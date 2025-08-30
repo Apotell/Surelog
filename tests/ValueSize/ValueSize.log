@@ -4,10 +4,11 @@
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/ValueSize/dut.sv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ValueSize/dut.sv:1:1: No timescale set for "flash_ctrl_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ValueSize/dut.sv:1:1: Compile package "flash_ctrl_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_typespec                                           2
-constant                                              14
+bit_typespec                                           5
+constant                                              26
 design                                                 1
 logic_typespec                                         2
 module_inst                                            1
@@ -15,9 +16,8 @@ operation                                              6
 package                                                1
 param_assign                                           4
 parameter                                              4
-range                                                  4
-ref_obj                                                3
-ref_typespec                                          12
+range                                                  7
+ref_typespec                                          15
 string_typespec                                        3
 struct_typespec                                        2
 tagged_pattern                                         3
@@ -72,7 +72,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:7:24, endln:7:36
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:2
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (flash_ctrl_pkg)
@@ -98,24 +98,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:8:44, endln:10:5
         |vpiPattern:
-        \_operation: , line:9:13, endln:9:30
-          |vpiParent:
-          \_operation: , line:8:44, endln:10:5
-          |vpiOpType:33
-          |vpiOperand:
-          \_ref_obj: (flash_ctrl_pkg::SeedBank), line:9:14, endln:9:22
-            |vpiParent:
-            \_operation: , line:9:13, endln:9:30
-            |vpiName:SeedBank
-            |vpiFullName:flash_ctrl_pkg::SeedBank
-            |vpiActual:
-            \_constant: , line:7:35, endln:7:36
-          |vpiOperand:
-          \_constant: , line:9:24, endln:9:29
-            |vpiDecompile:2'b11
-            |vpiSize:2
-            |BIN:11
-            |vpiConstType:3
+        \_constant: , line:9:13, endln:9:30
+          |vpiSize:4
+          |BIN:0011
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (flash_ctrl_pkg)
           |vpiParent:

@@ -49,16 +49,19 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:1:1: No timescale set for "pkg1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:5:1: No timescale set for "pkg2".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:1:1: Compile package "pkg1".
+[INF:CP0301] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:5:1: Compile package "pkg2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+constant                                               7
 design                                                 1
-int_typespec                                           1
+int_typespec                                           4
+module_inst                                            2
 package                                                2
 param_assign                                           4
 parameter                                              4
 ref_obj                                                3
-ref_typespec                                           3
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnelabPack/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnelabPack/slpp_all/checker/surelog.chk.html ...
@@ -97,7 +100,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:12, endln:2:17
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (pkg1)
@@ -120,6 +123,14 @@ design: (unnamed)
   \_parameter: (pkg2::Y), line:6:12, endln:6:13
     |vpiParent:
     \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:5:1, endln:7:11
+    |UINT:4
+    |vpiTypespec:
+    \_ref_typespec: (pkg2::Y)
+      |vpiParent:
+      \_parameter: (pkg2::Y), line:6:12, endln:6:13
+      |vpiFullName:pkg2::Y
+      |vpiActual:
+      \_int_typespec: , line:6:1, endln:6:23
     |vpiLocalParam:1
     |vpiName:Y
     |vpiFullName:pkg2::Y
@@ -128,18 +139,26 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:5:1, endln:7:11
     |vpiRhs:
-    \_ref_obj: (pkg2::pkg1::X), line:6:16, endln:6:23
+    \_constant: , line:2:16, endln:2:17
       |vpiParent:
       \_param_assign: , line:6:12, endln:6:23
-      |vpiName:pkg1::X
-      |vpiFullName:pkg2::pkg1::X
-      |vpiActual:
-      \_parameter: (pkg1::X), line:2:12, endln:2:13
+      |vpiDecompile:4
+      |vpiSize:32
+      |UINT:4
+      |vpiTypespec:
+      \_ref_typespec: (pkg2)
+        |vpiParent:
+        \_constant: , line:2:16, endln:2:17
+        |vpiFullName:pkg2
+        |vpiActual:
+        \_int_typespec: , line:6:1, endln:6:23
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (pkg2::Y), line:6:12, endln:6:13
   |vpiDefName:pkg2
 \_weaklyReferenced:
 \_int_typespec: , line:2:1, endln:2:17
+\_int_typespec: , line:6:1, endln:6:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

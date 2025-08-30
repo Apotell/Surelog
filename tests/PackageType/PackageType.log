@@ -125,6 +125,7 @@ n<> u<119> t<Top_level_rule> c<1> l<1:1> el<25:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageType/dut.sv:1:1: No timescale set for "bp_common_aviary_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageType/dut.sv:1:1: Compile package "bp_common_aviary_pkg".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/PackageType/builtin.sv
@@ -387,29 +388,29 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              15
+constant                                              21
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
-int_typespec                                          10
+int_typespec                                          14
 int_var                                                4
 integer_typespec                                       6
 io_decl                                               11
 logic_var                                              1
 module_inst                                            1
-operation                                              8
+operation                                              7
 package                                                2
 packed_array_typespec                                  2
 param_assign                                           8
 parameter                                              8
 range                                                  2
-ref_obj                                                8
-ref_typespec                                          34
+ref_obj                                                4
+ref_typespec                                          39
 string_typespec                                        3
 struct_typespec                                        3
-sys_func_call                                          3
+sys_func_call                                          1
 tagged_pattern                                         3
 task                                                   9
 typespec_member                                        6
@@ -483,6 +484,14 @@ design: (unnamed)
   \_parameter: (bp_common_aviary_pkg::lg_max_cfgs), line:11:14, endln:11:25
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/PackageType/dut.sv, line:1:1, endln:24:11
+    |UINT:7
+    |vpiTypespec:
+    \_ref_typespec: (bp_common_aviary_pkg::lg_max_cfgs)
+      |vpiParent:
+      \_parameter: (bp_common_aviary_pkg::lg_max_cfgs), line:11:14, endln:11:25
+      |vpiFullName:bp_common_aviary_pkg::lg_max_cfgs
+      |vpiActual:
+      \_int_typespec: , line:11:3, endln:11:44
     |vpiLocalParam:1
     |vpiName:lg_max_cfgs
     |vpiFullName:bp_common_aviary_pkg::lg_max_cfgs
@@ -522,7 +531,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:14, endln:10:31
       |vpiDecompile:128
-      |vpiSize:64
+      |vpiSize:32
       |UINT:128
       |vpiTypespec:
       \_ref_typespec: (bp_common_aviary_pkg)
@@ -539,18 +548,20 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/PackageType/dut.sv, line:1:1, endln:24:11
     |vpiRhs:
-    \_sys_func_call: ($clog2), line:11:28, endln:11:44
+    \_constant: , line:11:28, endln:11:44
       |vpiParent:
       \_param_assign: , line:11:14, endln:11:44
-      |vpiArgument:
-      \_ref_obj: (bp_common_aviary_pkg::max_cfgs), line:11:35, endln:11:43
+      |vpiDecompile:7
+      |vpiSize:32
+      |UINT:7
+      |vpiTypespec:
+      \_ref_typespec: (bp_common_aviary_pkg)
         |vpiParent:
-        \_sys_func_call: ($clog2), line:11:28, endln:11:44
-        |vpiName:max_cfgs
-        |vpiFullName:bp_common_aviary_pkg::max_cfgs
+        \_constant: , line:11:28, endln:11:44
+        |vpiFullName:bp_common_aviary_pkg
         |vpiActual:
-        \_constant: , line:10:28, endln:10:31
-      |vpiName:$clog2
+        \_int_typespec: , line:11:3, endln:11:44
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (bp_common_aviary_pkg::lg_max_cfgs), line:11:14, endln:11:25
   |vpiParamAssign:
@@ -590,6 +601,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:18:44, endln:21:4
       |vpiOpType:33
+      |vpiReordered:1
       |vpiOperand:
       \_ref_obj: (bp_common_aviary_pkg::bp_inv_cfg_p), line:20:4, endln:20:16
         |vpiParent:
@@ -1095,6 +1107,7 @@ design: (unnamed)
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/PackageType/dut.sv, line:1:1, endln:24:11
   |vpiSigned:1
 \_int_typespec: , line:10:3, endln:10:31
+\_int_typespec: , line:11:3, endln:11:44
 \_string_typespec: (default), line:14:7, endln:14:14
   |vpiParent:
   \_tagged_pattern: , line:14:16, endln:14:21
@@ -1109,26 +1122,13 @@ design: (unnamed)
     |vpiParent:
     \_packed_array_typespec: , line:18:13, endln:18:43
     |vpiLeftRange:
-    \_operation: , line:18:30, endln:18:40
+    \_constant: , line:18:30, endln:18:38
       |vpiParent:
       \_range: , line:18:29, endln:18:43
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (bp_common_aviary_pkg::all_cfgs_gp::max_cfgs), line:18:30, endln:18:38
-        |vpiParent:
-        \_operation: , line:18:30, endln:18:40
-        |vpiName:max_cfgs
-        |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp::max_cfgs
-        |vpiActual:
-        \_constant: , line:10:28, endln:10:31
-      |vpiOperand:
-      \_constant: , line:18:39, endln:18:40
-        |vpiParent:
-        \_operation: , line:18:30, endln:18:40
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:127
+      |vpiSize:64
+      |INT:127
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:18:41, endln:18:42
       |vpiParent:

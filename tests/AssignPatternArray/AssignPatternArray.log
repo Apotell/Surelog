@@ -339,29 +339,31 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:41:1: No timescale set for "foo".
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:46:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:1:1: Compile package "ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:6:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:41:1: Compile module "work@foo".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:46:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         6
-constant                                              97
+constant                                             113
 design                                                 1
 enum_const                                            36
 enum_typespec                                         12
 import_typespec                                        2
-int_typespec                                          32
+int_typespec                                          52
 logic_net                                              1
 logic_typespec                                        12
 module_inst                                            4
-operation                                             42
+operation                                             37
 package                                                2
 param_assign                                          24
 parameter                                             34
 port                                                   2
 range                                                 23
 ref_module                                             1
-ref_obj                                               41
-ref_typespec                                         114
+ref_obj                                               20
+ref_typespec                                         134
 string_typespec                                       30
 struct_typespec                                       12
 tagged_pattern                                        30
@@ -419,7 +421,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:32
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (ctrl_pkg)
@@ -440,7 +442,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:17, endln:3:37
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (ctrl_pkg)
@@ -463,6 +465,7 @@ design: (unnamed)
   \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+    |UINT:2
     |vpiTypespec:
     \_ref_typespec: (pkg::NumBanks)
       |vpiParent:
@@ -476,6 +479,7 @@ design: (unnamed)
   \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+    |UINT:64
     |vpiTypespec:
     \_ref_typespec: (pkg::PagesPerBank)
       |vpiParent:
@@ -545,13 +549,20 @@ design: (unnamed)
         \_range: , line:28:43, endln:28:54
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (pkg::HwDataAttr::HwDataRules), line:28:43, endln:28:54
+        \_constant: , line:28:43, endln:28:54
           |vpiParent:
           \_operation: , line:28:43, endln:28:54
-          |vpiName:HwDataRules
-          |vpiFullName:pkg::HwDataAttr::HwDataRules
-          |vpiActual:
-          \_constant: , line:9:31, endln:9:32
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (pkg::HwDataAttr)
+            |vpiParent:
+            \_constant: , line:28:43, endln:28:54
+            |vpiFullName:pkg::HwDataAttr
+            |vpiActual:
+            \_int_typespec: , line:9:13, endln:9:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiSize:64
@@ -564,13 +575,20 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
     |vpiRhs:
-    \_ref_obj: (pkg::ctrl_pkg::RegNumBanks), line:7:44, endln:7:65
+    \_constant: , line:2:31, endln:2:32
       |vpiParent:
       \_param_assign: , line:7:26, endln:7:65
-      |vpiName:ctrl_pkg::RegNumBanks
-      |vpiFullName:pkg::ctrl_pkg::RegNumBanks
-      |vpiActual:
-      \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
+      |vpiDecompile:2
+      |vpiSize:32
+      |UINT:2
+      |vpiTypespec:
+      \_ref_typespec: (pkg)
+        |vpiParent:
+        \_constant: , line:2:31, endln:2:32
+        |vpiFullName:pkg
+        |vpiActual:
+        \_int_typespec: , line:7:13, endln:7:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
   |vpiParamAssign:
@@ -578,13 +596,20 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
     |vpiRhs:
-    \_ref_obj: (pkg::ctrl_pkg::RegPagesPerBank), line:8:44, endln:8:69
+    \_constant: , line:3:35, endln:3:37
       |vpiParent:
       \_param_assign: , line:8:26, endln:8:69
-      |vpiName:ctrl_pkg::RegPagesPerBank
-      |vpiFullName:pkg::ctrl_pkg::RegPagesPerBank
-      |vpiActual:
-      \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
+      |vpiDecompile:64
+      |vpiSize:32
+      |UINT:64
+      |vpiTypespec:
+      \_ref_typespec: (pkg)
+        |vpiParent:
+        \_constant: , line:3:35, endln:3:37
+        |vpiFullName:pkg
+        |vpiActual:
+        \_int_typespec: , line:8:13, endln:8:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
   |vpiParamAssign:
@@ -596,7 +621,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:32
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (pkg)
@@ -617,7 +642,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:31
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (pkg)
@@ -929,11 +954,20 @@ design: (unnamed)
         \_range: , line:28:43, endln:28:54
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@foo.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+        \_constant: , line:28:43, endln:28:54
           |vpiParent:
           \_operation: , line:28:43, endln:28:54
-          |vpiName:HwDataRules
-          |vpiFullName:work@foo.HwDataAttr.HwDataRules
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (work@foo.HwDataAttr)
+            |vpiParent:
+            \_constant: , line:28:43, endln:28:54
+            |vpiFullName:work@foo.HwDataAttr
+            |vpiActual:
+            \_int_typespec: , line:9:13, endln:9:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiParent:
@@ -980,6 +1014,7 @@ design: (unnamed)
   \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:41:1, endln:45:10
+    |UINT:2
     |vpiTypespec:
     \_ref_typespec: (work@foo.NumBanks)
       |vpiParent:
@@ -994,6 +1029,7 @@ design: (unnamed)
   \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:41:1, endln:45:10
+    |UINT:64
     |vpiTypespec:
     \_ref_typespec: (work@foo.PagesPerBank)
       |vpiParent:
@@ -1009,15 +1045,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:41:1, endln:45:10
     |vpiRhs:
-    \_ref_obj: (work@foo.ctrl_pkg::RegNumBanks), line:7:44, endln:7:65
+    \_constant: , line:2:31, endln:2:32
       |vpiParent:
       \_param_assign: , line:7:26, endln:7:65
-      |vpiName:ctrl_pkg::RegNumBanks
-      |vpiFullName:work@foo.ctrl_pkg::RegNumBanks
+      |vpiDecompile:2
+      |vpiSize:32
+      |UINT:2
+      |vpiTypespec:
+      \_ref_typespec: (work@foo)
+        |vpiParent:
+        \_constant: , line:2:31, endln:2:32
+        |vpiFullName:work@foo
+        |vpiActual:
+        \_int_typespec: , line:7:13, endln:7:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
       |vpiParent:
       \_param_assign: , line:7:26, endln:7:65
+      |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@foo.NumBanks)
         |vpiParent:
@@ -1033,15 +1079,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:41:1, endln:45:10
     |vpiRhs:
-    \_ref_obj: (work@foo.ctrl_pkg::RegPagesPerBank), line:8:44, endln:8:69
+    \_constant: , line:3:35, endln:3:37
       |vpiParent:
       \_param_assign: , line:8:26, endln:8:69
-      |vpiName:ctrl_pkg::RegPagesPerBank
-      |vpiFullName:work@foo.ctrl_pkg::RegPagesPerBank
+      |vpiDecompile:64
+      |vpiSize:32
+      |UINT:64
+      |vpiTypespec:
+      \_ref_typespec: (work@foo)
+        |vpiParent:
+        \_constant: , line:3:35, endln:3:37
+        |vpiFullName:work@foo
+        |vpiActual:
+        \_int_typespec: , line:8:13, endln:8:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
       |vpiParent:
       \_param_assign: , line:8:26, endln:8:69
+      |UINT:64
       |vpiTypespec:
       \_ref_typespec: (work@foo.PagesPerBank)
         |vpiParent:
@@ -1061,7 +1117,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:32
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@foo)
@@ -1096,7 +1152,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:31
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (work@foo)
@@ -1279,11 +1335,20 @@ design: (unnamed)
           \_range: , line:28:43, endln:28:54
           |vpiOpType:11
           |vpiOperand:
-          \_ref_obj: (work@foo.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+          \_constant: , line:28:43, endln:28:54
             |vpiParent:
             \_operation: , line:28:43, endln:28:54
-            |vpiName:HwDataRules
-            |vpiFullName:work@foo.HwDataAttr.HwDataRules
+            |vpiDecompile:2
+            |vpiSize:32
+            |UINT:2
+            |vpiTypespec:
+            \_ref_typespec: (work@foo.HwDataAttr)
+              |vpiParent:
+              \_constant: , line:28:43, endln:28:54
+              |vpiFullName:work@foo.HwDataAttr
+              |vpiActual:
+              \_int_typespec: , line:9:13, endln:9:16
+            |vpiConstType:9
           |vpiOperand:
           \_constant: 
             |vpiParent:
@@ -1367,11 +1432,20 @@ design: (unnamed)
         \_range: , line:28:43, endln:28:54
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@top.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+        \_constant: , line:28:43, endln:28:54
           |vpiParent:
           \_operation: , line:28:43, endln:28:54
-          |vpiName:HwDataRules
-          |vpiFullName:work@top.HwDataAttr.HwDataRules
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (work@top.HwDataAttr)
+            |vpiParent:
+            \_constant: , line:28:43, endln:28:54
+            |vpiFullName:work@top.HwDataAttr
+            |vpiActual:
+            \_int_typespec: , line:9:13, endln:9:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiParent:
@@ -1418,6 +1492,7 @@ design: (unnamed)
   \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:46:1, endln:50:10
+    |UINT:2
     |vpiTypespec:
     \_ref_typespec: (work@top.NumBanks)
       |vpiParent:
@@ -1432,6 +1507,7 @@ design: (unnamed)
   \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:46:1, endln:50:10
+    |UINT:64
     |vpiTypespec:
     \_ref_typespec: (work@top.PagesPerBank)
       |vpiParent:
@@ -1447,15 +1523,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:46:1, endln:50:10
     |vpiRhs:
-    \_ref_obj: (work@top.ctrl_pkg::RegNumBanks), line:7:44, endln:7:65
+    \_constant: , line:2:31, endln:2:32
       |vpiParent:
       \_param_assign: , line:7:26, endln:7:65
-      |vpiName:ctrl_pkg::RegNumBanks
-      |vpiFullName:work@top.ctrl_pkg::RegNumBanks
+      |vpiDecompile:2
+      |vpiSize:32
+      |UINT:2
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
+        |vpiParent:
+        \_constant: , line:2:31, endln:2:32
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:7:13, endln:7:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
       |vpiParent:
       \_param_assign: , line:7:26, endln:7:65
+      |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@top.NumBanks)
         |vpiParent:
@@ -1471,15 +1557,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:46:1, endln:50:10
     |vpiRhs:
-    \_ref_obj: (work@top.ctrl_pkg::RegPagesPerBank), line:8:44, endln:8:69
+    \_constant: , line:3:35, endln:3:37
       |vpiParent:
       \_param_assign: , line:8:26, endln:8:69
-      |vpiName:ctrl_pkg::RegPagesPerBank
-      |vpiFullName:work@top.ctrl_pkg::RegPagesPerBank
+      |vpiDecompile:64
+      |vpiSize:32
+      |UINT:64
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
+        |vpiParent:
+        \_constant: , line:3:35, endln:3:37
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:8:13, endln:8:25
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
       |vpiParent:
       \_param_assign: , line:8:26, endln:8:69
+      |UINT:64
       |vpiTypespec:
       \_ref_typespec: (work@top.PagesPerBank)
         |vpiParent:
@@ -1499,7 +1595,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:32
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1534,7 +1630,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:31
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1717,11 +1813,20 @@ design: (unnamed)
           \_range: , line:28:43, endln:28:54
           |vpiOpType:11
           |vpiOperand:
-          \_ref_obj: (work@top.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+          \_constant: , line:28:43, endln:28:54
             |vpiParent:
             \_operation: , line:28:43, endln:28:54
-            |vpiName:HwDataRules
-            |vpiFullName:work@top.HwDataAttr.HwDataRules
+            |vpiDecompile:2
+            |vpiSize:32
+            |UINT:2
+            |vpiTypespec:
+            \_ref_typespec: (work@top.HwDataAttr)
+              |vpiParent:
+              \_constant: , line:28:43, endln:28:54
+              |vpiFullName:work@top.HwDataAttr
+              |vpiActual:
+              \_int_typespec: , line:9:13, endln:9:16
+            |vpiConstType:9
           |vpiOperand:
           \_constant: 
             |vpiParent:
@@ -1805,25 +1910,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:11:16, endln:11:38
     |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
+    \_constant: , line:11:23, endln:11:33
       |vpiParent:
       \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiActual:
-        \_constant: , line:10:30, endln:10:31
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:3
+      |vpiSize:64
+      |INT:3
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:11:36, endln:11:37
       |vpiParent:
@@ -1855,6 +1948,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (pkg::HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_array_typespec: , line:28:13, endln:28:55
   |vpiParent:
   \_parameter: (pkg::HwDataAttr), line:28:32, endln:28:42
@@ -1912,11 +2011,20 @@ design: (unnamed)
       \_range: , line:28:43, endln:28:54
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+      \_constant: , line:28:43, endln:28:54
         |vpiParent:
         \_operation: , line:28:43, endln:28:54
-        |vpiName:HwDataRules
-        |vpiFullName:work@foo.HwDataAttr.HwDataRules
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@foo.HwDataAttr)
+          |vpiParent:
+          \_constant: , line:28:43, endln:28:54
+          |vpiFullName:work@foo.HwDataAttr
+          |vpiActual:
+          \_int_typespec: , line:9:13, endln:9:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -1931,6 +2039,12 @@ design: (unnamed)
     |vpiFullName:work@foo.HwDataAttr
     |vpiActual:
     \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@foo.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
   |vpiParent:
   \_ref_typespec: (work@foo.HwDataAttr)
@@ -2105,24 +2219,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:11:16, endln:11:38
     |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
+    \_constant: , line:11:23, endln:11:33
       |vpiParent:
       \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:3
+      |vpiSize:64
+      |INT:3
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:11:36, endln:11:37
       |vpiParent:
@@ -2131,6 +2234,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@foo.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_int_typespec: , line:9:13, endln:9:16
   |vpiParent:
   \_ref_typespec: (work@foo.HwDataRules)
@@ -2155,7 +2264,17 @@ design: (unnamed)
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
 \_int_typespec: , line:7:13, endln:7:25
   |vpiParent:
+  \_ref_typespec: (work@foo)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+\_int_typespec: , line:7:13, endln:7:25
+  |vpiParent:
   \_ref_typespec: (work@foo.NumBanks)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+\_int_typespec: , line:8:13, endln:8:25
+  |vpiParent:
+  \_ref_typespec: (work@foo)
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
 \_int_typespec: , line:8:13, endln:8:25
@@ -2232,11 +2351,20 @@ design: (unnamed)
       \_range: , line:28:43, endln:28:54
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+      \_constant: , line:28:43, endln:28:54
         |vpiParent:
         \_operation: , line:28:43, endln:28:54
-        |vpiName:HwDataRules
-        |vpiFullName:work@foo.HwDataAttr.HwDataRules
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@foo.HwDataAttr)
+          |vpiParent:
+          \_constant: , line:28:43, endln:28:54
+          |vpiFullName:work@foo.HwDataAttr
+          |vpiActual:
+          \_int_typespec: , line:9:13, endln:9:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -2251,6 +2379,12 @@ design: (unnamed)
     |vpiFullName:work@foo.HwDataAttr
     |vpiActual:
     \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@foo.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
   |vpiParent:
   \_ref_typespec: (work@foo.HwDataAttr)
@@ -2425,24 +2559,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:11:16, endln:11:38
     |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
+    \_constant: , line:11:23, endln:11:33
       |vpiParent:
       \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:3
+      |vpiSize:64
+      |INT:3
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:11:36, endln:11:37
       |vpiParent:
@@ -2451,6 +2574,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@foo.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_array_typespec: , line:28:13, endln:28:55
   |vpiParent:
   \_ref_typespec: (work@top.HwDataAttr)
@@ -2472,11 +2601,20 @@ design: (unnamed)
       \_range: , line:28:43, endln:28:54
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+      \_constant: , line:28:43, endln:28:54
         |vpiParent:
         \_operation: , line:28:43, endln:28:54
-        |vpiName:HwDataRules
-        |vpiFullName:work@top.HwDataAttr.HwDataRules
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@top.HwDataAttr)
+          |vpiParent:
+          \_constant: , line:28:43, endln:28:54
+          |vpiFullName:work@top.HwDataAttr
+          |vpiActual:
+          \_int_typespec: , line:9:13, endln:9:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -2491,6 +2629,12 @@ design: (unnamed)
     |vpiFullName:work@top.HwDataAttr
     |vpiActual:
     \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@top.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
   |vpiParent:
   \_ref_typespec: (work@top.HwDataAttr)
@@ -2665,24 +2809,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:11:16, endln:11:38
     |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
+    \_constant: , line:11:23, endln:11:33
       |vpiParent:
       \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:3
+      |vpiSize:64
+      |INT:3
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:11:36, endln:11:37
       |vpiParent:
@@ -2691,6 +2824,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@top.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_int_typespec: , line:9:13, endln:9:16
   |vpiParent:
   \_ref_typespec: (work@top.HwDataRules)
@@ -2715,7 +2854,17 @@ design: (unnamed)
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
 \_int_typespec: , line:7:13, endln:7:25
   |vpiParent:
+  \_ref_typespec: (work@top)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+\_int_typespec: , line:7:13, endln:7:25
+  |vpiParent:
   \_ref_typespec: (work@top.NumBanks)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+\_int_typespec: , line:8:13, endln:8:25
+  |vpiParent:
+  \_ref_typespec: (work@top)
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
 \_int_typespec: , line:8:13, endln:8:25
@@ -2792,11 +2941,20 @@ design: (unnamed)
       \_range: , line:28:43, endln:28:54
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.HwDataRules), line:28:43, endln:28:54
+      \_constant: , line:28:43, endln:28:54
         |vpiParent:
         \_operation: , line:28:43, endln:28:54
-        |vpiName:HwDataRules
-        |vpiFullName:work@top.HwDataAttr.HwDataRules
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@top.HwDataAttr)
+          |vpiParent:
+          \_constant: , line:28:43, endln:28:54
+          |vpiFullName:work@top.HwDataAttr
+          |vpiActual:
+          \_int_typespec: , line:9:13, endln:9:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -2811,6 +2969,12 @@ design: (unnamed)
     |vpiFullName:work@top.HwDataAttr
     |vpiActual:
     \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@top.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
   |vpiParent:
   \_ref_typespec: (work@top.HwDataAttr)
@@ -2985,24 +3149,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:11:16, endln:11:38
     |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
+    \_constant: , line:11:23, endln:11:33
       |vpiParent:
       \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:3
+      |vpiSize:64
+      |INT:3
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:11:36, endln:11:37
       |vpiParent:
@@ -3011,6 +3164,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:9:13, endln:9:16
+  |vpiParent:
+  \_ref_typespec: (work@top.HwDataAttr)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
+  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

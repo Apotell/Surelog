@@ -391,28 +391,31 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:17:1: No timescale set for "kmac_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:33:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:1:1: Compile package "sha3_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:5:1: Compile package "kmac_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:17:1: Compile package "kmac_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:33:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              36
+constant                                              79
 design                                                 1
 gen_if                                                 1
 hier_path                                              2
 import_typespec                                        2
-int_typespec                                          37
+int_typespec                                          62
 logic_net                                              1
 logic_typespec                                         2
-module_inst                                            4
+module_inst                                            5
 named_begin                                            1
-operation                                             38
+operation                                             29
 package                                                3
 param_assign                                          26
 parameter                                             34
 range                                                  1
-ref_obj                                               49
-ref_typespec                                          55
+ref_obj                                               21
+ref_typespec                                          84
 struct_typespec                                        4
-sys_func_call                                          5
+sys_func_call                                          2
 typespec_member                                        6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStructTypespec/slpp_all/surelog.uhdm ...
@@ -452,7 +455,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:30
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (sha3_pkg)
@@ -476,6 +479,7 @@ design: (unnamed)
   \_parameter: (kmac_pkg::MsgWidth), line:6:17, endln:6:25
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+    |UINT:64
     |vpiTypespec:
     \_ref_typespec: (kmac_pkg::MsgWidth)
       |vpiParent:
@@ -535,6 +539,7 @@ design: (unnamed)
   \_parameter: (kmac_pkg::BufferCycles), line:10:17, endln:10:29
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+    |INT:15
     |vpiTypespec:
     \_ref_typespec: (kmac_pkg::BufferCycles)
       |vpiParent:
@@ -549,6 +554,7 @@ design: (unnamed)
   \_parameter: (kmac_pkg::BufferSizeBits), line:11:17, endln:11:31
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+    |INT:480
     |vpiTypespec:
     \_ref_typespec: (kmac_pkg::BufferSizeBits)
       |vpiParent:
@@ -563,6 +569,7 @@ design: (unnamed)
   \_parameter: (kmac_pkg::MsgFifoDepth), line:13:17, endln:13:29
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+    |INT:10
     |vpiTypespec:
     \_ref_typespec: (kmac_pkg::MsgFifoDepth)
       |vpiParent:
@@ -577,6 +584,7 @@ design: (unnamed)
   \_parameter: (kmac_pkg::MsgFifoDepthW), line:14:17, endln:14:30
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+    |UINT:4
     |vpiTypespec:
     \_ref_typespec: (kmac_pkg::MsgFifoDepthW)
       |vpiParent:
@@ -592,13 +600,20 @@ design: (unnamed)
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
     |vpiRhs:
-    \_ref_obj: (kmac_pkg::sha3_pkg::MsgWidth), line:6:28, endln:6:46
+    \_constant: , line:2:28, endln:2:30
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:46
-      |vpiName:sha3_pkg::MsgWidth
-      |vpiFullName:kmac_pkg::sha3_pkg::MsgWidth
-      |vpiActual:
-      \_parameter: (sha3_pkg::MsgWidth), line:2:17, endln:2:25
+      |vpiDecompile:64
+      |vpiSize:32
+      |UINT:64
+      |vpiTypespec:
+      \_ref_typespec: (kmac_pkg)
+        |vpiParent:
+        \_constant: , line:2:28, endln:2:30
+        |vpiFullName:kmac_pkg
+        |vpiActual:
+        \_int_typespec: , line:6:13, endln:6:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (kmac_pkg::MsgWidth), line:6:17, endln:6:25
   |vpiParamAssign:
@@ -610,7 +625,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:7:17, endln:7:34
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (kmac_pkg)
@@ -631,7 +646,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:17, endln:8:33
       |vpiDecompile:5
-      |vpiSize:64
+      |vpiSize:32
       |UINT:5
       |vpiTypespec:
       \_ref_typespec: (kmac_pkg)
@@ -652,7 +667,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:34
       |vpiDecompile:72
-      |vpiSize:64
+      |vpiSize:32
       |UINT:72
       |vpiTypespec:
       \_ref_typespec: (kmac_pkg)
@@ -669,52 +684,20 @@ design: (unnamed)
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
     |vpiRhs:
-    \_operation: , line:10:34, endln:10:75
+    \_constant: , line:10:34, endln:10:64
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:75
-      |vpiOpType:12
-      |vpiOperand:
-      \_operation: , line:10:35, endln:10:63
+      |vpiDecompile:15
+      |vpiSize:32
+      |INT:15
+      |vpiTypespec:
+      \_ref_typespec: (kmac_pkg)
         |vpiParent:
-        \_operation: , line:10:34, endln:10:75
-        |vpiOpType:11
-        |vpiOperand:
-        \_operation: , line:10:35, endln:10:59
-          |vpiParent:
-          \_operation: , line:10:35, endln:10:63
-          |vpiOpType:24
-          |vpiOperand:
-          \_ref_obj: (kmac_pkg::Sha3Latency), line:10:35, endln:10:46
-            |vpiParent:
-            \_operation: , line:10:35, endln:10:59
-            |vpiName:Sha3Latency
-            |vpiFullName:kmac_pkg::Sha3Latency
-            |vpiActual:
-            \_constant: , line:9:32, endln:9:34
-          |vpiOperand:
-          \_ref_obj: (kmac_pkg::RegLatency), line:10:49, endln:10:59
-            |vpiParent:
-            \_operation: , line:10:35, endln:10:59
-            |vpiName:RegLatency
-            |vpiFullName:kmac_pkg::RegLatency
-            |vpiActual:
-            \_constant: , line:8:32, endln:8:33
-        |vpiOperand:
-        \_constant: , line:10:62, endln:10:63
-          |vpiParent:
-          \_operation: , line:10:35, endln:10:63
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiOperand:
-      \_ref_obj: (kmac_pkg::RegLatency), line:10:65, endln:10:75
-        |vpiParent:
-        \_operation: , line:10:34, endln:10:75
-        |vpiName:RegLatency
-        |vpiFullName:kmac_pkg::RegLatency
+        \_constant: , line:10:34, endln:10:64
+        |vpiFullName:kmac_pkg
         |vpiActual:
-        \_constant: , line:8:32, endln:8:33
+        \_int_typespec: , line:10:13, endln:10:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (kmac_pkg::BufferCycles), line:10:17, endln:10:29
   |vpiParamAssign:
@@ -722,26 +705,20 @@ design: (unnamed)
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
     |vpiRhs:
-    \_operation: , line:11:34, endln:11:61
+    \_constant: , line:11:34, endln:11:46
       |vpiParent:
       \_param_assign: , line:11:17, endln:11:61
-      |vpiOpType:25
-      |vpiOperand:
-      \_ref_obj: (kmac_pkg::RegIntfWidth), line:11:34, endln:11:46
+      |vpiDecompile:480
+      |vpiSize:32
+      |INT:480
+      |vpiTypespec:
+      \_ref_typespec: (kmac_pkg)
         |vpiParent:
-        \_operation: , line:11:34, endln:11:61
-        |vpiName:RegIntfWidth
-        |vpiFullName:kmac_pkg::RegIntfWidth
+        \_constant: , line:11:34, endln:11:46
+        |vpiFullName:kmac_pkg
         |vpiActual:
-        \_constant: , line:7:32, endln:7:34
-      |vpiOperand:
-      \_ref_obj: (kmac_pkg::BufferCycles), line:11:49, endln:11:61
-        |vpiParent:
-        \_operation: , line:11:34, endln:11:61
-        |vpiName:BufferCycles
-        |vpiFullName:kmac_pkg::BufferCycles
-        |vpiActual:
-        \_operation: , line:10:34, endln:10:75
+        \_int_typespec: , line:11:13, endln:11:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (kmac_pkg::BufferSizeBits), line:11:17, endln:11:31
   |vpiParamAssign:
@@ -749,65 +726,20 @@ design: (unnamed)
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
     |vpiRhs:
-    \_operation: , line:13:34, endln:13:80
+    \_constant: , line:13:34, endln:13:35
       |vpiParent:
       \_param_assign: , line:13:17, endln:13:80
-      |vpiOpType:24
-      |vpiOperand:
-      \_constant: , line:13:34, endln:13:35
+      |vpiDecompile:10
+      |vpiSize:32
+      |INT:10
+      |vpiTypespec:
+      \_ref_typespec: (kmac_pkg)
         |vpiParent:
-        \_operation: , line:13:34, endln:13:80
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_operation: , line:13:39, endln:13:79
-        |vpiParent:
-        \_operation: , line:13:34, endln:13:80
-        |vpiOpType:12
-        |vpiOperand:
-        \_operation: , line:13:40, endln:13:69
-          |vpiParent:
-          \_operation: , line:13:39, endln:13:79
-          |vpiOpType:11
-          |vpiOperand:
-          \_operation: , line:13:40, endln:13:65
-            |vpiParent:
-            \_operation: , line:13:40, endln:13:69
-            |vpiOpType:24
-            |vpiOperand:
-            \_ref_obj: (kmac_pkg::BufferSizeBits), line:13:40, endln:13:54
-              |vpiParent:
-              \_operation: , line:13:40, endln:13:65
-              |vpiName:BufferSizeBits
-              |vpiFullName:kmac_pkg::BufferSizeBits
-              |vpiActual:
-              \_operation: , line:11:34, endln:11:61
-            |vpiOperand:
-            \_ref_obj: (kmac_pkg::MsgWidth), line:13:57, endln:13:65
-              |vpiParent:
-              \_operation: , line:13:40, endln:13:65
-              |vpiName:MsgWidth
-              |vpiFullName:kmac_pkg::MsgWidth
-              |vpiActual:
-              \_ref_obj: (kmac_pkg::sha3_pkg::MsgWidth), line:6:28, endln:6:46
-          |vpiOperand:
-          \_constant: , line:13:68, endln:13:69
-            |vpiParent:
-            \_operation: , line:13:40, endln:13:69
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
-        |vpiOperand:
-        \_ref_obj: (kmac_pkg::MsgWidth), line:13:71, endln:13:79
-          |vpiParent:
-          \_operation: , line:13:39, endln:13:79
-          |vpiName:MsgWidth
-          |vpiFullName:kmac_pkg::MsgWidth
-          |vpiActual:
-          \_ref_obj: (kmac_pkg::sha3_pkg::MsgWidth), line:6:28, endln:6:46
+        \_constant: , line:13:34, endln:13:35
+        |vpiFullName:kmac_pkg
+        |vpiActual:
+        \_int_typespec: , line:13:13, endln:13:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (kmac_pkg::MsgFifoDepth), line:13:17, endln:13:29
   |vpiParamAssign:
@@ -815,31 +747,20 @@ design: (unnamed)
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
     |vpiRhs:
-    \_sys_func_call: ($clog2), line:14:34, endln:14:56
+    \_constant: , line:14:34, endln:14:56
       |vpiParent:
       \_param_assign: , line:14:17, endln:14:56
-      |vpiArgument:
-      \_operation: , line:14:41, endln:14:55
+      |vpiDecompile:4
+      |vpiSize:32
+      |UINT:4
+      |vpiTypespec:
+      \_ref_typespec: (kmac_pkg)
         |vpiParent:
-        \_sys_func_call: ($clog2), line:14:34, endln:14:56
-        |vpiOpType:24
-        |vpiOperand:
-        \_ref_obj: (kmac_pkg::MsgFifoDepth), line:14:41, endln:14:53
-          |vpiParent:
-          \_operation: , line:14:41, endln:14:55
-          |vpiName:MsgFifoDepth
-          |vpiFullName:kmac_pkg::MsgFifoDepth
-          |vpiActual:
-          \_operation: , line:13:34, endln:13:80
-        |vpiOperand:
-        \_constant: , line:14:54, endln:14:55
-          |vpiParent:
-          \_operation: , line:14:41, endln:14:55
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiName:$clog2
+        \_constant: , line:14:34, endln:14:56
+        |vpiFullName:kmac_pkg
+        |vpiActual:
+        \_int_typespec: , line:14:13, endln:14:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (kmac_pkg::MsgFifoDepthW), line:14:17, endln:14:30
   |vpiDefName:kmac_pkg
@@ -944,6 +865,7 @@ design: (unnamed)
   \_parameter: (work@top.BufferCycles), line:10:17, endln:10:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
+    |INT:15
     |vpiTypespec:
     \_ref_typespec: (work@top.BufferCycles)
       |vpiParent:
@@ -959,6 +881,7 @@ design: (unnamed)
   \_parameter: (work@top.BufferSizeBits), line:11:17, endln:11:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
+    |INT:480
     |vpiTypespec:
     \_ref_typespec: (work@top.BufferSizeBits)
       |vpiParent:
@@ -974,6 +897,7 @@ design: (unnamed)
   \_parameter: (work@top.MsgFifoDepth), line:13:17, endln:13:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
+    |INT:10
     |vpiTypespec:
     \_ref_typespec: (work@top.MsgFifoDepth)
       |vpiParent:
@@ -989,6 +913,7 @@ design: (unnamed)
   \_parameter: (work@top.MsgFifoDepthW), line:14:17, endln:14:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
+    |UINT:4
     |vpiTypespec:
     \_ref_typespec: (work@top.MsgFifoDepthW)
       |vpiParent:
@@ -1004,6 +929,7 @@ design: (unnamed)
   \_parameter: (work@top.MsgWidth), line:6:17, endln:6:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
+    |UINT:64
     |vpiTypespec:
     \_ref_typespec: (work@top.MsgWidth)
       |vpiParent:
@@ -1068,15 +994,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiRhs:
-    \_ref_obj: (work@top.sha3_pkg::MsgWidth), line:6:28, endln:6:46
+    \_constant: , line:2:28, endln:2:30
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:46
-      |vpiName:sha3_pkg::MsgWidth
-      |vpiFullName:work@top.sha3_pkg::MsgWidth
+      |vpiDecompile:64
+      |vpiSize:32
+      |UINT:64
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
+        |vpiParent:
+        \_constant: , line:2:28, endln:2:30
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:6:13, endln:6:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.MsgWidth), line:6:17, endln:6:25
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:46
+      |UINT:64
       |vpiTypespec:
       \_ref_typespec: (work@top.MsgWidth)
         |vpiParent:
@@ -1097,7 +1033,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:7:17, endln:7:34
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1132,7 +1068,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:17, endln:8:33
       |vpiDecompile:5
-      |vpiSize:64
+      |vpiSize:32
       |UINT:5
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1167,7 +1103,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:34
       |vpiDecompile:72
-      |vpiSize:64
+      |vpiSize:32
       |UINT:72
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1198,50 +1134,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiRhs:
-    \_operation: , line:10:34, endln:10:75
+    \_constant: , line:10:34, endln:10:64
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:75
-      |vpiOpType:12
-      |vpiOperand:
-      \_operation: , line:10:35, endln:10:63
+      |vpiDecompile:15
+      |vpiSize:32
+      |INT:15
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
-        \_operation: , line:10:34, endln:10:75
-        |vpiOpType:11
-        |vpiOperand:
-        \_operation: , line:10:35, endln:10:59
-          |vpiParent:
-          \_operation: , line:10:35, endln:10:63
-          |vpiOpType:24
-          |vpiOperand:
-          \_ref_obj: (work@top.Sha3Latency), line:10:35, endln:10:46
-            |vpiParent:
-            \_operation: , line:10:35, endln:10:59
-            |vpiName:Sha3Latency
-            |vpiFullName:work@top.Sha3Latency
-          |vpiOperand:
-          \_ref_obj: (work@top.RegLatency), line:10:49, endln:10:59
-            |vpiParent:
-            \_operation: , line:10:35, endln:10:59
-            |vpiName:RegLatency
-            |vpiFullName:work@top.RegLatency
-        |vpiOperand:
-        \_constant: , line:10:62, endln:10:63
-          |vpiParent:
-          \_operation: , line:10:35, endln:10:63
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiOperand:
-      \_ref_obj: (work@top.RegLatency), line:10:65, endln:10:75
-        |vpiParent:
-        \_operation: , line:10:34, endln:10:75
-        |vpiName:RegLatency
-        |vpiFullName:work@top.RegLatency
+        \_constant: , line:10:34, endln:10:64
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:10:13, endln:10:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (work@top.BufferCycles), line:10:17, endln:10:29
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:75
+      |INT:15
       |vpiTypespec:
       \_ref_typespec: (work@top.BufferCycles)
         |vpiParent:
@@ -1258,26 +1169,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiRhs:
-    \_operation: , line:11:34, endln:11:61
+    \_constant: , line:11:34, endln:11:46
       |vpiParent:
       \_param_assign: , line:11:17, endln:11:61
-      |vpiOpType:25
-      |vpiOperand:
-      \_ref_obj: (work@top.RegIntfWidth), line:11:34, endln:11:46
+      |vpiDecompile:480
+      |vpiSize:32
+      |INT:480
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
-        \_operation: , line:11:34, endln:11:61
-        |vpiName:RegIntfWidth
-        |vpiFullName:work@top.RegIntfWidth
-      |vpiOperand:
-      \_ref_obj: (work@top.BufferCycles), line:11:49, endln:11:61
-        |vpiParent:
-        \_operation: , line:11:34, endln:11:61
-        |vpiName:BufferCycles
-        |vpiFullName:work@top.BufferCycles
+        \_constant: , line:11:34, endln:11:46
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:11:13, endln:11:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (work@top.BufferSizeBits), line:11:17, endln:11:31
       |vpiParent:
       \_param_assign: , line:11:17, endln:11:61
+      |INT:480
       |vpiTypespec:
       \_ref_typespec: (work@top.BufferSizeBits)
         |vpiParent:
@@ -1294,63 +1204,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiRhs:
-    \_operation: , line:13:34, endln:13:80
+    \_constant: , line:13:34, endln:13:35
       |vpiParent:
       \_param_assign: , line:13:17, endln:13:80
-      |vpiOpType:24
-      |vpiOperand:
-      \_constant: , line:13:34, endln:13:35
+      |vpiDecompile:10
+      |vpiSize:32
+      |INT:10
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
-        \_operation: , line:13:34, endln:13:80
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_operation: , line:13:39, endln:13:79
-        |vpiParent:
-        \_operation: , line:13:34, endln:13:80
-        |vpiOpType:12
-        |vpiOperand:
-        \_operation: , line:13:40, endln:13:69
-          |vpiParent:
-          \_operation: , line:13:39, endln:13:79
-          |vpiOpType:11
-          |vpiOperand:
-          \_operation: , line:13:40, endln:13:65
-            |vpiParent:
-            \_operation: , line:13:40, endln:13:69
-            |vpiOpType:24
-            |vpiOperand:
-            \_ref_obj: (work@top.BufferSizeBits), line:13:40, endln:13:54
-              |vpiParent:
-              \_operation: , line:13:40, endln:13:65
-              |vpiName:BufferSizeBits
-              |vpiFullName:work@top.BufferSizeBits
-            |vpiOperand:
-            \_ref_obj: (work@top.MsgWidth), line:13:57, endln:13:65
-              |vpiParent:
-              \_operation: , line:13:40, endln:13:65
-              |vpiName:MsgWidth
-              |vpiFullName:work@top.MsgWidth
-          |vpiOperand:
-          \_constant: , line:13:68, endln:13:69
-            |vpiParent:
-            \_operation: , line:13:40, endln:13:69
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
-        |vpiOperand:
-        \_ref_obj: (work@top.MsgWidth), line:13:71, endln:13:79
-          |vpiParent:
-          \_operation: , line:13:39, endln:13:79
-          |vpiName:MsgWidth
-          |vpiFullName:work@top.MsgWidth
+        \_constant: , line:13:34, endln:13:35
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:13:13, endln:13:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (work@top.MsgFifoDepth), line:13:17, endln:13:29
       |vpiParent:
       \_param_assign: , line:13:17, endln:13:80
+      |INT:10
       |vpiTypespec:
       \_ref_typespec: (work@top.MsgFifoDepth)
         |vpiParent:
@@ -1367,33 +1239,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiRhs:
-    \_sys_func_call: ($clog2), line:14:34, endln:14:56
+    \_constant: , line:14:34, endln:14:56
       |vpiParent:
       \_param_assign: , line:14:17, endln:14:56
-      |vpiArgument:
-      \_operation: , line:14:41, endln:14:55
+      |vpiDecompile:4
+      |vpiSize:32
+      |UINT:4
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
-        \_sys_func_call: ($clog2), line:14:34, endln:14:56
-        |vpiOpType:24
-        |vpiOperand:
-        \_ref_obj: (work@top.MsgFifoDepth), line:14:41, endln:14:53
-          |vpiParent:
-          \_operation: , line:14:41, endln:14:55
-          |vpiName:MsgFifoDepth
-          |vpiFullName:work@top.MsgFifoDepth
-        |vpiOperand:
-        \_constant: , line:14:54, endln:14:55
-          |vpiParent:
-          \_operation: , line:14:41, endln:14:55
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiName:$clog2
+        \_constant: , line:14:34, endln:14:56
+        |vpiFullName:work@top
+        |vpiActual:
+        \_int_typespec: , line:14:13, endln:14:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.MsgFifoDepthW), line:14:17, endln:14:30
       |vpiParent:
       \_param_assign: , line:14:17, endln:14:56
+      |UINT:4
       |vpiTypespec:
       \_ref_typespec: (work@top.MsgFifoDepthW)
         |vpiParent:
@@ -1666,6 +1530,12 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:6:13, endln:6:16
   |vpiParent:
+  \_ref_typespec: (work@top)
+  |vpiInstance:
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+  |vpiSigned:1
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
   \_ref_typespec: (work@top.MsgWidth)
   |vpiInstance:
   \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
@@ -1708,7 +1578,19 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:10:13, endln:10:16
   |vpiParent:
+  \_ref_typespec: (work@top)
+  |vpiInstance:
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+  |vpiSigned:1
+\_int_typespec: , line:10:13, endln:10:16
+  |vpiParent:
   \_ref_typespec: (work@top.BufferCycles)
+  |vpiInstance:
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+  |vpiSigned:1
+\_int_typespec: , line:11:13, endln:11:16
+  |vpiParent:
+  \_ref_typespec: (work@top)
   |vpiInstance:
   \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
   |vpiSigned:1
@@ -1720,7 +1602,19 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:13:13, endln:13:16
   |vpiParent:
+  \_ref_typespec: (work@top)
+  |vpiInstance:
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+  |vpiSigned:1
+\_int_typespec: , line:13:13, endln:13:16
+  |vpiParent:
   \_ref_typespec: (work@top.MsgFifoDepth)
+  |vpiInstance:
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
+  |vpiSigned:1
+\_int_typespec: , line:14:13, endln:14:16
+  |vpiParent:
+  \_ref_typespec: (work@top)
   |vpiInstance:
   \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:5:1, endln:15:22
   |vpiSigned:1
@@ -1738,5 +1632,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv | ${SURELOG_DIR}/build/regression/HierPathStructTypespec/roundtrip/dut_000.sv | 11 | 40 |
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv | ${SURELOG_DIR}/build/regression/HierPathStructTypespec/roundtrip/dut_000.sv | 13 | 40 |
 ============================== End RoundTrip Results ==============================

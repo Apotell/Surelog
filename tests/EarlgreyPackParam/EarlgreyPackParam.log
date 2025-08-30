@@ -382,6 +382,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:41:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:49:1: No timescale set for "aes".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:2:1: Compile package "alert_handler_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:28:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:49:1: Compile module "work@aes".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:13:1: Compile module "work@prim_alert_sender".
@@ -392,23 +393,23 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 bit_typespec                                           3
-constant                                              26
+constant                                              22
 design                                                 1
 gen_for                                                1
 gen_if                                                 2
-int_typespec                                           2
+int_typespec                                           3
 logic_net                                              1
 logic_typespec                                         3
 module_inst                                            7
 named_begin                                            3
-operation                                              7
+operation                                              6
 package                                                1
 param_assign                                           9
 parameter                                              9
 range                                                  3
 ref_module                                             4
-ref_obj                                                7
-ref_typespec                                          16
+ref_obj                                                5
+ref_typespec                                          17
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -463,7 +464,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:17, endln:3:29
       |vpiDecompile:35
-      |vpiSize:64
+      |vpiSize:32
       |UINT:35
       |vpiTypespec:
       \_ref_typespec: (alert_handler_reg_pkg)
@@ -850,26 +851,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:4:13, endln:4:32
     |vpiLeftRange:
-    \_operation: , line:4:20, endln:4:29
+    \_constant: , line:4:20, endln:4:27
       |vpiParent:
       \_range: , line:4:19, endln:4:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (alert_handler_reg_pkg::AsyncOn::NAlerts), line:4:20, endln:4:27
-        |vpiParent:
-        \_operation: , line:4:20, endln:4:29
-        |vpiName:NAlerts
-        |vpiFullName:alert_handler_reg_pkg::AsyncOn::NAlerts
-        |vpiActual:
-        \_constant: , line:3:27, endln:3:29
-      |vpiOperand:
-      \_constant: , line:4:28, endln:4:29
-        |vpiParent:
-        \_operation: , line:4:20, endln:4:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:34
+      |vpiSize:64
+      |INT:34
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:4:30, endln:4:31
       |vpiParent:

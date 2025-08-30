@@ -725,6 +725,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:1:1: No timescale set for "prim_util_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:1:1: Compile package "prim_util_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:22:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -742,15 +743,15 @@ integer_typespec                                      20
 integer_var                                           13
 io_decl                                                6
 logic_typespec                                         2
-logic_var                                              1
-module_inst                                            1
+logic_var                                              3
+module_inst                                            4
 operation                                             17
 package                                                1
-param_assign                                           5
-parameter                                              5
+param_assign                                           9
+parameter                                              9
 range                                                  3
 ref_obj                                               38
-ref_typespec                                          22
+ref_typespec                                          25
 ref_var                                                2
 return_stmt                                            4
 sys_func_call                                          1
@@ -1072,6 +1073,13 @@ design: (unnamed)
           \_ref_obj: (prim_util_pkg::vbits::value), line:14:53, endln:14:58
             |vpiParent:
             \_func_call: (prim_util_pkg::_clog2), line:14:31, endln:14:44
+            |vpiTypespec:
+            \_ref_typespec: (prim_util_pkg::vbits::value)
+              |vpiParent:
+              \_ref_obj: (prim_util_pkg::vbits::value), line:14:53, endln:14:58
+              |vpiFullName:prim_util_pkg::vbits::value
+              |vpiActual:
+              \_integer_typespec: , line:3:37, endln:3:44
             |vpiName:value
             |vpiFullName:prim_util_pkg::vbits::value
             |vpiActual:

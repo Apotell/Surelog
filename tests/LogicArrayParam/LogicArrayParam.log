@@ -212,6 +212,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:17:1: No timescale set for "M".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:20:1: No timescale set for "alert_handler".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:1:1: Compile package "alert_handler_reg_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:9:1: Compile package "alert_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:17:1: Compile module "work@M".
 [INF:CP0303] ${SURELOG_DIR}/tests/LogicArrayParam/dut.sv:20:1: Compile module "work@alert_handler".
 [INF:UH0706] Creating UHDM Model...
@@ -219,25 +221,25 @@ AST_DEBUG_END
 assignment                                             1
 begin                                                  1
 bit_select                                             1
-bit_typespec                                           4
-constant                                              26
+bit_typespec                                           5
+constant                                              40
 design                                                 1
 gen_for                                                1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                           6
+int_typespec                                          11
 logic_net                                              1
-logic_typespec                                         2
-module_inst                                            3
+logic_typespec                                         4
+module_inst                                            4
 named_begin                                            1
-operation                                              8
+operation                                              4
 package                                                2
 param_assign                                          11
 parameter                                             13
-range                                                  6
+range                                                  9
 ref_module                                             1
-ref_obj                                               19
-ref_typespec                                          17
+ref_obj                                               11
+ref_typespec                                          25
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -292,7 +294,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:17, endln:4:29
       |vpiDecompile:20
-      |vpiSize:64
+      |vpiSize:32
       |UINT:20
       |vpiTypespec:
       \_ref_typespec: (alert_handler_reg_pkg)
@@ -336,6 +338,7 @@ design: (unnamed)
   \_parameter: (alert_pkg::NAlerts), line:12:32, endln:12:39
     |vpiParent:
     \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+    |UINT:20
     |vpiTypespec:
     \_ref_typespec: (alert_pkg::NAlerts)
       |vpiParent:
@@ -350,6 +353,7 @@ design: (unnamed)
   \_parameter: (alert_pkg::AsyncOn), line:13:32, endln:13:39
     |vpiParent:
     \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+    |BIN:01100001100000001111
     |vpiTypespec:
     \_ref_typespec: (alert_pkg::AsyncOn)
       |vpiParent:
@@ -365,13 +369,20 @@ design: (unnamed)
     |vpiParent:
     \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
     |vpiRhs:
-    \_ref_obj: (alert_pkg::alert_handler_reg_pkg::NAlerts), line:12:44, endln:12:74
+    \_constant: , line:4:27, endln:4:29
       |vpiParent:
       \_param_assign: , line:12:32, endln:12:74
-      |vpiName:alert_handler_reg_pkg::NAlerts
-      |vpiFullName:alert_pkg::alert_handler_reg_pkg::NAlerts
-      |vpiActual:
-      \_parameter: (alert_handler_reg_pkg::NAlerts), line:4:17, endln:4:24
+      |vpiDecompile:20
+      |vpiSize:32
+      |UINT:20
+      |vpiTypespec:
+      \_ref_typespec: (alert_pkg)
+        |vpiParent:
+        \_constant: , line:4:27, endln:4:29
+        |vpiFullName:alert_pkg
+        |vpiActual:
+        \_int_typespec: , line:12:14, endln:12:26
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (alert_pkg::NAlerts), line:12:32, endln:12:39
   |vpiParamAssign:
@@ -379,13 +390,20 @@ design: (unnamed)
     |vpiParent:
     \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
     |vpiRhs:
-    \_ref_obj: (alert_pkg::alert_handler_reg_pkg::AsyncOn), line:13:44, endln:13:74
+    \_constant: , line:5:43, endln:5:67
       |vpiParent:
       \_param_assign: , line:13:32, endln:13:74
-      |vpiName:alert_handler_reg_pkg::AsyncOn
-      |vpiFullName:alert_pkg::alert_handler_reg_pkg::AsyncOn
-      |vpiActual:
-      \_parameter: (alert_handler_reg_pkg::AsyncOn), line:5:33, endln:5:40
+      |vpiDecompile:20'b01100001100000001111
+      |vpiSize:20
+      |BIN:01100001100000001111
+      |vpiTypespec:
+      \_ref_typespec: (alert_pkg)
+        |vpiParent:
+        \_constant: , line:5:43, endln:5:67
+        |vpiFullName:alert_pkg
+        |vpiActual:
+        \_bit_typespec: , line:13:14, endln:13:31
+      |vpiConstType:3
     |vpiLhs:
     \_parameter: (alert_pkg::AsyncOn), line:13:32, endln:13:39
   |vpiDefName:alert_pkg
@@ -404,6 +422,7 @@ design: (unnamed)
   \_parameter: (work@alert_handler.AsyncOn), line:13:32, endln:13:39
     |vpiParent:
     \_module_inst: work@alert_handler (work@alert_handler), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:20:1, endln:32:10
+    |BIN:01100001100000001111
     |vpiTypespec:
     \_ref_typespec: (work@alert_handler.AsyncOn)
       |vpiParent:
@@ -419,6 +438,7 @@ design: (unnamed)
   \_parameter: (work@alert_handler.NAlerts), line:12:32, endln:12:39
     |vpiParent:
     \_module_inst: work@alert_handler (work@alert_handler), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:20:1, endln:32:10
+    |UINT:20
     |vpiTypespec:
     \_ref_typespec: (work@alert_handler.NAlerts)
       |vpiParent:
@@ -435,15 +455,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@alert_handler (work@alert_handler), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:20:1, endln:32:10
     |vpiRhs:
-    \_ref_obj: (work@alert_handler.alert_handler_reg_pkg::NAlerts), line:12:44, endln:12:74
+    \_constant: , line:4:27, endln:4:29
       |vpiParent:
       \_param_assign: , line:12:32, endln:12:74
-      |vpiName:alert_handler_reg_pkg::NAlerts
-      |vpiFullName:work@alert_handler.alert_handler_reg_pkg::NAlerts
+      |vpiDecompile:20
+      |vpiSize:32
+      |UINT:20
+      |vpiTypespec:
+      \_ref_typespec: (work@alert_handler)
+        |vpiParent:
+        \_constant: , line:4:27, endln:4:29
+        |vpiFullName:work@alert_handler
+        |vpiActual:
+        \_int_typespec: , line:12:14, endln:12:26
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@alert_handler.NAlerts), line:12:32, endln:12:39
       |vpiParent:
       \_param_assign: , line:12:32, endln:12:74
+      |UINT:20
       |vpiTypespec:
       \_ref_typespec: (work@alert_handler.NAlerts)
         |vpiParent:
@@ -460,15 +490,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@alert_handler (work@alert_handler), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:20:1, endln:32:10
     |vpiRhs:
-    \_ref_obj: (work@alert_handler.alert_handler_reg_pkg::AsyncOn), line:13:44, endln:13:74
+    \_constant: , line:5:43, endln:5:67
       |vpiParent:
       \_param_assign: , line:13:32, endln:13:74
-      |vpiName:alert_handler_reg_pkg::AsyncOn
-      |vpiFullName:work@alert_handler.alert_handler_reg_pkg::AsyncOn
+      |vpiDecompile:20'b01100001100000001111
+      |vpiSize:20
+      |BIN:01100001100000001111
+      |vpiTypespec:
+      \_ref_typespec: (work@alert_handler)
+        |vpiParent:
+        \_constant: , line:5:43, endln:5:67
+        |vpiFullName:work@alert_handler
+        |vpiActual:
+        \_bit_typespec: , line:13:14, endln:13:31
+      |vpiConstType:3
     |vpiLhs:
     \_parameter: (work@alert_handler.AsyncOn), line:13:32, endln:13:39
       |vpiParent:
       \_param_assign: , line:13:32, endln:13:74
+      |BIN:01100001100000001111
       |vpiTypespec:
       \_ref_typespec: (work@alert_handler.AsyncOn)
         |vpiParent:
@@ -616,26 +656,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:5:13, endln:5:32
     |vpiLeftRange:
-    \_operation: , line:5:20, endln:5:29
+    \_constant: , line:5:20, endln:5:27
       |vpiParent:
       \_range: , line:5:19, endln:5:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (alert_handler_reg_pkg::AsyncOn::NAlerts), line:5:20, endln:5:27
-        |vpiParent:
-        \_operation: , line:5:20, endln:5:29
-        |vpiName:NAlerts
-        |vpiFullName:alert_handler_reg_pkg::AsyncOn::NAlerts
-        |vpiActual:
-        \_constant: , line:4:27, endln:4:29
-      |vpiOperand:
-      \_constant: , line:5:28, endln:5:29
-        |vpiParent:
-        \_operation: , line:5:20, endln:5:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:19
+      |vpiSize:64
+      |INT:19
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:5:30, endln:5:31
       |vpiParent:
@@ -659,26 +686,13 @@ design: (unnamed)
     |vpiParent:
     \_bit_typespec: , line:13:14, endln:13:31
     |vpiLeftRange:
-    \_operation: , line:13:19, endln:13:28
+    \_constant: , line:13:19, endln:13:26
       |vpiParent:
       \_range: , line:13:18, endln:13:31
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (alert_pkg::AsyncOn::NAlerts), line:13:19, endln:13:26
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiName:NAlerts
-        |vpiFullName:alert_pkg::AsyncOn::NAlerts
-        |vpiActual:
-        \_ref_obj: (alert_pkg::alert_handler_reg_pkg::NAlerts), line:12:44, endln:12:74
-      |vpiOperand:
-      \_constant: , line:13:27, endln:13:28
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:19
+      |vpiSize:64
+      |INT:19
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:13:29, endln:13:30
       |vpiParent:
@@ -697,24 +711,13 @@ design: (unnamed)
     |vpiParent:
     \_bit_typespec: , line:13:14, endln:13:31
     |vpiLeftRange:
-    \_operation: , line:13:19, endln:13:28
+    \_constant: , line:13:19, endln:13:26
       |vpiParent:
       \_range: , line:13:18, endln:13:31
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@alert_handler.AsyncOn.NAlerts), line:13:19, endln:13:26
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiName:NAlerts
-        |vpiFullName:work@alert_handler.AsyncOn.NAlerts
-      |vpiOperand:
-      \_constant: , line:13:27, endln:13:28
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:19
+      |vpiSize:64
+      |INT:19
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:13:29, endln:13:30
       |vpiParent:
@@ -730,9 +733,39 @@ design: (unnamed)
   \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
 \_int_typespec: , line:12:14, endln:12:26
   |vpiParent:
+  \_ref_typespec: (work@alert_handler)
+  |vpiInstance:
+  \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+\_int_typespec: , line:12:14, endln:12:26
+  |vpiParent:
   \_ref_typespec: (work@alert_handler.NAlerts)
   |vpiInstance:
   \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+\_bit_typespec: , line:13:14, endln:13:31
+  |vpiParent:
+  \_ref_typespec: (work@alert_handler)
+  |vpiInstance:
+  \_package: alert_pkg (alert_pkg::), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+  |vpiRange:
+  \_range: , line:13:18, endln:13:31
+    |vpiParent:
+    \_bit_typespec: , line:13:14, endln:13:31
+    |vpiLeftRange:
+    \_constant: , line:13:19, endln:13:26
+      |vpiParent:
+      \_range: , line:13:18, endln:13:31
+      |vpiDecompile:19
+      |vpiSize:64
+      |INT:19
+      |vpiConstType:7
+    |vpiRightRange:
+    \_constant: , line:13:29, endln:13:30
+      |vpiParent:
+      \_range: , line:13:18, endln:13:31
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
 \_bit_typespec: , line:13:14, endln:13:31
   |vpiParent:
   \_ref_typespec: (work@alert_handler.AsyncOn)
@@ -743,24 +776,13 @@ design: (unnamed)
     |vpiParent:
     \_bit_typespec: , line:13:14, endln:13:31
     |vpiLeftRange:
-    \_operation: , line:13:19, endln:13:28
+    \_constant: , line:13:19, endln:13:26
       |vpiParent:
       \_range: , line:13:18, endln:13:31
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@alert_handler.AsyncOn.NAlerts), line:13:19, endln:13:26
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiName:NAlerts
-        |vpiFullName:work@alert_handler.AsyncOn.NAlerts
-      |vpiOperand:
-      \_constant: , line:13:27, endln:13:28
-        |vpiParent:
-        \_operation: , line:13:19, endln:13:28
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:19
+      |vpiSize:64
+      |INT:19
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:13:29, endln:13:30
       |vpiParent:

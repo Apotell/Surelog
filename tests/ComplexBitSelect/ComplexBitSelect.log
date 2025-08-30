@@ -180,6 +180,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:1:1: No timescale set for "flash_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:12:1: No timescale set for "flash_ctrl_info_cfg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:1:1: Compile package "flash_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:12:1: Compile module "work@flash_ctrl_info_cfg".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -446,7 +447,7 @@ bit_select                                             2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              43
+constant                                              50
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -456,7 +457,7 @@ function                                               9
 gen_for                                                1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                          24
+int_typespec                                          31
 int_var                                                4
 io_decl                                               11
 logic_net                                              1
@@ -468,8 +469,8 @@ package                                                2
 param_assign                                          10
 parameter                                             13
 range                                                  7
-ref_obj                                               13
-ref_typespec                                          39
+ref_obj                                                6
+ref_typespec                                          46
 ref_var                                                1
 task                                                   9
 unsupported_typespec                                   1
@@ -570,13 +571,20 @@ design: (unnamed)
         \_range: , line:3:31, endln:3:40
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (flash_ctrl_pkg::InfoTypeSize::InfoTypes), line:3:31, endln:3:40
+        \_constant: , line:3:31, endln:3:40
           |vpiParent:
           \_operation: , line:3:31, endln:3:40
-          |vpiName:InfoTypes
-          |vpiFullName:flash_ctrl_pkg::InfoTypeSize::InfoTypes
-          |vpiActual:
-          \_constant: , line:2:35, endln:2:36
+          |vpiDecompile:3
+          |vpiSize:32
+          |UINT:3
+          |vpiTypespec:
+          \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize)
+            |vpiParent:
+            \_constant: , line:3:31, endln:3:40
+            |vpiFullName:flash_ctrl_pkg::InfoTypeSize
+            |vpiActual:
+            \_int_typespec: , line:2:13, endln:2:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiSize:64
@@ -608,7 +616,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:36
       |vpiDecompile:3
-      |vpiSize:64
+      |vpiSize:32
       |UINT:3
       |vpiTypespec:
       \_ref_typespec: (flash_ctrl_pkg)
@@ -658,7 +666,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:17, endln:8:37
       |vpiDecompile:10
-      |vpiSize:64
+      |vpiSize:32
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (flash_ctrl_pkg)
@@ -1145,11 +1153,20 @@ design: (unnamed)
         \_range: , line:3:31, endln:3:40
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+        \_constant: , line:3:31, endln:3:40
           |vpiParent:
           \_operation: , line:3:31, endln:3:40
-          |vpiName:InfoTypes
-          |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
+          |vpiDecompile:3
+          |vpiSize:32
+          |UINT:3
+          |vpiTypespec:
+          \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+            |vpiParent:
+            \_constant: , line:3:31, endln:3:40
+            |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
+            |vpiActual:
+            \_int_typespec: , line:2:13, endln:2:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiParent:
@@ -1216,7 +1233,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:36
       |vpiDecompile:3
-      |vpiSize:64
+      |vpiSize:32
       |UINT:3
       |vpiTypespec:
       \_ref_typespec: (work@flash_ctrl_info_cfg)
@@ -1306,11 +1323,20 @@ design: (unnamed)
           \_range: , line:3:31, endln:3:40
           |vpiOpType:11
           |vpiOperand:
-          \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+          \_constant: , line:3:31, endln:3:40
             |vpiParent:
             \_operation: , line:3:31, endln:3:40
-            |vpiName:InfoTypes
-            |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
+            |vpiDecompile:3
+            |vpiSize:32
+            |UINT:3
+            |vpiTypespec:
+            \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+              |vpiParent:
+              \_constant: , line:3:31, endln:3:40
+              |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
+              |vpiActual:
+              \_int_typespec: , line:2:13, endln:2:16
+            |vpiConstType:9
           |vpiOperand:
           \_constant: 
             |vpiParent:
@@ -1330,7 +1356,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:17, endln:8:37
       |vpiDecompile:10
-      |vpiSize:64
+      |vpiSize:32
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (work@flash_ctrl_info_cfg)
@@ -1516,6 +1542,12 @@ design: (unnamed)
   |vpiInstance:
   \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
   |vpiSigned:1
+\_int_typespec: , line:2:13, endln:2:16
+  |vpiParent:
+  \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize)
+  |vpiInstance:
+  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+  |vpiSigned:1
 \_array_typespec: , line:3:13, endln:3:41
   |vpiParent:
   \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
@@ -1559,11 +1591,20 @@ design: (unnamed)
       \_range: , line:3:31, endln:3:40
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+      \_constant: , line:3:31, endln:3:40
         |vpiParent:
         \_operation: , line:3:31, endln:3:40
-        |vpiName:InfoTypes
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
+        |vpiDecompile:3
+        |vpiSize:32
+        |UINT:3
+        |vpiTypespec:
+        \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+          |vpiParent:
+          \_constant: , line:3:31, endln:3:40
+          |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
+          |vpiActual:
+          \_int_typespec: , line:2:13, endln:2:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -1578,7 +1619,19 @@ design: (unnamed)
     |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
     |vpiActual:
     \_int_typespec: , line:3:13, endln:3:16
+\_int_typespec: , line:2:13, endln:2:16
+  |vpiParent:
+  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+  |vpiInstance:
+  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+  |vpiSigned:1
 \_int_typespec: , line:3:13, endln:3:16
+  |vpiParent:
+  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+  |vpiInstance:
+  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+  |vpiSigned:1
+\_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
   \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
   |vpiInstance:
@@ -1629,11 +1682,20 @@ design: (unnamed)
       \_range: , line:3:31, endln:3:40
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+      \_constant: , line:3:31, endln:3:40
         |vpiParent:
         \_operation: , line:3:31, endln:3:40
-        |vpiName:InfoTypes
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
+        |vpiDecompile:3
+        |vpiSize:32
+        |UINT:3
+        |vpiTypespec:
+        \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+          |vpiParent:
+          \_constant: , line:3:31, endln:3:40
+          |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
+          |vpiActual:
+          \_int_typespec: , line:2:13, endln:2:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -1648,7 +1710,19 @@ design: (unnamed)
     |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
     |vpiActual:
     \_int_typespec: , line:3:13, endln:3:16
+\_int_typespec: , line:2:13, endln:2:16
+  |vpiParent:
+  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+  |vpiInstance:
+  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+  |vpiSigned:1
 \_int_typespec: , line:3:13, endln:3:16
+  |vpiParent:
+  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+  |vpiInstance:
+  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+  |vpiSigned:1
+\_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
   \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
   |vpiInstance:

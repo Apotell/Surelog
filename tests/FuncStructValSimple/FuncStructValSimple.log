@@ -508,6 +508,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:64:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:85:1: No timescale set for "popcount".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:1:1: Compile package "config_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:22:1: Compile package "cva6_config_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:36:1: Compile package "build_config_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:85:1: Compile module "work@popcount".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv:64:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -515,16 +518,16 @@ AST_DEBUG_END
 assignment                                             4
 begin                                                  2
 bit_typespec                                           5
-constant                                              35
+constant                                              47
 design                                                 1
 func_call                                              1
 function                                               1
 gen_if_else                                            2
 hier_path                                              6
-int_typespec                                           6
+int_typespec                                          12
 io_decl                                                1
 logic_typespec                                         4
-module_inst                                            3
+module_inst                                            5
 named_begin                                            3
 operation                                             17
 package                                                3
@@ -532,8 +535,8 @@ param_assign                                           8
 parameter                                              8
 range                                                  8
 ref_module                                             3
-ref_obj                                               19
-ref_typespec                                          37
+ref_obj                                               16
+ref_typespec                                          43
 return_stmt                                            1
 string_typespec                                        6
 struct_typespec                                        4
@@ -578,7 +581,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:17:25, endln:17:44
       |vpiDecompile:'0
-      |vpiSize:-1
+      |vpiSize:1088
       |BIN:0
       |vpiTypespec:
       \_ref_typespec: (config_pkg)
@@ -736,7 +739,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:24:14, endln:24:34
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -762,25 +765,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:26:53, endln:29:4
         |vpiPattern:
-        \_operation: , line:27:12, endln:27:34
-          |vpiParent:
-          \_operation: , line:26:53, endln:29:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:27:12, endln:27:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:27:12, endln:27:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigCExtEn), line:27:17, endln:27:33
-            |vpiParent:
-            \_operation: , line:27:12, endln:27:34
-            |vpiName:CVA6ConfigCExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigCExtEn
-            |vpiActual:
-            \_constant: , line:24:33, endln:24:34
+        \_constant: , line:27:12, endln:27:34
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -793,27 +781,17 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:26:53, endln:29:4
         |vpiPattern:
-        \_operation: , line:28:21, endln:28:32
-          |vpiParent:
-          \_operation: , line:26:53, endln:29:4
-          |vpiOpType:34
-          |vpiOperand:
-          \_constant: , line:28:22, endln:28:24
-            |vpiDecompile:16
-            |vpiSize:64
-            |UINT:16
-            |vpiConstType:9
-          |vpiOperand:
-          \_operation: , line:28:24, endln:28:31
+        \_constant: , line:28:21, endln:28:32
+          |vpiDecompile:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiSize:1024
+          |BIN:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiTypespec:
+          \_ref_typespec: 
             |vpiParent:
-            \_operation: , line:28:21, endln:28:32
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:28:25, endln:28:30
-              |vpiDecompile:64'h0
-              |vpiSize:64
-              |HEX:0
-              |vpiConstType:5
+            \_constant: , line:28:21, endln:28:32
+            |vpiActual:
+            \_int_typespec: 
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -1331,13 +1309,12 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_int_typespec: , line:24:3, endln:24:34
-\_bit_typespec: , line:27:12, endln:27:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv, line:22:1, endln:32:11
 \_string_typespec: (RVC), line:27:7, endln:27:10
   |vpiParent:
   \_tagged_pattern: , line:27:12, endln:27:34
   |vpiName:RVC
+\_int_typespec: 
+  |UINT:64
 \_string_typespec: (PMPCfgRstVal), line:28:7, endln:28:19
   |vpiParent:
   \_tagged_pattern: , line:28:21, endln:28:32
@@ -1353,5 +1330,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv | ${SURELOG_DIR}/build/regression/FuncStructValSimple/roundtrip/dut_000.sv | 32 | 100 |
+[roundtrip]: ${SURELOG_DIR}/tests/FuncStructValSimple/dut.sv | ${SURELOG_DIR}/build/regression/FuncStructValSimple/roundtrip/dut_000.sv | 33 | 100 |
 ============================== End RoundTrip Results ==============================

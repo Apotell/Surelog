@@ -292,6 +292,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -299,11 +300,11 @@ AST_DEBUG_END
 array_typespec                                         1
 begin                                                  2
 bit_select                                             4
-constant                                              21
+constant                                              25
 design                                                 1
 gen_if                                                 2
 hier_path                                              4
-int_typespec                                           5
+int_typespec                                           7
 logic_net                                              3
 logic_typespec                                         3
 module_inst                                            4
@@ -314,8 +315,8 @@ parameter                                              6
 port                                                   1
 range                                                  4
 ref_module                                             2
-ref_obj                                                9
-ref_typespec                                          14
+ref_obj                                                7
+ref_typespec                                          16
 struct_typespec                                        2
 sys_func_call                                          2
 typespec_member                                        2
@@ -372,7 +373,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:18, endln:2:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (keymgr_pkg)
@@ -393,7 +394,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:18, endln:3:31
       |vpiDecompile:16
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16
       |vpiTypespec:
       \_ref_typespec: (keymgr_pkg)
@@ -693,26 +694,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:6:7, endln:6:39
     |vpiLeftRange:
-    \_operation: , line:6:14, endln:6:22
+    \_constant: , line:6:14, endln:6:20
       |vpiParent:
       \_range: , line:6:13, endln:6:25
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (keymgr_pkg::keymgr_pkg::hw_key_req_t::key::Shares), line:6:14, endln:6:20
-        |vpiParent:
-        \_operation: , line:6:14, endln:6:22
-        |vpiName:Shares
-        |vpiFullName:keymgr_pkg::keymgr_pkg::hw_key_req_t::key::Shares
-        |vpiActual:
-        \_constant: , line:2:27, endln:2:28
-      |vpiOperand:
-      \_constant: , line:6:21, endln:6:22
-        |vpiParent:
-        \_operation: , line:6:14, endln:6:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:1
+      |vpiSize:64
+      |INT:1
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:6:23, endln:6:24
       |vpiParent:
@@ -726,26 +714,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:6:7, endln:6:39
     |vpiLeftRange:
-    \_operation: , line:6:26, endln:6:36
+    \_constant: , line:6:26, endln:6:34
       |vpiParent:
       \_range: , line:6:25, endln:6:39
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (keymgr_pkg::keymgr_pkg::hw_key_req_t::key::KeyWidth), line:6:26, endln:6:34
-        |vpiParent:
-        \_operation: , line:6:26, endln:6:36
-        |vpiName:KeyWidth
-        |vpiFullName:keymgr_pkg::keymgr_pkg::hw_key_req_t::key::KeyWidth
-        |vpiActual:
-        \_constant: , line:3:29, endln:3:31
-      |vpiOperand:
-      \_constant: , line:6:35, endln:6:36
-        |vpiParent:
-        \_operation: , line:6:26, endln:6:36
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:6:37, endln:6:38
       |vpiParent:

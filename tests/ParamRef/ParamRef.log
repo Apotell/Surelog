@@ -199,15 +199,17 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamRef/dut.sv:18:1: No timescale set for "rv_core_ibex".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamRef/dut.sv:25:1: No timescale set for "ibex_core".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamRef/dut.sv:1:1: Compile package "tl_main_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamRef/dut.sv:5:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamRef/dut.sv:25:1: Compile module "work@ibex_core".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamRef/dut.sv:18:1: Compile module "work@rv_core_ibex".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamRef/dut.sv:10:1: Compile module "work@top_earlgrey".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              17
+constant                                              21
 design                                                 1
 import_typespec                                        1
-int_typespec                                           9
+int_typespec                                          11
 logic_typespec                                         2
 module_inst                                            5
 operation                                              3
@@ -216,8 +218,8 @@ param_assign                                           9
 parameter                                             10
 range                                                  2
 ref_module                                             2
-ref_obj                                                3
-ref_typespec                                          18
+ref_obj                                                1
+ref_typespec                                          21
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamRef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamRef/slpp_all/checker/surelog.chk.html ...
@@ -257,7 +259,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:19, endln:2:43
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (tl_main_pkg)
@@ -296,6 +298,7 @@ design: (unnamed)
   \_parameter: (dm::ExceptionAddress), line:7:28, endln:7:44
     |vpiParent:
     \_package: dm (dm::), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:5:1, endln:8:16
+    |UINT:12
     |vpiTypespec:
     \_ref_typespec: (dm::ExceptionAddress)
       |vpiParent:
@@ -315,7 +318,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:19, endln:6:35
       |vpiDecompile:10
-      |vpiSize:64
+      |vpiSize:32
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (dm)
@@ -332,26 +335,20 @@ design: (unnamed)
     |vpiParent:
     \_package: dm (dm::), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:5:1, endln:8:16
     |vpiRhs:
-    \_operation: , line:7:47, endln:7:62
+    \_constant: , line:7:47, endln:7:58
       |vpiParent:
       \_param_assign: , line:7:28, endln:7:62
-      |vpiOpType:24
-      |vpiOperand:
-      \_ref_obj: (dm::HaltAddress), line:7:47, endln:7:58
+      |vpiDecompile:12
+      |vpiSize:32
+      |UINT:12
+      |vpiTypespec:
+      \_ref_typespec: (dm)
         |vpiParent:
-        \_operation: , line:7:47, endln:7:62
-        |vpiName:HaltAddress
-        |vpiFullName:dm::HaltAddress
+        \_constant: , line:7:47, endln:7:58
+        |vpiFullName:dm
         |vpiActual:
-        \_constant: , line:6:33, endln:6:35
-      |vpiOperand:
-      \_constant: , line:7:61, endln:7:62
-        |vpiParent:
-        \_operation: , line:7:47, endln:7:62
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
+        \_logic_typespec: , line:7:15, endln:7:27
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (dm::ExceptionAddress), line:7:28, endln:7:44
   |vpiDefName:dm
@@ -477,7 +474,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:19, endln:2:43
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@top_earlgrey)

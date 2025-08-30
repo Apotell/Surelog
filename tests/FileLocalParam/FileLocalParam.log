@@ -116,18 +116,18 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                               6
+constant                                              12
 design                                                 1
 gen_if                                                 1
 int_typespec                                           3
-module_inst                                            2
+module_inst                                            3
 operation                                              4
 param_assign                                           5
 parameter                                              5
 range                                                  2
 ref_module                                             1
-ref_obj                                                7
-ref_typespec                                           6
+ref_obj                                                6
+ref_typespec                                           7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/checker/surelog.chk.html ...
@@ -220,6 +220,7 @@ design: (unnamed)
 \_parameter: (MAP), line:3:23, endln:3:26
   |vpiParent:
   \_design: (unnamed)
+  |BIN:0000000000000000000000000000000000000000000000000000000000010000
   |vpiTypespec:
   \_ref_typespec: (MAP)
     |vpiParent:
@@ -238,7 +239,7 @@ design: (unnamed)
     |vpiParent:
     \_param_assign: , line:1:25, endln:1:58
     |vpiDecompile:16
-    |vpiSize:64
+    |vpiSize:32
     |UINT:16
     |vpiTypespec:
     \_ref_typespec: 
@@ -254,15 +255,18 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiRhs:
-  \_operation: , line:3:33, endln:5:48
+  \_constant: , line:3:33, endln:5:48
     |vpiParent:
     \_param_assign: , line:3:23, endln:5:48
-    |vpiOpType:33
-    |vpiOperand:
-    \_ref_obj: (AWIDTH), line:4:3, endln:4:9
+    |vpiSize:17
+    |BIN:0000000000000000000000000000000000000000000000000000000000010000
+    |vpiTypespec:
+    \_ref_typespec: 
       |vpiParent:
-      \_operation: , line:3:33, endln:5:48
-      |vpiName:AWIDTH
+      \_constant: , line:3:33, endln:5:48
+      |vpiActual:
+      \_int_typespec: , line:3:12, endln:3:22
+    |vpiConstType:3
   |vpiLhs:
   \_parameter: (MAP), line:3:23, endln:3:26
 \_weaklyReferenced:
@@ -275,11 +279,13 @@ design: (unnamed)
     |vpiParent:
     \_int_typespec: , line:3:12, endln:3:22
     |vpiLeftRange:
-    \_ref_obj: (MAP.AWIDTH), line:3:13, endln:3:19
+    \_constant: , line:3:13, endln:3:19
       |vpiParent:
       \_range: , line:3:12, endln:3:22
-      |vpiName:AWIDTH
-      |vpiFullName:MAP.AWIDTH
+      |vpiDecompile:16
+      |vpiSize:64
+      |UINT:16
+      |vpiConstType:9
     |vpiRightRange:
     \_constant: , line:3:20, endln:3:21
       |vpiParent:
@@ -296,5 +302,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FileLocalParam/dut.sv | ${SURELOG_DIR}/build/regression/FileLocalParam/roundtrip/dut_000.sv | 5 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/FileLocalParam/dut.sv | ${SURELOG_DIR}/build/regression/FileLocalParam/roundtrip/dut_000.sv | 7 | 19 |
 ============================== End RoundTrip Results ==============================

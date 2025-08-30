@@ -472,6 +472,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:48:1: No timescale set for "otp_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:59:1: No timescale set for "flash_ctrl_info_cfg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:2:1: Compile package "prim_util_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:24:1: Compile package "flash_ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:48:1: Compile package "otp_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:59:1: Compile module "work@flash_ctrl_info_cfg".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -738,7 +741,7 @@ bit_select                                             2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              38
+constant                                              96
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -750,20 +753,20 @@ if_stmt                                                1
 import_typespec                                        2
 int_typespec                                          27
 int_var                                                6
-integer_typespec                                       7
+integer_typespec                                       9
 integer_var                                            4
 io_decl                                               15
 logic_net                                              1
-logic_typespec                                         1
-logic_var                                              1
-module_inst                                            2
-operation                                             17
+logic_typespec                                        29
+logic_var                                             52
+module_inst                                           55
+operation                                             18
 package                                                4
-param_assign                                          11
-parameter                                             14
+param_assign                                          72
+parameter                                             75
 range                                                  2
-ref_obj                                               29
-ref_typespec                                          44
+ref_obj                                               41
+ref_typespec                                         105
 ref_var                                                1
 return_stmt                                            4
 task                                                   9
@@ -1122,6 +1125,13 @@ design: (unnamed)
           \_ref_obj: (prim_util_pkg::vbits::value), line:17:53, endln:17:58
             |vpiParent:
             \_func_call: (prim_util_pkg::_clog2), line:17:31, endln:17:44
+            |vpiTypespec:
+            \_ref_typespec: (prim_util_pkg::vbits::value)
+              |vpiParent:
+              \_ref_obj: (prim_util_pkg::vbits::value), line:17:53, endln:17:58
+              |vpiFullName:prim_util_pkg::vbits::value
+              |vpiActual:
+              \_integer_typespec: , line:6:37, endln:6:44
             |vpiName:value
             |vpiFullName:prim_util_pkg::vbits::value
             |vpiActual:
@@ -1189,7 +1199,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:26:15, endln:26:28
       |vpiDecompile:3
-      |vpiSize:64
+      |vpiSize:32
       |UINT:3
       |vpiTypespec:
       \_ref_typespec: (flash_ctrl_pkg)
@@ -1206,35 +1216,11 @@ design: (unnamed)
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
     |vpiRhs:
-    \_func_call: (max_info_pages), line:27:33, endln:27:47
-      |vpiParent:
-      \_param_assign: , line:27:15, endln:31:5
-      |vpiArgument:
-      \_operation: , line:27:48, endln:31:4
-        |vpiParent:
-        \_func_call: (max_info_pages), line:27:33, endln:27:47
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:28:5, endln:28:7
-          |vpiDecompile:10
-          |vpiSize:64
-          |UINT:10
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:29:5, endln:29:6
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:30:5, endln:30:6
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiName:max_info_pages
-      |vpiFunction:
-      \_function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
+    \_constant: , line:28:5, endln:28:7
+      |vpiDecompile:10
+      |vpiSize:64
+      |UINT:10
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (flash_ctrl_pkg::InfosPerBank), line:27:15, endln:27:27
   |vpiParamAssign:
@@ -1242,20 +1228,11 @@ design: (unnamed)
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
     |vpiRhs:
-    \_func_call: (prim_util_pkg::vbits), line:33:34, endln:33:49
-      |vpiParent:
-      \_param_assign: , line:33:16, endln:33:68
-      |vpiArgument:
-      \_ref_obj: (flash_ctrl_pkg::InfosPerBank), line:33:55, endln:33:67
-        |vpiParent:
-        \_func_call: (prim_util_pkg::vbits), line:33:34, endln:33:49
-        |vpiName:InfosPerBank
-        |vpiFullName:flash_ctrl_pkg::InfosPerBank
-        |vpiActual:
-        \_func_call: (max_info_pages), line:27:33, endln:27:47
-      |vpiName:prim_util_pkg::vbits
-      |vpiFunction:
-      \_function: (prim_util_pkg::vbits), line:15:1, endln:19:14
+    \_constant: 
+      |vpiDecompile:4
+      |vpiSize:64
+      |INT:4
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (flash_ctrl_pkg::InfoPageW), line:33:16, endln:33:25
   |vpiDefName:flash_ctrl_pkg
@@ -1538,6 +1515,13 @@ design: (unnamed)
       \_ref_obj: (otp_ctrl_pkg::InfosPerBank), line:54:38, endln:54:50
         |vpiParent:
         \_func_call: (vbits), line:54:32, endln:54:37
+        |vpiTypespec:
+        \_ref_typespec: (otp_ctrl_pkg::InfosPerBank)
+          |vpiParent:
+          \_ref_obj: (otp_ctrl_pkg::InfosPerBank), line:54:38, endln:54:50
+          |vpiFullName:otp_ctrl_pkg::InfosPerBank
+          |vpiActual:
+          \_integer_typespec: , line:15:34, endln:15:41
         |vpiName:InfosPerBank
         |vpiFullName:otp_ctrl_pkg::InfosPerBank
       |vpiName:vbits
@@ -1617,6 +1601,13 @@ design: (unnamed)
           \_ref_obj: (otp_ctrl_pkg::vbits::value), line:17:53, endln:17:58
             |vpiParent:
             \_func_call: (prim_util_pkg::_clog2), line:17:31, endln:17:44
+            |vpiTypespec:
+            \_ref_typespec: (otp_ctrl_pkg::vbits::value)
+              |vpiParent:
+              \_ref_obj: (otp_ctrl_pkg::vbits::value), line:17:53, endln:17:58
+              |vpiFullName:otp_ctrl_pkg::vbits::value
+              |vpiActual:
+              \_integer_typespec: , line:6:37, endln:6:44
             |vpiName:value
             |vpiFullName:otp_ctrl_pkg::vbits::value
             |vpiActual:
@@ -2124,7 +2115,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:26:15, endln:26:28
       |vpiDecompile:3
-      |vpiSize:64
+      |vpiSize:32
       |UINT:3
       |vpiTypespec:
       \_ref_typespec: (work@flash_ctrl_info_cfg)
@@ -2155,41 +2146,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
     |vpiRhs:
-    \_func_call: (max_info_pages), line:27:33, endln:27:47
+    \_constant: , line:28:5, endln:28:7
       |vpiParent:
       \_param_assign: , line:27:15, endln:31:5
-      |vpiArgument:
-      \_operation: , line:27:48, endln:31:4
-        |vpiParent:
-        \_func_call: (max_info_pages), line:27:33, endln:27:47
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:28:5, endln:28:7
-          |vpiParent:
-          \_operation: , line:27:48, endln:31:4
-          |vpiDecompile:10
-          |vpiSize:64
-          |UINT:10
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:29:5, endln:29:6
-          |vpiParent:
-          \_operation: , line:27:48, endln:31:4
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:30:5, endln:30:6
-          |vpiParent:
-          \_operation: , line:27:48, endln:31:4
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiName:max_info_pages
-      |vpiFunction:
-      \_function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
+      |vpiDecompile:10
+      |vpiSize:64
+      |UINT:10
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@flash_ctrl_info_cfg.InfosPerBank), line:27:15, endln:27:27
       |vpiParent:
@@ -2210,18 +2173,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
     |vpiRhs:
-    \_func_call: (prim_util_pkg::vbits), line:33:34, endln:33:49
+    \_constant: 
       |vpiParent:
       \_param_assign: , line:33:16, endln:33:68
-      |vpiArgument:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfosPerBank), line:33:55, endln:33:67
-        |vpiParent:
-        \_func_call: (prim_util_pkg::vbits), line:33:34, endln:33:49
-        |vpiName:InfosPerBank
-        |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-      |vpiName:prim_util_pkg::vbits
-      |vpiFunction:
-      \_function: (prim_util_pkg::vbits), line:15:1, endln:19:14
+      |vpiDecompile:4
+      |vpiSize:64
+      |INT:4
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (work@flash_ctrl_info_cfg.InfoPageW), line:33:16, endln:33:25
       |vpiParent:
@@ -2312,6 +2270,12 @@ design: (unnamed)
   \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
   |vpiSigned:1
 \_integer_typespec: , line:15:34, endln:15:41
+  |vpiParent:
+  \_ref_typespec: (otp_ctrl_pkg::vbits::value)
+  |vpiInstance:
+  \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:2:1, endln:22:11
+  |vpiSigned:1
+\_integer_typespec: , line:6:37, endln:6:44
   |vpiParent:
   \_ref_typespec: (otp_ctrl_pkg::vbits::value)
   |vpiInstance:

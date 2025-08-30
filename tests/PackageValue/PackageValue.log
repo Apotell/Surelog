@@ -588,6 +588,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: No timescale set for "riscv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: No timescale set for "ariane_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:1:1: Compile package "prim_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: Compile package "riscv".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: Compile package "ariane_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageValue/top.sv:11:1: Compile module "work@prim_diff_decode".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -856,7 +859,7 @@ case_stmt                                              1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              98
+constant                                             216
 design                                                 1
 enum_const                                             7
 enum_typespec                                          2
@@ -868,17 +871,17 @@ int_typespec                                           9
 int_var                                                4
 integer_typespec                                       1
 io_decl                                               11
-logic_typespec                                        26
+logic_typespec                                        50
 logic_var                                              1
-module_inst                                            3
+module_inst                                            4
 named_begin                                            2
 operation                                             34
 package                                                4
 param_assign                                          27
 parameter                                             27
-range                                                 26
+range                                                 50
 ref_obj                                               43
-ref_typespec                                          66
+ref_typespec                                          91
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/surelog.uhdm ...
@@ -1411,6 +1414,7 @@ design: (unnamed)
   \_parameter: (ariane_pkg::SMODE_STATUS_READ_MASK), line:58:28, endln:58:50
     |vpiParent:
     \_package: ariane_pkg (ariane_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:55:1, endln:72:11
+    |UINT:9223372049740587315
     |vpiTypespec:
     \_ref_typespec: (ariane_pkg::SMODE_STATUS_READ_MASK)
       |vpiParent:
@@ -1426,156 +1430,20 @@ design: (unnamed)
     |vpiParent:
     \_package: ariane_pkg (ariane_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:55:1, endln:72:11
     |vpiRhs:
-    \_operation: , line:58:53, endln:69:73
+    \_constant: , line:58:53, endln:68:72
       |vpiParent:
       \_param_assign: , line:58:28, endln:69:73
-      |vpiOpType:29
-      |vpiOperand:
-      \_operation: , line:58:53, endln:68:72
+      |vpiDecompile:9223372049740587315
+      |vpiSize:64
+      |UINT:9223372049740587315
+      |vpiTypespec:
+      \_ref_typespec: (ariane_pkg)
         |vpiParent:
-        \_operation: , line:58:53, endln:69:73
-        |vpiOpType:29
-        |vpiOperand:
-        \_operation: , line:58:53, endln:67:73
-          |vpiParent:
-          \_operation: , line:58:53, endln:68:72
-          |vpiOpType:29
-          |vpiOperand:
-          \_operation: , line:58:53, endln:66:73
-            |vpiParent:
-            \_operation: , line:58:53, endln:67:73
-            |vpiOpType:29
-            |vpiOperand:
-            \_operation: , line:58:53, endln:65:72
-              |vpiParent:
-              \_operation: , line:58:53, endln:66:73
-              |vpiOpType:29
-              |vpiOperand:
-              \_operation: , line:58:53, endln:64:72
-                |vpiParent:
-                \_operation: , line:58:53, endln:65:72
-                |vpiOpType:29
-                |vpiOperand:
-                \_operation: , line:58:53, endln:63:71
-                  |vpiParent:
-                  \_operation: , line:58:53, endln:64:72
-                  |vpiOpType:29
-                  |vpiOperand:
-                  \_operation: , line:58:53, endln:62:71
-                    |vpiParent:
-                    \_operation: , line:58:53, endln:63:71
-                    |vpiOpType:29
-                    |vpiOperand:
-                    \_operation: , line:58:53, endln:61:72
-                      |vpiParent:
-                      \_operation: , line:58:53, endln:62:71
-                      |vpiOpType:29
-                      |vpiOperand:
-                      \_operation: , line:58:53, endln:60:73
-                        |vpiParent:
-                        \_operation: , line:58:53, endln:61:72
-                        |vpiOpType:29
-                        |vpiOperand:
-                        \_operation: , line:58:53, endln:59:72
-                          |vpiParent:
-                          \_operation: , line:58:53, endln:60:73
-                          |vpiOpType:29
-                          |vpiOperand:
-                          \_ref_obj: (ariane_pkg::riscv::SSTATUS_UIE), line:58:53, endln:58:71
-                            |vpiParent:
-                            \_operation: , line:58:53, endln:59:72
-                            |vpiName:riscv::SSTATUS_UIE
-                            |vpiFullName:ariane_pkg::riscv::SSTATUS_UIE
-                            |vpiActual:
-                            \_parameter: (riscv::SSTATUS_UIE), line:39:29, endln:39:40
-                          |vpiOperand:
-                          \_ref_obj: (ariane_pkg::riscv::SSTATUS_SIE), line:59:54, endln:59:72
-                            |vpiParent:
-                            \_operation: , line:58:53, endln:59:72
-                            |vpiName:riscv::SSTATUS_SIE
-                            |vpiFullName:ariane_pkg::riscv::SSTATUS_SIE
-                            |vpiActual:
-                            \_parameter: (riscv::SSTATUS_SIE), line:40:29, endln:40:40
-                        |vpiOperand:
-                        \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPIE), line:60:54, endln:60:73
-                          |vpiParent:
-                          \_operation: , line:58:53, endln:60:73
-                          |vpiName:riscv::SSTATUS_SPIE
-                          |vpiFullName:ariane_pkg::riscv::SSTATUS_SPIE
-                          |vpiActual:
-                          \_parameter: (riscv::SSTATUS_SPIE), line:41:29, endln:41:41
-                      |vpiOperand:
-                      \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPP), line:61:54, endln:61:72
-                        |vpiParent:
-                        \_operation: , line:58:53, endln:61:72
-                        |vpiName:riscv::SSTATUS_SPP
-                        |vpiFullName:ariane_pkg::riscv::SSTATUS_SPP
-                        |vpiActual:
-                        \_parameter: (riscv::SSTATUS_SPP), line:42:29, endln:42:40
-                    |vpiOperand:
-                    \_ref_obj: (ariane_pkg::riscv::SSTATUS_FS), line:62:54, endln:62:71
-                      |vpiParent:
-                      \_operation: , line:58:53, endln:62:71
-                      |vpiName:riscv::SSTATUS_FS
-                      |vpiFullName:ariane_pkg::riscv::SSTATUS_FS
-                      |vpiActual:
-                      \_parameter: (riscv::SSTATUS_FS), line:43:29, endln:43:39
-                  |vpiOperand:
-                  \_ref_obj: (ariane_pkg::riscv::SSTATUS_XS), line:63:54, endln:63:71
-                    |vpiParent:
-                    \_operation: , line:58:53, endln:63:71
-                    |vpiName:riscv::SSTATUS_XS
-                    |vpiFullName:ariane_pkg::riscv::SSTATUS_XS
-                    |vpiActual:
-                    \_parameter: (riscv::SSTATUS_XS), line:44:29, endln:44:39
-                |vpiOperand:
-                \_ref_obj: (ariane_pkg::riscv::SSTATUS_SUM), line:64:54, endln:64:72
-                  |vpiParent:
-                  \_operation: , line:58:53, endln:64:72
-                  |vpiName:riscv::SSTATUS_SUM
-                  |vpiFullName:ariane_pkg::riscv::SSTATUS_SUM
-                  |vpiActual:
-                  \_parameter: (riscv::SSTATUS_SUM), line:45:29, endln:45:40
-              |vpiOperand:
-              \_ref_obj: (ariane_pkg::riscv::SSTATUS_MXR), line:65:54, endln:65:72
-                |vpiParent:
-                \_operation: , line:58:53, endln:65:72
-                |vpiName:riscv::SSTATUS_MXR
-                |vpiFullName:ariane_pkg::riscv::SSTATUS_MXR
-                |vpiActual:
-                \_parameter: (riscv::SSTATUS_MXR), line:46:29, endln:46:40
-            |vpiOperand:
-            \_ref_obj: (ariane_pkg::riscv::SSTATUS_UPIE), line:66:54, endln:66:73
-              |vpiParent:
-              \_operation: , line:58:53, endln:66:73
-              |vpiName:riscv::SSTATUS_UPIE
-              |vpiFullName:ariane_pkg::riscv::SSTATUS_UPIE
-              |vpiActual:
-              \_parameter: (riscv::SSTATUS_UPIE), line:47:29, endln:47:41
-          |vpiOperand:
-          \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPIE), line:67:54, endln:67:73
-            |vpiParent:
-            \_operation: , line:58:53, endln:67:73
-            |vpiName:riscv::SSTATUS_SPIE
-            |vpiFullName:ariane_pkg::riscv::SSTATUS_SPIE
-            |vpiActual:
-            \_parameter: (riscv::SSTATUS_SPIE), line:41:29, endln:41:41
-        |vpiOperand:
-        \_ref_obj: (ariane_pkg::riscv::SSTATUS_UXL), line:68:54, endln:68:72
-          |vpiParent:
-          \_operation: , line:58:53, endln:68:72
-          |vpiName:riscv::SSTATUS_UXL
-          |vpiFullName:ariane_pkg::riscv::SSTATUS_UXL
-          |vpiActual:
-          \_parameter: (riscv::SSTATUS_UXL), line:48:29, endln:48:40
-      |vpiOperand:
-      \_ref_obj: (ariane_pkg::riscv::SSTATUS64_SD), line:69:54, endln:69:73
-        |vpiParent:
-        \_operation: , line:58:53, endln:69:73
-        |vpiName:riscv::SSTATUS64_SD
-        |vpiFullName:ariane_pkg::riscv::SSTATUS64_SD
+        \_constant: , line:58:53, endln:68:72
+        |vpiFullName:ariane_pkg
         |vpiActual:
-        \_parameter: (riscv::SSTATUS64_SD), line:49:29, endln:49:41
+        \_logic_typespec: , line:58:15, endln:58:27
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (ariane_pkg::SMODE_STATUS_READ_MASK), line:58:28, endln:58:50
   |vpiDefName:ariane_pkg

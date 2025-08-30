@@ -206,24 +206,25 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:17:1: No timescale set for "upper".
 [WRN:PA0205] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:1:1: Compile package "foo_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:5:1: Compile module "work@bottom".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:9:1: Compile module "work@lower".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:22:1: Compile module "work@top".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:17:1: Compile module "work@upper".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              11
+constant                                              12
 design                                                 1
 import_typespec                                        1
 int_typespec                                          12
 module_inst                                            5
-operation                                              9
+operation                                              7
 package                                                1
 param_assign                                           7
 parameter                                              8
 ref_module                                             3
-ref_obj                                                5
-ref_typespec                                          16
+ref_obj                                                4
+ref_typespec                                          17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternAssign/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DefaultPatternAssign/slpp_all/checker/surelog.chk.html ...
@@ -242,6 +243,7 @@ design: (unnamed)
   \_parameter: (foo_pkg::VALUE_TEMP), line:2:17, endln:2:27
     |vpiParent:
     \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:1:1, endln:3:11
+    |INT:-1
     |vpiTypespec:
     \_ref_typespec: (foo_pkg::VALUE_TEMP)
       |vpiParent:
@@ -257,35 +259,20 @@ design: (unnamed)
     |vpiParent:
     \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:1:1, endln:3:11
     |vpiRhs:
-    \_operation: , line:2:30, endln:2:46
+    \_constant: 
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:46
+      |vpiDecompile:-1
+      |vpiSize:32
+      |INT:-1
       |vpiTypespec:
       \_ref_typespec: (foo_pkg)
         |vpiParent:
-        \_operation: , line:2:30, endln:2:46
+        \_constant: 
         |vpiFullName:foo_pkg
         |vpiActual:
-        \_int_typespec: , line:2:30, endln:2:33
-      |vpiOpType:67
-      |vpiOperand:
-      \_operation: , line:2:34, endln:2:46
-        |vpiParent:
-        \_operation: , line:2:30, endln:2:46
-        |vpiOpType:33
-        |vpiOperand:
-        \_ref_obj: (foo_pkg::default), line:2:35, endln:2:42
-          |vpiParent:
-          \_operation: , line:2:34, endln:2:46
-          |vpiName:default
-          |vpiFullName:foo_pkg::default
-          |vpiStructMember:1
-        |vpiOperand:
-        \_constant: , line:2:44, endln:2:45
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        \_int_typespec: , line:2:13, endln:2:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (foo_pkg::VALUE_TEMP), line:2:17, endln:2:27
   |vpiDefName:foo_pkg
@@ -340,6 +327,7 @@ design: (unnamed)
   \_parameter: (work@lower.VALUE_TEMP), line:2:17, endln:2:27
     |vpiParent:
     \_module_inst: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
+    |INT:-1
     |vpiTypespec:
     \_ref_typespec: (work@lower.VALUE_TEMP)
       |vpiParent:
@@ -370,41 +358,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
     |vpiRhs:
-    \_operation: , line:2:30, endln:2:46
+    \_constant: 
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:46
+      |vpiDecompile:-1
+      |vpiSize:32
+      |INT:-1
       |vpiTypespec:
       \_ref_typespec: (work@lower)
         |vpiParent:
-        \_operation: , line:2:30, endln:2:46
+        \_constant: 
         |vpiFullName:work@lower
         |vpiActual:
-        \_int_typespec: , line:2:30, endln:2:33
-      |vpiOpType:67
-      |vpiOperand:
-      \_operation: , line:2:34, endln:2:46
-        |vpiParent:
-        \_operation: , line:2:30, endln:2:46
-        |vpiOpType:33
-        |vpiOperand:
-        \_ref_obj: (work@lower.default), line:2:35, endln:2:42
-          |vpiParent:
-          \_operation: , line:2:34, endln:2:46
-          |vpiName:default
-          |vpiFullName:work@lower.default
-          |vpiStructMember:1
-        |vpiOperand:
-        \_constant: , line:2:44, endln:2:45
-          |vpiParent:
-          \_operation: , line:2:34, endln:2:46
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        \_int_typespec: , line:2:13, endln:2:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (work@lower.VALUE_TEMP), line:2:17, endln:2:27
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:46
+      |INT:-1
       |vpiTypespec:
       \_ref_typespec: (work@lower.VALUE_TEMP)
         |vpiParent:
@@ -559,10 +531,6 @@ design: (unnamed)
   |vpiInstance:
   \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:1:1, endln:3:11
   |vpiSigned:1
-\_int_typespec: , line:2:30, endln:2:33
-  |vpiInstance:
-  \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:1:1, endln:3:11
-  |vpiSigned:1
 \_int_typespec: , line:6:13, endln:6:16
   |vpiParent:
   \_parameter: (work@bottom.VALUE), line:6:17, endln:6:22
@@ -573,7 +541,7 @@ design: (unnamed)
   |vpiInstance:
   \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:1:1, endln:3:11
   |vpiSigned:1
-\_int_typespec: , line:2:30, endln:2:33
+\_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
   \_ref_typespec: (work@lower)
   |vpiInstance:

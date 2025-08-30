@@ -2,23 +2,24 @@
 [INF:CM0020] Separate compilation-unit mode is on.
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageEval/dut.sv:1:1: No timescale set for "test_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageEval/dut.sv:1:1: Compile package "test_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         2
-constant                                              17
+constant                                              21
 design                                                 1
-int_typespec                                           4
+int_typespec                                           6
 logic_typespec                                         2
 module_inst                                            1
-operation                                              6
+operation                                              4
 package                                                1
 param_assign                                           6
 parameter                                              6
 range                                                  4
-ref_obj                                                6
-ref_typespec                                          12
+ref_obj                                                1
+ref_typespec                                          15
 struct_typespec                                        1
-sys_func_call                                          3
+sys_func_call                                          1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageEval/slpp_unit/surelog.uhdm ...
@@ -53,7 +54,7 @@ design: (unnamed)
   \_parameter: (test_pkg::MioStrapPos), line:4:16, endln:4:27
     |vpiParent:
     \_package: test_pkg (test_pkg::), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
-    |vpiSize:1
+    |vpiSize:2
     |vpiTypespec:
     \_ref_typespec: (test_pkg::MioStrapPos)
       |vpiParent:
@@ -75,32 +76,27 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiRightRange:
-      \_operation: , line:4:31, endln:4:40
+      \_constant: , line:4:31, endln:4:38
         |vpiParent:
         \_range: , line:4:28, endln:4:41
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (test_pkg::MioStrapPos::NStraps), line:4:31, endln:4:38
-          |vpiParent:
-          \_operation: , line:4:31, endln:4:40
-          |vpiName:NStraps
-          |vpiFullName:test_pkg::MioStrapPos::NStraps
-          |vpiActual:
-          \_constant: , line:3:27, endln:3:28
-        |vpiOperand:
-        \_constant: , line:4:39, endln:4:40
-          |vpiParent:
-          \_operation: , line:4:31, endln:4:40
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        |vpiDecompile:1
+        |vpiSize:64
+        |INT:1
+        |vpiConstType:7
     |vpiName:MioStrapPos
     |vpiFullName:test_pkg::MioStrapPos
   |vpiParameter:
   \_parameter: (test_pkg::TEST_SIZE), line:11:11, endln:11:20
     |vpiParent:
     \_package: test_pkg (test_pkg::), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
+    |UINT:65
+    |vpiTypespec:
+    \_ref_typespec: (test_pkg::TEST_SIZE)
+      |vpiParent:
+      \_parameter: (test_pkg::TEST_SIZE), line:11:11, endln:11:20
+      |vpiFullName:test_pkg::TEST_SIZE
+      |vpiActual:
+      \_int_typespec: , line:11:1, endln:11:36
     |vpiName:TEST_SIZE
     |vpiFullName:test_pkg::TEST_SIZE
   |vpiParamAssign:
@@ -112,7 +108,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:16, endln:3:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (test_pkg)
@@ -152,16 +148,20 @@ design: (unnamed)
     |vpiParent:
     \_package: test_pkg (test_pkg::), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
     |vpiRhs:
-    \_sys_func_call: ($bits), line:11:23, endln:11:36
+    \_constant: , line:11:23, endln:11:36
       |vpiParent:
       \_param_assign: , line:11:11, endln:11:36
-      |vpiArgument:
-      \_ref_obj: (test_pkg::t_test), line:11:29, endln:11:35
+      |vpiDecompile:65
+      |vpiSize:32
+      |UINT:65
+      |vpiTypespec:
+      \_ref_typespec: (test_pkg)
         |vpiParent:
-        \_sys_func_call: ($bits), line:11:23, endln:11:36
-        |vpiName:t_test
-        |vpiFullName:test_pkg::t_test
-      |vpiName:$bits
+        \_constant: , line:11:23, endln:11:36
+        |vpiFullName:test_pkg
+        |vpiActual:
+        \_int_typespec: , line:11:1, endln:11:36
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (test_pkg::TEST_SIZE), line:11:11, endln:11:20
   |vpiTypedef:
@@ -260,6 +260,7 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:11:1, endln:11:36
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -268,5 +269,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageEval/dut.sv | ${SURELOG_DIR}/build/regression/PackageEval/roundtrip/dut_000.sv | 1 | 14 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageEval/dut.sv | ${SURELOG_DIR}/build/regression/PackageEval/roundtrip/dut_000.sv | 2 | 14 |
 ============================== End RoundTrip Results ==============================

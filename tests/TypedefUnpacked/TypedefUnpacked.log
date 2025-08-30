@@ -5,6 +5,7 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:1: Compile module "work@dut".
 [NTE:CP0309] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
@@ -16,16 +17,15 @@ cont_assign                                            2
 design                                                 1
 hier_path                                              2
 logic_net                                              2
-logic_typespec                                         2
-module_inst                                            1
+logic_typespec                                         3
+module_inst                                            2
 package                                                1
 port                                                   1
 range                                                  1
 ref_obj                                                4
-ref_typespec                                           3
-struct_typespec                                        1
-typespec_member                                        1
-unsupported_typespec                                   1
+ref_typespec                                           6
+struct_typespec                                        2
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefUnpacked/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypedefUnpacked/slpp_unit/checker/surelog.chk.html ...
@@ -65,6 +65,40 @@ design: (unnamed)
       |vpiRefColumnNo:7
       |vpiRefEndLineNo:3
       |vpiRefEndColumnNo:12
+  |vpiTypedef:
+  \_array_typespec: (pkg::b), line:5:12, endln:5:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+    |vpiName:pkg::b
+    |vpiInstance:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+    |vpiRange:
+    \_range: , line:5:15, endln:5:20
+      |vpiParent:
+      \_array_typespec: (pkg::b), line:5:12, endln:5:20
+      |vpiLeftRange:
+      \_constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:18, endln:5:19
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (pkg::pkg::b)
+      |vpiParent:
+      \_array_typespec: (pkg::b), line:5:12, endln:5:20
+      |vpiFullName:pkg::pkg::b
+      |vpiActual:
+      \_struct_typespec: (pkg::a), line:2:12, endln:4:5
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
@@ -88,7 +122,7 @@ design: (unnamed)
       \_logic_net: (work@dut.c), line:9:11, endln:9:12
       |vpiFullName:work@dut.c
       |vpiActual:
-      \_unsupported_typespec: (pkg::b), line:9:4, endln:9:9
+      \_array_typespec: (pkg::b), line:5:12, endln:5:20
     |vpiName:c
     |vpiFullName:work@dut.c
   |vpiPort:
@@ -188,9 +222,41 @@ design: (unnamed)
   \_typespec_member: (x), line:3:16, endln:3:17
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+\_struct_typespec: (pkg::a), line:2:12, endln:4:5
+  |vpiName:pkg::a
+  |vpiTypedefAlias:
+  \_ref_typespec: (pkg::a)
+    |vpiParent:
+    \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+    |vpiFullName:pkg::a
+    |vpiActual:
+    \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (x), line:3:16, endln:3:17
+    |vpiParent:
+    \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+    |vpiName:x
+    |vpiTypespec:
+    \_ref_typespec: (pkg::a.x)
+      |vpiParent:
+      \_typespec_member: (x), line:3:16, endln:3:17
+      |vpiFullName:pkg::a.x
+      |vpiActual:
+      \_logic_typespec: , line:3:7, endln:3:12
+    |vpiRefFile:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv
+    |vpiRefLineNo:3
+    |vpiRefColumnNo:7
+    |vpiRefEndLineNo:3
+    |vpiRefEndColumnNo:12
+\_logic_typespec: , line:3:7, endln:3:12
+  |vpiParent:
+  \_ref_typespec: (pkg::a.x)
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
 \_logic_typespec: , line:8:19, endln:8:19
-\_unsupported_typespec: (pkg::b), line:9:4, endln:9:9
-  |vpiName:pkg::b
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -199,5 +265,5 @@ design: (unnamed)
 [   NOTE] : 1
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv | ${SURELOG_DIR}/build/regression/TypedefUnpacked/roundtrip/dut_000.sv | 4 | 12 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv | ${SURELOG_DIR}/build/regression/TypedefUnpacked/roundtrip/dut_000.sv | 6 | 12 |
 ============================== End RoundTrip Results ==============================

@@ -7393,9 +7393,11 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:611:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:623:1: No timescale set for "popcount".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:2:1: Compile package "cva6_config_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:138:1: Compile package "config_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:466:1: Compile package "build_config_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:623:1: Compile module "work@popcount".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:611:1: Compile module "work@top".
-[ERR:EL0514] ${SURELOG_DIR}/tests/FuncStructVal/dut.sv:63:62: Undefined variable: config_pkg::WT.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
@@ -7404,7 +7406,7 @@ begin                                                 10
 bit_select                                            12
 bit_typespec                                         158
 bit_var                                               11
-constant                                             529
+constant                                             722
 cont_assign                                            5
 design                                                 1
 enum_const                                            21
@@ -7415,16 +7417,16 @@ function                                               6
 gen_if_else                                            2
 hier_path                                            227
 immediate_assert                                       7
-int_typespec                                         190
+int_typespec                                         325
 int_var                                                8
 integer_typespec                                      19
 io_decl                                               11
 logic_net                                              5
 logic_typespec                                        54
 logic_var                                              7
-module_inst                                            3
+module_inst                                            5
 named_begin                                            3
-operation                                            247
+operation                                            241
 package                                                3
 param_assign                                         108
 parameter                                            108
@@ -7432,8 +7434,8 @@ part_select                                            3
 port                                                   6
 range                                                 80
 ref_module                                             3
-ref_obj                                              688
-ref_typespec                                         714
+ref_obj                                              555
+ref_typespec                                         850
 return_stmt                                            5
 string_typespec                                      174
 struct_typespec                                        3
@@ -7730,6 +7732,14 @@ design: (unnamed)
   \_parameter: (cva6_config_pkg::CVA6ConfigFetchUserWidth), line:25:14, endln:25:38
     |vpiParent:
     \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
+    |UINT:32
+    |vpiTypespec:
+    \_ref_typespec: (cva6_config_pkg::CVA6ConfigFetchUserWidth)
+      |vpiParent:
+      \_parameter: (cva6_config_pkg::CVA6ConfigFetchUserWidth), line:25:14, endln:25:38
+      |vpiFullName:cva6_config_pkg::CVA6ConfigFetchUserWidth
+      |vpiActual:
+      \_int_typespec: , line:25:3, endln:25:55
     |vpiLocalParam:1
     |vpiName:CVA6ConfigFetchUserWidth
     |vpiFullName:cva6_config_pkg::CVA6ConfigFetchUserWidth
@@ -7752,6 +7762,14 @@ design: (unnamed)
   \_parameter: (cva6_config_pkg::CVA6ConfigDataUserWidth), line:27:14, endln:27:37
     |vpiParent:
     \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
+    |UINT:32
+    |vpiTypespec:
+    \_ref_typespec: (cva6_config_pkg::CVA6ConfigDataUserWidth)
+      |vpiParent:
+      \_parameter: (cva6_config_pkg::CVA6ConfigDataUserWidth), line:27:14, endln:27:37
+      |vpiFullName:cva6_config_pkg::CVA6ConfigDataUserWidth
+      |vpiActual:
+      \_int_typespec: , line:27:3, endln:27:54
     |vpiLocalParam:1
     |vpiName:CVA6ConfigDataUserWidth
     |vpiFullName:cva6_config_pkg::CVA6ConfigDataUserWidth
@@ -8167,7 +8185,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:14, endln:4:33
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8188,7 +8206,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:14, endln:6:33
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8209,7 +8227,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:7:14, endln:7:33
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8230,7 +8248,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:14, endln:8:36
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8251,7 +8269,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:14, endln:9:32
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8272,7 +8290,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:14, endln:10:34
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8293,7 +8311,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:12:14, endln:12:35
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8314,7 +8332,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:13:14, endln:13:34
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8335,7 +8353,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:14:14, endln:14:36
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8356,7 +8374,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:15:14, endln:15:37
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8377,7 +8395,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:16:14, endln:16:34
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8398,7 +8416,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:17:14, endln:17:34
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8419,7 +8437,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:18:14, endln:18:34
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8440,7 +8458,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:19:14, endln:19:39
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8461,7 +8479,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:21:14, endln:21:38
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8482,7 +8500,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:22:14, endln:22:41
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8503,7 +8521,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:23:14, endln:23:41
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8524,7 +8542,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:24:14, endln:24:39
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8541,13 +8559,20 @@ design: (unnamed)
     |vpiParent:
     \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
     |vpiRhs:
-    \_ref_obj: (cva6_config_pkg::CVA6ConfigXlen), line:25:41, endln:25:55
+    \_constant: , line:25:41, endln:25:55
       |vpiParent:
       \_param_assign: , line:25:14, endln:25:55
-      |vpiName:CVA6ConfigXlen
-      |vpiFullName:cva6_config_pkg::CVA6ConfigXlen
-      |vpiActual:
-      \_constant: , line:4:31, endln:4:33
+      |vpiDecompile:32
+      |vpiSize:32
+      |UINT:32
+      |vpiTypespec:
+      \_ref_typespec: (cva6_config_pkg)
+        |vpiParent:
+        \_constant: , line:25:41, endln:25:55
+        |vpiFullName:cva6_config_pkg
+        |vpiActual:
+        \_int_typespec: , line:25:3, endln:25:55
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (cva6_config_pkg::CVA6ConfigFetchUserWidth), line:25:14, endln:25:38
   |vpiParamAssign:
@@ -8559,7 +8584,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:26:14, endln:26:38
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8576,13 +8601,20 @@ design: (unnamed)
     |vpiParent:
     \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
     |vpiRhs:
-    \_ref_obj: (cva6_config_pkg::CVA6ConfigXlen), line:27:40, endln:27:54
+    \_constant: , line:27:40, endln:27:54
       |vpiParent:
       \_param_assign: , line:27:14, endln:27:54
-      |vpiName:CVA6ConfigXlen
-      |vpiFullName:cva6_config_pkg::CVA6ConfigXlen
-      |vpiActual:
-      \_constant: , line:4:31, endln:4:33
+      |vpiDecompile:32
+      |vpiSize:32
+      |UINT:32
+      |vpiTypespec:
+      \_ref_typespec: (cva6_config_pkg)
+        |vpiParent:
+        \_constant: , line:27:40, endln:27:54
+        |vpiFullName:cva6_config_pkg
+        |vpiActual:
+        \_int_typespec: , line:27:3, endln:27:54
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (cva6_config_pkg::CVA6ConfigDataUserWidth), line:27:14, endln:27:37
   |vpiParamAssign:
@@ -8594,7 +8626,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:29:14, endln:29:46
       |vpiDecompile:16384
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16384
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8615,7 +8647,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:30:14, endln:30:42
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8636,7 +8668,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:31:14, endln:31:45
       |vpiDecompile:128
-      |vpiSize:64
+      |vpiSize:32
       |UINT:128
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8657,7 +8689,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:32:14, endln:32:46
       |vpiDecompile:32768
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32768
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8678,7 +8710,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:33:14, endln:33:42
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8699,7 +8731,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:34:14, endln:34:45
       |vpiDecompile:128
-      |vpiSize:64
+      |vpiSize:32
       |UINT:128
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8720,7 +8752,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:36:14, endln:36:41
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8741,7 +8773,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:37:14, endln:37:39
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8762,7 +8794,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:39:14, endln:39:45
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8783,7 +8815,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:41:14, endln:41:41
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8804,7 +8836,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:42:14, endln:42:47
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8825,7 +8857,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:43:14, endln:43:44
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8846,7 +8878,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:45:14, endln:45:34
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8867,7 +8899,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:47:14, endln:47:42
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8888,7 +8920,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:48:14, endln:48:43
       |vpiDecompile:0
-      |vpiSize:64
+      |vpiSize:32
       |UINT:0
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8909,7 +8941,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:50:14, endln:50:43
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8930,7 +8962,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:51:14, endln:51:42
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8951,7 +8983,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:53:14, endln:53:36
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8972,7 +9004,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:54:14, endln:54:39
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -8993,7 +9025,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:55:14, endln:55:40
       |vpiDecompile:128
-      |vpiSize:64
+      |vpiSize:32
       |UINT:128
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9014,7 +9046,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:57:14, endln:57:34
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9035,7 +9067,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:59:14, endln:59:40
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9056,7 +9088,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:61:14, endln:61:41
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9089,7 +9121,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:65:14, endln:65:38
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9110,7 +9142,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:67:14, endln:67:37
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (cva6_config_pkg)
@@ -9136,18 +9168,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:70:13, endln:70:38
+        \_constant: , line:70:23, endln:70:37
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigXlen), line:70:23, endln:70:37
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:32
+          |vpiSize:32
+          |UINT:32
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:70:13, endln:70:38
-            |vpiName:CVA6ConfigXlen
-            |vpiFullName:cva6_config_pkg::CVA6ConfigXlen
+            \_constant: , line:70:23, endln:70:37
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:4:31, endln:4:33
-          |vpiName:$unsigned
+            \_int_typespec: , line:4:3, endln:4:33
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9160,25 +9194,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:71:16, endln:71:38
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:71:16, endln:71:38
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:71:16, endln:71:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigFPGAEn), line:71:21, endln:71:37
-            |vpiParent:
-            \_operation: , line:71:16, endln:71:38
-            |vpiName:CVA6ConfigFPGAEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigFPGAEn
-            |vpiActual:
-            \_constant: , line:45:33, endln:45:34
+        \_constant: , line:71:16, endln:71:38
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9191,18 +9210,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:72:22, endln:72:56
+        \_constant: , line:72:32, endln:72:55
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigNrCommitPorts), line:72:32, endln:72:55
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:72:22, endln:72:56
-            |vpiName:CVA6ConfigNrCommitPorts
-            |vpiFullName:cva6_config_pkg::CVA6ConfigNrCommitPorts
+            \_constant: , line:72:32, endln:72:55
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:41:40, endln:41:41
-          |vpiName:$unsigned
+            \_int_typespec: , line:41:3, endln:41:41
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9215,18 +9236,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:73:21, endln:73:54
+        \_constant: , line:73:31, endln:73:53
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigAxiAddrWidth), line:73:31, endln:73:53
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:64
+          |vpiSize:32
+          |UINT:64
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:73:21, endln:73:54
-            |vpiName:CVA6ConfigAxiAddrWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigAxiAddrWidth
+            \_constant: , line:73:31, endln:73:53
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:22:39, endln:22:41
-          |vpiName:$unsigned
+            \_int_typespec: , line:22:3, endln:22:41
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9239,18 +9262,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:74:21, endln:74:54
+        \_constant: , line:74:31, endln:74:53
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigAxiDataWidth), line:74:31, endln:74:53
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:64
+          |vpiSize:32
+          |UINT:64
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:74:21, endln:74:54
-            |vpiName:CVA6ConfigAxiDataWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigAxiDataWidth
+            \_constant: , line:74:31, endln:74:53
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:23:39, endln:23:41
-          |vpiName:$unsigned
+            \_int_typespec: , line:23:3, endln:23:41
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9263,18 +9288,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:75:19, endln:75:50
+        \_constant: , line:75:29, endln:75:49
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigAxiIdWidth), line:75:29, endln:75:49
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:4
+          |vpiSize:32
+          |UINT:4
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:75:19, endln:75:50
-            |vpiName:CVA6ConfigAxiIdWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigAxiIdWidth
+            \_constant: , line:75:29, endln:75:49
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:21:37, endln:21:38
-          |vpiName:$unsigned
+            \_int_typespec: , line:21:3, endln:21:38
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9287,18 +9314,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:76:21, endln:76:55
+        \_constant: , line:76:31, endln:76:54
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigDataUserWidth), line:76:31, endln:76:54
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:32
+          |vpiSize:32
+          |UINT:32
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:76:21, endln:76:55
-            |vpiName:CVA6ConfigDataUserWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigDataUserWidth
+            \_constant: , line:76:31, endln:76:54
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_ref_obj: (cva6_config_pkg::CVA6ConfigXlen), line:27:40, endln:27:54
-          |vpiName:$unsigned
+            \_int_typespec: , line:27:3, endln:27:54
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9311,18 +9340,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:77:20, endln:77:52
+        \_constant: , line:77:30, endln:77:51
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigMemTidWidth), line:77:30, endln:77:51
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:77:20, endln:77:52
-            |vpiName:CVA6ConfigMemTidWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigMemTidWidth
+            \_constant: , line:77:30, endln:77:51
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:37:38, endln:37:39
-          |vpiName:$unsigned
+            \_int_typespec: , line:37:3, endln:37:39
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9335,18 +9366,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:78:25, endln:78:62
+        \_constant: , line:78:35, endln:78:61
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigNrLoadBufEntries), line:78:35, endln:78:61
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:78:25, endln:78:62
-            |vpiName:CVA6ConfigNrLoadBufEntries
-            |vpiFullName:cva6_config_pkg::CVA6ConfigNrLoadBufEntries
+            \_constant: , line:78:35, endln:78:61
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:43:43, endln:43:44
-          |vpiName:$unsigned
+            \_int_typespec: , line:43:3, endln:43:44
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9359,25 +9392,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:79:14, endln:79:35
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:79:14, endln:79:35
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:79:14, endln:79:17
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigFpuEn), line:79:19, endln:79:34
-            |vpiParent:
-            \_operation: , line:79:14, endln:79:35
-            |vpiName:CVA6ConfigFpuEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigFpuEn
-            |vpiActual:
-            \_constant: , line:6:32, endln:6:33
+        \_constant: , line:79:14, endln:79:35
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9390,25 +9408,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:80:13, endln:80:34
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:80:13, endln:80:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:80:13, endln:80:16
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigF16En), line:80:18, endln:80:33
-            |vpiParent:
-            \_operation: , line:80:13, endln:80:34
-            |vpiName:CVA6ConfigF16En
-            |vpiFullName:cva6_config_pkg::CVA6ConfigF16En
-            |vpiActual:
-            \_constant: , line:7:32, endln:7:33
+        \_constant: , line:80:13, endln:80:34
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9421,25 +9424,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:81:16, endln:81:40
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:81:16, endln:81:40
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:81:16, endln:81:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigF16AltEn), line:81:21, endln:81:39
-            |vpiParent:
-            \_operation: , line:81:16, endln:81:40
-            |vpiName:CVA6ConfigF16AltEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigF16AltEn
-            |vpiActual:
-            \_constant: , line:8:35, endln:8:36
+        \_constant: , line:81:16, endln:81:40
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9452,25 +9440,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:82:12, endln:82:32
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:82:12, endln:82:32
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:82:12, endln:82:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigF8En), line:82:17, endln:82:31
-            |vpiParent:
-            \_operation: , line:82:12, endln:82:32
-            |vpiName:CVA6ConfigF8En
-            |vpiFullName:cva6_config_pkg::CVA6ConfigF8En
-            |vpiActual:
-            \_constant: , line:9:31, endln:9:32
+        \_constant: , line:82:12, endln:82:32
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9483,25 +9456,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:83:12, endln:83:34
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:83:12, endln:83:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:83:12, endln:83:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigAExtEn), line:83:17, endln:83:33
-            |vpiParent:
-            \_operation: , line:83:12, endln:83:34
-            |vpiName:CVA6ConfigAExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigAExtEn
-            |vpiActual:
-            \_constant: , line:16:33, endln:16:34
+        \_constant: , line:83:12, endln:83:34
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9514,25 +9472,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:84:12, endln:84:34
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:84:12, endln:84:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:84:12, endln:84:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigBExtEn), line:84:17, endln:84:33
-            |vpiParent:
-            \_operation: , line:84:12, endln:84:34
-            |vpiName:CVA6ConfigBExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigBExtEn
-            |vpiActual:
-            \_constant: , line:17:33, endln:17:34
+        \_constant: , line:84:12, endln:84:34
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9545,25 +9488,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:85:12, endln:85:34
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:85:12, endln:85:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:85:12, endln:85:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigVExtEn), line:85:17, endln:85:33
-            |vpiParent:
-            \_operation: , line:85:12, endln:85:34
-            |vpiName:CVA6ConfigVExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigVExtEn
-            |vpiActual:
-            \_constant: , line:18:33, endln:18:34
+        \_constant: , line:85:12, endln:85:34
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9576,25 +9504,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:86:12, endln:86:34
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:86:12, endln:86:34
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:86:12, endln:86:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigCExtEn), line:86:17, endln:86:33
-            |vpiParent:
-            \_operation: , line:86:12, endln:86:34
-            |vpiName:CVA6ConfigCExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigCExtEn
-            |vpiActual:
-            \_constant: , line:13:33, endln:13:34
+        \_constant: , line:86:12, endln:86:34
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9607,25 +9520,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:87:14, endln:87:38
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:87:14, endln:87:38
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:87:14, endln:87:17
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigZcbExtEn), line:87:19, endln:87:37
-            |vpiParent:
-            \_operation: , line:87:14, endln:87:38
-            |vpiName:CVA6ConfigZcbExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigZcbExtEn
-            |vpiActual:
-            \_constant: , line:14:35, endln:14:36
+        \_constant: , line:87:14, endln:87:38
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9638,25 +9536,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:88:15, endln:88:40
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:88:15, endln:88:40
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:88:15, endln:88:18
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigZcmpExtEn), line:88:20, endln:88:39
-            |vpiParent:
-            \_operation: , line:88:15, endln:88:40
-            |vpiName:CVA6ConfigZcmpExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigZcmpExtEn
-            |vpiActual:
-            \_constant: , line:15:36, endln:15:37
+        \_constant: , line:88:15, endln:88:40
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9669,25 +9552,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:89:14, endln:89:36
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:89:14, endln:89:36
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:89:14, endln:89:17
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigFVecEn), line:89:19, endln:89:35
-            |vpiParent:
-            \_operation: , line:89:14, endln:89:36
-            |vpiName:CVA6ConfigFVecEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigFVecEn
-            |vpiActual:
-            \_constant: , line:10:33, endln:10:34
+        \_constant: , line:89:14, endln:89:36
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9700,25 +9568,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:90:16, endln:90:39
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:90:16, endln:90:39
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:90:16, endln:90:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigCvxifEn), line:90:21, endln:90:38
-            |vpiParent:
-            \_operation: , line:90:16, endln:90:39
-            |vpiName:CVA6ConfigCvxifEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigCvxifEn
-            |vpiActual:
-            \_constant: , line:12:34, endln:12:35
+        \_constant: , line:90:16, endln:90:39
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9731,25 +9584,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:91:20, endln:91:47
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:91:20, endln:91:47
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:91:20, endln:91:23
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigZiCondExtEn), line:91:25, endln:91:46
-            |vpiParent:
-            \_operation: , line:91:20, endln:91:47
-            |vpiName:CVA6ConfigZiCondExtEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigZiCondExtEn
-            |vpiActual:
-            \_constant: , line:19:38, endln:19:39
+        \_constant: , line:91:20, endln:91:47
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9762,18 +9600,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:92:28, endln:92:68
+        \_constant: , line:92:38, endln:92:67
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigNrScoreboardEntries), line:92:38, endln:92:67
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:8
+          |vpiSize:32
+          |UINT:8
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:92:28, endln:92:68
-            |vpiName:CVA6ConfigNrScoreboardEntries
-            |vpiFullName:cva6_config_pkg::CVA6ConfigNrScoreboardEntries
+            \_constant: , line:92:38, endln:92:67
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:42:46, endln:42:47
-          |vpiName:$unsigned
+            \_int_typespec: , line:42:3, endln:42:47
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9786,25 +9626,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:93:12, endln:93:19
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:93:12, endln:93:19
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:93:12, endln:93:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_constant: , line:93:17, endln:93:18
-            |vpiParent:
-            \_operation: , line:93:12, endln:93:19
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
+        \_constant: , line:93:12, endln:93:19
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9817,25 +9642,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:94:12, endln:94:19
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:94:12, endln:94:19
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:94:12, endln:94:15
-          |vpiOpType:67
-          |vpiOperand:
-          \_constant: , line:94:17, endln:94:18
-            |vpiParent:
-            \_operation: , line:94:12, endln:94:19
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
+        \_constant: , line:94:12, endln:94:19
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9882,18 +9692,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:97:17, endln:97:46
+        \_constant: , line:97:27, endln:97:45
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigRASDepth), line:97:27, endln:97:45
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:97:17, endln:97:46
-            |vpiName:CVA6ConfigRASDepth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigRASDepth
+            \_constant: , line:97:27, endln:97:45
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:53:35, endln:53:36
-          |vpiName:$unsigned
+            \_int_typespec: , line:53:3, endln:53:36
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9906,18 +9718,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:98:19, endln:98:50
+        \_constant: , line:98:29, endln:98:49
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigBTBEntries), line:98:29, endln:98:49
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:32
+          |vpiSize:32
+          |UINT:32
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:98:19, endln:98:50
-            |vpiName:CVA6ConfigBTBEntries
-            |vpiFullName:cva6_config_pkg::CVA6ConfigBTBEntries
+            \_constant: , line:98:29, endln:98:49
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:54:37, endln:54:39
-          |vpiName:$unsigned
+            \_int_typespec: , line:54:3, endln:54:39
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9930,18 +9744,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:99:19, endln:99:50
+        \_constant: , line:99:29, endln:99:49
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigBHTEntries), line:99:29, endln:99:49
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:128
+          |vpiSize:32
+          |UINT:128
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:99:19, endln:99:50
-            |vpiName:CVA6ConfigBHTEntries
-            |vpiFullName:cva6_config_pkg::CVA6ConfigBHTEntries
+            \_constant: , line:99:29, endln:99:49
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:55:37, endln:55:40
-          |vpiName:$unsigned
+            \_int_typespec: , line:55:3, endln:55:40
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9971,18 +9787,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:101:15, endln:101:42
+        \_constant: , line:101:25, endln:101:41
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigTvalEn), line:101:25, endln:101:41
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:1
+          |vpiSize:32
+          |UINT:1
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:101:15, endln:101:42
-            |vpiName:CVA6ConfigTvalEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigTvalEn
+            \_constant: , line:101:25, endln:101:41
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:57:33, endln:57:34
-          |vpiName:$unsigned
+            \_int_typespec: , line:57:3, endln:57:34
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -9995,18 +9813,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:102:21, endln:102:54
+        \_constant: , line:102:31, endln:102:53
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigNrPMPEntries), line:102:31, endln:102:53
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:8
+          |vpiSize:32
+          |UINT:8
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:102:21, endln:102:54
-            |vpiName:CVA6ConfigNrPMPEntries
-            |vpiFullName:cva6_config_pkg::CVA6ConfigNrPMPEntries
+            \_constant: , line:102:31, endln:102:53
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:59:39, endln:59:40
-          |vpiName:$unsigned
+            \_int_typespec: , line:59:3, endln:59:40
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10019,27 +9839,17 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:103:21, endln:103:32
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiOpType:34
-          |vpiOperand:
-          \_constant: , line:103:22, endln:103:24
-            |vpiDecompile:16
-            |vpiSize:64
-            |UINT:16
-            |vpiConstType:9
-          |vpiOperand:
-          \_operation: , line:103:24, endln:103:31
+        \_constant: , line:103:21, endln:103:32
+          |vpiDecompile:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiSize:1024
+          |BIN:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiTypespec:
+          \_ref_typespec: 
             |vpiParent:
-            \_operation: , line:103:21, endln:103:32
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:103:25, endln:103:30
-              |vpiDecompile:64'h0
-              |vpiSize:64
-              |HEX:0
-              |vpiConstType:5
+            \_constant: , line:103:21, endln:103:32
+            |vpiActual:
+            \_int_typespec: 
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10052,27 +9862,17 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:104:22, endln:104:33
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiOpType:34
-          |vpiOperand:
-          \_constant: , line:104:23, endln:104:25
-            |vpiDecompile:16
-            |vpiSize:64
-            |UINT:16
-            |vpiConstType:9
-          |vpiOperand:
-          \_operation: , line:104:25, endln:104:32
+        \_constant: , line:104:22, endln:104:33
+          |vpiDecompile:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiSize:1024
+          |BIN:0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+          |vpiTypespec:
+          \_ref_typespec: 
             |vpiParent:
-            \_operation: , line:104:22, endln:104:33
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:104:26, endln:104:31
-              |vpiDecompile:64'h0
-              |vpiSize:64
-              |HEX:0
-              |vpiConstType:5
+            \_constant: , line:104:22, endln:104:33
+            |vpiActual:
+            \_int_typespec: 
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10119,18 +9919,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:107:29, endln:107:41
+        \_constant: , line:107:39, endln:107:40
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_constant: , line:107:39, endln:107:40
-            |vpiParent:
-            \_sys_func_call: ($unsigned), line:107:29, endln:107:41
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
-            |vpiConstType:9
-          |vpiName:$unsigned
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10155,22 +9950,12 @@ design: (unnamed)
             \_integer_typespec: , line:108:30, endln:108:34
           |vpiOpType:67
           |vpiOperand:
-          \_operation: , line:108:36, endln:108:50
+          \_constant: , line:108:36, endln:108:50
             |vpiParent:
             \_operation: , line:108:30, endln:108:51
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:108:37, endln:108:42
-              |vpiDecompile:64'b0
-              |vpiSize:64
-              |BIN:0
-              |vpiConstType:3
-            |vpiOperand:
-            \_constant: , line:108:44, endln:108:49
-              |vpiDecompile:64'b0
-              |vpiSize:64
-              |BIN:0
-              |vpiConstType:3
+            |vpiSize:128
+            |BIN:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10195,22 +9980,12 @@ design: (unnamed)
             \_integer_typespec: , line:109:28, endln:109:32
           |vpiOpType:67
           |vpiOperand:
-          \_operation: , line:109:34, endln:109:48
+          \_constant: , line:109:34, endln:109:48
             |vpiParent:
             \_operation: , line:109:28, endln:109:49
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:109:35, endln:109:40
-              |vpiDecompile:64'b0
-              |vpiSize:64
-              |BIN:0
-              |vpiConstType:3
-            |vpiOperand:
-            \_constant: , line:109:42, endln:109:47
-              |vpiDecompile:64'b0
-              |vpiSize:64
-              |BIN:0
-              |vpiConstType:3
+            |vpiSize:128
+            |BIN:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10223,18 +9998,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:110:29, endln:110:41
+        \_constant: , line:110:39, endln:110:40
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_constant: , line:110:39, endln:110:40
-            |vpiParent:
-            \_sys_func_call: ($unsigned), line:110:29, endln:110:41
-            |vpiDecompile:3
-            |vpiSize:64
-            |UINT:3
-            |vpiConstType:9
-          |vpiName:$unsigned
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10259,28 +10029,12 @@ design: (unnamed)
             \_integer_typespec: , line:113:7, endln:113:11
           |vpiOpType:67
           |vpiOperand:
-          \_operation: , line:114:7, endln:114:41
+          \_constant: , line:114:7, endln:114:41
             |vpiParent:
             \_operation: , line:113:7, endln:115:8
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:114:8, endln:114:21
-              |vpiDecompile:64'h80000000
-              |vpiSize:64
-              |HEX:80000000
-              |vpiConstType:5
-            |vpiOperand:
-            \_constant: , line:114:23, endln:114:33
-              |vpiDecompile:64'h10000
-              |vpiSize:64
-              |HEX:10000
-              |vpiConstType:5
-            |vpiOperand:
-            \_constant: , line:114:35, endln:114:40
-              |vpiDecompile:64'h0
-              |vpiSize:64
-              |HEX:0
-              |vpiConstType:5
+            |vpiSize:192
+            |BIN:000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000
+            |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10305,28 +10059,12 @@ design: (unnamed)
             \_integer_typespec: , line:116:28, endln:116:32
           |vpiOpType:67
           |vpiOperand:
-          \_operation: , line:116:34, endln:116:69
+          \_constant: , line:116:34, endln:116:69
             |vpiParent:
             \_operation: , line:116:28, endln:116:70
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:116:35, endln:116:47
-              |vpiDecompile:64'h40000000
-              |vpiSize:64
-              |HEX:40000000
-              |vpiConstType:5
-            |vpiOperand:
-            \_constant: , line:116:49, endln:116:58
-              |vpiDecompile:64'h10000
-              |vpiSize:64
-              |HEX:10000
-              |vpiConstType:5
-            |vpiOperand:
-            \_constant: , line:116:60, endln:116:68
-              |vpiDecompile:64'h1000
-              |vpiSize:64
-              |HEX:1000
-              |vpiConstType:5
+            |vpiSize:192
+            |BIN:000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000001000000000000
+            |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10339,18 +10077,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:117:28, endln:117:40
+        \_constant: , line:117:38, endln:117:39
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_constant: , line:117:38, endln:117:39
-            |vpiParent:
-            \_sys_func_call: ($unsigned), line:117:28, endln:117:40
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
-          |vpiName:$unsigned
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10363,28 +10096,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:118:29, endln:118:51
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:118:29, endln:118:51
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_integer_typespec: , line:118:29, endln:118:33
-          |vpiOpType:67
-          |vpiOperand:
-          \_operation: , line:118:35, endln:118:50
-            |vpiParent:
-            \_operation: , line:118:29, endln:118:51
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:118:36, endln:118:49
-              |vpiDecompile:64'h80000000
-              |vpiSize:64
-              |HEX:80000000
-              |vpiConstType:5
+        \_constant: , line:118:29, endln:118:51
+          |vpiSize:1024
+          |UINT:0
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10397,28 +10112,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:119:27, endln:119:48
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:119:27, endln:119:48
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_integer_typespec: , line:119:27, endln:119:31
-          |vpiOpType:67
-          |vpiOperand:
-          \_operation: , line:119:33, endln:119:47
-            |vpiParent:
-            \_operation: , line:119:27, endln:119:48
-            |vpiOpType:33
-            |vpiOperand:
-            \_constant: , line:119:34, endln:119:46
-              |vpiDecompile:64'h40000000
-              |vpiSize:64
-              |HEX:40000000
-              |vpiConstType:5
+        \_constant: , line:119:27, endln:119:48
+          |vpiSize:1024
+          |UINT:0
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10431,18 +10128,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:120:29, endln:120:41
+        \_constant: , line:120:39, endln:120:40
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_constant: , line:120:39, endln:120:40
-            |vpiParent:
-            \_sys_func_call: ($unsigned), line:120:29, endln:120:41
-            |vpiDecompile:7
-            |vpiSize:64
-            |UINT:7
-            |vpiConstType:9
-          |vpiName:$unsigned
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:7
+          |vpiSize:64
+          |UINT:7
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10455,25 +10147,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:121:16, endln:121:23
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:121:16, endln:121:23
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:121:16, endln:121:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_constant: , line:121:21, endln:121:22
-            |vpiParent:
-            \_operation: , line:121:16, endln:121:23
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
+        \_constant: , line:121:16, endln:121:23
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10486,25 +10163,10 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_operation: , line:122:24, endln:122:31
-          |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiTypespec:
-          \_ref_typespec: (cva6_config_pkg)
-            |vpiParent:
-            \_operation: , line:122:24, endln:122:31
-            |vpiFullName:cva6_config_pkg
-            |vpiActual:
-            \_bit_typespec: , line:122:24, endln:122:27
-          |vpiOpType:67
-          |vpiOperand:
-          \_constant: , line:122:29, endln:122:30
-            |vpiParent:
-            \_operation: , line:122:24, endln:122:31
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
+        \_constant: , line:122:24, endln:122:31
+          |vpiSize:1
+          |BIN:0
+          |vpiConstType:3
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10517,18 +10179,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:123:23, endln:123:58
+        \_constant: , line:123:33, endln:123:57
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigIcacheByteSize), line:123:33, endln:123:57
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:16384
+          |vpiSize:32
+          |UINT:16384
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:123:23, endln:123:58
-            |vpiName:CVA6ConfigIcacheByteSize
-            |vpiFullName:cva6_config_pkg::CVA6ConfigIcacheByteSize
+            \_constant: , line:123:33, endln:123:57
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:29:41, endln:29:46
-          |vpiName:$unsigned
+            \_int_typespec: , line:29:3, endln:29:46
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10541,18 +10205,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:124:23, endln:124:58
+        \_constant: , line:124:33, endln:124:57
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigIcacheSetAssoc), line:124:33, endln:124:57
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:4
+          |vpiSize:32
+          |UINT:4
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:124:23, endln:124:58
-            |vpiName:CVA6ConfigIcacheSetAssoc
-            |vpiFullName:cva6_config_pkg::CVA6ConfigIcacheSetAssoc
+            \_constant: , line:124:33, endln:124:57
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:30:41, endln:30:42
-          |vpiName:$unsigned
+            \_int_typespec: , line:30:3, endln:30:42
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10565,18 +10231,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:125:24, endln:125:60
+        \_constant: , line:125:34, endln:125:59
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigIcacheLineWidth), line:125:34, endln:125:59
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:128
+          |vpiSize:32
+          |UINT:128
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:125:24, endln:125:60
-            |vpiName:CVA6ConfigIcacheLineWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigIcacheLineWidth
+            \_constant: , line:125:34, endln:125:59
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:31:42, endln:31:45
-          |vpiName:$unsigned
+            \_int_typespec: , line:31:3, endln:31:45
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10589,18 +10257,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:126:23, endln:126:58
+        \_constant: , line:126:33, endln:126:57
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigDcacheByteSize), line:126:33, endln:126:57
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:32768
+          |vpiSize:32
+          |UINT:32768
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:126:23, endln:126:58
-            |vpiName:CVA6ConfigDcacheByteSize
-            |vpiFullName:cva6_config_pkg::CVA6ConfigDcacheByteSize
+            \_constant: , line:126:33, endln:126:57
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:32:41, endln:32:46
-          |vpiName:$unsigned
+            \_int_typespec: , line:32:3, endln:32:46
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10613,18 +10283,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:127:23, endln:127:58
+        \_constant: , line:127:33, endln:127:57
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigDcacheSetAssoc), line:127:33, endln:127:57
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:8
+          |vpiSize:32
+          |UINT:8
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:127:23, endln:127:58
-            |vpiName:CVA6ConfigDcacheSetAssoc
-            |vpiFullName:cva6_config_pkg::CVA6ConfigDcacheSetAssoc
+            \_constant: , line:127:33, endln:127:57
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:33:41, endln:33:42
-          |vpiName:$unsigned
+            \_int_typespec: , line:33:3, endln:33:42
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10637,18 +10309,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:128:24, endln:128:60
+        \_constant: , line:128:34, endln:128:59
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigDcacheLineWidth), line:128:34, endln:128:59
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:128
+          |vpiSize:32
+          |UINT:128
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:128:24, endln:128:60
-            |vpiName:CVA6ConfigDcacheLineWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigDcacheLineWidth
+            \_constant: , line:128:34, endln:128:59
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:34:42, endln:34:45
-          |vpiName:$unsigned
+            \_int_typespec: , line:34:3, endln:34:45
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10661,18 +10335,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:129:19, endln:129:50
+        \_constant: , line:129:29, endln:129:49
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigDataUserEn), line:129:29, endln:129:49
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:0
+          |vpiSize:32
+          |UINT:0
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:129:19, endln:129:50
-            |vpiName:CVA6ConfigDataUserEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigDataUserEn
+            \_constant: , line:129:29, endln:129:49
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:26:37, endln:26:38
-          |vpiName:$unsigned
+            \_int_typespec: , line:26:3, endln:26:38
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10685,18 +10361,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:130:23, endln:130:58
+        \_constant: , line:130:33, endln:130:57
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigFetchUserWidth), line:130:33, endln:130:57
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:32
+          |vpiSize:32
+          |UINT:32
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:130:23, endln:130:58
-            |vpiName:CVA6ConfigFetchUserWidth
-            |vpiFullName:cva6_config_pkg::CVA6ConfigFetchUserWidth
+            \_constant: , line:130:33, endln:130:57
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_ref_obj: (cva6_config_pkg::CVA6ConfigXlen), line:25:41, endln:25:55
-          |vpiName:$unsigned
+            \_int_typespec: , line:25:3, endln:25:55
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10709,18 +10387,20 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:69:53, endln:132:4
         |vpiPattern:
-        \_sys_func_call: ($unsigned), line:131:20, endln:131:52
+        \_constant: , line:131:30, endln:131:51
           |vpiParent:
-          \_operation: , line:69:53, endln:132:4
-          |vpiArgument:
-          \_ref_obj: (cva6_config_pkg::CVA6ConfigFetchUserEn), line:131:30, endln:131:51
+          \_sys_func_call: ($unsigned)
+          |vpiDecompile:0
+          |vpiSize:32
+          |UINT:0
+          |vpiTypespec:
+          \_ref_typespec: (cva6_config_pkg)
             |vpiParent:
-            \_sys_func_call: ($unsigned), line:131:20, endln:131:52
-            |vpiName:CVA6ConfigFetchUserEn
-            |vpiFullName:cva6_config_pkg::CVA6ConfigFetchUserEn
+            \_constant: , line:131:30, endln:131:51
+            |vpiFullName:cva6_config_pkg
             |vpiActual:
-            \_constant: , line:24:38, endln:24:39
-          |vpiName:$unsigned
+            \_int_typespec: , line:24:3, endln:24:39
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (cva6_config_pkg)
           |vpiParent:
@@ -10806,7 +10486,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:143:27, endln:143:36
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (config_pkg)
@@ -10827,7 +10507,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:144:27, endln:144:35
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (config_pkg)
@@ -10848,7 +10528,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:174:14, endln:174:29
       |vpiDecompile:16
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16
       |vpiTypespec:
       \_ref_typespec: (config_pkg)
@@ -10869,7 +10549,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:411:25, endln:411:44
       |vpiDecompile:'0
-      |vpiSize:-1
+      |vpiSize:10099
       |BIN:0
       |vpiTypespec:
       \_ref_typespec: (config_pkg)
@@ -21141,7 +20821,9 @@ design: (unnamed)
 \_int_typespec: , line:22:3, endln:22:41
 \_int_typespec: , line:23:3, endln:23:41
 \_int_typespec: , line:24:3, endln:24:39
+\_int_typespec: , line:25:3, endln:25:55
 \_int_typespec: , line:26:3, endln:26:38
+\_int_typespec: , line:27:3, endln:27:54
 \_int_typespec: , line:29:3, endln:29:46
 \_int_typespec: , line:30:3, endln:30:42
 \_int_typespec: , line:31:3, endln:31:45
@@ -21179,150 +20861,183 @@ design: (unnamed)
   |vpiName:config_pkg::cva6_user_cfg_t
   |vpiInstance:
   \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
+\_int_typespec: , line:4:3, endln:4:33
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:70:23, endln:70:37
+  |vpiName:$unsigned
 \_string_typespec: (XLEN), line:70:7, endln:70:11
   |vpiParent:
   \_tagged_pattern: , line:70:13, endln:70:38
   |vpiName:XLEN
-\_bit_typespec: , line:71:16, endln:71:19
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (FPGA_EN), line:71:7, endln:71:14
   |vpiParent:
   \_tagged_pattern: , line:71:16, endln:71:38
   |vpiName:FPGA_EN
+\_int_typespec: , line:41:3, endln:41:41
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:72:32, endln:72:55
+  |vpiName:$unsigned
 \_string_typespec: (NrCommitPorts), line:72:7, endln:72:20
   |vpiParent:
   \_tagged_pattern: , line:72:22, endln:72:56
   |vpiName:NrCommitPorts
+\_int_typespec: , line:22:3, endln:22:41
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:73:31, endln:73:53
+  |vpiName:$unsigned
 \_string_typespec: (AxiAddrWidth), line:73:7, endln:73:19
   |vpiParent:
   \_tagged_pattern: , line:73:21, endln:73:54
   |vpiName:AxiAddrWidth
+\_int_typespec: , line:23:3, endln:23:41
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:74:31, endln:74:53
+  |vpiName:$unsigned
 \_string_typespec: (AxiDataWidth), line:74:7, endln:74:19
   |vpiParent:
   \_tagged_pattern: , line:74:21, endln:74:54
   |vpiName:AxiDataWidth
+\_int_typespec: , line:21:3, endln:21:38
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:75:29, endln:75:49
+  |vpiName:$unsigned
 \_string_typespec: (AxiIdWidth), line:75:7, endln:75:17
   |vpiParent:
   \_tagged_pattern: , line:75:19, endln:75:50
   |vpiName:AxiIdWidth
+\_int_typespec: , line:27:3, endln:27:54
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:76:31, endln:76:54
+  |vpiName:$unsigned
 \_string_typespec: (AxiUserWidth), line:76:7, endln:76:19
   |vpiParent:
   \_tagged_pattern: , line:76:21, endln:76:55
   |vpiName:AxiUserWidth
+\_int_typespec: , line:37:3, endln:37:39
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:77:30, endln:77:51
+  |vpiName:$unsigned
 \_string_typespec: (MemTidWidth), line:77:7, endln:77:18
   |vpiParent:
   \_tagged_pattern: , line:77:20, endln:77:52
   |vpiName:MemTidWidth
+\_int_typespec: , line:43:3, endln:43:44
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:78:35, endln:78:61
+  |vpiName:$unsigned
 \_string_typespec: (NrLoadBufEntries), line:78:7, endln:78:23
   |vpiParent:
   \_tagged_pattern: , line:78:25, endln:78:62
   |vpiName:NrLoadBufEntries
-\_bit_typespec: , line:79:14, endln:79:17
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (FpuEn), line:79:7, endln:79:12
   |vpiParent:
   \_tagged_pattern: , line:79:14, endln:79:35
   |vpiName:FpuEn
-\_bit_typespec: , line:80:13, endln:80:16
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (XF16), line:80:7, endln:80:11
   |vpiParent:
   \_tagged_pattern: , line:80:13, endln:80:34
   |vpiName:XF16
-\_bit_typespec: , line:81:16, endln:81:19
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (XF16ALT), line:81:7, endln:81:14
   |vpiParent:
   \_tagged_pattern: , line:81:16, endln:81:40
   |vpiName:XF16ALT
-\_bit_typespec: , line:82:12, endln:82:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (XF8), line:82:7, endln:82:10
   |vpiParent:
   \_tagged_pattern: , line:82:12, endln:82:32
   |vpiName:XF8
-\_bit_typespec: , line:83:12, endln:83:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVA), line:83:7, endln:83:10
   |vpiParent:
   \_tagged_pattern: , line:83:12, endln:83:34
   |vpiName:RVA
-\_bit_typespec: , line:84:12, endln:84:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVB), line:84:7, endln:84:10
   |vpiParent:
   \_tagged_pattern: , line:84:12, endln:84:34
   |vpiName:RVB
-\_bit_typespec: , line:85:12, endln:85:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVV), line:85:7, endln:85:10
   |vpiParent:
   \_tagged_pattern: , line:85:12, endln:85:34
   |vpiName:RVV
-\_bit_typespec: , line:86:12, endln:86:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVC), line:86:7, endln:86:10
   |vpiParent:
   \_tagged_pattern: , line:86:12, endln:86:34
   |vpiName:RVC
-\_bit_typespec: , line:87:14, endln:87:17
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVZCB), line:87:7, endln:87:12
   |vpiParent:
   \_tagged_pattern: , line:87:14, endln:87:38
   |vpiName:RVZCB
-\_bit_typespec: , line:88:15, endln:88:18
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVZCMP), line:88:7, endln:88:13
   |vpiParent:
   \_tagged_pattern: , line:88:15, endln:88:40
   |vpiName:RVZCMP
-\_bit_typespec: , line:89:14, endln:89:17
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (XFVec), line:89:7, endln:89:12
   |vpiParent:
   \_tagged_pattern: , line:89:14, endln:89:36
   |vpiName:XFVec
-\_bit_typespec: , line:90:16, endln:90:19
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (CvxifEn), line:90:7, endln:90:14
   |vpiParent:
   \_tagged_pattern: , line:90:16, endln:90:39
   |vpiName:CvxifEn
-\_bit_typespec: , line:91:20, endln:91:23
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (ZiCondExtEn), line:91:7, endln:91:18
   |vpiParent:
   \_tagged_pattern: , line:91:20, endln:91:47
   |vpiName:ZiCondExtEn
+\_int_typespec: , line:42:3, endln:42:47
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:92:38, endln:92:67
+  |vpiName:$unsigned
 \_string_typespec: (NrScoreboardEntries), line:92:7, endln:92:26
   |vpiParent:
   \_tagged_pattern: , line:92:28, endln:92:68
   |vpiName:NrScoreboardEntries
-\_bit_typespec: , line:93:12, endln:93:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVS), line:93:7, endln:93:10
   |vpiParent:
   \_tagged_pattern: , line:93:12, endln:93:19
   |vpiName:RVS
-\_bit_typespec: , line:94:12, endln:94:15
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (RVU), line:94:7, endln:94:10
   |vpiParent:
   \_tagged_pattern: , line:94:12, endln:94:19
@@ -21335,14 +21050,41 @@ design: (unnamed)
   |vpiParent:
   \_tagged_pattern: , line:96:25, endln:96:32
   |vpiName:ExceptionAddress
+\_int_typespec: , line:53:3, endln:53:36
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:97:27, endln:97:45
+  |vpiName:$unsigned
 \_string_typespec: (RASDepth), line:97:7, endln:97:15
   |vpiParent:
   \_tagged_pattern: , line:97:17, endln:97:46
   |vpiName:RASDepth
+\_int_typespec: , line:54:3, endln:54:39
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:98:29, endln:98:49
+  |vpiName:$unsigned
 \_string_typespec: (BTBEntries), line:98:7, endln:98:17
   |vpiParent:
   \_tagged_pattern: , line:98:19, endln:98:50
   |vpiName:BTBEntries
+\_int_typespec: , line:55:3, endln:55:40
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:99:29, endln:99:49
+  |vpiName:$unsigned
 \_string_typespec: (BHTEntries), line:99:7, endln:99:17
   |vpiParent:
   \_tagged_pattern: , line:99:19, endln:99:50
@@ -21351,18 +21093,40 @@ design: (unnamed)
   |vpiParent:
   \_tagged_pattern: , line:100:22, endln:100:27
   |vpiName:DmBaseAddress
+\_int_typespec: , line:57:3, endln:57:34
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:101:25, endln:101:41
+  |vpiName:$unsigned
 \_string_typespec: (TvalEn), line:101:7, endln:101:13
   |vpiParent:
   \_tagged_pattern: , line:101:15, endln:101:42
   |vpiName:TvalEn
+\_int_typespec: , line:59:3, endln:59:40
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:102:31, endln:102:53
+  |vpiName:$unsigned
 \_string_typespec: (NrPMPEntries), line:102:7, endln:102:19
   |vpiParent:
   \_tagged_pattern: , line:102:21, endln:102:54
   |vpiName:NrPMPEntries
+\_int_typespec: 
+  |UINT:64
 \_string_typespec: (PMPCfgRstVal), line:103:7, endln:103:19
   |vpiParent:
   \_tagged_pattern: , line:103:21, endln:103:32
   |vpiName:PMPCfgRstVal
+\_int_typespec: 
+  |UINT:64
 \_string_typespec: (PMPAddrRstVal), line:104:7, endln:104:20
   |vpiParent:
   \_tagged_pattern: , line:104:22, endln:104:33
@@ -21375,6 +21139,12 @@ design: (unnamed)
   |vpiParent:
   \_tagged_pattern: , line:106:16, endln:106:46
   |vpiName:NOCType
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:107:39, endln:107:40
+  |vpiName:$unsigned
 \_string_typespec: (NrNonIdempotentRules), line:107:7, endln:107:27
   |vpiParent:
   \_tagged_pattern: , line:107:29, endln:107:41
@@ -21395,6 +21165,12 @@ design: (unnamed)
   |vpiParent:
   \_tagged_pattern: , line:109:28, endln:109:49
   |vpiName:NonIdempotentLength
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:110:39, endln:110:40
+  |vpiName:$unsigned
 \_string_typespec: (NrExecuteRegionRules), line:110:7, endln:110:27
   |vpiParent:
   \_tagged_pattern: , line:110:29, endln:110:41
@@ -21415,76 +21191,155 @@ design: (unnamed)
   |vpiParent:
   \_tagged_pattern: , line:116:28, endln:116:70
   |vpiName:ExecuteRegionLength
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:117:38, endln:117:39
+  |vpiName:$unsigned
 \_string_typespec: (NrCachedRegionRules), line:117:7, endln:117:26
   |vpiParent:
   \_tagged_pattern: , line:117:28, endln:117:40
   |vpiName:NrCachedRegionRules
-\_integer_typespec: , line:118:29, endln:118:33
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
-  |INT:1024
 \_string_typespec: (CachedRegionAddrBase), line:118:7, endln:118:27
   |vpiParent:
   \_tagged_pattern: , line:118:29, endln:118:51
   |vpiName:CachedRegionAddrBase
-\_integer_typespec: , line:119:27, endln:119:31
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
-  |INT:1024
 \_string_typespec: (CachedRegionLength), line:119:7, endln:119:25
   |vpiParent:
   \_tagged_pattern: , line:119:27, endln:119:48
   |vpiName:CachedRegionLength
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:120:39, endln:120:40
+  |vpiName:$unsigned
 \_string_typespec: (MaxOutstandingStores), line:120:7, endln:120:27
   |vpiParent:
   \_tagged_pattern: , line:120:29, endln:120:41
   |vpiName:MaxOutstandingStores
-\_bit_typespec: , line:121:16, endln:121:19
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (DebugEn), line:121:7, endln:121:14
   |vpiParent:
   \_tagged_pattern: , line:121:16, endln:121:23
   |vpiName:DebugEn
-\_bit_typespec: , line:122:24, endln:122:27
-  |vpiInstance:
-  \_package: cva6_config_pkg (cva6_config_pkg::), file:${SURELOG_DIR}/tests/FuncStructVal/dut.sv, line:2:1, endln:133:11
 \_string_typespec: (AxiBurstWriteEn), line:122:7, endln:122:22
   |vpiParent:
   \_tagged_pattern: , line:122:24, endln:122:31
   |vpiName:AxiBurstWriteEn
+\_int_typespec: , line:29:3, endln:29:46
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:123:33, endln:123:57
+  |vpiName:$unsigned
 \_string_typespec: (IcacheByteSize), line:123:7, endln:123:21
   |vpiParent:
   \_tagged_pattern: , line:123:23, endln:123:58
   |vpiName:IcacheByteSize
+\_int_typespec: , line:30:3, endln:30:42
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:124:33, endln:124:57
+  |vpiName:$unsigned
 \_string_typespec: (IcacheSetAssoc), line:124:7, endln:124:21
   |vpiParent:
   \_tagged_pattern: , line:124:23, endln:124:58
   |vpiName:IcacheSetAssoc
+\_int_typespec: , line:31:3, endln:31:45
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:125:34, endln:125:59
+  |vpiName:$unsigned
 \_string_typespec: (IcacheLineWidth), line:125:7, endln:125:22
   |vpiParent:
   \_tagged_pattern: , line:125:24, endln:125:60
   |vpiName:IcacheLineWidth
+\_int_typespec: , line:32:3, endln:32:46
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:126:33, endln:126:57
+  |vpiName:$unsigned
 \_string_typespec: (DcacheByteSize), line:126:7, endln:126:21
   |vpiParent:
   \_tagged_pattern: , line:126:23, endln:126:58
   |vpiName:DcacheByteSize
+\_int_typespec: , line:33:3, endln:33:42
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:127:33, endln:127:57
+  |vpiName:$unsigned
 \_string_typespec: (DcacheSetAssoc), line:127:7, endln:127:21
   |vpiParent:
   \_tagged_pattern: , line:127:23, endln:127:58
   |vpiName:DcacheSetAssoc
+\_int_typespec: , line:34:3, endln:34:45
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:128:34, endln:128:59
+  |vpiName:$unsigned
 \_string_typespec: (DcacheLineWidth), line:128:7, endln:128:22
   |vpiParent:
   \_tagged_pattern: , line:128:24, endln:128:60
   |vpiName:DcacheLineWidth
+\_int_typespec: , line:26:3, endln:26:38
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:129:29, endln:129:49
+  |vpiName:$unsigned
 \_string_typespec: (DataUserEn), line:129:7, endln:129:17
   |vpiParent:
   \_tagged_pattern: , line:129:19, endln:129:50
   |vpiName:DataUserEn
+\_int_typespec: , line:25:3, endln:25:55
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:130:33, endln:130:57
+  |vpiName:$unsigned
 \_string_typespec: (FetchUserWidth), line:130:7, endln:130:21
   |vpiParent:
   \_tagged_pattern: , line:130:23, endln:130:58
   |vpiName:FetchUserWidth
+\_int_typespec: , line:24:3, endln:24:39
+  |vpiParent:
+  \_ref_typespec: (cva6_config_pkg)
+\_sys_func_call: ($unsigned)
+  |vpiParent:
+  \_operation: , line:69:53, endln:132:4
+  |vpiArgument:
+  \_constant: , line:131:30, endln:131:51
+  |vpiName:$unsigned
 \_string_typespec: (FetchUserEn), line:131:7, endln:131:18
   |vpiParent:
   \_tagged_pattern: , line:131:20, endln:131:52
@@ -21901,26 +21756,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:254:5, endln:254:33
     |vpiLeftRange:
-    \_operation: , line:254:12, endln:254:24
+    \_constant: , line:254:12, endln:254:22
       |vpiParent:
       \_range: , line:254:11, endln:254:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::NonIdempotentAddrBase::NrMaxRules), line:254:12, endln:254:22
-        |vpiParent:
-        \_operation: , line:254:12, endln:254:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::NonIdempotentAddrBase::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:254:23, endln:254:24
-        |vpiParent:
-        \_operation: , line:254:12, endln:254:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:254:25, endln:254:26
       |vpiParent:
@@ -21959,26 +21801,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:256:5, endln:256:33
     |vpiLeftRange:
-    \_operation: , line:256:12, endln:256:24
+    \_constant: , line:256:12, endln:256:22
       |vpiParent:
       \_range: , line:256:11, endln:256:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::NonIdempotentLength::NrMaxRules), line:256:12, endln:256:22
-        |vpiParent:
-        \_operation: , line:256:12, endln:256:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::NonIdempotentLength::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:256:23, endln:256:24
-        |vpiParent:
-        \_operation: , line:256:12, endln:256:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:256:25, endln:256:26
       |vpiParent:
@@ -22022,26 +21851,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:260:5, endln:260:33
     |vpiLeftRange:
-    \_operation: , line:260:12, endln:260:24
+    \_constant: , line:260:12, endln:260:22
       |vpiParent:
       \_range: , line:260:11, endln:260:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::ExecuteRegionAddrBase::NrMaxRules), line:260:12, endln:260:22
-        |vpiParent:
-        \_operation: , line:260:12, endln:260:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::ExecuteRegionAddrBase::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:260:23, endln:260:24
-        |vpiParent:
-        \_operation: , line:260:12, endln:260:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:260:25, endln:260:26
       |vpiParent:
@@ -22080,26 +21896,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:262:5, endln:262:33
     |vpiLeftRange:
-    \_operation: , line:262:12, endln:262:24
+    \_constant: , line:262:12, endln:262:22
       |vpiParent:
       \_range: , line:262:11, endln:262:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::ExecuteRegionLength::NrMaxRules), line:262:12, endln:262:22
-        |vpiParent:
-        \_operation: , line:262:12, endln:262:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::ExecuteRegionLength::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:262:23, endln:262:24
-        |vpiParent:
-        \_operation: , line:262:12, endln:262:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:262:25, endln:262:26
       |vpiParent:
@@ -22143,26 +21946,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:266:5, endln:266:33
     |vpiLeftRange:
-    \_operation: , line:266:12, endln:266:24
+    \_constant: , line:266:12, endln:266:22
       |vpiParent:
       \_range: , line:266:11, endln:266:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::CachedRegionAddrBase::NrMaxRules), line:266:12, endln:266:22
-        |vpiParent:
-        \_operation: , line:266:12, endln:266:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::CachedRegionAddrBase::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:266:23, endln:266:24
-        |vpiParent:
-        \_operation: , line:266:12, endln:266:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:266:25, endln:266:26
       |vpiParent:
@@ -22201,26 +21991,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:268:5, endln:268:33
     |vpiLeftRange:
-    \_operation: , line:268:12, endln:268:24
+    \_constant: , line:268:12, endln:268:22
       |vpiParent:
       \_range: , line:268:11, endln:268:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (config_pkg::config_pkg::cva6_user_cfg_t::CachedRegionLength::NrMaxRules), line:268:12, endln:268:22
-        |vpiParent:
-        \_operation: , line:268:12, endln:268:24
-        |vpiName:NrMaxRules
-        |vpiFullName:config_pkg::config_pkg::cva6_user_cfg_t::CachedRegionLength::NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:268:23, endln:268:24
-        |vpiParent:
-        \_operation: , line:268:12, endln:268:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:268:25, endln:268:26
       |vpiParent:
@@ -22759,26 +22536,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:362:5, endln:362:33
     |vpiLeftRange:
-    \_operation: , line:362:12, endln:362:24
+    \_constant: , line:362:12, endln:362:22
       |vpiParent:
       \_range: , line:362:11, endln:362:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.NonIdempotentAddrBase.NrMaxRules), line:362:12, endln:362:22
-        |vpiParent:
-        \_operation: , line:362:12, endln:362:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.NonIdempotentAddrBase.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:362:23, endln:362:24
-        |vpiParent:
-        \_operation: , line:362:12, endln:362:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:362:25, endln:362:26
       |vpiParent:
@@ -22817,26 +22581,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:363:5, endln:363:33
     |vpiLeftRange:
-    \_operation: , line:363:12, endln:363:24
+    \_constant: , line:363:12, endln:363:22
       |vpiParent:
       \_range: , line:363:11, endln:363:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.NonIdempotentLength.NrMaxRules), line:363:12, endln:363:22
-        |vpiParent:
-        \_operation: , line:363:12, endln:363:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.NonIdempotentLength.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:363:23, endln:363:24
-        |vpiParent:
-        \_operation: , line:363:12, endln:363:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:363:25, endln:363:26
       |vpiParent:
@@ -22880,26 +22631,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:365:5, endln:365:33
     |vpiLeftRange:
-    \_operation: , line:365:12, endln:365:24
+    \_constant: , line:365:12, endln:365:22
       |vpiParent:
       \_range: , line:365:11, endln:365:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.ExecuteRegionAddrBase.NrMaxRules), line:365:12, endln:365:22
-        |vpiParent:
-        \_operation: , line:365:12, endln:365:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.ExecuteRegionAddrBase.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:365:23, endln:365:24
-        |vpiParent:
-        \_operation: , line:365:12, endln:365:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:365:25, endln:365:26
       |vpiParent:
@@ -22938,26 +22676,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:366:5, endln:366:33
     |vpiLeftRange:
-    \_operation: , line:366:12, endln:366:24
+    \_constant: , line:366:12, endln:366:22
       |vpiParent:
       \_range: , line:366:11, endln:366:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.ExecuteRegionLength.NrMaxRules), line:366:12, endln:366:22
-        |vpiParent:
-        \_operation: , line:366:12, endln:366:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.ExecuteRegionLength.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:366:23, endln:366:24
-        |vpiParent:
-        \_operation: , line:366:12, endln:366:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:366:25, endln:366:26
       |vpiParent:
@@ -23001,26 +22726,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:368:5, endln:368:33
     |vpiLeftRange:
-    \_operation: , line:368:12, endln:368:24
+    \_constant: , line:368:12, endln:368:22
       |vpiParent:
       \_range: , line:368:11, endln:368:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.CachedRegionAddrBase.NrMaxRules), line:368:12, endln:368:22
-        |vpiParent:
-        \_operation: , line:368:12, endln:368:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.CachedRegionAddrBase.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:368:23, endln:368:24
-        |vpiParent:
-        \_operation: , line:368:12, endln:368:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:368:25, endln:368:26
       |vpiParent:
@@ -23059,26 +22771,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:369:5, endln:369:33
     |vpiLeftRange:
-    \_operation: , line:369:12, endln:369:24
+    \_constant: , line:369:12, endln:369:22
       |vpiParent:
       \_range: , line:369:11, endln:369:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.CVA6Cfg.config_pkg::cva6_cfg_t.CachedRegionLength.NrMaxRules), line:369:12, endln:369:22
-        |vpiParent:
-        \_operation: , line:369:12, endln:369:24
-        |vpiName:NrMaxRules
-        |vpiFullName:work@top.CVA6Cfg.config_pkg::cva6_cfg_t.CachedRegionLength.NrMaxRules
-        |vpiActual:
-        \_constant: , line:174:27, endln:174:29
-      |vpiOperand:
-      \_constant: , line:369:23, endln:369:24
-        |vpiParent:
-        \_operation: , line:369:12, endln:369:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:369:25, endln:369:26
       |vpiParent:
@@ -23772,6 +23471,6 @@ design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 5
 [   NOTE] : 0

@@ -3,14 +3,16 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: No timescale set for "tlul_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: No timescale set for "flash_ctrl".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:1:1: Compile package "top_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: Compile package "tlul_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: Compile module "work@flash_ctrl".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              51
+constant                                              78
 design                                                 1
 enum_const                                             2
 enum_typespec                                          1
-int_typespec                                          22
+int_typespec                                          31
 logic_net                                              1
 logic_typespec                                        10
 module_inst                                            3
@@ -19,10 +21,10 @@ package                                                2
 param_assign                                          22
 parameter                                             22
 range                                                  7
-ref_obj                                               11
-ref_typespec                                          54
+ref_obj                                                7
+ref_typespec                                          65
 struct_typespec                                        1
-sys_func_call                                          6
+sys_func_call                                          2
 typespec_member                                       10
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructVar/slpp_all/surelog.uhdm ...
@@ -122,6 +124,7 @@ design: (unnamed)
   \_parameter: (top_pkg::TL_DBW), line:7:17, endln:7:23
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:1:1, endln:13:11
+    |UINT:4
     |vpiTypespec:
     \_ref_typespec: (top_pkg::TL_DBW)
       |vpiParent:
@@ -137,6 +140,7 @@ design: (unnamed)
   \_parameter: (top_pkg::TL_SZW), line:8:17, endln:8:23
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:1:1, endln:13:11
+    |UINT:2
     |vpiTypespec:
     \_ref_typespec: (top_pkg::TL_SZW)
       |vpiParent:
@@ -221,7 +225,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:25
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -242,7 +246,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:17, endln:3:25
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -263,7 +267,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:17, endln:4:25
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -284,7 +288,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:5:17, endln:5:25
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -305,7 +309,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:26
       |vpiDecompile:16
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -322,26 +326,20 @@ design: (unnamed)
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:1:1, endln:13:11
     |vpiRhs:
-    \_operation: , line:7:25, endln:7:33
+    \_constant: , line:7:25, endln:7:30
       |vpiParent:
       \_param_assign: , line:7:17, endln:7:34
-      |vpiOpType:23
-      |vpiOperand:
-      \_ref_obj: (top_pkg::TL_DW), line:7:25, endln:7:30
+      |vpiDecompile:4
+      |vpiSize:32
+      |UINT:4
+      |vpiTypespec:
+      \_ref_typespec: (top_pkg)
         |vpiParent:
-        \_operation: , line:7:25, endln:7:33
-        |vpiName:TL_DW
-        |vpiFullName:top_pkg::TL_DW
+        \_constant: , line:7:25, endln:7:30
+        |vpiFullName:top_pkg
         |vpiActual:
-        \_constant: , line:3:23, endln:3:25
-      |vpiOperand:
-      \_constant: , line:7:32, endln:7:33
-        |vpiParent:
-        \_operation: , line:7:25, endln:7:33
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
+        \_int_typespec: , line:7:13, endln:7:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (top_pkg::TL_DBW), line:7:17, endln:7:23
   |vpiParamAssign:
@@ -349,36 +347,20 @@ design: (unnamed)
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:1:1, endln:13:11
     |vpiRhs:
-    \_sys_func_call: ($clog2), line:8:24, endln:8:48
+    \_constant: , line:8:24, endln:8:48
       |vpiParent:
       \_param_assign: , line:8:17, endln:8:48
-      |vpiArgument:
-      \_operation: , line:8:31, endln:8:47
+      |vpiDecompile:2
+      |vpiSize:32
+      |UINT:2
+      |vpiTypespec:
+      \_ref_typespec: (top_pkg)
         |vpiParent:
-        \_sys_func_call: ($clog2), line:8:24, endln:8:48
-        |vpiOpType:24
-        |vpiOperand:
-        \_sys_func_call: ($clog2), line:8:31, endln:8:45
-          |vpiParent:
-          \_operation: , line:8:31, endln:8:47
-          |vpiArgument:
-          \_ref_obj: (top_pkg::TL_DBW), line:8:38, endln:8:44
-            |vpiParent:
-            \_sys_func_call: ($clog2), line:8:31, endln:8:45
-            |vpiName:TL_DBW
-            |vpiFullName:top_pkg::TL_DBW
-            |vpiActual:
-            \_operation: , line:7:25, endln:7:33
-          |vpiName:$clog2
-        |vpiOperand:
-        \_constant: , line:8:46, endln:8:47
-          |vpiParent:
-          \_operation: , line:8:31, endln:8:47
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiName:$clog2
+        \_constant: , line:8:24, endln:8:48
+        |vpiFullName:top_pkg
+        |vpiActual:
+        \_int_typespec: , line:8:13, endln:8:16
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (top_pkg::TL_SZW), line:8:17, endln:8:23
   |vpiParamAssign:
@@ -390,7 +372,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:30
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -411,7 +393,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:17, endln:10:41
       |vpiDecompile:256
-      |vpiSize:64
+      |vpiSize:32
       |UINT:256
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -432,7 +414,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:11:17, endln:11:41
       |vpiDecompile:256
-      |vpiSize:64
+      |vpiSize:32
       |UINT:256
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -453,7 +435,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:12:17, endln:12:39
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -830,26 +812,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:28:4, endln:28:32
     |vpiLeftRange:
-    \_operation: , line:28:12, endln:28:29
+    \_constant: , line:28:12, endln:28:27
       |vpiParent:
       \_range: , line:28:11, endln:28:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_size::top_pkg::TL_SZW), line:28:12, endln:28:27
-        |vpiParent:
-        \_operation: , line:28:12, endln:28:29
-        |vpiName:top_pkg::TL_SZW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_size::top_pkg::TL_SZW
-        |vpiActual:
-        \_parameter: (top_pkg::TL_SZW), line:8:17, endln:8:23
-      |vpiOperand:
-      \_constant: , line:28:28, endln:28:29
-        |vpiParent:
-        \_operation: , line:28:12, endln:28:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:1
+      |vpiSize:64
+      |INT:1
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:28:30, endln:28:31
       |vpiParent:
@@ -868,26 +837,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:29:4, endln:29:32
     |vpiLeftRange:
-    \_operation: , line:29:12, endln:29:29
+    \_constant: , line:29:12, endln:29:27
       |vpiParent:
       \_range: , line:29:11, endln:29:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_source::top_pkg::TL_AIW), line:29:12, endln:29:27
-        |vpiParent:
-        \_operation: , line:29:12, endln:29:29
-        |vpiName:top_pkg::TL_AIW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_source::top_pkg::TL_AIW
-        |vpiActual:
-        \_parameter: (top_pkg::TL_AIW), line:4:17, endln:4:23
-      |vpiOperand:
-      \_constant: , line:29:28, endln:29:29
-        |vpiParent:
-        \_operation: , line:29:12, endln:29:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:7
+      |vpiSize:64
+      |INT:7
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:29:30, endln:29:31
       |vpiParent:
@@ -906,26 +862,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:30:4, endln:30:32
     |vpiLeftRange:
-    \_operation: , line:30:12, endln:30:29
+    \_constant: , line:30:12, endln:30:27
       |vpiParent:
       \_range: , line:30:11, endln:30:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_sink::top_pkg::TL_DIW), line:30:12, endln:30:27
-        |vpiParent:
-        \_operation: , line:30:12, endln:30:29
-        |vpiName:top_pkg::TL_DIW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_sink::top_pkg::TL_DIW
-        |vpiActual:
-        \_parameter: (top_pkg::TL_DIW), line:5:17, endln:5:23
-      |vpiOperand:
-      \_constant: , line:30:28, endln:30:29
-        |vpiParent:
-        \_operation: , line:30:12, endln:30:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:0
+      |vpiSize:64
+      |INT:0
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:30:30, endln:30:31
       |vpiParent:
@@ -944,26 +887,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:31:4, endln:31:32
     |vpiLeftRange:
-    \_operation: , line:31:13, endln:31:29
+    \_constant: , line:31:13, endln:31:27
       |vpiParent:
       \_range: , line:31:12, endln:31:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_data::top_pkg::TL_DW), line:31:13, endln:31:27
-        |vpiParent:
-        \_operation: , line:31:13, endln:31:29
-        |vpiName:top_pkg::TL_DW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_data::top_pkg::TL_DW
-        |vpiActual:
-        \_parameter: (top_pkg::TL_DW), line:3:17, endln:3:22
-      |vpiOperand:
-      \_constant: , line:31:28, endln:31:29
-        |vpiParent:
-        \_operation: , line:31:13, endln:31:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:31
+      |vpiSize:64
+      |INT:31
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:31:30, endln:31:31
       |vpiParent:
@@ -982,26 +912,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:32:4, endln:32:32
     |vpiLeftRange:
-    \_operation: , line:32:12, endln:32:29
+    \_constant: , line:32:12, endln:32:27
       |vpiParent:
       \_range: , line:32:11, endln:32:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_user::top_pkg::TL_DUW), line:32:12, endln:32:27
-        |vpiParent:
-        \_operation: , line:32:12, endln:32:29
-        |vpiName:top_pkg::TL_DUW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_user::top_pkg::TL_DUW
-        |vpiActual:
-        \_parameter: (top_pkg::TL_DUW), line:6:17, endln:6:23
-      |vpiOperand:
-      \_constant: , line:32:28, endln:32:29
-        |vpiParent:
-        \_operation: , line:32:12, endln:32:29
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:15
+      |vpiSize:64
+      |INT:15
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:32:30, endln:32:31
       |vpiParent:

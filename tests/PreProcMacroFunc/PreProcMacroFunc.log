@@ -151,6 +151,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:8:1: No timescale set for "pkg_b".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:12:1: No timescale set for "pkg_a".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:8:1: Compile package "pkg_b".
+[INF:CP0301] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:12:1: Compile package "pkg_a".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         1
@@ -160,21 +162,20 @@ begin                                                  1
 bit_select                                             1
 bit_typespec                                           2
 bit_var                                                2
-constant                                              14
+constant                                              17
 design                                                 1
 function                                               1
-int_typespec                                           4
+int_typespec                                           5
 module_inst                                            2
-operation                                              5
+operation                                              3
 package                                                2
 param_assign                                           4
 parameter                                              4
 range                                                  1
-ref_obj                                                2
-ref_typespec                                          13
+ref_obj                                                1
+ref_typespec                                          14
 return_stmt                                            1
 string_typespec                                        1
-sys_func_call                                          2
 tagged_pattern                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreProcMacroFunc/slpp_all/surelog.uhdm ...
@@ -216,7 +217,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:9:17, endln:9:39
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (pkg_b)
@@ -260,7 +261,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:13:17, endln:13:39
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (pkg_a)
@@ -423,59 +424,13 @@ design: (unnamed)
       \_range: , line:3:21, endln:3:95
       |vpiOpType:11
       |vpiOperand:
-      \_operation: , line:3:22, endln:3:94
+      \_constant: , line:3:88, endln:3:89
         |vpiParent:
         \_operation: , line:3:21, endln:3:95
-        |vpiOpType:32
-        |vpiOperand:
-        \_operation: , line:3:23, endln:3:84
-          |vpiParent:
-          \_operation: , line:3:22, endln:3:94
-          |vpiOpType:14
-          |vpiOperand:
-          \_sys_func_call: ($bits), line:3:23, endln:3:48
-            |vpiParent:
-            \_operation: , line:3:23, endln:3:84
-            |vpiArgument:
-            \_ref_obj: (ParameterIntInPkgA), line:3:29, endln:3:47
-              |vpiParent:
-              \_sys_func_call: ($bits), line:3:23, endln:3:48
-              |vpiName:ParameterIntInPkgA
-              |vpiActual:
-              \_constant: , line:13:38, endln:13:39
-            |vpiName:$bits
-          |vpiOperand:
-          \_sys_func_call: ($bits), line:3:52, endln:3:84
-            |vpiParent:
-            \_operation: , line:3:23, endln:3:84
-            |vpiArgument:
-            \_constant: , line:3:58, endln:3:83
-              |vpiParent:
-              \_sys_func_call: ($bits), line:3:52, endln:3:84
-              |vpiDecompile:4
-              |vpiSize:32
-              |UINT:4
-              |vpiConstType:9
-            |vpiName:$bits
-        |vpiOperand:
-        \_constant: , line:3:88, endln:3:89
-          |vpiParent:
-          \_operation: , line:3:22, endln:3:94
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiOperand:
-        \_operation: , line:3:92, endln:3:94
-          |vpiParent:
-          \_operation: , line:3:22, endln:3:94
-          |vpiOpType:1
-          |vpiOperand:
-          \_constant: , line:3:93, endln:3:94
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiSize:64

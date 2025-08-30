@@ -99,14 +99,15 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:1:1: No timescale set for "spi_device_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:6:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:1:1: Compile package "spi_device_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:6:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               9
+constant                                              13
 cont_assign                                            1
 design                                                 1
 import_typespec                                        1
-int_typespec                                           6
+int_typespec                                           8
 logic_net                                              1
 logic_typespec                                         1
 module_inst                                            2
@@ -117,8 +118,8 @@ param_assign                                           3
 parameter                                              4
 port                                                   1
 range                                                  2
-ref_obj                                                5
-ref_typespec                                           8
+ref_obj                                                3
+ref_typespec                                          10
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportedTypespec/slpp_all/surelog.uhdm ...
@@ -157,7 +158,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:27, endln:2:38
       |vpiDecompile:10
-      |vpiSize:64
+      |vpiSize:32
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (spi_device_pkg)
@@ -181,26 +182,13 @@ design: (unnamed)
       |vpiParent:
       \_logic_typespec: (spi_device_pkg::sram_addr_t), line:3:12, endln:3:30
       |vpiLeftRange:
-      \_operation: , line:3:19, endln:3:27
+      \_constant: , line:3:19, endln:3:25
         |vpiParent:
         \_range: , line:3:18, endln:3:30
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (spi_device_pkg::spi_device_pkg::sram_addr_t::SramAw), line:3:19, endln:3:25
-          |vpiParent:
-          \_operation: , line:3:19, endln:3:27
-          |vpiName:SramAw
-          |vpiFullName:spi_device_pkg::spi_device_pkg::sram_addr_t::SramAw
-          |vpiActual:
-          \_constant: , line:2:36, endln:2:38
-        |vpiOperand:
-        \_constant: , line:3:26, endln:3:27
-          |vpiParent:
-          \_operation: , line:3:19, endln:3:27
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        |vpiDecompile:9
+        |vpiSize:64
+        |INT:9
+        |vpiConstType:7
       |vpiRightRange:
       \_constant: , line:3:28, endln:3:29
         |vpiParent:
@@ -239,7 +227,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:27, endln:2:38
       |vpiDecompile:10
-      |vpiSize:64
+      |vpiSize:32
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (work@top)

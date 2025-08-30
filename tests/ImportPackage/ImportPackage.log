@@ -152,17 +152,18 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:4:1: No timescale set for "lc_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:9:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:4:1: Compile package "lc_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              10
+constant                                              14
 cont_assign                                            1
 design                                                 1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                           4
+int_typespec                                           6
 logic_net                                              1
 logic_typespec                                         1
 module_inst                                            3
@@ -173,8 +174,8 @@ param_assign                                           3
 parameter                                              3
 range                                                  2
 ref_module                                             1
-ref_obj                                                5
-ref_typespec                                           7
+ref_obj                                                3
+ref_typespec                                           9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/checker/surelog.chk.html ...
@@ -213,7 +214,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:5:18, endln:5:29
       |vpiDecompile:4
-      |vpiSize:64
+      |vpiSize:32
       |UINT:4
       |vpiTypespec:
       \_ref_typespec: (lc_ctrl_pkg)
@@ -237,26 +238,13 @@ design: (unnamed)
       |vpiParent:
       \_logic_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:31
       |vpiLeftRange:
-      \_operation: , line:6:19, endln:6:28
+      \_constant: , line:6:19, endln:6:26
         |vpiParent:
         \_range: , line:6:18, endln:6:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (lc_ctrl_pkg::lc_ctrl_pkg::unused_type_t::TxWidth), line:6:19, endln:6:26
-          |vpiParent:
-          \_operation: , line:6:19, endln:6:28
-          |vpiName:TxWidth
-          |vpiFullName:lc_ctrl_pkg::lc_ctrl_pkg::unused_type_t::TxWidth
-          |vpiActual:
-          \_constant: , line:5:28, endln:5:29
-        |vpiOperand:
-        \_constant: , line:6:27, endln:6:28
-          |vpiParent:
-          \_operation: , line:6:19, endln:6:28
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        |vpiDecompile:3
+        |vpiSize:64
+        |INT:3
+        |vpiConstType:7
       |vpiRightRange:
       \_constant: , line:6:29, endln:6:30
         |vpiParent:

@@ -112,24 +112,24 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:1:1: No timescale set for "lc_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: No timescale set for "prim_lc_sender".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:1:1: Compile package "lc_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: Compile module "work@prim_lc_sender".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               8
+constant                                              10
 cont_assign                                            1
 design                                                 1
-enum_const                                             2
-enum_typespec                                          1
+enum_const                                             4
+enum_typespec                                          2
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         3
 module_inst                                            2
 operation                                              1
 package                                                1
 port                                                   2
-range                                                  2
+range                                                  3
 ref_obj                                                4
-ref_typespec                                           4
-unsupported_typespec                                   2
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/checker/surelog.chk.html ...
@@ -170,6 +170,43 @@ design: (unnamed)
     \_enum_const: (Off), line:4:5, endln:4:18
       |vpiParent:
       \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:2:3, endln:5:13
+      |vpiName:Off
+      |BIN:0101
+      |vpiDecompile:4'b0101
+      |vpiSize:4
+  |vpiTypedef:
+  \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiName:lc_ctrl_pkg::lc_tx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_t)
+      |vpiParent:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
+      |vpiFullName:lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:2:3, endln:5:13
+    |vpiInstance:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiBaseTypespec:
+    \_ref_typespec: (lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_t)
+      |vpiParent:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
+      |vpiFullName:lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_logic_typespec: , line:2:16, endln:2:27
+    |vpiEnumConst:
+    \_enum_const: (On), line:3:5, endln:3:18
+      |vpiParent:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
+      |vpiName:On
+      |BIN:1010
+      |vpiDecompile:4'b1010
+      |vpiSize:4
+    |vpiEnumConst:
+    \_enum_const: (Off), line:4:5, endln:4:18
+      |vpiParent:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
       |vpiName:Off
       |BIN:0101
       |vpiDecompile:4'b0101
@@ -235,7 +272,7 @@ design: (unnamed)
       \_port: (lc_en_o), line:12:31, endln:12:38
       |vpiFullName:work@prim_lc_sender.lc_en_o
       |vpiActual:
-      \_unsupported_typespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:23
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
   |vpiContAssign:
   \_cont_assign: , line:14:10, endln:14:50
     |vpiParent:
@@ -250,7 +287,7 @@ design: (unnamed)
         \_operation: , line:14:20, endln:14:50
         |vpiFullName:work@prim_lc_sender
         |vpiActual:
-        \_unsupported_typespec: (lc_ctrl_pkg::lc_tx_t), line:14:20, endln:14:33
+        \_enum_typespec: (lc_ctrl_pkg::lc_tx_t), line:2:3, endln:5:13
       |vpiOpType:67
       |vpiOperand:
       \_ref_obj: (work@prim_lc_sender.lc_en_i), line:14:42, endln:14:49
@@ -293,8 +330,31 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_unsupported_typespec: (lc_ctrl_pkg::lc_tx_t), line:14:20, endln:14:33
-  |vpiName:lc_ctrl_pkg::lc_tx_t
+\_logic_typespec: , line:2:16, endln:2:27
+  |vpiParent:
+  \_ref_typespec: (lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_t)
+  |vpiInstance:
+  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+  |vpiRange:
+  \_range: , line:2:22, endln:2:27
+    |vpiParent:
+    \_logic_typespec: , line:2:16, endln:2:27
+    |vpiLeftRange:
+    \_constant: , line:2:23, endln:2:24
+      |vpiParent:
+      \_range: , line:2:22, endln:2:27
+      |vpiDecompile:3
+      |vpiSize:64
+      |UINT:3
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:2:25, endln:2:26
+      |vpiParent:
+      \_range: , line:2:22, endln:2:27
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
 \_logic_typespec: , line:11:10, endln:11:15
   |vpiRange:
   \_range: , line:11:10, endln:11:15
@@ -316,8 +376,6 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_unsupported_typespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:23
-  |vpiName:lc_ctrl_pkg::lc_tx_t
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -326,5 +384,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypedefPack/dut.sv | ${SURELOG_DIR}/build/regression/TypedefPack/roundtrip/dut_000.sv | 7 | 15 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypedefPack/dut.sv | ${SURELOG_DIR}/build/regression/TypedefPack/roundtrip/dut_000.sv | 8 | 15 |
 ============================== End RoundTrip Results ==============================

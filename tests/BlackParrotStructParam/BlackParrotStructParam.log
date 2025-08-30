@@ -368,6 +368,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:1:1: No timescale set for "bp_common_aviary_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:55:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:1:1: Compile package "bp_common_aviary_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:55:1: Compile module "work@top".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -634,37 +635,37 @@ bit_typespec                                           1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              37
+constant                                              78
 design                                                 1
 enum_const                                             6
 enum_typespec                                          2
 enum_var                                               1
 function                                               9
 gen_if                                                 1
-hier_path                                             25
+hier_path                                             13
 import_typespec                                        1
-int_typespec                                          13
+int_typespec                                          18
 int_var                                                4
-integer_typespec                                      19
+integer_typespec                                      49
 io_decl                                               11
 logic_net                                              1
 logic_typespec                                         1
 logic_var                                              1
 module_inst                                            2
-operation                                             38
+operation                                             58
 package                                                2
 packed_array_typespec                                  4
 param_assign                                          24
 parameter                                             31
 range                                                  6
 ref_module                                             1
-ref_obj                                               67
-ref_typespec                                          91
-string_typespec                                       16
-struct_typespec                                       19
-tagged_pattern                                        16
+ref_obj                                               37
+ref_typespec                                         160
+string_typespec                                       17
+struct_typespec                                       49
+tagged_pattern                                        17
 task                                                   9
-typespec_member                                       19
+typespec_member                                       49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/checker/surelog.chk.html ...
@@ -823,7 +824,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:14, endln:3:29
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (bp_common_aviary_pkg)
@@ -843,24 +844,19 @@ design: (unnamed)
     \_operation: , line:11:5, endln:13:8
       |vpiParent:
       \_param_assign: , line:10:30, endln:13:8
+      |vpiTypespec:
+      \_ref_typespec: 
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:12:18, endln:12:19
+      \_constant: , line:12:18, endln:12:19
         |vpiParent:
         \_operation: , line:11:5, endln:13:8
-        |vpiPattern:
-        \_constant: , line:12:18, endln:12:19
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiTypespec:
-        \_ref_typespec: (bp_common_aviary_pkg)
-          |vpiParent:
-          \_tagged_pattern: , line:12:18, endln:12:19
-          |vpiFullName:bp_common_aviary_pkg
-          |vpiActual:
-          \_string_typespec: (cc_x_dim), line:12:7, endln:12:15
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (bp_common_aviary_pkg::bp_default_cfg_p), line:10:30, endln:10:46
   |vpiParamAssign:
@@ -868,13 +864,25 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiRhs:
-    \_ref_obj: (bp_common_aviary_pkg::bp_default_cfg_p), line:15:48, endln:15:64
+    \_operation: , line:11:5, endln:13:8
       |vpiParent:
       \_param_assign: , line:15:29, endln:15:64
-      |vpiName:bp_default_cfg_p
-      |vpiFullName:bp_common_aviary_pkg::bp_default_cfg_p
-      |vpiActual:
-      \_operation: , line:11:5, endln:13:8
+      |vpiTypespec:
+      \_ref_typespec: (bp_common_aviary_pkg)
+        |vpiParent:
+        \_operation: , line:11:5, endln:13:8
+        |vpiFullName:bp_common_aviary_pkg
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiOpType:75
+      |vpiOperand:
+      \_constant: , line:12:18, endln:12:19
+        |vpiParent:
+        \_operation: , line:11:5, endln:13:8
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (bp_common_aviary_pkg::bp_unicore_cfg_p), line:15:29, endln:15:45
   |vpiParamAssign:
@@ -885,24 +893,19 @@ design: (unnamed)
     \_operation: , line:18:5, endln:20:8
       |vpiParent:
       \_param_assign: , line:17:30, endln:20:8
+      |vpiTypespec:
+      \_ref_typespec: 
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:19:17, endln:19:22
+      \_constant: , line:19:17, endln:19:22
         |vpiParent:
         \_operation: , line:18:5, endln:20:8
-        |vpiPattern:
-        \_constant: , line:19:17, endln:19:22
-          |vpiDecompile:"inv"
-          |vpiSize:24
-          |STRING:inv
-          |vpiConstType:6
-        |vpiTypespec:
-        \_ref_typespec: (bp_common_aviary_pkg)
-          |vpiParent:
-          \_tagged_pattern: , line:19:17, endln:19:22
-          |vpiFullName:bp_common_aviary_pkg
-          |vpiActual:
-          \_string_typespec: (default), line:19:7, endln:19:14
+        |vpiDecompile:"inv"
+        |vpiSize:32
+        |STRING:inv
+        |vpiConstType:6
     |vpiLhs:
     \_parameter: (bp_common_aviary_pkg::bp_multicore_cce_ucode_half_override_p), line:17:30, endln:17:68
   |vpiParamAssign:
@@ -913,84 +916,19 @@ design: (unnamed)
     \_operation: , line:23:7, endln:30:8
       |vpiParent:
       \_param_assign: , line:22:29, endln:30:8
+      |vpiTypespec:
+      \_ref_typespec: 
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:24:15, endln:29:34
+      \_constant: , line:12:18, endln:12:19
         |vpiParent:
         \_operation: , line:23:7, endln:30:8
-        |vpiPattern:
-        \_operation: , line:24:15, endln:29:34
-          |vpiParent:
-          \_operation: , line:23:7, endln:30:8
-          |vpiOpType:32
-          |vpiOperand:
-          \_operation: , line:24:16, endln:25:43
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiOpType:14
-            |vpiOperand:
-            \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-              |vpiParent:
-              \_operation: , line:24:16, endln:25:43
-              |vpiActual:
-              \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:24:16, endln:24:54
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-                |vpiName:bp_multicore_cce_ucode_half_override_p
-              |vpiActual:
-              \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:25:26, endln:25:34
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-                |vpiName:cc_x_dim
-                |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-              |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
-            |vpiOperand:
-            \_constant: , line:25:38, endln:25:43
-              |vpiParent:
-              \_operation: , line:24:16, endln:25:43
-              |vpiDecompile:"inv"
-              |vpiSize:24
-              |STRING:inv
-              |vpiConstType:6
-          |vpiOperand:
-          \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiActual:
-            \_ref_obj: (bp_unicore_cfg_p), line:26:21, endln:26:37
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-              |vpiName:bp_unicore_cfg_p
-            |vpiActual:
-            \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:27:26, endln:27:34
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-              |vpiName:cc_x_dim
-              |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-            |vpiName:bp_unicore_cfg_p.cc_x_dim
-          |vpiOperand:
-          \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiActual:
-            \_ref_obj: (bp_unicore_cfg_p), line:28:21, endln:28:37
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-              |vpiName:bp_unicore_cfg_p
-            |vpiActual:
-            \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:29:26, endln:29:34
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-              |vpiName:cc_x_dim
-              |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-            |vpiName:bp_unicore_cfg_p.cc_x_dim
-        |vpiTypespec:
-        \_ref_typespec: (bp_common_aviary_pkg)
-          |vpiParent:
-          \_tagged_pattern: , line:24:15, endln:29:34
-          |vpiFullName:bp_common_aviary_pkg
-          |vpiActual:
-          \_string_typespec: (cc_x_dim), line:24:5, endln:24:13
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (bp_common_aviary_pkg::bp_multicore_1_cce_ucode_cfg_p), line:22:29, endln:22:59
   |vpiParamAssign:
@@ -1007,71 +945,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:33:7, endln:40:10
         |vpiPattern:
-        \_operation: , line:34:15, endln:39:34
+        \_constant: , line:12:18, endln:12:19
           |vpiParent:
-          \_operation: , line:33:7, endln:40:10
-          |vpiOpType:32
-          |vpiOperand:
-          \_operation: , line:34:16, endln:35:43
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiOpType:14
-            |vpiOperand:
-            \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-              |vpiParent:
-              \_operation: , line:34:16, endln:35:43
-              |vpiActual:
-              \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:34:16, endln:34:54
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-                |vpiName:bp_multicore_cce_ucode_half_override_p
-              |vpiActual:
-              \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:35:26, endln:35:34
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-                |vpiName:cc_x_dim
-                |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-              |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
-            |vpiOperand:
-            \_constant: , line:35:38, endln:35:43
-              |vpiParent:
-              \_operation: , line:34:16, endln:35:43
-              |vpiDecompile:"inv"
-              |vpiSize:24
-              |STRING:inv
-              |vpiConstType:6
-          |vpiOperand:
-          \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiActual:
-            \_ref_obj: (bp_multicore_1_cce_ucode_cfg_p), line:36:21, endln:36:51
-              |vpiParent:
-              \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-              |vpiName:bp_multicore_1_cce_ucode_cfg_p
-            |vpiActual:
-            \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:37:26, endln:37:34
-              |vpiParent:
-              \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-              |vpiName:cc_x_dim
-              |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-            |vpiName:bp_multicore_1_cce_ucode_cfg_p.cc_x_dim
-          |vpiOperand:
-          \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiActual:
-            \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:38:21, endln:38:59
-              |vpiParent:
-              \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-              |vpiName:bp_multicore_cce_ucode_half_override_p
-            |vpiActual:
-            \_ref_obj: (bp_common_aviary_pkg::cc_x_dim), line:39:26, endln:39:34
-              |vpiParent:
-              \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-              |vpiName:cc_x_dim
-              |vpiFullName:bp_common_aviary_pkg::cc_x_dim
-            |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
+          \_operation: , line:23:7, endln:30:8
+          |vpiDecompile:1
+          |vpiSize:32
+          |UINT:1
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (bp_common_aviary_pkg)
           |vpiParent:
@@ -1090,6 +970,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:42:41, endln:46:4
       |vpiOpType:33
+      |vpiReordered:1
       |vpiOperand:
       \_ref_obj: (bp_common_aviary_pkg::bp_multicore_cce_ucode_half_cfg_p), line:45:5, endln:45:38
         |vpiParent:
@@ -1739,7 +1620,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:14, endln:3:29
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1773,26 +1654,22 @@ design: (unnamed)
     \_operation: , line:11:5, endln:13:8
       |vpiParent:
       \_param_assign: , line:10:30, endln:13:8
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:12:18, endln:12:19
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
         \_operation: , line:11:5, endln:13:8
-        |vpiPattern:
-        \_constant: , line:12:18, endln:12:19
-          |vpiParent:
-          \_tagged_pattern: , line:12:18, endln:12:19
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:12:18, endln:12:19
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (cc_x_dim), line:12:7, endln:12:15
+        |vpiFullName:work@top
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiOpType:75
+      |vpiOperand:
+      \_constant: , line:12:18, endln:12:19
+        |vpiParent:
+        \_operation: , line:11:5, endln:13:8
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.bp_default_cfg_p), line:10:30, endln:10:46
       |vpiParent:
@@ -1813,11 +1690,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
     |vpiRhs:
-    \_ref_obj: (work@top.bp_default_cfg_p), line:15:48, endln:15:64
+    \_operation: , line:11:5, endln:13:8
       |vpiParent:
       \_param_assign: , line:15:29, endln:15:64
-      |vpiName:bp_default_cfg_p
-      |vpiFullName:work@top.bp_default_cfg_p
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
+        |vpiParent:
+        \_operation: , line:11:5, endln:13:8
+        |vpiFullName:work@top
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiOpType:75
+      |vpiOperand:
+      \_constant: , line:12:18, endln:12:19
+        |vpiParent:
+        \_operation: , line:11:5, endln:13:8
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.bp_unicore_cfg_p), line:15:29, endln:15:45
       |vpiParent:
@@ -1841,26 +1732,22 @@ design: (unnamed)
     \_operation: , line:18:5, endln:20:8
       |vpiParent:
       \_param_assign: , line:17:30, endln:20:8
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:19:17, endln:19:22
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
         \_operation: , line:18:5, endln:20:8
-        |vpiPattern:
-        \_constant: , line:19:17, endln:19:22
-          |vpiParent:
-          \_tagged_pattern: , line:19:17, endln:19:22
-          |vpiDecompile:"inv"
-          |vpiSize:24
-          |STRING:inv
-          |vpiConstType:6
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:19:17, endln:19:22
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (default), line:19:7, endln:19:14
+        |vpiFullName:work@top
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiOpType:75
+      |vpiOperand:
+      \_constant: , line:19:17, endln:19:22
+        |vpiParent:
+        \_operation: , line:18:5, endln:20:8
+        |vpiDecompile:"inv"
+        |vpiSize:32
+        |STRING:inv
+        |vpiConstType:6
     |vpiLhs:
     \_parameter: (work@top.bp_multicore_cce_ucode_half_override_p), line:17:30, endln:17:68
       |vpiParent:
@@ -1884,84 +1771,22 @@ design: (unnamed)
     \_operation: , line:23:7, endln:30:8
       |vpiParent:
       \_param_assign: , line:22:29, endln:30:8
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:24:15, endln:29:34
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
         |vpiParent:
         \_operation: , line:23:7, endln:30:8
-        |vpiPattern:
-        \_operation: , line:24:15, endln:29:34
-          |vpiParent:
-          \_tagged_pattern: , line:24:15, endln:29:34
-          |vpiOpType:32
-          |vpiOperand:
-          \_operation: , line:24:16, endln:25:43
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiOpType:14
-            |vpiOperand:
-            \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-              |vpiParent:
-              \_operation: , line:24:16, endln:25:43
-              |vpiActual:
-              \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:24:16, endln:24:54
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-                |vpiName:bp_multicore_cce_ucode_half_override_p
-              |vpiActual:
-              \_ref_obj: (work@top.cc_x_dim), line:25:26, endln:25:34
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:24:16, endln:25:34
-                |vpiName:cc_x_dim
-                |vpiFullName:work@top.cc_x_dim
-              |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
-            |vpiOperand:
-            \_constant: , line:25:38, endln:25:43
-              |vpiParent:
-              \_operation: , line:24:16, endln:25:43
-              |vpiDecompile:"inv"
-              |vpiSize:24
-              |STRING:inv
-              |vpiConstType:6
-          |vpiOperand:
-          \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiActual:
-            \_ref_obj: (bp_unicore_cfg_p), line:26:21, endln:26:37
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-              |vpiName:bp_unicore_cfg_p
-            |vpiActual:
-            \_ref_obj: (work@top.cc_x_dim), line:27:26, endln:27:34
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:26:21, endln:27:34
-              |vpiName:cc_x_dim
-              |vpiFullName:work@top.cc_x_dim
-            |vpiName:bp_unicore_cfg_p.cc_x_dim
-          |vpiOperand:
-          \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-            |vpiParent:
-            \_operation: , line:24:15, endln:29:34
-            |vpiActual:
-            \_ref_obj: (bp_unicore_cfg_p), line:28:21, endln:28:37
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-              |vpiName:bp_unicore_cfg_p
-            |vpiActual:
-            \_ref_obj: (work@top.cc_x_dim), line:29:26, endln:29:34
-              |vpiParent:
-              \_hier_path: (bp_unicore_cfg_p.cc_x_dim), line:28:21, endln:29:34
-              |vpiName:cc_x_dim
-              |vpiFullName:work@top.cc_x_dim
-            |vpiName:bp_unicore_cfg_p.cc_x_dim
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:24:15, endln:29:34
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (cc_x_dim), line:24:5, endln:24:13
+        |vpiFullName:work@top
+        |vpiActual:
+        \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiOpType:75
+      |vpiOperand:
+      \_constant: , line:12:18, endln:12:19
+        |vpiParent:
+        \_operation: , line:23:7, endln:30:8
+        |vpiDecompile:1
+        |vpiSize:32
+        |UINT:1
+        |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.bp_multicore_1_cce_ucode_cfg_p), line:22:29, endln:22:59
       |vpiParent:
@@ -1991,71 +1816,13 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:33:7, endln:40:10
         |vpiPattern:
-        \_operation: , line:34:15, endln:39:34
+        \_constant: , line:12:18, endln:12:19
           |vpiParent:
           \_tagged_pattern: , line:34:15, endln:39:34
-          |vpiOpType:32
-          |vpiOperand:
-          \_operation: , line:34:16, endln:35:43
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiOpType:14
-            |vpiOperand:
-            \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-              |vpiParent:
-              \_operation: , line:34:16, endln:35:43
-              |vpiActual:
-              \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:34:16, endln:34:54
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-                |vpiName:bp_multicore_cce_ucode_half_override_p
-              |vpiActual:
-              \_ref_obj: (work@top.cc_x_dim), line:35:26, endln:35:34
-                |vpiParent:
-                \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:34:16, endln:35:34
-                |vpiName:cc_x_dim
-                |vpiFullName:work@top.cc_x_dim
-              |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
-            |vpiOperand:
-            \_constant: , line:35:38, endln:35:43
-              |vpiParent:
-              \_operation: , line:34:16, endln:35:43
-              |vpiDecompile:"inv"
-              |vpiSize:24
-              |STRING:inv
-              |vpiConstType:6
-          |vpiOperand:
-          \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiActual:
-            \_ref_obj: (bp_multicore_1_cce_ucode_cfg_p), line:36:21, endln:36:51
-              |vpiParent:
-              \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-              |vpiName:bp_multicore_1_cce_ucode_cfg_p
-            |vpiActual:
-            \_ref_obj: (work@top.cc_x_dim), line:37:26, endln:37:34
-              |vpiParent:
-              \_hier_path: (bp_multicore_1_cce_ucode_cfg_p.cc_x_dim), line:36:21, endln:37:34
-              |vpiName:cc_x_dim
-              |vpiFullName:work@top.cc_x_dim
-            |vpiName:bp_multicore_1_cce_ucode_cfg_p.cc_x_dim
-          |vpiOperand:
-          \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-            |vpiParent:
-            \_operation: , line:34:15, endln:39:34
-            |vpiActual:
-            \_ref_obj: (bp_multicore_cce_ucode_half_override_p), line:38:21, endln:38:59
-              |vpiParent:
-              \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-              |vpiName:bp_multicore_cce_ucode_half_override_p
-            |vpiActual:
-            \_ref_obj: (work@top.cc_x_dim), line:39:26, endln:39:34
-              |vpiParent:
-              \_hier_path: (bp_multicore_cce_ucode_half_override_p.cc_x_dim), line:38:21, endln:39:34
-              |vpiName:cc_x_dim
-              |vpiFullName:work@top.cc_x_dim
-            |vpiName:bp_multicore_cce_ucode_half_override_p.cc_x_dim
+          |vpiDecompile:1
+          |vpiSize:32
+          |UINT:1
+          |vpiConstType:9
         |vpiTypespec:
         \_ref_typespec: (work@top)
           |vpiParent:
@@ -2087,6 +1854,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:42:41, endln:46:4
       |vpiOpType:33
+      |vpiReordered:1
       |vpiOperand:
       \_ref_obj: (work@top.bp_multicore_cce_ucode_half_cfg_p), line:45:5, endln:45:38
         |vpiParent:
@@ -2223,18 +1991,79 @@ design: (unnamed)
   |vpiInstance:
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
   |vpiSigned:1
-\_string_typespec: (cc_x_dim), line:12:7, endln:12:15
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
-  \_tagged_pattern: , line:12:18, endln:12:19
-  |vpiName:cc_x_dim
-\_string_typespec: (default), line:19:7, endln:19:14
+  \_ref_typespec: (bp_common_aviary_pkg)
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
   |vpiParent:
-  \_tagged_pattern: , line:19:17, endln:19:22
-  |vpiName:default
-\_string_typespec: (cc_x_dim), line:24:5, endln:24:13
+  \_ref_typespec: (bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
+\_operation: , line:23:7, endln:30:8
   |vpiParent:
-  \_tagged_pattern: , line:24:15, endln:29:34
-  |vpiName:cc_x_dim
+  \_param_assign: , line:22:29, endln:30:8
+  |vpiTypespec:
+  \_ref_typespec: (bp_common_aviary_pkg)
+    |vpiParent:
+    \_operation: , line:23:7, endln:30:8
+    |vpiFullName:bp_common_aviary_pkg
+    |vpiActual:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  |vpiOpType:75
+  |vpiOperand:
+  \_constant: , line:12:18, endln:12:19
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  |vpiParent:
+  \_ref_typespec: (bp_common_aviary_pkg)
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
+  |vpiParent:
+  \_ref_typespec: (bp_common_aviary_pkg::bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
 \_string_typespec: (cc_x_dim), line:34:5, endln:34:13
   |vpiParent:
   \_tagged_pattern: , line:34:15, endln:39:34
@@ -2249,13 +2078,20 @@ design: (unnamed)
     |vpiParent:
     \_packed_array_typespec: , line:42:12, endln:42:40
     |vpiLeftRange:
-    \_ref_obj: (bp_common_aviary_pkg::all_cfgs_gp::max_cfgs), line:42:29, endln:42:37
+    \_constant: , line:42:29, endln:42:37
       |vpiParent:
       \_range: , line:42:28, endln:42:40
-      |vpiName:max_cfgs
-      |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp::max_cfgs
-      |vpiActual:
-      \_constant: , line:3:28, endln:3:29
+      |vpiDecompile:1
+      |vpiSize:32
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (bp_common_aviary_pkg::all_cfgs_gp)
+        |vpiParent:
+        \_constant: , line:42:29, endln:42:37
+        |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp
+        |vpiActual:
+        \_int_typespec: , line:3:3, endln:3:29
+      |vpiConstType:9
     |vpiRightRange:
     \_constant: , line:42:38, endln:42:39
       |vpiParent:
@@ -2271,6 +2107,9 @@ design: (unnamed)
     |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp
     |vpiActual:
     \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+\_int_typespec: , line:3:3, endln:3:29
+  |vpiParent:
+  \_ref_typespec: (bp_common_aviary_pkg::all_cfgs_gp)
 \_bit_typespec: , line:48:15, endln:48:31
   |vpiInstance:
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
@@ -2279,12 +2118,19 @@ design: (unnamed)
     |vpiParent:
     \_bit_typespec: , line:48:15, endln:48:31
     |vpiLeftRange:
-    \_ref_obj: (max_cfgs), line:48:20, endln:48:28
+    \_constant: , line:48:20, endln:48:28
       |vpiParent:
       \_range: , line:48:19, endln:48:31
-      |vpiName:max_cfgs
-      |vpiActual:
-      \_constant: , line:3:28, endln:3:29
+      |vpiDecompile:1
+      |vpiSize:32
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: 
+        |vpiParent:
+        \_constant: , line:48:20, endln:48:28
+        |vpiActual:
+        \_int_typespec: , line:3:3, endln:3:29
+      |vpiConstType:9
     |vpiRightRange:
     \_constant: , line:48:29, endln:48:30
       |vpiParent:
@@ -2293,6 +2139,9 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:3:3, endln:3:29
+  |vpiParent:
+  \_ref_typespec: 
 \_packed_array_typespec: , line:42:12, endln:42:40
   |vpiParent:
   \_ref_typespec: (work@top.all_cfgs_gp)
@@ -2303,11 +2152,20 @@ design: (unnamed)
     |vpiParent:
     \_packed_array_typespec: , line:42:12, endln:42:40
     |vpiLeftRange:
-    \_ref_obj: (work@top.all_cfgs_gp.max_cfgs), line:42:29, endln:42:37
+    \_constant: , line:42:29, endln:42:37
       |vpiParent:
       \_range: , line:42:28, endln:42:40
-      |vpiName:max_cfgs
-      |vpiFullName:work@top.all_cfgs_gp.max_cfgs
+      |vpiDecompile:1
+      |vpiSize:32
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (work@top.all_cfgs_gp)
+        |vpiParent:
+        \_constant: , line:42:29, endln:42:37
+        |vpiFullName:work@top.all_cfgs_gp
+        |vpiActual:
+        \_int_typespec: , line:3:3, endln:3:29
+      |vpiConstType:9
     |vpiRightRange:
     \_constant: , line:42:38, endln:42:39
       |vpiParent:
@@ -2323,6 +2181,9 @@ design: (unnamed)
     |vpiFullName:work@top.all_cfgs_gp
     |vpiActual:
     \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+\_int_typespec: , line:3:3, endln:3:29
+  |vpiParent:
+  \_ref_typespec: (work@top.all_cfgs_gp)
 \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top.all_cfgs_gp)
@@ -2512,10 +2373,36 @@ design: (unnamed)
 \_int_typespec: , line:3:3, endln:3:29
   |vpiParent:
   \_ref_typespec: (work@top.max_cfgs)
-\_string_typespec: (cc_x_dim), line:12:7, endln:12:15
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top)
-  |vpiName:cc_x_dim
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
+  |vpiParent:
+  \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
 \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top.bp_default_cfg_p)
@@ -2543,6 +2430,36 @@ design: (unnamed)
 \_integer_typespec: , line:7:5, endln:7:12
   |vpiParent:
   \_ref_typespec: (work@top.bp_default_cfg_p.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  |vpiParent:
+  \_ref_typespec: (work@top)
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
+  |vpiParent:
+  \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
   |vpiInstance:
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
   |vpiSigned:1
@@ -2576,10 +2493,36 @@ design: (unnamed)
   |vpiInstance:
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
   |vpiSigned:1
-\_string_typespec: (default), line:19:7, endln:19:14
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top)
-  |vpiName:default
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
+  |vpiParent:
+  \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
 \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top.bp_multicore_cce_ucode_half_override_p)
@@ -2610,10 +2553,36 @@ design: (unnamed)
   |vpiInstance:
   \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
   |vpiSigned:1
-\_string_typespec: (cc_x_dim), line:24:5, endln:24:13
+\_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top)
-  |vpiName:cc_x_dim
+  |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+    |vpiParent:
+    \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+    |vpiName:cc_x_dim
+    |vpiTypespec:
+    \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+      |vpiParent:
+      \_typespec_member: (cc_x_dim), line:7:13, endln:7:21
+      |vpiFullName:work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim
+      |vpiActual:
+      \_integer_typespec: , line:7:5, endln:7:12
+    |vpiRefFile:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv
+    |vpiRefLineNo:7
+    |vpiRefColumnNo:5
+    |vpiRefEndLineNo:7
+    |vpiRefEndColumnNo:12
+\_integer_typespec: , line:7:5, endln:7:12
+  |vpiParent:
+  \_ref_typespec: (work@top.bp_common_aviary_pkg::bp_proc_param_s.cc_x_dim)
+  |vpiInstance:
+  \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiSigned:1
 \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top.bp_multicore_1_cce_ucode_cfg_p)
@@ -2688,11 +2657,20 @@ design: (unnamed)
     |vpiParent:
     \_packed_array_typespec: , line:42:12, endln:42:40
     |vpiLeftRange:
-    \_ref_obj: (work@top.all_cfgs_gp.max_cfgs), line:42:29, endln:42:37
+    \_constant: , line:42:29, endln:42:37
       |vpiParent:
       \_range: , line:42:28, endln:42:40
-      |vpiName:max_cfgs
-      |vpiFullName:work@top.all_cfgs_gp.max_cfgs
+      |vpiDecompile:1
+      |vpiSize:32
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (work@top.all_cfgs_gp)
+        |vpiParent:
+        \_constant: , line:42:29, endln:42:37
+        |vpiFullName:work@top.all_cfgs_gp
+        |vpiActual:
+        \_int_typespec: , line:3:3, endln:3:29
+      |vpiConstType:9
     |vpiRightRange:
     \_constant: , line:42:38, endln:42:39
       |vpiParent:
@@ -2708,6 +2686,9 @@ design: (unnamed)
     |vpiFullName:work@top.all_cfgs_gp
     |vpiActual:
     \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+\_int_typespec: , line:3:3, endln:3:29
+  |vpiParent:
+  \_ref_typespec: (work@top.all_cfgs_gp)
 \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiParent:
   \_ref_typespec: (work@top.all_cfgs_gp)
@@ -2805,5 +2786,5 @@ design: (unnamed)
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv | ${SURELOG_DIR}/build/regression/BlackParrotStructParam/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv     | ${SURELOG_DIR}/build/regression/BlackParrotStructParam/roundtrip/dut_000.sv     | 35 | 66 |
+[roundtrip]: ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv     | ${SURELOG_DIR}/build/regression/BlackParrotStructParam/roundtrip/dut_000.sv     | 39 | 66 |
 ============================== End RoundTrip Results ==============================

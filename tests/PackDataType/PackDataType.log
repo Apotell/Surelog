@@ -189,6 +189,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackDataType/dut.sv:13:1: No timescale set for "OK".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackDataType/dut.sv:16:1: No timescale set for "kmac_keymgr".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackDataType/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackDataType/dut.sv:13:1: Compile module "work@OK".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackDataType/dut.sv:16:1: Compile module "work@kmac_keymgr".
 AST_DEBUG_BEGIN
@@ -454,7 +455,7 @@ begin                                                  1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              13
+constant                                              15
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -462,7 +463,7 @@ enum_var                                               1
 function                                               9
 gen_if                                                 1
 hier_path                                              2
-int_typespec                                          12
+int_typespec                                          13
 int_var                                                4
 io_decl                                               11
 logic_net                                              2
@@ -476,8 +477,8 @@ parameter                                              3
 port                                                   1
 range                                                  2
 ref_module                                             1
-ref_obj                                                8
-ref_typespec                                          23
+ref_obj                                                7
+ref_typespec                                          24
 struct_typespec                                        1
 sys_func_call                                          1
 task                                                   9
@@ -557,7 +558,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:16, endln:3:30
       |vpiDecompile:256
-      |vpiSize:64
+      |vpiSize:32
       |UINT:256
       |vpiTypespec:
       \_ref_typespec: (keymgr_pkg)
@@ -1223,26 +1224,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: , line:8:5, endln:8:26
     |vpiLeftRange:
-    \_operation: , line:8:12, endln:8:23
+    \_constant: , line:8:12, endln:8:20
       |vpiParent:
       \_range: , line:8:11, endln:8:26
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (keymgr_pkg::keymgr_pkg::kmac_data_rsp_t::digest_share0::KeyWidth), line:8:12, endln:8:20
-        |vpiParent:
-        \_operation: , line:8:12, endln:8:23
-        |vpiName:KeyWidth
-        |vpiFullName:keymgr_pkg::keymgr_pkg::kmac_data_rsp_t::digest_share0::KeyWidth
-        |vpiActual:
-        \_constant: , line:3:27, endln:3:30
-      |vpiOperand:
-      \_constant: , line:8:21, endln:8:23
-        |vpiParent:
-        \_operation: , line:8:12, endln:8:23
-        |vpiDecompile:10
-        |vpiSize:64
-        |UINT:10
-        |vpiConstType:9
+      |vpiDecompile:246
+      |vpiSize:64
+      |INT:246
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:8:24, endln:8:25
       |vpiParent:

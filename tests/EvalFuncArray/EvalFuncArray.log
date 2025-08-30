@@ -199,6 +199,7 @@ n<> u<193> t<Top_level_rule> c<1> l<1:1> el<27:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: No timescale set for "earlgrey".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: Compile package "earlgrey".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv
@@ -464,7 +465,7 @@ bit_select                                             2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              27
+constant                                              55
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -478,15 +479,16 @@ int_var                                                6
 integer_typespec                                       1
 integer_var                                            1
 io_decl                                               12
-logic_var                                              1
-module_inst                                            1
+logic_typespec                                         8
+logic_var                                             10
+module_inst                                           10
 operation                                              7
 package                                                2
-param_assign                                           4
-parameter                                              4
+param_assign                                          16
+parameter                                             16
 range                                                  1
-ref_obj                                                9
-ref_typespec                                          24
+ref_obj                                               10
+ref_typespec                                          34
 return_stmt                                            1
 task                                                   9
 === UHDM Object Stats End ===
@@ -574,47 +576,11 @@ design: (unnamed)
     |vpiParent:
     \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
     |vpiRhs:
-    \_func_call: (max_info_pages), line:3:33, endln:3:47
-      |vpiParent:
-      \_param_assign: , line:3:15, endln:9:5
-      |vpiArgument:
-      \_operation: , line:3:48, endln:9:4
-        |vpiParent:
-        \_func_call: (max_info_pages), line:3:33, endln:3:47
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:4:5, endln:4:7
-          |vpiDecompile:10
-          |vpiSize:64
-          |UINT:10
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:5:5, endln:5:6
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:6:5, endln:6:7
-          |vpiDecompile:14
-          |vpiSize:64
-          |UINT:14
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:7:5, endln:7:7
-          |vpiDecompile:18
-          |vpiSize:64
-          |UINT:18
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:8:5, endln:8:7
-          |vpiDecompile:12
-          |vpiSize:64
-          |UINT:12
-          |vpiConstType:9
-      |vpiName:max_info_pages
-      |vpiFunction:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
+    \_constant: , line:7:5, endln:7:7
+      |vpiDecompile:18
+      |vpiSize:64
+      |UINT:18
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
   |vpiParamAssign:
@@ -626,7 +592,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:10:15, endln:10:28
       |vpiDecompile:5
-      |vpiSize:64
+      |vpiSize:32
       |UINT:5
       |vpiTypespec:
       \_ref_typespec: (earlgrey)

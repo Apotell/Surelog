@@ -240,27 +240,28 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:17:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:21:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:17:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:13:1: Compile module "work@foo".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:10:1: Compile module "work@foo2".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:21:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              43
+constant                                              41
 design                                                 1
 import_typespec                                        1
-int_typespec                                           5
+int_typespec                                           7
 logic_typespec                                        12
 module_inst                                            5
-operation                                             11
+operation                                              2
 package                                                1
 packed_array_typespec                                  1
 param_assign                                           9
 parameter                                             11
 range                                                 13
 ref_module                                             3
-ref_obj                                               12
-ref_typespec                                          29
+ref_obj                                                1
+ref_typespec                                          31
 struct_typespec                                        5
 typespec_member                                        5
 === UHDM Object Stats End ===
@@ -296,7 +297,7 @@ design: (unnamed)
   \_parameter: (pkg::InitDefault), line:7:21, endln:7:32
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
-    |BIN:1
+    |UINT:18446744073709551615
     |vpiTypespec:
     \_ref_typespec: (pkg::InitDefault)
       |vpiParent:
@@ -316,7 +317,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:32
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (pkg)
@@ -336,9 +337,9 @@ design: (unnamed)
     \_constant: , line:7:35, endln:7:37
       |vpiParent:
       \_param_assign: , line:7:21, endln:7:37
-      |vpiDecompile:'1
-      |vpiSize:-1
-      |BIN:1
+      |vpiDecompile:18446744073709551615
+      |vpiSize:64
+      |UINT:18446744073709551615
       |vpiTypespec:
       \_ref_typespec: (pkg)
         |vpiParent:
@@ -346,7 +347,7 @@ design: (unnamed)
         |vpiFullName:pkg
         |vpiActual:
         \_struct_typespec: (pkg::init_t), line:4:11, endln:6:4
-      |vpiConstType:3
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (pkg::InitDefault), line:7:21, endln:7:32
   |vpiTypedef:
@@ -386,26 +387,13 @@ design: (unnamed)
       |vpiParent:
       \_logic_typespec: (pkg::key), line:3:11, endln:3:28
       |vpiLeftRange:
-      \_operation: , line:3:18, endln:3:25
+      \_constant: , line:3:18, endln:3:23
         |vpiParent:
         \_range: , line:3:17, endln:3:28
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (pkg::pkg::key::Width), line:3:18, endln:3:23
-          |vpiParent:
-          \_operation: , line:3:18, endln:3:25
-          |vpiName:Width
-          |vpiFullName:pkg::pkg::key::Width
-          |vpiActual:
-          \_constant: , line:2:30, endln:2:32
-        |vpiOperand:
-        \_constant: , line:3:24, endln:3:25
-          |vpiParent:
-          \_operation: , line:3:18, endln:3:25
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
+        |vpiDecompile:63
+        |vpiSize:64
+        |INT:63
+        |vpiConstType:7
       |vpiRightRange:
       \_constant: , line:3:26, endln:3:27
         |vpiParent:
@@ -424,7 +412,7 @@ design: (unnamed)
   \_parameter: (work@dut.InitDefault), line:7:21, endln:7:32
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:17:1, endln:19:10
-    |BIN:1
+    |UINT:18446744073709551615
     |vpiTypespec:
     \_ref_typespec: (work@dut.InitDefault)
       |vpiParent:
@@ -474,7 +462,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:17, endln:2:32
       |vpiDecompile:64
-      |vpiSize:64
+      |vpiSize:32
       |UINT:64
       |vpiTypespec:
       \_ref_typespec: (work@dut)
@@ -508,9 +496,9 @@ design: (unnamed)
     \_constant: , line:7:35, endln:7:37
       |vpiParent:
       \_param_assign: , line:7:21, endln:7:37
-      |vpiDecompile:'1
-      |vpiSize:-1
-      |BIN:1
+      |vpiDecompile:18446744073709551615
+      |vpiSize:64
+      |UINT:18446744073709551615
       |vpiTypespec:
       \_ref_typespec: (work@dut)
         |vpiParent:
@@ -518,12 +506,12 @@ design: (unnamed)
         |vpiFullName:work@dut
         |vpiActual:
         \_struct_typespec: (pkg::init_t), line:4:11, endln:6:4
-      |vpiConstType:3
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@dut.InitDefault), line:7:21, endln:7:32
       |vpiParent:
       \_param_assign: , line:7:21, endln:7:37
-      |BIN:1
+      |UINT:18446744073709551615
       |vpiTypespec:
       \_ref_typespec: (work@dut.InitDefault)
         |vpiParent:
@@ -691,24 +679,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.Init.pkg::init_t.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.Init.pkg::init_t.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -759,24 +736,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.InitDefault.pkg::init_t.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.InitDefault.pkg::init_t.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -796,24 +762,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.InitDefault.pkg::init_t.key.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.InitDefault.pkg::init_t.key.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -882,24 +837,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.pkg::init_t.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.pkg::init_t.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -919,24 +863,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.pkg::init_t.key.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.pkg::init_t.key.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -987,24 +920,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.InitDefault.pkg::init_t.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.InitDefault.pkg::init_t.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -1024,24 +946,13 @@ design: (unnamed)
     |vpiParent:
     \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiLeftRange:
-    \_operation: , line:3:18, endln:3:25
+    \_constant: , line:3:18, endln:3:23
       |vpiParent:
       \_range: , line:3:17, endln:3:28
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.InitDefault.pkg::init_t.key.key.key.Width), line:3:18, endln:3:23
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiName:Width
-        |vpiFullName:work@dut.InitDefault.pkg::init_t.key.key.key.Width
-      |vpiOperand:
-      \_constant: , line:3:24, endln:3:25
-        |vpiParent:
-        \_operation: , line:3:18, endln:3:25
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
+      |vpiDecompile:63
+      |vpiSize:64
+      |INT:63
+      |vpiConstType:7
     |vpiRightRange:
     \_constant: , line:3:26, endln:3:27
       |vpiParent:
@@ -1104,5 +1015,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv | ${SURELOG_DIR}/build/regression/StructUnsizedVal/roundtrip/dut_000.sv | 7 | 23 |
+[roundtrip]: ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv | ${SURELOG_DIR}/build/regression/StructUnsizedVal/roundtrip/dut_000.sv | 8 | 23 |
 ============================== End RoundTrip Results ==============================

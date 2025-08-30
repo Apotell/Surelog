@@ -453,6 +453,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:14:3: No timescale set for "tlul_adapter_host".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:25:3: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:2:1: Compile package "top_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:14:3: Compile module "work@tlul_adapter_host".
 [INF:CP0303] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:25:3: Compile module "work@top".
 AST_DEBUG_BEGIN
@@ -722,7 +723,7 @@ begin                                                  2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              39
+constant                                              51
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -732,7 +733,7 @@ function                                               9
 hier_path                                              1
 if_stmt                                                1
 initial                                                1
-int_typespec                                          33
+int_typespec                                          37
 int_var                                                4
 integer_typespec                                       1
 io_decl                                               11
@@ -745,12 +746,12 @@ package                                                2
 param_assign                                          15
 parameter                                             15
 range                                                  3
-ref_obj                                               18
-ref_typespec                                          58
+ref_obj                                               14
+ref_typespec                                          64
 string_typespec                                        2
 struct_typespec                                        2
 struct_var                                             1
-sys_func_call                                          6
+sys_func_call                                          2
 tagged_pattern                                         2
 task                                                   9
 typespec_member                                        5
@@ -889,6 +890,7 @@ design: (unnamed)
   \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |UINT:4
     |vpiTypespec:
     \_ref_typespec: (top_pkg::TL_DBW)
       |vpiParent:
@@ -904,6 +906,7 @@ design: (unnamed)
   \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |UINT:2
     |vpiTypespec:
     \_ref_typespec: (top_pkg::TL_SZW)
       |vpiParent:
@@ -924,7 +927,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:18, endln:4:26
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -945,7 +948,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:5:18, endln:5:26
       |vpiDecompile:32
-      |vpiSize:64
+      |vpiSize:32
       |UINT:32
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -966,7 +969,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:18, endln:6:26
       |vpiDecompile:8
-      |vpiSize:64
+      |vpiSize:32
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -987,7 +990,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:7:18, endln:7:26
       |vpiDecompile:1
-      |vpiSize:64
+      |vpiSize:32
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -1008,7 +1011,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:8:18, endln:8:27
       |vpiDecompile:16
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16
       |vpiTypespec:
       \_ref_typespec: (top_pkg)
@@ -1025,26 +1028,20 @@ design: (unnamed)
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |vpiRhs:
-    \_operation: , line:9:26, endln:9:34
+    \_constant: , line:9:26, endln:9:31
       |vpiParent:
       \_param_assign: , line:9:18, endln:9:35
-      |vpiOpType:23
-      |vpiOperand:
-      \_ref_obj: (top_pkg::TL_DW), line:9:26, endln:9:31
+      |vpiDecompile:4
+      |vpiSize:32
+      |UINT:4
+      |vpiTypespec:
+      \_ref_typespec: (top_pkg)
         |vpiParent:
-        \_operation: , line:9:26, endln:9:34
-        |vpiName:TL_DW
-        |vpiFullName:top_pkg::TL_DW
+        \_constant: , line:9:26, endln:9:31
+        |vpiFullName:top_pkg
         |vpiActual:
-        \_constant: , line:5:24, endln:5:26
-      |vpiOperand:
-      \_constant: , line:9:33, endln:9:34
-        |vpiParent:
-        \_operation: , line:9:26, endln:9:34
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
+        \_int_typespec: , line:9:14, endln:9:17
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
   |vpiParamAssign:
@@ -1052,36 +1049,20 @@ design: (unnamed)
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |vpiRhs:
-    \_sys_func_call: ($clog2), line:10:25, endln:10:49
+    \_constant: , line:10:25, endln:10:49
       |vpiParent:
       \_param_assign: , line:10:18, endln:10:49
-      |vpiArgument:
-      \_operation: , line:10:32, endln:10:48
+      |vpiDecompile:2
+      |vpiSize:32
+      |UINT:2
+      |vpiTypespec:
+      \_ref_typespec: (top_pkg)
         |vpiParent:
-        \_sys_func_call: ($clog2), line:10:25, endln:10:49
-        |vpiOpType:24
-        |vpiOperand:
-        \_sys_func_call: ($clog2), line:10:32, endln:10:46
-          |vpiParent:
-          \_operation: , line:10:32, endln:10:48
-          |vpiArgument:
-          \_ref_obj: (top_pkg::TL_DBW), line:10:39, endln:10:45
-            |vpiParent:
-            \_sys_func_call: ($clog2), line:10:32, endln:10:46
-            |vpiName:TL_DBW
-            |vpiFullName:top_pkg::TL_DBW
-            |vpiActual:
-            \_operation: , line:9:26, endln:9:34
-          |vpiName:$clog2
-        |vpiOperand:
-        \_constant: , line:10:47, endln:10:48
-          |vpiParent:
-          \_operation: , line:10:32, endln:10:48
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiName:$clog2
+        \_constant: , line:10:25, endln:10:49
+        |vpiFullName:top_pkg
+        |vpiActual:
+        \_int_typespec: , line:10:14, endln:10:17
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
   |vpiDefName:top_pkg
@@ -2023,6 +2004,7 @@ design: (unnamed)
   \_tagged_pattern: , line:17:18, endln:17:22
   |vpiName:a_param
 \_int_typespec: 
+  |UINT:2
 \_string_typespec: (a_size), line:18:7, endln:18:13
   |vpiParent:
   \_tagged_pattern: , line:18:18, endln:18:44

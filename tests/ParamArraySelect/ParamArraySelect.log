@@ -514,6 +514,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:33:1: No timescale set for "otp_ctrl_lci".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:51:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:1:1: Compile package "otp_ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:10:1: Compile package "otp_ctrl_part_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:33:1: Compile module "work@otp_ctrl_lci".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:51:1: Compile module "work@top".
 AST_DEBUG_BEGIN
@@ -782,7 +784,7 @@ bit_select                                             3
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              74
+constant                                              81
 design                                                 1
 enum_const                                             7
 enum_typespec                                          2
@@ -792,14 +794,14 @@ gen_for                                                1
 gen_if                                                 1
 hier_path                                              4
 import_typespec                                        3
-int_typespec                                          22
+int_typespec                                          29
 int_var                                                4
 integer_typespec                                       2
 io_decl                                               11
 logic_net                                              3
 logic_typespec                                        12
 logic_var                                              1
-module_inst                                            4
+module_inst                                            5
 named_begin                                            1
 operation                                             33
 package                                                3
@@ -807,8 +809,8 @@ param_assign                                          13
 parameter                                             17
 range                                                 19
 ref_module                                             2
-ref_obj                                               25
-ref_typespec                                          72
+ref_obj                                               18
+ref_typespec                                          79
 ref_var                                                1
 string_typespec                                       16
 struct_typespec                                        4
@@ -891,7 +893,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -998,13 +1000,20 @@ design: (unnamed)
         \_range: , line:12:36, endln:12:43
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (otp_ctrl_part_pkg::PartInfo::NumPart), line:12:36, endln:12:43
+        \_constant: , line:12:36, endln:12:43
           |vpiParent:
           \_operation: , line:12:36, endln:12:43
-          |vpiName:NumPart
-          |vpiFullName:otp_ctrl_part_pkg::PartInfo::NumPart
-          |vpiActual:
-          \_constant: , line:6:27, endln:6:28
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (otp_ctrl_part_pkg::PartInfo)
+            |vpiParent:
+            \_constant: , line:12:36, endln:12:43
+            |vpiFullName:otp_ctrl_part_pkg::PartInfo
+            |vpiActual:
+            \_int_typespec: , line:6:13, endln:6:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiSize:64
@@ -1022,7 +1031,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_part_pkg)
@@ -1661,7 +1670,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@otp_ctrl_lci)
@@ -1851,11 +1860,20 @@ design: (unnamed)
         \_range: , line:12:36, endln:12:43
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@top.PartInfo.NumPart), line:12:36, endln:12:43
+        \_constant: , line:12:36, endln:12:43
           |vpiParent:
           \_operation: , line:12:36, endln:12:43
-          |vpiName:NumPart
-          |vpiFullName:work@top.PartInfo.NumPart
+          |vpiDecompile:2
+          |vpiSize:32
+          |UINT:2
+          |vpiTypespec:
+          \_ref_typespec: (work@top.PartInfo)
+            |vpiParent:
+            \_constant: , line:12:36, endln:12:43
+            |vpiFullName:work@top.PartInfo
+            |vpiActual:
+            \_int_typespec: , line:6:13, endln:6:16
+          |vpiConstType:9
         |vpiOperand:
         \_constant: 
           |vpiParent:
@@ -1891,7 +1909,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:6:17, endln:6:28
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -2042,11 +2060,20 @@ design: (unnamed)
           \_range: , line:12:36, endln:12:43
           |vpiOpType:11
           |vpiOperand:
-          \_ref_obj: (work@top.PartInfo.NumPart), line:12:36, endln:12:43
+          \_constant: , line:12:36, endln:12:43
             |vpiParent:
             \_operation: , line:12:36, endln:12:43
-            |vpiName:NumPart
-            |vpiFullName:work@top.PartInfo.NumPart
+            |vpiDecompile:2
+            |vpiSize:32
+            |UINT:2
+            |vpiTypespec:
+            \_ref_typespec: (work@top.PartInfo)
+              |vpiParent:
+              \_constant: , line:12:36, endln:12:43
+              |vpiFullName:work@top.PartInfo
+              |vpiActual:
+              \_int_typespec: , line:6:13, endln:6:16
+            |vpiConstType:9
           |vpiOperand:
           \_constant: 
             |vpiParent:
@@ -2397,6 +2424,12 @@ design: (unnamed)
   |vpiInstance:
   \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
   |vpiSigned:1
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
+  \_ref_typespec: (otp_ctrl_part_pkg::PartInfo)
+  |vpiInstance:
+  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+  |vpiSigned:1
 \_array_typespec: , line:12:14, endln:12:44
   |vpiParent:
   \_parameter: (otp_ctrl_part_pkg::PartInfo), line:12:26, endln:12:34
@@ -2474,11 +2507,20 @@ design: (unnamed)
       \_range: , line:12:36, endln:12:43
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@top.PartInfo.NumPart), line:12:36, endln:12:43
+      \_constant: , line:12:36, endln:12:43
         |vpiParent:
         \_operation: , line:12:36, endln:12:43
-        |vpiName:NumPart
-        |vpiFullName:work@top.PartInfo.NumPart
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@top.PartInfo)
+          |vpiParent:
+          \_constant: , line:12:36, endln:12:43
+          |vpiFullName:work@top.PartInfo
+          |vpiActual:
+          \_int_typespec: , line:6:13, endln:6:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -2493,6 +2535,12 @@ design: (unnamed)
     |vpiFullName:work@top.PartInfo
     |vpiActual:
     \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
+  \_ref_typespec: (work@top.PartInfo)
+  |vpiInstance:
+  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+  |vpiSigned:1
 \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
   |vpiParent:
   \_ref_typespec: (work@top.PartInfo)
@@ -2584,6 +2632,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
+  \_ref_typespec: (work@top.PartInfo)
+  |vpiInstance:
+  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+  |vpiSigned:1
 \_int_typespec: , line:6:13, endln:6:16
   |vpiParent:
   \_ref_typespec: (work@top)
@@ -2633,11 +2687,20 @@ design: (unnamed)
       \_range: , line:12:36, endln:12:43
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (work@top.PartInfo.NumPart), line:12:36, endln:12:43
+      \_constant: , line:12:36, endln:12:43
         |vpiParent:
         \_operation: , line:12:36, endln:12:43
-        |vpiName:NumPart
-        |vpiFullName:work@top.PartInfo.NumPart
+        |vpiDecompile:2
+        |vpiSize:32
+        |UINT:2
+        |vpiTypespec:
+        \_ref_typespec: (work@top.PartInfo)
+          |vpiParent:
+          \_constant: , line:12:36, endln:12:43
+          |vpiFullName:work@top.PartInfo
+          |vpiActual:
+          \_int_typespec: , line:6:13, endln:6:16
+        |vpiConstType:9
       |vpiOperand:
       \_constant: 
         |vpiParent:
@@ -2652,6 +2715,12 @@ design: (unnamed)
     |vpiFullName:work@top.PartInfo
     |vpiActual:
     \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
+  \_ref_typespec: (work@top.PartInfo)
+  |vpiInstance:
+  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+  |vpiSigned:1
 \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
   |vpiParent:
   \_ref_typespec: (work@top.PartInfo)
@@ -2743,6 +2812,12 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_int_typespec: , line:6:13, endln:6:16
+  |vpiParent:
+  \_ref_typespec: (work@top.PartInfo)
+  |vpiInstance:
+  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+  |vpiSigned:1
 \_int_typespec: , line:58:13, endln:58:16
   |vpiParent:
   \_parameter: (work@top.OtpByteAddrWidth), line:58:17, endln:58:33

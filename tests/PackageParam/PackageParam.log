@@ -225,6 +225,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageParam/dut.sv:19:1: No timescale set for "otp_ctrl_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageParam/dut.sv:28:1: No timescale set for "otp_ctrl_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:2:1: Compile package "lc_ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:19:1: Compile package "otp_ctrl_reg_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:28:1: Compile package "otp_ctrl_pkg".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/PackageParam/builtin.sv
@@ -488,27 +491,27 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              43
+constant                                              67
 design                                                 1
 enum_const                                             7
 enum_typespec                                          2
 enum_var                                               1
 function                                               9
 import_typespec                                        2
-int_typespec                                          28
+int_typespec                                          32
 int_var                                                4
 io_decl                                               11
-logic_typespec                                         5
+logic_typespec                                         9
 logic_var                                              1
 module_inst                                            3
 operation                                              9
 package                                                4
 param_assign                                          17
 parameter                                             20
-range                                                  5
-ref_obj                                               11
-ref_typespec                                          50
-sys_func_call                                          3
+range                                                  9
+ref_obj                                                3
+ref_typespec                                          59
+sys_func_call                                          1
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageParam/slpp_all/surelog.uhdm ...
@@ -659,7 +662,6 @@ design: (unnamed)
       \_enum_typespec: (lc_ctrl_pkg::lc_state_e), line:10:3, endln:14:16
       |vpiName:LcStTestUnlocked0
       |BIN:00000000000000000000000000000000
-      |vpiDecompile:{A11,A10}
       |vpiSize:32
   |vpiDefName:lc_ctrl_pkg
 |uhdmallPackages:
@@ -722,7 +724,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:22:17, endln:22:39
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_reg_pkg)
@@ -743,7 +745,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:23:17, endln:23:38
       |vpiDecompile:11
-      |vpiSize:64
+      |vpiSize:32
       |UINT:11
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_reg_pkg)
@@ -764,7 +766,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:24:17, endln:24:36
       |vpiDecompile:9
-      |vpiSize:64
+      |vpiSize:32
       |UINT:9
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_reg_pkg)
@@ -850,6 +852,7 @@ design: (unnamed)
   \_parameter: (otp_ctrl_pkg::OtpAddrWidth), line:35:17, endln:35:29
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:28:1, endln:37:11
+    |INT:10
     |vpiTypespec:
     \_ref_typespec: (otp_ctrl_pkg::OtpAddrWidth)
       |vpiParent:
@@ -869,7 +872,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:22:17, endln:22:39
       |vpiDecompile:2
-      |vpiSize:64
+      |vpiSize:32
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -904,7 +907,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:23:17, endln:23:38
       |vpiDecompile:11
-      |vpiSize:64
+      |vpiSize:32
       |UINT:11
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -939,7 +942,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:24:17, endln:24:36
       |vpiDecompile:9
-      |vpiSize:64
+      |vpiSize:32
       |UINT:9
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -974,7 +977,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:34:17, endln:34:38
       |vpiDecompile:16
-      |vpiSize:64
+      |vpiSize:32
       |UINT:16
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -991,44 +994,20 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:28:1, endln:37:11
     |vpiRhs:
-    \_operation: , line:35:36, endln:35:73
+    \_constant: , line:35:36, endln:35:52
       |vpiParent:
       \_param_assign: , line:35:17, endln:35:73
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (otp_ctrl_pkg::OtpByteAddrWidth), line:35:36, endln:35:52
+      |vpiDecompile:10
+      |vpiSize:32
+      |INT:10
+      |vpiTypespec:
+      \_ref_typespec: (otp_ctrl_pkg)
         |vpiParent:
-        \_operation: , line:35:36, endln:35:73
-        |vpiName:OtpByteAddrWidth
-        |vpiFullName:otp_ctrl_pkg::OtpByteAddrWidth
+        \_constant: , line:35:36, endln:35:52
+        |vpiFullName:otp_ctrl_pkg
         |vpiActual:
-        \_constant: , line:23:36, endln:23:38
-      |vpiOperand:
-      \_sys_func_call: ($clog2), line:35:55, endln:35:73
-        |vpiParent:
-        \_operation: , line:35:36, endln:35:73
-        |vpiArgument:
-        \_operation: , line:35:62, endln:35:72
-          |vpiParent:
-          \_sys_func_call: ($clog2), line:35:55, endln:35:73
-          |vpiOpType:12
-          |vpiOperand:
-          \_ref_obj: (otp_ctrl_pkg::OtpWidth), line:35:62, endln:35:70
-            |vpiParent:
-            \_operation: , line:35:62, endln:35:72
-            |vpiName:OtpWidth
-            |vpiFullName:otp_ctrl_pkg::OtpWidth
-            |vpiActual:
-            \_constant: , line:34:36, endln:34:38
-          |vpiOperand:
-          \_constant: , line:35:71, endln:35:72
-            |vpiParent:
-            \_operation: , line:35:62, endln:35:72
-            |vpiDecompile:8
-            |vpiSize:64
-            |UINT:8
-            |vpiConstType:9
-        |vpiName:$clog2
+        \_int_typespec: , line:35:13, endln:35:16
+      |vpiConstType:7
     |vpiLhs:
     \_parameter: (otp_ctrl_pkg::OtpAddrWidth), line:35:17, endln:35:29
   |vpiTypedef:
@@ -1678,5 +1657,5 @@ design: (unnamed)
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackageParam/builtin.sv | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/PackageParam/dut.sv     | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/dut_000.sv     | 1 | 37 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageParam/dut.sv     | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/dut_000.sv     | 2 | 37 |
 ============================== End RoundTrip Results ==============================

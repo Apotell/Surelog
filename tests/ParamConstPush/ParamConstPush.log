@@ -117,21 +117,23 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamConstPush/dut.sv:6:1: No timescale set for "error_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamConstPush/dut.sv:10:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamConstPush/dut.sv:1:1: Compile package "base_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamConstPush/dut.sv:6:1: Compile package "error_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamConstPush/dut.sv:10:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              23
+constant                                              42
 design                                                 1
 import_typespec                                        1
-logic_typespec                                         8
-module_inst                                            2
+logic_typespec                                        13
+module_inst                                            3
 operation                                              3
 package                                                2
 param_assign                                           7
 parameter                                              8
-range                                                  8
-ref_obj                                                7
-ref_typespec                                          11
+range                                                 13
+ref_obj                                                4
+ref_typespec                                          17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamConstPush/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamConstPush/slpp_all/checker/surelog.chk.html ...
@@ -165,6 +167,7 @@ design: (unnamed)
   \_parameter: (base_pkg::USAGE), line:3:25, endln:3:30
     |vpiParent:
     \_package: base_pkg (base_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
+    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (base_pkg::USAGE)
       |vpiParent:
@@ -201,26 +204,20 @@ design: (unnamed)
     |vpiParent:
     \_package: base_pkg (base_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
     |vpiRhs:
-    \_operation: , line:3:34, endln:3:46
+    \_constant: , line:3:34, endln:3:38
       |vpiParent:
       \_param_assign: , line:3:25, endln:3:46
-      |vpiOpType:29
-      |vpiOperand:
-      \_ref_obj: (base_pkg::BASE), line:3:34, endln:3:38
+      |vpiDecompile:1
+      |vpiSize:2
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (base_pkg)
         |vpiParent:
-        \_operation: , line:3:34, endln:3:46
-        |vpiName:BASE
-        |vpiFullName:base_pkg::BASE
+        \_constant: , line:3:34, endln:3:38
+        |vpiFullName:base_pkg
         |vpiActual:
-        \_constant: , line:2:34, endln:2:39
-      |vpiOperand:
-      \_constant: , line:3:41, endln:3:46
-        |vpiParent:
-        \_operation: , line:3:34, endln:3:46
-        |vpiDecompile:2'b01
-        |vpiSize:2
-        |BIN:01
-        |vpiConstType:3
+        \_logic_typespec: , line:3:12, endln:3:23
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (base_pkg::USAGE), line:3:25, endln:3:30
   |vpiDefName:base_pkg
@@ -234,6 +231,7 @@ design: (unnamed)
   \_parameter: (error_pkg::FROM_USAGE), line:7:25, endln:7:35
     |vpiParent:
     \_package: error_pkg (error_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
+    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (error_pkg::FROM_USAGE)
       |vpiParent:
@@ -249,13 +247,20 @@ design: (unnamed)
     |vpiParent:
     \_package: error_pkg (error_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
     |vpiRhs:
-    \_ref_obj: (error_pkg::base_pkg::USAGE), line:7:38, endln:7:53
+    \_constant: , line:3:34, endln:3:38
       |vpiParent:
       \_param_assign: , line:7:25, endln:7:53
-      |vpiName:base_pkg::USAGE
-      |vpiFullName:error_pkg::base_pkg::USAGE
-      |vpiActual:
-      \_parameter: (base_pkg::USAGE), line:3:25, endln:3:30
+      |vpiDecompile:1
+      |vpiSize:2
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (error_pkg)
+        |vpiParent:
+        \_constant: , line:3:34, endln:3:38
+        |vpiFullName:error_pkg
+        |vpiActual:
+        \_logic_typespec: , line:7:12, endln:7:23
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (error_pkg::FROM_USAGE), line:7:25, endln:7:35
   |vpiDefName:error_pkg
@@ -268,6 +273,7 @@ design: (unnamed)
   \_parameter: (work@top.FROM_USAGE), line:7:25, endln:7:35
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:10:1, endln:11:10
+    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (work@top.FROM_USAGE)
       |vpiParent:
@@ -284,15 +290,25 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:10:1, endln:11:10
     |vpiRhs:
-    \_ref_obj: (work@top.base_pkg::USAGE), line:7:38, endln:7:53
+    \_constant: , line:3:34, endln:3:38
       |vpiParent:
       \_param_assign: , line:7:25, endln:7:53
-      |vpiName:base_pkg::USAGE
-      |vpiFullName:work@top.base_pkg::USAGE
+      |vpiDecompile:1
+      |vpiSize:2
+      |UINT:1
+      |vpiTypespec:
+      \_ref_typespec: (work@top)
+        |vpiParent:
+        \_constant: , line:3:34, endln:3:38
+        |vpiFullName:work@top
+        |vpiActual:
+        \_logic_typespec: , line:7:12, endln:7:23
+      |vpiConstType:9
     |vpiLhs:
     \_parameter: (work@top.FROM_USAGE), line:7:25, endln:7:35
       |vpiParent:
       \_param_assign: , line:7:25, endln:7:53
+      |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@top.FROM_USAGE)
         |vpiParent:
@@ -386,6 +402,31 @@ design: (unnamed)
 \_logic_typespec: , line:7:12, endln:7:23
   |vpiParent:
   \_ref_typespec: (work@top.FROM_USAGE)
+  |vpiInstance:
+  \_package: error_pkg (error_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
+  |vpiRange:
+  \_range: , line:7:18, endln:7:23
+    |vpiParent:
+    \_logic_typespec: , line:7:12, endln:7:23
+    |vpiLeftRange:
+    \_constant: , line:7:19, endln:7:20
+      |vpiParent:
+      \_range: , line:7:18, endln:7:23
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:7:21, endln:7:22
+      |vpiParent:
+      \_range: , line:7:18, endln:7:23
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:7:12, endln:7:23
+  |vpiParent:
+  \_ref_typespec: (work@top)
   |vpiInstance:
   \_package: error_pkg (error_pkg::), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
   |vpiRange:

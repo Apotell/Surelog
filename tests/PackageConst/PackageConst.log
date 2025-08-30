@@ -54,19 +54,21 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageConst/dut.sv:1:1: No timescale set for "spi_device_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageConst/dut.sv:5:1: No timescale set for "spi_device_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageConst/dut.sv:1:1: Compile package "spi_device_reg_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageConst/dut.sv:5:1: Compile package "spi_device_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+constant                                               7
 design                                                 1
 enum_const                                             1
 enum_typespec                                          1
-int_typespec                                           3
+int_typespec                                           5
 module_inst                                            2
 package                                                2
 param_assign                                           2
 parameter                                              2
 ref_obj                                                2
-ref_typespec                                           5
+ref_typespec                                           7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/checker/surelog.chk.html ...
@@ -104,7 +106,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:27, endln:2:42
       |vpiDecompile:24
-      |vpiSize:64
+      |vpiSize:32
       |UINT:24
       |vpiTypespec:
       \_ref_typespec: (spi_device_reg_pkg)
@@ -143,7 +145,7 @@ design: (unnamed)
       \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:4, endln:8:23
       |vpiName:CmdInfoReserveEnd
       |UINT:24
-      |vpiDecompile:spi_device_reg_pkg::NumCmdInfo
+      |vpiDecompile:24
       |vpiSize:32
   |vpiDefName:spi_device_pkg
 \_weaklyReferenced:
@@ -163,5 +165,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageConst/dut.sv | ${SURELOG_DIR}/build/regression/PackageConst/roundtrip/dut_000.sv | 0 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageConst/dut.sv | ${SURELOG_DIR}/build/regression/PackageConst/roundtrip/dut_000.sv | 1 | 9 |
 ============================== End RoundTrip Results ==============================

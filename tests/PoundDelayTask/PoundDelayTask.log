@@ -56,12 +56,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv:1:1: No timescale set for "m".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv:1:1: Compile module "work@m".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv:1:1: Top level module "work@m".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
@@ -69,35 +63,22 @@ constant                                               1
 delay_control                                          1
 design                                                 1
 initial                                                1
-module_inst                                            2
+module_inst                                            1
 sys_func_call                                          1
 task                                                   1
 task_call                                              1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                               1
-delay_control                                          2
-design                                                 1
-initial                                                2
-module_inst                                            2
-sys_func_call                                          2
-task                                                   2
-task_call                                              2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@m)
-|vpiElaborated:1
-|vpiName:work@m
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
   |vpiParent:
-  \_design: (work@m)
+  \_design: (unnamed)
   |vpiFullName:work@m
   |vpiDefName:work@m
   |vpiTaskFunc:
@@ -142,59 +123,14 @@ design: (work@m)
           \_delay_control: , line:7:9, endln:7:13
           |vpiTask:
           \_task: (work@m.t), line:2:5, endln:4:12
-|uhdmtopModules:
-\_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
-  |vpiParent:
-  \_design: (work@m)
-  |vpiName:work@m
-  |vpiDefName:work@m
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_task: (work@m.t), line:2:5, endln:4:12
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
-    |vpiName:t
-    |vpiFullName:work@m.t
-    |vpiVisibility:1
-    |vpiStmt:
-    \_sys_func_call: ($display), line:3:9, endln:3:32
-      |vpiParent:
-      \_task: (work@m.t), line:2:5, endln:4:12
-      |vpiArgument:
-      \_constant: , line:3:18, endln:3:31
-      |vpiName:$display
-    |vpiInstance:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:6:5, endln:8:8
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
-    |vpiStmt:
-    \_begin: (work@m), line:6:13, endln:8:8
-      |vpiParent:
-      \_initial: , line:6:5, endln:8:8
-      |vpiFullName:work@m
-      |vpiStmt:
-      \_delay_control: , line:7:9, endln:7:13
-        |vpiParent:
-        \_begin: (work@m), line:6:13, endln:8:8
-        |#1
-        |vpiStmt:
-        \_task_call: 
-          |vpiParent:
-          \_delay_control: , line:7:9, endln:7:13
-          |vpiTask:
-          \_task: (work@m.t), line:2:5, endln:4:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv:7:9: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv:7:9: Non synthesizable construct,
 ============================== End Linting Results ==============================
 

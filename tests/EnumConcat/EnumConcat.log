@@ -92,46 +92,19 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConcat/dut.sv:2:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConcat/dut.sv:6:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/EnumConcat/dut.sv:12:5: Compile generate block "work@dut.genblk1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/EnumConcat/dut.sv:6:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              10
+constant                                               7
 design                                                 1
 enum_const                                             1
 enum_typespec                                          1
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
 logic_typespec                                         1
-module_inst                                            6
-operation                                              4
+module_inst                                            3
+operation                                              3
 range                                                  1
-ref_module                                             2
-ref_obj                                                1
-ref_typespec                                           1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-constant                                              10
-design                                                 1
-enum_const                                             1
-enum_typespec                                          1
-gen_if                                                 1
-gen_scope                                              3
-gen_scope_array                                        3
-logic_typespec                                         1
-module_inst                                            7
-operation                                              4
-range                                                  1
-ref_module                                             2
+ref_module                                             1
 ref_obj                                                1
 ref_typespec                                           1
 === UHDM Object Stats End ===
@@ -140,19 +113,18 @@ ref_typespec                                           1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:2:1, endln:3:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_enum_typespec: (exc_cause_e), line:7:1, endln:9:15
@@ -213,36 +185,6 @@ design: (work@dut)
         \_begin: (work@dut)
         |vpiName:good
         |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiTypedef:
-  \_enum_typespec: (exc_cause_e), line:7:1, endln:9:15
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut.genblk1), line:12:5, endln:12:17
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
-    |vpiName:genblk1
-    |vpiFullName:work@dut.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@dut.genblk1), line:12:5, endln:12:17
-      |vpiParent:
-      \_gen_scope_array: (work@dut.genblk1), line:12:5, endln:12:17
-      |vpiFullName:work@dut.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@dut.genblk1.good), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:12:5, endln:12:17
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1), line:12:5, endln:12:17
-        |vpiName:good
-        |vpiFullName:work@dut.genblk1.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/EnumConcat/dut.sv
-        |vpiDefLineNo:2
 \_weaklyReferenced:
 \_logic_typespec: , line:7:14, endln:7:25
   |vpiRange:
@@ -270,7 +212,7 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/EnumConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConcat/roundtrip/dut_000.sv | 3 | 15 |

@@ -242,80 +242,42 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:9:1: Compile module "work@sub".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:14:1: Compile module "work@top".
 [WRN:CP0310] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:9:23: Port "I" definition missing its direction (input, output, inout).
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:14:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_typespec                                           3
-bit_var                                                2
-constant                                              32
+bit_typespec                                           1
+constant                                               9
 delay_control                                          1
 design                                                 1
-hier_path                                              4
+hier_path                                              3
 initial                                                2
-int_typespec                                           3
-int_var                                                2
-interface_inst                                         4
-interface_typespec                                     3
-io_decl                                               24
+int_typespec                                           1
+interface_inst                                         1
+interface_typespec                                     1
+io_decl                                                6
 logic_net                                              4
-logic_typespec                                         7
-logic_var                                              2
-modport                                                8
-module_inst                                            7
-part_select                                            4
-port                                                   3
-range                                                  9
+logic_typespec                                         1
+modport                                                2
+module_inst                                            2
+part_select                                            2
+port                                                   2
+range                                                  1
 ref_module                                             2
-ref_obj                                               12
-ref_typespec                                          11
+ref_obj                                                8
+ref_typespec                                           4
 sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-bit_typespec                                           3
-bit_var                                                2
-constant                                              32
-delay_control                                          2
-design                                                 1
-hier_path                                              7
-initial                                                4
-int_typespec                                           3
-int_var                                                2
-interface_inst                                         4
-interface_typespec                                     3
-io_decl                                               24
-logic_net                                              4
-logic_typespec                                         7
-logic_var                                              2
-modport                                                8
-module_inst                                            7
-part_select                                            4
-port                                                   4
-range                                                  9
-ref_module                                             2
-ref_obj                                               19
-ref_typespec                                          12
-sys_func_call                                          2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModExp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfaceModExp/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModExp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@I
   |vpiDefName:work@I
   |vpiNet:
@@ -401,8 +363,6 @@ design: (work@top)
         \_io_decl: (Q), line:5:38, endln:5:39
         |vpiName:x
         |vpiFullName:work@I.A.Q.x
-        |vpiActual:
-        \_int_var: (work@top.inst.x), line:3:11, endln:3:14
     |vpiIODecl:
     \_io_decl: (R), line:5:44, endln:5:45
       |vpiParent:
@@ -461,7 +421,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@sub
   |vpiDefName:work@sub
   |vpiNet:
@@ -483,7 +443,7 @@ design: (work@top)
       |vpiName:I
       |vpiFullName:work@sub.I.I
       |vpiActual:
-      \_interface_inst: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
+      \_logic_net: (work@sub.I), line:9:23, endln:9:24
     |vpiTypedef:
     \_ref_typespec: (work@sub.I)
       |vpiParent:
@@ -525,7 +485,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiProcess:
@@ -602,477 +562,7 @@ design: (work@top)
           |vpiName:A
           |vpiFullName:work@top.s.A
         |vpiName:inst.A
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiInterface:
-  \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiName:inst
-    |vpiFullName:work@top.inst
-    |vpiVariables:
-    \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-      |vpiParent:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-      |vpiTypespec:
-      \_ref_typespec: (work@top.inst.r)
-        |vpiParent:
-        \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-        |vpiFullName:work@top.inst.r
-        |vpiActual:
-        \_logic_typespec: , line:2:1, endln:2:12
-      |vpiName:r
-      |vpiFullName:work@top.inst.r
-      |vpiVisibility:1
-    |vpiVariables:
-    \_int_var: (work@top.inst.x), line:3:11, endln:3:14
-      |vpiParent:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-      |vpiTypespec:
-      \_ref_typespec: (work@top.inst.x)
-        |vpiParent:
-        \_int_var: (work@top.inst.x), line:3:11, endln:3:14
-        |vpiFullName:work@top.inst.x
-        |vpiActual:
-        \_int_typespec: , line:3:7, endln:3:10
-      |vpiName:x
-      |vpiFullName:work@top.inst.x
-      |vpiSigned:1
-      |vpiConstantVariable:1
-      |vpiVisibility:1
-      |vpiExpr:
-      \_constant: , line:3:13, endln:3:14
-        |vpiParent:
-        \_int_var: (work@top.inst.x), line:3:11, endln:3:14
-        |vpiDecompile:1
-        |vpiSize:32
-        |UINT:1
-        |vpiConstType:9
-    |vpiVariables:
-    \_bit_var: (work@top.inst.R), line:4:5, endln:4:6
-      |vpiParent:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-      |vpiTypespec:
-      \_ref_typespec: (work@top.inst.R)
-        |vpiParent:
-        \_bit_var: (work@top.inst.R), line:4:5, endln:4:6
-        |vpiFullName:work@top.inst.R
-        |vpiActual:
-        \_bit_typespec: , line:4:1, endln:4:4
-      |vpiName:R
-      |vpiFullName:work@top.inst.R
-      |vpiVisibility:1
-    |vpiDefName:work@I
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiModport:
-    \_modport: (A), line:5:9, endln:5:10
-      |vpiParent:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-      |vpiName:A
-      |vpiIODecl:
-      \_io_decl: (P), line:5:20, endln:5:21
-        |vpiParent:
-        \_modport: (A), line:5:9, endln:5:10
-        |vpiDirection:2
-        |vpiName:P
-        |vpiExpr:
-        \_part_select: r (work@top.inst.A.P.r), line:5:22, endln:5:28
-          |vpiParent:
-          \_io_decl: (P), line:5:20, endln:5:21
-          |vpiName:r
-          |vpiFullName:work@top.inst.A.P.r
-          |vpiDefName:r
-          |vpiActual:
-          \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-          |vpiConstantSelect:1
-          |vpiLeftRange:
-          \_constant: , line:5:24, endln:5:25
-            |vpiDecompile:3
-            |vpiSize:64
-            |UINT:3
-            |vpiConstType:9
-          |vpiRightRange:
-          \_constant: , line:5:26, endln:5:27
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-      |vpiIODecl:
-      \_io_decl: (Q), line:5:38, endln:5:39
-        |vpiParent:
-        \_modport: (A), line:5:9, endln:5:10
-        |vpiDirection:1
-        |vpiName:Q
-        |vpiExpr:
-        \_constant: , line:3:13, endln:3:14
-      |vpiIODecl:
-      \_io_decl: (R), line:5:44, endln:5:45
-        |vpiParent:
-        \_modport: (A), line:5:9, endln:5:10
-        |vpiDirection:1
-        |vpiName:R
-      |vpiInterface:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-    |vpiModport:
-    \_modport: (B), line:6:9, endln:6:10
-      |vpiParent:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-      |vpiName:B
-      |vpiIODecl:
-      \_io_decl: (P), line:6:20, endln:6:21
-        |vpiParent:
-        \_modport: (B), line:6:9, endln:6:10
-        |vpiDirection:2
-        |vpiName:P
-        |vpiExpr:
-        \_part_select: r (work@top.inst.B.P.r), line:6:22, endln:6:28
-          |vpiParent:
-          \_io_decl: (P), line:6:20, endln:6:21
-          |vpiName:r
-          |vpiFullName:work@top.inst.B.P.r
-          |vpiDefName:r
-          |vpiActual:
-          \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-          |vpiConstantSelect:1
-          |vpiLeftRange:
-          \_constant: , line:6:24, endln:6:25
-            |vpiDecompile:7
-            |vpiSize:64
-            |UINT:7
-            |vpiConstType:9
-          |vpiRightRange:
-          \_constant: , line:6:26, endln:6:27
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
-            |vpiConstType:9
-      |vpiIODecl:
-      \_io_decl: (Q), line:6:38, endln:6:39
-        |vpiParent:
-        \_modport: (B), line:6:9, endln:6:10
-        |vpiDirection:1
-        |vpiName:Q
-        |vpiExpr:
-        \_constant: , line:6:40, endln:6:41
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiIODecl:
-      \_io_decl: (R), line:6:44, endln:6:45
-        |vpiParent:
-        \_modport: (B), line:6:9, endln:6:10
-        |vpiDirection:1
-        |vpiName:R
-      |vpiInterface:
-      \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-  |vpiProcess:
-  \_initial: , line:18:3, endln:18:40
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiStmt:
-    \_delay_control: , line:18:11, endln:18:13
-      |vpiParent:
-      \_initial: , line:18:3, endln:18:40
-      |#1
-      |vpiStmt:
-      \_sys_func_call: ($display), line:18:14, endln:18:39
-        |vpiParent:
-        \_delay_control: , line:18:11, endln:18:13
-        |vpiArgument:
-        \_constant: , line:18:23, endln:18:30
-        |vpiArgument:
-        \_hier_path: (inst.r), line:18:32, endln:18:38
-          |vpiParent:
-          \_sys_func_call: ($display), line:18:14, endln:18:39
-          |vpiActual:
-          \_ref_obj: (inst), line:18:32, endln:18:36
-            |vpiParent:
-            \_hier_path: (inst.r), line:18:32, endln:18:38
-            |vpiName:inst
-            |vpiActual:
-            \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-          |vpiActual:
-          \_ref_obj: (work@top.r), line:18:37, endln:18:38
-            |vpiParent:
-            \_hier_path: (inst.r), line:18:32, endln:18:38
-            |vpiName:r
-            |vpiFullName:work@top.r
-            |vpiActual:
-            \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-          |vpiName:inst.r
-        |vpiName:$display
-  |vpiModule:
-  \_module_inst: work@sub (work@top.s), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:3, endln:16:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiName:s
-    |vpiFullName:work@top.s
-    |vpiDefName:work@sub
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv
-    |vpiDefLineNo:9
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiPort:
-    \_port: (I), line:9:23, endln:9:24
-      |vpiParent:
-      \_module_inst: work@sub (work@top.s), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:3, endln:16:18
-      |vpiName:I
-      |vpiDirection:3
-      |vpiHighConn:
-      \_hier_path: (inst.A), line:16:10, endln:16:16
-        |vpiParent:
-        \_port: (I), line:9:23, endln:9:24
-        |vpiActual:
-        \_ref_obj: (inst), line:16:10, endln:16:14
-          |vpiParent:
-          \_hier_path: (inst.A), line:16:10, endln:16:16
-          |vpiName:inst
-          |vpiActual:
-          \_interface_inst: work@I (work@top.inst), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:15:3, endln:15:12
-        |vpiActual:
-        \_ref_obj: (work@top.s.I.A), line:16:15, endln:16:16
-          |vpiParent:
-          \_hier_path: (inst.A), line:16:10, endln:16:16
-          |vpiName:A
-          |vpiFullName:work@top.s.I.A
-          |vpiActual:
-          \_modport: (A), line:5:9, endln:5:10
-        |vpiName:inst.A
-      |vpiLowConn:
-      \_ref_obj: (work@top.s.I), line:16:10, endln:16:16
-        |vpiParent:
-        \_port: (I), line:9:23, endln:9:24
-        |vpiFullName:work@top.s.I
-        |vpiActual:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-      |vpiTypedef:
-      \_ref_typespec: (work@top.s.I)
-        |vpiParent:
-        \_port: (I), line:9:23, endln:9:24
-        |vpiFullName:work@top.s.I
-        |vpiActual:
-        \_interface_typespec: (I), line:9:23, endln:9:24
-      |vpiInstance:
-      \_module_inst: work@sub (work@top.s), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:3, endln:16:18
-    |vpiInterface:
-    \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-      |vpiParent:
-      \_module_inst: work@sub (work@top.s), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:3, endln:16:18
-      |vpiName:I
-      |vpiFullName:work@top.s.I
-      |vpiVariables:
-      \_logic_var: (work@top.s.I.r), line:2:13, endln:2:14
-        |vpiParent:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-        |vpiTypespec:
-        \_ref_typespec: (work@top.s.I.r)
-          |vpiParent:
-          \_logic_var: (work@top.s.I.r), line:2:13, endln:2:14
-          |vpiFullName:work@top.s.I.r
-          |vpiActual:
-          \_logic_typespec: , line:2:1, endln:2:12
-        |vpiName:r
-        |vpiFullName:work@top.s.I.r
-        |vpiVisibility:1
-      |vpiVariables:
-      \_int_var: (work@top.s.I.x), line:3:11, endln:3:14
-        |vpiParent:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-        |vpiTypespec:
-        \_ref_typespec: (work@top.s.I.x)
-          |vpiParent:
-          \_int_var: (work@top.s.I.x), line:3:11, endln:3:14
-          |vpiFullName:work@top.s.I.x
-          |vpiActual:
-          \_int_typespec: , line:3:7, endln:3:10
-        |vpiName:x
-        |vpiFullName:work@top.s.I.x
-        |vpiSigned:1
-        |vpiConstantVariable:1
-        |vpiVisibility:1
-        |vpiExpr:
-        \_constant: , line:3:13, endln:3:14
-          |vpiParent:
-          \_int_var: (work@top.s.I.x), line:3:11, endln:3:14
-          |vpiDecompile:1
-          |vpiSize:32
-          |UINT:1
-          |vpiConstType:9
-      |vpiVariables:
-      \_bit_var: (work@top.s.I.R), line:4:5, endln:4:6
-        |vpiParent:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-        |vpiTypespec:
-        \_ref_typespec: (work@top.s.I.R)
-          |vpiParent:
-          \_bit_var: (work@top.s.I.R), line:4:5, endln:4:6
-          |vpiFullName:work@top.s.I.R
-          |vpiActual:
-          \_bit_typespec: , line:4:1, endln:4:4
-        |vpiName:R
-        |vpiFullName:work@top.s.I.R
-        |vpiVisibility:1
-      |vpiDefName:work@I
-      |vpiModport:
-      \_modport: (A), line:5:9, endln:5:10
-        |vpiParent:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-        |vpiName:A
-        |vpiIODecl:
-        \_io_decl: (P), line:5:20, endln:5:21
-          |vpiParent:
-          \_modport: (A), line:5:9, endln:5:10
-          |vpiDirection:2
-          |vpiName:P
-        |vpiIODecl:
-        \_io_decl: (Q), line:5:38, endln:5:39
-          |vpiParent:
-          \_modport: (A), line:5:9, endln:5:10
-          |vpiDirection:1
-          |vpiName:Q
-        |vpiIODecl:
-        \_io_decl: (R), line:5:44, endln:5:45
-          |vpiParent:
-          \_modport: (A), line:5:9, endln:5:10
-          |vpiDirection:1
-          |vpiName:R
-          |vpiExpr:
-          \_bit_var: (work@top.s.I.R), line:4:5, endln:4:6
-        |vpiInterface:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-      |vpiModport:
-      \_modport: (B), line:6:9, endln:6:10
-        |vpiParent:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-        |vpiName:B
-        |vpiIODecl:
-        \_io_decl: (P), line:6:20, endln:6:21
-          |vpiParent:
-          \_modport: (B), line:6:9, endln:6:10
-          |vpiDirection:2
-          |vpiName:P
-        |vpiIODecl:
-        \_io_decl: (Q), line:6:38, endln:6:39
-          |vpiParent:
-          \_modport: (B), line:6:9, endln:6:10
-          |vpiDirection:1
-          |vpiName:Q
-        |vpiIODecl:
-        \_io_decl: (R), line:6:44, endln:6:45
-          |vpiParent:
-          \_modport: (B), line:6:9, endln:6:10
-          |vpiDirection:1
-          |vpiName:R
-          |vpiExpr:
-          \_bit_var: (work@top.s.I.R), line:4:5, endln:4:6
-        |vpiInterface:
-        \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-    |vpiInterface:
-    \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-    |vpiProcess:
-    \_initial: , line:11:3, endln:11:25
-      |vpiParent:
-      \_module_inst: work@sub (work@top.s), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:3, endln:16:18
-      |vpiStmt:
-      \_assignment: , line:11:11, endln:11:24
-        |vpiParent:
-        \_initial: , line:11:3, endln:11:25
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:11:17, endln:11:24
-        |vpiLhs:
-        \_hier_path: (I.P), line:11:11, endln:11:14
-          |vpiParent:
-          \_assignment: , line:11:11, endln:11:24
-          |vpiActual:
-          \_ref_obj: (I), line:11:13, endln:11:14
-            |vpiParent:
-            \_hier_path: (I.P), line:11:11, endln:11:14
-            |vpiName:I
-            |vpiActual:
-            \_interface_inst: work@I (work@top.s.I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:16:0
-          |vpiActual:
-          \_ref_obj: (P), line:11:13, endln:11:14
-            |vpiParent:
-            \_hier_path: (I.P), line:11:11, endln:11:14
-            |vpiName:P
-            |vpiActual:
-            \_io_decl: (P), line:5:20, endln:5:21
-          |vpiName:I.P
 \_weaklyReferenced:
-\_logic_typespec: , line:2:1, endln:2:12
-  |vpiParent:
-  \_logic_var: (work@top.inst.r), line:2:13, endln:2:14
-  |vpiRange:
-  \_range: , line:2:7, endln:2:12
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:8, endln:2:9
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:10, endln:2:11
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:3:7, endln:3:10
-  |vpiParent:
-  \_int_var: (work@top.inst.x), line:3:11, endln:3:14
-  |vpiSigned:1
-\_bit_typespec: , line:4:1, endln:4:4
-  |vpiParent:
-  \_bit_var: (work@top.inst.R), line:4:5, endln:4:6
-\_interface_typespec: (I), line:9:23, endln:9:24
-  |vpiName:I
-\_logic_typespec: , line:2:1, endln:2:12
-  |vpiParent:
-  \_logic_var: (work@top.s.I.r), line:2:13, endln:2:14
-  |vpiRange:
-  \_range: , line:2:7, endln:2:12
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:8, endln:2:9
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:10, endln:2:11
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:3:7, endln:3:10
-  |vpiParent:
-  \_int_var: (work@top.s.I.x), line:3:11, endln:3:14
-  |vpiSigned:1
-\_bit_typespec: , line:4:1, endln:4:4
-  |vpiParent:
-  \_bit_var: (work@top.s.I.R), line:4:5, endln:4:6
 \_logic_typespec: , line:2:1, endln:2:12
   |vpiRange:
   \_range: , line:2:7, endln:2:12
@@ -1104,10 +594,9 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:18:11: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:18:11: Non synthesizable construct,
 ============================== End Linting Results ==============================
 

@@ -199,7 +199,6 @@ n<> u<193> t<Top_level_rule> c<1> l<1:1> el<27:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: No timescale set for "earlgrey".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: Compile package "earlgrey".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv
@@ -457,80 +456,39 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-assignment                                             6
-begin                                                  6
-bit_select                                             4
+assignment                                             3
+begin                                                  3
+bit_select                                             2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              77
+constant                                              27
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
-for_stmt                                               2
-func_call                                              6
-function                                              11
-if_stmt                                                2
-int_typespec                                          23
-int_var                                                8
-integer_typespec                                       2
-integer_var                                            2
-io_decl                                               13
-logic_typespec                                         8
-logic_var                                             10
-module_inst                                           11
-operation                                             14
-package                                                4
-param_assign                                          20
-parameter                                             20
-range                                                  2
-ref_obj                                               19
-ref_typespec                                          45
-return_stmt                                            2
+for_stmt                                               1
+func_call                                              3
+function                                              10
+if_stmt                                                1
+int_typespec                                          16
+int_var                                                6
+integer_typespec                                       1
+integer_var                                            1
+io_decl                                               12
+logic_var                                              1
+module_inst                                            1
+operation                                              7
+package                                                2
+param_assign                                           4
+parameter                                              4
+range                                                  1
+ref_obj                                                9
+ref_typespec                                          24
+return_stmt                                            1
 task                                                   9
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                            12
-begin                                                 12
-bit_select                                             8
-class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              77
-design                                                 1
-enum_const                                            10
-enum_typespec                                          2
-enum_var                                               1
-for_stmt                                               4
-func_call                                              6
-function                                              22
-if_stmt                                                4
-int_typespec                                          23
-int_var                                               16
-integer_typespec                                       2
-integer_var                                            2
-io_decl                                               26
-logic_typespec                                         8
-logic_var                                             10
-module_inst                                           11
-operation                                             22
-package                                                4
-param_assign                                          20
-parameter                                             20
-range                                                  4
-ref_obj                                               37
-ref_typespec                                          60
-return_stmt                                            4
-task                                                  18
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/checker/surelog.chk.html ...
@@ -538,7 +496,6 @@ task                                                  18
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
@@ -547,6 +504,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
   |vpiParent:
@@ -661,7 +648,7 @@ design: (unnamed)
     |vpiVariables:
     \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
       |vpiParent:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
+      \_assignment: , line:14:9, endln:14:24
       |vpiTypespec:
       \_ref_typespec: (earlgrey::max_info_pages::current_max)
         |vpiParent:
@@ -717,7 +704,7 @@ design: (unnamed)
             |vpiName:InfoTypes
             |vpiFullName:earlgrey::max_info_pages::infos::InfoTypes
             |vpiActual:
-            \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
+            \_constant: , line:10:27, endln:10:28
           |vpiOperand:
           \_constant: 
             |vpiSize:64
@@ -737,18 +724,6 @@ design: (unnamed)
       |vpiFullName:earlgrey::max_info_pages
       |vpiVariables:
       \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-        |vpiParent:
-        \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-        |vpiTypespec:
-        \_ref_typespec: (earlgrey::max_info_pages::current_max)
-          |vpiParent:
-          \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiFullName:earlgrey::max_info_pages::current_max
-          |vpiActual:
-          \_int_typespec: , line:14:5, endln:14:8
-        |vpiName:current_max
-        |vpiFullName:earlgrey::max_info_pages::current_max
-        |vpiSigned:1
       |vpiStmt:
       \_assignment: , line:14:9, endln:14:24
         |vpiParent:
@@ -763,18 +738,6 @@ design: (unnamed)
           |vpiConstType:9
         |vpiLhs:
         \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiParent:
-          \_assignment: , line:14:9, endln:14:24
-          |vpiTypespec:
-          \_ref_typespec: (earlgrey::max_info_pages::current_max)
-            |vpiParent:
-            \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-            |vpiFullName:earlgrey::max_info_pages::current_max
-            |vpiActual:
-            \_int_typespec: , line:14:5, endln:14:8
-          |vpiName:current_max
-          |vpiFullName:earlgrey::max_info_pages::current_max
-          |vpiSigned:1
       |vpiStmt:
       \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
         |vpiParent:
@@ -839,7 +802,7 @@ design: (unnamed)
             |vpiName:InfoTypes
             |vpiFullName:earlgrey::max_info_pages::InfoTypes
             |vpiActual:
-            \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
+            \_constant: , line:10:27, endln:10:28
         |vpiStmt:
         \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
           |vpiParent:
@@ -852,7 +815,7 @@ design: (unnamed)
             |vpiCondition:
             \_operation: , line:16:11, endln:16:33
               |vpiParent:
-              \_if_stmt: , line:16:7, endln:18:10
+              \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
               |vpiOpType:18
               |vpiOperand:
               \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
@@ -860,8 +823,6 @@ design: (unnamed)
                 \_operation: , line:16:11, endln:16:33
                 |vpiName:infos
                 |vpiFullName:earlgrey::max_info_pages::infos
-                |vpiActual:
-                \_io_decl: (infos), line:12:50, endln:12:55
                 |vpiIndex:
                 \_ref_obj: (earlgrey::max_info_pages::i), line:16:17, endln:16:18
                   |vpiParent:
@@ -895,391 +856,6 @@ design: (unnamed)
                   \_assignment: , line:17:9, endln:17:31
                   |vpiName:infos
                   |vpiFullName:earlgrey::max_info_pages::infos
-                  |vpiActual:
-                  \_io_decl: (infos), line:12:50, endln:12:55
-                  |vpiIndex:
-                  \_ref_obj: (earlgrey::max_info_pages::i), line:17:29, endln:17:30
-                    |vpiParent:
-                    \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                    |vpiName:i
-                    |vpiFullName:earlgrey::max_info_pages::i
-                    |vpiActual:
-                    \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-                |vpiLhs:
-                \_ref_obj: (earlgrey::max_info_pages::current_max), line:17:9, endln:17:20
-                  |vpiParent:
-                  \_assignment: , line:17:9, endln:17:31
-                  |vpiName:current_max
-                  |vpiFullName:earlgrey::max_info_pages::current_max
-                  |vpiActual:
-                  \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-      |vpiStmt:
-      \_return_stmt: , line:20:5, endln:20:11
-        |vpiParent:
-        \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-        |vpiCondition:
-        \_ref_obj: (earlgrey::max_info_pages::current_max), line:20:12, endln:20:23
-          |vpiParent:
-          \_return_stmt: , line:20:5, endln:20:11
-          |vpiName:current_max
-          |vpiFullName:earlgrey::max_info_pages::current_max
-          |vpiActual:
-          \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiInstance:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
-  |vpiClassDefn:
-  \_class_defn: (builtin::any_sverilog_class)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:any_sverilog_class
-    |vpiFullName:builtin::any_sverilog_class
-  |vpiClassDefn:
-  \_class_defn: (builtin::array)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:array
-    |vpiFullName:builtin::array
-  |vpiClassDefn:
-  \_class_defn: (builtin::queue)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:queue
-    |vpiFullName:builtin::queue
-  |vpiClassDefn:
-  \_class_defn: (builtin::string)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:string
-    |vpiFullName:builtin::string
-  |vpiClassDefn:
-  \_class_defn: (builtin::system)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:system
-    |vpiFullName:builtin::system
-|uhdmtopPackages:
-\_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:earlgrey
-  |vpiFullName:earlgrey::
-  |vpiParameter:
-  \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
-    |vpiParent:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiTypespec:
-    \_ref_typespec: (earlgrey::InfosPerBank)
-      |vpiParent:
-      \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
-      |vpiFullName:earlgrey::InfosPerBank
-      |vpiActual:
-      \_int_typespec: , line:3:11, endln:3:14
-    |vpiSigned:1
-    |vpiName:InfosPerBank
-    |vpiFullName:earlgrey::InfosPerBank
-  |vpiParameter:
-  \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-    |vpiParent:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |UINT:5
-    |vpiTypespec:
-    \_ref_typespec: (earlgrey::InfoTypes)
-      |vpiParent:
-      \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-      |vpiFullName:earlgrey::InfoTypes
-      |vpiActual:
-      \_int_typespec: , line:10:11, endln:10:14
-    |vpiSigned:1
-    |vpiName:InfoTypes
-    |vpiFullName:earlgrey::InfoTypes
-  |vpiParamAssign:
-  \_param_assign: , line:3:15, endln:9:5
-    |vpiParent:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiRhs:
-    \_constant: , line:7:5, endln:7:7
-      |vpiDecompile:18
-      |vpiSize:64
-      |UINT:18
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
-  |vpiParamAssign:
-  \_param_assign: , line:10:15, endln:10:28
-    |vpiParent:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiRhs:
-    \_constant: , line:10:27, endln:10:28
-      |vpiParent:
-      \_param_assign: , line:10:15, endln:10:28
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (earlgrey)
-        |vpiParent:
-        \_constant: , line:10:27, endln:10:28
-        |vpiFullName:earlgrey
-        |vpiActual:
-        \_int_typespec: , line:10:11, endln:10:14
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-  |vpiDefName:earlgrey
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-    |vpiParent:
-    \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiName:max_info_pages
-    |vpiFullName:earlgrey::max_info_pages
-    |vpiVariables:
-    \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-      |vpiParent:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-      |vpiTypespec:
-      \_ref_typespec: (earlgrey::max_info_pages::current_max)
-        |vpiParent:
-        \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-        |vpiFullName:earlgrey::max_info_pages::current_max
-        |vpiActual:
-        \_int_typespec: , line:14:5, endln:14:8
-      |vpiName:current_max
-      |vpiFullName:earlgrey::max_info_pages::current_max
-      |vpiSigned:1
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_integer_var: (earlgrey::max_info_pages), line:12:23, endln:12:30
-      |vpiParent:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-      |vpiTypespec:
-      \_ref_typespec: (earlgrey::max_info_pages)
-        |vpiParent:
-        \_integer_var: (earlgrey::max_info_pages), line:12:23, endln:12:30
-        |vpiFullName:earlgrey::max_info_pages
-        |vpiActual:
-        \_integer_typespec: , line:12:23, endln:12:30
-      |vpiFullName:earlgrey::max_info_pages
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (infos), line:12:50, endln:12:55
-      |vpiParent:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-      |vpiDirection:1
-      |vpiName:infos
-      |vpiRange:
-      \_range: , line:12:56, endln:12:65
-        |vpiParent:
-        \_io_decl: (infos), line:12:50, endln:12:55
-        |vpiLeftRange:
-        \_constant: 
-          |vpiParent:
-          \_range: , line:12:56, endln:12:65
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiRightRange:
-        \_operation: , line:12:56, endln:12:65
-          |vpiParent:
-          \_range: , line:12:56, endln:12:65
-          |vpiOpType:11
-          |vpiOperand:
-          \_ref_obj: (earlgrey::max_info_pages::infos::InfoTypes), line:12:56, endln:12:65
-            |vpiParent:
-            \_operation: , line:12:56, endln:12:65
-            |vpiName:InfoTypes
-            |vpiFullName:earlgrey::max_info_pages::infos::InfoTypes
-            |vpiActual:
-            \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-          |vpiOperand:
-          \_constant: 
-            |vpiSize:64
-            |INT:1
-            |vpiConstType:7
-      |vpiTypedef:
-      \_ref_typespec: (earlgrey::max_info_pages::infos)
-        |vpiParent:
-        \_io_decl: (infos), line:12:50, endln:12:55
-        |vpiFullName:earlgrey::max_info_pages::infos
-        |vpiActual:
-        \_int_typespec: , line:12:46, endln:12:49
-    |vpiStmt:
-    \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiParent:
-      \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-      |vpiFullName:earlgrey::max_info_pages
-      |vpiVariables:
-      \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-        |vpiParent:
-        \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-        |vpiTypespec:
-        \_ref_typespec: (earlgrey::max_info_pages::current_max)
-          |vpiParent:
-          \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiFullName:earlgrey::max_info_pages::current_max
-          |vpiActual:
-          \_int_typespec: , line:14:5, endln:14:8
-        |vpiName:current_max
-        |vpiFullName:earlgrey::max_info_pages::current_max
-        |vpiSigned:1
-      |vpiStmt:
-      \_assignment: , line:14:9, endln:14:24
-        |vpiParent:
-        \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:14:23, endln:14:24
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiLhs:
-        \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiParent:
-          \_assignment: , line:14:9, endln:14:24
-          |vpiTypespec:
-          \_ref_typespec: (earlgrey::max_info_pages::current_max)
-            |vpiParent:
-            \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-            |vpiFullName:earlgrey::max_info_pages::current_max
-            |vpiActual:
-            \_int_typespec: , line:14:5, endln:14:8
-          |vpiName:current_max
-          |vpiFullName:earlgrey::max_info_pages::current_max
-          |vpiSigned:1
-      |vpiStmt:
-      \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiParent:
-        \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-        |vpiFullName:earlgrey::max_info_pages
-        |vpiForInitStmt:
-        \_assignment: , line:15:10, endln:15:19
-          |vpiParent:
-          \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-          |vpiRhs:
-          \_constant: , line:15:18, endln:15:19
-            |vpiParent:
-            \_assignment: , line:15:10, endln:15:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiLhs:
-          \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-            |vpiParent:
-            \_assignment: , line:15:10, endln:15:19
-            |vpiTypespec:
-            \_ref_typespec: (earlgrey::max_info_pages::i)
-              |vpiParent:
-              \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-              |vpiFullName:earlgrey::max_info_pages::i
-              |vpiActual:
-              \_int_typespec: , line:15:10, endln:15:13
-            |vpiName:i
-            |vpiFullName:earlgrey::max_info_pages::i
-            |vpiSigned:1
-        |vpiForIncStmt:
-        \_operation: , line:15:36, endln:15:39
-          |vpiParent:
-          \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-          |vpiOpType:62
-          |vpiOperand:
-          \_ref_obj: (earlgrey::max_info_pages::i), line:15:36, endln:15:37
-            |vpiParent:
-            \_operation: , line:15:36, endln:15:39
-            |vpiName:i
-            |vpiFullName:earlgrey::max_info_pages::i
-            |vpiActual:
-            \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-        |vpiCondition:
-        \_operation: , line:15:21, endln:15:34
-          |vpiParent:
-          \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-          |vpiOpType:20
-          |vpiOperand:
-          \_ref_obj: (earlgrey::max_info_pages::i), line:15:21, endln:15:22
-            |vpiParent:
-            \_operation: , line:15:21, endln:15:34
-            |vpiName:i
-            |vpiFullName:earlgrey::max_info_pages::i
-            |vpiActual:
-            \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-          |vpiOperand:
-          \_ref_obj: (earlgrey::max_info_pages::InfoTypes), line:15:25, endln:15:34
-            |vpiParent:
-            \_operation: , line:15:21, endln:15:34
-            |vpiName:InfoTypes
-            |vpiFullName:earlgrey::max_info_pages::InfoTypes
-            |vpiActual:
-            \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-        |vpiStmt:
-        \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-          |vpiParent:
-          \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-          |vpiFullName:earlgrey::max_info_pages
-          |vpiStmt:
-          \_if_stmt: , line:16:7, endln:18:10
-            |vpiParent:
-            \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-            |vpiCondition:
-            \_operation: , line:16:11, endln:16:33
-              |vpiParent:
-              \_if_stmt: , line:16:7, endln:18:10
-              |vpiOpType:18
-              |vpiOperand:
-              \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-                |vpiParent:
-                \_operation: , line:16:11, endln:16:33
-                |vpiName:infos
-                |vpiFullName:earlgrey::max_info_pages::infos
-                |vpiActual:
-                \_io_decl: (infos), line:12:50, endln:12:55
-                |vpiIndex:
-                \_ref_obj: (earlgrey::max_info_pages::i), line:16:17, endln:16:18
-                  |vpiParent:
-                  \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-                  |vpiName:i
-                  |vpiFullName:earlgrey::max_info_pages::i
-                  |vpiActual:
-                  \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-              |vpiOperand:
-              \_ref_obj: (earlgrey::max_info_pages::current_max), line:16:22, endln:16:33
-                |vpiParent:
-                \_operation: , line:16:11, endln:16:33
-                |vpiName:current_max
-                |vpiFullName:earlgrey::max_info_pages::current_max
-                |vpiActual:
-                \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-            |vpiStmt:
-            \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-              |vpiParent:
-              \_if_stmt: , line:16:7, endln:18:10
-              |vpiFullName:earlgrey::max_info_pages
-              |vpiStmt:
-              \_assignment: , line:17:9, endln:17:31
-                |vpiParent:
-                \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-                |vpiOpType:82
-                |vpiBlocking:1
-                |vpiRhs:
-                \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                  |vpiParent:
-                  \_assignment: , line:17:9, endln:17:31
-                  |vpiName:infos
-                  |vpiFullName:earlgrey::max_info_pages::infos
-                  |vpiActual:
-                  \_io_decl: (infos), line:12:50, endln:12:55
                   |vpiIndex:
                   \_ref_obj: (earlgrey::max_info_pages::i), line:17:29, endln:17:30
                     |vpiParent:
@@ -1749,226 +1325,6 @@ design: (unnamed)
         |vpiActual:
         \_int_typespec: , line:66:26, endln:66:29
 \_weaklyReferenced:
-\_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-  |vpiParent:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiName:max_info_pages
-  |vpiFullName:earlgrey::max_info_pages
-  |vpiVariables:
-  \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiParent:
-    \_assignment: , line:14:9, endln:14:24
-    |vpiTypespec:
-    \_ref_typespec: (earlgrey::max_info_pages::current_max)
-      |vpiParent:
-      \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-      |vpiFullName:earlgrey::max_info_pages::current_max
-      |vpiActual:
-      \_int_typespec: , line:14:5, endln:14:8
-    |vpiName:current_max
-    |vpiFullName:earlgrey::max_info_pages::current_max
-    |vpiSigned:1
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_integer_var: (earlgrey::max_info_pages), line:12:23, endln:12:30
-  |vpiIODecl:
-  \_io_decl: (infos), line:12:50, endln:12:55
-    |vpiParent:
-    \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-    |vpiDirection:1
-    |vpiName:infos
-    |vpiRange:
-    \_range: , line:12:56, endln:12:65
-      |vpiParent:
-      \_io_decl: (infos), line:12:50, endln:12:55
-      |vpiLeftRange:
-      \_constant: 
-      |vpiRightRange:
-      \_operation: , line:12:56, endln:12:65
-        |vpiParent:
-        \_range: , line:12:56, endln:12:65
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::infos::InfoTypes), line:12:56, endln:12:65
-          |vpiParent:
-          \_operation: , line:12:56, endln:12:65
-          |vpiName:InfoTypes
-          |vpiFullName:earlgrey::max_info_pages::infos::InfoTypes
-          |vpiActual:
-          \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-        |vpiOperand:
-        \_constant: 
-    |vpiTypedef:
-    \_ref_typespec: (earlgrey::max_info_pages::infos)
-      |vpiParent:
-      \_io_decl: (infos), line:12:50, endln:12:55
-      |vpiFullName:earlgrey::max_info_pages::infos
-      |vpiActual:
-      \_int_typespec: , line:12:46, endln:12:49
-  |vpiStmt:
-  \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-    |vpiParent:
-    \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-    |vpiFullName:earlgrey::max_info_pages
-    |vpiVariables:
-    \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_assignment: , line:14:9, endln:14:24
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_constant: , line:14:23, endln:14:24
-      |vpiLhs:
-      \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiFullName:earlgrey::max_info_pages
-      |vpiForInitStmt:
-      \_assignment: , line:15:10, endln:15:19
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiRhs:
-        \_constant: , line:15:18, endln:15:19
-        |vpiLhs:
-        \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-          |vpiParent:
-          \_assignment: , line:15:10, endln:15:19
-          |vpiTypespec:
-          \_ref_typespec: (earlgrey::max_info_pages::i)
-            |vpiParent:
-            \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-            |vpiFullName:earlgrey::max_info_pages::i
-            |vpiActual:
-            \_int_typespec: , line:15:10, endln:15:13
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiSigned:1
-      |vpiForIncStmt:
-      \_operation: , line:15:36, endln:15:39
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiOpType:62
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::i), line:15:36, endln:15:37
-          |vpiParent:
-          \_operation: , line:15:36, endln:15:39
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiActual:
-          \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-      |vpiCondition:
-      \_operation: , line:15:21, endln:15:34
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiOpType:20
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::i), line:15:21, endln:15:22
-          |vpiParent:
-          \_operation: , line:15:21, endln:15:34
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiActual:
-          \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::InfoTypes), line:15:25, endln:15:34
-          |vpiParent:
-          \_operation: , line:15:21, endln:15:34
-          |vpiName:InfoTypes
-          |vpiFullName:earlgrey::max_info_pages::InfoTypes
-          |vpiActual:
-          \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-      |vpiStmt:
-      \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiFullName:earlgrey::max_info_pages
-        |vpiStmt:
-        \_if_stmt: , line:16:7, endln:18:10
-          |vpiParent:
-          \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-          |vpiCondition:
-          \_operation: , line:16:11, endln:16:33
-            |vpiParent:
-            \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-            |vpiOpType:18
-            |vpiOperand:
-            \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-              |vpiParent:
-              \_operation: , line:16:11, endln:16:33
-              |vpiName:infos
-              |vpiFullName:earlgrey::max_info_pages::infos
-              |vpiActual:
-              \_io_decl: (infos), line:12:50, endln:12:55
-              |vpiIndex:
-              \_ref_obj: (earlgrey::max_info_pages::i), line:16:17, endln:16:18
-                |vpiParent:
-                \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-                |vpiName:i
-                |vpiFullName:earlgrey::max_info_pages::i
-                |vpiActual:
-                \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-            |vpiOperand:
-            \_ref_obj: (earlgrey::max_info_pages::current_max), line:16:22, endln:16:33
-              |vpiParent:
-              \_operation: , line:16:11, endln:16:33
-              |vpiName:current_max
-              |vpiFullName:earlgrey::max_info_pages::current_max
-              |vpiActual:
-              \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiStmt:
-          \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-            |vpiParent:
-            \_if_stmt: , line:16:7, endln:18:10
-            |vpiFullName:earlgrey::max_info_pages
-            |vpiStmt:
-            \_assignment: , line:17:9, endln:17:31
-              |vpiParent:
-              \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                |vpiParent:
-                \_assignment: , line:17:9, endln:17:31
-                |vpiName:infos
-                |vpiFullName:earlgrey::max_info_pages::infos
-                |vpiActual:
-                \_io_decl: (infos), line:12:50, endln:12:55
-                |vpiIndex:
-                \_ref_obj: (earlgrey::max_info_pages::i), line:17:29, endln:17:30
-                  |vpiParent:
-                  \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                  |vpiName:i
-                  |vpiFullName:earlgrey::max_info_pages::i
-                  |vpiActual:
-                  \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-              |vpiLhs:
-              \_ref_obj: (earlgrey::max_info_pages::current_max), line:17:9, endln:17:20
-                |vpiParent:
-                \_assignment: , line:17:9, endln:17:31
-                |vpiName:current_max
-                |vpiFullName:earlgrey::max_info_pages::current_max
-                |vpiActual:
-                \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_return_stmt: , line:20:5, endln:20:11
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiCondition:
-      \_ref_obj: (earlgrey::max_info_pages::current_max), line:20:12, endln:20:23
-        |vpiParent:
-        \_return_stmt: , line:20:5, endln:20:11
-        |vpiName:current_max
-        |vpiFullName:earlgrey::max_info_pages::current_max
-        |vpiActual:
-        \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
 \_int_typespec: , line:3:11, endln:3:14
   |vpiParent:
   \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
@@ -1997,430 +1353,20 @@ design: (unnamed)
   |vpiInstance:
   \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
   |vpiSigned:1
-\_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-  |vpiParent:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiName:max_info_pages
-  |vpiFullName:earlgrey::max_info_pages
-  |vpiVariables:
-  \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiParent:
-    \_assignment: , line:14:9, endln:14:24
-    |vpiTypespec:
-    \_ref_typespec: (earlgrey::max_info_pages::current_max)
-      |vpiParent:
-      \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-      |vpiFullName:earlgrey::max_info_pages::current_max
-      |vpiActual:
-      \_int_typespec: , line:14:5, endln:14:8
-    |vpiName:current_max
-    |vpiFullName:earlgrey::max_info_pages::current_max
-    |vpiSigned:1
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_integer_var: (earlgrey::max_info_pages), line:12:23, endln:12:30
-  |vpiIODecl:
-  \_io_decl: (infos), line:12:50, endln:12:55
-    |vpiParent:
-    \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-    |vpiDirection:1
-    |vpiName:infos
-    |vpiRange:
-    \_range: , line:12:56, endln:12:65
-      |vpiParent:
-      \_io_decl: (infos), line:12:50, endln:12:55
-      |vpiLeftRange:
-      \_constant: 
-      |vpiRightRange:
-      \_operation: , line:12:56, endln:12:65
-        |vpiParent:
-        \_range: , line:12:56, endln:12:65
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::infos::InfoTypes), line:12:56, endln:12:65
-          |vpiParent:
-          \_operation: , line:12:56, endln:12:65
-          |vpiName:InfoTypes
-          |vpiFullName:earlgrey::max_info_pages::infos::InfoTypes
-          |vpiActual:
-          \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-        |vpiOperand:
-        \_constant: 
-    |vpiTypedef:
-    \_ref_typespec: (earlgrey::max_info_pages::infos)
-      |vpiParent:
-      \_io_decl: (infos), line:12:50, endln:12:55
-      |vpiFullName:earlgrey::max_info_pages::infos
-      |vpiActual:
-      \_int_typespec: , line:12:46, endln:12:49
-  |vpiStmt:
-  \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-    |vpiParent:
-    \_function: (earlgrey::max_info_pages), line:12:4, endln:21:14
-    |vpiFullName:earlgrey::max_info_pages
-    |vpiVariables:
-    \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_assignment: , line:14:9, endln:14:24
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_constant: , line:14:23, endln:14:24
-      |vpiLhs:
-      \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiFullName:earlgrey::max_info_pages
-      |vpiForInitStmt:
-      \_assignment: , line:15:10, endln:15:19
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiRhs:
-        \_constant: , line:15:18, endln:15:19
-        |vpiLhs:
-        \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-          |vpiParent:
-          \_assignment: , line:15:10, endln:15:19
-          |vpiTypespec:
-          \_ref_typespec: (earlgrey::max_info_pages::i)
-            |vpiParent:
-            \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-            |vpiFullName:earlgrey::max_info_pages::i
-            |vpiActual:
-            \_int_typespec: , line:15:10, endln:15:13
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiSigned:1
-      |vpiForIncStmt:
-      \_operation: , line:15:36, endln:15:39
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiOpType:62
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::i), line:15:36, endln:15:37
-          |vpiParent:
-          \_operation: , line:15:36, endln:15:39
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiActual:
-          \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-      |vpiCondition:
-      \_operation: , line:15:21, endln:15:34
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiOpType:20
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::i), line:15:21, endln:15:22
-          |vpiParent:
-          \_operation: , line:15:21, endln:15:34
-          |vpiName:i
-          |vpiFullName:earlgrey::max_info_pages::i
-          |vpiActual:
-          \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-        |vpiOperand:
-        \_ref_obj: (earlgrey::max_info_pages::InfoTypes), line:15:25, endln:15:34
-          |vpiParent:
-          \_operation: , line:15:21, endln:15:34
-          |vpiName:InfoTypes
-          |vpiFullName:earlgrey::max_info_pages::InfoTypes
-          |vpiActual:
-          \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-      |vpiStmt:
-      \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-        |vpiParent:
-        \_for_stmt: (earlgrey::max_info_pages), line:15:5, endln:15:8
-        |vpiFullName:earlgrey::max_info_pages
-        |vpiStmt:
-        \_if_stmt: , line:16:7, endln:18:10
-          |vpiParent:
-          \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-          |vpiCondition:
-          \_operation: , line:16:11, endln:16:33
-            |vpiParent:
-            \_begin: (earlgrey::max_info_pages), line:15:41, endln:19:8
-            |vpiOpType:18
-            |vpiOperand:
-            \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-              |vpiParent:
-              \_operation: , line:16:11, endln:16:33
-              |vpiName:infos
-              |vpiFullName:earlgrey::max_info_pages::infos
-              |vpiActual:
-              \_io_decl: (infos), line:12:50, endln:12:55
-              |vpiIndex:
-              \_ref_obj: (earlgrey::max_info_pages::i), line:16:17, endln:16:18
-                |vpiParent:
-                \_bit_select: (earlgrey::max_info_pages::infos), line:16:17, endln:16:18
-                |vpiName:i
-                |vpiFullName:earlgrey::max_info_pages::i
-                |vpiActual:
-                \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-            |vpiOperand:
-            \_ref_obj: (earlgrey::max_info_pages::current_max), line:16:22, endln:16:33
-              |vpiParent:
-              \_operation: , line:16:11, endln:16:33
-              |vpiName:current_max
-              |vpiFullName:earlgrey::max_info_pages::current_max
-              |vpiActual:
-              \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-          |vpiStmt:
-          \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-            |vpiParent:
-            \_if_stmt: , line:16:7, endln:18:10
-            |vpiFullName:earlgrey::max_info_pages
-            |vpiStmt:
-            \_assignment: , line:17:9, endln:17:31
-              |vpiParent:
-              \_begin: (earlgrey::max_info_pages), line:16:35, endln:18:10
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                |vpiParent:
-                \_assignment: , line:17:9, endln:17:31
-                |vpiName:infos
-                |vpiFullName:earlgrey::max_info_pages::infos
-                |vpiActual:
-                \_io_decl: (infos), line:12:50, endln:12:55
-                |vpiIndex:
-                \_ref_obj: (earlgrey::max_info_pages::i), line:17:29, endln:17:30
-                  |vpiParent:
-                  \_bit_select: (earlgrey::max_info_pages::infos), line:17:29, endln:17:30
-                  |vpiName:i
-                  |vpiFullName:earlgrey::max_info_pages::i
-                  |vpiActual:
-                  \_int_var: (earlgrey::max_info_pages::i), line:15:14, endln:15:15
-              |vpiLhs:
-              \_ref_obj: (earlgrey::max_info_pages::current_max), line:17:9, endln:17:20
-                |vpiParent:
-                \_assignment: , line:17:9, endln:17:31
-                |vpiName:current_max
-                |vpiFullName:earlgrey::max_info_pages::current_max
-                |vpiActual:
-                \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-    |vpiStmt:
-    \_return_stmt: , line:20:5, endln:20:11
-      |vpiParent:
-      \_begin: (earlgrey::max_info_pages), line:15:5, endln:19:8
-      |vpiCondition:
-      \_ref_obj: (earlgrey::max_info_pages::current_max), line:20:12, endln:20:23
-        |vpiParent:
-        \_return_stmt: , line:20:5, endln:20:11
-        |vpiName:current_max
-        |vpiFullName:earlgrey::max_info_pages::current_max
-        |vpiActual:
-        \_int_var: (earlgrey::max_info_pages::current_max), line:14:9, endln:14:20
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-\_int_typespec: , line:3:11, endln:3:14
-  |vpiParent:
-  \_parameter: (earlgrey::InfosPerBank), line:3:15, endln:3:27
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_int_typespec: , line:10:11, endln:10:14
-  |vpiParent:
-  \_parameter: (earlgrey::InfoTypes), line:10:15, endln:10:24
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_integer_typespec: , line:12:23, endln:12:30
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_int_typespec: , line:12:46, endln:12:49
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_int_typespec: , line:14:5, endln:14:8
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_int_typespec: , line:15:10, endln:15:13
-  |vpiInstance:
-  \_package: earlgrey (earlgrey::), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-  |vpiSigned:1
-\_function: (work@mailbox::new), line:3:5, endln:4:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
-  |vpiName:new
-  |vpiFullName:work@mailbox::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-  |vpiIODecl:
-  \_io_decl: (bound), line:3:23, endln:3:28
-    |vpiParent:
-    \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiDirection:1
-    |vpiName:bound
-    |vpiExpr:
-    \_constant: , line:3:31, endln:3:32
-    |vpiTypedef:
-    \_ref_typespec: (work@mailbox::new::bound)
-      |vpiParent:
-      \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiFullName:work@mailbox::new::bound
-      |vpiActual:
-      \_int_typespec: , line:3:19, endln:3:22
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
 \_int_typespec: , line:3:19, endln:3:22
   |vpiSigned:1
-\_function: (work@mailbox::num), line:6:5, endln:7:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
-  |vpiName:num
-  |vpiFullName:work@mailbox::num
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::num), line:6:14, endln:6:17
 \_int_typespec: , line:6:14, endln:6:17
   |vpiSigned:1
-\_function: (work@mailbox::try_put), line:12:5, endln:13:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_put
-  |vpiFullName:work@mailbox::try_put
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_logic_var: (work@mailbox::try_put)
-  |vpiIODecl:
-  \_io_decl: (message), line:12:23, endln:12:30
-    |vpiParent:
-    \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiDirection:1
-    |vpiName:message
-\_function: (work@mailbox::try_get), line:18:5, endln:19:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_get
-  |vpiFullName:work@mailbox::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-  |vpiIODecl:
-  \_io_decl: (message), line:18:31, endln:18:38
-    |vpiParent:
-    \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:18:14, endln:18:17
   |vpiSigned:1
-\_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_peek
-  |vpiFullName:work@mailbox::try_peek
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-  |vpiIODecl:
-  \_io_decl: (message), line:24:31, endln:24:38
-    |vpiParent:
-    \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:24:14, endln:24:17
   |vpiSigned:1
-\_enum_typespec: (state), line:32:5, endln:32:74
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
-  |vpiName:state
-  |vpiEnumConst:
-  \_enum_const: (FINISHED), line:32:20, endln:32:28
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:FINISHED
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (RUNNING), line:32:30, endln:32:37
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:RUNNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (WAITING), line:32:39, endln:32:46
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:WAITING
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:SUSPENDED
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (KILLED), line:32:59, endln:32:65
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:KILLED
-    |INT:4
-    |vpiDecompile:4
-    |vpiSize:64
-\_function: (work@process::self), line:34:5, endln:34:11
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
-  |vpiName:self
-  |vpiFullName:work@process::self
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_class_var: (work@process::self), line:34:21, endln:34:28
 \_class_typespec: , line:34:21, endln:34:28
   |vpiClassDefn:
   \_class_defn: (work@process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
-\_function: (work@process::status), line:37:5, endln:38:16
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
-  |vpiName:status
-  |vpiFullName:work@process::status
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_enum_var: (work@process::status), line:37:14, endln:37:19
-\_function: (work@semaphore::new), line:57:5, endln:58:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:55:3, endln:69:11
-  |vpiName:new
-  |vpiFullName:work@semaphore::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:57:22, endln:57:30
-    |vpiParent:
-    \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:57:33, endln:57:34
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::new::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiFullName:work@semaphore::new::keyCount
-      |vpiActual:
-      \_int_typespec: , line:57:18, endln:57:21
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:55:3, endln:69:11
@@ -2430,30 +1376,6 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:63:14, endln:63:17
   |vpiSigned:1
-\_function: (work@semaphore::try_get), line:66:5, endln:67:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:55:3, endln:69:11
-  |vpiName:try_get
-  |vpiFullName:work@semaphore::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:66:30, endln:66:38
-    |vpiParent:
-    \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:66:41, endln:66:42
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::try_get::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiFullName:work@semaphore::try_get::keyCount
-      |vpiActual:
-      \_int_typespec: , line:66:26, endln:66:29
 \_int_typespec: , line:66:14, endln:66:17
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
@@ -2463,4 +1385,4 @@ design: (unnamed)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0

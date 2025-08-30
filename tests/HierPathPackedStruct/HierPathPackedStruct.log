@@ -138,52 +138,25 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv:10:1: No timescale set for "some_mod".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv:10:1: Compile module "work@some_mod".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv:10:1: Top level module "work@some_mod".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
 bit_select                                             2
-constant                                              13
+constant                                               9
 design                                                 1
 gen_if                                                 1
 hier_path                                              2
 logic_net                                              1
 logic_typespec                                         2
-module_inst                                            5
-operation                                              2
+module_inst                                            2
+operation                                              1
 packed_array_typespec                                  1
-port                                                   2
+port                                                   1
 range                                                  3
-ref_obj                                                4
-ref_typespec                                           8
+ref_obj                                                3
+ref_typespec                                           5
 struct_typespec                                        2
-struct_var                                             1
-typespec_member                                        3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-bit_select                                             2
-constant                                              13
-design                                                 1
-gen_if                                                 1
-hier_path                                              2
-logic_net                                              1
-logic_typespec                                         2
-module_inst                                            5
-operation                                              2
-packed_array_typespec                                  1
-port                                                   3
-range                                                  3
-ref_obj                                                5
-ref_typespec                                           9
-struct_typespec                                        2
-struct_var                                             1
+sys_func_call                                          1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
@@ -191,13 +164,12 @@ typespec_member                                        3
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@some_mod)
-|vpiElaborated:1
-|vpiName:work@some_mod
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
   |vpiParent:
-  \_design: (work@some_mod)
+  \_design: (unnamed)
   |vpiFullName:work@some_mod
   |vpiDefName:work@some_mod
   |vpiNet:
@@ -237,13 +209,34 @@ design: (work@some_mod)
       \_gen_if: , line:14:4, endln:14:6
       |vpiOpType:15
       |vpiOperand:
-      \_constant: , line:14:8, endln:14:24
+      \_sys_func_call: ($bits), line:14:8, endln:14:24
         |vpiParent:
         \_operation: , line:14:8, endln:14:30
-        |vpiDecompile:42
-        |vpiSize:64
-        |UINT:42
-        |vpiConstType:9
+        |vpiArgument:
+        \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+          |vpiParent:
+          \_sys_func_call: ($bits), line:14:8, endln:14:24
+          |vpiActual:
+          \_ref_obj: (a), line:14:14, endln:14:15
+            |vpiParent:
+            \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+            |vpiName:a
+          |vpiActual:
+          \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+            |vpiParent:
+            \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+            |vpiName:pair
+            |vpiFullName:work@some_mod.a.pair[0].pair
+            |vpiIndex:
+            \_constant: , line:14:21, endln:14:22
+              |vpiParent:
+              \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+          |vpiName:a.pair[0]
+        |vpiName:$bits
       |vpiOperand:
       \_constant: , line:14:28, endln:14:30
         |vpiParent:
@@ -260,10 +253,10 @@ design: (work@some_mod)
 |vpiTypedef:
 \_struct_typespec: (foo_t), line:6:9, endln:8:2
   |vpiParent:
-  \_design: (work@some_mod)
+  \_design: (unnamed)
   |vpiName:foo_t
   |vpiInstance:
-  \_design: (work@some_mod)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (pair), line:7:22, endln:7:26
@@ -285,10 +278,10 @@ design: (work@some_mod)
 |vpiTypedef:
 \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
   |vpiParent:
-  \_design: (work@some_mod)
+  \_design: (unnamed)
   |vpiName:fourty_two_t
   |vpiInstance:
-  \_design: (work@some_mod)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (foo), line:2:16, endln:2:19
@@ -324,51 +317,6 @@ design: (work@some_mod)
     |vpiRefColumnNo:3
     |vpiRefEndLineNo:3
     |vpiRefEndColumnNo:15
-|uhdmtopModules:
-\_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
-  |vpiParent:
-  \_design: (work@some_mod)
-  |vpiName:work@some_mod
-  |vpiVariables:
-  \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
-    |vpiParent:
-    \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
-    |vpiTypespec:
-    \_ref_typespec: (work@some_mod.a)
-      |vpiParent:
-      \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
-      |vpiFullName:work@some_mod.a
-      |vpiActual:
-      \_struct_typespec: (foo_t), line:6:9, endln:8:2
-    |vpiName:a
-    |vpiFullName:work@some_mod.a
-    |vpiVisibility:1
-  |vpiDefName:work@some_mod
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (a), line:10:29, endln:10:30
-    |vpiParent:
-    \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
-    |vpiName:a
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@some_mod.a), line:10:29, endln:10:30
-      |vpiParent:
-      \_port: (a), line:10:29, endln:10:30
-      |vpiName:a
-      |vpiFullName:work@some_mod.a
-      |vpiActual:
-      \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
-    |vpiTypedef:
-    \_ref_typespec: (work@some_mod.a)
-      |vpiParent:
-      \_port: (a), line:10:29, endln:10:30
-      |vpiFullName:work@some_mod.a
-      |vpiActual:
-      \_struct_typespec: (foo_t), line:6:9, endln:8:2
-    |vpiInstance:
-    \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
 \_weaklyReferenced:
 \_logic_typespec: , line:2:3, endln:2:15
   |vpiParent:
@@ -451,8 +399,4 @@ design: (work@some_mod)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedStruct/roundtrip/dut_000.sv | 6 | 17 |
-============================== End RoundTrip Results ==============================
+[   NOTE] : 0

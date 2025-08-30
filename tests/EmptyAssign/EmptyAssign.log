@@ -164,59 +164,34 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/EmptyAssign/dut.sv:1:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/EmptyAssign/dut.sv:13:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/EmptyAssign/dut.sv:13:1: Top level module "work@top".
-[NTE:EL0537] ${SURELOG_DIR}/tests/EmptyAssign/dut.sv:15:14: Empty parameter override for b.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              12
+constant                                               7
 design                                                 1
 if_else                                                1
 initial                                                1
-int_typespec                                           6
-module_inst                                            6
+int_typespec                                           3
+module_inst                                            2
 operation                                              1
-param_assign                                           6
-parameter                                              6
+param_assign                                           3
+parameter                                              3
 ref_module                                             1
 ref_obj                                                4
-ref_typespec                                          12
+ref_typespec                                           6
 sys_func_call                                          3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                              12
-design                                                 1
-if_else                                                2
-initial                                                2
-int_typespec                                           6
-module_inst                                            6
-operation                                              2
-param_assign                                           6
-parameter                                              6
-ref_module                                             1
-ref_obj                                                8
-ref_typespec                                          12
-sys_func_call                                          6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.a), line:1:24, endln:1:25
@@ -416,7 +391,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
@@ -427,224 +402,16 @@ design: (work@top)
     |vpiDefName:work@dut
     |vpiActual:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
-    |vpiName:dut
-    |vpiFullName:work@top.dut
-    |vpiParameter:
-    \_parameter: (work@top.dut.a), line:1:24, endln:1:25
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut.a)
-        |vpiParent:
-        \_parameter: (work@top.dut.a), line:1:24, endln:1:25
-        |vpiFullName:work@top.dut.a
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
-      |vpiName:a
-      |vpiFullName:work@top.dut.a
-    |vpiParameter:
-    \_parameter: (work@top.dut.b), line:1:31, endln:1:32
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut.b)
-        |vpiParent:
-        \_parameter: (work@top.dut.b), line:1:31, endln:1:32
-        |vpiFullName:work@top.dut.b
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
-      |vpiName:b
-      |vpiFullName:work@top.dut.b
-    |vpiParameter:
-    \_parameter: (work@top.dut.c), line:1:38, endln:1:39
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut.c)
-        |vpiParent:
-        \_parameter: (work@top.dut.c), line:1:38, endln:1:39
-        |vpiFullName:work@top.dut.c
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
-      |vpiName:c
-      |vpiFullName:work@top.dut.c
-    |vpiParamAssign:
-    \_param_assign: , line:1:24, endln:1:29
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:1:28, endln:1:29
-        |vpiParent:
-        \_param_assign: , line:1:24, endln:1:29
-        |vpiDecompile:4
-        |vpiSize:32
-        |UINT:4
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut)
-          |vpiParent:
-          \_constant: , line:1:28, endln:1:29
-          |vpiFullName:work@top.dut
-          |vpiActual:
-          \_int_typespec: , line:1:14, endln:1:43
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut.a), line:1:24, endln:1:25
-    |vpiParamAssign:
-    \_param_assign: , line:1:31, endln:1:36
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |vpiRhs:
-      \_constant: , line:1:35, endln:1:36
-        |vpiParent:
-        \_param_assign: , line:1:31, endln:1:36
-        |vpiDecompile:2
-        |vpiSize:32
-        |UINT:2
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut)
-          |vpiParent:
-          \_constant: , line:1:35, endln:1:36
-          |vpiFullName:work@top.dut
-          |vpiActual:
-          \_int_typespec: , line:1:14, endln:1:43
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut.b), line:1:31, endln:1:32
-    |vpiParamAssign:
-    \_param_assign: , line:1:38, endln:1:43
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:1:42, endln:1:43
-        |vpiParent:
-        \_param_assign: , line:1:38, endln:1:43
-        |vpiDecompile:5
-        |vpiSize:32
-        |UINT:5
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut)
-          |vpiParent:
-          \_constant: , line:1:42, endln:1:43
-          |vpiFullName:work@top.dut
-          |vpiActual:
-          \_int_typespec: , line:1:14, endln:1:43
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut.c), line:1:38, endln:1:39
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/EmptyAssign/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
-    |vpiProcess:
-    \_initial: , line:3:1, endln:9:4
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:15:1, endln:15:33
-      |vpiStmt:
-      \_begin: (work@top.dut), line:3:9, endln:9:4
-        |vpiParent:
-        \_initial: , line:3:1, endln:9:4
-        |vpiFullName:work@top.dut
-        |vpiStmt:
-        \_sys_func_call: ($display), line:4:3, endln:4:35
-          |vpiParent:
-          \_begin: (work@top.dut), line:3:9, endln:9:4
-          |vpiArgument:
-          \_constant: , line:4:12, endln:4:25
-          |vpiArgument:
-          \_ref_obj: (work@top.dut.a), line:4:27, endln:4:28
-            |vpiParent:
-            \_sys_func_call: ($display), line:4:3, endln:4:35
-            |vpiName:a
-            |vpiFullName:work@top.dut.a
-            |vpiActual:
-            \_parameter: (work@top.dut.a), line:1:24, endln:1:25
-          |vpiArgument:
-          \_ref_obj: (work@top.dut.b), line:4:30, endln:4:31
-            |vpiParent:
-            \_sys_func_call: ($display), line:4:3, endln:4:35
-            |vpiName:b
-            |vpiFullName:work@top.dut.b
-            |vpiActual:
-            \_parameter: (work@top.dut.b), line:1:31, endln:1:32
-          |vpiArgument:
-          \_ref_obj: (work@top.dut.c), line:4:33, endln:4:34
-            |vpiParent:
-            \_sys_func_call: ($display), line:4:3, endln:4:35
-            |vpiName:c
-            |vpiFullName:work@top.dut.c
-            |vpiActual:
-            \_parameter: (work@top.dut.c), line:1:38, endln:1:39
-          |vpiName:$display
-        |vpiStmt:
-        \_if_else: , line:5:3, endln:8:24
-          |vpiParent:
-          \_begin: (work@top.dut), line:3:9, endln:9:4
-          |vpiCondition:
-          \_operation: , line:5:7, endln:5:14
-            |vpiParent:
-            \_if_else: , line:5:3, endln:8:24
-            |vpiOpType:16
-            |vpiOperand:
-            \_ref_obj: (work@top.dut.b), line:5:7, endln:5:8
-              |vpiParent:
-              \_operation: , line:5:7, endln:5:14
-              |vpiName:b
-              |vpiFullName:work@top.dut.b
-              |vpiActual:
-              \_parameter: (work@top.dut.b), line:1:31, endln:1:32
-            |vpiOperand:
-            \_constant: , line:5:13, endln:5:14
-          |vpiStmt:
-          \_sys_func_call: ($display), line:6:5, endln:6:23
-            |vpiParent:
-            \_if_else: , line:5:3, endln:8:24
-            |vpiArgument:
-            \_constant: , line:6:14, endln:6:22
-            |vpiName:$display
-          |vpiElseStmt:
-          \_sys_func_call: ($display), line:8:5, endln:8:23
-            |vpiParent:
-            \_if_else: , line:5:3, endln:8:24
-            |vpiArgument:
-            \_constant: , line:8:14, endln:8:22
-            |vpiName:$display
 \_weaklyReferenced:
 \_int_typespec: , line:1:14, endln:1:43
 \_int_typespec: , line:1:14, endln:1:43
 \_int_typespec: , line:1:14, endln:1:43
-\_int_typespec: , line:1:14, endln:1:43
-  |vpiParent:
-  \_ref_typespec: (work@top.dut.a)
-\_int_typespec: , line:1:14, endln:1:43
-  |vpiParent:
-  \_ref_typespec: (work@top.dut.b)
-\_int_typespec: , line:1:14, endln:1:43
-  |vpiParent:
-  \_ref_typespec: (work@top.dut.c)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 6
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/EmptyAssign/dut.sv | ${SURELOG_DIR}/build/regression/EmptyAssign/roundtrip/dut_000.sv | 2 | 17 |

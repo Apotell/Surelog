@@ -3,52 +3,30 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/DeferAssert/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DeferAssert/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/DeferAssert/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               2
+constant                                               1
 design                                                 1
 immediate_assert                                       1
 initial                                                1
 logic_net                                              1
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
+logic_typespec                                         1
+module_inst                                            1
 operation                                              1
 ref_obj                                                1
-ref_typespec                                           2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               2
-design                                                 1
-immediate_assert                                       2
-initial                                                2
-logic_net                                              1
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
-operation                                              2
-ref_obj                                                2
-ref_typespec                                           2
+ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DeferAssert/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DeferAssert/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DeferAssert/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -95,71 +73,14 @@ design: (work@top)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_logic_var: (work@top.a), line:2:9, endln:2:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_logic_var: (work@top.a), line:2:9, endln:2:14
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_logic_typespec: , line:2:3, endln:2:8
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-    |vpiExpr:
-    \_constant: , line:2:13, endln:2:14
-      |vpiParent:
-      \_logic_var: (work@top.a), line:2:9, endln:2:14
-      |vpiDecompile:1
-      |vpiSize:1
-      |UINT:1
-      |vpiConstType:9
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:3:3, endln:3:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
-    |vpiStmt:
-    \_immediate_assert: , line:3:11, endln:3:31
-      |vpiParent:
-      \_initial: , line:3:3, endln:3:31
-      |vpiIsDeferred:1
-      |vpiExpr:
-      \_operation: , line:3:23, endln:3:29
-        |vpiParent:
-        \_immediate_assert: , line:3:11, endln:3:31
-        |vpiOpType:15
-        |vpiOperand:
-        \_ref_obj: (work@top.a), line:3:23, endln:3:24
-          |vpiParent:
-          \_operation: , line:3:23, endln:3:29
-          |vpiName:a
-          |vpiFullName:work@top.a
-          |vpiActual:
-          \_logic_var: (work@top.a), line:2:9, endln:2:14
-        |vpiOperand:
-        \_constant: , line:3:28, endln:3:29
 \_weaklyReferenced:
-\_logic_typespec: , line:2:3, endln:2:8
-  |vpiParent:
-  \_logic_var: (work@top.a), line:2:9, endln:2:14
 \_logic_typespec: , line:2:3, endln:2:14
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/DeferAssert/dut.sv | ${SURELOG_DIR}/build/regression/DeferAssert/roundtrip/dut_000.sv | 2 | 4 |

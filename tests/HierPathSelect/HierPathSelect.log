@@ -78,43 +78,19 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathSelect/dut.sv:1:1: No timescale set for "dut2".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathSelect/dut.sv:1:1: Compile module "work@dut2".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/HierPathSelect/dut.sv:1:1: Top level module "work@dut2".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_select                                             2
-constant                                               6
-cont_assign                                            2
+bit_select                                             1
+constant                                               4
+cont_assign                                            1
 design                                                 1
-hier_path                                              2
+hier_path                                              1
 logic_net                                              1
 logic_typespec                                         1
-module_inst                                            3
+module_inst                                            1
 range                                                  1
-ref_obj                                                2
-ref_typespec                                           2
-struct_net                                             1
-struct_typespec                                        1
-typespec_member                                        1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_select                                             3
-constant                                               6
-cont_assign                                            3
-design                                                 1
-hier_path                                              3
-logic_net                                              1
-logic_typespec                                         1
-module_inst                                            3
-range                                                  1
-ref_obj                                                3
-ref_typespec                                           2
-struct_net                                             1
+ref_obj                                                1
+ref_typespec                                           1
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
@@ -123,13 +99,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut2)
-|vpiElaborated:1
-|vpiName:work@dut2
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
   |vpiParent:
-  \_design: (work@dut2)
+  \_design: (unnamed)
   |vpiFullName:work@dut2
   |vpiTypedef:
   \_struct_typespec: (struct_typedef), line:3:9, endln:5:2
@@ -199,63 +174,6 @@ design: (work@dut2)
           |UINT:1
           |vpiConstType:9
       |vpiName:read_buf.q[1]
-|uhdmtopModules:
-\_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
-  |vpiParent:
-  \_design: (work@dut2)
-  |vpiName:work@dut2
-  |vpiTypedef:
-  \_struct_typespec: (struct_typedef), line:3:9, endln:5:2
-  |vpiDefName:work@dut2
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@dut2.read_buf), line:6:16, endln:6:24
-    |vpiParent:
-    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut2.read_buf)
-      |vpiParent:
-      \_struct_net: (work@dut2.read_buf), line:6:16, endln:6:24
-      |vpiFullName:work@dut2.read_buf
-      |vpiActual:
-      \_struct_typespec: (struct_typedef), line:3:9, endln:5:2
-    |vpiName:read_buf
-    |vpiFullName:work@dut2.read_buf
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:8:8, endln:8:28
-    |vpiParent:
-    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
-    |vpiRhs:
-    \_constant: , line:8:24, endln:8:28
-    |vpiLhs:
-    \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-      |vpiParent:
-      \_cont_assign: , line:8:8, endln:8:28
-      |vpiActual:
-      \_ref_obj: (read_buf), line:8:17, endln:8:18
-        |vpiParent:
-        \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-        |vpiName:read_buf
-        |vpiActual:
-        \_struct_net: (work@dut2.read_buf), line:6:16, endln:6:24
-      |vpiActual:
-      \_bit_select: (work@dut2.read_buf.q[1].q), line:8:19, endln:8:20
-        |vpiParent:
-        \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-        |vpiName:q
-        |vpiFullName:work@dut2.read_buf.q[1].q
-        |vpiActual:
-        \_typespec_member: (q), line:4:15, endln:4:16
-        |vpiIndex:
-        \_constant: , line:8:19, endln:8:20
-          |vpiParent:
-          \_bit_select: (work@dut2.read_buf.q[1].q), line:8:19, endln:8:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiName:read_buf.q[1]
 \_weaklyReferenced:
 \_logic_typespec: , line:4:3, endln:4:14
   |vpiParent:
@@ -280,32 +198,9 @@ design: (work@dut2)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_cont_assign: , line:8:8, endln:8:28
-  |vpiParent:
-  \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
-  |vpiRhs:
-  \_constant: , line:8:24, endln:8:28
-  |vpiLhs:
-  \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-    |vpiParent:
-    \_cont_assign: , line:8:8, endln:8:28
-    |vpiActual:
-    \_ref_obj: (read_buf), line:8:17, endln:8:18
-      |vpiParent:
-      \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-      |vpiName:read_buf
-    |vpiActual:
-    \_bit_select: (work@dut2.read_buf.q[1].q), line:8:19, endln:8:20
-      |vpiParent:
-      \_hier_path: (read_buf.q[1]), line:8:8, endln:8:21
-      |vpiName:q
-      |vpiFullName:work@dut2.read_buf.q[1].q
-      |vpiIndex:
-      \_constant: , line:8:19, endln:8:20
-    |vpiName:read_buf.q[1]
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0

@@ -147,63 +147,39 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstantBits/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstantBits/dut.sv:1:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ConstantBits/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              16
-cont_assign                                            2
+constant                                               6
+cont_assign                                            1
 design                                                 1
 logic_net                                              2
-logic_typespec                                        10
-logic_var                                              1
-module_inst                                            5
-operation                                              4
-part_select                                            2
-range                                                  5
+logic_typespec                                         5
+module_inst                                            1
+operation                                              2
+part_select                                            1
+range                                                  2
 ref_obj                                                2
-ref_typespec                                          13
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        8
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              16
-cont_assign                                            3
-design                                                 1
-logic_net                                              2
-logic_typespec                                        10
-logic_var                                              1
-module_inst                                            5
-operation                                              6
-part_select                                            3
-range                                                  5
-ref_obj                                                3
-ref_typespec                                          14
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        8
+ref_typespec                                           6
+struct_typespec                                        1
+sys_func_call                                          1
+typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantBits/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstantBits/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstantBits/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
     |vpiName:cpu_ctrl_t
     |vpiInstance:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
@@ -214,10 +190,10 @@ design: (work@dut)
       \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
       |vpiName:dummy_instr_mask
       |vpiTypespec:
-      \_ref_typespec: (cpu_ctrl_t.dummy_instr_mask)
+      \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_mask)
         |vpiParent:
         \_typespec_member: (dummy_instr_mask), line:4:24, endln:4:40
-        |vpiFullName:cpu_ctrl_t.dummy_instr_mask
+        |vpiFullName:work@dut.cpu_ctrl_t.dummy_instr_mask
         |vpiActual:
         \_logic_typespec: , line:4:11, endln:4:22
       |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
@@ -231,10 +207,10 @@ design: (work@dut)
       \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
       |vpiName:dummy_instr_en
       |vpiTypespec:
-      \_ref_typespec: (cpu_ctrl_t.dummy_instr_en)
+      \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_en)
         |vpiParent:
         \_typespec_member: (dummy_instr_en), line:5:24, endln:5:38
-        |vpiFullName:cpu_ctrl_t.dummy_instr_en
+        |vpiFullName:work@dut.cpu_ctrl_t.dummy_instr_en
         |vpiActual:
         \_logic_typespec: , line:5:11, endln:5:16
       |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
@@ -248,10 +224,10 @@ design: (work@dut)
       \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
       |vpiName:data_ind_timing
       |vpiTypespec:
-      \_ref_typespec: (cpu_ctrl_t.data_ind_timing)
+      \_ref_typespec: (work@dut.cpu_ctrl_t.data_ind_timing)
         |vpiParent:
         \_typespec_member: (data_ind_timing), line:6:24, endln:6:39
-        |vpiFullName:cpu_ctrl_t.data_ind_timing
+        |vpiFullName:work@dut.cpu_ctrl_t.data_ind_timing
         |vpiActual:
         \_logic_typespec: , line:6:11, endln:6:16
       |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
@@ -265,10 +241,10 @@ design: (work@dut)
       \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
       |vpiName:icache_enable
       |vpiTypespec:
-      \_ref_typespec: (cpu_ctrl_t.icache_enable)
+      \_ref_typespec: (work@dut.cpu_ctrl_t.icache_enable)
         |vpiParent:
         \_typespec_member: (icache_enable), line:7:24, endln:7:37
-        |vpiFullName:cpu_ctrl_t.icache_enable
+        |vpiFullName:work@dut.cpu_ctrl_t.icache_enable
         |vpiActual:
         \_logic_typespec: , line:7:11, endln:7:16
       |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
@@ -327,13 +303,16 @@ design: (work@dut)
           \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
           |vpiOpType:11
           |vpiOperand:
-          \_constant: , line:11:58, endln:11:75
+          \_sys_func_call: ($bits), line:11:58, endln:11:75
             |vpiParent:
             \_operation: , line:11:58, endln:11:77
-            |vpiDecompile:6
-            |vpiSize:64
-            |UINT:6
-            |vpiConstType:9
+            |vpiArgument:
+            \_ref_obj: (work@dut.csr_wdata_int.cpu_ctrl_t), line:11:64, endln:11:74
+              |vpiParent:
+              \_sys_func_call: ($bits), line:11:58, endln:11:75
+              |vpiName:cpu_ctrl_t
+              |vpiFullName:work@dut.csr_wdata_int.cpu_ctrl_t
+            |vpiName:$bits
           |vpiOperand:
           \_constant: , line:11:76, endln:11:77
             |vpiParent:
@@ -356,91 +335,6 @@ design: (work@dut)
       |vpiFullName:work@dut.cpuctrl_wdata
       |vpiActual:
       \_logic_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_logic_var: (work@dut.csr_wdata_int), line:10:22, endln:10:35
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.csr_wdata_int)
-      |vpiParent:
-      \_logic_var: (work@dut.csr_wdata_int), line:10:22, endln:10:35
-      |vpiFullName:work@dut.csr_wdata_int
-      |vpiActual:
-      \_logic_typespec: , line:10:9, endln:10:21
-    |vpiName:csr_wdata_int
-    |vpiFullName:work@dut.csr_wdata_int
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.cpuctrl_wdata)
-      |vpiParent:
-      \_struct_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
-      |vpiFullName:work@dut.cpuctrl_wdata
-      |vpiActual:
-      \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-    |vpiName:cpuctrl_wdata
-    |vpiFullName:work@dut.cpuctrl_wdata
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:11:16, endln:11:81
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-    |vpiRhs:
-    \_operation: , line:11:32, endln:11:81
-      |vpiParent:
-      \_cont_assign: , line:11:16, endln:11:81
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_operation: , line:11:32, endln:11:81
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-      |vpiOpType:67
-      |vpiOperand:
-      \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
-        |vpiParent:
-        \_operation: , line:11:32, endln:11:81
-        |vpiName:csr_wdata_int
-        |vpiFullName:work@dut.csr_wdata_int
-        |vpiDefName:csr_wdata_int
-        |vpiActual:
-        \_logic_var: (work@dut.csr_wdata_int), line:10:22, endln:10:35
-        |vpiConstantSelect:1
-        |vpiLeftRange:
-        \_constant: , line:11:58, endln:11:77
-          |vpiDecompile:5
-          |vpiSize:64
-          |INT:5
-          |vpiConstType:7
-        |vpiRightRange:
-        \_constant: , line:11:78, endln:11:79
-          |vpiParent:
-          \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-    |vpiLhs:
-    \_ref_obj: (work@dut.cpuctrl_wdata), line:11:16, endln:11:29
-      |vpiParent:
-      \_cont_assign: , line:11:16, endln:11:81
-      |vpiName:cpuctrl_wdata
-      |vpiFullName:work@dut.cpuctrl_wdata
-      |vpiActual:
-      \_struct_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
 \_weaklyReferenced:
 \_logic_typespec: , line:4:11, endln:4:22
   |vpiParent:
@@ -475,8 +369,6 @@ design: (work@dut)
   |vpiParent:
   \_typespec_member: (icache_enable), line:7:24, endln:7:37
 \_logic_typespec: , line:10:9, endln:10:21
-  |vpiParent:
-  \_logic_var: (work@dut.csr_wdata_int), line:10:22, endln:10:35
   |vpiRange:
   \_range: , line:10:15, endln:10:21
     |vpiParent:
@@ -497,196 +389,12 @@ design: (work@dut)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:10:9, endln:10:21
-  |vpiRange:
-  \_range: , line:10:15, endln:10:21
-    |vpiParent:
-    \_logic_typespec: , line:10:9, endln:10:21
-    |vpiLeftRange:
-    \_constant: , line:10:16, endln:10:18
-      |vpiParent:
-      \_range: , line:10:15, endln:10:21
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:10:19, endln:10:20
-      |vpiParent:
-      \_range: , line:10:15, endln:10:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-  |vpiParent:
-  \_ref_typespec: (work@dut)
-  |vpiName:cpu_ctrl_t
-  |vpiInstance:
-  \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dummy_instr_mask), line:4:24, endln:4:40
-    |vpiParent:
-    \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-    |vpiName:dummy_instr_mask
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_mask)
-      |vpiParent:
-      \_typespec_member: (dummy_instr_mask), line:4:24, endln:4:40
-      |vpiFullName:work@dut.cpu_ctrl_t.dummy_instr_mask
-      |vpiActual:
-      \_logic_typespec: , line:4:11, endln:4:22
-    |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:11
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:22
-  |vpiTypespecMember:
-  \_typespec_member: (dummy_instr_en), line:5:24, endln:5:38
-    |vpiParent:
-    \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-    |vpiName:dummy_instr_en
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_en)
-      |vpiParent:
-      \_typespec_member: (dummy_instr_en), line:5:24, endln:5:38
-      |vpiFullName:work@dut.cpu_ctrl_t.dummy_instr_en
-      |vpiActual:
-      \_logic_typespec: , line:5:11, endln:5:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:11
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (data_ind_timing), line:6:24, endln:6:39
-    |vpiParent:
-    \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-    |vpiName:data_ind_timing
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.cpu_ctrl_t.data_ind_timing)
-      |vpiParent:
-      \_typespec_member: (data_ind_timing), line:6:24, endln:6:39
-      |vpiFullName:work@dut.cpu_ctrl_t.data_ind_timing
-      |vpiActual:
-      \_logic_typespec: , line:6:11, endln:6:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:11
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (icache_enable), line:7:24, endln:7:37
-    |vpiParent:
-    \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-    |vpiName:icache_enable
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.cpu_ctrl_t.icache_enable)
-      |vpiParent:
-      \_typespec_member: (icache_enable), line:7:24, endln:7:37
-      |vpiFullName:work@dut.cpu_ctrl_t.icache_enable
-      |vpiActual:
-      \_logic_typespec: , line:7:11, endln:7:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ConstantBits/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:11
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:16
-\_ref_typespec: (work@dut)
-  |vpiParent:
-  \_operation: , line:11:32, endln:11:81
-  |vpiFullName:work@dut
-  |vpiActual:
-  \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
-\_operation: , line:11:32, endln:11:81
-  |vpiParent:
-  \_cont_assign: , line:11:16, endln:11:81
-  |vpiTypespec:
-  \_ref_typespec: (work@dut)
-  |vpiOpType:67
-  |vpiOperand:
-  \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
-    |vpiParent:
-    \_operation: , line:11:32, endln:11:81
-    |vpiName:csr_wdata_int
-    |vpiFullName:work@dut.csr_wdata_int
-    |vpiDefName:csr_wdata_int
-    |vpiConstantSelect:1
-    |vpiLeftRange:
-    \_operation: , line:11:58, endln:11:77
-      |vpiParent:
-      \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:11:58, endln:11:75
-        |vpiParent:
-        \_operation: , line:11:58, endln:11:77
-        |vpiDecompile:6
-        |vpiSize:64
-        |UINT:6
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:11:76, endln:11:77
-        |vpiParent:
-        \_operation: , line:11:58, endln:11:77
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:78, endln:11:79
-\_cont_assign: , line:11:16, endln:11:81
-  |vpiParent:
-  \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-  |vpiRhs:
-  \_operation: , line:11:32, endln:11:81
-  |vpiLhs:
-  \_ref_obj: (work@dut.cpuctrl_wdata), line:11:16, endln:11:29
-    |vpiParent:
-    \_cont_assign: , line:11:16, endln:11:81
-    |vpiName:cpuctrl_wdata
-    |vpiFullName:work@dut.cpuctrl_wdata
-    |vpiActual:
-    \_struct_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
-\_logic_typespec: , line:4:11, endln:4:22
-  |vpiParent:
-  \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_mask)
-  |vpiRange:
-  \_range: , line:4:17, endln:4:22
-    |vpiParent:
-    \_logic_typespec: , line:4:11, endln:4:22
-    |vpiLeftRange:
-    \_constant: , line:4:18, endln:4:19
-      |vpiParent:
-      \_range: , line:4:17, endln:4:22
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:20, endln:4:21
-      |vpiParent:
-      \_range: , line:4:17, endln:4:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:11, endln:5:16
-  |vpiParent:
-  \_ref_typespec: (work@dut.cpu_ctrl_t.dummy_instr_en)
-\_logic_typespec: , line:6:11, endln:6:16
-  |vpiParent:
-  \_ref_typespec: (work@dut.cpu_ctrl_t.data_ind_timing)
-\_logic_typespec: , line:7:11, endln:7:16
-  |vpiParent:
-  \_ref_typespec: (work@dut.cpu_ctrl_t.icache_enable)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ConstantBits/dut.sv | ${SURELOG_DIR}/build/regression/ConstantBits/roundtrip/dut_000.sv | 2 | 12 |

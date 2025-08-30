@@ -49,50 +49,30 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv:2:1: No timescale set for "counter".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv:2:1: Compile module "work@counter".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv:2:1: Top level module "work@counter".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              11
-cont_assign                                            2
+constant                                               3
+cont_assign                                            1
 design                                                 1
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            4
-port                                                   2
-range                                                  4
-ref_obj                                                4
-ref_typespec                                           3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              11
-cont_assign                                            3
-design                                                 1
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            4
-port                                                   3
-range                                                  4
-ref_obj                                                6
-ref_typespec                                           4
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            1
+port                                                   1
+range                                                  1
+ref_obj                                                2
+ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedLiteral1/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedLiteral1/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedLiteral1/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@counter)
-|vpiElaborated:1
-|vpiName:work@counter
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
   |vpiParent:
-  \_design: (work@counter)
+  \_design: (unnamed)
   |vpiFullName:work@counter
   |vpiDefName:work@counter
   |vpiNet:
@@ -143,71 +123,6 @@ design: (work@counter)
       |vpiFullName:work@counter.out
       |vpiActual:
       \_logic_net: (work@counter.out), line:2:36, endln:2:39
-|uhdmtopModules:
-\_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-  |vpiParent:
-  \_design: (work@counter)
-  |vpiName:work@counter
-  |vpiDefName:work@counter
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@counter.out), line:2:36, endln:2:39
-    |vpiParent:
-    \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-    |vpiTypespec:
-    \_ref_typespec: (work@counter.out)
-      |vpiParent:
-      \_logic_net: (work@counter.out), line:2:36, endln:2:39
-      |vpiFullName:work@counter.out
-      |vpiActual:
-      \_logic_typespec: , line:2:25, endln:2:35
-    |vpiName:out
-    |vpiFullName:work@counter.out
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (out), line:2:36, endln:2:39
-    |vpiParent:
-    \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-    |vpiName:out
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@counter.out), line:2:36, endln:2:39
-      |vpiParent:
-      \_port: (out), line:2:36, endln:2:39
-      |vpiName:out
-      |vpiFullName:work@counter.out
-      |vpiActual:
-      \_logic_net: (work@counter.out), line:2:36, endln:2:39
-    |vpiTypedef:
-    \_ref_typespec: (work@counter.out)
-      |vpiParent:
-      \_port: (out), line:2:36, endln:2:39
-      |vpiFullName:work@counter.out
-      |vpiActual:
-      \_logic_typespec: , line:2:25, endln:2:35
-    |vpiInstance:
-    \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-  |vpiContAssign:
-  \_cont_assign: , line:4:10, endln:4:18
-    |vpiParent:
-    \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-    |vpiRhs:
-    \_constant: , line:4:16, endln:4:18
-      |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:18
-      |vpiDecompile:15
-      |vpiSize:4
-      |UINT:15
-      |vpiConstType:9
-    |vpiLhs:
-    \_ref_obj: (work@counter.out), line:4:10, endln:4:13
-      |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:18
-      |vpiName:out
-      |vpiFullName:work@counter.out
-      |vpiActual:
-      \_logic_net: (work@counter.out), line:2:36, endln:2:39
 \_weaklyReferenced:
 \_logic_typespec: , line:2:25, endln:2:35
   |vpiRange:
@@ -230,67 +145,12 @@ design: (work@counter)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:2:25, endln:2:35
-  |vpiRange:
-  \_range: , line:2:30, endln:2:35
-    |vpiParent:
-    \_logic_typespec: , line:2:25, endln:2:35
-    |vpiLeftRange:
-    \_constant: , line:2:31, endln:2:32
-      |vpiParent:
-      \_range: , line:2:30, endln:2:35
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:33, endln:2:34
-      |vpiParent:
-      \_range: , line:2:30, endln:2:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:25, endln:2:35
-  |vpiRange:
-  \_range: , line:2:30, endln:2:35
-    |vpiParent:
-    \_logic_typespec: , line:2:25, endln:2:35
-    |vpiLeftRange:
-    \_constant: , line:2:31, endln:2:32
-      |vpiParent:
-      \_range: , line:2:30, endln:2:35
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:33, endln:2:34
-      |vpiParent:
-      \_range: , line:2:30, endln:2:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_cont_assign: , line:4:10, endln:4:18
-  |vpiParent:
-  \_module_inst: work@counter (work@counter), file:${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv, line:2:1, endln:6:10
-  |vpiRhs:
-  \_constant: , line:4:16, endln:4:18
-  |vpiLhs:
-  \_ref_obj: (work@counter.out), line:4:10, endln:4:13
-    |vpiParent:
-    \_cont_assign: , line:4:10, endln:4:18
-    |vpiName:out
-    |vpiFullName:work@counter.out
-    |vpiActual:
-    \_logic_net: (work@counter.out), line:2:36, endln:2:39
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/UnsizedLiteral1/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedLiteral1/roundtrip/dut_000.sv | 1 | 6 |

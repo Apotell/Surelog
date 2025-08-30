@@ -115,67 +115,39 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ScalarParam/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/ScalarParam/dut.sv:12:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/ScalarParam/dut.sv:4:1: Compile module "work@param_test".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/ScalarParam/dut.sv:8:6: Compile generate block "work@dut.t1.genblk1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/ScalarParam/dut.sv:12:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 4.
-[NTE:EL0510] Nb instances: 3.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-bit_typespec                                           2
-constant                                              11
+bit_typespec                                           1
+constant                                               4
 design                                                 1
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
-module_inst                                            8
-operation                                              2
-param_assign                                           2
-parameter                                              2
-range                                                  2
-ref_module                                             3
+module_inst                                            3
+operation                                              1
+param_assign                                           1
+parameter                                              1
+range                                                  1
+ref_module                                             2
 ref_obj                                                1
-ref_typespec                                           4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-bit_typespec                                           2
-constant                                              11
-design                                                 1
-gen_if                                                 1
-gen_scope                                              3
-gen_scope_array                                        3
-module_inst                                            9
-operation                                              2
-param_assign                                           2
-parameter                                              2
-range                                                  2
-ref_module                                             3
-ref_obj                                                1
-ref_typespec                                           4
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:1:1, endln:2:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
@@ -189,7 +161,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@param_test
   |vpiParameter:
   \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
@@ -261,108 +233,10 @@ design: (work@dut)
         \_begin: (work@param_test)
         |vpiName:good
         |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@param_test (work@dut.t1), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:14:3, endln:16:11
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
-    |vpiName:t1
-    |vpiFullName:work@dut.t1
-    |vpiParameter:
-    \_parameter: (work@dut.t1.DRspDepth), line:5:25, endln:5:34
-      |vpiParent:
-      \_module_inst: work@param_test (work@dut.t1), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:14:3, endln:16:11
-      |HEX:2
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.t1.DRspDepth)
-        |vpiParent:
-        \_parameter: (work@dut.t1.DRspDepth), line:5:25, endln:5:34
-        |vpiFullName:work@dut.t1.DRspDepth
-        |vpiActual:
-        \_bit_typespec: , line:5:11, endln:5:20
-      |vpiName:DRspDepth
-      |vpiFullName:work@dut.t1.DRspDepth
-    |vpiParamAssign:
-    \_param_assign: , line:5:25, endln:5:41
-      |vpiParent:
-      \_module_inst: work@param_test (work@dut.t1), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:14:3, endln:16:11
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:5:37, endln:5:41
-        |vpiParent:
-        \_param_assign: , line:5:25, endln:5:41
-        |vpiDecompile:4'h0
-        |vpiSize:4
-        |HEX:0
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.t1)
-          |vpiParent:
-          \_constant: , line:5:37, endln:5:41
-          |vpiFullName:work@dut.t1
-          |vpiActual:
-          \_bit_typespec: , line:5:11, endln:5:20
-        |vpiConstType:5
-      |vpiLhs:
-      \_parameter: (work@dut.t1.DRspDepth), line:5:25, endln:5:34
-    |vpiDefName:work@param_test
-    |vpiDefFile:${SURELOG_DIR}/tests/ScalarParam/dut.sv
-    |vpiDefLineNo:4
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@dut.t1.genblk1), line:8:6, endln:8:18
-      |vpiParent:
-      \_module_inst: work@param_test (work@dut.t1), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:14:3, endln:16:11
-      |vpiName:genblk1
-      |vpiFullName:work@dut.t1.genblk1
-      |vpiGenScope:
-      \_gen_scope: (work@dut.t1.genblk1), line:8:6, endln:8:18
-        |vpiParent:
-        \_gen_scope_array: (work@dut.t1.genblk1), line:8:6, endln:8:18
-        |vpiFullName:work@dut.t1.genblk1
-        |vpiModule:
-        \_module_inst: work@GOOD (work@dut.t1.genblk1.good), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:8:6, endln:8:18
-          |vpiParent:
-          \_gen_scope: (work@dut.t1.genblk1), line:8:6, endln:8:18
-          |vpiName:good
-          |vpiFullName:work@dut.t1.genblk1.good
-          |vpiDefName:work@GOOD
-          |vpiDefFile:${SURELOG_DIR}/tests/ScalarParam/dut.sv
-          |vpiDefLineNo:1
 \_weaklyReferenced:
 \_bit_typespec: , line:5:11, endln:5:20
   |vpiParent:
   \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
-  |vpiRange:
-  \_range: , line:5:15, endln:5:20
-    |vpiParent:
-    \_bit_typespec: , line:5:11, endln:5:20
-    |vpiLeftRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:15, endln:5:20
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:18, endln:5:19
-      |vpiParent:
-      \_range: , line:5:15, endln:5:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_bit_typespec: , line:5:11, endln:5:20
-  |vpiParent:
-  \_ref_typespec: (work@dut.t1.DRspDepth)
   |vpiRange:
   \_range: , line:5:15, endln:5:20
     |vpiParent:
@@ -388,7 +262,7 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ScalarParam/dut.sv | ${SURELOG_DIR}/build/regression/ScalarParam/roundtrip/dut_000.sv | 8 | 18 |

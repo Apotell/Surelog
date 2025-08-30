@@ -67,63 +67,32 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv:1:1: Top level module "work@top".
-[WRN:EL0500] ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv:2:4: Cannot find a module definition for "work@top::PLLE2_ADV".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[WRN:EL0512] Nb undefined modules: 1.
-[WRN:EL0513] Nb undefined instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_net                                              1
 array_typespec                                         1
-constant                                              21
+constant                                               5
 design                                                 1
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            5
-operation                                              3
-param_assign                                           2
-parameter                                              2
-port                                                   2
-range                                                  7
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            1
+operation                                              1
+port                                                   1
+range                                                  2
 ref_module                                             1
-ref_obj                                                2
-ref_typespec                                           4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_net                                              1
-array_typespec                                         1
-constant                                              21
-design                                                 1
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            5
-operation                                              3
-param_assign                                           2
-parameter                                              2
-port                                                   3
-range                                                  7
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           5
+ref_obj                                                1
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackboxMissingDef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BlackboxMissingDef/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BlackboxMissingDef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -160,179 +129,7 @@ design: (work@top)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
     |vpiName:pll
     |vpiDefName:work@PLLE2_ADV
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiArrayNet:
-  \_array_net: (work@top.e), line:1:30, endln:1:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
-    |vpiSize:2
-    |vpiName:e
-    |vpiFullName:work@top.e
-    |vpiRange:
-    \_range: , line:1:32, endln:1:33
-      |vpiParent:
-      \_array_net: (work@top.e), line:1:30, endln:1:31
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:1:32, endln:1:33
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:1:32, endln:1:33
-        |vpiParent:
-        \_range: , line:1:32, endln:1:33
-        |vpiOpType:11
-        |vpiOperand:
-        \_constant: , line:1:32, endln:1:33
-          |vpiParent:
-          \_operation: , line:1:32, endln:1:33
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiNet:
-    \_logic_net: (work@top.e), line:1:30, endln:1:31
-      |vpiParent:
-      \_array_net: (work@top.e), line:1:30, endln:1:31
-      |vpiTypespec:
-      \_ref_typespec: (work@top.e)
-        |vpiParent:
-        \_logic_net: (work@top.e), line:1:30, endln:1:31
-        |vpiFullName:work@top.e
-        |vpiActual:
-        \_logic_typespec: , line:1:18, endln:1:29
-      |vpiFullName:work@top.e
-      |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (e), line:1:30, endln:1:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
-    |vpiName:e
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.e), line:1:30, endln:1:31
-      |vpiParent:
-      \_port: (e), line:1:30, endln:1:31
-      |vpiName:e
-      |vpiFullName:work@top.e
-      |vpiActual:
-      \_array_net: (work@top.e), line:1:30, endln:1:31
-    |vpiTypedef:
-    \_ref_typespec: (work@top.e)
-      |vpiParent:
-      \_port: (e), line:1:30, endln:1:31
-      |vpiFullName:work@top.e
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:29
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
-  |vpiModule:
-  \_module_inst: work@top::PLLE2_ADV (work@top.pll), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:2:4, endln:4:13
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
-    |vpiName:pll
-    |vpiFullName:work@top.pll
-    |vpiParameter:
-    \_parameter: (work@top.pll.TEST)
-      |vpiParent:
-      \_param_assign: 
-      |vpiName:TEST
-      |vpiFullName:work@top.pll.TEST
-    |vpiParameter:
-    \_parameter: (work@top.pll.TEST2)
-      |vpiParent:
-      \_param_assign: 
-      |vpiName:TEST2
-      |vpiFullName:work@top.pll.TEST2
-    |vpiParamAssign:
-    \_param_assign: 
-      |vpiParent:
-      \_module_inst: work@top::PLLE2_ADV (work@top.pll), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:2:4, endln:4:13
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:3:0, endln:3:0
-        |vpiDecompile:TEST PARAMETER
-        |vpiSize:112
-        |STRING:TEST PARAMETER
-        |vpiConstType:6
-      |vpiLhs:
-      \_parameter: (work@top.pll.TEST)
-    |vpiParamAssign:
-    \_param_assign: 
-      |vpiParent:
-      \_module_inst: work@top::PLLE2_ADV (work@top.pll), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:2:4, endln:4:13
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:3:0, endln:3:0
-        |vpiDecompile:10
-        |vpiSize:64
-        |UINT:10
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.pll.TEST2)
-    |vpiDefName:work@top::PLLE2_ADV
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
 \_weaklyReferenced:
-\_logic_typespec: , line:1:18, endln:1:29
-  |vpiRange:
-  \_range: , line:1:24, endln:1:29
-    |vpiParent:
-    \_logic_typespec: , line:1:18, endln:1:29
-    |vpiLeftRange:
-    \_constant: , line:1:25, endln:1:26
-      |vpiParent:
-      \_range: , line:1:24, endln:1:29
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:27, endln:1:28
-      |vpiParent:
-      \_range: , line:1:24, endln:1:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:1:18, endln:1:29
-  |vpiParent:
-  \_logic_net: (work@top.e), line:1:30, endln:1:31
-  |vpiRange:
-  \_range: , line:1:24, endln:1:29
-    |vpiParent:
-    \_logic_typespec: , line:1:18, endln:1:29
-    |vpiLeftRange:
-    \_constant: , line:1:25, endln:1:26
-      |vpiParent:
-      \_range: , line:1:24, endln:1:29
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:27, endln:1:28
-      |vpiParent:
-      \_range: , line:1:24, endln:1:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_array_typespec: , line:1:18, endln:1:33
   |vpiParent:
   \_port: (e), line:1:30, endln:1:31
@@ -399,8 +196,8 @@ design: (work@top)
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 4
-[   NOTE] : 5
+[WARNING] : 1
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv | ${SURELOG_DIR}/build/regression/BlackboxMissingDef/roundtrip/dut_000.sv | 4 | 5 |

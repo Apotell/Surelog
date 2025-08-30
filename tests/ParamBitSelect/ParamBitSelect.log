@@ -152,75 +152,26 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:5:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:9:32: Compile generate block "work@dut.genblk1[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Compile generate block "work@dut.genblk1[0].genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:13:8: Compile generate block "work@dut.genblk1[0].genblk1.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:9:32: Compile generate block "work@dut.genblk1[1]".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Compile generate block "work@dut.genblk1[1].genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:13:8: Compile generate block "work@dut.genblk1[1].genblk1.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:9:32: Compile generate block "work@dut.genblk1[2]".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:9:32: Compile generate block "work@dut.genblk1[3]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:5:1: Top level module "work@dut".
-[WRN:EL0500] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Cannot find a module definition for "work@dut.genblk1[0].genblk1::MOD".
-[WRN:EL0500] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Cannot find a module definition for "work@dut.genblk1[1].genblk1::MOD".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 4.
-[NTE:EL0510] Nb instances: 5.
-[NTE:EL0511] Nb leaf instances: 4.
-[WRN:EL0512] Nb undefined modules: 2.
-[WRN:EL0513] Nb undefined instances: 2.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 begin                                                  4
-bit_select                                             5
-constant                                              57
+bit_select                                             1
+constant                                               7
 design                                                 1
 gen_for                                                1
 gen_if                                                 1
 gen_if_else                                            1
-gen_scope                                             14
-gen_scope_array                                       14
-int_typespec                                           8
-int_var                                                2
+int_typespec                                           1
 logic_net                                              1
-logic_typespec                                         4
-module_inst                                            9
-operation                                             16
-param_assign                                           2
-parameter                                              6
-range                                                  6
-ref_module                                             7
+module_inst                                            2
+operation                                              5
+param_assign                                           1
+parameter                                              1
+range                                                  1
+ref_module                                             3
 ref_obj                                                5
-ref_typespec                                          16
-ref_var                                                1
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-begin                                                  4
-bit_select                                             5
-constant                                              57
-design                                                 1
-gen_for                                                1
-gen_if                                                 1
-gen_if_else                                            1
-gen_scope                                             20
-gen_scope_array                                       20
-int_typespec                                           8
-int_var                                                2
-logic_net                                              1
-logic_typespec                                         4
-module_inst                                           13
-operation                                             16
-param_assign                                           2
-parameter                                              6
-range                                                  6
-ref_module                                             7
-ref_obj                                                5
-ref_typespec                                          20
+ref_typespec                                           3
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -229,19 +180,18 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:1:1, endln:3:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.test), line:7:11, endln:7:15
@@ -282,7 +232,7 @@ design: (work@dut)
   |vpiNet:
   \_logic_net: (work@dut.k), line:9:20, endln:9:21
     |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
+    \_operation: , line:9:20, endln:9:25
     |vpiName:k
     |vpiFullName:work@dut.k
     |vpiNetType:1
@@ -301,16 +251,16 @@ design: (work@dut)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@dut.k), line:9:13, endln:9:14
+      \_ref_var: (work@dut.k), line:9:13, endln:9:14
         |vpiParent:
         \_assignment: , line:9:6, endln:9:18
         |vpiTypespec:
         \_ref_typespec: (work@dut.k)
           |vpiParent:
-          \_int_var: (work@dut.k), line:9:13, endln:9:14
+          \_ref_var: (work@dut.k), line:9:13, endln:9:14
           |vpiFullName:work@dut.k
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (k), line:9:13, endln:9:14
         |vpiName:k
         |vpiFullName:work@dut.k
     |vpiCondition:
@@ -448,207 +398,6 @@ design: (work@dut)
                 \_begin: (work@dut)
                 |vpiName:bad
                 |vpiDefName:work@BAD
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiParameter:
-  \_parameter: (work@dut.test), line:7:11, endln:7:15
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |BIN:0011
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.test)
-      |vpiParent:
-      \_parameter: (work@dut.test), line:7:11, endln:7:15
-      |vpiFullName:work@dut.test
-      |vpiActual:
-      \_int_typespec: , line:7:1, endln:7:25
-    |vpiName:test
-    |vpiFullName:work@dut.test
-  |vpiParamAssign:
-  \_param_assign: , line:7:11, endln:7:25
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |vpiRhs:
-    \_constant: , line:7:18, endln:7:25
-      |vpiParent:
-      \_param_assign: , line:7:11, endln:7:25
-      |vpiDecompile:4'b0011
-      |vpiSize:4
-      |BIN:0011
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:7:18, endln:7:25
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_logic_typespec: 
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@dut.test), line:7:11, endln:7:15
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut.genblk1[0]), line:9:32, endln:19:4
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |vpiName:genblk1[0]
-    |vpiFullName:work@dut.genblk1[0]
-    |vpiGenScope:
-    \_gen_scope: (work@dut.genblk1[0]), line:9:32, endln:19:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut.genblk1[0]), line:9:32, endln:19:4
-      |vpiFullName:work@dut.genblk1[0]
-      |vpiParameter:
-      \_parameter: (work@dut.genblk1[0].k), line:9:0
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[0]), line:9:32, endln:19:4
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.genblk1[0].k)
-          |vpiParent:
-          \_parameter: (work@dut.genblk1[0].k), line:9:0
-          |vpiFullName:work@dut.genblk1[0].k
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:k
-        |vpiFullName:work@dut.genblk1[0].k
-      |vpiModule:
-      \_module_inst: work@dut.genblk1[0].genblk1::MOD (work@dut.genblk1[0].genblk1.m), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:11:5, endln:11:14
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[0]), line:9:32, endln:19:4
-        |vpiName:m
-        |vpiFullName:work@dut.genblk1[0].genblk1.m
-        |vpiDefName:work@dut.genblk1[0].genblk1::MOD
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@dut.genblk1[0].genblk1), line:13:8, endln:13:20
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[0]), line:9:32, endln:19:4
-        |vpiName:genblk1
-        |vpiFullName:work@dut.genblk1[0].genblk1
-        |vpiGenScope:
-        \_gen_scope: (work@dut.genblk1[0].genblk1), line:13:8, endln:13:20
-          |vpiParent:
-          \_gen_scope_array: (work@dut.genblk1[0].genblk1), line:13:8, endln:13:20
-          |vpiFullName:work@dut.genblk1[0].genblk1
-          |vpiModule:
-          \_module_inst: work@GOOD (work@dut.genblk1[0].genblk1.good), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:13:8, endln:13:20
-            |vpiParent:
-            \_gen_scope: (work@dut.genblk1[0].genblk1), line:13:8, endln:13:20
-            |vpiName:good
-            |vpiFullName:work@dut.genblk1[0].genblk1.good
-            |vpiDefName:work@GOOD
-            |vpiDefFile:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv
-            |vpiDefLineNo:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut.genblk1[1]), line:9:32, endln:19:4
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |vpiName:genblk1[1]
-    |vpiFullName:work@dut.genblk1[1]
-    |vpiGenScope:
-    \_gen_scope: (work@dut.genblk1[1]), line:9:32, endln:19:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut.genblk1[1]), line:9:32, endln:19:4
-      |vpiFullName:work@dut.genblk1[1]
-      |vpiParameter:
-      \_parameter: (work@dut.genblk1[1].k), line:9:0
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[1]), line:9:32, endln:19:4
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.genblk1[1].k)
-          |vpiParent:
-          \_parameter: (work@dut.genblk1[1].k), line:9:0
-          |vpiFullName:work@dut.genblk1[1].k
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:k
-        |vpiFullName:work@dut.genblk1[1].k
-      |vpiModule:
-      \_module_inst: work@dut.genblk1[1].genblk1::MOD (work@dut.genblk1[1].genblk1.m), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:11:5, endln:11:14
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[1]), line:9:32, endln:19:4
-        |vpiName:m
-        |vpiFullName:work@dut.genblk1[1].genblk1.m
-        |vpiDefName:work@dut.genblk1[1].genblk1::MOD
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@dut.genblk1[1].genblk1), line:13:8, endln:13:20
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[1]), line:9:32, endln:19:4
-        |vpiName:genblk1
-        |vpiFullName:work@dut.genblk1[1].genblk1
-        |vpiGenScope:
-        \_gen_scope: (work@dut.genblk1[1].genblk1), line:13:8, endln:13:20
-          |vpiParent:
-          \_gen_scope_array: (work@dut.genblk1[1].genblk1), line:13:8, endln:13:20
-          |vpiFullName:work@dut.genblk1[1].genblk1
-          |vpiModule:
-          \_module_inst: work@GOOD (work@dut.genblk1[1].genblk1.good), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:13:8, endln:13:20
-            |vpiParent:
-            \_gen_scope: (work@dut.genblk1[1].genblk1), line:13:8, endln:13:20
-            |vpiName:good
-            |vpiFullName:work@dut.genblk1[1].genblk1.good
-            |vpiDefName:work@GOOD
-            |vpiDefFile:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv
-            |vpiDefLineNo:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut.genblk1[2]), line:9:32, endln:19:4
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |vpiName:genblk1[2]
-    |vpiFullName:work@dut.genblk1[2]
-    |vpiGenScope:
-    \_gen_scope: (work@dut.genblk1[2]), line:9:32, endln:19:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut.genblk1[2]), line:9:32, endln:19:4
-      |vpiFullName:work@dut.genblk1[2]
-      |vpiParameter:
-      \_parameter: (work@dut.genblk1[2].k), line:9:0
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[2]), line:9:32, endln:19:4
-        |UINT:2
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.genblk1[2].k)
-          |vpiParent:
-          \_parameter: (work@dut.genblk1[2].k), line:9:0
-          |vpiFullName:work@dut.genblk1[2].k
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:k
-        |vpiFullName:work@dut.genblk1[2].k
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut.genblk1[3]), line:9:32, endln:19:4
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
-    |vpiName:genblk1[3]
-    |vpiFullName:work@dut.genblk1[3]
-    |vpiGenScope:
-    \_gen_scope: (work@dut.genblk1[3]), line:9:32, endln:19:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut.genblk1[3]), line:9:32, endln:19:4
-      |vpiFullName:work@dut.genblk1[3]
-      |vpiParameter:
-      \_parameter: (work@dut.genblk1[3].k), line:9:0
-        |vpiParent:
-        \_gen_scope: (work@dut.genblk1[3]), line:9:32, endln:19:4
-        |UINT:3
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.genblk1[3].k)
-          |vpiParent:
-          \_parameter: (work@dut.genblk1[3].k), line:9:0
-          |vpiFullName:work@dut.genblk1[3].k
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:k
-        |vpiFullName:work@dut.genblk1[3].k
 \_weaklyReferenced:
 \_int_typespec: , line:7:1, endln:7:25
   |vpiRange:
@@ -661,42 +410,15 @@ design: (work@dut)
     |vpiRightRange:
     \_constant: 
       |INT:0
-\_logic_typespec: 
-  |vpiRange:
-  \_range: 
-    |vpiParent:
-    \_logic_typespec: 
-    |vpiLeftRange:
-    \_constant: 
-      |UINT:3
-    |vpiRightRange:
-    \_constant: 
-      |UINT:0
-\_int_typespec: , line:7:1, endln:7:25
-  |vpiParent:
-  \_ref_typespec: (work@dut.test)
-  |vpiRange:
-  \_range: 
-    |vpiParent:
-    \_int_typespec: , line:7:1, endln:7:25
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: 
-      |INT:3
-    |vpiRightRange:
-    \_constant: 
-      |vpiParent:
-      \_range: 
-      |INT:0
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
+\_unsupported_typespec: (k), line:9:13, endln:9:14
+  |vpiName:k
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 6
-[   NOTE] : 5
+[WARNING] : 2
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv | ${SURELOG_DIR}/build/regression/ParamBitSelect/roundtrip/dut_000.sv | 11 | 21 |
+============================== End RoundTrip Results ==============================

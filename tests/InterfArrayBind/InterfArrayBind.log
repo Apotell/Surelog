@@ -202,72 +202,30 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv:1:1: Compile interface "work@io_bus_interface".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv:6:1: Compile module "work@soc_tb".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv:21:9: Compile generate block "work@soc_tb.io_gen[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv:21:9: Compile generate block "work@soc_tb.io_gen[1]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv:6:1: Top level module "work@soc_tb".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-bit_select                                             6
-constant                                              43
-cont_assign                                            6
+bit_select                                             1
+constant                                               9
+cont_assign                                            1
 design                                                 1
-enum_const                                             2
-enum_typespec                                          2
-enum_var                                               1
+enum_const                                             1
+enum_typespec                                          1
 gen_region                                             1
-gen_scope                                              4
-gen_scope_array                                        4
-hier_path                                              6
-int_typespec                                           5
-interface_inst                                         5
+hier_path                                              1
+int_typespec                                           2
+interface_inst                                         1
 logic_net                                              2
-logic_typespec                                         5
-logic_var                                              2
+logic_typespec                                         2
 module_array                                           1
-module_inst                                            7
+module_inst                                            2
 module_typespec                                        1
-operation                                              9
-param_assign                                           2
-parameter                                              4
-range                                                  5
-ref_obj                                               14
-ref_typespec                                          16
-sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-bit_select                                             9
-constant                                              43
-cont_assign                                            9
-design                                                 1
-enum_const                                             2
-enum_typespec                                          2
-enum_var                                               1
-gen_region                                             1
-gen_scope                                              6
-gen_scope_array                                        6
-hier_path                                              9
-int_typespec                                           5
-interface_inst                                         5
-logic_net                                              2
-logic_typespec                                         5
-logic_var                                              2
-module_array                                           1
-module_inst                                            7
-module_typespec                                        1
-operation                                              9
-param_assign                                           2
-parameter                                              4
-range                                                  5
-ref_obj                                               20
-ref_typespec                                          18
+operation                                              2
+param_assign                                           1
+parameter                                              1
+range                                                  2
+ref_obj                                                4
+ref_typespec                                           7
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfArrayBind/slpp_all/surelog.uhdm ...
@@ -275,13 +233,12 @@ sys_func_call                                          1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@soc_tb)
-|vpiElaborated:1
-|vpiName:work@soc_tb
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
   |vpiParent:
-  \_design: (work@soc_tb)
+  \_design: (unnamed)
   |vpiFullName:work@io_bus_interface
   |vpiDefName:work@io_bus_interface
   |vpiNet:
@@ -301,7 +258,7 @@ design: (work@soc_tb)
 |uhdmallModules:
 \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
   |vpiParent:
-  \_design: (work@soc_tb)
+  \_design: (unnamed)
   |vpiFullName:work@soc_tb
   |vpiParameter:
   \_parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:31
@@ -443,334 +400,12 @@ design: (work@soc_tb)
       |vpiParent:
       \_gen_region: 
       |vpiFullName:work@soc_tb
-|uhdmtopModules:
-\_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiParent:
-  \_design: (work@soc_tb)
-  |vpiName:work@soc_tb
-  |vpiVariables:
-  \_enum_var: (work@soc_tb.io_bus_source), line:12:7, endln:12:20
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiTypespec:
-    \_ref_typespec: (work@soc_tb.io_bus_source)
-      |vpiParent:
-      \_enum_var: (work@soc_tb.io_bus_source), line:12:7, endln:12:20
-      |vpiFullName:work@soc_tb.io_bus_source
-      |vpiActual:
-      \_enum_typespec: 
-    |vpiName:io_bus_source
-    |vpiFullName:work@soc_tb.io_bus_source
-    |vpiVisibility:1
-  |vpiParameter:
-  \_parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:31
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@soc_tb.NUM_PERIPHERALS)
-      |vpiParent:
-      \_parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:31
-      |vpiFullName:work@soc_tb.NUM_PERIPHERALS
-      |vpiActual:
-      \_int_typespec: , line:8:5, endln:8:35
-    |vpiLocalParam:1
-    |vpiName:NUM_PERIPHERALS
-    |vpiFullName:work@soc_tb.NUM_PERIPHERALS
-  |vpiParamAssign:
-  \_param_assign: , line:8:16, endln:8:35
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiRhs:
-    \_constant: , line:8:34, endln:8:35
-      |vpiParent:
-      \_param_assign: , line:8:16, endln:8:35
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@soc_tb)
-        |vpiParent:
-        \_constant: , line:8:34, endln:8:35
-        |vpiFullName:work@soc_tb
-        |vpiActual:
-        \_int_typespec: , line:8:5, endln:8:35
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:31
-  |vpiDefName:work@soc_tb
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiInterface:
-  \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[0]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:peripheral_io_bus[0]
-    |vpiFullName:work@soc_tb.peripheral_io_bus[0]
-    |vpiVariables:
-    \_logic_var: (work@soc_tb.peripheral_io_bus[0].write_en), line:2:11, endln:2:19
-      |vpiParent:
-      \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[0]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-      |vpiTypespec:
-      \_ref_typespec: (work@soc_tb.peripheral_io_bus[0].write_en)
-        |vpiParent:
-        \_logic_var: (work@soc_tb.peripheral_io_bus[0].write_en), line:2:11, endln:2:19
-        |vpiFullName:work@soc_tb.peripheral_io_bus[0].write_en
-        |vpiActual:
-        \_logic_typespec: , line:2:5, endln:2:10
-      |vpiName:write_en
-      |vpiFullName:work@soc_tb.peripheral_io_bus[0].write_en
-      |vpiVisibility:1
-    |vpiDefName:work@io_bus_interface
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiInterface:
-  \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[1]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:peripheral_io_bus[1]
-    |vpiFullName:work@soc_tb.peripheral_io_bus[1]
-    |vpiVariables:
-    \_logic_var: (work@soc_tb.peripheral_io_bus[1].write_en), line:2:11, endln:2:19
-      |vpiParent:
-      \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[1]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-      |vpiTypespec:
-      \_ref_typespec: (work@soc_tb.peripheral_io_bus[1].write_en)
-        |vpiParent:
-        \_logic_var: (work@soc_tb.peripheral_io_bus[1].write_en), line:2:11, endln:2:19
-        |vpiFullName:work@soc_tb.peripheral_io_bus[1].write_en
-        |vpiActual:
-        \_logic_typespec: , line:2:5, endln:2:10
-      |vpiName:write_en
-      |vpiFullName:work@soc_tb.peripheral_io_bus[1].write_en
-      |vpiVisibility:1
-    |vpiDefName:work@io_bus_interface
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:io_gen[0]
-    |vpiFullName:work@soc_tb.io_gen[0]
-    |vpiGenScope:
-    \_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-      |vpiParent:
-      \_gen_scope_array: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-      |vpiFullName:work@soc_tb.io_gen[0]
-      |vpiParameter:
-      \_parameter: (work@soc_tb.io_gen[0].io_idx), line:20:0
-        |vpiParent:
-        \_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@soc_tb.io_gen[0].io_idx)
-          |vpiParent:
-          \_parameter: (work@soc_tb.io_gen[0].io_idx), line:20:0
-          |vpiFullName:work@soc_tb.io_gen[0].io_idx
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:io_idx
-        |vpiFullName:work@soc_tb.io_gen[0].io_idx
-      |vpiContAssign:
-      \_cont_assign: , line:22:20, endln:22:58
-        |vpiParent:
-        \_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-        |vpiRhs:
-        \_constant: , line:22:57, endln:22:58
-          |vpiParent:
-          \_cont_assign: , line:22:20, endln:22:58
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiLhs:
-        \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-          |vpiParent:
-          \_cont_assign: , line:22:20, endln:22:58
-          |vpiActual:
-          \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-            |vpiParent:
-            \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-            |vpiName:peripheral_io_bus
-            |vpiFullName:peripheral_io_bus[io_idx]
-            |vpiActual:
-            \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[0]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-            |vpiIndex:
-            \_ref_obj: (work@soc_tb.io_gen[0].peripheral_io_bus[io_idx].write_en.io_idx), line:22:38, endln:22:44
-              |vpiParent:
-              \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-              |vpiName:io_idx
-              |vpiFullName:work@soc_tb.io_gen[0].peripheral_io_bus[io_idx].write_en.io_idx
-              |vpiActual:
-              \_parameter: (work@soc_tb.io_gen[0].io_idx), line:20:0
-          |vpiActual:
-          \_ref_obj: (peripheral_io_bus[io_idx].write_en), line:22:46, endln:22:54
-            |vpiParent:
-            \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-            |vpiName:write_en
-            |vpiFullName:peripheral_io_bus[io_idx].write_en
-            |vpiActual:
-            \_logic_var: (work@soc_tb.peripheral_io_bus[0].write_en), line:2:11, endln:2:19
-          |vpiName:peripheral_io_bus[io_idx].write_en
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:io_gen[1]
-    |vpiFullName:work@soc_tb.io_gen[1]
-    |vpiGenScope:
-    \_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-      |vpiParent:
-      \_gen_scope_array: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-      |vpiFullName:work@soc_tb.io_gen[1]
-      |vpiParameter:
-      \_parameter: (work@soc_tb.io_gen[1].io_idx), line:20:0
-        |vpiParent:
-        \_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@soc_tb.io_gen[1].io_idx)
-          |vpiParent:
-          \_parameter: (work@soc_tb.io_gen[1].io_idx), line:20:0
-          |vpiFullName:work@soc_tb.io_gen[1].io_idx
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:io_idx
-        |vpiFullName:work@soc_tb.io_gen[1].io_idx
-      |vpiContAssign:
-      \_cont_assign: , line:22:20, endln:22:58
-        |vpiParent:
-        \_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-        |vpiRhs:
-        \_constant: , line:22:57, endln:22:58
-          |vpiParent:
-          \_cont_assign: , line:22:20, endln:22:58
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiLhs:
-        \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-          |vpiParent:
-          \_cont_assign: , line:22:20, endln:22:58
-          |vpiActual:
-          \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-            |vpiParent:
-            \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-            |vpiName:peripheral_io_bus
-            |vpiFullName:peripheral_io_bus[io_idx]
-            |vpiActual:
-            \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[1]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-            |vpiIndex:
-            \_ref_obj: (work@soc_tb.io_gen[1].peripheral_io_bus[io_idx].write_en.io_idx), line:22:38, endln:22:44
-              |vpiParent:
-              \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-              |vpiName:io_idx
-              |vpiFullName:work@soc_tb.io_gen[1].peripheral_io_bus[io_idx].write_en.io_idx
-              |vpiActual:
-              \_parameter: (work@soc_tb.io_gen[1].io_idx), line:20:0
-          |vpiActual:
-          \_ref_obj: (peripheral_io_bus[io_idx].write_en), line:22:46, endln:22:54
-            |vpiParent:
-            \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-            |vpiName:write_en
-            |vpiFullName:peripheral_io_bus[io_idx].write_en
-            |vpiActual:
-            \_logic_var: (work@soc_tb.peripheral_io_bus[1].write_en), line:2:11, endln:2:19
-          |vpiName:peripheral_io_bus[io_idx].write_en
-  |vpiContAssign:
-  \_cont_assign: , line:16:12, endln:16:62
-    |vpiParent:
-    \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiRhs:
-    \_constant: , line:16:50, endln:16:62
-    |vpiLhs:
-    \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-      |vpiParent:
-      \_cont_assign: , line:16:12, endln:16:62
-      |vpiActual:
-      \_bit_select: (peripheral_io_bus[IO_ONES]), line:16:12, endln:16:29
-        |vpiParent:
-        \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-        |vpiName:peripheral_io_bus
-        |vpiFullName:peripheral_io_bus[IO_ONES]
-        |vpiActual:
-        \_interface_inst: work@io_bus_interface (work@soc_tb.peripheral_io_bus[0]), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:14:5, endln:14:65
-        |vpiIndex:
-        \_ref_obj: (work@soc_tb.peripheral_io_bus[IO_ONES].write_en.IO_ONES), line:16:30, endln:16:37
-          |vpiParent:
-          \_bit_select: (peripheral_io_bus[IO_ONES]), line:16:12, endln:16:29
-          |vpiName:IO_ONES
-          |vpiFullName:work@soc_tb.peripheral_io_bus[IO_ONES].write_en.IO_ONES
-          |vpiActual:
-          \_enum_const: (IO_ONES), line:11:7, endln:11:14
-      |vpiActual:
-      \_ref_obj: (peripheral_io_bus[IO_ONES].write_en), line:16:39, endln:16:47
-        |vpiParent:
-        \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-        |vpiName:write_en
-        |vpiFullName:peripheral_io_bus[IO_ONES].write_en
-        |vpiActual:
-        \_logic_var: (work@soc_tb.peripheral_io_bus[0].write_en), line:2:11, endln:2:19
-      |vpiName:peripheral_io_bus[IO_ONES].write_en
 \_weaklyReferenced:
 \_int_typespec: , line:8:5, endln:8:35
 \_module_typespec: (io_bus_interface), line:14:5, endln:14:21
   |vpiParent:
   \_module_array: (work@io_bus_interface), line:14:22, endln:14:39
   |vpiName:io_bus_interface
-\_enum_typespec: 
-  |vpiParent:
-  \_enum_var: (work@soc_tb.io_bus_source), line:12:7, endln:12:20
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@soc_tb.io_bus_source)
-    |vpiParent:
-    \_enum_typespec: 
-    |vpiFullName:work@soc_tb.io_bus_source
-    |vpiActual:
-    \_logic_typespec: , line:10:10, endln:10:46
-  |vpiEnumConst:
-  \_enum_const: (IO_ONES), line:11:7, endln:11:14
-    |vpiParent:
-    \_enum_typespec: 
-    |vpiName:IO_ONES
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:1
-\_logic_typespec: , line:10:10, endln:10:46
-  |vpiRange:
-  \_range: , line:10:15, endln:10:46
-    |vpiParent:
-    \_logic_typespec: , line:10:10, endln:10:46
-    |vpiLeftRange:
-    \_constant: , line:10:16, endln:10:39
-      |vpiParent:
-      \_range: , line:10:15, endln:10:46
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:10:44, endln:10:45
-      |vpiParent:
-      \_range: , line:10:15, endln:10:46
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:5, endln:2:10
-  |vpiParent:
-  \_logic_var: (work@soc_tb.peripheral_io_bus[0].write_en), line:2:11, endln:2:19
-\_logic_typespec: , line:2:5, endln:2:10
-  |vpiParent:
-  \_logic_var: (work@soc_tb.peripheral_io_bus[1].write_en), line:2:11, endln:2:19
 \_logic_typespec: , line:2:5, endln:2:10
 \_enum_typespec: 
   |vpiBaseTypespec:
@@ -823,130 +458,13 @@ design: (work@soc_tb)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:8:5, endln:8:35
-  |vpiParent:
-  \_ref_typespec: (work@soc_tb.NUM_PERIPHERALS)
-\_cont_assign: , line:16:12, endln:16:62
-  |vpiParent:
-  \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiRhs:
-  \_constant: , line:16:50, endln:16:62
-  |vpiLhs:
-  \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-    |vpiParent:
-    \_cont_assign: , line:16:12, endln:16:62
-    |vpiActual:
-    \_bit_select: (peripheral_io_bus[IO_ONES]), line:16:12, endln:16:29
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-      |vpiName:peripheral_io_bus
-      |vpiFullName:peripheral_io_bus[IO_ONES]
-      |vpiIndex:
-      \_ref_obj: (work@soc_tb.peripheral_io_bus[IO_ONES].write_en.IO_ONES), line:16:30, endln:16:37
-        |vpiParent:
-        \_bit_select: (peripheral_io_bus[IO_ONES]), line:16:12, endln:16:29
-        |vpiName:IO_ONES
-        |vpiFullName:work@soc_tb.peripheral_io_bus[IO_ONES].write_en.IO_ONES
-        |vpiActual:
-        \_enum_const: (IO_ONES), line:11:7, endln:11:14
-    |vpiActual:
-    \_ref_obj: (peripheral_io_bus[IO_ONES].write_en), line:16:39, endln:16:47
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:29
-      |vpiName:write_en
-      |vpiFullName:peripheral_io_bus[IO_ONES].write_en
-    |vpiName:peripheral_io_bus[IO_ONES].write_en
-\_cont_assign: , line:22:20, endln:22:58
-  |vpiParent:
-  \_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-  |vpiRhs:
-  \_constant: , line:22:57, endln:22:58
-  |vpiLhs:
-  \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-    |vpiParent:
-    \_cont_assign: , line:22:20, endln:22:58
-    |vpiActual:
-    \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-      |vpiName:peripheral_io_bus
-      |vpiFullName:peripheral_io_bus[io_idx]
-      |vpiIndex:
-      \_ref_obj: (work@soc_tb.io_gen[0].peripheral_io_bus[io_idx].write_en.io_idx), line:22:38, endln:22:44
-        |vpiParent:
-        \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-        |vpiName:io_idx
-        |vpiFullName:work@soc_tb.io_gen[0].peripheral_io_bus[io_idx].write_en.io_idx
-    |vpiActual:
-    \_ref_obj: (peripheral_io_bus[io_idx].write_en), line:22:46, endln:22:54
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-      |vpiName:write_en
-      |vpiFullName:peripheral_io_bus[io_idx].write_en
-    |vpiName:peripheral_io_bus[io_idx].write_en
-\_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-  |vpiParent:
-  \_gen_scope_array: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-  |vpiFullName:work@soc_tb.io_gen[0]
-  |vpiParameter:
-  \_parameter: (work@soc_tb.io_gen[0].io_idx), line:20:0
-  |vpiContAssign:
-  \_cont_assign: , line:22:20, endln:22:58
-\_gen_scope_array: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-  |vpiParent:
-  \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiName:io_gen[0]
-  |vpiFullName:work@soc_tb.io_gen[0]
-  |vpiGenScope:
-  \_gen_scope: (work@soc_tb.io_gen[0]), line:21:9, endln:23:12
-\_int_typespec: 
-\_cont_assign: , line:22:20, endln:22:58
-  |vpiParent:
-  \_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-  |vpiRhs:
-  \_constant: , line:22:57, endln:22:58
-  |vpiLhs:
-  \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-    |vpiParent:
-    \_cont_assign: , line:22:20, endln:22:58
-    |vpiActual:
-    \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-      |vpiName:peripheral_io_bus
-      |vpiFullName:peripheral_io_bus[io_idx]
-      |vpiIndex:
-      \_ref_obj: (work@soc_tb.io_gen[1].peripheral_io_bus[io_idx].write_en.io_idx), line:22:38, endln:22:44
-        |vpiParent:
-        \_bit_select: (peripheral_io_bus[io_idx]), line:22:20, endln:22:37
-        |vpiName:io_idx
-        |vpiFullName:work@soc_tb.io_gen[1].peripheral_io_bus[io_idx].write_en.io_idx
-    |vpiActual:
-    \_ref_obj: (peripheral_io_bus[io_idx].write_en), line:22:46, endln:22:54
-      |vpiParent:
-      \_hier_path: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:37
-      |vpiName:write_en
-      |vpiFullName:peripheral_io_bus[io_idx].write_en
-    |vpiName:peripheral_io_bus[io_idx].write_en
-\_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-  |vpiParent:
-  \_gen_scope_array: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-  |vpiFullName:work@soc_tb.io_gen[1]
-  |vpiParameter:
-  \_parameter: (work@soc_tb.io_gen[1].io_idx), line:20:0
-  |vpiContAssign:
-  \_cont_assign: , line:22:20, endln:22:58
-\_gen_scope_array: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-  |vpiParent:
-  \_module_inst: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiName:io_gen[1]
-  |vpiFullName:work@soc_tb.io_gen[1]
-  |vpiGenScope:
-  \_gen_scope: (work@soc_tb.io_gen[1]), line:21:9, endln:23:12
-\_int_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/InterfArrayBind/dut.sv | ${SURELOG_DIR}/build/regression/InterfArrayBind/roundtrip/dut_000.sv | 12 | 26 |
+============================== End RoundTrip Results ==============================

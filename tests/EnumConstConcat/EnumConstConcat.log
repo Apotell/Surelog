@@ -155,73 +155,39 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:19:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:2:1: Compile package "prim_mubi_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:11:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:19:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:22:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:25:7: Compile generate block "work@top.genblk1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:22:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              40
+constant                                              17
 design                                                 1
-enum_const                                             6
-enum_typespec                                          4
+enum_const                                             3
+enum_typespec                                          2
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           5
-logic_typespec                                         4
-module_inst                                            9
-operation                                              8
-package                                                4
-param_assign                                           4
-parameter                                              4
-range                                                  4
-ref_module                                             2
-ref_obj                                                3
-ref_typespec                                          13
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-constant                                              40
-design                                                 1
-enum_const                                             6
-enum_typespec                                          4
-gen_if                                                 1
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           5
-logic_typespec                                         4
-module_inst                                           10
-operation                                              8
-package                                                4
-param_assign                                           4
-parameter                                              4
-range                                                  4
-ref_module                                             2
-ref_obj                                                3
-ref_typespec                                          13
+int_typespec                                           2
+logic_typespec                                         2
+module_inst                                            4
+operation                                              4
+package                                                2
+param_assign                                           2
+parameter                                              2
+range                                                  2
+ref_module                                             1
+ref_obj                                                4
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:prim_mubi_pkg
   |vpiFullName:prim_mubi_pkg::
   |vpiParameter:
@@ -294,7 +260,7 @@ design: (work@top)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiTypedef:
@@ -320,119 +286,16 @@ design: (work@top)
       |vpiDecompile:{6'b001100,prim_mubi_pkg::MuBi4False}
       |vpiSize:10
   |vpiDefName:pkg
-|uhdmtopPackages:
-\_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:prim_mubi_pkg
-  |vpiFullName:prim_mubi_pkg::
-  |vpiParameter:
-  \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
-    |vpiParent:
-    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (prim_mubi_pkg::MuBi4Width)
-      |vpiParent:
-      \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
-      |vpiFullName:prim_mubi_pkg::MuBi4Width
-      |vpiActual:
-      \_int_typespec: , line:3:11, endln:3:14
-    |vpiSigned:1
-    |vpiName:MuBi4Width
-    |vpiFullName:prim_mubi_pkg::MuBi4Width
-  |vpiParamAssign:
-  \_param_assign: , line:3:15, endln:3:29
-    |vpiParent:
-    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-    |vpiRhs:
-    \_constant: , line:3:28, endln:3:29
-      |vpiParent:
-      \_param_assign: , line:3:15, endln:3:29
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (prim_mubi_pkg)
-        |vpiParent:
-        \_constant: , line:3:28, endln:3:29
-        |vpiFullName:prim_mubi_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:11, endln:3:14
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
-  |vpiTypedef:
-  \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
-    |vpiParent:
-    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-    |vpiName:prim_mubi_pkg::mubi4_t
-    |vpiInstance:
-    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (prim_mubi_pkg::prim_mubi_pkg::mubi4_t)
-      |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
-      |vpiFullName:prim_mubi_pkg::prim_mubi_pkg::mubi4_t
-      |vpiActual:
-      \_logic_typespec: , line:4:14, endln:4:36
-    |vpiEnumConst:
-    \_enum_const: (MuBi4True), line:5:3, endln:5:19
-      |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
-      |vpiName:MuBi4True
-      |HEX:A
-      |vpiDecompile:4'hA
-      |vpiSize:4
-    |vpiEnumConst:
-    \_enum_const: (MuBi4False), line:6:3, endln:6:20
-      |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
-      |vpiName:MuBi4False
-      |HEX:5
-      |vpiDecompile:4'h5
-      |vpiSize:4
-  |vpiDefName:prim_mubi_pkg
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:pkg
-  |vpiFullName:pkg::
-  |vpiTypedef:
-  \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
-    |vpiName:pkg::fsm_state_e
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (pkg::pkg::fsm_state_e)
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
-      |vpiFullName:pkg::pkg::fsm_state_e
-      |vpiActual:
-      \_logic_typespec: , line:13:14, endln:13:25
-    |vpiEnumConst:
-    \_enum_const: (ReadingLow), line:14:3, endln:14:55
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
-      |vpiName:ReadingLow
-      |BIN:0011000101
-      |vpiSize:10
-  |vpiDefName:pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:19:1, endln:20:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiGenStmt:
@@ -445,13 +308,11 @@ design: (work@top)
       \_gen_if: , line:24:4, endln:24:6
       |vpiOpType:14
       |vpiOperand:
-      \_constant: , line:24:8, endln:24:13
+      \_ref_obj: (work@top.pkg::ReadingLow), line:24:8, endln:24:23
         |vpiParent:
         \_operation: , line:24:8, endln:24:30
-        |vpiDecompile:10'b0011000101
-        |vpiSize:10
-        |BIN:0011000101
-        |vpiConstType:3
+        |vpiName:pkg::ReadingLow
+        |vpiFullName:work@top.pkg::ReadingLow
       |vpiOperand:
       \_constant: , line:24:27, endln:24:30
         |vpiParent:
@@ -471,64 +332,7 @@ design: (work@top)
         \_begin: (work@top)
         |vpiName:good
         |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1), line:25:7, endln:25:19
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
-    |vpiName:genblk1
-    |vpiFullName:work@top.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1), line:25:7, endln:25:19
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1), line:25:7, endln:25:19
-      |vpiFullName:work@top.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk1.good), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:25:7, endln:25:19
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1), line:25:7, endln:25:19
-        |vpiName:good
-        |vpiFullName:work@top.genblk1.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv
-        |vpiDefLineNo:19
 \_weaklyReferenced:
-\_int_typespec: , line:3:11, endln:3:14
-  |vpiParent:
-  \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
-  |vpiInstance:
-  \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-  |vpiSigned:1
-\_logic_typespec: , line:4:14, endln:4:36
-  |vpiInstance:
-  \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-  |vpiRange:
-  \_range: , line:4:20, endln:4:36
-    |vpiParent:
-    \_logic_typespec: , line:4:14, endln:4:36
-    |vpiLeftRange:
-    \_constant: , line:4:21, endln:4:31
-      |vpiParent:
-      \_range: , line:4:20, endln:4:36
-      |vpiDecompile:3
-      |vpiSize:64
-      |INT:3
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:4:34, endln:4:35
-      |vpiParent:
-      \_range: , line:4:20, endln:4:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_int_typespec: , line:3:11, endln:3:14
   |vpiParent:
   \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
@@ -553,7 +357,7 @@ design: (work@top)
         \_operation: , line:4:21, endln:4:33
         |vpiName:MuBi4Width
         |vpiActual:
-        \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
+        \_constant: , line:3:28, endln:3:29
       |vpiOperand:
       \_constant: , line:4:32, endln:4:33
         |vpiParent:
@@ -593,35 +397,12 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:13:14, endln:13:25
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
-  |vpiRange:
-  \_range: , line:13:20, endln:13:25
-    |vpiParent:
-    \_logic_typespec: , line:13:14, endln:13:25
-    |vpiLeftRange:
-    \_constant: , line:13:21, endln:13:22
-      |vpiParent:
-      \_range: , line:13:20, endln:13:25
-      |vpiDecompile:9
-      |vpiSize:64
-      |UINT:9
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:23, endln:13:24
-      |vpiParent:
-      \_range: , line:13:20, endln:13:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConstConcat/roundtrip/dut_000.sv | 4 | 28 |

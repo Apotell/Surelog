@@ -127,77 +127,40 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:4:1: Compile module "work@axi".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:16:16: Compile generate block "work@axi.LEAF_NODES".
-Instance tree:
-[TOP] work@axi work@axi
-[SCO] work@axi.LEAF_NODES work@axi.LEAF_NODES
-[MOD] work@GOOD work@axi.LEAF_NODES.good
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:4:1: Top level module "work@axi".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:4:1: Instance "work@axi".
-[NTE:EL0522] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:16:16: Scope "work@axi.LEAF_NODES".
-[NTE:EL0523] ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv:17:14: Instance "work@axi.LEAF_NODES.good".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  2
-constant                                              16
+constant                                               4
 design                                                 1
 gen_if_else                                            2
 gen_region                                             1
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           4
-module_inst                                            6
+int_typespec                                           2
+module_inst                                            2
 named_begin                                            3
-operation                                              6
-param_assign                                           4
-parameter                                              4
-ref_module                                             2
+operation                                              3
+param_assign                                           2
+parameter                                              2
+ref_module                                             1
 ref_obj                                                3
-ref_typespec                                          10
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                              16
-design                                                 1
-gen_if_else                                            2
-gen_region                                             1
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           4
-module_inst                                            7
-named_begin                                            3
-operation                                              6
-param_assign                                           4
-parameter                                              4
-ref_module                                             2
-ref_obj                                                3
-ref_typespec                                          10
+ref_typespec                                           4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfElseIf1/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IfElseIf1/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IfElseIf1/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@axi)
-|vpiElaborated:1
-|vpiName:work@axi
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:1:1, endln:2:10
   |vpiParent:
-  \_design: (work@axi)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
   |vpiParent:
-  \_design: (work@axi)
+  \_design: (unnamed)
   |vpiFullName:work@axi
   |vpiParameter:
   \_parameter: (work@axi.j), line:6:15, endln:6:16
@@ -365,116 +328,16 @@ design: (work@axi)
                 \_named_begin: (work@axi.LEAF_NODES)
                 |vpiName:good
                 |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-  |vpiParent:
-  \_design: (work@axi)
-  |vpiName:work@axi
-  |vpiParameter:
-  \_parameter: (work@axi.j), line:6:15, endln:6:16
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-    |UINT:6
-    |vpiTypespec:
-    \_ref_typespec: (work@axi.j)
-      |vpiParent:
-      \_parameter: (work@axi.j), line:6:15, endln:6:16
-      |vpiFullName:work@axi.j
-      |vpiActual:
-      \_int_typespec: , line:6:5, endln:6:20
-    |vpiName:j
-    |vpiFullName:work@axi.j
-  |vpiParameter:
-  \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-    |UINT:5
-    |vpiTypespec:
-    \_ref_typespec: (work@axi.LOG_MASTER)
-      |vpiParent:
-      \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-      |vpiFullName:work@axi.LOG_MASTER
-      |vpiActual:
-      \_int_typespec: , line:7:5, endln:7:34
-    |vpiName:LOG_MASTER
-    |vpiFullName:work@axi.LOG_MASTER
-  |vpiParamAssign:
-  \_param_assign: , line:6:15, endln:6:20
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-    |vpiRhs:
-    \_constant: , line:6:19, endln:6:20
-      |vpiParent:
-      \_param_assign: , line:6:15, endln:6:20
-      |vpiDecompile:6
-      |vpiSize:32
-      |UINT:6
-      |vpiTypespec:
-      \_ref_typespec: (work@axi)
-        |vpiParent:
-        \_constant: , line:6:19, endln:6:20
-        |vpiFullName:work@axi
-        |vpiActual:
-        \_int_typespec: , line:6:5, endln:6:20
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@axi.j), line:6:15, endln:6:16
-  |vpiParamAssign:
-  \_param_assign: , line:7:15, endln:7:34
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-    |vpiRhs:
-    \_constant: , line:7:33, endln:7:34
-      |vpiParent:
-      \_param_assign: , line:7:15, endln:7:34
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@axi)
-        |vpiParent:
-        \_constant: , line:7:33, endln:7:34
-        |vpiFullName:work@axi
-        |vpiActual:
-        \_int_typespec: , line:7:5, endln:7:34
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-  |vpiDefName:work@axi
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@axi.LEAF_NODES), line:16:16, endln:18:14
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:4:1, endln:21:10
-    |vpiName:LEAF_NODES
-    |vpiFullName:work@axi.LEAF_NODES
-    |vpiGenScope:
-    \_gen_scope: (work@axi.LEAF_NODES), line:16:16, endln:18:14
-      |vpiParent:
-      \_gen_scope_array: (work@axi.LEAF_NODES), line:16:16, endln:18:14
-      |vpiFullName:work@axi.LEAF_NODES
-      |vpiModule:
-      \_module_inst: work@GOOD (work@axi.LEAF_NODES.good), file:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv, line:17:14, endln:17:26
-        |vpiParent:
-        \_gen_scope: (work@axi.LEAF_NODES), line:16:16, endln:18:14
-        |vpiName:good
-        |vpiFullName:work@axi.LEAF_NODES.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv
-        |vpiDefLineNo:1
 \_weaklyReferenced:
 \_int_typespec: , line:6:5, endln:6:20
 \_int_typespec: , line:7:5, endln:7:34
-\_int_typespec: , line:6:5, endln:6:20
-  |vpiParent:
-  \_ref_typespec: (work@axi.j)
-\_int_typespec: , line:7:5, endln:7:34
-  |vpiParent:
-  \_ref_typespec: (work@axi.LOG_MASTER)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 8
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/IfElseIf/test1/dut.sv | ${SURELOG_DIR}/build/regression/IfElseIf1/roundtrip/dut_000.sv | 10 | 21 |
+============================== End RoundTrip Results ==============================

@@ -271,55 +271,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfImport/dut.sv:1:1: No timescale set for "tnoc_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfImport/dut.sv:6:1: No timescale set for "tnoc_port_control_if".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/InterfImport/dut.sv:1:1: Compile package "tnoc_pkg".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfImport/dut.sv:6:1: Compile interface "work@tnoc_port_control_if".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              19
+constant                                              15
 design                                                 1
 hier_path                                              1
 import_typespec                                        1
-int_typespec                                           7
+int_typespec                                           5
 interface_inst                                         1
 io_decl                                               10
 logic_net                                              5
 logic_typespec                                         5
 modport                                                2
-module_inst                                            1
 operation                                              5
-package                                                2
-param_assign                                           7
-parameter                                              8
+package                                                1
+param_assign                                           5
+parameter                                              6
 range                                                  5
-ref_obj                                                7
-ref_typespec                                          17
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              19
-design                                                 1
-hier_path                                              1
-import_typespec                                        1
-int_typespec                                           7
-interface_inst                                         1
-io_decl                                               10
-logic_net                                              5
-logic_typespec                                         5
-modport                                                2
-module_inst                                            1
-operation                                              5
-package                                                2
-param_assign                                           7
-parameter                                              8
-range                                                  5
-ref_obj                                                7
-ref_typespec                                          17
+ref_obj                                                8
+ref_typespec                                          13
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfImport/slpp_all/surelog.uhdm ...
@@ -328,7 +299,6 @@ unsupported_typespec                                   1
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:1:1, endln:4:11
@@ -373,50 +343,6 @@ design: (unnamed)
     |vpiLhs:
     \_parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:2:15, endln:2:41
   |vpiDefName:tnoc_pkg
-|uhdmtopPackages:
-\_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:1:1, endln:4:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:tnoc_pkg
-  |vpiFullName:tnoc_pkg::
-  |vpiParameter:
-  \_parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:2:15, endln:2:41
-    |vpiParent:
-    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:1:1, endln:4:11
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG)
-      |vpiParent:
-      \_parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:2:15, endln:2:41
-      |vpiFullName:tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG
-      |vpiActual:
-      \_int_typespec: , line:2:4, endln:2:46
-    |vpiLocalParam:1
-    |vpiName:TNOC_DEFAULT_PACKET_CONFIG
-    |vpiFullName:tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG
-  |vpiParamAssign:
-  \_param_assign: , line:2:15, endln:2:46
-    |vpiParent:
-    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:1:1, endln:4:11
-    |vpiRhs:
-    \_constant: , line:2:45, endln:2:46
-      |vpiParent:
-      \_param_assign: , line:2:15, endln:2:46
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (tnoc_pkg)
-        |vpiParent:
-        \_constant: , line:2:45, endln:2:46
-        |vpiFullName:tnoc_pkg
-        |vpiActual:
-        \_int_typespec: , line:2:4, endln:2:46
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:2:15, endln:2:41
-  |vpiDefName:tnoc_pkg
-  |vpiTop:1
 |uhdmallInterfaces:
 \_interface_inst: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
   |vpiParent:
@@ -442,7 +368,6 @@ design: (unnamed)
   \_parameter: (work@tnoc_port_control_if.PACKET_CONFIG), line:9:33, endln:9:46
     |vpiParent:
     \_interface_inst: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
-    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (work@tnoc_port_control_if.PACKET_CONFIG)
       |vpiParent:
@@ -476,7 +401,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:15, endln:2:46
       |vpiDecompile:1
-      |vpiSize:32
+      |vpiSize:64
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@tnoc_port_control_if)
@@ -507,20 +432,11 @@ design: (unnamed)
     |vpiParent:
     \_interface_inst: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
     |vpiRhs:
-    \_constant: , line:9:50, endln:9:76
+    \_ref_obj: (work@tnoc_port_control_if.TNOC_DEFAULT_PACKET_CONFIG), line:9:50, endln:9:76
       |vpiParent:
       \_param_assign: , line:9:33, endln:9:76
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@tnoc_port_control_if)
-        |vpiParent:
-        \_constant: , line:9:50, endln:9:76
-        |vpiFullName:work@tnoc_port_control_if
-        |vpiActual:
-        \_unsupported_typespec: (tnoc_packet_config), line:9:13, endln:9:31
-      |vpiConstType:9
+      |vpiName:TNOC_DEFAULT_PACKET_CONFIG
+      |vpiFullName:work@tnoc_port_control_if.TNOC_DEFAULT_PACKET_CONFIG
     |vpiLhs:
     \_parameter: (work@tnoc_port_control_if.PACKET_CONFIG), line:9:33, endln:9:46
   |vpiParamAssign:
@@ -688,7 +604,6 @@ design: (unnamed)
       |vpiDirection:2
       |vpiName:end_of_packet
 \_weaklyReferenced:
-\_int_typespec: , line:2:4, endln:2:46
 \_int_typespec: , line:2:4, endln:2:46
 \_int_typespec: , line:2:4, endln:2:46
   |vpiParent:
@@ -867,4 +782,8 @@ design: (unnamed)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 4
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/InterfImport/dut.sv | ${SURELOG_DIR}/build/regression/InterfImport/roundtrip/dut_000.sv | 12 | 34 |
+============================== End RoundTrip Results ==============================

@@ -241,71 +241,25 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:5:1: Compile module "work@tlul_socket_1n".
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:16:1: Compile module "work@top".
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:11:1: Compile module "work@xbar_main".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[1]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[2]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[3]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[4]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[5]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[6]".
-[INF:CP0335] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:6:36: Compile generate block "work@xbar_main.u_s1n_25.gen_dfifo[7]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:11:1: Top level module "work@xbar_main".
-[NTE:EL0503] ${SURELOG_DIR}/tests/PartSelect4/dut.sv:16:1: Top level module "work@top".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 4.
-[NTE:EL0510] Nb instances: 11.
-[NTE:EL0511] Nb leaf instances: 9.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_typespec                                           2
-constant                                             110
+bit_typespec                                           1
+constant                                              10
 design                                                 1
 gen_for                                                1
-gen_scope                                             16
-gen_scope_array                                       16
-indexed_part_select                                   10
-int_typespec                                          23
-int_var                                                2
+indexed_part_select                                    1
+int_typespec                                           3
 logic_net                                              1
-logic_typespec                                         1
-module_inst                                           26
+module_inst                                            4
 named_begin                                            1
-operation                                             25
-param_assign                                          17
-parameter                                             25
-range                                                  5
-ref_module                                            10
-ref_obj                                                5
-ref_typespec                                          40
-ref_var                                                1
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-bit_typespec                                           2
-constant                                             110
-design                                                 1
-gen_for                                                1
-gen_scope                                             24
-gen_scope_array                                       24
-indexed_part_select                                   10
-int_typespec                                          23
-int_var                                                2
-logic_net                                              1
-logic_typespec                                         1
-module_inst                                           34
-named_begin                                            1
-operation                                             25
-param_assign                                          25
-parameter                                             25
-range                                                  5
-ref_module                                            10
-ref_obj                                                5
-ref_typespec                                          64
+operation                                              5
+param_assign                                           5
+parameter                                              5
+range                                                  2
+ref_module                                             2
+ref_obj                                                4
+ref_typespec                                           6
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -314,13 +268,12 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PartSelect4/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@xbar_main)
-|vpiElaborated:1
-|vpiName:work@xbar_main
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@tlul_fifo_sync (work@tlul_fifo_sync), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:2:1, endln:3:10
   |vpiParent:
-  \_design: (work@xbar_main)
+  \_design: (unnamed)
   |vpiFullName:work@tlul_fifo_sync
   |vpiParameter:
   \_parameter: (work@tlul_fifo_sync.ReqDepth), line:2:48, endln:2:56
@@ -345,7 +298,7 @@ design: (work@xbar_main)
 |uhdmallModules:
 \_module_inst: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
   |vpiParent:
-  \_design: (work@xbar_main)
+  \_design: (unnamed)
   |vpiFullName:work@tlul_socket_1n
   |vpiParameter:
   \_parameter: (work@tlul_socket_1n.N), line:5:48, endln:5:49
@@ -389,7 +342,7 @@ design: (work@xbar_main)
   |vpiNet:
   \_logic_net: (work@tlul_socket_1n.i), line:6:23, endln:6:24
     |vpiParent:
-    \_module_inst: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
+    \_operation: , line:6:23, endln:6:28
     |vpiName:i
     |vpiFullName:work@tlul_socket_1n.i
     |vpiNetType:1
@@ -408,16 +361,16 @@ design: (work@xbar_main)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@tlul_socket_1n.i), line:6:15, endln:6:16
+      \_ref_var: (work@tlul_socket_1n.i), line:6:15, endln:6:16
         |vpiParent:
         \_assignment: , line:6:8, endln:6:20
         |vpiTypespec:
         \_ref_typespec: (work@tlul_socket_1n.i)
           |vpiParent:
-          \_int_var: (work@tlul_socket_1n.i), line:6:15, endln:6:16
+          \_ref_var: (work@tlul_socket_1n.i), line:6:15, endln:6:16
           |vpiFullName:work@tlul_socket_1n.i
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (i), line:6:15, endln:6:16
         |vpiName:i
         |vpiFullName:work@tlul_socket_1n.i
     |vpiCondition:
@@ -467,7 +420,7 @@ design: (work@xbar_main)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
   |vpiParent:
-  \_design: (work@xbar_main)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.A), line:18:12, endln:18:13
@@ -556,7 +509,7 @@ design: (work@xbar_main)
 |uhdmallModules:
 \_module_inst: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
   |vpiParent:
-  \_design: (work@xbar_main)
+  \_design: (unnamed)
   |vpiFullName:work@xbar_main
   |vpiDefName:work@xbar_main
   |vpiRefModule:
@@ -567,718 +520,6 @@ design: (work@xbar_main)
     |vpiDefName:work@tlul_socket_1n
     |vpiActual:
     \_module_inst: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
-|uhdmtopModules:
-\_module_inst: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
-  |vpiParent:
-  \_design: (work@xbar_main)
-  |vpiName:work@xbar_main
-  |vpiDefName:work@xbar_main
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-    |vpiParent:
-    \_module_inst: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
-    |vpiName:u_s1n_25
-    |vpiFullName:work@xbar_main.u_s1n_25
-    |vpiParameter:
-    \_parameter: (work@xbar_main.u_s1n_25.N), line:5:48, endln:5:49
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiTypespec:
-      \_ref_typespec: (work@xbar_main.u_s1n_25.N)
-        |vpiParent:
-        \_parameter: (work@xbar_main.u_s1n_25.N), line:5:48, endln:5:49
-        |vpiFullName:work@xbar_main.u_s1n_25.N
-        |vpiActual:
-        \_int_typespec: , line:5:35, endln:5:47
-      |vpiName:N
-      |vpiFullName:work@xbar_main.u_s1n_25.N
-    |vpiParameter:
-    \_parameter: (work@xbar_main.u_s1n_25.DReqDepth), line:5:75, endln:5:84
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiTypespec:
-      \_ref_typespec: (work@xbar_main.u_s1n_25.DReqDepth)
-        |vpiParent:
-        \_parameter: (work@xbar_main.u_s1n_25.DReqDepth), line:5:75, endln:5:84
-        |vpiFullName:work@xbar_main.u_s1n_25.DReqDepth
-        |vpiActual:
-        \_bit_typespec: , line:5:61, endln:5:74
-      |vpiName:DReqDepth
-      |vpiFullName:work@xbar_main.u_s1n_25.DReqDepth
-    |vpiParamAssign:
-    \_param_assign: , line:5:48, endln:5:49
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: 
-        |vpiParent:
-        \_param_assign: , line:5:48, endln:5:49
-        |vpiDecompile:8
-        |vpiSize:32
-        |UINT:8
-        |vpiTypespec:
-        \_ref_typespec: (work@xbar_main.u_s1n_25)
-          |vpiParent:
-          \_constant: 
-          |vpiFullName:work@xbar_main.u_s1n_25
-          |vpiActual:
-          \_int_typespec: , line:5:35, endln:5:47
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@xbar_main.u_s1n_25.N), line:5:48, endln:5:49
-    |vpiParamAssign:
-    \_param_assign: , line:5:75, endln:5:84
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: 
-        |vpiParent:
-        \_param_assign: , line:5:75, endln:5:84
-        |vpiDecompile:68'h200000000000000
-        |vpiSize:68
-        |HEX:200000000000000
-        |vpiTypespec:
-        \_ref_typespec: (work@xbar_main.u_s1n_25)
-          |vpiParent:
-          \_constant: 
-          |vpiFullName:work@xbar_main.u_s1n_25
-          |vpiActual:
-          \_bit_typespec: , line:5:61, endln:5:74
-        |vpiConstType:5
-      |vpiLhs:
-      \_parameter: (work@xbar_main.u_s1n_25.DReqDepth), line:5:75, endln:5:84
-    |vpiDefName:work@tlul_socket_1n
-    |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-    |vpiDefLineNo:5
-    |vpiInstance:
-    \_module_inst: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[0]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-          |UINT:0
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[0].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[1]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-          |UINT:1
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[1].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[2]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-          |UINT:2
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[2].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[3]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-          |UINT:3
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[3].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[4]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-          |UINT:4
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[4].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[5]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-          |UINT:5
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[5].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[6]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-          |UINT:6
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[6].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-      |vpiParent:
-      \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-      |vpiName:gen_dfifo[7]
-      |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7]
-      |vpiGenScope:
-      \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-        |vpiParent:
-        \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-        |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7]
-        |vpiParameter:
-        \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].i), line:6:0
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-          |UINT:7
-          |vpiTypespec:
-          \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[7].i)
-            |vpiParent:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].i), line:6:0
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:i
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].i
-        |vpiModule:
-        \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-          |vpiParent:
-          \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-          |vpiName:fifo_d
-          |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d
-          |vpiParameter:
-          \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-            |vpiParent:
-            \_param_assign: , line:2:48, endln:2:56
-            |vpiTypespec:
-            \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth)
-              |vpiParent:
-              \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-              |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth
-              |vpiActual:
-              \_int_typespec: , line:2:35, endln:2:47
-            |vpiName:ReqDepth
-            |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth
-          |vpiParamAssign:
-          \_param_assign: , line:2:48, endln:2:56
-            |vpiParent:
-            \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: 
-              |vpiParent:
-              \_param_assign: , line:2:48, endln:2:56
-              |vpiDecompile:4'b0000
-              |vpiSize:4
-              |BIN:0000
-              |vpiTypespec:
-              \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d)
-                |vpiParent:
-                \_constant: 
-                |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d
-                |vpiActual:
-                \_int_typespec: , line:2:35, endln:2:47
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-          |vpiDefName:work@tlul_fifo_sync
-          |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-          |vpiDefLineNo:2
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
-  |vpiParent:
-  \_design: (work@xbar_main)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.A), line:18:12, endln:18:13
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
-    |HEX:200000000000000
-    |vpiTypespec:
-    \_ref_typespec: (work@top.A)
-      |vpiParent:
-      \_parameter: (work@top.A), line:18:12, endln:18:13
-      |vpiFullName:work@top.A
-      |vpiActual:
-      \_int_typespec: , line:18:2, endln:18:35
-    |vpiName:A
-    |vpiFullName:work@top.A
-  |vpiParameter:
-  \_parameter: (work@top.B), line:19:12, endln:19:13
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
-    |vpiName:B
-    |vpiFullName:work@top.B
-  |vpiParamAssign:
-  \_param_assign: , line:18:12, endln:18:35
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
-    |vpiRhs:
-    \_constant: , line:18:16, endln:18:35
-      |vpiParent:
-      \_param_assign: , line:18:12, endln:18:35
-      |vpiDecompile:68'h200000000000000
-      |vpiSize:68
-      |HEX:200000000000000
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:18:16, endln:18:35
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:18:2, endln:18:35
-      |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (work@top.A), line:18:12, endln:18:13
-  |vpiParamAssign:
-  \_param_assign: , line:19:12, endln:19:25
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
-    |vpiRhs:
-    \_constant: , line:19:16, endln:19:25
-      |vpiParent:
-      \_param_assign: , line:19:12, endln:19:25
-      |vpiDecompile:4'b0000
-      |vpiSize:4
-      |BIN:0000
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@top.B), line:19:12, endln:19:13
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_int_typespec: , line:2:35, endln:2:47
   |vpiParent:
@@ -1299,11 +540,24 @@ design: (work@xbar_main)
       \_range: , line:5:65, endln:5:74
       |vpiOpType:11
       |vpiOperand:
-      \_constant: , line:5:66, endln:5:69
-        |vpiDecompile:32
-        |vpiSize:64
-        |INT:32
-        |vpiConstType:7
+      \_operation: , line:5:66, endln:5:69
+        |vpiParent:
+        \_operation: , line:5:66, endln:5:71
+        |vpiOpType:25
+        |vpiOperand:
+        \_ref_obj: (work@tlul_socket_1n.DReqDepth.N), line:5:66, endln:5:67
+          |vpiParent:
+          \_operation: , line:5:66, endln:5:69
+          |vpiName:N
+          |vpiFullName:work@tlul_socket_1n.DReqDepth.N
+        |vpiOperand:
+        \_constant: , line:5:68, endln:5:69
+          |vpiParent:
+          \_operation: , line:5:66, endln:5:69
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
       |vpiOperand:
       \_constant: , line:5:70, endln:5:71
         |vpiParent:
@@ -1320,6 +574,8 @@ design: (work@xbar_main)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_unsupported_typespec: (i), line:6:15, endln:6:16
+  |vpiName:i
 \_int_typespec: , line:18:2, endln:18:35
   |vpiRange:
   \_range: 
@@ -1330,425 +586,14 @@ design: (work@xbar_main)
       |INT:67
     |vpiRightRange:
     \_constant: 
-      |INT:0
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_param_assign: , line:2:48, endln:2:56
-  |vpiParent:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-\_int_typespec: , line:5:35, endln:5:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.N)
-\_bit_typespec: , line:5:61, endln:5:74
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.DReqDepth)
-  |vpiRange:
-  \_range: , line:5:65, endln:5:74
-    |vpiParent:
-    \_bit_typespec: , line:5:61, endln:5:74
-    |vpiLeftRange:
-    \_operation: , line:5:66, endln:5:71
-      |vpiParent:
-      \_range: , line:5:65, endln:5:74
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:5:66, endln:5:69
-        |vpiDecompile:32
-        |vpiSize:64
-        |INT:32
-        |vpiConstType:7
-      |vpiOperand:
-      \_constant: , line:5:70, endln:5:71
-        |vpiParent:
-        \_operation: , line:5:66, endln:5:71
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:72, endln:5:73
-      |vpiParent:
-      \_range: , line:5:65, endln:5:74
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[0]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[0]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[0].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[1]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[1]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[1].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[2]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[2]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[2].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[3]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[3]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[3].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[4]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[4]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[4].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[5]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[5]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[5].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[6]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[6]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[6].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-  |vpiParent:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-  |vpiName:fifo_d
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiParamAssign:
-  \_param_assign: , line:2:48, endln:2:56
-  |vpiDefName:work@tlul_fifo_sync
-  |vpiDefFile:${SURELOG_DIR}/tests/PartSelect4/dut.sv
-  |vpiDefLineNo:2
-\_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-  |vpiParent:
-  \_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7]
-  |vpiParameter:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].i), line:6:0
-  |vpiModule:
-  \_module_inst: work@tlul_fifo_sync (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:7:5, endln:7:61
-\_gen_scope_array: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-  |vpiParent:
-  \_module_inst: work@tlul_socket_1n (work@xbar_main.u_s1n_25), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:12:3, endln:12:72
-  |vpiName:gen_dfifo[7]
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7]
-  |vpiGenScope:
-  \_gen_scope: (work@xbar_main.u_s1n_25.gen_dfifo[7]), line:6:36, endln:8:6
-\_int_typespec: , line:2:35, endln:2:47
-  |vpiParent:
-  \_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth)
-\_ref_typespec: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth)
-  |vpiParent:
-  \_parameter: (work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth), line:2:48, endln:2:56
-  |vpiFullName:work@xbar_main.u_s1n_25.gen_dfifo[7].fifo_d.ReqDepth
-  |vpiActual:
-  \_int_typespec: , line:2:35, endln:2:47
-\_int_typespec: 
-\_int_typespec: , line:18:2, endln:18:35
-  |vpiParent:
-  \_ref_typespec: (work@top.A)
-  |vpiRange:
-  \_range: 
-    |vpiParent:
-    \_int_typespec: , line:18:2, endln:18:35
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: 
-      |INT:67
-    |vpiRightRange:
-    \_constant: 
-      |vpiParent:
-      \_range: 
       |INT:0
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 7
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PartSelect4/dut.sv | ${SURELOG_DIR}/build/regression/PartSelect4/roundtrip/dut_000.sv | 8 | 21 |
+============================== End RoundTrip Results ==============================

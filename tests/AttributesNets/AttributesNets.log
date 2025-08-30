@@ -95,48 +95,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AttributesNets/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/AttributesNets/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/AttributesNets/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 attribute                                              4
-constant                                              10
+constant                                               4
 design                                                 1
-logic_net                                              7
-logic_typespec                                         6
-module_inst                                            3
-range                                                  6
-ref_obj                                                3
-ref_typespec                                           6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-attribute                                              4
-constant                                              10
-design                                                 1
-logic_net                                              7
-logic_typespec                                         6
-module_inst                                            3
-range                                                  6
-ref_obj                                                3
-ref_typespec                                           6
+logic_net                                              4
+logic_typespec                                         3
+module_inst                                            1
+range                                                  2
+ref_obj                                                1
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AttributesNets/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AttributesNets/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AttributesNets/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -182,87 +163,13 @@ design: (work@top)
     |vpiFullName:work@top.fw_first_addr
     |vpiNetType:48
   |vpiNet:
-  \_logic_net: (work@top.LGFLEN), line:5:25, endln:5:31
+  \_logic_net: (LGFLEN), line:5:25, endln:5:31
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
+    \_range: , line:5:24, endln:5:34
     |vpiName:LGFLEN
-    |vpiFullName:work@top.LGFLEN
     |vpiNetType:1
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.execute_RS1), line:3:47, endln:3:58
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.execute_RS1)
-      |vpiParent:
-      \_logic_net: (work@top.execute_RS1), line:3:47, endln:3:58
-      |vpiFullName:work@top.execute_RS1
-      |vpiActual:
-      \_logic_typespec: , line:3:27, endln:3:44
-    |vpiName:execute_RS1
-    |vpiFullName:work@top.execute_RS1
-    |vpiNetType:1
-    |vpiAttribute:
-    \_attribute: (keep), line:3:8, endln:3:12
-      |vpiParent:
-      \_logic_net: (work@top.execute_RS1), line:3:47, endln:3:58
-      |vpiName:keep
-    |vpiAttribute:
-    \_attribute: (syn_keep), line:3:15, endln:3:23
-      |vpiParent:
-      \_logic_net: (work@top.execute_RS1), line:3:47, endln:3:58
-      |vpiName:syn_keep
-  |vpiNet:
-  \_logic_net: (work@top.system_rsp_valid), line:4:50, endln:4:66
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.system_rsp_valid)
-      |vpiParent:
-      \_logic_net: (work@top.system_rsp_valid), line:4:50, endln:4:66
-      |vpiFullName:work@top.system_rsp_valid
-      |vpiActual:
-      \_logic_typespec: , line:4:30, endln:4:33
-    |vpiName:system_rsp_valid
-    |vpiFullName:work@top.system_rsp_valid
-    |vpiNetType:48
-    |vpiAttribute:
-    \_attribute: (async_reg), line:4:8, endln:4:26
-      |vpiParent:
-      \_logic_net: (work@top.system_rsp_valid), line:4:50, endln:4:66
-      |vpiName:async_reg
-      |STRING:true
-  |vpiNet:
-  \_logic_net: (work@top.fw_first_addr), line:5:35, endln:5:48
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.fw_first_addr)
-      |vpiParent:
-      \_logic_net: (work@top.fw_first_addr), line:5:35, endln:5:48
-      |vpiFullName:work@top.fw_first_addr
-      |vpiActual:
-      \_logic_typespec: , line:5:20, endln:5:34
-    |vpiName:fw_first_addr
-    |vpiFullName:work@top.fw_first_addr
-    |vpiNetType:48
-    |vpiAttribute:
-    \_attribute: (anyconst), line:5:8, endln:5:16
-      |vpiParent:
-      \_logic_net: (work@top.fw_first_addr), line:5:35, endln:5:48
-      |vpiName:anyconst
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_logic_typespec: , line:3:27, endln:3:44
-  |vpiParent:
-  \_logic_net: (work@top.execute_RS1), line:3:47, endln:3:58
   |vpiRange:
   \_range: , line:3:38, endln:3:44
     |vpiParent:
@@ -284,79 +191,33 @@ design: (work@top)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:4:30, endln:4:33
+\_range: , line:5:24, endln:5:34
   |vpiParent:
-  \_logic_net: (work@top.system_rsp_valid), line:4:50, endln:4:66
-\_logic_typespec: , line:5:20, endln:5:34
-  |vpiParent:
-  \_logic_net: (work@top.fw_first_addr), line:5:35, endln:5:48
-  |vpiRange:
-  \_range: , line:5:24, endln:5:34
+  \_logic_typespec: , line:5:20, endln:5:34
+  |vpiLeftRange:
+  \_ref_obj: (LGFLEN), line:5:25, endln:5:31
     |vpiParent:
-    \_logic_typespec: , line:5:20, endln:5:34
-    |vpiLeftRange:
-    \_ref_obj: (work@top.fw_first_addr.LGFLEN), line:5:25, endln:5:31
-      |vpiParent:
-      \_range: , line:5:24, endln:5:34
-      |vpiName:LGFLEN
-      |vpiFullName:work@top.fw_first_addr.LGFLEN
-      |vpiActual:
-      \_logic_net: (work@top.LGFLEN), line:5:25, endln:5:31
-    |vpiRightRange:
-    \_constant: , line:5:32, endln:5:33
-      |vpiParent:
-      \_range: , line:5:24, endln:5:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:27, endln:3:44
-  |vpiRange:
-  \_range: , line:3:38, endln:3:44
+    \_range: , line:5:24, endln:5:34
+    |vpiName:LGFLEN
+    |vpiActual:
+    \_logic_net: (LGFLEN), line:5:25, endln:5:31
+  |vpiRightRange:
+  \_constant: , line:5:32, endln:5:33
     |vpiParent:
-    \_logic_typespec: , line:3:27, endln:3:44
-    |vpiLeftRange:
-    \_constant: , line:3:39, endln:3:41
-      |vpiParent:
-      \_range: , line:3:38, endln:3:44
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:42, endln:3:43
-      |vpiParent:
-      \_range: , line:3:38, endln:3:44
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:30, endln:4:33
+    \_range: , line:5:24, endln:5:34
+    |vpiDecompile:0
+    |vpiSize:64
+    |UINT:0
+    |vpiConstType:9
 \_logic_typespec: , line:5:20, endln:5:34
   |vpiRange:
   \_range: , line:5:24, endln:5:34
-    |vpiParent:
-    \_logic_typespec: , line:5:20, endln:5:34
-    |vpiLeftRange:
-    \_ref_obj: (LGFLEN), line:5:25, endln:5:31
-      |vpiParent:
-      \_range: , line:5:24, endln:5:34
-      |vpiName:LGFLEN
-      |vpiActual:
-      \_logic_net: (work@top.LGFLEN), line:5:25, endln:5:31
-    |vpiRightRange:
-    \_constant: , line:5:32, endln:5:33
-      |vpiParent:
-      \_range: , line:5:24, endln:5:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/AttributesNets/dut.sv | ${SURELOG_DIR}/build/regression/AttributesNets/roundtrip/dut_000.sv | 3 | 7 |

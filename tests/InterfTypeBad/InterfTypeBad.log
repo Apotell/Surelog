@@ -90,57 +90,33 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv:13:1: Compile module "work@dut".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv:6:1: Compile interface "work@tnoc_flit_if".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv:1:1: Compile interface "work@tnoc_types".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv:13:1: Top level module "work@dut".
-[ERR:EL0538] ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv:15:16: Illegal use of an interface as a signal type for "i_types".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               1
 design                                                 1
 int_typespec                                           1
-interface_inst                                         5
-interface_typespec                                     4
-logic_net                                              3
-module_inst                                            3
+interface_inst                                         2
+interface_typespec                                     1
+logic_net                                              2
+module_inst                                            1
 param_assign                                           1
 parameter                                              1
-port                                                   3
+port                                                   2
 ref_module                                             1
-ref_obj                                                4
-ref_typespec                                           4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               1
-design                                                 1
-int_typespec                                           1
-interface_inst                                         5
-interface_typespec                                     4
-logic_net                                              3
-module_inst                                            3
-param_assign                                           1
-parameter                                              1
-port                                                   3
-ref_module                                             1
-ref_obj                                                4
-ref_typespec                                           4
+ref_obj                                                2
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfTypeBad/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfTypeBad/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfTypeBad/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@tnoc_flit_if (work@tnoc_flit_if), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:6:1, endln:10:13
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@tnoc_flit_if
   |vpiDefName:work@tnoc_flit_if
   |vpiNet:
@@ -166,7 +142,7 @@ design: (work@dut)
 |uhdmallInterfaces:
 \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:1:1, endln:4:13
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@tnoc_types
   |vpiParameter:
   \_parameter: (work@tnoc_types.PACKET_CONFIG), line:2:18, endln:2:31
@@ -208,7 +184,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -244,80 +220,19 @@ design: (work@dut)
         |vpiFullName:work@dut.tnoc.i_types
         |vpiActual:
         \_logic_net: (work@dut.i_types), line:15:16, endln:15:23
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@dut.i_types), line:16:20, endln:16:27
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
-    |vpiName:i_types
-    |vpiFullName:work@dut.i_types
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiInterface:
-  \_interface_inst: work@tnoc_flit_if (work@dut.tnoc), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:16:1, endln:16:29
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
-    |vpiName:tnoc
-    |vpiFullName:work@dut.tnoc
-    |vpiDefName:work@tnoc_flit_if
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv
-    |vpiDefLineNo:6
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
-    |vpiInterface:
-    \_interface_inst: work@tnoc_types (work@dut.tnoc.types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:0
-      |vpiParent:
-      \_interface_inst: work@tnoc_flit_if (work@dut.tnoc), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:16:1, endln:16:29
-      |vpiName:types
-      |vpiFullName:work@dut.tnoc.types
-      |vpiDefName:work@tnoc_types
-    |vpiPort:
-    \_port: (types), line:7:15, endln:7:20
-      |vpiParent:
-      \_interface_inst: work@tnoc_flit_if (work@dut.tnoc), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:16:1, endln:16:29
-      |vpiName:types
-      |vpiDirection:3
-      |vpiHighConn:
-      \_ref_obj: (work@dut.i_types), line:16:20, endln:16:27
-        |vpiParent:
-        \_port: (types), line:7:15, endln:7:20
-        |vpiName:i_types
-        |vpiFullName:work@dut.i_types
-        |vpiActual:
-        \_logic_net: (work@dut.i_types), line:16:20, endln:16:27
-      |vpiLowConn:
-      \_ref_obj: (work@dut.types), line:16:20, endln:16:27
-        |vpiFullName:work@dut.types
-        |vpiActual:
-        \_interface_inst: work@tnoc_types (work@dut.tnoc.types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:0
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.tnoc.types)
-        |vpiParent:
-        \_port: (types), line:7:15, endln:7:20
-        |vpiFullName:work@dut.tnoc.types
-        |vpiActual:
-        \_interface_typespec: (tnoc_types), line:7:3, endln:7:13
 \_weaklyReferenced:
 \_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
   \_parameter: (work@tnoc_types.PACKET_CONFIG), line:2:18, endln:2:31
   |vpiSigned:1
-\_interface_typespec: (tnoc_types), line:7:3, endln:7:13
-  |vpiName:tnoc_types
 \_interface_typespec: (tnoc_types), line:15:1, endln:15:11
   |vpiName:tnoc_types
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/InterfTypeBad/dut.sv | ${SURELOG_DIR}/build/regression/InterfTypeBad/roundtrip/dut_000.sv | 7 | 18 |

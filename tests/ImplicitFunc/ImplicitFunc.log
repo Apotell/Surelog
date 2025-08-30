@@ -46,12 +46,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv:1:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               4
@@ -59,18 +53,7 @@ design                                                 1
 function                                               2
 logic_typespec                                         2
 logic_var                                              4
-module_inst                                            2
-range                                                  2
-ref_typespec                                           2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               4
-design                                                 1
-function                                               4
-logic_typespec                                         2
-logic_var                                              4
-module_inst                                            2
+module_inst                                            1
 range                                                  2
 ref_typespec                                           2
 === UHDM Object Stats End ===
@@ -79,13 +62,12 @@ ref_typespec                                           2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiTaskFunc:
@@ -123,36 +105,6 @@ design: (work@dut)
       |vpiFullName:work@dut.bar
     |vpiInstance:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (work@dut.foo), line:3:4, endln:5:15
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-    |vpiName:foo
-    |vpiFullName:work@dut.foo
-    |vpiVisibility:1
-    |vpiReturn:
-    \_logic_var: (work@dut.foo), line:3:13, endln:3:18
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-  |vpiTaskFunc:
-  \_function: (work@dut.bar), line:7:4, endln:9:15
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-    |vpiName:bar
-    |vpiFullName:work@dut.bar
-    |vpiVisibility:1
-    |vpiReturn:
-    \_logic_var: (work@dut.bar)
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_logic_typespec: , line:3:13, endln:3:18
   |vpiRange:
@@ -180,7 +132,7 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv | ${SURELOG_DIR}/build/regression/ImplicitFunc/roundtrip/dut_000.sv | 1 | 11 |

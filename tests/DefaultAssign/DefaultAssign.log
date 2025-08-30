@@ -149,64 +149,36 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultAssign/dut.sv:4:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultAssign/dut.sv:1:1: Compile module "work@foo".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/DefaultAssign/dut.sv:4:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              27
-cont_assign                                            2
+constant                                               9
+cont_assign                                            1
 design                                                 1
-logic_net                                              3
-logic_typespec                                         7
-logic_var                                              1
-module_inst                                            8
-operation                                              6
-param_assign                                           2
-parameter                                              2
-port                                                   3
-range                                                  9
+logic_net                                              2
+logic_typespec                                         3
+module_inst                                            2
+operation                                              3
+param_assign                                           1
+parameter                                              1
+port                                                   2
+range                                                  3
 ref_module                                             1
-ref_obj                                                4
-ref_typespec                                          14
-string_typespec                                        6
-tagged_pattern                                         6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              27
-cont_assign                                            3
-design                                                 1
-logic_net                                              3
-logic_typespec                                         7
-logic_var                                              1
-module_inst                                            8
-operation                                              6
-param_assign                                           2
-parameter                                              2
-port                                                   4
-range                                                  9
-ref_module                                             1
-ref_obj                                                6
-ref_typespec                                          15
-string_typespec                                        6
-tagged_pattern                                         6
+ref_obj                                                2
+ref_typespec                                           6
+string_typespec                                        3
+tagged_pattern                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultAssign/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DefaultAssign/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DefaultAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.data), line:8:24, endln:8:28
@@ -336,7 +308,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@foo
   |vpiDefName:work@foo
   |vpiNet:
@@ -367,126 +339,6 @@ design: (work@dut)
       |vpiFullName:work@foo.data
       |vpiActual:
       \_logic_typespec: , line:1:18, endln:1:30
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_logic_var: (work@dut.data), line:6:14, endln:6:18
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.data)
-      |vpiParent:
-      \_logic_var: (work@dut.data), line:6:14, endln:6:18
-      |vpiFullName:work@dut.data
-      |vpiActual:
-      \_logic_typespec: , line:6:1, endln:6:13
-    |vpiName:data
-    |vpiFullName:work@dut.data
-    |vpiVisibility:1
-  |vpiParameter:
-  \_parameter: (work@dut.data), line:8:24, endln:8:28
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.data)
-      |vpiParent:
-      \_parameter: (work@dut.data), line:8:24, endln:8:28
-      |vpiFullName:work@dut.data
-      |vpiActual:
-      \_logic_typespec: , line:8:11, endln:8:23
-    |vpiName:data
-    |vpiFullName:work@dut.data
-  |vpiParamAssign:
-  \_param_assign: , line:8:24, endln:8:46
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiRhs:
-    \_constant: , line:8:31, endln:8:46
-      |vpiParent:
-      \_param_assign: , line:8:24, endln:8:46
-      |vpiDecompile:32'd4294967295
-      |vpiSize:32
-      |UINT:4294967295
-    |vpiLhs:
-    \_parameter: (work@dut.data), line:8:24, endln:8:28
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@foo (work@dut.f), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:12:1, endln:12:31
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiName:f
-    |vpiFullName:work@dut.f
-    |vpiDefName:work@foo
-    |vpiDefFile:${SURELOG_DIR}/tests/DefaultAssign/dut.sv
-    |vpiDefLineNo:1
-    |vpiNet:
-    \_logic_net: (work@dut.f.data), line:1:31, endln:1:35
-      |vpiParent:
-      \_module_inst: work@foo (work@dut.f), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:12:1, endln:12:31
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.f.data)
-        |vpiParent:
-        \_logic_net: (work@dut.f.data), line:1:31, endln:1:35
-        |vpiFullName:work@dut.f.data
-        |vpiActual:
-        \_logic_typespec: , line:1:18, endln:1:30
-      |vpiName:data
-      |vpiFullName:work@dut.f.data
-      |vpiNetType:36
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiPort:
-    \_port: (data), line:1:31, endln:1:35
-      |vpiParent:
-      \_module_inst: work@foo (work@dut.f), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:12:1, endln:12:31
-      |vpiName:data
-      |vpiDirection:1
-      |vpiHighConn:
-      \_constant: , line:12:13, endln:12:28
-        |vpiParent:
-        \_port: (data), line:1:31, endln:1:35
-        |vpiDecompile:32'd4294967295
-        |vpiSize:32
-        |UINT:4294967295
-      |vpiLowConn:
-      \_ref_obj: (work@dut.f.data), line:12:8, endln:12:12
-        |vpiParent:
-        \_port: (data), line:1:31, endln:1:35
-        |vpiName:data
-        |vpiFullName:work@dut.f.data
-        |vpiActual:
-        \_logic_net: (work@dut.f.data), line:1:31, endln:1:35
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.f.data)
-        |vpiParent:
-        \_port: (data), line:1:31, endln:1:35
-        |vpiFullName:work@dut.f.data
-        |vpiActual:
-        \_logic_typespec: , line:1:18, endln:1:30
-      |vpiInstance:
-      \_module_inst: work@foo (work@dut.f), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:12:1, endln:12:31
-  |vpiContAssign:
-  \_cont_assign: , line:10:8, endln:10:30
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiRhs:
-    \_constant: , line:10:15, endln:10:30
-      |vpiDecompile:32'd4294967295
-      |vpiSize:32
-      |UINT:4294967295
-    |vpiLhs:
-    \_ref_obj: (work@dut.data), line:10:8, endln:10:12
-      |vpiParent:
-      \_cont_assign: , line:10:8, endln:10:30
-      |vpiName:data
-      |vpiFullName:work@dut.data
-      |vpiActual:
-      \_logic_var: (work@dut.data), line:6:14, endln:6:18
 \_weaklyReferenced:
 \_logic_typespec: , line:8:11, endln:8:23
   |vpiParent:
@@ -544,28 +396,6 @@ design: (work@dut)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_port: (data), line:1:31, endln:1:35
-  |vpiParent:
-  \_module_inst: work@foo (work@dut.f), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:12:1, endln:12:31
-  |vpiName:data
-  |vpiDirection:1
-  |vpiHighConn:
-  \_constant: , line:12:13, endln:12:28
-  |vpiLowConn:
-  \_ref_obj: (work@dut.f.data), line:12:8, endln:12:12
-    |vpiParent:
-    \_port: (data), line:1:31, endln:1:35
-    |vpiName:data
-    |vpiFullName:work@dut.f.data
-    |vpiActual:
-    \_logic_net: (work@dut.f.data), line:1:31, endln:1:35
-  |vpiTypedef:
-  \_ref_typespec: (work@dut.f.data)
-    |vpiParent:
-    \_port: (data), line:1:31, endln:1:35
-    |vpiFullName:work@dut.f.data
-    |vpiActual:
-    \_logic_typespec: , line:1:18, endln:1:30
 \_logic_typespec: , line:1:18, endln:1:30
   |vpiRange:
   \_range: , line:1:24, endln:1:30
@@ -583,94 +413,6 @@ design: (work@dut)
     \_constant: , line:1:28, endln:1:29
       |vpiParent:
       \_range: , line:1:24, endln:1:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:1:18, endln:1:30
-  |vpiParent:
-  \_logic_net: (work@dut.f.data), line:1:31, endln:1:35
-  |vpiRange:
-  \_range: , line:1:24, endln:1:30
-    |vpiParent:
-    \_logic_typespec: , line:1:18, endln:1:30
-    |vpiLeftRange:
-    \_constant: , line:1:25, endln:1:27
-      |vpiParent:
-      \_range: , line:1:24, endln:1:30
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:28, endln:1:29
-      |vpiParent:
-      \_range: , line:1:24, endln:1:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:1, endln:6:13
-  |vpiRange:
-  \_range: , line:6:7, endln:6:13
-    |vpiParent:
-    \_logic_typespec: , line:6:1, endln:6:13
-    |vpiLeftRange:
-    \_constant: , line:6:8, endln:6:10
-      |vpiParent:
-      \_range: , line:6:7, endln:6:13
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:11, endln:6:12
-      |vpiParent:
-      \_range: , line:6:7, endln:6:13
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:1:18, endln:1:30
-  |vpiRange:
-  \_range: , line:1:24, endln:1:30
-    |vpiParent:
-    \_logic_typespec: , line:1:18, endln:1:30
-    |vpiLeftRange:
-    \_constant: , line:1:25, endln:1:27
-      |vpiParent:
-      \_range: , line:1:24, endln:1:30
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:28, endln:1:29
-      |vpiParent:
-      \_range: , line:1:24, endln:1:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:11, endln:8:23
-  |vpiParent:
-  \_ref_typespec: (work@dut.data)
-  |vpiRange:
-  \_range: , line:8:17, endln:8:23
-    |vpiParent:
-    \_logic_typespec: , line:8:11, endln:8:23
-    |vpiLeftRange:
-    \_constant: , line:8:18, endln:8:20
-      |vpiParent:
-      \_range: , line:8:17, endln:8:23
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:21, endln:8:22
-      |vpiParent:
-      \_range: , line:8:17, endln:8:23
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
@@ -680,7 +422,7 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/DefaultAssign/dut.sv | ${SURELOG_DIR}/build/regression/DefaultAssign/roundtrip/dut_000.sv | 2 | 14 |

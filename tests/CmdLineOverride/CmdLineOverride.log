@@ -42,33 +42,14 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv:5:1: Compile module "work@baz".
 [INF:CP0303] ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv:1:1: Compile module "work@foo".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv:1:1: Top level module "work@foo".
-[NTE:EL0503] ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv:5:1: Top level module "work@baz".
-[NTE:EL0504] Multiple top level modules in design.
-[ERR:EL0541] Unknown parameter in command line override "foo".
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 2.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               2
+constant                                               1
 design                                                 1
 int_typespec                                           1
-module_inst                                            4
-param_assign                                           2
-parameter                                              2
-ref_typespec                                           2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               2
-design                                                 1
-int_typespec                                           1
-module_inst                                            4
-param_assign                                           2
-parameter                                              2
+module_inst                                            2
+param_assign                                           1
+parameter                                              1
 ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/surelog.uhdm ...
@@ -76,25 +57,31 @@ ref_typespec                                           2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@foo)
-|vpiElaborated:1
-|vpiName:work@foo
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@baz (work@baz), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:5:1, endln:6:10
   |vpiParent:
-  \_design: (work@foo)
+  \_design: (unnamed)
   |vpiFullName:work@baz
   |vpiDefName:work@baz
 |uhdmallModules:
 \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
   |vpiParent:
-  \_design: (work@foo)
+  \_design: (unnamed)
   |vpiFullName:work@foo
   |vpiParameter:
   \_parameter: (work@foo.bar), line:2:17, endln:2:20
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
     |UINT:0
+    |vpiTypespec:
+    \_ref_typespec: (work@foo.bar)
+      |vpiParent:
+      \_parameter: (work@foo.bar), line:2:17, endln:2:20
+      |vpiFullName:work@foo.bar
+      |vpiActual:
+      \_int_typespec: , line:2:13, endln:2:16
     |vpiSigned:1
     |vpiName:bar
     |vpiFullName:work@foo.bar
@@ -120,44 +107,6 @@ design: (work@foo)
     |vpiLhs:
     \_parameter: (work@foo.bar), line:2:17, endln:2:20
   |vpiDefName:work@foo
-|uhdmtopModules:
-\_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
-  |vpiParent:
-  \_design: (work@foo)
-  |vpiName:work@foo
-  |vpiParameter:
-  \_parameter: (work@foo.bar), line:2:17, endln:2:20
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
-    |UINT:0
-    |vpiSigned:1
-    |vpiName:bar
-    |vpiFullName:work@foo.bar
-  |vpiParamAssign:
-  \_param_assign: , line:2:17, endln:2:24
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
-    |vpiRhs:
-    \_constant: , line:2:23, endln:2:24
-      |vpiParent:
-      \_param_assign: , line:2:17, endln:2:24
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@foo.bar), line:2:17, endln:2:20
-  |vpiDefName:work@foo
-  |vpiTop:1
-  |vpiTopModule:1
-|uhdmtopModules:
-\_module_inst: work@baz (work@baz), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:5:1, endln:6:10
-  |vpiParent:
-  \_design: (work@foo)
-  |vpiName:work@baz
-  |vpiDefName:work@baz
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
@@ -166,9 +115,9 @@ design: (work@foo)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 7
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv | ${SURELOG_DIR}/build/regression/CmdLineOverride/roundtrip/dut_000.sv | 0 | 6 |

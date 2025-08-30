@@ -113,67 +113,39 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/FileLocalParam/dut.sv:7:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/FileLocalParam/dut.sv:11:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/FileLocalParam/dut.sv:16:6: Compile generate block "work@top.genblk1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/FileLocalParam/dut.sv:11:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              17
+constant                                               6
 design                                                 1
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           7
-module_inst                                            6
-operation                                              5
-param_assign                                           6
-parameter                                              6
+int_typespec                                           3
+module_inst                                            2
+operation                                              4
+param_assign                                           5
+parameter                                              5
 range                                                  2
-ref_module                                             2
-ref_obj                                                4
-ref_typespec                                          11
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-constant                                              17
-design                                                 1
-gen_if                                                 1
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           7
-module_inst                                            7
-operation                                              5
-param_assign                                           6
-parameter                                              6
-range                                                  2
-ref_module                                             2
-ref_obj                                                4
-ref_typespec                                          11
+ref_module                                             1
+ref_obj                                                7
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:7:1, endln:9:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.D), line:13:13, endln:13:14
@@ -233,7 +205,7 @@ design: (work@top)
 |vpiParameter:
 \_parameter: (AWIDTH), line:1:25, endln:1:31
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |UINT:16
   |vpiTypespec:
   \_ref_typespec: (AWIDTH)
@@ -247,8 +219,7 @@ design: (work@top)
 |vpiParameter:
 \_parameter: (MAP), line:3:23, endln:3:26
   |vpiParent:
-  \_design: (work@top)
-  |BIN:00000000000000000000000000010000
+  \_design: (unnamed)
   |vpiTypespec:
   \_ref_typespec: (MAP)
     |vpiParent:
@@ -261,13 +232,13 @@ design: (work@top)
 |vpiParamAssign:
 \_param_assign: , line:1:25, endln:1:58
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiRhs:
   \_constant: , line:1:56, endln:1:58
     |vpiParent:
     \_param_assign: , line:1:25, endln:1:58
     |vpiDecompile:16
-    |vpiSize:32
+    |vpiSize:64
     |UINT:16
     |vpiTypespec:
     \_ref_typespec: 
@@ -281,70 +252,19 @@ design: (work@top)
 |vpiParamAssign:
 \_param_assign: , line:3:23, endln:5:48
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiRhs:
-  \_constant: , line:3:33, endln:5:48
+  \_operation: , line:3:33, endln:5:48
     |vpiParent:
     \_param_assign: , line:3:23, endln:5:48
-    |vpiSize:17
-    |BIN:00000000000000000000000000010000
-    |vpiTypespec:
-    \_ref_typespec: 
+    |vpiOpType:33
+    |vpiOperand:
+    \_ref_obj: (AWIDTH), line:4:3, endln:4:9
       |vpiParent:
-      \_constant: , line:3:33, endln:5:48
-      |vpiActual:
-      \_int_typespec: , line:3:12, endln:3:22
-    |vpiConstType:3
+      \_operation: , line:3:33, endln:5:48
+      |vpiName:AWIDTH
   |vpiLhs:
   \_parameter: (MAP), line:3:23, endln:3:26
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.D), line:13:13, endln:13:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
-    |vpiName:D
-    |vpiFullName:work@top.D
-  |vpiParamAssign:
-  \_param_assign: , line:13:13, endln:13:19
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
-    |vpiRhs:
-    \_constant: , line:13:16, endln:13:19
-      |vpiParent:
-      \_param_assign: , line:13:13, endln:13:19
-      |vpiDecompile:17'b00000000000000000000000000010000
-      |vpiSize:17
-      |BIN:00000000000000000000000000010000
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@top.D), line:13:13, endln:13:14
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1), line:16:6, endln:16:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
-    |vpiName:genblk1
-    |vpiFullName:work@top.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1), line:16:6, endln:16:18
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1), line:16:6, endln:16:18
-      |vpiFullName:work@top.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk1.good), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:16:6, endln:16:18
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1), line:16:6, endln:16:18
-        |vpiName:good
-        |vpiFullName:work@top.genblk1.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/FileLocalParam/dut.sv
-        |vpiDefLineNo:7
 \_weaklyReferenced:
 \_int_typespec: , line:1:1, endln:1:58
 \_int_typespec: , line:3:12, endln:3:22
@@ -355,20 +275,11 @@ design: (work@top)
     |vpiParent:
     \_int_typespec: , line:3:12, endln:3:22
     |vpiLeftRange:
-    \_constant: , line:3:13, endln:3:19
+    \_ref_obj: (MAP.AWIDTH), line:3:13, endln:3:19
       |vpiParent:
       \_range: , line:3:12, endln:3:22
-      |vpiDecompile:16
-      |vpiSize:32
-      |UINT:16
-      |vpiTypespec:
-      \_ref_typespec: (MAP)
-        |vpiParent:
-        \_constant: , line:3:13, endln:3:19
-        |vpiFullName:MAP
-        |vpiActual:
-        \_int_typespec: , line:1:1, endln:1:58
-      |vpiConstType:9
+      |vpiName:AWIDTH
+      |vpiFullName:MAP.AWIDTH
     |vpiRightRange:
     \_constant: , line:3:20, endln:3:21
       |vpiParent:
@@ -377,12 +288,13 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:1:1, endln:1:58
-  |vpiParent:
-  \_ref_typespec: (MAP)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 0
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/FileLocalParam/dut.sv | ${SURELOG_DIR}/build/regression/FileLocalParam/roundtrip/dut_000.sv | 5 | 19 |
+============================== End RoundTrip Results ==============================

@@ -244,60 +244,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:28:1: No timescale set for "goog".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:35:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:2:1: Compile package "foo_flags_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:12:1: Compile package "fooes_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:28:1: Compile package "goog".
 [INF:CP0303] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:35:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:35:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              25
-cont_assign                                            3
+constant                                              12
+cont_assign                                            2
 design                                                 1
-enum_const                                             8
-enum_typespec                                          2
+enum_const                                             4
+enum_typespec                                          1
 logic_net                                              3
-logic_typespec                                         9
-module_inst                                            6
-operation                                              2
-package                                                6
-packed_array_typespec                                  4
-port                                                   4
-range                                                 10
-ref_obj                                                8
-ref_typespec                                          24
-struct_typespec                                        3
-typespec_member                                       12
-union_typespec                                         2
-union_var                                              2
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              25
-cont_assign                                            5
-design                                                 1
-enum_const                                             8
-enum_typespec                                          2
-logic_net                                              3
-logic_typespec                                         9
-module_inst                                            6
-operation                                              2
-package                                                6
-packed_array_typespec                                  4
-port                                                   6
-range                                                 10
-ref_obj                                               13
-ref_typespec                                          26
-struct_typespec                                        3
-typespec_member                                       12
-union_typespec                                         2
-union_var                                              2
+logic_typespec                                         5
+module_inst                                            2
+operation                                              1
+package                                                3
+packed_array_typespec                                  2
+port                                                   2
+range                                                  5
+ref_obj                                                5
+ref_typespec                                          12
+struct_typespec                                        2
+typespec_member                                        7
+union_typespec                                         1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackUnion/slpp_all/surelog.uhdm ...
@@ -305,13 +272,12 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FilePackUnion/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:foo_flags_pkg
   |vpiFullName:foo_flags_pkg::
   |vpiTypedef:
@@ -378,7 +344,7 @@ design: (work@top)
 |uhdmallPackages:
 \_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:fooes_pkg
   |vpiFullName:fooes_pkg::
   |vpiTypedef:
@@ -432,7 +398,7 @@ design: (work@top)
 |uhdmallPackages:
 \_package: goog (goog::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:goog
   |vpiFullName:goog::
   |vpiTypedef:
@@ -479,182 +445,10 @@ design: (work@top)
       |vpiRefEndColumnNo:32
   |vpiDefName:goog
   |vpiEndLabel:goog
-|uhdmtopPackages:
-\_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:foo_flags_pkg
-  |vpiFullName:foo_flags_pkg::
-  |vpiTypedef:
-  \_struct_typespec: (foo_flags_pkg::common_flags_t), line:4:11, endln:8:4
-    |vpiParent:
-    \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-    |vpiName:foo_flags_pkg::common_flags_t
-    |vpiInstance:
-    \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (a), line:5:11, endln:5:12
-      |vpiParent:
-      \_struct_typespec: (foo_flags_pkg::common_flags_t), line:4:11, endln:8:4
-      |vpiName:a
-      |vpiTypespec:
-      \_ref_typespec: (foo_flags_pkg::foo_flags_pkg::common_flags_t::a)
-        |vpiParent:
-        \_typespec_member: (a), line:5:11, endln:5:12
-        |vpiFullName:foo_flags_pkg::foo_flags_pkg::common_flags_t::a
-        |vpiActual:
-        \_logic_typespec: , line:5:5, endln:5:10
-      |vpiRefFile:${SURELOG_DIR}/tests/FilePackUnion/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:10
-    |vpiTypespecMember:
-    \_typespec_member: (b), line:6:11, endln:6:12
-      |vpiParent:
-      \_struct_typespec: (foo_flags_pkg::common_flags_t), line:4:11, endln:8:4
-      |vpiName:b
-      |vpiTypespec:
-      \_ref_typespec: (foo_flags_pkg::foo_flags_pkg::common_flags_t::b)
-        |vpiParent:
-        \_typespec_member: (b), line:6:11, endln:6:12
-        |vpiFullName:foo_flags_pkg::foo_flags_pkg::common_flags_t::b
-        |vpiActual:
-        \_logic_typespec: , line:6:5, endln:6:10
-      |vpiRefFile:${SURELOG_DIR}/tests/FilePackUnion/dut.sv
-      |vpiRefLineNo:6
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:6
-      |vpiRefEndColumnNo:10
-    |vpiTypespecMember:
-    \_typespec_member: (c), line:7:11, endln:7:12
-      |vpiParent:
-      \_struct_typespec: (foo_flags_pkg::common_flags_t), line:4:11, endln:8:4
-      |vpiName:c
-      |vpiTypespec:
-      \_ref_typespec: (foo_flags_pkg::foo_flags_pkg::common_flags_t::c)
-        |vpiParent:
-        \_typespec_member: (c), line:7:11, endln:7:12
-        |vpiFullName:foo_flags_pkg::foo_flags_pkg::common_flags_t::c
-        |vpiActual:
-        \_logic_typespec: , line:7:5, endln:7:10
-      |vpiRefFile:${SURELOG_DIR}/tests/FilePackUnion/dut.sv
-      |vpiRefLineNo:7
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:7
-      |vpiRefEndColumnNo:10
-  |vpiDefName:foo_flags_pkg
-  |vpiTop:1
-  |vpiEndLabel:foo_flags_pkg
-|uhdmtopPackages:
-\_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:fooes_pkg
-  |vpiFullName:fooes_pkg::
-  |vpiTypedef:
-  \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-    |vpiParent:
-    \_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
-    |vpiName:fooes_pkg::classes_e
-    |vpiInstance:
-    \_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
-    |vpiBaseTypespec:
-    \_ref_typespec: (fooes_pkg::fooes_pkg::classes_e)
-      |vpiParent:
-      \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-      |vpiFullName:fooes_pkg::fooes_pkg::classes_e
-      |vpiActual:
-      \_logic_typespec: , line:14:16, endln:14:27
-    |vpiEnumConst:
-    \_enum_const: (a), line:15:5, endln:15:6
-      |vpiParent:
-      \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-      |vpiName:a
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (b), line:16:5, endln:16:6
-      |vpiParent:
-      \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-      |vpiName:b
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (c), line:17:5, endln:17:6
-      |vpiParent:
-      \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-      |vpiName:c
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (d), line:18:5, endln:18:6
-      |vpiParent:
-      \_enum_typespec: (fooes_pkg::classes_e), line:14:3, endln:19:15
-      |vpiName:d
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:2
-  |vpiDefName:fooes_pkg
-  |vpiTop:1
-  |vpiEndLabel:fooes_pkg
-|uhdmtopPackages:
-\_package: goog (goog::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:goog
-  |vpiFullName:goog::
-  |vpiTypedef:
-  \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-    |vpiName:goog::top_flag_t
-    |vpiInstance:
-    \_package: goog (goog::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (atype_t), line:30:45, endln:30:52
-      |vpiParent:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-      |vpiName:atype_t
-      |vpiTypespec:
-      \_ref_typespec: (goog::top_flag_t.atype_t)
-        |vpiParent:
-        \_typespec_member: (atype_t), line:30:45, endln:30:52
-        |vpiFullName:goog::top_flag_t.atype_t
-        |vpiActual:
-        \_packed_array_typespec: 
-      |vpiRefFile:${SURELOG_DIR}/tests/FilePackUnion/dut.sv
-      |vpiRefLineNo:30
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:30
-      |vpiRefEndColumnNo:44
-    |vpiTypespecMember:
-    \_typespec_member: (btype_t), line:31:33, endln:31:40
-      |vpiParent:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-      |vpiName:btype_t
-      |vpiTypespec:
-      \_ref_typespec: (goog::top_flag_t.btype_t)
-        |vpiParent:
-        \_typespec_member: (btype_t), line:31:33, endln:31:40
-        |vpiFullName:goog::top_flag_t.btype_t
-        |vpiActual:
-        \_packed_array_typespec: , line:31:3, endln:31:32
-      |vpiRefFile:${SURELOG_DIR}/tests/FilePackUnion/dut.sv
-      |vpiRefLineNo:31
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:31
-      |vpiRefEndColumnNo:32
-  |vpiDefName:goog
-  |vpiTop:1
-  |vpiEndLabel:goog
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -672,7 +466,7 @@ design: (work@top)
   |vpiNet:
   \_logic_net: (work@top.c), line:37:10, endln:37:11
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
+    \_cont_assign: , line:37:10, endln:37:19
     |vpiName:c
     |vpiFullName:work@top.c
     |vpiNetType:1
@@ -774,10 +568,10 @@ design: (work@top)
 |vpiTypedef:
 \_struct_typespec: (padded_fooes_t), line:23:9, endln:26:2
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:padded_fooes_t
   |vpiInstance:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (a), line:24:9, endln:24:10
@@ -813,128 +607,6 @@ design: (work@top)
     |vpiRefColumnNo:3
     |vpiRefEndLineNo:25
     |vpiRefEndColumnNo:23
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_union_var: (work@top.a), line:35:35, endln:35:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_union_var: (work@top.a), line:35:35, endln:35:36
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_union_var: (work@top.b), line:35:63, endln:35:64
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.b)
-      |vpiParent:
-      \_union_var: (work@top.b), line:35:63, endln:35:64
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-    |vpiName:b
-    |vpiFullName:work@top.b
-    |vpiVisibility:1
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (a), line:35:35, endln:35:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiName:a
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.a), line:35:35, endln:35:36
-      |vpiParent:
-      \_port: (a), line:35:35, endln:35:36
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_union_var: (work@top.a), line:35:35, endln:35:36
-    |vpiTypedef:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_port: (a), line:35:35, endln:35:36
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-  |vpiPort:
-  \_port: (b), line:35:63, endln:35:64
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiName:b
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.b), line:35:63, endln:35:64
-      |vpiParent:
-      \_port: (b), line:35:63, endln:35:64
-      |vpiName:b
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_union_var: (work@top.b), line:35:63, endln:35:64
-    |vpiTypedef:
-    \_ref_typespec: (work@top.b)
-      |vpiParent:
-      \_port: (b), line:35:63, endln:35:64
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_union_typespec: (goog::top_flag_t), line:29:9, endln:32:2
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-  |vpiContAssign:
-  \_cont_assign: , line:36:10, endln:36:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiRhs:
-    \_ref_obj: (work@top.a), line:36:14, endln:36:15
-      |vpiParent:
-      \_cont_assign: , line:36:10, endln:36:15
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_union_var: (work@top.a), line:35:35, endln:35:36
-    |vpiLhs:
-    \_ref_obj: (work@top.b), line:36:10, endln:36:11
-      |vpiParent:
-      \_cont_assign: , line:36:10, endln:36:15
-      |vpiName:b
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_union_var: (work@top.b), line:35:63, endln:35:64
-  |vpiContAssign:
-  \_cont_assign: , line:37:10, endln:37:19
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-    |vpiRhs:
-    \_constant: 
-      |vpiParent:
-      \_cont_assign: , line:37:10, endln:37:19
-      |vpiDecompile:20
-      |vpiSize:64
-      |INT:20
-      |vpiConstType:7
-    |vpiLhs:
-    \_ref_obj: (work@top.c), line:37:10, endln:37:11
-      |vpiParent:
-      \_cont_assign: , line:37:10, endln:37:19
-      |vpiName:c
-      |vpiFullName:work@top.c
-      |vpiActual:
-      \_logic_net: (work@top.c), line:37:10, endln:37:11
 \_weaklyReferenced:
 \_logic_typespec: , line:24:3, endln:24:8
   |vpiParent:
@@ -954,21 +626,6 @@ design: (work@top)
   \_typespec_member: (c), line:7:11, endln:7:12
   |vpiInstance:
   \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (a), line:5:11, endln:5:12
-  |vpiInstance:
-  \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-\_logic_typespec: , line:6:5, endln:6:10
-  |vpiParent:
-  \_typespec_member: (b), line:6:11, endln:6:12
-  |vpiInstance:
-  \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
-\_logic_typespec: , line:7:5, endln:7:10
-  |vpiParent:
-  \_typespec_member: (c), line:7:11, endln:7:12
-  |vpiInstance:
-  \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:2:1, endln:10:27
 \_logic_typespec: , line:14:16, endln:14:27
   |vpiInstance:
   \_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
@@ -992,133 +649,6 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:14:16, endln:14:27
-  |vpiInstance:
-  \_package: fooes_pkg (fooes_pkg::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
-  |vpiRange:
-  \_range: , line:14:22, endln:14:27
-    |vpiParent:
-    \_logic_typespec: , line:14:16, endln:14:27
-    |vpiLeftRange:
-    \_constant: , line:14:23, endln:14:24
-      |vpiParent:
-      \_range: , line:14:22, endln:14:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:25, endln:14:26
-      |vpiParent:
-      \_range: , line:14:22, endln:14:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_packed_array_typespec: 
-  |vpiParent:
-  \_typespec_member: (atype_t), line:30:45, endln:30:52
-  |vpiInstance:
-  \_package: goog (goog::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
-  |vpiRange:
-  \_range: , line:30:34, endln:30:39
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiLeftRange:
-    \_constant: , line:30:35, endln:30:36
-      |vpiParent:
-      \_range: , line:30:34, endln:30:39
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:30:37, endln:30:38
-      |vpiParent:
-      \_range: , line:30:34, endln:30:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:30:39, endln:30:44
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiLeftRange:
-    \_constant: , line:30:40, endln:30:41
-      |vpiParent:
-      \_range: , line:30:39, endln:30:44
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:30:42, endln:30:43
-      |vpiParent:
-      \_range: , line:30:39, endln:30:44
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (goog::top_flag_t.atype_t)
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiFullName:goog::top_flag_t.atype_t
-    |vpiActual:
-    \_struct_typespec: (foo_flags_pkg::common_flags_t), line:4:11, endln:8:4
-\_packed_array_typespec: , line:31:3, endln:31:32
-  |vpiParent:
-  \_typespec_member: (btype_t), line:31:33, endln:31:40
-  |vpiInstance:
-  \_package: goog (goog::), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
-  |vpiRange:
-  \_range: , line:31:22, endln:31:27
-    |vpiParent:
-    \_packed_array_typespec: , line:31:3, endln:31:32
-    |vpiLeftRange:
-    \_constant: , line:31:23, endln:31:24
-      |vpiParent:
-      \_range: , line:31:22, endln:31:27
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:31:25, endln:31:26
-      |vpiParent:
-      \_range: , line:31:22, endln:31:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:31:27, endln:31:32
-    |vpiParent:
-    \_packed_array_typespec: , line:31:3, endln:31:32
-    |vpiLeftRange:
-    \_constant: , line:31:28, endln:31:29
-      |vpiParent:
-      \_range: , line:31:27, endln:31:32
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:31:30, endln:31:31
-      |vpiParent:
-      \_range: , line:31:27, endln:31:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (goog::top_flag_t.btype_t)
-    |vpiParent:
-    \_packed_array_typespec: , line:31:3, endln:31:32
-    |vpiFullName:goog::top_flag_t.btype_t
-    |vpiActual:
-    \_struct_typespec: (padded_fooes_t), line:23:9, endln:26:2
 \_packed_array_typespec: 
   |vpiParent:
   \_typespec_member: (atype_t), line:30:45, endln:30:52
@@ -1223,25 +753,12 @@ design: (work@top)
     |vpiFullName:goog::goog::top_flag_t::btype_t
     |vpiActual:
     \_struct_typespec: (padded_fooes_t), line:23:9, endln:26:2
-\_cont_assign: , line:37:10, endln:37:19
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_ref_obj: (work@top.c), line:37:10, endln:37:11
-    |vpiParent:
-    \_cont_assign: , line:37:10, endln:37:19
-    |vpiName:c
-    |vpiFullName:work@top.c
-    |vpiActual:
-    \_logic_net: (work@top.c), line:37:10, endln:37:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/FilePackUnion/dut.sv | ${SURELOG_DIR}/build/regression/FilePackUnion/roundtrip/dut_000.sv | 8 | 38 |

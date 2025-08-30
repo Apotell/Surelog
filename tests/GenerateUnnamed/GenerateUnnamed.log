@@ -927,59 +927,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:29:8: Compile generate block "work@test1.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:30:5: Compile generate block "work@test1.genblk1.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:37:9: Compile generate block "work@test1.genblk1.genblk1.u1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:45:9: Compile generate block "work@test1.genblk1.genblk1.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:50:7: Compile generate block "work@test1.genblk1.genblk1.n5".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:89:5: Compile generate block "work@test2.pp2".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:96:9: Compile generate block "work@test2.pp2.u1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:104:9: Compile generate block "work@test2.pp2.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:109:7: Compile generate block "work@test2.pp2.n5".
-Instance tree:
-[TOP] work@test1 work@test1
-[TOP] work@test2 work@test2
-[GAT] work@or work@test1.sg1
-[SCO] work@test1.genblk1.genblk1.u1 work@test1.u1
-[SCO] work@test1.genblk1.genblk1.genblk1 work@test1.genblk1
-[SCO] work@test1.genblk1.genblk1.n5 work@test1.n5
-[GAT] work@or work@test2.sg1
-[SCO] work@test2.pp2 work@test2.pp2
-[GAT] work@xnor work@test1.u1.g3
-[GAT] work@xnor work@test1.genblk1.g4
-[GAT] work@xnor work@test1.n5.g5
-[SCO] work@test2.pp2.u1 work@test2.pp2.u1
-[SCO] work@test2.pp2.genblk1 work@test2.pp2.genblk1
-[SCO] work@test2.pp2.n5 work@test2.pp2.n5
-[GAT] work@xnor work@test2.pp2.u1.g3
-[GAT] work@xnor work@test2.pp2.genblk1.g4
-[GAT] work@xnor work@test2.pp2.n5.g5
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:1:1: Top level module "work@test1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:60:1: Top level module "work@test2".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 4.
-[NTE:EL0510] Nb instances: 10.
-[NTE:EL0511] Nb leaf instances: 8.
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:1:1: Instance "work@test1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:60:1: Instance "work@test2".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:11:6: Instance "work@test1.sg1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:37:9: Scope "work@test1.u1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:45:9: Scope "work@test1.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:50:7: Scope "work@test1.n5".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:70:6: Instance "work@test2.sg1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:89:5: Scope "work@test2.pp2".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:39:16: Instance "work@test1.u1.g3".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:45:14: Instance "work@test1.genblk1.g4".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:51:14: Instance "work@test1.n5.g5".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:96:9: Scope "work@test2.pp2.u1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:104:9: Scope "work@test2.pp2.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:109:7: Scope "work@test2.pp2.n5".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:98:16: Instance "work@test2.pp2.u1.g3".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:104:14: Instance "work@test2.pp2.genblk1.g4".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenerateUnnamed/top.v:110:14: Instance "work@test2.pp2.n5.g5".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                 13
@@ -987,34 +934,31 @@ case_item                                              4
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              70
+constant                                              23
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
-gate                                                  16
+gate                                                   2
 gen_case                                               2
 gen_if                                                 6
 gen_if_else                                            6
-gen_scope                                             16
-gen_scope_array                                       16
-int_typespec                                          17
+int_typespec                                          13
 int_var                                                4
 io_decl                                               11
-logic_net                                             12
-logic_typespec                                         8
+logic_net                                              6
+logic_typespec                                         6
 logic_var                                              1
-module_inst                                            7
+module_inst                                            2
 named_begin                                            9
-operation                                             13
-package                                                2
-param_assign                                           8
-parameter                                              8
-port                                                  24
-prim_term                                             48
-ref_obj                                               58
-ref_typespec                                          45
+operation                                              8
+package                                                1
+param_assign                                           4
+parameter                                              4
+prim_term                                              6
+ref_obj                                               16
+ref_typespec                                          27
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateUnnamed/slpp_unit/surelog.uhdm ...
@@ -1022,23 +966,15 @@ task                                                   9
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenerateUnnamed/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@test1)
-|vpiName:work@test1
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (work@test1)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (builtin::any_sverilog_class)
     |vpiParent:
@@ -1072,7 +1008,7 @@ design: (work@test1)
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/GenerateUnnamed/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiName:work@mailbox
   |vpiMethod:
   \_function: (work@mailbox::new), line:3:5, endln:4:16
@@ -1251,7 +1187,7 @@ design: (work@test1)
 |uhdmallClasses:
 \_class_defn: (work@process), file:${SURELOG_DIR}/tests/GenerateUnnamed/builtin.sv, line:30:3, endln:52:11
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiName:work@process
   |vpiTypedef:
   \_enum_typespec: (state), line:32:5, endln:32:74
@@ -1373,7 +1309,7 @@ design: (work@test1)
 |uhdmallClasses:
 \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/GenerateUnnamed/builtin.sv, line:55:3, endln:69:11
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiName:work@semaphore
   |vpiMethod:
   \_function: (work@semaphore::new), line:57:5, endln:58:16
@@ -1510,7 +1446,7 @@ design: (work@test1)
 |uhdmallModules:
 \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiFullName:work@test1
   |vpiParameter:
   \_parameter: (work@test1.p), line:2:13, endln:2:14
@@ -1872,7 +1808,7 @@ design: (work@test1)
 |uhdmallModules:
 \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
   |vpiParent:
-  \_design: (work@test1)
+  \_design: (unnamed)
   |vpiFullName:work@test2
   |vpiParameter:
   \_parameter: (work@test2.p), line:61:13, endln:61:14
@@ -2232,715 +2168,6 @@ design: (work@test1)
               \_gen_if: , line:108:5, endln:108:7
               |vpiName:n5
               |vpiFullName:work@test2.pp2.n5
-|uhdmtopModules:
-\_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-  |vpiParent:
-  \_design: (work@test1)
-  |vpiName:work@test1
-  |vpiParameter:
-  \_parameter: (work@test1.p), line:2:13, endln:2:14
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@test1.p)
-      |vpiParent:
-      \_parameter: (work@test1.p), line:2:13, endln:2:14
-      |vpiFullName:work@test1.p
-      |vpiActual:
-      \_int_typespec: , line:2:3, endln:2:25
-    |vpiName:p
-    |vpiFullName:work@test1.p
-  |vpiParameter:
-  \_parameter: (work@test1.q), line:2:20, endln:2:21
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (work@test1.q)
-      |vpiParent:
-      \_parameter: (work@test1.q), line:2:20, endln:2:21
-      |vpiFullName:work@test1.q
-      |vpiActual:
-      \_int_typespec: , line:2:3, endln:2:25
-    |vpiName:q
-    |vpiFullName:work@test1.q
-  |vpiParamAssign:
-  \_param_assign: , line:2:13, endln:2:18
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiRhs:
-    \_constant: , line:2:17, endln:2:18
-      |vpiParent:
-      \_param_assign: , line:2:13, endln:2:18
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@test1)
-        |vpiParent:
-        \_constant: , line:2:17, endln:2:18
-        |vpiFullName:work@test1
-        |vpiActual:
-        \_int_typespec: , line:2:3, endln:2:25
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@test1.p), line:2:13, endln:2:14
-  |vpiParamAssign:
-  \_param_assign: , line:2:20, endln:2:25
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiRhs:
-    \_constant: , line:2:24, endln:2:25
-      |vpiParent:
-      \_param_assign: , line:2:20, endln:2:25
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@test1)
-        |vpiParent:
-        \_constant: , line:2:24, endln:2:25
-        |vpiFullName:work@test1
-        |vpiActual:
-        \_int_typespec: , line:2:3, endln:2:25
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@test1.q), line:2:20, endln:2:21
-  |vpiDefName:work@test1
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@test1.a), line:3:8, endln:3:9
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test1.a)
-      |vpiParent:
-      \_logic_net: (work@test1.a), line:3:8, endln:3:9
-      |vpiFullName:work@test1.a
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:7
-    |vpiName:a
-    |vpiFullName:work@test1.a
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@test1.b), line:3:11, endln:3:12
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test1.b)
-      |vpiParent:
-      \_logic_net: (work@test1.b), line:3:11, endln:3:12
-      |vpiFullName:work@test1.b
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:7
-    |vpiName:b
-    |vpiFullName:work@test1.b
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@test1.c), line:3:14, endln:3:15
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test1.c)
-      |vpiParent:
-      \_logic_net: (work@test1.c), line:3:14, endln:3:15
-      |vpiFullName:work@test1.c
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:7
-    |vpiName:c
-    |vpiFullName:work@test1.c
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test1.u1), line:37:9, endln:40:12
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiName:u1
-    |vpiFullName:work@test1.u1
-    |vpiGenScope:
-    \_gen_scope: (work@test1.u1), line:37:9, endln:40:12
-      |vpiParent:
-      \_gen_scope_array: (work@test1.u1), line:37:9, endln:40:12
-      |vpiFullName:work@test1.u1
-      |vpiPrimitive:
-      \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-        |vpiParent:
-        \_gen_scope: (work@test1.u1), line:37:9, endln:40:12
-        |vpiDefName:work@xnor
-        |vpiName:g3
-        |vpiFullName:work@test1.u1.g3
-        |vpiPrimType:6
-        |vpiPrimTerm:
-        \_prim_term: , line:39:19, endln:39:20
-          |vpiParent:
-          \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-          |vpiDirection:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.u1.a), line:39:19, endln:39:20
-            |vpiParent:
-            \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-            |vpiName:a
-            |vpiFullName:work@test1.genblk1.genblk1.u1.a
-            |vpiActual:
-            \_logic_net: (work@test1.a), line:3:8, endln:3:9
-        |vpiPrimTerm:
-        \_prim_term: , line:39:22, endln:39:23
-          |vpiParent:
-          \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-          |vpiDirection:1
-          |vpiTermIndex:1
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.u1.b), line:39:22, endln:39:23
-            |vpiParent:
-            \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-            |vpiName:b
-            |vpiFullName:work@test1.genblk1.genblk1.u1.b
-            |vpiActual:
-            \_logic_net: (work@test1.b), line:3:11, endln:3:12
-        |vpiPrimTerm:
-        \_prim_term: , line:39:25, endln:39:26
-          |vpiParent:
-          \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-          |vpiDirection:1
-          |vpiTermIndex:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.u1.c), line:39:25, endln:39:26
-            |vpiParent:
-            \_gate: work@xnor (work@test1.u1.g3), line:39:16, endln:39:27
-            |vpiName:c
-            |vpiFullName:work@test1.genblk1.genblk1.u1.c
-            |vpiActual:
-            \_logic_net: (work@test1.c), line:3:14, endln:3:15
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test1.genblk1), line:45:9, endln:45:26
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiName:genblk1
-    |vpiFullName:work@test1.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@test1.genblk1), line:45:9, endln:45:26
-      |vpiParent:
-      \_gen_scope_array: (work@test1.genblk1), line:45:9, endln:45:26
-      |vpiFullName:work@test1.genblk1
-      |vpiPrimitive:
-      \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-        |vpiParent:
-        \_gen_scope: (work@test1.genblk1), line:45:9, endln:45:26
-        |vpiDefName:work@xnor
-        |vpiName:g4
-        |vpiFullName:work@test1.genblk1.g4
-        |vpiPrimType:6
-        |vpiPrimTerm:
-        \_prim_term: , line:45:17, endln:45:18
-          |vpiParent:
-          \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-          |vpiDirection:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.genblk1.a), line:45:17, endln:45:18
-            |vpiParent:
-            \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-            |vpiName:a
-            |vpiFullName:work@test1.genblk1.genblk1.genblk1.a
-            |vpiActual:
-            \_logic_net: (work@test1.a), line:3:8, endln:3:9
-        |vpiPrimTerm:
-        \_prim_term: , line:45:20, endln:45:21
-          |vpiParent:
-          \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-          |vpiDirection:1
-          |vpiTermIndex:1
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.genblk1.b), line:45:20, endln:45:21
-            |vpiParent:
-            \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-            |vpiName:b
-            |vpiFullName:work@test1.genblk1.genblk1.genblk1.b
-            |vpiActual:
-            \_logic_net: (work@test1.b), line:3:11, endln:3:12
-        |vpiPrimTerm:
-        \_prim_term: , line:45:23, endln:45:24
-          |vpiParent:
-          \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-          |vpiDirection:1
-          |vpiTermIndex:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.genblk1.c), line:45:23, endln:45:24
-            |vpiParent:
-            \_gate: work@xnor (work@test1.genblk1.g4), line:45:14, endln:45:25
-            |vpiName:c
-            |vpiFullName:work@test1.genblk1.genblk1.genblk1.c
-            |vpiActual:
-            \_logic_net: (work@test1.c), line:3:14, endln:3:15
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test1.n5), line:50:7, endln:52:10
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiName:n5
-    |vpiFullName:work@test1.n5
-    |vpiGenScope:
-    \_gen_scope: (work@test1.n5), line:50:7, endln:52:10
-      |vpiParent:
-      \_gen_scope_array: (work@test1.n5), line:50:7, endln:52:10
-      |vpiFullName:work@test1.n5
-      |vpiPrimitive:
-      \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-        |vpiParent:
-        \_gen_scope: (work@test1.n5), line:50:7, endln:52:10
-        |vpiDefName:work@xnor
-        |vpiName:g5
-        |vpiFullName:work@test1.n5.g5
-        |vpiPrimType:6
-        |vpiPrimTerm:
-        \_prim_term: , line:51:17, endln:51:18
-          |vpiParent:
-          \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-          |vpiDirection:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.n5.a), line:51:17, endln:51:18
-            |vpiParent:
-            \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-            |vpiName:a
-            |vpiFullName:work@test1.genblk1.genblk1.n5.a
-            |vpiActual:
-            \_logic_net: (work@test1.a), line:3:8, endln:3:9
-        |vpiPrimTerm:
-        \_prim_term: , line:51:20, endln:51:21
-          |vpiParent:
-          \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-          |vpiDirection:1
-          |vpiTermIndex:1
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.n5.b), line:51:20, endln:51:21
-            |vpiParent:
-            \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-            |vpiName:b
-            |vpiFullName:work@test1.genblk1.genblk1.n5.b
-            |vpiActual:
-            \_logic_net: (work@test1.b), line:3:11, endln:3:12
-        |vpiPrimTerm:
-        \_prim_term: , line:51:23, endln:51:24
-          |vpiParent:
-          \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-          |vpiDirection:1
-          |vpiTermIndex:2
-          |vpiExpr:
-          \_ref_obj: (work@test1.genblk1.genblk1.n5.c), line:51:23, endln:51:24
-            |vpiParent:
-            \_gate: work@xnor (work@test1.n5.g5), line:51:14, endln:51:25
-            |vpiName:c
-            |vpiFullName:work@test1.genblk1.genblk1.n5.c
-            |vpiActual:
-            \_logic_net: (work@test1.c), line:3:14, endln:3:15
-  |vpiPrimitive:
-  \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-    |vpiParent:
-    \_module_inst: work@test1 (work@test1), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:1:1, endln:56:10
-    |vpiDefName:work@or
-    |vpiName:sg1
-    |vpiFullName:work@test1.sg1
-    |vpiPrimType:4
-    |vpiPrimTerm:
-    \_prim_term: , line:11:10, endln:11:11
-      |vpiParent:
-      \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-      |vpiDirection:2
-      |vpiExpr:
-      \_ref_obj: (work@test1.a), line:11:10, endln:11:11
-        |vpiParent:
-        \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-        |vpiName:a
-        |vpiFullName:work@test1.a
-        |vpiActual:
-        \_logic_net: (work@test1.a), line:3:8, endln:3:9
-    |vpiPrimTerm:
-    \_prim_term: , line:11:13, endln:11:14
-      |vpiParent:
-      \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-      |vpiDirection:1
-      |vpiTermIndex:1
-      |vpiExpr:
-      \_ref_obj: (work@test1.b), line:11:13, endln:11:14
-        |vpiParent:
-        \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-        |vpiName:b
-        |vpiFullName:work@test1.b
-        |vpiActual:
-        \_logic_net: (work@test1.b), line:3:11, endln:3:12
-    |vpiPrimTerm:
-    \_prim_term: , line:11:16, endln:11:17
-      |vpiParent:
-      \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-      |vpiDirection:1
-      |vpiTermIndex:2
-      |vpiExpr:
-      \_ref_obj: (work@test1.c), line:11:16, endln:11:17
-        |vpiParent:
-        \_gate: work@or (work@test1.sg1), line:11:6, endln:11:18
-        |vpiName:c
-        |vpiFullName:work@test1.c
-        |vpiActual:
-        \_logic_net: (work@test1.c), line:3:14, endln:3:15
-|uhdmtopModules:
-\_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-  |vpiParent:
-  \_design: (work@test1)
-  |vpiName:work@test2
-  |vpiParameter:
-  \_parameter: (work@test2.p), line:61:13, endln:61:14
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@test2.p)
-      |vpiParent:
-      \_parameter: (work@test2.p), line:61:13, endln:61:14
-      |vpiFullName:work@test2.p
-      |vpiActual:
-      \_int_typespec: , line:61:3, endln:61:25
-    |vpiName:p
-    |vpiFullName:work@test2.p
-  |vpiParameter:
-  \_parameter: (work@test2.q), line:61:20, endln:61:21
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (work@test2.q)
-      |vpiParent:
-      \_parameter: (work@test2.q), line:61:20, endln:61:21
-      |vpiFullName:work@test2.q
-      |vpiActual:
-      \_int_typespec: , line:61:3, endln:61:25
-    |vpiName:q
-    |vpiFullName:work@test2.q
-  |vpiParamAssign:
-  \_param_assign: , line:61:13, endln:61:18
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiRhs:
-    \_constant: , line:61:17, endln:61:18
-      |vpiParent:
-      \_param_assign: , line:61:13, endln:61:18
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@test2)
-        |vpiParent:
-        \_constant: , line:61:17, endln:61:18
-        |vpiFullName:work@test2
-        |vpiActual:
-        \_int_typespec: , line:61:3, endln:61:25
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@test2.p), line:61:13, endln:61:14
-  |vpiParamAssign:
-  \_param_assign: , line:61:20, endln:61:25
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiRhs:
-    \_constant: , line:61:24, endln:61:25
-      |vpiParent:
-      \_param_assign: , line:61:20, endln:61:25
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@test2)
-        |vpiParent:
-        \_constant: , line:61:24, endln:61:25
-        |vpiFullName:work@test2
-        |vpiActual:
-        \_int_typespec: , line:61:3, endln:61:25
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@test2.q), line:61:20, endln:61:21
-  |vpiDefName:work@test2
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@test2.a), line:62:8, endln:62:9
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test2.a)
-      |vpiParent:
-      \_logic_net: (work@test2.a), line:62:8, endln:62:9
-      |vpiFullName:work@test2.a
-      |vpiActual:
-      \_logic_typespec: , line:62:3, endln:62:7
-    |vpiName:a
-    |vpiFullName:work@test2.a
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@test2.b), line:62:11, endln:62:12
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test2.b)
-      |vpiParent:
-      \_logic_net: (work@test2.b), line:62:11, endln:62:12
-      |vpiFullName:work@test2.b
-      |vpiActual:
-      \_logic_typespec: , line:62:3, endln:62:7
-    |vpiName:b
-    |vpiFullName:work@test2.b
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@test2.c), line:62:14, endln:62:15
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test2.c)
-      |vpiParent:
-      \_logic_net: (work@test2.c), line:62:14, endln:62:15
-      |vpiFullName:work@test2.c
-      |vpiActual:
-      \_logic_typespec: , line:62:3, endln:62:7
-    |vpiName:c
-    |vpiFullName:work@test2.c
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test2.pp2), line:89:5, endln:100:12
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiName:pp2
-    |vpiFullName:work@test2.pp2
-    |vpiGenScope:
-    \_gen_scope: (work@test2.pp2), line:89:5, endln:100:12
-      |vpiParent:
-      \_gen_scope_array: (work@test2.pp2), line:89:5, endln:100:12
-      |vpiFullName:work@test2.pp2
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@test2.pp2.u1), line:96:9, endln:99:12
-        |vpiParent:
-        \_gen_scope: (work@test2.pp2), line:89:5, endln:100:12
-        |vpiName:u1
-        |vpiFullName:work@test2.pp2.u1
-        |vpiGenScope:
-        \_gen_scope: (work@test2.pp2.u1), line:96:9, endln:99:12
-          |vpiParent:
-          \_gen_scope_array: (work@test2.pp2.u1), line:96:9, endln:99:12
-          |vpiFullName:work@test2.pp2.u1
-          |vpiPrimitive:
-          \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-            |vpiParent:
-            \_gen_scope: (work@test2.pp2.u1), line:96:9, endln:99:12
-            |vpiDefName:work@xnor
-            |vpiName:g3
-            |vpiFullName:work@test2.pp2.u1.g3
-            |vpiPrimType:6
-            |vpiPrimTerm:
-            \_prim_term: , line:98:19, endln:98:20
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-              |vpiDirection:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.u1.a), line:98:19, endln:98:20
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-                |vpiName:a
-                |vpiFullName:work@test2.pp2.u1.a
-                |vpiActual:
-                \_logic_net: (work@test2.a), line:62:8, endln:62:9
-            |vpiPrimTerm:
-            \_prim_term: , line:98:22, endln:98:23
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-              |vpiDirection:1
-              |vpiTermIndex:1
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.u1.b), line:98:22, endln:98:23
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-                |vpiName:b
-                |vpiFullName:work@test2.pp2.u1.b
-                |vpiActual:
-                \_logic_net: (work@test2.b), line:62:11, endln:62:12
-            |vpiPrimTerm:
-            \_prim_term: , line:98:25, endln:98:26
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-              |vpiDirection:1
-              |vpiTermIndex:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.u1.c), line:98:25, endln:98:26
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.u1.g3), line:98:16, endln:98:27
-                |vpiName:c
-                |vpiFullName:work@test2.pp2.u1.c
-                |vpiActual:
-                \_logic_net: (work@test2.c), line:62:14, endln:62:15
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@test2.pp2.genblk1), line:104:9, endln:104:26
-        |vpiParent:
-        \_gen_scope: (work@test2.pp2), line:89:5, endln:100:12
-        |vpiName:genblk1
-        |vpiFullName:work@test2.pp2.genblk1
-        |vpiGenScope:
-        \_gen_scope: (work@test2.pp2.genblk1), line:104:9, endln:104:26
-          |vpiParent:
-          \_gen_scope_array: (work@test2.pp2.genblk1), line:104:9, endln:104:26
-          |vpiFullName:work@test2.pp2.genblk1
-          |vpiPrimitive:
-          \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-            |vpiParent:
-            \_gen_scope: (work@test2.pp2.genblk1), line:104:9, endln:104:26
-            |vpiDefName:work@xnor
-            |vpiName:g4
-            |vpiFullName:work@test2.pp2.genblk1.g4
-            |vpiPrimType:6
-            |vpiPrimTerm:
-            \_prim_term: , line:104:17, endln:104:18
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-              |vpiDirection:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.genblk1.a), line:104:17, endln:104:18
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-                |vpiName:a
-                |vpiFullName:work@test2.pp2.genblk1.a
-                |vpiActual:
-                \_logic_net: (work@test2.a), line:62:8, endln:62:9
-            |vpiPrimTerm:
-            \_prim_term: , line:104:20, endln:104:21
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-              |vpiDirection:1
-              |vpiTermIndex:1
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.genblk1.b), line:104:20, endln:104:21
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-                |vpiName:b
-                |vpiFullName:work@test2.pp2.genblk1.b
-                |vpiActual:
-                \_logic_net: (work@test2.b), line:62:11, endln:62:12
-            |vpiPrimTerm:
-            \_prim_term: , line:104:23, endln:104:24
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-              |vpiDirection:1
-              |vpiTermIndex:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.genblk1.c), line:104:23, endln:104:24
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.genblk1.g4), line:104:14, endln:104:25
-                |vpiName:c
-                |vpiFullName:work@test2.pp2.genblk1.c
-                |vpiActual:
-                \_logic_net: (work@test2.c), line:62:14, endln:62:15
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@test2.pp2.n5), line:109:7, endln:111:10
-        |vpiParent:
-        \_gen_scope: (work@test2.pp2), line:89:5, endln:100:12
-        |vpiName:n5
-        |vpiFullName:work@test2.pp2.n5
-        |vpiGenScope:
-        \_gen_scope: (work@test2.pp2.n5), line:109:7, endln:111:10
-          |vpiParent:
-          \_gen_scope_array: (work@test2.pp2.n5), line:109:7, endln:111:10
-          |vpiFullName:work@test2.pp2.n5
-          |vpiPrimitive:
-          \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-            |vpiParent:
-            \_gen_scope: (work@test2.pp2.n5), line:109:7, endln:111:10
-            |vpiDefName:work@xnor
-            |vpiName:g5
-            |vpiFullName:work@test2.pp2.n5.g5
-            |vpiPrimType:6
-            |vpiPrimTerm:
-            \_prim_term: , line:110:17, endln:110:18
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-              |vpiDirection:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.n5.a), line:110:17, endln:110:18
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-                |vpiName:a
-                |vpiFullName:work@test2.pp2.n5.a
-                |vpiActual:
-                \_logic_net: (work@test2.a), line:62:8, endln:62:9
-            |vpiPrimTerm:
-            \_prim_term: , line:110:20, endln:110:21
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-              |vpiDirection:1
-              |vpiTermIndex:1
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.n5.b), line:110:20, endln:110:21
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-                |vpiName:b
-                |vpiFullName:work@test2.pp2.n5.b
-                |vpiActual:
-                \_logic_net: (work@test2.b), line:62:11, endln:62:12
-            |vpiPrimTerm:
-            \_prim_term: , line:110:23, endln:110:24
-              |vpiParent:
-              \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-              |vpiDirection:1
-              |vpiTermIndex:2
-              |vpiExpr:
-              \_ref_obj: (work@test2.pp2.n5.c), line:110:23, endln:110:24
-                |vpiParent:
-                \_gate: work@xnor (work@test2.pp2.n5.g5), line:110:14, endln:110:25
-                |vpiName:c
-                |vpiFullName:work@test2.pp2.n5.c
-                |vpiActual:
-                \_logic_net: (work@test2.c), line:62:14, endln:62:15
-  |vpiPrimitive:
-  \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-    |vpiParent:
-    \_module_inst: work@test2 (work@test2), file:${SURELOG_DIR}/tests/GenerateUnnamed/top.v, line:60:1, endln:115:10
-    |vpiDefName:work@or
-    |vpiName:sg1
-    |vpiFullName:work@test2.sg1
-    |vpiPrimType:4
-    |vpiPrimTerm:
-    \_prim_term: , line:70:10, endln:70:11
-      |vpiParent:
-      \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-      |vpiDirection:2
-      |vpiExpr:
-      \_ref_obj: (work@test2.a), line:70:10, endln:70:11
-        |vpiParent:
-        \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-        |vpiName:a
-        |vpiFullName:work@test2.a
-        |vpiActual:
-        \_logic_net: (work@test2.a), line:62:8, endln:62:9
-    |vpiPrimTerm:
-    \_prim_term: , line:70:13, endln:70:14
-      |vpiParent:
-      \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-      |vpiDirection:1
-      |vpiTermIndex:1
-      |vpiExpr:
-      \_ref_obj: (work@test2.b), line:70:13, endln:70:14
-        |vpiParent:
-        \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-        |vpiName:b
-        |vpiFullName:work@test2.b
-        |vpiActual:
-        \_logic_net: (work@test2.b), line:62:11, endln:62:12
-    |vpiPrimTerm:
-    \_prim_term: , line:70:16, endln:70:17
-      |vpiParent:
-      \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-      |vpiDirection:1
-      |vpiTermIndex:2
-      |vpiExpr:
-      \_ref_obj: (work@test2.c), line:70:16, endln:70:17
-        |vpiParent:
-        \_gate: work@or (work@test2.sg1), line:70:6, endln:70:18
-        |vpiName:c
-        |vpiFullName:work@test2.c
-        |vpiActual:
-        \_logic_net: (work@test2.c), line:62:14, endln:62:15
 \_weaklyReferenced:
 \_int_typespec: , line:2:3, endln:2:25
 \_int_typespec: , line:2:3, endln:2:25
@@ -2974,32 +2201,19 @@ design: (work@test1)
 \_int_typespec: , line:66:26, endln:66:29
   |vpiSigned:1
 \_logic_typespec: , line:3:3, endln:3:7
-  |vpiParent:
-  \_logic_net: (work@test1.c), line:3:14, endln:3:15
-\_logic_typespec: , line:62:3, endln:62:7
-  |vpiParent:
-  \_logic_net: (work@test2.c), line:62:14, endln:62:15
-\_logic_typespec: , line:3:3, endln:3:7
 \_logic_typespec: , line:3:3, endln:3:7
 \_logic_typespec: , line:3:3, endln:3:7
 \_logic_typespec: , line:62:3, endln:62:7
 \_logic_typespec: , line:62:3, endln:62:7
 \_logic_typespec: , line:62:3, endln:62:7
-\_int_typespec: , line:2:3, endln:2:25
-  |vpiParent:
-  \_ref_typespec: (work@test1.p)
-\_int_typespec: , line:2:3, endln:2:25
-  |vpiParent:
-  \_ref_typespec: (work@test1.q)
-\_int_typespec: , line:61:3, endln:61:25
-  |vpiParent:
-  \_ref_typespec: (work@test2.p)
-\_int_typespec: , line:61:3, endln:61:25
-  |vpiParent:
-  \_ref_typespec: (work@test2.q)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 24
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenerateUnnamed/builtin.sv | ${SURELOG_DIR}/build/regression/GenerateUnnamed/roundtrip/builtin_000.sv | 0 | 0 |
+[roundtrip]: ${SURELOG_DIR}/tests/GenerateUnnamed/top.v      | ${SURELOG_DIR}/build/regression/GenerateUnnamed/roundtrip/top_000.v      | 64 | 115 |
+============================== End RoundTrip Results ==============================

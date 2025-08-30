@@ -74,56 +74,20 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenFor/dut.sv:2:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenFor/dut.sv:2:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenFor/dut.sv:4:35: Compile generate block "work@top.genblk1[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenFor/dut.sv:4:35: Compile generate block "work@top.genblk1[1]".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenFor/dut.sv:4:35: Compile generate block "work@top.genblk1[2]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenFor/dut.sv:2:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
 begin                                                  1
-bit_select                                             7
-constant                                              23
-cont_assign                                            7
+bit_select                                             1
+constant                                               4
+cont_assign                                            1
 design                                                 1
 gen_for                                                1
-gen_scope                                              6
-gen_scope_array                                        6
-int_typespec                                           5
-int_var                                                2
 logic_net                                              1
-module_inst                                            4
-operation                                              6
-parameter                                              3
-ref_obj                                               10
-ref_typespec                                           6
-ref_var                                                1
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-begin                                                  1
-bit_select                                            10
-constant                                              23
-cont_assign                                           10
-design                                                 1
-gen_for                                                1
-gen_scope                                              9
-gen_scope_array                                        9
-int_typespec                                           5
-int_var                                                2
-logic_net                                              1
-module_inst                                            4
-operation                                              6
-parameter                                              3
-ref_obj                                               13
-ref_typespec                                           9
+module_inst                                            1
+operation                                              2
+ref_obj                                                4
+ref_typespec                                           1
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -132,19 +96,18 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenFor/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.i), line:4:16, endln:4:17
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+    \_operation: , line:4:16, endln:4:21
     |vpiName:i
     |vpiFullName:work@top.i
     |vpiNetType:1
@@ -163,16 +126,16 @@ design: (work@top)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@top.i), line:4:9, endln:4:10
+      \_ref_var: (work@top.i), line:4:9, endln:4:10
         |vpiParent:
         \_assignment: , line:4:9, endln:4:14
         |vpiTypespec:
         \_ref_typespec: (work@top.i)
           |vpiParent:
-          \_int_var: (work@top.i), line:4:9, endln:4:10
+          \_ref_var: (work@top.i), line:4:9, endln:4:10
           |vpiFullName:work@top.i
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (i), line:4:9, endln:4:10
         |vpiName:i
         |vpiFullName:work@top.i
     |vpiCondition:
@@ -259,277 +222,15 @@ design: (work@top)
             \_bit_select: (work@top.tmp), line:5:14, endln:5:20
             |vpiName:i
             |vpiFullName:work@top.i
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1[0]), line:4:35, endln:6:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-    |vpiName:genblk1[0]
-    |vpiFullName:work@top.genblk1[0]
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1[0]), line:4:35, endln:6:7
-      |vpiFullName:work@top.genblk1[0]
-      |vpiParameter:
-      \_parameter: (work@top.genblk1[0].i), line:4:0
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@top.genblk1[0].i)
-          |vpiParent:
-          \_parameter: (work@top.genblk1[0].i), line:4:0
-          |vpiFullName:work@top.genblk1[0].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@top.genblk1[0].i
-      |vpiContAssign:
-      \_cont_assign: , line:5:14, endln:5:27
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-        |vpiRhs:
-        \_constant: , line:5:23, endln:5:27
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@top.genblk1[0].tmp), line:5:14, endln:5:20
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiName:tmp
-          |vpiFullName:work@top.genblk1[0].tmp
-          |vpiIndex:
-          \_ref_obj: (work@top.genblk1[0].i), line:5:18, endln:5:19
-            |vpiParent:
-            \_bit_select: (work@top.genblk1[0].tmp), line:5:14, endln:5:20
-            |vpiName:i
-            |vpiFullName:work@top.genblk1[0].i
-            |vpiActual:
-            \_parameter: (work@top.genblk1[0].i), line:4:0
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1[1]), line:4:35, endln:6:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-    |vpiName:genblk1[1]
-    |vpiFullName:work@top.genblk1[1]
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1[1]), line:4:35, endln:6:7
-      |vpiFullName:work@top.genblk1[1]
-      |vpiParameter:
-      \_parameter: (work@top.genblk1[1].i), line:4:0
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@top.genblk1[1].i)
-          |vpiParent:
-          \_parameter: (work@top.genblk1[1].i), line:4:0
-          |vpiFullName:work@top.genblk1[1].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@top.genblk1[1].i
-      |vpiContAssign:
-      \_cont_assign: , line:5:14, endln:5:27
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-        |vpiRhs:
-        \_constant: , line:5:23, endln:5:27
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@top.genblk1[1].tmp), line:5:14, endln:5:20
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiName:tmp
-          |vpiFullName:work@top.genblk1[1].tmp
-          |vpiIndex:
-          \_ref_obj: (work@top.genblk1[1].i), line:5:18, endln:5:19
-            |vpiParent:
-            \_bit_select: (work@top.genblk1[1].tmp), line:5:14, endln:5:20
-            |vpiName:i
-            |vpiFullName:work@top.genblk1[1].i
-            |vpiActual:
-            \_parameter: (work@top.genblk1[1].i), line:4:0
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1[2]), line:4:35, endln:6:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-    |vpiName:genblk1[2]
-    |vpiFullName:work@top.genblk1[2]
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1[2]), line:4:35, endln:6:7
-      |vpiFullName:work@top.genblk1[2]
-      |vpiParameter:
-      \_parameter: (work@top.genblk1[2].i), line:4:0
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-        |UINT:2
-        |vpiTypespec:
-        \_ref_typespec: (work@top.genblk1[2].i)
-          |vpiParent:
-          \_parameter: (work@top.genblk1[2].i), line:4:0
-          |vpiFullName:work@top.genblk1[2].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@top.genblk1[2].i
-      |vpiContAssign:
-      \_cont_assign: , line:5:14, endln:5:27
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-        |vpiRhs:
-        \_constant: , line:5:23, endln:5:27
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@top.genblk1[2].tmp), line:5:14, endln:5:20
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiName:tmp
-          |vpiFullName:work@top.genblk1[2].tmp
-          |vpiIndex:
-          \_ref_obj: (work@top.genblk1[2].i), line:5:18, endln:5:19
-            |vpiParent:
-            \_bit_select: (work@top.genblk1[2].tmp), line:5:14, endln:5:20
-            |vpiName:i
-            |vpiFullName:work@top.genblk1[2].i
-            |vpiActual:
-            \_parameter: (work@top.genblk1[2].i), line:4:0
 \_weaklyReferenced:
-\_cont_assign: , line:5:14, endln:5:27
-  |vpiParent:
-  \_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-  |vpiRhs:
-  \_constant: , line:5:23, endln:5:27
-  |vpiLhs:
-  \_bit_select: (work@top.genblk1[0].tmp), line:5:14, endln:5:20
-    |vpiParent:
-    \_cont_assign: , line:5:14, endln:5:27
-    |vpiName:tmp
-    |vpiFullName:work@top.genblk1[0].tmp
-    |vpiIndex:
-    \_ref_obj: (work@top.genblk1[0].i), line:5:18, endln:5:19
-      |vpiParent:
-      \_bit_select: (work@top.genblk1[0].tmp), line:5:14, endln:5:20
-      |vpiName:i
-      |vpiFullName:work@top.genblk1[0].i
-\_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-  |vpiParent:
-  \_gen_scope_array: (work@top.genblk1[0]), line:4:35, endln:6:7
-  |vpiFullName:work@top.genblk1[0]
-  |vpiParameter:
-  \_parameter: (work@top.genblk1[0].i), line:4:0
-  |vpiContAssign:
-  \_cont_assign: , line:5:14, endln:5:27
-\_gen_scope_array: (work@top.genblk1[0]), line:4:35, endln:6:7
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-  |vpiName:genblk1[0]
-  |vpiFullName:work@top.genblk1[0]
-  |vpiGenScope:
-  \_gen_scope: (work@top.genblk1[0]), line:4:35, endln:6:7
-\_int_typespec: 
-\_cont_assign: , line:5:14, endln:5:27
-  |vpiParent:
-  \_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-  |vpiRhs:
-  \_constant: , line:5:23, endln:5:27
-  |vpiLhs:
-  \_bit_select: (work@top.genblk1[1].tmp), line:5:14, endln:5:20
-    |vpiParent:
-    \_cont_assign: , line:5:14, endln:5:27
-    |vpiName:tmp
-    |vpiFullName:work@top.genblk1[1].tmp
-    |vpiIndex:
-    \_ref_obj: (work@top.genblk1[1].i), line:5:18, endln:5:19
-      |vpiParent:
-      \_bit_select: (work@top.genblk1[1].tmp), line:5:14, endln:5:20
-      |vpiName:i
-      |vpiFullName:work@top.genblk1[1].i
-\_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-  |vpiParent:
-  \_gen_scope_array: (work@top.genblk1[1]), line:4:35, endln:6:7
-  |vpiFullName:work@top.genblk1[1]
-  |vpiParameter:
-  \_parameter: (work@top.genblk1[1].i), line:4:0
-  |vpiContAssign:
-  \_cont_assign: , line:5:14, endln:5:27
-\_gen_scope_array: (work@top.genblk1[1]), line:4:35, endln:6:7
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-  |vpiName:genblk1[1]
-  |vpiFullName:work@top.genblk1[1]
-  |vpiGenScope:
-  \_gen_scope: (work@top.genblk1[1]), line:4:35, endln:6:7
-\_int_typespec: 
-\_cont_assign: , line:5:14, endln:5:27
-  |vpiParent:
-  \_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-  |vpiRhs:
-  \_constant: , line:5:23, endln:5:27
-  |vpiLhs:
-  \_bit_select: (work@top.genblk1[2].tmp), line:5:14, endln:5:20
-    |vpiParent:
-    \_cont_assign: , line:5:14, endln:5:27
-    |vpiName:tmp
-    |vpiFullName:work@top.genblk1[2].tmp
-    |vpiIndex:
-    \_ref_obj: (work@top.genblk1[2].i), line:5:18, endln:5:19
-      |vpiParent:
-      \_bit_select: (work@top.genblk1[2].tmp), line:5:14, endln:5:20
-      |vpiName:i
-      |vpiFullName:work@top.genblk1[2].i
-\_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-  |vpiParent:
-  \_gen_scope_array: (work@top.genblk1[2]), line:4:35, endln:6:7
-  |vpiFullName:work@top.genblk1[2]
-  |vpiParameter:
-  \_parameter: (work@top.genblk1[2].i), line:4:0
-  |vpiContAssign:
-  \_cont_assign: , line:5:14, endln:5:27
-\_gen_scope_array: (work@top.genblk1[2]), line:4:35, endln:6:7
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
-  |vpiName:genblk1[2]
-  |vpiFullName:work@top.genblk1[2]
-  |vpiGenScope:
-  \_gen_scope: (work@top.genblk1[2]), line:4:35, endln:6:7
-\_int_typespec: 
-\_int_typespec: 
+\_unsupported_typespec: (i), line:4:9, endln:4:10
+  |vpiName:i
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/GenFor/dut.sv | ${SURELOG_DIR}/build/regression/GenFor/roundtrip/dut_000.sv | 2 | 8 |

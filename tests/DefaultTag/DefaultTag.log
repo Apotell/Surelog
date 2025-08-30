@@ -137,56 +137,33 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/DefaultTag/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultTag/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/DefaultTag/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              50
+constant                                              11
 design                                                 1
-logic_typespec                                        16
-module_inst                                            4
-operation                                              5
-param_assign                                           2
-parameter                                              3
-range                                                 16
-ref_typespec                                          36
-string_typespec                                       14
-struct_typespec                                        4
-tagged_pattern                                        14
-typespec_member                                       16
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              50
-design                                                 1
-logic_typespec                                        16
-module_inst                                            4
-operation                                              5
-param_assign                                           2
-parameter                                              3
-range                                                 16
-ref_typespec                                          36
-string_typespec                                       14
-struct_typespec                                        4
-tagged_pattern                                        14
-typespec_member                                       16
+logic_typespec                                         4
+module_inst                                            1
+operation                                              1
+param_assign                                           1
+parameter                                              1
+range                                                  4
+ref_typespec                                           8
+string_typespec                                        3
+struct_typespec                                        1
+tagged_pattern                                         3
+typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultTag/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DefaultTag/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DefaultTag/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.X), line:8:23, endln:8:24
@@ -266,7 +243,7 @@ design: (work@top)
   |vpiTypedef:
   \_struct_typespec: (struct_1), line:2:12, endln:7:5
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
+    \_parameter: (work@top.X), line:8:23, endln:8:24
     |vpiName:struct_1
     |vpiInstance:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
@@ -277,10 +254,10 @@ design: (work@top)
       \_struct_typespec: (struct_1), line:2:12, endln:7:5
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (work@top.struct_1.a)
+      \_ref_typespec: (work@top.X.struct_1.a)
         |vpiParent:
         \_typespec_member: (a), line:3:19, endln:3:20
-        |vpiFullName:work@top.struct_1.a
+        |vpiFullName:work@top.X.struct_1.a
         |vpiActual:
         \_logic_typespec: , line:3:7, endln:3:18
       |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
@@ -294,10 +271,10 @@ design: (work@top)
       \_struct_typespec: (struct_1), line:2:12, endln:7:5
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (work@top.struct_1.b)
+      \_ref_typespec: (work@top.X.struct_1.b)
         |vpiParent:
         \_typespec_member: (b), line:4:19, endln:4:20
-        |vpiFullName:work@top.struct_1.b
+        |vpiFullName:work@top.X.struct_1.b
         |vpiActual:
         \_logic_typespec: , line:4:7, endln:4:18
       |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
@@ -311,10 +288,10 @@ design: (work@top)
       \_struct_typespec: (struct_1), line:2:12, endln:7:5
       |vpiName:c
       |vpiTypespec:
-      \_ref_typespec: (work@top.struct_1.c)
+      \_ref_typespec: (work@top.X.struct_1.c)
         |vpiParent:
         \_typespec_member: (c), line:5:19, endln:5:20
-        |vpiFullName:work@top.struct_1.c
+        |vpiFullName:work@top.X.struct_1.c
         |vpiActual:
         \_logic_typespec: , line:5:7, endln:5:18
       |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
@@ -328,10 +305,10 @@ design: (work@top)
       \_struct_typespec: (struct_1), line:2:12, endln:7:5
       |vpiName:d
       |vpiTypespec:
-      \_ref_typespec: (work@top.struct_1.d)
+      \_ref_typespec: (work@top.X.struct_1.d)
         |vpiParent:
         \_typespec_member: (d), line:6:19, endln:6:20
-        |vpiFullName:work@top.struct_1.d
+        |vpiFullName:work@top.X.struct_1.d
         |vpiActual:
         \_logic_typespec: , line:6:7, endln:6:18
       |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
@@ -340,79 +317,6 @@ design: (work@top)
       |vpiRefEndLineNo:6
       |vpiRefEndColumnNo:18
   |vpiDefName:work@top
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.X), line:8:23, endln:8:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.X)
-      |vpiParent:
-      \_parameter: (work@top.X), line:8:23, endln:8:24
-      |vpiFullName:work@top.X
-      |vpiActual:
-      \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:X
-    |vpiFullName:work@top.X
-  |vpiParamAssign:
-  \_param_assign: , line:8:23, endln:8:55
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
-    |vpiRhs:
-    \_operation: , line:8:27, endln:8:55
-      |vpiParent:
-      \_param_assign: , line:8:23, endln:8:55
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_operation: , line:8:27, endln:8:55
-        |vpiFullName:work@top
-        |vpiActual:
-        \_struct_typespec: (struct_1), line:2:12, endln:7:5
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:8:52, endln:8:54
-        |vpiParent:
-        \_operation: , line:8:27, endln:8:55
-        |vpiDecompile:15
-        |vpiSize:2
-        |UINT:15
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:8:32, endln:8:34
-        |vpiParent:
-        \_operation: , line:8:27, endln:8:55
-        |vpiDecompile:10
-        |vpiSize:3
-        |UINT:10
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:8:52, endln:8:54
-        |vpiParent:
-        \_operation: , line:8:27, endln:8:55
-        |vpiDecompile:15
-        |vpiSize:3
-        |UINT:15
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:8:39, endln:8:41
-        |vpiParent:
-        \_operation: , line:8:27, endln:8:55
-        |vpiDecompile:20
-        |vpiSize:3
-        |UINT:20
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.X), line:8:23, endln:8:24
-  |vpiTypedef:
-  \_struct_typespec: (struct_1), line:2:12, endln:7:5
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_logic_typespec: , line:3:7, endln:3:18
   |vpiParent:
@@ -518,344 +422,12 @@ design: (work@top)
   |vpiParent:
   \_tagged_pattern: , line:8:52, endln:8:54
   |vpiName:default
-\_struct_typespec: (struct_1), line:2:12, endln:7:5
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:struct_1
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:19, endln:3:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@top.struct_1.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:19, endln:3:20
-      |vpiFullName:work@top.struct_1.a
-      |vpiActual:
-      \_logic_typespec: , line:3:7, endln:3:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:19, endln:4:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@top.struct_1.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:19, endln:4:20
-      |vpiFullName:work@top.struct_1.b
-      |vpiActual:
-      \_logic_typespec: , line:4:7, endln:4:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (c), line:5:19, endln:5:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:c
-    |vpiTypespec:
-    \_ref_typespec: (work@top.struct_1.c)
-      |vpiParent:
-      \_typespec_member: (c), line:5:19, endln:5:20
-      |vpiFullName:work@top.struct_1.c
-      |vpiActual:
-      \_logic_typespec: , line:5:7, endln:5:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (d), line:6:19, endln:6:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:d
-    |vpiTypespec:
-    \_ref_typespec: (work@top.struct_1.d)
-      |vpiParent:
-      \_typespec_member: (d), line:6:19, endln:6:20
-      |vpiFullName:work@top.struct_1.d
-      |vpiActual:
-      \_logic_typespec: , line:6:7, endln:6:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:18
-\_logic_typespec: , line:3:7, endln:3:18
-  |vpiParent:
-  \_ref_typespec: (work@top.struct_1.a)
-  |vpiRange:
-  \_range: , line:3:13, endln:3:18
-    |vpiParent:
-    \_logic_typespec: , line:3:7, endln:3:18
-    |vpiLeftRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:7, endln:4:18
-  |vpiParent:
-  \_ref_typespec: (work@top.struct_1.b)
-  |vpiRange:
-  \_range: , line:4:13, endln:4:18
-    |vpiParent:
-    \_logic_typespec: , line:4:7, endln:4:18
-    |vpiLeftRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:13, endln:4:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:16, endln:4:17
-      |vpiParent:
-      \_range: , line:4:13, endln:4:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:7, endln:5:18
-  |vpiParent:
-  \_ref_typespec: (work@top.struct_1.c)
-  |vpiRange:
-  \_range: , line:5:13, endln:5:18
-    |vpiParent:
-    \_logic_typespec: , line:5:7, endln:5:18
-    |vpiLeftRange:
-    \_constant: , line:5:14, endln:5:15
-      |vpiParent:
-      \_range: , line:5:13, endln:5:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:13, endln:5:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:7, endln:6:18
-  |vpiParent:
-  \_ref_typespec: (work@top.struct_1.d)
-  |vpiRange:
-  \_range: , line:6:13, endln:6:18
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:18
-    |vpiLeftRange:
-    \_constant: , line:6:14, endln:6:15
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (struct_1), line:2:12, endln:7:5
-  |vpiParent:
-  \_ref_typespec: (work@top.X)
-  |vpiName:struct_1
-  |vpiInstance:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:19, endln:3:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@top.X.struct_1.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:19, endln:3:20
-      |vpiFullName:work@top.X.struct_1.a
-      |vpiActual:
-      \_logic_typespec: , line:3:7, endln:3:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:19, endln:4:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@top.X.struct_1.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:19, endln:4:20
-      |vpiFullName:work@top.X.struct_1.b
-      |vpiActual:
-      \_logic_typespec: , line:4:7, endln:4:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (c), line:5:19, endln:5:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:c
-    |vpiTypespec:
-    \_ref_typespec: (work@top.X.struct_1.c)
-      |vpiParent:
-      \_typespec_member: (c), line:5:19, endln:5:20
-      |vpiFullName:work@top.X.struct_1.c
-      |vpiActual:
-      \_logic_typespec: , line:5:7, endln:5:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (d), line:6:19, endln:6:20
-    |vpiParent:
-    \_struct_typespec: (struct_1), line:2:12, endln:7:5
-    |vpiName:d
-    |vpiTypespec:
-    \_ref_typespec: (work@top.X.struct_1.d)
-      |vpiParent:
-      \_typespec_member: (d), line:6:19, endln:6:20
-      |vpiFullName:work@top.X.struct_1.d
-      |vpiActual:
-      \_logic_typespec: , line:6:7, endln:6:18
-    |vpiRefFile:${SURELOG_DIR}/tests/DefaultTag/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:18
-\_logic_typespec: , line:3:7, endln:3:18
-  |vpiParent:
-  \_ref_typespec: (work@top.X.struct_1.a)
-  |vpiRange:
-  \_range: , line:3:13, endln:3:18
-    |vpiParent:
-    \_logic_typespec: , line:3:7, endln:3:18
-    |vpiLeftRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:7, endln:4:18
-  |vpiParent:
-  \_ref_typespec: (work@top.X.struct_1.b)
-  |vpiRange:
-  \_range: , line:4:13, endln:4:18
-    |vpiParent:
-    \_logic_typespec: , line:4:7, endln:4:18
-    |vpiLeftRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:13, endln:4:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:16, endln:4:17
-      |vpiParent:
-      \_range: , line:4:13, endln:4:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:7, endln:5:18
-  |vpiParent:
-  \_ref_typespec: (work@top.X.struct_1.c)
-  |vpiRange:
-  \_range: , line:5:13, endln:5:18
-    |vpiParent:
-    \_logic_typespec: , line:5:7, endln:5:18
-    |vpiLeftRange:
-    \_constant: , line:5:14, endln:5:15
-      |vpiParent:
-      \_range: , line:5:13, endln:5:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:13, endln:5:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:7, endln:6:18
-  |vpiParent:
-  \_ref_typespec: (work@top.X.struct_1.d)
-  |vpiRange:
-  \_range: , line:6:13, endln:6:18
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:18
-    |vpiLeftRange:
-    \_constant: , line:6:14, endln:6:15
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/DefaultTag/dut.sv | ${SURELOG_DIR}/build/regression/DefaultTag/roundtrip/dut_000.sv | 0 | 9 |

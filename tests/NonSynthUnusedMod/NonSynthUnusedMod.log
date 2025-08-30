@@ -27,22 +27,6 @@ n<> u<21> t<Top_level_rule> c<1> l<1:1> el<8:1>
 AST_DEBUG_END
 AST_DEBUG_BEGIN
 LIB:  work
-FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
-n<> u<0> t<_INVALID_> f<0> l<0:0>
-n<> u<1> t<Null_rule> p<11> s<10> l<1:1> el<1:0>
-n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-n<top> u<3> t<StringConst> p<6> s<5> l<1:8> el<1:11>
-n<> u<4> t<Port> p<5> l<1:12> el<1:12>
-n<> u<5> t<List_of_ports> p<6> c<4> l<1:11> el<1:13>
-n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
-n<> u<7> t<ENDMODULE> p<8> l<3:1> el<3:10>
-n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<3:10>
-n<> u<9> t<Description> p<10> c<8> l<1:1> el<3:10>
-n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<3:10>
-n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
-AST_DEBUG_END
-AST_DEBUG_BEGIN
-LIB:  work
 FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v
 n<> u<0> t<_INVALID_> f<0> l<0:0>
 n<> u<1> t<Null_rule> p<38> s<37> l<1:1> el<1:0>
@@ -84,33 +68,33 @@ n<> u<36> t<Description> p<37> c<35> l<1:1> el<7:10>
 n<> u<37> t<Source_text> p<38> c<36> l<1:1> el<7:10>
 n<> u<38> t<Top_level_rule> c<1> l<1:1> el<8:1>
 AST_DEBUG_END
+AST_DEBUG_BEGIN
+LIB:  work
+FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
+n<> u<0> t<_INVALID_> f<0> l<0:0>
+n<> u<1> t<Null_rule> p<11> s<10> l<1:1> el<1:0>
+n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+n<top> u<3> t<StringConst> p<6> s<5> l<1:8> el<1:11>
+n<> u<4> t<Port> p<5> l<1:12> el<1:12>
+n<> u<5> t<List_of_ports> p<6> c<4> l<1:11> el<1:13>
+n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
+n<> u<7> t<ENDMODULE> p<8> l<3:1> el<3:10>
+n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<3:10>
+n<> u<9> t<Description> p<10> c<8> l<1:1> el<3:10>
+n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<3:10>
+n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
+AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv:1:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v:1:1: Compile module "work@nonsynth".
 [INF:CP0303] ${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 delay_control                                          1
 design                                                 1
 initial                                                1
-module_inst                                            5
-ref_module                                             1
-ref_obj                                                2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-delay_control                                          1
-design                                                 1
-initial                                                1
-module_inst                                            5
+module_inst                                            3
 ref_module                                             1
 ref_obj                                                2
 === UHDM Object Stats End ===
@@ -119,13 +103,12 @@ ref_obj                                                2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NonSynthUnusedMod/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
@@ -134,41 +117,12 @@ design: (work@dut)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
     |vpiName:top
     |vpiDefName:work@top
-    |vpiActual:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v, line:1:1, endln:3:10
-|uhdmallModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v, line:1:1, endln:3:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiCellInstance:1
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@top (work@dut.top), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:3:4, endln:3:14
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
-    |vpiName:top
-    |vpiFullName:work@dut.top
-    |vpiDefName:work@top
-    |vpiCellInstance:1
-    |vpiDefFile:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 0
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv | ${SURELOG_DIR}/build/regression/NonSynthUnusedMod/roundtrip/dut_000.sv | 1 | 6 |

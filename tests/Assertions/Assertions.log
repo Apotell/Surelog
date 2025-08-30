@@ -440,70 +440,38 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/Assertions/dut.sv:1:1: Compile module "work@m".
 [WRN:CP0334] ${SURELOG_DIR}/tests/Assertions/dut.sv:16:1: Colliding compilation unit name: "m",
              ${SURELOG_DIR}/tests/Assertions/dut.sv:1:1: previous usage.
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/Assertions/dut.sv:1:1: Top level module "work@m".
-[WRN:EL0505] ${SURELOG_DIR}/tests/Assertions/dut.sv:16:1: Multiply defined module "work@m",
-             ${SURELOG_DIR}/tests/Assertions/dut.sv:1:1: previous definition.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assert_stmt                                            1
 bit_typespec                                           4
-constant                                              18
+constant                                              12
 design                                                 1
 immediate_assert                                       1
-logic_net                                              8
-logic_typespec                                        13
-logic_var                                              4
-module_inst                                            3
+logic_net                                              7
+logic_typespec                                         9
+module_inst                                            1
 operation                                             12
 packed_array_typespec                                  1
-port                                                   2
+port                                                   1
 prop_formal_decl                                       2
 property_decl                                          1
 property_spec                                          2
-range                                                  9
-ref_obj                                                9
-ref_typespec                                          21
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-assert_stmt                                            2
-bit_typespec                                           4
-constant                                              18
-design                                                 1
-immediate_assert                                       2
-logic_net                                              8
-logic_typespec                                        13
-logic_var                                              4
-module_inst                                            3
-operation                                             24
-packed_array_typespec                                  1
-port                                                   3
-prop_formal_decl                                       4
-property_decl                                          2
-property_spec                                          4
-range                                                  9
-ref_obj                                               17
-ref_typespec                                          30
+range                                                  6
+ref_obj                                                8
+ref_typespec                                          15
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@m)
-|vpiElaborated:1
-|vpiName:work@m
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
   |vpiParent:
-  \_design: (work@m)
+  \_design: (unnamed)
   |vpiFullName:work@m
   |vpiPropertyDecl:
   \_property_decl: (work@m.toggles), line:9:10, endln:9:17
@@ -556,7 +524,7 @@ design: (work@m)
               |vpiName:x
               |vpiFullName:work@m.toggles.x
               |vpiActual:
-              \_logic_net: (work@m.x), line:10:9, endln:10:10
+              \_logic_net: (work@m.toggles.x), line:10:9, endln:10:10
           |vpiOperand:
           \_operation: , line:10:16, endln:10:25
             |vpiParent:
@@ -576,7 +544,7 @@ design: (work@m)
               |vpiName:y
               |vpiFullName:work@m.toggles.y
               |vpiActual:
-              \_logic_net: (work@m.y), line:10:23, endln:10:24
+              \_logic_net: (work@m.toggles.y), line:10:23, endln:10:24
         |vpiOperand:
         \_operation: , line:10:31, endln:10:58
           |vpiParent:
@@ -606,7 +574,7 @@ design: (work@m)
                 |vpiName:x
                 |vpiFullName:work@m.toggles.x
                 |vpiActual:
-                \_logic_net: (work@m.x), line:10:9, endln:10:10
+                \_logic_net: (work@m.toggles.x), line:10:9, endln:10:10
             |vpiOperand:
             \_operation: , line:10:48, endln:10:57
               |vpiParent:
@@ -626,7 +594,7 @@ design: (work@m)
                 |vpiName:y
                 |vpiFullName:work@m.toggles.y
                 |vpiActual:
-                \_logic_net: (work@m.y), line:10:23, endln:10:24
+                \_logic_net: (work@m.toggles.y), line:10:23, endln:10:24
   |vpiTypedef:
   \_bit_typespec: (bits), line:4:9, endln:4:19
     |vpiParent:
@@ -718,18 +686,18 @@ design: (work@m)
     |vpiFullName:work@m.d
     |vpiNetType:36
   |vpiNet:
-  \_logic_net: (work@m.x), line:10:9, endln:10:10
+  \_logic_net: (work@m.toggles.x), line:10:9, endln:10:10
     |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    \_operation: , line:10:2, endln:10:11
     |vpiName:x
-    |vpiFullName:work@m.x
+    |vpiFullName:work@m.toggles.x
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@m.y), line:10:23, endln:10:24
+  \_logic_net: (work@m.toggles.y), line:10:23, endln:10:24
     |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    \_operation: , line:10:16, endln:10:25
     |vpiName:y
-    |vpiFullName:work@m.y
+    |vpiFullName:work@m.toggles.y
     |vpiNetType:1
   |vpiAssertion:
   \_assert_stmt: (work@m.a2), line:12:1, endln:12:54
@@ -831,318 +799,6 @@ design: (work@m)
             \_logic_net: (work@m.b), line:2:17, endln:2:18
     |vpiAlwaysType:2
   |vpiEndLabel:m
-|uhdmtopModules:
-\_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-  |vpiParent:
-  \_design: (work@m)
-  |vpiName:work@m
-  |vpiPropertyDecl:
-  \_property_decl: (work@m.toggles), line:9:10, endln:9:17
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiName:toggles
-    |vpiFullName:work@m.toggles
-    |vpiPropFormalDecl:
-    \_prop_formal_decl: (x)
-      |vpiParent:
-      \_property_decl: (work@m.toggles), line:9:10, endln:9:17
-      |vpiName:x
-      |vpiTypespec:
-      \_ref_typespec: (work@m.toggles.x)
-        |vpiParent:
-        \_prop_formal_decl: (x)
-        |vpiFullName:work@m.toggles.x
-        |vpiActual:
-        \_bit_typespec: , line:9:18, endln:9:21
-    |vpiPropFormalDecl:
-    \_prop_formal_decl: (y)
-      |vpiParent:
-      \_property_decl: (work@m.toggles), line:9:10, endln:9:17
-      |vpiName:y
-      |vpiTypespec:
-      \_ref_typespec: (work@m.toggles.y)
-        |vpiParent:
-        \_prop_formal_decl: (y)
-        |vpiFullName:work@m.toggles.y
-    |vpiPropertySpec:
-    \_property_spec: , line:10:1, endln:10:58
-      |vpiParent:
-      \_property_decl: (work@m.toggles), line:9:10, endln:9:17
-      |vpiPropertyExpr:
-      \_operation: , line:10:1, endln:10:58
-        |vpiParent:
-        \_property_spec: , line:10:1, endln:10:58
-        |vpiOpType:51
-        |vpiOperand:
-        \_operation: , line:10:2, endln:10:25
-          |vpiParent:
-          \_operation: , line:10:1, endln:10:58
-          |vpiOpType:16
-          |vpiOperand:
-          \_operation: , line:10:2, endln:10:11
-            |vpiParent:
-            \_operation: , line:10:2, endln:10:25
-            |vpiTypespec:
-            \_ref_typespec: (work@m.toggles)
-              |vpiParent:
-              \_operation: , line:10:2, endln:10:11
-              |vpiFullName:work@m.toggles
-              |vpiActual:
-              \_logic_typespec: , line:10:2, endln:10:7
-            |vpiOpType:67
-            |vpiOperand:
-            \_ref_obj: (work@m.toggles.x), line:10:9, endln:10:10
-              |vpiParent:
-              \_operation: , line:10:2, endln:10:11
-              |vpiName:x
-              |vpiFullName:work@m.toggles.x
-              |vpiActual:
-              \_logic_net: (work@m.x), line:10:9, endln:10:10
-          |vpiOperand:
-          \_operation: , line:10:16, endln:10:25
-            |vpiParent:
-            \_operation: , line:10:2, endln:10:25
-            |vpiTypespec:
-            \_ref_typespec: (work@m.toggles)
-              |vpiParent:
-              \_operation: , line:10:16, endln:10:25
-              |vpiFullName:work@m.toggles
-              |vpiActual:
-              \_logic_typespec: , line:10:16, endln:10:21
-            |vpiOpType:67
-            |vpiOperand:
-            \_ref_obj: (work@m.toggles.y), line:10:23, endln:10:24
-              |vpiParent:
-              \_operation: , line:10:16, endln:10:25
-              |vpiName:y
-              |vpiFullName:work@m.toggles.y
-              |vpiActual:
-              \_logic_net: (work@m.y), line:10:23, endln:10:24
-        |vpiOperand:
-        \_operation: , line:10:31, endln:10:58
-          |vpiParent:
-          \_operation: , line:10:1, endln:10:58
-          |vpiOpType:3
-          |vpiOperand:
-          \_operation: , line:10:34, endln:10:57
-            |vpiParent:
-            \_operation: , line:10:31, endln:10:58
-            |vpiOpType:16
-            |vpiOperand:
-            \_operation: , line:10:34, endln:10:43
-              |vpiParent:
-              \_operation: , line:10:34, endln:10:57
-              |vpiTypespec:
-              \_ref_typespec: (work@m.toggles)
-                |vpiParent:
-                \_operation: , line:10:34, endln:10:43
-                |vpiFullName:work@m.toggles
-                |vpiActual:
-                \_logic_typespec: , line:10:34, endln:10:39
-              |vpiOpType:67
-              |vpiOperand:
-              \_ref_obj: (work@m.toggles.x), line:10:41, endln:10:42
-                |vpiParent:
-                \_operation: , line:10:34, endln:10:43
-                |vpiName:x
-                |vpiFullName:work@m.toggles.x
-                |vpiActual:
-                \_logic_net: (work@m.x), line:10:9, endln:10:10
-            |vpiOperand:
-            \_operation: , line:10:48, endln:10:57
-              |vpiParent:
-              \_operation: , line:10:34, endln:10:57
-              |vpiTypespec:
-              \_ref_typespec: (work@m.toggles)
-                |vpiParent:
-                \_operation: , line:10:48, endln:10:57
-                |vpiFullName:work@m.toggles
-                |vpiActual:
-                \_logic_typespec: , line:10:48, endln:10:53
-              |vpiOpType:67
-              |vpiOperand:
-              \_ref_obj: (work@m.toggles.y), line:10:55, endln:10:56
-                |vpiParent:
-                \_operation: , line:10:48, endln:10:57
-                |vpiName:y
-                |vpiFullName:work@m.toggles.y
-                |vpiActual:
-                \_logic_net: (work@m.y), line:10:23, endln:10:24
-  |vpiVariables:
-  \_logic_var: (work@m.a), line:2:14, endln:2:15
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.a)
-      |vpiParent:
-      \_logic_var: (work@m.a), line:2:14, endln:2:15
-      |vpiFullName:work@m.a
-      |vpiActual:
-      \_logic_typespec: , line:2:1, endln:2:13
-    |vpiName:a
-    |vpiFullName:work@m.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_logic_var: (work@m.b), line:2:17, endln:2:18
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.b)
-      |vpiParent:
-      \_logic_var: (work@m.b), line:2:17, endln:2:18
-      |vpiFullName:work@m.b
-      |vpiActual:
-      \_logic_typespec: , line:2:1, endln:2:13
-    |vpiName:b
-    |vpiFullName:work@m.b
-    |vpiVisibility:1
-  |vpiVariables:
-  \_logic_var: (work@m.c), line:3:7, endln:3:8
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.c)
-      |vpiParent:
-      \_logic_var: (work@m.c), line:3:7, endln:3:8
-      |vpiFullName:work@m.c
-      |vpiActual:
-      \_logic_typespec: , line:3:1, endln:3:6
-    |vpiName:c
-    |vpiFullName:work@m.c
-    |vpiVisibility:1
-  |vpiVariables:
-  \_logic_var: (work@m.d), line:3:10, endln:3:11
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.d)
-      |vpiParent:
-      \_logic_var: (work@m.d), line:3:10, endln:3:11
-      |vpiFullName:work@m.d
-      |vpiActual:
-      \_logic_typespec: , line:3:1, endln:3:6
-    |vpiName:d
-    |vpiFullName:work@m.d
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_bit_typespec: (bits), line:4:9, endln:4:19
-  |vpiDefName:work@m
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@m.clock), line:1:16, endln:1:21
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.clock)
-      |vpiParent:
-      \_logic_net: (work@m.clock), line:1:16, endln:1:21
-      |vpiFullName:work@m.clock
-      |vpiActual:
-      \_logic_typespec: , line:1:16, endln:1:16
-    |vpiName:clock
-    |vpiFullName:work@m.clock
-  |vpiAssertion:
-  \_assert_stmt: (work@m.a2), line:12:1, endln:12:54
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiName:a2
-    |vpiFullName:work@m.a2
-    |vpiProperty:
-    \_property_spec: , line:12:22, endln:12:52
-      |vpiParent:
-      \_assert_stmt: (work@m.a2), line:12:1, endln:12:54
-      |vpiPropertyExpr:
-      \_operation: , line:12:24, endln:12:37
-        |vpiParent:
-        \_property_spec: , line:12:22, endln:12:52
-        |vpiOpType:39
-        |vpiOperand:
-        \_ref_obj: (work@m.a2.clock), line:12:32, endln:12:37
-          |vpiParent:
-          \_operation: , line:12:24, endln:12:37
-          |vpiName:clock
-          |vpiFullName:work@m.a2.clock
-          |vpiActual:
-          \_logic_net: (work@m.clock), line:1:16, endln:1:21
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (clock), line:1:16, endln:1:21
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiName:clock
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@m.clock), line:1:16, endln:1:21
-      |vpiParent:
-      \_port: (clock), line:1:16, endln:1:21
-      |vpiName:clock
-      |vpiFullName:work@m.clock
-      |vpiActual:
-      \_logic_net: (work@m.clock), line:1:16, endln:1:21
-    |vpiTypedef:
-    \_ref_typespec: (work@m.clock)
-      |vpiParent:
-      \_port: (clock), line:1:16, endln:1:21
-      |vpiFullName:work@m.clock
-      |vpiActual:
-      \_logic_typespec: , line:1:16, endln:1:16
-    |vpiInstance:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-  |vpiProcess:
-  \_always: , line:7:1, endln:8:35
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiStmt:
-    \_immediate_assert: (a1), line:8:1, endln:8:35
-      |vpiParent:
-      \_always: , line:7:1, endln:8:35
-      |vpiName:a1
-      |vpiExpr:
-      \_operation: , line:8:12, endln:8:32
-        |vpiParent:
-        \_immediate_assert: (a1), line:8:1, endln:8:35
-        |vpiOpType:14
-        |vpiOperand:
-        \_operation: , line:8:12, endln:8:20
-          |vpiParent:
-          \_operation: , line:8:12, endln:8:32
-          |vpiTypespec:
-          \_ref_typespec: (work@m.a1)
-            |vpiParent:
-            \_operation: , line:8:12, endln:8:20
-            |vpiFullName:work@m.a1
-            |vpiActual:
-            \_bit_typespec: (bits), line:4:9, endln:4:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (work@m.a1.a), line:8:18, endln:8:19
-            |vpiParent:
-            \_operation: , line:8:12, endln:8:20
-            |vpiName:a
-            |vpiFullName:work@m.a1.a
-            |vpiActual:
-            \_logic_var: (work@m.a), line:2:14, endln:2:15
-        |vpiOperand:
-        \_operation: , line:8:24, endln:8:32
-          |vpiParent:
-          \_operation: , line:8:12, endln:8:32
-          |vpiTypespec:
-          \_ref_typespec: (work@m.a1)
-            |vpiParent:
-            \_operation: , line:8:24, endln:8:32
-            |vpiFullName:work@m.a1
-            |vpiActual:
-            \_bit_typespec: (bits), line:4:9, endln:4:19
-          |vpiOpType:67
-          |vpiOperand:
-          \_ref_obj: (work@m.a1.b), line:8:30, endln:8:31
-            |vpiParent:
-            \_operation: , line:8:24, endln:8:32
-            |vpiName:b
-            |vpiFullName:work@m.a1.b
-            |vpiActual:
-            \_logic_var: (work@m.b), line:2:17, endln:2:18
-    |vpiAlwaysType:2
 \_weaklyReferenced:
 \_bit_typespec: (bits), line:4:9, endln:4:19
   |vpiName:bits
@@ -1208,36 +864,6 @@ design: (work@m)
 \_logic_typespec: , line:10:34, endln:10:39
 \_logic_typespec: , line:10:48, endln:10:53
 \_logic_typespec: , line:1:16, endln:1:16
-\_logic_typespec: , line:1:16, endln:1:16
-  |vpiParent:
-  \_logic_net: (work@m.clock), line:1:16, endln:1:21
-\_logic_typespec: , line:2:1, endln:2:13
-  |vpiParent:
-  \_logic_var: (work@m.b), line:2:17, endln:2:18
-  |vpiRange:
-  \_range: , line:2:7, endln:2:13
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:13
-    |vpiLeftRange:
-    \_constant: , line:2:8, endln:2:10
-      |vpiParent:
-      \_range: , line:2:7, endln:2:13
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:11, endln:2:12
-      |vpiParent:
-      \_range: , line:2:7, endln:2:13
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:1, endln:3:6
-  |vpiParent:
-  \_logic_var: (work@m.d), line:3:10, endln:3:11
-\_logic_typespec: , line:1:16, endln:1:16
 \_logic_typespec: , line:2:1, endln:2:13
   |vpiRange:
   \_range: , line:2:7, endln:2:13
@@ -1286,13 +912,15 @@ design: (work@m)
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 3
-[   NOTE] : 5
+[WARNING] : 2
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:10:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:9:10: Non synthesizable construct, toggles
 [LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:12:22: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:9:10: Non synthesizable construct, toggles
-[LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:12:22: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/Assertions/dut.sv | ${SURELOG_DIR}/build/regression/Assertions/roundtrip/dut_000.sv | 10 | 13 |
+============================== End RoundTrip Results ==============================

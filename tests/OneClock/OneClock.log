@@ -3,12 +3,6 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/OneClock/tb.v:2:1: No timescale set for "tb".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/OneClock/tb.v:2:1: Compile module "work@tb".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/OneClock/tb.v:2:1: Top level module "work@tb".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
@@ -18,12 +12,12 @@ constant                                               2
 delay_control                                          2
 design                                                 1
 initial                                                2
-logic_net                                              2
-logic_typespec                                         2
-module_inst                                            2
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            1
 operation                                              1
 ref_obj                                                4
-ref_typespec                                           2
+ref_typespec                                           1
 sys_func_call                                          3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneClock/slpp_unit/surelog.uhdm ...
@@ -31,12 +25,12 @@ sys_func_call                                          3
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/OneClock/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@tb)
-|vpiName:work@tb
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneClock/tb.v, line:2:1, endln:19:10
   |vpiParent:
-  \_design: (work@tb)
+  \_design: (unnamed)
   |vpiFullName:work@tb
   |vpiDefName:work@tb
   |vpiNet:
@@ -164,45 +158,14 @@ design: (work@tb)
           |vpiActual:
           \_logic_net: (work@tb.clk), line:3:7, endln:3:10
     |vpiAlwaysType:1
-|uhdmtopModules:
-\_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneClock/tb.v, line:2:1, endln:19:10
-  |vpiParent:
-  \_design: (work@tb)
-  |vpiName:work@tb
-  |vpiDefName:work@tb
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@tb.clk), line:3:7, endln:3:10
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneClock/tb.v, line:2:1, endln:19:10
-    |vpiTypespec:
-    \_ref_typespec: (work@tb.clk)
-      |vpiParent:
-      \_logic_net: (work@tb.clk), line:3:7, endln:3:10
-      |vpiFullName:work@tb.clk
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:6
-    |vpiName:clk
-    |vpiFullName:work@tb.clk
-    |vpiNetType:48
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:5:3, endln:8:6
-  |vpiProcess:
-  \_initial: , line:10:3, endln:13:6
-  |vpiProcess:
-  \_always: , line:15:3, endln:16:19
 \_weaklyReferenced:
-\_logic_typespec: , line:3:3, endln:3:6
-  |vpiParent:
-  \_logic_net: (work@tb.clk), line:3:7, endln:3:10
 \_logic_typespec: , line:3:3, endln:3:6
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/OneClock/tb.v:6:5: Non synthesizable construct, $monitor

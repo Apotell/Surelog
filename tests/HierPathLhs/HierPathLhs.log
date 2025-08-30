@@ -153,92 +153,46 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:1:1: Compile module "work@alert_handler_reg_wrap".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:8:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:2:34: Compile generate block "work@alert_handler_reg_wrap.gen_alert_cause[0]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:1:1: Top level module "work@alert_handler_reg_wrap".
-[NTE:EL0503] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:8:1: Top level module "work@top".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_select                                             9
-constant                                              32
-cont_assign                                            5
+bit_select                                             4
+constant                                              11
+cont_assign                                            2
 design                                                 1
 gen_for                                                1
-gen_scope                                              2
-gen_scope_array                                        2
-hier_path                                              7
-int_typespec                                           4
-int_var                                                2
+hier_path                                              3
+int_typespec                                           1
 logic_net                                              2
-module_inst                                            7
+module_inst                                            2
 named_begin                                            1
-operation                                              4
-packed_array_typespec                                  2
-packed_array_var                                       1
-parameter                                              1
-range                                                  6
-ref_obj                                               12
-ref_typespec                                           9
+operation                                              2
+packed_array_typespec                                  1
+range                                                  2
+ref_obj                                                6
+ref_typespec                                           4
 ref_var                                                1
 struct_typespec                                        1
-struct_var                                             1
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-bit_select                                            13
-constant                                              32
-cont_assign                                            7
-design                                                 1
-gen_for                                                1
-gen_scope                                              3
-gen_scope_array                                        3
-hier_path                                              9
-int_typespec                                           4
-int_var                                                2
-logic_net                                              2
-module_inst                                            7
-named_begin                                            1
-operation                                              4
-packed_array_typespec                                  2
-packed_array_var                                       1
-parameter                                              1
-range                                                  6
-ref_obj                                               15
-ref_typespec                                          10
-ref_var                                                1
-struct_typespec                                        1
-struct_var                                             1
-typespec_member                                        1
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[ERR:UH0725] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:3:12: Unresolved hierarchical reference "hw2reg.alert_cause[k].d".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@alert_handler_reg_wrap)
-|vpiElaborated:1
-|vpiName:work@alert_handler_reg_wrap
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
+  \_design: (unnamed)
   |vpiFullName:work@alert_handler_reg_wrap
   |vpiDefName:work@alert_handler_reg_wrap
   |vpiNet:
   \_logic_net: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
     |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
+    \_operation: , line:2:22, endln:2:27
     |vpiName:k
     |vpiFullName:work@alert_handler_reg_wrap.k
     |vpiNetType:1
@@ -257,16 +211,16 @@ design: (work@alert_handler_reg_wrap)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+      \_ref_var: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
         |vpiParent:
         \_assignment: , line:2:8, endln:2:20
         |vpiTypespec:
         \_ref_typespec: (work@alert_handler_reg_wrap.k)
           |vpiParent:
-          \_int_var: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+          \_ref_var: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
           |vpiFullName:work@alert_handler_reg_wrap.k
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (k), line:2:15, endln:2:16
         |vpiName:k
         |vpiFullName:work@alert_handler_reg_wrap.k
     |vpiCondition:
@@ -351,7 +305,7 @@ design: (work@alert_handler_reg_wrap)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
   |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_struct_typespec: (struct_t), line:9:11, endln:11:4
@@ -446,208 +400,9 @@ design: (work@alert_handler_reg_wrap)
           |UINT:0
           |vpiConstType:9
       |vpiName:a[0][0].x[0]
-|uhdmtopModules:
-\_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
-  |vpiName:work@alert_handler_reg_wrap
-  |vpiDefName:work@alert_handler_reg_wrap
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
-    |vpiName:gen_alert_cause[0]
-    |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-      |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.gen_alert_cause[0].k), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.gen_alert_cause[0].k)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.gen_alert_cause[0].k), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0].k
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:k
-        |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0].k
-      |vpiContAssign:
-      \_cont_assign: , line:3:12, endln:3:43
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-        |vpiRhs:
-        \_constant: , line:3:39, endln:3:43
-          |vpiParent:
-          \_cont_assign: , line:3:12, endln:3:43
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiLhs:
-        \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-          |vpiParent:
-          \_cont_assign: , line:3:12, endln:3:43
-          |vpiActual:
-          \_ref_obj: (hw2reg), line:3:19, endln:3:30
-            |vpiParent:
-            \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-            |vpiName:hw2reg
-          |vpiActual:
-          \_bit_select: (alert_cause[k]), line:3:19, endln:3:30
-            |vpiParent:
-            \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-            |vpiName:alert_cause
-            |vpiFullName:alert_cause[k]
-            |vpiIndex:
-            \_ref_obj: (work@alert_handler_reg_wrap.gen_alert_cause[0].hw2reg.alert_cause[k].d.k), line:3:31, endln:3:32
-              |vpiParent:
-              \_bit_select: (alert_cause[k]), line:3:19, endln:3:30
-              |vpiName:k
-              |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0].hw2reg.alert_cause[k].d.k
-              |vpiActual:
-              \_parameter: (work@alert_handler_reg_wrap.gen_alert_cause[0].k), line:2:0
-          |vpiActual:
-          \_ref_obj: (alert_cause[k].d), line:3:37, endln:3:37
-            |vpiParent:
-            \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-            |vpiName:d
-            |vpiFullName:alert_cause[k].d
-          |vpiName:hw2reg.alert_cause[k].d
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-  |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
-  |vpiName:work@top
-  |vpiVariables:
-  \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-    |vpiRange:
-    \_range: , line:13:12, endln:13:17
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-      |vpiLeftRange:
-      \_constant: , line:13:13, endln:13:14
-        |vpiParent:
-        \_range: , line:13:12, endln:13:17
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:13:15, endln:13:16
-        |vpiParent:
-        \_range: , line:13:12, endln:13:17
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiRange:
-    \_range: , line:13:17, endln:13:22
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-      |vpiLeftRange:
-      \_constant: , line:13:18, endln:13:19
-        |vpiParent:
-        \_range: , line:13:17, endln:13:22
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:13:20, endln:13:21
-        |vpiParent:
-        \_range: , line:13:17, endln:13:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElement:
-    \_struct_var: (work@top.a)
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-      |vpiTypespec:
-      \_ref_typespec: (work@top.a)
-        |vpiParent:
-        \_struct_var: (work@top.a)
-        |vpiFullName:work@top.a
-        |vpiActual:
-        \_struct_typespec: (struct_t), line:9:11, endln:11:4
-      |vpiFullName:work@top.a
-  |vpiTypedef:
-  \_struct_typespec: (struct_t), line:9:11, endln:11:4
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:15:10, endln:15:26
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-    |vpiRhs:
-    \_constant: , line:15:25, endln:15:26
-    |vpiLhs:
-    \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-      |vpiParent:
-      \_cont_assign: , line:15:10, endln:15:26
-      |vpiActual:
-      \_bit_select: (a[0]), line:15:10, endln:15:11
-        |vpiParent:
-        \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-        |vpiName:a
-        |vpiFullName:a[0]
-        |vpiActual:
-        \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-        |vpiIndex:
-        \_constant: , line:15:12, endln:15:13
-          |vpiParent:
-          \_bit_select: (a[0]), line:15:10, endln:15:11
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_bit_select: (a[0][0]), line:15:12, endln:15:13
-        |vpiParent:
-        \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-        |vpiFullName:a[0][0]
-        |vpiIndex:
-        \_constant: , line:15:15, endln:15:16
-          |vpiParent:
-          \_bit_select: (a[0][0]), line:15:12, endln:15:13
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_bit_select: (a[0][0].x[0]), line:15:20, endln:15:21
-        |vpiParent:
-        \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-        |vpiName:x
-        |vpiFullName:a[0][0].x[0]
-        |vpiActual:
-        \_typespec_member: (x), line:10:9, endln:10:10
-        |vpiIndex:
-        \_constant: , line:15:20, endln:15:21
-          |vpiParent:
-          \_bit_select: (a[0][0].x[0]), line:15:20, endln:15:21
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiName:a[0][0].x[0]
 \_weaklyReferenced:
+\_unsupported_typespec: (k), line:2:15, endln:2:16
+  |vpiName:k
 \_hier_path: (alert_cause[k].d), line:3:19, endln:3:30
   |vpiActual:
   \_bit_select: (alert_cause[k]), line:3:19, endln:3:30
@@ -705,94 +460,9 @@ design: (work@alert_handler_reg_wrap)
     \_packed_array_typespec: , line:13:3, endln:13:17
     |vpiActual:
     \_struct_typespec: (struct_t), line:9:11, endln:11:4
-\_cont_assign: , line:3:12, endln:3:43
-  |vpiParent:
-  \_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-  |vpiRhs:
-  \_constant: , line:3:39, endln:3:43
-  |vpiLhs:
-  \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-    |vpiParent:
-    \_cont_assign: , line:3:12, endln:3:43
-    |vpiActual:
-    \_ref_obj: (hw2reg), line:3:19, endln:3:30
-      |vpiParent:
-      \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-      |vpiName:hw2reg
-    |vpiActual:
-    \_bit_select: (alert_cause[k]), line:3:19, endln:3:30
-      |vpiParent:
-      \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-      |vpiName:alert_cause
-      |vpiFullName:alert_cause[k]
-      |vpiIndex:
-      \_ref_obj: (work@alert_handler_reg_wrap.gen_alert_cause[0].hw2reg.alert_cause[k].d.k), line:3:31, endln:3:32
-        |vpiParent:
-        \_bit_select: (alert_cause[k]), line:3:19, endln:3:30
-        |vpiName:k
-        |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0].hw2reg.alert_cause[k].d.k
-    |vpiActual:
-    \_ref_obj: (alert_cause[k].d), line:3:37, endln:3:37
-      |vpiParent:
-      \_hier_path: (hw2reg.alert_cause[k].d), line:3:12, endln:3:35
-      |vpiName:d
-      |vpiFullName:alert_cause[k].d
-    |vpiName:hw2reg.alert_cause[k].d
-\_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-  |vpiParent:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-  |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0]
-  |vpiParameter:
-  \_parameter: (work@alert_handler_reg_wrap.gen_alert_cause[0].k), line:2:0
-  |vpiContAssign:
-  \_cont_assign: , line:3:12, endln:3:43
-\_gen_scope_array: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-  |vpiParent:
-  \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
-  |vpiName:gen_alert_cause[0]
-  |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause[0]
-  |vpiGenScope:
-  \_gen_scope: (work@alert_handler_reg_wrap.gen_alert_cause[0]), line:2:34, endln:4:6
-\_int_typespec: 
-\_int_typespec: 
-\_cont_assign: , line:15:10, endln:15:26
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-  |vpiRhs:
-  \_constant: , line:15:25, endln:15:26
-  |vpiLhs:
-  \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-    |vpiParent:
-    \_cont_assign: , line:15:10, endln:15:26
-    |vpiActual:
-    \_bit_select: (a[0]), line:15:10, endln:15:11
-      |vpiParent:
-      \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-      |vpiName:a
-      |vpiFullName:a[0]
-      |vpiIndex:
-      \_constant: , line:15:12, endln:15:13
-    |vpiActual:
-    \_bit_select: (a[0][0]), line:15:12, endln:15:13
-      |vpiParent:
-      \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-      |vpiFullName:a[0][0]
-      |vpiActual:
-      \_packed_array_var: (work@top.a), line:13:23, endln:13:24
-      |vpiIndex:
-      \_constant: , line:15:15, endln:15:16
-    |vpiActual:
-    \_bit_select: (a[0][0].x[0]), line:15:20, endln:15:21
-      |vpiParent:
-      \_hier_path: (a[0][0].x[0]), line:15:10, endln:15:11
-      |vpiName:x
-      |vpiFullName:a[0][0].x[0]
-      |vpiIndex:
-      \_constant: , line:15:20, endln:15:21
-    |vpiName:a[0][0].x[0]
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 7
+[   NOTE] : 0

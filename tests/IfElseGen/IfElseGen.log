@@ -162,72 +162,43 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:4:1: Compile module "work@GOOD2".
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:7:1: Compile module "work@dut1".
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:17:1: Compile module "work@dut2".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:9:20: Compile generate block "work@dut1.gen_rom_snd_scratch".
-[INF:CP0335] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:21:10: Compile generate block "work@dut2.gen_rom_one_scratch".
-[NTE:EL0503] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:7:1: Top level module "work@dut1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:17:1: Top level module "work@dut2".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 4.
-[NTE:EL0511] Nb leaf instances: 2.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_typespec                                           4
-constant                                               8
+bit_typespec                                           2
+constant                                               2
 design                                                 1
 gen_if_else                                            2
-gen_scope                                              4
-gen_scope_array                                        4
-module_inst                                           11
+module_inst                                            4
 named_begin                                            4
-param_assign                                           4
-parameter                                              4
-ref_module                                             6
+param_assign                                           2
+parameter                                              2
+ref_module                                             4
 ref_obj                                                2
-ref_typespec                                          10
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_typespec                                           4
-constant                                               8
-design                                                 1
-gen_if_else                                            2
-gen_scope                                              6
-gen_scope_array                                        6
-module_inst                                           13
-named_begin                                            4
-param_assign                                           4
-parameter                                              4
-ref_module                                             6
-ref_obj                                                2
-ref_typespec                                          10
+ref_typespec                                           4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfElseGen/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IfElseGen/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IfElseGen/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut1)
-|vpiElaborated:1
-|vpiName:work@dut1
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD1 (work@GOOD1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:1:1, endln:2:10
   |vpiParent:
-  \_design: (work@dut1)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD1
   |vpiDefName:work@GOOD1
 |uhdmallModules:
 \_module_inst: work@GOOD2 (work@GOOD2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:4:1, endln:5:10
   |vpiParent:
-  \_design: (work@dut1)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD2
   |vpiDefName:work@GOOD2
 |uhdmallModules:
 \_module_inst: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
   |vpiParent:
-  \_design: (work@dut1)
+  \_design: (unnamed)
   |vpiFullName:work@dut1
   |vpiParameter:
   \_parameter: (work@dut1.HasSndScratch), line:8:25, endln:8:38
@@ -303,7 +274,7 @@ design: (work@dut1)
 |uhdmallModules:
 \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
   |vpiParent:
-  \_design: (work@dut1)
+  \_design: (unnamed)
   |vpiFullName:work@dut2
   |vpiParameter:
   \_parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:38
@@ -376,134 +347,6 @@ design: (work@dut1)
         \_named_begin: (work@dut2.gen_rom_one_scratch)
         |vpiName:cond_module
         |vpiDefName:work@GOOD2
-|uhdmtopModules:
-\_module_inst: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
-  |vpiParent:
-  \_design: (work@dut1)
-  |vpiName:work@dut1
-  |vpiParameter:
-  \_parameter: (work@dut1.HasSndScratch), line:8:25, endln:8:38
-    |vpiParent:
-    \_module_inst: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
-    |BIN:1
-    |vpiTypespec:
-    \_ref_typespec: (work@dut1.HasSndScratch)
-      |vpiParent:
-      \_parameter: (work@dut1.HasSndScratch), line:8:25, endln:8:38
-      |vpiFullName:work@dut1.HasSndScratch
-      |vpiActual:
-      \_bit_typespec: , line:8:12, endln:8:15
-    |vpiLocalParam:1
-    |vpiName:HasSndScratch
-    |vpiFullName:work@dut1.HasSndScratch
-  |vpiParamAssign:
-  \_param_assign: , line:8:25, endln:8:46
-    |vpiParent:
-    \_module_inst: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
-    |vpiRhs:
-    \_constant: , line:8:42, endln:8:46
-      |vpiParent:
-      \_param_assign: , line:8:25, endln:8:46
-      |vpiDecompile:1'b1
-      |vpiSize:1
-      |BIN:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut1)
-        |vpiParent:
-        \_constant: , line:8:42, endln:8:46
-        |vpiFullName:work@dut1
-        |vpiActual:
-        \_bit_typespec: , line:8:12, endln:8:15
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@dut1.HasSndScratch), line:8:25, endln:8:38
-  |vpiDefName:work@dut1
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut1.gen_rom_snd_scratch), line:9:20, endln:11:4
-    |vpiParent:
-    \_module_inst: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
-    |vpiName:gen_rom_snd_scratch
-    |vpiFullName:work@dut1.gen_rom_snd_scratch
-    |vpiGenScope:
-    \_gen_scope: (work@dut1.gen_rom_snd_scratch), line:9:20, endln:11:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut1.gen_rom_snd_scratch), line:9:20, endln:11:4
-      |vpiFullName:work@dut1.gen_rom_snd_scratch
-      |vpiModule:
-      \_module_inst: work@GOOD1 (work@dut1.gen_rom_snd_scratch.cond_module), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:10:3, endln:10:23
-        |vpiParent:
-        \_gen_scope: (work@dut1.gen_rom_snd_scratch), line:9:20, endln:11:4
-        |vpiName:cond_module
-        |vpiFullName:work@dut1.gen_rom_snd_scratch.cond_module
-        |vpiDefName:work@GOOD1
-        |vpiDefFile:${SURELOG_DIR}/tests/IfElseGen/dut.sv
-        |vpiDefLineNo:1
-|uhdmtopModules:
-\_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
-  |vpiParent:
-  \_design: (work@dut1)
-  |vpiName:work@dut2
-  |vpiParameter:
-  \_parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:38
-    |vpiParent:
-    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
-    |BIN:0
-    |vpiTypespec:
-    \_ref_typespec: (work@dut2.HasSndScratch)
-      |vpiParent:
-      \_parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:38
-      |vpiFullName:work@dut2.HasSndScratch
-      |vpiActual:
-      \_bit_typespec: , line:18:12, endln:18:15
-    |vpiLocalParam:1
-    |vpiName:HasSndScratch
-    |vpiFullName:work@dut2.HasSndScratch
-  |vpiParamAssign:
-  \_param_assign: , line:18:25, endln:18:46
-    |vpiParent:
-    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
-    |vpiRhs:
-    \_constant: , line:18:42, endln:18:46
-      |vpiParent:
-      \_param_assign: , line:18:25, endln:18:46
-      |vpiDecompile:1'b0
-      |vpiSize:1
-      |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@dut2)
-        |vpiParent:
-        \_constant: , line:18:42, endln:18:46
-        |vpiFullName:work@dut2
-        |vpiActual:
-        \_bit_typespec: , line:18:12, endln:18:15
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:38
-  |vpiDefName:work@dut2
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
-    |vpiParent:
-    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
-    |vpiName:gen_rom_one_scratch
-    |vpiFullName:work@dut2.gen_rom_one_scratch
-    |vpiGenScope:
-    \_gen_scope: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
-      |vpiParent:
-      \_gen_scope_array: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
-      |vpiFullName:work@dut2.gen_rom_one_scratch
-      |vpiModule:
-      \_module_inst: work@GOOD2 (work@dut2.gen_rom_one_scratch.cond_module), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:22:3, endln:22:23
-        |vpiParent:
-        \_gen_scope: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
-        |vpiName:cond_module
-        |vpiFullName:work@dut2.gen_rom_one_scratch.cond_module
-        |vpiDefName:work@GOOD2
-        |vpiDefFile:${SURELOG_DIR}/tests/IfElseGen/dut.sv
-        |vpiDefLineNo:4
 \_weaklyReferenced:
 \_bit_typespec: , line:8:12, endln:8:15
   |vpiParent:
@@ -511,18 +354,12 @@ design: (work@dut1)
 \_bit_typespec: , line:18:12, endln:18:15
   |vpiParent:
   \_parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:38
-\_bit_typespec: , line:8:12, endln:8:15
-  |vpiParent:
-  \_ref_typespec: (work@dut1.HasSndScratch)
-\_bit_typespec: , line:18:12, endln:18:15
-  |vpiParent:
-  \_ref_typespec: (work@dut2.HasSndScratch)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 7
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/IfElseGen/dut.sv | ${SURELOG_DIR}/build/regression/IfElseGen/roundtrip/dut_000.sv | 10 | 24 |

@@ -122,37 +122,18 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 clocked_seq                                            2
 constant                                               4
 design                                                 1
 logic_net                                              2
-module_inst                                            2
+module_inst                                            1
 multiclock_sequence_expr                               2
 operation                                              6
 ref_obj                                                6
 sequence_decl                                          2
 sys_func_call                                          4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-clocked_seq                                            4
-constant                                               4
-design                                                 1
-logic_net                                              2
-module_inst                                            2
-multiclock_sequence_expr                               4
-operation                                             12
-ref_obj                                               12
-sequence_decl                                          4
-sys_func_call                                          8
 === UHDM Object Stats End ===
 [ERR:UH0731] ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:29: Required positive value (>=1), "0" given.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LegalPastFunc/slpp_all/surelog.uhdm ...
@@ -160,13 +141,12 @@ sys_func_call                                          8
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LegalPastFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiSequenceDecl:
   \_sequence_decl: (work@top.s_req_bad), line:3:10, endln:3:19
@@ -190,7 +170,7 @@ design: (work@top)
             |vpiName:clk
             |vpiFullName:work@top.s_req_bad.clk
             |vpiActual:
-            \_logic_net: (work@top.clk), line:4:14, endln:4:17
+            \_logic_net: (work@top.s_req_bad.clk), line:4:14, endln:4:17
         |vpiSequenceExpr:
         \_operation: , line:5:3, endln:5:31
           |vpiParent:
@@ -207,7 +187,7 @@ design: (work@top)
               |vpiName:req
               |vpiFullName:work@top.s_req_bad.req
               |vpiActual:
-              \_logic_net: (work@top.req), line:5:9, endln:5:12
+              \_logic_net: (work@top.s_req_bad.req), line:5:9, endln:5:12
             |vpiName:$rose
           |vpiOperand:
           \_constant: , line:5:14, endln:5:17
@@ -231,7 +211,7 @@ design: (work@top)
                 |vpiName:req
                 |vpiFullName:work@top.s_req_bad.req
                 |vpiActual:
-                \_logic_net: (work@top.req), line:5:9, endln:5:12
+                \_logic_net: (work@top.s_req_bad.req), line:5:9, endln:5:12
             |vpiArgument:
             \_constant: , line:5:29, endln:5:30
               |vpiParent:
@@ -263,7 +243,7 @@ design: (work@top)
             |vpiName:clk
             |vpiFullName:work@top.s_req_ok.clk
             |vpiActual:
-            \_logic_net: (work@top.clk), line:4:14, endln:4:17
+            \_logic_net: (work@top.s_req_bad.clk), line:4:14, endln:4:17
         |vpiSequenceExpr:
         \_operation: , line:11:3, endln:11:31
           |vpiParent:
@@ -280,7 +260,7 @@ design: (work@top)
               |vpiName:req
               |vpiFullName:work@top.s_req_ok.req
               |vpiActual:
-              \_logic_net: (work@top.req), line:5:9, endln:5:12
+              \_logic_net: (work@top.s_req_bad.req), line:5:9, endln:5:12
             |vpiName:$rose
           |vpiOperand:
           \_constant: , line:11:14, endln:11:17
@@ -304,7 +284,7 @@ design: (work@top)
                 |vpiName:req
                 |vpiFullName:work@top.s_req_ok.req
                 |vpiActual:
-                \_logic_net: (work@top.req), line:5:9, endln:5:12
+                \_logic_net: (work@top.s_req_bad.req), line:5:9, endln:5:12
             |vpiArgument:
             \_constant: , line:11:29, endln:11:30
               |vpiParent:
@@ -316,179 +296,28 @@ design: (work@top)
             |vpiName:$past
   |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.clk), line:4:14, endln:4:17
+  \_logic_net: (work@top.s_req_bad.clk), line:4:14, endln:4:17
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
+    \_operation: , line:4:6, endln:4:17
     |vpiName:clk
-    |vpiFullName:work@top.clk
+    |vpiFullName:work@top.s_req_bad.clk
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.req), line:5:9, endln:5:12
+  \_logic_net: (work@top.s_req_bad.req), line:5:9, endln:5:12
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
+    \_sys_func_call: ($rose), line:5:3, endln:5:13
     |vpiName:req
-    |vpiFullName:work@top.req
+    |vpiFullName:work@top.s_req_bad.req
     |vpiNetType:1
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiSequenceDecl:
-  \_sequence_decl: (work@top.s_req_bad), line:3:10, endln:3:19
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
-    |vpiName:s_req_bad
-    |vpiFullName:work@top.s_req_bad
-    |vpiExpr:
-    \_multiclock_sequence_expr: , line:4:3, endln:5:31
-      |vpiParent:
-      \_sequence_decl: (work@top.s_req_bad), line:3:10, endln:3:19
-      |vpiClockedSeq:
-      \_clocked_seq: 
-        |vpiParent:
-        \_multiclock_sequence_expr: , line:4:3, endln:5:31
-        |vpiClockingEvent:
-        \_operation: , line:4:6, endln:4:17
-          |vpiParent:
-          \_clocked_seq: 
-          |vpiOpType:39
-          |vpiOperand:
-          \_ref_obj: (work@top.s_req_bad.clk), line:4:14, endln:4:17
-            |vpiParent:
-            \_operation: , line:4:6, endln:4:17
-            |vpiName:clk
-            |vpiFullName:work@top.s_req_bad.clk
-            |vpiActual:
-            \_logic_net: (work@top.clk), line:4:14, endln:4:17
-        |vpiSequenceExpr:
-        \_operation: , line:5:3, endln:5:31
-          |vpiParent:
-          \_clocked_seq: 
-          |vpiOpType:54
-          |vpiOperand:
-          \_sys_func_call: ($rose), line:5:3, endln:5:13
-            |vpiParent:
-            \_operation: , line:5:3, endln:5:31
-            |vpiArgument:
-            \_ref_obj: (work@top.s_req_bad.req), line:5:9, endln:5:12
-              |vpiParent:
-              \_sys_func_call: ($rose), line:5:3, endln:5:13
-              |vpiName:req
-              |vpiFullName:work@top.s_req_bad.req
-              |vpiActual:
-              \_logic_net: (work@top.req), line:5:9, endln:5:12
-            |vpiName:$rose
-          |vpiOperand:
-          \_constant: , line:5:14, endln:5:17
-          |vpiOperand:
-          \_sys_func_call: ($past), line:5:18, endln:5:31
-            |vpiParent:
-            \_operation: , line:5:3, endln:5:31
-            |vpiArgument:
-            \_operation: , line:5:24, endln:5:28
-              |vpiParent:
-              \_sys_func_call: ($past), line:5:18, endln:5:31
-              |vpiOpType:3
-              |vpiOperand:
-              \_ref_obj: (work@top.s_req_bad.req), line:5:25, endln:5:28
-                |vpiParent:
-                \_operation: , line:5:24, endln:5:28
-                |vpiName:req
-                |vpiFullName:work@top.s_req_bad.req
-                |vpiActual:
-                \_logic_net: (work@top.req), line:5:9, endln:5:12
-            |vpiArgument:
-            \_constant: , line:5:29, endln:5:30
-            |vpiName:$past
-  |vpiSequenceDecl:
-  \_sequence_decl: (work@top.s_req_ok), line:9:10, endln:9:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LegalPastFunc/dut.sv, line:1:1, endln:14:10
-    |vpiName:s_req_ok
-    |vpiFullName:work@top.s_req_ok
-    |vpiExpr:
-    \_multiclock_sequence_expr: , line:10:3, endln:11:31
-      |vpiParent:
-      \_sequence_decl: (work@top.s_req_ok), line:9:10, endln:9:18
-      |vpiClockedSeq:
-      \_clocked_seq: 
-        |vpiParent:
-        \_multiclock_sequence_expr: , line:10:3, endln:11:31
-        |vpiClockingEvent:
-        \_operation: , line:10:6, endln:10:17
-          |vpiParent:
-          \_clocked_seq: 
-          |vpiOpType:39
-          |vpiOperand:
-          \_ref_obj: (work@top.s_req_ok.clk), line:10:14, endln:10:17
-            |vpiParent:
-            \_operation: , line:10:6, endln:10:17
-            |vpiName:clk
-            |vpiFullName:work@top.s_req_ok.clk
-            |vpiActual:
-            \_logic_net: (work@top.clk), line:4:14, endln:4:17
-        |vpiSequenceExpr:
-        \_operation: , line:11:3, endln:11:31
-          |vpiParent:
-          \_clocked_seq: 
-          |vpiOpType:54
-          |vpiOperand:
-          \_sys_func_call: ($rose), line:11:3, endln:11:13
-            |vpiParent:
-            \_operation: , line:11:3, endln:11:31
-            |vpiArgument:
-            \_ref_obj: (work@top.s_req_ok.req), line:11:9, endln:11:12
-              |vpiParent:
-              \_sys_func_call: ($rose), line:11:3, endln:11:13
-              |vpiName:req
-              |vpiFullName:work@top.s_req_ok.req
-              |vpiActual:
-              \_logic_net: (work@top.req), line:5:9, endln:5:12
-            |vpiName:$rose
-          |vpiOperand:
-          \_constant: , line:11:14, endln:11:17
-          |vpiOperand:
-          \_sys_func_call: ($past), line:11:18, endln:11:31
-            |vpiParent:
-            \_operation: , line:11:3, endln:11:31
-            |vpiArgument:
-            \_operation: , line:11:24, endln:11:28
-              |vpiParent:
-              \_sys_func_call: ($past), line:11:18, endln:11:31
-              |vpiOpType:3
-              |vpiOperand:
-              \_ref_obj: (work@top.s_req_ok.req), line:11:25, endln:11:28
-                |vpiParent:
-                \_operation: , line:11:24, endln:11:28
-                |vpiName:req
-                |vpiFullName:work@top.s_req_ok.req
-                |vpiActual:
-                \_logic_net: (work@top.req), line:5:9, endln:5:12
-            |vpiArgument:
-            \_constant: , line:11:29, endln:11:30
-            |vpiName:$past
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 1
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:29: Non positive (<1) value, 0
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:29: Non positive (<1) value, 0
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:3: Non synthesizable construct, $rose
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:18: Non synthesizable construct, $past
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:4:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:3:10: Non synthesizable construct, s_req_bad
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:11:3: Non synthesizable construct, $rose
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:11:18: Non synthesizable construct, $past
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:10:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:9:10: Non synthesizable construct, s_req_ok
 [LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:3: Non synthesizable construct, $rose
 [LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:5:18: Non synthesizable construct, $past
 [LINT]: ${SURELOG_DIR}/tests/LegalPastFunc/dut.sv:4:3: Non synthesizable construct,

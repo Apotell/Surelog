@@ -3,61 +3,35 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstPort/dut.sv:8:1: No timescale set for "mix_columns".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstPort/dut.sv:13:1: No timescale set for "cipher_core".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ConstPort/dut.sv:1:1: Compile package "aes_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstPort/dut.sv:13:1: Compile module "work@cipher_core".
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstPort/dut.sv:8:1: Compile module "work@mix_columns".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ConstPort/dut.sv:13:1: Top level module "work@cipher_core".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              10
+constant                                               5
 design                                                 1
-enum_const                                             4
-enum_typespec                                          2
-enum_var                                               2
+enum_const                                             2
+enum_typespec                                          1
 import_typespec                                        1
 logic_net                                              2
-logic_typespec                                         2
-module_inst                                            7
-package                                                2
-port                                                   5
+logic_typespec                                         1
+module_inst                                            3
+package                                                1
+port                                                   3
 ref_module                                             1
-ref_obj                                                5
-ref_typespec                                           8
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              10
-design                                                 1
-enum_const                                             4
-enum_typespec                                          2
-enum_var                                               2
-import_typespec                                        1
-logic_net                                              2
-logic_typespec                                         2
-module_inst                                            7
-package                                                2
-port                                                   7
-ref_module                                             1
-ref_obj                                                7
-ref_typespec                                          10
+ref_obj                                                3
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@cipher_core)
-|vpiElaborated:1
-|vpiName:work@cipher_core
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
   |vpiParent:
-  \_design: (work@cipher_core)
+  \_design: (unnamed)
   |vpiName:aes_pkg
   |vpiFullName:aes_pkg::
   |vpiTypedef:
@@ -91,48 +65,10 @@ design: (work@cipher_core)
       |vpiDecompile:1'b1
       |vpiSize:1
   |vpiDefName:aes_pkg
-|uhdmtopPackages:
-\_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
-  |vpiParent:
-  \_design: (work@cipher_core)
-  |vpiName:aes_pkg
-  |vpiFullName:aes_pkg::
-  |vpiTypedef:
-  \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-    |vpiParent:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-    |vpiName:aes_pkg::ciph_op_e
-    |vpiInstance:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@cipher_core.aes_pkg::ciph_op_e)
-      |vpiParent:
-      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-      |vpiFullName:work@cipher_core.aes_pkg::ciph_op_e
-      |vpiActual:
-      \_logic_typespec: , line:2:14, endln:2:19
-    |vpiEnumConst:
-    \_enum_const: (CIPH_FWD), line:3:3, endln:3:18
-      |vpiParent:
-      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-      |vpiName:CIPH_FWD
-      |BIN:0
-      |vpiDecompile:1'b0
-      |vpiSize:1
-    |vpiEnumConst:
-    \_enum_const: (CIPH_INV), line:4:3, endln:4:18
-      |vpiParent:
-      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-      |vpiName:CIPH_INV
-      |BIN:1
-      |vpiDecompile:1'b1
-      |vpiSize:1
-  |vpiDefName:aes_pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
   |vpiParent:
-  \_design: (work@cipher_core)
+  \_design: (unnamed)
   |vpiFullName:work@cipher_core
   |vpiTypedef:
   \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
@@ -190,7 +126,7 @@ design: (work@cipher_core)
 |uhdmallModules:
 \_module_inst: work@mix_columns (work@mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:8:1, endln:11:10
   |vpiParent:
-  \_design: (work@cipher_core)
+  \_design: (unnamed)
   |vpiFullName:work@mix_columns
   |vpiDefName:work@mix_columns
   |vpiNet:
@@ -220,146 +156,16 @@ design: (work@cipher_core)
       |vpiFullName:work@mix_columns.op_i
       |vpiActual:
       \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-|uhdmtopModules:
-\_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-  |vpiParent:
-  \_design: (work@cipher_core)
-  |vpiName:work@cipher_core
-  |vpiVariables:
-  \_enum_var: (work@cipher_core.op_i), line:14:32, endln:14:36
-    |vpiParent:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-    |vpiTypespec:
-    \_ref_typespec: (work@cipher_core.op_i)
-      |vpiParent:
-      \_enum_var: (work@cipher_core.op_i), line:14:32, endln:14:36
-      |vpiFullName:work@cipher_core.op_i
-      |vpiActual:
-      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-    |vpiName:op_i
-    |vpiFullName:work@cipher_core.op_i
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-  |vpiTypedef:
-  \_import_typespec: (aes_pkg), line:16:10, endln:16:20
-  |vpiDefName:work@cipher_core
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (op_i), line:14:32, endln:14:36
-    |vpiParent:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-    |vpiName:op_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@cipher_core.op_i), line:14:32, endln:14:36
-      |vpiParent:
-      \_port: (op_i), line:14:32, endln:14:36
-      |vpiName:op_i
-      |vpiFullName:work@cipher_core.op_i
-      |vpiActual:
-      \_enum_var: (work@cipher_core.op_i), line:14:32, endln:14:36
-    |vpiTypedef:
-    \_ref_typespec: (work@cipher_core.op_i)
-      |vpiParent:
-      \_port: (op_i), line:14:32, endln:14:36
-      |vpiFullName:work@cipher_core.op_i
-      |vpiActual:
-      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-    |vpiInstance:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-  |vpiModule:
-  \_module_inst: work@mix_columns (work@cipher_core.key_mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:17:3, endln:19:5
-    |vpiParent:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-    |vpiName:key_mix_columns
-    |vpiFullName:work@cipher_core.key_mix_columns
-    |vpiVariables:
-    \_enum_var: (work@cipher_core.key_mix_columns.op_i), line:9:32, endln:9:36
-      |vpiParent:
-      \_module_inst: work@mix_columns (work@cipher_core.key_mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:17:3, endln:19:5
-      |vpiTypespec:
-      \_ref_typespec: (work@cipher_core.key_mix_columns.op_i)
-        |vpiParent:
-        \_enum_var: (work@cipher_core.key_mix_columns.op_i), line:9:32, endln:9:36
-        |vpiFullName:work@cipher_core.key_mix_columns.op_i
-        |vpiActual:
-        \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-      |vpiName:op_i
-      |vpiFullName:work@cipher_core.key_mix_columns.op_i
-      |vpiVisibility:1
-    |vpiDefName:work@mix_columns
-    |vpiDefFile:${SURELOG_DIR}/tests/ConstPort/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
-    |vpiPort:
-    \_port: (op_i), line:9:32, endln:9:36
-      |vpiParent:
-      \_module_inst: work@mix_columns (work@cipher_core.key_mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:17:3, endln:19:5
-      |vpiName:op_i
-      |vpiDirection:1
-      |vpiHighConn:
-      \_constant: , line:18:15, endln:18:23
-        |vpiParent:
-        \_port: (op_i), line:9:32, endln:9:36
-        |vpiDecompile:1'b1
-        |vpiSize:1
-        |BIN:1
-        |vpiConstType:3
-      |vpiLowConn:
-      \_ref_obj: (work@cipher_core.key_mix_columns.op_i), line:18:6, endln:18:10
-        |vpiParent:
-        \_port: (op_i), line:9:32, endln:9:36
-        |vpiName:op_i
-        |vpiFullName:work@cipher_core.key_mix_columns.op_i
-        |vpiActual:
-        \_enum_var: (work@cipher_core.key_mix_columns.op_i), line:9:32, endln:9:36
-      |vpiTypedef:
-      \_ref_typespec: (work@cipher_core.key_mix_columns.op_i)
-        |vpiParent:
-        \_port: (op_i), line:9:32, endln:9:36
-        |vpiFullName:work@cipher_core.key_mix_columns.op_i
-        |vpiActual:
-        \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
-      |vpiInstance:
-      \_module_inst: work@mix_columns (work@cipher_core.key_mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:17:3, endln:19:5
 \_weaklyReferenced:
 \_logic_typespec: , line:2:14, endln:2:19
   |vpiInstance:
   \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:2:14, endln:2:19
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
-\_port: (op_i), line:9:32, endln:9:36
-  |vpiParent:
-  \_module_inst: work@mix_columns (work@cipher_core.key_mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:17:3, endln:19:5
-  |vpiName:op_i
-  |vpiDirection:1
-  |vpiHighConn:
-  \_constant: , line:18:15, endln:18:23
-  |vpiLowConn:
-  \_ref_obj: (work@cipher_core.key_mix_columns.op_i), line:18:6, endln:18:10
-    |vpiParent:
-    \_port: (op_i), line:9:32, endln:9:36
-    |vpiName:op_i
-    |vpiFullName:work@cipher_core.key_mix_columns.op_i
-    |vpiActual:
-    \_enum_var: (work@cipher_core.key_mix_columns.op_i), line:9:32, endln:9:36
-  |vpiTypedef:
-  \_ref_typespec: (work@cipher_core.key_mix_columns.op_i)
-    |vpiParent:
-    \_port: (op_i), line:9:32, endln:9:36
-    |vpiFullName:work@cipher_core.key_mix_columns.op_i
-    |vpiActual:
-    \_enum_typespec: (aes_pkg::ciph_op_e), line:2:1, endln:5:13
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ConstPort/dut.sv | ${SURELOG_DIR}/build/regression/ConstPort/roundtrip/dut_000.sv | 7 | 20 |

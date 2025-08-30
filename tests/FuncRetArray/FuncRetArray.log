@@ -309,82 +309,41 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncRetArray/dut.sv:22:1: Compile module "work@main".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncRetArray/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/FuncRetArray/dut.sv:18:3: Compile generate block "work@main.top1.genblk3".
-[NTE:EL0503] ${SURELOG_DIR}/tests/FuncRetArray/dut.sv:22:1: Top level module "work@main".
-[INF:EL0549] ${SURELOG_DIR}/tests/FuncRetArray/dut.sv:18:3: Elaboration info "--[1] (%d) is 5!!!".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         5
+array_typespec                                         4
 array_var                                              1
 assignment                                             2
 begin                                                  4
-bit_select                                             7
-constant                                              64
+bit_select                                             4
+constant                                              18
 design                                                 1
 for_stmt                                               1
-func_call                                              3
+func_call                                              1
 function                                               1
 gen_if                                                 3
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           5
+int_typespec                                           4
 int_var                                                1
-logic_var                                              3
-module_inst                                            8
-operation                                             13
-param_assign                                          17
-parameter                                             17
-range                                                  5
+module_inst                                            2
+operation                                              8
+param_assign                                           1
+parameter                                              1
+range                                                  3
 ref_module                                             1
 ref_obj                                                3
-ref_typespec                                          18
-sys_task_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_typespec                                         5
-array_var                                              1
-assignment                                             4
-begin                                                  5
-bit_select                                             8
-constant                                              64
-design                                                 1
-for_stmt                                               2
-func_call                                              3
-function                                               2
-gen_if                                                 3
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           5
-int_var                                                2
-logic_var                                              3
-module_inst                                            8
-operation                                             15
-param_assign                                          17
-parameter                                             17
-range                                                  5
-ref_module                                             1
-ref_obj                                                6
-ref_typespec                                          19
-sys_task_call                                          2
+ref_typespec                                           7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncRetArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncRetArray/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FuncRetArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@main)
-|vpiElaborated:1
-|vpiName:work@main
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
   |vpiParent:
-  \_design: (work@main)
+  \_design: (unnamed)
   |vpiFullName:work@main
   |vpiDefName:work@main
   |vpiRefModule:
@@ -398,7 +357,7 @@ design: (work@main)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:1:1, endln:20:10
   |vpiParent:
-  \_design: (work@main)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.VADDR), line:9:29, endln:9:34
@@ -610,8 +569,6 @@ design: (work@main)
             \_assignment: , line:5:14, endln:5:33
             |vpiName:ASSIGN_VADDR
             |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
-            |vpiActual:
-            \_array_var: (work@top.ASSIGN_VADDR), line:3:21, endln:3:39
             |vpiIndex:
             \_ref_obj: (work@top.ASSIGN_VADDR.i), line:5:27, endln:5:28
               |vpiParent:
@@ -730,201 +687,6 @@ design: (work@main)
       |vpiParent:
       \_gen_if: , line:17:2, endln:17:4
       |vpiFullName:work@top
-|uhdmtopModules:
-\_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
-  |vpiParent:
-  \_design: (work@main)
-  |vpiName:work@main
-  |vpiDefName:work@main
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-    |vpiParent:
-    \_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
-    |vpiName:top1
-    |vpiFullName:work@main.top1
-    |vpiParameter:
-    \_parameter: (work@main.top1.VADDR), line:9:29, endln:9:34
-      |vpiParent:
-      \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-      |vpiSize:1
-      |vpiTypespec:
-      \_ref_typespec: (work@main.top1.VADDR)
-        |vpiParent:
-        \_parameter: (work@main.top1.VADDR), line:9:29, endln:9:34
-        |vpiFullName:work@main.top1.VADDR
-        |vpiActual:
-        \_array_typespec: , line:9:16, endln:9:37
-      |vpiRange:
-      \_range: , line:9:35, endln:9:36
-        |vpiParent:
-        \_parameter: (work@main.top1.VADDR), line:9:29, endln:9:34
-        |vpiLeftRange:
-        \_constant: 
-          |vpiParent:
-          \_range: , line:9:35, endln:9:36
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiRightRange:
-        \_operation: , line:9:35, endln:9:36
-          |vpiParent:
-          \_range: , line:9:35, endln:9:36
-          |vpiOpType:11
-          |vpiOperand:
-          \_constant: , line:9:35, endln:9:36
-            |vpiParent:
-            \_operation: , line:9:35, endln:9:36
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
-            |vpiConstType:9
-          |vpiOperand:
-          \_constant: 
-            |vpiParent:
-            \_operation: , line:9:35, endln:9:36
-            |vpiSize:64
-            |INT:1
-            |vpiConstType:7
-      |vpiLocalParam:1
-      |vpiName:VADDR
-      |vpiFullName:work@main.top1.VADDR
-    |vpiParamAssign:
-    \_param_assign: , line:9:29, endln:9:54
-      |vpiParent:
-      \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-      |vpiRhs:
-      \_func_call: (ASSIGN_VADDR), line:9:40, endln:9:52
-        |vpiParent:
-        \_param_assign: , line:9:29, endln:9:54
-        |vpiName:ASSIGN_VADDR
-        |vpiFunction:
-        \_function: (work@top.ASSIGN_VADDR), line:3:5, endln:7:16
-      |vpiLhs:
-      \_parameter: (work@main.top1.VADDR), line:9:29, endln:9:34
-    |vpiTypedef:
-    \_array_typespec: (ASSIGN_VADDR_RET_T), line:2:13, endln:2:47
-    |vpiDefName:work@top
-    |vpiDefFile:${SURELOG_DIR}/tests/FuncRetArray/dut.sv
-    |vpiDefLineNo:1
-    |vpiTaskFunc:
-    \_function: (work@main.top1.ASSIGN_VADDR), line:3:5, endln:7:16
-      |vpiParent:
-      \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-      |vpiName:ASSIGN_VADDR
-      |vpiFullName:work@main.top1.ASSIGN_VADDR
-      |vpiVisibility:1
-      |vpiReturn:
-      \_array_var: (work@top.ASSIGN_VADDR), line:3:21, endln:3:39
-      |vpiStmt:
-      \_for_stmt: (work@main.top1.ASSIGN_VADDR), line:4:9, endln:4:12
-        |vpiParent:
-        \_function: (work@main.top1.ASSIGN_VADDR), line:3:5, endln:7:16
-        |vpiFullName:work@main.top1.ASSIGN_VADDR
-        |vpiForInitStmt:
-        \_assignment: , line:4:14, endln:4:23
-          |vpiParent:
-          \_for_stmt: (work@main.top1.ASSIGN_VADDR), line:4:9, endln:4:12
-          |vpiRhs:
-          \_constant: , line:4:22, endln:4:23
-          |vpiLhs:
-          \_int_var: (work@main.top1.ASSIGN_VADDR.i), line:4:18, endln:4:19
-            |vpiParent:
-            \_assignment: , line:4:14, endln:4:23
-            |vpiTypespec:
-            \_ref_typespec: (work@main.top1.ASSIGN_VADDR.i)
-              |vpiParent:
-              \_int_var: (work@main.top1.ASSIGN_VADDR.i), line:4:18, endln:4:19
-              |vpiFullName:work@main.top1.ASSIGN_VADDR.i
-              |vpiActual:
-              \_int_typespec: , line:4:14, endln:4:17
-            |vpiName:i
-            |vpiFullName:work@main.top1.ASSIGN_VADDR.i
-            |vpiSigned:1
-        |vpiForIncStmt:
-        \_operation: , line:4:32, endln:4:35
-          |vpiParent:
-          \_for_stmt: (work@main.top1.ASSIGN_VADDR), line:4:9, endln:4:12
-          |vpiOpType:62
-          |vpiOperand:
-          \_ref_obj: (work@main.top1.ASSIGN_VADDR.i), line:4:32, endln:4:33
-            |vpiParent:
-            \_operation: , line:4:32, endln:4:35
-            |vpiName:i
-            |vpiFullName:work@main.top1.ASSIGN_VADDR.i
-            |vpiActual:
-            \_int_var: (work@main.top1.ASSIGN_VADDR.i), line:4:18, endln:4:19
-        |vpiCondition:
-        \_operation: , line:4:25, endln:4:30
-          |vpiParent:
-          \_for_stmt: (work@main.top1.ASSIGN_VADDR), line:4:9, endln:4:12
-          |vpiOpType:20
-          |vpiOperand:
-          \_ref_obj: (work@main.top1.ASSIGN_VADDR.i), line:4:25, endln:4:26
-            |vpiParent:
-            \_operation: , line:4:25, endln:4:30
-            |vpiName:i
-            |vpiFullName:work@main.top1.ASSIGN_VADDR.i
-            |vpiActual:
-            \_int_var: (work@main.top1.ASSIGN_VADDR.i), line:4:18, endln:4:19
-          |vpiOperand:
-          \_constant: , line:4:29, endln:4:30
-        |vpiStmt:
-        \_begin: (work@main.top1.ASSIGN_VADDR), line:4:37, endln:6:12
-          |vpiParent:
-          \_for_stmt: (work@main.top1.ASSIGN_VADDR), line:4:9, endln:4:12
-          |vpiFullName:work@main.top1.ASSIGN_VADDR
-          |vpiStmt:
-          \_assignment: , line:5:14, endln:5:33
-            |vpiParent:
-            \_begin: (work@main.top1.ASSIGN_VADDR), line:4:37, endln:6:12
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_constant: , line:5:32, endln:5:33
-            |vpiLhs:
-            \_bit_select: (work@main.top1.ASSIGN_VADDR.ASSIGN_VADDR), line:5:14, endln:5:29
-              |vpiParent:
-              \_assignment: , line:5:14, endln:5:33
-              |vpiName:ASSIGN_VADDR
-              |vpiFullName:work@main.top1.ASSIGN_VADDR.ASSIGN_VADDR
-              |vpiActual:
-              \_array_var: (work@top.ASSIGN_VADDR), line:3:21, endln:3:39
-              |vpiIndex:
-              \_ref_obj: (work@main.top1.ASSIGN_VADDR.i), line:5:27, endln:5:28
-                |vpiParent:
-                \_bit_select: (work@main.top1.ASSIGN_VADDR.ASSIGN_VADDR), line:5:14, endln:5:29
-                |vpiName:i
-                |vpiFullName:work@main.top1.ASSIGN_VADDR.i
-                |vpiActual:
-                \_int_var: (work@main.top1.ASSIGN_VADDR.i), line:4:18, endln:4:19
-      |vpiInstance:
-      \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-    |vpiInstance:
-    \_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@main.top1.genblk3), line:18:3, endln:18:40
-      |vpiParent:
-      \_module_inst: work@top (work@main.top1), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:23:5, endln:23:20
-      |vpiName:genblk3
-      |vpiFullName:work@main.top1.genblk3
-      |vpiGenScope:
-      \_gen_scope: (work@main.top1.genblk3), line:18:3, endln:18:40
-        |vpiParent:
-        \_gen_scope_array: (work@main.top1.genblk3), line:18:3, endln:18:40
-        |vpiFullName:work@main.top1.genblk3
-        |vpiSysTaskCall:
-        \_sys_task_call: (info), line:18:3, endln:18:40
-          |vpiParent:
-          \_gen_scope: (work@main.top1.genblk3), line:18:3, endln:18:40
-          |vpiArgument:
-          \_constant: 
-            |vpiDecompile:"--[1] (%d) is 5!!!"
-            |STRING:"--[1] (%d) is 5!!!"
-            |vpiConstType:6
-          |vpiName:info
 \_weaklyReferenced:
 \_int_typespec: , line:2:13, endln:2:25
 \_array_typespec: (ASSIGN_VADDR_RET_T), line:2:13, endln:2:47
@@ -993,57 +755,12 @@ design: (work@main)
     |vpiActual:
     \_int_typespec: , line:9:16, endln:9:28
 \_int_typespec: , line:9:16, endln:9:28
-\_array_typespec: , line:9:16, endln:9:37
-  |vpiParent:
-  \_ref_typespec: (work@main.top1.VADDR)
-  |vpiRange:
-  \_range: , line:9:35, endln:9:36
-    |vpiParent:
-    \_array_typespec: , line:9:16, endln:9:37
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:9:35, endln:9:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:9:35, endln:9:36
-      |vpiParent:
-      \_range: , line:9:35, endln:9:36
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:9:35, endln:9:36
-        |vpiParent:
-        \_operation: , line:9:35, endln:9:36
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:9:35, endln:9:36
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@main.top1.VADDR)
-    |vpiParent:
-    \_array_typespec: , line:9:16, endln:9:37
-    |vpiFullName:work@main.top1.VADDR
-    |vpiActual:
-    \_int_typespec: , line:9:16, endln:9:28
-\_int_typespec: , line:9:16, endln:9:28
-  |vpiParent:
-  \_ref_typespec: (work@main.top1.VADDR)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/FuncRetArray/dut.sv | ${SURELOG_DIR}/build/regression/FuncRetArray/roundtrip/dut_000.sv | 14 | 24 |

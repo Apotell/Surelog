@@ -43,57 +43,18 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:1:1: No timescale set for "alert_handler_reg_wrap".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:1:1: Compile module "work@alert_handler_reg_wrap".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[1]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[2]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[3]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[4]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[5]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[6]".
-[INF:CP0335] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:2:48: Compile generate block "work@alert_handler_reg_wrap.g_dmem_intg_check[7]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/UnaryPlus/dut.sv:1:1: Top level module "work@alert_handler_reg_wrap".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-constant                                              30
+constant                                               2
 design                                                 1
 gen_for                                                1
-gen_scope                                             16
-gen_scope_array                                       16
-int_typespec                                          10
-int_var                                                2
 logic_net                                              1
-module_inst                                            3
+module_inst                                            1
 named_begin                                            1
-operation                                             11
-parameter                                              8
+operation                                              2
 ref_obj                                                2
-ref_typespec                                          11
-ref_var                                                1
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-constant                                              30
-design                                                 1
-gen_for                                                1
-gen_scope                                             24
-gen_scope_array                                       24
-int_typespec                                          10
-int_var                                                2
-logic_net                                              1
-module_inst                                            3
-named_begin                                            1
-operation                                             11
-parameter                                              8
-ref_obj                                                2
-ref_typespec                                          19
+ref_typespec                                           1
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -102,19 +63,18 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnaryPlus/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@alert_handler_reg_wrap)
-|vpiElaborated:1
-|vpiName:work@alert_handler_reg_wrap
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
   |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
+  \_design: (unnamed)
   |vpiFullName:work@alert_handler_reg_wrap
   |vpiDefName:work@alert_handler_reg_wrap
   |vpiNet:
   \_logic_net: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
     |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
+    \_operation: , line:2:26, endln:2:36
     |vpiName:i_word
     |vpiFullName:work@alert_handler_reg_wrap.i_word
     |vpiNetType:1
@@ -133,16 +93,16 @@ design: (work@alert_handler_reg_wrap)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
+      \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
         |vpiParent:
         \_assignment: , line:2:7, endln:2:24
         |vpiTypespec:
         \_ref_typespec: (work@alert_handler_reg_wrap.i_word)
           |vpiParent:
-          \_int_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
+          \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
           |vpiFullName:work@alert_handler_reg_wrap.i_word
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (i_word), line:2:14, endln:2:20
         |vpiName:i_word
         |vpiFullName:work@alert_handler_reg_wrap.i_word
     |vpiCondition:
@@ -185,238 +145,15 @@ design: (work@alert_handler_reg_wrap)
       \_gen_for: 
       |vpiName:g_dmem_intg_check
       |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check
-|uhdmtopModules:
-\_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-  |vpiParent:
-  \_design: (work@alert_handler_reg_wrap)
-  |vpiName:work@alert_handler_reg_wrap
-  |vpiDefName:work@alert_handler_reg_wrap
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[0]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[0]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[0]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[0]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[0]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[0]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[0].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[0]), line:2:48, endln:3:6
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[0].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[0].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[0].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[0].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[1]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[1]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[1]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[1]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[1]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[1]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[1].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[1]), line:2:48, endln:3:6
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[1].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[1].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[1].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[1].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[2]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[2]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[2]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[2]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[2]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[2]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[2].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[2]), line:2:48, endln:3:6
-        |UINT:2
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[2].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[2].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[2].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[2].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[3]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[3]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[3]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[3]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[3]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[3]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[3].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[3]), line:2:48, endln:3:6
-        |UINT:3
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[3].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[3].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[3].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[3].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[4]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[4]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[4]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[4]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[4]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[4]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[4].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[4]), line:2:48, endln:3:6
-        |UINT:4
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[4].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[4].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[4].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[4].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[5]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[5]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[5]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[5]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[5]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[5]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[5].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[5]), line:2:48, endln:3:6
-        |UINT:5
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[5].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[5].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[5].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[5].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[6]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[6]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[6]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[6]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[6]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[6]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[6].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[6]), line:2:48, endln:3:6
-        |UINT:6
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[6].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[6].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[6].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[6].i_word
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[7]), line:2:48, endln:3:6
-    |vpiParent:
-    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
-    |vpiName:g_dmem_intg_check[7]
-    |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[7]
-    |vpiGenScope:
-    \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[7]), line:2:48, endln:3:6
-      |vpiParent:
-      \_gen_scope_array: (work@alert_handler_reg_wrap.g_dmem_intg_check[7]), line:2:48, endln:3:6
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[7]
-      |vpiParameter:
-      \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[7].i_word), line:2:0
-        |vpiParent:
-        \_gen_scope: (work@alert_handler_reg_wrap.g_dmem_intg_check[7]), line:2:48, endln:3:6
-        |UINT:7
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.g_dmem_intg_check[7].i_word)
-          |vpiParent:
-          \_parameter: (work@alert_handler_reg_wrap.g_dmem_intg_check[7].i_word), line:2:0
-          |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[7].i_word
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check[7].i_word
 \_weaklyReferenced:
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
+\_unsupported_typespec: (i_word), line:2:14, endln:2:20
+  |vpiName:i_word
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/UnaryPlus/dut.sv | ${SURELOG_DIR}/build/regression/UnaryPlus/roundtrip/dut_000.sv | 2 | 4 |

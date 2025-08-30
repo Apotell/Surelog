@@ -328,84 +328,39 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:1:1: No timescale set for "mod".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:1:1: Compile module "work@mod".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:14:10: Compile generate block "work@mod.blk4".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:24:9: Compile generate block "work@mod.genblk2".
-Instance tree:
-[TOP] work@mod work@mod
-[SCO] work@mod.blk4 work@mod.blk4
-[SCO] work@mod.genblk2 work@mod.genblk2
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:1:1: Top level module "work@mod".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:1:1: Instance "work@mod".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:14:10: Scope "work@mod.blk4".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv:24:9: Scope "work@mod.genblk2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_net                                              1
 begin                                                  8
-constant                                              38
-cont_assign                                            5
+constant                                               9
+cont_assign                                            4
 design                                                 1
 gen_if_else                                            6
-gen_scope                                              4
-gen_scope_array                                        4
-hier_path                                             10
-int_typespec                                           2
-logic_net                                              3
-logic_typespec                                         4
-module_inst                                            8
+hier_path                                              8
+int_typespec                                           1
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            2
 named_begin                                            4
-operation                                             13
-param_assign                                           2
-parameter                                              2
-port                                                   2
-range                                                  5
-ref_obj                                               33
-ref_typespec                                          10
-sys_func_call                                          5
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_net                                              1
-begin                                                  8
-constant                                              38
-cont_assign                                            6
-design                                                 1
-gen_if_else                                            6
-gen_scope                                              6
-gen_scope_array                                        6
-hier_path                                             11
-int_typespec                                           2
-logic_net                                              3
-logic_typespec                                         4
-module_inst                                            8
-named_begin                                            4
-operation                                             13
-param_assign                                           2
-parameter                                              2
-port                                                   3
-range                                                  5
-ref_obj                                               37
-ref_typespec                                          12
-sys_func_call                                          6
+operation                                              6
+param_assign                                           1
+parameter                                              1
+port                                                   1
+range                                                  1
+ref_obj                                               27
+ref_typespec                                           3
+sys_func_call                                          4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenScopeHierPath2/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenScopeHierPath2/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenScopeHierPath2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@mod)
-|vpiElaborated:1
-|vpiName:work@mod
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
   |vpiParent:
-  \_design: (work@mod)
+  \_design: (unnamed)
   |vpiFullName:work@mod
   |vpiParameter:
   \_parameter: (work@mod.P), line:4:15, endln:4:16
@@ -797,202 +752,6 @@ design: (work@mod)
                   \_cont_assign: , line:24:16, endln:24:35
                   |vpiName:out
                   |vpiFullName:work@mod.out
-|uhdmtopModules:
-\_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-  |vpiParent:
-  \_design: (work@mod)
-  |vpiName:work@mod
-  |vpiParameter:
-  \_parameter: (work@mod.P), line:4:15, endln:4:16
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |UINT:0
-    |vpiTypespec:
-    \_ref_typespec: (work@mod.P)
-      |vpiParent:
-      \_parameter: (work@mod.P), line:4:15, endln:4:16
-      |vpiFullName:work@mod.P
-      |vpiActual:
-      \_int_typespec: , line:4:5, endln:4:20
-    |vpiName:P
-    |vpiFullName:work@mod.P
-  |vpiParamAssign:
-  \_param_assign: , line:4:15, endln:4:20
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |vpiRhs:
-    \_constant: , line:4:19, endln:4:20
-      |vpiParent:
-      \_param_assign: , line:4:15, endln:4:20
-      |vpiDecompile:0
-      |vpiSize:32
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@mod)
-        |vpiParent:
-        \_constant: , line:4:19, endln:4:20
-        |vpiFullName:work@mod
-        |vpiActual:
-        \_int_typespec: , line:4:5, endln:4:20
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@mod.P), line:4:15, endln:4:16
-  |vpiDefName:work@mod
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@mod.out), line:2:24, endln:2:27
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |vpiTypespec:
-    \_ref_typespec: (work@mod.out)
-      |vpiParent:
-      \_logic_net: (work@mod.out), line:2:24, endln:2:27
-      |vpiFullName:work@mod.out
-      |vpiActual:
-      \_logic_typespec: , line:2:12, endln:2:23
-    |vpiName:out
-    |vpiFullName:work@mod.out
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (out), line:2:24, endln:2:27
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |vpiName:out
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@mod.out), line:2:24, endln:2:27
-      |vpiParent:
-      \_port: (out), line:2:24, endln:2:27
-      |vpiName:out
-      |vpiFullName:work@mod.out
-      |vpiActual:
-      \_logic_net: (work@mod.out), line:2:24, endln:2:27
-    |vpiTypedef:
-    \_ref_typespec: (work@mod.out)
-      |vpiParent:
-      \_port: (out), line:2:24, endln:2:27
-      |vpiFullName:work@mod.out
-      |vpiActual:
-      \_logic_typespec: , line:2:12, endln:2:23
-    |vpiInstance:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@mod.blk4), line:14:10, endln:16:8
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |vpiName:blk4
-    |vpiFullName:work@mod.blk4
-    |vpiGenScope:
-    \_gen_scope: (work@mod.blk4), line:14:10, endln:16:8
-      |vpiParent:
-      \_gen_scope_array: (work@mod.blk4), line:14:10, endln:16:8
-      |vpiFullName:work@mod.blk4
-      |vpiArrayNet:
-      \_array_net: (work@mod.blk4.z), line:15:14, endln:15:15
-        |vpiParent:
-        \_gen_scope: (work@mod.blk4), line:14:10, endln:16:8
-        |vpiSize:7
-        |vpiName:z
-        |vpiFullName:work@mod.blk4.z
-        |vpiRange:
-        \_range: , line:15:17, endln:15:18
-          |vpiParent:
-          \_array_net: (work@mod.blk4.z), line:15:14, endln:15:15
-          |vpiLeftRange:
-          \_constant: 
-            |vpiParent:
-            \_range: , line:15:17, endln:15:18
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiRightRange:
-          \_operation: , line:15:17, endln:15:18
-            |vpiParent:
-            \_range: , line:15:17, endln:15:18
-            |vpiOpType:11
-            |vpiOperand:
-            \_constant: , line:15:17, endln:15:18
-              |vpiParent:
-              \_operation: , line:15:17, endln:15:18
-              |vpiDecompile:7
-              |vpiSize:64
-              |UINT:7
-              |vpiConstType:9
-            |vpiOperand:
-            \_constant: 
-              |vpiSize:64
-              |INT:1
-              |vpiConstType:7
-        |vpiNet:
-        \_logic_net: (work@mod.blk4.z), line:15:14, endln:15:15
-          |vpiParent:
-          \_array_net: (work@mod.blk4.z), line:15:14, endln:15:15
-          |vpiTypespec:
-          \_ref_typespec: (work@mod.blk4.z)
-            |vpiParent:
-            \_logic_net: (work@mod.blk4.z), line:15:14, endln:15:15
-            |vpiFullName:work@mod.blk4.z
-            |vpiActual:
-            \_logic_typespec: , line:15:9, endln:15:13
-          |vpiFullName:work@mod.blk4.z
-          |vpiNetType:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@mod.genblk2), line:24:9, endln:24:36
-    |vpiParent:
-    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-    |vpiName:genblk2
-    |vpiFullName:work@mod.genblk2
-    |vpiGenScope:
-    \_gen_scope: (work@mod.genblk2), line:24:9, endln:24:36
-      |vpiParent:
-      \_gen_scope_array: (work@mod.genblk2), line:24:9, endln:24:36
-      |vpiFullName:work@mod.genblk2
-      |vpiContAssign:
-      \_cont_assign: , line:24:16, endln:24:35
-        |vpiParent:
-        \_gen_scope: (work@mod.genblk2), line:24:9, endln:24:36
-        |vpiRhs:
-        \_sys_func_call: ($bits), line:24:22, endln:24:35
-          |vpiParent:
-          \_cont_assign: , line:24:16, endln:24:35
-          |vpiTypespec:
-          \_ref_typespec: (work@mod.genblk2)
-            |vpiParent:
-            \_sys_func_call: ($bits), line:24:22, endln:24:35
-            |vpiFullName:work@mod.genblk2
-            |vpiActual:
-            \_logic_typespec: , line:2:12, endln:2:23
-          |vpiArgument:
-          \_hier_path: (blk4.z), line:24:28, endln:24:34
-            |vpiParent:
-            \_sys_func_call: ($bits), line:24:22, endln:24:35
-            |vpiActual:
-            \_ref_obj: (blk4), line:24:28, endln:24:32
-              |vpiParent:
-              \_hier_path: (blk4.z), line:24:28, endln:24:34
-              |vpiName:blk4
-              |vpiActual:
-              \_gen_scope: (work@mod.blk4), line:14:10, endln:16:8
-            |vpiActual:
-            \_ref_obj: (work@mod.genblk2.z), line:24:33, endln:24:34
-              |vpiParent:
-              \_hier_path: (blk4.z), line:24:28, endln:24:34
-              |vpiName:z
-              |vpiFullName:work@mod.genblk2.z
-              |vpiActual:
-              \_array_net: (work@mod.blk4.z), line:15:14, endln:15:15
-            |vpiName:blk4.z
-          |vpiName:$bits
-        |vpiLhs:
-        \_ref_obj: (work@mod.genblk2.out), line:24:16, endln:24:19
-          |vpiParent:
-          \_cont_assign: , line:24:16, endln:24:35
-          |vpiName:out
-          |vpiFullName:work@mod.genblk2.out
-          |vpiActual:
-          \_logic_net: (work@mod.out), line:2:24, endln:2:27
 \_weaklyReferenced:
 \_int_typespec: , line:4:5, endln:4:20
 \_logic_typespec: , line:2:12, endln:2:23
@@ -1016,70 +775,13 @@ design: (work@mod)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:2:12, endln:2:23
-  |vpiRange:
-  \_range: , line:2:17, endln:2:23
-    |vpiParent:
-    \_logic_typespec: , line:2:12, endln:2:23
-    |vpiLeftRange:
-    \_constant: , line:2:18, endln:2:20
-      |vpiParent:
-      \_range: , line:2:17, endln:2:23
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:21, endln:2:22
-      |vpiParent:
-      \_range: , line:2:17, endln:2:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:15:9, endln:15:13
-  |vpiParent:
-  \_logic_net: (work@mod.blk4.z), line:15:14, endln:15:15
-\_logic_typespec: , line:2:12, endln:2:23
-  |vpiRange:
-  \_range: , line:2:17, endln:2:23
-    |vpiParent:
-    \_logic_typespec: , line:2:12, endln:2:23
-    |vpiLeftRange:
-    \_constant: , line:2:18, endln:2:20
-      |vpiParent:
-      \_range: , line:2:17, endln:2:23
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:21, endln:2:22
-      |vpiParent:
-      \_range: , line:2:17, endln:2:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:4:5, endln:4:20
-  |vpiParent:
-  \_ref_typespec: (work@mod.P)
-\_gen_scope: (work@mod.blk4), line:14:10, endln:16:8
-  |vpiParent:
-  \_gen_scope_array: (work@mod.blk4), line:14:10, endln:16:8
-  |vpiFullName:work@mod.blk4
-  |vpiArrayNet:
-  \_array_net: (work@mod.blk4.z), line:15:14, endln:15:15
-\_gen_scope_array: (work@mod.blk4), line:14:10, endln:16:8
-  |vpiParent:
-  \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
-  |vpiName:blk4
-  |vpiFullName:work@mod.blk4
-  |vpiGenScope:
-  \_gen_scope: (work@mod.blk4), line:14:10, endln:16:8
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 8
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv | ${SURELOG_DIR}/build/regression/GenScopeHierPath2/roundtrip/dut_000.sv | 19 | 25 |
+============================== End RoundTrip Results ==============================

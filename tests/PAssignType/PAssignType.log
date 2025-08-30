@@ -195,70 +195,40 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PAssignType/dut.sv:16:1: No timescale set for "shadow".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PAssignType/dut.sv:22:1: No timescale set for "aes_core".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PAssignType/dut.sv:1:1: Compile package "aes_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:22:1: Compile module "work@aes_core".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:16:1: Compile module "work@shadow".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:11:1: Compile module "work@subreg".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PAssignType/dut.sv:22:1: Top level module "work@aes_core".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 3.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              50
+constant                                              19
 design                                                 1
 import_typespec                                        1
 logic_net                                              1
-logic_typespec                                        16
-module_inst                                           12
-operation                                             11
-package                                                2
-param_assign                                          10
-parameter                                             13
-range                                                 16
+logic_typespec                                         6
+module_inst                                            3
+operation                                              4
+package                                                1
+param_assign                                           5
+parameter                                              6
+range                                                  6
 ref_module                                             2
-ref_typespec                                          44
-string_typespec                                        9
-struct_net                                             1
-struct_typespec                                       10
-tagged_pattern                                         9
-typespec_member                                       10
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              50
-design                                                 1
-import_typespec                                        1
-logic_net                                              1
-logic_typespec                                        16
-module_inst                                           12
-operation                                             11
-package                                                2
-param_assign                                          10
-parameter                                             13
-range                                                 16
-ref_module                                             2
-ref_typespec                                          44
-string_typespec                                        9
-struct_net                                             1
-struct_typespec                                       10
-tagged_pattern                                         9
-typespec_member                                       10
+ref_typespec                                          18
+string_typespec                                        4
+struct_typespec                                        4
+tagged_pattern                                         4
+typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PAssignType/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PAssignType/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PAssignType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@aes_core)
-|vpiElaborated:1
-|vpiName:work@aes_core
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiName:aes_pkg
   |vpiFullName:aes_pkg::
   |vpiParameter:
@@ -305,80 +275,7 @@ design: (work@aes_core)
   |vpiTypedef:
   \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
     |vpiParent:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiName:aes_pkg::ctrl_reg_t
-    |vpiInstance:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (manual_operation), line:3:15, endln:3:31
-      |vpiParent:
-      \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-      |vpiName:manual_operation
-      |vpiTypespec:
-      \_ref_typespec: (aes_pkg::aes_pkg::ctrl_reg_t::manual_operation)
-        |vpiParent:
-        \_typespec_member: (manual_operation), line:3:15, endln:3:31
-        |vpiFullName:aes_pkg::aes_pkg::ctrl_reg_t::manual_operation
-        |vpiActual:
-        \_logic_typespec: , line:3:3, endln:3:14
-      |vpiRefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:14
-  |vpiDefName:aes_pkg
-|uhdmtopPackages:
-\_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiParent:
-  \_design: (work@aes_core)
-  |vpiName:aes_pkg
-  |vpiFullName:aes_pkg::
-  |vpiParameter:
-  \_parameter: (aes_pkg::CTRL_RESET), line:6:22, endln:6:32
-    |vpiParent:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiTypespec:
-    \_ref_typespec: (aes_pkg::CTRL_RESET)
-      |vpiParent:
-      \_parameter: (aes_pkg::CTRL_RESET), line:6:22, endln:6:32
-      |vpiFullName:aes_pkg::CTRL_RESET
-      |vpiActual:
-      \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiName:CTRL_RESET
-    |vpiFullName:aes_pkg::CTRL_RESET
-  |vpiParamAssign:
-  \_param_assign: , line:6:22, endln:8:2
-    |vpiParent:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiRhs:
-    \_operation: , line:6:35, endln:8:2
-      |vpiParent:
-      \_param_assign: , line:6:22, endln:8:2
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:7:21, endln:7:23
-        |vpiParent:
-        \_operation: , line:6:35, endln:8:2
-        |vpiPattern:
-        \_constant: , line:7:21, endln:7:23
-          |vpiDecompile:'0
-          |vpiSize:-1
-          |BIN:0
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (aes_pkg)
-          |vpiParent:
-          \_tagged_pattern: , line:7:21, endln:7:23
-          |vpiFullName:aes_pkg
-          |vpiActual:
-          \_string_typespec: (manual_operation), line:7:3, endln:7:19
-    |vpiLhs:
     \_parameter: (aes_pkg::CTRL_RESET), line:6:22, endln:6:32
-  |vpiTypedef:
-  \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
     |vpiName:aes_pkg::ctrl_reg_t
     |vpiInstance:
     \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
@@ -389,10 +286,10 @@ design: (work@aes_core)
       \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
       |vpiName:manual_operation
       |vpiTypespec:
-      \_ref_typespec: (work@aes_core.aes_pkg::ctrl_reg_t.manual_operation)
+      \_ref_typespec: (aes_pkg::CTRL_RESET::aes_pkg::ctrl_reg_t::manual_operation)
         |vpiParent:
         \_typespec_member: (manual_operation), line:3:15, endln:3:31
-        |vpiFullName:work@aes_core.aes_pkg::ctrl_reg_t.manual_operation
+        |vpiFullName:aes_pkg::CTRL_RESET::aes_pkg::ctrl_reg_t::manual_operation
         |vpiActual:
         \_logic_typespec: , line:3:3, endln:3:14
       |vpiRefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
@@ -401,11 +298,10 @@ design: (work@aes_core)
       |vpiRefEndLineNo:3
       |vpiRefEndColumnNo:14
   |vpiDefName:aes_pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiFullName:work@aes_core
   |vpiParameter:
   \_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
@@ -492,7 +388,7 @@ design: (work@aes_core)
 |uhdmallModules:
 \_module_inst: work@shadow (work@shadow), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:16:1, endln:20:10
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiFullName:work@shadow
   |vpiParameter:
   \_parameter: (work@shadow.RESVAL), line:17:26, endln:17:32
@@ -541,7 +437,7 @@ design: (work@aes_core)
 |uhdmallModules:
 \_module_inst: work@subreg (work@subreg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:11:1, endln:14:10
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiFullName:work@subreg
   |vpiParameter:
   \_parameter: (work@subreg.RESVAL), line:12:26, endln:12:32
@@ -579,182 +475,7 @@ design: (work@aes_core)
     |vpiLhs:
     \_parameter: (work@subreg.RESVAL), line:12:26, endln:12:32
   |vpiDefName:work@subreg
-|uhdmtopModules:
-\_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-  |vpiParent:
-  \_design: (work@aes_core)
-  |vpiName:work@aes_core
-  |vpiParameter:
-  \_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-    |vpiTypespec:
-    \_ref_typespec: (work@aes_core.CTRL_RESET)
-      |vpiParent:
-      \_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
-      |vpiFullName:work@aes_core.CTRL_RESET
-      |vpiActual:
-      \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiName:CTRL_RESET
-    |vpiFullName:work@aes_core.CTRL_RESET
-    |vpiImported:aes_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:6:22, endln:8:2
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-    |vpiRhs:
-    \_operation: , line:6:35, endln:8:2
-      |vpiParent:
-      \_param_assign: , line:6:22, endln:8:2
-      |vpiTypespec:
-      \_ref_typespec: 
-        |vpiActual:
-        \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:7:21, endln:7:23
-        |vpiParent:
-        \_operation: , line:6:35, endln:8:2
-        |vpiDecompile:0
-        |vpiSize:32
-        |UINT:0
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
-  |vpiTypedef:
-  \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-  |vpiTypedef:
-  \_import_typespec: (aes_pkg), line:23:10, endln:23:20
-  |vpiDefName:work@aes_core
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@aes_core.ctrl_q), line:24:14, endln:24:20
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-    |vpiTypespec:
-    \_ref_typespec: (work@aes_core.ctrl_q)
-      |vpiParent:
-      \_struct_net: (work@aes_core.ctrl_q), line:24:14, endln:24:20
-      |vpiFullName:work@aes_core.ctrl_q
-      |vpiActual:
-      \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiName:ctrl_q
-    |vpiFullName:work@aes_core.ctrl_q
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@shadow (work@aes_core.shadow_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:25:3, endln:25:46
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-    |vpiName:shadow_reg
-    |vpiFullName:work@aes_core.shadow_reg
-    |vpiParameter:
-    \_parameter: (work@aes_core.shadow_reg.RESVAL), line:17:26, endln:17:32
-      |vpiParent:
-      \_module_inst: work@shadow (work@aes_core.shadow_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:25:3, endln:25:46
-      |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@aes_core.shadow_reg.RESVAL)
-        |vpiParent:
-        \_parameter: (work@aes_core.shadow_reg.RESVAL), line:17:26, endln:17:32
-        |vpiFullName:work@aes_core.shadow_reg.RESVAL
-        |vpiActual:
-        \_logic_typespec: , line:17:13, endln:17:25
-      |vpiName:RESVAL
-      |vpiFullName:work@aes_core.shadow_reg.RESVAL
-    |vpiParamAssign:
-    \_param_assign: , line:17:26, endln:17:37
-      |vpiParent:
-      \_module_inst: work@shadow (work@aes_core.shadow_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:25:3, endln:25:46
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:25:20, endln:25:30
-        |vpiDecompile:32'd0
-        |vpiSize:32
-        |UINT:0
-      |vpiLhs:
-      \_parameter: (work@aes_core.shadow_reg.RESVAL), line:17:26, endln:17:32
-    |vpiDefName:work@shadow
-    |vpiDefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
-    |vpiDefLineNo:16
-    |vpiInstance:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
-    |vpiModule:
-    \_module_inst: work@subreg (work@aes_core.shadow_reg.commit_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:19:3, endln:19:42
-      |vpiParent:
-      \_module_inst: work@shadow (work@aes_core.shadow_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:25:3, endln:25:46
-      |vpiName:commit_reg
-      |vpiFullName:work@aes_core.shadow_reg.commit_reg
-      |vpiParameter:
-      \_parameter: (work@aes_core.shadow_reg.commit_reg.RESVAL), line:12:26, endln:12:32
-        |vpiParent:
-        \_module_inst: work@subreg (work@aes_core.shadow_reg.commit_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:19:3, endln:19:42
-        |BIN:0
-        |vpiTypespec:
-        \_ref_typespec: (work@aes_core.shadow_reg.commit_reg.RESVAL)
-          |vpiParent:
-          \_parameter: (work@aes_core.shadow_reg.commit_reg.RESVAL), line:12:26, endln:12:32
-          |vpiFullName:work@aes_core.shadow_reg.commit_reg.RESVAL
-          |vpiActual:
-          \_logic_typespec: , line:12:13, endln:12:25
-        |vpiName:RESVAL
-        |vpiFullName:work@aes_core.shadow_reg.commit_reg.RESVAL
-      |vpiParamAssign:
-      \_param_assign: , line:12:26, endln:12:37
-        |vpiParent:
-        \_module_inst: work@subreg (work@aes_core.shadow_reg.commit_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:19:3, endln:19:42
-        |vpiOverriden:1
-        |vpiRhs:
-        \_constant: , line:12:35, endln:12:37
-          |vpiParent:
-          \_param_assign: , line:12:26, endln:12:37
-          |vpiDecompile:0
-          |vpiSize:32
-          |UINT:0
-          |vpiTypespec:
-          \_ref_typespec: (work@aes_core.shadow_reg.commit_reg)
-            |vpiParent:
-            \_constant: , line:12:35, endln:12:37
-            |vpiFullName:work@aes_core.shadow_reg.commit_reg
-            |vpiActual:
-            \_logic_typespec: , line:12:13, endln:12:25
-          |vpiConstType:9
-        |vpiLhs:
-        \_parameter: (work@aes_core.shadow_reg.commit_reg.RESVAL), line:12:26, endln:12:32
-      |vpiDefName:work@subreg
-      |vpiDefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
-      |vpiDefLineNo:11
-      |vpiInstance:
-      \_module_inst: work@shadow (work@aes_core.shadow_reg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:25:3, endln:25:46
 \_weaklyReferenced:
-\_logic_typespec: , line:3:3, endln:3:14
-  |vpiParent:
-  \_typespec_member: (manual_operation), line:3:15, endln:3:31
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiRange:
-  \_range: , line:3:8, endln:3:14
-    |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:14
-    |vpiLeftRange:
-    \_constant: , line:3:9, endln:3:11
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_string_typespec: (manual_operation), line:7:3, endln:7:19
-  |vpiParent:
-  \_tagged_pattern: , line:7:21, endln:7:23
-  |vpiName:manual_operation
 \_logic_typespec: , line:3:3, endln:3:14
   |vpiParent:
   \_typespec_member: (manual_operation), line:3:15, endln:3:31
@@ -932,167 +653,13 @@ design: (work@aes_core)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.CTRL_RESET)
-  |vpiName:aes_pkg::ctrl_reg_t
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (manual_operation), line:3:15, endln:3:31
-    |vpiParent:
-    \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiName:manual_operation
-    |vpiTypespec:
-    \_ref_typespec: (work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation)
-      |vpiParent:
-      \_typespec_member: (manual_operation), line:3:15, endln:3:31
-      |vpiFullName:work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:14
-    |vpiRefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:14
-\_ref_typespec: (work@aes_core.CTRL_RESET)
-  |vpiParent:
-  \_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
-  |vpiFullName:work@aes_core.CTRL_RESET
-  |vpiActual:
-  \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-\_parameter: (work@aes_core.CTRL_RESET), line:6:22, endln:6:32
-  |vpiParent:
-  \_param_assign: , line:6:22, endln:8:2
-  |vpiTypespec:
-  \_ref_typespec: (work@aes_core.CTRL_RESET)
-  |vpiName:CTRL_RESET
-  |vpiFullName:work@aes_core.CTRL_RESET
-  |vpiImported:aes_pkg
-\_logic_typespec: , line:3:3, endln:3:14
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation)
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiRange:
-  \_range: , line:3:8, endln:3:14
-    |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:14
-    |vpiLeftRange:
-    \_constant: , line:3:9, endln:3:11
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.CTRL_RESET)
-  |vpiName:aes_pkg::ctrl_reg_t
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (manual_operation), line:3:15, endln:3:31
-    |vpiParent:
-    \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
-    |vpiName:manual_operation
-    |vpiTypespec:
-    \_ref_typespec: (work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation)
-      |vpiParent:
-      \_typespec_member: (manual_operation), line:3:15, endln:3:31
-      |vpiFullName:work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:14
-    |vpiRefFile:${SURELOG_DIR}/tests/PAssignType/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:14
-\_logic_typespec: , line:3:3, endln:3:14
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.CTRL_RESET.aes_pkg::ctrl_reg_t.manual_operation)
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiRange:
-  \_range: , line:3:8, endln:3:14
-    |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:14
-    |vpiLeftRange:
-    \_constant: , line:3:9, endln:3:11
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:8, endln:3:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:17:13, endln:17:25
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.shadow_reg.RESVAL)
-  |vpiRange:
-  \_range: , line:17:19, endln:17:25
-    |vpiParent:
-    \_logic_typespec: , line:17:13, endln:17:25
-    |vpiLeftRange:
-    \_constant: , line:17:20, endln:17:22
-      |vpiParent:
-      \_range: , line:17:19, endln:17:25
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:17:23, endln:17:24
-      |vpiParent:
-      \_range: , line:17:19, endln:17:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:12:13, endln:12:25
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.shadow_reg.commit_reg.RESVAL)
-  |vpiRange:
-  \_range: , line:12:19, endln:12:25
-    |vpiParent:
-    \_logic_typespec: , line:12:13, endln:12:25
-    |vpiLeftRange:
-    \_constant: , line:12:20, endln:12:22
-      |vpiParent:
-      \_range: , line:12:19, endln:12:25
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:12:23, endln:12:24
-      |vpiParent:
-      \_range: , line:12:19, endln:12:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PAssignType/dut.sv | ${SURELOG_DIR}/build/regression/PAssignType/roundtrip/dut_000.sv | 8 | 26 |
+============================== End RoundTrip Results ==============================

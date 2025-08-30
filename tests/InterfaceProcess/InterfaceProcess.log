@@ -97,62 +97,34 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfaceProcess/dut.sv:1:1: Compile interface "work@sw_test_status_if".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfaceProcess/dut.sv:13:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/InterfaceProcess/dut.sv:13:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 begin                                                  1
-bit_typespec                                           2
-bit_var                                                1
-constant                                               3
-cont_assign                                            2
+bit_typespec                                           1
+constant                                               2
+cont_assign                                            1
 design                                                 1
 initial                                                1
-interface_inst                                         3
+interface_inst                                         1
 logic_net                                              2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
+logic_typespec                                         1
+module_inst                                            1
 ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-begin                                                  1
-bit_typespec                                           2
-bit_var                                                1
-constant                                               3
-cont_assign                                            2
-design                                                 1
-initial                                                1
-interface_inst                                         3
-logic_net                                              2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           4
+ref_obj                                                2
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceProcess/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfaceProcess/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceProcess/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@sw_test_status_if
   |vpiDefName:work@sw_test_status_if
   |vpiNet:
@@ -200,8 +172,6 @@ design: (work@top)
       \_cont_assign: , line:3:10, endln:3:27
       |vpiName:data_valid
       |vpiFullName:work@sw_test_status_if.data_valid
-      |vpiActual:
-      \_logic_var: (work@top.u_sw.data_valid), line:2:9, endln:2:19
   |vpiProcess:
   \_initial: , line:6:3, endln:8:6
     |vpiParent:
@@ -229,12 +199,10 @@ design: (work@top)
           \_assignment: , line:7:6, endln:7:25
           |vpiName:sw_test_done
           |vpiFullName:work@sw_test_status_if.sw_test_done
-          |vpiActual:
-          \_bit_var: (work@top.u_sw.sw_test_done), line:5:7, endln:5:19
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
@@ -245,76 +213,7 @@ design: (work@top)
     |vpiDefName:work@sw_test_status_if
     |vpiActual:
     \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiInterface:
-  \_interface_inst: work@sw_test_status_if (work@top.u_sw), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:14:4, endln:14:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
-    |vpiName:u_sw
-    |vpiFullName:work@top.u_sw
-    |vpiVariables:
-    \_logic_var: (work@top.u_sw.data_valid), line:2:9, endln:2:19
-      |vpiParent:
-      \_interface_inst: work@sw_test_status_if (work@top.u_sw), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:14:4, endln:14:29
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_sw.data_valid)
-        |vpiParent:
-        \_logic_var: (work@top.u_sw.data_valid), line:2:9, endln:2:19
-        |vpiFullName:work@top.u_sw.data_valid
-        |vpiActual:
-        \_logic_typespec: , line:2:3, endln:2:8
-      |vpiName:data_valid
-      |vpiFullName:work@top.u_sw.data_valid
-      |vpiVisibility:1
-    |vpiVariables:
-    \_bit_var: (work@top.u_sw.sw_test_done), line:5:7, endln:5:19
-      |vpiParent:
-      \_interface_inst: work@sw_test_status_if (work@top.u_sw), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:14:4, endln:14:29
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_sw.sw_test_done)
-        |vpiParent:
-        \_bit_var: (work@top.u_sw.sw_test_done), line:5:7, endln:5:19
-        |vpiFullName:work@top.u_sw.sw_test_done
-        |vpiActual:
-        \_bit_typespec: , line:5:3, endln:5:6
-      |vpiName:sw_test_done
-      |vpiFullName:work@top.u_sw.sw_test_done
-      |vpiVisibility:1
-    |vpiDefName:work@sw_test_status_if
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
-    |vpiContAssign:
-    \_cont_assign: , line:3:10, endln:3:27
-      |vpiParent:
-      \_interface_inst: work@sw_test_status_if (work@top.u_sw), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:14:4, endln:14:29
-      |vpiRhs:
-      \_constant: , line:3:23, endln:3:27
-      |vpiLhs:
-      \_ref_obj: (work@top.u_sw.data_valid), line:3:10, endln:3:20
-        |vpiParent:
-        \_cont_assign: , line:3:10, endln:3:27
-        |vpiName:data_valid
-        |vpiFullName:work@top.u_sw.data_valid
-        |vpiActual:
-        \_logic_var: (work@top.u_sw.data_valid), line:2:9, endln:2:19
-    |vpiProcess:
-    \_initial: , line:6:3, endln:8:6
 \_weaklyReferenced:
-\_logic_typespec: , line:2:3, endln:2:8
-  |vpiParent:
-  \_logic_var: (work@top.u_sw.data_valid), line:2:9, endln:2:19
-\_bit_typespec: , line:5:3, endln:5:6
-  |vpiParent:
-  \_bit_var: (work@top.u_sw.sw_test_done), line:5:7, endln:5:19
 \_logic_typespec: , line:2:3, endln:2:8
 \_bit_typespec: , line:5:3, endln:5:6
 ===================
@@ -322,7 +221,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/InterfaceProcess/dut.sv | ${SURELOG_DIR}/build/regression/InterfaceProcess/roundtrip/dut_000.sv | 1 | 15 |

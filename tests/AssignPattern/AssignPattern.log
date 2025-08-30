@@ -67,12 +67,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignPattern/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPattern/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/AssignPattern/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               3
@@ -80,22 +74,9 @@ cont_assign                                            2
 design                                                 1
 integer_typespec                                       1
 logic_net                                              2
-module_inst                                            3
+module_inst                                            1
 operation                                              3
 ref_obj                                                2
-ref_typespec                                           1
-tagged_pattern                                         1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               3
-cont_assign                                            4
-design                                                 1
-integer_typespec                                       1
-logic_net                                              2
-module_inst                                            3
-operation                                              6
-ref_obj                                                4
 ref_typespec                                           1
 tagged_pattern                                         1
 === UHDM Object Stats End ===
@@ -104,26 +85,25 @@ tagged_pattern                                         1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.oo), line:2:11, endln:2:13
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
+    \_cont_assign: , line:2:11, endln:2:22
     |vpiName:oo
     |vpiFullName:work@top.oo
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@top.uu), line:3:11, endln:3:13
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
+    \_cont_assign: , line:3:11, endln:3:23
     |vpiName:uu
     |vpiFullName:work@top.uu
     |vpiNetType:1
@@ -195,59 +175,6 @@ design: (work@top)
       |vpiFullName:work@top.uu
       |vpiActual:
       \_logic_net: (work@top.uu), line:3:11, endln:3:13
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:2:11, endln:2:22
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
-    |vpiRhs:
-    \_operation: , line:2:16, endln:2:22
-      |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:22
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:2:20, endln:2:21
-    |vpiLhs:
-    \_ref_obj: (work@top.oo), line:2:11, endln:2:13
-      |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:22
-      |vpiName:oo
-      |vpiFullName:work@top.oo
-      |vpiActual:
-      \_logic_net: (work@top.oo), line:2:11, endln:2:13
-  |vpiContAssign:
-  \_cont_assign: , line:3:11, endln:3:23
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
-    |vpiRhs:
-    \_operation: , line:3:16, endln:3:23
-      |vpiParent:
-      \_cont_assign: , line:3:11, endln:3:23
-      |vpiOpType:76
-      |vpiOperand:
-      \_constant: , line:3:18, endln:3:19
-      |vpiOperand:
-      \_operation: , line:3:20, endln:3:21
-        |vpiParent:
-        \_operation: , line:3:16, endln:3:23
-        |vpiOpType:33
-        |vpiOperand:
-        \_constant: , line:3:20, endln:3:21
-    |vpiLhs:
-    \_ref_obj: (work@top.uu), line:3:11, endln:3:13
-      |vpiParent:
-      \_cont_assign: , line:3:11, endln:3:23
-      |vpiName:uu
-      |vpiFullName:work@top.uu
-      |vpiActual:
-      \_logic_net: (work@top.uu), line:3:11, endln:3:13
 \_weaklyReferenced:
 \_integer_typespec: , line:2:18, endln:2:19
   |INT:8
@@ -256,7 +183,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/AssignPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignPattern/roundtrip/dut_000.sv | 1 | 4 |

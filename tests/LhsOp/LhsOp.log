@@ -130,12 +130,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LhsOp/dut.sv:2:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/LhsOp/dut.sv:2:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/LhsOp/dut.sv:2:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               6
@@ -144,38 +138,16 @@ design                                                 1
 enum_const                                             2
 enum_typespec                                          1
 hier_path                                              1
-logic_net                                              5
-logic_typespec                                         7
-module_inst                                            4
-operation                                              2
+logic_net                                              3
+logic_typespec                                         3
+module_inst                                            2
+operation                                              1
 packed_array_typespec                                  1
-port                                                   4
+port                                                   2
 range                                                  1
-ref_obj                                               10
-ref_typespec                                          11
+ref_obj                                                6
+ref_typespec                                           6
 struct_typespec                                        1
-struct_var                                             1
-typespec_member                                        1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               6
-cont_assign                                            2
-design                                                 1
-enum_const                                             2
-enum_typespec                                          1
-hier_path                                              2
-logic_net                                              5
-logic_typespec                                         7
-module_inst                                            4
-operation                                              3
-packed_array_typespec                                  1
-port                                                   6
-range                                                  1
-ref_obj                                               16
-ref_typespec                                          13
-struct_typespec                                        1
-struct_var                                             1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
@@ -183,13 +155,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_enum_typespec: (cstate_e), line:3:3, endln:3:46
@@ -357,172 +328,6 @@ design: (work@top)
         |vpiFullName:work@top.b
         |vpiActual:
         \_logic_net: (work@top.b), line:2:41, endln:2:42
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_struct_var: (work@top.hw2reg_wrap), line:9:18, endln:9:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.hw2reg_wrap)
-      |vpiParent:
-      \_struct_var: (work@top.hw2reg_wrap), line:9:18, endln:9:29
-      |vpiFullName:work@top.hw2reg_wrap
-      |vpiActual:
-      \_struct_typespec: (hw2reg_wrap_t), line:5:12, endln:7:5
-    |vpiName:hw2reg_wrap
-    |vpiFullName:work@top.hw2reg_wrap
-    |vpiVisibility:1
-    |vpiExpr:
-    \_operation: , line:9:32, endln:9:40
-      |vpiParent:
-      \_struct_var: (work@top.hw2reg_wrap), line:9:18, endln:9:29
-      |vpiOpType:33
-      |vpiOperand:
-      \_ref_obj: (work@top.hw2reg_wrap.c), line:9:34, endln:9:35
-        |vpiParent:
-        \_operation: , line:9:32, endln:9:40
-        |vpiName:c
-        |vpiFullName:work@top.hw2reg_wrap.c
-        |vpiActual:
-        \_enum_const: (c), line:3:23, endln:3:28
-      |vpiOperand:
-      \_ref_obj: (work@top.hw2reg_wrap.d), line:9:37, endln:9:38
-        |vpiParent:
-        \_operation: , line:9:32, endln:9:40
-        |vpiName:d
-        |vpiFullName:work@top.hw2reg_wrap.d
-        |vpiActual:
-        \_enum_const: (d), line:3:30, endln:3:35
-  |vpiTypedef:
-  \_enum_typespec: (cstate_e), line:3:3, endln:3:46
-  |vpiTypedef:
-  \_struct_typespec: (hw2reg_wrap_t), line:5:12, endln:7:5
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.a), line:2:25, endln:2:26
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_logic_net: (work@top.a), line:2:25, endln:2:26
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_logic_typespec: , line:2:19, endln:2:24
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.b), line:2:41, endln:2:42
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.b)
-      |vpiParent:
-      \_logic_net: (work@top.b), line:2:41, endln:2:42
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_logic_typespec: , line:2:35, endln:2:40
-    |vpiName:b
-    |vpiFullName:work@top.b
-    |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (a), line:2:25, endln:2:26
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiName:a
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.a), line:2:25, endln:2:26
-      |vpiParent:
-      \_port: (a), line:2:25, endln:2:26
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_logic_net: (work@top.a), line:2:25, endln:2:26
-    |vpiTypedef:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_port: (a), line:2:25, endln:2:26
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_logic_typespec: , line:2:19, endln:2:24
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-  |vpiPort:
-  \_port: (b), line:2:41, endln:2:42
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiName:b
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.b), line:2:41, endln:2:42
-      |vpiParent:
-      \_port: (b), line:2:41, endln:2:42
-      |vpiName:b
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_logic_net: (work@top.b), line:2:41, endln:2:42
-    |vpiTypedef:
-    \_ref_typespec: (work@top.b)
-      |vpiParent:
-      \_port: (b), line:2:41, endln:2:42
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_logic_typespec: , line:2:35, endln:2:40
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-  |vpiContAssign:
-  \_cont_assign: , line:11:11, endln:12:46
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
-    |vpiRhs:
-    \_hier_path: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-      |vpiParent:
-      \_cont_assign: , line:11:11, endln:12:46
-      |vpiActual:
-      \_ref_obj: (hw2reg_wrap), line:12:19, endln:12:30
-        |vpiParent:
-        \_hier_path: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-        |vpiName:hw2reg_wrap
-        |vpiActual:
-        \_struct_var: (work@top.hw2reg_wrap), line:9:18, endln:9:29
-      |vpiActual:
-      \_ref_obj: (work@top.class_esc_state), line:12:31, endln:12:46
-        |vpiParent:
-        \_hier_path: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
-        |vpiName:class_esc_state
-        |vpiFullName:work@top.class_esc_state
-        |vpiActual:
-        \_typespec_member: (class_esc_state), line:6:22, endln:6:37
-      |vpiName:hw2reg_wrap.class_esc_state
-    |vpiLhs:
-    \_operation: , line:11:13, endln:11:14
-      |vpiParent:
-      \_cont_assign: , line:11:11, endln:12:46
-      |vpiOpType:33
-      |vpiOperand:
-      \_ref_obj: (work@top.a), line:11:13, endln:11:14
-        |vpiParent:
-        \_operation: , line:11:13, endln:11:14
-        |vpiName:a
-        |vpiFullName:work@top.a
-        |vpiActual:
-        \_logic_net: (work@top.a), line:2:25, endln:2:26
-      |vpiOperand:
-      \_ref_obj: (work@top.b), line:12:13, endln:12:14
-        |vpiParent:
-        \_operation: , line:11:13, endln:11:14
-        |vpiName:b
-        |vpiFullName:work@top.b
-        |vpiActual:
-        \_logic_net: (work@top.b), line:2:41, endln:2:42
 \_weaklyReferenced:
 \_logic_typespec: , line:3:16, endln:3:21
 \_packed_array_typespec: , line:6:7, endln:6:21
@@ -557,20 +362,12 @@ design: (work@top)
     \_enum_typespec: (cstate_e), line:3:3, endln:3:46
 \_logic_typespec: , line:2:19, endln:2:24
 \_logic_typespec: , line:2:35, endln:2:40
-\_logic_typespec: , line:2:19, endln:2:24
-  |vpiParent:
-  \_logic_net: (work@top.a), line:2:25, endln:2:26
-\_logic_typespec: , line:2:35, endln:2:40
-  |vpiParent:
-  \_logic_net: (work@top.b), line:2:41, endln:2:42
-\_logic_typespec: , line:2:19, endln:2:24
-\_logic_typespec: , line:2:35, endln:2:40
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/LhsOp/dut.sv | ${SURELOG_DIR}/build/regression/LhsOp/roundtrip/dut_000.sv | 6 | 14 |

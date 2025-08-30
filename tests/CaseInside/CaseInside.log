@@ -168,7 +168,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: No timescale set for "dm".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: No timescale set for "dm_csrs".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: Compile module "work@dm_csrs".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -427,12 +426,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: Top level module "work@dm_csrs".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
@@ -443,10 +436,10 @@ case_stmt                                              1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              26
+constant                                              18
 design                                                 1
-enum_const                                            11
-enum_typespec                                          3
+enum_const                                             8
+enum_typespec                                          2
 enum_var                                               1
 function                                               9
 hier_path                                              1
@@ -454,121 +447,31 @@ int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         1
 logic_var                                              1
-module_inst                                            4
+module_inst                                            2
 named_begin                                            1
 operation                                              5
-package                                                4
-range                                                  2
+package                                                2
+range                                                  1
 ref_obj                                                5
-ref_typespec                                          15
+ref_typespec                                          14
 task                                                   9
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-assignment                                             4
-begin                                                  2
-case_item                                              6
-case_stmt                                              2
-class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              26
-design                                                 1
-enum_const                                            16
-enum_typespec                                          4
-enum_var                                               1
-function                                              18
-hier_path                                              2
-int_typespec                                           9
-int_var                                                4
-io_decl                                               22
-logic_net                                              2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            4
-named_begin                                            2
-operation                                             10
-package                                                4
-range                                                  2
-ref_obj                                               10
-ref_typespec                                          20
-task                                                  18
-=== UHDM Object Stats End ===
-[ERR:UH0725] ${SURELOG_DIR}/tests/CaseInside/top.sv:15:27: Unresolved hierarchical reference "dmi_req_i.addr".
-[ERR:UH0718] ${SURELOG_DIR}/tests/CaseInside/top.sv:19:11: Illegal lhs of type wire "resp_queue_data".
-[ERR:UH0718] ${SURELOG_DIR}/tests/CaseInside/top.sv:23:27: Illegal lhs of type wire "resp_queue_data".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dm_csrs)
-|vpiElaborated:1
-|vpiName:work@dm_csrs
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
-|uhdmallPackages:
-\_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
-  |vpiParent:
-  \_design: (work@dm_csrs)
-  |vpiName:dm
-  |vpiFullName:dm::
-  |vpiTypedef:
-  \_enum_typespec: (dm::dm_csr_e), line:4:3, endln:8:14
-    |vpiParent:
-    \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
-    |vpiName:dm::dm_csr_e
-    |vpiInstance:
-    \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
-    |vpiBaseTypespec:
-    \_ref_typespec: (dm::dm::dm_csr_e)
-      |vpiParent:
-      \_enum_typespec: (dm::dm_csr_e), line:4:3, endln:8:14
-      |vpiFullName:dm::dm::dm_csr_e
-      |vpiActual:
-      \_logic_typespec: , line:4:16, endln:4:27
-    |vpiEnumConst:
-    \_enum_const: (DMControl), line:5:5, endln:5:25
-      |vpiParent:
-      \_enum_typespec: (dm::dm_csr_e), line:4:3, endln:8:14
-      |vpiName:DMControl
-      |HEX:10
-      |vpiDecompile:8'h10
-      |vpiSize:8
-    |vpiEnumConst:
-    \_enum_const: (Data0), line:6:5, endln:6:25
-      |vpiParent:
-      \_enum_typespec: (dm::dm_csr_e), line:4:3, endln:8:14
-      |vpiName:Data0
-      |HEX:11
-      |vpiDecompile:8'h11
-      |vpiSize:8
-    |vpiEnumConst:
-    \_enum_const: (Data1), line:7:5, endln:7:25
-      |vpiParent:
-      \_enum_typespec: (dm::dm_csr_e), line:4:3, endln:8:14
-      |vpiName:Data1
-      |HEX:12
-      |vpiDecompile:8'h12
-      |vpiSize:8
-  |vpiDefName:dm
-  |vpiEndLabel:dm
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (work@dm_csrs)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (builtin::any_sverilog_class)
     |vpiParent:
@@ -599,10 +502,10 @@ design: (work@dm_csrs)
     \_package: builtin (builtin::)
     |vpiName:system
     |vpiFullName:builtin::system
-|uhdmtopPackages:
+|uhdmallPackages:
 \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiName:dm
   |vpiFullName:dm::
   |vpiTypedef:
@@ -644,12 +547,11 @@ design: (work@dm_csrs)
       |vpiDecompile:8'h12
       |vpiSize:8
   |vpiDefName:dm
-  |vpiTop:1
   |vpiEndLabel:dm
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiName:work@mailbox
   |vpiMethod:
   \_function: (work@mailbox::new), line:3:5, endln:4:16
@@ -828,7 +730,7 @@ design: (work@dm_csrs)
 |uhdmallClasses:
 \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiName:work@process
   |vpiTypedef:
   \_enum_typespec: (state), line:32:5, endln:32:74
@@ -950,7 +852,7 @@ design: (work@dm_csrs)
 |uhdmallClasses:
 \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:55:3, endln:69:11
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiName:work@semaphore
   |vpiMethod:
   \_function: (work@semaphore::new), line:57:5, endln:58:16
@@ -1087,22 +989,22 @@ design: (work@dm_csrs)
 |uhdmallModules:
 \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
   |vpiParent:
-  \_design: (work@dm_csrs)
+  \_design: (unnamed)
   |vpiFullName:work@dm_csrs
   |vpiDefName:work@dm_csrs
   |vpiNet:
-  \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+  \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
     |vpiParent:
-    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
+    \_assignment: , line:19:11, endln:19:33
     |vpiName:resp_queue_data
-    |vpiFullName:work@dm_csrs.resp_queue_data
+    |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@dm_csrs.dmcontrol_q), line:23:45, endln:23:56
+  \_logic_net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
     |vpiParent:
-    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
+    \_assignment: , line:23:27, endln:23:56
     |vpiName:dmcontrol_q
-    |vpiFullName:work@dm_csrs.dmcontrol_q
+    |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:13:3, endln:28:6
@@ -1197,7 +1099,7 @@ design: (work@dm_csrs)
                 |vpiName:resp_queue_data
                 |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
                 |vpiActual:
-                \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+                \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
         |vpiCaseItem:
         \_case_item: , line:23:9, endln:23:57
           |vpiParent:
@@ -1231,7 +1133,7 @@ design: (work@dm_csrs)
               |vpiName:dmcontrol_q
               |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
               |vpiActual:
-              \_logic_net: (work@dm_csrs.dmcontrol_q), line:23:45, endln:23:56
+              \_logic_net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
             |vpiLhs:
             \_ref_obj: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
               |vpiParent:
@@ -1239,142 +1141,13 @@ design: (work@dm_csrs)
               |vpiName:resp_queue_data
               |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
               |vpiActual:
-              \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+              \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
         |vpiCaseItem:
         \_case_item: , line:25:9, endln:25:18
           |vpiParent:
           \_case_stmt: , line:15:7, endln:26:14
     |vpiAlwaysType:2
   |vpiEndLabel:dm_csrs
-|uhdmtopModules:
-\_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
-  |vpiParent:
-  \_design: (work@dm_csrs)
-  |vpiName:work@dm_csrs
-  |vpiDefName:work@dm_csrs
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_always: , line:13:3, endln:28:6
-    |vpiParent:
-    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
-    |vpiStmt:
-    \_named_begin: (work@dm_csrs.csr_read_write), line:13:23, endln:13:37
-      |vpiParent:
-      \_always: , line:13:3, endln:28:6
-      |vpiName:csr_read_write
-      |vpiFullName:work@dm_csrs.csr_read_write
-      |vpiStmt:
-      \_case_stmt: , line:15:7, endln:26:14
-        |vpiParent:
-        \_named_begin: (work@dm_csrs.csr_read_write), line:13:23, endln:13:37
-        |vpiCaseType:1
-        |vpiQualifier:1
-        |vpiCondition:
-        \_operation: , line:15:20, endln:15:42
-          |vpiParent:
-          \_case_stmt: , line:15:7, endln:26:14
-          |vpiOpType:33
-          |vpiOperand:
-          \_constant: , line:15:21, endln:15:25
-          |vpiOperand:
-          \_hier_path: (dmi_req_i.addr), line:15:27, endln:15:41
-            |vpiParent:
-            \_operation: , line:15:20, endln:15:42
-            |vpiActual:
-            \_ref_obj: (dmi_req_i), line:15:27, endln:15:36
-              |vpiParent:
-              \_hier_path: (dmi_req_i.addr), line:15:27, endln:15:41
-              |vpiName:dmi_req_i
-            |vpiActual:
-            \_ref_obj: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
-              |vpiParent:
-              \_hier_path: (dmi_req_i.addr), line:15:27, endln:15:41
-              |vpiName:addr
-              |vpiFullName:work@dm_csrs.csr_read_write.addr
-            |vpiName:dmi_req_i.addr
-        |vpiCaseItem:
-        \_case_item: , line:17:9, endln:21:12
-          |vpiParent:
-          \_case_stmt: , line:15:7, endln:26:14
-          |vpiExpr:
-          \_operation: , line:17:9, endln:17:34
-            |vpiParent:
-            \_case_item: , line:17:9, endln:21:12
-            |vpiOpType:95
-            |vpiOperand:
-            \_operation: , line:17:9, endln:17:34
-              |vpiParent:
-              \_operation: , line:17:9, endln:17:34
-              |vpiOpType:37
-              |vpiOperand:
-              \_constant: , line:17:11, endln:17:20
-              |vpiOperand:
-              \_constant: , line:17:23, endln:17:32
-          |vpiStmt:
-          \_begin: (work@dm_csrs.csr_read_write), line:17:36, endln:21:12
-            |vpiParent:
-            \_case_item: , line:17:9, endln:21:12
-            |vpiFullName:work@dm_csrs.csr_read_write
-            |vpiStmt:
-            \_assignment: , line:19:11, endln:19:33
-              |vpiParent:
-              \_begin: (work@dm_csrs.csr_read_write), line:17:36, endln:21:12
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_constant: , line:19:29, endln:19:33
-              |vpiLhs:
-              \_ref_obj: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
-                |vpiParent:
-                \_assignment: , line:19:11, endln:19:33
-                |vpiName:resp_queue_data
-                |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
-                |vpiActual:
-                \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
-        |vpiCaseItem:
-        \_case_item: , line:23:9, endln:23:57
-          |vpiParent:
-          \_case_stmt: , line:15:7, endln:26:14
-          |vpiExpr:
-          \_operation: , line:23:9, endln:23:22
-            |vpiParent:
-            \_case_item: , line:23:9, endln:23:57
-            |vpiOpType:95
-            |vpiOperand:
-            \_operation: , line:23:9, endln:23:22
-              |vpiParent:
-              \_operation: , line:23:9, endln:23:22
-              |vpiOpType:37
-              |vpiOperand:
-              \_constant: , line:23:9, endln:23:22
-          |vpiStmt:
-          \_assignment: , line:23:27, endln:23:56
-            |vpiParent:
-            \_case_item: , line:23:9, endln:23:57
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_ref_obj: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
-              |vpiParent:
-              \_assignment: , line:23:27, endln:23:56
-              |vpiName:dmcontrol_q
-              |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
-              |vpiActual:
-              \_logic_net: (work@dm_csrs.dmcontrol_q), line:23:45, endln:23:56
-            |vpiLhs:
-            \_ref_obj: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
-              |vpiParent:
-              \_assignment: , line:23:27, endln:23:56
-              |vpiName:resp_queue_data
-              |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
-              |vpiActual:
-              \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
-        |vpiCaseItem:
-        \_case_item: , line:25:9, endln:25:18
-          |vpiParent:
-          \_case_stmt: , line:15:7, endln:26:14
-    |vpiAlwaysType:2
 \_weaklyReferenced:
 \_logic_typespec: , line:4:16, endln:4:27
   |vpiInstance:
@@ -1399,205 +1172,20 @@ design: (work@dm_csrs)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:4:16, endln:4:27
-  |vpiInstance:
-  \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
-  |vpiRange:
-  \_range: , line:4:22, endln:4:27
-    |vpiParent:
-    \_logic_typespec: , line:4:16, endln:4:27
-    |vpiLeftRange:
-    \_constant: , line:4:23, endln:4:24
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:25, endln:4:26
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_function: (work@mailbox::new), line:3:5, endln:4:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
-  |vpiName:new
-  |vpiFullName:work@mailbox::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-  |vpiIODecl:
-  \_io_decl: (bound), line:3:23, endln:3:28
-    |vpiParent:
-    \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiDirection:1
-    |vpiName:bound
-    |vpiExpr:
-    \_constant: , line:3:31, endln:3:32
-    |vpiTypedef:
-    \_ref_typespec: (work@mailbox::new::bound)
-      |vpiParent:
-      \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiFullName:work@mailbox::new::bound
-      |vpiActual:
-      \_int_typespec: , line:3:19, endln:3:22
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
 \_int_typespec: , line:3:19, endln:3:22
   |vpiSigned:1
-\_function: (work@mailbox::num), line:6:5, endln:7:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
-  |vpiName:num
-  |vpiFullName:work@mailbox::num
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::num), line:6:14, endln:6:17
 \_int_typespec: , line:6:14, endln:6:17
   |vpiSigned:1
-\_function: (work@mailbox::try_put), line:12:5, endln:13:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_put
-  |vpiFullName:work@mailbox::try_put
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_logic_var: (work@mailbox::try_put)
-  |vpiIODecl:
-  \_io_decl: (message), line:12:23, endln:12:30
-    |vpiParent:
-    \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiDirection:1
-    |vpiName:message
-\_function: (work@mailbox::try_get), line:18:5, endln:19:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_get
-  |vpiFullName:work@mailbox::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-  |vpiIODecl:
-  \_io_decl: (message), line:18:31, endln:18:38
-    |vpiParent:
-    \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:18:14, endln:18:17
   |vpiSigned:1
-\_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_peek
-  |vpiFullName:work@mailbox::try_peek
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-  |vpiIODecl:
-  \_io_decl: (message), line:24:31, endln:24:38
-    |vpiParent:
-    \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:24:14, endln:24:17
   |vpiSigned:1
-\_enum_typespec: (state), line:32:5, endln:32:74
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
-  |vpiName:state
-  |vpiEnumConst:
-  \_enum_const: (FINISHED), line:32:20, endln:32:28
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:FINISHED
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (RUNNING), line:32:30, endln:32:37
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:RUNNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (WAITING), line:32:39, endln:32:46
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:WAITING
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:SUSPENDED
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (KILLED), line:32:59, endln:32:65
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:KILLED
-    |INT:4
-    |vpiDecompile:4
-    |vpiSize:64
-\_function: (work@process::self), line:34:5, endln:34:11
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
-  |vpiName:self
-  |vpiFullName:work@process::self
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_class_var: (work@process::self), line:34:21, endln:34:28
 \_class_typespec: , line:34:21, endln:34:28
   |vpiClassDefn:
   \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
-\_function: (work@process::status), line:37:5, endln:38:16
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
-  |vpiName:status
-  |vpiFullName:work@process::status
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_enum_var: (work@process::status), line:37:14, endln:37:19
-\_function: (work@semaphore::new), line:57:5, endln:58:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:55:3, endln:69:11
-  |vpiName:new
-  |vpiFullName:work@semaphore::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:57:22, endln:57:30
-    |vpiParent:
-    \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:57:33, endln:57:34
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::new::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiFullName:work@semaphore::new::keyCount
-      |vpiActual:
-      \_int_typespec: , line:57:18, endln:57:21
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:55:3, endln:69:11
@@ -1607,30 +1195,6 @@ design: (work@dm_csrs)
   |vpiSigned:1
 \_int_typespec: , line:63:14, endln:63:17
   |vpiSigned:1
-\_function: (work@semaphore::try_get), line:66:5, endln:67:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:55:3, endln:69:11
-  |vpiName:try_get
-  |vpiFullName:work@semaphore::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:66:30, endln:66:38
-    |vpiParent:
-    \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:66:41, endln:66:42
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::try_get::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiFullName:work@semaphore::try_get::keyCount
-      |vpiActual:
-      \_int_typespec: , line:66:26, endln:66:29
 \_int_typespec: , line:66:14, endln:66:17
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
@@ -1638,14 +1202,9 @@ design: (work@dm_csrs)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
-
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/CaseInside/top.sv:19:11: Illegal wire LHS, resp_queue_data
-[LINT]: ${SURELOG_DIR}/tests/CaseInside/top.sv:23:27: Illegal wire LHS, resp_queue_data
-============================== End Linting Results ==============================
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/CaseInside/builtin.sv | ${SURELOG_DIR}/build/regression/CaseInside/roundtrip/builtin_000.sv | 0 | 0 |

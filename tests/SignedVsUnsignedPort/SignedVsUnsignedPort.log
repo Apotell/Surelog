@@ -96,56 +96,31 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:6:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:2:1: Compile module "work@rvdffe".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:6:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              18
+constant                                               6
 design                                                 1
-logic_net                                              3
-logic_typespec                                         5
-logic_var                                              1
-module_inst                                            6
-part_select                                            2
-port                                                   3
-range                                                  7
+logic_net                                              2
+logic_typespec                                         2
+module_inst                                            2
+part_select                                            1
+port                                                   2
+range                                                  2
 ref_module                                             1
-ref_obj                                                2
-ref_typespec                                           5
+ref_obj                                                1
+ref_typespec                                           2
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              18
-design                                                 1
-logic_net                                              3
-logic_typespec                                         5
-logic_var                                              1
-module_inst                                            6
-part_select                                            3
-port                                                   4
-range                                                  7
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           6
-=== UHDM Object Stats End ===
-[WRN:UH0732] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:10:35: Critical: Signed vs Unsigned port connection "din".
-[WRN:UH0733] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:10:35: Critical: Forcing signal to unsigned type due to unsigned port binding "rs2_ext_in".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedVsUnsignedPort/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SignedVsUnsignedPort/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SignedVsUnsignedPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -191,7 +166,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@rvdffe (work@rvdffe), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:2:1, endln:4:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@rvdffe
   |vpiDefName:work@rvdffe
   |vpiNet:
@@ -222,166 +197,7 @@ design: (work@dut)
       |vpiFullName:work@rvdffe.din
       |vpiActual:
       \_logic_typespec: , line:3:12, endln:3:24
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_logic_var: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.rs2_ext_in)
-      |vpiParent:
-      \_logic_var: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-      |vpiFullName:work@dut.rs2_ext_in
-      |vpiActual:
-      \_logic_typespec: , line:8:4, endln:8:23
-    |vpiName:rs2_ext_in
-    |vpiFullName:work@dut.rs2_ext_in
-    |vpiVisibility:1
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@rvdffe (work@dut.i_b_x_ff), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:10:4, endln:10:55
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
-    |vpiName:i_b_x_ff
-    |vpiFullName:work@dut.i_b_x_ff
-    |vpiDefName:work@rvdffe
-    |vpiDefFile:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv
-    |vpiDefLineNo:2
-    |vpiNet:
-    \_logic_net: (work@dut.i_b_x_ff.din), line:3:25, endln:3:28
-      |vpiParent:
-      \_module_inst: work@rvdffe (work@dut.i_b_x_ff), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:10:4, endln:10:55
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.i_b_x_ff.din)
-        |vpiParent:
-        \_logic_net: (work@dut.i_b_x_ff.din), line:3:25, endln:3:28
-        |vpiFullName:work@dut.i_b_x_ff.din
-        |vpiActual:
-        \_logic_typespec: , line:3:12, endln:3:24
-      |vpiName:din
-      |vpiFullName:work@dut.i_b_x_ff.din
-      |vpiNetType:36
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
-    |vpiPort:
-    \_port: (din), line:3:25, endln:3:28
-      |vpiParent:
-      \_module_inst: work@rvdffe (work@dut.i_b_x_ff), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:10:4, endln:10:55
-      |vpiName:din
-      |vpiDirection:1
-      |vpiHighConn:
-      \_part_select: rs2_ext_in (work@dut.i_b_x_ff.din.rs2_ext_in), line:10:35, endln:10:51
-        |vpiParent:
-        \_port: (din), line:3:25, endln:3:28
-        |vpiName:rs2_ext_in
-        |vpiFullName:work@dut.i_b_x_ff.din.rs2_ext_in
-        |vpiDefName:rs2_ext_in
-        |vpiActual:
-        \_logic_var: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-        |vpiConstantSelect:1
-        |vpiLeftRange:
-        \_constant: , line:10:46, endln:10:48
-          |vpiDecompile:32
-          |vpiSize:64
-          |UINT:32
-          |vpiConstType:9
-        |vpiRightRange:
-        \_constant: , line:10:49, endln:10:50
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiLowConn:
-      \_ref_obj: (work@dut.i_b_x_ff.din), line:10:31, endln:10:34
-        |vpiParent:
-        \_port: (din), line:3:25, endln:3:28
-        |vpiName:din
-        |vpiFullName:work@dut.i_b_x_ff.din
-        |vpiActual:
-        \_logic_net: (work@dut.i_b_x_ff.din), line:3:25, endln:3:28
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.i_b_x_ff.din)
-        |vpiParent:
-        \_port: (din), line:3:25, endln:3:28
-        |vpiFullName:work@dut.i_b_x_ff.din
-        |vpiActual:
-        \_logic_typespec: , line:3:12, endln:3:24
-      |vpiInstance:
-      \_module_inst: work@rvdffe (work@dut.i_b_x_ff), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:10:4, endln:10:55
 \_weaklyReferenced:
-\_logic_typespec: , line:8:4, endln:8:23
-  |vpiParent:
-  \_logic_var: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-  |vpiRange:
-  \_range: , line:8:17, endln:8:23
-    |vpiParent:
-    \_logic_typespec: , line:8:4, endln:8:23
-    |vpiLeftRange:
-    \_constant: , line:8:18, endln:8:20
-      |vpiParent:
-      \_range: , line:8:17, endln:8:23
-      |vpiDecompile:32
-      |vpiSize:64
-      |UINT:32
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:21, endln:8:22
-      |vpiParent:
-      \_range: , line:8:17, endln:8:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:12, endln:3:24
-  |vpiRange:
-  \_range: , line:3:18, endln:3:24
-    |vpiParent:
-    \_logic_typespec: , line:3:12, endln:3:24
-    |vpiLeftRange:
-    \_constant: , line:3:19, endln:3:21
-      |vpiParent:
-      \_range: , line:3:18, endln:3:24
-      |vpiDecompile:32
-      |vpiSize:64
-      |UINT:32
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:18, endln:3:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:12, endln:3:24
-  |vpiParent:
-  \_logic_net: (work@dut.i_b_x_ff.din), line:3:25, endln:3:28
-  |vpiRange:
-  \_range: , line:3:18, endln:3:24
-    |vpiParent:
-    \_logic_typespec: , line:3:12, endln:3:24
-    |vpiLeftRange:
-    \_constant: , line:3:19, endln:3:21
-      |vpiParent:
-      \_range: , line:3:18, endln:3:24
-      |vpiDecompile:32
-      |vpiSize:64
-      |UINT:32
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:18, endln:3:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:3:12, endln:3:24
   |vpiRange:
   \_range: , line:3:18, endln:3:24
@@ -407,8 +223,8 @@ design: (work@dut)
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 2
-[   NOTE] : 5
+[WARNING] : 0
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv | ${SURELOG_DIR}/build/regression/SignedVsUnsignedPort/roundtrip/dut_000.sv | 4 | 12 |

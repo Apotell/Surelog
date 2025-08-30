@@ -87,56 +87,32 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedEnum/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedEnum/dut.sv:1:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PackedEnum/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              12
+constant                                               8
 design                                                 1
 enum_const                                             2
 enum_typespec                                          1
 logic_net                                              1
-logic_typespec                                         3
-module_inst                                            4
-packed_array_typespec                                  2
-range                                                  4
-ref_typespec                                           9
-struct_typespec                                        2
-struct_var                                             1
-typespec_member                                        4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              12
-design                                                 1
-enum_const                                             2
-enum_typespec                                          1
-logic_net                                              1
-logic_typespec                                         3
-module_inst                                            4
-packed_array_typespec                                  2
-range                                                  4
-ref_typespec                                           9
-struct_typespec                                        2
-struct_var                                             1
-typespec_member                                        4
+logic_typespec                                         2
+module_inst                                            2
+packed_array_typespec                                  1
+range                                                  2
+ref_typespec                                           5
+struct_typespec                                        1
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnum/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedEnum/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnum/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_enum_typespec: (cstate_e), line:2:4, endln:2:47
@@ -182,123 +158,8 @@ design: (work@dut)
       \_struct_typespec: , line:4:4, endln:4:17
     |vpiName:hw2reg_wrap_t
     |vpiFullName:work@dut.hw2reg_wrap_t
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_struct_var: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.hw2reg_wrap_t)
-      |vpiParent:
-      \_struct_var: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
-      |vpiFullName:work@dut.hw2reg_wrap_t
-      |vpiActual:
-      \_struct_typespec: , line:4:4, endln:4:10
-    |vpiName:hw2reg_wrap_t
-    |vpiFullName:work@dut.hw2reg_wrap_t
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_enum_typespec: (cstate_e), line:2:4, endln:2:47
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_logic_typespec: , line:2:17, endln:2:22
-\_struct_typespec: , line:4:4, endln:4:10
-  |vpiParent:
-  \_struct_var: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (class_esc_state), line:5:22, endln:5:37
-    |vpiParent:
-    \_struct_typespec: , line:4:4, endln:4:10
-    |vpiName:class_esc_state
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.hw2reg_wrap_t.class_esc_state)
-      |vpiParent:
-      \_typespec_member: (class_esc_state), line:5:22, endln:5:37
-      |vpiFullName:work@dut.hw2reg_wrap_t.class_esc_state
-      |vpiActual:
-      \_packed_array_typespec: , line:5:7, endln:5:21
-    |vpiRefFile:${SURELOG_DIR}/tests/PackedEnum/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:21
-  |vpiTypespecMember:
-  \_typespec_member: (blah), line:6:19, endln:6:23
-    |vpiParent:
-    \_struct_typespec: , line:4:4, endln:4:10
-    |vpiName:blah
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.hw2reg_wrap_t.blah)
-      |vpiParent:
-      \_typespec_member: (blah), line:6:19, endln:6:23
-      |vpiFullName:work@dut.hw2reg_wrap_t.blah
-      |vpiActual:
-      \_logic_typespec: , line:6:7, endln:6:18
-    |vpiRefFile:${SURELOG_DIR}/tests/PackedEnum/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:18
-\_packed_array_typespec: , line:5:7, endln:5:21
-  |vpiParent:
-  \_typespec_member: (class_esc_state), line:5:22, endln:5:37
-  |vpiRange:
-  \_range: , line:5:16, endln:5:21
-    |vpiParent:
-    \_packed_array_typespec: , line:5:7, endln:5:21
-    |vpiLeftRange:
-    \_constant: , line:5:17, endln:5:18
-      |vpiParent:
-      \_range: , line:5:16, endln:5:21
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:19, endln:5:20
-      |vpiParent:
-      \_range: , line:5:16, endln:5:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@dut.hw2reg_wrap_t.class_esc_state)
-    |vpiParent:
-    \_packed_array_typespec: , line:5:7, endln:5:21
-    |vpiFullName:work@dut.hw2reg_wrap_t.class_esc_state
-    |vpiActual:
-    \_enum_typespec: (cstate_e), line:2:4, endln:2:47
-\_logic_typespec: , line:6:7, endln:6:18
-  |vpiParent:
-  \_typespec_member: (blah), line:6:19, endln:6:23
-  |vpiRange:
-  \_range: , line:6:13, endln:6:18
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:18
-    |vpiLeftRange:
-    \_constant: , line:6:14, endln:6:15
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
 \_struct_typespec: , line:4:4, endln:4:17
   |vpiPacked:1
   |vpiTypespecMember:
@@ -393,4 +254,8 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PackedEnum/dut.sv | ${SURELOG_DIR}/build/regression/PackedEnum/roundtrip/dut_000.sv | 3 | 8 |
+============================== End RoundTrip Results ==============================

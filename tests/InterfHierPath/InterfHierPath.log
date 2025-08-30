@@ -91,58 +91,33 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfHierPath/dut.sv:1:1: Compile interface "work@logic_gate_if".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfHierPath/dut.sv:8:1: Compile module "work@or_ex".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/InterfHierPath/dut.sv:8:1: Top level module "work@or_ex".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              14
+constant                                               4
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
-interface_inst                                         3
-logic_net                                              3
-logic_typespec                                         5
-logic_var                                              1
-module_inst                                            5
-port                                                   2
-range                                                  7
+interface_inst                                         1
+logic_net                                              2
+logic_typespec                                         2
+module_inst                                            1
+port                                                   1
+range                                                  2
 ref_module                                             1
-ref_obj                                                5
-ref_typespec                                           5
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              14
-cont_assign                                            2
-design                                                 1
-hier_path                                              2
-interface_inst                                         3
-logic_net                                              3
-logic_typespec                                         5
-logic_var                                              1
-module_inst                                            5
-port                                                   3
-range                                                  7
-ref_module                                             1
-ref_obj                                                9
-ref_typespec                                           6
+ref_obj                                                4
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfHierPath/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@or_ex)
-|vpiElaborated:1
-|vpiName:work@or_ex
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
   |vpiParent:
-  \_design: (work@or_ex)
+  \_design: (unnamed)
   |vpiFullName:work@logic_gate_if
   |vpiDefName:work@logic_gate_if
   |vpiNet:
@@ -162,7 +137,7 @@ design: (work@or_ex)
 |uhdmallModules:
 \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
   |vpiParent:
-  \_design: (work@or_ex)
+  \_design: (unnamed)
   |vpiFullName:work@or_ex
   |vpiDefName:work@or_ex
   |vpiNet:
@@ -228,175 +203,7 @@ design: (work@or_ex)
     |vpiDefName:work@logic_gate_if
     |vpiActual:
     \_interface_inst: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
-|uhdmtopModules:
-\_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-  |vpiParent:
-  \_design: (work@or_ex)
-  |vpiName:work@or_ex
-  |vpiDefName:work@or_ex
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-    |vpiParent:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-    |vpiTypespec:
-    \_ref_typespec: (work@or_ex.a)
-      |vpiParent:
-      \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-      |vpiFullName:work@or_ex.a
-      |vpiActual:
-      \_logic_typespec: , line:9:11, endln:9:21
-    |vpiName:a
-    |vpiFullName:work@or_ex.a
-    |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (a), line:9:22, endln:9:23
-    |vpiParent:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-    |vpiName:a
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@or_ex.a), line:9:22, endln:9:23
-      |vpiParent:
-      \_port: (a), line:9:22, endln:9:23
-      |vpiName:a
-      |vpiFullName:work@or_ex.a
-      |vpiActual:
-      \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-    |vpiTypedef:
-    \_ref_typespec: (work@or_ex.a)
-      |vpiParent:
-      \_port: (a), line:9:22, endln:9:23
-      |vpiFullName:work@or_ex.a
-      |vpiActual:
-      \_logic_typespec: , line:9:11, endln:9:21
-    |vpiInstance:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-  |vpiInterface:
-  \_interface_inst: work@logic_gate_if (work@or_ex.lg), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:12:3, endln:12:23
-    |vpiParent:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-    |vpiName:lg
-    |vpiFullName:work@or_ex.lg
-    |vpiVariables:
-    \_logic_var: (work@or_ex.lg.a), line:3:12, endln:3:13
-      |vpiParent:
-      \_interface_inst: work@logic_gate_if (work@or_ex.lg), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:12:3, endln:12:23
-      |vpiTypespec:
-      \_ref_typespec: (work@or_ex.lg.a)
-        |vpiParent:
-        \_logic_var: (work@or_ex.lg.a), line:3:12, endln:3:13
-        |vpiFullName:work@or_ex.lg.a
-        |vpiActual:
-        \_logic_typespec: , line:3:1, endln:3:11
-      |vpiName:a
-      |vpiFullName:work@or_ex.lg.a
-      |vpiVisibility:1
-    |vpiDefName:work@logic_gate_if
-    |vpiDefFile:${SURELOG_DIR}/tests/InterfHierPath/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-  |vpiContAssign:
-  \_cont_assign: , line:14:10, endln:14:18
-    |vpiParent:
-    \_module_inst: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-    |vpiRhs:
-    \_ref_obj: (work@or_ex.a), line:14:17, endln:14:18
-      |vpiParent:
-      \_cont_assign: , line:14:10, endln:14:18
-      |vpiName:a
-      |vpiFullName:work@or_ex.a
-      |vpiActual:
-      \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-    |vpiLhs:
-    \_hier_path: (lg.a), line:14:10, endln:14:14
-      |vpiParent:
-      \_cont_assign: , line:14:10, endln:14:18
-      |vpiActual:
-      \_ref_obj: (lg), line:14:13, endln:14:14
-        |vpiParent:
-        \_hier_path: (lg.a), line:14:10, endln:14:14
-        |vpiName:lg
-        |vpiActual:
-        \_interface_inst: work@logic_gate_if (work@or_ex.lg), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:12:3, endln:12:23
-      |vpiActual:
-      \_ref_obj: (a), line:14:13, endln:14:14
-        |vpiParent:
-        \_hier_path: (lg.a), line:14:10, endln:14:14
-        |vpiName:a
-        |vpiActual:
-        \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-      |vpiName:lg.a
 \_weaklyReferenced:
-\_logic_typespec: , line:9:11, endln:9:21
-  |vpiRange:
-  \_range: , line:9:16, endln:9:21
-    |vpiParent:
-    \_logic_typespec: , line:9:11, endln:9:21
-    |vpiLeftRange:
-    \_constant: , line:9:17, endln:9:18
-      |vpiParent:
-      \_range: , line:9:16, endln:9:21
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:19, endln:9:20
-      |vpiParent:
-      \_range: , line:9:16, endln:9:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:11, endln:9:21
-  |vpiParent:
-  \_logic_net: (work@or_ex.a), line:9:22, endln:9:23
-  |vpiRange:
-  \_range: , line:9:16, endln:9:21
-    |vpiParent:
-    \_logic_typespec: , line:9:11, endln:9:21
-    |vpiLeftRange:
-    \_constant: , line:9:17, endln:9:18
-      |vpiParent:
-      \_range: , line:9:16, endln:9:21
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:19, endln:9:20
-      |vpiParent:
-      \_range: , line:9:16, endln:9:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:1, endln:3:11
-  |vpiParent:
-  \_logic_var: (work@or_ex.lg.a), line:3:12, endln:3:13
-  |vpiRange:
-  \_range: , line:3:6, endln:3:11
-    |vpiParent:
-    \_logic_typespec: , line:3:1, endln:3:11
-    |vpiLeftRange:
-    \_constant: , line:3:7, endln:3:8
-      |vpiParent:
-      \_range: , line:3:6, endln:3:11
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:9, endln:3:10
-      |vpiParent:
-      \_range: , line:3:6, endln:3:11
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:3:1, endln:3:11
   |vpiRange:
   \_range: , line:3:6, endln:3:11
@@ -444,7 +251,7 @@ design: (work@or_ex)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/InterfHierPath/dut.sv | ${SURELOG_DIR}/build/regression/InterfHierPath/roundtrip/dut_000.sv | 4 | 16 |

@@ -494,7 +494,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:1:1: No timescale set for "prim_cipher_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:26:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:1:1: Compile package "prim_cipher_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:26:1: Compile module "work@top".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -753,112 +752,93 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:26:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
-assignment                                             9
-begin                                                  4
-bit_select                                             3
+assignment                                             6
+begin                                                  2
+bit_select                                             2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                             211
+constant                                             101
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
-for_stmt                                               2
+for_stmt                                               1
 func_call                                              1
-function                                              11
-indexed_part_select                                    4
-int_typespec                                          11
-int_var                                                6
-io_decl                                               15
+function                                              10
+indexed_part_select                                    2
+int_typespec                                          10
+int_var                                                5
+io_decl                                               13
 logic_net                                              7
-logic_typespec                                        16
-logic_var                                              6
-module_inst                                            5
+logic_typespec                                         8
+logic_var                                              3
+module_inst                                            1
 named_begin                                            1
-operation                                             27
-package                                                4
-param_assign                                          12
-parameter                                             12
+operation                                             15
+package                                                2
+param_assign                                           4
+parameter                                              4
 part_select                                            1
-range                                                 30
-ref_obj                                               20
-ref_typespec                                          38
-return_stmt                                            2
+range                                                 15
+ref_obj                                               15
+ref_typespec                                          24
+return_stmt                                            1
 task                                                   9
 var_select                                             1
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-assignment                                            16
-begin                                                  8
-bit_select                                             6
-class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             211
-cont_assign                                            2
-design                                                 1
-enum_const                                            10
-enum_typespec                                          2
-enum_var                                               1
-for_stmt                                               4
-func_call                                              2
-function                                              22
-indexed_part_select                                    8
-int_typespec                                          11
-int_var                                                8
-io_decl                                               30
-logic_net                                              7
-logic_typespec                                        16
-logic_var                                             10
-module_inst                                            5
-named_begin                                            2
-operation                                             41
-package                                                4
-param_assign                                          12
-parameter                                             12
-part_select                                            2
-range                                                 30
-ref_obj                                               40
-ref_typespec                                          54
-return_stmt                                            4
-task                                                  18
-var_select                                             2
-=== UHDM Object Stats End ===
-[ERR:UH0718] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:32:12: Illegal lhs of type wire "data_o".
-[ERR:UH0718] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:36:11: Illegal lhs of type wire "data_o".
-[ERR:UH0718] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:37:12: Illegal lhs of type wire "data_o".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageFuncCall/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageFuncCall/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackageFuncCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:prim_cipher_pkg
   |vpiFullName:prim_cipher_pkg::
   |vpiParameter:
@@ -1027,7 +1007,7 @@ design: (work@top)
     |vpiVariables:
     \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
       |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
+      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
       |vpiTypespec:
       \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
         |vpiParent:
@@ -1084,17 +1064,6 @@ design: (work@top)
       |vpiFullName:prim_cipher_pkg::sbox4_64bit
       |vpiVariables:
       \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-        |vpiParent:
-        \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-        |vpiTypespec:
-        \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
-          |vpiParent:
-          \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-          |vpiActual:
-          \_logic_typespec: , line:9:5, endln:9:17
-        |vpiName:state_out
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
       |vpiStmt:
       \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
         |vpiParent:
@@ -1190,8 +1159,6 @@ design: (work@top)
               \_assignment: , line:12:7, endln:12:54
               |vpiName:sbox4
               |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-              |vpiActual:
-              \_io_decl: (sbox4), line:8:88, endln:8:93
               |vpiIndex:
               \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
                 |vpiParent:
@@ -1199,8 +1166,6 @@ design: (work@top)
                 |vpiName:state_in
                 |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in
                 |vpiDefName:state_in
-                |vpiActual:
-                \_io_decl: (state_in), line:8:60, endln:8:68
                 |vpiConstantSelect:1
                 |vpiIndexedPartSelectType:1
                 |vpiBaseExpr:
@@ -1237,460 +1202,6 @@ design: (work@top)
               |vpiName:state_out
               |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
               |vpiDefName:state_out
-              |vpiActual:
-              \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-              |vpiConstantSelect:1
-              |vpiIndexedPartSelectType:1
-              |vpiBaseExpr:
-              \_operation: , line:12:17, endln:12:20
-                |vpiParent:
-                \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-                |vpiOpType:25
-                |vpiOperand:
-                \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out::k), line:12:17, endln:12:18
-                  |vpiParent:
-                  \_operation: , line:12:17, endln:12:20
-                  |vpiName:k
-                  |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out::k
-                  |vpiActual:
-                  \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-                |vpiOperand:
-                \_constant: , line:12:19, endln:12:20
-                  |vpiParent:
-                  \_operation: , line:12:17, endln:12:20
-                  |vpiDecompile:4
-                  |vpiSize:64
-                  |UINT:4
-                  |vpiConstType:9
-              |vpiWidthExpr:
-              \_constant: , line:12:24, endln:12:25
-                |vpiDecompile:4
-                |vpiSize:64
-                |UINT:4
-                |vpiConstType:9
-      |vpiStmt:
-      \_return_stmt: , line:14:5, endln:14:11
-        |vpiParent:
-        \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-        |vpiCondition:
-        \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out), line:14:12, endln:14:21
-          |vpiParent:
-          \_return_stmt: , line:14:5, endln:14:11
-          |vpiName:state_out
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-          |vpiActual:
-          \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-    |vpiInstance:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiEndLabel:prim_cipher_pkg
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
-  |vpiClassDefn:
-  \_class_defn: (builtin::any_sverilog_class)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:any_sverilog_class
-    |vpiFullName:builtin::any_sverilog_class
-  |vpiClassDefn:
-  \_class_defn: (builtin::array)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:array
-    |vpiFullName:builtin::array
-  |vpiClassDefn:
-  \_class_defn: (builtin::queue)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:queue
-    |vpiFullName:builtin::queue
-  |vpiClassDefn:
-  \_class_defn: (builtin::string)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:string
-    |vpiFullName:builtin::string
-  |vpiClassDefn:
-  \_class_defn: (builtin::system)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:system
-    |vpiFullName:builtin::system
-|uhdmtopPackages:
-\_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:prim_cipher_pkg
-  |vpiFullName:prim_cipher_pkg::
-  |vpiParameter:
-  \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
-    |vpiParent:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiTypespec:
-    \_ref_typespec: (prim_cipher_pkg::PRESENT_SBOX4)
-      |vpiParent:
-      \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
-      |vpiFullName:prim_cipher_pkg::PRESENT_SBOX4
-      |vpiActual:
-      \_logic_typespec: , line:3:13, endln:3:30
-    |vpiName:PRESENT_SBOX4
-    |vpiFullName:prim_cipher_pkg::PRESENT_SBOX4
-  |vpiParameter:
-  \_parameter: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:18:32, endln:18:50
-    |vpiParent:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiTypespec:
-    \_ref_typespec: (prim_cipher_pkg::PRINCE_ROUND_CONST)
-      |vpiParent:
-      \_parameter: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:18:32, endln:18:50
-      |vpiFullName:prim_cipher_pkg::PRINCE_ROUND_CONST
-      |vpiActual:
-      \_logic_typespec: , line:18:13, endln:18:31
-    |vpiName:PRINCE_ROUND_CONST
-    |vpiFullName:prim_cipher_pkg::PRINCE_ROUND_CONST
-  |vpiParamAssign:
-  \_param_assign: , line:3:31, endln:6:71
-    |vpiParent:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiRhs:
-    \_operation: , line:3:47, endln:6:71
-      |vpiParent:
-      \_param_assign: , line:3:31, endln:6:71
-      |vpiOpType:33
-      |vpiOperand:
-      \_constant: , line:3:48, endln:3:52
-        |vpiDecompile:4'h2
-        |vpiSize:4
-        |HEX:2
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:3:54, endln:3:58
-        |vpiDecompile:4'h1
-        |vpiSize:4
-        |HEX:1
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:3:60, endln:3:64
-        |vpiDecompile:4'h7
-        |vpiSize:4
-        |HEX:7
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:3:66, endln:3:70
-        |vpiDecompile:4'h4
-        |vpiSize:4
-        |HEX:4
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:4:48, endln:4:52
-        |vpiDecompile:4'h8
-        |vpiSize:4
-        |HEX:8
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:4:54, endln:4:58
-        |vpiDecompile:4'hF
-        |vpiSize:4
-        |HEX:F
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:4:60, endln:4:64
-        |vpiDecompile:4'hE
-        |vpiSize:4
-        |HEX:E
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:4:66, endln:4:70
-        |vpiDecompile:4'h3
-        |vpiSize:4
-        |HEX:3
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:5:48, endln:5:52
-        |vpiDecompile:4'hD
-        |vpiSize:4
-        |HEX:D
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:5:54, endln:5:58
-        |vpiDecompile:4'hA
-        |vpiSize:4
-        |HEX:A
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:5:60, endln:5:64
-        |vpiDecompile:4'h0
-        |vpiSize:4
-        |HEX:0
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:5:66, endln:5:70
-        |vpiDecompile:4'h9
-        |vpiSize:4
-        |HEX:9
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:6:48, endln:6:52
-        |vpiDecompile:4'hB
-        |vpiSize:4
-        |HEX:B
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:6:54, endln:6:58
-        |vpiDecompile:4'h6
-        |vpiSize:4
-        |HEX:6
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:6:60, endln:6:64
-        |vpiDecompile:4'h5
-        |vpiSize:4
-        |HEX:5
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:6:66, endln:6:70
-        |vpiDecompile:4'hC
-        |vpiSize:4
-        |HEX:C
-        |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
-  |vpiParamAssign:
-  \_param_assign: , line:18:32, endln:19:78
-    |vpiParent:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiRhs:
-    \_operation: , line:18:53, endln:19:78
-      |vpiParent:
-      \_param_assign: , line:18:32, endln:19:78
-      |vpiOpType:33
-      |vpiOperand:
-      \_constant: , line:18:54, endln:18:74
-        |vpiDecompile:64'hC0AC29B7C97C50DD
-        |vpiSize:64
-        |HEX:C0AC29B7C97C50DD
-        |vpiConstType:5
-      |vpiOperand:
-      \_constant: , line:19:57, endln:19:77
-        |vpiDecompile:64'hD3B5A399CA0C2399
-        |vpiSize:64
-        |HEX:D3B5A399CA0C2399
-        |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:18:32, endln:18:50
-  |vpiDefName:prim_cipher_pkg
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiParent:
-    \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiName:sbox4_64bit
-    |vpiFullName:prim_cipher_pkg::sbox4_64bit
-    |vpiVariables:
-    \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-      |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-      |vpiTypespec:
-      \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
-        |vpiParent:
-        \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-        |vpiActual:
-        \_logic_typespec: , line:9:5, endln:9:17
-      |vpiName:state_out
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (prim_cipher_pkg::sbox4_64bit), line:8:22, endln:8:34
-      |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-      |vpiTypespec:
-      \_ref_typespec: (prim_cipher_pkg::sbox4_64bit)
-        |vpiParent:
-        \_logic_var: (prim_cipher_pkg::sbox4_64bit), line:8:22, endln:8:34
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit
-        |vpiActual:
-        \_logic_typespec: , line:8:22, endln:8:34
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit
-    |vpiIODecl:
-    \_io_decl: (state_in), line:8:60, endln:8:68
-      |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-      |vpiDirection:1
-      |vpiName:state_in
-      |vpiTypedef:
-      \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_in)
-        |vpiParent:
-        \_io_decl: (state_in), line:8:60, endln:8:68
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_in
-        |vpiActual:
-        \_logic_typespec: , line:8:47, endln:8:52
-    |vpiIODecl:
-    \_io_decl: (sbox4), line:8:88, endln:8:93
-      |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-      |vpiDirection:1
-      |vpiName:sbox4
-      |vpiTypedef:
-      \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::sbox4)
-        |vpiParent:
-        \_io_decl: (sbox4), line:8:88, endln:8:93
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-        |vpiActual:
-        \_logic_typespec: , line:8:70, endln:8:75
-    |vpiStmt:
-    \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-      |vpiParent:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit
-      |vpiVariables:
-      \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-        |vpiParent:
-        \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-        |vpiTypespec:
-        \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
-          |vpiParent:
-          \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-          |vpiActual:
-          \_logic_typespec: , line:9:5, endln:9:17
-        |vpiName:state_out
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-      |vpiStmt:
-      \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiParent:
-        \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit
-        |vpiForInitStmt:
-        \_assignment: , line:11:10, endln:11:19
-          |vpiParent:
-          \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-          |vpiRhs:
-          \_constant: , line:11:18, endln:11:19
-            |vpiParent:
-            \_assignment: , line:11:10, endln:11:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiLhs:
-          \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-            |vpiParent:
-            \_assignment: , line:11:10, endln:11:19
-            |vpiTypespec:
-            \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::k)
-              |vpiParent:
-              \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-              |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-              |vpiActual:
-              \_int_typespec: , line:11:10, endln:11:13
-            |vpiName:k
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-            |vpiSigned:1
-        |vpiForIncStmt:
-        \_operation: , line:11:31, endln:11:34
-          |vpiParent:
-          \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-          |vpiOpType:62
-          |vpiOperand:
-          \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:31, endln:11:32
-            |vpiParent:
-            \_operation: , line:11:31, endln:11:34
-            |vpiName:k
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-            |vpiActual:
-            \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-        |vpiCondition:
-        \_operation: , line:11:21, endln:11:29
-          |vpiParent:
-          \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-          |vpiOpType:20
-          |vpiOperand:
-          \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:21, endln:11:22
-            |vpiParent:
-            \_operation: , line:11:21, endln:11:29
-            |vpiName:k
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-            |vpiActual:
-            \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-          |vpiOperand:
-          \_constant: , line:11:25, endln:11:29
-            |vpiDecompile:16
-            |vpiSize:64
-            |INT:16
-            |vpiConstType:7
-        |vpiStmt:
-        \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-          |vpiParent:
-          \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit
-          |vpiStmt:
-          \_assignment: , line:12:7, endln:12:54
-            |vpiParent:
-            \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-              |vpiParent:
-              \_assignment: , line:12:7, endln:12:54
-              |vpiName:sbox4
-              |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-              |vpiActual:
-              \_io_decl: (sbox4), line:8:88, endln:8:93
-              |vpiIndex:
-              \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-                |vpiParent:
-                \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-                |vpiName:state_in
-                |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in
-                |vpiDefName:state_in
-                |vpiActual:
-                \_io_decl: (state_in), line:8:60, endln:8:68
-                |vpiConstantSelect:1
-                |vpiIndexedPartSelectType:1
-                |vpiBaseExpr:
-                \_operation: , line:12:44, endln:12:47
-                  |vpiParent:
-                  \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-                  |vpiOpType:25
-                  |vpiOperand:
-                  \_ref_obj: (prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k), line:12:44, endln:12:45
-                    |vpiParent:
-                    \_operation: , line:12:44, endln:12:47
-                    |vpiName:k
-                    |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k
-                    |vpiActual:
-                    \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-                  |vpiOperand:
-                  \_constant: , line:12:46, endln:12:47
-                    |vpiParent:
-                    \_operation: , line:12:44, endln:12:47
-                    |vpiDecompile:4
-                    |vpiSize:64
-                    |UINT:4
-                    |vpiConstType:9
-                |vpiWidthExpr:
-                \_constant: , line:12:51, endln:12:52
-                  |vpiDecompile:4
-                  |vpiSize:64
-                  |UINT:4
-                  |vpiConstType:9
-            |vpiLhs:
-            \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-              |vpiParent:
-              \_assignment: , line:12:7, endln:12:54
-              |vpiName:state_out
-              |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-              |vpiDefName:state_out
-              |vpiActual:
-              \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
               |vpiConstantSelect:1
               |vpiIndexedPartSelectType:1
               |vpiBaseExpr:
@@ -1738,7 +1249,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@mailbox
   |vpiMethod:
   \_function: (work@mailbox::new), line:3:5, endln:4:16
@@ -1917,7 +1428,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@process
   |vpiTypedef:
   \_enum_typespec: (state), line:32:5, endln:32:74
@@ -2039,7 +1550,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@semaphore
   |vpiMethod:
   \_function: (work@semaphore::new), line:57:5, endln:58:16
@@ -2176,57 +1687,57 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.data_state_sbox), line:28:8, endln:28:23
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_cont_assign: , line:28:8, endln:29:55
     |vpiName:data_state_sbox
     |vpiFullName:work@top.data_state_sbox
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@top.data_state_xor), line:28:55, endln:28:69
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_func_call: (prim_cipher_pkg::sbox4_64bit), line:28:26, endln:28:41
     |vpiName:data_state_xor
     |vpiFullName:work@top.data_state_xor
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.data_o), line:32:12, endln:32:18
+  \_logic_net: (work@top.p_post_round_xor.data_o), line:32:12, endln:32:18
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_assignment: , line:32:12, endln:35:37
     |vpiName:data_o
-    |vpiFullName:work@top.data_o
+    |vpiFullName:work@top.p_post_round_xor.data_o
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.NumRoundsHalf), line:32:35, endln:32:48
+  \_logic_net: (work@top.p_post_round_xor.data_state.NumRoundsHalf), line:32:35, endln:32:48
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_operation: , line:32:33, endln:32:48
     |vpiName:NumRoundsHalf
-    |vpiFullName:work@top.NumRoundsHalf
+    |vpiFullName:work@top.p_post_round_xor.data_state.NumRoundsHalf
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.DataWidth), line:35:23, endln:35:32
+  \_logic_net: (work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth), line:35:23, endln:35:32
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_operation: , line:35:23, endln:35:34
     |vpiName:DataWidth
-    |vpiFullName:work@top.DataWidth
+    |vpiFullName:work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.k1), line:36:21, endln:36:23
+  \_logic_net: (work@top.p_post_round_xor.k1), line:36:21, endln:36:23
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_assignment: , line:36:11, endln:36:23
     |vpiName:k1
-    |vpiFullName:work@top.k1
+    |vpiFullName:work@top.p_post_round_xor.k1
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.k0_prime), line:37:22, endln:37:30
+  \_logic_net: (work@top.p_post_round_xor.k0_prime), line:37:22, endln:37:30
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
+    \_assignment: , line:37:12, endln:37:30
     |vpiName:k0_prime
-    |vpiFullName:work@top.k0_prime
+    |vpiFullName:work@top.p_post_round_xor.k0_prime
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:31:2, endln:38:13
@@ -2280,7 +1791,7 @@ design: (work@top)
                   |vpiName:NumRoundsHalf
                   |vpiFullName:work@top.p_post_round_xor.data_state.NumRoundsHalf
                   |vpiActual:
-                  \_logic_net: (work@top.NumRoundsHalf), line:32:35, endln:32:48
+                  \_logic_net: (work@top.p_post_round_xor.data_state.NumRoundsHalf), line:32:35, endln:32:48
               |vpiOperand:
               \_constant: , line:32:49, endln:32:50
                 |vpiParent:
@@ -2321,7 +1832,7 @@ design: (work@top)
                   |vpiName:DataWidth
                   |vpiFullName:work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth
                   |vpiActual:
-                  \_logic_net: (work@top.DataWidth), line:35:23, endln:35:32
+                  \_logic_net: (work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth), line:35:23, endln:35:32
                 |vpiOperand:
                 \_constant: , line:35:33, endln:35:34
                   |vpiParent:
@@ -2343,7 +1854,7 @@ design: (work@top)
           |vpiName:data_o
           |vpiFullName:work@top.p_post_round_xor.data_o
           |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
+          \_logic_net: (work@top.p_post_round_xor.data_o), line:32:12, endln:32:18
       |vpiStmt:
       \_assignment: , line:36:11, endln:36:23
         |vpiParent:
@@ -2357,7 +1868,7 @@ design: (work@top)
           |vpiName:k1
           |vpiFullName:work@top.p_post_round_xor.k1
           |vpiActual:
-          \_logic_net: (work@top.k1), line:36:21, endln:36:23
+          \_logic_net: (work@top.p_post_round_xor.k1), line:36:21, endln:36:23
         |vpiLhs:
         \_ref_obj: (work@top.p_post_round_xor.data_o), line:36:11, endln:36:17
           |vpiParent:
@@ -2365,7 +1876,7 @@ design: (work@top)
           |vpiName:data_o
           |vpiFullName:work@top.p_post_round_xor.data_o
           |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
+          \_logic_net: (work@top.p_post_round_xor.data_o), line:32:12, endln:32:18
       |vpiStmt:
       \_assignment: , line:37:12, endln:37:30
         |vpiParent:
@@ -2379,7 +1890,7 @@ design: (work@top)
           |vpiName:k0_prime
           |vpiFullName:work@top.p_post_round_xor.k0_prime
           |vpiActual:
-          \_logic_net: (work@top.k0_prime), line:37:22, endln:37:30
+          \_logic_net: (work@top.p_post_round_xor.k0_prime), line:37:22, endln:37:30
         |vpiLhs:
         \_ref_obj: (work@top.p_post_round_xor.data_o), line:37:12, endln:37:18
           |vpiParent:
@@ -2387,7 +1898,7 @@ design: (work@top)
           |vpiName:data_o
           |vpiFullName:work@top.p_post_round_xor.data_o
           |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
+          \_logic_net: (work@top.p_post_round_xor.data_o), line:32:12, endln:32:18
     |vpiAlwaysType:2
   |vpiContAssign:
   \_cont_assign: , line:28:8, endln:29:55
@@ -2401,195 +1912,6 @@ design: (work@top)
       \_ref_obj: (work@top.data_state_xor), line:28:55, endln:28:69
         |vpiParent:
         \_func_call: (prim_cipher_pkg::sbox4_64bit), line:28:26, endln:28:41
-        |vpiTypespec:
-        \_ref_typespec: (work@top.data_state_xor)
-          |vpiParent:
-          \_ref_obj: (work@top.data_state_xor), line:28:55, endln:28:69
-          |vpiFullName:work@top.data_state_xor
-          |vpiActual:
-          \_logic_typespec: , line:8:47, endln:8:52
-        |vpiName:data_state_xor
-        |vpiFullName:work@top.data_state_xor
-        |vpiActual:
-        \_logic_net: (work@top.data_state_xor), line:28:55, endln:28:69
-      |vpiArgument:
-      \_ref_obj: (prim_cipher_pkg::PRESENT_SBOX4), line:29:24, endln:29:41
-        |vpiParent:
-        \_func_call: (prim_cipher_pkg::sbox4_64bit), line:28:26, endln:28:41
-        |vpiName:prim_cipher_pkg::PRESENT_SBOX4
-        |vpiActual:
-        \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
-      |vpiName:prim_cipher_pkg::sbox4_64bit
-      |vpiFunction:
-      \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiLhs:
-    \_ref_obj: (work@top.data_state_sbox), line:28:8, endln:28:23
-      |vpiParent:
-      \_cont_assign: , line:28:8, endln:29:55
-      |vpiName:data_state_sbox
-      |vpiFullName:work@top.data_state_sbox
-      |vpiActual:
-      \_logic_net: (work@top.data_state_sbox), line:28:8, endln:28:23
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_always: , line:31:2, endln:38:13
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
-    |vpiStmt:
-    \_named_begin: (work@top.p_post_round_xor), line:31:22, endln:31:38
-      |vpiParent:
-      \_always: , line:31:2, endln:38:13
-      |vpiName:p_post_round_xor
-      |vpiFullName:work@top.p_post_round_xor
-      |vpiStmt:
-      \_assignment: , line:32:12, endln:35:37
-        |vpiParent:
-        \_named_begin: (work@top.p_post_round_xor), line:31:22, endln:31:38
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_operation: , line:32:22, endln:35:37
-          |vpiParent:
-          \_assignment: , line:32:12, endln:35:37
-          |vpiOpType:30
-          |vpiOperand:
-          \_bit_select: (work@top.p_post_round_xor.data_state), line:32:33, endln:32:50
-            |vpiParent:
-            \_operation: , line:32:22, endln:35:37
-            |vpiName:data_state
-            |vpiFullName:work@top.p_post_round_xor.data_state
-            |vpiIndex:
-            \_operation: , line:32:33, endln:32:50
-              |vpiParent:
-              \_bit_select: (work@top.p_post_round_xor.data_state), line:32:33, endln:32:50
-              |vpiOpType:24
-              |vpiOperand:
-              \_operation: , line:32:33, endln:32:48
-                |vpiParent:
-                \_operation: , line:32:33, endln:32:50
-                |vpiOpType:25
-                |vpiOperand:
-                \_constant: , line:32:33, endln:32:34
-                |vpiOperand:
-                \_ref_obj: (work@top.p_post_round_xor.data_state.NumRoundsHalf), line:32:35, endln:32:48
-                  |vpiParent:
-                  \_operation: , line:32:33, endln:32:48
-                  |vpiName:NumRoundsHalf
-                  |vpiFullName:work@top.p_post_round_xor.data_state.NumRoundsHalf
-                  |vpiActual:
-                  \_logic_net: (work@top.NumRoundsHalf), line:32:35, endln:32:48
-              |vpiOperand:
-              \_constant: , line:32:49, endln:32:50
-          |vpiOperand:
-          \_var_select: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:33:22, endln:35:37
-            |vpiParent:
-            \_operation: , line:32:22, endln:35:37
-            |vpiName:prim_cipher_pkg::PRINCE_ROUND_CONST
-            |vpiIndex:
-            \_constant: , line:34:23, endln:34:25
-            |vpiIndex:
-            \_part_select: prim_cipher_pkg::PRINCE_ROUND_CONST (prim_cipher_pkg::PRINCE_ROUND_CONST), line:35:23, endln:35:36
-              |vpiParent:
-              \_var_select: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:33:22, endln:35:37
-              |vpiName:prim_cipher_pkg::PRINCE_ROUND_CONST
-              |vpiDefName:prim_cipher_pkg::PRINCE_ROUND_CONST
-              |vpiConstantSelect:1
-              |vpiLeftRange:
-              \_operation: , line:35:23, endln:35:34
-                |vpiParent:
-                \_part_select: prim_cipher_pkg::PRINCE_ROUND_CONST (prim_cipher_pkg::PRINCE_ROUND_CONST), line:35:23, endln:35:36
-                |vpiOpType:11
-                |vpiOperand:
-                \_ref_obj: (work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth), line:35:23, endln:35:32
-                  |vpiParent:
-                  \_operation: , line:35:23, endln:35:34
-                  |vpiName:DataWidth
-                  |vpiFullName:work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth
-                  |vpiActual:
-                  \_logic_net: (work@top.DataWidth), line:35:23, endln:35:32
-                |vpiOperand:
-                \_constant: , line:35:33, endln:35:34
-              |vpiRightRange:
-              \_constant: , line:35:35, endln:35:36
-        |vpiLhs:
-        \_ref_obj: (work@top.p_post_round_xor.data_o), line:32:12, endln:32:18
-          |vpiParent:
-          \_assignment: , line:32:12, endln:35:37
-          |vpiName:data_o
-          |vpiFullName:work@top.p_post_round_xor.data_o
-          |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
-      |vpiStmt:
-      \_assignment: , line:36:11, endln:36:23
-        |vpiParent:
-        \_named_begin: (work@top.p_post_round_xor), line:31:22, endln:31:38
-        |vpiOpType:30
-        |vpiBlocking:1
-        |vpiRhs:
-        \_ref_obj: (work@top.p_post_round_xor.k1), line:36:21, endln:36:23
-          |vpiParent:
-          \_assignment: , line:36:11, endln:36:23
-          |vpiName:k1
-          |vpiFullName:work@top.p_post_round_xor.k1
-          |vpiActual:
-          \_logic_net: (work@top.k1), line:36:21, endln:36:23
-        |vpiLhs:
-        \_ref_obj: (work@top.p_post_round_xor.data_o), line:36:11, endln:36:17
-          |vpiParent:
-          \_assignment: , line:36:11, endln:36:23
-          |vpiName:data_o
-          |vpiFullName:work@top.p_post_round_xor.data_o
-          |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
-      |vpiStmt:
-      \_assignment: , line:37:12, endln:37:30
-        |vpiParent:
-        \_named_begin: (work@top.p_post_round_xor), line:31:22, endln:31:38
-        |vpiOpType:30
-        |vpiBlocking:1
-        |vpiRhs:
-        \_ref_obj: (work@top.p_post_round_xor.k0_prime), line:37:22, endln:37:30
-          |vpiParent:
-          \_assignment: , line:37:12, endln:37:30
-          |vpiName:k0_prime
-          |vpiFullName:work@top.p_post_round_xor.k0_prime
-          |vpiActual:
-          \_logic_net: (work@top.k0_prime), line:37:22, endln:37:30
-        |vpiLhs:
-        \_ref_obj: (work@top.p_post_round_xor.data_o), line:37:12, endln:37:18
-          |vpiParent:
-          \_assignment: , line:37:12, endln:37:30
-          |vpiName:data_o
-          |vpiFullName:work@top.p_post_round_xor.data_o
-          |vpiActual:
-          \_logic_net: (work@top.data_o), line:32:12, endln:32:18
-    |vpiAlwaysType:2
-  |vpiContAssign:
-  \_cont_assign: , line:28:8, endln:29:55
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
-    |vpiRhs:
-    \_func_call: (prim_cipher_pkg::sbox4_64bit), line:28:26, endln:28:41
-      |vpiParent:
-      \_cont_assign: , line:28:8, endln:29:55
-      |vpiArgument:
-      \_ref_obj: (work@top.data_state_xor), line:28:55, endln:28:69
-        |vpiParent:
-        \_func_call: (prim_cipher_pkg::sbox4_64bit), line:28:26, endln:28:41
-        |vpiTypespec:
-        \_ref_typespec: (work@top.data_state_xor)
-          |vpiParent:
-          \_ref_obj: (work@top.data_state_xor), line:28:55, endln:28:69
-          |vpiFullName:work@top.data_state_xor
-          |vpiActual:
-          \_logic_typespec: , line:8:47, endln:8:52
         |vpiName:data_state_xor
         |vpiFullName:work@top.data_state_xor
         |vpiActual:
@@ -2613,222 +1935,6 @@ design: (work@top)
       |vpiActual:
       \_logic_net: (work@top.data_state_sbox), line:28:8, endln:28:23
 \_weaklyReferenced:
-\_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-  |vpiParent:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiName:sbox4_64bit
-  |vpiFullName:prim_cipher_pkg::sbox4_64bit
-  |vpiVariables:
-  \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-    |vpiParent:
-    \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-    |vpiTypespec:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
-      |vpiParent:
-      \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-      |vpiActual:
-      \_logic_typespec: , line:9:5, endln:9:17
-    |vpiName:state_out
-    |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (prim_cipher_pkg::sbox4_64bit), line:8:22, endln:8:34
-  |vpiIODecl:
-  \_io_decl: (state_in), line:8:60, endln:8:68
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:8:60, endln:8:68
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:8:47, endln:8:52
-  |vpiIODecl:
-  \_io_decl: (sbox4), line:8:88, endln:8:93
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiDirection:1
-    |vpiName:sbox4
-    |vpiTypedef:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::sbox4)
-      |vpiParent:
-      \_io_decl: (sbox4), line:8:88, endln:8:93
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-      |vpiActual:
-      \_logic_typespec: , line:8:70, endln:8:75
-  |vpiStmt:
-  \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiFullName:prim_cipher_pkg::sbox4_64bit
-    |vpiVariables:
-    \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-    |vpiStmt:
-    \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-      |vpiParent:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit
-      |vpiForInitStmt:
-      \_assignment: , line:11:10, endln:11:19
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiRhs:
-        \_constant: , line:11:18, endln:11:19
-        |vpiLhs:
-        \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-          |vpiParent:
-          \_assignment: , line:11:10, endln:11:19
-          |vpiTypespec:
-          \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::k)
-            |vpiParent:
-            \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-            |vpiActual:
-            \_int_typespec: , line:11:10, endln:11:13
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiSigned:1
-      |vpiForIncStmt:
-      \_operation: , line:11:31, endln:11:34
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiOpType:62
-        |vpiOperand:
-        \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:31, endln:11:32
-          |vpiParent:
-          \_operation: , line:11:31, endln:11:34
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiActual:
-          \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-      |vpiCondition:
-      \_operation: , line:11:21, endln:11:29
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiOpType:20
-        |vpiOperand:
-        \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:21, endln:11:22
-          |vpiParent:
-          \_operation: , line:11:21, endln:11:29
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiActual:
-          \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-        |vpiOperand:
-        \_operation: , line:11:25, endln:11:29
-          |vpiParent:
-          \_operation: , line:11:21, endln:11:29
-          |vpiOpType:12
-          |vpiOperand:
-          \_constant: , line:11:25, endln:11:27
-            |vpiParent:
-            \_operation: , line:11:25, endln:11:29
-            |vpiDecompile:64
-            |vpiSize:64
-            |UINT:64
-            |vpiConstType:9
-          |vpiOperand:
-          \_constant: , line:11:28, endln:11:29
-            |vpiParent:
-            \_operation: , line:11:25, endln:11:29
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
-            |vpiConstType:9
-      |vpiStmt:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit
-        |vpiStmt:
-        \_assignment: , line:12:7, endln:12:54
-          |vpiParent:
-          \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-            |vpiParent:
-            \_assignment: , line:12:7, endln:12:54
-            |vpiName:sbox4
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-            |vpiActual:
-            \_io_decl: (sbox4), line:8:88, endln:8:93
-            |vpiIndex:
-            \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-              |vpiParent:
-              \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-              |vpiName:state_in
-              |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in
-              |vpiDefName:state_in
-              |vpiActual:
-              \_io_decl: (state_in), line:8:60, endln:8:68
-              |vpiConstantSelect:1
-              |vpiIndexedPartSelectType:1
-              |vpiBaseExpr:
-              \_operation: , line:12:44, endln:12:47
-                |vpiParent:
-                \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-                |vpiOpType:25
-                |vpiOperand:
-                \_ref_obj: (prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k), line:12:44, endln:12:45
-                  |vpiParent:
-                  \_operation: , line:12:44, endln:12:47
-                  |vpiName:k
-                  |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k
-                  |vpiActual:
-                  \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-                |vpiOperand:
-                \_constant: , line:12:46, endln:12:47
-              |vpiWidthExpr:
-              \_constant: , line:12:51, endln:12:52
-          |vpiLhs:
-          \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-            |vpiParent:
-            \_assignment: , line:12:7, endln:12:54
-            |vpiName:state_out
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-            |vpiDefName:state_out
-            |vpiActual:
-            \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-            |vpiConstantSelect:1
-            |vpiIndexedPartSelectType:1
-            |vpiBaseExpr:
-            \_operation: , line:12:17, endln:12:20
-              |vpiParent:
-              \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-              |vpiOpType:25
-              |vpiOperand:
-              \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out::k), line:12:17, endln:12:18
-                |vpiParent:
-                \_operation: , line:12:17, endln:12:20
-                |vpiName:k
-                |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out::k
-                |vpiActual:
-                \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-              |vpiOperand:
-              \_constant: , line:12:19, endln:12:20
-            |vpiWidthExpr:
-            \_constant: , line:12:24, endln:12:25
-    |vpiStmt:
-    \_return_stmt: , line:14:5, endln:14:11
-      |vpiParent:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-      |vpiCondition:
-      \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out), line:14:12, endln:14:21
-        |vpiParent:
-        \_return_stmt: , line:14:5, endln:14:11
-        |vpiName:state_out
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-        |vpiActual:
-        \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
 \_logic_typespec: , line:3:13, endln:3:30
   |vpiParent:
   \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
@@ -3035,592 +2141,20 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-  |vpiParent:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiName:sbox4_64bit
-  |vpiFullName:prim_cipher_pkg::sbox4_64bit
-  |vpiVariables:
-  \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-    |vpiParent:
-    \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-    |vpiTypespec:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_out)
-      |vpiParent:
-      \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-      |vpiActual:
-      \_logic_typespec: , line:9:5, endln:9:17
-    |vpiName:state_out
-    |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (prim_cipher_pkg::sbox4_64bit), line:8:22, endln:8:34
-  |vpiIODecl:
-  \_io_decl: (state_in), line:8:60, endln:8:68
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:8:60, endln:8:68
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:8:47, endln:8:52
-  |vpiIODecl:
-  \_io_decl: (sbox4), line:8:88, endln:8:93
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiDirection:1
-    |vpiName:sbox4
-    |vpiTypedef:
-    \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::sbox4)
-      |vpiParent:
-      \_io_decl: (sbox4), line:8:88, endln:8:93
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-      |vpiActual:
-      \_logic_typespec: , line:8:70, endln:8:75
-  |vpiStmt:
-  \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-    |vpiParent:
-    \_function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
-    |vpiFullName:prim_cipher_pkg::sbox4_64bit
-    |vpiVariables:
-    \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-    |vpiStmt:
-    \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-      |vpiParent:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit
-      |vpiForInitStmt:
-      \_assignment: , line:11:10, endln:11:19
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiRhs:
-        \_constant: , line:11:18, endln:11:19
-        |vpiLhs:
-        \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-          |vpiParent:
-          \_assignment: , line:11:10, endln:11:19
-          |vpiTypespec:
-          \_ref_typespec: (prim_cipher_pkg::sbox4_64bit::k)
-            |vpiParent:
-            \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-            |vpiActual:
-            \_int_typespec: , line:11:10, endln:11:13
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiSigned:1
-      |vpiForIncStmt:
-      \_operation: , line:11:31, endln:11:34
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiOpType:62
-        |vpiOperand:
-        \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:31, endln:11:32
-          |vpiParent:
-          \_operation: , line:11:31, endln:11:34
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiActual:
-          \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-      |vpiCondition:
-      \_operation: , line:11:21, endln:11:29
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiOpType:20
-        |vpiOperand:
-        \_ref_obj: (prim_cipher_pkg::sbox4_64bit::k), line:11:21, endln:11:22
-          |vpiParent:
-          \_operation: , line:11:21, endln:11:29
-          |vpiName:k
-          |vpiFullName:prim_cipher_pkg::sbox4_64bit::k
-          |vpiActual:
-          \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-        |vpiOperand:
-        \_operation: , line:11:25, endln:11:29
-          |vpiParent:
-          \_operation: , line:11:21, endln:11:29
-          |vpiOpType:12
-          |vpiOperand:
-          \_constant: , line:11:25, endln:11:27
-          |vpiOperand:
-          \_constant: , line:11:28, endln:11:29
-      |vpiStmt:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-        |vpiParent:
-        \_for_stmt: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:11:8
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit
-        |vpiStmt:
-        \_assignment: , line:12:7, endln:12:54
-          |vpiParent:
-          \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:36, endln:13:8
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-            |vpiParent:
-            \_assignment: , line:12:7, endln:12:54
-            |vpiName:sbox4
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
-            |vpiActual:
-            \_io_decl: (sbox4), line:8:88, endln:8:93
-            |vpiIndex:
-            \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-              |vpiParent:
-              \_bit_select: (prim_cipher_pkg::sbox4_64bit::sbox4), line:12:35, endln:12:53
-              |vpiName:state_in
-              |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in
-              |vpiDefName:state_in
-              |vpiActual:
-              \_io_decl: (state_in), line:8:60, endln:8:68
-              |vpiConstantSelect:1
-              |vpiIndexedPartSelectType:1
-              |vpiBaseExpr:
-              \_operation: , line:12:44, endln:12:47
-                |vpiParent:
-                \_indexed_part_select: state_in (prim_cipher_pkg::sbox4_64bit::sbox4::state_in), line:12:44, endln:12:52
-                |vpiOpType:25
-                |vpiOperand:
-                \_ref_obj: (prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k), line:12:44, endln:12:45
-                  |vpiParent:
-                  \_operation: , line:12:44, endln:12:47
-                  |vpiName:k
-                  |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4::state_in::k
-                  |vpiActual:
-                  \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-                |vpiOperand:
-                \_constant: , line:12:46, endln:12:47
-              |vpiWidthExpr:
-              \_constant: , line:12:51, endln:12:52
-          |vpiLhs:
-          \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-            |vpiParent:
-            \_assignment: , line:12:7, endln:12:54
-            |vpiName:state_out
-            |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-            |vpiDefName:state_out
-            |vpiActual:
-            \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-            |vpiConstantSelect:1
-            |vpiIndexedPartSelectType:1
-            |vpiBaseExpr:
-            \_operation: , line:12:17, endln:12:20
-              |vpiParent:
-              \_indexed_part_select: state_out (prim_cipher_pkg::sbox4_64bit::state_out), line:12:7, endln:12:26
-              |vpiOpType:25
-              |vpiOperand:
-              \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out::k), line:12:17, endln:12:18
-                |vpiParent:
-                \_operation: , line:12:17, endln:12:20
-                |vpiName:k
-                |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out::k
-                |vpiActual:
-                \_int_var: (prim_cipher_pkg::sbox4_64bit::k), line:11:14, endln:11:15
-              |vpiOperand:
-              \_constant: , line:12:19, endln:12:20
-            |vpiWidthExpr:
-            \_constant: , line:12:24, endln:12:25
-    |vpiStmt:
-    \_return_stmt: , line:14:5, endln:14:11
-      |vpiParent:
-      \_begin: (prim_cipher_pkg::sbox4_64bit), line:11:5, endln:13:8
-      |vpiCondition:
-      \_ref_obj: (prim_cipher_pkg::sbox4_64bit::state_out), line:14:12, endln:14:21
-        |vpiParent:
-        \_return_stmt: , line:14:5, endln:14:11
-        |vpiName:state_out
-        |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_out
-        |vpiActual:
-        \_logic_var: (prim_cipher_pkg::sbox4_64bit::state_out), line:9:18, endln:9:27
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-\_logic_typespec: , line:3:13, endln:3:30
-  |vpiParent:
-  \_parameter: (prim_cipher_pkg::PRESENT_SBOX4), line:3:31, endln:3:44
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:3:19, endln:3:25
-    |vpiParent:
-    \_logic_typespec: , line:3:13, endln:3:30
-    |vpiLeftRange:
-    \_constant: , line:3:20, endln:3:22
-      |vpiParent:
-      \_range: , line:3:19, endln:3:25
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:23, endln:3:24
-      |vpiParent:
-      \_range: , line:3:19, endln:3:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:3:25, endln:3:30
-    |vpiParent:
-    \_logic_typespec: , line:3:13, endln:3:30
-    |vpiLeftRange:
-    \_constant: , line:3:26, endln:3:27
-      |vpiParent:
-      \_range: , line:3:25, endln:3:30
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:28, endln:3:29
-      |vpiParent:
-      \_range: , line:3:25, endln:3:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:22, endln:8:34
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:8:28, endln:8:34
-    |vpiParent:
-    \_logic_typespec: , line:8:22, endln:8:34
-    |vpiLeftRange:
-    \_constant: , line:8:29, endln:8:31
-      |vpiParent:
-      \_range: , line:8:28, endln:8:34
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:32, endln:8:33
-      |vpiParent:
-      \_range: , line:8:28, endln:8:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:47, endln:8:52
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:8:53, endln:8:59
-    |vpiParent:
-    \_logic_typespec: , line:8:47, endln:8:52
-    |vpiLeftRange:
-    \_constant: , line:8:54, endln:8:56
-      |vpiParent:
-      \_range: , line:8:53, endln:8:59
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:57, endln:8:58
-      |vpiParent:
-      \_range: , line:8:53, endln:8:59
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:70, endln:8:75
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:8:76, endln:8:82
-    |vpiParent:
-    \_logic_typespec: , line:8:70, endln:8:75
-    |vpiLeftRange:
-    \_constant: , line:8:77, endln:8:79
-      |vpiParent:
-      \_range: , line:8:76, endln:8:82
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:80, endln:8:81
-      |vpiParent:
-      \_range: , line:8:76, endln:8:82
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:8:82, endln:8:87
-    |vpiParent:
-    \_logic_typespec: , line:8:70, endln:8:75
-    |vpiLeftRange:
-    \_constant: , line:8:83, endln:8:84
-      |vpiParent:
-      \_range: , line:8:82, endln:8:87
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:85, endln:8:86
-      |vpiParent:
-      \_range: , line:8:82, endln:8:87
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:5, endln:9:17
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:9:11, endln:9:17
-    |vpiParent:
-    \_logic_typespec: , line:9:5, endln:9:17
-    |vpiLeftRange:
-    \_constant: , line:9:12, endln:9:14
-      |vpiParent:
-      \_range: , line:9:11, endln:9:17
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:15, endln:9:16
-      |vpiParent:
-      \_range: , line:9:11, endln:9:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:11:10, endln:11:13
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiSigned:1
-\_logic_typespec: , line:18:13, endln:18:31
-  |vpiParent:
-  \_parameter: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:18:32, endln:18:50
-  |vpiInstance:
-  \_package: prim_cipher_pkg (prim_cipher_pkg::), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-  |vpiRange:
-  \_range: , line:18:19, endln:18:25
-    |vpiParent:
-    \_logic_typespec: , line:18:13, endln:18:31
-    |vpiLeftRange:
-    \_constant: , line:18:20, endln:18:22
-      |vpiParent:
-      \_range: , line:18:19, endln:18:25
-      |vpiDecompile:11
-      |vpiSize:64
-      |UINT:11
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:18:23, endln:18:24
-      |vpiParent:
-      \_range: , line:18:19, endln:18:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:18:25, endln:18:31
-    |vpiParent:
-    \_logic_typespec: , line:18:13, endln:18:31
-    |vpiLeftRange:
-    \_constant: , line:18:26, endln:18:28
-      |vpiParent:
-      \_range: , line:18:25, endln:18:31
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:18:29, endln:18:30
-      |vpiParent:
-      \_range: , line:18:25, endln:18:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_function: (work@mailbox::new), line:3:5, endln:4:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
-  |vpiName:new
-  |vpiFullName:work@mailbox::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-  |vpiIODecl:
-  \_io_decl: (bound), line:3:23, endln:3:28
-    |vpiParent:
-    \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiDirection:1
-    |vpiName:bound
-    |vpiExpr:
-    \_constant: , line:3:31, endln:3:32
-    |vpiTypedef:
-    \_ref_typespec: (work@mailbox::new::bound)
-      |vpiParent:
-      \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiFullName:work@mailbox::new::bound
-      |vpiActual:
-      \_int_typespec: , line:3:19, endln:3:22
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
 \_int_typespec: , line:3:19, endln:3:22
   |vpiSigned:1
-\_function: (work@mailbox::num), line:6:5, endln:7:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
-  |vpiName:num
-  |vpiFullName:work@mailbox::num
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::num), line:6:14, endln:6:17
 \_int_typespec: , line:6:14, endln:6:17
   |vpiSigned:1
-\_function: (work@mailbox::try_put), line:12:5, endln:13:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_put
-  |vpiFullName:work@mailbox::try_put
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_logic_var: (work@mailbox::try_put)
-  |vpiIODecl:
-  \_io_decl: (message), line:12:23, endln:12:30
-    |vpiParent:
-    \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiDirection:1
-    |vpiName:message
-\_function: (work@mailbox::try_get), line:18:5, endln:19:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_get
-  |vpiFullName:work@mailbox::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-  |vpiIODecl:
-  \_io_decl: (message), line:18:31, endln:18:38
-    |vpiParent:
-    \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:18:14, endln:18:17
   |vpiSigned:1
-\_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_peek
-  |vpiFullName:work@mailbox::try_peek
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-  |vpiIODecl:
-  \_io_decl: (message), line:24:31, endln:24:38
-    |vpiParent:
-    \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:24:14, endln:24:17
   |vpiSigned:1
-\_enum_typespec: (state), line:32:5, endln:32:74
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
-  |vpiName:state
-  |vpiEnumConst:
-  \_enum_const: (FINISHED), line:32:20, endln:32:28
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:FINISHED
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (RUNNING), line:32:30, endln:32:37
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:RUNNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (WAITING), line:32:39, endln:32:46
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:WAITING
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:SUSPENDED
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (KILLED), line:32:59, endln:32:65
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:KILLED
-    |INT:4
-    |vpiDecompile:4
-    |vpiSize:64
-\_function: (work@process::self), line:34:5, endln:34:11
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
-  |vpiName:self
-  |vpiFullName:work@process::self
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_class_var: (work@process::self), line:34:21, endln:34:28
 \_class_typespec: , line:34:21, endln:34:28
   |vpiClassDefn:
   \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
-\_function: (work@process::status), line:37:5, endln:38:16
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
-  |vpiName:status
-  |vpiFullName:work@process::status
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_enum_var: (work@process::status), line:37:14, endln:37:19
-\_function: (work@semaphore::new), line:57:5, endln:58:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
-  |vpiName:new
-  |vpiFullName:work@semaphore::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:57:22, endln:57:30
-    |vpiParent:
-    \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:57:33, endln:57:34
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::new::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiFullName:work@semaphore::new::keyCount
-      |vpiActual:
-      \_int_typespec: , line:57:18, endln:57:21
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
@@ -3630,30 +2164,6 @@ design: (work@top)
   |vpiSigned:1
 \_int_typespec: , line:63:14, endln:63:17
   |vpiSigned:1
-\_function: (work@semaphore::try_get), line:66:5, endln:67:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
-  |vpiName:try_get
-  |vpiFullName:work@semaphore::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:66:30, endln:66:38
-    |vpiParent:
-    \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:66:41, endln:66:42
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::try_get::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiFullName:work@semaphore::try_get::keyCount
-      |vpiActual:
-      \_int_typespec: , line:66:26, endln:66:29
 \_int_typespec: , line:66:14, endln:66:17
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
@@ -3661,15 +2171,9 @@ design: (work@top)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
-
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:32:12: Illegal wire LHS, data_o
-[LINT]: ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:36:11: Illegal wire LHS, data_o
-[LINT]: ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:37:12: Illegal wire LHS, data_o
-============================== End Linting Results ==============================
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv | ${SURELOG_DIR}/build/regression/PackageFuncCall/roundtrip/builtin_000.sv | 0 | 0 |

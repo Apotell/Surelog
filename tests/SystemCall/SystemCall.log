@@ -80,12 +80,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/SystemCall/dut.sv:1:1: No timescale set for "m2".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/SystemCall/dut.sv:1:1: Compile module "work@m2".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/SystemCall/dut.sv:1:1: Top level module "work@m2".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               4
@@ -94,40 +88,23 @@ design                                                 1
 io_decl                                                1
 let_decl                                               1
 logic_net                                              3
-module_inst                                            3
+module_inst                                            1
 operation                                              1
 ref_obj                                                5
-ref_typespec                                           1
 seq_formal_decl                                        1
 sys_func_call                                          2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               4
-cont_assign                                            2
-design                                                 1
-io_decl                                                1
-let_decl                                               2
-logic_net                                              3
-module_inst                                            3
-operation                                              2
-ref_obj                                               10
-ref_typespec                                           2
-seq_formal_decl                                        1
-sys_func_call                                          4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@m2)
-|vpiElaborated:1
-|vpiName:work@m2
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
   |vpiParent:
-  \_design: (work@m2)
+  \_design: (unnamed)
   |vpiFullName:work@m2
   |vpiLetDecl:
   \_let_decl: (p2), line:3:1, endln:3:30
@@ -167,21 +144,21 @@ design: (work@m2)
   |vpiNet:
   \_logic_net: (work@m2.a), line:4:8, endln:4:9
     |vpiParent:
-    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    \_cont_assign: , line:4:8, endln:4:39
     |vpiName:a
     |vpiFullName:work@m2.a
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@m2.x), line:4:18, endln:4:19
     |vpiParent:
-    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    \_sys_func_call: ($past), line:4:12, endln:4:17
     |vpiName:x
     |vpiFullName:work@m2.x
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@m2.clock), line:4:32, endln:4:37
     |vpiParent:
-    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    \_operation: , line:4:24, endln:4:37
     |vpiName:clock
     |vpiFullName:work@m2.clock
     |vpiNetType:1
@@ -193,11 +170,6 @@ design: (work@m2)
     \_sys_func_call: ($past), line:4:12, endln:4:17
       |vpiParent:
       \_cont_assign: , line:4:8, endln:4:39
-      |vpiTypespec:
-      \_ref_typespec: (work@m2)
-        |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
-        |vpiFullName:work@m2
       |vpiArgument:
       \_ref_obj: (work@m2.x), line:4:18, endln:4:19
         |vpiParent:
@@ -218,87 +190,6 @@ design: (work@m2)
         |vpiSize:64
         |INT:0
         |vpiConstType:7
-      |vpiArgument:
-      \_operation: , line:4:24, endln:4:37
-        |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
-        |vpiOpType:39
-        |vpiOperand:
-        \_ref_obj: (work@m2.clock), line:4:32, endln:4:37
-          |vpiParent:
-          \_operation: , line:4:24, endln:4:37
-          |vpiName:clock
-          |vpiFullName:work@m2.clock
-          |vpiActual:
-          \_logic_net: (work@m2.clock), line:4:32, endln:4:37
-      |vpiName:$past
-    |vpiLhs:
-    \_ref_obj: (work@m2.a), line:4:8, endln:4:9
-      |vpiParent:
-      \_cont_assign: , line:4:8, endln:4:39
-      |vpiName:a
-      |vpiFullName:work@m2.a
-      |vpiActual:
-      \_logic_net: (work@m2.a), line:4:8, endln:4:9
-|uhdmtopModules:
-\_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
-  |vpiParent:
-  \_design: (work@m2)
-  |vpiName:work@m2
-  |vpiLetDecl:
-  \_let_decl: (p2), line:3:1, endln:3:30
-    |vpiParent:
-    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
-    |vpiExpr:
-    \_sys_func_call: ($past), line:3:13, endln:3:29
-      |vpiParent:
-      \_let_decl: (p2), line:3:1, endln:3:30
-      |vpiArgument:
-      \_ref_obj: (work@m2.p2.x), line:3:19, endln:3:20
-        |vpiParent:
-        \_sys_func_call: ($past), line:3:13, endln:3:29
-        |vpiName:x
-        |vpiFullName:work@m2.p2.x
-      |vpiArgument:
-      \_constant: , line:3:21, endln:3:21
-      |vpiArgument:
-      \_constant: , line:3:22, endln:3:22
-      |vpiArgument:
-      \_ref_obj: (work@m2.p2.clock), line:3:23, endln:3:28
-        |vpiParent:
-        \_sys_func_call: ($past), line:3:13, endln:3:29
-        |vpiName:clock
-        |vpiFullName:work@m2.p2.clock
-      |vpiName:$past
-    |vpiName:p2
-  |vpiDefName:work@m2
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:4:8, endln:4:39
-    |vpiParent:
-    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
-    |vpiRhs:
-    \_sys_func_call: ($past), line:4:12, endln:4:17
-      |vpiParent:
-      \_cont_assign: , line:4:8, endln:4:39
-      |vpiTypespec:
-      \_ref_typespec: (work@m2)
-        |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
-        |vpiFullName:work@m2
-      |vpiArgument:
-      \_ref_obj: (work@m2.x), line:4:18, endln:4:19
-        |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
-        |vpiName:x
-        |vpiFullName:work@m2.x
-        |vpiActual:
-        \_logic_net: (work@m2.x), line:4:18, endln:4:19
-      |vpiArgument:
-      \_constant: , line:4:20, endln:4:20
-      |vpiArgument:
-      \_constant: , line:4:21, endln:4:21
       |vpiArgument:
       \_operation: , line:4:24, endln:4:37
         |vpiParent:
@@ -326,11 +217,9 @@ design: (work@m2)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/SystemCall/dut.sv:3:13: Non synthesizable construct, $past
-[LINT]: ${SURELOG_DIR}/tests/SystemCall/dut.sv:4:12: Non synthesizable construct, $past
 [LINT]: ${SURELOG_DIR}/tests/SystemCall/dut.sv:3:13: Non synthesizable construct, $past
 [LINT]: ${SURELOG_DIR}/tests/SystemCall/dut.sv:4:12: Non synthesizable construct, $past
 ============================== End Linting Results ==============================

@@ -50,42 +50,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/DataAttrib/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DataAttrib/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/DataAttrib/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 attribute                                              1
 design                                                 1
-logic_net                                              6
-logic_typespec                                         5
-module_inst                                            2
-ref_typespec                                           6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-attribute                                              1
-design                                                 1
-logic_net                                              6
-logic_typespec                                         5
-module_inst                                            2
-ref_typespec                                           6
+logic_net                                              3
+logic_typespec                                         3
+module_inst                                            1
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DataAttrib/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DataAttrib/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DataAttrib/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DataAttrib/dut.sv, line:1:1, endln:7:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -130,70 +114,7 @@ design: (work@top)
     |vpiName:no_attrib
     |vpiFullName:work@top.no_attrib
     |vpiNetType:48
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DataAttrib/dut.sv, line:1:1, endln:7:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.my_reg1), line:3:20, endln:3:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DataAttrib/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.my_reg1)
-      |vpiParent:
-      \_logic_net: (work@top.my_reg1), line:3:20, endln:3:27
-      |vpiFullName:work@top.my_reg1
-      |vpiActual:
-      \_logic_typespec: , line:3:16, endln:3:19
-    |vpiName:my_reg1
-    |vpiFullName:work@top.my_reg1
-    |vpiNetType:48
-    |vpiAttribute:
-    \_attribute: (preserve), line:3:4, endln:3:12
-      |vpiParent:
-      \_logic_net: (work@top.my_reg2), line:3:29, endln:3:36
-      |vpiName:preserve
-  |vpiNet:
-  \_logic_net: (work@top.my_reg2), line:3:29, endln:3:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DataAttrib/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.my_reg2)
-      |vpiParent:
-      \_logic_net: (work@top.my_reg2), line:3:29, endln:3:36
-      |vpiFullName:work@top.my_reg2
-      |vpiActual:
-      \_logic_typespec: , line:3:16, endln:3:19
-    |vpiName:my_reg2
-    |vpiFullName:work@top.my_reg2
-    |vpiNetType:48
-    |vpiAttribute:
-    \_attribute: (preserve), line:3:4, endln:3:12
-  |vpiNet:
-  \_logic_net: (work@top.no_attrib), line:5:5, endln:5:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DataAttrib/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.no_attrib)
-      |vpiParent:
-      \_logic_net: (work@top.no_attrib), line:5:5, endln:5:14
-      |vpiFullName:work@top.no_attrib
-      |vpiActual:
-      \_logic_typespec: , line:5:1, endln:5:4
-    |vpiName:no_attrib
-    |vpiFullName:work@top.no_attrib
-    |vpiNetType:48
-  |vpiTopModule:1
 \_weaklyReferenced:
-\_logic_typespec: , line:3:16, endln:3:19
-  |vpiParent:
-  \_logic_net: (work@top.my_reg2), line:3:29, endln:3:36
-\_logic_typespec: , line:5:1, endln:5:4
-  |vpiParent:
-  \_logic_net: (work@top.no_attrib), line:5:5, endln:5:14
 \_logic_typespec: , line:3:16, endln:3:19
 \_logic_typespec: , line:3:16, endln:3:19
 \_logic_typespec: , line:5:1, endln:5:4
@@ -202,7 +123,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/DataAttrib/dut.sv | ${SURELOG_DIR}/build/regression/DataAttrib/roundtrip/dut_000.sv | 2 | 7 |

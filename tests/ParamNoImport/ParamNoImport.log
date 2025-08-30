@@ -118,67 +118,38 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:5:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:14:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:5:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:14:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:1:1: Compile module "work@test".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:14:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              23
+constant                                               8
 design                                                 1
 int_typespec                                           1
-logic_typespec                                         6
-module_inst                                            7
-operation                                              9
-package                                                2
-param_assign                                           6
-parameter                                              7
-range                                                  6
+logic_typespec                                         2
+module_inst                                            2
+operation                                              3
+package                                                1
+param_assign                                           3
+parameter                                              3
+range                                                  2
 ref_module                                             1
-ref_obj                                                1
-ref_typespec                                          24
-string_typespec                                        7
-struct_typespec                                        6
-tagged_pattern                                         7
-typespec_member                                        6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              23
-design                                                 1
-int_typespec                                           1
-logic_typespec                                         6
-module_inst                                            7
-operation                                              9
-package                                                2
-param_assign                                           6
-parameter                                              7
-range                                                  6
-ref_module                                             1
-ref_obj                                                1
-ref_typespec                                          24
-string_typespec                                        7
-struct_typespec                                        6
-tagged_pattern                                         7
-typespec_member                                        6
+ref_typespec                                           9
+string_typespec                                        3
+struct_typespec                                        2
+tagged_pattern                                         3
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiParameter:
@@ -225,75 +196,7 @@ design: (work@dut)
   |vpiTypedef:
   \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
     |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiName:pkg::pwr_ast_rsp_t
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-      |vpiParent:
-      \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-      |vpiName:slow_clk_val
-      |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::pwr_ast_rsp_t::slow_clk_val)
-        |vpiParent:
-        \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-        |vpiFullName:pkg::pkg::pwr_ast_rsp_t::slow_clk_val
-        |vpiActual:
-        \_logic_typespec: , line:7:3, endln:7:14
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
-      |vpiRefLineNo:7
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:7
-      |vpiRefEndColumnNo:14
-  |vpiDefName:pkg
-|uhdmtopPackages:
-\_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:pkg
-  |vpiFullName:pkg::
-  |vpiParameter:
-  \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiTypespec:
-    \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT)
-      |vpiParent:
-      \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
-      |vpiFullName:pkg::PWR_AST_RSP_DEFAULT
-      |vpiActual:
-      \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-    |vpiName:PWR_AST_RSP_DEFAULT
-    |vpiFullName:pkg::PWR_AST_RSP_DEFAULT
-  |vpiParamAssign:
-  \_param_assign: , line:9:25, endln:11:2
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiRhs:
-    \_operation: , line:9:47, endln:11:2
-      |vpiParent:
-      \_param_assign: , line:9:25, endln:11:2
-      |vpiTypespec:
-      \_ref_typespec: 
-        |vpiActual:
-        \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:10:17, endln:10:22
-        |vpiParent:
-        \_operation: , line:9:47, endln:11:2
-        |vpiDecompile:2'b10
-        |vpiSize:2
-        |BIN:10
-        |vpiConstType:3
-    |vpiLhs:
     \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
-  |vpiTypedef:
-  \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
     |vpiName:pkg::pwr_ast_rsp_t
     |vpiInstance:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
@@ -304,10 +207,10 @@ design: (work@dut)
       \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
       |vpiName:slow_clk_val
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::pwr_ast_rsp_t::slow_clk_val)
+      \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val)
         |vpiParent:
         \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-        |vpiFullName:pkg::pkg::pwr_ast_rsp_t::slow_clk_val
+        |vpiFullName:pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val
         |vpiActual:
         \_logic_typespec: , line:7:3, endln:7:14
       |vpiRefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
@@ -316,11 +219,10 @@ design: (work@dut)
       |vpiRefEndLineNo:7
       |vpiRefEndColumnNo:14
   |vpiDefName:pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
@@ -334,7 +236,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@test
   |vpiParameter:
   \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:37
@@ -363,85 +265,7 @@ design: (work@dut)
     |vpiLhs:
     \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:37
   |vpiDefName:work@test
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@test (work@dut.t), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:16:1, endln:16:52
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
-    |vpiName:t
-    |vpiFullName:work@dut.t
-    |vpiParameter:
-    \_parameter: (work@dut.t.PWR_AST_RSP), line:1:26, endln:1:37
-      |vpiParent:
-      \_module_inst: work@test (work@dut.t), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:16:1, endln:16:52
-      |BIN:0
-      |vpiName:PWR_AST_RSP
-      |vpiFullName:work@dut.t.PWR_AST_RSP
-    |vpiParamAssign:
-    \_param_assign: , line:1:26, endln:1:42
-      |vpiParent:
-      \_module_inst: work@test (work@dut.t), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:16:1, endln:16:52
-      |vpiOverriden:1
-      |vpiRhs:
-      \_operation: , line:9:47, endln:11:2
-        |vpiParent:
-        \_param_assign: , line:1:26, endln:1:42
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.t)
-          |vpiParent:
-          \_operation: , line:9:47, endln:11:2
-          |vpiFullName:work@dut.t
-          |vpiActual:
-          \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:10:17, endln:10:22
-          |vpiParent:
-          \_operation: , line:9:47, endln:11:2
-          |vpiDecompile:2'b10
-          |vpiSize:2
-          |BIN:10
-          |vpiConstType:3
-      |vpiLhs:
-      \_parameter: (work@dut.t.PWR_AST_RSP), line:1:26, endln:1:37
-    |vpiDefName:work@test
-    |vpiDefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
 \_weaklyReferenced:
-\_logic_typespec: , line:7:3, endln:7:14
-  |vpiParent:
-  \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiRange:
-  \_range: , line:7:9, endln:7:14
-    |vpiParent:
-    \_logic_typespec: , line:7:3, endln:7:14
-    |vpiLeftRange:
-    \_constant: , line:7:10, endln:7:11
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:12, endln:7:13
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:7:3, endln:7:14
   |vpiParent:
   \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
@@ -471,61 +295,12 @@ design: (work@dut)
   |vpiParent:
   \_tagged_pattern: , line:10:17, endln:10:22
   |vpiName:slow_clk_val
-\_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-  |vpiParent:
-  \_ref_typespec: (work@dut.t)
-  |vpiName:pkg::pwr_ast_rsp_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-    |vpiParent:
-    \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
-    |vpiName:slow_clk_val
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.t.pkg::pwr_ast_rsp_t.slow_clk_val)
-      |vpiParent:
-      \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-      |vpiFullName:work@dut.t.pkg::pwr_ast_rsp_t.slow_clk_val
-      |vpiActual:
-      \_logic_typespec: , line:7:3, endln:7:14
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:14
-\_logic_typespec: , line:7:3, endln:7:14
-  |vpiParent:
-  \_ref_typespec: (work@dut.t.pkg::pwr_ast_rsp_t.slow_clk_val)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiRange:
-  \_range: , line:7:9, endln:7:14
-    |vpiParent:
-    \_logic_typespec: , line:7:3, endln:7:14
-    |vpiLeftRange:
-    \_constant: , line:7:10, endln:7:11
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:12, endln:7:13
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ParamNoImport/dut.sv | ${SURELOG_DIR}/build/regression/ParamNoImport/roundtrip/dut_000.sv | 2 | 18 |

@@ -79,54 +79,31 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ArrayNet/dut.sv:1:1: No timescale set for "memory".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ArrayNet/dut.sv:1:1: Compile module "work@memory".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ArrayNet/dut.sv:1:1: Top level module "work@memory".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_net                                              1
 begin                                                  1
-constant                                               9
+constant                                               3
 design                                                 1
 initial                                                1
-logic_net                                              2
-logic_typespec                                         2
-module_inst                                            3
-range                                                  4
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            1
+range                                                  1
 ref_obj                                                1
-ref_typespec                                           2
+ref_typespec                                           1
 sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_net                                              1
-begin                                                  2
-constant                                               9
-design                                                 1
-initial                                                2
-logic_net                                              2
-logic_typespec                                         2
-module_inst                                            3
-range                                                  4
-ref_obj                                                2
-ref_typespec                                           2
-sys_func_call                                          2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ArrayNet/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@memory)
-|vpiElaborated:1
-|vpiName:work@memory
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
   |vpiParent:
-  \_design: (work@memory)
+  \_design: (unnamed)
   |vpiFullName:work@memory
   |vpiDefName:work@memory
   |vpiNet:
@@ -173,102 +150,7 @@ design: (work@memory)
           |vpiActual:
           \_logic_net: (work@memory.my_memory), line:2:11, endln:2:20
         |vpiName:$readmemh
-|uhdmtopModules:
-\_module_inst: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
-  |vpiParent:
-  \_design: (work@memory)
-  |vpiName:work@memory
-  |vpiDefName:work@memory
-  |vpiTop:1
-  |vpiArrayNet:
-  \_array_net: (work@memory.my_memory), line:2:11, endln:2:20
-    |vpiParent:
-    \_module_inst: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
-    |vpiSize:256
-    |vpiName:my_memory
-    |vpiFullName:work@memory.my_memory
-    |vpiRange:
-    \_range: , line:2:21, endln:2:28
-      |vpiParent:
-      \_array_net: (work@memory.my_memory), line:2:11, endln:2:20
-      |vpiLeftRange:
-      \_constant: , line:2:22, endln:2:23
-        |vpiParent:
-        \_range: , line:2:21, endln:2:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:2:24, endln:2:27
-        |vpiParent:
-        \_range: , line:2:21, endln:2:28
-        |vpiDecompile:255
-        |vpiSize:64
-        |UINT:255
-        |vpiConstType:9
-    |vpiNet:
-    \_logic_net: (work@memory.my_memory), line:2:11, endln:2:20
-      |vpiParent:
-      \_array_net: (work@memory.my_memory), line:2:11, endln:2:20
-      |vpiTypespec:
-      \_ref_typespec: (work@memory.my_memory)
-        |vpiParent:
-        \_logic_net: (work@memory.my_memory), line:2:11, endln:2:20
-        |vpiFullName:work@memory.my_memory
-        |vpiActual:
-        \_logic_typespec: , line:2:1, endln:2:10
-      |vpiFullName:work@memory.my_memory
-      |vpiNetType:48
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:4:1, endln:6:4
-    |vpiParent:
-    \_module_inst: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
-    |vpiStmt:
-    \_begin: (work@memory), line:4:9, endln:6:4
-      |vpiParent:
-      \_initial: , line:4:1, endln:6:4
-      |vpiFullName:work@memory
-      |vpiStmt:
-      \_sys_func_call: ($readmemh), line:5:2, endln:5:37
-        |vpiParent:
-        \_begin: (work@memory), line:4:9, endln:6:4
-        |vpiArgument:
-        \_constant: , line:5:12, endln:5:25
-        |vpiArgument:
-        \_ref_obj: (work@memory.my_memory), line:5:27, endln:5:36
-          |vpiParent:
-          \_sys_func_call: ($readmemh), line:5:2, endln:5:37
-          |vpiName:my_memory
-          |vpiFullName:work@memory.my_memory
-          |vpiActual:
-          \_array_net: (work@memory.my_memory), line:2:11, endln:2:20
-        |vpiName:$readmemh
 \_weaklyReferenced:
-\_logic_typespec: , line:2:1, endln:2:10
-  |vpiParent:
-  \_logic_net: (work@memory.my_memory), line:2:11, endln:2:20
-  |vpiRange:
-  \_range: , line:2:5, endln:2:10
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:10
-    |vpiLeftRange:
-    \_constant: , line:2:6, endln:2:7
-      |vpiParent:
-      \_range: , line:2:5, endln:2:10
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:8, endln:2:9
-      |vpiParent:
-      \_range: , line:2:5, endln:2:10
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:2:1, endln:2:28
   |vpiRange:
   \_range: , line:2:5, endln:2:10
@@ -295,7 +177,7 @@ design: (work@memory)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ArrayNet/dut.sv | ${SURELOG_DIR}/build/regression/ArrayNet/roundtrip/dut_000.sv | 1 | 7 |

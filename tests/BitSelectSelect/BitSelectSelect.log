@@ -111,54 +111,23 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv:2:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv:2:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv:2:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_select                                             4
-constant                                              20
-cont_assign                                            2
+bit_select                                             2
+constant                                               9
+cont_assign                                            1
 design                                                 1
-hier_path                                              2
-int_typespec                                           3
-int_var                                                1
+hier_path                                              1
+int_typespec                                           1
 logic_net                                              2
 logic_typespec                                         1
-module_inst                                            4
-packed_array_typespec                                  2
-packed_array_var                                       1
-port                                                   2
-range                                                  7
-ref_obj                                                4
-ref_typespec                                           8
+module_inst                                            1
+packed_array_typespec                                  1
+port                                                   1
+range                                                  3
+ref_obj                                                2
+ref_typespec                                           4
 struct_typespec                                        1
-struct_var                                             1
-typespec_member                                        1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_select                                             6
-constant                                              21
-cont_assign                                            3
-design                                                 1
-hier_path                                              3
-int_typespec                                           3
-int_var                                                1
-logic_net                                              2
-logic_typespec                                         1
-module_inst                                            4
-packed_array_typespec                                  2
-packed_array_var                                       1
-port                                                   3
-range                                                  7
-ref_obj                                                6
-ref_typespec                                           9
-struct_typespec                                        1
-struct_var                                             1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectSelect/slpp_all/surelog.uhdm ...
@@ -166,13 +135,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
@@ -286,165 +254,6 @@ design: (work@top)
         |vpiName:min_v
         |vpiFullName:a[0][0].min_v
       |vpiName:a[0][0].min_v
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_int_var: (work@top.o), line:2:23, endln:2:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_int_var: (work@top.o), line:2:23, endln:2:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:2:19, endln:2:22
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-    |vpiRange:
-    \_range: , line:7:17, endln:7:22
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-      |vpiLeftRange:
-      \_constant: , line:7:18, endln:7:19
-        |vpiParent:
-        \_range: , line:7:17, endln:7:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:7:20, endln:7:21
-        |vpiParent:
-        \_range: , line:7:17, endln:7:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiRange:
-    \_range: , line:7:22, endln:7:27
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-      |vpiLeftRange:
-      \_constant: , line:7:23, endln:7:24
-        |vpiParent:
-        \_range: , line:7:22, endln:7:27
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:7:25, endln:7:26
-        |vpiParent:
-        \_range: , line:7:22, endln:7:27
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElement:
-    \_struct_var: (work@top.a)
-      |vpiParent:
-      \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-      |vpiTypespec:
-      \_ref_typespec: (work@top.a)
-        |vpiParent:
-        \_struct_var: (work@top.a)
-        |vpiFullName:work@top.a
-        |vpiActual:
-        \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
-      |vpiFullName:work@top.a
-  |vpiTypedef:
-  \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:2:23, endln:2:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:2:23, endln:2:24
-      |vpiParent:
-      \_port: (o), line:2:23, endln:2:24
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_var: (work@top.o), line:2:23, endln:2:24
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:2:23, endln:2:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:2:19, endln:2:22
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-  |vpiContAssign:
-  \_cont_assign: , line:8:11, endln:8:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-    |vpiRhs:
-    \_constant: , line:8:27, endln:8:29
-      |vpiDecompile:1023
-      |vpiSize:10
-      |UINT:1023
-      |vpiConstType:9
-    |vpiLhs:
-    \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-      |vpiParent:
-      \_cont_assign: , line:8:11, endln:8:29
-      |vpiActual:
-      \_bit_select: (a[0]), line:8:11, endln:8:12
-        |vpiParent:
-        \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-        |vpiName:a
-        |vpiFullName:a[0]
-        |vpiActual:
-        \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-        |vpiIndex:
-        \_constant: , line:8:13, endln:8:14
-          |vpiParent:
-          \_bit_select: (a[0]), line:8:11, endln:8:12
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_bit_select: (a[0][0]), line:8:13, endln:8:14
-        |vpiParent:
-        \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-        |vpiFullName:a[0][0]
-        |vpiIndex:
-        \_constant: , line:8:16, endln:8:17
-          |vpiParent:
-          \_bit_select: (a[0][0]), line:8:13, endln:8:14
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_ref_obj: (a[0][0].min_v), line:8:19, endln:8:24
-        |vpiParent:
-        \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-        |vpiName:min_v
-        |vpiFullName:a[0][0].min_v
-        |vpiActual:
-        \_typespec_member: (min_v), line:4:19, endln:4:24
-      |vpiName:a[0][0].min_v
 \_weaklyReferenced:
 \_logic_typespec: , line:4:7, endln:4:18
   |vpiParent:
@@ -469,12 +278,6 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:2:19, endln:2:22
-  |vpiSigned:1
-\_int_typespec: , line:2:19, endln:2:22
-  |vpiParent:
-  \_int_var: (work@top.o), line:2:23, endln:2:24
-  |vpiSigned:1
 \_int_typespec: , line:2:19, endln:2:22
   |vpiSigned:1
 \_packed_array_typespec: , line:7:4, endln:7:22
@@ -524,45 +327,12 @@ design: (work@top)
     \_packed_array_typespec: , line:7:4, endln:7:22
     |vpiActual:
     \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
-\_cont_assign: , line:8:11, endln:8:29
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
-  |vpiRhs:
-  \_constant: , line:8:27, endln:8:29
-  |vpiLhs:
-  \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-    |vpiParent:
-    \_cont_assign: , line:8:11, endln:8:29
-    |vpiActual:
-    \_bit_select: (a[0]), line:8:11, endln:8:12
-      |vpiParent:
-      \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-      |vpiName:a
-      |vpiFullName:a[0]
-      |vpiIndex:
-      \_constant: , line:8:13, endln:8:14
-    |vpiActual:
-    \_bit_select: (a[0][0]), line:8:13, endln:8:14
-      |vpiParent:
-      \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-      |vpiFullName:a[0][0]
-      |vpiActual:
-      \_packed_array_var: (work@top.a), line:7:28, endln:7:29
-      |vpiIndex:
-      \_constant: , line:8:16, endln:8:17
-    |vpiActual:
-    \_ref_obj: (a[0][0].min_v), line:8:19, endln:8:24
-      |vpiParent:
-      \_hier_path: (a[0][0].min_v), line:8:11, endln:8:12
-      |vpiName:min_v
-      |vpiFullName:a[0][0].min_v
-    |vpiName:a[0][0].min_v
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv | ${SURELOG_DIR}/build/regression/BitSelectSelect/roundtrip/dut_000.sv | 4 | 9 |

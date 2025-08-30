@@ -10,24 +10,12 @@
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] work@top work@top
-[MOD] work@ibex_csr work@top.u_mie_csr
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/Connection/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/Connection/dut.sv:1:1: Instance "work@top".
-[NTE:EL0523] ${SURELOG_DIR}/tests/Connection/dut.sv:2:4: Instance "work@top.u_mie_csr".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                               7
+constant                                               6
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -36,16 +24,15 @@ function                                               9
 int_typespec                                           9
 int_var                                                4
 io_decl                                               11
-logic_net                                             12
-logic_typespec                                        12
+logic_net                                              6
+logic_typespec                                         6
 logic_var                                              1
-module_inst                                            5
-operation                                              1
-package                                                2
-port                                                  16
+module_inst                                            2
+package                                                1
+port                                                  10
 ref_module                                             1
-ref_obj                                               15
-ref_typespec                                          31
+ref_obj                                                7
+ref_typespec                                          19
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Connection/slpp_unit/surelog.uhdm ...
@@ -53,23 +40,15 @@ task                                                   9
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Connection/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (builtin::any_sverilog_class)
     |vpiParent:
@@ -103,7 +82,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Connection/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@mailbox
   |vpiMethod:
   \_function: (work@mailbox::new), line:3:5, endln:4:16
@@ -282,7 +261,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Connection/builtin.sv, line:30:3, endln:52:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@process
   |vpiTypedef:
   \_enum_typespec: (state), line:32:5, endln:32:74
@@ -404,7 +383,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Connection/builtin.sv, line:55:3, endln:69:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@semaphore
   |vpiMethod:
   \_function: (work@semaphore::new), line:57:5, endln:58:16
@@ -541,7 +520,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:12:1, endln:19:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@ibex_csr
   |vpiDefName:work@ibex_csr
   |vpiNet:
@@ -659,7 +638,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -757,262 +736,6 @@ design: (work@top)
         |vpiSize:1
         |BIN:1
         |vpiConstType:3
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.rd_impl_conn), line:1:18, endln:1:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.rd_impl_conn)
-      |vpiParent:
-      \_logic_net: (work@top.rd_impl_conn), line:1:18, endln:1:30
-      |vpiFullName:work@top.rd_impl_conn
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:18
-    |vpiName:rd_impl_conn
-    |vpiFullName:work@top.rd_impl_conn
-  |vpiNet:
-  \_logic_net: (work@top.rd_name_conn), line:1:32, endln:1:44
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.rd_name_conn)
-      |vpiParent:
-      \_logic_net: (work@top.rd_name_conn), line:1:32, endln:1:44
-      |vpiFullName:work@top.rd_name_conn
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:18
-    |vpiName:rd_name_conn
-    |vpiFullName:work@top.rd_name_conn
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (rd_impl_conn), line:1:18, endln:1:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiName:rd_impl_conn
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.rd_impl_conn), line:1:18, endln:1:30
-      |vpiParent:
-      \_port: (rd_impl_conn), line:1:18, endln:1:30
-      |vpiName:rd_impl_conn
-      |vpiFullName:work@top.rd_impl_conn
-      |vpiActual:
-      \_logic_net: (work@top.rd_impl_conn), line:1:18, endln:1:30
-    |vpiTypedef:
-    \_ref_typespec: (work@top.rd_impl_conn)
-      |vpiParent:
-      \_port: (rd_impl_conn), line:1:18, endln:1:30
-      |vpiFullName:work@top.rd_impl_conn
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:18
-  |vpiPort:
-  \_port: (rd_name_conn), line:1:32, endln:1:44
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiName:rd_name_conn
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.rd_name_conn), line:1:32, endln:1:44
-      |vpiParent:
-      \_port: (rd_name_conn), line:1:32, endln:1:44
-      |vpiName:rd_name_conn
-      |vpiFullName:work@top.rd_name_conn
-      |vpiActual:
-      \_logic_net: (work@top.rd_name_conn), line:1:32, endln:1:44
-    |vpiTypedef:
-    \_ref_typespec: (work@top.rd_name_conn)
-      |vpiParent:
-      \_port: (rd_name_conn), line:1:32, endln:1:44
-      |vpiFullName:work@top.rd_name_conn
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:18
-  |vpiModule:
-  \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiName:u_mie_csr
-    |vpiFullName:work@top.u_mie_csr
-    |vpiDefName:work@ibex_csr
-    |vpiDefFile:${SURELOG_DIR}/tests/Connection/dut.sv
-    |vpiDefLineNo:12
-    |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:20, endln:14:33
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_mie_csr.rd_const_conn)
-        |vpiParent:
-        \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:20, endln:14:33
-        |vpiFullName:work@top.u_mie_csr.rd_const_conn
-        |vpiActual:
-        \_logic_typespec: , line:14:14, endln:14:19
-      |vpiName:rd_const_conn
-      |vpiFullName:work@top.u_mie_csr.rd_const_conn
-      |vpiNetType:36
-    |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15:21, endln:15:33
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_mie_csr.rd_impl_conn)
-        |vpiParent:
-        \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15:21, endln:15:33
-        |vpiFullName:work@top.u_mie_csr.rd_impl_conn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
-      |vpiName:rd_impl_conn
-      |vpiFullName:work@top.u_mie_csr.rd_impl_conn
-      |vpiNetType:36
-    |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15:35, endln:15:47
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_mie_csr.rd_name_conn)
-        |vpiParent:
-        \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15:35, endln:15:47
-        |vpiFullName:work@top.u_mie_csr.rd_name_conn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
-      |vpiName:rd_name_conn
-      |vpiFullName:work@top.u_mie_csr.rd_name_conn
-      |vpiNetType:36
-    |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:49, endln:15:59
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_mie_csr.rd_disconn)
-        |vpiParent:
-        \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:49, endln:15:59
-        |vpiFullName:work@top.u_mie_csr.rd_disconn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
-      |vpiName:rd_disconn
-      |vpiFullName:work@top.u_mie_csr.rd_disconn
-      |vpiNetType:36
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:1:1, endln:10:10
-    |vpiPort:
-    \_port: (rd_const_conn), line:14:20, endln:14:33
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiName:rd_const_conn
-      |vpiDirection:1
-      |vpiHighConn:
-      \_constant: , line:7:21, endln:7:25
-        |vpiParent:
-        \_port: (rd_const_conn), line:14:20, endln:14:33
-        |vpiDecompile:1'b1
-        |vpiSize:1
-        |BIN:1
-        |vpiConstType:3
-      |vpiLowConn:
-      \_ref_obj: (work@top.u_mie_csr.rd_const_conn), line:7:7, endln:7:20
-        |vpiParent:
-        \_port: (rd_const_conn), line:14:20, endln:14:33
-        |vpiName:rd_const_conn
-        |vpiFullName:work@top.u_mie_csr.rd_const_conn
-        |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:20, endln:14:33
-      |vpiTypedef:
-      \_ref_typespec: (work@top.u_mie_csr.rd_const_conn)
-        |vpiParent:
-        \_port: (rd_const_conn), line:14:20, endln:14:33
-        |vpiFullName:work@top.u_mie_csr.rd_const_conn
-        |vpiActual:
-        \_logic_typespec: , line:14:14, endln:14:19
-    |vpiPort:
-    \_port: (rd_impl_conn), line:15:21, endln:15:33
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiName:rd_impl_conn
-      |vpiDirection:2
-      |vpiHighConn:
-      \_ref_obj: (work@top.rd_impl_conn), line:4:7, endln:4:19
-        |vpiParent:
-        \_port: (rd_impl_conn), line:15:21, endln:15:33
-        |vpiName:rd_impl_conn
-        |vpiFullName:work@top.rd_impl_conn
-        |vpiActual:
-        \_logic_net: (work@top.rd_impl_conn), line:1:18, endln:1:30
-      |vpiLowConn:
-      \_ref_obj: (work@top.u_mie_csr.rd_impl_conn), line:4:7, endln:4:19
-        |vpiParent:
-        \_port: (rd_impl_conn), line:15:21, endln:15:33
-        |vpiName:rd_impl_conn
-        |vpiFullName:work@top.u_mie_csr.rd_impl_conn
-        |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15:21, endln:15:33
-      |vpiTypedef:
-      \_ref_typespec: (work@top.u_mie_csr.rd_impl_conn)
-        |vpiParent:
-        \_port: (rd_impl_conn), line:15:21, endln:15:33
-        |vpiFullName:work@top.u_mie_csr.rd_impl_conn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
-    |vpiPort:
-    \_port: (rd_name_conn), line:15:35, endln:15:47
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiName:rd_name_conn
-      |vpiDirection:2
-      |vpiHighConn:
-      \_ref_obj: (work@top.rd_name_conn), line:5:20, endln:5:32
-        |vpiParent:
-        \_port: (rd_name_conn), line:15:35, endln:15:47
-        |vpiName:rd_name_conn
-        |vpiFullName:work@top.rd_name_conn
-        |vpiActual:
-        \_logic_net: (work@top.rd_name_conn), line:1:32, endln:1:44
-      |vpiLowConn:
-      \_ref_obj: (work@top.u_mie_csr.rd_name_conn), line:5:7, endln:5:19
-        |vpiParent:
-        \_port: (rd_name_conn), line:15:35, endln:15:47
-        |vpiName:rd_name_conn
-        |vpiFullName:work@top.u_mie_csr.rd_name_conn
-        |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15:35, endln:15:47
-      |vpiTypedef:
-      \_ref_typespec: (work@top.u_mie_csr.rd_name_conn)
-        |vpiParent:
-        \_port: (rd_name_conn), line:15:35, endln:15:47
-        |vpiFullName:work@top.u_mie_csr.rd_name_conn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
-    |vpiPort:
-    \_port: (rd_disconn), line:15:49, endln:15:59
-      |vpiParent:
-      \_module_inst: work@ibex_csr (work@top.u_mie_csr), file:${SURELOG_DIR}/tests/Connection/dut.sv, line:2:4, endln:8:6
-      |vpiName:rd_disconn
-      |vpiDirection:2
-      |vpiHighConn:
-      \_operation: , line:6:18, endln:6:19
-        |vpiParent:
-        \_port: (rd_disconn), line:15:49, endln:15:59
-        |vpiOpType:36
-      |vpiLowConn:
-      \_ref_obj: (work@top.u_mie_csr.rd_disconn), line:15:49, endln:15:59
-        |vpiParent:
-        \_port: (rd_disconn), line:15:49, endln:15:59
-        |vpiName:rd_disconn
-        |vpiFullName:work@top.u_mie_csr.rd_disconn
-        |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:49, endln:15:59
-      |vpiTypedef:
-      \_ref_typespec: (work@top.u_mie_csr.rd_disconn)
-        |vpiParent:
-        \_port: (rd_disconn), line:15:49, endln:15:59
-        |vpiFullName:work@top.u_mie_csr.rd_disconn
-        |vpiActual:
-        \_logic_typespec: , line:15:15, endln:15:20
 \_weaklyReferenced:
 \_class_typespec: 
   |vpiClassDefn:
@@ -1041,18 +764,6 @@ design: (work@top)
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
   |vpiSigned:1
-\_logic_typespec: , line:1:18, endln:1:18
-\_logic_typespec: , line:1:18, endln:1:18
-  |vpiParent:
-  \_logic_net: (work@top.rd_name_conn), line:1:32, endln:1:44
-\_logic_typespec: , line:14:14, endln:14:19
-\_logic_typespec: , line:15:15, endln:15:20
-\_logic_typespec: , line:14:14, endln:14:19
-  |vpiParent:
-  \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:20, endln:14:33
-\_logic_typespec: , line:15:15, endln:15:20
-  |vpiParent:
-  \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:49, endln:15:59
 \_logic_typespec: , line:14:14, endln:14:19
 \_logic_typespec: , line:15:15, endln:15:20
 \_logic_typespec: , line:15:15, endln:15:20
@@ -1064,7 +775,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 7
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/Connection/builtin.sv | ${SURELOG_DIR}/build/regression/Connection/roundtrip/builtin_000.sv | 0 | 0 |

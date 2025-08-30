@@ -482,32 +482,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] work@wave work@wave
-[MOD] work@cct work@wave.a
-[SCO] work@wave.wave1 work@wave.wave1
-[MOD] work@mod work@wave.a.amod
-[MOD] work@mod work@wave.a.bmod
-[SCO] work@wave.wave1.innerwave work@wave.wave1.innerwave
-[SCO] work@wave.wave1.genblk1 work@wave.wave1.genblk1
-[SCO] work@mod.keep work@wave.a.amod.keep
-[SCO] work@mod.keep work@wave.a.bmod.keep
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:24:1: Top level module "work@wave".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 4.
-[NTE:EL0511] Nb leaf instances: 0.
-[NTE:EL0523] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:24:1: Instance "work@wave".
-[NTE:EL0523] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:28:1: Instance "work@wave.a".
-[NTE:EL0522] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:30:1: Scope "work@wave.wave1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:6:1: Instance "work@wave.a.amod".
-[NTE:EL0523] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:6:1: Instance "work@wave.a.bmod".
-[NTE:EL0522] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:33:1: Scope "work@wave.wave1.innerwave".
-[NTE:EL0522] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:38:1: Scope "work@wave.wave1.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:17:1: Scope "work@wave.a.amod.keep".
-[NTE:EL0522] ${SURELOG_DIR}/tests/UnitElabBlock/top.v:17:1: Scope "work@wave.a.bmod.keep".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
@@ -528,67 +502,857 @@ initial                                                1
 int_typespec                                           9
 int_var                                                4
 io_decl                                               11
-logic_net                                             10
-logic_typespec                                        14
-logic_var                                              4
-module_inst                                            9
+logic_net                                              6
+logic_typespec                                         7
+logic_var                                              2
+module_inst                                            3
 named_begin                                            2
 named_fork                                             1
 operation                                              1
-package                                                2
-port                                                   9
+package                                                1
+port                                                   5
 ref_module                                             2
-ref_obj                                               17
-ref_typespec                                          30
+ref_obj                                                9
+ref_typespec                                          20
 ref_var                                                1
 task                                                   9
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 3
-assignment                                             8
-begin                                                  2
-class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                               6
-delay_control                                          4
-design                                                 1
-enum_const                                            10
-enum_typespec                                          2
-enum_var                                               1
-event_control                                          3
-function                                              18
-initial                                                2
-int_typespec                                           9
-int_var                                                4
-io_decl                                               22
-logic_net                                             10
-logic_typespec                                        14
-logic_var                                              7
-module_inst                                            9
-named_begin                                            5
-named_fork                                             2
-operation                                              3
-package                                                2
-port                                                  13
-ref_module                                             2
-ref_obj                                               32
-ref_typespec                                          44
-ref_var                                                3
-task                                                  18
-=== UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabBlock/slpp_unit/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitElabBlock/slpp_unit/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabBlock/slpp_unit/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallPackages:
+\_package: builtin (builtin::)
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:builtin
+  |vpiFullName:builtin::
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
+|uhdmallClasses:
+\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@mailbox
+  |vpiMethod:
+  \_function: (work@mailbox::new), line:3:5, endln:4:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:new
+    |vpiFullName:work@mailbox::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::new)
+        |vpiParent:
+        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@mailbox::new
+    |vpiIODecl:
+    \_io_decl: (bound), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiDirection:1
+      |vpiName:bound
+      |vpiExpr:
+      \_constant: , line:3:31, endln:3:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@mailbox::new::bound)
+        |vpiParent:
+        \_io_decl: (bound), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new::bound
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+  |vpiMethod:
+  \_function: (work@mailbox::num), line:6:5, endln:7:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:num
+    |vpiFullName:work@mailbox::num
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+      |vpiParent:
+      \_function: (work@mailbox::num), line:6:5, endln:7:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::num)
+        |vpiParent:
+        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+        |vpiFullName:work@mailbox::num
+        |vpiActual:
+        \_int_typespec: , line:6:14, endln:6:17
+      |vpiFullName:work@mailbox::num
+      |vpiSigned:1
+  |vpiMethod:
+  \_task: (work@mailbox::put), line:9:5, endln:10:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:put
+    |vpiFullName:work@mailbox::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:9:15, endln:9:22
+      |vpiParent:
+      \_task: (work@mailbox::put), line:9:5, endln:10:12
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_put
+    |vpiFullName:work@mailbox::try_put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@mailbox::try_put)
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiFullName:work@mailbox::try_put
+    |vpiIODecl:
+    \_io_decl: (message), line:12:23, endln:12:30
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::get), line:15:5, endln:16:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:get
+    |vpiFullName:work@mailbox::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:15:19, endln:15:26
+      |vpiParent:
+      \_task: (work@mailbox::get), line:15:5, endln:16:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_get
+    |vpiFullName:work@mailbox::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_get)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+        |vpiFullName:work@mailbox::try_get
+        |vpiActual:
+        \_int_typespec: , line:18:14, endln:18:17
+      |vpiFullName:work@mailbox::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:18:31, endln:18:38
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::peek), line:21:5, endln:22:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:peek
+    |vpiFullName:work@mailbox::peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:21:20, endln:21:27
+      |vpiParent:
+      \_task: (work@mailbox::peek), line:21:5, endln:22:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_peek
+    |vpiFullName:work@mailbox::try_peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_peek)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+        |vpiFullName:work@mailbox::try_peek
+        |vpiActual:
+        \_int_typespec: , line:24:14, endln:24:17
+      |vpiFullName:work@mailbox::try_peek
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:24:31, endln:24:38
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiDirection:6
+      |vpiName:message
+|uhdmallClasses:
+\_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@process
+  |vpiTypedef:
+  \_enum_typespec: (state), line:32:5, endln:32:74
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:state
+    |vpiEnumConst:
+    \_enum_const: (FINISHED), line:32:20, endln:32:28
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:FINISHED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (RUNNING), line:32:30, endln:32:37
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:RUNNING
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (WAITING), line:32:39, endln:32:46
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:WAITING
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:SUSPENDED
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (KILLED), line:32:59, endln:32:65
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:KILLED
+      |INT:4
+      |vpiDecompile:4
+      |vpiSize:64
+  |vpiMethod:
+  \_function: (work@process::self), line:34:5, endln:34:11
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:self
+    |vpiFullName:work@process::self
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_class_var: (work@process::self), line:34:21, endln:34:28
+      |vpiParent:
+      \_function: (work@process::self), line:34:5, endln:34:11
+      |vpiTypespec:
+      \_ref_typespec: (work@process::self)
+        |vpiParent:
+        \_class_var: (work@process::self), line:34:21, endln:34:28
+        |vpiFullName:work@process::self
+        |vpiActual:
+        \_class_typespec: , line:34:21, endln:34:28
+      |vpiFullName:work@process::self
+  |vpiMethod:
+  \_function: (work@process::status), line:37:5, endln:38:16
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:status
+    |vpiFullName:work@process::status
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_enum_var: (work@process::status), line:37:14, endln:37:19
+      |vpiParent:
+      \_function: (work@process::status), line:37:5, endln:38:16
+      |vpiTypespec:
+      \_ref_typespec: (work@process::status)
+        |vpiParent:
+        \_enum_var: (work@process::status), line:37:14, endln:37:19
+        |vpiFullName:work@process::status
+        |vpiActual:
+        \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiFullName:work@process::status
+  |vpiMethod:
+  \_task: (work@process::kill), line:40:5, endln:41:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:kill
+    |vpiFullName:work@process::kill
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::await), line:43:5, endln:44:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:await
+    |vpiFullName:work@process::await
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::suspend), line:46:5, endln:47:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:suspend
+    |vpiFullName:work@process::suspend
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::resume), line:49:5, endln:50:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+    |vpiName:resume
+    |vpiFullName:work@process::resume
+    |vpiMethod:1
+    |vpiVisibility:1
+|uhdmallClasses:
+\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@semaphore
+  |vpiMethod:
+  \_function: (work@semaphore::new), line:57:5, endln:58:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+    |vpiName:new
+    |vpiFullName:work@semaphore::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::new)
+        |vpiParent:
+        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@semaphore::new
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:57:33, endln:57:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::new::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new::keyCount
+        |vpiActual:
+        \_int_typespec: , line:57:18, endln:57:21
+  |vpiMethod:
+  \_task: (work@semaphore::put), line:60:5, endln:61:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+    |vpiName:put
+    |vpiFullName:work@semaphore::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:60:18, endln:60:26
+      |vpiParent:
+      \_task: (work@semaphore::put), line:60:5, endln:61:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:60:29, endln:60:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::put::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:60:18, endln:60:26
+        |vpiFullName:work@semaphore::put::keyCount
+        |vpiActual:
+        \_int_typespec: , line:60:14, endln:60:17
+  |vpiMethod:
+  \_task: (work@semaphore::get), line:63:5, endln:64:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+    |vpiName:get
+    |vpiFullName:work@semaphore::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:63:18, endln:63:26
+      |vpiParent:
+      \_task: (work@semaphore::get), line:63:5, endln:64:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:63:29, endln:63:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:63:18, endln:63:26
+        |vpiFullName:work@semaphore::get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:63:14, endln:63:17
+  |vpiMethod:
+  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+    |vpiName:try_get
+    |vpiFullName:work@semaphore::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::try_get)
+        |vpiParent:
+        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+        |vpiFullName:work@semaphore::try_get
+        |vpiActual:
+        \_int_typespec: , line:66:14, endln:66:17
+      |vpiFullName:work@semaphore::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:66:30, endln:66:38
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:66:41, endln:66:42
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::try_get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:66:30, endln:66:38
+        |vpiFullName:work@semaphore::try_get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:66:26, endln:66:29
+|uhdmallModules:
+\_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@cct
+  |vpiDefName:work@cct
+  |vpiNet:
+  \_logic_net: (work@cct.stim1), line:2:7, endln:2:12
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:stim1
+    |vpiFullName:work@cct.stim1
+  |vpiNet:
+  \_logic_net: (work@cct.stim2), line:2:14, endln:2:19
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:stim2
+    |vpiFullName:work@cct.stim2
+  |vpiPort:
+  \_port: (stim1), line:2:7, endln:2:12
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:stim1
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@cct.stim1.stim1), line:2:7, endln:2:12
+      |vpiParent:
+      \_port: (stim1), line:2:7, endln:2:12
+      |vpiName:stim1
+      |vpiFullName:work@cct.stim1.stim1
+      |vpiActual:
+      \_logic_net: (work@cct.stim1), line:2:7, endln:2:12
+    |vpiTypedef:
+    \_ref_typespec: (work@cct.stim1)
+      |vpiParent:
+      \_port: (stim1), line:2:7, endln:2:12
+      |vpiFullName:work@cct.stim1
+      |vpiActual:
+      \_logic_typespec: , line:4:1, endln:3:7
+  |vpiPort:
+  \_port: (stim2), line:2:14, endln:2:19
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:stim2
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@cct.stim2.stim2), line:2:14, endln:2:19
+      |vpiParent:
+      \_port: (stim2), line:2:14, endln:2:19
+      |vpiName:stim2
+      |vpiFullName:work@cct.stim2.stim2
+      |vpiActual:
+      \_logic_net: (work@cct.stim2), line:2:14, endln:2:19
+    |vpiTypedef:
+    \_ref_typespec: (work@cct.stim2)
+      |vpiParent:
+      \_port: (stim2), line:2:14, endln:2:19
+      |vpiFullName:work@cct.stim2
+      |vpiActual:
+      \_logic_typespec: , line:4:1, endln:3:7
+  |vpiRefModule:
+  \_ref_module: work@mod (amod), line:6:5, endln:6:9
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:amod
+    |vpiDefName:work@mod
+    |vpiActual:
+    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+    |vpiPort:
+    \_port: , line:6:10, endln:6:15
+      |vpiParent:
+      \_ref_module: work@mod (amod), line:6:5, endln:6:9
+      |vpiHighConn:
+      \_ref_obj: (work@cct.amod.stim1), line:6:10, endln:6:15
+        |vpiParent:
+        \_port: , line:6:10, endln:6:15
+        |vpiName:stim1
+        |vpiFullName:work@cct.amod.stim1
+        |vpiActual:
+        \_logic_net: (work@cct.stim1), line:2:7, endln:2:12
+  |vpiRefModule:
+  \_ref_module: work@mod (bmod), line:7:1, endln:7:5
+    |vpiParent:
+    \_module_inst: work@cct (work@cct), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:1:1, endln:8:10
+    |vpiName:bmod
+    |vpiDefName:work@mod
+    |vpiActual:
+    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+    |vpiPort:
+    \_port: , line:7:6, endln:7:11
+      |vpiParent:
+      \_ref_module: work@mod (bmod), line:7:1, endln:7:5
+      |vpiHighConn:
+      \_ref_obj: (work@cct.bmod.stim2), line:7:6, endln:7:11
+        |vpiParent:
+        \_port: , line:7:6, endln:7:11
+        |vpiName:stim2
+        |vpiFullName:work@cct.bmod.stim2
+        |vpiActual:
+        \_logic_net: (work@cct.stim2), line:2:14, endln:2:19
+|uhdmallModules:
+\_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@mod
+  |vpiDefName:work@mod
+  |vpiNet:
+  \_logic_net: (work@mod.in), line:10:7, endln:10:9
+    |vpiParent:
+    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+    |vpiName:in
+    |vpiFullName:work@mod.in
+  |vpiNet:
+  \_logic_net: (work@mod.keep.hold), line:21:1, endln:21:5
+    |vpiParent:
+    \_assignment: , line:21:1, endln:21:10
+    |vpiName:hold
+    |vpiFullName:work@mod.keep.hold
+    |vpiNetType:1
+  |vpiPort:
+  \_port: (in), line:10:7, endln:10:9
+    |vpiParent:
+    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+    |vpiName:in
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@mod.in.in), line:10:7, endln:10:9
+      |vpiParent:
+      \_port: (in), line:10:7, endln:10:9
+      |vpiName:in
+      |vpiFullName:work@mod.in.in
+      |vpiActual:
+      \_logic_net: (work@mod.in), line:10:7, endln:10:9
+    |vpiTypedef:
+    \_ref_typespec: (work@mod.in)
+      |vpiParent:
+      \_port: (in), line:10:7, endln:10:9
+      |vpiFullName:work@mod.in
+      |vpiActual:
+      \_logic_typespec: , line:12:2, endln:11:8
+  |vpiProcess:
+  \_always: , line:13:1, endln:22:4
+    |vpiParent:
+    \_module_inst: work@mod (work@mod), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:9:1, endln:23:10
+    |vpiStmt:
+    \_event_control: , line:14:1, endln:16:5
+      |vpiParent:
+      \_always: , line:13:1, endln:22:4
+      |vpiCondition:
+      \_operation: , line:15:1, endln:16:4
+        |vpiParent:
+        \_event_control: , line:14:1, endln:16:5
+        |vpiOpType:39
+        |vpiOperand:
+        \_ref_obj: (work@mod.in), line:16:2, endln:16:4
+          |vpiParent:
+          \_operation: , line:15:1, endln:16:4
+          |vpiName:in
+          |vpiFullName:work@mod.in
+          |vpiActual:
+          \_logic_net: (work@mod.in), line:10:7, endln:10:9
+      |vpiStmt:
+      \_named_begin: (work@mod.keep), line:18:4, endln:18:8
+        |vpiParent:
+        \_event_control: , line:14:1, endln:16:5
+        |vpiName:keep
+        |vpiFullName:work@mod.keep
+        |vpiVariables:
+        \_ref_var: (work@mod.keep.hold), line:20:2, endln:20:6
+          |vpiParent:
+          \_named_begin: (work@mod.keep), line:18:4, endln:18:8
+          |vpiTypespec:
+          \_ref_typespec: (work@mod.keep.hold)
+            |vpiParent:
+            \_ref_var: (work@mod.keep.hold), line:20:2, endln:20:6
+            |vpiFullName:work@mod.keep.hold
+            |vpiActual:
+            \_logic_typespec: , line:19:1, endln:19:6
+          |vpiName:hold
+          |vpiFullName:work@mod.keep.hold
+        |vpiStmt:
+        \_assignment: , line:21:1, endln:21:10
+          |vpiParent:
+          \_named_begin: (work@mod.keep), line:18:4, endln:18:8
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_ref_obj: (work@mod.keep.in), line:21:8, endln:21:10
+            |vpiParent:
+            \_assignment: , line:21:1, endln:21:10
+            |vpiName:in
+            |vpiFullName:work@mod.keep.in
+            |vpiActual:
+            \_logic_net: (work@mod.in), line:10:7, endln:10:9
+          |vpiLhs:
+          \_ref_obj: (work@mod.keep.hold), line:21:1, endln:21:5
+            |vpiParent:
+            \_assignment: , line:21:1, endln:21:10
+            |vpiName:hold
+            |vpiFullName:work@mod.keep.hold
+            |vpiActual:
+            \_logic_net: (work@mod.keep.hold), line:21:1, endln:21:5
+    |vpiAlwaysType:1
+|uhdmallModules:
+\_module_inst: work@wave (work@wave), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:24:1, endln:42:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@wave
+  |vpiDefName:work@wave
+  |vpiNet:
+  \_logic_net: (work@wave.stim1), line:27:2, endln:27:7
+    |vpiParent:
+    \_module_inst: work@wave (work@wave), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:24:1, endln:42:10
+    |vpiTypespec:
+    \_ref_typespec: (work@wave.stim1)
+      |vpiParent:
+      \_logic_net: (work@wave.stim1), line:27:2, endln:27:7
+      |vpiFullName:work@wave.stim1
+      |vpiActual:
+      \_logic_typespec: , line:26:1, endln:27:7
+    |vpiName:stim1
+    |vpiFullName:work@wave.stim1
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (work@wave.stim2), line:27:9, endln:27:14
+    |vpiParent:
+    \_module_inst: work@wave (work@wave), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:24:1, endln:42:10
+    |vpiTypespec:
+    \_ref_typespec: (work@wave.stim2)
+      |vpiParent:
+      \_logic_net: (work@wave.stim2), line:27:9, endln:27:14
+      |vpiFullName:work@wave.stim2
+      |vpiActual:
+      \_logic_typespec: , line:26:1, endln:27:7
+    |vpiName:stim2
+    |vpiFullName:work@wave.stim2
+    |vpiNetType:36
+  |vpiProcess:
+  \_initial: , line:29:1, endln:41:4
+    |vpiParent:
+    \_module_inst: work@wave (work@wave), file:${SURELOG_DIR}/tests/UnitElabBlock/top.v, line:24:1, endln:42:10
+    |vpiStmt:
+    \_named_begin: (work@wave.wave1), line:31:3, endln:31:8
+      |vpiParent:
+      \_initial: , line:29:1, endln:41:4
+      |vpiName:wave1
+      |vpiFullName:work@wave.wave1
+      |vpiStmt:
+      \_delay_control: , line:32:1, endln:32:5
+        |vpiParent:
+        \_named_begin: (work@wave.wave1), line:31:3, endln:31:8
+        |#100
+        |vpiStmt:
+        \_named_fork: (work@wave.wave1.innerwave), line:33:1, endln:36:5
+          |vpiParent:
+          \_delay_control: , line:32:1, endln:32:5
+          |vpiName:innerwave
+          |vpiFullName:work@wave.wave1.innerwave
+          |vpiVariables:
+          \_logic_var: (work@wave.wave1.innerwave.hold), line:35:5, endln:35:9
+            |vpiParent:
+            \_named_fork: (work@wave.wave1.innerwave), line:33:1, endln:36:5
+            |vpiTypespec:
+            \_ref_typespec: (work@wave.wave1.innerwave.hold)
+              |vpiParent:
+              \_logic_var: (work@wave.wave1.innerwave.hold), line:35:5, endln:35:9
+              |vpiFullName:work@wave.wave1.innerwave.hold
+              |vpiActual:
+              \_logic_typespec: , line:35:1, endln:35:4
+            |vpiName:hold
+            |vpiFullName:work@wave.wave1.innerwave.hold
+          |vpiVariables:
+          \_logic_var: (work@wave.wave1.innerwave.hold), line:35:5, endln:35:9
+          |vpiStmt:
+          \_assignment: , line:35:5, endln:35:9
+            |vpiParent:
+            \_named_fork: (work@wave.wave1.innerwave), line:33:1, endln:36:5
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiLhs:
+            \_logic_var: (work@wave.wave1.innerwave.hold), line:35:5, endln:35:9
+      |vpiStmt:
+      \_delay_control: , line:37:1, endln:37:5
+        |vpiParent:
+        \_named_begin: (work@wave.wave1), line:31:3, endln:31:8
+        |#150
+        |vpiStmt:
+        \_begin: (work@wave.wave1), line:38:1, endln:40:4
+          |vpiParent:
+          \_delay_control: , line:37:1, endln:37:5
+          |vpiFullName:work@wave.wave1
+          |vpiStmt:
+          \_assignment: , line:39:1, endln:39:10
+            |vpiParent:
+            \_begin: (work@wave.wave1), line:38:1, endln:40:4
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiRhs:
+            \_constant: , line:39:9, endln:39:10
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+            |vpiLhs:
+            \_ref_obj: (work@wave.wave1.stim1), line:39:1, endln:39:6
+              |vpiParent:
+              \_assignment: , line:39:1, endln:39:10
+              |vpiName:stim1
+              |vpiFullName:work@wave.wave1.stim1
+              |vpiActual:
+              \_logic_net: (work@wave.stim1), line:27:2, endln:27:7
+\_weaklyReferenced:
+\_logic_typespec: , line:19:1, endln:19:6
+\_logic_typespec: , line:35:1, endln:35:4
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:1:3, endln:27:11
+\_int_typespec: , line:3:19, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:6:14, endln:6:17
+  |vpiSigned:1
+\_int_typespec: , line:18:14, endln:18:17
+  |vpiSigned:1
+\_int_typespec: , line:24:14, endln:24:17
+  |vpiSigned:1
+\_class_typespec: , line:34:21, endln:34:28
+  |vpiClassDefn:
+  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:30:3, endln:52:11
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabBlock/builtin.sv, line:55:3, endln:69:11
+\_int_typespec: , line:57:18, endln:57:21
+  |vpiSigned:1
+\_int_typespec: , line:60:14, endln:60:17
+  |vpiSigned:1
+\_int_typespec: , line:63:14, endln:63:17
+  |vpiSigned:1
+\_int_typespec: , line:66:14, endln:66:17
+  |vpiSigned:1
+\_int_typespec: , line:66:26, endln:66:29
+  |vpiSigned:1
+\_logic_typespec: , line:4:1, endln:3:7
+\_logic_typespec: , line:4:1, endln:3:7
+\_logic_typespec: , line:12:2, endln:11:8
+\_logic_typespec: , line:26:1, endln:27:7
+\_logic_typespec: , line:26:1, endln:27:7
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 14
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:33:1: Non synthesizable construct, innerwave
-[LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:32:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:37:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:33:1: Non synthesizable construct, innerwave
 [LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:32:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/UnitElabBlock/top.v:37:1: Non synthesizable construct,

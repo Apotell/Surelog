@@ -82,26 +82,19 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv:3:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv:3:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv:3:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               4
-cont_assign                                            2
+constant                                               3
+cont_assign                                            1
 design                                                 1
-logic_net                                              3
-logic_typespec                                         4
-module_inst                                            4
-operation                                              2
-port                                                   4
+logic_net                                              2
+logic_typespec                                         2
+module_inst                                            1
+operation                                              1
+port                                                   2
 range                                                  1
-ref_obj                                                8
-ref_typespec                                           7
-struct_net                                             1
+ref_obj                                                4
+ref_typespec                                           3
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
@@ -110,12 +103,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstantNoElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -210,10 +203,10 @@ design: (work@top)
 |vpiTypedef:
 \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:my_struct_packed_t
   |vpiInstance:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (a), line:2:36, endln:2:37
@@ -232,116 +225,6 @@ design: (work@top)
     |vpiRefColumnNo:24
     |vpiRefEndLineNo:2
     |vpiRefEndColumnNo:35
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@top.out3), line:4:31, endln:4:35
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiTypespec:
-    \_ref_typespec: (work@top.out3)
-      |vpiParent:
-      \_struct_net: (work@top.out3), line:4:31, endln:4:35
-      |vpiFullName:work@top.out3
-      |vpiActual:
-      \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
-    |vpiName:out3
-    |vpiFullName:work@top.out3
-  |vpiNet:
-  \_logic_net: (work@top.out4), line:5:17, endln:5:21
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiTypespec:
-    \_ref_typespec: (work@top.out4)
-      |vpiParent:
-      \_logic_net: (work@top.out4), line:5:17, endln:5:21
-      |vpiFullName:work@top.out4
-      |vpiActual:
-      \_logic_typespec: , line:5:12, endln:5:16
-    |vpiName:out4
-    |vpiFullName:work@top.out4
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (out3), line:4:31, endln:4:35
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiName:out3
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out3), line:4:31, endln:4:35
-      |vpiParent:
-      \_port: (out3), line:4:31, endln:4:35
-      |vpiName:out3
-      |vpiFullName:work@top.out3
-      |vpiActual:
-      \_struct_net: (work@top.out3), line:4:31, endln:4:35
-    |vpiTypedef:
-    \_ref_typespec: (work@top.out3)
-      |vpiParent:
-      \_port: (out3), line:4:31, endln:4:35
-      |vpiFullName:work@top.out3
-      |vpiActual:
-      \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
-  |vpiPort:
-  \_port: (out4), line:5:17, endln:5:21
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiName:out4
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out4), line:5:17, endln:5:21
-      |vpiParent:
-      \_port: (out4), line:5:17, endln:5:21
-      |vpiName:out4
-      |vpiFullName:work@top.out4
-      |vpiActual:
-      \_logic_net: (work@top.out4), line:5:17, endln:5:21
-    |vpiTypedef:
-    \_ref_typespec: (work@top.out4)
-      |vpiParent:
-      \_port: (out4), line:5:17, endln:5:21
-      |vpiFullName:work@top.out4
-      |vpiActual:
-      \_logic_typespec: , line:5:12, endln:5:16
-  |vpiContAssign:
-  \_cont_assign: , line:7:10, endln:7:32
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiRhs:
-    \_operation: , line:7:21, endln:7:31
-      |vpiParent:
-      \_cont_assign: , line:7:10, endln:7:32
-      |vpiOpType:14
-      |vpiOperand:
-      \_ref_obj: (work@top.out3), line:7:21, endln:7:25
-        |vpiParent:
-        \_operation: , line:7:21, endln:7:31
-        |vpiName:out3
-        |vpiFullName:work@top.out3
-        |vpiActual:
-        \_logic_net: (work@top.out3), line:4:31, endln:4:35
-      |vpiOperand:
-      \_constant: , line:7:29, endln:7:31
-        |vpiParent:
-        \_operation: , line:7:21, endln:7:31
-        |vpiDecompile:'1
-        |vpiSize:-1
-        |BIN:1
-        |vpiConstType:3
-    |vpiLhs:
-    \_ref_obj: (work@top.out4), line:7:10, endln:7:14
-      |vpiParent:
-      \_cont_assign: , line:7:10, endln:7:32
-      |vpiName:out4
-      |vpiFullName:work@top.out4
-      |vpiActual:
-      \_logic_net: (work@top.out4), line:5:17, endln:5:21
 \_weaklyReferenced:
 \_logic_typespec: , line:2:24, endln:2:35
   |vpiParent:
@@ -367,14 +250,12 @@ design: (work@top)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:5:12, endln:5:16
-\_logic_typespec: , line:5:12, endln:5:16
-\_logic_typespec: , line:5:12, endln:5:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv | ${SURELOG_DIR}/build/regression/ConstantNoElabUhdm/roundtrip/dut_000.sv | 7 | 8 |

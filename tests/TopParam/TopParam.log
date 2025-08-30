@@ -59,43 +59,25 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/TopParam/dut.sv:12:1: Compile module "work@test".
 [INF:CP0303] ${SURELOG_DIR}/tests/TopParam/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/TopParam/dut.sv:1:1: Top level module "work@top".
-[ERR:EL0551] ${SURELOG_DIR}/tests/TopParam/dut.sv:2:15: Top-level parameter with no default value "param".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
-module_inst                                            6
-param_assign                                           4
-parameter                                              4
+module_inst                                            2
+param_assign                                           2
+parameter                                              2
 ref_module                                             1
-ref_obj                                                1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-design                                                 1
-module_inst                                            6
-param_assign                                           4
-parameter                                              4
-ref_module                                             1
-ref_obj                                                1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TopParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TopParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TopParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:12:1, endln:16:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@test
   |vpiParameter:
   \_parameter: (work@test.param), line:13:15, endln:13:20
@@ -113,7 +95,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.param), line:2:15, endln:2:20
@@ -136,64 +118,12 @@ design: (work@top)
     |vpiDefName:work@test
     |vpiActual:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:12:1, endln:16:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.param), line:2:15, endln:2:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
-    |vpiName:param
-    |vpiFullName:work@top.param
-  |vpiParamAssign:
-  \_param_assign: , line:2:15, endln:2:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
-    |vpiLhs:
-    \_parameter: (work@top.param), line:2:15, endln:2:20
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@test (work@top.test_i), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:5:5, endln:8:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
-    |vpiName:test_i
-    |vpiFullName:work@top.test_i
-    |vpiParameter:
-    \_parameter: (work@top.test_i.param), line:13:15, endln:13:20
-      |vpiParent:
-      \_module_inst: work@test (work@top.test_i), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:5:5, endln:8:7
-      |vpiName:param
-      |vpiFullName:work@top.test_i.param
-    |vpiParamAssign:
-    \_param_assign: , line:13:15, endln:13:20
-      |vpiParent:
-      \_module_inst: work@test (work@top.test_i), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:5:5, endln:8:7
-      |vpiOverriden:1
-      |vpiRhs:
-      \_ref_obj: (work@top.test_i.param), line:6:16, endln:6:21
-        |vpiParent:
-        \_param_assign: , line:13:15, endln:13:20
-        |vpiName:param
-        |vpiFullName:work@top.test_i.param
-        |vpiActual:
-        \_parameter: (work@top.test_i.param), line:13:15, endln:13:20
-      |vpiLhs:
-      \_parameter: (work@top.test_i.param), line:13:15, endln:13:20
-    |vpiDefName:work@test
-    |vpiDefFile:${SURELOG_DIR}/tests/TopParam/dut.sv
-    |vpiDefLineNo:12
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/TopParam/dut.sv | ${SURELOG_DIR}/build/regression/TopParam/roundtrip/dut_000.sv | 8 | 16 |

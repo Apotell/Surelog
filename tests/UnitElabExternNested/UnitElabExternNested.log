@@ -26,55 +26,1545 @@
 there are 1 more instances of this message.
 [WRN:CP0310] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:2:18: Port "a" definition missing its direction (input, output, inout),
 there are 3 more instances of this message.
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:1:1: Top level module "work@dff_nested".
-[NTE:EL0503] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:18:1: Top level module "work@top".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 13.
-[NTE:EL0511] Nb leaf instances: 8.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              35
+constant                                              15
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
-gate                                                  12
-int_typespec                                          11
+gate                                                   6
+int_typespec                                          10
 int_var                                                4
 io_decl                                               11
-logic_net                                             55
-logic_typespec                                        26
-logic_var                                              3
-module_inst                                           17
-package                                                2
-param_assign                                           4
-parameter                                              4
-part_select                                            3
-port                                                  50
-prim_term                                             48
-range                                                 10
+logic_net                                             20
+logic_typespec                                        15
+logic_var                                              1
+module_inst                                            7
+package                                                1
+param_assign                                           2
+parameter                                              2
+part_select                                            1
+port                                                  14
+prim_term                                             24
+range                                                  3
 ref_module                                             5
-ref_obj                                               79
-ref_typespec                                          59
+ref_obj                                               37
+ref_typespec                                          32
 task                                                   9
-unsupported_typespec                                   2
-void_typespec                                          2
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabExternNested/slpp_unit/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitElabExternNested/slpp_unit/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabExternNested/slpp_unit/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallPackages:
+\_package: builtin (builtin::)
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:builtin
+  |vpiFullName:builtin::
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
+|uhdmallClasses:
+\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@mailbox
+  |vpiMethod:
+  \_function: (work@mailbox::new), line:3:5, endln:4:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:new
+    |vpiFullName:work@mailbox::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::new)
+        |vpiParent:
+        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@mailbox::new
+    |vpiIODecl:
+    \_io_decl: (bound), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiDirection:1
+      |vpiName:bound
+      |vpiExpr:
+      \_constant: , line:3:31, endln:3:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@mailbox::new::bound)
+        |vpiParent:
+        \_io_decl: (bound), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new::bound
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+  |vpiMethod:
+  \_function: (work@mailbox::num), line:6:5, endln:7:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:num
+    |vpiFullName:work@mailbox::num
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+      |vpiParent:
+      \_function: (work@mailbox::num), line:6:5, endln:7:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::num)
+        |vpiParent:
+        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+        |vpiFullName:work@mailbox::num
+        |vpiActual:
+        \_int_typespec: , line:6:14, endln:6:17
+      |vpiFullName:work@mailbox::num
+      |vpiSigned:1
+  |vpiMethod:
+  \_task: (work@mailbox::put), line:9:5, endln:10:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:put
+    |vpiFullName:work@mailbox::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:9:15, endln:9:22
+      |vpiParent:
+      \_task: (work@mailbox::put), line:9:5, endln:10:12
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_put
+    |vpiFullName:work@mailbox::try_put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@mailbox::try_put)
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiFullName:work@mailbox::try_put
+    |vpiIODecl:
+    \_io_decl: (message), line:12:23, endln:12:30
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::get), line:15:5, endln:16:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:get
+    |vpiFullName:work@mailbox::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:15:19, endln:15:26
+      |vpiParent:
+      \_task: (work@mailbox::get), line:15:5, endln:16:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_get
+    |vpiFullName:work@mailbox::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_get)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+        |vpiFullName:work@mailbox::try_get
+        |vpiActual:
+        \_int_typespec: , line:18:14, endln:18:17
+      |vpiFullName:work@mailbox::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:18:31, endln:18:38
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::peek), line:21:5, endln:22:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:peek
+    |vpiFullName:work@mailbox::peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:21:20, endln:21:27
+      |vpiParent:
+      \_task: (work@mailbox::peek), line:21:5, endln:22:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_peek
+    |vpiFullName:work@mailbox::try_peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_peek)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+        |vpiFullName:work@mailbox::try_peek
+        |vpiActual:
+        \_int_typespec: , line:24:14, endln:24:17
+      |vpiFullName:work@mailbox::try_peek
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:24:31, endln:24:38
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiDirection:6
+      |vpiName:message
+|uhdmallClasses:
+\_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@process
+  |vpiTypedef:
+  \_enum_typespec: (state), line:32:5, endln:32:74
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:state
+    |vpiEnumConst:
+    \_enum_const: (FINISHED), line:32:20, endln:32:28
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:FINISHED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (RUNNING), line:32:30, endln:32:37
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:RUNNING
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (WAITING), line:32:39, endln:32:46
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:WAITING
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:SUSPENDED
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (KILLED), line:32:59, endln:32:65
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:KILLED
+      |INT:4
+      |vpiDecompile:4
+      |vpiSize:64
+  |vpiMethod:
+  \_function: (work@process::self), line:34:5, endln:34:11
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:self
+    |vpiFullName:work@process::self
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_class_var: (work@process::self), line:34:21, endln:34:28
+      |vpiParent:
+      \_function: (work@process::self), line:34:5, endln:34:11
+      |vpiTypespec:
+      \_ref_typespec: (work@process::self)
+        |vpiParent:
+        \_class_var: (work@process::self), line:34:21, endln:34:28
+        |vpiFullName:work@process::self
+        |vpiActual:
+        \_class_typespec: , line:34:21, endln:34:28
+      |vpiFullName:work@process::self
+  |vpiMethod:
+  \_function: (work@process::status), line:37:5, endln:38:16
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:status
+    |vpiFullName:work@process::status
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_enum_var: (work@process::status), line:37:14, endln:37:19
+      |vpiParent:
+      \_function: (work@process::status), line:37:5, endln:38:16
+      |vpiTypespec:
+      \_ref_typespec: (work@process::status)
+        |vpiParent:
+        \_enum_var: (work@process::status), line:37:14, endln:37:19
+        |vpiFullName:work@process::status
+        |vpiActual:
+        \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiFullName:work@process::status
+  |vpiMethod:
+  \_task: (work@process::kill), line:40:5, endln:41:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:kill
+    |vpiFullName:work@process::kill
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::await), line:43:5, endln:44:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:await
+    |vpiFullName:work@process::await
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::suspend), line:46:5, endln:47:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:suspend
+    |vpiFullName:work@process::suspend
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::resume), line:49:5, endln:50:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+    |vpiName:resume
+    |vpiFullName:work@process::resume
+    |vpiMethod:1
+    |vpiVisibility:1
+|uhdmallClasses:
+\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@semaphore
+  |vpiMethod:
+  \_function: (work@semaphore::new), line:57:5, endln:58:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+    |vpiName:new
+    |vpiFullName:work@semaphore::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::new)
+        |vpiParent:
+        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@semaphore::new
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:57:33, endln:57:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::new::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new::keyCount
+        |vpiActual:
+        \_int_typespec: , line:57:18, endln:57:21
+  |vpiMethod:
+  \_task: (work@semaphore::put), line:60:5, endln:61:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+    |vpiName:put
+    |vpiFullName:work@semaphore::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:60:18, endln:60:26
+      |vpiParent:
+      \_task: (work@semaphore::put), line:60:5, endln:61:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:60:29, endln:60:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::put::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:60:18, endln:60:26
+        |vpiFullName:work@semaphore::put::keyCount
+        |vpiActual:
+        \_int_typespec: , line:60:14, endln:60:17
+  |vpiMethod:
+  \_task: (work@semaphore::get), line:63:5, endln:64:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+    |vpiName:get
+    |vpiFullName:work@semaphore::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:63:18, endln:63:26
+      |vpiParent:
+      \_task: (work@semaphore::get), line:63:5, endln:64:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:63:29, endln:63:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:63:18, endln:63:26
+        |vpiFullName:work@semaphore::get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:63:14, endln:63:17
+  |vpiMethod:
+  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+    |vpiName:try_get
+    |vpiFullName:work@semaphore::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::try_get)
+        |vpiParent:
+        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+        |vpiFullName:work@semaphore::try_get
+        |vpiActual:
+        \_int_typespec: , line:66:14, endln:66:17
+      |vpiFullName:work@semaphore::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:66:30, endln:66:38
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:66:41, endln:66:42
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::try_get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:66:30, endln:66:38
+        |vpiFullName:work@semaphore::try_get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:66:26, endln:66:29
+|uhdmallModules:
+\_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@a
+  |vpiParameter:
+  \_parameter: (work@a.size), line:5:2, endln:5:6
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |UINT:8
+    |vpiTypespec:
+    \_ref_typespec: (work@a.size)
+      |vpiParent:
+      \_parameter: (work@a.size), line:5:2, endln:5:6
+      |vpiFullName:work@a.size
+      |vpiActual:
+      \_int_typespec: , line:4:1, endln:5:9
+    |vpiName:size
+    |vpiFullName:work@a.size
+  |vpiParameter:
+  \_parameter: (work@a.TP), line:8:2, endln:8:4
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiTypespec:
+    \_ref_typespec: (work@a.TP)
+      |vpiParent:
+      \_parameter: (work@a.TP), line:8:2, endln:8:4
+      |vpiFullName:work@a.TP
+      |vpiActual:
+      \_unsupported_typespec: (type), line:7:1, endln:7:5
+    |vpiName:TP
+    |vpiFullName:work@a.TP
+  |vpiParamAssign:
+  \_param_assign: , line:5:2, endln:5:9
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiRhs:
+    \_constant: , line:5:8, endln:5:9
+      |vpiParent:
+      \_param_assign: , line:5:2, endln:5:9
+      |vpiDecompile:8
+      |vpiSize:64
+      |UINT:8
+      |vpiTypespec:
+      \_ref_typespec: (work@a)
+        |vpiParent:
+        \_constant: , line:5:8, endln:5:9
+        |vpiFullName:work@a
+        |vpiActual:
+        \_int_typespec: , line:4:1, endln:5:9
+      |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (work@a.size), line:5:2, endln:5:6
+  |vpiParamAssign:
+  \_param_assign: , line:8:2, endln:10:7
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiRhs:
+    \_part_select: logic (work@a.logic), line:9:1, endln:10:7
+      |vpiParent:
+      \_param_assign: , line:8:2, endln:10:7
+      |vpiName:logic
+      |vpiFullName:work@a.logic
+      |vpiDefName:logic
+      |vpiConstantSelect:1
+      |vpiLeftRange:
+      \_constant: , line:10:3, endln:10:4
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:10:5, endln:10:6
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (work@a.TP), line:8:2, endln:8:4
+  |vpiDefName:work@a
+  |vpiNet:
+  \_logic_net: (work@a.a), line:13:11, endln:13:12
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:a
+    |vpiFullName:work@a.a
+  |vpiNet:
+  \_logic_net: (work@a.b), line:15:5, endln:15:6
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:b
+    |vpiFullName:work@a.b
+  |vpiPort:
+  \_port: (a), line:13:11, endln:13:12
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:a
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@a.a.a), line:13:11, endln:13:12
+      |vpiParent:
+      \_port: (a), line:13:11, endln:13:12
+      |vpiName:a
+      |vpiFullName:work@a.a.a
+      |vpiActual:
+      \_logic_net: (work@a.a), line:13:11, endln:13:12
+    |vpiTypedef:
+    \_ref_typespec: (work@a.a)
+      |vpiParent:
+      \_port: (a), line:13:11, endln:13:12
+      |vpiFullName:work@a.a
+      |vpiActual:
+      \_logic_typespec: , line:13:2, endln:13:10
+  |vpiPort:
+  \_port: (b), line:15:5, endln:15:6
+    |vpiParent:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:b
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (work@a.b.b), line:15:5, endln:15:6
+      |vpiParent:
+      \_port: (b), line:15:5, endln:15:6
+      |vpiName:b
+      |vpiFullName:work@a.b.b
+      |vpiActual:
+      \_logic_net: (work@a.b), line:15:5, endln:15:6
+    |vpiTypedef:
+    \_ref_typespec: (work@a.b)
+      |vpiParent:
+      \_port: (b), line:15:5, endln:15:6
+      |vpiFullName:work@a.b
+      |vpiActual:
+      \_unsupported_typespec: (type), line:7:1, endln:7:5
+|uhdmallModules:
+\_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@dff_nested
+  |vpiDefName:work@dff_nested
+  |vpiNet:
+  \_logic_net: (work@dff_nested.d), line:4:2, endln:4:3
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:d
+    |vpiFullName:work@dff_nested.d
+  |vpiNet:
+  \_logic_net: (work@dff_nested.ck), line:4:5, endln:4:7
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:ck
+    |vpiFullName:work@dff_nested.ck
+  |vpiNet:
+  \_logic_net: (work@dff_nested.pr), line:4:9, endln:4:11
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:pr
+    |vpiFullName:work@dff_nested.pr
+  |vpiNet:
+  \_logic_net: (work@dff_nested.clr), line:4:13, endln:4:16
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:clr
+    |vpiFullName:work@dff_nested.clr
+  |vpiNet:
+  \_logic_net: (work@dff_nested.q), line:6:2, endln:6:3
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:q
+    |vpiFullName:work@dff_nested.q
+  |vpiNet:
+  \_logic_net: (work@dff_nested.nq), line:6:5, endln:6:7
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:nq
+    |vpiFullName:work@dff_nested.nq
+  |vpiNet:
+  \_logic_net: (work@dff_nested.q1), line:8:2, endln:8:4
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dff_nested.q1)
+      |vpiParent:
+      \_logic_net: (work@dff_nested.q1), line:8:2, endln:8:4
+      |vpiFullName:work@dff_nested.q1
+      |vpiActual:
+      \_logic_typespec: , line:7:1, endln:7:5
+    |vpiName:q1
+    |vpiFullName:work@dff_nested.q1
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@dff_nested.nq1), line:8:6, endln:8:9
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dff_nested.nq1)
+      |vpiParent:
+      \_logic_net: (work@dff_nested.nq1), line:8:6, endln:8:9
+      |vpiFullName:work@dff_nested.nq1
+      |vpiActual:
+      \_logic_typespec: , line:7:1, endln:7:5
+    |vpiName:nq1
+    |vpiFullName:work@dff_nested.nq1
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@dff_nested.nq2), line:8:11, endln:8:14
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dff_nested.nq2)
+      |vpiParent:
+      \_logic_net: (work@dff_nested.nq2), line:8:11, endln:8:14
+      |vpiFullName:work@dff_nested.nq2
+      |vpiActual:
+      \_logic_typespec: , line:7:1, endln:7:5
+    |vpiName:nq2
+    |vpiFullName:work@dff_nested.nq2
+    |vpiNetType:1
+  |vpiPort:
+  \_port: (d), line:4:2, endln:4:3
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:d
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.d.d), line:4:2, endln:4:3
+      |vpiParent:
+      \_port: (d), line:4:2, endln:4:3
+      |vpiName:d
+      |vpiFullName:work@dff_nested.d.d
+      |vpiActual:
+      \_logic_net: (work@dff_nested.d), line:4:2, endln:4:3
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.d)
+      |vpiParent:
+      \_port: (d), line:4:2, endln:4:3
+      |vpiFullName:work@dff_nested.d
+      |vpiActual:
+      \_logic_typespec: , line:4:2, endln:3:8
+  |vpiPort:
+  \_port: (ck), line:4:5, endln:4:7
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:ck
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.ck.ck), line:4:5, endln:4:7
+      |vpiParent:
+      \_port: (ck), line:4:5, endln:4:7
+      |vpiName:ck
+      |vpiFullName:work@dff_nested.ck.ck
+      |vpiActual:
+      \_logic_net: (work@dff_nested.ck), line:4:5, endln:4:7
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.ck)
+      |vpiParent:
+      \_port: (ck), line:4:5, endln:4:7
+      |vpiFullName:work@dff_nested.ck
+      |vpiActual:
+      \_logic_typespec: , line:4:2, endln:3:8
+  |vpiPort:
+  \_port: (pr), line:4:9, endln:4:11
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:pr
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.pr.pr), line:4:9, endln:4:11
+      |vpiParent:
+      \_port: (pr), line:4:9, endln:4:11
+      |vpiName:pr
+      |vpiFullName:work@dff_nested.pr.pr
+      |vpiActual:
+      \_logic_net: (work@dff_nested.pr), line:4:9, endln:4:11
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.pr)
+      |vpiParent:
+      \_port: (pr), line:4:9, endln:4:11
+      |vpiFullName:work@dff_nested.pr
+      |vpiActual:
+      \_logic_typespec: , line:4:2, endln:3:8
+  |vpiPort:
+  \_port: (clr), line:4:13, endln:4:16
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:clr
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.clr.clr), line:4:13, endln:4:16
+      |vpiParent:
+      \_port: (clr), line:4:13, endln:4:16
+      |vpiName:clr
+      |vpiFullName:work@dff_nested.clr.clr
+      |vpiActual:
+      \_logic_net: (work@dff_nested.clr), line:4:13, endln:4:16
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.clr)
+      |vpiParent:
+      \_port: (clr), line:4:13, endln:4:16
+      |vpiFullName:work@dff_nested.clr
+      |vpiActual:
+      \_logic_typespec: , line:4:2, endln:3:8
+  |vpiPort:
+  \_port: (q), line:6:2, endln:6:3
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:q
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.q.q), line:6:2, endln:6:3
+      |vpiParent:
+      \_port: (q), line:6:2, endln:6:3
+      |vpiName:q
+      |vpiFullName:work@dff_nested.q.q
+      |vpiActual:
+      \_logic_net: (work@dff_nested.q), line:6:2, endln:6:3
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.q)
+      |vpiParent:
+      \_port: (q), line:6:2, endln:6:3
+      |vpiFullName:work@dff_nested.q
+      |vpiActual:
+      \_logic_typespec: , line:6:2, endln:5:9
+  |vpiPort:
+  \_port: (nq), line:6:5, endln:6:7
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:nq
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (work@dff_nested.nq.nq), line:6:5, endln:6:7
+      |vpiParent:
+      \_port: (nq), line:6:5, endln:6:7
+      |vpiName:nq
+      |vpiFullName:work@dff_nested.nq.nq
+      |vpiActual:
+      \_logic_net: (work@dff_nested.nq), line:6:5, endln:6:7
+    |vpiTypedef:
+    \_ref_typespec: (work@dff_nested.nq)
+      |vpiParent:
+      \_port: (nq), line:6:5, endln:6:7
+      |vpiFullName:work@dff_nested.nq
+      |vpiActual:
+      \_logic_typespec: , line:6:2, endln:5:9
+  |vpiRefModule:
+  \_ref_module: work@ff1 (i1), line:16:9, endln:16:11
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:i1
+    |vpiDefName:work@ff1
+  |vpiRefModule:
+  \_ref_module: work@ff2 (i2), line:27:9, endln:27:11
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:i2
+    |vpiDefName:work@ff2
+  |vpiRefModule:
+  \_ref_module: work@ff3 (i3), line:35:9, endln:35:11
+    |vpiParent:
+    \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+    |vpiName:i3
+    |vpiDefName:work@ff3
+|uhdmallModules:
+\_module_inst: work@dff_nested::ff1 (work@dff_nested::ff1), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:9:1, endln:15:10
+  |vpiParent:
+  \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+  |vpiFullName:work@dff_nested::ff1
+  |vpiDefName:work@dff_nested::ff1
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff1 (work@dff_nested::ff1), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:9:1, endln:15:10
+    |vpiDefName:work@nand
+    |vpiName:g1b
+    |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:12:7, endln:12:10
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1b.nq1), line:12:7, endln:12:10
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+        |vpiName:nq1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.nq1
+    |vpiPrimTerm:
+    \_prim_term: , line:12:12, endln:12:13
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1b.d), line:12:12, endln:12:13
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+        |vpiName:d
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.d
+    |vpiPrimTerm:
+    \_prim_term: , line:12:15, endln:12:18
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1b.clr), line:12:15, endln:12:18
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+        |vpiName:clr
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.clr
+    |vpiPrimTerm:
+    \_prim_term: , line:12:20, endln:12:22
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1b.q1), line:12:20, endln:12:22
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1b), line:12:2, endln:12:23
+        |vpiName:q1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.q1
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff1 (work@dff_nested::ff1), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:9:1, endln:15:10
+    |vpiDefName:work@nand
+    |vpiName:g1a
+    |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:14:7, endln:14:9
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1a.q1), line:14:7, endln:14:9
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+        |vpiName:q1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.q1
+    |vpiPrimTerm:
+    \_prim_term: , line:14:11, endln:14:13
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1a.ck), line:14:11, endln:14:13
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+        |vpiName:ck
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.ck
+    |vpiPrimTerm:
+    \_prim_term: , line:14:15, endln:14:18
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1a.nq2), line:14:15, endln:14:18
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+        |vpiName:nq2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.nq2
+    |vpiPrimTerm:
+    \_prim_term: , line:14:20, endln:14:23
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff1.g1a.nq1), line:14:20, endln:14:23
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
+        |vpiName:nq1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.nq1
+|uhdmallModules:
+\_module_inst: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
+  |vpiParent:
+  \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+  |vpiFullName:work@dff_nested::ff2
+  |vpiDefName:work@dff_nested::ff2
+  |vpiNet:
+  \_logic_net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dff_nested.work@dff_nested::ff2.q2)
+      |vpiParent:
+      \_logic_net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+      |vpiFullName:work@dff_nested.work@dff_nested::ff2.q2
+      |vpiActual:
+      \_logic_typespec: , line:20:1, endln:20:5
+    |vpiName:q2
+    |vpiFullName:work@dff_nested.work@dff_nested::ff2.q2
+    |vpiNetType:1
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
+    |vpiDefName:work@nand
+    |vpiName:g2b
+    |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:23:7, endln:23:10
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2b.nq2), line:23:7, endln:23:10
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+        |vpiName:nq2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.nq2
+    |vpiPrimTerm:
+    \_prim_term: , line:23:12, endln:23:14
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2b.ck), line:23:12, endln:23:14
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+        |vpiName:ck
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.ck
+    |vpiPrimTerm:
+    \_prim_term: , line:23:16, endln:23:19
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2b.clr), line:23:16, endln:23:19
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+        |vpiName:clr
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.clr
+    |vpiPrimTerm:
+    \_prim_term: , line:23:21, endln:23:23
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2b.q2), line:23:21, endln:23:23
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
+        |vpiName:q2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.q2
+        |vpiActual:
+        \_logic_net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
+    |vpiDefName:work@nand
+    |vpiName:g2a
+    |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:25:7, endln:25:9
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2a.q2), line:25:7, endln:25:9
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+        |vpiName:q2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.q2
+        |vpiActual:
+        \_logic_net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+    |vpiPrimTerm:
+    \_prim_term: , line:25:11, endln:25:14
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2a.nq1), line:25:11, endln:25:14
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+        |vpiName:nq1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.nq1
+    |vpiPrimTerm:
+    \_prim_term: , line:25:16, endln:25:18
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2a.pr), line:25:16, endln:25:18
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+        |vpiName:pr
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.pr
+    |vpiPrimTerm:
+    \_prim_term: , line:25:20, endln:25:23
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff2.g2a.nq2), line:25:20, endln:25:23
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
+        |vpiName:nq2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.nq2
+|uhdmallModules:
+\_module_inst: work@dff_nested::ff3 (work@dff_nested::ff3), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:28:1, endln:34:10
+  |vpiParent:
+  \_module_inst: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
+  |vpiFullName:work@dff_nested::ff3
+  |vpiDefName:work@dff_nested::ff3
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff3 (work@dff_nested::ff3), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:28:1, endln:34:10
+    |vpiDefName:work@nand
+    |vpiName:g3a
+    |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:31:7, endln:31:8
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3a.q), line:31:7, endln:31:8
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+        |vpiName:q
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.q
+    |vpiPrimTerm:
+    \_prim_term: , line:31:10, endln:31:13
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3a.nq2), line:31:10, endln:31:13
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+        |vpiName:nq2
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.nq2
+    |vpiPrimTerm:
+    \_prim_term: , line:31:15, endln:31:18
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3a.clr), line:31:15, endln:31:18
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+        |vpiName:clr
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.clr
+    |vpiPrimTerm:
+    \_prim_term: , line:31:20, endln:31:22
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3a.nq), line:31:20, endln:31:22
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3a), line:31:2, endln:31:23
+        |vpiName:nq
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.nq
+  |vpiPrimitive:
+  \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+    |vpiParent:
+    \_module_inst: work@dff_nested::ff3 (work@dff_nested::ff3), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:28:1, endln:34:10
+    |vpiDefName:work@nand
+    |vpiName:g3b
+    |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b
+    |vpiPrimType:2
+    |vpiPrimTerm:
+    \_prim_term: , line:33:7, endln:33:9
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3b.nq), line:33:7, endln:33:9
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+        |vpiName:nq
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.nq
+    |vpiPrimTerm:
+    \_prim_term: , line:33:11, endln:33:13
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+      |vpiDirection:1
+      |vpiTermIndex:1
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3b.q1), line:33:11, endln:33:13
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+        |vpiName:q1
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.q1
+    |vpiPrimTerm:
+    \_prim_term: , line:33:15, endln:33:17
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+      |vpiDirection:1
+      |vpiTermIndex:2
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3b.pr), line:33:15, endln:33:17
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+        |vpiName:pr
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.pr
+    |vpiPrimTerm:
+    \_prim_term: , line:33:19, endln:33:20
+      |vpiParent:
+      \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+      |vpiDirection:1
+      |vpiTermIndex:3
+      |vpiExpr:
+      \_ref_obj: (work@dff_nested.work@dff_nested::ff3.g3b.q), line:33:19, endln:33:20
+        |vpiParent:
+        \_gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
+        |vpiName:q
+        |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.q
+|uhdmallModules:
+\_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@m
+  |vpiDefName:work@m
+  |vpiNet:
+  \_logic_net: (work@m.a), line:2:18, endln:2:19
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:a
+    |vpiFullName:work@m.a
+  |vpiNet:
+  \_logic_net: (work@m.b), line:2:20, endln:2:21
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:b
+    |vpiFullName:work@m.b
+  |vpiNet:
+  \_logic_net: (work@m.c), line:2:22, endln:2:23
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:c
+    |vpiFullName:work@m.c
+  |vpiNet:
+  \_logic_net: (work@m.d), line:2:24, endln:2:25
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:d
+    |vpiFullName:work@m.d
+  |vpiPort:
+  \_port: (a), line:2:18, endln:2:19
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:a
+    |vpiDirection:3
+    |vpiLowConn:
+    \_ref_obj: (work@m.a.a), line:2:18, endln:2:19
+      |vpiParent:
+      \_port: (a), line:2:18, endln:2:19
+      |vpiName:a
+      |vpiFullName:work@m.a.a
+      |vpiActual:
+      \_logic_net: (work@m.a), line:2:18, endln:2:19
+  |vpiPort:
+  \_port: (b), line:2:20, endln:2:21
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:b
+    |vpiDirection:3
+    |vpiLowConn:
+    \_ref_obj: (work@m.b.b), line:2:20, endln:2:21
+      |vpiParent:
+      \_port: (b), line:2:20, endln:2:21
+      |vpiName:b
+      |vpiFullName:work@m.b.b
+      |vpiActual:
+      \_logic_net: (work@m.b), line:2:20, endln:2:21
+  |vpiPort:
+  \_port: (c), line:2:22, endln:2:23
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:c
+    |vpiDirection:3
+    |vpiLowConn:
+    \_ref_obj: (work@m.c.c), line:2:22, endln:2:23
+      |vpiParent:
+      \_port: (c), line:2:22, endln:2:23
+      |vpiName:c
+      |vpiFullName:work@m.c.c
+      |vpiActual:
+      \_logic_net: (work@m.c), line:2:22, endln:2:23
+  |vpiPort:
+  \_port: (d), line:2:24, endln:2:25
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiName:d
+    |vpiDirection:3
+    |vpiLowConn:
+    \_ref_obj: (work@m.d.d), line:2:24, endln:2:25
+      |vpiParent:
+      \_port: (d), line:2:24, endln:2:25
+      |vpiName:d
+      |vpiFullName:work@m.d.d
+      |vpiActual:
+      \_logic_net: (work@m.d), line:2:24, endln:2:25
+|uhdmallModules:
+\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@top
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.a), line:20:7, endln:20:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.a)
+      |vpiParent:
+      \_logic_net: (work@top.a), line:20:7, endln:20:8
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_logic_typespec: , line:19:1, endln:20:6
+    |vpiName:a
+    |vpiFullName:work@top.a
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@top.b), line:22:8, endln:22:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.b)
+      |vpiParent:
+      \_logic_net: (work@top.b), line:22:8, endln:22:9
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_logic_typespec: , line:21:1, endln:22:7
+    |vpiName:b
+    |vpiFullName:work@top.b
+  |vpiNet:
+  \_logic_net: (work@top.c), line:24:1, endln:24:2
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.c)
+      |vpiParent:
+      \_logic_net: (work@top.c), line:24:1, endln:24:2
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_logic_typespec: , line:23:1, endln:23:5
+    |vpiName:c
+    |vpiFullName:work@top.c
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@top.d), line:24:4, endln:24:5
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.d)
+      |vpiParent:
+      \_logic_net: (work@top.d), line:24:4, endln:24:5
+      |vpiFullName:work@top.d
+      |vpiActual:
+      \_logic_typespec: , line:23:1, endln:23:5
+    |vpiName:d
+    |vpiFullName:work@top.d
+    |vpiNetType:1
+  |vpiRefModule:
+  \_ref_module: work@m (mm), line:26:3, endln:26:5
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiName:mm
+    |vpiDefName:work@m
+    |vpiActual:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
+    |vpiPort:
+    \_port: , line:26:7, endln:26:9
+      |vpiParent:
+      \_ref_module: work@m (mm), line:26:3, endln:26:5
+      |vpiHighConn:
+      \_constant: , line:26:7, endln:26:9
+        |vpiParent:
+        \_port: , line:26:7, endln:26:9
+        |vpiDecompile:.*
+        |STRING:.*
+  |vpiRefModule:
+  \_ref_module: work@a (aa), line:27:3, endln:27:5
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
+    |vpiName:aa
+    |vpiDefName:work@a
+    |vpiActual:
+    \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiPort:
+    \_port: , line:27:7, endln:27:9
+      |vpiParent:
+      \_ref_module: work@a (aa), line:27:3, endln:27:5
+      |vpiHighConn:
+      \_constant: , line:27:7, endln:27:9
+        |vpiParent:
+        \_port: , line:27:7, endln:27:9
+        |vpiDecompile:.*
+        |STRING:.*
+\_weaklyReferenced:
+\_int_typespec: , line:4:1, endln:5:9
+\_unsupported_typespec: (type), line:7:1, endln:7:5
+  |vpiParent:
+  \_parameter: (work@a.TP), line:8:2, endln:8:4
+  |vpiName:type
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:1:3, endln:27:11
+\_int_typespec: , line:3:19, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:6:14, endln:6:17
+  |vpiSigned:1
+\_int_typespec: , line:18:14, endln:18:17
+  |vpiSigned:1
+\_int_typespec: , line:24:14, endln:24:17
+  |vpiSigned:1
+\_class_typespec: , line:34:21, endln:34:28
+  |vpiClassDefn:
+  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:30:3, endln:52:11
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv, line:55:3, endln:69:11
+\_int_typespec: , line:57:18, endln:57:21
+  |vpiSigned:1
+\_int_typespec: , line:60:14, endln:60:17
+  |vpiSigned:1
+\_int_typespec: , line:63:14, endln:63:17
+  |vpiSigned:1
+\_int_typespec: , line:66:14, endln:66:17
+  |vpiSigned:1
+\_int_typespec: , line:66:26, endln:66:29
+  |vpiSigned:1
+\_logic_typespec: , line:13:2, endln:13:10
+  |vpiRange:
+  \_range: , line:13:2, endln:13:10
+    |vpiParent:
+    \_logic_typespec: , line:13:2, endln:13:10
+    |vpiLeftRange:
+    \_ref_obj: (size), line:13:3, endln:13:7
+      |vpiParent:
+      \_range: , line:13:2, endln:13:10
+      |vpiName:size
+    |vpiRightRange:
+    \_constant: , line:13:8, endln:13:9
+      |vpiParent:
+      \_range: , line:13:2, endln:13:10
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:4:2, endln:3:8
+\_logic_typespec: , line:4:2, endln:3:8
+\_logic_typespec: , line:4:2, endln:3:8
+\_logic_typespec: , line:4:2, endln:3:8
+\_logic_typespec: , line:6:2, endln:5:9
+\_logic_typespec: , line:6:2, endln:5:9
+\_logic_typespec: , line:7:1, endln:7:5
+\_logic_typespec: , line:7:1, endln:7:5
+\_logic_typespec: , line:7:1, endln:7:5
+\_logic_typespec: , line:20:1, endln:20:5
+\_logic_typespec: , line:19:1, endln:20:6
+  |vpiRange:
+  \_range: , line:20:1, endln:20:6
+    |vpiParent:
+    \_logic_typespec: , line:19:1, endln:20:6
+    |vpiLeftRange:
+    \_constant: , line:20:2, endln:20:3
+      |vpiParent:
+      \_range: , line:20:1, endln:20:6
+      |vpiDecompile:8
+      |vpiSize:64
+      |UINT:8
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:20:4, endln:20:5
+      |vpiParent:
+      \_range: , line:20:1, endln:20:6
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:21:1, endln:22:7
+  |vpiRange:
+  \_range: , line:22:2, endln:22:7
+    |vpiParent:
+    \_logic_typespec: , line:21:1, endln:22:7
+    |vpiLeftRange:
+    \_constant: , line:22:3, endln:22:4
+      |vpiParent:
+      \_range: , line:22:2, endln:22:7
+      |vpiDecompile:7
+      |vpiSize:64
+      |UINT:7
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:22:5, endln:22:6
+      |vpiParent:
+      \_range: , line:22:2, endln:22:7
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:23:1, endln:23:5
+\_logic_typespec: , line:23:1, endln:23:5
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 8
-[   NOTE] : 8
+[   NOTE] : 1
 
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:7:1: Unsupported typespec, type
-[LINT]:   \_ :0:0:
-============================== End Linting Results ==============================
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/UnitElabExternNested/builtin.sv | ${SURELOG_DIR}/build/regression/UnitElabExternNested/roundtrip/builtin_000.sv | 0 | 0 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v   | ${SURELOG_DIR}/build/regression/UnitElabExternNested/roundtrip/middle_000.v   | 18 | 28 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitElabExternNested/top.v      | ${SURELOG_DIR}/build/regression/UnitElabExternNested/roundtrip/top_000.v      | 33 | 36 |
+============================== End RoundTrip Results ==============================

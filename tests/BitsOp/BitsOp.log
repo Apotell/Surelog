@@ -7,106 +7,52 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsOp/dut.sv:75:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsOp/dut.sv:104:1: No timescale set for "dmi_jtag".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:1:1: Compile package "top_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:22:1: Compile package "tlul_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:48:1: Compile package "hmac_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:65:1: Compile package "flash_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsOp/dut.sv:104:1: Compile module "work@dmi_jtag".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsOp/dut.sv:75:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/BitsOp/dut.sv:75:1: Top level module "work@dut".
-[NTE:EL0503] ${SURELOG_DIR}/tests/BitsOp/dut.sv:104:1: Top level module "work@dmi_jtag".
-[NTE:EL0504] Multiple top level modules in design.
-[NTE:EL0508] Nb Top level modules: 2.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assignment                                             1
 begin                                                  2
-bit_typespec                                           5
-bit_var                                                1
-constant                                             313
-cont_assign                                            2
+bit_typespec                                           3
+constant                                             106
+cont_assign                                            1
 design                                                 1
-enum_const                                             4
-enum_typespec                                          2
-hier_path                                              8
+enum_const                                             2
+enum_typespec                                          1
+hier_path                                              4
 if_stmt                                                2
 import_typespec                                        1
-int_typespec                                          83
-integer_typespec                                       2
+int_typespec                                          26
 logic_net                                             10
-logic_typespec                                        45
-logic_var                                              4
-module_inst                                           16
+logic_typespec                                        24
+module_inst                                            5
 named_begin                                            1
-operation                                             77
-package                                                8
-packed_array_typespec                                  5
-param_assign                                          96
-parameter                                             96
+operation                                             39
+package                                                4
+packed_array_typespec                                  3
+param_assign                                          48
+parameter                                             48
 part_select                                            1
-port                                                   2
-range                                                 48
-ref_obj                                               77
-ref_typespec                                         231
-struct_net                                             2
-struct_typespec                                        9
-sys_func_call                                         29
-typespec_member                                       32
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-assignment                                             2
-begin                                                  4
-bit_typespec                                           5
-bit_var                                                1
-constant                                             313
-cont_assign                                            3
-design                                                 1
-enum_const                                             4
-enum_typespec                                          2
-hier_path                                              8
-if_stmt                                                4
-import_typespec                                        1
-int_typespec                                          83
-integer_typespec                                       2
-logic_net                                             10
-logic_typespec                                        45
-logic_var                                              4
-module_inst                                           16
-named_begin                                            2
-operation                                             80
-package                                                8
-packed_array_typespec                                  5
-param_assign                                          96
-parameter                                             96
-part_select                                            2
-port                                                   3
-range                                                 48
-ref_obj                                               84
-ref_typespec                                         233
-struct_net                                             2
-struct_typespec                                        9
-sys_func_call                                         29
-typespec_member                                       32
+port                                                   1
+range                                                 24
+ref_obj                                               66
+ref_typespec                                          86
+struct_typespec                                        5
+sys_func_call                                         33
+typespec_member                                       17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsOp/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitsOp/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitsOp/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:top_pkg
   |vpiFullName:top_pkg::
   |vpiParameter:
@@ -414,7 +360,7 @@ design: (work@dut)
         |vpiName:TL_DW
         |vpiFullName:top_pkg::TL_DW
         |vpiActual:
-        \_parameter: (top_pkg::TL_DW), line:4:14, endln:4:19
+        \_constant: , line:4:20, endln:4:22
       |vpiOperand:
       \_constant: , line:8:29, endln:8:30
         |vpiParent:
@@ -449,7 +395,7 @@ design: (work@dut)
             |vpiName:TL_DBW
             |vpiFullName:top_pkg::TL_DBW
             |vpiActual:
-            \_parameter: (top_pkg::TL_DBW), line:8:14, endln:8:20
+            \_operation: , line:8:22, endln:8:30
           |vpiName:$clog2
         |vpiOperand:
         \_constant: , line:9:43, endln:9:44
@@ -561,7 +507,7 @@ design: (work@dut)
         |vpiName:FLASH_BANKS
         |vpiFullName:top_pkg::FLASH_BANKS
         |vpiActual:
-        \_parameter: (top_pkg::FLASH_BANKS), line:10:14, endln:10:25
+        \_constant: , line:10:26, endln:10:27
       |vpiName:$clog2
     |vpiLhs:
     \_parameter: (top_pkg::FLASH_BKW), line:14:14, endln:14:23
@@ -580,7 +526,7 @@ design: (work@dut)
         |vpiName:FLASH_PAGES_PER_BANK
         |vpiFullName:top_pkg::FLASH_PAGES_PER_BANK
         |vpiActual:
-        \_parameter: (top_pkg::FLASH_PAGES_PER_BANK), line:11:14, endln:11:34
+        \_constant: , line:11:35, endln:11:38
       |vpiName:$clog2
     |vpiLhs:
     \_parameter: (top_pkg::FLASH_PGW), line:15:14, endln:15:23
@@ -599,7 +545,7 @@ design: (work@dut)
         |vpiName:FLASH_WORDS_PER_PAGE
         |vpiFullName:top_pkg::FLASH_WORDS_PER_PAGE
         |vpiActual:
-        \_parameter: (top_pkg::FLASH_WORDS_PER_PAGE), line:12:14, endln:12:34
+        \_constant: , line:12:35, endln:12:38
       |vpiName:$clog2
     |vpiLhs:
     \_parameter: (top_pkg::FLASH_WDW), line:16:14, endln:16:23
@@ -624,7 +570,7 @@ design: (work@dut)
           |vpiName:FLASH_BKW
           |vpiFullName:top_pkg::FLASH_BKW
           |vpiActual:
-          \_parameter: (top_pkg::FLASH_BKW), line:14:14, endln:14:23
+          \_sys_func_call: ($clog2), line:14:26, endln:14:45
         |vpiOperand:
         \_ref_obj: (top_pkg::FLASH_PGW), line:17:37, endln:17:46
           |vpiParent:
@@ -632,7 +578,7 @@ design: (work@dut)
           |vpiName:FLASH_PGW
           |vpiFullName:top_pkg::FLASH_PGW
           |vpiActual:
-          \_parameter: (top_pkg::FLASH_PGW), line:15:14, endln:15:23
+          \_sys_func_call: ($clog2), line:15:26, endln:15:54
       |vpiOperand:
       \_ref_obj: (top_pkg::FLASH_WDW), line:17:49, endln:17:58
         |vpiParent:
@@ -640,7 +586,7 @@ design: (work@dut)
         |vpiName:FLASH_WDW
         |vpiFullName:top_pkg::FLASH_WDW
         |vpiActual:
-        \_parameter: (top_pkg::FLASH_WDW), line:16:14, endln:16:23
+        \_sys_func_call: ($clog2), line:16:26, endln:16:54
     |vpiLhs:
     \_parameter: (top_pkg::FLASH_AW), line:17:14, endln:17:22
   |vpiParamAssign:
@@ -659,7 +605,7 @@ design: (work@dut)
         |vpiName:FLASH_BYTES_PER_WORD
         |vpiFullName:top_pkg::FLASH_BYTES_PER_WORD
         |vpiActual:
-        \_parameter: (top_pkg::FLASH_BYTES_PER_WORD), line:13:14, endln:13:34
+        \_constant: , line:13:35, endln:13:36
       |vpiOperand:
       \_constant: , line:18:48, endln:18:49
         |vpiParent:
@@ -674,13 +620,13 @@ design: (work@dut)
 |uhdmallPackages:
 \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:tlul_pkg
   |vpiFullName:tlul_pkg::
   |vpiTypedef:
   \_struct_typespec: (tlul_pkg::tl_a_op_e), line:24:11, endln:26:4
     |vpiParent:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
+    \_typespec_member: (a_opcode), line:34:35, endln:34:43
     |vpiName:tlul_pkg::tl_a_op_e
     |vpiInstance:
     \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
@@ -691,10 +637,10 @@ design: (work@dut)
       \_struct_typespec: (tlul_pkg::tl_a_op_e), line:24:11, endln:26:4
       |vpiName:b_valid
       |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_a_op_e::b_valid)
+      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_opcode::tlul_pkg::tl_a_op_e::b_valid)
         |vpiParent:
         \_typespec_member: (b_valid), line:25:35, endln:25:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_a_op_e::b_valid
+        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_opcode::tlul_pkg::tl_a_op_e::b_valid
         |vpiActual:
         \_logic_typespec: , line:25:5, endln:25:10
       |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
@@ -705,7 +651,7 @@ design: (work@dut)
   |vpiTypedef:
   \_struct_typespec: (tlul_pkg::tl_a_user_t), line:28:11, endln:30:4
     |vpiParent:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
+    \_typespec_member: (a_user), line:41:35, endln:41:41
     |vpiName:tlul_pkg::tl_a_user_t
     |vpiInstance:
     \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
@@ -716,10 +662,10 @@ design: (work@dut)
       \_struct_typespec: (tlul_pkg::tl_a_user_t), line:28:11, endln:30:4
       |vpiName:b_valid
       |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_a_user_t::b_valid)
+      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_user::tlul_pkg::tl_a_user_t::b_valid)
         |vpiParent:
         \_typespec_member: (b_valid), line:29:35, endln:29:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_a_user_t::b_valid
+        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_user::tlul_pkg::tl_a_user_t::b_valid
         |vpiActual:
         \_logic_typespec: , line:29:5, endln:29:10
       |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
@@ -909,7 +855,7 @@ design: (work@dut)
 |uhdmallPackages:
 \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:hmac_pkg
   |vpiFullName:hmac_pkg::
   |vpiParameter:
@@ -1139,7 +1085,7 @@ design: (work@dut)
 |uhdmallPackages:
 \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:flash_ctrl_pkg
   |vpiFullName:flash_ctrl_pkg::
   |vpiTypedef:
@@ -1200,1117 +1146,15 @@ design: (work@dut)
         |UINT:0
         |vpiConstType:9
   |vpiDefName:flash_ctrl_pkg
-|uhdmtopPackages:
-\_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:top_pkg
-  |vpiFullName:top_pkg::
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_AW), line:3:14, endln:3:19
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:32
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_AW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_AW), line:3:14, endln:3:19
-      |vpiFullName:top_pkg::TL_AW
-      |vpiActual:
-      \_int_typespec: , line:3:3, endln:3:22
-    |vpiLocalParam:1
-    |vpiName:TL_AW
-    |vpiFullName:top_pkg::TL_AW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_DW), line:4:14, endln:4:19
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:32
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_DW), line:4:14, endln:4:19
-      |vpiFullName:top_pkg::TL_DW
-      |vpiActual:
-      \_int_typespec: , line:4:3, endln:4:22
-    |vpiLocalParam:1
-    |vpiName:TL_DW
-    |vpiFullName:top_pkg::TL_DW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_AIW), line:5:14, endln:5:20
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:8
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_AIW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_AIW), line:5:14, endln:5:20
-      |vpiFullName:top_pkg::TL_AIW
-      |vpiActual:
-      \_int_typespec: , line:5:3, endln:5:22
-    |vpiLocalParam:1
-    |vpiName:TL_AIW
-    |vpiFullName:top_pkg::TL_AIW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_DIW), line:6:14, endln:6:20
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DIW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_DIW), line:6:14, endln:6:20
-      |vpiFullName:top_pkg::TL_DIW
-      |vpiActual:
-      \_int_typespec: , line:6:3, endln:6:22
-    |vpiLocalParam:1
-    |vpiName:TL_DIW
-    |vpiFullName:top_pkg::TL_DIW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_DUW), line:7:14, endln:7:20
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:16
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DUW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_DUW), line:7:14, endln:7:20
-      |vpiFullName:top_pkg::TL_DUW
-      |vpiActual:
-      \_int_typespec: , line:7:3, endln:7:23
-    |vpiLocalParam:1
-    |vpiName:TL_DUW
-    |vpiFullName:top_pkg::TL_DUW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_DBW), line:8:14, endln:8:20
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DBW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_DBW), line:8:14, endln:8:20
-      |vpiFullName:top_pkg::TL_DBW
-      |vpiActual:
-      \_int_typespec: , line:8:3, endln:8:31
-    |vpiLocalParam:1
-    |vpiName:TL_DBW
-    |vpiFullName:top_pkg::TL_DBW
-  |vpiParameter:
-  \_parameter: (top_pkg::TL_SZW), line:9:14, endln:9:20
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_SZW)
-      |vpiParent:
-      \_parameter: (top_pkg::TL_SZW), line:9:14, endln:9:20
-      |vpiFullName:top_pkg::TL_SZW
-      |vpiActual:
-      \_int_typespec: , line:9:3, endln:9:45
-    |vpiLocalParam:1
-    |vpiName:TL_SZW
-    |vpiFullName:top_pkg::TL_SZW
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_BANKS), line:10:14, endln:10:25
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_BANKS)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_BANKS), line:10:14, endln:10:25
-      |vpiFullName:top_pkg::FLASH_BANKS
-      |vpiActual:
-      \_int_typespec: , line:10:3, endln:10:27
-    |vpiLocalParam:1
-    |vpiName:FLASH_BANKS
-    |vpiFullName:top_pkg::FLASH_BANKS
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_PAGES_PER_BANK), line:11:14, endln:11:34
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:256
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_PAGES_PER_BANK)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_PAGES_PER_BANK), line:11:14, endln:11:34
-      |vpiFullName:top_pkg::FLASH_PAGES_PER_BANK
-      |vpiActual:
-      \_int_typespec: , line:11:3, endln:11:38
-    |vpiLocalParam:1
-    |vpiName:FLASH_PAGES_PER_BANK
-    |vpiFullName:top_pkg::FLASH_PAGES_PER_BANK
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_WORDS_PER_PAGE), line:12:14, endln:12:34
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:256
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_WORDS_PER_PAGE)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_WORDS_PER_PAGE), line:12:14, endln:12:34
-      |vpiFullName:top_pkg::FLASH_WORDS_PER_PAGE
-      |vpiActual:
-      \_int_typespec: , line:12:3, endln:12:38
-    |vpiLocalParam:1
-    |vpiName:FLASH_WORDS_PER_PAGE
-    |vpiFullName:top_pkg::FLASH_WORDS_PER_PAGE
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_BYTES_PER_WORD), line:13:14, endln:13:34
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_BYTES_PER_WORD)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_BYTES_PER_WORD), line:13:14, endln:13:34
-      |vpiFullName:top_pkg::FLASH_BYTES_PER_WORD
-      |vpiActual:
-      \_int_typespec: , line:13:3, endln:13:36
-    |vpiLocalParam:1
-    |vpiName:FLASH_BYTES_PER_WORD
-    |vpiFullName:top_pkg::FLASH_BYTES_PER_WORD
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_BKW), line:14:14, endln:14:23
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_BKW)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_BKW), line:14:14, endln:14:23
-      |vpiFullName:top_pkg::FLASH_BKW
-      |vpiActual:
-      \_int_typespec: , line:14:3, endln:14:45
-    |vpiLocalParam:1
-    |vpiName:FLASH_BKW
-    |vpiFullName:top_pkg::FLASH_BKW
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_PGW), line:15:14, endln:15:23
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:8
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_PGW)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_PGW), line:15:14, endln:15:23
-      |vpiFullName:top_pkg::FLASH_PGW
-      |vpiActual:
-      \_int_typespec: , line:15:3, endln:15:54
-    |vpiLocalParam:1
-    |vpiName:FLASH_PGW
-    |vpiFullName:top_pkg::FLASH_PGW
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_WDW), line:16:14, endln:16:23
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:8
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_WDW)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_WDW), line:16:14, endln:16:23
-      |vpiFullName:top_pkg::FLASH_WDW
-      |vpiActual:
-      \_int_typespec: , line:16:3, endln:16:54
-    |vpiLocalParam:1
-    |vpiName:FLASH_WDW
-    |vpiFullName:top_pkg::FLASH_WDW
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_AW), line:17:14, endln:17:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |UINT:17
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_AW)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_AW), line:17:14, endln:17:22
-      |vpiFullName:top_pkg::FLASH_AW
-      |vpiActual:
-      \_int_typespec: , line:17:3, endln:17:58
-    |vpiLocalParam:1
-    |vpiName:FLASH_AW
-    |vpiFullName:top_pkg::FLASH_AW
-  |vpiParameter:
-  \_parameter: (top_pkg::FLASH_DW), line:18:14, endln:18:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |INT:32
-    |vpiTypespec:
-    \_ref_typespec: (top_pkg::FLASH_DW)
-      |vpiParent:
-      \_parameter: (top_pkg::FLASH_DW), line:18:14, endln:18:22
-      |vpiFullName:top_pkg::FLASH_DW
-      |vpiActual:
-      \_int_typespec: , line:18:3, endln:18:49
-    |vpiLocalParam:1
-    |vpiName:FLASH_DW
-    |vpiFullName:top_pkg::FLASH_DW
-  |vpiParamAssign:
-  \_param_assign: , line:3:14, endln:3:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:3:20, endln:3:22
-      |vpiParent:
-      \_param_assign: , line:3:14, endln:3:22
-      |vpiDecompile:32
-      |vpiSize:32
-      |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:3:20, endln:3:22
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:3, endln:3:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_AW), line:3:14, endln:3:19
-  |vpiParamAssign:
-  \_param_assign: , line:4:14, endln:4:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:4:20, endln:4:22
-      |vpiParent:
-      \_param_assign: , line:4:14, endln:4:22
-      |vpiDecompile:32
-      |vpiSize:32
-      |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:4:20, endln:4:22
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:4:3, endln:4:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_DW), line:4:14, endln:4:19
-  |vpiParamAssign:
-  \_param_assign: , line:5:14, endln:5:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:5:21, endln:5:22
-      |vpiParent:
-      \_param_assign: , line:5:14, endln:5:22
-      |vpiDecompile:8
-      |vpiSize:32
-      |UINT:8
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:5:21, endln:5:22
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:5:3, endln:5:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_AIW), line:5:14, endln:5:20
-  |vpiParamAssign:
-  \_param_assign: , line:6:14, endln:6:22
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:6:21, endln:6:22
-      |vpiParent:
-      \_param_assign: , line:6:14, endln:6:22
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:6:21, endln:6:22
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:6:3, endln:6:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_DIW), line:6:14, endln:6:20
-  |vpiParamAssign:
-  \_param_assign: , line:7:14, endln:7:23
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:7:21, endln:7:23
-      |vpiParent:
-      \_param_assign: , line:7:14, endln:7:23
-      |vpiDecompile:16
-      |vpiSize:32
-      |UINT:16
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:7:21, endln:7:23
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:7:3, endln:7:23
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_DUW), line:7:14, endln:7:20
-  |vpiParamAssign:
-  \_param_assign: , line:8:14, endln:8:31
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:8:22, endln:8:27
-      |vpiParent:
-      \_param_assign: , line:8:14, endln:8:31
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:8:22, endln:8:27
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:8:3, endln:8:31
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_DBW), line:8:14, endln:8:20
-  |vpiParamAssign:
-  \_param_assign: , line:9:14, endln:9:45
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:9:21, endln:9:45
-      |vpiParent:
-      \_param_assign: , line:9:14, endln:9:45
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:9:21, endln:9:45
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:9:3, endln:9:45
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::TL_SZW), line:9:14, endln:9:20
-  |vpiParamAssign:
-  \_param_assign: , line:10:14, endln:10:27
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:10:26, endln:10:27
-      |vpiParent:
-      \_param_assign: , line:10:14, endln:10:27
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:10:26, endln:10:27
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:10:3, endln:10:27
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_BANKS), line:10:14, endln:10:25
-  |vpiParamAssign:
-  \_param_assign: , line:11:14, endln:11:38
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:11:35, endln:11:38
-      |vpiParent:
-      \_param_assign: , line:11:14, endln:11:38
-      |vpiDecompile:256
-      |vpiSize:32
-      |UINT:256
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:11:35, endln:11:38
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:11:3, endln:11:38
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_PAGES_PER_BANK), line:11:14, endln:11:34
-  |vpiParamAssign:
-  \_param_assign: , line:12:14, endln:12:38
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:12:35, endln:12:38
-      |vpiParent:
-      \_param_assign: , line:12:14, endln:12:38
-      |vpiDecompile:256
-      |vpiSize:32
-      |UINT:256
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:12:35, endln:12:38
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:12:3, endln:12:38
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_WORDS_PER_PAGE), line:12:14, endln:12:34
-  |vpiParamAssign:
-  \_param_assign: , line:13:14, endln:13:36
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:13:35, endln:13:36
-      |vpiParent:
-      \_param_assign: , line:13:14, endln:13:36
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:13:35, endln:13:36
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:13:3, endln:13:36
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_BYTES_PER_WORD), line:13:14, endln:13:34
-  |vpiParamAssign:
-  \_param_assign: , line:14:14, endln:14:45
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:14:26, endln:14:45
-      |vpiParent:
-      \_param_assign: , line:14:14, endln:14:45
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:14:26, endln:14:45
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:14:3, endln:14:45
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_BKW), line:14:14, endln:14:23
-  |vpiParamAssign:
-  \_param_assign: , line:15:14, endln:15:54
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:15:26, endln:15:54
-      |vpiParent:
-      \_param_assign: , line:15:14, endln:15:54
-      |vpiDecompile:8
-      |vpiSize:32
-      |UINT:8
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:15:26, endln:15:54
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:15:3, endln:15:54
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_PGW), line:15:14, endln:15:23
-  |vpiParamAssign:
-  \_param_assign: , line:16:14, endln:16:54
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:16:26, endln:16:54
-      |vpiParent:
-      \_param_assign: , line:16:14, endln:16:54
-      |vpiDecompile:8
-      |vpiSize:32
-      |UINT:8
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:16:26, endln:16:54
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:16:3, endln:16:54
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_WDW), line:16:14, endln:16:23
-  |vpiParamAssign:
-  \_param_assign: , line:17:14, endln:17:58
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:17:25, endln:17:46
-      |vpiParent:
-      \_param_assign: , line:17:14, endln:17:58
-      |vpiDecompile:17
-      |vpiSize:32
-      |UINT:17
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:17:25, endln:17:46
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:17:3, endln:17:58
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_AW), line:17:14, endln:17:22
-  |vpiParamAssign:
-  \_param_assign: , line:18:14, endln:18:49
-    |vpiParent:
-    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:1:1, endln:20:13
-    |vpiRhs:
-    \_constant: , line:18:25, endln:18:45
-      |vpiParent:
-      \_param_assign: , line:18:14, endln:18:49
-      |vpiDecompile:32
-      |vpiSize:32
-      |INT:32
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:18:25, endln:18:45
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:18:3, endln:18:49
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (top_pkg::FLASH_DW), line:18:14, endln:18:22
-  |vpiDefName:top_pkg
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:tlul_pkg
-  |vpiFullName:tlul_pkg::
-  |vpiTypedef:
-  \_struct_typespec: (tlul_pkg::tl_a_op_e), line:24:11, endln:26:4
-    |vpiParent:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiName:tlul_pkg::tl_a_op_e
-    |vpiInstance:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (b_valid), line:25:35, endln:25:42
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_a_op_e), line:24:11, endln:26:4
-      |vpiName:b_valid
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_a_op_e::b_valid)
-        |vpiParent:
-        \_typespec_member: (b_valid), line:25:35, endln:25:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_a_op_e::b_valid
-        |vpiActual:
-        \_logic_typespec: , line:25:5, endln:25:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:25
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:25
-      |vpiRefEndColumnNo:10
-  |vpiTypedef:
-  \_struct_typespec: (tlul_pkg::tl_a_user_t), line:28:11, endln:30:4
-    |vpiParent:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiName:tlul_pkg::tl_a_user_t
-    |vpiInstance:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (b_valid), line:29:35, endln:29:42
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_a_user_t), line:28:11, endln:30:4
-      |vpiName:b_valid
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_a_user_t::b_valid)
-        |vpiParent:
-        \_typespec_member: (b_valid), line:29:35, endln:29:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_a_user_t::b_valid
-        |vpiActual:
-        \_logic_typespec: , line:29:5, endln:29:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:29
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:29
-      |vpiRefEndColumnNo:10
-  |vpiTypedef:
-  \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-    |vpiParent:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiName:tlul_pkg::tl_h2d_t
-    |vpiInstance:
-    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (a_valid), line:33:35, endln:33:42
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_valid
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_valid)
-        |vpiParent:
-        \_typespec_member: (a_valid), line:33:35, endln:33:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_valid
-        |vpiActual:
-        \_logic_typespec: , line:33:5, endln:33:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:33
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:33
-      |vpiRefEndColumnNo:10
-    |vpiTypespecMember:
-    \_typespec_member: (a_opcode), line:34:35, endln:34:43
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_opcode
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_opcode)
-        |vpiParent:
-        \_typespec_member: (a_opcode), line:34:35, endln:34:43
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_opcode
-        |vpiActual:
-        \_struct_typespec: (tlul_pkg::tl_a_op_e), line:24:11, endln:26:4
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:34
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:34
-      |vpiRefEndColumnNo:14
-    |vpiTypespecMember:
-    \_typespec_member: (a_param), line:35:35, endln:35:42
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_param
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_param)
-        |vpiParent:
-        \_typespec_member: (a_param), line:35:35, endln:35:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_param
-        |vpiActual:
-        \_logic_typespec: , line:35:5, endln:35:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:35
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:35
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_size), line:36:35, endln:36:41
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_size
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_size)
-        |vpiParent:
-        \_typespec_member: (a_size), line:36:35, endln:36:41
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_size
-        |vpiActual:
-        \_logic_typespec: , line:36:5, endln:36:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:36
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:36
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_source), line:37:35, endln:37:43
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_source
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_source)
-        |vpiParent:
-        \_typespec_member: (a_source), line:37:35, endln:37:43
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_source
-        |vpiActual:
-        \_logic_typespec: , line:37:5, endln:37:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:37
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:37
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_address), line:38:35, endln:38:44
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_address
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_address)
-        |vpiParent:
-        \_typespec_member: (a_address), line:38:35, endln:38:44
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_address
-        |vpiActual:
-        \_logic_typespec: , line:38:5, endln:38:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:38
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:38
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_mask), line:39:35, endln:39:41
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_mask
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_mask)
-        |vpiParent:
-        \_typespec_member: (a_mask), line:39:35, endln:39:41
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_mask
-        |vpiActual:
-        \_logic_typespec: , line:39:5, endln:39:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:39
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:39
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_data), line:40:35, endln:40:41
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_data
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_data)
-        |vpiParent:
-        \_typespec_member: (a_data), line:40:35, endln:40:41
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_data
-        |vpiActual:
-        \_logic_typespec: , line:40:5, endln:40:33
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:40
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:40
-      |vpiRefEndColumnNo:33
-    |vpiTypespecMember:
-    \_typespec_member: (a_user), line:41:35, endln:41:41
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:a_user
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_user)
-        |vpiParent:
-        \_typespec_member: (a_user), line:41:35, endln:41:41
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::a_user
-        |vpiActual:
-        \_struct_typespec: (tlul_pkg::tl_a_user_t), line:28:11, endln:30:4
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:41
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:41
-      |vpiRefEndColumnNo:16
-    |vpiTypespecMember:
-    \_typespec_member: (d_ready), line:43:35, endln:43:42
-      |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-      |vpiName:d_ready
-      |vpiTypespec:
-      \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_ready)
-        |vpiParent:
-        \_typespec_member: (d_ready), line:43:35, endln:43:42
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_ready
-        |vpiActual:
-        \_logic_typespec: , line:43:5, endln:43:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-      |vpiRefLineNo:43
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:43
-      |vpiRefEndColumnNo:10
-  |vpiDefName:tlul_pkg
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:hmac_pkg
-  |vpiFullName:hmac_pkg::
-  |vpiParameter:
-  \_parameter: (hmac_pkg::NumAlerts), line:52:18, endln:52:27
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (hmac_pkg::NumAlerts)
-      |vpiParent:
-      \_parameter: (hmac_pkg::NumAlerts), line:52:18, endln:52:27
-      |vpiFullName:hmac_pkg::NumAlerts
-      |vpiActual:
-      \_int_typespec: , line:52:14, endln:52:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:NumAlerts
-    |vpiFullName:hmac_pkg::NumAlerts
-  |vpiParameter:
-  \_parameter: (hmac_pkg::AlertAsyncOn), line:53:36, endln:53:48
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (hmac_pkg::AlertAsyncOn)
-      |vpiParent:
-      \_parameter: (hmac_pkg::AlertAsyncOn), line:53:36, endln:53:48
-      |vpiFullName:hmac_pkg::AlertAsyncOn
-      |vpiActual:
-      \_logic_typespec: , line:53:14, endln:53:35
-    |vpiLocalParam:1
-    |vpiName:AlertAsyncOn
-    |vpiFullName:hmac_pkg::AlertAsyncOn
-  |vpiParameter:
-  \_parameter: (hmac_pkg::MsgFifoDepth), line:55:18, endln:55:30
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |UINT:16
-    |vpiTypespec:
-    \_ref_typespec: (hmac_pkg::MsgFifoDepth)
-      |vpiParent:
-      \_parameter: (hmac_pkg::MsgFifoDepth), line:55:18, endln:55:30
-      |vpiFullName:hmac_pkg::MsgFifoDepth
-      |vpiActual:
-      \_int_typespec: , line:55:14, endln:55:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:MsgFifoDepth
-    |vpiFullName:hmac_pkg::MsgFifoDepth
-  |vpiParameter:
-  \_parameter: (hmac_pkg::NumRound), line:57:18, endln:57:26
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |UINT:64
-    |vpiTypespec:
-    \_ref_typespec: (hmac_pkg::NumRound)
-      |vpiParent:
-      \_parameter: (hmac_pkg::NumRound), line:57:18, endln:57:26
-      |vpiFullName:hmac_pkg::NumRound
-      |vpiActual:
-      \_int_typespec: , line:57:14, endln:57:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:NumRound
-    |vpiFullName:hmac_pkg::NumRound
-  |vpiParameter:
-  \_parameter: (hmac_pkg::WordByte), line:60:18, endln:60:26
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |INT:4
-    |vpiTypespec:
-    \_ref_typespec: (hmac_pkg::WordByte)
-      |vpiParent:
-      \_parameter: (hmac_pkg::WordByte), line:60:18, endln:60:26
-      |vpiFullName:hmac_pkg::WordByte
-      |vpiActual:
-      \_int_typespec: , line:60:14, endln:60:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:WordByte
-    |vpiFullName:hmac_pkg::WordByte
-  |vpiParamAssign:
-  \_param_assign: , line:52:18, endln:52:31
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRhs:
-    \_constant: , line:52:30, endln:52:31
-      |vpiParent:
-      \_param_assign: , line:52:18, endln:52:31
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (hmac_pkg)
-        |vpiParent:
-        \_constant: , line:52:30, endln:52:31
-        |vpiFullName:hmac_pkg
-        |vpiActual:
-        \_int_typespec: , line:52:14, endln:52:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (hmac_pkg::NumAlerts), line:52:18, endln:52:27
-  |vpiParamAssign:
-  \_param_assign: , line:53:36, endln:53:67
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRhs:
-    \_constant: , line:53:51, endln:53:67
-      |vpiParent:
-      \_param_assign: , line:53:36, endln:53:67
-      |vpiDecompile:1
-      |vpiSize:1
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (hmac_pkg)
-        |vpiParent:
-        \_constant: , line:53:51, endln:53:67
-        |vpiFullName:hmac_pkg
-        |vpiActual:
-        \_logic_typespec: , line:53:14, endln:53:35
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (hmac_pkg::AlertAsyncOn), line:53:36, endln:53:48
-  |vpiParamAssign:
-  \_param_assign: , line:55:18, endln:55:35
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRhs:
-    \_constant: , line:55:33, endln:55:35
-      |vpiParent:
-      \_param_assign: , line:55:18, endln:55:35
-      |vpiDecompile:16
-      |vpiSize:32
-      |UINT:16
-      |vpiTypespec:
-      \_ref_typespec: (hmac_pkg)
-        |vpiParent:
-        \_constant: , line:55:33, endln:55:35
-        |vpiFullName:hmac_pkg
-        |vpiActual:
-        \_int_typespec: , line:55:14, endln:55:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (hmac_pkg::MsgFifoDepth), line:55:18, endln:55:30
-  |vpiParamAssign:
-  \_param_assign: , line:57:18, endln:57:31
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRhs:
-    \_constant: , line:57:29, endln:57:31
-      |vpiParent:
-      \_param_assign: , line:57:18, endln:57:31
-      |vpiDecompile:64
-      |vpiSize:32
-      |UINT:64
-      |vpiTypespec:
-      \_ref_typespec: (hmac_pkg)
-        |vpiParent:
-        \_constant: , line:57:29, endln:57:31
-        |vpiFullName:hmac_pkg
-        |vpiActual:
-        \_int_typespec: , line:57:14, endln:57:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (hmac_pkg::NumRound), line:57:18, endln:57:26
-  |vpiParamAssign:
-  \_param_assign: , line:60:18, endln:60:48
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRhs:
-    \_constant: , line:60:29, endln:60:46
-      |vpiParent:
-      \_param_assign: , line:60:18, endln:60:48
-      |vpiDecompile:4
-      |vpiSize:32
-      |INT:4
-      |vpiTypespec:
-      \_ref_typespec: (hmac_pkg)
-        |vpiParent:
-        \_constant: , line:60:29, endln:60:46
-        |vpiFullName:hmac_pkg
-        |vpiActual:
-        \_int_typespec: , line:60:14, endln:60:17
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (hmac_pkg::WordByte), line:60:18, endln:60:26
-  |vpiTypedef:
-  \_logic_typespec: (hmac_pkg::sha_word_t), line:59:11, endln:59:23
-    |vpiParent:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiName:hmac_pkg::sha_word_t
-    |vpiInstance:
-    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-    |vpiRange:
-    \_range: , line:59:17, endln:59:23
-      |vpiParent:
-      \_logic_typespec: (hmac_pkg::sha_word_t), line:59:11, endln:59:23
-      |vpiLeftRange:
-      \_constant: , line:59:18, endln:59:20
-        |vpiParent:
-        \_range: , line:59:17, endln:59:23
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:59:21, endln:59:22
-        |vpiParent:
-        \_range: , line:59:17, endln:59:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiDefName:hmac_pkg
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:flash_ctrl_pkg
-  |vpiFullName:flash_ctrl_pkg::
-  |vpiTypedef:
-  \_enum_typespec: (flash_ctrl_pkg::flash_erase_op_e), line:66:1, endln:69:20
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiName:flash_ctrl_pkg::flash_erase_op_e
-    |vpiInstance:
-    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@dut.flash_ctrl_pkg::flash_erase_op_e)
-      |vpiParent:
-      \_enum_typespec: (flash_ctrl_pkg::flash_erase_op_e), line:66:1, endln:69:20
-      |vpiFullName:work@dut.flash_ctrl_pkg::flash_erase_op_e
-      |vpiActual:
-      \_logic_typespec: , line:66:14, endln:66:19
-    |vpiEnumConst:
-    \_enum_const: (PageErase), line:67:3, endln:67:20
-      |vpiParent:
-      \_enum_typespec: (flash_ctrl_pkg::flash_erase_op_e), line:66:1, endln:69:20
-      |vpiName:PageErase
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (BankErase), line:68:3, endln:68:20
-      |vpiParent:
-      \_enum_typespec: (flash_ctrl_pkg::flash_erase_op_e), line:66:1, endln:69:20
-      |vpiName:BankErase
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
-  |vpiTypedef:
-  \_logic_typespec: (flash_ctrl_pkg::sha_word_t), line:71:9, endln:71:21
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiName:flash_ctrl_pkg::sha_word_t
-    |vpiInstance:
-    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
-    |vpiRange:
-    \_range: , line:71:15, endln:71:21
-      |vpiParent:
-      \_logic_typespec: (flash_ctrl_pkg::sha_word_t), line:71:9, endln:71:21
-      |vpiLeftRange:
-      \_constant: , line:71:16, endln:71:18
-        |vpiParent:
-        \_range: , line:71:15, endln:71:21
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:71:19, endln:71:20
-        |vpiParent:
-        \_range: , line:71:15, endln:71:21
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiDefName:flash_ctrl_pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dmi_jtag
   |vpiTypedef:
   \_struct_typespec: (dmi_t), line:106:11, endln:110:4
+    |vpiParent:
+    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
     |vpiName:dmi_t
     |vpiInstance:
     \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
@@ -2321,10 +1165,10 @@ design: (work@dut)
       \_struct_typespec: (dmi_t), line:106:11, endln:110:4
       |vpiName:address
       |vpiTypespec:
-      \_ref_typespec: (dmi_t.address)
+      \_ref_typespec: (work@dmi_jtag.dmi_t.address)
         |vpiParent:
         \_typespec_member: (address), line:107:18, endln:107:25
-        |vpiFullName:dmi_t.address
+        |vpiFullName:work@dmi_jtag.dmi_t.address
         |vpiActual:
         \_logic_typespec: , line:107:5, endln:107:16
       |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
@@ -2338,10 +1182,10 @@ design: (work@dut)
       \_struct_typespec: (dmi_t), line:106:11, endln:110:4
       |vpiName:data
       |vpiTypespec:
-      \_ref_typespec: (dmi_t.data)
+      \_ref_typespec: (work@dmi_jtag.dmi_t.data)
         |vpiParent:
         \_typespec_member: (data), line:108:18, endln:108:22
-        |vpiFullName:dmi_t.data
+        |vpiFullName:work@dmi_jtag.dmi_t.data
         |vpiActual:
         \_logic_typespec: , line:108:5, endln:108:17
       |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
@@ -2355,10 +1199,10 @@ design: (work@dut)
       \_struct_typespec: (dmi_t), line:106:11, endln:110:4
       |vpiName:op
       |vpiTypespec:
-      \_ref_typespec: (dmi_t.op)
+      \_ref_typespec: (work@dmi_jtag.dmi_t.op)
         |vpiParent:
         \_typespec_member: (op), line:109:18, endln:109:20
-        |vpiFullName:dmi_t.op
+        |vpiFullName:work@dmi_jtag.dmi_t.op
         |vpiActual:
         \_logic_typespec: , line:109:5, endln:109:16
       |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
@@ -2402,25 +1246,25 @@ design: (work@dut)
     |vpiName:dmi
     |vpiFullName:work@dmi_jtag.dmi
   |vpiNet:
-  \_logic_net: (work@dmi_jtag.shift_dr), line:119:9, endln:119:17
+  \_logic_net: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
     |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
+    \_named_begin: (work@dmi_jtag.p_shift), line:117:23, endln:117:30
     |vpiName:shift_dr
-    |vpiFullName:work@dmi_jtag.shift_dr
+    |vpiFullName:work@dmi_jtag.p_shift.shift_dr
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@dmi_jtag.dmi_access), line:120:11, endln:120:21
+  \_logic_net: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
     |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
+    \_begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
     |vpiName:dmi_access
-    |vpiFullName:work@dmi_jtag.dmi_access
+    |vpiFullName:work@dmi_jtag.p_shift.dmi_access
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@dmi_jtag.dmi_tdi), line:121:17, endln:121:24
+  \_logic_net: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
     |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
+    \_operation: , line:121:16, endln:121:48
     |vpiName:dmi_tdi
-    |vpiFullName:work@dmi_jtag.dmi_tdi
+    |vpiFullName:work@dmi_jtag.p_shift.dmi_tdi
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:117:3, endln:125:6
@@ -2443,7 +1287,7 @@ design: (work@dut)
           |vpiName:shift_dr
           |vpiFullName:work@dmi_jtag.p_shift.shift_dr
           |vpiActual:
-          \_logic_net: (work@dmi_jtag.shift_dr), line:119:9, endln:119:17
+          \_logic_net: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
         |vpiStmt:
         \_begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
           |vpiParent:
@@ -2460,7 +1304,7 @@ design: (work@dut)
               |vpiName:dmi_access
               |vpiFullName:work@dmi_jtag.p_shift.dmi_access
               |vpiActual:
-              \_logic_net: (work@dmi_jtag.dmi_access), line:120:11, endln:120:21
+              \_logic_net: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
             |vpiStmt:
             \_begin: (work@dmi_jtag.p_shift), line:120:23, endln:122:10
               |vpiParent:
@@ -2484,7 +1328,7 @@ design: (work@dut)
                     |vpiName:dmi_tdi
                     |vpiFullName:work@dmi_jtag.p_shift.dmi_tdi
                     |vpiActual:
-                    \_logic_net: (work@dmi_jtag.dmi_tdi), line:121:17, endln:121:24
+                    \_logic_net: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
                   |vpiOperand:
                   \_part_select: dr_q (work@dmi_jtag.p_shift.dr_q), line:121:26, endln:121:47
                     |vpiParent:
@@ -2499,13 +1343,18 @@ design: (work@dut)
                       \_part_select: dr_q (work@dmi_jtag.p_shift.dr_q), line:121:26, endln:121:47
                       |vpiOpType:11
                       |vpiOperand:
-                      \_constant: , line:121:31, endln:121:42
+                      \_sys_func_call: ($bits), line:121:31, endln:121:42
                         |vpiParent:
                         \_operation: , line:121:31, endln:121:44
-                        |vpiDecompile:41
-                        |vpiSize:64
-                        |UINT:41
-                        |vpiConstType:9
+                        |vpiArgument:
+                        \_ref_obj: (work@dmi_jtag.p_shift.dr_q.dr_q), line:121:37, endln:121:41
+                          |vpiParent:
+                          \_sys_func_call: ($bits), line:121:31, endln:121:42
+                          |vpiName:dr_q
+                          |vpiFullName:work@dmi_jtag.p_shift.dr_q.dr_q
+                          |vpiActual:
+                          \_logic_net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+                        |vpiName:$bits
                       |vpiOperand:
                       \_constant: , line:121:43, endln:121:44
                         |vpiParent:
@@ -2565,7 +1414,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.WordByte), line:78:18, endln:78:26
@@ -2586,7 +1435,6 @@ design: (work@dut)
   \_parameter: (work@dut.DataWidth), line:80:18, endln:80:27
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |INT:32
     |vpiTypespec:
     \_ref_typespec: (work@dut.DataWidth)
       |vpiParent:
@@ -2617,7 +1465,6 @@ design: (work@dut)
   \_parameter: (work@dut.EraseBitWidth), line:82:18, endln:82:31
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (work@dut.EraseBitWidth)
       |vpiParent:
@@ -2667,13 +1514,16 @@ design: (work@dut)
       \_param_assign: , line:78:18, endln:78:48
       |vpiOpType:12
       |vpiOperand:
-      \_constant: , line:78:29, endln:78:46
+      \_sys_func_call: ($bits), line:78:29, endln:78:46
         |vpiParent:
         \_operation: , line:78:29, endln:78:48
-        |vpiDecompile:32
-        |vpiSize:64
-        |UINT:32
-        |vpiConstType:9
+        |vpiArgument:
+        \_ref_obj: (work@dut.sha_word_t), line:78:35, endln:78:45
+          |vpiParent:
+          \_sys_func_call: ($bits), line:78:29, endln:78:46
+          |vpiName:sha_word_t
+          |vpiFullName:work@dut.sha_word_t
+        |vpiName:$bits
       |vpiOperand:
       \_constant: , line:78:47, endln:78:48
         |vpiParent:
@@ -2689,20 +1539,13 @@ design: (work@dut)
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiRhs:
-    \_constant: , line:80:30, endln:80:39
+    \_ref_obj: (work@dut.top_pkg::FLASH_DW), line:80:30, endln:80:47
       |vpiParent:
       \_param_assign: , line:80:18, endln:80:47
-      |vpiDecompile:32
-      |vpiSize:32
-      |INT:32
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:80:30, endln:80:39
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:80:14, endln:80:17
-      |vpiConstType:7
+      |vpiName:top_pkg::FLASH_DW
+      |vpiFullName:work@dut.top_pkg::FLASH_DW
+      |vpiActual:
+      \_parameter: (top_pkg::FLASH_DW), line:18:14, endln:18:22
     |vpiLhs:
     \_parameter: (work@dut.DataWidth), line:80:18, endln:80:27
   |vpiParamAssign:
@@ -2740,20 +1583,16 @@ design: (work@dut)
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiRhs:
-    \_constant: , line:82:34, endln:82:57
+    \_sys_func_call: ($bits), line:82:34, endln:82:57
       |vpiParent:
       \_param_assign: , line:82:18, endln:82:57
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
+      |vpiArgument:
+      \_ref_obj: (work@dut.flash_erase_op_e), line:82:40, endln:82:56
         |vpiParent:
-        \_constant: , line:82:34, endln:82:57
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:82:14, endln:82:17
-      |vpiConstType:9
+        \_sys_func_call: ($bits), line:82:34, endln:82:57
+        |vpiName:flash_erase_op_e
+        |vpiFullName:work@dut.flash_erase_op_e
+      |vpiName:$bits
     |vpiLhs:
     \_parameter: (work@dut.EraseBitWidth), line:82:18, endln:82:31
   |vpiParamAssign:
@@ -2765,13 +1604,16 @@ design: (work@dut)
       |vpiParent:
       \_param_assign: , line:84:27, endln:84:67
       |vpiArgument:
-      \_constant: , line:84:49, endln:84:66
+      \_sys_func_call: ($bits), line:84:49, endln:84:66
         |vpiParent:
         \_sys_func_call: ($clog2), line:84:42, endln:84:67
-        |vpiDecompile:32
-        |vpiSize:64
-        |UINT:32
-        |vpiConstType:9
+        |vpiArgument:
+        \_ref_obj: (work@dut.sha_word_t), line:84:55, endln:84:65
+          |vpiParent:
+          \_sys_func_call: ($bits), line:84:49, endln:84:66
+          |vpiName:sha_word_t
+          |vpiFullName:work@dut.sha_word_t
+        |vpiName:$bits
       |vpiName:$clog2
     |vpiLhs:
     \_parameter: (work@dut.HashWordBits), line:84:27, endln:84:39
@@ -2785,13 +1627,16 @@ design: (work@dut)
       \_param_assign: , line:86:27, endln:86:70
       |vpiOpType:11
       |vpiOperand:
-      \_constant: , line:86:43, endln:86:68
+      \_sys_func_call: ($bits), line:86:43, endln:86:68
         |vpiParent:
         \_operation: , line:86:43, endln:86:70
-        |vpiDecompile:85
-        |vpiSize:64
-        |UINT:85
-        |vpiConstType:9
+        |vpiArgument:
+        \_ref_obj: (work@dut.tlul_pkg::tl_h2d_t), line:86:49, endln:86:59
+          |vpiParent:
+          \_sys_func_call: ($bits), line:86:43, endln:86:68
+          |vpiName:tlul_pkg::tl_h2d_t
+          |vpiFullName:work@dut.tlul_pkg::tl_h2d_t
+        |vpiName:$bits
       |vpiOperand:
       \_constant: , line:86:69, endln:86:70
         |vpiParent:
@@ -2814,13 +1659,16 @@ design: (work@dut)
       |vpiParent:
       \_bit_typespec: (MyBits), line:97:11, endln:97:31
       |vpiLeftRange:
-      \_constant: , line:97:15, endln:97:28
+      \_sys_func_call: ($bits), line:97:15, endln:97:28
         |vpiParent:
         \_range: , line:97:14, endln:97:31
-        |vpiDecompile:9
-        |vpiSize:64
-        |UINT:9
-        |vpiConstType:9
+        |vpiArgument:
+        \_ref_obj: (work@dut.MyBits.MyType), line:97:21, endln:97:27
+          |vpiParent:
+          \_sys_func_call: ($bits), line:97:15, endln:97:28
+          |vpiName:MyType
+          |vpiFullName:work@dut.MyBits.MyType
+        |vpiName:$bits
       |vpiRightRange:
       \_constant: , line:97:29, endln:97:30
         |vpiParent:
@@ -2945,687 +1793,16 @@ design: (work@dut)
       |vpiFullName:work@dut.tl_h_i
       |vpiActual:
       \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_logic_var: (work@dut.err_source), line:88:38, endln:88:48
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.err_source)
-      |vpiParent:
-      \_logic_var: (work@dut.err_source), line:88:38, endln:88:48
-      |vpiFullName:work@dut.err_source
-      |vpiActual:
-      \_logic_typespec: , line:88:3, endln:88:37
-    |vpiName:err_source
-    |vpiFullName:work@dut.err_source
-    |vpiVisibility:1
-  |vpiVariables:
-  \_logic_var: (work@dut.err_size), line:89:38, endln:89:46
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.err_size)
-      |vpiParent:
-      \_logic_var: (work@dut.err_size), line:89:38, endln:89:46
-      |vpiFullName:work@dut.err_size
-      |vpiActual:
-      \_logic_typespec: , line:89:3, endln:89:35
-    |vpiName:err_size
-    |vpiFullName:work@dut.err_size
-    |vpiVisibility:1
-  |vpiVariables:
-  \_bit_var: (work@dut.b), line:98:10, endln:98:11
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.b)
-      |vpiParent:
-      \_bit_var: (work@dut.b), line:98:10, endln:98:11
-      |vpiFullName:work@dut.b
-      |vpiActual:
-      \_bit_typespec: (MyBits), line:97:11, endln:97:31
-    |vpiName:b
-    |vpiFullName:work@dut.b
-    |vpiVisibility:1
-  |vpiParameter:
-  \_parameter: (work@dut.WordByte), line:78:18, endln:78:26
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.WordByte)
-      |vpiParent:
-      \_parameter: (work@dut.WordByte), line:78:18, endln:78:26
-      |vpiFullName:work@dut.WordByte
-      |vpiActual:
-      \_int_typespec: , line:78:14, endln:78:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:WordByte
-    |vpiFullName:work@dut.WordByte
-  |vpiParameter:
-  \_parameter: (work@dut.DataWidth), line:80:18, endln:80:27
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |INT:32
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.DataWidth)
-      |vpiParent:
-      \_parameter: (work@dut.DataWidth), line:80:18, endln:80:27
-      |vpiFullName:work@dut.DataWidth
-      |vpiActual:
-      \_int_typespec: , line:80:14, endln:80:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:DataWidth
-    |vpiFullName:work@dut.DataWidth
-  |vpiParameter:
-  \_parameter: (work@dut.DataBitWidth), line:81:18, endln:81:30
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.DataBitWidth)
-      |vpiParent:
-      \_parameter: (work@dut.DataBitWidth), line:81:18, endln:81:30
-      |vpiFullName:work@dut.DataBitWidth
-      |vpiActual:
-      \_int_typespec: , line:81:14, endln:81:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:DataBitWidth
-    |vpiFullName:work@dut.DataBitWidth
-  |vpiParameter:
-  \_parameter: (work@dut.EraseBitWidth), line:82:18, endln:82:31
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.EraseBitWidth)
-      |vpiParent:
-      \_parameter: (work@dut.EraseBitWidth), line:82:18, endln:82:31
-      |vpiFullName:work@dut.EraseBitWidth
-      |vpiActual:
-      \_int_typespec: , line:82:14, endln:82:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:EraseBitWidth
-    |vpiFullName:work@dut.EraseBitWidth
-  |vpiParameter:
-  \_parameter: (work@dut.HashWordBits), line:84:27, endln:84:39
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.HashWordBits)
-      |vpiParent:
-      \_parameter: (work@dut.HashWordBits), line:84:27, endln:84:39
-      |vpiFullName:work@dut.HashWordBits
-      |vpiActual:
-      \_int_typespec: , line:84:14, endln:84:26
-    |vpiLocalParam:1
-    |vpiName:HashWordBits
-    |vpiFullName:work@dut.HashWordBits
-  |vpiParameter:
-  \_parameter: (work@dut.REQFIFO_WIDTH), line:86:27, endln:86:40
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.REQFIFO_WIDTH)
-      |vpiParent:
-      \_parameter: (work@dut.REQFIFO_WIDTH), line:86:27, endln:86:40
-      |vpiFullName:work@dut.REQFIFO_WIDTH
-      |vpiActual:
-      \_int_typespec: , line:86:14, endln:86:26
-    |vpiLocalParam:1
-    |vpiName:REQFIFO_WIDTH
-    |vpiFullName:work@dut.REQFIFO_WIDTH
-  |vpiParamAssign:
-  \_param_assign: , line:78:18, endln:78:48
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:78:29, endln:78:48
-      |vpiParent:
-      \_param_assign: , line:78:18, endln:78:48
-      |vpiDecompile:4
-      |vpiSize:32
-      |INT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:78:29, endln:78:48
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:78:14, endln:78:17
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@dut.WordByte), line:78:18, endln:78:26
-  |vpiParamAssign:
-  \_param_assign: , line:80:18, endln:80:47
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:80:30, endln:80:47
-      |vpiParent:
-      \_param_assign: , line:80:18, endln:80:47
-      |vpiDecompile:32
-      |vpiSize:32
-      |INT:32
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:80:30, endln:80:47
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:18:3, endln:18:49
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@dut.DataWidth), line:80:18, endln:80:27
-  |vpiParamAssign:
-  \_param_assign: , line:81:18, endln:81:52
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:81:33, endln:81:52
-      |vpiParent:
-      \_param_assign: , line:81:18, endln:81:52
-      |vpiDecompile:2
-      |vpiSize:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:81:33, endln:81:52
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:81:14, endln:81:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@dut.DataBitWidth), line:81:18, endln:81:30
-  |vpiParamAssign:
-  \_param_assign: , line:82:18, endln:82:57
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:82:34, endln:82:57
-      |vpiParent:
-      \_param_assign: , line:82:18, endln:82:57
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:82:34, endln:82:57
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:82:14, endln:82:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@dut.EraseBitWidth), line:82:18, endln:82:31
-  |vpiParamAssign:
-  \_param_assign: , line:84:27, endln:84:67
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:84:42, endln:84:67
-      |vpiParent:
-      \_param_assign: , line:84:27, endln:84:67
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:84:42, endln:84:67
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:84:14, endln:84:26
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@dut.HashWordBits), line:84:27, endln:84:39
-  |vpiParamAssign:
-  \_param_assign: , line:86:27, endln:86:70
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiRhs:
-    \_constant: , line:86:43, endln:86:70
-      |vpiParent:
-      \_param_assign: , line:86:27, endln:86:70
-      |vpiDecompile:83
-      |vpiSize:32
-      |INT:83
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:86:43, endln:86:70
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:86:14, endln:86:26
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@dut.REQFIFO_WIDTH), line:86:27, endln:86:40
-  |vpiTypedef:
-  \_bit_typespec: (MyBits), line:97:11, endln:97:31
-  |vpiTypedef:
-  \_struct_typespec: (MyType), line:92:11, endln:95:6
-  |vpiTypedef:
-  \_enum_typespec: (flash_ctrl_pkg::flash_erase_op_e), line:66:1, endln:69:20
-  |vpiTypedef:
-  \_logic_typespec: (flash_ctrl_pkg::sha_word_t), line:71:9, endln:71:21
-  |vpiTypedef:
-  \_import_typespec: (flash_ctrl_pkg), line:76:10, endln:76:27
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@dut.tl_h_i), line:75:39, endln:75:45
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.tl_h_i)
-      |vpiParent:
-      \_struct_net: (work@dut.tl_h_i), line:75:39, endln:75:45
-      |vpiFullName:work@dut.tl_h_i
-      |vpiActual:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-    |vpiName:tl_h_i
-    |vpiFullName:work@dut.tl_h_i
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (tl_h_i), line:75:39, endln:75:45
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-    |vpiName:tl_h_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@dut.tl_h_i), line:75:39, endln:75:45
-      |vpiParent:
-      \_port: (tl_h_i), line:75:39, endln:75:45
-      |vpiName:tl_h_i
-      |vpiFullName:work@dut.tl_h_i
-      |vpiActual:
-      \_struct_net: (work@dut.tl_h_i), line:75:39, endln:75:45
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.tl_h_i)
-      |vpiParent:
-      \_port: (tl_h_i), line:75:39, endln:75:45
-      |vpiFullName:work@dut.tl_h_i
-      |vpiActual:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:32:11, endln:44:4
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
-|uhdmtopModules:
-\_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dmi_jtag
-  |vpiVariables:
-  \_logic_var: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
-    |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dr_d)
-      |vpiParent:
-      \_logic_var: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
-      |vpiFullName:work@dmi_jtag.dr_d
-      |vpiActual:
-      \_logic_typespec: , line:112:3, endln:112:27
-    |vpiName:dr_d
-    |vpiFullName:work@dmi_jtag.dr_d
-    |vpiVisibility:1
-  |vpiVariables:
-  \_logic_var: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-    |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dr_q)
-      |vpiParent:
-      \_logic_var: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-      |vpiFullName:work@dmi_jtag.dr_q
-      |vpiActual:
-      \_logic_typespec: , line:112:3, endln:112:27
-    |vpiName:dr_q
-    |vpiFullName:work@dmi_jtag.dr_q
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-  |vpiDefName:work@dmi_jtag
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
-    |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dmi)
-      |vpiParent:
-      \_struct_net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
-      |vpiFullName:work@dmi_jtag.dmi
-      |vpiActual:
-      \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-    |vpiName:dmi
-    |vpiFullName:work@dmi_jtag.dmi
-  |vpiTopModule:1
-  |vpiProcess:
-  \_always: , line:117:3, endln:125:6
-    |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-    |vpiStmt:
-    \_named_begin: (work@dmi_jtag.p_shift), line:117:23, endln:117:30
-      |vpiParent:
-      \_always: , line:117:3, endln:125:6
-      |vpiName:p_shift
-      |vpiFullName:work@dmi_jtag.p_shift
-      |vpiStmt:
-      \_if_stmt: , line:119:5, endln:123:8
-        |vpiParent:
-        \_named_begin: (work@dmi_jtag.p_shift), line:117:23, endln:117:30
-        |vpiCondition:
-        \_ref_obj: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
-          |vpiParent:
-          \_if_stmt: , line:119:5, endln:123:8
-          |vpiName:shift_dr
-          |vpiFullName:work@dmi_jtag.p_shift.shift_dr
-          |vpiActual:
-          \_logic_net: (work@dmi_jtag.shift_dr), line:119:9, endln:119:17
-        |vpiStmt:
-        \_begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
-          |vpiParent:
-          \_if_stmt: , line:119:5, endln:123:8
-          |vpiFullName:work@dmi_jtag.p_shift
-          |vpiStmt:
-          \_if_stmt: , line:120:7, endln:122:10
-            |vpiParent:
-            \_begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
-            |vpiCondition:
-            \_ref_obj: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
-              |vpiParent:
-              \_if_stmt: , line:120:7, endln:122:10
-              |vpiName:dmi_access
-              |vpiFullName:work@dmi_jtag.p_shift.dmi_access
-              |vpiActual:
-              \_logic_net: (work@dmi_jtag.dmi_access), line:120:11, endln:120:21
-            |vpiStmt:
-            \_begin: (work@dmi_jtag.p_shift), line:120:23, endln:122:10
-              |vpiParent:
-              \_if_stmt: , line:120:7, endln:122:10
-              |vpiFullName:work@dmi_jtag.p_shift
-              |vpiStmt:
-              \_assignment: , line:121:9, endln:121:48
-                |vpiParent:
-                \_begin: (work@dmi_jtag.p_shift), line:120:23, endln:122:10
-                |vpiOpType:82
-                |vpiBlocking:1
-                |vpiRhs:
-                \_operation: , line:121:16, endln:121:48
-                  |vpiParent:
-                  \_assignment: , line:121:9, endln:121:48
-                  |vpiOpType:33
-                  |vpiOperand:
-                  \_ref_obj: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
-                    |vpiParent:
-                    \_operation: , line:121:16, endln:121:48
-                    |vpiName:dmi_tdi
-                    |vpiFullName:work@dmi_jtag.p_shift.dmi_tdi
-                    |vpiActual:
-                    \_logic_net: (work@dmi_jtag.dmi_tdi), line:121:17, endln:121:24
-                  |vpiOperand:
-                  \_part_select: dr_q (work@dmi_jtag.p_shift.dr_q), line:121:26, endln:121:47
-                    |vpiParent:
-                    \_operation: , line:121:16, endln:121:48
-                    |vpiName:dr_q
-                    |vpiFullName:work@dmi_jtag.p_shift.dr_q
-                    |vpiDefName:dr_q
-                    |vpiActual:
-                    \_logic_var: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-                    |vpiConstantSelect:1
-                    |vpiLeftRange:
-                    \_constant: , line:121:31, endln:121:44
-                      |vpiDecompile:40
-                      |vpiSize:64
-                      |INT:40
-                      |vpiConstType:7
-                    |vpiRightRange:
-                    \_constant: , line:121:45, endln:121:46
-                |vpiLhs:
-                \_ref_obj: (work@dmi_jtag.p_shift.dr_d), line:121:9, endln:121:13
-                  |vpiParent:
-                  \_assignment: , line:121:9, endln:121:48
-                  |vpiName:dr_d
-                  |vpiFullName:work@dmi_jtag.p_shift.dr_d
-                  |vpiActual:
-                  \_logic_var: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
-    |vpiAlwaysType:2
-  |vpiContAssign:
-  \_cont_assign: , line:115:10, endln:115:37
-    |vpiParent:
-    \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-    |vpiRhs:
-    \_operation: , line:115:25, endln:115:37
-      |vpiParent:
-      \_cont_assign: , line:115:10, endln:115:37
-      |vpiTypespec:
-      \_ref_typespec: (work@dmi_jtag)
-        |vpiParent:
-        \_operation: , line:115:25, endln:115:37
-        |vpiFullName:work@dmi_jtag
-        |vpiActual:
-        \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-      |vpiOpType:67
-      |vpiOperand:
-      \_ref_obj: (work@dmi_jtag.dr_q), line:115:32, endln:115:36
-        |vpiParent:
-        \_operation: , line:115:25, endln:115:37
-        |vpiName:dr_q
-        |vpiFullName:work@dmi_jtag.dr_q
-        |vpiActual:
-        \_logic_var: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-    |vpiLhs:
-    \_ref_obj: (work@dmi_jtag.dmi), line:115:10, endln:115:13
-      |vpiParent:
-      \_cont_assign: , line:115:10, endln:115:37
-      |vpiName:dmi
-      |vpiFullName:work@dmi_jtag.dmi
-      |vpiActual:
-      \_struct_net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
 \_weaklyReferenced:
 \_int_typespec: , line:3:3, endln:3:22
 \_int_typespec: , line:4:3, endln:4:22
 \_int_typespec: , line:5:3, endln:5:22
 \_int_typespec: , line:6:3, endln:6:22
 \_int_typespec: , line:7:3, endln:7:23
-\_int_typespec: , line:8:3, endln:8:31
-\_int_typespec: , line:9:3, endln:9:45
 \_int_typespec: , line:10:3, endln:10:27
 \_int_typespec: , line:11:3, endln:11:38
 \_int_typespec: , line:12:3, endln:12:38
 \_int_typespec: , line:13:3, endln:13:36
-\_int_typespec: , line:14:3, endln:14:45
-\_int_typespec: , line:15:3, endln:15:54
-\_int_typespec: , line:16:3, endln:16:54
-\_int_typespec: , line:17:3, endln:17:58
-\_int_typespec: , line:18:3, endln:18:49
-\_int_typespec: , line:3:3, endln:3:22
-\_int_typespec: , line:4:3, endln:4:22
-\_int_typespec: , line:5:3, endln:5:22
-\_int_typespec: , line:6:3, endln:6:22
-\_int_typespec: , line:7:3, endln:7:23
-\_int_typespec: , line:10:3, endln:10:27
-\_int_typespec: , line:11:3, endln:11:38
-\_int_typespec: , line:12:3, endln:12:38
-\_int_typespec: , line:13:3, endln:13:36
-\_logic_typespec: , line:25:5, endln:25:10
-  |vpiParent:
-  \_typespec_member: (b_valid), line:25:35, endln:25:42
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-\_logic_typespec: , line:29:5, endln:29:10
-  |vpiParent:
-  \_typespec_member: (b_valid), line:29:35, endln:29:42
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-\_logic_typespec: , line:33:5, endln:33:10
-  |vpiParent:
-  \_typespec_member: (a_valid), line:33:35, endln:33:42
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-\_logic_typespec: , line:35:5, endln:35:33
-  |vpiParent:
-  \_typespec_member: (a_param), line:35:35, endln:35:42
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:35:28, endln:35:33
-    |vpiParent:
-    \_logic_typespec: , line:35:5, endln:35:33
-    |vpiLeftRange:
-    \_constant: , line:35:29, endln:35:30
-      |vpiParent:
-      \_range: , line:35:28, endln:35:33
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:35:31, endln:35:32
-      |vpiParent:
-      \_range: , line:35:28, endln:35:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:36:5, endln:36:33
-  |vpiParent:
-  \_typespec_member: (a_size), line:36:35, endln:36:41
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:36:12, endln:36:33
-    |vpiParent:
-    \_logic_typespec: , line:36:5, endln:36:33
-    |vpiLeftRange:
-    \_constant: , line:36:13, endln:36:28
-      |vpiParent:
-      \_range: , line:36:12, endln:36:33
-      |vpiDecompile:1
-      |vpiSize:64
-      |INT:1
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:36:31, endln:36:32
-      |vpiParent:
-      \_range: , line:36:12, endln:36:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:37:5, endln:37:33
-  |vpiParent:
-  \_typespec_member: (a_source), line:37:35, endln:37:43
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:37:12, endln:37:33
-    |vpiParent:
-    \_logic_typespec: , line:37:5, endln:37:33
-    |vpiLeftRange:
-    \_constant: , line:37:13, endln:37:28
-      |vpiParent:
-      \_range: , line:37:12, endln:37:33
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:37:31, endln:37:32
-      |vpiParent:
-      \_range: , line:37:12, endln:37:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:38:5, endln:38:33
-  |vpiParent:
-  \_typespec_member: (a_address), line:38:35, endln:38:44
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:38:13, endln:38:33
-    |vpiParent:
-    \_logic_typespec: , line:38:5, endln:38:33
-    |vpiLeftRange:
-    \_constant: , line:38:14, endln:38:28
-      |vpiParent:
-      \_range: , line:38:13, endln:38:33
-      |vpiDecompile:31
-      |vpiSize:64
-      |INT:31
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:38:31, endln:38:32
-      |vpiParent:
-      \_range: , line:38:13, endln:38:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:39:5, endln:39:33
-  |vpiParent:
-  \_typespec_member: (a_mask), line:39:35, endln:39:41
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:39:12, endln:39:33
-    |vpiParent:
-    \_logic_typespec: , line:39:5, endln:39:33
-    |vpiLeftRange:
-    \_constant: , line:39:13, endln:39:28
-      |vpiParent:
-      \_range: , line:39:12, endln:39:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |INT:3
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:39:31, endln:39:32
-      |vpiParent:
-      \_range: , line:39:12, endln:39:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:40:5, endln:40:33
-  |vpiParent:
-  \_typespec_member: (a_data), line:40:35, endln:40:41
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
-  |vpiRange:
-  \_range: , line:40:13, endln:40:33
-    |vpiParent:
-    \_logic_typespec: , line:40:5, endln:40:33
-    |vpiLeftRange:
-    \_constant: , line:40:14, endln:40:28
-      |vpiParent:
-      \_range: , line:40:13, endln:40:33
-      |vpiDecompile:31
-      |vpiSize:64
-      |INT:31
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:40:31, endln:40:32
-      |vpiParent:
-      \_range: , line:40:13, endln:40:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:43:5, endln:43:10
-  |vpiParent:
-  \_typespec_member: (d_ready), line:43:35, endln:43:42
-  |vpiInstance:
-  \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:22:1, endln:46:11
 \_logic_typespec: , line:25:5, endln:25:10
   |vpiParent:
   \_typespec_member: (b_valid), line:25:35, endln:25:42
@@ -3877,55 +2054,6 @@ design: (work@dut)
     |vpiParent:
     \_logic_typespec: , line:53:14, endln:53:35
     |vpiLeftRange:
-    \_constant: , line:53:21, endln:53:30
-      |vpiParent:
-      \_range: , line:53:20, endln:53:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:53:33, endln:53:34
-      |vpiParent:
-      \_range: , line:53:20, endln:53:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:55:14, endln:55:17
-  |vpiParent:
-  \_parameter: (hmac_pkg::MsgFifoDepth), line:55:18, endln:55:30
-  |vpiInstance:
-  \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiSigned:1
-\_int_typespec: , line:57:14, endln:57:17
-  |vpiParent:
-  \_parameter: (hmac_pkg::NumRound), line:57:18, endln:57:26
-  |vpiInstance:
-  \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiSigned:1
-\_int_typespec: , line:60:14, endln:60:17
-  |vpiParent:
-  \_parameter: (hmac_pkg::WordByte), line:60:18, endln:60:26
-  |vpiInstance:
-  \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiSigned:1
-\_int_typespec: , line:52:14, endln:52:17
-  |vpiParent:
-  \_parameter: (hmac_pkg::NumAlerts), line:52:18, endln:52:27
-  |vpiInstance:
-  \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiSigned:1
-\_logic_typespec: , line:53:14, endln:53:35
-  |vpiParent:
-  \_parameter: (hmac_pkg::AlertAsyncOn), line:53:36, endln:53:48
-  |vpiInstance:
-  \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
-  |vpiRange:
-  \_range: , line:53:20, endln:53:35
-    |vpiParent:
-    \_logic_typespec: , line:53:14, endln:53:35
-    |vpiLeftRange:
     \_operation: , line:53:21, endln:53:32
       |vpiParent:
       \_range: , line:53:20, endln:53:35
@@ -3937,7 +2065,7 @@ design: (work@dut)
         |vpiName:NumAlerts
         |vpiFullName:hmac_pkg::AlertAsyncOn::NumAlerts
         |vpiActual:
-        \_parameter: (hmac_pkg::NumAlerts), line:52:18, endln:52:27
+        \_constant: , line:52:30, endln:52:31
       |vpiOperand:
       \_constant: , line:53:31, endln:53:32
         |vpiParent:
@@ -3977,9 +2105,6 @@ design: (work@dut)
   |vpiInstance:
   \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
   |vpiSigned:1
-\_logic_typespec: , line:66:14, endln:66:19
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
 \_logic_typespec: , line:66:14, endln:66:19
   |vpiInstance:
   \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:65:1, endln:72:11
@@ -4099,112 +2224,6 @@ design: (work@dut)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiConstType:9
-\_int_typespec: , line:18:3, endln:18:49
-  |vpiParent:
-  \_ref_typespec: 
-\_ref_typespec: 
-  |vpiParent:
-  \_constant: , line:80:30, endln:80:39
-  |vpiActual:
-  \_int_typespec: , line:18:3, endln:18:49
-\_constant: , line:80:30, endln:80:39
-  |vpiDecompile:32
-  |vpiSize:32
-  |INT:32
-  |vpiTypespec:
-  \_ref_typespec: 
-  |vpiConstType:7
-\_logic_typespec: , line:88:3, endln:88:37
-  |vpiParent:
-  \_logic_var: (work@dut.err_source), line:88:38, endln:88:48
-  |vpiRange:
-  \_range: , line:88:9, endln:88:37
-    |vpiParent:
-    \_logic_typespec: , line:88:3, endln:88:37
-    |vpiLeftRange:
-    \_constant: , line:88:10, endln:88:32
-      |vpiParent:
-      \_range: , line:88:9, endln:88:37
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:88:35, endln:88:36
-      |vpiParent:
-      \_range: , line:88:9, endln:88:37
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:89:3, endln:89:35
-  |vpiParent:
-  \_logic_var: (work@dut.err_size), line:89:38, endln:89:46
-  |vpiRange:
-  \_range: , line:89:9, endln:89:35
-    |vpiParent:
-    \_logic_typespec: , line:89:3, endln:89:35
-    |vpiLeftRange:
-    \_constant: , line:89:10, endln:89:30
-      |vpiParent:
-      \_range: , line:89:9, endln:89:35
-      |vpiDecompile:1
-      |vpiSize:64
-      |INT:1
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:89:33, endln:89:34
-      |vpiParent:
-      \_range: , line:89:9, endln:89:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_bit_typespec: (MyBits), line:97:11, endln:97:31
-  |vpiName:MyBits
-  |vpiRange:
-  \_range: , line:97:14, endln:97:31
-    |vpiParent:
-    \_bit_typespec: (MyBits), line:97:11, endln:97:31
-    |vpiLeftRange:
-    \_constant: , line:97:15, endln:97:28
-      |vpiParent:
-      \_range: , line:97:14, endln:97:31
-      |vpiDecompile:9
-      |vpiSize:64
-      |UINT:9
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:97:29, endln:97:30
-      |vpiParent:
-      \_range: , line:97:14, endln:97:31
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-\_logic_typespec: , line:112:3, endln:112:27
-  |vpiParent:
-  \_logic_var: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-  |vpiRange:
-  \_range: , line:112:9, endln:112:27
-    |vpiParent:
-    \_logic_typespec: , line:112:3, endln:112:27
-    |vpiLeftRange:
-    \_constant: , line:112:10, endln:112:22
-      |vpiParent:
-      \_range: , line:112:9, endln:112:27
-      |vpiDecompile:40
-      |vpiSize:64
-      |INT:40
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:112:25, endln:112:26
-      |vpiParent:
-      \_range: , line:112:9, endln:112:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:112:3, endln:112:27
   |vpiRange:
@@ -4386,13 +2405,16 @@ design: (work@dut)
     |vpiParent:
     \_bit_typespec: (MyBits), line:97:11, endln:97:31
     |vpiLeftRange:
-    \_constant: , line:97:15, endln:97:28
+    \_sys_func_call: ($bits), line:97:15, endln:97:28
       |vpiParent:
       \_range: , line:97:14, endln:97:31
-      |vpiDecompile:9
-      |vpiSize:64
-      |UINT:9
-      |vpiConstType:9
+      |vpiArgument:
+      \_ref_obj: (MyBits.MyType), line:97:21, endln:97:27
+        |vpiParent:
+        \_sys_func_call: ($bits), line:97:15, endln:97:28
+        |vpiName:MyType
+        |vpiFullName:MyBits.MyType
+      |vpiName:$bits
     |vpiRightRange:
     \_constant: , line:97:29, endln:97:30
       |vpiParent:
@@ -4401,191 +2423,13 @@ design: (work@dut)
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
-\_int_typespec: , line:78:14, endln:78:17
-  |vpiParent:
-  \_ref_typespec: (work@dut.WordByte)
-  |vpiSigned:1
-\_int_typespec: , line:80:14, endln:80:17
-  |vpiParent:
-  \_ref_typespec: (work@dut.DataWidth)
-  |vpiSigned:1
-\_int_typespec: , line:81:14, endln:81:17
-  |vpiParent:
-  \_ref_typespec: (work@dut.DataBitWidth)
-  |vpiSigned:1
-\_int_typespec: , line:82:14, endln:82:17
-  |vpiParent:
-  \_ref_typespec: (work@dut.EraseBitWidth)
-  |vpiSigned:1
-\_int_typespec: , line:84:14, endln:84:26
-  |vpiParent:
-  \_ref_typespec: (work@dut.HashWordBits)
-\_int_typespec: , line:86:14, endln:86:26
-  |vpiParent:
-  \_ref_typespec: (work@dut.REQFIFO_WIDTH)
-\_struct_typespec: (dmi_t), line:106:11, endln:110:4
-  |vpiParent:
-  \_ref_typespec: (work@dmi_jtag)
-  |vpiName:dmi_t
-  |vpiInstance:
-  \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (address), line:107:18, endln:107:25
-    |vpiParent:
-    \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-    |vpiName:address
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dmi_t.address)
-      |vpiParent:
-      \_typespec_member: (address), line:107:18, endln:107:25
-      |vpiFullName:work@dmi_jtag.dmi_t.address
-      |vpiActual:
-      \_logic_typespec: , line:107:5, endln:107:16
-    |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-    |vpiRefLineNo:107
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:107
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (data), line:108:18, endln:108:22
-    |vpiParent:
-    \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-    |vpiName:data
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dmi_t.data)
-      |vpiParent:
-      \_typespec_member: (data), line:108:18, endln:108:22
-      |vpiFullName:work@dmi_jtag.dmi_t.data
-      |vpiActual:
-      \_logic_typespec: , line:108:5, endln:108:17
-    |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-    |vpiRefLineNo:108
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:108
-    |vpiRefEndColumnNo:17
-  |vpiTypespecMember:
-  \_typespec_member: (op), line:109:18, endln:109:20
-    |vpiParent:
-    \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-    |vpiName:op
-    |vpiTypespec:
-    \_ref_typespec: (work@dmi_jtag.dmi_t.op)
-      |vpiParent:
-      \_typespec_member: (op), line:109:18, endln:109:20
-      |vpiFullName:work@dmi_jtag.dmi_t.op
-      |vpiActual:
-      \_logic_typespec: , line:109:5, endln:109:16
-    |vpiRefFile:${SURELOG_DIR}/tests/BitsOp/dut.sv
-    |vpiRefLineNo:109
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:109
-    |vpiRefEndColumnNo:16
-\_ref_typespec: (work@dmi_jtag)
-  |vpiParent:
-  \_operation: , line:115:25, endln:115:37
-  |vpiFullName:work@dmi_jtag
-  |vpiActual:
-  \_struct_typespec: (dmi_t), line:106:11, endln:110:4
-\_operation: , line:115:25, endln:115:37
-  |vpiParent:
-  \_cont_assign: , line:115:10, endln:115:37
-  |vpiTypespec:
-  \_ref_typespec: (work@dmi_jtag)
-  |vpiOpType:67
-  |vpiOperand:
-  \_ref_obj: (work@dmi_jtag.dr_q), line:115:32, endln:115:36
-    |vpiParent:
-    \_operation: , line:115:25, endln:115:37
-    |vpiName:dr_q
-    |vpiFullName:work@dmi_jtag.dr_q
-    |vpiActual:
-    \_logic_net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
-\_cont_assign: , line:115:10, endln:115:37
-  |vpiParent:
-  \_module_inst: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
-  |vpiRhs:
-  \_operation: , line:115:25, endln:115:37
-  |vpiLhs:
-  \_ref_obj: (work@dmi_jtag.dmi), line:115:10, endln:115:13
-    |vpiParent:
-    \_cont_assign: , line:115:10, endln:115:37
-    |vpiName:dmi
-    |vpiFullName:work@dmi_jtag.dmi
-    |vpiActual:
-    \_struct_net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
-\_logic_typespec: , line:107:5, endln:107:16
-  |vpiParent:
-  \_ref_typespec: (work@dmi_jtag.dmi_t.address)
-  |vpiRange:
-  \_range: , line:107:11, endln:107:16
-    |vpiParent:
-    \_logic_typespec: , line:107:5, endln:107:16
-    |vpiLeftRange:
-    \_constant: , line:107:12, endln:107:13
-      |vpiParent:
-      \_range: , line:107:11, endln:107:16
-      |vpiDecompile:6
-      |vpiSize:64
-      |UINT:6
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:107:14, endln:107:15
-      |vpiParent:
-      \_range: , line:107:11, endln:107:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:108:5, endln:108:17
-  |vpiParent:
-  \_ref_typespec: (work@dmi_jtag.dmi_t.data)
-  |vpiRange:
-  \_range: , line:108:11, endln:108:17
-    |vpiParent:
-    \_logic_typespec: , line:108:5, endln:108:17
-    |vpiLeftRange:
-    \_constant: , line:108:12, endln:108:14
-      |vpiParent:
-      \_range: , line:108:11, endln:108:17
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:108:15, endln:108:16
-      |vpiParent:
-      \_range: , line:108:11, endln:108:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:109:5, endln:109:16
-  |vpiParent:
-  \_ref_typespec: (work@dmi_jtag.dmi_t.op)
-  |vpiRange:
-  \_range: , line:109:11, endln:109:16
-    |vpiParent:
-    \_logic_typespec: , line:109:5, endln:109:16
-    |vpiLeftRange:
-    \_constant: , line:109:12, endln:109:13
-      |vpiParent:
-      \_range: , line:109:11, endln:109:16
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:109:14, endln:109:15
-      |vpiParent:
-      \_range: , line:109:11, endln:109:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 6
-[   NOTE] : 7
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/BitsOp/dut.sv | ${SURELOG_DIR}/build/regression/BitsOp/roundtrip/dut_000.sv | 35 | 127 |
+============================== End RoundTrip Results ==============================

@@ -193,12 +193,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EnumVal/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumVal/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/EnumVal/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                              50
@@ -206,19 +200,7 @@ design                                                 1
 enum_const                                            12
 enum_typespec                                          1
 logic_typespec                                         1
-module_inst                                            3
-operation                                             24
-range                                                  1
-ref_typespec                                           1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              50
-design                                                 1
-enum_const                                            12
-enum_typespec                                          1
-logic_typespec                                         1
-module_inst                                            3
+module_inst                                            2
 operation                                             24
 range                                                  1
 ref_typespec                                           1
@@ -228,13 +210,12 @@ ref_typespec                                           1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVal/dut.sv, line:1:1, endln:16:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_enum_typespec: (exc_cause_e), line:2:5, endln:15:19
@@ -347,16 +328,6 @@ design: (work@top)
       |vpiDecompile:{1'b0,5'd11}
       |vpiSize:6
   |vpiDefName:work@top
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVal/dut.sv, line:1:1, endln:16:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiTypedef:
-  \_enum_typespec: (exc_cause_e), line:2:5, endln:15:19
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_logic_typespec: , line:2:18, endln:2:29
   |vpiRange:
@@ -384,7 +355,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/EnumVal/dut.sv | ${SURELOG_DIR}/build/regression/EnumVal/roundtrip/dut_000.sv | 0 | 16 |

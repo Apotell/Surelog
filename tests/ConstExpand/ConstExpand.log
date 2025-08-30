@@ -149,12 +149,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstExpand/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstExpand/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ConstExpand/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
@@ -162,47 +156,17 @@ assignment                                             2
 begin                                                  1
 case_item                                              2
 case_stmt                                              1
-constant                                              10
+constant                                               5
 design                                                 1
 hier_path                                              1
 indexed_part_select                                    1
-int_typespec                                           5
-int_var                                                1
+int_typespec                                           3
 logic_net                                              2
-module_inst                                            3
-operation                                              2
-port                                                   2
-ref_obj                                                5
-ref_typespec                                          13
-string_typespec                                        5
+module_inst                                            1
+port                                                   1
+ref_obj                                                4
+ref_typespec                                           4
 struct_typespec                                        1
-struct_var                                             1
-tagged_pattern                                         5
-typespec_member                                        2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-assignment                                             4
-begin                                                  2
-case_item                                              4
-case_stmt                                              2
-constant                                              11
-design                                                 1
-hier_path                                              2
-indexed_part_select                                    2
-int_typespec                                           5
-int_var                                                1
-logic_net                                              2
-module_inst                                            3
-operation                                              2
-port                                                   3
-ref_obj                                                9
-ref_typespec                                          14
-string_typespec                                        5
-struct_typespec                                        1
-struct_var                                             1
-tagged_pattern                                         5
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
@@ -210,13 +174,12 @@ typespec_member                                        2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
@@ -405,183 +368,6 @@ design: (work@top)
               |vpiActual:
               \_logic_net: (work@top.o), line:1:23, endln:1:24
     |vpiAlwaysType:2
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_int_var: (work@top.o), line:1:23, endln:1:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_int_var: (work@top.o), line:1:23, endln:1:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:1:19, endln:1:22
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.operation_i)
-      |vpiParent:
-      \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
-      |vpiFullName:work@top.operation_i
-      |vpiActual:
-      \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
-    |vpiName:operation_i
-    |vpiFullName:work@top.operation_i
-    |vpiVisibility:1
-    |vpiExpr:
-    \_operation: , line:7:41, endln:7:70
-      |vpiParent:
-      \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
-      |vpiTypespec:
-      \_ref_typespec: 
-        |vpiActual:
-        \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:7:54, endln:7:56
-        |vpiParent:
-        \_operation: , line:7:41, endln:7:70
-        |vpiDecompile:4294967295
-        |vpiSize:32
-        |UINT:4294967295
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:7:67, endln:7:69
-        |vpiParent:
-        \_operation: , line:7:41, endln:7:70
-        |vpiDecompile:0
-        |vpiSize:32
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:1:23, endln:1:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_var: (work@top.o), line:1:23, endln:1:24
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:1:19, endln:1:22
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-  |vpiProcess:
-  \_always: , line:9:4, endln:14:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiStmt:
-    \_begin: (work@top), line:9:16, endln:14:7
-      |vpiParent:
-      \_always: , line:9:4, endln:14:7
-      |vpiFullName:work@top
-      |vpiStmt:
-      \_case_stmt: , line:10:7, endln:13:14
-        |vpiParent:
-        \_begin: (work@top), line:9:16, endln:14:7
-        |vpiCaseType:1
-        |vpiQualifier:1
-        |vpiCondition:
-        \_constant: , line:10:20, endln:10:21
-        |vpiCaseItem:
-        \_case_item: , line:11:10, endln:11:46
-          |vpiParent:
-          \_case_stmt: , line:10:7, endln:13:14
-          |vpiExpr:
-          \_constant: , line:11:10, endln:11:11
-          |vpiStmt:
-          \_assignment: , line:11:13, endln:11:45
-            |vpiParent:
-            \_case_item: , line:11:10, endln:11:46
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
-              |vpiParent:
-              \_assignment: , line:11:13, endln:11:45
-              |vpiActual:
-              \_ref_obj: (operation_i), line:11:17, endln:11:28
-                |vpiParent:
-                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
-                |vpiName:operation_i
-                |vpiActual:
-                \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
-              |vpiActual:
-              \_indexed_part_select: (operation_i.operand_a[0+:32]), line:11:29, endln:11:44
-                |vpiParent:
-                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
-                |vpiName:operand_a
-                |vpiFullName:operation_i.operand_a[0+:32]
-                |vpiActual:
-                \_typespec_member: (operand_a), line:3:11, endln:3:20
-                |vpiConstantSelect:1
-                |vpiIndexedPartSelectType:1
-                |vpiBaseExpr:
-                \_constant: , line:11:39, endln:11:40
-                |vpiWidthExpr:
-                \_constant: , line:11:42, endln:11:44
-              |vpiName:operation_i.operand_a[0+:32]
-            |vpiLhs:
-            \_ref_obj: (work@top.o), line:11:13, endln:11:14
-              |vpiParent:
-              \_assignment: , line:11:13, endln:11:45
-              |vpiName:o
-              |vpiFullName:work@top.o
-              |vpiActual:
-              \_int_var: (work@top.o), line:1:23, endln:1:24
-        |vpiCaseItem:
-        \_case_item: , line:12:10, endln:12:26
-          |vpiParent:
-          \_case_stmt: , line:10:7, endln:13:14
-          |vpiStmt:
-          \_assignment: , line:12:19, endln:12:25
-            |vpiParent:
-            \_case_item: , line:12:10, endln:12:26
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_constant: , line:12:23, endln:12:25
-              |vpiParent:
-              \_assignment: , line:12:19, endln:12:25
-              |vpiDecompile:'0
-              |vpiSize:-1
-              |BIN:0
-              |vpiConstType:3
-            |vpiLhs:
-            \_ref_obj: (work@top.o), line:12:19, endln:12:20
-              |vpiParent:
-              \_assignment: , line:12:19, endln:12:25
-              |vpiName:o
-              |vpiFullName:work@top.o
-              |vpiActual:
-              \_int_var: (work@top.o), line:1:23, endln:1:24
-    |vpiAlwaysType:2
 \_weaklyReferenced:
 \_int_typespec: , line:3:7, endln:3:10
   |vpiParent:
@@ -593,18 +379,12 @@ design: (work@top)
   |vpiSigned:1
 \_int_typespec: , line:1:19, endln:1:22
   |vpiSigned:1
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiParent:
-  \_int_var: (work@top.o), line:1:23, endln:1:24
-  |vpiSigned:1
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ConstExpand/dut.sv | ${SURELOG_DIR}/build/regression/ConstExpand/roundtrip/dut_000.sv | 3 | 15 |

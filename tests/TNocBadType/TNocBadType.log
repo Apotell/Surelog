@@ -66,35 +66,14 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0304] ${SURELOG_DIR}/tests/TNocBadType/dut.sv:1:1: Compile interface "work@tnoc_types".
 [INF:CP0303] ${SURELOG_DIR}/tests/TNocBadType/dut.sv:7:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[ERR:CP0317] ${SURELOG_DIR}/tests/TNocBadType/dut.sv:10:11: Undefined type "types".
-[NTE:EL0503] ${SURELOG_DIR}/tests/TNocBadType/dut.sv:7:1: Top level module "work@top".
-[ERR:EL0538] ${SURELOG_DIR}/tests/TNocBadType/dut.sv:8:16: Illegal use of an interface as a signal type for "types".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
 int_typespec                                           1
 interface_inst                                         1
-interface_typespec                                     2
+interface_typespec                                     1
 logic_net                                              2
-logic_var                                              1
-module_inst                                            2
-ref_typespec                                           2
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-design                                                 1
-int_typespec                                           1
-interface_inst                                         1
-interface_typespec                                     2
-logic_net                                              2
-logic_var                                              1
-module_inst                                            2
+module_inst                                            1
 ref_typespec                                           2
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -103,13 +82,12 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TNocBadType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallInterfaces:
 \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@tnoc_types
   |vpiTypedef:
   \_int_typespec: (tnoc_common_header), line:2:10, endln:2:13
@@ -123,15 +101,8 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
-  |vpiTypedef:
-  \_unsupported_typespec: (tnoc_common_header), line:10:11, endln:10:16
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-    |vpiName:tnoc_common_header
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.types), line:8:16, endln:8:21
@@ -156,40 +127,20 @@ design: (work@top)
       \_logic_net: (work@top.common_header), line:12:23, endln:12:36
       |vpiFullName:work@top.common_header
       |vpiActual:
-      \_unsupported_typespec: (tnoc_common_header), line:10:11, endln:10:16
+      \_unsupported_typespec: (tnoc_common_header), line:12:3, endln:12:21
     |vpiName:common_header
     |vpiFullName:work@top.common_header
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_logic_var: (work@top.common_header), line:12:23, endln:12:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-    |vpiName:common_header
-    |vpiFullName:work@top.common_header
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_unsupported_typespec: (tnoc_common_header), line:10:11, endln:10:16
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_interface_typespec: (tnoc_types), line:8:4, endln:8:14
   |vpiName:tnoc_types
+\_unsupported_typespec: (tnoc_common_header), line:12:3, endln:12:21
+  |vpiName:tnoc_common_header
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
-
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/TNocBadType/dut.sv:10:11: Unsupported typespec, tnoc_common_header
-[LINT]:   \_ ${SURELOG_DIR}/tests/TNocBadType/dut.sv:7:1:
-============================== End Linting Results ==============================
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/TNocBadType/dut.sv | ${SURELOG_DIR}/build/regression/TNocBadType/roundtrip/dut_000.sv | 2 | 13 |

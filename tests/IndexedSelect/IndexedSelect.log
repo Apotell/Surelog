@@ -153,65 +153,32 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: No timescale set for "test".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: Compile module "work@test".
-[INF:EL0526] Design Elaboration...
-[INF:CP0303] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: Compile module "work@test".
-[INF:CP0335] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:11:45: Compile generate block "work@test.genfoo[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:11:45: Compile generate block "work@test.genfoo[1]".
-[INF:CP0335] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:11:45: Compile generate block "work@test.genfoo[2]".
-[INF:CP0335] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:11:45: Compile generate block "work@test.genfoo[3]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: Top level module "work@test".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              46
+constant                                               4
 design                                                 1
 gen_region                                             1
-gen_scope                                              8
-gen_scope_array                                        8
-indexed_part_select                                    7
-int_typespec                                           7
-module_inst                                            4
-operation                                              9
-param_assign                                           6
-parameter                                             10
+indexed_part_select                                    1
+int_typespec                                           1
+module_inst                                            1
+operation                                              2
+param_assign                                           3
+parameter                                              3
 ref_obj                                                1
-ref_typespec                                          11
-sys_task_call                                          4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-constant                                              46
-design                                                 1
-gen_region                                             1
-gen_scope                                             12
-gen_scope_array                                       12
-indexed_part_select                                    7
-int_typespec                                           7
-module_inst                                            4
-operation                                              9
-param_assign                                           6
-parameter                                             10
-ref_obj                                                1
-ref_typespec                                          15
-sys_task_call                                          8
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexedSelect/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IndexedSelect/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IndexedSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@test)
-|vpiElaborated:1
-|vpiName:work@test
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
   |vpiParent:
-  \_design: (work@test)
+  \_design: (unnamed)
   |vpiFullName:work@test
   |vpiParameter:
   \_parameter: (work@test.FOO), line:3:11, endln:3:14
@@ -325,254 +292,15 @@ design: (work@test)
       |vpiParent:
       \_gen_region: 
       |vpiFullName:work@test
-|uhdmtopModules:
-\_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-  |vpiParent:
-  \_design: (work@test)
-  |vpiName:work@test
-  |vpiParameter:
-  \_parameter: (work@test.FOO), line:3:11, endln:3:14
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@test.FOO)
-      |vpiParent:
-      \_parameter: (work@test.FOO), line:3:11, endln:3:14
-      |vpiFullName:work@test.FOO
-      |vpiActual:
-      \_int_typespec: , line:3:1, endln:3:16
-    |vpiName:FOO
-    |vpiFullName:work@test.FOO
-  |vpiParameter:
-  \_parameter: (work@test.FOO_REPL), line:4:11, endln:4:19
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:FOO_REPL
-    |vpiFullName:work@test.FOO_REPL
-  |vpiParameter:
-  \_parameter: (work@test.DEBUG), line:6:11, endln:6:16
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:DEBUG
-    |vpiFullName:work@test.DEBUG
-  |vpiParamAssign:
-  \_param_assign: , line:3:11, endln:3:16
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiRhs:
-    \_constant: , line:3:15, endln:3:16
-      |vpiParent:
-      \_param_assign: , line:3:11, endln:3:16
-      |vpiDecompile:3
-      |vpiSize:32
-      |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:3:15, endln:3:16
-        |vpiFullName:work@test
-        |vpiActual:
-        \_int_typespec: , line:3:1, endln:3:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@test.FOO), line:3:11, endln:3:14
-  |vpiParamAssign:
-  \_param_assign: , line:4:11, endln:4:32
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiRhs:
-    \_constant: , line:4:20, endln:4:32
-      |vpiParent:
-      \_param_assign: , line:4:11, endln:4:32
-      |vpiDecompile:96'b000000000000000000000000000001000000000000000000000000000000010000000000000000000000000000000100
-      |vpiSize:96
-      |BIN:000000000000000000000000000001000000000000000000000000000000010000000000000000000000000000000100
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:4:20, endln:4:32
-        |vpiFullName:work@test
-        |vpiActual:
-        \_int_typespec: 
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@test.FOO_REPL), line:4:11, endln:4:19
-  |vpiParamAssign:
-  \_param_assign: , line:6:11, endln:6:34
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiRhs:
-    \_constant: , line:6:19, endln:6:34
-      |vpiParent:
-      \_param_assign: , line:6:11, endln:6:34
-      |vpiDecompile:32'b00000000000000000000000000000100
-      |vpiSize:32
-      |BIN:00000000000000000000000000000100
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@test.DEBUG), line:6:11, endln:6:16
-  |vpiDefName:work@test
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test.genfoo[0]), line:11:45, endln:13:8
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:genfoo[0]
-    |vpiFullName:work@test.genfoo[0]
-    |vpiGenScope:
-    \_gen_scope: (work@test.genfoo[0]), line:11:45, endln:13:8
-      |vpiParent:
-      \_gen_scope_array: (work@test.genfoo[0]), line:11:45, endln:13:8
-      |vpiFullName:work@test.genfoo[0]
-      |vpiParameter:
-      \_parameter: (work@test.genfoo[0].i), line:11:0
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[0]), line:11:45, endln:13:8
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@test.genfoo[0].i)
-          |vpiParent:
-          \_parameter: (work@test.genfoo[0].i), line:11:0
-          |vpiFullName:work@test.genfoo[0].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@test.genfoo[0].i
-      |vpiSysTaskCall:
-      \_sys_task_call: (display), line:12:9, endln:12:26
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[0]), line:11:45, endln:13:8
-        |vpiArgument:
-        \_constant: 
-          |vpiDecompile:"test"
-          |STRING:"test"
-          |vpiConstType:6
-        |vpiName:display
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test.genfoo[1]), line:11:45, endln:13:8
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:genfoo[1]
-    |vpiFullName:work@test.genfoo[1]
-    |vpiGenScope:
-    \_gen_scope: (work@test.genfoo[1]), line:11:45, endln:13:8
-      |vpiParent:
-      \_gen_scope_array: (work@test.genfoo[1]), line:11:45, endln:13:8
-      |vpiFullName:work@test.genfoo[1]
-      |vpiParameter:
-      \_parameter: (work@test.genfoo[1].i), line:11:0
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[1]), line:11:45, endln:13:8
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@test.genfoo[1].i)
-          |vpiParent:
-          \_parameter: (work@test.genfoo[1].i), line:11:0
-          |vpiFullName:work@test.genfoo[1].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@test.genfoo[1].i
-      |vpiSysTaskCall:
-      \_sys_task_call: (display), line:12:9, endln:12:26
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[1]), line:11:45, endln:13:8
-        |vpiArgument:
-        \_constant: 
-          |vpiDecompile:"test"
-          |STRING:"test"
-          |vpiConstType:6
-        |vpiName:display
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test.genfoo[2]), line:11:45, endln:13:8
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:genfoo[2]
-    |vpiFullName:work@test.genfoo[2]
-    |vpiGenScope:
-    \_gen_scope: (work@test.genfoo[2]), line:11:45, endln:13:8
-      |vpiParent:
-      \_gen_scope_array: (work@test.genfoo[2]), line:11:45, endln:13:8
-      |vpiFullName:work@test.genfoo[2]
-      |vpiParameter:
-      \_parameter: (work@test.genfoo[2].i), line:11:0
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[2]), line:11:45, endln:13:8
-        |UINT:2
-        |vpiTypespec:
-        \_ref_typespec: (work@test.genfoo[2].i)
-          |vpiParent:
-          \_parameter: (work@test.genfoo[2].i), line:11:0
-          |vpiFullName:work@test.genfoo[2].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@test.genfoo[2].i
-      |vpiSysTaskCall:
-      \_sys_task_call: (display), line:12:9, endln:12:26
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[2]), line:11:45, endln:13:8
-        |vpiArgument:
-        \_constant: 
-          |vpiDecompile:"test"
-          |STRING:"test"
-          |vpiConstType:6
-        |vpiName:display
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test.genfoo[3]), line:11:45, endln:13:8
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
-    |vpiName:genfoo[3]
-    |vpiFullName:work@test.genfoo[3]
-    |vpiGenScope:
-    \_gen_scope: (work@test.genfoo[3]), line:11:45, endln:13:8
-      |vpiParent:
-      \_gen_scope_array: (work@test.genfoo[3]), line:11:45, endln:13:8
-      |vpiFullName:work@test.genfoo[3]
-      |vpiParameter:
-      \_parameter: (work@test.genfoo[3].i), line:11:0
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[3]), line:11:45, endln:13:8
-        |UINT:3
-        |vpiTypespec:
-        \_ref_typespec: (work@test.genfoo[3].i)
-          |vpiParent:
-          \_parameter: (work@test.genfoo[3].i), line:11:0
-          |vpiFullName:work@test.genfoo[3].i
-          |vpiActual:
-          \_int_typespec: 
-        |vpiLocalParam:1
-        |vpiName:i
-        |vpiFullName:work@test.genfoo[3].i
-      |vpiSysTaskCall:
-      \_sys_task_call: (display), line:12:9, endln:12:26
-        |vpiParent:
-        \_gen_scope: (work@test.genfoo[3]), line:11:45, endln:13:8
-        |vpiArgument:
-        \_constant: 
-          |vpiDecompile:"test"
-          |STRING:"test"
-          |vpiConstType:6
-        |vpiName:display
 \_weaklyReferenced:
 \_int_typespec: , line:3:1, endln:3:16
-\_int_typespec: 
-  |UINT:32
-\_int_typespec: , line:3:1, endln:3:16
-  |vpiParent:
-  \_ref_typespec: (work@test.FOO)
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
-\_int_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/IndexedSelect/dut.sv | ${SURELOG_DIR}/build/regression/IndexedSelect/roundtrip/dut_000.sv | 8 | 17 |
+============================== End RoundTrip Results ==============================

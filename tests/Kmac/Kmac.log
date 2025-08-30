@@ -659,77 +659,36 @@ n<> u<77> t<Source_text> p<78> c<76> l<1:1> el<16:10>
 n<> u<78> t<Top_level_rule> c<1> l<1:1> el<17:1>
 AST_DEBUG_END
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv:7:1: Compile package "sha3_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/Kmac/kmac.sv:1:1: Compile module "work@kmac".
 [INF:CP0303] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:1:1: Compile module "work@kmac_core".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/Kmac/kmac.sv:1:1: Top level module "work@kmac".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
-array_typespec                                        16
+array_typespec                                         4
 assignment                                             6
 begin                                                  1
 bit_select                                             5
-bit_typespec                                           4
+bit_typespec                                           2
 case_item                                              6
 case_stmt                                              1
-constant                                             301
+constant                                              82
 design                                                 1
-enum_const                                            20
-enum_typespec                                          4
-enum_var                                               2
+enum_const                                            10
+enum_typespec                                          2
 import_typespec                                        7
-int_typespec                                          77
-logic_net                                              7
-logic_typespec                                        12
-logic_var                                              1
-module_inst                                            9
-operation                                             90
-package                                                2
-param_assign                                          28
-parameter                                             31
-port                                                   9
-range                                                 29
+int_typespec                                          14
+logic_net                                              5
+logic_typespec                                         5
+module_inst                                            3
+operation                                             46
+package                                                1
+param_assign                                          14
+parameter                                             16
+port                                                   5
+range                                                 10
 ref_module                                             1
-ref_obj                                               38
-ref_typespec                                         138
-sys_func_call                                          4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-always                                                 2
-array_typespec                                        16
-assignment                                            12
-begin                                                  2
-bit_select                                            10
-bit_typespec                                           4
-case_item                                             12
-case_stmt                                              2
-constant                                             307
-design                                                 1
-enum_const                                            20
-enum_typespec                                          4
-enum_var                                               2
-import_typespec                                        7
-int_typespec                                          77
-logic_net                                              7
-logic_typespec                                        12
-logic_var                                              1
-module_inst                                            9
-operation                                             95
-package                                                2
-param_assign                                          28
-parameter                                             31
-port                                                  13
-range                                                 29
-ref_module                                             1
-ref_obj                                               61
-ref_typespec                                         147
+ref_obj                                               56
+ref_typespec                                          39
 sys_func_call                                          4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Kmac/slpp_all/surelog.uhdm ...
@@ -737,13 +696,12 @@ sys_func_call                                          4
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Kmac/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@kmac)
-|vpiElaborated:1
-|vpiName:work@kmac
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
   |vpiParent:
-  \_design: (work@kmac)
+  \_design: (unnamed)
   |vpiName:sha3_pkg
   |vpiFullName:sha3_pkg::
   |vpiParameter:
@@ -862,35 +820,110 @@ design: (work@kmac)
       \_param_assign: , line:20:26, endln:26:4
       |vpiOpType:75
       |vpiOperand:
-      \_constant: , line:21:5, endln:21:9
-        |vpiDecompile:21
-        |vpiSize:64
-        |INT:21
-        |vpiConstType:7
+      \_operation: , line:21:5, endln:21:18
+        |vpiParent:
+        \_operation: , line:20:43, endln:26:4
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:21:5, endln:21:9
+          |vpiParent:
+          \_operation: , line:21:5, endln:21:18
+          |vpiDecompile:1344
+          |vpiSize:64
+          |UINT:1344
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (sha3_pkg::MsgWidth), line:21:10, endln:21:18
+          |vpiParent:
+          \_operation: , line:21:5, endln:21:18
+          |vpiName:MsgWidth
+          |vpiFullName:sha3_pkg::MsgWidth
+          |vpiActual:
+          \_constant: , line:9:28, endln:9:30
       |vpiOperand:
-      \_constant: , line:22:5, endln:22:9
-        |vpiDecompile:18
-        |vpiSize:64
-        |INT:18
-        |vpiConstType:7
+      \_operation: , line:22:5, endln:22:18
+        |vpiParent:
+        \_operation: , line:20:43, endln:26:4
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:22:5, endln:22:9
+          |vpiParent:
+          \_operation: , line:22:5, endln:22:18
+          |vpiDecompile:1152
+          |vpiSize:64
+          |UINT:1152
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (sha3_pkg::MsgWidth), line:22:10, endln:22:18
+          |vpiParent:
+          \_operation: , line:22:5, endln:22:18
+          |vpiName:MsgWidth
+          |vpiFullName:sha3_pkg::MsgWidth
+          |vpiActual:
+          \_constant: , line:9:28, endln:9:30
       |vpiOperand:
-      \_constant: , line:23:5, endln:23:9
-        |vpiDecompile:17
-        |vpiSize:64
-        |INT:17
-        |vpiConstType:7
+      \_operation: , line:23:5, endln:23:18
+        |vpiParent:
+        \_operation: , line:20:43, endln:26:4
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:23:5, endln:23:9
+          |vpiParent:
+          \_operation: , line:23:5, endln:23:18
+          |vpiDecompile:1088
+          |vpiSize:64
+          |UINT:1088
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (sha3_pkg::MsgWidth), line:23:10, endln:23:18
+          |vpiParent:
+          \_operation: , line:23:5, endln:23:18
+          |vpiName:MsgWidth
+          |vpiFullName:sha3_pkg::MsgWidth
+          |vpiActual:
+          \_constant: , line:9:28, endln:9:30
       |vpiOperand:
-      \_constant: , line:24:6, endln:24:9
-        |vpiDecompile:13
-        |vpiSize:64
-        |INT:13
-        |vpiConstType:7
+      \_operation: , line:24:6, endln:24:18
+        |vpiParent:
+        \_operation: , line:20:43, endln:26:4
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:24:6, endln:24:9
+          |vpiParent:
+          \_operation: , line:24:6, endln:24:18
+          |vpiDecompile:832
+          |vpiSize:64
+          |UINT:832
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (sha3_pkg::MsgWidth), line:24:10, endln:24:18
+          |vpiParent:
+          \_operation: , line:24:6, endln:24:18
+          |vpiName:MsgWidth
+          |vpiFullName:sha3_pkg::MsgWidth
+          |vpiActual:
+          \_constant: , line:9:28, endln:9:30
       |vpiOperand:
-      \_constant: , line:25:6, endln:25:9
-        |vpiDecompile:9
-        |vpiSize:64
-        |INT:9
-        |vpiConstType:7
+      \_operation: , line:25:6, endln:25:18
+        |vpiParent:
+        \_operation: , line:20:43, endln:26:4
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:25:6, endln:25:9
+          |vpiParent:
+          \_operation: , line:25:6, endln:25:18
+          |vpiDecompile:576
+          |vpiSize:64
+          |UINT:576
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (sha3_pkg::MsgWidth), line:25:10, endln:25:18
+          |vpiParent:
+          \_operation: , line:25:6, endln:25:18
+          |vpiName:MsgWidth
+          |vpiFullName:sha3_pkg::MsgWidth
+          |vpiActual:
+          \_constant: , line:9:28, endln:9:30
     |vpiLhs:
     \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
   |vpiParamAssign:
@@ -917,7 +950,7 @@ design: (work@kmac)
         |vpiName:MsgWidth
         |vpiFullName:sha3_pkg::MsgWidth
         |vpiActual:
-        \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
+        \_constant: , line:9:28, endln:9:30
     |vpiLhs:
     \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
   |vpiParamAssign:
@@ -940,7 +973,7 @@ design: (work@kmac)
           |vpiName:KeccakEntries
           |vpiFullName:sha3_pkg::KeccakEntries
           |vpiActual:
-          \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
+          \_operation: , line:28:42, endln:28:55
         |vpiOperand:
         \_constant: , line:30:62, endln:30:63
           |vpiParent:
@@ -1008,264 +1041,10 @@ design: (work@kmac)
       |vpiSize:3
   |vpiDefName:sha3_pkg
   |vpiEndLabel:sha3_pkg
-|uhdmtopPackages:
-\_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-  |vpiParent:
-  \_design: (work@kmac)
-  |vpiName:sha3_pkg
-  |vpiFullName:sha3_pkg::
-  |vpiParameter:
-  \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |UINT:64
-    |vpiTypespec:
-    \_ref_typespec: (sha3_pkg::MsgWidth)
-      |vpiParent:
-      \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
-      |vpiFullName:sha3_pkg::MsgWidth
-      |vpiActual:
-      \_int_typespec: , line:9:13, endln:9:16
-    |vpiSigned:1
-    |vpiName:MsgWidth
-    |vpiFullName:sha3_pkg::MsgWidth
-  |vpiParameter:
-  \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiSize:5
-    |vpiTypespec:
-    \_ref_typespec: (sha3_pkg::KeccakRate)
-      |vpiParent:
-      \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
-      |vpiFullName:sha3_pkg::KeccakRate
-      |vpiActual:
-      \_array_typespec: , line:20:13, endln:20:40
-    |vpiRange:
-    \_range: , line:20:38, endln:20:39
-      |vpiParent:
-      \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:20:38, endln:20:39
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:20:38, endln:20:39
-        |vpiParent:
-        \_range: , line:20:38, endln:20:39
-        |vpiOpType:11
-        |vpiOperand:
-        \_constant: , line:20:38, endln:20:39
-          |vpiParent:
-          \_operation: , line:20:38, endln:20:39
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiName:KeccakRate
-    |vpiFullName:sha3_pkg::KeccakRate
-  |vpiParameter:
-  \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |INT:25
-    |vpiTypespec:
-    \_ref_typespec: (sha3_pkg::KeccakEntries)
-      |vpiParent:
-      \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
-      |vpiFullName:sha3_pkg::KeccakEntries
-      |vpiActual:
-      \_int_typespec: , line:28:13, endln:28:25
-    |vpiName:KeccakEntries
-    |vpiFullName:sha3_pkg::KeccakEntries
-  |vpiParameter:
-  \_parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:38
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |UINT:5
-    |vpiTypespec:
-    \_ref_typespec: (sha3_pkg::KeccakCountW)
-      |vpiParent:
-      \_parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:38
-      |vpiFullName:sha3_pkg::KeccakCountW
-      |vpiActual:
-      \_int_typespec: , line:30:13, endln:30:25
-    |vpiName:KeccakCountW
-    |vpiFullName:sha3_pkg::KeccakCountW
-  |vpiParamAssign:
-  \_param_assign: , line:9:17, endln:9:30
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiRhs:
-    \_constant: , line:9:28, endln:9:30
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:30
-      |vpiDecompile:64
-      |vpiSize:32
-      |UINT:64
-      |vpiTypespec:
-      \_ref_typespec: (sha3_pkg)
-        |vpiParent:
-        \_constant: , line:9:28, endln:9:30
-        |vpiFullName:sha3_pkg
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
-  |vpiParamAssign:
-  \_param_assign: , line:20:26, endln:26:4
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiRhs:
-    \_operation: , line:20:43, endln:26:4
-      |vpiParent:
-      \_param_assign: , line:20:26, endln:26:4
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:21:5, endln:21:9
-        |vpiDecompile:21
-        |vpiSize:64
-        |INT:21
-        |vpiConstType:7
-      |vpiOperand:
-      \_constant: , line:22:5, endln:22:9
-        |vpiDecompile:18
-        |vpiSize:64
-        |INT:18
-        |vpiConstType:7
-      |vpiOperand:
-      \_constant: , line:23:5, endln:23:9
-        |vpiDecompile:17
-        |vpiSize:64
-        |INT:17
-        |vpiConstType:7
-      |vpiOperand:
-      \_constant: , line:24:6, endln:24:9
-        |vpiDecompile:13
-        |vpiSize:64
-        |INT:13
-        |vpiConstType:7
-      |vpiOperand:
-      \_constant: , line:25:6, endln:25:9
-        |vpiDecompile:9
-        |vpiSize:64
-        |INT:9
-        |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
-  |vpiParamAssign:
-  \_param_assign: , line:28:26, endln:28:55
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiRhs:
-    \_constant: , line:28:42, endln:28:46
-      |vpiParent:
-      \_param_assign: , line:28:26, endln:28:55
-      |vpiDecompile:25
-      |vpiSize:32
-      |INT:25
-      |vpiTypespec:
-      \_ref_typespec: (sha3_pkg)
-        |vpiParent:
-        \_constant: , line:28:42, endln:28:46
-        |vpiFullName:sha3_pkg
-        |vpiActual:
-        \_int_typespec: , line:28:13, endln:28:25
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
-  |vpiParamAssign:
-  \_param_assign: , line:30:26, endln:30:64
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiRhs:
-    \_constant: , line:30:41, endln:30:64
-      |vpiParent:
-      \_param_assign: , line:30:26, endln:30:64
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (sha3_pkg)
-        |vpiParent:
-        \_constant: , line:30:41, endln:30:64
-        |vpiFullName:sha3_pkg
-        |vpiActual:
-        \_int_typespec: , line:30:13, endln:30:25
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:38
-  |vpiTypedef:
-  \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-    |vpiParent:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiName:sha3_pkg::keccak_strength_e
-    |vpiInstance:
-    \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-    |vpiBaseTypespec:
-    \_ref_typespec: (sha3_pkg::sha3_pkg::keccak_strength_e)
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiFullName:sha3_pkg::sha3_pkg::keccak_strength_e
-      |vpiActual:
-      \_logic_typespec: , line:12:16, endln:12:27
-    |vpiEnumConst:
-    \_enum_const: (L128), line:13:5, endln:13:18
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:L128
-      |BIN:000
-      |vpiDecompile:3'b000
-      |vpiSize:3
-    |vpiEnumConst:
-    \_enum_const: (L224), line:14:5, endln:14:18
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:L224
-      |BIN:001
-      |vpiDecompile:3'b001
-      |vpiSize:3
-    |vpiEnumConst:
-    \_enum_const: (L256), line:15:5, endln:15:18
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:L256
-      |BIN:010
-      |vpiDecompile:3'b010
-      |vpiSize:3
-    |vpiEnumConst:
-    \_enum_const: (L384), line:16:5, endln:16:18
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:L384
-      |BIN:011
-      |vpiDecompile:3'b011
-      |vpiSize:3
-    |vpiEnumConst:
-    \_enum_const: (L512), line:17:5, endln:17:18
-      |vpiParent:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:L512
-      |BIN:100
-      |vpiDecompile:3'b100
-      |vpiSize:3
-  |vpiDefName:sha3_pkg
-  |vpiTop:1
-  |vpiEndLabel:sha3_pkg
 |uhdmallModules:
 \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
   |vpiParent:
-  \_design: (work@kmac)
+  \_design: (unnamed)
   |vpiFullName:work@kmac
   |vpiParameter:
   \_parameter: (work@kmac.EnMasking), line:4:18, endln:4:27
@@ -1426,13 +1205,12 @@ design: (work@kmac)
 |uhdmallModules:
 \_module_inst: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
   |vpiParent:
-  \_design: (work@kmac)
+  \_design: (unnamed)
   |vpiFullName:work@kmac_core
   |vpiParameter:
   \_parameter: (work@kmac_core.KeccakCountW), line:30:26, endln:30:38
     |vpiParent:
     \_module_inst: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
-    |UINT:5
     |vpiTypespec:
     \_ref_typespec: (work@kmac_core.KeccakCountW)
       |vpiParent:
@@ -1447,7 +1225,7 @@ design: (work@kmac)
   \_parameter: (work@kmac_core.KeccakRate), line:20:26, endln:20:36
     |vpiParent:
     \_module_inst: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
-    |vpiSize:5
+    |vpiSize:1
     |vpiTypespec:
     \_ref_typespec: (work@kmac_core.KeccakRate)
       |vpiParent:
@@ -1524,25 +1302,33 @@ design: (work@kmac)
     |vpiParent:
     \_module_inst: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
     |vpiRhs:
-    \_constant: , line:30:41, endln:30:64
+    \_sys_func_call: ($clog2), line:30:41, endln:30:64
       |vpiParent:
       \_param_assign: , line:30:26, endln:30:64
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac_core)
+      |vpiArgument:
+      \_operation: , line:30:48, endln:30:63
         |vpiParent:
-        \_constant: , line:30:41, endln:30:64
-        |vpiFullName:work@kmac_core
-        |vpiActual:
-        \_int_typespec: , line:30:13, endln:30:25
-      |vpiConstType:9
+        \_sys_func_call: ($clog2), line:30:41, endln:30:64
+        |vpiOpType:24
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.KeccakEntries), line:30:48, endln:30:61
+          |vpiParent:
+          \_operation: , line:30:48, endln:30:63
+          |vpiName:KeccakEntries
+          |vpiFullName:work@kmac_core.KeccakEntries
+        |vpiOperand:
+        \_constant: , line:30:62, endln:30:63
+          |vpiParent:
+          \_operation: , line:30:48, endln:30:63
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiName:$clog2
     |vpiLhs:
     \_parameter: (work@kmac_core.KeccakCountW), line:30:26, endln:30:38
       |vpiParent:
       \_param_assign: , line:30:26, endln:30:64
-      |UINT:5
       |vpiTypespec:
       \_ref_typespec: (work@kmac_core.KeccakCountW)
         |vpiParent:
@@ -1563,50 +1349,105 @@ design: (work@kmac)
       \_param_assign: , line:20:26, endln:26:4
       |vpiOpType:75
       |vpiOperand:
-      \_constant: , line:21:5, endln:21:9
+      \_operation: , line:21:5, endln:21:18
         |vpiParent:
         \_operation: , line:20:43, endln:26:4
-        |vpiDecompile:21
-        |vpiSize:64
-        |INT:21
-        |vpiConstType:7
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:21:5, endln:21:9
+          |vpiParent:
+          \_operation: , line:21:5, endln:21:18
+          |vpiDecompile:1344
+          |vpiSize:64
+          |UINT:1344
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.MsgWidth), line:21:10, endln:21:18
+          |vpiParent:
+          \_operation: , line:21:5, endln:21:18
+          |vpiName:MsgWidth
+          |vpiFullName:work@kmac_core.MsgWidth
       |vpiOperand:
-      \_constant: , line:22:5, endln:22:9
+      \_operation: , line:22:5, endln:22:18
         |vpiParent:
         \_operation: , line:20:43, endln:26:4
-        |vpiDecompile:18
-        |vpiSize:64
-        |INT:18
-        |vpiConstType:7
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:22:5, endln:22:9
+          |vpiParent:
+          \_operation: , line:22:5, endln:22:18
+          |vpiDecompile:1152
+          |vpiSize:64
+          |UINT:1152
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.MsgWidth), line:22:10, endln:22:18
+          |vpiParent:
+          \_operation: , line:22:5, endln:22:18
+          |vpiName:MsgWidth
+          |vpiFullName:work@kmac_core.MsgWidth
       |vpiOperand:
-      \_constant: , line:23:5, endln:23:9
+      \_operation: , line:23:5, endln:23:18
         |vpiParent:
         \_operation: , line:20:43, endln:26:4
-        |vpiDecompile:17
-        |vpiSize:64
-        |INT:17
-        |vpiConstType:7
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:23:5, endln:23:9
+          |vpiParent:
+          \_operation: , line:23:5, endln:23:18
+          |vpiDecompile:1088
+          |vpiSize:64
+          |UINT:1088
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.MsgWidth), line:23:10, endln:23:18
+          |vpiParent:
+          \_operation: , line:23:5, endln:23:18
+          |vpiName:MsgWidth
+          |vpiFullName:work@kmac_core.MsgWidth
       |vpiOperand:
-      \_constant: , line:24:6, endln:24:9
+      \_operation: , line:24:6, endln:24:18
         |vpiParent:
         \_operation: , line:20:43, endln:26:4
-        |vpiDecompile:13
-        |vpiSize:64
-        |INT:13
-        |vpiConstType:7
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:24:6, endln:24:9
+          |vpiParent:
+          \_operation: , line:24:6, endln:24:18
+          |vpiDecompile:832
+          |vpiSize:64
+          |UINT:832
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.MsgWidth), line:24:10, endln:24:18
+          |vpiParent:
+          \_operation: , line:24:6, endln:24:18
+          |vpiName:MsgWidth
+          |vpiFullName:work@kmac_core.MsgWidth
       |vpiOperand:
-      \_constant: , line:25:6, endln:25:9
+      \_operation: , line:25:6, endln:25:18
         |vpiParent:
         \_operation: , line:20:43, endln:26:4
-        |vpiDecompile:9
-        |vpiSize:64
-        |INT:9
-        |vpiConstType:7
+        |vpiOpType:12
+        |vpiOperand:
+        \_constant: , line:25:6, endln:25:9
+          |vpiParent:
+          \_operation: , line:25:6, endln:25:18
+          |vpiDecompile:576
+          |vpiSize:64
+          |UINT:576
+          |vpiConstType:9
+        |vpiOperand:
+        \_ref_obj: (work@kmac_core.MsgWidth), line:25:10, endln:25:18
+          |vpiParent:
+          \_operation: , line:25:6, endln:25:18
+          |vpiName:MsgWidth
+          |vpiFullName:work@kmac_core.MsgWidth
     |vpiLhs:
     \_parameter: (work@kmac_core.KeccakRate), line:20:26, endln:20:36
       |vpiParent:
       \_param_assign: , line:20:26, endln:26:4
-      |vpiSize:5
+      |vpiSize:1
       |vpiTypespec:
       \_ref_typespec: (work@kmac_core.KeccakRate)
         |vpiParent:
@@ -1870,7 +1711,7 @@ design: (work@kmac)
                 \_operation: , line:26:32, endln:26:63
                 |vpiFullName:work@kmac_core
                 |vpiActual:
-                \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
+                \_int_typespec: , line:30:13, endln:30:25
               |vpiOpType:67
               |vpiOperand:
               \_bit_select: (work@kmac_core.KeccakRate), line:26:57, endln:26:61
@@ -1922,7 +1763,7 @@ design: (work@kmac)
                 \_operation: , line:27:32, endln:27:63
                 |vpiFullName:work@kmac_core
                 |vpiActual:
-                \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
+                \_int_typespec: , line:30:13, endln:30:25
               |vpiOpType:67
               |vpiOperand:
               \_bit_select: (work@kmac_core.KeccakRate), line:27:57, endln:27:61
@@ -1974,7 +1815,7 @@ design: (work@kmac)
                 \_operation: , line:28:32, endln:28:63
                 |vpiFullName:work@kmac_core
                 |vpiActual:
-                \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
+                \_int_typespec: , line:30:13, endln:30:25
               |vpiOpType:67
               |vpiOperand:
               \_bit_select: (work@kmac_core.KeccakRate), line:28:57, endln:28:61
@@ -2026,7 +1867,7 @@ design: (work@kmac)
                 \_operation: , line:29:32, endln:29:63
                 |vpiFullName:work@kmac_core
                 |vpiActual:
-                \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
+                \_int_typespec: , line:30:13, endln:30:25
               |vpiOpType:67
               |vpiOperand:
               \_bit_select: (work@kmac_core.KeccakRate), line:29:57, endln:29:61
@@ -2078,7 +1919,7 @@ design: (work@kmac)
                 \_operation: , line:30:32, endln:30:63
                 |vpiFullName:work@kmac_core
                 |vpiActual:
-                \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
+                \_int_typespec: , line:30:13, endln:30:25
               |vpiOpType:67
               |vpiOperand:
               \_bit_select: (work@kmac_core.KeccakRate), line:30:57, endln:30:61
@@ -2127,843 +1968,7 @@ design: (work@kmac)
               |vpiActual:
               \_logic_net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
     |vpiAlwaysType:2
-|uhdmtopModules:
-\_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-  |vpiParent:
-  \_design: (work@kmac)
-  |vpiName:work@kmac
-  |vpiVariables:
-  \_enum_var: (work@kmac.strength_i), line:9:37, endln:9:47
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_ref_typespec: (work@kmac.strength_i)
-      |vpiParent:
-      \_enum_var: (work@kmac.strength_i), line:9:37, endln:9:47
-      |vpiFullName:work@kmac.strength_i
-      |vpiActual:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-    |vpiName:strength_i
-    |vpiFullName:work@kmac.strength_i
-    |vpiVisibility:1
-  |vpiParameter:
-  \_parameter: (work@kmac.EnMasking), line:4:18, endln:4:27
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |UINT:0
-    |vpiTypespec:
-    \_ref_typespec: (work@kmac.EnMasking)
-      |vpiParent:
-      \_parameter: (work@kmac.EnMasking), line:4:18, endln:4:27
-      |vpiFullName:work@kmac.EnMasking
-      |vpiActual:
-      \_bit_typespec: , line:4:14, endln:4:17
-    |vpiName:EnMasking
-    |vpiFullName:work@kmac.EnMasking
-  |vpiParameter:
-  \_parameter: (work@kmac.Share), line:5:18, endln:5:23
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_ref_typespec: (work@kmac.Share)
-      |vpiParent:
-      \_parameter: (work@kmac.Share), line:5:18, endln:5:23
-      |vpiFullName:work@kmac.Share
-      |vpiActual:
-      \_int_typespec: , line:5:14, endln:5:17
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:Share
-    |vpiFullName:work@kmac.Share
-  |vpiParamAssign:
-  \_param_assign: , line:4:18, endln:4:31
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiRhs:
-    \_constant: , line:4:30, endln:4:31
-      |vpiParent:
-      \_param_assign: , line:4:18, endln:4:31
-      |vpiDecompile:0
-      |vpiSize:1
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac)
-        |vpiParent:
-        \_constant: , line:4:30, endln:4:31
-        |vpiFullName:work@kmac
-        |vpiActual:
-        \_bit_typespec: , line:4:14, endln:4:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@kmac.EnMasking), line:4:18, endln:4:27
-  |vpiParamAssign:
-  \_param_assign: , line:5:18, endln:5:45
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiRhs:
-    \_constant: , line:5:26, endln:5:45
-      |vpiParent:
-      \_param_assign: , line:5:18, endln:5:45
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac)
-        |vpiParent:
-        \_constant: , line:5:26, endln:5:45
-        |vpiFullName:work@kmac
-        |vpiActual:
-        \_int_typespec: , line:5:14, endln:5:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@kmac.Share), line:5:18, endln:5:23
-  |vpiDefName:work@kmac
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_ref_typespec: (work@kmac.kmac_en_i)
-      |vpiParent:
-      \_logic_net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-      |vpiFullName:work@kmac.kmac_en_i
-      |vpiActual:
-      \_logic_typespec: , line:8:37, endln:8:37
-    |vpiName:kmac_en_i
-    |vpiFullName:work@kmac.kmac_en_i
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (kmac_en_i), line:8:37, endln:8:46
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiName:kmac_en_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-      |vpiParent:
-      \_port: (kmac_en_i), line:8:37, endln:8:46
-      |vpiName:kmac_en_i
-      |vpiFullName:work@kmac.kmac_en_i
-      |vpiActual:
-      \_logic_net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-    |vpiTypedef:
-    \_ref_typespec: (work@kmac.kmac_en_i)
-      |vpiParent:
-      \_port: (kmac_en_i), line:8:37, endln:8:46
-      |vpiFullName:work@kmac.kmac_en_i
-      |vpiActual:
-      \_logic_typespec: , line:8:37, endln:8:37
-    |vpiInstance:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-  |vpiPort:
-  \_port: (strength_i), line:9:37, endln:9:47
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiName:strength_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@kmac.strength_i), line:9:37, endln:9:47
-      |vpiParent:
-      \_port: (strength_i), line:9:37, endln:9:47
-      |vpiName:strength_i
-      |vpiFullName:work@kmac.strength_i
-      |vpiActual:
-      \_enum_var: (work@kmac.strength_i), line:9:37, endln:9:47
-    |vpiTypedef:
-    \_ref_typespec: (work@kmac.strength_i)
-      |vpiParent:
-      \_port: (strength_i), line:9:37, endln:9:47
-      |vpiFullName:work@kmac.strength_i
-      |vpiActual:
-      \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-    |vpiInstance:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-  |vpiModule:
-  \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-    |vpiParent:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiName:core
-    |vpiFullName:work@kmac.core
-    |vpiVariables:
-    \_enum_var: (work@kmac.core.strength_i), line:9:37, endln:9:47
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.strength_i)
-        |vpiParent:
-        \_enum_var: (work@kmac.core.strength_i), line:9:37, endln:9:47
-        |vpiFullName:work@kmac.core.strength_i
-        |vpiActual:
-        \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiName:strength_i
-      |vpiFullName:work@kmac.core.strength_i
-      |vpiVisibility:1
-    |vpiVariables:
-    \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.block_addr_limit)
-        |vpiParent:
-        \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-        |vpiFullName:work@kmac.core.block_addr_limit
-        |vpiActual:
-        \_logic_typespec: , line:23:2, endln:23:36
-      |vpiName:block_addr_limit
-      |vpiFullName:work@kmac.core.block_addr_limit
-      |vpiVisibility:1
-    |vpiParameter:
-    \_parameter: (work@kmac.core.KeccakCountW), line:30:26, endln:30:38
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.KeccakCountW)
-        |vpiParent:
-        \_parameter: (work@kmac.core.KeccakCountW), line:30:26, endln:30:38
-        |vpiFullName:work@kmac.core.KeccakCountW
-        |vpiActual:
-        \_int_typespec: , line:30:13, endln:30:25
-      |vpiName:KeccakCountW
-      |vpiFullName:work@kmac.core.KeccakCountW
-      |vpiImported:sha3_pkg
-    |vpiParameter:
-    \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiSize:5
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.KeccakRate)
-        |vpiParent:
-        \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-        |vpiFullName:work@kmac.core.KeccakRate
-        |vpiActual:
-        \_array_typespec: , line:20:13, endln:20:40
-      |vpiRange:
-      \_range: , line:20:38, endln:20:39
-        |vpiParent:
-        \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-        |vpiLeftRange:
-        \_constant: 
-          |vpiParent:
-          \_range: , line:20:38, endln:20:39
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiRightRange:
-        \_operation: , line:20:38, endln:20:39
-          |vpiParent:
-          \_range: , line:20:38, endln:20:39
-          |vpiOpType:11
-          |vpiOperand:
-          \_constant: , line:20:38, endln:20:39
-            |vpiParent:
-            \_operation: , line:20:38, endln:20:39
-            |vpiDecompile:5
-            |vpiSize:64
-            |UINT:5
-            |vpiConstType:9
-          |vpiOperand:
-          \_constant: 
-            |vpiParent:
-            \_operation: , line:20:38, endln:20:39
-            |vpiSize:64
-            |INT:1
-            |vpiConstType:7
-      |vpiName:KeccakRate
-      |vpiFullName:work@kmac.core.KeccakRate
-      |vpiImported:sha3_pkg
-    |vpiParameter:
-    \_parameter: (work@kmac.core.EnMasking), line:4:18, endln:4:27
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.EnMasking)
-        |vpiParent:
-        \_parameter: (work@kmac.core.EnMasking), line:4:18, endln:4:27
-        |vpiFullName:work@kmac.core.EnMasking
-        |vpiActual:
-        \_bit_typespec: , line:4:14, endln:4:17
-      |vpiName:EnMasking
-      |vpiFullName:work@kmac.core.EnMasking
-    |vpiParameter:
-    \_parameter: (work@kmac.core.Share), line:5:18, endln:5:23
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.Share)
-        |vpiParent:
-        \_parameter: (work@kmac.core.Share), line:5:18, endln:5:23
-        |vpiFullName:work@kmac.core.Share
-        |vpiActual:
-        \_int_typespec: , line:5:14, endln:5:17
-      |vpiSigned:1
-      |vpiLocalParam:1
-      |vpiName:Share
-      |vpiFullName:work@kmac.core.Share
-    |vpiParamAssign:
-    \_param_assign: , line:4:18, endln:4:31
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiRhs:
-      \_constant: , line:4:30, endln:4:31
-        |vpiParent:
-        \_param_assign: , line:4:18, endln:4:31
-        |vpiDecompile:0
-        |vpiSize:1
-        |UINT:0
-        |vpiTypespec:
-        \_ref_typespec: (work@kmac.core)
-          |vpiParent:
-          \_constant: , line:4:30, endln:4:31
-          |vpiFullName:work@kmac.core
-          |vpiActual:
-          \_bit_typespec: , line:4:14, endln:4:17
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@kmac.core.EnMasking), line:4:18, endln:4:27
-    |vpiParamAssign:
-    \_param_assign: , line:5:18, endln:5:45
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiRhs:
-      \_constant: , line:5:26, endln:5:45
-        |vpiParent:
-        \_param_assign: , line:5:18, endln:5:45
-        |vpiDecompile:1
-        |vpiSize:32
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@kmac.core)
-          |vpiParent:
-          \_constant: , line:5:26, endln:5:45
-          |vpiFullName:work@kmac.core
-          |vpiActual:
-          \_int_typespec: , line:5:14, endln:5:17
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@kmac.core.Share), line:5:18, endln:5:23
-    |vpiParamAssign:
-    \_param_assign: , line:30:26, endln:30:64
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiRhs:
-      \_constant: , line:30:41, endln:30:64
-        |vpiParent:
-        \_param_assign: , line:30:26, endln:30:64
-        |vpiDecompile:5
-        |vpiSize:32
-        |UINT:5
-        |vpiTypespec:
-        \_ref_typespec: (work@kmac.core)
-          |vpiParent:
-          \_constant: , line:30:41, endln:30:64
-          |vpiFullName:work@kmac.core
-          |vpiActual:
-          \_int_typespec: , line:30:13, endln:30:25
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@kmac.core.KeccakCountW), line:30:26, endln:30:38
-    |vpiParamAssign:
-    \_param_assign: , line:20:26, endln:26:4
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiRhs:
-      \_operation: , line:20:43, endln:26:4
-        |vpiParent:
-        \_param_assign: , line:20:26, endln:26:4
-        |vpiTypespec:
-        \_ref_typespec: (work@kmac.core)
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiFullName:work@kmac.core
-          |vpiActual:
-          \_array_typespec: , line:20:13, endln:20:40
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:21:5, endln:21:9
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiDecompile:21
-          |vpiSize:32
-          |INT:21
-          |vpiConstType:7
-        |vpiOperand:
-        \_constant: , line:22:5, endln:22:9
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiDecompile:18
-          |vpiSize:32
-          |INT:18
-          |vpiConstType:7
-        |vpiOperand:
-        \_constant: , line:23:5, endln:23:9
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiDecompile:17
-          |vpiSize:32
-          |INT:17
-          |vpiConstType:7
-        |vpiOperand:
-        \_constant: , line:24:6, endln:24:9
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiDecompile:13
-          |vpiSize:32
-          |INT:13
-          |vpiConstType:7
-        |vpiOperand:
-        \_constant: , line:25:6, endln:25:9
-          |vpiParent:
-          \_operation: , line:20:43, endln:26:4
-          |vpiDecompile:9
-          |vpiSize:32
-          |INT:9
-          |vpiConstType:7
-      |vpiLhs:
-      \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-    |vpiTypedef:
-    \_import_typespec: (sha3_pkg), line:15:10, endln:15:32
-    |vpiTypedef:
-    \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-    |vpiDefName:work@kmac_core
-    |vpiDefFile:${SURELOG_DIR}/tests/Kmac/kmac_core.sv
-    |vpiDefLineNo:1
-    |vpiNet:
-    \_logic_net: (work@kmac.core.kmac_en_i), line:8:37, endln:8:46
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac.core.kmac_en_i)
-        |vpiParent:
-        \_logic_net: (work@kmac.core.kmac_en_i), line:8:37, endln:8:46
-        |vpiFullName:work@kmac.core.kmac_en_i
-        |vpiActual:
-        \_logic_typespec: , line:8:37, endln:8:37
-      |vpiName:kmac_en_i
-      |vpiFullName:work@kmac.core.kmac_en_i
-    |vpiInstance:
-    \_module_inst: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
-    |vpiPort:
-    \_port: (kmac_en_i), line:8:37, endln:8:46
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiName:kmac_en_i
-      |vpiDirection:1
-      |vpiHighConn:
-      \_ref_obj: (work@kmac.kmac_en_i), line:13:20, endln:13:21
-        |vpiParent:
-        \_port: (kmac_en_i), line:8:37, endln:8:46
-        |vpiName:kmac_en_i
-        |vpiFullName:work@kmac.kmac_en_i
-        |vpiActual:
-        \_logic_net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-      |vpiLowConn:
-      \_ref_obj: (work@kmac.core.kmac_en_i), line:8:37, endln:8:46
-        |vpiParent:
-        \_port: (kmac_en_i), line:8:37, endln:8:46
-        |vpiName:kmac_en_i
-        |vpiFullName:work@kmac.core.kmac_en_i
-        |vpiActual:
-        \_logic_net: (work@kmac.core.kmac_en_i), line:8:37, endln:8:46
-      |vpiTypedef:
-      \_ref_typespec: (work@kmac.core.kmac_en_i)
-        |vpiParent:
-        \_port: (kmac_en_i), line:8:37, endln:8:46
-        |vpiFullName:work@kmac.core.kmac_en_i
-        |vpiActual:
-        \_logic_typespec: , line:8:37, endln:8:37
-      |vpiInstance:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-    |vpiPort:
-    \_port: (strength_i), line:9:37, endln:9:47
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiName:strength_i
-      |vpiDirection:1
-      |vpiHighConn:
-      \_ref_obj: (work@kmac.strength_i), line:13:20, endln:13:21
-        |vpiParent:
-        \_port: (strength_i), line:9:37, endln:9:47
-        |vpiName:strength_i
-        |vpiFullName:work@kmac.strength_i
-        |vpiActual:
-        \_enum_var: (work@kmac.strength_i), line:9:37, endln:9:47
-      |vpiLowConn:
-      \_ref_obj: (work@kmac.core.strength_i), line:9:37, endln:9:47
-        |vpiParent:
-        \_port: (strength_i), line:9:37, endln:9:47
-        |vpiName:strength_i
-        |vpiFullName:work@kmac.core.strength_i
-        |vpiActual:
-        \_enum_var: (work@kmac.core.strength_i), line:9:37, endln:9:47
-      |vpiTypedef:
-      \_ref_typespec: (work@kmac.core.strength_i)
-        |vpiParent:
-        \_port: (strength_i), line:9:37, endln:9:47
-        |vpiFullName:work@kmac.core.strength_i
-        |vpiActual:
-        \_enum_typespec: (sha3_pkg::keccak_strength_e), line:12:3, endln:18:23
-      |vpiInstance:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-    |vpiProcess:
-    \_always: , line:24:5, endln:34:8
-      |vpiParent:
-      \_module_inst: work@kmac_core (work@kmac.core), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:13:4, endln:13:24
-      |vpiStmt:
-      \_begin: (work@kmac.core), line:24:17, endln:34:8
-        |vpiParent:
-        \_always: , line:24:5, endln:34:8
-        |vpiFullName:work@kmac.core
-        |vpiStmt:
-        \_case_stmt: , line:25:5, endln:33:12
-          |vpiParent:
-          \_begin: (work@kmac.core), line:24:17, endln:34:8
-          |vpiCaseType:1
-          |vpiQualifier:1
-          |vpiCondition:
-          \_ref_obj: (work@kmac.core.strength_i), line:25:18, endln:25:28
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiName:strength_i
-            |vpiFullName:work@kmac.core.strength_i
-            |vpiActual:
-            \_enum_var: (work@kmac.core.strength_i), line:9:37, endln:9:47
-          |vpiCaseItem:
-          \_case_item: , line:26:7, endln:26:64
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiExpr:
-            \_constant: , line:26:7, endln:26:11
-              |vpiSize:3
-              |BIN:000
-            |vpiStmt:
-            \_assignment: , line:26:13, endln:26:63
-              |vpiParent:
-              \_case_item: , line:26:7, endln:26:64
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_operation: , line:26:32, endln:26:63
-                |vpiParent:
-                \_assignment: , line:26:13, endln:26:63
-                |vpiTypespec:
-                \_ref_typespec: (work@kmac.core)
-                  |vpiParent:
-                  \_operation: , line:26:32, endln:26:63
-                  |vpiFullName:work@kmac.core
-                  |vpiActual:
-                  \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-                |vpiOpType:67
-                |vpiOperand:
-                \_bit_select: (work@kmac.core.KeccakRate), line:26:57, endln:26:61
-                  |vpiParent:
-                  \_operation: , line:26:32, endln:26:63
-                  |vpiName:KeccakRate
-                  |vpiFullName:work@kmac.core.KeccakRate
-                  |vpiActual:
-                  \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-                  |vpiIndex:
-                  \_ref_obj: (work@kmac.core.L128), line:26:57, endln:26:61
-                    |vpiParent:
-                    \_bit_select: (work@kmac.core.KeccakRate), line:26:57, endln:26:61
-                    |vpiName:L128
-                    |vpiFullName:work@kmac.core.L128
-                    |vpiActual:
-                    \_enum_const: (L128), line:13:5, endln:13:18
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:26:13, endln:26:29
-                |vpiParent:
-                \_assignment: , line:26:13, endln:26:63
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-          |vpiCaseItem:
-          \_case_item: , line:27:7, endln:27:64
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiExpr:
-            \_constant: , line:27:7, endln:27:11
-              |vpiSize:3
-              |BIN:001
-            |vpiStmt:
-            \_assignment: , line:27:13, endln:27:63
-              |vpiParent:
-              \_case_item: , line:27:7, endln:27:64
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_operation: , line:27:32, endln:27:63
-                |vpiParent:
-                \_assignment: , line:27:13, endln:27:63
-                |vpiTypespec:
-                \_ref_typespec: (work@kmac.core)
-                  |vpiParent:
-                  \_operation: , line:27:32, endln:27:63
-                  |vpiFullName:work@kmac.core
-                  |vpiActual:
-                  \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-                |vpiOpType:67
-                |vpiOperand:
-                \_bit_select: (work@kmac.core.KeccakRate), line:27:57, endln:27:61
-                  |vpiParent:
-                  \_operation: , line:27:32, endln:27:63
-                  |vpiName:KeccakRate
-                  |vpiFullName:work@kmac.core.KeccakRate
-                  |vpiActual:
-                  \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-                  |vpiIndex:
-                  \_ref_obj: (work@kmac.core.L224), line:27:57, endln:27:61
-                    |vpiParent:
-                    \_bit_select: (work@kmac.core.KeccakRate), line:27:57, endln:27:61
-                    |vpiName:L224
-                    |vpiFullName:work@kmac.core.L224
-                    |vpiActual:
-                    \_enum_const: (L224), line:14:5, endln:14:18
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:27:13, endln:27:29
-                |vpiParent:
-                \_assignment: , line:27:13, endln:27:63
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-          |vpiCaseItem:
-          \_case_item: , line:28:7, endln:28:64
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiExpr:
-            \_constant: , line:28:7, endln:28:11
-              |vpiSize:3
-              |BIN:010
-            |vpiStmt:
-            \_assignment: , line:28:13, endln:28:63
-              |vpiParent:
-              \_case_item: , line:28:7, endln:28:64
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_operation: , line:28:32, endln:28:63
-                |vpiParent:
-                \_assignment: , line:28:13, endln:28:63
-                |vpiTypespec:
-                \_ref_typespec: (work@kmac.core)
-                  |vpiParent:
-                  \_operation: , line:28:32, endln:28:63
-                  |vpiFullName:work@kmac.core
-                  |vpiActual:
-                  \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-                |vpiOpType:67
-                |vpiOperand:
-                \_bit_select: (work@kmac.core.KeccakRate), line:28:57, endln:28:61
-                  |vpiParent:
-                  \_operation: , line:28:32, endln:28:63
-                  |vpiName:KeccakRate
-                  |vpiFullName:work@kmac.core.KeccakRate
-                  |vpiActual:
-                  \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-                  |vpiIndex:
-                  \_ref_obj: (work@kmac.core.L256), line:28:57, endln:28:61
-                    |vpiParent:
-                    \_bit_select: (work@kmac.core.KeccakRate), line:28:57, endln:28:61
-                    |vpiName:L256
-                    |vpiFullName:work@kmac.core.L256
-                    |vpiActual:
-                    \_enum_const: (L256), line:15:5, endln:15:18
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:28:13, endln:28:29
-                |vpiParent:
-                \_assignment: , line:28:13, endln:28:63
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-          |vpiCaseItem:
-          \_case_item: , line:29:7, endln:29:64
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiExpr:
-            \_constant: , line:29:7, endln:29:11
-              |vpiSize:3
-              |BIN:011
-            |vpiStmt:
-            \_assignment: , line:29:13, endln:29:63
-              |vpiParent:
-              \_case_item: , line:29:7, endln:29:64
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_operation: , line:29:32, endln:29:63
-                |vpiParent:
-                \_assignment: , line:29:13, endln:29:63
-                |vpiTypespec:
-                \_ref_typespec: (work@kmac.core)
-                  |vpiParent:
-                  \_operation: , line:29:32, endln:29:63
-                  |vpiFullName:work@kmac.core
-                  |vpiActual:
-                  \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-                |vpiOpType:67
-                |vpiOperand:
-                \_bit_select: (work@kmac.core.KeccakRate), line:29:57, endln:29:61
-                  |vpiParent:
-                  \_operation: , line:29:32, endln:29:63
-                  |vpiName:KeccakRate
-                  |vpiFullName:work@kmac.core.KeccakRate
-                  |vpiActual:
-                  \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-                  |vpiIndex:
-                  \_ref_obj: (work@kmac.core.L384), line:29:57, endln:29:61
-                    |vpiParent:
-                    \_bit_select: (work@kmac.core.KeccakRate), line:29:57, endln:29:61
-                    |vpiName:L384
-                    |vpiFullName:work@kmac.core.L384
-                    |vpiActual:
-                    \_enum_const: (L384), line:16:5, endln:16:18
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:29:13, endln:29:29
-                |vpiParent:
-                \_assignment: , line:29:13, endln:29:63
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-          |vpiCaseItem:
-          \_case_item: , line:30:7, endln:30:64
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiExpr:
-            \_constant: , line:30:7, endln:30:11
-              |vpiSize:3
-              |BIN:100
-            |vpiStmt:
-            \_assignment: , line:30:13, endln:30:63
-              |vpiParent:
-              \_case_item: , line:30:7, endln:30:64
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_operation: , line:30:32, endln:30:63
-                |vpiParent:
-                \_assignment: , line:30:13, endln:30:63
-                |vpiTypespec:
-                \_ref_typespec: (work@kmac.core)
-                  |vpiParent:
-                  \_operation: , line:30:32, endln:30:63
-                  |vpiFullName:work@kmac.core
-                  |vpiActual:
-                  \_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-                |vpiOpType:67
-                |vpiOperand:
-                \_bit_select: (work@kmac.core.KeccakRate), line:30:57, endln:30:61
-                  |vpiParent:
-                  \_operation: , line:30:32, endln:30:63
-                  |vpiName:KeccakRate
-                  |vpiFullName:work@kmac.core.KeccakRate
-                  |vpiActual:
-                  \_parameter: (work@kmac.core.KeccakRate), line:20:26, endln:20:36
-                  |vpiIndex:
-                  \_ref_obj: (work@kmac.core.L512), line:30:57, endln:30:61
-                    |vpiParent:
-                    \_bit_select: (work@kmac.core.KeccakRate), line:30:57, endln:30:61
-                    |vpiName:L512
-                    |vpiFullName:work@kmac.core.L512
-                    |vpiActual:
-                    \_enum_const: (L512), line:17:5, endln:17:18
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:30:13, endln:30:29
-                |vpiParent:
-                \_assignment: , line:30:13, endln:30:63
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-          |vpiCaseItem:
-          \_case_item: , line:32:7, endln:32:38
-            |vpiParent:
-            \_case_stmt: , line:25:5, endln:33:12
-            |vpiStmt:
-            \_assignment: , line:32:16, endln:32:37
-              |vpiParent:
-              \_case_item: , line:32:7, endln:32:38
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_constant: , line:32:35, endln:32:37
-                |vpiParent:
-                \_assignment: , line:32:16, endln:32:37
-                |vpiDecompile:'0
-                |vpiSize:-1
-                |BIN:0
-                |vpiConstType:3
-              |vpiLhs:
-              \_ref_obj: (work@kmac.core.block_addr_limit), line:32:16, endln:32:32
-                |vpiParent:
-                \_assignment: , line:32:16, endln:32:37
-                |vpiName:block_addr_limit
-                |vpiFullName:work@kmac.core.block_addr_limit
-                |vpiActual:
-                \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-      |vpiAlwaysType:2
 \_weaklyReferenced:
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-  |vpiSigned:1
-\_logic_typespec: , line:12:16, endln:12:27
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-  |vpiRange:
-  \_range: , line:12:22, endln:12:27
-    |vpiParent:
-    \_logic_typespec: , line:12:16, endln:12:27
-    |vpiLeftRange:
-    \_constant: , line:12:23, endln:12:24
-      |vpiParent:
-      \_range: , line:12:22, endln:12:27
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:12:25, endln:12:26
-      |vpiParent:
-      \_range: , line:12:22, endln:12:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_array_typespec: , line:20:13, endln:20:40
-  |vpiParent:
-  \_parameter: (sha3_pkg::KeccakRate), line:20:26, endln:20:36
-  |vpiRange:
-  \_range: , line:20:38, endln:20:39
-  |vpiElemTypespec:
-  \_ref_typespec: (sha3_pkg::KeccakRate)
-    |vpiParent:
-    \_array_typespec: , line:20:13, endln:20:40
-    |vpiFullName:sha3_pkg::KeccakRate
-    |vpiActual:
-    \_int_typespec: , line:20:13, endln:20:25
-\_int_typespec: , line:20:13, endln:20:25
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_int_typespec: , line:28:13, endln:28:25
-  |vpiParent:
-  \_parameter: (sha3_pkg::KeccakEntries), line:28:26, endln:28:39
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_int_typespec: , line:30:13, endln:30:25
-  |vpiParent:
-  \_parameter: (sha3_pkg::KeccakCountW), line:30:26, endln:30:38
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
 \_int_typespec: , line:9:13, endln:9:16
   |vpiParent:
   \_parameter: (sha3_pkg::MsgWidth), line:9:17, endln:9:25
@@ -3032,14 +2037,17 @@ design: (work@kmac)
   \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
 \_int_typespec: , line:30:13, endln:30:25
   |vpiParent:
-  \_ref_typespec: (work@kmac_core)
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_int_typespec: , line:30:13, endln:30:25
-  |vpiParent:
   \_ref_typespec: (work@kmac_core.KeccakCountW)
   |vpiInstance:
   \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
+  |vpiExpr:
+  \_ref_obj: (work@kmac_core.KeccakCountW.KeccakCountW)
+    |vpiParent:
+    \_int_typespec: , line:30:13, endln:30:25
+    |vpiName:KeccakCountW
+    |vpiFullName:work@kmac_core.KeccakCountW.KeccakCountW
+    |vpiActual:
+    \_parameter: (work@kmac_core.KeccakCountW), line:30:26, endln:30:38
 \_array_typespec: , line:20:13, endln:20:40
   |vpiParent:
   \_ref_typespec: (work@kmac_core.KeccakRate)
@@ -3141,99 +2149,6 @@ design: (work@kmac)
   |vpiParent:
   \_parameter: (work@kmac_core.Share), line:5:18, endln:5:23
   |vpiSigned:1
-\_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-  |vpiName:KeccakCountW
-  |UINT:5
-\_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-  |vpiName:KeccakCountW
-  |UINT:5
-\_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-  |vpiName:KeccakCountW
-  |UINT:5
-\_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-  |vpiName:KeccakCountW
-  |UINT:5
-\_int_typespec: (KeccakCountW), line:30:26, endln:30:26
-  |vpiName:KeccakCountW
-  |UINT:5
-\_logic_typespec: , line:8:37, endln:8:37
-\_logic_typespec: , line:8:37, endln:8:37
-  |vpiParent:
-  \_logic_net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
-\_logic_typespec: , line:8:37, endln:8:37
-\_array_typespec: , line:20:13, endln:20:40
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core)
-  |vpiRange:
-  \_range: , line:20:38, endln:20:39
-    |vpiParent:
-    \_array_typespec: , line:20:13, endln:20:40
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:20:38, endln:20:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:20:38, endln:20:39
-      |vpiParent:
-      \_range: , line:20:38, endln:20:39
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:20:38, endln:20:39
-        |vpiParent:
-        \_operation: , line:20:38, endln:20:39
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:20:38, endln:20:39
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@kmac.core)
-    |vpiParent:
-    \_array_typespec: , line:20:13, endln:20:40
-    |vpiFullName:work@kmac.core
-    |vpiActual:
-    \_int_typespec: , line:20:13, endln:20:25
-\_int_typespec: , line:20:13, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core)
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_logic_typespec: , line:8:37, endln:8:37
-  |vpiParent:
-  \_logic_net: (work@kmac.core.kmac_en_i), line:8:37, endln:8:46
-\_logic_typespec: , line:23:2, endln:23:36
-  |vpiParent:
-  \_logic_var: (work@kmac.core.block_addr_limit), line:23:37, endln:23:53
-  |vpiRange:
-  \_range: , line:23:8, endln:23:36
-    |vpiParent:
-    \_logic_typespec: , line:23:2, endln:23:36
-    |vpiLeftRange:
-    \_constant: , line:23:9, endln:23:31
-      |vpiParent:
-      \_range: , line:23:8, endln:23:36
-      |vpiDecompile:4
-      |vpiSize:64
-      |INT:4
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:23:34, endln:23:35
-      |vpiParent:
-      \_range: , line:23:8, endln:23:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:8:37, endln:8:37
 \_logic_typespec: , line:12:16, endln:12:27
   |vpiParent:
@@ -3261,75 +2176,9 @@ design: (work@kmac)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:8:37, endln:8:37
-\_bit_typespec: , line:4:14, endln:4:17
-  |vpiParent:
-  \_ref_typespec: (work@kmac.EnMasking)
-\_int_typespec: , line:5:14, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@kmac.Share)
-  |vpiSigned:1
-\_int_typespec: , line:30:13, endln:30:25
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core.KeccakCountW)
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_array_typespec: , line:20:13, endln:20:40
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core.KeccakRate)
-  |vpiRange:
-  \_range: , line:20:38, endln:20:39
-    |vpiParent:
-    \_array_typespec: , line:20:13, endln:20:40
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:20:38, endln:20:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:20:38, endln:20:39
-      |vpiParent:
-      \_range: , line:20:38, endln:20:39
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:20:38, endln:20:39
-        |vpiParent:
-        \_operation: , line:20:38, endln:20:39
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:20:38, endln:20:39
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@kmac.core.KeccakRate)
-    |vpiParent:
-    \_array_typespec: , line:20:13, endln:20:40
-    |vpiFullName:work@kmac.core.KeccakRate
-    |vpiActual:
-    \_int_typespec: , line:20:13, endln:20:25
-\_int_typespec: , line:20:13, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core.KeccakRate)
-  |vpiInstance:
-  \_package: sha3_pkg (sha3_pkg::), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-\_bit_typespec: , line:4:14, endln:4:17
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core.EnMasking)
-\_int_typespec: , line:5:14, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@kmac.core.Share)
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 0
-[   NOTE] : 5
+[   NOTE] : 0

@@ -70,56 +70,20 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LoopVar/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/LoopVar/dut.sv:1:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/LoopVar/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         1
-array_var                                              1
 assignment                                             1
 begin                                                  1
 bit_select                                             1
-constant                                               3
 design                                                 1
 foreach_stmt                                           1
-hier_path                                              1
 initial                                                1
-int_typespec                                           3
-int_var                                                2
+int_typespec                                           1
 logic_net                                              2
-module_inst                                            4
-operation                                              1
-range                                                  1
-ref_obj                                                3
-ref_typespec                                           6
+module_inst                                            1
+ref_obj                                                2
+ref_typespec                                           3
 ref_var                                                2
-unsupported_typespec                                   2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_typespec                                         1
-array_var                                              1
-assignment                                             2
-begin                                                  2
-bit_select                                             2
-constant                                               3
-design                                                 1
-foreach_stmt                                           2
-hier_path                                              1
-initial                                                2
-int_typespec                                           3
-int_var                                                3
-logic_net                                              2
-module_inst                                            4
-operation                                              1
-range                                                  1
-ref_obj                                                5
-ref_typespec                                           8
-ref_var                                                3
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LoopVar/slpp_all/surelog.uhdm ...
@@ -127,13 +91,12 @@ unsupported_typespec                                   2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LoopVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -150,11 +113,11 @@ design: (work@dut)
     |vpiName:array
     |vpiFullName:work@dut.array
   |vpiNet:
-  \_logic_net: (work@dut.i), line:6:19, endln:6:20
+  \_logic_net: (work@dut.array.i), line:6:19, endln:6:20
     |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
+    \_bit_select: (work@dut.array), line:6:13, endln:6:21
     |vpiName:i
-    |vpiFullName:work@dut.i
+    |vpiFullName:work@dut.array.i
     |vpiNetType:1
   |vpiProcess:
   \_initial: , line:4:5, endln:7:8
@@ -180,20 +143,20 @@ design: (work@dut)
             \_ref_var: (work@dut.array), line:5:17, endln:5:22
             |vpiFullName:work@dut.array
             |vpiActual:
-            \_array_typespec: 
+            \_unsupported_typespec: (array), line:5:17, endln:5:22
           |vpiName:array
           |vpiFullName:work@dut.array
         |vpiLoopVars:
-        \_int_var: (work@dut.i), line:5:23, endln:5:24
+        \_ref_var: (work@dut.i), line:5:23, endln:5:24
           |vpiParent:
           \_foreach_stmt: (work@dut), line:5:9, endln:5:16
           |vpiTypespec:
           \_ref_typespec: (work@dut.i)
             |vpiParent:
-            \_int_var: (work@dut.i), line:5:23, endln:5:24
+            \_ref_var: (work@dut.i), line:5:23, endln:5:24
             |vpiFullName:work@dut.i
             |vpiActual:
-            \_int_typespec: , line:2:5, endln:2:8
+            \_unsupported_typespec: (i), line:5:23, endln:5:24
           |vpiName:i
           |vpiFullName:work@dut.i
         |vpiStmt:
@@ -209,7 +172,7 @@ design: (work@dut)
             |vpiName:i
             |vpiFullName:work@dut.i
             |vpiActual:
-            \_int_var: (work@dut.i), line:5:23, endln:5:24
+            \_logic_net: (work@dut.array.i), line:6:19, endln:6:20
           |vpiLhs:
           \_bit_select: (work@dut.array), line:6:13, endln:6:21
             |vpiParent:
@@ -223,163 +186,22 @@ design: (work@dut)
               |vpiName:i
               |vpiFullName:work@dut.i
               |vpiActual:
-              \_int_var: (work@dut.i), line:5:23, endln:5:24
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_array_var: (work@dut.array), line:2:9, endln:2:14
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
-    |vpiSize:16
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.array)
-      |vpiParent:
-      \_array_var: (work@dut.array), line:2:9, endln:2:14
-      |vpiFullName:work@dut.array
-      |vpiActual:
-      \_array_typespec: 
-    |vpiName:array
-    |vpiFullName:work@dut.array
-    |vpiSigned:1
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_range: , line:2:15, endln:2:17
-      |vpiParent:
-      \_array_var: (work@dut.array), line:2:9, endln:2:14
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:2:15, endln:2:17
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:2:15, endln:2:17
-        |vpiParent:
-        \_range: , line:2:15, endln:2:17
-        |vpiOpType:11
-        |vpiOperand:
-        \_constant: , line:2:15, endln:2:17
-          |vpiParent:
-          \_operation: , line:2:15, endln:2:17
-          |vpiDecompile:16
-          |vpiSize:64
-          |UINT:16
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiReg:
-    \_int_var: (work@dut.array), line:2:9, endln:2:14
-      |vpiParent:
-      \_array_var: (work@dut.array), line:2:9, endln:2:14
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.array)
-        |vpiParent:
-        \_int_var: (work@dut.array), line:2:9, endln:2:14
-        |vpiFullName:work@dut.array
-        |vpiActual:
-        \_int_typespec: , line:2:5, endln:2:8
-      |vpiFullName:work@dut.array
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:4:5, endln:7:8
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
-    |vpiStmt:
-    \_begin: (work@dut), line:4:13, endln:7:8
-      |vpiParent:
-      \_initial: , line:4:5, endln:7:8
-      |vpiFullName:work@dut
-      |vpiStmt:
-      \_foreach_stmt: (work@dut), line:5:9, endln:5:16
-        |vpiParent:
-        \_begin: (work@dut), line:4:13, endln:7:8
-        |vpiFullName:work@dut
-        |vpiVariables:
-        \_ref_var: (work@dut.array), line:5:17, endln:5:22
-          |vpiParent:
-          \_foreach_stmt: (work@dut), line:5:9, endln:5:16
-          |vpiTypespec:
-          \_ref_typespec: (work@dut.array)
-            |vpiParent:
-            \_ref_var: (work@dut.array), line:5:17, endln:5:22
-            |vpiFullName:work@dut.array
-            |vpiActual:
-            \_array_typespec: 
-          |vpiName:array
-          |vpiFullName:work@dut.array
-          |vpiActual:
-          \_array_var: (work@dut.array), line:2:9, endln:2:14
-        |vpiLoopVars:
-        \_int_var: (work@dut.i), line:5:23, endln:5:24
-          |vpiParent:
-          \_foreach_stmt: (work@dut), line:5:9, endln:5:16
-          |vpiTypespec:
-          \_ref_typespec: (work@dut.i)
-            |vpiParent:
-            \_int_var: (work@dut.i), line:5:23, endln:5:24
-            |vpiFullName:work@dut.i
-            |vpiActual:
-            \_int_typespec: , line:2:5, endln:2:8
-          |vpiName:i
-          |vpiFullName:work@dut.i
-        |vpiStmt:
-        \_assignment: , line:6:13, endln:6:25
-          |vpiParent:
-          \_foreach_stmt: (work@dut), line:5:9, endln:5:16
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_ref_obj: (work@dut.i), line:6:24, endln:6:25
-            |vpiParent:
-            \_assignment: , line:6:13, endln:6:25
-            |vpiName:i
-            |vpiFullName:work@dut.i
-            |vpiActual:
-            \_int_var: (work@dut.i), line:5:23, endln:5:24
-          |vpiLhs:
-          \_bit_select: (work@dut.array), line:6:13, endln:6:21
-            |vpiParent:
-            \_assignment: , line:6:13, endln:6:25
-            |vpiName:array
-            |vpiFullName:work@dut.array
-            |vpiActual:
-            \_array_var: (work@dut.array), line:2:9, endln:2:14
-            |vpiIndex:
-            \_ref_obj: (work@dut.i), line:6:19, endln:6:20
-              |vpiParent:
-              \_bit_select: (work@dut.array), line:6:13, endln:6:21
-              |vpiName:i
-              |vpiFullName:work@dut.i
-              |vpiActual:
-              \_int_var: (work@dut.i), line:5:23, endln:5:24
+              \_logic_net: (work@dut.array.i), line:6:19, endln:6:20
 \_weaklyReferenced:
-\_int_typespec: , line:2:5, endln:2:8
+\_unsupported_typespec: (array), line:5:17, endln:5:22
+  |vpiName:array
+\_unsupported_typespec: (i), line:5:23, endln:5:24
   |vpiParent:
-  \_int_var: (work@dut.array), line:2:9, endln:2:14
-  |vpiSigned:1
-\_array_typespec: 
+  \_ref_var: (work@dut.i), line:5:23, endln:5:24
+  |vpiName:i
 \_int_typespec: , line:2:5, endln:2:18
-  |vpiSigned:1
-\_int_typespec: , line:2:5, endln:2:8
   |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/LoopVar/dut.sv | ${SURELOG_DIR}/build/regression/LoopVar/roundtrip/dut_000.sv | 3 | 9 |

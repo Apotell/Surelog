@@ -118,49 +118,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv:1:1: Top level module "work@top".
-[ERR:UH0722] ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv:3:40: Division by zero in instance "".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              19
+constant                                               7
 design                                                 1
-integer_typespec                                       6
-module_inst                                            4
-operation                                              9
-param_assign                                           6
-parameter                                              6
+integer_typespec                                       3
+module_inst                                            1
+operation                                              6
+param_assign                                           3
+parameter                                              3
 ref_obj                                                4
-ref_typespec                                          12
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              19
-design                                                 1
-integer_typespec                                       6
-module_inst                                            4
-operation                                              9
-param_assign                                           6
-parameter                                              6
-ref_obj                                                4
-ref_typespec                                          12
+ref_typespec                                           4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.A), line:2:23, endln:2:24
@@ -341,133 +321,6 @@ design: (work@top)
     |vpiLhs:
     \_parameter: (work@top.C), line:4:23, endln:4:24
   |vpiDefName:work@top
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.A), line:2:23, endln:2:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |UINT:0
-    |vpiTypespec:
-    \_ref_typespec: (work@top.A)
-      |vpiParent:
-      \_parameter: (work@top.A), line:2:23, endln:2:24
-      |vpiFullName:work@top.A
-      |vpiActual:
-      \_integer_typespec: , line:2:15, endln:2:22
-    |vpiSigned:1
-    |vpiName:A
-    |vpiFullName:work@top.A
-  |vpiParameter:
-  \_parameter: (work@top.B), line:3:23, endln:3:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.B)
-      |vpiParent:
-      \_parameter: (work@top.B), line:3:23, endln:3:24
-      |vpiFullName:work@top.B
-      |vpiActual:
-      \_integer_typespec: , line:3:15, endln:3:22
-    |vpiSigned:1
-    |vpiName:B
-    |vpiFullName:work@top.B
-  |vpiParameter:
-  \_parameter: (work@top.C), line:4:23, endln:4:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.C)
-      |vpiParent:
-      \_parameter: (work@top.C), line:4:23, endln:4:24
-      |vpiFullName:work@top.C
-      |vpiActual:
-      \_integer_typespec: , line:4:15, endln:4:22
-    |vpiSigned:1
-    |vpiName:C
-    |vpiFullName:work@top.C
-  |vpiParamAssign:
-  \_param_assign: , line:2:23, endln:2:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |vpiRhs:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_param_assign: , line:2:23, endln:2:28
-      |vpiDecompile:0
-      |vpiSize:32
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:27, endln:2:28
-        |vpiFullName:work@top
-        |vpiActual:
-        \_integer_typespec: , line:2:15, endln:2:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.A), line:2:23, endln:2:24
-  |vpiParamAssign:
-  \_param_assign: , line:3:23, endln:3:45
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |vpiRhs:
-    \_operation: , line:3:38, endln:3:41
-      |vpiParent:
-      \_param_assign: , line:3:23, endln:3:45
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_operation: , line:3:38, endln:3:41
-        |vpiFullName:work@top
-        |vpiActual:
-        \_integer_typespec: , line:3:15, endln:3:22
-      |vpiOpType:12
-      |vpiOperand:
-      \_constant: , line:3:38, endln:3:39
-        |vpiParent:
-        \_operation: , line:3:38, endln:3:41
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:3:40, endln:3:41
-        |vpiParent:
-        \_operation: , line:3:38, endln:3:41
-        |vpiDecompile:0
-        |vpiSize:32
-        |UINT:0
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.B), line:3:23, endln:3:24
-  |vpiParamAssign:
-  \_param_assign: , line:4:23, endln:4:44
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
-    |vpiRhs:
-    \_constant: , line:4:27, endln:4:44
-      |vpiParent:
-      \_param_assign: , line:4:23, endln:4:44
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:4:27, endln:4:44
-        |vpiFullName:work@top
-        |vpiActual:
-        \_integer_typespec: , line:4:15, endln:4:22
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.C), line:4:23, endln:4:24
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_integer_typespec: , line:2:15, endln:2:22
   |vpiParent:
@@ -481,24 +334,12 @@ design: (work@top)
   |vpiParent:
   \_parameter: (work@top.C), line:4:23, endln:4:24
   |vpiSigned:1
-\_integer_typespec: , line:2:15, endln:2:22
-  |vpiParent:
-  \_ref_typespec: (work@top.A)
-  |vpiSigned:1
-\_integer_typespec: , line:3:15, endln:3:22
-  |vpiParent:
-  \_ref_typespec: (work@top.B)
-  |vpiSigned:1
-\_integer_typespec: , line:4:15, endln:4:22
-  |vpiParent:
-  \_ref_typespec: (work@top.C)
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv | ${SURELOG_DIR}/build/regression/CondOpLazyEval/roundtrip/dut_000.sv | 2 | 5 |

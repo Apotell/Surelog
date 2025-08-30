@@ -2,70 +2,30 @@
 [INF:CM0020] Separate compilation-unit mode is on.
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:1:1: No timescale set for "pack".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:1:1: Compile package "pack".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:12:1: Compile class "pack::C".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:5:1: Compile class "pack::Vector".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:9:1: Compile class "pack::ovm_queue".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
-[ERR:EL0514] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:4: Undefined variable: super.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_typespec                                           1
-bit_var                                                1
 class_defn                                             3
 class_typespec                                         1
 class_var                                              1
-constant                                              10
+constant                                               2
 design                                                 1
 function                                               2
-int_typespec                                           9
-int_var                                                2
+int_typespec                                           6
+int_var                                                1
 io_decl                                                2
 method_func_call                                       1
-module_inst                                            1
-operation                                              2
-package                                                2
+package                                                1
 param_assign                                           1
 parameter                                              1
-range                                                  2
 ref_obj                                                8
-ref_typespec                                          13
+ref_typespec                                           9
 return_stmt                                            1
 short_int_typespec                                     1
 task                                                   1
-type_parameter                                         3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-bit_typespec                                           1
-bit_var                                                2
-class_defn                                             3
-class_typespec                                         1
-class_var                                              1
-constant                                              10
-design                                                 1
-function                                               4
-int_typespec                                           9
-int_var                                                3
-io_decl                                                4
-method_func_call                                       2
-module_inst                                            1
-operation                                              2
-package                                                2
-param_assign                                           2
-parameter                                              1
-range                                                  2
-ref_obj                                               16
-ref_typespec                                          22
-return_stmt                                            2
-short_int_typespec                                     1
-task                                                   2
 type_parameter                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncTask/slpp_unit/surelog.uhdm ...
@@ -74,7 +34,6 @@ type_parameter                                         3
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
@@ -83,36 +42,12 @@ design: (unnamed)
   |vpiName:pack
   |vpiFullName:pack::
   |vpiDefName:pack
-|uhdmtopPackages:
-\_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:pack
-  |vpiFullName:pack::
-  |vpiDefName:pack
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
     |vpiName:C
     |vpiFullName:pack::C
-    |vpiVariables:
-    \_int_var: (pack::C::x), line:13:7, endln:13:8
-      |vpiParent:
-      \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
-      |vpiTypespec:
-      \_ref_typespec: (pack::C::x)
-        |vpiParent:
-        \_int_var: (pack::C::x), line:13:7, endln:13:8
-        |vpiFullName:pack::C::x
-        |vpiActual:
-        \_int_typespec: , line:13:3, endln:13:6
-      |vpiName:x
-      |vpiFullName:pack::C::x
-      |vpiSigned:1
-      |vpiAutomatic:1
-      |vpiVisibility:1
     |vpiParameter:
     \_type_parameter: (pack::C::T), line:12:16, endln:12:17
       |vpiParent:
@@ -232,16 +167,12 @@ design: (unnamed)
           \_assignment: , line:20:5, endln:20:10
           |vpiName:i
           |vpiFullName:pack::C::set::i
-          |vpiActual:
-          \_io_decl: (i), line:19:17, endln:19:18
         |vpiLhs:
         \_ref_obj: (pack::C::set::x), line:20:5, endln:20:6
           |vpiParent:
           \_assignment: , line:20:5, endln:20:10
           |vpiName:x
           |vpiFullName:pack::C::set::x
-          |vpiActual:
-          \_int_var: (pack::C::x), line:13:7, endln:13:8
     |vpiMethod:
     \_function: (pack::C::get), line:22:3, endln:24:14
       |vpiParent:
@@ -273,33 +204,16 @@ design: (unnamed)
           \_return_stmt: , line:23:5, endln:23:11
           |vpiName:x
           |vpiFullName:pack::C::get::x
-          |vpiActual:
-          \_int_var: (pack::C::x), line:13:7, endln:13:8
   |vpiClassDefn:
   \_class_defn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
     |vpiName:Vector
     |vpiFullName:pack::Vector
-    |vpiVariables:
-    \_bit_var: (pack::Vector::data), line:6:19, endln:6:23
-      |vpiParent:
-      \_class_defn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
-      |vpiTypespec:
-      \_ref_typespec: (pack::Vector::data)
-        |vpiParent:
-        \_bit_var: (pack::Vector::data), line:6:19, endln:6:23
-        |vpiFullName:pack::Vector::data
-        |vpiActual:
-        \_bit_typespec: , line:6:3, endln:6:18
-      |vpiName:data
-      |vpiFullName:pack::Vector::data
-      |vpiAutomatic:1
-      |vpiVisibility:1
     |vpiParameter:
     \_parameter: (pack::Vector::WIDTH), line:5:26, endln:5:31
       |vpiParent:
-      \_param_assign: , line:5:26, endln:5:33
+      \_class_defn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (pack::Vector::WIDTH)
@@ -368,64 +282,6 @@ design: (unnamed)
   |vpiParent:
   \_type_parameter: (pack::C::T), line:12:16, endln:12:17
   |vpiSigned:1
-\_function: (pack::C::new), line:15:3, endln:17:14
-  |vpiParent:
-  \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
-  |vpiName:new
-  |vpiFullName:pack::C::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (pack::C::new), line:15:21, endln:15:26
-  |vpiIODecl:
-  \_io_decl: (bound), line:15:21, endln:15:26
-    |vpiParent:
-    \_function: (pack::C::new), line:15:3, endln:17:14
-    |vpiDirection:1
-    |vpiName:bound
-    |vpiExpr:
-    \_constant: , line:15:29, endln:15:30
-    |vpiTypedef:
-    \_ref_typespec: (pack::C::new::bound)
-      |vpiParent:
-      \_io_decl: (bound), line:15:21, endln:15:26
-      |vpiFullName:pack::C::new::bound
-      |vpiActual:
-      \_int_typespec: , line:15:17, endln:15:20
-  |vpiStmt:
-  \_method_func_call: (super.new)
-    |vpiParent:
-    \_function: (pack::C::new), line:15:3, endln:17:14
-    |vpiArgument:
-    \_ref_obj: (pack::C::new::name), line:16:15, endln:16:19
-      |vpiParent:
-      \_method_func_call: (super.new)
-      |vpiName:name
-      |vpiFullName:pack::C::new::name
-    |vpiArgument:
-    \_ref_obj: (pack::C::new::parent), line:16:21, endln:16:27
-      |vpiParent:
-      \_method_func_call: (super.new)
-      |vpiName:parent
-      |vpiFullName:pack::C::new::parent
-    |vpiArgument:
-    \_ref_obj: (pack::C::new::UVM_PORT), line:16:29, endln:16:37
-      |vpiParent:
-      \_method_func_call: (super.new)
-      |vpiName:UVM_PORT
-      |vpiFullName:pack::C::new::UVM_PORT
-    |vpiArgument:
-    \_ref_obj: (pack::C::new::min_size), line:16:39, endln:16:47
-      |vpiParent:
-      \_method_func_call: (super.new)
-      |vpiName:min_size
-      |vpiFullName:pack::C::new::min_size
-    |vpiArgument:
-    \_ref_obj: (pack::C::new::max_size), line:16:49, endln:16:57
-      |vpiParent:
-      \_method_func_call: (super.new)
-      |vpiName:max_size
-      |vpiFullName:pack::C::new::max_size
-    |vpiName:super.new
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
@@ -433,34 +289,8 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:19:13, endln:19:16
   |vpiSigned:1
-\_function: (pack::C::get), line:22:3, endln:24:14
-  |vpiParent:
-  \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
-  |vpiName:get
-  |vpiFullName:pack::C::get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (pack::C::get), line:22:12, endln:22:15
-  |vpiStmt:
-  \_return_stmt: , line:23:5, endln:23:11
-    |vpiParent:
-    \_function: (pack::C::get), line:22:3, endln:24:14
-    |vpiCondition:
-    \_ref_obj: (pack::C::get::x), line:23:12, endln:23:13
-      |vpiParent:
-      \_return_stmt: , line:23:5, endln:23:11
-      |vpiName:x
-      |vpiFullName:pack::C::get::x
 \_int_typespec: , line:22:12, endln:22:15
   |vpiSigned:1
-\_param_assign: , line:5:26, endln:5:33
-  |vpiParent:
-  \_class_defn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
-  |vpiRhs:
-  \_constant: , line:5:32, endln:5:33
-  |vpiLhs:
-  \_parameter: (pack::Vector::WIDTH), line:5:26, endln:5:31
 \_int_typespec: , line:5:16, endln:5:33
 \_int_typespec: , line:9:26, endln:9:29
   |vpiParent:
@@ -470,68 +300,12 @@ design: (unnamed)
   |vpiParent:
   \_type_parameter: (pack::ovm_queue::Q), line:9:36, endln:9:37
   |vpiSigned:1
-\_int_typespec: , line:13:3, endln:13:6
-  |vpiParent:
-  \_int_var: (pack::C::x), line:13:7, endln:13:8
-  |vpiSigned:1
-\_int_var: (pack::C::x), line:13:7, endln:13:8
-  |vpiParent:
-  \_class_defn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
-  |vpiTypespec:
-  \_ref_typespec: (pack::C::x)
-    |vpiParent:
-    \_int_var: (pack::C::x), line:13:7, endln:13:8
-    |vpiFullName:pack::C::x
-    |vpiActual:
-    \_int_typespec: , line:13:3, endln:13:6
-  |vpiName:x
-  |vpiFullName:pack::C::x
-  |vpiSigned:1
-  |vpiAutomatic:1
-  |vpiVisibility:1
-\_bit_typespec: , line:6:3, endln:6:18
-  |vpiParent:
-  \_bit_var: (pack::Vector::data), line:6:19, endln:6:23
-  |vpiRange:
-  \_range: , line:6:7, endln:6:18
-    |vpiParent:
-    \_bit_typespec: , line:6:3, endln:6:18
-    |vpiLeftRange:
-    \_constant: , line:6:8, endln:6:13
-      |vpiParent:
-      \_range: , line:6:7, endln:6:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:7, endln:6:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_bit_var: (pack::Vector::data), line:6:19, endln:6:23
-  |vpiParent:
-  \_class_defn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
-  |vpiTypespec:
-  \_ref_typespec: (pack::Vector::data)
-    |vpiParent:
-    \_bit_var: (pack::Vector::data), line:6:19, endln:6:23
-    |vpiFullName:pack::Vector::data
-    |vpiActual:
-    \_bit_typespec: , line:6:3, endln:6:18
-  |vpiName:data
-  |vpiFullName:pack::Vector::data
-  |vpiAutomatic:1
-  |vpiVisibility:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:12:1: Non synthesizable construct, C
@@ -540,5 +314,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv | ${SURELOG_DIR}/build/regression/ClassFuncTask/roundtrip/dut_000.sv | 17 | 27 |
+[roundtrip]: ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv | ${SURELOG_DIR}/build/regression/ClassFuncTask/roundtrip/dut_000.sv | 8 | 27 |
 ============================== End RoundTrip Results ==============================

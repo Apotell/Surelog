@@ -6,23 +6,13 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageOrder/dut.sv:5:1: No timescale set for "D".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageOrder/dut.sv:10:1: No timescale set for "A".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageOrder/dut.sv:1:1: Compile package "B".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageOrder/dut.sv:5:1: Compile package "D".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageOrder/dut.sv:10:1: Compile package "A".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               4
+constant                                               2
 design                                                 1
-import_typespec                                        4
-logic_typespec                                         2
-package                                                6
+import_typespec                                        2
+logic_typespec                                         1
+package                                                3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageOrder/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageOrder/slpp_unit/checker/surelog.chk.html ...
@@ -43,7 +33,7 @@ design: (unnamed)
     \_package: B (B::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
     |vpiName:B::C
     |vpiInstance:
-    \_package: B (B::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
+    \_package: A (A::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
   |vpiDefName:B
 |uhdmallPackages:
 \_package: D (D::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11
@@ -53,11 +43,6 @@ design: (unnamed)
   |vpiFullName:D::
   |vpiTypedef:
   \_logic_typespec: (B::C), line:2:11, endln:2:16
-    |vpiParent:
-    \_package: A (A::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
-    |vpiName:B::C
-    |vpiInstance:
-    \_package: A (A::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
   |vpiTypedef:
   \_import_typespec: (B), line:6:10, endln:6:14
   |vpiDefName:D
@@ -72,46 +57,12 @@ design: (unnamed)
   |vpiTypedef:
   \_import_typespec: (D), line:11:10, endln:11:14
   |vpiDefName:A
-|uhdmtopPackages:
-\_package: B (B::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:B
-  |vpiFullName:B::
-  |vpiTypedef:
-  \_logic_typespec: (B::C), line:2:11, endln:2:16
-  |vpiDefName:B
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: D (D::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:D
-  |vpiFullName:D::
-  |vpiTypedef:
-  \_logic_typespec: (B::C), line:2:11, endln:2:16
-  |vpiTypedef:
-  \_import_typespec: (B), line:6:10, endln:6:14
-  |vpiDefName:D
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: A (A::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:A
-  |vpiFullName:A::
-  |vpiTypedef:
-  \_logic_typespec: (B::C), line:2:11, endln:2:16
-  |vpiTypedef:
-  \_import_typespec: (D), line:11:10, endln:11:14
-  |vpiDefName:A
-  |vpiTop:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackageOrder/dut.sv | ${SURELOG_DIR}/build/regression/PackageOrder/roundtrip/dut_000.sv | 0 | 12 |

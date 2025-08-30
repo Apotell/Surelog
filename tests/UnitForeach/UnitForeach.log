@@ -438,7 +438,6 @@ n<> u<130> t<Top_level_rule> c<1> l<3:1> el<15:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitForeach/top2.v:3:1: No timescale set for "uvm_pkg".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/UnitForeach/top2.v:3:1: Compile package "uvm_pkg".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/UnitForeach/builtin.sv
@@ -698,62 +697,40 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: Compile class "work@moreobj".
 [INF:CP0302] ${SURELOG_DIR}/tests/UnitForeach/top.v:7:1: Compile class "work@uvm_reg_map".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:56:11: Function "bad1" is not defined for variable "submap" of type work@uvm_reg_map,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:7:1: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:57:11: Function "bad2" is not defined for variable "m_submaps" of type work@moreobj,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:62:11: Function "bad3" is not defined for variable "i" of type integer,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:61:15: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:63:11: Function "bad4" is not defined for variable "m_submaps" of type work@moreobj,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:68:10: Function "bad5" is not defined for variable "i" of type integer,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:61:15: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:69:10: Function "bad6" is not defined for variable "m_submaps3" of type work@moreobj,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: type definition.
-[ERR:CP0332] ${SURELOG_DIR}/tests/UnitForeach/top.v:76:10: Function "bad6" is not defined for variable "submap" of type work@uvm_reg_map,
-             ${SURELOG_DIR}/tests/UnitForeach/top.v:7:1: type definition.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         4
-array_var                                              4
+array_typespec                                         1
+array_var                                              1
 assignment                                             2
-begin                                                  7
-bit_select                                             4
+begin                                                  6
+bit_select                                             2
 class_defn                                            10
-class_typespec                                         9
-class_var                                              7
-constant                                              25
+class_typespec                                         5
+class_var                                              4
+constant                                              13
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
-foreach_stmt                                           6
-function                                              13
-hier_path                                              7
-int_typespec                                          10
-int_var                                                5
-io_decl                                               13
+foreach_stmt                                           5
+function                                              12
+hier_path                                              3
+int_typespec                                           9
+int_var                                                4
+io_decl                                               12
 logic_var                                              2
-method_func_call                                      23
-module_inst                                            2
+method_func_call                                      18
 operation                                              1
-package                                                4
-range                                                  5
-ref_obj                                               35
-ref_typespec                                          41
-ref_var                                               12
+package                                                2
+range                                                  1
+ref_obj                                               23
+ref_typespec                                          28
+ref_var                                               10
 string_typespec                                        1
 string_var                                             1
-sys_func_call                                          4
+sys_func_call                                          2
 task                                                   9
-unsupported_typespec                                  14
+unsupported_typespec                                  11
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/checker/surelog.chk.html ...
@@ -769,6 +746,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
   |vpiParent:
@@ -963,270 +970,6 @@ design: (unnamed)
                   \_hier_path: (arb_sequence_q[i].sequence_id), line:10:67, endln:10:96
                   |vpiName:i
                   |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-              |vpiActual:
-              \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::sequence_id), line:10:85, endln:10:96
-                |vpiParent:
-                \_hier_path: (arb_sequence_q[i].sequence_id), line:10:67, endln:10:96
-                |vpiName:sequence_id
-                |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::sequence_id
-              |vpiName:arb_sequence_q[i].sequence_id
-            |vpiName:$sformatf
-          |vpiArgument:
-          \_constant: , line:10:99, endln:10:102
-            |vpiParent:
-            \_method_func_call: (print_string), line:9:15, endln:9:27
-            |vpiDecompile:"["
-            |vpiSize:8
-            |STRING:[
-            |vpiConstType:6
-          |vpiName:print_string
-          |vpiPrefix:
-          \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::printer), line:9:7, endln:9:14
-            |vpiParent:
-            \_method_func_call: (print_string), line:9:15, endln:9:27
-            |vpiName:printer
-            |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::printer
-    |vpiInstance:
-    \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
-  |vpiClassDefn:
-  \_class_defn: (builtin::any_sverilog_class)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:any_sverilog_class
-    |vpiFullName:builtin::any_sverilog_class
-  |vpiClassDefn:
-  \_class_defn: (builtin::array)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:array
-    |vpiFullName:builtin::array
-  |vpiClassDefn:
-  \_class_defn: (builtin::queue)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:queue
-    |vpiFullName:builtin::queue
-  |vpiClassDefn:
-  \_class_defn: (builtin::string)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:string
-    |vpiFullName:builtin::string
-  |vpiClassDefn:
-  \_class_defn: (builtin::system)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:system
-    |vpiFullName:builtin::system
-|uhdmtopPackages:
-\_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:uvm_pkg
-  |vpiFullName:uvm_pkg::
-  |vpiDefName:uvm_pkg
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
-    |vpiParent:
-    \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-    |vpiName:uvm_sequencer_base::do_print
-    |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (printer), line:5:59, endln:5:66
-      |vpiParent:
-      \_function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
-      |vpiDirection:1
-      |vpiName:printer
-      |vpiTypedef:
-      \_ref_typespec: (uvm_pkg::uvm_sequencer_base::do_print::printer)
-        |vpiParent:
-        \_io_decl: (printer), line:5:59, endln:5:66
-        |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::printer
-        |vpiActual:
-        \_unsupported_typespec: (uvm_printer), line:5:47, endln:5:58
-    |vpiStmt:
-    \_begin: (uvm_pkg::uvm_sequencer_base::do_print), line:7:5, endln:7:76
-      |vpiParent:
-      \_function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
-      |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print
-      |vpiStmt:
-      \_method_func_call: (do_print), line:6:11, endln:6:19
-        |vpiParent:
-        \_begin: (uvm_pkg::uvm_sequencer_base::do_print), line:7:5, endln:7:76
-        |vpiArgument:
-        \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::printer), line:6:20, endln:6:27
-          |vpiParent:
-          \_method_func_call: (do_print), line:6:11, endln:6:19
-          |vpiName:printer
-          |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::printer
-          |vpiActual:
-          \_io_decl: (printer), line:5:59, endln:5:66
-        |vpiName:do_print
-        |vpiPrefix:
-        \_constant: , line:6:5, endln:6:10
-          |vpiDecompile:super
-          |vpiSize:5
-          |STRING:super
-          |vpiConstType:6
-      |vpiStmt:
-      \_method_func_call: (print_array_header), line:7:13, endln:7:31
-        |vpiParent:
-        \_begin: (uvm_pkg::uvm_sequencer_base::do_print), line:7:5, endln:7:76
-        |vpiArgument:
-        \_constant: , line:7:32, endln:7:51
-          |vpiParent:
-          \_method_func_call: (print_array_header), line:7:13, endln:7:31
-          |vpiDecompile:"arbitration_queue"
-          |vpiSize:136
-          |STRING:arbitration_queue
-          |vpiConstType:6
-        |vpiArgument:
-        \_hier_path: (arb_sequence_q.size), line:7:53, endln:7:74
-          |vpiParent:
-          \_method_func_call: (print_array_header), line:7:13, endln:7:31
-          |vpiActual:
-          \_ref_obj: (arb_sequence_q), line:7:53, endln:7:67
-            |vpiParent:
-            \_hier_path: (arb_sequence_q.size), line:7:53, endln:7:74
-            |vpiName:arb_sequence_q
-          |vpiActual:
-          \_method_func_call: (size), line:7:68, endln:7:72
-            |vpiParent:
-            \_hier_path: (arb_sequence_q.size), line:7:53, endln:7:74
-            |vpiName:size
-          |vpiName:arb_sequence_q.size
-        |vpiName:print_array_header
-        |vpiPrefix:
-        \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::printer), line:7:5, endln:7:12
-          |vpiParent:
-          \_method_func_call: (print_array_header), line:7:13, endln:7:31
-          |vpiName:printer
-          |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::printer
-      |vpiStmt:
-      \_foreach_stmt: (uvm_pkg::uvm_sequencer_base::do_print), line:8:5, endln:8:12
-        |vpiParent:
-        \_begin: (uvm_pkg::uvm_sequencer_base::do_print), line:7:5, endln:7:76
-        |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print
-        |vpiVariables:
-        \_ref_var: (uvm_pkg::uvm_sequencer_base::do_print::arb_sequence_q), line:8:14, endln:8:28
-          |vpiParent:
-          \_foreach_stmt: (uvm_pkg::uvm_sequencer_base::do_print), line:8:5, endln:8:12
-          |vpiTypespec:
-          \_ref_typespec: (uvm_pkg::uvm_sequencer_base::do_print::arb_sequence_q)
-            |vpiParent:
-            \_ref_var: (uvm_pkg::uvm_sequencer_base::do_print::arb_sequence_q), line:8:14, endln:8:28
-            |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::arb_sequence_q
-            |vpiActual:
-            \_unsupported_typespec: (arb_sequence_q), line:8:14, endln:8:28
-          |vpiName:arb_sequence_q
-          |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::arb_sequence_q
-        |vpiLoopVars:
-        \_int_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
-          |vpiParent:
-          \_foreach_stmt: (uvm_pkg::uvm_sequencer_base::do_print), line:8:5, endln:8:12
-          |vpiTypespec:
-          \_ref_typespec: (uvm_pkg::uvm_sequencer_base::do_print::i)
-            |vpiParent:
-            \_int_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
-            |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-            |vpiActual:
-            \_int_typespec: 
-          |vpiName:i
-          |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-        |vpiStmt:
-        \_method_func_call: (print_string), line:9:15, endln:9:27
-          |vpiParent:
-          \_foreach_stmt: (uvm_pkg::uvm_sequencer_base::do_print), line:8:5, endln:8:12
-          |vpiArgument:
-          \_sys_func_call: ($sformatf), line:9:28, endln:9:49
-            |vpiParent:
-            \_method_func_call: (print_string), line:9:15, endln:9:27
-            |vpiArgument:
-            \_constant: , line:9:38, endln:9:45
-              |vpiParent:
-              \_sys_func_call: ($sformatf), line:9:28, endln:9:49
-              |vpiDecompile:"[%0d]"
-              |vpiSize:40
-              |STRING:[%0d]
-              |vpiConstType:6
-            |vpiArgument:
-            \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::i), line:9:47, endln:9:48
-              |vpiParent:
-              \_sys_func_call: ($sformatf), line:9:28, endln:9:49
-              |vpiName:i
-              |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-              |vpiActual:
-              \_int_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
-            |vpiName:$sformatf
-          |vpiArgument:
-          \_sys_func_call: ($sformatf), line:10:10, endln:10:97
-            |vpiParent:
-            \_method_func_call: (print_string), line:9:15, endln:9:27
-            |vpiArgument:
-            \_constant: , line:10:20, endln:10:33
-              |vpiParent:
-              \_sys_func_call: ($sformatf), line:10:10, endln:10:97
-              |vpiDecompile:"%s@seqid%0d"
-              |vpiSize:88
-              |STRING:%s@seqid%0d
-              |vpiConstType:6
-            |vpiArgument:
-            \_hier_path: (arb_sequence_q[i].request.name), line:10:34, endln:10:66
-              |vpiParent:
-              \_sys_func_call: ($sformatf), line:10:10, endln:10:97
-              |vpiActual:
-              \_bit_select: (arb_sequence_q[i]), line:10:34, endln:10:48
-                |vpiParent:
-                \_hier_path: (arb_sequence_q[i].request.name), line:10:34, endln:10:66
-                |vpiName:arb_sequence_q
-                |vpiFullName:arb_sequence_q[i]
-                |vpiIndex:
-                \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::i), line:10:49, endln:10:50
-                  |vpiParent:
-                  \_hier_path: (arb_sequence_q[i].request.name), line:10:34, endln:10:66
-                  |vpiName:i
-                  |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-                  |vpiActual:
-                  \_int_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
-              |vpiActual:
-              \_ref_obj: (request), line:10:52, endln:10:59
-                |vpiParent:
-                \_hier_path: (arb_sequence_q[i].request.name), line:10:34, endln:10:66
-                |vpiName:request
-              |vpiActual:
-              \_method_func_call: (name), line:10:60, endln:10:64
-                |vpiParent:
-                \_hier_path: (arb_sequence_q[i].request.name), line:10:34, endln:10:66
-                |vpiName:name
-              |vpiName:arb_sequence_q[i].request.name
-            |vpiArgument:
-            \_hier_path: (arb_sequence_q[i].sequence_id), line:10:67, endln:10:96
-              |vpiParent:
-              \_sys_func_call: ($sformatf), line:10:10, endln:10:97
-              |vpiActual:
-              \_bit_select: (arb_sequence_q[i]), line:10:67, endln:10:81
-                |vpiParent:
-                \_hier_path: (arb_sequence_q[i].sequence_id), line:10:67, endln:10:96
-                |vpiName:arb_sequence_q
-                |vpiFullName:arb_sequence_q[i]
-                |vpiIndex:
-                \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::i), line:10:82, endln:10:83
-                  |vpiParent:
-                  \_hier_path: (arb_sequence_q[i].sequence_id), line:10:67, endln:10:96
-                  |vpiName:i
-                  |vpiFullName:uvm_pkg::uvm_sequencer_base::do_print::i
-                  |vpiActual:
-                  \_int_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
               |vpiActual:
               \_ref_obj: (uvm_pkg::uvm_sequencer_base::do_print::sequence_id), line:10:85, endln:10:96
                 |vpiParent:
@@ -1713,96 +1456,6 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@uvm_reg_map
-  |vpiVariables:
-  \_array_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-    |vpiParent:
-    \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-    |vpiSize:1
-    |vpiTypespec:
-    \_ref_typespec: (work@uvm_reg_map::m_submaps)
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-      |vpiFullName:work@uvm_reg_map::m_submaps
-      |vpiActual:
-      \_array_typespec: 
-    |vpiName:m_submaps
-    |vpiFullName:work@uvm_reg_map::m_submaps
-    |vpiAutomatic:1
-    |vpiRandType:1
-    |vpiVisibility:3
-    |vpiArrayType:3
-    |vpiReg:
-    \_class_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-      |vpiTypespec:
-      \_ref_typespec: (work@uvm_reg_map::m_submaps)
-        |vpiParent:
-        \_class_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-        |vpiFullName:work@uvm_reg_map::m_submaps
-        |vpiActual:
-        \_class_typespec: (moreobj), line:46:9, endln:46:16
-      |vpiFullName:work@uvm_reg_map::m_submaps
-  |vpiVariables:
-  \_array_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-    |vpiParent:
-    \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-    |vpiSize:1
-    |vpiTypespec:
-    \_ref_typespec: (work@uvm_reg_map::m_submaps2)
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-      |vpiFullName:work@uvm_reg_map::m_submaps2
-      |vpiActual:
-      \_array_typespec: 
-    |vpiName:m_submaps2
-    |vpiFullName:work@uvm_reg_map::m_submaps2
-    |vpiAutomatic:1
-    |vpiRandType:1
-    |vpiVisibility:3
-    |vpiArrayType:3
-    |vpiReg:
-    \_class_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-      |vpiTypespec:
-      \_ref_typespec: (work@uvm_reg_map::m_submaps2)
-        |vpiParent:
-        \_class_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-        |vpiFullName:work@uvm_reg_map::m_submaps2
-        |vpiActual:
-        \_class_typespec: (moreobj), line:47:9, endln:47:16
-      |vpiFullName:work@uvm_reg_map::m_submaps2
-  |vpiVariables:
-  \_array_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-    |vpiParent:
-    \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-    |vpiSize:1
-    |vpiTypespec:
-    \_ref_typespec: (work@uvm_reg_map::m_submaps3)
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-      |vpiFullName:work@uvm_reg_map::m_submaps3
-      |vpiActual:
-      \_array_typespec: 
-    |vpiName:m_submaps3
-    |vpiFullName:work@uvm_reg_map::m_submaps3
-    |vpiAutomatic:1
-    |vpiRandType:1
-    |vpiVisibility:3
-    |vpiArrayType:4
-    |vpiReg:
-    \_class_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-      |vpiParent:
-      \_array_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-      |vpiTypespec:
-      \_ref_typespec: (work@uvm_reg_map::m_submaps3)
-        |vpiParent:
-        \_class_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-        |vpiFullName:work@uvm_reg_map::m_submaps3
-        |vpiActual:
-        \_class_typespec: (moreobj), line:48:9, endln:48:16
-      |vpiFullName:work@uvm_reg_map::m_submaps3
   |vpiMethod:
   \_function: (work@uvm_reg_map::set_check_on_read), line:49:3, endln:79:15
     |vpiParent:
@@ -2165,14 +1818,6 @@ design: (unnamed)
   |vpiName:arb_sequence_q
   |vpiInstance:
   \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-\_unsupported_typespec: (uvm_printer), line:5:47, endln:5:58
-  |vpiName:uvm_printer
-  |vpiInstance:
-  \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-\_unsupported_typespec: (arb_sequence_q), line:8:14, endln:8:28
-  |vpiName:arb_sequence_q
-  |vpiInstance:
-  \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
 \_unsupported_typespec: (i), line:8:29, endln:8:30
   |vpiParent:
   \_ref_var: (uvm_pkg::uvm_sequencer_base::do_print::i), line:8:29, endln:8:30
@@ -2270,48 +1915,12 @@ design: (unnamed)
   |vpiParent:
   \_ref_var: (work@uvm_reg_map::set_check_on_read::submap), line:74:22, endln:74:28
   |vpiName:submap
-\_class_typespec: (moreobj), line:46:9, endln:46:16
-  |vpiParent:
-  \_class_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:30
-  |vpiName:moreobj
-  |vpiClassDefn:
-  \_class_defn: (work@moreobj), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:1:1, endln:4:9
-\_array_typespec: 
-  |vpiIndexTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: 
-    |vpiActual:
-    \_class_typespec: (uvm_reg_map), line:46:31, endln:46:42
-\_class_typespec: (uvm_reg_map), line:46:31, endln:46:42
-  |vpiName:uvm_reg_map
-  |vpiClassDefn:
-  \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-\_class_typespec: (moreobj), line:47:9, endln:47:16
-  |vpiParent:
-  \_class_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:31
-  |vpiName:moreobj
-  |vpiClassDefn:
-  \_class_defn: (work@moreobj), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:1:1, endln:4:9
-\_array_typespec: 
-  |vpiIndexTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: 
-\_class_typespec: (moreobj), line:48:9, endln:48:16
-  |vpiParent:
-  \_class_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
-  |vpiName:moreobj
-  |vpiClassDefn:
-  \_class_defn: (work@moreobj), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:1:1, endln:4:9
-\_array_typespec: 
-\_int_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 7
+[  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:6:11: Non synthesizable construct, do_print
@@ -2319,15 +1928,21 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:13: Non synthesizable construct, print_array_header
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:60: Non synthesizable construct, name
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:9:15: Non synthesizable construct, print_string
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:6:11: Non synthesizable construct, do_print
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:68: Non synthesizable construct, size
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:13: Non synthesizable construct, print_array_header
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:60: Non synthesizable construct, name
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:9:15: Non synthesizable construct, print_string
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: Non synthesizable construct, work@moreobj
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:52:17: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:55:18: Non synthesizable construct, set_check_on_read
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:56:18: Non synthesizable construct, bad1
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:57:29: Non synthesizable construct, bad2
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:58:29: Non synthesizable construct, mine
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:62:13: Non synthesizable construct, bad3
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:63:24: Non synthesizable construct, bad4
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:64:24: Non synthesizable construct, mine
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:68:12: Non synthesizable construct, bad5
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:69:24: Non synthesizable construct, bad6
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:70:24: Non synthesizable construct, mine
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:75:17: Non synthesizable construct, set_check_on_read
+[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:76:17: Non synthesizable construct, bad6
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:7:1: Non synthesizable construct, work@uvm_reg_map
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:5:47: Unsupported typespec, uvm_printer
-[LINT]: ${SURELOG_DIR}/tests/UnitForeach/top2.v:8:14: Unsupported typespec, arb_sequence_q
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================

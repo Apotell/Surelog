@@ -10,29 +10,28 @@ LIB: realLib
      ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr
 
 LIB: logicLib
-     ${SURELOG_DIR}/tests/LibraryIntercon/driver.sv
-     ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv
      ${SURELOG_DIR}/tests/LibraryIntercon/top.sv
+     ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv
+     ${SURELOG_DIR}/tests/LibraryIntercon/driver.sv
 
 
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/lib.map".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.svr".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.sv".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/top.sv".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.sv".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.svr".
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.sv".
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/top.sv".
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv".
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/LibraryIntercon/driver.sv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg:1:1: No timescale set for "NetsPkg".
-[WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:1: No timescale set for "cmp".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: No timescale set for "top".
+[WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:1: No timescale set for "cmp".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg:1:1: Compile package "NetsPkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:1: Compile module "logicLib@cmp".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/driver.sv:2:1: Compile module "logicLib@driver".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: Compile module "logicLib@top".
@@ -41,71 +40,16 @@ LIB: logicLib
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] logicLib@top logicLib@top
-[MOD] realLib@driver logicLib@top.driverArray[0]
-[MOD] realLib@driver logicLib@top.driverArray[1]
-[MOD] realLib@driver logicLib@top.driverArray[2]
-[MOD] realLib@driver logicLib@top.driverArray[3]
-[MOD] realLib@cmp logicLib@top.cmpArray[0]
-[MOD] realLib@cmp logicLib@top.cmpArray[1]
-[MOD] realLib@cmp logicLib@top.cmpArray[2]
-[MOD] realLib@cmp logicLib@top.cmpArray[3]
-[SCO] realLib@driver.genblk1 logicLib@top.driverArray[0].genblk1
-[SCO] realLib@driver.genblk1 logicLib@top.driverArray[1].genblk1
-[SCO] realLib@driver.genblk1 logicLib@top.driverArray[2].genblk1
-[SCO] realLib@driver.genblk1 logicLib@top.driverArray[3].genblk1
-[SCO] realLib@cmp.genblk1 logicLib@top.cmpArray[0].genblk1
-[SCO] realLib@cmp.genblk1 logicLib@top.cmpArray[1].genblk1
-[SCO] realLib@cmp.genblk1 logicLib@top.cmpArray[2].genblk1
-[SCO] realLib@cmp.genblk1 logicLib@top.cmpArray[3].genblk1
-[SCO] realLib@driver.genblk1.genblk1 logicLib@top.driverArray[0].genblk1.genblk1
-[SCO] realLib@driver.genblk1.genblk1 logicLib@top.driverArray[1].genblk1.genblk1
-[SCO] realLib@driver.genblk1.genblk1 logicLib@top.driverArray[2].genblk1.genblk1
-[SCO] realLib@driver.genblk1.genblk1 logicLib@top.driverArray[3].genblk1.genblk1
-
-[NTE:EL0519] ${SURELOG_DIR}/tests/LibraryIntercon/lib.map:5:1: Using configuration "work@cfgReal".
-[NTE:EL0520] ${SURELOG_DIR}/tests/LibraryIntercon/lib.map:10:1: Ignoring configuration "work@cfgLogic".
-[NTE:EL0503] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: Top level module "logicLib@top".
-[ERR:UH0703] Internal Error: adding wrong object type (real_var) in a enum_struct_union_packed_var_group group!.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 9.
-[NTE:EL0511] Nb leaf instances: 0.
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: Instance "logicLib@top".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:5:1: Instance "logicLib@top.driverArray[0]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:5:1: Instance "logicLib@top.driverArray[1]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:5:1: Instance "logicLib@top.driverArray[2]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:5:1: Instance "logicLib@top.driverArray[3]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:7:1: Instance "logicLib@top.cmpArray[0]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:7:1: Instance "logicLib@top.cmpArray[1]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:7:1: Instance "logicLib@top.cmpArray[2]".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:7:1: Instance "logicLib@top.cmpArray[3]".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:11:1: Scope "logicLib@top.driverArray[0].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:11:1: Scope "logicLib@top.driverArray[1].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:11:1: Scope "logicLib@top.driverArray[2].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:11:1: Scope "logicLib@top.driverArray[3].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:25:1: Scope "logicLib@top.cmpArray[0].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:25:1: Scope "logicLib@top.cmpArray[1].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:25:1: Scope "logicLib@top.cmpArray[2].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:25:1: Scope "logicLib@top.cmpArray[3].genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:15:5: Scope "logicLib@top.driverArray[0].genblk1.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:15:5: Scope "logicLib@top.driverArray[1].genblk1.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:15:5: Scope "logicLib@top.driverArray[2].genblk1.genblk1".
-[NTE:EL0522] ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:15:5: Scope "logicLib@top.driverArray[3].genblk1.genblk1".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 2
-array_typespec                                         4
-array_var                                              4
 assignment                                            15
 begin                                                  5
-bit_select                                            14
+bit_select                                            10
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                             176
+constant                                              56
 cont_assign                                            2
 delay_control                                          3
 design                                                 1
@@ -119,37 +63,2046 @@ if_else                                                4
 if_stmt                                                1
 import_typespec                                        2
 initial                                                4
-int_typespec                                          23
+int_typespec                                          15
 int_var                                                6
 io_decl                                               11
-logic_net                                             23
-logic_typespec                                        27
-logic_var                                              2
-module_array                                           3
-module_inst                                           25
-module_typespec                                        3
+logic_net                                             13
+logic_typespec                                         9
+logic_var                                              1
+module_array                                           1
+module_inst                                            5
+module_typespec                                        1
 operation                                             11
-package                                                4
-packed_array_var                                       8
-param_assign                                          18
-parameter                                             18
-port                                                  25
-range                                                 51
-real_typespec                                         36
-real_var                                              16
-ref_obj                                               65
-ref_typespec                                         161
+package                                                2
+param_assign                                           6
+parameter                                              6
+port                                                   9
+range                                                  9
+real_typespec                                          7
+ref_obj                                               37
+ref_typespec                                          45
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LibraryIntercon/slpp_unit/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LibraryIntercon/slpp_unit/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LibraryIntercon/slpp_unit/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallPackages:
+\_package: builtin (builtin::)
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:builtin
+  |vpiFullName:builtin::
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
+|uhdmallPackages:
+\_package: NetsPkg (NetsPkg::), file:${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg, line:1:1, endln:5:21
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:NetsPkg
+  |vpiFullName:NetsPkg::
+  |vpiTypedef:
+  \_real_typespec: (NetsPkg::realNet), line:3:9, endln:3:13
+    |vpiParent:
+    \_package: NetsPkg (NetsPkg::), file:${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg, line:1:1, endln:5:21
+    |vpiName:NetsPkg::realNet
+    |vpiInstance:
+    \_package: NetsPkg (NetsPkg::), file:${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg, line:1:1, endln:5:21
+  |vpiDefName:NetsPkg
+  |vpiEndLabel:NetsPkg
+|uhdmallClasses:
+\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@mailbox
+  |vpiMethod:
+  \_function: (work@mailbox::new), line:3:5, endln:4:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:new
+    |vpiFullName:work@mailbox::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::new)
+        |vpiParent:
+        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@mailbox::new
+    |vpiIODecl:
+    \_io_decl: (bound), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiDirection:1
+      |vpiName:bound
+      |vpiExpr:
+      \_constant: , line:3:31, endln:3:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@mailbox::new::bound)
+        |vpiParent:
+        \_io_decl: (bound), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new::bound
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+  |vpiMethod:
+  \_function: (work@mailbox::num), line:6:5, endln:7:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:num
+    |vpiFullName:work@mailbox::num
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+      |vpiParent:
+      \_function: (work@mailbox::num), line:6:5, endln:7:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::num)
+        |vpiParent:
+        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+        |vpiFullName:work@mailbox::num
+        |vpiActual:
+        \_int_typespec: , line:6:14, endln:6:17
+      |vpiFullName:work@mailbox::num
+      |vpiSigned:1
+  |vpiMethod:
+  \_task: (work@mailbox::put), line:9:5, endln:10:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:put
+    |vpiFullName:work@mailbox::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:9:15, endln:9:22
+      |vpiParent:
+      \_task: (work@mailbox::put), line:9:5, endln:10:12
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_put
+    |vpiFullName:work@mailbox::try_put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@mailbox::try_put)
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiFullName:work@mailbox::try_put
+    |vpiIODecl:
+    \_io_decl: (message), line:12:23, endln:12:30
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::get), line:15:5, endln:16:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:get
+    |vpiFullName:work@mailbox::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:15:19, endln:15:26
+      |vpiParent:
+      \_task: (work@mailbox::get), line:15:5, endln:16:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_get
+    |vpiFullName:work@mailbox::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_get)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+        |vpiFullName:work@mailbox::try_get
+        |vpiActual:
+        \_int_typespec: , line:18:14, endln:18:17
+      |vpiFullName:work@mailbox::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:18:31, endln:18:38
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::peek), line:21:5, endln:22:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:peek
+    |vpiFullName:work@mailbox::peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:21:20, endln:21:27
+      |vpiParent:
+      \_task: (work@mailbox::peek), line:21:5, endln:22:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_peek
+    |vpiFullName:work@mailbox::try_peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_peek)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+        |vpiFullName:work@mailbox::try_peek
+        |vpiActual:
+        \_int_typespec: , line:24:14, endln:24:17
+      |vpiFullName:work@mailbox::try_peek
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:24:31, endln:24:38
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiDirection:6
+      |vpiName:message
+|uhdmallClasses:
+\_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@process
+  |vpiTypedef:
+  \_enum_typespec: (state), line:32:5, endln:32:74
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:state
+    |vpiEnumConst:
+    \_enum_const: (FINISHED), line:32:20, endln:32:28
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:FINISHED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (RUNNING), line:32:30, endln:32:37
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:RUNNING
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (WAITING), line:32:39, endln:32:46
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:WAITING
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:SUSPENDED
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (KILLED), line:32:59, endln:32:65
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:KILLED
+      |INT:4
+      |vpiDecompile:4
+      |vpiSize:64
+  |vpiMethod:
+  \_function: (work@process::self), line:34:5, endln:34:11
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:self
+    |vpiFullName:work@process::self
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_class_var: (work@process::self), line:34:21, endln:34:28
+      |vpiParent:
+      \_function: (work@process::self), line:34:5, endln:34:11
+      |vpiTypespec:
+      \_ref_typespec: (work@process::self)
+        |vpiParent:
+        \_class_var: (work@process::self), line:34:21, endln:34:28
+        |vpiFullName:work@process::self
+        |vpiActual:
+        \_class_typespec: , line:34:21, endln:34:28
+      |vpiFullName:work@process::self
+  |vpiMethod:
+  \_function: (work@process::status), line:37:5, endln:38:16
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:status
+    |vpiFullName:work@process::status
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_enum_var: (work@process::status), line:37:14, endln:37:19
+      |vpiParent:
+      \_function: (work@process::status), line:37:5, endln:38:16
+      |vpiTypespec:
+      \_ref_typespec: (work@process::status)
+        |vpiParent:
+        \_enum_var: (work@process::status), line:37:14, endln:37:19
+        |vpiFullName:work@process::status
+        |vpiActual:
+        \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiFullName:work@process::status
+  |vpiMethod:
+  \_task: (work@process::kill), line:40:5, endln:41:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:kill
+    |vpiFullName:work@process::kill
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::await), line:43:5, endln:44:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:await
+    |vpiFullName:work@process::await
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::suspend), line:46:5, endln:47:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:suspend
+    |vpiFullName:work@process::suspend
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::resume), line:49:5, endln:50:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+    |vpiName:resume
+    |vpiFullName:work@process::resume
+    |vpiMethod:1
+    |vpiVisibility:1
+|uhdmallClasses:
+\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@semaphore
+  |vpiMethod:
+  \_function: (work@semaphore::new), line:57:5, endln:58:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+    |vpiName:new
+    |vpiFullName:work@semaphore::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::new)
+        |vpiParent:
+        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@semaphore::new
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:57:33, endln:57:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::new::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new::keyCount
+        |vpiActual:
+        \_int_typespec: , line:57:18, endln:57:21
+  |vpiMethod:
+  \_task: (work@semaphore::put), line:60:5, endln:61:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+    |vpiName:put
+    |vpiFullName:work@semaphore::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:60:18, endln:60:26
+      |vpiParent:
+      \_task: (work@semaphore::put), line:60:5, endln:61:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:60:29, endln:60:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::put::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:60:18, endln:60:26
+        |vpiFullName:work@semaphore::put::keyCount
+        |vpiActual:
+        \_int_typespec: , line:60:14, endln:60:17
+  |vpiMethod:
+  \_task: (work@semaphore::get), line:63:5, endln:64:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+    |vpiName:get
+    |vpiFullName:work@semaphore::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:63:18, endln:63:26
+      |vpiParent:
+      \_task: (work@semaphore::get), line:63:5, endln:64:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:63:29, endln:63:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:63:18, endln:63:26
+        |vpiFullName:work@semaphore::get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:63:14, endln:63:17
+  |vpiMethod:
+  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+    |vpiName:try_get
+    |vpiFullName:work@semaphore::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::try_get)
+        |vpiParent:
+        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+        |vpiFullName:work@semaphore::try_get
+        |vpiActual:
+        \_int_typespec: , line:66:14, endln:66:17
+      |vpiFullName:work@semaphore::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:66:30, endln:66:38
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:66:41, endln:66:42
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::try_get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:66:30, endln:66:38
+        |vpiFullName:work@semaphore::try_get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:66:26, endln:66:29
+|uhdmallModules:
+\_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:logicLib@cmp
+  |vpiParameter:
+  \_parameter: (logicLib@cmp.hyst), line:2:29, endln:2:33
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |REAL:0.650000
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@cmp.hyst)
+      |vpiParent:
+      \_parameter: (logicLib@cmp.hyst), line:2:29, endln:2:33
+      |vpiFullName:logicLib@cmp.hyst
+      |vpiActual:
+      \_real_typespec: , line:2:24, endln:2:28
+    |vpiName:hyst
+    |vpiFullName:logicLib@cmp.hyst
+  |vpiParamAssign:
+  \_param_assign: , line:2:29, endln:2:40
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiRhs:
+    \_constant: , line:2:36, endln:2:40
+      |vpiParent:
+      \_param_assign: , line:2:29, endln:2:40
+      |vpiDecompile:0.65
+      |vpiSize:64
+      |REAL:0.650000
+      |vpiTypespec:
+      \_ref_typespec: (logicLib@cmp)
+        |vpiParent:
+        \_constant: , line:2:36, endln:2:40
+        |vpiFullName:logicLib@cmp
+        |vpiActual:
+        \_real_typespec: , line:2:24, endln:2:28
+      |vpiConstType:2
+    |vpiLhs:
+    \_parameter: (logicLib@cmp.hyst), line:2:29, endln:2:33
+  |vpiDefName:logicLib@cmp
+  |vpiNet:
+  \_logic_net: (logicLib@cmp.inA), line:4:25, endln:4:28
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:inA
+    |vpiFullName:logicLib@cmp.inA
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (logicLib@cmp.rst), line:5:13, endln:5:16
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:rst
+    |vpiFullName:logicLib@cmp.rst
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:out
+    |vpiFullName:logicLib@cmp.out
+    |vpiNetType:36
+  |vpiPort:
+  \_port: (inA), line:4:25, endln:4:28
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:inA
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (logicLib@cmp.inA.inA), line:4:25, endln:4:28
+      |vpiParent:
+      \_port: (inA), line:4:25, endln:4:28
+      |vpiName:inA
+      |vpiFullName:logicLib@cmp.inA.inA
+      |vpiActual:
+      \_logic_net: (logicLib@cmp.inA), line:4:25, endln:4:28
+    |vpiTypedef:
+    \_ref_typespec: (logicLib@cmp.inA)
+      |vpiParent:
+      \_port: (inA), line:4:25, endln:4:28
+      |vpiFullName:logicLib@cmp.inA
+      |vpiActual:
+      \_logic_typespec: , line:4:13, endln:4:24
+  |vpiPort:
+  \_port: (rst), line:5:13, endln:5:16
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:rst
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (logicLib@cmp.rst.rst), line:5:13, endln:5:16
+      |vpiParent:
+      \_port: (rst), line:5:13, endln:5:16
+      |vpiName:rst
+      |vpiFullName:logicLib@cmp.rst.rst
+      |vpiActual:
+      \_logic_net: (logicLib@cmp.rst), line:5:13, endln:5:16
+    |vpiTypedef:
+    \_ref_typespec: (logicLib@cmp.rst)
+      |vpiParent:
+      \_port: (rst), line:5:13, endln:5:16
+      |vpiFullName:logicLib@cmp.rst
+      |vpiActual:
+      \_logic_typespec: , line:5:7, endln:5:12
+  |vpiPort:
+  \_port: (out), line:8:2, endln:8:5
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiName:out
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (logicLib@cmp.out.out), line:8:2, endln:8:5
+      |vpiParent:
+      \_port: (out), line:8:2, endln:8:5
+      |vpiName:out
+      |vpiFullName:logicLib@cmp.out.out
+      |vpiActual:
+      \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+    |vpiTypedef:
+    \_ref_typespec: (logicLib@cmp.out)
+      |vpiParent:
+      \_port: (out), line:8:2, endln:8:5
+      |vpiFullName:logicLib@cmp.out
+      |vpiActual:
+      \_logic_typespec: , line:7:1, endln:7:6
+  |vpiProcess:
+  \_initial: , line:9:1, endln:10:13
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiStmt:
+    \_assignment: , line:10:2, endln:10:12
+      |vpiParent:
+      \_initial: , line:9:1, endln:10:13
+      |vpiOpType:82
+      |vpiBlocking:1
+      |vpiRhs:
+      \_constant: , line:10:8, endln:10:12
+        |vpiDecompile:1'b0
+        |vpiSize:1
+        |BIN:0
+        |vpiConstType:3
+      |vpiLhs:
+      \_ref_obj: (logicLib@cmp.out), line:10:2, endln:10:5
+        |vpiParent:
+        \_assignment: , line:10:2, endln:10:12
+        |vpiName:out
+        |vpiFullName:logicLib@cmp.out
+        |vpiActual:
+        \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+  |vpiProcess:
+  \_always: , line:11:1, endln:22:4
+    |vpiParent:
+    \_module_inst: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+    |vpiStmt:
+    \_event_control: , line:12:2, endln:12:13
+      |vpiParent:
+      \_always: , line:11:1, endln:22:4
+      |vpiCondition:
+      \_operation: , line:12:4, endln:12:12
+        |vpiParent:
+        \_event_control: , line:12:2, endln:12:13
+        |vpiOpType:37
+        |vpiOperand:
+        \_ref_obj: (logicLib@cmp.inA), line:12:4, endln:12:7
+          |vpiParent:
+          \_operation: , line:12:4, endln:12:12
+          |vpiName:inA
+          |vpiFullName:logicLib@cmp.inA
+          |vpiActual:
+          \_logic_net: (logicLib@cmp.inA), line:4:25, endln:4:28
+        |vpiOperand:
+        \_ref_obj: (logicLib@cmp.rst), line:12:9, endln:12:12
+          |vpiParent:
+          \_operation: , line:12:4, endln:12:12
+          |vpiName:rst
+          |vpiFullName:logicLib@cmp.rst
+          |vpiActual:
+          \_logic_net: (logicLib@cmp.rst), line:5:13, endln:5:16
+      |vpiStmt:
+      \_begin: (logicLib@cmp), line:13:1, endln:22:4
+        |vpiParent:
+        \_event_control: , line:12:2, endln:12:13
+        |vpiFullName:logicLib@cmp
+        |vpiStmt:
+        \_if_else: , line:14:1, endln:21:10
+          |vpiParent:
+          \_begin: (logicLib@cmp), line:13:1, endln:22:4
+          |vpiCondition:
+          \_ref_obj: (logicLib@cmp.rst), line:15:3, endln:15:6
+            |vpiParent:
+            \_begin: (logicLib@cmp), line:13:1, endln:22:4
+            |vpiName:rst
+            |vpiFullName:logicLib@cmp.rst
+            |vpiActual:
+            \_logic_net: (logicLib@cmp.rst), line:5:13, endln:5:16
+          |vpiStmt:
+          \_assignment: , line:15:8, endln:15:19
+            |vpiParent:
+            \_if_else: , line:14:1, endln:21:10
+            |vpiOpType:82
+            |vpiRhs:
+            \_constant: , line:15:15, endln:15:19
+              |vpiDecompile:1'b0
+              |vpiSize:1
+              |BIN:0
+              |vpiConstType:3
+            |vpiLhs:
+            \_ref_obj: (logicLib@cmp.out), line:15:8, endln:15:11
+              |vpiParent:
+              \_assignment: , line:15:8, endln:15:19
+              |vpiName:out
+              |vpiFullName:logicLib@cmp.out
+              |vpiActual:
+              \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+          |vpiElseStmt:
+          \_if_else: , line:17:1, endln:21:10
+            |vpiParent:
+            \_if_else: , line:14:1, endln:21:10
+            |vpiCondition:
+            \_operation: , line:18:3, endln:18:19
+              |vpiParent:
+              \_if_else: , line:14:1, endln:21:10
+              |vpiOpType:28
+              |vpiOperand:
+              \_bit_select: (logicLib@cmp.inA), line:18:7, endln:18:8
+                |vpiParent:
+                \_operation: , line:18:3, endln:18:19
+                |vpiName:inA
+                |vpiFullName:logicLib@cmp.inA
+                |vpiIndex:
+                \_constant: , line:18:7, endln:18:8
+                  |vpiParent:
+                  \_bit_select: (logicLib@cmp.inA), line:18:7, endln:18:8
+                  |vpiDecompile:0
+                  |vpiSize:64
+                  |UINT:0
+                  |vpiConstType:9
+              |vpiOperand:
+              \_operation: , line:18:12, endln:18:19
+                |vpiParent:
+                \_operation: , line:18:3, endln:18:19
+                |vpiOpType:4
+                |vpiOperand:
+                \_bit_select: (logicLib@cmp.inA), line:18:17, endln:18:18
+                  |vpiParent:
+                  \_operation: , line:18:12, endln:18:19
+                  |vpiName:inA
+                  |vpiFullName:logicLib@cmp.inA
+                  |vpiIndex:
+                  \_constant: , line:18:17, endln:18:18
+                    |vpiParent:
+                    \_bit_select: (logicLib@cmp.inA), line:18:17, endln:18:18
+                    |vpiDecompile:1
+                    |vpiSize:64
+                    |UINT:1
+                    |vpiConstType:9
+            |vpiStmt:
+            \_assignment: , line:18:21, endln:18:32
+              |vpiParent:
+              \_if_else: , line:17:1, endln:21:10
+              |vpiOpType:82
+              |vpiRhs:
+              \_constant: , line:18:28, endln:18:32
+                |vpiDecompile:1'b1
+                |vpiSize:1
+                |BIN:1
+                |vpiConstType:3
+              |vpiLhs:
+              \_ref_obj: (logicLib@cmp.out), line:18:21, endln:18:24
+                |vpiParent:
+                \_assignment: , line:18:21, endln:18:32
+                |vpiName:out
+                |vpiFullName:logicLib@cmp.out
+                |vpiActual:
+                \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+            |vpiElseStmt:
+            \_assignment: , line:20:1, endln:21:9
+              |vpiParent:
+              \_if_else: , line:17:1, endln:21:10
+              |vpiOpType:82
+              |vpiRhs:
+              \_constant: , line:21:5, endln:21:9
+                |vpiDecompile:1'b0
+                |vpiSize:1
+                |BIN:0
+                |vpiConstType:3
+              |vpiLhs:
+              \_ref_obj: (logicLib@cmp.out), line:20:1, endln:20:4
+                |vpiParent:
+                \_assignment: , line:20:1, endln:21:9
+                |vpiName:out
+                |vpiFullName:logicLib@cmp.out
+                |vpiActual:
+                \_logic_net: (logicLib@cmp.out), line:8:2, endln:8:5
+    |vpiAlwaysType:1
+  |vpiEndLabel:cmp
+|uhdmallModules:
+\_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:logicLib@driver
+  |vpiParameter:
+  \_parameter: (logicLib@driver.iterations), line:8:2, endln:8:12
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |UINT:256
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@driver.iterations)
+      |vpiParent:
+      \_parameter: (logicLib@driver.iterations), line:8:2, endln:8:12
+      |vpiFullName:logicLib@driver.iterations
+      |vpiActual:
+      \_int_typespec: , line:7:1, endln:7:4
+    |vpiName:iterations
+    |vpiFullName:logicLib@driver.iterations
+  |vpiParameter:
+  \_parameter: (logicLib@driver.delay), line:6:2, endln:6:7
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |UINT:30
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@driver.delay)
+      |vpiParent:
+      \_parameter: (logicLib@driver.delay), line:6:2, endln:6:7
+      |vpiFullName:logicLib@driver.delay
+      |vpiActual:
+      \_int_typespec: , line:5:1, endln:5:4
+    |vpiSigned:1
+    |vpiName:delay
+    |vpiFullName:logicLib@driver.delay
+  |vpiParamAssign:
+  \_param_assign: , line:8:2, endln:8:18
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiRhs:
+    \_constant: , line:8:15, endln:8:18
+      |vpiParent:
+      \_param_assign: , line:8:2, endln:8:18
+      |vpiDecompile:256
+      |vpiSize:64
+      |UINT:256
+      |vpiTypespec:
+      \_ref_typespec: (logicLib@driver)
+        |vpiParent:
+        \_constant: , line:8:15, endln:8:18
+        |vpiFullName:logicLib@driver
+        |vpiActual:
+        \_int_typespec: , line:7:1, endln:7:4
+      |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (logicLib@driver.iterations), line:8:2, endln:8:12
+  |vpiParamAssign:
+  \_param_assign: , line:6:2, endln:6:12
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiRhs:
+    \_constant: , line:6:10, endln:6:12
+      |vpiParent:
+      \_param_assign: , line:6:2, endln:6:12
+      |vpiDecompile:30
+      |vpiSize:64
+      |UINT:30
+      |vpiTypespec:
+      \_ref_typespec: (logicLib@driver)
+        |vpiParent:
+        \_constant: , line:6:10, endln:6:12
+        |vpiFullName:logicLib@driver
+        |vpiActual:
+        \_int_typespec: , line:5:1, endln:5:4
+      |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (logicLib@driver.delay), line:6:2, endln:6:7
+  |vpiDefName:logicLib@driver
+  |vpiNet:
+  \_logic_net: (logicLib@driver.out), line:13:8, endln:13:11
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiName:out
+    |vpiFullName:logicLib@driver.out
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (logicLib@driver.outvar), line:16:8, endln:16:14
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@driver.outvar)
+      |vpiParent:
+      \_logic_net: (logicLib@driver.outvar), line:16:8, endln:16:14
+      |vpiFullName:logicLib@driver.outvar
+      |vpiActual:
+      \_logic_typespec: , line:15:1, endln:16:7
+    |vpiName:outvar
+    |vpiFullName:logicLib@driver.outvar
+    |vpiNetType:36
+  |vpiPort:
+  \_port: (out), line:13:8, endln:13:11
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiName:out
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (logicLib@driver.out.out), line:13:8, endln:13:11
+      |vpiParent:
+      \_port: (out), line:13:8, endln:13:11
+      |vpiName:out
+      |vpiFullName:logicLib@driver.out.out
+      |vpiActual:
+      \_logic_net: (logicLib@driver.out), line:13:8, endln:13:11
+    |vpiTypedef:
+    \_ref_typespec: (logicLib@driver.out)
+      |vpiParent:
+      \_port: (out), line:13:8, endln:13:11
+      |vpiFullName:logicLib@driver.out
+      |vpiActual:
+      \_logic_typespec: , line:12:1, endln:13:7
+  |vpiProcess:
+  \_initial: , line:19:1, endln:27:4
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiStmt:
+    \_begin: (logicLib@driver), line:20:1, endln:27:4
+      |vpiParent:
+      \_initial: , line:19:1, endln:27:4
+      |vpiFullName:logicLib@driver
+      |vpiStmt:
+      \_assignment: , line:21:1, endln:21:12
+        |vpiParent:
+        \_begin: (logicLib@driver), line:20:1, endln:27:4
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_constant: , line:21:10, endln:21:12
+          |vpiDecompile:'0
+          |vpiSize:-1
+          |BIN:0
+          |vpiConstType:3
+        |vpiLhs:
+        \_ref_obj: (logicLib@driver.outvar), line:21:1, endln:21:7
+          |vpiParent:
+          \_assignment: , line:21:1, endln:21:12
+          |vpiName:outvar
+          |vpiFullName:logicLib@driver.outvar
+          |vpiActual:
+          \_logic_net: (logicLib@driver.outvar), line:16:8, endln:16:14
+      |vpiStmt:
+      \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+        |vpiParent:
+        \_begin: (logicLib@driver), line:20:1, endln:27:4
+        |vpiFullName:logicLib@driver
+        |vpiForInitStmt:
+        \_assignment: , line:24:1, endln:25:7
+          |vpiParent:
+          \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+          |vpiRhs:
+          \_constant: , line:25:6, endln:25:7
+            |vpiParent:
+            \_assignment: , line:24:1, endln:25:7
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_int_var: (logicLib@driver.i), line:25:2, endln:25:3
+            |vpiParent:
+            \_assignment: , line:24:1, endln:25:7
+            |vpiTypespec:
+            \_ref_typespec: (logicLib@driver.i)
+              |vpiParent:
+              \_int_var: (logicLib@driver.i), line:25:2, endln:25:3
+              |vpiFullName:logicLib@driver.i
+              |vpiActual:
+              \_int_typespec: , line:24:1, endln:24:4
+            |vpiName:i
+            |vpiFullName:logicLib@driver.i
+            |vpiSigned:1
+        |vpiForIncStmt:
+        \_operation: , line:25:25, endln:25:28
+          |vpiParent:
+          \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+          |vpiOpType:62
+          |vpiOperand:
+          \_ref_obj: (logicLib@driver.i), line:25:25, endln:25:26
+            |vpiParent:
+            \_operation: , line:25:25, endln:25:28
+            |vpiName:i
+            |vpiFullName:logicLib@driver.i
+            |vpiActual:
+            \_int_var: (logicLib@driver.i), line:25:2, endln:25:3
+        |vpiCondition:
+        \_operation: , line:25:9, endln:25:23
+          |vpiParent:
+          \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+          |vpiOpType:20
+          |vpiOperand:
+          \_ref_obj: (logicLib@driver.i), line:25:9, endln:25:10
+            |vpiParent:
+            \_operation: , line:25:9, endln:25:23
+            |vpiName:i
+            |vpiFullName:logicLib@driver.i
+            |vpiActual:
+            \_int_var: (logicLib@driver.i), line:25:2, endln:25:3
+          |vpiOperand:
+          \_ref_obj: (logicLib@driver.iterations), line:25:13, endln:25:23
+            |vpiParent:
+            \_operation: , line:25:9, endln:25:23
+            |vpiName:iterations
+            |vpiFullName:logicLib@driver.iterations
+        |vpiStmt:
+        \_delay_control: , line:26:1, endln:26:7
+          |vpiParent:
+          \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+          |vpiStmt:
+          \_operation: , line:26:8, endln:26:16
+            |vpiParent:
+            \_delay_control: , line:26:1, endln:26:7
+            |vpiOpType:62
+            |vpiOperand:
+            \_ref_obj: (logicLib@driver.outvar), line:26:8, endln:26:14
+              |vpiParent:
+              \_operation: , line:26:8, endln:26:16
+              |vpiName:outvar
+              |vpiFullName:logicLib@driver.outvar
+              |vpiActual:
+              \_logic_net: (logicLib@driver.outvar), line:16:8, endln:16:14
+          |vpiDelay:
+          \_ref_obj: (logicLib@driver.delay), line:26:1, endln:26:7
+            |vpiParent:
+            \_for_stmt: (logicLib@driver), line:22:1, endln:22:4
+            |vpiName:delay
+            |vpiFullName:logicLib@driver.delay
+  |vpiContAssign:
+  \_cont_assign: , line:18:2, endln:18:14
+    |vpiParent:
+    \_module_inst: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+    |vpiRhs:
+    \_ref_obj: (logicLib@driver.outvar), line:18:8, endln:18:14
+      |vpiParent:
+      \_cont_assign: , line:18:2, endln:18:14
+      |vpiName:outvar
+      |vpiFullName:logicLib@driver.outvar
+      |vpiActual:
+      \_logic_net: (logicLib@driver.outvar), line:16:8, endln:16:14
+    |vpiLhs:
+    \_ref_obj: (logicLib@driver.out), line:18:2, endln:18:5
+      |vpiParent:
+      \_cont_assign: , line:18:2, endln:18:14
+      |vpiName:out
+      |vpiFullName:logicLib@driver.out
+      |vpiActual:
+      \_logic_net: (logicLib@driver.out), line:13:8, endln:13:11
+  |vpiEndLabel:driver
+|uhdmallModules:
+\_module_inst: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:logicLib@top
+  |vpiDefName:logicLib@top
+  |vpiNet:
+  \_logic_net: (logicLib@top.aBus), line:2:26, endln:2:30
+    |vpiParent:
+    \_module_inst: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@top.aBus)
+      |vpiParent:
+      \_logic_net: (logicLib@top.aBus), line:2:26, endln:2:30
+      |vpiFullName:logicLib@top.aBus
+      |vpiActual:
+      \_logic_typespec: , line:2:14, endln:2:19
+    |vpiName:aBus
+    |vpiFullName:logicLib@top.aBus
+    |vpiNetType:12
+  |vpiNet:
+  \_logic_net: (logicLib@top.dBus), line:3:13, endln:3:17
+    |vpiParent:
+    \_module_inst: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
+    |vpiTypespec:
+    \_ref_typespec: (logicLib@top.dBus)
+      |vpiParent:
+      \_logic_net: (logicLib@top.dBus), line:3:13, endln:3:17
+      |vpiFullName:logicLib@top.dBus
+      |vpiActual:
+      \_logic_typespec: , line:3:1, endln:3:12
+    |vpiName:dBus
+    |vpiFullName:logicLib@top.dBus
+    |vpiNetType:36
+  |vpiModuleArray:
+  \_module_array: (logicLib@driver), line:5:8, endln:5:19
+    |vpiParent:
+    \_module_inst: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
+    |vpiName:driverArray
+    |vpiFullName:logicLib@driver
+    |vpiRange:
+    \_range: , line:5:19, endln:5:24
+      |vpiParent:
+      \_module_array: (logicLib@driver), line:5:8, endln:5:19
+      |vpiLeftRange:
+      \_constant: , line:5:20, endln:5:21
+        |vpiParent:
+        \_range: , line:5:19, endln:5:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:22, endln:5:23
+        |vpiParent:
+        \_range: , line:5:19, endln:5:24
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (logicLib@top.driverArray)
+      |vpiParent:
+      \_module_array: (logicLib@driver), line:5:8, endln:5:19
+      |vpiFullName:logicLib@top.driverArray
+      |vpiActual:
+      \_module_typespec: (driver), line:5:1, endln:5:7
+    |vpiPort:
+    \_port: , line:5:25, endln:5:29
+      |vpiParent:
+      \_module_array: (logicLib@driver), line:5:8, endln:5:19
+      |vpiHighConn:
+      \_ref_obj: (logicLib@top.driverArray.aBus), line:5:25, endln:5:29
+        |vpiParent:
+        \_port: , line:5:25, endln:5:29
+        |vpiName:aBus
+        |vpiFullName:logicLib@top.driverArray.aBus
+        |vpiActual:
+        \_logic_net: (logicLib@top.aBus), line:2:26, endln:2:30
+  |vpiEndLabel:top
+|uhdmallModules:
+\_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:realLib@cmp
+  |vpiParameter:
+  \_parameter: (realLib@cmp.hyst), line:9:2, endln:9:6
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |REAL:0.650000
+    |vpiTypespec:
+    \_ref_typespec: (realLib@cmp.hyst)
+      |vpiParent:
+      \_parameter: (realLib@cmp.hyst), line:9:2, endln:9:6
+      |vpiFullName:realLib@cmp.hyst
+      |vpiActual:
+      \_real_typespec: , line:8:1, endln:8:5
+    |vpiName:hyst
+    |vpiFullName:realLib@cmp.hyst
+  |vpiParamAssign:
+  \_param_assign: , line:9:2, endln:9:13
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiRhs:
+    \_constant: , line:9:9, endln:9:13
+      |vpiParent:
+      \_param_assign: , line:9:2, endln:9:13
+      |vpiDecompile:0.65
+      |vpiSize:64
+      |REAL:0.650000
+      |vpiTypespec:
+      \_ref_typespec: (realLib@cmp)
+        |vpiParent:
+        \_constant: , line:9:9, endln:9:13
+        |vpiFullName:realLib@cmp
+        |vpiActual:
+        \_real_typespec: , line:8:1, endln:8:5
+      |vpiConstType:2
+    |vpiLhs:
+    \_parameter: (realLib@cmp.hyst), line:9:2, endln:9:6
+  |vpiTypedef:
+  \_real_typespec: (NetsPkg::realNet), line:3:9, endln:3:13
+  |vpiTypedef:
+  \_import_typespec: (NetsPkg), line:5:2, endln:5:12
+  |vpiDefName:realLib@cmp
+  |vpiNet:
+  \_logic_net: (realLib@cmp.inA), line:12:16, endln:12:19
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:inA
+    |vpiFullName:realLib@cmp.inA
+  |vpiNet:
+  \_logic_net: (realLib@cmp.rst), line:14:2, endln:14:5
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:rst
+    |vpiFullName:realLib@cmp.rst
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:out
+    |vpiFullName:realLib@cmp.out
+    |vpiNetType:36
+  |vpiNet:
+  \_logic_net: (realLib@cmp.updatePeriod), line:20:2, endln:20:14
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiTypespec:
+    \_ref_typespec: (realLib@cmp.updatePeriod)
+      |vpiParent:
+      \_logic_net: (realLib@cmp.updatePeriod), line:20:2, endln:20:14
+      |vpiFullName:realLib@cmp.updatePeriod
+      |vpiActual:
+      \_real_typespec: , line:19:1, endln:20:22
+    |vpiName:updatePeriod
+    |vpiFullName:realLib@cmp.updatePeriod
+  |vpiPort:
+  \_port: (inA), line:12:16, endln:12:19
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:inA
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (realLib@cmp.inA.inA), line:12:16, endln:12:19
+      |vpiParent:
+      \_port: (inA), line:12:16, endln:12:19
+      |vpiName:inA
+      |vpiFullName:realLib@cmp.inA.inA
+      |vpiActual:
+      \_logic_net: (realLib@cmp.inA), line:12:16, endln:12:19
+    |vpiTypedef:
+    \_ref_typespec: (realLib@cmp.inA)
+      |vpiParent:
+      \_port: (inA), line:12:16, endln:12:19
+      |vpiFullName:realLib@cmp.inA
+      |vpiActual:
+      \_real_typespec: (NetsPkg::realNet), line:12:2, endln:12:15
+  |vpiPort:
+  \_port: (rst), line:14:2, endln:14:5
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:rst
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (realLib@cmp.rst.rst), line:14:2, endln:14:5
+      |vpiParent:
+      \_port: (rst), line:14:2, endln:14:5
+      |vpiName:rst
+      |vpiFullName:realLib@cmp.rst.rst
+      |vpiActual:
+      \_logic_net: (realLib@cmp.rst), line:14:2, endln:14:5
+    |vpiTypedef:
+    \_ref_typespec: (realLib@cmp.rst)
+      |vpiParent:
+      \_port: (rst), line:14:2, endln:14:5
+      |vpiFullName:realLib@cmp.rst
+      |vpiActual:
+      \_logic_typespec: , line:13:8, endln:13:13
+  |vpiPort:
+  \_port: (out), line:17:2, endln:17:5
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiName:out
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (realLib@cmp.out.out), line:17:2, endln:17:5
+      |vpiParent:
+      \_port: (out), line:17:2, endln:17:5
+      |vpiName:out
+      |vpiFullName:realLib@cmp.out.out
+      |vpiActual:
+      \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+    |vpiTypedef:
+    \_ref_typespec: (realLib@cmp.out)
+      |vpiParent:
+      \_port: (out), line:17:2, endln:17:5
+      |vpiFullName:realLib@cmp.out
+      |vpiActual:
+      \_logic_typespec: , line:16:1, endln:16:6
+  |vpiProcess:
+  \_initial: , line:21:1, endln:22:13
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiStmt:
+    \_assignment: , line:22:2, endln:22:12
+      |vpiParent:
+      \_initial: , line:21:1, endln:22:13
+      |vpiOpType:82
+      |vpiBlocking:1
+      |vpiRhs:
+      \_constant: , line:22:8, endln:22:12
+        |vpiDecompile:1'b0
+        |vpiSize:1
+        |BIN:0
+        |vpiConstType:3
+      |vpiLhs:
+      \_ref_obj: (realLib@cmp.out), line:22:2, endln:22:5
+        |vpiParent:
+        \_assignment: , line:22:2, endln:22:12
+        |vpiName:out
+        |vpiFullName:realLib@cmp.out
+        |vpiActual:
+        \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+  |vpiProcess:
+  \_always: , line:23:1, endln:34:4
+    |vpiParent:
+    \_module_inst: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiStmt:
+    \_delay_control: , line:24:2, endln:24:15
+      |vpiParent:
+      \_always: , line:23:1, endln:34:4
+      |vpiStmt:
+      \_begin: (realLib@cmp), line:25:1, endln:34:4
+        |vpiParent:
+        \_delay_control: , line:24:2, endln:24:15
+        |vpiFullName:realLib@cmp
+        |vpiStmt:
+        \_if_else: , line:26:1, endln:33:39
+          |vpiParent:
+          \_begin: (realLib@cmp), line:25:1, endln:34:4
+          |vpiCondition:
+          \_ref_obj: (realLib@cmp.rst), line:27:3, endln:27:6
+            |vpiParent:
+            \_begin: (realLib@cmp), line:25:1, endln:34:4
+            |vpiName:rst
+            |vpiFullName:realLib@cmp.rst
+            |vpiActual:
+            \_logic_net: (realLib@cmp.rst), line:14:2, endln:14:5
+          |vpiStmt:
+          \_assignment: , line:27:8, endln:27:19
+            |vpiParent:
+            \_if_else: , line:26:1, endln:33:39
+            |vpiOpType:82
+            |vpiRhs:
+            \_constant: , line:27:15, endln:27:19
+              |vpiDecompile:1'b0
+              |vpiSize:1
+              |BIN:0
+              |vpiConstType:3
+            |vpiLhs:
+            \_ref_obj: (realLib@cmp.out), line:27:8, endln:27:11
+              |vpiParent:
+              \_assignment: , line:27:8, endln:27:19
+              |vpiName:out
+              |vpiFullName:realLib@cmp.out
+              |vpiActual:
+              \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+          |vpiElseStmt:
+          \_if_else: , line:29:1, endln:33:39
+            |vpiParent:
+            \_if_else: , line:26:1, endln:33:39
+            |vpiCondition:
+            \_operation: , line:30:3, endln:30:18
+              |vpiParent:
+              \_if_else: , line:26:1, endln:33:39
+              |vpiOpType:18
+              |vpiOperand:
+              \_bit_select: (realLib@cmp.inA), line:30:7, endln:30:8
+                |vpiParent:
+                \_operation: , line:30:3, endln:30:18
+                |vpiName:inA
+                |vpiFullName:realLib@cmp.inA
+                |vpiIndex:
+                \_constant: , line:30:7, endln:30:8
+                  |vpiParent:
+                  \_bit_select: (realLib@cmp.inA), line:30:7, endln:30:8
+                  |vpiDecompile:0
+                  |vpiSize:64
+                  |UINT:0
+                  |vpiConstType:9
+              |vpiOperand:
+              \_bit_select: (realLib@cmp.inA), line:30:16, endln:30:17
+                |vpiParent:
+                \_operation: , line:30:3, endln:30:18
+                |vpiName:inA
+                |vpiFullName:realLib@cmp.inA
+                |vpiIndex:
+                \_constant: , line:30:16, endln:30:17
+                  |vpiParent:
+                  \_bit_select: (realLib@cmp.inA), line:30:16, endln:30:17
+                  |vpiDecompile:1
+                  |vpiSize:64
+                  |UINT:1
+                  |vpiConstType:9
+            |vpiStmt:
+            \_assignment: , line:30:20, endln:30:31
+              |vpiParent:
+              \_if_else: , line:29:1, endln:33:39
+              |vpiOpType:82
+              |vpiRhs:
+              \_constant: , line:30:27, endln:30:31
+                |vpiDecompile:1'b1
+                |vpiSize:1
+                |BIN:1
+                |vpiConstType:3
+              |vpiLhs:
+              \_ref_obj: (realLib@cmp.out), line:30:20, endln:30:23
+                |vpiParent:
+                \_assignment: , line:30:20, endln:30:31
+                |vpiName:out
+                |vpiFullName:realLib@cmp.out
+                |vpiActual:
+                \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+            |vpiElseStmt:
+            \_if_stmt: , line:32:1, endln:33:39
+              |vpiParent:
+              \_if_else: , line:29:1, endln:33:39
+              |vpiCondition:
+              \_operation: , line:33:3, endln:33:25
+                |vpiParent:
+                \_if_else: , line:29:1, endln:33:39
+                |vpiOpType:20
+                |vpiOperand:
+                \_bit_select: (realLib@cmp.inA), line:33:7, endln:33:8
+                  |vpiParent:
+                  \_operation: , line:33:3, endln:33:25
+                  |vpiName:inA
+                  |vpiFullName:realLib@cmp.inA
+                  |vpiIndex:
+                  \_constant: , line:33:7, endln:33:8
+                    |vpiParent:
+                    \_bit_select: (realLib@cmp.inA), line:33:7, endln:33:8
+                    |vpiDecompile:0
+                    |vpiSize:64
+                    |UINT:0
+                    |vpiConstType:9
+                |vpiOperand:
+                \_operation: , line:33:12, endln:33:25
+                  |vpiParent:
+                  \_operation: , line:33:3, endln:33:25
+                  |vpiOpType:11
+                  |vpiOperand:
+                  \_bit_select: (realLib@cmp.inA), line:33:16, endln:33:17
+                    |vpiParent:
+                    \_operation: , line:33:12, endln:33:25
+                    |vpiName:inA
+                    |vpiFullName:realLib@cmp.inA
+                    |vpiIndex:
+                    \_constant: , line:33:16, endln:33:17
+                      |vpiParent:
+                      \_bit_select: (realLib@cmp.inA), line:33:16, endln:33:17
+                      |vpiDecompile:1
+                      |vpiSize:64
+                      |UINT:1
+                      |vpiConstType:9
+                  |vpiOperand:
+                  \_ref_obj: (realLib@cmp.hyst), line:33:21, endln:33:25
+                    |vpiParent:
+                    \_operation: , line:33:12, endln:33:25
+                    |vpiName:hyst
+                    |vpiFullName:realLib@cmp.hyst
+              |vpiStmt:
+              \_assignment: , line:33:27, endln:33:38
+                |vpiParent:
+                \_if_stmt: , line:32:1, endln:33:39
+                |vpiOpType:82
+                |vpiRhs:
+                \_constant: , line:33:34, endln:33:38
+                  |vpiDecompile:1'b0
+                  |vpiSize:1
+                  |BIN:0
+                  |vpiConstType:3
+                |vpiLhs:
+                \_ref_obj: (realLib@cmp.out), line:33:27, endln:33:30
+                  |vpiParent:
+                  \_assignment: , line:33:27, endln:33:38
+                  |vpiName:out
+                  |vpiFullName:realLib@cmp.out
+                  |vpiActual:
+                  \_logic_net: (realLib@cmp.out), line:17:2, endln:17:5
+      |vpiDelay:
+      \_ref_obj: (realLib@cmp.updatePeriod), line:24:2, endln:24:15
+        |vpiParent:
+        \_always: , line:23:1, endln:34:4
+        |vpiName:updatePeriod
+        |vpiFullName:realLib@cmp.updatePeriod
+    |vpiAlwaysType:1
+  |vpiEndLabel:cmp
+|uhdmallModules:
+\_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:realLib@driver
+  |vpiParameter:
+  \_parameter: (realLib@driver.iterations), line:4:17, endln:4:27
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |UINT:256
+    |vpiTypespec:
+    \_ref_typespec: (realLib@driver.iterations)
+      |vpiParent:
+      \_parameter: (realLib@driver.iterations), line:4:17, endln:4:27
+      |vpiFullName:realLib@driver.iterations
+      |vpiActual:
+      \_int_typespec: , line:4:13, endln:4:16
+    |vpiName:iterations
+    |vpiFullName:realLib@driver.iterations
+  |vpiParameter:
+  \_parameter: (realLib@driver.delay), line:3:17, endln:3:22
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |UINT:30
+    |vpiTypespec:
+    \_ref_typespec: (realLib@driver.delay)
+      |vpiParent:
+      \_parameter: (realLib@driver.delay), line:3:17, endln:3:22
+      |vpiFullName:realLib@driver.delay
+      |vpiActual:
+      \_int_typespec: , line:3:13, endln:3:16
+    |vpiSigned:1
+    |vpiName:delay
+    |vpiFullName:realLib@driver.delay
+  |vpiParamAssign:
+  \_param_assign: , line:4:17, endln:4:33
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiRhs:
+    \_constant: , line:4:30, endln:4:33
+      |vpiParent:
+      \_param_assign: , line:4:17, endln:4:33
+      |vpiDecompile:256
+      |vpiSize:64
+      |UINT:256
+      |vpiTypespec:
+      \_ref_typespec: (realLib@driver)
+        |vpiParent:
+        \_constant: , line:4:30, endln:4:33
+        |vpiFullName:realLib@driver
+        |vpiActual:
+        \_int_typespec: , line:4:13, endln:4:16
+      |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (realLib@driver.iterations), line:4:17, endln:4:27
+  |vpiParamAssign:
+  \_param_assign: , line:3:17, endln:3:27
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiRhs:
+    \_constant: , line:3:25, endln:3:27
+      |vpiParent:
+      \_param_assign: , line:3:17, endln:3:27
+      |vpiDecompile:30
+      |vpiSize:64
+      |UINT:30
+      |vpiTypespec:
+      \_ref_typespec: (realLib@driver)
+        |vpiParent:
+        \_constant: , line:3:25, endln:3:27
+        |vpiFullName:realLib@driver
+        |vpiActual:
+        \_int_typespec: , line:3:13, endln:3:16
+      |vpiConstType:9
+    |vpiLhs:
+    \_parameter: (realLib@driver.delay), line:3:17, endln:3:22
+  |vpiTypedef:
+  \_real_typespec: (NetsPkg::realNet), line:3:9, endln:3:13
+  |vpiTypedef:
+  \_import_typespec: (NetsPkg), line:2:8, endln:2:18
+  |vpiDefName:realLib@driver
+  |vpiNet:
+  \_logic_net: (realLib@driver.out), line:5:30, endln:5:33
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiName:out
+    |vpiFullName:realLib@driver.out
+  |vpiNet:
+  \_logic_net: (realLib@driver.outR), line:7:6, endln:7:10
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiTypespec:
+    \_ref_typespec: (realLib@driver.outR)
+      |vpiParent:
+      \_logic_net: (realLib@driver.outR), line:7:6, endln:7:10
+      |vpiFullName:realLib@driver.outR
+      |vpiActual:
+      \_real_typespec: , line:7:1, endln:7:15
+    |vpiName:outR
+    |vpiFullName:realLib@driver.outR
+  |vpiPort:
+  \_port: (out), line:5:30, endln:5:33
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiName:out
+    |vpiDirection:2
+    |vpiLowConn:
+    \_ref_obj: (realLib@driver.out.out), line:5:30, endln:5:33
+      |vpiParent:
+      \_port: (out), line:5:30, endln:5:33
+      |vpiName:out
+      |vpiFullName:realLib@driver.out.out
+      |vpiActual:
+      \_logic_net: (realLib@driver.out), line:5:30, endln:5:33
+    |vpiTypedef:
+    \_ref_typespec: (realLib@driver.out)
+      |vpiParent:
+      \_port: (out), line:5:30, endln:5:33
+      |vpiFullName:realLib@driver.out
+      |vpiActual:
+      \_real_typespec: (NetsPkg::realNet), line:5:16, endln:5:29
+  |vpiProcess:
+  \_initial: , line:10:1, endln:19:4
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiStmt:
+    \_begin: (realLib@driver), line:11:1, endln:19:4
+      |vpiParent:
+      \_initial: , line:10:1, endln:19:4
+      |vpiFullName:realLib@driver
+      |vpiStmt:
+      \_assignment: , line:12:3, endln:12:16
+        |vpiParent:
+        \_begin: (realLib@driver), line:11:1, endln:19:4
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_constant: , line:12:13, endln:12:16
+          |vpiDecompile:0.0
+          |vpiSize:64
+          |REAL:0.000000
+          |vpiConstType:2
+        |vpiLhs:
+        \_bit_select: (realLib@driver.outR), line:12:3, endln:12:10
+          |vpiParent:
+          \_assignment: , line:12:3, endln:12:16
+          |vpiName:outR
+          |vpiFullName:realLib@driver.outR
+          |vpiIndex:
+          \_constant: , line:12:8, endln:12:9
+            |vpiParent:
+            \_bit_select: (realLib@driver.outR), line:12:3, endln:12:10
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+      |vpiStmt:
+      \_assignment: , line:13:3, endln:13:16
+        |vpiParent:
+        \_begin: (realLib@driver), line:11:1, endln:19:4
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_constant: , line:13:13, endln:13:16
+          |vpiDecompile:3.3
+          |vpiSize:64
+          |REAL:3.300000
+          |vpiConstType:2
+        |vpiLhs:
+        \_bit_select: (realLib@driver.outR), line:13:3, endln:13:10
+          |vpiParent:
+          \_assignment: , line:13:3, endln:13:16
+          |vpiName:outR
+          |vpiFullName:realLib@driver.outR
+          |vpiIndex:
+          \_constant: , line:13:8, endln:13:9
+            |vpiParent:
+            \_bit_select: (realLib@driver.outR), line:13:3, endln:13:10
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+      |vpiStmt:
+      \_for_stmt: (realLib@driver), line:14:3, endln:14:6
+        |vpiParent:
+        \_begin: (realLib@driver), line:11:1, endln:19:4
+        |vpiFullName:realLib@driver
+        |vpiForInitStmt:
+        \_assignment: , line:14:8, endln:14:17
+          |vpiParent:
+          \_for_stmt: (realLib@driver), line:14:3, endln:14:6
+          |vpiRhs:
+          \_constant: , line:14:16, endln:14:17
+            |vpiParent:
+            \_assignment: , line:14:8, endln:14:17
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_int_var: (realLib@driver.i), line:14:12, endln:14:13
+            |vpiParent:
+            \_assignment: , line:14:8, endln:14:17
+            |vpiTypespec:
+            \_ref_typespec: (realLib@driver.i)
+              |vpiParent:
+              \_int_var: (realLib@driver.i), line:14:12, endln:14:13
+              |vpiFullName:realLib@driver.i
+              |vpiActual:
+              \_int_typespec: , line:14:8, endln:14:11
+            |vpiName:i
+            |vpiFullName:realLib@driver.i
+            |vpiSigned:1
+        |vpiForIncStmt:
+        \_operation: , line:14:35, endln:14:38
+          |vpiParent:
+          \_for_stmt: (realLib@driver), line:14:3, endln:14:6
+          |vpiOpType:62
+          |vpiOperand:
+          \_ref_obj: (realLib@driver.i), line:14:35, endln:14:36
+            |vpiParent:
+            \_operation: , line:14:35, endln:14:38
+            |vpiName:i
+            |vpiFullName:realLib@driver.i
+            |vpiActual:
+            \_int_var: (realLib@driver.i), line:14:12, endln:14:13
+        |vpiCondition:
+        \_operation: , line:14:19, endln:14:33
+          |vpiParent:
+          \_for_stmt: (realLib@driver), line:14:3, endln:14:6
+          |vpiOpType:20
+          |vpiOperand:
+          \_ref_obj: (realLib@driver.i), line:14:19, endln:14:20
+            |vpiParent:
+            \_operation: , line:14:19, endln:14:33
+            |vpiName:i
+            |vpiFullName:realLib@driver.i
+            |vpiActual:
+            \_int_var: (realLib@driver.i), line:14:12, endln:14:13
+          |vpiOperand:
+          \_ref_obj: (realLib@driver.iterations), line:14:23, endln:14:33
+            |vpiParent:
+            \_operation: , line:14:19, endln:14:33
+            |vpiName:iterations
+            |vpiFullName:realLib@driver.iterations
+        |vpiStmt:
+        \_begin: (realLib@driver), line:15:5, endln:18:8
+          |vpiParent:
+          \_for_stmt: (realLib@driver), line:14:3, endln:14:6
+          |vpiFullName:realLib@driver
+          |vpiStmt:
+          \_delay_control: , line:16:7, endln:16:13
+            |vpiParent:
+            \_begin: (realLib@driver), line:15:5, endln:18:8
+            |vpiStmt:
+            \_assignment: , line:16:14, endln:16:28
+              |vpiParent:
+              \_delay_control: , line:16:7, endln:16:13
+              |vpiOpType:24
+              |vpiBlocking:1
+              |vpiRhs:
+              \_constant: , line:16:25, endln:16:28
+                |vpiDecompile:0.2
+                |vpiSize:64
+                |REAL:0.200000
+                |vpiConstType:2
+              |vpiLhs:
+              \_bit_select: (realLib@driver.outR), line:16:14, endln:16:21
+                |vpiParent:
+                \_assignment: , line:16:14, endln:16:28
+                |vpiName:outR
+                |vpiFullName:realLib@driver.outR
+                |vpiIndex:
+                \_constant: , line:16:19, endln:16:20
+                  |vpiParent:
+                  \_bit_select: (realLib@driver.outR), line:16:14, endln:16:21
+                  |vpiDecompile:0
+                  |vpiSize:64
+                  |UINT:0
+                  |vpiConstType:9
+            |vpiDelay:
+            \_ref_obj: (realLib@driver.delay), line:16:7, endln:16:13
+              |vpiParent:
+              \_begin: (realLib@driver), line:15:5, endln:18:8
+              |vpiName:delay
+              |vpiFullName:realLib@driver.delay
+          |vpiStmt:
+          \_assignment: , line:17:7, endln:17:21
+            |vpiParent:
+            \_begin: (realLib@driver), line:15:5, endln:18:8
+            |vpiOpType:11
+            |vpiBlocking:1
+            |vpiRhs:
+            \_constant: , line:17:18, endln:17:21
+              |vpiDecompile:0.2
+              |vpiSize:64
+              |REAL:0.200000
+              |vpiConstType:2
+            |vpiLhs:
+            \_bit_select: (realLib@driver.outR), line:17:7, endln:17:14
+              |vpiParent:
+              \_assignment: , line:17:7, endln:17:21
+              |vpiName:outR
+              |vpiFullName:realLib@driver.outR
+              |vpiIndex:
+              \_constant: , line:17:12, endln:17:13
+                |vpiParent:
+                \_bit_select: (realLib@driver.outR), line:17:7, endln:17:14
+                |vpiDecompile:1
+                |vpiSize:64
+                |UINT:1
+                |vpiConstType:9
+  |vpiContAssign:
+  \_cont_assign: , line:8:8, endln:8:18
+    |vpiParent:
+    \_module_inst: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiRhs:
+    \_ref_obj: (realLib@driver.outR), line:8:14, endln:8:18
+      |vpiParent:
+      \_cont_assign: , line:8:8, endln:8:18
+      |vpiName:outR
+      |vpiFullName:realLib@driver.outR
+      |vpiActual:
+      \_logic_net: (realLib@driver.outR), line:7:6, endln:7:10
+    |vpiLhs:
+    \_ref_obj: (realLib@driver.out), line:8:8, endln:8:11
+      |vpiParent:
+      \_cont_assign: , line:8:8, endln:8:18
+      |vpiName:out
+      |vpiFullName:realLib@driver.out
+      |vpiActual:
+      \_logic_net: (realLib@driver.out), line:5:30, endln:5:33
+  |vpiEndLabel:driver
+\_weaklyReferenced:
+\_real_typespec: , line:2:24, endln:2:28
+  |vpiParent:
+  \_parameter: (logicLib@cmp.hyst), line:2:29, endln:2:33
+\_int_typespec: , line:7:1, endln:7:4
+  |vpiParent:
+  \_parameter: (logicLib@driver.iterations), line:8:2, endln:8:12
+  |vpiSigned:1
+\_int_typespec: , line:5:1, endln:5:4
+  |vpiParent:
+  \_parameter: (logicLib@driver.delay), line:6:2, endln:6:7
+  |vpiSigned:1
+\_int_typespec: , line:24:1, endln:24:4
+  |vpiSigned:1
+\_module_typespec: (driver), line:5:1, endln:5:7
+  |vpiParent:
+  \_module_array: (logicLib@driver), line:5:8, endln:5:19
+  |vpiName:driver
+\_real_typespec: , line:8:1, endln:8:5
+  |vpiParent:
+  \_parameter: (realLib@cmp.hyst), line:9:2, endln:9:6
+\_int_typespec: , line:4:13, endln:4:16
+  |vpiParent:
+  \_parameter: (realLib@driver.iterations), line:4:17, endln:4:27
+  |vpiSigned:1
+\_int_typespec: , line:3:13, endln:3:16
+  |vpiParent:
+  \_parameter: (realLib@driver.delay), line:3:17, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:14:8, endln:14:11
+  |vpiSigned:1
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:1:3, endln:27:11
+\_int_typespec: , line:3:19, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:6:14, endln:6:17
+  |vpiSigned:1
+\_int_typespec: , line:18:14, endln:18:17
+  |vpiSigned:1
+\_int_typespec: , line:24:14, endln:24:17
+  |vpiSigned:1
+\_class_typespec: , line:34:21, endln:34:28
+  |vpiClassDefn:
+  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:30:3, endln:52:11
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/LibraryIntercon/builtin.sv, line:55:3, endln:69:11
+\_int_typespec: , line:57:18, endln:57:21
+  |vpiSigned:1
+\_int_typespec: , line:60:14, endln:60:17
+  |vpiSigned:1
+\_int_typespec: , line:63:14, endln:63:17
+  |vpiSigned:1
+\_int_typespec: , line:66:14, endln:66:17
+  |vpiSigned:1
+\_int_typespec: , line:66:26, endln:66:29
+  |vpiSigned:1
+\_logic_typespec: , line:4:13, endln:4:24
+  |vpiRange:
+  \_range: , line:4:19, endln:4:24
+    |vpiParent:
+    \_logic_typespec: , line:4:13, endln:4:24
+    |vpiLeftRange:
+    \_constant: , line:4:20, endln:4:21
+      |vpiParent:
+      \_range: , line:4:19, endln:4:24
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:4:22, endln:4:23
+      |vpiParent:
+      \_range: , line:4:19, endln:4:24
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+\_logic_typespec: , line:5:7, endln:5:12
+\_logic_typespec: , line:7:1, endln:7:6
+\_logic_typespec: , line:12:1, endln:13:7
+  |vpiRange:
+  \_range: , line:13:2, endln:13:7
+    |vpiParent:
+    \_logic_typespec: , line:12:1, endln:13:7
+    |vpiLeftRange:
+    \_constant: , line:13:3, endln:13:4
+      |vpiParent:
+      \_range: , line:13:2, endln:13:7
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:13:5, endln:13:6
+      |vpiParent:
+      \_range: , line:13:2, endln:13:7
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+\_logic_typespec: , line:15:1, endln:16:7
+  |vpiRange:
+  \_range: , line:16:2, endln:16:7
+    |vpiParent:
+    \_logic_typespec: , line:15:1, endln:16:7
+    |vpiLeftRange:
+    \_constant: , line:16:3, endln:16:4
+      |vpiParent:
+      \_range: , line:16:2, endln:16:7
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:16:5, endln:16:6
+      |vpiParent:
+      \_range: , line:16:2, endln:16:7
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+\_logic_typespec: , line:2:14, endln:2:19
+  |vpiRange:
+  \_range: , line:2:14, endln:2:19
+    |vpiParent:
+    \_logic_typespec: , line:2:14, endln:2:19
+    |vpiLeftRange:
+    \_constant: , line:2:15, endln:2:16
+      |vpiParent:
+      \_range: , line:2:14, endln:2:19
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:2:17, endln:2:18
+      |vpiParent:
+      \_range: , line:2:14, endln:2:19
+      |vpiDecompile:3
+      |vpiSize:64
+      |UINT:3
+      |vpiConstType:9
+  |vpiRange:
+  \_range: , line:2:20, endln:2:25
+    |vpiParent:
+    \_logic_typespec: , line:2:14, endln:2:19
+    |vpiLeftRange:
+    \_constant: , line:2:21, endln:2:22
+      |vpiParent:
+      \_range: , line:2:20, endln:2:25
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:2:23, endln:2:24
+      |vpiParent:
+      \_range: , line:2:20, endln:2:25
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+\_logic_typespec: , line:3:1, endln:3:12
+  |vpiRange:
+  \_range: , line:3:7, endln:3:12
+    |vpiParent:
+    \_logic_typespec: , line:3:1, endln:3:12
+    |vpiLeftRange:
+    \_constant: , line:3:8, endln:3:9
+      |vpiParent:
+      \_range: , line:3:7, endln:3:12
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:3:10, endln:3:11
+      |vpiParent:
+      \_range: , line:3:7, endln:3:12
+      |vpiDecompile:3
+      |vpiSize:64
+      |UINT:3
+      |vpiConstType:9
+\_real_typespec: (NetsPkg::realNet), line:12:2, endln:12:15
+  |vpiName:NetsPkg::realNet
+  |vpiTypedefAlias:
+  \_ref_typespec: (NetsPkg::realNet)
+    |vpiParent:
+    \_real_typespec: (NetsPkg::realNet), line:12:2, endln:12:15
+    |vpiFullName:NetsPkg::realNet
+    |vpiActual:
+    \_real_typespec: (NetsPkg::realNet), line:3:9, endln:3:13
+  |vpiInstance:
+  \_package: NetsPkg (NetsPkg::), file:${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg, line:1:1, endln:5:21
+\_logic_typespec: , line:13:8, endln:13:13
+\_logic_typespec: , line:16:1, endln:16:6
+\_real_typespec: , line:19:1, endln:20:22
+\_real_typespec: (NetsPkg::realNet), line:5:16, endln:5:29
+  |vpiName:NetsPkg::realNet
+  |vpiTypedefAlias:
+  \_ref_typespec: (NetsPkg::realNet)
+    |vpiParent:
+    \_real_typespec: (NetsPkg::realNet), line:5:16, endln:5:29
+    |vpiFullName:NetsPkg::realNet
+    |vpiActual:
+    \_real_typespec: (NetsPkg::realNet), line:3:9, endln:3:13
+  |vpiInstance:
+  \_package: NetsPkg (NetsPkg::), file:${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg, line:1:1, endln:5:21
+\_real_typespec: , line:7:1, endln:7:15
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 28
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg:3:9: Non synthesizable construct, NetsPkg::realNet
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg:3:9: Non synthesizable construct, NetsPkg::realNet
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:24: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.sv:26:1: Non synthesizable construct,
@@ -160,32 +2113,4 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:5:16: Non synthesizable construct, NetsPkg::realNet
 [LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:16:7: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:6: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:5:16: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:6: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:5:16: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:6: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:5:16: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:7:6: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/driver.svr:5:16: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:19:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:20:2: Non synthesizable construct, updatePeriod
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:8:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:12:2: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:19:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:20:2: Non synthesizable construct, updatePeriod
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:8:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:12:2: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:19:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:20:2: Non synthesizable construct, updatePeriod
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:8:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:12:2: Non synthesizable construct, realNet
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:19:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:20:2: Non synthesizable construct, updatePeriod
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:8:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr:12:2: Non synthesizable construct, realNet
 ============================== End Linting Results ==============================

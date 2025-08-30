@@ -81,72 +81,33 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:1:1: No timescale set for "test".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:1:1: Compile module "work@test".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Compile generate block "work@test.genblk1".
-Instance tree:
-[TOP] work@test work@test
-[SCO] work@test.genblk1 work@test.genblk1
-[MOD] work@test.genblk1::bar [U] work@test.genblk1.mybar
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:1:1: Top level module "work@test".
-[WRN:EL0500] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Cannot find a module definition for "work@test.genblk1::bar".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[WRN:EL0512] Nb undefined modules: 1.
-[WRN:EL0513] Nb undefined instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:1:1: Instance "work@test".
-[NTE:EL0522] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Scope "work@test.genblk1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Instance "work@test.genblk1.mybar".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              14
+constant                                               5
 design                                                 1
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           2
-module_inst                                            5
-operation                                              4
-param_assign                                           2
-parameter                                              2
-range                                                  2
-ref_module                                             2
+int_typespec                                           1
+module_inst                                            1
+operation                                              2
+param_assign                                           1
+parameter                                              1
+range                                                  1
+ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-constant                                              14
-design                                                 1
-gen_if                                                 1
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           2
-module_inst                                            6
-operation                                              4
-param_assign                                           2
-parameter                                              2
-range                                                  2
-ref_module                                             2
-ref_obj                                                1
-ref_typespec                                           4
+ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@test)
-|vpiElaborated:1
-|vpiName:work@test
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
   |vpiParent:
-  \_design: (work@test)
+  \_design: (unnamed)
   |vpiFullName:work@test
   |vpiParameter:
   \_parameter: (work@test.foo), line:3:17, endln:3:20
@@ -219,66 +180,6 @@ design: (work@test)
         \_begin: (work@test)
         |vpiName:mybar
         |vpiDefName:work@bar
-|uhdmtopModules:
-\_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-  |vpiParent:
-  \_design: (work@test)
-  |vpiName:work@test
-  |vpiParameter:
-  \_parameter: (work@test.foo), line:3:17, endln:3:20
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test.foo)
-      |vpiParent:
-      \_parameter: (work@test.foo), line:3:17, endln:3:20
-      |vpiFullName:work@test.foo
-      |vpiActual:
-      \_int_typespec: , line:3:11, endln:3:16
-    |vpiName:foo
-    |vpiFullName:work@test.foo
-  |vpiParamAssign:
-  \_param_assign: , line:3:17, endln:3:35
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-    |vpiRhs:
-    \_constant: , line:3:23, endln:3:35
-      |vpiParent:
-      \_param_assign: , line:3:17, endln:3:35
-      |vpiDecompile:2'b01
-      |vpiSize:2
-      |BIN:01
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:3:23, endln:3:35
-        |vpiFullName:work@test
-        |vpiActual:
-        \_int_typespec: , line:3:11, endln:3:16
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@test.foo), line:3:17, endln:3:20
-  |vpiDefName:work@test
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@test.genblk1), line:6:5, endln:6:17
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-    |vpiName:genblk1
-    |vpiFullName:work@test.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@test.genblk1), line:6:5, endln:6:17
-      |vpiParent:
-      \_gen_scope_array: (work@test.genblk1), line:6:5, endln:6:17
-      |vpiFullName:work@test.genblk1
-      |vpiModule:
-      \_module_inst: work@test.genblk1::bar (work@test.genblk1.mybar), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:6:5, endln:6:17
-        |vpiParent:
-        \_gen_scope: (work@test.genblk1), line:6:5, endln:6:17
-        |vpiName:mybar
-        |vpiFullName:work@test.genblk1.mybar
-        |vpiDefName:work@test.genblk1::bar
 \_weaklyReferenced:
 \_int_typespec: , line:3:11, endln:3:16
   |vpiParent:
@@ -303,35 +204,12 @@ design: (work@test)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:3:11, endln:3:16
-  |vpiParent:
-  \_ref_typespec: (work@test.foo)
-  |vpiRange:
-  \_range: , line:3:11, endln:3:16
-    |vpiParent:
-    \_int_typespec: , line:3:11, endln:3:16
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 4
-[   NOTE] : 8
+[WARNING] : 1
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ConcatRadix/dut.sv | ${SURELOG_DIR}/build/regression/ConcatRadix/roundtrip/dut_000.sv | 4 | 9 |

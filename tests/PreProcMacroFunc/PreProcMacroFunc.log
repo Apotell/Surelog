@@ -151,64 +151,31 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:8:1: No timescale set for "pkg_b".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:12:1: No timescale set for "pkg_a".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:8:1: Compile package "pkg_b".
-[INF:CP0301] ${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv:12:1: Compile package "pkg_a".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         2
-array_var                                              2
-assignment                                             4
-begin                                                  2
-bit_select                                             2
-bit_typespec                                           4
-bit_var                                                4
-constant                                              31
+array_typespec                                         1
+array_var                                              1
+assignment                                             2
+begin                                                  1
+bit_select                                             1
+bit_typespec                                           2
+bit_var                                                2
+constant                                              14
 design                                                 1
-function                                               2
-int_typespec                                           9
-module_inst                                            4
-operation                                              8
-package                                                4
-param_assign                                           8
-parameter                                              8
-range                                                  2
-ref_obj                                                3
-ref_typespec                                          27
-return_stmt                                            2
-string_typespec                                        2
+function                                               1
+int_typespec                                           4
+module_inst                                            2
+operation                                              5
+package                                                2
+param_assign                                           4
+parameter                                              4
+range                                                  1
+ref_obj                                                2
+ref_typespec                                          13
+return_stmt                                            1
+string_typespec                                        1
 sys_func_call                                          2
-tagged_pattern                                         2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_typespec                                         2
-array_var                                              6
-assignment                                             6
-begin                                                  4
-bit_select                                             4
-bit_typespec                                           4
-bit_var                                               10
-constant                                              31
-design                                                 1
-function                                               4
-int_typespec                                           9
-module_inst                                            4
-operation                                             10
-package                                                4
-param_assign                                           8
-parameter                                              8
-range                                                  2
-ref_obj                                                5
-ref_typespec                                          37
-return_stmt                                            4
-string_typespec                                        2
-sys_func_call                                          2
-tagged_pattern                                         2
+tagged_pattern                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreProcMacroFunc/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PreProcMacroFunc/slpp_all/checker/surelog.chk.html ...
@@ -218,7 +185,6 @@ tagged_pattern                                         2
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
@@ -316,7 +282,7 @@ design: (unnamed)
     |vpiVariables:
     \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
       |vpiParent:
-      \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
+      \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
       |vpiTypespec:
       \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
         |vpiParent:
@@ -359,43 +325,9 @@ design: (unnamed)
       \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
       |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
       |vpiVariables:
-      \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:3:9, endln:3:19
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiTypespec:
-        \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter)
-          |vpiParent:
-          \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:3:9, endln:3:19
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-          |vpiActual:
-          \_bit_typespec: , line:3:5, endln:3:8
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
+      \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
       |vpiVariables:
       \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiTypespec:
-        \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-          |vpiParent:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_array_typespec: , line:3:9, endln:3:95
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiArrayType:1
-        |vpiReg:
-        \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiParent:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiTypespec:
-          \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-            |vpiParent:
-            \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-            |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-            |vpiActual:
-            \_bit_typespec: , line:3:5, endln:3:8
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
       |vpiStmt:
       \_assignment: , line:4:5, endln:4:34
         |vpiParent:
@@ -442,245 +374,6 @@ design: (unnamed)
           \_return_stmt: , line:5:5, endln:5:11
           |vpiName:unused_bit
           |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiIndex:
-          \_constant: , line:5:23, endln:5:24
-            |vpiParent:
-            \_bit_select: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:5:23, endln:5:24
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-    |vpiInstance:
-    \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-  |vpiEndLabel:pkg_a
-|uhdmtopPackages:
-\_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:pkg_b
-  |vpiFullName:pkg_b::
-  |vpiParameter:
-  \_parameter: (pkg_b::ParameterIntEqual4), line:9:17, endln:9:35
-    |vpiParent:
-    \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (pkg_b::ParameterIntEqual4)
-      |vpiParent:
-      \_parameter: (pkg_b::ParameterIntEqual4), line:9:17, endln:9:35
-      |vpiFullName:pkg_b::ParameterIntEqual4
-      |vpiActual:
-      \_int_typespec: , line:9:13, endln:9:16
-    |vpiSigned:1
-    |vpiName:ParameterIntEqual4
-    |vpiFullName:pkg_b::ParameterIntEqual4
-  |vpiParamAssign:
-  \_param_assign: , line:9:17, endln:9:39
-    |vpiParent:
-    \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
-    |vpiRhs:
-    \_constant: , line:9:38, endln:9:39
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:39
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (pkg_b)
-        |vpiParent:
-        \_constant: , line:9:38, endln:9:39
-        |vpiFullName:pkg_b
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (pkg_b::ParameterIntEqual4), line:9:17, endln:9:35
-  |vpiDefName:pkg_b
-  |vpiTop:1
-  |vpiEndLabel:pkg_b
-|uhdmtopPackages:
-\_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:pkg_a
-  |vpiFullName:pkg_a::
-  |vpiParameter:
-  \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
-    |vpiParent:
-    \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (pkg_a::ParameterIntInPkgA)
-      |vpiParent:
-      \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
-      |vpiFullName:pkg_a::ParameterIntInPkgA
-      |vpiActual:
-      \_int_typespec: , line:13:13, endln:13:16
-    |vpiSigned:1
-    |vpiName:ParameterIntInPkgA
-    |vpiFullName:pkg_a::ParameterIntInPkgA
-  |vpiParamAssign:
-  \_param_assign: , line:13:17, endln:13:39
-    |vpiParent:
-    \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-    |vpiRhs:
-    \_constant: , line:13:38, endln:13:39
-      |vpiParent:
-      \_param_assign: , line:13:17, endln:13:39
-      |vpiDecompile:4
-      |vpiSize:32
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (pkg_a)
-        |vpiParent:
-        \_constant: , line:13:38, endln:13:39
-        |vpiFullName:pkg_a
-        |vpiActual:
-        \_int_typespec: , line:13:13, endln:13:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
-  |vpiDefName:pkg_a
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-    |vpiParent:
-    \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-    |vpiName:assert_static_in_package_ThisNameDoesNotMatter
-    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-    |vpiVariables:
-    \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiParent:
-      \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-      |vpiTypespec:
-      \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-        |vpiParent:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_array_typespec: , line:3:9, endln:3:95
-      |vpiName:unused_bit
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-      |vpiArrayType:1
-      |vpiReg:
-      \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiParent:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiTypespec:
-        \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-          |vpiParent:
-          \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_bit_typespec: , line:3:5, endln:3:8
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:22, endln:2:25
-      |vpiParent:
-      \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-      |vpiTypespec:
-      \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter)
-        |vpiParent:
-        \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:22, endln:2:25
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-        |vpiActual:
-        \_bit_typespec: , line:2:22, endln:2:25
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-    |vpiStmt:
-    \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-      |vpiParent:
-      \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-      |vpiVariables:
-      \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:3:9, endln:3:19
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiTypespec:
-        \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter)
-          |vpiParent:
-          \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:3:9, endln:3:19
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-          |vpiActual:
-          \_bit_typespec: , line:3:5, endln:3:8
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-      |vpiVariables:
-      \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiTypespec:
-        \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-          |vpiParent:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_array_typespec: , line:3:9, endln:3:95
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiArrayType:1
-        |vpiReg:
-        \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiParent:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-          |vpiTypespec:
-          \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-            |vpiParent:
-            \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-            |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-            |vpiActual:
-            \_bit_typespec: , line:3:5, endln:3:8
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-      |vpiStmt:
-      \_assignment: , line:4:5, endln:4:34
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_operation: , line:4:18, endln:4:34
-          |vpiParent:
-          \_assignment: , line:4:5, endln:4:34
-          |vpiOpType:75
-          |vpiOperand:
-          \_tagged_pattern: , line:4:29, endln:4:33
-            |vpiParent:
-            \_operation: , line:4:18, endln:4:34
-            |vpiPattern:
-            \_constant: , line:4:29, endln:4:33
-              |vpiDecompile:1'b0
-              |vpiSize:1
-              |BIN:0
-              |vpiConstType:3
-            |vpiTypespec:
-            \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter)
-              |vpiParent:
-              \_tagged_pattern: , line:4:29, endln:4:33
-              |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-              |vpiActual:
-              \_string_typespec: (default), line:4:20, endln:4:27
-        |vpiLhs:
-        \_ref_obj: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:4:5, endln:4:15
-          |vpiParent:
-          \_assignment: , line:4:5, endln:4:34
-          |vpiName:unused_bit
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiStmt:
-      \_return_stmt: , line:5:5, endln:5:11
-        |vpiParent:
-        \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-        |vpiCondition:
-        \_bit_select: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:5:23, endln:5:24
-          |vpiParent:
-          \_return_stmt: , line:5:5, endln:5:11
-          |vpiName:unused_bit
-          |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-          |vpiActual:
-          \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
           |vpiIndex:
           \_constant: , line:5:23, endln:5:24
             |vpiParent:
@@ -699,227 +392,6 @@ design: (unnamed)
   |vpiInstance:
   \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
   |vpiSigned:1
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_parameter: (pkg_b::ParameterIntEqual4), line:9:17, endln:9:35
-  |vpiInstance:
-  \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:8:1, endln:10:19
-  |vpiSigned:1
-\_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-  |vpiParent:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-  |vpiName:assert_static_in_package_ThisNameDoesNotMatter
-  |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-  |vpiVariables:
-  \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiParent:
-    \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-    |vpiTypespec:
-    \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-      |vpiParent:
-      \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-      |vpiActual:
-      \_array_typespec: , line:3:9, endln:3:95
-    |vpiName:unused_bit
-    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-    |vpiArrayType:1
-    |vpiReg:
-    \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiParent:
-      \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiTypespec:
-      \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-        |vpiParent:
-        \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_bit_typespec: , line:3:5, endln:3:8
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:22, endln:2:25
-  |vpiStmt:
-  \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-    |vpiParent:
-    \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-    |vpiVariables:
-    \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiVariables:
-    \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiStmt:
-    \_assignment: , line:4:5, endln:4:34
-      |vpiParent:
-      \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_operation: , line:4:18, endln:4:34
-        |vpiParent:
-        \_assignment: , line:4:5, endln:4:34
-        |vpiOpType:75
-        |vpiOperand:
-        \_tagged_pattern: , line:4:29, endln:4:33
-      |vpiLhs:
-      \_ref_obj: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:4:5, endln:4:15
-        |vpiParent:
-        \_assignment: , line:4:5, endln:4:34
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiStmt:
-    \_return_stmt: , line:5:5, endln:5:11
-      |vpiParent:
-      \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-      |vpiCondition:
-      \_bit_select: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:5:23, endln:5:24
-        |vpiParent:
-        \_return_stmt: , line:5:5, endln:5:11
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiIndex:
-        \_constant: , line:5:23, endln:5:24
-  |vpiInstance:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-\_int_typespec: , line:13:13, endln:13:16
-  |vpiParent:
-  \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
-  |vpiInstance:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-  |vpiSigned:1
-\_bit_typespec: , line:2:22, endln:2:25
-  |vpiInstance:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-\_bit_typespec: , line:3:5, endln:3:8
-  |vpiInstance:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-\_array_typespec: , line:3:9, endln:3:95
-  |vpiRange:
-  \_range: , line:3:21, endln:3:95
-    |vpiParent:
-    \_array_typespec: , line:3:9, endln:3:95
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:3:21, endln:3:95
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:3:21, endln:3:95
-      |vpiParent:
-      \_range: , line:3:21, endln:3:95
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:3:88, endln:3:89
-        |vpiParent:
-        \_operation: , line:3:21, endln:3:95
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: , line:3:9, endln:3:95
-    |vpiActual:
-    \_bit_typespec: , line:3:5, endln:3:8
-\_string_typespec: (default), line:4:20, endln:4:27
-  |vpiParent:
-  \_tagged_pattern: , line:4:29, endln:4:33
-  |vpiName:default
-\_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-  |vpiParent:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
-  |vpiName:assert_static_in_package_ThisNameDoesNotMatter
-  |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-  |vpiVariables:
-  \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiParent:
-    \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-    |vpiTypespec:
-    \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-      |vpiParent:
-      \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-      |vpiActual:
-      \_array_typespec: , line:3:9, endln:3:95
-    |vpiName:unused_bit
-    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-    |vpiArrayType:1
-    |vpiReg:
-    \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiParent:
-      \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-      |vpiTypespec:
-      \_ref_typespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit)
-        |vpiParent:
-        \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_bit_typespec: , line:3:5, endln:3:8
-      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:22, endln:2:25
-  |vpiStmt:
-  \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-    |vpiParent:
-    \_function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:2:3, endln:6:14
-    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter
-    |vpiVariables:
-    \_bit_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiVariables:
-    \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiStmt:
-    \_assignment: , line:4:5, endln:4:34
-      |vpiParent:
-      \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_operation: , line:4:18, endln:4:34
-        |vpiParent:
-        \_assignment: , line:4:5, endln:4:34
-        |vpiOpType:75
-        |vpiOperand:
-        \_tagged_pattern: , line:4:29, endln:4:33
-      |vpiLhs:
-      \_ref_obj: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:4:5, endln:4:15
-        |vpiParent:
-        \_assignment: , line:4:5, endln:4:34
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-    |vpiStmt:
-    \_return_stmt: , line:5:5, endln:5:11
-      |vpiParent:
-      \_begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter), line:4:5, endln:4:35
-      |vpiCondition:
-      \_bit_select: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:5:23, endln:5:24
-        |vpiParent:
-        \_return_stmt: , line:5:5, endln:5:11
-        |vpiName:unused_bit
-        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit
-        |vpiActual:
-        \_array_var: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter::unused_bit), line:3:9, endln:3:19
-        |vpiIndex:
-        \_constant: , line:5:23, endln:5:24
-  |vpiInstance:
-  \_package: pkg_a (pkg_a::), file:${SURELOG_DIR}/tests/PreProcMacroFunc/dut.sv, line:12:1, endln:18:19
 \_int_typespec: , line:13:13, endln:13:16
   |vpiParent:
   \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
@@ -970,7 +442,7 @@ design: (unnamed)
               \_sys_func_call: ($bits), line:3:23, endln:3:48
               |vpiName:ParameterIntInPkgA
               |vpiActual:
-              \_parameter: (pkg_a::ParameterIntInPkgA), line:13:17, endln:13:35
+              \_constant: , line:13:38, endln:13:39
             |vpiName:$bits
           |vpiOperand:
           \_sys_func_call: ($bits), line:3:52, endln:3:84
@@ -1024,4 +496,4 @@ design: (unnamed)
 [ SYNTAX] : 0
 [  ERROR] : 2
 [WARNING] : 2
-[   NOTE] : 4
+[   NOTE] : 0

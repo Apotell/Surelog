@@ -134,67 +134,33 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackBox/dut.sv:5:1: Compile module "work@core".
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackBox/dut.sv:12:1: Compile module "work@nyuzi".
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackBox/dut.sv:25:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/BlackBox/dut.sv:17:9: Compile generate block "work@top.nyuzi.core_gen[0]".
-[NTE:EL0503] ${SURELOG_DIR}/tests/BlackBox/dut.sv:25:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 4.
-[NTE:EL0510] Nb instances: 3.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
 bit_select                                             1
-constant                                               8
+constant                                               1
 cont_assign                                            1
 design                                                 1
 gen_region                                             1
-gen_scope                                              2
-gen_scope_array                                        2
 hier_path                                              1
-int_typespec                                           3
-int_var                                                1
+int_typespec                                           1
 logic_net                                              2
-module_inst                                            8
-operation                                              2
-parameter                                              1
-ref_module                                             2
+module_inst                                            3
+ref_module                                             1
 ref_obj                                                4
-ref_typespec                                           3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  1
-bit_select                                             2
-constant                                               8
-cont_assign                                            2
-design                                                 1
-gen_region                                             1
-gen_scope                                              3
-gen_scope_array                                        3
-hier_path                                              2
-int_typespec                                           3
-int_var                                                2
-logic_net                                              2
-module_inst                                            9
-operation                                              2
-parameter                                              1
-ref_module                                             2
-ref_obj                                                8
-ref_typespec                                           5
+ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackBox/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BlackBox/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BlackBox/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@core (work@core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:5:1, endln:9:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@core
   |vpiDefName:work@core
   |vpiNet:
@@ -213,7 +179,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@nyuzi
   |vpiDefName:work@nyuzi
   |vpiGenStmt:
@@ -228,13 +194,13 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.o), line:31:12, endln:31:13
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+    \_cont_assign: , line:31:12, endln:31:54
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:1
@@ -291,178 +257,15 @@ design: (work@top)
     |vpiDefName:work@nyuzi
     |vpiActual:
     \_module_inst: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@nyuzi (work@top.nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:29:1, endln:29:16
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
-    |vpiName:nyuzi
-    |vpiFullName:work@top.nyuzi
-    |vpiDefName:work@nyuzi
-    |vpiDefFile:${SURELOG_DIR}/tests/BlackBox/dut.sv
-    |vpiDefLineNo:12
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-      |vpiParent:
-      \_module_inst: work@nyuzi (work@top.nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:29:1, endln:29:16
-      |vpiName:core_gen[0]
-      |vpiFullName:work@top.nyuzi.core_gen[0]
-      |vpiGenScope:
-      \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-        |vpiParent:
-        \_gen_scope_array: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-        |vpiFullName:work@top.nyuzi.core_gen[0]
-        |vpiParameter:
-        \_parameter: (work@top.nyuzi.core_gen[0].core_idx), line:16:0
-          |vpiParent:
-          \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-          |UINT:0
-          |vpiTypespec:
-          \_ref_typespec: (work@top.nyuzi.core_gen[0].core_idx)
-            |vpiParent:
-            \_parameter: (work@top.nyuzi.core_gen[0].core_idx), line:16:0
-            |vpiFullName:work@top.nyuzi.core_gen[0].core_idx
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:core_idx
-          |vpiFullName:work@top.nyuzi.core_gen[0].core_idx
-        |vpiModule:
-        \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-          |vpiParent:
-          \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-          |vpiName:core
-          |vpiFullName:work@top.nyuzi.core_gen[0].core
-          |vpiVariables:
-          \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-            |vpiParent:
-            \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-            |vpiTypespec:
-            \_ref_typespec: (work@top.nyuzi.core_gen[0].core.wb_writeback_en)
-              |vpiParent:
-              \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-              |vpiFullName:work@top.nyuzi.core_gen[0].core.wb_writeback_en
-              |vpiActual:
-              \_int_typespec: , line:7:1, endln:7:4
-            |vpiName:wb_writeback_en
-            |vpiFullName:work@top.nyuzi.core_gen[0].core.wb_writeback_en
-            |vpiSigned:1
-            |vpiVisibility:1
-            |vpiInstance:
-            \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-          |vpiDefName:work@core
-          |vpiDefFile:${SURELOG_DIR}/tests/BlackBox/dut.sv
-          |vpiDefLineNo:5
-  |vpiContAssign:
-  \_cont_assign: , line:31:12, endln:31:54
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
-    |vpiRhs:
-    \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
-      |vpiParent:
-      \_cont_assign: , line:31:12, endln:31:54
-      |vpiActual:
-      \_ref_obj: (nyuzi), line:31:16, endln:31:21
-        |vpiParent:
-        \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
-        |vpiName:nyuzi
-        |vpiActual:
-        \_module_inst: work@nyuzi (work@top.nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:29:1, endln:29:16
-      |vpiActual:
-      \_bit_select: (nyuzi.core_gen[0]), line:31:22, endln:31:30
-        |vpiParent:
-        \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
-        |vpiName:core_gen
-        |vpiFullName:nyuzi.core_gen[0]
-        |vpiActual:
-        \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-        |vpiIndex:
-        \_constant: , line:31:31, endln:31:32
-      |vpiActual:
-      \_ref_obj: (core), line:31:34, endln:31:38
-        |vpiParent:
-        \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
-        |vpiName:core
-        |vpiActual:
-        \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-      |vpiActual:
-      \_ref_obj: (work@top.wb_writeback_en), line:31:39, endln:31:54
-        |vpiParent:
-        \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
-        |vpiName:wb_writeback_en
-        |vpiFullName:work@top.wb_writeback_en
-        |vpiActual:
-        \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-      |vpiName:nyuzi.core_gen[0].core.wb_writeback_en
-    |vpiLhs:
-    \_ref_obj: (work@top.o), line:31:12, endln:31:13
-      |vpiParent:
-      \_cont_assign: , line:31:12, endln:31:54
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:31:12, endln:31:13
 \_weaklyReferenced:
 \_int_typespec: , line:7:1, endln:7:4
-  |vpiParent:
-  \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
   |vpiSigned:1
-\_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-  |vpiParent:
-  \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-  |vpiTypespec:
-  \_ref_typespec: (work@top.nyuzi.core_gen[0].core.wb_writeback_en)
-    |vpiParent:
-    \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-    |vpiFullName:work@top.nyuzi.core_gen[0].core.wb_writeback_en
-    |vpiActual:
-    \_int_typespec: , line:7:1, endln:7:4
-  |vpiName:wb_writeback_en
-  |vpiFullName:work@top.nyuzi.core_gen[0].core.wb_writeback_en
-  |vpiSigned:1
-  |vpiVisibility:1
-\_int_typespec: , line:7:1, endln:7:4
-  |vpiSigned:1
-\_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-  |vpiParent:
-  \_gen_scope_array: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-  |vpiFullName:work@top.nyuzi.core_gen[0]
-  |vpiParameter:
-  \_parameter: (work@top.nyuzi.core_gen[0].core_idx), line:16:0
-  |vpiModule:
-  \_module_inst: work@core (work@top.nyuzi.core_gen[0].core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:18:13, endln:18:26
-    |vpiParent:
-    \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-    |vpiName:core
-    |vpiFullName:work@top.nyuzi.core_gen[0].core
-    |vpiVariables:
-    \_int_var: (work@top.nyuzi.core_gen[0].core.wb_writeback_en), line:7:5, endln:7:20
-    |vpiDefName:work@core
-    |vpiDefFile:${SURELOG_DIR}/tests/BlackBox/dut.sv
-    |vpiDefLineNo:5
-\_gen_scope_array: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-  |vpiParent:
-  \_module_inst: work@nyuzi (work@top.nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:29:1, endln:29:16
-  |vpiName:core_gen[0]
-  |vpiFullName:work@top.nyuzi.core_gen[0]
-  |vpiGenScope:
-  \_gen_scope: (work@top.nyuzi.core_gen[0]), line:17:9, endln:19:12
-\_int_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BlackBox/dut.sv | ${SURELOG_DIR}/build/regression/BlackBox/roundtrip/dut_000.sv | 10 | 34 |

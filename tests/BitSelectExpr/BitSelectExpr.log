@@ -93,54 +93,23 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_select                                             2
-constant                                              13
-cont_assign                                            2
+bit_select                                             1
+constant                                               5
+cont_assign                                            1
 design                                                 1
-hier_path                                              2
-int_typespec                                           4
-int_var                                                1
+hier_path                                              1
+int_typespec                                           2
 logic_net                                              2
-module_inst                                            4
-operation                                              2
-packed_array_typespec                                  2
-packed_array_var                                       1
-port                                                   2
-range                                                  3
-ref_obj                                                4
-ref_typespec                                           8
+module_inst                                            1
+operation                                              1
+packed_array_typespec                                  1
+port                                                   1
+range                                                  1
+ref_obj                                                2
+ref_typespec                                           4
 struct_typespec                                        1
-struct_var                                             1
-typespec_member                                        1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_select                                             3
-constant                                              14
-cont_assign                                            3
-design                                                 1
-hier_path                                              3
-int_typespec                                           4
-int_var                                                1
-logic_net                                              2
-module_inst                                            4
-operation                                              3
-packed_array_typespec                                  2
-packed_array_var                                       1
-port                                                   3
-range                                                  3
-ref_obj                                                6
-ref_typespec                                           9
-struct_typespec                                        1
-struct_var                                             1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.uhdm ...
@@ -148,13 +117,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
@@ -272,136 +240,10 @@ design: (work@top)
         |vpiName:nonce
         |vpiFullName:sram_otp_key_o[2 - 2].nonce
       |vpiName:sram_otp_key_o[2 - 2].nonce
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_int_var: (work@top.o), line:1:23, endln:1:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_int_var: (work@top.o), line:1:23, endln:1:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:1:19, endln:1:22
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_packed_array_var: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-    |vpiName:sram_otp_key_o
-    |vpiFullName:work@top.sram_otp_key_o
-    |vpiVisibility:1
-    |vpiRange:
-    \_range: , line:7:23, endln:7:28
-      |vpiParent:
-      \_packed_array_var: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-      |vpiLeftRange:
-      \_constant: , line:7:24, endln:7:25
-        |vpiParent:
-        \_range: , line:7:23, endln:7:28
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:7:26, endln:7:27
-        |vpiParent:
-        \_range: , line:7:23, endln:7:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElement:
-    \_struct_var: (work@top.sram_otp_key_o)
-      |vpiParent:
-      \_packed_array_var: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-      |vpiTypespec:
-      \_ref_typespec: (work@top.sram_otp_key_o)
-        |vpiParent:
-        \_struct_var: (work@top.sram_otp_key_o)
-        |vpiFullName:work@top.sram_otp_key_o
-        |vpiActual:
-        \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
-      |vpiFullName:work@top.sram_otp_key_o
-  |vpiTypedef:
-  \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:1:23, endln:1:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_var: (work@top.o), line:1:23, endln:1:24
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:1:19, endln:1:22
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-  |vpiContAssign:
-  \_cont_assign: , line:9:11, endln:9:40
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-    |vpiRhs:
-    \_constant: , line:9:39, endln:9:40
-    |vpiLhs:
-    \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-      |vpiParent:
-      \_cont_assign: , line:9:11, endln:9:40
-      |vpiActual:
-      \_bit_select: (sram_otp_key_o[2 - 2]), line:9:11, endln:9:25
-        |vpiParent:
-        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-        |vpiName:sram_otp_key_o
-        |vpiFullName:sram_otp_key_o[2 - 2]
-        |vpiActual:
-        \_packed_array_var: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-        |vpiIndex:
-        \_constant: , line:9:26, endln:9:29
-          |vpiDecompile:0
-          |vpiSize:64
-          |INT:0
-          |vpiConstType:7
-      |vpiActual:
-      \_ref_obj: (sram_otp_key_o[2 - 2].nonce), line:9:31, endln:9:36
-        |vpiParent:
-        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-        |vpiName:nonce
-        |vpiFullName:sram_otp_key_o[2 - 2].nonce
-        |vpiActual:
-        \_typespec_member: (nonce), line:4:14, endln:4:19
-      |vpiName:sram_otp_key_o[2 - 2].nonce
 \_weaklyReferenced:
 \_int_typespec: , line:4:7, endln:4:10
   |vpiParent:
   \_typespec_member: (nonce), line:4:14, endln:4:19
-  |vpiSigned:1
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiSigned:1
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiParent:
-  \_int_var: (work@top.o), line:1:23, endln:1:24
   |vpiSigned:1
 \_int_typespec: , line:1:19, endln:1:22
   |vpiSigned:1
@@ -432,55 +274,12 @@ design: (work@top)
     \_packed_array_typespec: , line:7:4, endln:7:28
     |vpiActual:
     \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
-\_cont_assign: , line:9:11, endln:9:40
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-  |vpiRhs:
-  \_constant: , line:9:39, endln:9:40
-  |vpiLhs:
-  \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-    |vpiParent:
-    \_cont_assign: , line:9:11, endln:9:40
-    |vpiActual:
-    \_bit_select: (sram_otp_key_o[2 - 2]), line:9:11, endln:9:25
-      |vpiParent:
-      \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-      |vpiName:sram_otp_key_o
-      |vpiFullName:sram_otp_key_o[2 - 2]
-      |vpiIndex:
-      \_operation: , line:9:26, endln:9:29
-        |vpiParent:
-        \_bit_select: (sram_otp_key_o[2 - 2]), line:9:11, endln:9:25
-        |vpiOpType:11
-        |vpiOperand:
-        \_constant: , line:9:26, endln:9:27
-          |vpiParent:
-          \_operation: , line:9:26, endln:9:29
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:9:28, endln:9:29
-          |vpiParent:
-          \_operation: , line:9:26, endln:9:29
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiActual:
-    \_ref_obj: (sram_otp_key_o[2 - 2].nonce), line:9:31, endln:9:36
-      |vpiParent:
-      \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:25
-      |vpiName:nonce
-      |vpiFullName:sram_otp_key_o[2 - 2].nonce
-    |vpiName:sram_otp_key_o[2 - 2].nonce
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv | ${SURELOG_DIR}/build/regression/BitSelectExpr/roundtrip/dut_000.sv | 4 | 12 |

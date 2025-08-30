@@ -82,65 +82,35 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:7:1: No timescale set for "otp_ctrl_part_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:11:1: No timescale set for "otp_ctrl".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:1:1: Compile package "otp_ctrl_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:7:1: Compile package "otp_ctrl_part_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:11:1: Compile module "work@otp_ctrl".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:11:1: Top level module "work@otp_ctrl".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               7
+constant                                               4
 design                                                 1
-import_typespec                                        3
+import_typespec                                        2
 logic_net                                              2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
-package                                                4
-port                                                   4
-range                                                  2
-ref_obj                                                4
-ref_typespec                                           7
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        2
-unsupported_typespec                                   3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               7
-design                                                 1
-import_typespec                                        3
-logic_net                                              2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            3
-package                                                4
-port                                                   6
-range                                                  2
-ref_obj                                                6
-ref_typespec                                           9
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        2
-unsupported_typespec                                   3
+logic_typespec                                         1
+module_inst                                            1
+package                                                2
+port                                                   2
+range                                                  1
+ref_obj                                                2
+ref_typespec                                           3
+struct_typespec                                        1
+typespec_member                                        1
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@otp_ctrl)
-|vpiElaborated:1
-|vpiName:work@otp_ctrl
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
   |vpiParent:
-  \_design: (work@otp_ctrl)
+  \_design: (unnamed)
   |vpiName:otp_ctrl_pkg
   |vpiFullName:otp_ctrl_pkg::
   |vpiTypedef:
@@ -149,7 +119,7 @@ design: (work@otp_ctrl)
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
     |vpiName:otp_ctrl_pkg::otp_ast_req_t
     |vpiInstance:
-    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
+    \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
     |vpiPacked:1
     |vpiTypespecMember:
     \_typespec_member: (pwr_seq), line:3:17, endln:3:24
@@ -173,53 +143,7 @@ design: (work@otp_ctrl)
 |uhdmallPackages:
 \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
   |vpiParent:
-  \_design: (work@otp_ctrl)
-  |vpiName:otp_ctrl_part_pkg
-  |vpiFullName:otp_ctrl_part_pkg::
-  |vpiTypedef:
-  \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-    |vpiParent:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-    |vpiName:otp_ctrl_pkg::otp_ast_req_t
-    |vpiInstance:
-    \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (pwr_seq), line:3:17, endln:3:24
-      |vpiParent:
-      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-      |vpiName:pwr_seq
-      |vpiTypespec:
-      \_ref_typespec: (work@otp_ctrl.otp_ctrl_pkg::otp_ast_req_t.pwr_seq)
-        |vpiParent:
-        \_typespec_member: (pwr_seq), line:3:17, endln:3:24
-        |vpiFullName:work@otp_ctrl.otp_ctrl_pkg::otp_ast_req_t.pwr_seq
-        |vpiActual:
-        \_logic_typespec: , line:3:5, endln:3:16
-      |vpiRefFile:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:16
-  |vpiTypedef:
-  \_import_typespec: (otp_ctrl_pkg), line:8:10, endln:8:25
-  |vpiDefName:otp_ctrl_part_pkg
-  |vpiEndLabel:otp_ctrl_part_pkg
-|uhdmtopPackages:
-\_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
-  |vpiParent:
-  \_design: (work@otp_ctrl)
-  |vpiName:otp_ctrl_pkg
-  |vpiFullName:otp_ctrl_pkg::
-  |vpiTypedef:
-  \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-  |vpiDefName:otp_ctrl_pkg
-  |vpiTop:1
-  |vpiEndLabel:otp_ctrl_pkg
-|uhdmtopPackages:
-\_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
-  |vpiParent:
-  \_design: (work@otp_ctrl)
+  \_design: (unnamed)
   |vpiName:otp_ctrl_part_pkg
   |vpiFullName:otp_ctrl_part_pkg::
   |vpiTypedef:
@@ -227,12 +151,11 @@ design: (work@otp_ctrl)
   |vpiTypedef:
   \_import_typespec: (otp_ctrl_pkg), line:8:10, endln:8:25
   |vpiDefName:otp_ctrl_part_pkg
-  |vpiTop:1
   |vpiEndLabel:otp_ctrl_part_pkg
 |uhdmallModules:
 \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
   |vpiParent:
-  \_design: (work@otp_ctrl)
+  \_design: (unnamed)
   |vpiFullName:work@otp_ctrl
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
@@ -294,84 +217,6 @@ design: (work@otp_ctrl)
       |vpiActual:
       \_unsupported_typespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiEndLabel:otp_ctrl
-|uhdmtopModules:
-\_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-  |vpiParent:
-  \_design: (work@otp_ctrl)
-  |vpiName:work@otp_ctrl
-  |vpiVariables:
-  \_logic_var: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-    |vpiParent:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-    |vpiName:otp_ast_pwr_seq_h_i
-    |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-  |vpiTypedef:
-  \_import_typespec: (otp_ctrl_pkg), line:12:10, endln:12:25
-  |vpiDefName:work@otp_ctrl
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-    |vpiParent:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-    |vpiTypespec:
-    \_ref_typespec: (work@otp_ctrl.otp_ast_pwr_seq_o)
-      |vpiParent:
-      \_struct_net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o
-      |vpiActual:
-      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-    |vpiName:otp_ast_pwr_seq_o
-    |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (otp_ast_pwr_seq_o), line:14:24, endln:14:41
-    |vpiParent:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-    |vpiName:otp_ast_pwr_seq_o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiParent:
-      \_port: (otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiName:otp_ast_pwr_seq_o
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o
-      |vpiActual:
-      \_struct_net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-    |vpiTypedef:
-    \_ref_typespec: (work@otp_ctrl.otp_ast_pwr_seq_o)
-      |vpiParent:
-      \_port: (otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o
-      |vpiActual:
-      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
-    |vpiInstance:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-  |vpiPort:
-  \_port: (otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-    |vpiParent:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
-    |vpiName:otp_ast_pwr_seq_h_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-      |vpiParent:
-      \_port: (otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-      |vpiName:otp_ast_pwr_seq_h_i
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i
-      |vpiActual:
-      \_logic_var: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-    |vpiTypedef:
-    \_ref_typespec: (work@otp_ctrl.otp_ast_pwr_seq_h_i)
-      |vpiParent:
-      \_port: (otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i
-      |vpiActual:
-      \_unsupported_typespec: (otp_ast_rsp_t), line:15:10, endln:15:23
-    |vpiInstance:
-    \_module_inst: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
 \_weaklyReferenced:
 \_logic_typespec: , line:3:5, endln:3:16
   |vpiParent:
@@ -398,33 +243,6 @@ design: (work@otp_ctrl)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:3:5, endln:3:16
-  |vpiParent:
-  \_typespec_member: (pwr_seq), line:3:17, endln:3:24
-  |vpiInstance:
-  \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
-  |vpiRange:
-  \_range: , line:3:11, endln:3:16
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:16
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_unsupported_typespec: (otp_ast_rsp_t), line:15:10, endln:15:23
-  |vpiName:otp_ast_rsp_t
 \_unsupported_typespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiName:otp_ast_rsp_t
 ===================
@@ -432,11 +250,7 @@ design: (work@otp_ctrl)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
-
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported typespec, otp_ast_rsp_t
-============================== End Linting Results ==============================
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv | ${SURELOG_DIR}/build/regression/PkgImportPkg/roundtrip/dut_000.sv | 8 | 17 |

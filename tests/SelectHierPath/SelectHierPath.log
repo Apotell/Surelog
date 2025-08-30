@@ -89,47 +89,18 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/SelectHierPath/dut.sv:10:1: No timescale set for "IntegerRegisterWriteStage".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/SelectHierPath/dut.sv:10:1: Compile module "work@IntegerRegisterWriteStage".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/SelectHierPath/dut.sv:10:1: Top level module "work@IntegerRegisterWriteStage".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_net                                              1
 bit_select                                             1
-constant                                               4
+constant                                               1
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
 int_typespec                                           1
 logic_net                                              2
-module_inst                                            4
-operation                                              1
-range                                                  1
+module_inst                                            1
 ref_obj                                                3
-ref_typespec                                           3
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        2
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_net                                              1
-bit_select                                             2
-constant                                               4
-cont_assign                                            2
-design                                                 1
-hier_path                                              2
-int_typespec                                           1
-logic_net                                              2
-module_inst                                            4
-operation                                              1
-range                                                  1
-ref_obj                                                6
-ref_typespec                                           3
-struct_net                                             1
+ref_typespec                                           2
 struct_typespec                                        2
 typespec_member                                        2
 === UHDM Object Stats End ===
@@ -138,13 +109,12 @@ typespec_member                                        2
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SelectHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@IntegerRegisterWriteStage)
-|vpiElaborated:1
-|vpiName:work@IntegerRegisterWriteStage
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
   |vpiParent:
-  \_design: (work@IntegerRegisterWriteStage)
+  \_design: (unnamed)
   |vpiFullName:work@IntegerRegisterWriteStage
   |vpiDefName:work@IntegerRegisterWriteStage
   |vpiNet:
@@ -156,7 +126,7 @@ design: (work@IntegerRegisterWriteStage)
   |vpiNet:
   \_logic_net: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
     |vpiParent:
-    \_module_inst: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
+    \_cont_assign: , line:14:8, endln:14:40
     |vpiName:o
     |vpiFullName:work@IntegerRegisterWriteStage.o
     |vpiNetType:1
@@ -203,10 +173,10 @@ design: (work@IntegerRegisterWriteStage)
 |vpiTypedef:
 \_struct_typespec: (BranchResult), line:1:9, endln:3:2
   |vpiParent:
-  \_design: (work@IntegerRegisterWriteStage)
+  \_typespec_member: (brResult), line:6:18, endln:6:26
   |vpiName:BranchResult
   |vpiInstance:
-  \_design: (work@IntegerRegisterWriteStage)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (nextAddr), line:2:9, endln:2:17
@@ -214,10 +184,10 @@ design: (work@IntegerRegisterWriteStage)
     \_struct_typespec: (BranchResult), line:1:9, endln:3:2
     |vpiName:nextAddr
     |vpiTypespec:
-    \_ref_typespec: (BranchResult.nextAddr)
+    \_ref_typespec: (IntegerRegisterWriteStageRegPath.brResult.BranchResult.nextAddr)
       |vpiParent:
       \_typespec_member: (nextAddr), line:2:9, endln:2:17
-      |vpiFullName:BranchResult.nextAddr
+      |vpiFullName:IntegerRegisterWriteStageRegPath.brResult.BranchResult.nextAddr
       |vpiActual:
       \_int_typespec: , line:2:5, endln:2:8
     |vpiRefFile:${SURELOG_DIR}/tests/SelectHierPath/dut.sv
@@ -228,10 +198,10 @@ design: (work@IntegerRegisterWriteStage)
 |vpiTypedef:
 \_struct_typespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
   |vpiParent:
-  \_design: (work@IntegerRegisterWriteStage)
+  \_design: (unnamed)
   |vpiName:IntegerRegisterWriteStageRegPath
   |vpiInstance:
-  \_design: (work@IntegerRegisterWriteStage)
+  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (brResult), line:6:18, endln:6:26
@@ -250,106 +220,6 @@ design: (work@IntegerRegisterWriteStage)
     |vpiRefColumnNo:5
     |vpiRefEndLineNo:6
     |vpiRefEndColumnNo:17
-|uhdmtopModules:
-\_module_inst: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
-  |vpiParent:
-  \_design: (work@IntegerRegisterWriteStage)
-  |vpiName:work@IntegerRegisterWriteStage
-  |vpiDefName:work@IntegerRegisterWriteStage
-  |vpiTop:1
-  |vpiArrayNet:
-  \_array_net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-    |vpiParent:
-    \_module_inst: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
-    |vpiSize:2
-    |vpiName:pipeReg
-    |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
-    |vpiRange:
-    \_range: , line:12:43, endln:12:44
-      |vpiParent:
-      \_array_net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:12:43, endln:12:44
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:12:43, endln:12:44
-        |vpiParent:
-        \_range: , line:12:43, endln:12:44
-        |vpiOpType:11
-        |vpiOperand:
-        \_constant: , line:12:43, endln:12:44
-          |vpiParent:
-          \_operation: , line:12:43, endln:12:44
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiNet:
-    \_struct_net: (work@IntegerRegisterWriteStage.pipeReg.pipeReg), line:12:34, endln:12:45
-      |vpiParent:
-      \_array_net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-      |vpiTypespec:
-      \_ref_typespec: (work@IntegerRegisterWriteStage.pipeReg.pipeReg)
-        |vpiParent:
-        \_struct_net: (work@IntegerRegisterWriteStage.pipeReg.pipeReg), line:12:34, endln:12:45
-        |vpiFullName:work@IntegerRegisterWriteStage.pipeReg.pipeReg
-        |vpiActual:
-        \_struct_typespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
-      |vpiName:pipeReg
-      |vpiFullName:work@IntegerRegisterWriteStage.pipeReg.pipeReg
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:14:8, endln:14:40
-    |vpiParent:
-    \_module_inst: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
-    |vpiRhs:
-    \_hier_path: (pipeReg[1].brResult.nextAddr), line:14:12, endln:14:40
-      |vpiParent:
-      \_cont_assign: , line:14:8, endln:14:40
-      |vpiActual:
-      \_bit_select: (pipeReg[1]), line:14:12, endln:14:19
-        |vpiParent:
-        \_hier_path: (pipeReg[1].brResult.nextAddr), line:14:12, endln:14:40
-        |vpiName:pipeReg
-        |vpiFullName:pipeReg[1]
-        |vpiActual:
-        \_array_net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-        |vpiIndex:
-        \_constant: , line:14:20, endln:14:21
-      |vpiActual:
-      \_ref_obj: (brResult), line:14:23, endln:14:31
-        |vpiParent:
-        \_hier_path: (pipeReg[1].brResult.nextAddr), line:14:12, endln:14:40
-        |vpiName:brResult
-        |vpiActual:
-        \_typespec_member: (brResult), line:6:18, endln:6:26
-      |vpiActual:
-      \_ref_obj: (work@IntegerRegisterWriteStage.nextAddr), line:14:32, endln:14:40
-        |vpiParent:
-        \_hier_path: (pipeReg[1].brResult.nextAddr), line:14:12, endln:14:40
-        |vpiName:nextAddr
-        |vpiFullName:work@IntegerRegisterWriteStage.nextAddr
-        |vpiActual:
-        \_typespec_member: (nextAddr), line:2:9, endln:2:17
-      |vpiName:pipeReg[1].brResult.nextAddr
-    |vpiLhs:
-    \_ref_obj: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
-      |vpiParent:
-      \_cont_assign: , line:14:8, endln:14:40
-      |vpiName:o
-      |vpiFullName:work@IntegerRegisterWriteStage.o
-      |vpiActual:
-      \_logic_net: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
 \_weaklyReferenced:
 \_int_typespec: , line:2:5, endln:2:8
   |vpiParent:
@@ -360,7 +230,7 @@ design: (work@IntegerRegisterWriteStage)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/SelectHierPath/dut.sv | ${SURELOG_DIR}/build/regression/SelectHierPath/roundtrip/dut_000.sv | 1 | 16 |

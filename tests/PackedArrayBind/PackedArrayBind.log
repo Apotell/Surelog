@@ -142,12 +142,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv:1:1: No timescale set for "PreDecodeStage".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv:1:1: Compile module "work@PreDecodeStage".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv:1:1: Top level module "work@PreDecodeStage".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             1
@@ -157,31 +151,12 @@ design                                                 1
 hier_path                                              1
 logic_net                                              2
 logic_typespec                                         2
-module_inst                                            3
+module_inst                                            1
 packed_array_typespec                                  2
 range                                                  4
 ref_obj                                                4
-ref_typespec                                           6
+ref_typespec                                           5
 struct_typespec                                        3
-struct_var                                             1
-typespec_member                                        3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_select                                             2
-constant                                               9
-cont_assign                                            2
-design                                                 1
-hier_path                                              2
-logic_net                                              2
-logic_typespec                                         2
-module_inst                                            3
-packed_array_typespec                                  2
-range                                                  4
-ref_obj                                                8
-ref_typespec                                           6
-struct_typespec                                        3
-struct_var                                             1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/surelog.uhdm ...
@@ -189,13 +164,12 @@ typespec_member                                        3
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@PreDecodeStage)
-|vpiElaborated:1
-|vpiName:work@PreDecodeStage
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
   |vpiParent:
-  \_design: (work@PreDecodeStage)
+  \_design: (unnamed)
   |vpiFullName:work@PreDecodeStage
   |vpiTypedef:
   \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
@@ -252,7 +226,7 @@ design: (work@PreDecodeStage)
   |vpiTypedef:
   \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
     |vpiParent:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
+    \_typespec_member: (memOpInfo), line:12:15, endln:12:24
     |vpiName:MemOpInfo
     |vpiInstance:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
@@ -263,10 +237,10 @@ design: (work@PreDecodeStage)
       \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
       |vpiName:mshrID
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.MemOpInfo.mshrID)
+      \_ref_typespec: (work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo.mshrID)
         |vpiParent:
         \_typespec_member: (mshrID), line:7:20, endln:7:26
-        |vpiFullName:work@PreDecodeStage.MemOpInfo.mshrID
+        |vpiFullName:work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo.mshrID
         |vpiActual:
         \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
       |vpiRefFile:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv
@@ -309,7 +283,7 @@ design: (work@PreDecodeStage)
   |vpiNet:
   \_logic_net: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
     |vpiParent:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
+    \_cont_assign: , line:24:9, endln:24:60
     |vpiName:mshrID
     |vpiFullName:work@PreDecodeStage.mshrID
     |vpiNetType:1
@@ -358,95 +332,16 @@ design: (work@PreDecodeStage)
       |vpiFullName:work@PreDecodeStage.mshrID
       |vpiActual:
       \_logic_net: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
-|uhdmtopModules:
-\_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-  |vpiParent:
-  \_design: (work@PreDecodeStage)
-  |vpiName:work@PreDecodeStage
-  |vpiVariables:
-  \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
-    |vpiParent:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-    |vpiTypespec:
-    \_ref_typespec: (work@PreDecodeStage.replayEntryOut)
-      |vpiParent:
-      \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
-      |vpiFullName:work@PreDecodeStage.replayEntryOut
-      |vpiActual:
-      \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
-    |vpiName:replayEntryOut
-    |vpiFullName:work@PreDecodeStage.replayEntryOut
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-  |vpiTypedef:
-  \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
-  |vpiTypedef:
-  \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
-  |vpiTypedef:
-  \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
-  |vpiDefName:work@PreDecodeStage
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:24:9, endln:24:60
-    |vpiParent:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-    |vpiRhs:
-    \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
-      |vpiParent:
-      \_cont_assign: , line:24:9, endln:24:60
-      |vpiActual:
-      \_ref_obj: (replayEntryOut), line:24:18, endln:24:32
-        |vpiParent:
-        \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
-        |vpiName:replayEntryOut
-        |vpiActual:
-        \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
-      |vpiActual:
-      \_bit_select: (replayEntryOut.memData[0]), line:24:33, endln:24:40
-        |vpiParent:
-        \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
-        |vpiName:memData
-        |vpiFullName:replayEntryOut.memData[0]
-        |vpiActual:
-        \_typespec_member: (memData), line:17:36, endln:17:43
-        |vpiIndex:
-        \_constant: , line:24:41, endln:24:42
-      |vpiActual:
-      \_ref_obj: (memOpInfo), line:24:44, endln:24:53
-        |vpiParent:
-        \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
-        |vpiName:memOpInfo
-        |vpiActual:
-        \_typespec_member: (memOpInfo), line:12:15, endln:12:24
-      |vpiActual:
-      \_ref_obj: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
-        |vpiParent:
-        \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
-        |vpiName:mshrID
-        |vpiFullName:work@PreDecodeStage.mshrID
-        |vpiActual:
-        \_typespec_member: (mshrID), line:7:20, endln:7:26
-      |vpiName:replayEntryOut.memData[0].memOpInfo.mshrID
-    |vpiLhs:
-    \_ref_obj: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
-      |vpiParent:
-      \_cont_assign: , line:24:9, endln:24:60
-      |vpiName:mshrID
-      |vpiFullName:work@PreDecodeStage.mshrID
-      |vpiActual:
-      \_logic_net: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
 \_weaklyReferenced:
 \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
   |vpiParent:
   \_typespec_member: (mshrID), line:7:20, endln:7:26
   |vpiName:MSHR_IndexPath
   |vpiTypedefAlias:
-  \_ref_typespec: (work@PreDecodeStage.MemOpInfo.mshrID.MSHR_IndexPath)
+  \_ref_typespec: (work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo.mshrID.MSHR_IndexPath)
     |vpiParent:
     \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-    |vpiFullName:work@PreDecodeStage.MemOpInfo.mshrID.MSHR_IndexPath
+    |vpiFullName:work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo.mshrID.MSHR_IndexPath
     |vpiActual:
     \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
   |vpiRange:
@@ -504,7 +399,7 @@ design: (work@PreDecodeStage)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayBind/roundtrip/dut_000.sv | 8 | 26 |

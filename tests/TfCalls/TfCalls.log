@@ -4,24 +4,18 @@
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/TfCalls/top.v:1:1: Compile module "work@m1".
 [NTE:CP0309] ${SURELOG_DIR}/tests/TfCalls/top.v:1:29: Implicit port type (wire) for "out".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/TfCalls/top.v:1:1: Top level module "work@m1".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
 constant                                               1
 design                                                 1
 initial                                                1
-logic_net                                              4
-logic_typespec                                         6
-module_inst                                            2
-port                                                   4
-ref_obj                                                5
-ref_typespec                                           6
+logic_net                                              2
+logic_typespec                                         2
+module_inst                                            1
+port                                                   2
+ref_obj                                                3
+ref_typespec                                           2
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TfCalls/slpp_unit/surelog.uhdm ...
@@ -29,12 +23,12 @@ sys_func_call                                          1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TfCalls/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@m1)
-|vpiName:work@m1
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@m1)
+  \_design: (unnamed)
   |vpiFullName:work@m1
   |vpiDefName:work@m1
   |vpiNet:
@@ -121,93 +115,7 @@ design: (work@m1)
           |vpiActual:
           \_logic_net: (work@m1.clk), line:1:17, endln:1:20
         |vpiName:$display
-|uhdmtopModules:
-\_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@m1)
-  |vpiName:work@m1
-  |vpiDefName:work@m1
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@m1.clk), line:1:17, endln:1:20
-    |vpiParent:
-    \_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@m1.clk)
-      |vpiParent:
-      \_logic_net: (work@m1.clk), line:1:17, endln:1:20
-      |vpiFullName:work@m1.clk
-      |vpiActual:
-      \_logic_typespec: , line:1:17, endln:1:17
-    |vpiName:clk
-    |vpiFullName:work@m1.clk
-  |vpiNet:
-  \_logic_net: (work@m1.out), line:1:29, endln:1:32
-    |vpiParent:
-    \_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@m1.out)
-      |vpiParent:
-      \_logic_net: (work@m1.out), line:1:29, endln:1:32
-      |vpiFullName:work@m1.out
-      |vpiActual:
-      \_logic_typespec: , line:1:29, endln:1:29
-    |vpiName:out
-    |vpiFullName:work@m1.out
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (clk), line:1:17, endln:1:20
-    |vpiParent:
-    \_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
-    |vpiName:clk
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@m1.clk), line:1:17, endln:1:20
-      |vpiParent:
-      \_port: (clk), line:1:17, endln:1:20
-      |vpiName:clk
-      |vpiFullName:work@m1.clk
-      |vpiActual:
-      \_logic_net: (work@m1.clk), line:1:17, endln:1:20
-    |vpiTypedef:
-    \_ref_typespec: (work@m1.clk)
-      |vpiParent:
-      \_port: (clk), line:1:17, endln:1:20
-      |vpiFullName:work@m1.clk
-      |vpiActual:
-      \_logic_typespec: , line:1:17, endln:1:17
-  |vpiPort:
-  \_port: (out), line:1:29, endln:1:32
-    |vpiParent:
-    \_module_inst: work@m1 (work@m1), file:${SURELOG_DIR}/tests/TfCalls/top.v, line:1:1, endln:5:10
-    |vpiName:out
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@m1.out), line:1:29, endln:1:32
-      |vpiParent:
-      \_port: (out), line:1:29, endln:1:32
-      |vpiName:out
-      |vpiFullName:work@m1.out
-      |vpiActual:
-      \_logic_net: (work@m1.out), line:1:29, endln:1:32
-    |vpiTypedef:
-    \_ref_typespec: (work@m1.out)
-      |vpiParent:
-      \_port: (out), line:1:29, endln:1:32
-      |vpiFullName:work@m1.out
-      |vpiActual:
-      \_logic_typespec: , line:1:29, endln:1:29
-  |vpiProcess:
-  \_initial: , line:2:3, endln:4:6
 \_weaklyReferenced:
-\_logic_typespec: , line:1:17, endln:1:17
-\_logic_typespec: , line:1:29, endln:1:29
-\_logic_typespec: , line:1:17, endln:1:17
-  |vpiParent:
-  \_logic_net: (work@m1.clk), line:1:17, endln:1:20
-\_logic_typespec: , line:1:29, endln:1:29
-  |vpiParent:
-  \_logic_net: (work@m1.out), line:1:29, endln:1:32
 \_logic_typespec: , line:1:17, endln:1:17
 \_logic_typespec: , line:1:29, endln:1:29
 ===================
@@ -215,7 +123,7 @@ design: (work@m1)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 6
+[   NOTE] : 1
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/TfCalls/top.v | ${SURELOG_DIR}/build/regression/TfCalls/roundtrip/top_000.v | 1 | 5 |

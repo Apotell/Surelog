@@ -95,54 +95,32 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv:7:1: Compile module "work@prim_flop".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              17
+constant                                               3
 design                                                 1
-int_typespec                                           2
-logic_typespec                                         2
-module_inst                                            6
-operation                                              2
-param_assign                                           4
-parameter                                              4
-range                                                  2
+int_typespec                                           1
+logic_typespec                                         1
+module_inst                                            2
+operation                                              1
+param_assign                                           2
+parameter                                              2
+range                                                  1
 ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           8
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              17
-design                                                 1
-int_typespec                                           2
-logic_typespec                                         2
-module_inst                                            6
-operation                                              2
-param_assign                                           4
-parameter                                              4
-range                                                  2
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           8
+ref_obj                                                2
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloadProp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamOverloadProp/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloadProp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@prim_flop
   |vpiParameter:
   \_parameter: (work@prim_flop.Width), line:8:18, endln:8:23
@@ -209,7 +187,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
@@ -220,97 +198,6 @@ design: (work@top)
     |vpiDefName:work@prim_flop
     |vpiActual:
     \_module_inst: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@prim_flop (work@top.u_prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:2:4, endln:4:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
-    |vpiName:u_prim_flop
-    |vpiFullName:work@top.u_prim_flop
-    |vpiParameter:
-    \_parameter: (work@top.u_prim_flop.Width), line:8:18, endln:8:23
-      |vpiParent:
-      \_module_inst: work@prim_flop (work@top.u_prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:2:4, endln:4:20
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_prim_flop.Width)
-        |vpiParent:
-        \_parameter: (work@top.u_prim_flop.Width), line:8:18, endln:8:23
-        |vpiFullName:work@top.u_prim_flop.Width
-        |vpiActual:
-        \_int_typespec: , line:8:14, endln:8:17
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@top.u_prim_flop.Width
-    |vpiParameter:
-    \_parameter: (work@top.u_prim_flop.ResetValue), line:9:32, endln:9:42
-      |vpiParent:
-      \_module_inst: work@prim_flop (work@top.u_prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:2:4, endln:4:20
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_prim_flop.ResetValue)
-        |vpiParent:
-        \_parameter: (work@top.u_prim_flop.ResetValue), line:9:32, endln:9:42
-        |vpiFullName:work@top.u_prim_flop.ResetValue
-        |vpiActual:
-        \_logic_typespec: , line:9:14, endln:9:31
-      |vpiName:ResetValue
-      |vpiFullName:work@top.u_prim_flop.ResetValue
-    |vpiParamAssign:
-    \_param_assign: , line:8:18, endln:8:27
-      |vpiParent:
-      \_module_inst: work@prim_flop (work@top.u_prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:2:4, endln:4:20
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:8:26, endln:8:27
-        |vpiParent:
-        \_param_assign: , line:8:18, endln:8:27
-        |vpiDecompile:22
-        |vpiSize:32
-        |UINT:22
-        |vpiTypespec:
-        \_ref_typespec: (work@top.u_prim_flop)
-          |vpiParent:
-          \_constant: , line:8:26, endln:8:27
-          |vpiFullName:work@top.u_prim_flop
-          |vpiActual:
-          \_int_typespec: , line:8:14, endln:8:17
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.u_prim_flop.Width), line:8:18, endln:8:23
-    |vpiParamAssign:
-    \_param_assign: , line:9:32, endln:9:50
-      |vpiParent:
-      \_module_inst: work@prim_flop (work@top.u_prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:2:4, endln:4:20
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:9:45, endln:9:50
-        |vpiParent:
-        \_param_assign: , line:9:32, endln:9:50
-        |vpiDecompile:22
-        |vpiSize:22
-        |UINT:22
-        |vpiTypespec:
-        \_ref_typespec: (work@top.u_prim_flop)
-          |vpiParent:
-          \_constant: , line:9:45, endln:9:50
-          |vpiFullName:work@top.u_prim_flop
-          |vpiActual:
-          \_logic_typespec: , line:9:14, endln:9:31
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.u_prim_flop.ResetValue), line:9:32, endln:9:42
-    |vpiDefName:work@prim_flop
-    |vpiDefFile:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv
-    |vpiDefLineNo:7
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
 \_weaklyReferenced:
 \_int_typespec: , line:8:14, endln:8:17
   |vpiParent:
@@ -334,48 +221,6 @@ design: (work@top)
         \_operation: , line:9:21, endln:9:28
         |vpiName:Width
         |vpiFullName:work@prim_flop.ResetValue.Width
-        |vpiActual:
-        \_parameter: (work@top.u_prim_flop.Width), line:8:18, endln:8:23
-      |vpiOperand:
-      \_constant: , line:9:27, endln:9:28
-        |vpiParent:
-        \_operation: , line:9:21, endln:9:28
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:29, endln:9:30
-      |vpiParent:
-      \_range: , line:9:20, endln:9:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:8:14, endln:8:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_prim_flop.Width)
-  |vpiSigned:1
-\_logic_typespec: , line:9:14, endln:9:31
-  |vpiParent:
-  \_ref_typespec: (work@top.u_prim_flop.ResetValue)
-  |vpiRange:
-  \_range: , line:9:20, endln:9:31
-    |vpiParent:
-    \_logic_typespec: , line:9:14, endln:9:31
-    |vpiLeftRange:
-    \_operation: , line:9:21, endln:9:28
-      |vpiParent:
-      \_range: , line:9:20, endln:9:31
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.u_prim_flop.ResetValue.Width), line:9:21, endln:9:26
-        |vpiParent:
-        \_operation: , line:9:21, endln:9:28
-        |vpiName:Width
-        |vpiFullName:work@top.u_prim_flop.ResetValue.Width
-        |vpiActual:
-        \_parameter: (work@top.u_prim_flop.Width), line:8:18, endln:8:23
       |vpiOperand:
       \_constant: , line:9:27, endln:9:28
         |vpiParent:
@@ -397,7 +242,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv | ${SURELOG_DIR}/build/regression/ParamOverloadProp/roundtrip/dut_000.sv | 3 | 10 |

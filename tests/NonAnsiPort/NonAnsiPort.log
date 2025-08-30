@@ -216,44 +216,35 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:7:1: No timescale set for "pkg2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:13:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:1:1: Compile package "pkg1".
-[INF:CP0301] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:7:1: Compile package "pkg2".
 [INF:CP0303] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:13:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:13:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              16
-cont_assign                                            6
+constant                                               9
+cont_assign                                            3
 design                                                 1
-hier_path                                              6
+hier_path                                              3
 logic_net                                              3
-logic_typespec                                         5
-module_inst                                            5
-package                                                4
-port                                                   6
-range                                                  5
-ref_obj                                               18
-ref_typespec                                          14
-struct_net                                             3
-struct_typespec                                        5
-typespec_member                                        5
+logic_typespec                                         3
+module_inst                                            1
+package                                                2
+port                                                   3
+range                                                  3
+ref_obj                                                9
+ref_typespec                                           6
+struct_typespec                                        3
+typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:pkg1
   |vpiFullName:pkg1::
   |vpiTypedef:
@@ -285,7 +276,7 @@ design: (work@dut)
 |uhdmallPackages:
 \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:pkg2
   |vpiFullName:pkg2::
   |vpiTypedef:
@@ -314,76 +305,10 @@ design: (work@dut)
       |vpiRefEndLineNo:9
       |vpiRefEndColumnNo:20
   |vpiDefName:pkg2
-|uhdmtopPackages:
-\_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:pkg1
-  |vpiFullName:pkg1::
-  |vpiTypedef:
-  \_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-    |vpiParent:
-    \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-    |vpiName:pkg1::struct1
-    |vpiInstance:
-    \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (first), line:3:21, endln:3:26
-      |vpiParent:
-      \_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-      |vpiName:first
-      |vpiTypespec:
-      \_ref_typespec: (pkg1::pkg1::struct1::first)
-        |vpiParent:
-        \_typespec_member: (first), line:3:21, endln:3:26
-        |vpiFullName:pkg1::pkg1::struct1::first
-        |vpiActual:
-        \_logic_typespec: , line:3:9, endln:3:20
-      |vpiRefFile:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:20
-  |vpiDefName:pkg1
-  |vpiTop:1
-|uhdmtopPackages:
-\_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:pkg2
-  |vpiFullName:pkg2::
-  |vpiTypedef:
-  \_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-    |vpiParent:
-    \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-    |vpiName:pkg2::struct1
-    |vpiInstance:
-    \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (second), line:9:21, endln:9:27
-      |vpiParent:
-      \_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-      |vpiName:second
-      |vpiTypespec:
-      \_ref_typespec: (pkg2::pkg2::struct1::second)
-        |vpiParent:
-        \_typespec_member: (second), line:9:21, endln:9:27
-        |vpiFullName:pkg2::pkg2::struct1::second
-        |vpiActual:
-        \_logic_typespec: , line:9:9, endln:9:20
-      |vpiRefFile:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv
-      |vpiRefLineNo:9
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:9
-      |vpiRefEndColumnNo:20
-  |vpiDefName:pkg2
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_struct_typespec: (struct2), line:14:13, endln:16:6
@@ -417,14 +342,12 @@ design: (work@dut)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
     |vpiName:var1
     |vpiFullName:work@dut.var1
-    |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut.var2), line:13:18, endln:13:22
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
     |vpiName:var2
     |vpiFullName:work@dut.var2
-    |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut.var3), line:13:24, endln:13:28
     |vpiParent:
@@ -575,183 +498,6 @@ design: (work@dut)
         \_hier_path: (var3.third), line:24:12, endln:24:22
         |vpiName:third
       |vpiName:var3.third
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiTypedef:
-  \_struct_typespec: (struct2), line:14:13, endln:16:6
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@dut.var1), line:13:12, endln:13:16
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.var1)
-      |vpiParent:
-      \_struct_net: (work@dut.var1), line:13:12, endln:13:16
-      |vpiFullName:work@dut.var1
-      |vpiActual:
-      \_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-    |vpiName:var1
-    |vpiFullName:work@dut.var1
-    |vpiNetType:1
-  |vpiNet:
-  \_struct_net: (work@dut.var2), line:13:18, endln:13:22
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.var2)
-      |vpiParent:
-      \_struct_net: (work@dut.var2), line:13:18, endln:13:22
-      |vpiFullName:work@dut.var2
-      |vpiActual:
-      \_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-    |vpiName:var2
-    |vpiFullName:work@dut.var2
-    |vpiNetType:1
-  |vpiNet:
-  \_struct_net: (work@dut.var3), line:13:24, endln:13:28
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.var3)
-      |vpiParent:
-      \_struct_net: (work@dut.var3), line:13:24, endln:13:28
-      |vpiFullName:work@dut.var3
-      |vpiActual:
-      \_struct_typespec: (struct2), line:14:13, endln:16:6
-    |vpiName:var3
-    |vpiFullName:work@dut.var3
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (var1), line:13:12, endln:13:16
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiName:var1
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.var1), line:13:12, endln:13:16
-      |vpiParent:
-      \_port: (var1), line:13:12, endln:13:16
-      |vpiName:var1
-      |vpiFullName:work@dut.var1
-      |vpiActual:
-      \_struct_net: (work@dut.var1), line:13:12, endln:13:16
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.var1)
-      |vpiParent:
-      \_port: (var1), line:13:12, endln:13:16
-      |vpiFullName:work@dut.var1
-      |vpiActual:
-      \_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-  |vpiPort:
-  \_port: (var2), line:13:18, endln:13:22
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiName:var2
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.var2), line:13:18, endln:13:22
-      |vpiParent:
-      \_port: (var2), line:13:18, endln:13:22
-      |vpiName:var2
-      |vpiFullName:work@dut.var2
-      |vpiActual:
-      \_struct_net: (work@dut.var2), line:13:18, endln:13:22
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.var2)
-      |vpiParent:
-      \_port: (var2), line:13:18, endln:13:22
-      |vpiFullName:work@dut.var2
-      |vpiActual:
-      \_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-  |vpiPort:
-  \_port: (var3), line:13:24, endln:13:28
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiName:var3
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.var3), line:13:24, endln:13:28
-      |vpiParent:
-      \_port: (var3), line:13:24, endln:13:28
-      |vpiName:var3
-      |vpiFullName:work@dut.var3
-      |vpiActual:
-      \_struct_net: (work@dut.var3), line:13:24, endln:13:28
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.var3)
-      |vpiParent:
-      \_port: (var3), line:13:24, endln:13:28
-      |vpiFullName:work@dut.var3
-      |vpiActual:
-      \_struct_typespec: (struct2), line:14:13, endln:16:6
-  |vpiContAssign:
-  \_cont_assign: , line:22:12, endln:22:28
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiRhs:
-    \_constant: , line:22:25, endln:22:28
-    |vpiLhs:
-    \_hier_path: (var1.first), line:22:12, endln:22:22
-      |vpiParent:
-      \_cont_assign: , line:22:12, endln:22:28
-      |vpiActual:
-      \_ref_obj: (var1), line:22:17, endln:22:22
-        |vpiParent:
-        \_hier_path: (var1.first), line:22:12, endln:22:22
-        |vpiName:var1
-      |vpiActual:
-      \_ref_obj: (first), line:22:17, endln:22:22
-        |vpiParent:
-        \_hier_path: (var1.first), line:22:12, endln:22:22
-        |vpiName:first
-      |vpiName:var1.first
-  |vpiContAssign:
-  \_cont_assign: , line:23:12, endln:23:29
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiRhs:
-    \_constant: , line:23:26, endln:23:29
-    |vpiLhs:
-    \_hier_path: (var2.second), line:23:12, endln:23:23
-      |vpiParent:
-      \_cont_assign: , line:23:12, endln:23:29
-      |vpiActual:
-      \_ref_obj: (var2), line:23:17, endln:23:23
-        |vpiParent:
-        \_hier_path: (var2.second), line:23:12, endln:23:23
-        |vpiName:var2
-      |vpiActual:
-      \_ref_obj: (second), line:23:17, endln:23:23
-        |vpiParent:
-        \_hier_path: (var2.second), line:23:12, endln:23:23
-        |vpiName:second
-      |vpiName:var2.second
-  |vpiContAssign:
-  \_cont_assign: , line:24:12, endln:24:27
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
-    |vpiRhs:
-    \_constant: , line:24:25, endln:24:27
-    |vpiLhs:
-    \_hier_path: (var3.third), line:24:12, endln:24:22
-      |vpiParent:
-      \_cont_assign: , line:24:12, endln:24:27
-      |vpiActual:
-      \_ref_obj: (var3), line:24:17, endln:24:22
-        |vpiParent:
-        \_hier_path: (var3.third), line:24:12, endln:24:22
-        |vpiName:var3
-      |vpiActual:
-      \_ref_obj: (third), line:24:17, endln:24:22
-        |vpiParent:
-        \_hier_path: (var3.third), line:24:12, endln:24:22
-        |vpiName:third
-      |vpiName:var3.third
 \_weaklyReferenced:
 \_logic_typespec: , line:3:9, endln:3:20
   |vpiParent:
@@ -774,56 +520,6 @@ design: (work@dut)
     \_constant: , line:3:18, endln:3:19
       |vpiParent:
       \_range: , line:3:15, endln:3:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:9, endln:3:20
-  |vpiParent:
-  \_typespec_member: (first), line:3:21, endln:3:26
-  |vpiInstance:
-  \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-  |vpiRange:
-  \_range: , line:3:15, endln:3:20
-    |vpiParent:
-    \_logic_typespec: , line:3:9, endln:3:20
-    |vpiLeftRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:18, endln:3:19
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:9, endln:9:20
-  |vpiParent:
-  \_typespec_member: (second), line:9:21, endln:9:27
-  |vpiInstance:
-  \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-  |vpiRange:
-  \_range: , line:9:15, endln:9:20
-    |vpiParent:
-    \_logic_typespec: , line:9:9, endln:9:20
-    |vpiLeftRange:
-    \_constant: , line:9:16, endln:9:17
-      |vpiParent:
-      \_range: , line:9:15, endln:9:20
-      |vpiDecompile:6
-      |vpiSize:64
-      |UINT:6
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:18, endln:9:19
-      |vpiParent:
-      \_range: , line:9:15, endln:9:20
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
@@ -881,7 +577,7 @@ design: (work@dut)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv | ${SURELOG_DIR}/build/regression/NonAnsiPort/roundtrip/dut_000.sv | 6 | 25 |

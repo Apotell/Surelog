@@ -140,69 +140,37 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LongHex/dut.sv:6:1: No timescale set for "aes_cipher_core".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LongHex/dut.sv:11:1: No timescale set for "aes_core".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/LongHex/dut.sv:1:1: Compile package "aes_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LongHex/dut.sv:6:1: Compile module "work@aes_cipher_core".
 [INF:CP0303] ${SURELOG_DIR}/tests/LongHex/dut.sv:11:1: Compile module "work@aes_core".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] work@aes_core work@aes_core
-[MOD] work@aes_cipher_core work@aes_core.u_aes_cipher_core
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/LongHex/dut.sv:11:1: Top level module "work@aes_core".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/LongHex/dut.sv:11:1: Instance "work@aes_core".
-[NTE:EL0523] ${SURELOG_DIR}/tests/LongHex/dut.sv:12:4: Instance "work@aes_core.u_aes_cipher_core".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              48
-cont_assign                                            2
+constant                                              28
+cont_assign                                            1
 design                                                 1
 import_typespec                                        2
 logic_net                                              1
-logic_typespec                                        14
-module_inst                                           10
-package                                                2
-param_assign                                          10
-parameter                                             12
-part_select                                            2
-range                                                 14
+logic_typespec                                         9
+module_inst                                            3
+package                                                1
+param_assign                                           5
+parameter                                              7
+part_select                                            1
+range                                                  9
 ref_module                                             1
-ref_obj                                                2
-ref_typespec                                          22
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              48
-cont_assign                                            3
-design                                                 1
-import_typespec                                        2
-logic_net                                              1
-logic_typespec                                        14
-module_inst                                           10
-package                                                2
-param_assign                                          10
-parameter                                             12
-part_select                                            2
-range                                                 14
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                          22
+ref_obj                                                1
+ref_typespec                                          12
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LongHex/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LongHex/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LongHex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@aes_core)
-|vpiElaborated:1
-|vpiName:work@aes_core
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiName:aes_pkg
   |vpiFullName:aes_pkg::
   |vpiParameter:
@@ -241,53 +209,10 @@ design: (work@aes_core)
     |vpiLhs:
     \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
   |vpiDefName:aes_pkg
-|uhdmtopPackages:
-\_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-  |vpiParent:
-  \_design: (work@aes_core)
-  |vpiName:aes_pkg
-  |vpiFullName:aes_pkg::
-  |vpiParameter:
-  \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-    |vpiParent:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-    |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-    |vpiTypespec:
-    \_ref_typespec: (aes_pkg::RndCnstMaskingLfsrSeedDefault)
-      |vpiParent:
-      \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-      |vpiFullName:aes_pkg::RndCnstMaskingLfsrSeedDefault
-      |vpiActual:
-      \_logic_typespec: , line:2:14, endln:2:27
-    |vpiName:RndCnstMaskingLfsrSeedDefault
-    |vpiFullName:aes_pkg::RndCnstMaskingLfsrSeedDefault
-  |vpiParamAssign:
-  \_param_assign: , line:2:28, endln:3:51
-    |vpiParent:
-    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-    |vpiRhs:
-    \_constant: , line:3:7, endln:3:51
-      |vpiParent:
-      \_param_assign: , line:2:28, endln:3:51
-      |vpiDecompile:160'hc132b5723c5a4cf4743b3c7c32d580f74f1713a
-      |vpiSize:160
-      |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-      |vpiTypespec:
-      \_ref_typespec: (aes_pkg)
-        |vpiParent:
-        \_constant: , line:3:7, endln:3:51
-        |vpiFullName:aes_pkg
-        |vpiActual:
-        \_logic_typespec: , line:2:14, endln:2:27
-      |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-  |vpiDefName:aes_pkg
-  |vpiTop:1
 |uhdmallModules:
 \_module_inst: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:6:1, endln:9:10
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiFullName:work@aes_cipher_core
   |vpiParameter:
   \_parameter: (work@aes_cipher_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
@@ -379,7 +304,7 @@ design: (work@aes_core)
   |vpiNet:
   \_logic_net: (work@aes_cipher_core.x), line:8:11, endln:8:12
     |vpiParent:
-    \_module_inst: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:6:1, endln:9:10
+    \_cont_assign: , line:8:11, endln:8:43
     |vpiName:x
     |vpiFullName:work@aes_cipher_core.x
     |vpiNetType:1
@@ -418,7 +343,7 @@ design: (work@aes_core)
 |uhdmallModules:
 \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
   |vpiParent:
-  \_design: (work@aes_core)
+  \_design: (unnamed)
   |vpiFullName:work@aes_core
   |vpiParameter:
   \_parameter: (work@aes_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
@@ -480,183 +405,7 @@ design: (work@aes_core)
     |vpiDefName:work@aes_cipher_core
     |vpiActual:
     \_module_inst: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:6:1, endln:9:10
-|uhdmtopModules:
-\_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
-  |vpiParent:
-  \_design: (work@aes_core)
-  |vpiName:work@aes_core
-  |vpiParameter:
-  \_parameter: (work@aes_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
-    |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-    |vpiTypespec:
-    \_ref_typespec: (work@aes_core.RndCnstMaskingLfsrSeedDefault)
-      |vpiParent:
-      \_parameter: (work@aes_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-      |vpiFullName:work@aes_core.RndCnstMaskingLfsrSeedDefault
-      |vpiActual:
-      \_logic_typespec: , line:2:14, endln:2:27
-    |vpiName:RndCnstMaskingLfsrSeedDefault
-    |vpiFullName:work@aes_core.RndCnstMaskingLfsrSeedDefault
-    |vpiImported:aes_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:2:28, endln:3:51
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
-    |vpiRhs:
-    \_constant: , line:3:7, endln:3:51
-      |vpiParent:
-      \_param_assign: , line:2:28, endln:3:51
-      |vpiDecompile:160'hc132b5723c5a4cf4743b3c7c32d580f74f1713a
-      |vpiSize:160
-      |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-      |vpiTypespec:
-      \_ref_typespec: (work@aes_core)
-        |vpiParent:
-        \_constant: , line:3:7, endln:3:51
-        |vpiFullName:work@aes_core
-        |vpiActual:
-        \_logic_typespec: , line:2:14, endln:2:27
-      |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (work@aes_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-  |vpiTypedef:
-  \_import_typespec: (aes_pkg), line:11:24, endln:11:34
-  |vpiDefName:work@aes_core
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-    |vpiParent:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
-    |vpiName:u_aes_cipher_core
-    |vpiFullName:work@aes_core.u_aes_cipher_core
-    |vpiParameter:
-    \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-      |vpiParent:
-      \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-      |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-      |vpiTypespec:
-      \_ref_typespec: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault)
-        |vpiParent:
-        \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-        |vpiFullName:work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault
-        |vpiActual:
-        \_logic_typespec: , line:2:14, endln:2:27
-      |vpiName:RndCnstMaskingLfsrSeedDefault
-      |vpiFullName:work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault
-      |vpiImported:aes_pkg
-    |vpiParameter:
-    \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed), line:7:28, endln:7:50
-      |vpiParent:
-      \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed)
-        |vpiParent:
-        \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed), line:7:28, endln:7:50
-        |vpiFullName:work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed
-        |vpiActual:
-        \_logic_typespec: , line:7:14, endln:7:27
-      |vpiName:RndCnstMaskingLfsrSeed
-      |vpiFullName:work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed
-    |vpiParamAssign:
-    \_param_assign: , line:2:28, endln:3:51
-      |vpiParent:
-      \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-      |vpiRhs:
-      \_constant: , line:3:7, endln:3:51
-        |vpiParent:
-        \_param_assign: , line:2:28, endln:3:51
-        |vpiDecompile:160'hc132b5723c5a4cf4743b3c7c32d580f74f1713a
-        |vpiSize:160
-        |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-        |vpiTypespec:
-        \_ref_typespec: (work@aes_core.u_aes_cipher_core)
-          |vpiParent:
-          \_constant: , line:3:7, endln:3:51
-          |vpiFullName:work@aes_core.u_aes_cipher_core
-          |vpiActual:
-          \_logic_typespec: , line:2:14, endln:2:27
-        |vpiConstType:5
-      |vpiLhs:
-      \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-    |vpiParamAssign:
-    \_param_assign: , line:7:28, endln:7:54
-      |vpiParent:
-      \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:7:53, endln:7:54
-        |vpiParent:
-        \_param_assign: , line:7:28, endln:7:54
-        |vpiDecompile:160'hc132b5723c5a4cf4743b3c7c32d580f74f1713a
-        |vpiSize:160
-        |HEX:c132b5723c5a4cf4743b3c7c32d580f74f1713a
-        |vpiTypespec:
-        \_ref_typespec: (work@aes_core.u_aes_cipher_core)
-          |vpiParent:
-          \_constant: , line:7:53, endln:7:54
-          |vpiFullName:work@aes_core.u_aes_cipher_core
-          |vpiActual:
-          \_logic_typespec: , line:7:14, endln:7:27
-        |vpiConstType:5
-      |vpiLhs:
-      \_parameter: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed), line:7:28, endln:7:50
-    |vpiTypedef:
-    \_import_typespec: (aes_pkg), line:6:31, endln:6:41
-    |vpiDefName:work@aes_cipher_core
-    |vpiDefFile:${SURELOG_DIR}/tests/LongHex/dut.sv
-    |vpiDefLineNo:6
-    |vpiInstance:
-    \_module_inst: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:11:1, endln:15:10
-    |vpiContAssign:
-    \_cont_assign: , line:8:11, endln:8:43
-      |vpiParent:
-      \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-      |vpiRhs:
-      \_constant: 
-        |vpiParent:
-        \_cont_assign: , line:8:11, endln:8:43
-        |vpiDecompile:01110100111100010111000100111010
-        |vpiSize:32
-        |BIN:01110100111100010111000100111010
-        |vpiConstType:3
-      |vpiLhs:
-      \_ref_obj: (work@aes_core.u_aes_cipher_core.x), line:8:11, endln:8:12
-        |vpiParent:
-        \_cont_assign: , line:8:11, endln:8:43
-        |vpiName:x
-        |vpiFullName:work@aes_core.u_aes_cipher_core.x
-        |vpiActual:
-        \_logic_net: (work@aes_cipher_core.x), line:8:11, endln:8:12
 \_weaklyReferenced:
-\_logic_typespec: , line:2:14, endln:2:27
-  |vpiParent:
-  \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-  |vpiRange:
-  \_range: , line:2:20, endln:2:27
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:27
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:159
-      |vpiSize:64
-      |UINT:159
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:2:14, endln:2:27
   |vpiParent:
   \_parameter: (aes_pkg::RndCnstMaskingLfsrSeedDefault), line:2:28, endln:2:57
@@ -855,98 +604,12 @@ design: (work@aes_core)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:2:14, endln:2:27
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.RndCnstMaskingLfsrSeedDefault)
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-  |vpiRange:
-  \_range: , line:2:20, endln:2:27
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:27
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:159
-      |vpiSize:64
-      |UINT:159
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:14, endln:2:27
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeedDefault)
-  |vpiInstance:
-  \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:1:1, endln:4:11
-  |vpiRange:
-  \_range: , line:2:20, endln:2:27
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:27
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:159
-      |vpiSize:64
-      |UINT:159
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:20, endln:2:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:7:14, endln:7:27
-  |vpiParent:
-  \_ref_typespec: (work@aes_core.u_aes_cipher_core.RndCnstMaskingLfsrSeed)
-  |vpiRange:
-  \_range: , line:7:20, endln:7:27
-    |vpiParent:
-    \_logic_typespec: , line:7:14, endln:7:27
-    |vpiLeftRange:
-    \_constant: , line:7:21, endln:7:24
-      |vpiParent:
-      \_range: , line:7:20, endln:7:27
-      |vpiDecompile:159
-      |vpiSize:64
-      |UINT:159
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:25, endln:7:26
-      |vpiParent:
-      \_range: , line:7:20, endln:7:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_cont_assign: , line:8:11, endln:8:43
-  |vpiParent:
-  \_module_inst: work@aes_cipher_core (work@aes_core.u_aes_cipher_core), file:${SURELOG_DIR}/tests/LongHex/dut.sv, line:12:4, endln:14:27
-  |vpiRhs:
-  \_constant: 
-  |vpiLhs:
-  \_ref_obj: (work@aes_core.u_aes_cipher_core.x), line:8:11, endln:8:12
-    |vpiParent:
-    \_cont_assign: , line:8:11, endln:8:43
-    |vpiName:x
-    |vpiFullName:work@aes_core.u_aes_cipher_core.x
-    |vpiActual:
-    \_logic_net: (work@aes_cipher_core.x), line:8:11, endln:8:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 7
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/LongHex/dut.sv | ${SURELOG_DIR}/build/regression/LongHex/roundtrip/dut_000.sv | 8 | 15 |

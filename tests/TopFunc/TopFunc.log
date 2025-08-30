@@ -62,48 +62,20 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/TopFunc/dut.sv:5:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/TopFunc/dut.sv:5:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/TopFunc/dut.sv:5:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               2
-cont_assign                                            2
+constant                                               1
+cont_assign                                            1
 design                                                 1
-func_call                                              2
+func_call                                              1
 function                                               1
-int_typespec                                           4
-int_var                                                2
+int_typespec                                           2
+int_var                                                1
 logic_net                                              1
-logic_var                                              1
-module_inst                                            4
-param_assign                                           1
-parameter                                              1
-port                                                   2
-ref_obj                                                5
-ref_typespec                                           5
-return_stmt                                            1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               2
-cont_assign                                            3
-design                                                 1
-func_call                                              2
-function                                               1
-int_typespec                                           4
-int_var                                                2
-logic_net                                              1
-logic_var                                              1
-module_inst                                            4
-param_assign                                           1
-parameter                                              1
-port                                                   3
-ref_obj                                                7
-ref_typespec                                           6
+module_inst                                            1
+port                                                   1
+ref_obj                                                2
+ref_typespec                                           2
 return_stmt                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TopFunc/slpp_all/surelog.uhdm ...
@@ -111,13 +83,12 @@ return_stmt                                            1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TopFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -169,7 +140,7 @@ design: (work@top)
 |vpiTaskFunc:
 \_function: (get_1), line:1:1, endln:3:12
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:get_1
   |vpiMethod:1
   |vpiVisibility:1
@@ -197,100 +168,17 @@ design: (work@top)
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_int_var: (work@top.o), line:5:23, endln:5:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_int_var: (work@top.o), line:5:23, endln:5:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:5:19, endln:5:22
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:5:23, endln:5:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:5:23, endln:5:24
-      |vpiParent:
-      \_port: (o), line:5:23, endln:5:24
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_var: (work@top.o), line:5:23, endln:5:24
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:5:23, endln:5:24
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:5:19, endln:5:22
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-  |vpiContAssign:
-  \_cont_assign: , line:6:11, endln:6:22
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-    |vpiRhs:
-    \_constant: , line:2:11, endln:2:12
-      |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:22
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiConstType:9
-    |vpiLhs:
-    \_ref_obj: (work@top.o), line:6:11, endln:6:12
-      |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:22
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_var: (work@top.o), line:5:23, endln:5:24
 \_weaklyReferenced:
 \_int_typespec: , line:1:20, endln:1:23
   |vpiSigned:1
 \_int_typespec: , line:5:19, endln:5:22
   |vpiSigned:1
-\_int_typespec: , line:5:19, endln:5:22
-  |vpiSigned:1
-\_int_typespec: , line:5:19, endln:5:22
-  |vpiSigned:1
-\_cont_assign: , line:6:11, endln:6:22
-  |vpiParent:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
-  |vpiRhs:
-  \_constant: , line:2:11, endln:2:12
-  |vpiLhs:
-  \_ref_obj: (work@top.o), line:6:11, endln:6:12
-    |vpiParent:
-    \_cont_assign: , line:6:11, endln:6:22
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiActual:
-    \_logic_net: (work@top.o), line:5:23, endln:5:24
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/TopFunc/dut.sv | ${SURELOG_DIR}/build/regression/TopFunc/roundtrip/dut_000.sv | 1 | 7 |

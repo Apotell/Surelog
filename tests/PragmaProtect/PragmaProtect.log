@@ -6,26 +6,16 @@
 [INF:CP0302] Compile class "work@semaphore".
 [WRN:CP0334] ${SURELOG_DIR}/tests/PragmaProtect/top.sv:74:1: Colliding compilation unit name: "sram",
              ${SURELOG_DIR}/tests/PragmaProtect/top.sv:2:1: previous usage.
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PragmaProtect/top.sv:2:1: Top level module "work@sram".
-[WRN:EL0505] ${SURELOG_DIR}/tests/PragmaProtect/top.sv:74:1: Multiply defined module "work@sram",
-             ${SURELOG_DIR}/tests/PragmaProtect/top.sv:2:1: previous definition.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
-array_net                                              1
 assignment                                             8
 begin                                                  6
 bit_select                                             3
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              47
-cont_assign                                            1
+constant                                              25
 delay_control                                          3
 design                                                 1
 enum_const                                             5
@@ -39,29 +29,1270 @@ if_stmt                                                1
 initial                                                1
 int_typespec                                           9
 int_var                                                4
-integer_typespec                                       2
-integer_var                                            1
+integer_typespec                                       1
 io_decl                                               11
-logic_net                                             13
-logic_typespec                                        16
+logic_net                                              7
+logic_typespec                                         6
 logic_var                                              1
-module_inst                                            4
+module_inst                                            1
 operation                                             10
-package                                                2
-port                                                   8
-range                                                 15
-ref_obj                                               33
-ref_typespec                                          31
+package                                                1
+port                                                   4
+range                                                  4
+ref_obj                                               28
+ref_typespec                                          20
 ref_var                                                1
 sys_func_call                                          4
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PragmaProtect/slpp_all/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PragmaProtect/slpp_all/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PragmaProtect/slpp_all/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallPackages:
+\_package: builtin (builtin::)
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:builtin
+  |vpiFullName:builtin::
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
+|uhdmallClasses:
+\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@mailbox
+  |vpiMethod:
+  \_function: (work@mailbox::new), line:3:5, endln:4:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:new
+    |vpiFullName:work@mailbox::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::new)
+        |vpiParent:
+        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@mailbox::new
+    |vpiIODecl:
+    \_io_decl: (bound), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiDirection:1
+      |vpiName:bound
+      |vpiExpr:
+      \_constant: , line:3:31, endln:3:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@mailbox::new::bound)
+        |vpiParent:
+        \_io_decl: (bound), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new::bound
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+  |vpiMethod:
+  \_function: (work@mailbox::num), line:6:5, endln:7:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:num
+    |vpiFullName:work@mailbox::num
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+      |vpiParent:
+      \_function: (work@mailbox::num), line:6:5, endln:7:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::num)
+        |vpiParent:
+        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+        |vpiFullName:work@mailbox::num
+        |vpiActual:
+        \_int_typespec: , line:6:14, endln:6:17
+      |vpiFullName:work@mailbox::num
+      |vpiSigned:1
+  |vpiMethod:
+  \_task: (work@mailbox::put), line:9:5, endln:10:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:put
+    |vpiFullName:work@mailbox::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:9:15, endln:9:22
+      |vpiParent:
+      \_task: (work@mailbox::put), line:9:5, endln:10:12
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_put
+    |vpiFullName:work@mailbox::try_put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@mailbox::try_put)
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiFullName:work@mailbox::try_put
+    |vpiIODecl:
+    \_io_decl: (message), line:12:23, endln:12:30
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::get), line:15:5, endln:16:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:get
+    |vpiFullName:work@mailbox::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:15:19, endln:15:26
+      |vpiParent:
+      \_task: (work@mailbox::get), line:15:5, endln:16:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_get
+    |vpiFullName:work@mailbox::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_get)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+        |vpiFullName:work@mailbox::try_get
+        |vpiActual:
+        \_int_typespec: , line:18:14, endln:18:17
+      |vpiFullName:work@mailbox::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:18:31, endln:18:38
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::peek), line:21:5, endln:22:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:peek
+    |vpiFullName:work@mailbox::peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:21:20, endln:21:27
+      |vpiParent:
+      \_task: (work@mailbox::peek), line:21:5, endln:22:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_peek
+    |vpiFullName:work@mailbox::try_peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_peek)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+        |vpiFullName:work@mailbox::try_peek
+        |vpiActual:
+        \_int_typespec: , line:24:14, endln:24:17
+      |vpiFullName:work@mailbox::try_peek
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:24:31, endln:24:38
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiDirection:6
+      |vpiName:message
+|uhdmallClasses:
+\_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@process
+  |vpiTypedef:
+  \_enum_typespec: (state), line:32:5, endln:32:74
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:state
+    |vpiEnumConst:
+    \_enum_const: (FINISHED), line:32:20, endln:32:28
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:FINISHED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (RUNNING), line:32:30, endln:32:37
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:RUNNING
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (WAITING), line:32:39, endln:32:46
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:WAITING
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:SUSPENDED
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (KILLED), line:32:59, endln:32:65
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:KILLED
+      |INT:4
+      |vpiDecompile:4
+      |vpiSize:64
+  |vpiMethod:
+  \_function: (work@process::self), line:34:5, endln:34:11
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:self
+    |vpiFullName:work@process::self
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_class_var: (work@process::self), line:34:21, endln:34:28
+      |vpiParent:
+      \_function: (work@process::self), line:34:5, endln:34:11
+      |vpiTypespec:
+      \_ref_typespec: (work@process::self)
+        |vpiParent:
+        \_class_var: (work@process::self), line:34:21, endln:34:28
+        |vpiFullName:work@process::self
+        |vpiActual:
+        \_class_typespec: , line:34:21, endln:34:28
+      |vpiFullName:work@process::self
+  |vpiMethod:
+  \_function: (work@process::status), line:37:5, endln:38:16
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:status
+    |vpiFullName:work@process::status
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_enum_var: (work@process::status), line:37:14, endln:37:19
+      |vpiParent:
+      \_function: (work@process::status), line:37:5, endln:38:16
+      |vpiTypespec:
+      \_ref_typespec: (work@process::status)
+        |vpiParent:
+        \_enum_var: (work@process::status), line:37:14, endln:37:19
+        |vpiFullName:work@process::status
+        |vpiActual:
+        \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiFullName:work@process::status
+  |vpiMethod:
+  \_task: (work@process::kill), line:40:5, endln:41:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:kill
+    |vpiFullName:work@process::kill
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::await), line:43:5, endln:44:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:await
+    |vpiFullName:work@process::await
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::suspend), line:46:5, endln:47:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:suspend
+    |vpiFullName:work@process::suspend
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::resume), line:49:5, endln:50:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+    |vpiName:resume
+    |vpiFullName:work@process::resume
+    |vpiMethod:1
+    |vpiVisibility:1
+|uhdmallClasses:
+\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@semaphore
+  |vpiMethod:
+  \_function: (work@semaphore::new), line:57:5, endln:58:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+    |vpiName:new
+    |vpiFullName:work@semaphore::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::new)
+        |vpiParent:
+        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@semaphore::new
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:57:33, endln:57:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::new::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new::keyCount
+        |vpiActual:
+        \_int_typespec: , line:57:18, endln:57:21
+  |vpiMethod:
+  \_task: (work@semaphore::put), line:60:5, endln:61:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+    |vpiName:put
+    |vpiFullName:work@semaphore::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:60:18, endln:60:26
+      |vpiParent:
+      \_task: (work@semaphore::put), line:60:5, endln:61:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:60:29, endln:60:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::put::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:60:18, endln:60:26
+        |vpiFullName:work@semaphore::put::keyCount
+        |vpiActual:
+        \_int_typespec: , line:60:14, endln:60:17
+  |vpiMethod:
+  \_task: (work@semaphore::get), line:63:5, endln:64:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+    |vpiName:get
+    |vpiFullName:work@semaphore::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:63:18, endln:63:26
+      |vpiParent:
+      \_task: (work@semaphore::get), line:63:5, endln:64:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:63:29, endln:63:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:63:18, endln:63:26
+        |vpiFullName:work@semaphore::get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:63:14, endln:63:17
+  |vpiMethod:
+  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+    |vpiName:try_get
+    |vpiFullName:work@semaphore::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::try_get)
+        |vpiParent:
+        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+        |vpiFullName:work@semaphore::try_get
+        |vpiActual:
+        \_int_typespec: , line:66:14, endln:66:17
+      |vpiFullName:work@semaphore::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:66:30, endln:66:38
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:66:41, endln:66:42
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::try_get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:66:30, endln:66:38
+        |vpiFullName:work@semaphore::try_get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:66:26, endln:66:29
+|uhdmallModules:
+\_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@sram
+  |vpiDefName:work@sram
+  |vpiNet:
+  \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiTypespec:
+    \_ref_typespec: (work@sram.DBUS_driver)
+      |vpiParent:
+      \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+      |vpiFullName:work@sram.DBUS_driver
+      |vpiActual:
+      \_logic_typespec: , line:10:1, endln:10:11
+    |vpiName:DBUS_driver
+    |vpiFullName:work@sram.DBUS_driver
+    |vpiNetType:48
+  |vpiNet:
+  \_logic_net: (work@sram.DBUS), line:11:12, endln:11:16
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:DBUS
+    |vpiFullName:work@sram.DBUS
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@sram.ram), line:12:11, endln:12:14
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiTypespec:
+    \_ref_typespec: (work@sram.ram)
+      |vpiParent:
+      \_logic_net: (work@sram.ram), line:12:11, endln:12:14
+      |vpiFullName:work@sram.ram
+      |vpiActual:
+      \_logic_typespec: , line:12:1, endln:12:22
+    |vpiName:ram
+    |vpiFullName:work@sram.ram
+    |vpiNetType:48
+  |vpiNet:
+  \_logic_net: (work@sram.i), line:14:9, endln:14:10
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiTypespec:
+    \_ref_typespec: (work@sram.i)
+      |vpiParent:
+      \_logic_net: (work@sram.i), line:14:9, endln:14:10
+      |vpiFullName:work@sram.i
+      |vpiActual:
+      \_integer_typespec: , line:14:1, endln:14:8
+    |vpiName:i
+    |vpiFullName:work@sram.i
+  |vpiNet:
+  \_logic_net: (work@sram.CSB), line:2:13, endln:2:16
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:CSB
+    |vpiFullName:work@sram.CSB
+  |vpiNet:
+  \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:WRB
+    |vpiFullName:work@sram.WRB
+  |vpiNet:
+  \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:ABUS
+    |vpiFullName:work@sram.ABUS
+  |vpiPort:
+  \_port: (CSB), line:2:13, endln:2:16
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:CSB
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@sram.CSB.CSB), line:2:13, endln:2:16
+      |vpiParent:
+      \_port: (CSB), line:2:13, endln:2:16
+      |vpiName:CSB
+      |vpiFullName:work@sram.CSB.CSB
+      |vpiActual:
+      \_logic_net: (work@sram.CSB), line:2:13, endln:2:16
+    |vpiTypedef:
+    \_ref_typespec: (work@sram.CSB)
+      |vpiParent:
+      \_port: (CSB), line:2:13, endln:2:16
+      |vpiFullName:work@sram.CSB
+      |vpiActual:
+      \_logic_typespec: , line:4:7, endln:4:7
+  |vpiPort:
+  \_port: (WRB), line:2:17, endln:2:20
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:WRB
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@sram.WRB.WRB), line:2:17, endln:2:20
+      |vpiParent:
+      \_port: (WRB), line:2:17, endln:2:20
+      |vpiName:WRB
+      |vpiFullName:work@sram.WRB.WRB
+      |vpiActual:
+      \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+    |vpiTypedef:
+    \_ref_typespec: (work@sram.WRB)
+      |vpiParent:
+      \_port: (WRB), line:2:17, endln:2:20
+      |vpiFullName:work@sram.WRB
+      |vpiActual:
+      \_logic_typespec: , line:5:7, endln:5:7
+  |vpiPort:
+  \_port: (ABUS), line:2:21, endln:2:25
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:ABUS
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@sram.ABUS.ABUS), line:2:21, endln:2:25
+      |vpiParent:
+      \_port: (ABUS), line:2:21, endln:2:25
+      |vpiName:ABUS
+      |vpiFullName:work@sram.ABUS.ABUS
+      |vpiActual:
+      \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+    |vpiTypedef:
+    \_ref_typespec: (work@sram.ABUS)
+      |vpiParent:
+      \_port: (ABUS), line:2:21, endln:2:25
+      |vpiFullName:work@sram.ABUS
+      |vpiActual:
+      \_logic_typespec: , line:6:7, endln:6:13
+  |vpiPort:
+  \_port: (DBUS), line:2:26, endln:2:30
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiName:DBUS
+    |vpiDirection:3
+    |vpiLowConn:
+    \_ref_obj: (work@sram.DBUS), line:2:26, endln:2:30
+      |vpiParent:
+      \_port: (DBUS), line:2:26, endln:2:30
+      |vpiFullName:work@sram.DBUS
+      |vpiActual:
+      \_logic_net: (work@sram.DBUS), line:11:12, endln:11:16
+    |vpiTypedef:
+    \_ref_typespec: (work@sram.DBUS)
+      |vpiParent:
+      \_port: (DBUS), line:2:26, endln:2:30
+      |vpiFullName:work@sram.DBUS
+      |vpiActual:
+      \_logic_typespec: , line:7:7, endln:7:12
+  |vpiProcess:
+  \_initial: , line:15:1, endln:20:7
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiStmt:
+    \_begin: (work@sram), line:16:4, endln:20:7
+      |vpiParent:
+      \_initial: , line:15:1, endln:20:7
+      |vpiFullName:work@sram
+      |vpiStmt:
+      \_assignment: , line:17:4, endln:17:29
+        |vpiParent:
+        \_begin: (work@sram), line:16:4, endln:20:7
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_constant: , line:17:18, endln:17:29
+          |vpiDecompile:8'bzzzzzzzz
+          |vpiSize:8
+          |BIN:zzzzzzzz
+          |vpiConstType:3
+        |vpiLhs:
+        \_ref_obj: (work@sram.DBUS_driver), line:17:4, endln:17:15
+          |vpiParent:
+          \_assignment: , line:17:4, endln:17:29
+          |vpiName:DBUS_driver
+          |vpiFullName:work@sram.DBUS_driver
+          |vpiActual:
+          \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+      |vpiStmt:
+      \_for_stmt: (work@sram), line:18:4, endln:18:7
+        |vpiParent:
+        \_begin: (work@sram), line:16:4, endln:20:7
+        |vpiFullName:work@sram
+        |vpiForInitStmt:
+        \_assignment: , line:18:9, endln:18:12
+          |vpiParent:
+          \_for_stmt: (work@sram), line:18:4, endln:18:7
+          |vpiRhs:
+          \_constant: , line:18:11, endln:18:12
+            |vpiParent:
+            \_assignment: , line:18:9, endln:18:12
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_ref_var: (work@sram.i), line:18:9, endln:18:10
+            |vpiParent:
+            \_assignment: , line:18:9, endln:18:12
+            |vpiName:i
+            |vpiFullName:work@sram.i
+        |vpiForIncStmt:
+        \_assignment: , line:18:24, endln:18:33
+          |vpiParent:
+          \_for_stmt: (work@sram), line:18:4, endln:18:7
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_operation: , line:18:28, endln:18:33
+            |vpiParent:
+            \_assignment: , line:18:24, endln:18:33
+            |vpiOpType:24
+            |vpiOperand:
+            \_ref_obj: (work@sram.i), line:18:28, endln:18:29
+              |vpiParent:
+              \_operation: , line:18:28, endln:18:33
+              |vpiName:i
+              |vpiFullName:work@sram.i
+              |vpiActual:
+              \_logic_net: (work@sram.i), line:14:9, endln:14:10
+            |vpiOperand:
+            \_constant: , line:18:32, endln:18:33
+              |vpiParent:
+              \_operation: , line:18:28, endln:18:33
+              |vpiDecompile:1
+              |vpiSize:64
+              |UINT:1
+              |vpiConstType:9
+          |vpiLhs:
+          \_ref_obj: (work@sram.i), line:18:24, endln:18:25
+            |vpiParent:
+            \_assignment: , line:18:24, endln:18:33
+            |vpiName:i
+            |vpiFullName:work@sram.i
+            |vpiActual:
+            \_logic_net: (work@sram.i), line:14:9, endln:14:10
+        |vpiCondition:
+        \_operation: , line:18:14, endln:18:22
+          |vpiParent:
+          \_for_stmt: (work@sram), line:18:4, endln:18:7
+          |vpiOpType:20
+          |vpiOperand:
+          \_ref_obj: (work@sram.i), line:18:14, endln:18:15
+            |vpiParent:
+            \_operation: , line:18:14, endln:18:22
+            |vpiName:i
+            |vpiFullName:work@sram.i
+            |vpiActual:
+            \_logic_net: (work@sram.i), line:14:9, endln:14:10
+          |vpiOperand:
+          \_constant: , line:18:18, endln:18:22
+            |vpiParent:
+            \_operation: , line:18:14, endln:18:22
+            |vpiDecompile:4095
+            |vpiSize:64
+            |UINT:4095
+            |vpiConstType:9
+        |vpiStmt:
+        \_assignment: , line:19:6, endln:19:16
+          |vpiParent:
+          \_for_stmt: (work@sram), line:18:4, endln:18:7
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_constant: , line:19:15, endln:19:16
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_bit_select: (work@sram.ram), line:19:6, endln:19:12
+            |vpiParent:
+            \_assignment: , line:19:6, endln:19:16
+            |vpiName:ram
+            |vpiFullName:work@sram.ram
+            |vpiIndex:
+            \_ref_obj: (work@sram.i), line:19:10, endln:19:11
+              |vpiParent:
+              \_bit_select: (work@sram.ram), line:19:6, endln:19:12
+              |vpiName:i
+              |vpiFullName:work@sram.i
+              |vpiActual:
+              \_logic_net: (work@sram.i), line:14:9, endln:14:10
+  |vpiProcess:
+  \_always: , line:26:1, endln:48:6
+    |vpiParent:
+    \_module_inst: work@sram (work@sram), file:${SURELOG_DIR}/tests/PragmaProtect/top.sv, line:2:1, endln:50:10
+    |vpiStmt:
+    \_event_control: , line:26:8, endln:26:29
+      |vpiParent:
+      \_always: , line:26:1, endln:48:6
+      |vpiCondition:
+      \_operation: , line:26:10, endln:26:28
+        |vpiParent:
+        \_event_control: , line:26:8, endln:26:29
+        |vpiOpType:35
+        |vpiOperand:
+        \_operation: , line:26:10, endln:26:20
+          |vpiParent:
+          \_operation: , line:26:10, endln:26:28
+          |vpiOpType:35
+          |vpiOperand:
+          \_ref_obj: (work@sram.CSB), line:26:10, endln:26:13
+            |vpiParent:
+            \_operation: , line:26:10, endln:26:20
+            |vpiName:CSB
+            |vpiFullName:work@sram.CSB
+            |vpiActual:
+            \_logic_net: (work@sram.CSB), line:2:13, endln:2:16
+          |vpiOperand:
+          \_ref_obj: (work@sram.WRB), line:26:17, endln:26:20
+            |vpiParent:
+            \_operation: , line:26:10, endln:26:20
+            |vpiName:WRB
+            |vpiFullName:work@sram.WRB
+            |vpiActual:
+            \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+        |vpiOperand:
+        \_ref_obj: (work@sram.ABUS), line:26:24, endln:26:28
+          |vpiParent:
+          \_operation: , line:26:10, endln:26:28
+          |vpiName:ABUS
+          |vpiFullName:work@sram.ABUS
+          |vpiActual:
+          \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+      |vpiStmt:
+      \_begin: (work@sram), line:27:3, endln:48:6
+        |vpiParent:
+        \_event_control: , line:26:8, endln:26:29
+        |vpiFullName:work@sram
+        |vpiStmt:
+        \_if_else: , line:28:5, endln:47:10
+          |vpiParent:
+          \_begin: (work@sram), line:27:3, endln:48:6
+          |vpiCondition:
+          \_operation: , line:28:9, endln:28:20
+            |vpiParent:
+            \_begin: (work@sram), line:27:3, endln:48:6
+            |vpiOpType:14
+            |vpiOperand:
+            \_ref_obj: (work@sram.CSB), line:28:9, endln:28:12
+              |vpiParent:
+              \_operation: , line:28:9, endln:28:20
+              |vpiName:CSB
+              |vpiFullName:work@sram.CSB
+              |vpiActual:
+              \_logic_net: (work@sram.CSB), line:2:13, endln:2:16
+            |vpiOperand:
+            \_constant: , line:28:16, endln:28:20
+              |vpiParent:
+              \_operation: , line:28:9, endln:28:20
+              |vpiDecompile:1'b0
+              |vpiSize:1
+              |BIN:0
+              |vpiConstType:3
+          |vpiStmt:
+          \_begin: (work@sram), line:29:7, endln:43:10
+            |vpiParent:
+            \_if_else: , line:28:5, endln:47:10
+            |vpiFullName:work@sram
+            |vpiStmt:
+            \_if_else: , line:30:7, endln:42:12
+              |vpiParent:
+              \_begin: (work@sram), line:29:7, endln:43:10
+              |vpiCondition:
+              \_operation: , line:30:11, endln:30:22
+                |vpiParent:
+                \_begin: (work@sram), line:29:7, endln:43:10
+                |vpiOpType:14
+                |vpiOperand:
+                \_ref_obj: (work@sram.WRB), line:30:11, endln:30:14
+                  |vpiParent:
+                  \_operation: , line:30:11, endln:30:22
+                  |vpiName:WRB
+                  |vpiFullName:work@sram.WRB
+                  |vpiActual:
+                  \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+                |vpiOperand:
+                \_constant: , line:30:18, endln:30:22
+                  |vpiParent:
+                  \_operation: , line:30:11, endln:30:22
+                  |vpiDecompile:1'b0
+                  |vpiSize:1
+                  |BIN:0
+                  |vpiConstType:3
+              |vpiStmt:
+              \_begin: (work@sram), line:32:9, endln:37:12
+                |vpiParent:
+                \_if_else: , line:30:7, endln:42:12
+                |vpiFullName:work@sram
+                |vpiStmt:
+                \_assignment: , line:33:9, endln:33:39
+                  |vpiParent:
+                  \_begin: (work@sram), line:32:9, endln:37:12
+                  |vpiOpType:82
+                  |vpiRhs:
+                  \_constant: , line:33:28, endln:33:39
+                    |vpiDecompile:8'bzzzzzzzz
+                    |vpiSize:8
+                    |BIN:zzzzzzzz
+                    |vpiConstType:3
+                  |vpiLhs:
+                  \_ref_obj: (work@sram.DBUS_driver), line:33:9, endln:33:20
+                    |vpiParent:
+                    \_assignment: , line:33:9, endln:33:39
+                    |vpiName:DBUS_driver
+                    |vpiFullName:work@sram.DBUS_driver
+                    |vpiActual:
+                    \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+                  |vpiDelayControl:
+                  \_delay_control: , line:33:24, endln:33:27
+                    |vpiParent:
+                    \_assignment: , line:33:9, endln:33:39
+                    |#10
+                |vpiStmt:
+                \_event_control: , line:34:9, endln:34:38
+                  |vpiParent:
+                  \_begin: (work@sram), line:32:9, endln:37:12
+                  |vpiCondition:
+                  \_operation: , line:34:11, endln:34:37
+                    |vpiParent:
+                    \_event_control: , line:34:9, endln:34:38
+                    |vpiOpType:35
+                    |vpiOperand:
+                    \_operation: , line:34:11, endln:34:22
+                      |vpiParent:
+                      \_operation: , line:34:11, endln:34:37
+                      |vpiOpType:39
+                      |vpiOperand:
+                      \_ref_obj: (work@sram.CSB), line:34:19, endln:34:22
+                        |vpiParent:
+                        \_operation: , line:34:11, endln:34:22
+                        |vpiName:CSB
+                        |vpiFullName:work@sram.CSB
+                        |vpiActual:
+                        \_logic_net: (work@sram.CSB), line:2:13, endln:2:16
+                    |vpiOperand:
+                    \_operation: , line:34:26, endln:34:37
+                      |vpiParent:
+                      \_operation: , line:34:11, endln:34:37
+                      |vpiOpType:39
+                      |vpiOperand:
+                      \_ref_obj: (work@sram.WRB), line:34:34, endln:34:37
+                        |vpiParent:
+                        \_operation: , line:34:26, endln:34:37
+                        |vpiName:WRB
+                        |vpiFullName:work@sram.WRB
+                        |vpiActual:
+                        \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+                |vpiStmt:
+                \_sys_func_call: ($display), line:35:9, endln:35:64
+                  |vpiParent:
+                  \_begin: (work@sram), line:32:9, endln:37:12
+                  |vpiArgument:
+                  \_sys_func_call: ($time), line:35:18, endln:35:23
+                    |vpiParent:
+                    \_sys_func_call: ($display), line:35:9, endln:35:64
+                    |vpiName:$time
+                  |vpiArgument:
+                  \_constant: , line:35:24, endln:35:53
+                    |vpiParent:
+                    \_sys_func_call: ($display), line:35:9, endln:35:64
+                    |vpiDecompile:" Writing %m ABUS=%h DATA=%h"
+                    |vpiSize:216
+                    |STRING: Writing %m ABUS=%h DATA=%h
+                    |vpiConstType:6
+                  |vpiArgument:
+                  \_ref_obj: (work@sram.ABUS), line:35:54, endln:35:58
+                    |vpiParent:
+                    \_sys_func_call: ($display), line:35:9, endln:35:64
+                    |vpiName:ABUS
+                    |vpiFullName:work@sram.ABUS
+                    |vpiActual:
+                    \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+                  |vpiArgument:
+                  \_ref_obj: (work@sram.DBUS), line:35:59, endln:35:63
+                    |vpiParent:
+                    \_sys_func_call: ($display), line:35:9, endln:35:64
+                    |vpiName:DBUS
+                    |vpiFullName:work@sram.DBUS
+                    |vpiActual:
+                    \_logic_net: (work@sram.DBUS), line:11:12, endln:11:16
+                  |vpiName:$display
+                |vpiStmt:
+                \_assignment: , line:36:9, endln:36:25
+                  |vpiParent:
+                  \_begin: (work@sram), line:32:9, endln:37:12
+                  |vpiOpType:82
+                  |vpiBlocking:1
+                  |vpiRhs:
+                  \_ref_obj: (work@sram.DBUS), line:36:21, endln:36:25
+                    |vpiParent:
+                    \_assignment: , line:36:9, endln:36:25
+                    |vpiName:DBUS
+                    |vpiFullName:work@sram.DBUS
+                    |vpiActual:
+                    \_logic_net: (work@sram.DBUS), line:11:12, endln:11:16
+                  |vpiLhs:
+                  \_bit_select: (work@sram.ram), line:36:9, endln:36:18
+                    |vpiParent:
+                    \_assignment: , line:36:9, endln:36:25
+                    |vpiName:ram
+                    |vpiFullName:work@sram.ram
+                    |vpiIndex:
+                    \_ref_obj: (work@sram.ABUS), line:36:13, endln:36:17
+                      |vpiParent:
+                      \_bit_select: (work@sram.ram), line:36:9, endln:36:18
+                      |vpiName:ABUS
+                      |vpiFullName:work@sram.ABUS
+                      |vpiActual:
+                      \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+              |vpiElseStmt:
+              \_if_stmt: , line:38:12, endln:42:12
+                |vpiParent:
+                \_if_else: , line:30:7, endln:42:12
+                |vpiCondition:
+                \_operation: , line:38:16, endln:38:27
+                  |vpiParent:
+                  \_if_else: , line:30:7, endln:42:12
+                  |vpiOpType:14
+                  |vpiOperand:
+                  \_ref_obj: (work@sram.WRB), line:38:16, endln:38:19
+                    |vpiParent:
+                    \_operation: , line:38:16, endln:38:27
+                    |vpiName:WRB
+                    |vpiFullName:work@sram.WRB
+                    |vpiActual:
+                    \_logic_net: (work@sram.WRB), line:2:17, endln:2:20
+                  |vpiOperand:
+                  \_constant: , line:38:23, endln:38:27
+                    |vpiParent:
+                    \_operation: , line:38:16, endln:38:27
+                    |vpiDecompile:1'b1
+                    |vpiSize:1
+                    |BIN:1
+                    |vpiConstType:3
+                |vpiStmt:
+                \_begin: (work@sram), line:39:9, endln:42:12
+                  |vpiParent:
+                  \_if_stmt: , line:38:12, endln:42:12
+                  |vpiFullName:work@sram
+                  |vpiStmt:
+                  \_delay_control: , line:40:9, endln:40:12
+                    |vpiParent:
+                    \_begin: (work@sram), line:39:9, endln:42:12
+                    |#10
+                    |vpiStmt:
+                    \_assignment: , line:40:13, endln:40:37
+                      |vpiParent:
+                      \_delay_control: , line:40:9, endln:40:12
+                      |vpiOpType:82
+                      |vpiBlocking:1
+                      |vpiRhs:
+                      \_bit_select: (work@sram.ram), line:40:32, endln:40:36
+                        |vpiParent:
+                        \_assignment: , line:40:13, endln:40:37
+                        |vpiName:ram
+                        |vpiFullName:work@sram.ram
+                        |vpiIndex:
+                        \_ref_obj: (work@sram.ABUS), line:40:32, endln:40:36
+                          |vpiParent:
+                          \_bit_select: (work@sram.ram), line:40:32, endln:40:36
+                          |vpiName:ABUS
+                          |vpiFullName:work@sram.ABUS
+                          |vpiActual:
+                          \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+                      |vpiLhs:
+                      \_ref_obj: (work@sram.DBUS_driver), line:40:13, endln:40:24
+                        |vpiParent:
+                        \_assignment: , line:40:13, endln:40:37
+                        |vpiName:DBUS_driver
+                        |vpiFullName:work@sram.DBUS_driver
+                        |vpiActual:
+                        \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+                  |vpiStmt:
+                  \_sys_func_call: ($display), line:41:9, endln:41:71
+                    |vpiParent:
+                    \_begin: (work@sram), line:39:9, endln:42:12
+                    |vpiArgument:
+                    \_sys_func_call: ($time), line:41:18, endln:41:23
+                      |vpiParent:
+                      \_sys_func_call: ($display), line:41:9, endln:41:71
+                      |vpiName:$time
+                    |vpiArgument:
+                    \_constant: , line:41:24, endln:41:53
+                      |vpiParent:
+                      \_sys_func_call: ($display), line:41:9, endln:41:71
+                      |vpiDecompile:" Reading %m ABUS=%h DATA=%h"
+                      |vpiSize:216
+                      |STRING: Reading %m ABUS=%h DATA=%h
+                      |vpiConstType:6
+                    |vpiArgument:
+                    \_ref_obj: (work@sram.ABUS), line:41:54, endln:41:58
+                      |vpiParent:
+                      \_sys_func_call: ($display), line:41:9, endln:41:71
+                      |vpiName:ABUS
+                      |vpiFullName:work@sram.ABUS
+                      |vpiActual:
+                      \_logic_net: (work@sram.ABUS), line:2:21, endln:2:25
+                    |vpiArgument:
+                    \_ref_obj: (work@sram.DBUS_driver), line:41:59, endln:41:70
+                      |vpiParent:
+                      \_sys_func_call: ($display), line:41:9, endln:41:71
+                      |vpiName:DBUS_driver
+                      |vpiFullName:work@sram.DBUS_driver
+                      |vpiActual:
+                      \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+                    |vpiName:$display
+          |vpiElseStmt:
+          \_begin: (work@sram), line:45:7, endln:47:10
+            |vpiParent:
+            \_if_else: , line:28:5, endln:47:10
+            |vpiFullName:work@sram
+            |vpiStmt:
+            \_assignment: , line:46:7, endln:46:38
+              |vpiParent:
+              \_begin: (work@sram), line:45:7, endln:47:10
+              |vpiOpType:82
+              |vpiRhs:
+              \_constant: , line:46:27, endln:46:38
+                |vpiDecompile:8'bzzzzzzzz
+                |vpiSize:8
+                |BIN:zzzzzzzz
+                |vpiConstType:3
+              |vpiLhs:
+              \_ref_obj: (work@sram.DBUS_driver), line:46:7, endln:46:18
+                |vpiParent:
+                \_assignment: , line:46:7, endln:46:38
+                |vpiName:DBUS_driver
+                |vpiFullName:work@sram.DBUS_driver
+                |vpiActual:
+                \_logic_net: (work@sram.DBUS_driver), line:10:12, endln:10:23
+              |vpiDelayControl:
+              \_delay_control: , line:46:23, endln:46:26
+                |vpiParent:
+                \_assignment: , line:46:7, endln:46:38
+                |#10
+    |vpiAlwaysType:1
+\_weaklyReferenced:
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:1:3, endln:27:11
+\_int_typespec: , line:3:19, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:6:14, endln:6:17
+  |vpiSigned:1
+\_int_typespec: , line:18:14, endln:18:17
+  |vpiSigned:1
+\_int_typespec: , line:24:14, endln:24:17
+  |vpiSigned:1
+\_class_typespec: , line:34:21, endln:34:28
+  |vpiClassDefn:
+  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:30:3, endln:52:11
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/PragmaProtect/builtin.sv, line:55:3, endln:69:11
+\_int_typespec: , line:57:18, endln:57:21
+  |vpiSigned:1
+\_int_typespec: , line:60:14, endln:60:17
+  |vpiSigned:1
+\_int_typespec: , line:63:14, endln:63:17
+  |vpiSigned:1
+\_int_typespec: , line:66:14, endln:66:17
+  |vpiSigned:1
+\_int_typespec: , line:66:26, endln:66:29
+  |vpiSigned:1
+\_logic_typespec: , line:4:7, endln:4:7
+\_logic_typespec: , line:5:7, endln:5:7
+\_logic_typespec: , line:6:7, endln:6:13
+  |vpiRange:
+  \_range: , line:6:7, endln:6:13
+    |vpiParent:
+    \_logic_typespec: , line:6:7, endln:6:13
+    |vpiLeftRange:
+    \_constant: , line:6:8, endln:6:10
+      |vpiParent:
+      \_range: , line:6:7, endln:6:13
+      |vpiDecompile:11
+      |vpiSize:64
+      |UINT:11
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:6:11, endln:6:12
+      |vpiParent:
+      \_range: , line:6:7, endln:6:13
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:7:7, endln:7:12
+  |vpiRange:
+  \_range: , line:7:7, endln:7:12
+    |vpiParent:
+    \_logic_typespec: , line:7:7, endln:7:12
+    |vpiLeftRange:
+    \_constant: , line:7:8, endln:7:9
+      |vpiParent:
+      \_range: , line:7:7, endln:7:12
+      |vpiDecompile:7
+      |vpiSize:64
+      |UINT:7
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:7:10, endln:7:11
+      |vpiParent:
+      \_range: , line:7:7, endln:7:12
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:10:1, endln:10:11
+  |vpiRange:
+  \_range: , line:10:6, endln:10:11
+    |vpiParent:
+    \_logic_typespec: , line:10:1, endln:10:11
+    |vpiLeftRange:
+    \_constant: , line:10:7, endln:10:8
+      |vpiParent:
+      \_range: , line:10:6, endln:10:11
+      |vpiDecompile:7
+      |vpiSize:64
+      |UINT:7
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:10:9, endln:10:10
+      |vpiParent:
+      \_range: , line:10:6, endln:10:11
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_logic_typespec: , line:12:1, endln:12:22
+  |vpiRange:
+  \_range: , line:12:5, endln:12:10
+    |vpiParent:
+    \_logic_typespec: , line:12:1, endln:12:22
+    |vpiLeftRange:
+    \_constant: , line:12:6, endln:12:7
+      |vpiParent:
+      \_range: , line:12:5, endln:12:10
+      |vpiDecompile:7
+      |vpiSize:64
+      |UINT:7
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:12:8, endln:12:9
+      |vpiParent:
+      \_range: , line:12:5, endln:12:10
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+\_integer_typespec: , line:14:1, endln:14:8
+  |vpiSigned:1
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 2
-[   NOTE] : 5
+[WARNING] : 1
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/PragmaProtect/top.sv:33:24: Non synthesizable construct,

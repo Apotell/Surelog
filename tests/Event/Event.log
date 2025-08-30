@@ -28,28 +28,12 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Event/dut.sv:1:1: No timescale set for "t".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/Event/dut.sv:1:1: Compile module "work@t".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/Event/dut.sv:1:1: Top level module "work@t".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
-event_typespec                                         2
+event_typespec                                         1
 logic_net                                              1
-module_inst                                            2
-named_event                                            1
-ref_typespec                                           1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-design                                                 1
-event_typespec                                         2
-logic_net                                              1
-module_inst                                            2
-named_event                                            1
+module_inst                                            1
 ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Event/slpp_all/surelog.uhdm ...
@@ -57,13 +41,12 @@ ref_typespec                                           1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Event/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@t)
-|vpiElaborated:1
-|vpiName:work@t
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/Event/dut.sv, line:1:1, endln:3:10
   |vpiParent:
-  \_design: (work@t)
+  \_design: (unnamed)
   |vpiFullName:work@t
   |vpiDefName:work@t
   |vpiNet:
@@ -79,20 +62,6 @@ design: (work@t)
       \_event_typespec: , line:2:5, endln:2:10
     |vpiName:e
     |vpiFullName:work@t.e
-|uhdmtopModules:
-\_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/Event/dut.sv, line:1:1, endln:3:10
-  |vpiParent:
-  \_design: (work@t)
-  |vpiName:work@t
-  |vpiNamedEvent:
-  \_named_event: (work@t.e), line:2:11, endln:2:12
-    |vpiParent:
-    \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/Event/dut.sv, line:1:1, endln:3:10
-    |vpiName:e
-    |vpiFullName:work@t.e
-  |vpiDefName:work@t
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_event_typespec: , line:2:5, endln:2:10
 ===================
@@ -100,11 +69,10 @@ design: (work@t)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/Event/dut.sv:2:5: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/Event/dut.sv:2:11: Non synthesizable construct, e
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================

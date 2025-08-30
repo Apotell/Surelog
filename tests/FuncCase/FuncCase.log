@@ -6,66 +6,47 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncCase/dut.sv:19:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncCase/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/FuncCase/dut.sv:1:1: Compile package "fpnew_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncCase/dut.sv:19:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncCase/dut.sv:22:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/FuncCase/dut.sv:28:6: Compile generate block "work@top.genblk1".
-Instance tree:
-[TOP] work@top work@top
-[SCO] work@top.genblk1 work@top.genblk1
-[MOD] work@GOOD work@top.genblk1.good
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/FuncCase/dut.sv:22:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/FuncCase/dut.sv:22:1: Instance "work@top".
-[NTE:EL0522] ${SURELOG_DIR}/tests/FuncCase/dut.sv:28:6: Scope "work@top.genblk1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/FuncCase/dut.sv:28:6: Instance "work@top.genblk1.good".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-case_item                                             10
-case_stmt                                              2
-constant                                              23
+case_item                                              5
+case_stmt                                              1
+constant                                               9
 design                                                 1
-enum_const                                             8
-enum_typespec                                          2
-func_call                                              2
-function                                               2
+enum_const                                             4
+enum_typespec                                          1
+func_call                                              1
+function                                               1
 gen_if                                                 1
-gen_scope                                              2
-gen_scope_array                                        2
 import_typespec                                        1
-int_typespec                                           2
-int_var                                                2
-io_decl                                                2
-logic_typespec                                         2
-logic_var                                              1
-module_inst                                            8
-operation                                              2
-package                                                2
-param_assign                                           4
-parameter                                              4
-range                                                  2
-ref_module                                             2
-ref_obj                                               13
-ref_typespec                                           8
-return_stmt                                           10
+int_typespec                                           1
+int_var                                                1
+io_decl                                                1
+logic_typespec                                         1
+module_inst                                            3
+operation                                              1
+package                                                1
+param_assign                                           1
+parameter                                              1
+range                                                  1
+ref_module                                             1
+ref_obj                                                7
+ref_typespec                                           3
+return_stmt                                            5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:fpnew_pkg
   |vpiFullName:fpnew_pkg::
   |vpiTypedef:
@@ -266,221 +247,16 @@ design: (work@top)
             |vpiConstType:9
     |vpiInstance:
     \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
-|uhdmtopPackages:
-\_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:fpnew_pkg
-  |vpiFullName:fpnew_pkg::
-  |vpiTypedef:
-  \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
-    |vpiName:fpnew_pkg::opgroup_e
-    |vpiInstance:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@top.fpnew_pkg::opgroup_e)
-      |vpiParent:
-      \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-      |vpiFullName:work@top.fpnew_pkg::opgroup_e
-      |vpiActual:
-      \_logic_typespec: , line:2:14, endln:2:25
-    |vpiEnumConst:
-    \_enum_const: (ADDMUL), line:3:5, endln:3:11
-      |vpiParent:
-      \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-      |vpiName:ADDMUL
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (DIVSQRT), line:3:13, endln:3:20
-      |vpiParent:
-      \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-      |vpiName:DIVSQRT
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (NONCOMP), line:3:22, endln:3:29
-      |vpiParent:
-      \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-      |vpiName:NONCOMP
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (CONV), line:3:31, endln:3:35
-      |vpiParent:
-      \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-      |vpiName:CONV
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:2
-  |vpiDefName:fpnew_pkg
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-    |vpiParent:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
-    |vpiName:num_operands
-    |vpiFullName:fpnew_pkg::num_operands
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_int_var: (fpnew_pkg::num_operands), line:7:20, endln:7:32
-      |vpiParent:
-      \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-      |vpiTypespec:
-      \_ref_typespec: (fpnew_pkg::num_operands)
-        |vpiParent:
-        \_int_var: (fpnew_pkg::num_operands), line:7:20, endln:7:32
-        |vpiFullName:fpnew_pkg::num_operands
-        |vpiActual:
-        \_int_typespec: , line:7:20, endln:7:32
-      |vpiFullName:fpnew_pkg::num_operands
-    |vpiIODecl:
-    \_io_decl: (grp), line:7:56, endln:7:59
-      |vpiParent:
-      \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-      |vpiDirection:1
-      |vpiName:grp
-      |vpiTypedef:
-      \_ref_typespec: (fpnew_pkg::num_operands::grp)
-        |vpiParent:
-        \_io_decl: (grp), line:7:56, endln:7:59
-        |vpiFullName:fpnew_pkg::num_operands::grp
-        |vpiActual:
-        \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-    |vpiStmt:
-    \_case_stmt: , line:8:5, endln:14:12
-      |vpiParent:
-      \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-      |vpiCaseType:1
-      |vpiQualifier:1
-      |vpiCondition:
-      \_ref_obj: (fpnew_pkg::num_operands::grp), line:8:18, endln:8:21
-        |vpiParent:
-        \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-        |vpiName:grp
-        |vpiFullName:fpnew_pkg::num_operands::grp
-        |vpiActual:
-        \_io_decl: (grp), line:7:56, endln:7:59
-      |vpiCaseItem:
-      \_case_item: , line:9:7, endln:9:25
-        |vpiParent:
-        \_case_stmt: , line:8:5, endln:14:12
-        |vpiExpr:
-        \_ref_obj: (fpnew_pkg::num_operands::ADDMUL), line:9:7, endln:9:13
-          |vpiParent:
-          \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-          |vpiName:ADDMUL
-          |vpiFullName:fpnew_pkg::num_operands::ADDMUL
-          |vpiActual:
-          \_enum_const: (ADDMUL), line:3:5, endln:3:11
-        |vpiStmt:
-        \_return_stmt: , line:9:16, endln:9:22
-          |vpiParent:
-          \_case_item: , line:9:7, endln:9:25
-          |vpiCondition:
-          \_constant: , line:9:23, endln:9:24
-            |vpiDecompile:3
-            |vpiSize:64
-            |UINT:3
-            |vpiConstType:9
-      |vpiCaseItem:
-      \_case_item: , line:10:7, endln:10:25
-        |vpiParent:
-        \_case_stmt: , line:8:5, endln:14:12
-        |vpiExpr:
-        \_ref_obj: (fpnew_pkg::num_operands::DIVSQRT), line:10:7, endln:10:14
-          |vpiParent:
-          \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-          |vpiName:DIVSQRT
-          |vpiFullName:fpnew_pkg::num_operands::DIVSQRT
-          |vpiActual:
-          \_enum_const: (DIVSQRT), line:3:13, endln:3:20
-        |vpiStmt:
-        \_return_stmt: , line:10:16, endln:10:22
-          |vpiParent:
-          \_case_item: , line:10:7, endln:10:25
-          |vpiCondition:
-          \_constant: , line:10:23, endln:10:24
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
-            |vpiConstType:9
-      |vpiCaseItem:
-      \_case_item: , line:11:7, endln:11:25
-        |vpiParent:
-        \_case_stmt: , line:8:5, endln:14:12
-        |vpiExpr:
-        \_ref_obj: (fpnew_pkg::num_operands::NONCOMP), line:11:7, endln:11:14
-          |vpiParent:
-          \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-          |vpiName:NONCOMP
-          |vpiFullName:fpnew_pkg::num_operands::NONCOMP
-          |vpiActual:
-          \_enum_const: (NONCOMP), line:3:22, endln:3:29
-        |vpiStmt:
-        \_return_stmt: , line:11:16, endln:11:22
-          |vpiParent:
-          \_case_item: , line:11:7, endln:11:25
-          |vpiCondition:
-          \_constant: , line:11:23, endln:11:24
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
-            |vpiConstType:9
-      |vpiCaseItem:
-      \_case_item: , line:12:7, endln:12:25
-        |vpiParent:
-        \_case_stmt: , line:8:5, endln:14:12
-        |vpiExpr:
-        \_ref_obj: (fpnew_pkg::num_operands::CONV), line:12:7, endln:12:11
-          |vpiParent:
-          \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-          |vpiName:CONV
-          |vpiFullName:fpnew_pkg::num_operands::CONV
-          |vpiActual:
-          \_enum_const: (CONV), line:3:31, endln:3:35
-        |vpiStmt:
-        \_return_stmt: , line:12:16, endln:12:22
-          |vpiParent:
-          \_case_item: , line:12:7, endln:12:25
-          |vpiCondition:
-          \_constant: , line:12:23, endln:12:24
-            |vpiDecompile:3
-            |vpiSize:64
-            |UINT:3
-            |vpiConstType:9
-      |vpiCaseItem:
-      \_case_item: , line:13:7, endln:13:25
-        |vpiParent:
-        \_case_stmt: , line:8:5, endln:14:12
-        |vpiStmt:
-        \_return_stmt: , line:13:16, endln:13:22
-          |vpiParent:
-          \_case_item: , line:13:7, endln:13:25
-          |vpiCondition:
-          \_constant: , line:13:23, endln:13:24
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-    |vpiInstance:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:19:1, endln:20:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.p), line:25:14, endln:25:15
@@ -550,87 +326,7 @@ design: (work@top)
         \_begin: (work@top)
         |vpiName:good
         |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.p), line:25:14, endln:25:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
-    |vpiName:p
-    |vpiFullName:work@top.p
-  |vpiParamAssign:
-  \_param_assign: , line:25:14, endln:25:39
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:25:18, endln:25:39
-      |vpiParent:
-      \_param_assign: , line:25:14, endln:25:39
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.p), line:25:14, endln:25:15
-  |vpiTypedef:
-  \_enum_typespec: (fpnew_pkg::opgroup_e), line:7:46, endln:7:55
-  |vpiTypedef:
-  \_import_typespec: (fpnew_pkg), line:23:11, endln:23:23
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1), line:28:6, endln:28:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
-    |vpiName:genblk1
-    |vpiFullName:work@top.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1), line:28:6, endln:28:18
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1), line:28:6, endln:28:18
-      |vpiFullName:work@top.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk1.good), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:28:6, endln:28:18
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1), line:28:6, endln:28:18
-        |vpiName:good
-        |vpiFullName:work@top.genblk1.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/FuncCase/dut.sv
-        |vpiDefLineNo:19
 \_weaklyReferenced:
-\_logic_typespec: , line:2:14, endln:2:25
-  |vpiInstance:
-  \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
-  |vpiRange:
-  \_range: , line:2:20, endln:2:25
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:25
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:22
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:23, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:7:20, endln:7:32
-  |vpiInstance:
-  \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
 \_logic_typespec: , line:2:14, endln:2:25
   |vpiInstance:
   \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
@@ -662,7 +358,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 8
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/FuncCase/dut.sv | ${SURELOG_DIR}/build/regression/FuncCase/roundtrip/dut_000.sv | 6 | 30 |

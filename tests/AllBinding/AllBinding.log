@@ -80,54 +80,31 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AllBinding/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/AllBinding/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/AllBinding/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               8
 design                                                 1
 enum_const                                             3
 enum_typespec                                          1
-enum_var                                               2
 logic_net                                              2
 logic_typespec                                         1
-module_inst                                            3
-port                                                   2
+module_inst                                            2
+port                                                   1
 range                                                  1
-ref_obj                                                2
-ref_typespec                                           6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               8
-design                                                 1
-enum_const                                             3
-enum_typespec                                          1
-enum_var                                               2
-logic_net                                              2
-logic_typespec                                         1
-module_inst                                            3
-port                                                   3
-range                                                  1
-ref_obj                                                3
-ref_typespec                                           7
+ref_obj                                                1
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -173,10 +150,10 @@ design: (work@top)
 |vpiTypedef:
 \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:type_scr1_mem_resp_e
   |vpiInstance:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiBaseTypespec:
   \_ref_typespec: (type_scr1_mem_resp_e)
     |vpiParent:
@@ -208,65 +185,6 @@ design: (work@top)
     |BIN:10
     |vpiDecompile:2'b10
     |vpiSize:2
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.dmem2exu_resp_i)
-      |vpiParent:
-      \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiFullName:work@top.dmem2exu_resp_i
-      |vpiActual:
-      \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiName:dmem2exu_resp_i
-    |vpiFullName:work@top.dmem2exu_resp_i
-    |vpiVisibility:1
-  |vpiVariables:
-  \_enum_var: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.dmem2exu_resp_ii)
-      |vpiParent:
-      \_enum_var: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
-      |vpiFullName:work@top.dmem2exu_resp_ii
-      |vpiActual:
-      \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiName:dmem2exu_resp_ii
-    |vpiFullName:work@top.dmem2exu_resp_ii
-    |vpiVisibility:1
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
-    |vpiName:dmem2exu_resp_i
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiParent:
-      \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiName:dmem2exu_resp_i
-      |vpiFullName:work@top.dmem2exu_resp_i
-      |vpiActual:
-      \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
-    |vpiTypedef:
-    \_ref_typespec: (work@top.dmem2exu_resp_i)
-      |vpiParent:
-      \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiFullName:work@top.dmem2exu_resp_i
-      |vpiActual:
-      \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
 \_weaklyReferenced:
 \_logic_typespec: , line:1:14, endln:1:24
   |vpiRange:
@@ -294,7 +212,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/AllBinding/dut.sv  | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/dut_000.sv  | 2 | 5 |

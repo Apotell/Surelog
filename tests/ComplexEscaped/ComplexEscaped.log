@@ -90,14 +90,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:1:1: Compile module "work@top".
 [WRN:CP0334] ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:6:1: Colliding compilation unit name: "top",
              ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:1:1: previous usage.
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:1:1: Top level module "work@top".
-[WRN:EL0505] ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:6:1: Multiply defined module "work@top",
-             ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv:1:1: previous definition.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
@@ -106,40 +98,23 @@ constant                                               1
 design                                                 1
 initial                                                1
 logic_net                                              1
-module_inst                                            2
-port                                                   2
-ref_obj                                                3
-ref_typespec                                           3
-string_typespec                                        3
-string_var                                             1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-begin                                                  2
-constant                                               1
-design                                                 1
-initial                                                2
-logic_net                                              1
-module_inst                                            2
-port                                                   3
-ref_obj                                                5
-ref_typespec                                           4
-string_typespec                                        3
-string_var                                             1
+module_inst                                            1
+port                                                   1
+ref_obj                                                2
+ref_typespec                                           1
+string_typespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -198,88 +173,14 @@ design: (work@top)
           |vpiFullName:work@top.o
           |vpiActual:
           \_logic_net: (work@top.o), line:1:26, endln:1:27
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_string_var: (work@top.o), line:1:26, endln:1:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_string_var: (work@top.o), line:1:26, endln:1:27
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_string_typespec: , line:1:19, endln:1:25
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiVisibility:1
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:1:26, endln:1:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:1:26, endln:1:27
-      |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_string_var: (work@top.o), line:1:26, endln:1:27
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_string_typespec: , line:1:19, endln:1:25
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
-  |vpiProcess:
-  \_initial: , line:2:4, endln:4:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
-    |vpiStmt:
-    \_begin: (work@top), line:2:12, endln:4:7
-      |vpiParent:
-      \_initial: , line:2:4, endln:4:7
-      |vpiFullName:work@top
-      |vpiStmt:
-      \_assignment: , line:3:7, endln:3:47
-        |vpiParent:
-        \_begin: (work@top), line:2:12, endln:4:7
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:3:11, endln:3:47
-        |vpiLhs:
-        \_ref_obj: (work@top.o), line:3:7, endln:3:8
-          |vpiParent:
-          \_assignment: , line:3:7, endln:3:47
-          |vpiName:o
-          |vpiFullName:work@top.o
-          |vpiActual:
-          \_string_var: (work@top.o), line:1:26, endln:1:27
 \_weaklyReferenced:
-\_string_typespec: , line:1:19, endln:1:25
-\_string_typespec: , line:1:19, endln:1:25
-  |vpiParent:
-  \_string_var: (work@top.o), line:1:26, endln:1:27
 \_string_typespec: , line:1:19, endln:1:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 3
-[   NOTE] : 5
+[WARNING] : 2
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv | ${SURELOG_DIR}/build/regression/ComplexEscaped/roundtrip/dut_000.sv | 1 | 5 |

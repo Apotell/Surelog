@@ -21,77 +21,1002 @@
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/Escape/top.v:8:1: Compile class "work@env".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/Escape/top.v:2:1: Top level module "work@top".
-[NTE:EL0503] ${SURELOG_DIR}/tests/Escape/top.v:17:1: Top level module "work@bottom1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/Escape/top1.v:32:1: Top level module "work@middle".
-[WRN:EL0505] ${SURELOG_DIR}/tests/Escape/top1.v:21:1: Multiply defined module "work@bottom1",
-             ${SURELOG_DIR}/tests/Escape/top.v:17:1: previous definition.
-[WRN:EL0505] ${SURELOG_DIR}/tests/Escape/top1.v:26:1: Multiply defined module "work@bottom2",
-             ${SURELOG_DIR}/tests/Escape/top.v:27:1: previous definition.
-[WRN:EL0505] ${SURELOG_DIR}/tests/Escape/top1.v:46:1: Multiply defined module "work@bottom3",
-             ${SURELOG_DIR}/tests/Escape/top.v:60:1: previous definition.
-[WRN:EL0505] ${SURELOG_DIR}/tests/Escape/top1.v:15:1: Multiply defined module "work@top",
-             ${SURELOG_DIR}/tests/Escape/top.v:2:1: previous definition.
-[NTE:EL0504] Multiple top level modules in design.
-[WRN:EL0500] ${SURELOG_DIR}/tests/Escape/top.v:62:2: Cannot find a module definition for "work@bottom3::ddr".
-[NTE:EL0508] Nb Top level modules: 3.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 7.
-[NTE:EL0511] Nb leaf instances: 4.
-[WRN:EL0512] Nb undefined modules: 1.
-[WRN:EL0513] Nb undefined instances: 1.
-[ERR:CP0328] ${SURELOG_DIR}/tests/Escape/top.v:8:19: Undefined base class "uvm_env" extended by "work@env".
-[ERR:CP0317] ${SURELOG_DIR}/tests/Escape/top.v:11:31: Undefined type "uvm_phase".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_select                                             1
 class_defn                                            10
 class_typespec                                         4
 class_var                                              3
-clocking_block                                         2
-clocking_io_decl                                       4
-constant                                              13
+clocking_block                                         1
+clocking_io_decl                                       2
+constant                                               6
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
-event_control                                          2
+event_control                                          1
 function                                              10
-gate                                                   2
+gate                                                   1
 immediate_assert                                       1
 int_typespec                                           9
 int_var                                                4
-interface_inst                                         3
+interface_inst                                         1
 io_decl                                               12
-logic_net                                             27
-logic_typespec                                        22
+logic_net                                             12
+logic_typespec                                         7
 logic_var                                              1
-module_inst                                           15
-operation                                              3
-package                                                2
-port                                                  21
-prim_term                                              3
-range                                                  3
+module_inst                                            6
+operation                                              2
+package                                                1
+port                                                  10
+prim_term                                              1
 ref_module                                             2
-ref_obj                                               31
-ref_typespec                                          38
+ref_obj                                               15
+ref_typespec                                          21
 task                                                   9
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Escape/slpp_unit/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Escape/slpp_unit/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Escape/slpp_unit/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallPackages:
+\_package: builtin (builtin::)
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:builtin
+  |vpiFullName:builtin::
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
+|uhdmallClasses:
+\_class_defn: (work@env), file:${SURELOG_DIR}/tests/Escape/top.v, line:8:1, endln:15:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@env
+  |vpiVirtual:1
+  |vpiMethod:
+  \_function: (work@env::connect_phase), line:11:3, endln:14:14
+    |vpiParent:
+    \_class_defn: (work@env), file:${SURELOG_DIR}/tests/Escape/top.v, line:8:1, endln:15:10
+    |vpiName:connect_phase
+    |vpiFullName:work@env::connect_phase
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (phase), line:11:41, endln:11:46
+      |vpiParent:
+      \_function: (work@env::connect_phase), line:11:3, endln:14:14
+      |vpiDirection:1
+      |vpiName:phase
+      |vpiTypedef:
+      \_ref_typespec: (work@env::connect_phase::phase)
+        |vpiParent:
+        \_io_decl: (phase), line:11:41, endln:11:46
+        |vpiFullName:work@env::connect_phase::phase
+        |vpiActual:
+        \_unsupported_typespec: (uvm_phase), line:11:31, endln:11:40
+    |vpiStmt:
+    \_immediate_assert: , line:13:5, endln:13:102
+      |vpiParent:
+      \_function: (work@env::connect_phase), line:11:3, endln:14:14
+      |vpiExpr:
+      \_ref_obj: (work@env::connect_phase::uvm_resource_db::read_by_name), line:13:12, endln:13:50
+        |vpiParent:
+        \_immediate_assert: , line:13:5, endln:13:102
+        |vpiName:uvm_resource_db::read_by_name
+        |vpiFullName:work@env::connect_phase::uvm_resource_db::read_by_name
+|uhdmallClasses:
+\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@mailbox
+  |vpiMethod:
+  \_function: (work@mailbox::new), line:3:5, endln:4:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:new
+    |vpiFullName:work@mailbox::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::new)
+        |vpiParent:
+        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@mailbox::new
+    |vpiIODecl:
+    \_io_decl: (bound), line:3:23, endln:3:28
+      |vpiParent:
+      \_function: (work@mailbox::new), line:3:5, endln:4:16
+      |vpiDirection:1
+      |vpiName:bound
+      |vpiExpr:
+      \_constant: , line:3:31, endln:3:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@mailbox::new::bound)
+        |vpiParent:
+        \_io_decl: (bound), line:3:23, endln:3:28
+        |vpiFullName:work@mailbox::new::bound
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+  |vpiMethod:
+  \_function: (work@mailbox::num), line:6:5, endln:7:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:num
+    |vpiFullName:work@mailbox::num
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+      |vpiParent:
+      \_function: (work@mailbox::num), line:6:5, endln:7:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::num)
+        |vpiParent:
+        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
+        |vpiFullName:work@mailbox::num
+        |vpiActual:
+        \_int_typespec: , line:6:14, endln:6:17
+      |vpiFullName:work@mailbox::num
+      |vpiSigned:1
+  |vpiMethod:
+  \_task: (work@mailbox::put), line:9:5, endln:10:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:put
+    |vpiFullName:work@mailbox::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:9:15, endln:9:22
+      |vpiParent:
+      \_task: (work@mailbox::put), line:9:5, endln:10:12
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_put
+    |vpiFullName:work@mailbox::try_put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@mailbox::try_put)
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiFullName:work@mailbox::try_put
+    |vpiIODecl:
+    \_io_decl: (message), line:12:23, endln:12:30
+      |vpiParent:
+      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
+      |vpiDirection:1
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::get), line:15:5, endln:16:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:get
+    |vpiFullName:work@mailbox::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:15:19, endln:15:26
+      |vpiParent:
+      \_task: (work@mailbox::get), line:15:5, endln:16:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_get
+    |vpiFullName:work@mailbox::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_get)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
+        |vpiFullName:work@mailbox::try_get
+        |vpiActual:
+        \_int_typespec: , line:18:14, endln:18:17
+      |vpiFullName:work@mailbox::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:18:31, endln:18:38
+      |vpiParent:
+      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_task: (work@mailbox::peek), line:21:5, endln:22:12
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:peek
+    |vpiFullName:work@mailbox::peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (message), line:21:20, endln:21:27
+      |vpiParent:
+      \_task: (work@mailbox::peek), line:21:5, endln:22:12
+      |vpiDirection:6
+      |vpiName:message
+  |vpiMethod:
+  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+    |vpiParent:
+    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+    |vpiName:try_peek
+    |vpiFullName:work@mailbox::try_peek
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiTypespec:
+      \_ref_typespec: (work@mailbox::try_peek)
+        |vpiParent:
+        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
+        |vpiFullName:work@mailbox::try_peek
+        |vpiActual:
+        \_int_typespec: , line:24:14, endln:24:17
+      |vpiFullName:work@mailbox::try_peek
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (message), line:24:31, endln:24:38
+      |vpiParent:
+      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
+      |vpiDirection:6
+      |vpiName:message
+|uhdmallClasses:
+\_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@process
+  |vpiTypedef:
+  \_enum_typespec: (state), line:32:5, endln:32:74
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:state
+    |vpiEnumConst:
+    \_enum_const: (FINISHED), line:32:20, endln:32:28
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:FINISHED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (RUNNING), line:32:30, endln:32:37
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:RUNNING
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (WAITING), line:32:39, endln:32:46
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:WAITING
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:SUSPENDED
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:64
+    |vpiEnumConst:
+    \_enum_const: (KILLED), line:32:59, endln:32:65
+      |vpiParent:
+      \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiName:KILLED
+      |INT:4
+      |vpiDecompile:4
+      |vpiSize:64
+  |vpiMethod:
+  \_function: (work@process::self), line:34:5, endln:34:11
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:self
+    |vpiFullName:work@process::self
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_class_var: (work@process::self), line:34:21, endln:34:28
+      |vpiParent:
+      \_function: (work@process::self), line:34:5, endln:34:11
+      |vpiTypespec:
+      \_ref_typespec: (work@process::self)
+        |vpiParent:
+        \_class_var: (work@process::self), line:34:21, endln:34:28
+        |vpiFullName:work@process::self
+        |vpiActual:
+        \_class_typespec: , line:34:21, endln:34:28
+      |vpiFullName:work@process::self
+  |vpiMethod:
+  \_function: (work@process::status), line:37:5, endln:38:16
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:status
+    |vpiFullName:work@process::status
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_enum_var: (work@process::status), line:37:14, endln:37:19
+      |vpiParent:
+      \_function: (work@process::status), line:37:5, endln:38:16
+      |vpiTypespec:
+      \_ref_typespec: (work@process::status)
+        |vpiParent:
+        \_enum_var: (work@process::status), line:37:14, endln:37:19
+        |vpiFullName:work@process::status
+        |vpiActual:
+        \_enum_typespec: (state), line:32:5, endln:32:74
+      |vpiFullName:work@process::status
+  |vpiMethod:
+  \_task: (work@process::kill), line:40:5, endln:41:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:kill
+    |vpiFullName:work@process::kill
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::await), line:43:5, endln:44:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:await
+    |vpiFullName:work@process::await
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::suspend), line:46:5, endln:47:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:suspend
+    |vpiFullName:work@process::suspend
+    |vpiMethod:1
+    |vpiVisibility:1
+  |vpiMethod:
+  \_task: (work@process::resume), line:49:5, endln:50:12
+    |vpiParent:
+    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+    |vpiName:resume
+    |vpiFullName:work@process::resume
+    |vpiMethod:1
+    |vpiVisibility:1
+|uhdmallClasses:
+\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:work@semaphore
+  |vpiMethod:
+  \_function: (work@semaphore::new), line:57:5, endln:58:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+    |vpiName:new
+    |vpiFullName:work@semaphore::new
+    |vpiMethod:1
+    |vpiReturn:
+    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::new)
+        |vpiParent:
+        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new
+        |vpiActual:
+        \_class_typespec: 
+      |vpiFullName:work@semaphore::new
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:57:22, endln:57:30
+      |vpiParent:
+      \_function: (work@semaphore::new), line:57:5, endln:58:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:57:33, endln:57:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::new::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:57:22, endln:57:30
+        |vpiFullName:work@semaphore::new::keyCount
+        |vpiActual:
+        \_int_typespec: , line:57:18, endln:57:21
+  |vpiMethod:
+  \_task: (work@semaphore::put), line:60:5, endln:61:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+    |vpiName:put
+    |vpiFullName:work@semaphore::put
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:60:18, endln:60:26
+      |vpiParent:
+      \_task: (work@semaphore::put), line:60:5, endln:61:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:60:29, endln:60:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::put::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:60:18, endln:60:26
+        |vpiFullName:work@semaphore::put::keyCount
+        |vpiActual:
+        \_int_typespec: , line:60:14, endln:60:17
+  |vpiMethod:
+  \_task: (work@semaphore::get), line:63:5, endln:64:12
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+    |vpiName:get
+    |vpiFullName:work@semaphore::get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:63:18, endln:63:26
+      |vpiParent:
+      \_task: (work@semaphore::get), line:63:5, endln:64:12
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:63:29, endln:63:30
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:63:18, endln:63:26
+        |vpiFullName:work@semaphore::get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:63:14, endln:63:17
+  |vpiMethod:
+  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+    |vpiParent:
+    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+    |vpiName:try_get
+    |vpiFullName:work@semaphore::try_get
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiTypespec:
+      \_ref_typespec: (work@semaphore::try_get)
+        |vpiParent:
+        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
+        |vpiFullName:work@semaphore::try_get
+        |vpiActual:
+        \_int_typespec: , line:66:14, endln:66:17
+      |vpiFullName:work@semaphore::try_get
+      |vpiSigned:1
+    |vpiIODecl:
+    \_io_decl: (keyCount), line:66:30, endln:66:38
+      |vpiParent:
+      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
+      |vpiDirection:1
+      |vpiName:keyCount
+      |vpiExpr:
+      \_constant: , line:66:41, endln:66:42
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiTypedef:
+      \_ref_typespec: (work@semaphore::try_get::keyCount)
+        |vpiParent:
+        \_io_decl: (keyCount), line:66:30, endln:66:38
+        |vpiFullName:work@semaphore::try_get::keyCount
+        |vpiActual:
+        \_int_typespec: , line:66:26, endln:66:29
+|uhdmallInterfaces:
+\_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@my_interface
+  |vpiDefName:work@my_interface
+  |vpiNet:
+  \_logic_net: (work@my_interface.clock), line:3:9, endln:3:14
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:clock
+    |vpiFullName:work@my_interface.clock
+  |vpiNet:
+  \_logic_net: (work@my_interface.select), line:4:9, endln:4:15
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:select
+    |vpiFullName:work@my_interface.select
+  |vpiNet:
+  \_logic_net: (work@my_interface.data), line:5:15, endln:5:19
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:data
+    |vpiFullName:work@my_interface.data
+  |vpiClockingBlock:
+  \_clocking_block: (work@my_interface.cb), line:7:3, endln:9:14
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:cb
+    |vpiFullName:work@my_interface.cb
+    |vpiClockingEvent:
+    \_event_control: , line:7:15, endln:7:31
+      |vpiParent:
+      \_clocking_block: (work@my_interface.cb), line:7:3, endln:9:14
+      |vpiCondition:
+      \_operation: , line:7:17, endln:7:30
+        |vpiParent:
+        \_event_control: , line:7:15, endln:7:31
+        |vpiOpType:39
+        |vpiOperand:
+        \_ref_obj: (work@my_interface.cb.clock), line:7:25, endln:7:30
+          |vpiParent:
+          \_operation: , line:7:17, endln:7:30
+          |vpiName:clock
+          |vpiFullName:work@my_interface.cb.clock
+    |vpiClockingIODecl:
+    \_clocking_io_decl: (select), line:8:11, endln:8:17
+      |vpiParent:
+      \_clocking_block: (work@my_interface.cb), line:7:3, endln:9:14
+      |vpiDirection:1
+      |vpiName:select
+    |vpiClockingIODecl:
+    \_clocking_io_decl: (data), line:8:19, endln:8:23
+      |vpiParent:
+      \_clocking_block: (work@my_interface.cb), line:7:3, endln:9:14
+      |vpiDirection:1
+      |vpiName:data
+  |vpiPort:
+  \_port: (clock), line:3:9, endln:3:14
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:clock
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@my_interface.clock.clock), line:3:9, endln:3:14
+      |vpiParent:
+      \_port: (clock), line:3:9, endln:3:14
+      |vpiName:clock
+      |vpiFullName:work@my_interface.clock.clock
+      |vpiActual:
+      \_logic_net: (work@my_interface.clock), line:3:9, endln:3:14
+  |vpiPort:
+  \_port: (select), line:4:9, endln:4:15
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:select
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@my_interface.select.select), line:4:9, endln:4:15
+      |vpiParent:
+      \_port: (select), line:4:9, endln:4:15
+      |vpiName:select
+      |vpiFullName:work@my_interface.select.select
+      |vpiActual:
+      \_logic_net: (work@my_interface.select), line:4:9, endln:4:15
+  |vpiPort:
+  \_port: (data), line:5:15, endln:5:19
+    |vpiParent:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiName:data
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@my_interface.data.data), line:5:15, endln:5:19
+      |vpiParent:
+      \_port: (data), line:5:15, endln:5:19
+      |vpiName:data
+      |vpiFullName:work@my_interface.data.data
+      |vpiActual:
+      \_logic_net: (work@my_interface.data), line:5:15, endln:5:19
+|uhdmallModules:
+\_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@bottom1
+  |vpiDefName:work@bottom1
+  |vpiNet:
+  \_logic_net: (work@bottom1.a), line:17:23, endln:17:24
+    |vpiParent:
+    \_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+    |vpiName:a
+    |vpiFullName:work@bottom1.a
+  |vpiNet:
+  \_logic_net: (work@bottom1.b), line:17:32, endln:17:33
+    |vpiParent:
+    \_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+    |vpiName:b
+    |vpiFullName:work@bottom1.b
+  |vpiPort:
+  \_port: (a), line:17:23, endln:17:24
+    |vpiParent:
+    \_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+    |vpiName:a
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@bottom1.a.a), line:17:23, endln:17:24
+      |vpiParent:
+      \_port: (a), line:17:23, endln:17:24
+      |vpiName:a
+      |vpiFullName:work@bottom1.a.a
+      |vpiActual:
+      \_logic_net: (work@bottom1.a), line:17:23, endln:17:24
+    |vpiTypedef:
+    \_ref_typespec: (work@bottom1.a)
+      |vpiParent:
+      \_port: (a), line:17:23, endln:17:24
+      |vpiFullName:work@bottom1.a
+      |vpiActual:
+      \_logic_typespec: , line:17:23, endln:17:23
+  |vpiPort:
+  \_port: (b), line:17:32, endln:17:33
+    |vpiParent:
+    \_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+    |vpiName:b
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@bottom1.b.b), line:17:32, endln:17:33
+      |vpiParent:
+      \_port: (b), line:17:32, endln:17:33
+      |vpiName:b
+      |vpiFullName:work@bottom1.b.b
+      |vpiActual:
+      \_logic_net: (work@bottom1.b), line:17:32, endln:17:33
+    |vpiTypedef:
+    \_ref_typespec: (work@bottom1.b)
+      |vpiParent:
+      \_port: (b), line:17:32, endln:17:33
+      |vpiFullName:work@bottom1.b
+      |vpiActual:
+      \_logic_typespec: , line:17:32, endln:17:32
+  |vpiRefModule:
+  \_ref_module: work@my_interface (my_interface), line:23:15, endln:23:27
+    |vpiParent:
+    \_module_inst: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
+    |vpiName:my_interface
+    |vpiDefName:work@my_interface
+    |vpiActual:
+    \_interface_inst: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
+    |vpiPort:
+    \_port: , line:23:28, endln:23:30
+      |vpiParent:
+      \_ref_module: work@my_interface (my_interface), line:23:15, endln:23:27
+      |vpiHighConn:
+      \_constant: , line:23:28, endln:23:30
+        |vpiParent:
+        \_port: , line:23:28, endln:23:30
+        |vpiDecompile:.*
+        |STRING:.*
+|uhdmallModules:
+\_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@bottom2
+  |vpiDefName:work@bottom2
+  |vpiNet:
+  \_logic_net: (work@bottom2.a), line:27:23, endln:27:24
+    |vpiParent:
+    \_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+    |vpiName:a
+    |vpiFullName:work@bottom2.a
+  |vpiNet:
+  \_logic_net: (work@bottom2.b), line:27:32, endln:27:33
+    |vpiParent:
+    \_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+    |vpiName:b
+    |vpiFullName:work@bottom2.b
+  |vpiPort:
+  \_port: (a), line:27:23, endln:27:24
+    |vpiParent:
+    \_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+    |vpiName:a
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@bottom2.a.a), line:27:23, endln:27:24
+      |vpiParent:
+      \_port: (a), line:27:23, endln:27:24
+      |vpiName:a
+      |vpiFullName:work@bottom2.a.a
+      |vpiActual:
+      \_logic_net: (work@bottom2.a), line:27:23, endln:27:24
+    |vpiTypedef:
+    \_ref_typespec: (work@bottom2.a)
+      |vpiParent:
+      \_port: (a), line:27:23, endln:27:24
+      |vpiFullName:work@bottom2.a
+      |vpiActual:
+      \_logic_typespec: , line:27:23, endln:27:23
+  |vpiPort:
+  \_port: (b), line:27:32, endln:27:33
+    |vpiParent:
+    \_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+    |vpiName:b
+    |vpiDirection:1
+    |vpiLowConn:
+    \_ref_obj: (work@bottom2.b.b), line:27:32, endln:27:33
+      |vpiParent:
+      \_port: (b), line:27:32, endln:27:33
+      |vpiName:b
+      |vpiFullName:work@bottom2.b.b
+      |vpiActual:
+      \_logic_net: (work@bottom2.b), line:27:32, endln:27:33
+    |vpiTypedef:
+    \_ref_typespec: (work@bottom2.b)
+      |vpiParent:
+      \_port: (b), line:27:32, endln:27:33
+      |vpiFullName:work@bottom2.b
+      |vpiActual:
+      \_logic_typespec: , line:27:32, endln:27:32
+  |vpiPrimitive:
+  \_gate: work@not (work@bottom2.work@not), line:28:5, endln:28:11
+    |vpiParent:
+    \_module_inst: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/Escape/top.v, line:27:1, endln:29:10
+    |vpiDefName:work@not
+    |vpiFullName:work@bottom2.work@not
+    |vpiPrimType:8
+    |vpiPrimTerm:
+    \_prim_term: , line:28:9, endln:28:10
+      |vpiParent:
+      \_gate: work@not (work@bottom2.work@not), line:28:5, endln:28:11
+      |vpiDirection:2
+      |vpiExpr:
+      \_ref_obj: (work@bottom2.work@not.a), line:28:9, endln:28:10
+        |vpiParent:
+        \_gate: work@not (work@bottom2.work@not), line:28:5, endln:28:11
+        |vpiName:a
+        |vpiFullName:work@bottom2.work@not.a
+        |vpiActual:
+        \_logic_net: (work@bottom2.a), line:27:23, endln:27:24
+|uhdmallModules:
+\_module_inst: work@bottom3 (work@bottom3), file:${SURELOG_DIR}/tests/Escape/top.v, line:60:1, endln:70:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@bottom3
+  |vpiDefName:work@bottom3
+  |vpiNet:
+  \_logic_net: (work@bottom3.g_datapath:0:g_io.capture.capture), line:64:17, endln:64:24
+    |vpiParent:
+    \_port: (capture), line:64:7, endln:64:25
+    |vpiName:capture
+    |vpiFullName:work@bottom3.g_datapath:0:g_io.capture.capture
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@bottom3.g_datapath:0:g_io.clk.clk), line:65:13, endln:65:16
+    |vpiParent:
+    \_port: (clk), line:65:7, endln:65:17
+    |vpiName:clk
+    |vpiFullName:work@bottom3.g_datapath:0:g_io.clk.clk
+    |vpiNetType:1
+  |vpiRefModule:
+  \_ref_module: work@ddr (g_datapath:0:g_io), line:62:6, endln:62:29
+    |vpiParent:
+    \_module_inst: work@bottom3 (work@bottom3), file:${SURELOG_DIR}/tests/Escape/top.v, line:60:1, endln:70:10
+    |vpiName:g_datapath:0:g_io
+    |vpiDefName:work@ddr
+    |vpiPort:
+    \_port: (capture), line:64:7, endln:64:25
+      |vpiParent:
+      \_ref_module: work@ddr (g_datapath:0:g_io), line:62:6, endln:62:29
+      |vpiName:capture
+      |vpiHighConn:
+      \_ref_obj: (work@bottom3.g_datapath:0:g_io.capture.capture), line:64:17, endln:64:24
+        |vpiParent:
+        \_port: (capture), line:64:7, endln:64:25
+        |vpiName:capture
+        |vpiFullName:work@bottom3.g_datapath:0:g_io.capture.capture
+        |vpiActual:
+        \_logic_net: (work@bottom3.g_datapath:0:g_io.capture.capture), line:64:17, endln:64:24
+    |vpiPort:
+    \_port: (clk), line:65:7, endln:65:17
+      |vpiParent:
+      \_ref_module: work@ddr (g_datapath:0:g_io), line:62:6, endln:62:29
+      |vpiName:clk
+      |vpiHighConn:
+      \_ref_obj: (work@bottom3.g_datapath:0:g_io.clk.clk), line:65:13, endln:65:16
+        |vpiParent:
+        \_port: (clk), line:65:7, endln:65:17
+        |vpiName:clk
+        |vpiFullName:work@bottom3.g_datapath:0:g_io.clk.clk
+        |vpiActual:
+        \_logic_net: (work@bottom3.g_datapath:0:g_io.clk.clk), line:65:13, endln:65:16
+|uhdmallModules:
+\_module_inst: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@middle
+  |vpiDefName:work@middle
+  |vpiNet:
+  \_logic_net: (work@middle.a), line:35:8, endln:35:9
+    |vpiParent:
+    \_module_inst: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
+    |vpiTypespec:
+    \_ref_typespec: (work@middle.a)
+      |vpiParent:
+      \_logic_net: (work@middle.a), line:35:8, endln:35:9
+      |vpiFullName:work@middle.a
+      |vpiActual:
+      \_logic_typespec: , line:35:3, endln:35:7
+    |vpiName:a
+    |vpiFullName:work@middle.a
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@middle.b), line:35:11, endln:35:12
+    |vpiParent:
+    \_module_inst: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
+    |vpiTypespec:
+    \_ref_typespec: (work@middle.b)
+      |vpiParent:
+      \_logic_net: (work@middle.b), line:35:11, endln:35:12
+      |vpiFullName:work@middle.b
+      |vpiActual:
+      \_logic_typespec: , line:35:3, endln:35:7
+    |vpiName:b
+    |vpiFullName:work@middle.b
+    |vpiNetType:1
+  |vpiNet:
+  \_logic_net: (work@middle.c), line:35:14, endln:35:15
+    |vpiParent:
+    \_module_inst: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
+    |vpiTypespec:
+    \_ref_typespec: (work@middle.c)
+      |vpiParent:
+      \_logic_net: (work@middle.c), line:35:14, endln:35:15
+      |vpiFullName:work@middle.c
+      |vpiActual:
+      \_logic_typespec: , line:35:3, endln:35:7
+    |vpiName:c
+    |vpiFullName:work@middle.c
+    |vpiNetType:1
+|uhdmallModules:
+\_module_inst: work@middle::nested (work@middle::nested), file:${SURELOG_DIR}/tests/Escape/top1.v, line:36:3, endln:38:12
+  |vpiParent:
+  \_module_inst: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
+  |vpiFullName:work@middle::nested
+  |vpiDefName:work@middle::nested
+  |vpiContAssign:
+  \_cont_assign: , line:37:12, endln:37:21
+    |vpiParent:
+    \_module_inst: work@middle::nested (work@middle::nested), file:${SURELOG_DIR}/tests/Escape/top1.v, line:36:3, endln:38:12
+    |vpiRhs:
+    \_operation: , line:37:16, endln:37:21
+      |vpiParent:
+      \_cont_assign: , line:37:12, endln:37:21
+      |vpiOpType:28
+      |vpiOperand:
+      \_ref_obj: (work@middle.work@middle::nested.a), line:37:16, endln:37:17
+        |vpiParent:
+        \_operation: , line:37:16, endln:37:21
+        |vpiName:a
+        |vpiFullName:work@middle.work@middle::nested.a
+      |vpiOperand:
+      \_ref_obj: (work@middle.work@middle::nested.b), line:37:20, endln:37:21
+        |vpiParent:
+        \_operation: , line:37:16, endln:37:21
+        |vpiName:b
+        |vpiFullName:work@middle.work@middle::nested.b
+    |vpiLhs:
+    \_ref_obj: (work@middle.work@middle::nested.c), line:37:12, endln:37:13
+      |vpiParent:
+      \_cont_assign: , line:37:12, endln:37:21
+      |vpiName:c
+      |vpiFullName:work@middle.work@middle::nested.c
+|uhdmallModules:
+\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Escape/top.v, line:2:1, endln:5:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@top
+  |vpiDefName:work@top
+\_weaklyReferenced:
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:1:3, endln:27:11
+\_int_typespec: , line:3:19, endln:3:22
+  |vpiSigned:1
+\_int_typespec: , line:6:14, endln:6:17
+  |vpiSigned:1
+\_int_typespec: , line:18:14, endln:18:17
+  |vpiSigned:1
+\_int_typespec: , line:24:14, endln:24:17
+  |vpiSigned:1
+\_class_typespec: , line:34:21, endln:34:28
+  |vpiClassDefn:
+  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:30:3, endln:52:11
+\_class_typespec: 
+  |vpiClassDefn:
+  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/Escape/builtin.sv, line:55:3, endln:69:11
+\_int_typespec: , line:57:18, endln:57:21
+  |vpiSigned:1
+\_int_typespec: , line:60:14, endln:60:17
+  |vpiSigned:1
+\_int_typespec: , line:63:14, endln:63:17
+  |vpiSigned:1
+\_int_typespec: , line:66:14, endln:66:17
+  |vpiSigned:1
+\_int_typespec: , line:66:26, endln:66:29
+  |vpiSigned:1
+\_unsupported_typespec: (uvm_phase), line:11:31, endln:11:40
+  |vpiName:uvm_phase
+\_logic_typespec: , line:17:23, endln:17:23
+\_logic_typespec: , line:17:32, endln:17:32
+\_logic_typespec: , line:27:23, endln:27:23
+\_logic_typespec: , line:27:32, endln:27:32
+\_logic_typespec: , line:35:3, endln:35:7
+\_logic_typespec: , line:35:3, endln:35:7
+\_logic_typespec: , line:35:3, endln:35:7
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
-[WARNING] : 12
-[   NOTE] : 8
+[  ERROR] : 0
+[WARNING] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/Escape/top.v:8:1: Non synthesizable construct, work@env
-[LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:11: Non synthesizable construct, select
-[LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:19: Non synthesizable construct, data
-[LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:7:3: Non synthesizable construct, cb
 [LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:11: Non synthesizable construct, select
 [LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:19: Non synthesizable construct, data
 [LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:7:3: Non synthesizable construct, cb

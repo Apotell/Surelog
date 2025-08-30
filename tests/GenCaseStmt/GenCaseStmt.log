@@ -251,74 +251,41 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:3:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:6:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:14:14: Compile generate block "work@top.genblk1".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:21:14: Compile generate block "work@top.genblk2".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:26:13: Compile generate block "work@top.genblk3".
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:6:1: Top level module "work@top".
-[ERR:EL0545] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:13:5: Invalid generate case stmt value.
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 4.
-[NTE:EL0511] Nb leaf instances: 3.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  8
-bit_typespec                                           6
+bit_typespec                                           3
 case_item                                              8
-constant                                              40
+constant                                               7
 design                                                 1
 gen_case                                               3
-gen_scope                                              6
-gen_scope_array                                        6
-int_typespec                                          24
-logic_typespec                                         2
-module_inst                                            8
-param_assign                                           8
-parameter                                              8
-range                                                  2
-ref_module                                            11
+int_typespec                                           3
+logic_typespec                                         1
+module_inst                                            2
+param_assign                                           4
+parameter                                              4
+range                                                  1
+ref_module                                             8
 ref_obj                                                7
-ref_typespec                                          38
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  8
-bit_typespec                                           6
-case_item                                              8
-constant                                              40
-design                                                 1
-gen_case                                               3
-gen_scope                                              9
-gen_scope_array                                        9
-int_typespec                                          24
-logic_typespec                                         2
-module_inst                                           11
-param_assign                                           8
-parameter                                              8
-range                                                  2
-ref_module                                            11
-ref_obj                                                7
-ref_typespec                                          38
+ref_typespec                                           8
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenCaseStmt/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenCaseStmt/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenCaseStmt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:3:1, endln:4:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.x_1b0), line:7:26, endln:7:31
@@ -618,217 +585,6 @@ design: (work@top)
           \_begin: 
           |vpiName:u3
           |vpiDefName:work@BAD
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.x_1b0), line:7:26, endln:7:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |BIN:0
-    |vpiTypespec:
-    \_ref_typespec: (work@top.x_1b0)
-      |vpiParent:
-      \_parameter: (work@top.x_1b0), line:7:26, endln:7:31
-      |vpiFullName:work@top.x_1b0
-      |vpiActual:
-      \_bit_typespec: , line:7:13, endln:7:16
-    |vpiName:x_1b0
-    |vpiFullName:work@top.x_1b0
-  |vpiParameter:
-  \_parameter: (work@top.x_1sb0), line:8:24, endln:8:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |BIN:0
-    |vpiTypespec:
-    \_ref_typespec: (work@top.x_1sb0)
-      |vpiParent:
-      \_parameter: (work@top.x_1sb0), line:8:24, endln:8:30
-      |vpiFullName:work@top.x_1sb0
-      |vpiActual:
-      \_bit_typespec: , line:8:13, endln:8:23
-    |vpiSigned:1
-    |vpiName:x_1sb0
-    |vpiFullName:work@top.x_1sb0
-  |vpiParameter:
-  \_parameter: (work@top.x_1sb1), line:9:24, endln:9:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |BIN:1
-    |vpiTypespec:
-    \_ref_typespec: (work@top.x_1sb1)
-      |vpiParent:
-      \_parameter: (work@top.x_1sb1), line:9:24, endln:9:30
-      |vpiFullName:work@top.x_1sb1
-      |vpiActual:
-      \_bit_typespec: , line:9:13, endln:9:23
-    |vpiSigned:1
-    |vpiName:x_1sb1
-    |vpiFullName:work@top.x_1sb1
-  |vpiParameter:
-  \_parameter: (work@top.x_2sb11), line:10:32, endln:10:39
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |BIN:11
-    |vpiTypespec:
-    \_ref_typespec: (work@top.x_2sb11)
-      |vpiParent:
-      \_parameter: (work@top.x_2sb11), line:10:32, endln:10:39
-      |vpiFullName:work@top.x_2sb11
-      |vpiActual:
-      \_logic_typespec: , line:10:13, endln:10:31
-    |vpiSigned:1
-    |vpiName:x_2sb11
-    |vpiFullName:work@top.x_2sb11
-  |vpiParamAssign:
-  \_param_assign: , line:7:26, endln:7:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:7:34, endln:7:38
-      |vpiParent:
-      \_param_assign: , line:7:26, endln:7:38
-      |vpiDecompile:1'b0
-      |vpiSize:1
-      |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:7:34, endln:7:38
-        |vpiFullName:work@top
-        |vpiActual:
-        \_bit_typespec: , line:7:13, endln:7:16
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@top.x_1b0), line:7:26, endln:7:31
-  |vpiParamAssign:
-  \_param_assign: , line:8:24, endln:8:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:8:33, endln:8:38
-      |vpiParent:
-      \_param_assign: , line:8:24, endln:8:38
-      |vpiDecompile:1'b0
-      |vpiSize:1
-      |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:8:33, endln:8:38
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: 
-      |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@top.x_1sb0), line:8:24, endln:8:30
-  |vpiParamAssign:
-  \_param_assign: , line:9:24, endln:9:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:9:33, endln:9:38
-      |vpiParent:
-      \_param_assign: , line:9:24, endln:9:38
-      |vpiDecompile:-1
-      |vpiSize:1
-      |INT:-1
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:9:33, endln:9:38
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: 
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@top.x_1sb1), line:9:24, endln:9:30
-  |vpiParamAssign:
-  \_param_assign: , line:10:32, endln:10:48
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:10:42, endln:10:48
-      |vpiParent:
-      \_param_assign: , line:10:32, endln:10:48
-      |vpiDecompile:-1
-      |vpiSize:2
-      |INT:-1
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:10:42, endln:10:48
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: 
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@top.x_2sb11), line:10:32, endln:10:39
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1), line:14:14, endln:14:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiName:genblk1
-    |vpiFullName:work@top.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1), line:14:14, endln:14:24
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1), line:14:14, endln:14:24
-      |vpiFullName:work@top.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk1.u3), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:14:14, endln:14:24
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1), line:14:14, endln:14:24
-        |vpiName:u3
-        |vpiFullName:work@top.genblk1.u3
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv
-        |vpiDefLineNo:3
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk2), line:21:14, endln:21:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiName:genblk2
-    |vpiFullName:work@top.genblk2
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk2), line:21:14, endln:21:24
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk2), line:21:14, endln:21:24
-      |vpiFullName:work@top.genblk2
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk2.u3), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:21:14, endln:21:24
-        |vpiParent:
-        \_gen_scope: (work@top.genblk2), line:21:14, endln:21:24
-        |vpiName:u3
-        |vpiFullName:work@top.genblk2.u3
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv
-        |vpiDefLineNo:3
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk3), line:26:13, endln:26:23
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
-    |vpiName:genblk3
-    |vpiFullName:work@top.genblk3
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk3), line:26:13, endln:26:23
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk3), line:26:13, endln:26:23
-      |vpiFullName:work@top.genblk3
-      |vpiModule:
-      \_module_inst: work@GOOD (work@top.genblk3.u2), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:26:13, endln:26:23
-        |vpiParent:
-        \_gen_scope: (work@top.genblk3), line:26:13, endln:26:23
-        |vpiName:u2
-        |vpiFullName:work@top.genblk3.u2
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv
-        |vpiDefLineNo:3
 \_weaklyReferenced:
 \_bit_typespec: , line:7:13, endln:7:16
   |vpiParent:
@@ -865,53 +621,12 @@ design: (work@top)
       |UINT:0
       |vpiConstType:9
   |vpiSigned:1
-\_int_typespec: 
-  |vpiSigned:1
-\_int_typespec: 
-  |vpiSigned:1
-\_int_typespec: 
-  |vpiSigned:1
-\_bit_typespec: , line:7:13, endln:7:16
-  |vpiParent:
-  \_ref_typespec: (work@top.x_1b0)
-\_bit_typespec: , line:8:13, endln:8:23
-  |vpiParent:
-  \_ref_typespec: (work@top.x_1sb0)
-  |vpiSigned:1
-\_bit_typespec: , line:9:13, endln:9:23
-  |vpiParent:
-  \_ref_typespec: (work@top.x_1sb1)
-  |vpiSigned:1
-\_logic_typespec: , line:10:13, endln:10:31
-  |vpiParent:
-  \_ref_typespec: (work@top.x_2sb11)
-  |vpiRange:
-  \_range: , line:10:26, endln:10:31
-    |vpiParent:
-    \_logic_typespec: , line:10:13, endln:10:31
-    |vpiLeftRange:
-    \_constant: , line:10:27, endln:10:28
-      |vpiParent:
-      \_range: , line:10:26, endln:10:31
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:10:29, endln:10:30
-      |vpiParent:
-      \_range: , line:10:26, endln:10:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv | ${SURELOG_DIR}/build/regression/GenCaseStmt/roundtrip/dut_000.sv | 18 | 30 |

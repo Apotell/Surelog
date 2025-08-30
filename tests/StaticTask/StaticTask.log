@@ -86,12 +86,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StaticTask/dut.sv:1:1: No timescale set for "tb".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/StaticTask/dut.sv:1:1: Compile module "work@tb".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/StaticTask/dut.sv:1:1: Top level module "work@tb".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
@@ -101,7 +95,7 @@ design                                                 1
 initial                                                1
 integer_typespec                                       1
 integer_var                                            1
-module_inst                                            2
+module_inst                                            1
 operation                                              1
 ref_obj                                                3
 ref_typespec                                           1
@@ -109,35 +103,17 @@ sys_func_call                                          1
 task                                                   1
 task_call                                              1
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             4
-begin                                                  2
-constant                                               3
-design                                                 1
-initial                                                2
-integer_typespec                                       1
-integer_var                                            4
-module_inst                                            2
-operation                                              2
-ref_obj                                                6
-ref_typespec                                           4
-sys_func_call                                          2
-task                                                   2
-task_call                                              2
-=== UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@tb)
-|vpiElaborated:1
-|vpiName:work@tb
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
   |vpiParent:
-  \_design: (work@tb)
+  \_design: (unnamed)
   |vpiFullName:work@tb
   |vpiDefName:work@tb
   |vpiTaskFunc:
@@ -251,133 +227,6 @@ design: (work@tb)
       |vpiName:display
       |vpiTask:
       \_task: (work@tb.display), line:5:2, endln:9:9
-|uhdmtopModules:
-\_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
-  |vpiParent:
-  \_design: (work@tb)
-  |vpiName:work@tb
-  |vpiDefName:work@tb
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_task: (work@tb.display), line:5:2, endln:9:9
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
-    |vpiName:display
-    |vpiFullName:work@tb.display
-    |vpiVariables:
-    \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-      |vpiParent:
-      \_task: (work@tb.display), line:5:2, endln:9:9
-      |vpiTypespec:
-      \_ref_typespec: (work@tb.display.i)
-        |vpiParent:
-        \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiFullName:work@tb.display.i
-        |vpiActual:
-        \_integer_typespec: , line:6:2, endln:6:9
-      |vpiName:i
-      |vpiFullName:work@tb.display.i
-      |vpiSigned:1
-    |vpiVisibility:1
-    |vpiStmt:
-    \_begin: (work@tb.display), line:7:2, endln:7:12
-      |vpiParent:
-      \_task: (work@tb.display), line:5:2, endln:9:9
-      |vpiFullName:work@tb.display
-      |vpiVariables:
-      \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
-        |vpiTypespec:
-        \_ref_typespec: (work@tb.display.i)
-          |vpiParent:
-          \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-          |vpiFullName:work@tb.display.i
-          |vpiActual:
-          \_integer_typespec: , line:6:2, endln:6:9
-        |vpiName:i
-        |vpiFullName:work@tb.display.i
-        |vpiSigned:1
-      |vpiStmt:
-      \_assignment: , line:6:10, endln:6:15
-        |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:6:14, endln:6:15
-        |vpiLhs:
-        \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-          |vpiParent:
-          \_assignment: , line:6:10, endln:6:15
-          |vpiTypespec:
-          \_ref_typespec: (work@tb.display.i)
-            |vpiParent:
-            \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-            |vpiFullName:work@tb.display.i
-            |vpiActual:
-            \_integer_typespec: , line:6:2, endln:6:9
-          |vpiName:i
-          |vpiFullName:work@tb.display.i
-          |vpiSigned:1
-      |vpiStmt:
-      \_assignment: , line:7:2, endln:7:11
-        |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_operation: , line:7:6, endln:7:11
-          |vpiParent:
-          \_assignment: , line:7:2, endln:7:11
-          |vpiOpType:24
-          |vpiOperand:
-          \_ref_obj: (work@tb.display.i), line:7:6, endln:7:7
-            |vpiParent:
-            \_operation: , line:7:6, endln:7:11
-            |vpiName:i
-            |vpiFullName:work@tb.display.i
-            |vpiActual:
-            \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-          |vpiOperand:
-          \_constant: , line:7:10, endln:7:11
-        |vpiLhs:
-        \_ref_obj: (work@tb.display.i), line:7:2, endln:7:3
-          |vpiParent:
-          \_assignment: , line:7:2, endln:7:11
-          |vpiName:i
-          |vpiFullName:work@tb.display.i
-          |vpiActual:
-          \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-      |vpiStmt:
-      \_sys_func_call: ($display), line:8:2, endln:8:22
-        |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
-        |vpiArgument:
-        \_constant: , line:8:11, endln:8:18
-        |vpiArgument:
-        \_ref_obj: (work@tb.display.i), line:8:20, endln:8:21
-          |vpiParent:
-          \_sys_func_call: ($display), line:8:2, endln:8:22
-          |vpiName:i
-          |vpiFullName:work@tb.display.i
-          |vpiActual:
-          \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiName:$display
-    |vpiInstance:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:3:2, endln:3:20
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
-    |vpiStmt:
-    \_task_call: (display), line:3:10, endln:3:19
-      |vpiParent:
-      \_initial: , line:3:2, endln:3:20
-      |vpiName:display
-      |vpiTask:
-      \_task: (work@tb.display), line:5:2, endln:9:9
 \_weaklyReferenced:
 \_integer_typespec: , line:6:2, endln:6:9
   |vpiSigned:1
@@ -386,7 +235,7 @@ design: (work@tb)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/StaticTask/dut.sv | ${SURELOG_DIR}/build/regression/StaticTask/roundtrip/dut_000.sv | 1 | 10 |

@@ -78,49 +78,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenIfElse/dut.sv:2:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenIfElse/dut.sv:2:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenIfElse/dut.sv:4:5: Compile generate block "work@top.genblk1".
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenIfElse/dut.sv:2:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  2
-constant                                               2
-cont_assign                                            4
+constant                                               1
+cont_assign                                            3
 design                                                 1
 gen_if_else                                            1
-gen_scope                                              2
-gen_scope_array                                        2
-module_inst                                            4
-ref_obj                                                8
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                               2
-cont_assign                                            5
-design                                                 1
-gen_if_else                                            1
-gen_scope                                              3
-gen_scope_array                                        3
-module_inst                                            4
-ref_obj                                               10
+module_inst                                            1
+ref_obj                                                6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenIfElse/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenIfElse/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenIfElse/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenIfElse/dut.sv, line:2:1, endln:10:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiGenStmt:
@@ -193,47 +171,12 @@ design: (work@top)
           \_cont_assign: , line:8:12, endln:8:17
           |vpiName:e
           |vpiFullName:work@top.e
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenIfElse/dut.sv, line:2:1, endln:10:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.genblk1), line:4:5, endln:4:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenIfElse/dut.sv, line:2:1, endln:10:10
-    |vpiName:genblk1
-    |vpiFullName:work@top.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@top.genblk1), line:4:5, endln:4:18
-      |vpiParent:
-      \_gen_scope_array: (work@top.genblk1), line:4:5, endln:4:18
-      |vpiFullName:work@top.genblk1
-      |vpiContAssign:
-      \_cont_assign: , line:4:12, endln:4:17
-        |vpiParent:
-        \_gen_scope: (work@top.genblk1), line:4:5, endln:4:18
-        |vpiRhs:
-        \_ref_obj: (work@top.genblk1.b), line:4:16, endln:4:17
-          |vpiParent:
-          \_cont_assign: , line:4:12, endln:4:17
-          |vpiName:b
-          |vpiFullName:work@top.genblk1.b
-        |vpiLhs:
-        \_ref_obj: (work@top.genblk1.a), line:4:12, endln:4:13
-          |vpiParent:
-          \_cont_assign: , line:4:12, endln:4:17
-          |vpiName:a
-          |vpiFullName:work@top.genblk1.a
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/GenIfElse/dut.sv | ${SURELOG_DIR}/build/regression/GenIfElse/roundtrip/dut_000.sv | 4 | 10 |

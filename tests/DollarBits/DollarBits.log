@@ -186,60 +186,35 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/DollarBits/dut.sv:7:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/DollarBits/dut.sv:1:1: Compile module "work@other".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/DollarBits/dut.sv:7:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              49
+constant                                               9
 cont_assign                                            1
 design                                                 1
-int_typespec                                           2
-logic_net                                              8
-logic_typespec                                        13
-module_inst                                            8
-operation                                              8
-param_assign                                           2
-parameter                                              2
-port                                                  10
-range                                                 17
+int_typespec                                           1
+logic_net                                              4
+logic_typespec                                         4
+module_inst                                            2
+operation                                              2
+param_assign                                           1
+parameter                                              1
+port                                                   6
+range                                                  4
 ref_module                                             1
-ref_obj                                               16
-ref_typespec                                          16
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              49
-cont_assign                                            2
-design                                                 1
-int_typespec                                           2
-logic_net                                              8
-logic_typespec                                        13
-module_inst                                            8
-operation                                              8
-param_assign                                           2
-parameter                                              2
-port                                                  14
-range                                                 17
-ref_module                                             1
-ref_obj                                               24
-ref_typespec                                          20
+ref_obj                                               10
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DollarBits/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DollarBits/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DollarBits/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -335,7 +310,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@other (work@other), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@other
   |vpiParameter:
   \_parameter: (work@other.Width), line:2:19, endln:2:24
@@ -450,425 +425,11 @@ design: (work@dut)
       |vpiFullName:work@other.out
       |vpiActual:
       \_logic_net: (work@other.out), line:3:55, endln:3:58
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@dut.in), line:7:30, endln:7:32
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.in)
-      |vpiParent:
-      \_logic_net: (work@dut.in), line:7:30, endln:7:32
-      |vpiFullName:work@dut.in
-      |vpiActual:
-      \_logic_typespec: , line:7:19, endln:7:29
-    |vpiName:in
-    |vpiFullName:work@dut.in
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@dut.out), line:7:52, endln:7:55
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.out)
-      |vpiParent:
-      \_logic_net: (work@dut.out), line:7:52, endln:7:55
-      |vpiFullName:work@dut.out
-      |vpiActual:
-      \_logic_typespec: , line:7:41, endln:7:51
-    |vpiName:out
-    |vpiFullName:work@dut.out
-    |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (in), line:7:30, endln:7:32
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiName:in
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@dut.in), line:7:30, endln:7:32
-      |vpiParent:
-      \_port: (in), line:7:30, endln:7:32
-      |vpiName:in
-      |vpiFullName:work@dut.in
-      |vpiActual:
-      \_logic_net: (work@dut.in), line:7:30, endln:7:32
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.in)
-      |vpiParent:
-      \_port: (in), line:7:30, endln:7:32
-      |vpiFullName:work@dut.in
-      |vpiActual:
-      \_logic_typespec: , line:7:19, endln:7:29
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-  |vpiPort:
-  \_port: (out), line:7:52, endln:7:55
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiName:out
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.out), line:7:52, endln:7:55
-      |vpiParent:
-      \_port: (out), line:7:52, endln:7:55
-      |vpiName:out
-      |vpiFullName:work@dut.out
-      |vpiActual:
-      \_logic_net: (work@dut.out), line:7:52, endln:7:55
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.out)
-      |vpiParent:
-      \_port: (out), line:7:52, endln:7:55
-      |vpiFullName:work@dut.out
-      |vpiActual:
-      \_logic_typespec: , line:7:41, endln:7:51
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-  |vpiModule:
-  \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiName:oth
-    |vpiFullName:work@dut.oth
-    |vpiParameter:
-    \_parameter: (work@dut.oth.Width), line:2:19, endln:2:24
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.oth.Width)
-        |vpiParent:
-        \_parameter: (work@dut.oth.Width), line:2:19, endln:2:24
-        |vpiFullName:work@dut.oth.Width
-        |vpiActual:
-        \_int_typespec: , line:2:15, endln:2:18
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@dut.oth.Width
-    |vpiParamAssign:
-    \_param_assign: , line:2:19, endln:2:28
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:2:27, endln:2:28
-        |vpiParent:
-        \_param_assign: , line:2:19, endln:2:28
-        |vpiDecompile:8
-        |vpiSize:32
-        |UINT:8
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.oth)
-          |vpiParent:
-          \_constant: , line:2:27, endln:2:28
-          |vpiFullName:work@dut.oth
-          |vpiActual:
-          \_int_typespec: , line:2:15, endln:2:18
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@dut.oth.Width), line:2:19, endln:2:24
-    |vpiDefName:work@other
-    |vpiDefFile:${SURELOG_DIR}/tests/DollarBits/dut.sv
-    |vpiDefLineNo:1
-    |vpiNet:
-    \_logic_net: (work@dut.oth.in), line:3:27, endln:3:29
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.oth.in)
-        |vpiParent:
-        \_logic_net: (work@dut.oth.in), line:3:27, endln:3:29
-        |vpiFullName:work@dut.oth.in
-        |vpiActual:
-        \_logic_typespec: , line:3:10, endln:3:26
-      |vpiName:in
-      |vpiFullName:work@dut.oth.in
-      |vpiNetType:36
-    |vpiNet:
-    \_logic_net: (work@dut.oth.out), line:3:55, endln:3:58
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.oth.out)
-        |vpiParent:
-        \_logic_net: (work@dut.oth.out), line:3:55, endln:3:58
-        |vpiFullName:work@dut.oth.out
-        |vpiActual:
-        \_logic_typespec: , line:3:38, endln:3:54
-      |vpiName:out
-      |vpiFullName:work@dut.oth.out
-      |vpiNetType:36
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:7:1, endln:9:10
-    |vpiPort:
-    \_port: (in), line:3:27, endln:3:29
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiName:in
-      |vpiDirection:1
-      |vpiHighConn:
-      \_ref_obj: (work@dut.in), line:8:41, endln:8:43
-        |vpiParent:
-        \_port: (in), line:3:27, endln:3:29
-        |vpiName:in
-        |vpiFullName:work@dut.in
-        |vpiActual:
-        \_logic_net: (work@dut.in), line:7:30, endln:7:32
-      |vpiLowConn:
-      \_ref_obj: (work@dut.oth.in), line:8:38, endln:8:40
-        |vpiParent:
-        \_port: (in), line:3:27, endln:3:29
-        |vpiName:in
-        |vpiFullName:work@dut.oth.in
-        |vpiActual:
-        \_logic_net: (work@dut.oth.in), line:3:27, endln:3:29
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.oth.in)
-        |vpiParent:
-        \_port: (in), line:3:27, endln:3:29
-        |vpiFullName:work@dut.oth.in
-        |vpiActual:
-        \_logic_typespec: , line:3:10, endln:3:26
-      |vpiInstance:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-    |vpiPort:
-    \_port: (out), line:3:55, endln:3:58
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiName:out
-      |vpiDirection:2
-      |vpiHighConn:
-      \_ref_obj: (work@dut.out), line:8:51, endln:8:54
-        |vpiParent:
-        \_port: (out), line:3:55, endln:3:58
-        |vpiName:out
-        |vpiFullName:work@dut.out
-        |vpiActual:
-        \_logic_net: (work@dut.out), line:7:52, endln:7:55
-      |vpiLowConn:
-      \_ref_obj: (work@dut.oth.out), line:8:47, endln:8:50
-        |vpiParent:
-        \_port: (out), line:3:55, endln:3:58
-        |vpiName:out
-        |vpiFullName:work@dut.oth.out
-        |vpiActual:
-        \_logic_net: (work@dut.oth.out), line:3:55, endln:3:58
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.oth.out)
-        |vpiParent:
-        \_port: (out), line:3:55, endln:3:58
-        |vpiFullName:work@dut.oth.out
-        |vpiActual:
-        \_logic_typespec: , line:3:38, endln:3:54
-      |vpiInstance:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-    |vpiContAssign:
-    \_cont_assign: , line:4:11, endln:4:19
-      |vpiParent:
-      \_module_inst: work@other (work@dut.oth), file:${SURELOG_DIR}/tests/DollarBits/dut.sv, line:8:4, endln:8:57
-      |vpiRhs:
-      \_ref_obj: (work@dut.oth.in), line:4:17, endln:4:19
-        |vpiParent:
-        \_cont_assign: , line:4:11, endln:4:19
-        |vpiName:in
-        |vpiFullName:work@dut.oth.in
-        |vpiActual:
-        \_logic_net: (work@dut.oth.in), line:3:27, endln:3:29
-      |vpiLhs:
-      \_ref_obj: (work@dut.oth.out), line:4:11, endln:4:14
-        |vpiParent:
-        \_cont_assign: , line:4:11, endln:4:19
-        |vpiName:out
-        |vpiFullName:work@dut.oth.out
-        |vpiActual:
-        \_logic_net: (work@dut.oth.out), line:3:55, endln:3:58
 \_weaklyReferenced:
 \_int_typespec: , line:2:15, endln:2:18
   |vpiParent:
   \_parameter: (work@other.Width), line:2:19, endln:2:24
   |vpiSigned:1
-\_logic_typespec: , line:7:19, endln:7:29
-  |vpiRange:
-  \_range: , line:7:24, endln:7:29
-    |vpiParent:
-    \_logic_typespec: , line:7:19, endln:7:29
-    |vpiLeftRange:
-    \_constant: , line:7:25, endln:7:26
-      |vpiParent:
-      \_range: , line:7:24, endln:7:29
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:27, endln:7:28
-      |vpiParent:
-      \_range: , line:7:24, endln:7:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:7:41, endln:7:51
-  |vpiRange:
-  \_range: , line:7:46, endln:7:51
-    |vpiParent:
-    \_logic_typespec: , line:7:41, endln:7:51
-    |vpiLeftRange:
-    \_constant: , line:7:47, endln:7:48
-      |vpiParent:
-      \_range: , line:7:46, endln:7:51
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:49, endln:7:50
-      |vpiParent:
-      \_range: , line:7:46, endln:7:51
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:7:19, endln:7:29
-  |vpiParent:
-  \_logic_net: (work@dut.in), line:7:30, endln:7:32
-  |vpiRange:
-  \_range: , line:7:24, endln:7:29
-    |vpiParent:
-    \_logic_typespec: , line:7:19, endln:7:29
-    |vpiLeftRange:
-    \_constant: , line:7:25, endln:7:26
-      |vpiParent:
-      \_range: , line:7:24, endln:7:29
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:27, endln:7:28
-      |vpiParent:
-      \_range: , line:7:24, endln:7:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:7:41, endln:7:51
-  |vpiParent:
-  \_logic_net: (work@dut.out), line:7:52, endln:7:55
-  |vpiRange:
-  \_range: , line:7:46, endln:7:51
-    |vpiParent:
-    \_logic_typespec: , line:7:41, endln:7:51
-    |vpiLeftRange:
-    \_constant: , line:7:47, endln:7:48
-      |vpiParent:
-      \_range: , line:7:46, endln:7:51
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:49, endln:7:50
-      |vpiParent:
-      \_range: , line:7:46, endln:7:51
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:10, endln:3:26
-  |vpiRange:
-  \_range: , line:3:15, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:10, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:16, endln:3:21
-      |vpiParent:
-      \_range: , line:3:15, endln:3:26
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:15, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:38, endln:3:54
-  |vpiRange:
-  \_range: , line:3:43, endln:3:54
-    |vpiParent:
-    \_logic_typespec: , line:3:38, endln:3:54
-    |vpiLeftRange:
-    \_constant: , line:3:44, endln:3:49
-      |vpiParent:
-      \_range: , line:3:43, endln:3:54
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:3:52, endln:3:53
-      |vpiParent:
-      \_range: , line:3:43, endln:3:54
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:10, endln:3:26
-  |vpiParent:
-  \_logic_net: (work@dut.oth.in), line:3:27, endln:3:29
-  |vpiRange:
-  \_range: , line:3:15, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:10, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:16, endln:3:21
-      |vpiParent:
-      \_range: , line:3:15, endln:3:26
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:15, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:38, endln:3:54
-  |vpiRange:
-  \_range: , line:3:43, endln:3:54
-    |vpiParent:
-    \_logic_typespec: , line:3:38, endln:3:54
-    |vpiLeftRange:
-    \_constant: , line:3:44, endln:3:49
-      |vpiParent:
-      \_range: , line:3:43, endln:3:54
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:3:52, endln:3:53
-      |vpiParent:
-      \_range: , line:3:43, endln:3:54
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:7:19, endln:7:29
   |vpiRange:
   \_range: , line:7:24, endln:7:29
@@ -973,16 +534,12 @@ design: (work@dut)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:2:15, endln:2:18
-  |vpiParent:
-  \_ref_typespec: (work@dut.oth.Width)
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/DollarBits/dut.sv | ${SURELOG_DIR}/build/regression/DollarBits/roundtrip/dut_000.sv | 5 | 9 |

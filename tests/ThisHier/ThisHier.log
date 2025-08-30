@@ -148,63 +148,22 @@ n<> u<142> t<Top_level_rule> c<1> l<1:1> el<34:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ThisHier/dut.sv:1:1: No timescale set for "uvm".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ThisHier/dut.sv:1:1: Compile package "uvm".
 [INF:CP0302] ${SURELOG_DIR}/tests/ThisHier/dut.sv:8:1: Compile class "uvm::uvm_barrier".
 [INF:CP0302] ${SURELOG_DIR}/tests/ThisHier/dut.sv:3:1: Compile class "uvm::uvm_object".
 [INF:CP0302] ${SURELOG_DIR}/tests/ThisHier/dut.sv:19:1: Compile class "uvm::uvm_phase".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         2
-array_var                                              2
-assignment                                             3
-bit_typespec                                           2
-bit_var                                                2
+assignment                                             2
 class_defn                                             5
-class_typespec                                         5
+class_typespec                                         1
 class_var                                              1
-constant                                               6
 design                                                 1
-extends                                                2
-function                                               4
-hier_path                                              5
-int_typespec                                           1
-int_var                                                1
-module_inst                                            1
-package                                                2
-range                                                  4
-ref_obj                                               17
-ref_typespec                                          12
-var_select                                             3
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-array_typespec                                         2
-array_var                                              7
-assignment                                            10
-bit_typespec                                           2
-bit_var                                                7
-class_defn                                             5
-class_typespec                                         5
-class_var                                              1
-constant                                               6
-design                                                 1
-extends                                                8
-func_call                                              3
-function                                              14
-hier_path                                             16
-int_typespec                                           1
-int_var                                                4
-module_inst                                            1
-package                                                2
-range                                                  4
-ref_obj                                               46
-ref_typespec                                          31
-var_select                                             3
+function                                               3
+hier_path                                              3
+package                                                1
+ref_obj                                                8
+ref_typespec                                           1
+var_select                                             2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ThisHier/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ThisHier/slpp_all/checker/surelog.chk.html ...
@@ -212,7 +171,6 @@ var_select                                             3
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
@@ -221,99 +179,12 @@ design: (unnamed)
   |vpiName:uvm
   |vpiFullName:uvm::
   |vpiDefName:uvm
-  |vpiTaskFunc:
-  \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
-    |vpiParent:
-    \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
-    |vpiName:uvm_phase::add
-    |vpiFullName:uvm::uvm_phase::add
-    |vpiVisibility:1
-    |vpiStmt:
-    \_assignment: , line:27:5, endln:27:50
-      |vpiParent:
-      \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_hier_path: (super.m_successors), line:27:32, endln:27:50
-        |vpiParent:
-        \_assignment: , line:27:5, endln:27:50
-        |vpiActual:
-        \_ref_obj: (super), line:27:38, endln:27:50
-          |vpiParent:
-          \_hier_path: (super.m_successors), line:27:32, endln:27:50
-          |vpiName:super
-        |vpiActual:
-        \_ref_obj: (m_successors), line:27:38, endln:27:50
-          |vpiParent:
-          \_hier_path: (super.m_successors), line:27:32, endln:27:50
-          |vpiName:m_successors
-        |vpiName:super.m_successors
-      |vpiLhs:
-      \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-        |vpiParent:
-        \_assignment: , line:27:5, endln:27:50
-        |vpiActual:
-        \_ref_obj: (this), line:27:10, endln:27:24
-          |vpiParent:
-          \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-          |vpiName:this
-        |vpiActual:
-        \_ref_obj: (uvm::uvm_phase::add::m_predecessors)
-          |vpiParent:
-          \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-          |vpiName:m_predecessors
-          |vpiFullName:uvm::uvm_phase::add::m_predecessors
-        |vpiActual:
-        \_ref_obj: (uvm::uvm_phase::add::size)
-          |vpiParent:
-          \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-          |vpiName:size
-          |vpiFullName:uvm::uvm_phase::add::size
-        |vpiName:this.m_predecessors.size
-    |vpiInstance:
-    \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
-|uhdmtopPackages:
-\_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:uvm
-  |vpiFullName:uvm::
-  |vpiDefName:uvm
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
     |vpiName:uvm_barrier
     |vpiFullName:uvm::uvm_barrier
-    |vpiVariables:
-    \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-      |vpiParent:
-      \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-      |vpiTypespec:
-      \_ref_typespec: (uvm::uvm_barrier::threshold)
-        |vpiParent:
-        \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-        |vpiFullName:uvm::uvm_barrier::threshold
-        |vpiActual:
-        \_int_typespec: , line:10:10, endln:10:13
-      |vpiName:threshold
-      |vpiFullName:uvm::uvm_barrier::threshold
-      |vpiSigned:1
-      |vpiAutomatic:1
-      |vpiVisibility:3
-    |vpiExtends:
-    \_extends: , line:8:27, endln:8:37
-      |vpiParent:
-      \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-      |vpiClassTypespec:
-      \_ref_typespec: (uvm::uvm_barrier)
-        |vpiParent:
-        \_extends: , line:8:27, endln:8:37
-        |vpiFullName:uvm::uvm_barrier
-        |vpiActual:
-        \_class_typespec: (uvm_object), line:8:27, endln:8:37
     |vpiMethod:
     \_function: (uvm::uvm_barrier::new), line:12:3, endln:15:14
       |vpiParent:
@@ -345,8 +216,6 @@ design: (unnamed)
           \_assignment: , line:13:5, endln:13:31
           |vpiName:threshold
           |vpiFullName:uvm::uvm_barrier::new::threshold
-          |vpiActual:
-          \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
         |vpiLhs:
         \_hier_path: (this.threshold), line:13:5, endln:13:9
           |vpiParent:
@@ -356,16 +225,12 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (this.threshold), line:13:5, endln:13:9
             |vpiName:this
-            |vpiActual:
-            \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
           |vpiActual:
           \_ref_obj: (uvm::uvm_barrier::new::threshold)
             |vpiParent:
             \_hier_path: (this.threshold), line:13:5, endln:13:9
             |vpiName:threshold
             |vpiFullName:uvm::uvm_barrier::new::threshold
-            |vpiActual:
-            \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
           |vpiName:this.threshold
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
@@ -373,375 +238,90 @@ design: (unnamed)
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
     |vpiName:uvm_object
     |vpiFullName:uvm::uvm_object
-    |vpiVariables:
-    \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-      |vpiParent:
-      \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
-      |vpiSize:1
-      |vpiTypespec:
-      \_ref_typespec: (uvm::uvm_object::m_successors)
-        |vpiParent:
-        \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-        |vpiFullName:uvm::uvm_object::m_successors
-        |vpiActual:
-        \_array_typespec: 
-      |vpiName:m_successors
-      |vpiFullName:uvm::uvm_object::m_successors
-      |vpiAutomatic:1
-      |vpiRandType:1
-      |vpiVisibility:2
-      |vpiArrayType:3
-      |vpiReg:
-      \_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-        |vpiParent:
-        \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-        |vpiTypespec:
-        \_ref_typespec: (uvm::uvm_object::m_successors)
-          |vpiParent:
-          \_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-          |vpiFullName:uvm::uvm_object::m_successors
-          |vpiActual:
-          \_bit_typespec: , line:4:11, endln:4:14
-        |vpiFullName:uvm::uvm_object::m_successors
-    |vpiDerivedClasses:
-    \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-    |vpiDerivedClasses:
-    \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-      |vpiParent:
-      \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
-      |vpiName:uvm_phase
-      |vpiFullName:uvm::uvm_phase
-      |vpiVariables:
-      \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-        |vpiParent:
-        \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-        |vpiSize:1
-        |vpiTypespec:
-        \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-          |vpiParent:
-          \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-          |vpiFullName:uvm::uvm_phase::m_predecessors
-          |vpiActual:
-          \_array_typespec: 
-        |vpiName:m_predecessors
-        |vpiFullName:uvm::uvm_phase::m_predecessors
-        |vpiAutomatic:1
-        |vpiRandType:1
-        |vpiVisibility:2
-        |vpiArrayType:3
-        |vpiReg:
-        \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-          |vpiParent:
-          \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-          |vpiTypespec:
-          \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-            |vpiParent:
-            \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-            |vpiFullName:uvm::uvm_phase::m_predecessors
-            |vpiActual:
-            \_bit_typespec: , line:20:11, endln:20:14
-          |vpiFullName:uvm::uvm_phase::m_predecessors
-      |vpiExtends:
-      \_extends: , line:19:25, endln:19:35
-        |vpiParent:
-        \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-        |vpiClassTypespec:
-        \_ref_typespec: (uvm::uvm_phase)
-          |vpiParent:
-          \_extends: , line:19:25, endln:19:35
-          |vpiFullName:uvm::uvm_phase
-          |vpiActual:
-          \_class_typespec: (uvm_object), line:19:25, endln:19:35
-      |vpiMethod:
-      \_function: (uvm::uvm_phase::add), line:21:1, endln:21:7
-        |vpiParent:
-        \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-        |vpiName:add
-        |vpiFullName:uvm::uvm_phase::add
-        |vpiMethod:1
-        |vpiAccessType:2
-        |vpiVisibility:1
-      |vpiMethod:
-      \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
-        |vpiParent:
-        \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-        |vpiName:add
-        |vpiFullName:uvm::uvm_phase::add
-        |vpiVisibility:1
-        |vpiStmt:
-        \_assignment: , line:27:5, endln:27:50
-          |vpiParent:
-          \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_hier_path: (super.m_successors), line:27:32, endln:27:50
-            |vpiParent:
-            \_assignment: , line:27:5, endln:27:50
-            |vpiActual:
-            \_ref_obj: (super), line:27:38, endln:27:50
-              |vpiParent:
-              \_hier_path: (super.m_successors), line:27:32, endln:27:50
-              |vpiName:super
-              |vpiActual:
-              \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
-            |vpiActual:
-            \_ref_obj: (m_successors), line:27:38, endln:27:50
-              |vpiParent:
-              \_hier_path: (super.m_successors), line:27:32, endln:27:50
-              |vpiName:m_successors
-              |vpiActual:
-              \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-            |vpiName:super.m_successors
-          |vpiLhs:
-          \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-            |vpiParent:
-            \_assignment: , line:27:5, endln:27:50
-            |vpiActual:
-            \_ref_obj: (this), line:27:10, endln:27:24
-              |vpiParent:
-              \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-              |vpiName:this
-              |vpiActual:
-              \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-            |vpiActual:
-            \_ref_obj: (uvm::uvm_phase::add::m_predecessors)
-              |vpiParent:
-              \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-              |vpiName:m_predecessors
-              |vpiFullName:uvm::uvm_phase::add::m_predecessors
-              |vpiActual:
-              \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-            |vpiActual:
-            \_ref_obj: (uvm::uvm_phase::add::size)
-              |vpiParent:
-              \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-              |vpiName:size
-              |vpiFullName:uvm::uvm_phase::add::size
-              |vpiActual:
-              \_func_call: (size)
-            |vpiName:this.m_predecessors.size
-        |vpiInstance:
-        \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-\_weaklyReferenced:
-\_function: (uvm::uvm_barrier::new), line:12:3, endln:15:14
-  |vpiParent:
-  \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-  |vpiName:new
-  |vpiFullName:uvm::uvm_barrier::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (uvm::uvm_barrier::new)
-  |vpiStmt:
-  \_assignment: , line:13:5, endln:13:31
     |vpiParent:
-    \_function: (uvm::uvm_barrier::new), line:12:3, endln:15:14
-    |vpiOpType:82
-    |vpiBlocking:1
-    |vpiRhs:
-    \_ref_obj: (uvm::uvm_barrier::new::threshold), line:13:22, endln:13:31
+    \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
+    |vpiName:uvm_phase
+    |vpiFullName:uvm::uvm_phase
+    |vpiMethod:
+    \_function: (uvm::uvm_phase::add), line:21:1, endln:21:7
       |vpiParent:
-      \_assignment: , line:13:5, endln:13:31
-      |vpiName:threshold
-      |vpiFullName:uvm::uvm_barrier::new::threshold
-    |vpiLhs:
-    \_hier_path: (this.threshold), line:13:5, endln:13:9
+      \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
+      |vpiName:add
+      |vpiFullName:uvm::uvm_phase::add
+      |vpiMethod:1
+      |vpiAccessType:2
+      |vpiVisibility:1
+    |vpiMethod:
+    \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
       |vpiParent:
-      \_assignment: , line:13:5, endln:13:31
-      |vpiActual:
-      \_ref_obj: (this), line:13:10, endln:13:19
+      \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
+      |vpiName:add
+      |vpiFullName:uvm::uvm_phase::add
+      |vpiVisibility:1
+      |vpiStmt:
+      \_assignment: , line:27:5, endln:27:50
         |vpiParent:
-        \_hier_path: (this.threshold), line:13:5, endln:13:9
-        |vpiName:this
-      |vpiActual:
-      \_ref_obj: (uvm::uvm_barrier::new::threshold)
-        |vpiParent:
-        \_hier_path: (this.threshold), line:13:5, endln:13:9
-        |vpiName:threshold
-        |vpiFullName:uvm::uvm_barrier::new::threshold
-      |vpiName:this.threshold
+        \_function: (uvm::uvm_phase::add), line:24:1, endln:30:12
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_hier_path: (super.m_successors), line:27:32, endln:27:50
+          |vpiParent:
+          \_assignment: , line:27:5, endln:27:50
+          |vpiActual:
+          \_ref_obj: (super), line:27:38, endln:27:50
+            |vpiParent:
+            \_hier_path: (super.m_successors), line:27:32, endln:27:50
+            |vpiName:super
+          |vpiActual:
+          \_ref_obj: (m_successors), line:27:38, endln:27:50
+            |vpiParent:
+            \_hier_path: (super.m_successors), line:27:32, endln:27:50
+            |vpiName:m_successors
+          |vpiName:super.m_successors
+        |vpiLhs:
+        \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
+          |vpiParent:
+          \_assignment: , line:27:5, endln:27:50
+          |vpiActual:
+          \_ref_obj: (this), line:27:10, endln:27:24
+            |vpiParent:
+            \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
+            |vpiName:this
+          |vpiActual:
+          \_ref_obj: (uvm::uvm_phase::add::m_predecessors)
+            |vpiParent:
+            \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
+            |vpiName:m_predecessors
+            |vpiFullName:uvm::uvm_phase::add::m_predecessors
+          |vpiActual:
+          \_ref_obj: (uvm::uvm_phase::add::size)
+            |vpiParent:
+            \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
+            |vpiName:size
+            |vpiFullName:uvm::uvm_phase::add::size
+          |vpiName:this.m_predecessors.size
+      |vpiInstance:
+      \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
+\_weaklyReferenced:
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-\_class_typespec: (uvm_object), line:8:27, endln:8:37
-  |vpiName:uvm_object
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
-\_class_typespec: (uvm_object), line:19:25, endln:19:35
-  |vpiName:uvm_object
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
-\_int_typespec: , line:10:10, endln:10:13
-  |vpiParent:
-  \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-  |vpiSigned:1
-\_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-  |vpiParent:
-  \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_barrier::threshold)
-    |vpiParent:
-    \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-    |vpiFullName:uvm::uvm_barrier::threshold
-    |vpiActual:
-    \_int_typespec: , line:10:10, endln:10:13
-  |vpiName:threshold
-  |vpiFullName:uvm::uvm_barrier::threshold
-  |vpiSigned:1
-  |vpiAutomatic:1
-  |vpiVisibility:3
-\_bit_typespec: , line:4:11, endln:4:14
-  |vpiParent:
-  \_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-\_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-  |vpiParent:
-  \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_object::m_successors)
-    |vpiParent:
-    \_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-    |vpiFullName:uvm::uvm_object::m_successors
-    |vpiActual:
-    \_bit_typespec: , line:4:11, endln:4:14
-  |vpiFullName:uvm::uvm_object::m_successors
-\_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-  |vpiParent:
-  \_class_defn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
-  |vpiSize:1
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_object::m_successors)
-    |vpiParent:
-    \_array_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-    |vpiFullName:uvm::uvm_object::m_successors
-    |vpiActual:
-    \_array_typespec: 
-  |vpiName:m_successors
-  |vpiFullName:uvm::uvm_object::m_successors
-  |vpiAutomatic:1
-  |vpiRandType:1
-  |vpiVisibility:2
-  |vpiArrayType:3
-  |vpiReg:
-  \_bit_var: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
-\_array_typespec: 
-  |vpiIndexTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: 
-    |vpiActual:
-    \_class_typespec: (uvm_phase), line:4:29, endln:4:38
-\_class_typespec: (uvm_phase), line:4:29, endln:4:38
-  |vpiName:uvm_phase
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-\_bit_typespec: , line:20:11, endln:20:14
-  |vpiParent:
-  \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-\_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-  |vpiParent:
-  \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-    |vpiParent:
-    \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-    |vpiFullName:uvm::uvm_phase::m_predecessors
-    |vpiActual:
-    \_bit_typespec: , line:20:11, endln:20:14
-  |vpiFullName:uvm::uvm_phase::m_predecessors
-\_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-  |vpiParent:
-  \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-  |vpiSize:1
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-    |vpiParent:
-    \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-    |vpiFullName:uvm::uvm_phase::m_predecessors
-    |vpiActual:
-    \_array_typespec: 
-  |vpiName:m_predecessors
-  |vpiFullName:uvm::uvm_phase::m_predecessors
-  |vpiAutomatic:1
-  |vpiRandType:1
-  |vpiVisibility:2
-  |vpiArrayType:3
-  |vpiReg:
-  \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-\_array_typespec: 
-  |vpiIndexTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: 
-    |vpiActual:
-    \_class_typespec: (uvm_phase), line:20:31, endln:20:40
-\_class_typespec: (uvm_phase), line:20:31, endln:20:40
-  |vpiName:uvm_phase
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-\_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-  |vpiParent:
-  \_class_defn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_barrier::threshold)
-    |vpiParent:
-    \_int_var: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
-    |vpiFullName:uvm::uvm_barrier::threshold
-    |vpiActual:
-    \_int_typespec: , line:10:10, endln:10:13
-  |vpiName:threshold
-  |vpiFullName:uvm::uvm_barrier::threshold
-  |vpiSigned:1
-  |vpiAutomatic:1
-  |vpiVisibility:3
-\_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-  |vpiParent:
-  \_class_defn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
-  |vpiSize:1
-  |vpiTypespec:
-  \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-    |vpiParent:
-    \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-    |vpiFullName:uvm::uvm_phase::m_predecessors
-    |vpiActual:
-    \_array_typespec: 
-  |vpiName:m_predecessors
-  |vpiFullName:uvm::uvm_phase::m_predecessors
-  |vpiAutomatic:1
-  |vpiRandType:1
-  |vpiVisibility:2
-  |vpiArrayType:3
-  |vpiReg:
-  \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-    |vpiParent:
-    \_array_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-    |vpiTypespec:
-    \_ref_typespec: (uvm::uvm_phase::m_predecessors)
-      |vpiParent:
-      \_bit_var: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
-      |vpiFullName:uvm::uvm_phase::m_predecessors
-      |vpiActual:
-      \_bit_typespec: , line:20:11, endln:20:14
-    |vpiFullName:uvm::uvm_phase::m_predecessors
-\_func_call: (size)
-  |vpiParent:
-  \_hier_path: (this.m_predecessors.size), line:27:5, endln:27:9
-  |vpiName:size
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ThisHier/dut.sv:3:1: Non synthesizable construct, uvm_object
-[LINT]: ${SURELOG_DIR}/tests/ThisHier/dut.sv:8:27: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/ThisHier/dut.sv:8:1: Non synthesizable construct, uvm_barrier
+[LINT]: ${SURELOG_DIR}/tests/ThisHier/dut.sv:3:1: Non synthesizable construct, uvm_object
 [LINT]: ${SURELOG_DIR}/tests/ThisHier/dut.sv:19:1: Non synthesizable construct, uvm_phase
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ThisHier/dut.sv | ${SURELOG_DIR}/build/regression/ThisHier/roundtrip/dut_000.sv | 15 | 33 |
+[roundtrip]: ${SURELOG_DIR}/tests/ThisHier/dut.sv | ${SURELOG_DIR}/build/regression/ThisHier/roundtrip/dut_000.sv | 9 | 33 |
 ============================== End RoundTrip Results ==============================

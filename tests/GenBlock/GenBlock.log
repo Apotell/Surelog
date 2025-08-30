@@ -128,59 +128,22 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenBlock/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/GenBlock/dut.sv:4:1: Compile module "work@axi".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenBlock/dut.sv:18:9: Compile generate block "work@axi.genblk1".
-Instance tree:
-[TOP] work@axi work@axi
-[SCO] work@axi.genblk1 work@axi.genblk1
-[MOD] work@GOOD work@axi.genblk1.good
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenBlock/dut.sv:4:1: Top level module "work@axi".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 3.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenBlock/dut.sv:4:1: Instance "work@axi".
-[NTE:EL0522] ${SURELOG_DIR}/tests/GenBlock/dut.sv:18:9: Scope "work@axi.genblk1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/GenBlock/dut.sv:18:9: Instance "work@axi.genblk1.good".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  2
-constant                                              14
+constant                                               2
 design                                                 1
 gen_if_else                                            1
 gen_region                                             1
-gen_scope                                              2
-gen_scope_array                                        2
-int_typespec                                           2
-module_inst                                            6
+int_typespec                                           1
+module_inst                                            2
 named_begin                                            1
-operation                                              4
-param_assign                                           6
-parameter                                              6
-ref_module                                             2
+operation                                              2
+param_assign                                           3
+parameter                                              3
+ref_module                                             1
 ref_obj                                                4
-ref_typespec                                           5
-sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                              14
-design                                                 1
-gen_if_else                                            1
-gen_region                                             1
-gen_scope                                              3
-gen_scope_array                                        3
-int_typespec                                           2
-module_inst                                            7
-named_begin                                            1
-operation                                              4
-param_assign                                           6
-parameter                                              6
-ref_module                                             2
-ref_obj                                                4
-ref_typespec                                           5
+ref_typespec                                           2
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenBlock/slpp_all/surelog.uhdm ...
@@ -188,19 +151,18 @@ sys_func_call                                          1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@axi)
-|vpiElaborated:1
-|vpiName:work@axi
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:1:1, endln:2:10
   |vpiParent:
-  \_design: (work@axi)
+  \_design: (unnamed)
   |vpiFullName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
   |vpiParent:
-  \_design: (work@axi)
+  \_design: (unnamed)
   |vpiFullName:work@axi
   |vpiParameter:
   \_parameter: (work@axi.N_MASTER), line:6:15, endln:6:23
@@ -340,118 +302,15 @@ design: (work@axi)
             \_begin: (work@axi)
             |vpiName:good
             |vpiDefName:work@GOOD
-|uhdmtopModules:
-\_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-  |vpiParent:
-  \_design: (work@axi)
-  |vpiName:work@axi
-  |vpiParameter:
-  \_parameter: (work@axi.N_MASTER), line:6:15, endln:6:23
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |UINT:8
-    |vpiTypespec:
-    \_ref_typespec: (work@axi.N_MASTER)
-      |vpiParent:
-      \_parameter: (work@axi.N_MASTER), line:6:15, endln:6:23
-      |vpiFullName:work@axi.N_MASTER
-      |vpiActual:
-      \_int_typespec: , line:6:5, endln:6:34
-    |vpiName:N_MASTER
-    |vpiFullName:work@axi.N_MASTER
-  |vpiParameter:
-  \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiName:LOG_MASTER
-    |vpiFullName:work@axi.LOG_MASTER
-  |vpiParameter:
-  \_parameter: (work@axi.TOTAL_N_MASTER), line:8:16, endln:8:30
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiLocalParam:1
-    |vpiName:TOTAL_N_MASTER
-    |vpiFullName:work@axi.TOTAL_N_MASTER
-  |vpiParamAssign:
-  \_param_assign: , line:6:15, endln:6:34
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiRhs:
-    \_constant: , line:6:33, endln:6:34
-      |vpiParent:
-      \_param_assign: , line:6:15, endln:6:34
-      |vpiDecompile:8
-      |vpiSize:32
-      |UINT:8
-      |vpiTypespec:
-      \_ref_typespec: (work@axi)
-        |vpiParent:
-        \_constant: , line:6:33, endln:6:34
-        |vpiFullName:work@axi
-        |vpiActual:
-        \_int_typespec: , line:6:5, endln:6:34
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@axi.N_MASTER), line:6:15, endln:6:23
-  |vpiParamAssign:
-  \_param_assign: , line:7:15, endln:7:49
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiRhs:
-    \_constant: , line:7:33, endln:7:49
-      |vpiParent:
-      \_param_assign: , line:7:15, endln:7:49
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-  |vpiParamAssign:
-  \_param_assign: , line:8:16, endln:8:49
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiRhs:
-    \_constant: , line:8:36, endln:8:49
-      |vpiParent:
-      \_param_assign: , line:8:16, endln:8:49
-      |vpiDecompile:8
-      |vpiSize:64
-      |INT:8
-      |vpiConstType:7
-    |vpiLhs:
-    \_parameter: (work@axi.TOTAL_N_MASTER), line:8:16, endln:8:30
-  |vpiDefName:work@axi
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@axi.genblk1), line:18:9, endln:18:21
-    |vpiParent:
-    \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
-    |vpiName:genblk1
-    |vpiFullName:work@axi.genblk1
-    |vpiGenScope:
-    \_gen_scope: (work@axi.genblk1), line:18:9, endln:18:21
-      |vpiParent:
-      \_gen_scope_array: (work@axi.genblk1), line:18:9, endln:18:21
-      |vpiFullName:work@axi.genblk1
-      |vpiModule:
-      \_module_inst: work@GOOD (work@axi.genblk1.good), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:18:9, endln:18:21
-        |vpiParent:
-        \_gen_scope: (work@axi.genblk1), line:18:9, endln:18:21
-        |vpiName:good
-        |vpiFullName:work@axi.genblk1.good
-        |vpiDefName:work@GOOD
-        |vpiDefFile:${SURELOG_DIR}/tests/GenBlock/dut.sv
-        |vpiDefLineNo:1
 \_weaklyReferenced:
 \_int_typespec: , line:6:5, endln:6:34
-\_int_typespec: , line:6:5, endln:6:34
-  |vpiParent:
-  \_ref_typespec: (work@axi.N_MASTER)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 8
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenBlock/dut.sv | ${SURELOG_DIR}/build/regression/GenBlock/roundtrip/dut_000.sv | 10 | 22 |
+============================== End RoundTrip Results ==============================

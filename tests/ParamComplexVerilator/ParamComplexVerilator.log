@@ -187,7 +187,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:9:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:17:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:17:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:9:1: Compile module "work@top".
 AST_DEBUG_BEGIN
@@ -447,148 +446,52 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv:9:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_typespec                                           2
+bit_typespec                                           1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              38
+constant                                              13
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
-int_typespec                                          11
+int_typespec                                          10
 int_var                                                4
 io_decl                                               11
-logic_typespec                                        12
+logic_typespec                                         2
 logic_var                                              1
-module_inst                                            7
-operation                                              9
-package                                                4
-param_assign                                           6
-parameter                                              7
-range                                                  8
+module_inst                                            2
+operation                                              2
+package                                                2
+param_assign                                           3
+parameter                                              3
+range                                                  2
 ref_module                                             1
-ref_obj                                                5
-ref_typespec                                          49
-string_typespec                                       10
-struct_typespec                                        6
-tagged_pattern                                        10
+ref_obj                                                1
+ref_typespec                                          22
+string_typespec                                        2
+struct_typespec                                        1
+tagged_pattern                                         2
 task                                                   9
-typespec_member                                       12
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-bit_typespec                                           2
-class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              38
-design                                                 1
-enum_const                                            10
-enum_typespec                                          2
-enum_var                                               1
-function                                              18
-int_typespec                                          11
-int_var                                                4
-io_decl                                               22
-logic_typespec                                        12
-logic_var                                              1
-module_inst                                            7
-operation                                              9
-package                                                4
-param_assign                                           6
-parameter                                              7
-range                                                  8
-ref_module                                             1
-ref_obj                                                5
-ref_typespec                                          54
-string_typespec                                       10
-struct_typespec                                        6
-tagged_pattern                                        10
-task                                                  18
-typespec_member                                       12
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamComplexVerilator/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamComplexVerilator/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamComplexVerilator/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
-|uhdmallPackages:
-\_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:pkg
-  |vpiFullName:pkg::
-  |vpiTypedef:
-  \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-    |vpiName:pkg::complex_t
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (a), line:3:11, endln:3:12
-      |vpiParent:
-      \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-      |vpiName:a
-      |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::complex_t::a)
-        |vpiParent:
-        \_typespec_member: (a), line:3:11, endln:3:12
-        |vpiFullName:pkg::pkg::complex_t::a
-        |vpiActual:
-        \_logic_typespec: , line:3:5, endln:3:10
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:10
-    |vpiTypespecMember:
-    \_typespec_member: (b), line:4:17, endln:4:18
-      |vpiParent:
-      \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-      |vpiName:b
-      |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::complex_t::b)
-        |vpiParent:
-        \_typespec_member: (b), line:4:17, endln:4:18
-        |vpiFullName:pkg::pkg::complex_t::b
-        |vpiActual:
-        \_logic_typespec: , line:4:5, endln:4:16
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:16
-  |vpiDefName:pkg
-|uhdmtopPackages:
-\_package: builtin (builtin::)
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:builtin
-  |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiTop:1
   |vpiClassDefn:
   \_class_defn: (builtin::any_sverilog_class)
     |vpiParent:
@@ -619,16 +522,16 @@ design: (work@top)
     \_package: builtin (builtin::)
     |vpiName:system
     |vpiFullName:builtin::system
-|uhdmtopPackages:
+|uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiTypedef:
   \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
     |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
+    \_parameter: (work@top.init_val), line:10:30, endln:10:38
     |vpiName:pkg::complex_t
     |vpiInstance:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
@@ -639,10 +542,10 @@ design: (work@top)
       \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::complex_t::a)
+      \_ref_typespec: (work@top.init_val.pkg::complex_t.a)
         |vpiParent:
         \_typespec_member: (a), line:3:11, endln:3:12
-        |vpiFullName:pkg::pkg::complex_t::a
+        |vpiFullName:work@top.init_val.pkg::complex_t.a
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:10
       |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
@@ -656,10 +559,10 @@ design: (work@top)
       \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::complex_t::b)
+      \_ref_typespec: (work@top.init_val.pkg::complex_t.b)
         |vpiParent:
         \_typespec_member: (b), line:4:17, endln:4:18
-        |vpiFullName:pkg::pkg::complex_t::b
+        |vpiFullName:work@top.init_val.pkg::complex_t.b
         |vpiActual:
         \_logic_typespec: , line:4:5, endln:4:16
       |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
@@ -668,11 +571,10 @@ design: (work@top)
       |vpiRefEndLineNo:4
       |vpiRefEndColumnNo:16
   |vpiDefName:pkg
-  |vpiTop:1
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@mailbox
   |vpiMethod:
   \_function: (work@mailbox::new), line:3:5, endln:4:16
@@ -851,7 +753,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:30:3, endln:52:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@process
   |vpiTypedef:
   \_enum_typespec: (state), line:32:5, endln:32:74
@@ -973,7 +875,7 @@ design: (work@top)
 |uhdmallClasses:
 \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:55:3, endln:69:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:work@semaphore
   |vpiMethod:
   \_function: (work@semaphore::new), line:57:5, endln:58:16
@@ -1110,7 +1012,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:17:1, endln:22:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.size), line:18:19, endln:18:23
@@ -1187,7 +1089,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.init_val), line:10:30, endln:10:38
@@ -1257,175 +1159,7 @@ design: (work@top)
     |vpiDefName:work@dut
     |vpiActual:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:17:1, endln:22:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.init_val), line:10:30, endln:10:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.init_val)
-      |vpiParent:
-      \_parameter: (work@top.init_val), line:10:30, endln:10:38
-      |vpiFullName:work@top.init_val
-      |vpiActual:
-      \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiLocalParam:1
-    |vpiName:init_val
-    |vpiFullName:work@top.init_val
-  |vpiParamAssign:
-  \_param_assign: , line:10:30, endln:10:58
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
-    |vpiRhs:
-    \_operation: , line:10:41, endln:10:58
-      |vpiParent:
-      \_param_assign: , line:10:30, endln:10:58
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_operation: , line:10:41, endln:10:58
-        |vpiFullName:work@top
-        |vpiActual:
-        \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:10:46, endln:10:50
-        |vpiParent:
-        \_operation: , line:10:41, endln:10:58
-        |vpiDecompile:1'b0
-        |vpiSize:1
-        |BIN:0
-        |vpiConstType:3
-      |vpiOperand:
-      \_constant: , line:10:55, endln:10:57
-        |vpiParent:
-        \_operation: , line:10:41, endln:10:58
-        |vpiDecompile:7
-        |vpiSize:3
-        |UINT:7
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.init_val), line:10:30, endln:10:38
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@dut (work@top.asgn0), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:11:4, endln:14:16
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
-    |vpiName:asgn0
-    |vpiFullName:work@top.asgn0
-    |vpiParameter:
-    \_parameter: (work@top.asgn0.size), line:18:19, endln:18:23
-      |vpiParent:
-      \_module_inst: work@dut (work@top.asgn0), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:11:4, endln:14:16
-      |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top.asgn0.size)
-        |vpiParent:
-        \_parameter: (work@top.asgn0.size), line:18:19, endln:18:23
-        |vpiFullName:work@top.asgn0.size
-        |vpiActual:
-        \_int_typespec: , line:18:15, endln:18:18
-      |vpiSigned:1
-      |vpiName:size
-      |vpiFullName:work@top.asgn0.size
-    |vpiParameter:
-    \_parameter: (work@top.asgn0.init), line:19:30, endln:19:34
-      |vpiParent:
-      \_module_inst: work@dut (work@top.asgn0), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:11:4, endln:14:16
-      |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top.asgn0.init)
-        |vpiParent:
-        \_parameter: (work@top.asgn0.init), line:19:30, endln:19:34
-        |vpiFullName:work@top.asgn0.init
-        |vpiActual:
-        \_bit_typespec: , line:19:15, endln:19:29
-      |vpiName:init
-      |vpiFullName:work@top.asgn0.init
-    |vpiParamAssign:
-    \_param_assign: , line:18:19, endln:18:27
-      |vpiParent:
-      \_module_inst: work@dut (work@top.asgn0), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:11:4, endln:14:16
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:18:26, endln:18:27
-        |vpiParent:
-        \_param_assign: , line:18:19, endln:18:27
-        |vpiDecompile:4
-        |vpiSize:32
-        |UINT:4
-        |vpiTypespec:
-        \_ref_typespec: (work@top.asgn0)
-          |vpiParent:
-          \_constant: , line:18:26, endln:18:27
-          |vpiFullName:work@top.asgn0
-          |vpiActual:
-          \_int_typespec: , line:18:15, endln:18:18
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.asgn0.size), line:18:19, endln:18:23
-    |vpiParamAssign:
-    \_param_assign: , line:19:30, endln:19:39
-      |vpiParent:
-      \_module_inst: work@dut (work@top.asgn0), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:11:4, endln:14:16
-      |vpiOverriden:1
-      |vpiRhs:
-      \_operation: , line:13:15, endln:13:25
-        |vpiParent:
-        \_param_assign: , line:19:30, endln:19:39
-        |vpiOpType:33
-        |vpiOperand:
-        \_ref_obj: (work@top.asgn0.init_val), line:13:16, endln:13:24
-          |vpiParent:
-          \_operation: , line:13:15, endln:13:25
-          |vpiName:init_val
-          |vpiFullName:work@top.asgn0.init_val
-          |vpiActual:
-          \_parameter: (work@top.init_val), line:10:30, endln:10:38
-      |vpiLhs:
-      \_parameter: (work@top.asgn0.init), line:19:30, endln:19:34
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiDefLineNo:17
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:9:1, endln:15:10
 \_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:10
-  |vpiParent:
-  \_typespec_member: (a), line:3:11, endln:3:12
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_typespec_member: (b), line:4:17, endln:4:18
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:4:11, endln:4:16
-    |vpiParent:
-    \_logic_typespec: , line:4:5, endln:4:16
-    |vpiLeftRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:3:5, endln:3:10
   |vpiParent:
   \_typespec_member: (a), line:3:11, endln:3:12
@@ -1502,182 +1236,20 @@ design: (work@top)
   |vpiParent:
   \_tagged_pattern: , line:10:55, endln:10:57
   |vpiName:b
-\_function: (work@mailbox::new), line:3:5, endln:4:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
-  |vpiName:new
-  |vpiFullName:work@mailbox::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-  |vpiIODecl:
-  \_io_decl: (bound), line:3:23, endln:3:28
-    |vpiParent:
-    \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiDirection:1
-    |vpiName:bound
-    |vpiExpr:
-    \_constant: , line:3:31, endln:3:32
-    |vpiTypedef:
-    \_ref_typespec: (work@mailbox::new::bound)
-      |vpiParent:
-      \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiFullName:work@mailbox::new::bound
-      |vpiActual:
-      \_int_typespec: , line:3:19, endln:3:22
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
 \_int_typespec: , line:3:19, endln:3:22
   |vpiSigned:1
-\_function: (work@mailbox::num), line:6:5, endln:7:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
-  |vpiName:num
-  |vpiFullName:work@mailbox::num
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::num), line:6:14, endln:6:17
 \_int_typespec: , line:6:14, endln:6:17
   |vpiSigned:1
-\_function: (work@mailbox::try_put), line:12:5, endln:13:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_put
-  |vpiFullName:work@mailbox::try_put
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_logic_var: (work@mailbox::try_put)
-  |vpiIODecl:
-  \_io_decl: (message), line:12:23, endln:12:30
-    |vpiParent:
-    \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiDirection:1
-    |vpiName:message
-\_function: (work@mailbox::try_get), line:18:5, endln:19:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_get
-  |vpiFullName:work@mailbox::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-  |vpiIODecl:
-  \_io_decl: (message), line:18:31, endln:18:38
-    |vpiParent:
-    \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:18:14, endln:18:17
   |vpiSigned:1
-\_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-  |vpiParent:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:1:3, endln:27:11
-  |vpiName:try_peek
-  |vpiFullName:work@mailbox::try_peek
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-  |vpiIODecl:
-  \_io_decl: (message), line:24:31, endln:24:38
-    |vpiParent:
-    \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiDirection:6
-    |vpiName:message
 \_int_typespec: , line:24:14, endln:24:17
   |vpiSigned:1
-\_enum_typespec: (state), line:32:5, endln:32:74
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:30:3, endln:52:11
-  |vpiName:state
-  |vpiEnumConst:
-  \_enum_const: (FINISHED), line:32:20, endln:32:28
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:FINISHED
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (RUNNING), line:32:30, endln:32:37
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:RUNNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (WAITING), line:32:39, endln:32:46
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:WAITING
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:SUSPENDED
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (KILLED), line:32:59, endln:32:65
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:KILLED
-    |INT:4
-    |vpiDecompile:4
-    |vpiSize:64
-\_function: (work@process::self), line:34:5, endln:34:11
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:30:3, endln:52:11
-  |vpiName:self
-  |vpiFullName:work@process::self
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_class_var: (work@process::self), line:34:21, endln:34:28
 \_class_typespec: , line:34:21, endln:34:28
   |vpiClassDefn:
   \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:30:3, endln:52:11
-\_function: (work@process::status), line:37:5, endln:38:16
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:30:3, endln:52:11
-  |vpiName:status
-  |vpiFullName:work@process::status
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_enum_var: (work@process::status), line:37:14, endln:37:19
-\_function: (work@semaphore::new), line:57:5, endln:58:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:55:3, endln:69:11
-  |vpiName:new
-  |vpiFullName:work@semaphore::new
-  |vpiMethod:1
-  |vpiReturn:
-  \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:57:22, endln:57:30
-    |vpiParent:
-    \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:57:33, endln:57:34
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::new::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiFullName:work@semaphore::new::keyCount
-      |vpiActual:
-      \_int_typespec: , line:57:18, endln:57:21
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:55:3, endln:69:11
@@ -1687,319 +1259,16 @@ design: (work@top)
   |vpiSigned:1
 \_int_typespec: , line:63:14, endln:63:17
   |vpiSigned:1
-\_function: (work@semaphore::try_get), line:66:5, endln:67:16
-  |vpiParent:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv, line:55:3, endln:69:11
-  |vpiName:try_get
-  |vpiFullName:work@semaphore::try_get
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiReturn:
-  \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-  |vpiIODecl:
-  \_io_decl: (keyCount), line:66:30, endln:66:38
-    |vpiParent:
-    \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiDirection:1
-    |vpiName:keyCount
-    |vpiExpr:
-    \_constant: , line:66:41, endln:66:42
-    |vpiTypedef:
-    \_ref_typespec: (work@semaphore::try_get::keyCount)
-      |vpiParent:
-      \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiFullName:work@semaphore::try_get::keyCount
-      |vpiActual:
-      \_int_typespec: , line:66:26, endln:66:29
 \_int_typespec: , line:66:14, endln:66:17
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
   |vpiSigned:1
-\_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:pkg::complex_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:11, endln:3:12
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pkg::complex_t.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:11, endln:3:12
-      |vpiFullName:work@top.pkg::complex_t.a
-      |vpiActual:
-      \_logic_typespec: , line:3:5, endln:3:10
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:17, endln:4:18
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pkg::complex_t.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:17, endln:4:18
-      |vpiFullName:work@top.pkg::complex_t.b
-      |vpiActual:
-      \_logic_typespec: , line:4:5, endln:4:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:16
-\_logic_typespec: , line:3:5, endln:3:10
-  |vpiParent:
-  \_ref_typespec: (work@top.pkg::complex_t.a)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_ref_typespec: (work@top.pkg::complex_t.b)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:4:11, endln:4:16
-    |vpiParent:
-    \_logic_typespec: , line:4:5, endln:4:16
-    |vpiLeftRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_operation: , line:10:41, endln:10:58
-  |vpiParent:
-  \_param_assign: , line:10:30, endln:10:58
-  |vpiTypespec:
-  \_ref_typespec: 
-    |vpiActual:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-  |vpiOpType:75
-  |vpiOperand:
-  \_constant: , line:10:46, endln:10:50
-  |vpiOperand:
-  \_constant: , line:10:55, endln:10:57
-\_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val)
-  |vpiName:pkg::complex_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:11, endln:3:12
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@top.init_val.pkg::complex_t.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:11, endln:3:12
-      |vpiFullName:work@top.init_val.pkg::complex_t.a
-      |vpiActual:
-      \_logic_typespec: , line:3:5, endln:3:10
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:17, endln:4:18
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@top.init_val.pkg::complex_t.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:17, endln:4:18
-      |vpiFullName:work@top.init_val.pkg::complex_t.b
-      |vpiActual:
-      \_logic_typespec: , line:4:5, endln:4:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:16
-\_ref_typespec: (work@top.init_val)
-  |vpiParent:
-  \_parameter: (work@top.init_val), line:10:30, endln:10:38
-  |vpiFullName:work@top.init_val
-  |vpiActual:
-  \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-\_parameter: (work@top.init_val), line:10:30, endln:10:38
-  |vpiParent:
-  \_param_assign: , line:10:30, endln:10:58
-  |vpiTypespec:
-  \_ref_typespec: (work@top.init_val)
-  |vpiLocalParam:1
-  |vpiName:init_val
-  |vpiFullName:work@top.init_val
-\_logic_typespec: , line:3:5, endln:3:10
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val.pkg::complex_t.a)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val.pkg::complex_t.b)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:4:11, endln:4:16
-    |vpiParent:
-    \_logic_typespec: , line:4:5, endln:4:16
-    |vpiLeftRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val)
-  |vpiName:pkg::complex_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:11, endln:3:12
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@top.init_val.pkg::complex_t.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:11, endln:3:12
-      |vpiFullName:work@top.init_val.pkg::complex_t.a
-      |vpiActual:
-      \_logic_typespec: , line:3:5, endln:3:10
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:17, endln:4:18
-    |vpiParent:
-    \_struct_typespec: (pkg::complex_t), line:2:11, endln:5:4
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@top.init_val.pkg::complex_t.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:17, endln:4:18
-      |vpiFullName:work@top.init_val.pkg::complex_t.b
-      |vpiActual:
-      \_logic_typespec: , line:4:5, endln:4:16
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:16
-\_logic_typespec: , line:3:5, endln:3:10
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val.pkg::complex_t.a)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_ref_typespec: (work@top.init_val.pkg::complex_t.b)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamComplexVerilator/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:4:11, endln:4:16
-    |vpiParent:
-    \_logic_typespec: , line:4:5, endln:4:16
-    |vpiLeftRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:18:15, endln:18:18
-  |vpiParent:
-  \_ref_typespec: (work@top.asgn0.size)
-  |vpiSigned:1
-\_bit_typespec: , line:19:15, endln:19:29
-  |vpiParent:
-  \_ref_typespec: (work@top.asgn0.init)
-  |vpiRange:
-  \_range: , line:19:19, endln:19:29
-    |vpiParent:
-    \_bit_typespec: , line:19:15, endln:19:29
-    |vpiLeftRange:
-    \_operation: , line:19:20, endln:19:26
-      |vpiParent:
-      \_range: , line:19:19, endln:19:29
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.asgn0.init.size), line:19:20, endln:19:24
-        |vpiParent:
-        \_operation: , line:19:20, endln:19:26
-        |vpiName:size
-        |vpiFullName:work@top.asgn0.init.size
-        |vpiActual:
-        \_parameter: (work@top.asgn0.size), line:18:19, endln:18:23
-      |vpiOperand:
-      \_constant: , line:19:25, endln:19:26
-        |vpiParent:
-        \_operation: , line:19:20, endln:19:26
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:19:27, endln:19:28
-      |vpiParent:
-      \_range: , line:19:19, endln:19:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ParamComplexVerilator/builtin.sv | ${SURELOG_DIR}/build/regression/ParamComplexVerilator/roundtrip/builtin_000.sv | 0 | 0 |

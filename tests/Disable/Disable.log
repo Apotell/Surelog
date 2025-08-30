@@ -45,12 +45,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Disable/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/Disable/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/Disable/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
@@ -60,21 +54,8 @@ disable_fork                                           1
 forever_stmt                                           1
 initial                                                1
 logic_net                                              1
-module_inst                                            2
+module_inst                                            1
 named_begin                                            1
-ref_obj                                                1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-design                                                 1
-disable                                                2
-disable_fork                                           2
-forever_stmt                                           2
-initial                                                2
-logic_net                                              1
-module_inst                                            2
-named_begin                                            2
 ref_obj                                                1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Disable/slpp_all/surelog.uhdm ...
@@ -82,59 +63,21 @@ ref_obj                                                1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Disable/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Disable/dut.sv, line:1:1, endln:8:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.loop), line:4:18, endln:4:22
+  \_logic_net: (work@top.loop.loop), line:4:18, endln:4:22
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Disable/dut.sv, line:1:1, endln:8:10
+    \_disable: , line:4:10, endln:4:23
     |vpiName:loop
-    |vpiFullName:work@top.loop
+    |vpiFullName:work@top.loop.loop
     |vpiNetType:1
-  |vpiProcess:
-  \_initial: , line:2:4, endln:7:7
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Disable/dut.sv, line:1:1, endln:8:10
-    |vpiStmt:
-    \_begin: (work@top), line:2:12, endln:7:7
-      |vpiParent:
-      \_initial: , line:2:4, endln:7:7
-      |vpiFullName:work@top
-      |vpiStmt:
-      \_forever_stmt: , line:3:7, endln:3:14
-        |vpiParent:
-        \_begin: (work@top), line:2:12, endln:7:7
-        |vpiStmt:
-        \_named_begin: (work@top.loop), line:3:23, endln:3:27
-          |vpiParent:
-          \_forever_stmt: , line:3:7, endln:3:14
-          |vpiName:loop
-          |vpiFullName:work@top.loop
-          |vpiStmt:
-          \_disable: , line:4:10, endln:4:23
-            |vpiParent:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
-            |vpiExpr:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
-          |vpiStmt:
-          \_disable_fork: , line:5:10, endln:5:23
-            |vpiParent:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Disable/dut.sv, line:1:1, endln:8:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
   |vpiProcess:
   \_initial: , line:2:4, endln:7:7
     |vpiParent:
@@ -169,11 +112,9 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/Disable/dut.sv:4:10: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/Disable/dut.sv:5:10: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/Disable/dut.sv:4:10: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/Disable/dut.sv:5:10: Non synthesizable construct,
 ============================== End Linting Results ==============================

@@ -166,63 +166,33 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:1:1: No timescale set for "gen_test9".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:1:1: Compile module "work@gen_test9".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:4:17: Compile generate block "work@gen_test9.A".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:7:25: Compile generate block "work@gen_test9.A.B".
-[INF:CP0335] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:12:25: Compile generate block "work@gen_test9.A.C".
-[NTE:EL0503] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:1:1: Top level module "work@gen_test9".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              32
-cont_assign                                            8
+constant                                               3
+cont_assign                                            1
 design                                                 1
 gen_region                                             3
-gen_scope                                              6
-gen_scope_array                                        6
-hier_path                                              4
-logic_net                                              8
-logic_typespec                                         8
-module_inst                                            7
+hier_path                                              2
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            1
 named_begin                                            3
-operation                                              4
-range                                                 12
-ref_obj                                               10
-ref_typespec                                           8
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              32
-cont_assign                                           12
-design                                                 1
-gen_region                                             3
-gen_scope                                              9
-gen_scope_array                                        9
-hier_path                                              6
-logic_net                                              8
-logic_typespec                                         8
-module_inst                                            7
-named_begin                                            3
-operation                                              6
-range                                                 12
-ref_obj                                               15
-ref_typespec                                           8
+operation                                              2
+range                                                  1
+ref_obj                                                5
+ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@gen_test9)
-|vpiElaborated:1
-|vpiName:work@gen_test9
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
   |vpiParent:
-  \_design: (work@gen_test9)
+  \_design: (unnamed)
   |vpiFullName:work@gen_test9
   |vpiDefName:work@gen_test9
   |vpiNet:
@@ -292,8 +262,6 @@ design: (work@gen_test9)
                 |vpiParent:
                 \_hier_path: (B.y), line:16:36, endln:16:39
                 |vpiName:B
-                |vpiActual:
-                \_named_begin: (work@gen_test9.A.B)
               |vpiActual:
               \_ref_obj: (work@gen_test9.A.y), line:16:38, endln:16:39
                 |vpiParent:
@@ -318,8 +286,6 @@ design: (work@gen_test9)
               |vpiParent:
               \_hier_path: (C.z), line:16:50, endln:16:53
               |vpiName:C
-              |vpiActual:
-              \_named_begin: (work@gen_test9.A.C)
             |vpiActual:
             \_ref_obj: (work@gen_test9.A.z), line:16:52, endln:16:53
               |vpiParent:
@@ -333,218 +299,6 @@ design: (work@gen_test9)
           \_cont_assign: , line:16:32, endln:16:53
           |vpiName:x
           |vpiFullName:work@gen_test9.A.x
-|uhdmtopModules:
-\_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-  |vpiParent:
-  \_design: (work@gen_test9)
-  |vpiName:work@gen_test9
-  |vpiDefName:work@gen_test9
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
-    |vpiParent:
-    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-    |vpiTypespec:
-    \_ref_typespec: (work@gen_test9.w)
-      |vpiParent:
-      \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
-      |vpiFullName:work@gen_test9.w
-      |vpiActual:
-      \_logic_typespec: , line:2:9, endln:2:19
-    |vpiName:w
-    |vpiFullName:work@gen_test9.w
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@gen_test9.A), line:4:17, endln:17:20
-    |vpiParent:
-    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-    |vpiName:A
-    |vpiFullName:work@gen_test9.A
-    |vpiGenScope:
-    \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-      |vpiParent:
-      \_gen_scope_array: (work@gen_test9.A), line:4:17, endln:17:20
-      |vpiFullName:work@gen_test9.A
-      |vpiNet:
-      \_logic_net: (work@gen_test9.A.x), line:5:36, endln:5:37
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-        |vpiTypespec:
-        \_ref_typespec: (work@gen_test9.A.x)
-          |vpiParent:
-          \_logic_net: (work@gen_test9.A.x), line:5:36, endln:5:37
-          |vpiFullName:work@gen_test9.A.x
-          |vpiActual:
-          \_logic_typespec: , line:5:25, endln:5:35
-        |vpiName:x
-        |vpiFullName:work@gen_test9.A.x
-        |vpiNetType:1
-      |vpiContAssign:
-      \_cont_assign: , line:16:32, endln:16:53
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-        |vpiRhs:
-        \_operation: , line:16:36, endln:16:53
-          |vpiParent:
-          \_cont_assign: , line:16:32, endln:16:53
-          |vpiOpType:30
-          |vpiOperand:
-          \_operation: , line:16:36, endln:16:47
-            |vpiParent:
-            \_operation: , line:16:36, endln:16:53
-            |vpiOpType:30
-            |vpiOperand:
-            \_hier_path: (B.y), line:16:36, endln:16:39
-              |vpiParent:
-              \_operation: , line:16:36, endln:16:47
-              |vpiActual:
-              \_ref_obj: (B), line:16:36, endln:16:37
-                |vpiParent:
-                \_hier_path: (B.y), line:16:36, endln:16:39
-                |vpiName:B
-                |vpiActual:
-                \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-              |vpiActual:
-              \_ref_obj: (work@gen_test9.A.y), line:16:38, endln:16:39
-                |vpiParent:
-                \_hier_path: (B.y), line:16:36, endln:16:39
-                |vpiName:y
-                |vpiFullName:work@gen_test9.A.y
-                |vpiActual:
-                \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-              |vpiName:B.y
-            |vpiOperand:
-            \_constant: , line:16:42, endln:16:47
-              |vpiParent:
-              \_operation: , line:16:36, endln:16:47
-              |vpiDecompile:2'b11
-              |vpiSize:2
-              |BIN:11
-              |vpiConstType:3
-          |vpiOperand:
-          \_hier_path: (C.z), line:16:50, endln:16:53
-            |vpiParent:
-            \_operation: , line:16:36, endln:16:53
-            |vpiActual:
-            \_ref_obj: (C), line:16:50, endln:16:51
-              |vpiParent:
-              \_hier_path: (C.z), line:16:50, endln:16:53
-              |vpiName:C
-              |vpiActual:
-              \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-            |vpiActual:
-            \_ref_obj: (work@gen_test9.A.z), line:16:52, endln:16:53
-              |vpiParent:
-              \_hier_path: (C.z), line:16:50, endln:16:53
-              |vpiName:z
-              |vpiFullName:work@gen_test9.A.z
-              |vpiActual:
-              \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-            |vpiName:C.z
-        |vpiLhs:
-        \_ref_obj: (work@gen_test9.A.x), line:16:32, endln:16:33
-          |vpiParent:
-          \_cont_assign: , line:16:32, endln:16:53
-          |vpiName:x
-          |vpiFullName:work@gen_test9.A.x
-          |vpiActual:
-          \_logic_net: (work@gen_test9.A.x), line:5:36, endln:5:37
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@gen_test9.A.B), line:7:25, endln:9:28
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-        |vpiName:B
-        |vpiFullName:work@gen_test9.A.B
-        |vpiGenScope:
-        \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-          |vpiParent:
-          \_gen_scope_array: (work@gen_test9.A.B), line:7:25, endln:9:28
-          |vpiFullName:work@gen_test9.A.B
-          |vpiNet:
-          \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-            |vpiParent:
-            \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-            |vpiTypespec:
-            \_ref_typespec: (work@gen_test9.A.B.y)
-              |vpiParent:
-              \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-              |vpiFullName:work@gen_test9.A.B.y
-              |vpiActual:
-              \_logic_typespec: , line:8:33, endln:8:43
-            |vpiName:y
-            |vpiFullName:work@gen_test9.A.B.y
-            |vpiNetType:1
-          |vpiContAssign:
-          \_cont_assign: , line:8:44, endln:8:45
-            |vpiParent:
-            \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-            |vpiNetDeclAssign:1
-            |vpiRhs:
-            \_constant: , line:8:48, endln:8:53
-              |vpiParent:
-              \_cont_assign: , line:8:44, endln:8:45
-              |vpiDecompile:2'b00
-              |vpiSize:2
-              |BIN:00
-              |vpiConstType:3
-            |vpiLhs:
-            \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-      |vpiGenScopeArray:
-      \_gen_scope_array: (work@gen_test9.A.C), line:12:25, endln:14:28
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-        |vpiName:C
-        |vpiFullName:work@gen_test9.A.C
-        |vpiGenScope:
-        \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-          |vpiParent:
-          \_gen_scope_array: (work@gen_test9.A.C), line:12:25, endln:14:28
-          |vpiFullName:work@gen_test9.A.C
-          |vpiNet:
-          \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-            |vpiParent:
-            \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-            |vpiTypespec:
-            \_ref_typespec: (work@gen_test9.A.C.z)
-              |vpiParent:
-              \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-              |vpiFullName:work@gen_test9.A.C.z
-              |vpiActual:
-              \_logic_typespec: , line:13:33, endln:13:43
-            |vpiName:z
-            |vpiFullName:work@gen_test9.A.C.z
-            |vpiNetType:1
-          |vpiContAssign:
-          \_cont_assign: , line:13:44, endln:13:45
-            |vpiParent:
-            \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-            |vpiNetDeclAssign:1
-            |vpiRhs:
-            \_constant: , line:13:48, endln:13:53
-              |vpiParent:
-              \_cont_assign: , line:13:44, endln:13:45
-              |vpiDecompile:2'b01
-              |vpiSize:2
-              |BIN:01
-              |vpiConstType:3
-            |vpiLhs:
-            \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-  |vpiContAssign:
-  \_cont_assign: , line:2:20, endln:2:21
-    |vpiParent:
-    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-    |vpiNetDeclAssign:1
-    |vpiRhs:
-    \_constant: , line:2:24, endln:2:29
-      |vpiParent:
-      \_cont_assign: , line:2:20, endln:2:21
-      |vpiDecompile:2'b11
-      |vpiSize:2
-      |BIN:11
-      |vpiConstType:3
-    |vpiLhs:
-    \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
 \_weaklyReferenced:
 \_logic_typespec: , line:2:9, endln:2:19
   |vpiRange:
@@ -567,325 +321,12 @@ design: (work@gen_test9)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_operation: , line:16:36, endln:16:47
-  |vpiParent:
-  \_operation: , line:16:36, endln:16:53
-  |vpiOpType:30
-  |vpiOperand:
-  \_hier_path: (B.y), line:16:36, endln:16:39
-    |vpiParent:
-    \_operation: , line:16:36, endln:16:47
-    |vpiActual:
-    \_ref_obj: (B), line:16:36, endln:16:37
-      |vpiParent:
-      \_hier_path: (B.y), line:16:36, endln:16:39
-      |vpiName:B
-    |vpiActual:
-    \_ref_obj: (work@gen_test9.A.y), line:16:38, endln:16:39
-      |vpiParent:
-      \_hier_path: (B.y), line:16:36, endln:16:39
-      |vpiName:y
-      |vpiFullName:work@gen_test9.A.y
-    |vpiName:B.y
-  |vpiOperand:
-  \_constant: , line:16:42, endln:16:47
-\_operation: , line:16:36, endln:16:53
-  |vpiParent:
-  \_cont_assign: , line:16:32, endln:16:53
-  |vpiOpType:30
-  |vpiOperand:
-  \_operation: , line:16:36, endln:16:47
-  |vpiOperand:
-  \_hier_path: (C.z), line:16:50, endln:16:53
-    |vpiParent:
-    \_operation: , line:16:36, endln:16:53
-    |vpiActual:
-    \_ref_obj: (C), line:16:50, endln:16:51
-      |vpiParent:
-      \_hier_path: (C.z), line:16:50, endln:16:53
-      |vpiName:C
-    |vpiActual:
-    \_ref_obj: (work@gen_test9.A.z), line:16:52, endln:16:53
-      |vpiParent:
-      \_hier_path: (C.z), line:16:50, endln:16:53
-      |vpiName:z
-      |vpiFullName:work@gen_test9.A.z
-    |vpiName:C.z
-\_cont_assign: , line:16:32, endln:16:53
-  |vpiParent:
-  \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-  |vpiRhs:
-  \_operation: , line:16:36, endln:16:53
-  |vpiLhs:
-  \_ref_obj: (work@gen_test9.A.x), line:16:32, endln:16:33
-    |vpiParent:
-    \_cont_assign: , line:16:32, endln:16:53
-    |vpiName:x
-    |vpiFullName:work@gen_test9.A.x
-\_logic_typespec: , line:5:25, endln:5:35
-  |vpiParent:
-  \_logic_net: (work@gen_test9.A.x), line:5:36, endln:5:37
-  |vpiRange:
-  \_range: , line:5:30, endln:5:35
-    |vpiParent:
-    \_logic_typespec: , line:5:25, endln:5:35
-    |vpiLeftRange:
-    \_constant: , line:5:31, endln:5:32
-      |vpiParent:
-      \_range: , line:5:30, endln:5:35
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:30, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:33, endln:8:43
-  |vpiRange:
-  \_range: , line:8:38, endln:8:43
-    |vpiParent:
-    \_logic_typespec: , line:8:33, endln:8:43
-    |vpiLeftRange:
-    \_constant: , line:8:39, endln:8:40
-      |vpiParent:
-      \_range: , line:8:38, endln:8:43
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:41, endln:8:42
-      |vpiParent:
-      \_range: , line:8:38, endln:8:43
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:13:33, endln:13:43
-  |vpiRange:
-  \_range: , line:13:38, endln:13:43
-    |vpiParent:
-    \_logic_typespec: , line:13:33, endln:13:43
-    |vpiLeftRange:
-    \_constant: , line:13:39, endln:13:40
-      |vpiParent:
-      \_range: , line:13:38, endln:13:43
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:41, endln:13:42
-      |vpiParent:
-      \_range: , line:13:38, endln:13:43
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:9, endln:2:19
-  |vpiRange:
-  \_range: , line:2:14, endln:2:19
-    |vpiParent:
-    \_logic_typespec: , line:2:9, endln:2:19
-    |vpiLeftRange:
-    \_constant: , line:2:15, endln:2:16
-      |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:17, endln:2:18
-      |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_cont_assign: , line:2:20, endln:2:21
-  |vpiParent:
-  \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-  |vpiNetDeclAssign:1
-  |vpiRhs:
-  \_constant: , line:2:24, endln:2:29
-  |vpiLhs:
-  \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
-    |vpiParent:
-    \_cont_assign: , line:2:20, endln:2:21
-    |vpiTypespec:
-    \_ref_typespec: (work@gen_test9.w)
-      |vpiParent:
-      \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
-      |vpiFullName:work@gen_test9.w
-      |vpiActual:
-      \_logic_typespec: , line:2:9, endln:2:19
-    |vpiName:w
-    |vpiFullName:work@gen_test9.w
-    |vpiNetType:1
-\_logic_typespec: , line:2:9, endln:2:19
-  |vpiParent:
-  \_ref_typespec: (work@gen_test9.w)
-  |vpiRange:
-  \_range: , line:2:14, endln:2:19
-    |vpiParent:
-    \_logic_typespec: , line:2:9, endln:2:19
-    |vpiLeftRange:
-    \_constant: , line:2:15, endln:2:16
-      |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:17, endln:2:18
-      |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-  |vpiParent:
-  \_gen_scope_array: (work@gen_test9.A), line:4:17, endln:17:20
-  |vpiFullName:work@gen_test9.A
-  |vpiNet:
-  \_logic_net: (work@gen_test9.A.x), line:5:36, endln:5:37
-  |vpiContAssign:
-  \_cont_assign: , line:16:32, endln:16:53
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@gen_test9.A.B), line:7:25, endln:9:28
-    |vpiParent:
-    \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-    |vpiName:B
-    |vpiFullName:work@gen_test9.A.B
-    |vpiGenScope:
-    \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-      |vpiParent:
-      \_gen_scope_array: (work@gen_test9.A.B), line:7:25, endln:9:28
-      |vpiFullName:work@gen_test9.A.B
-      |vpiNet:
-      \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-      |vpiContAssign:
-      \_cont_assign: , line:8:44, endln:8:45
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A.B), line:7:25, endln:9:28
-        |vpiNetDeclAssign:1
-        |vpiRhs:
-        \_constant: , line:8:48, endln:8:53
-        |vpiLhs:
-        \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-          |vpiParent:
-          \_cont_assign: , line:8:44, endln:8:45
-          |vpiTypespec:
-          \_ref_typespec: (work@gen_test9.A.B.y)
-            |vpiParent:
-            \_logic_net: (work@gen_test9.A.B.y), line:8:44, endln:8:45
-            |vpiFullName:work@gen_test9.A.B.y
-            |vpiActual:
-            \_logic_typespec: , line:8:33, endln:8:43
-          |vpiName:y
-          |vpiFullName:work@gen_test9.A.B.y
-          |vpiNetType:1
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@gen_test9.A.C), line:12:25, endln:14:28
-    |vpiParent:
-    \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-    |vpiName:C
-    |vpiFullName:work@gen_test9.A.C
-    |vpiGenScope:
-    \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-      |vpiParent:
-      \_gen_scope_array: (work@gen_test9.A.C), line:12:25, endln:14:28
-      |vpiFullName:work@gen_test9.A.C
-      |vpiNet:
-      \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-      |vpiContAssign:
-      \_cont_assign: , line:13:44, endln:13:45
-        |vpiParent:
-        \_gen_scope: (work@gen_test9.A.C), line:12:25, endln:14:28
-        |vpiNetDeclAssign:1
-        |vpiRhs:
-        \_constant: , line:13:48, endln:13:53
-        |vpiLhs:
-        \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-          |vpiParent:
-          \_cont_assign: , line:13:44, endln:13:45
-          |vpiTypespec:
-          \_ref_typespec: (work@gen_test9.A.C.z)
-            |vpiParent:
-            \_logic_net: (work@gen_test9.A.C.z), line:13:44, endln:13:45
-            |vpiFullName:work@gen_test9.A.C.z
-            |vpiActual:
-            \_logic_typespec: , line:13:33, endln:13:43
-          |vpiName:z
-          |vpiFullName:work@gen_test9.A.C.z
-          |vpiNetType:1
-\_gen_scope_array: (work@gen_test9.A), line:4:17, endln:17:20
-  |vpiParent:
-  \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-  |vpiName:A
-  |vpiFullName:work@gen_test9.A
-  |vpiGenScope:
-  \_gen_scope: (work@gen_test9.A), line:4:17, endln:17:20
-\_logic_typespec: , line:8:33, endln:8:43
-  |vpiParent:
-  \_ref_typespec: (work@gen_test9.A.B.y)
-  |vpiRange:
-  \_range: , line:8:38, endln:8:43
-    |vpiParent:
-    \_logic_typespec: , line:8:33, endln:8:43
-    |vpiLeftRange:
-    \_constant: , line:8:39, endln:8:40
-      |vpiParent:
-      \_range: , line:8:38, endln:8:43
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:41, endln:8:42
-      |vpiParent:
-      \_range: , line:8:38, endln:8:43
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:13:33, endln:13:43
-  |vpiParent:
-  \_ref_typespec: (work@gen_test9.A.C.z)
-  |vpiRange:
-  \_range: , line:13:38, endln:13:43
-    |vpiParent:
-    \_logic_typespec: , line:13:33, endln:13:43
-    |vpiLeftRange:
-    \_constant: , line:13:39, endln:13:40
-      |vpiParent:
-      \_range: , line:13:38, endln:13:43
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:41, endln:13:42
-      |vpiParent:
-      \_range: , line:13:38, endln:13:43
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/GenerateBlock/dut.sv | ${SURELOG_DIR}/build/regression/GenerateBlock/roundtrip/dut_000.sv | 16 | 19 |

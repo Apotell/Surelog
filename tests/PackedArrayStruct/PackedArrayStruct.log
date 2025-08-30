@@ -93,44 +93,20 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              11
+constant                                               4
 cont_assign                                            1
 design                                                 1
-logic_net                                              3
-logic_typespec                                         4
-module_inst                                            4
+logic_net                                              2
+logic_typespec                                         2
+module_inst                                            1
 packed_array_typespec                                  1
-port                                                   2
-range                                                  5
-ref_obj                                                4
-ref_typespec                                           7
+port                                                   1
+range                                                  2
+ref_obj                                                3
+ref_typespec                                           4
 struct_typespec                                        1
-struct_var                                             1
-typespec_member                                        1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              11
-cont_assign                                            2
-design                                                 1
-logic_net                                              3
-logic_typespec                                         4
-module_inst                                            4
-packed_array_typespec                                  1
-port                                                   3
-range                                                  5
-ref_obj                                                7
-ref_typespec                                           8
-struct_typespec                                        1
-struct_var                                             1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayStruct/slpp_all/surelog.uhdm ...
@@ -138,13 +114,12 @@ typespec_member                                        1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_packed_array_typespec: (struct_array_t), line:2:12, endln:4:12
@@ -242,95 +217,6 @@ design: (work@top)
       |vpiFullName:work@top.o
       |vpiActual:
       \_logic_net: (work@top.o), line:1:32, endln:1:33
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiVariables:
-  \_struct_var: (work@top.a), line:5:19, endln:5:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_struct_var: (work@top.a), line:5:19, endln:5:20
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_packed_array_typespec: (struct_array_t), line:2:12, endln:4:12
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-    |vpiExpr:
-    \_constant: , line:5:23, endln:5:25
-      |vpiParent:
-      \_struct_var: (work@top.a), line:5:19, endln:5:20
-      |vpiDecompile:4294967295
-      |vpiSize:32
-      |UINT:4294967295
-      |vpiConstType:9
-  |vpiTypedef:
-  \_packed_array_typespec: (struct_array_t), line:2:12, endln:4:12
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.o), line:1:32, endln:1:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_logic_net: (work@top.o), line:1:32, endln:1:33
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_typespec: , line:1:19, endln:1:31
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:1:32, endln:1:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:1:32, endln:1:33
-      |vpiParent:
-      \_port: (o), line:1:32, endln:1:33
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:32, endln:1:33
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:1:32, endln:1:33
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_typespec: , line:1:19, endln:1:31
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-  |vpiContAssign:
-  \_cont_assign: , line:6:11, endln:6:16
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiRhs:
-    \_ref_obj: (work@top.a), line:6:15, endln:6:16
-      |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:16
-      |vpiName:a
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_struct_var: (work@top.a), line:5:19, endln:5:20
-    |vpiLhs:
-    \_ref_obj: (work@top.o), line:6:11, endln:6:12
-      |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:16
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:32, endln:1:33
 \_weaklyReferenced:
 \_struct_typespec: , line:2:12, endln:2:18
   |vpiPacked:1
@@ -375,54 +261,12 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:1:19, endln:1:31
-  |vpiRange:
-  \_range: , line:1:25, endln:1:31
-    |vpiParent:
-    \_logic_typespec: , line:1:19, endln:1:31
-    |vpiLeftRange:
-    \_constant: , line:1:26, endln:1:28
-      |vpiParent:
-      \_range: , line:1:25, endln:1:31
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:29, endln:1:30
-      |vpiParent:
-      \_range: , line:1:25, endln:1:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:1:19, endln:1:31
-  |vpiRange:
-  \_range: , line:1:25, endln:1:31
-    |vpiParent:
-    \_logic_typespec: , line:1:19, endln:1:31
-    |vpiLeftRange:
-    \_constant: , line:1:26, endln:1:28
-      |vpiParent:
-      \_range: , line:1:25, endln:1:31
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:29, endln:1:30
-      |vpiParent:
-      \_range: , line:1:25, endln:1:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayStruct/roundtrip/dut_000.sv | 3 | 7 |

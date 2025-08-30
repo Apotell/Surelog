@@ -95,12 +95,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PpLppdr/dut.sv:16:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PpLppdr/dut.sv:16:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PpLppdr/dut.sv:16:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
@@ -110,35 +104,21 @@ constant                                               3
 design                                                 1
 func_call                                              2
 logic_net                                              2
-module_inst                                            2
+module_inst                                            1
 ref_obj                                                5
 task                                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-begin                                                  2
-bit_select                                             2
-constant                                               3
-design                                                 1
-func_call                                              4
-logic_net                                              2
-module_inst                                            2
-ref_obj                                               10
-task                                                   2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PpLppdr/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PpLppdr/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PpLppdr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiTaskFunc:
@@ -165,7 +145,7 @@ design: (work@top)
           |vpiName:DDR_CMN_OFFSET
           |vpiFullName:work@top.set_refgen_en.DDR_CMN_OFFSET
           |vpiActual:
-          \_logic_net: (work@top.DDR_CMN_OFFSET), line:11:45, endln:11:59
+          \_logic_net: (work@top.set_refgen_en.DDR_CMN_OFFSET), line:11:45, endln:11:59
         |vpiArgument:
         \_constant: , line:11:60, endln:11:72
           |vpiParent:
@@ -196,7 +176,7 @@ design: (work@top)
           |vpiName:en
           |vpiFullName:work@top.set_refgen_en.en
           |vpiActual:
-          \_logic_net: (work@top.en), line:12:49, endln:12:51
+          \_logic_net: (work@top.set_refgen_en.en), line:12:49, endln:12:51
         |vpiLhs:
         \_bit_select: (work@top.set_refgen_en.wdata), line:12:36, endln:12:46
           |vpiParent:
@@ -222,7 +202,7 @@ design: (work@top)
           |vpiName:DDR_CMN_OFFSET
           |vpiFullName:work@top.set_refgen_en.DDR_CMN_OFFSET
           |vpiActual:
-          \_logic_net: (work@top.DDR_CMN_OFFSET), line:11:45, endln:11:59
+          \_logic_net: (work@top.set_refgen_en.DDR_CMN_OFFSET), line:11:45, endln:11:59
         |vpiArgument:
         \_constant: , line:13:61, endln:13:73
           |vpiParent:
@@ -243,116 +223,25 @@ design: (work@top)
     |vpiInstance:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
   |vpiNet:
-  \_logic_net: (work@top.DDR_CMN_OFFSET), line:11:45, endln:11:59
+  \_logic_net: (work@top.set_refgen_en.DDR_CMN_OFFSET), line:11:45, endln:11:59
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
+    \_func_call: (csr_read), line:11:36, endln:11:80
     |vpiName:DDR_CMN_OFFSET
-    |vpiFullName:work@top.DDR_CMN_OFFSET
+    |vpiFullName:work@top.set_refgen_en.DDR_CMN_OFFSET
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.en), line:12:49, endln:12:51
+  \_logic_net: (work@top.set_refgen_en.en), line:12:49, endln:12:51
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
+    \_assignment: , line:12:36, endln:12:51
     |vpiName:en
-    |vpiFullName:work@top.en
+    |vpiFullName:work@top.set_refgen_en.en
     |vpiNetType:1
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_task: (work@top.set_refgen_en), line:18:3, endln:22:8
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
-    |vpiName:set_refgen_en
-    |vpiFullName:work@top.set_refgen_en
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiStmt:
-    \_begin: (work@top.set_refgen_en), line:19:5, endln:21:8
-      |vpiParent:
-      \_task: (work@top.set_refgen_en), line:18:3, endln:22:8
-      |vpiFullName:work@top.set_refgen_en
-      |vpiStmt:
-      \_func_call: (csr_read), line:11:36, endln:11:80
-        |vpiParent:
-        \_begin: (work@top.set_refgen_en), line:19:5, endln:21:8
-        |vpiArgument:
-        \_ref_obj: (work@top.set_refgen_en.DDR_CMN_OFFSET), line:11:45, endln:11:59
-          |vpiParent:
-          \_func_call: (csr_read), line:11:36, endln:11:80
-          |vpiName:DDR_CMN_OFFSET
-          |vpiFullName:work@top.set_refgen_en.DDR_CMN_OFFSET
-          |vpiActual:
-          \_logic_net: (work@top.DDR_CMN_OFFSET), line:11:45, endln:11:59
-        |vpiArgument:
-        \_constant: , line:11:60, endln:11:72
-        |vpiArgument:
-        \_ref_obj: (work@top.set_refgen_en.wdata), line:11:74, endln:11:79
-          |vpiParent:
-          \_func_call: (csr_read), line:11:36, endln:11:80
-          |vpiName:wdata
-          |vpiFullName:work@top.set_refgen_en.wdata
-          |vpiActual:
-          \_bit_select: (work@top.set_refgen_en.wdata), line:12:36, endln:12:46
-        |vpiName:csr_read
-      |vpiStmt:
-      \_assignment: , line:12:36, endln:12:51
-        |vpiParent:
-        \_begin: (work@top.set_refgen_en), line:19:5, endln:21:8
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_ref_obj: (work@top.set_refgen_en.en), line:12:49, endln:12:51
-          |vpiParent:
-          \_assignment: , line:12:36, endln:12:51
-          |vpiName:en
-          |vpiFullName:work@top.set_refgen_en.en
-          |vpiActual:
-          \_logic_net: (work@top.en), line:12:49, endln:12:51
-        |vpiLhs:
-        \_bit_select: (work@top.set_refgen_en.wdata), line:12:36, endln:12:46
-          |vpiParent:
-          \_assignment: , line:12:36, endln:12:51
-          |vpiName:wdata
-          |vpiFullName:work@top.set_refgen_en.wdata
-          |vpiIndex:
-          \_constant: , line:12:42, endln:12:43
-      |vpiStmt:
-      \_func_call: (csr_write), line:13:36, endln:13:81
-        |vpiParent:
-        \_begin: (work@top.set_refgen_en), line:19:5, endln:21:8
-        |vpiArgument:
-        \_ref_obj: (work@top.set_refgen_en.DDR_CMN_OFFSET), line:13:46, endln:13:60
-          |vpiParent:
-          \_func_call: (csr_write), line:13:36, endln:13:81
-          |vpiName:DDR_CMN_OFFSET
-          |vpiFullName:work@top.set_refgen_en.DDR_CMN_OFFSET
-          |vpiActual:
-          \_logic_net: (work@top.DDR_CMN_OFFSET), line:11:45, endln:11:59
-        |vpiArgument:
-        \_constant: , line:13:61, endln:13:73
-        |vpiArgument:
-        \_ref_obj: (work@top.set_refgen_en.wdata), line:13:75, endln:13:80
-          |vpiParent:
-          \_func_call: (csr_write), line:13:36, endln:13:81
-          |vpiName:wdata
-          |vpiFullName:work@top.set_refgen_en.wdata
-          |vpiActual:
-          \_bit_select: (work@top.set_refgen_en.wdata), line:12:36, endln:12:46
-        |vpiName:csr_write
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PpLppdr/dut.sv, line:16:1, endln:25:10
-  |vpiTopModule:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PpLppdr/dut.sv | ${SURELOG_DIR}/build/regression/PpLppdr/roundtrip/dut_000.sv | 11 | 25 |

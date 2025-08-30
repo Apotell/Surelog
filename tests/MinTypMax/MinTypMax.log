@@ -58,48 +58,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/MinTypMax/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/MinTypMax/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/MinTypMax/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               6
+constant                                               3
 design                                                 1
 initial                                                1
-module_inst                                            4
-operation                                              2
-param_assign                                           2
-parameter                                              2
+module_inst                                            1
+operation                                              1
+param_assign                                           1
+parameter                                              1
 ref_obj                                                1
 sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               6
-design                                                 1
-initial                                                2
-module_inst                                            4
-operation                                              2
-param_assign                                           2
-parameter                                              2
-ref_obj                                                2
-sys_func_call                                          2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MinTypMax/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/MinTypMax/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/MinTypMax/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.value), line:2:13, endln:2:18
@@ -152,72 +133,12 @@ design: (work@top)
         |vpiName:value
         |vpiFullName:work@top.value
       |vpiName:$display
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.value), line:2:13, endln:2:18
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
-    |vpiName:value
-    |vpiFullName:work@top.value
-  |vpiParamAssign:
-  \_param_assign: , line:2:13, endln:2:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
-    |vpiRhs:
-    \_operation: , line:2:21, endln:2:28
-      |vpiParent:
-      \_param_assign: , line:2:13, endln:2:28
-      |vpiOpType:38
-      |vpiOperand:
-      \_constant: , line:2:22, endln:2:23
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:2:24, endln:2:25
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:2:26, endln:2:27
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.value), line:2:13, endln:2:18
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:3:3, endln:3:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
-    |vpiStmt:
-    \_sys_func_call: ($display), line:3:11, endln:3:26
-      |vpiParent:
-      \_initial: , line:3:3, endln:3:27
-      |vpiArgument:
-      \_ref_obj: (work@top.value), line:3:20, endln:3:25
-        |vpiParent:
-        \_sys_func_call: ($display), line:3:11, endln:3:26
-        |vpiName:value
-        |vpiFullName:work@top.value
-        |vpiActual:
-        \_parameter: (work@top.value), line:2:13, endln:2:18
-      |vpiName:$display
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/MinTypMax/dut.sv | ${SURELOG_DIR}/build/regression/MinTypMax/roundtrip/dut_000.sv | 1 | 4 |

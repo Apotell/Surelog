@@ -41,42 +41,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PreprocString/dut.sv:1:1: No timescale set for "test".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PreprocString/dut.sv:1:1: Compile module "work@test".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PreprocString/dut.sv:1:1: Top level module "work@test".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
 constant                                               1
 design                                                 1
 initial                                                1
-module_inst                                            2
+module_inst                                            1
 sys_func_call                                          1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-begin                                                  2
-constant                                               1
-design                                                 1
-initial                                                2
-module_inst                                            2
-sys_func_call                                          2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@test)
-|vpiElaborated:1
-|vpiName:work@test
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
   |vpiParent:
-  \_design: (work@test)
+  \_design: (unnamed)
   |vpiFullName:work@test
   |vpiDefName:work@test
   |vpiProcess:
@@ -101,36 +85,12 @@ design: (work@test)
           |STRING:test/rom.mem`message
           |vpiConstType:6
         |vpiName:$display
-|uhdmtopModules:
-\_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
-  |vpiParent:
-  \_design: (work@test)
-  |vpiName:work@test
-  |vpiDefName:work@test
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:6:5, endln:8:8
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
-    |vpiStmt:
-    \_begin: (work@test), line:6:13, endln:8:8
-      |vpiParent:
-      \_initial: , line:6:5, endln:8:8
-      |vpiFullName:work@test
-      |vpiStmt:
-      \_sys_func_call: ($display), line:7:5, endln:7:37
-        |vpiParent:
-        \_begin: (work@test), line:6:13, endln:8:8
-        |vpiArgument:
-        \_constant: , line:7:14, endln:7:36
-        |vpiName:$display
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PreprocString/dut.sv | ${SURELOG_DIR}/build/regression/PreprocString/roundtrip/dut_000.sv | 3 | 9 |

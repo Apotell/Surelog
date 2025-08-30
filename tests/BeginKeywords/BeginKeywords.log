@@ -26,30 +26,37 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BeginKeywords/top.v:8:1: No timescale set for "b_kw2".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/BeginKeywords/top.v:8:1: Compile module "work@b_kw2".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] work@b_kw2 work@b_kw2
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/BeginKeywords/top.v:8:1: Top level module "work@b_kw2".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
-[NTE:EL0523] ${SURELOG_DIR}/tests/BeginKeywords/top.v:8:1: Instance "work@b_kw2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
-logic_net                                              2
-logic_typespec                                         1
-module_inst                                            2
-ref_typespec                                           1
+logic_net                                              1
+module_inst                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BeginKeywords/slpp_all/surelog.uhdm ...
+[INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BeginKeywords/slpp_all/checker/surelog.chk.html ...
+[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BeginKeywords/slpp_all/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+design: (unnamed)
+|vpiName:unnamed
+|uhdmallModules:
+\_module_inst: work@b_kw2 (work@b_kw2), file:${SURELOG_DIR}/tests/BeginKeywords/top.v, line:8:1, endln:10:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiFullName:work@b_kw2
+  |vpiDefName:work@b_kw2
+  |vpiNet:
+  \_logic_net: (work@b_kw2.clk), line:9:7, endln:9:10
+    |vpiParent:
+    \_module_inst: work@b_kw2 (work@b_kw2), file:${SURELOG_DIR}/tests/BeginKeywords/top.v, line:8:1, endln:10:10
+    |vpiName:clk
+    |vpiFullName:work@b_kw2.clk
+===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 6
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/BeginKeywords/top.v | ${SURELOG_DIR}/build/regression/BeginKeywords/roundtrip/top_000.v | 8 | 10 |

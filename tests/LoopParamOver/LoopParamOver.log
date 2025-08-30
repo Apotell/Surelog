@@ -139,55 +139,30 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:1:1: Compile module "work@Foo".
 [INF:CP0303] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:8:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:8:1: Top level module "work@top".
-[ERR:EL0542] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:9: Expression loop in instance "work@top".
-[ERR:EL0542] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:10: Expression loop in instance "work@top".
-[ERR:EL0542] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:11: Expression loop in instance "work@top".
-[ERR:EL0542] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:10: Expression loop in instance "work@top.sub".
-[ERR:EL0542] ${SURELOG_DIR}/tests/LoopParamOver/dut.sv:3: Expression loop in instance "work@top.sub".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 constant                                               1
 design                                                 1
-int_typespec                                          29
-module_inst                                            7
-operation                                              3
-param_assign                                          10
-parameter                                             10
+int_typespec                                           1
+module_inst                                            2
+operation                                              1
+param_assign                                           5
+parameter                                              5
 ref_module                                             1
-ref_obj                                             4528
-ref_typespec                                          31
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               1
-design                                                 1
-int_typespec                                          29
-module_inst                                            7
-operation                                              3
-param_assign                                          10
-parameter                                             10
-ref_module                                             1
-ref_obj                                             4528
-ref_typespec                                          31
+ref_obj                                                5
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LoopParamOver/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LoopParamOver/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LoopParamOver/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@Foo
   |vpiParameter:
   \_parameter: (work@Foo.P1), line:2:12, endln:2:14
@@ -257,7 +232,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.P3), line:9:13, endln:9:15
@@ -322,174 +297,15 @@ design: (work@top)
     |vpiDefName:work@Foo
     |vpiActual:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:1:1, endln:5:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.P3), line:9:13, endln:9:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiName:P3
-    |vpiFullName:work@top.P3
-  |vpiParameter:
-  \_parameter: (work@top.P2), line:10:13, endln:10:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiName:P2
-    |vpiFullName:work@top.P2
-  |vpiParameter:
-  \_parameter: (work@top.P1), line:11:13, endln:11:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiName:P1
-    |vpiFullName:work@top.P1
-  |vpiParamAssign:
-  \_param_assign: , line:9:13, endln:9:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiRhs:
-    \_ref_obj: (work@top.P2), line:9:18, endln:9:20
-      |vpiParent:
-      \_param_assign: , line:11:13, endln:11:20
-      |vpiName:P2
-      |vpiFullName:work@top.P2
-      |vpiActual:
-      \_parameter: (work@top.P2), line:10:13, endln:10:15
-    |vpiLhs:
-    \_parameter: (work@top.P3), line:9:13, endln:9:15
-  |vpiParamAssign:
-  \_param_assign: , line:10:13, endln:10:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiRhs:
-    \_ref_obj: (work@top.P2), line:10:18, endln:10:20
-      |vpiParent:
-      \_param_assign: , line:9:13, endln:9:20
-      |vpiTypespec:
-      \_ref_typespec: (work@top.P2)
-        |vpiParent:
-        \_ref_obj: (work@top.P2), line:10:18, endln:10:20
-        |vpiFullName:work@top.P2
-        |vpiActual:
-        \_int_typespec: , line:2:2, endln:2:19
-      |vpiName:P2
-      |vpiFullName:work@top.P2
-      |vpiActual:
-      \_parameter: (work@top.sub.P2), line:3:12, endln:3:14
-    |vpiLhs:
-    \_parameter: (work@top.P2), line:10:13, endln:10:15
-  |vpiParamAssign:
-  \_param_assign: , line:11:13, endln:11:20
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiRhs:
-    \_ref_obj: (work@top.P2), line:10:18, endln:10:20
-    |vpiLhs:
-    \_parameter: (work@top.P1), line:11:13, endln:11:15
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@Foo (work@top.sub), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:12:1, endln:12:22
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
-    |vpiName:sub
-    |vpiFullName:work@top.sub
-    |vpiParameter:
-    \_parameter: (work@top.sub.P1), line:2:12, endln:2:14
-      |vpiParent:
-      \_module_inst: work@Foo (work@top.sub), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:12:1, endln:12:22
-      |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (work@top.sub.P1)
-        |vpiParent:
-        \_parameter: (work@top.sub.P1), line:2:12, endln:2:14
-        |vpiFullName:work@top.sub.P1
-        |vpiActual:
-        \_int_typespec: , line:2:2, endln:2:19
-      |vpiName:P1
-      |vpiFullName:work@top.sub.P1
-    |vpiParameter:
-    \_parameter: (work@top.sub.P2), line:3:12, endln:3:14
-      |vpiParent:
-      \_module_inst: work@Foo (work@top.sub), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:12:1, endln:12:22
-      |vpiName:P2
-      |vpiFullName:work@top.sub.P2
-    |vpiParamAssign:
-    \_param_assign: , line:2:12, endln:2:19
-      |vpiParent:
-      \_module_inst: work@Foo (work@top.sub), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:12:1, endln:12:22
-      |vpiOverriden:1
-      |vpiRhs:
-      \_ref_obj: (work@top.P2), line:10:18, endln:10:20
-      |vpiLhs:
-      \_parameter: (work@top.sub.P1), line:2:12, endln:2:14
-    |vpiParamAssign:
-    \_param_assign: , line:3:12, endln:3:24
-      |vpiParent:
-      \_module_inst: work@Foo (work@top.sub), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:12:1, endln:12:22
-      |vpiOverriden:1
-      |vpiRhs:
-      \_operation: , line:3:17, endln:3:24
-        |vpiParent:
-        \_param_assign: , line:3:12, endln:3:24
-        |vpiOpType:24
-        |vpiOperand:
-        \_ref_obj: (work@top.sub.P2), line:10:18, endln:10:20
-          |vpiParent:
-          \_operation: , line:3:17, endln:3:24
-          |vpiTypespec:
-          \_ref_typespec: (work@top.sub.P2)
-            |vpiParent:
-            \_ref_obj: (work@top.sub.P2), line:10:18, endln:10:20
-            |vpiFullName:work@top.sub.P2
-            |vpiActual:
-            \_int_typespec: , line:2:2, endln:2:19
-          |vpiName:P2
-          |vpiFullName:work@top.sub.P2
-          |vpiActual:
-          \_parameter: (work@top.sub.P2), line:3:12, endln:3:14
-        |vpiOperand:
-        \_operation: , line:3:22, endln:3:24
-          |vpiParent:
-          \_operation: , line:3:17, endln:3:24
-          |vpiOpType:24
-          |vpiOperand:
-          \_ref_obj: (work@top.sub.P1), line:3:17, endln:3:19
-            |vpiParent:
-            \_operation: , line:3:22, endln:3:24
-            |vpiName:P1
-            |vpiFullName:work@top.sub.P1
-            |vpiActual:
-            \_parameter: (work@top.sub.P1), line:2:12, endln:2:14
-          |vpiOperand:
-          \_ref_obj: (work@top.sub.P2), line:3:22, endln:3:24
-            |vpiParent:
-            \_operation: , line:3:22, endln:3:24
-            |vpiName:P2
-            |vpiFullName:work@top.sub.P2
-            |vpiActual:
-            \_parameter: (work@top.sub.P2), line:3:12, endln:3:14
-      |vpiLhs:
-      \_parameter: (work@top.sub.P2), line:3:12, endln:3:14
-    |vpiDefName:work@Foo
-    |vpiDefFile:${SURELOG_DIR}/tests/LoopParamOver/dut.sv
-    |vpiDefLineNo:1
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
 \_weaklyReferenced:
 \_int_typespec: , line:2:2, endln:2:19
-\_int_typespec: , line:2:2, endln:2:19
-  |vpiParent:
-  \_ref_typespec: (work@top.sub.P2)
-\_int_typespec: , line:2:2, endln:2:19
-  |vpiParent:
-  \_ref_typespec: (work@top.sub.P1)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 5
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/LoopParamOver/dut.sv | ${SURELOG_DIR}/build/regression/LoopParamOver/roundtrip/dut_000.sv | 2 | 13 |
+============================== End RoundTrip Results ==============================

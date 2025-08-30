@@ -120,46 +120,21 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv:1:1: Compile module "work@dut".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv:1:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              15
-cont_assign                                            2
+constant                                               4
+cont_assign                                            1
 design                                                 1
-int_typespec                                           6
+int_typespec                                           4
 logic_net                                              1
 logic_typespec                                         2
-module_inst                                            3
-operation                                             10
-ref_obj                                                2
-ref_typespec                                          25
-string_typespec                                       12
+module_inst                                            1
+operation                                              3
+ref_obj                                                1
+ref_typespec                                          11
+string_typespec                                        3
 struct_typespec                                        3
-struct_var                                             1
-tagged_pattern                                        15
-typespec_member                                        7
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              15
-cont_assign                                            3
-design                                                 1
-int_typespec                                           6
-logic_net                                              1
-logic_typespec                                         2
-module_inst                                            3
-operation                                             13
-ref_obj                                                3
-ref_typespec                                          26
-string_typespec                                       12
-struct_typespec                                        3
-struct_var                                             1
-tagged_pattern                                        15
+tagged_pattern                                         4
 typespec_member                                        7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignRhsFlat/slpp_all/surelog.uhdm ...
@@ -167,16 +142,17 @@ typespec_member                                        7
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssignRhsFlat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_struct_typespec: (ABC), line:2:9, endln:8:2
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
     |vpiName:ABC
     |vpiInstance:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
@@ -186,10 +162,10 @@ design: (work@dut)
       \_struct_typespec: (ABC), line:2:9, endln:8:2
       |vpiName:A
       |vpiTypespec:
-      \_ref_typespec: (ABC.A)
+      \_ref_typespec: (work@dut.ABC.A)
         |vpiParent:
         \_typespec_member: (A), line:3:7, endln:3:8
-        |vpiFullName:ABC.A
+        |vpiFullName:work@dut.ABC.A
         |vpiActual:
         \_int_typespec: , line:3:3, endln:3:6
       |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -203,10 +179,10 @@ design: (work@dut)
       \_struct_typespec: (ABC), line:2:9, endln:8:2
       |vpiName:BC1
       |vpiTypespec:
-      \_ref_typespec: (ABC.BC1)
+      \_ref_typespec: (work@dut.ABC.BC1)
         |vpiParent:
         \_typespec_member: (BC1), line:7:5, endln:7:8
-        |vpiFullName:ABC.BC1
+        |vpiFullName:work@dut.ABC.BC1
         |vpiActual:
         \_struct_typespec: , line:4:3, endln:4:9
       |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -220,10 +196,10 @@ design: (work@dut)
       \_struct_typespec: (ABC), line:2:9, endln:8:2
       |vpiName:BC2
       |vpiTypespec:
-      \_ref_typespec: (ABC.BC2)
+      \_ref_typespec: (work@dut.ABC.BC2)
         |vpiParent:
         \_typespec_member: (BC2), line:7:10, endln:7:13
-        |vpiFullName:ABC.BC2
+        |vpiFullName:work@dut.ABC.BC2
         |vpiActual:
         \_struct_typespec: , line:4:3, endln:4:9
       |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -333,105 +309,6 @@ design: (work@dut)
       |vpiFullName:work@dut.test
       |vpiActual:
       \_logic_net: (work@dut.test), line:10:5, endln:10:9
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiVariables:
-  \_struct_var: (work@dut.test), line:10:5, endln:10:9
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.test)
-      |vpiParent:
-      \_struct_var: (work@dut.test), line:10:5, endln:10:9
-      |vpiFullName:work@dut.test
-      |vpiActual:
-      \_struct_typespec: (ABC), line:2:9, endln:8:2
-    |vpiName:test
-    |vpiFullName:work@dut.test
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_struct_typespec: (ABC), line:2:9, endln:8:2
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiContAssign:
-  \_cont_assign: , line:12:8, endln:12:61
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
-    |vpiRhs:
-    \_operation: , line:12:15, endln:12:61
-      |vpiParent:
-      \_cont_assign: , line:12:8, endln:12:61
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:12:39, endln:12:40
-        |vpiParent:
-        \_operation: , line:12:15, endln:12:61
-        |vpiDecompile:0
-        |vpiSize:32
-        |UINT:0
-        |vpiConstType:9
-      |vpiOperand:
-      \_operation: , line:12:22, endln:12:32
-        |vpiParent:
-        \_operation: , line:12:15, endln:12:61
-        |vpiSize:33
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:12:24, endln:12:28
-          |vpiParent:
-          \_operation: , line:12:22, endln:12:32
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiOperand:
-        \_constant: , line:12:30, endln:12:31
-          |vpiParent:
-          \_operation: , line:12:22, endln:12:32
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiOperand:
-      \_operation: , line:12:47, endln:12:60
-        |vpiParent:
-        \_operation: , line:12:15, endln:12:61
-        |vpiTypespec:
-        \_ref_typespec: (work@dut)
-          |vpiParent:
-          \_operation: , line:12:47, endln:12:60
-          |vpiFullName:work@dut
-          |vpiActual:
-          \_struct_typespec: , line:4:3, endln:4:9
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:12:58, endln:12:59
-          |vpiParent:
-          \_operation: , line:12:47, endln:12:60
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:12:58, endln:12:59
-          |vpiParent:
-          \_operation: , line:12:47, endln:12:60
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-    |vpiLhs:
-    \_ref_obj: (work@dut.test), line:12:8, endln:12:12
-      |vpiParent:
-      \_cont_assign: , line:12:8, endln:12:61
-      |vpiName:test
-      |vpiFullName:work@dut.test
-      |vpiActual:
-      \_struct_var: (work@dut.test), line:10:5, endln:10:9
 \_weaklyReferenced:
 \_int_typespec: , line:3:3, endln:3:6
   |vpiParent:
@@ -446,10 +323,10 @@ design: (work@dut)
     \_struct_typespec: , line:4:3, endln:4:9
     |vpiName:B
     |vpiTypespec:
-    \_ref_typespec: (ABC.BC1.B)
+    \_ref_typespec: (work@dut.ABC.BC1.B)
       |vpiParent:
       \_typespec_member: (B), line:5:11, endln:5:12
-      |vpiFullName:ABC.BC1.B
+      |vpiFullName:work@dut.ABC.BC1.B
       |vpiActual:
       \_logic_typespec: , line:5:5, endln:5:10
     |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -463,10 +340,10 @@ design: (work@dut)
     \_struct_typespec: , line:4:3, endln:4:9
     |vpiName:C
     |vpiTypespec:
-    \_ref_typespec: (ABC.BC1.C)
+    \_ref_typespec: (work@dut.ABC.BC1.C)
       |vpiParent:
       \_typespec_member: (C), line:6:9, endln:6:10
-      |vpiFullName:ABC.BC1.C
+      |vpiFullName:work@dut.ABC.BC1.C
       |vpiActual:
       \_int_typespec: , line:6:5, endln:6:8
     |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -490,10 +367,10 @@ design: (work@dut)
     \_struct_typespec: , line:4:3, endln:4:9
     |vpiName:B
     |vpiTypespec:
-    \_ref_typespec: (ABC.BC2.B)
+    \_ref_typespec: (work@dut.ABC.BC2.B)
       |vpiParent:
       \_typespec_member: (B), line:5:11, endln:5:12
-      |vpiFullName:ABC.BC2.B
+      |vpiFullName:work@dut.ABC.BC2.B
       |vpiActual:
       \_logic_typespec: , line:5:5, endln:5:10
     |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -507,10 +384,10 @@ design: (work@dut)
     \_struct_typespec: , line:4:3, endln:4:9
     |vpiName:C
     |vpiTypespec:
-    \_ref_typespec: (ABC.BC2.C)
+    \_ref_typespec: (work@dut.ABC.BC2.C)
       |vpiParent:
       \_typespec_member: (C), line:6:9, endln:6:10
-      |vpiFullName:ABC.BC2.C
+      |vpiFullName:work@dut.ABC.BC2.C
       |vpiActual:
       \_int_typespec: , line:6:5, endln:6:8
     |vpiRefFile:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv
@@ -539,51 +416,13 @@ design: (work@dut)
   |vpiParent:
   \_tagged_pattern: , line:12:47, endln:12:60
   |vpiName:BC2
-\_operation: , line:12:15, endln:12:61
-  |vpiParent:
-  \_cont_assign: , line:12:8, endln:12:61
-  |vpiOpType:75
-  |vpiOperand:
-  \_constant: , line:12:39, endln:12:40
-  |vpiOperand:
-  \_operation: , line:12:22, endln:12:32
-    |vpiParent:
-    \_operation: , line:12:15, endln:12:61
-    |vpiSize:33
-    |vpiOpType:75
-    |vpiOperand:
-    \_constant: , line:12:24, endln:12:28
-    |vpiOperand:
-    \_constant: , line:12:30, endln:12:31
-  |vpiOperand:
-  \_operation: , line:12:47, endln:12:60
-    |vpiParent:
-    \_operation: , line:12:15, endln:12:61
-    |vpiTypespec:
-    \_ref_typespec: 
-      |vpiActual:
-      \_struct_typespec: , line:4:3, endln:4:9
-    |vpiOpType:75
-    |vpiOperand:
-    \_constant: , line:12:58, endln:12:59
-    |vpiOperand:
-    \_constant: , line:12:58, endln:12:59
-\_cont_assign: , line:12:8, endln:12:61
-  |vpiParent:
-  \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
-  |vpiRhs:
-  \_operation: , line:12:15, endln:12:61
-  |vpiLhs:
-  \_ref_obj: (work@dut.test), line:12:8, endln:12:12
-    |vpiParent:
-    \_cont_assign: , line:12:8, endln:12:61
-    |vpiName:test
-    |vpiFullName:work@dut.test
-    |vpiActual:
-    \_struct_var: (work@dut.test), line:10:5, endln:10:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 5
+[   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv | ${SURELOG_DIR}/build/regression/AssignRhsFlat/roundtrip/dut_000.sv | 4 | 13 |
+============================== End RoundTrip Results ==============================

@@ -5,12 +5,6 @@
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v:1:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v:1:1: Compile module "work@tb".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v:1:1: Top level module "work@tb".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
@@ -21,13 +15,13 @@ delay_control                                          4
 design                                                 1
 immediate_assert                                       2
 initial                                                2
-logic_net                                              8
-logic_typespec                                         7
-module_inst                                            5
+logic_net                                              4
+logic_typespec                                         2
+module_inst                                            2
 operation                                              2
-port                                                   4
-ref_obj                                               18
-ref_typespec                                           8
+port                                                   2
+ref_obj                                               14
+ref_typespec                                           2
 sys_func_call                                          9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetNonAnsi/slpp_unit/surelog.uhdm ...
@@ -35,12 +29,12 @@ sys_func_call                                          9
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/OneNetNonAnsi/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@tb)
-|vpiName:work@tb
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v, line:1:1, endln:7:10
   |vpiParent:
-  \_design: (work@tb)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -120,7 +114,7 @@ design: (work@tb)
 |uhdmallModules:
 \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
   |vpiParent:
-  \_design: (work@tb)
+  \_design: (unnamed)
   |vpiFullName:work@tb
   |vpiDefName:work@tb
   |vpiNet:
@@ -388,153 +382,7 @@ design: (work@tb)
               |STRING:i != o!
               |vpiConstType:6
             |vpiName:$fatal
-|uhdmtopModules:
-\_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-  |vpiParent:
-  \_design: (work@tb)
-  |vpiName:work@tb
-  |vpiDefName:work@tb
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@tb.i), line:2:9, endln:2:10
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-    |vpiTypespec:
-    \_ref_typespec: (work@tb.i)
-      |vpiParent:
-      \_logic_net: (work@tb.i), line:2:9, endln:2:10
-      |vpiFullName:work@tb.i
-      |vpiActual:
-      \_logic_typespec: , line:2:3, endln:2:8
-    |vpiName:i
-    |vpiFullName:work@tb.i
-  |vpiNet:
-  \_logic_net: (work@tb.o), line:2:12, endln:2:13
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-    |vpiTypespec:
-    \_ref_typespec: (work@tb.o)
-      |vpiParent:
-      \_logic_net: (work@tb.o), line:2:12, endln:2:13
-      |vpiFullName:work@tb.o
-      |vpiActual:
-      \_logic_typespec: , line:2:3, endln:2:8
-    |vpiName:o
-    |vpiFullName:work@tb.o
-  |vpiTopModule:1
-  |vpiProcess:
-  \_initial: , line:4:3, endln:9:6
-  |vpiProcess:
-  \_initial: , line:11:3, endln:17:6
-  |vpiModule:
-  \_module_inst: work@dut (work@tb.dut1), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:19:3, endln:19:17
-    |vpiParent:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-    |vpiName:dut1
-    |vpiFullName:work@tb.dut1
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v
-    |vpiDefLineNo:1
-    |vpiNet:
-    \_logic_net: (work@tb.dut1.i), line:4:8, endln:4:9
-      |vpiParent:
-      \_module_inst: work@dut (work@tb.dut1), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:19:3, endln:19:17
-      |vpiTypespec:
-      \_ref_typespec: (work@tb.dut1.i)
-        |vpiParent:
-        \_logic_net: (work@tb.dut1.i), line:4:8, endln:4:9
-        |vpiFullName:work@tb.dut1.i
-        |vpiActual:
-        \_logic_typespec: , line:4:3, endln:4:7
-      |vpiName:i
-      |vpiFullName:work@tb.dut1.i
-      |vpiNetType:1
-    |vpiNet:
-    \_logic_net: (work@tb.dut1.o), line:5:7, endln:5:8
-      |vpiParent:
-      \_module_inst: work@dut (work@tb.dut1), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:19:3, endln:19:17
-      |vpiTypespec:
-      \_ref_typespec: (work@tb.dut1.o)
-        |vpiParent:
-        \_logic_net: (work@tb.dut1.o), line:5:7, endln:5:8
-        |vpiFullName:work@tb.dut1.o
-        |vpiActual:
-        \_logic_typespec: , line:5:3, endln:5:6
-      |vpiName:o
-      |vpiFullName:work@tb.dut1.o
-      |vpiNetType:48
-    |vpiInstance:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-    |vpiPort:
-    \_port: (i), line:1:13, endln:1:14
-      |vpiParent:
-      \_module_inst: work@dut (work@tb.dut1), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:19:3, endln:19:17
-      |vpiName:i
-      |vpiDirection:1
-      |vpiHighConn:
-      \_ref_obj: (work@tb.i), line:19:12, endln:19:13
-        |vpiParent:
-        \_port: (i), line:1:13, endln:1:14
-        |vpiName:i
-        |vpiFullName:work@tb.i
-        |vpiActual:
-        \_logic_net: (work@tb.i), line:2:9, endln:2:10
-      |vpiLowConn:
-      \_ref_obj: (work@tb.dut1.i), line:1:13, endln:1:14
-        |vpiParent:
-        \_port: (i), line:1:13, endln:1:14
-        |vpiName:i
-        |vpiFullName:work@tb.dut1.i
-        |vpiActual:
-        \_logic_net: (work@tb.dut1.i), line:4:8, endln:4:9
-      |vpiTypedef:
-      \_ref_typespec: (work@tb.dut1.i)
-        |vpiParent:
-        \_port: (i), line:1:13, endln:1:14
-        |vpiFullName:work@tb.dut1.i
-        |vpiActual:
-        \_logic_typespec: , line:2:9, endln:2:9
-    |vpiPort:
-    \_port: (o), line:1:16, endln:1:17
-      |vpiParent:
-      \_module_inst: work@dut (work@tb.dut1), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:19:3, endln:19:17
-      |vpiName:o
-      |vpiDirection:2
-      |vpiHighConn:
-      \_ref_obj: (work@tb.o), line:19:14, endln:19:15
-        |vpiParent:
-        \_port: (o), line:1:16, endln:1:17
-        |vpiName:o
-        |vpiFullName:work@tb.o
-        |vpiActual:
-        \_logic_net: (work@tb.o), line:2:12, endln:2:13
-      |vpiLowConn:
-      \_ref_obj: (work@tb.dut1.o), line:1:16, endln:1:17
-        |vpiParent:
-        \_port: (o), line:1:16, endln:1:17
-        |vpiName:o
-        |vpiFullName:work@tb.dut1.o
-        |vpiActual:
-        \_logic_net: (work@tb.dut1.o), line:5:7, endln:5:8
-      |vpiTypedef:
-      \_ref_typespec: (work@tb.dut1.o)
-        |vpiParent:
-        \_port: (o), line:1:16, endln:1:17
-        |vpiFullName:work@tb.dut1.o
-        |vpiActual:
-        \_logic_typespec: , line:3:10, endln:3:10
-    |vpiContAssign:
-    \_cont_assign: , line:6:10, endln:6:15
 \_weaklyReferenced:
-\_logic_typespec: , line:2:3, endln:2:8
-  |vpiParent:
-  \_logic_net: (work@tb.o), line:2:12, endln:2:13
-\_logic_typespec: , line:2:9, endln:2:9
-\_logic_typespec: , line:3:10, endln:3:10
-\_logic_typespec: , line:4:3, endln:4:7
-  |vpiParent:
-  \_logic_net: (work@tb.dut1.i), line:4:8, endln:4:9
-\_logic_typespec: , line:5:3, endln:5:6
 \_logic_typespec: , line:2:9, endln:2:9
 \_logic_typespec: , line:3:10, endln:3:10
 ===================
@@ -542,7 +390,7 @@ design: (work@tb)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v:7:5: Non synthesizable construct, $monitor

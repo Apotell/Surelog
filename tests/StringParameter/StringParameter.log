@@ -5,46 +5,28 @@
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/StringParameter/dut.sv:8:1: Compile module "work@parameter_module".
 [INF:CP0303] ${SURELOG_DIR}/tests/StringParameter/dut.sv:1:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/StringParameter/dut.sv:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               6
+constant                                               2
 design                                                 1
-module_inst                                            6
-param_assign                                           4
-parameter                                              4
+module_inst                                            2
+param_assign                                           2
+parameter                                              2
 ref_module                                             1
-ref_typespec                                           8
-string_typespec                                        4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               6
-design                                                 1
-module_inst                                            6
-param_assign                                           4
-parameter                                              4
-ref_module                                             1
-ref_typespec                                           8
-string_typespec                                        4
+ref_typespec                                           4
+string_typespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@parameter_module
   |vpiParameter:
   \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:25
@@ -120,7 +102,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
@@ -131,112 +113,15 @@ design: (work@top)
     |vpiDefName:work@parameter_module
     |vpiActual:
     \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@parameter_module (work@top.test_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:2:9, endln:5:26
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
-    |vpiName:test_module
-    |vpiFullName:work@top.test_module
-    |vpiParameter:
-    \_parameter: (work@top.test_module.FIRSTPARAMETER), line:9:11, endln:9:25
-      |vpiParent:
-      \_module_inst: work@parameter_module (work@top.test_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:2:9, endln:5:26
-      |STRING:FIRSTVALUE
-      |vpiTypespec:
-      \_ref_typespec: (work@top.test_module.FIRSTPARAMETER)
-        |vpiParent:
-        \_parameter: (work@top.test_module.FIRSTPARAMETER), line:9:11, endln:9:25
-        |vpiFullName:work@top.test_module.FIRSTPARAMETER
-        |vpiActual:
-        \_string_typespec: 
-      |vpiName:FIRSTPARAMETER
-      |vpiFullName:work@top.test_module.FIRSTPARAMETER
-    |vpiParameter:
-    \_parameter: (work@top.test_module.SECONDPARAMETER), line:10:11, endln:10:26
-      |vpiParent:
-      \_module_inst: work@parameter_module (work@top.test_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:2:9, endln:5:26
-      |STRING:SECONDVALUE
-      |vpiTypespec:
-      \_ref_typespec: (work@top.test_module.SECONDPARAMETER)
-        |vpiParent:
-        \_parameter: (work@top.test_module.SECONDPARAMETER), line:10:11, endln:10:26
-        |vpiFullName:work@top.test_module.SECONDPARAMETER
-        |vpiActual:
-        \_string_typespec: 
-      |vpiName:SECONDPARAMETER
-      |vpiFullName:work@top.test_module.SECONDPARAMETER
-    |vpiParamAssign:
-    \_param_assign: , line:9:11, endln:9:40
-      |vpiParent:
-      \_module_inst: work@parameter_module (work@top.test_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:2:9, endln:5:26
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:9:28, endln:9:40
-        |vpiParent:
-        \_param_assign: , line:9:11, endln:9:40
-        |vpiDecompile:TOPFIRSTVALUE
-        |vpiSize:104
-        |STRING:TOPFIRSTVALUE
-        |vpiTypespec:
-        \_ref_typespec: (work@top.test_module)
-          |vpiParent:
-          \_constant: , line:9:28, endln:9:40
-          |vpiFullName:work@top.test_module
-          |vpiActual:
-          \_string_typespec: 
-        |vpiConstType:6
-      |vpiLhs:
-      \_parameter: (work@top.test_module.FIRSTPARAMETER), line:9:11, endln:9:25
-    |vpiParamAssign:
-    \_param_assign: , line:10:11, endln:10:42
-      |vpiParent:
-      \_module_inst: work@parameter_module (work@top.test_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:2:9, endln:5:26
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:10:29, endln:10:42
-        |vpiParent:
-        \_param_assign: , line:10:11, endln:10:42
-        |vpiDecompile:TOPSECONDVALUE
-        |vpiSize:112
-        |STRING:TOPSECONDVALUE
-        |vpiTypespec:
-        \_ref_typespec: (work@top.test_module)
-          |vpiParent:
-          \_constant: , line:10:29, endln:10:42
-          |vpiFullName:work@top.test_module
-          |vpiActual:
-          \_string_typespec: 
-        |vpiConstType:6
-      |vpiLhs:
-      \_parameter: (work@top.test_module.SECONDPARAMETER), line:10:11, endln:10:26
-    |vpiDefName:work@parameter_module
-    |vpiDefFile:${SURELOG_DIR}/tests/StringParameter/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
 \_weaklyReferenced:
 \_string_typespec: 
 \_string_typespec: 
-\_string_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@top.test_module.FIRSTPARAMETER)
-\_string_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@top.test_module.SECONDPARAMETER)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/StringParameter/dut.sv | ${SURELOG_DIR}/build/regression/StringParameter/roundtrip/dut_000.sv | 4 | 11 |

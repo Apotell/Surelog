@@ -244,67 +244,41 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:8:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:11:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:8:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:11:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:11:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 5.
-[NTE:EL0511] Nb leaf instances: 4.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              16
+constant                                               3
 design                                                 1
-int_typespec                                           7
+hier_path                                              1
+int_typespec                                           2
 logic_net                                              1
-logic_typespec                                         4
-module_inst                                           15
-package                                                2
-param_assign                                           7
-parameter                                              7
-port                                                   2
-range                                                  2
+logic_typespec                                         2
+module_inst                                            2
+operation                                              1
+package                                                1
+param_assign                                           2
+parameter                                              2
+port                                                   1
+range                                                  1
 ref_module                                             4
-ref_obj                                                2
-ref_typespec                                          22
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                              16
-design                                                 1
-int_typespec                                           7
-logic_net                                              1
-logic_typespec                                         4
-module_inst                                           15
-package                                                2
-param_assign                                           7
-parameter                                              7
-port                                                   3
-range                                                  2
-ref_module                                             4
-ref_obj                                                3
-ref_typespec                                          23
-struct_net                                             1
-struct_typespec                                        2
-typespec_member                                        4
+ref_obj                                                4
+ref_typespec                                           6
+struct_typespec                                        1
+sys_func_call                                          1
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiTypedef:
@@ -350,62 +324,11 @@ design: (work@top)
       |vpiRefEndLineNo:4
       |vpiRefEndColumnNo:10
   |vpiDefName:pkg
-  |vpiEndLabel:pkg
-|uhdmtopPackages:
-\_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:pkg
-  |vpiFullName:pkg::
-  |vpiTypedef:
-  \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
-    |vpiName:pkg::struct_t
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (x), line:3:16, endln:3:17
-      |vpiParent:
-      \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
-      |vpiName:x
-      |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::struct_t::x)
-        |vpiParent:
-        \_typespec_member: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::pkg::struct_t::x
-        |vpiActual:
-        \_logic_typespec: , line:3:5, endln:3:15
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:15
-    |vpiTypespecMember:
-    \_typespec_member: (z), line:4:16, endln:4:17
-      |vpiParent:
-      \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
-      |vpiName:z
-      |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::struct_t::z)
-        |vpiParent:
-        \_typespec_member: (z), line:4:16, endln:4:17
-        |vpiFullName:pkg::pkg::struct_t::z
-        |vpiActual:
-        \_logic_typespec: , line:4:5, endln:4:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:10
-  |vpiDefName:pkg
-  |vpiTop:1
   |vpiEndLabel:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.Width), line:8:28, endln:8:33
@@ -447,13 +370,12 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |UINT:17
     |vpiTypespec:
     \_ref_typespec: (work@top.SyncWidth)
       |vpiParent:
@@ -470,20 +392,39 @@ design: (work@top)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiRhs:
-    \_constant: , line:12:31, endln:12:47
+    \_sys_func_call: ($bits), line:12:31, endln:12:47
       |vpiParent:
       \_param_assign: , line:12:19, endln:12:47
-      |vpiDecompile:17
-      |vpiSize:64
-      |UINT:17
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
+      |vpiArgument:
+      \_operation: , line:12:37, endln:12:46
         |vpiParent:
-        \_constant: , line:12:31, endln:12:47
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:12:15, endln:12:18
-      |vpiConstType:9
+        \_sys_func_call: ($bits), line:12:31, endln:12:47
+        |vpiOpType:33
+        |vpiOperand:
+        \_ref_obj: (work@top.in), line:12:38, endln:12:40
+          |vpiParent:
+          \_operation: , line:12:37, endln:12:46
+          |vpiName:in
+          |vpiFullName:work@top.in
+          |vpiActual:
+          \_logic_net: (work@top.in), line:11:33, endln:11:35
+        |vpiOperand:
+        \_hier_path: (in.x), line:12:41, endln:12:45
+          |vpiParent:
+          \_operation: , line:12:37, endln:12:46
+          |vpiActual:
+          \_ref_obj: (in), line:12:41, endln:12:43
+            |vpiParent:
+            \_hier_path: (in.x), line:12:41, endln:12:45
+            |vpiName:in
+          |vpiActual:
+          \_ref_obj: (work@top.x), line:12:44, endln:12:45
+            |vpiParent:
+            \_hier_path: (in.x), line:12:41, endln:12:45
+            |vpiName:x
+            |vpiFullName:work@top.x
+          |vpiName:in.x
+      |vpiName:$bits
     |vpiLhs:
     \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
   |vpiDefName:work@top
@@ -493,7 +434,6 @@ design: (work@top)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:in
     |vpiFullName:work@top.in
-    |vpiNetType:1
   |vpiPort:
   \_port: (in), line:11:33, endln:11:35
     |vpiParent:
@@ -547,311 +487,7 @@ design: (work@top)
     |vpiDefName:work@dut
     |vpiActual:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |UINT:17
-    |vpiTypespec:
-    \_ref_typespec: (work@top.SyncWidth)
-      |vpiParent:
-      \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
-      |vpiFullName:work@top.SyncWidth
-      |vpiActual:
-      \_int_typespec: , line:12:15, endln:12:18
-    |vpiSigned:1
-    |vpiLocalParam:1
-    |vpiName:SyncWidth
-    |vpiFullName:work@top.SyncWidth
-  |vpiParamAssign:
-  \_param_assign: , line:12:19, endln:12:47
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiRhs:
-    \_constant: , line:12:31, endln:12:47
-      |vpiParent:
-      \_param_assign: , line:12:19, endln:12:47
-      |vpiDecompile:17
-      |vpiSize:32
-      |UINT:17
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:12:31, endln:12:47
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:12:15, endln:12:18
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_struct_net: (work@top.in), line:11:33, endln:11:35
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.in)
-      |vpiParent:
-      \_struct_net: (work@top.in), line:11:33, endln:11:35
-      |vpiFullName:work@top.in
-      |vpiActual:
-      \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
-    |vpiName:in
-    |vpiFullName:work@top.in
-    |vpiNetType:1
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (in), line:11:33, endln:11:35
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiName:in
-    |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.in), line:11:33, endln:11:35
-      |vpiParent:
-      \_port: (in), line:11:33, endln:11:35
-      |vpiName:in
-      |vpiFullName:work@top.in
-      |vpiActual:
-      \_struct_net: (work@top.in), line:11:33, endln:11:35
-    |vpiTypedef:
-    \_ref_typespec: (work@top.in)
-      |vpiParent:
-      \_port: (in), line:11:33, endln:11:35
-      |vpiFullName:work@top.in
-      |vpiActual:
-      \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-  |vpiModule:
-  \_module_inst: work@dut (work@top.dut1), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:13:4, endln:13:40
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiName:dut1
-    |vpiFullName:work@top.dut1
-    |vpiParameter:
-    \_parameter: (work@top.dut1.Width), line:8:28, endln:8:33
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut1), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:13:4, endln:13:40
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut1.Width)
-        |vpiParent:
-        \_parameter: (work@top.dut1.Width), line:8:28, endln:8:33
-        |vpiFullName:work@top.dut1.Width
-        |vpiActual:
-        \_int_typespec: , line:8:24, endln:8:27
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@top.dut1.Width
-    |vpiParamAssign:
-    \_param_assign: , line:8:28, endln:8:37
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut1), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:13:4, endln:13:40
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:8:36, endln:8:37
-        |vpiParent:
-        \_param_assign: , line:8:28, endln:8:37
-        |vpiDecompile:8
-        |vpiSize:32
-        |UINT:8
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut1)
-          |vpiParent:
-          \_constant: , line:8:36, endln:8:37
-          |vpiFullName:work@top.dut1
-          |vpiActual:
-          \_int_typespec: , line:8:24, endln:8:27
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut1.Width), line:8:28, endln:8:33
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-  |vpiModule:
-  \_module_inst: work@dut (work@top.dut2), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:14:4, endln:14:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiName:dut2
-    |vpiFullName:work@top.dut2
-    |vpiParameter:
-    \_parameter: (work@top.dut2.Width), line:8:28, endln:8:33
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut2), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:14:4, endln:14:38
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut2.Width)
-        |vpiParent:
-        \_parameter: (work@top.dut2.Width), line:8:28, endln:8:33
-        |vpiFullName:work@top.dut2.Width
-        |vpiActual:
-        \_int_typespec: , line:8:24, endln:8:27
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@top.dut2.Width
-    |vpiParamAssign:
-    \_param_assign: , line:8:28, endln:8:37
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut2), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:14:4, endln:14:38
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:8:36, endln:8:37
-        |vpiParent:
-        \_param_assign: , line:8:28, endln:8:37
-        |vpiDecompile:9
-        |vpiSize:32
-        |UINT:9
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut2)
-          |vpiParent:
-          \_constant: , line:8:36, endln:8:37
-          |vpiFullName:work@top.dut2
-          |vpiActual:
-          \_int_typespec: , line:8:24, endln:8:27
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut2.Width), line:8:28, endln:8:33
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-  |vpiModule:
-  \_module_inst: work@dut (work@top.dut3), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:15:4, endln:15:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiName:dut3
-    |vpiFullName:work@top.dut3
-    |vpiParameter:
-    \_parameter: (work@top.dut3.Width), line:8:28, endln:8:33
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut3), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:15:4, endln:15:36
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut3.Width)
-        |vpiParent:
-        \_parameter: (work@top.dut3.Width), line:8:28, endln:8:33
-        |vpiFullName:work@top.dut3.Width
-        |vpiActual:
-        \_int_typespec: , line:8:24, endln:8:27
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@top.dut3.Width
-    |vpiParamAssign:
-    \_param_assign: , line:8:28, endln:8:37
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut3), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:15:4, endln:15:36
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:8:36, endln:8:37
-        |vpiParent:
-        \_param_assign: , line:8:28, endln:8:37
-        |vpiDecompile:9
-        |vpiSize:32
-        |UINT:9
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut3)
-          |vpiParent:
-          \_constant: , line:8:36, endln:8:37
-          |vpiFullName:work@top.dut3
-          |vpiActual:
-          \_int_typespec: , line:8:24, endln:8:27
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut3.Width), line:8:28, endln:8:33
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-  |vpiModule:
-  \_module_inst: work@dut (work@top.dut4), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:16:4, endln:16:43
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
-    |vpiName:dut4
-    |vpiFullName:work@top.dut4
-    |vpiParameter:
-    \_parameter: (work@top.dut4.Width), line:8:28, endln:8:33
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut4), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:16:4, endln:16:43
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.dut4.Width)
-        |vpiParent:
-        \_parameter: (work@top.dut4.Width), line:8:28, endln:8:33
-        |vpiFullName:work@top.dut4.Width
-        |vpiActual:
-        \_int_typespec: , line:8:24, endln:8:27
-      |vpiSigned:1
-      |vpiName:Width
-      |vpiFullName:work@top.dut4.Width
-    |vpiParamAssign:
-    \_param_assign: , line:8:28, endln:8:37
-      |vpiParent:
-      \_module_inst: work@dut (work@top.dut4), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:16:4, endln:16:43
-      |vpiOverriden:1
-      |vpiRhs:
-      \_constant: , line:8:36, endln:8:37
-        |vpiParent:
-        \_param_assign: , line:8:28, endln:8:37
-        |vpiDecompile:17
-        |vpiSize:32
-        |UINT:17
-        |vpiTypespec:
-        \_ref_typespec: (work@top.dut4)
-          |vpiParent:
-          \_constant: , line:8:36, endln:8:37
-          |vpiFullName:work@top.dut4
-          |vpiActual:
-          \_int_typespec: , line:8:24, endln:8:27
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.dut4.Width), line:8:28, endln:8:33
-    |vpiDefName:work@dut
-    |vpiDefFile:${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-    |vpiDefLineNo:8
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
 \_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:15
-  |vpiParent:
-  \_typespec_member: (x), line:3:16, endln:3:17
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
-  |vpiRange:
-  \_range: , line:3:10, endln:3:15
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:15
-    |vpiLeftRange:
-    \_constant: , line:3:11, endln:3:12
-      |vpiParent:
-      \_range: , line:3:10, endln:3:15
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:13, endln:3:14
-      |vpiParent:
-      \_range: , line:3:10, endln:3:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:5, endln:4:10
-  |vpiParent:
-  \_typespec_member: (z), line:4:16, endln:4:17
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
 \_logic_typespec: , line:3:5, endln:3:15
   |vpiParent:
   \_typespec_member: (x), line:3:16, endln:3:17
@@ -890,33 +526,13 @@ design: (work@top)
   |vpiParent:
   \_parameter: (work@top.SyncWidth), line:12:19, endln:12:28
   |vpiSigned:1
-\_int_typespec: , line:12:15, endln:12:18
-  |vpiParent:
-  \_ref_typespec: (work@top.SyncWidth)
-  |vpiSigned:1
-\_int_typespec: , line:8:24, endln:8:27
-  |vpiParent:
-  \_ref_typespec: (work@top.dut1.Width)
-  |vpiSigned:1
-\_int_typespec: , line:8:24, endln:8:27
-  |vpiParent:
-  \_ref_typespec: (work@top.dut2.Width)
-  |vpiSigned:1
-\_int_typespec: , line:8:24, endln:8:27
-  |vpiParent:
-  \_ref_typespec: (work@top.dut3.Width)
-  |vpiSigned:1
-\_int_typespec: , line:8:24, endln:8:27
-  |vpiParent:
-  \_ref_typespec: (work@top.dut4.Width)
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 3
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitsHierPath/dut.sv | ${SURELOG_DIR}/build/regression/BitsHierPath/roundtrip/dut_000.sv | 8 | 17 |
+[roundtrip]: ${SURELOG_DIR}/tests/BitsHierPath/dut.sv | ${SURELOG_DIR}/build/regression/BitsHierPath/roundtrip/dut_000.sv | 7 | 17 |
 ============================== End RoundTrip Results ==============================

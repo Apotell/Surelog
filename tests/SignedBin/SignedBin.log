@@ -60,52 +60,31 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedBin/dut.sv:7:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedBin/dut.sv:1:1: Compile module "work@prim_subreg".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/SignedBin/dut.sv:7:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 2.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               6
+constant                                               2
 design                                                 1
-int_typespec                                           3
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            5
-operation                                              4
-port                                                   3
+int_typespec                                           1
+logic_net                                              1
+logic_typespec                                         1
+module_inst                                            2
+operation                                              2
+port                                                   2
 ref_module                                             1
-ref_obj                                                2
-ref_typespec                                           6
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-constant                                               6
-design                                                 1
-int_typespec                                           3
-logic_net                                              2
-logic_typespec                                         3
-module_inst                                            5
-operation                                              4
-port                                                   4
-ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           7
+ref_obj                                                1
+ref_typespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedBin/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SignedBin/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SignedBin/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
@@ -152,7 +131,7 @@ design: (work@dut)
 |uhdmallModules:
 \_module_inst: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@prim_subreg
   |vpiDefName:work@prim_subreg
   |vpiNet:
@@ -183,115 +162,16 @@ design: (work@dut)
       |vpiFullName:work@prim_subreg.test
       |vpiActual:
       \_logic_typespec: , line:2:7, endln:2:12
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:work@dut
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@prim_subreg (work@dut.s), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:9:1, endln:9:36
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
-    |vpiName:s
-    |vpiFullName:work@dut.s
-    |vpiDefName:work@prim_subreg
-    |vpiDefFile:${SURELOG_DIR}/tests/SignedBin/dut.sv
-    |vpiDefLineNo:1
-    |vpiNet:
-    \_logic_net: (work@dut.s.test), line:2:13, endln:2:17
-      |vpiParent:
-      \_module_inst: work@prim_subreg (work@dut.s), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:9:1, endln:9:36
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.s.test)
-        |vpiParent:
-        \_logic_net: (work@dut.s.test), line:2:13, endln:2:17
-        |vpiFullName:work@dut.s.test
-        |vpiActual:
-        \_logic_typespec: , line:2:7, endln:2:12
-      |vpiName:test
-      |vpiFullName:work@dut.s.test
-      |vpiNetType:36
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
-    |vpiPort:
-    \_port: (test), line:2:13, endln:2:17
-      |vpiParent:
-      \_module_inst: work@prim_subreg (work@dut.s), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:9:1, endln:9:36
-      |vpiName:test
-      |vpiDirection:1
-      |vpiHighConn:
-      \_constant: , line:9:21, endln:9:33
-        |vpiParent:
-        \_port: (test), line:2:13, endln:2:17
-        |vpiDecompile:000000000000000000000000
-        |vpiSize:24
-        |BIN:000000000000000000000000
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.s.test)
-          |vpiParent:
-          \_constant: , line:9:21, endln:9:33
-          |vpiFullName:work@dut.s.test
-          |vpiActual:
-          \_int_typespec: 
-        |vpiConstType:3
-      |vpiLowConn:
-      \_ref_obj: (work@dut.s.test), line:9:16, endln:9:20
-        |vpiParent:
-        \_port: (test), line:2:13, endln:2:17
-        |vpiName:test
-        |vpiFullName:work@dut.s.test
-        |vpiActual:
-        \_logic_net: (work@dut.s.test), line:2:13, endln:2:17
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.s.test)
-        |vpiParent:
-        \_port: (test), line:2:13, endln:2:17
-        |vpiFullName:work@dut.s.test
-        |vpiActual:
-        \_logic_typespec: , line:2:7, endln:2:12
-      |vpiInstance:
-      \_module_inst: work@prim_subreg (work@dut.s), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:9:1, endln:9:36
 \_weaklyReferenced:
 \_int_typespec: 
   |vpiSigned:1
-\_port: (test), line:2:13, endln:2:17
-  |vpiParent:
-  \_module_inst: work@prim_subreg (work@dut.s), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:9:1, endln:9:36
-  |vpiName:test
-  |vpiDirection:1
-  |vpiHighConn:
-  \_constant: , line:9:21, endln:9:33
-  |vpiLowConn:
-  \_ref_obj: (work@dut.s.test), line:9:16, endln:9:20
-    |vpiParent:
-    \_port: (test), line:2:13, endln:2:17
-    |vpiName:test
-    |vpiFullName:work@dut.s.test
-    |vpiActual:
-    \_logic_net: (work@dut.s.test), line:2:13, endln:2:17
-  |vpiTypedef:
-  \_ref_typespec: (work@dut.s.test)
-    |vpiParent:
-    \_port: (test), line:2:13, endln:2:17
-    |vpiFullName:work@dut.s.test
-    |vpiActual:
-    \_logic_typespec: , line:2:7, endln:2:12
-\_logic_typespec: , line:2:7, endln:2:12
-\_logic_typespec: , line:2:7, endln:2:12
-  |vpiParent:
-  \_logic_net: (work@dut.s.test), line:2:13, endln:2:17
-\_int_typespec: 
-  |UINT:1
 \_logic_typespec: , line:2:7, endln:2:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/SignedBin/dut.sv | ${SURELOG_DIR}/build/regression/SignedBin/roundtrip/dut_000.sv | 3 | 10 |

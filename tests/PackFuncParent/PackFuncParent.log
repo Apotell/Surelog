@@ -219,74 +219,40 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:13:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:13:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0503] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:13:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-assignment                                             4
-begin                                                  2
-constant                                              55
+assignment                                             2
+begin                                                  1
+constant                                              23
 cont_assign                                            1
 design                                                 1
-func_call                                              3
-function                                               4
-indexed_part_select                                    4
-io_decl                                                4
-logic_net                                              2
-logic_typespec                                        14
-logic_var                                              8
-module_inst                                            7
-package                                                2
-param_assign                                           6
-parameter                                              6
-port                                                   2
-range                                                 21
-ref_obj                                                9
-ref_typespec                                          18
-return_stmt                                            4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             6
-begin                                                  4
-constant                                              55
-cont_assign                                            2
-design                                                 1
-func_call                                              6
-function                                               8
-indexed_part_select                                    8
-io_decl                                                8
-logic_net                                              2
-logic_typespec                                        14
-logic_var                                             12
-module_inst                                            7
-package                                                2
-param_assign                                           6
-parameter                                              6
-port                                                   3
-range                                                 21
-ref_obj                                               15
-ref_typespec                                          28
-return_stmt                                            8
+func_call                                              2
+function                                               2
+indexed_part_select                                    2
+io_decl                                                2
+logic_net                                              1
+logic_typespec                                         6
+logic_var                                              3
+module_inst                                            1
+package                                                1
+port                                                   1
+range                                                  9
+ref_obj                                                4
+ref_typespec                                           6
+return_stmt                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFuncParent/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackFuncParent/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackFuncParent/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:my_pkg
   |vpiFullName:my_pkg::
   |vpiDefName:my_pkg
@@ -346,7 +312,7 @@ design: (work@top)
     |vpiVariables:
     \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
       |vpiParent:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
+      \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
       |vpiTypespec:
       \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
         |vpiParent:
@@ -390,17 +356,6 @@ design: (work@top)
       |vpiFullName:my_pkg::sbox4_16bit
       |vpiVariables:
       \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-        |vpiParent:
-        \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-        |vpiTypespec:
-        \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
-          |vpiParent:
-          \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-          |vpiFullName:my_pkg::sbox4_16bit::state_out
-          |vpiActual:
-          \_logic_typespec: , line:7:7, endln:7:19
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
       |vpiStmt:
       \_assignment: , line:8:7, endln:8:55
         |vpiParent:
@@ -418,8 +373,6 @@ design: (work@top)
             |vpiName:state_in
             |vpiFullName:my_pkg::sbox4_16bit::state_in
             |vpiDefName:state_in
-            |vpiActual:
-            \_io_decl: (state_in), line:6:61, endln:6:69
             |vpiConstantSelect:1
             |vpiIndexedPartSelectType:1
             |vpiBaseExpr:
@@ -444,207 +397,6 @@ design: (work@top)
           |vpiName:state_out
           |vpiFullName:my_pkg::sbox4_16bit::state_out
           |vpiDefName:state_out
-          |vpiActual:
-          \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-          |vpiConstantSelect:1
-          |vpiIndexedPartSelectType:1
-          |vpiBaseExpr:
-          \_constant: , line:8:17, endln:8:18
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiWidthExpr:
-          \_constant: , line:8:22, endln:8:23
-            |vpiDecompile:8
-            |vpiSize:64
-            |UINT:8
-            |vpiConstType:9
-      |vpiStmt:
-      \_return_stmt: , line:9:7, endln:9:13
-        |vpiParent:
-        \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-        |vpiCondition:
-        \_ref_obj: (my_pkg::sbox4_16bit::state_out), line:9:14, endln:9:23
-          |vpiParent:
-          \_return_stmt: , line:9:7, endln:9:13
-          |vpiName:state_out
-          |vpiFullName:my_pkg::sbox4_16bit::state_out
-          |vpiActual:
-          \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-    |vpiInstance:
-    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-|uhdmtopPackages:
-\_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:my_pkg
-  |vpiFullName:my_pkg::
-  |vpiDefName:my_pkg
-  |vpiTop:1
-  |vpiTaskFunc:
-  \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-    |vpiParent:
-    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-    |vpiName:sbox4_8bit
-    |vpiFullName:my_pkg::sbox4_8bit
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
-      |vpiParent:
-      \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiTypespec:
-      \_ref_typespec: (my_pkg::sbox4_8bit)
-        |vpiParent:
-        \_logic_var: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
-        |vpiFullName:my_pkg::sbox4_8bit
-        |vpiActual:
-        \_logic_typespec: , line:2:23, endln:2:34
-      |vpiFullName:my_pkg::sbox4_8bit
-    |vpiIODecl:
-    \_io_decl: (state_in), line:2:58, endln:2:66
-      |vpiParent:
-      \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiDirection:1
-      |vpiName:state_in
-      |vpiTypedef:
-      \_ref_typespec: (my_pkg::sbox4_8bit::state_in)
-        |vpiParent:
-        \_io_decl: (state_in), line:2:58, endln:2:66
-        |vpiFullName:my_pkg::sbox4_8bit::state_in
-        |vpiActual:
-        \_logic_typespec: , line:2:46, endln:2:51
-    |vpiStmt:
-    \_return_stmt: , line:3:7, endln:3:13
-      |vpiParent:
-      \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiCondition:
-      \_ref_obj: (my_pkg::sbox4_8bit::state_in), line:3:14, endln:3:22
-        |vpiParent:
-        \_return_stmt: , line:3:7, endln:3:13
-        |vpiName:state_in
-        |vpiFullName:my_pkg::sbox4_8bit::state_in
-        |vpiActual:
-        \_io_decl: (state_in), line:2:58, endln:2:66
-    |vpiInstance:
-    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiTaskFunc:
-  \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiParent:
-    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-    |vpiName:sbox4_16bit
-    |vpiFullName:my_pkg::sbox4_16bit
-    |vpiVariables:
-    \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-      |vpiParent:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-      |vpiTypespec:
-      \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
-        |vpiParent:
-        \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-        |vpiActual:
-        \_logic_typespec: , line:7:7, endln:7:19
-      |vpiName:state_out
-      |vpiFullName:my_pkg::sbox4_16bit::state_out
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
-      |vpiParent:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-      |vpiTypespec:
-      \_ref_typespec: (my_pkg::sbox4_16bit)
-        |vpiParent:
-        \_logic_var: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
-        |vpiFullName:my_pkg::sbox4_16bit
-        |vpiActual:
-        \_logic_typespec: , line:6:23, endln:6:35
-      |vpiFullName:my_pkg::sbox4_16bit
-    |vpiIODecl:
-    \_io_decl: (state_in), line:6:61, endln:6:69
-      |vpiParent:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-      |vpiDirection:1
-      |vpiName:state_in
-      |vpiTypedef:
-      \_ref_typespec: (my_pkg::sbox4_16bit::state_in)
-        |vpiParent:
-        \_io_decl: (state_in), line:6:61, endln:6:69
-        |vpiFullName:my_pkg::sbox4_16bit::state_in
-        |vpiActual:
-        \_logic_typespec: , line:6:48, endln:6:53
-    |vpiStmt:
-    \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-      |vpiParent:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-      |vpiFullName:my_pkg::sbox4_16bit
-      |vpiVariables:
-      \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-        |vpiParent:
-        \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-        |vpiTypespec:
-        \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
-          |vpiParent:
-          \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-          |vpiFullName:my_pkg::sbox4_16bit::state_out
-          |vpiActual:
-          \_logic_typespec: , line:7:7, endln:7:19
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-      |vpiStmt:
-      \_assignment: , line:8:7, endln:8:55
-        |vpiParent:
-        \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-          |vpiParent:
-          \_assignment: , line:8:7, endln:8:55
-          |vpiArgument:
-          \_indexed_part_select: state_in (my_pkg::sbox4_16bit::state_in), line:8:47, endln:8:53
-            |vpiParent:
-            \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-            |vpiTypespec:
-            \_ref_typespec: (my_pkg::sbox4_16bit::state_in)
-              |vpiParent:
-              \_indexed_part_select: state_in (my_pkg::sbox4_16bit::state_in), line:8:47, endln:8:53
-              |vpiFullName:my_pkg::sbox4_16bit::state_in
-              |vpiActual:
-              \_logic_typespec: , line:2:46, endln:2:51
-            |vpiName:state_in
-            |vpiFullName:my_pkg::sbox4_16bit::state_in
-            |vpiDefName:state_in
-            |vpiActual:
-            \_io_decl: (state_in), line:6:61, endln:6:69
-            |vpiConstantSelect:1
-            |vpiIndexedPartSelectType:1
-            |vpiBaseExpr:
-            \_constant: , line:8:47, endln:8:48
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiWidthExpr:
-            \_constant: , line:8:52, endln:8:53
-              |vpiDecompile:8
-              |vpiSize:64
-              |UINT:8
-              |vpiConstType:9
-          |vpiName:sbox4_8bit
-          |vpiFunction:
-          \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-        |vpiLhs:
-        \_indexed_part_select: state_out (my_pkg::sbox4_16bit::state_out), line:8:7, endln:8:24
-          |vpiParent:
-          \_assignment: , line:8:7, endln:8:55
-          |vpiName:state_out
-          |vpiFullName:my_pkg::sbox4_16bit::state_out
-          |vpiDefName:state_out
-          |vpiActual:
-          \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
           |vpiConstantSelect:1
           |vpiIndexedPartSelectType:1
           |vpiBaseExpr:
@@ -676,7 +428,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
@@ -722,13 +474,6 @@ design: (work@top)
         |vpiDecompile:16'hABCD
         |vpiSize:16
         |HEX:ABCD
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_constant: , line:14:35, endln:14:43
-          |vpiFullName:work@top
-          |vpiActual:
-          \_logic_typespec: , line:6:48, endln:6:53
         |vpiConstType:5
       |vpiName:my_pkg::sbox4_16bit
       |vpiFunction:
@@ -741,215 +486,7 @@ design: (work@top)
       |vpiFullName:work@top.o
       |vpiActual:
       \_logic_net: (work@top.o), line:13:32, endln:13:33
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:work@top
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiNet:
-  \_logic_net: (work@top.o), line:13:32, endln:13:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_logic_net: (work@top.o), line:13:32, endln:13:33
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_typespec: , line:13:19, endln:13:31
-    |vpiName:o
-    |vpiFullName:work@top.o
-    |vpiNetType:36
-  |vpiTopModule:1
-  |vpiPort:
-  \_port: (o), line:13:32, endln:13:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
-    |vpiName:o
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o), line:13:32, endln:13:33
-      |vpiParent:
-      \_port: (o), line:13:32, endln:13:33
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:13:32, endln:13:33
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:13:32, endln:13:33
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_typespec: , line:13:19, endln:13:31
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
-  |vpiContAssign:
-  \_cont_assign: , line:14:11, endln:14:44
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:13:1, endln:15:10
-    |vpiRhs:
-    \_func_call: (my_pkg::sbox4_16bit), line:14:15, endln:14:21
-      |vpiParent:
-      \_cont_assign: , line:14:11, endln:14:44
-      |vpiArgument:
-      \_constant: , line:14:35, endln:14:43
-      |vpiName:my_pkg::sbox4_16bit
-      |vpiFunction:
-      \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiLhs:
-    \_ref_obj: (work@top.o), line:14:11, endln:14:12
-      |vpiParent:
-      \_cont_assign: , line:14:11, endln:14:44
-      |vpiName:o
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:13:32, endln:13:33
 \_weaklyReferenced:
-\_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-  |vpiParent:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiName:sbox4_8bit
-  |vpiFullName:my_pkg::sbox4_8bit
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
-  |vpiIODecl:
-  \_io_decl: (state_in), line:2:58, endln:2:66
-    |vpiParent:
-    \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (my_pkg::sbox4_8bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:2:58, endln:2:66
-      |vpiFullName:my_pkg::sbox4_8bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:2:46, endln:2:51
-  |vpiStmt:
-  \_return_stmt: , line:3:7, endln:3:13
-    |vpiParent:
-    \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-    |vpiCondition:
-    \_ref_obj: (my_pkg::sbox4_8bit::state_in), line:3:14, endln:3:22
-      |vpiParent:
-      \_return_stmt: , line:3:7, endln:3:13
-      |vpiName:state_in
-      |vpiFullName:my_pkg::sbox4_8bit::state_in
-      |vpiActual:
-      \_io_decl: (state_in), line:2:58, endln:2:66
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-\_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-  |vpiParent:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiName:sbox4_16bit
-  |vpiFullName:my_pkg::sbox4_16bit
-  |vpiVariables:
-  \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-    |vpiParent:
-    \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-    |vpiTypespec:
-    \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
-      |vpiParent:
-      \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-      |vpiFullName:my_pkg::sbox4_16bit::state_out
-      |vpiActual:
-      \_logic_typespec: , line:7:7, endln:7:19
-    |vpiName:state_out
-    |vpiFullName:my_pkg::sbox4_16bit::state_out
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
-  |vpiIODecl:
-  \_io_decl: (state_in), line:6:61, endln:6:69
-    |vpiParent:
-    \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (my_pkg::sbox4_16bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:6:61, endln:6:69
-      |vpiFullName:my_pkg::sbox4_16bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:6:48, endln:6:53
-  |vpiStmt:
-  \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-    |vpiParent:
-    \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiFullName:my_pkg::sbox4_16bit
-    |vpiVariables:
-    \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-    |vpiStmt:
-    \_assignment: , line:8:7, endln:8:55
-      |vpiParent:
-      \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-        |vpiParent:
-        \_assignment: , line:8:7, endln:8:55
-        |vpiArgument:
-        \_indexed_part_select: state_in (my_pkg::sbox4_16bit::state_in), line:8:47, endln:8:53
-          |vpiParent:
-          \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-          |vpiTypespec:
-          \_ref_typespec: (my_pkg::sbox4_16bit::state_in)
-            |vpiParent:
-            \_indexed_part_select: state_in (my_pkg::sbox4_16bit::state_in), line:8:47, endln:8:53
-            |vpiFullName:my_pkg::sbox4_16bit::state_in
-            |vpiActual:
-            \_logic_typespec: , line:2:46, endln:2:51
-          |vpiName:state_in
-          |vpiFullName:my_pkg::sbox4_16bit::state_in
-          |vpiDefName:state_in
-          |vpiActual:
-          \_io_decl: (state_in), line:6:61, endln:6:69
-          |vpiConstantSelect:1
-          |vpiIndexedPartSelectType:1
-          |vpiBaseExpr:
-          \_constant: , line:8:47, endln:8:48
-          |vpiWidthExpr:
-          \_constant: , line:8:52, endln:8:53
-        |vpiName:sbox4_8bit
-        |vpiFunction:
-        \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiLhs:
-      \_indexed_part_select: state_out (my_pkg::sbox4_16bit::state_out), line:8:7, endln:8:24
-        |vpiParent:
-        \_assignment: , line:8:7, endln:8:55
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-        |vpiDefName:state_out
-        |vpiActual:
-        \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-        |vpiConstantSelect:1
-        |vpiIndexedPartSelectType:1
-        |vpiBaseExpr:
-        \_constant: , line:8:17, endln:8:18
-        |vpiWidthExpr:
-        \_constant: , line:8:22, endln:8:23
-    |vpiStmt:
-    \_return_stmt: , line:9:7, endln:9:13
-      |vpiParent:
-      \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-      |vpiCondition:
-      \_ref_obj: (my_pkg::sbox4_16bit::state_out), line:9:14, endln:9:23
-        |vpiParent:
-        \_return_stmt: , line:9:7, endln:9:13
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-        |vpiActual:
-        \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
 \_logic_typespec: , line:2:23, endln:2:34
   |vpiInstance:
   \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
@@ -1061,298 +598,6 @@ design: (work@top)
     \_constant: , line:7:17, endln:7:18
       |vpiParent:
       \_range: , line:7:13, endln:7:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-  |vpiParent:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiName:sbox4_8bit
-  |vpiFullName:my_pkg::sbox4_8bit
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
-  |vpiIODecl:
-  \_io_decl: (state_in), line:2:58, endln:2:66
-    |vpiParent:
-    \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (my_pkg::sbox4_8bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:2:58, endln:2:66
-      |vpiFullName:my_pkg::sbox4_8bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:2:46, endln:2:51
-  |vpiStmt:
-  \_return_stmt: , line:3:7, endln:3:13
-    |vpiParent:
-    \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-    |vpiCondition:
-    \_ref_obj: (my_pkg::sbox4_8bit::state_in), line:3:14, endln:3:22
-      |vpiParent:
-      \_return_stmt: , line:3:7, endln:3:13
-      |vpiName:state_in
-      |vpiFullName:my_pkg::sbox4_8bit::state_in
-      |vpiActual:
-      \_io_decl: (state_in), line:2:58, endln:2:66
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-\_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-  |vpiParent:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiName:sbox4_16bit
-  |vpiFullName:my_pkg::sbox4_16bit
-  |vpiVariables:
-  \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-    |vpiParent:
-    \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-    |vpiTypespec:
-    \_ref_typespec: (my_pkg::sbox4_16bit::state_out)
-      |vpiParent:
-      \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-      |vpiFullName:my_pkg::sbox4_16bit::state_out
-      |vpiActual:
-      \_logic_typespec: , line:7:7, endln:7:19
-    |vpiName:state_out
-    |vpiFullName:my_pkg::sbox4_16bit::state_out
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_logic_var: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
-  |vpiIODecl:
-  \_io_decl: (state_in), line:6:61, endln:6:69
-    |vpiParent:
-    \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiDirection:1
-    |vpiName:state_in
-    |vpiTypedef:
-    \_ref_typespec: (my_pkg::sbox4_16bit::state_in)
-      |vpiParent:
-      \_io_decl: (state_in), line:6:61, endln:6:69
-      |vpiFullName:my_pkg::sbox4_16bit::state_in
-      |vpiActual:
-      \_logic_typespec: , line:6:48, endln:6:53
-  |vpiStmt:
-  \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-    |vpiParent:
-    \_function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-    |vpiFullName:my_pkg::sbox4_16bit
-    |vpiVariables:
-    \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-    |vpiStmt:
-    \_assignment: , line:8:7, endln:8:55
-      |vpiParent:
-      \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-        |vpiParent:
-        \_assignment: , line:8:7, endln:8:55
-        |vpiArgument:
-        \_indexed_part_select: state_in (my_pkg::sbox4_16bit::state_in), line:8:47, endln:8:53
-          |vpiParent:
-          \_func_call: (sbox4_8bit), line:8:27, endln:8:55
-          |vpiName:state_in
-          |vpiFullName:my_pkg::sbox4_16bit::state_in
-          |vpiDefName:state_in
-          |vpiActual:
-          \_io_decl: (state_in), line:6:61, endln:6:69
-          |vpiConstantSelect:1
-          |vpiIndexedPartSelectType:1
-          |vpiBaseExpr:
-          \_constant: , line:8:47, endln:8:48
-          |vpiWidthExpr:
-          \_constant: , line:8:52, endln:8:53
-        |vpiName:sbox4_8bit
-        |vpiFunction:
-        \_function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiLhs:
-      \_indexed_part_select: state_out (my_pkg::sbox4_16bit::state_out), line:8:7, endln:8:24
-        |vpiParent:
-        \_assignment: , line:8:7, endln:8:55
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-        |vpiDefName:state_out
-        |vpiActual:
-        \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-        |vpiConstantSelect:1
-        |vpiIndexedPartSelectType:1
-        |vpiBaseExpr:
-        \_constant: , line:8:17, endln:8:18
-        |vpiWidthExpr:
-        \_constant: , line:8:22, endln:8:23
-    |vpiStmt:
-    \_return_stmt: , line:9:7, endln:9:13
-      |vpiParent:
-      \_begin: (my_pkg::sbox4_16bit), line:8:7, endln:8:56
-      |vpiCondition:
-      \_ref_obj: (my_pkg::sbox4_16bit::state_out), line:9:14, endln:9:23
-        |vpiParent:
-        \_return_stmt: , line:9:7, endln:9:13
-        |vpiName:state_out
-        |vpiFullName:my_pkg::sbox4_16bit::state_out
-        |vpiActual:
-        \_logic_var: (my_pkg::sbox4_16bit::state_out), line:7:20, endln:7:29
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-\_logic_typespec: , line:2:23, endln:2:34
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:2:29, endln:2:34
-    |vpiParent:
-    \_logic_typespec: , line:2:23, endln:2:34
-    |vpiLeftRange:
-    \_constant: , line:2:30, endln:2:31
-      |vpiParent:
-      \_range: , line:2:29, endln:2:34
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:32, endln:2:33
-      |vpiParent:
-      \_range: , line:2:29, endln:2:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:46, endln:2:51
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:2:52, endln:2:57
-    |vpiParent:
-    \_logic_typespec: , line:2:46, endln:2:51
-    |vpiLeftRange:
-    \_constant: , line:2:53, endln:2:54
-      |vpiParent:
-      \_range: , line:2:52, endln:2:57
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:55, endln:2:56
-      |vpiParent:
-      \_range: , line:2:52, endln:2:57
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:23, endln:6:35
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:6:29, endln:6:35
-    |vpiParent:
-    \_logic_typespec: , line:6:23, endln:6:35
-    |vpiLeftRange:
-    \_constant: , line:6:30, endln:6:32
-      |vpiParent:
-      \_range: , line:6:29, endln:6:35
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:33, endln:6:34
-      |vpiParent:
-      \_range: , line:6:29, endln:6:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:48, endln:6:53
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:6:54, endln:6:60
-    |vpiParent:
-    \_logic_typespec: , line:6:48, endln:6:53
-    |vpiLeftRange:
-    \_constant: , line:6:55, endln:6:57
-      |vpiParent:
-      \_range: , line:6:54, endln:6:60
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:58, endln:6:59
-      |vpiParent:
-      \_range: , line:6:54, endln:6:60
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:7:7, endln:7:19
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:7:13, endln:7:19
-    |vpiParent:
-    \_logic_typespec: , line:7:7, endln:7:19
-    |vpiLeftRange:
-    \_constant: , line:7:14, endln:7:16
-      |vpiParent:
-      \_range: , line:7:13, endln:7:19
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:17, endln:7:18
-      |vpiParent:
-      \_range: , line:7:13, endln:7:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:13:19, endln:13:31
-  |vpiRange:
-  \_range: , line:13:25, endln:13:31
-    |vpiParent:
-    \_logic_typespec: , line:13:19, endln:13:31
-    |vpiLeftRange:
-    \_constant: , line:13:26, endln:13:28
-      |vpiParent:
-      \_range: , line:13:25, endln:13:31
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:29, endln:13:30
-      |vpiParent:
-      \_range: , line:13:25, endln:13:31
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:13:19, endln:13:31
-  |vpiRange:
-  \_range: , line:13:25, endln:13:31
-    |vpiParent:
-    \_logic_typespec: , line:13:19, endln:13:31
-    |vpiLeftRange:
-    \_constant: , line:13:26, endln:13:28
-      |vpiParent:
-      \_range: , line:13:25, endln:13:31
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:29, endln:13:30
-      |vpiParent:
-      \_range: , line:13:25, endln:13:31
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
@@ -1383,7 +628,7 @@ design: (work@top)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackFuncParent/dut.sv | ${SURELOG_DIR}/build/regression/PackFuncParent/roundtrip/dut_000.sv | 5 | 15 |

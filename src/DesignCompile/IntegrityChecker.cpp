@@ -755,6 +755,40 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+  if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
+    bool reportError = false;
+    if ((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
+        (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
+        (any_cast<uhdm::UnionTypespec>(t) != nullptr)) {
+      if ((t->getStartLine() == 0) || (t->getEndLine() == 0) ||
+          (t->getStartColumn() == 0) || (t->getEndColumn() == 0)) {
+        reportError = true;
+      }
+    } else if ((t->getStartLine() != 0) || (t->getEndLine() != 0) ||
+               (t->getStartColumn() != 0) || (t->getEndColumn() != 0)) {
+      reportError = true;
+    }
+    if (reportError) {
+      SymbolTable* const symbolTable = m_session->getSymbolTable();
+      FileSystem* const fileSystem = m_session->getFileSystem();
+      ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                   object->getStartLine(), object->getStartColumn(),
+                   symbolTable->registerSymbol(asSymbol(object)));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
+    }
+  }
+}
+
+void IntegrityChecker::enterAny2(const uhdm::Any* object,
+                                 uint32_t vpiRelation) {
   if (isBuiltInPackageOnStack(object)) return;
   if (isUVMMember(object)) return;
 

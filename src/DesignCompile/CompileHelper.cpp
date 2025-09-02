@@ -547,7 +547,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
 
       uhdm::StringTypespec* st = s.make<uhdm::StringTypespec>();
       st->setParent(pstmt);
-      fC->populateCoreMembers(data_type, data_type, st);
 
       refTypespec->setActual(st);
       typespecTypespec->setTypedefAlias(refTypespec);
@@ -675,7 +674,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       if (uhdm::Typespec* ts =
               compileTypespec(scope, fC, enum_base_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
-        fC->populateCoreMembers(enum_base_type, type_name, ts, true);
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
             (valuedcomponenti_cast<Package>(scope))) {
           ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
@@ -836,7 +834,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
       typedefTypespec->setName(fullName);
       typedefTypespec->setParent(pstmt);
-      fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+      NodeId tdId = type_name ? type_name : stype;
+      fC->populateCoreMembers(tdId, tdId, typedefTypespec);
 
       if (uhdm::Typespec* tps =
               compileTypespec(scope, fC, data_type, Variable_dimension,
@@ -2826,7 +2825,6 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
     tps = s.make<uhdm::ModuleTypespec>();
     tps->setName(typespecName);
     tps->setParent(parentScope);
-    fC->populateCoreMembers(typespecId, typespecId, tps);
   }
 
   NodeId hierInstId = fC->sl_collect(id, VObjectType::paHierarchical_instance);
@@ -4531,7 +4529,6 @@ bool CompileHelper::compileParameterDeclaration(
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
                 its->setSigned(false);
                 its->setParent(pany);
-                fC->populateCoreMembers(nodeId, nodeId, its);
                 const std::string_view v = c->getValue();
                 if (v.front() == '-') {
                   its->setSigned(true);
@@ -4552,7 +4549,6 @@ bool CompileHelper::compileParameterDeclaration(
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
                 its->setSigned(false);
                 its->setParent(pany);
-                fC->populateCoreMembers(nodeId, nodeId, its);
                 if (c->getSize() != -1) {  // Unsized
                   uhdm::Range* r = s.make<uhdm::Range>();
                   uhdm::Constant* l = s.make<uhdm::Constant>();
@@ -4588,7 +4584,6 @@ bool CompileHelper::compileParameterDeclaration(
               }
               case vpiUIntConst: {
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
-                fC->populateCoreMembers(nodeId, nodeId, its);
                 its->setParent(pany);
                 its->setSigned(false);
                 ts = its;

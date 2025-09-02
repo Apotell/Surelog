@@ -701,8 +701,6 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           uhdm::ArrayTypespec* array_ts = s.make<uhdm::ArrayTypespec>();
           array_ts->setRanges(ranges);
           array_ts->setParent(dest_port);
-          fC->populateCoreMembers(unpackedDimensions, unpackedDimensions,
-                                  array_ts);
           for (uhdm::Range* r : *ranges) {
             r->setParent(array_ts);
             const uhdm::Expr* rrange = r->getRightExpr();
@@ -885,11 +883,6 @@ void UhdmWriter::writeNets(DesignComponent* mod,
               dest_net->setTypespec(rt);
               fC->populateCoreMembers(orig_net->getTypespecId(),
                                       orig_net->getTypespecId(), rt);
-              NodeId dimensions = orig_net->getUnpackedDimension();
-              if (!dimensions) dimensions = orig_net->getPackedDimension();
-              if (dimensions) {
-                fC->populateCoreMembers(InvalidNodeId, dimensions, ts);
-              }
             }
           }
         }

@@ -284,8 +284,6 @@ bool TestbenchElaboration::bindBaseClasses_() {
         fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                    placeHolder->getNodeId(), extends);
         uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-        fCDef->populateCoreMembers(placeHolder->getNodeId(),
-                                   placeHolder->getNodeId(), tps);
         uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
         extends_ts->setParent(extends);
         extends_ts->setActual(tps);

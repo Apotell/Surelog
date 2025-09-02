@@ -522,7 +522,6 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
           tps->setName(fC->SymName(loopVarId));
-          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
           if (ref->getTypespec() == nullptr) {
             uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
@@ -1510,7 +1509,6 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           // Implicit type
           uhdm::LogicTypespec* pts = s.make<uhdm::LogicTypespec>();
           pts->setParent(parent);
-          fC->populateCoreMembers(Data_type, Data_type, pts);
           int32_t size;
           if (uhdm::RangeCollection* ranges =
                   compileRanges(component, fC, Data_type, compileDesign,
@@ -2314,7 +2312,6 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (constructor) {
     uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
     tps->setParent(func);
-    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tps);
 
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
     tpsRef->setParent(func);
@@ -2354,11 +2351,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       // Implicit return type
       ts = s.make<uhdm::LogicTypespec>();
       ts->setParent(func);
-      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, ts);
     } else {  // else void return type
       ts = s.make<uhdm::VoidTypespec>();
       ts->setParent(func);
-      fC->populateCoreMembers(Function_data_type, Function_data_type, ts);
     }
 
     if (ts != nullptr) {
@@ -2747,7 +2742,6 @@ Function* CompileHelper::compileFunctionPrototype(
   if ((ts == nullptr) && Packed_dimension) {
     uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
     lts->setParent(func);  // Need input
-    fC->populateCoreMembers(type, type, lts);
 
     int32_t size;
     uhdm::RangeCollection* ranges =
@@ -2756,8 +2750,6 @@ Function* CompileHelper::compileFunctionPrototype(
     if ((ranges != nullptr) && !ranges->empty()) {
       lts->setRanges(ranges);
       for (uhdm::Range* r : *ranges) r->setParent(lts, true);
-      lts->setEndLine(ranges->back()->getEndLine());
-      lts->setEndColumn(ranges->back()->getEndColumn());
     }
     ts = lts;
   }

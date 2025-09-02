@@ -96,6 +96,8 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
 
   void enterAny(const uhdm::Any* object, uint32_t vpiRelation) final;
 
+  void enterAny2(const uhdm::Any* object, uint32_t vpiRelation);
+
   void enterAliasCollection(const uhdm::Any* object,
                             const uhdm::AliasCollection& objects,
                             uint32_t vpiRelation) final;

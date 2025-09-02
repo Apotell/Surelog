@@ -202,7 +202,6 @@ uhdm::Any* CompileHelper::compileVariable(
             tps->setName(typespecName);
             tps->setParent(pstmt);
             ts = tps;
-            fC->populateCoreMembers(variable, variable, tps);
           }
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(typespecName);
@@ -347,7 +346,6 @@ uhdm::Any* CompileHelper::compileVariable(
           uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
           lts->setSigned(isSigned);
           lts->setParent(var);
-          fC->populateCoreMembers(declarationId, declarationId, lts);
           ts = lts;
         }
 
@@ -988,7 +986,6 @@ Typespec* CompileHelper::compileDatastructureTypespec(
         ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
         ref->setName(typeName);
         ref->setParent(pscope);
-        fC->populateCoreMembers(type, type, ref);
         result = ref;
 
         const FileContent* actualFC = fC;
@@ -1154,14 +1151,12 @@ Typespec* CompileHelper::compileDatastructureTypespec(
       uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
       tps->setName(typeName);
       tps->setParent(pscope);
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
     }
   } else {
     uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
     tps->setName(typeName);
     tps->setParent(pscope);
-    fC->populateCoreMembers(type, type, tps);
     result = tps;
   }
   return result;
@@ -1201,20 +1196,11 @@ IntTypespec* CompileHelper::buildIntTypespec(CompileDesign* compileDesign,
   std::unordered_map<std::string, uhdm::IntTypespec*>::iterator itr =
       m_cache_int_typespec.find(hash);
   */
-  uhdm::IntTypespec* var = nullptr;
   // if (itr == m_cache_int_typespec.end()) {
   uhdm::Serializer& s = compileDesign->getSerializer();
-  var = s.make<uhdm::IntTypespec>();
+  uhdm::IntTypespec* var = s.make<uhdm::IntTypespec>();
   var->setValue(value);
   var->setFile(fileSystem->toPath(fileId));
-  var->setStartLine(line);
-  var->setStartColumn(column);
-  var->setEndLine(eline);
-  var->setEndColumn(ecolumn);
-  //  m_cache_int_typespec.insert(std::make_pair(hash, var));
-  //} else {
-  //  var = (*itr).second;
-  //}
   return var;
 }
 
@@ -1242,48 +1228,41 @@ uhdm::Typespec* CompileHelper::compileBuiltinTypespec(
       }
       uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? sign : type, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_Int: {
       uhdm::IntTypespec* var = s.make<uhdm::IntTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? type : sign, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_Integer: {
       uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? type : sign, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_Byte: {
       uhdm::ByteTypespec* var = s.make<uhdm::ByteTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? type : sign, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_LongInt: {
       uhdm::LongIntTypespec* var = s.make<uhdm::LongIntTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? type : sign, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_Shortint: {
       uhdm::ShortIntTypespec* var = s.make<uhdm::ShortIntTypespec>();
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? type : sign, var);
       result = var;
       break;
     }
     case VObjectType::paIntegerAtomType_Time: {
       uhdm::TimeTypespec* var = s.make<uhdm::TimeTypespec>();
-      fC->populateCoreMembers(type, type, var);
       result = var;
       break;
     }
@@ -1294,31 +1273,26 @@ uhdm::Typespec* CompileHelper::compileBuiltinTypespec(
         isSigned = true;
       }
       var->setSigned(isSigned);
-      fC->populateCoreMembers(type, isSigned ? sign : type, var);
       result = var;
       break;
     }
     case VObjectType::paNonIntType_ShortReal: {
       uhdm::ShortRealTypespec* var = s.make<uhdm::ShortRealTypespec>();
-      fC->populateCoreMembers(type, type, var);
       result = var;
       break;
     }
     case VObjectType::paNonIntType_Real: {
       uhdm::RealTypespec* var = s.make<uhdm::RealTypespec>();
-      fC->populateCoreMembers(type, type, var);
       result = var;
       break;
     }
     case VObjectType::paString_type: {
       uhdm::StringTypespec* tps = s.make<uhdm::StringTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
       break;
     }
     default:
       uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
-      fC->populateCoreMembers(type, type, var);
       result = var;
       break;
   }
@@ -1361,8 +1335,6 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     if ((packedDimensions != nullptr) && !packedDimensions->empty()) {
       lts->setRanges(packedDimensions);
       for (uhdm::Range* r : *packedDimensions) r->setParent(lts, true);
-      lts->setEndLine(packedDimensions->back()->getEndLine());
-      lts->setEndColumn(packedDimensions->back()->getEndColumn());
     }
     ts = lts;
     packedId = InvalidNodeId;
@@ -1377,12 +1349,10 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
     }
-    fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 
     // create packed array
     uhdm::PackedArrayTypespec* tpaps = s.make<uhdm::PackedArrayTypespec>();
     tpaps->setParent(pscope);
-    fC->populateCoreMembers(nodeId, packedId, tpaps);
     uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
     pret->setParent(taps);
     pret->setActual(tpaps);
@@ -1458,7 +1428,6 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
     }
-    fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 
     uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
     ert->setParent(taps);
@@ -1521,7 +1490,6 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   } else if (packedId) {
     uhdm::PackedArrayTypespec* taps = s.make<uhdm::PackedArrayTypespec>();
     taps->setParent(pscope);
-    fC->populateCoreMembers(nodeId, nodeId, taps);
 
     if (ts != nullptr) {
       uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
@@ -1633,7 +1601,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       if (uhdm::Any* res = compileExpression(component, fC, type, compileDesign,
                                              reduce, pstmt, instance)) {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
-        fC->populateCoreMembers(type, type, var);
         result = var;
         if (uhdm::Constant* constant = any_cast<uhdm::Constant*>(res)) {
           var->setValue(constant->getValue());
@@ -1643,7 +1610,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       } else {
         uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
         tps->setParent(pstmt);
-        fC->populateCoreMembers(type, type, tps);
         result = tps;
       }
       break;
@@ -1687,7 +1653,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           tps->setSigned(true);
           result = tps;
         }
-        fC->populateCoreMembers(type, type, result);
       }
       break;
     }
@@ -1701,7 +1666,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
         result = tps;
       }
-      fC->populateCoreMembers(type, type, result);
       break;
     }
     case VObjectType::paPacked_dimension: {
@@ -1714,7 +1678,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
         result = tps;
       }
-      fC->populateCoreMembers(type, type, result);
       break;
     }
     case VObjectType::paExpression: {
@@ -1741,7 +1704,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       } else {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
         var->setValue(StrCat("INT:", fC->SymName(literal)));
-        fC->populateCoreMembers(type, type, var);
         result = var;
       }
       break;
@@ -1799,7 +1761,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             uhdm::ClassTypespec* ref = s.make<uhdm::ClassTypespec>();
             ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
             ref->setName(typeName);
-            fC->populateCoreMembers(type, type, ref);
             result = ref;
             break;
           }
@@ -1835,7 +1796,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         ref->setParent(pstmt);
         ref->setPacked(isPacked);
         ref->setName(typeName);
-        fC->populateCoreMembers(id, id, ref);
         result = ref;
       }
       break;
@@ -1915,7 +1875,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           } else {
             uhdm::VoidTypespec* tps = s.make<uhdm::VoidTypespec>();
             tps->setParent(result);
-            fC->populateCoreMembers(Data_type_or_void, Data_type_or_void, tps);
             member_ts = tps;
           }
 
@@ -1960,15 +1919,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       const std::string_view typeName = fC->SymName(type);
       if (typeName == "logic") {
         uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
-        fC->populateCoreMembers(type, type, var);
         result = var;
       } else if (typeName == "bit") {
         uhdm::BitTypespec* var = s.make<uhdm::BitTypespec>();
-        fC->populateCoreMembers(type, type, var);
         result = var;
       } else if (typeName == "byte") {
         uhdm::ByteTypespec* var = s.make<uhdm::ByteTypespec>();
-        fC->populateCoreMembers(type, type, var);
         result = var;
       } else if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes)) {
         if (uhdm::Any* cast_to =
@@ -1979,11 +1935,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           if (c) {
             uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
             var->setValue(c->getValue());
-            fC->populateCoreMembers(type, type, var);
             result = var;
           } else {
             uhdm::VoidTypespec* tps = s.make<uhdm::VoidTypespec>();
-            fC->populateCoreMembers(type, type, tps);
             result = tps;
           }
         }
@@ -2091,7 +2045,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             tps->setName(typeName);
             tps->setParent(pstmt);
             tps->setClassDefn(cl->getUhdmModel<uhdm::ClassDefn>());
-            fC->populateCoreMembers(type, type, tps);
             result = tps;
           }
         }
@@ -2099,9 +2052,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       if (result == nullptr) {
         result = compileDatastructureTypespec(
             component, fC, type, compileDesign, reduce, instance, "", typeName);
-        if (result) {
-          fC->populateCoreMembers(type, type, result);
-        }
       }
       if ((!result) && component) {
         if (uhdm::AnyCollection* params = component->getParameters()) {
@@ -2133,7 +2083,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             var->setExpr(exp);
             exp->setParent(var, true);
           }
-          fC->populateCoreMembers(type, type, var);
           result = var;
         }
       }
@@ -2147,15 +2096,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     }
     case VObjectType::paConstant_range: {
       uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       if (uhdm::RangeCollection* ranges =
               compileRanges(component, fC, type, compileDesign, reduce, tps,
                             instance, size, false)) {
         if (!ranges->empty()) {
           tps->setRanges(ranges);
           for (uhdm::Range* r : *ranges) r->setParent(tps, true);
-          tps->setEndLine(ranges->back()->getEndLine());
-          tps->setEndColumn(ranges->back()->getEndColumn());
         }
       }
       result = tps;
@@ -2163,13 +2109,11 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     }
     case VObjectType::paEvent_type: {
       uhdm::EventTypespec* tps = s.make<uhdm::EventTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
       break;
     }
     case VObjectType::paNonIntType_RealTime: {
       uhdm::TimeTypespec* tps = s.make<uhdm::TimeTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
       break;
     }
@@ -2206,7 +2150,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
               uhdm::TimeTypespec* tps = s.make<uhdm::TimeTypespec>();
               result = tps;
             }
-            fC->populateCoreMembers(type, type, result);
           }
         } else {
           std::string lineText;
@@ -2226,14 +2169,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     }
     case VObjectType::paData_type_or_implicit: {
       uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
       break;
     }
     case VObjectType::paImplicit_data_type: {
       // Interconnect
       uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       result = tps;
       break;
     }

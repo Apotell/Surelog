@@ -1345,10 +1345,6 @@ void ObjectBinder::enterClassDefn(const uhdm::ClassDefn* object,
       if (uhdm::ClassDefn* base = bdef->getUhdmModel<uhdm::ClassDefn>()) {
         uhdm::Serializer& s = *base->getSerializer();
         uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-        tps->setStartLine(rt->getStartLine());
-        tps->setStartColumn(rt->getStartColumn());
-        tps->setEndLine(rt->getEndLine());
-        tps->setEndColumn(rt->getEndColumn());
         tps->setName(rt->getName());
         tps->setFile(base->getFile());
         tps->setParent(derClsDef);

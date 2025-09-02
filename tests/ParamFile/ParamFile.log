@@ -228,9 +228,12 @@ Operation                                              2
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   3
+PreprocMacroDefinition                                 1
+PreprocMacroInstance                                   1
 RefModule                                              1
 RefObj                                                 6
 RefTypespec                                            4
+SourceFile                                             1
 SysFuncCall                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamFile/slpp_unit/surelog.uhdm ...
@@ -238,6 +241,39 @@ SysFuncCall                                            2
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/ParamFile/dut.sv
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiPreprocMacroDefinition:
+  \_PreprocMacroDefinition: (PARAM_FILE), line:1:1, endln:1:22
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/ParamFile/dut.sv
+    |vpiName:PARAM_FILE
+    |vpiNameStartColumn:9
+    |vpiBodyStartColumn:20
+  |vpiPreprocMacroInstance:
+  \_PreprocMacroInstance: (PARAM_FILE), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:4:29, endln:4:40
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/ParamFile/dut.sv
+    |vpiName:PARAM_FILE
+    |vpiPreprocMacroDefinition:
+    \_PreprocMacroDefinition: (PARAM_FILE), line:1:1, endln:1:22
+    |vpiSectionStartLine:1
+    |vpiSectionStartColumn:20
+    |vpiSectionEndLine:1
+    |vpiSectionEndColumn:22
+    |vpiSourceStartLine:4
+    |vpiSourceStartColumn:29
+    |vpiSourceEndLine:4
+    |vpiSourceEndColumn:31
+    |vpiObject:
+    \_Constant: , line:1:20, endln:1:22
+      |vpiParent:
+      \_ParamAssign: , line:4:14, endln:4:40
+      |vpiDecompile:""
+      |STRING:
+      |vpiConstType:6
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
   |vpiParent:
@@ -256,11 +292,6 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
     |vpiRhs:
     \_Constant: , line:1:20, endln:1:22
-      |vpiParent:
-      \_ParamAssign: , line:4:14, endln:4:40
-      |vpiDecompile:""
-      |STRING:
-      |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@dut.SRAMInitFile), line:4:14, endln:4:40
   |vpiTypedef:

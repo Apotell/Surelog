@@ -80,10 +80,7 @@ ContAssign                                             2
 Design                                                 1
 Module                                                 2
 Operation                                              1
-PreprocMacroDefinition                                 2
-PreprocMacroInstance                                   2
 RefObj                                                 2
-SourceFile                                             1
 SysFuncCall                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PPMacro/slpp_all/surelog.uhdm ...
@@ -91,77 +88,6 @@ SysFuncCall                                            1
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
-|vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
-  |vpiParent:
-  \_Design: (unnamed)
-  |vpiPreprocMacroDefinition:
-  \_PreprocMacroDefinition: (FOO1), line:1:1, endln:1:20
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
-    |vpiName:FOO1
-    |vpiNameStartColumn:9
-    |vpiBodyStartColumn:14
-  |vpiPreprocMacroDefinition:
-  \_PreprocMacroDefinition: (FOO2), line:6:1, endln:6:16
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
-    |vpiName:FOO2
-    |vpiNameStartColumn:9
-    |vpiBodyStartColumn:14
-  |vpiPreprocMacroInstance:
-  \_PreprocMacroInstance: (FOO1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:3:14, endln:3:24
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
-    |vpiName:FOO1
-    |vpiPreprocMacroDefinition:
-    \_PreprocMacroDefinition: (FOO1), line:1:1, endln:1:20
-    |vpiSectionStartLine:1
-    |vpiSectionStartColumn:14
-    |vpiSectionEndLine:1
-    |vpiSectionEndColumn:25
-    |vpiSourceStartLine:3
-    |vpiSourceStartColumn:14
-    |vpiSourceEndLine:3
-    |vpiSourceEndColumn:25
-    |vpiObject:
-    \_SysFuncCall: ($clog2), line:1:14, endln:1:25
-      |vpiParent:
-      \_ContAssign: , line:3:10, endln:3:24
-      |vpiArgument:
-      \_Constant: , line:1:21, endln:1:24
-        |vpiParent:
-        \_SysFuncCall: ($clog2), line:1:14, endln:1:25
-        |vpiDecompile:123
-        |vpiSize:64
-        |UINT:123
-        |vpiConstType:9
-      |vpiName:$clog2
-    |vpiObject:
-    \_Constant: , line:1:21, endln:1:24
-  |vpiPreprocMacroInstance:
-  \_PreprocMacroInstance: (FOO2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:8:14, endln:8:19
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
-    |vpiName:FOO2
-    |vpiPreprocMacroDefinition:
-    \_PreprocMacroDefinition: (FOO2), line:6:1, endln:6:16
-    |vpiSectionStartLine:6
-    |vpiSectionStartColumn:14
-    |vpiSectionEndLine:6
-    |vpiSectionEndColumn:16
-    |vpiSourceStartLine:8
-    |vpiSourceStartColumn:14
-    |vpiSourceEndLine:8
-    |vpiSourceEndColumn:16
-    |vpiObject:
-    \_Constant: , line:6:14, endln:6:16
-      |vpiParent:
-      \_Operation: , line:8:14, endln:8:27
-      |vpiDecompile:42
-      |vpiSize:64
-      |UINT:42
-      |vpiConstType:9
 |vpiAllModules:
 \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
   |vpiParent:
@@ -183,6 +109,17 @@ Design: (unnamed)
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
     |vpiRhs:
     \_SysFuncCall: ($clog2), line:1:14, endln:1:25
+      |vpiParent:
+      \_ContAssign: , line:3:10, endln:3:24
+      |vpiArgument:
+      \_Constant: , line:1:21, endln:1:24
+        |vpiParent:
+        \_SysFuncCall: ($clog2), line:1:14, endln:1:25
+        |vpiDecompile:123
+        |vpiSize:64
+        |UINT:123
+        |vpiConstType:9
+      |vpiName:$clog2
     |vpiLhs:
     \_RefObj: (work@top1.a), line:3:10, endln:3:11
       |vpiParent:
@@ -217,6 +154,12 @@ Design: (unnamed)
       |vpiOpType:24
       |vpiOperand:
       \_Constant: , line:6:14, endln:6:16
+        |vpiParent:
+        \_Operation: , line:8:14, endln:8:27
+        |vpiDecompile:42
+        |vpiSize:64
+        |UINT:42
+        |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:8:23, endln:8:26
         |vpiParent:

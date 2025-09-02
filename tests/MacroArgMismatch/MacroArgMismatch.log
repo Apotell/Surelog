@@ -83,70 +83,21 @@ LogicTypespec                                          1
 Module                                                 1
 Operation                                              2
 Port                                                   1
-PreprocMacroDefinition                                 1
-PreprocMacroInstance                                   1
 RefObj                                                 3
 RefTypespec                                            1
-SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MacroArgMismatch/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
-|vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv
-  |vpiParent:
-  \_Design: (unnamed)
-  |vpiPreprocMacroDefinition:
-  \_PreprocMacroDefinition: (D), line:1:1, endln:1:13
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv
-    |vpiName:D
-    |vpiNameStartColumn:9
-    |vpiBodyStartColumn:11
-  |vpiPreprocMacroInstance:
-  \_PreprocMacroInstance: (D), file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv, line:5:10, endln:5:17
-    |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv
-    |vpiName:D
-    |vpiPreprocMacroDefinition:
-    \_PreprocMacroDefinition: (D), line:1:1, endln:1:13
-    |vpiSectionStartLine:1
-    |vpiSectionStartColumn:11
-    |vpiSectionEndLine:1
-    |vpiSectionEndColumn:17
-    |vpiSourceStartLine:5
-    |vpiSourceStartColumn:10
-    |vpiSourceEndLine:5
-    |vpiSourceEndColumn:17
-    |vpiObject:
-    \_Operation: , line:1:15, endln:1:17
-      |vpiParent:
-      \_Assignment: , line:5:5, endln:5:17
-      |vpiOpType:4
-      |vpiOperand:
-      \_RefObj: (work@test.d), line:1:16, endln:1:17
-        |vpiParent:
-        \_Operation: , line:1:15, endln:1:17
-        |vpiName:d
-        |vpiFullName:work@test.d
-        |vpiActual:
-        \_LogicNet: (work@test.d), line:3:5, endln:3:6
-    |vpiObject:
-    \_RefObj: (work@test.d), line:1:16, endln:1:17
-    |vpiObject:
-    \_DelayControl: , line:1:11, endln:1:13
-      |vpiParent:
-      \_Assignment: , line:5:5, endln:5:17
-      |#1
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv, line:2:1, endln:6:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@test
   |vpiTypedef:
-  \_LogicTypespec: , line:3:1, endln:3:4
+  \_LogicTypespec: 
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/MacroArgMismatch/dut.sv, line:2:1, endln:6:10
   |vpiImportTypespec:
@@ -156,7 +107,7 @@ Design: (unnamed)
     |vpiName:clk
     |vpiFullName:work@test.clk
   |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:4
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@test.d), line:3:5, endln:3:6
     |vpiParent:
@@ -167,7 +118,7 @@ Design: (unnamed)
       \_LogicNet: (work@test.d), line:3:5, endln:3:6
       |vpiFullName:work@test.d
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:4
+      \_LogicTypespec: 
     |vpiName:d
     |vpiFullName:work@test.d
     |vpiNetType:48
@@ -210,6 +161,17 @@ Design: (unnamed)
         |vpiOpType:82
         |vpiRhs:
         \_Operation: , line:1:15, endln:1:17
+          |vpiParent:
+          \_Assignment: , line:5:5, endln:5:17
+          |vpiOpType:4
+          |vpiOperand:
+          \_RefObj: (work@test.d), line:1:16, endln:1:17
+            |vpiParent:
+            \_Operation: , line:1:15, endln:1:17
+            |vpiName:d
+            |vpiFullName:work@test.d
+            |vpiActual:
+            \_LogicNet: (work@test.d), line:3:5, endln:3:6
         |vpiLhs:
         \_RefObj: (work@test.d), line:5:5, endln:5:6
           |vpiParent:
@@ -220,6 +182,9 @@ Design: (unnamed)
           \_LogicNet: (work@test.d), line:3:5, endln:3:6
         |vpiDelayControl:
         \_DelayControl: , line:1:11, endln:1:13
+          |vpiParent:
+          \_Assignment: , line:5:5, endln:5:17
+          |#1
     |vpiAlwaysType:1
 ===================
 [  FATAL] : 0

@@ -168,7 +168,7 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:5:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:2:1: Compile module "work@sub".
-[ERR:UH0703] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:12:14: Internal Error(17) : adding wrong object type (GenVar) in a stmt group!.
+[ERR:UH0703] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:12:14: Internal Error(16) : adding wrong object type (GenVar) in a stmt group!.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  3
@@ -186,17 +186,12 @@ Parameter                                              1
 Port                                                   1
 RefObj                                                 1
 RefTypespec                                            2
-SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
-|vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv
-  |vpiParent:
-  \_Design: (unnamed)
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
   |vpiParent:
@@ -293,15 +288,15 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@sub
   |vpiTypedef:
-  \_LogicTypespec: , line:2:20, endln:2:23
+  \_LogicTypespec: 
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
   |vpiTypedef:
-  \_LogicTypespec: , line:2:20, endln:2:23
+  \_LogicTypespec: 
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:20, endln:2:23
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
     |vpiParent:
@@ -312,12 +307,12 @@ Design: (unnamed)
       \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
       |vpiFullName:work@sub.int_status
       |vpiActual:
-      \_LogicTypespec: , line:2:20, endln:2:23
+      \_LogicTypespec: 
     |vpiName:int_status
     |vpiFullName:work@sub.int_status
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:20, endln:2:23
+  \_LogicTypespec: 
   |vpiDefName:work@sub
   |vpiNet:
   \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
@@ -333,7 +328,7 @@ Design: (unnamed)
       \_Port: (int_status), line:2:24, endln:2:34
       |vpiFullName:work@sub.int_status
       |vpiActual:
-      \_LogicTypespec: , line:2:20, endln:2:23
+      \_LogicTypespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

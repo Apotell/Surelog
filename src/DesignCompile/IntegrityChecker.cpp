@@ -754,7 +754,8 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
   }
 }
 
-void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+void IntegrityChecker::reportInvalidTypespecLocation(
+    const uhdm::Any* object) const {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool reportError = false;
     if ((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
@@ -787,8 +788,7 @@ void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
   }
 }
 
-void IntegrityChecker::enterAny2(const uhdm::Any* object,
-                                 uint32_t vpiRelation) {
+void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
   if (isBuiltInPackageOnStack(object)) return;
   if (isUVMMember(object)) return;
 
@@ -816,6 +816,7 @@ void IntegrityChecker::enterAny2(const uhdm::Any* object,
   reportMissingLocation(object);
   reportInvalidNames(object);
   reportInvalidFile(object);
+  reportInvalidTypespecLocation(object);
 
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();

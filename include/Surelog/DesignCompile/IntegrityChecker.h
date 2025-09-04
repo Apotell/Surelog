@@ -73,30 +73,22 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
                                            uint32_t psl, uint16_t psc,
                                            uint32_t pel, uint16_t pec) const;
 
+  static std::string_view stripDecorations(std::string_view name);
+  static bool areNamedSame(const uhdm::Any* object, const uhdm::Any* actual);
+  static bool isImplicitFunctionReturnType(const uhdm::Any* object);
+
   template <typename T>
   void reportDuplicates(const uhdm::Any* object,
                         const std::vector<T*>& collection,
                         uint32_t vpiRelation) const;
-
   void reportInvalidLocation(const uhdm::Any* object) const;
-
   void reportMissingLocation(const uhdm::Any* object) const;
-
-  static bool isImplicitFunctionReturnType(const uhdm::Any* object);
-
-  static std::string_view stripDecorations(std::string_view name);
-
-  static bool areNamedSame(const uhdm::Any* object, const uhdm::Any* actual);
-
+  void reportInvalidTypespecLocation(const uhdm::Any* object) const;
   void reportInvalidNames(const uhdm::Any* object) const;
-
   void reportInvalidFile(const uhdm::Any* object) const;
-
   void reportNullActual(const uhdm::Any* object) const;
 
   void enterAny(const uhdm::Any* object, uint32_t vpiRelation) final;
-
-  void enterAny2(const uhdm::Any* object, uint32_t vpiRelation);
 
   void enterAliasCollection(const uhdm::Any* object,
                             const uhdm::AliasCollection& objects,

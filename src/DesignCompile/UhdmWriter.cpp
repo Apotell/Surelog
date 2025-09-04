@@ -3382,16 +3382,16 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     bind(s, designs);
   }
 
-  // if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
-  //   for (auto h : designs) {
-  //     const uhdm::Design* const d =
-  //         static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
-  //     checker->check(d);
-  //   }
-  //
-  //   delete checker;
-  //   errors->printMessages(clp->muteStdout());
-  // }
+  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+    for (auto h : designs) {
+      const uhdm::Design* const d =
+          static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
+      checker->check(d);
+    }
+
+    delete checker;
+    errors->printMessages(clp->muteStdout());
+  }
 
   // ----------------------------------
   // Lint only the elaborated model

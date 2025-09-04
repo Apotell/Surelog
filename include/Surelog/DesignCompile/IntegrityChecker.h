@@ -83,7 +83,6 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
                         uint32_t vpiRelation) const;
   void reportInvalidLocation(const uhdm::Any* object) const;
   void reportMissingLocation(const uhdm::Any* object) const;
-  void reportInvalidTypespecLocation(const uhdm::Any* object) const;
   void reportInvalidNames(const uhdm::Any* object) const;
   void reportInvalidFile(const uhdm::Any* object) const;
   void reportNullActual(const uhdm::Any* object) const;

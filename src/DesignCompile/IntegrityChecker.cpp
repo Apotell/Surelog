@@ -491,29 +491,22 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
-  if ((object->getStartLine() != 0) && (object->getStartColumn() != 0) &&
-      (object->getEndLine() != 0) && (object->getEndColumn() != 0))
-    return;
-
-  if (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
-      m_acceptedUhdmTypesWithInvalidLocation.cend())
-    return;
-
   const uhdm::Any* const parent = object->getParent();
   if (parent == nullptr) return;
 
   const uhdm::Any* const grandParent = parent->getParent();
   if (grandParent == nullptr) return;
 
+  bool expectLegal = true;
+
   // begin in function body are implicit!
   if ((object->getUhdmType() == uhdm::UhdmType::Begin) &&
-      (parent->getUhdmType() == uhdm::UhdmType::Function))
-    return;
-
-  if ((object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
-      (grandParent->getName() == "new") &&
-      (parent->Cast<uhdm::Variables>() != nullptr) &&
-      (grandParent->getUhdmType() == uhdm::UhdmType::Function)) {
+      (parent->getUhdmType() == uhdm::UhdmType::Function)) {
+    expectLegal = false;
+  } else if ((object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
+             (grandParent->getName() == "new") &&
+             (parent->Cast<uhdm::Variables>() != nullptr) &&
+             (grandParent->getUhdmType() == uhdm::UhdmType::Function)) {
     // For refTypespec associated with a class's constructor return value
     // there is no legal position because the "new" operator's return value
     // is implicit.
@@ -523,7 +516,7 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
         grandParent->Cast<uhdm::Function>();
     if ((grandParentAsTaskFunc->getReturn() == parent) &&
         (parentAsVariables->getTypespec() == object)) {
-      return;
+      expectLegal = false;
     }
   } else if ((object->getUhdmType() == uhdm::UhdmType::ClassTypespec) &&
              (parent->getName() == "new") &&
@@ -535,7 +528,7 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
         parent->Cast<uhdm::Function>();
     if (const uhdm::RefTypespec* const rt = parentAsFunction->getReturn()) {
       if ((rt == object) || (rt->getActual() == object)) {
-        return;
+        expectLegal = false;
       }
     }
   } else if (object->Cast<uhdm::Variables>() != nullptr) {
@@ -543,31 +536,65 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
     // is consdiered the return type's name.
     if (const uhdm::TaskFunc* const parentAsTaskFunc =
             parent->Cast<uhdm::TaskFunc>()) {
-      if (parentAsTaskFunc->getReturn() == object) return;
+      if (parentAsTaskFunc->getReturn() == object) {
+        expectLegal = false;
+      }
     }
   } else if (const uhdm::Constant* const objectAsConstant =
                  object->Cast<uhdm::Constant>()) {
     if (const uhdm::Range* const parentAsRange = parent->Cast<uhdm::Range>()) {
       // The left expression of range is allowed to be zero.
-      if (parentAsRange->getLeftExpr() == object) return;
+      if (parentAsRange->getLeftExpr() == object) {
+        expectLegal = false;
+      }
 
       // The right is allowed to be zero if it's associative
       if ((parentAsRange->getRightExpr() == object) &&
           (objectAsConstant->getValue() == "STRING:associative")) {
-        return;
+        expectLegal = false;
       }
     }
   }
 
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+  if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
+    if (!((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
+          (any_cast<uhdm::UnionTypespec>(t) != nullptr))) {
+      expectLegal = false;
+    }
+  }
+  if (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
+      m_acceptedUhdmTypesWithInvalidLocation.cend()) {
+    expectLegal = false;
+  }
 
-  Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
-               object->getStartLine(), object->getStartColumn(),
-               symbolTable->registerSymbol(asSymbol(object)));
-  errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION,
-                           loc);
+  bool reportError = false;
+  if (expectLegal == true) {
+    reportError =
+        (object->getStartLine() == 0) || (object->getEndLine() == 0) ||
+        (object->getStartColumn() == 0) || (object->getEndColumn() == 0);
+  } else {
+    reportError =
+        (object->getStartLine() != 0) || (object->getEndLine() != 0) ||
+        (object->getStartColumn() != 0) || (object->getEndColumn() != 0);
+  }
+
+  if (reportError) {
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION,
+                             loc);
+  }
 }
 
 bool IntegrityChecker::isImplicitFunctionReturnType(const uhdm::Any* object) {
@@ -754,40 +781,6 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
   }
 }
 
-void IntegrityChecker::reportInvalidTypespecLocation(
-    const uhdm::Any* object) const {
-  if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
-    bool reportError = false;
-    if ((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
-        (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
-        (any_cast<uhdm::UnionTypespec>(t) != nullptr)) {
-      if ((t->getStartLine() == 0) || (t->getEndLine() == 0) ||
-          (t->getStartColumn() == 0) || (t->getEndColumn() == 0)) {
-        reportError = true;
-      }
-    } else if ((t->getStartLine() != 0) || (t->getEndLine() != 0) ||
-               (t->getStartColumn() != 0) || (t->getEndColumn() != 0)) {
-      reportError = true;
-    }
-    if (reportError) {
-      SymbolTable* const symbolTable = m_session->getSymbolTable();
-      FileSystem* const fileSystem = m_session->getFileSystem();
-      ErrorContainer* const errorContainer = m_session->getErrorContainer();
-
-      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
-                   object->getStartLine(), object->getStartColumn(),
-                   symbolTable->registerSymbol(asSymbol(object)));
-      errorContainer->addError(
-          ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
-    }
-  }
-}
-
 void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
   if (isBuiltInPackageOnStack(object)) return;
   if (isUVMMember(object)) return;
@@ -816,7 +809,6 @@ void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
   reportMissingLocation(object);
   reportInvalidNames(object);
   reportInvalidFile(object);
-  reportInvalidTypespecLocation(object);
 
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();

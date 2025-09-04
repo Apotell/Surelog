@@ -1411,14 +1411,12 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     else
       taps->setArrayType(vpiStaticArray);
 
-    if (packedDimensions != nullptr) {
-      tpaps->setRanges(packedDimensions);
-      for (auto r : *packedDimensions) r->setParent(tpaps);
-    }
-    if (unpackedDimensions != nullptr) {
-      taps->setRanges(unpackedDimensions);
-      for (auto r : *unpackedDimensions) r->setParent(taps);
-    }
+    tpaps->setRanges(packedDimensions);
+    for (auto r : *packedDimensions) r->setParent(tpaps);
+
+    taps->setRanges(unpackedDimensions);
+    for (auto r : *unpackedDimensions) r->setParent(taps);
+
     retts = taps;
 
   } else if (unpackedId) {
@@ -1481,10 +1479,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     else
       taps->setArrayType(vpiStaticArray);
 
-    if (unpackedDimensions != nullptr) {
-      taps->setRanges(unpackedDimensions);
-      for (auto r : *unpackedDimensions) r->setParent(taps);
-    }
+    taps->setRanges(unpackedDimensions);
+    for (auto r : *unpackedDimensions) r->setParent(taps);
     retts = taps;
 
   } else if (packedId) {
@@ -1497,16 +1493,15 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
       ert->setActual(ts);
       taps->setElemTypespec(ert);
       ert->setName(ts->getName());
-      ert->setStartLine(ts->getStartLine());
-      ert->setStartColumn(ts->getStartColumn());
-      ert->setEndLine(ts->getEndLine());
-      ert->setEndColumn(ts->getEndColumn());
+      ert->setFile(packedDimensions->front()->getFile());
+      ert->setStartLine(packedDimensions->front()->getStartLine());
+      ert->setStartColumn(packedDimensions->front()->getStartColumn());
+      ert->setEndLine(packedDimensions->back()->getEndLine());
+      ert->setEndColumn(packedDimensions->back()->getEndColumn());
     }
 
-    if (packedDimensions != nullptr) {
-      taps->setRanges(packedDimensions);
-      for (uhdm::Range* r : *packedDimensions) r->setParent(taps, true);
-    }
+    taps->setRanges(packedDimensions);
+    for (uhdm::Range* r : *packedDimensions) r->setParent(taps, true);
     retts = taps;
   }
   return retts;
@@ -2191,15 +2186,18 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
   };
 
-  if (result) {
+  if (result != nullptr) {
+    result->setParent(pstmt);
     result = compileUpdatedTypespec(component, fC, id, Packed_dimension,
                                     unpackedDimId, compileDesign, reduce, pstmt,
                                     result);
-    if ((m_elaborate == Elaborate::Yes) && component &&
-        !result->getInstance()) {
-      result->setInstance(component->getUhdmModel<uhdm::Instance>());
+    if (result != nullptr) {
+      if ((m_elaborate == Elaborate::Yes) && component &&
+          !result->getInstance()) {
+        result->setInstance(component->getUhdmModel<uhdm::Instance>());
+      }
+      result->setParent(pstmt);
     }
-    result->setParent(pstmt);
   }
 
   return result;

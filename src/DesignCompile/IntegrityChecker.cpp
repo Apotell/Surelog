@@ -544,9 +544,9 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
                  object->Cast<uhdm::Constant>()) {
     if (const uhdm::Range* const parentAsRange = parent->Cast<uhdm::Range>()) {
       // The left expression of range is allowed to be zero.
-      if (parentAsRange->getLeftExpr() == object) {
-        expectLegal = false;
-      }
+      // if (parentAsRange->getLeftExpr() == object) {
+      //   expectLegal = false;
+      // }
 
       // The right is allowed to be zero if it's associative
       if ((parentAsRange->getRightExpr() == object) &&
@@ -711,8 +711,23 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* object) const {
 void IntegrityChecker::reportInvalidFile(const uhdm::Any* object) const {
   if (object->getUhdmType() == uhdm::UhdmType::Design) return;
 
+  bool expectLegal = true;
+  if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
+    if (!((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
+          (any_cast<uhdm::UnionTypespec>(t) != nullptr))) {
+      expectLegal = false;
+    }
+  }
+
   std::string_view filename = object->getFile();
-  if (filename.empty() || (filename == SymbolTable::getBadSymbol())) {
+  if (expectLegal &&
+      (filename.empty() || (filename == SymbolTable::getBadSymbol()))) {
     SymbolTable* const symbolTable = m_session->getSymbolTable();
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();

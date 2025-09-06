@@ -4196,6 +4196,7 @@ bool CompileHelper::compileParameterDeclaration(
     param_assigns = component->getParamAssigns();
   }
   uhdm::Any* const pany = component->getUhdmModel();
+  const uhdm::ScopedScope scopedScope(pany);
   if (fC->Type(nodeId) == VObjectType::paType_assignment_list) {
     // Type param
     NodeId typeNameId = fC->Child(fC->Child(nodeId));

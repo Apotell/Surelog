@@ -523,6 +523,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
           tps->setName(fC->SymName(loopVarId));
           tps->setParent(ref);
+          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           if (ref->getTypespec() == nullptr) {
             uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
             fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
@@ -2312,6 +2313,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (constructor) {
     uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
     tps->setParent(func);
+    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tps);
 
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
     tpsRef->setParent(func);

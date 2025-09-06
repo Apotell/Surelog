@@ -68,9 +68,9 @@ class CompileClass final {
   CompileClass(const CompileClass&) = delete;
 
   bool compile(Elaborate elaborate, Reduce reduce);
+  bool compileClassParameters(const FileContent* fC, NodeId id);
 
  private:
-  bool compile_class_parameters_(const FileContent* fC, NodeId id);
   bool compile_class_property_(const FileContent* fC, NodeId id);
   bool compile_class_method_(const FileContent* fC, NodeId id);
   bool compile_class_constraint_(const FileContent* fC, NodeId id);

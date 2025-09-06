@@ -1798,6 +1798,7 @@ void DesignElaboration::elaborateInstance_(
                 uhdm::ModuleTypespec* tps = s.make<uhdm::ModuleTypespec>();
                 NodeId typespecId = fC->Child(subInstanceId);
                 tps->setName(fC->SymName(typespecId));
+                fC->populateCoreMembers(typespecId, typespecId, tps);
                 uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
                 tpsRef->setParent(mod_array);
                 tpsRef->setActual(tps);

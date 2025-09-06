@@ -46,13 +46,11 @@ class Session;
 class ValuedComponentI;
 
 class ObjectBinder final : protected uhdm::UhdmListener {
- private:
+ public:
   using ForwardComponentMap =
       std::map<const ValuedComponentI*, uhdm::BaseClass*>;
   using ReverseComponentMap =
       std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
-  using DesignStack = std::vector<const uhdm::Design*>;
-  using PackageStack = std::vector<const uhdm::Package*>;
   using PrefixStack = std::vector<const uhdm::Any*>;
   using Unbounded =
       std::vector<std::tuple<const uhdm::Any*, const ValuedComponentI*>>;

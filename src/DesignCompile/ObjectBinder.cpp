@@ -773,11 +773,14 @@ const uhdm::Any* ObjectBinder::findInClassDefn(std::string_view name,
   } else if (const uhdm::Any* const actual = findInCollection(
                  name, refType, scope->getConstraints(), scope)) {
     return actual;
-  } else if (const uhdm::Extends* ext = scope->getExtends()) {
-    if (const uhdm::RefTypespec* rt = ext->getClassTypespec()) {
-      if (const uhdm::ClassTypespec* cts =
+  } else if (const uhdm::Extends* const ext = scope->getExtends()) {
+    if (const uhdm::RefTypespec* const rt = ext->getClassTypespec()) {
+      if (const uhdm::ClassTypespec* const cts =
               rt->getActual<uhdm::ClassTypespec>()) {
         return findInClassDefn(name, refType, cts->getClassDefn());
+      } else if (const uhdm::TypeParameter* const tp =
+                     rt->getActual<uhdm::TypeParameter>()) {
+        return findInRefTypespec(name, refType, tp->getTypespec());
       }
     }
   }
@@ -1348,6 +1351,10 @@ void ObjectBinder::enterClassDefn(const uhdm::ClassDefn* object,
         tps->setName(rt->getName());
         tps->setFile(base->getFile());
         tps->setParent(derClsDef);
+        tps->setStartLine(rt->getStartLine());
+        tps->setStartColumn(rt->getStartColumn());
+        tps->setEndLine(rt->getEndLine());
+        tps->setEndColumn(rt->getEndColumn());
         rt->setActual(tps);
 
         tps->setClassDefn(base);

@@ -256,6 +256,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
       expectedRelation = LineColumnRelation::Before;
     }
 
+    if (const uhdm::Function* const parentAsFunction =
+            parent->Cast<uhdm::Function>()) {
+      if (parentAsFunction->getReturn() == object) {
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    }
+
     if (const uhdm::EnumTypespec* const parentAsEnumTypespec =
             parent->Cast<uhdm::EnumTypespec>()) {
       if (parentAsEnumTypespec->getBaseTypespec() == object) {
@@ -532,7 +539,7 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
       }
     }
   } else if (object->Cast<uhdm::Variables>() != nullptr) {
-    // When no explicit return is specific, the function's name
+    // When no explicit return is specified, the function's name
     // is consdiered the return type's name.
     if (const uhdm::TaskFunc* const parentAsTaskFunc =
             parent->Cast<uhdm::TaskFunc>()) {
@@ -558,13 +565,16 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
 
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     if (!((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ClassTypespec>(t) != nullptr) ||
           (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
           (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
           (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ModuleTypespec>(t) != nullptr) ||
           (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
           (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
           (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
-          (any_cast<uhdm::UnionTypespec>(t) != nullptr))) {
+          (any_cast<uhdm::UnionTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::UnsupportedTypespec>(t) != nullptr))) {
       expectLegal = false;
     }
   }
@@ -714,13 +724,16 @@ void IntegrityChecker::reportInvalidFile(const uhdm::Any* object) const {
   bool expectLegal = true;
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     if (!((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ClassTypespec>(t) != nullptr) ||
           (any_cast<uhdm::EnumTypespec>(t) != nullptr) ||
           (any_cast<uhdm::ImportTypespec>(t) != nullptr) ||
           (any_cast<uhdm::InterfaceTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::ModuleTypespec>(t) != nullptr) ||
           (any_cast<uhdm::StructTypespec>(t) != nullptr) ||
           (any_cast<uhdm::TypedefTypespec>(t) != nullptr) ||
           (any_cast<uhdm::TypeParameter>(t) != nullptr) ||
-          (any_cast<uhdm::UnionTypespec>(t) != nullptr))) {
+          (any_cast<uhdm::UnionTypespec>(t) != nullptr) ||
+          (any_cast<uhdm::UnsupportedTypespec>(t) != nullptr))) {
       expectLegal = false;
     }
   }
@@ -931,6 +944,12 @@ void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
       uhdm::UhdmType::ParamAssign};
   bool expectDesign = (allowedDesignChildren.find(object->getUhdmType()) !=
                        allowedDesignChildren.cend());
+
+  if (any_cast<uhdm::ParamAssign>(object) != nullptr) {
+    if (any_cast<uhdm::ClassTypespec>(parent) != nullptr) {
+      expectScope = expectDesign = false;
+    }
+  }
 
   const std::set<uhdm::UhdmType> allowedUdpChildren{uhdm::UhdmType::LogicNet,
                                                     uhdm::UhdmType::IODecl,

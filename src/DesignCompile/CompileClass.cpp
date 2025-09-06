@@ -169,8 +169,6 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
                            m_compileDesign);
   }
 
-  compile_class_parameters_(fC, nodeId);
-
   // This
   DataType* thisdt =
       new DataType(fC, nodeId, "this", VObjectType::paClass_declaration);
@@ -969,7 +967,7 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
   return true;
 }
 
-bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
+bool CompileClass::compileClassParameters(const FileContent* fC, NodeId id) {
   /*
   n<all_c> u<1> t<StringConst> p<16> s<14> l<3>
   n<uvm_port_base> u<2> t<StringConst> p<12> s<8> l<7>

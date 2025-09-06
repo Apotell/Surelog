@@ -2825,6 +2825,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
     tps = s.make<uhdm::ModuleTypespec>();
     tps->setName(typespecName);
     tps->setParent(parentScope);
+    fC->populateCoreMembers(typespecId, typespecId, tps);
   }
 
   NodeId hierInstId = fC->sl_collect(id, VObjectType::paHierarchical_instance);

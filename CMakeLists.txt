@@ -610,6 +610,7 @@ if (NOT QUICK_COMP)
   add_executable(hellosureworld ${PROJECT_SOURCE_DIR}/src/hellosureworld.cpp)
   add_executable(hellouhdm ${PROJECT_SOURCE_DIR}/src/hellouhdm.cpp)
   add_executable(hellodesign ${PROJECT_SOURCE_DIR}/src/hellodesign.cpp)
+  add_executable(binder ${PROJECT_SOURCE_DIR}/src/binder.cpp)
 endif()
 
 if (MSVC OR WIN32)
@@ -622,6 +623,7 @@ if (MSVC OR WIN32)
     set_target_properties(hellouhdm PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
     set_target_properties(hellodesign PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
     set_target_properties(hellosureworld PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
+    set_target_properties(binder PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
   endif()
 endif()
 
@@ -744,6 +746,7 @@ if (NOT QUICK_COMP)
   target_link_libraries(hellosureworld surelog)
   target_link_libraries(hellouhdm surelog)
   target_link_libraries(hellodesign surelog)
+  target_link_libraries(binder surelog)
 endif()
 
 # Creation of the distribution directory, Precompiled package creation

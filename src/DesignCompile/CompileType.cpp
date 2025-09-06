@@ -201,6 +201,7 @@ uhdm::Any* CompileHelper::compileVariable(
             tps->setClassDefn(cl->getUhdmModel<uhdm::ClassDefn>());
             tps->setName(typespecName);
             tps->setParent(pstmt);
+            fC->populateCoreMembers(variable, variable, tps);
             ts = tps;
           }
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
@@ -986,6 +987,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
         ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
         ref->setName(typeName);
         ref->setParent(pscope);
+        fC->populateCoreMembers(type, type, ref);
         result = ref;
 
         const FileContent* actualFC = fC;
@@ -1151,12 +1153,14 @@ Typespec* CompileHelper::compileDatastructureTypespec(
       uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
       tps->setName(typeName);
       tps->setParent(pscope);
+      fC->populateCoreMembers(type, type, tps);
       result = tps;
     }
   } else {
     uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
     tps->setName(typeName);
     tps->setParent(pscope);
+    fC->populateCoreMembers(type, type, tps);
     result = tps;
   }
   return result;
@@ -1605,6 +1609,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       } else {
         uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
         tps->setParent(pstmt);
+        fC->populateCoreMembers(type, type, tps);
         result = tps;
       }
       break;
@@ -1756,6 +1761,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             uhdm::ClassTypespec* ref = s.make<uhdm::ClassTypespec>();
             ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
             ref->setName(typeName);
+            fC->populateCoreMembers(type, type, ref);
             result = ref;
             break;
           }
@@ -1791,6 +1797,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         ref->setParent(pstmt);
         ref->setPacked(isPacked);
         ref->setName(typeName);
+        fC->populateCoreMembers(id, id, ref);
         result = ref;
       }
       break;
@@ -2040,6 +2047,23 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             tps->setName(typeName);
             tps->setParent(pstmt);
             tps->setClassDefn(cl->getUhdmModel<uhdm::ClassDefn>());
+
+            NodeId endType = type;
+            if (const NodeId Parameter_value_assignment = fC->Sibling(type)) {
+              if (uhdm::ParamAssignCollection* const paramAssigns =
+                      compileParameterValueAssignments(
+                          cl, fC, compileDesign, Parameter_value_assignment,
+                          tps)) {
+                endType = Parameter_value_assignment;
+                tps->setParamAssigns(paramAssigns);
+
+                uhdm::AnyCollection* const params = tps->getParameters(true);
+                for (uhdm::ParamAssign* pa : *paramAssigns) {
+                  params->emplace_back(pa->getLhs());
+                }
+              }
+            }
+            fC->populateCoreMembers(type, endType, tps);
             result = tps;
           }
         }
@@ -2388,4 +2412,78 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
   return false;
 }
 
+uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
+    DesignComponent* component, const FileContent* fC,
+    CompileDesign* compileDesign, NodeId id, uhdm::Any* pstmt) {
+  if (!id) return nullptr;
+
+  NodeId Parameter_assignment_list = fC->Child(id);
+  NodeId Ordered_parameter_assignment = fC->Child(Parameter_assignment_list);
+  if (!Ordered_parameter_assignment) return nullptr;
+
+  uhdm::Serializer& s = compileDesign->getSerializer();
+  const DesignComponent::ParameterVec& formals =
+      component->getOrderedParameters();
+  uhdm::ParamAssignCollection* assigns = nullptr;
+
+  size_t index = 0;
+  while (Ordered_parameter_assignment && (index < formals.size())) {
+    NodeId Param_expression = fC->Child(Ordered_parameter_assignment);
+    NodeId Data_type = fC->Child(Param_expression);
+
+    Parameter* p = formals[index];
+    std::string_view fName = p->getName();
+    uhdm::Any* const fparam = p->getUhdmParam();
+
+    if (fC->Type(Data_type) == VObjectType::paData_type) {
+      uhdm::Typespec* tps =
+          compileTypespec(component, fC, Data_type, InvalidNodeId,
+                          compileDesign, Reduce::No, pstmt, nullptr, false);
+
+      uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
+      pass->setRhs(tps);
+      pass->setLhs(fparam);
+      pass->setParent(pstmt);
+      pass->setStartLine(tps->getStartLine());
+      pass->setStartColumn(tps->getStartColumn());
+      pass->setEndLine(tps->getEndLine());
+      pass->setEndColumn(tps->getEndColumn());
+      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, pass);
+
+      if (assigns == nullptr) {
+        assigns = s.makeCollection<uhdm::ParamAssign>();
+      }
+      assigns->emplace_back(pass);
+    } else if (uhdm::Any* exp = compileExpression(
+                   component, fC, Param_expression, compileDesign, Reduce::No,
+                   nullptr, nullptr)) {
+      if (exp->getUhdmType() == uhdm::UhdmType::RefObj) {
+        const std::string_view name = exp->getName();
+        if (uhdm::Typespec* const tps = compileDatastructureTypespec(
+                component, fC, Parameter_assignment_list, compileDesign,
+                Reduce::No, nullptr, "", name)) {
+
+          uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
+          pass->setRhs(tps);
+          pass->setLhs(fparam);
+          pass->setParent(pstmt);
+          pass->setStartLine(tps->getStartLine());
+          pass->setStartColumn(tps->getStartColumn());
+          pass->setEndLine(tps->getEndLine());
+          pass->setEndColumn(tps->getEndColumn());
+          fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, pass);
+
+          if (assigns == nullptr) {
+            assigns = s.makeCollection<uhdm::ParamAssign>();
+          }
+          assigns->emplace_back(pass);
+        }
+      }
+    }
+
+    ++index;
+    Ordered_parameter_assignment = fC->Sibling(Ordered_parameter_assignment);
+  }
+  return assigns;
+}
 }  // namespace SURELOG

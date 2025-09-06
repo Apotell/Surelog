@@ -30,6 +30,7 @@
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Design/ModuleDefinition.h"
 #include "Surelog/Design/VObject.h"
+#include "Surelog/DesignCompile/CompileClass.h"
 #include "Surelog/DesignCompile/CompileDesign.h"
 #include "Surelog/Library/Library.h"
 #include "Surelog/Package/Package.h"
@@ -74,6 +75,7 @@ std::string_view ResolveSymbols::SymName(NodeId index) const {
 void ResolveSymbols::createFastLookup() {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   ErrorContainer* const errors = m_session->getErrorContainer();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
   Library* lib = m_fileContent->getLibrary();
   const std::string_view libName = lib->getName();
 
@@ -128,6 +130,9 @@ void ResolveSymbols::createFastLookup() {
                                       subobject, nullptr, s);
               m_fileContent->addClassDefinition(fullSubName, def);
               pdef->addClassDefinition(name, def);
+
+              CompileClass helper(m_session, m_compileDesign, def, design);
+              helper.compileClassParameters(m_fileContent, subobject);
             }
           }
           break;

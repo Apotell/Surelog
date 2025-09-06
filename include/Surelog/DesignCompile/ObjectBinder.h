@@ -68,6 +68,8 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   void bind(const uhdm::Design* object, bool report);
   void bind(const std::vector<const uhdm::Design*>& objects, bool report);
 
+  void bindAny(const uhdm::Any* object) { listenAny(object, 0); }
+
  private:
   void enterHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
   void leaveHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;

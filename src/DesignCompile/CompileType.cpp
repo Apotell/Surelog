@@ -2462,7 +2462,6 @@ uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
         if (uhdm::Typespec* const tps = compileDatastructureTypespec(
                 component, fC, Parameter_assignment_list, compileDesign,
                 Reduce::No, nullptr, "", name)) {
-
           uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
           pass->setRhs(tps);
           pass->setLhs(fparam);

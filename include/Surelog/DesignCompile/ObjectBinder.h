@@ -52,8 +52,7 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   using ReverseComponentMap =
       std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
   using PrefixStack = std::vector<const uhdm::Any*>;
-  using Unbounded =
-      std::vector<std::tuple<const uhdm::Any*, const ValuedComponentI*>>;
+  using Unbounded = std::set<const uhdm::Any*>;
   using Searched = std::set<const uhdm::Any*>;
 
   enum class RefType {
@@ -105,7 +104,7 @@ class ObjectBinder final : protected uhdm::UhdmListener {
                        const uhdm::Any* object2) const;
   static bool isInElaboratedTree(const uhdm::Any* object);
 
-  VObjectType getDefaultNetType(const ValuedComponentI* component) const;
+  VObjectType getDefaultNetType(const uhdm::Any* object) const;
   const uhdm::Any* getPrefix(const uhdm::Any* object);
 
   template <typename T>
@@ -165,10 +164,11 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   const uhdm::Any* findInDesign(std::string_view name, RefType refType,
                                 const uhdm::Design* scope);
 
-  const uhdm::Any* bindObject(const uhdm::Any* object);
-  const uhdm::Any* bindObjectInScope(std::string_view name,
-                                     const uhdm::Any* object,
-                                     const uhdm::Any* scope);
+  const uhdm::Any* find(std::string_view name, RefType refType,
+                        const uhdm::Any* scope);
+  const uhdm::Any* find(const uhdm::Any* object, RefType refType);
+  const uhdm::Any* findObject(const uhdm::Any* object);
+  const uhdm::Any* findType(const uhdm::Any* object);
 
   void reportErrors();
   bool createDefaultNets();

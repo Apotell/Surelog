@@ -2052,8 +2052,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             if (const NodeId Parameter_value_assignment = fC->Sibling(type)) {
               if (uhdm::ParamAssignCollection* const paramAssigns =
                       compileParameterValueAssignments(
-                          cl, fC, compileDesign, Parameter_value_assignment,
-                          tps)) {
+                          component, fC, compileDesign, Parameter_value_assignment,
+                          tps, cl)) {
                 endType = Parameter_value_assignment;
                 tps->setParamAssigns(paramAssigns);
 
@@ -2414,7 +2414,8 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
 
 uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
     DesignComponent* component, const FileContent* fC,
-    CompileDesign* compileDesign, NodeId id, uhdm::Any* pstmt) {
+    CompileDesign* compileDesign, NodeId id, uhdm::Any* pstmt,
+    DesignComponent* classComponent) {
   if (!id) return nullptr;
 
   NodeId Parameter_assignment_list = fC->Child(id);
@@ -2423,7 +2424,7 @@ uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
 
   uhdm::Serializer& s = compileDesign->getSerializer();
   const DesignComponent::ParameterVec& formals =
-      component->getOrderedParameters();
+      classComponent->getOrderedParameters();
   uhdm::ParamAssignCollection* assigns = nullptr;
 
   size_t index = 0;
@@ -2448,7 +2449,7 @@ uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
       pass->setStartColumn(tps->getStartColumn());
       pass->setEndLine(tps->getEndLine());
       pass->setEndColumn(tps->getEndColumn());
-      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, pass);
+      fC->populateCoreMembers(Data_type, Data_type, pass);
 
       if (assigns == nullptr) {
         assigns = s.makeCollection<uhdm::ParamAssign>();
@@ -2470,7 +2471,9 @@ uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
           pass->setStartColumn(tps->getStartColumn());
           pass->setEndLine(tps->getEndLine());
           pass->setEndColumn(tps->getEndColumn());
-          fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, pass);
+          fC->populateCoreMembers(Parameter_assignment_list,
+                                  Parameter_assignment_list,
+                                  pass);
 
           if (assigns == nullptr) {
             assigns = s.makeCollection<uhdm::ParamAssign>();

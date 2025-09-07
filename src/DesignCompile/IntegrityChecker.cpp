@@ -504,6 +504,9 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
   const uhdm::Any* const grandParent = parent->getParent();
   if (grandParent == nullptr) return;
 
+  const bool isInvalid =
+      (object->getStartLine() == 0) || (object->getEndLine() == 0) ||
+      (object->getStartColumn() == 0) || (object->getEndColumn() == 0);
   bool expectLegal = true;
 
   // begin in function body are implicit!
@@ -578,23 +581,12 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
       expectLegal = false;
     }
   }
-  if (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
-      m_acceptedUhdmTypesWithInvalidLocation.cend()) {
+  if (isInvalid && (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
+      m_acceptedUhdmTypesWithInvalidLocation.cend())) {
     expectLegal = false;
   }
 
-  bool reportError = false;
-  if (expectLegal == true) {
-    reportError =
-        (object->getStartLine() == 0) || (object->getEndLine() == 0) ||
-        (object->getStartColumn() == 0) || (object->getEndColumn() == 0);
-  } else {
-    reportError =
-        (object->getStartLine() != 0) || (object->getEndLine() != 0) ||
-        (object->getStartColumn() != 0) || (object->getEndColumn() != 0);
-  }
-
-  if (reportError) {
+  if (expectLegal && isInvalid) {
     SymbolTable* const symbolTable = m_session->getSymbolTable();
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();

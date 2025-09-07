@@ -187,7 +187,8 @@ class CompileHelper final {
 
   uhdm::ParamAssignCollection* compileParameterValueAssignments(
       DesignComponent* component, const FileContent* fC,
-      CompileDesign* compileDesign, NodeId id, uhdm::Any* pstmt);
+      CompileDesign* compileDesign, NodeId id, uhdm::Any* pstmt,
+      DesignComponent* classComponent);
 
   // ------------------------------------------------------------------------------------------
   // UHDM modeling

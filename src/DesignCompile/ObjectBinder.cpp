@@ -265,18 +265,6 @@ const uhdm::ClassDefn* ObjectBinder::getClassDefn(
   return nullptr;
 }
 
-void ObjectBinder::enterHierPath(const uhdm::HierPath* object,
-                                 uint32_t vpiRelation) {
-  m_prefixStack.emplace_back(object);
-}
-
-void ObjectBinder::leaveHierPath(const uhdm::HierPath* object,
-                                 uint32_t vpiRelation) {
-  if (!m_prefixStack.empty() && (m_prefixStack.back() == object)) {
-    m_prefixStack.pop_back();
-  }
-}
-
 const uhdm::Any* ObjectBinder::findInTypespec(std::string_view name,
                                               RefType refType,
                                               const uhdm::Typespec* scope) {
@@ -864,8 +852,6 @@ const uhdm::Any* ObjectBinder::findInDesign(std::string_view name,
 
 const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
   if (object == nullptr) return nullptr;
-  if (m_prefixStack.empty()) return nullptr;
-  if (m_prefixStack.back() != object->getParent()) return nullptr;
 
   const uhdm::Any* const parent = object->getParent();
   if (parent->getUhdmType() != uhdm::UhdmType::HierPath) return nullptr;
@@ -966,7 +952,6 @@ const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
   return nullptr;
 }
 
-
 const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType,
                                     const uhdm::Any* scope) {
   if (std::string_view::size_type pos = name.find("::");
@@ -987,12 +972,8 @@ const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType,
     }
   }
 
-  if (!m_prefixStack.empty()) {
-    if (const uhdm::Any* const prefix = getPrefix(scope)) {
-      return find(name, refType, prefix);
-    } else {
-      return nullptr;
-    }
+  if (const uhdm::Any* const prefix = getPrefix(scope)) {
+    return find(name, refType, prefix);
   }
 
   while (scope != nullptr) {
@@ -1130,7 +1111,8 @@ const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType,
 
 const uhdm::Any* ObjectBinder::find(const uhdm::Any* object, RefType refType) {
   m_searched.clear();
-  if (const uhdm::Any* const actual = find(object->getName(), refType, object)) {
+  if (const uhdm::Any* const actual =
+          find(object->getName(), refType, object)) {
     return actual;
   }
   m_unbounded.emplace(object);

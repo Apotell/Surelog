@@ -51,7 +51,6 @@ class ObjectBinder final : protected uhdm::UhdmListener {
       std::map<const ValuedComponentI*, uhdm::BaseClass*>;
   using ReverseComponentMap =
       std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
-  using PrefixStack = std::vector<const uhdm::Any*>;
   using Unbounded = std::set<const uhdm::Any*>;
   using Searched = std::set<const uhdm::Any*>;
 
@@ -70,9 +69,6 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   void bindAny(const uhdm::Any* object) { listenAny(object, 0); }
 
  private:
-  void enterHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
-  void leaveHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
-
   void enterBitSelect(const uhdm::BitSelect* object,
                       uint32_t vpiRelation) final;
   void enterVarSelect(const uhdm::VarSelect* object,
@@ -180,7 +176,6 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   const bool m_muteStdout = false;
 
   ReverseComponentMap m_reverseComponentMap;
-  PrefixStack m_prefixStack;
   Unbounded m_unbounded;
   Searched m_searched;
 };

@@ -1723,12 +1723,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
           refName = fC->Child(refName);
         tsRef->setName(fC->SymName(refName));
         decl->setTypespec(tsRef);
-        fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tsRef);
-        // Need to include the logic's packed dimensions!
-        tsRef->setStartLine(ts->getStartLine());
-        tsRef->setStartColumn(ts->getStartColumn());
-        tsRef->setEndLine(ts->getEndLine());
-        tsRef->setEndColumn(ts->getEndColumn());
+        fC->populateCoreMembers(refName, refName, tsRef);
       }
       decl->getTypespec()->setActual(ts);
     }
@@ -2356,6 +2351,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     } else {  // else void return type
       ts = s.make<uhdm::VoidTypespec>();
       ts->setParent(func);
+      Return_data_type = Function_data_type;
     }
 
     if (ts != nullptr) {

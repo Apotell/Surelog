@@ -2052,8 +2052,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             if (const NodeId Parameter_value_assignment = fC->Sibling(type)) {
               if (uhdm::ParamAssignCollection* const paramAssigns =
                       compileParameterValueAssignments(
-                          component, fC, compileDesign, Parameter_value_assignment,
-                          tps, cl)) {
+                          component, fC, compileDesign,
+                          Parameter_value_assignment, tps, cl)) {
                 endType = Parameter_value_assignment;
                 tps->setParamAssigns(paramAssigns);
 
@@ -2472,8 +2472,7 @@ uhdm::ParamAssignCollection* CompileHelper::compileParameterValueAssignments(
           pass->setEndLine(tps->getEndLine());
           pass->setEndColumn(tps->getEndColumn());
           fC->populateCoreMembers(Parameter_assignment_list,
-                                  Parameter_assignment_list,
-                                  pass);
+                                  Parameter_assignment_list, pass);
 
           if (assigns == nullptr) {
             assigns = s.makeCollection<uhdm::ParamAssign>();

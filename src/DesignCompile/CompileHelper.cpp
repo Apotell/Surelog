@@ -672,7 +672,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       fC->populateCoreMembers(type_name, type_name, typedefTypespec);
 
       if (uhdm::Typespec* ts =
-              compileTypespec(scope, fC, enum_base_type, Variable_dimension,
+              compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
             (valuedcomponenti_cast<Package>(scope))) {

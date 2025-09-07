@@ -296,9 +296,7 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
                   ? LineColumnRelation::Inside
                   : LineColumnRelation::After;
         } else {
-          // <var_name> <ranges> = ....
-          // ArrayVar::typespec refers to the ranges
-          expectedRelation = LineColumnRelation::After;
+          expectedRelation = LineColumnRelation::Before;
         }
       }
     } else if (const uhdm::ArrayTypespec* const parentAsArrayTypespec =
@@ -581,8 +579,9 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
       expectLegal = false;
     }
   }
-  if (isInvalid && (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
-      m_acceptedUhdmTypesWithInvalidLocation.cend())) {
+  if (isInvalid &&
+      (m_acceptedUhdmTypesWithInvalidLocation.find(object->getUhdmType()) !=
+       m_acceptedUhdmTypesWithInvalidLocation.cend())) {
     expectLegal = false;
   }
 

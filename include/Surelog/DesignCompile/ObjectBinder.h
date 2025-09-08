@@ -71,26 +71,20 @@ class ObjectBinder final : protected uhdm::UhdmListener {
  private:
   void enterBitSelect(const uhdm::BitSelect* object,
                       uint32_t vpiRelation) final;
-  void enterVarSelect(const uhdm::VarSelect* object,
+  void enterClassDefn(const uhdm::ClassDefn* object,
                       uint32_t vpiRelation) final;
-
   // void enterChandle_var(const uhdm::ChandleVar* object) final;
-
   void enterIndexedPartSelect(const uhdm::IndexedPartSelect* object,
                               uint32_t vpiRelation) final;
-
   void enterPartSelect(const uhdm::PartSelect* object,
                        uint32_t vpiRelation) final;
-
   void enterRefModule(const uhdm::RefModule* object,
                       uint32_t vpiRelation) final;
-
   void enterRefObj(const uhdm::RefObj* object, uint32_t vpiRelation) final;
-
   void enterRefTypespec(const uhdm::RefTypespec* object,
                         uint32_t vpiRelation) final;
-
-  void enterClassDefn(const uhdm::ClassDefn* object,
+  void enterRefVar(const uhdm::RefVar* object, uint32_t vpiRelation) final;
+  void enterVarSelect(const uhdm::VarSelect* object,
                       uint32_t vpiRelation) final;
 
  private:

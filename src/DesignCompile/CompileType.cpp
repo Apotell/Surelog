@@ -255,15 +255,21 @@ uhdm::Any* CompileHelper::compileVariable(
           }
           ref->setName(fC->SymName(nameId));
           fC->populateCoreMembers(nameId, nameId, ref);
-          if (ts != nullptr) {
-            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            fC->populateCoreMembers(declarationId, declarationId, tsRef);
-            tsRef->setParent(ref);
-            tsRef->setActual(ts);
-            tsRef->setName(typeName);
-            fC->populateCoreMembers(declarationId, declarationId, tsRef);
-            ref->setTypespec(tsRef);
+
+          if (ts == nullptr) {
+            uhdm::UnsupportedTypespec *ut = s.make<uhdm::UnsupportedTypespec>();
+            ut->setName(typeName);
+            ut->setParent(pstmt);
+            fC->populateCoreMembers(declarationId, declarationId, ut);
+            ts = ut;
           }
+
+          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+          tsRef->setParent(ref);
+          tsRef->setActual(ts);
+          tsRef->setName(typeName);
+          fC->populateCoreMembers(declarationId, declarationId, tsRef);
+          ref->setTypespec(tsRef);
           result = ref;
         }
       }
@@ -542,11 +548,22 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component,
 
   if (tps != nullptr) {
     if (uhdm::Expr* const e = any_cast<uhdm::Expr>(obj)) {
+      std::string name(fC->SymName(typespecId));
+      if (!tps->getName().empty() &&
+          (tps->getName() != SymbolTable::getBadSymbol())) {
+        name = tps->getName();
+      }
+      // NodeId nid = fC->Child(typespecId);
+      // while (nid && (fC->Type(nid) == VObjectType::paClass_scope)) {
+      //   nid = fC->Sibling(nid);
+      //   name.append("::").append(fC->SymName(nid));
+      //   nid = fC->Sibling(nid);
+      // }
       tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(e);
       tpsRef->setActual(tps);
       e->setTypespec(tpsRef);
-      tpsRef->setName(fC->SymName(typespecId));
+      tpsRef->setName(name);
       fC->populateCoreMembers(typespecId, typespecId, tpsRef);
     }
   }

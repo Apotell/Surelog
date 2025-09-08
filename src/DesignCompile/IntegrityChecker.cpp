@@ -447,6 +447,7 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         (expectedRelation == LineColumnRelation::Before) &&
         (object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
         ((parent->getUhdmType() == uhdm::UhdmType::Port) ||
+         (parent->getUhdmType() == uhdm::UhdmType::LogicNet) ||
          (parent->getUhdmType() == uhdm::UhdmType::PackedArrayVar))) {
       // typespec for uhdm::Ports*can* be inside the parent module!
       // module (port_name):
@@ -526,9 +527,20 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
         (parentAsVariables->getTypespec() == object)) {
       expectLegal = false;
     }
-  } else if ((object->getUhdmType() == uhdm::UhdmType::ClassTypespec) &&
-             (parent->getName() == "new") &&
+  } else if ((object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
              (parent->getUhdmType() == uhdm::UhdmType::Function)) {
+    if (parent->getName() == "new") {
+      const uhdm::Function* const parentAsFunction =
+          parent->Cast<uhdm::Function>();
+      if (parentAsFunction->getReturn() == object) {
+        expectLegal = false;
+      }
+    } else if (isInvalid) {
+      expectLegal = false;
+    }
+  } else if ((object->getUhdmType() == uhdm::UhdmType::ClassTypespec) &&
+             (parent->getUhdmType() == uhdm::UhdmType::Function) &&
+             (parent->getName() == "new")) {
     // For typespec associated with a class's constructor return value
     // there is no legal position because the "new" operator's return value
     // is implicit.

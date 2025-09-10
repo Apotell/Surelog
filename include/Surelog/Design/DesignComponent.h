@@ -200,7 +200,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   uhdm::Any* getUhdmModel() { return m_model; }
   template <typename T>
   T* getUhdmModel() const {
-    return (m_model == nullptr) ? nullptr : any_cast<T>(m_model);
+    return any_cast<T>(m_model);
+  }
+
+  void setUhdmTypespecModel(uhdm::Typespec* model) { m_typespecModel = model; }
+  uhdm::Typespec* getUhdmTypespecModel() { return m_typespecModel; }
+  template <typename T>
+  T* getUhdmTypespecModel() const {
+    return any_cast<T>(m_typespecModel);
   }
 
   void scheduleParamExprEval(std::string_view name, ExprEval& expr_eval) {
@@ -249,6 +256,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
   uhdm::Any* m_model = nullptr;
+  uhdm::Typespec* m_typespecModel = nullptr;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;

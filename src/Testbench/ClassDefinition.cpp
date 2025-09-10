@@ -24,6 +24,7 @@
 
 #include <uhdm/Serializer.h>
 #include <uhdm/class_defn.h>
+#include <uhdm/class_typespec.h>
 
 #include <cstdint>
 #include <string_view>
@@ -63,6 +64,12 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name,
   }
   if (container != nullptr) instance->setParent(container->getUhdmModel());
   setUhdmModel(instance);
+
+  uhdm::ClassTypespec* const tps = serializer.make<uhdm::ClassTypespec>();
+  if (container != nullptr) tps->setParent(container->getUhdmModel());
+  tps->setClassDefn(instance);
+  tps->setName(name);
+  setUhdmTypespecModel(tps);
 }
 
 void ClassDefinition::setContainer(DesignComponent* container) {

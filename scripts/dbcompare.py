@@ -271,7 +271,6 @@ def _main():
 
   _mkdir(args.output_dirpath)
 
-
   print(f'Comparing UHDM Databases ...')
   results = _compare(args)
 

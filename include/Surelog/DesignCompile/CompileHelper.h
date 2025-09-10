@@ -544,7 +544,7 @@ class CompileHelper final {
                                 CompileDesign* compileDesign, NodeId id,
                                 ValuedComponentI* instance);
 
-  void compileHighConn(ModuleDefinition* component, const FileContent* fC,
+  void compileHighConn(DesignComponent* component, const FileContent* fC,
                        CompileDesign* compileDesign, NodeId id,
                        uhdm::PortCollection* ports, uhdm::Any* pexpr);
 

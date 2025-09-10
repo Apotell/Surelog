@@ -2800,31 +2800,52 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
   const std::string_view libName = fC->getLibrary()->getName();
   const std::string_view mname = fC->SymName(moduleName);
   std::string modName = StrCat(libName, "@", mname);
-  ModuleDefinition* parentModuleDefinition =
-      design->getModuleDefinition(modName);
-  if (parentModuleDefinition == nullptr) parentModuleDefinition = mod;
-
+  DesignComponent* refModDef = design->getModuleDefinition(modName);
+  if (refModDef == nullptr) refModDef = design->getProgram(modName);
   uhdm::Scope* parentScope = any_cast<uhdm::Scope>(pexpr);
-  if (parentScope == nullptr) parentScope = mod->getUhdmModel<uhdm::Module>();
+  if (parentScope == nullptr) parentScope = mod->getUhdmModel<uhdm::Scope>();
 
-  uhdm::ModuleTypespec* tps = nullptr;
+  uhdm::Typespec* tps = nullptr;
   NodeId typespecId = fC->Child(id);
-  const std::string_view typespecName = fC->SymName(typespecId);
-  if (uhdm::TypespecCollection* const typespecs = parentScope->getTypespecs()) {
-    for (uhdm::Typespec* t : *typespecs) {
-      if (uhdm::ModuleTypespec* const mt = any_cast<uhdm::ModuleTypespec>(t)) {
-        if (mt->getName() == typespecName) {
-          tps = mt;
-          break;
-        }
-      }
+  if (refModDef == nullptr) {
+    if (fC->Type(id) == VObjectType::paInterface_instantiation) {
+      uhdm::InterfaceTypespec* const it = s.make<uhdm::InterfaceTypespec>();
+      it->setName(fC->SymName(typespecId));
+      it->setParent(parentScope);
+      tps = it;
+    } else if (fC->Type(id) == VObjectType::paModule_instantiation) {
+      uhdm::ModuleTypespec* const mt = s.make<uhdm::ModuleTypespec>();
+      mt->setName(fC->SymName(typespecId));
+      mt->setParent(parentScope);
+      tps = mt;
+    } else if (fC->Type(id) == VObjectType::paProgram_instantiation) {
+      uhdm::ProgramTypespec* const mt = s.make<uhdm::ProgramTypespec>();
+      mt->setName(fC->SymName(typespecId));
+      mt->setParent(parentScope);
+      tps = mt;
+    } else if (fC->Type(id) == VObjectType::paUdp_instantiation) {
+      uhdm::UdpDefnTypespec* const mt = s.make<uhdm::UdpDefnTypespec>();
+      mt->setName(fC->SymName(typespecId));
+      mt->setParent(parentScope);
+      tps = mt;
+    }
+    refModDef = mod;
+  } else {
+    if (fC->Type(id) == VObjectType::paInterface_instantiation) {
+      tps = refModDef->getUhdmTypespecModel<uhdm::InterfaceTypespec>();
+    } else if (fC->Type(id) == VObjectType::paModule_instantiation) {
+      tps = refModDef->getUhdmTypespecModel<uhdm::ModuleTypespec>();
+    } else if (fC->Type(id) == VObjectType::paProgram_instantiation) {
+      tps = refModDef->getUhdmTypespecModel<uhdm::ProgramTypespec>();
+    } else if (fC->Type(id) == VObjectType::paUdp_instantiation) {
+      tps = refModDef->getUhdmTypespecModel<uhdm::UdpDefnTypespec>();
     }
   }
 
-  if (tps == nullptr) {
-    tps = s.make<uhdm::ModuleTypespec>();
-    tps->setName(typespecName);
-    tps->setParent(parentScope);
+  if (uhdm::TypespecCollection* const tc = parentScope->getTypespecs(true)) {
+    if (std::find(tc->cbegin(), tc->cend(), tps) == tc->cend()) {
+      tc->emplace_back(tps);
+    }
   }
 
   NodeId hierInstId = fC->sl_collect(id, VObjectType::paHierarchical_instance);
@@ -2851,8 +2872,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         fC->populateCoreMembers(typespecId, typespecId, tpsRef);
         mod_array->setElemTypespec(tpsRef);
         tpsRef->setActual(tps);
-
-        compileHighConn(parentModuleDefinition, fC, compileDesign, id,
+        compileHighConn(refModDef, fC, compileDesign, id,
                         mod_array->getPorts(true), mod_array);
         fC->populateCoreMembers(identifierId, identifierId, mod_array);
         results.first.emplace_back(mod_array);
@@ -2865,8 +2885,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       m->setParent(parentScope);
       fC->populateCoreMembers(moduleName, moduleName, m);
       results.second.emplace_back(m);
-      compileHighConn(parentModuleDefinition, fC, compileDesign, id,
-                      m->getPorts(true), m);
+      compileHighConn(refModDef, fC, compileDesign, id, m->getPorts(true), m);
     }
     hierInstId = fC->Sibling(hierInstId);
   }
@@ -3112,7 +3131,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
                  instance);
 }
 
-void CompileHelper::compileHighConn(ModuleDefinition* component,
+void CompileHelper::compileHighConn(DesignComponent* component,
                                     const FileContent* fC,
                                     CompileDesign* compileDesign, NodeId instId,
                                     uhdm::PortCollection* ports,
@@ -5570,6 +5589,14 @@ uhdm::ClockingBlock* CompileHelper::compileClockingBlock(
             io->setDirection(vpiOutput);
           } else if (direction == VObjectType::paClockingDir_Inout) {
             io->setDirection(vpiInout);
+          }
+          if ((dcInp != nullptr) &&
+              (dcInp->getParent<uhdm::ClockingIODecl>() == nullptr)) {
+            dcInp->setParent(io, true);
+          }
+          if ((dcOut != nullptr) &&
+              (dcOut->getParent<uhdm::ClockingIODecl>() == nullptr)) {
+            dcOut->setParent(io, true);
           }
           Clocking_decl_assign = fC->Sibling(Clocking_decl_assign);
         }

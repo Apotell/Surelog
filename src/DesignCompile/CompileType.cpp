@@ -195,14 +195,8 @@ uhdm::Any* CompileHelper::compileVariable(
           }
         }
         if (cl) {
+          ts = cl->getUhdmTypespecModel();
           uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
-          if (ts == nullptr) {
-            uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-            tps->setClassDefn(cl->getUhdmModel<uhdm::ClassDefn>());
-            tps->setName(typespecName);
-            tps->setParent(pstmt);
-            ts = tps;
-          }
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(typespecName);
           tpsRef->setParent(var);
@@ -982,10 +976,9 @@ Typespec* CompileHelper::compileDatastructureTypespec(
         return nullptr;
       } else if (const ClassDefinition* classDefn =
                      datatype_cast<ClassDefinition>(dt)) {
-        uhdm::ClassTypespec* ref = s.make<uhdm::ClassTypespec>();
-        ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
-        ref->setName(typeName);
-        ref->setParent(pscope);
+        uhdm::ClassTypespec* const ref =
+            const_cast<ClassDefinition*>(classDefn)
+                ->getUhdmTypespecModel<uhdm::ClassTypespec>();
         result = ref;
 
         const FileContent* actualFC = fC;
@@ -1108,10 +1101,8 @@ Typespec* CompileHelper::compileDatastructureTypespec(
           design->getModuleDefinition(StrCat(libName, "@", typeName));
       if (def) {
         if (def->getType() == VObjectType::paInterface_declaration) {
-          uhdm::InterfaceTypespec* tps = s.make<uhdm::InterfaceTypespec>();
-          tps->setName(typeName);
-          tps->setInterface(def->getUhdmModel<uhdm::Interface>());
-          fC->populateCoreMembers(type, type, tps);
+          uhdm::InterfaceTypespec* const tps =
+              def->getUhdmTypespecModel<uhdm::InterfaceTypespec>();
           result = tps;
           if (!suffixname.empty()) {
             const DataType* defType = def->getDataType(design, suffixname);
@@ -1628,14 +1619,18 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::paInterface_identifier: {
-      uhdm::InterfaceTypespec* tps = s.make<uhdm::InterfaceTypespec>();
       const std::string_view name = fC->SymName(type);
-      tps->setName(name);
-      fC->populateCoreMembers(type, type, tps);
       const std::string_view libName = fC->getLibrary()->getName();
-      if (ModuleDefinition* const def =
-              design->getModuleDefinition(StrCat(libName, "@", name))) {
-        tps->setInterface(def->getUhdmModel<uhdm::Interface>());
+      ModuleDefinition* const def =
+          design->getModuleDefinition(StrCat(libName, "@", name));
+      uhdm::InterfaceTypespec* tps = nullptr;
+      if (def) tps = def->getUhdmTypespecModel<uhdm::InterfaceTypespec>();
+
+      if (tps == nullptr) {
+        tps = s.make<uhdm::InterfaceTypespec>();
+        tps->setName(name);
+        fC->populateCoreMembers(type, type, tps);
+        if (def) tps->setInterface(def->getUhdmModel<uhdm::Interface>());
       }
       result = tps;
       break;
@@ -1757,11 +1752,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         if (dtype == nullptr) {
           ClassDefinition* classDefn = pack->getClassDefinition(name);
           dtype = (const DataType*)classDefn;
-          if (dtype) {
-            uhdm::ClassTypespec* ref = s.make<uhdm::ClassTypespec>();
-            ref->setClassDefn(classDefn->getUhdmModel<uhdm::ClassDefn>());
-            ref->setName(typeName);
-            result = ref;
+          if (classDefn) {
+            result = classDefn->getUhdmTypespecModel();
             break;
           }
         }
@@ -2041,11 +2033,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             }
           }
           if (cl) {
-            uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-            tps->setName(typeName);
-            tps->setParent(pstmt);
-            tps->setClassDefn(cl->getUhdmModel<uhdm::ClassDefn>());
-            result = tps;
+            result = cl->getUhdmTypespecModel();
           }
         }
       }
@@ -2192,6 +2180,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
   };
 
   if (result) {
+    result->setParent(pstmt);
     result = compileUpdatedTypespec(component, fC, id, Packed_dimension,
                                     unpackedDimId, compileDesign, reduce, pstmt,
                                     result);

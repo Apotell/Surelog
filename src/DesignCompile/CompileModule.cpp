@@ -317,18 +317,20 @@ bool CompileModule::collectUdpObjects_() {
 
         const std::string_view outputname = fC->SymName(Output);
         fC->populateCoreMembers(Output, Output, net);
-        net->setParent(defn);
         if (std::vector<uhdm::IODecl*>* ios = defn->getIODecls()) {
           for (auto io : *ios) {
             if (io->getName() == outputname) {
-              if (io->getExpr() == nullptr)
+              if (io->getExpr() == nullptr) {
                 io->setExpr(net);  // reg def do not override output def
+                net->setParent(io);
+              }
               net->setName(io->getName());
               io->setDirection(vpiOutput);
               break;
             }
           }
         }
+        net->setParent(defn);
         break;
       }
       case VObjectType::paUdp_input_declaration: {
@@ -351,15 +353,16 @@ bool CompileModule::collectUdpObjects_() {
               net->setAttributes(attributes);
               for (auto a : *attributes) a->setParent(net);
             }
-            net->setParent(defn);
             for (auto io : *ios) {
               if (io->getName() == inputname) {
                 io->setExpr(net);
+                net->setParent(io);
                 net->setName(io->getName());
                 io->setDirection(vpiInput);
                 break;
               }
             }
+            net->setParent(defn);
           }
           Identifier = fC->Sibling(Identifier);
         }

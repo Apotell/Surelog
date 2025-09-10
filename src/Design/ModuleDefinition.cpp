@@ -14,8 +14,6 @@
  limitations under the License.
  */
 
-#include "Surelog/Design/ModuleDefinition.h"
-
 /*
  * File:   ModuleDefinition.cpp
  * Author: alain
@@ -23,9 +21,15 @@
  * Created on October 20, 2017, 10:29 PM
  */
 
+#include "Surelog/Design/ModuleDefinition.h"
+
 #include <uhdm/Serializer.h>
 #include <uhdm/interface.h>
+#include <uhdm/interface_typespec.h>
 #include <uhdm/module.h>
+#include <uhdm/module_typespec.h>
+#include <uhdm/udp_defn.h>
+#include <uhdm/udp_defn_typespec.h>
 
 #include <cstddef>
 #include <cstdint>
@@ -61,6 +65,13 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PRIMITIVE),
                               nodeId, instance);
       setUhdmModel(instance);
+
+      uhdm::UdpDefnTypespec* const tps =
+          serializer.make<uhdm::UdpDefnTypespec>();
+      tps->setName(
+          fC->SymName(fC->sl_collect(nodeId, VObjectType::paIdentifier)));
+      tps->setUdpDefn(instance);
+      setUhdmTypespecModel(tps);
     } break;
 
     case VObjectType::paInterface_declaration: {
@@ -69,6 +80,13 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::INTERFACE),
                               nodeId, instance);
       setUhdmModel(instance);
+
+      uhdm::InterfaceTypespec* const tps =
+          serializer.make<uhdm::InterfaceTypespec>();
+      tps->setName(fC->SymName(
+          fC->sl_collect(nodeId, VObjectType::paInterface_identifier)));
+      tps->setInterface(instance);
+      setUhdmTypespecModel(tps);
     } break;
 
     default: {
@@ -78,6 +96,12 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
           fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
           instance);
       setUhdmModel(instance);
+
+      uhdm::ModuleTypespec* const tps = serializer.make<uhdm::ModuleTypespec>();
+      tps->setName(
+          fC->SymName(fC->sl_collect(nodeId, VObjectType::STRING_CONST)));
+      tps->setModule(instance);
+      setUhdmTypespecModel(tps);
     } break;
   }
 }

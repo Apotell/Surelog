@@ -1230,7 +1230,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
       if (result) {
         uhdm::VarSelect *var_select = (uhdm::VarSelect *)result;
         var_select->getIndexes(true)->emplace_back(sel);
-        sel->setParent(var_select);
+        sel->setParent(var_select, true);
       } else if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
         uhdm::VarSelect *var_select = s.make<uhdm::VarSelect>();
         var_select->setName(name);
@@ -1239,7 +1239,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
         }
         var_select->setParent(pexpr);
         var_select->getIndexes(true)->emplace_back(sel);
-        sel->setParent(var_select);
+        sel->setParent(var_select, true);
       } else {
         result = sel;
       }
@@ -1293,7 +1293,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
               if (sel->getUhdmType() == uhdm::UhdmType::HierPath) {
                 uhdm::HierPath *p = (uhdm::HierPath *)sel;
                 for (auto el : *p->getPathElems()) {
-                  el->swap(p, path);
+                  s.swap(p, path);
                   elems->emplace_back(el);
                 }
                 break;
@@ -5389,10 +5389,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
 
             if (fC->Type(randomize_call) == VObjectType::paRandomize_call) {
               fcall = compileRandomizeCall(component, fC, randomize_call,
-                                           compileDesign, pexpr);
+                                           compileDesign, path);
             } else {
               fcall = s.make<uhdm::MethodFuncCall>();
               fcall->setName(method_name);
+              fcall->setParent(path);
               fC->populateCoreMembers(method_name_node, id, fcall);
               NodeId list_of_arguments =
                   fC->Sibling(fC->Child(fC->Child(method_child)));
@@ -5425,6 +5426,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
             fcall = s.make<uhdm::MethodFuncCall>();
             const std::string_view methodName = fC->SymName(dotedName);
             fcall->setName(methodName);
+            fcall->setParent(path);
             fC->populateCoreMembers(dotedName, id, fcall);
             if (uhdm::AnyCollection *arguments = compileTfCallArguments(
                     component, fC, List_of_arguments, compileDesign, reduce,
@@ -5435,7 +5437,6 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
             tmpName.clear();
             dotedName = fC->Sibling(dotedName);
           }
-          if (fcall != nullptr) fcall->setParent(path);
         }
         name = dotedName;
         if (dotedName) dotedName = fC->Sibling(dotedName);

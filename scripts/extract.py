@@ -89,8 +89,7 @@ def _is_filtered(name, filters):
   return False
 
 
-def _extract_worker(params):
-  zip_filepath, output_dirpath, modes, filters = params
+def _extract_worker(zip_filepath, output_dirpath, modes, filters):
   archive_name = Path(zip_filepath).stem
 
   results = {}
@@ -158,14 +157,6 @@ def _main():
 
   parser = argparse.ArgumentParser()
   parser.add_argument('modes', nargs='+', choices=['db', 'log'], type=str, help='Pick what to extract from available choices')
-  parser.add_argument('--build-no', dest='build_no', required=True, type=int, help='CI build no.')
-  parser.add_argument('--archive-filename-pattern', dest='archive_filename_pattern', required=False, type=str,
-                      default='sl-{}-linux-gcc-release-regression-{}.zip', help='Archive filepath pattern (with extension).')
-  parser.add_argument('--shards', dest='shards', nargs='+', type=int,
-                      default=[0, 1, 2, 3, 4, 5], help='List of shards to extract')
-  parser.add_argument(
-      '--input-dirpath', dest='input_dirpath', required=False, type=str,
-      help='Input directory path to find the artifacts.')
   parser.add_argument(
       '--output-dirpath', dest='output_dirpath', required=False, type=str,
       help='Output directory path to extract to.')
@@ -174,17 +165,14 @@ def _main():
   parser.add_argument(
       '--jobs', nargs='?', required=False, default=multiprocessing.cpu_count(), type=int,
       help='Run tests in parallel, optionally providing max number of concurrent processes. Set 0 to run sequentially.')
+  parser.add_argument(
+      '--zip-filepath', dest='zip_filepath', required=False, type=str, help='Path to zipfile to extract logs from.')
   args = parser.parse_args()
 
   args.modes = sorted(set(args.modes))
-  args.shards = sorted(set(args.shards))
 
-  if not os.path.isabs(args.input_dirpath):
-    args.input_dirpath = os.getcwd()
-  args.input_dirpath = os.path.abspath(args.input_dirpath)
-
-  if not os.path.isabs(args.output_dirpath):
-    args.output_dirpath = os.getcwd()
+  if not args.output_dirpath:
+    args.output_dirpath = os.path.dirname(args.zip_filepath)
   args.output_dirpath = os.path.abspath(args.output_dirpath)
 
   if args.filters:
@@ -207,37 +195,21 @@ def _main():
 
 
   print( 'Environment:')
-  print(f'            command-line: {" ".join(sys.argv)}')
-  print(f'         current-dirpath: {os.getcwd()}')
-  print(f'                build-no: {args.build_no}')
-  print(f'archive-filename-pattern: {args.archive_filename_pattern}')
-  print(f'                  shards: {args.shards}')
-  print(f'           input-dirpath: {args.input_dirpath}')
-  print(f'          output-dirpath: {args.output_dirpath}')
-  print(f'                 filters: {args.filters}')
-  print(f'                    jobs: {args.jobs}')
+  print(f'   command-line: {" ".join(sys.argv)}')
+  print(f'current-dirpath: {os.getcwd()}')
+  print(f'   zip-filepath: {args.zip_filepath}')
+  print(f' output-dirpath: {args.output_dirpath}')
+  print(f'        filters: {args.filters}')
+  print(f'           jobs: {args.jobs}')
   print( '\n\n')
 
   _mkdir(args.output_dirpath)
-
-  params = [(
-    os.path.join(args.input_dirpath, args.archive_filename_pattern.format(args.build_no, shard)),
-    args.output_dirpath,
-    args.modes, args.filters
-  ) for shard in args.shards]
-
-  jobs = min(args.jobs, len(params))
-
-  if jobs <= 1:
-    results = [_extract_worker(param) for param in params]
-  else:
-    with multiprocessing.Pool(processes=jobs) as pool:
-      results = pool.map(_extract_worker, params)
+  results = _extract_worker(args.zip_filepath, args.output_dirpath, args.modes, args.filters)
 
   def _test_failed(v: dict):
     return sum(0 if s == Status.PASS else 1 for s in v.values()) != 0
 
-  results = {k: v for result in results for k, v in result.items()}
+  # results = {k: v for result in results for k, v in result.items()}
   failures = {k: v for k, v in results.items() if _test_failed(v)}
 
   end_dt = datetime.now()

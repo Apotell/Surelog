@@ -283,13 +283,11 @@ bool TestbenchElaboration::bindBaseClasses_() {
         extends->setParent(derived);
         fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                    placeHolder->getNodeId(), extends);
-        uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
         uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
         extends_ts->setParent(extends);
-        extends_ts->setActual(tps);
+        extends_ts->setActual(
+            const_cast<ClassDefinition*>(bdef)->getUhdmTypespecModel());
         extends->setClassTypespec(extends_ts);
-        tps->setClassDefn(parent);
-        tps->setName(placeHolder->getName());
         derived->setExtends(extends);
         parent->getDerivedClasses(true)->push_back(derived);
       } else {
@@ -308,11 +306,10 @@ bool TestbenchElaboration::bindBaseClasses_() {
           uhdm::Extends* extends = s.make<uhdm::Extends>();
           fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                      placeHolder->getNodeId(), extends);
-          uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-          tps->setName(class_def.second->getName());
           uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
           extends_ts->setParent(extends);
-          extends_ts->setActual(tps);
+          extends_ts->setActual(
+              const_cast<ClassDefinition*>(bdef)->getUhdmTypespecModel());
           extends->setClassTypespec(extends_ts);
           uhdm::ClassDefn* def =
               classDefinition->getUhdmModel<uhdm::ClassDefn>();

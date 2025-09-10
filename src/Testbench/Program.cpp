@@ -25,6 +25,7 @@
 
 #include <uhdm/Serializer.h>
 #include <uhdm/program.h>
+#include <uhdm/program_typespec.h>
 
 #include <cstdint>
 #include <string_view>
@@ -46,6 +47,11 @@ Program::Program(Session* session, std::string_view name, Library* library,
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(nodeId, nodeId, instance);
   setUhdmModel(instance);
+
+  uhdm::ProgramTypespec* const tps = serializer.make<uhdm::ProgramTypespec>();
+  tps->setName(fC->SymName(fC->sl_collect(nodeId, VObjectType::STRING_CONST)));
+  tps->setProgram(instance);
+  setUhdmTypespecModel(tps);
 }
 
 uint32_t Program::getSize() const {

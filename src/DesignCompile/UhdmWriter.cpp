@@ -931,6 +931,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s,
     uhdm::ClassDefn* c = classDef->getUhdmModel<uhdm::ClassDefn>();
     m_componentMap.emplace(classDef, c);
     c->setParent(parent);
+    classDef->getUhdmTypespecModel()->setParent(parent);
     c->setEndLabel(classDef->getEndLabel());
     c->setTaskFuncDecls(classDef->getTaskFuncDecls());
 
@@ -1439,15 +1440,15 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
           while (fC->Sibling(typespecEnd)) {
             typespecEnd = fC->Sibling(typespecEnd);
           }
-          uhdm::InterfaceTypespec* tps = s.make<uhdm::InterfaceTypespec>();
           if (smarray->getElemTypespec() == nullptr) {
             uhdm::RefTypespec* tps_rt = s.make<uhdm::RefTypespec>();
             tps_rt->setParent(smarray);
             smarray->setElemTypespec(tps_rt);
           }
-          smarray->getElemTypespec()->setActual(tps);
-          tps->setName(typeName);
-          fC->populateCoreMembers(typespecStart, typespecEnd, tps);
+          ModuleDefinition* intefacedef =
+              m_design->getModuleDefinition(typeName);
+          smarray->getElemTypespec()->setActual(
+              intefacedef->getUhdmTypespecModel());
 
           subInterfaceArrays->emplace_back(smarray);
         }
@@ -3110,6 +3111,9 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     for (auto& pack : m_design->getPackageDefinitions()) {
       if (pack.first == "builtin") {
         pack.second->getUhdmModel()->setParent(d);
+        if (Typespec* const ts = pack.second->getUhdmTypespecModel()) {
+          ts->setParent(d);
+        }
         if (pack.second) packages.insert(packages.begin(), pack.second);
         break;
       }
@@ -3189,6 +3193,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         m_componentMap.emplace(prog, p);
         instanceDefinitionMap.emplace(prog->getName(), p);
         p->setParent(d);
+        prog->getUhdmTypespecModel()->setParent(d);
         p->setDefName(prog->getName());
         const NodeId modId = prog->getNodeIds()[0];
         const NodeId startId = fC->sl_collect(modId, VObjectType::PROGRAM);
@@ -3215,6 +3220,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         m_componentMap.emplace(mod, m);
         instanceDefinitionMap.emplace(mod->getName(), m);
         m->setParent(d);
+        mod->getUhdmTypespecModel()->setParent(d);
         m->setDefName(mod->getName());
         const NodeId modId = mod->getNodeIds()[0];
         const NodeId startId = fC->sl_collect(modId, VObjectType::INTERFACE);
@@ -3247,8 +3253,11 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         std::string_view modName = mod->getName();
         instanceDefinitionMap.emplace(modName, m);
         m->setDefName(modName);
+        uhdm::Typespec* mtps = mod->getUhdmTypespecModel();
         if (modName.find("::") == std::string_view::npos) {
           m->setParent(d);
+          mtps->setParent(d);
+          mod->getUhdmTypespecModel()->setParent(d);
         } else {
           modName = StringUtils::rtrim_until(modName, ':');
           modName.remove_suffix(1);
@@ -3256,8 +3265,12 @@ bool UhdmWriter::write(PathId uhdmFileId) {
               instanceDefinitionMap.find(modName);
           if (pmodIt == instanceDefinitionMap.end()) {
             m->setParent(d);
+            mtps->setParent(d);
+            mod->getUhdmTypespecModel()->setParent(d);
           } else {
             m->setParent(pmodIt->second);
+            mtps->setParent(pmodIt->second);
+            mod->getUhdmTypespecModel()->setParent(pmodIt->second);
           }
         }
         if (mod->getAttributes() != nullptr) {
@@ -3273,6 +3286,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         if (uhdm::UdpDefn* defn = mod->getUhdmModel<uhdm::UdpDefn>()) {
           m_componentMap.emplace(mod, defn);
           defn->setParent(d);
+          mod->getUhdmTypespecModel()->setParent(d);
           defn->setDefName(mod->getName());
           const NodeId modId = mod->getNodeIds()[0];
           const NodeId startId = fC->sl_collect(modId, VObjectType::PRIMITIVE);

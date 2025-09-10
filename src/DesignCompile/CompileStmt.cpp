@@ -1522,16 +1522,8 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             fC->Sibling(Data_type_or_implicit);
         NodeId nameId = fC->Child(List_of_tf_variable_identifiers);
         while (nameId) {
-          uhdm::RangeCollection* ranges = nullptr;
-          NodeId Variable_dimension = fC->Sibling(nameId);
-          if (fC->Type(Variable_dimension) ==
-              VObjectType::paVariable_dimension) {
-            int32_t size;
-            ranges =
-                compileRanges(component, fC, Variable_dimension, compileDesign,
-                              Reduce::No, parent, nullptr, size, false);
-          }
           const std::string_view name = fC->SymName(nameId);
+
           uhdm::IODecl* decl = s.make<uhdm::IODecl>();
           ios->emplace_back(decl);
           decl->setParent(parent);
@@ -1540,6 +1532,16 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           decl->setName(name);
           ioMap.emplace(name, decl);
           fC->populateCoreMembers(nameId, nameId, decl);
+
+          uhdm::RangeCollection* ranges = nullptr;
+          NodeId Variable_dimension = fC->Sibling(nameId);
+          if (fC->Type(Variable_dimension) ==
+              VObjectType::paVariable_dimension) {
+            int32_t size;
+            ranges =
+                compileRanges(component, fC, Variable_dimension, compileDesign,
+                              Reduce::No, decl, nullptr, size, false);
+          }
           if (ts != nullptr) {
             if (decl->getTypespec() == nullptr) {
               uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
@@ -2192,7 +2194,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
     while (Stmt) {
       if (fC->Type(Stmt) == VObjectType::paSuper_dot_new) {
         uhdm::MethodFuncCall* mcall = s.make<uhdm::MethodFuncCall>();
-        mcall->setParent(func);
+        mcall->setParent(begin);
         mcall->setName("super.new");
         NodeId Args = fC->Sibling(Stmt);
         if (fC->Type(Args) == VObjectType::paArgument_list) {
@@ -2310,19 +2312,11 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   setFuncTaskQualifiers(fC, nodeId, func);
   func->setMethod(isMethod);
   if (constructor) {
-    uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-    tps->setParent(func);
-
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
     tpsRef->setParent(func);
-    tpsRef->setActual(tps);
+    tpsRef->setActual(component->getUhdmTypespecModel());
     fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tpsRef);
     func->setReturn(tpsRef);
-
-    ClassDefinition* cdef = valuedcomponenti_cast<ClassDefinition*>(component);
-    tps->setClassDefn(cdef->getUhdmModel<uhdm::ClassDefn>());
-    tps->setName(cdef->getUhdmModel<uhdm::ClassDefn>()->getFullName());
-    tpsRef->setName(tps->getName());
   } else {
     NodeId Function_body_declaration;
     if (fC->Type(func_decl) == VObjectType::paFunction_body_declaration)

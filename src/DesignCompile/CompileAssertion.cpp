@@ -367,6 +367,22 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
     CompileDesign* compileDesign, uhdm::Any* pstmt,
     SURELOG::ValuedComponentI* instance) {
   uhdm::Serializer& s = compileDesign->getSerializer();
+
+  uhdm::Any* stmt = nullptr;
+  switch (fC->Type(the_stmt)) {
+    case VObjectType::paDeferred_immediate_assert_statement:
+      stmt = s.make<uhdm::ImmediateAssert>();
+      break;
+    case VObjectType::paDeferred_immediate_assume_statement:
+      stmt = s.make<uhdm::ImmediateAssume>();
+      break;
+    case VObjectType::paDeferred_immediate_cover_statement:
+      stmt = s.make<uhdm::ImmediateCover>();
+      break;
+    default:
+      return nullptr;
+  }
+
   NodeId the_stmt_child = fC->Child(the_stmt);
   int32_t isFinal =
       fC->Type(the_stmt_child) == VObjectType::POUND_DELAY ? 0 : 1;
@@ -382,59 +398,47 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
     if (else_keyword) else_stmt_id = fC->Sibling(else_keyword);
   }
   uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      Reduce::No, pstmt, instance);
+                                      Reduce::No, stmt, instance);
   uhdm::AnyCollection* if_stmts = nullptr;
   if (if_stmt_id)
-    if_stmts = compileStmt(component, fC, if_stmt_id, compileDesign, Reduce::No,
-                           pstmt);
+    if_stmts =
+        compileStmt(component, fC, if_stmt_id, compileDesign, Reduce::No, stmt);
   uhdm::Any* if_stmt = nullptr;
-  if (if_stmts) if_stmt = (*if_stmts)[0];
+  if (if_stmts) if_stmt = if_stmts->front();
   uhdm::AnyCollection* else_stmts = nullptr;
   if (else_stmt_id)
     else_stmts = compileStmt(component, fC, else_stmt_id, compileDesign,
-                             Reduce::No, pstmt);
+                             Reduce::No, stmt);
   uhdm::Any* else_stmt = nullptr;
-  if (else_stmts) else_stmt = (*else_stmts)[0];
-  uhdm::Any* stmt = nullptr;
+  if (else_stmts) else_stmt = else_stmts->front();
   switch (fC->Type(the_stmt)) {
     case VObjectType::paDeferred_immediate_assert_statement: {
-      uhdm::ImmediateAssert* astmt = s.make<uhdm::ImmediateAssert>();
+      uhdm::ImmediateAssert* astmt = static_cast<uhdm::ImmediateAssert*>(stmt);
       fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
-      astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
-      astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
-      astmt->setElseStmt(else_stmt);
-      if (else_stmt) else_stmt->setParent(astmt);
+      if (uhdm::Expr* const e = any_cast<uhdm::Expr>(expr)) astmt->setExpr(e);
+      if (if_stmt != nullptr) astmt->setStmt(if_stmt);
+      if (else_stmt != nullptr) astmt->setElseStmt(else_stmt);
       astmt->setIsDeferred(1);
       astmt->setIsFinal(isFinal);
       stmt = astmt;
       break;
     }
     case VObjectType::paDeferred_immediate_assume_statement: {
-      uhdm::ImmediateAssume* astmt = s.make<uhdm::ImmediateAssume>();
+      uhdm::ImmediateAssume* astmt = static_cast<uhdm::ImmediateAssume*>(stmt);
       fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
-      astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
-      astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
-      astmt->setElseStmt(else_stmt);
-      if (else_stmt) else_stmt->setParent(astmt);
+      if (uhdm::Expr* const e = any_cast<uhdm::Expr>(expr)) astmt->setExpr(e);
+      if (if_stmt != nullptr) astmt->setStmt(if_stmt);
+      if (else_stmt != nullptr) astmt->setElseStmt(else_stmt);
       astmt->setIsDeferred(1);
       astmt->setIsFinal(isFinal);
       stmt = astmt;
       break;
     }
     case VObjectType::paDeferred_immediate_cover_statement: {
-      uhdm::ImmediateCover* astmt = s.make<uhdm::ImmediateCover>();
+      uhdm::ImmediateCover* astmt = static_cast<uhdm::ImmediateCover*>(stmt);
       fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
-      astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
-      astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
+      if (uhdm::Expr* const e = any_cast<uhdm::Expr>(expr)) astmt->setExpr(e);
+      if (if_stmt != nullptr) astmt->setStmt(if_stmt);
       astmt->setIsDeferred(1);
       astmt->setIsFinal(isFinal);
       stmt = astmt;

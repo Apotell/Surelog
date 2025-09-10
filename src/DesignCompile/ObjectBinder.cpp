@@ -395,6 +395,11 @@ const uhdm::Any* ObjectBinder::findInCollection(
       if (const uhdm::Any* const actual = findInTypespec(name, refType, et)) {
         return actual;
       }
+    } else if (const uhdm::ImportTypespec* const it =
+                   any_cast<uhdm::ImportTypespec>(c)) {
+      if (const uhdm::Any* const actual = findInTypespec(name, refType, it)) {
+        return actual;
+      }
     }
 
     if (c->getUhdmType() == uhdm::UhdmType::EnumVar) {
@@ -1265,8 +1270,7 @@ void ObjectBinder::enterRefObj(const uhdm::RefObj* object,
                         rto->setEndLine(object->getEndLine());
                         rto->setEndColumn(object->getEndColumn());
                         rto->setActual(const_cast<uhdm::Typespec*>(et));
-                        const_cast<uhdm::Any*>(object->getParent())
-                            ->swap(object, rto);
+                        m_serializer.swap(object, rto);
                         return;
                       }
                     }
@@ -1342,15 +1346,9 @@ void ObjectBinder::enterClassDefn(const uhdm::ClassDefn* object,
       //                  false, false, false, false, false);
       // bdef->insertProperty(prop);
 
-      if (uhdm::ClassDefn* base = bdef->getUhdmModel<uhdm::ClassDefn>()) {
-        uhdm::Serializer& s = *base->getSerializer();
-        uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
-        tps->setName(rt->getName());
-        tps->setFile(base->getFile());
-        tps->setParent(derClsDef);
-        rt->setActual(tps);
-
-        tps->setClassDefn(base);
+      if (uhdm::ClassDefn* const base = bdef->getUhdmModel<uhdm::ClassDefn>()) {
+        rt->setActual(
+            const_cast<ClassDefinition*>(bdef)->getUhdmTypespecModel());
         base->getDerivedClasses(true)->emplace_back(derClsDef);
       }
       break;
@@ -1455,7 +1453,7 @@ bool ObjectBinder::createDefaultNets() {
         rt->setStartColumn(ro->getStartColumn());
         rt->setEndLine(ro->getEndLine());
         rt->setEndColumn(ro->getEndColumn());
-        const_cast<uhdm::Any*>(pro)->swap(object, rt);
+        m_serializer.swap(object, rt);
         m_unbounded.erase(std::find_if(m_unbounded.begin(), m_unbounded.end(),
                                        [object](Unbounded::value_type& entry) {
                                          return std::get<0>(entry) == object;

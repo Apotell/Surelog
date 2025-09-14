@@ -244,20 +244,25 @@ uhdm::Any* CompileHelper::compileVariable(
           }
           result = var;
         } else {
-          uhdm::Variables* ref = nullptr;
-          if (ts && (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
-            ref = s.make<uhdm::ArrayVar>();
-          } else if (ts && (ts->getUhdmType() ==
-                            uhdm::UhdmType::PackedArrayTypespec)) {
-            ref = s.make<uhdm::PackedArrayVar>();
+          if ((ts != nullptr) &&
+              (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
+            uhdm::Variables* ref = s.make<uhdm::ArrayVar>();
+            ref->setName(fC->SymName(nameId));
+            result = ref;
+          } else if ((ts != nullptr) && (ts->getUhdmType() ==
+                                         uhdm::UhdmType::PackedArrayTypespec)) {
+            uhdm::Variables* ref = s.make<uhdm::PackedArrayVar>();
+            ref->setName(fC->SymName(nameId));
+            result = ref;
           } else {
-            ref = s.make<uhdm::RefVar>();
+            uhdm::RefObj* ref = s.make<uhdm::RefObj>();
+            ref->setName(fC->SymName(nameId));
+            result = ref;
           }
-          ref->setName(fC->SymName(nameId));
-          fC->populateCoreMembers(nameId, nameId, ref);
+          fC->populateCoreMembers(nameId, nameId, result);
 
           if (ts == nullptr) {
-            uhdm::UnsupportedTypespec *ut = s.make<uhdm::UnsupportedTypespec>();
+            uhdm::UnsupportedTypespec* ut = s.make<uhdm::UnsupportedTypespec>();
             ut->setName(typeName);
             ut->setParent(pstmt);
             fC->populateCoreMembers(declarationId, declarationId, ut);
@@ -265,12 +270,11 @@ uhdm::Any* CompileHelper::compileVariable(
           }
 
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-          tsRef->setParent(ref);
+          tsRef->setParent(result);
           tsRef->setActual(ts);
           tsRef->setName(typeName);
           fC->populateCoreMembers(declarationId, declarationId, tsRef);
-          ref->setTypespec(tsRef);
-          result = ref;
+          any_cast<uhdm::SimpleExpr>(result)->setTypespec(tsRef);
         }
       }
       break;
@@ -1330,8 +1334,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   uhdm::Typespec* retts = ts;
   uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
-  uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr) pscope = design->getUhdmDesign();
+  if (pstmt == nullptr) pstmt = component->getUhdmModel();
+  if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
   std::vector<uhdm::Range*>* packedDimensions = nullptr;
   if (packedId) {
@@ -1373,7 +1377,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
 
     // create packed array
     uhdm::PackedArrayTypespec* tpaps = s.make<uhdm::PackedArrayTypespec>();
-    tpaps->setParent(pscope);
+    tpaps->setParent(pstmt);
+
     uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
     pret->setParent(taps);
     pret->setActual(tpaps);
@@ -1433,16 +1438,17 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
       taps->setArrayType(vpiStaticArray);
 
     tpaps->setRanges(packedDimensions);
-    for (auto r : *packedDimensions) r->setParent(tpaps);
+    for (auto r : *packedDimensions) r->setParent(tpaps, true);
 
     taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
 
     retts = taps;
 
   } else if (unpackedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
+
     NodeId unpackDimensionId2 = unpackedId;
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
@@ -1501,12 +1507,12 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
       taps->setArrayType(vpiStaticArray);
 
     taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
     retts = taps;
 
   } else if (packedId) {
     uhdm::PackedArrayTypespec* taps = s.make<uhdm::PackedArrayTypespec>();
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
 
     if (ts != nullptr) {
       uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();

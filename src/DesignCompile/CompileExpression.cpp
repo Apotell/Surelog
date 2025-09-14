@@ -5336,7 +5336,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                       instance, muteErrors)) {
                 tmpName = the_name;
                 the_name += "[" + decompileHelper(index) + "]";
-                select->setName(tmpName);
+                select->setName(fC->SymName(name));
                 select->setFullName(the_name);
                 select->setIndex(index);
               }

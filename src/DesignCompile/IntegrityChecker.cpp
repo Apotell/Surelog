@@ -974,6 +974,11 @@ void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
                              loc);
   }
 
+  if ((any_cast<uhdm::IODecl>(object) != nullptr) &&
+      (any_cast<uhdm::Modport>(parent) != nullptr)) {
+    expectScope = expectDesign = expectUdpDefn = false;
+  }
+
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr) &&
       (parentAsUdpDefn == nullptr) &&
       (expectScope || expectDesign || expectUdpDefn)) {

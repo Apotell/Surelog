@@ -569,10 +569,6 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         for_each->setEndLine(stmt->getEndLine());
         for_each->setEndColumn(stmt->getEndColumn());
       }
-      if (var) {
-        var->setParent(for_each);
-        for_each->setVariable((uhdm::Variables*)var);
-      }
       stmt = for_each;
       break;
     }
@@ -1718,10 +1714,10 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(decl);
         NodeId refName = (type == InvalidNodeId) ? prevType : type;
-        if ((fC->Type(refName) == VObjectType::paData_type) &&
-            (fC->SymName(refName) == SymbolTable::getBadSymbol()))
-          refName = fC->Child(refName);
-        tsRef->setName(fC->SymName(refName));
+        std::string_view name = fC->SymName(refName);
+        if (!name.empty() || (name == SymbolTable::getBadSymbol()))
+          name = ts->getName();
+        tsRef->setName(name);
         decl->setTypespec(tsRef);
         fC->populateCoreMembers(refName, refName, tsRef);
       }

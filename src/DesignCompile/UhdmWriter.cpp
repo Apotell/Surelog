@@ -1507,8 +1507,8 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
       mod->getModportSignalMap();
   for (auto& orig_modport : orig_modports) {
     uhdm::Modport* dest_modport = s.make<uhdm::Modport>();
-    // dest_modport->Interface(m); // Loop in elaboration!
     dest_modport->setParent(m);
+    dest_modport->setInterface(m);
     const FileContent* orig_fC = orig_modport.second.getFileContent();
     const NodeId orig_nodeId = orig_modport.second.getNodeId();
     orig_fC->populateCoreMembers(orig_nodeId, orig_nodeId, dest_modport);

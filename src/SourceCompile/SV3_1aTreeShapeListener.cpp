@@ -1878,9 +1878,68 @@ void SV3_1aTreeShapeListener::enterUnconnected_drive_directive(
 void SV3_1aTreeShapeListener::enterNounconnected_drive_directive(
     SV3_1aParser::Nounconnected_drive_directiveContext *ctx) {}
 
-void SV3_1aTreeShapeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {}
-void SV3_1aTreeShapeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {}
-void SV3_1aTreeShapeListener::visitTerminal(antlr4::tree::TerminalNode *node) {}
+void SV3_1aTreeShapeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
+  if (const antlr4::Token *const startToken = ctx->getStart()) {
+    // NOTE(HS): Bit of ambiguity here!
+    // Should we append the nodes between two rules to the previous
+    // or the current rule? If appended to the previous, they will show up
+    // at the tail and if appended to current, they show up at head.
+    // Either way, dependent on the source context, one of the other might
+    // be more meaningful, and thus ambigious.
+    processPendingTokens(ctx, startToken->getTokenIndex());
+  }
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
+    m_enteredSourceText = true;
+  }
+}
+void SV3_1aTreeShapeListener::processPendingTokens(
+    antlr4::tree::ParseTree *tree, size_t endTokenIndex) {
+
+  //return;
+  if (!m_enteredSourceText) {
+    return;  // Wait until the source_text rule is visited!
+  }
+
+  if (tree->getTreeType() == antlr4::tree::ParseTreeType::ERROR) {
+    tree = tree->parent;
+  }
+
+  while ((m_lastVisitedTokenIndex < endTokenIndex) &&
+         (m_lastVisitedTokenIndex < m_tokens->size())) {
+    antlr4::Token *const lastToken = m_tokens->get(m_lastVisitedTokenIndex);
+    ++m_lastVisitedTokenIndex;
+
+    switch (lastToken->getType()) {
+      case SV3_1aParser::LINE_COMMENT: {
+        const NodeId nodeId = addVObject(tree, lastToken->getText(),
+                                         VObjectType::LINE_COMMENT, true);
+      } break;
+      case SV3_1aParser::BLOCK_COMMENT: {
+        const NodeId nodeId = addVObject(tree, lastToken->getText(),
+                                         VObjectType::BLOCK_COMMENT, true);
+      } break;
+    }
+  }
+}
+
+void SV3_1aTreeShapeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
+    processPendingTokens(ctx->children.empty() ? ctx : ctx->children.back(),
+                         m_tokens->size());
+    m_enteredSourceText = false;
+  }
+
+  if (const antlr4::Token *const stopToken = ctx->getStop()) {
+    if (!ctx->children.empty()) {
+      processPendingTokens(ctx->children.back(), stopToken->getTokenIndex());
+    }
+  }
+}
+void SV3_1aTreeShapeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
+  const antlr4::Token *const token = node->getSymbol();
+  if (token->getType() == antlr4::Token::EOF) return;
+  processPendingTokens(node, token->getTokenIndex());
+}
 void SV3_1aTreeShapeListener::visitErrorNode(antlr4::tree::ErrorNode *node) {}
 
 void SV3_1aTreeShapeListener::exitBegin_keywords_directive(

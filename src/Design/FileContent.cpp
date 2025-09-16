@@ -336,7 +336,12 @@ NodeId FileContent::Child(NodeId index) const {
     std::cerr << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return InvalidNodeId;
   }
-  return m_objects[index].m_child;
+  NodeId childId = m_objects[index].m_child;
+  while (childId && (m_objects[childId].m_type == VObjectType::LINE_COMMENT || m_objects[childId].m_type == VObjectType::BLOCK_COMMENT))
+  {
+    childId = m_objects[childId].m_sibling;
+  }
+  return childId;
 }
 
 NodeId FileContent::Sibling(NodeId index) const {
@@ -347,7 +352,13 @@ NodeId FileContent::Sibling(NodeId index) const {
     std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return InvalidNodeId;
   }
-  return m_objects[index].m_sibling;
+  NodeId siblingId = m_objects[index].m_sibling;
+  while (siblingId &&
+         (m_objects[siblingId].m_type == VObjectType::LINE_COMMENT ||
+          m_objects[siblingId].m_type == VObjectType::BLOCK_COMMENT)) {
+    siblingId = m_objects[siblingId].m_sibling;
+  }
+  return siblingId;
 }
 
 NodeId FileContent::Definition(NodeId index) const {

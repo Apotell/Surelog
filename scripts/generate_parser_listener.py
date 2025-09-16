@@ -524,6 +524,11 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
           content.append(line)
 
   content.extend([
+    '   private:',
+    '     void processPendingTokens(antlr4::tree::ParseTree* tree, size_t endTokenIndex);',
+    '   private:',
+    '     size_t m_lastVisitedTokenIndex = 0;',
+    '     bool m_enteredSourceText = false;',
     '  };',
     '} // namespace SURELOG',
     ''

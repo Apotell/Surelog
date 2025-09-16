@@ -57,6 +57,7 @@ class DesignElaboration;
 class ErrorContainer;
 class FileContent;
 class LibrarySet;
+class Modport;
 class ModuleInstance;
 class ParseCache;
 class ParseFile;
@@ -126,6 +127,7 @@ class Design final {
   }
 
   ModuleDefinition* getModuleDefinition(std::string_view moduleName) const;
+  Modport* getModport(std::string_view modportName) const;
 
   DesignComponent* getComponentDefinition(std::string_view componentName) const;
 

@@ -1126,13 +1126,12 @@ Typespec* CompileHelper::compileDatastructureTypespec(
     }
 
     if (result == nullptr) {
-      const std::string_view libName = fC->getLibrary()->getName();
-      ModuleDefinition* def =
-          design->getModuleDefinition(StrCat(libName, "@", typeName));
-      if (def) {
+      const std::string defName =
+          StrCat(fC->getLibrary()->getName(), "@", typeName);
+      if (ModuleDefinition* def = design->getModuleDefinition(defName)) {
         if (def->getType() == VObjectType::paInterface_declaration) {
           uhdm::InterfaceTypespec* tps = s.make<uhdm::InterfaceTypespec>();
-          tps->setName(typeName);
+          tps->setName(defName);
           tps->setInterface(def->getUhdmModel<uhdm::Interface>());
           fC->populateCoreMembers(type, type, tps);
           result = tps;
@@ -1154,15 +1153,16 @@ Typespec* CompileHelper::compileDatastructureTypespec(
             }
           }
           if (NodeId sub = fC->Sibling(type)) {
-            const std::string_view name = fC->SymName(sub);
-            if (def->getModport(name)) {
+            const std::string mpName =
+                StrCat(def->getName(), ".", fC->SymName(sub));
+            if (Modport* const mp = def->getModport(mpName)) {
               uhdm::InterfaceTypespec* mptps =
                   s.make<uhdm::InterfaceTypespec>();
-              mptps->setName(name);
+              mptps->setName(mpName);
+              mptps->setModport(mp->getUhdmModel());
               mptps->setInterface(def->getUhdmModel<uhdm::Interface>());
               fC->populateCoreMembers(sub, sub, mptps);
               mptps->setParent(tps);
-              mptps->setIsModport(true);
               result = mptps;
             }
           }
@@ -1655,10 +1655,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       const std::string_view name = fC->SymName(type);
       tps->setName(name);
       fC->populateCoreMembers(type, type, tps);
-      const std::string_view libName = fC->getLibrary()->getName();
-      if (ModuleDefinition* const def =
-              design->getModuleDefinition(StrCat(libName, "@", name))) {
+      const std::string tsName = StrCat(fC->getLibrary()->getName(), "@", name);
+      if (ModuleDefinition* const def = design->getModuleDefinition(tsName)) {
         tps->setInterface(def->getUhdmModel<uhdm::Interface>());
+      } else if (Modport* const mp = design->getModport(tsName)) {
+        tps->setInterface(mp->getInterface());
+        tps->setModport(mp->getUhdmModel());
       }
       result = tps;
       break;

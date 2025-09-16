@@ -495,7 +495,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::FOREACH: {
       uhdm::ForeachStmt* for_each = s.make<uhdm::ForeachStmt>();
       NodeId Ps_or_hierarchical_array_identifier = fC->Sibling(the_stmt);
-      uhdm::Any* var = compileVariable(
+      compileVariable(
           component, fC, fC->Child(Ps_or_hierarchical_array_identifier),
           fC->Child(Ps_or_hierarchical_array_identifier), InvalidNodeId,
           compileDesign, Reduce::No, for_each, nullptr, false);

@@ -32,6 +32,11 @@
 #include <string_view>
 #include <vector>
 
+namespace uhdm {
+class Interface;
+class Modport;
+}  // namespace uhdm
+
 namespace SURELOG {
 
 class ModuleDefinition;
@@ -44,18 +49,34 @@ class Modport final {
       : m_parent(parent), m_name(name), m_fileContent(fC), m_nodeId(nodeId) {}
 
   std::string_view getName() const { return m_name; }
-  void addSignal(const Signal& sig) { m_ports.push_back(sig); }
+  void addSignal(const Signal& sig) { m_ports.emplace_back(sig); }
   const std::vector<Signal>& getPorts() const { return m_ports; }
   const Signal* getPort(std::string_view name) const;
   ModuleDefinition* getParent() const { return m_parent; }
   const FileContent* getFileContent() const { return m_fileContent; }
   NodeId getNodeId() const { return m_nodeId; }
 
+  void setInterface(uhdm::Interface* itf) { m_interface = itf; }
+  uhdm::Interface* getInterface() { return m_interface; }
+  template <typename T>
+  T* getInterface() const {
+    return (m_interface == nullptr) ? nullptr : any_cast<T>(m_interface);
+  }
+
+  void setUhdmModel(uhdm::Modport* model) { m_model = model; }
+  uhdm::Modport* getUhdmModel() { return m_model; }
+  template <typename T>
+  T* getUhdmModel() const {
+    return (m_model == nullptr) ? nullptr : any_cast<T>(m_model);
+  }
+
  private:
   ModuleDefinition* const m_parent;
   const std::string m_name;
   const FileContent* const m_fileContent;
   const NodeId m_nodeId;
+  uhdm::Interface* m_interface = nullptr;
+  uhdm::Modport* m_model = nullptr;
 
   std::vector<Signal> m_ports;
 };

@@ -545,10 +545,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       refTypespec->setParent(typespecTypespec);
       fC->populateCoreMembers(type_name, type_name, refTypespec);
 
-      uhdm::StringTypespec* st = s.make<uhdm::StringTypespec>();
-      st->setParent(pstmt);
-
-      refTypespec->setActual(st);
       typespecTypespec->setTypedefAlias(refTypespec);
       newTypeDef->setTypespec(typespecTypespec);
 
@@ -841,6 +837,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setName(tps->getName());
         refTypespec->setParent(typedefTypespec);
         refTypespec->setActual(tps);
         fC->populateCoreMembers(stype, stype, refTypespec);
@@ -4951,8 +4948,7 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
       const std::string_view mname = fC->SymName(tfNameNode);
       NodeId argListNode = fC->Sibling(tfNameNode);
-      fC->populateCoreMembers(dollar_or_string,
-                              argListNode ? argListNode : tfNameNode, fcall);
+      fC->populateCoreMembers(tfNameNode, Tf_call_stmt, fcall);
       fcall->setName(mname);
       fcall->setParent(pexpr);
       uhdm::RefObj* prefix = s.make<uhdm::RefObj>();

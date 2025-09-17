@@ -794,14 +794,12 @@ type_declaration
     ((data_type | net_type) identifier variable_dimension*)
     | (identifier constant_bit_select DOT identifier identifier)
     | (
-      (
         enum_keyword
         | struct_keyword
         | union_keyword
         | class_keyword
         | interface_class_keyword
       )? identifier
-    )
   ) SEMICOLON
   ;
 

@@ -324,6 +324,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
                    parent->Cast<uhdm::Variables>()) {
       expectedRelation = LineColumnRelation::Before;
     }
+
+    if (const uhdm::TypedefTypespec* parentAsTypedefTypsepc =
+                 parent->Cast<uhdm::TypedefTypespec>()) {
+      if (objectAsRefTypespec->getActual() == nullptr) {
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    }
   } else if (const uhdm::RefObj* const objAsRefObj =
                  any_cast<uhdm::RefObj>(object)) {
     if (const uhdm::BitSelect* const parentAsBitSelect =
@@ -439,6 +446,11 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
           break;
         }
       }
+    }
+  } else if (const uhdm::MethodFuncCall* const parentAsMethodFuncCall =
+                 parent->Cast<uhdm::MethodFuncCall>()) {
+    if (parentAsMethodFuncCall->getPrefix() == object) {
+      expectedRelation = LineColumnRelation::Before;
     }
   }
 

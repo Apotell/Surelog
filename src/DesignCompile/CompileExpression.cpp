@@ -4382,7 +4382,10 @@ uhdm::Any *CompileHelper::compileBits(
   uhdm::Any *result = nullptr;
   NodeId callId = List_of_arguments;
   VObjectType callType = VObjectType::paSubroutine_call;
-  if (NodeId id = fC->sl_parent(List_of_arguments, {callType}, callType)) {
+  if (NodeId id = fC->sl_parent(
+          List_of_arguments,
+          {VObjectType::paComplex_func_call, VObjectType::paSubroutine_call},
+          callType)) {
     callId = id;
   }
   NodeId Expression = List_of_arguments;
@@ -4776,6 +4779,15 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
   uhdm::Any *result = nullptr;
   NodeId dotedName = fC->Sibling(name);
 
+  NodeId callId = id;
+  VObjectType callType = VObjectType::paSubroutine_call;
+  if (NodeId nid = fC->sl_parent(
+          id,
+          {VObjectType::paComplex_func_call, VObjectType::paSubroutine_call},
+          callType)) {
+    callId = nid;
+  }
+
   bool hierPath = false;
   NodeId tmp = dotedName;
   while (fC->Type(tmp) == VObjectType::paAttribute_instance) {
@@ -4903,12 +4915,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
         fcall->setPrefix(object);
       }
       fcall->setParent(pexpr);
-      const std::string_view methodName = fC->SymName(Method);
-      fcall->setName(methodName);
-      if ((rootName == "super") || (rootName == "this"))
-        fC->populateCoreMembers(name, List_of_arguments, fcall);
-      else
-        fC->populateCoreMembers(Method, Method, fcall);
+      fcall->setName(fC->SymName(Method));
+      fC->populateCoreMembers(Method, callId, fcall);
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, compileDesign, reduce, fcall,
               instance, muteErrors)) {

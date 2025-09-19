@@ -236,8 +236,7 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
     case VObjectType::paInterface_declaration:
     case VObjectType::paUdp_declaration:
       do {
-        VObject current = fC->Object(nodeId);
-        nodeId = current.m_child;
+        nodeId = fC->Child(nodeId);
       } while (nodeId &&
                (fC->Type(nodeId) != VObjectType::paAttribute_instance));
       if (nodeId) {
@@ -246,7 +245,6 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
           m_module->setAttributes(attributes);
         }
       }
-
       break;
     default:
       break;
@@ -263,17 +261,16 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
 bool CompileModule::collectUdpObjects_() {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   const FileContent* const fC = m_module->m_fileContents[0];
-  NodeId id = m_module->m_nodeIds[0];
-  VObject current = fC->Object(id);
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(m_module->m_nodeIds[0]);
 
   const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   uhdm::UdpDefn* defn = m_module->getUhdmModel<uhdm::UdpDefn>();
   while (!stack.empty()) {
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
-    current = fC->Object(id);
+
     VObjectType type = fC->Type(id);
     switch (type) {
       case VObjectType::paUdp_declaration:
@@ -524,8 +521,8 @@ bool CompileModule::collectUdpObjects_() {
       default:
         break;
     }
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) stack.push(current.m_child);
+    if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+    if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
   }
 
   return true;
@@ -556,8 +553,9 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
   const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
-    VObject current = fC->Object(m_module->m_nodeIds[i]);
-    NodeId id = current.m_child;
+
+    const NodeId nodeId = m_module->m_nodeIds[i];
+    NodeId id = fC->Child(nodeId);
 
     NodeId endOfBlockId;
     if (m_module->getGenBlockId()) {
@@ -571,8 +569,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       }
       if (!endOfBlockId) endOfBlockId = fC->Sibling(m_module->getGenBlockId());
     }
-    if (!id) id = current.m_sibling;
-    if (!id) return false;
+    if (!id) id = fC->Sibling(nodeId);
+    if (!id) continue;
 
     if (collectType == CollectType::FUNCTION) {
       // Package imports
@@ -591,19 +589,22 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
     }
     NodeId ParameterPortListId;
     std::stack<NodeId> stack;
-    stack.push(id);
+    stack.emplace(id);
+
     VObjectType port_direction = VObjectType::NO_TYPE;
     NodeId startId = id;
     while (!stack.empty()) {
       id = stack.top();
+      stack.pop();
+
       if (endOfBlockId && (id == endOfBlockId)) {
         break;
       }
       if (ParameterPortListId && (id == ParameterPortListId)) {
         ParameterPortListId = InvalidNodeId;
       }
-      stack.pop();
-      current = fC->Object(id);
+
+      const VObject &current = fC->Object(id);
       VObjectType type = fC->Type(id);
       bool skipChildren = false;
       switch (type) {
@@ -1016,20 +1017,19 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child && (!skipChildren)) {
-        if (!stopPoints.empty()) {
+      if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+      if (!skipChildren) {
+        if (const NodeId childId = fC->Child(id)) {
           bool stop = false;
-          for (auto t : stopPoints) {
-            if (t == current.m_type) {
-              stop = true;
-              break;
+          if (!stopPoints.empty()) {
+            for (auto t : stopPoints) {
+              if (t == current.m_type) {
+                stop = true;
+                break;
+              }
             }
           }
-          if (!stop)
-            if (current.m_child) stack.push(current.m_child);
-        } else {
-          if (current.m_child) stack.push(current.m_child);
+          if (!stop) stack.emplace(childId);
         }
       }
     }
@@ -1078,16 +1078,16 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
   const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
-    VObject current = fC->Object(m_module->m_nodeIds[i]);
-    NodeId id = current.m_child;
-    if (!id) id = current.m_sibling;
-    if (!id) return false;
+
+    NodeId id = fC->Child(m_module->m_nodeIds[i]);
+    if (!id) id = fC->Sibling(m_module->m_nodeIds[i]);
+    if (!id) continue;
 
     if (collectType == CollectType::FUNCTION) {
       // Package imports
       std::vector<FileCNodeId> pack_imports;
       // - Local file imports
-      for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
+      for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
         pack_imports.emplace_back(import);
       }
 
@@ -1104,7 +1104,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
 
     NodeId ParameterPortListId;
     std::stack<NodeId> stack;
-    stack.push(id);
+    stack.emplace(id);
+
     VObjectType port_direction = VObjectType::NO_TYPE;
     NodeId startId = id;
     while (!stack.empty()) {
@@ -1113,7 +1114,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         ParameterPortListId = InvalidNodeId;
       }
       stack.pop();
-      current = fC->Object(id);
+
+      const VObject& current = fC->Object(id);
       VObjectType type = fC->Type(id);
       bool skipChildren = false;
       switch (type) {
@@ -1277,7 +1279,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           // TODO: rewrite this rough implementation
           VObjectTypeUnorderedSet types = {VObjectType::paModport_item};
           std::vector<NodeId> items = fC->sl_collect_all(id, types);
-          for (auto nodeId : items) {
+          for (auto& nodeId : items) {
             Location loc(fC->getFileId(nodeId), fC->Line(nodeId),
                          fC->Column(nodeId));
             errors->addError(ErrorDefinition::COMP_NO_MODPORT_IN_GENERATE, loc);
@@ -1538,20 +1540,19 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child && (!skipChildren)) {
-        if (!stopPoints.empty()) {
+      if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+      if (!skipChildren) {
+        if (const NodeId childId = fC->Child(id)) {
           bool stop = false;
-          for (auto t : stopPoints) {
-            if (t == current.m_type) {
-              stop = true;
-              break;
+          if (!stopPoints.empty()) {
+            for (auto t : stopPoints) {
+              if (t == current.m_type) {
+                stop = true;
+                break;
+              }
             }
           }
-          if (!stop)
-            if (current.m_child) stack.push(current.m_child);
-        } else {
-          if (current.m_child) stack.push(current.m_child);
+          if (!stop) stack.emplace(childId);
         }
       }
     }

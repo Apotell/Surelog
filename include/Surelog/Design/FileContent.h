@@ -69,6 +69,8 @@ class FileContent final : public DesignComponent {
               FileContent* parent, PathId fileChunkId);
   ~FileContent() final;
 
+  bool isIgnoredType(VObjectType type) const;
+
   Session* getSession() { return m_session; }
   const Session* getSession() const { return m_session; }
 

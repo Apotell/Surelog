@@ -131,9 +131,10 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
   for (uint32_t i = 0; i < m_package->m_fileContents.size(); i++) {
     const FileContent* fC = m_package->m_fileContents[i];
     VObject current = fC->Object(m_package->m_nodeIds[i]);
-    NodeId id = current.m_child;
+    NodeId currentId = m_package->m_nodeIds[i];
+    NodeId id = fC->Child(currentId);
 
-    if (!id) id = current.m_sibling;
+    if (!id) id = fC->Sibling(currentId);
     if (!id) return false;
 
     if (collectType == CollectType::FUNCTION) {
@@ -333,8 +334,9 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child) {
+      if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+      NodeId childId = fC->Child(id);
+      if (childId) {
         if (!stopPoints.empty()) {
           bool stop = false;
           for (auto t : stopPoints) {
@@ -344,9 +346,9 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
             }
           }
           if (!stop)
-            if (current.m_child) stack.push(current.m_child);
+            if (childId) stack.push(childId);
         } else {
-          if (current.m_child) stack.push(current.m_child);
+          if (childId) stack.push(childId);
         }
       }
     }

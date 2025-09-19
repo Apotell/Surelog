@@ -237,7 +237,7 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
     case VObjectType::paUdp_declaration:
       do {
         VObject current = fC->Object(nodeId);
-        nodeId = current.m_child;
+        nodeId = fC->Child(nodeId);
       } while (nodeId &&
                (fC->Type(nodeId) != VObjectType::paAttribute_instance));
       if (nodeId) {
@@ -524,8 +524,8 @@ bool CompileModule::collectUdpObjects_() {
       default:
         break;
     }
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) stack.push(current.m_child);
+    if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+    if (NodeId childId = fC->Child(id)) stack.push(childId);
   }
 
   return true;
@@ -557,7 +557,9 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
-    NodeId id = current.m_child;
+    NodeId currentId = m_module->m_nodeIds[i];
+    NodeId id = fC->Child(currentId);
+    //NodeId id = current.m_child;
 
     NodeId endOfBlockId;
     if (m_module->getGenBlockId()) {
@@ -571,7 +573,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       }
       if (!endOfBlockId) endOfBlockId = fC->Sibling(m_module->getGenBlockId());
     }
-    if (!id) id = current.m_sibling;
+    if (!id) id = fC->Sibling(currentId);
     if (!id) return false;
 
     if (collectType == CollectType::FUNCTION) {
@@ -1016,8 +1018,9 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child && (!skipChildren)) {
+      if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+      NodeId childId = fC->Child(id);
+      if (childId && (!skipChildren)) {
         if (!stopPoints.empty()) {
           bool stop = false;
           for (auto t : stopPoints) {
@@ -1027,9 +1030,9 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
             }
           }
           if (!stop)
-            if (current.m_child) stack.push(current.m_child);
+            if (childId) stack.push(childId);
         } else {
-          if (current.m_child) stack.push(current.m_child);
+          if (childId) stack.push(childId);
         }
       }
     }
@@ -1079,7 +1082,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
-    NodeId id = current.m_child;
+    NodeId currentId = m_module->m_nodeIds[i];
+    NodeId id = fC->Child(currentId);
     if (!id) id = current.m_sibling;
     if (!id) return false;
 
@@ -1538,8 +1542,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child && (!skipChildren)) {
+      if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+      NodeId childId = fC->Child(id);
+      if (childId && (!skipChildren)) {
         if (!stopPoints.empty()) {
           bool stop = false;
           for (auto t : stopPoints) {
@@ -1549,9 +1554,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             }
           }
           if (!stop)
-            if (current.m_child) stack.push(current.m_child);
+            if (childId) stack.push(childId);
         } else {
-          if (current.m_child) stack.push(current.m_child);
+          if (childId) stack.push(childId);
         }
       }
     }

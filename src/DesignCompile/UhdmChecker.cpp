@@ -64,10 +64,10 @@ namespace SURELOG {
 
 bool UhdmChecker::registerFile(const FileContent* fC,
                                std::set<std::string_view>& moduleNames) {
-  const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
-  NodeId id = current.m_child;
+  NodeId currentId = fC->getRootNode();
+  NodeId id = fC->Child(currentId);
   PathId fileId = fC->getFileId();
-  if (!id) id = current.m_sibling;
+  if (!id) id = fC->Sibling(currentId);
   if (!id) return false;
   std::stack<NodeId> stack;
   stack.push(id);
@@ -92,7 +92,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     // Skip macro expansion which resides in another file (header)
     PathId fid = fC->getFileId(id);
     if (fid != fileId) {
-      if (current.m_sibling) stack.push(current.m_sibling);
+      if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
       continue;
     }
 
@@ -130,7 +130,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         type == VObjectType::paGenerate_interface_loop_statement ||
         type == VObjectType::paGenerate_region ||
         ((type == VObjectType::paPackage_or_generate_item_declaration) &&
-         !current.m_child) ||  // SEMICOLUMN ALONE ;
+         !fC->Child(id)) ||  // SEMICOLUMN ALONE ;
         type == VObjectType::paGenerate_begin_end_block) {
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
@@ -205,8 +205,8 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       skip = true;  // Only skip the item itself
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) stack.push(current.m_child);
+    if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+    if (NodeId childId = fC->Child(id)) stack.push(childId);
     if (skip == false && skipModule == false) {
       uint16_t from = fC->Column(id);
       uint16_t to = fC->EndColumn(id);

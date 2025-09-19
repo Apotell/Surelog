@@ -79,9 +79,9 @@ bool CompileFileContent::collectObjects_() {
 
   FileContent* fC = m_fileContent;
   if (fC->getSize() == 0) return true;
-  const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
-  NodeId id = current.m_child;
-  if (!id) id = current.m_sibling;
+  NodeId currentId = fC->getRootNode();
+  NodeId id = fC->Child(currentId);
+  if (!id) id = fC->Sibling(currentId);
   if (!id) return false;
   std::stack<NodeId> stack;
   stack.push(id);
@@ -175,21 +175,19 @@ bool CompileFileContent::collectObjects_() {
         break;
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) {
+
+    if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+    if (NodeId childId = fC->Child(id)) {
+      bool stop = false;
       if (!stopPoints.empty()) {
-        bool stop = false;
         for (auto t : stopPoints) {
           if (t == current.m_type) {
             stop = true;
             break;
           }
         }
-        if (!stop)
-          if (current.m_child) stack.push(current.m_child);
-      } else {
-        if (current.m_child) stack.push(current.m_child);
       }
+      if (!stop) stack.push(childId);
     }
   }
 

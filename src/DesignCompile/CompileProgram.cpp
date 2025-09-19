@@ -124,8 +124,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
 
   if (fC->getSize() == 0) return true;
   VObject current = fC->Object(nodeId);
-  NodeId id = current.m_child;
-  if (!id) id = current.m_sibling;
+  NodeId id = fC->Child(nodeId);
+  if (!id) id = fC->Sibling(nodeId);
   if (!id) return false;
 
   if (collectType == CollectType::FUNCTION) {
@@ -403,8 +403,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         break;
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) {
+    if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
+    if (NodeId childId = fC->Child(id)) {
       if (!stopPoints.empty()) {
         bool stop = false;
         for (auto t : stopPoints) {
@@ -414,9 +414,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
           }
         }
         if (!stop)
-          if (current.m_child) stack.push(current.m_child);
+          if (childId) stack.push(childId);
       } else {
-        if (current.m_child) stack.push(current.m_child);
+        if (childId) stack.push(childId);
       }
     }
   }

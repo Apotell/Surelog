@@ -863,6 +863,7 @@ ContAssign                                             1
 DelayControl                                           4
 Design                                                 1
 HierPath                                               6
+Identifier                                            17
 ImmediateAssert                                        2
 Initial                                                1
 Interface                                              1
@@ -884,7 +885,7 @@ RefTypespec                                           17
 SourceFile                                             2
 SysFuncCall                                            9
 === UHDM Object Stats End ===
-[ERR:UH0703] ${SURELOG_DIR}/tests/OneNetRange/tb.v:1:1: Internal Error(8) : adding wrong object type (Program) in a actual_instance group!.
+[ERR:UH0703] ${SURELOG_DIR}/tests/OneNetRange/tb.v:1:1: Internal Error(12) : adding wrong object type (Program) in a actual_instance group!.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetRange/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -902,7 +903,9 @@ Design: (unnamed)
 \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@ConnectTB
+  |vpiName:
+  \_Identifier: (work@ConnectTB)
+    |vpiName:work@ConnectTB
   |vpiVariables:
   \_LogicVar: (work@ConnectTB.con_i), line:8:68, endln:8:73
     |vpiParent:
@@ -1117,7 +1120,9 @@ Design: (unnamed)
 \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:1:1, endln:13:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@TESTBENCH
+  |vpiName:
+  \_Identifier: (work@TESTBENCH)
+    |vpiName:work@TESTBENCH
   |vpiParameter:
   \_Parameter: (work@TESTBENCH.width), line:1:31, endln:1:40
     |vpiParent:
@@ -1249,7 +1254,9 @@ Design: (unnamed)
             |vpiSize:24
             |STRING:OK!
             |vpiConstType:6
-          |vpiName:$display
+          |vpiName:
+          \_Identifier: ($display)
+            |vpiName:$display
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:7:55, endln:7:85
           |vpiParent:
@@ -1270,7 +1277,9 @@ Design: (unnamed)
             |vpiSize:136
             |STRING:drive != observe!
             |vpiConstType:6
-          |vpiName:$fatal
+          |vpiName:
+          \_Identifier: ($fatal)
+            |vpiName:$fatal
       |vpiImportTypespec:
       \_ImmediateAssert: , line:9:8, endln:9:86
         |vpiParent:
@@ -1308,7 +1317,9 @@ Design: (unnamed)
             |vpiSize:24
             |STRING:OK!
             |vpiConstType:6
-          |vpiName:$display
+          |vpiName:
+          \_Identifier: ($display)
+            |vpiName:$display
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:9:55, endln:9:85
           |vpiParent:
@@ -1329,7 +1340,9 @@ Design: (unnamed)
             |vpiSize:136
             |STRING:drive != observe!
             |vpiConstType:6
-          |vpiName:$fatal
+          |vpiName:
+          \_Identifier: ($fatal)
+            |vpiName:$fatal
       |vpiStmt:
       \_SysFuncCall: ($dumpfile), line:3:5, endln:3:26
         |vpiParent:
@@ -1342,12 +1355,16 @@ Design: (unnamed)
           |vpiSize:64
           |STRING:test.vcd
           |vpiConstType:6
-        |vpiName:$dumpfile
+        |vpiName:
+        \_Identifier: ($dumpfile)
+          |vpiName:$dumpfile
       |vpiStmt:
       \_SysFuncCall: ($dumpvars), line:4:5, endln:4:14
         |vpiParent:
         \_Begin: (work@TESTBENCH), line:2:11, endln:12:6
-        |vpiName:$dumpvars
+        |vpiName:
+        \_Identifier: ($dumpvars)
+          |vpiName:$dumpvars
       |vpiStmt:
       \_SysFuncCall: ($monitor), line:5:5, endln:5:61
         |vpiParent:
@@ -1364,7 +1381,9 @@ Design: (unnamed)
         \_SysFuncCall: ($time), line:5:40, endln:5:45
           |vpiParent:
           \_SysFuncCall: ($monitor), line:5:5, endln:5:61
-          |vpiName:$time
+          |vpiName:
+          \_Identifier: ($time)
+            |vpiName:$time
         |vpiArgument:
         \_RefObj: (work@TESTBENCH.drive), line:5:46, endln:5:51
           |vpiParent:
@@ -1381,7 +1400,9 @@ Design: (unnamed)
           |vpiFullName:work@TESTBENCH.observe
           |vpiActual:
           \_Port: (observe), line:1:66, endln:1:73
-        |vpiName:$monitor
+        |vpiName:
+        \_Identifier: ($monitor)
+          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:6:5, endln:6:16
         |vpiParent:
@@ -1454,7 +1475,9 @@ Design: (unnamed)
         \_SysFuncCall: ($finish), line:10:10, endln:10:19
           |vpiParent:
           \_DelayControl: , line:10:5, endln:10:19
-          |vpiName:$finish
+          |vpiName:
+          \_Identifier: ($finish)
+            |vpiName:$finish
   |vpiPort:
   \_Port: (observe), line:1:66, endln:1:73
     |vpiParent:
@@ -1501,7 +1524,9 @@ Design: (unnamed)
 \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@SUB
+  |vpiName:
+  \_Identifier: (work@SUB)
+    |vpiName:work@SUB
   |vpiParameter:
   \_Parameter: (work@SUB.width), line:15:24, endln:15:33
     |vpiParent:
@@ -1696,7 +1721,9 @@ Design: (unnamed)
 \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:16:1, endln:23:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@TOP
+  |vpiName:
+  \_Identifier: (work@TOP)
+    |vpiName:work@TOP
   |vpiParameter:
   \_Parameter: (work@TOP.width), line:17:13, endln:17:23
     |vpiParent:
@@ -2020,7 +2047,9 @@ Design: (unnamed)
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:2:1, endln:5:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@dut
+  |vpiName:
+  \_Identifier: (work@dut)
+    |vpiName:work@dut
   |vpiParameter:
   \_Parameter: (work@dut.width), line:2:24, endln:2:33
     |vpiParent:
@@ -2264,7 +2293,9 @@ Design: (unnamed)
 \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:11:1, endln:13:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@middle
+  |vpiName:
+  \_Identifier: (work@middle)
+    |vpiName:work@middle
   |vpiParameter:
   \_Parameter: (work@middle.width), line:11:27, endln:11:36
     |vpiParent:
@@ -2295,14 +2326,18 @@ Design: (unnamed)
   \_InterfaceTypespec: (ConnectTB), line:11:39, endln:11:48
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:11:1, endln:13:10
-    |vpiName:ConnectTB
+    |vpiName:
+    \_Identifier: (ConnectTB)
+      |vpiName:ConnectTB
     |vpiInterface:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
   |vpiTypedef:
   \_InterfaceTypespec: (ConnectTB), line:11:39, endln:11:48
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:11:1, endln:13:10
-    |vpiName:ConnectTB
+    |vpiName:
+    \_Identifier: (ConnectTB)
+      |vpiName:ConnectTB
     |vpiInterface:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
   |vpiImportTypespec:

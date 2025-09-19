@@ -75,6 +75,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               4
 Design                                                 1
+Identifier                                             3
 LogicTypespec                                          1
 Package                                                1
 PackedArrayTypespec                                    1
@@ -100,12 +101,16 @@ Design: (unnamed)
 \_Package: foo_flags_pkg (foo_flags_pkg), file:${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv, line:1:1, endln:6:27
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:foo_flags_pkg
+  |vpiName:
+  \_Identifier: (foo_flags_pkg)
+    |vpiName:foo_flags_pkg
   |vpiTypedef:
   \_TypedefTypespec: (foo_flags_pkg::common_flags_t), line:4:5, endln:4:19
     |vpiParent:
     \_Package: foo_flags_pkg (foo_flags_pkg), file:${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv, line:1:1, endln:6:27
-    |vpiName:foo_flags_pkg::common_flags_t
+    |vpiName:
+    \_Identifier: (foo_flags_pkg::common_flags_t)
+      |vpiName:foo_flags_pkg::common_flags_t
     |vpiTypedefAlias:
     \_RefTypespec: (foo_flags_pkg::common_flags_t), line:2:11, endln:4:4
       |vpiParent:
@@ -146,7 +151,9 @@ Design: (unnamed)
 \_TypedefTypespec: (top_flag_t), line:11:3, endln:11:13
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:top_flag_t
+  |vpiName:
+  \_Identifier: (top_flag_t)
+    |vpiName:top_flag_t
   |vpiTypedefAlias:
   \_RefTypespec: (top_flag_t), line:9:9, endln:11:2
     |vpiParent:

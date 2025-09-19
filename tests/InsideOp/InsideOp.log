@@ -296,6 +296,7 @@ Design                                                 1
 EnumConst                                              6
 EnumTypespec                                           1
 GenIfElse                                              4
+Identifier                                            10
 ImportTypespec                                         1
 IntTypespec                                            3
 IntVar                                                 1
@@ -325,7 +326,9 @@ Design: (unnamed)
 \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:my_pkg
+  |vpiName:
+  \_Identifier: (my_pkg)
+    |vpiName:my_pkg
   |vpiTypedef:
   \_EnumTypespec: , line:3:11, endln:10:10
     |vpiParent:
@@ -394,7 +397,9 @@ Design: (unnamed)
   \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
-    |vpiName:my_pkg::get_e
+    |vpiName:
+    \_Identifier: (my_pkg::get_e)
+      |vpiName:my_pkg::get_e
     |vpiTypedefAlias:
     \_RefTypespec: (my_pkg::get_e), line:3:11, endln:10:4
       |vpiParent:
@@ -413,13 +418,17 @@ Design: (unnamed)
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@GOOD
+  |vpiName:
+  \_Identifier: (work@GOOD)
+    |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@top
+  |vpiName:
+  \_Identifier: (work@top)
+    |vpiName:work@top
   |vpiVariables:
   \_IntVar: (work@top.out), line:22:16, endln:22:19
     |vpiParent:
@@ -468,7 +477,9 @@ Design: (unnamed)
   \_Begin: (work@top.gen_zero), line:25:42, endln:27:6
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:gen_zero
+    |vpiName:
+    \_Identifier: (gen_zero)
+      |vpiName:gen_zero
     |vpiFullName:work@top.gen_zero
     |vpiStmt:
     \_ContAssign: , line:26:12, endln:26:19
@@ -499,7 +510,9 @@ Design: (unnamed)
     \_Begin: (work@top.gen_one), line:27:33, endln:29:6
       |vpiParent:
       \_Begin: (work@top), line:27:12, endln:36:6
-      |vpiName:gen_one
+      |vpiName:
+      \_Identifier: (gen_one)
+        |vpiName:gen_one
       |vpiFullName:work@top.gen_one
       |vpiStmt:
       \_ContAssign: , line:28:12, endln:28:19
@@ -530,7 +543,9 @@ Design: (unnamed)
       \_Begin: (work@top.gen_two), line:29:45, endln:32:6
         |vpiParent:
         \_Begin: (work@top), line:29:12, endln:36:6
-        |vpiName:gen_two
+        |vpiName:
+        \_Identifier: (gen_two)
+          |vpiName:gen_two
         |vpiFullName:work@top.gen_two
         |vpiTypedef:
         \_ModuleTypespec: (GOOD)
@@ -576,7 +591,9 @@ Design: (unnamed)
         \_Begin: (work@top.gen_three), line:32:33, endln:34:6
           |vpiParent:
           \_Begin: (work@top), line:32:12, endln:36:6
-          |vpiName:gen_three
+          |vpiName:
+          \_Identifier: (gen_three)
+            |vpiName:gen_three
           |vpiFullName:work@top.gen_three
           |vpiStmt:
           \_ContAssign: , line:33:12, endln:33:19
@@ -602,7 +619,9 @@ Design: (unnamed)
         \_Begin: (work@top.gen_invalid), line:34:12, endln:36:6
           |vpiParent:
           \_Begin: (work@top), line:32:12, endln:36:6
-          |vpiName:gen_invalid
+          |vpiName:
+          \_Identifier: (gen_invalid)
+            |vpiName:gen_invalid
           |vpiFullName:work@top.gen_invalid
           |vpiStmt:
           \_ContAssign: , line:35:12, endln:35:21
@@ -744,7 +763,9 @@ Design: (unnamed)
   \_ImportTypespec: (my_pkg), line:18:8, endln:18:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:my_pkg
+    |vpiName:
+    \_Identifier: (my_pkg)
+      |vpiName:my_pkg
     |vpiImportTypespecItem:
     \_Constant: , line:18:8, endln:18:17
       |vpiParent:

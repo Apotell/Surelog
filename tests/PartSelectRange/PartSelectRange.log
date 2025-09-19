@@ -235,6 +235,7 @@ GenFor                                                 1
 GenIf                                                  1
 GenIfElse                                              1
 GenVar                                                 1
+Identifier                                             4
 IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         2
@@ -263,7 +264,9 @@ Design: (unnamed)
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@test
+  |vpiName:
+  \_Identifier: (work@test)
+    |vpiName:work@test
   |vpiGenVar:
   \_GenVar: (work@test.i), line:6:10, endln:6:11
     |vpiParent:
@@ -334,13 +337,17 @@ Design: (unnamed)
     \_Begin: (work@test.loop), line:8:6, endln:17:9
       |vpiParent:
       \_GenFor: (work@test), line:7:3, endln:17:9
-      |vpiName:loop
+      |vpiName:
+      \_Identifier: (loop)
+        |vpiName:loop
       |vpiFullName:work@test.loop
       |vpiInternalScope:
       \_Begin: (work@test.loop.foo), line:10:4, endln:12:7
         |vpiParent:
         \_Begin: (work@test.loop), line:8:6, endln:17:9
-        |vpiName:foo
+        |vpiName:
+        \_Identifier: (foo)
+          |vpiName:foo
         |vpiFullName:work@test.loop.foo
         |vpiTypedef:
         \_ModuleTypespec: (foo)
@@ -364,7 +371,9 @@ Design: (unnamed)
         \_Begin: (work@test.loop.bar), line:14:4, endln:16:7
           |vpiParent:
           \_Begin: (work@test.loop), line:13:7, endln:16:7
-          |vpiName:bar
+          |vpiName:
+          \_Identifier: (bar)
+            |vpiName:bar
           |vpiFullName:work@test.loop.bar
           |vpiTypedef:
           \_ModuleTypespec: (bar)

@@ -227,6 +227,7 @@ Design                                                 1
 GenIf                                                  4
 GenRegion                                              1
 HierPath                                               6
+Identifier                                             5
 LogicNet                                               5
 LogicTypespec                                          6
 Module                                                 1
@@ -235,10 +236,10 @@ RefObj                                                17
 RefTypespec                                            6
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Failed to bind object: "id: 43, name: Z".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Illegal implicit net "id:43, name: Z".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Failed to bind object: "id: 44, name: A".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Illegal implicit net "id:44, name: A".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Failed to bind object: "id: 48, name: Z".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Illegal implicit net "id:48, name: Z".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Failed to bind object: "id: 49, name: A".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Illegal implicit net "id:49, name: A".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -252,7 +253,9 @@ Design: (unnamed)
 \_Module: work@genblk_dive_top (work@genblk_dive_top), file:${SURELOG_DIR}/tests/ComplexHierPath/dut.sv, line:2:1, endln:21:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@genblk_dive_top
+  |vpiName:
+  \_Identifier: (work@genblk_dive_top)
+    |vpiName:work@genblk_dive_top
   |vpiInternalScope:
   \_GenRegion: (work@genblk_dive_top), line:3:9, endln:19:20
     |vpiParent:
@@ -267,25 +270,33 @@ Design: (unnamed)
       \_Begin: (work@genblk_dive_top.Z), line:4:24, endln:18:20
         |vpiParent:
         \_Begin: (work@genblk_dive_top), line:4:17, endln:18:20
-        |vpiName:Z
+        |vpiName:
+        \_Identifier: (Z)
+          |vpiName:Z
         |vpiFullName:work@genblk_dive_top.Z
         |vpiInternalScope:
         \_Begin: (work@genblk_dive_top.Z.A), line:5:32, endln:17:28
           |vpiParent:
           \_Begin: (work@genblk_dive_top.Z), line:4:24, endln:18:20
-          |vpiName:A
+          |vpiName:
+          \_Identifier: (A)
+            |vpiName:A
           |vpiFullName:work@genblk_dive_top.Z.A
           |vpiInternalScope:
           \_Begin: (work@genblk_dive_top.Z.A.B), line:7:40, endln:15:36
             |vpiParent:
             \_Begin: (work@genblk_dive_top.Z.A), line:5:32, endln:17:28
-            |vpiName:B
+            |vpiName:
+            \_Identifier: (B)
+              |vpiName:B
             |vpiFullName:work@genblk_dive_top.Z.A.B
             |vpiInternalScope:
             \_Begin: (work@genblk_dive_top.Z.A.B.C), line:9:48, endln:13:44
               |vpiParent:
               \_Begin: (work@genblk_dive_top.Z.A.B), line:7:40, endln:15:36
-              |vpiName:C
+              |vpiName:
+              \_Identifier: (C)
+                |vpiName:C
               |vpiFullName:work@genblk_dive_top.Z.A.B.C
               |vpiTypedef:
               \_LogicTypespec: 

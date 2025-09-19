@@ -289,6 +289,7 @@ GenFor                                                 1
 GenIf                                                  3
 GenRegion                                              2
 GenVar                                                 1
+Identifier                                             6
 IntTypespec                                            1
 Module                                                 4
 ModuleTypespec                                         5
@@ -316,13 +317,17 @@ Design: (unnamed)
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@GOOD
+  |vpiName:
+  \_Identifier: (work@GOOD)
+    |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |vpiAllModules:
 \_Module: work@hierdefparam_a (work@hierdefparam_a), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:12:1, endln:20:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@hierdefparam_a
+  |vpiName:
+  \_Identifier: (work@hierdefparam_a)
+    |vpiName:work@hierdefparam_a
   |vpiGenVar:
   \_GenVar: (work@hierdefparam_a.i), line:13:10, endln:13:11
     |vpiParent:
@@ -354,7 +359,9 @@ Design: (unnamed)
         \_Begin: (work@hierdefparam_a.bar), line:15:31, endln:17:8
           |vpiParent:
           \_GenFor: (work@hierdefparam_a), line:15:5, endln:17:8
-          |vpiName:bar
+          |vpiName:
+          \_Identifier: (bar)
+            |vpiName:bar
           |vpiFullName:work@hierdefparam_a.bar
           |vpiTypedef:
           \_ModuleTypespec: (hierdefparam_b)
@@ -453,7 +460,9 @@ Design: (unnamed)
 \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@hierdefparam_b
+  |vpiName:
+  \_Identifier: (work@hierdefparam_b)
+    |vpiName:work@hierdefparam_b
   |vpiParameter:
   \_Parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
     |vpiParent:
@@ -659,7 +668,9 @@ Design: (unnamed)
 \_Module: work@hierdefparam_top (work@hierdefparam_top), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:4:1, endln:10:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@hierdefparam_top
+  |vpiName:
+  \_Identifier: (work@hierdefparam_top)
+    |vpiName:work@hierdefparam_top
   |vpiInternalScope:
   \_GenRegion: (work@hierdefparam_top), line:5:3, endln:7:18
     |vpiParent:
@@ -669,7 +680,9 @@ Design: (unnamed)
     \_Begin: (work@hierdefparam_top.foo), line:5:12, endln:7:6
       |vpiParent:
       \_GenRegion: (work@hierdefparam_top), line:5:3, endln:7:18
-      |vpiName:foo
+      |vpiName:
+      \_Identifier: (foo)
+        |vpiName:foo
       |vpiFullName:work@hierdefparam_top.foo
       |vpiTypedef:
       \_ModuleTypespec: (hierdefparam_a)

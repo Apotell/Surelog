@@ -70,6 +70,7 @@ AST_DEBUG_END
 Begin                                                  1
 ClassDefn                                              1
 Design                                                 1
+Identifier                                             4
 Initial                                                1
 IntTypespec                                            1
 IntVar                                                 1
@@ -92,7 +93,9 @@ Design: (unnamed)
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@dut
+  |vpiName:
+  \_Identifier: (work@dut)
+    |vpiName:work@dut
   |vpiVariables:
   \_IntVar: (work@dut), line:4:21, endln:4:24
     |vpiParent:
@@ -114,14 +117,18 @@ Design: (unnamed)
       \_ParamAssign: , line:4:11, endln:4:25
       |vpiArgument:
       \_IntVar: (work@dut), line:4:21, endln:4:24
-      |vpiName:$size
+      |vpiName:
+      \_Identifier: ($size)
+        |vpiName:$size
     |vpiLhs:
     \_Parameter: (work@dut.S), line:4:11, endln:4:25
   |vpiInternalScope:
   \_ClassDefn: (work@dut::A), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:10:1, endln:11:9
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
-    |vpiName:A
+    |vpiName:
+    \_Identifier: (A)
+      |vpiName:A
     |vpiFullName:work@dut::A
   |vpiImportTypespec:
   \_ClassDefn: (work@dut::A), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:10:1, endln:11:9
@@ -143,7 +150,9 @@ Design: (unnamed)
       \_SysFuncCall: ($display), line:7:3, endln:7:13
         |vpiParent:
         \_Begin: (work@dut), line:6:9, endln:8:4
-        |vpiName:$display
+        |vpiName:
+        \_Identifier: ($display)
+          |vpiName:$display
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

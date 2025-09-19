@@ -94,6 +94,7 @@ ClassVar                                               1
 Design                                                 1
 Function                                               1
 HierPath                                               1
+Identifier                                             6
 MethodFuncCall                                         1
 Package                                                1
 RefObj                                                 2
@@ -104,8 +105,8 @@ TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Failed to bind object: "id: 21, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Illegal implicit net "id:21, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Failed to bind object: "id: 26, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Illegal implicit net "id:26, name: i".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -119,24 +120,32 @@ Design: (unnamed)
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:pkg
+  |vpiName:
+  \_Identifier: (pkg)
+    |vpiName:pkg
   |vpiInternalScope:
   \_ClassDefn: (pkg::uvm_queue), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:3:1, endln:4:9
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
-    |vpiName:uvm_queue
+    |vpiName:
+    \_Identifier: (uvm_queue)
+      |vpiName:uvm_queue
     |vpiFullName:pkg::uvm_queue
   |vpiInternalScope:
   \_ClassDefn: (pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:6:1, endln:10:9
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
-    |vpiName:uvm_resource_types
+    |vpiName:
+    \_Identifier: (uvm_resource_types)
+      |vpiName:uvm_resource_types
     |vpiFullName:pkg::uvm_resource_types
     |vpiTypedef:
     \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
       |vpiParent:
       \_ClassDefn: (pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:6:1, endln:10:9
-      |vpiName:rsrc_q_t
+      |vpiName:
+      \_Identifier: (rsrc_q_t)
+        |vpiName:rsrc_q_t
       |vpiTypedefAlias:
       \_RefTypespec: (pkg::uvm_resource_types::rsrc_q_t), line:8:11, endln:8:20
         |vpiParent:
@@ -161,7 +170,9 @@ Design: (unnamed)
   \_Function: (pkg::uvm_sequencer_base::start_phase_sequence), line:12:1, endln:18:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
-    |vpiName:uvm_sequencer_base::start_phase_sequence
+    |vpiName:
+    \_Identifier: (uvm_sequencer_base::start_phase_sequence)
+      |vpiName:uvm_sequencer_base::start_phase_sequence
     |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence
     |vpiInternalScope:
     \_Begin: (pkg::uvm_sequencer_base::start_phase_sequence)
@@ -234,7 +245,9 @@ Design: (unnamed)
               \_MethodFuncCall: (get), line:15:31, endln:15:37
               |vpiName:i
               |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rq.get::i
-            |vpiName:get
+            |vpiName:
+            \_Identifier: (get)
+              |vpiName:get
           |vpiName:rq.get
         |vpiLhs:
         \_RefVar: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25

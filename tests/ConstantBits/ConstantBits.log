@@ -152,6 +152,7 @@ AST_DEBUG_END
 Constant                                               6
 ContAssign                                             1
 Design                                                 1
+Identifier                                             3
 LogicNet                                               1
 LogicTypespec                                          5
 Module                                                 1
@@ -180,12 +181,16 @@ Design: (unnamed)
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@dut
+  |vpiName:
+  \_Identifier: (work@dut)
+    |vpiName:work@dut
   |vpiTypedef:
   \_TypedefTypespec: (cpu_ctrl_t), line:8:11, endln:8:21
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
-    |vpiName:cpu_ctrl_t
+    |vpiName:
+    \_Identifier: (cpu_ctrl_t)
+      |vpiName:cpu_ctrl_t
     |vpiTypedefAlias:
     \_RefTypespec: (work@dut.cpu_ctrl_t), line:3:17, endln:8:10
       |vpiParent:
@@ -389,7 +394,9 @@ Design: (unnamed)
               |vpiFullName:work@dut.csr_wdata_int.cpu_ctrl_t
               |vpiActual:
               \_TypedefTypespec: (cpu_ctrl_t), line:8:11, endln:8:21
-            |vpiName:$bits
+            |vpiName:
+            \_Identifier: ($bits)
+              |vpiName:$bits
           |vpiOperand:
           \_Constant: , line:11:76, endln:11:77
             |vpiParent:

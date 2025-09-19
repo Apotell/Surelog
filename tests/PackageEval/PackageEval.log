@@ -127,6 +127,7 @@ AST_DEBUG_END
 ArrayTypespec                                          1
 Constant                                              13
 Design                                                 1
+Identifier                                             5
 IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 1
@@ -156,7 +157,9 @@ Design: (unnamed)
 \_Package: test_pkg (test_pkg), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:test_pkg
+  |vpiName:
+  \_Identifier: (test_pkg)
+    |vpiName:test_pkg
   |vpiParameter:
   \_Parameter: (test_pkg::NStraps), line:3:16, endln:3:28
     |vpiParent:
@@ -249,7 +252,9 @@ Design: (unnamed)
         |vpiFullName:test_pkg::t_test
         |vpiActual:
         \_TypedefTypespec: (test_pkg::t_test), line:10:3, endln:10:9
-      |vpiName:$bits
+      |vpiName:
+      \_Identifier: ($bits)
+        |vpiName:$bits
     |vpiLhs:
     \_Parameter: (test_pkg::TEST_SIZE), line:11:11, endln:11:36
   |vpiTypedef:
@@ -311,7 +316,9 @@ Design: (unnamed)
   \_TypedefTypespec: (test_pkg::t_test), line:10:3, endln:10:9
     |vpiParent:
     \_Package: test_pkg (test_pkg), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
-    |vpiName:test_pkg::t_test
+    |vpiName:
+    \_Identifier: (test_pkg::t_test)
+      |vpiName:test_pkg::t_test
     |vpiTypedefAlias:
     \_RefTypespec: (test_pkg::t_test), line:7:9, endln:10:2
       |vpiParent:

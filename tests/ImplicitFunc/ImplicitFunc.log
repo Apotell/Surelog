@@ -52,6 +52,7 @@ AST_DEBUG_END
 Constant                                               4
 Design                                                 1
 Function                                               2
+Identifier                                             3
 LogicTypespec                                          4
 Module                                                 1
 Range                                                  2
@@ -71,12 +72,16 @@ Design: (unnamed)
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@dut
+  |vpiName:
+  \_Identifier: (work@dut)
+    |vpiName:work@dut
   |vpiInternalScope:
   \_Function: (work@dut.foo), line:3:4, endln:5:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-    |vpiName:foo
+    |vpiName:
+    \_Identifier: (foo)
+      |vpiName:foo
     |vpiFullName:work@dut.foo
     |vpiTypedef:
     \_LogicTypespec: 
@@ -142,7 +147,9 @@ Design: (unnamed)
   \_Function: (work@dut.bar), line:7:4, endln:9:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
-    |vpiName:bar
+    |vpiName:
+    \_Identifier: (bar)
+      |vpiName:bar
     |vpiFullName:work@dut.bar
     |vpiTypedef:
     \_LogicTypespec: 

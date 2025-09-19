@@ -228,6 +228,7 @@ Function                                               2
 FunctionDecl                                           1
 HierPath                                               2
 IODecl                                                 2
+Identifier                                            12
 IfElse                                                 1
 IfStmt                                                 1
 LogicNet                                               1
@@ -239,10 +240,10 @@ RefTypespec                                            6
 SourceFile                                             1
 VoidTypespec                                           2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Failed to bind object: "id: 21, name: ovm_default_printer".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:21, name: ovm_default_printer".
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 39, name: OVM_PRINT".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:39, name: OVM_PRINT".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Failed to bind object: "id: 26, name: ovm_default_printer".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:26, name: ovm_default_printer".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 48, name: OVM_PRINT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:48, name: OVM_PRINT".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -256,18 +257,24 @@ Design: (unnamed)
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:pack
+  |vpiName:
+  \_Identifier: (pack)
+    |vpiName:pack
   |vpiInternalScope:
   \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
-    |vpiName:ovm_printer
+    |vpiName:
+    \_Identifier: (ovm_printer)
+      |vpiName:ovm_printer
     |vpiFullName:pack::ovm_printer
   |vpiInternalScope:
   \_ClassDefn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
-    |vpiName:ovm_options_container
+    |vpiName:
+    \_Identifier: (ovm_options_container)
+      |vpiName:ovm_options_container
     |vpiFullName:pack::ovm_options_container
     |vpiVariables:
     \_ClassVar: (pack::ovm_options_container::printer), line:7:17, endln:7:24
@@ -303,13 +310,17 @@ Design: (unnamed)
   \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
-    |vpiName:ovm_object
+    |vpiName:
+    \_Identifier: (ovm_object)
+      |vpiName:ovm_object
     |vpiFullName:pack::ovm_object
     |vpiInternalScope:
     \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
       |vpiParent:
       \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-      |vpiName:print
+      |vpiName:
+      \_Identifier: (print)
+        |vpiName:print
       |vpiFullName:pack::ovm_object::print
       |vpiTypedef:
       \_VoidTypespec: 
@@ -362,7 +373,9 @@ Design: (unnamed)
     \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
       |vpiParent:
       \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-      |vpiName:print
+      |vpiName:
+      \_Identifier: (print)
+        |vpiName:print
       |vpiFullName:pack::ovm_object::print
       |vpiInternalScope:
       \_Begin: (pack::ovm_object::print)
@@ -433,7 +446,9 @@ Design: (unnamed)
             \_MethodFuncCall: (istop), line:28:14, endln:28:21
               |vpiParent:
               \_HierPath: (printer.istop), line:28:6, endln:28:21
-              |vpiName:istop
+              |vpiName:
+              \_Identifier: (istop)
+                |vpiName:istop
             |vpiName:printer.istop
           |vpiStmt:
           \_Begin: (pack::ovm_object::print), line:28:23, endln:30:6
@@ -448,7 +463,9 @@ Design: (unnamed)
               \_FuncCall: (get_name), line:29:26, endln:29:36
                 |vpiParent:
                 \_MethodFuncCall: (print_object), line:29:5, endln:29:42
-                |vpiName:get_name
+                |vpiName:
+                \_Identifier: (get_name)
+                  |vpiName:get_name
               |vpiArgument:
               \_RefObj: (pack::ovm_object::print::this), line:29:38, endln:29:42
                 |vpiParent:
@@ -457,7 +474,9 @@ Design: (unnamed)
                 |vpiFullName:pack::ovm_object::print::this
                 |vpiActual:
                 \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-              |vpiName:print_object
+              |vpiName:
+              \_Identifier: (print_object)
+                |vpiName:print_object
               |vpiPrefix:
               \_RefObj: (pack::ovm_object::print::printer), line:29:5, endln:29:12
                 |vpiParent:
@@ -529,7 +548,9 @@ Design: (unnamed)
                 |vpiDecompile:""
                 |STRING:
                 |vpiConstType:6
-              |vpiName:m_field_automation
+              |vpiName:
+              \_Identifier: (m_field_automation)
+                |vpiName:m_field_automation
             |vpiStmt:
             \_FuncCall: (do_print), line:37:5, endln:37:22
               |vpiParent:
@@ -542,7 +563,9 @@ Design: (unnamed)
                 |vpiFullName:pack::ovm_object::print::printer
                 |vpiActual:
                 \_IODecl: (printer), line:23:45, endln:23:52
-              |vpiName:do_print
+              |vpiName:
+              \_Identifier: (do_print)
+                |vpiName:do_print
       |vpiTypedef:
       \_VoidTypespec: 
         |vpiParent:
@@ -604,7 +627,9 @@ Design: (unnamed)
     \_FunctionDecl: (pack::ovm_object::print), line:15:1, endln:15:54
       |vpiParent:
       \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-      |vpiName:print
+      |vpiName:
+      \_Identifier: (print)
+        |vpiName:print
       |vpiFullName:pack::ovm_object::print
       |vpiTaskFunc:
       \_Function: (pack::ovm_object::print), line:15:1, endln:15:54

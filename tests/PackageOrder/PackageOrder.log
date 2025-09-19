@@ -61,6 +61,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
 Design                                                 1
+Identifier                                             6
 ImportTypespec                                         2
 LogicTypespec                                          1
 Package                                                3
@@ -81,7 +82,9 @@ Design: (unnamed)
 \_Package: B (B), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:B
+  |vpiName:
+  \_Identifier: (B)
+    |vpiName:B
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -90,7 +93,9 @@ Design: (unnamed)
   \_TypedefTypespec: (B::C), line:2:17, endln:2:18
     |vpiParent:
     \_Package: B (B), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
-    |vpiName:B::C
+    |vpiName:
+    \_Identifier: (B::C)
+      |vpiName:B::C
     |vpiTypedefAlias:
     \_RefTypespec: (B::C), line:2:11, endln:2:16
       |vpiParent:
@@ -107,12 +112,16 @@ Design: (unnamed)
 \_Package: D (D), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:D
+  |vpiName:
+  \_Identifier: (D)
+    |vpiName:D
   |vpiTypedef:
   \_ImportTypespec: (B), line:6:10, endln:6:14
     |vpiParent:
     \_Package: D (D), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11
-    |vpiName:B
+    |vpiName:
+    \_Identifier: (B)
+      |vpiName:B
     |vpiImportTypespecItem:
     \_Constant: , line:6:10, endln:6:14
       |vpiParent:
@@ -128,12 +137,16 @@ Design: (unnamed)
 \_Package: A (A), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:A
+  |vpiName:
+  \_Identifier: (A)
+    |vpiName:A
   |vpiTypedef:
   \_ImportTypespec: (D), line:11:10, endln:11:14
     |vpiParent:
     \_Package: A (A), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:10:1, endln:12:11
-    |vpiName:D
+    |vpiName:
+    \_Identifier: (D)
+      |vpiName:D
     |vpiImportTypespecItem:
     \_Constant: , line:11:10, endln:11:14
       |vpiParent:

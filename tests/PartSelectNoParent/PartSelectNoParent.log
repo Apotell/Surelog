@@ -237,6 +237,7 @@ Constant                                              18
 Design                                                 1
 ForStmt                                                1
 HierPath                                               1
+Identifier                                             5
 ImportTypespec                                         1
 IntTypespec                                            6
 IntVar                                                 2
@@ -271,7 +272,9 @@ Design: (unnamed)
 \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:my_pkg
+  |vpiName:
+  \_Identifier: (my_pkg)
+    |vpiName:my_pkg
   |vpiParameter:
   \_Parameter: (my_pkg::Shares), line:2:18, endln:2:28
     |vpiParent:
@@ -378,7 +381,9 @@ Design: (unnamed)
   \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
-    |vpiName:my_pkg::hw_key_req_t
+    |vpiName:
+    \_Identifier: (my_pkg::hw_key_req_t)
+      |vpiName:my_pkg::hw_key_req_t
     |vpiTypedefAlias:
     \_RefTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
       |vpiParent:
@@ -490,7 +495,9 @@ Design: (unnamed)
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:11:1, endln:19:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@top
+  |vpiName:
+  \_Identifier: (work@top)
+    |vpiName:work@top
   |vpiVariables:
   \_IntVar: (work@top.o), line:11:23, endln:11:24
     |vpiParent:
@@ -511,7 +518,9 @@ Design: (unnamed)
   \_ImportTypespec: (my_pkg), line:12:11, endln:12:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:11:1, endln:19:10
-    |vpiName:my_pkg
+    |vpiName:
+    \_Identifier: (my_pkg)
+      |vpiName:my_pkg
     |vpiImportTypespecItem:
     \_Constant: , line:12:11, endln:12:20
       |vpiParent:
@@ -576,7 +585,9 @@ Design: (unnamed)
     \_Begin: (work@top.key_sideload_get), line:14:16, endln:18:7
       |vpiParent:
       \_Always: , line:14:4, endln:18:7
-      |vpiName:key_sideload_get
+      |vpiName:
+      \_Identifier: (key_sideload_get)
+        |vpiName:key_sideload_get
       |vpiFullName:work@top.key_sideload_get
       |vpiVariables:
       \_IntVar: (work@top.key_sideload_get.i), line:15:16, endln:15:17

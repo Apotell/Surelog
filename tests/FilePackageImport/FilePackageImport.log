@@ -77,6 +77,7 @@ Constant                                               3
 Design                                                 1
 Function                                               1
 IODecl                                                 2
+Identifier                                             4
 ImportTypespec                                         1
 IntTypespec                                            1
 LogicTypespec                                          2
@@ -88,8 +89,8 @@ ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 21, name: we".
-[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:21, name: we".
+[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 25, name: we".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:25, name: we".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -103,7 +104,9 @@ Design: (unnamed)
 \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:pkg_b
+  |vpiName:
+  \_Identifier: (pkg_b)
+    |vpiName:pkg_b
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -132,7 +135,9 @@ Design: (unnamed)
   \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
     |vpiParent:
     \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
-    |vpiName:pkg_b::DCacheWayPath
+    |vpiName:
+    \_Identifier: (pkg_b::DCacheWayPath)
+      |vpiName:pkg_b::DCacheWayPath
     |vpiTypedefAlias:
     \_RefTypespec: (pkg_b::DCacheWayPath), line:3:9, endln:3:14
       |vpiParent:
@@ -150,7 +155,9 @@ Design: (unnamed)
 \_ImportTypespec: (pkg_b), line:7:8, endln:7:16
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:pkg_b
+  |vpiName:
+  \_Identifier: (pkg_b)
+    |vpiName:pkg_b
   |vpiImportTypespecItem:
   \_Constant: , line:7:8, endln:7:16
     |vpiParent:
@@ -163,7 +170,9 @@ Design: (unnamed)
 \_Function: (TreeLRU_CalcWriteEnable), line:9:1, endln:12:12
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:TreeLRU_CalcWriteEnable
+  |vpiName:
+  \_Identifier: (TreeLRU_CalcWriteEnable)
+    |vpiName:TreeLRU_CalcWriteEnable
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:

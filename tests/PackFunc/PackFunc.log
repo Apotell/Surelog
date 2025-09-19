@@ -142,6 +142,7 @@ Constant                                               6
 Design                                                 1
 Function                                               1
 IODecl                                                 1
+Identifier                                             6
 LogicTypespec                                          3
 LogicVar                                               1
 Operation                                              2
@@ -169,12 +170,16 @@ Design: (unnamed)
 \_Package: b (b), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:b
+  |vpiName:
+  \_Identifier: (b)
+    |vpiName:b
   |vpiTypedef:
   \_TypedefTypespec: (b::foo_bar_t), line:4:5, endln:4:14
     |vpiParent:
     \_Package: b (b), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
-    |vpiName:b::foo_bar_t
+    |vpiName:
+    \_Identifier: (b::foo_bar_t)
+      |vpiName:b::foo_bar_t
     |vpiTypedefAlias:
     \_RefTypespec: (b::foo_bar_t), line:2:11, endln:4:4
       |vpiParent:
@@ -234,7 +239,9 @@ Design: (unnamed)
 \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:aa
+  |vpiName:
+  \_Identifier: (aa)
+    |vpiName:aa
   |vpiVariables:
   \_StructVar: (aa::y), line:14:18, endln:14:19
     |vpiParent:
@@ -254,7 +261,9 @@ Design: (unnamed)
   \_Function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiParent:
     \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
-    |vpiName:foo_bar
+    |vpiName:
+    \_Identifier: (foo_bar)
+      |vpiName:foo_bar
     |vpiFullName:aa::foo_bar
     |vpiReg:
     \_LogicVar: (aa::foo_bar::a_vec), line:15:24, endln:15:29
@@ -323,7 +332,9 @@ Design: (unnamed)
               |vpiFullName:aa::foo_bar::a
               |vpiActual:
               \_IODecl: (a), line:12:24, endln:12:25
-            |vpiName:$bits
+            |vpiName:
+            \_Identifier: ($bits)
+              |vpiName:$bits
           |vpiOperand:
           \_Constant: , line:15:19, endln:15:20
             |vpiParent:
@@ -365,7 +376,9 @@ Design: (unnamed)
               |vpiFullName:aa::foo_bar::a
               |vpiActual:
               \_IODecl: (a), line:12:24, endln:12:25
-            |vpiName:$bits
+            |vpiName:
+            \_Identifier: ($bits)
+              |vpiName:$bits
           |vpiOperand:
           \_Constant: , line:15:19, endln:15:20
             |vpiParent:

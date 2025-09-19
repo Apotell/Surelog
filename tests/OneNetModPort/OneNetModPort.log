@@ -560,6 +560,7 @@ DelayControl                                           4
 Design                                                 1
 HierPath                                              14
 IODecl                                                 4
+Identifier                                            23
 ImmediateAssert                                        2
 Initial                                                1
 Interface                                              1
@@ -579,7 +580,7 @@ RefTypespec                                           14
 SourceFile                                             2
 SysFuncCall                                            9
 === UHDM Object Stats End ===
-[ERR:UH0703] ${SURELOG_DIR}/tests/OneNetModPort/tb.v:1:1: Internal Error(8) : adding wrong object type (Program) in a actual_instance group!.
+[ERR:UH0703] ${SURELOG_DIR}/tests/OneNetModPort/tb.v:1:1: Internal Error(12) : adding wrong object type (Program) in a actual_instance group!.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetModPort/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -597,7 +598,9 @@ Design: (unnamed)
 \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@ConnectTB
+  |vpiName:
+  \_Identifier: (work@ConnectTB)
+    |vpiName:work@ConnectTB
   |vpiVariables:
   \_LogicVar: (work@ConnectTB.drive), line:10:9, endln:10:14
     |vpiParent:
@@ -699,22 +702,30 @@ Design: (unnamed)
   \_Modport: (dut), line:12:11, endln:12:14
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
-    |vpiName:dut
+    |vpiName:
+    \_Identifier: (dut)
+      |vpiName:dut
   |vpiModport:
   \_Modport: (tb), line:16:11, endln:16:13
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
-    |vpiName:tb
+    |vpiName:
+    \_Identifier: (tb)
+      |vpiName:tb
 |vpiAllPrograms:
 \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:1:1, endln:12:11
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@TESTBENCH
+  |vpiName:
+  \_Identifier: (work@TESTBENCH)
+    |vpiName:work@TESTBENCH
   |vpiTypedef:
   \_InterfaceTypespec: (tb), line:1:31, endln:1:33
     |vpiParent:
     \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:1:1, endln:12:11
-    |vpiName:tb
+    |vpiName:
+    \_Identifier: (tb)
+      |vpiName:tb
     |vpiIsModPort:1
     |vpiInterface:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
@@ -791,7 +802,9 @@ Design: (unnamed)
             |vpiSize:24
             |STRING:OK!
             |vpiConstType:6
-          |vpiName:$display
+          |vpiName:
+          \_Identifier: ($display)
+            |vpiName:$display
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:7:65, endln:7:105
           |vpiParent:
@@ -812,7 +825,9 @@ Design: (unnamed)
             |vpiSize:216
             |STRING:intf.drive != intf.observe!
             |vpiConstType:6
-          |vpiName:$fatal
+          |vpiName:
+          \_Identifier: ($fatal)
+            |vpiName:$fatal
       |vpiImportTypespec:
       \_ImmediateAssert: , line:9:8, endln:9:106
         |vpiParent:
@@ -874,7 +889,9 @@ Design: (unnamed)
             |vpiSize:24
             |STRING:OK!
             |vpiConstType:6
-          |vpiName:$display
+          |vpiName:
+          \_Identifier: ($display)
+            |vpiName:$display
         |vpiElseStmt:
         \_SysFuncCall: ($fatal), line:9:65, endln:9:105
           |vpiParent:
@@ -895,7 +912,9 @@ Design: (unnamed)
             |vpiSize:216
             |STRING:intf.drive != intf.observe!
             |vpiConstType:6
-          |vpiName:$fatal
+          |vpiName:
+          \_Identifier: ($fatal)
+            |vpiName:$fatal
       |vpiStmt:
       \_SysFuncCall: ($dumpfile), line:3:5, endln:3:26
         |vpiParent:
@@ -908,12 +927,16 @@ Design: (unnamed)
           |vpiSize:64
           |STRING:test.vcd
           |vpiConstType:6
-        |vpiName:$dumpfile
+        |vpiName:
+        \_Identifier: ($dumpfile)
+          |vpiName:$dumpfile
       |vpiStmt:
       \_SysFuncCall: ($dumpvars), line:4:5, endln:4:14
         |vpiParent:
         \_Begin: (work@TESTBENCH), line:2:11, endln:11:6
-        |vpiName:$dumpvars
+        |vpiName:
+        \_Identifier: ($dumpvars)
+          |vpiName:$dumpvars
       |vpiStmt:
       \_SysFuncCall: ($monitor), line:5:5, endln:5:71
         |vpiParent:
@@ -930,7 +953,9 @@ Design: (unnamed)
         \_SysFuncCall: ($time), line:5:40, endln:5:45
           |vpiParent:
           \_SysFuncCall: ($monitor), line:5:5, endln:5:71
-          |vpiName:$time
+          |vpiName:
+          \_Identifier: ($time)
+            |vpiName:$time
         |vpiArgument:
         \_HierPath: (intf.drive), line:5:46, endln:5:56
           |vpiParent:
@@ -971,7 +996,9 @@ Design: (unnamed)
             |vpiActual:
             \_LogicNet: (work@ConnectTB.observe), line:11:9, endln:11:16
           |vpiName:intf.observe
-        |vpiName:$monitor
+        |vpiName:
+        \_Identifier: ($monitor)
+          |vpiName:$monitor
       |vpiStmt:
       \_Assignment: , line:6:5, endln:6:19
         |vpiParent:
@@ -1066,7 +1093,9 @@ Design: (unnamed)
         \_SysFuncCall: ($finish), line:10:10, endln:10:19
           |vpiParent:
           \_DelayControl: , line:10:5, endln:10:19
-          |vpiName:$finish
+          |vpiName:
+          \_Identifier: ($finish)
+            |vpiName:$finish
   |vpiPort:
   \_Port: (intf), line:1:34, endln:1:38
     |vpiParent:
@@ -1085,7 +1114,9 @@ Design: (unnamed)
 \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:26:1, endln:28:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@SUB
+  |vpiName:
+  \_Identifier: (work@SUB)
+    |vpiName:work@SUB
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -1193,7 +1224,9 @@ Design: (unnamed)
 \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:15:1, endln:19:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@TOP
+  |vpiName:
+  \_Identifier: (work@TOP)
+    |vpiName:work@TOP
   |vpiTypedef:
   \_ModuleTypespec: (ConnectTB)
     |vpiParent:
@@ -1320,7 +1353,9 @@ Design: (unnamed)
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:2:1, endln:7:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@dut
+  |vpiName:
+  \_Identifier: (work@dut)
+    |vpiName:work@dut
   |vpiTypedef:
   \_ModuleTypespec: (ConnectTB)
     |vpiParent:
@@ -1532,7 +1567,9 @@ Design: (unnamed)
 \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@middle
+  |vpiName:
+  \_Identifier: (work@middle)
+    |vpiName:work@middle
   |vpiTypedef:
   \_ModuleTypespec: (SUB)
     |vpiParent:
@@ -1542,7 +1579,9 @@ Design: (unnamed)
   \_InterfaceTypespec: (dut), line:22:26, endln:22:29
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
-    |vpiName:dut
+    |vpiName:
+    \_Identifier: (dut)
+      |vpiName:dut
     |vpiIsModPort:1
     |vpiInterface:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
@@ -1550,7 +1589,9 @@ Design: (unnamed)
   \_InterfaceTypespec: (dut), line:22:26, endln:22:29
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
-    |vpiName:dut
+    |vpiName:
+    \_Identifier: (dut)
+      |vpiName:dut
     |vpiIsModPort:1
     |vpiInterface:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13

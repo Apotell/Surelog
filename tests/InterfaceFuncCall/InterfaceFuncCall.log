@@ -166,6 +166,7 @@ Design                                                 1
 Function                                               1
 HierPath                                               2
 IODecl                                                 1
+Identifier                                             7
 Initial                                                1
 IntegerTypespec                                        2
 Interface                                              1
@@ -195,7 +196,9 @@ Design: (unnamed)
 \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@Foo
+  |vpiName:
+  \_Identifier: (work@Foo)
+    |vpiName:work@Foo
   |vpiParameter:
   \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
     |vpiParent:
@@ -221,7 +224,9 @@ Design: (unnamed)
   \_Function: (work@Foo.bar), line:3:5, endln:6:16
     |vpiParent:
     \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
-    |vpiName:bar
+    |vpiName:
+    \_Identifier: (bar)
+      |vpiName:bar
     |vpiFullName:work@Foo.bar
     |vpiTypedef:
     \_IntegerTypespec: 
@@ -305,7 +310,9 @@ Design: (unnamed)
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:9:1, endln:16:10
   |vpiParent:
   \_Design: (unnamed)
-  |vpiName:work@top
+  |vpiName:
+  \_Identifier: (work@top)
+    |vpiName:work@top
   |vpiTypedef:
   \_ModuleTypespec: (Foo)
     |vpiParent:
@@ -350,9 +357,13 @@ Design: (unnamed)
               |vpiSize:64
               |UINT:3
               |vpiConstType:9
-            |vpiName:bar
+            |vpiName:
+            \_Identifier: (bar)
+              |vpiName:bar
           |vpiName:foo_1.bar
-        |vpiName:$display
+        |vpiName:
+        \_Identifier: ($display)
+          |vpiName:$display
       |vpiStmt:
       \_SysFuncCall: ($display), line:14:9, endln:14:31
         |vpiParent:
@@ -380,9 +391,13 @@ Design: (unnamed)
               |vpiSize:64
               |UINT:3
               |vpiConstType:9
-            |vpiName:bar
+            |vpiName:
+            \_Identifier: (bar)
+              |vpiName:bar
           |vpiName:foo_2.bar
-        |vpiName:$display
+        |vpiName:
+        \_Identifier: ($display)
+          |vpiName:$display
   |vpiRefModule:
   \_RefModule: work@Foo (foo_1), line:10:5, endln:10:8
     |vpiParent:

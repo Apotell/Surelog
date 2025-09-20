@@ -509,16 +509,16 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
       std::multimap<const uhdm::Any*, const uhdm::PreprocMacroInstance*>;
   any_macro_instance_map_t m_anyMacroInstance;
 
-  bool m_reportInvalidName = true;
+  bool m_reportInvalidName = false;
   bool m_reportMissingName = true;
   bool m_reportMissingFile = true;
   bool m_reportMissingParent = true;
   bool m_reportMissingLocation = true;
-  bool m_reportNullActual = true;
-  bool m_reportNullTypespec = true;
-  bool m_reportUnsupportedTypespec = true;
-  bool m_reportDuplicates = true;
-  bool m_reportInvalidForeachVariable = true;
+  bool m_reportNullActual = false;
+  bool m_reportNullTypespec = false;
+  bool m_reportUnsupportedTypespec = false;
+  bool m_reportDuplicates = false;
+  bool m_reportInvalidForeachVariable = false;
 };
 
 };  // namespace SURELOG

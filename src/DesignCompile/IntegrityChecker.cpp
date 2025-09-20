@@ -42,7 +42,6 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::FuncCall,
           uhdm::UhdmType::Function,
           uhdm::UhdmType::FunctionDecl,
-          uhdm::UhdmType::Identifier,
           uhdm::UhdmType::Interface,
           uhdm::UhdmType::IODecl,
           uhdm::UhdmType::MethodFuncCall,
@@ -74,8 +73,6 @@ IntegrityChecker::IntegrityChecker(Session* session)
       m_typesWithMissingFile{
           uhdm::UhdmType::Begin,
           uhdm::UhdmType::Design,
-          // TODO(HS): Remove this once identifier location is fixed
-          uhdm::UhdmType::Identifier,
           uhdm::UhdmType::RefTypespec,
       },
       m_typesWithMissingParent{
@@ -84,8 +81,6 @@ IntegrityChecker::IntegrityChecker(Session* session)
       m_typesWithMissingLocation{
           uhdm::UhdmType::Begin,
           uhdm::UhdmType::Design,
-          // TODO(HS): Remove this once identifier location is fixed
-          uhdm::UhdmType::Identifier,
           uhdm::UhdmType::RefTypespec,
           uhdm::UhdmType::SourceFile,
       } {}
@@ -589,7 +584,8 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
-  if (m_reportMissingLocation) {
+  if (m_reportMissingLocation &&
+      (object->getUhdmType() == uhdm::UhdmType::Identifier)) {
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, object);
   }
 
@@ -709,7 +705,8 @@ void IntegrityChecker::reportInvalidName(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
-  if (m_reportMissingName) {
+  if (m_reportMissingName &&
+      (object->getUhdmType() == uhdm::UhdmType::Identifier)) {
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME, object);
   }
   /*
@@ -784,13 +781,15 @@ void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::reportMissingFile(const uhdm::Any* object) const {
-  if (m_reportMissingFile) {
+  if (m_reportMissingFile &&
+      (object->getUhdmType() == uhdm::UhdmType::Identifier)) {
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE, object);
   }
 }
 
 void IntegrityChecker::reportMissingParent(const uhdm::Any* object) const {
-  if (m_reportMissingParent) {
+  if (m_reportMissingParent &&
+      (object->getUhdmType() == uhdm::UhdmType::Identifier)) {
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT, object);
   }
 }
@@ -1031,8 +1030,6 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
 }
 
 void IntegrityChecker::visitAny(const uhdm::Any* object) {
-  if (m_visited.find(object) != m_visited.cend()) return;
-
   const uhdm::Any* const parent = object->getParent();
   if ((parent == nullptr) &&
       (object->getUhdmType() != uhdm::UhdmType::Design)) {
@@ -1040,14 +1037,8 @@ void IntegrityChecker::visitAny(const uhdm::Any* object) {
     return;
   }
 
-  const uhdm::Any* parentPackage = object;
-  while (parentPackage != nullptr) {
-    if ((parentPackage->getUhdmType() == uhdm::UhdmType::Package) &&
-        (parentPackage->getName() == "builtin")) {
-      m_visited.emplace(object);
-      return;
-    }
-    parentPackage = parentPackage->getParent();
+  if (const uhdm::Any* parentPackage = uhdm::getParent<uhdm::Package>(object)) {
+    if (parentPackage->getName() == "builtin") return;
   }
 
   uhdm::UhdmType uhdmType = object->getUhdmType();

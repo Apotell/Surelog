@@ -755,6 +755,26 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+  if (const uhdm::Identifier* const identifier =
+          any_cast<uhdm::Identifier>(object)) {
+    if ((identifier->getStartLine() == 0) || (identifier->getEndLine() == 0) ||
+        (identifier->getStartColumn() == 0) ||
+        (identifier->getEndColumn() == 0)) {
+      SymbolTable* const symbolTable = m_session->getSymbolTable();
+      FileSystem* const fileSystem = m_session->getFileSystem();
+      ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                   object->getStartLine(), object->getStartColumn(),
+                   symbolTable->registerSymbol(asSymbol(object)));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
+    }
+  }
+}
+
+void IntegrityChecker::enterAny3(const uhdm::Any* object,
+                                 uint32_t vpiRelation) {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool reportError = false;
     if ((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||

@@ -198,6 +198,8 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:
   \_Identifier: (work@Foo)
+    |vpiParent:
+    \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
     |vpiName:work@Foo
   |vpiParameter:
   \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
@@ -226,6 +228,8 @@ Design: (unnamed)
     \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
     |vpiName:
     \_Identifier: (bar)
+      |vpiParent:
+      \_Function: (work@Foo.bar), line:3:5, endln:6:16
       |vpiName:bar
     |vpiFullName:work@Foo.bar
     |vpiTypedef:
@@ -312,6 +316,8 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:
   \_Identifier: (work@top)
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:9:1, endln:16:10
     |vpiName:work@top
   |vpiTypedef:
   \_ModuleTypespec: (Foo)
@@ -359,10 +365,14 @@ Design: (unnamed)
               |vpiConstType:9
             |vpiName:
             \_Identifier: (bar)
+              |vpiParent:
+              \_MethodFuncCall: (bar), line:13:24, endln:13:30
               |vpiName:bar
           |vpiName:foo_1.bar
         |vpiName:
         \_Identifier: ($display)
+          |vpiParent:
+          \_SysFuncCall: ($display), line:13:9, endln:13:31
           |vpiName:$display
       |vpiStmt:
       \_SysFuncCall: ($display), line:14:9, endln:14:31
@@ -393,10 +403,14 @@ Design: (unnamed)
               |vpiConstType:9
             |vpiName:
             \_Identifier: (bar)
+              |vpiParent:
+              \_MethodFuncCall: (bar), line:14:24, endln:14:30
               |vpiName:bar
           |vpiName:foo_2.bar
         |vpiName:
         \_Identifier: ($display)
+          |vpiParent:
+          \_SysFuncCall: ($display), line:14:9, endln:14:31
           |vpiName:$display
   |vpiRefModule:
   \_RefModule: work@Foo (foo_1), line:10:5, endln:10:8

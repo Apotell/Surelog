@@ -68,6 +68,11 @@ FileContent::~FileContent() {
   }
 }
 
+bool FileContent::isIgnoredType(VObjectType type) const {
+  return (type == VObjectType::LINE_COMMENT) ||
+         (type == VObjectType::BLOCK_COMMENT);
+}
+
 std::string_view FileContent::getName() const {
   return m_session->getFileSystem()->toPath(m_fileId);
 }
@@ -337,8 +342,7 @@ NodeId FileContent::Child(NodeId index) const {
     return InvalidNodeId;
   }
   NodeId childId = m_objects[index].m_child;
-  while (childId && (m_objects[childId].m_type == VObjectType::LINE_COMMENT || m_objects[childId].m_type == VObjectType::BLOCK_COMMENT))
-  {
+  while (childId && isIgnoredType(m_objects[childId].m_type)) {
     childId = m_objects[childId].m_sibling;
   }
   return childId;
@@ -353,9 +357,7 @@ NodeId FileContent::Sibling(NodeId index) const {
     return InvalidNodeId;
   }
   NodeId siblingId = m_objects[index].m_sibling;
-  while (siblingId &&
-         (m_objects[siblingId].m_type == VObjectType::LINE_COMMENT ||
-          m_objects[siblingId].m_type == VObjectType::BLOCK_COMMENT)) {
+  while (siblingId && isIgnoredType(m_objects[siblingId].m_type)) {
     siblingId = m_objects[siblingId].m_sibling;
   }
   return siblingId;

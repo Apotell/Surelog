@@ -1878,25 +1878,10 @@ void SV3_1aTreeShapeListener::enterUnconnected_drive_directive(
 void SV3_1aTreeShapeListener::enterNounconnected_drive_directive(
     SV3_1aParser::Nounconnected_drive_directiveContext *ctx) {}
 
-void SV3_1aTreeShapeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
-  if (const antlr4::Token *const startToken = ctx->getStart()) {
-    // NOTE(HS): Bit of ambiguity here!
-    // Should we append the nodes between two rules to the previous
-    // or the current rule? If appended to the previous, they will show up
-    // at the tail and if appended to current, they show up at head.
-    // Either way, dependent on the source context, one of the other might
-    // be more meaningful, and thus ambigious.
-    processPendingTokens(ctx, startToken->getTokenIndex());
-  }
-  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
-    m_enteredSourceText = true;
-  }
-}
 void SV3_1aTreeShapeListener::processPendingTokens(
     antlr4::tree::ParseTree *tree, size_t endTokenIndex) {
-
-  //return;
-  if (!m_enteredSourceText) {
+  // return;
+  if (m_lastRuleAction == RuleAction::None) {
     return;  // Wait until the source_text rule is visited!
   }
 
@@ -1911,34 +1896,114 @@ void SV3_1aTreeShapeListener::processPendingTokens(
 
     switch (lastToken->getType()) {
       case SV3_1aParser::LINE_COMMENT: {
-        const NodeId nodeId = addVObject(tree, lastToken->getText(),
-                                         VObjectType::LINE_COMMENT, true);
+        const std::string text = lastToken->getText();
+
+        bool hasCR = false;
+        std::string_view trimmed = text;
+        if (!trimmed.empty() && (trimmed.back() == '\n')) {
+          trimmed.remove_suffix(1);
+          hasCR = true;
+        }
+
+        if (!trimmed.empty()) {
+          const NodeId nodeId =
+              addVObject(tree, trimmed, VObjectType::LINE_COMMENT, true);
+
+          VObject *const object = m_fileContent->MutableObject(nodeId);
+          std::tie(object->m_fileId, object->m_startLine, object->m_startColumn,
+                   object->m_endLine, object->m_endColumn) =
+              getFileLine(nullptr, lastToken);
+          std::tie(object->m_ppStartLine, object->m_ppStartColumn) =
+              ParseUtils::getLineColumn(lastToken);
+          std::tie(object->m_ppEndLine, object->m_ppEndColumn) =
+              ParseUtils::getEndLineColumn(lastToken);
+
+          if (hasCR) {
+            --object->m_endLine;
+            object->m_endColumn = object->m_startColumn + trimmed.length();
+
+            --object->m_ppEndLine;
+            object->m_ppEndColumn = object->m_ppStartColumn + trimmed.length();
+          }
+        }
       } break;
+
       case SV3_1aParser::BLOCK_COMMENT: {
-        const NodeId nodeId = addVObject(tree, lastToken->getText(),
-                                         VObjectType::BLOCK_COMMENT, true);
+        addVObject(tree, lastToken->getText(), VObjectType::BLOCK_COMMENT,
+                   true);
       } break;
+
+      default:
+        break;
     }
+  }
+}
+
+void SV3_1aTreeShapeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
+  if (const antlr4::Token *const token = ctx->getStart()) {
+    switch (m_lastRuleAction) {
+      case RuleAction::Entered: {
+        processPendingTokens(m_lastEnteredRule, token->getTokenIndex());
+        m_lastEnteredRule = ctx;
+        m_lastRuleAction = RuleAction::Entered;
+      } break;
+
+      case RuleAction::Exited: {
+        processPendingTokens(ctx, token->getTokenIndex());
+        m_lastEnteredRule = ctx;
+        m_lastRuleAction = RuleAction::Entered;
+      } break;
+
+      default:
+        break;
+    }
+  }
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
+    m_lastEnteredRule = ctx;
+    m_lastRuleAction = RuleAction::Entered;
   }
 }
 
 void SV3_1aTreeShapeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
-  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
-    processPendingTokens(ctx->children.empty() ? ctx : ctx->children.back(),
-                         m_tokens->size());
-    m_enteredSourceText = false;
-  }
+  if (const antlr4::Token *const token = ctx->getStop()) {
+    switch (m_lastRuleAction) {
+      case RuleAction::Entered: {
+        processPendingTokens(m_lastEnteredRule, token->getTokenIndex());
+        m_lastExitedRule = ctx;
+        m_lastRuleAction = RuleAction::Exited;
+      } break;
 
-  if (const antlr4::Token *const stopToken = ctx->getStop()) {
-    if (!ctx->children.empty()) {
-      processPendingTokens(ctx->children.back(), stopToken->getTokenIndex());
+      case RuleAction::Exited: {
+        processPendingTokens(ctx, token->getTokenIndex());
+        m_lastExitedRule = ctx;
+        m_lastRuleAction = RuleAction::Exited;
+      } break;
+
+      default:
+        break;
     }
+  }
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
+    processPendingTokens(ctx, m_tokens->size());
+    m_lastExitedRule = ctx;
+    m_lastRuleAction = RuleAction::None;
   }
 }
 void SV3_1aTreeShapeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
-  const antlr4::Token *const token = node->getSymbol();
-  if (token->getType() == antlr4::Token::EOF) return;
-  processPendingTokens(node, token->getTokenIndex());
+  if (const antlr4::Token *const token = node->getSymbol()) {
+    switch (m_lastRuleAction) {
+      case RuleAction::Entered: {
+        processPendingTokens(m_lastEnteredRule, token->getTokenIndex());
+      } break;
+
+      case RuleAction::Exited: {
+        processPendingTokens(m_lastExitedRule, token->getTokenIndex());
+      } break;
+
+      default:
+        break;
+    }
+  }
 }
 void SV3_1aTreeShapeListener::visitErrorNode(antlr4::tree::ErrorNode *node) {}
 

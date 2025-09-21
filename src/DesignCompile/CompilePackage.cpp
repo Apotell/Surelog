@@ -106,8 +106,7 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   collectObjects_(CollectType::OTHER, reduce);
 
   do {
-    VObject current = fC->Object(packId);
-    packId = current.m_child;
+    packId = fC->Child(packId);
   } while (packId && (fC->Type(packId) != VObjectType::paAttribute_instance));
   if (packId) {
     if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
@@ -130,12 +129,9 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
   m_helper.setDesign(m_compileDesign->getCompiler()->getDesign());
   for (uint32_t i = 0; i < m_package->m_fileContents.size(); i++) {
     const FileContent* fC = m_package->m_fileContents[i];
-    VObject current = fC->Object(m_package->m_nodeIds[i]);
-    NodeId currentId = m_package->m_nodeIds[i];
-    NodeId id = fC->Child(currentId);
-
-    if (!id) id = fC->Sibling(currentId);
-    if (!id) return false;
+    NodeId nodeId = fC->Child(m_package->m_nodeIds[i]);
+    if (!nodeId) nodeId = fC->Sibling(m_package->m_nodeIds[i]);
+    if (!nodeId) continue;
 
     if (collectType == CollectType::FUNCTION) {
       // Package imports
@@ -154,11 +150,11 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
     }
 
     std::stack<NodeId> stack;
-    stack.push(id);
+    stack.emplace(nodeId);
     while (!stack.empty()) {
-      id = stack.top();
+      const NodeId id = stack.top();
       stack.pop();
-      current = fC->Object(id);
+      const VObject& current = fC->Object(id);
       VObjectType type = fC->Type(id);
       switch (type) {
         case VObjectType::paPackage_import_item: {
@@ -334,22 +330,18 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
           break;
       }
 
-      if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
-      NodeId childId = fC->Child(id);
-      if (childId) {
+      if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+      if (const NodeId childId = fC->Child(id)) {
+        bool stop = false;
         if (!stopPoints.empty()) {
-          bool stop = false;
           for (auto t : stopPoints) {
             if (t == current.m_type) {
               stop = true;
               break;
             }
           }
-          if (!stop)
-            if (childId) stack.push(childId);
-        } else {
-          if (childId) stack.push(childId);
         }
+        if (!stop) stack.emplace(childId);
       }
     }
   }

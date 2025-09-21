@@ -79,14 +79,15 @@ bool CompileFileContent::collectObjects_() {
 
   FileContent* fC = m_fileContent;
   if (fC->getSize() == 0) return true;
-  NodeId currentId = fC->getRootNode();
-  NodeId id = fC->Child(currentId);
-  if (!id) id = fC->Sibling(currentId);
-  if (!id) return false;
+  const NodeId nodeId = fC->getRootNode();
+  NodeId startId = fC->Child(nodeId);
+  if (!startId) startId = fC->Sibling(nodeId);
+  if (!startId) return false;
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(startId);
   while (!stack.empty()) {
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
     const VObject& current = fC->Object(id);
     VObjectType type = fC->Type(id);
@@ -175,9 +176,8 @@ bool CompileFileContent::collectObjects_() {
         break;
     }
 
-
-    if (NodeId siblingId = fC->Sibling(id)) stack.push(siblingId);
-    if (NodeId childId = fC->Child(id)) {
+    if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+    if (const NodeId childId = fC->Child(id)) {
       bool stop = false;
       if (!stopPoints.empty()) {
         for (auto t : stopPoints) {
@@ -187,7 +187,7 @@ bool CompileFileContent::collectObjects_() {
           }
         }
       }
-      if (!stop) stack.push(childId);
+      if (!stop) stack.emplace(childId);
     }
   }
 

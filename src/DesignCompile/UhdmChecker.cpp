@@ -64,13 +64,15 @@ namespace SURELOG {
 
 bool UhdmChecker::registerFile(const FileContent* fC,
                                std::set<std::string_view>& moduleNames) {
-  NodeId currentId = fC->getRootNode();
-  NodeId id = fC->Child(currentId);
-  PathId fileId = fC->getFileId();
-  if (!id) id = fC->Sibling(currentId);
-  if (!id) return false;
+  const NodeId nodeId = fC->getRootNode();
+  NodeId startId = fC->Child(nodeId);
+  if (!startId) startId = fC->Sibling(nodeId);
+  if (!startId) return false;
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(startId);
+
+  const PathId fileId = fC->getFileId();
 
   FileNodeCoverMap::iterator fileItr = m_fileNodeCoverMap.find(fC);
   if (fileItr == m_fileNodeCoverMap.end()) {
@@ -78,11 +80,11 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     m_fileNodeCoverMap.emplace(fC, uhdmCover);
     fileItr = m_fileNodeCoverMap.find(fC);
   }
-  RangesMap& uhdmCover = (*fileItr).second;
+  RangesMap& uhdmCover = fileItr->second;
   bool skipModule = false;
   NodeId endModuleNode;
   while (!stack.empty()) {
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
     const VObject& current = fC->Object(id);
     bool skip = false;
@@ -109,6 +111,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       endModuleNode = fC->Parent(id);
       endModuleNode = fC->Sibling(endModuleNode);
     }
+    const NodeId childId = fC->Child(id);
     if (type == VObjectType::paDescription || type == VObjectType::ENDCASE ||
         type == VObjectType::ENDTASK || type == VObjectType::ENDFUNCTION ||
         type == VObjectType::ENDMODULE || type == VObjectType::ENDINTERFACE ||
@@ -130,7 +133,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         type == VObjectType::paGenerate_interface_loop_statement ||
         type == VObjectType::paGenerate_region ||
         ((type == VObjectType::paPackage_or_generate_item_declaration) &&
-         !fC->Child(id)) ||  // SEMICOLUMN ALONE ;
+         !childId) ||  // SEMICOLUMN ALONE ;
         type == VObjectType::paGenerate_begin_end_block) {
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
@@ -176,7 +179,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         uint16_t to = fC->EndColumn(id);
         if (lineItr != uhdmCover.end()) {
           bool found = false;
-          for (ColRange& crange : (*lineItr).second) {
+          for (ColRange& crange : lineItr->second) {
             if ((crange.from >= from) && (crange.to <= to)) {
               found = true;
               crange.from = from;
@@ -190,7 +193,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
             crange.from = from;
             crange.to = to;
             crange.covered = Status::COVERED;
-            (*lineItr).second.push_back(crange);
+            lineItr->second.emplace_back(crange);
           }
         } else {
           Ranges ranges;
@@ -213,7 +216,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
         bool found = false;
-        for (ColRange& crange : (*lineItr).second) {
+        for (ColRange& crange : lineItr->second) {
           if ((crange.from >= from) && (crange.to <= to)) {
             found = true;
             crange.from = from;
@@ -227,7 +230,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
           crange.from = from;
           crange.to = to;
           crange.covered = Status::EXIST;
-          (*lineItr).second.push_back(crange);
+          lineItr->second.emplace_back(crange);
         }
       } else {
         Ranges ranges;
@@ -235,7 +238,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         crange.from = from;
         crange.to = to;
         crange.covered = Status::EXIST;
-        ranges.push_back(crange);
+        ranges.emplace_back(crange);
         uhdmCover.emplace(current.m_startLine, ranges);
       }
     }

@@ -168,7 +168,7 @@ IntTypespec                                            3
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 Package                                                1
 ParamAssign                                            2
@@ -365,10 +365,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD)
       |vpiParent:
-      \_Begin: (work@top), line:15:21, endln:17:6
+      \_Design: (unnamed)
       |vpiName:GOOD
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD)
+      |vpiModule:
+      \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:1:1, endln:2:10
     |vpiStmt:
     \_RefModule: work@GOOD (good), line:16:6, endln:16:10
       |vpiParent:
@@ -399,15 +399,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (lc_ctrl_pkg), line:10:11, endln:10:37
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -460,6 +453,15 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:15:21, endln:17:6
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

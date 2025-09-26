@@ -228,6 +228,7 @@ LogicNet                                               1
 LogicTypespec                                          1
 MethodFuncCall                                         1
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              5
 RefObj                                                11
 RefTypespec                                            2
@@ -595,11 +596,11 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiIndex:
-        \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
+        \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
           |vpiParent:
-          \_HierPath: (keymgr_key_i.key[0][1 * 32+:32]), line:4:14, endln:4:47
+          \_VarSelect: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:27, endln:4:47
           |vpiName:key
-          |vpiFullName:work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key
+          |vpiFullName:work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key
           |vpiDefName:key
           |vpiActual:
           \_LogicNet: (work@dm_csrs.key), line:4:27, endln:4:47
@@ -608,7 +609,7 @@ Design: (unnamed)
           |vpiBaseExpr:
           \_Operation: , line:4:34, endln:4:40
             |vpiParent:
-            \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
+            \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
             |vpiOpType:25
             |vpiOperand:
             \_Constant: , line:4:34, endln:4:35
@@ -629,7 +630,7 @@ Design: (unnamed)
           |vpiWidthExpr:
           \_Constant: , line:4:44, endln:4:46
             |vpiParent:
-            \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
+            \_IndexedPartSelect: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
             |vpiDecompile:32
             |vpiSize:64
             |UINT:32
@@ -697,6 +698,13 @@ Design: (unnamed)
         |vpiActual:
         \_LogicNet: (work@dm_csrs.nonce), line:5:30, endln:5:35
       |vpiName:sram_otp_key_o[2 - 2].nonce
+|vpiTypedef:
+\_ModuleTypespec: (dm_csrs)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dm_csrs
+  |vpiModule:
+  \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

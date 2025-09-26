@@ -134,6 +134,7 @@ Identifier                                             2
 IntTypespec                                            2
 IntVar                                                 1
 Module                                                 1
+ModuleTypespec                                         1
 PackedArrayNet                                         1
 PackedArrayTypespec                                    1
 Range                                                  1
@@ -247,11 +248,6 @@ Design: (unnamed)
       |vpiFullName:work@t.S
       |vpiActual:
       \_TypedefTypespec: (S), line:2:30, endln:2:31
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_TypedefTypespec: (S), line:2:30, endln:2:31
   |vpiImportTypespec:
@@ -274,8 +270,6 @@ Design: (unnamed)
       \_PackedArrayTypespec: 
     |vpiName:s
     |vpiFullName:work@t.s
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@t.y), line:4:8, endln:4:9
   |vpiDefName:work@t
@@ -384,6 +378,13 @@ Design: (unnamed)
             \_LogicNet: (work@t.x), line:7:15, endln:7:16
           |vpiName:s[1].x
     |vpiAlwaysType:2
+|vpiTypedef:
+\_ModuleTypespec: (t)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:t
+  |vpiModule:
+  \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -254,7 +254,7 @@ ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              2
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              12
 ContAssign                                             2
 Design                                                 1
@@ -269,6 +269,7 @@ IntTypespec                                            9
 LogicNet                                               3
 LogicTypespec                                          6
 Module                                                 2
+ModuleTypespec                                         1
 Operation                                              1
 Package                                                1
 Range                                                  2
@@ -625,15 +626,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -944,13 +936,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -999,22 +984,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1213,18 +1270,6 @@ Design: (unnamed)
       |vpiFullName:work@top.pmp_cfg_t
       |vpiActual:
       \_TypedefTypespec: (pmp_cfg_t), line:14:4, endln:14:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
   |vpiImportTypespec:
   \_EnumTypespec: , line:3:10, endln:5:16
   |vpiImportTypespec:
@@ -1286,8 +1331,6 @@ Design: (unnamed)
     |vpiName:enum_test
     |vpiFullName:work@top.enum_test
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.t), line:22:8, endln:22:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
@@ -1316,8 +1359,6 @@ Design: (unnamed)
     |vpiName:first
     |vpiFullName:work@top.first
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.second), line:25:8, endln:25:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
@@ -1331,8 +1372,6 @@ Design: (unnamed)
     |vpiName:second
     |vpiFullName:work@top.second
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.third), line:26:8, endln:26:13
     |vpiParent:
@@ -1422,6 +1461,13 @@ Design: (unnamed)
         |vpiActual:
         \_LogicNet: (work@top.mode), line:28:24, endln:28:28
       |vpiName:csr_pmp_cfg_ie.mode
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

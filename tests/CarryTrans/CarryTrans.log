@@ -561,7 +561,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                               5
 ContAssign                                             1
 Design                                                 1
@@ -575,6 +575,7 @@ IntTypespec                                            9
 LogicNet                                              22
 LogicTypespec                                         11
 Module                                                 3
+ModuleTypespec                                         3
 Operation                                              5
 Package                                                1
 Port                                                  12
@@ -929,15 +930,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1248,13 +1240,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1303,22 +1288,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CarryTrans/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1344,14 +1401,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@carry_gate (work@carry_gate), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:8:1, endln:16:10
     |vpiName:work@carry_gate
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_gate (work@carry_gate), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:8:1, endln:16:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_gate (work@carry_gate), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:8:1, endln:16:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -1397,8 +1446,6 @@ Design: (unnamed)
     |vpiFullName:work@carry_gate.x
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@carry_gate.y), line:11:9, endln:11:10
     |vpiParent:
     \_Module: work@carry_gate (work@carry_gate), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:8:1, endln:16:10
@@ -1412,8 +1459,6 @@ Design: (unnamed)
     |vpiName:y
     |vpiFullName:work@carry_gate.y
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@carry_gate.z), line:11:12, endln:11:13
     |vpiParent:
@@ -1841,30 +1886,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
   |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.a), line:18:26, endln:18:27
     |vpiParent:
@@ -1906,8 +1927,6 @@ Design: (unnamed)
     |vpiFullName:work@carry_trans.i1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.i2), line:20:10, endln:20:12
     |vpiParent:
     \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
@@ -1921,8 +1940,6 @@ Design: (unnamed)
     |vpiName:i2
     |vpiFullName:work@carry_trans.i2
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.i3), line:20:14, endln:20:16
     |vpiParent:
@@ -1938,8 +1955,6 @@ Design: (unnamed)
     |vpiFullName:work@carry_trans.i3
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.i4), line:20:18, endln:20:20
     |vpiParent:
     \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
@@ -1953,8 +1968,6 @@ Design: (unnamed)
     |vpiName:i4
     |vpiFullName:work@carry_trans.i4
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.cn), line:20:22, endln:20:24
     |vpiParent:
@@ -1970,8 +1983,6 @@ Design: (unnamed)
     |vpiFullName:work@carry_trans.cn
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.zero), line:22:6, endln:22:10
     |vpiParent:
     \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
@@ -1985,8 +1996,6 @@ Design: (unnamed)
     |vpiName:zero
     |vpiFullName:work@carry_trans.zero
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@carry_trans.one), line:23:6, endln:23:9
     |vpiParent:
@@ -2048,6 +2057,27 @@ Design: (unnamed)
     \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
     |vpiName:cout
     |vpiDirection:2
+|vpiTypedef:
+\_ModuleTypespec: (carry_gate)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:carry_gate
+  |vpiModule:
+  \_Module: work@carry_gate (work@carry_gate), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:8:1, endln:16:10
+|vpiTypedef:
+\_ModuleTypespec: (carry_rtl)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:carry_rtl
+  |vpiModule:
+  \_Module: work@carry_rtl (work@carry_rtl), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:1:1, endln:5:10
+|vpiTypedef:
+\_ModuleTypespec: (carry_trans)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:carry_trans
+  |vpiModule:
+  \_Module: work@carry_trans (work@carry_trans), file:${SURELOG_DIR}/tests/CarryTrans/dut.sv, line:18:1, endln:37:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

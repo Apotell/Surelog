@@ -239,7 +239,7 @@ Always                                                 1
 Assignment                                             2
 Begin                                                  1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              16
 ContAssign                                             1
 Design                                                 1
@@ -254,6 +254,7 @@ IntTypespec                                           10
 LogicNet                                               4
 LogicTypespec                                          7
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              8
 Package                                                1
 ParamAssign                                            1
@@ -611,15 +612,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -930,13 +922,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -985,22 +970,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1068,10 +1125,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiRange:
     \_Range: , line:8:11, endln:8:17
       |vpiParent:
@@ -1129,14 +1182,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -1155,8 +1200,6 @@ Design: (unnamed)
     |vpiName:clk
     |vpiFullName:work@top.clk
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.out), line:5:37, endln:5:40
     |vpiParent:
@@ -1203,10 +1246,6 @@ Design: (unnamed)
     |vpiName:counter_upd
     |vpiFullName:work@top.counter_upd
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.clk), line:4:17, endln:4:20
@@ -1425,6 +1464,13 @@ Design: (unnamed)
       |vpiFullName:work@top.out
       |vpiActual:
       \_LogicNet: (work@top.out), line:5:37, endln:5:40
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

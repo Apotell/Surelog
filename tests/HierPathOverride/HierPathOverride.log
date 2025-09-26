@@ -364,7 +364,7 @@ ImportTypespec                                         4
 IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 4
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                             11
 Package                                                2
 PackedArrayTypespec                                    1
@@ -682,14 +682,6 @@ Design: (unnamed)
   \_StringTypespec: 
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:11:11, endln:11:34
   |vpiImportTypespec:
@@ -698,10 +690,6 @@ Design: (unnamed)
   \_StructTypespec: , line:13:12, endln:15:5
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiDefName:pinmux_pkg
@@ -740,7 +728,7 @@ Design: (unnamed)
       |vpiName:A
       |vpiFullName:work@prim_generic_pad_attr.A
       |vpiActual:
-      \_LogicNet: (work@prim_generic_pad_attr.A), line:25:35, endln:25:36
+      \_EnumConst: (A), line:5:7, endln:5:15
     |vpiLhs:
     \_Parameter: (work@prim_generic_pad_attr.PadType), line:25:25, endln:25:36
   |vpiInternalScope:
@@ -799,25 +787,7 @@ Design: (unnamed)
       |vpiConstType:8
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:24:11, endln:24:34
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_generic_pad_attr.A), line:25:35, endln:25:36
-    |vpiParent:
-    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:23:1, endln:29:34
-    |vpiName:A
-    |vpiFullName:work@prim_generic_pad_attr.A
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_generic_pad_attr.B), line:26:19, endln:26:20
-    |vpiParent:
-    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:23:1, endln:29:34
-    |vpiName:B
-    |vpiFullName:work@prim_generic_pad_attr.B
-    |vpiNetType:1
   |vpiDefName:work@prim_generic_pad_attr
-  |vpiNet:
-  \_LogicNet: (work@prim_generic_pad_attr.A), line:25:35, endln:25:36
-  |vpiNet:
-  \_LogicNet: (work@prim_generic_pad_attr.B), line:26:19, endln:26:20
   |vpiGenStmt:
   \_GenIf: , line:26:4, endln:28:7
     |vpiParent:
@@ -842,7 +812,7 @@ Design: (unnamed)
         |vpiName:B
         |vpiFullName:work@prim_generic_pad_attr.B
         |vpiActual:
-        \_LogicNet: (work@prim_generic_pad_attr.B), line:26:19, endln:26:20
+        \_EnumConst: (B), line:6:7, endln:6:15
     |vpiStmt:
     \_Begin: (work@prim_generic_pad_attr.gen_assign), line:26:22, endln:28:7
   |vpiEndLabel:prim_generic_pad_attr
@@ -880,7 +850,7 @@ Design: (unnamed)
       |vpiName:A
       |vpiFullName:work@prim_pad_attr.A
       |vpiActual:
-      \_LogicNet: (work@prim_pad_attr.A), line:34:35, endln:34:36
+      \_EnumConst: (A), line:5:7, endln:5:15
     |vpiLhs:
     \_Parameter: (work@prim_pad_attr.PadType), line:34:25, endln:34:36
   |vpiInternalScope:
@@ -896,10 +866,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (prim_generic_pad_attr)
       |vpiParent:
-      \_Begin: (work@prim_pad_attr.gen_generic), line:36:11, endln:40:7
+      \_Design: (unnamed)
       |vpiName:prim_generic_pad_attr
-    |vpiImportTypespec:
-    \_ModuleTypespec: (prim_generic_pad_attr)
+      |vpiModule:
+      \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:23:1, endln:29:34
     |vpiStmt:
     \_RefModule: work@prim_generic_pad_attr (u_impl_generic), line:37:7, endln:37:28
       |vpiParent:
@@ -927,16 +897,7 @@ Design: (unnamed)
       |vpiConstType:8
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:33:11, endln:33:34
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_pad_attr.A), line:34:35, endln:34:36
-    |vpiParent:
-    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:32:1, endln:42:10
-    |vpiName:A
-    |vpiFullName:work@prim_pad_attr.A
-    |vpiNetType:1
   |vpiDefName:work@prim_pad_attr
-  |vpiNet:
-  \_LogicNet: (work@prim_pad_attr.A), line:34:35, endln:34:36
   |vpiGenStmt:
   \_GenIf: , line:36:4, endln:40:7
     |vpiParent:
@@ -985,7 +946,7 @@ Design: (unnamed)
       |vpiName:DefaultTargetCfg
       |vpiFullName:work@top.DefaultTargetCfg
       |vpiActual:
-      \_LogicNet: (work@top.DefaultTargetCfg), line:46:39, endln:46:55
+      \_Parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:19:5
     |vpiLhs:
     \_Parameter: (work@top.TargetCfg), line:46:27, endln:46:55
   |vpiTypedef:
@@ -1008,22 +969,13 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_pad_attr)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:44:1, endln:50:10
+    \_Design: (unnamed)
     |vpiName:prim_pad_attr
+    |vpiModule:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:32:1, endln:42:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:45:11, endln:45:24
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_pad_attr)
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.DefaultTargetCfg), line:46:39, endln:46:55
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:44:1, endln:50:10
-    |vpiName:DefaultTargetCfg
-    |vpiFullName:work@top.DefaultTargetCfg
-    |vpiNetType:1
   |vpiDefName:work@top
-  |vpiNet:
-  \_LogicNet: (work@top.DefaultTargetCfg), line:46:39, endln:46:55
   |vpiRefModule:
   \_RefModule: work@prim_pad_attr (u_prim_pad_attr), line:47:5, endln:47:18
     |vpiParent:
@@ -1032,6 +984,17 @@ Design: (unnamed)
     |vpiDefName:work@prim_pad_attr
     |vpiActual:
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:32:1, endln:42:10
+|vpiTypedef:
+\_ModuleTypespec: (prim_generic_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (prim_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:44:1, endln:50:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

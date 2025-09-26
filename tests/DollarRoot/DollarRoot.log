@@ -6476,7 +6476,7 @@ BitTypespec                                            6
 BitVar                                                 1
 BreakStmt                                              2
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                             155
 ContAssign                                             1
 Design                                                 1
@@ -6502,6 +6502,7 @@ LogicNet                                               7
 LogicTypespec                                         19
 MethodFuncCall                                        13
 Module                                                 4
+ModuleTypespec                                         3
 NamedEvent                                             1
 Operation                                            105
 Package                                                1
@@ -6872,15 +6873,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -7191,13 +7183,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -7246,22 +7231,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -9514,17 +9571,10 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:344:7, endln:361:110
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.configure_and_push_response_to_slave_0), line:344:7, endln:361:110
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.configure_and_push_response_to_slave_0.read_response_latency), line:344:11, endln:344:32
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.configure_and_push_response_to_slave_0.i), line:348:16, endln:348:17
       |vpiImportTypespec:
@@ -11606,17 +11656,10 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:487:7, endln:504:110
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.configure_and_push_response_to_slave_1), line:487:7, endln:504:110
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.configure_and_push_response_to_slave_1.read_response_latency), line:487:11, endln:487:32
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.configure_and_push_response_to_slave_1.i), line:491:16, endln:491:17
       |vpiImportTypespec:
@@ -12084,26 +12127,12 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.master_send_commands.master_id), line:552:19, endln:552:28
       |vpiImportTypespec:
-      \_IntTypespec: 
-      |vpiImportTypespec:
       \_IntVar: (work@test_program.master_send_commands.slave_id), line:552:30, endln:552:38
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntVar: (work@test_program.master_send_commands.i), line:554:16, endln:554:17
       |vpiStmt:
@@ -13003,43 +13032,6 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
-      |vpiTypedef:
-      \_LogicTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.generate_random_aligned_address)
-        |vpiRange:
-        \_Range: , line:612:13, endln:612:25
-          |vpiParent:
-          \_LogicTypespec: 
-          |vpiLeftRange:
-          \_Operation: , line:612:14, endln:612:22
-            |vpiParent:
-            \_Range: , line:612:13, endln:612:25
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (work@test_program.generate_random_aligned_address.ADDR_W), line:612:14, endln:612:20
-              |vpiParent:
-              \_Operation: , line:612:14, endln:612:22
-              |vpiName:ADDR_W
-              |vpiFullName:work@test_program.generate_random_aligned_address.ADDR_W
-              |vpiActual:
-              \_Parameter: (work@test_program.ADDR_W), line:13:15, endln:13:44
-            |vpiOperand:
-            \_Constant: , line:612:21, endln:612:22
-              |vpiParent:
-              \_Operation: , line:612:14, endln:612:22
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiConstType:9
-          |vpiRightRange:
-          \_Constant: , line:612:23, endln:612:24
-            |vpiParent:
-            \_Range: , line:612:13, endln:612:25
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
       |vpiImportTypespec:
       \_LogicTypespec: 
       |vpiImportTypespec:
@@ -13056,8 +13048,6 @@ Design: (unnamed)
         |vpiName:base_addr
         |vpiFullName:work@test_program.generate_random_aligned_address.base_addr
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_LogicTypespec: 
       |vpiImportTypespec:
       \_LogicNet: (work@test_program.generate_random_aligned_address.addr), line:612:37, endln:612:41
         |vpiParent:
@@ -13365,13 +13355,6 @@ Design: (unnamed)
       |vpiParent:
       \_Task: (work@test_program.queue_command), line:620:4, endln:629:11
       |vpiSigned:1
-    |vpiTypedef:
-    \_IntTypespec: 
-      |vpiParent:
-      \_Task: (work@test_program.queue_command), line:620:4, endln:629:11
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntTypespec: 
     |vpiImportTypespec:
     \_IntTypespec: 
     |vpiVisibility:1
@@ -13838,43 +13821,6 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
-      |vpiTypedef:
-      \_LogicTypespec: 
-        |vpiParent:
-        \_Begin: (work@test_program.translate_master_to_slave_address)
-        |vpiRange:
-        \_Range: , line:662:13, endln:662:25
-          |vpiParent:
-          \_LogicTypespec: 
-          |vpiLeftRange:
-          \_Operation: , line:662:14, endln:662:22
-            |vpiParent:
-            \_Range: , line:662:13, endln:662:25
-            |vpiOpType:11
-            |vpiOperand:
-            \_RefObj: (work@test_program.translate_master_to_slave_address.ADDR_W), line:662:14, endln:662:20
-              |vpiParent:
-              \_Operation: , line:662:14, endln:662:22
-              |vpiName:ADDR_W
-              |vpiFullName:work@test_program.translate_master_to_slave_address.ADDR_W
-              |vpiActual:
-              \_Parameter: (work@test_program.ADDR_W), line:13:15, endln:13:44
-            |vpiOperand:
-            \_Constant: , line:662:21, endln:662:22
-              |vpiParent:
-              \_Operation: , line:662:14, endln:662:22
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiConstType:9
-          |vpiRightRange:
-          \_Constant: , line:662:23, endln:662:24
-            |vpiParent:
-            \_Range: , line:662:13, endln:662:25
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiImportTypespec:
@@ -13895,8 +13841,6 @@ Design: (unnamed)
         |vpiName:base_addr
         |vpiFullName:work@test_program.translate_master_to_slave_address.base_addr
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_LogicTypespec: 
       |vpiImportTypespec:
       \_LogicNet: (work@test_program.translate_master_to_slave_address.offset), line:662:37, endln:662:43
         |vpiParent:
@@ -16657,10 +16601,6 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-  |vpiTypedef:
   \_TypedefTypespec: (Burstmode), line:43:6, endln:43:15
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -16984,10 +16924,6 @@ Design: (unnamed)
       |vpiActual:
       \_LogicTypespec: 
   |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -17018,10 +16954,6 @@ Design: (unnamed)
       |vpiFullName:work@test_program
       |vpiActual:
       \_BitTypespec: 
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -17237,10 +17169,6 @@ Design: (unnamed)
       |vpiFullName:work@test_program
       |vpiActual:
       \_LogicTypespec: 
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -17473,15 +17401,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiSigned:1
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-  |vpiTypedef:
   \_EventTypespec: 
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -17548,8 +17467,6 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EnumTypespec: , line:39:12, endln:43:15
   |vpiImportTypespec:
-  \_BitTypespec: 
-  |vpiImportTypespec:
   \_TypedefTypespec: (Burstmode), line:43:6, endln:43:15
   |vpiImportTypespec:
   \_TypedefTypespec: (Command), line:54:6, endln:54:13
@@ -17566,11 +17483,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiImportTypespec:
-  \_BitTypespec: 
-  |vpiImportTypespec:
   \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -17583,8 +17496,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -18010,11 +17921,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntVar: (work@test_program.pending_read_cycles_slave_0), line:332:8, endln:332:35
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
   \_IntVar: (work@test_program.pending_read_cycles_slave_1), line:475:8, endln:475:35
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_BitVar: (work@test_program.test_success), line:511:5, endln:511:17
   |vpiImportTypespec:
@@ -18668,17 +18575,10 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@test_program), line:282:59, endln:305:7
           |vpiSigned:1
-        |vpiTypedef:
-        \_IntTypespec: 
-          |vpiParent:
-          \_Begin: (work@test_program), line:282:59, endln:305:7
-          |vpiSigned:1
         |vpiImportTypespec:
         \_IntTypespec: 
         |vpiImportTypespec:
         \_IntVar: (work@test_program.backpressure_cycles), line:287:21, endln:287:40
-        |vpiImportTypespec:
-        \_IntTypespec: 
         |vpiImportTypespec:
         \_IntVar: (work@test_program.i), line:290:16, endln:290:17
         |vpiImportTypespec:
@@ -19463,17 +19363,10 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@test_program), line:425:59, endln:448:7
           |vpiSigned:1
-        |vpiTypedef:
-        \_IntTypespec: 
-          |vpiParent:
-          \_Begin: (work@test_program), line:425:59, endln:448:7
-          |vpiSigned:1
         |vpiImportTypespec:
         \_IntTypespec: 
         |vpiImportTypespec:
         \_IntVar: (work@test_program.backpressure_cycles), line:430:21, endln:430:40
-        |vpiImportTypespec:
-        \_IntTypespec: 
         |vpiImportTypespec:
         \_IntVar: (work@test_program.i), line:433:16, endln:433:17
         |vpiImportTypespec:
@@ -20289,18 +20182,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -20318,8 +20199,6 @@ Design: (unnamed)
     |vpiFullName:work@top.b
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.a), line:1:41, endln:1:42
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
@@ -20333,10 +20212,6 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.b), line:1:25, endln:1:26
@@ -20405,6 +20280,27 @@ Design: (unnamed)
         \_LogicNet: (work@top.a), line:1:41, endln:1:42
       |vpiName:$root.top.a
       |vpiFullName:work@top.$root.top.a
+|vpiTypedef:
+\_ModuleTypespec: (test_program)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test_program
+  |vpiModule:
+  \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+|vpiTypedef:
+\_ModuleTypespec: (test_program1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test_program1
+  |vpiModule:
+  \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:1:1, endln:3:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

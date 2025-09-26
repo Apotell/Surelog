@@ -168,7 +168,6 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:5:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:2:1: Compile module "work@sub".
-[ERR:UH0703] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:12:14: Internal Error(20) : adding wrong object type (GenVar) in a stmt group!.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  3
@@ -181,6 +180,7 @@ Identifier                                             3
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
+ModuleTypespec                                         2
 Operation                                              1
 ParamAssign                                            1
 Parameter                                              1
@@ -293,6 +293,8 @@ Design: (unnamed)
         \_Begin: (work@dut), line:12:5, endln:12:23
         |vpiName:loop_int
         |vpiFullName:work@dut.loop_int
+      |vpiStmt:
+      \_GenVar: (work@dut.loop_int), line:12:14, endln:12:22
     |vpiStmt:
     \_Begin: (work@dut), line:12:5, endln:12:23
   |vpiDefName:work@dut
@@ -305,10 +307,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
     |vpiName:work@sub
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -329,8 +327,6 @@ Design: (unnamed)
     |vpiName:int_status
     |vpiFullName:work@sub.int_status
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@sub
   |vpiNet:
   \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
@@ -347,9 +343,23 @@ Design: (unnamed)
       |vpiFullName:work@sub.int_status
       |vpiActual:
       \_LogicTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
+|vpiTypedef:
+\_ModuleTypespec: (sub)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:sub
+  |vpiModule:
+  \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0

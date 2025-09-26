@@ -98,7 +98,7 @@ Identifier                                             3
 LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 RefModule                                              2
 RefObj                                                 3
 RefTypespec                                            1
@@ -176,14 +176,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (bottom)
     |vpiParent:
-    \_Module: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
+    \_Design: (unnamed)
     |vpiName:bottom
+    |vpiModule:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (bottom)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -223,10 +223,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (medium)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:11:1, endln:13:10
+    \_Design: (unnamed)
     |vpiName:medium
-  |vpiImportTypespec:
-  \_ModuleTypespec: (medium)
+    |vpiModule:
+    \_Module: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@medium (u1), line:12:4, endln:12:10
@@ -236,6 +236,17 @@ Design: (unnamed)
     |vpiDefName:work@medium
     |vpiActual:
     \_Module: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
+|vpiTypedef:
+\_ModuleTypespec: (bottom)
+|vpiTypedef:
+\_ModuleTypespec: (medium)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:11:1, endln:13:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

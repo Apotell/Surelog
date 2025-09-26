@@ -173,7 +173,7 @@ Identifier                                             5
 IfElse                                                 1
 Initial                                                1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 ParamAssign                                            3
 Parameter                                              3
@@ -385,10 +385,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
+    \_Design: (unnamed)
     |vpiName:dut
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@dut (dut), line:15:1, endln:15:4
@@ -398,6 +398,15 @@ Design: (unnamed)
     |vpiDefName:work@dut
     |vpiActual:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

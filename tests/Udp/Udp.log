@@ -680,7 +680,7 @@ Assignment                                            11
 Attribute                                              4
 Begin                                                  1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              19
 DelayControl                                           9
 Design                                                 1
@@ -694,6 +694,7 @@ IntTypespec                                            9
 LogicNet                                              18
 LogicTypespec                                          4
 Module                                                 1
+ModuleTypespec                                         1
 Package                                                1
 PrimTerm                                               3
 RefObj                                                17
@@ -705,6 +706,7 @@ Task                                                   9
 TypedefTypespec                                        1
 Udp                                                    1
 UdpDefn                                                4
+UdpDefnTypespec                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Udp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1050,15 +1052,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1369,13 +1362,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1424,22 +1410,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/Udp/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1468,11 +1526,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:a
     |vpiExpr:
-    \_LogicNet: (work@udp_body.a), line:6:10, endln:6:11
+    \_LogicNet: (work@udp_body.a.a), line:6:10, endln:6:11
       |vpiParent:
-      \_UdpDefn: work@udp_body, line:1:1, endln:18:13
+      \_IODecl: (a), line:2:3, endln:2:4
       |vpiName:a
-      |vpiFullName:work@udp_body.a
+      |vpiFullName:work@udp_body.a.a
   |vpiIODecl:
   \_IODecl: (b), line:3:3, endln:3:4
     |vpiParent:
@@ -1480,11 +1538,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:b
     |vpiExpr:
-    \_LogicNet: (work@udp_body.b), line:7:9, endln:7:10
+    \_LogicNet: (work@udp_body.b.b), line:7:9, endln:7:10
       |vpiParent:
-      \_UdpDefn: work@udp_body, line:1:1, endln:18:13
+      \_IODecl: (b), line:3:3, endln:3:4
       |vpiName:b
-      |vpiFullName:work@udp_body.b
+      |vpiFullName:work@udp_body.b.b
   |vpiIODecl:
   \_IODecl: (c), line:4:3, endln:4:4
     |vpiParent:
@@ -1492,11 +1550,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:c
     |vpiExpr:
-    \_LogicNet: (work@udp_body.c), line:7:11, endln:7:12
+    \_LogicNet: (work@udp_body.c.c), line:7:11, endln:7:12
       |vpiParent:
-      \_UdpDefn: work@udp_body, line:1:1, endln:18:13
+      \_IODecl: (c), line:4:3, endln:4:4
       |vpiName:c
-      |vpiFullName:work@udp_body.c
+      |vpiFullName:work@udp_body.c.c
   |vpiTableEntry:
   \_TableEntry: , line:13:7, endln:13:11
     |vpiParent:
@@ -1527,11 +1585,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:q
     |vpiExpr:
-    \_LogicNet: (work@udp_latch.q), line:22:8, endln:22:9
+    \_LogicNet: (work@udp_latch.q.q), line:22:8, endln:22:9
       |vpiParent:
-      \_UdpDefn: work@udp_latch, line:21:1, endln:34:13
+      \_IODecl: (q), line:21:21, endln:21:22
       |vpiName:q
-      |vpiFullName:work@udp_latch.q
+      |vpiFullName:work@udp_latch.q.q
   |vpiIODecl:
   \_IODecl: (clk), line:21:24, endln:21:27
     |vpiParent:
@@ -1539,11 +1597,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:clk
     |vpiExpr:
-    \_LogicNet: (work@udp_latch.clk), line:23:7, endln:23:10
+    \_LogicNet: (work@udp_latch.clk.clk), line:23:7, endln:23:10
       |vpiParent:
-      \_UdpDefn: work@udp_latch, line:21:1, endln:34:13
+      \_IODecl: (clk), line:21:24, endln:21:27
       |vpiName:clk
-      |vpiFullName:work@udp_latch.clk
+      |vpiFullName:work@udp_latch.clk.clk
   |vpiIODecl:
   \_IODecl: (d), line:21:29, endln:21:30
     |vpiParent:
@@ -1551,11 +1609,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:d
     |vpiExpr:
-    \_LogicNet: (work@udp_latch.d), line:23:12, endln:23:13
+    \_LogicNet: (work@udp_latch.d.d), line:23:12, endln:23:13
       |vpiParent:
-      \_UdpDefn: work@udp_latch, line:21:1, endln:34:13
+      \_IODecl: (d), line:21:29, endln:21:30
       |vpiName:d
-      |vpiFullName:work@udp_latch.d
+      |vpiFullName:work@udp_latch.d.d
   |vpiTableEntry:
   \_TableEntry: , line:29:3, endln:29:10
     |vpiParent:
@@ -1586,11 +1644,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:q
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential.q), line:38:8, endln:38:9
+    \_LogicNet: (work@udp_sequential.q.q), line:38:8, endln:38:9
       |vpiParent:
-      \_UdpDefn: work@udp_sequential, line:37:1, endln:56:13
+      \_IODecl: (q), line:37:26, endln:37:27
       |vpiName:q
-      |vpiFullName:work@udp_sequential.q
+      |vpiFullName:work@udp_sequential.q.q
   |vpiIODecl:
   \_IODecl: (clk), line:37:29, endln:37:32
     |vpiParent:
@@ -1598,11 +1656,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:clk
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential.clk), line:39:7, endln:39:10
+    \_LogicNet: (work@udp_sequential.clk.clk), line:39:7, endln:39:10
       |vpiParent:
-      \_UdpDefn: work@udp_sequential, line:37:1, endln:56:13
+      \_IODecl: (clk), line:37:29, endln:37:32
       |vpiName:clk
-      |vpiFullName:work@udp_sequential.clk
+      |vpiFullName:work@udp_sequential.clk.clk
   |vpiIODecl:
   \_IODecl: (d), line:37:34, endln:37:35
     |vpiParent:
@@ -1610,11 +1668,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:d
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential.d), line:39:12, endln:39:13
+    \_LogicNet: (work@udp_sequential.d.d), line:39:12, endln:39:13
       |vpiParent:
-      \_UdpDefn: work@udp_sequential, line:37:1, endln:56:13
+      \_IODecl: (d), line:37:34, endln:37:35
       |vpiName:d
-      |vpiFullName:work@udp_sequential.d
+      |vpiFullName:work@udp_sequential.d.d
   |vpiTableEntry:
   \_TableEntry: , line:46:4, endln:46:18
     |vpiParent:
@@ -1668,17 +1726,17 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:q
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential_initial.q), line:61:26, endln:61:27
+    \_LogicNet: (work@udp_sequential_initial.q.q), line:61:26, endln:61:27
       |vpiParent:
-      \_UdpDefn: work@udp_sequential_initial, line:60:1, endln:82:13
+      \_IODecl: (q), line:60:34, endln:60:35
       |vpiAttribute:
       \_Attribute: (q), line:61:4, endln:61:14
         |vpiParent:
-        \_LogicNet: (work@udp_sequential_initial.q), line:61:26, endln:61:27
+        \_LogicNet: (work@udp_sequential_initial.q.q), line:61:26, endln:61:27
         |vpiName:q
         |STRING:blah
       |vpiName:q
-      |vpiFullName:work@udp_sequential_initial.q
+      |vpiFullName:work@udp_sequential_initial.q.q
   |vpiIODecl:
   \_IODecl: (clk), line:60:37, endln:60:40
     |vpiParent:
@@ -1686,17 +1744,17 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:clk
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential_initial.clk), line:62:25, endln:62:28
+    \_LogicNet: (work@udp_sequential_initial.clk.clk), line:62:25, endln:62:28
       |vpiParent:
-      \_UdpDefn: work@udp_sequential_initial, line:60:1, endln:82:13
+      \_IODecl: (clk), line:60:37, endln:60:40
       |vpiAttribute:
       \_Attribute: (clk), line:62:4, endln:62:15
         |vpiParent:
-        \_LogicNet: (work@udp_sequential_initial.clk), line:62:25, endln:62:28
+        \_LogicNet: (work@udp_sequential_initial.clk.clk), line:62:25, endln:62:28
         |vpiName:clk
         |STRING:foo
       |vpiName:clk
-      |vpiFullName:work@udp_sequential_initial.clk
+      |vpiFullName:work@udp_sequential_initial.clk.clk
   |vpiIODecl:
   \_IODecl: (d), line:60:42, endln:60:43
     |vpiParent:
@@ -1704,13 +1762,13 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:d
     |vpiExpr:
-    \_LogicNet: (work@udp_sequential_initial.d), line:62:30, endln:62:31
+    \_LogicNet: (work@udp_sequential_initial.d.d), line:62:30, endln:62:31
       |vpiParent:
-      \_UdpDefn: work@udp_sequential_initial, line:60:1, endln:82:13
+      \_IODecl: (d), line:60:42, endln:60:43
       |vpiAttribute:
       \_Attribute: (clk), line:62:4, endln:62:15
       |vpiName:d
-      |vpiFullName:work@udp_sequential_initial.d
+      |vpiFullName:work@udp_sequential_initial.d.d
   |vpiTableEntry:
   \_TableEntry: , line:72:4, endln:72:18
     |vpiParent:
@@ -1784,14 +1842,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@udp_body_tb (work@udp_body_tb), file:${SURELOG_DIR}/tests/Udp/dut.sv, line:84:1, endln:106:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@udp_body_tb (work@udp_body_tb), file:${SURELOG_DIR}/tests/Udp/dut.sv, line:84:1, endln:106:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@udp_body_tb (work@udp_body_tb), file:${SURELOG_DIR}/tests/Udp/dut.sv, line:84:1, endln:106:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1809,8 +1859,6 @@ Design: (unnamed)
     |vpiFullName:work@udp_body_tb.b
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@udp_body_tb.c), line:86:7, endln:86:8
     |vpiParent:
     \_Module: work@udp_body_tb (work@udp_body_tb), file:${SURELOG_DIR}/tests/Udp/dut.sv, line:84:1, endln:106:10
@@ -1824,8 +1872,6 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@udp_body_tb.c
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@udp_body_tb.a), line:87:6, endln:87:7
     |vpiParent:
@@ -2219,6 +2265,37 @@ Design: (unnamed)
         |vpiFullName:work@udp_body_tb.udp.c
         |vpiActual:
         \_LogicNet: (work@udp_body_tb.c), line:86:7, endln:86:8
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@udp_body, line:1:1, endln:18:13
+|vpiTypedef:
+\_ModuleTypespec: (udp_body_tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:udp_body_tb
+  |vpiModule:
+  \_Module: work@udp_body_tb (work@udp_body_tb), file:${SURELOG_DIR}/tests/Udp/dut.sv, line:84:1, endln:106:10
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@udp_latch, line:21:1, endln:34:13
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@udp_sequential, line:37:1, endln:56:13
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@udp_sequential_initial, line:60:1, endln:82:13
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

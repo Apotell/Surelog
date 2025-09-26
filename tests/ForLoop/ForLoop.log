@@ -807,7 +807,7 @@ AST_DEBUG_END
 Assignment                                            33
 Begin                                                  1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              54
 Design                                                 1
 EnumConst                                              5
@@ -822,6 +822,7 @@ IntegerNet                                            14
 IntegerTypespec                                       14
 LogicTypespec                                          1
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                             33
 Package                                                1
 RefObj                                                51
@@ -1176,15 +1177,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1495,13 +1487,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1550,22 +1535,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ForLoop/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1596,11 +1653,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/ForLoop/dut.sv, line:1:1, endln:28:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/ForLoop/dut.sv, line:1:1, endln:28:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: 
   |vpiImportTypespec:
@@ -1617,8 +1669,6 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@t.a
     |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_IntegerNet: (work@t.b), line:3:14, endln:3:15
     |vpiParent:
@@ -2888,61 +2938,6 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
-      |vpiTypedef:
-      \_IntegerTypespec: 
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiSigned:1
       |vpiImportTypespec:
       \_RefVar: (work@t), line:12:11, endln:12:12
       |vpiImportTypespec:
@@ -2966,8 +2961,6 @@ Design: (unnamed)
         |vpiFullName:work@t.a
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:16:19, endln:16:20
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -2981,8 +2974,6 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@t.a
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:17:19, endln:17:20
         |vpiParent:
@@ -2998,8 +2989,6 @@ Design: (unnamed)
         |vpiFullName:work@t.a
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:18:23, endln:18:24
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -3013,8 +3002,6 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@t.a
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:19:23, endln:19:24
         |vpiParent:
@@ -3030,8 +3017,6 @@ Design: (unnamed)
         |vpiFullName:work@t.a
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:20:23, endln:20:24
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -3045,8 +3030,6 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@t.a
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:21:19, endln:21:20
         |vpiParent:
@@ -3062,8 +3045,6 @@ Design: (unnamed)
         |vpiFullName:work@t.a
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:21:32, endln:21:33
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -3077,8 +3058,6 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@t.b
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:22:19, endln:22:20
         |vpiParent:
@@ -3094,8 +3073,6 @@ Design: (unnamed)
         |vpiFullName:work@t.a
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:22:32, endln:22:33
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -3110,8 +3087,6 @@ Design: (unnamed)
         |vpiFullName:work@t.b
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntegerTypespec: 
-      |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:23:19, endln:23:20
         |vpiParent:
         \_Begin: (work@t), line:5:11, endln:26:6
@@ -3125,8 +3100,6 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@t.a
         |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:23:32, endln:23:33
         |vpiParent:
@@ -3203,6 +3176,13 @@ Design: (unnamed)
           |vpiParent:
           \_SysFuncCall: ($finish), line:25:6, endln:25:13
           |vpiName:$finish
+|vpiTypedef:
+\_ModuleTypespec: (t)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:t
+  |vpiModule:
+  \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/ForLoop/dut.sv, line:1:1, endln:28:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

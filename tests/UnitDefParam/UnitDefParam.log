@@ -693,7 +693,7 @@ AST_DEBUG_END
 Assignment                                            10
 Begin                                                  8
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              21
 Design                                                 1
 EnumConst                                              5
@@ -708,7 +708,7 @@ Identifier                                            40
 IntTypespec                                            9
 LogicTypespec                                          1
 Module                                                 6
-ModuleTypespec                                         9
+ModuleTypespec                                        12
 Operation                                             11
 Package                                                1
 ParamAssign                                            5
@@ -1073,15 +1073,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1392,13 +1383,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1447,22 +1431,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitDefParam/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1522,15 +1578,15 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (secret_number)
     |vpiParent:
-    \_Module: work@defparam_example (work@defparam_example), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:14:1, endln:27:10
+    \_Design: (unnamed)
     |vpiName:secret_number
+    |vpiModule:
+    \_Module: work@secret_number (work@secret_number), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:2:1, endln:12:10
   |vpiTypedef:
   \_ModuleTypespec: (NO_DEF)
     |vpiParent:
     \_Module: work@defparam_example (work@defparam_example), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:14:1, endln:27:10
     |vpiName:NO_DEF
-  |vpiImportTypespec:
-  \_ModuleTypespec: (secret_number)
   |vpiImportTypespec:
   \_ModuleTypespec: (NO_DEF)
   |vpiDefName:work@defparam_example
@@ -2369,10 +2425,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (small_test)
     |vpiParent:
-    \_Module: work@small_top (work@small_top), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:7:1, endln:9:10
+    \_Design: (unnamed)
     |vpiName:small_test
-  |vpiImportTypespec:
-  \_ModuleTypespec: (small_test)
+    |vpiModule:
+    \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
   |vpiDefName:work@small_top
   |vpiRefModule:
   \_RefModule: work@small_test (u1), line:8:4, endln:8:14
@@ -2394,10 +2450,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (def)
     |vpiParent:
-    \_Module: work@top_def (work@top_def), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:1:1, endln:5:10
+    \_Design: (unnamed)
     |vpiName:def
-  |vpiImportTypespec:
-  \_ModuleTypespec: (def)
+    |vpiModule:
+    \_Module: work@def (work@def), file:${SURELOG_DIR}/tests/UnitDefParam/def.v, line:2:1, endln:8:10
   |vpiDefName:work@top_def
   |vpiRefModule:
   \_RefModule: work@def (u1), line:3:5, endln:3:8
@@ -2407,6 +2463,33 @@ Design: (unnamed)
     |vpiDefName:work@def
     |vpiActual:
     \_Module: work@def (work@def), file:${SURELOG_DIR}/tests/UnitDefParam/def.v, line:2:1, endln:8:10
+|vpiTypedef:
+\_ModuleTypespec: (def)
+|vpiTypedef:
+\_ModuleTypespec: (defparam_example)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:defparam_example
+  |vpiModule:
+  \_Module: work@defparam_example (work@defparam_example), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:14:1, endln:27:10
+|vpiTypedef:
+\_ModuleTypespec: (secret_number)
+|vpiTypedef:
+\_ModuleTypespec: (small_test)
+|vpiTypedef:
+\_ModuleTypespec: (small_top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:small_top
+  |vpiModule:
+  \_Module: work@small_top (work@small_top), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:7:1, endln:9:10
+|vpiTypedef:
+\_ModuleTypespec: (top_def)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top_def
+  |vpiModule:
+  \_Module: work@top_def (work@top_def), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:1:1, endln:5:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

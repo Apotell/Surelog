@@ -315,7 +315,7 @@ IntTypespec                                            1
 IntVar                                                 1
 LogicTypespec                                          5
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                              3
 ParamAssign                                            5
 Parameter                                              5
@@ -613,14 +613,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
   |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
-  |vpiTypedef:
   \_ModuleTypespec: (prim_subreg)
     |vpiParent:
-    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
+    \_Design: (unnamed)
     |vpiName:prim_subreg
+    |vpiModule:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:2:1, endln:5:10
   |vpiImportTypespec:
   \_TypedefTypespec: (struct_ab), line:11:6, endln:11:15
   |vpiImportTypespec:
@@ -631,10 +629,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_subreg)
   |vpiDefName:work@prim_subreg_shadow
   |vpiRefModule:
   \_RefModule: work@prim_subreg (staged_reg), line:18:4, endln:18:15
@@ -832,8 +826,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_subreg_shadow)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:24:1, endln:41:10
+    \_Design: (unnamed)
     |vpiName:prim_subreg_shadow
+    |vpiModule:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
   |vpiImportTypespec:
   \_TypedefTypespec: (struct_ab), line:28:6, endln:28:15
   |vpiImportTypespec:
@@ -842,8 +838,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_subreg_shadow)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_subreg_shadow (u_ctrl_reg_shadowed), line:38:4, endln:38:22
@@ -853,6 +847,17 @@ Design: (unnamed)
     |vpiDefName:work@prim_subreg_shadow
     |vpiActual:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
+|vpiTypedef:
+\_ModuleTypespec: (prim_subreg)
+|vpiTypedef:
+\_ModuleTypespec: (prim_subreg_shadow)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:24:1, endln:41:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

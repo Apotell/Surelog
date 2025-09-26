@@ -203,7 +203,7 @@ IntVar                                                 2
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
@@ -430,11 +430,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
   |vpiImportTypespec:
@@ -443,8 +438,6 @@ Design: (unnamed)
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@prim_lfsr.o), line:3:29, endln:3:30
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@prim_lfsr
   |vpiTaskFunc:
   \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
@@ -528,26 +521,19 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_lfsr)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
+    \_Design: (unnamed)
     |vpiName:prim_lfsr
+    |vpiModule:
+    \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_lfsr)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:15:23, endln:15:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiPort:
   \_Port: (o), line:15:23, endln:15:24
@@ -583,6 +569,15 @@ Design: (unnamed)
         |vpiFullName:work@top.u_lfsr.o.o
         |vpiActual:
         \_IntVar: (work@top.o), line:15:23, endln:15:24
+|vpiTypedef:
+\_ModuleTypespec: (prim_lfsr)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

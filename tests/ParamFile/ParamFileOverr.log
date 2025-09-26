@@ -224,7 +224,7 @@ Initial                                                1
 LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 ParamAssign                                            2
 Parameter                                              2
@@ -302,18 +302,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (ram_1p)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
+    \_Design: (unnamed)
     |vpiName:ram_1p
+    |vpiModule:
+    \_Module: work@ram_1p (work@ram_1p), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:12:1, endln:30:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (ram_1p)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -330,8 +326,6 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.o), line:3:26, endln:3:27
@@ -402,10 +396,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@ram_1p (work@ram_1p), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:12:1, endln:30:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@ram_1p (work@ram_1p), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:12:1, endln:30:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -422,8 +412,6 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@ram_1p.out
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@ram_1p
   |vpiNet:
   \_LogicNet: (work@ram_1p.out), line:15:22, endln:15:25
@@ -599,6 +587,15 @@ Design: (unnamed)
               |vpiFullName:work@ram_1p.gen_nomeminit.out
               |vpiActual:
               \_LogicNet: (work@ram_1p.out), line:15:22, endln:15:25
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamFile/dut.sv, line:3:1, endln:10:10
+|vpiTypedef:
+\_ModuleTypespec: (ram_1p)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

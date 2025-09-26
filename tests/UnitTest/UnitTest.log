@@ -638,17 +638,18 @@ Constant                                              20
 ContAssign                                             1
 Design                                                 1
 IODecl                                                 2
-Identifier                                            18
+Identifier                                            15
 IfElse                                                 3
 IfStmt                                                 1
 Initial                                                1
 Interface                                              1
-InterfaceTypespec                                      6
+InterfaceTypespec                                      3
 LogicNet                                              10
 LogicTypespec                                          8
 LogicVar                                               1
 Modport                                                2
 Module                                                 3
+ModuleTypespec                                         3
 Operation                                             16
 Port                                                   5
 Range                                                  2
@@ -706,16 +707,10 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.clk), line:47:30, endln:47:33
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
     |vpiParent:
@@ -735,6 +730,12 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (memory), line:50:12, endln:50:18
       |vpiName:memory
+    |vpiIODecl:
+    \_IODecl: (clk), line:50:27, endln:50:30
+      |vpiParent:
+      \_Modport: (memory), line:50:12, endln:50:18
+      |vpiDirection:2
+      |vpiName:clk
   |vpiModport:
   \_Modport: (system), line:49:12, endln:49:18
     |vpiParent:
@@ -744,6 +745,12 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (system), line:49:12, endln:49:18
       |vpiName:system
+    |vpiIODecl:
+    \_IODecl: (clk), line:49:26, endln:49:29
+      |vpiParent:
+      \_Modport: (system), line:49:12, endln:49:18
+      |vpiDirection:1
+      |vpiName:clk
   |vpiPort:
   \_Port: (clk), line:47:30, endln:47:33
     |vpiParent:
@@ -785,7 +792,7 @@ Design: (unnamed)
       |vpiName:DD2
       |vpiFullName:work@memory_ctrl1.toto2.DD2
       |vpiActual:
-      \_ClassTypespec: (DD2)
+      \_ClassTypespec: (work@DD2)
     |vpiName:toto2
     |vpiFullName:work@memory_ctrl1.toto2
     |vpiRandType:1
@@ -796,10 +803,10 @@ Design: (unnamed)
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiName:DD1
   |vpiTypedef:
-  \_ClassTypespec: (DD2)
+  \_ClassTypespec: (work@DD2)
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:DD2
+    |vpiName:work@DD2
     |vpiClassDefn:
     \_ClassDefn: (work@DD2), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:54:1, endln:55:9
   |vpiTypedef:
@@ -807,40 +814,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
   |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-  |vpiTypedef:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+  \_InterfaceTypespec: (mem_if)
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiName:
     \_Identifier: (mem_if)
       |vpiParent:
-      \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
-      |vpiName:mem_if
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (system), line:57:42, endln:57:48
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:
-    \_Identifier: (system)
-      |vpiParent:
-      \_InterfaceTypespec: (system), line:57:42, endln:57:48
-      |vpiName:system
-    |vpiIsModPort:1
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:
-    \_Identifier: (mem_if)
-      |vpiParent:
-      \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+      \_InterfaceTypespec: (mem_if)
       |vpiName:mem_if
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
@@ -873,7 +853,7 @@ Design: (unnamed)
     |vpiName:toto1
     |vpiFullName:work@memory_ctrl1.toto1
   |vpiImportTypespec:
-  \_ClassTypespec: (DD2)
+  \_ClassTypespec: (work@DD2)
   |vpiImportTypespec:
   \_ClassVar: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
   |vpiImportTypespec:
@@ -893,8 +873,6 @@ Design: (unnamed)
     |vpiFullName:work@memory_ctrl1.i1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@memory_ctrl1.o1), line:65:5, endln:65:7
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
@@ -909,11 +887,7 @@ Design: (unnamed)
     |vpiFullName:work@memory_ctrl1.o1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (system), line:57:42, endln:57:48
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+  \_InterfaceTypespec: (mem_if)
   |vpiImportTypespec:
   \_InterfaceTypespec: (system), line:57:42, endln:57:48
   |vpiDefName:work@memory_ctrl1
@@ -936,7 +910,7 @@ Design: (unnamed)
       |vpiName:mem_if
       |vpiFullName:work@memory_ctrl1.sif1.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+      \_InterfaceTypespec: (mem_if)
   |vpiPort:
   \_Port: (sif2), line:57:49, endln:57:53
     |vpiParent:
@@ -1678,10 +1652,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
   |vpiImportTypespec:
   \_LogicNet: (work@top.i), line:40:19, endln:40:20
     |vpiParent:
@@ -1710,8 +1680,6 @@ Design: (unnamed)
     |vpiName:i
     |vpiFullName:work@top.i
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.o), line:42:5, endln:42:6
     |vpiParent:
@@ -1767,6 +1735,27 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_LogicNet: (work@top.o), line:40:29, endln:40:30
+|vpiTypedef:
+\_ModuleTypespec: (memory_ctrl1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:memory_ctrl1
+  |vpiModule:
+  \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
+|vpiTypedef:
+\_ModuleTypespec: (tb_operators)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:tb_operators
+  |vpiModule:
+  \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

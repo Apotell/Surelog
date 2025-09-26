@@ -92,10 +92,11 @@ Assignment                                             1
 Begin                                                  1
 Constant                                               1
 Design                                                 1
-Identifier                                             2
+Identifier                                             3
 IntTypespec                                            4
 IntVar                                                 2
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               1
 Module                                                 1
 ModuleTypespec                                         1
@@ -144,17 +145,10 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
-    |vpiSigned:1
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@sw_test_status_if.x), line:1:40, endln:1:41
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@sw_test_status_if.x), line:1:40, endln:1:41
     |vpiParent:
@@ -243,28 +237,25 @@ Design: (unnamed)
     |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
-  \_ModuleTypespec: (sw_test_status_if)
+  \_InterfaceTypespec: (sw_test_status_if)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
-    |vpiName:sw_test_status_if
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (sw_test_status_if)
+      |vpiParent:
+      \_InterfaceTypespec: (sw_test_status_if)
+      |vpiName:sw_test_status_if
+    |vpiInterface:
+    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_ModuleTypespec: (sw_test_status_if)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:7:23, endln:7:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiPort:
   \_Port: (o), line:7:23, endln:7:24
@@ -300,6 +291,15 @@ Design: (unnamed)
         |vpiFullName:work@top.u_sw.x.o
         |vpiActual:
         \_IntVar: (work@top.o), line:7:23, endln:7:24
+|vpiTypedef:
+\_InterfaceTypespec: (sw_test_status_if)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

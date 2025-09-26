@@ -117,6 +117,7 @@ ContAssign                                             3
 Design                                                 1
 Identifier                                             1
 Module                                                 1
+ModuleTypespec                                         1
 PartSelect                                             2
 SourceFile                                             1
 VarSelect                                              2
@@ -256,11 +257,11 @@ Design: (unnamed)
         |UINT:4
         |vpiConstType:9
       |vpiIndex:
-      \_PartSelect: state_d (work@dut.state_d), line:4:25, endln:4:28
+      \_PartSelect: state_d (work@dut.state_d.state_d), line:4:25, endln:4:28
         |vpiParent:
-        \_ContAssign: , line:4:8, endln:4:43
+        \_VarSelect: (work@dut.state_d), line:4:8, endln:4:29
         |vpiName:state_d
-        |vpiFullName:work@dut.state_d
+        |vpiFullName:work@dut.state_d.state_d
         |vpiDefName:state_d
         |vpiActual:
         \_LogicNet: (work@dut.state_d), line:4:8, endln:4:29
@@ -268,7 +269,7 @@ Design: (unnamed)
         |vpiLeftRange:
         \_Constant: , line:4:25, endln:4:26
           |vpiParent:
-          \_PartSelect: state_d (work@dut.state_d), line:4:25, endln:4:28
+          \_PartSelect: state_d (work@dut.state_d.state_d), line:4:25, endln:4:28
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
@@ -276,7 +277,7 @@ Design: (unnamed)
         |vpiRightRange:
         \_Constant: , line:4:27, endln:4:28
           |vpiParent:
-          \_PartSelect: state_d (work@dut.state_d), line:4:25, endln:4:28
+          \_PartSelect: state_d (work@dut.state_d.state_d), line:4:25, endln:4:28
           |vpiDecompile:6
           |vpiSize:64
           |UINT:6
@@ -319,6 +320,13 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:11
         |vpiConstType:9
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

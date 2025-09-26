@@ -254,7 +254,7 @@ Identifier                                             5
 IndexedPartSelect                                      1
 IntTypespec                                            2
 Module                                                 4
-ModuleTypespec                                         2
+ModuleTypespec                                         4
 Operation                                              5
 PackedArrayTypespec                                    1
 ParamAssign                                            5
@@ -381,10 +381,10 @@ Design: (unnamed)
       |vpiTypedef:
       \_ModuleTypespec: (tlul_fifo_sync)
         |vpiParent:
-        \_Begin: (work@tlul_socket_1n.gen_dfifo), line:6:36, endln:8:6
+        \_Design: (unnamed)
         |vpiName:tlul_fifo_sync
-      |vpiImportTypespec:
-      \_ModuleTypespec: (tlul_fifo_sync)
+        |vpiModule:
+        \_Module: work@tlul_fifo_sync (work@tlul_fifo_sync), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:2:1, endln:3:10
       |vpiStmt:
       \_RefModule: work@tlul_fifo_sync (fifo_d), line:7:5, endln:7:19
         |vpiParent:
@@ -626,10 +626,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (tlul_socket_1n)
     |vpiParent:
-    \_Module: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
+    \_Design: (unnamed)
     |vpiName:tlul_socket_1n
-  |vpiImportTypespec:
-  \_ModuleTypespec: (tlul_socket_1n)
+    |vpiModule:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
   |vpiDefName:work@xbar_main
   |vpiRefModule:
   \_RefModule: work@tlul_socket_1n (u_s1n_25), line:12:3, endln:12:17
@@ -639,6 +639,24 @@ Design: (unnamed)
     |vpiDefName:work@tlul_socket_1n
     |vpiActual:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
+|vpiTypedef:
+\_ModuleTypespec: (tlul_fifo_sync)
+|vpiTypedef:
+\_ModuleTypespec: (tlul_socket_1n)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
+|vpiTypedef:
+\_ModuleTypespec: (xbar_main)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:xbar_main
+  |vpiModule:
+  \_Module: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -145,7 +145,7 @@ Constant                                               1
 Design                                                 1
 Identifier                                             2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 ParamAssign                                            5
 Parameter                                              5
@@ -298,10 +298,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (Foo)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
+    \_Design: (unnamed)
     |vpiName:Foo
-  |vpiImportTypespec:
-  \_ModuleTypespec: (Foo)
+    |vpiModule:
+    \_Module: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:1:1, endln:5:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@Foo (sub), line:12:1, endln:12:4
@@ -311,6 +311,15 @@ Design: (unnamed)
     |vpiDefName:work@Foo
     |vpiActual:
     \_Module: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:1:1, endln:5:10
+|vpiTypedef:
+\_ModuleTypespec: (Foo)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LoopParamOver/dut.sv, line:8:1, endln:13:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

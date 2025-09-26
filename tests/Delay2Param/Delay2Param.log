@@ -415,7 +415,7 @@ Identifier                                             6
 LogicNet                                               9
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                              9
 ParamAssign                                            8
 Parameter                                              8
@@ -429,6 +429,7 @@ SysFuncCall                                            3
 TableEntry                                             2
 Udp                                                    1
 UdpDefn                                                1
+UdpDefnTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Delay2Param/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -451,11 +452,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:O
     |vpiExpr:
-    \_LogicNet: (work@BUFG.O), line:15:11, endln:15:12
+    \_LogicNet: (work@BUFG.O.O), line:15:11, endln:15:12
       |vpiParent:
-      \_UdpDefn: work@BUFG, line:14:1, endln:21:13
+      \_IODecl: (O), line:14:18, endln:14:19
       |vpiName:O
-      |vpiFullName:work@BUFG.O
+      |vpiFullName:work@BUFG.O.O
   |vpiIODecl:
   \_IODecl: (I), line:14:21, endln:14:22
     |vpiParent:
@@ -463,11 +464,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:I
     |vpiExpr:
-    \_LogicNet: (work@BUFG.I), line:16:10, endln:16:11
+    \_LogicNet: (work@BUFG.I.I), line:16:10, endln:16:11
       |vpiParent:
-      \_UdpDefn: work@BUFG, line:14:1, endln:21:13
+      \_IODecl: (I), line:14:21, endln:14:22
       |vpiName:I
-      |vpiFullName:work@BUFG.I
+      |vpiFullName:work@BUFG.I.I
   |vpiTableEntry:
   \_TableEntry: , line:18:7, endln:18:8
     |vpiParent:
@@ -967,17 +968,17 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (iNToRawFN)
     |vpiParent:
-    \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
+    \_Design: (unnamed)
     |vpiName:iNToRawFN
+    |vpiModule:
+    \_Module: work@iNToRawFN (work@iNToRawFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:1:1, endln:4:10
   |vpiTypedef:
   \_ModuleTypespec: (iNToRawFN3)
     |vpiParent:
-    \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
+    \_Design: (unnamed)
     |vpiName:iNToRawFN3
-  |vpiImportTypespec:
-  \_ModuleTypespec: (iNToRawFN)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (iNToRawFN3)
+    |vpiModule:
+    \_Module: work@iNToRawFN3 (work@iNToRawFN3), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:6:1, endln:11:10
   |vpiImportTypespec:
   \_LogicNet: (work@iNToRecFN.signedIn), line:24:33, endln:24:41
     |vpiParent:
@@ -1067,6 +1068,23 @@ Design: (unnamed)
         |vpiFullName:work@iNToRecFN.iNToRawFN3.sExp
         |vpiActual:
         \_LogicNet: (work@iNToRecFN.sExp), line:24:43, endln:24:47
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@BUFG, line:14:1, endln:21:13
+|vpiTypedef:
+\_ModuleTypespec: (iNToRawFN)
+|vpiTypedef:
+\_ModuleTypespec: (iNToRawFN3)
+|vpiTypedef:
+\_ModuleTypespec: (iNToRecFN)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:iNToRecFN
+  |vpiModule:
+  \_Module: work@iNToRecFN (work@iNToRecFN), file:${SURELOG_DIR}/tests/Delay2Param/dut.sv, line:23:1, endln:29:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -89,7 +89,7 @@ LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 2
 ModuleArray                                            1
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Port                                                   3
 Range                                                  3
 RefObj                                                 1
@@ -149,8 +149,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (bus_conn)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:2:1, endln:4:10
+    \_Design: (unnamed)
     |vpiName:bus_conn
+    |vpiModule:
+    \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:6:1, endln:8:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -175,32 +177,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:2:1, endln:4:10
-    |vpiRange:
-    \_Range: , line:2:18, endln:2:23
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:2:19, endln:2:20
-        |vpiParent:
-        \_Range: , line:2:18, endln:2:23
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:21, endln:2:22
-        |vpiParent:
-        \_Range: , line:2:18, endln:2:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiImportTypespec:
-  \_ModuleTypespec: (bus_conn)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -216,8 +192,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:inp
     |vpiFullName:work@top.inp
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.inp), line:2:24, endln:2:27
@@ -281,6 +255,15 @@ Design: (unnamed)
         |vpiFullName:work@top.u1.datain.inp
         |vpiActual:
         \_LogicNet: (work@top.inp), line:2:24, endln:2:27
+|vpiTypedef:
+\_ModuleTypespec: (bus_conn)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InstArray/dut.sv, line:2:1, endln:4:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

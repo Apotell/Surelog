@@ -193,7 +193,7 @@ Identifier                                             3
 IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              5
 ParamAssign                                            4
 Parameter                                              4
@@ -392,10 +392,10 @@ Design: (unnamed)
       |vpiTypedef:
       \_ModuleTypespec: (alert_sender)
         |vpiParent:
-        \_Begin: (work@dut.gen_alert_tx), line:10:40, endln:14:4
+        \_Design: (unnamed)
         |vpiName:alert_sender
-      |vpiImportTypespec:
-      \_ModuleTypespec: (alert_sender)
+        |vpiModule:
+        \_Module: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
       |vpiStmt:
       \_RefModule: work@alert_sender (i_alert_sender), line:11:3, endln:11:15
         |vpiParent:
@@ -517,6 +517,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiDefName:work@dut
+|vpiTypedef:
+\_ModuleTypespec: (alert_sender)
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

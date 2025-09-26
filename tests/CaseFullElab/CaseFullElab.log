@@ -400,7 +400,7 @@ Begin                                                  5
 CaseItem                                               6
 CaseStmt                                               2
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              18
 Design                                                 1
 EnumConst                                              5
@@ -415,6 +415,7 @@ IntTypespec                                            9
 LogicNet                                              13
 LogicTypespec                                         11
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              3
 Package                                                1
 ParamAssign                                            7
@@ -771,15 +772,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1090,13 +1082,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1145,22 +1130,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1341,18 +1398,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiRange:
     \_Range: , line:4:10, endln:4:15
       |vpiParent:
@@ -1393,42 +1438,6 @@ Design: (unnamed)
       \_Constant: , line:5:10, endln:5:11
         |vpiParent:
         \_Range: , line:5:7, endln:5:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
-    |vpiRange:
-    \_Range: , line:4:10, endln:4:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:4:11, endln:4:12
-        |vpiParent:
-        \_Range: , line:4:10, endln:4:15
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:13, endln:4:14
-        |vpiParent:
-        \_Range: , line:4:10, endln:4:15
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -1478,8 +1487,6 @@ Design: (unnamed)
     |vpiFullName:work@FSM.clock
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@FSM.keys), line:3:15, endln:3:19
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
@@ -1494,8 +1501,6 @@ Design: (unnamed)
     |vpiFullName:work@FSM.keys
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@FSM.brake), line:3:21, endln:3:26
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
@@ -1509,8 +1514,6 @@ Design: (unnamed)
     |vpiName:brake
     |vpiFullName:work@FSM.brake
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@FSM.accelerate), line:3:28, endln:3:38
     |vpiParent:
@@ -1558,8 +1561,6 @@ Design: (unnamed)
     |vpiFullName:work@FSM.Speed
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@FSM.Ctrl1), line:7:7, endln:7:12
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
@@ -1573,8 +1574,6 @@ Design: (unnamed)
     |vpiName:Ctrl1
     |vpiFullName:work@FSM.Ctrl1
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@FSM.Ctrl2), line:7:14, endln:7:19
     |vpiParent:
@@ -1590,8 +1589,6 @@ Design: (unnamed)
     |vpiFullName:work@FSM.Ctrl2
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@FSM.Ctrl3), line:7:21, endln:7:26
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
@@ -1605,8 +1602,6 @@ Design: (unnamed)
     |vpiName:Ctrl3
     |vpiFullName:work@FSM.Ctrl3
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@FSM
   |vpiNet:
   \_LogicNet: (work@FSM.clock), line:1:12, endln:1:17
@@ -1964,6 +1959,13 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
     |vpiAlwaysType:1
+|vpiTypedef:
+\_ModuleTypespec: (FSM)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:FSM
+  |vpiModule:
+  \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

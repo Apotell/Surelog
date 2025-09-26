@@ -198,7 +198,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              29
 Design                                                 1
 EnumConst                                              5
@@ -210,6 +210,7 @@ IntTypespec                                            9
 LogicNet                                               8
 LogicTypespec                                         17
 Module                                                 2
+ModuleTypespec                                         2
 Package                                                1
 Port                                                   8
 Range                                                 12
@@ -562,15 +563,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -881,13 +873,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -936,22 +921,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PortRanges/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1053,82 +1110,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit (work@DFlipflop8Bit), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:1:1, endln:9:10
-    |vpiRange:
-    \_Range: , line:4:12, endln:4:17
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:4:13, endln:4:14
-        |vpiParent:
-        \_Range: , line:4:12, endln:4:17
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:15, endln:4:16
-        |vpiParent:
-        \_Range: , line:4:12, endln:4:17
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit (work@DFlipflop8Bit), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:1:1, endln:9:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit (work@DFlipflop8Bit), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:1:1, endln:9:10
-    |vpiRange:
-    \_Range: , line:7:8, endln:7:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:7:9, endln:7:10
-        |vpiParent:
-        \_Range: , line:7:8, endln:7:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:7:11, endln:7:12
-        |vpiParent:
-        \_Range: , line:7:8, endln:7:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit (work@DFlipflop8Bit), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:1:1, endln:9:10
-    |vpiRange:
-    \_Range: , line:6:9, endln:6:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:6:10, endln:6:11
-        |vpiParent:
-        \_Range: , line:6:9, endln:6:14
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:12, endln:6:13
-        |vpiParent:
-        \_Range: , line:6:9, endln:6:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1191,14 +1172,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:A2
     |vpiFullName:work@DFlipflop8Bit.A2
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@DFlipflop8Bit
   |vpiNet:
   \_LogicNet: (work@DFlipflop8Bit.Q1), line:1:26, endln:1:28
@@ -1345,82 +1318,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
-    |vpiRange:
-    \_Range: , line:12:29, endln:12:34
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:12:30, endln:12:31
-        |vpiParent:
-        \_Range: , line:12:29, endln:12:34
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:12:32, endln:12:33
-        |vpiParent:
-        \_Range: , line:12:29, endln:12:34
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
-    |vpiRange:
-    \_Range: , line:13:34, endln:13:39
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:13:35, endln:13:36
-        |vpiParent:
-        \_Range: , line:13:34, endln:13:39
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:13:37, endln:13:38
-        |vpiParent:
-        \_Range: , line:13:34, endln:13:39
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
-    |vpiRange:
-    \_Range: , line:14:30, endln:14:35
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:14:31, endln:14:32
-        |vpiParent:
-        \_Range: , line:14:30, endln:14:35
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:14:33, endln:14:34
-        |vpiParent:
-        \_Range: , line:14:30, endln:14:35
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1483,14 +1380,6 @@ Design: (unnamed)
     |vpiName:Q4
     |vpiFullName:work@DFlipflop8Bit2.Q4
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@DFlipflop8Bit2
   |vpiNet:
   \_LogicNet: (work@DFlipflop8Bit2.A3), line:12:35, endln:12:37
@@ -1552,6 +1441,20 @@ Design: (unnamed)
       |vpiFullName:work@DFlipflop8Bit2.Q4
       |vpiActual:
       \_LogicTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (DFlipflop8Bit)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:DFlipflop8Bit
+  |vpiModule:
+  \_Module: work@DFlipflop8Bit (work@DFlipflop8Bit), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:1:1, endln:9:10
+|vpiTypedef:
+\_ModuleTypespec: (DFlipflop8Bit2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:DFlipflop8Bit2
+  |vpiModule:
+  \_Module: work@DFlipflop8Bit2 (work@DFlipflop8Bit2), file:${SURELOG_DIR}/tests/PortRanges/dut.sv, line:12:1, endln:17:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

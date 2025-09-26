@@ -105,7 +105,7 @@ Identifier                                             2
 IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 ParamAssign                                            2
 Parameter                                              2
@@ -248,10 +248,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_flop)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
+    \_Design: (unnamed)
     |vpiName:prim_flop
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_flop)
+    |vpiModule:
+    \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_flop (u_prim_flop), line:2:4, endln:2:13
@@ -261,6 +261,15 @@ Design: (unnamed)
     |vpiDefName:work@prim_flop
     |vpiActual:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
+|vpiTypedef:
+\_ModuleTypespec: (prim_flop)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:1:1, endln:5:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

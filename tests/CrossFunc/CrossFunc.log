@@ -356,6 +356,7 @@ LogicNet                                               4
 LogicTypespec                                          4
 MethodFuncCall                                         3
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              8
 Range                                                  4
 RefObj                                                12
@@ -495,13 +496,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
       |vpiSigned:1
-    |vpiTypedef:
-    \_IntTypespec: 
-      |vpiParent:
-      \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntTypespec: 
     |vpiImportTypespec:
     \_IntTypespec: 
     |vpiImportTypespec:
@@ -774,30 +768,6 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
-    |vpiRange:
-    \_Range: , line:2:8, endln:2:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:2:9, endln:2:11
-        |vpiParent:
-        \_Range: , line:2:8, endln:2:14
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:12, endln:2:13
-        |vpiParent:
-        \_Range: , line:2:8, endln:2:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
   \_UnsupportedTypespec: (cg)
     |vpiParent:
     \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
@@ -826,8 +796,6 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@mod_m.a
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mod_m.b), line:2:18, endln:2:19
     |vpiParent:
@@ -886,6 +854,13 @@ Design: (unnamed)
       |vpiParent:
       \_MethodFuncCall: (new), line:24:15, endln:24:21
       |vpiName:new
+|vpiTypedef:
+\_ModuleTypespec: (mod_m)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:mod_m
+  |vpiModule:
+  \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

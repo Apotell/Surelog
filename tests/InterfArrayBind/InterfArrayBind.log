@@ -215,8 +215,9 @@ GenFor                                                 1
 GenRegion                                              1
 GenVar                                                 1
 HierPath                                               2
-Identifier                                             3
+Identifier                                             4
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               2
 LogicTypespec                                          3
 LogicVar                                               1
@@ -271,16 +272,10 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@io_bus_interface.write_en), line:2:11, endln:2:19
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@io_bus_interface.write_en), line:2:11, endln:2:19
     |vpiParent:
@@ -478,16 +473,20 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@soc_tb), line:20:9, endln:23:12
   |vpiTypedef:
-  \_ModuleTypespec: (io_bus_interface)
+  \_InterfaceTypespec: (io_bus_interface)
     |vpiParent:
-    \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:io_bus_interface
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (io_bus_interface)
+      |vpiParent:
+      \_InterfaceTypespec: (io_bus_interface)
+      |vpiName:io_bus_interface
+    |vpiInterface:
+    \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (io_bus_interface)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -579,7 +578,7 @@ Design: (unnamed)
       |vpiName:io_bus_interface
       |vpiFullName:work@soc_tb.peripheral_io_bus.io_bus_interface
       |vpiActual:
-      \_ModuleTypespec: (io_bus_interface)
+      \_InterfaceTypespec: (io_bus_interface)
   |vpiContAssign:
   \_ContAssign: , line:16:12, endln:16:62
     |vpiParent:
@@ -621,6 +620,15 @@ Design: (unnamed)
         |vpiActual:
         \_LogicNet: (work@soc_tb.write_en), line:16:39, endln:16:47
       |vpiName:peripheral_io_bus[IO_ONES].write_en
+|vpiTypedef:
+\_InterfaceTypespec: (io_bus_interface)
+|vpiTypedef:
+\_ModuleTypespec: (soc_tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:soc_tb
+  |vpiModule:
+  \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

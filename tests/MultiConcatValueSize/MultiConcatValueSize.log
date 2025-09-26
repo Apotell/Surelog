@@ -504,7 +504,7 @@ AST_DEBUG_END
 Assignment                                             1
 Begin                                                  3
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              25
 ContAssign                                             1
 Design                                                 1
@@ -520,7 +520,7 @@ IntTypespec                                           18
 IntVar                                                 4
 LogicTypespec                                          2
 Module                                                 6
-ModuleTypespec                                         3
+ModuleTypespec                                         4
 Operation                                             16
 Package                                                3
 PackedArrayTypespec                                    1
@@ -884,15 +884,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1203,13 +1194,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1258,22 +1242,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/MultiConcatValueSize/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1580,14 +1636,6 @@ Design: (unnamed)
   \_StringTypespec: 
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:8:1, endln:20:24
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:8:1, endln:20:24
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:8:1, endln:20:24
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:9:11, endln:9:34
   |vpiImportTypespec:
@@ -1598,10 +1646,6 @@ Design: (unnamed)
   \_StructTypespec: , line:13:12, endln:15:5
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiDefName:pinmux_pkg
@@ -1656,7 +1700,7 @@ Design: (unnamed)
       |vpiName:A
       |vpiFullName:work@prim_generic_pad_attr.A
       |vpiActual:
-      \_LogicNet: (work@prim_generic_pad_attr.A), line:24:35, endln:24:36
+      \_EnumConst: (A), line:3:7, endln:3:15
     |vpiLhs:
     \_Parameter: (work@prim_generic_pad_attr.PadType), line:24:25, endln:24:36
   |vpiInternalScope:
@@ -1711,38 +1755,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:22:1, endln:28:34
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:22:1, endln:28:34
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:23:11, endln:23:34
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@prim_generic_pad_attr.a), line:22:41, endln:22:42
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_generic_pad_attr.A), line:24:35, endln:24:36
-    |vpiParent:
-    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:22:1, endln:28:34
-    |vpiName:A
-    |vpiFullName:work@prim_generic_pad_attr.A
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_generic_pad_attr.B), line:25:19, endln:25:20
-    |vpiParent:
-    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:22:1, endln:28:34
-    |vpiName:B
-    |vpiFullName:work@prim_generic_pad_attr.B
-    |vpiNetType:1
   |vpiDefName:work@prim_generic_pad_attr
-  |vpiNet:
-  \_LogicNet: (work@prim_generic_pad_attr.A), line:24:35, endln:24:36
-  |vpiNet:
-  \_LogicNet: (work@prim_generic_pad_attr.B), line:25:19, endln:25:20
   |vpiPort:
   \_Port: (a), line:22:41, endln:22:42
     |vpiParent:
@@ -1780,7 +1799,7 @@ Design: (unnamed)
         |vpiName:B
         |vpiFullName:work@prim_generic_pad_attr.B
         |vpiActual:
-        \_LogicNet: (work@prim_generic_pad_attr.B), line:25:19, endln:25:20
+        \_EnumConst: (B), line:4:7, endln:4:15
     |vpiStmt:
     \_Begin: (work@prim_generic_pad_attr.gen_assign), line:25:22, endln:27:7
   |vpiEndLabel:prim_generic_pad_attr
@@ -1834,7 +1853,7 @@ Design: (unnamed)
       |vpiName:A
       |vpiFullName:work@prim_pad_attr.A
       |vpiActual:
-      \_LogicNet: (work@prim_pad_attr.A), line:32:35, endln:32:36
+      \_EnumConst: (A), line:3:7, endln:3:15
     |vpiLhs:
     \_Parameter: (work@prim_pad_attr.PadType), line:32:25, endln:32:36
   |vpiInternalScope:
@@ -1850,10 +1869,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (prim_generic_pad_attr)
       |vpiParent:
-      \_Begin: (work@prim_pad_attr.gen_generic), line:34:11, endln:38:7
+      \_Design: (unnamed)
       |vpiName:prim_generic_pad_attr
-    |vpiImportTypespec:
-    \_ModuleTypespec: (prim_generic_pad_attr)
+      |vpiModule:
+      \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:22:1, endln:28:34
     |vpiStmt:
     \_RefModule: work@prim_generic_pad_attr (u_impl_generic), line:35:7, endln:35:28
       |vpiParent:
@@ -1897,29 +1916,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:30:1, endln:39:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:30:1, endln:39:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:31:11, endln:31:34
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@prim_pad_attr.b), line:30:33, endln:30:34
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@prim_pad_attr.A), line:32:35, endln:32:36
-    |vpiParent:
-    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:30:1, endln:39:10
-    |vpiName:A
-    |vpiFullName:work@prim_pad_attr.A
-    |vpiNetType:1
   |vpiDefName:work@prim_pad_attr
-  |vpiNet:
-  \_LogicNet: (work@prim_pad_attr.A), line:32:35, endln:32:36
   |vpiPort:
   \_Port: (b), line:30:33, endln:30:34
     |vpiParent:
@@ -1997,7 +2000,7 @@ Design: (unnamed)
       |vpiName:DefaultTargetCfg
       |vpiFullName:work@sub_top.DefaultTargetCfg
       |vpiActual:
-      \_LogicNet: (work@sub_top.DefaultTargetCfg), line:43:39, endln:43:55
+      \_Parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:19:5
     |vpiLhs:
     \_Parameter: (work@sub_top.TargetCfg), line:43:27, endln:43:55
   |vpiInternalScope:
@@ -2024,10 +2027,10 @@ Design: (unnamed)
       |vpiTypedef:
       \_ModuleTypespec: (prim_pad_attr)
         |vpiParent:
-        \_Begin: (work@sub_top.gen_dio_attr), line:45:41, endln:49:6
+        \_Design: (unnamed)
         |vpiName:prim_pad_attr
-      |vpiImportTypespec:
-      \_ModuleTypespec: (prim_pad_attr)
+        |vpiModule:
+        \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:30:1, endln:39:10
       |vpiStmt:
       \_RefModule: work@prim_pad_attr (u_prim_pad_attr), line:46:6, endln:46:19
         |vpiParent:
@@ -2057,13 +2060,6 @@ Design: (unnamed)
       \_GenFor: (work@sub_top), line:45:3, endln:49:6
       |vpiName:k
       |vpiFullName:work@sub_top.k
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_LogicNet: (work@sub_top.NDioPads), line:45:26, endln:45:34
-      |vpiParent:
-      \_GenFor: (work@sub_top), line:45:3, endln:49:6
-      |vpiName:NDioPads
-      |vpiFullName:work@sub_top.NDioPads
       |vpiNetType:1
     |vpiImportTypespec:
     \_LogicNet: (work@sub_top.k), line:45:36, endln:45:37
@@ -2106,7 +2102,7 @@ Design: (unnamed)
         |vpiName:NDioPads
         |vpiFullName:work@sub_top.NDioPads
         |vpiActual:
-        \_LogicNet: (work@sub_top.NDioPads), line:45:26, endln:45:34
+        \_Parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:30
     |vpiForIncStmt:
     \_Operation: , line:45:36, endln:45:39
       |vpiParent:
@@ -2144,29 +2140,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:41:1, endln:50:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:41:1, endln:50:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:42:11, endln:42:24
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@sub_top.c), line:41:27, endln:41:28
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@sub_top.DefaultTargetCfg), line:43:39, endln:43:55
-    |vpiParent:
-    \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:41:1, endln:50:10
-    |vpiName:DefaultTargetCfg
-    |vpiFullName:work@sub_top.DefaultTargetCfg
-    |vpiNetType:1
   |vpiDefName:work@sub_top
-  |vpiNet:
-  \_LogicNet: (work@sub_top.DefaultTargetCfg), line:43:39, endln:43:55
   |vpiPort:
   \_Port: (c), line:41:27, endln:41:28
     |vpiParent:
@@ -2276,13 +2256,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (sub_top)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:52:1, endln:60:10
+    \_Design: (unnamed)
     |vpiName:sub_top
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:52:1, endln:60:10
-    |vpiSigned:1
+    |vpiModule:
+    \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:41:1, endln:50:10
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
@@ -2291,13 +2268,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiImportTypespec:
-  \_ModuleTypespec: (sub_top)
-  |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:52:23, endln:52:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiPort:
   \_Port: (o), line:52:23, endln:52:24
@@ -2333,6 +2306,19 @@ Design: (unnamed)
         |vpiFullName:work@top.u_sub.c.o
         |vpiActual:
         \_IntVar: (work@top.o), line:52:23, endln:52:24
+|vpiTypedef:
+\_ModuleTypespec: (prim_generic_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (prim_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (sub_top)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:52:1, endln:60:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

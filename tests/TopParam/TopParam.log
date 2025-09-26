@@ -65,7 +65,7 @@ AST_DEBUG_END
 Design                                                 1
 Identifier                                             2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
@@ -126,10 +126,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (test)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
+    \_Design: (unnamed)
     |vpiName:test
-  |vpiImportTypespec:
-  \_ModuleTypespec: (test)
+    |vpiModule:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:12:1, endln:16:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@test (test_i), line:5:5, endln:5:9
@@ -139,6 +139,15 @@ Design: (unnamed)
     |vpiDefName:work@test
     |vpiActual:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:12:1, endln:16:10
+|vpiTypedef:
+\_ModuleTypespec: (test)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TopParam/dut.sv, line:1:1, endln:10:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

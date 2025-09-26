@@ -140,7 +140,7 @@ IntTypespec                                            1
 LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
@@ -198,6 +198,10 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
   |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
+  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
@@ -252,30 +256,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:3:16, endln:3:22
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:3:17, endln:3:19
-        |vpiParent:
-        \_Range: , line:3:16, endln:3:22
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:20, endln:3:21
-        |vpiParent:
-        \_Range: , line:3:16, endln:3:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -294,8 +276,6 @@ Design: (unnamed)
     |vpiName:o1
     |vpiFullName:work@module_scope_Example.o1
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@module_scope_Example
   |vpiNet:
   \_LogicNet: (work@module_scope_Example.o1), line:1:29, endln:1:31
@@ -367,8 +347,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (module_scope_Example)
     |vpiParent:
-    \_Module: work@module_scope_top (work@module_scope_top), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:7:1, endln:11:10
+    \_Design: (unnamed)
     |vpiName:module_scope_Example
+    |vpiModule:
+    \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -393,32 +375,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@module_scope_top (work@module_scope_top), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:7:1, endln:11:10
-    |vpiRange:
-    \_Range: , line:8:16, endln:8:22
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:8:17, endln:8:19
-        |vpiParent:
-        \_Range: , line:8:16, endln:8:22
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:8:20, endln:8:21
-        |vpiParent:
-        \_Range: , line:8:16, endln:8:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiImportTypespec:
-  \_ModuleTypespec: (module_scope_Example)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -435,8 +391,6 @@ Design: (unnamed)
     |vpiName:a1
     |vpiFullName:work@module_scope_top.a1
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@module_scope_top
   |vpiNet:
   \_LogicNet: (work@module_scope_top.a1), line:8:23, endln:8:25
@@ -474,8 +428,15 @@ Design: (unnamed)
         |vpiFullName:work@module_scope_top.a.a1.a1
         |vpiActual:
         \_LogicNet: (work@module_scope_top.a1), line:8:23, endln:8:25
-\_weaklyReferenced:
-\_IntTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (module_scope_Example)
+|vpiTypedef:
+\_ModuleTypespec: (module_scope_top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:module_scope_top
+  |vpiModule:
+  \_Module: work@module_scope_top (work@module_scope_top), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:7:1, endln:11:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

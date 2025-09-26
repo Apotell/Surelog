@@ -137,7 +137,7 @@ Identifier                                             3
 LogicNet                                               1
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 Range                                                  2
 RefModule                                              1
@@ -344,14 +344,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
   |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
-  |vpiTypedef:
   \_ModuleTypespec: (rr_arb_tree)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
+    \_Design: (unnamed)
     |vpiName:rr_arb_tree
+    |vpiModule:
+    \_Module: work@rr_arb_tree (work@rr_arb_tree), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:1:1, endln:5:10
   |vpiImportTypespec:
   \_TypedefTypespec: (output_t), line:13:5, endln:13:13
   |vpiImportTypespec:
@@ -360,10 +358,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (rr_arb_tree)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@rr_arb_tree (i_arbiter), line:15:2, endln:15:13
@@ -373,6 +367,15 @@ Design: (unnamed)
     |vpiDefName:work@rr_arb_tree
     |vpiActual:
     \_Module: work@rr_arb_tree (work@rr_arb_tree), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:1:1, endln:5:10
+|vpiTypedef:
+\_ModuleTypespec: (rr_arb_tree)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

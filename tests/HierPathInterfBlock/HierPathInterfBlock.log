@@ -290,10 +290,11 @@ FuncCall                                               1
 Function                                               2
 GenIf                                                  2
 HierPath                                               7
-Identifier                                            22
+Identifier                                            23
 Initial                                                1
 IntegerTypespec                                        2
 Interface                                              1
+InterfaceTypespec                                      1
 MethodFuncCall                                         7
 Module                                                 1
 ModuleTypespec                                         1
@@ -447,14 +448,18 @@ Design: (unnamed)
       |vpiName:blk
     |vpiFullName:work@top.blk
   |vpiTypedef:
-  \_ModuleTypespec: (intf)
+  \_InterfaceTypespec: (intf)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
-    |vpiName:intf
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (intf)
+      |vpiParent:
+      \_InterfaceTypespec: (intf)
+      |vpiName:intf
+    |vpiInterface:
+    \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
   |vpiImportTypespec:
   \_Function: (work@top.f), line:14:5, endln:16:16
-  |vpiImportTypespec:
-  \_ModuleTypespec: (intf)
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.f), line:14:5, endln:16:16
@@ -754,6 +759,15 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top.blk), line:17:12, endln:21:8
+|vpiTypedef:
+\_InterfaceTypespec: (intf)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

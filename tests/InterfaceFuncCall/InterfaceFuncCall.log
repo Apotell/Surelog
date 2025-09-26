@@ -166,10 +166,11 @@ Design                                                 1
 Function                                               1
 HierPath                                               2
 IODecl                                                 1
-Identifier                                             7
+Identifier                                             8
 Initial                                                1
 IntegerTypespec                                        2
 Interface                                              1
+InterfaceTypespec                                      1
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
@@ -237,13 +238,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@Foo.bar), line:3:5, endln:6:16
       |vpiSigned:1
-    |vpiTypedef:
-    \_IntegerTypespec: 
-      |vpiParent:
-      \_Function: (work@Foo.bar), line:3:5, endln:6:16
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntegerTypespec: 
     |vpiImportTypespec:
     \_IntegerTypespec: 
     |vpiVisibility:1
@@ -320,12 +314,16 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:9:1, endln:16:10
     |vpiName:work@top
   |vpiTypedef:
-  \_ModuleTypespec: (Foo)
+  \_InterfaceTypespec: (Foo)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:9:1, endln:16:10
-    |vpiName:Foo
-  |vpiImportTypespec:
-  \_ModuleTypespec: (Foo)
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (Foo)
+      |vpiParent:
+      \_InterfaceTypespec: (Foo)
+      |vpiName:Foo
+    |vpiInterface:
+    \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
   |vpiDefName:work@top
   |vpiProcess:
   \_Initial: , line:12:5, endln:15:8
@@ -428,6 +426,15 @@ Design: (unnamed)
     |vpiDefName:work@Foo
     |vpiActual:
     \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
+|vpiTypedef:
+\_InterfaceTypespec: (Foo)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:9:1, endln:16:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

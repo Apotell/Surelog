@@ -182,6 +182,7 @@ IntVar                                                 1
 LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 3
+ModuleTypespec                                         2
 PackedArrayTypespec                                    2
 ParamAssign                                            3
 Parameter                                              3
@@ -293,6 +294,10 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top1.p3), line:4:17, endln:4:29
   |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
@@ -359,6 +364,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -493,9 +500,20 @@ Design: (unnamed)
   \_LogicNet: (work@top2.p1), line:9:13, endln:9:15
   |vpiNet:
   \_LogicNet: (work@top2.p2), line:10:13, endln:10:15
-\_weaklyReferenced:
-\_IntTypespec: 
-\_IntTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (top1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top1
+  |vpiModule:
+  \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+|vpiTypedef:
+\_ModuleTypespec: (top2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top2
+  |vpiModule:
+  \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:8:1, endln:12:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

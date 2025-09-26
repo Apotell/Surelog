@@ -140,7 +140,7 @@ Design                                                 1
 Identifier                                             3
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 ParamAssign                                            2
 Parameter                                              2
@@ -354,14 +354,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
   |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
-  |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
+    \_Design: (unnamed)
     |vpiName:dut
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:1:1, endln:4:10
   |vpiImportTypespec:
   \_TypedefTypespec: (struct_1), line:10:6, endln:10:14
   |vpiImportTypespec:
@@ -370,10 +368,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@dut (u_dut), line:17:4, endln:17:7
@@ -383,6 +377,15 @@ Design: (unnamed)
     |vpiDefName:work@dut
     |vpiActual:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:1:1, endln:4:10
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -74,6 +74,7 @@ Initial                                                1
 IntTypespec                                            3
 IntVar                                                 1
 Module                                                 1
+ModuleTypespec                                         1
 Port                                                   1
 RefObj                                                 1
 RefTypespec                                            3
@@ -119,24 +120,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaskProto/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaskProto/dut.sv, line:1:1, endln:7:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaskProto/dut.sv, line:1:1, endln:7:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.a), line:1:23, endln:1:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiTaskFuncDecl:
   \_TaskDecl: (work@top.test_output_argument), line:2:4, endln:2:59
@@ -154,14 +141,14 @@ Design: (unnamed)
     |vpiIODecl:
     \_IODecl: (o), line:2:56, endln:2:57
       |vpiParent:
-      \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaskProto/dut.sv, line:1:1, endln:7:10
+      \_TaskDecl: (work@top.test_output_argument), line:2:4, endln:2:59
       |vpiDirection:2
       |vpiName:o
       |vpiTypedef:
-      \_RefTypespec: (work@top.o)
+      \_RefTypespec: (work@top.test_output_argument.o)
         |vpiParent:
         \_IODecl: (o), line:2:56, endln:2:57
-        |vpiFullName:work@top.o
+        |vpiFullName:work@top.test_output_argument.o
         |vpiActual:
         \_IntTypespec: 
   |vpiPort:
@@ -203,8 +190,13 @@ Design: (unnamed)
           |vpiParent:
           \_FuncCall: (test_output_argument), line:5:7, endln:5:30
           |vpiName:test_output_argument
-  |vpiIODecl:
-  \_IODecl: (o), line:2:56, endln:2:57
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaskProto/dut.sv, line:1:1, endln:7:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

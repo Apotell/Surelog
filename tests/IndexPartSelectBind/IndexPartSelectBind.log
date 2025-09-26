@@ -147,6 +147,7 @@ Assignment                                             2
 Begin                                                  2
 BitSelect                                              1
 ClassDefn                                              1
+ClassTypespec                                          1
 Constant                                               3
 Design                                                 1
 ForStmt                                                1
@@ -168,10 +169,10 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 29, name: nbytes".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:29, name: nbytes".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 46, name: gp".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:46, name: gp".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 30, name: nbytes".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:30, name: nbytes".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 47, name: gp".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:47, name: gp".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -432,6 +433,13 @@ Design: (unnamed)
     |vpiMethod:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
   |vpiTypedef:
+  \_ClassTypespec: (tt)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+    |vpiName:tt
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
+  |vpiTypedef:
   \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
@@ -471,6 +479,8 @@ Design: (unnamed)
     |vpiName:uvm_reg_data_t
   |vpiImportTypespec:
   \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (tt)
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
   |vpiImportTypespec:

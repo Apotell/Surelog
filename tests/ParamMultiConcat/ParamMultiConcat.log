@@ -181,7 +181,7 @@ IntTypespec                                            4
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              8
 ParamAssign                                            4
 Parameter                                              4
@@ -272,43 +272,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
-    |vpiRange:
-    \_Range: , line:5:10, endln:5:21
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:5:11, endln:5:18
-        |vpiParent:
-        \_Range: , line:5:10, endln:5:21
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@dut.Width), line:5:11, endln:5:16
-          |vpiParent:
-          \_Operation: , line:5:11, endln:5:18
-          |vpiName:Width
-          |vpiFullName:work@dut.Width
-          |vpiActual:
-          \_Parameter: (work@dut.Width), line:3:18, endln:3:23
-        |vpiOperand:
-        \_Constant: , line:5:17, endln:5:18
-          |vpiParent:
-          \_Operation: , line:5:11, endln:5:18
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:19, endln:5:20
-        |vpiParent:
-        \_Range: , line:5:10, endln:5:21
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -326,8 +289,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:wmask_i
     |vpiFullName:work@dut.wmask_i
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.wmask_i), line:5:22, endln:5:29
@@ -476,28 +437,14 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
     |vpiSigned:1
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
-    |vpiSigned:1
-  |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
+    \_Design: (unnamed)
     |vpiName:dut
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@dut (u_dut), line:13:4, endln:13:7
@@ -551,6 +498,15 @@ Design: (unnamed)
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

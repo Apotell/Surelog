@@ -229,7 +229,7 @@ ImportTypespec                                         1
 IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 4
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              4
 Package                                                2
 PackedArrayTypespec                                    1
@@ -546,7 +546,7 @@ Design: (unnamed)
           |vpiName:AsyncOn
           |vpiFullName:work@alert_handler.gen_alerts.AsyncOn
           |vpiActual:
-          \_LogicNet: (work@alert_handler.gen_alerts.AsyncOn), line:26:31, endln:26:34
+          \_Parameter: (alert_pkg::AsyncOn), line:13:32, endln:13:74
           |vpiIndex:
           \_RefObj: (work@alert_handler.gen_alerts.k), line:26:32, endln:26:33
             |vpiParent:
@@ -565,10 +565,10 @@ Design: (unnamed)
         |vpiTypedef:
         \_ModuleTypespec: (M)
           |vpiParent:
-          \_Begin: (work@alert_handler.gen_alerts), line:27:16, endln:29:8
+          \_Design: (unnamed)
           |vpiName:M
-        |vpiImportTypespec:
-        \_ModuleTypespec: (M)
+          |vpiModule:
+          \_Module: work@M (work@M), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:17:1, endln:18:10
         |vpiStmt:
         \_RefModule: work@M (u), line:28:7, endln:28:8
           |vpiParent:
@@ -577,13 +577,6 @@ Design: (unnamed)
           |vpiDefName:work@M
           |vpiActual:
           \_Module: work@M (work@M), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:17:1, endln:18:10
-      |vpiImportTypespec:
-      \_LogicNet: (work@alert_handler.gen_alerts.AsyncOn), line:26:31, endln:26:34
-        |vpiParent:
-        \_Begin: (work@alert_handler.gen_alerts), line:25:42, endln:30:6
-        |vpiName:AsyncOn
-        |vpiFullName:work@alert_handler.gen_alerts.AsyncOn
-        |vpiNetType:1
       |vpiImportTypespec:
       \_LogicNet: (work@alert_handler.gen_alerts.k), line:26:32, endln:26:33
         |vpiParent:
@@ -615,13 +608,6 @@ Design: (unnamed)
       \_GenFor: (work@alert_handler), line:25:3, endln:30:6
       |vpiName:k
       |vpiFullName:work@alert_handler.k
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_LogicNet: (work@alert_handler.NAlerts), line:25:27, endln:25:34
-      |vpiParent:
-      \_GenFor: (work@alert_handler), line:25:3, endln:30:6
-      |vpiName:NAlerts
-      |vpiFullName:work@alert_handler.NAlerts
       |vpiNetType:1
     |vpiImportTypespec:
     \_LogicNet: (work@alert_handler.k), line:25:37, endln:25:38
@@ -664,7 +650,7 @@ Design: (unnamed)
         |vpiName:NAlerts
         |vpiFullName:work@alert_handler.NAlerts
         |vpiActual:
-        \_LogicNet: (work@alert_handler.NAlerts), line:25:27, endln:25:34
+        \_Parameter: (alert_pkg::NAlerts), line:12:32, endln:12:74
     |vpiForIncStmt:
     \_Operation: , line:25:37, endln:25:40
       |vpiParent:
@@ -700,6 +686,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (alert_pkg), line:21:10, endln:21:22
   |vpiDefName:work@alert_handler
+|vpiTypedef:
+\_ModuleTypespec: (M)
+|vpiTypedef:
+\_ModuleTypespec: (alert_handler)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:alert_handler
+  |vpiModule:
+  \_Module: work@alert_handler (work@alert_handler), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:20:1, endln:32:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

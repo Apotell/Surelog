@@ -378,7 +378,7 @@ Begin                                                  1
 BitSelect                                              1
 BitTypespec                                            1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              29
 Design                                                 1
 EnumConst                                              6
@@ -394,7 +394,7 @@ IntegerTypespec                                        1
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                             29
 Package                                                2
 PackedArrayTypespec                                    2
@@ -756,15 +756,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1075,13 +1066,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1130,22 +1114,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1621,50 +1677,6 @@ Design: (unnamed)
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
   |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
@@ -1774,28 +1786,6 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
   \_EnumTypespec: , line:48:10, endln:51:16
@@ -1862,7 +1852,7 @@ Design: (unnamed)
       |vpiName:e_bp_default_cfg
       |vpiFullName:work@top.e_bp_default_cfg
       |vpiActual:
-      \_LogicNet: (work@top.e_bp_default_cfg), line:56:39, endln:56:55
+      \_EnumConst: (e_bp_default_cfg), line:50:5, endln:50:47
     |vpiLhs:
     \_Parameter: (work@top.bp_params_p), line:56:25, endln:56:55
   |vpiParamAssign:
@@ -1876,7 +1866,7 @@ Design: (unnamed)
       |vpiName:all_cfgs_gp
       |vpiFullName:work@top.all_cfgs_gp
       |vpiActual:
-      \_LogicNet: (work@top.all_cfgs_gp), line:57:57, endln:57:70
+      \_Parameter: (bp_common_aviary_pkg::all_cfgs_gp), line:42:41, endln:46:4
       |vpiIndex:
       \_RefObj: (work@top.bp_params_p), line:57:58, endln:57:69
         |vpiParent:
@@ -2002,27 +1992,9 @@ Design: (unnamed)
     |vpiName:aa
     |vpiFullName:work@top.aa
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.e_bp_default_cfg), line:56:39, endln:56:55
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
-    |vpiName:e_bp_default_cfg
-    |vpiFullName:work@top.e_bp_default_cfg
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.all_cfgs_gp), line:57:57, endln:57:70
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
-    |vpiName:all_cfgs_gp
-    |vpiFullName:work@top.all_cfgs_gp
-    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.aa), line:60:25, endln:60:27
-  |vpiNet:
-  \_LogicNet: (work@top.e_bp_default_cfg), line:56:39, endln:56:55
-  |vpiNet:
-  \_LogicNet: (work@top.all_cfgs_gp), line:57:57, endln:57:70
   |vpiGenStmt:
   \_GenIf: , line:62:2, endln:64:5
     |vpiParent:
@@ -2050,6 +2022,13 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:62:23, endln:64:5
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

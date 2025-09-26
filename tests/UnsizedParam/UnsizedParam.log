@@ -155,7 +155,7 @@ Identifier                                             3
 IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 ParamAssign                                            2
 Parameter                                              2
@@ -353,10 +353,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (submodule)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:8:1, endln:11:10
+    \_Design: (unnamed)
     |vpiName:submodule
-  |vpiImportTypespec:
-  \_ModuleTypespec: (submodule)
+    |vpiModule:
+    \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@submodule (u_sub_default), line:9:4, endln:9:13
@@ -374,6 +374,15 @@ Design: (unnamed)
     |vpiDefName:work@submodule
     |vpiActual:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
+|vpiTypedef:
+\_ModuleTypespec: (submodule)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:8:1, endln:11:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -130,7 +130,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                             10
-ClassTypespec                                          2
+ClassTypespec                                         10
 ClassVar                                               1
 Constant                                               6
 Design                                                 1
@@ -145,6 +145,7 @@ IntTypespec                                            9
 LogicNet                                               2
 LogicTypespec                                          1
 Module                                                 1
+ModuleTypespec                                         1
 Package                                                2
 RefTypespec                                           20
 SourceFile                                             1
@@ -496,15 +497,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -815,13 +807,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -870,22 +855,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -921,6 +978,13 @@ Design: (unnamed)
       \_ClassDefn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
       |vpiName:Configuration1
     |vpiFullName:pkg::Configuration1
+  |vpiTypedef:
+  \_ClassTypespec: (Configuration1)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
+    |vpiName:Configuration1
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
   |vpiTypedef:
   \_EnumTypespec: , line:6:10, endln:6:47
     |vpiParent:
@@ -976,6 +1040,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassDefn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
   |vpiImportTypespec:
+  \_ClassTypespec: (Configuration1)
+  |vpiImportTypespec:
   \_EnumTypespec: , line:6:10, endln:6:47
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
@@ -1011,7 +1077,7 @@ Design: (unnamed)
       |vpiName:Configuration2
       |vpiFullName:work@top.cfg.Configuration2
       |vpiActual:
-      \_ClassTypespec: (Configuration2)
+      \_ClassTypespec: (work@Configuration2)
     |vpiName:cfg
     |vpiFullName:work@top.cfg
     |vpiRandType:1
@@ -1091,15 +1157,10 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
     |vpiName:Environment
   |vpiTypedef:
-  \_UnsupportedTypespec: (Configuration1)
+  \_ClassTypespec: (work@Configuration2)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiName:Configuration1
-  |vpiTypedef:
-  \_ClassTypespec: (Configuration2)
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiName:Configuration2
+    |vpiName:work@Configuration2
     |vpiClassDefn:
     \_ClassDefn: (work@Configuration2), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:10:1, endln:11:9
   |vpiImportTypespec:
@@ -1153,8 +1214,6 @@ Design: (unnamed)
     |vpiName:env
     |vpiFullName:work@top.env
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (Configuration1)
-  |vpiImportTypespec:
   \_LogicNet: (work@top.cfg), line:22:16, endln:22:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
@@ -1165,11 +1224,11 @@ Design: (unnamed)
       |vpiName:Configuration1
       |vpiFullName:work@top.cfg.Configuration1
       |vpiActual:
-      \_UnsupportedTypespec: (Configuration1)
+      \_ClassTypespec: (Configuration1)
     |vpiName:cfg
     |vpiFullName:work@top.cfg
   |vpiImportTypespec:
-  \_ClassTypespec: (Configuration2)
+  \_ClassTypespec: (work@Configuration2)
   |vpiImportTypespec:
   \_ClassVar: (work@top.cfg), line:23:16, endln:23:19
   |vpiDefName:work@top
@@ -1181,6 +1240,13 @@ Design: (unnamed)
   \_LogicNet: (work@top.env), line:21:13, endln:21:16
   |vpiNet:
   \_LogicNet: (work@top.cfg), line:22:16, endln:22:19
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

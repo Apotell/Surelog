@@ -254,11 +254,12 @@ DelayControl                                           1
 Design                                                 1
 HierPath                                               3
 IODecl                                                 6
-Identifier                                             6
+Identifier                                             7
 Initial                                                2
 IntTypespec                                            2
 IntVar                                                 1
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               4
 LogicTypespec                                          2
 LogicVar                                               1
@@ -381,39 +382,6 @@ Design: (unnamed)
   \_BitTypespec: 
     |vpiParent:
     \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
-    |vpiRange:
-    \_Range: , line:2:7, endln:2:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:2:8, endln:2:9
-        |vpiParent:
-        \_Range: , line:2:7, endln:2:12
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:10, endln:2:11
-        |vpiParent:
-        \_Range: , line:2:7, endln:2:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
-    |vpiSigned:1
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -426,8 +394,6 @@ Design: (unnamed)
   \_BitTypespec: 
   |vpiImportTypespec:
   \_BitVar: (work@I.R), line:4:5, endln:4:6
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@I.r), line:2:13, endln:2:14
     |vpiParent:
@@ -443,8 +409,6 @@ Design: (unnamed)
     |vpiFullName:work@I.r
     |vpiNetType:36
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@I.x), line:3:11, endln:3:12
     |vpiParent:
     \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
@@ -457,8 +421,6 @@ Design: (unnamed)
       \_IntTypespec: 
     |vpiName:x
     |vpiFullName:work@I.x
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@I.R), line:4:5, endln:4:6
     |vpiParent:
@@ -488,6 +450,24 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (A), line:5:9, endln:5:10
       |vpiName:A
+    |vpiIODecl:
+    \_IODecl: (P), line:5:20, endln:5:21
+      |vpiParent:
+      \_Modport: (A), line:5:9, endln:5:10
+      |vpiDirection:2
+      |vpiName:P
+    |vpiIODecl:
+    \_IODecl: (Q), line:5:38, endln:5:39
+      |vpiParent:
+      \_Modport: (A), line:5:9, endln:5:10
+      |vpiDirection:1
+      |vpiName:Q
+    |vpiIODecl:
+    \_IODecl: (R), line:5:44, endln:5:45
+      |vpiParent:
+      \_Modport: (A), line:5:9, endln:5:10
+      |vpiDirection:1
+      |vpiName:R
   |vpiModport:
   \_Modport: (B), line:6:9, endln:6:10
     |vpiParent:
@@ -497,6 +477,24 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (B), line:6:9, endln:6:10
       |vpiName:B
+    |vpiIODecl:
+    \_IODecl: (P), line:6:20, endln:6:21
+      |vpiParent:
+      \_Modport: (B), line:6:9, endln:6:10
+      |vpiDirection:2
+      |vpiName:P
+    |vpiIODecl:
+    \_IODecl: (Q), line:6:38, endln:6:39
+      |vpiParent:
+      \_Modport: (B), line:6:9, endln:6:10
+      |vpiDirection:1
+      |vpiName:Q
+    |vpiIODecl:
+    \_IODecl: (R), line:6:44, endln:6:45
+      |vpiParent:
+      \_Modport: (B), line:6:9, endln:6:10
+      |vpiDirection:1
+      |vpiName:R
 |vpiAllModules:
 \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
   |vpiParent:
@@ -577,19 +575,23 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
     |vpiName:work@top
   |vpiTypedef:
-  \_ModuleTypespec: (I)
+  \_InterfaceTypespec: (I)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
-    |vpiName:I
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (I)
+      |vpiParent:
+      \_InterfaceTypespec: (I)
+      |vpiName:I
+    |vpiInterface:
+    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiTypedef:
   \_ModuleTypespec: (sub)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
+    \_Design: (unnamed)
     |vpiName:sub
-  |vpiImportTypespec:
-  \_ModuleTypespec: (I)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (sub)
+    |vpiModule:
+    \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
   |vpiImportTypespec:
   \_LogicNet: (work@top.r), line:18:37, endln:18:38
     |vpiParent:
@@ -696,6 +698,17 @@ Design: (unnamed)
           |vpiActual:
           \_LogicNet: (work@top.A), line:16:15, endln:16:16
         |vpiName:inst.A
+|vpiTypedef:
+\_InterfaceTypespec: (I)
+|vpiTypedef:
+\_ModuleTypespec: (sub)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

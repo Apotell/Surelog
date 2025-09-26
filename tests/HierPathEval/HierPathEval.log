@@ -298,7 +298,7 @@ Identifier                                            15
 ImportTypespec                                         4
 LogicTypespec                                          2
 Module                                                 5
-ModuleTypespec                                         3
+ModuleTypespec                                         4
 Operation                                              1
 Package                                                2
 ParamAssign                                            3
@@ -523,10 +523,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD)
       |vpiParent:
-      \_Begin: (work@prim_generic_pad_attr.gen_inner_if_true), line:23:6, endln:25:10
+      \_Design: (unnamed)
       |vpiName:GOOD
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD)
+      |vpiModule:
+      \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:16:1, endln:17:10
     |vpiStmt:
     \_RefModule: work@GOOD (good), line:24:9, endln:24:13
       |vpiParent:
@@ -646,10 +646,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (prim_generic_pad_attr)
       |vpiParent:
-      \_Begin: (work@prim_pad_attr.gen_outer_if), line:37:11, endln:43:7
+      \_Design: (unnamed)
       |vpiName:prim_generic_pad_attr
-    |vpiImportTypespec:
-    \_ModuleTypespec: (prim_generic_pad_attr)
+      |vpiModule:
+      \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:19:1, endln:30:34
     |vpiStmt:
     \_RefModule: work@prim_generic_pad_attr (u_impl_generic), line:38:8, endln:38:29
       |vpiParent:
@@ -750,12 +750,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_pad_attr)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:46:1, endln:55:10
+    \_Design: (unnamed)
     |vpiName:prim_pad_attr
+    |vpiModule:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:33:1, endln:44:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:47:11, endln:47:24
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_pad_attr)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_pad_attr (u_prim_pad_attr), line:50:4, endln:50:17
@@ -765,6 +765,19 @@ Design: (unnamed)
     |vpiDefName:work@prim_pad_attr
     |vpiActual:
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:33:1, endln:44:10
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (prim_generic_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (prim_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathEval/dut.sv, line:46:1, endln:55:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -127,7 +127,7 @@ Identifier                                             2
 LogicNet                                               6
 LogicTypespec                                          3
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Port                                                   5
 RefModule                                              1
 RefObj                                                 2
@@ -230,18 +230,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (dff)
     |vpiParent:
-    \_Module: work@implicit (work@implicit), file:${SURELOG_DIR}/tests/ImplicitPorts2/dut.sv, line:1:1, endln:8:10
+    \_Design: (unnamed)
     |vpiName:dff
+    |vpiModule:
+    \_Module: work@dff (work@dff), file:${SURELOG_DIR}/tests/ImplicitPorts2/dut.sv, line:11:1, endln:15:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@implicit (work@implicit), file:${SURELOG_DIR}/tests/ImplicitPorts2/dut.sv, line:1:1, endln:8:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@implicit (work@implicit), file:${SURELOG_DIR}/tests/ImplicitPorts2/dut.sv, line:1:1, endln:8:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dff)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -258,8 +254,6 @@ Design: (unnamed)
     |vpiName:clk
     |vpiFullName:work@implicit.clk
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@implicit.q), line:3:8, endln:3:9
     |vpiParent:
@@ -313,6 +307,15 @@ Design: (unnamed)
         |vpiFullName:work@implicit.u0.clk.clk
         |vpiActual:
         \_LogicNet: (work@implicit.clk), line:2:7, endln:2:10
+|vpiTypedef:
+\_ModuleTypespec: (dff)
+|vpiTypedef:
+\_ModuleTypespec: (implicit)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:implicit
+  |vpiModule:
+  \_Module: work@implicit (work@implicit), file:${SURELOG_DIR}/tests/ImplicitPorts2/dut.sv, line:1:1, endln:8:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

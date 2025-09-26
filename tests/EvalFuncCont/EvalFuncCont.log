@@ -312,7 +312,7 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  3
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              17
 ContinueStmt                                           1
 Design                                                 1
@@ -329,6 +329,7 @@ IntegerTypespec                                        2
 LogicNet                                               2
 LogicTypespec                                          3
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              9
 Package                                                1
 ParamAssign                                            3
@@ -687,15 +688,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1006,13 +998,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1061,22 +1046,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/EvalFuncCont/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1327,13 +1384,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@t.num_out), line:20:4, endln:27:15
       |vpiSigned:1
-    |vpiTypedef:
-    \_IntegerTypespec: 
-      |vpiParent:
-      \_Function: (work@t.num_out), line:20:4, endln:27:15
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntegerTypespec: 
     |vpiImportTypespec:
     \_IntegerTypespec: 
     |vpiVisibility:1
@@ -1396,43 +1446,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncCont/dut.sv, line:8:1, endln:35:10
-    |vpiRange:
-    \_Range: , line:18:9, endln:18:22
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:18:10, endln:18:19
-        |vpiParent:
-        \_Range: , line:18:9, endln:18:22
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@t.NUM_OUT), line:18:10, endln:18:17
-          |vpiParent:
-          \_Operation: , line:18:10, endln:18:19
-          |vpiName:NUM_OUT
-          |vpiFullName:work@t.NUM_OUT
-          |vpiActual:
-          \_Parameter: (work@t.NUM_OUT), line:16:15, endln:16:39
-        |vpiOperand:
-        \_Constant: , line:18:18, endln:18:19
-          |vpiParent:
-          \_Operation: , line:18:10, endln:18:19
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:18:20, endln:18:21
-        |vpiParent:
-        \_Range: , line:18:9, endln:18:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_Function: (work@t.num_out), line:20:4, endln:27:15
   |vpiImportTypespec:
@@ -1443,8 +1456,6 @@ Design: (unnamed)
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncCont/dut.sv, line:8:1, endln:35:10
     |vpiName:clk
     |vpiFullName:work@t.clk
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@t.z), line:18:23, endln:18:24
     |vpiParent:
@@ -1584,6 +1595,13 @@ Design: (unnamed)
           |vpiParent:
           \_SysFuncCall: ($finish), line:33:7, endln:33:14
           |vpiName:$finish
+|vpiTypedef:
+\_ModuleTypespec: (t)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:t
+  |vpiModule:
+  \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncCont/dut.sv, line:8:1, endln:35:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -264,7 +264,7 @@ ImportTypespec                                         1
 IntTypespec                                            2
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 Package                                                1
 ParamAssign                                            6
@@ -681,7 +681,7 @@ Design: (unnamed)
       |vpiName:RndCnstScrmblKeyInitDefault
       |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
       |vpiActual:
-      \_LogicNet: (work@top.RndCnstScrmblKeyInitDefault), line:23:52, endln:23:79
+      \_Parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
     |vpiLhs:
     \_Parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:79
   |vpiParamAssign:
@@ -695,7 +695,7 @@ Design: (unnamed)
       |vpiName:SramKeyWidth
       |vpiFullName:work@top.SramKeyWidth
       |vpiActual:
-      \_LogicNet: (work@top.SramKeyWidth), line:24:19, endln:24:31
+      \_Parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
     |vpiLhs:
     \_Parameter: (work@top.Width), line:24:11, endln:24:31
   |vpiTypedef:
@@ -718,31 +718,13 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_sec_anchor_flop)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
+    \_Design: (unnamed)
     |vpiName:prim_sec_anchor_flop
+    |vpiModule:
+    \_Module: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
   |vpiImportTypespec:
   \_ImportTypespec: (pack), line:22:8, endln:22:15
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_sec_anchor_flop)
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.RndCnstScrmblKeyInitDefault), line:23:52, endln:23:79
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |vpiName:RndCnstScrmblKeyInitDefault
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.SramKeyWidth), line:24:19, endln:24:31
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |vpiName:SramKeyWidth
-    |vpiFullName:work@top.SramKeyWidth
-    |vpiNetType:1
   |vpiDefName:work@top
-  |vpiNet:
-  \_LogicNet: (work@top.RndCnstScrmblKeyInitDefault), line:23:52, endln:23:79
-  |vpiNet:
-  \_LogicNet: (work@top.SramKeyWidth), line:24:19, endln:24:31
   |vpiRefModule:
   \_RefModule: work@prim_sec_anchor_flop (u_key_out_anchor), line:25:1, endln:25:21
     |vpiParent:
@@ -751,6 +733,15 @@ Design: (unnamed)
     |vpiDefName:work@prim_sec_anchor_flop
     |vpiActual:
     \_Module: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
+|vpiTypedef:
+\_ModuleTypespec: (prim_sec_anchor_flop)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

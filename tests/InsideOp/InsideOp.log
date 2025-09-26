@@ -301,7 +301,7 @@ ImportTypespec                                         1
 IntTypespec                                            3
 IntVar                                                 1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              4
 Package                                                1
 ParamAssign                                            1
@@ -478,7 +478,7 @@ Design: (unnamed)
       |vpiName:Get3
       |vpiFullName:work@top.Get3
       |vpiActual:
-      \_LogicNet: (work@top.Get3), line:20:31, endln:20:35
+      \_EnumConst: (Get3), line:7:5, endln:7:13
     |vpiLhs:
     \_Parameter: (work@top.GetWhat), line:20:21, endln:20:35
   |vpiInternalScope:
@@ -564,10 +564,10 @@ Design: (unnamed)
         |vpiTypedef:
         \_ModuleTypespec: (GOOD)
           |vpiParent:
-          \_Begin: (work@top.gen_two), line:29:45, endln:32:6
+          \_Design: (unnamed)
           |vpiName:GOOD
-        |vpiImportTypespec:
-        \_ModuleTypespec: (GOOD)
+          |vpiModule:
+          \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
         |vpiStmt:
         \_ContAssign: , line:30:12, endln:30:19
           |vpiParent:
@@ -661,13 +661,6 @@ Design: (unnamed)
               |vpiFullName:work@top.gen_invalid.out
               |vpiActual:
               \_IntVar: (work@top.out), line:22:16, endln:22:19
-        |vpiImportTypespec:
-        \_LogicNet: (work@top.Get4), line:32:27, endln:32:31
-          |vpiParent:
-          \_Begin: (work@top), line:32:12, endln:36:6
-          |vpiName:Get4
-          |vpiFullName:work@top.Get4
-          |vpiNetType:1
         |vpiStmt:
         \_GenIfElse: , line:32:12, endln:36:6
           |vpiParent:
@@ -692,18 +685,11 @@ Design: (unnamed)
               |vpiName:Get4
               |vpiFullName:work@top.Get4
               |vpiActual:
-              \_LogicNet: (work@top.Get4), line:32:27, endln:32:31
+              \_EnumConst: (Get4), line:8:5, endln:8:13
           |vpiStmt:
           \_Begin: (work@top.gen_three), line:32:33, endln:34:6
           |vpiElseStmt:
           \_Begin: (work@top.gen_invalid), line:34:12, endln:36:6
-      |vpiImportTypespec:
-      \_LogicNet: (work@top.Get2), line:29:32, endln:29:36
-        |vpiParent:
-        \_Begin: (work@top), line:29:12, endln:36:6
-        |vpiName:Get2
-        |vpiFullName:work@top.Get2
-        |vpiNetType:1
       |vpiStmt:
       \_GenIfElse: , line:29:12, endln:36:6
         |vpiParent:
@@ -728,7 +714,7 @@ Design: (unnamed)
             |vpiName:Get2
             |vpiFullName:work@top.Get2
             |vpiActual:
-            \_LogicNet: (work@top.Get2), line:29:32, endln:29:36
+            \_EnumConst: (Get2), line:6:5, endln:6:13
           |vpiOperand:
           \_RefObj: (work@top.Get3), line:29:38, endln:29:42
             |vpiParent:
@@ -736,18 +722,11 @@ Design: (unnamed)
             |vpiName:Get3
             |vpiFullName:work@top.Get3
             |vpiActual:
-            \_LogicNet: (work@top.Get3), line:20:31, endln:20:35
+            \_EnumConst: (Get3), line:7:5, endln:7:13
         |vpiStmt:
         \_Begin: (work@top.gen_two), line:29:45, endln:32:6
         |vpiElseStmt:
         \_Begin: (work@top), line:32:12, endln:36:6
-    |vpiImportTypespec:
-    \_LogicNet: (work@top.Get1), line:27:27, endln:27:31
-      |vpiParent:
-      \_Begin: (work@top), line:27:12, endln:36:6
-      |vpiName:Get1
-      |vpiFullName:work@top.Get1
-      |vpiNetType:1
     |vpiStmt:
     \_GenIfElse: , line:27:12, endln:36:6
       |vpiParent:
@@ -772,7 +751,7 @@ Design: (unnamed)
           |vpiName:Get1
           |vpiFullName:work@top.Get1
           |vpiActual:
-          \_LogicNet: (work@top.Get1), line:27:27, endln:27:31
+          \_EnumConst: (Get1), line:5:5, endln:5:13
       |vpiStmt:
       \_Begin: (work@top.gen_one), line:27:33, endln:29:6
       |vpiElseStmt:
@@ -799,47 +778,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:18:8, endln:18:17
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.out), line:22:16, endln:22:19
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.Get3), line:20:31, endln:20:35
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:Get3
-    |vpiFullName:work@top.Get3
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.Get0), line:25:23, endln:25:27
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:Get0
-    |vpiFullName:work@top.Get0
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.GetDefault), line:25:29, endln:25:39
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:GetDefault
-    |vpiFullName:work@top.GetDefault
-    |vpiNetType:1
   |vpiDefName:work@top
-  |vpiNet:
-  \_LogicNet: (work@top.Get3), line:20:31, endln:20:35
-  |vpiNet:
-  \_LogicNet: (work@top.Get0), line:25:23, endln:25:27
-  |vpiNet:
-  \_LogicNet: (work@top.GetDefault), line:25:29, endln:25:39
   |vpiPort:
   \_Port: (out), line:22:16, endln:22:19
     |vpiParent:
@@ -877,7 +822,7 @@ Design: (unnamed)
         |vpiName:Get0
         |vpiFullName:work@top.Get0
         |vpiActual:
-        \_LogicNet: (work@top.Get0), line:25:23, endln:25:27
+        \_EnumConst: (Get0), line:4:5, endln:4:13
       |vpiOperand:
       \_RefObj: (work@top.GetDefault), line:25:29, endln:25:39
         |vpiParent:
@@ -885,11 +830,20 @@ Design: (unnamed)
         |vpiName:GetDefault
         |vpiFullName:work@top.GetDefault
         |vpiActual:
-        \_LogicNet: (work@top.GetDefault), line:25:29, endln:25:39
+        \_EnumConst: (GetDefault), line:9:5, endln:9:21
     |vpiStmt:
     \_Begin: (work@top.gen_zero), line:25:42, endln:27:6
     |vpiElseStmt:
     \_Begin: (work@top), line:27:12, endln:36:6
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

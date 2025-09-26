@@ -69,7 +69,7 @@ Identifier                                             2
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 Port                                                   2
 RefModule                                              1
@@ -97,10 +97,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_subreg)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
+    \_Design: (unnamed)
     |vpiName:prim_subreg
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_subreg)
+    |vpiModule:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10
   |vpiDefName:work@dut
   |vpiRefModule:
   \_RefModule: work@prim_subreg (s), line:9:1, endln:9:12
@@ -154,10 +154,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -174,8 +170,6 @@ Design: (unnamed)
     |vpiName:test
     |vpiFullName:work@prim_subreg.test
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@prim_subreg
   |vpiNet:
   \_LogicNet: (work@prim_subreg.test), line:2:13, endln:2:17
@@ -192,6 +186,15 @@ Design: (unnamed)
       |vpiFullName:work@prim_subreg.test
       |vpiActual:
       \_LogicTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
+|vpiTypedef:
+\_ModuleTypespec: (prim_subreg)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

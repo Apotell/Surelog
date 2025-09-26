@@ -238,7 +238,7 @@ GenVar                                                 1
 Identifier                                             4
 IntTypespec                                            1
 Module                                                 1
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                             10
 PackedArrayTypespec                                    1
 ParamAssign                                            2
@@ -640,6 +640,10 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@test.loop), line:8:6, endln:17:9
   |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
+  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
@@ -671,10 +675,17 @@ Design: (unnamed)
       |vpiActual:
       \_IntTypespec: 
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiDefName:work@test
-\_weaklyReferenced:
-\_IntTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (test)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test
+  |vpiModule:
+  \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

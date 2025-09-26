@@ -116,6 +116,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 ClassDefn                                              1
+ClassTypespec                                          1
 Constant                                               2
 Design                                                 1
 EnumConst                                              2
@@ -197,6 +198,13 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntVar: (pack::toto::DO_NOT_CATCH), line:21:18, endln:21:30
   |vpiTypedef:
+  \_ClassTypespec: (toto)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
+    |vpiName:toto
+    |vpiClassDefn:
+    \_ClassDefn: (pack::toto), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:20:1, endln:22:9
+  |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
@@ -242,10 +250,6 @@ Design: (unnamed)
       |vpiActual:
       \_EnumTypespec: , line:7:9, endln:12:17
   |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
-  |vpiTypedef:
   \_UnsupportedTypespec: (uvm_object_wrapper)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
@@ -263,13 +267,10 @@ Design: (unnamed)
       |vpiFullName:pack::uvm_object_wrapper
       |vpiActual:
       \_UnsupportedTypespec: (uvm_object_wrapper)
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ClassDefn: (pack::toto), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:20:1, endln:22:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (toto)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -278,8 +279,6 @@ Design: (unnamed)
   \_EnumTypespec: , line:7:9, endln:12:17
   |vpiImportTypespec:
   \_TypedefTypespec: (pack::uvm_core_state), line:12:3, endln:12:17
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (pack::uvm_aa_string_key), line:5:8, endln:5:25
     |vpiParent:
@@ -325,8 +324,6 @@ Design: (unnamed)
     |vpiName:uvm_deferred_init
     |vpiFullName:pack::uvm_deferred_init
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (pack::DO_NOT_CATCH_2), line:24:18, endln:24:32
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
@@ -366,15 +363,15 @@ Design: (unnamed)
     |vpiIODecl:
     \_IODecl: (path), line:3:63, endln:3:67
       |vpiParent:
-      \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
+      \_FunctionDecl: (pack::uvm_hdl_check_path), line:3:1, endln:3:69
       |vpiDirection:1
       |vpiName:path
       |vpiTypedef:
-      \_RefTypespec: (pack::path::string)
+      \_RefTypespec: (pack::uvm_hdl_check_path::path::string)
         |vpiParent:
         \_IODecl: (path), line:3:63, endln:3:67
         |vpiName:string
-        |vpiFullName:pack::path::string
+        |vpiFullName:pack::uvm_hdl_check_path::path::string
         |vpiActual:
         \_StringTypespec: 
   |vpiNet:

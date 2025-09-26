@@ -124,7 +124,7 @@ Design                                                 1
 GenIf                                                  1
 Identifier                                             3
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                              1
 PackedArrayTypespec                                    1
 ParamAssign                                            1
@@ -166,10 +166,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (param_test)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
+    \_Design: (unnamed)
     |vpiName:param_test
-  |vpiImportTypespec:
-  \_ModuleTypespec: (param_test)
+    |vpiModule:
+    \_Module: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
   |vpiDefName:work@dut
   |vpiRefModule:
   \_RefModule: work@param_test (t1), line:14:3, endln:14:13
@@ -224,10 +224,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD)
       |vpiParent:
-      \_Begin: (work@param_test), line:7:24, endln:9:7
+      \_Design: (unnamed)
       |vpiName:GOOD
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD)
+      |vpiModule:
+      \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:1:1, endln:2:10
     |vpiStmt:
     \_RefModule: work@GOOD (good), line:8:6, endln:8:10
       |vpiParent:
@@ -303,6 +303,17 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@param_test), line:7:24, endln:9:7
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
+|vpiTypedef:
+\_ModuleTypespec: (param_test)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

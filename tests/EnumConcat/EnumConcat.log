@@ -103,7 +103,7 @@ GenIf                                                  1
 Identifier                                             3
 LogicTypespec                                          1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 Range                                                  1
 RefModule                                              1
@@ -148,10 +148,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD)
       |vpiParent:
-      \_Begin: (work@dut), line:11:46, endln:13:6
+      \_Design: (unnamed)
       |vpiName:GOOD
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD)
+      |vpiModule:
+      \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:2:1, endln:3:10
     |vpiStmt:
     \_RefModule: work@GOOD (good), line:12:5, endln:12:9
       |vpiParent:
@@ -253,6 +253,15 @@ Design: (unnamed)
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@dut), line:11:46, endln:13:6
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

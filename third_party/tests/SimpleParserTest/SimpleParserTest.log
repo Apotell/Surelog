@@ -10959,7 +10959,7 @@ BitSelect                                             97
 CaseItem                                              35
 CaseStmt                                               4
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                             443
 ContAssign                                            11
 DelayControl                                           3
@@ -10982,7 +10982,7 @@ IntegerTypespec                                       12
 LogicNet                                             122
 LogicTypespec                                        102
 Module                                                14
-ModuleTypespec                                         2
+ModuleTypespec                                        15
 Operation                                            236
 Package                                                1
 PackedArrayTypespec                                    2
@@ -11003,6 +11003,7 @@ TableEntry                                            17
 Task                                                  10
 TypedefTypespec                                        1
 UdpDefn                                                2
+UdpDefnTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleParserTest/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -11401,15 +11402,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -11720,13 +11712,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -11775,22 +11760,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -11819,11 +11876,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:q
     |vpiExpr:
-    \_LogicNet: (work@jkff_udp.q), line:9:9, endln:9:10
+    \_LogicNet: (work@jkff_udp.q.q), line:9:9, endln:9:10
       |vpiParent:
-      \_UdpDefn: work@jkff_udp, line:7:1, endln:22:13
+      \_IODecl: (q), line:7:21, endln:7:22
       |vpiName:q
-      |vpiFullName:work@jkff_udp.q
+      |vpiFullName:work@jkff_udp.q.q
   |vpiIODecl:
   \_IODecl: (clk), line:7:23, endln:7:26
     |vpiParent:
@@ -11831,11 +11888,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:clk
     |vpiExpr:
-    \_LogicNet: (work@jkff_udp.clk), line:8:8, endln:8:11
+    \_LogicNet: (work@jkff_udp.clk.clk), line:8:8, endln:8:11
       |vpiParent:
-      \_UdpDefn: work@jkff_udp, line:7:1, endln:22:13
+      \_IODecl: (clk), line:7:23, endln:7:26
       |vpiName:clk
-      |vpiFullName:work@jkff_udp.clk
+      |vpiFullName:work@jkff_udp.clk.clk
   |vpiIODecl:
   \_IODecl: (j), line:7:27, endln:7:28
     |vpiParent:
@@ -11843,11 +11900,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:j
     |vpiExpr:
-    \_LogicNet: (work@jkff_udp.j), line:8:12, endln:8:13
+    \_LogicNet: (work@jkff_udp.j.j), line:8:12, endln:8:13
       |vpiParent:
-      \_UdpDefn: work@jkff_udp, line:7:1, endln:22:13
+      \_IODecl: (j), line:7:27, endln:7:28
       |vpiName:j
-      |vpiFullName:work@jkff_udp.j
+      |vpiFullName:work@jkff_udp.j.j
   |vpiIODecl:
   \_IODecl: (k), line:7:29, endln:7:30
     |vpiParent:
@@ -11855,11 +11912,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:k
     |vpiExpr:
-    \_LogicNet: (work@jkff_udp.k), line:8:14, endln:8:15
+    \_LogicNet: (work@jkff_udp.k.k), line:8:14, endln:8:15
       |vpiParent:
-      \_UdpDefn: work@jkff_udp, line:7:1, endln:22:13
+      \_IODecl: (k), line:7:29, endln:7:30
       |vpiName:k
-      |vpiFullName:work@jkff_udp.k
+      |vpiFullName:work@jkff_udp.k.k
   |vpiTableEntry:
   \_TableEntry: , line:13:7, endln:13:13
     |vpiParent:
@@ -11920,11 +11977,11 @@ Design: (unnamed)
     |vpiDirection:2
     |vpiName:c
     |vpiExpr:
-    \_LogicNet: (work@xor2_input.c), line:25:10, endln:25:11
+    \_LogicNet: (work@xor2_input.c.c), line:25:10, endln:25:11
       |vpiParent:
-      \_UdpDefn: work@xor2_input, line:24:1, endln:38:13
+      \_IODecl: (c), line:24:23, endln:24:24
       |vpiName:c
-      |vpiFullName:work@xor2_input.c
+      |vpiFullName:work@xor2_input.c.c
   |vpiIODecl:
   \_IODecl: (a), line:24:25, endln:24:26
     |vpiParent:
@@ -11932,11 +11989,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:a
     |vpiExpr:
-    \_LogicNet: (work@xor2_input.a), line:26:9, endln:26:10
+    \_LogicNet: (work@xor2_input.a.a), line:26:9, endln:26:10
       |vpiParent:
-      \_UdpDefn: work@xor2_input, line:24:1, endln:38:13
+      \_IODecl: (a), line:24:25, endln:24:26
       |vpiName:a
-      |vpiFullName:work@xor2_input.a
+      |vpiFullName:work@xor2_input.a.a
   |vpiIODecl:
   \_IODecl: (b), line:24:27, endln:24:28
     |vpiParent:
@@ -11944,11 +12001,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:b
     |vpiExpr:
-    \_LogicNet: (work@xor2_input.b), line:26:11, endln:26:12
+    \_LogicNet: (work@xor2_input.b.b), line:26:11, endln:26:12
       |vpiParent:
-      \_UdpDefn: work@xor2_input, line:24:1, endln:38:13
+      \_IODecl: (b), line:24:27, endln:24:28
       |vpiName:b
-      |vpiFullName:work@xor2_input.b
+      |vpiFullName:work@xor2_input.b.b
   |vpiTableEntry:
   \_TableEntry: , line:28:6, endln:28:9
     |vpiParent:
@@ -12509,15 +12566,6 @@ Design: (unnamed)
       \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
       |vpiSigned:1
     |vpiTypedef:
-    \_IntegerTypespec: 
-      |vpiParent:
-      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
-      |vpiSigned:1
-    |vpiTypedef:
-    \_LogicTypespec: 
-      |vpiParent:
-      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
-    |vpiTypedef:
     \_LogicTypespec: 
       |vpiParent:
       \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
@@ -12554,8 +12602,6 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: 
     |vpiImportTypespec:
-    \_IntegerTypespec: 
-    |vpiImportTypespec:
     \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
       |vpiParent:
       \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
@@ -12569,8 +12615,6 @@ Design: (unnamed)
       |vpiName:i
       |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
       |vpiSigned:1
-    |vpiImportTypespec:
-    \_LogicTypespec: 
     |vpiImportTypespec:
     \_LogicTypespec: 
     |vpiImportTypespec:
@@ -12631,6 +12675,10 @@ Design: (unnamed)
         \_LogicTypespec: 
     |vpiStmt:
     \_Begin: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:16:2, endln:24:5
+  |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -12746,30 +12794,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiRange:
-    \_Range: , line:5:8, endln:5:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:5:9, endln:5:10
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:11, endln:5:12
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
-    |vpiRange:
     \_Range: , line:6:5, endln:6:10
       |vpiParent:
       \_LogicTypespec: 
@@ -12785,108 +12809,14 @@ Design: (unnamed)
       \_Constant: , line:6:8, endln:6:9
         |vpiParent:
         \_Range: , line:6:5, endln:6:10
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
-    |vpiRange:
-    \_Range: , line:6:5, endln:6:10
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:6:6, endln:6:7
-        |vpiParent:
-        \_Range: , line:6:5, endln:6:10
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:8, endln:6:9
-        |vpiParent:
-        \_Range: , line:6:5, endln:6:10
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
-    |vpiRange:
-    \_Range: , line:4:7, endln:4:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:4:8, endln:4:9
-        |vpiParent:
-        \_Range: , line:4:7, endln:4:12
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:10, endln:4:11
-        |vpiParent:
-        \_Range: , line:4:7, endln:4:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
-    |vpiRange:
-    \_Range: , line:5:8, endln:5:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:5:9, endln:5:10
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:11, endln:5:12
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
-    |vpiRange:
-    \_Range: , line:5:8, endln:5:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:5:9, endln:5:10
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:11, endln:5:12
-        |vpiParent:
-        \_Range: , line:5:8, endln:5:13
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
   \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -12929,8 +12859,6 @@ Design: (unnamed)
     |vpiFullName:work@LFSR_TASK.random1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
@@ -12961,8 +12889,6 @@ Design: (unnamed)
     |vpiFullName:work@LFSR_TASK.random1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@LFSR_TASK.random2), line:6:20, endln:6:27
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
@@ -12988,12 +12914,6 @@ Design: (unnamed)
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:seed2
     |vpiFullName:work@LFSR_TASK.seed2
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@LFSR_TASK
   |vpiTaskFunc:
   \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
@@ -13345,51 +13265,6 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@arbiter.ADDRESSWIDTH), line:8:12, endln:8:28
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiSigned:1
   |vpiTypedef:
   \_IntegerTypespec: 
     |vpiParent:
@@ -14135,130 +14010,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiRange:
-    \_Range: , line:15:8, endln:15:24
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:15:9, endln:15:19
-        |vpiParent:
-        \_Range: , line:15:8, endln:15:24
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@arbiter.NUMUNITS), line:15:9, endln:15:17
-          |vpiParent:
-          \_Operation: , line:15:9, endln:15:19
-          |vpiName:NUMUNITS
-          |vpiFullName:work@arbiter.NUMUNITS
-          |vpiActual:
-          \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
-        |vpiOperand:
-        \_Constant: , line:15:18, endln:15:19
-          |vpiParent:
-          \_Operation: , line:15:9, endln:15:19
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:15:22, endln:15:23
-        |vpiParent:
-        \_Range: , line:15:8, endln:15:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiRange:
-    \_Range: , line:16:8, endln:16:37
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:16:9, endln:16:32
-        |vpiParent:
-        \_Range: , line:16:8, endln:16:37
-        |vpiOpType:11
-        |vpiOperand:
-        \_Operation: , line:16:9, endln:16:30
-          |vpiParent:
-          \_Operation: , line:16:9, endln:16:32
-          |vpiOpType:25
-          |vpiOperand:
-          \_RefObj: (work@arbiter.ADDRESSWIDTH), line:16:9, endln:16:21
-            |vpiParent:
-            \_Operation: , line:16:9, endln:16:30
-            |vpiName:ADDRESSWIDTH
-            |vpiFullName:work@arbiter.ADDRESSWIDTH
-            |vpiActual:
-            \_Parameter: (work@arbiter.ADDRESSWIDTH), line:8:12, endln:8:28
-          |vpiOperand:
-          \_RefObj: (work@arbiter.NUMUNITS), line:16:22, endln:16:30
-            |vpiParent:
-            \_Operation: , line:16:9, endln:16:30
-            |vpiName:NUMUNITS
-            |vpiFullName:work@arbiter.NUMUNITS
-            |vpiActual:
-            \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
-        |vpiOperand:
-        \_Constant: , line:16:31, endln:16:32
-          |vpiParent:
-          \_Operation: , line:16:9, endln:16:32
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:16:35, endln:16:36
-        |vpiParent:
-        \_Range: , line:16:8, endln:16:37
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiRange:
-    \_Range: , line:17:9, endln:17:25
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:17:10, endln:17:20
-        |vpiParent:
-        \_Range: , line:17:9, endln:17:25
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@arbiter.NUMUNITS), line:17:10, endln:17:18
-          |vpiParent:
-          \_Operation: , line:17:10, endln:17:20
-          |vpiName:NUMUNITS
-          |vpiFullName:work@arbiter.NUMUNITS
-          |vpiActual:
-          \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
-        |vpiOperand:
-        \_Constant: , line:17:19, endln:17:20
-          |vpiParent:
-          \_Operation: , line:17:10, endln:17:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:17:23, endln:17:24
-        |vpiParent:
-        \_Range: , line:17:9, endln:17:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_IntegerTypespec: 
   |vpiImportTypespec:
@@ -14276,8 +14027,6 @@ Design: (unnamed)
     |vpiFullName:work@arbiter.i
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerTypespec: 
-  |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -14291,8 +14040,6 @@ Design: (unnamed)
     |vpiName:j
     |vpiFullName:work@arbiter.j
     |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
     |vpiParent:
@@ -14308,8 +14055,6 @@ Design: (unnamed)
     |vpiFullName:work@arbiter.k
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerTypespec: 
-  |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -14323,8 +14068,6 @@ Design: (unnamed)
     |vpiName:p
     |vpiFullName:work@arbiter.p
     |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
     |vpiParent:
@@ -14340,8 +14083,6 @@ Design: (unnamed)
     |vpiFullName:work@arbiter.q
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerTypespec: 
-  |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -14355,8 +14096,6 @@ Design: (unnamed)
     |vpiName:r
     |vpiFullName:work@arbiter.r
     |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
     |vpiParent:
@@ -14372,8 +14111,6 @@ Design: (unnamed)
     |vpiFullName:work@arbiter.s
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerTypespec: 
-  |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -14388,8 +14125,6 @@ Design: (unnamed)
     |vpiFullName:work@arbiter.t
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerTypespec: 
-  |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -14403,8 +14138,6 @@ Design: (unnamed)
     |vpiName:u
     |vpiFullName:work@arbiter.u
     |vpiSigned:1
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
     |vpiParent:
@@ -14697,12 +14430,6 @@ Design: (unnamed)
     |vpiName:finalRequest
     |vpiFullName:work@arbiter.finalRequest
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@arbiter
   |vpiNet:
   \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
@@ -17903,54 +17630,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
-    |vpiRange:
-    \_Range: , line:3:7, endln:3:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:3:8, endln:3:9
-        |vpiParent:
-        \_Range: , line:3:7, endln:3:12
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:10, endln:3:11
-        |vpiParent:
-        \_Range: , line:3:7, endln:3:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
-    |vpiRange:
-    \_Range: , line:4:7, endln:4:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:4:8, endln:4:9
-        |vpiParent:
-        \_Range: , line:4:7, endln:4:12
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:10, endln:4:11
-        |vpiParent:
-        \_Range: , line:4:7, endln:4:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -17987,10 +17666,6 @@ Design: (unnamed)
     \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
     |vpiName:out2
     |vpiFullName:work@case1.out2
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@case1
   |vpiNet:
   \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
@@ -18514,78 +18189,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
-    |vpiRange:
-    \_Range: , line:22:7, endln:22:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:22:8, endln:22:9
-        |vpiParent:
-        \_Range: , line:22:7, endln:22:12
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:22:10, endln:22:11
-        |vpiParent:
-        \_Range: , line:22:7, endln:22:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
-    |vpiRange:
-    \_Range: , line:23:7, endln:23:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:23:8, endln:23:9
-        |vpiParent:
-        \_Range: , line:23:7, endln:23:12
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:23:10, endln:23:11
-        |vpiParent:
-        \_Range: , line:23:7, endln:23:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
-    |vpiRange:
-    \_Range: , line:24:8, endln:24:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:24:9, endln:24:11
-        |vpiParent:
-        \_Range: , line:24:8, endln:24:14
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:24:12, endln:24:13
-        |vpiParent:
-        \_Range: , line:24:8, endln:24:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -18647,12 +18250,6 @@ Design: (unnamed)
     |vpiName:select
     |vpiFullName:work@case2.select
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@case2
   |vpiNet:
   \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
@@ -19754,54 +19351,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
-    |vpiRange:
-    \_Range: , line:12:8, endln:12:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:12:9, endln:12:10
-        |vpiParent:
-        \_Range: , line:12:8, endln:12:13
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:12:11, endln:12:12
-        |vpiParent:
-        \_Range: , line:12:8, endln:12:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
-    |vpiRange:
-    \_Range: , line:14:7, endln:14:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:14:8, endln:14:10
-        |vpiParent:
-        \_Range: , line:14:7, endln:14:13
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:14:11, endln:14:12
-        |vpiParent:
-        \_Range: , line:14:7, endln:14:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -19855,10 +19404,6 @@ Design: (unnamed)
     |vpiName:binary_out
     |vpiFullName:work@encoder_using_case.binary_out
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@encoder_using_case
   |vpiNet:
   \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
@@ -20510,18 +20055,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
   |vpiImportTypespec:
   \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
     |vpiParent:
@@ -20569,8 +20102,6 @@ Design: (unnamed)
     |vpiFullName:work@full_adder_gates.and1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@full_adder_gates.and2), line:10:11, endln:10:15
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
@@ -20585,8 +20116,6 @@ Design: (unnamed)
     |vpiFullName:work@full_adder_gates.and2
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@full_adder_gates.and3), line:10:16, endln:10:20
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
@@ -20600,8 +20129,6 @@ Design: (unnamed)
     |vpiName:and3
     |vpiFullName:work@full_adder_gates.and3
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@full_adder_gates.sum1), line:10:21, endln:10:25
     |vpiParent:
@@ -20951,14 +20478,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
   |vpiImportTypespec:
   \_LogicNet: (work@mux21_switch.out), line:7:22, endln:7:25
     |vpiParent:
@@ -21000,8 +20519,6 @@ Design: (unnamed)
     |vpiFullName:work@mux21_switch.e
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mux21_switch.power), line:13:12, endln:13:17
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
@@ -21015,8 +20532,6 @@ Design: (unnamed)
     |vpiName:power
     |vpiFullName:work@mux21_switch.power
     |vpiNetType:10
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mux21_switch.ground), line:14:12, endln:14:18
     |vpiParent:
@@ -21151,78 +20666,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
-    |vpiRange:
-    \_Range: , line:50:7, endln:50:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:50:8, endln:50:9
-        |vpiParent:
-        \_Range: , line:50:7, endln:50:12
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:50:10, endln:50:11
-        |vpiParent:
-        \_Range: , line:50:7, endln:50:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
-    |vpiRange:
-    \_Range: , line:51:7, endln:51:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:51:8, endln:51:9
-        |vpiParent:
-        \_Range: , line:51:7, endln:51:12
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:51:10, endln:51:11
-        |vpiParent:
-        \_Range: , line:51:7, endln:51:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
-    |vpiRange:
-    \_Range: , line:52:8, endln:52:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:52:9, endln:52:10
-        |vpiParent:
-        \_Range: , line:52:8, endln:52:13
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:52:11, endln:52:12
-        |vpiParent:
-        \_Range: , line:52:8, endln:52:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -21274,12 +20717,6 @@ Design: (unnamed)
     \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
     |vpiName:B
     |vpiFullName:work@pri_encooder.B
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@pri_encooder
   |vpiNet:
   \_LogicNet: (work@pri_encooder.Op), line:49:22, endln:49:24
@@ -22000,80 +21437,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
-    |vpiRange:
-    \_Range: , line:32:7, endln:32:23
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:32:8, endln:32:20
-        |vpiParent:
-        \_Range: , line:32:7, endln:32:23
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@syn_fifo.DATA_WIDTH), line:32:8, endln:32:18
-          |vpiParent:
-          \_Operation: , line:32:8, endln:32:20
-          |vpiName:DATA_WIDTH
-          |vpiFullName:work@syn_fifo.DATA_WIDTH
-          |vpiActual:
-          \_Parameter: (work@syn_fifo.DATA_WIDTH), line:22:11, endln:22:25
-        |vpiOperand:
-        \_Constant: , line:32:19, endln:32:20
-          |vpiParent:
-          \_Operation: , line:32:8, endln:32:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:32:21, endln:32:22
-        |vpiParent:
-        \_Range: , line:32:7, endln:32:23
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
-    |vpiRange:
-    \_Range: , line:35:8, endln:35:24
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:35:9, endln:35:21
-        |vpiParent:
-        \_Range: , line:35:8, endln:35:24
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@syn_fifo.DATA_WIDTH), line:35:9, endln:35:19
-          |vpiParent:
-          \_Operation: , line:35:9, endln:35:21
-          |vpiName:DATA_WIDTH
-          |vpiFullName:work@syn_fifo.DATA_WIDTH
-          |vpiActual:
-          \_Parameter: (work@syn_fifo.DATA_WIDTH), line:22:11, endln:22:25
-        |vpiOperand:
-        \_Constant: , line:35:20, endln:35:21
-          |vpiParent:
-          \_Operation: , line:35:9, endln:35:21
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:35:22, endln:35:23
-        |vpiParent:
-        \_Range: , line:35:8, endln:35:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_ModuleTypespec: (ram_dp_ar_aw)
   |vpiImportTypespec:
@@ -22235,10 +21598,6 @@ Design: (unnamed)
     |vpiName:data_ram
     |vpiFullName:work@syn_fifo.data_ram
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@syn_fifo
   |vpiNet:
   \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
@@ -23344,50 +22703,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (arbiter)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
+    \_Design: (unnamed)
     |vpiName:arbiter
+    |vpiModule:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (arbiter)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -23405,8 +22728,6 @@ Design: (unnamed)
     |vpiFullName:work@top.clk
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.rst), line:6:17, endln:6:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
@@ -23420,8 +22741,6 @@ Design: (unnamed)
     |vpiName:rst
     |vpiFullName:work@top.rst
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.req3), line:7:17, endln:7:21
     |vpiParent:
@@ -23437,8 +22756,6 @@ Design: (unnamed)
     |vpiFullName:work@top.req3
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.req2), line:8:17, endln:8:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
@@ -23452,8 +22769,6 @@ Design: (unnamed)
     |vpiName:req2
     |vpiFullName:work@top.req2
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.req1), line:9:17, endln:9:21
     |vpiParent:
@@ -23469,8 +22784,6 @@ Design: (unnamed)
     |vpiFullName:work@top.req1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.req0), line:10:17, endln:10:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
@@ -23484,8 +22797,6 @@ Design: (unnamed)
     |vpiName:req0
     |vpiFullName:work@top.req0
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.gnt3), line:11:17, endln:11:21
     |vpiParent:
@@ -23501,8 +22812,6 @@ Design: (unnamed)
     |vpiFullName:work@top.gnt3
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.gnt2), line:12:17, endln:12:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
@@ -23517,8 +22826,6 @@ Design: (unnamed)
     |vpiFullName:work@top.gnt2
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@top.gnt1), line:13:17, endln:13:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
@@ -23532,8 +22839,6 @@ Design: (unnamed)
     |vpiName:gnt1
     |vpiFullName:work@top.gnt1
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.gnt0), line:14:17, endln:14:21
     |vpiParent:
@@ -24473,10 +23778,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiRange:
     \_Range: , line:42:5, endln:42:10
       |vpiParent:
@@ -24497,10 +23798,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -24593,78 +23890,6 @@ Design: (unnamed)
       \_Constant: , line:47:8, endln:47:9
         |vpiParent:
         \_Range: , line:47:5, endln:47:10
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-    |vpiRange:
-    \_Range: , line:27:8, endln:27:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:27:9, endln:27:10
-        |vpiParent:
-        \_Range: , line:27:8, endln:27:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:27:11, endln:27:12
-        |vpiParent:
-        \_Range: , line:27:8, endln:27:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
-    |vpiRange:
-    \_Range: , line:33:8, endln:33:13
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:33:9, endln:33:10
-        |vpiParent:
-        \_Range: , line:33:8, endln:33:13
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:33:11, endln:33:12
-        |vpiParent:
-        \_Range: , line:33:8, endln:33:13
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -24802,8 +24027,6 @@ Design: (unnamed)
     |vpiFullName:work@uart.tx_empty
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@uart.tx_over_run), line:41:14, endln:41:25
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
@@ -24833,8 +24056,6 @@ Design: (unnamed)
     |vpiName:tx_cnt
     |vpiFullName:work@uart.tx_cnt
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@uart.tx_out), line:43:14, endln:43:20
     |vpiParent:
@@ -24914,8 +24135,6 @@ Design: (unnamed)
     |vpiFullName:work@uart.rx_cnt
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_frame_err), line:48:14, endln:48:26
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
@@ -24929,8 +24148,6 @@ Design: (unnamed)
     |vpiName:rx_frame_err
     |vpiFullName:work@uart.rx_frame_err
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_over_run), line:49:14, endln:49:25
     |vpiParent:
@@ -24946,8 +24163,6 @@ Design: (unnamed)
     |vpiFullName:work@uart.rx_over_run
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_empty), line:50:14, endln:50:22
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
@@ -24961,8 +24176,6 @@ Design: (unnamed)
     |vpiName:rx_empty
     |vpiFullName:work@uart.rx_empty
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_d1), line:51:14, endln:51:19
     |vpiParent:
@@ -24978,8 +24191,6 @@ Design: (unnamed)
     |vpiFullName:work@uart.rx_d1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_d2), line:52:14, endln:52:19
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
@@ -24994,8 +24205,6 @@ Design: (unnamed)
     |vpiFullName:work@uart.rx_d2
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@uart.rx_busy), line:53:14, endln:53:21
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
@@ -25009,10 +24218,6 @@ Design: (unnamed)
     |vpiName:rx_busy
     |vpiFullName:work@uart.rx_busy
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@uart
   |vpiNet:
   \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
@@ -26812,9 +26017,97 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@uart.tx_cnt), line:42:14, endln:42:20
     |vpiAlwaysType:1
-\_weaklyReferenced:
-\_IntTypespec: 
-\_IntTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (LFSR_TASK)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:LFSR_TASK
+  |vpiModule:
+  \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
+|vpiTypedef:
+\_ModuleTypespec: (arbiter)
+|vpiTypedef:
+\_ModuleTypespec: (case1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:case1
+  |vpiModule:
+  \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
+|vpiTypedef:
+\_ModuleTypespec: (case2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:case2
+  |vpiModule:
+  \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
+|vpiTypedef:
+\_ModuleTypespec: (dff_async_reset)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dff_async_reset
+  |vpiModule:
+  \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
+|vpiTypedef:
+\_ModuleTypespec: (encoder_using_case)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:encoder_using_case
+  |vpiModule:
+  \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
+|vpiTypedef:
+\_ModuleTypespec: (full_adder_gates)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:full_adder_gates
+  |vpiModule:
+  \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@jkff_udp, line:7:1, endln:22:13
+|vpiTypedef:
+\_ModuleTypespec: (mux21_switch)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:mux21_switch
+  |vpiModule:
+  \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
+|vpiTypedef:
+\_ModuleTypespec: (pri_encooder)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:pri_encooder
+  |vpiModule:
+  \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
+|vpiTypedef:
+\_ModuleTypespec: (syn_fifo)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:syn_fifo
+  |vpiModule:
+  \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
+|vpiTypedef:
+\_ModuleTypespec: (uart)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:uart
+  |vpiModule:
+  \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
+|vpiTypedef:
+\_UdpDefnTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiUdpDefn:
+  \_UdpDefn: work@xor2_input, line:24:1, endln:38:13
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

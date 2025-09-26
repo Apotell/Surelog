@@ -305,10 +305,11 @@ Design                                                 1
 FuncCall                                               2
 Function                                               2
 GenIfElse                                              2
-Identifier                                             8
+Identifier                                             9
 IntTypespec                                            7
 IntVar                                                 2
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               1
 Module                                                 1
 ModuleTypespec                                         1
@@ -486,11 +487,6 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:1:1, endln:18:13
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:1:1, endln:18:13
-    |vpiSigned:1
   |vpiImportTypespec:
   \_Function: (work@intf.get2), line:5:4, endln:7:18
   |vpiImportTypespec:
@@ -499,8 +495,6 @@ Design: (unnamed)
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@intf.o), line:3:27, endln:3:28
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@intf.o), line:3:27, endln:3:28
     |vpiParent:
@@ -700,10 +694,16 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:21:1, endln:40:10
   |vpiTypedef:
-  \_ModuleTypespec: (intf)
+  \_InterfaceTypespec: (intf)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:21:1, endln:40:10
-    |vpiName:intf
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (intf)
+      |vpiParent:
+      \_InterfaceTypespec: (intf)
+      |vpiName:intf
+    |vpiInterface:
+    \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:1:1, endln:18:13
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
@@ -713,8 +713,6 @@ Design: (unnamed)
   \_Function: (work@top.get4), line:25:4, endln:27:18
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (intf)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -759,6 +757,15 @@ Design: (unnamed)
     \_Begin: (work@top.gen_block), line:29:19, endln:35:19
     |vpiElseStmt:
     \_Begin: (work@top), line:37:6, endln:37:19
+|vpiTypedef:
+\_InterfaceTypespec: (intf)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDeclScope/dut.sv, line:21:1, endln:40:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

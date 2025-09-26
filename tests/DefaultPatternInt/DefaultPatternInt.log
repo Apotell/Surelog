@@ -392,7 +392,7 @@ ImportTypespec                                         1
 IntTypespec                                            5
 IntVar                                                 1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              8
 Package                                                1
 ParamAssign                                            3
@@ -537,24 +537,12 @@ Design: (unnamed)
   \_StringTypespec: 
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiDefName:pack
@@ -570,10 +558,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (top)
     |vpiParent:
-    \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:32:1, endln:34:10
+    \_Design: (unnamed)
     |vpiName:top
-  |vpiImportTypespec:
-  \_ModuleTypespec: (top)
+    |vpiModule:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
   |vpiDefName:work@main
   |vpiRefModule:
   \_RefModule: work@top (top1), line:33:1, endln:33:4
@@ -657,13 +645,6 @@ Design: (unnamed)
         |vpiParent:
         \_ForStmt: (work@top.ASSIGN_VADDR), line:12:5, endln:14:8
         |vpiFullName:work@top.ASSIGN_VADDR
-        |vpiImportTypespec:
-        \_LogicNet: (work@top.ASSIGN_VADDR.V), line:13:29, endln:13:32
-          |vpiParent:
-          \_Begin: (work@top.ASSIGN_VADDR), line:12:35, endln:14:8
-          |vpiName:V
-          |vpiFullName:work@top.ASSIGN_VADDR.V
-          |vpiNetType:1
         |vpiStmt:
         \_Assignment: , line:13:10, endln:13:32
           |vpiParent:
@@ -677,7 +658,7 @@ Design: (unnamed)
             |vpiName:V
             |vpiFullName:work@top.ASSIGN_VADDR.V
             |vpiActual:
-            \_LogicNet: (work@top.ASSIGN_VADDR.V), line:13:29, endln:13:32
+            \_Parameter: (pack::V), line:4:25, endln:4:47
             |vpiIndex:
             \_RefObj: (work@top.ASSIGN_VADDR.i), line:13:30, endln:13:31
               |vpiParent:
@@ -702,13 +683,6 @@ Design: (unnamed)
               |vpiFullName:work@top.ASSIGN_VADDR.i
               |vpiActual:
               \_IntVar: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
-      |vpiImportTypespec:
-      \_LogicNet: (work@top.ASSIGN_VADDR.CNT), line:12:25, endln:12:28
-        |vpiParent:
-        \_ForStmt: (work@top.ASSIGN_VADDR), line:12:5, endln:14:8
-        |vpiName:CNT
-        |vpiFullName:work@top.ASSIGN_VADDR.CNT
-        |vpiNetType:1
       |vpiForInitStmt:
       \_Assignment: , line:12:10, endln:12:19
         |vpiParent:
@@ -756,7 +730,7 @@ Design: (unnamed)
           |vpiName:CNT
           |vpiFullName:work@top.ASSIGN_VADDR.CNT
           |vpiActual:
-          \_LogicNet: (work@top.ASSIGN_VADDR.CNT), line:12:25, endln:12:28
+          \_Parameter: (pack::CNT), line:2:25, endln:2:32
       |vpiStmt:
       \_Begin: (work@top.ASSIGN_VADDR), line:12:35, endln:14:8
     |vpiTypedef:
@@ -857,10 +831,6 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: 
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
-  |vpiTypedef:
   \_UnsupportedTypespec: (CNT)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
@@ -897,8 +867,6 @@ Design: (unnamed)
   \_ArrayTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_UnsupportedTypespec: (CNT)
   |vpiImportTypespec:
@@ -1011,6 +979,15 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:26:20, endln:28:4
+|vpiTypedef:
+\_ModuleTypespec: (main)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:main
+  |vpiModule:
+  \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:32:1, endln:34:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

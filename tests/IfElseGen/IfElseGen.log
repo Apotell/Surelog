@@ -171,7 +171,7 @@ Design                                                 1
 GenIfElse                                              2
 Identifier                                             8
 Module                                                 4
-ModuleTypespec                                         4
+ModuleTypespec                                         6
 ParamAssign                                            2
 Parameter                                              2
 RefModule                                              4
@@ -259,10 +259,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD1)
       |vpiParent:
-      \_Begin: (work@dut1.gen_rom_snd_scratch), line:9:20, endln:11:4
+      \_Design: (unnamed)
       |vpiName:GOOD1
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD1)
+      |vpiModule:
+      \_Module: work@GOOD1 (work@GOOD1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:1:1, endln:2:10
     |vpiStmt:
     \_RefModule: work@GOOD1 (cond_module), line:10:3, endln:10:8
       |vpiParent:
@@ -391,10 +391,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD2)
       |vpiParent:
-      \_Begin: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
+      \_Design: (unnamed)
       |vpiName:GOOD2
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD2)
+      |vpiModule:
+      \_Module: work@GOOD2 (work@GOOD2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:4:1, endln:5:10
     |vpiStmt:
     \_RefModule: work@GOOD2 (cond_module), line:22:3, endln:22:8
       |vpiParent:
@@ -426,6 +426,24 @@ Design: (unnamed)
     \_Begin: (work@dut2.gen_rom_snd_scratch), line:19:20, endln:21:4
     |vpiElseStmt:
     \_Begin: (work@dut2.gen_rom_one_scratch), line:21:10, endln:23:4
+|vpiTypedef:
+\_ModuleTypespec: (GOOD1)
+|vpiTypedef:
+\_ModuleTypespec: (GOOD2)
+|vpiTypedef:
+\_ModuleTypespec: (dut1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut1
+  |vpiModule:
+  \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
+|vpiTypedef:
+\_ModuleTypespec: (dut2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut2
+  |vpiModule:
+  \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

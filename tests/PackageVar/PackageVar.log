@@ -219,7 +219,7 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  3
 ClassDefn                                              3
-ClassTypespec                                          4
+ClassTypespec                                          3
 ClassVar                                               1
 Constant                                               5
 Design                                                 1
@@ -240,10 +240,10 @@ RefTypespec                                            6
 SourceFile                                             1
 VoidTypespec                                           2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Failed to bind object: "id: 26, name: ovm_default_printer".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:26, name: ovm_default_printer".
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 48, name: OVM_PRINT".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:48, name: OVM_PRINT".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Failed to bind object: "id: 28, name: ovm_default_printer".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:28, name: ovm_default_printer".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 50, name: OVM_PRINT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:50, name: OVM_PRINT".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -299,19 +299,8 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiTypedef:
-    \_ClassTypespec: (ovm_printer)
-      |vpiParent:
-      \_ClassDefn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
-      |vpiName:ovm_printer
-      |vpiClassDefn:
-      \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
-    |vpiImportTypespec:
-    \_ClassTypespec: (ovm_printer)
     |vpiImportTypespec:
     \_ClassVar: (pack::ovm_options_container::printer), line:7:17, endln:7:24
-    |vpiClassTypespec:
-    \_ClassTypespec: (ovm_printer)
   |vpiInternalScope:
   \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
     |vpiParent:
@@ -336,17 +325,8 @@ Design: (unnamed)
       \_VoidTypespec: 
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
-      |vpiTypedef:
-      \_ClassTypespec: (ovm_printer)
-        |vpiParent:
-        \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
-        |vpiName:ovm_printer
-        |vpiClassDefn:
-        \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
       |vpiImportTypespec:
       \_VoidTypespec: 
-      |vpiImportTypespec:
-      \_ClassTypespec: (ovm_printer)
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -592,17 +572,8 @@ Design: (unnamed)
       \_VoidTypespec: 
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
-      |vpiTypedef:
-      \_ClassTypespec: (ovm_printer)
-        |vpiParent:
-        \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
-        |vpiName:ovm_printer
-        |vpiClassDefn:
-        \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
       |vpiImportTypespec:
       \_VoidTypespec: 
-      |vpiImportTypespec:
-      \_ClassTypespec: (ovm_printer)
       |vpiVisibility:1
       |vpiReturn:
       \_RefTypespec: (pack::ovm_object::print)
@@ -658,20 +629,38 @@ Design: (unnamed)
       |vpiTaskFunc:
       \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
   |vpiTypedef:
+  \_ClassTypespec: (ovm_printer)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
+    |vpiName:ovm_printer
+    |vpiClassDefn:
+    \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
+  |vpiTypedef:
   \_ClassTypespec: (ovm_options_container)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
     |vpiName:ovm_options_container
     |vpiClassDefn:
     \_ClassDefn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
+  |vpiTypedef:
+  \_ClassTypespec: (ovm_object)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
+    |vpiName:ovm_object
+    |vpiClassDefn:
+    \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
   |vpiImportTypespec:
   \_ClassDefn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
   |vpiImportTypespec:
+  \_ClassTypespec: (ovm_printer)
+  |vpiImportTypespec:
   \_ClassDefn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (ovm_options_container)
   |vpiImportTypespec:
   \_ClassDefn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
   |vpiImportTypespec:
-  \_ClassTypespec: (ovm_options_container)
+  \_ClassTypespec: (ovm_object)
   |vpiImportTypespec:
   \_LogicNet: (pack::ovm_auto_options_object), line:11:23, endln:11:46
     |vpiParent:

@@ -179,6 +179,7 @@ IntVar                                                 1
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
+ModuleTypespec                                         1
 Operation                                             15
 Package                                                1
 ParamAssign                                            2
@@ -325,7 +326,7 @@ Design: (unnamed)
       |vpiName:PartInvDefault
       |vpiFullName:work@top.PartInvDefault
       |vpiActual:
-      \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
+      \_Parameter: (otp_ctrl_part_pkg::PartInvDefault), line:2:26, endln:6:49
     |vpiLhs:
     \_Parameter: (work@top.P), line:12:14, endln:12:32
   |vpiTypedef:
@@ -379,7 +380,7 @@ Design: (unnamed)
               |vpiName:PartInvDefault
               |vpiFullName:work@top.PartInvDefault
               |vpiActual:
-              \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
+              \_Parameter: (otp_ctrl_part_pkg::PartInvDefault), line:2:26, endln:6:49
             |vpiName:
             \_Identifier: ($bits)
               |vpiParent:
@@ -409,11 +410,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_part_pkg), line:10:11, endln:10:31
   |vpiImportTypespec:
@@ -436,20 +432,9 @@ Design: (unnamed)
     |vpiName:part_buf_data
     |vpiFullName:work@top.part_buf_data
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
-    |vpiName:PartInvDefault
-    |vpiFullName:work@top.PartInvDefault
-    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.part_buf_data), line:14:40, endln:14:53
-  |vpiNet:
-  \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
   |vpiPort:
   \_Port: (o), line:9:23, endln:9:24
     |vpiParent:
@@ -488,6 +473,13 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_IntVar: (work@top.o), line:9:23, endln:9:24
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

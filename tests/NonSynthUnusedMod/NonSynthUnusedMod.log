@@ -26,6 +26,22 @@ n<> u<21> t<Top_level_rule> c<1> l<1:1> el<8:1>
         n<> u<17> t<ENDMODULE> p<18> l<6:1> el<6:10>
 AST_DEBUG_END
 AST_DEBUG_BEGIN
+Count: 12
+LIB: work
+FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
+n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
+  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
+  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<3:10>
+    n<> u<9> t<Description> p<10> c<8> l<1:1> el<3:10>
+      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<3:10>
+        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
+          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+          n<top> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
+          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:11> el<1:11>
+          n<> u<5> t<Port_list> p<6> l<1:11> el<1:13>
+        n<> u<7> t<ENDMODULE> p<8> l<3:1> el<3:10>
+AST_DEBUG_END
+AST_DEBUG_BEGIN
 Count: 39
 LIB: work
 FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v
@@ -68,22 +84,6 @@ n<> u<38> t<Top_level_rule> c<1> l<1:1> el<8:1>
                                           n<b> u<16> t<STRING_CONST> p<17> l<4:13> el<4:14>
         n<> u<34> t<ENDMODULE> p<35> l<7:1> el<7:10>
 AST_DEBUG_END
-AST_DEBUG_BEGIN
-Count: 12
-LIB: work
-FILE: ${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
-n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
-  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
-  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<3:10>
-    n<> u<9> t<Description> p<10> c<8> l<1:1> el<3:10>
-      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<3:10>
-        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:14>
-          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-          n<top> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
-          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:11> el<1:11>
-          n<> u<5> t<Port_list> p<6> l<1:11> el<1:13>
-        n<> u<7> t<ENDMODULE> p<8> l<3:1> el<3:10>
-AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv:1:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v:1:1: Compile module "work@nonsynth".
@@ -96,7 +96,7 @@ Design                                                 1
 Identifier                                             3
 Initial                                                1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         3
 RefModule                                              1
 RefObj                                                 2
 SourceFile                                             3
@@ -111,11 +111,11 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v
+\_SourceFile: , file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
   |vpiParent:
   \_Design: (unnamed)
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v
+\_SourceFile: , file:${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v
   |vpiParent:
   \_Design: (unnamed)
 |vpiAllModules:
@@ -130,10 +130,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (top)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
+    \_Design: (unnamed)
     |vpiName:top
-  |vpiImportTypespec:
-  \_ModuleTypespec: (top)
+    |vpiModule:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v, line:1:1, endln:3:10
   |vpiDefName:work@dut
   |vpiRefModule:
   \_RefModule: work@top (top), line:3:4, endln:3:7
@@ -212,6 +212,22 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/top.v, line:1:1, endln:3:10
     |vpiName:work@top
   |vpiDefName:work@top
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/dut.sv, line:1:1, endln:6:10
+|vpiTypedef:
+\_ModuleTypespec: (nonsynth)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:nonsynth
+  |vpiModule:
+  \_Module: work@nonsynth (work@nonsynth), file:${SURELOG_DIR}/tests/NonSynthUnusedMod/nonsynth.v, line:1:1, endln:7:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -617,7 +617,7 @@ Begin                                                  9
 CaseItem                                               4
 CaseStmt                                               1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              24
 DelayControl                                           9
 Design                                                 1
@@ -632,6 +632,7 @@ IntTypespec                                            9
 LogicNet                                              14
 LogicTypespec                                          9
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              8
 Package                                                1
 ParamAssign                                            4
@@ -988,15 +989,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1307,13 +1299,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1362,22 +1347,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/FSMSingleAlways/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1487,26 +1544,6 @@ Design: (unnamed)
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@fsm_using_single_always.GNT1), line:25:40, endln:25:53
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -1644,8 +1681,6 @@ Design: (unnamed)
     |vpiFullName:work@fsm_using_single_always.clock
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@fsm_using_single_always.reset), line:20:15, endln:20:20
     |vpiParent:
     \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
@@ -1659,8 +1694,6 @@ Design: (unnamed)
     |vpiName:reset
     |vpiFullName:work@fsm_using_single_always.reset
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@fsm_using_single_always.req_0), line:20:21, endln:20:26
     |vpiParent:
@@ -1676,8 +1709,6 @@ Design: (unnamed)
     |vpiFullName:work@fsm_using_single_always.req_0
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@fsm_using_single_always.req_1), line:20:27, endln:20:32
     |vpiParent:
     \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
@@ -1692,8 +1723,6 @@ Design: (unnamed)
     |vpiFullName:work@fsm_using_single_always.req_1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@fsm_using_single_always.gnt_0), line:22:9, endln:22:14
     |vpiParent:
     \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
@@ -1707,8 +1736,6 @@ Design: (unnamed)
     |vpiName:gnt_0
     |vpiFullName:work@fsm_using_single_always.gnt_0
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@fsm_using_single_always.gnt_1), line:22:15, endln:22:20
     |vpiParent:
@@ -2430,6 +2457,13 @@ Design: (unnamed)
                   \_Assignment: , line:59:14, endln:59:30
                   |#1
     |vpiAlwaysType:1
+|vpiTypedef:
+\_ModuleTypespec: (fsm_using_single_always)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:fsm_using_single_always
+  |vpiModule:
+  \_Module: work@fsm_using_single_always (work@fsm_using_single_always), file:${SURELOG_DIR}/tests/FSMSingleAlways/top.sv, line:7:1, endln:63:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

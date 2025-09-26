@@ -162,7 +162,7 @@ Begin                                                  1
 BitTypespec                                            3
 BitVar                                                 1
 ClassDefn                                              2
-ClassTypespec                                          1
+ClassTypespec                                          2
 ClassVar                                               1
 Constant                                               1
 Design                                                 1
@@ -175,6 +175,7 @@ Initial                                                1
 LogicNet                                               1
 MethodFuncCall                                         2
 Module                                                 1
+ModuleTypespec                                         1
 Package                                                1
 RefObj                                                 6
 RefTypespec                                            7
@@ -393,17 +394,8 @@ Design: (unnamed)
           |vpiName:knobs.identifier
       |vpiInstance:
       \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
-    |vpiTypedef:
-    \_ClassTypespec: (m_uvm_printer_knobs)
-      |vpiParent:
-      \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
-      |vpiName:m_uvm_printer_knobs
-      |vpiClassDefn:
-      \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
     |vpiImportTypespec:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-    |vpiImportTypespec:
-    \_ClassTypespec: (m_uvm_printer_knobs)
     |vpiImportTypespec:
     \_ClassVar: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
     |vpiImportTypespec:
@@ -424,12 +416,28 @@ Design: (unnamed)
       |vpiFullName:pkg::uvm_printer::set_name_enabled
       |vpiTaskFunc:
       \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
-    |vpiClassTypespec:
-    \_ClassTypespec: (m_uvm_printer_knobs)
+  |vpiTypedef:
+  \_ClassTypespec: (m_uvm_printer_knobs)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
+    |vpiName:m_uvm_printer_knobs
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_printer)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
+    |vpiName:uvm_printer
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
   |vpiImportTypespec:
   \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
   |vpiImportTypespec:
+  \_ClassTypespec: (m_uvm_printer_knobs)
+  |vpiImportTypespec:
   \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (uvm_printer)
   |vpiDefName:pkg
   |vpiClassDefn:
   \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
@@ -532,6 +540,13 @@ Design: (unnamed)
           |vpiFullName:work@top.printer
           |vpiActual:
           \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

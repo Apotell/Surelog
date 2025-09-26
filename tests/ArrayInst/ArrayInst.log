@@ -110,7 +110,7 @@ Design                                                 1
 Identifier                                             3
 Module                                                 3
 ModuleArray                                            3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Range                                                  4
 RefTypespec                                            3
 SourceFile                                             1
@@ -136,10 +136,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (qq)
     |vpiParent:
-    \_Module: work@flop (work@flop), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:4:1, endln:6:10
+    \_Design: (unnamed)
     |vpiName:qq
-  |vpiImportTypespec:
-  \_ModuleTypespec: (qq)
+    |vpiModule:
+    \_Module: work@qq (work@qq), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:1:1, endln:2:10
   |vpiDefName:work@flop
   |vpiModuleArrays:
   \_ModuleArray: (work@qq), line:5:6, endln:5:7
@@ -197,10 +197,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (flop)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:8:1, endln:10:10
+    \_Design: (unnamed)
     |vpiName:flop
-  |vpiImportTypespec:
-  \_ModuleTypespec: (flop)
+    |vpiModule:
+    \_Module: work@flop (work@flop), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:4:1, endln:6:10
   |vpiDefName:work@top
   |vpiModuleArrays:
   \_ModuleArray: (work@flop), line:9:8, endln:9:23
@@ -290,6 +290,17 @@ Design: (unnamed)
       |vpiFullName:work@top.flop_instances2.flop
       |vpiActual:
       \_ModuleTypespec: (flop)
+|vpiTypedef:
+\_ModuleTypespec: (flop)
+|vpiTypedef:
+\_ModuleTypespec: (qq)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:8:1, endln:10:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -883,7 +883,7 @@ BitSelect                                              2
 BitTypespec                                            2
 BitVar                                                 1
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 ClockingBlock                                          1
 ClockingIODecl                                         4
 Constant                                              41
@@ -896,24 +896,25 @@ EventControl                                           3
 Function                                               9
 HierPath                                              11
 IODecl                                                38
-Identifier                                            55
+Identifier                                            52
 IfStmt                                                 2
 Initial                                                1
 IntTypespec                                            9
 Interface                                              2
-InterfaceTypespec                                     10
+InterfaceTypespec                                      7
 LogicNet                                              18
 LogicTypespec                                         35
 LogicVar                                              16
 Modport                                                4
 Module                                                 4
-ModuleTypespec                                         4
+ModuleTypespec                                         3
 Operation                                              7
 Package                                                1
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   9
 Program                                                1
+ProgramTypespec                                        1
 Range                                                 16
 RefModule                                              4
 RefObj                                                30
@@ -923,7 +924,6 @@ SysFuncCall                                            1
 Task                                                   9
 TypedefTypespec                                        2
 === UHDM Object Stats End ===
-[ERR:UH0703] ${SURELOG_DIR}/tests/InterfaceModPort/top.v:99:1: Internal Error(11) : adding wrong object type (Program) in a actual_instance group!.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1268,15 +1268,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1587,13 +1578,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1642,22 +1626,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1895,22 +1951,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiRange:
     \_Range: , line:31:10, endln:31:15
       |vpiParent:
@@ -1955,162 +1995,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-    |vpiRange:
-    \_Range: , line:35:10, endln:35:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:35:11, endln:35:12
-        |vpiParent:
-        \_Range: , line:35:10, endln:35:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:35:13, endln:35:14
-        |vpiParent:
-        \_Range: , line:35:10, endln:35:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-    |vpiRange:
-    \_Range: , line:36:10, endln:36:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:36:11, endln:36:12
-        |vpiParent:
-        \_Range: , line:36:10, endln:36:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:36:13, endln:36:14
-        |vpiParent:
-        \_Range: , line:36:10, endln:36:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-    |vpiRange:
-    \_Range: , line:37:10, endln:37:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:37:11, endln:37:12
-        |vpiParent:
-        \_Range: , line:37:10, endln:37:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:37:13, endln:37:14
-        |vpiParent:
-        \_Range: , line:37:10, endln:37:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-    |vpiRange:
-    \_Range: , line:31:10, endln:31:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:31:11, endln:31:12
-        |vpiParent:
-        \_Range: , line:31:10, endln:31:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:31:13, endln:31:14
-        |vpiParent:
-        \_Range: , line:31:10, endln:31:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-    |vpiRange:
-    \_Range: , line:32:10, endln:32:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:32:11, endln:32:12
-        |vpiParent:
-        \_Range: , line:32:10, endln:32:15
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:32:13, endln:32:14
-        |vpiParent:
-        \_Range: , line:32:10, endln:32:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -2188,19 +2072,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.clk), line:26:30, endln:26:33
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicVar: (work@mem_if.reset), line:27:16, endln:27:21
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.we_sys), line:28:16, endln:28:22
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicVar: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.ready_sys), line:30:16, endln:30:25
   |vpiImportTypespec:
@@ -2212,11 +2088,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.addr_sys), line:32:16, endln:32:24
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicVar: (work@mem_if.we_mem), line:33:16, endln:33:22
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.ce_mem), line:34:16, endln:34:22
   |vpiImportTypespec:
@@ -2232,16 +2104,12 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@mem_if.addr_mem), line:37:16, endln:37:24
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.clk), line:26:30, endln:26:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiName:clk
     |vpiFullName:work@mem_if.clk
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.reset), line:27:16, endln:27:21
     |vpiParent:
@@ -2257,8 +2125,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.reset
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.we_sys), line:28:16, endln:28:22
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
@@ -2272,8 +2138,6 @@ Design: (unnamed)
     |vpiName:we_sys
     |vpiFullName:work@mem_if.we_sys
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
     |vpiParent:
@@ -2289,8 +2153,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.cmd_valid_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.ready_sys), line:30:16, endln:30:25
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
@@ -2304,8 +2166,6 @@ Design: (unnamed)
     |vpiName:ready_sys
     |vpiFullName:work@mem_if.ready_sys
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.data_sys), line:31:16, endln:31:24
     |vpiParent:
@@ -2321,8 +2181,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.data_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.addr_sys), line:32:16, endln:32:24
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
@@ -2336,8 +2194,6 @@ Design: (unnamed)
     |vpiName:addr_sys
     |vpiFullName:work@mem_if.addr_sys
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
     |vpiParent:
@@ -2353,8 +2209,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.we_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
@@ -2368,8 +2222,6 @@ Design: (unnamed)
     |vpiName:ce_mem
     |vpiFullName:work@mem_if.ce_mem
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
     |vpiParent:
@@ -2385,8 +2237,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.datao_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_if.datai_mem), line:36:16, endln:36:25
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
@@ -2400,8 +2250,6 @@ Design: (unnamed)
     |vpiName:datai_mem
     |vpiFullName:work@mem_if.datai_mem
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
     |vpiParent:
@@ -2450,6 +2298,48 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (memory), line:48:12, endln:48:18
       |vpiName:memory
+    |vpiIODecl:
+    \_IODecl: (clk), line:48:26, endln:48:29
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:clk
+    |vpiIODecl:
+    \_IODecl: (reset), line:48:30, endln:48:35
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:reset
+    |vpiIODecl:
+    \_IODecl: (we_mem), line:48:36, endln:48:42
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:we_mem
+    |vpiIODecl:
+    \_IODecl: (ce_mem), line:48:44, endln:48:50
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:ce_mem
+    |vpiIODecl:
+    \_IODecl: (addr_mem), line:49:20, endln:49:28
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:addr_mem
+    |vpiIODecl:
+    \_IODecl: (datai_mem), line:49:30, endln:49:39
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:1
+      |vpiName:datai_mem
+    |vpiIODecl:
+    \_IODecl: (datao_mem), line:49:48, endln:49:57
+      |vpiParent:
+      \_Modport: (memory), line:48:12, endln:48:18
+      |vpiDirection:2
+      |vpiName:datao_mem
   |vpiModport:
   \_Modport: (system), line:41:12, endln:41:18
     |vpiParent:
@@ -2459,6 +2349,78 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (system), line:41:12, endln:41:18
       |vpiName:system
+    |vpiIODecl:
+    \_IODecl: (clk), line:41:26, endln:41:29
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:clk
+    |vpiIODecl:
+    \_IODecl: (reset), line:41:30, endln:41:35
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:reset
+    |vpiIODecl:
+    \_IODecl: (we_sys), line:41:36, endln:41:42
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:we_sys
+    |vpiIODecl:
+    \_IODecl: (cmd_valid_sys), line:41:44, endln:41:57
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:cmd_valid_sys
+    |vpiIODecl:
+    \_IODecl: (addr_sys), line:42:20, endln:42:28
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:addr_sys
+    |vpiIODecl:
+    \_IODecl: (datao_mem), line:42:30, endln:42:39
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:1
+      |vpiName:datao_mem
+    |vpiIODecl:
+    \_IODecl: (we_mem), line:43:27, endln:43:33
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:2
+      |vpiName:we_mem
+    |vpiIODecl:
+    \_IODecl: (ce_mem), line:43:35, endln:43:41
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:2
+      |vpiName:ce_mem
+    |vpiIODecl:
+    \_IODecl: (addr_mem), line:43:43, endln:43:51
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:2
+      |vpiName:addr_mem
+    |vpiIODecl:
+    \_IODecl: (datai_mem), line:44:20, endln:44:29
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:2
+      |vpiName:datai_mem
+    |vpiIODecl:
+    \_IODecl: (ready_sys), line:44:31, endln:44:40
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:2
+      |vpiName:ready_sys
+    |vpiIODecl:
+    \_IODecl: (data_sys), line:44:46, endln:44:54
+      |vpiParent:
+      \_Modport: (system), line:41:12, endln:41:18
+      |vpiDirection:3
+      |vpiName:data_sys
   |vpiModport:
   \_Modport: (tb), line:53:12, endln:53:14
     |vpiParent:
@@ -2468,6 +2430,48 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (tb), line:53:12, endln:53:14
       |vpiName:tb
+    |vpiIODecl:
+    \_IODecl: (clk), line:53:22, endln:53:25
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:1
+      |vpiName:clk
+    |vpiIODecl:
+    \_IODecl: (ready_sys), line:53:27, endln:53:36
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:1
+      |vpiName:ready_sys
+    |vpiIODecl:
+    \_IODecl: (reset), line:54:23, endln:54:28
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:2
+      |vpiName:reset
+    |vpiIODecl:
+    \_IODecl: (we_sys), line:54:29, endln:54:35
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:2
+      |vpiName:we_sys
+    |vpiIODecl:
+    \_IODecl: (cmd_valid_sys), line:54:37, endln:54:50
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:2
+      |vpiName:cmd_valid_sys
+    |vpiIODecl:
+    \_IODecl: (addr_sys), line:54:52, endln:54:60
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:2
+      |vpiName:addr_sys
+    |vpiIODecl:
+    \_IODecl: (data_sys), line:55:19, endln:55:27
+      |vpiParent:
+      \_Modport: (tb), line:53:12, endln:53:14
+      |vpiDirection:3
+      |vpiName:data_sys
   |vpiPort:
   \_Port: (clk), line:26:30, endln:26:33
     |vpiParent:
@@ -2752,70 +2756,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-    |vpiRange:
-    \_Range: , line:6:9, endln:6:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:6:10, endln:6:11
-        |vpiParent:
-        \_Range: , line:6:9, endln:6:14
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:12, endln:6:13
-        |vpiParent:
-        \_Range: , line:6:9, endln:6:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-    |vpiRange:
-    \_Range: , line:7:9, endln:7:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:7:10, endln:7:11
-        |vpiParent:
-        \_Range: , line:7:9, endln:7:14
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:7:12, endln:7:13
-        |vpiParent:
-        \_Range: , line:7:9, endln:7:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
   |vpiImportTypespec:
   \_BitTypespec: 
   |vpiImportTypespec:
@@ -2833,19 +2773,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@mem_interface.mem_en), line:8:15, endln:8:21
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicVar: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_interface.clock), line:1:35, endln:1:40
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiName:clock
     |vpiFullName:work@mem_interface.clock
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_interface.mem_data), line:6:15, endln:6:23
     |vpiParent:
@@ -2861,8 +2795,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_interface.mem_data
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_interface.mem_add), line:7:15, endln:7:22
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
@@ -2877,8 +2809,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_interface.mem_add
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@mem_interface.mem_en), line:8:15, endln:8:21
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
@@ -2892,8 +2822,6 @@ Design: (unnamed)
     |vpiName:mem_en
     |vpiFullName:work@mem_interface.mem_en
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
     |vpiParent:
@@ -2928,6 +2856,12 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (MEM), line:19:12, endln:19:15
       |vpiName:MEM
+    |vpiIODecl:
+    \_IODecl: (clock), line:19:34, endln:19:39
+      |vpiParent:
+      \_Modport: (MEM), line:19:12, endln:19:15
+      |vpiDirection:1
+      |vpiName:clock
   |vpiClockingBlock:
   \_ClockingBlock: (work@mem_interface.cb), line:11:4, endln:17:18
   |vpiPort:
@@ -3055,37 +2989,41 @@ Design: (unnamed)
     \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
     |vpiName:work@interface_modports
   |vpiTypedef:
-  \_ModuleTypespec: (mem_if)
+  \_InterfaceTypespec: (mem_if)
     |vpiParent:
-    \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
-    |vpiName:mem_if
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (mem_if)
+      |vpiParent:
+      \_InterfaceTypespec: (mem_if)
+      |vpiName:mem_if
+    |vpiInterface:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiTypedef:
   \_ModuleTypespec: (memory_ctrl)
     |vpiParent:
-    \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
+    \_Design: (unnamed)
     |vpiName:memory_ctrl
+    |vpiModule:
+    \_Module: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
   |vpiTypedef:
   \_ModuleTypespec: (memory_model)
     |vpiParent:
-    \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
+    \_Design: (unnamed)
     |vpiName:memory_model
+    |vpiModule:
+    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
   |vpiTypedef:
-  \_ModuleTypespec: (test)
+  \_ProgramTypespec: (test)
     |vpiParent:
-    \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
+    \_Design: (unnamed)
     |vpiName:test
+    |vpiProgram:
+    \_Program: work@test (work@test), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:99:1, endln:107:11
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (mem_if)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (memory_ctrl)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (memory_model)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (test)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -3197,6 +3135,8 @@ Design: (unnamed)
     \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
     |vpiName:U_test
     |vpiDefName:work@test
+    |vpiActual:
+    \_Program: work@test (work@test), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:99:1, endln:107:11
     |vpiPort:
     \_Port: (miff), line:122:15, endln:122:19
       |vpiParent:
@@ -3283,18 +3223,6 @@ Design: (unnamed)
     |vpiIsModPort:1
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (system), line:87:28, endln:87:34
-    |vpiParent:
-    \_Module: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
-    |vpiName:
-    \_Identifier: (system)
-      |vpiParent:
-      \_InterfaceTypespec: (system), line:87:28, endln:87:34
-      |vpiName:system
-    |vpiIsModPort:1
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiImportTypespec:
   \_EnumTypespec: , line:89:10, endln:89:43
   |vpiImportTypespec:
@@ -3313,8 +3241,6 @@ Design: (unnamed)
       \_TypedefTypespec: (fsm_t), line:89:38, endln:89:43
     |vpiName:state
     |vpiFullName:work@memory_ctrl.state
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (system), line:87:28, endln:87:34
   |vpiImportTypespec:
   \_InterfaceTypespec: (system), line:87:28, endln:87:34
   |vpiDefName:work@memory_ctrl
@@ -3411,18 +3337,6 @@ Design: (unnamed)
     |vpiIsModPort:1
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (memory), line:62:29, endln:62:35
-    |vpiParent:
-    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
-    |vpiName:
-    \_Identifier: (memory)
-      |vpiParent:
-      \_InterfaceTypespec: (memory), line:62:29, endln:62:35
-      |vpiName:memory
-    |vpiIsModPort:1
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -3441,8 +3355,6 @@ Design: (unnamed)
     |vpiName:mem
     |vpiFullName:work@memory_model.mem
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (memory), line:62:29, endln:62:35
   |vpiImportTypespec:
   \_InterfaceTypespec: (memory), line:62:29, endln:62:35
   |vpiDefName:work@memory_model
@@ -3748,9 +3660,35 @@ Design: (unnamed)
                 \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
               |vpiName:mif.datao_mem
     |vpiAlwaysType:1
+|vpiTypedef:
+\_ProgramTypespec: (test)
+|vpiTypedef:
+\_InterfaceTypespec: (mem_if)
+|vpiTypedef:
+\_InterfaceTypespec: (mem_interface)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (mem_interface)
+    |vpiParent:
+    \_InterfaceTypespec: (mem_interface)
+    |vpiName:mem_interface
+  |vpiInterface:
+  \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
+|vpiTypedef:
+\_ModuleTypespec: (interface_modports)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:interface_modports
+  |vpiModule:
+  \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
+|vpiTypedef:
+\_ModuleTypespec: (memory_ctrl)
+|vpiTypedef:
+\_ModuleTypespec: (memory_model)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 2

@@ -132,7 +132,7 @@ Identifier                                             2
 LogicNet                                               2
 LogicTypespec                                          6
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   3
@@ -191,16 +191,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -217,8 +207,6 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.a), line:1:25, endln:1:26
@@ -299,20 +287,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
+    \_Design: (unnamed)
     |vpiName:dut
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -329,8 +307,6 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.o), line:6:25, endln:6:26
@@ -368,6 +344,15 @@ Design: (unnamed)
         |vpiFullName:work@top.u_dut.a.o
         |vpiActual:
         \_LogicNet: (work@top.o), line:6:25, endln:6:26
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

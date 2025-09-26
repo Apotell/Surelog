@@ -96,10 +96,10 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               1
 Design                                                 1
-Identifier                                             6
+Identifier                                             5
 IntTypespec                                            1
 Interface                                              2
-InterfaceTypespec                                      3
+InterfaceTypespec                                      2
 LogicNet                                               1
 Module                                                 1
 ModuleTypespec                                         1
@@ -129,32 +129,6 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@tnoc_flit_if (work@tnoc_flit_if), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:6:1, endln:10:13
     |vpiName:work@tnoc_flit_if
-  |vpiTypedef:
-  \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
-    |vpiParent:
-    \_Interface: work@tnoc_flit_if (work@tnoc_flit_if), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:6:1, endln:10:13
-    |vpiName:
-    \_Identifier: (tnoc_types)
-      |vpiParent:
-      \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
-      |vpiName:tnoc_types
-    |vpiInterface:
-    \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:1:1, endln:4:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
-    |vpiParent:
-    \_Interface: work@tnoc_flit_if (work@tnoc_flit_if), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:6:1, endln:10:13
-    |vpiName:
-    \_Identifier: (tnoc_types)
-      |vpiParent:
-      \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
-      |vpiName:tnoc_types
-    |vpiInterface:
-    \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:1:1, endln:4:13
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
   |vpiImportTypespec:
   \_LogicNet: (work@tnoc_flit_if.types), line:7:15, endln:7:20
     |vpiParent:
@@ -185,7 +159,7 @@ Design: (unnamed)
       |vpiName:tnoc_types
       |vpiFullName:work@tnoc_flit_if.types.tnoc_types
       |vpiActual:
-      \_InterfaceTypespec: (tnoc_types), line:7:3, endln:7:13
+      \_InterfaceTypespec: (tnoc_types)
 |vpiAllInterfaces:
 \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:1:1, endln:4:13
   |vpiParent:
@@ -242,25 +216,29 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
     |vpiName:work@dut
   |vpiTypedef:
-  \_ModuleTypespec: (tnoc_flit_if)
+  \_InterfaceTypespec: (tnoc_flit_if)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
-    |vpiName:tnoc_flit_if
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (tnoc_flit_if)
+      |vpiParent:
+      \_InterfaceTypespec: (tnoc_flit_if)
+      |vpiName:tnoc_flit_if
+    |vpiInterface:
+    \_Interface: work@tnoc_flit_if (work@tnoc_flit_if), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:6:1, endln:10:13
   |vpiTypedef:
-  \_InterfaceTypespec: (tnoc_types), line:15:1, endln:15:11
+  \_InterfaceTypespec: (tnoc_types)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
     |vpiName:
     \_Identifier: (tnoc_types)
       |vpiParent:
-      \_InterfaceTypespec: (tnoc_types), line:15:1, endln:15:11
+      \_InterfaceTypespec: (tnoc_types)
       |vpiName:tnoc_types
     |vpiInterface:
     \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:1:1, endln:4:13
   |vpiImportTypespec:
-  \_ModuleTypespec: (tnoc_flit_if)
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (tnoc_types), line:15:1, endln:15:11
+  \_InterfaceTypespec: (tnoc_types)
   |vpiImportTypespec:
   \_LogicNet: (work@dut.i_types), line:16:20, endln:16:27
     |vpiParent:
@@ -292,6 +270,15 @@ Design: (unnamed)
         |vpiFullName:work@dut.tnoc.i_types.i_types
         |vpiActual:
         \_LogicNet: (work@dut.i_types), line:16:20, endln:16:27
+|vpiTypedef:
+\_InterfaceTypespec: (tnoc_flit_if)
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfTypeBad/dut.sv, line:13:1, endln:18:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

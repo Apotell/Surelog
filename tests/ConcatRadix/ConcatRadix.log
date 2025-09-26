@@ -90,7 +90,7 @@ GenIf                                                  1
 Identifier                                             1
 IntTypespec                                            1
 Module                                                 1
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 PackedArrayTypespec                                    1
 ParamAssign                                            1
@@ -178,6 +178,10 @@ Design: (unnamed)
       |vpiName:mybar
       |vpiDefName:work@bar
   |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
@@ -209,6 +213,8 @@ Design: (unnamed)
       |vpiActual:
       \_IntTypespec: 
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiDefName:work@test
   |vpiGenStmt:
@@ -238,8 +244,13 @@ Design: (unnamed)
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@test), line:5:19, endln:7:4
-\_weaklyReferenced:
-\_IntTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (test)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test
+  |vpiModule:
+  \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

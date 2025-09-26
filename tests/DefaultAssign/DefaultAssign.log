@@ -159,7 +159,7 @@ Identifier                                             2
 LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
@@ -262,18 +262,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
   |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-  |vpiTypedef:
   \_ModuleTypespec: (foo)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
+    \_Design: (unnamed)
     |vpiName:foo
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
+    |vpiModule:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -300,12 +294,6 @@ Design: (unnamed)
         |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (foo)
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiImportTypespec:
@@ -413,10 +401,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -433,8 +417,6 @@ Design: (unnamed)
     |vpiName:data
     |vpiFullName:work@foo.data
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@foo
   |vpiNet:
   \_LogicNet: (work@foo.data), line:1:31, endln:1:35
@@ -451,6 +433,15 @@ Design: (unnamed)
       |vpiFullName:work@foo.data
       |vpiActual:
       \_LogicTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
+|vpiTypedef:
+\_ModuleTypespec: (foo)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

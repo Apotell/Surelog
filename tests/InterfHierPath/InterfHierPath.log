@@ -99,8 +99,9 @@ Constant                                               4
 ContAssign                                             1
 Design                                                 1
 HierPath                                               1
-Identifier                                             2
+Identifier                                             3
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               2
 LogicTypespec                                          4
 LogicVar                                               1
@@ -172,36 +173,10 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
-    |vpiRange:
-    \_Range: , line:3:6, endln:3:11
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:3:7, endln:3:8
-        |vpiParent:
-        \_Range: , line:3:6, endln:3:11
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:9, endln:3:10
-        |vpiParent:
-        \_Range: , line:3:6, endln:3:11
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@logic_gate_if.a), line:3:12, endln:3:13
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@logic_gate_if.a), line:3:12, endln:3:13
     |vpiParent:
@@ -229,20 +204,20 @@ Design: (unnamed)
     \_Module: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
     |vpiName:work@or_ex
   |vpiTypedef:
-  \_ModuleTypespec: (logic_gate_if)
+  \_InterfaceTypespec: (logic_gate_if)
     |vpiParent:
-    \_Module: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-    |vpiName:logic_gate_if
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (logic_gate_if)
+      |vpiParent:
+      \_InterfaceTypespec: (logic_gate_if)
+      |vpiName:logic_gate_if
+    |vpiInterface:
+    \_Interface: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (logic_gate_if)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -259,8 +234,6 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@or_ex.a
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@or_ex
   |vpiNet:
   \_LogicNet: (work@or_ex.a), line:9:22, endln:9:23
@@ -316,6 +289,15 @@ Design: (unnamed)
     |vpiDefName:work@logic_gate_if
     |vpiActual:
     \_Interface: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
+|vpiTypedef:
+\_InterfaceTypespec: (logic_gate_if)
+|vpiTypedef:
+\_ModuleTypespec: (or_ex)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:or_ex
+  |vpiModule:
+  \_Module: work@or_ex (work@or_ex), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:8:1, endln:16:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

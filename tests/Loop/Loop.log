@@ -132,7 +132,7 @@ Design                                                 1
 GenIf                                                  1
 Identifier                                             3
 Module                                                 3
-ModuleTypespec                                         4
+ModuleTypespec                                         3
 ParamAssign                                            1
 Parameter                                              1
 RefModule                                              4
@@ -160,10 +160,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (loop)
     |vpiParent:
-    \_Module: work@loop (work@loop), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:6:1, endln:8:10
+    \_Design: (unnamed)
     |vpiName:loop
-  |vpiImportTypespec:
-  \_ModuleTypespec: (loop)
+    |vpiModule:
+    \_Module: work@loop (work@loop), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:6:1, endln:8:10
   |vpiDefName:work@loop
   |vpiRefModule:
   \_RefModule: work@loop (u1), line:7:4, endln:7:8
@@ -211,10 +211,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (test)
       |vpiParent:
-      \_Begin: (work@test), line:13:25, endln:15:7
+      \_Design: (unnamed)
       |vpiName:test
-    |vpiImportTypespec:
-    \_ModuleTypespec: (test)
+      |vpiModule:
+      \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:10:1, endln:16:10
     |vpiStmt:
     \_RefModule: work@test (u), line:14:6, endln:14:10
       |vpiParent:
@@ -249,17 +249,7 @@ Design: (unnamed)
     |vpiName:work@top
   |vpiTypedef:
   \_ModuleTypespec: (test)
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:1:1, endln:4:10
-    |vpiName:test
   |vpiTypedef:
-  \_ModuleTypespec: (loop)
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:1:1, endln:4:10
-    |vpiName:loop
-  |vpiImportTypespec:
-  \_ModuleTypespec: (test)
-  |vpiImportTypespec:
   \_ModuleTypespec: (loop)
   |vpiDefName:work@top
   |vpiRefModule:
@@ -278,6 +268,17 @@ Design: (unnamed)
     |vpiDefName:work@loop
     |vpiActual:
     \_Module: work@loop (work@loop), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:6:1, endln:8:10
+|vpiTypedef:
+\_ModuleTypespec: (loop)
+|vpiTypedef:
+\_ModuleTypespec: (test)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Loop/dut.sv, line:1:1, endln:4:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

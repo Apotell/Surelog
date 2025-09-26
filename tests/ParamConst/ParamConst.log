@@ -237,7 +237,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              24
 Design                                                 1
 EnumConst                                              6
@@ -249,7 +249,7 @@ ImportTypespec                                         1
 IntTypespec                                            9
 LogicTypespec                                          6
 Module                                                 4
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                              2
 Package                                                2
 ParamAssign                                            4
@@ -606,15 +606,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -925,13 +916,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -980,22 +964,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ParamConst/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1323,12 +1379,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (generic_flop)
     |vpiParent:
-    \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:12:1, endln:16:10
+    \_Design: (unnamed)
     |vpiName:generic_flop
+    |vpiModule:
+    \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:9:1, endln:10:10
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (generic_flop)
   |vpiDefName:work@prim_flop
   |vpiRefModule:
   \_RefModule: work@generic_flop (impl_generic), line:13:5, endln:13:17
@@ -1367,12 +1423,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_flop)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:18:1, endln:25:10
+    \_Design: (unnamed)
     |vpiName:prim_flop
+    |vpiModule:
+    \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:12:1, endln:16:10
   |vpiImportTypespec:
   \_ImportTypespec: (lc_ctrl_state_pkg), line:19:10, endln:19:30
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_flop)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_flop (state_regs), line:21:3, endln:21:12
@@ -1382,6 +1438,17 @@ Design: (unnamed)
     |vpiDefName:work@prim_flop
     |vpiActual:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:12:1, endln:16:10
+|vpiTypedef:
+\_ModuleTypespec: (generic_flop)
+|vpiTypedef:
+\_ModuleTypespec: (prim_flop)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:18:1, endln:25:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -218,7 +218,7 @@ Identifier                                             6
 ImportTypespec                                         1
 IntTypespec                                            5
 Module                                                 4
-ModuleTypespec                                         3
+ModuleTypespec                                         4
 Operation                                              7
 Package                                                1
 ParamAssign                                            5
@@ -228,8 +228,8 @@ RefObj                                                 4
 RefTypespec                                            6
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Failed to bind object: "id: 28, name: default".
-[ERR:EL0535] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Illegal implicit net "id:28, name: default".
+[ERR:UH0734] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Failed to bind object: "id: 32, name: default".
+[ERR:EL0535] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Illegal implicit net "id:32, name: default".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -386,7 +386,7 @@ Design: (unnamed)
         |vpiName:VALUE_TEMP
         |vpiFullName:work@lower.VALUE_TEMP
         |vpiActual:
-        \_LogicNet: (work@lower.VALUE_TEMP), line:11:25, endln:11:35
+        \_Parameter: (foo_pkg::VALUE_TEMP), line:2:17, endln:2:46
       |vpiOperand:
       \_Constant: , line:11:38, endln:11:39
         |vpiParent:
@@ -422,24 +422,15 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (bottom)
     |vpiParent:
-    \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
+    \_Design: (unnamed)
     |vpiName:bottom
+    |vpiModule:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:5:1, endln:7:10
   |vpiImportTypespec:
   \_ImportTypespec: (foo_pkg), line:10:10, endln:10:20
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (bottom)
-  |vpiImportTypespec:
-  \_LogicNet: (work@lower.VALUE_TEMP), line:11:25, endln:11:35
-    |vpiParent:
-    \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
-    |vpiName:VALUE_TEMP
-    |vpiFullName:work@lower.VALUE_TEMP
-    |vpiNetType:1
   |vpiDefName:work@lower
-  |vpiNet:
-  \_LogicNet: (work@lower.VALUE_TEMP), line:11:25, endln:11:35
   |vpiRefModule:
   \_RefModule: work@bottom (bottom_u), line:12:3, endln:12:9
     |vpiParent:
@@ -494,12 +485,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (upper)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:22:1, endln:25:10
+    \_Design: (unnamed)
     |vpiName:upper
+    |vpiModule:
+    \_Module: work@upper (work@upper), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:17:1, endln:20:10
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (upper)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@upper (upper_u), line:24:3, endln:24:8
@@ -555,12 +546,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (lower)
     |vpiParent:
-    \_Module: work@upper (work@upper), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:17:1, endln:20:10
+    \_Design: (unnamed)
     |vpiName:lower
+    |vpiModule:
+    \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (lower)
   |vpiDefName:work@upper
   |vpiRefModule:
   \_RefModule: work@lower (lower_u), line:19:3, endln:19:8
@@ -570,6 +561,19 @@ Design: (unnamed)
     |vpiDefName:work@lower
     |vpiActual:
     \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:9:1, endln:15:10
+|vpiTypedef:
+\_ModuleTypespec: (bottom)
+|vpiTypedef:
+\_ModuleTypespec: (lower)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv, line:22:1, endln:25:10
+|vpiTypedef:
+\_ModuleTypespec: (upper)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

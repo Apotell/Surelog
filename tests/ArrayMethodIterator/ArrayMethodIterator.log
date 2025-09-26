@@ -166,7 +166,7 @@ ArrayVar                                               2
 Assignment                                             4
 Begin                                                  1
 ClassDefn                                              3
-ClassTypespec                                          2
+ClassTypespec                                          3
 Constant                                               2
 Design                                                 1
 Function                                               1
@@ -177,6 +177,7 @@ IntVar                                                 1
 LogicNet                                               1
 MethodFuncCall                                         1
 Module                                                 1
+ModuleTypespec                                         1
 Package                                                1
 Range                                                  2
 RefObj                                                 5
@@ -187,12 +188,12 @@ TypeParameter                                          2
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 53, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:53, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 55, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:55, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Failed to bind object: "id: 56, name: get_inst_id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:56, name: get_inst_id".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 55, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:55, name: cb_".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 57, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:57, name: cb_".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Failed to bind object: "id: 58, name: get_inst_id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:58, name: get_inst_id".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -438,21 +439,7 @@ Design: (unnamed)
       |vpiStmt:
       \_Begin: (pkg::uvm_callbacks::get_all)
     |vpiTypedef:
-    \_ClassTypespec: (uvm_object)
-      |vpiParent:
-      \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
-      |vpiName:uvm_object
-      |vpiClassDefn:
-      \_ClassDefn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
-    |vpiTypedef:
     \_TypeParameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
-    |vpiTypedef:
-    \_ClassTypespec: (uvm_callback)
-      |vpiParent:
-      \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
-      |vpiName:uvm_callback
-      |vpiClassDefn:
-      \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
     |vpiTypedef:
     \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
     |vpiTypedef:
@@ -482,11 +469,7 @@ Design: (unnamed)
         |vpiActual:
         \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
     |vpiImportTypespec:
-    \_ClassTypespec: (uvm_object)
-    |vpiImportTypespec:
     \_TypeParameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
-    |vpiImportTypespec:
-    \_ClassTypespec: (uvm_callback)
     |vpiImportTypespec:
     \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
     |vpiImportTypespec:
@@ -497,16 +480,39 @@ Design: (unnamed)
     \_ArrayTypespec: 
     |vpiMethod:
     \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
-    |vpiClassTypespec:
-    \_ClassTypespec: (uvm_object)
-    |vpiClassTypespec:
-    \_ClassTypespec: (uvm_callback)
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_object)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
+    |vpiName:uvm_object
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_callback)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
+    |vpiName:uvm_callback
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_callbacks)
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
+    |vpiName:uvm_callbacks
+    |vpiClassDefn:
+    \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
   |vpiImportTypespec:
   \_ClassDefn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
   |vpiImportTypespec:
+  \_ClassTypespec: (uvm_object)
+  |vpiImportTypespec:
   \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
   |vpiImportTypespec:
+  \_ClassTypespec: (uvm_callback)
+  |vpiImportTypespec:
   \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (uvm_callbacks)
   |vpiDefName:pkg
   |vpiClassDefn:
   \_ClassDefn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
@@ -547,6 +553,13 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

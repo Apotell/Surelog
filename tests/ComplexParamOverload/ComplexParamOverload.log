@@ -408,7 +408,7 @@ Identifier                                            15
 ImportTypespec                                         3
 IntTypespec                                            6
 Module                                                 6
-ModuleTypespec                                         4
+ModuleTypespec                                         5
 Package                                                1
 ParamAssign                                            6
 Parameter                                              6
@@ -532,11 +532,6 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiSigned:1
-  |vpiTypedef:
   \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
@@ -606,11 +601,6 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiSigned:1
-  |vpiTypedef:
   \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
@@ -673,8 +663,6 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EnumTypespec: , line:10:12, endln:12:13
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
   |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::struct2_t), line:16:6, endln:16:15
@@ -682,8 +670,6 @@ Design: (unnamed)
   \_StructTypespec: , line:14:12, endln:16:5
   |vpiImportTypespec:
   \_EnumTypespec: , line:18:12, endln:20:13
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
   |vpiImportTypespec:
@@ -749,12 +735,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_pad_attr)
     |vpiParent:
-    \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:54:1, endln:63:10
+    \_Design: (unnamed)
     |vpiName:prim_pad_attr
+    |vpiModule:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:42:1, endln:52:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:55:11, endln:55:24
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_pad_attr)
   |vpiDefName:work@almost_top
   |vpiRefModule:
   \_RefModule: work@prim_pad_attr (u_prim_pad_attr), line:58:4, endln:58:17
@@ -931,14 +917,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_submodule)
     |vpiParent:
-    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:42:1, endln:52:10
+    \_Design: (unnamed)
     |vpiName:prim_submodule
+    |vpiModule:
+    \_Module: work@prim_submodule (work@prim_submodule), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:32:1, endln:40:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:43:11, endln:43:24
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_submodule)
   |vpiDefName:work@prim_pad_attr
   |vpiRefModule:
   \_RefModule: work@prim_submodule (u_submodule), line:47:4, endln:47:18
@@ -994,12 +980,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_generic)
     |vpiParent:
-    \_Module: work@prim_submodule (work@prim_submodule), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:32:1, endln:40:10
+    \_Design: (unnamed)
     |vpiName:prim_generic
+    |vpiModule:
+    \_Module: work@prim_generic (work@prim_generic), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:27:1, endln:30:10
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_generic)
   |vpiDefName:work@prim_submodule
   |vpiRefModule:
   \_RefModule: work@prim_generic (u_impl_generic), line:35:4, endln:35:16
@@ -1067,12 +1053,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (almost_top)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:65:1, endln:74:10
+    \_Design: (unnamed)
     |vpiName:almost_top
+    |vpiModule:
+    \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:54:1, endln:63:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:66:11, endln:66:24
-  |vpiImportTypespec:
-  \_ModuleTypespec: (almost_top)
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@almost_top (u_top), line:69:4, endln:69:14
@@ -1082,6 +1068,21 @@ Design: (unnamed)
     |vpiDefName:work@almost_top
     |vpiActual:
     \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:54:1, endln:63:10
+|vpiTypedef:
+\_ModuleTypespec: (almost_top)
+|vpiTypedef:
+\_ModuleTypespec: (prim_generic)
+|vpiTypedef:
+\_ModuleTypespec: (prim_pad_attr)
+|vpiTypedef:
+\_ModuleTypespec: (prim_submodule)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:65:1, endln:74:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

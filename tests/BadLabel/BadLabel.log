@@ -322,17 +322,20 @@ Begin                                                  2
 BitTypespec                                            1
 BitVar                                                 1
 ClassDefn                                              1
+ClassTypespec                                          1
 Constant                                               7
 Design                                                 1
 ForkStmt                                               4
 FuncCall                                               3
-Identifier                                            18
+Identifier                                            22
 IfStmt                                                 1
 Initial                                                3
 Interface                                              4
+InterfaceTypespec                                      4
 LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 6
+ModuleTypespec                                         4
 Operation                                              1
 Package                                                1
 RefObj                                                 2
@@ -557,10 +560,28 @@ Design: (unnamed)
   \_BitTypespec: 
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+  |vpiTypedef:
+  \_ModuleTypespec: (sub)
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+    |vpiName:sub
+    |vpiModule:
+    \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
+  |vpiTypedef:
+  \_ModuleTypespec: (sub2)
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+    |vpiName:sub2
+    |vpiModule:
+    \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
   |vpiImportTypespec:
   \_BitTypespec: 
   |vpiImportTypespec:
   \_BitVar: (work@test.err), line:27:8, endln:27:11
+  |vpiImportTypespec:
+  \_ModuleTypespec: (sub)
+  |vpiImportTypespec:
+  \_ModuleTypespec: (sub2)
   |vpiDefName:work@test
   |vpiProcess:
   \_Initial: , line:29:4, endln:32:25
@@ -706,6 +727,71 @@ Design: (unnamed)
   |vpiModules:
   \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
   |vpiEndLabel:bad_test
+|vpiTypedef:
+\_InterfaceTypespec: (intf)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (intf)
+    |vpiParent:
+    \_InterfaceTypespec: (intf)
+    |vpiName:intf
+  |vpiInterface:
+  \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:7:1, endln:8:23
+|vpiTypedef:
+\_InterfaceTypespec: (itf)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (itf)
+    |vpiParent:
+    \_InterfaceTypespec: (itf)
+    |vpiName:itf
+  |vpiInterface:
+  \_Interface: work@itf (work@itf), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:12:22, endln:20:13
+|vpiTypedef:
+\_InterfaceTypespec: (itf2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (itf2)
+    |vpiParent:
+    \_InterfaceTypespec: (itf2)
+    |vpiName:itf2
+  |vpiInterface:
+  \_Interface: work@itf2 (work@itf2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:14:25, endln:15:22
+|vpiTypedef:
+\_InterfaceTypespec: (itf3)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (itf3)
+    |vpiParent:
+    \_InterfaceTypespec: (itf3)
+    |vpiName:itf3
+  |vpiInterface:
+  \_Interface: work@itf3 (work@itf3), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:17:25, endln:18:26
+|vpiTypedef:
+\_ModuleTypespec: (block_tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:block_tb
+  |vpiModule:
+  \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:60:1, endln:66:10
+|vpiTypedef:
+\_ModuleTypespec: (test)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test
+  |vpiModule:
+  \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+|vpiTypedef:
+\_ClassTypespec: (work@c)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@c
+  |vpiClassDefn:
+  \_ClassDefn: (work@c), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:4:1, endln:5:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

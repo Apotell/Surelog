@@ -66,7 +66,7 @@ Identifier                                             2
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Port                                                   1
 Range                                                  2
 RefModule                                              1
@@ -115,30 +115,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
-    |vpiRange:
-    \_Range: , line:7:7, endln:7:12
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:7:8, endln:7:9
-        |vpiParent:
-        \_Range: , line:7:7, endln:7:12
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:7:10, endln:7:11
-        |vpiParent:
-        \_Range: , line:7:7, endln:7:12
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -154,8 +130,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:datain
     |vpiFullName:work@bus_conn.datain
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@bus_conn
   |vpiNet:
   \_LogicNet: (work@bus_conn.datain), line:7:13, endln:7:19
@@ -192,10 +166,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (bus_conn)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:2:1, endln:4:10
+    \_Design: (unnamed)
     |vpiName:bus_conn
-  |vpiImportTypespec:
-  \_ModuleTypespec: (bus_conn)
+    |vpiModule:
+    \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@bus_conn (u1), line:3:1, endln:3:9
@@ -205,6 +179,15 @@ Design: (unnamed)
     |vpiDefName:work@bus_conn
     |vpiActual:
     \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
+|vpiTypedef:
+\_ModuleTypespec: (bus_conn)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:2:1, endln:4:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

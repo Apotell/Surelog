@@ -146,7 +146,7 @@ Identifier                                             4
 ImportTypespec                                         1
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
@@ -296,7 +296,7 @@ Design: (unnamed)
       |vpiName:X
       |vpiFullName:work@aes_cipher_core.X
       |vpiActual:
-      \_LogicNet: (work@aes_cipher_core.X), line:7:38, endln:7:39
+      \_Parameter: (aes_pkg::X), line:2:31, endln:2:43
     |vpiLhs:
     \_Parameter: (work@aes_cipher_core.P), line:7:34, endln:7:39
   |vpiParamAssign:
@@ -384,16 +384,7 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@aes_cipher_core.X), line:7:38, endln:7:39
-    |vpiParent:
-    \_Module: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:5:1, endln:10:10
-    |vpiName:X
-    |vpiFullName:work@aes_cipher_core.X
-    |vpiNetType:1
   |vpiDefName:work@aes_cipher_core
-  |vpiNet:
-  \_LogicNet: (work@aes_cipher_core.X), line:7:38, endln:7:39
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:12:1, endln:14:10
   |vpiParent:
@@ -406,10 +397,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (aes_cipher_core)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:12:1, endln:14:10
+    \_Design: (unnamed)
     |vpiName:aes_cipher_core
-  |vpiImportTypespec:
-  \_ModuleTypespec: (aes_cipher_core)
+    |vpiModule:
+    \_Module: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:5:1, endln:10:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@aes_cipher_core (u_aes_cipher_core), line:13:4, endln:13:19
@@ -419,6 +410,15 @@ Design: (unnamed)
     |vpiDefName:work@aes_cipher_core
     |vpiActual:
     \_Module: work@aes_cipher_core (work@aes_cipher_core), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:5:1, endln:10:10
+|vpiTypedef:
+\_ModuleTypespec: (aes_cipher_core)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamFromPackage/dut.sv, line:12:1, endln:14:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -135,7 +135,7 @@ Identifier                                             5
 ImportTypespec                                         1
 LogicTypespec                                          1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 Package                                                1
 ParamAssign                                            2
@@ -305,7 +305,7 @@ Design: (unnamed)
       |vpiName:RndCnstLfsrPermDefault
       |vpiFullName:work@keymgr.RndCnstLfsrPermDefault
       |vpiActual:
-      \_LogicNet: (work@keymgr.RndCnstLfsrPermDefault), line:11:44, endln:11:66
+      \_Parameter: (keymgr_pkg::RndCnstLfsrPermDefault), line:3:26, endln:6:5
     |vpiLhs:
     \_Parameter: (work@keymgr.RndCnstLfsrPerm), line:11:26, endln:11:66
   |vpiTypedef:
@@ -327,16 +327,7 @@ Design: (unnamed)
       |vpiConstType:8
   |vpiImportTypespec:
   \_ImportTypespec: (keymgr_pkg), line:10:11, endln:10:24
-  |vpiImportTypespec:
-  \_LogicNet: (work@keymgr.RndCnstLfsrPermDefault), line:11:44, endln:11:66
-    |vpiParent:
-    \_Module: work@keymgr (work@keymgr), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:9:1, endln:12:10
-    |vpiName:RndCnstLfsrPermDefault
-    |vpiFullName:work@keymgr.RndCnstLfsrPermDefault
-    |vpiNetType:1
   |vpiDefName:work@keymgr
-  |vpiNet:
-  \_LogicNet: (work@keymgr.RndCnstLfsrPermDefault), line:11:44, endln:11:66
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:14:1, endln:18:10
   |vpiParent:
@@ -349,10 +340,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (keymgr)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:14:1, endln:18:10
+    \_Design: (unnamed)
     |vpiName:keymgr
-  |vpiImportTypespec:
-  \_ModuleTypespec: (keymgr)
+    |vpiModule:
+    \_Module: work@keymgr (work@keymgr), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:9:1, endln:12:10
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@keymgr (u_keymgr), line:15:4, endln:15:10
@@ -362,6 +353,15 @@ Design: (unnamed)
     |vpiDefName:work@keymgr
     |vpiActual:
     \_Module: work@keymgr (work@keymgr), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:9:1, endln:12:10
+|vpiTypedef:
+\_ModuleTypespec: (keymgr)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload2/dut.sv, line:14:1, endln:18:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

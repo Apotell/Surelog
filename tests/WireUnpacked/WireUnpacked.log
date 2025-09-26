@@ -93,6 +93,7 @@ Identifier                                             1
 IndexedPartSelect                                      1
 LogicTypespec                                          1
 Module                                                 1
+ModuleTypespec                                         1
 Range                                                  2
 RefTypespec                                            2
 SourceFile                                             1
@@ -222,11 +223,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiIndex:
-      \_IndexedPartSelect: read_buf (work@dut.read_buf), line:3:20, endln:3:24
+      \_IndexedPartSelect: read_buf (work@dut.read_buf.read_buf), line:3:20, endln:3:24
         |vpiParent:
-        \_ContAssign: , line:3:8, endln:3:32
+        \_VarSelect: (work@dut.read_buf), line:3:8, endln:3:25
         |vpiName:read_buf
-        |vpiFullName:work@dut.read_buf
+        |vpiFullName:work@dut.read_buf.read_buf
         |vpiDefName:read_buf
         |vpiActual:
         \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
@@ -235,7 +236,7 @@ Design: (unnamed)
         |vpiBaseExpr:
         \_Constant: , line:3:20, endln:3:21
           |vpiParent:
-          \_IndexedPartSelect: read_buf (work@dut.read_buf), line:3:20, endln:3:24
+          \_IndexedPartSelect: read_buf (work@dut.read_buf.read_buf), line:3:20, endln:3:24
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -243,11 +244,18 @@ Design: (unnamed)
         |vpiWidthExpr:
         \_Constant: , line:3:23, endln:3:24
           |vpiParent:
-          \_IndexedPartSelect: read_buf (work@dut.read_buf), line:3:20, endln:3:24
+          \_IndexedPartSelect: read_buf (work@dut.read_buf.read_buf), line:3:20, endln:3:24
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
           |vpiConstType:9
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

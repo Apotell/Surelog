@@ -192,7 +192,7 @@ ArrayVar                                               1
 Assignment                                             1
 BitTypespec                                            4
 ClassDefn                                              2
-ClassTypespec                                          1
+ClassTypespec                                          2
 Constant                                              11
 Design                                                 1
 Function                                               4
@@ -209,8 +209,8 @@ RefTypespec                                           14
 SourceFile                                             1
 UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Failed to bind object: "id: 18, name: top".
-[ERR:EL0535] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Illegal implicit net "id:18, name: top".
+[ERR:UH0734] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Failed to bind object: "id: 20, name: top".
+[ERR:EL0535] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Illegal implicit net "id:20, name: top".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectHier/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -421,10 +421,6 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
     |vpiTypedef:
-    \_BitTypespec: 
-      |vpiParent:
-      \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
-    |vpiTypedef:
     \_PackedArrayTypespec: 
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
@@ -469,8 +465,6 @@ Design: (unnamed)
     \_PackedArrayTypespec: 
     |vpiImportTypespec:
     \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
-    |vpiImportTypespec:
-    \_BitTypespec: 
     |vpiImportTypespec:
     \_PackedArrayTypespec: 
     |vpiImportTypespec:
@@ -667,13 +661,6 @@ Design: (unnamed)
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiName:uvm_mem_mam_cfg
     |vpiTypedef:
-    \_ClassTypespec: (uvm_mem_region)
-      |vpiParent:
-      \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
-      |vpiName:uvm_mem_region
-      |vpiClassDefn:
-      \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
-    |vpiTypedef:
     \_ArrayTypespec: 
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
@@ -692,8 +679,6 @@ Design: (unnamed)
     \_UnsupportedTypespec: (uvm_mem_mam_cfg)
     |vpiImportTypespec:
     \_UnsupportedTypespec: (uvm_mem_mam_cfg)
-    |vpiImportTypespec:
-    \_ClassTypespec: (uvm_mem_region)
     |vpiImportTypespec:
     \_ArrayTypespec: 
     |vpiImportTypespec:
@@ -716,8 +701,20 @@ Design: (unnamed)
       |vpiFullName:pack::uvm_mem_mam::reconfigure
       |vpiTaskFunc:
       \_Function: (pack::uvm_mem_mam::reconfigure), line:37:1, endln:37:73
-    |vpiClassTypespec:
-    \_ClassTypespec: (uvm_mem_region)
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_mem_region)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
+    |vpiName:uvm_mem_region
+    |vpiClassDefn:
+    \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
+  |vpiTypedef:
+  \_ClassTypespec: (uvm_mem_mam)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
+    |vpiName:uvm_mem_mam
+    |vpiClassDefn:
+    \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
   |vpiTypedef:
   \_UnsupportedTypespec: (uvm_mem_mam_cfg)
     |vpiParent:
@@ -731,7 +728,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
   |vpiImportTypespec:
+  \_ClassTypespec: (uvm_mem_region)
+  |vpiImportTypespec:
   \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (uvm_mem_mam)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (uvm_mem_mam_cfg)
   |vpiImportTypespec:

@@ -586,7 +586,7 @@ Assignment                                             2
 Begin                                                  4
 BitTypespec                                            6
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              36
 ContAssign                                             1
 Design                                                 1
@@ -601,7 +601,7 @@ IndexedPartSelect                                      2
 IntTypespec                                           14
 LogicTypespec                                          1
 Module                                                 4
-ModuleTypespec                                         3
+ModuleTypespec                                         4
 Operation                                             15
 Package                                                1
 PackedArrayTypespec                                    6
@@ -961,15 +961,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1280,13 +1271,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1335,22 +1319,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1572,10 +1628,10 @@ Design: (unnamed)
       |vpiTypedef:
       \_ModuleTypespec: (fifo_sync)
         |vpiParent:
-        \_Begin: (work@all_zero.gen_dfifo), line:60:36, endln:64:6
+        \_Design: (unnamed)
         |vpiName:fifo_sync
-      |vpiImportTypespec:
-      \_ModuleTypespec: (fifo_sync)
+        |vpiModule:
+        \_Module: work@fifo_sync (work@fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:24:1, endln:33:10
       |vpiStmt:
       \_RefModule: work@fifo_sync (fifo_d), line:61:5, endln:61:14
         |vpiParent:
@@ -1690,10 +1746,6 @@ Design: (unnamed)
       |vpiActual:
       \_BitTypespec: 
   |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
-  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
@@ -1724,10 +1776,6 @@ Design: (unnamed)
       |vpiFullName:work@all_zero
       |vpiActual:
       \_BitTypespec: 
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -1766,11 +1814,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
-  \_BitTypespec: 
-  |vpiImportTypespec:
   \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiDefName:work@all_zero
@@ -1818,12 +1862,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_fifo_sync)
     |vpiParent:
-    \_Module: work@fifo_sync (work@fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:24:1, endln:33:10
+    \_Design: (unnamed)
     |vpiName:prim_fifo_sync
+    |vpiModule:
+    \_Module: work@prim_fifo_sync (work@prim_fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:2:1, endln:21:10
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_fifo_sync)
   |vpiDefName:work@fifo_sync
   |vpiRefModule:
   \_RefModule: work@prim_fifo_sync (reqfifo), line:30:3, endln:30:17
@@ -1987,12 +2031,6 @@ Design: (unnamed)
   \_IntTypespec: 
     |vpiParent:
     \_Module: work@prim_fifo_sync (work@prim_fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:2:1, endln:21:10
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@prim_fifo_sync (work@prim_fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:2:1, endln:21:10
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiDefName:work@prim_fifo_sync
@@ -2229,11 +2267,6 @@ Design: (unnamed)
       |vpiFullName:work@socket_1n.gen_dfifo
       |vpiTypedef:
       \_ModuleTypespec: (fifo_sync)
-        |vpiParent:
-        \_Begin: (work@socket_1n.gen_dfifo), line:44:36, endln:48:6
-        |vpiName:fifo_sync
-      |vpiImportTypespec:
-      \_ModuleTypespec: (fifo_sync)
       |vpiStmt:
       \_RefModule: work@fifo_sync (fifo_d), line:45:5, endln:45:14
         |vpiParent:
@@ -2348,10 +2381,6 @@ Design: (unnamed)
       |vpiActual:
       \_BitTypespec: 
   |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
-  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
@@ -2382,10 +2411,6 @@ Design: (unnamed)
       |vpiFullName:work@socket_1n
       |vpiActual:
       \_BitTypespec: 
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -2424,14 +2449,28 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
-  \_BitTypespec: 
-  |vpiImportTypespec:
   \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiDefName:work@socket_1n
+|vpiTypedef:
+\_ModuleTypespec: (all_zero)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:all_zero
+  |vpiModule:
+  \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
+|vpiTypedef:
+\_ModuleTypespec: (fifo_sync)
+|vpiTypedef:
+\_ModuleTypespec: (prim_fifo_sync)
+|vpiTypedef:
+\_ModuleTypespec: (socket_1n)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:socket_1n
+  |vpiModule:
+  \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

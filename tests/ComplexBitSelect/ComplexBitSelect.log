@@ -191,7 +191,7 @@ Assignment                                             1
 Begin                                                  2
 BitSelect                                              2
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              26
 ContAssign                                             1
 Design                                                 1
@@ -206,6 +206,7 @@ ImportTypespec                                         1
 IntTypespec                                           13
 LogicTypespec                                          1
 Module                                                 2
+ModuleTypespec                                         1
 Operation                                              6
 Package                                                2
 ParamAssign                                            4
@@ -562,15 +563,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -881,13 +873,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -936,22 +921,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1121,19 +1178,12 @@ Design: (unnamed)
       |vpiFullName:flash_ctrl_pkg
       |vpiActual:
       \_IntTypespec: 
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-    |vpiSigned:1
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:flash_ctrl_pkg
 |vpiAllModules:
 \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
@@ -1253,13 +1303,6 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.i
         |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize), line:19:25, endln:19:34
-        |vpiParent:
-        \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
-        |vpiName:InfoTypeSize
-        |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize
-        |vpiNetType:1
       |vpiStmt:
       \_GenIf: , line:19:5, endln:21:8
         |vpiParent:
@@ -1284,7 +1327,7 @@ Design: (unnamed)
             |vpiName:InfoTypeSize
             |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize
             |vpiActual:
-            \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize), line:19:25, endln:19:34
+            \_Parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
             |vpiIndex:
             \_RefObj: (work@flash_ctrl_info_cfg.gen_info_priv.InfoSel), line:19:26, endln:19:33
               |vpiParent:
@@ -1303,13 +1346,6 @@ Design: (unnamed)
       \_GenFor: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
       |vpiName:i
       |vpiFullName:work@flash_ctrl_info_cfg.i
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_LogicNet: (work@flash_ctrl_info_cfg.InfosPerBank), line:16:25, endln:16:37
-      |vpiParent:
-      \_GenFor: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
-      |vpiName:InfosPerBank
-      |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
       |vpiNetType:1
     |vpiImportTypespec:
     \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
@@ -1352,7 +1388,7 @@ Design: (unnamed)
         |vpiName:InfosPerBank
         |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
         |vpiActual:
-        \_LogicNet: (work@flash_ctrl_info_cfg.InfosPerBank), line:16:25, endln:16:37
+        \_Parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
     |vpiForIncStmt:
     \_Operation: , line:16:39, endln:16:42
       |vpiParent:
@@ -1395,6 +1431,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiDefName:work@flash_ctrl_info_cfg
+|vpiTypedef:
+\_ModuleTypespec: (flash_ctrl_info_cfg)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:flash_ctrl_info_cfg
+  |vpiModule:
+  \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

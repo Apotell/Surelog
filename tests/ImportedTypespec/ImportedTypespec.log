@@ -112,6 +112,7 @@ IntTypespec                                            3
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 2
+ModuleTypespec                                         1
 Operation                                              1
 Package                                                1
 ParamAssign                                            1
@@ -281,29 +282,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (spi_device_pkg), line:7:11, endln:7:28
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:6:23, endln:6:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.sram_addr_t), line:9:21, endln:9:32
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
-    |vpiName:sram_addr_t
-    |vpiFullName:work@top.sram_addr_t
-    |vpiNetType:1
   |vpiDefName:work@top
-  |vpiNet:
-  \_LogicNet: (work@top.sram_addr_t), line:9:21, endln:9:32
   |vpiPort:
   \_Port: (o), line:6:23, endln:6:24
     |vpiParent:
@@ -326,13 +311,13 @@ Design: (unnamed)
       |vpiParent:
       \_ContAssign: , line:9:11, endln:9:33
       |vpiArgument:
-      \_RefObj: (work@top.sram_addr_t), line:9:21, endln:9:32
+      \_RefTypespec: (work@top.sram_addr_t), line:9:21, endln:9:32
         |vpiParent:
         \_SysFuncCall: ($bits), line:9:21, endln:9:32
         |vpiName:sram_addr_t
         |vpiFullName:work@top.sram_addr_t
         |vpiActual:
-        \_LogicNet: (work@top.sram_addr_t), line:9:21, endln:9:32
+        \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
       |vpiName:
       \_Identifier: ($bits)
         |vpiParent:
@@ -346,6 +331,13 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_IntVar: (work@top.o), line:6:23, endln:6:24
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

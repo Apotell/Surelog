@@ -197,7 +197,7 @@ Identifier                                             4
 LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              4
 Port                                                   3
 RefModule                                              1
@@ -229,10 +229,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@aes_sbox (work@aes_sbox), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:1:1, endln:6:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@aes_sbox (work@aes_sbox), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:1:1, endln:6:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -249,8 +245,6 @@ Design: (unnamed)
     |vpiName:data_i
     |vpiFullName:work@aes_sbox.data_i
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@aes_sbox
   |vpiNet:
   \_LogicNet: (work@aes_sbox.data_i), line:3:32, endln:3:38
@@ -321,10 +315,10 @@ Design: (unnamed)
           |vpiTypedef:
           \_ModuleTypespec: (aes_sbox)
             |vpiParent:
-            \_Begin: (work@aes_sub_bytes.gen_sbox_j.gen_sbox_i), line:15:36, endln:20:8
+            \_Design: (unnamed)
             |vpiName:aes_sbox
-          |vpiImportTypespec:
-          \_ModuleTypespec: (aes_sbox)
+            |vpiModule:
+            \_Module: work@aes_sbox (work@aes_sbox), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:1:1, endln:6:10
           |vpiImportTypespec:
           \_LogicNet: (work@aes_sub_bytes.gen_sbox_j.gen_sbox_i.i), line:18:26, endln:18:27
             |vpiParent:
@@ -514,10 +508,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@aes_sub_bytes (work@aes_sub_bytes), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:8:1, endln:23:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@aes_sub_bytes (work@aes_sub_bytes), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:8:1, endln:23:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -534,8 +524,6 @@ Design: (unnamed)
     |vpiName:data_i
     |vpiFullName:work@aes_sub_bytes.data_i
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@aes_sub_bytes
   |vpiNet:
   \_LogicNet: (work@aes_sub_bytes.data_i), line:10:32, endln:10:38
@@ -552,6 +540,15 @@ Design: (unnamed)
       |vpiFullName:work@aes_sub_bytes.data_i
       |vpiActual:
       \_LogicTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (aes_sbox)
+|vpiTypedef:
+\_ModuleTypespec: (aes_sub_bytes)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:aes_sub_bytes
+  |vpiModule:
+  \_Module: work@aes_sub_bytes (work@aes_sub_bytes), file:${SURELOG_DIR}/tests/VarSelectGenStmt/dut.sv, line:8:1, endln:23:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

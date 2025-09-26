@@ -207,7 +207,7 @@ Identifier                                             6
 ImportTypespec                                         1
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 Operation                                              3
 Package                                                1
 ParamAssign                                            3
@@ -347,24 +347,12 @@ Design: (unnamed)
   \_StringTypespec: 
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
   |vpiImportTypespec:
   \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
   |vpiImportTypespec:
   \_StructTypespec: , line:2:9, endln:4:2
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiDefName:aes_pkg
@@ -397,12 +385,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (shadow)
     |vpiParent:
-    \_Module: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
+    \_Design: (unnamed)
     |vpiName:shadow
+    |vpiModule:
+    \_Module: work@shadow (work@shadow), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:16:1, endln:20:10
   |vpiImportTypespec:
   \_ImportTypespec: (aes_pkg), line:23:10, endln:23:20
-  |vpiImportTypespec:
-  \_ModuleTypespec: (shadow)
   |vpiImportTypespec:
   \_StructNet: (work@aes_core.ctrl_q), line:24:14, endln:24:20
     |vpiParent:
@@ -492,12 +480,12 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (subreg)
     |vpiParent:
-    \_Module: work@shadow (work@shadow), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:16:1, endln:20:10
+    \_Design: (unnamed)
     |vpiName:subreg
+    |vpiModule:
+    \_Module: work@subreg (work@subreg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:11:1, endln:14:10
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (subreg)
   |vpiDefName:work@shadow
   |vpiRefModule:
   \_RefModule: work@subreg (commit_reg), line:19:3, endln:19:9
@@ -571,6 +559,17 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiDefName:work@subreg
+|vpiTypedef:
+\_ModuleTypespec: (aes_core)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:aes_core
+  |vpiModule:
+  \_Module: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
+|vpiTypedef:
+\_ModuleTypespec: (shadow)
+|vpiTypedef:
+\_ModuleTypespec: (subreg)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

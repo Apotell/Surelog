@@ -194,6 +194,7 @@ AST_DEBUG_END
 Assignment                                             1
 BitTypespec                                            1
 ClassDefn                                              3
+ClassTypespec                                          3
 Constant                                               4
 Design                                                 1
 Function                                               2
@@ -217,16 +218,16 @@ SourceFile                                             1
 Task                                                   1
 TypeParameter                                          3
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Failed to bind object: "id: 22, name: name".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Illegal implicit net "id:22, name: name".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Failed to bind object: "id: 23, name: parent".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Illegal implicit net "id:23, name: parent".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Failed to bind object: "id: 24, name: UVM_PORT".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Illegal implicit net "id:24, name: UVM_PORT".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Failed to bind object: "id: 25, name: min_size".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Illegal implicit net "id:25, name: min_size".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Failed to bind object: "id: 26, name: max_size".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Illegal implicit net "id:26, name: max_size".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Failed to bind object: "id: 25, name: name".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Illegal implicit net "id:25, name: name".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Failed to bind object: "id: 26, name: parent".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Illegal implicit net "id:26, name: parent".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Failed to bind object: "id: 27, name: UVM_PORT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Illegal implicit net "id:27, name: UVM_PORT".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Failed to bind object: "id: 28, name: min_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Illegal implicit net "id:28, name: min_size".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Failed to bind object: "id: 29, name: max_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Illegal implicit net "id:29, name: max_size".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncTask/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -621,11 +622,6 @@ Design: (unnamed)
       |vpiSigned:1
     |vpiTypedef:
     \_TypeParameter: (pack::C::T), line:12:16, endln:12:17
-    |vpiTypedef:
-    \_IntTypespec: 
-      |vpiParent:
-      \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
-      |vpiSigned:1
     |vpiImportTypespec:
     \_IntTypespec: 
     |vpiImportTypespec:
@@ -637,8 +633,6 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Function: (pack::C::get), line:22:3, endln:24:14
     |vpiImportTypespec:
-    \_IntTypespec: 
-    |vpiImportTypespec:
     \_IntVar: (pack::C::x), line:13:7, endln:13:8
     |vpiMethod:
     \_Function: (pack::C::new), line:15:3, endln:17:14
@@ -646,12 +640,39 @@ Design: (unnamed)
     \_Task: (pack::C::set), line:19:3, endln:21:10
     |vpiMethod:
     \_Function: (pack::C::get), line:22:3, endln:24:14
+  |vpiTypedef:
+  \_ClassTypespec: (Vector)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
+    |vpiName:Vector
+    |vpiClassDefn:
+    \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
+  |vpiTypedef:
+  \_ClassTypespec: (ovm_queue)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
+    |vpiName:ovm_queue
+    |vpiClassDefn:
+    \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
+  |vpiTypedef:
+  \_ClassTypespec: (C)
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:1:1, endln:27:11
+    |vpiName:C
+    |vpiClassDefn:
+    \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
   |vpiImportTypespec:
   \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
   |vpiImportTypespec:
+  \_ClassTypespec: (Vector)
+  |vpiImportTypespec:
   \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
   |vpiImportTypespec:
+  \_ClassTypespec: (ovm_queue)
+  |vpiImportTypespec:
   \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
+  |vpiImportTypespec:
+  \_ClassTypespec: (C)
   |vpiDefName:pack
   |vpiClassDefn:
   \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9

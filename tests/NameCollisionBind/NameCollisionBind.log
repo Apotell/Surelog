@@ -103,13 +103,14 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 IODecl                                                 1
-Identifier                                             8
+Identifier                                             7
 IntTypespec                                            1
 Interface                                              1
-InterfaceTypespec                                      3
+InterfaceTypespec                                      2
 LogicNet                                               1
 Modport                                                1
 Module                                                 1
+ModuleTypespec                                         1
 Port                                                   1
 RefObj                                                 4
 RefTypespec                                            5
@@ -173,6 +174,12 @@ Design: (unnamed)
       |vpiParent:
       \_Modport: (CSR), line:14:13, endln:14:16
       |vpiName:CSR
+    |vpiIODecl:
+    \_IODecl: (perfCounter), line:16:5, endln:16:16
+      |vpiParent:
+      \_Modport: (CSR), line:14:13, endln:14:16
+      |vpiDirection:1
+      |vpiName:perfCounter
 |vpiAllModules:
 \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
   |vpiParent:
@@ -183,13 +190,13 @@ Design: (unnamed)
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:work@CSR_Unit
   |vpiTypedef:
-  \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
+  \_InterfaceTypespec: (PerformanceCounterIF)
     |vpiParent:
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:
     \_Identifier: (PerformanceCounterIF)
       |vpiParent:
-      \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
+      \_InterfaceTypespec: (PerformanceCounterIF)
       |vpiName:PerformanceCounterIF
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
@@ -206,7 +213,7 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiImportTypespec:
-  \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
+  \_InterfaceTypespec: (PerformanceCounterIF)
   |vpiImportTypespec:
   \_InterfaceTypespec: (CSR), line:21:26, endln:21:29
   |vpiImportTypespec:
@@ -327,6 +334,13 @@ Design: (unnamed)
       |vpiFullName:numLoadMiss.DataPath
       |vpiActual:
       \_TypedefTypespec: (DataPath), line:2:13, endln:2:21
+|vpiTypedef:
+\_ModuleTypespec: (CSR_Unit)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:CSR_Unit
+  |vpiModule:
+  \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

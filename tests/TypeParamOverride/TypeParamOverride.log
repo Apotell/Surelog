@@ -139,7 +139,7 @@ Identifier                                             5
 LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Package                                                1
 RefModule                                              1
 RefObj                                                 2
@@ -217,16 +217,10 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Package: ariane_axi_soc (ariane_axi_soc), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Package: ariane_axi_soc (ariane_axi_soc), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
   |vpiImportTypespec:
   \_TypedefTypespec: (ariane_axi_soc::resp_slv_t), line:6:3, endln:6:13
   |vpiImportTypespec:
   \_StructTypespec: , line:3:9, endln:6:2
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiDefName:ariane_axi_soc
@@ -242,10 +236,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (axi_err_slv)
     |vpiParent:
-    \_Module: work@ariane_testharness (work@ariane_testharness), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:23:1, endln:31:10
+    \_Design: (unnamed)
     |vpiName:axi_err_slv
-  |vpiImportTypespec:
-  \_ModuleTypespec: (axi_err_slv)
+    |vpiModule:
+    \_Module: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
   |vpiDefName:work@ariane_testharness
   |vpiRefModule:
   \_RefModule: work@axi_err_slv (i_gpio_err_slv), line:25:1, endln:25:12
@@ -359,6 +353,15 @@ Design: (unnamed)
             \_LogicNet: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
           |vpiName:err_resp.w_ready
     |vpiAlwaysType:2
+|vpiTypedef:
+\_ModuleTypespec: (ariane_testharness)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:ariane_testharness
+  |vpiModule:
+  \_Module: work@ariane_testharness (work@ariane_testharness), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:23:1, endln:31:10
+|vpiTypedef:
+\_ModuleTypespec: (axi_err_slv)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

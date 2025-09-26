@@ -243,6 +243,7 @@ IntTypespec                                            1
 LogicNet                                               4
 LogicTypespec                                          7
 Module                                                 2
+ModuleTypespec                                         1
 Operation                                              4
 Package                                                1
 ParamAssign                                            1
@@ -441,23 +442,6 @@ Design: (unnamed)
       |STRING:OPCODE_LOAD
       |vpiConstType:8
   |vpiTypedef:
-  \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
-    |vpiName:
-    \_Identifier: (my_pkg)
-      |vpiParent:
-      \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
-      |vpiName:my_pkg
-    |vpiImportTypespecItem:
-    \_Constant: , line:13:36, endln:13:47
-      |vpiParent:
-      \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
-      |vpiDecompile:OPCODE_LOAD
-      |vpiSize:88
-      |STRING:OPCODE_LOAD
-      |vpiConstType:8
-  |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
@@ -553,60 +537,10 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
-    |vpiRange:
-    \_Range: , line:14:9, endln:14:14
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:14:10, endln:14:11
-        |vpiParent:
-        \_Range: , line:14:9, endln:14:14
-        |vpiDecompile:5
-        |vpiSize:64
-        |UINT:5
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:14:12, endln:14:13
-        |vpiParent:
-        \_Range: , line:14:9, endln:14:14
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
-    |vpiRange:
-    \_Range: , line:15:10, endln:15:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:15:11, endln:15:12
-        |vpiParent:
-        \_Range: , line:15:10, endln:15:15
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:15:13, endln:15:14
-        |vpiParent:
-        \_Range: , line:15:10, endln:15:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:12:10, endln:12:19
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:10, endln:13:26
-  |vpiImportTypespec:
-  \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
   |vpiImportTypespec:
@@ -673,17 +607,6 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@dut.b
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicNet: (work@dut.OPCODE_LOAD), line:19:23, endln:19:34
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
-    |vpiName:OPCODE_LOAD
-    |vpiFullName:work@dut.OPCODE_LOAD
-    |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.a), line:11:13, endln:11:14
@@ -693,8 +616,6 @@ Design: (unnamed)
   \_LogicNet: (work@dut.a), line:16:14, endln:16:15
   |vpiNet:
   \_LogicNet: (work@dut.b), line:17:13, endln:17:14
-  |vpiNet:
-  \_LogicNet: (work@dut.OPCODE_LOAD), line:19:23, endln:19:34
   |vpiPort:
   \_Port: (a), line:11:13, endln:11:14
     |vpiParent:
@@ -768,7 +689,7 @@ Design: (unnamed)
             |vpiName:OPCODE_LOAD
             |vpiFullName:work@dut.OPCODE_LOAD
             |vpiActual:
-            \_LogicNet: (work@dut.OPCODE_LOAD), line:19:23, endln:19:34
+            \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
     |vpiLhs:
     \_RefObj: (work@dut.b), line:18:10, endln:18:11
       |vpiParent:
@@ -777,6 +698,13 @@ Design: (unnamed)
       |vpiFullName:work@dut.b
       |vpiActual:
       \_LogicNet: (work@dut.b), line:11:16, endln:11:17
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

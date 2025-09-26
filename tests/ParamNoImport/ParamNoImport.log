@@ -127,7 +127,7 @@ Design                                                 1
 Identifier                                             4
 LogicTypespec                                          1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              3
 Package                                                1
 ParamAssign                                            2
@@ -266,24 +266,12 @@ Design: (unnamed)
   \_StringTypespec: 
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiTypedef:
-  \_StringTypespec: 
-    |vpiParent:
-    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
   |vpiImportTypespec:
   \_StructTypespec: , line:6:9, endln:8:2
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
-  |vpiImportTypespec:
-  \_StringTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiDefName:pkg
@@ -299,10 +287,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (test)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
+    \_Design: (unnamed)
     |vpiName:test
-  |vpiImportTypespec:
-  \_ModuleTypespec: (test)
+    |vpiModule:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
   |vpiDefName:work@dut
   |vpiRefModule:
   \_RefModule: work@test (t), line:16:1, endln:16:5
@@ -343,6 +331,15 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
   |vpiDefName:work@test
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
+|vpiTypedef:
+\_ModuleTypespec: (test)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -108,9 +108,10 @@ BitVar                                                 1
 Constant                                               2
 ContAssign                                             1
 Design                                                 1
-Identifier                                             2
+Identifier                                             3
 Initial                                                1
 Interface                                              1
+InterfaceTypespec                                      1
 LogicNet                                               2
 LogicTypespec                                          2
 LogicVar                                               1
@@ -179,14 +180,6 @@ Design: (unnamed)
   \_BitTypespec: 
     |vpiParent:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -195,8 +188,6 @@ Design: (unnamed)
   \_BitTypespec: 
   |vpiImportTypespec:
   \_BitVar: (work@sw_test_status_if.sw_test_done), line:5:7, endln:5:19
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@sw_test_status_if.data_valid), line:2:9, endln:2:19
     |vpiParent:
@@ -211,8 +202,6 @@ Design: (unnamed)
     |vpiName:data_valid
     |vpiFullName:work@sw_test_status_if.data_valid
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@sw_test_status_if.sw_test_done), line:5:7, endln:5:19
     |vpiParent:
@@ -292,12 +281,16 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
     |vpiName:work@top
   |vpiTypedef:
-  \_ModuleTypespec: (sw_test_status_if)
+  \_InterfaceTypespec: (sw_test_status_if)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
-    |vpiName:sw_test_status_if
-  |vpiImportTypespec:
-  \_ModuleTypespec: (sw_test_status_if)
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (sw_test_status_if)
+      |vpiParent:
+      \_InterfaceTypespec: (sw_test_status_if)
+      |vpiName:sw_test_status_if
+    |vpiInterface:
+    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@sw_test_status_if (u_sw), line:14:4, endln:14:21
@@ -307,6 +300,15 @@ Design: (unnamed)
     |vpiDefName:work@sw_test_status_if
     |vpiActual:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
+|vpiTypedef:
+\_InterfaceTypespec: (sw_test_status_if)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:13:1, endln:15:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

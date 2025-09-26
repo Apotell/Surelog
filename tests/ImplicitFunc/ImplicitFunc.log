@@ -55,6 +55,7 @@ Function                                               2
 Identifier                                             3
 LogicTypespec                                          4
 Module                                                 1
+ModuleTypespec                                         1
 Range                                                  2
 RefTypespec                                            4
 SourceFile                                             1
@@ -111,32 +112,6 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-    |vpiTypedef:
-    \_LogicTypespec: 
-      |vpiParent:
-      \_Function: (work@dut.foo), line:3:4, endln:5:15
-      |vpiRange:
-      \_Range: , line:3:13, endln:3:18
-        |vpiParent:
-        \_LogicTypespec: 
-        |vpiLeftRange:
-        \_Constant: , line:3:14, endln:3:15
-          |vpiParent:
-          \_Range: , line:3:13, endln:3:18
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiRightRange:
-        \_Constant: , line:3:16, endln:3:17
-          |vpiParent:
-          \_Range: , line:3:13, endln:3:18
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-    |vpiImportTypespec:
-    \_LogicTypespec: 
     |vpiImportTypespec:
     \_LogicTypespec: 
     |vpiVisibility:1
@@ -161,12 +136,6 @@ Design: (unnamed)
     \_LogicTypespec: 
       |vpiParent:
       \_Function: (work@dut.bar), line:7:4, endln:9:15
-    |vpiTypedef:
-    \_LogicTypespec: 
-      |vpiParent:
-      \_Function: (work@dut.bar), line:7:4, endln:9:15
-    |vpiImportTypespec:
-    \_LogicTypespec: 
     |vpiImportTypespec:
     \_LogicTypespec: 
     |vpiVisibility:1
@@ -186,6 +155,13 @@ Design: (unnamed)
   \_Function: (work@dut.foo), line:3:4, endln:5:15
   |vpiTaskFunc:
   \_Function: (work@dut.bar), line:7:4, endln:9:15
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

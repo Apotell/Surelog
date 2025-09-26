@@ -144,7 +144,7 @@ IntTypespec                                            2
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              5
 ParamAssign                                            2
 Parameter                                              2
@@ -316,10 +316,10 @@ Design: (unnamed)
     |vpiTypedef:
     \_ModuleTypespec: (GOOD)
       |vpiParent:
-      \_Begin: (work@top), line:13:22, endln:15:6
+      \_Design: (unnamed)
       |vpiName:GOOD
-    |vpiImportTypespec:
-    \_ModuleTypespec: (GOOD)
+      |vpiModule:
+      \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:1:1, endln:3:10
     |vpiStmt:
     \_RefModule: work@GOOD (good), line:14:6, endln:14:10
       |vpiParent:
@@ -334,20 +334,9 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:5:1, endln:17:10
     |vpiSigned:1
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:5:1, endln:17:10
-    |vpiSigned:1
-  |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:5:1, endln:17:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:5:1, endln:17:10
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -366,8 +355,6 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.o), line:8:17, endln:8:18
@@ -411,6 +398,15 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:13:22, endln:15:6
+|vpiTypedef:
+\_ModuleTypespec: (GOOD)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpPrec/dut.sv, line:5:1, endln:17:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

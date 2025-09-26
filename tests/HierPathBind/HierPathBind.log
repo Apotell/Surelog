@@ -135,7 +135,7 @@ Identifier                                             3
 LogicNet                                               2
 LogicTypespec                                          5
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Port                                                   3
 RefModule                                              1
 RefObj                                                 6
@@ -168,10 +168,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:1:1, endln:3:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -188,8 +184,6 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.o), line:1:26, endln:1:27
@@ -275,24 +269,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
+    \_Design: (unnamed)
     |vpiName:dut
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
   |vpiImportTypespec:
   \_StructTypespec: , line:6:12, endln:8:5
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -323,8 +307,6 @@ Design: (unnamed)
       \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
     |vpiName:alert_rx_i
     |vpiFullName:work@top.alert_rx_i
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.ping_p), line:14:26, endln:14:32
     |vpiParent:
@@ -417,6 +399,15 @@ Design: (unnamed)
           |vpiActual:
           \_LogicNet: (work@top.ping_p), line:14:26, endln:14:32
         |vpiName:alert_rx_i.ping_p
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -384,7 +384,7 @@ Identifier                                             5
 IntTypespec                                            5
 IntVar                                                 1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              6
 ParamAssign                                            3
 Parameter                                              3
@@ -418,10 +418,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (top)
     |vpiParent:
-    \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:29:1, endln:31:10
+    \_Design: (unnamed)
     |vpiName:top
-  |vpiImportTypespec:
-  \_ModuleTypespec: (top)
+    |vpiModule:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
   |vpiDefName:work@main
   |vpiRefModule:
   \_RefModule: work@top (top1), line:30:1, endln:30:4
@@ -741,10 +741,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
-  |vpiTypedef:
   \_ArrayTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -780,10 +776,6 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: 
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
-  |vpiTypedef:
   \_ArrayTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -813,13 +805,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: 
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiDefName:work@top
@@ -930,6 +918,15 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:23:20, endln:25:4
+|vpiTypedef:
+\_ModuleTypespec: (main)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:main
+  |vpiModule:
+  \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:29:1, endln:31:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

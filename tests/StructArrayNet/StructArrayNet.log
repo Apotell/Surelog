@@ -153,7 +153,7 @@ IntTypespec                                            3
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              1
 Package                                                1
 PackedArrayNet                                         1
@@ -297,8 +297,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (mod)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
+    \_Design: (unnamed)
     |vpiName:mod
+    |vpiModule:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:6:1, endln:7:10
   |vpiTypedef:
   \_IntTypespec: 
     |vpiParent:
@@ -349,13 +351,6 @@ Design: (unnamed)
       |vpiFullName:work@dut.pkg::Struct
       |vpiActual:
       \_TypedefTypespec: (pkg::Struct), line:3:39, endln:3:45
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
-    |vpiSigned:1
-  |vpiImportTypespec:
-  \_ModuleTypespec: (mod)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -376,8 +371,6 @@ Design: (unnamed)
       \_PackedArrayTypespec: 
     |vpiName:struct_array
     |vpiFullName:work@dut.struct_array
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_PackedArrayNet: (work@dut.struct_array), line:10:32, endln:10:44
@@ -463,6 +456,15 @@ Design: (unnamed)
       |vpiFullName:work@mod.struct_i.pkg::Struct
       |vpiActual:
       \_TypedefTypespec: (pkg::Struct), line:3:39, endln:3:45
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
+|vpiTypedef:
+\_ModuleTypespec: (mod)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

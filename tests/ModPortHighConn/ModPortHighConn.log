@@ -215,7 +215,7 @@ Identifier                                             2
 LogicNet                                               4
 LogicTypespec                                          2
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 Port                                                  10
 Range                                                  2
@@ -282,8 +282,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (moduleA)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:5:1, endln:11:10
+    \_Design: (unnamed)
     |vpiName:moduleA
+    |vpiModule:
+    \_Module: work@moduleA (work@moduleA), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:2:1, endln:3:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -308,32 +310,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:5:1, endln:11:10
-    |vpiRange:
-    \_Range: , line:6:10, endln:6:15
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Constant: , line:6:11, endln:6:12
-        |vpiParent:
-        \_Range: , line:6:10, endln:6:15
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:13, endln:6:14
-        |vpiParent:
-        \_Range: , line:6:10, endln:6:15
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiImportTypespec:
-  \_ModuleTypespec: (moduleA)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -350,8 +326,6 @@ Design: (unnamed)
     |vpiName:topA
     |vpiFullName:work@top.topA
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top.topB), line:6:22, endln:6:26
     |vpiParent:
@@ -608,6 +582,15 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
+|vpiTypedef:
+\_ModuleTypespec: (moduleA)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:5:1, endln:11:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

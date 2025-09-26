@@ -454,7 +454,7 @@ Assignment                                             3
 Begin                                                  4
 BitSelect                                              3
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              32
 ContAssign                                             1
 Design                                                 1
@@ -464,9 +464,10 @@ Function                                               9
 GenFor                                                 3
 GenRegion                                              1
 IODecl                                                11
-Identifier                                            34
+Identifier                                            36
 IntTypespec                                           12
 Interface                                              2
+InterfaceTypespec                                      2
 LogicNet                                               5
 LogicTypespec                                         11
 LogicVar                                               4
@@ -830,15 +831,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1149,13 +1141,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1204,22 +1189,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1473,80 +1530,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
-    |vpiRange:
-    \_Range: , line:3:9, endln:3:25
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:3:10, endln:3:20
-        |vpiParent:
-        \_Range: , line:3:9, endln:3:25
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@abc_if.NO_Input), line:3:10, endln:3:18
-          |vpiParent:
-          \_Operation: , line:3:10, endln:3:20
-          |vpiName:NO_Input
-          |vpiFullName:work@abc_if.NO_Input
-          |vpiActual:
-          \_Parameter: (work@abc_if.NO_Input), line:1:24, endln:1:34
-        |vpiOperand:
-        \_Constant: , line:3:19, endln:3:20
-          |vpiParent:
-          \_Operation: , line:3:10, endln:3:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:22, endln:3:23
-        |vpiParent:
-        \_Range: , line:3:9, endln:3:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
-    |vpiRange:
-    \_Range: , line:4:9, endln:4:25
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:4:10, endln:4:20
-        |vpiParent:
-        \_Range: , line:4:9, endln:4:25
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@abc_if.NO_Input), line:4:10, endln:4:18
-          |vpiParent:
-          \_Operation: , line:4:10, endln:4:20
-          |vpiName:NO_Input
-          |vpiFullName:work@abc_if.NO_Input
-          |vpiActual:
-          \_Parameter: (work@abc_if.NO_Input), line:1:24, endln:1:34
-        |vpiOperand:
-        \_Constant: , line:4:19, endln:4:20
-          |vpiParent:
-          \_Operation: , line:4:10, endln:4:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:22, endln:4:23
-        |vpiParent:
-        \_Range: , line:4:9, endln:4:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -1557,8 +1540,6 @@ Design: (unnamed)
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@abc_if.clk_i), line:4:26, endln:4:31
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@abc_if.xyz_o), line:3:26, endln:3:31
     |vpiParent:
@@ -1573,8 +1554,6 @@ Design: (unnamed)
     |vpiName:xyz_o
     |vpiFullName:work@abc_if.xyz_o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@abc_if.clk_i), line:4:26, endln:4:31
     |vpiParent:
@@ -1827,80 +1806,6 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
-    |vpiRange:
-    \_Range: , line:23:9, endln:23:20
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:23:10, endln:23:17
-        |vpiParent:
-        \_Range: , line:23:9, endln:23:20
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@pins_if.Width), line:23:10, endln:23:15
-          |vpiParent:
-          \_Operation: , line:23:10, endln:23:17
-          |vpiName:Width
-          |vpiFullName:work@pins_if.Width
-          |vpiActual:
-          \_Parameter: (work@pins_if.Width), line:22:36, endln:22:45
-        |vpiOperand:
-        \_Constant: , line:23:16, endln:23:17
-          |vpiParent:
-          \_Operation: , line:23:10, endln:23:17
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:23:18, endln:23:19
-        |vpiParent:
-        \_Range: , line:23:9, endln:23:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
-    |vpiRange:
-    \_Range: , line:25:9, endln:25:20
-      |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:25:10, endln:25:17
-        |vpiParent:
-        \_Range: , line:25:9, endln:25:20
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@pins_if.Width), line:25:10, endln:25:15
-          |vpiParent:
-          \_Operation: , line:25:10, endln:25:17
-          |vpiName:Width
-          |vpiFullName:work@pins_if.Width
-          |vpiActual:
-          \_Parameter: (work@pins_if.Width), line:22:36, endln:22:45
-        |vpiOperand:
-        \_Constant: , line:25:16, endln:25:17
-          |vpiParent:
-          \_Operation: , line:25:10, endln:25:17
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:25:18, endln:25:19
-        |vpiParent:
-        \_Range: , line:25:9, endln:25:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -1912,15 +1817,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@pins_if.pins_o), line:25:21, endln:25:27
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
     |vpiParent:
     \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
     |vpiName:pins
     |vpiFullName:work@pins_if.pins
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@pins_if.pins_o), line:25:21, endln:25:27
     |vpiParent:
@@ -1971,12 +1872,16 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:16:1, endln:19:10
     |vpiName:work@top
   |vpiTypedef:
-  \_ModuleTypespec: (abc_if)
+  \_InterfaceTypespec: (abc_if)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:16:1, endln:19:10
-    |vpiName:abc_if
-  |vpiImportTypespec:
-  \_ModuleTypespec: (abc_if)
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (abc_if)
+      |vpiParent:
+      \_InterfaceTypespec: (abc_if)
+      |vpiName:abc_if
+    |vpiInterface:
+    \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@abc_if (intf), line:17:3, endln:17:9
@@ -2217,47 +2122,16 @@ Design: (unnamed)
     \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:34:1, endln:43:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ModuleTypespec: (pins_if)
+  \_InterfaceTypespec: (pins_if)
     |vpiParent:
-    \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:34:1, endln:43:10
-    |vpiName:pins_if
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:34:1, endln:43:10
-    |vpiRange:
-    \_Range: , line:34:49, endln:34:60
+    \_Design: (unnamed)
+    |vpiName:
+    \_Identifier: (pins_if)
       |vpiParent:
-      \_LogicTypespec: 
-      |vpiLeftRange:
-      \_Operation: , line:34:50, endln:34:57
-        |vpiParent:
-        \_Range: , line:34:49, endln:34:60
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@top2.Width), line:34:50, endln:34:55
-          |vpiParent:
-          \_Operation: , line:34:50, endln:34:57
-          |vpiName:Width
-          |vpiFullName:work@top2.Width
-          |vpiActual:
-          \_Parameter: (work@top2.Width), line:34:30, endln:34:39
-        |vpiOperand:
-        \_Constant: , line:34:56, endln:34:57
-          |vpiParent:
-          \_Operation: , line:34:50, endln:34:57
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:34:58, endln:34:59
-        |vpiParent:
-        \_Range: , line:34:49, endln:34:60
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_InterfaceTypespec: (pins_if)
+      |vpiName:pins_if
+    |vpiInterface:
+    \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
@@ -2298,8 +2172,6 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
-  \_ModuleTypespec: (pins_if)
-  |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
@@ -2314,8 +2186,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:pins
     |vpiFullName:work@top2.pins
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@top2
   |vpiNet:
   \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
@@ -2353,6 +2223,24 @@ Design: (unnamed)
         |vpiFullName:work@top2.intf.pins.pins
         |vpiActual:
         \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+|vpiTypedef:
+\_InterfaceTypespec: (abc_if)
+|vpiTypedef:
+\_InterfaceTypespec: (pins_if)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:16:1, endln:19:10
+|vpiTypedef:
+\_ModuleTypespec: (top2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top2
+  |vpiModule:
+  \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:34:1, endln:43:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

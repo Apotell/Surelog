@@ -505,7 +505,7 @@ Assignment                                             6
 Begin                                                  3
 BitSelect                                              2
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              89
 ContAssign                                             1
 Design                                                 1
@@ -522,6 +522,7 @@ IntVar                                                 1
 LogicTypespec                                          7
 LogicVar                                               1
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                             15
 Package                                                2
 ParamAssign                                            2
@@ -880,15 +881,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1199,13 +1191,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1254,22 +1239,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -2140,7 +2197,7 @@ Design: (unnamed)
             |vpiIndex:
             \_PartSelect: prim_cipher_pkg::PRINCE_ROUND_CONST (prim_cipher_pkg::PRINCE_ROUND_CONST), line:35:23, endln:35:36
               |vpiParent:
-              \_Operation: , line:32:22, endln:35:37
+              \_VarSelect: (prim_cipher_pkg::PRINCE_ROUND_CONST), line:33:22, endln:35:37
               |vpiName:prim_cipher_pkg::PRINCE_ROUND_CONST
               |vpiDefName:prim_cipher_pkg::PRINCE_ROUND_CONST
               |vpiActual:
@@ -2152,11 +2209,11 @@ Design: (unnamed)
                 \_PartSelect: prim_cipher_pkg::PRINCE_ROUND_CONST (prim_cipher_pkg::PRINCE_ROUND_CONST), line:35:23, endln:35:36
                 |vpiOpType:11
                 |vpiOperand:
-                \_RefObj: (work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth), line:35:23, endln:35:32
+                \_RefObj: (work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth), line:35:23, endln:35:32
                   |vpiParent:
                   \_Operation: , line:35:23, endln:35:34
                   |vpiName:DataWidth
-                  |vpiFullName:work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth
+                  |vpiFullName:work@top.p_post_round_xor.prim_cipher_pkg::PRINCE_ROUND_CONST.prim_cipher_pkg::PRINCE_ROUND_CONST.DataWidth
                   |vpiActual:
                   \_LogicNet: (work@top.p_post_round_xor.DataWidth), line:35:23, endln:35:32
                 |vpiOperand:
@@ -2266,6 +2323,13 @@ Design: (unnamed)
       |vpiFullName:work@top.data_state_sbox
       |vpiActual:
       \_LogicNet: (work@top.data_state_sbox), line:28:8, endln:28:23
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:26:1, endln:42:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

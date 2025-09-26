@@ -199,6 +199,7 @@ IntVar                                                 1
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              1
 PartSelect                                             2
 Port                                                   1
@@ -282,11 +283,11 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiIndex:
-          \_PartSelect: state (work@top.iota.state), line:8:33, endln:8:36
+          \_PartSelect: state (work@top.iota.state.state), line:8:33, endln:8:36
             |vpiParent:
-            \_Assignment: , line:8:7, endln:8:37
+            \_VarSelect: (work@top.iota.state), line:8:24, endln:8:37
             |vpiName:state
-            |vpiFullName:work@top.iota.state
+            |vpiFullName:work@top.iota.state.state
             |vpiDefName:state
             |vpiActual:
             \_IODecl: (state), line:6:46, endln:6:51
@@ -294,7 +295,7 @@ Design: (unnamed)
             |vpiLeftRange:
             \_Constant: , line:8:33, endln:8:34
               |vpiParent:
-              \_PartSelect: state (work@top.iota.state), line:8:33, endln:8:36
+              \_PartSelect: state (work@top.iota.state.state), line:8:33, endln:8:36
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
@@ -302,7 +303,7 @@ Design: (unnamed)
             |vpiRightRange:
             \_Constant: , line:8:35, endln:8:36
               |vpiParent:
-              \_PartSelect: state (work@top.iota.state), line:8:33, endln:8:36
+              \_PartSelect: state (work@top.iota.state.state), line:8:33, endln:8:36
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
@@ -324,11 +325,11 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiIndex:
-          \_PartSelect: result (work@top.iota.result), line:8:17, endln:8:20
+          \_PartSelect: result (work@top.iota.result.result), line:8:17, endln:8:20
             |vpiParent:
-            \_Assignment: , line:8:7, endln:8:37
+            \_VarSelect: (work@top.iota.result), line:8:7, endln:8:21
             |vpiName:result
-            |vpiFullName:work@top.iota.result
+            |vpiFullName:work@top.iota.result.result
             |vpiDefName:result
             |vpiActual:
             \_LogicNet: (work@top.result), line:7:13, endln:7:19
@@ -336,7 +337,7 @@ Design: (unnamed)
             |vpiLeftRange:
             \_Constant: , line:8:17, endln:8:18
               |vpiParent:
-              \_PartSelect: result (work@top.iota.result), line:8:17, endln:8:20
+              \_PartSelect: result (work@top.iota.result.result), line:8:17, endln:8:20
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
@@ -344,7 +345,7 @@ Design: (unnamed)
             |vpiRightRange:
             \_Constant: , line:8:19, endln:8:20
               |vpiParent:
-              \_PartSelect: result (work@top.iota.result), line:8:17, endln:8:20
+              \_PartSelect: result (work@top.iota.result.result), line:8:17, endln:8:20
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
@@ -485,11 +486,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
-    |vpiSigned:1
   |vpiImportTypespec:
   \_Function: (work@top.iota), line:6:4, endln:10:22
   |vpiImportTypespec:
@@ -514,8 +510,6 @@ Design: (unnamed)
   \_IntTypespec: 
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:1:23, endln:1:24
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.iota), line:6:4, endln:10:22
@@ -570,6 +564,13 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_IntVar: (work@top.o), line:1:23, endln:1:24
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

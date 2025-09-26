@@ -326,7 +326,7 @@ Identifier                                             5
 IntTypespec                                            3
 IntVar                                                 1
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              7
 ParamAssign                                            1
 Parameter                                              1
@@ -358,10 +358,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (top)
     |vpiParent:
-    \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
+    \_Design: (unnamed)
     |vpiName:top
-  |vpiImportTypespec:
-  \_ModuleTypespec: (top)
+    |vpiModule:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:1:1, endln:20:10
   |vpiDefName:work@main
   |vpiRefModule:
   \_RefModule: work@top (top1), line:23:5, endln:23:8
@@ -610,10 +610,6 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: 
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:1:1, endln:20:10
-  |vpiTypedef:
   \_ArrayTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:1:1, endln:20:10
@@ -650,8 +646,6 @@ Design: (unnamed)
   \_ArrayTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:2:26, endln:2:44
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiDefName:work@top
@@ -762,6 +756,15 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:17:21, endln:19:5
+|vpiTypedef:
+\_ModuleTypespec: (main)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:main
+  |vpiModule:
+  \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/FuncRetArray/dut.sv, line:22:1, endln:24:10
+|vpiTypedef:
+\_ModuleTypespec: (top)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

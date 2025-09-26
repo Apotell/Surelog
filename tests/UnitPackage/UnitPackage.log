@@ -725,7 +725,7 @@ Assignment                                             4
 Begin                                                  6
 BitTypespec                                            5
 ClassDefn                                              8
-ClassTypespec                                          1
+ClassTypespec                                          8
 Constant                                              27
 DelayControl                                           3
 Design                                                 1
@@ -745,7 +745,7 @@ IntegerTypespec                                        4
 LogicNet                                               4
 LogicTypespec                                          1
 Module                                                 1
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              4
 Package                                                3
 PackedArrayTypespec                                    2
@@ -1116,15 +1116,6 @@ Design: (unnamed)
         \_Function: (builtin::process::self), line:34:5, endln:35:16
         |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiTypedef:
-      \_ClassTypespec: (process)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiName:process
-        |vpiClassDefn:
-        \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (process)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1435,13 +1426,6 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
-      |vpiTypedef:
-      \_IntTypespec: 
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiSigned:1
-      |vpiImportTypespec:
-      \_IntTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: 
       |vpiMethod:1
@@ -1490,22 +1474,94 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiTypedef:
+  \_ClassTypespec: (array)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:array
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::array)
+  |vpiTypedef:
+  \_ClassTypespec: (queue)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:queue
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::queue)
+  |vpiTypedef:
+  \_ClassTypespec: (string)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:string
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::string)
+  |vpiTypedef:
+  \_ClassTypespec: (system)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:system
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::system)
+  |vpiTypedef:
+  \_ClassTypespec: (any_sverilog_class)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:any_sverilog_class
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::any_sverilog_class)
+  |vpiTypedef:
+  \_ClassTypespec: (mailbox)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:mailbox
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:1:3, endln:27:11
+  |vpiTypedef:
+  \_ClassTypespec: (process)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:process
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
+  |vpiTypedef:
+  \_ClassTypespec: (semaphore)
+    |vpiParent:
+    \_Package: (builtin)
+    |vpiName:semaphore
+    |vpiClassDefn:
+    \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:55:3, endln:69:11
   |vpiImportTypespec:
   \_ClassDefn: (builtin::array)
   |vpiImportTypespec:
+  \_ClassTypespec: (array)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::queue)
+  |vpiImportTypespec:
+  \_ClassTypespec: (queue)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::string)
   |vpiImportTypespec:
+  \_ClassTypespec: (string)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::system)
+  |vpiImportTypespec:
+  \_ClassTypespec: (system)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::any_sverilog_class)
   |vpiImportTypespec:
+  \_ClassTypespec: (any_sverilog_class)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (mailbox)
   |vpiImportTypespec:
   \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
   |vpiImportTypespec:
+  \_ClassTypespec: (process)
+  |vpiImportTypespec:
   \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:55:3, endln:69:11
+  |vpiImportTypespec:
+  \_ClassTypespec: (semaphore)
   |vpiClassDefn:
   \_ClassDefn: (builtin::array)
   |vpiClassDefn:
@@ -1648,6 +1704,10 @@ Design: (unnamed)
         |vpiActual:
         \_BitTypespec: 
   |vpiTypedef:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
+  |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
@@ -1709,10 +1769,6 @@ Design: (unnamed)
       |vpiFullName:definesPkg
       |vpiActual:
       \_BitTypespec: 
-  |vpiTypedef:
-  \_BitTypespec: 
-    |vpiParent:
-    \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
   |vpiImportTypespec:
   \_EnumTypespec: , line:10:11, endln:10:35
   |vpiImportTypespec:
@@ -1722,11 +1778,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:11:11, endln:15:4
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: 
-  |vpiImportTypespec:
   \_BitTypespec: 
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: 
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: 
   |vpiDefName:definesPkg
 |vpiAllPackages:
 \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
@@ -2322,11 +2378,6 @@ Design: (unnamed)
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
     |vpiSigned:1
   |vpiTypedef:
-  \_IntegerTypespec: 
-    |vpiParent:
-    \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
-    |vpiSigned:1
-  |vpiTypedef:
   \_BitTypespec: 
     |vpiParent:
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
@@ -2363,8 +2414,6 @@ Design: (unnamed)
       \_IntegerTypespec: 
     |vpiName:errCnt
     |vpiFullName:msgPkg::errCnt
-  |vpiImportTypespec:
-  \_IntegerTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
     |vpiParent:
@@ -2752,9 +2801,13 @@ Design: (unnamed)
     |vpiSize:32
     |STRING:bool
     |vpiConstType:8
-\_weaklyReferenced:
-\_BitTypespec: 
-\_BitTypespec: 
+|vpiTypedef:
+\_ModuleTypespec: (simple_package)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:simple_package
+  |vpiModule:
+  \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

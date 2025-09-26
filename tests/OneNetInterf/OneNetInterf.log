@@ -537,26 +537,26 @@ ContAssign                                             1
 DelayControl                                           4
 Design                                                 1
 HierPath                                               4
-Identifier                                            17
+Identifier                                            16
 ImmediateAssert                                        2
 Initial                                                1
 Interface                                              1
-InterfaceTypespec                                      2
+InterfaceTypespec                                      1
 LogicNet                                              10
 LogicTypespec                                         16
 LogicVar                                               2
 Module                                                 4
-ModuleTypespec                                         6
+ModuleTypespec                                         4
 Operation                                              2
 Port                                                  19
 Program                                                1
+ProgramTypespec                                        1
 RefModule                                              6
 RefObj                                                28
 RefTypespec                                           17
 SourceFile                                             2
 SysFuncCall                                            9
 === UHDM Object Stats End ===
-[ERR:UH0703] ${SURELOG_DIR}/tests/OneNetInterf/tb.v:1:1: Internal Error(12) : adding wrong object type (Program) in a actual_instance group!.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetInterf/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -617,30 +617,12 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicVar: (work@ConnectTB.con_i), line:7:33, endln:7:38
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicVar: (work@ConnectTB.con_o), line:7:51, endln:7:56
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@ConnectTB.con_i), line:7:33, endln:7:38
     |vpiParent:
@@ -715,12 +697,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:1:1, endln:12:11
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:1:1, endln:12:11
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1085,18 +1061,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1114,8 +1078,6 @@ Design: (unnamed)
     |vpiFullName:work@SUB.inp
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@SUB.out), line:14:40, endln:14:43
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
@@ -1129,10 +1091,6 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@SUB.out
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@SUB
   |vpiNet:
   \_LogicNet: (work@SUB.inp), line:14:24, endln:14:27
@@ -1194,35 +1152,27 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
     |vpiName:work@dut
   |vpiTypedef:
-  \_ModuleTypespec: (ConnectTB)
+  \_InterfaceTypespec: (ConnectTB)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
-    |vpiName:ConnectTB
+    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
+    |vpiName:
+    \_Identifier: (ConnectTB)
+      |vpiParent:
+      \_InterfaceTypespec: (ConnectTB)
+      |vpiName:ConnectTB
+    |vpiInterface:
+    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
   |vpiTypedef:
   \_ModuleTypespec: (middle)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
+    \_Design: (unnamed)
     |vpiName:middle
+    |vpiModule:
+    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (ConnectTB)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (middle)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1240,8 +1190,6 @@ Design: (unnamed)
     |vpiFullName:work@dut.i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
   \_LogicNet: (work@dut.o), line:2:38, endln:2:39
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
@@ -1255,10 +1203,6 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:48
-  |vpiImportTypespec:
-  \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.i), line:2:24, endln:2:25
@@ -1357,36 +1301,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (SUB)
     |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
+    \_Design: (unnamed)
     |vpiName:SUB
+    |vpiModule:
+    \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:14:1, endln:16:10
   |vpiTypedef:
-  \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
-    |vpiName:
-    \_Identifier: (ConnectTB)
-      |vpiParent:
-      \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
-      |vpiName:ConnectTB
-    |vpiInterface:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
-    |vpiName:
-    \_Identifier: (ConnectTB)
-      |vpiParent:
-      \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
-      |vpiName:ConnectTB
-    |vpiInterface:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:7:1, endln:8:13
+  \_InterfaceTypespec: (ConnectTB)
   |vpiImportTypespec:
-  \_ModuleTypespec: (SUB)
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
+  \_InterfaceTypespec: (ConnectTB)
   |vpiDefName:work@middle
   |vpiPort:
   \_Port: (conn), line:10:26, endln:10:30
@@ -1401,7 +1323,7 @@ Design: (unnamed)
       |vpiName:ConnectTB
       |vpiFullName:work@middle.conn.ConnectTB
       |vpiActual:
-      \_InterfaceTypespec: (ConnectTB), line:10:16, endln:10:25
+      \_InterfaceTypespec: (ConnectTB)
   |vpiRefModule:
   \_RefModule: work@SUB (sub1), line:11:3, endln:11:6
     |vpiParent:
@@ -1470,34 +1392,20 @@ Design: (unnamed)
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
     |vpiName:work@tb
   |vpiTypedef:
-  \_ModuleTypespec: (ConnectTB)
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
-    |vpiName:ConnectTB
+  \_InterfaceTypespec: (ConnectTB)
   |vpiTypedef:
   \_ModuleTypespec: (middle)
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
-    |vpiName:middle
   |vpiTypedef:
-  \_ModuleTypespec: (TESTBENCH)
+  \_ProgramTypespec: (TESTBENCH)
     |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
+    \_Design: (unnamed)
     |vpiName:TESTBENCH
+    |vpiProgram:
+    \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:1:1, endln:12:11
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (ConnectTB)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (middle)
-  |vpiImportTypespec:
-  \_ModuleTypespec: (TESTBENCH)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1514,8 +1422,6 @@ Design: (unnamed)
     |vpiName:i
     |vpiFullName:work@tb.i
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@tb.o), line:15:10, endln:15:11
     |vpiParent:
@@ -1614,6 +1520,8 @@ Design: (unnamed)
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
     |vpiName:tb
     |vpiDefName:work@TESTBENCH
+    |vpiActual:
+    \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:1:1, endln:12:11
     |vpiPort:
     \_Port: (observe), line:18:17, endln:18:24
       |vpiParent:
@@ -1664,9 +1572,29 @@ Design: (unnamed)
           |vpiActual:
           \_LogicNet: (work@tb.con_i), line:18:53, endln:18:58
         |vpiName:conntb.con_i
+|vpiTypedef:
+\_ProgramTypespec: (TESTBENCH)
+|vpiTypedef:
+\_ModuleTypespec: (SUB)
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:2:1, endln:5:10
+|vpiTypedef:
+\_ModuleTypespec: (middle)
+|vpiTypedef:
+\_ModuleTypespec: (tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:tb
+  |vpiModule:
+  \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 7
 [   NOTE] : 0

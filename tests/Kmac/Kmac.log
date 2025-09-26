@@ -684,7 +684,7 @@ IntTypespec                                            6
 LogicNet                                               3
 LogicTypespec                                          2
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                             33
 Package                                                1
 ParamAssign                                            8
@@ -1100,14 +1100,6 @@ Design: (unnamed)
       |vpiFullName:sha3_pkg
       |vpiActual:
       \_IntTypespec: 
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
-  |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Package: sha3_pkg (sha3_pkg), file:${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv, line:7:1, endln:32:22
   |vpiImportTypespec:
   \_IntTypespec: 
   |vpiImportTypespec:
@@ -1120,10 +1112,6 @@ Design: (unnamed)
   \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_IntTypespec: 
   |vpiDefName:sha3_pkg
   |vpiEndLabel:sha3_pkg
 |vpiAllModules:
@@ -1225,14 +1213,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (kmac_core)
     |vpiParent:
-    \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
+    \_Design: (unnamed)
     |vpiName:kmac_core
+    |vpiModule:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
   |vpiImportTypespec:
   \_BitTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (kmac_core)
   |vpiImportTypespec:
   \_LogicNet: (work@kmac.kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
@@ -1628,48 +1616,6 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:24:5, endln:34:8
       |vpiFullName:work@kmac_core
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.L128), line:26:7, endln:26:11
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:L128
-        |vpiFullName:work@kmac_core.L128
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:KeccakRate
-        |vpiFullName:work@kmac_core.KeccakRate
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.L224), line:27:7, endln:27:11
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:L224
-        |vpiFullName:work@kmac_core.L224
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.L256), line:28:7, endln:28:11
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:L256
-        |vpiFullName:work@kmac_core.L256
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.L384), line:29:7, endln:29:11
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:L384
-        |vpiFullName:work@kmac_core.L384
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@kmac_core.L512), line:30:7, endln:30:11
-        |vpiParent:
-        \_Begin: (work@kmac_core), line:24:17, endln:34:8
-        |vpiName:L512
-        |vpiFullName:work@kmac_core.L512
-        |vpiNetType:1
       |vpiStmt:
       \_CaseStmt: , line:25:5, endln:33:12
         |vpiParent:
@@ -1695,7 +1641,7 @@ Design: (unnamed)
             |vpiName:L128
             |vpiFullName:work@kmac_core.L128
             |vpiActual:
-            \_LogicNet: (work@kmac_core.L128), line:26:7, endln:26:11
+            \_EnumConst: (L128), line:13:5, endln:13:18
           |vpiStmt:
           \_Assignment: , line:26:13, endln:26:63
             |vpiParent:
@@ -1714,7 +1660,7 @@ Design: (unnamed)
                 |vpiName:KeccakRate
                 |vpiFullName:work@kmac_core.KeccakRate
                 |vpiActual:
-                \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
+                \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
                 |vpiIndex:
                 \_RefObj: (work@kmac_core.L128), line:26:57, endln:26:61
                   |vpiParent:
@@ -1722,7 +1668,7 @@ Design: (unnamed)
                   |vpiName:L128
                   |vpiFullName:work@kmac_core.L128
                   |vpiActual:
-                  \_LogicNet: (work@kmac_core.L128), line:26:7, endln:26:11
+                  \_EnumConst: (L128), line:13:5, endln:13:18
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:26:13, endln:26:29
               |vpiParent:
@@ -1742,7 +1688,7 @@ Design: (unnamed)
             |vpiName:L224
             |vpiFullName:work@kmac_core.L224
             |vpiActual:
-            \_LogicNet: (work@kmac_core.L224), line:27:7, endln:27:11
+            \_EnumConst: (L224), line:14:5, endln:14:18
           |vpiStmt:
           \_Assignment: , line:27:13, endln:27:63
             |vpiParent:
@@ -1761,7 +1707,7 @@ Design: (unnamed)
                 |vpiName:KeccakRate
                 |vpiFullName:work@kmac_core.KeccakRate
                 |vpiActual:
-                \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
+                \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
                 |vpiIndex:
                 \_RefObj: (work@kmac_core.L224), line:27:57, endln:27:61
                   |vpiParent:
@@ -1769,7 +1715,7 @@ Design: (unnamed)
                   |vpiName:L224
                   |vpiFullName:work@kmac_core.L224
                   |vpiActual:
-                  \_LogicNet: (work@kmac_core.L224), line:27:7, endln:27:11
+                  \_EnumConst: (L224), line:14:5, endln:14:18
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:27:13, endln:27:29
               |vpiParent:
@@ -1789,7 +1735,7 @@ Design: (unnamed)
             |vpiName:L256
             |vpiFullName:work@kmac_core.L256
             |vpiActual:
-            \_LogicNet: (work@kmac_core.L256), line:28:7, endln:28:11
+            \_EnumConst: (L256), line:15:5, endln:15:18
           |vpiStmt:
           \_Assignment: , line:28:13, endln:28:63
             |vpiParent:
@@ -1808,7 +1754,7 @@ Design: (unnamed)
                 |vpiName:KeccakRate
                 |vpiFullName:work@kmac_core.KeccakRate
                 |vpiActual:
-                \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
+                \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
                 |vpiIndex:
                 \_RefObj: (work@kmac_core.L256), line:28:57, endln:28:61
                   |vpiParent:
@@ -1816,7 +1762,7 @@ Design: (unnamed)
                   |vpiName:L256
                   |vpiFullName:work@kmac_core.L256
                   |vpiActual:
-                  \_LogicNet: (work@kmac_core.L256), line:28:7, endln:28:11
+                  \_EnumConst: (L256), line:15:5, endln:15:18
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:28:13, endln:28:29
               |vpiParent:
@@ -1836,7 +1782,7 @@ Design: (unnamed)
             |vpiName:L384
             |vpiFullName:work@kmac_core.L384
             |vpiActual:
-            \_LogicNet: (work@kmac_core.L384), line:29:7, endln:29:11
+            \_EnumConst: (L384), line:16:5, endln:16:18
           |vpiStmt:
           \_Assignment: , line:29:13, endln:29:63
             |vpiParent:
@@ -1855,7 +1801,7 @@ Design: (unnamed)
                 |vpiName:KeccakRate
                 |vpiFullName:work@kmac_core.KeccakRate
                 |vpiActual:
-                \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
+                \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
                 |vpiIndex:
                 \_RefObj: (work@kmac_core.L384), line:29:57, endln:29:61
                   |vpiParent:
@@ -1863,7 +1809,7 @@ Design: (unnamed)
                   |vpiName:L384
                   |vpiFullName:work@kmac_core.L384
                   |vpiActual:
-                  \_LogicNet: (work@kmac_core.L384), line:29:7, endln:29:11
+                  \_EnumConst: (L384), line:16:5, endln:16:18
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:29:13, endln:29:29
               |vpiParent:
@@ -1883,7 +1829,7 @@ Design: (unnamed)
             |vpiName:L512
             |vpiFullName:work@kmac_core.L512
             |vpiActual:
-            \_LogicNet: (work@kmac_core.L512), line:30:7, endln:30:11
+            \_EnumConst: (L512), line:17:5, endln:17:18
           |vpiStmt:
           \_Assignment: , line:30:13, endln:30:63
             |vpiParent:
@@ -1902,7 +1848,7 @@ Design: (unnamed)
                 |vpiName:KeccakRate
                 |vpiFullName:work@kmac_core.KeccakRate
                 |vpiActual:
-                \_LogicNet: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
+                \_Parameter: (sha3_pkg::KeccakRate), line:20:26, endln:26:4
                 |vpiIndex:
                 \_RefObj: (work@kmac_core.L512), line:30:57, endln:30:61
                   |vpiParent:
@@ -1910,7 +1856,7 @@ Design: (unnamed)
                   |vpiName:L512
                   |vpiFullName:work@kmac_core.L512
                   |vpiActual:
-                  \_LogicNet: (work@kmac_core.L512), line:30:7, endln:30:11
+                  \_EnumConst: (L512), line:17:5, endln:17:18
             |vpiLhs:
             \_RefObj: (work@kmac_core.block_addr_limit), line:30:13, endln:30:29
               |vpiParent:
@@ -1946,6 +1892,15 @@ Design: (unnamed)
               |vpiActual:
               \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
     |vpiAlwaysType:2
+|vpiTypedef:
+\_ModuleTypespec: (kmac)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:kmac
+  |vpiModule:
+  \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
+|vpiTypedef:
+\_ModuleTypespec: (kmac_core)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

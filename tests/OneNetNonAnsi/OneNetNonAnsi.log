@@ -374,7 +374,7 @@ Initial                                                2
 LogicNet                                               6
 LogicTypespec                                          4
 Module                                                 2
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Operation                                              2
 Port                                                   4
 RefModule                                              1
@@ -409,10 +409,6 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v, line:1:1, endln:7:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v, line:1:1, endln:7:10
   |vpiImportTypespec:
   \_LogicNet: (work@dut.i), line:1:13, endln:1:14
     |vpiParent:
@@ -443,8 +439,6 @@ Design: (unnamed)
     |vpiName:i
     |vpiFullName:work@dut.i
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@dut.o), line:5:7, endln:5:8
     |vpiParent:
@@ -512,18 +506,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (dut)
     |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
+    \_Design: (unnamed)
     |vpiName:dut
+    |vpiModule:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetNonAnsi/dut.v, line:1:1, endln:7:10
   |vpiTypedef:
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-  |vpiTypedef:
-  \_LogicTypespec: 
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
-  |vpiImportTypespec:
-  \_ModuleTypespec: (dut)
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -540,8 +530,6 @@ Design: (unnamed)
       \_LogicTypespec: 
     |vpiName:i
     |vpiFullName:work@tb.i
-  |vpiImportTypespec:
-  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@tb.o), line:2:12, endln:2:13
     |vpiParent:
@@ -890,6 +878,15 @@ Design: (unnamed)
         |vpiFullName:work@tb.dut1.o
         |vpiActual:
         \_LogicNet: (work@tb.o), line:2:12, endln:2:13
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+|vpiTypedef:
+\_ModuleTypespec: (tb)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:tb
+  |vpiModule:
+  \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetNonAnsi/tb.v, line:1:1, endln:21:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

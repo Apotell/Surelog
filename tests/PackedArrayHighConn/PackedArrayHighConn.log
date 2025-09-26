@@ -191,7 +191,7 @@ ImportTypespec                                         2
 LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         1
+ModuleTypespec                                         2
 Package                                                1
 PackedArrayNet                                         1
 PackedArrayTypespec                                    1
@@ -434,8 +434,10 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (prim_pad_wrapper)
     |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
+    \_Design: (unnamed)
     |vpiName:prim_pad_wrapper
+    |vpiModule:
+    \_Module: work@prim_pad_wrapper (work@prim_pad_wrapper), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:8:1, endln:10:29
   |vpiTypedef:
   \_PackedArrayTypespec: 
     |vpiParent:
@@ -472,8 +474,6 @@ Design: (unnamed)
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:13:10, endln:13:33
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (prim_pad_wrapper)
   |vpiImportTypespec:
   \_PackedArrayTypespec: 
   |vpiImportTypespec:
@@ -591,6 +591,15 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
   |vpiEndLabel:prim_pad_wrapper
+|vpiTypedef:
+\_ModuleTypespec: (dut)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:dut
+  |vpiModule:
+  \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
+|vpiTypedef:
+\_ModuleTypespec: (prim_pad_wrapper)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

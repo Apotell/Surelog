@@ -225,7 +225,7 @@ IntTypespec                                            2
 LogicNet                                               5
 LogicTypespec                                          3
 Module                                                 3
-ModuleTypespec                                         2
+ModuleTypespec                                         3
 ParamAssign                                            1
 Parameter                                              1
 Range                                                  1
@@ -427,14 +427,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (bottom)
     |vpiParent:
-    \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:10:1, endln:15:10
+    \_Design: (unnamed)
     |vpiName:bottom
+    |vpiModule:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:17:1, endln:21:10
   |vpiImportTypespec:
   \_TypeParameter: (work@mid.TP0), line:10:29, endln:10:32
   |vpiImportTypespec:
   \_LogicTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (bottom)
   |vpiImportTypespec:
   \_LogicNet: (work@mid.DATA0), line:11:6, endln:11:11
     |vpiParent:
@@ -500,14 +500,14 @@ Design: (unnamed)
   |vpiTypedef:
   \_ModuleTypespec: (mid)
     |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:1:1, endln:8:10
+    \_Design: (unnamed)
     |vpiName:mid
+    |vpiModule:
+    \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:10:1, endln:15:10
   |vpiImportTypespec:
   \_TypeParameter: (work@top.TPTOP), line:2:16, endln:2:21
   |vpiImportTypespec:
   \_IntTypespec: 
-  |vpiImportTypespec:
-  \_ModuleTypespec: (mid)
   |vpiImportTypespec:
   \_LogicNet: (work@top.DATATOP), line:4:8, endln:4:15
     |vpiParent:
@@ -533,6 +533,17 @@ Design: (unnamed)
     |vpiDefName:work@mid
     |vpiActual:
     \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:10:1, endln:15:10
+|vpiTypedef:
+\_ModuleTypespec: (bottom)
+|vpiTypedef:
+\_ModuleTypespec: (mid)
+|vpiTypedef:
+\_ModuleTypespec: (top)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:top
+  |vpiModule:
+  \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:1:1, endln:8:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

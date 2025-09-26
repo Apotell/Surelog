@@ -104,6 +104,7 @@ Identifier                                             1
 LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
+ModuleTypespec                                         1
 PartSelect                                             1
 Range                                                  3
 RefTypespec                                            1
@@ -248,11 +249,11 @@ Design: (unnamed)
         |UINT:3
         |vpiConstType:9
       |vpiIndex:
-      \_PartSelect: state_d (work@t.state_d), line:3:22, endln:3:25
+      \_PartSelect: state_d (work@t.state_d.state_d), line:3:22, endln:3:25
         |vpiParent:
-        \_ContAssign: , line:3:8, endln:3:40
+        \_VarSelect: (work@t.state_d), line:3:8, endln:3:26
         |vpiName:state_d
-        |vpiFullName:work@t.state_d
+        |vpiFullName:work@t.state_d.state_d
         |vpiDefName:state_d
         |vpiActual:
         \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
@@ -260,7 +261,7 @@ Design: (unnamed)
         |vpiLeftRange:
         \_Constant: , line:3:22, endln:3:23
           |vpiParent:
-          \_PartSelect: state_d (work@t.state_d), line:3:22, endln:3:25
+          \_PartSelect: state_d (work@t.state_d.state_d), line:3:22, endln:3:25
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
@@ -268,11 +269,18 @@ Design: (unnamed)
         |vpiRightRange:
         \_Constant: , line:3:24, endln:3:25
           |vpiParent:
-          \_PartSelect: state_d (work@t.state_d), line:3:22, endln:3:25
+          \_PartSelect: state_d (work@t.state_d.state_d), line:3:22, endln:3:25
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
+|vpiTypedef:
+\_ModuleTypespec: (t)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:t
+  |vpiModule:
+  \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

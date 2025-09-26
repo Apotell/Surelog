@@ -127,6 +127,7 @@ Initial                                                1
 LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              1
 Package                                                1
 ParamAssign                                            2
@@ -297,27 +298,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:17:1, endln:19:4
       |vpiFullName:work@test
-      |vpiImportTypespec:
-      \_LogicNet: (work@test.p1), line:18:7, endln:18:9
-        |vpiParent:
-        \_Begin: (work@test), line:17:9, endln:19:4
-        |vpiName:p1
-        |vpiFullName:work@test.p1
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@test.p2), line:18:12, endln:18:14
-        |vpiParent:
-        \_Begin: (work@test), line:17:9, endln:19:4
-        |vpiName:p2
-        |vpiFullName:work@test.p2
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@test.v), line:18:3, endln:18:4
-        |vpiParent:
-        \_Begin: (work@test), line:17:9, endln:19:4
-        |vpiName:v
-        |vpiFullName:work@test.v
-        |vpiNetType:1
       |vpiStmt:
       \_Assignment: , line:18:3, endln:18:14
         |vpiParent:
@@ -336,7 +316,7 @@ Design: (unnamed)
             |vpiName:p1
             |vpiFullName:work@test.p1
             |vpiActual:
-            \_LogicNet: (work@test.p1), line:18:7, endln:18:9
+            \_Parameter: (my_package1::p1), line:3:12, endln:3:18
           |vpiOperand:
           \_RefObj: (work@test.p2), line:18:12, endln:18:14
             |vpiParent:
@@ -344,7 +324,7 @@ Design: (unnamed)
             |vpiName:p2
             |vpiFullName:work@test.p2
             |vpiActual:
-            \_LogicNet: (work@test.p2), line:18:12, endln:18:14
+            \_Parameter: (my_package1::p2), line:4:12, endln:4:18
         |vpiLhs:
         \_RefObj: (work@test.v), line:18:3, endln:18:4
           |vpiParent:
@@ -352,7 +332,14 @@ Design: (unnamed)
           |vpiName:v
           |vpiFullName:work@test.v
           |vpiActual:
-          \_LogicNet: (work@test.v), line:18:3, endln:18:4
+          \_LogicNet: (my_package1::v), line:8:6, endln:8:7
+|vpiTypedef:
+\_ModuleTypespec: (test)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test
+  |vpiModule:
+  \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:13:1, endln:21:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

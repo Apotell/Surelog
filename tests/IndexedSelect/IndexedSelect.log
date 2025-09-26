@@ -154,7 +154,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: No timescale set for "test".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:1:1: Compile module "work@test".
-[ERR:UH0703] ${SURELOG_DIR}/tests/IndexedSelect/dut.sv:10:12: Internal Error(21) : adding wrong object type (GenVar) in a stmt group!.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
@@ -165,6 +164,7 @@ GenVar                                                 1
 Identifier                                             1
 IndexedPartSelect                                      1
 Module                                                 1
+ModuleTypespec                                         1
 Operation                                              2
 ParamAssign                                            3
 Parameter                                              3
@@ -303,12 +303,21 @@ Design: (unnamed)
         \_Begin: (work@test), line:10:5, endln:10:14
         |vpiName:i
         |vpiFullName:work@test.i
+      |vpiStmt:
+      \_GenVar: (work@test.i), line:10:12, endln:10:13
     |vpiStmt:
     \_Begin: (work@test), line:10:5, endln:10:14
   |vpiDefName:work@test
+|vpiTypedef:
+\_ModuleTypespec: (test)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:test
+  |vpiModule:
+  \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

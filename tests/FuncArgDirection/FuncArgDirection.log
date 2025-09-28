@@ -37,7 +37,7 @@ n<> u<210> t<Top_level_rule> c<1> l<1:1> el<16:1>
                                       n<> u<14> t<Primary_literal> p<15> c<13> l<2:29> el<2:30>
                                         n<0> u<13> t<INT_CONST> p<14> l<2:29> el<2:30>
                         n<aes_rev_order_bit> u<22> t<STRING_CONST> p<136> s<38> l<2:32> el<2:49>
-                        n<> u<38> t<Tf_port_list> p<136> c<37> s<56> l<2:50> el<2:64>
+                        n<> u<38> t<Tf_port_item_list> p<136> c<37> s<56> l<2:49> el<2:65>
                           n<> u<37> t<Tf_port_item> p<38> c<35> l<2:50> el<2:64>
                             n<> u<35> t<Data_type_or_implicit> p<37> c<34> s<36> l<2:50> el<2:61>
                               n<> u<34> t<Data_type> p<35> c<23> l<2:50> el<2:61>
@@ -253,6 +253,7 @@ SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncArgDirection/dut.sv:2:20: Bad relative location: Child: 12, RefTypespec,  Parent: 6, Function, aes_rev_order_bit.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncArgDirection/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -364,7 +365,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -806,7 +807,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -846,7 +847,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -886,7 +887,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -933,7 +934,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1339,7 +1340,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:in
       |vpiTypedef:
-      \_RefTypespec: (work@dut.aes_rev_order_bit.in)
+      \_RefTypespec: (work@dut.aes_rev_order_bit.in), line:2:50, endln:2:61
         |vpiParent:
         \_IODecl: (in), line:2:62, endln:2:64
         |vpiFullName:work@dut.aes_rev_order_bit.in
@@ -1471,6 +1472,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

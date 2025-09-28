@@ -255,7 +255,7 @@ Design                                                 1
 GenFor                                                 2
 GenIf                                                  3
 GenIfElse                                              2
-GenVar                                                 1
+GenVar                                                 3
 Identifier                                             2
 LogicNet                                               7
 LogicTypespec                                          7
@@ -266,7 +266,6 @@ ParamAssign                                            1
 Parameter                                              1
 RefObj                                                 8
 RefTypespec                                            7
-RefVar                                                 2
 SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StandardBlock/slpp_all/surelog.uhdm ...
@@ -287,12 +286,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StandardBlock/dut.sv, line:1:1, endln:28:10
     |vpiName:work@top
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@top.i), line:3:8, endln:3:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StandardBlock/dut.sv, line:1:1, endln:28:10
     |vpiName:i
     |vpiFullName:work@top.i
+  |vpiGenVar:
+  \_GenVar: (work@top.i), line:3:8, endln:3:9
   |vpiParameter:
   \_Parameter: (work@top.genblk2), line:2:11, endln:2:22
     |vpiParent:
@@ -345,6 +346,8 @@ Design: (unnamed)
       \_Begin: (work@top), line:5:14, endln:5:22
       |vpiOpType:82
       |vpiBlocking:1
+      |vpiLhs:
+      \_LogicNet: (work@top.a), line:5:20, endln:5:21
   |vpiInternalScope:
   \_Begin: (work@top), line:6:6, endln:6:14
     |vpiParent:
@@ -376,6 +379,8 @@ Design: (unnamed)
       \_Begin: (work@top), line:6:6, endln:6:14
       |vpiOpType:82
       |vpiBlocking:1
+      |vpiLhs:
+      \_LogicNet: (work@top.b), line:6:12, endln:6:13
   |vpiInternalScope:
   \_Begin: (work@top), line:9:14, endln:9:22
     |vpiParent:
@@ -407,6 +412,8 @@ Design: (unnamed)
       \_Begin: (work@top), line:9:14, endln:9:22
       |vpiOpType:82
       |vpiBlocking:1
+      |vpiLhs:
+      \_LogicNet: (work@top.a), line:9:20, endln:9:21
   |vpiInternalScope:
   \_Begin: (work@top), line:10:6, endln:10:14
     |vpiParent:
@@ -438,6 +445,8 @@ Design: (unnamed)
       \_Begin: (work@top), line:10:6, endln:10:14
       |vpiOpType:82
       |vpiBlocking:1
+      |vpiLhs:
+      \_LogicNet: (work@top.b), line:10:12, endln:10:13
   |vpiInternalScope:
   \_Begin: (work@top), line:27:8, endln:27:16
     |vpiParent:
@@ -469,17 +478,21 @@ Design: (unnamed)
       \_Begin: (work@top), line:27:8, endln:27:16
       |vpiOpType:82
       |vpiBlocking:1
+      |vpiLhs:
+      \_LogicNet: (work@top.a), line:27:14, endln:27:15
   |vpiInternalScope:
   \_GenFor: (work@top), line:13:1, endln:17:4
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StandardBlock/dut.sv, line:1:1, endln:28:10
     |vpiFullName:work@top
     |vpiVariables:
-    \_RefVar: (work@top.i), line:13:6, endln:13:7
+    \_GenVar: (work@top.i), line:13:6, endln:13:7
       |vpiParent:
       \_GenFor: (work@top), line:13:1, endln:17:4
       |vpiName:i
       |vpiFullName:work@top.i
+    |vpiGenVar:
+    \_GenVar: (work@top.i), line:13:6, endln:13:7
     |vpiInternalScope:
     \_Begin: (work@top.g1), line:13:31, endln:17:4
       |vpiParent:
@@ -521,6 +534,8 @@ Design: (unnamed)
           \_Begin: (work@top.g1), line:16:8, endln:16:16
           |vpiOpType:82
           |vpiBlocking:1
+          |vpiLhs:
+          \_LogicNet: (work@top.g1.a), line:16:14, endln:16:15
       |vpiStmt:
       \_GenIf: , line:16:1, endln:16:16
         |vpiParent:
@@ -536,7 +551,7 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (work@top.g1), line:16:8, endln:16:16
     |vpiImportTypespec:
-    \_RefVar: (work@top.i), line:13:6, endln:13:7
+    \_GenVar: (work@top.i), line:13:6, endln:13:7
     |vpiForInitStmt:
     \_Assignment: , line:13:6, endln:13:11
       |vpiParent:
@@ -550,7 +565,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@top.i), line:13:6, endln:13:7
+      \_GenVar: (work@top.i), line:13:6, endln:13:7
     |vpiCondition:
     \_Operation: , line:13:13, endln:13:18
       |vpiParent:
@@ -614,11 +629,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StandardBlock/dut.sv, line:1:1, endln:28:10
     |vpiFullName:work@top
     |vpiVariables:
-    \_RefVar: (work@top.i), line:22:6, endln:22:7
+    \_GenVar: (work@top.i), line:22:6, endln:22:7
       |vpiParent:
       \_GenFor: (work@top), line:22:1, endln:25:16
       |vpiName:i
       |vpiFullName:work@top.i
+    |vpiGenVar:
+    \_GenVar: (work@top.i), line:22:6, endln:22:7
     |vpiInternalScope:
     \_Begin: (work@top), line:25:1, endln:25:16
       |vpiParent:
@@ -655,6 +672,8 @@ Design: (unnamed)
           \_Begin: (work@top), line:25:8, endln:25:16
           |vpiOpType:82
           |vpiBlocking:1
+          |vpiLhs:
+          \_LogicNet: (work@top.a), line:25:14, endln:25:15
       |vpiStmt:
       \_GenIf: , line:25:1, endln:25:16
         |vpiParent:
@@ -670,7 +689,7 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (work@top), line:25:8, endln:25:16
     |vpiImportTypespec:
-    \_RefVar: (work@top.i), line:22:6, endln:22:7
+    \_GenVar: (work@top.i), line:22:6, endln:22:7
     |vpiForInitStmt:
     \_Assignment: , line:22:6, endln:22:11
       |vpiParent:
@@ -684,7 +703,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@top.i), line:22:6, endln:22:7
+      \_GenVar: (work@top.i), line:22:6, endln:22:7
     |vpiCondition:
     \_Operation: , line:22:13, endln:22:18
       |vpiParent:
@@ -742,6 +761,8 @@ Design: (unnamed)
         \_GenVar: (work@top.i), line:3:8, endln:3:9
     |vpiStmt:
     \_Begin: (work@top), line:25:1, endln:25:16
+  |vpiImportTypespec:
+  \_GenVar: (work@top.i), line:3:8, endln:3:9
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIfElse: , line:5:1, endln:6:14

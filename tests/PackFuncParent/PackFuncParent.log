@@ -30,7 +30,7 @@ n<> u<213> t<Top_level_rule> c<1> l<1:1> el<17:1>
                               n<> u<11> t<Primary_literal> p<12> c<10> l<2:32> el<2:33>
                                 n<0> u<10> t<INT_CONST> p<11> l<2:32> el<2:33>
                 n<sbox4_8bit> u<19> t<STRING_CONST> p<47> s<35> l<2:35> el<2:45>
-                n<> u<35> t<Tf_port_list> p<47> c<34> s<44> l<2:46> el<2:66>
+                n<> u<35> t<Tf_port_item_list> p<47> c<34> s<44> l<2:45> el<2:67>
                   n<> u<34> t<Tf_port_item> p<35> c<32> l<2:46> el<2:66>
                     n<> u<32> t<Data_type_or_implicit> p<34> c<31> s<33> l<2:46> el<2:57>
                       n<> u<31> t<Data_type> p<32> c<20> l<2:46> el<2:57>
@@ -77,7 +77,7 @@ n<> u<213> t<Top_level_rule> c<1> l<1:1> el<17:1>
                               n<> u<58> t<Primary_literal> p<59> c<57> l<6:33> el<6:34>
                                 n<0> u<57> t<INT_CONST> p<58> l<6:33> el<6:34>
                 n<sbox4_16bit> u<66> t<STRING_CONST> p<156> s<82> l<6:36> el<6:47>
-                n<> u<82> t<Tf_port_list> p<156> c<81> s<100> l<6:48> el<6:69>
+                n<> u<82> t<Tf_port_item_list> p<156> c<81> s<100> l<6:47> el<6:70>
                   n<> u<81> t<Tf_port_item> p<82> c<79> l<6:48> el<6:69>
                     n<> u<79> t<Data_type_or_implicit> p<81> c<78> s<80> l<6:48> el<6:60>
                       n<> u<78> t<Data_type> p<79> c<67> l<6:48> el<6:60>
@@ -246,6 +246,8 @@ RefTypespec                                            7
 ReturnStmt                                             2
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:2:23: Bad relative location: Child: 16, RefTypespec,  Parent: 8, Function, sbox4_8bit.
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackFuncParent/dut.sv:6:23: Bad relative location: Child: 29, RefTypespec,  Parent: 10, Function, sbox4_16bit.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFuncParent/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -342,7 +344,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state_in
       |vpiTypedef:
-      \_RefTypespec: (my_pkg::sbox4_8bit::state_in)
+      \_RefTypespec: (my_pkg::sbox4_8bit::state_in), line:2:46, endln:2:57
         |vpiParent:
         \_IODecl: (state_in), line:2:58, endln:2:66
         |vpiFullName:my_pkg::sbox4_8bit::state_in
@@ -572,7 +574,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state_in
       |vpiTypedef:
-      \_RefTypespec: (my_pkg::sbox4_16bit::state_in)
+      \_RefTypespec: (my_pkg::sbox4_16bit::state_in), line:6:48, endln:6:60
         |vpiParent:
         \_IODecl: (state_in), line:6:61, endln:6:69
         |vpiFullName:my_pkg::sbox4_16bit::state_in
@@ -677,6 +679,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0

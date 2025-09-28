@@ -177,7 +177,7 @@ ContAssign                                             1
 Design                                                 1
 GenFor                                                 1
 GenRegion                                              1
-GenVar                                                 1
+GenVar                                                 2
 HierPath                                               1
 IODecl                                                 1
 Identifier                                             6
@@ -197,9 +197,10 @@ Port                                                   1
 Range                                                  3
 RefObj                                                 9
 RefTypespec                                            8
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv:7:11: Parented to neither scope nor design: 56, IODecl, vld.
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, r5p_bus_if.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -261,20 +262,22 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@r5p_bus_if.vld), line:4:17, endln:4:20
   |vpiModport:
-  \_Modport: (man), line:6:11, endln:6:14
+  \_Modport: (work@r5p_bus_if.man), line:6:11, endln:8:3
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
     |vpiName:
-    \_Identifier: (man)
+    \_Identifier: (work@r5p_bus_if.man)
       |vpiParent:
-      \_Modport: (man), line:6:11, endln:6:14
-      |vpiName:man
+      \_Modport: (work@r5p_bus_if.man), line:6:11, endln:8:3
+      |vpiName:work@r5p_bus_if.man
     |vpiIODecl:
     \_IODecl: (vld), line:7:11, endln:7:14
       |vpiParent:
-      \_Modport: (man), line:6:11, endln:6:14
+      \_Modport: (work@r5p_bus_if.man), line:6:11, endln:8:3
       |vpiDirection:2
       |vpiName:vld
+    |vpiInterface:
+    \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
   |vpiEndLabel:r5p_bus_if
 |vpiAllModules:
 \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
@@ -285,12 +288,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
     |vpiName:work@r5p_bus_dec
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@r5p_bus_dec.i), line:18:8, endln:18:9
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
     |vpiName:i
     |vpiFullName:work@r5p_bus_dec.i
+  |vpiGenVar:
+  \_GenVar: (work@r5p_bus_dec.i), line:18:8, endln:18:9
   |vpiParameter:
   \_Parameter: (work@r5p_bus_dec.BN), line:13:16, endln:13:22
     |vpiParent:
@@ -335,11 +340,13 @@ Design: (unnamed)
         \_Begin: (work@r5p_bus_dec), line:21:1, endln:25:14
         |vpiFullName:work@r5p_bus_dec
         |vpiVariables:
-        \_RefVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
+        \_GenVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
           |vpiParent:
           \_GenFor: (work@r5p_bus_dec), line:21:1, endln:25:14
           |vpiName:i
           |vpiFullName:work@r5p_bus_dec.i
+        |vpiGenVar:
+        \_GenVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
         |vpiInternalScope:
         \_Begin: (work@r5p_bus_dec.gen_loop), line:21:22, endln:25:14
           |vpiParent:
@@ -435,7 +442,7 @@ Design: (unnamed)
                 \_LogicNet: (work@r5p_bus_dec.gen_loop.vld), line:23:15, endln:23:18
               |vpiName:m[i].vld
         |vpiImportTypespec:
-        \_RefVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
+        \_GenVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
         |vpiForInitStmt:
         \_Assignment: , line:21:6, endln:21:9
           |vpiParent:
@@ -449,7 +456,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
+          \_GenVar: (work@r5p_bus_dec.i), line:21:6, endln:21:7
         |vpiCondition:
         \_Operation: , line:21:11, endln:21:15
           |vpiParent:
@@ -597,15 +604,16 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: 
   |vpiTypedef:
-  \_InterfaceTypespec: (man), line:15:14, endln:15:17
+  \_InterfaceTypespec: (work@r5p_bus_if.man), line:15:14, endln:15:17
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:12:1, endln:29:10
     |vpiName:
-    \_Identifier: (man)
+    \_Identifier: (work@r5p_bus_if.man)
       |vpiParent:
-      \_InterfaceTypespec: (man), line:15:14, endln:15:17
-      |vpiName:man
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@r5p_bus_if.man), line:15:14, endln:15:17
+      |vpiName:work@r5p_bus_if.man
+    |vpiModport:
+    \_Modport: (work@r5p_bus_if.man), line:6:11, endln:8:3
     |vpiInterface:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/tests/ModPortArrayBind/dut.sv, line:2:1, endln:10:25
   |vpiTypedef:
@@ -647,15 +655,17 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@r5p_bus_dec.man), line:15:3, endln:15:13
+    \_RefTypespec: (work@r5p_bus_dec.work@r5p_bus_if.man), line:15:3, endln:15:13
       |vpiParent:
       \_ArrayTypespec: 
-      |vpiName:man
-      |vpiFullName:work@r5p_bus_dec.man
+      |vpiName:work@r5p_bus_if.man
+      |vpiFullName:work@r5p_bus_dec.work@r5p_bus_if.man
       |vpiActual:
-      \_InterfaceTypespec: (man), line:15:14, endln:15:17
+      \_InterfaceTypespec: (work@r5p_bus_if.man), line:15:14, endln:15:17
   |vpiImportTypespec:
   \_IntTypespec: 
+  |vpiImportTypespec:
+  \_GenVar: (work@r5p_bus_dec.i), line:18:8, endln:18:9
   |vpiImportTypespec:
   \_InterfaceTypespec: (r5p_bus_if)
   |vpiImportTypespec:
@@ -677,7 +687,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiImportTypespec:
-  \_InterfaceTypespec: (man), line:15:14, endln:15:17
+  \_InterfaceTypespec: (work@r5p_bus_if.man), line:15:14, endln:15:17
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiDefName:work@r5p_bus_dec
@@ -707,6 +717,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0

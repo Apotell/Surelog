@@ -59,7 +59,7 @@ n<> u<205> t<Top_level_rule> c<1> l<1:1> el<44:1>
                       n<> u<43> t<Function_data_type_or_implicit> p<54> c<42> s<44> l<15:17> el<15:21>
                         n<> u<42> t<Function_data_type> p<43> l<15:17> el<15:21>
                       n<print> u<44> t<STRING_CONST> p<54> s<53> l<15:22> el<15:27>
-                      n<> u<53> t<Tf_port_list> p<54> c<52> l<15:28> el<15:52>
+                      n<> u<53> t<Tf_port_item_list> p<54> c<52> l<15:27> el<15:53>
                         n<> u<52> t<Tf_port_item> p<53> c<47> l<15:28> el<15:52>
                           n<> u<47> t<Data_type_or_implicit> p<52> c<46> s<48> l<15:28> el<15:39>
                             n<ovm_printer> u<46> t<Data_type> p<47> c<45> l<15:28> el<15:39>
@@ -79,7 +79,7 @@ n<> u<205> t<Top_level_rule> c<1> l<1:1> el<44:1>
                   n<> u<66> t<Class_type> p<67> c<65> l<23:15> el<23:25>
                     n<ovm_object> u<65> t<STRING_CONST> p<66> l<23:15> el<23:25>
                 n<print> u<68> t<STRING_CONST> p<197> s<77> l<23:27> el<23:32>
-                n<> u<77> t<Tf_port_list> p<197> c<76> s<107> l<23:33> el<23:57>
+                n<> u<77> t<Tf_port_item_list> p<197> c<76> s<107> l<23:32> el<23:58>
                   n<> u<76> t<Tf_port_item> p<77> c<71> l<23:33> el<23:57>
                     n<> u<71> t<Data_type_or_implicit> p<76> c<70> s<72> l<23:33> el<23:44>
                       n<ovm_printer> u<70> t<Data_type> p<71> c<69> l<23:33> el<23:44>
@@ -244,6 +244,10 @@ VoidTypespec                                           2
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:28, name: ovm_default_printer".
 [ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 50, name: OVM_PRINT".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:50, name: OVM_PRINT".
+[ERR:IG0801] ${SURELOG_DIR}/tests/PackageVar/dut.sv Missing location information: 58, RefTypespec, .
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Unbound: 28, RefObj, ovm_default_printer.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Unbound: 50, RefObj, OVM_PRINT.
+[ERR:IG0801] ${SURELOG_DIR}/tests/PackageVar/dut.sv Missing location information: 17, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -352,7 +356,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:11
         |vpiTypedef:
-        \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer)
+        \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer), line:15:28, endln:15:39
           |vpiParent:
           \_IODecl: (printer), line:15:40, endln:15:47
           |vpiName:ovm_printer
@@ -597,7 +601,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:11
         |vpiTypedef:
-        \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer)
+        \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer), line:23:33, endln:23:44
           |vpiParent:
           \_IODecl: (printer), line:23:45, endln:23:52
           |vpiName:ovm_printer
@@ -687,6 +691,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 8
 [WARNING] : 1
 [   NOTE] : 0

@@ -151,7 +151,7 @@ n<> u<191> t<Top_level_rule> c<1> l<1:1> el<22:1>
                       n<> u<135> t<IntegerAtomType_Int> p<137> s<136> l<17:20> el<17:23>
                       n<> u<136> t<Signing_Unsigned> p<137> l<17:24> el<17:32>
                 n<fp_width> u<140> t<STRING_CONST> p<183> s<146> l<17:33> el<17:41>
-                n<> u<146> t<Tf_port_list> p<183> c<145> s<181> l<17:42> el<17:57>
+                n<> u<146> t<Tf_port_item_list> p<183> c<145> s<181> l<17:41> el<17:58>
                   n<> u<145> t<Tf_port_item> p<146> c<143> l<17:42> el<17:57>
                     n<> u<143> t<Data_type_or_implicit> p<145> c<142> s<144> l<17:42> el<17:53>
                       n<fp_format_e> u<142> t<Data_type> p<143> c<141> l<17:42> el<17:53>
@@ -227,6 +227,10 @@ UnsupportedTypespec                                    1
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:92, name: exp_bits".
 [ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Failed to bind object: "id: 97, name: man_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:97, name: man_bits".
+[ERR:IG0804] Missing/invalid file: 29, RefTypespec, uvm::fp_encoding_t.
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:20: Bad relative location: Child: 84, RefTypespec,  Parent: 5, Function, fp_width.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Unbound: 92, RefObj, exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Unbound: 97, RefObj, man_bits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -429,7 +433,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:fmt
       |vpiTypedef:
-      \_RefTypespec: (uvm::fp_width::fmt::fp_format_e)
+      \_RefTypespec: (uvm::fp_width::fmt::fp_format_e), line:17:42, endln:17:53
         |vpiParent:
         \_IODecl: (fmt), line:17:54, endln:17:57
         |vpiName:fp_format_e
@@ -630,6 +634,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 8
 [WARNING] : 1
 [   NOTE] : 0

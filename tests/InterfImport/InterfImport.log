@@ -298,6 +298,17 @@ RefTypespec                                           13
 SourceFile                                             1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:20:13: Parented to neither scope nor design: 119, IODecl, request.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:21:13: Parented to neither scope nor design: 120, IODecl, grant.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:22:13: Parented to neither scope nor design: 121, IODecl, free.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:23:13: Parented to neither scope nor design: 122, IODecl, start_of_packet.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:24:13: Parented to neither scope nor design: 123, IODecl, end_of_packet.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:28:13: Parented to neither scope nor design: 114, IODecl, request.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:29:13: Parented to neither scope nor design: 115, IODecl, grant.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:30:13: Parented to neither scope nor design: 116, IODecl, free.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:31:13: Parented to neither scope nor design: 117, IODecl, start_of_packet.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfImport/dut.sv:32:13: Parented to neither scope nor design: 118, IODecl, end_of_packet.
+[ERR:IG0810] Invalid location: 7, InterfaceTypespec, tnoc_port_control_if.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -830,83 +841,87 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@tnoc_port_control_if.virtual_channels), line:11:45, endln:11:61
   |vpiModport:
-  \_Modport: (controller), line:27:11, endln:27:21
+  \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
     |vpiParent:
     \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
     |vpiName:
-    \_Identifier: (controller)
+    \_Identifier: (work@tnoc_port_control_if.requester)
       |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiName:controller
-    |vpiIODecl:
-    \_IODecl: (request), line:28:13, endln:28:20
-      |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiDirection:1
-      |vpiName:request
-    |vpiIODecl:
-    \_IODecl: (grant), line:29:13, endln:29:18
-      |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiDirection:2
-      |vpiName:grant
-    |vpiIODecl:
-    \_IODecl: (free), line:30:13, endln:30:17
-      |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiDirection:1
-      |vpiName:free
-    |vpiIODecl:
-    \_IODecl: (start_of_packet), line:31:13, endln:31:28
-      |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiDirection:1
-      |vpiName:start_of_packet
-    |vpiIODecl:
-    \_IODecl: (end_of_packet), line:32:13, endln:32:26
-      |vpiParent:
-      \_Modport: (controller), line:27:11, endln:27:21
-      |vpiDirection:1
-      |vpiName:end_of_packet
-  |vpiModport:
-  \_Modport: (requester), line:19:11, endln:19:20
-    |vpiParent:
-    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
-    |vpiName:
-    \_Identifier: (requester)
-      |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
-      |vpiName:requester
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
+      |vpiName:work@tnoc_port_control_if.requester
     |vpiIODecl:
     \_IODecl: (request), line:20:13, endln:20:20
       |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
       |vpiDirection:2
       |vpiName:request
     |vpiIODecl:
     \_IODecl: (grant), line:21:13, endln:21:18
       |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
       |vpiDirection:1
       |vpiName:grant
     |vpiIODecl:
     \_IODecl: (free), line:22:13, endln:22:17
       |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
       |vpiDirection:2
       |vpiName:free
     |vpiIODecl:
     \_IODecl: (start_of_packet), line:23:13, endln:23:28
       |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
       |vpiDirection:2
       |vpiName:start_of_packet
     |vpiIODecl:
     \_IODecl: (end_of_packet), line:24:13, endln:24:26
       |vpiParent:
-      \_Modport: (requester), line:19:11, endln:19:20
+      \_Modport: (work@tnoc_port_control_if.requester), line:19:11, endln:25:4
       |vpiDirection:2
       |vpiName:end_of_packet
+    |vpiInterface:
+    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
+  |vpiModport:
+  \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+    |vpiParent:
+    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
+    |vpiName:
+    \_Identifier: (work@tnoc_port_control_if.controller)
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiName:work@tnoc_port_control_if.controller
+    |vpiIODecl:
+    \_IODecl: (request), line:28:13, endln:28:20
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiDirection:1
+      |vpiName:request
+    |vpiIODecl:
+    \_IODecl: (grant), line:29:13, endln:29:18
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiDirection:2
+      |vpiName:grant
+    |vpiIODecl:
+    \_IODecl: (free), line:30:13, endln:30:17
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiDirection:1
+      |vpiName:free
+    |vpiIODecl:
+    \_IODecl: (start_of_packet), line:31:13, endln:31:28
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiDirection:1
+      |vpiName:start_of_packet
+    |vpiIODecl:
+    \_IODecl: (end_of_packet), line:32:13, endln:32:26
+      |vpiParent:
+      \_Modport: (work@tnoc_port_control_if.controller), line:27:11, endln:33:4
+      |vpiDirection:1
+      |vpiName:end_of_packet
+    |vpiInterface:
+    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
 |vpiTypedef:
 \_InterfaceTypespec: (tnoc_port_control_if)
   |vpiParent:
@@ -921,6 +936,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 11
 [WARNING] : 2
 [   NOTE] : 0

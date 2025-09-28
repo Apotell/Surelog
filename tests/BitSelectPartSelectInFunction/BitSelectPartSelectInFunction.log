@@ -101,7 +101,7 @@ n<> u<175> t<Top_level_rule> c<1> l<1:1> el<15:1>
                                     n<> u<79> t<Primary_literal> p<80> c<78> l<6:32> el<6:33>
                                       n<0> u<78> t<INT_CONST> p<79> l<6:32> el<6:33>
                       n<iota> u<87> t<STRING_CONST> p<164> s<93> l<6:35> el<6:39>
-                      n<> u<93> t<Tf_port_list> p<164> c<92> s<101> l<6:40> el<6:51>
+                      n<> u<93> t<Tf_port_item_list> p<164> c<92> s<101> l<6:39> el<6:52>
                         n<> u<92> t<Tf_port_item> p<93> c<90> l<6:40> el<6:51>
                           n<> u<90> t<Data_type_or_implicit> p<92> c<89> s<91> l<6:40> el<6:45>
                             n<box_t> u<89> t<Data_type> p<90> c<88> l<6:40> el<6:45>
@@ -211,6 +211,7 @@ SourceFile                                             1
 TypedefTypespec                                        1
 VarSelect                                              2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv:6:23: Bad relative location: Child: 22, RefTypespec,  Parent: 6, Function, iota.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectPartSelectInFunction/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -412,7 +413,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state
       |vpiTypedef:
-      \_RefTypespec: (work@top.iota.state.box_t), line:2:29, endln:2:34
+      \_RefTypespec: (work@top.iota.state.box_t), line:6:40, endln:6:45
         |vpiParent:
         \_IODecl: (state), line:6:46, endln:6:51
         |vpiName:box_t
@@ -503,7 +504,7 @@ Design: (unnamed)
       |vpiName:box_t
       |vpiFullName:work@top.result.box_t
       |vpiActual:
-      \_TypedefTypespec: (box_t), line:2:29, endln:2:34
+      \_LogicTypespec: 
     |vpiName:result
     |vpiFullName:work@top.result
   |vpiImportTypespec:
@@ -574,6 +575,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

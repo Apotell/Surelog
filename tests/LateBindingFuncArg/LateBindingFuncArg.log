@@ -28,7 +28,7 @@ n<> u<61> t<Top_level_rule> c<1> l<1:1> el<8:1>
                           n<> u<11> t<Data_type> p<12> c<10> l<4:14> el<4:21>
                             n<> u<10> t<IntegerAtomType_Integer> p<11> l<4:14> el<4:21>
                       n<doFoo> u<14> t<STRING_CONST> p<50> s<21> l<4:22> el<4:27>
-                      n<> u<21> t<Tf_port_list> p<50> c<20> s<48> l<4:28> el<4:47>
+                      n<> u<21> t<Tf_port_item_list> p<50> c<20> s<48> l<4:27> el<4:48>
                         n<> u<20> t<Tf_port_item> p<21> c<15> l<4:28> el<4:47>
                           n<> u<15> t<TfPortDir_Inp> p<20> s<18> l<4:28> el<4:33>
                           n<> u<18> t<Data_type_or_implicit> p<20> c<17> s<19> l<4:34> el<4:41>
@@ -83,6 +83,7 @@ RefTypespec                                            2
 SourceFile                                             1
 SysFuncCall                                            2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/LateBindingFuncArg/dut.sv:4:14: Bad relative location: Child: 9, RefTypespec,  Parent: 6, Function, doFoo.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LateBindingFuncArg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -133,7 +134,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:depth
       |vpiTypedef:
-      \_RefTypespec: (work@top.doFoo.depth)
+      \_RefTypespec: (work@top.doFoo.depth), line:4:34, endln:4:41
         |vpiParent:
         \_IODecl: (depth), line:4:42, endln:4:47
         |vpiFullName:work@top.doFoo.depth
@@ -194,6 +195,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

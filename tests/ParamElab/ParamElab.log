@@ -165,6 +165,7 @@ EnumTypespec                                           1
 Function                                               9
 GenFor                                                 1
 GenRegion                                              1
+GenVar                                                 1
 IODecl                                                11
 Identifier                                            30
 IntTypespec                                           12
@@ -178,11 +179,11 @@ Parameter                                              3
 RefModule                                              2
 RefObj                                                 5
 RefTypespec                                           16
-RefVar                                                 1
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamElab/dut.sv:16:7: Unbound: 40, RefModule, u.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamElab/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -294,7 +295,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -736,7 +737,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -776,7 +777,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -816,7 +817,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -863,7 +864,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1139,11 +1140,13 @@ Design: (unnamed)
         \_Begin: (work@test), line:15:4, endln:17:7
         |vpiFullName:work@test
         |vpiVariables:
-        \_RefVar: (work@test.i), line:15:9, endln:15:10
+        \_GenVar: (work@test.i), line:15:9, endln:15:10
           |vpiParent:
           \_GenFor: (work@test), line:15:4, endln:17:7
           |vpiName:i
           |vpiFullName:work@test.i
+        |vpiGenVar:
+        \_GenVar: (work@test.i), line:15:9, endln:15:10
         |vpiInternalScope:
         \_Begin: (work@test), line:15:36, endln:17:7
           |vpiParent:
@@ -1163,7 +1166,7 @@ Design: (unnamed)
             |vpiName:u
             |vpiDefName:work@G1
         |vpiImportTypespec:
-        \_RefVar: (work@test.i), line:15:9, endln:15:10
+        \_GenVar: (work@test.i), line:15:9, endln:15:10
         |vpiImportTypespec:
         \_LogicNet: (work@test.i), line:15:16, endln:15:17
           |vpiParent:
@@ -1191,7 +1194,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@test.i), line:15:9, endln:15:10
+          \_GenVar: (work@test.i), line:15:9, endln:15:10
         |vpiCondition:
         \_Operation: , line:15:16, endln:15:29
           |vpiParent:
@@ -1252,6 +1255,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

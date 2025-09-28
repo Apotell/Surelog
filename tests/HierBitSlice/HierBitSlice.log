@@ -4563,7 +4563,7 @@ Design                                                 1
 EventControl                                           2
 GenFor                                                 1
 GenRegion                                              1
-GenVar                                                 1
+GenVar                                                 2
 HierPath                                              19
 Identifier                                             8
 IfElse                                                 5
@@ -4581,7 +4581,6 @@ Range                                                 11
 RefModule                                              1
 RefObj                                               299
 RefTypespec                                          109
-RefVar                                                 1
 SourceFile                                             1
 StructNet                                              3
 StructTypespec                                         2
@@ -4596,6 +4595,11 @@ UnsupportedTypespec                                   32
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Illegal implicit net "id:14, name: FLOAT32_EXP_WIDTH".
 [ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Failed to bind object: "id: 22, name: FLOAT32_SIG_WIDTH".
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Illegal implicit net "id:22, name: FLOAT32_SIG_WIDTH".
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:51:18: Unbound: 142, RefObj, NUM_VECTOR_LANES.
+[ERR:IG0804] Missing/invalid file: 147, RefTypespec, scalar_t.
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Unbound: 14, RefObj, FLOAT32_EXP_WIDTH.
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Unbound: 22, RefObj, FLOAT32_SIG_WIDTH.
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:214:13: Unbound: 626, RefModule, rom.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -4614,12 +4618,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:work@int_execute_stage
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
     |vpiParent:
     \_Module: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:lane
     |vpiFullName:work@int_execute_stage.lane
+  |vpiGenVar:
+  \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
   |vpiInternalScope:
   \_GenRegion: (work@int_execute_stage), line:98:5, endln:275:16
     |vpiParent:
@@ -4636,11 +4642,13 @@ Design: (unnamed)
         \_Begin: (work@int_execute_stage), line:99:9, endln:274:12
         |vpiFullName:work@int_execute_stage
         |vpiVariables:
-        \_RefVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
           |vpiParent:
           \_GenFor: (work@int_execute_stage), line:99:9, endln:274:12
           |vpiName:lane
           |vpiFullName:work@int_execute_stage.lane
+        |vpiGenVar:
+        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiInternalScope:
         \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
           |vpiParent:
@@ -4881,54 +4889,72 @@ Design: (unnamed)
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.borrow), line:105:19, endln:105:25
           |vpiStmt:
           \_Assignment: , line:106:19, endln:106:27
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.negative), line:106:19, endln:106:27
           |vpiStmt:
           \_Assignment: , line:107:19, endln:107:27
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.overflow), line:107:19, endln:107:27
           |vpiStmt:
           \_Assignment: , line:108:19, endln:108:23
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.zero), line:108:19, endln:108:23
           |vpiStmt:
           \_Assignment: , line:109:19, endln:109:29
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.signed_gtr), line:109:19, endln:109:29
           |vpiStmt:
           \_Assignment: , line:110:24, endln:110:26
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.lz), line:110:24, endln:110:26
           |vpiStmt:
           \_Assignment: , line:111:24, endln:111:26
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.tz), line:111:24, endln:111:26
           |vpiStmt:
           \_Assignment: , line:114:24, endln:114:43
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.reciprocal_estimate), line:114:24, endln:114:43
           |vpiStmt:
           \_Assignment: , line:115:19, endln:115:32
             |vpiParent:
             \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
             |vpiOpType:82
             |vpiBlocking:1
+            |vpiLhs:
+            \_LogicNet: (work@int_execute_stage.lane_alu_gen.shift_in_sign), line:115:19, endln:115:32
           |vpiStmt:
           \_ContAssign: , line:118:20, endln:118:53
             |vpiParent:
@@ -10002,7 +10028,7 @@ Design: (unnamed)
                 |vpiActual:
                 \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
         |vpiImportTypespec:
-        \_RefVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiForInitStmt:
         \_Assignment: , line:99:14, endln:99:22
           |vpiParent:
@@ -10016,7 +10042,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+          \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiCondition:
         \_Operation: , line:99:24, endln:99:32
           |vpiParent:
@@ -10212,6 +10238,8 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:8
           |vpiConstType:9
+  |vpiImportTypespec:
+  \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
   |vpiImportTypespec:
   \_LogicNet: (work@int_execute_stage.clk), line:54:39, endln:54:42
     |vpiParent:
@@ -13344,6 +13372,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 7
+[  ERROR] : 12
 [WARNING] : 1
 [   NOTE] : 0

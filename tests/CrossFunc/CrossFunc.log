@@ -43,7 +43,7 @@ n<> u<333> t<Top_level_rule> c<1> l<1:1> el<33:1>
                 n<> u<265> t<Package_or_generate_item_declaration> p<266> c<264> l<3:2> el<23:10>
                   n<> u<264> t<Covergroup_declaration> p<265> c<30> l<3:2> el<23:10>
                     n<cg> u<30> t<STRING_CONST> p<264> s<36> l<3:13> el<3:15>
-                    n<> u<36> t<Tf_port_list> p<264> c<35> s<44> l<3:16> el<3:26>
+                    n<> u<36> t<Tf_port_item_list> p<264> c<35> s<44> l<3:15> el<3:27>
                       n<> u<35> t<Tf_port_item> p<36> c<33> l<3:16> el<3:26>
                         n<> u<33> t<Data_type_or_implicit> p<35> c<32> s<34> l<3:16> el<3:19>
                           n<> u<32> t<Data_type> p<33> c<31> l<3:16> el<3:19>
@@ -83,7 +83,7 @@ n<> u<333> t<Top_level_rule> c<1> l<1:1> el<33:1>
                                       n<CrossQueueType> u<60> t<Data_type> p<61> c<59> l<9:12> el<9:26>
                                         n<CrossQueueType> u<59> t<STRING_CONST> p<60> l<9:12> el<9:26>
                                   n<myFunc1> u<63> t<STRING_CONST> p<125> s<69> l<9:27> el<9:34>
-                                  n<> u<69> t<Tf_port_list> p<125> c<68> s<123> l<9:35> el<9:44>
+                                  n<> u<69> t<Tf_port_item_list> p<125> c<68> s<123> l<9:34> el<9:45>
                                     n<> u<68> t<Tf_port_item> p<69> c<66> l<9:35> el<9:44>
                                       n<> u<66> t<Data_type_or_implicit> p<68> c<65> s<67> l<9:35> el<9:38>
                                         n<> u<65> t<Data_type> p<66> c<64> l<9:35> el<9:38>
@@ -182,7 +182,7 @@ n<> u<333> t<Top_level_rule> c<1> l<1:1> el<33:1>
                                       n<CrossQueueType> u<159> t<Data_type> p<160> c<158> l<17:12> el<17:26>
                                         n<CrossQueueType> u<158> t<STRING_CONST> p<159> l<17:12> el<17:26>
                                   n<myFunc2> u<162> t<STRING_CONST> p<256> s<178> l<17:27> el<17:34>
-                                  n<> u<178> t<Tf_port_list> p<256> c<177> s<254> l<17:35> el<17:53>
+                                  n<> u<178> t<Tf_port_item_list> p<256> c<177> s<254> l<17:34> el<17:54>
                                     n<> u<177> t<Tf_port_item> p<178> c<175> l<17:35> el<17:53>
                                       n<> u<175> t<Data_type_or_implicit> p<177> c<174> s<176> l<17:35> el<17:47>
                                         n<> u<174> t<Data_type> p<175> c<163> l<17:35> el<17:47>
@@ -516,7 +516,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:f_lim
       |vpiTypedef:
-      \_RefTypespec: (work@mod_m.myFunc1.f_lim)
+      \_RefTypespec: (work@mod_m.myFunc1.f_lim), line:9:35, endln:9:38
         |vpiParent:
         \_IODecl: (f_lim), line:9:39, endln:9:44
         |vpiFullName:work@mod_m.myFunc1.f_lim
@@ -551,6 +551,20 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
+        |vpiLhs:
+        \_LogicNet: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
+          |vpiParent:
+          \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
+          |vpiTypespec:
+          \_RefTypespec: (work@mod_m.myFunc2.i), line:18:9, endln:18:21
+            |vpiParent:
+            \_LogicNet: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
+            |vpiFullName:work@mod_m.myFunc2.i
+            |vpiActual:
+            \_LogicTypespec: 
+          |vpiName:i
+          |vpiFullName:work@mod_m.myFunc2.i
+          |vpiSigned:1
       |vpiForIncStmt:
       \_Operation: , line:18:40, endln:18:43
         |vpiParent:
@@ -697,18 +711,6 @@ Design: (unnamed)
     \_LogicTypespec: 
     |vpiImportTypespec:
     \_LogicNet: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
-      |vpiParent:
-      \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
-      |vpiTypespec:
-      \_RefTypespec: (work@mod_m.myFunc2.i), line:18:9, endln:18:21
-        |vpiParent:
-        \_LogicNet: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
-        |vpiFullName:work@mod_m.myFunc2.i
-        |vpiActual:
-        \_LogicTypespec: 
-      |vpiName:i
-      |vpiFullName:work@mod_m.myFunc2.i
-      |vpiSigned:1
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@mod_m.myFunc2.CrossQueueType), line:17:12, endln:17:26
@@ -725,7 +727,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:f_lim
       |vpiTypedef:
-      \_RefTypespec: (work@mod_m.myFunc2.f_lim)
+      \_RefTypespec: (work@mod_m.myFunc2.f_lim), line:17:35, endln:17:47
         |vpiParent:
         \_IODecl: (f_lim), line:17:48, endln:17:53
         |vpiFullName:work@mod_m.myFunc2.f_lim

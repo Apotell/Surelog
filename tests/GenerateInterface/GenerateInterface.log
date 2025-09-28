@@ -463,6 +463,7 @@ EnumTypespec                                           1
 Function                                               9
 GenFor                                                 3
 GenRegion                                              1
+GenVar                                                 3
 IODecl                                                11
 Identifier                                            36
 IntTypespec                                           12
@@ -482,11 +483,12 @@ Range                                                 10
 RefModule                                              2
 RefObj                                                24
 RefTypespec                                           26
-RefVar                                                 3
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, abc_if.
+[ERR:IG0810] Invalid location: 12, InterfaceTypespec, pins_if.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateInterface/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -598,7 +600,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1040,7 +1042,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1080,7 +1082,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1120,7 +1122,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1167,7 +1169,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1370,11 +1372,13 @@ Design: (unnamed)
     \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
     |vpiFullName:work@abc_if
     |vpiVariables:
-    \_RefVar: (work@abc_if.i), line:6:15, endln:6:16
+    \_GenVar: (work@abc_if.i), line:6:15, endln:6:16
       |vpiParent:
       \_GenFor: (work@abc_if), line:6:4, endln:10:15
       |vpiName:i
       |vpiFullName:work@abc_if.i
+    |vpiGenVar:
+    \_GenVar: (work@abc_if.i), line:6:15, endln:6:16
     |vpiInternalScope:
     \_Begin: (work@abc_if.block), line:6:34, endln:10:15
       |vpiParent:
@@ -1386,7 +1390,7 @@ Design: (unnamed)
         |vpiName:block
       |vpiFullName:work@abc_if.block
     |vpiImportTypespec:
-    \_RefVar: (work@abc_if.i), line:6:15, endln:6:16
+    \_GenVar: (work@abc_if.i), line:6:15, endln:6:16
     |vpiImportTypespec:
     \_LogicNet: (work@abc_if.i), line:6:19, endln:6:20
       |vpiParent:
@@ -1414,7 +1418,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@abc_if.i), line:6:15, endln:6:16
+      \_GenVar: (work@abc_if.i), line:6:15, endln:6:16
     |vpiCondition:
     \_Operation: , line:6:19, endln:6:29
       |vpiParent:
@@ -1651,18 +1655,20 @@ Design: (unnamed)
     \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
     |vpiFullName:work@pins_if
     |vpiVariables:
-    \_RefVar: (work@pins_if.i), line:28:17, endln:28:18
+    \_GenVar: (work@pins_if.i), line:28:17, endln:28:18
       |vpiParent:
       \_GenFor: (work@pins_if), line:28:5, endln:30:8
       |vpiName:i
       |vpiFullName:work@pins_if.i
+    |vpiGenVar:
+    \_GenVar: (work@pins_if.i), line:28:17, endln:28:18
     |vpiInternalScope:
     \_Begin: (work@pins_if), line:28:40, endln:30:8
       |vpiParent:
       \_GenFor: (work@pins_if), line:28:5, endln:30:8
       |vpiFullName:work@pins_if
     |vpiImportTypespec:
-    \_RefVar: (work@pins_if.i), line:28:17, endln:28:18
+    \_GenVar: (work@pins_if.i), line:28:17, endln:28:18
     |vpiImportTypespec:
     \_LogicNet: (work@pins_if.i), line:28:24, endln:28:25
       |vpiParent:
@@ -1690,7 +1696,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@pins_if.i), line:28:17, endln:28:18
+      \_GenVar: (work@pins_if.i), line:28:17, endln:28:18
     |vpiCondition:
     \_Operation: , line:28:24, endln:28:33
       |vpiParent:
@@ -1945,11 +1951,13 @@ Design: (unnamed)
         \_Begin: (work@top2), line:38:5, endln:40:8
         |vpiFullName:work@top2
         |vpiVariables:
-        \_RefVar: (work@top2.i), line:38:17, endln:38:18
+        \_GenVar: (work@top2.i), line:38:17, endln:38:18
           |vpiParent:
           \_GenFor: (work@top2), line:38:5, endln:40:8
           |vpiName:i
           |vpiFullName:work@top2.i
+        |vpiGenVar:
+        \_GenVar: (work@top2.i), line:38:17, endln:38:18
         |vpiInternalScope:
         \_Begin: (work@top2.each_pin), line:38:40, endln:40:8
           |vpiParent:
@@ -2047,7 +2055,7 @@ Design: (unnamed)
                 |vpiActual:
                 \_LogicNet: (work@top2.each_pin.i), line:39:32, endln:39:33
         |vpiImportTypespec:
-        \_RefVar: (work@top2.i), line:38:17, endln:38:18
+        \_GenVar: (work@top2.i), line:38:17, endln:38:18
         |vpiImportTypespec:
         \_LogicNet: (work@top2.i), line:38:24, endln:38:25
           |vpiParent:
@@ -2075,7 +2083,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@top2.i), line:38:17, endln:38:18
+          \_GenVar: (work@top2.i), line:38:17, endln:38:18
         |vpiCondition:
         \_Operation: , line:38:24, endln:38:33
           |vpiParent:
@@ -2244,6 +2252,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 4
 [   NOTE] : 2

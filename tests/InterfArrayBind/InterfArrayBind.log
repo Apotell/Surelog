@@ -213,7 +213,7 @@ ContAssign                                             2
 Design                                                 1
 GenFor                                                 1
 GenRegion                                              1
-GenVar                                                 1
+GenVar                                                 2
 HierPath                                               2
 Identifier                                             4
 Interface                                              1
@@ -230,9 +230,9 @@ Parameter                                              1
 Range                                                  1
 RefObj                                                 8
 RefTypespec                                            4
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, io_bus_interface.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -302,12 +302,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
     |vpiName:work@soc_tb
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
     |vpiName:io_idx
     |vpiFullName:work@soc_tb.io_idx
+  |vpiGenVar:
+  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
   |vpiParameter:
   \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
     |vpiParent:
@@ -346,11 +348,13 @@ Design: (unnamed)
         \_Begin: (work@soc_tb), line:20:9, endln:23:12
         |vpiFullName:work@soc_tb
         |vpiVariables:
-        \_RefVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
           |vpiParent:
           \_GenFor: (work@soc_tb), line:20:9, endln:23:12
           |vpiName:io_idx
           |vpiFullName:work@soc_tb.io_idx
+        |vpiGenVar:
+        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiInternalScope:
         \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
           |vpiParent:
@@ -417,7 +421,7 @@ Design: (unnamed)
                 \_LogicNet: (work@soc_tb.io_gen.write_en), line:22:46, endln:22:54
               |vpiName:peripheral_io_bus[io_idx].write_en
         |vpiImportTypespec:
-        \_RefVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiForInitStmt:
         \_Assignment: , line:20:14, endln:20:24
           |vpiParent:
@@ -431,7 +435,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+          \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiCondition:
         \_Operation: , line:20:26, endln:20:51
           |vpiParent:
@@ -487,6 +491,8 @@ Design: (unnamed)
   \_LogicTypespec: 
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
+  |vpiImportTypespec:
+  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -632,6 +638,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

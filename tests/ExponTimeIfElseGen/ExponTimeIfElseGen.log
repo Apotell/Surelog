@@ -927,6 +927,7 @@ GenFor                                                 1
 GenIf                                                  1
 GenIfElse                                              9
 GenRegion                                              1
+GenVar                                                 1
 Identifier                                             1
 IfStmt                                                10
 Module                                                 1
@@ -935,7 +936,6 @@ Operation                                             32
 ParamAssign                                            1
 Parameter                                              1
 RefObj                                                62
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExponTimeIfElseGen/slpp_all/surelog.uhdm ...
@@ -993,11 +993,13 @@ Design: (unnamed)
         \_Begin: (work@Foo), line:5:9, endln:87:12
         |vpiFullName:work@Foo
         |vpiVariables:
-        \_RefVar: (work@Foo.i), line:5:21, endln:5:22
+        \_GenVar: (work@Foo.i), line:5:21, endln:5:22
           |vpiParent:
           \_GenFor: (work@Foo), line:5:9, endln:87:12
           |vpiName:i
           |vpiFullName:work@Foo.i
+        |vpiGenVar:
+        \_GenVar: (work@Foo.i), line:5:21, endln:5:22
         |vpiInternalScope:
         \_Begin: (work@Foo), line:5:45, endln:87:12
           |vpiParent:
@@ -2740,7 +2742,7 @@ Design: (unnamed)
             |vpiElseStmt:
             \_Begin: (work@Foo), line:14:18, endln:85:16
         |vpiImportTypespec:
-        \_RefVar: (work@Foo.i), line:5:21, endln:5:22
+        \_GenVar: (work@Foo.i), line:5:21, endln:5:22
         |vpiImportTypespec:
         \_LogicNet: (work@Foo.i), line:5:29, endln:5:30
           |vpiParent:
@@ -2768,7 +2770,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@Foo.i), line:5:21, endln:5:22
+          \_GenVar: (work@Foo.i), line:5:21, endln:5:22
         |vpiCondition:
         \_Operation: , line:5:29, endln:5:36
           |vpiParent:

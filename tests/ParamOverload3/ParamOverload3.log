@@ -276,7 +276,7 @@ n<> u<614> t<Top_level_rule> c<1> l<1:1> el<66:1>
                       n<> u<260> t<IntegerAtomType_Int> p<262> s<261> l<37:22> el<37:25>
                       n<> u<261> t<Signing_Unsigned> p<262> l<37:26> el<37:34>
                 n<fp_width> u<265> t<STRING_CONST> p<308> s<271> l<37:35> el<37:43>
-                n<> u<271> t<Tf_port_list> p<308> c<270> s<306> l<37:44> el<37:59>
+                n<> u<271> t<Tf_port_item_list> p<308> c<270> s<306> l<37:43> el<37:60>
                   n<> u<270> t<Tf_port_item> p<271> c<268> l<37:44> el<37:59>
                     n<> u<268> t<Data_type_or_implicit> p<270> c<267> s<269> l<37:44> el<37:55>
                       n<fp_format_e> u<267> t<Data_type> p<268> c<266> l<37:44> el<37:55>
@@ -636,6 +636,7 @@ FuncCall                                               1
 Function                                               1
 GenFor                                                 2
 GenIfElse                                              1
+GenVar                                                 2
 HierPath                                               4
 IODecl                                                 1
 Identifier                                            13
@@ -652,7 +653,6 @@ PartSelect                                             1
 Range                                                  2
 RefObj                                                31
 RefTypespec                                           34
-RefVar                                                 2
 ReturnStmt                                             1
 SourceFile                                             1
 StringTypespec                                        15
@@ -668,6 +668,10 @@ VarSelect                                              2
 [ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Illegal implicit net "id:204, name: exp_bits".
 [ERR:UH0734] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Failed to bind object: "id: 209, name: man_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Illegal implicit net "id:209, name: man_bits".
+[ERR:IG0804] Missing/invalid file: 75, RefTypespec, fpnew_pkg::fp_encoding_t.
+[ERR:IG0807] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:37:22: Bad relative location: Child: 197, RefTypespec,  Parent: 8, Function, fp_width.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Unbound: 204, RefObj, exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Unbound: 209, RefObj, man_bits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1041,7 +1045,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:fmt
       |vpiTypedef:
-      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fp_format_e), line:18:5, endln:18:16
+      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fp_format_e), line:37:44, endln:37:55
         |vpiParent:
         \_IODecl: (fmt), line:37:56, endln:37:59
         |vpiName:fp_format_e
@@ -1457,11 +1461,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
     |vpiFullName:work@top
     |vpiVariables:
-    \_RefVar: (work@top.fmt), line:49:15, endln:49:18
+    \_GenVar: (work@top.fmt), line:49:15, endln:49:18
       |vpiParent:
       \_GenFor: (work@top), line:49:3, endln:62:6
       |vpiName:fmt
       |vpiFullName:work@top.fmt
+    |vpiGenVar:
+    \_GenVar: (work@top.fmt), line:49:15, endln:49:18
     |vpiInternalScope:
     \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
       |vpiParent:
@@ -1532,11 +1538,13 @@ Design: (unnamed)
           \_Begin: (work@top.gen_nanbox_check.check), line:52:54, endln:58:8
           |vpiFullName:work@top.gen_nanbox_check.check
           |vpiVariables:
-          \_RefVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
+          \_GenVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
             |vpiParent:
             \_GenFor: (work@top.gen_nanbox_check.check), line:53:7, endln:57:10
             |vpiName:op
             |vpiFullName:work@top.gen_nanbox_check.check.op
+          |vpiGenVar:
+          \_GenVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
           |vpiInternalScope:
           \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
             |vpiParent:
@@ -1698,7 +1706,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
           |vpiImportTypespec:
-          \_RefVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
+          \_GenVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
           |vpiImportTypespec:
           \_LogicNet: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
             |vpiParent:
@@ -1733,7 +1741,7 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
             |vpiLhs:
-            \_RefVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
+            \_GenVar: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
           |vpiCondition:
           \_Operation: , line:53:27, endln:53:50
             |vpiParent:
@@ -1892,7 +1900,7 @@ Design: (unnamed)
         |vpiElseStmt:
         \_Begin: (work@top.gen_nanbox_check.no_check), line:58:14, endln:60:8
     |vpiImportTypespec:
-    \_RefVar: (work@top.fmt), line:49:15, endln:49:18
+    \_GenVar: (work@top.fmt), line:49:15, endln:49:18
     |vpiImportTypespec:
     \_LogicNet: (work@top.fmt), line:49:24, endln:49:27
       |vpiParent:
@@ -1920,7 +1928,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@top.fmt), line:49:15, endln:49:18
+      \_GenVar: (work@top.fmt), line:49:15, endln:49:18
     |vpiCondition:
     \_Operation: , line:49:24, endln:49:47
       |vpiParent:
@@ -1995,6 +2003,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 8
 [WARNING] : 2
 [   NOTE] : 0

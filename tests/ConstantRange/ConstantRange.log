@@ -222,6 +222,7 @@ Constant                                               9
 Design                                                 1
 GenFor                                                 1
 GenIf                                                  2
+GenVar                                                 1
 Identifier                                             4
 IntTypespec                                            1
 LogicTypespec                                          2
@@ -234,9 +235,9 @@ Range                                                  2
 RefModule                                              2
 RefObj                                                 7
 RefTypespec                                            3
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConstantRange/dut.sv:18:4: Unbound: 59, RefModule, bad.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantRange/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -374,11 +375,13 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
     |vpiFullName:work@dut
     |vpiVariables:
-    \_RefVar: (work@dut.k), line:11:13, endln:11:14
+    \_GenVar: (work@dut.k), line:11:13, endln:11:14
       |vpiParent:
       \_GenFor: (work@dut), line:11:1, endln:15:4
       |vpiName:k
       |vpiFullName:work@dut.k
+    |vpiGenVar:
+    \_GenVar: (work@dut.k), line:11:13, endln:11:14
     |vpiInternalScope:
     \_Begin: (work@dut.gen_mio_pads), line:11:39, endln:15:4
       |vpiParent:
@@ -465,7 +468,7 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (work@dut.gen_mio_pads.gen_mio_inout), line:12:47, endln:14:9
     |vpiImportTypespec:
-    \_RefVar: (work@dut.k), line:11:13, endln:11:14
+    \_GenVar: (work@dut.k), line:11:13, endln:11:14
     |vpiImportTypespec:
     \_LogicNet: (work@dut.k), line:11:20, endln:11:21
       |vpiParent:
@@ -493,7 +496,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@dut.k), line:11:13, endln:11:14
+      \_GenVar: (work@dut.k), line:11:13, endln:11:14
     |vpiCondition:
     \_Operation: , line:11:20, endln:11:32
       |vpiParent:
@@ -650,6 +653,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

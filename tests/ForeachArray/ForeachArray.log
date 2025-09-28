@@ -88,9 +88,9 @@ Module                                                 1
 ModuleTypespec                                         1
 Operation                                              1
 Range                                                  1
-RefObj                                                 2
+RefObj                                                 3
 RefTypespec                                            3
-RefVar                                                 2
+RefVar                                                 1
 SourceFile                                             1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
@@ -182,12 +182,6 @@ Design: (unnamed)
         \_Begin: (work@dut), line:5:13, endln:8:8
         |vpiFullName:work@dut
         |vpiImportTypespec:
-        \_RefVar: (work@dut.array), line:6:17, endln:6:22
-          |vpiParent:
-          \_ForeachStmt: (work@dut), line:6:9, endln:7:25
-          |vpiName:array
-          |vpiFullName:work@dut.array
-        |vpiImportTypespec:
         \_RefVar: (work@dut.i), line:6:23, endln:6:24
           |vpiParent:
           \_ForeachStmt: (work@dut), line:6:9, endln:7:25
@@ -202,7 +196,13 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@dut.i
         |vpiVariables:
-        \_RefVar: (work@dut.array), line:6:17, endln:6:22
+        \_RefObj: (work@dut.array), line:6:17, endln:6:22
+          |vpiParent:
+          \_ForeachStmt: (work@dut), line:6:9, endln:7:25
+          |vpiName:array
+          |vpiFullName:work@dut.array
+          |vpiActual:
+          \_ArrayNet: (work@dut.array), line:3:9, endln:3:14
         |vpiLoopVars:
         \_RefVar: (work@dut.i), line:6:23, endln:6:24
         |vpiStmt:
@@ -226,7 +226,7 @@ Design: (unnamed)
             |vpiName:array
             |vpiFullName:work@dut.array
             |vpiActual:
-            \_RefVar: (work@dut.array), line:6:17, endln:6:22
+            \_ArrayNet: (work@dut.array), line:3:9, endln:3:14
             |vpiIndex:
             \_RefObj: (work@dut.i), line:7:19, endln:7:20
               |vpiParent:

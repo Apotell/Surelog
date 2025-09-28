@@ -397,6 +397,7 @@ Constant                                              24
 Design                                                 1
 GenFor                                                 1
 GenIf                                                  2
+GenVar                                                 1
 Identifier                                            10
 IntTypespec                                            1
 LogicTypespec                                          2
@@ -410,7 +411,6 @@ Range                                                  2
 RefModule                                              4
 RefObj                                                 6
 RefTypespec                                            8
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EarlgreyPackParam/slpp_all/surelog.uhdm ...
@@ -605,11 +605,13 @@ Design: (unnamed)
     \_Module: work@aes (work@aes), file:${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv, line:49:1, endln:60:10
     |vpiFullName:work@aes
     |vpiVariables:
-    \_RefVar: (work@aes.i), line:52:16, endln:52:17
+    \_GenVar: (work@aes.i), line:52:16, endln:52:17
       |vpiParent:
       \_GenFor: (work@aes), line:52:4, endln:58:6
       |vpiName:i
       |vpiFullName:work@aes.i
+    |vpiGenVar:
+    \_GenVar: (work@aes.i), line:52:16, endln:52:17
     |vpiInternalScope:
     \_Begin: (work@aes.gen_alert_tx), line:52:35, endln:58:6
       |vpiParent:
@@ -636,7 +638,7 @@ Design: (unnamed)
         |vpiActual:
         \_Module: work@prim_alert_sender (work@prim_alert_sender), file:${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv, line:13:1, endln:26:11
     |vpiImportTypespec:
-    \_RefVar: (work@aes.i), line:52:16, endln:52:17
+    \_GenVar: (work@aes.i), line:52:16, endln:52:17
     |vpiImportTypespec:
     \_LogicNet: (work@aes.i), line:52:23, endln:52:24
       |vpiParent:
@@ -664,7 +666,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@aes.i), line:52:16, endln:52:17
+      \_GenVar: (work@aes.i), line:52:16, endln:52:17
     |vpiCondition:
     \_Operation: , line:52:23, endln:52:28
       |vpiParent:

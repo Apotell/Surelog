@@ -513,6 +513,7 @@ EnumTypespec                                           2
 Function                                               9
 GenFor                                                 1
 GenIf                                                  2
+GenVar                                                 1
 IODecl                                                11
 Identifier                                            43
 ImportTypespec                                         4
@@ -531,7 +532,6 @@ Range                                                  2
 RefModule                                              3
 RefObj                                                19
 RefTypespec                                           38
-RefVar                                                 1
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         1
@@ -540,6 +540,7 @@ Task                                                   9
 TypedefTypespec                                        3
 TypespecMember                                         1
 === UHDM Object Stats End ===
+[ERR:IG0804] Missing/invalid file: 56, RefTypespec, prim_pad_wrapper_pkg::pad_type_e.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiConcatValueSize/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -651,7 +652,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1093,7 +1094,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1133,7 +1134,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1173,7 +1174,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1220,7 +1221,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -2009,11 +2010,13 @@ Design: (unnamed)
     \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv, line:41:1, endln:50:10
     |vpiFullName:work@sub_top
     |vpiVariables:
-    \_RefVar: (work@sub_top.k), line:45:15, endln:45:16
+    \_GenVar: (work@sub_top.k), line:45:15, endln:45:16
       |vpiParent:
       \_GenFor: (work@sub_top), line:45:3, endln:49:6
       |vpiName:k
       |vpiFullName:work@sub_top.k
+    |vpiGenVar:
+    \_GenVar: (work@sub_top.k), line:45:15, endln:45:16
     |vpiInternalScope:
     \_Begin: (work@sub_top.gen_dio_attr), line:45:41, endln:49:6
       |vpiParent:
@@ -2053,7 +2056,7 @@ Design: (unnamed)
             |vpiActual:
             \_IntVar: (work@sub_top.c), line:41:27, endln:41:28
     |vpiImportTypespec:
-    \_RefVar: (work@sub_top.k), line:45:15, endln:45:16
+    \_GenVar: (work@sub_top.k), line:45:15, endln:45:16
     |vpiImportTypespec:
     \_LogicNet: (work@sub_top.k), line:45:22, endln:45:23
       |vpiParent:
@@ -2081,7 +2084,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@sub_top.k), line:45:15, endln:45:16
+      \_GenVar: (work@sub_top.k), line:45:15, endln:45:16
     |vpiCondition:
     \_Operation: , line:45:22, endln:45:34
       |vpiParent:
@@ -2322,6 +2325,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 6
 [   NOTE] : 0

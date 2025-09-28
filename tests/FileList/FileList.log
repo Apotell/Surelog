@@ -20,7 +20,7 @@ n<> u<57> t<Top_level_rule> c<1> l<1:1> el<9:1>
                     n<> u<6> t<Data_type> p<7> c<5> l<3:21> el<3:28>
                       n<> u<5> t<IntegerAtomType_Integer> p<6> l<3:21> el<3:28>
                 n<vbits> u<9> t<STRING_CONST> p<49> s<15> l<3:29> el<3:34>
-                n<> u<15> t<Tf_port_list> p<49> c<14> s<47> l<3:35> el<3:48>
+                n<> u<15> t<Tf_port_item_list> p<49> c<14> s<47> l<3:34> el<3:49>
                   n<> u<14> t<Tf_port_item> p<15> c<12> l<3:35> el<3:48>
                     n<> u<12> t<Data_type_or_implicit> p<14> c<11> s<13> l<3:35> el<3:42>
                       n<> u<11> t<Data_type> p<12> c<10> l<3:35> el<3:42>
@@ -228,6 +228,7 @@ ReturnStmt                                             1
 SourceFile                                             2
 SysFuncCall                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/FileList/pack.sv:3:21: Bad relative location: Child: 12, RefTypespec,  Parent: 9, Function, vbits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileList/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -283,7 +284,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::vbits::value)
+      \_RefTypespec: (prim_util_pkg::vbits::value), line:3:35, endln:3:42
         |vpiParent:
         \_IODecl: (value), line:3:43, endln:3:48
         |vpiFullName:prim_util_pkg::vbits::value
@@ -573,6 +574,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 1

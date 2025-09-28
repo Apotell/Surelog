@@ -9983,6 +9983,17 @@ SourceFile                                             1
 SysFuncCall                                          109
 TypeParameter                                          6
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Failed to bind object: "id: 659, name: PARAM_T".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Illegal implicit net "id:659, name: PARAM_T".
+[ERR:IG0810] Invalid location: 22, InterfaceTypespec, I.
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 669, RefTypespec, P::T Parent: 176, ParamAssign, .
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 671, RefTypespec, C::T Parent: 244, ParamAssign, .
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Unbound: 659, PartSelect, PARAM_T.
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 679, RefTypespec, C::T Parent: 312, ParamAssign, .
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 687, RefTypespec, C::T Parent: 380, ParamAssign, .
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 695, RefTypespec, C::T Parent: 448, ParamAssign, .
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 703, RefTypespec, C::T Parent: 516, ParamAssign, .
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassScope/dut.sv:45:40: Bad relative location: Child: 711, RefTypespec, C::T Parent: 584, ParamAssign, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -10066,13 +10077,13 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@top), line:43:19, endln:62:12
           |vpiRhs:
-          \_RefTypespec: (work@top.T), line:45:40, endln:45:41
+          \_RefObj: (work@top.T), line:45:40, endln:45:41
             |vpiParent:
             \_ParamAssign: , line:45:29, endln:45:41
             |vpiName:T
             |vpiFullName:work@top.T
             |vpiActual:
-            \_TypeParameter: (work@top.T), line:40:21, endln:40:22
+            \_LogicNet: (work@top.T), line:45:40, endln:45:41
           |vpiLhs:
           \_Parameter: (work@top.the_type), line:45:29, endln:45:37
         |vpiTypedef:
@@ -10093,6 +10104,13 @@ Design: (unnamed)
           |vpiName:M
           |vpiModule:
           \_Module: work@M (work@M), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:14:1, endln:23:10
+        |vpiImportTypespec:
+        \_LogicNet: (work@top.T), line:45:40, endln:45:41
+          |vpiParent:
+          \_Begin: (work@top), line:43:19, endln:62:12
+          |vpiName:T
+          |vpiFullName:work@top.T
+          |vpiNetType:1
         |vpiStmt:
         \_ParamAssign: , line:44:24, endln:44:36
         |vpiStmt:
@@ -10236,13 +10254,13 @@ Design: (unnamed)
                 |vpiParent:
                 \_SysFuncCall: ($display), line:50:17, endln:50:74
                 |vpiArgument:
-                \_RefTypespec: (work@top.T), line:50:71, endln:50:72
+                \_RefObj: (work@top.T), line:50:71, endln:50:72
                   |vpiParent:
                   \_SysFuncCall: ($bits), line:50:17, endln:50:74
                   |vpiName:T
                   |vpiFullName:work@top.T
                   |vpiActual:
-                  \_TypeParameter: (work@top.T), line:40:21, endln:40:22
+                  \_LogicNet: (work@top.T), line:45:40, endln:45:41
                 |vpiName:
                 \_Identifier: ($bits)
                   |vpiParent:
@@ -10304,13 +10322,13 @@ Design: (unnamed)
                 |vpiParent:
                 \_SysFuncCall: ($display), line:52:17, endln:52:53
                 |vpiArgument:
-                \_RefTypespec: (work@top.T), line:52:50, endln:52:51
+                \_RefObj: (work@top.T), line:52:50, endln:52:51
                   |vpiParent:
                   \_SysFuncCall: ($left), line:52:44, endln:52:52
                   |vpiName:T
                   |vpiFullName:work@top.T
                   |vpiActual:
-                  \_TypeParameter: (work@top.T), line:40:21, endln:40:22
+                  \_LogicNet: (work@top.T), line:45:40, endln:45:41
                 |vpiName:
                 \_Identifier: ($left)
                   |vpiParent:
@@ -10442,7 +10460,7 @@ Design: (unnamed)
     |vpiObject:
     \_ParamAssign: , line:45:29, endln:45:41
     |vpiObject:
-    \_RefTypespec: (work@top.T), line:45:40, endln:45:41
+    \_RefObj: (work@top.T), line:45:40, endln:45:41
     |vpiObject:
     \_Initial: , line:46:13, endln:55:16
     |vpiObject:
@@ -10482,7 +10500,7 @@ Design: (unnamed)
     |vpiObject:
     \_SysFuncCall: ($bits), line:50:17, endln:50:74
     |vpiObject:
-    \_RefTypespec: (work@top.T), line:50:71, endln:50:72
+    \_RefObj: (work@top.T), line:50:71, endln:50:72
     |vpiObject:
     \_SysFuncCall: ($display), line:51:17, endln:51:53
     |vpiObject:
@@ -10498,7 +10516,7 @@ Design: (unnamed)
     |vpiObject:
     \_SysFuncCall: ($left), line:52:44, endln:52:52
     |vpiObject:
-    \_RefTypespec: (work@top.T), line:52:50, endln:52:51
+    \_RefObj: (work@top.T), line:52:50, endln:52:51
     |vpiObject:
     \_SysFuncCall: ($display), line:53:17, endln:53:48
     |vpiObject:
@@ -14325,13 +14343,42 @@ Design: (unnamed)
     |vpiParent:
     \_ClassDefn: (work@C), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:1:1, endln:7:9
     |vpiExpr:
-    \_RefTypespec: (work@C::PARAM_T), line:6:34, endln:6:47
+    \_PartSelect: PARAM_T (work@C::PARAM_T), line:6:34, endln:6:47
       |vpiParent:
       \_IntegerTypespec: 
       |vpiName:PARAM_T
       |vpiFullName:work@C::PARAM_T
-      |vpiActual:
-      \_TypeParameter: (work@C::PARAM_T), line:3:20, endln:3:27
+      |vpiDefName:PARAM_T
+      |vpiConstantSelect:1
+      |vpiLeftRange:
+      \_Operation: , line:6:34, endln:6:45
+        |vpiParent:
+        \_PartSelect: PARAM_T (work@C::PARAM_T), line:6:34, endln:6:47
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@C::PARAM_T::PARAM_E), line:6:34, endln:6:41
+          |vpiParent:
+          \_Operation: , line:6:34, endln:6:45
+          |vpiName:PARAM_E
+          |vpiFullName:work@C::PARAM_T::PARAM_E
+          |vpiActual:
+          \_Parameter: (work@C::PARAM_E), line:2:15, endln:2:26
+        |vpiOperand:
+        \_Constant: , line:6:44, endln:6:45
+          |vpiParent:
+          \_Operation: , line:6:34, endln:6:45
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:46, endln:6:47
+        |vpiParent:
+        \_PartSelect: PARAM_T (work@C::PARAM_T), line:6:34, endln:6:47
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_TypeParameter: (work@C::PARAM_T), line:3:20, endln:3:27
   |vpiImportTypespec:
@@ -14832,6 +14879,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 11
 [WARNING] : 4
 [   NOTE] : 0

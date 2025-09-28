@@ -714,6 +714,20 @@ TypedefTypespec                                        1
 UdpDefn                                                1
 UdpDefnTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:8:8: Parented to neither scope nor design: 137, LogicNet, mux.
+[ERR:IG0805] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:9:7: Parented to neither scope nor design: 138, LogicNet, control.
+[ERR:IG0805] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:9:16: Parented to neither scope nor design: 139, LogicNet, dataA.
+[ERR:IG0805] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:9:23: Parented to neither scope nor design: 140, LogicNet, dataB.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:2:10: Bad relative location: Child: 48, RefTypespec,  Parent: 47, LogicNet, clk.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:3:10: Bad relative location: Child: 51, RefTypespec,  Parent: 50, LogicNet, rst.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:4:10: Bad relative location: Child: 54, RefTypespec,  Parent: 53, LogicNet, inp.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:5:10: Bad relative location: Child: 57, RefTypespec,  Parent: 56, LogicNet, out.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:14:10: Bad relative location: Child: 118, RefTypespec,  Parent: 117, LogicNet, clk.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:15:10: Bad relative location: Child: 121, RefTypespec,  Parent: 120, LogicNet, rst.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:16:10: Bad relative location: Child: 124, RefTypespec,  Parent: 123, LogicNet, inp.
+[ERR:IG0807] ${SURELOG_DIR}/tests/Attributes/dut.sv:17:10: Bad relative location: Child: 127, RefTypespec,  Parent: 126, LogicNet, out.
+[ERR:IG0810] Invalid location: 25, InterfaceTypespec, itf.
+[ERR:IG0810] Invalid location: 29, InterfaceTypespec, itf2.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Attributes/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -829,7 +843,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1271,7 +1285,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1311,7 +1325,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1351,7 +1365,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1398,7 +1412,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -2547,6 +2561,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 14
 [WARNING] : 8
 [   NOTE] : 0

@@ -702,7 +702,7 @@ Function                                               9
 GenFor                                                 5
 GenIf                                                  1
 GenRegion                                              2
-GenVar                                                 2
+GenVar                                                10
 IODecl                                                11
 Identifier                                            40
 IntTypespec                                            9
@@ -716,11 +716,16 @@ Parameter                                              5
 RefModule                                             12
 RefObj                                                21
 RefTypespec                                           13
-RefVar                                                 5
 SourceFile                                             3
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/small.v:7:3: Unbound: 52, RefModule, N1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/small.v:23:3: Unbound: 31, RefModule, U5.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/top.v:39:1: Unbound: 113, RefModule, N3.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/top.v:32:1: Unbound: 98, RefModule, N2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/top.v:52:1: Unbound: 135, RefModule, N4.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitDefParam/top.v:26:1: Unbound: 83, RefModule, N1.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitDefParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -840,7 +845,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1282,7 +1287,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1322,7 +1327,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1362,7 +1367,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1409,7 +1414,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1637,12 +1642,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@secret_number (work@secret_number), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:2:1, endln:12:10
     |vpiName:work@secret_number
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@secret_number.i), line:5:11, endln:5:12
     |vpiParent:
     \_Module: work@secret_number (work@secret_number), file:${SURELOG_DIR}/tests/UnitDefParam/small.v, line:2:1, endln:12:10
     |vpiName:i
     |vpiFullName:work@secret_number.i
+  |vpiGenVar:
+  \_GenVar: (work@secret_number.i), line:5:11, endln:5:12
   |vpiParameter:
   \_Parameter: (work@secret_number.SIZE), line:3:12, endln:3:20
     |vpiParent:
@@ -1680,11 +1687,13 @@ Design: (unnamed)
         \_Begin: (work@secret_number), line:6:11, endln:8:5
         |vpiFullName:work@secret_number
         |vpiVariables:
-        \_RefVar: (work@secret_number.i), line:6:16, endln:6:17
+        \_GenVar: (work@secret_number.i), line:6:16, endln:6:17
           |vpiParent:
           \_GenFor: (work@secret_number), line:6:11, endln:8:5
           |vpiName:i
           |vpiFullName:work@secret_number.i
+        |vpiGenVar:
+        \_GenVar: (work@secret_number.i), line:6:16, endln:6:17
         |vpiInternalScope:
         \_Begin: (work@secret_number.B1), line:6:36, endln:8:5
           |vpiParent:
@@ -1709,7 +1718,7 @@ Design: (unnamed)
             |vpiName:N1
             |vpiDefName:work@M1
         |vpiImportTypespec:
-        \_RefVar: (work@secret_number.i), line:6:16, endln:6:17
+        \_GenVar: (work@secret_number.i), line:6:16, endln:6:17
         |vpiForInitStmt:
         \_Assignment: , line:6:16, endln:6:19
           |vpiParent:
@@ -1723,7 +1732,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@secret_number.i), line:6:16, endln:6:17
+          \_GenVar: (work@secret_number.i), line:6:16, endln:6:17
         |vpiCondition:
         \_Operation: , line:6:21, endln:6:27
           |vpiParent:
@@ -1785,6 +1794,8 @@ Design: (unnamed)
       \_GenFor: (work@secret_number), line:6:11, endln:8:5
     |vpiStmt:
     \_Begin: (work@secret_number), line:6:11, endln:8:5
+  |vpiImportTypespec:
+  \_GenVar: (work@secret_number.i), line:5:11, endln:5:12
   |vpiDefName:work@secret_number
 |vpiAllModules:
 \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
@@ -1795,12 +1806,38 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
     |vpiName:work@small_test
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@small_test.i), line:19:2, endln:19:3
     |vpiParent:
     \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
     |vpiName:i
     |vpiFullName:work@small_test.i
+  |vpiVariables:
+  \_GenVar: (work@small_test.j), line:19:5, endln:19:6
+    |vpiParent:
+    \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
+    |vpiName:j
+    |vpiFullName:work@small_test.j
+  |vpiVariables:
+  \_GenVar: (work@small_test.k), line:19:8, endln:19:9
+    |vpiParent:
+    \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
+    |vpiName:k
+    |vpiFullName:work@small_test.k
+  |vpiVariables:
+  \_GenVar: (work@small_test.m), line:19:11, endln:19:12
+    |vpiParent:
+    \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:11:1, endln:60:10
+    |vpiName:m
+    |vpiFullName:work@small_test.m
+  |vpiGenVar:
+  \_GenVar: (work@small_test.i), line:19:2, endln:19:3
+  |vpiGenVar:
+  \_GenVar: (work@small_test.j), line:19:5, endln:19:6
+  |vpiGenVar:
+  \_GenVar: (work@small_test.k), line:19:8, endln:19:9
+  |vpiGenVar:
+  \_GenVar: (work@small_test.m), line:19:11, endln:19:12
   |vpiParameter:
   \_Parameter: (work@small_test.SIZE), line:14:27, endln:14:37
     |vpiParent:
@@ -1880,11 +1917,13 @@ Design: (unnamed)
         \_Begin: (work@small_test), line:21:1, endln:57:4
         |vpiFullName:work@small_test
         |vpiVariables:
-        \_RefVar: (work@small_test.i), line:22:3, endln:22:4
+        \_GenVar: (work@small_test.i), line:22:3, endln:22:4
           |vpiParent:
           \_GenFor: (work@small_test), line:21:1, endln:57:4
           |vpiName:i
           |vpiFullName:work@small_test.i
+        |vpiGenVar:
+        \_GenVar: (work@small_test.i), line:22:3, endln:22:4
         |vpiInternalScope:
         \_Begin: (work@small_test.B1), line:23:1, endln:57:4
           |vpiParent:
@@ -1901,11 +1940,13 @@ Design: (unnamed)
             \_Begin: (work@small_test.B1), line:23:1, endln:57:4
             |vpiFullName:work@small_test.B1
             |vpiVariables:
-            \_RefVar: (work@small_test.B1.j), line:29:3, endln:29:4
+            \_GenVar: (work@small_test.B1.j), line:29:3, endln:29:4
               |vpiParent:
               \_GenFor: (work@small_test.B1), line:28:1, endln:42:4
               |vpiName:j
               |vpiFullName:work@small_test.B1.j
+            |vpiGenVar:
+            \_GenVar: (work@small_test.B1.j), line:29:3, endln:29:4
             |vpiInternalScope:
             \_Begin: (work@small_test.B1.B2), line:30:1, endln:42:4
               |vpiParent:
@@ -1922,11 +1963,13 @@ Design: (unnamed)
                 \_Begin: (work@small_test.B1.B2), line:30:1, endln:42:4
                 |vpiFullName:work@small_test.B1.B2
                 |vpiVariables:
-                \_RefVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
+                \_GenVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
                   |vpiParent:
                   \_GenFor: (work@small_test.B1.B2), line:35:1, endln:40:4
                   |vpiName:k
                   |vpiFullName:work@small_test.B1.B2.k
+                |vpiGenVar:
+                \_GenVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
                 |vpiInternalScope:
                 \_Begin: (work@small_test.B1.B2.B3), line:37:1, endln:40:4
                   |vpiParent:
@@ -1951,28 +1994,7 @@ Design: (unnamed)
                     |vpiName:N3
                     |vpiDefName:work@M3
                 |vpiImportTypespec:
-                \_RefVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
-                |vpiImportTypespec:
-                \_LogicNet: (work@small_test.B1.B2.k), line:36:8, endln:36:9
-                  |vpiParent:
-                  \_GenFor: (work@small_test.B1.B2), line:35:1, endln:40:4
-                  |vpiName:k
-                  |vpiFullName:work@small_test.B1.B2.k
-                  |vpiNetType:1
-                |vpiImportTypespec:
-                \_LogicNet: (work@small_test.B1.B2.k), line:36:18, endln:36:19
-                  |vpiParent:
-                  \_GenFor: (work@small_test.B1.B2), line:35:1, endln:40:4
-                  |vpiName:k
-                  |vpiFullName:work@small_test.B1.B2.k
-                  |vpiNetType:1
-                |vpiImportTypespec:
-                \_LogicNet: (work@small_test.B1.B2.k), line:36:16, endln:36:17
-                  |vpiParent:
-                  \_GenFor: (work@small_test.B1.B2), line:35:1, endln:40:4
-                  |vpiName:k
-                  |vpiFullName:work@small_test.B1.B2.k
-                  |vpiNetType:1
+                \_GenVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
                 |vpiForInitStmt:
                 \_Assignment: , line:36:3, endln:36:6
                   |vpiParent:
@@ -1986,7 +2008,7 @@ Design: (unnamed)
                     |UINT:0
                     |vpiConstType:9
                   |vpiLhs:
-                  \_RefVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
+                  \_GenVar: (work@small_test.B1.B2.k), line:36:3, endln:36:4
                 |vpiCondition:
                 \_Operation: , line:36:8, endln:36:14
                   |vpiParent:
@@ -1999,7 +2021,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:work@small_test.B1.B2.k
                     |vpiActual:
-                    \_LogicNet: (work@small_test.B1.B2.k), line:36:8, endln:36:9
+                    \_GenVar: (work@small_test.k), line:19:8, endln:19:9
                   |vpiOperand:
                   \_RefObj: (work@small_test.B1.B2.SIZE), line:36:10, endln:36:14
                     |vpiParent:
@@ -2025,7 +2047,7 @@ Design: (unnamed)
                       |vpiName:k
                       |vpiFullName:work@small_test.B1.B2.k
                       |vpiActual:
-                      \_LogicNet: (work@small_test.B1.B2.k), line:36:18, endln:36:19
+                      \_GenVar: (work@small_test.k), line:19:8, endln:19:9
                     |vpiOperand:
                     \_Constant: , line:36:20, endln:36:21
                       |vpiParent:
@@ -2041,7 +2063,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:work@small_test.B1.B2.k
                     |vpiActual:
-                    \_LogicNet: (work@small_test.B1.B2.k), line:36:16, endln:36:17
+                    \_GenVar: (work@small_test.k), line:19:8, endln:19:9
                 |vpiStmt:
                 \_Begin: (work@small_test.B1.B2.B3), line:37:1, endln:40:4
               |vpiTypedef:
@@ -2060,28 +2082,7 @@ Design: (unnamed)
               |vpiStmt:
               \_GenFor: (work@small_test.B1.B2), line:35:1, endln:40:4
             |vpiImportTypespec:
-            \_RefVar: (work@small_test.B1.j), line:29:3, endln:29:4
-            |vpiImportTypespec:
-            \_LogicNet: (work@small_test.B1.j), line:29:8, endln:29:9
-              |vpiParent:
-              \_GenFor: (work@small_test.B1), line:28:1, endln:42:4
-              |vpiName:j
-              |vpiFullName:work@small_test.B1.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@small_test.B1.j), line:29:18, endln:29:19
-              |vpiParent:
-              \_GenFor: (work@small_test.B1), line:28:1, endln:42:4
-              |vpiName:j
-              |vpiFullName:work@small_test.B1.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@small_test.B1.j), line:29:16, endln:29:17
-              |vpiParent:
-              \_GenFor: (work@small_test.B1), line:28:1, endln:42:4
-              |vpiName:j
-              |vpiFullName:work@small_test.B1.j
-              |vpiNetType:1
+            \_GenVar: (work@small_test.B1.j), line:29:3, endln:29:4
             |vpiForInitStmt:
             \_Assignment: , line:29:3, endln:29:6
               |vpiParent:
@@ -2095,7 +2096,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@small_test.B1.j), line:29:3, endln:29:4
+              \_GenVar: (work@small_test.B1.j), line:29:3, endln:29:4
             |vpiCondition:
             \_Operation: , line:29:8, endln:29:14
               |vpiParent:
@@ -2108,7 +2109,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@small_test.B1.j
                 |vpiActual:
-                \_LogicNet: (work@small_test.B1.j), line:29:8, endln:29:9
+                \_GenVar: (work@small_test.j), line:19:5, endln:19:6
               |vpiOperand:
               \_RefObj: (work@small_test.B1.SIZE), line:29:10, endln:29:14
                 |vpiParent:
@@ -2134,7 +2135,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@small_test.B1.j
                   |vpiActual:
-                  \_LogicNet: (work@small_test.B1.j), line:29:18, endln:29:19
+                  \_GenVar: (work@small_test.j), line:19:5, endln:19:6
                 |vpiOperand:
                 \_Constant: , line:29:20, endln:29:21
                   |vpiParent:
@@ -2150,7 +2151,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@small_test.B1.j
                 |vpiActual:
-                \_LogicNet: (work@small_test.B1.j), line:29:16, endln:29:17
+                \_GenVar: (work@small_test.j), line:19:5, endln:19:6
             |vpiStmt:
             \_Begin: (work@small_test.B1.B2), line:30:1, endln:42:4
           |vpiInternalScope:
@@ -2169,11 +2170,13 @@ Design: (unnamed)
               \_Begin: (work@small_test.B1.B4), line:45:1, endln:56:4
               |vpiFullName:work@small_test.B1.B4
               |vpiVariables:
-              \_RefVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
+              \_GenVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
                 |vpiParent:
                 \_GenFor: (work@small_test.B1.B4), line:48:1, endln:54:4
                 |vpiName:m
                 |vpiFullName:work@small_test.B1.B4.m
+              |vpiGenVar:
+              \_GenVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
               |vpiInternalScope:
               \_Begin: (work@small_test.B1.B4.B5), line:50:1, endln:54:4
                 |vpiParent:
@@ -2198,28 +2201,7 @@ Design: (unnamed)
                   |vpiName:N4
                   |vpiDefName:work@M4
               |vpiImportTypespec:
-              \_RefVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
-              |vpiImportTypespec:
-              \_LogicNet: (work@small_test.B1.B4.m), line:49:8, endln:49:9
-                |vpiParent:
-                \_GenFor: (work@small_test.B1.B4), line:48:1, endln:54:4
-                |vpiName:m
-                |vpiFullName:work@small_test.B1.B4.m
-                |vpiNetType:1
-              |vpiImportTypespec:
-              \_LogicNet: (work@small_test.B1.B4.m), line:49:18, endln:49:19
-                |vpiParent:
-                \_GenFor: (work@small_test.B1.B4), line:48:1, endln:54:4
-                |vpiName:m
-                |vpiFullName:work@small_test.B1.B4.m
-                |vpiNetType:1
-              |vpiImportTypespec:
-              \_LogicNet: (work@small_test.B1.B4.m), line:49:16, endln:49:17
-                |vpiParent:
-                \_GenFor: (work@small_test.B1.B4), line:48:1, endln:54:4
-                |vpiName:m
-                |vpiFullName:work@small_test.B1.B4.m
-                |vpiNetType:1
+              \_GenVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
               |vpiForInitStmt:
               \_Assignment: , line:49:3, endln:49:6
                 |vpiParent:
@@ -2233,7 +2215,7 @@ Design: (unnamed)
                   |UINT:0
                   |vpiConstType:9
                 |vpiLhs:
-                \_RefVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
+                \_GenVar: (work@small_test.B1.B4.m), line:49:3, endln:49:4
               |vpiCondition:
               \_Operation: , line:49:8, endln:49:14
                 |vpiParent:
@@ -2246,7 +2228,7 @@ Design: (unnamed)
                   |vpiName:m
                   |vpiFullName:work@small_test.B1.B4.m
                   |vpiActual:
-                  \_LogicNet: (work@small_test.B1.B4.m), line:49:8, endln:49:9
+                  \_GenVar: (work@small_test.m), line:19:11, endln:19:12
                 |vpiOperand:
                 \_RefObj: (work@small_test.B1.B4.SIZE), line:49:10, endln:49:14
                   |vpiParent:
@@ -2272,7 +2254,7 @@ Design: (unnamed)
                     |vpiName:m
                     |vpiFullName:work@small_test.B1.B4.m
                     |vpiActual:
-                    \_LogicNet: (work@small_test.B1.B4.m), line:49:18, endln:49:19
+                    \_GenVar: (work@small_test.m), line:19:11, endln:19:12
                   |vpiOperand:
                   \_Constant: , line:49:20, endln:49:21
                     |vpiParent:
@@ -2288,7 +2270,7 @@ Design: (unnamed)
                   |vpiName:m
                   |vpiFullName:work@small_test.B1.B4.m
                   |vpiActual:
-                  \_LogicNet: (work@small_test.B1.B4.m), line:49:16, endln:49:17
+                  \_GenVar: (work@small_test.m), line:19:11, endln:19:12
               |vpiStmt:
               \_Begin: (work@small_test.B1.B4.B5), line:50:1, endln:54:4
             |vpiStmt:
@@ -2336,7 +2318,7 @@ Design: (unnamed)
             |vpiStmt:
             \_Begin: (work@small_test.B1.B4), line:45:1, endln:56:4
         |vpiImportTypespec:
-        \_RefVar: (work@small_test.i), line:22:3, endln:22:4
+        \_GenVar: (work@small_test.i), line:22:3, endln:22:4
         |vpiForInitStmt:
         \_Assignment: , line:22:3, endln:22:6
           |vpiParent:
@@ -2350,7 +2332,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@small_test.i), line:22:3, endln:22:4
+          \_GenVar: (work@small_test.i), line:22:3, endln:22:4
         |vpiCondition:
         \_Operation: , line:22:8, endln:22:14
           |vpiParent:
@@ -2412,6 +2394,14 @@ Design: (unnamed)
       \_GenFor: (work@small_test), line:21:1, endln:57:4
     |vpiStmt:
     \_Begin: (work@small_test), line:21:1, endln:57:4
+  |vpiImportTypespec:
+  \_GenVar: (work@small_test.i), line:19:2, endln:19:3
+  |vpiImportTypespec:
+  \_GenVar: (work@small_test.j), line:19:5, endln:19:6
+  |vpiImportTypespec:
+  \_GenVar: (work@small_test.k), line:19:8, endln:19:9
+  |vpiImportTypespec:
+  \_GenVar: (work@small_test.m), line:19:11, endln:19:12
   |vpiDefName:work@small_test
 |vpiAllModules:
 \_Module: work@small_top (work@small_top), file:${SURELOG_DIR}/tests/UnitDefParam/top.v, line:7:1, endln:9:10
@@ -2493,6 +2483,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 6
 [   NOTE] : 0

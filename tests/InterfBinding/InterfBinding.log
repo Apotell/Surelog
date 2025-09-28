@@ -150,6 +150,8 @@ StructVar                                              1
 TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:22:11: Parented to neither scope nor design: 52, IODecl, backEnd.
+[ERR:IG0810] Invalid location: 7, InterfaceTypespec, ControllerIF.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -331,20 +333,22 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@ControllerIF.rst), line:15:14, endln:15:17
   |vpiModport:
-  \_Modport: (BypassNetwork), line:20:12, endln:20:25
+  \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
     |vpiParent:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
     |vpiName:
-    \_Identifier: (BypassNetwork)
+    \_Identifier: (work@ControllerIF.BypassNetwork)
       |vpiParent:
-      \_Modport: (BypassNetwork), line:20:12, endln:20:25
-      |vpiName:BypassNetwork
+      \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
+      |vpiName:work@ControllerIF.BypassNetwork
     |vpiIODecl:
     \_IODecl: (backEnd), line:22:11, endln:22:18
       |vpiParent:
-      \_Modport: (BypassNetwork), line:20:12, endln:20:25
+      \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
       |vpiDirection:1
       |vpiName:backEnd
+    |vpiInterface:
+    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
   |vpiPort:
   \_Port: (clk), line:14:14, endln:14:17
     |vpiParent:
@@ -408,21 +412,22 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
   |vpiTypedef:
-  \_InterfaceTypespec: (BypassNetwork), line:30:18, endln:30:31
+  \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
     |vpiName:
-    \_Identifier: (BypassNetwork)
+    \_Identifier: (work@ControllerIF.BypassNetwork)
       |vpiParent:
-      \_InterfaceTypespec: (BypassNetwork), line:30:18, endln:30:31
-      |vpiName:BypassNetwork
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
+      |vpiName:work@ControllerIF.BypassNetwork
+    |vpiModport:
+    \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
     |vpiInterface:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
   |vpiImportTypespec:
   \_InterfaceTypespec: (ControllerIF)
   |vpiImportTypespec:
-  \_InterfaceTypespec: (BypassNetwork), line:30:18, endln:30:31
+  \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
   |vpiImportTypespec:
   \_LogicNet: (work@BypassNetwork.o), line:33:9, endln:33:10
     |vpiParent:
@@ -440,13 +445,13 @@ Design: (unnamed)
     |vpiName:ctrl
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@BypassNetwork.ctrl.BypassNetwork), line:30:5, endln:30:17
+    \_RefTypespec: (work@BypassNetwork.ctrl.work@ControllerIF.BypassNetwork), line:30:5, endln:30:17
       |vpiParent:
       \_Port: (ctrl), line:30:32, endln:30:36
-      |vpiName:BypassNetwork
-      |vpiFullName:work@BypassNetwork.ctrl.BypassNetwork
+      |vpiName:work@ControllerIF.BypassNetwork
+      |vpiFullName:work@BypassNetwork.ctrl.work@ControllerIF.BypassNetwork
       |vpiActual:
-      \_InterfaceTypespec: (BypassNetwork), line:30:18, endln:30:31
+      \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
   |vpiContAssign:
   \_ContAssign: , line:33:9, endln:33:25
     |vpiParent:
@@ -506,6 +511,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0

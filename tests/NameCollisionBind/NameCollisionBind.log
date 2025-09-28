@@ -120,6 +120,8 @@ StructVar                                              1
 TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/NameCollisionBind/dut.sv:16:5: Parented to neither scope nor design: 31, IODecl, perfCounter.
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, PerformanceCounterIF.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -166,20 +168,22 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
   |vpiModport:
-  \_Modport: (CSR), line:14:13, endln:14:16
+  \_Modport: (work@PerformanceCounterIF.CSR), line:14:13, endln:17:2
     |vpiParent:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
     |vpiName:
-    \_Identifier: (CSR)
+    \_Identifier: (work@PerformanceCounterIF.CSR)
       |vpiParent:
-      \_Modport: (CSR), line:14:13, endln:14:16
-      |vpiName:CSR
+      \_Modport: (work@PerformanceCounterIF.CSR), line:14:13, endln:17:2
+      |vpiName:work@PerformanceCounterIF.CSR
     |vpiIODecl:
     \_IODecl: (perfCounter), line:16:5, endln:16:16
       |vpiParent:
-      \_Modport: (CSR), line:14:13, endln:14:16
+      \_Modport: (work@PerformanceCounterIF.CSR), line:14:13, endln:17:2
       |vpiDirection:1
       |vpiName:perfCounter
+    |vpiInterface:
+    \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
 |vpiAllModules:
 \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
   |vpiParent:
@@ -201,21 +205,22 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiTypedef:
-  \_InterfaceTypespec: (CSR), line:21:26, endln:21:29
+  \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:21:26, endln:21:29
     |vpiParent:
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:
-    \_Identifier: (CSR)
+    \_Identifier: (work@PerformanceCounterIF.CSR)
       |vpiParent:
-      \_InterfaceTypespec: (CSR), line:21:26, endln:21:29
-      |vpiName:CSR
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:21:26, endln:21:29
+      |vpiName:work@PerformanceCounterIF.CSR
+    |vpiModport:
+    \_Modport: (work@PerformanceCounterIF.CSR), line:14:13, endln:17:2
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiImportTypespec:
   \_InterfaceTypespec: (PerformanceCounterIF)
   |vpiImportTypespec:
-  \_InterfaceTypespec: (CSR), line:21:26, endln:21:29
+  \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:21:26, endln:21:29
   |vpiImportTypespec:
   \_LogicNet: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
     |vpiParent:
@@ -233,13 +238,13 @@ Design: (unnamed)
     |vpiName:perfCounter
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@CSR_Unit.perfCounter.CSR), line:21:5, endln:21:25
+    \_RefTypespec: (work@CSR_Unit.perfCounter.work@PerformanceCounterIF.CSR), line:21:5, endln:21:25
       |vpiParent:
       \_Port: (perfCounter), line:21:30, endln:21:41
-      |vpiName:CSR
-      |vpiFullName:work@CSR_Unit.perfCounter.CSR
+      |vpiName:work@PerformanceCounterIF.CSR
+      |vpiFullName:work@CSR_Unit.perfCounter.work@PerformanceCounterIF.CSR
       |vpiActual:
-      \_InterfaceTypespec: (CSR), line:21:26, endln:21:29
+      \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:21:26, endln:21:29
   |vpiContAssign:
   \_ContAssign: , line:25:9, endln:25:53
     |vpiParent:
@@ -344,6 +349,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0

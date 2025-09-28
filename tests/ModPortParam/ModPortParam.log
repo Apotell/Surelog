@@ -96,6 +96,8 @@ RefObj                                                 1
 RefTypespec                                            1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/ModPortParam/dut.sv:4:9: Parented to neither scope nor design: 19, IODecl, perfCounter.
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, PerformanceCounterIF.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -116,20 +118,22 @@ Design: (unnamed)
     |vpiName:work@PerformanceCounterIF
   |vpiDefName:work@PerformanceCounterIF
   |vpiModport:
-  \_Modport: (CSR), line:2:13, endln:2:16
+  \_Modport: (work@PerformanceCounterIF.CSR), line:2:13, endln:5:6
     |vpiParent:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
     |vpiName:
-    \_Identifier: (CSR)
+    \_Identifier: (work@PerformanceCounterIF.CSR)
       |vpiParent:
-      \_Modport: (CSR), line:2:13, endln:2:16
-      |vpiName:CSR
+      \_Modport: (work@PerformanceCounterIF.CSR), line:2:13, endln:5:6
+      |vpiName:work@PerformanceCounterIF.CSR
     |vpiIODecl:
     \_IODecl: (perfCounter), line:4:9, endln:4:20
       |vpiParent:
-      \_Modport: (CSR), line:2:13, endln:2:16
+      \_Modport: (work@PerformanceCounterIF.CSR), line:2:13, endln:5:6
       |vpiDirection:1
       |vpiName:perfCounter
+    |vpiInterface:
+    \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
 |vpiAllModules:
 \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
   |vpiParent:
@@ -151,21 +155,22 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiTypedef:
-  \_InterfaceTypespec: (CSR), line:9:26, endln:9:29
+  \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:9:26, endln:9:29
     |vpiParent:
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
     |vpiName:
-    \_Identifier: (CSR)
+    \_Identifier: (work@PerformanceCounterIF.CSR)
       |vpiParent:
-      \_InterfaceTypespec: (CSR), line:9:26, endln:9:29
-      |vpiName:CSR
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:9:26, endln:9:29
+      |vpiName:work@PerformanceCounterIF.CSR
+    |vpiModport:
+    \_Modport: (work@PerformanceCounterIF.CSR), line:2:13, endln:5:6
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiImportTypespec:
   \_InterfaceTypespec: (PerformanceCounterIF)
   |vpiImportTypespec:
-  \_InterfaceTypespec: (CSR), line:9:26, endln:9:29
+  \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:9:26, endln:9:29
   |vpiDefName:work@CSR_Unit
   |vpiPort:
   \_Port: (perfCounter), line:9:30, endln:9:41
@@ -174,13 +179,13 @@ Design: (unnamed)
     |vpiName:perfCounter
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@CSR_Unit.perfCounter.CSR), line:9:5, endln:9:25
+    \_RefTypespec: (work@CSR_Unit.perfCounter.work@PerformanceCounterIF.CSR), line:9:5, endln:9:25
       |vpiParent:
       \_Port: (perfCounter), line:9:30, endln:9:41
-      |vpiName:CSR
-      |vpiFullName:work@CSR_Unit.perfCounter.CSR
+      |vpiName:work@PerformanceCounterIF.CSR
+      |vpiFullName:work@CSR_Unit.perfCounter.work@PerformanceCounterIF.CSR
       |vpiActual:
-      \_InterfaceTypespec: (CSR), line:9:26, endln:9:29
+      \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:9:26, endln:9:29
 |vpiAllModules:
 \_Module: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
   |vpiParent:
@@ -241,6 +246,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 3
 [WARNING] : 3
 [   NOTE] : 0

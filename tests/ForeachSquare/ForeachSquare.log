@@ -112,9 +112,9 @@ Module                                                 1
 ModuleTypespec                                         1
 Operation                                              3
 Range                                                  2
-RefObj                                                 4
+RefObj                                                 6
 RefTypespec                                            5
-RefVar                                                 5
+RefVar                                                 3
 SourceFile                                             1
 UnsupportedTypespec                                    3
 VarSelect                                              1
@@ -229,12 +229,6 @@ Design: (unnamed)
           \_ForeachStmt: (work@dut), line:6:9, endln:8:36
           |vpiFullName:work@dut
           |vpiImportTypespec:
-          \_RefVar: (work@dut.array), line:7:21, endln:7:26
-            |vpiParent:
-            \_ForeachStmt: (work@dut), line:7:13, endln:8:36
-            |vpiName:array
-            |vpiFullName:work@dut.array
-          |vpiImportTypespec:
           \_RefVar: (work@dut.i), line:7:27, endln:7:28
             |vpiParent:
             \_ForeachStmt: (work@dut), line:7:13, endln:8:36
@@ -263,7 +257,13 @@ Design: (unnamed)
             |vpiName:j
             |vpiFullName:work@dut.j
           |vpiVariables:
-          \_RefVar: (work@dut.array), line:7:21, endln:7:26
+          \_RefObj: (work@dut.array), line:7:21, endln:7:26
+            |vpiParent:
+            \_ForeachStmt: (work@dut), line:7:13, endln:8:36
+            |vpiName:array
+            |vpiFullName:work@dut.array
+            |vpiActual:
+            \_ArrayNet: (work@dut.array), line:3:9, endln:3:14
           |vpiLoopVars:
           \_RefVar: (work@dut.i), line:7:27, endln:7:28
           |vpiLoopVars:
@@ -302,7 +302,7 @@ Design: (unnamed)
               |vpiName:array
               |vpiFullName:work@dut.array
               |vpiActual:
-              \_RefVar: (work@dut.array), line:7:21, endln:7:26
+              \_ArrayNet: (work@dut.array), line:3:9, endln:3:14
               |vpiIndex:
               \_RefObj: (work@dut.array.i), line:8:23, endln:8:24
                 |vpiParent:
@@ -320,12 +320,6 @@ Design: (unnamed)
                 |vpiActual:
                 \_RefVar: (work@dut.j), line:7:30, endln:7:31
         |vpiImportTypespec:
-        \_RefVar: (work@dut.array), line:6:17, endln:6:22
-          |vpiParent:
-          \_ForeachStmt: (work@dut), line:6:9, endln:8:36
-          |vpiName:array
-          |vpiFullName:work@dut.array
-        |vpiImportTypespec:
         \_RefVar: (work@dut.i), line:6:23, endln:6:24
           |vpiParent:
           \_ForeachStmt: (work@dut), line:6:9, endln:8:36
@@ -340,7 +334,13 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@dut.i
         |vpiVariables:
-        \_RefVar: (work@dut.array), line:6:17, endln:6:22
+        \_RefObj: (work@dut.array), line:6:17, endln:6:22
+          |vpiParent:
+          \_ForeachStmt: (work@dut), line:6:9, endln:8:36
+          |vpiName:array
+          |vpiFullName:work@dut.array
+          |vpiActual:
+          \_ArrayNet: (work@dut.array), line:3:9, endln:3:14
         |vpiLoopVars:
         \_RefVar: (work@dut.i), line:6:23, endln:6:24
         |vpiStmt:

@@ -825,9 +825,8 @@ Module                                                 1
 ModuleTypespec                                         1
 Operation                                             33
 Package                                                1
-RefObj                                                51
+RefObj                                                54
 RefTypespec                                           27
-RefVar                                                 3
 SourceFile                                             1
 SysFuncCall                                            2
 Task                                                   9
@@ -944,7 +943,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1386,7 +1385,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1426,7 +1425,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1466,7 +1465,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1513,7 +1512,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1697,21 +1696,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:5:3, endln:26:6
       |vpiFullName:work@t
-      |vpiVariables:
-      \_RefVar: (work@t), line:12:11, endln:12:12
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiFullName:work@t
-      |vpiVariables:
-      \_RefVar: (work@t), line:13:11, endln:13:12
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiFullName:work@t
-      |vpiVariables:
-      \_RefVar: (work@t), line:14:11, endln:14:12
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiFullName:work@t
       |vpiInternalScope:
       \_ForStmt: (work@t), line:6:6, endln:6:18
         |vpiParent:
@@ -2033,7 +2017,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@t), line:12:11, endln:12:12
+          \_RefObj: (work@t.a), line:12:11, endln:12:12
+            |vpiParent:
+            \_Assignment: , line:12:11, endln:12:14
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiActual:
+            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:12:16, endln:12:19
           |vpiParent:
@@ -2073,7 +2063,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@t), line:13:11, endln:13:12
+          \_RefObj: (work@t.a), line:13:11, endln:13:12
+            |vpiParent:
+            \_Assignment: , line:13:11, endln:13:14
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiActual:
+            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:13:21, endln:13:26
           |vpiParent:
@@ -2148,7 +2144,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@t), line:14:11, endln:14:12
+          \_RefObj: (work@t.a), line:14:11, endln:14:12
+            |vpiParent:
+            \_Assignment: , line:14:11, endln:14:14
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiActual:
+            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:14:21, endln:14:26
           |vpiParent:
@@ -2257,6 +2259,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:15:11, endln:15:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiCondition:
         \_Operation: , line:15:24, endln:15:27
           |vpiParent:
@@ -2295,6 +2311,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:16:19, endln:16:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:16:11, endln:16:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:16:19, endln:16:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:16:29, endln:16:34
           |vpiParent:
@@ -2368,6 +2398,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:17:19, endln:17:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:17:11, endln:17:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:17:19, endln:17:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:17:29, endln:17:34
           |vpiParent:
@@ -2476,6 +2520,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:18:23, endln:18:24
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:18:15, endln:18:22
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:18:23, endln:18:24
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiCondition:
         \_Operation: , line:18:28, endln:18:31
           |vpiParent:
@@ -2514,6 +2572,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:19:23, endln:19:24
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:19:15, endln:19:22
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:19:23, endln:19:24
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:19:33, endln:19:38
           |vpiParent:
@@ -2587,6 +2659,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:20:23, endln:20:24
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:20:15, endln:20:22
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:20:23, endln:20:24
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:20:33, endln:20:38
           |vpiParent:
@@ -2695,6 +2781,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:21:19, endln:21:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:21:11, endln:21:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:21:19, endln:21:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForInitStmt:
         \_Assignment: , line:21:24, endln:21:35
           |vpiParent:
@@ -2707,6 +2807,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.b), line:21:24, endln:21:31
+              |vpiParent:
+              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              |vpiFullName:work@t.b
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:b
+            |vpiFullName:work@t.b
+            |vpiSigned:1
         |vpiCondition:
         \_Operation: , line:21:37, endln:21:40
           |vpiParent:
@@ -2745,6 +2859,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:22:19, endln:22:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:22:11, endln:22:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:22:19, endln:22:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForInitStmt:
         \_Assignment: , line:22:24, endln:22:35
           |vpiParent:
@@ -2757,6 +2885,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.b), line:22:32, endln:22:33
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.b), line:22:24, endln:22:31
+              |vpiParent:
+              \_IntegerNet: (work@t.b), line:22:32, endln:22:33
+              |vpiFullName:work@t.b
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:b
+            |vpiFullName:work@t.b
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:22:42, endln:22:47
           |vpiParent:
@@ -2830,6 +2972,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.a), line:23:19, endln:23:20
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.a), line:23:11, endln:23:18
+              |vpiParent:
+              \_IntegerNet: (work@t.a), line:23:19, endln:23:20
+              |vpiFullName:work@t.a
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:a
+            |vpiFullName:work@t.a
+            |vpiSigned:1
         |vpiForInitStmt:
         \_Assignment: , line:23:24, endln:23:35
           |vpiParent:
@@ -2842,6 +2998,20 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
+          |vpiLhs:
+          \_IntegerNet: (work@t.b), line:23:32, endln:23:33
+            |vpiParent:
+            \_Begin: (work@t), line:5:11, endln:26:6
+            |vpiTypespec:
+            \_RefTypespec: (work@t.b), line:23:24, endln:23:31
+              |vpiParent:
+              \_IntegerNet: (work@t.b), line:23:32, endln:23:33
+              |vpiFullName:work@t.b
+              |vpiActual:
+              \_IntegerTypespec: 
+            |vpiName:b
+            |vpiFullName:work@t.b
+            |vpiSigned:1
         |vpiForIncStmt:
         \_Assignment: , line:23:42, endln:23:47
           |vpiParent:
@@ -2939,181 +3109,31 @@ Design: (unnamed)
         \_Begin: (work@t), line:5:11, endln:26:6
         |vpiSigned:1
       |vpiImportTypespec:
-      \_RefVar: (work@t), line:12:11, endln:12:12
-      |vpiImportTypespec:
-      \_RefVar: (work@t), line:13:11, endln:13:12
-      |vpiImportTypespec:
-      \_RefVar: (work@t), line:14:11, endln:14:12
-      |vpiImportTypespec:
       \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:15:19, endln:15:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:15:11, endln:15:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:15:19, endln:15:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:16:19, endln:16:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:16:11, endln:16:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:16:19, endln:16:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:17:19, endln:17:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:17:11, endln:17:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:17:19, endln:17:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:18:23, endln:18:24
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:18:15, endln:18:22
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:18:23, endln:18:24
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:19:23, endln:19:24
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:19:15, endln:19:22
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:19:23, endln:19:24
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:20:23, endln:20:24
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:20:15, endln:20:22
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:20:23, endln:20:24
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:21:19, endln:21:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:21:11, endln:21:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:21:19, endln:21:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:21:32, endln:21:33
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.b), line:21:24, endln:21:31
-          |vpiParent:
-          \_IntegerNet: (work@t.b), line:21:32, endln:21:33
-          |vpiFullName:work@t.b
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:b
-        |vpiFullName:work@t.b
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:22:19, endln:22:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:22:11, endln:22:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:22:19, endln:22:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:22:32, endln:22:33
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.b), line:22:24, endln:22:31
-          |vpiParent:
-          \_IntegerNet: (work@t.b), line:22:32, endln:22:33
-          |vpiFullName:work@t.b
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:b
-        |vpiFullName:work@t.b
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.a), line:23:19, endln:23:20
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.a), line:23:11, endln:23:18
-          |vpiParent:
-          \_IntegerNet: (work@t.a), line:23:19, endln:23:20
-          |vpiFullName:work@t.a
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:a
-        |vpiFullName:work@t.a
-        |vpiSigned:1
       |vpiImportTypespec:
       \_IntegerNet: (work@t.b), line:23:32, endln:23:33
-        |vpiParent:
-        \_Begin: (work@t), line:5:11, endln:26:6
-        |vpiTypespec:
-        \_RefTypespec: (work@t.b), line:23:24, endln:23:31
-          |vpiParent:
-          \_IntegerNet: (work@t.b), line:23:32, endln:23:33
-          |vpiFullName:work@t.b
-          |vpiActual:
-          \_IntegerTypespec: 
-        |vpiName:b
-        |vpiFullName:work@t.b
-        |vpiSigned:1
       |vpiStmt:
       \_ForStmt: (work@t), line:6:6, endln:6:18
       |vpiStmt:

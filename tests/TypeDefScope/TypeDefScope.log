@@ -36,7 +36,7 @@ n<> u<98> t<Top_level_rule> c<1> l<1:1> el<20:1>
                         n<> u<20> t<Function_data_type_or_implicit> p<86> c<19> s<21> l<3:13> el<3:17>
                           n<> u<19> t<Function_data_type> p<20> l<3:13> el<3:17>
                         n<UVMC_set_config_object> u<21> t<STRING_CONST> p<86> s<47> l<3:18> el<3:40>
-                        n<> u<47> t<Tf_port_list> p<86> c<26> s<62> l<3:42> el<7:19>
+                        n<> u<47> t<Tf_port_item_list> p<86> c<26> s<62> l<3:41> el<7:20>
                           n<> u<26> t<Tf_port_item> p<47> c<24> s<31> l<3:42> el<3:58>
                             n<> u<24> t<Data_type_or_implicit> p<26> c<23> s<25> l<3:42> el<3:48>
                               n<string> u<23> t<Data_type> p<24> c<22> l<3:42> el<3:48>
@@ -130,8 +130,8 @@ Module                                                 1
 ModuleTypespec                                         1
 Package                                                1
 Port                                                   2
-RefTypespec                                           23
-RefVar                                                 2
+RefObj                                                 2
+RefTypespec                                           21
 SourceFile                                             1
 StringTypespec                                         4
 Task                                                   9
@@ -139,6 +139,7 @@ TypedefTypespec                                        3
 UnsupportedTypespec                                    4
 VoidTypespec                                           1
 === UHDM Object Stats End ===
+[ERR:IG0801] ${SURELOG_DIR}/tests/TypeDefScope/dut.sv Missing location information: 9, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -250,7 +251,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -692,7 +693,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -732,7 +733,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -772,7 +773,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -819,7 +820,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -969,34 +970,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiFullName:work@dut.UVMC_set_config_object
-      |vpiVariables:
-      \_RefVar: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
-        |vpiParent:
-        \_Begin: (work@dut.UVMC_set_config_object)
-        |vpiTypespec:
-        \_RefTypespec: (work@dut.UVMC_set_config_object.obj.uvm_object), line:11:1, endln:11:11
-          |vpiParent:
-          \_RefVar: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
-          |vpiName:uvm_object
-          |vpiFullName:work@dut.UVMC_set_config_object.obj.uvm_object
-          |vpiActual:
-          \_UnsupportedTypespec: (uvm_object)
-        |vpiName:obj
-        |vpiFullName:work@dut.UVMC_set_config_object.obj
-      |vpiVariables:
-      \_RefVar: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
-        |vpiParent:
-        \_Begin: (work@dut.UVMC_set_config_object)
-        |vpiTypespec:
-        \_RefTypespec: (work@dut.UVMC_set_config_object.comp.uvm_component), line:12:1, endln:12:14
-          |vpiParent:
-          \_RefVar: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
-          |vpiName:uvm_component
-          |vpiFullName:work@dut.UVMC_set_config_object.comp.uvm_component
-          |vpiActual:
-          \_UnsupportedTypespec: (uvm_component)
-        |vpiName:comp
-        |vpiFullName:work@dut.UVMC_set_config_object.comp
       |vpiTypedef:
       \_TypedefTypespec: (converter1), line:8:46, endln:8:56
         |vpiParent:
@@ -1007,10 +980,11 @@ Design: (unnamed)
           \_TypedefTypespec: (converter1), line:8:46, endln:8:56
           |vpiName:converter1
         |vpiTypedefAlias:
-        \_RefTypespec: (work@dut.UVMC_set_config_object.converter1), line:8:9, endln:8:31
+        \_RefTypespec: (work@dut.UVMC_set_config_object.converter1.uvmc_default_converter), line:8:9, endln:8:31
           |vpiParent:
           \_TypedefTypespec: (converter1), line:8:46, endln:8:56
-          |vpiFullName:work@dut.UVMC_set_config_object.converter1
+          |vpiName:uvmc_default_converter
+          |vpiFullName:work@dut.UVMC_set_config_object.converter1.uvmc_default_converter
           |vpiActual:
           \_UnsupportedTypespec: (uvmc_default_converter)
       |vpiTypedef:
@@ -1039,10 +1013,6 @@ Design: (unnamed)
       \_LogicTypespec: 
       |vpiImportTypespec:
       \_TypedefTypespec: (converter2), line:9:15, endln:9:25
-      |vpiImportTypespec:
-      \_RefVar: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
-      |vpiImportTypespec:
-      \_RefVar: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
     |vpiTypedef:
     \_VoidTypespec: 
       |vpiParent:
@@ -1070,7 +1040,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:type_name
       |vpiTypedef:
-      \_RefTypespec: (work@dut.UVMC_set_config_object.type_name.string)
+      \_RefTypespec: (work@dut.UVMC_set_config_object.type_name.string), line:3:42, endln:3:48
         |vpiParent:
         \_IODecl: (type_name), line:3:49, endln:3:58
         |vpiName:string
@@ -1084,7 +1054,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:contxt
       |vpiTypedef:
-      \_RefTypespec: (work@dut.UVMC_set_config_object.contxt.string)
+      \_RefTypespec: (work@dut.UVMC_set_config_object.contxt.string), line:4:7, endln:4:13
         |vpiParent:
         \_IODecl: (contxt), line:4:14, endln:4:20
         |vpiName:string
@@ -1098,7 +1068,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:inst_name
       |vpiTypedef:
-      \_RefTypespec: (work@dut.UVMC_set_config_object.inst_name.string)
+      \_RefTypespec: (work@dut.UVMC_set_config_object.inst_name.string), line:5:7, endln:5:13
         |vpiParent:
         \_IODecl: (inst_name), line:5:14, endln:5:23
         |vpiName:string
@@ -1112,7 +1082,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:field_name
       |vpiTypedef:
-      \_RefTypespec: (work@dut.UVMC_set_config_object.field_name.string)
+      \_RefTypespec: (work@dut.UVMC_set_config_object.field_name.string), line:6:7, endln:6:13
         |vpiParent:
         \_IODecl: (field_name), line:6:14, endln:6:24
         |vpiName:string
@@ -1126,7 +1096,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (work@dut.UVMC_set_config_object.value.bits_t)
+      \_RefTypespec: (work@dut.UVMC_set_config_object.value.bits_t), line:7:7, endln:7:13
         |vpiParent:
         \_IODecl: (value), line:7:14, endln:7:19
         |vpiName:bits_t
@@ -1145,26 +1115,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
     |vpiName:uvmc_default_converter
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_object)
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
-    |vpiName:uvm_object
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_component)
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
-    |vpiName:uvm_component
   |vpiImportTypespec:
   \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
   |vpiImportTypespec:
   \_UnsupportedTypespec: (bits_t)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (uvmc_default_converter)
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_object)
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_component)
   |vpiImportTypespec:
   \_LogicNet: (work@dut.a), line:1:13, endln:1:14
     |vpiParent:
@@ -1206,6 +1162,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

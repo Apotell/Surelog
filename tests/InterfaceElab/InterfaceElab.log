@@ -192,6 +192,8 @@ RefObj                                                 5
 RefTypespec                                            6
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceElab/dut.sv:11:23: Parented to neither scope nor design: 57, IODecl, addr.
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, REG_BUS.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -360,20 +362,22 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@REG_BUS.addr), line:9:28, endln:9:32
   |vpiModport:
-  \_Modport: (out), line:11:11, endln:11:14
+  \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
     |vpiParent:
     \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiName:
-    \_Identifier: (out)
+    \_Identifier: (work@REG_BUS.out)
       |vpiParent:
-      \_Modport: (out), line:11:11, endln:11:14
-      |vpiName:out
+      \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
+      |vpiName:work@REG_BUS.out
     |vpiIODecl:
     \_IODecl: (addr), line:11:23, endln:11:27
       |vpiParent:
-      \_Modport: (out), line:11:11, endln:11:14
+      \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
       |vpiDirection:2
       |vpiName:addr
+    |vpiInterface:
+    \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
   |vpiPort:
   \_Port: (clk_i), line:6:15, endln:6:20
     |vpiParent:
@@ -405,19 +409,20 @@ Design: (unnamed)
     \_Module: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
     |vpiName:work@apb_to_reg
   |vpiTypedef:
-  \_InterfaceTypespec: (out), line:16:11, endln:16:14
+  \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
     |vpiParent:
     \_Module: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
     |vpiName:
-    \_Identifier: (out)
+    \_Identifier: (work@REG_BUS.out)
       |vpiParent:
-      \_InterfaceTypespec: (out), line:16:11, endln:16:14
-      |vpiName:out
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
+      |vpiName:work@REG_BUS.out
+    |vpiModport:
+    \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
     |vpiInterface:
     \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
   |vpiImportTypespec:
-  \_InterfaceTypespec: (out), line:16:11, endln:16:14
+  \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
   |vpiDefName:work@apb_to_reg
   |vpiPort:
   \_Port: (reg_o), line:16:16, endln:16:21
@@ -426,13 +431,13 @@ Design: (unnamed)
     |vpiName:reg_o
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@apb_to_reg.reg_o.out), line:16:3, endln:16:10
+    \_RefTypespec: (work@apb_to_reg.reg_o.work@REG_BUS.out), line:16:3, endln:16:10
       |vpiParent:
       \_Port: (reg_o), line:16:16, endln:16:21
-      |vpiName:out
-      |vpiFullName:work@apb_to_reg.reg_o.out
+      |vpiName:work@REG_BUS.out
+      |vpiFullName:work@apb_to_reg.reg_o.work@REG_BUS.out
       |vpiActual:
-      \_InterfaceTypespec: (out), line:16:11, endln:16:14
+      \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
 |vpiAllModules:
 \_Module: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
   |vpiParent:
@@ -553,6 +558,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 4
 [   NOTE] : 0

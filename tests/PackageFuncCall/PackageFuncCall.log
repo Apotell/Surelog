@@ -128,7 +128,7 @@ n<> u<487> t<Top_level_rule> c<1> l<1:1> el<43:1>
                               n<> u<109> t<Primary_literal> p<110> c<108> l<8:32> el<8:33>
                                 n<0> u<108> t<INT_CONST> p<109> l<8:32> el<8:33>
                 n<sbox4_64bit> u<117> t<STRING_CONST> p<289> s<158> l<8:35> el<8:46>
-                n<> u<158> t<Tf_port_list> p<289> c<132> s<176> l<8:47> el<8:93>
+                n<> u<158> t<Tf_port_item_list> p<289> c<132> s<176> l<8:46> el<8:94>
                   n<> u<132> t<Tf_port_item> p<158> c<130> s<157> l<8:47> el<8:68>
                     n<> u<130> t<Data_type_or_implicit> p<132> c<129> s<131> l<8:47> el<8:59>
                       n<> u<129> t<Data_type> p<130> c<118> l<8:47> el<8:59>
@@ -537,6 +537,7 @@ Task                                                   9
 TypedefTypespec                                        1
 VarSelect                                              1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackageFuncCall/dut.sv:8:22: Bad relative location: Child: 76, RefTypespec,  Parent: 8, Function, sbox4_64bit.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageFuncCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -648,7 +649,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1090,7 +1091,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1130,7 +1131,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1170,7 +1171,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1217,7 +1218,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1921,7 +1922,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state_in
       |vpiTypedef:
-      \_RefTypespec: (prim_cipher_pkg::sbox4_64bit::state_in)
+      \_RefTypespec: (prim_cipher_pkg::sbox4_64bit::state_in), line:8:47, endln:8:59
         |vpiParent:
         \_IODecl: (state_in), line:8:60, endln:8:68
         |vpiFullName:prim_cipher_pkg::sbox4_64bit::state_in
@@ -1934,7 +1935,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:sbox4
       |vpiTypedef:
-      \_RefTypespec: (prim_cipher_pkg::sbox4_64bit::sbox4)
+      \_RefTypespec: (prim_cipher_pkg::sbox4_64bit::sbox4), line:8:70, endln:8:87
         |vpiParent:
         \_IODecl: (sbox4), line:8:88, endln:8:93
         |vpiFullName:prim_cipher_pkg::sbox4_64bit::sbox4
@@ -2333,6 +2334,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

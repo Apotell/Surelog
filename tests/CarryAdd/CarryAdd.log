@@ -370,7 +370,7 @@ Design                                                 1
 GenFor                                                 1
 GenIfElse                                              1
 GenRegion                                              1
-GenVar                                                 1
+GenVar                                                 2
 HierPath                                               2
 Identifier                                             2
 LogicNet                                               7
@@ -384,9 +384,11 @@ Port                                                   3
 Range                                                  6
 RefObj                                                31
 RefTypespec                                           10
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/CarryAdd/dut.sv:6:8: Bad relative location: Child: 97, RefTypespec,  Parent: 96, LogicNet, y.
+[ERR:IG0807] ${SURELOG_DIR}/tests/CarryAdd/dut.sv:5:7: Bad relative location: Child: 81, RefTypespec,  Parent: 80, LogicNet, a.
+[ERR:IG0807] ${SURELOG_DIR}/tests/CarryAdd/dut.sv:5:7: Bad relative location: Child: 89, RefTypespec,  Parent: 88, LogicNet, b.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -405,12 +407,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:work@carryadd
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@carryadd.i), line:8:8, endln:8:9
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:i
     |vpiFullName:work@carryadd.i
+  |vpiGenVar:
+  \_GenVar: (work@carryadd.i), line:8:8, endln:8:9
   |vpiParameter:
   \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
     |vpiParent:
@@ -448,11 +452,13 @@ Design: (unnamed)
         \_Begin: (work@carryadd), line:10:9, endln:19:12
         |vpiFullName:work@carryadd
         |vpiVariables:
-        \_RefVar: (work@carryadd.i), line:10:14, endln:10:15
+        \_GenVar: (work@carryadd.i), line:10:14, endln:10:15
           |vpiParent:
           \_GenFor: (work@carryadd), line:10:9, endln:19:12
           |vpiName:i
           |vpiFullName:work@carryadd.i
+        |vpiGenVar:
+        \_GenVar: (work@carryadd.i), line:10:14, endln:10:15
         |vpiInternalScope:
         \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
           |vpiParent:
@@ -789,7 +795,7 @@ Design: (unnamed)
                 |vpiActual:
                 \_GenVar: (work@carryadd.i), line:8:8, endln:8:9
         |vpiImportTypespec:
-        \_RefVar: (work@carryadd.i), line:10:14, endln:10:15
+        \_GenVar: (work@carryadd.i), line:10:14, endln:10:15
         |vpiForInitStmt:
         \_Assignment: , line:10:14, endln:10:19
           |vpiParent:
@@ -803,7 +809,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@carryadd.i), line:10:14, endln:10:15
+          \_GenVar: (work@carryadd.i), line:10:14, endln:10:15
         |vpiCondition:
         \_Operation: , line:10:21, endln:10:30
           |vpiParent:
@@ -939,6 +945,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_GenVar: (work@carryadd.i), line:8:8, endln:8:9
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -1102,6 +1110,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 3
 [WARNING] : 1
 [   NOTE] : 1

@@ -164,6 +164,7 @@ Constant                                              11
 ContAssign                                             2
 Design                                                 1
 GenFor                                                 1
+GenVar                                                 1
 HierPath                                               3
 Identifier                                             4
 IntTypespec                                            1
@@ -175,12 +176,12 @@ PackedArrayTypespec                                    1
 Range                                                  2
 RefObj                                                 6
 RefTypespec                                            4
-RefVar                                                 1
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
+[ERR:IG0804] Missing/invalid file: 52, RefTypespec, struct_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -205,11 +206,13 @@ Design: (unnamed)
     \_Module: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:1:1, endln:5:10
     |vpiFullName:work@alert_handler_reg_wrap
     |vpiVariables:
-    \_RefVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+    \_GenVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
       |vpiParent:
       \_GenFor: (work@alert_handler_reg_wrap), line:2:3, endln:4:6
       |vpiName:k
       |vpiFullName:work@alert_handler_reg_wrap.k
+    |vpiGenVar:
+    \_GenVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
     |vpiInternalScope:
     \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
       |vpiParent:
@@ -297,7 +300,7 @@ Design: (unnamed)
             \_LogicNet: (work@alert_handler_reg_wrap.gen_alert_cause.d), line:3:37, endln:3:37
           |vpiName:hw2reg.alert_cause[k].d
     |vpiImportTypespec:
-    \_RefVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+    \_GenVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
     |vpiImportTypespec:
     \_LogicNet: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
       |vpiParent:
@@ -325,7 +328,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+      \_GenVar: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
     |vpiCondition:
     \_Operation: , line:2:22, endln:2:27
       |vpiParent:
@@ -587,6 +590,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

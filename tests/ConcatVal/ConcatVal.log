@@ -83,7 +83,7 @@ n<> u<211> t<Top_level_rule> c<1> l<1:1> el<17:1>
                                       n<> u<60> t<Primary_literal> p<61> c<59> l<4:31> el<4:32>
                                         n<0> u<59> t<INT_CONST> p<60> l<4:31> el<4:32>
                         n<sbox4_64bit> u<68> t<STRING_CONST> p<112> s<109> l<4:34> el<4:45>
-                        n<> u<109> t<Tf_port_list> p<112> c<83> s<111> l<4:46> el<4:92>
+                        n<> u<109> t<Tf_port_item_list> p<112> c<83> s<111> l<4:45> el<4:93>
                           n<> u<83> t<Tf_port_item> p<109> c<81> s<108> l<4:46> el<4:67>
                             n<> u<81> t<Data_type_or_implicit> p<83> c<80> s<82> l<4:46> el<4:58>
                               n<> u<80> t<Data_type> p<81> c<69> l<4:46> el<4:58>
@@ -250,6 +250,7 @@ SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/ConcatVal/dut.sv:4:21: Bad relative location: Child: 25, RefTypespec,  Parent: 6, Function, sbox4_64bit.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -361,7 +362,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -803,7 +804,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -843,7 +844,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -883,7 +884,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -930,7 +931,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1234,7 +1235,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state_in
       |vpiTypedef:
-      \_RefTypespec: (work@dut.sbox4_64bit.state_in)
+      \_RefTypespec: (work@dut.sbox4_64bit.state_in), line:4:46, endln:4:58
         |vpiParent:
         \_IODecl: (state_in), line:4:59, endln:4:67
         |vpiFullName:work@dut.sbox4_64bit.state_in
@@ -1247,7 +1248,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:sbox4
       |vpiTypedef:
-      \_RefTypespec: (work@dut.sbox4_64bit.sbox4)
+      \_RefTypespec: (work@dut.sbox4_64bit.sbox4), line:4:69, endln:4:86
         |vpiParent:
         \_IODecl: (sbox4), line:4:87, endln:4:92
         |vpiFullName:work@dut.sbox4_64bit.sbox4
@@ -1454,6 +1455,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

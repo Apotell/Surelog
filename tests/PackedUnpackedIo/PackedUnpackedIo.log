@@ -47,7 +47,7 @@ n<> u<157> t<Top_level_rule> c<1> l<1:1> el<14:1>
                               n<> u<28> t<Primary_literal> p<29> c<27> l<3:34> el<3:35>
                                 n<0> u<27> t<INT_CONST> p<28> l<3:34> el<3:35>
                 n<compress> u<36> t<STRING_CONST> p<149> s<147> l<4:28> el<4:36>
-                n<> u<147> t<Tf_port_list> p<149> c<42> s<148> l<5:47> el<10:74>
+                n<> u<147> t<Tf_port_item_list> p<149> c<42> s<148> l<4:36> el<10:75>
                   n<> u<42> t<Tf_port_item> p<147> c<37> s<59> l<5:47> el<5:65>
                     n<> u<37> t<TfPortDir_Inp> p<42> s<40> l<5:47> el<5:52>
                     n<> u<40> t<Data_type_or_implicit> p<42> c<39> s<41> l<5:53> el<5:63>
@@ -179,6 +179,9 @@ RefTypespec                                           15
 SourceFile                                             1
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackedUnpackedIo/dut.sv:3:20: Bad relative location: Child: 19, RefTypespec,  Parent: 5, Function, compress.
+[ERR:IG0804] Missing/invalid file: 18, RefTypespec, hmac_pkg::sha_word_t.
+[ERR:IG0804] Missing/invalid file: 37, RefTypespec, hmac_pkg::sha_word_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedUnpackedIo/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -289,7 +292,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:w
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:2:22, endln:2:32
+      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:5:53, endln:5:63
         |vpiParent:
         \_IODecl: (w), line:5:64, endln:5:65
         |vpiName:sha_word_t
@@ -323,7 +326,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::ww::sha_word_t)
+      \_RefTypespec: (hmac_pkg::compress::ww::sha_word_t), line:6:53, endln:6:63
         |vpiParent:
         \_IODecl: (ww), line:6:64, endln:6:66
         |vpiName:sha_word_t
@@ -337,7 +340,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:h_i
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::h_i::sha_word_t)
+      \_RefTypespec: (hmac_pkg::compress::h_i::sha_word_t), line:7:53, endln:7:69
         |vpiParent:
         \_IODecl: (h_i), line:7:70, endln:7:73
         |vpiName:sha_word_t
@@ -371,7 +374,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::hh_ii::sha_word_t)
+      \_RefTypespec: (hmac_pkg::compress::hh_ii::sha_word_t), line:8:53, endln:8:69
         |vpiParent:
         \_IODecl: (hh_ii), line:8:70, endln:8:75
         |vpiName:sha_word_t
@@ -405,7 +408,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::hh)
+      \_RefTypespec: (hmac_pkg::compress::hh), line:9:53, endln:9:58
         |vpiParent:
         \_IODecl: (hh), line:9:59, endln:9:61
         |vpiFullName:hmac_pkg::compress::hh
@@ -438,7 +441,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::ii)
+      \_RefTypespec: (hmac_pkg::compress::ii), line:10:53, endln:10:64
         |vpiParent:
         \_IODecl: (ii), line:10:65, endln:10:67
         |vpiFullName:hmac_pkg::compress::ii
@@ -699,6 +702,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 3
 [WARNING] : 1
 [   NOTE] : 0

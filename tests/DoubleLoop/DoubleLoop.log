@@ -743,7 +743,7 @@ ContAssign                                             5
 Design                                                 1
 GenFor                                                10
 GenRegion                                              5
-GenVar                                                 5
+GenVar                                                20
 Identifier                                             6
 LogicNet                                              10
 LogicTypespec                                         20
@@ -754,9 +754,18 @@ Port                                                  10
 Range                                                 20
 RefObj                                                45
 RefTypespec                                           20
-RefVar                                                10
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:4:8: Bad relative location: Child: 59, RefTypespec,  Parent: 58, LogicNet, ys.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:4:8: Bad relative location: Child: 65, RefTypespec,  Parent: 64, LogicNet, yu.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:21:8: Bad relative location: Child: 106, RefTypespec,  Parent: 105, LogicNet, ys.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:21:8: Bad relative location: Child: 112, RefTypespec,  Parent: 111, LogicNet, yu.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:38:8: Bad relative location: Child: 153, RefTypespec,  Parent: 152, LogicNet, ys.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:38:8: Bad relative location: Child: 159, RefTypespec,  Parent: 158, LogicNet, yu.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:55:8: Bad relative location: Child: 200, RefTypespec,  Parent: 199, LogicNet, ys.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:55:8: Bad relative location: Child: 206, RefTypespec,  Parent: 205, LogicNet, yu.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:74:8: Bad relative location: Child: 247, RefTypespec,  Parent: 246, LogicNet, ys.
+[ERR:IG0807] ${SURELOG_DIR}/tests/DoubleLoop/dut.sv:74:8: Bad relative location: Child: 253, RefTypespec,  Parent: 252, LogicNet, yu.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DoubleLoop/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -775,12 +784,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@constpower1 (work@constpower1), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:2:1, endln:17:10
     |vpiName:work@constpower1
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@constpower1.i), line:6:8, endln:6:9
     |vpiParent:
     \_Module: work@constpower1 (work@constpower1), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:2:1, endln:17:10
     |vpiName:i
     |vpiFullName:work@constpower1.i
+  |vpiVariables:
+  \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
+    |vpiParent:
+    \_Module: work@constpower1 (work@constpower1), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:2:1, endln:17:10
+    |vpiName:j
+    |vpiFullName:work@constpower1.j
+  |vpiGenVar:
+  \_GenVar: (work@constpower1.i), line:6:8, endln:6:9
+  |vpiGenVar:
+  \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
   |vpiInternalScope:
   \_GenRegion: (work@constpower1), line:8:1, endln:15:12
     |vpiParent:
@@ -797,11 +816,13 @@ Design: (unnamed)
         \_Begin: (work@constpower1), line:9:2, endln:13:5
         |vpiFullName:work@constpower1
         |vpiVariables:
-        \_RefVar: (work@constpower1.i), line:9:7, endln:9:8
+        \_GenVar: (work@constpower1.i), line:9:7, endln:9:8
           |vpiParent:
           \_GenFor: (work@constpower1), line:9:2, endln:13:5
           |vpiName:i
           |vpiFullName:work@constpower1.i
+        |vpiGenVar:
+        \_GenVar: (work@constpower1.i), line:9:7, endln:9:8
         |vpiInternalScope:
         \_Begin: (work@constpower1), line:10:2, endln:13:5
           |vpiParent:
@@ -813,11 +834,13 @@ Design: (unnamed)
             \_Begin: (work@constpower1), line:10:2, endln:13:5
             |vpiFullName:work@constpower1
             |vpiVariables:
-            \_RefVar: (work@constpower1.j), line:10:7, endln:10:8
+            \_GenVar: (work@constpower1.j), line:10:7, endln:10:8
               |vpiParent:
               \_GenFor: (work@constpower1), line:10:2, endln:13:5
               |vpiName:j
               |vpiFullName:work@constpower1.j
+            |vpiGenVar:
+            \_GenVar: (work@constpower1.j), line:10:7, endln:10:8
             |vpiInternalScope:
             \_Begin: (work@constpower1.W), line:10:30, endln:13:5
               |vpiParent:
@@ -828,13 +851,6 @@ Design: (unnamed)
                 \_Begin: (work@constpower1.W), line:10:30, endln:13:5
                 |vpiName:W
               |vpiFullName:work@constpower1.W
-              |vpiImportTypespec:
-              \_LogicNet: (work@constpower1.W.j), line:11:18, endln:11:19
-                |vpiParent:
-                \_Begin: (work@constpower1.W), line:10:30, endln:13:5
-                |vpiName:j
-                |vpiFullName:work@constpower1.W.j
-                |vpiNetType:1
               |vpiStmt:
               \_ContAssign: , line:11:10, endln:11:19
                 |vpiParent:
@@ -859,7 +875,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@constpower1.W.j
                     |vpiActual:
-                    \_LogicNet: (work@constpower1.W.j), line:11:18, endln:11:19
+                    \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
                 |vpiLhs:
                 \_RefObj: (work@constpower1.W.ys), line:11:10, endln:11:12
                   |vpiParent:
@@ -869,28 +885,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@constpower1.ys), line:2:20, endln:2:22
             |vpiImportTypespec:
-            \_RefVar: (work@constpower1.j), line:10:7, endln:10:8
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower1.j), line:10:14, endln:10:15
-              |vpiParent:
-              \_GenFor: (work@constpower1), line:10:2, endln:13:5
-              |vpiName:j
-              |vpiFullName:work@constpower1.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower1.j), line:10:25, endln:10:26
-              |vpiParent:
-              \_GenFor: (work@constpower1), line:10:2, endln:13:5
-              |vpiName:j
-              |vpiFullName:work@constpower1.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower1.j), line:10:21, endln:10:22
-              |vpiParent:
-              \_GenFor: (work@constpower1), line:10:2, endln:13:5
-              |vpiName:j
-              |vpiFullName:work@constpower1.j
-              |vpiNetType:1
+            \_GenVar: (work@constpower1.j), line:10:7, endln:10:8
             |vpiForInitStmt:
             \_Assignment: , line:10:7, endln:10:12
               |vpiParent:
@@ -904,7 +899,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@constpower1.j), line:10:7, endln:10:8
+              \_GenVar: (work@constpower1.j), line:10:7, endln:10:8
             |vpiCondition:
             \_Operation: , line:10:14, endln:10:19
               |vpiParent:
@@ -917,7 +912,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower1.j
                 |vpiActual:
-                \_LogicNet: (work@constpower1.j), line:10:14, endln:10:15
+                \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
               |vpiOperand:
               \_Constant: , line:10:18, endln:10:19
                 |vpiParent:
@@ -943,7 +938,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@constpower1.j
                   |vpiActual:
-                  \_LogicNet: (work@constpower1.j), line:10:25, endln:10:26
+                  \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
                 |vpiOperand:
                 \_Constant: , line:10:27, endln:10:28
                   |vpiParent:
@@ -959,13 +954,13 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower1.j
                 |vpiActual:
-                \_LogicNet: (work@constpower1.j), line:10:21, endln:10:22
+                \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
             |vpiStmt:
             \_Begin: (work@constpower1.W), line:10:30, endln:13:5
           |vpiStmt:
           \_GenFor: (work@constpower1), line:10:2, endln:13:5
         |vpiImportTypespec:
-        \_RefVar: (work@constpower1.i), line:9:7, endln:9:8
+        \_GenVar: (work@constpower1.i), line:9:7, endln:9:8
         |vpiForInitStmt:
         \_Assignment: , line:9:7, endln:9:12
           |vpiParent:
@@ -979,7 +974,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@constpower1.i), line:9:7, endln:9:8
+          \_GenVar: (work@constpower1.i), line:9:7, endln:9:8
         |vpiCondition:
         \_Operation: , line:9:14, endln:9:19
           |vpiParent:
@@ -1066,6 +1061,10 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
+  \_GenVar: (work@constpower1.i), line:6:8, endln:6:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower1.j), line:6:11, endln:6:12
+  |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@constpower1.ys), line:2:20, endln:2:22
@@ -1133,12 +1132,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@constpower2 (work@constpower2), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:19:1, endln:34:10
     |vpiName:work@constpower2
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@constpower2.i), line:23:8, endln:23:9
     |vpiParent:
     \_Module: work@constpower2 (work@constpower2), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:19:1, endln:34:10
     |vpiName:i
     |vpiFullName:work@constpower2.i
+  |vpiVariables:
+  \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
+    |vpiParent:
+    \_Module: work@constpower2 (work@constpower2), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:19:1, endln:34:10
+    |vpiName:j
+    |vpiFullName:work@constpower2.j
+  |vpiGenVar:
+  \_GenVar: (work@constpower2.i), line:23:8, endln:23:9
+  |vpiGenVar:
+  \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
   |vpiInternalScope:
   \_GenRegion: (work@constpower2), line:25:1, endln:32:12
     |vpiParent:
@@ -1155,11 +1164,13 @@ Design: (unnamed)
         \_Begin: (work@constpower2), line:26:2, endln:30:5
         |vpiFullName:work@constpower2
         |vpiVariables:
-        \_RefVar: (work@constpower2.i), line:26:7, endln:26:8
+        \_GenVar: (work@constpower2.i), line:26:7, endln:26:8
           |vpiParent:
           \_GenFor: (work@constpower2), line:26:2, endln:30:5
           |vpiName:i
           |vpiFullName:work@constpower2.i
+        |vpiGenVar:
+        \_GenVar: (work@constpower2.i), line:26:7, endln:26:8
         |vpiInternalScope:
         \_Begin: (work@constpower2), line:27:2, endln:30:5
           |vpiParent:
@@ -1171,23 +1182,18 @@ Design: (unnamed)
             \_Begin: (work@constpower2), line:27:2, endln:30:5
             |vpiFullName:work@constpower2
             |vpiVariables:
-            \_RefVar: (work@constpower2.j), line:27:7, endln:27:8
+            \_GenVar: (work@constpower2.j), line:27:7, endln:27:8
               |vpiParent:
               \_GenFor: (work@constpower2), line:27:2, endln:30:5
               |vpiName:j
               |vpiFullName:work@constpower2.j
+            |vpiGenVar:
+            \_GenVar: (work@constpower2.j), line:27:7, endln:27:8
             |vpiInternalScope:
             \_Begin: (work@constpower2), line:27:30, endln:30:5
               |vpiParent:
               \_GenFor: (work@constpower2), line:27:2, endln:30:5
               |vpiFullName:work@constpower2
-              |vpiImportTypespec:
-              \_LogicNet: (work@constpower2.j), line:28:18, endln:28:19
-                |vpiParent:
-                \_Begin: (work@constpower2), line:27:30, endln:30:5
-                |vpiName:j
-                |vpiFullName:work@constpower2.j
-                |vpiNetType:1
               |vpiStmt:
               \_ContAssign: , line:28:10, endln:28:19
                 |vpiParent:
@@ -1212,7 +1218,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@constpower2.j
                     |vpiActual:
-                    \_LogicNet: (work@constpower2.j), line:28:18, endln:28:19
+                    \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
                 |vpiLhs:
                 \_RefObj: (work@constpower2.ys), line:28:10, endln:28:12
                   |vpiParent:
@@ -1222,28 +1228,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@constpower2.ys), line:19:20, endln:19:22
             |vpiImportTypespec:
-            \_RefVar: (work@constpower2.j), line:27:7, endln:27:8
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower2.j), line:27:14, endln:27:15
-              |vpiParent:
-              \_GenFor: (work@constpower2), line:27:2, endln:30:5
-              |vpiName:j
-              |vpiFullName:work@constpower2.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower2.j), line:27:25, endln:27:26
-              |vpiParent:
-              \_GenFor: (work@constpower2), line:27:2, endln:30:5
-              |vpiName:j
-              |vpiFullName:work@constpower2.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower2.j), line:27:21, endln:27:22
-              |vpiParent:
-              \_GenFor: (work@constpower2), line:27:2, endln:30:5
-              |vpiName:j
-              |vpiFullName:work@constpower2.j
-              |vpiNetType:1
+            \_GenVar: (work@constpower2.j), line:27:7, endln:27:8
             |vpiForInitStmt:
             \_Assignment: , line:27:7, endln:27:12
               |vpiParent:
@@ -1257,7 +1242,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@constpower2.j), line:27:7, endln:27:8
+              \_GenVar: (work@constpower2.j), line:27:7, endln:27:8
             |vpiCondition:
             \_Operation: , line:27:14, endln:27:19
               |vpiParent:
@@ -1270,7 +1255,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower2.j
                 |vpiActual:
-                \_LogicNet: (work@constpower2.j), line:27:14, endln:27:15
+                \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
               |vpiOperand:
               \_Constant: , line:27:18, endln:27:19
                 |vpiParent:
@@ -1296,7 +1281,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@constpower2.j
                   |vpiActual:
-                  \_LogicNet: (work@constpower2.j), line:27:25, endln:27:26
+                  \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
                 |vpiOperand:
                 \_Constant: , line:27:27, endln:27:28
                   |vpiParent:
@@ -1312,13 +1297,13 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower2.j
                 |vpiActual:
-                \_LogicNet: (work@constpower2.j), line:27:21, endln:27:22
+                \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
             |vpiStmt:
             \_Begin: (work@constpower2), line:27:30, endln:30:5
           |vpiStmt:
           \_GenFor: (work@constpower2), line:27:2, endln:30:5
         |vpiImportTypespec:
-        \_RefVar: (work@constpower2.i), line:26:7, endln:26:8
+        \_GenVar: (work@constpower2.i), line:26:7, endln:26:8
         |vpiForInitStmt:
         \_Assignment: , line:26:7, endln:26:12
           |vpiParent:
@@ -1332,7 +1317,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@constpower2.i), line:26:7, endln:26:8
+          \_GenVar: (work@constpower2.i), line:26:7, endln:26:8
         |vpiCondition:
         \_Operation: , line:26:14, endln:26:19
           |vpiParent:
@@ -1419,6 +1404,10 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
+  \_GenVar: (work@constpower2.i), line:23:8, endln:23:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower2.j), line:23:11, endln:23:12
+  |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@constpower2.ys), line:19:20, endln:19:22
@@ -1486,12 +1475,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@constpower3 (work@constpower3), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:36:1, endln:51:10
     |vpiName:work@constpower3
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@constpower3.i), line:40:8, endln:40:9
     |vpiParent:
     \_Module: work@constpower3 (work@constpower3), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:36:1, endln:51:10
     |vpiName:i
     |vpiFullName:work@constpower3.i
+  |vpiVariables:
+  \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
+    |vpiParent:
+    \_Module: work@constpower3 (work@constpower3), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:36:1, endln:51:10
+    |vpiName:j
+    |vpiFullName:work@constpower3.j
+  |vpiGenVar:
+  \_GenVar: (work@constpower3.i), line:40:8, endln:40:9
+  |vpiGenVar:
+  \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
   |vpiInternalScope:
   \_GenRegion: (work@constpower3), line:42:1, endln:49:12
     |vpiParent:
@@ -1508,11 +1507,13 @@ Design: (unnamed)
         \_Begin: (work@constpower3), line:43:2, endln:47:5
         |vpiFullName:work@constpower3
         |vpiVariables:
-        \_RefVar: (work@constpower3.i), line:43:7, endln:43:8
+        \_GenVar: (work@constpower3.i), line:43:7, endln:43:8
           |vpiParent:
           \_GenFor: (work@constpower3), line:43:2, endln:47:5
           |vpiName:i
           |vpiFullName:work@constpower3.i
+        |vpiGenVar:
+        \_GenVar: (work@constpower3.i), line:43:7, endln:43:8
         |vpiInternalScope:
         \_Begin: (work@constpower3), line:43:30, endln:47:5
           |vpiParent:
@@ -1524,23 +1525,18 @@ Design: (unnamed)
             \_Begin: (work@constpower3), line:43:30, endln:47:5
             |vpiFullName:work@constpower3
             |vpiVariables:
-            \_RefVar: (work@constpower3.j), line:44:7, endln:44:8
+            \_GenVar: (work@constpower3.j), line:44:7, endln:44:8
               |vpiParent:
               \_GenFor: (work@constpower3), line:44:2, endln:45:20
               |vpiName:j
               |vpiFullName:work@constpower3.j
+            |vpiGenVar:
+            \_GenVar: (work@constpower3.j), line:44:7, endln:44:8
             |vpiInternalScope:
             \_Begin: (work@constpower3), line:45:3, endln:45:20
               |vpiParent:
               \_GenFor: (work@constpower3), line:44:2, endln:45:20
               |vpiFullName:work@constpower3
-              |vpiImportTypespec:
-              \_LogicNet: (work@constpower3.j), line:45:18, endln:45:19
-                |vpiParent:
-                \_Begin: (work@constpower3), line:45:3, endln:45:20
-                |vpiName:j
-                |vpiFullName:work@constpower3.j
-                |vpiNetType:1
               |vpiStmt:
               \_ContAssign: , line:45:10, endln:45:19
                 |vpiParent:
@@ -1565,7 +1561,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@constpower3.j
                     |vpiActual:
-                    \_LogicNet: (work@constpower3.j), line:45:18, endln:45:19
+                    \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
                 |vpiLhs:
                 \_RefObj: (work@constpower3.ys), line:45:10, endln:45:12
                   |vpiParent:
@@ -1575,28 +1571,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@constpower3.ys), line:36:20, endln:36:22
             |vpiImportTypespec:
-            \_RefVar: (work@constpower3.j), line:44:7, endln:44:8
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower3.j), line:44:14, endln:44:15
-              |vpiParent:
-              \_GenFor: (work@constpower3), line:44:2, endln:45:20
-              |vpiName:j
-              |vpiFullName:work@constpower3.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower3.j), line:44:25, endln:44:26
-              |vpiParent:
-              \_GenFor: (work@constpower3), line:44:2, endln:45:20
-              |vpiName:j
-              |vpiFullName:work@constpower3.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower3.j), line:44:21, endln:44:22
-              |vpiParent:
-              \_GenFor: (work@constpower3), line:44:2, endln:45:20
-              |vpiName:j
-              |vpiFullName:work@constpower3.j
-              |vpiNetType:1
+            \_GenVar: (work@constpower3.j), line:44:7, endln:44:8
             |vpiForInitStmt:
             \_Assignment: , line:44:7, endln:44:12
               |vpiParent:
@@ -1610,7 +1585,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@constpower3.j), line:44:7, endln:44:8
+              \_GenVar: (work@constpower3.j), line:44:7, endln:44:8
             |vpiCondition:
             \_Operation: , line:44:14, endln:44:19
               |vpiParent:
@@ -1623,7 +1598,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower3.j
                 |vpiActual:
-                \_LogicNet: (work@constpower3.j), line:44:14, endln:44:15
+                \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
               |vpiOperand:
               \_Constant: , line:44:18, endln:44:19
                 |vpiParent:
@@ -1649,7 +1624,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@constpower3.j
                   |vpiActual:
-                  \_LogicNet: (work@constpower3.j), line:44:25, endln:44:26
+                  \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
                 |vpiOperand:
                 \_Constant: , line:44:27, endln:44:28
                   |vpiParent:
@@ -1665,13 +1640,13 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower3.j
                 |vpiActual:
-                \_LogicNet: (work@constpower3.j), line:44:21, endln:44:22
+                \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
             |vpiStmt:
             \_Begin: (work@constpower3), line:45:3, endln:45:20
           |vpiStmt:
           \_GenFor: (work@constpower3), line:44:2, endln:45:20
         |vpiImportTypespec:
-        \_RefVar: (work@constpower3.i), line:43:7, endln:43:8
+        \_GenVar: (work@constpower3.i), line:43:7, endln:43:8
         |vpiForInitStmt:
         \_Assignment: , line:43:7, endln:43:12
           |vpiParent:
@@ -1685,7 +1660,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@constpower3.i), line:43:7, endln:43:8
+          \_GenVar: (work@constpower3.i), line:43:7, endln:43:8
         |vpiCondition:
         \_Operation: , line:43:14, endln:43:19
           |vpiParent:
@@ -1772,6 +1747,10 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
+  \_GenVar: (work@constpower3.i), line:40:8, endln:40:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower3.j), line:40:11, endln:40:12
+  |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@constpower3.ys), line:36:20, endln:36:22
@@ -1839,12 +1818,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@constpower4 (work@constpower4), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:53:1, endln:69:10
     |vpiName:work@constpower4
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@constpower4.i), line:57:8, endln:57:9
     |vpiParent:
     \_Module: work@constpower4 (work@constpower4), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:53:1, endln:69:10
     |vpiName:i
     |vpiFullName:work@constpower4.i
+  |vpiVariables:
+  \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
+    |vpiParent:
+    \_Module: work@constpower4 (work@constpower4), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:53:1, endln:69:10
+    |vpiName:j
+    |vpiFullName:work@constpower4.j
+  |vpiGenVar:
+  \_GenVar: (work@constpower4.i), line:57:8, endln:57:9
+  |vpiGenVar:
+  \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
   |vpiInternalScope:
   \_GenRegion: (work@constpower4), line:59:1, endln:67:12
     |vpiParent:
@@ -1861,11 +1850,13 @@ Design: (unnamed)
         \_Begin: (work@constpower4), line:60:2, endln:65:12
         |vpiFullName:work@constpower4
         |vpiVariables:
-        \_RefVar: (work@constpower4.i), line:60:7, endln:60:8
+        \_GenVar: (work@constpower4.i), line:60:7, endln:60:8
           |vpiParent:
           \_GenFor: (work@constpower4), line:60:2, endln:65:12
           |vpiName:i
           |vpiFullName:work@constpower4.i
+        |vpiGenVar:
+        \_GenVar: (work@constpower4.i), line:60:7, endln:60:8
         |vpiInternalScope:
         \_Begin: (work@constpower4), line:60:30, endln:65:12
           |vpiParent:
@@ -1877,23 +1868,18 @@ Design: (unnamed)
             \_Begin: (work@constpower4), line:60:30, endln:65:12
             |vpiFullName:work@constpower4
             |vpiVariables:
-            \_RefVar: (work@constpower4.j), line:61:7, endln:61:8
+            \_GenVar: (work@constpower4.j), line:61:7, endln:61:8
               |vpiParent:
               \_GenFor: (work@constpower4), line:61:2, endln:64:5
               |vpiName:j
               |vpiFullName:work@constpower4.j
+            |vpiGenVar:
+            \_GenVar: (work@constpower4.j), line:61:7, endln:61:8
             |vpiInternalScope:
             \_Begin: (work@constpower4), line:61:30, endln:64:5
               |vpiParent:
               \_GenFor: (work@constpower4), line:61:2, endln:64:5
               |vpiFullName:work@constpower4
-              |vpiImportTypespec:
-              \_LogicNet: (work@constpower4.j), line:62:18, endln:62:19
-                |vpiParent:
-                \_Begin: (work@constpower4), line:61:30, endln:64:5
-                |vpiName:j
-                |vpiFullName:work@constpower4.j
-                |vpiNetType:1
               |vpiStmt:
               \_ContAssign: , line:62:10, endln:62:19
                 |vpiParent:
@@ -1918,7 +1904,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@constpower4.j
                     |vpiActual:
-                    \_LogicNet: (work@constpower4.j), line:62:18, endln:62:19
+                    \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
                 |vpiLhs:
                 \_RefObj: (work@constpower4.ys), line:62:10, endln:62:12
                   |vpiParent:
@@ -1928,28 +1914,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@constpower4.ys), line:53:20, endln:53:22
             |vpiImportTypespec:
-            \_RefVar: (work@constpower4.j), line:61:7, endln:61:8
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower4.j), line:61:14, endln:61:15
-              |vpiParent:
-              \_GenFor: (work@constpower4), line:61:2, endln:64:5
-              |vpiName:j
-              |vpiFullName:work@constpower4.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower4.j), line:61:25, endln:61:26
-              |vpiParent:
-              \_GenFor: (work@constpower4), line:61:2, endln:64:5
-              |vpiName:j
-              |vpiFullName:work@constpower4.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower4.j), line:61:21, endln:61:22
-              |vpiParent:
-              \_GenFor: (work@constpower4), line:61:2, endln:64:5
-              |vpiName:j
-              |vpiFullName:work@constpower4.j
-              |vpiNetType:1
+            \_GenVar: (work@constpower4.j), line:61:7, endln:61:8
             |vpiForInitStmt:
             \_Assignment: , line:61:7, endln:61:12
               |vpiParent:
@@ -1963,7 +1928,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@constpower4.j), line:61:7, endln:61:8
+              \_GenVar: (work@constpower4.j), line:61:7, endln:61:8
             |vpiCondition:
             \_Operation: , line:61:14, endln:61:19
               |vpiParent:
@@ -1976,7 +1941,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower4.j
                 |vpiActual:
-                \_LogicNet: (work@constpower4.j), line:61:14, endln:61:15
+                \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
               |vpiOperand:
               \_Constant: , line:61:18, endln:61:19
                 |vpiParent:
@@ -2002,7 +1967,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@constpower4.j
                   |vpiActual:
-                  \_LogicNet: (work@constpower4.j), line:61:25, endln:61:26
+                  \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
                 |vpiOperand:
                 \_Constant: , line:61:27, endln:61:28
                   |vpiParent:
@@ -2018,13 +1983,13 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower4.j
                 |vpiActual:
-                \_LogicNet: (work@constpower4.j), line:61:21, endln:61:22
+                \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
             |vpiStmt:
             \_Begin: (work@constpower4), line:61:30, endln:64:5
           |vpiStmt:
           \_GenFor: (work@constpower4), line:61:2, endln:64:5
         |vpiImportTypespec:
-        \_RefVar: (work@constpower4.i), line:60:7, endln:60:8
+        \_GenVar: (work@constpower4.i), line:60:7, endln:60:8
         |vpiForInitStmt:
         \_Assignment: , line:60:7, endln:60:12
           |vpiParent:
@@ -2038,7 +2003,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@constpower4.i), line:60:7, endln:60:8
+          \_GenVar: (work@constpower4.i), line:60:7, endln:60:8
         |vpiCondition:
         \_Operation: , line:60:14, endln:60:19
           |vpiParent:
@@ -2125,6 +2090,10 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
+  \_GenVar: (work@constpower4.i), line:57:8, endln:57:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower4.j), line:57:11, endln:57:12
+  |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@constpower4.ys), line:53:20, endln:53:22
@@ -2192,12 +2161,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@constpower5 (work@constpower5), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:72:1, endln:88:10
     |vpiName:work@constpower5
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@constpower5.i), line:76:8, endln:76:9
     |vpiParent:
     \_Module: work@constpower5 (work@constpower5), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:72:1, endln:88:10
     |vpiName:i
     |vpiFullName:work@constpower5.i
+  |vpiVariables:
+  \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
+    |vpiParent:
+    \_Module: work@constpower5 (work@constpower5), file:${SURELOG_DIR}/tests/DoubleLoop/dut.sv, line:72:1, endln:88:10
+    |vpiName:j
+    |vpiFullName:work@constpower5.j
+  |vpiGenVar:
+  \_GenVar: (work@constpower5.i), line:76:8, endln:76:9
+  |vpiGenVar:
+  \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
   |vpiInternalScope:
   \_GenRegion: (work@constpower5), line:78:1, endln:86:12
     |vpiParent:
@@ -2214,11 +2193,13 @@ Design: (unnamed)
         \_Begin: (work@constpower5), line:79:2, endln:81:20
         |vpiFullName:work@constpower5
         |vpiVariables:
-        \_RefVar: (work@constpower5.i), line:79:7, endln:79:8
+        \_GenVar: (work@constpower5.i), line:79:7, endln:79:8
           |vpiParent:
           \_GenFor: (work@constpower5), line:79:2, endln:81:20
           |vpiName:i
           |vpiFullName:work@constpower5.i
+        |vpiGenVar:
+        \_GenVar: (work@constpower5.i), line:79:7, endln:79:8
         |vpiInternalScope:
         \_Begin: (work@constpower5), line:80:2, endln:81:20
           |vpiParent:
@@ -2230,23 +2211,18 @@ Design: (unnamed)
             \_Begin: (work@constpower5), line:80:2, endln:81:20
             |vpiFullName:work@constpower5
             |vpiVariables:
-            \_RefVar: (work@constpower5.j), line:80:7, endln:80:8
+            \_GenVar: (work@constpower5.j), line:80:7, endln:80:8
               |vpiParent:
               \_GenFor: (work@constpower5), line:80:2, endln:81:20
               |vpiName:j
               |vpiFullName:work@constpower5.j
+            |vpiGenVar:
+            \_GenVar: (work@constpower5.j), line:80:7, endln:80:8
             |vpiInternalScope:
             \_Begin: (work@constpower5), line:81:3, endln:81:20
               |vpiParent:
               \_GenFor: (work@constpower5), line:80:2, endln:81:20
               |vpiFullName:work@constpower5
-              |vpiImportTypespec:
-              \_LogicNet: (work@constpower5.j), line:81:18, endln:81:19
-                |vpiParent:
-                \_Begin: (work@constpower5), line:81:3, endln:81:20
-                |vpiName:j
-                |vpiFullName:work@constpower5.j
-                |vpiNetType:1
               |vpiStmt:
               \_ContAssign: , line:81:10, endln:81:19
                 |vpiParent:
@@ -2271,7 +2247,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@constpower5.j
                     |vpiActual:
-                    \_LogicNet: (work@constpower5.j), line:81:18, endln:81:19
+                    \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
                 |vpiLhs:
                 \_RefObj: (work@constpower5.ys), line:81:10, endln:81:12
                   |vpiParent:
@@ -2281,28 +2257,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@constpower5.ys), line:72:20, endln:72:22
             |vpiImportTypespec:
-            \_RefVar: (work@constpower5.j), line:80:7, endln:80:8
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower5.j), line:80:14, endln:80:15
-              |vpiParent:
-              \_GenFor: (work@constpower5), line:80:2, endln:81:20
-              |vpiName:j
-              |vpiFullName:work@constpower5.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower5.j), line:80:25, endln:80:26
-              |vpiParent:
-              \_GenFor: (work@constpower5), line:80:2, endln:81:20
-              |vpiName:j
-              |vpiFullName:work@constpower5.j
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_LogicNet: (work@constpower5.j), line:80:21, endln:80:22
-              |vpiParent:
-              \_GenFor: (work@constpower5), line:80:2, endln:81:20
-              |vpiName:j
-              |vpiFullName:work@constpower5.j
-              |vpiNetType:1
+            \_GenVar: (work@constpower5.j), line:80:7, endln:80:8
             |vpiForInitStmt:
             \_Assignment: , line:80:7, endln:80:12
               |vpiParent:
@@ -2316,7 +2271,7 @@ Design: (unnamed)
                 |UINT:0
                 |vpiConstType:9
               |vpiLhs:
-              \_RefVar: (work@constpower5.j), line:80:7, endln:80:8
+              \_GenVar: (work@constpower5.j), line:80:7, endln:80:8
             |vpiCondition:
             \_Operation: , line:80:14, endln:80:19
               |vpiParent:
@@ -2329,7 +2284,7 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower5.j
                 |vpiActual:
-                \_LogicNet: (work@constpower5.j), line:80:14, endln:80:15
+                \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
               |vpiOperand:
               \_Constant: , line:80:18, endln:80:19
                 |vpiParent:
@@ -2355,7 +2310,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@constpower5.j
                   |vpiActual:
-                  \_LogicNet: (work@constpower5.j), line:80:25, endln:80:26
+                  \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
                 |vpiOperand:
                 \_Constant: , line:80:27, endln:80:28
                   |vpiParent:
@@ -2371,13 +2326,13 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:work@constpower5.j
                 |vpiActual:
-                \_LogicNet: (work@constpower5.j), line:80:21, endln:80:22
+                \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
             |vpiStmt:
             \_Begin: (work@constpower5), line:81:3, endln:81:20
           |vpiStmt:
           \_GenFor: (work@constpower5), line:80:2, endln:81:20
         |vpiImportTypespec:
-        \_RefVar: (work@constpower5.i), line:79:7, endln:79:8
+        \_GenVar: (work@constpower5.i), line:79:7, endln:79:8
         |vpiForInitStmt:
         \_Assignment: , line:79:7, endln:79:12
           |vpiParent:
@@ -2391,7 +2346,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (work@constpower5.i), line:79:7, endln:79:8
+          \_GenVar: (work@constpower5.i), line:79:7, endln:79:8
         |vpiCondition:
         \_Operation: , line:79:14, endln:79:19
           |vpiParent:
@@ -2477,6 +2432,10 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower5.i), line:76:8, endln:76:9
+  |vpiImportTypespec:
+  \_GenVar: (work@constpower5.j), line:76:11, endln:76:12
   |vpiImportTypespec:
   \_LogicTypespec: 
   |vpiImportTypespec:
@@ -2574,6 +2533,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 10
 [WARNING] : 5
 [   NOTE] : 5

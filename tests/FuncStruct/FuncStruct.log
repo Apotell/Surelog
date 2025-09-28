@@ -47,7 +47,7 @@ n<> u<226> t<Top_level_rule> c<1> l<1:1> el<20:1>
                               n<> u<28> t<Primary_literal> p<29> c<27> l<3:34> el<3:35>
                                 n<0> u<27> t<INT_CONST> p<28> l<3:34> el<3:35>
                 n<compress> u<36> t<STRING_CONST> p<109> s<63> l<3:37> el<3:45>
-                n<> u<63> t<Tf_port_list> p<109> c<42> s<72> l<3:47> el<3:97>
+                n<> u<63> t<Tf_port_item_list> p<109> c<42> s<72> l<3:45> el<3:98>
                   n<> u<42> t<Tf_port_item> p<63> c<37> s<62> l<3:47> el<3:65>
                     n<> u<37> t<TfPortDir_Inp> p<42> s<40> l<3:47> el<3:52>
                     n<> u<40> t<Data_type_or_implicit> p<42> c<39> s<41> l<3:53> el<3:63>
@@ -260,6 +260,11 @@ RefTypespec                                           11
 SourceFile                                             1
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:3:20: Bad relative location: Child: 22, RefTypespec,  Parent: 8, Function, compress.
+[ERR:IG0804] Missing/invalid file: 21, RefTypespec, hmac_pkg::sha_word_t.
+[ERR:IG0804] Missing/invalid file: 30, RefTypespec, hmac_pkg::sha_word_t.
+[ERR:IG0804] Missing/invalid file: 62, RefTypespec, hmac_pkg::sha_word_t.
+[ERR:IG0804] Missing/invalid file: 69, RefTypespec, hmac_pkg::sha_word_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -289,7 +294,7 @@ Design: (unnamed)
       |vpiName:sha_word_t
       |vpiFullName:hmac_pkg::sigma_0::sha_word_t
       |vpiActual:
-      \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+      \_LogicTypespec: 
     |vpiName:sigma_0
     |vpiFullName:hmac_pkg::sigma_0
     |vpiAutomatic:1
@@ -378,7 +383,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:w
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:2:22, endln:2:32
+      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:3:53, endln:3:63
         |vpiParent:
         \_IODecl: (w), line:3:64, endln:3:65
         |vpiName:sha_word_t
@@ -400,7 +405,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::h_i::sha_word_t)
+      \_RefTypespec: (hmac_pkg::compress::h_i::sha_word_t), line:3:73, endln:3:89
         |vpiParent:
         \_IODecl: (h_i), line:3:90, endln:3:93
         |vpiName:sha_word_t
@@ -742,6 +747,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 2
 [   NOTE] : 0

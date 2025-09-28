@@ -239,6 +239,9 @@ StructTypespec                                         3
 TypedefTypespec                                        3
 TypespecMember                                         3
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:18:12: Bad relative location: Child: 56, RefTypespec, pkg1::struct1 Parent: 55, StructNet, var1.
+[ERR:IG0807] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:19:12: Bad relative location: Child: 58, RefTypespec, pkg2::struct1 Parent: 57, StructNet, var2.
+[ERR:IG0807] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:20:12: Bad relative location: Child: 60, RefTypespec, struct2 Parent: 59, StructNet, var3.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -471,10 +474,11 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.var1), line:18:12, endln:18:18
+    \_RefTypespec: (work@dut.var1.pkg1::struct1), line:18:12, endln:18:18
       |vpiParent:
       \_StructNet: (work@dut.var1), line:13:12, endln:13:16
-      |vpiFullName:work@dut.var1
+      |vpiName:pkg1::struct1
+      |vpiFullName:work@dut.var1.pkg1::struct1
       |vpiActual:
       \_TypedefTypespec: (pkg1::struct1), line:4:7, endln:4:14
     |vpiName:var1
@@ -484,10 +488,11 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.var2), line:19:12, endln:19:18
+    \_RefTypespec: (work@dut.var2.pkg2::struct1), line:19:12, endln:19:18
       |vpiParent:
       \_StructNet: (work@dut.var2), line:13:18, endln:13:22
-      |vpiFullName:work@dut.var2
+      |vpiName:pkg2::struct1
+      |vpiFullName:work@dut.var2.pkg2::struct1
       |vpiActual:
       \_TypedefTypespec: (pkg2::struct1), line:10:7, endln:10:14
     |vpiName:var2
@@ -685,6 +690,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 3
 [WARNING] : 3
 [   NOTE] : 0

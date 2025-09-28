@@ -659,6 +659,9 @@ SourceFile                                             1
 SysFuncCall                                            5
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/UnitTest/top.v:49:26: Parented to neither scope nor design: 163, IODecl, clk.
+[ERR:IG0805] ${SURELOG_DIR}/tests/UnitTest/top.v:50:27: Parented to neither scope nor design: 162, IODecl, clk.
+[ERR:IG0810] Invalid location: 11, InterfaceTypespec, mem_if.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitTest/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -722,35 +725,39 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiModport:
-  \_Modport: (memory), line:50:12, endln:50:18
+  \_Modport: (work@mem_if.system), line:49:12, endln:49:30
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
     |vpiName:
-    \_Identifier: (memory)
+    \_Identifier: (work@mem_if.system)
       |vpiParent:
-      \_Modport: (memory), line:50:12, endln:50:18
-      |vpiName:memory
-    |vpiIODecl:
-    \_IODecl: (clk), line:50:27, endln:50:30
-      |vpiParent:
-      \_Modport: (memory), line:50:12, endln:50:18
-      |vpiDirection:2
-      |vpiName:clk
-  |vpiModport:
-  \_Modport: (system), line:49:12, endln:49:18
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-    |vpiName:
-    \_Identifier: (system)
-      |vpiParent:
-      \_Modport: (system), line:49:12, endln:49:18
-      |vpiName:system
+      \_Modport: (work@mem_if.system), line:49:12, endln:49:30
+      |vpiName:work@mem_if.system
     |vpiIODecl:
     \_IODecl: (clk), line:49:26, endln:49:29
       |vpiParent:
-      \_Modport: (system), line:49:12, endln:49:18
+      \_Modport: (work@mem_if.system), line:49:12, endln:49:30
       |vpiDirection:1
       |vpiName:clk
+    |vpiInterface:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
+  |vpiModport:
+  \_Modport: (work@mem_if.memory), line:50:12, endln:50:31
+    |vpiParent:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
+    |vpiName:
+    \_Identifier: (work@mem_if.memory)
+      |vpiParent:
+      \_Modport: (work@mem_if.memory), line:50:12, endln:50:31
+      |vpiName:work@mem_if.memory
+    |vpiIODecl:
+    \_IODecl: (clk), line:50:27, endln:50:30
+      |vpiParent:
+      \_Modport: (work@mem_if.memory), line:50:12, endln:50:31
+      |vpiDirection:2
+      |vpiName:clk
+    |vpiInterface:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiPort:
   \_Port: (clk), line:47:30, endln:47:33
     |vpiParent:
@@ -825,15 +832,16 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiTypedef:
-  \_InterfaceTypespec: (system), line:57:42, endln:57:48
+  \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiName:
-    \_Identifier: (system)
+    \_Identifier: (work@mem_if.system)
       |vpiParent:
-      \_InterfaceTypespec: (system), line:57:42, endln:57:48
-      |vpiName:system
-    |vpiIsModPort:1
+      \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
+      |vpiName:work@mem_if.system
+    |vpiModport:
+    \_Modport: (work@mem_if.system), line:49:12, endln:49:30
     |vpiInterface:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiImportTypespec:
@@ -889,7 +897,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_InterfaceTypespec: (mem_if)
   |vpiImportTypespec:
-  \_InterfaceTypespec: (system), line:57:42, endln:57:48
+  \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
   |vpiDefName:work@memory_ctrl1
   |vpiNet:
   \_LogicNet: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
@@ -918,13 +926,13 @@ Design: (unnamed)
     |vpiName:sif2
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl1.sif2.system), line:57:35, endln:57:41
+    \_RefTypespec: (work@memory_ctrl1.sif2.work@mem_if.system), line:57:35, endln:57:41
       |vpiParent:
       \_Port: (sif2), line:57:49, endln:57:53
-      |vpiName:system
-      |vpiFullName:work@memory_ctrl1.sif2.system
+      |vpiName:work@mem_if.system
+      |vpiFullName:work@memory_ctrl1.sif2.work@mem_if.system
       |vpiActual:
-      \_InterfaceTypespec: (system), line:57:42, endln:57:48
+      \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
 |vpiAllModules:
 \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
   |vpiParent:
@@ -1759,6 +1767,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 3
 [WARNING] : 4
 [   NOTE] : 0

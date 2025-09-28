@@ -40,7 +40,7 @@ n<> u<134> t<Top_level_rule> c<1> l<1:1> el<25:1>
                           n<uvm_sequence_item> u<22> t<Data_type> p<23> c<21> l<10:18> el<10:35>
                             n<uvm_sequence_item> u<21> t<STRING_CONST> p<22> l<10:18> el<10:35>
                       n<reg2bus> u<25> t<STRING_CONST> p<121> s<32> l<10:36> el<10:43>
-                      n<> u<32> t<Tf_port_list> p<121> c<31> s<110> l<10:44> el<10:71>
+                      n<> u<32> t<Tf_port_item_list> p<121> c<31> s<110> l<10:43> el<10:72>
                         n<> u<31> t<Tf_port_item> p<32> c<26> l<10:44> el<10:71>
                           n<> u<26> t<TfPortDir_Ref> p<31> s<29> l<10:44> el<10:53>
                           n<> u<29> t<Data_type_or_implicit> p<31> c<28> s<30> l<10:54> el<10:68>
@@ -173,6 +173,8 @@ UnsupportedTypespec                                    2
 [ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:30, name: nbytes".
 [ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 47, name: gp".
 [ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:47, name: gp".
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Unbound: 30, RefObj, nbytes.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Unbound: 47, RefObj, gp.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -412,7 +414,7 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:rw
         |vpiTypedef:
-        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:6:3, endln:6:17
+        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:10:54, endln:10:68
           |vpiParent:
           \_IODecl: (rw), line:10:69, endln:10:71
           |vpiName:uvm_reg_bus_op
@@ -493,6 +495,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 6
 [WARNING] : 1
 [   NOTE] : 0

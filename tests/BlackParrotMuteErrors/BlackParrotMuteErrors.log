@@ -20,7 +20,7 @@ n<> u<6314> t<Top_level_rule> c<1> l<1:1> el<896:1>
                     n<> u<6> t<Data_type> p<7> c<5> l<5:22> el<5:29>
                       n<> u<5> t<IntegerAtomType_Integer> p<6> l<5:22> el<5:29>
                 n<_clog2> u<9> t<STRING_CONST> p<127> s<15> l<5:30> el<5:36>
-                n<> u<15> t<Tf_port_list> p<127> c<14> s<23> l<5:37> el<5:50>
+                n<> u<15> t<Tf_port_item_list> p<127> c<14> s<23> l<5:36> el<5:51>
                   n<> u<14> t<Tf_port_item> p<15> c<12> l<5:37> el<5:50>
                     n<> u<12> t<Data_type_or_implicit> p<14> c<11> s<13> l<5:37> el<5:44>
                       n<> u<11> t<Data_type> p<12> c<10> l<5:37> el<5:44>
@@ -147,7 +147,7 @@ n<> u<6314> t<Top_level_rule> c<1> l<1:1> el<896:1>
                     n<> u<133> t<Data_type> p<134> c<132> l<14:20> el<14:27>
                       n<> u<132> t<IntegerAtomType_Integer> p<133> l<14:20> el<14:27>
                 n<vbits> u<136> t<STRING_CONST> p<178> s<142> l<14:28> el<14:33>
-                n<> u<142> t<Tf_port_list> p<178> c<141> s<176> l<14:34> el<14:47>
+                n<> u<142> t<Tf_port_item_list> p<178> c<141> s<176> l<14:33> el<14:48>
                   n<> u<141> t<Tf_port_item> p<142> c<139> l<14:34> el<14:47>
                     n<> u<139> t<Data_type_or_implicit> p<141> c<138> s<140> l<14:34> el<14:41>
                       n<> u<138> t<Data_type> p<139> c<137> l<14:34> el<14:41>
@@ -6347,6 +6347,7 @@ FuncCall                                              13
 Function                                              11
 GenFor                                                 1
 GenIf                                                  1
+GenVar                                                 1
 HierPath                                               3
 IODecl                                                13
 Identifier                                           128
@@ -6364,9 +6365,8 @@ ParamAssign                                          141
 Parameter                                            141
 Range                                                 91
 RefModule                                              1
-RefObj                                               123
+RefObj                                               124
 RefTypespec                                          762
-RefVar                                                 2
 ReturnStmt                                             2
 SourceFile                                             1
 StringTypespec                                       216
@@ -6378,6 +6378,17 @@ TypedefTypespec                                       64
 TypespecMember                                       163
 UnsupportedTypespec                                   14
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:5:22: Bad relative location: Child: 22, RefTypespec,  Parent: 17, Function, _clog2.
+[ERR:IG0807] ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:14:20: Bad relative location: Child: 57, RefTypespec,  Parent: 19, Function, vbits.
+[ERR:IG0804] Missing/invalid file: 990, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1017, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1026, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1033, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1040, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1047, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1054, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1061, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t.
+[ERR:IG0804] Missing/invalid file: 1068, RefTypespec, otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotMuteErrors/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -6489,7 +6500,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -6931,7 +6942,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -6971,7 +6982,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -7011,7 +7022,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -7058,7 +7069,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -7222,11 +7233,6 @@ Design: (unnamed)
         |vpiName:result
         |vpiFullName:prim_util_pkg::_clog2::result
         |vpiSigned:1
-      |vpiVariables:
-      \_RefVar: (prim_util_pkg::_clog2), line:8:10, endln:8:16
-        |vpiParent:
-        \_Begin: (prim_util_pkg::_clog2)
-        |vpiFullName:prim_util_pkg::_clog2
       |vpiInternalScope:
       \_ForStmt: (prim_util_pkg::_clog2), line:8:5, endln:10:8
         |vpiParent:
@@ -7285,7 +7291,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (prim_util_pkg::_clog2), line:8:10, endln:8:16
+          \_RefObj: (prim_util_pkg::_clog2::result), line:8:10, endln:8:16
+            |vpiParent:
+            \_Assignment: , line:8:10, endln:8:20
+            |vpiName:result
+            |vpiFullName:prim_util_pkg::_clog2::result
+            |vpiActual:
+            \_IntegerVar: (prim_util_pkg::_clog2::result), line:6:13, endln:6:19
         |vpiForIncStmt:
         \_Assignment: , line:8:33, endln:8:52
           |vpiParent:
@@ -7353,8 +7365,6 @@ Design: (unnamed)
       \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerVar: (prim_util_pkg::_clog2::result), line:6:13, endln:6:19
-      |vpiImportTypespec:
-      \_RefVar: (prim_util_pkg::_clog2), line:8:10, endln:8:16
       |vpiStmt:
       \_Assignment: , line:7:5, endln:7:22
         |vpiParent:
@@ -7427,7 +7437,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::_clog2::value)
+      \_RefTypespec: (prim_util_pkg::_clog2::value), line:5:37, endln:5:44
         |vpiParent:
         \_IODecl: (value), line:5:45, endln:5:50
         |vpiFullName:prim_util_pkg::_clog2::value
@@ -7470,7 +7480,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::vbits::value)
+      \_RefTypespec: (prim_util_pkg::vbits::value), line:14:34, endln:14:41
         |vpiParent:
         \_IODecl: (value), line:14:42, endln:14:47
         |vpiFullName:prim_util_pkg::vbits::value
@@ -20811,11 +20821,13 @@ Design: (unnamed)
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:877:1, endln:893:10
     |vpiFullName:work@otp_ctrl
     |vpiVariables:
-    \_RefVar: (work@otp_ctrl.k), line:882:13, endln:882:14
+    \_GenVar: (work@otp_ctrl.k), line:882:13, endln:882:14
       |vpiParent:
       \_GenFor: (work@otp_ctrl), line:882:1, endln:891:4
       |vpiName:k
       |vpiFullName:work@otp_ctrl.k
+    |vpiGenVar:
+    \_GenVar: (work@otp_ctrl.k), line:882:13, endln:882:14
     |vpiInternalScope:
     \_Begin: (work@otp_ctrl.gen_partitions), line:882:39, endln:891:4
       |vpiParent:
@@ -20914,7 +20926,7 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (work@otp_ctrl.gen_partitions.gen_buffered), line:884:38, endln:889:4
     |vpiImportTypespec:
-    \_RefVar: (work@otp_ctrl.k), line:882:13, endln:882:14
+    \_GenVar: (work@otp_ctrl.k), line:882:13, endln:882:14
     |vpiImportTypespec:
     \_LogicNet: (work@otp_ctrl.k), line:882:20, endln:882:21
       |vpiParent:
@@ -20942,7 +20954,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@otp_ctrl.k), line:882:13, endln:882:14
+      \_GenVar: (work@otp_ctrl.k), line:882:13, endln:882:14
     |vpiCondition:
     \_Operation: , line:882:20, endln:882:31
       |vpiParent:
@@ -21246,6 +21258,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 11
 [WARNING] : 6
 [   NOTE] : 0

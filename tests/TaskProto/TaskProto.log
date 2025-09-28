@@ -31,7 +31,7 @@ n<> u<56> t<Top_level_rule> c<1> l<1:1> el<8:1>
                     n<"DPI-C"> u<15> t<STRING_LITERAL> p<26> s<24> l<2:11> el<2:18>
                     n<> u<24> t<Task_prototype> p<26> c<16> l<2:19> el<2:58>
                       n<test_output_argument> u<16> t<STRING_CONST> p<24> s<23> l<2:24> el<2:44>
-                      n<> u<23> t<Tf_port_list> p<24> c<22> l<2:45> el<2:57>
+                      n<> u<23> t<Tf_port_item_list> p<24> c<22> l<2:44> el<2:58>
                         n<> u<22> t<Tf_port_item> p<23> c<17> l<2:45> el<2:57>
                           n<> u<17> t<TfPortDir_Out> p<22> s<20> l<2:45> el<2:51>
                           n<> u<20> t<Data_type_or_implicit> p<22> c<19> s<21> l<2:52> el<2:55>
@@ -81,6 +81,7 @@ RefTypespec                                            3
 SourceFile                                             1
 TaskDecl                                               1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/TaskProto/dut.sv:2:56: Parented to neither scope nor design: 8, IODecl, o.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaskProto/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -145,7 +146,7 @@ Design: (unnamed)
       |vpiDirection:2
       |vpiName:o
       |vpiTypedef:
-      \_RefTypespec: (work@top.test_output_argument.o)
+      \_RefTypespec: (work@top.test_output_argument.o), line:2:52, endln:2:55
         |vpiParent:
         \_IODecl: (o), line:2:56, endln:2:57
         |vpiFullName:work@top.test_output_argument.o
@@ -200,6 +201,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

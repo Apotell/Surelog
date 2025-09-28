@@ -32,7 +32,7 @@ n<> u<37> t<Top_level_rule> c<1> l<1:1> el<4:1>
                     n<> u<16> t<Context_keyword> p<27> s<25> l<2:19> el<2:26>
                     n<> u<25> t<Task_prototype> p<27> c<17> l<2:27> el<2:51>
                       n<get_2> u<17> t<STRING_CONST> p<25> s<24> l<2:32> el<2:37>
-                      n<> u<24> t<Tf_port_list> p<25> c<23> l<2:38> el<2:50>
+                      n<> u<24> t<Tf_port_item_list> p<25> c<23> l<2:37> el<2:51>
                         n<> u<23> t<Tf_port_item> p<24> c<18> l<2:38> el<2:50>
                           n<> u<18> t<TfPortDir_Out> p<23> s<21> l<2:38> el<2:44>
                           n<> u<21> t<Data_type_or_implicit> p<23> c<20> s<22> l<2:45> el<2:48>
@@ -58,6 +58,7 @@ RefTypespec                                            3
 SourceFile                                             1
 TaskDecl                                               1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/Context/dut.sv:2:49: Parented to neither scope nor design: 8, IODecl, x.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Context/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -123,7 +124,7 @@ Design: (unnamed)
       |vpiDirection:2
       |vpiName:x
       |vpiTypedef:
-      \_RefTypespec: (work@top.get_2.x)
+      \_RefTypespec: (work@top.get_2.x), line:2:45, endln:2:48
         |vpiParent:
         \_IODecl: (x), line:2:49, endln:2:50
         |vpiFullName:work@top.get_2.x
@@ -152,6 +153,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

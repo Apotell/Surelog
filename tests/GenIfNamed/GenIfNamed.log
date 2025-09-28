@@ -142,12 +142,12 @@ ContAssign                                             3
 Design                                                 1
 GenFor                                                 1
 GenIfElse                                              1
+GenVar                                                 1
 Identifier                                             4
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
 RefObj                                                 6
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenIfNamed/slpp_all/surelog.uhdm ...
@@ -174,11 +174,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenIfNamed/dut.sv, line:2:1, endln:13:10
     |vpiFullName:work@top
     |vpiVariables:
-    \_RefVar: (work@top.i), line:4:8, endln:4:9
+    \_GenVar: (work@top.i), line:4:8, endln:4:9
       |vpiParent:
       \_GenFor: (work@top), line:4:3, endln:11:6
       |vpiName:i
       |vpiFullName:work@top.i
+    |vpiGenVar:
+    \_GenVar: (work@top.i), line:4:8, endln:4:9
     |vpiInternalScope:
     \_Begin: (work@top.tag1), line:4:34, endln:11:6
       |vpiParent:
@@ -345,7 +347,7 @@ Design: (unnamed)
         |vpiElseStmt:
         \_Begin: (work@top.tag1.tag3), line:7:15, endln:10:9
     |vpiImportTypespec:
-    \_RefVar: (work@top.i), line:4:8, endln:4:9
+    \_GenVar: (work@top.i), line:4:8, endln:4:9
     |vpiImportTypespec:
     \_LogicNet: (work@top.i), line:4:15, endln:4:16
       |vpiParent:
@@ -380,7 +382,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@top.i), line:4:8, endln:4:9
+      \_GenVar: (work@top.i), line:4:8, endln:4:9
     |vpiCondition:
     \_Operation: , line:4:15, endln:4:20
       |vpiParent:

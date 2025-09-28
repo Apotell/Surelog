@@ -274,6 +274,13 @@ RefTypespec                                            6
 SourceFile                                             1
 SysFuncCall                                            1
 === UHDM Object Stats End ===
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:5:20: Parented to neither scope nor design: 64, IODecl, P.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:5:38: Parented to neither scope nor design: 65, IODecl, Q.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:5:44: Parented to neither scope nor design: 66, IODecl, R.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:6:20: Parented to neither scope nor design: 67, IODecl, P.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:6:38: Parented to neither scope nor design: 68, IODecl, Q.
+[ERR:IG0805] ${SURELOG_DIR}/tests/InterfaceModExp/dut.sv:6:44: Parented to neither scope nor design: 69, IODecl, R.
+[ERR:IG0810] Invalid location: 5, InterfaceTypespec, I.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModExp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -442,59 +449,63 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@I.R), line:4:5, endln:4:6
   |vpiModport:
-  \_Modport: (A), line:5:9, endln:5:10
+  \_Modport: (work@I.A), line:5:9, endln:5:46
     |vpiParent:
     \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
     |vpiName:
-    \_Identifier: (A)
+    \_Identifier: (work@I.A)
       |vpiParent:
-      \_Modport: (A), line:5:9, endln:5:10
-      |vpiName:A
+      \_Modport: (work@I.A), line:5:9, endln:5:46
+      |vpiName:work@I.A
     |vpiIODecl:
     \_IODecl: (P), line:5:20, endln:5:21
       |vpiParent:
-      \_Modport: (A), line:5:9, endln:5:10
+      \_Modport: (work@I.A), line:5:9, endln:5:46
       |vpiDirection:2
       |vpiName:P
     |vpiIODecl:
     \_IODecl: (Q), line:5:38, endln:5:39
       |vpiParent:
-      \_Modport: (A), line:5:9, endln:5:10
+      \_Modport: (work@I.A), line:5:9, endln:5:46
       |vpiDirection:1
       |vpiName:Q
     |vpiIODecl:
     \_IODecl: (R), line:5:44, endln:5:45
       |vpiParent:
-      \_Modport: (A), line:5:9, endln:5:10
+      \_Modport: (work@I.A), line:5:9, endln:5:46
       |vpiDirection:1
       |vpiName:R
+    |vpiInterface:
+    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiModport:
-  \_Modport: (B), line:6:9, endln:6:10
+  \_Modport: (work@I.B), line:6:9, endln:6:46
     |vpiParent:
     \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
     |vpiName:
-    \_Identifier: (B)
+    \_Identifier: (work@I.B)
       |vpiParent:
-      \_Modport: (B), line:6:9, endln:6:10
-      |vpiName:B
+      \_Modport: (work@I.B), line:6:9, endln:6:46
+      |vpiName:work@I.B
     |vpiIODecl:
     \_IODecl: (P), line:6:20, endln:6:21
       |vpiParent:
-      \_Modport: (B), line:6:9, endln:6:10
+      \_Modport: (work@I.B), line:6:9, endln:6:46
       |vpiDirection:2
       |vpiName:P
     |vpiIODecl:
     \_IODecl: (Q), line:6:38, endln:6:39
       |vpiParent:
-      \_Modport: (B), line:6:9, endln:6:10
+      \_Modport: (work@I.B), line:6:9, endln:6:46
       |vpiDirection:1
       |vpiName:Q
     |vpiIODecl:
     \_IODecl: (R), line:6:44, endln:6:45
       |vpiParent:
-      \_Modport: (B), line:6:9, endln:6:10
+      \_Modport: (work@I.B), line:6:9, endln:6:46
       |vpiDirection:1
       |vpiName:R
+    |vpiInterface:
+    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
 |vpiAllModules:
 \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
   |vpiParent:
@@ -712,6 +723,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 7
 [WARNING] : 4
 [   NOTE] : 0

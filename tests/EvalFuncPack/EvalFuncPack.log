@@ -20,7 +20,7 @@ n<> u<463> t<Top_level_rule> c<1> l<2:1> el<65:1>
                     n<> u<6> t<Data_type> p<7> c<5> l<6:22> el<6:29>
                       n<> u<5> t<IntegerAtomType_Integer> p<6> l<6:22> el<6:29>
                 n<_clog2> u<9> t<STRING_CONST> p<127> s<15> l<6:30> el<6:36>
-                n<> u<15> t<Tf_port_list> p<127> c<14> s<23> l<6:37> el<6:50>
+                n<> u<15> t<Tf_port_item_list> p<127> c<14> s<23> l<6:36> el<6:51>
                   n<> u<14> t<Tf_port_item> p<15> c<12> l<6:37> el<6:50>
                     n<> u<12> t<Data_type_or_implicit> p<14> c<11> s<13> l<6:37> el<6:44>
                       n<> u<11> t<Data_type> p<12> c<10> l<6:37> el<6:44>
@@ -147,7 +147,7 @@ n<> u<463> t<Top_level_rule> c<1> l<2:1> el<65:1>
                     n<> u<133> t<Data_type> p<134> c<132> l<15:20> el<15:27>
                       n<> u<132> t<IntegerAtomType_Integer> p<133> l<15:20> el<15:27>
                 n<vbits> u<136> t<STRING_CONST> p<178> s<142> l<15:28> el<15:33>
-                n<> u<142> t<Tf_port_list> p<178> c<141> s<176> l<15:34> el<15:47>
+                n<> u<142> t<Tf_port_item_list> p<178> c<141> s<176> l<15:33> el<15:48>
                   n<> u<141> t<Tf_port_item> p<142> c<139> l<15:34> el<15:47>
                     n<> u<139> t<Data_type_or_implicit> p<141> c<138> s<140> l<15:34> el<15:41>
                       n<> u<138> t<Data_type> p<139> c<137> l<15:34> el<15:41>
@@ -273,7 +273,7 @@ n<> u<463> t<Top_level_rule> c<1> l<2:1> el<65:1>
                     n<> u<259> t<Data_type> p<260> c<258> l<35:20> el<35:27>
                       n<> u<258> t<IntegerAtomType_Integer> p<259> l<35:20> el<35:27>
                 n<max_info_pages> u<262> t<STRING_CONST> p<383> s<274> l<35:28> el<35:42>
-                n<> u<274> t<Tf_port_list> p<383> c<273> s<286> l<35:43> el<35:63>
+                n<> u<274> t<Tf_port_item_list> p<383> c<273> s<286> l<35:42> el<35:64>
                   n<> u<273> t<Tf_port_item> p<274> c<265> l<35:43> el<35:63>
                     n<> u<265> t<Data_type_or_implicit> p<273> c<264> s<266> l<35:43> el<35:46>
                       n<> u<264> t<Data_type> p<265> c<263> l<35:43> el<35:46>
@@ -508,9 +508,8 @@ Package                                                4
 ParamAssign                                            4
 Parameter                                              4
 Range                                                  4
-RefObj                                                29
+RefObj                                                30
 RefTypespec                                           34
-RefVar                                                 1
 ReturnStmt                                             3
 SourceFile                                             1
 Task                                                   9
@@ -518,6 +517,10 @@ TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 178, name: InfosPerBank".
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:178, name: InfosPerBank".
+[ERR:IG0807] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:6:22: Bad relative location: Child: 17, RefTypespec,  Parent: 12, Function, _clog2.
+[ERR:IG0807] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:15:20: Bad relative location: Child: 52, RefTypespec,  Parent: 14, Function, vbits.
+[ERR:IG0807] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:35:20: Bad relative location: Child: 114, RefTypespec,  Parent: 65, Function, max_info_pages.
+[ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Unbound: 178, RefObj, InfosPerBank.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -629,7 +632,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1071,7 +1074,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1111,7 +1114,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1151,7 +1154,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1198,7 +1201,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1362,11 +1365,6 @@ Design: (unnamed)
         |vpiName:result
         |vpiFullName:prim_util_pkg::_clog2::result
         |vpiSigned:1
-      |vpiVariables:
-      \_RefVar: (prim_util_pkg::_clog2), line:9:10, endln:9:16
-        |vpiParent:
-        \_Begin: (prim_util_pkg::_clog2)
-        |vpiFullName:prim_util_pkg::_clog2
       |vpiInternalScope:
       \_ForStmt: (prim_util_pkg::_clog2), line:9:5, endln:11:8
         |vpiParent:
@@ -1425,7 +1423,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (prim_util_pkg::_clog2), line:9:10, endln:9:16
+          \_RefObj: (prim_util_pkg::_clog2::result), line:9:10, endln:9:16
+            |vpiParent:
+            \_Assignment: , line:9:10, endln:9:20
+            |vpiName:result
+            |vpiFullName:prim_util_pkg::_clog2::result
+            |vpiActual:
+            \_IntegerVar: (prim_util_pkg::_clog2::result), line:7:13, endln:7:19
         |vpiForIncStmt:
         \_Assignment: , line:9:33, endln:9:52
           |vpiParent:
@@ -1493,8 +1497,6 @@ Design: (unnamed)
       \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerVar: (prim_util_pkg::_clog2::result), line:7:13, endln:7:19
-      |vpiImportTypespec:
-      \_RefVar: (prim_util_pkg::_clog2), line:9:10, endln:9:16
       |vpiStmt:
       \_Assignment: , line:8:5, endln:8:22
         |vpiParent:
@@ -1567,7 +1569,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::_clog2::value)
+      \_RefTypespec: (prim_util_pkg::_clog2::value), line:6:37, endln:6:44
         |vpiParent:
         \_IODecl: (value), line:6:45, endln:6:50
         |vpiFullName:prim_util_pkg::_clog2::value
@@ -1610,7 +1612,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::vbits::value)
+      \_RefTypespec: (prim_util_pkg::vbits::value), line:15:34, endln:15:41
         |vpiParent:
         \_IODecl: (value), line:15:42, endln:15:47
         |vpiFullName:prim_util_pkg::vbits::value
@@ -2080,7 +2082,7 @@ Design: (unnamed)
             |vpiActual:
             \_Parameter: (flash_ctrl_pkg::InfoTypes), line:26:15, endln:26:28
       |vpiTypedef:
-      \_RefTypespec: (flash_ctrl_pkg::max_info_pages::infos)
+      \_RefTypespec: (flash_ctrl_pkg::max_info_pages::infos), line:35:43, endln:35:46
         |vpiParent:
         \_IODecl: (infos), line:35:47, endln:35:52
         |vpiFullName:flash_ctrl_pkg::max_info_pages::infos
@@ -2305,6 +2307,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 6
 [WARNING] : 4
 [   NOTE] : 0

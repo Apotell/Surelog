@@ -47,7 +47,7 @@ n<> u<65> t<Top_level_rule> c<1> l<2:1> el<12:12>
                   n<> u<34> t<Data_type> p<35> c<33> l<9:20> el<9:23>
                     n<> u<33> t<IntegerAtomType_Int> p<34> l<9:20> el<9:23>
               n<TreeLRU_CalcWriteEnable> u<37> t<STRING_CONST> p<59> s<48> l<10:1> el<10:24>
-              n<> u<48> t<Tf_port_list> p<59> c<42> s<57> l<10:25> el<10:54>
+              n<> u<48> t<Tf_port_item_list> p<59> c<42> s<57> l<10:24> el<10:55>
                 n<> u<42> t<Tf_port_item> p<48> c<40> s<47> l<10:25> el<10:35>
                   n<> u<40> t<Data_type_or_implicit> p<42> c<39> s<41> l<10:25> el<10:30>
                     n<> u<39> t<Data_type> p<40> c<38> l<10:25> el<10:30>
@@ -91,6 +91,8 @@ TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 25, name: we".
 [ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:25, name: we".
+[ERR:IG0807] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:9:20: Bad relative location: Child: 18, RefTypespec,  Parent: 15, Function, TreeLRU_CalcWriteEnable.
+[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Unbound: 25, RefObj, we.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -211,7 +213,7 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:weIn
     |vpiTypedef:
-    \_RefTypespec: (TreeLRU_CalcWriteEnable.weIn)
+    \_RefTypespec: (TreeLRU_CalcWriteEnable.weIn), line:10:25, endln:10:30
       |vpiParent:
       \_IODecl: (weIn), line:10:31, endln:10:35
       |vpiFullName:TreeLRU_CalcWriteEnable.weIn
@@ -224,7 +226,7 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:way
     |vpiTypedef:
-    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.DCacheWayPath), line:3:21, endln:3:34
+    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.DCacheWayPath), line:10:37, endln:10:50
       |vpiParent:
       \_IODecl: (way), line:10:51, endln:10:54
       |vpiName:DCacheWayPath
@@ -244,6 +246,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0

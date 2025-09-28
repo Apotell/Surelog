@@ -595,6 +595,7 @@ EnumTypespec                                           1
 Function                                               9
 GenFor                                                 2
 GenIfElse                                              1
+GenVar                                                 2
 IODecl                                                11
 Identifier                                            38
 IndexedPartSelect                                      2
@@ -611,12 +612,23 @@ Range                                                  6
 RefModule                                              3
 RefObj                                                13
 RefTypespec                                           30
-RefVar                                                 2
 SourceFile                                             1
 SysFuncCall                                            2
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0801] Missing location information: 25, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 25, RefTypespec, .
+[ERR:IG0801] Missing location information: 38, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 38, RefTypespec, .
+[ERR:IG0801] Missing location information: 50, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 50, RefTypespec, .
+[ERR:IG0801] Missing location information: 115, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 115, RefTypespec, .
+[ERR:IG0801] Missing location information: 128, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 128, RefTypespec, .
+[ERR:IG0801] Missing location information: 140, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 140, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ElabCParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -728,7 +740,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1170,7 +1182,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1210,7 +1222,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1250,7 +1262,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1297,7 +1309,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1610,11 +1622,13 @@ Design: (unnamed)
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
     |vpiFullName:work@all_zero
     |vpiVariables:
-    \_RefVar: (work@all_zero.i), line:60:15, endln:60:16
+    \_GenVar: (work@all_zero.i), line:60:15, endln:60:16
       |vpiParent:
       \_GenFor: (work@all_zero), line:60:3, endln:64:6
       |vpiName:i
       |vpiFullName:work@all_zero.i
+    |vpiGenVar:
+    \_GenVar: (work@all_zero.i), line:60:15, endln:60:16
     |vpiInternalScope:
     \_Begin: (work@all_zero.gen_dfifo), line:60:36, endln:64:6
       |vpiParent:
@@ -1641,7 +1655,7 @@ Design: (unnamed)
         |vpiActual:
         \_Module: work@fifo_sync (work@fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:24:1, endln:33:10
     |vpiImportTypespec:
-    \_RefVar: (work@all_zero.i), line:60:15, endln:60:16
+    \_GenVar: (work@all_zero.i), line:60:15, endln:60:16
     |vpiImportTypespec:
     \_LogicNet: (work@all_zero.i), line:60:23, endln:60:24
       |vpiParent:
@@ -1669,7 +1683,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@all_zero.i), line:60:15, endln:60:16
+      \_GenVar: (work@all_zero.i), line:60:15, endln:60:16
     |vpiCondition:
     \_Operation: , line:60:23, endln:60:28
       |vpiParent:
@@ -2250,11 +2264,13 @@ Design: (unnamed)
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
     |vpiFullName:work@socket_1n
     |vpiVariables:
-    \_RefVar: (work@socket_1n.i), line:44:15, endln:44:16
+    \_GenVar: (work@socket_1n.i), line:44:15, endln:44:16
       |vpiParent:
       \_GenFor: (work@socket_1n), line:44:3, endln:48:6
       |vpiName:i
       |vpiFullName:work@socket_1n.i
+    |vpiGenVar:
+    \_GenVar: (work@socket_1n.i), line:44:15, endln:44:16
     |vpiInternalScope:
     \_Begin: (work@socket_1n.gen_dfifo), line:44:36, endln:48:6
       |vpiParent:
@@ -2276,7 +2292,7 @@ Design: (unnamed)
         |vpiActual:
         \_Module: work@fifo_sync (work@fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:24:1, endln:33:10
     |vpiImportTypespec:
-    \_RefVar: (work@socket_1n.i), line:44:15, endln:44:16
+    \_GenVar: (work@socket_1n.i), line:44:15, endln:44:16
     |vpiImportTypespec:
     \_LogicNet: (work@socket_1n.i), line:44:23, endln:44:24
       |vpiParent:
@@ -2304,7 +2320,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@socket_1n.i), line:44:15, endln:44:16
+      \_GenVar: (work@socket_1n.i), line:44:15, endln:44:16
     |vpiCondition:
     \_Operation: , line:44:23, endln:44:28
       |vpiParent:
@@ -2474,6 +2490,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 12
 [WARNING] : 4
 [   NOTE] : 0

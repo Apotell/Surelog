@@ -21,7 +21,7 @@ n<> u<1579> t<Top_level_rule> c<1> l<19:1> el<169:1>
                       n<> u<5> t<IntegerAtomType_Int> p<7> s<6> l<25:20> el<25:23>
                       n<> u<6> t<Signing_Unsigned> p<7> l<25:24> el<25:32>
                 n<opsiz> u<10> t<STRING_CONST> p<84> s<32> l<25:33> el<25:38>
-                n<> u<32> t<Tf_port_list> p<84> c<31> s<81> l<25:40> el<25:57>
+                n<> u<32> t<Tf_port_item_list> p<84> c<31> s<81> l<25:39> el<25:58>
                   n<> u<31> t<Tf_port_item> p<32> c<29> l<25:40> el<25:57>
                     n<> u<29> t<Data_type_or_implicit> p<31> c<28> s<30> l<25:40> el<25:54>
                       n<> u<28> t<Data_type> p<29> c<11> l<25:40> el<25:54>
@@ -1621,6 +1621,7 @@ TypespecMember                                        50
 UnionTypespec                                          1
 UnionVar                                               1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnionCast/dut.sv:25:20: Bad relative location: Child: 11, RefTypespec,  Parent: 8, Function, opsiz.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnionCast/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1710,7 +1711,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:op
       |vpiTypedef:
-      \_RefTypespec: (riscv_isa_pkg::opsiz::op)
+      \_RefTypespec: (riscv_isa_pkg::opsiz::op), line:25:40, endln:25:54
         |vpiParent:
         \_IODecl: (op), line:25:55, endln:25:57
         |vpiFullName:riscv_isa_pkg::opsiz::op
@@ -4092,16 +4093,16 @@ Design: (unnamed)
       \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
       |vpiFullName:riscv_isa_pkg::op32_t
       |vpiActual:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
   |vpiTypedef:
-  \_UnionTypespec: , line:115:9, endln:115:14
+  \_UnionTypespec: , line:115:9, endln:123:2
     |vpiParent:
     \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (r4), line:116:13, endln:116:15
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:r4
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::r4::op32_r4_t), line:116:3, endln:116:12
@@ -4114,7 +4115,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (r), line:117:13, endln:117:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:r
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::r::op32_r_t), line:117:3, endln:117:11
@@ -4127,7 +4128,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (i), line:118:13, endln:118:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:i
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::i::op32_i_t), line:118:3, endln:118:11
@@ -4140,7 +4141,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (s), line:119:13, endln:119:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:s
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::s::op32_s_t), line:119:3, endln:119:11
@@ -4153,7 +4154,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (b), line:120:13, endln:120:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:b
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::b::op32_b_t), line:120:3, endln:120:11
@@ -4166,7 +4167,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (u), line:121:13, endln:121:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:u
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::u::op32_u_t), line:121:3, endln:121:11
@@ -4179,7 +4180,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (j), line:122:13, endln:122:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:115:14
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:j
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::j::op32_j_t), line:122:3, endln:122:11
@@ -4320,7 +4321,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
   |vpiImportTypespec:
-  \_UnionTypespec: , line:115:9, endln:115:14
+  \_UnionTypespec: , line:115:9, endln:123:2
   |vpiDefName:riscv_isa_pkg
   |vpiTaskFunc:
   \_Function: (riscv_isa_pkg::opsiz), line:25:1, endln:34:19
@@ -4715,6 +4716,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

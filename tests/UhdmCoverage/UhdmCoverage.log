@@ -922,6 +922,11 @@ SourceFile                                             1
 StringTypespec                                         3
 TaggedPattern                                          3
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:75:1: Unbound: 36, RefModule, u1.
+[ERR:IG0801] Missing location information: 68, RefTypespec, .
+[ERR:IG0804] Missing/invalid file: 68, RefTypespec, .
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:27:9: Unbound: 100, RefModule, m1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:140:24: Unbound: 146, RefModule, l2e.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UhdmCoverage/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -964,17 +969,21 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:71:1, endln:77:10
     |vpiName:work@a
-  |vpiGenVar:
+  |vpiVariables:
   \_GenVar: (work@a.v), line:73:8, endln:73:9
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:71:1, endln:77:10
     |vpiName:v
     |vpiFullName:work@a.v
+  |vpiGenVar:
+  \_GenVar: (work@a.v), line:73:8, endln:73:9
   |vpiTypedef:
   \_ModuleTypespec: (U1)
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:71:1, endln:77:10
     |vpiName:U1
+  |vpiImportTypespec:
+  \_GenVar: (work@a.v), line:73:8, endln:73:9
   |vpiImportTypespec:
   \_ModuleTypespec: (U1)
   |vpiDefName:work@a
@@ -2564,6 +2573,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 10
 [   NOTE] : 1

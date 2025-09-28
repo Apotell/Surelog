@@ -200,6 +200,7 @@ EnumTypespec                                           1
 Function                                               9
 GenFor                                                 1
 GenIf                                                  1
+GenVar                                                 1
 IODecl                                                11
 Identifier                                            33
 ImportTypespec                                         1
@@ -214,7 +215,6 @@ Parameter                                              4
 Range                                                  2
 RefObj                                                 9
 RefTypespec                                           23
-RefVar                                                 1
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
@@ -330,7 +330,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -772,7 +772,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -812,7 +812,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -852,7 +852,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -899,7 +899,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1229,11 +1229,13 @@ Design: (unnamed)
     \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
     |vpiFullName:work@flash_ctrl_info_cfg
     |vpiVariables:
-    \_RefVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+    \_GenVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
       |vpiParent:
       \_GenFor: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
       |vpiName:i
       |vpiFullName:work@flash_ctrl_info_cfg.i
+    |vpiGenVar:
+    \_GenVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
     |vpiInternalScope:
     \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
       |vpiParent:
@@ -1339,7 +1341,7 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region), line:19:36, endln:21:8
     |vpiImportTypespec:
-    \_RefVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+    \_GenVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
     |vpiImportTypespec:
     \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
       |vpiParent:
@@ -1367,7 +1369,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_RefVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+      \_GenVar: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
     |vpiCondition:
     \_Operation: , line:16:21, endln:16:37
       |vpiParent:

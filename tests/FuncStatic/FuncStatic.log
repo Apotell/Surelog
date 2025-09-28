@@ -28,7 +28,7 @@ n<> u<228> t<Top_level_rule> c<1> l<1:1> el<21:1>
                             n<> u<10> t<Data_type> p<11> c<9> l<3:17> el<3:24>
                               n<> u<9> t<IntegerAtomType_Integer> p<10> l<3:17> el<3:24>
                         n<accumulate1> u<13> t<STRING_CONST> p<65> s<20> l<3:25> el<3:36>
-                        n<> u<20> t<Tf_port_list> p<65> c<19> s<33> l<3:37> el<3:56>
+                        n<> u<20> t<Tf_port_item_list> p<65> c<19> s<33> l<3:36> el<3:57>
                           n<> u<19> t<Tf_port_item> p<20> c<14> l<3:37> el<3:56>
                             n<> u<14> t<TfPortDir_Inp> p<19> s<17> l<3:37> el<3:42>
                             n<> u<17> t<Data_type_or_implicit> p<19> c<16> s<18> l<3:43> el<3:50>
@@ -92,7 +92,7 @@ n<> u<228> t<Top_level_rule> c<1> l<1:1> el<21:1>
                             n<> u<74> t<Data_type> p<75> c<73> l<9:10> el<9:17>
                               n<> u<73> t<IntegerAtomType_Integer> p<74> l<9:10> el<9:17>
                         n<accumulate2> u<77> t<STRING_CONST> p<128> s<84> l<9:18> el<9:29>
-                        n<> u<84> t<Tf_port_list> p<128> c<83> s<96> l<9:30> el<9:49>
+                        n<> u<84> t<Tf_port_item_list> p<128> c<83> s<96> l<9:29> el<9:50>
                           n<> u<83> t<Tf_port_item> p<84> c<78> l<9:30> el<9:49>
                             n<> u<78> t<TfPortDir_Inp> p<83> s<81> l<9:30> el<9:35>
                             n<> u<81> t<Data_type_or_implicit> p<83> c<80> s<82> l<9:36> el<9:43>
@@ -258,6 +258,8 @@ RefTypespec                                            6
 ReturnStmt                                             2
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStatic/dut.sv:3:17: Bad relative location: Child: 11, RefTypespec,  Parent: 6, Function, accumulate1.
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStatic/dut.sv:9:10: Bad relative location: Child: 29, RefTypespec,  Parent: 8, Function, accumulate2.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncStatic/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -527,7 +529,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (work@test.accumulate1.value)
+      \_RefTypespec: (work@test.accumulate1.value), line:3:43, endln:3:50
         |vpiParent:
         \_IODecl: (value), line:3:51, endln:3:56
         |vpiFullName:work@test.accumulate1.value
@@ -658,7 +660,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (work@test.accumulate2.value)
+      \_RefTypespec: (work@test.accumulate2.value), line:9:36, endln:9:43
         |vpiParent:
         \_IODecl: (value), line:9:44, endln:9:49
         |vpiFullName:work@test.accumulate2.value
@@ -685,6 +687,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

@@ -20,7 +20,7 @@ n<> u<143> t<Top_level_rule> c<1> l<1:1> el<15:1>
                     n<> u<6> t<Data_type> p<7> c<5> l<2:23> el<2:30>
                       n<> u<5> t<IntegerAtomType_Integer> p<6> l<2:23> el<2:30>
                 n<_clog2> u<9> t<STRING_CONST> p<96> s<15> l<2:31> el<2:37>
-                n<> u<15> t<Tf_port_list> p<96> c<14> s<23> l<2:38> el<2:51>
+                n<> u<15> t<Tf_port_item_list> p<96> c<14> s<23> l<2:37> el<2:52>
                   n<> u<14> t<Tf_port_item> p<15> c<12> l<2:38> el<2:51>
                     n<> u<12> t<Data_type_or_implicit> p<14> c<11> s<13> l<2:38> el<2:45>
                       n<> u<11> t<Data_type> p<12> c<10> l<2:38> el<2:45>
@@ -171,12 +171,12 @@ ModuleTypespec                                         1
 Operation                                              3
 Package                                                1
 Port                                                   1
-RefObj                                                 6
+RefObj                                                 7
 RefTypespec                                            5
-RefVar                                                 1
 ReturnStmt                                             1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackageBind/dut.sv:2:23: Bad relative location: Child: 11, RefTypespec,  Parent: 8, Function, _clog2.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -224,11 +224,6 @@ Design: (unnamed)
         |vpiName:result
         |vpiFullName:prim_util_pkg::_clog2::result
         |vpiSigned:1
-      |vpiVariables:
-      \_RefVar: (prim_util_pkg::_clog2), line:5:12, endln:5:18
-        |vpiParent:
-        \_Begin: (prim_util_pkg::_clog2)
-        |vpiFullName:prim_util_pkg::_clog2
       |vpiInternalScope:
       \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
         |vpiParent:
@@ -287,7 +282,13 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_RefVar: (prim_util_pkg::_clog2), line:5:12, endln:5:18
+          \_RefObj: (prim_util_pkg::_clog2::result), line:5:12, endln:5:18
+            |vpiParent:
+            \_Assignment: , line:5:12, endln:5:22
+            |vpiName:result
+            |vpiFullName:prim_util_pkg::_clog2::result
+            |vpiActual:
+            \_IntegerVar: (prim_util_pkg::_clog2::result), line:3:15, endln:3:21
         |vpiForIncStmt:
         \_Operation: , line:5:35, endln:5:43
           |vpiParent:
@@ -333,8 +334,6 @@ Design: (unnamed)
       \_IntegerTypespec: 
       |vpiImportTypespec:
       \_IntegerVar: (prim_util_pkg::_clog2::result), line:3:15, endln:3:21
-      |vpiImportTypespec:
-      \_RefVar: (prim_util_pkg::_clog2), line:5:12, endln:5:18
       |vpiStmt:
       \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
       |vpiStmt:
@@ -372,7 +371,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_RefTypespec: (prim_util_pkg::_clog2::value)
+      \_RefTypespec: (prim_util_pkg::_clog2::value), line:2:38, endln:2:45
         |vpiParent:
         \_IODecl: (value), line:2:46, endln:2:51
         |vpiFullName:prim_util_pkg::_clog2::value
@@ -474,6 +473,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

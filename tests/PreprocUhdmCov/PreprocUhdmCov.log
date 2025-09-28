@@ -172,7 +172,7 @@ n<> u<208> t<Top_level_rule> c<1> l<4:1> el<51:1>
                                     n<> u<144> t<Primary_literal> p<145> c<143> l<45:33> el<45:34>
                                       n<0> u<143> t<INT_CONST> p<144> l<45:33> el<45:34>
                       n<prince_shiftrows_32bit> u<152> t<STRING_CONST> p<196> s<193> l<45:36> el<45:58>
-                      n<> u<193> t<Tf_port_list> p<196> c<167> s<195> l<45:59> el<46:88>
+                      n<> u<193> t<Tf_port_item_list> p<196> c<167> s<195> l<45:58> el<46:90>
                         n<> u<167> t<Tf_port_item> p<193> c<165> s<192> l<45:59> el<45:85>
                           n<> u<165> t<Data_type_or_implicit> p<167> c<164> s<166> l<45:59> el<45:71>
                             n<> u<164> t<Data_type> p<165> c<153> l<45:59> el<45:71>
@@ -259,6 +259,8 @@ Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv:45:23: Bad relative location: Child: 30, RefTypespec,  Parent: 14, Function, prince_shiftrows_32bit.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv:30:2: Unbound: 60, RefModule, u_ip0_p7.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocUhdmCov/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -438,7 +440,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -880,7 +882,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -920,7 +922,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -960,7 +962,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1007,7 +1009,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1271,7 +1273,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:state_in
       |vpiTypedef:
-      \_RefTypespec: (work@top.prince_shiftrows_32bit.state_in)
+      \_RefTypespec: (work@top.prince_shiftrows_32bit.state_in), line:45:59, endln:45:71
         |vpiParent:
         \_IODecl: (state_in), line:45:77, endln:45:85
         |vpiFullName:work@top.prince_shiftrows_32bit.state_in
@@ -1284,7 +1286,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:shifts
       |vpiTypedef:
-      \_RefTypespec: (work@top.prince_shiftrows_32bit.shifts)
+      \_RefTypespec: (work@top.prince_shiftrows_32bit.shifts), line:46:64, endln:46:81
         |vpiParent:
         \_IODecl: (shifts), line:46:82, endln:46:88
         |vpiFullName:work@top.prince_shiftrows_32bit.shifts
@@ -1543,6 +1545,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 4
 [WARNING] : 5
 [   NOTE] : 1

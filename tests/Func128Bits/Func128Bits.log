@@ -143,7 +143,7 @@ n<> u<651> t<Top_level_rule> c<1> l<5:1> el<47:1>
                                   n<> u<122> t<Primary_literal> p<123> c<121> l<14:42> el<14:43>
                                     n<0> u<121> t<INT_CONST> p<122> l<14:42> el<14:43>
                         n<calcBaseAddrs> u<128> t<STRING_CONST> p<588> s<143> l<14:45> el<14:58>
-                        n<> u<143> t<Tf_port_list> p<588> c<142> s<151> l<14:59> el<14:77>
+                        n<> u<143> t<Tf_port_item_list> p<588> c<142> s<151> l<14:58> el<14:78>
                           n<> u<142> t<Tf_port_item> p<143> c<129> l<14:59> el<14:77>
                             n<> u<129> t<TfPortDir_Inp> p<142> s<140> l<14:59> el<14:64>
                             n<> u<140> t<Data_type_or_implicit> p<142> c<139> s<141> l<14:65> el<14:71>
@@ -685,11 +685,11 @@ ParamAssign                                            5
 Parameter                                              5
 Range                                                  5
 RefModule                                              1
-RefObj                                                43
+RefObj                                                44
 RefTypespec                                            6
-RefVar                                                 1
 SourceFile                                             1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/Func128Bits/dut.sv:14:10: Bad relative location: Child: 39, RefTypespec,  Parent: 9, Function, calcBaseAddrs.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Func128Bits/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -888,11 +888,6 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@ScratchPad.calcBaseAddrs)
         |vpiFullName:work@ScratchPad.calcBaseAddrs
-        |vpiVariables:
-        \_RefVar: (work@ScratchPad.calcBaseAddrs), line:23:14, endln:23:15
-          |vpiParent:
-          \_Begin: (work@ScratchPad.calcBaseAddrs), line:20:5, endln:35:8
-          |vpiFullName:work@ScratchPad.calcBaseAddrs
         |vpiInternalScope:
         \_ForStmt: (work@ScratchPad.calcBaseAddrs), line:23:9, endln:34:12
           |vpiParent:
@@ -1294,7 +1289,13 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
             |vpiLhs:
-            \_RefVar: (work@ScratchPad.calcBaseAddrs), line:23:14, endln:23:15
+            \_RefObj: (work@ScratchPad.calcBaseAddrs.i), line:23:14, endln:23:15
+              |vpiParent:
+              \_Assignment: , line:23:14, endln:23:19
+              |vpiName:i
+              |vpiFullName:work@ScratchPad.calcBaseAddrs.i
+              |vpiActual:
+              \_IntegerNet: (work@ScratchPad.calcBaseAddrs.i), line:15:13, endln:15:14
           |vpiForIncStmt:
           \_Assignment: , line:23:44, endln:23:53
             |vpiParent:
@@ -1366,8 +1367,6 @@ Design: (unnamed)
                 \_Parameter: (work@ScratchPad.M_REGIONS), line:11:11, endln:11:24
           |vpiStmt:
           \_Begin: (work@ScratchPad.calcBaseAddrs), line:23:55, endln:34:12
-        |vpiImportTypespec:
-        \_RefVar: (work@ScratchPad.calcBaseAddrs), line:23:14, endln:23:15
         |vpiStmt:
         \_Assignment: , line:21:9, endln:21:61
           |vpiParent:
@@ -1838,6 +1837,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

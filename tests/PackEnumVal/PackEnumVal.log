@@ -40,7 +40,7 @@ n<> u<108> t<Top_level_rule> c<1> l<2:1> el<20:1>
                     n<> u<26> t<Data_type> p<27> c<25> l<9:22> el<9:27>
                       n<> u<25> t<IntVec_TypeLogic> p<26> l<9:22> el<9:27>
                 n<test_true> u<29> t<STRING_CONST> p<53> s<35> l<9:28> el<9:37>
-                n<> u<35> t<Tf_port_list> p<53> c<34> s<50> l<9:38> el<9:49>
+                n<> u<35> t<Tf_port_item_list> p<53> c<34> s<50> l<9:37> el<9:50>
                   n<> u<34> t<Tf_port_item> p<35> c<32> l<9:38> el<9:49>
                     n<> u<32> t<Data_type_or_implicit> p<34> c<31> s<33> l<9:38> el<9:45>
                       n<lc_tx_t> u<31> t<Data_type> p<32> c<30> l<9:38> el<9:45>
@@ -140,6 +140,7 @@ ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackEnumVal/dut.sv:9:22: Bad relative location: Child: 24, RefTypespec,  Parent: 8, Function, test_true.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackEnumVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -190,7 +191,7 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:val
       |vpiTypedef:
-      \_RefTypespec: (test_package::test_true::val::lc_tx_t), line:7:5, endln:7:12
+      \_RefTypespec: (test_package::test_true::val::lc_tx_t), line:9:38, endln:9:45
         |vpiParent:
         \_IODecl: (val), line:9:46, endln:9:49
         |vpiName:lc_tx_t
@@ -397,6 +398,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

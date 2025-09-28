@@ -461,7 +461,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 1
-ArrayNet                                               1
 ArrayTypespec                                          2
 Assignment                                             3
 Begin                                                  3
@@ -492,7 +491,7 @@ RefObj                                                17
 RefTypespec                                           42
 SourceFile                                             1
 StringTypespec                                         2
-StructNet                                              1
+StructNet                                              2
 StructTypespec                                         2
 SysFuncCall                                            6
 TaggedPattern                                          2
@@ -611,7 +610,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::mailbox::new::bound)
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
@@ -1053,7 +1052,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::new::keyCount)
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
@@ -1093,7 +1092,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::put::keyCount)
+        \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
@@ -1133,7 +1132,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::get::keyCount)
+        \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
@@ -1180,7 +1179,7 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiTypedef:
-        \_RefTypespec: (builtin::semaphore::try_get::keyCount)
+        \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
@@ -1932,17 +1931,17 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: 
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.v1), line:31:12, endln:31:14
+  \_StructNet: (work@top.v1), line:31:12, endln:31:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiTypespec:
     \_RefTypespec: (work@top.v1.ab_t), line:31:7, endln:31:11
       |vpiParent:
-      \_ArrayNet: (work@top.v1), line:31:12, endln:31:14
+      \_StructNet: (work@top.v1), line:31:12, endln:31:14
       |vpiName:ab_t
       |vpiFullName:work@top.v1.ab_t
       |vpiActual:
-      \_ArrayTypespec: 
+      \_StructTypespec: , line:27:13, endln:27:33
     |vpiName:v1
     |vpiFullName:work@top.v1
   |vpiImportTypespec:
@@ -1968,9 +1967,9 @@ Design: (unnamed)
   \_IntVar: (work@top.c), line:28:13, endln:28:14
   |vpiDefName:work@top
   |vpiNet:
+  \_StructNet: (work@top.v1), line:31:12, endln:31:14
+  |vpiNet:
   \_StructNet: (work@top.XYZ), line:26:25, endln:26:28
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.v1), line:31:12, endln:31:14
   |vpiProcess:
   \_Initial: , line:30:5, endln:33:8
     |vpiParent:
@@ -2076,7 +2075,7 @@ Design: (unnamed)
           |vpiName:v1
           |vpiFullName:work@top.v1
           |vpiActual:
-          \_ArrayNet: (work@top.v1), line:31:12, endln:31:14
+          \_StructNet: (work@top.v1), line:31:12, endln:31:14
   |vpiProcess:
   \_Always: , line:36:3, endln:40:6
     |vpiParent:

@@ -546,10 +546,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       refTypespec->setParent(typespecTypespec);
       fC->populateCoreMembers(type_name, type_name, refTypespec);
 
-      uhdm::StringTypespec* st = s.make<uhdm::StringTypespec>();
-      st->setParent(pstmt);
-
-      refTypespec->setActual(st);
       typespecTypespec->setTypedefAlias(refTypespec);
       newTypeDef->setTypespec(typespecTypespec);
 
@@ -673,7 +669,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       fC->populateCoreMembers(type_name, type_name, typedefTypespec);
 
       if (uhdm::Typespec* ts =
-              compileTypespec(scope, fC, enum_base_type, Variable_dimension,
+              compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
             (valuedcomponenti_cast<Package>(scope))) {
@@ -842,6 +838,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setName(tps->getName());
         refTypespec->setParent(typedefTypespec);
         refTypespec->setActual(tps);
         fC->populateCoreMembers(stype, stype, refTypespec);

@@ -29,6 +29,7 @@
 #include <Surelog/Design/Signal.h>
 
 // UHDM
+#include <uhdm/BaseClass.h>
 #include <uhdm/uhdm_forward_decl.h>
 
 #include <vector>
@@ -43,19 +44,25 @@ class ClockingBlock final {
   // TODO: some of these parameters are not used. Correct or oversight ?
   ClockingBlock([[maybe_unused]] const FileContent* fileContent, NodeId blockId,
                 [[maybe_unused]] NodeId clockingBlockId, Type type,
-                uhdm::ClockingBlock* actual)
-      : m_blockId(blockId), m_actual(actual), m_type(type) {}
+                uhdm::ClockingBlock* cb)
+      : m_blockId(blockId), m_model(cb), m_type(type) {}
 
   void addSignal(Signal& signal) { m_signals.push_back(signal); }
   NodeId getNodeId() const { return m_blockId; }
   const std::vector<Signal>& getAllSignals() const { return m_signals; }
-  uhdm::ClockingBlock* getActual() const { return m_actual; }
   Type getType() const { return m_type; }
+
+  void setUhdmModel(uhdm::ClockingBlock* model) { m_model = model; }
+  uhdm::ClockingBlock* getUhdmModel() { return m_model; }
+  template <typename T>
+  T* getUhdmModel() const {
+    return any_cast<T>(m_model);
+  }
 
  private:
   NodeId m_blockId;
   std::vector<Signal> m_signals;
-  uhdm::ClockingBlock* m_actual = nullptr;
+  uhdm::ClockingBlock* m_model = nullptr;
   Type m_type;
 };
 

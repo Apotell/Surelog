@@ -26,6 +26,7 @@
 #include <uhdm/Serializer.h>
 #include <uhdm/interface.h>
 #include <uhdm/interface_typespec.h>
+#include <uhdm/modport.h>
 #include <uhdm/module.h>
 #include <uhdm/module_typespec.h>
 #include <uhdm/udp_defn.h>
@@ -43,6 +44,7 @@
 #include "Surelog/Design/Modport.h"
 #include "Surelog/Design/Signal.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
+#include "Surelog/Utils/StringUtils.h"
 
 namespace SURELOG {
 
@@ -127,9 +129,22 @@ void ModuleDefinition::insertModport(std::string_view modport,
                                      const Signal& signal, NodeId nodeId) {
   ModportSignalMap::iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
-    Modport modp(this, modport, m_fileContents[0], nodeId);
-    modp.addSignal(signal);
-    m_modportSignalMap.emplace(modport, modp);
+    const FileContent* const fC = m_fileContents[0];
+    auto it = m_modportSignalMap.emplace(
+        std::piecewise_construct, std::forward_as_tuple(modport),
+        std::forward_as_tuple(this, modport, fC, nodeId));
+    it.first->second.addSignal(signal);
+
+    uhdm::Serializer* const serializer = getUhdmModel()->getSerializer();
+    uhdm::Interface* const instance = getUhdmModel<uhdm::Interface>();
+
+    uhdm::Modport* const mp = serializer->make<uhdm::Modport>();
+    mp->setName(modport);
+    mp->setParent(getUhdmModel());
+    mp->setInterface(instance);
+    fC->populateCoreMembers(nodeId, nodeId, mp);
+    it.first->second.setUhdmModel(mp);
+    it.first->second.setInterface(instance);
   } else {
     itr->second.addSignal(signal);
   }
@@ -141,7 +156,7 @@ const Signal* ModuleDefinition::getModportSignal(std::string_view modport,
   if (itr == m_modportSignalMap.end()) {
     return nullptr;
   } else {
-    for (auto& sig : (*itr).second.getPorts()) {
+    for (auto& sig : itr->second.getPorts()) {
       if (sig.getNodeId() == port) {
         return &sig;
       }
@@ -160,15 +175,16 @@ Modport* ModuleDefinition::getModport(std::string_view modport) {
 }
 
 void ModuleDefinition::insertModport(std::string_view modport,
-                                     ClockingBlock& cb) {
+                                     const ClockingBlock& cb) {
   ModportClockingBlockMap::iterator itr =
       m_modportClockingBlockMap.find(modport);
   if (itr == m_modportClockingBlockMap.end()) {
-    std::vector<ClockingBlock> cbs;
-    cbs.push_back(cb);
-    m_modportClockingBlockMap.emplace(modport, cbs);
+    auto it = m_modportClockingBlockMap.emplace(std::piecewise_construct,
+                                                std::forward_as_tuple(modport),
+                                                std::forward_as_tuple());
+    it.first->second.emplace_back(cb);
   } else {
-    itr->second.push_back(cb);
+    itr->second.emplace_back(cb);
   }
 }
 
@@ -178,7 +194,7 @@ const ClockingBlock* ModuleDefinition::getModportClockingBlock(
   if (itr == m_modportClockingBlockMap.end()) {
     return nullptr;
   } else {
-    for (auto& cb : (*itr).second) {
+    for (auto& cb : itr->second) {
       if (cb.getNodeId() == port) {
         return &cb;
       }

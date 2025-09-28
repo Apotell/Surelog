@@ -1163,11 +1163,15 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
                 component, fC, Data_type, Var, UnpackedDimensionsStartId,
                 compileDesign, Reduce::No, assign_stmt, instance, false)) {
           fC->populateCoreMembers(Var, Var, var);
+          if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
+            assign_stmt->setLhs(expr);
+          }
           if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
             v->setConstantVariable(const_status);
             v->setAutomatic(automatic_status);
             v->setName(fC->SymName(Var));
-            assign_stmt->setLhs(v);
+          } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
+            ro->setName(fC->SymName(Var));
           }
         }
 
@@ -1522,8 +1526,16 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             fC->Sibling(Data_type_or_implicit);
         NodeId nameId = fC->Child(List_of_tf_variable_identifiers);
         while (nameId) {
+          uhdm::RangeCollection* ranges = nullptr;
+          NodeId Variable_dimension = fC->Sibling(nameId);
+          if (fC->Type(Variable_dimension) ==
+              VObjectType::paVariable_dimension) {
+            int32_t size;
+            ranges =
+                compileRanges(component, fC, Variable_dimension, compileDesign,
+                              Reduce::No, parent, nullptr, size, false);
+          }
           const std::string_view name = fC->SymName(nameId);
-
           uhdm::IODecl* decl = s.make<uhdm::IODecl>();
           ios->emplace_back(decl);
           decl->setParent(parent);
@@ -1532,16 +1544,6 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           decl->setName(name);
           ioMap.emplace(name, decl);
           fC->populateCoreMembers(nameId, nameId, decl);
-
-          uhdm::RangeCollection* ranges = nullptr;
-          NodeId Variable_dimension = fC->Sibling(nameId);
-          if (fC->Type(Variable_dimension) ==
-              VObjectType::paVariable_dimension) {
-            int32_t size;
-            ranges =
-                compileRanges(component, fC, Variable_dimension, compileDesign,
-                              Reduce::No, decl, nullptr, size, false);
-          }
           if (ts != nullptr) {
             if (decl->getTypespec() == nullptr) {
               uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
@@ -1722,17 +1724,13 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(decl);
         NodeId refName = (type == InvalidNodeId) ? prevType : type;
-        if ((fC->Type(refName) == VObjectType::paData_type) &&
-            (fC->SymName(refName) == SymbolTable::getBadSymbol()))
-          refName = fC->Child(refName);
-        tsRef->setName(fC->SymName(refName));
+        std::string_view name = fC->SymName(refName);
+        if (name.empty() || (name == SymbolTable::getBadSymbol())) {
+          name = ts->getName();
+        }
+        tsRef->setName(name);
         decl->setTypespec(tsRef);
-        fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tsRef);
-        // Need to include the logic's packed dimensions!
-        tsRef->setStartLine(ts->getStartLine());
-        tsRef->setStartColumn(ts->getStartColumn());
-        tsRef->setEndLine(ts->getEndLine());
-        tsRef->setEndColumn(ts->getEndColumn());
+        fC->populateCoreMembers(refName, refName, tsRef);
       }
       decl->getTypespec()->setActual(ts);
     }
@@ -2937,8 +2935,13 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         if (uhdm::Any* var = compileVariable(
                 component, fC, Data_type, Var, InvalidNodeId, compileDesign,
                 Reduce::Yes, assign_stmt, nullptr, false)) {
-          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+          if (uhdm::Expr* const v = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(v);
+          }
+          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+            v->setName(fC->SymName(Var));
+          } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
+            ro->setName(fC->SymName(Var));
           }
         }
         if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
@@ -2972,12 +2975,17 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         fC->populateCoreMembers(Variable_assignment, Variable_assignment,
                                 assign_stmt);
 
+        NodeId nameId = fC->Child(Hierarchical_identifier);
         if (uhdm::Any* var = compileVariable(
-                component, fC, Hierarchical_identifier, Hierarchical_identifier,
-                InvalidNodeId, compileDesign, Reduce::Yes, assign_stmt, nullptr,
-                false)) {
+                component, fC, Hierarchical_identifier, nameId, InvalidNodeId,
+                compileDesign, Reduce::Yes, assign_stmt, nullptr, false)) {
+          if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
+            assign_stmt->setLhs(expr);
+          }
           if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
-            assign_stmt->setLhs(v);
+            v->setName(fC->SymName(nameId));
+          } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
+            ro->setName(fC->SymName(nameId));
           }
         }
 

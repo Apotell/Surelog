@@ -985,11 +985,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (uhdm::AnyCollection* vars =
                   m_helper.compileGenVars(m_module, fC, id, m_compileDesign)) {
             if (m_module->getGenVars() == nullptr) {
-              m_module->setGenVars(
-                  m_compileDesign->getSerializer().makeCollection<uhdm::Any>());
-            }
-            for (auto v : *vars) {
-              m_module->getGenVars()->emplace_back(v);
+              m_module->setGenVars(vars);
+            } else {
+              for (auto v : *vars) {
+                m_module->getGenVars()->emplace_back(v);
+              }
             }
           }
           break;
@@ -1358,7 +1358,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       m_module, fC, port_declaration, simple_port_name,
                       VObjectType::paData_type_or_implicit, port_direction_type,
                       InvalidNodeId, InvalidNodeId, false);
-                  m_module->insertModport(modportsymb, signal, modportname);
+                  const std::string modportName =
+                      StrCat(m_module->getName(), ".", modportsymb);
+                  m_module->insertModport(modportName, signal, id);
                   modport_simple_port = fC->Sibling(modport_simple_port);
                 }
               } else if (port_declaration_type ==
@@ -1382,7 +1384,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       ErrorDefinition::COMP_MODPORT_UNDEFINED_CLOCKING_BLOCK,
                       loc);
                 } else {
-                  m_module->insertModport(modportsymb, *cb);
+                  const std::string modportName =
+                      StrCat(m_module->getName(), ".", modportsymb);
+                  m_module->insertModport(modportName, *cb);
                 }
               }
               modport_ports_declaration =

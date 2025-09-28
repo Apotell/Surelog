@@ -86,7 +86,7 @@ class ModuleDefinition final : public DesignComponent,
   }
   void insertModport(std::string_view modport, const Signal& signal,
                      NodeId nodeId);
-  void insertModport(std::string_view modport, ClockingBlock& block);
+  void insertModport(std::string_view modport, const ClockingBlock& block);
   const Signal* getModportSignal(std::string_view modport, NodeId port) const;
   Modport* getModport(std::string_view modport);
 

@@ -123,6 +123,15 @@ ModuleDefinition* Design::getModuleDefinition(
   return nullptr;
 }
 
+Modport* Design::getModport(std::string_view modportName) const {
+  for (auto& entry : m_moduleDefinitions) {
+    if (Modport* mp = entry.second->getModport(modportName)) {
+      return mp;
+    }
+  }
+  return nullptr;
+}
+
 std::string Design::reportInstanceTree() const {
   std::string tree;
   ModuleInstance* tmp;

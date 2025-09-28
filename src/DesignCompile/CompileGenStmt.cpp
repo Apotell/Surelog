@@ -79,17 +79,17 @@ uhdm::AnyCollection* CompileHelper::compileGenVars(
   Serializer& s = compileDesign->getSerializer();
   AnyCollection* vars = nullptr;
   NodeId identifierListId = fC->Child(id);
-  while (identifierListId) {
-    NodeId nameId = fC->Child(identifierListId);
-
+  NodeId nameId = fC->Child(identifierListId);
+  while (nameId) {
     uhdm::GenVar* var = s.make<uhdm::GenVar>();
     var->setName(fC->SymName(nameId));
+    var->setParent(component->getUhdmModel());
     fC->populateCoreMembers(nameId, nameId, var);
 
     if (vars == nullptr) vars = s.makeCollection<Any>();
     vars->emplace_back(var);
 
-    identifierListId = fC->Sibling(identifierListId);
+    nameId = fC->Sibling(nameId);
   }
   return vars;
 }
@@ -294,21 +294,18 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
 
     // Var init
     NodeId Var = fC->Child(varInit);
-    NodeId Expression = fC->Sibling(Var);
     uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
     assign_stmt->setParent(genfor);
     fC->populateCoreMembers(varInit, varInit, assign_stmt);
-    if (uhdm::Any* any = compileVariable(component, fC, Var, Var, InvalidNodeId,
-                                         compileDesign, Reduce::No, genfor,
-                                         nullptr, false)) {
-      if (uhdm::Variables* const var = any_cast<uhdm::Variables>(any)) {
-        assign_stmt->setLhs(var);
-        var->setName(fC->SymName(Var));
-      }
-      any->setParent(assign_stmt);
-      fC->populateCoreMembers(Var, Var, any);
-    }
+
+    uhdm::GenVar* const gv = s.make<uhdm::GenVar>();
+    gv->setName(fC->SymName(Var));
+    gv->setParent(assign_stmt);
+    fC->populateCoreMembers(Var, Var, gv);
+    assign_stmt->setLhs(gv);
+
     checkForLoops(true);
+    NodeId Expression = fC->Sibling(Var);
     if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
             component, fC, Expression, compileDesign, Reduce::No,
             assign_stmt)) {

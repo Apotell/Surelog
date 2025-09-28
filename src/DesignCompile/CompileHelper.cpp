@@ -1997,13 +1997,13 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   }
 
   if (obj) {
-    if (uhdm::Variables* v = any_cast<uhdm::Variables>(obj)) {
-      // KS: Need input. If org_tps is not null then how to link typedef
-      // typespec with curent typespec,
-      // if ((v->getTypespec() != nullptr) && (org_tps != nullptr) &&
-      //    (org_tps->getUhdmType() == uhdm::UhdmType::TypedefTypespec))
-      //  v->getTypespec()->setActual(org_tps);
-    }
+    // if (uhdm::Variables* v = any_cast<uhdm::Variables>(obj)) {
+    //   // KS: Need input. If org_tps is not null then how to link typedef
+    //   // typespec with curent typespec,
+    //   // if ((v->getTypespec() != nullptr) && (org_tps != nullptr) &&
+    //   //    (org_tps->getUhdmType() == uhdm::UhdmType::TypedefTypespec))
+    //   //  v->getTypespec()->setActual(org_tps);
+    // }
     fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
     // set assignExp once get variable object
     if (exp != nullptr) {

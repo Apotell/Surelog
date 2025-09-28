@@ -1427,11 +1427,10 @@ bool ObjectBinder::createDefaultNets() {
     if (ro->getActual() != nullptr) continue;
 
     const uhdm::Any* const pro = ro->getParent();
-    bool tryRefTypespec = pro != nullptr;
-    tryRefTypespec =
-        tryRefTypespec || (ro->getName().find("::") != std::string_view::npos);
+    bool tryRefTypespec = ro->getName().find("::") != std::string_view::npos;
     tryRefTypespec = tryRefTypespec ||
-                     ((pro->getUhdmType() == uhdm::UhdmType::SysFuncCall) &&
+                     ((pro != nullptr) &&
+                      (pro->getUhdmType() == uhdm::UhdmType::SysFuncCall) &&
                       areSimilarNames(pro, "$bits"));
 
     if (tryRefTypespec) {

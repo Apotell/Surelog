@@ -94,9 +94,9 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
 
   void reportNullActual(const uhdm::Any* object) const;
 
-  void enterAny(const uhdm::Any* object, uint32_t vpiRelation) final;
+  void reportInvalidTypespecLocation(const uhdm::Any* object);
 
-  void enterAny2(const uhdm::Any* object, uint32_t vpiRelation);
+  void enterAny(const uhdm::Any* object, uint32_t vpiRelation) final;
 
   void enterAliasCollection(const uhdm::Any* object,
                             const uhdm::AliasCollection& objects,

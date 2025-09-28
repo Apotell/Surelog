@@ -505,6 +505,12 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
   const uhdm::Any* const grandParent = parent->getParent();
   if (grandParent == nullptr) return;
 
+  // Identifiers don't have position information yet!
+  if (object->getUhdmType() == uhdm::UhdmType::Identifier) return;
+
+  // Typespecs are handled explicitly by reportInvalidTypespecLocation
+  if (any_cast<uhdm::Typespec>(object) != nullptr) return;
+
   // begin in function body are implicit!
   if ((object->getUhdmType() == uhdm::UhdmType::Begin) &&
       (parent->getUhdmType() == uhdm::UhdmType::Function))
@@ -683,6 +689,10 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* object) const {
 
 void IntegrityChecker::reportInvalidFile(const uhdm::Any* object) const {
   if (object->getUhdmType() == uhdm::UhdmType::Design) return;
+  // Identifiers don't have position information yet!
+  if (object->getUhdmType() == uhdm::UhdmType::Identifier) return;
+  // Typespecs are handled explicitly by reportInvalidTypespecLocation
+  if (any_cast<uhdm::Typespec>(object) != nullptr) return;
 
   std::string_view filename = object->getFile();
   if (filename.empty() || (filename == SymbolTable::getBadSymbol())) {
@@ -754,7 +764,7 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
   }
 }
 
-void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+void IntegrityChecker::reportInvalidTypespecLocation(const uhdm::Any* object) {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool reportError = false;
     if ((any_cast<uhdm::ChandleTypespec>(t) != nullptr) ||
@@ -787,12 +797,13 @@ void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
   }
 }
 
-void IntegrityChecker::enterAny2(const uhdm::Any* object,
-                                 uint32_t vpiRelation) {
+void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+  if (m_visited.find(object) != m_visited.cend()) return;
   if (isBuiltInPackageOnStack(object)) return;
   if (isUVMMember(object)) return;
 
   reportNullActual(object);
+  reportInvalidTypespecLocation(object);
 
   // Known Issues!
   if (const uhdm::IntTypespec* const t = any_cast<uhdm::IntTypespec>(object)) {

@@ -195,7 +195,7 @@ jobs:
       timeout-minutes: 30
       run: |
         ls -lR
-        python3 scripts/scan_errors.py artifacts
+        python3 scripts/scan_errors.py artifacts 'sl-linux-gcc-release-regression-{index}'
         mv artifacts/sl-ic-errors.txt ${{ env.statistics-artifact-name }}.log
 
     - name: Upload regression artifacts

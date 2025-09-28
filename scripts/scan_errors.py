@@ -15,9 +15,7 @@ from pathlib import Path
 
 
 _platform_ids = ['.linux', '.osx', '.msys', '.win', '']
-_zip_file_count = 8
-_zip_filename_pattern = 'sl-linux-gcc-release-regression-{index}.zip'
-_tar_filename_pattern = 'sl-linux-gcc-release-regression-{index}.tar.gz'
+_max_input_file_count = 8
 
 
 def _is_ci_build():
@@ -82,14 +80,16 @@ def _scan_gzip(tar_filepath):
 def _main():
   parser = argparse.ArgumentParser()
   parser.add_argument('input_dirpath', type=str, help='Directory to scan')
+  parser.add_argument('filename_pattern', type=str, help='Filename pattern')
   args = parser.parse_args()
   
   input_dirpath = Path(args.input_dirpath)
   output_filepath = input_dirpath / f"sl-ic-errors.txt"
 
-  filename_pattern = _tar_filename_pattern if _is_ci_build() else _zip_filename_pattern
+  filename_pattern = args.filename_pattern + ('.tar.gz' if _is_ci_build() else '.zip')
   scanner = _scan_gzip if _is_ci_build() else _scan_zip
-  input_filepaths = [input_dirpath / filename_pattern.format(index=i) for i in range(4)]
+  input_filepaths = [input_dirpath / filename_pattern.format(index=i) for i in range(_max_input_file_count)]
+  input_filepaths = [_ for _ in input_filepaths if os.path.exists(_)]
 
   max_workers = len(input_filepaths)
   errors = []

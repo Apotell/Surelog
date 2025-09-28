@@ -172,7 +172,7 @@ uhdm::Any* CompileHelper::compileVariable(
         dt = dt->getActual();
         if (uhdm::Typespec* tps = dt->getTypespec()) {
           result = compileVariable(component, fC, compileDesign, nameId,
-                                   the_type, declarationId, ts);
+                                   the_type, declarationId, tps);
         }
       }
       if (result == nullptr) {

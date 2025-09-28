@@ -187,8 +187,8 @@ jobs:
 
 #######################################################################################################################
 
-  test:
-    name: "Test | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
+  regression:
+    name: "Regression | ${{ matrix.config.artifact-tag }} | ${{ matrix.shard }}"
     needs: build
     runs-on: ${{ matrix.config.os }}
 
@@ -288,7 +288,7 @@ jobs:
 #     name: "Deploy | ${{ matrix.config.artifact-tag }} | ${{ matrix.config.artifact-tag }}"
 #     if: github.ref == 'refs/heads/master'
 # 
-#     needs: test
+#     needs: regression
 #     runs-on: ubuntu-latest
 # 
 #     strategy:
@@ -393,6 +393,51 @@ jobs:
 #         keep_latest: 5
 #       env:
 #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# Collect statistics
+  collect-statistics:
+    name: "Linux | Statistics | gcc | release"
+    runs-on: ubuntu-24.04
+    needs: regression
+    if: "!cancelled()"
+    env:
+      regression-artifact-pattern: "Surelog_regression_ubuntu-gcc_release_*"
+      statistics-artifact-name: Surelog_regression_ubuntu-gcc_release_statistics
+
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        architecture: x64
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: false
+        sparse-checkout: scripts/scan_errors.py
+        sparse-checkout-cone-mode: false
+
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+        pattern: ${{ env.regression-artifact-pattern }}
+        merge-multiple: true
+
+    - name: Run scanner
+      timeout-minutes: 30
+      run: |
+        ls -lR
+        python3 scripts/scan_errors.py artifacts Surelog_regression_ubuntu-gcc_release_${{ github.run_number }}_{index}
+        mv artifacts/sl-ic-errors.txt ${{ env.statistics-artifact-name }}.log
+
+    - name: Upload regression artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.statistics-artifact-name }}
+        path: ${{ env.statistics-artifact-name }}.log
 
 # Code formatting
   CodeFormatting:

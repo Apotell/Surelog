@@ -116,6 +116,7 @@ uhdm::Any* CompileHelper::compileVariable(
   if (fC->Type(variable) == VObjectType::STRING_CONST &&
       fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
     uhdm::HierPath* path = s.make<uhdm::HierPath>();
+    path->setParent(pstmt);
     uhdm::AnyCollection* elems = path->getPathElems(true);
     std::string fullName(fC->SymName(variable));
     uhdm::RefObj* obj = s.make<uhdm::RefObj>();
@@ -909,8 +910,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   uhdm::Typespec* retts = ts;
   uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
-  uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr) pscope = design->getUhdmDesign();
+  if (pstmt == nullptr) pstmt = component->getUhdmModel();
+  if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
   std::vector<uhdm::Range*>* packedDimensions = nullptr;
   if (packedId) {
@@ -952,8 +953,9 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     // create packed array
     uhdm::ArrayTypespec* tpaps = s.make<uhdm::ArrayTypespec>();
     tpaps->setPacked(true);
-    tpaps->setParent(pscope);
+    tpaps->setParent(pstmt);
     fC->populateCoreMembers(nodeId, packedId, tpaps);
+
     uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
     pret->setParent(taps);
     pret->setActual(tpaps);
@@ -1012,19 +1014,18 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     else
       taps->setArrayType(vpiStaticArray);
 
-    if (packedDimensions != nullptr) {
-      tpaps->setRanges(packedDimensions);
-      for (auto r : *packedDimensions) r->setParent(tpaps);
-    }
-    if (unpackedDimensions != nullptr) {
-      taps->setRanges(unpackedDimensions);
-      for (auto r : *unpackedDimensions) r->setParent(taps);
-    }
+    tpaps->setRanges(packedDimensions);
+    for (auto r : *packedDimensions) r->setParent(tpaps, true);
+
+    taps->setRanges(unpackedDimensions);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
+
     retts = taps;
 
   } else if (unpackedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
+
     NodeId unpackDimensionId2 = unpackedId;
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
@@ -1100,12 +1101,12 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
       taps->setArrayType(vpiStaticArray);
 
     taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
     retts = taps;
   } else if (packedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
     taps->setPacked(true);
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
     fC->populateCoreMembers(nodeId, nodeId, taps);
     taps->setRanges(packedDimensions);
     for (uhdm::Range* r : *packedDimensions) r->setParent(taps, true);
@@ -1408,7 +1409,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         ref->setParent(pstmt);
         ref->setPacked(isPacked);
         ref->setName(typeName);
-        fC->populateCoreMembers(class_name, symb_id, ref);
+        fC->populateCoreMembers(id, id, ref);
         result = ref;
       }
       break;

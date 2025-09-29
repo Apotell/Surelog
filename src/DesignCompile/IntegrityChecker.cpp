@@ -303,6 +303,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
       expectedRelation = LineColumnRelation::Before;
     }
 
+    if (const uhdm::Function* const parentAsFunction =
+            parent->Cast<uhdm::Function>()) {
+      if (parentAsFunction->getReturn() == object) {
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    }
+
     if (const uhdm::EnumTypespec* const parentAsEnumTypespec =
             parent->Cast<uhdm::EnumTypespec>()) {
       if (parentAsEnumTypespec->getBaseTypespec() == object) {
@@ -388,7 +395,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         if (actualRelation == LineColumnRelation::After)
           expectedRelation = LineColumnRelation::After;
       }
-    } else if (const uhdm::Variable* const parentAsVariables =
+
+      if (parent->Cast<uhdm::TypedefTypespec>() != nullptr) {
+        if (objectAsRefTypespec->getActual() == nullptr) {
+          expectedRelation = LineColumnRelation::Inside;
+        }
+      }
+    } else if (const uhdm::Variable* const parentAsVariable =
                    parent->Cast<uhdm::Variable>()) {
       expectedRelation = LineColumnRelation::Before;
     }
@@ -511,6 +524,11 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         }
       }
     }
+  } else if (const uhdm::MethodFuncCall* const parentAsMethodFuncCall =
+                 parent->Cast<uhdm::MethodFuncCall>()) {
+    if (parentAsMethodFuncCall->getPrefix() == object) {
+      expectedRelation = LineColumnRelation::Before;
+    }
   }
 
   if (actualRelation != expectedRelation) {
@@ -527,7 +545,9 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
     if ((actualRelation == LineColumnRelation::After) &&
         (expectedRelation == LineColumnRelation::Before) &&
         (object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
-        ((parent->getUhdmType() == uhdm::UhdmType::Port) || isPackedArray)) {
+        ((parent->getUhdmType() == uhdm::UhdmType::Port) ||
+         (parent->getUhdmType() == uhdm::UhdmType::LogicNet) ||
+         isPackedArray)) {
       // typespec for uhdm::Ports*can* be inside the parent module!
       // module (port_name):
       //   input int port_name;
@@ -965,6 +985,12 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
   bool expectDesign = (allowedDesignChildren.find(object->getUhdmType()) !=
                        allowedDesignChildren.cend());
 
+  if (any_cast<uhdm::ParamAssign>(object) != nullptr) {
+    if (any_cast<uhdm::ClassTypespec>(parent) != nullptr) {
+      expectScope = expectDesign = false;
+    }
+  }
+
   const std::set<uhdm::UhdmType> allowedUdpChildren{
       uhdm::UhdmType::Net, uhdm::UhdmType::IODecl, uhdm::UhdmType::TableEntry};
   bool expectUdpDefn = (allowedUdpChildren.find(object->getUhdmType()) !=
@@ -983,6 +1009,11 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
   //   errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_REFPARENT,
   //                            loc);
   // }
+
+  if ((any_cast<uhdm::IODecl>(object) != nullptr) &&
+      (any_cast<uhdm::Modport>(parent) != nullptr)) {
+    expectScope = expectDesign = expectUdpDefn = false;
+  }
 
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr) &&
       (parentAsUdpDefn == nullptr) &&

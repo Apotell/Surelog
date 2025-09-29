@@ -509,6 +509,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           tps->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
+          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           if (ref->getTypespec() == nullptr) {
             uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
             fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);

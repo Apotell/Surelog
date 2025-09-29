@@ -3484,17 +3484,14 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
         std::pair<uhdm::TaskFunc*, DesignComponent*> ret =
             getTaskFunc(name, component, compileDesign, nullptr, nullptr);
         uhdm::TaskFunc* tf = ret.first;
-        uhdm::Any* call = nullptr;
+        uhdm::TFCall* call = nullptr;
         if (tf) {
           if (tf->getUhdmType() == uhdm::UhdmType::Function) {
-            uhdm::FuncCall* fcall = s.make<uhdm::FuncCall>();
-            fcall->setFunction(any_cast<uhdm::Function>(tf));
-            call = fcall;
+            call = s.make<uhdm::FuncCall>();
           } else {
-            uhdm::TaskCall* tcall = s.make<uhdm::TaskCall>();
-            tcall->setTask(any_cast<uhdm::Task>(tf));
-            call = tcall;
+            call = s.make<uhdm::TaskCall>();
           }
+          call->setTaskFunc(tf);
         }
         if (call) {
           NodeId nid = fC->Child(unit);
@@ -3744,6 +3741,7 @@ bool CompileHelper::compileParameterDeclaration(
     param_assigns = component->getParamAssigns();
   }
   uhdm::Any* const pany = component->getUhdmModel();
+  const uhdm::ScopedScope scopedScope(pany);
   if (fC->Type(nodeId) == VObjectType::paType_assignment_list) {
     // Type param
     NodeId typeNameId = fC->Child(fC->Child(nodeId));
@@ -4331,9 +4329,7 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
       tfNameNode = fC->Sibling(Constant_bit_select);
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
       const std::string_view mname = fC->SymName(tfNameNode);
-      NodeId argListNode = fC->Sibling(tfNameNode);
-      fC->populateCoreMembers(dollar_or_string,
-                              argListNode ? argListNode : tfNameNode, fcall);
+      fC->populateCoreMembers(tfNameNode, Tf_call_stmt, fcall);
       fcall->setName(mname);
       fcall->setParent(pexpr);
       uhdm::RefObj* prefix = s.make<uhdm::RefObj>();
@@ -4348,14 +4344,11 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
     uhdm::TaskFunc* tf = ret.first;
     if (tf) {
       if (tf->getUhdmType() == uhdm::UhdmType::Function) {
-        uhdm::FuncCall* fcall = s.make<uhdm::FuncCall>();
-        fcall->setFunction(any_cast<uhdm::Function>(tf));
-        call = fcall;
+        call = s.make<uhdm::FuncCall>();
       } else {
-        uhdm::TaskCall* tcall = s.make<uhdm::TaskCall>();
-        tcall->setTask(any_cast<uhdm::Task>(tf));
-        call = tcall;
+        call = s.make<uhdm::TaskCall>();
       }
+      call->setTaskFunc(tf);
       call->setParent(pexpr);
     }
     if (call == nullptr) {
@@ -4446,12 +4439,10 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
   NodeId argumentNode = fC->Child(Arg_list_node);
   if (!argumentNode) return nullptr;
   uhdm::IODeclCollection* io_decls = nullptr;
-  if (const uhdm::FuncCall* tf = any_cast<uhdm::FuncCall>(call)) {
-    const uhdm::Function* func = tf->getFunction();
-    if (func) io_decls = func->getIODecls();
-  } else if (const uhdm::TaskCall* tf = any_cast<uhdm::TaskCall>(call)) {
-    const uhdm::Task* task = tf->getTask();
-    if (task) io_decls = task->getIODecls();
+  if (uhdm::TFCall* const tfc = any_cast<uhdm::TFCall>(call)) {
+    if (uhdm::TaskFunc* const func = tfc->getTaskFunc()) {
+      io_decls = func->getIODecls();
+    }
   }
   uhdm::AnyCollection* arguments = s.makeCollection<uhdm::Any>();
   std::map<std::string, uhdm::Any*, std::less<>> args;

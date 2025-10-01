@@ -499,6 +499,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           component, fC, fC->Child(Ps_or_hierarchical_array_identifier),
           fC->Child(Ps_or_hierarchical_array_identifier), InvalidNodeId,
           compileDesign, Reduce::No, for_each, nullptr, false);
+      if (var) for_each->setVariable(var);
       NodeId Loop_variables = fC->Sibling(Ps_or_hierarchical_array_identifier);
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
@@ -526,10 +527,11 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           fC->populateCoreMembers(loopVarId, loopVarId, tps);
           if (ref->getTypespec() == nullptr) {
             uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-            fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
+            //fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
             tpsRef->setParent(ref);
             tpsRef->setName(fC->SymName(loopVarId));
             ref->setTypespec(tpsRef);
+            tpsRef->setFile(tps->getFile());
           }
           ref->getTypespec()->setActual(tps);
           loop_vars->emplace_back(ref);

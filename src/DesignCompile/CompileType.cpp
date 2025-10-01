@@ -122,6 +122,7 @@ uhdm::Any* CompileHelper::compileVariable(
   if (fC->Type(variable) == VObjectType::STRING_CONST &&
       fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
     uhdm::HierPath* path = s.make<uhdm::HierPath>();
+    path->setParent(pstmt);
     uhdm::AnyCollection* elems = path->getPathElems(true);
     std::string fullName(fC->SymName(variable));
     uhdm::RefObj* obj = s.make<uhdm::RefObj>();
@@ -261,20 +262,23 @@ uhdm::Any* CompileHelper::compileVariable(
           }
           fC->populateCoreMembers(nameId, nameId, result);
 
-          if (ts == nullptr) {
-            uhdm::UnsupportedTypespec* ut = s.make<uhdm::UnsupportedTypespec>();
-            ut->setName(typeName);
-            ut->setParent(pstmt);
-            fC->populateCoreMembers(declarationId, declarationId, ut);
-            ts = ut;
-          }
+          if (result && (result->getUhdmType() != uhdm::UhdmType::RefObj)) {
+            if (ts == nullptr) {
+              uhdm::UnsupportedTypespec* ut =
+                  s.make<uhdm::UnsupportedTypespec>();
+              ut->setName(typeName);
+              ut->setParent(pstmt);
+              fC->populateCoreMembers(declarationId, declarationId, ut);
+              ts = ut;
+            }
 
-          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-          tsRef->setParent(result);
-          tsRef->setActual(ts);
-          tsRef->setName(typeName);
-          fC->populateCoreMembers(declarationId, declarationId, tsRef);
-          any_cast<uhdm::SimpleExpr>(result)->setTypespec(tsRef);
+            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+            tsRef->setParent(result);
+            tsRef->setActual(ts);
+            tsRef->setName(typeName);
+            fC->populateCoreMembers(declarationId, declarationId, tsRef);
+            any_cast<uhdm::SimpleExpr>(result)->setTypespec(tsRef);
+          }
         }
       }
       break;

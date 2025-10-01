@@ -86,6 +86,12 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   void enterRefVar(const uhdm::RefVar* object, uint32_t vpiRelation) final;
   void enterVarSelect(const uhdm::VarSelect* object,
                       uint32_t vpiRelation) final;
+  void enterForeachStmt(const uhdm::ForeachStmt* object,
+                        uint32_t vpiRelation) final;
+  //void leaveForeachStmt(const uhdm::ForeachStmt* object,
+  //                      uint32_t vpiRelation) final;
+
+  void enterHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
 
  private:
   bool areSimilarNames(std::string_view name1, std::string_view name2) const;
@@ -93,7 +99,8 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   bool areSimilarNames(const uhdm::Any* object1,
                        const uhdm::Any* object2) const;
   static bool isInElaboratedTree(const uhdm::Any* object);
-
+  const uhdm::Any* findActual(const uhdm::Any* object);
+  const uhdm::Any* getActualBasedOnType(const uhdm::Any* object);
   VObjectType getDefaultNetType(const uhdm::Any* object) const;
   const uhdm::Any* getPrefix(const uhdm::Any* object);
 

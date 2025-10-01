@@ -500,6 +500,9 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
   const uhdm::Any* const parent = object->getParent();
   if (parent == nullptr) return;
 
+  if ((object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
+      (parent->getUhdmType() == uhdm::UhdmType::RefVar))
+    return;
   const uhdm::Any* const grandParent = parent->getParent();
   if (grandParent == nullptr) return;
 

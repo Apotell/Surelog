@@ -169,21 +169,22 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 30, name: nbytes".
 [ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:30, name: nbytes".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 47, name: gp".
 [ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:47, name: gp".
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Unbound: 30, RefObj, nbytes.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Unbound: 47, RefObj, gp.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:5:3: Unsupported Typespec: id:13, type:RefTypespec, name:uvm_reg_data_t.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Null Actual: id:30, type:RefObj, name:nbytes.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Null Actual: id:47, type:RefObj, name:gp.
+[ERR:IG0811] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:10:18: Unsupported Typespec: id:18, type:RefTypespec, name:uvm_sequence_item.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
   |vpiParent:
@@ -228,7 +229,7 @@ Design: (unnamed)
             \_IntVar: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
             |vpiFullName:pkg::tt::reg2bus::i
             |vpiActual:
-            \_IntTypespec: 
+            \_IntTypespec: , line:12:6, endln:12:9
           |vpiName:i
           |vpiFullName:pkg::tt::reg2bus::i
           |vpiSigned:1
@@ -376,12 +377,12 @@ Design: (unnamed)
           |vpiStmt:
           \_Begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
         |vpiTypedef:
-        \_IntTypespec: 
+        \_IntTypespec: , line:12:6, endln:12:9
           |vpiParent:
           \_Begin: (pkg::tt::reg2bus)
           |vpiSigned:1
         |vpiImportTypespec:
-        \_IntTypespec: 
+        \_IntTypespec: , line:12:6, endln:12:9
         |vpiImportTypespec:
         \_IntVar: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
         |vpiStmt:
@@ -406,7 +407,7 @@ Design: (unnamed)
         |vpiName:uvm_sequence_item
         |vpiFullName:pkg::tt::reg2bus::uvm_sequence_item
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_sequence_item)
+        \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
       |vpiIODecl:
       \_IODecl: (rw), line:10:69, endln:10:71
         |vpiParent:
@@ -414,24 +415,24 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:rw
         |vpiTypedef:
-        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:10:54, endln:10:68
+        \_RefTypespec: (pkg::tt::reg2bus::rw::pkg::uvm_reg_bus_op), line:10:54, endln:10:68
           |vpiParent:
           \_IODecl: (rw), line:10:69, endln:10:71
-          |vpiName:uvm_reg_bus_op
-          |vpiFullName:pkg::tt::reg2bus::rw::uvm_reg_bus_op
+          |vpiName:pkg::uvm_reg_bus_op
+          |vpiFullName:pkg::tt::reg2bus::rw::pkg::uvm_reg_bus_op
           |vpiActual:
           \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
       |vpiStmt:
       \_Begin: (pkg::tt::reg2bus)
     |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_sequence_item)
+    \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
       |vpiParent:
       \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
       |vpiName:uvm_sequence_item
     |vpiImportTypespec:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_sequence_item)
+    \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
     |vpiMethod:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
   |vpiTypedef:
@@ -473,9 +474,9 @@ Design: (unnamed)
         |vpiName:uvm_reg_data_t
         |vpiFullName:pkg::data::uvm_reg_data_t
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_reg_data_t)
+        \_UnsupportedTypespec: (uvm_reg_data_t), line:5:3, endln:5:17
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_reg_data_t)
+  \_UnsupportedTypespec: (uvm_reg_data_t), line:5:3, endln:5:17
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
     |vpiName:uvm_reg_data_t
@@ -488,7 +489,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:4:9, endln:6:2
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_reg_data_t)
+  \_UnsupportedTypespec: (uvm_reg_data_t), line:5:3, endln:5:17
   |vpiDefName:pkg
   |vpiClassDefn:
   \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9

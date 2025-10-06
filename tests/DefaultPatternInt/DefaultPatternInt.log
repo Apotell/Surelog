@@ -408,16 +408,18 @@ TaggedPattern                                          3
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:11:17: Bad relative location: Child: 72, RefTypespec, ASSIGN_VADDR_RET_T Parent: 55, Function, ASSIGN_VADDR.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternInt/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:17:30: Unsupported Typespec: id:101, type:RefTypespec, name:CNT.
+[ERR:IG0811] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:10:40: Unsupported Typespec: id:68, type:RefTypespec, name:CNT.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiParent:
@@ -438,7 +440,7 @@ Design: (unnamed)
       \_Parameter: (pack::CNT), line:2:25, endln:2:32
       |vpiFullName:pack::CNT
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:2:12, endln:2:24
     |vpiLocalParam:1
     |vpiName:CNT
     |vpiFullName:pack::CNT
@@ -452,7 +454,7 @@ Design: (unnamed)
       \_Parameter: (pack::V), line:4:25, endln:4:47
       |vpiFullName:pack::V
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:4:12, endln:4:47
     |vpiLocalParam:1
     |vpiName:V
     |vpiFullName:pack::V
@@ -497,56 +499,56 @@ Design: (unnamed)
           \_TaggedPattern: , line:4:36, endln:4:46
           |vpiFullName:pack
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:4:36, endln:4:43
     |vpiLhs:
     \_Parameter: (pack::V), line:4:25, endln:4:47
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:2:12, endln:2:24
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
     |vpiExpr:
     \_RefObj: (pack::CNT), line:4:27, endln:4:30
       |vpiParent:
-      \_IntTypespec: 
+      \_IntTypespec: , line:2:12, endln:2:24
       |vpiName:CNT
       |vpiFullName:pack::CNT
       |vpiActual:
       \_Parameter: (pack::CNT), line:2:25, endln:2:32
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:4:12, endln:4:24
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiTypedef:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:4:12, endln:4:47
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
     |vpiArrayType:3
     |vpiIndexTypespec:
     \_RefTypespec: (pack), line:4:26, endln:4:31
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:4:12, endln:4:47
       |vpiFullName:pack
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:2:12, endln:2:24
     |vpiElemTypespec:
     \_RefTypespec: (pack), line:4:12, endln:4:24
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:4:12, endln:4:47
       |vpiFullName:pack
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:4:12, endln:4:24
   |vpiTypedef:
-  \_StringTypespec: 
+  \_StringTypespec: , line:4:36, endln:4:43
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:2:12, endln:2:24
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:4:12, endln:4:24
   |vpiImportTypespec:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:4:12, endln:4:47
   |vpiImportTypespec:
-  \_StringTypespec: 
+  \_StringTypespec: , line:4:36, endln:4:43
   |vpiDefName:pack
 |vpiAllModules:
 \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:32:1, endln:34:10
@@ -592,7 +594,7 @@ Design: (unnamed)
       \_Parameter: (work@top.VADDR), line:17:25, endln:17:52
       |vpiFullName:work@top.VADDR
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:17:12, endln:17:52
     |vpiLocalParam:1
     |vpiName:VADDR
     |vpiFullName:work@top.VADDR
@@ -633,7 +635,7 @@ Design: (unnamed)
         \_IntVar: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
         |vpiFullName:work@top.ASSIGN_VADDR.i
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:12:10, endln:12:13
       |vpiName:i
       |vpiFullName:work@top.ASSIGN_VADDR.i
       |vpiSigned:1
@@ -736,12 +738,12 @@ Design: (unnamed)
       |vpiStmt:
       \_Begin: (work@top.ASSIGN_VADDR), line:12:35, endln:14:8
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:12:10, endln:12:13
       |vpiParent:
       \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:12:10, endln:12:13
     |vpiImportTypespec:
     \_IntVar: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
     |vpiVisibility:1
@@ -788,34 +790,34 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:10:9, endln:10:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
   |vpiTypedef:
-  \_UnsupportedTypespec: (CNT)
+  \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
     |vpiName:CNT
   |vpiTypedef:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:10:9, endln:10:45
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
     |vpiArrayType:3
     |vpiIndexTypespec:
     \_RefTypespec: (work@top.CNT), line:10:40, endln:10:45
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:10:9, endln:10:45
       |vpiName:CNT
       |vpiFullName:work@top.CNT
       |vpiActual:
-      \_UnsupportedTypespec: (CNT)
+      \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:10:9, endln:10:21
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:10:9, endln:10:45
       |vpiFullName:work@top
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:10:9, endln:10:21
   |vpiTypedef:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
     |vpiParent:
@@ -831,48 +833,48 @@ Design: (unnamed)
       \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
       |vpiFullName:work@top.ASSIGN_VADDR_RET_T
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:10:9, endln:10:45
   |vpiTypedef:
-  \_UnsupportedTypespec: (CNT)
+  \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
     |vpiName:CNT
   |vpiTypedef:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:17:12, endln:17:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
     |vpiArrayType:3
     |vpiIndexTypespec:
     \_RefTypespec: (work@top.CNT), line:17:30, endln:17:35
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:17:12, endln:17:52
       |vpiName:CNT
       |vpiFullName:work@top.CNT
       |vpiActual:
-      \_UnsupportedTypespec: (CNT)
+      \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:17:12, endln:17:24
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:17:12, endln:17:52
       |vpiFullName:work@top
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:10:9, endln:10:21
   |vpiImportTypespec:
   \_ImportTypespec: (pack), line:9:8, endln:9:15
   |vpiImportTypespec:
   \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:10:9, endln:10:21
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (CNT)
+  \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
   |vpiImportTypespec:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:10:9, endln:10:45
   |vpiImportTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (CNT)
+  \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
   |vpiImportTypespec:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:17:12, endln:17:52
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
@@ -993,6 +995,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0

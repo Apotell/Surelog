@@ -146,16 +146,16 @@ StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
-[ERR:IG0804] Missing/invalid file: 21, RefTypespec, pkg::a.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
   |vpiParent:
@@ -197,9 +197,9 @@ Design: (unnamed)
         \_TypespecMember: (x), line:3:19, endln:3:20
         |vpiFullName:pkg::x
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
   |vpiTypedef:
@@ -217,15 +217,15 @@ Design: (unnamed)
       \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
       |vpiFullName:pkg::b
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:5:12, endln:5:18
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
     |vpiRange:
     \_Range: , line:5:13, endln:5:18
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
       |vpiLeftRange:
       \_Constant: , line:5:14, endln:5:15
         |vpiParent:
@@ -245,7 +245,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (pkg::a), line:4:6, endln:4:7
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
       |vpiName:pkg::a
       |vpiActual:
       \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
@@ -254,11 +254,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiDefName:pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
@@ -401,6 +401,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1

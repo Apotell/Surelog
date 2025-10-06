@@ -87,20 +87,18 @@ RefObj                                                 3
 RefTypespec                                            4
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Failed to bind object: "id: 10, name: v2".
 [ERR:EL0535] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Illegal implicit net "id:10, name: v2".
-[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:11: Bad relative location: Child: 16, RefTypespec,  Parent: 15, LogicNet, o1.
-[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:11: Bad relative location: Child: 22, RefTypespec,  Parent: 21, LogicNet, o2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Unbound: 10, RefObj, v2.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeAssign/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Null Actual: id:10, type:RefObj, name:v2.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
   |vpiParent:
@@ -111,13 +109,13 @@ Design: (unnamed)
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
     |vpiName:work@module_scope_Example
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:4:11, endln:4:15
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
     |vpiRange:
     \_Range: , line:4:16, endln:4:22
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:4:11, endln:4:15
       |vpiLeftRange:
       \_Constant: , line:4:17, endln:4:19
         |vpiParent:
@@ -135,7 +133,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:4:11, endln:4:15
   |vpiImportTypespec:
   \_LogicNet: (work@module_scope_Example.o1), line:3:29, endln:3:31
     |vpiParent:
@@ -146,7 +144,7 @@ Design: (unnamed)
       \_LogicNet: (work@module_scope_Example.o1), line:3:29, endln:3:31
       |vpiFullName:work@module_scope_Example.o1
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:4:11, endln:4:15
     |vpiName:o1
     |vpiFullName:work@module_scope_Example.o1
     |vpiNetType:1
@@ -160,7 +158,7 @@ Design: (unnamed)
       \_LogicNet: (work@module_scope_Example.o2), line:3:33, endln:3:35
       |vpiFullName:work@module_scope_Example.o2
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:4:11, endln:4:15
     |vpiName:o2
     |vpiFullName:work@module_scope_Example.o2
     |vpiNetType:1
@@ -181,7 +179,7 @@ Design: (unnamed)
       \_Port: (o1), line:3:29, endln:3:31
       |vpiFullName:work@module_scope_Example.o1
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:4:11, endln:4:15
   |vpiPort:
   \_Port: (o2), line:3:33, endln:3:35
     |vpiParent:
@@ -194,7 +192,7 @@ Design: (unnamed)
       \_Port: (o2), line:3:33, endln:3:35
       |vpiFullName:work@module_scope_Example.o2
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:4:11, endln:4:15
   |vpiContAssign:
   \_ContAssign: , line:7:11, endln:7:39
     |vpiParent:
@@ -234,6 +232,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 5
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

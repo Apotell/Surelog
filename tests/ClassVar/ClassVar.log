@@ -159,17 +159,17 @@ TypespecMember                                         1
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/ClassVar/dut.sv:8:4: Bad relative location: Child: 24, RefTypespec, uvm_hdl_path_slice Parent: 23, ArrayVar, slices.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ClassVar/dut.sv Missing location information: 28, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassVar/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassVar/dut.sv:16:17: Unsupported Typespec: id:41, type:RefTypespec, name:p.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ClassVar/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ClassVar/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:1:1, endln:28:11
   |vpiParent:
@@ -194,13 +194,12 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
       |vpiTypespec:
-      \_RefTypespec: (pack::uvm_hdl_path_concat::slices::uvm_hdl_path_slice), line:8:4, endln:8:22
+      \_RefTypespec: (pack::uvm_hdl_path_concat::slices), line:8:4, endln:8:22
         |vpiParent:
         \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
-        |vpiName:uvm_hdl_path_slice
-        |vpiFullName:pack::uvm_hdl_path_concat::slices::uvm_hdl_path_slice
+        |vpiFullName:pack::uvm_hdl_path_concat::slices
         |vpiActual:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:8:4, endln:8:31
       |vpiName:slices
       |vpiFullName:pack::uvm_hdl_path_concat::slices
       |vpiAutomatic:1
@@ -209,20 +208,20 @@ Design: (unnamed)
     |vpiRegArray:
     \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:8:4, endln:8:31
       |vpiParent:
       \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
       |vpiArrayType:2
       |vpiElemTypespec:
       \_RefTypespec: (pack::uvm_hdl_path_concat::pack::uvm_hdl_path_slice), line:8:4, endln:8:22
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:8:4, endln:8:31
         |vpiName:pack::uvm_hdl_path_slice
         |vpiFullName:pack::uvm_hdl_path_concat::pack::uvm_hdl_path_slice
         |vpiActual:
         \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:8:4, endln:8:31
     |vpiImportTypespec:
     \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
   |vpiInternalScope:
@@ -293,24 +292,23 @@ Design: (unnamed)
               |vpiParent:
               \_Begin: (pack::uvm_mem_mam::check_reg), line:16:21, endln:22:6
               |vpiTypespec:
-              \_RefTypespec: (pack::uvm_mem_mam::check_reg::p_::string), line:18:5, endln:18:11
+              \_RefTypespec: (pack::uvm_mem_mam::check_reg::p_), line:18:5, endln:18:11
                 |vpiParent:
                 \_StringVar: (pack::uvm_mem_mam::check_reg::p_), line:18:12, endln:18:14
-                |vpiName:string
-                |vpiFullName:pack::uvm_mem_mam::check_reg::p_::string
+                |vpiFullName:pack::uvm_mem_mam::check_reg::p_
                 |vpiActual:
-                \_StringTypespec: 
+                \_StringTypespec: , line:18:5, endln:18:11
               |vpiName:p_
               |vpiFullName:pack::uvm_mem_mam::check_reg::p_
               |vpiSigned:1
             |vpiTypedef:
-            \_StringTypespec: 
+            \_StringTypespec: , line:18:5, endln:18:11
               |vpiParent:
               \_Begin: (pack::uvm_mem_mam::check_reg), line:16:21, endln:22:6
             |vpiImportTypespec:
             \_ClassVar: (pack::uvm_mem_mam::check_reg::path), line:17:25, endln:17:29
             |vpiImportTypespec:
-            \_StringTypespec: 
+            \_StringTypespec: , line:18:5, endln:18:11
             |vpiImportTypespec:
             \_StringVar: (pack::uvm_mem_mam::check_reg::p_), line:18:12, endln:18:14
             |vpiStmt:
@@ -392,7 +390,7 @@ Design: (unnamed)
               |vpiName:p
               |vpiFullName:pack::uvm_mem_mam::check_reg::p::p
               |vpiActual:
-              \_UnsupportedTypespec: (p)
+              \_UnsupportedTypespec: (p), line:16:17, endln:16:18
             |vpiName:p
             |vpiFullName:pack::uvm_mem_mam::check_reg::p
           |vpiVariables:
@@ -408,22 +406,22 @@ Design: (unnamed)
           |vpiStmt:
           \_Begin: (pack::uvm_mem_mam::check_reg), line:16:21, endln:22:6
         |vpiTypedef:
-        \_UnsupportedTypespec: (p)
+        \_UnsupportedTypespec: (p), line:16:17, endln:16:18
           |vpiParent:
           \_Begin: (pack::uvm_mem_mam::check_reg)
           |vpiName:p
         |vpiImportTypespec:
         \_ClassVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
         |vpiImportTypespec:
-        \_UnsupportedTypespec: (p)
+        \_UnsupportedTypespec: (p), line:16:17, endln:16:18
         |vpiStmt:
         \_ForeachStmt: (pack::uvm_mem_mam::check_reg), line:16:3, endln:22:6
       |vpiTypedef:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:13:28, endln:13:32
         |vpiParent:
         \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:24:12
       |vpiImportTypespec:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:13:28, endln:13:32
       |vpiMethod:1
       |vpiVisibility:2
       |vpiVirtual:1
@@ -433,18 +431,18 @@ Design: (unnamed)
         \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:24:12
         |vpiFullName:pack::uvm_mem_mam::check_reg
         |vpiActual:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:13:28, endln:13:32
       |vpiStmt:
       \_Begin: (pack::uvm_mem_mam::check_reg)
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:14:3, endln:14:31
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:11:1, endln:26:9
       |vpiArrayType:4
       |vpiElemTypespec:
       \_RefTypespec: (pack::uvm_mem_mam::uvm_hdl_path_concat), line:14:3, endln:14:22
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:14:3, endln:14:31
         |vpiName:uvm_hdl_path_concat
         |vpiFullName:pack::uvm_mem_mam::uvm_hdl_path_concat
         |vpiActual:
@@ -452,7 +450,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:24:12
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:14:3, endln:14:31
     |vpiMethod:
     \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:24:12
   |vpiTypedef:
@@ -495,15 +493,14 @@ Design: (unnamed)
       \_StructTypespec: , line:3:9, endln:5:2
       |vpiName:spath
       |vpiTypespec:
-      \_RefTypespec: (pack::spath::string), line:4:4, endln:4:10
+      \_RefTypespec: (pack::spath), line:4:4, endln:4:10
         |vpiParent:
         \_TypespecMember: (spath), line:4:11, endln:4:16
-        |vpiName:string
-        |vpiFullName:pack::spath::string
+        |vpiFullName:pack::spath
         |vpiActual:
-        \_StringTypespec: 
+        \_StringTypespec: , line:4:4, endln:4:10
   |vpiTypedef:
-  \_StringTypespec: 
+  \_StringTypespec: , line:4:4, endln:4:10
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:1:1, endln:28:11
   |vpiImportTypespec:
@@ -519,7 +516,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:3:9, endln:5:2
   |vpiImportTypespec:
-  \_StringTypespec: 
+  \_StringTypespec: , line:4:4, endln:4:10
   |vpiDefName:pack
   |vpiClassDefn:
   \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
@@ -528,6 +525,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

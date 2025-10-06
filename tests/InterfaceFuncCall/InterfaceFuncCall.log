@@ -185,17 +185,16 @@ ReturnStmt                                             1
 SourceFile                                             1
 SysFuncCall                                            2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv:3:14: Bad relative location: Child: 16, RefTypespec,  Parent: 10, Function, bar.
-[ERR:IG0810] Invalid location: 5, InterfaceTypespec, Foo.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceFuncCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllInterfaces:
 \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
   |vpiParent:
@@ -237,12 +236,12 @@ Design: (unnamed)
       |vpiName:bar
     |vpiFullName:work@Foo.bar
     |vpiTypedef:
-    \_IntegerTypespec: 
+    \_IntegerTypespec: , line:3:14, endln:3:21
       |vpiParent:
       \_Function: (work@Foo.bar), line:3:5, endln:6:16
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntegerTypespec: 
+    \_IntegerTypespec: , line:3:14, endln:3:21
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@Foo.bar), line:3:14, endln:3:21
@@ -250,7 +249,7 @@ Design: (unnamed)
       \_Function: (work@Foo.bar), line:3:5, endln:6:16
       |vpiFullName:work@Foo.bar
       |vpiActual:
-      \_IntegerTypespec: 
+      \_IntegerTypespec: , line:3:14, endln:3:21
     |vpiIODecl:
     \_IODecl: (x), line:4:23, endln:4:24
       |vpiParent:
@@ -263,7 +262,7 @@ Design: (unnamed)
         \_IODecl: (x), line:4:23, endln:4:24
         |vpiFullName:work@Foo.bar.x
         |vpiActual:
-        \_IntegerTypespec: 
+        \_IntegerTypespec: , line:3:14, endln:3:21
     |vpiStmt:
     \_ReturnStmt: , line:5:9, endln:5:34
       |vpiParent:
@@ -441,6 +440,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0

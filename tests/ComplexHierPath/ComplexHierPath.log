@@ -237,21 +237,20 @@ RefObj                                                17
 RefTypespec                                            6
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Failed to bind object: "id: 49, name: Z".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Illegal implicit net "id:49, name: Z".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Failed to bind object: "id: 50, name: A".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Illegal implicit net "id:50, name: A".
-[ERR:IG0809] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Unbound: 49, RefObj, Z.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Unbound: 50, RefObj, A.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexHierPath/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:20: Null Actual: id:49, type:RefObj, name:Z.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ComplexHierPath/dut.sv:20:22: Null Actual: id:50, type:RefObj, name:A.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ComplexHierPath/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ComplexHierPath/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@genblk_dive_top (work@genblk_dive_top), file:${SURELOG_DIR}/tests/ComplexHierPath/dut.sv, line:2:1, endln:21:10
   |vpiParent:
@@ -312,11 +311,11 @@ Design: (unnamed)
                 |vpiName:C
               |vpiFullName:work@genblk_dive_top.Z.A.B.C
               |vpiTypedef:
-              \_LogicTypespec: 
+              \_LogicTypespec: , line:10:49, endln:10:53
                 |vpiParent:
                 \_Begin: (work@genblk_dive_top.Z.A.B.C), line:9:48, endln:13:44
               |vpiImportTypespec:
-              \_LogicTypespec: 
+              \_LogicTypespec: , line:10:49, endln:10:53
               |vpiStmt:
               \_ContAssign: , line:11:56, endln:11:63
                 |vpiParent:
@@ -349,11 +348,11 @@ Design: (unnamed)
                     \_LogicNet: (work@genblk_dive_top.x), line:2:36, endln:2:37
                   |vpiName:B.x
             |vpiTypedef:
-            \_LogicTypespec: 
+            \_LogicTypespec: , line:8:41, endln:8:45
               |vpiParent:
               \_Begin: (work@genblk_dive_top.Z.A.B), line:7:40, endln:15:36
             |vpiImportTypespec:
-            \_LogicTypespec: 
+            \_LogicTypespec: , line:8:41, endln:8:45
             |vpiStmt:
             \_GenIf: , line:9:41, endln:13:44
               |vpiParent:
@@ -426,11 +425,11 @@ Design: (unnamed)
                   \_LogicNet: (work@genblk_dive_top.x), line:2:36, endln:2:37
                 |vpiName:A.x
           |vpiTypedef:
-          \_LogicTypespec: 
+          \_LogicTypespec: , line:6:33, endln:6:37
             |vpiParent:
             \_Begin: (work@genblk_dive_top.Z.A), line:5:32, endln:17:28
           |vpiImportTypespec:
-          \_LogicTypespec: 
+          \_LogicTypespec: , line:6:33, endln:6:37
           |vpiStmt:
           \_GenIf: , line:7:33, endln:15:36
             |vpiParent:
@@ -526,11 +525,11 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@genblk_dive_top), line:4:17, endln:18:20
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:31, endln:2:35
     |vpiParent:
     \_Module: work@genblk_dive_top (work@genblk_dive_top), file:${SURELOG_DIR}/tests/ComplexHierPath/dut.sv, line:2:1, endln:21:10
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:31, endln:2:35
   |vpiImportTypespec:
   \_LogicNet: (work@genblk_dive_top.x), line:2:36, endln:2:37
     |vpiParent:
@@ -541,7 +540,7 @@ Design: (unnamed)
       \_LogicNet: (work@genblk_dive_top.x), line:2:36, endln:2:37
       |vpiFullName:work@genblk_dive_top.x
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:31, endln:2:35
     |vpiName:x
     |vpiFullName:work@genblk_dive_top.x
     |vpiNetType:1
@@ -555,7 +554,7 @@ Design: (unnamed)
       \_LogicNet: (work@genblk_dive_top.x), line:6:38, endln:6:39
       |vpiFullName:work@genblk_dive_top.x
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:6:33, endln:6:37
     |vpiName:x
     |vpiFullName:work@genblk_dive_top.x
     |vpiNetType:1
@@ -569,7 +568,7 @@ Design: (unnamed)
       \_LogicNet: (work@genblk_dive_top.x), line:8:46, endln:8:47
       |vpiFullName:work@genblk_dive_top.x
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:8:41, endln:8:45
     |vpiName:x
     |vpiFullName:work@genblk_dive_top.x
     |vpiNetType:1
@@ -583,7 +582,7 @@ Design: (unnamed)
       \_LogicNet: (work@genblk_dive_top.x), line:10:54, endln:10:55
       |vpiFullName:work@genblk_dive_top.x
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:49, endln:10:53
     |vpiName:x
     |vpiFullName:work@genblk_dive_top.x
     |vpiNetType:1
@@ -597,7 +596,7 @@ Design: (unnamed)
       \_LogicNet: (work@genblk_dive_top.z), line:12:54, endln:12:55
       |vpiFullName:work@genblk_dive_top.z
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:49, endln:10:53
     |vpiName:z
     |vpiFullName:work@genblk_dive_top.z
     |vpiNetType:1
@@ -624,7 +623,7 @@ Design: (unnamed)
       \_Port: (x), line:2:36, endln:2:37
       |vpiFullName:work@genblk_dive_top.x
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:31, endln:2:35
   |vpiContAssign:
   \_ContAssign: , line:20:16, endln:20:25
     |vpiParent:
@@ -670,6 +669,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 6
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0

@@ -146,16 +146,19 @@ SourceFile                                             1
 TypeParameter                                          3
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Unbound: 32, RefTypespec, uvm_sequencer_base.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExtendClassMember/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:9:48: Unsupported Typespec: id:23, type:RefTypespec, name:uvm_sequence_item.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:12:45: Unsupported Typespec: id:28, type:RefTypespec, name:uvm_sequence_item.
+[ERR:IG0810] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Null Typespec: id:32, type:RefTypespec, name:uvm_sequencer_base.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:1:1, endln:26:11
   |vpiParent:
@@ -185,7 +188,7 @@ Design: (unnamed)
         \_BitVar: (pkg::uvm_tlm_fifo::print_enabled), line:5:6, endln:5:19
         |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:5:2, endln:5:5
       |vpiName:print_enabled
       |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
       |vpiAutomatic:1
@@ -200,11 +203,11 @@ Design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiTypedef:
-    \_BitTypespec: 
+    \_BitTypespec: , line:5:2, endln:5:5
       |vpiParent:
       \_ClassDefn: (pkg::uvm_tlm_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:3:1, endln:7:9
     |vpiImportTypespec:
-    \_BitTypespec: 
+    \_BitTypespec: , line:5:2, endln:5:5
     |vpiImportTypespec:
     \_BitVar: (pkg::uvm_tlm_fifo::print_enabled), line:5:6, endln:5:19
     |vpiDerivedClasses:
@@ -230,16 +233,16 @@ Design: (unnamed)
           |vpiName:uvm_sequence_item
           |vpiFullName:pkg::uvm_sequencer_analysis_fifo::RSP::uvm_sequence_item
           |vpiActual:
-          \_UnsupportedTypespec: (uvm_sequence_item)
+          \_UnsupportedTypespec: (uvm_sequence_item), line:9:48, endln:9:65
       |vpiTypedef:
-      \_UnsupportedTypespec: (uvm_sequence_item)
+      \_UnsupportedTypespec: (uvm_sequence_item), line:9:48, endln:9:65
         |vpiParent:
         \_ClassDefn: (pkg::uvm_sequencer_analysis_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:9:1, endln:10:9
         |vpiName:uvm_sequence_item
       |vpiTypedef:
       \_TypeParameter: (pkg::uvm_sequencer_analysis_fifo::RSP), line:9:42, endln:9:45
       |vpiImportTypespec:
-      \_UnsupportedTypespec: (uvm_sequence_item)
+      \_UnsupportedTypespec: (uvm_sequence_item), line:9:48, endln:9:65
       |vpiImportTypespec:
       \_TypeParameter: (pkg::uvm_sequencer_analysis_fifo::RSP), line:9:42, endln:9:45
       |vpiExtends:
@@ -296,7 +299,7 @@ Design: (unnamed)
         |vpiName:uvm_sequence_item
         |vpiFullName:pkg::uvm_sequencer_param_base::REQ::uvm_sequence_item
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_sequence_item)
+        \_UnsupportedTypespec: (uvm_sequence_item), line:12:45, endln:12:62
     |vpiParameter:
     \_TypeParameter: (pkg::uvm_sequencer_param_base::RSP), line:13:39, endln:13:42
       |vpiParent:
@@ -358,7 +361,7 @@ Design: (unnamed)
       |vpiInstance:
       \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:1:1, endln:26:11
     |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_sequence_item)
+    \_UnsupportedTypespec: (uvm_sequence_item), line:12:45, endln:12:62
       |vpiParent:
       \_ClassDefn: (pkg::uvm_sequencer_param_base), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:12:1, endln:16:9
       |vpiName:uvm_sequence_item
@@ -367,7 +370,7 @@ Design: (unnamed)
     |vpiTypedef:
     \_TypeParameter: (pkg::uvm_sequencer_param_base::RSP), line:13:39, endln:13:42
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_sequence_item)
+    \_UnsupportedTypespec: (uvm_sequence_item), line:12:45, endln:12:62
     |vpiImportTypespec:
     \_TypeParameter: (pkg::uvm_sequencer_param_base::REQ), line:12:39, endln:12:42
     |vpiImportTypespec:
@@ -431,6 +434,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 3
 [WARNING] : 1
 [   NOTE] : 0

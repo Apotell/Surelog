@@ -236,7 +236,6 @@ GenIf                                                  1
 GenIfElse                                              1
 GenVar                                                 2
 Identifier                                             4
-IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         3
 Operation                                             10
@@ -247,22 +246,21 @@ PartSelect                                             2
 Range                                                  1
 RefModule                                              2
 RefObj                                                 8
-RefTypespec                                            2
+RefTypespec                                            1
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0801] Missing location information: 11, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 11, RefTypespec, .
-[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:11:7: Unbound: 47, RefModule, i0.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:15:7: Unbound: 64, RefModule, i0.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectRange/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:11:7: Null Actual: id:45, type:RefModule, name:i0.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:15:7: Null Actual: id:62, type:RefModule, name:i0.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
   |vpiParent:
@@ -291,7 +289,7 @@ Design: (unnamed)
       \_Parameter: (work@test.MAP), line:3:19, endln:3:33
       |vpiFullName:work@test.MAP
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
     |vpiName:MAP
     |vpiFullName:work@test.MAP
   |vpiParameter:
@@ -647,17 +645,13 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@test.loop), line:8:6, endln:17:9
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
-  |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
     |vpiRange:
     \_Range: , line:3:13, endln:3:18
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
       |vpiLeftRange:
       \_Constant: , line:3:14, endln:3:15
         |vpiParent:
@@ -674,17 +668,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@test)
-      |vpiParent:
-      \_PackedArrayTypespec: 
-      |vpiFullName:work@test
-      |vpiActual:
-      \_IntTypespec: 
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
   |vpiImportTypespec:
   \_GenVar: (work@test.i), line:6:10, endln:6:11
   |vpiDefName:work@test
@@ -698,6 +683,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

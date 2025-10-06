@@ -63,40 +63,40 @@ TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Failed to bind object: "id: 219, name: uvm_resource_db::read_by_name".
 [ERR:EL0535] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Illegal implicit net "id:219, name: uvm_resource_db::read_by_name".
-[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Unbound: 219, RefObj, uvm_resource_db::read_by_name.
-[ERR:IG0801] ${SURELOG_DIR}/tests/Escape/top.v Missing location information: 214, RefTypespec, .
-[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:8:19: Unbound: 210, RefTypespec, uvm_env.
-[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:62:2: Unbound: 64, RefModule, g_datapath:0:g_io.
-[ERR:IG0810] Invalid location: 23, InterfaceTypespec, my_interface.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Escape/slpp_unit/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Null Actual: id:219, type:RefObj, name:uvm_resource_db::read_by_name.
+[ERR:IG0811] ${SURELOG_DIR}/tests/Escape/top.v:11:31: Unsupported Typespec: id:217, type:RefTypespec, name:uvm_phase.
+[ERR:IG0810] ${SURELOG_DIR}/tests/Escape/top.v:8:19: Null Typespec: id:210, type:RefTypespec, name:uvm_env.
+[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:62:2: Null Actual: id:64, type:RefModule, name:g_datapath:0:g_io.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/Escape/top.v
+\_SourceFile: (top.v), file:${SURELOG_DIR}/tests/Escape/top.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:top.v
   |vpiPreprocMacroDefinition:
   \_PreprocMacroDefinition: (FAIL_IF_STR_EQUAL), line:33:1, endln:42:6
     |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/Escape/top.v
+    \_SourceFile: (top.v), file:${SURELOG_DIR}/tests/Escape/top.v
     |vpiName:FAIL_IF_STR_EQUAL
     |vpiNameStartColumn:9
     |vpiBodyStartColumn:32
   |vpiPreprocMacroDefinition:
   \_PreprocMacroDefinition: (FAIL_UNLESS_STR_EQUAL), line:46:1, endln:55:6
     |vpiParent:
-    \_SourceFile: , file:${SURELOG_DIR}/tests/Escape/top.v
+    \_SourceFile: (top.v), file:${SURELOG_DIR}/tests/Escape/top.v
     |vpiName:FAIL_UNLESS_STR_EQUAL
     |vpiNameStartColumn:9
     |vpiBodyStartColumn:36
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/Escape/top1.v
+\_SourceFile: (top1.v), file:${SURELOG_DIR}/tests/Escape/top1.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:top1.v
 |vpiAllPackages:
 \_Package: (builtin)
   |vpiParent:
@@ -177,12 +177,12 @@ Design: (unnamed)
         |vpiName:new
       |vpiFullName:builtin::mailbox::new
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:19, endln:3:22
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:19, endln:3:22
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -204,7 +204,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -216,12 +216,12 @@ Design: (unnamed)
         |vpiName:num
       |vpiFullName:builtin::mailbox::num
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:6:14, endln:6:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -230,7 +230,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiFullName:builtin::mailbox::num
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -309,12 +309,12 @@ Design: (unnamed)
         |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:18:14, endln:18:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -323,7 +323,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiFullName:builtin::mailbox::try_get
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -359,12 +359,12 @@ Design: (unnamed)
         |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:24:14, endln:24:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -373,7 +373,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiFullName:builtin::mailbox::try_peek
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -619,12 +619,12 @@ Design: (unnamed)
         |vpiName:new
       |vpiFullName:builtin::semaphore::new
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:57:18, endln:57:21
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:57:18, endln:57:21
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -646,7 +646,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:57:18, endln:57:21
     |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
@@ -658,12 +658,12 @@ Design: (unnamed)
         |vpiName:put
       |vpiFullName:builtin::semaphore::put
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:60:14, endln:60:17
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:60:14, endln:60:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -686,7 +686,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:60:14, endln:60:17
     |vpiInternalScope:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiParent:
@@ -698,12 +698,12 @@ Design: (unnamed)
         |vpiName:get
       |vpiFullName:builtin::semaphore::get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:63:14, endln:63:17
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:63:14, endln:63:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -726,7 +726,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:63:14, endln:63:17
     |vpiInternalScope:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiParent:
@@ -738,12 +738,12 @@ Design: (unnamed)
         |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:66:14, endln:66:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -752,7 +752,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiFullName:builtin::semaphore::try_get
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -773,7 +773,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:66:14, endln:66:17
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiImportTypespec:
@@ -914,11 +914,11 @@ Design: (unnamed)
       |vpiName:connect_phase
     |vpiFullName:work@env::connect_phase
     |vpiTypedef:
-    \_VoidTypespec: 
+    \_VoidTypespec: , line:11:12, endln:11:16
       |vpiParent:
       \_Function: (work@env::connect_phase), line:11:3, endln:14:14
     |vpiImportTypespec:
-    \_VoidTypespec: 
+    \_VoidTypespec: , line:11:12, endln:11:16
     |vpiImportTypespec:
     \_ImmediateAssert: , line:13:5, endln:13:102
       |vpiParent:
@@ -937,7 +937,7 @@ Design: (unnamed)
       \_Function: (work@env::connect_phase), line:11:3, endln:14:14
       |vpiFullName:work@env::connect_phase
       |vpiActual:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:11:12, endln:11:16
     |vpiIODecl:
     \_IODecl: (phase), line:11:41, endln:11:46
       |vpiParent:
@@ -951,18 +951,18 @@ Design: (unnamed)
         |vpiName:uvm_phase
         |vpiFullName:work@env::connect_phase::phase::uvm_phase
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_phase)
+        \_UnsupportedTypespec: (uvm_phase), line:11:31, endln:11:40
     |vpiStmt:
     \_ImmediateAssert: , line:13:5, endln:13:102
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_phase)
+  \_UnsupportedTypespec: (uvm_phase), line:11:31, endln:11:40
     |vpiParent:
     \_ClassDefn: (work@env), file:${SURELOG_DIR}/tests/Escape/top.v, line:8:1, endln:15:10
     |vpiName:uvm_phase
   |vpiImportTypespec:
   \_Function: (work@env::connect_phase), line:11:3, endln:14:14
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_phase)
+  \_UnsupportedTypespec: (uvm_phase), line:11:31, endln:11:40
   |vpiVirtual:1
   |vpiExtends:
   \_Extends: , line:8:19, endln:8:26
@@ -1011,7 +1011,7 @@ Design: (unnamed)
       \_LogicVar: (work@my_interface.data), line:5:15, endln:5:19
       |vpiFullName:work@my_interface.data
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:5:9, endln:5:14
     |vpiName:data
     |vpiFullName:work@my_interface.data
     |vpiRandType:1
@@ -1070,13 +1070,13 @@ Design: (unnamed)
         \_ClockingIODecl: (data), line:8:19, endln:8:23
         |vpiName:data
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:5:9, endln:5:14
     |vpiParent:
     \_Interface: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/Escape/top1.v, line:2:1, endln:10:13
     |vpiRange:
     \_Range: , line:5:9, endln:5:14
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:5:9, endln:5:14
       |vpiLeftRange:
       \_Constant: , line:5:10, endln:5:11
         |vpiParent:
@@ -1098,7 +1098,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicVar: (work@my_interface.select), line:4:9, endln:4:15
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:5:9, endln:5:14
   |vpiImportTypespec:
   \_LogicVar: (work@my_interface.data), line:5:15, endln:5:19
   |vpiImportTypespec:
@@ -1176,7 +1176,7 @@ Design: (unnamed)
       \_Port: (data), line:5:15, endln:5:19
       |vpiFullName:work@my_interface.data
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:5:9, endln:5:14
 |vpiAllModules:
 \_Module: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/Escape/top.v, line:17:1, endln:25:10
   |vpiParent:
@@ -1506,7 +1506,7 @@ Design: (unnamed)
         |vpiActual:
         \_LogicNet: (work@middle.c), line:35:14, endln:35:15
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:35:3, endln:35:7
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/Escape/top1.v, line:32:1, endln:39:10
   |vpiTypedef:
@@ -1517,7 +1517,7 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@middle::nested (work@middle::nested), file:${SURELOG_DIR}/tests/Escape/top1.v, line:36:3, endln:38:12
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:35:3, endln:35:7
   |vpiImportTypespec:
   \_LogicNet: (work@middle.a), line:35:8, endln:35:9
     |vpiParent:
@@ -1528,7 +1528,7 @@ Design: (unnamed)
       \_LogicNet: (work@middle.a), line:35:8, endln:35:9
       |vpiFullName:work@middle.a
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:35:3, endln:35:7
     |vpiName:a
     |vpiFullName:work@middle.a
     |vpiNetType:1
@@ -1542,7 +1542,7 @@ Design: (unnamed)
       \_LogicNet: (work@middle.b), line:35:11, endln:35:12
       |vpiFullName:work@middle.b
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:35:3, endln:35:7
     |vpiName:b
     |vpiFullName:work@middle.b
     |vpiNetType:1
@@ -1556,7 +1556,7 @@ Design: (unnamed)
       \_LogicNet: (work@middle.c), line:35:14, endln:35:15
       |vpiFullName:work@middle.c
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:35:3, endln:35:7
     |vpiName:c
     |vpiFullName:work@middle.c
     |vpiNetType:1
@@ -1618,6 +1618,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 7
+[  ERROR] : 5
 [WARNING] : 5
 [   NOTE] : 0

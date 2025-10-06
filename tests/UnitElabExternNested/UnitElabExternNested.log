@@ -58,23 +58,27 @@ Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:IG0803] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Missing/invalid name: 42, RefTypespec, TP.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:16:5: Unbound: 44, RefModule, i1.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:27:5: Unbound: 46, RefModule, i2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:35:5: Unbound: 48, RefModule, i3.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabExternNested/slpp_unit/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:7:1: Unsupported Typespec: id:30, type:RefTypespec, name:type.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:42, type:RefTypespec, name:type.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:273, type:RefTypespec, name:type.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:16:5: Null Actual: id:44, type:RefModule, name:i1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:27:5: Null Actual: id:46, type:RefModule, name:i2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:35:5: Null Actual: id:48, type:RefModule, name:i3.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v
+\_SourceFile: (top.v), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:top.v
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v
+\_SourceFile: (middle.v), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:middle.v
 |vpiAllPackages:
 \_Package: (builtin)
   |vpiParent:
@@ -155,12 +159,12 @@ Design: (unnamed)
         |vpiName:new
       |vpiFullName:builtin::mailbox::new
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:19, endln:3:22
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:19, endln:3:22
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -182,7 +186,7 @@ Design: (unnamed)
           \_IODecl: (bound), line:3:23, endln:3:28
           |vpiFullName:builtin::mailbox::new::bound
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -194,12 +198,12 @@ Design: (unnamed)
         |vpiName:num
       |vpiFullName:builtin::mailbox::num
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:6:14, endln:6:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -208,7 +212,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiFullName:builtin::mailbox::num
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -287,12 +291,12 @@ Design: (unnamed)
         |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:18:14, endln:18:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -301,7 +305,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiFullName:builtin::mailbox::try_get
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -337,12 +341,12 @@ Design: (unnamed)
         |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:24:14, endln:24:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -351,7 +355,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiFullName:builtin::mailbox::try_peek
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -597,12 +601,12 @@ Design: (unnamed)
         |vpiName:new
       |vpiFullName:builtin::semaphore::new
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:57:18, endln:57:21
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:57:18, endln:57:21
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -624,7 +628,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:57:22, endln:57:30
           |vpiFullName:builtin::semaphore::new::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:57:18, endln:57:21
     |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
@@ -636,12 +640,12 @@ Design: (unnamed)
         |vpiName:put
       |vpiFullName:builtin::semaphore::put
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:60:14, endln:60:17
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:60:14, endln:60:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -664,7 +668,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:60:18, endln:60:26
           |vpiFullName:builtin::semaphore::put::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:60:14, endln:60:17
     |vpiInternalScope:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiParent:
@@ -676,12 +680,12 @@ Design: (unnamed)
         |vpiName:get
       |vpiFullName:builtin::semaphore::get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:63:14, endln:63:17
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:63:14, endln:63:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -704,7 +708,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:63:18, endln:63:26
           |vpiFullName:builtin::semaphore::get::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:63:14, endln:63:17
     |vpiInternalScope:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiParent:
@@ -716,12 +720,12 @@ Design: (unnamed)
         |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:66:14, endln:66:17
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -730,7 +734,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiFullName:builtin::semaphore::try_get
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -751,7 +755,7 @@ Design: (unnamed)
           \_IODecl: (keyCount), line:66:30, endln:66:38
           |vpiFullName:builtin::semaphore::try_get::keyCount
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:66:14, endln:66:17
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiImportTypespec:
@@ -899,7 +903,7 @@ Design: (unnamed)
       |vpiName:type
       |vpiFullName:work@a.TP.type
       |vpiActual:
-      \_UnsupportedTypespec: (type)
+      \_UnsupportedTypespec: (type), line:7:1, endln:7:5
     |vpiName:TP
     |vpiFullName:work@a.TP
   |vpiParamAssign:
@@ -949,18 +953,18 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@a.TP), line:8:2, endln:10:7
   |vpiTypedef:
-  \_UnsupportedTypespec: (type)
+  \_UnsupportedTypespec: (type), line:7:1, endln:7:5
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiName:type
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:13:2, endln:13:10
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiRange:
     \_Range: , line:13:2, endln:13:10
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:13:2, endln:13:10
       |vpiLeftRange:
       \_RefObj: (work@a.size), line:13:3, endln:13:7
         |vpiParent:
@@ -978,9 +982,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (type)
+  \_UnsupportedTypespec: (type), line:7:1, endln:7:5
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:13:2, endln:13:10
   |vpiImportTypespec:
   \_LogicNet: (work@a.a), line:13:11, endln:13:12
     |vpiParent:
@@ -991,7 +995,7 @@ Design: (unnamed)
       \_LogicNet: (work@a.a), line:13:11, endln:13:12
       |vpiFullName:work@a.a
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:13:2, endln:13:10
     |vpiName:a
     |vpiFullName:work@a.a
   |vpiImportTypespec:
@@ -999,13 +1003,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiTypespec:
-    \_RefTypespec: (work@a.b.TP), line:15:2, endln:15:4
+    \_RefTypespec: (work@a.b.type), line:15:2, endln:15:4
       |vpiParent:
       \_LogicNet: (work@a.b), line:15:5, endln:15:6
-      |vpiName:TP
-      |vpiFullName:work@a.b.TP
+      |vpiName:type
+      |vpiFullName:work@a.b.type
       |vpiActual:
-      \_UnsupportedTypespec: (type)
+      \_UnsupportedTypespec: (type), line:7:1, endln:7:5
     |vpiName:b
     |vpiFullName:work@a.b
   |vpiImportTypespec:
@@ -1034,7 +1038,7 @@ Design: (unnamed)
       \_Port: (a), line:13:11, endln:13:12
       |vpiFullName:work@a.a
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:13:2, endln:13:10
   |vpiPort:
   \_Port: (b), line:15:5, endln:15:6
     |vpiParent:
@@ -1048,7 +1052,7 @@ Design: (unnamed)
       |vpiName:type
       |vpiFullName:work@a.b.type
       |vpiActual:
-      \_UnsupportedTypespec: (type)
+      \_UnsupportedTypespec: (type), line:7:1, endln:7:5
 |vpiAllModules:
 \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
   |vpiParent:
@@ -1204,11 +1208,11 @@ Design: (unnamed)
       \_Module: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
       |vpiName:work@dff_nested::ff2
     |vpiTypedef:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:20:1, endln:20:5
       |vpiParent:
       \_Module: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
     |vpiImportTypespec:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:20:1, endln:20:5
     |vpiImportTypespec:
     \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
       |vpiParent:
@@ -1219,7 +1223,7 @@ Design: (unnamed)
         \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
         |vpiFullName:work@dff_nested.work@dff_nested::ff2.q2
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:20:1, endln:20:5
       |vpiName:q2
       |vpiFullName:work@dff_nested.work@dff_nested::ff2.q2
       |vpiNetType:1
@@ -1504,7 +1508,7 @@ Design: (unnamed)
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:ff3
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:7:1, endln:7:5
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
   |vpiTypedef:
@@ -1571,7 +1575,7 @@ Design: (unnamed)
     |vpiName:nq
     |vpiFullName:work@dff_nested.nq
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:7:1, endln:7:5
   |vpiImportTypespec:
   \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
     |vpiParent:
@@ -1582,7 +1586,7 @@ Design: (unnamed)
       \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
       |vpiFullName:work@dff_nested.q1
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:7:1, endln:7:5
     |vpiName:q1
     |vpiFullName:work@dff_nested.q1
     |vpiNetType:1
@@ -1596,7 +1600,7 @@ Design: (unnamed)
       \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
       |vpiFullName:work@dff_nested.nq1
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:7:1, endln:7:5
     |vpiName:nq1
     |vpiFullName:work@dff_nested.nq1
     |vpiNetType:1
@@ -1610,7 +1614,7 @@ Design: (unnamed)
       \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
       |vpiFullName:work@dff_nested.nq2
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:7:1, endln:7:5
     |vpiName:nq2
     |vpiFullName:work@dff_nested.nq2
     |vpiNetType:1
@@ -1789,13 +1793,13 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:19:1, endln:19:5
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiRange:
     \_Range: , line:20:1, endln:20:6
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:19:1, endln:19:5
       |vpiLeftRange:
       \_Constant: , line:20:2, endln:20:3
         |vpiParent:
@@ -1813,13 +1817,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:21:1, endln:21:6
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiRange:
     \_Range: , line:22:2, endln:22:7
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:21:1, endln:21:6
       |vpiLeftRange:
       \_Constant: , line:22:3, endln:22:4
         |vpiParent:
@@ -1837,11 +1841,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:23:1, endln:23:5
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:19:1, endln:19:5
   |vpiImportTypespec:
   \_LogicNet: (work@top.a), line:20:7, endln:20:8
     |vpiParent:
@@ -1852,28 +1856,27 @@ Design: (unnamed)
       \_LogicNet: (work@top.a), line:20:7, endln:20:8
       |vpiFullName:work@top.a
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:19:1, endln:19:5
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:21:1, endln:21:6
   |vpiImportTypespec:
   \_LogicNet: (work@top.b), line:22:8, endln:22:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.b.logic), line:21:1, endln:22:7
+    \_RefTypespec: (work@top.b), line:21:1, endln:22:7
       |vpiParent:
       \_LogicNet: (work@top.b), line:22:8, endln:22:9
-      |vpiName:logic
-      |vpiFullName:work@top.b.logic
+      |vpiFullName:work@top.b
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:21:1, endln:21:6
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:23:1, endln:23:5
   |vpiImportTypespec:
   \_LogicNet: (work@top.c), line:24:1, endln:24:2
     |vpiParent:
@@ -1884,7 +1887,7 @@ Design: (unnamed)
       \_LogicNet: (work@top.c), line:24:1, endln:24:2
       |vpiFullName:work@top.c
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:23:1, endln:23:5
     |vpiName:c
     |vpiFullName:work@top.c
     |vpiNetType:1
@@ -1898,7 +1901,7 @@ Design: (unnamed)
       \_LogicNet: (work@top.d), line:24:4, endln:24:5
       |vpiFullName:work@top.d
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:23:1, endln:23:5
     |vpiName:d
     |vpiFullName:work@top.d
     |vpiNetType:1
@@ -1948,6 +1951,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 6
 [WARNING] : 8
 [   NOTE] : 1

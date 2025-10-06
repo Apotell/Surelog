@@ -188,27 +188,23 @@ TypeParameter                                          2
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 54, name: cb_".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:54, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 56, name: cb_".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:56, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Failed to bind object: "id: 57, name: get_inst_id".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:57, name: get_inst_id".
-[ERR:IG0807] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:15:3: Bad relative location: Child: 40, RefTypespec, CB Parent: 39, ArrayVar, callbacks_to_append.
-[ERR:IG0807] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:16:3: Bad relative location: Child: 47, RefTypespec, CB Parent: 46, ArrayVar, unique_callbacks_to_append.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Unbound: 54, RefObj, cb_.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Unbound: 56, RefObj, cb_.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Unbound: 57, RefObj, get_inst_id.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv Missing location information: 30, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Null Actual: id:54, type:RefObj, name:cb_.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Null Actual: id:56, type:RefObj, name:cb_.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Null Actual: id:57, type:RefObj, name:get_inst_id.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:29:1: Unsupported Typespec: id:19, type:RefTypespec, name:pkg::uvm_callbacks.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
   |vpiParent:
@@ -248,7 +244,7 @@ Design: (unnamed)
         \_IntVar: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
         |vpiFullName:pkg::uvm_callback::get_inst_id
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:7:4, endln:7:7
       |vpiName:get_inst_id
       |vpiFullName:pkg::uvm_callback::get_inst_id
       |vpiSigned:1
@@ -256,12 +252,12 @@ Design: (unnamed)
       |vpiRandType:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:7:4, endln:7:7
       |vpiParent:
       \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:7:4, endln:7:7
     |vpiImportTypespec:
     \_IntVar: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
   |vpiInternalScope:
@@ -322,13 +318,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (pkg::uvm_callbacks::get_all)
           |vpiTypespec:
-          \_RefTypespec: (pkg::uvm_callbacks::get_all::callbacks_to_append::CB), line:15:3, endln:15:5
+          \_RefTypespec: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:3, endln:15:5
             |vpiParent:
             \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-            |vpiName:CB
-            |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append::CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
             |vpiActual:
-            \_ArrayTypespec: 
+            \_ArrayTypespec: , line:15:3, endln:15:28
           |vpiName:callbacks_to_append
           |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
         |vpiVariables:
@@ -336,13 +331,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (pkg::uvm_callbacks::get_all)
           |vpiTypespec:
-          \_RefTypespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append::CB), line:16:3, endln:16:5
+          \_RefTypespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:3, endln:16:5
             |vpiParent:
             \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-            |vpiName:CB
-            |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append::CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
             |vpiActual:
-            \_ArrayTypespec: 
+            \_ArrayTypespec: , line:16:3, endln:16:35
           |vpiName:unique_callbacks_to_append
           |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
         |vpiRegArray:
@@ -412,11 +406,11 @@ Design: (unnamed)
             |vpiActual:
             \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
       |vpiTypedef:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:12:11, endln:12:15
         |vpiParent:
         \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
       |vpiImportTypespec:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:12:11, endln:12:15
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -425,7 +419,7 @@ Design: (unnamed)
         \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
         |vpiFullName:pkg::uvm_callbacks::get_all
         |vpiActual:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:12:11, endln:12:15
       |vpiStmt:
       \_Begin: (pkg::uvm_callbacks::get_all)
     |vpiTypedef:
@@ -433,27 +427,27 @@ Design: (unnamed)
     |vpiTypedef:
     \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:15:3, endln:15:28
       |vpiParent:
       \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
       |vpiArrayType:4
       |vpiElemTypespec:
       \_RefTypespec: (pkg::uvm_callbacks::CB), line:15:3, endln:15:5
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:15:3, endln:15:28
         |vpiName:CB
         |vpiFullName:pkg::uvm_callbacks::CB
         |vpiActual:
         \_TypeParameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:16:3, endln:16:35
       |vpiParent:
       \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
       |vpiArrayType:4
       |vpiElemTypespec:
       \_RefTypespec: (pkg::uvm_callbacks::CB), line:16:3, endln:16:5
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:16:3, endln:16:35
         |vpiName:CB
         |vpiFullName:pkg::uvm_callbacks::CB
         |vpiActual:
@@ -465,9 +459,9 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:15:3, endln:15:28
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:16:3, endln:16:35
     |vpiMethod:
     \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
   |vpiTypedef:
@@ -520,12 +514,12 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
     |vpiName:work@top
   |vpiTypedef:
-  \_UnsupportedTypespec: (pkg::uvm_callbacks)
+  \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
     |vpiName:pkg::uvm_callbacks
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (pkg::uvm_callbacks)
+  \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
   |vpiImportTypespec:
   \_LogicNet: (work@top.c1), line:29:20, endln:29:22
     |vpiParent:
@@ -537,7 +531,7 @@ Design: (unnamed)
       |vpiName:pkg::uvm_callbacks
       |vpiFullName:work@top.c1.pkg::uvm_callbacks
       |vpiActual:
-      \_UnsupportedTypespec: (pkg::uvm_callbacks)
+      \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
     |vpiName:c1
     |vpiFullName:work@top.c1
   |vpiDefName:work@top
@@ -553,6 +547,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 12
+[  ERROR] : 7
 [WARNING] : 2
 [   NOTE] : 0

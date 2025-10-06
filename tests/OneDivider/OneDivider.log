@@ -41,13 +41,15 @@ SysFuncCall                                            9
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/OneDivider/dut.v
+\_SourceFile: (dut.v), file:${SURELOG_DIR}/tests/OneDivider/dut.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.v
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/OneDivider/tb.v
+\_SourceFile: (tb.v), file:${SURELOG_DIR}/tests/OneDivider/tb.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:tb.v
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
   |vpiParent:
@@ -58,23 +60,22 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
     |vpiName:work@dut
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:1:18, endln:1:23
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:1:18, endln:1:23
   |vpiImportTypespec:
   \_LogicNet: (work@dut.rstn), line:1:24, endln:1:28
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.rstn.logic), line:1:18, endln:1:23
+    \_RefTypespec: (work@dut.rstn), line:1:18, endln:1:23
       |vpiParent:
       \_LogicNet: (work@dut.rstn), line:1:24, endln:1:28
-      |vpiName:logic
-      |vpiFullName:work@dut.rstn.logic
+      |vpiFullName:work@dut.rstn
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
     |vpiName:rstn
     |vpiFullName:work@dut.rstn
     |vpiNetType:36
@@ -83,13 +84,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.clk.logic), line:2:18, endln:2:23
+    \_RefTypespec: (work@dut.clk), line:2:18, endln:2:23
       |vpiParent:
       \_LogicNet: (work@dut.clk), line:2:24, endln:2:27
-      |vpiName:logic
-      |vpiFullName:work@dut.clk.logic
+      |vpiFullName:work@dut.clk
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
     |vpiName:clk
     |vpiFullName:work@dut.clk
     |vpiNetType:36
@@ -103,7 +103,7 @@ Design: (unnamed)
       \_LogicNet: (work@dut.div), line:3:23, endln:3:26
       |vpiFullName:work@dut.div
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
     |vpiName:div
     |vpiFullName:work@dut.div
     |vpiNetType:48
@@ -126,7 +126,7 @@ Design: (unnamed)
       \_Port: (rstn), line:1:24, endln:1:28
       |vpiFullName:work@dut.rstn
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
   |vpiPort:
   \_Port: (clk), line:2:24, endln:2:27
     |vpiParent:
@@ -139,7 +139,7 @@ Design: (unnamed)
       \_Port: (clk), line:2:24, endln:2:27
       |vpiFullName:work@dut.clk
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
   |vpiPort:
   \_Port: (div), line:3:23, endln:3:26
     |vpiParent:
@@ -152,7 +152,7 @@ Design: (unnamed)
       \_Port: (div), line:3:23, endln:3:26
       |vpiFullName:work@dut.div
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:1:18, endln:1:23
   |vpiProcess:
   \_Always: , line:5:1, endln:9:23
     |vpiParent:
@@ -278,26 +278,24 @@ Design: (unnamed)
       \_PropertyDecl: (work@tb.divide), line:24:3, endln:26:14
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@tb.divide.a.a), line:24:19, endln:24:22
+      \_RefTypespec: (work@tb.divide.a), line:24:19, endln:24:22
         |vpiParent:
         \_PropFormalDecl: (a), line:24:23, endln:24:24
-        |vpiName:a
-        |vpiFullName:work@tb.divide.a.a
+        |vpiFullName:work@tb.divide.a
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:24:19, endln:24:22
     |vpiPropFormalDecl:
     \_PropFormalDecl: (n), line:24:30, endln:24:31
       |vpiParent:
       \_PropertyDecl: (work@tb.divide), line:24:3, endln:26:14
       |vpiName:n
       |vpiTypespec:
-      \_RefTypespec: (work@tb.divide.n.n), line:24:26, endln:24:29
+      \_RefTypespec: (work@tb.divide.n), line:24:26, endln:24:29
         |vpiParent:
         \_PropFormalDecl: (n), line:24:30, endln:24:31
-        |vpiName:n
-        |vpiFullName:work@tb.divide.n.n
+        |vpiFullName:work@tb.divide.n
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:24:26, endln:24:29
     |vpiPropertySpec:
     \_PropertySpec: , line:25:3, endln:25:52
       |vpiParent:
@@ -454,24 +452,24 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneDivider/dut.v, line:1:1, endln:10:10
   |vpiTypedef:
-  \_BitTypespec: 
+  \_BitTypespec: , line:24:19, endln:24:22
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneDivider/tb.v, line:1:1, endln:30:10
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:24:26, endln:24:29
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneDivider/tb.v, line:1:1, endln:30:10
     |vpiSigned:1
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:3, endln:2:6
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneDivider/tb.v, line:1:1, endln:30:10
   |vpiImportTypespec:
-  \_BitTypespec: 
+  \_BitTypespec: , line:24:19, endln:24:22
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:24:26, endln:24:29
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:3, endln:2:6
   |vpiImportTypespec:
   \_LogicNet: (work@tb.clk), line:2:7, endln:2:10
     |vpiParent:
@@ -482,7 +480,7 @@ Design: (unnamed)
       \_LogicNet: (work@tb.clk), line:2:7, endln:2:10
       |vpiFullName:work@tb.clk
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:3, endln:2:6
     |vpiName:clk
     |vpiFullName:work@tb.clk
     |vpiNetType:48
@@ -491,13 +489,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneDivider/tb.v, line:1:1, endln:30:10
     |vpiTypespec:
-    \_RefTypespec: (work@tb.div.logic), line:3:3, endln:3:8
+    \_RefTypespec: (work@tb.div), line:3:3, endln:3:8
       |vpiParent:
       \_LogicNet: (work@tb.div), line:3:9, endln:3:12
-      |vpiName:logic
-      |vpiFullName:work@tb.div.logic
+      |vpiFullName:work@tb.div
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:3, endln:2:6
     |vpiName:div
     |vpiFullName:work@tb.div
     |vpiNetType:36
@@ -506,13 +503,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneDivider/tb.v, line:1:1, endln:30:10
     |vpiTypespec:
-    \_RefTypespec: (work@tb.rstn.logic), line:4:3, endln:4:8
+    \_RefTypespec: (work@tb.rstn), line:4:3, endln:4:8
       |vpiParent:
       \_LogicNet: (work@tb.rstn), line:4:9, endln:4:13
-      |vpiName:logic
-      |vpiFullName:work@tb.rstn.logic
+      |vpiFullName:work@tb.rstn
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:3, endln:2:6
     |vpiName:rstn
     |vpiFullName:work@tb.rstn
     |vpiNetType:36

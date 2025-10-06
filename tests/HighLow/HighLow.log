@@ -293,7 +293,6 @@ ContAssign                                             1
 Design                                                 1
 GenIf                                                  4
 Identifier                                             7
-IntTypespec                                            1
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              4
@@ -303,21 +302,20 @@ Parameter                                              5
 Range                                                  1
 RefModule                                              4
 RefObj                                                15
-RefTypespec                                            2
+RefTypespec                                            1
 SourceFile                                             1
 SysFuncCall                                            5
 === UHDM Object Stats End ===
-[ERR:IG0801] Missing location information: 14, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 14, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HighLow/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/HighLow/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/HighLow/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
   |vpiParent:
@@ -348,7 +346,7 @@ Design: (unnamed)
       \_Parameter: (work@top.a), line:6:19, endln:6:25
       |vpiFullName:work@top.a
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:6:13, endln:6:18
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiParameter:
@@ -547,17 +545,13 @@ Design: (unnamed)
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
-  |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:6:13, endln:6:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiRange:
     \_Range: , line:6:13, endln:6:18
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:6:13, endln:6:18
       |vpiLeftRange:
       \_Constant: , line:6:14, endln:6:15
         |vpiParent:
@@ -574,17 +568,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@top)
-      |vpiParent:
-      \_PackedArrayTypespec: 
-      |vpiFullName:work@top
-      |vpiActual:
-      \_IntTypespec: 
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:6:13, endln:6:18
   |vpiImportTypespec:
   \_LogicNet: (work@top.ccc), line:12:10, endln:12:13
     |vpiParent:
@@ -744,6 +729,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0

@@ -39,16 +39,16 @@ ReturnStmt                                             5
 SourceFile                                             1
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/FuncCase/dut.sv:7:20: Bad relative location: Child: 28, RefTypespec,  Parent: 11, Function, num_operands.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/FuncCase/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/FuncCase/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
   |vpiParent:
@@ -69,11 +69,11 @@ Design: (unnamed)
       |vpiName:num_operands
     |vpiFullName:fpnew_pkg::num_operands
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:7:20, endln:7:32
       |vpiParent:
       \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:7:20, endln:7:32
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -82,7 +82,7 @@ Design: (unnamed)
       \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
       |vpiFullName:fpnew_pkg::num_operands
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:7:20, endln:7:32
     |vpiIODecl:
     \_IODecl: (grp), line:7:56, endln:7:59
       |vpiParent:
@@ -90,11 +90,11 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:grp
       |vpiTypedef:
-      \_RefTypespec: (fpnew_pkg::num_operands::grp::opgroup_e), line:7:46, endln:7:55
+      \_RefTypespec: (fpnew_pkg::num_operands::grp::fpnew_pkg::opgroup_e), line:7:46, endln:7:55
         |vpiParent:
         \_IODecl: (grp), line:7:56, endln:7:59
-        |vpiName:opgroup_e
-        |vpiFullName:fpnew_pkg::num_operands::grp::opgroup_e
+        |vpiName:fpnew_pkg::opgroup_e
+        |vpiFullName:fpnew_pkg::num_operands::grp::fpnew_pkg::opgroup_e
         |vpiActual:
         \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
     |vpiStmt:
@@ -235,7 +235,7 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:9, endln:4:14
       |vpiFullName:fpnew_pkg
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:14, endln:2:19
     |vpiEnumConst:
     \_EnumConst: (ADDMUL), line:3:5, endln:3:11
       |vpiParent:
@@ -269,13 +269,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:2
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:14, endln:2:19
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
     |vpiRange:
     \_Range: , line:2:20, endln:2:25
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:14, endln:2:19
       |vpiLeftRange:
       \_Constant: , line:2:21, endln:2:22
         |vpiParent:
@@ -313,7 +313,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EnumTypespec: , line:2:9, endln:4:14
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:14, endln:2:19
   |vpiImportTypespec:
   \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
   |vpiDefName:fpnew_pkg
@@ -448,6 +448,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0

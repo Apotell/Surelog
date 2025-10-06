@@ -120,17 +120,16 @@ StructVar                                              1
 TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
-[ERR:IG0805] ${SURELOG_DIR}/tests/NameCollisionBind/dut.sv:16:5: Parented to neither scope nor design: 31, IODecl, perfCounter.
-[ERR:IG0810] Invalid location: 5, InterfaceTypespec, PerformanceCounterIF.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllInterfaces:
 \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiParent:
@@ -194,13 +193,13 @@ Design: (unnamed)
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:work@CSR_Unit
   |vpiTypedef:
-  \_InterfaceTypespec: (PerformanceCounterIF)
+  \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
     |vpiParent:
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:
     \_Identifier: (PerformanceCounterIF)
       |vpiParent:
-      \_InterfaceTypespec: (PerformanceCounterIF)
+      \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
       |vpiName:PerformanceCounterIF
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
@@ -218,7 +217,7 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiImportTypespec:
-  \_InterfaceTypespec: (PerformanceCounterIF)
+  \_InterfaceTypespec: (PerformanceCounterIF), line:21:5, endln:21:25
   |vpiImportTypespec:
   \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:21:26, endln:21:29
   |vpiImportTypespec:
@@ -285,7 +284,7 @@ Design: (unnamed)
       |vpiActual:
       \_LogicNet: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
 |vpiTypedef:
-\_IntTypespec: 
+\_IntTypespec: , line:2:9, endln:2:12
   |vpiParent:
   \_Design: (unnamed)
   |vpiSigned:1
@@ -304,7 +303,7 @@ Design: (unnamed)
     \_TypedefTypespec: (DataPath), line:2:13, endln:2:21
     |vpiFullName:DataPath
     |vpiActual:
-    \_IntTypespec: 
+    \_IntTypespec: , line:2:9, endln:2:12
 |vpiTypedef:
 \_TypedefTypespec: (PerfCounterPath), line:8:3, endln:8:18
   |vpiParent:
@@ -349,6 +348,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0

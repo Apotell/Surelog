@@ -164,16 +164,16 @@ SysFuncCall                                            1
 TypedefTypespec                                        2
 TypespecMember                                         3
 === UHDM Object Stats End ===
-[ERR:IG0804] Missing/invalid file: 29, RefTypespec, fourty_two_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
   |vpiParent:
@@ -307,7 +307,7 @@ Design: (unnamed)
       \_TypespecMember: (foo), line:2:16, endln:2:19
       |vpiFullName:foo
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:3, endln:2:8
   |vpiTypespecMember:
   \_TypespecMember: (bar), line:3:16, endln:3:19
     |vpiParent:
@@ -319,15 +319,15 @@ Design: (unnamed)
       \_TypespecMember: (bar), line:3:16, endln:3:19
       |vpiFullName:bar
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:3:3, endln:3:8
 |vpiTypedef:
-\_LogicTypespec: 
+\_LogicTypespec: , line:2:3, endln:2:8
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:2:9, endln:2:15
     |vpiParent:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:2:3, endln:2:8
     |vpiLeftRange:
     \_Constant: , line:2:10, endln:2:12
       |vpiParent:
@@ -345,13 +345,13 @@ Design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
-\_LogicTypespec: 
+\_LogicTypespec: , line:3:3, endln:3:8
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:3:9, endln:3:15
     |vpiParent:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:3:3, endln:3:8
     |vpiLeftRange:
     \_Constant: , line:3:10, endln:3:12
       |vpiParent:
@@ -395,21 +395,20 @@ Design: (unnamed)
     \_StructTypespec: , line:6:9, endln:8:2
     |vpiName:pair
     |vpiTypespec:
-    \_RefTypespec: (pair.fourty_two_t), line:7:3, endln:7:21
+    \_RefTypespec: (pair), line:7:3, endln:7:21
       |vpiParent:
       \_TypespecMember: (pair), line:7:22, endln:7:26
-      |vpiName:fourty_two_t
-      |vpiFullName:pair.fourty_two_t
+      |vpiFullName:pair
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:7:3, endln:7:21
 |vpiTypedef:
-\_PackedArrayTypespec: 
+\_PackedArrayTypespec: , line:7:3, endln:7:21
   |vpiParent:
   \_Design: (unnamed)
   |vpiRange:
   \_Range: , line:7:16, endln:7:21
     |vpiParent:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:7:3, endln:7:21
     |vpiLeftRange:
     \_Constant: , line:7:17, endln:7:18
       |vpiParent:
@@ -429,7 +428,7 @@ Design: (unnamed)
   |vpiElemTypespec:
   \_RefTypespec: (fourty_two_t), line:4:3, endln:4:15
     |vpiParent:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:7:3, endln:7:21
     |vpiName:fourty_two_t
     |vpiActual:
     \_TypedefTypespec: (fourty_two_t), line:4:3, endln:4:15
@@ -443,6 +442,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

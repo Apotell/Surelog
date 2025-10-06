@@ -62,17 +62,16 @@ Range                                                  1
 RefTypespec                                            2
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv:3:13: Bad relative location: Child: 14, RefTypespec,  Parent: 6, Function, foo.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv Missing location information: 16, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
   |vpiParent:
@@ -93,13 +92,13 @@ Design: (unnamed)
       |vpiName:foo
     |vpiFullName:work@dut.foo
     |vpiTypedef:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:3:13, endln:3:18
       |vpiParent:
       \_Function: (work@dut.foo), line:3:4, endln:5:15
       |vpiRange:
       \_Range: , line:3:13, endln:3:18
         |vpiParent:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:3:13, endln:3:18
         |vpiLeftRange:
         \_Constant: , line:3:14, endln:3:15
           |vpiParent:
@@ -117,7 +116,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:3:13, endln:3:18
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@dut.foo), line:3:13, endln:3:18
@@ -125,7 +124,7 @@ Design: (unnamed)
       \_Function: (work@dut.foo), line:3:4, endln:5:15
       |vpiFullName:work@dut.foo
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:3:13, endln:3:18
   |vpiInternalScope:
   \_Function: (work@dut.bar), line:7:4, endln:9:15
     |vpiParent:
@@ -169,6 +168,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

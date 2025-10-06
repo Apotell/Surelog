@@ -26,17 +26,17 @@ StringTypespec                                         2
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/PackageDpi/dut.sv:3:33: Bad relative location: Child: 11, RefTypespec,  Parent: 8, FunctionDecl, uvm_hdl_check_path.
-[ERR:IG0805] ${SURELOG_DIR}/tests/PackageDpi/dut.sv:3:63: Parented to neither scope nor design: 12, IODecl, path.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageDpi/slpp_unit/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/PackageDpi/dut.sv:17:1: Unsupported Typespec: id:35, type:RefTypespec, name:uvm_object_wrapper.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PackageDpi/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
   |vpiParent:
@@ -66,7 +66,7 @@ Design: (unnamed)
         \_IntVar: (pack::toto::DO_NOT_CATCH), line:21:18, endln:21:30
         |vpiFullName:pack::toto::DO_NOT_CATCH
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:21:14, endln:21:17
       |vpiName:DO_NOT_CATCH
       |vpiFullName:pack::toto::DO_NOT_CATCH
       |vpiSigned:1
@@ -82,12 +82,12 @@ Design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:21:14, endln:21:17
       |vpiParent:
       \_ClassDefn: (pack::toto), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:20:1, endln:22:9
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:21:14, endln:21:17
     |vpiImportTypespec:
     \_IntVar: (pack::toto::DO_NOT_CATCH), line:21:18, endln:21:30
   |vpiTypedef:
@@ -98,12 +98,12 @@ Design: (unnamed)
     |vpiClassDefn:
     \_ClassDefn: (pack::toto), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:20:1, endln:22:9
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:33, endln:3:36
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StringTypespec: 
+  \_StringTypespec: , line:3:56, endln:3:62
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
   |vpiTypedef:
@@ -143,31 +143,31 @@ Design: (unnamed)
       |vpiActual:
       \_EnumTypespec: , line:7:9, endln:12:17
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_object_wrapper)
+  \_UnsupportedTypespec: (uvm_object_wrapper), line:17:1, endln:17:19
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
     |vpiName:uvm_object_wrapper
   |vpiTypedef:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:17:1, endln:17:40
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
     |vpiArrayType:4
     |vpiElemTypespec:
     \_RefTypespec: (pack::uvm_object_wrapper), line:17:1, endln:17:19
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:17:1, endln:17:40
       |vpiName:uvm_object_wrapper
       |vpiFullName:pack::uvm_object_wrapper
       |vpiActual:
-      \_UnsupportedTypespec: (uvm_object_wrapper)
+      \_UnsupportedTypespec: (uvm_object_wrapper), line:17:1, endln:17:19
   |vpiImportTypespec:
   \_ClassDefn: (pack::toto), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:20:1, endln:22:9
   |vpiImportTypespec:
   \_ClassTypespec: (toto)
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:33, endln:3:36
   |vpiImportTypespec:
-  \_StringTypespec: 
+  \_StringTypespec: , line:3:56, endln:3:62
   |vpiImportTypespec:
   \_EnumTypespec: , line:7:9, endln:12:17
   |vpiImportTypespec:
@@ -182,7 +182,7 @@ Design: (unnamed)
       \_LogicNet: (pack::uvm_aa_string_key), line:5:8, endln:5:25
       |vpiFullName:pack::uvm_aa_string_key
       |vpiActual:
-      \_StringTypespec: 
+      \_StringTypespec: , line:3:56, endln:3:62
     |vpiName:uvm_aa_string_key
     |vpiFullName:pack::uvm_aa_string_key
   |vpiImportTypespec:
@@ -200,9 +200,9 @@ Design: (unnamed)
     |vpiName:m_uvm_core_state
     |vpiFullName:pack::m_uvm_core_state
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_object_wrapper)
+  \_UnsupportedTypespec: (uvm_object_wrapper), line:17:1, endln:17:19
   |vpiImportTypespec:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:17:1, endln:17:40
   |vpiImportTypespec:
   \_LogicNet: (pack::uvm_deferred_init), line:17:20, endln:17:37
     |vpiParent:
@@ -213,7 +213,7 @@ Design: (unnamed)
       \_LogicNet: (pack::uvm_deferred_init), line:17:20, endln:17:37
       |vpiFullName:pack::uvm_deferred_init
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:17:1, endln:17:40
     |vpiName:uvm_deferred_init
     |vpiFullName:pack::uvm_deferred_init
   |vpiImportTypespec:
@@ -226,7 +226,7 @@ Design: (unnamed)
       \_LogicNet: (pack::DO_NOT_CATCH_2), line:24:18, endln:24:32
       |vpiFullName:pack::DO_NOT_CATCH_2
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:33, endln:3:36
     |vpiName:DO_NOT_CATCH_2
     |vpiFullName:pack::DO_NOT_CATCH_2
   |vpiDefName:pack
@@ -252,7 +252,7 @@ Design: (unnamed)
       \_FunctionDecl: (pack::uvm_hdl_check_path), line:3:1, endln:3:69
       |vpiFullName:pack::uvm_hdl_check_path
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:33, endln:3:36
     |vpiIODecl:
     \_IODecl: (path), line:3:63, endln:3:67
       |vpiParent:
@@ -260,13 +260,12 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:path
       |vpiTypedef:
-      \_RefTypespec: (pack::uvm_hdl_check_path::path::string), line:3:56, endln:3:62
+      \_RefTypespec: (pack::uvm_hdl_check_path::path), line:3:56, endln:3:62
         |vpiParent:
         \_IODecl: (path), line:3:63, endln:3:67
-        |vpiName:string
-        |vpiFullName:pack::uvm_hdl_check_path::path::string
+        |vpiFullName:pack::uvm_hdl_check_path::path
         |vpiActual:
-        \_StringTypespec: 
+        \_StringTypespec: , line:3:56, endln:3:62
   |vpiNet:
   \_LogicNet: (pack::uvm_aa_string_key), line:5:8, endln:5:25
   |vpiNet:
@@ -278,6 +277,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

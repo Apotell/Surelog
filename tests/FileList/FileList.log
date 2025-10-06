@@ -228,20 +228,21 @@ ReturnStmt                                             1
 SourceFile                                             2
 SysFuncCall                                            1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/FileList/pack.sv:3:21: Bad relative location: Child: 12, RefTypespec,  Parent: 9, Function, vbits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileList/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/FileList/pack.sv
+\_SourceFile: (pack.sv), file:${SURELOG_DIR}/tests/FileList/pack.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:pack.sv
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/FileList/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/FileList/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: prim_util_pkg (prim_util_pkg), file:${SURELOG_DIR}/tests/FileList/pack.sv, line:1:1, endln:7:11
   |vpiParent:
@@ -262,12 +263,12 @@ Design: (unnamed)
       |vpiName:vbits
     |vpiFullName:prim_util_pkg::vbits
     |vpiTypedef:
-    \_IntegerTypespec: 
+    \_IntegerTypespec: , line:3:21, endln:3:28
       |vpiParent:
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntegerTypespec: 
+    \_IntegerTypespec: , line:3:21, endln:3:28
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -276,7 +277,7 @@ Design: (unnamed)
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiFullName:prim_util_pkg::vbits
       |vpiActual:
-      \_IntegerTypespec: 
+      \_IntegerTypespec: , line:3:21, endln:3:28
     |vpiIODecl:
     \_IODecl: (value), line:3:43, endln:3:48
       |vpiParent:
@@ -289,7 +290,7 @@ Design: (unnamed)
         \_IODecl: (value), line:3:43, endln:3:48
         |vpiFullName:prim_util_pkg::vbits::value
         |vpiActual:
-        \_IntegerTypespec: 
+        \_IntegerTypespec: , line:3:21, endln:3:28
     |vpiStmt:
     \_ReturnStmt: , line:4:5, endln:4:44
       |vpiParent:
@@ -379,13 +380,13 @@ Design: (unnamed)
       |STRING:vbits
       |vpiConstType:8
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:6:1, endln:6:6
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileList/dut.sv, line:1:1, endln:11:10
     |vpiRange:
     \_Range: , line:6:7, endln:6:21
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:6:1, endln:6:6
       |vpiLeftRange:
       \_Operation: , line:6:8, endln:6:18
         |vpiParent:
@@ -441,7 +442,7 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@foo.out
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:6:1, endln:6:6
   |vpiImportTypespec:
   \_LogicNet: (work@foo.a), line:6:22, endln:6:23
     |vpiParent:
@@ -452,7 +453,7 @@ Design: (unnamed)
       \_LogicNet: (work@foo.a), line:6:22, endln:6:23
       |vpiFullName:work@foo.a
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:6:1, endln:6:6
     |vpiName:a
     |vpiFullName:work@foo.a
     |vpiNetType:36
@@ -574,6 +575,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1

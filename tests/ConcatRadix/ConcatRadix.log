@@ -88,7 +88,6 @@ Constant                                               5
 Design                                                 1
 GenIf                                                  1
 Identifier                                             1
-IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         2
 Operation                                              2
@@ -98,21 +97,20 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            2
+RefTypespec                                            1
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0801] Missing location information: 11, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 11, RefTypespec, .
-[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Unbound: 24, RefModule, mybar.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Null Actual: id:22, type:RefModule, name:mybar.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
   |vpiParent:
@@ -132,7 +130,7 @@ Design: (unnamed)
       \_Parameter: (work@test.foo), line:3:17, endln:3:35
       |vpiFullName:work@test.foo
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:3:11, endln:3:16
     |vpiName:foo
     |vpiFullName:work@test.foo
   |vpiParamAssign:
@@ -181,17 +179,13 @@ Design: (unnamed)
       |vpiName:mybar
       |vpiDefName:work@bar
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-  |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:3:11, endln:3:16
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
     |vpiRange:
     \_Range: , line:3:11, endln:3:16
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:3:11, endln:3:16
       |vpiLeftRange:
       \_Constant: , line:3:12, endln:3:13
         |vpiParent:
@@ -208,17 +202,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@test)
-      |vpiParent:
-      \_PackedArrayTypespec: 
-      |vpiFullName:work@test
-      |vpiActual:
-      \_IntTypespec: 
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:3:11, endln:3:16
   |vpiDefName:work@test
   |vpiGenStmt:
   \_GenIf: , line:5:1, endln:7:4
@@ -257,6 +242,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

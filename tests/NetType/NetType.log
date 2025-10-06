@@ -232,18 +232,18 @@ TypedefTypespec                                        7
 TypespecMember                                         2
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/NetType/dut.sv:3:20: Bad relative location: Child: 41, RefTypespec,  Parent: 38, Function, my_function.
-[ERR:IG0807] ${SURELOG_DIR}/tests/NetType/dut.sv:28:20: Bad relative location: Child: 44, RefTypespec, T Parent: 42, Function, Tsum.
-[ERR:IG0807] ${SURELOG_DIR}/tests/NetType/dut.sv:41:20: Bad relative location: Child: 77, RefTypespec,  Parent: 74, Function, my_function2.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Unsupported Typespec: id:17, type:RefTypespec, name:some_other_type.
+[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:65, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/NetType/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/NetType/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
   |vpiParent:
@@ -273,7 +273,7 @@ Design: (unnamed)
   \_RealVar: (work@dut.my_real_net), line:13:13, endln:13:24
   |vpiDefName:work@dut
 |vpiTypedef:
-\_BitTypespec: 
+\_BitTypespec: , line:6:9, endln:6:12
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypedef:
@@ -291,9 +291,9 @@ Design: (unnamed)
     \_TypedefTypespec: (net_bit), line:6:13, endln:6:20
     |vpiFullName:net_bit
     |vpiActual:
-    \_BitTypespec: 
+    \_BitTypespec: , line:6:9, endln:6:12
 |vpiTypedef:
-\_RealTypespec: 
+\_RealTypespec: , line:9:9, endln:9:13
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypedef:
@@ -311,7 +311,7 @@ Design: (unnamed)
     \_TypedefTypespec: (my_real), line:9:14, endln:9:21
     |vpiFullName:my_real
     |vpiActual:
-    \_RealTypespec: 
+    \_RealTypespec: , line:9:9, endln:9:13
 |vpiTypedef:
 \_TypedefTypespec: (myalias), line:18:25, endln:18:32
   |vpiParent:
@@ -328,9 +328,9 @@ Design: (unnamed)
     |vpiName:some_other_type
     |vpiFullName:myalias.some_other_type
     |vpiActual:
-    \_UnsupportedTypespec: (some_other_type)
+    \_UnsupportedTypespec: (some_other_type), line:18:9, endln:18:24
 |vpiTypedef:
-\_UnsupportedTypespec: (some_other_type)
+\_UnsupportedTypespec: (some_other_type), line:18:9, endln:18:24
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:some_other_type
@@ -365,7 +365,7 @@ Design: (unnamed)
       \_TypespecMember: (field1), line:23:8, endln:23:14
       |vpiFullName:field1
       |vpiActual:
-      \_RealTypespec: 
+      \_RealTypespec: , line:9:9, endln:9:13
   |vpiTypespecMember:
   \_TypespecMember: (field2), line:24:7, endln:24:13
     |vpiParent:
@@ -377,7 +377,7 @@ Design: (unnamed)
       \_TypespecMember: (field2), line:24:7, endln:24:13
       |vpiFullName:field2
       |vpiActual:
-      \_BitTypespec: 
+      \_BitTypespec: , line:6:9, endln:6:12
 |vpiTypedef:
 \_TypedefTypespec: (wT), line:34:11, endln:34:13
   |vpiParent:
@@ -427,30 +427,30 @@ Design: (unnamed)
     \_TypedefTypespec: (my_real), line:39:14, endln:39:21
     |vpiFullName:my_real
     |vpiActual:
-    \_RealTypespec: 
+    \_RealTypespec: , line:9:9, endln:9:13
 |vpiTypedef:
-\_ArrayTypespec: 
+\_ArrayTypespec: , line:28:34, endln:28:44
   |vpiParent:
   \_Design: (unnamed)
   |vpiArrayType:2
   |vpiElemTypespec:
   \_RefTypespec: (T), line:28:34, endln:28:35
     |vpiParent:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:28:34, endln:28:44
     |vpiName:T
     |vpiActual:
     \_TypedefTypespec: (T), line:25:3, endln:25:4
 |vpiTypedef:
-\_ArrayTypespec: 
+\_ArrayTypespec: , line:41:44, endln:41:58
   |vpiParent:
   \_Design: (unnamed)
   |vpiArrayType:2
   |vpiElemTypespec:
   \_RefTypespec: , line:41:44, endln:41:48
     |vpiParent:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:41:44, endln:41:58
     |vpiActual:
-    \_RealTypespec: 
+    \_RealTypespec: , line:41:20, endln:41:24
 |vpiTypedef:
 \_ModuleTypespec: (dut)
   |vpiParent:
@@ -468,11 +468,11 @@ Design: (unnamed)
     \_Function: (my_function), line:3:1, endln:4:12
     |vpiName:my_function
   |vpiTypedef:
-  \_BitTypespec: 
+  \_BitTypespec: , line:3:20, endln:3:23
     |vpiParent:
     \_Function: (my_function), line:3:1, endln:4:12
   |vpiImportTypespec:
-  \_BitTypespec: 
+  \_BitTypespec: , line:3:20, endln:3:23
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
@@ -482,7 +482,7 @@ Design: (unnamed)
     \_Function: (my_function), line:3:1, endln:4:12
     |vpiFullName:my_function
     |vpiActual:
-    \_BitTypespec: 
+    \_BitTypespec: , line:3:20, endln:3:23
 |vpiTaskFunc:
 \_Function: (Tsum), line:28:1, endln:32:12
   |vpiParent:
@@ -513,7 +513,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:Tsum.i.i
           |vpiActual:
-          \_UnsupportedTypespec: (i)
+          \_UnsupportedTypespec: (i), line:30:19, endln:30:20
         |vpiName:i
         |vpiFullName:Tsum.i
       |vpiVariables:
@@ -581,12 +581,12 @@ Design: (unnamed)
             \_TypespecMember: (field1), line:23:8, endln:23:14
           |vpiName:Tsum.field1
     |vpiTypedef:
-    \_UnsupportedTypespec: (i)
+    \_UnsupportedTypespec: (i), line:30:19, endln:30:20
       |vpiParent:
       \_Begin: (Tsum)
       |vpiName:i
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (i)
+    \_UnsupportedTypespec: (i), line:30:19, endln:30:20
     |vpiStmt:
     \_Assignment: , line:29:3, endln:29:20
       |vpiParent:
@@ -659,13 +659,12 @@ Design: (unnamed)
         |STRING:unsized
         |vpiConstType:6
     |vpiTypedef:
-    \_RefTypespec: (Tsum.driver.T), line:28:34, endln:28:35
+    \_RefTypespec: (Tsum.driver), line:28:34, endln:28:35
       |vpiParent:
       \_IODecl: (driver), line:28:36, endln:28:42
-      |vpiName:T
-      |vpiFullName:Tsum.driver.T
+      |vpiFullName:Tsum.driver
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:28:34, endln:28:44
   |vpiStmt:
   \_Begin: (Tsum)
 |vpiTaskFunc:
@@ -678,11 +677,11 @@ Design: (unnamed)
     \_Function: (my_function2), line:41:1, endln:42:12
     |vpiName:my_function2
   |vpiTypedef:
-  \_RealTypespec: 
+  \_RealTypespec: , line:41:20, endln:41:24
     |vpiParent:
     \_Function: (my_function2), line:41:1, endln:42:12
   |vpiImportTypespec:
-  \_RealTypespec: 
+  \_RealTypespec: , line:41:20, endln:41:24
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
@@ -692,7 +691,7 @@ Design: (unnamed)
     \_Function: (my_function2), line:41:1, endln:42:12
     |vpiFullName:my_function2
     |vpiActual:
-    \_RealTypespec: 
+    \_RealTypespec: , line:41:20, endln:41:24
   |vpiIODecl:
   \_IODecl: (driver), line:41:49, endln:41:55
     |vpiParent:
@@ -724,10 +723,10 @@ Design: (unnamed)
       \_IODecl: (driver), line:41:49, endln:41:55
       |vpiFullName:my_function2.driver
       |vpiActual:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:41:44, endln:41:58
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0

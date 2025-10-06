@@ -179,14 +179,16 @@ TypespecMember                                         7
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadScope/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/BadScope/dut.sv:17:5: Unsupported Typespec: id:32, type:RefTypespec, name:priv_lvl_e.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/BadScope/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/BadScope/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
   |vpiParent:
@@ -228,7 +230,7 @@ Design: (unnamed)
         \_TypespecMember: (A), line:5:16, endln:5:17
         |vpiFullName:pack::A
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:5:5, endln:5:10
     |vpiTypespecMember:
     \_TypespecMember: (B), line:6:16, endln:6:17
       |vpiParent:
@@ -240,9 +242,9 @@ Design: (unnamed)
         \_TypespecMember: (B), line:6:16, endln:6:17
         |vpiFullName:pack::B
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:5:5, endln:5:10
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:5:5, endln:5:10
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
   |vpiImportTypespec:
@@ -250,7 +252,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:4:10, endln:7:4
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:5:5, endln:5:10
   |vpiDefName:pack
 |vpiAllModules:
 \_Module: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
@@ -304,7 +306,7 @@ Design: (unnamed)
           |vpiName:mie
           |vpiFullName:work@top3.mie
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:21:42, endln:21:45
       |vpiOperand:
       \_TaggedPattern: , line:22:43, endln:22:53
         |vpiParent:
@@ -324,7 +326,7 @@ Design: (unnamed)
           |vpiName:mpie
           |vpiFullName:work@top3.mpie
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:21:42, endln:21:45
       |vpiOperand:
       \_TaggedPattern: , line:23:43, endln:23:59
         |vpiParent:
@@ -344,7 +346,7 @@ Design: (unnamed)
           |vpiName:mpp
           |vpiFullName:work@top3.mpp
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:21:42, endln:21:45
       |vpiOperand:
       \_TaggedPattern: , line:24:43, endln:24:53
         |vpiParent:
@@ -364,7 +366,7 @@ Design: (unnamed)
           |vpiName:mprv
           |vpiFullName:work@top3.mprv
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:21:42, endln:21:45
       |vpiOperand:
       \_TaggedPattern: , line:25:43, endln:25:53
         |vpiParent:
@@ -384,7 +386,7 @@ Design: (unnamed)
           |vpiName:tw
           |vpiFullName:work@top3.tw
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:21:42, endln:21:45
     |vpiLhs:
     \_Parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:25:54
   |vpiTypedef:
@@ -436,7 +438,7 @@ Design: (unnamed)
         \_TypespecMember: (mie), line:15:16, endln:15:19
         |vpiFullName:work@top3.mie
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:15:5, endln:15:10
     |vpiTypespecMember:
     \_TypespecMember: (mpie), line:16:16, endln:16:20
       |vpiParent:
@@ -448,7 +450,7 @@ Design: (unnamed)
         \_TypespecMember: (mpie), line:16:16, endln:16:20
         |vpiFullName:work@top3.mpie
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:15:5, endln:15:10
     |vpiTypespecMember:
     \_TypespecMember: (mpp), line:17:16, endln:17:19
       |vpiParent:
@@ -461,7 +463,7 @@ Design: (unnamed)
         |vpiName:priv_lvl_e
         |vpiFullName:work@top3.mpp.priv_lvl_e
         |vpiActual:
-        \_UnsupportedTypespec: (priv_lvl_e)
+        \_UnsupportedTypespec: (priv_lvl_e), line:17:5, endln:17:15
     |vpiTypespecMember:
     \_TypespecMember: (mprv), line:18:16, endln:18:20
       |vpiParent:
@@ -473,7 +475,7 @@ Design: (unnamed)
         \_TypespecMember: (mprv), line:18:16, endln:18:20
         |vpiFullName:work@top3.mprv
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:15:5, endln:15:10
     |vpiTypespecMember:
     \_TypespecMember: (tw), line:19:16, endln:19:18
       |vpiParent:
@@ -485,18 +487,18 @@ Design: (unnamed)
         \_TypespecMember: (tw), line:19:16, endln:19:18
         |vpiFullName:work@top3.tw
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:15:5, endln:15:10
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:15:5, endln:15:10
     |vpiParent:
     \_Module: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
   |vpiTypedef:
-  \_UnsupportedTypespec: (priv_lvl_e)
+  \_UnsupportedTypespec: (priv_lvl_e), line:17:5, endln:17:15
     |vpiParent:
     \_Module: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
     |vpiName:priv_lvl_e
   |vpiTypedef:
-  \_StringTypespec: 
+  \_StringTypespec: , line:21:42, endln:21:45
     |vpiParent:
     \_Module: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
   |vpiImportTypespec:
@@ -506,11 +508,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:14:10, endln:20:4
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:15:5, endln:15:10
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (priv_lvl_e)
+  \_UnsupportedTypespec: (priv_lvl_e), line:17:5, endln:17:15
   |vpiImportTypespec:
-  \_StringTypespec: 
+  \_StringTypespec: , line:21:42, endln:21:45
   |vpiImportTypespec:
   \_LogicNet: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
     |vpiParent:
@@ -531,6 +533,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

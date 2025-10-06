@@ -290,7 +290,6 @@ GenIf                                                  3
 GenRegion                                              2
 GenVar                                                 2
 Identifier                                             6
-IntTypespec                                            1
 Module                                                 4
 ModuleTypespec                                         5
 Operation                                              5
@@ -300,21 +299,20 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              5
 RefObj                                                 6
-RefTypespec                                            2
+RefTypespec                                            1
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0801] Missing location information: 38, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 38, RefTypespec, .
-[ERR:IG0809] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:31:2: Unbound: 61, RefModule, bad.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:31:2: Null Actual: id:59, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:1:1, endln:2:10
   |vpiParent:
@@ -490,7 +488,7 @@ Design: (unnamed)
       \_Parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
       |vpiFullName:work@hierdefparam_b.addvalue
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:23:13, endln:23:18
     |vpiName:addvalue
     |vpiFullName:work@hierdefparam_b.addvalue
   |vpiParamAssign:
@@ -561,17 +559,13 @@ Design: (unnamed)
       |vpiName:bad
       |vpiDefName:work@BAD
   |vpiTypedef:
-  \_IntTypespec: 
-    |vpiParent:
-    \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
-  |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:23:13, endln:23:18
     |vpiParent:
     \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |vpiRange:
     \_Range: , line:23:13, endln:23:18
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:23:13, endln:23:18
       |vpiLeftRange:
       \_Constant: , line:23:14, endln:23:15
         |vpiParent:
@@ -588,17 +582,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@hierdefparam_b)
-      |vpiParent:
-      \_PackedArrayTypespec: 
-      |vpiFullName:work@hierdefparam_b
-      |vpiActual:
-      \_IntTypespec: 
   |vpiImportTypespec:
-  \_IntTypespec: 
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:23:13, endln:23:18
   |vpiDefName:work@hierdefparam_b
   |vpiGenStmt:
   \_GenIf: , line:24:3, endln:26:6
@@ -739,6 +724,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 1
 [WARNING] : 4
 [   NOTE] : 0

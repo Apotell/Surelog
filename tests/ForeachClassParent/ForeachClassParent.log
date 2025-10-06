@@ -94,17 +94,17 @@ SourceFile                                             1
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/ForeachClassParent/dut.sv:4:13: Bad relative location: Child: 26, RefTypespec, uvm_phase Parent: 25, ArrayVar, m_type_overrides.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ForeachClassParent/dut.sv Missing location information: 14, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachClassParent/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachClassParent/dut.sv:12:32: Unsupported Typespec: id:19, type:RefTypespec, name:index.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ForeachClassParent/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ForeachClassParent/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachClassParent/dut.sv, line:1:1, endln:18:11
   |vpiParent:
@@ -129,13 +129,12 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (uvm::root), file:${SURELOG_DIR}/tests/ForeachClassParent/dut.sv, line:3:1, endln:5:9
       |vpiTypespec:
-      \_RefTypespec: (uvm::root::m_type_overrides::uvm_phase), line:4:13, endln:4:22
+      \_RefTypespec: (uvm::root::m_type_overrides), line:4:13, endln:4:22
         |vpiParent:
         \_ArrayVar: (uvm::root::m_type_overrides), line:4:23, endln:4:39
-        |vpiName:uvm_phase
-        |vpiFullName:uvm::root::m_type_overrides::uvm_phase
+        |vpiFullName:uvm::root::m_type_overrides
         |vpiActual:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:4:13, endln:4:42
       |vpiName:m_type_overrides
       |vpiFullName:uvm::root::m_type_overrides
       |vpiAutomatic:1
@@ -144,20 +143,20 @@ Design: (unnamed)
     |vpiRegArray:
     \_ArrayVar: (uvm::root::m_type_overrides), line:4:23, endln:4:39
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:4:13, endln:4:42
       |vpiParent:
       \_ClassDefn: (uvm::root), file:${SURELOG_DIR}/tests/ForeachClassParent/dut.sv, line:3:1, endln:5:9
       |vpiArrayType:4
       |vpiElemTypespec:
       \_RefTypespec: (uvm::root::uvm_phase), line:4:13, endln:4:22
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:4:13, endln:4:42
         |vpiName:uvm_phase
         |vpiFullName:uvm::root::uvm_phase
         |vpiActual:
         \_ClassTypespec: (uvm_phase)
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:4:13, endln:4:42
     |vpiImportTypespec:
     \_ArrayVar: (uvm::root::m_type_overrides), line:4:23, endln:4:39
     |vpiDerivedClasses:
@@ -201,7 +200,7 @@ Design: (unnamed)
               |vpiName:index
               |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::index::index
               |vpiActual:
-              \_UnsupportedTypespec: (index)
+              \_UnsupportedTypespec: (index), line:12:32, endln:12:37
             |vpiName:index
             |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::index
           |vpiVariables:
@@ -217,18 +216,18 @@ Design: (unnamed)
           |vpiStmt:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:12:40, endln:13:9
         |vpiTypedef:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:10:12, endln:10:16
           |vpiParent:
           \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
         |vpiTypedef:
-        \_UnsupportedTypespec: (index)
+        \_UnsupportedTypespec: (index), line:12:32, endln:12:37
           |vpiParent:
           \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
           |vpiName:index
         |vpiImportTypespec:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:10:12, endln:10:16
         |vpiImportTypespec:
-        \_UnsupportedTypespec: (index)
+        \_UnsupportedTypespec: (index), line:12:32, endln:12:37
         |vpiVisibility:1
         |vpiReturn:
         \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
@@ -236,7 +235,7 @@ Design: (unnamed)
           \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
           |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes
           |vpiActual:
-          \_VoidTypespec: 
+          \_VoidTypespec: , line:10:12, endln:10:16
         |vpiStmt:
         \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:12:6, endln:13:9
         |vpiInstance:
@@ -289,6 +288,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

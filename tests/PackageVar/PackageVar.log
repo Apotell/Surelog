@@ -240,23 +240,20 @@ RefTypespec                                            6
 SourceFile                                             1
 VoidTypespec                                           2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Failed to bind object: "id: 28, name: ovm_default_printer".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:28, name: ovm_default_printer".
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Failed to bind object: "id: 50, name: OVM_PRINT".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:50, name: OVM_PRINT".
-[ERR:IG0801] ${SURELOG_DIR}/tests/PackageVar/dut.sv Missing location information: 58, RefTypespec, .
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Unbound: 28, RefObj, ovm_default_printer.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Unbound: 50, RefObj, OVM_PRINT.
-[ERR:IG0801] ${SURELOG_DIR}/tests/PackageVar/dut.sv Missing location information: 17, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Null Actual: id:28, type:RefObj, name:ovm_default_printer.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Null Actual: id:50, type:RefObj, name:OVM_PRINT.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PackageVar/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PackageVar/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
   |vpiParent:
@@ -326,11 +323,11 @@ Design: (unnamed)
         |vpiName:print
       |vpiFullName:pack::ovm_object::print
       |vpiTypedef:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:15:17, endln:15:21
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
       |vpiImportTypespec:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:15:17, endln:15:21
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -340,7 +337,7 @@ Design: (unnamed)
         \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
         |vpiFullName:pack::ovm_object::print
         |vpiActual:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:15:17, endln:15:21
       |vpiIODecl:
       \_IODecl: (printer), line:15:40, endln:15:47
         |vpiParent:
@@ -573,11 +570,11 @@ Design: (unnamed)
                 \_FuncCall: (do_print), line:37:5, endln:37:22
                 |vpiName:do_print
       |vpiTypedef:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:23:10, endln:23:14
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
       |vpiImportTypespec:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:23:10, endln:23:14
       |vpiVisibility:1
       |vpiReturn:
       \_RefTypespec: (pack::ovm_object::print)
@@ -585,7 +582,7 @@ Design: (unnamed)
         \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
         |vpiFullName:pack::ovm_object::print
         |vpiActual:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:23:10, endln:23:14
       |vpiIODecl:
       \_IODecl: (printer), line:23:45, endln:23:52
         |vpiParent:
@@ -691,6 +688,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 8
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0

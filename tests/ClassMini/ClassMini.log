@@ -39,14 +39,16 @@ TaskDecl                                               1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMini/slpp_unit/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassMini/dut.sv:22:5: Unsupported Typespec: id:29, type:RefTypespec, name:pack::doorOpen.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ClassMini/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ClassMini/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:1:1, endln:19:11
   |vpiParent:
@@ -76,7 +78,7 @@ Design: (unnamed)
         \_IntVar: (pack::door::state), line:4:9, endln:4:14
         |vpiFullName:pack::door::state
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:4:5, endln:4:8
       |vpiName:state
       |vpiFullName:pack::door::state
       |vpiSigned:1
@@ -93,7 +95,7 @@ Design: (unnamed)
         \_IntVar: (pack::door::timer), line:5:9, endln:5:14
         |vpiFullName:pack::door::timer
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:4:5, endln:4:8
       |vpiName:timer
       |vpiFullName:pack::door::timer
       |vpiSigned:1
@@ -110,7 +112,7 @@ Design: (unnamed)
         \_LogicVar: (pack::door::open), line:6:11, endln:6:15
         |vpiFullName:pack::door::open
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:6:5, endln:6:10
       |vpiName:open
       |vpiFullName:pack::door::open
       |vpiAutomatic:1
@@ -126,7 +128,7 @@ Design: (unnamed)
         \_LogicVar: (pack::door::lock), line:6:16, endln:6:20
         |vpiFullName:pack::door::lock
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:6:5, endln:6:10
       |vpiName:lock
       |vpiFullName:pack::door::lock
       |vpiAutomatic:1
@@ -142,7 +144,7 @@ Design: (unnamed)
         \_LogicVar: (pack::door::clock), line:6:21, endln:6:26
         |vpiFullName:pack::door::clock
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:6:5, endln:6:10
       |vpiName:clock
       |vpiFullName:pack::door::clock
       |vpiAutomatic:1
@@ -232,24 +234,24 @@ Design: (unnamed)
       |vpiVirtual:1
       |vpiDPIPure:1
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:4:5, endln:4:8
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiSigned:1
     |vpiTypedef:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:6:5, endln:6:10
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
     |vpiImportTypespec:
     \_Task: (pack::door::door_fsm), line:10:5, endln:10:34
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:4:5, endln:4:8
     |vpiImportTypespec:
     \_IntVar: (pack::door::state), line:4:9, endln:4:14
     |vpiImportTypespec:
     \_IntVar: (pack::door::timer), line:5:9, endln:5:14
     |vpiImportTypespec:
-    \_LogicTypespec: 
+    \_LogicTypespec: , line:6:5, endln:6:10
     |vpiImportTypespec:
     \_LogicVar: (pack::door::open), line:6:11, endln:6:15
     |vpiImportTypespec:
@@ -392,12 +394,12 @@ Design: (unnamed)
     \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:21:1, endln:27:10
     |vpiName:work@door_mod
   |vpiTypedef:
-  \_UnsupportedTypespec: (pack::doorOpen)
+  \_UnsupportedTypespec: (pack::doorOpen), line:22:5, endln:22:19
     |vpiParent:
     \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:21:1, endln:27:10
     |vpiName:pack::doorOpen
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (pack::doorOpen)
+  \_UnsupportedTypespec: (pack::doorOpen), line:22:5, endln:22:19
   |vpiImportTypespec:
   \_LogicNet: (work@door_mod.open), line:22:20, endln:22:24
     |vpiParent:
@@ -409,7 +411,7 @@ Design: (unnamed)
       |vpiName:pack::doorOpen
       |vpiFullName:work@door_mod.open.pack::doorOpen
       |vpiActual:
-      \_UnsupportedTypespec: (pack::doorOpen)
+      \_UnsupportedTypespec: (pack::doorOpen), line:22:5, endln:22:19
     |vpiName:open
     |vpiFullName:work@door_mod.open
   |vpiDefName:work@door_mod
@@ -481,6 +483,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

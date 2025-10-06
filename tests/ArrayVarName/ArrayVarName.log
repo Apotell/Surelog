@@ -123,16 +123,16 @@ RefTypespec                                            5
 ReturnStmt                                             1
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/ArrayVarName/dut.sv:4:23: Bad relative location: Child: 9, RefTypespec,  Parent: 6, Function, get_a1.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayVarName/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
   |vpiParent:
@@ -152,7 +152,7 @@ Design: (unnamed)
       \_IntVar: (work@top.o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:1:19, endln:1:22
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
@@ -174,12 +174,12 @@ Design: (unnamed)
       \_Function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiFullName:work@top.get_a1
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:5:7, endln:5:10
         |vpiParent:
         \_Begin: (work@top.get_a1)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:5:7, endln:5:10
       |vpiImportTypespec:
       \_ArrayNet: (work@top.get_a1.a), line:5:11, endln:5:12
         |vpiParent:
@@ -190,7 +190,7 @@ Design: (unnamed)
           \_ArrayNet: (work@top.get_a1.a), line:5:11, endln:5:12
           |vpiFullName:work@top.get_a1.a
           |vpiActual:
-          \_ArrayTypespec: 
+          \_ArrayTypespec: , line:5:7, endln:5:26
         |vpiName:a
         |vpiFullName:work@top.get_a1.a
         |vpiSigned:1
@@ -244,12 +244,12 @@ Design: (unnamed)
             |UINT:1
             |vpiConstType:9
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:4:23, endln:4:26
       |vpiParent:
       \_Function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:4:23, endln:4:26
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -258,18 +258,18 @@ Design: (unnamed)
       \_Function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiFullName:work@top.get_a1
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:4:23, endln:4:26
     |vpiStmt:
     \_Begin: (work@top.get_a1)
   |vpiTypedef:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:5:7, endln:5:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:5:13, endln:5:16
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:5:7, endln:5:26
       |vpiRightRange:
       \_Operation: , line:5:14, endln:5:15
         |vpiParent:
@@ -286,21 +286,21 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:5:7, endln:5:10
       |vpiParent:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:5:7, endln:5:26
       |vpiFullName:work@top
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:5:7, endln:5:10
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:1:19, endln:1:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiSigned:1
   |vpiImportTypespec:
   \_Function: (work@top.get_a1), line:4:4, endln:7:15
   |vpiImportTypespec:
-  \_ArrayTypespec: 
+  \_ArrayTypespec: , line:5:7, endln:5:26
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:1:23, endln:1:24
   |vpiDefName:work@top
@@ -318,7 +318,7 @@ Design: (unnamed)
       \_Port: (o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:1:19, endln:1:22
   |vpiContAssign:
   \_ContAssign: , line:2:11, endln:2:23
     |vpiParent:
@@ -352,6 +352,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

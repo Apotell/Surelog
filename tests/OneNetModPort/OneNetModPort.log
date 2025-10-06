@@ -45,24 +45,21 @@ RefTypespec                                           14
 SourceFile                                             2
 SysFuncCall                                            9
 === UHDM Object Stats End ===
-[ERR:IG0805] ${SURELOG_DIR}/tests/OneNetModPort/dut.v:13:11: Parented to neither scope nor design: 160, IODecl, drive.
-[ERR:IG0805] ${SURELOG_DIR}/tests/OneNetModPort/dut.v:14:12: Parented to neither scope nor design: 161, IODecl, observe.
-[ERR:IG0805] ${SURELOG_DIR}/tests/OneNetModPort/dut.v:17:12: Parented to neither scope nor design: 162, IODecl, drive.
-[ERR:IG0805] ${SURELOG_DIR}/tests/OneNetModPort/dut.v:18:11: Parented to neither scope nor design: 163, IODecl, observe.
-[ERR:IG0810] Invalid location: 9, InterfaceTypespec, ConnectTB.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetModPort/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/OneNetModPort/dut.v
+\_SourceFile: (dut.v), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.v
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/OneNetModPort/tb.v
+\_SourceFile: (tb.v), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:tb.v
 |vpiAllInterfaces:
 \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
   |vpiParent:
@@ -77,13 +74,12 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
     |vpiTypespec:
-    \_RefTypespec: (work@ConnectTB.drive.logic), line:10:3, endln:10:8
+    \_RefTypespec: (work@ConnectTB.drive), line:10:3, endln:10:8
       |vpiParent:
       \_LogicVar: (work@ConnectTB.drive), line:10:9, endln:10:14
-      |vpiName:logic
-      |vpiFullName:work@ConnectTB.drive.logic
+      |vpiFullName:work@ConnectTB.drive
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:3, endln:10:8
     |vpiName:drive
     |vpiFullName:work@ConnectTB.drive
     |vpiRandType:1
@@ -93,13 +89,12 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
     |vpiTypespec:
-    \_RefTypespec: (work@ConnectTB.observe.logic), line:11:3, endln:11:8
+    \_RefTypespec: (work@ConnectTB.observe), line:11:3, endln:11:8
       |vpiParent:
       \_LogicVar: (work@ConnectTB.observe), line:11:9, endln:11:16
-      |vpiName:logic
-      |vpiFullName:work@ConnectTB.observe.logic
+      |vpiFullName:work@ConnectTB.observe
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:3, endln:10:8
     |vpiName:observe
     |vpiFullName:work@ConnectTB.observe
     |vpiRandType:1
@@ -109,11 +104,11 @@ Design: (unnamed)
   |vpiReg:
   \_LogicVar: (work@ConnectTB.observe), line:11:9, endln:11:16
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:10:3, endln:10:8
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:9:1, endln:20:13
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:10:3, endln:10:8
   |vpiImportTypespec:
   \_LogicVar: (work@ConnectTB.drive), line:10:9, endln:10:14
   |vpiImportTypespec:
@@ -128,7 +123,7 @@ Design: (unnamed)
       \_LogicNet: (work@ConnectTB.drive), line:10:9, endln:10:14
       |vpiFullName:work@ConnectTB.drive
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:3, endln:10:8
     |vpiName:drive
     |vpiFullName:work@ConnectTB.drive
     |vpiNetType:36
@@ -142,7 +137,7 @@ Design: (unnamed)
       \_LogicNet: (work@ConnectTB.observe), line:11:9, endln:11:16
       |vpiFullName:work@ConnectTB.observe
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:10:3, endln:10:8
     |vpiName:observe
     |vpiFullName:work@ConnectTB.observe
     |vpiNetType:36
@@ -628,11 +623,11 @@ Design: (unnamed)
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:26:1, endln:28:10
     |vpiName:work@SUB
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:26:19, endln:26:23
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:26:1, endln:28:10
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:26:19, endln:26:23
   |vpiImportTypespec:
   \_LogicNet: (work@SUB.inp), line:26:24, endln:26:27
     |vpiParent:
@@ -643,7 +638,7 @@ Design: (unnamed)
       \_LogicNet: (work@SUB.inp), line:26:24, endln:26:27
       |vpiFullName:work@SUB.inp
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:26:19, endln:26:23
     |vpiName:inp
     |vpiFullName:work@SUB.inp
     |vpiNetType:1
@@ -657,7 +652,7 @@ Design: (unnamed)
       \_LogicNet: (work@SUB.out), line:26:40, endln:26:43
       |vpiFullName:work@SUB.out
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:26:19, endln:26:23
     |vpiName:out
     |vpiFullName:work@SUB.out
     |vpiNetType:48
@@ -678,7 +673,7 @@ Design: (unnamed)
       \_Port: (inp), line:26:24, endln:26:27
       |vpiFullName:work@SUB.inp
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:26:19, endln:26:23
   |vpiPort:
   \_Port: (out), line:26:40, endln:26:43
     |vpiParent:
@@ -691,7 +686,7 @@ Design: (unnamed)
       \_Port: (out), line:26:40, endln:26:43
       |vpiFullName:work@SUB.out
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:26:19, endln:26:23
   |vpiContAssign:
   \_ContAssign: , line:27:10, endln:27:19
     |vpiParent:
@@ -868,11 +863,11 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:19, endln:2:23
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:2:1, endln:7:10
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:19, endln:2:23
   |vpiImportTypespec:
   \_LogicNet: (work@dut.i), line:2:24, endln:2:25
     |vpiParent:
@@ -883,7 +878,7 @@ Design: (unnamed)
       \_LogicNet: (work@dut.i), line:2:24, endln:2:25
       |vpiFullName:work@dut.i
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:19, endln:2:23
     |vpiName:i
     |vpiFullName:work@dut.i
     |vpiNetType:1
@@ -897,7 +892,7 @@ Design: (unnamed)
       \_LogicNet: (work@dut.o), line:2:38, endln:2:39
       |vpiFullName:work@dut.o
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:19, endln:2:23
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:48
@@ -936,7 +931,7 @@ Design: (unnamed)
       \_Port: (i), line:2:24, endln:2:25
       |vpiFullName:work@dut.i
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:19, endln:2:23
   |vpiPort:
   \_Port: (o), line:2:38, endln:2:39
     |vpiParent:
@@ -949,7 +944,7 @@ Design: (unnamed)
       \_Port: (o), line:2:38, endln:2:39
       |vpiFullName:work@dut.o
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:19, endln:2:23
   |vpiContAssign:
   \_ContAssign: , line:3:10, endln:3:26
     |vpiParent:
@@ -1166,6 +1161,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 5
+[  ERROR] : 0
 [WARNING] : 7
 [   NOTE] : 0

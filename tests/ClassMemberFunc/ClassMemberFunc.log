@@ -105,22 +105,20 @@ TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Failed to bind object: "id: 27, name: i".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Illegal implicit net "id:27, name: i".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Failed to bind object: "id: 22, name: rsrc".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Illegal implicit net "id:22, name: rsrc".
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Unbound: 27, RefObj, i.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Unbound: 22, RefObj, rsrc.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv Missing location information: 14, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberFunc/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Null Actual: id:27, type:RefObj, name:i.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Null Actual: id:22, type:RefObj, name:rsrc.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
   |vpiParent:
@@ -240,11 +238,11 @@ Design: (unnamed)
           |vpiName:rsrc
           |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rsrc
     |vpiTypedef:
-    \_VoidTypespec: 
+    \_VoidTypespec: , line:12:10, endln:12:14
       |vpiParent:
       \_Function: (pkg::uvm_sequencer_base::start_phase_sequence), line:12:1, endln:18:12
     |vpiImportTypespec:
-    \_VoidTypespec: 
+    \_VoidTypespec: , line:12:10, endln:12:14
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (pkg::uvm_sequencer_base::start_phase_sequence)
@@ -252,7 +250,7 @@ Design: (unnamed)
       \_Function: (pkg::uvm_sequencer_base::start_phase_sequence), line:12:1, endln:18:12
       |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence
       |vpiActual:
-      \_VoidTypespec: 
+      \_VoidTypespec: , line:12:10, endln:12:14
     |vpiStmt:
     \_Begin: (pkg::uvm_sequencer_base::start_phase_sequence)
     |vpiInstance:
@@ -291,6 +289,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 7
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0

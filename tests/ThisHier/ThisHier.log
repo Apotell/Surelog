@@ -62,7 +62,7 @@ n<> u<145> t<Top_level_rule> c<1> l<1:1> el<34:1>
                           n<> u<55> t<Blocking_assignment> p<56> c<54> l<13:5> el<13:31>
                             n<> u<54> t<Operator_assignment> p<55> c<48> l<13:5> el<13:31>
                               n<> u<48> t<Variable_lvalue> p<54> c<43> s<49> l<13:5> el<13:19>
-                                n<> u<43> t<Implicit_class_handle> p<48> c<42> s<45> l<13:5> el<13:9>
+                                n<this> u<43> t<Implicit_class_handle> p<48> c<42> s<45> l<13:5> el<13:9>
                                   n<> u<42> t<This_keyword> p<43> l<13:5> el<13:9>
                                 n<> u<45> t<Ps_or_hierarchical_identifier> p<48> c<44> s<47> l<13:10> el<13:19>
                                   n<threshold> u<44> t<STRING_CONST> p<45> l<13:10> el<13:19>
@@ -127,7 +127,7 @@ n<> u<145> t<Top_level_rule> c<1> l<1:1> el<34:1>
                       n<> u<129> t<Blocking_assignment> p<130> c<128> l<27:5> el<27:50>
                         n<> u<128> t<Operator_assignment> p<129> c<118> l<27:5> el<27:50>
                           n<> u<118> t<Variable_lvalue> p<128> c<112> s<119> l<27:5> el<27:29>
-                            n<> u<112> t<Implicit_class_handle> p<118> c<111> s<114> l<27:5> el<27:9>
+                            n<this> u<112> t<Implicit_class_handle> p<118> c<111> s<114> l<27:5> el<27:9>
                               n<> u<111> t<This_keyword> p<112> l<27:5> el<27:9>
                             n<> u<114> t<Ps_or_hierarchical_identifier> p<118> c<113> s<117> l<27:10> el<27:24>
                               n<m_predecessors> u<113> t<STRING_CONST> p<114> l<27:10> el<27:24>
@@ -138,7 +138,7 @@ n<> u<145> t<Top_level_rule> c<1> l<1:1> el<34:1>
                           n<> u<127> t<Expression> p<128> c<126> l<27:32> el<27:50>
                             n<> u<126> t<Primary> p<127> c<125> l<27:32> el<27:50>
                               n<> u<125> t<Complex_func_call> p<126> c<121> l<27:32> el<27:50>
-                                n<> u<121> t<Implicit_class_handle> p<125> c<120> s<122> l<27:32> el<27:37>
+                                n<super> u<121> t<Implicit_class_handle> p<125> c<120> s<122> l<27:32> el<27:37>
                                   n<> u<120> t<Super_keyword> p<121> l<27:32> el<27:37>
                                 n<m_successors> u<122> t<STRING_CONST> p<125> s<124> l<27:38> el<27:50>
                                 n<> u<124> t<Select> p<125> c<123> l<27:50> el<27:50>
@@ -179,21 +179,18 @@ SourceFile                                             1
 VarSelect                                              2
 VoidTypespec                                           2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ThisHier/dut.sv:27:25: Failed to bind object: "id: 23, name: size".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ThisHier/dut.sv:27:25: Illegal implicit net "id:23, name: size".
-[ERR:IG0807] ${SURELOG_DIR}/tests/ThisHier/dut.sv:4:11: Bad relative location: Child: 52, RefTypespec,  Parent: 51, ArrayVar, m_successors.
-[ERR:IG0807] ${SURELOG_DIR}/tests/ThisHier/dut.sv:20:11: Bad relative location: Child: 73, RefTypespec,  Parent: 72, ArrayVar, m_predecessors.
-[ERR:IG0801] ${SURELOG_DIR}/tests/ThisHier/dut.sv Missing location information: 58, RefTypespec, .
-[ERR:IG0801] ${SURELOG_DIR}/tests/ThisHier/dut.sv Missing location information: 17, RefTypespec, .
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ThisHier/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ThisHier/dut.sv:27:25: Null Actual: id:23, type:RefObj, name:size.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ThisHier/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ThisHier/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
   |vpiParent:
@@ -223,7 +220,7 @@ Design: (unnamed)
         \_ArrayVar: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
         |vpiFullName:uvm::uvm_object::m_successors
         |vpiActual:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:4:11, endln:4:39
       |vpiName:m_successors
       |vpiFullName:uvm::uvm_object::m_successors
       |vpiAutomatic:1
@@ -232,18 +229,18 @@ Design: (unnamed)
     |vpiRegArray:
     \_ArrayVar: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
     |vpiTypedef:
-    \_BitTypespec: 
+    \_BitTypespec: , line:4:11, endln:4:14
       |vpiParent:
       \_ClassDefn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:4:11, endln:4:39
       |vpiParent:
       \_ClassDefn: (uvm::uvm_object), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:3:1, endln:5:9
       |vpiArrayType:3
       |vpiIndexTypespec:
       \_RefTypespec: (uvm::uvm_object::uvm_phase), line:4:28, endln:4:39
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:4:11, endln:4:39
         |vpiName:uvm_phase
         |vpiFullName:uvm::uvm_object::uvm_phase
         |vpiActual:
@@ -251,14 +248,14 @@ Design: (unnamed)
       |vpiElemTypespec:
       \_RefTypespec: (uvm::uvm_object), line:4:11, endln:4:14
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:4:11, endln:4:39
         |vpiFullName:uvm::uvm_object
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:4:11, endln:4:14
     |vpiImportTypespec:
-    \_BitTypespec: 
+    \_BitTypespec: , line:4:11, endln:4:14
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:4:11, endln:4:39
     |vpiImportTypespec:
     \_ArrayVar: (uvm::uvm_object::m_successors), line:4:16, endln:4:28
     |vpiDerivedClasses:
@@ -281,7 +278,7 @@ Design: (unnamed)
           \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
           |vpiFullName:uvm::uvm_phase::m_predecessors
           |vpiActual:
-          \_ArrayTypespec: 
+          \_ArrayTypespec: , line:20:11, endln:20:41
         |vpiName:m_predecessors
         |vpiFullName:uvm::uvm_phase::m_predecessors
         |vpiAutomatic:1
@@ -300,11 +297,11 @@ Design: (unnamed)
           |vpiName:add
         |vpiFullName:uvm::uvm_phase::add
         |vpiTypedef:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:21:17, endln:21:21
           |vpiParent:
           \_Function: (uvm::uvm_phase::add), line:21:1, endln:21:28
         |vpiImportTypespec:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:21:17, endln:21:21
         |vpiMethod:1
         |vpiAccessType:2
         |vpiVisibility:1
@@ -314,7 +311,7 @@ Design: (unnamed)
           \_Function: (uvm::uvm_phase::add), line:21:1, endln:21:28
           |vpiFullName:uvm::uvm_phase::add
           |vpiActual:
-          \_VoidTypespec: 
+          \_VoidTypespec: , line:21:17, endln:21:21
       |vpiInternalScope:
       \_Function: (uvm::uvm_phase::add), line:24:1, endln:30:12
         |vpiParent:
@@ -326,11 +323,11 @@ Design: (unnamed)
           |vpiName:add
         |vpiFullName:uvm::uvm_phase::add
         |vpiTypedef:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:24:10, endln:24:14
           |vpiParent:
           \_Function: (uvm::uvm_phase::add), line:24:1, endln:30:12
         |vpiImportTypespec:
-        \_VoidTypespec: 
+        \_VoidTypespec: , line:24:10, endln:24:14
         |vpiVisibility:1
         |vpiReturn:
         \_RefTypespec: (uvm::uvm_phase::add)
@@ -338,7 +335,7 @@ Design: (unnamed)
           \_Function: (uvm::uvm_phase::add), line:24:1, endln:30:12
           |vpiFullName:uvm::uvm_phase::add
           |vpiActual:
-          \_VoidTypespec: 
+          \_VoidTypespec: , line:24:10, endln:24:14
         |vpiStmt:
         \_Assignment: , line:27:5, endln:27:50
           |vpiParent:
@@ -393,18 +390,18 @@ Design: (unnamed)
         |vpiInstance:
         \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:1:1, endln:33:11
       |vpiTypedef:
-      \_BitTypespec: 
+      \_BitTypespec: , line:20:11, endln:20:14
         |vpiParent:
         \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
       |vpiTypedef:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:20:11, endln:20:41
         |vpiParent:
         \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:19:1, endln:22:9
         |vpiArrayType:3
         |vpiIndexTypespec:
         \_RefTypespec: (uvm::uvm_phase::uvm_phase), line:20:30, endln:20:41
           |vpiParent:
-          \_ArrayTypespec: 
+          \_ArrayTypespec: , line:20:11, endln:20:41
           |vpiName:uvm_phase
           |vpiFullName:uvm::uvm_phase::uvm_phase
           |vpiActual:
@@ -412,16 +409,16 @@ Design: (unnamed)
         |vpiElemTypespec:
         \_RefTypespec: (uvm::uvm_phase), line:20:11, endln:20:14
           |vpiParent:
-          \_ArrayTypespec: 
+          \_ArrayTypespec: , line:20:11, endln:20:41
           |vpiFullName:uvm::uvm_phase
           |vpiActual:
-          \_BitTypespec: 
+          \_BitTypespec: , line:20:11, endln:20:14
       |vpiImportTypespec:
       \_Function: (uvm::uvm_phase::add), line:21:1, endln:21:28
       |vpiImportTypespec:
-      \_BitTypespec: 
+      \_BitTypespec: , line:20:11, endln:20:14
       |vpiImportTypespec:
-      \_ArrayTypespec: 
+      \_ArrayTypespec: , line:20:11, endln:20:41
       |vpiImportTypespec:
       \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:20:16, endln:20:30
       |vpiImportTypespec:
@@ -474,7 +471,7 @@ Design: (unnamed)
           \_IntVar: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
           |vpiFullName:uvm::uvm_barrier::threshold
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:10:10, endln:10:13
         |vpiName:threshold
         |vpiFullName:uvm::uvm_barrier::threshold
         |vpiSigned:1
@@ -527,14 +524,14 @@ Design: (unnamed)
               \_IntVar: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
             |vpiName:this.threshold
       |vpiTypedef:
-      \_IntTypespec: 
+      \_IntTypespec: , line:10:10, endln:10:13
         |vpiParent:
         \_ClassDefn: (uvm::uvm_barrier), file:${SURELOG_DIR}/tests/ThisHier/dut.sv, line:8:1, endln:17:9
         |vpiSigned:1
       |vpiImportTypespec:
       \_Function: (uvm::uvm_barrier::new), line:12:3, endln:13:31
       |vpiImportTypespec:
-      \_IntTypespec: 
+      \_IntTypespec: , line:10:10, endln:10:13
       |vpiImportTypespec:
       \_IntVar: (uvm::uvm_barrier::threshold), line:10:20, endln:10:29
       |vpiExtends:
@@ -598,6 +595,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 6
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

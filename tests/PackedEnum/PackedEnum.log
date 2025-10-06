@@ -107,16 +107,16 @@ StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
-[ERR:IG0804] Missing/invalid file: 24, RefTypespec, cstate_e.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnum/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PackedEnum/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
   |vpiParent:
@@ -136,7 +136,7 @@ Design: (unnamed)
       \_EnumTypespec: , line:2:12, endln:2:46
       |vpiFullName:work@dut
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:2:17, endln:2:22
     |vpiEnumConst:
     \_EnumConst: (c), line:2:24, endln:2:29
       |vpiParent:
@@ -154,7 +154,7 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:17, endln:2:22
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
   |vpiTypedef:
@@ -184,13 +184,12 @@ Design: (unnamed)
       \_StructTypespec: , line:4:4, endln:7:5
       |vpiName:class_esc_state
       |vpiTypespec:
-      \_RefTypespec: (work@dut.class_esc_state.cstate_e), line:5:7, endln:5:21
+      \_RefTypespec: (work@dut.class_esc_state), line:5:7, endln:5:21
         |vpiParent:
         \_TypespecMember: (class_esc_state), line:5:22, endln:5:37
-        |vpiName:cstate_e
-        |vpiFullName:work@dut.class_esc_state.cstate_e
+        |vpiFullName:work@dut.class_esc_state
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:5:7, endln:5:21
     |vpiTypespecMember:
     \_TypespecMember: (blah), line:6:19, endln:6:23
       |vpiParent:
@@ -202,15 +201,15 @@ Design: (unnamed)
         \_TypespecMember: (blah), line:6:19, endln:6:23
         |vpiFullName:work@dut.blah
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:6:7, endln:6:12
   |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:5:7, endln:5:21
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
     |vpiRange:
     \_Range: , line:5:16, endln:5:21
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:5:7, endln:5:21
       |vpiLeftRange:
       \_Constant: , line:5:17, endln:5:18
         |vpiParent:
@@ -230,19 +229,19 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@dut.cstate_e), line:2:38, endln:2:46
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:5:7, endln:5:21
       |vpiName:cstate_e
       |vpiFullName:work@dut.cstate_e
       |vpiActual:
       \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:6:7, endln:6:12
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
     |vpiRange:
     \_Range: , line:6:13, endln:6:18
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:6:7, endln:6:12
       |vpiLeftRange:
       \_Constant: , line:6:14, endln:6:15
         |vpiParent:
@@ -262,15 +261,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EnumTypespec: , line:2:12, endln:2:46
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:2:17, endln:2:22
   |vpiImportTypespec:
   \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
   |vpiImportTypespec:
   \_StructTypespec: , line:4:4, endln:7:5
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:5:7, endln:5:21
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:6:7, endln:6:12
   |vpiImportTypespec:
   \_StructNet: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
     |vpiParent:
@@ -297,6 +296,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

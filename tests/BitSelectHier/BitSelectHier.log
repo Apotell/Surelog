@@ -170,7 +170,7 @@ n<> u<179> t<Top_level_rule> c<1> l<1:1> el<48:1>
                           n<> u<163> t<Expression> p<164> c<162> l<43:10> el<43:43>
                             n<> u<162> t<Primary> p<163> c<161> l<43:10> el<43:43>
                               n<> u<161> t<Complex_func_call> p<162> c<153> l<43:10> el<43:43>
-                                n<> u<153> t<Implicit_class_handle> p<161> c<152> s<154> l<43:10> el<43:14>
+                                n<this> u<153> t<Implicit_class_handle> p<161> c<152> s<154> l<43:10> el<43:14>
                                   n<> u<152> t<This_keyword> p<153> l<43:10> el<43:14>
                                 n<in_use> u<154> t<STRING_CONST> p<161> s<158> l<43:15> el<43:21>
                                 n<> u<158> t<Constant_expression> p<161> c<157> s<159> l<43:22> el<43:23>
@@ -211,29 +211,22 @@ RefTypespec                                           14
 SourceFile                                             1
 UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Failed to bind object: "id: 20, name: top".
 [ERR:EL0535] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Illegal implicit net "id:20, name: top".
-[ERR:IG0801] Missing location information: 68, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 68, RefTypespec, .
-[ERR:IG0801] Missing location information: 76, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 76, RefTypespec, .
-[ERR:IG0807] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:16:20: Bad relative location: Child: 49, RefTypespec,  Parent: 41, Function, get_start_offset.
-[ERR:IG0801] Missing location information: 48, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 48, RefTypespec, .
-[ERR:IG0807] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:26:20: Bad relative location: Child: 60, RefTypespec,  Parent: 52, Function, get_end_offset.
-[ERR:IG0801] Missing location information: 59, RefTypespec, .
-[ERR:IG0804] Missing/invalid file: 59, RefTypespec, .
-[ERR:IG0807] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:36:1: Bad relative location: Child: 40, RefTypespec, uvm_mem_region Parent: 39, ArrayVar, in_use.
-[ERR:IG0809] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Unbound: 20, RefObj, top.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectHier/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:37:17: Unsupported Typespec: id:28, type:RefTypespec, name:uvm_mem_mam_cfg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:37:45: Unsupported Typespec: id:31, type:RefTypespec, name:uvm_mem_mam_cfg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:41:10: Unsupported Typespec: id:14, type:RefTypespec, name:uvm_mem_mam_cfg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:41:51: Unsupported Typespec: id:17, type:RefTypespec, name:uvm_mem_mam_cfg.
+[ERR:IG0809] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Null Actual: id:20, type:RefObj, name:top.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
   |vpiParent:
@@ -263,7 +256,7 @@ Design: (unnamed)
         \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
         |vpiFullName:pack::uvm_mem_region::Xstart_offsetX
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:5:14, endln:5:24
       |vpiName:Xstart_offsetX
       |vpiFullName:pack::uvm_mem_region::Xstart_offsetX
       |vpiAutomatic:1
@@ -279,7 +272,7 @@ Design: (unnamed)
         \_PackedArrayVar: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
         |vpiFullName:pack::uvm_mem_region::Xend_offsetX
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:6:14, endln:6:24
       |vpiName:Xend_offsetX
       |vpiFullName:pack::uvm_mem_region::Xend_offsetX
       |vpiAutomatic:1
@@ -296,11 +289,11 @@ Design: (unnamed)
         |vpiName:get_start_offset
       |vpiFullName:pack::uvm_mem_region::get_start_offset
       |vpiTypedef:
-      \_BitTypespec: 
+      \_BitTypespec: , line:16:20, endln:16:23
         |vpiParent:
         \_Function: (pack::uvm_mem_region::get_start_offset), line:16:4, endln:16:50
       |vpiImportTypespec:
-      \_BitTypespec: 
+      \_BitTypespec: , line:16:20, endln:16:23
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -310,7 +303,7 @@ Design: (unnamed)
         \_Function: (pack::uvm_mem_region::get_start_offset), line:16:4, endln:16:50
         |vpiFullName:pack::uvm_mem_region::get_start_offset
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:16:20, endln:16:30
     |vpiInternalScope:
     \_Function: (pack::uvm_mem_region::get_end_offset), line:26:4, endln:26:48
       |vpiParent:
@@ -322,11 +315,11 @@ Design: (unnamed)
         |vpiName:get_end_offset
       |vpiFullName:pack::uvm_mem_region::get_end_offset
       |vpiTypedef:
-      \_BitTypespec: 
+      \_BitTypespec: , line:26:20, endln:26:23
         |vpiParent:
         \_Function: (pack::uvm_mem_region::get_end_offset), line:26:4, endln:26:48
       |vpiImportTypespec:
-      \_BitTypespec: 
+      \_BitTypespec: , line:26:20, endln:26:23
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -336,15 +329,15 @@ Design: (unnamed)
         \_Function: (pack::uvm_mem_region::get_end_offset), line:26:4, endln:26:48
         |vpiFullName:pack::uvm_mem_region::get_end_offset
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:26:20, endln:26:30
     |vpiTypedef:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:16:20, endln:16:30
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiRange:
       \_Range: , line:16:24, endln:16:30
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:16:20, endln:16:30
         |vpiLeftRange:
         \_Constant: , line:16:25, endln:16:27
           |vpiParent:
@@ -362,20 +355,20 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiElemTypespec:
-      \_RefTypespec: (pack::uvm_mem_region)
+      \_RefTypespec: (pack::uvm_mem_region), line:16:20, endln:16:23
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:16:20, endln:16:30
         |vpiFullName:pack::uvm_mem_region
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:16:20, endln:16:23
     |vpiTypedef:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:26:20, endln:26:30
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiRange:
       \_Range: , line:26:24, endln:26:30
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:26:20, endln:26:30
         |vpiLeftRange:
         \_Constant: , line:26:25, endln:26:27
           |vpiParent:
@@ -393,24 +386,24 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiElemTypespec:
-      \_RefTypespec: (pack::uvm_mem_region)
+      \_RefTypespec: (pack::uvm_mem_region), line:26:20, endln:26:23
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:26:20, endln:26:30
         |vpiFullName:pack::uvm_mem_region
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:26:20, endln:26:23
     |vpiTypedef:
-    \_BitTypespec: 
+    \_BitTypespec: , line:5:14, endln:5:17
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
     |vpiTypedef:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:5:14, endln:5:24
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiRange:
       \_Range: , line:5:18, endln:5:24
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:5:14, endln:5:24
         |vpiLeftRange:
         \_Constant: , line:5:19, endln:5:21
           |vpiParent:
@@ -428,20 +421,20 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiElemTypespec:
-      \_RefTypespec: (pack::uvm_mem_region)
+      \_RefTypespec: (pack::uvm_mem_region), line:5:14, endln:5:17
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:5:14, endln:5:24
         |vpiFullName:pack::uvm_mem_region
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:5:14, endln:5:17
     |vpiTypedef:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:6:14, endln:6:24
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiRange:
       \_Range: , line:6:18, endln:6:24
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:6:14, endln:6:24
         |vpiLeftRange:
         \_Constant: , line:6:19, endln:6:21
           |vpiParent:
@@ -459,28 +452,28 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiElemTypespec:
-      \_RefTypespec: (pack::uvm_mem_region)
+      \_RefTypespec: (pack::uvm_mem_region), line:6:14, endln:6:17
         |vpiParent:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:6:14, endln:6:24
         |vpiFullName:pack::uvm_mem_region
         |vpiActual:
-        \_BitTypespec: 
+        \_BitTypespec: , line:5:14, endln:5:17
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_region::get_start_offset), line:16:4, endln:16:50
     |vpiImportTypespec:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:16:20, endln:16:30
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_region::get_end_offset), line:26:4, endln:26:48
     |vpiImportTypespec:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:26:20, endln:26:30
     |vpiImportTypespec:
-    \_BitTypespec: 
+    \_BitTypespec: , line:5:14, endln:5:17
     |vpiImportTypespec:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:5:14, endln:5:24
     |vpiImportTypespec:
     \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
     |vpiImportTypespec:
-    \_PackedArrayTypespec: 
+    \_PackedArrayTypespec: , line:6:14, endln:6:24
     |vpiImportTypespec:
     \_PackedArrayVar: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
     |vpiMethod:
@@ -526,13 +519,12 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiTypespec:
-      \_RefTypespec: (pack::uvm_mem_mam::in_use::uvm_mem_region), line:36:1, endln:36:15
+      \_RefTypespec: (pack::uvm_mem_mam::in_use), line:36:1, endln:36:15
         |vpiParent:
         \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
-        |vpiName:uvm_mem_region
-        |vpiFullName:pack::uvm_mem_mam::in_use::uvm_mem_region
+        |vpiFullName:pack::uvm_mem_mam::in_use
         |vpiActual:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:36:1, endln:36:25
       |vpiName:in_use
       |vpiFullName:pack::uvm_mem_mam::in_use
       |vpiAutomatic:1
@@ -560,7 +552,7 @@ Design: (unnamed)
         |vpiName:uvm_mem_mam_cfg
         |vpiFullName:pack::uvm_mem_mam::reconfigure::uvm_mem_mam_cfg
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+        \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:17, endln:37:32
       |vpiIODecl:
       \_IODecl: (cfg), line:37:61, endln:37:64
         |vpiParent:
@@ -582,7 +574,7 @@ Design: (unnamed)
           |vpiName:uvm_mem_mam_cfg
           |vpiFullName:pack::uvm_mem_mam::reconfigure::cfg::uvm_mem_mam_cfg
           |vpiActual:
-          \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+          \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:45, endln:37:60
     |vpiInternalScope:
     \_Function: (pack::uvm_mem_mam::reconfigure), line:41:1, endln:45:25
       |vpiParent:
@@ -601,7 +593,7 @@ Design: (unnamed)
         |vpiName:uvm_mem_mam_cfg
         |vpiFullName:pack::uvm_mem_mam::reconfigure::uvm_mem_mam_cfg
         |vpiActual:
-        \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+        \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:10, endln:41:25
       |vpiIODecl:
       \_IODecl: (cfg), line:41:67, endln:41:70
         |vpiParent:
@@ -623,7 +615,7 @@ Design: (unnamed)
           |vpiName:uvm_mem_mam_cfg
           |vpiFullName:pack::uvm_mem_mam::reconfigure::cfg::uvm_mem_mam_cfg
           |vpiActual:
-          \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+          \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:51, endln:41:66
       |vpiStmt:
       \_Assignment: , line:43:4, endln:43:43
         |vpiParent:
@@ -665,24 +657,24 @@ Design: (unnamed)
       |vpiInstance:
       \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
     |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+    \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:17, endln:37:32
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiName:uvm_mem_mam_cfg
     |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+    \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:45, endln:37:60
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiName:uvm_mem_mam_cfg
     |vpiTypedef:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:36:1, endln:36:25
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiArrayType:4
       |vpiElemTypespec:
       \_RefTypespec: (pack::uvm_mem_mam::uvm_mem_region), line:36:1, endln:36:15
         |vpiParent:
-        \_ArrayTypespec: 
+        \_ArrayTypespec: , line:36:1, endln:36:25
         |vpiName:uvm_mem_region
         |vpiFullName:pack::uvm_mem_mam::uvm_mem_region
         |vpiActual:
@@ -690,11 +682,11 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_mam::reconfigure), line:37:1, endln:37:73
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+    \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:17, endln:37:32
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+    \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:37:45, endln:37:60
     |vpiImportTypespec:
-    \_ArrayTypespec: 
+    \_ArrayTypespec: , line:36:1, endln:36:25
     |vpiImportTypespec:
     \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
     |vpiImportTypespec:
@@ -730,12 +722,12 @@ Design: (unnamed)
     |vpiClassDefn:
     \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+  \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:10, endln:41:25
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
     |vpiName:uvm_mem_mam_cfg
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+  \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:51, endln:41:66
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:1:1, endln:47:11
     |vpiName:uvm_mem_mam_cfg
@@ -748,9 +740,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassTypespec: (uvm_mem_mam)
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+  \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:10, endln:41:25
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_mem_mam_cfg)
+  \_UnsupportedTypespec: (uvm_mem_mam_cfg), line:41:51, endln:41:66
   |vpiDefName:pack
   |vpiClassDefn:
   \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
@@ -759,6 +751,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 14
+[  ERROR] : 6
 [WARNING] : 1
 [   NOTE] : 0

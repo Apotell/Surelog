@@ -223,23 +223,21 @@ TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Failed to bind object: "id: 92, name: exp_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:92, name: exp_bits".
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Failed to bind object: "id: 97, name: man_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:97, name: man_bits".
-[ERR:IG0804] Missing/invalid file: 29, RefTypespec, uvm::fp_encoding_t.
-[ERR:IG0807] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:20: Bad relative location: Child: 84, RefTypespec,  Parent: 5, Function, fp_width.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Unbound: 92, RefObj, exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Unbound: 97, RefObj, man_bits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHierPath/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:42: Unsupported Typespec: id:87, type:RefTypespec, name:fp_format_e.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Null Actual: id:92, type:RefObj, name:exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Null Actual: id:97, type:RefObj, name:man_bits.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
   |vpiParent:
@@ -261,13 +259,12 @@ Design: (unnamed)
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiTypespec:
-    \_RefTypespec: (uvm::FP_ENCODINGS::fp_encoding_t), line:8:12, endln:8:46
+    \_RefTypespec: (uvm::FP_ENCODINGS), line:8:12, endln:8:46
       |vpiParent:
       \_Parameter: (uvm::FP_ENCODINGS), line:8:47, endln:15:2
-      |vpiName:fp_encoding_t
-      |vpiFullName:uvm::FP_ENCODINGS::fp_encoding_t
+      |vpiFullName:uvm::FP_ENCODINGS
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
     |vpiLocalParam:1
     |vpiName:FP_ENCODINGS
     |vpiFullName:uvm::FP_ENCODINGS
@@ -412,11 +409,11 @@ Design: (unnamed)
       |vpiName:fp_width
     |vpiFullName:uvm::fp_width
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:17:20, endln:17:32
       |vpiParent:
       \_Function: (uvm::fp_width), line:17:1, endln:19:12
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:17:20, endln:17:32
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -425,7 +422,7 @@ Design: (unnamed)
       \_Function: (uvm::fp_width), line:17:1, endln:19:12
       |vpiFullName:uvm::fp_width
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:17:20, endln:17:32
     |vpiIODecl:
     \_IODecl: (fmt), line:17:54, endln:17:57
       |vpiParent:
@@ -439,7 +436,7 @@ Design: (unnamed)
         |vpiName:fp_format_e
         |vpiFullName:uvm::fp_width::fmt::fp_format_e
         |vpiActual:
-        \_UnsupportedTypespec: (fp_format_e)
+        \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
     |vpiStmt:
     \_ReturnStmt: , line:18:1, endln:18:67
       |vpiParent:
@@ -550,7 +547,7 @@ Design: (unnamed)
         \_TypespecMember: (exp_bits), line:3:16, endln:3:24
         |vpiFullName:uvm::exp_bits
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:3:3, endln:3:15
     |vpiTypespecMember:
     \_TypespecMember: (man_bits), line:4:16, endln:4:24
       |vpiParent:
@@ -562,19 +559,19 @@ Design: (unnamed)
         \_TypespecMember: (man_bits), line:4:16, endln:4:24
         |vpiFullName:uvm::man_bits
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:3:3, endln:3:15
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:3, endln:3:15
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
   |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:8:12, endln:8:46
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiRange:
     \_Range: , line:8:26, endln:8:46
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
       |vpiLeftRange:
       \_Constant: , line:8:27, endln:8:28
         |vpiParent:
@@ -607,12 +604,12 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
       |vpiName:uvm::fp_encoding_t
       |vpiActual:
       \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
   |vpiTypedef:
-  \_UnsupportedTypespec: (fp_format_e)
+  \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiName:fp_format_e
@@ -623,17 +620,17 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:2:9, endln:5:2
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:3, endln:3:15
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:8:12, endln:8:46
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (fp_format_e)
+  \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
   |vpiDefName:uvm
   |vpiTaskFunc:
   \_Function: (uvm::fp_width), line:17:1, endln:19:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 8
+[  ERROR] : 5
 [WARNING] : 1
 [   NOTE] : 0

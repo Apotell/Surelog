@@ -96,17 +96,16 @@ RefObj                                                 1
 RefTypespec                                            1
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:IG0805] ${SURELOG_DIR}/tests/ModPortParam/dut.sv:4:9: Parented to neither scope nor design: 19, IODecl, perfCounter.
-[ERR:IG0810] Invalid location: 5, InterfaceTypespec, PerformanceCounterIF.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ModPortParam/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllInterfaces:
 \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiParent:
@@ -144,13 +143,13 @@ Design: (unnamed)
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
     |vpiName:work@CSR_Unit
   |vpiTypedef:
-  \_InterfaceTypespec: (PerformanceCounterIF)
+  \_InterfaceTypespec: (PerformanceCounterIF), line:9:5, endln:9:25
     |vpiParent:
     \_Module: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
     |vpiName:
     \_Identifier: (PerformanceCounterIF)
       |vpiParent:
-      \_InterfaceTypespec: (PerformanceCounterIF)
+      \_InterfaceTypespec: (PerformanceCounterIF), line:9:5, endln:9:25
       |vpiName:PerformanceCounterIF
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
@@ -168,7 +167,7 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiImportTypespec:
-  \_InterfaceTypespec: (PerformanceCounterIF)
+  \_InterfaceTypespec: (PerformanceCounterIF), line:9:5, endln:9:25
   |vpiImportTypespec:
   \_InterfaceTypespec: (work@PerformanceCounterIF.CSR), line:9:26, endln:9:29
   |vpiDefName:work@CSR_Unit
@@ -196,7 +195,7 @@ Design: (unnamed)
     \_Module: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
     |vpiName:work@Core
   |vpiTypedef:
-  \_InterfaceTypespec: (PerformanceCounterIF)
+  \_InterfaceTypespec: (PerformanceCounterIF), line:9:5, endln:9:25
   |vpiTypedef:
   \_ModuleTypespec: (CSR_Unit)
     |vpiParent:
@@ -246,6 +245,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0

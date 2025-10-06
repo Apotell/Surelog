@@ -169,16 +169,16 @@ StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
-[ERR:IG0804] Missing/invalid file: 22, RefTypespec, my_pkg::ast_dif_t.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
   |vpiParent:
@@ -220,9 +220,9 @@ Design: (unnamed)
         \_TypespecMember: (p), line:3:13, endln:3:14
         |vpiFullName:my_pkg::p
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
   |vpiTypedef:
@@ -252,21 +252,20 @@ Design: (unnamed)
       \_StructTypespec: , line:6:12, endln:8:5
       |vpiName:alerts_ack
       |vpiTypespec:
-      \_RefTypespec: (my_pkg::alerts_ack::ast_dif_t), line:7:7, endln:7:22
+      \_RefTypespec: (my_pkg::alerts_ack), line:7:7, endln:7:22
         |vpiParent:
         \_TypespecMember: (alerts_ack), line:7:23, endln:7:33
-        |vpiName:ast_dif_t
-        |vpiFullName:my_pkg::alerts_ack::ast_dif_t
+        |vpiFullName:my_pkg::alerts_ack
         |vpiActual:
-        \_PackedArrayTypespec: 
+        \_PackedArrayTypespec: , line:7:7, endln:7:22
   |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:7:7, endln:7:22
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
     |vpiRange:
     \_Range: , line:7:17, endln:7:22
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:7:7, endln:7:22
       |vpiLeftRange:
       \_Constant: , line:7:18, endln:7:19
         |vpiParent:
@@ -286,7 +285,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:7:7, endln:7:22
       |vpiName:my_pkg::ast_dif_t
       |vpiActual:
       \_TypedefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
@@ -295,13 +294,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
   \_TypedefTypespec: (my_pkg::ast_alert_rsp_t), line:8:6, endln:8:21
   |vpiImportTypespec:
   \_StructTypespec: , line:6:12, endln:8:5
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:7:7, endln:7:22
   |vpiDefName:my_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
@@ -493,6 +492,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1

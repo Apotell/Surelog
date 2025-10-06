@@ -664,23 +664,22 @@ TypespecMember                                         2
 UnsupportedTypespec                                    2
 VarSelect                                              2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Failed to bind object: "id: 204, name: exp_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Illegal implicit net "id:204, name: exp_bits".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Failed to bind object: "id: 209, name: man_bits".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Illegal implicit net "id:209, name: man_bits".
-[ERR:IG0804] Missing/invalid file: 75, RefTypespec, fpnew_pkg::fp_encoding_t.
-[ERR:IG0807] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:37:22: Bad relative location: Child: 197, RefTypespec,  Parent: 8, Function, fp_width.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Unbound: 204, RefObj, exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Unbound: 209, RefObj, man_bits.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:152, type:RefTypespec, name:fpu_features_t.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Null Actual: id:204, type:RefObj, name:exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Null Actual: id:209, type:RefObj, name:man_bits.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:219, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiParent:
@@ -701,7 +700,7 @@ Design: (unnamed)
       \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:45
       |vpiFullName:fpnew_pkg::NUM_FP_FORMATS
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:14, endln:3:26
     |vpiLocalParam:1
     |vpiName:NUM_FP_FORMATS
     |vpiFullName:fpnew_pkg::NUM_FP_FORMATS
@@ -715,7 +714,7 @@ Design: (unnamed)
       \_Parameter: (fpnew_pkg::FP_FORMAT_BITS), line:4:27, endln:4:66
       |vpiFullName:fpnew_pkg::FP_FORMAT_BITS
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:3:14, endln:3:26
     |vpiLocalParam:1
     |vpiName:FP_FORMAT_BITS
     |vpiFullName:fpnew_pkg::FP_FORMAT_BITS
@@ -724,13 +723,12 @@ Design: (unnamed)
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiTypespec:
-    \_RefTypespec: (fpnew_pkg::FP_ENCODINGS::fp_encoding_t), line:20:14, endln:20:48
+    \_RefTypespec: (fpnew_pkg::FP_ENCODINGS), line:20:14, endln:20:48
       |vpiParent:
       \_Parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:27:4
-      |vpiName:fp_encoding_t
-      |vpiFullName:fpnew_pkg::FP_ENCODINGS::fp_encoding_t
+      |vpiFullName:fpnew_pkg::FP_ENCODINGS
       |vpiActual:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:20:14, endln:20:48
     |vpiLocalParam:1
     |vpiName:FP_ENCODINGS
     |vpiFullName:fpnew_pkg::FP_ENCODINGS
@@ -745,7 +743,7 @@ Design: (unnamed)
       |vpiName:fpu_features_t
       |vpiFullName:fpnew_pkg::RV64D_Xsflt::fpu_features_t
       |vpiActual:
-      \_UnsupportedTypespec: (fpu_features_t)
+      \_UnsupportedTypespec: (fpu_features_t), line:29:14, endln:29:28
     |vpiLocalParam:1
     |vpiName:RV64D_Xsflt
     |vpiFullName:fpnew_pkg::RV64D_Xsflt
@@ -930,7 +928,7 @@ Design: (unnamed)
           |vpiName:Width
           |vpiFullName:fpnew_pkg::Width
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:30:5, endln:30:10
       |vpiOperand:
       \_TaggedPattern: , line:31:5, endln:31:24
         |vpiParent:
@@ -950,7 +948,7 @@ Design: (unnamed)
           |vpiName:EnableVectors
           |vpiFullName:fpnew_pkg::EnableVectors
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:30:5, endln:30:10
       |vpiOperand:
       \_TaggedPattern: , line:32:5, endln:32:24
         |vpiParent:
@@ -970,7 +968,7 @@ Design: (unnamed)
           |vpiName:EnableNanBox
           |vpiFullName:fpnew_pkg::EnableNanBox
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:30:5, endln:30:10
       |vpiOperand:
       \_TaggedPattern: , line:33:5, endln:33:28
         |vpiParent:
@@ -990,7 +988,7 @@ Design: (unnamed)
           |vpiName:FpFmtMask
           |vpiFullName:fpnew_pkg::FpFmtMask
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:30:5, endln:30:10
       |vpiOperand:
       \_TaggedPattern: , line:34:5, endln:34:27
         |vpiParent:
@@ -1010,7 +1008,7 @@ Design: (unnamed)
           |vpiName:IntFmtMask
           |vpiFullName:fpnew_pkg::IntFmtMask
           |vpiActual:
-          \_StringTypespec: 
+          \_StringTypespec: , line:30:5, endln:30:10
     |vpiLhs:
     \_Parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:35:4
   |vpiInternalScope:
@@ -1024,11 +1022,11 @@ Design: (unnamed)
       |vpiName:fp_width
     |vpiFullName:fpnew_pkg::fp_width
     |vpiTypedef:
-    \_IntTypespec: 
+    \_IntTypespec: , line:37:22, endln:37:34
       |vpiParent:
       \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
     |vpiImportTypespec:
-    \_IntTypespec: 
+    \_IntTypespec: , line:37:22, endln:37:34
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -1037,7 +1035,7 @@ Design: (unnamed)
       \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
       |vpiFullName:fpnew_pkg::fp_width
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:37:22, endln:37:34
     |vpiIODecl:
     \_IODecl: (fmt), line:37:56, endln:37:59
       |vpiParent:
@@ -1045,11 +1043,11 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:fmt
       |vpiTypedef:
-      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fp_format_e), line:37:44, endln:37:55
+      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fpnew_pkg::fp_format_e), line:37:44, endln:37:55
         |vpiParent:
         \_IODecl: (fmt), line:37:56, endln:37:59
-        |vpiName:fp_format_e
-        |vpiFullName:fpnew_pkg::fp_width::fmt::fp_format_e
+        |vpiName:fpnew_pkg::fp_format_e
+        |vpiFullName:fpnew_pkg::fp_width::fmt::fpnew_pkg::fp_format_e
         |vpiActual:
         \_TypedefTypespec: (fpnew_pkg::fp_format_e), line:18:5, endln:18:16
     |vpiStmt:
@@ -1131,7 +1129,7 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:14, endln:3:26
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiTypedef:
@@ -1166,7 +1164,7 @@ Design: (unnamed)
         \_TypespecMember: (exp_bits), line:7:18, endln:7:26
         |vpiFullName:fpnew_pkg::exp_bits
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:3:14, endln:3:26
     |vpiTypespecMember:
     \_TypespecMember: (man_bits), line:8:18, endln:8:26
       |vpiParent:
@@ -1178,7 +1176,7 @@ Design: (unnamed)
         \_TypespecMember: (man_bits), line:8:18, endln:8:26
         |vpiFullName:fpnew_pkg::man_bits
         |vpiActual:
-        \_IntTypespec: 
+        \_IntTypespec: , line:3:14, endln:3:26
   |vpiTypedef:
   \_EnumTypespec: , line:11:11, endln:18:16
     |vpiParent:
@@ -1189,7 +1187,7 @@ Design: (unnamed)
       \_EnumTypespec: , line:11:11, endln:18:16
       |vpiFullName:fpnew_pkg
       |vpiActual:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:11:16, endln:11:21
     |vpiEnumConst:
     \_EnumConst: (FP32), line:12:5, endln:12:18
       |vpiParent:
@@ -1231,13 +1229,13 @@ Design: (unnamed)
       |vpiDecompile:'d4
       |vpiSize:-1
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:11:16, endln:11:21
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiRange:
     \_Range: , line:11:22, endln:11:42
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:11:16, endln:11:21
       |vpiLeftRange:
       \_Operation: , line:11:23, endln:11:39
         |vpiParent:
@@ -1284,13 +1282,13 @@ Design: (unnamed)
       |vpiActual:
       \_EnumTypespec: , line:11:11, endln:18:16
   |vpiTypedef:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:20:14, endln:20:48
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiRange:
     \_Range: , line:20:28, endln:20:48
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:20:14, endln:20:48
       |vpiLeftRange:
       \_Constant: , line:20:29, endln:20:30
         |vpiParent:
@@ -1323,23 +1321,23 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (fpnew_pkg::fp_encoding_t), line:9:5, endln:9:18
       |vpiParent:
-      \_PackedArrayTypespec: 
+      \_PackedArrayTypespec: , line:20:14, endln:20:48
       |vpiName:fpnew_pkg::fp_encoding_t
       |vpiActual:
       \_TypedefTypespec: (fpnew_pkg::fp_encoding_t), line:9:5, endln:9:18
   |vpiTypedef:
-  \_UnsupportedTypespec: (fpu_features_t)
+  \_UnsupportedTypespec: (fpu_features_t), line:29:14, endln:29:28
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiName:fpu_features_t
   |vpiTypedef:
-  \_StringTypespec: 
+  \_StringTypespec: , line:30:5, endln:30:10
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiImportTypespec:
   \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:3:14, endln:3:26
   |vpiImportTypespec:
   \_TypedefTypespec: (fpnew_pkg::fp_encoding_t), line:9:5, endln:9:18
   |vpiImportTypespec:
@@ -1347,15 +1345,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EnumTypespec: , line:11:11, endln:18:16
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:11:16, endln:11:21
   |vpiImportTypespec:
   \_TypedefTypespec: (fpnew_pkg::fp_format_e), line:18:5, endln:18:16
   |vpiImportTypespec:
-  \_PackedArrayTypespec: 
+  \_PackedArrayTypespec: , line:20:14, endln:20:48
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (fpu_features_t)
+  \_UnsupportedTypespec: (fpu_features_t), line:29:14, endln:29:28
   |vpiImportTypespec:
-  \_StringTypespec: 
+  \_StringTypespec: , line:30:5, endln:30:10
   |vpiDefName:fpnew_pkg
   |vpiTaskFunc:
   \_Function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
@@ -1378,7 +1376,7 @@ Design: (unnamed)
       \_Parameter: (work@top.NUM_FORMATS), line:44:28, endln:44:68
       |vpiFullName:work@top.NUM_FORMATS
       |vpiActual:
-      \_IntTypespec: 
+      \_IntTypespec: , line:44:15, endln:44:27
     |vpiLocalParam:1
     |vpiName:NUM_FORMATS
     |vpiFullName:work@top.NUM_FORMATS
@@ -1393,7 +1391,7 @@ Design: (unnamed)
       |vpiName:fpnew_pkg::fpu_features_t
       |vpiFullName:work@top.Features.fpnew_pkg::fpu_features_t
       |vpiActual:
-      \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t)
+      \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t), line:45:14, endln:45:39
     |vpiName:Features
     |vpiFullName:work@top.Features
   |vpiParameter:
@@ -1488,7 +1486,7 @@ Design: (unnamed)
           \_Parameter: (work@top.gen_nanbox_check.FP_WIDTH), line:50:29, endln:50:37
           |vpiFullName:work@top.gen_nanbox_check.FP_WIDTH
           |vpiActual:
-          \_IntTypespec: 
+          \_IntTypespec: , line:44:15, endln:44:27
         |vpiLocalParam:1
         |vpiName:FP_WIDTH
         |vpiFullName:work@top.gen_nanbox_check.FP_WIDTH
@@ -1971,18 +1969,18 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
   |vpiTypedef:
-  \_IntTypespec: 
+  \_IntTypespec: , line:44:15, endln:44:27
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
   |vpiTypedef:
-  \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t)
+  \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t), line:45:14, endln:45:39
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
     |vpiName:fpnew_pkg::fpu_features_t
   |vpiImportTypespec:
-  \_IntTypespec: 
+  \_IntTypespec: , line:44:15, endln:44:27
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t)
+  \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t), line:45:14, endln:45:39
   |vpiImportTypespec:
   \_LogicNet: (work@top.Width), line:46:31, endln:46:36
     |vpiParent:
@@ -2003,6 +2001,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 8
+[  ERROR] : 6
 [WARNING] : 2
 [   NOTE] : 0

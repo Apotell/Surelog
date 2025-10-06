@@ -106,14 +106,17 @@ TypespecMember                                         1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:30, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:35, type:RefTypespec, name:otp_ast_rsp_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
-\_SourceFile: , file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv
+\_SourceFile: (dut.sv), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv
   |vpiParent:
   \_Design: (unnamed)
+  |vpiName:dut.sv
 |vpiAllPackages:
 \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
   |vpiParent:
@@ -155,15 +158,15 @@ Design: (unnamed)
         \_TypespecMember: (pwr_seq), line:3:17, endln:3:24
         |vpiFullName:otp_ctrl_pkg::pwr_seq
         |vpiActual:
-        \_LogicTypespec: 
+        \_LogicTypespec: , line:3:5, endln:3:10
   |vpiTypedef:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:5, endln:3:10
     |vpiParent:
     \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
     |vpiRange:
     \_Range: , line:3:11, endln:3:16
       |vpiParent:
-      \_LogicTypespec: 
+      \_LogicTypespec: , line:3:5, endln:3:10
       |vpiLeftRange:
       \_Constant: , line:3:12, endln:3:13
         |vpiParent:
@@ -185,7 +188,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiImportTypespec:
-  \_LogicTypespec: 
+  \_LogicTypespec: , line:3:5, endln:3:10
   |vpiDefName:otp_ctrl_pkg
   |vpiEndLabel:otp_ctrl_pkg
 |vpiAllPackages:
@@ -245,12 +248,12 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_UnsupportedTypespec: (otp_ast_rsp_t)
+  \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
     |vpiName:otp_ast_rsp_t
   |vpiTypedef:
-  \_UnsupportedTypespec: (otp_ast_rsp_t)
+  \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
     |vpiName:otp_ast_rsp_t
@@ -261,17 +264,17 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
     |vpiTypespec:
-    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t), line:14:10, endln:14:23
+    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t), line:14:10, endln:14:23
       |vpiParent:
       \_StructNet: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiName:otp_ast_req_t
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t
+      |vpiName:otp_ctrl_pkg::otp_ast_req_t
+      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t
       |vpiActual:
       \_TypedefTypespec: (otp_ctrl_pkg::otp_ast_req_t), line:4:5, endln:4:18
     |vpiName:otp_ast_pwr_seq_o
     |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (otp_ast_rsp_t)
+  \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiImportTypespec:
   \_LogicNet: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
     |vpiParent:
@@ -283,11 +286,11 @@ Design: (unnamed)
       |vpiName:otp_ast_rsp_t
       |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i.otp_ast_rsp_t
       |vpiActual:
-      \_UnsupportedTypespec: (otp_ast_rsp_t)
+      \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
     |vpiName:otp_ast_pwr_seq_h_i
     |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (otp_ast_rsp_t)
+  \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiDefName:work@otp_ctrl
   |vpiNet:
   \_StructNet: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
@@ -320,7 +323,7 @@ Design: (unnamed)
       |vpiName:otp_ast_rsp_t
       |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i.otp_ast_rsp_t
       |vpiActual:
-      \_UnsupportedTypespec: (otp_ast_rsp_t)
+      \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiEndLabel:otp_ctrl
 |vpiTypedef:
 \_ModuleTypespec: (otp_ctrl)
@@ -332,6 +335,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0

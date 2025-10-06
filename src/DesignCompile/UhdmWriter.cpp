@@ -701,6 +701,8 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           uhdm::ArrayTypespec* array_ts = s.make<uhdm::ArrayTypespec>();
           array_ts->setRanges(ranges);
           array_ts->setParent(dest_port);
+          fC->populateCoreMembers(unpackedDimensions, unpackedDimensions,
+                                  array_ts);
           for (uhdm::Range* r : *ranges) {
             r->setParent(array_ts);
             const uhdm::Expr* rrange = r->getRightExpr();
@@ -730,7 +732,9 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           }
           if (dest_port->getTypespec() == nullptr) {
             uhdm::RefTypespec* dest_port_rt = s.make<uhdm::RefTypespec>();
-            dest_port_rt->setName(fC->SymName(orig_port->getTypespecId()));
+            CompileHelper::setRefTypespecName(
+                dest_port_rt, array_ts,
+                fC->SymName(orig_port->getTypespecId()));
             dest_port_rt->setParent(dest_port);
             fC->populateCoreMembers(orig_port->getTypespecId(),
                                     orig_port->getTypespecId(), dest_port_rt);
@@ -883,6 +887,11 @@ void UhdmWriter::writeNets(DesignComponent* mod,
               dest_net->setTypespec(rt);
               fC->populateCoreMembers(orig_net->getTypespecId(),
                                       orig_net->getTypespecId(), rt);
+              NodeId dimensions = orig_net->getUnpackedDimension();
+              if (!dimensions) dimensions = orig_net->getPackedDimension();
+              if (dimensions) {
+                fC->populateCoreMembers(InvalidNodeId, dimensions, ts);
+              }
             }
           }
         }
@@ -3390,17 +3399,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     bind(s, designs);
   }
 
-  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
-    for (auto h : designs) {
-      const uhdm::Design* const d =
-          static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
-      checker->check(d);
-    }
-
-    delete checker;
-    errors->printMessages(clp->muteStdout());
-  }
-
   // ----------------------------------
   // Lint only the elaborated model
   // if (m_session->getCommandLineParser()->getElabUhdm()) {
@@ -3435,6 +3433,17 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     errors->printMessages(clp->muteStdout());
     s.setGCEnabled(clp->gc());
     s.save(uhdmFile);
+  }
+
+  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+    for (auto h : designs) {
+      const uhdm::Design* const d =
+          static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
+      checker->check(d);
+    }
+
+    delete checker;
+    errors->printMessages(clp->muteStdout());
   }
 
   // if (clp->getDebugUhdm() || clp->getCoverUhdm()) {

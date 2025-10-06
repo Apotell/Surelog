@@ -2154,4 +2154,14 @@ void SV3_1aTreeShapeListener::exitString_type(
     SV3_1aParser::String_typeContext *ctx) {
   addVObject(ctx, ctx->getText(), VObjectType::paString_type);
 }
+
+void SV3_1aTreeShapeListener::exitThis_dot_super(
+    SV3_1aParser::This_dot_superContext *ctx) {
+  addVObject(ctx, ctx->getText(), VObjectType::paThis_dot_super);
+}
+
+void SV3_1aTreeShapeListener::exitImplicit_class_handle(
+    SV3_1aParser::Implicit_class_handleContext *ctx) {
+  addVObject(ctx, ctx->getText(), VObjectType::paImplicit_class_handle);
+}
 }  // namespace SURELOG

@@ -2883,6 +2883,7 @@ uhdm::Any *CompileHelper::compileExpression(
           rt->setParent(var);
           uhdm::ArrayTypespec *at = s.make<uhdm::ArrayTypespec>();
           at->setParent(var);
+          fC->populateCoreMembers(parent, parent, at);
           rt->setActual(at);
           fC->populateCoreMembers(parent, parent, rt);
           var->setTypespec(rt);
@@ -3557,6 +3558,8 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
           NodeId Constant_primary = fC->Child(Constant_expression);
           if (!Constant_primary) {
             uhdm::StringTypespec *tps = s.make<uhdm::StringTypespec>();
+            fC->populateCoreMembers(Constant_expression, Constant_expression,
+                                    tps);
             tps->setParent(pattern);
             if (pattern->getTypespec() == nullptr) {
               uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();

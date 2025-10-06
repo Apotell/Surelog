@@ -49,6 +49,17 @@ const DataType* DataType::getActual() const {
   return actual;
 }
 
+uhdm::Typespec* DataType::getActualTypespec() const {
+  const DataType* actual = this;
+  while (actual != nullptr) {
+    if (actual->m_typespec != nullptr) {
+      return actual->m_typespec;
+    }
+    actual = actual->getDefinition();
+  }
+  return nullptr;
+}
+
 void DataType::setTypespec(uhdm::Typespec* typespec) { m_typespec = typespec; }
 
 bool DataType::isInteger_type(VObjectType type) {

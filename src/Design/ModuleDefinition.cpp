@@ -71,7 +71,7 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
       uhdm::UdpDefnTypespec* const tps =
           serializer.make<uhdm::UdpDefnTypespec>();
       tps->setName(
-          fC->SymName(fC->sl_collect(nodeId, VObjectType::paIdentifier)));
+          fC->SymName(fC->sl_collect(nodeId, VObjectType::STRING_CONST)));
       tps->setUdpDefn(instance);
       setUhdmTypespecModel(tps);
     } break;

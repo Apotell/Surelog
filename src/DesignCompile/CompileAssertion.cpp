@@ -489,7 +489,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       if (tps != nullptr) {
         uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
         rtps->setActual(tps);
-        rtps->setName(fC->SymName(Port_name));
+        setRefTypespecName(rtps, tps, tps->getName());
         prop_port_decl->setTypespec(rtps);
         rtps->setParent(prop_port_decl);
         fC->populateCoreMembers(Data_type, Data_type, rtps);

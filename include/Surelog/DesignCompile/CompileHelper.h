@@ -114,6 +114,10 @@ class CompileHelper final {
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
 
+  static void setRefTypespecName(uhdm::RefTypespec* rt,
+                                 const uhdm::Typespec* ts,
+                                 std::string_view name);
+
   // ------------------------------------------------------------------------------------------
   // Surelog internal modeling
 

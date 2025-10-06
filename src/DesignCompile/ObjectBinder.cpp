@@ -1387,17 +1387,6 @@ void ObjectBinder::reportErrors() {
       }
     }
 
-    if (reportMissingActual) {
-      const std::string text =
-          StrCat("id: ", object->getUhdmId(), ", name: ", object->getName());
-      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
-                   object->getStartLine(), object->getStartColumn(),
-                   symbolTable->registerSymbol(text));
-      Error err(ErrorDefinition::UHDM_FAILED_TO_BIND, loc);
-      errorContainer->addError(err);
-      errorContainer->printMessages(m_muteStdout);
-    }
-
     if (getDefaultNetType(component) == VObjectType::NO_TYPE) {
       const std::string text =
           StrCat("id:", object->getUhdmId(), ", name: ", object->getName());

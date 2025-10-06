@@ -124,6 +124,26 @@ bool CompileHelper::loopDetected(PathId fileId, uint32_t lineNumber,
   return false;
 }
 
+void CompileHelper::setRefTypespecName(uhdm::RefTypespec* rt,
+                                       const uhdm::Typespec* ts,
+                                       std::string_view name) {
+  switch (ts->getUhdmType()) {
+    case uhdm::UhdmType::ClassTypespec:
+    case uhdm::UhdmType::ImportTypespec:
+    case uhdm::UhdmType::InterfaceTypespec:
+    case uhdm::UhdmType::ModuleTypespec:
+    case uhdm::UhdmType::ProgramTypespec:
+    case uhdm::UhdmType::TypeParameter:
+    case uhdm::UhdmType::TypedefTypespec:
+    case uhdm::UhdmType::UdpDefnTypespec:
+    case uhdm::UhdmType::UnsupportedTypespec: {
+      rt->setName(name);
+    } break;
+    default:
+      break;
+  }
+}
+
 bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
                                   const FileContent* fC, NodeId id,
                                   CompileDesign* compileDesign,
@@ -541,12 +561,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       typespecTypespec->setName(name);
       typespecTypespec->setParent(pstmt);
       fC->populateCoreMembers(type_name, type_name, typespecTypespec);
-
-      uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
-      refTypespec->setParent(typespecTypespec);
-      fC->populateCoreMembers(type_name, type_name, refTypespec);
-
-      typespecTypespec->setTypedefAlias(refTypespec);
       newTypeDef->setTypespec(typespecTypespec);
 
       return newType;
@@ -671,6 +685,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       if (uhdm::Typespec* ts =
               compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
+        fC->populateCoreMembers(data_type, type_name, ts, true);
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
             (valuedcomponenti_cast<Package>(scope))) {
           ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
@@ -721,7 +736,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
 
       uhdm::RefTypespec* baseTypeRef = s.make<uhdm::RefTypespec>();
       baseTypeRef->setParent(enum_t);
-      baseTypeRef->setName(tps->getName());
+      setRefTypespecName(baseTypeRef, tps, tps->getName());
       baseTypeRef->setActual(tps);
       fC->populateCoreMembers(enum_base_type, enum_base_type, baseTypeRef);
       enum_t->setBaseTypespec(baseTypeRef);
@@ -797,6 +812,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
     refTypespec->setParent(typedefTypespec);
     refTypespec->setActual(enum_t);
+    setRefTypespecName(refTypespec, enum_t, fC->SymName(type_name));
     fC->populateCoreMembers(data_type, data_type, refTypespec);
 
     typedefTypespec->setTypedefAlias(refTypespec);
@@ -838,7 +854,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               compileTypespec(scope, fC, data_type, Variable_dimension,
                               compileDesign, reduce, pstmt, nullptr, false)) {
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
-        refTypespec->setName(tps->getName());
+        setRefTypespecName(refTypespec, tps, tps->getName());
         refTypespec->setParent(typedefTypespec);
         refTypespec->setActual(tps);
         fC->populateCoreMembers(stype, stype, refTypespec);
@@ -1022,6 +1038,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         fC->populateCoreMembers(type_name, type_name, typedefTypespec);
 
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setName(ts->getName());
         refTypespec->setParent(typedefTypespec);
         refTypespec->setActual(ts);
         fC->populateCoreMembers(stype, stype, refTypespec);
@@ -2865,7 +2882,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         for (auto r : *unpackedDimensions) r->setParent(mod_array);
 
         uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-        tpsRef->setName(fC->SymName(typespecId));
+        setRefTypespecName(tpsRef, tps, fC->SymName(typespecId));
         tpsRef->setParent(mod_array);
         fC->populateCoreMembers(typespecId, typespecId, tpsRef);
         mod_array->setElemTypespec(tpsRef);
@@ -4233,7 +4250,7 @@ bool CompileHelper::compileParameterDeclaration(
                               compileDesign, Reduce::No, p, nullptr, false)) {
         if (p->getTypespec() == nullptr) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          tpsRef->setName(tps->getName());
+          setRefTypespecName(tpsRef, tps, tps->getName());
           fC->populateCoreMembers(ntype, ntype, tpsRef);
           tpsRef->setParent(p);
           p->setTypespec(tpsRef);
@@ -4271,7 +4288,7 @@ bool CompileHelper::compileParameterDeclaration(
                               compileDesign, Reduce::No, p, nullptr, false)) {
         if (p->getTypespec() == nullptr) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          tpsRef->setName(tps->getName());
+          setRefTypespecName(tpsRef, tps, tps->getName());
           fC->populateCoreMembers(Data_type, Data_type, tpsRef);
           tpsRef->setParent(p);
           p->setTypespec(tpsRef);
@@ -4449,7 +4466,7 @@ bool CompileHelper::compileParameterDeclaration(
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(param);
           fC->populateCoreMembers(Data_typeId, Data_typeId, tsRef);
-          tsRef->setName(fC->SymName(Data_typeId));
+          setRefTypespecName(tsRef, ts, fC->SymName(Data_typeId));
           param->setTypespec(tsRef);
         }
         param->getTypespec()->setActual(ts);
@@ -4546,6 +4563,7 @@ bool CompileHelper::compileParameterDeclaration(
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
                 its->setSigned(false);
                 its->setParent(pany);
+                fC->populateCoreMembers(nodeId, nodeId, its);
                 const std::string_view v = c->getValue();
                 if (v.front() == '-') {
                   its->setSigned(true);
@@ -4566,6 +4584,7 @@ bool CompileHelper::compileParameterDeclaration(
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
                 its->setSigned(false);
                 its->setParent(pany);
+                fC->populateCoreMembers(nodeId, nodeId, its);
                 if (c->getSize() != -1) {  // Unsized
                   uhdm::Range* r = s.make<uhdm::Range>();
                   uhdm::Constant* l = s.make<uhdm::Constant>();
@@ -4601,6 +4620,7 @@ bool CompileHelper::compileParameterDeclaration(
               }
               case vpiUIntConst: {
                 uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
+                fC->populateCoreMembers(nodeId, nodeId, its);
                 its->setParent(pany);
                 its->setSigned(false);
                 ts = its;

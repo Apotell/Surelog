@@ -50,6 +50,37 @@ _default_surelog_filepath = os.path.join('bin', _default_surelog_filename)
 _re_status_1 = re.compile(r'^\s*\[\s*(?P<status>\w+)\]\s*:\s*(?P<count>\d+)$')
 _re_status_2 = re.compile(r'^\s*\|\s*(?P<status>\w+)\s*\|\s*(?P<count1>\d+|\s+)\s*\|\s*(?P<count2>\d+|\s+)\s*\|\s*$')
 
+_blacklisted_dump_uhdm_tests = {
+  'AmiqEth',
+  'AmiqSimpleTestSuite',
+  'BuildUVMPkg',
+  'CoresSweRV',
+  'CoresSweRVMP',
+  'Driver',
+  'Earlgrey',
+  'Earlgrey_0_1',
+  'Earlgrey_Verilator_0_1',
+  'Earlgrey_Verilator_01_05_21',
+  'Google',
+  'Ibex',
+  'IbexGoogle',
+  'IncompTitan',
+  'MiniAmiq',
+  'Monitor',
+  'Opentitan',
+  'Scoreboard',
+  'SeqDriver',
+  'SimpleClass1',
+  'SimpleInterface',
+  'SimpleUVM',
+  'UnitAmiqEth',
+  'UVMNestedSeq',
+  'UVMSwitch',
+  'Xgate',
+  'YosysOpenSparc',
+  'YosysSmallBoom',
+}
+
 
 _log_mutex = Lock()
 def log(text, end='\n'):
@@ -357,7 +388,8 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
       parts += ['-mp', (mp or '0')]
     parts += ['-d', 'uhdmstats'] # Force print uhdm stats
     parts += ['-d', 'cache']
-    parts += ['-d', 'uhdm']
+    if name not in _blacklisted_dump_uhdm_tests:
+      parts += ['-d', 'uhdm']
     parts += ['-noreduce', '-noelab'] # Disable reduction & elaboration
 
     rel_output_dirpath = os.path.relpath(output_dirpath, dirpath)

@@ -522,12 +522,13 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
           tps->setName(fC->SymName(loopVarId));
+          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
           if (ref->getTypespec() == nullptr) {
             uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
             fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
             tpsRef->setParent(ref);
-            tpsRef->setName(fC->SymName(loopVarId));
+            setRefTypespecName(tpsRef, tps, fC->SymName(loopVarId));
             ref->setTypespec(tpsRef);
           }
           ref->getTypespec()->setActual(tps);
@@ -620,7 +621,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         if (ts != nullptr) {
           if (param->getTypespec() == nullptr) {
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            tsRef->setName(fC->SymName(Data_type));
+            setRefTypespecName(tsRef, ts, fC->SymName(Data_type));
             fC->populateCoreMembers(Data_type_or_implicit,
                                     Data_type_or_implicit, tsRef);
             tsRef->setParent(param);
@@ -1513,6 +1514,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           // Implicit type
           uhdm::LogicTypespec* pts = s.make<uhdm::LogicTypespec>();
           pts->setParent(parent);
+          fC->populateCoreMembers(Data_type, Data_type, pts);
           int32_t size;
           if (uhdm::RangeCollection* ranges =
                   compileRanges(component, fC, Data_type, compileDesign,
@@ -1548,7 +1550,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             if (decl->getTypespec() == nullptr) {
               uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
               tsRef->setParent(decl);
-              tsRef->setName(fC->SymName(Data_type));
+              setRefTypespecName(tsRef, ts, fC->SymName(Data_type));
               decl->setTypespec(tsRef);
               fC->populateCoreMembers(Data_type, Data_type, tsRef);
             }
@@ -1724,11 +1726,11 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(decl);
         NodeId refName = (type == InvalidNodeId) ? prevType : type;
-        std::string_view name = fC->SymName(refName);
+        std::string_view name = ts->getName();
         if (name.empty() || (name == SymbolTable::getBadSymbol())) {
-          name = ts->getName();
+          name = fC->SymName(refName);
         }
-        tsRef->setName(name);
+        setRefTypespecName(tsRef, ts, name);
         decl->setTypespec(tsRef);
         fC->populateCoreMembers(refName, refName, tsRef);
       }
@@ -2295,15 +2297,17 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       // Implicit return type
       ts = s.make<uhdm::LogicTypespec>();
       ts->setParent(func);
+      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, ts);
     } else {  // else void return type
       ts = s.make<uhdm::VoidTypespec>();
       ts->setParent(func);
+      fC->populateCoreMembers(Function_data_type, Function_data_type, ts);
     }
 
     if (ts != nullptr) {
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       fC->populateCoreMembers(Return_data_type, Return_data_type, tsRef);
-      tsRef->setName(ts->getName());
+      setRefTypespecName(tsRef, ts, ts->getName());
       tsRef->setParent(func);
       tsRef->setActual(ts);
       func->setReturn(tsRef);
@@ -2688,6 +2692,7 @@ Function* CompileHelper::compileFunctionPrototype(
   if ((ts == nullptr) && Packed_dimension) {
     uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
     lts->setParent(func);  // Need input
+    fC->populateCoreMembers(type, type, lts);
 
     int32_t size;
     uhdm::RangeCollection* ranges =
@@ -2703,7 +2708,7 @@ Function* CompileHelper::compileFunctionPrototype(
   if (ts != nullptr) {
     uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
     fC->populateCoreMembers(type, type, tsRef);
-    tsRef->setName(ts->getName());
+    setRefTypespecName(tsRef, ts, ts->getName());
     tsRef->setParent(func);
     tsRef->setActual(ts);
     func->setReturn(tsRef);

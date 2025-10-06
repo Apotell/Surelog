@@ -999,7 +999,13 @@ void Compiler::writeUhdmSourceFiles() {
           const IncludeFileInfo& cifi = includeFileInfos[oifi.m_indexOpposite];
 
           uhdm::SourceFile* const incl = m_serializer.make<uhdm::SourceFile>();
-          incl->setName(symbolTable->getSymbol(oifi.m_symbolId));
+          if (oifi.m_symbolId) {
+            incl->setName(symbolTable->getSymbol(oifi.m_symbolId));
+          } else {
+            auto [_, name] =
+                fileSystem->getLeaf(oifi.m_sectionFileId, symbolTable);
+            incl->setName(name);
+          }
           incl->setFile(fileSystem->toPath(oifi.m_sectionFileId));
           incl->setStartLine(oifi.m_symbolLine);
           incl->setStartColumn(oifi.m_symbolColumn);

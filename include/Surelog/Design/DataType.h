@@ -86,6 +86,7 @@ class DataType : public RTTI {
   const DataType* getDefinition() const { return m_definition; }
 
   const DataType* getActual() const;
+  uhdm::Typespec* getActualTypespec() const;
 
   Category getCategory() const { return m_category; }
 

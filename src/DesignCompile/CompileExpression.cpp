@@ -4515,7 +4515,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                   }
                 }
                 with_conditions_node = fC->Sibling(list_of_arguments);
-              } else {
+              } else if (list_of_arguments) {
                 with_conditions_node = list_of_arguments;
 
                 if ((method_name == "find") || (method_name == "find_index") ||
@@ -4534,6 +4534,10 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                   uhdm::RefTypespec *const rt = s.make<uhdm::RefTypespec>();
                   rt->setParent(rf);
                   rt->setFile(fcall->getFile());
+                  rt->setStartLine(fcall->getStartLine());
+                  rt->setStartColumn(fcall->getStartColumn());
+                  rt->setEndLine(fcall->getEndLine());
+                  rt->setEndColumn(fcall->getEndColumn());
                   rf->setTypespec(rt);
                 }
               }

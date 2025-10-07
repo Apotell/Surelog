@@ -503,23 +503,22 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         }
         while (loopVarId) {
           uhdm::Variable* ref = s.make<uhdm::Variable>();
+          ref->setParent(for_each);
           ref->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
+
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
-          tps->setName(fC->SymName(loopVarId));
-          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
-          fC->populateCoreMembers(loopVarId, loopVarId, tps);
-          if (ref->getTypespec() == nullptr) {
-            uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-            fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
-            tpsRef->setParent(ref);
-            setRefTypespecName(tpsRef, tps, fC->SymName(loopVarId));
-            ref->setTypespec(tpsRef);
-          }
-          ref->getTypespec()->setActual(tps);
+          tps->setFile(ref->getFile());
+
+          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
+          tpsRef->setParent(ref);
+          tpsRef->setActual(tps);
+          tpsRef->setFile(ref->getFile());
+
+          ref->setTypespec(tpsRef);
           loop_vars->emplace_back(ref);
-          ref->setParent(for_each);
+
           loopVarId = fC->Sibling(loopVarId);
           while (fC->Type(loopVarId) == VObjectType::paComma) {
             NodeId lookahead = fC->Sibling(loopVarId);

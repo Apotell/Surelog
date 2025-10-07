@@ -1273,8 +1273,10 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
   const uhdm::Any* const parent = object->getParent();
   if (parent == nullptr) return;
 
+  const uhdm::RefVar* const parentAsRefVar = object->getParent<uhdm::RefVar>();
+
   if (!isImplicitFunctionReturnType(object)) {
-    if (!isValidLocation(object)) {
+    if (!isValidLocation(object) && (parentAsRefVar == nullptr)) {
       reportMissingLocation(object);
     }
     if (!isValidFile(object)) {
@@ -1282,7 +1284,11 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
     }
   }
 
-  if (const uhdm::Any* const actual = object->getActual()) {
+  if (parentAsRefVar != nullptr) {
+    if (isValidName(object)) {
+      reportInvalidName(object);
+    }
+  } else if (const uhdm::Any* const actual = object->getActual()) {
     if (actual->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) {
       reportUnsupportedTypespec(object);
     }

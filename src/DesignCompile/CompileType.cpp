@@ -319,9 +319,9 @@ uhdm::Any* CompileHelper::compileVariable(
         v->setName(completeName);
 
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-        tsRef->setName(completeName);
         tsRef->setParent(v);
         tsRef->setActual(ts);
+        setRefTypespecName(tsRef, ts, completeName);
         fC->populateCoreMembers(declarationId, declarationId, tsRef);
         v->setTypespec(tsRef);
         var = v;

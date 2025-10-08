@@ -112,6 +112,80 @@ bool IntegrityChecker::isUVMMember(const uhdm::Any* object) {
          (filepath.find("/ovm_") != std::string_view::npos);
 }
 
+template <typename T>
+const T* IntegrityChecker::getActual(const uhdm::Any* object) {
+  if (object == nullptr) return nullptr;
+
+  switch (object->getUhdmType()) {
+    case uhdm::UhdmType::BitSelect:
+      return static_cast<const uhdm::BitSelect*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::ChandleVar:
+      return static_cast<const uhdm::ChandleVar*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::ClockingBlock:
+      return static_cast<const uhdm::ClockingBlock*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::HierPath: {
+      if (const uhdm::AnyCollection* const pathElems =
+              static_cast<const uhdm::HierPath*>(object)->getPathElems()) {
+        if (!pathElems->empty()) return getActual<T>(pathElems->back());
+      }
+      return nullptr;
+    }
+
+    case uhdm::UhdmType::PartSelect:
+      return static_cast<const uhdm::PartSelect*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::RefModule:
+      return static_cast<const uhdm::RefModule*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::RefObj:
+      return static_cast<const uhdm::RefObj*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::RefTypespec:
+      return static_cast<const uhdm::RefTypespec*>(object)->getActual<T>();
+
+    case uhdm::UhdmType::RefVar:
+      return static_cast<const uhdm::RefVar*>(object)->getActual<T>();
+
+    default:
+      return nullptr;
+  }
+}
+
+template <typename T>
+const T* IntegrityChecker::getTypespec(const uhdm::Any* object) {
+  if (object == nullptr) return nullptr;
+
+  if (const uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(object)) {
+    if (const uhdm::ArrayTypespec* const at =
+            rt->getActual<uhdm::ArrayTypespec>()) {
+      if (const uhdm::RefTypespec* const irt = at->getIndexTypespec()) {
+        return getTypespec<T>(irt);
+      } else if (const uhdm::RefTypespec* const ert = at->getElemTypespec()) {
+        return getTypespec<T>(ert);
+      }
+    } else if (const uhdm::PackedArrayTypespec* const pat =
+                   rt->getActual<uhdm::PackedArrayTypespec>()) {
+      if (const uhdm::RefTypespec* const ert = pat->getElemTypespec()) {
+        return getTypespec<T>(ert);
+      }
+    }
+  } else if (const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(object)) {
+    return getTypespec<T>(ro->getTypespec());
+  } else if (const uhdm::Variables* const v =
+                 any_cast<uhdm::Variables>(object)) {
+    return getTypespec<T>(v->getTypespec());
+  } else if (const uhdm::Nets* const n = any_cast<uhdm::Nets>(object)) {
+    return getTypespec<T>(n->getTypespec());
+  } else if (const uhdm::IODecl* const iod = any_cast<uhdm::IODecl>(object)) {
+    return getTypespec<T>(iod->getTypespec());
+  }
+
+  return nullptr;
+}
+
 bool IntegrityChecker::isValidFile(const uhdm::Any* object) {
   std::string_view name = object->getFile();
   return !name.empty() && (name != uhdm::SymbolFactory::getBadSymbol());
@@ -859,6 +933,14 @@ void IntegrityChecker::reportUnsupportedTypespec(
   }
 }
 
+void IntegrityChecker::reportInvalidForeachVariable(
+    const uhdm::Any* object) const {
+  if (m_reportInvalidForeachVariable) {
+    reportError(ErrorDefinition::INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE,
+                object);
+  }
+}
+
 void IntegrityChecker::reportInvalidTypespecLocation(const uhdm::Any* object) {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool shouldReport = false;
@@ -1159,7 +1241,24 @@ void IntegrityChecker::visitExtends(const uhdm::Extends* object) {}
 void IntegrityChecker::visitFinalStmt(const uhdm::FinalStmt* object) {}
 void IntegrityChecker::visitForStmt(const uhdm::ForStmt* object) {}
 void IntegrityChecker::visitForce(const uhdm::Force* object) {}
-void IntegrityChecker::visitForeachStmt(const uhdm::ForeachStmt* object) {}
+void IntegrityChecker::visitForeachStmt(const uhdm::ForeachStmt* object) {
+  if (const uhdm::Any* const variable = object->getVariable()) {
+    if (const uhdm::Any* const actual = getActual<>(variable)) {
+      if (actual->getUhdmType() == uhdm::UhdmType::IODecl) {
+        if (const uhdm::Typespec* const typespec = getTypespec<>(actual)) {
+          if ((typespec->getUhdmType() != uhdm::UhdmType::ArrayTypespec) &&
+              (typespec->getUhdmType() !=
+               uhdm::UhdmType::PackedArrayTypespec)) {
+            reportInvalidForeachVariable(object);
+          }
+        }
+      } else if ((actual->getUhdmType() != uhdm::UhdmType::ArrayVar) &&
+                 (actual->getUhdmType() != uhdm::UhdmType::PackedArrayVar)) {
+        reportInvalidForeachVariable(object);
+      }
+    }
+  }
+}
 void IntegrityChecker::visitForeverStmt(const uhdm::ForeverStmt* object) {}
 void IntegrityChecker::visitForkStmt(const uhdm::ForkStmt* object) {}
 void IntegrityChecker::visitFuncCall(const uhdm::FuncCall* object) {}

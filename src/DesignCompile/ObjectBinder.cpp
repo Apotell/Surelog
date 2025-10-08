@@ -146,7 +146,7 @@ const T* ObjectBinder::getParent(const uhdm::Any* object) const {
 }
 
 template <typename T>
-const T* ObjectBinder::getActual(const uhdm::Any* object) const {
+const T* ObjectBinder::getActual(const uhdm::Any* object) {
   if (object == nullptr) return nullptr;
 
   switch (object->getUhdmType()) {
@@ -164,6 +164,7 @@ const T* ObjectBinder::getActual(const uhdm::Any* object) const {
               static_cast<const uhdm::HierPath*>(object)->getPathElems()) {
         if (!pathElems->empty()) return getActual<T>(pathElems->back());
       }
+      return nullptr;
     }
 
     case uhdm::UhdmType::PartSelect:
@@ -237,42 +238,35 @@ bool ObjectBinder::setActual(const uhdm::Any* object,
 }
 
 template <typename T>
-const T* ObjectBinder::getTypespec(const uhdm::Any* object) const {
+const T* ObjectBinder::getTypespec(const uhdm::Any* object) {
   if (object == nullptr) return nullptr;
 
-  const uhdm::Typespec* t = nullptr;
-  if (const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(object)) {
-    if (const uhdm::RefTypespec* const rt = ro->getTypespec()) {
-      t = rt->getActual();
+  if (const uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(object)) {
+    if (const uhdm::ArrayTypespec* const at =
+            rt->getActual<uhdm::ArrayTypespec>()) {
+      if (const uhdm::RefTypespec* const irt = at->getIndexTypespec()) {
+        return getTypespec<T>(irt);
+      } else if (const uhdm::RefTypespec* const ert = at->getElemTypespec()) {
+        return getTypespec<T>(ert);
+      }
+    } else if (const uhdm::PackedArrayTypespec* const pat =
+                   rt->getActual<uhdm::PackedArrayTypespec>()) {
+      if (const uhdm::RefTypespec* const ert = pat->getElemTypespec()) {
+        return getTypespec<T>(ert);
+      }
     }
+  } else if (const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(object)) {
+    return getTypespec<T>(ro->getTypespec());
   } else if (const uhdm::Variables* const v =
                  any_cast<uhdm::Variables>(object)) {
-    if (const uhdm::RefTypespec* const rt = v->getTypespec()) {
-      t = rt->getActual();
-    }
+    return getTypespec<T>(v->getTypespec());
   } else if (const uhdm::Nets* const n = any_cast<uhdm::Nets>(object)) {
-    if (const uhdm::RefTypespec* const rt = n->getTypespec()) {
-      t = rt->getActual();
-    }
-  } else if (const uhdm::RefTypespec* const rt =
-                 any_cast<uhdm::RefTypespec>(object)) {
-    t = rt->getActual();
+    return getTypespec<T>(n->getTypespec());
+  } else if (const uhdm::IODecl* const iod = any_cast<uhdm::IODecl>(object)) {
+    return getTypespec<T>(iod->getTypespec());
   }
 
-  if (const uhdm::ArrayTypespec* const at = any_cast<uhdm::ArrayTypespec>(t)) {
-    if (const uhdm::RefTypespec* const rt = at->getIndexTypespec()) {
-      t = rt->getActual();
-    } else if (const uhdm::RefTypespec* const rt = at->getElemTypespec()) {
-      t = rt->getActual();
-    }
-  } else if (const uhdm::PackedArrayTypespec* const at =
-                 any_cast<uhdm::PackedArrayTypespec>(t)) {
-    if (const uhdm::RefTypespec* const rt = at->getElemTypespec()) {
-      t = rt->getActual();
-    }
-  }
-
-  return any_cast<T>(t);
+  return nullptr;
 }
 
 bool ObjectBinder::setTypespec(const uhdm::Any* object,
@@ -1016,6 +1010,9 @@ const uhdm::Any* ObjectBinder::findInDesign(std::string_view name,
   } else if (const uhdm::Any* const actual =
                  findInCollection(name, refType, scope->getAllUdps(), scope)) {
     return actual;
+  } else if (const uhdm::Any* const actual = findInCollection(
+                 name, refType, scope->getTypespecs(), scope)) {
+    return actual;
   }
   if (refType == RefType::Typespec) {
     if (const uhdm::Any* const actual =
@@ -1562,14 +1559,16 @@ const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType,
 }
 
 const uhdm::Any* ObjectBinder::find(const uhdm::Any* object, RefType refType) {
+  std::string_view name = object->getName();
+  if (name.empty()) return nullptr;
+
   m_searched.clear();
   m_searched.emplace(object);  // Prevent returning the same object
-  if (const uhdm::Any* const actual =
-          find(object->getName(), refType, object)) {
+  if (const uhdm::Any* const actual = find(name, refType, object)) {
     return actual;
   }
   if (const uhdm::Any* const p = getPackage("builtin", object)) {
-    if (const uhdm::Any* const actual = find(object->getName(), refType, p)) {
+    if (const uhdm::Any* const actual = find(name, refType, p)) {
       return actual;
     }
   }
@@ -1678,9 +1677,7 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
       uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(source);
       if (const uhdm::UnsupportedTypespec* const uts =
               rt->getActual<uhdm::UnsupportedTypespec>()) {
-        std::string_view name = source->getName();
-        if (const uhdm::Any* const actual =
-                find(name, RefType::Typespec, source)) {
+        if (const uhdm::Any* const actual = find(source, RefType::Typespec)) {
           if (const uhdm::Typespec* const replacement =
                   any_cast<uhdm::Typespec>(actual)) {
             rt->setActual(const_cast<uhdm::Typespec*>(replacement));

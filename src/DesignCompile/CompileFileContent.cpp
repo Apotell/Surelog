@@ -187,20 +187,22 @@ bool CompileFileContent::collectObjects_() {
     }
   }
 
-  for (Signal* sig : m_fileContent->getSignals()) {
-    const FileContent* fC = sig->getFileContent();
-    NodeId id = sig->getNodeId();
-    // Assignment to a default value
-    uhdm::Expr* exp = m_helper.exprFromAssign(
-        m_fileContent, m_compileDesign, fC, id, sig->getUnpackedDimension());
-    if (uhdm::Any* obj =
-            m_helper.compileSignals(m_fileContent, m_compileDesign, sig)) {
-      fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
-      obj->setParent(udesign);
-      if (exp != nullptr) {
-        exp->setParent(obj, true);
-        if (uhdm::Variables* const var = any_cast<uhdm::Variables>(obj)) {
-          var->setExpr(exp);
+  if (!m_declOnly) {
+    for (Signal* sig : m_fileContent->getSignals()) {
+      const FileContent* fC = sig->getFileContent();
+      NodeId id = sig->getNodeId();
+      // Assignment to a default value
+      uhdm::Expr* exp = m_helper.exprFromAssign(
+          m_fileContent, m_compileDesign, fC, id, sig->getUnpackedDimension());
+      if (uhdm::Any* obj =
+              m_helper.compileSignals(m_fileContent, m_compileDesign, sig)) {
+        fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
+        obj->setParent(udesign);
+        if (exp != nullptr) {
+          exp->setParent(obj, true);
+          if (uhdm::Variables* const var = any_cast<uhdm::Variables>(obj)) {
+            var->setExpr(exp);
+          }
         }
       }
     }

@@ -53,6 +53,11 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   static bool isValidName(const uhdm::Any* object);
   static bool isValidLocation(const uhdm::Any* object);
 
+  template <typename T = uhdm::Any>
+  static const T* getActual(const uhdm::Any* object);
+  template <typename T = uhdm::Typespec>
+  static const T* getTypespec(const uhdm::Any* object);
+
   std::set<const uhdm::PreprocMacroInstance*> getMacroInstances(
       const uhdm::Any* object) const;
 
@@ -93,6 +98,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void reportNullActual(const uhdm::Any* object) const;
   void reportNullTypespec(const uhdm::Any* object) const;
   void reportUnsupportedTypespec(const uhdm::Any* object) const;
+  void reportInvalidForeachVariable(const uhdm::Any* object) const;
   void reportInvalidTypespecLocation(const uhdm::Any* object);
 
   // clang-format off
@@ -517,6 +523,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   bool m_reportNullTypespec = true;
   bool m_reportUnsupportedTypespec = true;
   bool m_reportDuplicates = true;
+  bool m_reportInvalidForeachVariable = true;
 };
 
 };  // namespace SURELOG

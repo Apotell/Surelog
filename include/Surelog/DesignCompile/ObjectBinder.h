@@ -96,11 +96,11 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   const T* getParent(const uhdm::Any* object) const;
 
   template <typename T = uhdm::Any>
-  const T* getActual(const uhdm::Any* object) const;
+  static const T* getActual(const uhdm::Any* object);
   bool setActual(const uhdm::Any* object, const uhdm::Any* actual) const;
 
   template <typename T = uhdm::Typespec>
-  const T* getTypespec(const uhdm::Any* object) const;
+  static const T* getTypespec(const uhdm::Any* object);
   bool setTypespec(const uhdm::Any* object, const uhdm::Typespec* actual) const;
 
   const uhdm::Package* getPackage(std::string_view name,

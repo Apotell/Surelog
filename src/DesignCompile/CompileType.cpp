@@ -152,6 +152,28 @@ uhdm::Any* CompileHelper::compileVariable(
       (decl_type != VObjectType::STRING_CONST)) {
     ts = compileTypespec(component, fC, declarationId, unpackedDimId,
                          compileDesign, pstmt, instance, true);
+    if (ts != nullptr) {
+      if (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
+        result = s.make<uhdm::ArrayVar>();
+      } else if (ts->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
+        result = s.make<uhdm::PackedArrayVar>();
+      }
+    }
+
+    if (result != nullptr) {
+      fC->populateCoreMembers(nameId, nameId, result);
+
+      uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+      rt->setActual(ts);
+      rt->setParent(result);
+      fC->populateCoreMembers(declarationId, declarationId, rt);
+
+      uhdm::Variable* const v = any_cast<uhdm::Variable>(result);
+      v->setTypespec(rt);
+      v->setName(fC->SymName(nameId));
+
+      return result;
+    }
   }
   bool isSigned = true;
   const NodeId signId = fC->Sibling(variable);
@@ -1030,7 +1052,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
     }
-    fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
+    fC->populateCoreMembers(unpackedId, unpackDimensionId2, taps);
 
     uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
     ert->setParent(taps);

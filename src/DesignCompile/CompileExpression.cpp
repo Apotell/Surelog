@@ -1543,10 +1543,12 @@ uhdm::Any *CompileHelper::compileExpression(
       break;
     }
     case VObjectType::paClass_new: {
+      NodeId stId = fC->sl_collect(parent, VObjectType::STRING_CONST);
       uhdm::MethodFuncCall *sys = s.make<uhdm::MethodFuncCall>();
       sys->setName("new");
       sys->setParent(pexpr);
       fC->populateCoreMembers(parent, parent, sys);
+      if (stId) fC->populateCoreMembers(stId, stId, sys->getNameObj());
       if (uhdm::AnyCollection *arguments =
               compileTfCallArguments(component, fC, child, compileDesign,
                                      reduce, sys, instance, muteErrors)) {
@@ -4500,9 +4502,15 @@ uhdm::Any *CompileHelper::compileBits(
     result = sys;
   } else {
     uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
+
+    NodeId stId = fC->sl_collect(callId, VObjectType::STRING_CONST);
+
     sys->setName("$bits");
     sys->setParent(pexpr);
     fC->populateCoreMembers(callId, callId, sys);
+
+    if (stId) fC->populateCoreMembers(stId, stId, sys->getNameObj());
+
     if (uhdm::AnyCollection *arguments = compileTfCallArguments(
             component, fC, List_of_arguments, compileDesign, reduce, sys,
             instance, muteErrors)) {
@@ -4870,6 +4878,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
     if (result == nullptr) {
       NodeId List_of_arguments = fC->Sibling(nameId);
       uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
+
       sys->setName(StrCat("$", name));
       sys->setParent(pexpr);
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
@@ -4909,6 +4918,10 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
         fC->populateCoreMembers(name, List_of_arguments, fcall);
       else
         fC->populateCoreMembers(Method, Method, fcall);
+
+      NodeId stId = fC->sl_collect(Method, VObjectType::STRING_CONST);
+      if (stId) fC->populateCoreMembers(stId, stId, fcall->getNameObj());
+
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, compileDesign, reduce, fcall,
               instance, muteErrors)) {
@@ -5424,8 +5437,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
           } else {
             fcall = s.make<uhdm::MethodFuncCall>();
             const std::string_view methodName = fC->SymName(dotedName);
+            NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
             fcall->setName(methodName);
             fC->populateCoreMembers(dotedName, id, fcall);
+            if (stId)
+              fC->populateCoreMembers(stId, stId, fcall->getNameObj());
             if (uhdm::AnyCollection *arguments = compileTfCallArguments(
                     component, fC, List_of_arguments, compileDesign, reduce,
                     fcall, instance, muteErrors)) {

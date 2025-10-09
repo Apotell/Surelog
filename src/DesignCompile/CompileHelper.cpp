@@ -536,10 +536,13 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
 
+      NodeId stId = fC->sl_collect(type_name, VObjectType::STRING_CONST);
       uhdm::TypedefTypespec* typespecTypespec = s.make<uhdm::TypedefTypespec>();
       typespecTypespec->setName(name);
       typespecTypespec->setParent(pstmt);
       fC->populateCoreMembers(type_name, type_name, typespecTypespec);
+      if (stId)
+        fC->populateCoreMembers(stId, stId, typespecTypespec->getNameObj());
 
       uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
       refTypespec->setParent(typespecTypespec);
@@ -639,9 +642,15 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       newTypeDef->setDefinition(st);
 
       uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+
+      NodeId stId = fC->sl_collect(type_declaration, VObjectType::STRING_CONST);
+
       typedefTypespec->setName(fullName);
       typedefTypespec->setParent(pstmt);
       fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+      if (stId) 
+        fC->populateCoreMembers(stId, stId, typedefTypespec->getNameObj());
 
       if (uhdm::Typespec* ts =
               compileTypespec(scope, fC, data_type, Variable_dimension,
@@ -793,9 +802,12 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     }
 
     uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+    NodeId stId = fC->sl_collect(type_name, VObjectType::STRING_CONST);
     typedefTypespec->setName(fullName);
     typedefTypespec->setParent(pstmt);
     fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+    if (stId)
+      fC->populateCoreMembers(stId, stId, typedefTypespec->getNameObj());
 
     uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
     refTypespec->setParent(typedefTypespec);
@@ -1019,9 +1031,14 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
 
         uhdm::TypedefTypespec* typedefTypespec =
             s.make<uhdm::TypedefTypespec>();
+
+        NodeId stId = fC->sl_collect(type_name, VObjectType::STRING_CONST);
+
         typedefTypespec->setName(fullName);
         typedefTypespec->setParent(pstmt);
         fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+        if (stId)
+          fC->populateCoreMembers(stId, stId, typedefTypespec->getNameObj());
 
         uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
         refTypespec->setParent(typedefTypespec);
@@ -2396,6 +2413,12 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
     fC->populateCoreMembers(package_import_item_id, package_import_item_id,
                             import_stmt);
     import_stmt->setName(fC->SymName(package_import_item_id));
+
+    NodeId stId = fC->sl_collect(package_import_item_id, VObjectType::STRING_CONST);
+
+    if (stId)
+      fC->populateCoreMembers(stId, stId, import_stmt->getNameObj());
+
     NodeId package_name_id = fC->Child(package_import_item_id);
 
     NodeId item_name_id = fC->Sibling(package_name_id);
@@ -5035,9 +5058,11 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
       call->setParent(pexpr);
     }
   }
+  NodeId stId = fC->sl_collect(Tf_call_stmt, VObjectType::STRING_CONST);
   if (call->getName().empty()) call->setName(name);
   if (call->getStartLine() == 0) {
     fC->populateCoreMembers(Tf_call_stmt, Tf_call_stmt, call);
+    if (stId) fC->populateCoreMembers(stId, stId, call->getNameObj());
   }
   NodeId argListNode = fC->Sibling(tfNameNode);
   while (fC->Type(argListNode) == VObjectType::paAttribute_instance) {

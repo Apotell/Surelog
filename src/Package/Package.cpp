@@ -35,6 +35,8 @@
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Testbench/ClassDefinition.h"
 
+#include <uhdm/uhdm.h>
+
 namespace SURELOG {
 
 Package::Package(Session* session, std::string_view name, Library* library,
@@ -52,10 +54,13 @@ Package::Package(Session* session, std::string_view name, Library* library,
   // }
 
   uhdm::Package* const instance = serializer.make<uhdm::Package>();
+  NodeId stId = fC->sl_collect(nodeId, VObjectType::STRING_CONST);
   if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PACKAGE),
                             nodeId, instance);
+  if (stId)
+    fC->populateCoreMembers(stId, stId, instance->getNameObj());
   setUhdmModel(instance);
 }
 

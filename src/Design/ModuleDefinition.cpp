@@ -26,6 +26,7 @@
 #include <uhdm/Serializer.h>
 #include <uhdm/interface.h>
 #include <uhdm/module.h>
+#include <uhdm/uhdm.h>
 
 #include <cstddef>
 #include <cstdint>
@@ -73,10 +74,12 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
 
     default: {
       uhdm::Module* const instance = serializer.make<uhdm::Module>();
+      NodeId stId = fC->sl_collect(nodeId, VObjectType::STRING_CONST);
       if (!name.empty()) instance->setName(name);
       fC->populateCoreMembers(
           fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
           instance);
+      if (stId) fC->populateCoreMembers(stId, stId, instance->getNameObj());
       setUhdmModel(instance);
     } break;
   }

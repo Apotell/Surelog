@@ -1915,7 +1915,9 @@ bool CompileHelper::compileTask(DesignComponent* component,
     task = s.make<uhdm::Task>();
     task->setName(name);
     task->setParent(pscope);
+    NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
     fC->populateCoreMembers(id, id, task);
+    if (stId) fC->populateCoreMembers(stId, stId, task->getNameObj());
     task_funcs->emplace_back(task);
     return true;
   }
@@ -2300,7 +2302,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     } else {
       func->setParent(pscope);
     }
+    NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
     fC->populateCoreMembers(id, id, func);
+    if (stId) fC->populateCoreMembers(stId, stId, func->getNameObj());
     task_funcs->emplace_back(func);
     return true;
   }
@@ -2725,9 +2729,12 @@ Function* CompileHelper::compileFunctionPrototype(
     funcName = fC->SymName(function_name);
   }
 
+  NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
+
   func->setName(funcName);
   func->setParent(scope->getUhdmModel());
   fC->populateCoreMembers(id, id, func);
+  if (stId) fC->populateCoreMembers(stId, stId, func->getNameObj());
 
   uhdm::Typespec* ts =
       compileTypespec(scope, fC, type, InvalidNodeId, compileDesign,

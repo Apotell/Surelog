@@ -24,6 +24,7 @@
 
 #include <uhdm/Serializer.h>
 #include <uhdm/class_defn.h>
+#include <uhdm/uhdm.h>
 
 #include <cstdint>
 #include <string_view>
@@ -56,11 +57,13 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name,
   addFileContent(fC, nodeId);
 
   uhdm::ClassDefn* const instance = serializer.make<uhdm::ClassDefn>();
+  NodeId stId = fC->sl_collect(nodeId, VObjectType::STRING_CONST);
   if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr)) {
     fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::CLASS), nodeId,
                             instance);
   }
+  if (stId) fC->populateCoreMembers(stId, stId, instance->getNameObj());
   if (container != nullptr) instance->setParent(container->getUhdmModel());
   setUhdmModel(instance);
 }

@@ -2425,7 +2425,7 @@ uhdm::Any *CompileHelper::compileExpression(
                 }
               }
             }
-            if (m_elaborate == Elaborate::Yes) {
+            if (Simple_type) {
               if (uhdm::Typespec *tps = compileTypespec(
                       component, fC, Simple_type, InvalidNodeId, compileDesign,
                       reduce, operation, instance, false)) {

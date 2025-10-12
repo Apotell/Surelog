@@ -847,7 +847,10 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       typedefTypespec->setName(fullName);
       typedefTypespec->setParent(pstmt);
       NodeId tdId = type_name ? type_name : stype;
+      NodeId stId = fC->sl_collect(tdId, VObjectType::STRING_CONST);
       fC->populateCoreMembers(tdId, tdId, typedefTypespec);
+      if (stId)
+        fC->populateCoreMembers(stId, stId, typedefTypespec->getNameObj());
 
       if (uhdm::Typespec* tps =
               compileTypespec(scope, fC, data_type, Variable_dimension,
@@ -4972,10 +4975,13 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
       const std::string_view mname = fC->SymName(tfNameNode);
       NodeId argListNode = fC->Sibling(tfNameNode);
+      NodeId stId = fC->sl_collect(tfNameNode, VObjectType::STRING_CONST);
       fC->populateCoreMembers(dollar_or_string,
                               argListNode ? argListNode : tfNameNode, fcall);
+
       fcall->setName(mname);
       fcall->setParent(pexpr);
+      if (stId) fC->populateCoreMembers(stId, stId, fcall->getNameObj());
       uhdm::RefObj* prefix = s.make<uhdm::RefObj>();
       prefix->setName(name);
       prefix->setParent(fcall);
@@ -5226,10 +5232,13 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(
     AssignOp_Assign = InvalidNodeId;
     if (fC->Type(Delay_or_event_control) == VObjectType::paDynamic_array_new) {
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
+      NodeId stId =
+          fC->sl_collect(Delay_or_event_control, VObjectType::STRING_CONST);
       fcall->setParent(assign);
       fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control,
                               fcall);
       fcall->setName("new");
+      if (stId) fC->populateCoreMembers(stId, stId, fcall->getNameObj());
       NodeId List_of_arguments = fC->Child(Delay_or_event_control);
       if (List_of_arguments) {
         if (uhdm::AnyCollection* arguments = compileTfCallArguments(

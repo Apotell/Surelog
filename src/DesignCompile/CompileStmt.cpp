@@ -404,7 +404,9 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
 
       if (labelId) {
         label = fC->SymName(labelId);
+        NodeId stId = fC->sl_collect(labelId, VObjectType::STRING_CONST);
         fork->setName(label);
+        if (stId) fC->populateCoreMembers(stId, stId, fork->getNameObj());
       }
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
@@ -2126,10 +2128,10 @@ bool CompileHelper::compileClassConstructorDeclaration(
       }
     }
   }
-
   func->setName(name);
   func->setIODecls(
       compileTfPortList(component, func, fC, Tf_port_list, compileDesign));
+  fC->populateCoreMembers(nodeId, nodeId, func->getNameObj());
 
   NodeId Stmt;
   if (fC->Type(Tf_port_list) == VObjectType::paFunction_statement_or_null) {
@@ -2160,6 +2162,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       mcall->setParent(func);
       mcall->setName("super.new");
       NodeId Args = fC->Sibling(Stmt);
+      NodeId stId = fC->sl_collect(Args, VObjectType::STRING_CONST);
       if (fC->Type(Args) == VObjectType::paArgument_list) {
         if (uhdm::AnyCollection* arguments =
                 compileTfCallArguments(component, fC, Args, compileDesign,
@@ -2170,6 +2173,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       }
       func->setStmt(mcall);
       fC->populateCoreMembers(Stmt, Args, mcall);
+      if (stId) fC->populateCoreMembers(stId, stId, mcall->getNameObj());
     } else {
       if (NodeId Statement = fC->Child(Stmt)) {
         if (uhdm::AnyCollection* sts = compileStmt(
@@ -2205,7 +2209,9 @@ bool CompileHelper::compileClassConstructorDeclaration(
           }
           Stmt = fC->Sibling(Stmt);
         }
+        NodeId stId = fC->sl_collect(Args, VObjectType::STRING_CONST);
         fC->populateCoreMembers(Stmt, Args, mcall);
+        if (stId) fC->populateCoreMembers(stId, stId, mcall->getNameObj());
         stmts->emplace_back(mcall);
         mcall->setParent(begin);
       } else {
@@ -3224,6 +3230,7 @@ uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(
   func_call->setParent(pexpr);
   func_call->setName("randomize");
   fC->populateCoreMembers(id, id, func_call);
+  fC->populateCoreMembers(id, id, func_call->getNameObj());
 
   NodeId Identifier_list = id;
   if (fC->Type(id) == VObjectType::paRandomize_call) {

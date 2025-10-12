@@ -61,6 +61,7 @@
 #include <uhdm/ref_typespec.h>
 #include <uhdm/task.h>
 #include <uhdm/task_decl.h>
+#include <uhdm/uhdm.h>
 
 #include <cstdint>
 #include <stack>
@@ -613,9 +614,11 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
 
       if (td == nullptr) {
         td = s.make<uhdm::TaskDecl>();
+        NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
         td->setName(taskName);
         td->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, td);
+        if (stId) fC->populateCoreMembers(stId, stId, td->getNameObj());
         task_func_decls->emplace_back(td);
       }
 
@@ -662,9 +665,11 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
 
       if (fd == nullptr) {
         fd = s.make<uhdm::FunctionDecl>();
+        NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
         fd->setName(funcName);
         fd->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, fd);
+        if (stId) fC->populateCoreMembers(stId, stId, fd->getNameObj());
         task_func_decls->emplace_back(fd);
       }
 

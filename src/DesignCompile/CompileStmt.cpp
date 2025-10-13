@@ -321,8 +321,10 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         tempItem = fC->Sibling(tempItem);
       }
       if (labelId) {
+        NodeId stId = fC->sl_collect(labelId, VObjectType::STRING_CONST);
         label = fC->SymName(labelId);
         begin->setName(label);
+        if (stId) fC->populateCoreMembers(stId, stId, begin->getNameObj());
       }
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
@@ -2209,9 +2211,8 @@ bool CompileHelper::compileClassConstructorDeclaration(
           }
           Stmt = fC->Sibling(Stmt);
         }
-        NodeId stId = fC->sl_collect(Args, VObjectType::STRING_CONST);
         fC->populateCoreMembers(Stmt, Args, mcall);
-        if (stId) fC->populateCoreMembers(stId, stId, mcall->getNameObj());
+        fC->populateCoreMembers(Args, Args, mcall->getNameObj());
         stmts->emplace_back(mcall);
         mcall->setParent(begin);
       } else {
@@ -2308,9 +2309,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     } else {
       func->setParent(pscope);
     }
-    NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST);
     fC->populateCoreMembers(id, id, func);
-    if (stId) fC->populateCoreMembers(stId, stId, func->getNameObj());
+    fC->populateCoreMembers(id, id, func->getNameObj());
     task_funcs->emplace_back(func);
     return true;
   }

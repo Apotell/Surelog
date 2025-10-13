@@ -5232,13 +5232,12 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(
     AssignOp_Assign = InvalidNodeId;
     if (fC->Type(Delay_or_event_control) == VObjectType::paDynamic_array_new) {
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
-      NodeId stId =
-          fC->sl_collect(Delay_or_event_control, VObjectType::STRING_CONST);
       fcall->setParent(assign);
       fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control,
                               fcall);
       fcall->setName("new");
-      if (stId) fC->populateCoreMembers(stId, stId, fcall->getNameObj());
+      fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control,
+                              fcall->getNameObj());
       NodeId List_of_arguments = fC->Child(Delay_or_event_control);
       if (List_of_arguments) {
         if (uhdm::AnyCollection* arguments = compileTfCallArguments(

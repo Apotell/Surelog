@@ -852,6 +852,13 @@ const uhdm::Any* ObjectBinder::findInDesign(std::string_view name,
     return actual;
   }
 
+  if (refType == RefType::Typespec) {
+    if (const uhdm::Any* const actual =
+            findInCollection(name, refType, scope->getTypespecs(), scope)) {
+      return actual;
+    }
+  }
+
   return nullptr;
 }
 

@@ -816,9 +816,6 @@ Typespec* CompileHelper::compileDatastructureTypespec(
     SURELOG::ValuedComponentI* instance, std::string_view suffixname,
     std::string_view typeName) {
   uhdm::Serializer& s = compileDesign->getSerializer();
-  uhdm::Any* pscope = component->getUhdmModel();
-  Design* const design = compileDesign->getCompiler()->getDesign();
-  if (pscope == nullptr) pscope = design->getUhdmDesign();
   uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
   tps->setName(typeName);
   tps->setParent(s.topScope());

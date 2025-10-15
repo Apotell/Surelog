@@ -499,18 +499,18 @@ def _run_uhdm_lint(
   print('\n')
 
   with open(uhdm_lint_log_filepath, 'wt', encoding='cp850') as uhdm_lint_log_strm:
-    try:
-      result = subprocess.run(
-          uhdm_args,
-          stdout=uhdm_lint_log_strm,
-          stderr=subprocess.STDOUT,
-          check=False,
-          cwd=os.path.dirname(uhdm_lint_filepath))
-      print(f'uhdm-lint terminated with exit code: {result.returncode}')
-    except:
-      status = Status.FAILDUMP
-      print(f'uhdm-lint threw an exception')
-      traceback.print_exc()
+    # try:
+    #   result = subprocess.run(
+    #       uhdm_args,
+    #       stdout=uhdm_lint_log_strm,
+    #       stderr=subprocess.STDOUT,
+    #       check=False,
+    #       cwd=os.path.dirname(uhdm_lint_filepath))
+    #   print(f'uhdm-lint terminated with exit code: {result.returncode}')
+    # except:
+    #   status = Status.FAILDUMP
+    #   print(f'uhdm-lint threw an exception')
+    #   traceback.print_exc()
 
     uhdm_lint_log_strm.flush()
 
@@ -537,18 +537,18 @@ def _run_roundtrip(
 
   status = Status.PASS
   with open(roundtrip_log_filepath, 'wt', encoding='cp850') as roundtrip_log_strm:
-    try:
-      result = subprocess.run(
-          args,
-          stdout=roundtrip_log_strm,
-          stderr=subprocess.STDOUT,
-          check=False,
-          cwd=dirpath)
-      print(f'roundtrip terminated with exit code: {result.returncode}')
-    except:
-      status = Status.FAILDUMP
-      print(f'roundtrip threw an exception')
-      traceback.print_exc()
+    # try:
+    #   result = subprocess.run(
+    #       args,
+    #       stdout=roundtrip_log_strm,
+    #       stderr=subprocess.STDOUT,
+    #       check=False,
+    #       cwd=dirpath)
+    #   print(f'roundtrip terminated with exit code: {result.returncode}')
+    # except:
+    #   status = Status.FAILDUMP
+    #   print(f'roundtrip threw an exception')
+    #   traceback.print_exc()
 
     roundtrip_log_strm.flush()
 

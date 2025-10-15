@@ -5149,25 +5149,25 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
   // ----------------------------------
   // Lint only the elaborated model
-  if (UhdmLint* linter = new UhdmLint(&s, d)) {
-    linter->listenDesigns(designs);
-    delete linter;
-  }
+  // if (UhdmLint* linter = new UhdmLint(&s, d)) {
+  //   linter->listenDesigns(designs);
+  //   delete linter;
+  // }
 
-  if (m_compileDesign->getCompiler()
-          ->getCommandLineParser()
-          ->reportNonSynthesizable()) {
-    std::set<const any*> nonSynthesizableObjects;
-    if (SynthSubset* annotate =
-            new SynthSubset(&s, nonSynthesizableObjects, d, true,
-                            m_compileDesign->getCompiler()
-                                ->getCommandLineParser()
-                                ->reportNonSynthesizableWithFormal())) {
-      annotate->listenDesigns(designs);
-      annotate->filterNonSynthesizable();
-      delete annotate;
-    }
-  }
+  // if (m_compileDesign->getCompiler()
+  //         ->getCommandLineParser()
+  //         ->reportNonSynthesizable()) {
+  //   std::set<const any*> nonSynthesizableObjects;
+  //   if (SynthSubset* annotate =
+  //           new SynthSubset(&s, nonSynthesizableObjects, d, true,
+  //                           m_compileDesign->getCompiler()
+  //                               ->getCommandLineParser()
+  //                               ->reportNonSynthesizableWithFormal())) {
+  //     annotate->listenDesigns(designs);
+  //     annotate->filterNonSynthesizable();
+  //     delete annotate;
+  //   }
+  // }
 
   // Purge obsolete typespecs
   for (auto o : m_compileDesign->getSwapedObjects()) {

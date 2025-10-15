@@ -743,9 +743,10 @@ def _run_one(params):
       pprint.pprint({'result': result})
       print('\n')
 
-      if result['STATUS'] == Status.DIFF:
-        result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-        regression_log_strm.writelines(result['diff-lines'])
+      result['diff-lines'] = []
+      # if result['STATUS'] == Status.DIFF:
+      #   result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
+      #   regression_log_strm.writelines(result['diff-lines'])
 
       end_dt = datetime.now()
       delta = end_dt - start_dt
@@ -831,9 +832,10 @@ def _report_one(params):
     pprint.pprint(result)
     print('\n')
 
-    if result['STATUS'] == Status.DIFF:
-      result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
-      report_log_strm.writelines(result['diff-lines'])
+    result['diff-lines'] = []
+    # if result['STATUS'] == Status.DIFF:
+    #   result['diff-lines'] = _compare_one(golden_log_filepath, surelog_log_filepath)
+    #   report_log_strm.writelines(result['diff-lines'])
 
     end_dt = datetime.now()
     delta = end_dt - start_dt

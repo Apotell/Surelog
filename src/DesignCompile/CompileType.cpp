@@ -586,16 +586,8 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   if (tps == nullptr) {
     while (dtype) {
       if (const TypeDef* tdef = datatype_cast<TypeDef>(dtype)) {
-        if (tdef->getTypespec()) {
-          tps = tdef->getTypespec();
-          while ((tps != nullptr) &&
-                 (tps->getUhdmType() == uhdm::UhdmType::TypedefTypespec)) {
-            tps = static_cast<uhdm::TypedefTypespec*>(tps)
-                      ->getTypedefAlias()
-                      ->getActual();
-          }
-          break;
-        }
+        tps = tdef->getActualTypespec();
+        break;
       } else if (const Enum* en = datatype_cast<Enum>(dtype)) {
         tps = en->getTypespec();
         break;

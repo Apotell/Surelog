@@ -52,7 +52,8 @@ const DataType* DataType::getActual() const {
 uhdm::Typespec* DataType::getActualTypespec() const {
   const DataType* actual = this;
   while (actual != nullptr) {
-    if (actual->m_typespec != nullptr) {
+    if ((actual->m_typespec != nullptr) && (actual->m_typespec->getUhdmType() !=
+                                            uhdm::UhdmType::TypedefTypespec)) {
       return actual->m_typespec;
     }
     actual = actual->getDefinition();

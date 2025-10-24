@@ -40,7 +40,6 @@
 
 // UHDM
 #include <uhdm/always.h>
-#include <uhdm/array_var.h>
 #include <uhdm/assignment.h>
 #include <uhdm/atomic_stmt.h>
 #include <uhdm/attribute.h>
@@ -68,7 +67,7 @@
 #include <uhdm/typespec.h>
 #include <uhdm/typespec_member.h>
 #include <uhdm/uhdm_types.h>
-#include <uhdm/variables.h>
+#include <uhdm/variable.h>
 
 namespace uhdm {
 class constant;
@@ -265,7 +264,7 @@ class CompileHelper final {
                                                 CompileDesign* compileDesign);
 
   template <typename T>
-  std::pair<std::vector<uhdm::IODecl*>*, std::vector<uhdm::Variables*>*>
+  std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*>
   compileTfPortDecl(DesignComponent* scope, T* parent, const FileContent* fC,
                     NodeId id, CompileDesign* compileDesign);
 

@@ -81,7 +81,7 @@ uhdm::AnyCollection* CompileHelper::compileGenVars(
   NodeId identifierListId = fC->Child(id);
   NodeId nameId = fC->Child(identifierListId);
   while (nameId) {
-    uhdm::GenVar* var = s.make<uhdm::GenVar>();
+    uhdm::Variable* var = s.make<uhdm::Variable>();
     var->setName(fC->SymName(nameId));
     var->setParent(component->getUhdmModel());
     fC->populateCoreMembers(nameId, nameId, var);
@@ -298,7 +298,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
     assign_stmt->setParent(genfor);
     fC->populateCoreMembers(varInit, varInit, assign_stmt);
 
-    uhdm::GenVar* const gv = s.make<uhdm::GenVar>();
+    uhdm::Variable* const gv = s.make<uhdm::Variable>();
     gv->setName(fC->SymName(Var));
     gv->setParent(assign_stmt);
     fC->populateCoreMembers(Var, Var, gv);

@@ -718,7 +718,7 @@ bool TestbenchElaboration::bindProperties_() {
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
     uhdm::ClassDefn* defn = classDefinition->getUhdmModel<uhdm::ClassDefn>();
-    uhdm::VariablesCollection* vars = defn->getVariables(true);
+    uhdm::VariableCollection* vars = defn->getVariables(true);
     for (Signal* sig : classDefinition->getSignals()) {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();

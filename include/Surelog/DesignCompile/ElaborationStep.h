@@ -104,7 +104,7 @@ class ElaborationStep {
                       int32_t packedSize,
                       std::vector<uhdm::Range*>* unpackedDimensions,
                       int32_t unpackedSize, ModuleInstance* instance,
-                      uhdm::VariablesCollection* vars, uhdm::Expr* assignExp,
+                      uhdm::VariableCollection* vars, uhdm::Expr* assignExp,
                       uhdm::Typespec* tps);
 
   void swapTypespecPointersInUhdm(

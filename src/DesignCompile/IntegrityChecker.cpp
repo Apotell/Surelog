@@ -35,29 +35,18 @@ namespace SURELOG {
 IntegrityChecker::IntegrityChecker(Session* session)
     : m_session(session),
       m_typesWithValidName{
-          uhdm::UhdmType::ArrayVar,
-          uhdm::UhdmType::BitVar,
-          uhdm::UhdmType::ByteVar,
-          uhdm::UhdmType::ChandleVar,
           uhdm::UhdmType::ClassDefn,
           uhdm::UhdmType::ClassTypespec,
           uhdm::UhdmType::ClassTypespec,
-          uhdm::UhdmType::ClassVar,
           uhdm::UhdmType::EnumNet,
-          uhdm::UhdmType::EnumVar,
           uhdm::UhdmType::FuncCall,
           uhdm::UhdmType::Function,
           uhdm::UhdmType::FunctionDecl,
-          uhdm::UhdmType::GenVar,
           uhdm::UhdmType::Identifier,
           uhdm::UhdmType::IntegerNet,
-          uhdm::UhdmType::IntegerVar,
           uhdm::UhdmType::Interface,
-          uhdm::UhdmType::IntVar,
           uhdm::UhdmType::IODecl,
           uhdm::UhdmType::LogicNet,
-          uhdm::UhdmType::LogicVar,
-          uhdm::UhdmType::LongIntVar,
           uhdm::UhdmType::MethodFuncCall,
           uhdm::UhdmType::MethodTaskCall,
           uhdm::UhdmType::Modport,
@@ -65,36 +54,26 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::NamedEvent,
           uhdm::UhdmType::Package,
           uhdm::UhdmType::PackedArrayNet,
-          uhdm::UhdmType::PackedArrayVar,
           uhdm::UhdmType::Parameter,
           uhdm::UhdmType::Port,
           uhdm::UhdmType::Program,
           uhdm::UhdmType::ProgramTypespec,
-          uhdm::UhdmType::RealVar,
           uhdm::UhdmType::RefModule,
           uhdm::UhdmType::RefObj,
-          uhdm::UhdmType::RefVar,
-          uhdm::UhdmType::ShortIntVar,
-          uhdm::UhdmType::ShortRealVar,
           uhdm::UhdmType::SourceFile,
-          uhdm::UhdmType::StringVar,
           uhdm::UhdmType::StructNet,
-          uhdm::UhdmType::StructVar,
           uhdm::UhdmType::SysFuncCall,
           uhdm::UhdmType::SysTaskCall,
           uhdm::UhdmType::Task,
           uhdm::UhdmType::TaskCall,
           uhdm::UhdmType::TaskDecl,
           uhdm::UhdmType::TimeNet,
-          uhdm::UhdmType::TimeVar,
           uhdm::UhdmType::TypedefTypespec,
           uhdm::UhdmType::TypespecMember,
           // TODO(HS): Change UdpDefn::defName to UdpDefn::name
           // uhdm::UhdmType::UdpDefn,
           uhdm::UhdmType::UdpDefnTypespec,
-          uhdm::UhdmType::UnionVar,
-          uhdm::UhdmType::VarBit,
-          uhdm::UhdmType::VirtualInterfaceVar,
+          uhdm::UhdmType::Variable,
       },
       m_typesWithMissingFile{
           uhdm::UhdmType::Begin,
@@ -347,24 +326,46 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         // elem_type [0:n] var_name
         expectedRelation = LineColumnRelation::Before;
       }
-    } else if (const uhdm::ArrayVar* const parentAsArrayVar =
-                   parent->Cast<uhdm::ArrayVar>()) {
-      if (parentAsArrayVar->getTypespec() == object) {
+    } else if (const uhdm::Variable* const parentAsVariable =
+                   parent->Cast<uhdm::Variable>()) {
+      if (parentAsVariable->getTypespec() == object) {
         // elem_type var_name[range]
         // For arrayVar/Typespec, the range is the location
-        if (parentAsArrayVar->getArrayType() == vpiQueueArray) {
-          // In the case of declaration, i.e. <type> <var_name[$] it is 'After'
-          // In the case of assignment to empty queue, it is overlapping i.e
-          //    <var_name> = {}
-          expectedRelation =
-              ((csl == psl) && (csc == psc) && (cel == pel) && (cec == pec))
-                  ? LineColumnRelation::Inside
-                  : LineColumnRelation::After;
-        } else {
-          // <var_name> <ranges> = ....
-          // ArrayVar::typespec refers to the ranges
-          expectedRelation = LineColumnRelation::After;
+        if (const uhdm::RefTypespec* const rt =
+                parentAsVariable->getTypespec()) {
+          if (const uhdm::ArrayTypespec* const t =
+                  rt->getActual<uhdm::ArrayTypespec>()) {
+            if (t->getArrayType() == vpiQueueArray) {
+              // In the case of declaration, i.e. <type> <var_name[$] it is
+              // 'After' In the case of assignment to empty queue, it is
+              // overlapping i.e
+              //    <var_name> = {}
+              expectedRelation =
+                  ((csl == psl) && (csc == psc) && (cel == pel) && (cec == pec))
+                      ? LineColumnRelation::Inside
+                      : LineColumnRelation::After;
+            }
+          } else {
+            // <var_name> <ranges> = ....
+            // ArrayVar::typespec refers to the ranges
+            expectedRelation = LineColumnRelation::After;
+          }
         }
+        // if (parentAsArrayVar->getArrayType() == vpiQueueArray) {
+        //   // In the case of declaration, i.e. <type> <var_name[$] it is
+        //   'After'
+        //   // In the case of assignment to empty queue, it is overlapping i.e
+        //   //    <var_name> = {}
+        //   expectedRelation =
+        //       ((csl == psl) && (csc == psc) && (cel == pel) && (cec == pec))
+        //           ? LineColumnRelation::Inside
+        //           : LineColumnRelation::After;
+        // }
+        // else {
+        //   // <var_name> <ranges> = ....
+        //   // ArrayVar::typespec refers to the ranges
+        //   expectedRelation = LineColumnRelation::After;
+        // }
       }
     } else if (const uhdm::ArrayTypespec* const parentAsArrayTypespec =
                    parent->Cast<uhdm::ArrayTypespec>()) {
@@ -387,8 +388,8 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         if (actualRelation == LineColumnRelation::After)
           expectedRelation = LineColumnRelation::After;
       }
-    } else if (const uhdm::Variables* const parentAsVariables =
-                   parent->Cast<uhdm::Variables>()) {
+    } else if (const uhdm::Variable* const parentAsVariables =
+                   parent->Cast<uhdm::Variable>()) {
       expectedRelation = LineColumnRelation::Before;
     }
   } else if (const uhdm::RefObj* const objAsRefObj =
@@ -412,18 +413,23 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
     } else if (parent->Cast<uhdm::ModuleArray>() != nullptr) {
       // (module_type var_name[range])
       expectedRelation = LineColumnRelation::After;
-    } else if (parent->Cast<uhdm::ArrayVar>() != nullptr) {
-      // int var_name[range]
-      expectedRelation = LineColumnRelation::After;
-    } else if (parent->Cast<uhdm::ArrayNet>() != nullptr) {
-      // some_type var_name[range]
-      expectedRelation = LineColumnRelation::After;
-    } else if (parent->Cast<uhdm::PackedArrayVar>() != nullptr) {
-      // elem_type [range] var_name
-      expectedRelation = LineColumnRelation::Before;
-    } else if (parent->Cast<uhdm::LogicVar>() != nullptr) {
-      // logic [range] var_name
-      expectedRelation = LineColumnRelation::Before;
+    } else if (const uhdm::Variable* const parentAsVariable =
+                   parent->Cast<uhdm::Variable>()) {
+      if (const uhdm::RefTypespec* const rt = parentAsVariable->getTypespec()) {
+        if (rt->getActual<uhdm::ArrayTypespec>() != nullptr) {
+          // int var_name[range]
+          expectedRelation = LineColumnRelation::After;
+        } else if (rt->getActual<uhdm::ArrayNet>() != nullptr) {
+          // some_type var_name[range]
+          expectedRelation = LineColumnRelation::After;
+        } else if (rt->getActual<uhdm::PackedArrayTypespec>() != nullptr) {
+          // elem_type [range] var_name
+          expectedRelation = LineColumnRelation::Before;
+        } else if (rt->getActual<uhdm::LogicTypespec>() != nullptr) {
+          // logic [range] var_name
+          expectedRelation = LineColumnRelation::Before;
+        }
+      }
     }
   } else if (object->getUhdmType() == uhdm::UhdmType::Attribute) {
     expectedRelation = LineColumnRelation::Before;
@@ -481,8 +487,8 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
       // on the right of the variable!
       expectedRelation = LineColumnRelation::After;
     }
-  } else if (const uhdm::Variables* parentAsVariable =
-                 parent->Cast<uhdm::Variables>()) {
+  } else if (const uhdm::Variable* parentAsVariable =
+                 parent->Cast<uhdm::Variable>()) {
     if (parentAsVariable->getExpr() == object) {
       expectedRelation = LineColumnRelation::After;
     }
@@ -509,11 +515,20 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
   }
 
   if (actualRelation != expectedRelation) {
+    bool isPackedArray = false;
+    if (const uhdm::Variable* const v = parent->Cast<uhdm::Variable>()) {
+      if (const uhdm::RefTypespec* const rt = v->getTypespec()) {
+        if (const uhdm::PackedArrayTypespec* const pat =
+                rt->getActual<uhdm::PackedArrayTypespec>()) {
+          isPackedArray = true;
+        }
+      }
+    }
+
     if ((actualRelation == LineColumnRelation::After) &&
         (expectedRelation == LineColumnRelation::Before) &&
         (object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
-        ((parent->getUhdmType() == uhdm::UhdmType::Port) ||
-         (parent->getUhdmType() == uhdm::UhdmType::PackedArrayVar))) {
+        ((parent->getUhdmType() == uhdm::UhdmType::Port) || isPackedArray)) {
       // typespec for uhdm::Ports*can* be inside the parent module!
       // module (port_name):
       //   input int port_name;
@@ -624,7 +639,8 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
       }
     } else if (const uhdm::Constant* const objectAsConstant =
                    object->Cast<uhdm::Constant>()) {
-      if (const uhdm::Range* const parentAsRange = parent->Cast<uhdm::Range>())
+      if (const uhdm::Range* const parentAsRange =
+    parent->Cast<uhdm::Range>())
     {
         // The left expression of range is allowed to be zero.
         if (parentAsRange->getLeftExpr() == object) return;
@@ -685,8 +701,9 @@ void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
 
     bool shouldReport = false;
 
-    if (const uhdm::RefObj* const objectAsRefObj = object->Cast<uhdm::RefObj>())
-    { shouldReport = object->getName().empty(); shouldReport = shouldReport ||
+    if (const uhdm::RefObj* const objectAsRefObj =
+    object->Cast<uhdm::RefObj>()) { shouldReport = object->getName().empty();
+    shouldReport = shouldReport ||
     (object->getName().find(SymbolTable::getBadSymbol()) !=
                            std::string_view::npos);
 
@@ -724,11 +741,12 @@ void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
             (actual->getUhdmType() == uhdm::UhdmType::VoidTypespec)) {
           shouldReport = false;
         } else if ((actual->getUhdmType() == uhdm::UhdmType::EnumTypespec) ||
-                   (actual->getUhdmType() == uhdm::UhdmType::StructTypespec) ||
-                   (actual->getUhdmType() == uhdm::UhdmType::UnionTypespec)) {
+                   (actual->getUhdmType() == uhdm::UhdmType::StructTypespec)
+    || (actual->getUhdmType() == uhdm::UhdmType::UnionTypespec)) {
           shouldReport = false;
         } else if ((actual->getUhdmType() == uhdm::UhdmType::ClassTypespec) ||
-                   (actual->getUhdmType() == uhdm::UhdmType::InterfaceTypespec)
+                   (actual->getUhdmType() ==
+    uhdm::UhdmType::InterfaceTypespec)
     || (actual->getUhdmType() == uhdm::UhdmType::ModuleTypespec) ||
                    (actual->getUhdmType() ==
                     uhdm::UhdmType::UnsupportedTypespec)) {
@@ -769,19 +787,18 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
 
   bool shouldReport = false;
 
-  if (const uhdm::RefObj* const objectAsRefObj = object->Cast<uhdm::RefObj>()) {
-    shouldReport = objectAsRefObj->getActual() == nullptr;
+  if (const uhdm::RefObj* const objectAsRefObj = object->Cast<uhdm::RefObj>())
+  { shouldReport = objectAsRefObj->getActual() == nullptr;
     // Special case for $root and few others
     if (const uhdm::Any* const parent = object->getParent()) {
       shouldReport =
           shouldReport &&
-          !(((object->getName() == "$root") || (object->getName() == "size") ||
-             (object->getName() == "delete")) &&
-            (parent->getUhdmType() == uhdm::UhdmType::HierPath));
-      shouldReport = shouldReport &&
-                     !((parent->getUhdmType() == uhdm::UhdmType::SysFuncCall) &&
-                       (parent->getName() == "$bits"));
-      shouldReport = shouldReport && (object->getName() != "default");
+          !(((object->getName() == "$root") || (object->getName() == "size")
+  || (object->getName() == "delete")) && (parent->getUhdmType() ==
+  uhdm::UhdmType::HierPath)); shouldReport = shouldReport &&
+                     !((parent->getUhdmType() == uhdm::UhdmType::SysFuncCall)
+  && (parent->getName() == "$bits")); shouldReport = shouldReport &&
+  (object->getName() != "default");
     }
   } else if (const uhdm::RefTypespec* const objectAsRefTypespec =
                  object->Cast<const uhdm::RefTypespec*>()) {
@@ -894,71 +911,51 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
   const std::set<uhdm::UhdmType> allowedScopeChildren{
       uhdm::UhdmType::ArrayNet,
       uhdm::UhdmType::ArrayTypespec,
-      uhdm::UhdmType::ArrayVar,
       uhdm::UhdmType::Assert,
       uhdm::UhdmType::Assume,
       uhdm::UhdmType::BitTypespec,
-      uhdm::UhdmType::BitVar,
       uhdm::UhdmType::ByteTypespec,
-      uhdm::UhdmType::ByteVar,
       uhdm::UhdmType::ChandleTypespec,
-      uhdm::UhdmType::ChandleVar,
       uhdm::UhdmType::ClassTypespec,
-      uhdm::UhdmType::ClassVar,
       uhdm::UhdmType::ConcurrentAssertions,
       uhdm::UhdmType::Cover,
       uhdm::UhdmType::EnumNet,
       uhdm::UhdmType::EnumTypespec,
-      uhdm::UhdmType::EnumVar,
       uhdm::UhdmType::EventTypespec,
       uhdm::UhdmType::ImportTypespec,
       uhdm::UhdmType::IntTypespec,
-      uhdm::UhdmType::IntVar,
       uhdm::UhdmType::IntegerNet,
       uhdm::UhdmType::IntegerTypespec,
-      uhdm::UhdmType::IntegerVar,
       uhdm::UhdmType::InterfaceTypespec,
       uhdm::UhdmType::LetDecl,
       uhdm::UhdmType::LogicNet,
       uhdm::UhdmType::LogicTypespec,
-      uhdm::UhdmType::LogicVar,
       uhdm::UhdmType::LongIntTypespec,
-      uhdm::UhdmType::LongIntVar,
       uhdm::UhdmType::ModuleTypespec,
       uhdm::UhdmType::NamedEvent,
       uhdm::UhdmType::NamedEventArray,
       uhdm::UhdmType::NetBit,
       uhdm::UhdmType::PackedArrayNet,
       uhdm::UhdmType::PackedArrayTypespec,
-      uhdm::UhdmType::PackedArrayVar,
       uhdm::UhdmType::ParamAssign,
       uhdm::UhdmType::Parameter,
       uhdm::UhdmType::PropertyDecl,
       uhdm::UhdmType::PropertyTypespec,
       uhdm::UhdmType::RealTypespec,
-      uhdm::UhdmType::RealVar,
-      uhdm::UhdmType::RefVar,
       uhdm::UhdmType::Restrict,
       uhdm::UhdmType::SequenceDecl,
       uhdm::UhdmType::SequenceTypespec,
       uhdm::UhdmType::ShortIntTypespec,
-      uhdm::UhdmType::ShortIntVar,
       uhdm::UhdmType::ShortRealTypespec,
-      uhdm::UhdmType::ShortRealVar,
       uhdm::UhdmType::StringTypespec,
-      uhdm::UhdmType::StringVar,
       uhdm::UhdmType::StructNet,
       uhdm::UhdmType::StructTypespec,
-      uhdm::UhdmType::StructVar,
       uhdm::UhdmType::TimeNet,
       uhdm::UhdmType::TimeTypespec,
-      uhdm::UhdmType::TimeVar,
       uhdm::UhdmType::TypeParameter,
       uhdm::UhdmType::UnionTypespec,
-      uhdm::UhdmType::UnionVar,
       uhdm::UhdmType::UnsupportedTypespec,
-      uhdm::UhdmType::VarBit,
-      uhdm::UhdmType::VirtualInterfaceVar,
+      uhdm::UhdmType::Variable,
       uhdm::UhdmType::VoidTypespec,
   };
 
@@ -1053,7 +1050,7 @@ void IntegrityChecker::visitAny(const uhdm::Any* object) {
   const uhdm::Design* const parentAsDesign = object->getParent<uhdm::Design>();
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr)) {
     if ((any_cast<uhdm::Typespec>(object) != nullptr) ||
-        (any_cast<uhdm::Variables>(object) != nullptr)) {
+        (any_cast<uhdm::Variable>(object) != nullptr)) {
       reportError(
           ErrorDefinition::INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN,
           object);
@@ -1066,7 +1063,6 @@ void IntegrityChecker::visitAnyPattern(const uhdm::AnyPattern* object) {}
 void IntegrityChecker::visitArrayExpr(const uhdm::ArrayExpr* object) {}
 void IntegrityChecker::visitArrayNet(const uhdm::ArrayNet* object) {}
 void IntegrityChecker::visitArrayTypespec(const uhdm::ArrayTypespec* object) {}
-void IntegrityChecker::visitArrayVar(const uhdm::ArrayVar* object) {}
 void IntegrityChecker::visitAssert(const uhdm::Assert* object) {}
 void IntegrityChecker::visitAssignStmt(const uhdm::AssignStmt* object) {}
 void IntegrityChecker::visitAssignment(const uhdm::Assignment* object) {}
@@ -1089,10 +1085,8 @@ void IntegrityChecker::visitBitSelect(const uhdm::BitSelect* object) {
   if (object->getActual() == nullptr) reportNullActual(object);
 }
 void IntegrityChecker::visitBitTypespec(const uhdm::BitTypespec* object) {}
-void IntegrityChecker::visitBitVar(const uhdm::BitVar* object) {}
 void IntegrityChecker::visitBreakStmt(const uhdm::BreakStmt* object) {}
 void IntegrityChecker::visitByteTypespec(const uhdm::ByteTypespec* object) {}
-void IntegrityChecker::visitByteVar(const uhdm::ByteVar* object) {}
 void IntegrityChecker::visitCaseItem(const uhdm::CaseItem* object) {}
 void IntegrityChecker::visitCaseProperty(const uhdm::CaseProperty* object) {}
 void IntegrityChecker::visitCasePropertyItem(
@@ -1100,7 +1094,6 @@ void IntegrityChecker::visitCasePropertyItem(
 void IntegrityChecker::visitCaseStmt(const uhdm::CaseStmt* object) {}
 void IntegrityChecker::visitChandleTypespec(
     const uhdm::ChandleTypespec* object) {}
-void IntegrityChecker::visitChandleVar(const uhdm::ChandleVar* object) {}
 void IntegrityChecker::visitCheckerDecl(const uhdm::CheckerDecl* object) {}
 void IntegrityChecker::visitCheckerInst(const uhdm::CheckerInst* object) {}
 void IntegrityChecker::visitCheckerInstPort(
@@ -1109,7 +1102,6 @@ void IntegrityChecker::visitCheckerPort(const uhdm::CheckerPort* object) {}
 void IntegrityChecker::visitClassDefn(const uhdm::ClassDefn* object) {}
 void IntegrityChecker::visitClassObj(const uhdm::ClassObj* object) {}
 void IntegrityChecker::visitClassTypespec(const uhdm::ClassTypespec* object) {}
-void IntegrityChecker::visitClassVar(const uhdm::ClassVar* object) {}
 void IntegrityChecker::visitClockedProperty(
     const uhdm::ClockedProperty* object) {}
 void IntegrityChecker::visitClockedSeq(const uhdm::ClockedSeq* object) {}
@@ -1140,7 +1132,6 @@ void IntegrityChecker::visitDoWhile(const uhdm::DoWhile* object) {}
 void IntegrityChecker::visitEnumConst(const uhdm::EnumConst* object) {}
 void IntegrityChecker::visitEnumNet(const uhdm::EnumNet* object) {}
 void IntegrityChecker::visitEnumTypespec(const uhdm::EnumTypespec* object) {}
-void IntegrityChecker::visitEnumVar(const uhdm::EnumVar* object) {}
 void IntegrityChecker::visitEventControl(const uhdm::EventControl* object) {}
 void IntegrityChecker::visitEventStmt(const uhdm::EventStmt* object) {}
 void IntegrityChecker::visitEventTypespec(const uhdm::EventTypespec* object) {}
@@ -1164,7 +1155,6 @@ void IntegrityChecker::visitGenIfElse(const uhdm::GenIfElse* object) {}
 void IntegrityChecker::visitGenRegion(const uhdm::GenRegion* object) {}
 void IntegrityChecker::visitGenScope(const uhdm::GenScope* object) {}
 void IntegrityChecker::visitGenScopeArray(const uhdm::GenScopeArray* object) {}
-void IntegrityChecker::visitGenVar(const uhdm::GenVar* object) {}
 void IntegrityChecker::visitHierPath(const uhdm::HierPath* object) {}
 void IntegrityChecker::visitIODecl(const uhdm::IODecl* object) {}
 void IntegrityChecker::visitIdentifier(const uhdm::Identifier* object) {}
@@ -1183,11 +1173,9 @@ void IntegrityChecker::visitIndexedPartSelect(
     const uhdm::IndexedPartSelect* object) {}
 void IntegrityChecker::visitInitial(const uhdm::Initial* object) {}
 void IntegrityChecker::visitIntTypespec(const uhdm::IntTypespec* object) {}
-void IntegrityChecker::visitIntVar(const uhdm::IntVar* object) {}
 void IntegrityChecker::visitIntegerNet(const uhdm::IntegerNet* object) {}
 void IntegrityChecker::visitIntegerTypespec(
     const uhdm::IntegerTypespec* object) {}
-void IntegrityChecker::visitIntegerVar(const uhdm::IntegerVar* object) {}
 void IntegrityChecker::visitInterface(const uhdm::Interface* object) {}
 void IntegrityChecker::visitInterfaceArray(const uhdm::InterfaceArray* object) {
 }
@@ -1199,10 +1187,8 @@ void IntegrityChecker::visitLetDecl(const uhdm::LetDecl* object) {}
 void IntegrityChecker::visitLetExpr(const uhdm::LetExpr* object) {}
 void IntegrityChecker::visitLogicNet(const uhdm::LogicNet* object) {}
 void IntegrityChecker::visitLogicTypespec(const uhdm::LogicTypespec* object) {}
-void IntegrityChecker::visitLogicVar(const uhdm::LogicVar* object) {}
 void IntegrityChecker::visitLongIntTypespec(
     const uhdm::LongIntTypespec* object) {}
-void IntegrityChecker::visitLongIntVar(const uhdm::LongIntVar* object) {}
 void IntegrityChecker::visitMethodFuncCall(const uhdm::MethodFuncCall* object) {
 }
 void IntegrityChecker::visitMethodTaskCall(const uhdm::MethodTaskCall* object) {
@@ -1227,8 +1213,6 @@ void IntegrityChecker::visitPackedArrayNet(const uhdm::PackedArrayNet* object) {
 }
 void IntegrityChecker::visitPackedArrayTypespec(
     const uhdm::PackedArrayTypespec* object) {}
-void IntegrityChecker::visitPackedArrayVar(const uhdm::PackedArrayVar* object) {
-}
 void IntegrityChecker::visitParamAssign(const uhdm::ParamAssign* object) {}
 void IntegrityChecker::visitParameter(const uhdm::Parameter* object) {}
 void IntegrityChecker::visitPartSelect(const uhdm::PartSelect* object) {
@@ -1255,7 +1239,6 @@ void IntegrityChecker::visitPropertyTypespec(
     const uhdm::PropertyTypespec* object) {}
 void IntegrityChecker::visitRange(const uhdm::Range* object) {}
 void IntegrityChecker::visitRealTypespec(const uhdm::RealTypespec* object) {}
-void IntegrityChecker::visitRealVar(const uhdm::RealVar* object) {}
 void IntegrityChecker::visitRefModule(const uhdm::RefModule* object) {
   if (object->getActual() == nullptr) reportNullActual(object);
 }
@@ -1336,7 +1319,6 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
     }
   }
 }
-void IntegrityChecker::visitRefVar(const uhdm::RefVar* object) {}
 void IntegrityChecker::visitReg(const uhdm::Reg* object) {}
 void IntegrityChecker::visitRegArray(const uhdm::RegArray* object) {}
 void IntegrityChecker::visitRelease(const uhdm::Release* object) {}
@@ -1351,21 +1333,17 @@ void IntegrityChecker::visitSequenceTypespec(
     const uhdm::SequenceTypespec* object) {}
 void IntegrityChecker::visitShortIntTypespec(
     const uhdm::ShortIntTypespec* object) {}
-void IntegrityChecker::visitShortIntVar(const uhdm::ShortIntVar* object) {}
 void IntegrityChecker::visitShortRealTypespec(
     const uhdm::ShortRealTypespec* object) {}
-void IntegrityChecker::visitShortRealVar(const uhdm::ShortRealVar* object) {}
 void IntegrityChecker::visitSoftDisable(const uhdm::SoftDisable* object) {}
 void IntegrityChecker::visitSourceFile(const uhdm::SourceFile* object) {}
 void IntegrityChecker::visitSpecParam(const uhdm::SpecParam* object) {}
 void IntegrityChecker::visitStringTypespec(const uhdm::StringTypespec* object) {
 }
-void IntegrityChecker::visitStringVar(const uhdm::StringVar* object) {}
 void IntegrityChecker::visitStructNet(const uhdm::StructNet* object) {}
 void IntegrityChecker::visitStructPattern(const uhdm::StructPattern* object) {}
 void IntegrityChecker::visitStructTypespec(const uhdm::StructTypespec* object) {
 }
-void IntegrityChecker::visitStructVar(const uhdm::StructVar* object) {}
 void IntegrityChecker::visitSwitchArray(const uhdm::SwitchArray* object) {}
 void IntegrityChecker::visitSwitchTran(const uhdm::SwitchTran* object) {}
 void IntegrityChecker::visitSysFuncCall(const uhdm::SysFuncCall* object) {}
@@ -1380,7 +1358,6 @@ void IntegrityChecker::visitTchkTerm(const uhdm::TchkTerm* object) {}
 void IntegrityChecker::visitThread(const uhdm::Thread* object) {}
 void IntegrityChecker::visitTimeNet(const uhdm::TimeNet* object) {}
 void IntegrityChecker::visitTimeTypespec(const uhdm::TimeTypespec* object) {}
-void IntegrityChecker::visitTimeVar(const uhdm::TimeVar* object) {}
 void IntegrityChecker::visitTypeParameter(const uhdm::TypeParameter* object) {}
 void IntegrityChecker::visitTypedefTypespec(
     const uhdm::TypedefTypespec* object) {}
@@ -1392,7 +1369,6 @@ void IntegrityChecker::visitUdpDefn(const uhdm::UdpDefn* object) {}
 void IntegrityChecker::visitUdpDefnTypespec(
     const uhdm::UdpDefnTypespec* object) {}
 void IntegrityChecker::visitUnionTypespec(const uhdm::UnionTypespec* object) {}
-void IntegrityChecker::visitUnionVar(const uhdm::UnionVar* object) {}
 void IntegrityChecker::visitUnsupportedExpr(
     const uhdm::UnsupportedExpr* object) {}
 void IntegrityChecker::visitUnsupportedStmt(
@@ -1400,10 +1376,8 @@ void IntegrityChecker::visitUnsupportedStmt(
 void IntegrityChecker::visitUnsupportedTypespec(
     const uhdm::UnsupportedTypespec* object) {}
 void IntegrityChecker::visitUserSystf(const uhdm::UserSystf* object) {}
-void IntegrityChecker::visitVarBit(const uhdm::VarBit* object) {}
 void IntegrityChecker::visitVarSelect(const uhdm::VarSelect* object) {}
-void IntegrityChecker::visitVirtualInterfaceVar(
-    const uhdm::VirtualInterfaceVar* object) {}
+void IntegrityChecker::visitVariable(const uhdm::Variable* object) {}
 void IntegrityChecker::visitVoidTypespec(const uhdm::VoidTypespec* object) {}
 void IntegrityChecker::visitWaitFork(const uhdm::WaitFork* object) {}
 void IntegrityChecker::visitWaitStmt(const uhdm::WaitStmt* object) {}
@@ -1417,7 +1391,6 @@ void IntegrityChecker::visitAnyPatternCollection(const uhdm::Any* object, const 
 void IntegrityChecker::visitArrayExprCollection(const uhdm::Any* object, const uhdm::ArrayExprCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitArrayNetCollection(const uhdm::Any* object, const uhdm::ArrayNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitArrayTypespecCollection(const uhdm::Any* object, const uhdm::ArrayTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitArrayVarCollection(const uhdm::Any* object, const uhdm::ArrayVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitAssertCollection(const uhdm::Any* object, const uhdm::AssertCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitAssignStmtCollection(const uhdm::Any* object, const uhdm::AssignStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitAssignmentCollection(const uhdm::Any* object, const uhdm::AssignmentCollection& objects) { reportDuplicates(object, objects); }
@@ -1427,16 +1400,13 @@ void IntegrityChecker::visitAttributeCollection(const uhdm::Any* object, const u
 void IntegrityChecker::visitBeginCollection(const uhdm::Any* object, const uhdm::BeginCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitBitSelectCollection(const uhdm::Any* object, const uhdm::BitSelectCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitBitTypespecCollection(const uhdm::Any* object, const uhdm::BitTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitBitVarCollection(const uhdm::Any* object, const uhdm::BitVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitBreakStmtCollection(const uhdm::Any* object, const uhdm::BreakStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitByteTypespecCollection(const uhdm::Any* object, const uhdm::ByteTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitByteVarCollection(const uhdm::Any* object, const uhdm::ByteVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCaseItemCollection(const uhdm::Any* object, const uhdm::CaseItemCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCasePropertyCollection(const uhdm::Any* object, const uhdm::CasePropertyCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCasePropertyItemCollection(const uhdm::Any* object, const uhdm::CasePropertyItemCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCaseStmtCollection(const uhdm::Any* object, const uhdm::CaseStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitChandleTypespecCollection(const uhdm::Any* object, const uhdm::ChandleTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitChandleVarCollection(const uhdm::Any* object, const uhdm::ChandleVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCheckerDeclCollection(const uhdm::Any* object, const uhdm::CheckerDeclCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCheckerInstCollection(const uhdm::Any* object, const uhdm::CheckerInstCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitCheckerInstPortCollection(const uhdm::Any* object, const uhdm::CheckerInstPortCollection& objects) { reportDuplicates(object, objects); }
@@ -1444,7 +1414,6 @@ void IntegrityChecker::visitCheckerPortCollection(const uhdm::Any* object, const
 void IntegrityChecker::visitClassDefnCollection(const uhdm::Any* object, const uhdm::ClassDefnCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitClassObjCollection(const uhdm::Any* object, const uhdm::ClassObjCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitClassTypespecCollection(const uhdm::Any* object, const uhdm::ClassTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitClassVarCollection(const uhdm::Any* object, const uhdm::ClassVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitClockedPropertyCollection(const uhdm::Any* object, const uhdm::ClockedPropertyCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitClockedSeqCollection(const uhdm::Any* object, const uhdm::ClockedSeqCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitClockingBlockCollection(const uhdm::Any* object, const uhdm::ClockingBlockCollection& objects) { reportDuplicates(object, objects); }
@@ -1475,7 +1444,6 @@ void IntegrityChecker::visitDoWhileCollection(const uhdm::Any* object, const uhd
 void IntegrityChecker::visitEnumConstCollection(const uhdm::Any* object, const uhdm::EnumConstCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitEnumNetCollection(const uhdm::Any* object, const uhdm::EnumNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitEnumTypespecCollection(const uhdm::Any* object, const uhdm::EnumTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitEnumVarCollection(const uhdm::Any* object, const uhdm::EnumVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitEventControlCollection(const uhdm::Any* object, const uhdm::EventControlCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitEventStmtCollection(const uhdm::Any* object, const uhdm::EventStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitEventTypespecCollection(const uhdm::Any* object, const uhdm::EventTypespecCollection& objects) { reportDuplicates(object, objects); }
@@ -1501,7 +1469,6 @@ void IntegrityChecker::visitGenRegionCollection(const uhdm::Any* object, const u
 void IntegrityChecker::visitGenScopeCollection(const uhdm::Any* object, const uhdm::GenScopeCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitGenScopeArrayCollection(const uhdm::Any* object, const uhdm::GenScopeArrayCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitGenStmtCollection(const uhdm::Any* object, const uhdm::GenStmtCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitGenVarCollection(const uhdm::Any* object, const uhdm::GenVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitHierPathCollection(const uhdm::Any* object, const uhdm::HierPathCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitIODeclCollection(const uhdm::Any* object, const uhdm::IODeclCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitIdentifierCollection(const uhdm::Any* object, const uhdm::IdentifierCollection& objects) { reportDuplicates(object, objects); }
@@ -1517,10 +1484,8 @@ void IntegrityChecker::visitInitialCollection(const uhdm::Any* object, const uhd
 void IntegrityChecker::visitInstanceCollection(const uhdm::Any* object, const uhdm::InstanceCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitInstanceArrayCollection(const uhdm::Any* object, const uhdm::InstanceArrayCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitIntTypespecCollection(const uhdm::Any* object, const uhdm::IntTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitIntVarCollection(const uhdm::Any* object, const uhdm::IntVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitIntegerNetCollection(const uhdm::Any* object, const uhdm::IntegerNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitIntegerTypespecCollection(const uhdm::Any* object, const uhdm::IntegerTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitIntegerVarCollection(const uhdm::Any* object, const uhdm::IntegerVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitInterfaceCollection(const uhdm::Any* object, const uhdm::InterfaceCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitInterfaceArrayCollection(const uhdm::Any* object, const uhdm::InterfaceArrayCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitInterfaceTFDeclCollection(const uhdm::Any* object, const uhdm::InterfaceTFDeclCollection& objects) { reportDuplicates(object, objects); }
@@ -1529,9 +1494,7 @@ void IntegrityChecker::visitLetDeclCollection(const uhdm::Any* object, const uhd
 void IntegrityChecker::visitLetExprCollection(const uhdm::Any* object, const uhdm::LetExprCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitLogicNetCollection(const uhdm::Any* object, const uhdm::LogicNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitLogicTypespecCollection(const uhdm::Any* object, const uhdm::LogicTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitLogicVarCollection(const uhdm::Any* object, const uhdm::LogicVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitLongIntTypespecCollection(const uhdm::Any* object, const uhdm::LongIntTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitLongIntVarCollection(const uhdm::Any* object, const uhdm::LongIntVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitMethodFuncCallCollection(const uhdm::Any* object, const uhdm::MethodFuncCallCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitMethodTaskCallCollection(const uhdm::Any* object, const uhdm::MethodTaskCallCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitModPathCollection(const uhdm::Any* object, const uhdm::ModPathCollection& objects) { reportDuplicates(object, objects); }
@@ -1553,7 +1516,6 @@ void IntegrityChecker::visitOrderedWaitCollection(const uhdm::Any* object, const
 void IntegrityChecker::visitPackageCollection(const uhdm::Any* object, const uhdm::PackageCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitPackedArrayNetCollection(const uhdm::Any* object, const uhdm::PackedArrayNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitPackedArrayTypespecCollection(const uhdm::Any* object, const uhdm::PackedArrayTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitPackedArrayVarCollection(const uhdm::Any* object, const uhdm::PackedArrayVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitParamAssignCollection(const uhdm::Any* object, const uhdm::ParamAssignCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitParameterCollection(const uhdm::Any* object, const uhdm::ParameterCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitPartSelectCollection(const uhdm::Any* object, const uhdm::PartSelectCollection& objects) { reportDuplicates(object, objects); }
@@ -1577,11 +1539,9 @@ void IntegrityChecker::visitPropertySpecCollection(const uhdm::Any* object, cons
 void IntegrityChecker::visitPropertyTypespecCollection(const uhdm::Any* object, const uhdm::PropertyTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRangeCollection(const uhdm::Any* object, const uhdm::RangeCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRealTypespecCollection(const uhdm::Any* object, const uhdm::RealTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitRealVarCollection(const uhdm::Any* object, const uhdm::RealVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRefModuleCollection(const uhdm::Any* object, const uhdm::RefModuleCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRefObjCollection(const uhdm::Any* object, const uhdm::RefObjCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRefTypespecCollection(const uhdm::Any* object, const uhdm::RefTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitRefVarCollection(const uhdm::Any* object, const uhdm::RefVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRegCollection(const uhdm::Any* object, const uhdm::RegCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitRegArrayCollection(const uhdm::Any* object, const uhdm::RegArrayCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitReleaseCollection(const uhdm::Any* object, const uhdm::ReleaseCollection& objects) { reportDuplicates(object, objects); }
@@ -1595,19 +1555,15 @@ void IntegrityChecker::visitSequenceDeclCollection(const uhdm::Any* object, cons
 void IntegrityChecker::visitSequenceInstCollection(const uhdm::Any* object, const uhdm::SequenceInstCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSequenceTypespecCollection(const uhdm::Any* object, const uhdm::SequenceTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitShortIntTypespecCollection(const uhdm::Any* object, const uhdm::ShortIntTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitShortIntVarCollection(const uhdm::Any* object, const uhdm::ShortIntVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitShortRealTypespecCollection(const uhdm::Any* object, const uhdm::ShortRealTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitShortRealVarCollection(const uhdm::Any* object, const uhdm::ShortRealVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSimpleExprCollection(const uhdm::Any* object, const uhdm::SimpleExprCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSoftDisableCollection(const uhdm::Any* object, const uhdm::SoftDisableCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSourceFileCollection(const uhdm::Any* object, const uhdm::SourceFileCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSpecParamCollection(const uhdm::Any* object, const uhdm::SpecParamCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitStringTypespecCollection(const uhdm::Any* object, const uhdm::StringTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitStringVarCollection(const uhdm::Any* object, const uhdm::StringVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitStructNetCollection(const uhdm::Any* object, const uhdm::StructNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitStructPatternCollection(const uhdm::Any* object, const uhdm::StructPatternCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitStructTypespecCollection(const uhdm::Any* object, const uhdm::StructTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitStructVarCollection(const uhdm::Any* object, const uhdm::StructVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSwitchArrayCollection(const uhdm::Any* object, const uhdm::SwitchArrayCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSwitchTranCollection(const uhdm::Any* object, const uhdm::SwitchTranCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitSysFuncCallCollection(const uhdm::Any* object, const uhdm::SysFuncCallCollection& objects) { reportDuplicates(object, objects); }
@@ -1625,7 +1581,6 @@ void IntegrityChecker::visitTchkTermCollection(const uhdm::Any* object, const uh
 void IntegrityChecker::visitThreadCollection(const uhdm::Any* object, const uhdm::ThreadCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitTimeNetCollection(const uhdm::Any* object, const uhdm::TimeNetCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitTimeTypespecCollection(const uhdm::Any* object, const uhdm::TimeTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitTimeVarCollection(const uhdm::Any* object, const uhdm::TimeVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitTypeParameterCollection(const uhdm::Any* object, const uhdm::TypeParameterCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitTypedefTypespecCollection(const uhdm::Any* object, const uhdm::TypedefTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitTypespecCollection(const uhdm::Any* object, const uhdm::TypespecCollection& objects) { reportDuplicates(object, objects); }
@@ -1635,15 +1590,12 @@ void IntegrityChecker::visitUdpArrayCollection(const uhdm::Any* object, const uh
 void IntegrityChecker::visitUdpDefnCollection(const uhdm::Any* object, const uhdm::UdpDefnCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUdpDefnTypespecCollection(const uhdm::Any* object, const uhdm::UdpDefnTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUnionTypespecCollection(const uhdm::Any* object, const uhdm::UnionTypespecCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitUnionVarCollection(const uhdm::Any* object, const uhdm::UnionVarCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUnsupportedExprCollection(const uhdm::Any* object, const uhdm::UnsupportedExprCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUnsupportedStmtCollection(const uhdm::Any* object, const uhdm::UnsupportedStmtCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUnsupportedTypespecCollection(const uhdm::Any* object, const uhdm::UnsupportedTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitUserSystfCollection(const uhdm::Any* object, const uhdm::UserSystfCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitVarBitCollection(const uhdm::Any* object, const uhdm::VarBitCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitVarSelectCollection(const uhdm::Any* object, const uhdm::VarSelectCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitVariablesCollection(const uhdm::Any* object, const uhdm::VariablesCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitVirtualInterfaceVarCollection(const uhdm::Any* object, const uhdm::VirtualInterfaceVarCollection& objects) { reportDuplicates(object, objects); }
+void IntegrityChecker::visitVariableCollection(const uhdm::Any* object, const uhdm::VariableCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitVoidTypespecCollection(const uhdm::Any* object, const uhdm::VoidTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitWaitForkCollection(const uhdm::Any* object, const uhdm::WaitForkCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitWaitStmtCollection(const uhdm::Any* object, const uhdm::WaitStmtCollection& objects) { reportDuplicates(object, objects); }

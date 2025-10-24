@@ -44,7 +44,6 @@
 #include <uhdm/module.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/ref_typespec.h>
-#include <uhdm/variables.h>
 #include <uhdm/vpi_user.h>
 #include <uhdm/vpi_visitor.h>
 

@@ -1496,10 +1496,10 @@ uhdm::Any* ElaborationStep::makeVar_(
     DesignComponent* component, Signal* sig,
     std::vector<uhdm::Range*>* packedDimensions, int32_t packedSize,
     std::vector<uhdm::Range*>* unpackedDimensions, int32_t unpackedSize,
-    ModuleInstance* instance, uhdm::VariablesCollection* vars,
+    ModuleInstance* instance, uhdm::VariableCollection* vars,
     uhdm::Expr* assignExp, uhdm::Typespec* tps) {
-  uhdm::Variables* obj = (uhdm::Variables*)m_helper.compileSignals(
-      component, m_compileDesign, sig);
+  uhdm::Variable* obj =
+      (uhdm::Variable*)m_helper.compileSignals(component, m_compileDesign, sig);
   if (assignExp) {
     assignExp->setParent(obj);
     obj->setExpr(assignExp);

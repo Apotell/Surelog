@@ -195,7 +195,7 @@ uhdm::Any* CompileHelper::compileVariable(
         }
         if (cl) {
           ts = cl->getUhdmTypespecModel();
-          uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
+          uhdm::Variable* var = s.make<uhdm::Variable>();
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(typespecName);
           tpsRef->setParent(var);
@@ -210,7 +210,7 @@ uhdm::Any* CompileHelper::compileVariable(
       if ((result == nullptr) && (the_type == VObjectType::STRING_CONST) &&
           (ts != nullptr) &&
           (ts->getUhdmType() == uhdm::UhdmType::ClassTypespec)) {
-        uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
+        uhdm::Variable* var = s.make<uhdm::Variable>();
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(var);
         tsRef->setActual(ts);
@@ -223,7 +223,7 @@ uhdm::Any* CompileHelper::compileVariable(
       }
       if (result == nullptr) {
         if (the_type == VObjectType::paChandle_type) {
-          uhdm::ChandleVar* var = s.make<uhdm::ChandleVar>();
+          uhdm::Variable* var = s.make<uhdm::Variable>();
           var->setName(fC->SymName(nameId));
           fC->populateCoreMembers(nameId, nameId, var);
           if (ts) {
@@ -238,12 +238,12 @@ uhdm::Any* CompileHelper::compileVariable(
         } else {
           if ((ts != nullptr) &&
               (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
-            uhdm::ArrayVar* const av = s.make<uhdm::ArrayVar>();
+            uhdm::Variable* const av = s.make<uhdm::Variable>();
             av->setName(fC->SymName(nameId));
             result = av;
           } else if ((ts != nullptr) && (ts->getUhdmType() ==
                                          uhdm::UhdmType::PackedArrayTypespec)) {
-            uhdm::PackedArrayVar* const pav = s.make<uhdm::PackedArrayVar>();
+            uhdm::Variable* const pav = s.make<uhdm::Variable>();
             pav->setName(fC->SymName(nameId));
             result = pav;
           } else {
@@ -288,9 +288,9 @@ uhdm::Any* CompileHelper::compileVariable(
         const DataType* dtype = pack->getDataType(design, typeName);
         while (dtype) {
           if (uhdm::Typespec* const tps = dtype->getTypespec()) {
-            var = (uhdm::Variables*)compileVariable(
-                component, fC, compileDesign, nameId, the_type, declarationId,
-                tps);
+            var = (uhdm::Variable*)compileVariable(component, fC, compileDesign,
+                                                   nameId, the_type,
+                                                   declarationId, tps);
             break;
           }
           dtype = dtype->getDefinition();
@@ -326,7 +326,7 @@ uhdm::Any* CompileHelper::compileVariable(
       if (var == nullptr) {
         const std::string completeName = StrCat(packageName, "::", typeName);
 
-        Variables* const v = s.make<uhdm::ClassVar>();
+        uhdm::Variable* const v = s.make<uhdm::Variable>();
         v->setName(completeName);
 
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
@@ -346,7 +346,7 @@ uhdm::Any* CompileHelper::compileVariable(
       if (pstmt) result->setParent(pstmt, true);
       // Implicit type
       if ((result == nullptr) && declarationId) {
-        uhdm::LogicVar* var = s.make<uhdm::LogicVar>();
+        uhdm::Variable* var = s.make<uhdm::Variable>();
         var->setParent(pstmt);
 
         if (ts == nullptr) {
@@ -364,7 +364,7 @@ uhdm::Any* CompileHelper::compileVariable(
         var->setTypespec(tsRef);
 
         result = var;
-      } else if (Variables* const var = any_cast<Variables>(result)) {
+      } else if (uhdm::Variable* const var = any_cast<uhdm::Variable>(result)) {
         var->setSigned(isSigned);
       } else if (Nets* const nets = any_cast<Nets>(result)) {
         nets->setSigned(isSigned);
@@ -412,86 +412,64 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component,
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::ArrayNet>();
         } else {
-          obj = s.make<uhdm::ArrayVar>();
+          obj = s.make<uhdm::Variable>();
         }
       } break;
       case uhdm::UhdmType::PackedArrayTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::PackedArrayNet>();
         } else {
-          obj = s.make<uhdm::PackedArrayVar>();
+          obj = s.make<uhdm::Variable>();
         }
       } break;
       case uhdm::UhdmType::StructTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::StructNet>();
         } else {
-          obj = s.make<uhdm::StructVar>();
+          obj = s.make<uhdm::Variable>();
         }
       } break;
       case uhdm::UhdmType::LogicTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::LogicNet>();
         } else {
-          obj = s.make<uhdm::LogicVar>();
+          obj = s.make<uhdm::Variable>();
         }
       } break;
       case uhdm::UhdmType::EnumTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::EnumNet>();
         } else {
-          obj = s.make<uhdm::EnumVar>();
+          obj = s.make<uhdm::Variable>();
         }
-      } break;
-      case uhdm::UhdmType::BitTypespec: {
-        obj = s.make<uhdm::BitVar>();
-      } break;
-      case uhdm::UhdmType::ByteTypespec: {
-        obj = s.make<uhdm::ByteVar>();
-      } break;
-      case uhdm::UhdmType::RealTypespec: {
-        obj = s.make<uhdm::RealVar>();
-      } break;
-      case uhdm::UhdmType::ShortRealTypespec: {
-        obj = s.make<uhdm::ShortRealVar>();
-      } break;
-      case uhdm::UhdmType::IntTypespec: {
-        obj = s.make<uhdm::IntVar>();
       } break;
       case uhdm::UhdmType::IntegerTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::IntegerNet>();
         } else {
-          obj = s.make<uhdm::IntegerVar>();
+          obj = s.make<uhdm::Variable>();
         }
-      } break;
-      case uhdm::UhdmType::LongIntTypespec: {
-        obj = s.make<uhdm::LongIntVar>();
-      } break;
-      case uhdm::UhdmType::ShortIntTypespec: {
-        obj = s.make<uhdm::ShortIntVar>();
-      } break;
-      case uhdm::UhdmType::StringTypespec: {
-        obj = s.make<uhdm::StringVar>();
       } break;
       case uhdm::UhdmType::TimeTypespec: {
         if (pscope && (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
           obj = s.make<uhdm::TimeNet>();
         } else {
-          obj = s.make<uhdm::TimeVar>();
+          obj = s.make<uhdm::Variable>();
         }
       } break;
-      case uhdm::UhdmType::UnionTypespec: {
-        obj = s.make<uhdm::UnionVar>();
-      } break;
-      case uhdm::UhdmType::ClassTypespec: {
-        obj = s.make<uhdm::ClassVar>();
-      } break;
-      case uhdm::UhdmType::InterfaceTypespec: {
-        obj = s.make<uhdm::VirtualInterfaceVar>();
-      } break;
+      case uhdm::UhdmType::BitTypespec:
+      case uhdm::UhdmType::ByteTypespec:
+      case uhdm::UhdmType::RealTypespec:
+      case uhdm::UhdmType::ShortRealTypespec:
+      case uhdm::UhdmType::IntTypespec:
+      case uhdm::UhdmType::UnionTypespec:
+      case uhdm::UhdmType::ClassTypespec:
+      case uhdm::UhdmType::InterfaceTypespec:
+      case uhdm::UhdmType::LongIntTypespec:
+      case uhdm::UhdmType::ShortIntTypespec:
+      case uhdm::UhdmType::StringTypespec:
       case uhdm::UhdmType::VoidTypespec: {
-        obj = s.make<uhdm::LogicVar>();
+        obj = s.make<uhdm::Variable>();
       } break;
       default:
         break;
@@ -499,32 +477,20 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component,
   }
 
   if (obj == nullptr) {
-    if (subnettype == VObjectType::paIntegerAtomType_Shortint) {
-      obj = s.make<uhdm::ShortIntVar>();
-    } else if (subnettype == VObjectType::paIntegerAtomType_Int) {
-      obj = s.make<uhdm::IntVar>();
-    } else if (subnettype == VObjectType::paIntegerAtomType_Integer) {
-      obj = s.make<uhdm::IntegerVar>();
-    } else if (subnettype == VObjectType::paIntegerAtomType_LongInt) {
-      obj = s.make<uhdm::LongIntVar>();
-    } else if (subnettype == VObjectType::paIntegerAtomType_Time) {
-      obj = s.make<uhdm::TimeVar>();
-    } else if (subnettype == VObjectType::paIntVec_TypeBit) {
-      obj = s.make<uhdm::BitVar>();
-    } else if (subnettype == VObjectType::paIntegerAtomType_Byte) {
-      obj = s.make<uhdm::ByteVar>();
-    } else if (subnettype == VObjectType::paNonIntType_ShortReal) {
-      obj = s.make<uhdm::ShortRealVar>();
-    } else if (subnettype == VObjectType::paNonIntType_Real) {
-      obj = s.make<uhdm::RealVar>();
-    } else if (subnettype == VObjectType::paNonIntType_RealTime) {
-      obj = s.make<uhdm::TimeVar>();
-    } else if (subnettype == VObjectType::paString_type) {
-      obj = s.make<uhdm::StringVar>();
-    } else if (subnettype == VObjectType::paChandle_type) {
-      obj = s.make<uhdm::ChandleVar>();
-    } else if (subnettype == VObjectType::paIntVec_TypeLogic) {
-      obj = s.make<uhdm::LogicVar>();
+    if ((subnettype == VObjectType::paIntegerAtomType_Shortint) ||
+        (subnettype == VObjectType::paIntegerAtomType_Int) ||
+        (subnettype == VObjectType::paIntegerAtomType_Integer) ||
+        (subnettype == VObjectType::paIntegerAtomType_LongInt) ||
+        (subnettype == VObjectType::paIntegerAtomType_Time) ||
+        (subnettype == VObjectType::paIntVec_TypeBit) ||
+        (subnettype == VObjectType::paIntegerAtomType_Byte) ||
+        (subnettype == VObjectType::paNonIntType_ShortReal) ||
+        (subnettype == VObjectType::paNonIntType_Real) ||
+        (subnettype == VObjectType::paNonIntType_RealTime) ||
+        (subnettype == VObjectType::paString_type) ||
+        (subnettype == VObjectType::paChandle_type) ||
+        (subnettype == VObjectType::paIntVec_TypeLogic)) {
+      obj = s.make<uhdm::Variable>();
     } else if (subnettype == VObjectType::paEvent_type) {
       uhdm::NamedEvent* event = s.make<uhdm::NamedEvent>();
       event->setName(signame);
@@ -537,11 +503,11 @@ uhdm::Any* CompileHelper::compileVariable(DesignComponent* component,
         (pscope->getUhdmType() == uhdm::UhdmType::Module)) {
       obj = s.make<uhdm::LogicNet>();
     } else {
-      obj = s.make<uhdm::LogicVar>();
+      obj = s.make<uhdm::Variable>();
     }
   }
 
-  if (Variables* const var = any_cast<Variables>(obj)) {
+  if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
     var->setName(signame);
   } else if (Nets* const nets = any_cast<Nets>(obj)) {
     nets->setName(signame);
@@ -642,7 +608,7 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
     nets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
   }
 
-  if (Variables* const var = any_cast<Variables>(obj)) {
+  if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
     var->setSigned(sig->isSigned());
     var->setConstantVariable(sig->isConst());
     var->setIsRandomized(sig->isRand() || sig->isRandc());

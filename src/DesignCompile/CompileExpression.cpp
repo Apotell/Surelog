@@ -964,14 +964,18 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
           for (auto var : *variables) {
             if (var->getName() == name) {
               if (const uhdm::Expr *exp = var->getExpr()) {
-                uhdm::UhdmType vartype = var->getUhdmType();
-                if (vartype == uhdm::UhdmType::IntVar ||
-                    vartype == uhdm::UhdmType::IntegerVar ||
-                    vartype == uhdm::UhdmType::RealVar ||
-                    vartype == uhdm::UhdmType::ShortIntVar ||
-                    vartype == uhdm::UhdmType::LongIntVar)
-                  result = (uhdm::Expr *)exp;
-                break;
+                if (const uhdm::RefTypespec *const rt = exp->getTypespec()) {
+                  if (const uhdm::Typespec *const t = rt->getActual()) {
+                    uhdm::UhdmType tstype = t->getUhdmType();
+                    if (tstype == uhdm::UhdmType::IntTypespec ||
+                        tstype == uhdm::UhdmType::IntegerTypespec ||
+                        tstype == uhdm::UhdmType::RealTypespec ||
+                        tstype == uhdm::UhdmType::ShortIntTypespec ||
+                        tstype == uhdm::UhdmType::LongIntTypespec)
+                      result = (uhdm::Expr *)exp;
+                    break;
+                  }
+                }
               }
             }
           }
@@ -1366,28 +1370,12 @@ uhdm::Any *CompileHelper::compileExpression(
     childType = fC->Type(child);
   }
   switch (parentType) {
-    case VObjectType::paIntegerAtomType_Byte: {
-      result = s.make<uhdm::ByteVar>();
-      result->setParent(pexpr);
-      break;
-    }
-    case VObjectType::paIntegerAtomType_Int: {
-      result = s.make<uhdm::IntVar>();
-      result->setParent(pexpr);
-      break;
-    }
-    case VObjectType::paIntegerAtomType_Integer: {
-      result = s.make<uhdm::IntegerVar>();
-      result->setParent(pexpr);
-      break;
-    }
-    case VObjectType::paIntegerAtomType_LongInt: {
-      result = s.make<uhdm::LongIntVar>();
-      result->setParent(pexpr);
-      break;
-    }
+    case VObjectType::paIntegerAtomType_Byte:
+    case VObjectType::paIntegerAtomType_Int:
+    case VObjectType::paIntegerAtomType_Integer:
+    case VObjectType::paIntegerAtomType_LongInt:
     case VObjectType::paIntegerAtomType_Shortint: {
-      result = s.make<uhdm::ShortIntVar>();
+      result = s.make<uhdm::Variable>();
       result->setParent(pexpr);
       break;
     }
@@ -2876,7 +2864,7 @@ uhdm::Any *CompileHelper::compileExpression(
           break;
         }
         case VObjectType::paEmpty_queue: {
-          uhdm::ArrayVar *var = s.make<uhdm::ArrayVar>();
+          uhdm::Variable *var = s.make<uhdm::Variable>();
           var->setParent(pexpr);
           fC->populateCoreMembers(parent, parent, var);
           uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
@@ -2887,7 +2875,7 @@ uhdm::Any *CompileHelper::compileExpression(
           rt->setActual(at);
           fC->populateCoreMembers(parent, parent, rt);
           var->setTypespec(rt);
-          var->setArrayType(vpiQueueArray);
+          at->setArrayType(vpiQueueArray);
           result = var;
           break;
         }

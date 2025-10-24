@@ -402,15 +402,17 @@ const uhdm::Any* ObjectBinder::findInCollection(
       }
     }
 
-    if (c->getUhdmType() == uhdm::UhdmType::EnumVar) {
-      if (const uhdm::Any* const actual = findInRefTypespec(
-              name, refType,
-              static_cast<const uhdm::EnumVar*>(c)->getTypespec())) {
-        return actual;
-      } else if (const uhdm::Any* const actual = findInRefTypespec(
-                     shortName, refType,
-                     static_cast<const uhdm::EnumVar*>(c)->getTypespec())) {
-        return actual;
+    if (const uhdm::Variable* const v = any_cast<uhdm::Variable>(c)) {
+      if (const uhdm::RefTypespec* const rt = v->getTypespec()) {
+        if (rt->getActual<uhdm::EnumTypespec>() != nullptr) {
+          if (const uhdm::Any* const actual =
+                  findInRefTypespec(name, refType, rt)) {
+            return actual;
+          } else if (const uhdm::Any* const actual =
+                         findInRefTypespec(shortName, refType, rt)) {
+            return actual;
+          }
+        }
       }
     }
     // if (c->getUhdmType() == uhdm::UhdmType::StructVar) {
@@ -444,9 +446,6 @@ const uhdm::Any* ObjectBinder::findInScope(std::string_view name,
     return scope;
   } else if (const uhdm::Any* const actual = findInCollection(
                  name, refType, scope->getVariables(), scope)) {
-    return actual;
-  } else if (const uhdm::Any* const actual =
-                 findInCollection(name, refType, scope->getGenVars(), scope)) {
     return actual;
   } else if (const uhdm::Any* const actual = findInCollection(
                  name, refType, scope->getParamAssigns(), scope)) {
@@ -882,20 +881,22 @@ const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
                 return prefix;
               }
 
-              if (const uhdm::ArrayVar* const av =
-                      ro1->getActual<uhdm::ArrayVar>()) {
-                if (const uhdm::RefTypespec* const iod2 = av->getTypespec()) {
+              if (const uhdm::Variable* const var =
+                      ro1->getActual<uhdm::Variable>()) {
+                if (const uhdm::RefTypespec* const iod2 = var->getTypespec()) {
                   if (const uhdm::ArrayTypespec* const at =
                           iod2->getActual<uhdm::ArrayTypespec>()) {
                     if (const uhdm::RefTypespec* const et =
                             at->getElemTypespec()) {
                       return et->getActual();
                     }
+                  } else if (const uhdm::PackedArrayTypespec* const pat =
+                                 iod2->getActual<uhdm::PackedArrayTypespec>()) {
+                    if (const uhdm::RefTypespec* const et =
+                            at->getElemTypespec()) {
+                      return et->getActual();
+                    }
                   }
-                }
-              } else if (const uhdm::Variables* const var =
-                             ro1->getActual<uhdm::Variables>()) {
-                if (const uhdm::RefTypespec* const iod2 = var->getTypespec()) {
                   return iod2->getActual();
                 }
               } else if (const uhdm::IODecl* iod =
@@ -1251,8 +1252,8 @@ void ObjectBinder::enterRefObj(const uhdm::RefObj* object,
           if (contextAny != nullptr) {
             if (const uhdm::RefObj* const ro =
                     any_cast<uhdm::RefObj>(contextAny)) {
-              if (const uhdm::Variables* const roa =
-                      ro->getActual<uhdm::Variables>()) {
+              if (const uhdm::Variable* const roa =
+                      ro->getActual<uhdm::Variable>()) {
                 if (const uhdm::RefTypespec* const rt = roa->getTypespec()) {
                   if (const uhdm::ArrayTypespec* const at =
                           rt->getActual<uhdm::ArrayTypespec>()) {

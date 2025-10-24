@@ -2024,7 +2024,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
     // set assignExp once get variable object
     if (exp != nullptr) {
-      if (uhdm::Variables* const v = any_cast<uhdm::Variables>(obj)) {
+      if (uhdm::Variable* const v = any_cast<uhdm::Variable>(obj)) {
         v->setExpr(exp);
         exp->setParent(obj, true);
       }
@@ -5991,7 +5991,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
   }
   for (uint32_t i = 0; i < size; i++) {
     if (vars && ((int32_t)i < (int32_t)(vars->size()))) {
-      ((uhdm::Variables*)(*vars)[i])
+      ((uhdm::Variable*)(*vars)[i])
           ->setValue("UINT:" + std::to_string(values[i]));
     }
   }
@@ -6003,21 +6003,21 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
     if (const uhdm::RefTypespec* rt = atps->getElemTypespec()) {
       etps = rt->getActual();
     }
-    if (etps != nullptr) {
-      uhdm::UhdmType etps_type = etps->getUhdmType();
-      if (size > 1) {
-        if (etps_type == uhdm::UhdmType::EnumTypespec) {
-          uhdm::PackedArrayVar* array = s.make<uhdm::PackedArrayVar>();
-          array->setSize(size);
-          array->setRanges(atps->getRanges());
-          array->setElements(vars);
-          for (uint32_t i = 0; i < size; i++) {
-            vars->emplace_back(s.make<uhdm::EnumVar>());
-          }
-          result = array;
-        }
-      }
-    }
+    // if (etps != nullptr) {
+    //   uhdm::UhdmType etps_type = etps->getUhdmType();
+    //   if (size > 1) {
+    //     if (etps_type == uhdm::UhdmType::EnumTypespec) {
+    //       uhdm::PackedArrayVar* array = s.make<uhdm::PackedArrayVar>();
+    //       array->setSize(size);
+    //       array->setRanges(atps->getRanges());
+    //       array->setElements(vars);
+    //       for (uint32_t i = 0; i < size; i++) {
+    //         vars->emplace_back(s.make<uhdm::EnumVar>());
+    //       }
+    //       result = array;
+    //     }
+    //   }
+    // }
   } else if (tps->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
     if (patternSize) {
       uhdm::Constant* c = s.make<uhdm::Constant>();

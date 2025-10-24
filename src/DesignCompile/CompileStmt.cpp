@@ -354,8 +354,9 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
               uhdm::Assignment* assign = (uhdm::Assignment*)cstmt;
               if (assign->getRhs() == nullptr) {
                 isDecl = true;
-                if (assign->getLhs())
-                  ((uhdm::Variables*)assign->getLhs())->setParent(stmt);
+                if (assign->getLhs()) {
+                  assign->getLhs()->setParent(stmt);
+                }
               }
             } else if (cstmt->getUhdmType() == uhdm::UhdmType::SequenceDecl) {
               isDecl = true;
@@ -428,7 +429,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
                   isDecl = true;
                 }
                 if (assign->getLhs()) {
-                  ((uhdm::Variables*)assign->getLhs())->setParent(stmt);
+                  assign->getLhs()->setParent(stmt);
                 }
               }
             }
@@ -495,10 +496,6 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::FOREACH: {
       uhdm::ForeachStmt* for_each = s.make<uhdm::ForeachStmt>();
       NodeId Ps_or_hierarchical_array_identifier = fC->Sibling(the_stmt);
-      uhdm::Any* var = compileVariable(
-          component, fC, fC->Child(Ps_or_hierarchical_array_identifier),
-          fC->Child(Ps_or_hierarchical_array_identifier), InvalidNodeId,
-          compileDesign, Reduce::No, for_each, nullptr, false);
       NodeId Loop_variables = fC->Sibling(Ps_or_hierarchical_array_identifier);
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
@@ -517,7 +514,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           loopVarId = fC->Child(Statement);
         }
         while (loopVarId) {
-          uhdm::RefVar* ref = s.make<uhdm::RefVar>();
+          uhdm::Variable* ref = s.make<uhdm::Variable>();
           ref->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
@@ -569,9 +566,22 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         for_each->setEndLine(stmt->getEndLine());
         for_each->setEndColumn(stmt->getEndColumn());
       }
-      if (var) {
-        var->setParent(for_each);
-        for_each->setVariable((uhdm::Variables*)var);
+      uhdm::RefObj* const var = s.make<uhdm::RefObj>();
+      var->setParent(for_each);
+      for_each->setVariable(var);
+      if (NodeId varNameId = fC->Child(Ps_or_hierarchical_array_identifier)) {
+        std::string varName;
+        if (fC->Type(varNameId) == VObjectType::paClass_scope) {
+          NodeId classTypeId = fC->Child(varNameId);
+          NodeId classNameId = fC->Child(classTypeId);
+          NodeId symbNameId = fC->Sibling(varNameId);
+          varName =
+              StrCat(fC->SymName(classNameId), "::", fC->SymName(symbNameId));
+        } else {
+          varName = fC->SymName(varNameId);
+        }
+        var->setName(varName);
+        fC->populateCoreMembers(varNameId, varNameId, var);
       }
       stmt = for_each;
       break;
@@ -1167,7 +1177,7 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
           if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(expr);
           }
-          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+          if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
             v->setConstantVariable(const_status);
             v->setAutomatic(automatic_status);
             v->setName(fC->SymName(Var));
@@ -1480,7 +1490,7 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
 }
 
 template <typename T>
-std::pair<std::vector<uhdm::IODecl*>*, std::vector<uhdm::Variables*>*>
+std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*>
 CompileHelper::compileTfPortDecl(DesignComponent* component, T* parent,
                                  const FileContent* fC, NodeId tf_item_decl,
                                  CompileDesign* compileDesign) {
@@ -1596,7 +1606,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
                 // if (uhdm::Any* var = compileVariable(component, fC,
                 // compileDesign, nameId, VObjectType::NO_TYPE, Data_type,
                 // ts)) {
-                if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+                if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
                   v->setAutomatic(!is_static);
                   v->setName(name);
                 }
@@ -1986,13 +1996,12 @@ bool CompileHelper::compileTask(DesignComponent* component,
           if (stmt_type == uhdm::UhdmType::Assignment) {
             uhdm::Assignment* stmt = (uhdm::Assignment*)st;
             if (stmt->getRhs() == nullptr ||
-                any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
+                (uhdm::Expr*)stmt->getLhs<uhdm::Variable>()) {
               // Declaration
               if (stmt->getRhs() != nullptr) {
                 stmts->emplace_back(st);
               } else {
-                if (uhdm::Variables* var =
-                        any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs()))
+                if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
                   var->setParent(begin);
                 // s.Erase(stmt);
               }
@@ -2385,14 +2394,13 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                 func->getParamAssigns(true)->emplace_back(pst);
             } else if (stmt_type == uhdm::UhdmType::Assignment) {
               uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-              if (stmt->getRhs() == nullptr ||
-                  any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
+              if ((stmt->getRhs() == nullptr) ||
+                  stmt->getLhs<uhdm::Variable>()) {
                 // Declaration
                 if (stmt->getRhs() != nullptr) {
                   stmts->emplace_back(st);
                 } else {
-                  if (uhdm::Variables* var = any_cast<uhdm::Variables>(
-                          (uhdm::Expr*)stmt->getLhs()))
+                  if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
                     var->setParent(begin);
                   // s.Erase(stmt);
                 }
@@ -2428,14 +2436,12 @@ bool CompileHelper::compileFunction(DesignComponent* component,
             func->getParamAssigns(true)->emplace_back(pst);
         } else if (stmt_type == uhdm::UhdmType::Assignment) {
           uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-          if (stmt->getRhs() == nullptr ||
-              any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
+          if ((stmt->getRhs() == nullptr) || stmt->getLhs<uhdm::Variable>()) {
             // Declaration
             if (stmt->getRhs() != nullptr) {
               func->setStmt(st);
             } else {
-              if (uhdm::Variables* var =
-                      any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs()))
+              if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
                 var->setParent(func);
               // s.Erase(stmt);
             }
@@ -2943,7 +2949,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
           if (uhdm::Expr* const v = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(v);
           }
-          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+          if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
             v->setName(fC->SymName(Var));
           } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
             ro->setName(fC->SymName(Var));
@@ -2987,7 +2993,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
           if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(expr);
           }
-          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+          if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
             v->setName(fC->SymName(nameId));
           } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
             ro->setName(fC->SymName(nameId));
@@ -3094,7 +3100,7 @@ uhdm::Any* CompileHelper::bindVariable(DesignComponent* component,
           }
         }
       }
-      if (std::vector<uhdm::Variables*>* vars = netlist->variables()) {
+      if (VariableCollection* vars = netlist->variables()) {
         for (auto var : *vars) {
           if (var->getName() == name) {
             return var;

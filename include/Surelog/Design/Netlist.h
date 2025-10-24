@@ -59,8 +59,8 @@ class Netlist {
   std::vector<uhdm::Port*>* ports() { return m_ports; }
   std::vector<uhdm::Net*>* nets() { return m_nets; }
   std::vector<uhdm::GenScopeArray*>* gen_scopes() { return m_gen_scope_arrays; }
-  std::vector<uhdm::Variables*>* variables() { return m_variables; }
-  std::vector<uhdm::ArrayVar*>* array_vars() { return m_array_vars; }
+  std::vector<uhdm::Variable*>* variables() { return m_variables; }
+  std::vector<uhdm::Variable*>* array_vars() { return m_array_vars; }
   std::vector<uhdm::ArrayNet*>* array_nets() { return m_array_nets; }
   std::vector<uhdm::NamedEvent*>* named_events() { return m_named_events; }
   std::vector<uhdm::Expr*>* delays() { return m_delays; }
@@ -80,13 +80,13 @@ class Netlist {
   void gen_scopes(std::vector<uhdm::GenScopeArray*>* gen_scopes) {
     m_gen_scope_arrays = gen_scopes;
   }
-  void variables(std::vector<uhdm::Variables*>* variables) {
+  void variables(std::vector<uhdm::Variable*>* variables) {
     m_variables = variables;
   }
   void named_events(std::vector<uhdm::NamedEvent*>* events) {
     m_named_events = events;
   }
-  void array_vars(std::vector<uhdm::ArrayVar*>* array_vars) {
+  void array_vars(std::vector<uhdm::Variable*>* array_vars) {
     m_array_vars = array_vars;
   }
   void array_nets(std::vector<uhdm::ArrayNet*>* array_nets) {
@@ -119,8 +119,8 @@ class Netlist {
   std::vector<uhdm::Net*>* m_nets = nullptr;
   std::vector<uhdm::Port*>* m_ports = nullptr;
   std::vector<uhdm::GenScopeArray*>* m_gen_scope_arrays = nullptr;
-  std::vector<uhdm::Variables*>* m_variables = nullptr;
-  std::vector<uhdm::ArrayVar*>* m_array_vars = nullptr;
+  std::vector<uhdm::Variable*>* m_variables = nullptr;
+  std::vector<uhdm::Variable*>* m_array_vars = nullptr;
   std::vector<uhdm::ArrayNet*>* m_array_nets = nullptr;
   std::vector<uhdm::NamedEvent*>* m_named_events = nullptr;
   // properties of the netlist itself (gate)

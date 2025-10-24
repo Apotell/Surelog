@@ -501,7 +501,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
   }
   if (fC->Type(Property_spec) ==
       VObjectType::paAssertion_variable_declaration) {
-    uhdm::VariablesCollection* vars = result->getVariables(true);
+    uhdm::VariableCollection* vars = result->getVariables(true);
     while (fC->Type(Property_spec) ==
            VObjectType::paAssertion_variable_declaration) {
       NodeId Assertion_variable_declaration = Property_spec;
@@ -511,8 +511,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       if (varst) {
         for (auto v : *varst) {
           if (uhdm::Assignment* vast = any_cast<uhdm::Assignment*>(v)) {
-            if (uhdm::Variables* va =
-                    any_cast<uhdm::Variables*>(vast->getLhs())) {
+            if (uhdm::Variable* va = vast->getLhs<uhdm::Variable>()) {
               vars->emplace_back(va);
             }
           }

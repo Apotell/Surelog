@@ -1747,7 +1747,7 @@ bool NetlistElaboration::elab_generates_(ModuleInstance* instance) {
       elab_ports_nets_(instance, false);
 
       gen_scope->setNets(netlist->nets());
-      gen_scope->setRegArrays(netlist->array_vars());
+      // gen_scope->setRegArrays(netlist->array_vars());
     }
   }
   return true;
@@ -1797,8 +1797,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
   ErrorContainer* const errors = m_session->getErrorContainer();
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::Net*>* nets = netlist->nets();
-  std::vector<uhdm::Variables*>* vars = netlist->variables();
-  std::vector<uhdm::ArrayNet*>* array_nets = netlist->array_nets();
+  std::vector<uhdm::Variable*>* vars = netlist->variables();
+  // std::vector<uhdm::ArrayNet*>* array_nets = netlist->array_nets();
   const FileContent* fC = sig->getFileContent();
   NodeId id = sig->getNodeId();
   NodeId packedDimension = sig->getPackedDimension();
@@ -1901,7 +1901,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
 
   if (!isNet) {
     if (vars == nullptr) {
-      vars = s.makeCollection<uhdm::Variables>();
+      vars = s.makeCollection<uhdm::Variable>();
       netlist->variables(vars);
     }
   }
@@ -1999,7 +1999,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
             obj = pnets;
           }
         } else if (spec->getUhdmType() == uhdm::UhdmType::BitTypespec) {
-          uhdm::BitVar* logicn = s.make<uhdm::BitVar>();
+          uhdm::Variable* logicn = s.make<uhdm::Variable>();
           if (sig->attributes()) {
             logicn->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(logicn);
@@ -2015,7 +2015,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           spec->setParent(logicn);
           obj = logicn;
         } else if (spec->getUhdmType() == uhdm::UhdmType::ByteTypespec) {
-          uhdm::ByteVar* logicn = s.make<uhdm::ByteVar>();
+          uhdm::Variable* logicn = s.make<uhdm::Variable>();
           if (sig->attributes()) {
             logicn->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(logicn);
@@ -2028,8 +2028,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
-        } else if (uhdm::Variables* var =
-                       any_cast<uhdm::Variables>(m_helper.compileVariable(
+        } else if (uhdm::Variable* var =
+                       any_cast<uhdm::Variable>(m_helper.compileVariable(
                            comp, fC, m_compileDesign, id, subnettype,
                            typeSpecId, spec))) {
           if (sig->attributes()) {
@@ -2172,7 +2172,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
             stv->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
           }
         } else if (spec->getUhdmType() == uhdm::UhdmType::BitTypespec) {
-          uhdm::BitVar* logicn = s.make<uhdm::BitVar>();
+          uhdm::Variable* logicn = s.make<uhdm::Variable>();
           if (sig->attributes()) {
             logicn->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(logicn);
@@ -2188,7 +2188,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setName(signame);
           obj = logicn;
         } else if (spec->getUhdmType() == uhdm::UhdmType::ByteTypespec) {
-          uhdm::ByteVar* logicn = s.make<uhdm::ByteVar>();
+          uhdm::Variable* logicn = s.make<uhdm::Variable>();
           if (sig->attributes()) {
             logicn->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(logicn);
@@ -2201,8 +2201,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
-        } else if (uhdm::Variables* var =
-                       any_cast<uhdm::Variables>(m_helper.compileVariable(
+        } else if (uhdm::Variable* var =
+                       any_cast<uhdm::Variable>(m_helper.compileVariable(
                            comp, fC, m_compileDesign, id, subnettype,
                            typeSpecId, spec))) {
           if (sig->attributes()) {
@@ -2235,37 +2235,37 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         obj = logicn;
       }
 
-      if (unpackedDimensions) {
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setNets(s.makeCollection<uhdm::Net>());
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
-        if (array_nets == nullptr) {
-          array_nets = s.makeCollection<uhdm::ArrayNet>();
-          netlist->array_nets(array_nets);
-        }
-        array_nets->push_back(array_net);
-        obj->setParent(array_net);
-        uhdm::NetCollection* array_n = array_net->getNets();
-        array_n->push_back((uhdm::Net*)obj);
-      } else {
-        if (nets == nullptr) {
-          nets = s.makeCollection<uhdm::Net>();
-          netlist->nets(nets);
-        }
-        uhdm::UhdmType nettype = obj->getUhdmType();
-        if (nettype == uhdm::UhdmType::EnumNet) {
-          ((uhdm::EnumNet*)obj)->setName(signame);
-        } else if (nettype == uhdm::UhdmType::StructNet) {
-          ((uhdm::StructNet*)obj)->setName(signame);
-        } else if (nettype == uhdm::UhdmType::PackedArrayNet) {
-          ((uhdm::PackedArrayNet*)obj)->setName(signame);
-        }
-        nets->push_back((uhdm::Net*)obj);
-      }
+      // if (unpackedDimensions) {
+      //   uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
+      //   array_net->setNets(s.makeCollection<uhdm::Net>());
+      //   array_net->setRanges(unpackedDimensions);
+      //   array_net->setName(signame);
+      //   array_net->setSize(unpackedSize);
+      //   for (auto r : *unpackedDimensions) r->setParent(array_net);
+      //   fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(),
+      //   array_net); if (array_nets == nullptr) {
+      //     array_nets = s.makeCollection<uhdm::ArrayNet>();
+      //     netlist->array_nets(array_nets);
+      //   }
+      //   array_nets->push_back(array_net);
+      //   obj->setParent(array_net);
+      //   uhdm::NetCollection* array_n = array_net->getNets();
+      //   array_n->push_back((uhdm::Net*)obj);
+      // } else {
+      //   if (nets == nullptr) {
+      //     nets = s.makeCollection<uhdm::Net>();
+      //     netlist->nets(nets);
+      //   }
+      //   uhdm::UhdmType nettype = obj->getUhdmType();
+      //   if (nettype == uhdm::UhdmType::EnumNet) {
+      //     ((uhdm::EnumNet*)obj)->setName(signame);
+      //   } else if (nettype == uhdm::UhdmType::StructNet) {
+      //     ((uhdm::StructNet*)obj)->setName(signame);
+      //   } else if (nettype == uhdm::UhdmType::PackedArrayNet) {
+      //     ((uhdm::PackedArrayNet*)obj)->setName(signame);
+      //   }
+      //   nets->push_back((uhdm::Net*)obj);
+      // }
     } else if (subnettype == VObjectType::paStruct_union) {
       // Implicit type
       uhdm::StructNet* stv = s.make<uhdm::StructNet>();
@@ -2295,34 +2295,34 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
       stv->setTypespec(rt);
       tps->setParent(stv);
       obj = stv;
-      if (unpackedDimensions) {
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setNets(s.makeCollection<uhdm::Net>());
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
-        if (array_nets == nullptr) {
-          array_nets = s.makeCollection<uhdm::ArrayNet>();
-          netlist->array_nets(array_nets);
-        }
-        array_nets->push_back(array_net);
-        obj->setParent(array_net);
-        uhdm::NetCollection* array_n = array_net->getNets();
-        array_n->push_back((uhdm::Net*)obj);
-      } else {
-        if (nets == nullptr) {
-          nets = s.makeCollection<uhdm::Net>();
-          netlist->nets(nets);
-        }
-        if (obj->getUhdmType() == uhdm::UhdmType::EnumNet) {
-          ((uhdm::EnumNet*)obj)->setName(signame);
-        } else if (obj->getUhdmType() == uhdm::UhdmType::StructNet) {
-          ((uhdm::StructNet*)obj)->setName(signame);
-        }
-        nets->push_back((uhdm::Net*)obj);
-      }
+      // if (unpackedDimensions) {
+      //   uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
+      //   array_net->setNets(s.makeCollection<uhdm::Net>());
+      //   array_net->setRanges(unpackedDimensions);
+      //   array_net->setName(signame);
+      //   array_net->setSize(unpackedSize);
+      //   for (auto r : *unpackedDimensions) r->setParent(array_net);
+      //   fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(),
+      //   array_net); if (array_nets == nullptr) {
+      //     array_nets = s.makeCollection<uhdm::ArrayNet>();
+      //     netlist->array_nets(array_nets);
+      //   }
+      //   array_nets->push_back(array_net);
+      //   obj->setParent(array_net);
+      //   uhdm::NetCollection* array_n = array_net->getNets();
+      //   array_n->push_back((uhdm::Net*)obj);
+      // } else {
+      //   if (nets == nullptr) {
+      //     nets = s.makeCollection<uhdm::Net>();
+      //     netlist->nets(nets);
+      //   }
+      //   if (obj->getUhdmType() == uhdm::UhdmType::EnumNet) {
+      //     ((uhdm::EnumNet*)obj)->setName(signame);
+      //   } else if (obj->getUhdmType() == uhdm::UhdmType::StructNet) {
+      //     ((uhdm::StructNet*)obj)->setName(signame);
+      //   }
+      //   nets->push_back((uhdm::Net*)obj);
+      // }
     } else {
       uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
       logicn->setSigned(sig->isSigned());
@@ -2340,35 +2340,35 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         logicn->setTypespec(rt);
         tps->setParent(logicn);
       }
-      if (unpackedDimensions) {
-        fC->populateCoreMembers(id, id, logicn);
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setNets(s.makeCollection<uhdm::Net>());
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
-        if (array_nets == nullptr) {
-          array_nets = s.makeCollection<uhdm::ArrayNet>();
-          netlist->array_nets(array_nets);
-        }
-        array_nets->push_back(array_net);
-        logicn->setParent(array_net);
-        uhdm::NetCollection* array_n = array_net->getNets();
-        array_n->push_back(logicn);
-        obj = array_net;
-        array_net->setAttributes(((Net*)logicn)->getAttributes());
-      } else {
-        logicn->setName(signame);
-        logicn->setSigned(sig->isSigned());
-        obj = logicn;
-        if (nets == nullptr) {
-          nets = s.makeCollection<uhdm::Net>();
-          netlist->nets(nets);
-        }
-        nets->push_back(logicn);
-      }
+      // if (unpackedDimensions) {
+      //   fC->populateCoreMembers(id, id, logicn);
+      //   uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
+      //   array_net->setNets(s.makeCollection<uhdm::Net>());
+      //   array_net->setRanges(unpackedDimensions);
+      //   array_net->setName(signame);
+      //   array_net->setSize(unpackedSize);
+      //   for (auto r : *unpackedDimensions) r->setParent(array_net);
+      //   fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(),
+      //   array_net); if (array_nets == nullptr) {
+      //     array_nets = s.makeCollection<uhdm::ArrayNet>();
+      //     netlist->array_nets(array_nets);
+      //   }
+      //   array_nets->push_back(array_net);
+      //   logicn->setParent(array_net);
+      //   uhdm::NetCollection* array_n = array_net->getNets();
+      //   array_n->push_back(logicn);
+      //   obj = array_net;
+      //   array_net->setAttributes(((Net*)logicn)->getAttributes());
+      // } else {
+      //   logicn->setName(signame);
+      //   logicn->setSigned(sig->isSigned());
+      //   obj = logicn;
+      //   if (nets == nullptr) {
+      //     nets = s.makeCollection<uhdm::Net>();
+      //     netlist->nets(nets);
+      //   }
+      //   nets->push_back(logicn);
+      // }
     }
     if (parentNetlist)
       parentNetlist->getSymbolTable().emplace(parentSymbol, obj);
@@ -2908,14 +2908,14 @@ uhdm::Any* NetlistElaboration::bind_net_(ModuleInstance* instance,
         }
       } else {
         if (netlist->variables()) {
-          for (uhdm::Variables* var : *netlist->variables()) {
+          for (uhdm::Variable* var : *netlist->variables()) {
             if (var->getName() == name) {
               return var;
             }
           }
         }
         if (netlist->array_vars()) {
-          for (uhdm::Variables* var : *netlist->array_vars()) {
+          for (uhdm::Variable* var : *netlist->array_vars()) {
             if (var->getName() == name) {
               return var;
             }

@@ -1028,7 +1028,7 @@ void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
     const DataType* dtype = var->getDataType();
     const ClassDefinition* classdef = datatype_cast<ClassDefinition>(dtype);
     if (classdef) {
-      uhdm::ClassVar* cvar = s.make<uhdm::ClassVar>();
+      uhdm::Variable* cvar = s.make<uhdm::Variable>();
       cvar->setName(var->getName());
       var->getFileContent()->populateCoreMembers(var->getNodeId(),
                                                  var->getNodeId(), cvar);
@@ -1205,7 +1205,7 @@ void UhdmWriter::writePackage(Package* pack, uhdm::Package* p,
     if (netlist->variables()) {
       for (auto obj : *netlist->variables()) {
         obj->setParent(p);
-        ((uhdm::Variables*)obj)
+        ((uhdm::Variable*)obj)
             ->setFullName(StrCat(pack->getName(), "::", obj->getName()));
       }
     }
@@ -1737,12 +1737,12 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
         obj->setParent(m);
       }
     }
-    m->setRegArrays(netlist->array_vars());
-    if (netlist->array_vars()) {
-      for (auto obj : *netlist->array_vars()) {
-        obj->setParent(m);
-      }
-    }
+    // m->setRegArrays(netlist->array_vars());
+    // if (netlist->array_vars()) {
+    //   for (auto obj : *netlist->array_vars()) {
+    //     obj->setParent(m);
+    //   }
+    // }
     m->setNamedEvents(netlist->named_events());
     if (netlist->named_events()) {
       for (auto obj : *netlist->named_events()) {
@@ -2154,7 +2154,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
         obj->setParent(m);
       }
     }
-    m->setRegArrays(netlist->array_vars());
+    // m->setRegArrays(netlist->array_vars());
     if (netlist->array_vars()) {
       for (auto obj : *netlist->array_vars()) {
         obj->setParent(m);
@@ -2288,7 +2288,7 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
         obj->setParent(m);
       }
     }
-    m->setRegArrays(netlist->array_vars());
+    // m->setRegArrays(netlist->array_vars());
     if (netlist->array_vars()) {
       for (auto obj : *netlist->array_vars()) {
         obj->setParent(m);
@@ -2419,7 +2419,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
         obj->setParent(m);
       }
     }
-    m->setRegArrays(netlist->array_vars());
+    // m->setRegArrays(netlist->array_vars());
     if (netlist->array_vars()) {
       for (auto obj : *netlist->array_vars()) {
         obj->setParent(m);

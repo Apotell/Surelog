@@ -59,28 +59,9 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
     invalidValue = true;
     return nullptr;
   }
-
-  uhdm::GetObjectFunctor getObjectFunctor =
-      [&](std::string_view name, const uhdm::Any* inst,
-          const uhdm::Any* pexpr) -> uhdm::Any* {
-    return getObject(name, component, compileDesign, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor =
-      [&](std::string_view name, const uhdm::Any* inst,
-          const uhdm::Any* pexpr) -> uhdm::Any* {
-    return (uhdm::Expr*)getValue(name, component, compileDesign, Reduce::Yes,
-                                 instance, fileId, lineNumber,
-                                 (uhdm::Any*)pexpr, false);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
-      [&](std::string_view name, const uhdm::Any* inst) -> uhdm::TaskFunc* {
-    auto ret = getTaskFunc(name, component, compileDesign, instance, pexpr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval;
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
+  ObjectProvider provider(*this, component, compileDesign, instance, fileId,
+                          lineNumber);
+  uhdm::ExprEval eval(&provider);
   if (m_exprEvalPlaceHolder == nullptr) {
     m_exprEvalPlaceHolder = compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->setParamAssigns(

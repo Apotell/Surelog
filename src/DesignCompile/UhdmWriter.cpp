@@ -1915,7 +1915,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
         }
       }
       if (tps) {
-        uhdm::ExprEval eval(true);
+        uhdm::ExprEval eval(nullptr, true);
         uhdm::Expr* tmp =
             eval.flattenPatternAssignments(s, tps, (uhdm::Expr*)rhs);
         if (tmp->getUhdmType() == uhdm::UhdmType::Operation) {
@@ -1962,7 +1962,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
         uhdm::Operation* op = (uhdm::Operation*)rhs;
         if (const uhdm::RefTypespec* ro1 = op->getTypespec()) {
           if (const uhdm::Typespec* tps = ro1->getActual()) {
-            uhdm::ExprEval eval(true);
+            uhdm::ExprEval eval(nullptr, true);
             uhdm::Expr* tmp =
                 eval.flattenPatternAssignments(s, tps, (uhdm::Expr*)rhs);
             if (tmp->getUhdmType() == uhdm::UhdmType::Operation) {
@@ -2941,24 +2941,21 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
   }
 }
 
-class AlwaysWithForLoop : public VpiListener {
+class AlwaysWithForLoop final : public UhdmVisitor {
  public:
   explicit AlwaysWithForLoop() = default;
   ~AlwaysWithForLoop() override = default;
-  void leaveForStmt(const uhdm::ForStmt* object, vpiHandle handle) override {
+  void visitForStmt(const uhdm::ForStmt* object) final {
     containtsForStmt = true;
+    requestAbort();
   }
   bool containtsForStmt = false;
 };
 
-bool alwaysContainsForLoop(Serializer& serializer, uhdm::Any* root) {
-  AlwaysWithForLoop* listener = new AlwaysWithForLoop();
-  vpiHandle handle = serializer.makeUhdmHandle(root->getUhdmType(), root);
-  listener->listenAny(handle);
-  vpi_release_handle(handle);
-  bool result = listener->containtsForStmt;
-  delete listener;
-  return result;
+bool alwaysContainsForLoop(uhdm::Any* root) {
+  AlwaysWithForLoop listener;
+  listener.visit(root);
+  return listener.containtsForStmt;
 }
 
 // synlig has a major problem processing always blocks.
@@ -2969,20 +2966,13 @@ bool alwaysContainsForLoop(Serializer& serializer, uhdm::Any* root) {
 void filterAlwaysBlocks(Serializer& s, uhdm::Design* d) {
   if (d->getAllModules()) {
     for (auto module : *d->getAllModules()) {
-      if (module->getProcesses()) {
-        bool more = true;
-        while (more) {
-          more = false;
-          for (std::vector<uhdm::Process*>::iterator itr =
-                   module->getProcesses()->begin();
-               itr != module->getProcesses()->end(); itr++) {
-            if ((*itr)->getUhdmType() == uhdm::UhdmType::Always) {
-              if (alwaysContainsForLoop(s, (*itr))) {
-                more = true;
-                module->getProcesses()->erase(itr);
-                break;
-              }
-            }
+      if (ProcessCollection* const processes = module->getProcesses()) {
+        for (auto itr = processes->begin(); itr != processes->end();) {
+          if (((*itr)->getUhdmType() == uhdm::UhdmType::Always) &&
+              alwaysContainsForLoop(*itr)) {
+            itr = processes->erase(itr);
+          } else {
+            ++itr;
           }
         }
       }
@@ -2999,20 +2989,13 @@ void filterAlwaysBlocks(Serializer& s, uhdm::Design* d) {
     instances.pop();
     if (current->getUhdmType() == uhdm::UhdmType::Module) {
       uhdm::Module* mod = (uhdm::Module*)current;
-      if (mod->getProcesses()) {
-        bool more = true;
-        while (more) {
-          more = false;
-          for (std::vector<uhdm::Process*>::iterator itr =
-                   mod->getProcesses()->begin();
-               itr != mod->getProcesses()->end(); itr++) {
-            if ((*itr)->getUhdmType() == uhdm::UhdmType::Always) {
-              if (!alwaysContainsForLoop(s, (*itr))) {
-                more = true;
-                mod->getProcesses()->erase(itr);
-                break;
-              }
-            }
+      if (ProcessCollection* const processes = mod->getProcesses()) {
+        for (auto itr = processes->begin(); itr != processes->end();) {
+          if (((*itr)->getUhdmType() == uhdm::UhdmType::Always) &&
+              !alwaysContainsForLoop(*itr)) {
+            itr = processes->erase(itr);
+          } else {
+            ++itr;
           }
         }
       }

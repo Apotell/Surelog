@@ -793,8 +793,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         if (uhdm::Any* exp =
                 compileExpression(scope, fC, enumValueId, compileDesign, reduce,
                                   econst, nullptr)) {
-          uhdm::ExprEval eval;
-          econst->setDecompile(eval.prettyPrint(exp));
+          econst->setDecompile(uhdm::ExprEval::prettyPrint(exp));
         }
       } else {
         econst->setDecompile(value->decompiledValue());
@@ -2749,7 +2748,6 @@ uhdm::ContAssignCollection CompileHelper::compileContinuousAssignment(
 
 std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
   std::string path_name;
-  uhdm::ExprEval eval;
   if (sel == nullptr) {
     return "";
   }
@@ -2760,7 +2758,7 @@ std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
     const std::string_view ind = ((uhdm::Expr*)sel)->getName();
     path_name.append(ind);
   } else if (sel->getUhdmType() == uhdm::UhdmType::Operation) {
-    path_name.append(eval.prettyPrint(sel));
+    path_name.append(uhdm::ExprEval::prettyPrint(sel));
   } else if (sel->getUhdmType() == uhdm::UhdmType::BitSelect) {
     uhdm::BitSelect* bsel = (uhdm::BitSelect*)sel;
     const uhdm::Expr* index = bsel->getIndex();
@@ -2771,7 +2769,7 @@ std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
       const std::string_view ind = ((uhdm::Expr*)index)->getName();
       path_name.append("[").append(ind).append("]");
     } else if (index->getUhdmType() == uhdm::UhdmType::Operation) {
-      path_name.append("[" + eval.prettyPrint(index) + "]");
+      path_name.append("[" + uhdm::ExprEval::prettyPrint(index) + "]");
     }
   } else if (const uhdm::PartSelect* pselect =
                  any_cast<const uhdm::PartSelect*>(sel)) {
@@ -3990,7 +3988,7 @@ bool CompileHelper::isDecreasingRange(uhdm::Typespec* ts,
     }
     if (r) {
       bool invalidValue = false;
-      uhdm::ExprEval eval;
+      uhdm::ExprEval eval(nullptr);
       int64_t lv = eval.get_value(invalidValue, r->getLeftExpr());
       int64_t rv = eval.get_value(invalidValue, r->getRightExpr());
       if ((invalidValue == false) && (lv > rv)) return true;
@@ -4093,7 +4091,7 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(
             if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
                 (op0Concat->getName() == "default")) {
               bool invalidValue = false;
-              uhdm::ExprEval eval;
+              uhdm::ExprEval eval(nullptr);
               uint64_t val0 = eval.get_value(invalidValue,
                                              (uhdm::Expr*)(*operandsConcat)[1]);
               uhdm::Constant* c = s.make<uhdm::Constant>();
@@ -4165,7 +4163,7 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(
                              component, compileDesign, instance,
                              fileSystem->toPathId(r->getFile(), symbols),
                              r->getStartLine(), nullptr);
-              uhdm::ExprEval eval;
+              uhdm::ExprEval eval(nullptr);
               uint64_t lv = eval.get_uvalue(invalidValue, lexp);
               uint64_t rv = eval.get_uvalue(invalidValue, rexp);
               if (invalidValue == false) {
@@ -4758,7 +4756,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
     signedLhs = its->getSigned();
   }
 
-  uhdm::ExprEval eval;
+  uhdm::ExprEval eval(nullptr);
   int64_t val = eval.get_value(invalidValue, c);
   bool constantIsSigned = false;
   if (!invalidValue) {
@@ -5658,7 +5656,7 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
   if (c == nullptr) return;
   int32_t csize = c->getSize();
   if (csize == -1) {
-    uhdm::ExprEval eval;
+    uhdm::ExprEval eval(nullptr);
     bool invalidValue = false;
     uint64_t lv = eval.get_uvalue(invalidValue, c);
     if (lv == 1) {
@@ -5781,7 +5779,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
            rhs->getStartLine(), false);
   uint64_t patternSize = 0;
 
-  uhdm::ExprEval eval(true);
+  uhdm::ExprEval eval(nullptr, true);
   rhs = eval.flattenPatternAssignments(s, tps, rhs);
 
   std::vector<int32_t> values(size, 0);
@@ -5812,7 +5810,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
                 if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
                     (tpsi->getName() == "default")) {
                   bool invalidValue = false;
-                  uhdm::ExprEval eval;
+                  uhdm::ExprEval eval(nullptr);
                   defaultval = eval.get_value(
                       invalidValue,
                       reduceExpr((uhdm::Any*)tp->getPattern(), invalidValue,
@@ -5880,7 +5878,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
                     if (const uhdm::Typespec* tpsi = rt->getActual()) {
                       if (tpsi->getName() == member->getName()) {
                         bool invalidValue = false;
-                        uhdm::ExprEval eval;
+                        uhdm::ExprEval eval(nullptr);
                         val = eval.get_value(
                             invalidValue,
                             reduceExpr(
@@ -5941,7 +5939,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
                         if (pattern->getUhdmType() ==
                             uhdm::UhdmType::Constant) {
                           uhdm::Constant* c = (uhdm::Constant*)pattern;
-                          uhdm::ExprEval eval;
+                          uhdm::ExprEval eval(nullptr);
                           int32_t val = eval.get_value(invalidValue, c);
                           if (index >= 0 && index < ((int64_t)size))
                             values[size - index - 1] = val;
@@ -5958,7 +5956,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
           int32_t opIndex = 0;
           for (uhdm::Any* op : *operands) {
             uhdm::Expr* cop = (uhdm::Expr*)op;
-            uhdm::ExprEval eval;
+            uhdm::ExprEval eval(nullptr);
             uhdm::Expr* vexp = reduceExpr(
                 cop, invalidValue, component, compileDesign, instance,
                 fileSystem->toPathId(cop->getFile(), symbolTable),
@@ -6116,7 +6114,7 @@ bool CompileHelper::valueRange(Value* val, const uhdm::Typespec* lhstps,
     uhdm::Expr* rv =
         reduceExpr((uhdm::Any*)r->getRightExpr(), invalidValue, component,
                    compileDesign, instance, BadPathId, 0, nullptr, true);
-    uhdm::ExprEval eval;
+    uhdm::ExprEval eval(nullptr);
     int64_t lvv = eval.get_value(invalidValue, lv);
     int64_t rvv = eval.get_value(invalidValue, rv);
     if (invalidValue == false) {

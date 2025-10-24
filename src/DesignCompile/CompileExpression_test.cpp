@@ -71,7 +71,7 @@ TEST(CompileExpression, ExprFromParseTree1) {
         nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
-    uhdm::ExprEval eval;
+    uhdm::ExprEval eval(nullptr);
     EXPECT_EQ(eval.get_value(invalidValue, exp), 16);
   }
 }
@@ -104,7 +104,7 @@ TEST(CompileExpression, ExprFromParseTree2) {
         nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
-    uhdm::ExprEval eval;
+    uhdm::ExprEval eval(nullptr);
     EXPECT_EQ(eval.get_value(invalidValue, exp), 1);
   }
 }
@@ -141,7 +141,7 @@ TEST(CompileExpression, ExprFromParseTree3) {
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;
-      uhdm::ExprEval eval;
+      uhdm::ExprEval eval(nullptr);
       EXPECT_EQ(eval.get_value(invalidValue, exp2), 6);
     }
   }
@@ -185,7 +185,7 @@ TEST(CompileExpression, ExprFromPpTree) {
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;
-      uhdm::ExprEval eval;
+      uhdm::ExprEval eval(nullptr);
       EXPECT_EQ(eval.get_value(invalidValue, exp2), 6);
     }
   }

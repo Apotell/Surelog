@@ -1211,7 +1211,7 @@ void DesignElaboration::elaborateInstance_(
             m_helper.checkForLoops(false);
             condExpr = resize(m_compileDesign->getSerializer(), condExpr,
                               maxsize, is_overall_unsigned);
-            uhdm::ExprEval eval;
+            uhdm::ExprEval eval(nullptr);
             bool invalidValue = false;
             condVal = eval.get_value(
                 invalidValue, any_cast<const uhdm::Expr*>(condExpr), true);
@@ -1238,7 +1238,7 @@ void DesignElaboration::elaborateInstance_(
                   m_helper.checkForLoops(false);
                   caseExpr = resize(m_compileDesign->getSerializer(), caseExpr,
                                     maxsize, is_overall_unsigned);
-                  uhdm::ExprEval eval;
+                  uhdm::ExprEval eval(nullptr);
                   bool invalidValue = false;
                   int64_t caseVal = eval.get_value(
                       invalidValue, any_cast<const uhdm::Expr*>(caseExpr),

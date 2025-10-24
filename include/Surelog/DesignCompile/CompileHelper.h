@@ -39,6 +39,7 @@
 #include <vector>
 
 // UHDM
+#include <uhdm/ExprEval.h>
 #include <uhdm/always.h>
 #include <uhdm/array_var.h>
 #include <uhdm/assignment.h>
@@ -77,6 +78,7 @@ class Serializer;
 
 namespace SURELOG {
 class CompileDesign;
+class CompileHelper;
 class DataType;
 class Design;
 class DesignComponent;
@@ -106,6 +108,31 @@ class FScope : public ValuedComponentI {
 using Scopes = std::vector<FScope*>;
 enum class Elaborate : bool { Yes = true, No = false };
 enum class Reduce : bool { Yes = true, No = false };
+
+class ObjectProvider final : public uhdm::ObjectProvider {
+ public:
+  const uhdm::Any* getObject(std::string_view name, const uhdm::Any* inst,
+                             const uhdm::Any* pexpr,
+                             bool muteErrors = false) final;
+  const uhdm::TaskFunc* getTaskFunc(std::string_view name,
+                                    const uhdm::Any* inst,
+                                    const uhdm::Any* pexpr,
+                                    bool muteErrors = false) final;
+  uhdm::Any* getValue(std::string_view name, const uhdm::Any* inst,
+                      const uhdm::Any* pexpr, bool muteErrors = false) final;
+
+  ObjectProvider(CompileHelper& helper, DesignComponent* component,
+                 CompileDesign* compileDesign, ValuedComponentI* instance,
+                 PathId fileId, uint32_t lineNumber);
+
+ private:
+  CompileHelper& m_helper;
+  DesignComponent* const m_component = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  ValuedComponentI* const m_instance = nullptr;
+  PathId m_fileId;
+  uint32_t m_lineNumber = 0;
+};
 
 class CompileHelper final {
  public:

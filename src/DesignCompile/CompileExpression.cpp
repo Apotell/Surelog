@@ -78,6 +78,43 @@
 #include <uhdm/vpi_visitor.h>
 
 namespace SURELOG {
+ObjectProvider::ObjectProvider(CompileHelper &helper,
+                               DesignComponent *component,
+                               CompileDesign *compileDesign,
+                               ValuedComponentI *instance, PathId fileId,
+                               uint32_t lineNumber)
+    : m_helper(helper),
+      m_component(component),
+      m_compileDesign(compileDesign),
+      m_instance(instance),
+      m_fileId(fileId),
+      m_lineNumber(lineNumber) {}
+
+const uhdm::Any *ObjectProvider::getObject(std::string_view name,
+                                           const uhdm::Any *inst,
+                                           const uhdm::Any *pexpr,
+                                           bool muteErrors /* = false */) {
+  return m_helper.getObject(name, m_component, m_compileDesign, m_instance,
+                            pexpr);
+}
+
+const uhdm::TaskFunc *ObjectProvider::getTaskFunc(
+    std::string_view name, const uhdm::Any *inst, const uhdm::Any *pexpr,
+    bool muteErrors /* = false */) {
+  auto [tf, _] =
+      m_helper.getTaskFunc(name, m_component, m_compileDesign, m_instance,
+                           const_cast<uhdm::Any *>(pexpr));
+  return tf;
+}
+
+uhdm::Any *ObjectProvider::getValue(std::string_view name,
+                                    const uhdm::Any *inst,
+                                    const uhdm::Any *pexpr,
+                                    bool muteErrors /* = false */) {
+  return m_helper.getValue(name, m_component, m_compileDesign, Reduce::Yes,
+                           m_instance, m_fileId, m_lineNumber,
+                           const_cast<uhdm::Any *>(pexpr), muteErrors);
+}
 
 bool CompileHelper::substituteAssignedValue(const uhdm::Any *oper,
                                             CompileDesign *compileDesign) {
@@ -746,27 +783,9 @@ uhdm::Any *CompileHelper::decodeHierPath(
     CompileDesign *compileDesign, Reduce reduce, ValuedComponentI *instance,
     PathId fileId, uint32_t lineNumber, uhdm::Any *pexpr, bool muteErrors,
     bool returnTypespec) {
-  uhdm::GetObjectFunctor getObjectFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return getObject(name, component, compileDesign, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, compileDesign, Reduce::Yes,
-                                  instance, fileId, lineNumber,
-                                  (uhdm::Any *)pexpr, false);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
-      [&](std::string_view name, const uhdm::Any *inst) -> uhdm::TaskFunc * {
-    auto ret = getTaskFunc(name, component, compileDesign, instance, pexpr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval(muteErrors);
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
+  ObjectProvider provider(*this, component, compileDesign, instance, fileId,
+                          lineNumber);
+  uhdm::ExprEval eval(&provider, muteErrors);
   if (m_exprEvalPlaceHolder == nullptr) {
     m_exprEvalPlaceHolder = compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->getParamAssigns(true);
@@ -801,27 +820,9 @@ uhdm::Expr *CompileHelper::reduceExpr(uhdm::Any *result, bool &invalidValue,
                                       uint32_t lineNumber, uhdm::Any *pexpr,
                                       bool muteErrors) {
   if (m_reduce == Reduce::No) return any_cast<uhdm::Expr>(result);
-  uhdm::GetObjectFunctor getObjectFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return getObject(name, component, compileDesign, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, compileDesign, Reduce::Yes,
-                                  instance, fileId, lineNumber,
-                                  (uhdm::Any *)pexpr, muteErrors);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
-      [&](std::string_view name, const uhdm::Any *inst) -> uhdm::TaskFunc * {
-    auto ret = getTaskFunc(name, component, compileDesign, instance, pexpr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval(muteErrors);
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
+  ObjectProvider provider(*this, component, compileDesign, instance, fileId,
+                          lineNumber);
+  uhdm::ExprEval eval(&provider, muteErrors);
   if (m_exprEvalPlaceHolder == nullptr) {
     m_exprEvalPlaceHolder = compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->getParamAssigns(true);
@@ -867,7 +868,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
             if (uhdm::RefTypespec *rt = op->getTypespec()) {
               opts = rt->getActual();
             }
-            uhdm::ExprEval eval;
+            uhdm::ExprEval eval(nullptr);
             if (uhdm::Expr *res = eval.flattenPatternAssignments(
                     s, opts, (uhdm::Expr *)result)) {
               if (res->getUhdmType() == uhdm::UhdmType::Operation) {
@@ -2032,7 +2033,7 @@ uhdm::Any *CompileHelper::compileExpression(
               opType == VObjectType::paConditional_operator) {  // Ternary op
             if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
                 (opL->getUhdmType() == uhdm::UhdmType::Constant)) {
-              uhdm::ExprEval eval;
+              uhdm::ExprEval eval(nullptr);
               bool invalidValue = false;
               int64_t cond = eval.get_value(invalidValue, (uhdm::Expr *)opL);
               if (cond) {
@@ -2431,7 +2432,7 @@ uhdm::Any *CompileHelper::compileExpression(
                       reduce, operation, instance, false)) {
                 if (operation->getTypespec() == nullptr) {
                   uhdm::RefTypespec *rttps = s.make<uhdm::RefTypespec>();
-                  rttps->setName(fC->SymName(Simple_type));
+                  setRefTypespecName(rttps, tps, fC->SymName(Simple_type));
                   fC->populateCoreMembers(Simple_type, Simple_type, rttps);
                   rttps->setParent(operation);
                   operation->setTypespec(rttps);
@@ -3766,7 +3767,7 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         }
         if ((lexp) && (rexp) && (m_reduce == Reduce::Yes) &&
             (reduce == Reduce::Yes)) {
-          uhdm::ExprEval eval;
+          uhdm::ExprEval eval(nullptr);
           bool invalidValue = false;
           lexp =
               reduceExpr(lexp, invalidValue, component, compileDesign, instance,
@@ -4090,27 +4091,9 @@ uint64_t CompileHelper::Bits(const uhdm::Any *typespec, bool &invalidValue,
     }
   }
 
-  uhdm::GetObjectFunctor getObjectFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return getObject(name, component, compileDesign, instance, pexpr);
-  };
-  uhdm::GetObjectFunctor getValueFunctor =
-      [&](std::string_view name, const uhdm::Any *inst,
-          const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, compileDesign, Reduce::Yes,
-                                  instance, fileId, lineNumber,
-                                  (uhdm::Any *)pexpr, false);
-  };
-  uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
-      [&](std::string_view name, const uhdm::Any *inst) -> uhdm::TaskFunc * {
-    auto ret = getTaskFunc(name, component, compileDesign, instance, nullptr);
-    return ret.first;
-  };
-  uhdm::ExprEval eval;
-  eval.setGetObjectFunctor(getObjectFunctor);
-  eval.setGetValueFunctor(getValueFunctor);
-  eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
+  ObjectProvider provider(*this, component, compileDesign, instance, fileId,
+                          lineNumber);
+  uhdm::ExprEval eval(&provider);
   if (m_exprEvalPlaceHolder == nullptr) {
     m_exprEvalPlaceHolder = compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->getParamAssigns(true);
@@ -4425,8 +4408,7 @@ uhdm::Any *CompileHelper::compileBits(
                             instance);
           if ((m_elaborate == Elaborate::Yes) && (reduce == Reduce::No) &&
               tps) {
-            uhdm::ExprEval eval;
-            if (eval.isFullySpecified(tps)) {
+            if (uhdm::ExprEval::isFullySpecified(tps)) {
               reduce = Reduce::Yes;
             }
           }
@@ -4451,8 +4433,7 @@ uhdm::Any *CompileHelper::compileBits(
     tps =
         getTypespec(component, fC, typeSpecId, compileDesign, reduce, instance);
     if ((m_elaborate == Elaborate::Yes) && (reduce == Reduce::No) && tps) {
-      uhdm::ExprEval eval;
-      if (eval.isFullySpecified(tps)) {
+      if (uhdm::ExprEval::isFullySpecified(tps)) {
         reduce = Reduce::Yes;
       }
     }
@@ -4676,7 +4657,7 @@ uhdm::Any *CompileHelper::compileBound(
       bool invalidValue = false;
       lr = reduceExpr(lr, invalidValue, component, compileDesign, instance,
                       BadPathId, 0, nullptr, true);
-      uhdm::ExprEval eval;
+      uhdm::ExprEval eval(nullptr);
       int64_t lrv = eval.get_value(invalidValue, lr);
       rr = reduceExpr(rr, invalidValue, component, compileDesign, instance,
                       BadPathId, 0, nullptr, true);
@@ -4729,7 +4710,7 @@ uhdm::Any *CompileHelper::compileClog2(
     uhdm::Expr *operand = (uhdm::Expr *)compileExpression(
         component, fC, Expression, compileDesign, reduce, pexpr, instance,
         muteErrors);
-    uhdm::ExprEval eval;
+    uhdm::ExprEval eval(nullptr);
     val = eval.get_value(
         invalidValue,
         reduceExpr(operand, invalidValue, component, compileDesign, instance,
@@ -5493,7 +5474,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
               muteErrors);
           if (index && index->getUhdmType() == uhdm::UhdmType::Constant) {
             bool invalidValue = false;
-            uhdm::ExprEval eval;
+            uhdm::ExprEval eval(nullptr);
             uint64_t ind = (uint64_t)eval.get_value(invalidValue, index);
             if (invalidValue == false && type == uhdm::UhdmType::Operation) {
               uhdm::Operation *op = (uhdm::Operation *)st;
@@ -5685,7 +5666,7 @@ void CompileHelper::reorderAssignmentPattern(
           uhdm::Expr *lr = (uhdm::Expr *)r->getLeftExpr();
           uhdm::Expr *rr = (uhdm::Expr *)r->getRightExpr();
           bool invalidValue = false;
-          uhdm::ExprEval eval;
+          uhdm::ExprEval eval(nullptr);
           lr = reduceExpr(lr, invalidValue, mod, compileDesign, instance,
                           BadPathId, 0, nullptr, true);
           int64_t lrv = eval.get_value(invalidValue, lr);

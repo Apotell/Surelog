@@ -253,7 +253,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
                 tps = rt->getActual();
               }
               if (tps) {
-                uhdm::ExprEval eval;
+                uhdm::ExprEval eval(nullptr);
                 if (uhdm::Expr* tmp = eval.flattenPatternAssignments(
                         s, tps, (uhdm::Expr*)rhs)) {
                   if (tmp->getUhdmType() == uhdm::UhdmType::Operation) {
@@ -265,7 +265,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
                 uhdm::Operation* op = (uhdm::Operation*)rhs;
                 if (const uhdm::RefTypespec* rt = op->getTypespec()) {
                   if (const uhdm::Typespec* tps = rt->getActual()) {
-                    uhdm::ExprEval eval;
+                    uhdm::ExprEval eval(nullptr);
                     if (uhdm::Expr* tmp = eval.flattenPatternAssignments(
                             s, tps, (uhdm::Expr*)rhs)) {
                       if (tmp->getUhdmType() == uhdm::UhdmType::Operation) {

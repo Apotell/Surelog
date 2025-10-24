@@ -167,7 +167,7 @@ EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
 Identifier                                             4
-IntTypespec                                            2
+IntTypespec                                            3
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 2
@@ -177,7 +177,7 @@ PackedArrayTypespec                                    2
 Port                                                   1
 Range                                                  3
 RefObj                                                 3
-RefTypespec                                            8
+RefTypespec                                            9
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
@@ -211,7 +211,7 @@ Design: (unnamed)
       \_IntVar: (work@top.o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:1:19, endln:1:22
+      \_IntTypespec: , line:13:15, endln:13:18
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
@@ -417,7 +417,7 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
   |vpiTypedef:
-  \_IntTypespec: , line:1:19, endln:1:22
+  \_IntTypespec: , line:13:15, endln:13:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IncompFunc/dut.sv, line:1:1, endln:14:10
     |vpiSigned:1
@@ -448,7 +448,7 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@top.out
   |vpiImportTypespec:
-  \_IntTypespec: , line:1:19, endln:1:22
+  \_IntTypespec: , line:13:15, endln:13:18
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:1:23, endln:1:24
   |vpiDefName:work@top
@@ -468,7 +468,7 @@ Design: (unnamed)
       \_Port: (o), line:1:23, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:1:19, endln:1:22
+      \_IntTypespec: , line:13:15, endln:13:18
   |vpiContAssign:
   \_ContAssign: , line:13:11, endln:13:29
     |vpiParent:
@@ -477,6 +477,13 @@ Design: (unnamed)
     \_Operation: , line:13:15, endln:13:29
       |vpiParent:
       \_ContAssign: , line:13:11, endln:13:29
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:13:15, endln:13:18
+        |vpiParent:
+        \_Operation: , line:13:15, endln:13:29
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: , line:13:15, endln:13:18
       |vpiOpType:67
       |vpiOperand:
       \_FuncCall: (get_BA), line:13:20, endln:13:28

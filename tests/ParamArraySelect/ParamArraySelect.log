@@ -527,7 +527,7 @@ Begin                                                  2
 BitSelect                                              3
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              41
+Constant                                              43
 Design                                                 1
 EnumConst                                              7
 EnumTypespec                                           2
@@ -539,19 +539,20 @@ HierPath                                               4
 IODecl                                                11
 Identifier                                            38
 ImportTypespec                                         3
-IntTypespec                                           12
+IntTypespec                                           13
+IntegerTypespec                                        2
 LogicNet                                               2
 LogicTypespec                                          7
 Module                                                 4
 ModuleTypespec                                         3
-Operation                                             21
+Operation                                             23
 Package                                                3
 ParamAssign                                            7
 Parameter                                              7
 Range                                                  8
 RefModule                                              2
-RefObj                                                18
-RefTypespec                                           43
+RefObj                                                20
+RefTypespec                                           47
 SourceFile                                             1
 StringTypespec                                        12
 StructTypespec                                         1
@@ -563,7 +564,7 @@ UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamArraySelect/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:12:35: Unsupported Typespec: id:51, type:RefTypespec, name:NumPart.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Null Actual: id:143, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Null Actual: id:144, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1783,6 +1784,14 @@ Design: (unnamed)
     \_Operation: , line:37:32, endln:37:47
       |vpiParent:
       \_ParamAssign: , line:37:25, endln:37:47
+      |vpiTypespec:
+      \_RefTypespec: (work@otp_ctrl_lci.part_info_t), line:37:32, endln:37:43
+        |vpiParent:
+        \_Operation: , line:37:32, endln:37:47
+        |vpiName:part_info_t
+        |vpiFullName:work@otp_ctrl_lci.part_info_t
+        |vpiActual:
+        \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
       |vpiOpType:67
       |vpiOperand:
       \_Constant: , line:37:45, endln:37:46
@@ -2061,6 +2070,13 @@ Design: (unnamed)
           \_Operation: , line:62:53, endln:62:94
             |vpiParent:
             \_Operation: , line:62:53, endln:63:92
+            |vpiTypespec:
+            \_RefTypespec: (work@top.gen_part_sel), line:62:54, endln:62:72
+              |vpiParent:
+              \_Operation: , line:62:53, endln:62:94
+              |vpiFullName:work@top.gen_part_sel
+              |vpiActual:
+              \_IntegerTypespec: , line:62:54, endln:62:72
             |vpiOpType:67
             |vpiOperand:
             \_HierPath: (PartInfo[k].offset), line:62:75, endln:62:93
@@ -2095,6 +2111,13 @@ Design: (unnamed)
           \_Operation: , line:63:53, endln:63:92
             |vpiParent:
             \_Operation: , line:62:53, endln:63:92
+            |vpiTypespec:
+            \_RefTypespec: (work@top.gen_part_sel), line:63:54, endln:63:72
+              |vpiParent:
+              \_Operation: , line:63:53, endln:63:92
+              |vpiFullName:work@top.gen_part_sel
+              |vpiActual:
+              \_IntegerTypespec: , line:63:54, endln:63:72
             |vpiOpType:67
             |vpiOperand:
             \_HierPath: (PartInfo[k].size), line:63:75, endln:63:91
@@ -2135,6 +2158,13 @@ Design: (unnamed)
         \_Operation: , line:65:60, endln:66:80
           |vpiParent:
           \_ParamAssign: , line:65:45, endln:66:80
+          |vpiTypespec:
+          \_RefTypespec: (work@top.gen_part_sel), line:65:60, endln:65:76
+            |vpiParent:
+            \_Operation: , line:65:60, endln:66:80
+            |vpiFullName:work@top.gen_part_sel
+            |vpiActual:
+            \_IntTypespec: , line:58:17, endln:58:17
           |vpiOpType:67
           |vpiOperand:
           \_Operation: , line:65:78, endln:66:79
@@ -2159,6 +2189,67 @@ Design: (unnamed)
               |vpiConstType:9
         |vpiLhs:
         \_Parameter: (work@top.gen_part_sel.DigestOffset), line:65:45, endln:65:57
+      |vpiTypedef:
+      \_IntegerTypespec: , line:62:54, endln:62:72
+        |vpiParent:
+        \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
+        |vpiExpr:
+        \_Operation: , line:62:54, endln:62:72
+          |vpiParent:
+          \_IntegerTypespec: , line:62:54, endln:62:72
+          |vpiOpType:24
+          |vpiOperand:
+          \_RefObj: (work@top.gen_part_sel.OtpByteAddrWidth), line:62:54, endln:62:70
+            |vpiParent:
+            \_Operation: , line:62:54, endln:62:72
+            |vpiName:OtpByteAddrWidth
+            |vpiFullName:work@top.gen_part_sel.OtpByteAddrWidth
+            |vpiActual:
+            \_Parameter: (work@top.OtpByteAddrWidth), line:58:17, endln:58:37
+          |vpiOperand:
+          \_Constant: , line:62:71, endln:62:72
+            |vpiParent:
+            \_Operation: , line:62:54, endln:62:72
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+      |vpiTypedef:
+      \_IntegerTypespec: , line:63:54, endln:63:72
+        |vpiParent:
+        \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
+        |vpiExpr:
+        \_Operation: , line:63:54, endln:63:72
+          |vpiParent:
+          \_IntegerTypespec: , line:63:54, endln:63:72
+          |vpiOpType:24
+          |vpiOperand:
+          \_RefObj: (work@top.gen_part_sel.OtpByteAddrWidth), line:63:54, endln:63:70
+            |vpiParent:
+            \_Operation: , line:63:54, endln:63:72
+            |vpiName:OtpByteAddrWidth
+            |vpiFullName:work@top.gen_part_sel.OtpByteAddrWidth
+            |vpiActual:
+            \_Parameter: (work@top.OtpByteAddrWidth), line:58:17, endln:58:37
+          |vpiOperand:
+          \_Constant: , line:63:71, endln:63:72
+            |vpiParent:
+            \_Operation: , line:63:54, endln:63:72
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+      |vpiTypedef:
+      \_IntTypespec: , line:58:17, endln:58:17
+        |vpiParent:
+        \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
+        |UINT:7
+      |vpiImportTypespec:
+      \_IntegerTypespec: , line:62:54, endln:62:72
+      |vpiImportTypespec:
+      \_IntegerTypespec: , line:63:54, endln:63:72
+      |vpiImportTypespec:
+      \_IntTypespec: , line:58:17, endln:58:17
       |vpiImportTypespec:
       \_LogicNet: (work@top.gen_part_sel.k), line:62:84, endln:62:85
         |vpiParent:

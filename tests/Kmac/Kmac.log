@@ -693,12 +693,18 @@ Port                                                   4
 Range                                                  3
 RefModule                                              1
 RefObj                                                41
-RefTypespec                                           20
+RefTypespec                                           25
 SourceFile                                             3
 SysFuncCall                                            3
 TypedefTypespec                                        1
+UnsupportedTypespec                                    5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Kmac/slpp_all/surelog.uhdm ...
+[ERR:IG0811] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:26:32: Unsupported Typespec: id:201, type:RefTypespec, name:KeccakCountW.
+[ERR:IG0811] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:27:32: Unsupported Typespec: id:210, type:RefTypespec, name:KeccakCountW.
+[ERR:IG0811] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:28:32: Unsupported Typespec: id:219, type:RefTypespec, name:KeccakCountW.
+[ERR:IG0811] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:29:32: Unsupported Typespec: id:228, type:RefTypespec, name:KeccakCountW.
+[ERR:IG0811] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:30:32: Unsupported Typespec: id:237, type:RefTypespec, name:KeccakCountW.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1493,6 +1499,31 @@ Design: (unnamed)
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
     |vpiSigned:1
   |vpiTypedef:
+  \_UnsupportedTypespec: (KeccakCountW), line:26:32, endln:26:44
+    |vpiParent:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiName:KeccakCountW
+  |vpiTypedef:
+  \_UnsupportedTypespec: (KeccakCountW), line:27:32, endln:27:44
+    |vpiParent:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiName:KeccakCountW
+  |vpiTypedef:
+  \_UnsupportedTypespec: (KeccakCountW), line:28:32, endln:28:44
+    |vpiParent:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiName:KeccakCountW
+  |vpiTypedef:
+  \_UnsupportedTypespec: (KeccakCountW), line:29:32, endln:29:44
+    |vpiParent:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiName:KeccakCountW
+  |vpiTypedef:
+  \_UnsupportedTypespec: (KeccakCountW), line:30:32, endln:30:44
+    |vpiParent:
+    \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
+    |vpiName:KeccakCountW
+  |vpiTypedef:
   \_LogicTypespec: , line:23:2, endln:23:7
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
@@ -1547,6 +1578,16 @@ Design: (unnamed)
   \_BitTypespec: , line:4:14, endln:4:17
   |vpiImportTypespec:
   \_IntTypespec: , line:5:14, endln:5:17
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (KeccakCountW), line:26:32, endln:26:44
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (KeccakCountW), line:27:32, endln:27:44
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (KeccakCountW), line:28:32, endln:28:44
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (KeccakCountW), line:29:32, endln:29:44
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (KeccakCountW), line:30:32, endln:30:44
   |vpiImportTypespec:
   \_LogicNet: (work@kmac_core.kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
@@ -1655,6 +1696,14 @@ Design: (unnamed)
             \_Operation: , line:26:32, endln:26:63
               |vpiParent:
               \_Assignment: , line:26:13, endln:26:63
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core.KeccakCountW), line:26:32, endln:26:44
+                |vpiParent:
+                \_Operation: , line:26:32, endln:26:63
+                |vpiName:KeccakCountW
+                |vpiFullName:work@kmac_core.KeccakCountW
+                |vpiActual:
+                \_UnsupportedTypespec: (KeccakCountW), line:26:32, endln:26:44
               |vpiOpType:67
               |vpiOperand:
               \_BitSelect: (work@kmac_core.KeccakRate), line:26:56, endln:26:62
@@ -1702,6 +1751,14 @@ Design: (unnamed)
             \_Operation: , line:27:32, endln:27:63
               |vpiParent:
               \_Assignment: , line:27:13, endln:27:63
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core.KeccakCountW), line:27:32, endln:27:44
+                |vpiParent:
+                \_Operation: , line:27:32, endln:27:63
+                |vpiName:KeccakCountW
+                |vpiFullName:work@kmac_core.KeccakCountW
+                |vpiActual:
+                \_UnsupportedTypespec: (KeccakCountW), line:27:32, endln:27:44
               |vpiOpType:67
               |vpiOperand:
               \_BitSelect: (work@kmac_core.KeccakRate), line:27:56, endln:27:62
@@ -1749,6 +1806,14 @@ Design: (unnamed)
             \_Operation: , line:28:32, endln:28:63
               |vpiParent:
               \_Assignment: , line:28:13, endln:28:63
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core.KeccakCountW), line:28:32, endln:28:44
+                |vpiParent:
+                \_Operation: , line:28:32, endln:28:63
+                |vpiName:KeccakCountW
+                |vpiFullName:work@kmac_core.KeccakCountW
+                |vpiActual:
+                \_UnsupportedTypespec: (KeccakCountW), line:28:32, endln:28:44
               |vpiOpType:67
               |vpiOperand:
               \_BitSelect: (work@kmac_core.KeccakRate), line:28:56, endln:28:62
@@ -1796,6 +1861,14 @@ Design: (unnamed)
             \_Operation: , line:29:32, endln:29:63
               |vpiParent:
               \_Assignment: , line:29:13, endln:29:63
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core.KeccakCountW), line:29:32, endln:29:44
+                |vpiParent:
+                \_Operation: , line:29:32, endln:29:63
+                |vpiName:KeccakCountW
+                |vpiFullName:work@kmac_core.KeccakCountW
+                |vpiActual:
+                \_UnsupportedTypespec: (KeccakCountW), line:29:32, endln:29:44
               |vpiOpType:67
               |vpiOperand:
               \_BitSelect: (work@kmac_core.KeccakRate), line:29:56, endln:29:62
@@ -1843,6 +1916,14 @@ Design: (unnamed)
             \_Operation: , line:30:32, endln:30:63
               |vpiParent:
               \_Assignment: , line:30:13, endln:30:63
+              |vpiTypespec:
+              \_RefTypespec: (work@kmac_core.KeccakCountW), line:30:32, endln:30:44
+                |vpiParent:
+                \_Operation: , line:30:32, endln:30:63
+                |vpiName:KeccakCountW
+                |vpiFullName:work@kmac_core.KeccakCountW
+                |vpiActual:
+                \_UnsupportedTypespec: (KeccakCountW), line:30:32, endln:30:44
               |vpiOpType:67
               |vpiOperand:
               \_BitSelect: (work@kmac_core.KeccakRate), line:30:56, endln:30:62
@@ -1907,6 +1988,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 0
 [   NOTE] : 0

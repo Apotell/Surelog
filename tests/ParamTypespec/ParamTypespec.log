@@ -174,8 +174,9 @@ ContAssign                                             1
 Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
-IntTypespec                                            2
+IntTypespec                                            3
 IntVar                                                 1
+IntegerTypespec                                        6
 LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
@@ -187,7 +188,7 @@ Parameter                                              2
 Port                                                   1
 Range                                                  2
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                           11
 SourceFile                                             1
 SysFuncCall                                            1
 === UHDM Object Stats End ===
@@ -231,6 +232,13 @@ Design: (unnamed)
     \_Operation: , line:2:43, endln:6:49
       |vpiParent:
       \_ParamAssign: , line:2:26, endln:6:49
+      |vpiTypespec:
+      \_RefTypespec: (otp_ctrl_part_pkg), line:2:43, endln:2:44
+        |vpiParent:
+        \_Operation: , line:2:43, endln:6:49
+        |vpiFullName:otp_ctrl_part_pkg
+        |vpiActual:
+        \_IntegerTypespec: , line:3:47, endln:3:48
       |vpiOpType:67
       |vpiOperand:
       \_Operation: , line:2:46, endln:6:48
@@ -241,6 +249,13 @@ Design: (unnamed)
         \_Operation: , line:3:47, endln:5:53
           |vpiParent:
           \_Operation: , line:2:46, endln:6:48
+          |vpiTypespec:
+          \_RefTypespec: (otp_ctrl_part_pkg), line:3:47, endln:3:48
+            |vpiParent:
+            \_Operation: , line:3:47, endln:5:53
+            |vpiFullName:otp_ctrl_part_pkg
+            |vpiActual:
+            \_IntegerTypespec: , line:3:47, endln:3:48
           |vpiOpType:67
           |vpiOperand:
           \_Operation: , line:3:50, endln:5:52
@@ -281,8 +296,15 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_IntegerTypespec: , line:3:47, endln:3:48
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:1:1, endln:7:31
+    |INT:3
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:3:47, endln:3:48
   |vpiDefName:otp_ctrl_part_pkg
   |vpiEndLabel:otp_ctrl_part_pkg
 |vpiAllModules:
@@ -304,7 +326,7 @@ Design: (unnamed)
       \_IntVar: (work@top.o), line:9:23, endln:9:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:9:19, endln:9:22
+      \_IntTypespec: , line:15:15, endln:15:18
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
@@ -348,7 +370,7 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_IntTypespec: , line:9:19, endln:9:22
+  \_IntTypespec: , line:15:15, endln:15:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
     |vpiSigned:1
@@ -414,7 +436,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_part_pkg), line:10:11, endln:10:31
   |vpiImportTypespec:
-  \_IntTypespec: , line:9:19, endln:9:22
+  \_IntTypespec: , line:15:15, endln:15:18
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:9:23, endln:9:24
   |vpiImportTypespec:
@@ -448,7 +470,7 @@ Design: (unnamed)
       \_Port: (o), line:9:23, endln:9:24
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:9:19, endln:9:22
+      \_IntTypespec: , line:15:15, endln:15:18
   |vpiContAssign:
   \_ContAssign: , line:15:11, endln:15:34
     |vpiParent:
@@ -457,6 +479,13 @@ Design: (unnamed)
     \_Operation: , line:15:15, endln:15:34
       |vpiParent:
       \_ContAssign: , line:15:11, endln:15:34
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:15:15, endln:15:18
+        |vpiParent:
+        \_Operation: , line:15:15, endln:15:34
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: , line:15:15, endln:15:18
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@top.part_buf_data), line:15:20, endln:15:33

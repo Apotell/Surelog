@@ -189,7 +189,7 @@ EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
 Identifier                                             4
-IntTypespec                                            1
+IntTypespec                                            2
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 2
@@ -198,7 +198,7 @@ Operation                                              1
 PackedArrayTypespec                                    2
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                            7
+RefTypespec                                            8
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
@@ -232,7 +232,7 @@ Design: (unnamed)
       \_IntVar: (work@top.o), line:8:17, endln:8:18
       |vpiFullName:work@top.o
       |vpiActual:
-      \_IntTypespec: , line:8:4, endln:8:7
+      \_IntTypespec: , line:16:15, endln:16:18
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
@@ -468,7 +468,7 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
   |vpiTypedef:
-  \_IntTypespec: , line:8:4, endln:8:7
+  \_IntTypespec: , line:16:15, endln:16:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
     |vpiSigned:1
@@ -499,7 +499,7 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@top.out
   |vpiImportTypespec:
-  \_IntTypespec: , line:8:4, endln:8:7
+  \_IntTypespec: , line:16:15, endln:16:18
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:8:17, endln:8:18
   |vpiDefName:work@top
@@ -515,6 +515,13 @@ Design: (unnamed)
     \_Operation: , line:16:15, endln:16:29
       |vpiParent:
       \_ContAssign: , line:16:11, endln:16:29
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:16:15, endln:16:18
+        |vpiParent:
+        \_Operation: , line:16:15, endln:16:29
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: , line:16:15, endln:16:18
       |vpiOpType:67
       |vpiOperand:
       \_FuncCall: (get_BA), line:16:20, endln:16:28

@@ -1071,7 +1071,7 @@ GenIfElse                                              1
 IODecl                                                11
 Identifier                                            42
 IfElse                                                 1
-IntTypespec                                           15
+IntTypespec                                           21
 IntVar                                                 1
 LogicNet                                               5
 LogicTypespec                                         10
@@ -1084,8 +1084,8 @@ Parameter                                             14
 Port                                                   2
 Range                                                  6
 RefModule                                              2
-RefObj                                                41
-RefTypespec                                           35
+RefObj                                                52
+RefTypespec                                           42
 SourceFile                                             1
 SysFuncCall                                            4
 Task                                                   9
@@ -2153,6 +2153,20 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@bsg_dff_reset.harden_p), line:67:52, endln:67:62
+  |vpiTypedef:
+  \_IntTypespec: , line:75:22, endln:75:29
+    |vpiParent:
+    \_Module: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
+    |vpiExpr:
+    \_RefObj: (work@bsg_dff_reset.width_p), line:75:22, endln:75:29
+      |vpiParent:
+      \_IntTypespec: , line:75:22, endln:75:29
+      |vpiName:width_p
+      |vpiFullName:work@bsg_dff_reset.width_p
+      |vpiActual:
+      \_Parameter: (work@bsg_dff_reset.width_p), line:67:25, endln:67:35
+  |vpiImportTypespec:
+  \_IntTypespec: , line:75:22, endln:75:29
   |vpiImportTypespec:
   \_LogicNet: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
     |vpiParent:
@@ -2231,6 +2245,13 @@ Design: (unnamed)
             \_Operation: , line:75:21, endln:75:46
               |vpiParent:
               \_Assignment: , line:75:11, endln:75:46
+              |vpiTypespec:
+              \_RefTypespec: (work@bsg_dff_reset), line:75:22, endln:75:29
+                |vpiParent:
+                \_Operation: , line:75:21, endln:75:46
+                |vpiFullName:work@bsg_dff_reset
+                |vpiActual:
+                \_IntTypespec: , line:75:22, endln:75:29
               |vpiOpType:67
               |vpiOperand:
               \_RefObj: (work@bsg_dff_reset.reset_val_p), line:75:34, endln:75:45
@@ -2412,6 +2433,14 @@ Design: (unnamed)
   \_IntTypespec: , line:24:14, endln:24:26
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:20:1, endln:31:10
+    |vpiExpr:
+    \_RefObj: (work@dut1.NumBitsDeviceSel), line:28:22, endln:28:38
+      |vpiParent:
+      \_IntTypespec: , line:24:14, endln:24:26
+      |vpiName:NumBitsDeviceSel
+      |vpiFullName:work@dut1.NumBitsDeviceSel
+      |vpiActual:
+      \_Parameter: (work@dut1.NumBitsDeviceSel), line:24:27, endln:24:83
   |vpiTypedef:
   \_LogicTypespec: , line:25:3, endln:25:8
     |vpiParent:
@@ -2493,6 +2522,13 @@ Design: (unnamed)
         \_Operation: , line:28:22, endln:28:47
           |vpiParent:
           \_Assignment: , line:28:5, endln:28:47
+          |vpiTypespec:
+          \_RefTypespec: (work@dut1), line:28:22, endln:28:38
+            |vpiParent:
+            \_Operation: , line:28:22, endln:28:47
+            |vpiFullName:work@dut1
+            |vpiActual:
+            \_IntTypespec: , line:24:14, endln:24:26
           |vpiOpType:67
           |vpiOperand:
           \_RefObj: (work@dut1.device), line:28:40, endln:28:46
@@ -2585,6 +2621,13 @@ Design: (unnamed)
       \_Operation: , line:47:19, endln:47:44
         |vpiParent:
         \_ContAssign: , line:47:15, endln:47:44
+        |vpiTypespec:
+        \_RefTypespec: (work@dut2), line:47:20, endln:47:29
+          |vpiParent:
+          \_Operation: , line:47:19, endln:47:44
+          |vpiFullName:work@dut2
+          |vpiActual:
+          \_IntTypespec: , line:47:20, endln:47:29
         |vpiOpType:67
         |vpiOperand:
         \_Operation: , line:47:34, endln:47:43
@@ -2615,6 +2658,18 @@ Design: (unnamed)
         |vpiFullName:work@dut2.o
         |vpiActual:
         \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
+  |vpiTypedef:
+  \_IntTypespec: , line:47:20, endln:47:29
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
+    |vpiExpr:
+    \_RefObj: (work@dut2.num_out_p), line:47:20, endln:47:29
+      |vpiParent:
+      \_IntTypespec: , line:47:20, endln:47:29
+      |vpiName:num_out_p
+      |vpiFullName:work@dut2.num_out_p
+      |vpiActual:
+      \_Parameter: (work@dut2.num_out_p), line:35:25, endln:35:40
   |vpiTypedef:
   \_LogicTypespec: , line:37:12, endln:37:35
     |vpiParent:
@@ -2665,6 +2720,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:38:14, endln:38:19
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
+  |vpiImportTypespec:
+  \_IntTypespec: , line:47:20, endln:47:29
   |vpiImportTypespec:
   \_LogicTypespec: , line:37:12, endln:37:35
   |vpiImportTypespec:
@@ -2886,6 +2943,13 @@ Design: (unnamed)
         \_Operation: , line:60:28, endln:60:46
           |vpiParent:
           \_Operation: , line:60:28, endln:60:79
+          |vpiTypespec:
+          \_RefTypespec: (work@dut3), line:60:28, endln:60:34
+            |vpiParent:
+            \_Operation: , line:60:28, endln:60:46
+            |vpiFullName:work@dut3
+            |vpiActual:
+            \_IntTypespec: , line:54:26, endln:54:38
           |vpiOpType:67
           |vpiOperand:
           \_RefObj: (work@dut3.entropy_i), line:60:36, endln:60:45
@@ -3280,6 +3344,13 @@ Design: (unnamed)
                 \_Operation: , line:102:49, endln:102:68
                   |vpiParent:
                   \_Assignment: , line:102:41, endln:102:68
+                  |vpiTypespec:
+                  \_RefTypespec: (work@dut5), line:102:50, endln:102:61
+                    |vpiParent:
+                    \_Operation: , line:102:49, endln:102:68
+                    |vpiFullName:work@dut5
+                    |vpiActual:
+                    \_IntTypespec: , line:102:50, endln:102:61
                   |vpiOpType:67
                   |vpiOperand:
                   \_Constant: , line:102:66, endln:102:67
@@ -3360,6 +3431,13 @@ Design: (unnamed)
                 \_Operation: , line:103:48, endln:103:67
                   |vpiParent:
                   \_Assignment: , line:103:40, endln:103:67
+                  |vpiTypespec:
+                  \_RefTypespec: (work@dut5), line:103:49, endln:103:60
+                    |vpiParent:
+                    \_Operation: , line:103:48, endln:103:67
+                    |vpiFullName:work@dut5
+                    |vpiActual:
+                    \_IntTypespec: , line:103:49, endln:103:60
                   |vpiOpType:67
                   |vpiOperand:
                   \_Constant: , line:103:65, endln:103:66
@@ -3450,6 +3528,13 @@ Design: (unnamed)
                 \_Operation: , line:104:56, endln:104:75
                   |vpiParent:
                   \_Assignment: , line:104:48, endln:104:75
+                  |vpiTypespec:
+                  \_RefTypespec: (work@dut5), line:104:57, endln:104:68
+                    |vpiParent:
+                    \_Operation: , line:104:56, endln:104:75
+                    |vpiFullName:work@dut5
+                    |vpiActual:
+                    \_IntTypespec: , line:104:57, endln:104:68
                   |vpiOpType:67
                   |vpiOperand:
                   \_Constant: , line:104:73, endln:104:74
@@ -3571,6 +3656,42 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (lc_tx_e), line:90:7, endln:90:14
   |vpiTypedef:
+  \_IntTypespec: , line:102:50, endln:102:61
+    |vpiParent:
+    \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
+    |vpiExpr:
+    \_RefObj: (work@dut5.lg_inputs_p), line:102:50, endln:102:61
+      |vpiParent:
+      \_IntTypespec: , line:102:50, endln:102:61
+      |vpiName:lg_inputs_p
+      |vpiFullName:work@dut5.lg_inputs_p
+      |vpiActual:
+      \_Parameter: (work@dut5.lg_inputs_p), line:84:13, endln:84:45
+  |vpiTypedef:
+  \_IntTypespec: , line:103:49, endln:103:60
+    |vpiParent:
+    \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
+    |vpiExpr:
+    \_RefObj: (work@dut5.lg_inputs_p), line:103:49, endln:103:60
+      |vpiParent:
+      \_IntTypespec: , line:103:49, endln:103:60
+      |vpiName:lg_inputs_p
+      |vpiFullName:work@dut5.lg_inputs_p
+      |vpiActual:
+      \_Parameter: (work@dut5.lg_inputs_p), line:84:13, endln:84:45
+  |vpiTypedef:
+  \_IntTypespec: , line:104:57, endln:104:68
+    |vpiParent:
+    \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
+    |vpiExpr:
+    \_RefObj: (work@dut5.lg_inputs_p), line:104:57, endln:104:68
+      |vpiParent:
+      \_IntTypespec: , line:104:57, endln:104:68
+      |vpiName:lg_inputs_p
+      |vpiFullName:work@dut5.lg_inputs_p
+      |vpiActual:
+      \_Parameter: (work@dut5.lg_inputs_p), line:84:13, endln:84:45
+  |vpiTypedef:
   \_LogicTypespec: , line:96:4, endln:96:8
     |vpiParent:
     \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
@@ -3617,6 +3738,12 @@ Design: (unnamed)
   \_TypedefTypespec: (lc_tx_e), line:90:7, endln:90:14
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_tx_t), line:92:21, endln:92:28
+  |vpiImportTypespec:
+  \_IntTypespec: , line:102:50, endln:102:61
+  |vpiImportTypespec:
+  \_IntTypespec: , line:103:49, endln:103:60
+  |vpiImportTypespec:
+  \_IntTypespec: , line:104:57, endln:104:68
   |vpiImportTypespec:
   \_LogicTypespec: , line:96:4, endln:96:8
   |vpiImportTypespec:

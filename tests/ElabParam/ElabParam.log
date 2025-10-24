@@ -227,6 +227,7 @@ Function                                               9
 IODecl                                                11
 Identifier                                            31
 IntTypespec                                           10
+IntegerTypespec                                        2
 LogicNet                                               4
 LogicTypespec                                          8
 Module                                                 2
@@ -238,7 +239,7 @@ Parameter                                              1
 Port                                                   2
 Range                                                  7
 RefObj                                                 2
-RefTypespec                                           23
+RefTypespec                                           25
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
@@ -1177,6 +1178,11 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ElabParam/dut.sv, line:11:2, endln:18:11
     |vpiName:work@dut
   |vpiTypedef:
+  \_IntegerTypespec: , line:16:15, endln:16:16
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ElabParam/dut.sv, line:11:2, endln:18:11
+    |INT:4
+  |vpiTypedef:
   \_LogicTypespec: , line:12:10, endln:12:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ElabParam/dut.sv, line:11:2, endln:18:11
@@ -1272,6 +1278,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:16:15, endln:16:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:12:10, endln:12:15
   |vpiImportTypespec:
@@ -1384,6 +1392,13 @@ Design: (unnamed)
       \_Operation: , line:16:15, endln:16:37
         |vpiParent:
         \_Operation: , line:16:15, endln:17:46
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:16:15, endln:16:16
+          |vpiParent:
+          \_Operation: , line:16:15, endln:16:37
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntegerTypespec: , line:16:15, endln:16:16
         |vpiOpType:67
         |vpiOperand:
         \_Constant: , line:16:27, endln:16:36
@@ -1397,6 +1412,13 @@ Design: (unnamed)
       \_Operation: , line:17:17, endln:17:46
         |vpiParent:
         \_Operation: , line:16:15, endln:17:46
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:17:17, endln:17:18
+          |vpiParent:
+          \_Operation: , line:17:17, endln:17:46
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntegerTypespec: , line:16:15, endln:16:16
         |vpiOpType:67
         |vpiOperand:
         \_Operation: , line:17:20, endln:17:45

@@ -24,7 +24,7 @@ HierPath                                               4
 Identifier                                            48
 IfStmt                                                 2
 ImportTypespec                                         1
-IntTypespec                                           10
+IntTypespec                                           13
 LogicNet                                               4
 LogicTypespec                                         23
 Module                                                 5
@@ -39,7 +39,7 @@ PartSelect                                             1
 Port                                                   1
 Range                                                 19
 RefObj                                                62
-RefTypespec                                           69
+RefTypespec                                           72
 SourceFile                                             1
 StructNet                                              2
 StructTypespec                                         5
@@ -1088,6 +1088,13 @@ Design: (unnamed)
     \_Operation: , line:53:51, endln:53:67
       |vpiParent:
       \_ParamAssign: , line:53:36, endln:53:67
+      |vpiTypespec:
+      \_RefTypespec: (hmac_pkg), line:53:51, endln:53:60
+        |vpiParent:
+        \_Operation: , line:53:51, endln:53:67
+        |vpiFullName:hmac_pkg
+        |vpiActual:
+        \_IntTypespec: , line:52:18, endln:52:18
       |vpiOpType:67
       |vpiOperand:
       \_Constant: , line:53:62, endln:53:66
@@ -1206,6 +1213,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_IntTypespec: , line:52:18, endln:52:18
+    |vpiParent:
+    \_Package: hmac_pkg (hmac_pkg), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
+    |UINT:1
+  |vpiTypedef:
   \_LogicTypespec: , line:59:11, endln:59:16
     |vpiParent:
     \_Package: hmac_pkg (hmac_pkg), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:48:1, endln:62:11
@@ -1249,6 +1261,8 @@ Design: (unnamed)
   \_IntTypespec: , line:52:14, endln:52:17
   |vpiImportTypespec:
   \_LogicTypespec: , line:53:14, endln:53:19
+  |vpiImportTypespec:
+  \_IntTypespec: , line:52:18, endln:52:18
   |vpiImportTypespec:
   \_LogicTypespec: , line:59:11, endln:59:16
   |vpiImportTypespec:
@@ -1759,6 +1773,14 @@ Design: (unnamed)
     \_Operation: , line:115:25, endln:115:37
       |vpiParent:
       \_ContAssign: , line:115:10, endln:115:37
+      |vpiTypespec:
+      \_RefTypespec: (work@dmi_jtag.dmi_t), line:115:25, endln:115:30
+        |vpiParent:
+        \_Operation: , line:115:25, endln:115:37
+        |vpiName:dmi_t
+        |vpiFullName:work@dmi_jtag.dmi_t
+        |vpiActual:
+        \_TypedefTypespec: (dmi_t), line:110:5, endln:110:10
       |vpiOpType:67
       |vpiOperand:
       \_RefObj: (work@dmi_jtag.dr_q), line:115:32, endln:115:36

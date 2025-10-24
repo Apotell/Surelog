@@ -199,7 +199,7 @@ FuncCall                                               1
 Function                                               1
 Identifier                                             4
 Initial                                                1
-IntTypespec                                            5
+IntTypespec                                            6
 IntVar                                                 2
 LogicNet                                               1
 LogicTypespec                                          2
@@ -212,7 +212,7 @@ Port                                                   3
 Range                                                  2
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                            7
+RefTypespec                                            8
 ReturnStmt                                             1
 SourceFile                                             1
 === UHDM Object Stats End ===
@@ -467,6 +467,13 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:10:4, endln:12:7
       |vpiFullName:work@prim_lfsr
+      |vpiTypedef:
+      \_IntTypespec: , line:11:11, endln:11:14
+        |vpiParent:
+        \_Begin: (work@prim_lfsr), line:10:12, endln:12:7
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:11:11, endln:11:14
       |vpiStmt:
       \_Assignment: , line:11:7, endln:11:25
         |vpiParent:
@@ -477,6 +484,13 @@ Design: (unnamed)
         \_Operation: , line:11:11, endln:11:25
           |vpiParent:
           \_Assignment: , line:11:7, endln:11:25
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_lfsr), line:11:11, endln:11:14
+            |vpiParent:
+            \_Operation: , line:11:11, endln:11:25
+            |vpiFullName:work@prim_lfsr
+            |vpiActual:
+            \_IntTypespec: , line:11:11, endln:11:14
           |vpiOpType:67
           |vpiOperand:
           \_FuncCall: (get_1s), line:11:16, endln:11:24

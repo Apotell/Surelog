@@ -348,6 +348,7 @@ GenIf                                                  1
 IODecl                                                11
 Identifier                                            29
 IntTypespec                                            9
+IntegerTypespec                                        4
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         2
@@ -358,13 +359,13 @@ Parameter                                              4
 Range                                                  2
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                           17
+RefTypespec                                           21
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastShift/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/CastShift/dut.sv:20:3: Null Actual: id:89, type:RefModule, name:ok.
+[ERR:IG0809] ${SURELOG_DIR}/tests/CastShift/dut.sv:20:3: Null Actual: id:97, type:RefModule, name:ok.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1409,6 +1410,13 @@ Design: (unnamed)
                         \_Operation: , line:9:4, endln:9:14
                           |vpiParent:
                           \_Operation: , line:9:4, endln:9:27
+                          |vpiTypespec:
+                          \_RefTypespec: (work@dut), line:9:4, endln:9:6
+                            |vpiParent:
+                            \_Operation: , line:9:4, endln:9:14
+                            |vpiFullName:work@dut
+                            |vpiActual:
+                            \_IntegerTypespec: , line:9:4, endln:9:6
                           |vpiOpType:67
                           |vpiOperand:
                           \_RefObj: (work@dut.RV32E), line:9:8, endln:9:13
@@ -1456,6 +1464,13 @@ Design: (unnamed)
                     \_Operation: , line:11:4, endln:11:15
                       |vpiParent:
                       \_Operation: , line:11:4, endln:11:27
+                      |vpiTypespec:
+                      \_RefTypespec: (work@dut), line:11:4, endln:11:6
+                        |vpiParent:
+                        \_Operation: , line:11:4, endln:11:15
+                        |vpiFullName:work@dut
+                        |vpiActual:
+                        \_IntegerTypespec: , line:9:4, endln:9:6
                       |vpiOpType:67
                       |vpiOperand:
                       \_Operation: , line:11:8, endln:11:14
@@ -1487,6 +1502,13 @@ Design: (unnamed)
                   \_Operation: , line:12:4, endln:12:14
                     |vpiParent:
                     \_Operation: , line:12:4, endln:12:27
+                    |vpiTypespec:
+                    \_RefTypespec: (work@dut), line:12:4, endln:12:6
+                      |vpiParent:
+                      \_Operation: , line:12:4, endln:12:14
+                      |vpiFullName:work@dut
+                      |vpiActual:
+                      \_IntegerTypespec: , line:9:4, endln:9:6
                     |vpiOpType:67
                     |vpiOperand:
                     \_RefObj: (work@dut.RV32M), line:12:8, endln:12:13
@@ -1597,6 +1619,13 @@ Design: (unnamed)
         \_Operation: , line:17:4, endln:17:21
           |vpiParent:
           \_Operation: , line:17:4, endln:17:27
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:17:4, endln:17:6
+            |vpiParent:
+            \_Operation: , line:17:4, endln:17:21
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntegerTypespec: , line:9:4, endln:9:6
           |vpiOpType:67
           |vpiOperand:
           \_RefObj: (work@dut.CSR_MISA_MXL), line:17:8, endln:17:20
@@ -1686,12 +1715,19 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_IntegerTypespec: , line:9:4, endln:9:6
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/CastShift/dut.sv, line:1:1, endln:23:10
+    |INT:32
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:11, endln:2:16
   |vpiImportTypespec:
   \_BitTypespec: , line:3:11, endln:3:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:12, endln:5:17
+  |vpiImportTypespec:
+  \_IntegerTypespec: , line:9:4, endln:9:6
   |vpiDefName:work@dut
   |vpiGenStmt:
   \_GenIf: , line:19:1, endln:21:4

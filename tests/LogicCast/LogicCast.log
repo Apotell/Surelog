@@ -90,13 +90,14 @@ HierPath                                               1
 IODecl                                                11
 Identifier                                            30
 IntTypespec                                            9
-LogicTypespec                                          1
+IntegerTypespec                                        1
+LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              4
 Package                                                1
 RefObj                                                 4
-RefTypespec                                           13
+RefTypespec                                           15
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
@@ -932,6 +933,19 @@ Design: (unnamed)
         \_Begin: (work@top.csr_read_write), line:2:15, endln:4:6
         |vpiName:csr_read_write
       |vpiFullName:work@top.csr_read_write
+      |vpiTypedef:
+      \_IntegerTypespec: , line:3:36, endln:3:38
+        |vpiParent:
+        \_Begin: (work@top.csr_read_write), line:2:15, endln:4:6
+        |INT:32
+      |vpiTypedef:
+      \_LogicTypespec: , line:3:29, endln:3:34
+        |vpiParent:
+        \_Begin: (work@top.csr_read_write), line:2:15, endln:4:6
+      |vpiImportTypespec:
+      \_IntegerTypespec: , line:3:36, endln:3:38
+      |vpiImportTypespec:
+      \_LogicTypespec: , line:3:29, endln:3:34
       |vpiImportTypespec:
       \_LogicNet: (work@top.csr_read_write.hartsel_o), line:3:40, endln:3:49
         |vpiParent:
@@ -970,6 +984,13 @@ Design: (unnamed)
         \_Operation: , line:3:29, endln:3:67
           |vpiParent:
           \_Assignment: , line:3:3, endln:3:67
+          |vpiTypespec:
+          \_RefTypespec: (work@top.csr_read_write), line:3:29, endln:3:34
+            |vpiParent:
+            \_Operation: , line:3:29, endln:3:67
+            |vpiFullName:work@top.csr_read_write
+            |vpiActual:
+            \_LogicTypespec: , line:3:29, endln:3:34
           |vpiOpType:67
           |vpiOperand:
           \_Operation: , line:3:36, endln:3:66
@@ -980,6 +1001,13 @@ Design: (unnamed)
             \_Operation: , line:3:36, endln:3:50
               |vpiParent:
               \_Operation: , line:3:36, endln:3:66
+              |vpiTypespec:
+              \_RefTypespec: (work@top.csr_read_write), line:3:36, endln:3:38
+                |vpiParent:
+                \_Operation: , line:3:36, endln:3:50
+                |vpiFullName:work@top.csr_read_write
+                |vpiActual:
+                \_IntegerTypespec: , line:3:36, endln:3:38
               |vpiOpType:67
               |vpiOperand:
               \_RefObj: (work@top.csr_read_write.hartsel_o), line:3:40, endln:3:49

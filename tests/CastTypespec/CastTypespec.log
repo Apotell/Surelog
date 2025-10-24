@@ -466,7 +466,7 @@ Assignment                                             3
 Begin                                                  3
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              38
+Constant                                              39
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -477,18 +477,19 @@ IODecl                                                11
 Identifier                                            39
 IfStmt                                                 1
 Initial                                                1
-IntTypespec                                           24
+IntTypespec                                           25
 IntVar                                                 3
+IntegerTypespec                                        1
 LogicTypespec                                          1
 Module                                                 4
 ModuleTypespec                                         2
-Operation                                             20
+Operation                                             21
 Package                                                2
 ParamAssign                                            8
 Parameter                                              8
 Range                                                  3
-RefObj                                                17
-RefTypespec                                           42
+RefObj                                                18
+RefTypespec                                           44
 SourceFile                                             1
 StringTypespec                                         2
 StructNet                                              2
@@ -1588,8 +1589,14 @@ Design: (unnamed)
   \_StringTypespec: , line:17:7, endln:17:14
     |vpiParent:
     \_Module: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+  |vpiTypedef:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
   |vpiImportTypespec:
   \_StringTypespec: , line:17:7, endln:17:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicNet: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
     |vpiParent:
@@ -1646,6 +1653,13 @@ Design: (unnamed)
         \_Operation: , line:18:18, endln:18:44
           |vpiParent:
           \_TaggedPattern: , line:18:7, endln:18:44
+          |vpiTypespec:
+          \_RefTypespec: (work@tlul_adapter_host), line:18:18, endln:18:33
+            |vpiParent:
+            \_Operation: , line:18:18, endln:18:44
+            |vpiFullName:work@tlul_adapter_host
+            |vpiActual:
+            \_IntTypespec: 
           |vpiOpType:67
           |vpiOperand:
           \_RefObj: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
@@ -2091,6 +2105,33 @@ Design: (unnamed)
         \_Begin: (work@top.p_outmux), line:36:15, endln:40:6
         |vpiName:p_outmux
       |vpiFullName:work@top.p_outmux
+      |vpiTypedef:
+      \_IntegerTypespec: , line:37:26, endln:37:38
+        |vpiParent:
+        \_Begin: (work@top.p_outmux), line:36:15, endln:40:6
+        |vpiExpr:
+        \_Operation: , line:37:26, endln:37:38
+          |vpiParent:
+          \_IntegerTypespec: , line:37:26, endln:37:38
+          |vpiOpType:24
+          |vpiOperand:
+          \_RefObj: (work@top.p_outmux.HartSelLen), line:37:26, endln:37:36
+            |vpiParent:
+            \_Operation: , line:37:26, endln:37:38
+            |vpiName:HartSelLen
+            |vpiFullName:work@top.p_outmux.HartSelLen
+            |vpiActual:
+            \_Parameter: (work@top.HartSelLen), line:35:14, endln:35:28
+          |vpiOperand:
+          \_Constant: , line:37:37, endln:37:38
+            |vpiParent:
+            \_Operation: , line:37:26, endln:37:38
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+      |vpiImportTypespec:
+      \_IntegerTypespec: , line:37:26, endln:37:38
       |vpiImportTypespec:
       \_LogicNet: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
         |vpiParent:
@@ -2126,6 +2167,13 @@ Design: (unnamed)
           \_Operation: , line:37:25, endln:37:49
             |vpiParent:
             \_Operation: , line:37:9, endln:37:49
+            |vpiTypespec:
+            \_RefTypespec: (work@top.p_outmux), line:37:26, endln:37:38
+              |vpiParent:
+              \_Operation: , line:37:25, endln:37:49
+              |vpiFullName:work@top.p_outmux
+              |vpiActual:
+              \_IntegerTypespec: , line:37:26, endln:37:38
             |vpiOpType:67
             |vpiOperand:
             \_RefObj: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48

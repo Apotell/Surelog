@@ -8599,7 +8599,7 @@ HierPath                                              43
 IODecl                                                11
 Identifier                                           155
 ImportTypespec                                         7
-IntTypespec                                           11
+IntTypespec                                           12
 IntegerTypespec                                       40
 LogicTypespec                                        226
 Module                                                 5
@@ -8610,8 +8610,8 @@ PackedArrayTypespec                                   15
 ParamAssign                                          123
 Parameter                                            123
 Range                                                 93
-RefObj                                               228
-RefTypespec                                         1205
+RefObj                                               229
+RefTypespec                                         1206
 SourceFile                                             1
 StringTypespec                                       723
 StructTypespec                                        43
@@ -28630,6 +28630,18 @@ Design: (unnamed)
       |vpiFullName:work@bp_be_ptw
       |vpiActual:
       \_IntTypespec: , line:4417:16, endln:4417:19
+  |vpiTypedef:
+  \_IntTypespec: , line:4625:70, endln:4625:82
+    |vpiParent:
+    \_Module: work@bp_be_ptw (work@bp_be_ptw), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:4371:1, endln:4628:10
+    |vpiExpr:
+    \_RefObj: (work@bp_be_ptw.ppn_width_lp), line:4625:70, endln:4625:82
+      |vpiParent:
+      \_IntTypespec: , line:4625:70, endln:4625:82
+      |vpiName:ppn_width_lp
+      |vpiFullName:work@bp_be_ptw.ppn_width_lp
+      |vpiActual:
+      \_Parameter: (work@bp_be_ptw.ppn_width_lp), line:4608:17, endln:4608:78
   |vpiImportTypespec:
   \_ImportTypespec: (bp_common_pkg), line:4372:10, endln:4372:26
   |vpiImportTypespec:
@@ -28646,6 +28658,8 @@ Design: (unnamed)
   \_ArrayTypespec: , line:4417:16, endln:4418:57
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4437:16, endln:4438:57
+  |vpiImportTypespec:
+  \_IntTypespec: , line:4625:70, endln:4625:82
   |vpiImportTypespec:
   \_LogicNet: (work@bp_be_ptw.translation_en_i), line:4625:35, endln:4625:51
     |vpiParent:
@@ -28721,6 +28735,13 @@ Design: (unnamed)
       \_Operation: , line:4625:70, endln:4625:90
         |vpiParent:
         \_Operation: , line:4625:35, endln:4625:90
+        |vpiTypespec:
+        \_RefTypespec: (work@bp_be_ptw), line:4625:70, endln:4625:82
+          |vpiParent:
+          \_Operation: , line:4625:70, endln:4625:90
+          |vpiFullName:work@bp_be_ptw
+          |vpiActual:
+          \_IntTypespec: , line:4625:70, endln:4625:82
         |vpiOpType:67
         |vpiOperand:
         \_RefObj: (work@bp_be_ptw.vpn_r), line:4625:84, endln:4625:89

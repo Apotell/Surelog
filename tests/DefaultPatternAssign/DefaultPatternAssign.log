@@ -216,7 +216,7 @@ Constant                                               8
 Design                                                 1
 Identifier                                             6
 ImportTypespec                                         1
-IntTypespec                                            5
+IntTypespec                                            8
 Module                                                 4
 ModuleTypespec                                         4
 Operation                                              7
@@ -225,12 +225,12 @@ ParamAssign                                            5
 Parameter                                              5
 RefModule                                              3
 RefObj                                                 4
-RefTypespec                                            6
+RefTypespec                                            8
 SourceFile                                             1
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Illegal implicit net "id:32, name: default".
+[ERR:EL0535] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Illegal implicit net "id:35, name: default".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternAssign/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Null Actual: id:32, type:RefObj, name:default.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DefaultPatternAssign/dut.sv:2:35: Null Actual: id:35, type:RefObj, name:default.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -271,6 +271,13 @@ Design: (unnamed)
     \_Operation: , line:2:30, endln:2:46
       |vpiParent:
       \_ParamAssign: , line:2:17, endln:2:46
+      |vpiTypespec:
+      \_RefTypespec: (foo_pkg), line:2:30, endln:2:33
+        |vpiParent:
+        \_Operation: , line:2:30, endln:2:46
+        |vpiFullName:foo_pkg
+        |vpiActual:
+        \_IntTypespec: , line:2:13, endln:2:16
       |vpiOpType:67
       |vpiOperand:
       \_Operation: , line:2:34, endln:2:46

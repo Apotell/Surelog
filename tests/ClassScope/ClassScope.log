@@ -9962,6 +9962,7 @@ Design                                                 1
 GenIf                                                  8
 Identifier                                           115
 Initial                                               10
+IntTypespec                                            2
 IntegerTypespec                                        1
 Interface                                              1
 InterfaceTypespec                                      1
@@ -9978,14 +9979,39 @@ PreprocMacroInstance                                   8
 Range                                                  2
 RefModule                                             48
 RefObj                                               132
-RefTypespec                                            5
+RefTypespec                                           21
 SourceFile                                             1
 SysFuncCall                                          109
 TypeParameter                                          6
+UnsupportedTypespec                                   13
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Illegal implicit net "id:659, name: PARAM_T".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Illegal implicit net "id:690, name: PARAM_T".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassScope/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Null Actual: id:659, type:PartSelect, name:PARAM_T.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassScope/dut.sv:6:34: Null Actual: id:690, type:PartSelect, name:PARAM_T.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:47: Unsupported Typespec: id:302, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:47: Missing name: id:302, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:47: Unsupported Typespec: id:309, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:47: Missing name: id:309, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:51: Unsupported Typespec: id:374, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:51: Missing name: id:374, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:51: Unsupported Typespec: id:381, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:51: Missing name: id:381, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:57: Unsupported Typespec: id:446, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:57: Missing name: id:446, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:57: Unsupported Typespec: id:453, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:57: Missing name: id:453, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:71: Unsupported Typespec: id:518, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:71: Missing name: id:518, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:71: Unsupported Typespec: id:525, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:71: Missing name: id:525, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:57: Unsupported Typespec: id:590, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:57: Missing name: id:590, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:57: Unsupported Typespec: id:597, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:57: Missing name: id:597, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:61: Unsupported Typespec: id:662, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:53:61: Missing name: id:662, type:RefTypespec, name:.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:61: Unsupported Typespec: id:669, type:RefTypespec, name:.
+[ERR:IG0803] ${SURELOG_DIR}/tests/ClassScope/dut.sv:54:61: Missing name: id:669, type:RefTypespec, name:.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -10116,6 +10142,13 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_IntTypespec: , line:39:16, endln:39:16
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |UINT:3
+            |vpiImportTypespec:
+            \_IntTypespec: , line:39:16, endln:39:16
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -10347,6 +10380,13 @@ Design: (unnamed)
               \_Operation: , line:53:41, endln:53:47
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:48
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:41, endln:53:42
+                  |vpiParent:
+                  \_Operation: , line:53:41, endln:53:47
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_IntTypespec: , line:39:16, endln:39:16
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:44, endln:53:46
@@ -10377,6 +10417,14 @@ Design: (unnamed)
               \_Operation: , line:54:41, endln:54:47
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:48
+                |vpiTypespec:
+                \_RefTypespec: (work@top.T), line:54:41, endln:54:42
+                  |vpiParent:
+                  \_Operation: , line:54:41, endln:54:47
+                  |vpiName:T
+                  |vpiFullName:work@top.T
+                  |vpiActual:
+                  \_TypeParameter: (work@top.T), line:40:21, endln:40:22
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:44, endln:54:46
@@ -10518,6 +10566,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:44, endln:53:46
     |vpiObject:
+    \_RefTypespec: (work@top), line:53:41, endln:53:42
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:48
     |vpiObject:
     \_Constant: , line:54:26, endln:54:39
@@ -10525,6 +10575,8 @@ Design: (unnamed)
     \_Operation: , line:54:41, endln:54:47
     |vpiObject:
     \_Constant: , line:54:44, endln:54:46
+    |vpiObject:
+    \_RefTypespec: (work@top.T), line:54:41, endln:54:42
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -10630,6 +10682,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_IntTypespec: 
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |UINT:2
+            |vpiTypedef:
+            \_UnsupportedTypespec: (P::T), line:54:44, endln:54:48
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:P::T
+            |vpiImportTypespec:
+            \_IntTypespec: 
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (P::T), line:54:44, endln:54:48
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -10859,6 +10925,13 @@ Design: (unnamed)
               \_Operation: , line:53:44, endln:53:53
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:54
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:44, endln:53:48
+                  |vpiParent:
+                  \_Operation: , line:53:44, endln:53:53
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:50, endln:53:52
@@ -10889,6 +10962,14 @@ Design: (unnamed)
               \_Operation: , line:54:44, endln:54:53
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:54
+                |vpiTypespec:
+                \_RefTypespec: (work@top.P::T), line:54:44, endln:54:48
+                  |vpiParent:
+                  \_Operation: , line:54:44, endln:54:53
+                  |vpiName:P::T
+                  |vpiFullName:work@top.P::T
+                  |vpiActual:
+                  \_TypeParameter: (P::T), line:11:21, endln:11:22
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:50, endln:54:52
@@ -11030,6 +11111,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:50, endln:53:52
     |vpiObject:
+    \_RefTypespec: (work@top), line:53:44, endln:53:48
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:54
     |vpiObject:
     \_Constant: , line:54:26, endln:54:42
@@ -11037,6 +11120,10 @@ Design: (unnamed)
     \_Operation: , line:54:44, endln:54:53
     |vpiObject:
     \_Constant: , line:54:50, endln:54:52
+    |vpiObject:
+    \_UnsupportedTypespec: (P::T), line:54:44, endln:54:48
+    |vpiObject:
+    \_RefTypespec: (work@top.P::T), line:54:44, endln:54:48
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -11142,6 +11229,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:47, endln:53:54
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:47, endln:54:54
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:47, endln:53:54
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:47, endln:54:54
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -11373,6 +11474,13 @@ Design: (unnamed)
               \_Operation: , line:53:47, endln:53:59
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:60
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:47, endln:53:53
+                  |vpiParent:
+                  \_Operation: , line:53:47, endln:53:59
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:47, endln:53:54
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:56, endln:53:58
@@ -11403,6 +11511,13 @@ Design: (unnamed)
               \_Operation: , line:54:47, endln:54:59
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:60
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:47, endln:54:53
+                  |vpiParent:
+                  \_Operation: , line:54:47, endln:54:59
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:47, endln:54:54
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:56, endln:54:58
@@ -11544,6 +11659,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:56, endln:53:58
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:47, endln:53:54
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:47, endln:53:53
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:60
     |vpiObject:
     \_Constant: , line:54:26, endln:54:45
@@ -11551,6 +11670,10 @@ Design: (unnamed)
     \_Operation: , line:54:47, endln:54:59
     |vpiObject:
     \_Constant: , line:54:56, endln:54:58
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:47, endln:54:54
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:47, endln:54:53
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -11656,6 +11779,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:51, endln:53:62
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:51, endln:54:62
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:51, endln:53:62
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:51, endln:54:62
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -11887,6 +12024,13 @@ Design: (unnamed)
               \_Operation: , line:53:51, endln:53:67
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:68
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:51, endln:53:61
+                  |vpiParent:
+                  \_Operation: , line:53:51, endln:53:67
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:51, endln:53:62
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:64, endln:53:66
@@ -11917,6 +12061,13 @@ Design: (unnamed)
               \_Operation: , line:54:51, endln:54:67
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:68
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:51, endln:54:61
+                  |vpiParent:
+                  \_Operation: , line:54:51, endln:54:67
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:51, endln:54:62
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:64, endln:54:66
@@ -12058,6 +12209,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:64, endln:53:66
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:51, endln:53:62
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:51, endln:53:61
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:68
     |vpiObject:
     \_Constant: , line:54:26, endln:54:49
@@ -12065,6 +12220,10 @@ Design: (unnamed)
     \_Operation: , line:54:51, endln:54:67
     |vpiObject:
     \_Constant: , line:54:64, endln:54:66
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:51, endln:54:62
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:51, endln:54:61
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -12170,6 +12329,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -12401,6 +12574,13 @@ Design: (unnamed)
               \_Operation: , line:53:57, endln:53:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:80
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:57, endln:53:73
+                  |vpiParent:
+                  \_Operation: , line:53:57, endln:53:79
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:76, endln:53:78
@@ -12431,6 +12611,13 @@ Design: (unnamed)
               \_Operation: , line:54:57, endln:54:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:80
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:57, endln:54:73
+                  |vpiParent:
+                  \_Operation: , line:54:57, endln:54:79
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:76, endln:54:78
@@ -12572,6 +12759,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:76, endln:53:78
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:57, endln:53:73
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:80
     |vpiObject:
     \_Constant: , line:54:26, endln:54:55
@@ -12579,6 +12770,10 @@ Design: (unnamed)
     \_Operation: , line:54:57, endln:54:79
     |vpiObject:
     \_Constant: , line:54:76, endln:54:78
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:57, endln:54:73
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -12684,6 +12879,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:71, endln:53:102
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:71, endln:54:102
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:71, endln:53:102
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:71, endln:54:102
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -12915,6 +13124,13 @@ Design: (unnamed)
               \_Operation: , line:53:71, endln:53:107
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:108
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:71, endln:53:101
+                  |vpiParent:
+                  \_Operation: , line:53:71, endln:53:107
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:71, endln:53:102
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:104, endln:53:106
@@ -12945,6 +13161,13 @@ Design: (unnamed)
               \_Operation: , line:54:71, endln:54:107
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:108
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:71, endln:54:101
+                  |vpiParent:
+                  \_Operation: , line:54:71, endln:54:107
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:71, endln:54:102
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:104, endln:54:106
@@ -13086,6 +13309,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:104, endln:53:106
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:71, endln:53:102
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:71, endln:53:101
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:108
     |vpiObject:
     \_Constant: , line:54:26, endln:54:69
@@ -13093,6 +13320,10 @@ Design: (unnamed)
     \_Operation: , line:54:71, endln:54:107
     |vpiObject:
     \_Constant: , line:54:104, endln:54:106
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:71, endln:54:102
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:71, endln:54:101
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -13198,6 +13429,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -13429,6 +13674,13 @@ Design: (unnamed)
               \_Operation: , line:53:57, endln:53:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:80
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:57, endln:53:73
+                  |vpiParent:
+                  \_Operation: , line:53:57, endln:53:79
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:76, endln:53:78
@@ -13459,6 +13711,13 @@ Design: (unnamed)
               \_Operation: , line:54:57, endln:54:79
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:80
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:57, endln:54:73
+                  |vpiParent:
+                  \_Operation: , line:54:57, endln:54:79
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:76, endln:54:78
@@ -13600,6 +13859,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:76, endln:53:78
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:57, endln:53:74
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:57, endln:53:73
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:80
     |vpiObject:
     \_Constant: , line:54:26, endln:54:55
@@ -13607,6 +13870,10 @@ Design: (unnamed)
     \_Operation: , line:54:57, endln:54:79
     |vpiObject:
     \_Constant: , line:54:76, endln:54:78
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:57, endln:54:74
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:57, endln:54:73
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -13712,6 +13979,20 @@ Design: (unnamed)
             |vpiParent:
             \_Initial: , line:46:13, endln:55:16
             |vpiFullName:work@top
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::E), line:53:61, endln:53:82
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::E
+            |vpiTypedef:
+            \_UnsupportedTypespec: (C::T), line:54:61, endln:54:82
+              |vpiParent:
+              \_Begin: (work@top), line:46:21, endln:55:16
+              |vpiName:C::T
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::E), line:53:61, endln:53:82
+            |vpiImportTypespec:
+            \_UnsupportedTypespec: (C::T), line:54:61, endln:54:82
             |vpiStmt:
             \_DelayControl: , line:47:17, endln:47:26
               |vpiParent:
@@ -13943,6 +14224,13 @@ Design: (unnamed)
               \_Operation: , line:53:61, endln:53:87
                 |vpiParent:
                 \_SysFuncCall: ($display), line:53:17, endln:53:88
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:53:61, endln:53:81
+                  |vpiParent:
+                  \_Operation: , line:53:61, endln:53:87
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::E), line:53:61, endln:53:82
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:53:84, endln:53:86
@@ -13973,6 +14261,13 @@ Design: (unnamed)
               \_Operation: , line:54:61, endln:54:87
                 |vpiParent:
                 \_SysFuncCall: ($display), line:54:17, endln:54:88
+                |vpiTypespec:
+                \_RefTypespec: (work@top), line:54:61, endln:54:81
+                  |vpiParent:
+                  \_Operation: , line:54:61, endln:54:87
+                  |vpiFullName:work@top
+                  |vpiActual:
+                  \_UnsupportedTypespec: (C::T), line:54:61, endln:54:82
                 |vpiOpType:67
                 |vpiOperand:
                 \_Constant: , line:54:84, endln:54:86
@@ -14114,6 +14409,10 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:53:84, endln:53:86
     |vpiObject:
+    \_UnsupportedTypespec: (C::E), line:53:61, endln:53:82
+    |vpiObject:
+    \_RefTypespec: (work@top), line:53:61, endln:53:81
+    |vpiObject:
     \_SysFuncCall: ($display), line:54:17, endln:54:88
     |vpiObject:
     \_Constant: , line:54:26, endln:54:59
@@ -14121,6 +14420,10 @@ Design: (unnamed)
     \_Operation: , line:54:61, endln:54:87
     |vpiObject:
     \_Constant: , line:54:84, endln:54:86
+    |vpiObject:
+    \_UnsupportedTypespec: (C::T), line:54:61, endln:54:82
+    |vpiObject:
+    \_RefTypespec: (work@top), line:54:61, endln:54:81
     |vpiObject:
     \_RefModule: work@I (i1), line:56:13, endln:56:14
     |vpiObject:
@@ -14871,6 +15174,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 26
 [WARNING] : 4
 [   NOTE] : 0

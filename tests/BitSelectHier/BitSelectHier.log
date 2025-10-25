@@ -190,7 +190,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-ArrayVar                                               1
 Assignment                                             1
 BitTypespec                                            4
 ClassDefn                                              2
@@ -204,12 +203,12 @@ IODecl                                                 2
 Identifier                                            10
 Package                                                1
 PackedArrayTypespec                                    4
-PackedArrayVar                                         2
 Range                                                  5
 RefObj                                                 4
 RefTypespec                                           14
 SourceFile                                             1
 UnsupportedTypespec                                    4
+Variable                                               3
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/BitSelectHier/dut.sv:43:4: Illegal implicit net "id:20, name: top".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectHier/slpp_all/surelog.uhdm ...
@@ -246,14 +245,14 @@ Design: (unnamed)
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiName:uvm_mem_region
     |vpiFullName:pack::uvm_mem_region
-    |vpiVariables:
-    \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
+    |vpiVariable:
+    \_Variable: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiTypespec:
       \_RefTypespec: (pack::uvm_mem_region::Xstart_offsetX), line:5:14, endln:5:24
         |vpiParent:
-        \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
+        \_Variable: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
         |vpiFullName:pack::uvm_mem_region::Xstart_offsetX
         |vpiActual:
         \_PackedArrayTypespec: , line:5:14, endln:5:24
@@ -262,14 +261,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_PackedArrayVar: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
+    |vpiVariable:
+    \_Variable: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_region), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:3:1, endln:29:9
       |vpiTypespec:
       \_RefTypespec: (pack::uvm_mem_region::Xend_offsetX), line:6:14, endln:6:24
         |vpiParent:
-        \_PackedArrayVar: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
+        \_Variable: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
         |vpiFullName:pack::uvm_mem_region::Xend_offsetX
         |vpiActual:
         \_PackedArrayTypespec: , line:6:14, endln:6:24
@@ -471,11 +470,11 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:5:14, endln:5:24
     |vpiImportTypespec:
-    \_PackedArrayVar: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
+    \_Variable: (pack::uvm_mem_region::Xstart_offsetX), line:5:25, endln:5:39
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:6:14, endln:6:24
     |vpiImportTypespec:
-    \_PackedArrayVar: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
+    \_Variable: (pack::uvm_mem_region::Xend_offsetX), line:6:25, endln:6:37
     |vpiMethod:
     \_Function: (pack::uvm_mem_region::get_start_offset), line:16:4, endln:16:50
     |vpiMethod:
@@ -514,14 +513,14 @@ Design: (unnamed)
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiName:uvm_mem_mam
     |vpiFullName:pack::uvm_mem_mam
-    |vpiVariables:
-    \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
+    |vpiVariable:
+    \_Variable: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
       |vpiParent:
       \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/BitSelectHier/dut.sv, line:34:1, endln:39:9
       |vpiTypespec:
       \_RefTypespec: (pack::uvm_mem_mam::in_use), line:36:1, endln:36:15
         |vpiParent:
-        \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
+        \_Variable: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
         |vpiFullName:pack::uvm_mem_mam::in_use
         |vpiActual:
         \_ArrayTypespec: , line:36:1, endln:36:25
@@ -530,8 +529,6 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiRegArray:
-    \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
     |vpiInternalScope:
     \_Function: (pack::uvm_mem_mam::reconfigure), line:37:1, endln:37:73
       |vpiParent:
@@ -639,7 +636,7 @@ Design: (unnamed)
             \_HierPath: (this.in_use.get_start_offset), line:43:10, endln:43:41
             |vpiName:in_use
             |vpiActual:
-            \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
+            \_Variable: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
           |vpiActual:
           \_RefObj: (get_start_offset), line:43:25, endln:43:41
             |vpiParent:
@@ -688,7 +685,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_ArrayTypespec: , line:36:1, endln:36:25
     |vpiImportTypespec:
-    \_ArrayVar: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
+    \_Variable: (pack::uvm_mem_mam::in_use), line:36:16, endln:36:22
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_mam::reconfigure), line:41:1, endln:45:25
     |vpiMethod:

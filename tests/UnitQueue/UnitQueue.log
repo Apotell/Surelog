@@ -198,7 +198,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-ArrayVar                                               2
 Assignment                                             2
 Begin                                                  1
 ClassDefn                                             10
@@ -221,6 +220,7 @@ SourceFile                                             1
 StringTypespec                                         1
 Task                                                   9
 TypedefTypespec                                        1
+Variable                                               2
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:156, name: a".
@@ -1100,37 +1100,33 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@c2::main), line:9:1, endln:20:12
       |vpiFullName:work@c2::main
-      |vpiVariables:
-      \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+      |vpiVariable:
+      \_Variable: (work@c2::main::q), line:10:10, endln:10:11
         |vpiParent:
         \_Begin: (work@c2::main)
         |vpiTypespec:
         \_RefTypespec: (work@c2::main::q), line:10:3, endln:10:9
           |vpiParent:
-          \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+          \_Variable: (work@c2::main::q), line:10:10, endln:10:11
           |vpiFullName:work@c2::main::q
           |vpiActual:
           \_ArrayTypespec: , line:10:3, endln:10:14
         |vpiName:q
         |vpiFullName:work@c2::main::q
         |vpiSigned:1
-      |vpiVariables:
-      \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+      |vpiVariable:
+      \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
         |vpiParent:
         \_Begin: (work@c2::main)
         |vpiTypespec:
         \_RefTypespec: (work@c2::main::q2), line:11:3, endln:11:5
           |vpiParent:
-          \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+          \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
           |vpiFullName:work@c2::main::q2
           |vpiActual:
           \_ArrayTypespec: , line:11:3, endln:11:12
         |vpiName:q2
         |vpiFullName:work@c2::main::q2
-      |vpiRegArray:
-      \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
-      |vpiRegArray:
-      \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiTypedef:
       \_StringTypespec: , line:10:3, endln:10:9
         |vpiParent:
@@ -1145,11 +1141,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_StringTypespec: , line:10:3, endln:10:9
       |vpiImportTypespec:
-      \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+      \_Variable: (work@c2::main::q), line:10:10, endln:10:11
       |vpiImportTypespec:
       \_ClassTypespec: (work@c1), line:11:3, endln:11:5
       |vpiImportTypespec:
-      \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+      \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiStmt:
       \_MethodFuncCall: (atoi), line:12:3, endln:12:15
         |vpiParent:
@@ -1174,7 +1170,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@c2::main::q
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+          \_Variable: (work@c2::main::q), line:10:10, endln:10:11
       |vpiStmt:
       \_MethodFuncCall: (atoiq), line:13:3, endln:13:16
         |vpiParent:
@@ -1199,7 +1195,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@c2::main::q
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+          \_Variable: (work@c2::main::q), line:10:10, endln:10:11
       |vpiStmt:
       \_MethodFuncCall: (push_back), line:14:3, endln:14:16
         |vpiParent:
@@ -1222,7 +1218,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@c2::main::q
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+          \_Variable: (work@c2::main::q), line:10:10, endln:10:11
       |vpiStmt:
       \_MethodFuncCall: (toto), line:15:3, endln:15:11
         |vpiParent:
@@ -1245,7 +1241,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@c2::main::q
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q), line:10:10, endln:10:11
+          \_Variable: (work@c2::main::q), line:10:10, endln:10:11
       |vpiStmt:
       \_MethodFuncCall: (f), line:16:3, endln:16:13
         |vpiParent:
@@ -1270,7 +1266,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@c2::main::q2
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+          \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiStmt:
       \_MethodFuncCall: (atoiq), line:17:3, endln:17:17
         |vpiParent:
@@ -1295,7 +1291,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@c2::main::q2
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+          \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiStmt:
       \_MethodFuncCall: (push_back), line:18:3, endln:18:17
         |vpiParent:
@@ -1318,7 +1314,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@c2::main::q2
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+          \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiStmt:
       \_MethodFuncCall: (toto), line:19:3, endln:19:12
         |vpiParent:
@@ -1341,7 +1337,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@c2::main::q2
           |vpiActual:
-          \_ArrayVar: (work@c2::main::q2), line:11:7, endln:11:9
+          \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
     |vpiTypedef:
     \_VoidTypespec: , line:9:10, endln:9:14
       |vpiParent:

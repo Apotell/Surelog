@@ -20158,7 +20158,6 @@ GenFor                                                 2
 GenIf                                                  2
 GenIfElse                                              1
 GenRegion                                              1
-GenVar                                                 2
 HierPath                                              29
 IODecl                                               112
 Identifier                                           203
@@ -20167,9 +20166,7 @@ IfStmt                                                 9
 ImmediateAssert                                        7
 ImportTypespec                                         3
 IntTypespec                                          102
-IntVar                                                21
 LogicTypespec                                        389
-LogicVar                                              11
 LongIntTypespec                                        2
 Module                                                 8
 ModuleTypespec                                         5
@@ -20187,10 +20184,8 @@ RefTypespec                                         1156
 ReturnStmt                                           106
 SourceFile                                             1
 StringTypespec                                       223
-StringVar                                              3
 StructNet                                              1
 StructTypespec                                        45
-StructVar                                              1
 SysFuncCall                                           28
 TaggedPattern                                        219
 TypeParameter                                          1
@@ -20199,6 +20194,7 @@ TypespecMember                                       275
 UnionTypespec                                          2
 UnsupportedTypespec                                    1
 VarSelect                                              2
+Variable                                              38
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/ArianeElab/dut.sv:879:59: Illegal implicit net "id:4718, name: dm::DataCount".
@@ -27376,42 +27372,42 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (riscv::spikeCommitLog), line:636:5, endln:658:16
       |vpiFullName:riscv::spikeCommitLog
-      |vpiVariables:
-      \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+      |vpiVariable:
+      \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
         |vpiParent:
         \_Begin: (riscv::spikeCommitLog)
         |vpiTypespec:
         \_RefTypespec: (riscv::spikeCommitLog::rd_s), line:637:9, endln:637:15
           |vpiParent:
-          \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+          \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
           |vpiFullName:riscv::spikeCommitLog::rd_s
           |vpiActual:
           \_StringTypespec: , line:637:9, endln:637:15
         |vpiName:rd_s
         |vpiFullName:riscv::spikeCommitLog::rd_s
         |vpiSigned:1
-      |vpiVariables:
-      \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+      |vpiVariable:
+      \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
         |vpiParent:
         \_Begin: (riscv::spikeCommitLog)
         |vpiTypespec:
         \_RefTypespec: (riscv::spikeCommitLog::instr_word), line:638:9, endln:638:15
           |vpiParent:
-          \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+          \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
           |vpiFullName:riscv::spikeCommitLog::instr_word
           |vpiActual:
           \_StringTypespec: , line:637:9, endln:637:15
         |vpiName:instr_word
         |vpiFullName:riscv::spikeCommitLog::instr_word
         |vpiSigned:1
-      |vpiVariables:
-      \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+      |vpiVariable:
+      \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
         |vpiParent:
         \_Begin: (riscv::spikeCommitLog)
         |vpiTypespec:
         \_RefTypespec: (riscv::spikeCommitLog::rf_s), line:640:19, endln:640:25
           |vpiParent:
-          \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+          \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
           |vpiFullName:riscv::spikeCommitLog::rf_s
           |vpiActual:
           \_StringTypespec: , line:637:9, endln:637:15
@@ -27426,11 +27422,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_StringTypespec: , line:637:9, endln:637:15
       |vpiImportTypespec:
-      \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+      \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
       |vpiImportTypespec:
-      \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+      \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
       |vpiImportTypespec:
-      \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+      \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
       |vpiStmt:
       \_Assignment: , line:640:26, endln:640:51
         |vpiParent:
@@ -27467,7 +27463,7 @@ Design: (unnamed)
             |STRING:x
             |vpiConstType:6
         |vpiLhs:
-        \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+        \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
       |vpiStmt:
       \_IfElse: , line:642:9, endln:646:12
         |vpiParent:
@@ -27572,7 +27568,7 @@ Design: (unnamed)
               |vpiName:instr_word
               |vpiFullName:riscv::spikeCommitLog::instr_word
               |vpiActual:
-              \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+              \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
         |vpiElseStmt:
         \_Begin: (riscv::spikeCommitLog), line:644:18, endln:646:12
           |vpiParent:
@@ -27616,7 +27612,7 @@ Design: (unnamed)
               |vpiName:instr_word
               |vpiFullName:riscv::spikeCommitLog::instr_word
               |vpiActual:
-              \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+              \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
       |vpiStmt:
       \_IfElse: , line:648:9, endln:649:50
         |vpiParent:
@@ -27667,7 +27663,7 @@ Design: (unnamed)
               |vpiName:rf_s
               |vpiFullName:riscv::spikeCommitLog::rf_s
               |vpiActual:
-              \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+              \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
             |vpiArgument:
             \_RefObj: (riscv::spikeCommitLog::rd), line:648:55, endln:648:57
               |vpiParent:
@@ -27688,7 +27684,7 @@ Design: (unnamed)
             |vpiName:rd_s
             |vpiFullName:riscv::spikeCommitLog::rd_s
             |vpiActual:
-            \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+            \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
         |vpiElseStmt:
         \_Assignment: , line:649:14, endln:649:49
           |vpiParent:
@@ -27714,7 +27710,7 @@ Design: (unnamed)
               |vpiName:rf_s
               |vpiFullName:riscv::spikeCommitLog::rf_s
               |vpiActual:
-              \_StringVar: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
+              \_Variable: (riscv::spikeCommitLog::rf_s), line:640:26, endln:640:30
             |vpiArgument:
             \_RefObj: (riscv::spikeCommitLog::rd), line:649:46, endln:649:48
               |vpiParent:
@@ -27735,7 +27731,7 @@ Design: (unnamed)
             |vpiName:rd_s
             |vpiFullName:riscv::spikeCommitLog::rd_s
             |vpiActual:
-            \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+            \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
       |vpiStmt:
       \_IfElse: , line:651:9, endln:657:12
         |vpiParent:
@@ -27818,7 +27814,7 @@ Design: (unnamed)
                 |vpiName:instr_word
                 |vpiFullName:riscv::spikeCommitLog::instr_word
                 |vpiActual:
-                \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+                \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
               |vpiArgument:
               \_RefObj: (riscv::spikeCommitLog::rd_s), line:653:80, endln:653:84
                 |vpiParent:
@@ -27826,7 +27822,7 @@ Design: (unnamed)
                 |vpiName:rd_s
                 |vpiFullName:riscv::spikeCommitLog::rd_s
                 |vpiActual:
-                \_StringVar: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
+                \_Variable: (riscv::spikeCommitLog::rd_s), line:637:16, endln:637:20
               |vpiArgument:
               \_RefObj: (riscv::spikeCommitLog::result), line:653:86, endln:653:92
                 |vpiParent:
@@ -27884,7 +27880,7 @@ Design: (unnamed)
                 |vpiName:instr_word
                 |vpiFullName:riscv::spikeCommitLog::instr_word
                 |vpiActual:
-                \_StringVar: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
+                \_Variable: (riscv::spikeCommitLog::instr_word), line:638:16, endln:638:26
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -39725,35 +39721,33 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (ariane_pkg::is_inside_nonidempotent_regions), line:750:5, endln:757:50
       |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions
-      |vpiVariables:
-      \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_nonidempotent_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:7, endln:751:28
           |vpiParent:
-          \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+          \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
           |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::pass
           |vpiActual:
           \_LogicTypespec: , line:751:7, endln:751:12
         |vpiName:pass
         |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::pass
         |vpiSigned:1
-      |vpiVariables:
-      \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_nonidempotent_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:12, endln:753:24
           |vpiParent:
-          \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+          \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
           |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::k
           |vpiActual:
           \_IntTypespec: , line:753:12, endln:753:24
         |vpiName:k
         |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::k
-      |vpiReg:
-      \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
       |vpiInternalScope:
       \_ForStmt: (ariane_pkg::is_inside_nonidempotent_regions), line:753:7, endln:755:10
         |vpiParent:
@@ -39800,7 +39794,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::Cfg.NonIdempotentAddrBase[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+                    \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
                 |vpiName:Cfg.NonIdempotentAddrBase[k]
               |vpiArgument:
               \_HierPath: (Cfg.NonIdempotentLength[k]), line:754:61, endln:754:87
@@ -39828,7 +39822,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::Cfg.NonIdempotentLength[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+                    \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
                 |vpiName:Cfg.NonIdempotentLength[k]
               |vpiArgument:
               \_RefObj: (ariane_pkg::is_inside_nonidempotent_regions::address), line:754:89, endln:754:96
@@ -39852,7 +39846,7 @@ Design: (unnamed)
               |vpiName:pass
               |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::pass
               |vpiActual:
-              \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+              \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
               |vpiIndex:
               \_RefObj: (ariane_pkg::is_inside_nonidempotent_regions::k), line:754:14, endln:754:15
                 |vpiParent:
@@ -39860,7 +39854,7 @@ Design: (unnamed)
                 |vpiName:k
                 |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::k
                 |vpiActual:
-                \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+                \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
         |vpiForInitStmt:
         \_Assignment: , line:753:12, endln:753:30
           |vpiParent:
@@ -39874,7 +39868,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+          \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
         |vpiForIncStmt:
         \_Operation: , line:753:62, endln:753:65
           |vpiParent:
@@ -39887,7 +39881,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+            \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
         |vpiCondition:
         \_Operation: , line:753:32, endln:753:60
           |vpiParent:
@@ -39900,7 +39894,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+            \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
           |vpiOperand:
           \_HierPath: (Cfg.NrNonIdempotentRules), line:753:36, endln:753:60
             |vpiParent:
@@ -39967,11 +39961,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:751:7, endln:751:12
       |vpiImportTypespec:
-      \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+      \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
       |vpiImportTypespec:
       \_IntTypespec: , line:753:12, endln:753:24
       |vpiImportTypespec:
-      \_IntVar: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
+      \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::k), line:753:25, endln:753:26
       |vpiStmt:
       \_Assignment: , line:752:7, endln:752:16
         |vpiParent:
@@ -39993,7 +39987,7 @@ Design: (unnamed)
           |vpiName:pass
           |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::pass
           |vpiActual:
-          \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+          \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
       |vpiStmt:
       \_ForStmt: (ariane_pkg::is_inside_nonidempotent_regions), line:753:7, endln:755:10
       |vpiStmt:
@@ -40012,7 +40006,7 @@ Design: (unnamed)
             |vpiName:pass
             |vpiFullName:ariane_pkg::is_inside_nonidempotent_regions::pass
             |vpiActual:
-            \_LogicVar: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
+            \_Variable: (ariane_pkg::is_inside_nonidempotent_regions::pass), line:751:29, endln:751:33
     |vpiTypedef:
     \_LogicTypespec: , line:750:24, endln:750:29
       |vpiParent:
@@ -40100,35 +40094,33 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (ariane_pkg::is_inside_execute_regions), line:759:5, endln:767:44
       |vpiFullName:ariane_pkg::is_inside_execute_regions
-      |vpiVariables:
-      \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_execute_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_execute_regions::pass), line:761:7, endln:761:28
           |vpiParent:
-          \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+          \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
           |vpiFullName:ariane_pkg::is_inside_execute_regions::pass
           |vpiActual:
           \_LogicTypespec: , line:761:7, endln:761:12
         |vpiName:pass
         |vpiFullName:ariane_pkg::is_inside_execute_regions::pass
         |vpiSigned:1
-      |vpiVariables:
-      \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_execute_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_execute_regions::k), line:763:12, endln:763:24
           |vpiParent:
-          \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+          \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
           |vpiFullName:ariane_pkg::is_inside_execute_regions::k
           |vpiActual:
           \_IntTypespec: , line:763:12, endln:763:24
         |vpiName:k
         |vpiFullName:ariane_pkg::is_inside_execute_regions::k
-      |vpiReg:
-      \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
       |vpiInternalScope:
       \_ForStmt: (ariane_pkg::is_inside_execute_regions), line:763:7, endln:765:10
         |vpiParent:
@@ -40175,7 +40167,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_execute_regions::Cfg.ExecuteRegionAddrBase[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+                    \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
                 |vpiName:Cfg.ExecuteRegionAddrBase[k]
               |vpiArgument:
               \_HierPath: (Cfg.ExecuteRegionLength[k]), line:764:61, endln:764:87
@@ -40203,7 +40195,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_execute_regions::Cfg.ExecuteRegionLength[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+                    \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
                 |vpiName:Cfg.ExecuteRegionLength[k]
               |vpiArgument:
               \_RefObj: (ariane_pkg::is_inside_execute_regions::address), line:764:89, endln:764:96
@@ -40227,7 +40219,7 @@ Design: (unnamed)
               |vpiName:pass
               |vpiFullName:ariane_pkg::is_inside_execute_regions::pass
               |vpiActual:
-              \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+              \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
               |vpiIndex:
               \_RefObj: (ariane_pkg::is_inside_execute_regions::k), line:764:14, endln:764:15
                 |vpiParent:
@@ -40235,7 +40227,7 @@ Design: (unnamed)
                 |vpiName:k
                 |vpiFullName:ariane_pkg::is_inside_execute_regions::k
                 |vpiActual:
-                \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+                \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
         |vpiForInitStmt:
         \_Assignment: , line:763:12, endln:763:30
           |vpiParent:
@@ -40249,7 +40241,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+          \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
         |vpiForIncStmt:
         \_Operation: , line:763:62, endln:763:65
           |vpiParent:
@@ -40262,7 +40254,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_execute_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+            \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
         |vpiCondition:
         \_Operation: , line:763:32, endln:763:60
           |vpiParent:
@@ -40275,7 +40267,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_execute_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+            \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
           |vpiOperand:
           \_HierPath: (Cfg.NrExecuteRegionRules), line:763:36, endln:763:60
             |vpiParent:
@@ -40342,11 +40334,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:761:7, endln:761:12
       |vpiImportTypespec:
-      \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+      \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
       |vpiImportTypespec:
       \_IntTypespec: , line:763:12, endln:763:24
       |vpiImportTypespec:
-      \_IntVar: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
+      \_Variable: (ariane_pkg::is_inside_execute_regions::k), line:763:25, endln:763:26
       |vpiStmt:
       \_Assignment: , line:762:7, endln:762:16
         |vpiParent:
@@ -40368,7 +40360,7 @@ Design: (unnamed)
           |vpiName:pass
           |vpiFullName:ariane_pkg::is_inside_execute_regions::pass
           |vpiActual:
-          \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+          \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
       |vpiStmt:
       \_ForStmt: (ariane_pkg::is_inside_execute_regions), line:763:7, endln:765:10
       |vpiStmt:
@@ -40387,7 +40379,7 @@ Design: (unnamed)
             |vpiName:pass
             |vpiFullName:ariane_pkg::is_inside_execute_regions::pass
             |vpiActual:
-            \_LogicVar: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
+            \_Variable: (ariane_pkg::is_inside_execute_regions::pass), line:761:29, endln:761:33
     |vpiTypedef:
     \_LogicTypespec: , line:759:24, endln:759:29
       |vpiParent:
@@ -40475,14 +40467,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (ariane_pkg::is_inside_cacheable_regions), line:769:5, endln:776:46
       |vpiFullName:ariane_pkg::is_inside_cacheable_regions
-      |vpiVariables:
-      \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_cacheable_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:17, endln:770:38
           |vpiParent:
-          \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+          \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
           |vpiFullName:ariane_pkg::is_inside_cacheable_regions::pass
           |vpiActual:
           \_LogicTypespec: , line:770:17, endln:770:22
@@ -40490,21 +40482,19 @@ Design: (unnamed)
         |vpiFullName:ariane_pkg::is_inside_cacheable_regions::pass
         |vpiSigned:1
         |vpiAutomatic:1
-      |vpiVariables:
-      \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+      |vpiVariable:
+      \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
         |vpiParent:
         \_Begin: (ariane_pkg::is_inside_cacheable_regions)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::is_inside_cacheable_regions::k), line:772:12, endln:772:24
           |vpiParent:
-          \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+          \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
           |vpiFullName:ariane_pkg::is_inside_cacheable_regions::k
           |vpiActual:
           \_IntTypespec: , line:772:12, endln:772:24
         |vpiName:k
         |vpiFullName:ariane_pkg::is_inside_cacheable_regions::k
-      |vpiReg:
-      \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
       |vpiInternalScope:
       \_ForStmt: (ariane_pkg::is_inside_cacheable_regions), line:772:7, endln:774:10
         |vpiParent:
@@ -40551,7 +40541,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_cacheable_regions::Cfg.CachedRegionAddrBase[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+                    \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
                 |vpiName:Cfg.CachedRegionAddrBase[k]
               |vpiArgument:
               \_HierPath: (Cfg.CachedRegionLength[k]), line:773:60, endln:773:85
@@ -40579,7 +40569,7 @@ Design: (unnamed)
                     |vpiName:k
                     |vpiFullName:ariane_pkg::is_inside_cacheable_regions::Cfg.CachedRegionLength[k]::k
                     |vpiActual:
-                    \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+                    \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
                 |vpiName:Cfg.CachedRegionLength[k]
               |vpiArgument:
               \_RefObj: (ariane_pkg::is_inside_cacheable_regions::address), line:773:87, endln:773:94
@@ -40603,7 +40593,7 @@ Design: (unnamed)
               |vpiName:pass
               |vpiFullName:ariane_pkg::is_inside_cacheable_regions::pass
               |vpiActual:
-              \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+              \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
               |vpiIndex:
               \_RefObj: (ariane_pkg::is_inside_cacheable_regions::k), line:773:14, endln:773:15
                 |vpiParent:
@@ -40611,7 +40601,7 @@ Design: (unnamed)
                 |vpiName:k
                 |vpiFullName:ariane_pkg::is_inside_cacheable_regions::k
                 |vpiActual:
-                \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+                \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
         |vpiForInitStmt:
         \_Assignment: , line:772:12, endln:772:30
           |vpiParent:
@@ -40625,7 +40615,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+          \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
         |vpiForIncStmt:
         \_Operation: , line:772:61, endln:772:64
           |vpiParent:
@@ -40638,7 +40628,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_cacheable_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+            \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
         |vpiCondition:
         \_Operation: , line:772:32, endln:772:59
           |vpiParent:
@@ -40651,7 +40641,7 @@ Design: (unnamed)
             |vpiName:k
             |vpiFullName:ariane_pkg::is_inside_cacheable_regions::k
             |vpiActual:
-            \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+            \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
           |vpiOperand:
           \_HierPath: (Cfg.NrCachedRegionRules), line:772:36, endln:772:59
             |vpiParent:
@@ -40718,11 +40708,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:770:17, endln:770:22
       |vpiImportTypespec:
-      \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+      \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
       |vpiImportTypespec:
       \_IntTypespec: , line:772:12, endln:772:24
       |vpiImportTypespec:
-      \_IntVar: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
+      \_Variable: (ariane_pkg::is_inside_cacheable_regions::k), line:772:25, endln:772:26
       |vpiStmt:
       \_Assignment: , line:771:7, endln:771:16
         |vpiParent:
@@ -40744,7 +40734,7 @@ Design: (unnamed)
           |vpiName:pass
           |vpiFullName:ariane_pkg::is_inside_cacheable_regions::pass
           |vpiActual:
-          \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+          \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
       |vpiStmt:
       \_ForStmt: (ariane_pkg::is_inside_cacheable_regions), line:772:7, endln:774:10
       |vpiStmt:
@@ -40763,7 +40753,7 @@ Design: (unnamed)
             |vpiName:pass
             |vpiFullName:ariane_pkg::is_inside_cacheable_regions::pass
             |vpiActual:
-            \_LogicVar: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
+            \_Variable: (ariane_pkg::is_inside_cacheable_regions::pass), line:770:39, endln:770:43
     |vpiTypedef:
     \_LogicTypespec: , line:769:24, endln:769:29
       |vpiParent:
@@ -42910,38 +42900,34 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (ariane_pkg::data_align), line:1396:5, endln:1411:16
       |vpiFullName:ariane_pkg::data_align
-      |vpiVariables:
-      \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
+      |vpiVariable:
+      \_Variable: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
         |vpiParent:
         \_Begin: (ariane_pkg::data_align)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::data_align::addr_tmp), line:1398:9, endln:1398:20
           |vpiParent:
-          \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
+          \_Variable: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
           |vpiFullName:ariane_pkg::data_align::addr_tmp
           |vpiActual:
           \_LogicTypespec: , line:1398:9, endln:1398:14
         |vpiName:addr_tmp
         |vpiFullName:ariane_pkg::data_align::addr_tmp
         |vpiSigned:1
-      |vpiVariables:
-      \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+      |vpiVariable:
+      \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
         |vpiParent:
         \_Begin: (ariane_pkg::data_align)
         |vpiTypespec:
         \_RefTypespec: (ariane_pkg::data_align::data_tmp), line:1399:9, endln:1399:21
           |vpiParent:
-          \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+          \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
           |vpiFullName:ariane_pkg::data_align::data_tmp
           |vpiActual:
           \_LogicTypespec: , line:1399:9, endln:1399:14
         |vpiName:data_tmp
         |vpiFullName:ariane_pkg::data_align::data_tmp
         |vpiSigned:1
-      |vpiReg:
-      \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
-      |vpiReg:
-      \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
       |vpiTypedef:
       \_LogicTypespec: , line:1398:9, endln:1398:14
         |vpiParent:
@@ -42993,11 +42979,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:1398:9, endln:1398:14
       |vpiImportTypespec:
-      \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
+      \_Variable: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
       |vpiImportTypespec:
       \_LogicTypespec: , line:1399:9, endln:1399:14
       |vpiImportTypespec:
-      \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+      \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
       |vpiStmt:
       \_Assignment: , line:1398:21, endln:1398:74
         |vpiParent:
@@ -43064,7 +43050,7 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
         |vpiLhs:
-        \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
+        \_Variable: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
       |vpiStmt:
       \_Assignment: , line:1399:22, endln:1399:43
         |vpiParent:
@@ -43098,7 +43084,7 @@ Design: (unnamed)
               |BIN:0
               |vpiConstType:3
         |vpiLhs:
-        \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+        \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
       |vpiStmt:
       \_CaseStmt: , line:1400:9, endln:1409:16
         |vpiParent:
@@ -43111,7 +43097,7 @@ Design: (unnamed)
           |vpiName:addr_tmp
           |vpiFullName:ariane_pkg::data_align::addr_tmp
           |vpiActual:
-          \_LogicVar: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
+          \_Variable: (ariane_pkg::data_align::addr_tmp), line:1398:21, endln:1398:29
         |vpiCaseItem:
         \_CaseItem: , line:1401:13, endln:1401:73
           |vpiParent:
@@ -43182,7 +43168,7 @@ Design: (unnamed)
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiDefName:data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:1401:30, endln:1401:43
@@ -43335,7 +43321,7 @@ Design: (unnamed)
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiDefName:data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:1402:30, endln:1402:43
@@ -43488,7 +43474,7 @@ Design: (unnamed)
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiDefName:data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:1403:30, endln:1403:43
@@ -43641,7 +43627,7 @@ Design: (unnamed)
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiDefName:data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:1404:30, endln:1404:43
@@ -43754,7 +43740,7 @@ Design: (unnamed)
               |vpiName:data_tmp
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
         |vpiCaseItem:
         \_CaseItem: , line:1406:13, endln:1406:58
           |vpiParent:
@@ -43837,7 +43823,7 @@ Design: (unnamed)
               |vpiName:data_tmp
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
         |vpiCaseItem:
         \_CaseItem: , line:1407:13, endln:1407:58
           |vpiParent:
@@ -43920,7 +43906,7 @@ Design: (unnamed)
               |vpiName:data_tmp
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
         |vpiCaseItem:
         \_CaseItem: , line:1408:13, endln:1408:57
           |vpiParent:
@@ -44003,7 +43989,7 @@ Design: (unnamed)
               |vpiName:data_tmp
               |vpiFullName:ariane_pkg::data_align::data_tmp
               |vpiActual:
-              \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+              \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
       |vpiStmt:
       \_ReturnStmt: , line:1410:9, endln:1410:41
         |vpiParent:
@@ -44016,7 +44002,7 @@ Design: (unnamed)
           |vpiFullName:ariane_pkg::data_align::data_tmp
           |vpiDefName:data_tmp
           |vpiActual:
-          \_LogicVar: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
+          \_Variable: (ariane_pkg::data_align::data_tmp), line:1399:22, endln:1399:30
           |vpiConstantSelect:1
           |vpiLeftRange:
           \_Operation: , line:1410:25, endln:1410:38
@@ -50793,14 +50779,14 @@ Design: (unnamed)
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiName:fpnew_pkg
-  |vpiVariables:
-  \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::res::fpnew_pkg::fp_encoding_t), line:1802:15, endln:1802:28
       |vpiParent:
-      \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+      \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
       |vpiName:fpnew_pkg::fp_encoding_t
       |vpiFullName:fpnew_pkg::res::fpnew_pkg::fp_encoding_t
       |vpiActual:
@@ -50808,14 +50794,14 @@ Design: (unnamed)
     |vpiName:res
     |vpiFullName:fpnew_pkg::res
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::res), line:1863:27, endln:1863:30
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::res), line:1863:27, endln:1863:30
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::res::fpnew_pkg::fmt_logic_t), line:1863:15, endln:1863:26
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::res), line:1863:27, endln:1863:30
+      \_Variable: (fpnew_pkg::res), line:1863:27, endln:1863:30
       |vpiName:fpnew_pkg::fmt_logic_t
       |vpiFullName:fpnew_pkg::res::fpnew_pkg::fmt_logic_t
       |vpiActual:
@@ -50823,14 +50809,14 @@ Design: (unnamed)
     |vpiName:res
     |vpiFullName:fpnew_pkg::res
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::res), line:1875:28, endln:1875:31
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::res), line:1875:28, endln:1875:31
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::res::fpnew_pkg::ifmt_logic_t), line:1875:15, endln:1875:27
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::res), line:1875:28, endln:1875:31
+      \_Variable: (fpnew_pkg::res), line:1875:28, endln:1875:31
       |vpiName:fpnew_pkg::ifmt_logic_t
       |vpiFullName:fpnew_pkg::res::fpnew_pkg::ifmt_logic_t
       |vpiActual:
@@ -50838,14 +50824,14 @@ Design: (unnamed)
     |vpiName:res
     |vpiFullName:fpnew_pkg::res
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::lanefmts::fpnew_pkg::fmt_logic_t), line:1876:15, endln:1876:26
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+      \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
       |vpiName:fpnew_pkg::fmt_logic_t
       |vpiFullName:fpnew_pkg::lanefmts::fpnew_pkg::fmt_logic_t
       |vpiActual:
@@ -50853,14 +50839,14 @@ Design: (unnamed)
     |vpiName:lanefmts
     |vpiFullName:fpnew_pkg::lanefmts
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::res), line:1892:27, endln:1892:30
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::res), line:1892:27, endln:1892:30
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::res::fpnew_pkg::fmt_logic_t), line:1892:15, endln:1892:26
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::res), line:1892:27, endln:1892:30
+      \_Variable: (fpnew_pkg::res), line:1892:27, endln:1892:30
       |vpiName:fpnew_pkg::fmt_logic_t
       |vpiFullName:fpnew_pkg::res::fpnew_pkg::fmt_logic_t
       |vpiActual:
@@ -50868,14 +50854,14 @@ Design: (unnamed)
     |vpiName:res
     |vpiFullName:fpnew_pkg::res
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::res), line:1905:28, endln:1905:31
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::res), line:1905:28, endln:1905:31
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::res::fpnew_pkg::ifmt_logic_t), line:1905:15, endln:1905:27
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::res), line:1905:28, endln:1905:31
+      \_Variable: (fpnew_pkg::res), line:1905:28, endln:1905:31
       |vpiName:fpnew_pkg::ifmt_logic_t
       |vpiFullName:fpnew_pkg::res::fpnew_pkg::ifmt_logic_t
       |vpiActual:
@@ -50883,14 +50869,14 @@ Design: (unnamed)
     |vpiName:res
     |vpiFullName:fpnew_pkg::res
     |vpiAutomatic:1
-  |vpiVariables:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
+  |vpiVariable:
+  \_Variable: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1485:1, endln:1955:11
     |vpiTypespec:
     \_RefTypespec: (fpnew_pkg::lanefmts::fpnew_pkg::fmt_logic_t), line:1906:15, endln:1906:26
       |vpiParent:
-      \_LogicVar: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
+      \_Variable: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
       |vpiName:fpnew_pkg::fmt_logic_t
       |vpiFullName:fpnew_pkg::lanefmts::fpnew_pkg::fmt_logic_t
       |vpiActual:
@@ -50898,18 +50884,6 @@ Design: (unnamed)
     |vpiName:lanefmts
     |vpiFullName:fpnew_pkg::lanefmts
     |vpiAutomatic:1
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::res), line:1863:27, endln:1863:30
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::res), line:1875:28, endln:1875:31
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::res), line:1892:27, endln:1892:30
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::res), line:1905:28, endln:1905:31
-  |vpiReg:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
   |vpiParameter:
   \_Parameter: (fpnew_pkg::NUM_FP_FORMATS), line:1505:27, endln:1505:45
     |vpiParent:
@@ -52922,28 +52896,28 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::max_fp_width), line:1769:3, endln:1775:14
       |vpiFullName:fpnew_pkg::max_fp_width
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
         |vpiParent:
         \_Begin: (fpnew_pkg::max_fp_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::max_fp_width::res), line:1770:15, endln:1770:27
           |vpiParent:
-          \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+          \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
           |vpiFullName:fpnew_pkg::max_fp_width::res
           |vpiActual:
           \_IntTypespec: , line:1770:15, endln:1770:27
         |vpiName:res
         |vpiFullName:fpnew_pkg::max_fp_width::res
         |vpiAutomatic:1
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
         |vpiParent:
         \_Begin: (fpnew_pkg::max_fp_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::max_fp_width::i), line:1771:10, endln:1771:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+          \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
           |vpiFullName:fpnew_pkg::max_fp_width::i
           |vpiActual:
           \_IntTypespec: , line:1770:15, endln:1770:27
@@ -52967,7 +52941,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+          \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
         |vpiForIncStmt:
         \_Operation: , line:1771:50, endln:1771:53
           |vpiParent:
@@ -52980,7 +52954,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::max_fp_width::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+            \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
         |vpiCondition:
         \_Operation: , line:1771:30, endln:1771:48
           |vpiParent:
@@ -52993,7 +52967,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::max_fp_width::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+            \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::max_fp_width::NUM_FP_FORMATS), line:1771:34, endln:1771:48
             |vpiParent:
@@ -53021,7 +52995,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:fpnew_pkg::max_fp_width::i
               |vpiActual:
-              \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+              \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
           |vpiStmt:
           \_Assignment: , line:1773:9, endln:1773:65
             |vpiParent:
@@ -53043,7 +53017,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:fpnew_pkg::max_fp_width::res
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+                  \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
                 |vpiArgument:
                 \_FuncCall: (fp_width), line:1773:38, endln:1773:63
                   |vpiParent:
@@ -53060,7 +53034,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:fpnew_pkg::max_fp_width::i
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+                      \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
                   |vpiName:
                   \_Identifier: (fp_width)
                     |vpiParent:
@@ -53087,7 +53061,7 @@ Design: (unnamed)
               |vpiName:res
               |vpiFullName:fpnew_pkg::max_fp_width::res
               |vpiActual:
-              \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+              \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
       |vpiTypedef:
       \_IntTypespec: , line:1770:15, endln:1770:27
         |vpiParent:
@@ -53095,9 +53069,9 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1770:15, endln:1770:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+      \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
+      \_Variable: (fpnew_pkg::max_fp_width::i), line:1771:23, endln:1771:24
       |vpiStmt:
       \_Assignment: , line:1770:28, endln:1770:35
         |vpiParent:
@@ -53113,7 +53087,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiLhs:
-        \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+        \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::max_fp_width), line:1771:5, endln:1773:66
       |vpiStmt:
@@ -53127,7 +53101,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::max_fp_width::res
           |vpiActual:
-          \_IntVar: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
+          \_Variable: (fpnew_pkg::max_fp_width::res), line:1770:28, endln:1770:31
     |vpiTypedef:
     \_IntTypespec: , line:1769:22, endln:1769:34
       |vpiParent:
@@ -53176,28 +53150,28 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::min_fp_width), line:1778:3, endln:1784:14
       |vpiFullName:fpnew_pkg::min_fp_width
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
         |vpiParent:
         \_Begin: (fpnew_pkg::min_fp_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::min_fp_width::res), line:1779:15, endln:1779:27
           |vpiParent:
-          \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+          \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
           |vpiFullName:fpnew_pkg::min_fp_width::res
           |vpiActual:
           \_IntTypespec: , line:1779:15, endln:1779:27
         |vpiName:res
         |vpiFullName:fpnew_pkg::min_fp_width::res
         |vpiAutomatic:1
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
         |vpiParent:
         \_Begin: (fpnew_pkg::min_fp_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::min_fp_width::i), line:1780:10, endln:1780:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+          \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
           |vpiFullName:fpnew_pkg::min_fp_width::i
           |vpiActual:
           \_IntTypespec: , line:1779:15, endln:1779:27
@@ -53221,7 +53195,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+          \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
         |vpiForIncStmt:
         \_Operation: , line:1780:50, endln:1780:53
           |vpiParent:
@@ -53234,7 +53208,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::min_fp_width::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+            \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
         |vpiCondition:
         \_Operation: , line:1780:30, endln:1780:48
           |vpiParent:
@@ -53247,7 +53221,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::min_fp_width::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+            \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::min_fp_width::NUM_FP_FORMATS), line:1780:34, endln:1780:48
             |vpiParent:
@@ -53275,7 +53249,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:fpnew_pkg::min_fp_width::i
               |vpiActual:
-              \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+              \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
           |vpiStmt:
           \_Assignment: , line:1782:9, endln:1782:65
             |vpiParent:
@@ -53297,7 +53271,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:fpnew_pkg::min_fp_width::res
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+                  \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
                 |vpiArgument:
                 \_FuncCall: (fp_width), line:1782:38, endln:1782:63
                   |vpiParent:
@@ -53314,7 +53288,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:fpnew_pkg::min_fp_width::i
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+                      \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
                   |vpiName:
                   \_Identifier: (fp_width)
                     |vpiParent:
@@ -53341,7 +53315,7 @@ Design: (unnamed)
               |vpiName:res
               |vpiFullName:fpnew_pkg::min_fp_width::res
               |vpiActual:
-              \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+              \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
       |vpiTypedef:
       \_IntTypespec: , line:1779:15, endln:1779:27
         |vpiParent:
@@ -53349,9 +53323,9 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1779:15, endln:1779:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+      \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
+      \_Variable: (fpnew_pkg::min_fp_width::i), line:1780:23, endln:1780:24
       |vpiStmt:
       \_Assignment: , line:1779:28, endln:1779:51
         |vpiParent:
@@ -53378,7 +53352,7 @@ Design: (unnamed)
           |vpiFunction:
           \_Function: (fpnew_pkg::max_fp_width), line:1769:3, endln:1775:14
         |vpiLhs:
-        \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+        \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::min_fp_width), line:1780:5, endln:1782:66
       |vpiStmt:
@@ -53392,7 +53366,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::min_fp_width::res
           |vpiActual:
-          \_IntVar: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
+          \_Variable: (fpnew_pkg::min_fp_width::res), line:1779:28, endln:1779:31
     |vpiTypedef:
     \_IntTypespec: , line:1778:22, endln:1778:34
       |vpiParent:
@@ -53711,14 +53685,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::super_format), line:1801:3, endln:1810:14
       |vpiFullName:fpnew_pkg::super_format
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
         |vpiParent:
         \_Begin: (fpnew_pkg::super_format)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::super_format::fmt), line:1804:10, endln:1804:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+          \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
           |vpiFullName:fpnew_pkg::super_format::fmt
           |vpiActual:
           \_IntTypespec: , line:1804:10, endln:1804:22
@@ -53742,7 +53716,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+          \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
         |vpiForIncStmt:
         \_Operation: , line:1804:54, endln:1804:59
           |vpiParent:
@@ -53755,7 +53729,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::super_format::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+            \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
         |vpiCondition:
         \_Operation: , line:1804:32, endln:1804:52
           |vpiParent:
@@ -53768,7 +53742,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::super_format::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+            \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
           |vpiOperand:
           \_RefObj: (fpnew_pkg::super_format::NUM_FP_FORMATS), line:1804:38, endln:1804:52
             |vpiParent:
@@ -53796,7 +53770,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::super_format::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+              \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
           |vpiStmt:
           \_Begin: (fpnew_pkg::super_format), line:1805:21, endln:1808:10
             |vpiParent:
@@ -53826,7 +53800,7 @@ Design: (unnamed)
                       \_HierPath: (res.exp_bits), line:1806:42, endln:1806:54
                       |vpiName:res
                       |vpiActual:
-                      \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+                      \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
                     |vpiActual:
                     \_RefObj: (fpnew_pkg::super_format::exp_bits), line:1806:46, endln:1806:54
                       |vpiParent:
@@ -53852,7 +53826,7 @@ Design: (unnamed)
                         |vpiName:fmt
                         |vpiFullName:fpnew_pkg::super_format::fmt
                         |vpiActual:
-                        \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+                        \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
                     |vpiName:
                     \_Identifier: (exp_bits)
                       |vpiParent:
@@ -53882,7 +53856,7 @@ Design: (unnamed)
                   \_HierPath: (res.exp_bits), line:1806:12, endln:1806:21
                   |vpiName:res
                   |vpiActual:
-                  \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+                  \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
                 |vpiActual:
                 \_RefObj: (exp_bits), line:1806:13, endln:1806:21
                   |vpiParent:
@@ -53915,7 +53889,7 @@ Design: (unnamed)
                       \_HierPath: (res.man_bits), line:1807:42, endln:1807:54
                       |vpiName:res
                       |vpiActual:
-                      \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+                      \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
                     |vpiActual:
                     \_RefObj: (fpnew_pkg::super_format::man_bits), line:1807:46, endln:1807:54
                       |vpiParent:
@@ -53941,7 +53915,7 @@ Design: (unnamed)
                         |vpiName:fmt
                         |vpiFullName:fpnew_pkg::super_format::fmt
                         |vpiActual:
-                        \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+                        \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
                     |vpiName:
                     \_Identifier: (man_bits)
                       |vpiParent:
@@ -53971,7 +53945,7 @@ Design: (unnamed)
                   \_HierPath: (res.man_bits), line:1807:12, endln:1807:21
                   |vpiName:res
                   |vpiActual:
-                  \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+                  \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
                 |vpiActual:
                 \_RefObj: (man_bits), line:1807:13, endln:1807:21
                   |vpiParent:
@@ -53987,7 +53961,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1804:10, endln:1804:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
+      \_Variable: (fpnew_pkg::super_format::fmt), line:1804:23, endln:1804:26
       |vpiStmt:
       \_Assignment: , line:1803:5, endln:1803:13
         |vpiParent:
@@ -54009,7 +53983,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::super_format::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::super_format), line:1804:5, endln:1808:10
       |vpiStmt:
@@ -54023,7 +53997,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::super_format::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -54067,28 +54041,28 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::max_int_width), line:1816:3, endln:1822:14
       |vpiFullName:fpnew_pkg::max_int_width
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
         |vpiParent:
         \_Begin: (fpnew_pkg::max_int_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::max_int_width::res), line:1817:15, endln:1817:27
           |vpiParent:
-          \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+          \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
           |vpiFullName:fpnew_pkg::max_int_width::res
           |vpiActual:
           \_IntTypespec: , line:1817:15, endln:1817:27
         |vpiName:res
         |vpiFullName:fpnew_pkg::max_int_width::res
         |vpiAutomatic:1
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
         |vpiParent:
         \_Begin: (fpnew_pkg::max_int_width)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::max_int_width::ifmt), line:1818:10, endln:1818:13
           |vpiParent:
-          \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+          \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
           |vpiFullName:fpnew_pkg::max_int_width::ifmt
           |vpiActual:
           \_IntTypespec: , line:1818:10, endln:1818:13
@@ -54124,7 +54098,7 @@ Design: (unnamed)
                 |vpiName:ifmt
                 |vpiFullName:fpnew_pkg::max_int_width::ifmt
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+                \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
             |vpiStmt:
             \_Assignment: , line:1819:22, endln:1819:72
               |vpiParent:
@@ -54142,7 +54116,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:fpnew_pkg::max_int_width::res
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+                  \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
                 |vpiArgument:
                 \_FuncCall: (int_width), line:1819:41, endln:1819:71
                   |vpiParent:
@@ -54159,7 +54133,7 @@ Design: (unnamed)
                       |vpiName:ifmt
                       |vpiFullName:fpnew_pkg::max_int_width::ifmt
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+                      \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
                   |vpiName:
                   \_Identifier: (int_width)
                     |vpiParent:
@@ -54181,7 +54155,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:fpnew_pkg::max_int_width::res
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+                \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
         |vpiForInitStmt:
         \_Assignment: , line:1818:10, endln:1818:22
           |vpiParent:
@@ -54195,7 +54169,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+          \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
         |vpiForIncStmt:
         \_Operation: , line:1818:48, endln:1818:54
           |vpiParent:
@@ -54208,7 +54182,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::max_int_width::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+            \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
         |vpiCondition:
         \_Operation: , line:1818:24, endln:1818:46
           |vpiParent:
@@ -54221,7 +54195,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::max_int_width::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+            \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
           |vpiOperand:
           \_RefObj: (fpnew_pkg::max_int_width::NUM_INT_FORMATS), line:1818:31, endln:1818:46
             |vpiParent:
@@ -54244,11 +54218,11 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1817:15, endln:1817:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+      \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
       |vpiImportTypespec:
       \_IntTypespec: , line:1818:10, endln:1818:13
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
+      \_Variable: (fpnew_pkg::max_int_width::ifmt), line:1818:14, endln:1818:18
       |vpiStmt:
       \_Assignment: , line:1817:28, endln:1817:35
         |vpiParent:
@@ -54264,7 +54238,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiLhs:
-        \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+        \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::max_int_width), line:1818:5, endln:1820:8
       |vpiStmt:
@@ -54278,7 +54252,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::max_int_width::res
           |vpiActual:
-          \_IntVar: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
+          \_Variable: (fpnew_pkg::max_int_width::res), line:1817:28, endln:1817:31
     |vpiTypedef:
     \_IntTypespec: , line:1816:22, endln:1816:34
       |vpiParent:
@@ -55004,14 +54978,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_lane_formats), line:1860:3, endln:1868:14
       |vpiFullName:fpnew_pkg::get_lane_formats
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
         |vpiParent:
         \_Begin: (fpnew_pkg::get_lane_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_lane_formats::fmt), line:1864:10, endln:1864:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+          \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
           |vpiFullName:fpnew_pkg::get_lane_formats::fmt
           |vpiActual:
           \_IntTypespec: , line:1864:10, endln:1864:22
@@ -55035,7 +55009,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+          \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
         |vpiForIncStmt:
         \_Operation: , line:1864:54, endln:1864:59
           |vpiParent:
@@ -55048,7 +55022,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::get_lane_formats::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+            \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
         |vpiCondition:
         \_Operation: , line:1864:32, endln:1864:52
           |vpiParent:
@@ -55061,7 +55035,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::get_lane_formats::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+            \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_lane_formats::NUM_FP_FORMATS), line:1864:38, endln:1864:52
             |vpiParent:
@@ -55096,7 +55070,7 @@ Design: (unnamed)
                 |vpiName:fmt
                 |vpiFullName:fpnew_pkg::get_lane_formats::fmt
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+                \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
             |vpiOperand:
             \_Operation: , line:1866:30, endln:1866:75
               |vpiParent:
@@ -55131,7 +55105,7 @@ Design: (unnamed)
                       |vpiName:fmt
                       |vpiFullName:fpnew_pkg::get_lane_formats::fmt
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+                      \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
                   |vpiName:
                   \_Identifier: (fp_width)
                     |vpiParent:
@@ -55154,7 +55128,7 @@ Design: (unnamed)
             |vpiName:res
             |vpiFullName:fpnew_pkg::get_lane_formats::res
             |vpiActual:
-            \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+            \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
             |vpiIndex:
             \_RefObj: (fpnew_pkg::get_lane_formats::fmt), line:1866:11, endln:1866:14
               |vpiParent:
@@ -55162,7 +55136,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_lane_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+              \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
       |vpiTypedef:
       \_IntTypespec: , line:1864:10, endln:1864:22
         |vpiParent:
@@ -55170,7 +55144,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1864:10, endln:1864:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
+      \_Variable: (fpnew_pkg::get_lane_formats::fmt), line:1864:23, endln:1864:26
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_lane_formats), line:1864:5, endln:1866:77
       |vpiStmt:
@@ -55184,7 +55158,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_lane_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiTypedef:
     \_IntTypespec: , line:1860:51, endln:1860:63
       |vpiParent:
@@ -55260,27 +55234,27 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_lane_int_formats), line:1871:3, endln:1886:14
       |vpiFullName:fpnew_pkg::get_lane_int_formats
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
         |vpiParent:
         \_Begin: (fpnew_pkg::get_lane_int_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:10, endln:1880:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+          \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
           |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
           |vpiActual:
           \_IntTypespec: , line:1880:10, endln:1880:22
         |vpiName:ifmt
         |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
         |vpiParent:
         \_Begin: (fpnew_pkg::get_lane_int_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:12, endln:1881:24
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+          \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
           |vpiFullName:fpnew_pkg::get_lane_int_formats::fmt
           |vpiActual:
           \_IntTypespec: , line:1880:10, endln:1880:22
@@ -55309,7 +55283,7 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
             |vpiLhs:
-            \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+            \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
           |vpiForIncStmt:
           \_Operation: , line:1881:56, endln:1881:61
             |vpiParent:
@@ -55322,7 +55296,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_lane_int_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+              \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
           |vpiCondition:
           \_Operation: , line:1881:34, endln:1881:54
             |vpiParent:
@@ -55335,7 +55309,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_lane_int_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+              \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
             |vpiOperand:
             \_RefObj: (fpnew_pkg::get_lane_int_formats::NUM_FP_FORMATS), line:1881:40, endln:1881:54
               |vpiParent:
@@ -55369,7 +55343,7 @@ Design: (unnamed)
                     |vpiName:fmt
                     |vpiFullName:fpnew_pkg::get_lane_int_formats::fmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+                    \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
                 |vpiName:
                 \_Identifier: (fp_width)
                   |vpiParent:
@@ -55393,7 +55367,7 @@ Design: (unnamed)
                     |vpiName:ifmt
                     |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+                    \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
                 |vpiName:
                 \_Identifier: (int_width)
                   |vpiParent:
@@ -55427,7 +55401,7 @@ Design: (unnamed)
                     |vpiName:ifmt
                     |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+                    \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
                 |vpiOperand:
                 \_BitSelect: (fpnew_pkg::get_lane_int_formats::lanefmts), line:1884:46, endln:1884:51
                   |vpiParent:
@@ -55435,7 +55409,7 @@ Design: (unnamed)
                   |vpiName:lanefmts
                   |vpiFullName:fpnew_pkg::get_lane_int_formats::lanefmts
                   |vpiActual:
-                  \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+                  \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
                   |vpiIndex:
                   \_RefObj: (fpnew_pkg::get_lane_int_formats::fmt), line:1884:47, endln:1884:50
                     |vpiParent:
@@ -55443,7 +55417,7 @@ Design: (unnamed)
                     |vpiName:fmt
                     |vpiFullName:fpnew_pkg::get_lane_int_formats::fmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+                    \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
               |vpiLhs:
               \_BitSelect: (fpnew_pkg::get_lane_int_formats::res), line:1884:14, endln:1884:20
                 |vpiParent:
@@ -55451,7 +55425,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:fpnew_pkg::get_lane_int_formats::res
                 |vpiActual:
-                \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+                \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
                 |vpiIndex:
                 \_RefObj: (fpnew_pkg::get_lane_int_formats::ifmt), line:1884:15, endln:1884:19
                   |vpiParent:
@@ -55459,7 +55433,7 @@ Design: (unnamed)
                   |vpiName:ifmt
                   |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+                  \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
         |vpiForInitStmt:
         \_Assignment: , line:1880:10, endln:1880:31
           |vpiParent:
@@ -55473,7 +55447,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+          \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
         |vpiForIncStmt:
         \_Operation: , line:1880:57, endln:1880:63
           |vpiParent:
@@ -55486,7 +55460,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+            \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
         |vpiCondition:
         \_Operation: , line:1880:33, endln:1880:55
           |vpiParent:
@@ -55499,7 +55473,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::get_lane_int_formats::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+            \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_lane_int_formats::NUM_INT_FORMATS), line:1880:40, endln:1880:55
             |vpiParent:
@@ -55517,9 +55491,9 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1880:10, endln:1880:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
+      \_Variable: (fpnew_pkg::get_lane_int_formats::ifmt), line:1880:23, endln:1880:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
+      \_Variable: (fpnew_pkg::get_lane_int_formats::fmt), line:1881:25, endln:1881:28
       |vpiStmt:
       \_Assignment: , line:1877:5, endln:1877:13
         |vpiParent:
@@ -55541,7 +55515,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_lane_int_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
       |vpiStmt:
       \_Assignment: , line:1878:5, endln:1878:53
         |vpiParent:
@@ -55590,7 +55564,7 @@ Design: (unnamed)
           |vpiName:lanefmts
           |vpiFullName:fpnew_pkg::get_lane_int_formats::lanefmts
           |vpiActual:
-          \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+          \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_lane_int_formats), line:1880:5, endln:1884:52
       |vpiStmt:
@@ -55604,7 +55578,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_lane_int_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiTypedef:
     \_IntTypespec: , line:1871:56, endln:1871:68
       |vpiParent:
@@ -55694,14 +55668,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_conv_lane_formats), line:1889:3, endln:1898:14
       |vpiFullName:fpnew_pkg::get_conv_lane_formats
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
         |vpiParent:
         \_Begin: (fpnew_pkg::get_conv_lane_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:10, endln:1893:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+          \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
           |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
           |vpiActual:
           \_IntTypespec: , line:1893:10, endln:1893:22
@@ -55725,7 +55699,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+          \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
         |vpiForIncStmt:
         \_Operation: , line:1893:54, endln:1893:59
           |vpiParent:
@@ -55738,7 +55712,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+            \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
         |vpiCondition:
         \_Operation: , line:1893:32, endln:1893:52
           |vpiParent:
@@ -55751,7 +55725,7 @@ Design: (unnamed)
             |vpiName:fmt
             |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+            \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_conv_lane_formats::NUM_FP_FORMATS), line:1893:38, endln:1893:52
             |vpiParent:
@@ -55786,7 +55760,7 @@ Design: (unnamed)
                 |vpiName:fmt
                 |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+                \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
             |vpiOperand:
             \_Operation: , line:1895:31, endln:1896:65
               |vpiParent:
@@ -55826,7 +55800,7 @@ Design: (unnamed)
                         |vpiName:fmt
                         |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
                         |vpiActual:
-                        \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+                        \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
                     |vpiName:
                     \_Identifier: (fp_width)
                       |vpiParent:
@@ -55862,7 +55836,7 @@ Design: (unnamed)
                     |vpiName:fmt
                     |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+                    \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
                 |vpiOperand:
                 \_Operation: , line:1896:52, endln:1896:63
                   |vpiParent:
@@ -55891,7 +55865,7 @@ Design: (unnamed)
             |vpiName:res
             |vpiFullName:fpnew_pkg::get_conv_lane_formats::res
             |vpiActual:
-            \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+            \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
             |vpiIndex:
             \_RefObj: (fpnew_pkg::get_conv_lane_formats::fmt), line:1895:11, endln:1895:14
               |vpiParent:
@@ -55899,7 +55873,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_conv_lane_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+              \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
       |vpiTypedef:
       \_IntTypespec: , line:1893:10, endln:1893:22
         |vpiParent:
@@ -55907,7 +55881,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1893:10, endln:1893:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
+      \_Variable: (fpnew_pkg::get_conv_lane_formats::fmt), line:1893:23, endln:1893:26
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_conv_lane_formats), line:1893:5, endln:1896:67
       |vpiStmt:
@@ -55921,7 +55895,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_conv_lane_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiTypedef:
     \_IntTypespec: , line:1889:56, endln:1889:68
       |vpiParent:
@@ -55997,27 +55971,27 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_conv_lane_int_formats), line:1901:3, endln:1916:14
       |vpiFullName:fpnew_pkg::get_conv_lane_int_formats
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
         |vpiParent:
         \_Begin: (fpnew_pkg::get_conv_lane_int_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:10, endln:1910:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+          \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
           |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
           |vpiActual:
           \_IntTypespec: , line:1910:10, endln:1910:22
         |vpiName:ifmt
         |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
         |vpiParent:
         \_Begin: (fpnew_pkg::get_conv_lane_int_formats)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:12, endln:1911:24
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+          \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
           |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::fmt
           |vpiActual:
           \_IntTypespec: , line:1910:10, endln:1910:22
@@ -56046,7 +56020,7 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
             |vpiLhs:
-            \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+            \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
           |vpiForIncStmt:
           \_Operation: , line:1911:56, endln:1911:61
             |vpiParent:
@@ -56059,7 +56033,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+              \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
           |vpiCondition:
           \_Operation: , line:1911:34, endln:1911:54
             |vpiParent:
@@ -56072,7 +56046,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::fmt
               |vpiActual:
-              \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+              \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
             |vpiOperand:
             \_RefObj: (fpnew_pkg::get_conv_lane_int_formats::NUM_FP_FORMATS), line:1911:40, endln:1911:54
               |vpiParent:
@@ -56112,7 +56086,7 @@ Design: (unnamed)
                     |vpiName:ifmt
                     |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+                    \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
                 |vpiOperand:
                 \_BitSelect: (fpnew_pkg::get_conv_lane_int_formats::lanefmts), line:1913:44, endln:1913:49
                   |vpiParent:
@@ -56120,7 +56094,7 @@ Design: (unnamed)
                   |vpiName:lanefmts
                   |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::lanefmts
                   |vpiActual:
-                  \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+                  \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
                   |vpiIndex:
                   \_RefObj: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1913:45, endln:1913:48
                     |vpiParent:
@@ -56128,7 +56102,7 @@ Design: (unnamed)
                     |vpiName:fmt
                     |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::fmt
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+                    \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
               |vpiOperand:
               \_Operation: , line:1914:23, endln:1914:84
                 |vpiParent:
@@ -56150,7 +56124,7 @@ Design: (unnamed)
                       |vpiName:fmt
                       |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::fmt
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+                      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
                   |vpiName:
                   \_Identifier: (fp_width)
                     |vpiParent:
@@ -56174,7 +56148,7 @@ Design: (unnamed)
                       |vpiName:ifmt
                       |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
                       |vpiActual:
-                      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+                      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
                   |vpiName:
                   \_Identifier: (int_width)
                     |vpiParent:
@@ -56189,7 +56163,7 @@ Design: (unnamed)
               |vpiName:res
               |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::res
               |vpiActual:
-              \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+              \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
               |vpiIndex:
               \_RefObj: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1913:13, endln:1913:17
                 |vpiParent:
@@ -56197,7 +56171,7 @@ Design: (unnamed)
                 |vpiName:ifmt
                 |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+                \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
         |vpiForInitStmt:
         \_Assignment: , line:1910:10, endln:1910:31
           |vpiParent:
@@ -56211,7 +56185,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+          \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
         |vpiForIncStmt:
         \_Operation: , line:1910:57, endln:1910:63
           |vpiParent:
@@ -56224,7 +56198,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+            \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
         |vpiCondition:
         \_Operation: , line:1910:33, endln:1910:55
           |vpiParent:
@@ -56237,7 +56211,7 @@ Design: (unnamed)
             |vpiName:ifmt
             |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::ifmt
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+            \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_conv_lane_int_formats::NUM_INT_FORMATS), line:1910:40, endln:1910:55
             |vpiParent:
@@ -56255,9 +56229,9 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1910:10, endln:1910:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
+      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::ifmt), line:1910:23, endln:1910:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
+      \_Variable: (fpnew_pkg::get_conv_lane_int_formats::fmt), line:1911:25, endln:1911:28
       |vpiStmt:
       \_Assignment: , line:1907:5, endln:1907:13
         |vpiParent:
@@ -56279,7 +56253,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
       |vpiStmt:
       \_Assignment: , line:1908:5, endln:1908:58
         |vpiParent:
@@ -56328,7 +56302,7 @@ Design: (unnamed)
           |vpiName:lanefmts
           |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::lanefmts
           |vpiActual:
-          \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+          \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_conv_lane_int_formats), line:1910:5, endln:1914:86
       |vpiStmt:
@@ -56342,7 +56316,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_conv_lane_int_formats::res
           |vpiActual:
-          \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+          \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
     |vpiTypedef:
     \_IntTypespec: , line:1901:61, endln:1901:73
       |vpiParent:
@@ -56432,14 +56406,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::any_enabled_multi), line:1919:3, endln:1924:14
       |vpiFullName:fpnew_pkg::any_enabled_multi
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
         |vpiParent:
         \_Begin: (fpnew_pkg::any_enabled_multi)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::any_enabled_multi::i), line:1920:10, endln:1920:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+          \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
           |vpiFullName:fpnew_pkg::any_enabled_multi::i
           |vpiActual:
           \_IntTypespec: , line:1920:10, endln:1920:22
@@ -56463,7 +56437,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+          \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
         |vpiForIncStmt:
         \_Operation: , line:1920:50, endln:1920:53
           |vpiParent:
@@ -56476,7 +56450,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::any_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+            \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
         |vpiCondition:
         \_Operation: , line:1920:30, endln:1920:48
           |vpiParent:
@@ -56489,7 +56463,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::any_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+            \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::any_enabled_multi::NUM_FP_FORMATS), line:1920:34, endln:1920:48
             |vpiParent:
@@ -56522,7 +56496,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:fpnew_pkg::any_enabled_multi::i
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+                \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
             |vpiOperand:
             \_Operation: , line:1921:21, endln:1921:39
               |vpiParent:
@@ -56543,7 +56517,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:fpnew_pkg::any_enabled_multi::i
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+                  \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
               |vpiOperand:
               \_RefObj: (fpnew_pkg::any_enabled_multi::MERGED), line:1921:33, endln:1921:39
                 |vpiParent:
@@ -56571,7 +56545,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1920:10, endln:1920:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
+      \_Variable: (fpnew_pkg::any_enabled_multi::i), line:1920:23, endln:1920:24
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::any_enabled_multi), line:1920:5, endln:1922:21
       |vpiStmt:
@@ -56648,14 +56622,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::is_first_enabled_multi), line:1927:3, endln:1934:14
       |vpiFullName:fpnew_pkg::is_first_enabled_multi
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
         |vpiParent:
         \_Begin: (fpnew_pkg::is_first_enabled_multi)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::is_first_enabled_multi::i), line:1930:10, endln:1930:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+          \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
           |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
           |vpiActual:
           \_IntTypespec: , line:1930:10, endln:1930:22
@@ -56695,7 +56669,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+                  \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
               |vpiOperand:
               \_Operation: , line:1931:21, endln:1931:39
                 |vpiParent:
@@ -56716,7 +56690,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+                    \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
                 |vpiOperand:
                 \_RefObj: (fpnew_pkg::is_first_enabled_multi::MERGED), line:1931:33, endln:1931:39
                   |vpiParent:
@@ -56746,7 +56720,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+                    \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
                 |vpiOperand:
                 \_RefObj: (fpnew_pkg::is_first_enabled_multi::fmt), line:1931:68, endln:1931:71
                   |vpiParent:
@@ -56768,7 +56742,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+          \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
         |vpiForIncStmt:
         \_Operation: , line:1930:50, endln:1930:53
           |vpiParent:
@@ -56781,7 +56755,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+            \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
         |vpiCondition:
         \_Operation: , line:1930:30, endln:1930:48
           |vpiParent:
@@ -56794,7 +56768,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::is_first_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+            \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::is_first_enabled_multi::NUM_FP_FORMATS), line:1930:34, endln:1930:48
             |vpiParent:
@@ -56812,7 +56786,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1930:10, endln:1930:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
+      \_Variable: (fpnew_pkg::is_first_enabled_multi::i), line:1930:23, endln:1930:24
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::is_first_enabled_multi), line:1930:5, endln:1932:8
       |vpiStmt:
@@ -56903,14 +56877,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_first_enabled_multi), line:1937:3, endln:1942:14
       |vpiFullName:fpnew_pkg::get_first_enabled_multi
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
         |vpiParent:
         \_Begin: (fpnew_pkg::get_first_enabled_multi)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_first_enabled_multi::i), line:1938:10, endln:1938:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+          \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
           |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
           |vpiActual:
           \_IntTypespec: , line:1938:10, endln:1938:22
@@ -56934,7 +56908,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+          \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
         |vpiForIncStmt:
         \_Operation: , line:1938:50, endln:1938:53
           |vpiParent:
@@ -56947,7 +56921,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+            \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
         |vpiCondition:
         \_Operation: , line:1938:30, endln:1938:48
           |vpiParent:
@@ -56960,7 +56934,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+            \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_first_enabled_multi::NUM_FP_FORMATS), line:1938:34, endln:1938:48
             |vpiParent:
@@ -56993,7 +56967,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+                \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
             |vpiOperand:
             \_Operation: , line:1939:21, endln:1939:39
               |vpiParent:
@@ -57014,7 +56988,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+                  \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
               |vpiOperand:
               \_RefObj: (fpnew_pkg::get_first_enabled_multi::MERGED), line:1939:33, endln:1939:39
                 |vpiParent:
@@ -57039,7 +57013,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:fpnew_pkg::get_first_enabled_multi::i
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+                \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
       |vpiTypedef:
       \_IntTypespec: , line:1938:10, endln:1938:22
         |vpiParent:
@@ -57047,7 +57021,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1938:10, endln:1938:22
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
+      \_Variable: (fpnew_pkg::get_first_enabled_multi::i), line:1938:23, endln:1938:24
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_first_enabled_multi), line:1938:5, endln:1940:32
       |vpiStmt:
@@ -57124,28 +57098,28 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (fpnew_pkg::get_num_regs_multi), line:1945:3, endln:1953:14
       |vpiFullName:fpnew_pkg::get_num_regs_multi
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
         |vpiParent:
         \_Begin: (fpnew_pkg::get_num_regs_multi)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_num_regs_multi::res), line:1948:15, endln:1948:27
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+          \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
           |vpiFullName:fpnew_pkg::get_num_regs_multi::res
           |vpiActual:
           \_IntTypespec: , line:1948:15, endln:1948:27
         |vpiName:res
         |vpiFullName:fpnew_pkg::get_num_regs_multi::res
         |vpiAutomatic:1
-      |vpiVariables:
-      \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+      |vpiVariable:
+      \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
         |vpiParent:
         \_Begin: (fpnew_pkg::get_num_regs_multi)
         |vpiTypespec:
         \_RefTypespec: (fpnew_pkg::get_num_regs_multi::i), line:1949:10, endln:1949:22
           |vpiParent:
-          \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+          \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
           |vpiFullName:fpnew_pkg::get_num_regs_multi::i
           |vpiActual:
           \_IntTypespec: , line:1948:15, endln:1948:27
@@ -57185,7 +57159,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:fpnew_pkg::get_num_regs_multi::i
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+                  \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
               |vpiOperand:
               \_Operation: , line:1950:21, endln:1950:39
                 |vpiParent:
@@ -57206,7 +57180,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:fpnew_pkg::get_num_regs_multi::i
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+                    \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
                 |vpiOperand:
                 \_RefObj: (fpnew_pkg::get_num_regs_multi::MERGED), line:1950:33, endln:1950:39
                   |vpiParent:
@@ -57232,7 +57206,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:fpnew_pkg::get_num_regs_multi::res
                   |vpiActual:
-                  \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+                  \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
                 |vpiArgument:
                 \_BitSelect: (fpnew_pkg::get_num_regs_multi::regs), line:1950:64, endln:1950:67
                   |vpiParent:
@@ -57248,7 +57222,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:fpnew_pkg::get_num_regs_multi::i
                     |vpiActual:
-                    \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+                    \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
                 |vpiName:
                 \_Identifier: (maximum)
                   |vpiParent:
@@ -57263,7 +57237,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:fpnew_pkg::get_num_regs_multi::res
                 |vpiActual:
-                \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+                \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
         |vpiForInitStmt:
         \_Assignment: , line:1949:10, endln:1949:28
           |vpiParent:
@@ -57277,7 +57251,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+          \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
         |vpiForIncStmt:
         \_Operation: , line:1949:50, endln:1949:53
           |vpiParent:
@@ -57290,7 +57264,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::get_num_regs_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+            \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
         |vpiCondition:
         \_Operation: , line:1949:30, endln:1949:48
           |vpiParent:
@@ -57303,7 +57277,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:fpnew_pkg::get_num_regs_multi::i
             |vpiActual:
-            \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+            \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
           |vpiOperand:
           \_RefObj: (fpnew_pkg::get_num_regs_multi::NUM_FP_FORMATS), line:1949:34, endln:1949:48
             |vpiParent:
@@ -57321,9 +57295,9 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:1948:15, endln:1948:27
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+      \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
       |vpiImportTypespec:
-      \_IntVar: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
+      \_Variable: (fpnew_pkg::get_num_regs_multi::i), line:1949:23, endln:1949:24
       |vpiStmt:
       \_Assignment: , line:1948:28, endln:1948:35
         |vpiParent:
@@ -57339,7 +57313,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
         |vpiLhs:
-        \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+        \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
       |vpiStmt:
       \_ForStmt: (fpnew_pkg::get_num_regs_multi), line:1949:5, endln:1951:8
       |vpiStmt:
@@ -57353,7 +57327,7 @@ Design: (unnamed)
           |vpiName:res
           |vpiFullName:fpnew_pkg::get_num_regs_multi::res
           |vpiActual:
-          \_IntVar: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
+          \_Variable: (fpnew_pkg::get_num_regs_multi::res), line:1948:28, endln:1948:31
     |vpiTypedef:
     \_IntTypespec: , line:1945:22, endln:1945:34
       |vpiParent:
@@ -59218,19 +59192,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:1720:11, endln:1724:4
   |vpiImportTypespec:
-  \_StructVar: (fpnew_pkg::res), line:1802:29, endln:1802:32
+  \_Variable: (fpnew_pkg::res), line:1802:29, endln:1802:32
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::res), line:1863:27, endln:1863:30
+  \_Variable: (fpnew_pkg::res), line:1863:27, endln:1863:30
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::res), line:1875:28, endln:1875:31
+  \_Variable: (fpnew_pkg::res), line:1875:28, endln:1875:31
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
+  \_Variable: (fpnew_pkg::lanefmts), line:1876:27, endln:1876:35
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::res), line:1892:27, endln:1892:30
+  \_Variable: (fpnew_pkg::res), line:1892:27, endln:1892:30
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::res), line:1905:28, endln:1905:31
+  \_Variable: (fpnew_pkg::res), line:1905:28, endln:1905:31
   |vpiImportTypespec:
-  \_LogicVar: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
+  \_Variable: (fpnew_pkg::lanefmts), line:1906:27, endln:1906:35
   |vpiDefName:fpnew_pkg
   |vpiTaskFunc:
   \_Function: (fpnew_pkg::int_width), line:1557:3, endln:1564:14
@@ -60008,14 +59982,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@fpnew_top (work@fpnew_top), file:${SURELOG_DIR}/tests/ArianeElab/dut.sv, line:1958:1, endln:1987:10
     |vpiFullName:work@fpnew_top
-    |vpiVariables:
-    \_GenVar: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
+    |vpiVariable:
+    \_Variable: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
       |vpiParent:
       \_GenFor: (work@fpnew_top), line:1971:3, endln:1983:6
       |vpiName:fmt
       |vpiFullName:work@fpnew_top.fmt
-    |vpiGenVar:
-    \_GenVar: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
     |vpiInternalScope:
     \_Begin: (work@fpnew_top.gen_nanbox_check), line:1971:56, endln:1983:6
       |vpiParent:
@@ -60085,14 +60057,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@fpnew_top.gen_nanbox_check.check), line:1974:54, endln:1980:8
           |vpiFullName:work@fpnew_top.gen_nanbox_check.check
-          |vpiVariables:
-          \_GenVar: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
+          |vpiVariable:
+          \_Variable: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
             |vpiParent:
             \_GenFor: (work@fpnew_top.gen_nanbox_check.check), line:1975:7, endln:1979:10
             |vpiName:op
             |vpiFullName:work@fpnew_top.gen_nanbox_check.check.op
-          |vpiGenVar:
-          \_GenVar: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
           |vpiInternalScope:
           \_Begin: (work@fpnew_top.gen_nanbox_check.check.operands), line:1975:58, endln:1979:10
             |vpiParent:
@@ -60254,7 +60224,7 @@ Design: (unnamed)
                   |vpiActual:
                   \_LogicNet: (work@fpnew_top.gen_nanbox_check.check.operands.op), line:1977:49, endln:1977:51
           |vpiImportTypespec:
-          \_GenVar: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
+          \_Variable: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
           |vpiImportTypespec:
           \_LogicNet: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:27, endln:1975:29
             |vpiParent:
@@ -60282,7 +60252,7 @@ Design: (unnamed)
               |UINT:0
               |vpiConstType:9
             |vpiLhs:
-            \_GenVar: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
+            \_Variable: (work@fpnew_top.gen_nanbox_check.check.op), line:1975:19, endln:1975:21
           |vpiCondition:
           \_Operation: , line:1975:27, endln:1975:50
             |vpiParent:
@@ -60434,7 +60404,7 @@ Design: (unnamed)
         |vpiElseStmt:
         \_Begin: (work@fpnew_top.gen_nanbox_check.no_check), line:1980:14, endln:1982:8
     |vpiImportTypespec:
-    \_GenVar: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
+    \_Variable: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
     |vpiImportTypespec:
     \_LogicNet: (work@fpnew_top.fmt), line:1971:24, endln:1971:27
       |vpiParent:
@@ -60462,7 +60432,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_GenVar: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
+      \_Variable: (work@fpnew_top.fmt), line:1971:15, endln:1971:18
     |vpiCondition:
     \_Operation: , line:1971:24, endln:1971:47
       |vpiParent:

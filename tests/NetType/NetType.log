@@ -222,19 +222,18 @@ Module                                                 1
 ModuleTypespec                                         1
 Range                                                  4
 RealTypespec                                           5
-RealVar                                                1
 RefObj                                                 7
 RefTypespec                                           18
-RefVar                                                 1
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        7
 TypespecMember                                         2
 UnsupportedTypespec                                    2
+Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Unsupported Typespec: id:17, type:RefTypespec, name:some_other_type.
-[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:65, type:RefTypespec, name:i.
+[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:64, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -253,14 +252,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
     |vpiName:work@dut
-  |vpiVariables:
-  \_RealVar: (work@dut.my_real_net), line:13:13, endln:13:24
+  |vpiVariable:
+  \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.my_real_net.my_real), line:13:5, endln:13:12
       |vpiParent:
-      \_RealVar: (work@dut.my_real_net), line:13:13, endln:13:24
+      \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
       |vpiName:my_real
       |vpiFullName:work@dut.my_real_net.my_real
       |vpiActual:
@@ -270,7 +269,7 @@ Design: (unnamed)
     |vpiRandType:1
     |vpiVisibility:1
   |vpiImportTypespec:
-  \_RealVar: (work@dut.my_real_net), line:13:13, endln:13:24
+  \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
   |vpiDefName:work@dut
 |vpiTypedef:
 \_BitTypespec: , line:6:9, endln:6:12
@@ -503,20 +502,20 @@ Design: (unnamed)
       \_Begin: (Tsum)
       |vpiFullName:Tsum
       |vpiImportTypespec:
-      \_RefVar: (Tsum.i), line:30:19, endln:30:20
+      \_Variable: (Tsum.i), line:30:19, endln:30:20
         |vpiParent:
         \_ForeachStmt: (Tsum), line:30:3, endln:31:36
         |vpiTypespec:
         \_RefTypespec: (Tsum.i.i), line:30:19, endln:30:20
           |vpiParent:
-          \_RefVar: (Tsum.i), line:30:19, endln:30:20
+          \_Variable: (Tsum.i), line:30:19, endln:30:20
           |vpiName:i
           |vpiFullName:Tsum.i.i
           |vpiActual:
           \_UnsupportedTypespec: (i), line:30:19, endln:30:20
         |vpiName:i
         |vpiFullName:Tsum.i
-      |vpiVariables:
+      |vpiVariable:
       \_RefObj: (Tsum.driver), line:30:12, endln:30:18
         |vpiParent:
         \_ForeachStmt: (Tsum), line:30:3, endln:31:36
@@ -525,7 +524,7 @@ Design: (unnamed)
         |vpiActual:
         \_IODecl: (driver), line:28:36, endln:28:42
       |vpiLoopVars:
-      \_RefVar: (Tsum.i), line:30:19, endln:30:20
+      \_Variable: (Tsum.i), line:30:19, endln:30:20
       |vpiStmt:
       \_Assignment: , line:31:5, endln:31:36
         |vpiParent:
@@ -551,7 +550,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:Tsum.driver[i].field1.i
               |vpiActual:
-              \_RefVar: (Tsum.i), line:30:19, endln:30:20
+              \_Variable: (Tsum.i), line:30:19, endln:30:20
           |vpiActual:
           \_RefObj: (Tsum.field1), line:31:30, endln:31:36
             |vpiParent:

@@ -145,7 +145,6 @@ Function                                               1
 IODecl                                                 1
 Identifier                                             6
 LogicTypespec                                          3
-LogicVar                                               1
 Operation                                              2
 Package                                                2
 Range                                                  3
@@ -153,10 +152,10 @@ RefObj                                                 4
 RefTypespec                                            6
 SourceFile                                             1
 StructTypespec                                         1
-StructVar                                              1
 SysFuncCall                                            2
 TypedefTypespec                                        1
 TypespecMember                                         1
+Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -250,14 +249,14 @@ Design: (unnamed)
     |vpiParent:
     \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
     |vpiName:aa
-  |vpiVariables:
-  \_StructVar: (aa::y), line:14:18, endln:14:19
+  |vpiVariable:
+  \_Variable: (aa::y), line:14:18, endln:14:19
     |vpiParent:
     \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
     |vpiTypespec:
     \_RefTypespec: (aa::y::b::foo_bar_t), line:14:5, endln:14:17
       |vpiParent:
-      \_StructVar: (aa::y), line:14:18, endln:14:19
+      \_Variable: (aa::y), line:14:18, endln:14:19
       |vpiName:b::foo_bar_t
       |vpiFullName:aa::y::b::foo_bar_t
       |vpiActual:
@@ -275,21 +274,6 @@ Design: (unnamed)
       \_Function: (aa::foo_bar), line:10:3, endln:21:14
       |vpiName:foo_bar
     |vpiFullName:aa::foo_bar
-    |vpiReg:
-    \_LogicVar: (aa::foo_bar::a_vec), line:15:24, endln:15:29
-      |vpiParent:
-      \_Function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiTypespec:
-      \_RefTypespec: (aa::foo_bar::a_vec), line:15:5, endln:15:23
-        |vpiParent:
-        \_LogicVar: (aa::foo_bar::a_vec), line:15:24, endln:15:29
-        |vpiFullName:aa::foo_bar::a_vec
-        |vpiActual:
-        \_LogicTypespec: , line:15:5, endln:15:8
-      |vpiName:a_vec
-      |vpiFullName:aa::foo_bar::a_vec
-      |vpiSigned:1
-      |vpiAutomatic:1
     |vpiInternalScope:
     \_Begin: (aa::foo_bar), line:17:5, endln:19:8
       |vpiParent:
@@ -308,7 +292,7 @@ Design: (unnamed)
           |vpiName:y
           |vpiFullName:aa::foo_bar::y
           |vpiActual:
-          \_StructVar: (aa::y), line:14:18, endln:14:19
+          \_Variable: (aa::y), line:14:18, endln:14:19
         |vpiLhs:
         \_RefObj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
           |vpiParent:
@@ -366,7 +350,20 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:15:5, endln:15:8
     |vpiImportTypespec:
-    \_LogicVar: (aa::foo_bar::a_vec), line:15:24, endln:15:29
+    \_Variable: (aa::foo_bar::a_vec), line:15:24, endln:15:29
+      |vpiParent:
+      \_Function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiTypespec:
+      \_RefTypespec: (aa::foo_bar::a_vec), line:15:5, endln:15:23
+        |vpiParent:
+        \_Variable: (aa::foo_bar::a_vec), line:15:24, endln:15:29
+        |vpiFullName:aa::foo_bar::a_vec
+        |vpiActual:
+        \_LogicTypespec: , line:15:5, endln:15:8
+      |vpiName:a_vec
+      |vpiFullName:aa::foo_bar::a_vec
+      |vpiSigned:1
+      |vpiAutomatic:1
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -398,7 +395,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14
   |vpiImportTypespec:
-  \_StructVar: (aa::y), line:14:18, endln:14:19
+  \_Variable: (aa::y), line:14:18, endln:14:19
   |vpiDefName:aa
   |vpiTaskFunc:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14

@@ -315,7 +315,6 @@ Always                                                 1
 Assignment                                             2
 Begin                                                  1
 BitTypespec                                            2
-BitVar                                                 1
 ClockingBlock                                          1
 ClockingIODecl                                         4
 Constant                                              20
@@ -327,7 +326,6 @@ Interface                                              1
 InterfaceTypespec                                      1
 LogicNet                                              10
 LogicTypespec                                         12
-LogicVar                                               4
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              4
@@ -336,6 +334,7 @@ Range                                                 10
 RefObj                                                14
 RefTypespec                                           14
 SourceFile                                             1
+Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -356,14 +355,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiName:work@add_sub_if
-  |vpiVariables:
-  \_BitVar: (work@add_sub_if.clk), line:20:13, endln:20:16
+  |vpiVariable:
+  \_Variable: (work@add_sub_if.clk), line:20:13, endln:20:16
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiTypespec:
     \_RefTypespec: (work@add_sub_if.clk), line:20:9, endln:20:12
       |vpiParent:
-      \_BitVar: (work@add_sub_if.clk), line:20:13, endln:20:16
+      \_Variable: (work@add_sub_if.clk), line:20:13, endln:20:16
       |vpiFullName:work@add_sub_if.clk
       |vpiActual:
       \_BitTypespec: , line:20:9, endln:20:12
@@ -371,14 +370,14 @@ Design: (unnamed)
     |vpiFullName:work@add_sub_if.clk
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
+  |vpiVariable:
+  \_Variable: (work@add_sub_if.a), line:21:15, endln:21:16
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiTypespec:
     \_RefTypespec: (work@add_sub_if.a), line:21:9, endln:21:14
       |vpiParent:
-      \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
+      \_Variable: (work@add_sub_if.a), line:21:15, endln:21:16
       |vpiFullName:work@add_sub_if.a
       |vpiActual:
       \_LogicTypespec: , line:21:9, endln:21:14
@@ -386,14 +385,14 @@ Design: (unnamed)
     |vpiFullName:work@add_sub_if.a
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
+  |vpiVariable:
+  \_Variable: (work@add_sub_if.b), line:22:15, endln:22:16
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiTypespec:
     \_RefTypespec: (work@add_sub_if.b), line:22:9, endln:22:14
       |vpiParent:
-      \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
+      \_Variable: (work@add_sub_if.b), line:22:15, endln:22:16
       |vpiFullName:work@add_sub_if.b
       |vpiActual:
       \_LogicTypespec: , line:22:9, endln:22:14
@@ -401,22 +400,22 @@ Design: (unnamed)
     |vpiFullName:work@add_sub_if.b
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
+  |vpiVariable:
+  \_Variable: (work@add_sub_if.doAdd), line:23:15, endln:23:20
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiName:doAdd
     |vpiFullName:work@add_sub_if.doAdd
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
+  |vpiVariable:
+  \_Variable: (work@add_sub_if.result), line:24:15, endln:24:21
     |vpiParent:
     \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
     |vpiTypespec:
     \_RefTypespec: (work@add_sub_if.result), line:24:9, endln:24:14
       |vpiParent:
-      \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
+      \_Variable: (work@add_sub_if.result), line:24:15, endln:24:21
       |vpiFullName:work@add_sub_if.result
       |vpiActual:
       \_LogicTypespec: , line:24:9, endln:24:14
@@ -424,14 +423,6 @@ Design: (unnamed)
     |vpiFullName:work@add_sub_if.result
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
-  |vpiReg:
-  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
-  |vpiReg:
-  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
-  |vpiReg:
-  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
   |vpiInternalScope:
   \_ClockingBlock: (work@add_sub_if.cb), line:27:3, endln:32:14
     |vpiParent:
@@ -578,21 +569,21 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_BitTypespec: , line:20:9, endln:20:12
   |vpiImportTypespec:
-  \_BitVar: (work@add_sub_if.clk), line:20:13, endln:20:16
+  \_Variable: (work@add_sub_if.clk), line:20:13, endln:20:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:9, endln:21:14
   |vpiImportTypespec:
-  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
+  \_Variable: (work@add_sub_if.a), line:21:15, endln:21:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:22:9, endln:22:14
   |vpiImportTypespec:
-  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
+  \_Variable: (work@add_sub_if.b), line:22:15, endln:22:16
   |vpiImportTypespec:
-  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
+  \_Variable: (work@add_sub_if.doAdd), line:23:15, endln:23:20
   |vpiImportTypespec:
   \_LogicTypespec: , line:24:9, endln:24:14
   |vpiImportTypespec:
-  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
+  \_Variable: (work@add_sub_if.result), line:24:15, endln:24:21
   |vpiImportTypespec:
   \_LogicNet: (work@add_sub_if.clk), line:20:13, endln:20:16
     |vpiParent:

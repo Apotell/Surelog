@@ -160,7 +160,6 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
 ByteTypespec                                           1
-ByteVar                                                1
 ClassDefn                                              8
 ClassTypespec                                          8
 Constant                                              11
@@ -173,7 +172,6 @@ IODecl                                                11
 Identifier                                            34
 Initial                                                1
 IntTypespec                                           11
-IntVar                                                 2
 LogicTypespec                                          1
 MethodFuncCall                                         5
 Module                                                 2
@@ -183,9 +181,9 @@ RefObj                                                 7
 RefTypespec                                           18
 SourceFile                                             1
 StringTypespec                                         2
-StringVar                                              2
 Task                                                   9
 TypedefTypespec                                        1
+Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringMethod/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1003,14 +1001,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiName:work@top
-  |vpiVariables:
-  \_StringVar: (work@top.s), line:2:11, endln:2:12
+  |vpiVariable:
+  \_Variable: (work@top.s), line:2:11, endln:2:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.s), line:2:4, endln:2:10
       |vpiParent:
-      \_StringVar: (work@top.s), line:2:11, endln:2:12
+      \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiFullName:work@top.s
       |vpiActual:
       \_StringTypespec: , line:2:4, endln:2:10
@@ -1021,19 +1019,19 @@ Design: (unnamed)
     |vpiExpr:
     \_Constant: , line:2:15, endln:2:21
       |vpiParent:
-      \_StringVar: (work@top.s), line:2:11, endln:2:12
+      \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiDecompile:"abcd"
       |vpiSize:32
       |STRING:abcd
       |vpiConstType:6
-  |vpiVariables:
-  \_StringVar: (work@top.t), line:3:11, endln:3:12
+  |vpiVariable:
+  \_Variable: (work@top.t), line:3:11, endln:3:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.t), line:3:4, endln:3:10
       |vpiParent:
-      \_StringVar: (work@top.t), line:3:11, endln:3:12
+      \_Variable: (work@top.t), line:3:11, endln:3:12
       |vpiFullName:work@top.t
       |vpiActual:
       \_StringTypespec: , line:2:4, endln:2:10
@@ -1044,14 +1042,14 @@ Design: (unnamed)
     |vpiExpr:
     \_HierPath: (s.substr), line:3:15, endln:3:29
       |vpiParent:
-      \_StringVar: (work@top.t), line:3:11, endln:3:12
+      \_Variable: (work@top.t), line:3:11, endln:3:12
       |vpiActual:
       \_RefObj: (s), line:3:15, endln:3:16
         |vpiParent:
         \_HierPath: (s.substr), line:3:15, endln:3:29
         |vpiName:s
         |vpiActual:
-        \_StringVar: (work@top.s), line:2:11, endln:2:12
+        \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiActual:
       \_MethodFuncCall: (substr), line:3:17, endln:3:29
         |vpiParent:
@@ -1078,14 +1076,14 @@ Design: (unnamed)
           \_MethodFuncCall: (substr), line:3:17, endln:3:29
           |vpiName:substr
       |vpiName:s.substr
-  |vpiVariables:
-  \_ByteVar: (work@top.a), line:7:9, endln:7:10
+  |vpiVariable:
+  \_Variable: (work@top.a), line:7:9, endln:7:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:7:4, endln:7:8
       |vpiParent:
-      \_ByteVar: (work@top.a), line:7:9, endln:7:10
+      \_Variable: (work@top.a), line:7:9, endln:7:10
       |vpiFullName:work@top.a
       |vpiActual:
       \_ByteTypespec: , line:7:4, endln:7:8
@@ -1097,14 +1095,14 @@ Design: (unnamed)
     |vpiExpr:
     \_HierPath: (s.getc), line:7:13, endln:7:22
       |vpiParent:
-      \_ByteVar: (work@top.a), line:7:9, endln:7:10
+      \_Variable: (work@top.a), line:7:9, endln:7:10
       |vpiActual:
       \_RefObj: (s), line:7:13, endln:7:14
         |vpiParent:
         \_HierPath: (s.getc), line:7:13, endln:7:22
         |vpiName:s
         |vpiActual:
-        \_StringVar: (work@top.s), line:2:11, endln:2:12
+        \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiActual:
       \_MethodFuncCall: (getc), line:7:15, endln:7:22
         |vpiParent:
@@ -1123,14 +1121,14 @@ Design: (unnamed)
           \_MethodFuncCall: (getc), line:7:15, endln:7:22
           |vpiName:getc
       |vpiName:s.getc
-  |vpiVariables:
-  \_IntVar: (work@top.b), line:8:9, endln:8:10
+  |vpiVariable:
+  \_Variable: (work@top.b), line:8:9, endln:8:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:8:4, endln:8:7
       |vpiParent:
-      \_IntVar: (work@top.b), line:8:9, endln:8:10
+      \_Variable: (work@top.b), line:8:9, endln:8:10
       |vpiFullName:work@top.b
       |vpiActual:
       \_IntTypespec: , line:8:4, endln:8:7
@@ -1142,14 +1140,14 @@ Design: (unnamed)
     |vpiExpr:
     \_HierPath: (s.compare), line:8:13, endln:8:25
       |vpiParent:
-      \_IntVar: (work@top.b), line:8:9, endln:8:10
+      \_Variable: (work@top.b), line:8:9, endln:8:10
       |vpiActual:
       \_RefObj: (s), line:8:13, endln:8:14
         |vpiParent:
         \_HierPath: (s.compare), line:8:13, endln:8:25
         |vpiName:s
         |vpiActual:
-        \_StringVar: (work@top.s), line:2:11, endln:2:12
+        \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiActual:
       \_MethodFuncCall: (compare), line:8:15, endln:8:25
         |vpiParent:
@@ -1161,21 +1159,21 @@ Design: (unnamed)
           |vpiName:t
           |vpiFullName:work@top.b.s.compare.t
           |vpiActual:
-          \_StringVar: (work@top.t), line:3:11, endln:3:12
+          \_Variable: (work@top.t), line:3:11, endln:3:12
         |vpiName:
         \_Identifier: (compare)
           |vpiParent:
           \_MethodFuncCall: (compare), line:8:15, endln:8:25
           |vpiName:compare
       |vpiName:s.compare
-  |vpiVariables:
-  \_IntVar: (work@top.c), line:9:9, endln:9:10
+  |vpiVariable:
+  \_Variable: (work@top.c), line:9:9, endln:9:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringMethod/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c), line:9:4, endln:9:7
       |vpiParent:
-      \_IntVar: (work@top.c), line:9:9, endln:9:10
+      \_Variable: (work@top.c), line:9:9, endln:9:10
       |vpiFullName:work@top.c
       |vpiActual:
       \_IntTypespec: , line:8:4, endln:8:7
@@ -1187,14 +1185,14 @@ Design: (unnamed)
     |vpiExpr:
     \_HierPath: (s.icompare), line:9:13, endln:9:26
       |vpiParent:
-      \_IntVar: (work@top.c), line:9:9, endln:9:10
+      \_Variable: (work@top.c), line:9:9, endln:9:10
       |vpiActual:
       \_RefObj: (s), line:9:13, endln:9:14
         |vpiParent:
         \_HierPath: (s.icompare), line:9:13, endln:9:26
         |vpiName:s
         |vpiActual:
-        \_StringVar: (work@top.s), line:2:11, endln:2:12
+        \_Variable: (work@top.s), line:2:11, endln:2:12
       |vpiActual:
       \_MethodFuncCall: (icompare), line:9:15, endln:9:26
         |vpiParent:
@@ -1206,7 +1204,7 @@ Design: (unnamed)
           |vpiName:t
           |vpiFullName:work@top.c.s.icompare.t
           |vpiActual:
-          \_StringVar: (work@top.t), line:3:11, endln:3:12
+          \_Variable: (work@top.t), line:3:11, endln:3:12
         |vpiName:
         \_Identifier: (icompare)
           |vpiParent:
@@ -1230,19 +1228,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: , line:2:4, endln:2:10
   |vpiImportTypespec:
-  \_StringVar: (work@top.s), line:2:11, endln:2:12
+  \_Variable: (work@top.s), line:2:11, endln:2:12
   |vpiImportTypespec:
-  \_StringVar: (work@top.t), line:3:11, endln:3:12
+  \_Variable: (work@top.t), line:3:11, endln:3:12
   |vpiImportTypespec:
   \_ByteTypespec: , line:7:4, endln:7:8
   |vpiImportTypespec:
-  \_ByteVar: (work@top.a), line:7:9, endln:7:10
+  \_Variable: (work@top.a), line:7:9, endln:7:10
   |vpiImportTypespec:
   \_IntTypespec: , line:8:4, endln:8:7
   |vpiImportTypespec:
-  \_IntVar: (work@top.b), line:8:9, endln:8:10
+  \_Variable: (work@top.b), line:8:9, endln:8:10
   |vpiImportTypespec:
-  \_IntVar: (work@top.c), line:9:9, endln:9:10
+  \_Variable: (work@top.c), line:9:9, endln:9:10
   |vpiDefName:work@top
   |vpiProcess:
   \_Initial: , line:4:4, endln:6:7
@@ -1285,7 +1283,7 @@ Design: (unnamed)
           |vpiName:s
           |vpiFullName:work@top.s
           |vpiActual:
-          \_StringVar: (work@top.s), line:2:11, endln:2:12
+          \_Variable: (work@top.s), line:2:11, endln:2:12
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

@@ -31,24 +31,20 @@
 Always                                                 1
 ArrayNet                                               1
 ArrayTypespec                                          5
-ArrayVar                                               2
 Assignment                                            90
 Begin                                                 64
 BitSelect                                              2
 BitTypespec                                            7
-BitVar                                                 1
 CaseItem                                               3
 CaseStmt                                               1
 ClassDefn                                             12
 ClassTypespec                                         12
-ClassVar                                               2
 Constant                                             183
 DelayControl                                           6
 Design                                                 1
 DisableFork                                            4
 EnumConst                                              9
 EnumTypespec                                           3
-EnumVar                                                1
 EventControl                                          12
 EventTypespec                                          1
 Extends                                                3
@@ -65,7 +61,6 @@ IfStmt                                                20
 ImportTypespec                                         1
 Initial                                                2
 IntTypespec                                           19
-IntVar                                                 8
 IntegerNet                                             4
 IntegerTypespec                                        6
 LogicNet                                              26
@@ -85,12 +80,10 @@ Range                                                 24
 RefModule                                              1
 RefObj                                               296
 RefTypespec                                          147
-RefVar                                                 1
 Repeat                                                 1
 ReturnStmt                                             6
 SourceFile                                            11
 StringTypespec                                        34
-StringVar                                             15
 SysFuncCall                                           65
 Task                                                  25
 TaskCall                                              21
@@ -98,10 +91,11 @@ TaskDecl                                               5
 TypedefTypespec                                        3
 UnsupportedTypespec                                    2
 VarSelect                                              1
+Variable                                              30
 VoidTypespec                                          19
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ApbSlave/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:89:29: Unsupported Typespec: id:359, type:RefTypespec, name:i.
+[ERR:IG0811] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:89:29: Unsupported Typespec: id:358, type:RefTypespec, name:i.
 [ERR:IG0814] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:93:63: Invalid Name id:1817, type:RefTypespec, name:item.
 [ERR:IG0814] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv:80:61: Invalid Name id:1818, type:RefTypespec, name:item.
 [ERR:IG0811] ${SURELOG_DIR}/third_party/tests/ApbSlave/testbench.sv:9:3: Unsupported Typespec: id:1441, type:RefTypespec, name:svunit_testcase.
@@ -1798,14 +1792,14 @@ Design: (unnamed)
       \_ClassDefn: (svunit_pkg::svunit_base), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_base.sv, line:26:1, endln:49:9
       |vpiName:svunit_base
     |vpiFullName:svunit_pkg::svunit_base
-    |vpiVariables:
-    \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+    |vpiVariable:
+    \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
       |vpiParent:
       \_ClassDefn: (svunit_pkg::svunit_base), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_base.sv, line:26:1, endln:49:9
       |vpiTypespec:
       \_RefTypespec: (svunit_pkg::svunit_base::name), line:32:13, endln:32:19
         |vpiParent:
-        \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+        \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
         |vpiFullName:svunit_pkg::svunit_base::name
         |vpiActual:
         \_StringTypespec: , line:32:13, endln:32:19
@@ -1814,14 +1808,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:2
-    |vpiVariables:
-    \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+    |vpiVariable:
+    \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
       |vpiParent:
       \_ClassDefn: (svunit_pkg::svunit_base), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_base.sv, line:26:1, endln:49:9
       |vpiTypespec:
       \_RefTypespec: (svunit_pkg::svunit_base::success::svunit_pkg::results_t), line:38:13, endln:38:22
         |vpiParent:
-        \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+        \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
         |vpiName:svunit_pkg::results_t
         |vpiFullName:svunit_pkg::svunit_base::success::svunit_pkg::results_t
         |vpiActual:
@@ -1834,7 +1828,7 @@ Design: (unnamed)
       |vpiExpr:
       \_RefObj: (svunit_pkg::svunit_base::success::PASS), line:38:33, endln:38:37
         |vpiParent:
-        \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+        \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
         |vpiName:PASS
         |vpiFullName:svunit_pkg::svunit_base::success::PASS
         |vpiActual:
@@ -1987,7 +1981,7 @@ Design: (unnamed)
           |vpiName:name
           |vpiFullName:svunit_pkg::svunit_base::get_name::name
           |vpiActual:
-          \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+          \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
       |vpiInstance:
       \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
     |vpiInternalScope:
@@ -2005,14 +1999,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (svunit_pkg::svunit_base::report), line:77:1, endln:80:12
         |vpiFullName:svunit_pkg::svunit_base::report
-        |vpiVariables:
-        \_StringVar: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
+        |vpiVariable:
+        \_Variable: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
           |vpiParent:
           \_Begin: (svunit_pkg::svunit_base::report)
           |vpiTypespec:
           \_RefTypespec: (svunit_pkg::svunit_base::report::str), line:78:3, endln:78:9
             |vpiParent:
-            \_StringVar: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
+            \_Variable: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
             |vpiFullName:svunit_pkg::svunit_base::report::str
             |vpiActual:
             \_StringTypespec: , line:78:3, endln:78:9
@@ -2026,7 +2020,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_StringTypespec: , line:78:3, endln:78:9
         |vpiImportTypespec:
-        \_StringVar: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
+        \_Variable: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
         |vpiStmt:
         \_Assignment: , line:78:10, endln:78:44
           |vpiParent:
@@ -2045,7 +2039,7 @@ Design: (unnamed)
               |vpiName:success
               |vpiFullName:svunit_pkg::svunit_base::report::success
               |vpiActual:
-              \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+              \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
             |vpiOperand:
             \_Constant: , line:78:27, endln:78:35
               |vpiParent:
@@ -2063,7 +2057,7 @@ Design: (unnamed)
               |STRING:FAILED
               |vpiConstType:6
           |vpiLhs:
-          \_StringVar: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
+          \_Variable: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
         |vpiStmt:
         \_SysFuncCall: ($display), line:103:3, endln:103:83
           |vpiParent:
@@ -2092,7 +2086,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:svunit_pkg::svunit_base::report::name
             |vpiActual:
-            \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+            \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
           |vpiArgument:
           \_SysFuncCall: ($sformatf), line:103:50, endln:103:82
             |vpiParent:
@@ -2112,7 +2106,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_base::report::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_RefObj: (svunit_pkg::svunit_base::report::str), line:103:78, endln:103:81
               |vpiParent:
@@ -2120,7 +2114,7 @@ Design: (unnamed)
               |vpiName:str
               |vpiFullName:svunit_pkg::svunit_base::report::str
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
+              \_Variable: (svunit_pkg::svunit_base::report::str), line:78:10, endln:78:13
             |vpiName:
             \_Identifier: ($sformatf)
               |vpiParent:
@@ -2179,7 +2173,7 @@ Design: (unnamed)
           |vpiName:success
           |vpiFullName:svunit_pkg::svunit_base::get_results::success
           |vpiActual:
-          \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+          \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
       |vpiInstance:
       \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
     |vpiInternalScope:
@@ -2244,7 +2238,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:svunit_pkg::svunit_base::new::name
             |vpiActual:
-            \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+            \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
           |vpiName:this.name
       |vpiInstance:
       \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
@@ -2263,9 +2257,9 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_StringTypespec: , line:32:13, endln:32:19
     |vpiImportTypespec:
-    \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+    \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
     |vpiImportTypespec:
-    \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+    \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
     |vpiImportTypespec:
     \_Function: (svunit_pkg::svunit_base::get_name), line:68:1, endln:70:12
     |vpiImportTypespec:
@@ -2336,14 +2330,14 @@ Design: (unnamed)
         \_ClassDefn: (svunit_pkg::svunit_testcase), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testcase.sv, line:26:1, endln:70:9
         |vpiName:svunit_testcase
       |vpiFullName:svunit_pkg::svunit_testcase
-      |vpiVariables:
-      \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+      |vpiVariable:
+      \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testcase), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testcase.sv, line:26:1, endln:70:9
         |vpiTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testcase::test_count), line:32:9, endln:32:21
           |vpiParent:
-          \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+          \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
           |vpiFullName:svunit_pkg::svunit_testcase::test_count
           |vpiActual:
           \_IntTypespec: , line:32:9, endln:32:21
@@ -2355,19 +2349,19 @@ Design: (unnamed)
         |vpiExpr:
         \_Constant: , line:32:35, endln:32:36
           |vpiParent:
-          \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+          \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-      |vpiVariables:
-      \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+      |vpiVariable:
+      \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testcase), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testcase.sv, line:26:1, endln:70:9
         |vpiTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testcase::error_count), line:39:9, endln:39:21
           |vpiParent:
-          \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+          \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
           |vpiFullName:svunit_pkg::svunit_testcase::error_count
           |vpiActual:
           \_IntTypespec: , line:32:9, endln:32:21
@@ -2379,19 +2373,19 @@ Design: (unnamed)
         |vpiExpr:
         \_Constant: , line:39:36, endln:39:37
           |vpiParent:
-          \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+          \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-      |vpiVariables:
-      \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+      |vpiVariable:
+      \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testcase), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testcase.sv, line:26:1, endln:70:9
         |vpiTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testcase::running), line:46:9, endln:46:12
           |vpiParent:
-          \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+          \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
           |vpiFullName:svunit_pkg::svunit_testcase::running
           |vpiActual:
           \_BitTypespec: , line:46:9, endln:46:12
@@ -2403,7 +2397,7 @@ Design: (unnamed)
         |vpiExpr:
         \_Constant: , line:46:23, endln:46:24
           |vpiParent:
-          \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+          \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -2804,7 +2798,7 @@ Design: (unnamed)
             |vpiName:error_count
             |vpiFullName:svunit_pkg::svunit_testcase::wait_for_error::error_count
             |vpiActual:
-            \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+            \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiInternalScope:
@@ -2843,7 +2837,7 @@ Design: (unnamed)
             |vpiName:error_count
             |vpiFullName:svunit_pkg::svunit_testcase::get_error_count::error_count
             |vpiActual:
-            \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+            \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiInternalScope:
@@ -2907,14 +2901,14 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (svunit_pkg::svunit_testcase::fail), line:129:1, endln:142:12
           |vpiFullName:svunit_pkg::svunit_testcase::fail
-          |vpiVariables:
-          \_StringVar: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testcase::fail)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testcase::fail::_d), line:130:3, endln:130:9
               |vpiParent:
-              \_StringVar: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
+              \_Variable: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
               |vpiFullName:svunit_pkg::svunit_testcase::fail::_d
               |vpiActual:
               \_StringTypespec: , line:130:3, endln:130:9
@@ -2928,7 +2922,7 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_StringTypespec: , line:130:3, endln:130:9
           |vpiImportTypespec:
-          \_StringVar: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
+          \_Variable: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
           |vpiStmt:
           \_IfElse: , line:131:3, endln:141:6
             |vpiParent:
@@ -2958,7 +2952,7 @@ Design: (unnamed)
                   |vpiName:error_count
                   |vpiFullName:svunit_pkg::svunit_testcase::fail::error_count
                   |vpiActual:
-                  \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+                  \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
               |vpiStmt:
               \_IfStmt: , line:133:5, endln:135:8
                 |vpiParent:
@@ -2999,7 +2993,7 @@ Design: (unnamed)
                       |vpiName:_d
                       |vpiFullName:svunit_pkg::svunit_testcase::fail::_d
                       |vpiActual:
-                      \_StringVar: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
+                      \_Variable: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
                     |vpiArgument:
                     \_Constant: , line:134:20, endln:134:29
                       |vpiParent:
@@ -3049,7 +3043,7 @@ Design: (unnamed)
                   |vpiName:name
                   |vpiFullName:svunit_pkg::svunit_testcase::fail::name
                   |vpiActual:
-                  \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+                  \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
                 |vpiArgument:
                 \_SysFuncCall: ($sformatf), line:114:50, endln:114:99
                   |vpiParent:
@@ -3085,7 +3079,7 @@ Design: (unnamed)
                     |vpiName:_d
                     |vpiFullName:svunit_pkg::svunit_testcase::fail::_d
                     |vpiActual:
-                    \_StringVar: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
+                    \_Variable: (svunit_pkg::svunit_testcase::fail::_d), line:130:10, endln:130:12
                   |vpiArgument:
                   \_RefObj: (svunit_pkg::svunit_testcase::fail::f), line:114:95, endln:114:96
                     |vpiParent:
@@ -3293,7 +3287,7 @@ Design: (unnamed)
               |vpiName:running
               |vpiFullName:svunit_pkg::svunit_testcase::start::running
               |vpiActual:
-              \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+              \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
           |vpiStmt:
           \_Operation: , line:151:3, endln:151:15
             |vpiParent:
@@ -3306,7 +3300,7 @@ Design: (unnamed)
               |vpiName:test_count
               |vpiFullName:svunit_pkg::svunit_testcase::start::test_count
               |vpiActual:
-              \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+              \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
         |vpiTypedef:
         \_VoidTypespec: , line:149:10, endln:149:14
           |vpiParent:
@@ -3370,7 +3364,7 @@ Design: (unnamed)
             |vpiName:running
             |vpiFullName:svunit_pkg::svunit_testcase::stop::running
             |vpiActual:
-            \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+            \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiInternalScope:
@@ -3408,7 +3402,7 @@ Design: (unnamed)
             |vpiName:running
             |vpiFullName:svunit_pkg::svunit_testcase::is_running::running
             |vpiActual:
-            \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+            \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiInternalScope:
@@ -3451,7 +3445,7 @@ Design: (unnamed)
               |vpiName:error_count
               |vpiFullName:svunit_pkg::svunit_testcase::update_exit_status::error_count
               |vpiActual:
-              \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+              \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
             |vpiOperand:
             \_Constant: , line:178:22, endln:178:23
               |vpiParent:
@@ -3481,7 +3475,7 @@ Design: (unnamed)
               |vpiName:success
               |vpiFullName:svunit_pkg::svunit_testcase::update_exit_status::success
               |vpiActual:
-              \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+              \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
           |vpiElseStmt:
           \_Assignment: , line:181:5, endln:181:19
             |vpiParent:
@@ -3503,7 +3497,7 @@ Design: (unnamed)
               |vpiName:success
               |vpiFullName:svunit_pkg::svunit_testcase::update_exit_status::success
               |vpiActual:
-              \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+              \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiInternalScope:
@@ -3521,14 +3515,14 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (svunit_pkg::svunit_testcase::report), line:189:1, endln:196:12
           |vpiFullName:svunit_pkg::svunit_testcase::report
-          |vpiVariables:
-          \_StringVar: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testcase::report)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testcase::report::success_str), line:190:3, endln:190:9
               |vpiParent:
-              \_StringVar: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
+              \_Variable: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
               |vpiFullName:svunit_pkg::svunit_testcase::report::success_str
               |vpiActual:
               \_StringTypespec: , line:190:3, endln:190:9
@@ -3542,7 +3536,7 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_StringTypespec: , line:190:3, endln:190:9
           |vpiImportTypespec:
-          \_StringVar: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
+          \_Variable: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
           |vpiStmt:
           \_Assignment: , line:190:10, endln:190:52
             |vpiParent:
@@ -3561,7 +3555,7 @@ Design: (unnamed)
                 |vpiName:success
                 |vpiFullName:svunit_pkg::svunit_testcase::report::success
                 |vpiActual:
-                \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+                \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
               |vpiOperand:
               \_Constant: , line:190:35, endln:190:43
                 |vpiParent:
@@ -3579,7 +3573,7 @@ Design: (unnamed)
                 |STRING:FAILED
                 |vpiConstType:6
             |vpiLhs:
-            \_StringVar: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
+            \_Variable: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
           |vpiStmt:
           \_SysFuncCall: ($display), line:103:3, endln:106:17
             |vpiParent:
@@ -3608,7 +3602,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_testcase::report::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:106:16
               |vpiParent:
@@ -3628,7 +3622,7 @@ Design: (unnamed)
                 |vpiName:success_str
                 |vpiFullName:svunit_pkg::svunit_testcase::report::success_str
                 |vpiActual:
-                \_StringVar: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
+                \_Variable: (svunit_pkg::svunit_testcase::report::success_str), line:190:10, endln:190:21
               |vpiArgument:
               \_Operation: , line:105:5, endln:105:27
                 |vpiParent:
@@ -3641,7 +3635,7 @@ Design: (unnamed)
                   |vpiName:test_count
                   |vpiFullName:svunit_pkg::svunit_testcase::report::test_count
                   |vpiActual:
-                  \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+                  \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
                 |vpiOperand:
                 \_RefObj: (svunit_pkg::svunit_testcase::report::error_count), line:105:16, endln:105:27
                   |vpiParent:
@@ -3649,7 +3643,7 @@ Design: (unnamed)
                   |vpiName:error_count
                   |vpiFullName:svunit_pkg::svunit_testcase::report::error_count
                   |vpiActual:
-                  \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+                  \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
               |vpiArgument:
               \_RefObj: (svunit_pkg::svunit_testcase::report::test_count), line:106:5, endln:106:15
                 |vpiParent:
@@ -3657,7 +3651,7 @@ Design: (unnamed)
                 |vpiName:test_count
                 |vpiFullName:svunit_pkg::svunit_testcase::report::test_count
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+                \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -3796,13 +3790,13 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:32:9, endln:32:21
       |vpiImportTypespec:
-      \_IntVar: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
+      \_Variable: (svunit_pkg::svunit_testcase::test_count), line:32:22, endln:32:32
       |vpiImportTypespec:
-      \_IntVar: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
+      \_Variable: (svunit_pkg::svunit_testcase::error_count), line:39:22, endln:39:33
       |vpiImportTypespec:
       \_BitTypespec: , line:46:9, endln:46:12
       |vpiImportTypespec:
-      \_BitVar: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
+      \_Variable: (svunit_pkg::svunit_testcase::running), line:46:13, endln:46:20
       |vpiImportTypespec:
       \_Task: (svunit_pkg::svunit_testcase::wait_for_error), line:90:1, endln:92:8
       |vpiImportTypespec:
@@ -4029,14 +4023,14 @@ Design: (unnamed)
         \_ClassDefn: (svunit_pkg::svunit_testsuite), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv, line:26:1, endln:44:9
         |vpiName:svunit_testsuite
       |vpiFullName:svunit_pkg::svunit_testsuite
-      |vpiVariables:
-      \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+      |vpiVariable:
+      \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testsuite), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv, line:26:1, endln:44:9
         |vpiTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:9, endln:32:24
           |vpiParent:
-          \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+          \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
           |vpiFullName:svunit_pkg::svunit_testsuite::list_of_testcases
           |vpiActual:
           \_ArrayTypespec: , line:32:9, endln:32:45
@@ -4045,8 +4039,6 @@ Design: (unnamed)
         |vpiAutomatic:1
         |vpiRandType:1
         |vpiVisibility:3
-      |vpiRegArray:
-      \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
       |vpiInternalScope:
       \_Function: (svunit_pkg::svunit_testsuite::new), line:38:3, endln:38:35
         |vpiParent:
@@ -4208,7 +4200,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_testsuite::add_testcase::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:111
               |vpiParent:
@@ -4276,7 +4268,7 @@ Design: (unnamed)
               |vpiName:list_of_testcases
               |vpiFullName:svunit_pkg::svunit_testsuite::add_testcase::list_of_testcases
               |vpiActual:
-              \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+              \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
         |vpiTypedef:
         \_VoidTypespec: , line:66:10, endln:66:14
           |vpiParent:
@@ -4348,7 +4340,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:svunit_pkg::svunit_testsuite::run::name
             |vpiActual:
-            \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+            \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
           |vpiArgument:
           \_Constant: , line:103:50, endln:103:59
             |vpiParent:
@@ -4379,28 +4371,28 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (svunit_pkg::svunit_testsuite::report), line:85:1, endln:110:12
           |vpiFullName:svunit_pkg::svunit_testsuite::report
-          |vpiVariables:
-          \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:3, endln:86:6
               |vpiParent:
-              \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+              \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
               |vpiFullName:svunit_pkg::svunit_testsuite::report::pass_cnt
               |vpiActual:
               \_IntTypespec: , line:86:3, endln:86:6
             |vpiName:pass_cnt
             |vpiFullName:svunit_pkg::svunit_testsuite::report::pass_cnt
             |vpiSigned:1
-          |vpiVariables:
-          \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testsuite::report::success_str), line:87:3, endln:87:9
               |vpiParent:
-              \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+              \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
               |vpiFullName:svunit_pkg::svunit_testsuite::report::success_str
               |vpiActual:
               \_StringTypespec: , line:87:3, endln:87:9
@@ -4413,29 +4405,29 @@ Design: (unnamed)
             \_Begin: (svunit_pkg::svunit_testsuite::report)
             |vpiFullName:svunit_pkg::svunit_testsuite::report
             |vpiImportTypespec:
-            \_RefVar: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
+            \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
               |vpiParent:
               \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
               |vpiTypespec:
               \_RefTypespec: (svunit_pkg::svunit_testsuite::report::i::i), line:89:29, endln:89:30
                 |vpiParent:
-                \_RefVar: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
+                \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
                 |vpiName:i
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::i::i
                 |vpiActual:
                 \_UnsupportedTypespec: (i), line:89:29, endln:89:30
               |vpiName:i
               |vpiFullName:svunit_pkg::svunit_testsuite::report::i
-            |vpiVariables:
+            |vpiVariable:
             \_RefObj: (svunit_pkg::svunit_testsuite::report::list_of_testcases), line:89:11, endln:89:28
               |vpiParent:
               \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
               |vpiName:list_of_testcases
               |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases
               |vpiActual:
-              \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+              \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
             |vpiLoopVars:
-            \_RefVar: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
+            \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
             |vpiStmt:
             \_MethodFuncCall: (report), line:90:5, endln:90:33
               |vpiParent:
@@ -4452,20 +4444,20 @@ Design: (unnamed)
                 |vpiName:list_of_testcases
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases
                 |vpiActual:
-                \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+                \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
           |vpiInternalScope:
           \_Begin: (svunit_pkg::svunit_testsuite::report), line:92:3, endln:95:6
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
             |vpiFullName:svunit_pkg::svunit_testsuite::report
-            |vpiVariables:
-            \_ClassVar: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
+            |vpiVariable:
+            \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testsuite::report), line:92:3, endln:95:6
               |vpiTypespec:
               \_RefTypespec: (svunit_pkg::svunit_testsuite::report::match::svunit_pkg::svunit_testcase), line:93:5, endln:93:20
                 |vpiParent:
-                \_ClassVar: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
+                \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
                 |vpiName:svunit_pkg::svunit_testcase
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::match::svunit_pkg::svunit_testcase
                 |vpiActual:
@@ -4473,7 +4465,7 @@ Design: (unnamed)
               |vpiName:match
               |vpiFullName:svunit_pkg::svunit_testsuite::report::match
             |vpiImportTypespec:
-            \_ClassVar: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
+            \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
             |vpiStmt:
             \_Assignment: , line:93:21, endln:93:90
               |vpiParent:
@@ -4491,7 +4483,7 @@ Design: (unnamed)
                   |vpiName:list_of_testcases
                   |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+                  \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
                 |vpiActual:
                 \_MethodFuncCall: (find), line:93:50, endln:93:90
                   |vpiParent:
@@ -4538,7 +4530,7 @@ Design: (unnamed)
                       \_EnumConst: (PASS), line:29:17, endln:29:23
                 |vpiName:list_of_testcases
               |vpiLhs:
-              \_ClassVar: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
+              \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
             |vpiStmt:
             \_Assignment: , line:94:5, endln:94:28
               |vpiParent:
@@ -4555,7 +4547,7 @@ Design: (unnamed)
                   \_HierPath: (match.size), line:94:16, endln:94:28
                   |vpiName:match
                   |vpiActual:
-                  \_ClassVar: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
+                  \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
                 |vpiActual:
                 \_MethodFuncCall: (size), line:94:22, endln:94:28
                   |vpiParent:
@@ -4573,7 +4565,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+                \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
           |vpiTypedef:
           \_IntTypespec: , line:86:3, endln:86:6
             |vpiParent:
@@ -4591,11 +4583,11 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_IntTypespec: , line:86:3, endln:86:6
           |vpiImportTypespec:
-          \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+          \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
           |vpiImportTypespec:
           \_StringTypespec: , line:87:3, endln:87:9
           |vpiImportTypespec:
-          \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+          \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
           |vpiImportTypespec:
           \_UnsupportedTypespec: (i), line:89:29, endln:89:30
           |vpiStmt:
@@ -4618,7 +4610,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+                \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
               |vpiOperand:
               \_HierPath: (list_of_testcases.size), line:97:19, endln:97:43
                 |vpiParent:
@@ -4629,7 +4621,7 @@ Design: (unnamed)
                   \_HierPath: (list_of_testcases.size), line:97:19, endln:97:43
                   |vpiName:list_of_testcases
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+                  \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
                 |vpiActual:
                 \_MethodFuncCall: (size), line:97:37, endln:97:43
                   |vpiParent:
@@ -4666,7 +4658,7 @@ Design: (unnamed)
                   |vpiName:success_str
                   |vpiFullName:svunit_pkg::svunit_testsuite::report::success_str
                   |vpiActual:
-                  \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+                  \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
               |vpiStmt:
               \_Assignment: , line:99:5, endln:99:19
                 |vpiParent:
@@ -4688,7 +4680,7 @@ Design: (unnamed)
                   |vpiName:success
                   |vpiFullName:svunit_pkg::svunit_testsuite::report::success
                   |vpiActual:
-                  \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+                  \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
             |vpiElseStmt:
             \_Begin: (svunit_pkg::svunit_testsuite::report), line:100:12, endln:103:6
               |vpiParent:
@@ -4715,7 +4707,7 @@ Design: (unnamed)
                   |vpiName:success_str
                   |vpiFullName:svunit_pkg::svunit_testsuite::report::success_str
                   |vpiActual:
-                  \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+                  \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
               |vpiStmt:
               \_Assignment: , line:102:5, endln:102:19
                 |vpiParent:
@@ -4737,7 +4729,7 @@ Design: (unnamed)
                   |vpiName:success
                   |vpiFullName:svunit_pkg::svunit_testsuite::report::success
                   |vpiActual:
-                  \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+                  \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
           |vpiStmt:
           \_SysFuncCall: ($display), line:121:12, endln:121:24
             |vpiParent:
@@ -4782,7 +4774,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_testsuite::report::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:106:30
               |vpiParent:
@@ -4802,7 +4794,7 @@ Design: (unnamed)
                 |vpiName:success_str
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::success_str
                 |vpiActual:
-                \_StringVar: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
+                \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
               |vpiArgument:
               \_RefObj: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:105:5, endln:105:13
                 |vpiParent:
@@ -4810,7 +4802,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
+                \_Variable: (svunit_pkg::svunit_testsuite::report::pass_cnt), line:86:11, endln:86:19
               |vpiArgument:
               \_HierPath: (list_of_testcases.size), line:106:5, endln:106:29
                 |vpiParent:
@@ -4821,7 +4813,7 @@ Design: (unnamed)
                   \_HierPath: (list_of_testcases.size), line:106:5, endln:106:29
                   |vpiName:list_of_testcases
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+                  \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
                 |vpiActual:
                 \_MethodFuncCall: (size), line:106:23, endln:106:29
                   |vpiParent:
@@ -4933,7 +4925,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_ArrayTypespec: , line:32:9, endln:32:45
       |vpiImportTypespec:
-      \_ArrayVar: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
+      \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
       |vpiImportTypespec:
       \_Function: (svunit_pkg::svunit_testsuite::add_testcase), line:66:1, endln:69:12
       |vpiImportTypespec:
@@ -5016,14 +5008,14 @@ Design: (unnamed)
         \_ClassDefn: (svunit_pkg::svunit_testrunner), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv, line:26:1, endln:43:9
         |vpiName:svunit_testrunner
       |vpiFullName:svunit_pkg::svunit_testrunner
-      |vpiVariables:
-      \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+      |vpiVariable:
+      \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testrunner), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv, line:26:1, endln:43:9
         |vpiTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:9, endln:32:25
           |vpiParent:
-          \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+          \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
           |vpiFullName:svunit_pkg::svunit_testrunner::list_of_suites
           |vpiActual:
           \_ArrayTypespec: , line:32:9, endln:32:43
@@ -5032,8 +5024,6 @@ Design: (unnamed)
         |vpiAutomatic:1
         |vpiRandType:1
         |vpiVisibility:3
-      |vpiRegArray:
-      \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
       |vpiInternalScope:
       \_Function: (svunit_pkg::svunit_testrunner::new), line:38:3, endln:38:35
         |vpiParent:
@@ -5182,7 +5172,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_testrunner::add_testsuite::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:107
               |vpiParent:
@@ -5250,7 +5240,7 @@ Design: (unnamed)
               |vpiName:list_of_suites
               |vpiFullName:svunit_pkg::svunit_testrunner::add_testsuite::list_of_suites
               |vpiActual:
-              \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+              \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
         |vpiTypedef:
         \_VoidTypespec: , line:65:10, endln:65:14
           |vpiParent:
@@ -5298,28 +5288,28 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (svunit_pkg::svunit_testrunner::report), line:75:1, endln:98:12
           |vpiFullName:svunit_pkg::svunit_testrunner::report
-          |vpiVariables:
-          \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testrunner::report)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:3, endln:76:6
               |vpiParent:
-              \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+              \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
               |vpiFullName:svunit_pkg::svunit_testrunner::report::pass_cnt
               |vpiActual:
               \_IntTypespec: , line:76:3, endln:76:6
             |vpiName:pass_cnt
             |vpiFullName:svunit_pkg::svunit_testrunner::report::pass_cnt
             |vpiSigned:1
-          |vpiVariables:
-          \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+          |vpiVariable:
+          \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testrunner::report)
             |vpiTypespec:
             \_RefTypespec: (svunit_pkg::svunit_testrunner::report::success_str), line:77:3, endln:77:9
               |vpiParent:
-              \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+              \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
               |vpiFullName:svunit_pkg::svunit_testrunner::report::success_str
               |vpiActual:
               \_StringTypespec: , line:77:3, endln:77:9
@@ -5331,14 +5321,14 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testrunner::report)
             |vpiFullName:svunit_pkg::svunit_testrunner::report
-            |vpiVariables:
-            \_ClassVar: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
+            |vpiVariable:
+            \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testrunner::report), line:79:3, endln:82:6
               |vpiTypespec:
               \_RefTypespec: (svunit_pkg::svunit_testrunner::report::match::svunit_pkg::svunit_testsuite), line:80:5, endln:80:21
                 |vpiParent:
-                \_ClassVar: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
+                \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
                 |vpiName:svunit_pkg::svunit_testsuite
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::match::svunit_pkg::svunit_testsuite
                 |vpiActual:
@@ -5346,7 +5336,7 @@ Design: (unnamed)
               |vpiName:match
               |vpiFullName:svunit_pkg::svunit_testrunner::report::match
             |vpiImportTypespec:
-            \_ClassVar: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
+            \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
             |vpiStmt:
             \_Assignment: , line:80:22, endln:80:88
               |vpiParent:
@@ -5364,7 +5354,7 @@ Design: (unnamed)
                   |vpiName:list_of_suites
                   |vpiFullName:svunit_pkg::svunit_testrunner::report::list_of_suites
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+                  \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
                 |vpiActual:
                 \_MethodFuncCall: (find), line:80:48, endln:80:88
                   |vpiParent:
@@ -5411,7 +5401,7 @@ Design: (unnamed)
                       \_EnumConst: (PASS), line:29:17, endln:29:23
                 |vpiName:list_of_suites
               |vpiLhs:
-              \_ClassVar: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
+              \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
             |vpiStmt:
             \_Assignment: , line:81:5, endln:81:28
               |vpiParent:
@@ -5428,7 +5418,7 @@ Design: (unnamed)
                   \_HierPath: (match.size), line:81:16, endln:81:28
                   |vpiName:match
                   |vpiActual:
-                  \_ClassVar: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
+                  \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
                 |vpiActual:
                 \_MethodFuncCall: (size), line:81:22, endln:81:28
                   |vpiParent:
@@ -5446,7 +5436,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+                \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
           |vpiTypedef:
           \_IntTypespec: , line:76:3, endln:76:6
             |vpiParent:
@@ -5459,11 +5449,11 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_IntTypespec: , line:76:3, endln:76:6
           |vpiImportTypespec:
-          \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+          \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
           |vpiImportTypespec:
           \_StringTypespec: , line:77:3, endln:77:9
           |vpiImportTypespec:
-          \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+          \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
           |vpiStmt:
           \_Begin: (svunit_pkg::svunit_testrunner::report), line:79:3, endln:82:6
           |vpiStmt:
@@ -5482,7 +5472,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+                \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
               |vpiOperand:
               \_HierPath: (list_of_suites.size), line:84:19, endln:84:40
                 |vpiParent:
@@ -5493,7 +5483,7 @@ Design: (unnamed)
                   \_HierPath: (list_of_suites.size), line:84:19, endln:84:40
                   |vpiName:list_of_suites
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+                  \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
                 |vpiActual:
                 \_MethodFuncCall: (size), line:84:34, endln:84:40
                   |vpiParent:
@@ -5530,7 +5520,7 @@ Design: (unnamed)
                   |vpiName:success_str
                   |vpiFullName:svunit_pkg::svunit_testrunner::report::success_str
                   |vpiActual:
-                  \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+                  \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
               |vpiStmt:
               \_Assignment: , line:86:5, endln:86:19
                 |vpiParent:
@@ -5552,7 +5542,7 @@ Design: (unnamed)
                   |vpiName:success
                   |vpiFullName:svunit_pkg::svunit_testrunner::report::success
                   |vpiActual:
-                  \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+                  \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
             |vpiElseStmt:
             \_Begin: (svunit_pkg::svunit_testrunner::report), line:87:12, endln:90:6
               |vpiParent:
@@ -5579,7 +5569,7 @@ Design: (unnamed)
                   |vpiName:success_str
                   |vpiFullName:svunit_pkg::svunit_testrunner::report::success_str
                   |vpiActual:
-                  \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+                  \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
               |vpiStmt:
               \_Assignment: , line:89:5, endln:89:19
                 |vpiParent:
@@ -5601,7 +5591,7 @@ Design: (unnamed)
                   |vpiName:success
                   |vpiFullName:svunit_pkg::svunit_testrunner::report::success
                   |vpiActual:
-                  \_EnumVar: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
+                  \_Variable: (svunit_pkg::svunit_base::success), line:38:23, endln:38:30
           |vpiStmt:
           \_SysFuncCall: ($display), line:121:12, endln:121:24
             |vpiParent:
@@ -5646,7 +5636,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:svunit_pkg::svunit_testrunner::report::name
               |vpiActual:
-              \_StringVar: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
+              \_Variable: (svunit_pkg::svunit_base::name), line:32:20, endln:32:24
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:107:20
               |vpiParent:
@@ -5666,7 +5656,7 @@ Design: (unnamed)
                 |vpiName:success_str
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::success_str
                 |vpiActual:
-                \_StringVar: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
+                \_Variable: (svunit_pkg::svunit_testrunner::report::success_str), line:77:11, endln:77:22
               |vpiArgument:
               \_RefObj: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:105:5, endln:105:13
                 |vpiParent:
@@ -5674,7 +5664,7 @@ Design: (unnamed)
                 |vpiName:pass_cnt
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::pass_cnt
                 |vpiActual:
-                \_IntVar: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
+                \_Variable: (svunit_pkg::svunit_testrunner::report::pass_cnt), line:76:11, endln:76:19
               |vpiArgument:
               \_HierPath: (list_of_suites.size), line:106:5, endln:106:26
                 |vpiParent:
@@ -5685,7 +5675,7 @@ Design: (unnamed)
                   \_HierPath: (list_of_suites.size), line:106:5, endln:106:26
                   |vpiName:list_of_suites
                   |vpiActual:
-                  \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+                  \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
                 |vpiActual:
                 \_MethodFuncCall: (size), line:106:20, endln:106:26
                   |vpiParent:
@@ -5803,7 +5793,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_ArrayTypespec: , line:32:9, endln:32:43
       |vpiImportTypespec:
-      \_ArrayVar: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
+      \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
       |vpiImportTypespec:
       \_Function: (svunit_pkg::svunit_testrunner::add_testsuite), line:65:1, endln:68:12
       |vpiImportTypespec:
@@ -7115,14 +7105,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@apb_slave_unit_test (work@apb_slave_unit_test), file:${SURELOG_DIR}/third_party/tests/ApbSlave/testbench.sv, line:6:1, endln:261:10
     |vpiName:work@apb_slave_unit_test
-  |vpiVariables:
-  \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+  |vpiVariable:
+  \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
     |vpiParent:
     \_Module: work@apb_slave_unit_test (work@apb_slave_unit_test), file:${SURELOG_DIR}/third_party/tests/ApbSlave/testbench.sv, line:6:1, endln:261:10
     |vpiTypespec:
     \_RefTypespec: (work@apb_slave_unit_test.name), line:8:3, endln:8:9
       |vpiParent:
-      \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+      \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
       |vpiFullName:work@apb_slave_unit_test.name
       |vpiActual:
       \_StringTypespec: , line:8:3, endln:8:9
@@ -7133,7 +7123,7 @@ Design: (unnamed)
     |vpiExpr:
     \_Constant: , line:8:17, endln:8:31
       |vpiParent:
-      \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+      \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
       |vpiDecompile:"apb_slave_ut"
       |vpiSize:96
       |STRING:apb_slave_ut
@@ -7179,7 +7169,7 @@ Design: (unnamed)
           |vpiName:name
           |vpiFullName:work@apb_slave_unit_test.build.name
           |vpiActual:
-          \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+          \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
         |vpiName:
         \_Identifier: (new)
           |vpiParent:
@@ -7365,42 +7355,42 @@ Design: (unnamed)
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiName:single_write_then_read
         |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:5, endln:147:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+            \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read._testName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:_testName
           |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read._testName
           |vpiSigned:1
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:5, endln:149:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
+            \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.fileName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:fileName
           |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.fileName
           |vpiSigned:1
-        |vpiVariables:
-        \_IntVar: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:5, endln:150:8
             |vpiParent:
-            \_IntVar: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
+            \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.lineNumber
             |vpiActual:
             \_IntTypespec: , line:150:5, endln:150:8
@@ -7662,7 +7652,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_StringTypespec: , line:147:5, endln:147:11
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
         |vpiImportTypespec:
         \_IntegerTypespec: , line:148:5, endln:148:12
         |vpiImportTypespec:
@@ -7680,11 +7670,11 @@ Design: (unnamed)
           |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.local_error_count
           |vpiSigned:1
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.fileName), line:149:12, endln:149:20
         |vpiImportTypespec:
         \_IntTypespec: , line:150:5, endln:150:8
         |vpiImportTypespec:
-        \_IntVar: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
+        \_Variable: (work@apb_slave_unit_test.run.single_write_then_read.lineNumber), line:150:9, endln:150:19
         |vpiStmt:
         \_Assignment: , line:147:12, endln:147:48
           |vpiParent:
@@ -7700,7 +7690,7 @@ Design: (unnamed)
             |STRING:single_write_then_read
             |vpiConstType:6
           |vpiLhs:
-          \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+          \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
         |vpiStmt:
         \_Assignment: , line:148:13, endln:148:60
           |vpiParent:
@@ -7758,7 +7748,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.name
             |vpiActual:
-            \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+            \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
           |vpiArgument:
           \_SysFuncCall: ($sformatf), line:103:50, endln:103:85
             |vpiParent:
@@ -7778,7 +7768,7 @@ Design: (unnamed)
               |vpiName:_testName
               |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read._testName
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+              \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
             |vpiName:
             \_Identifier: ($sformatf)
               |vpiParent:
@@ -7935,7 +7925,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -7955,7 +7945,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -7994,7 +7984,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -8014,7 +8004,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.single_write_then_read._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -8052,42 +8042,42 @@ Design: (unnamed)
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiName:write_wo_psel
         |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:5, endln:147:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel._testName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:_testName
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel._testName
           |vpiSigned:1
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:5, endln:149:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.fileName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:fileName
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.fileName
           |vpiSigned:1
-        |vpiVariables:
-        \_IntVar: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:5, endln:150:8
             |vpiParent:
-            \_IntVar: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.lineNumber
             |vpiActual:
             \_IntTypespec: , line:150:5, endln:150:8
@@ -8392,7 +8382,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_StringTypespec: , line:147:5, endln:147:11
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
         |vpiImportTypespec:
         \_IntegerTypespec: , line:148:5, endln:148:12
         |vpiImportTypespec:
@@ -8410,11 +8400,11 @@ Design: (unnamed)
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.local_error_count
           |vpiSigned:1
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.fileName), line:149:12, endln:149:20
         |vpiImportTypespec:
         \_IntTypespec: , line:150:5, endln:150:8
         |vpiImportTypespec:
-        \_IntVar: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_psel.lineNumber), line:150:9, endln:150:19
         |vpiStmt:
         \_Assignment: , line:147:12, endln:147:39
           |vpiParent:
@@ -8430,7 +8420,7 @@ Design: (unnamed)
             |STRING:write_wo_psel
             |vpiConstType:6
           |vpiLhs:
-          \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+          \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
         |vpiStmt:
         \_Assignment: , line:148:13, endln:148:60
           |vpiParent:
@@ -8488,7 +8478,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.name
             |vpiActual:
-            \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+            \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
           |vpiArgument:
           \_SysFuncCall: ($sformatf), line:103:50, endln:103:85
             |vpiParent:
@@ -8508,7 +8498,7 @@ Design: (unnamed)
               |vpiName:_testName
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel._testName
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+              \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
             |vpiName:
             \_Identifier: ($sformatf)
               |vpiParent:
@@ -8665,7 +8655,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -8685,7 +8675,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -8724,7 +8714,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -8744,7 +8734,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.write_wo_psel._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -8782,42 +8772,42 @@ Design: (unnamed)
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiName:write_wo_write
         |vpiFullName:work@apb_slave_unit_test.run.write_wo_write
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:5, endln:147:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write._testName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:_testName
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_write._testName
           |vpiSigned:1
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:5, endln:149:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.fileName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:fileName
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.fileName
           |vpiSigned:1
-        |vpiVariables:
-        \_IntVar: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:5, endln:150:8
             |vpiParent:
-            \_IntVar: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
+            \_Variable: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.lineNumber
             |vpiActual:
             \_IntTypespec: , line:150:5, endln:150:8
@@ -9130,7 +9120,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_StringTypespec: , line:147:5, endln:147:11
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
         |vpiImportTypespec:
         \_IntegerTypespec: , line:148:5, endln:148:12
         |vpiImportTypespec:
@@ -9148,11 +9138,11 @@ Design: (unnamed)
           |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.local_error_count
           |vpiSigned:1
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write.fileName), line:149:12, endln:149:20
         |vpiImportTypespec:
         \_IntTypespec: , line:150:5, endln:150:8
         |vpiImportTypespec:
-        \_IntVar: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
+        \_Variable: (work@apb_slave_unit_test.run.write_wo_write.lineNumber), line:150:9, endln:150:19
         |vpiStmt:
         \_Assignment: , line:147:12, endln:147:40
           |vpiParent:
@@ -9168,7 +9158,7 @@ Design: (unnamed)
             |STRING:write_wo_write
             |vpiConstType:6
           |vpiLhs:
-          \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+          \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
         |vpiStmt:
         \_Assignment: , line:148:13, endln:148:60
           |vpiParent:
@@ -9226,7 +9216,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.name
             |vpiActual:
-            \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+            \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
           |vpiArgument:
           \_SysFuncCall: ($sformatf), line:103:50, endln:103:85
             |vpiParent:
@@ -9246,7 +9236,7 @@ Design: (unnamed)
               |vpiName:_testName
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_write._testName
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+              \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
             |vpiName:
             \_Identifier: ($sformatf)
               |vpiParent:
@@ -9403,7 +9393,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -9423,7 +9413,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.write_wo_write._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -9462,7 +9452,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -9482,7 +9472,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run.write_wo_write._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run.write_wo_write._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -9520,42 +9510,42 @@ Design: (unnamed)
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiName:_2_writes_then_2_reads
         |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:5, endln:147:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+            \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads._testName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:_testName
           |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads._testName
           |vpiSigned:1
-        |vpiVariables:
-        \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:5, endln:149:11
             |vpiParent:
-            \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
+            \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName
             |vpiActual:
             \_StringTypespec: , line:147:5, endln:147:11
           |vpiName:fileName
           |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName
           |vpiSigned:1
-        |vpiVariables:
-        \_IntVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
+        |vpiVariable:
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiTypespec:
           \_RefTypespec: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:5, endln:150:8
             |vpiParent:
-            \_IntVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
+            \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber
             |vpiActual:
             \_IntTypespec: , line:150:5, endln:150:8
@@ -9979,7 +9969,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_StringTypespec: , line:147:5, endln:147:11
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
         |vpiImportTypespec:
         \_IntegerTypespec: , line:148:5, endln:148:12
         |vpiImportTypespec:
@@ -9997,11 +9987,11 @@ Design: (unnamed)
           |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.local_error_count
           |vpiSigned:1
         |vpiImportTypespec:
-        \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.fileName), line:149:12, endln:149:20
         |vpiImportTypespec:
         \_IntTypespec: , line:150:5, endln:150:8
         |vpiImportTypespec:
-        \_IntVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
+        \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads.lineNumber), line:150:9, endln:150:19
         |vpiStmt:
         \_Assignment: , line:147:12, endln:147:48
           |vpiParent:
@@ -10017,7 +10007,7 @@ Design: (unnamed)
             |STRING:_2_writes_then_2_reads
             |vpiConstType:6
           |vpiLhs:
-          \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+          \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
         |vpiStmt:
         \_Assignment: , line:148:13, endln:148:60
           |vpiParent:
@@ -10075,7 +10065,7 @@ Design: (unnamed)
             |vpiName:name
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.name
             |vpiActual:
-            \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+            \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
           |vpiArgument:
           \_SysFuncCall: ($sformatf), line:103:50, endln:103:85
             |vpiParent:
@@ -10095,7 +10085,7 @@ Design: (unnamed)
               |vpiName:_testName
               |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads._testName
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+              \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
             |vpiName:
             \_Identifier: ($sformatf)
               |vpiParent:
@@ -10252,7 +10242,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -10272,7 +10262,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -10311,7 +10301,7 @@ Design: (unnamed)
               |vpiName:name
               |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.name
               |vpiActual:
-              \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+              \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
             |vpiArgument:
             \_SysFuncCall: ($sformatf), line:103:50, endln:103:84
               |vpiParent:
@@ -10331,7 +10321,7 @@ Design: (unnamed)
                 |vpiName:_testName
                 |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads._testName
                 |vpiActual:
-                \_StringVar: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
+                \_Variable: (work@apb_slave_unit_test.run._2_writes_then_2_reads._testName), line:147:12, endln:147:21
               |vpiName:
               \_Identifier: ($sformatf)
                 |vpiParent:
@@ -10387,7 +10377,7 @@ Design: (unnamed)
           |vpiName:name
           |vpiFullName:work@apb_slave_unit_test.run.name
           |vpiActual:
-          \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+          \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
         |vpiArgument:
         \_Constant: , line:103:50, endln:103:59
           |vpiParent:
@@ -11567,7 +11557,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: , line:8:3, endln:8:9
   |vpiImportTypespec:
-  \_StringVar: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
+  \_Variable: (work@apb_slave_unit_test.name), line:8:10, endln:8:14
   |vpiImportTypespec:
   \_UnsupportedTypespec: (svunit_testcase), line:9:3, endln:9:18
   |vpiImportTypespec:

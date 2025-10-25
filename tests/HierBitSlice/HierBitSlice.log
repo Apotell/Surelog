@@ -4563,7 +4563,6 @@ Design                                                 1
 EventControl                                           2
 GenFor                                                 1
 GenRegion                                              1
-GenVar                                                 2
 HierPath                                              19
 Identifier                                             8
 IfElse                                                 5
@@ -4588,6 +4587,7 @@ SysFuncCall                                            2
 TypedefTypespec                                        4
 TypespecMember                                        36
 UnsupportedTypespec                                   32
+Variable                                               2
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:51:18: Illegal implicit net "id:142, name: NUM_VECTOR_LANES".
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Illegal implicit net "id:14, name: FLOAT32_EXP_WIDTH".
@@ -4648,14 +4648,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:work@int_execute_stage
-  |vpiVariables:
-  \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+  |vpiVariable:
+  \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
     |vpiParent:
     \_Module: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:lane
     |vpiFullName:work@int_execute_stage.lane
-  |vpiGenVar:
-  \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
   |vpiInternalScope:
   \_GenRegion: (work@int_execute_stage), line:98:5, endln:275:16
     |vpiParent:
@@ -4671,14 +4669,12 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@int_execute_stage), line:99:9, endln:274:12
         |vpiFullName:work@int_execute_stage
-        |vpiVariables:
-        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+        |vpiVariable:
+        \_Variable: (work@int_execute_stage.lane), line:99:14, endln:99:18
           |vpiParent:
           \_GenFor: (work@int_execute_stage), line:99:9, endln:274:12
           |vpiName:lane
           |vpiFullName:work@int_execute_stage.lane
-        |vpiGenVar:
-        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiInternalScope:
         \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
           |vpiParent:
@@ -5004,7 +5000,7 @@ Design: (unnamed)
                 |vpiName:lane
                 |vpiFullName:work@int_execute_stage.lane_alu_gen.lane
                 |vpiActual:
-                \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+                \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
             |vpiLhs:
             \_RefObj: (work@int_execute_stage.lane_alu_gen.lane_operand1), line:118:20, endln:118:33
               |vpiParent:
@@ -5032,7 +5028,7 @@ Design: (unnamed)
                 |vpiName:lane
                 |vpiFullName:work@int_execute_stage.lane_alu_gen.lane
                 |vpiActual:
-                \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+                \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
             |vpiLhs:
             \_RefObj: (work@int_execute_stage.lane_alu_gen.lane_operand2), line:119:20, endln:119:33
               |vpiParent:
@@ -10056,9 +10052,9 @@ Design: (unnamed)
                 |vpiName:lane
                 |vpiFullName:work@int_execute_stage.lane_alu_gen.lane
                 |vpiActual:
-                \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+                \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
         |vpiImportTypespec:
-        \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+        \_Variable: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiForInitStmt:
         \_Assignment: , line:99:14, endln:99:22
           |vpiParent:
@@ -10072,7 +10068,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_GenVar: (work@int_execute_stage.lane), line:99:14, endln:99:18
+          \_Variable: (work@int_execute_stage.lane), line:99:14, endln:99:18
         |vpiCondition:
         \_Operation: , line:99:24, endln:99:32
           |vpiParent:
@@ -10085,7 +10081,7 @@ Design: (unnamed)
             |vpiName:lane
             |vpiFullName:work@int_execute_stage.lane
             |vpiActual:
-            \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+            \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
           |vpiOperand:
           \_Constant: , line:99:31, endln:99:32
             |vpiParent:
@@ -10106,7 +10102,7 @@ Design: (unnamed)
             |vpiName:lane
             |vpiFullName:work@int_execute_stage.lane
             |vpiActual:
-            \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+            \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
         |vpiStmt:
         \_Begin: (work@int_execute_stage.lane_alu_gen), line:100:9, endln:274:12
       |vpiStmt:
@@ -10303,7 +10299,7 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:83:39, endln:83:58
   |vpiImportTypespec:
-  \_GenVar: (work@int_execute_stage.lane), line:97:12, endln:97:16
+  \_Variable: (work@int_execute_stage.lane), line:97:12, endln:97:16
   |vpiImportTypespec:
   \_LogicNet: (work@int_execute_stage.clk), line:54:39, endln:54:42
     |vpiParent:

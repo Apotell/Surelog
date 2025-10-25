@@ -213,14 +213,12 @@ ContAssign                                             2
 Design                                                 1
 GenFor                                                 1
 GenRegion                                              1
-GenVar                                                 2
 HierPath                                               2
 Identifier                                             4
 Interface                                              1
 InterfaceTypespec                                      1
 LogicNet                                               2
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 1
 ModuleArray                                            1
 ModuleTypespec                                         1
@@ -231,6 +229,7 @@ Range                                                  1
 RefObj                                                 8
 RefTypespec                                            4
 SourceFile                                             1
+Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -251,14 +250,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
     |vpiName:work@io_bus_interface
-  |vpiVariables:
-  \_LogicVar: (work@io_bus_interface.write_en), line:2:11, endln:2:19
+  |vpiVariable:
+  \_Variable: (work@io_bus_interface.write_en), line:2:11, endln:2:19
     |vpiParent:
     \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
     |vpiTypespec:
     \_RefTypespec: (work@io_bus_interface.write_en), line:2:5, endln:2:10
       |vpiParent:
-      \_LogicVar: (work@io_bus_interface.write_en), line:2:11, endln:2:19
+      \_Variable: (work@io_bus_interface.write_en), line:2:11, endln:2:19
       |vpiFullName:work@io_bus_interface.write_en
       |vpiActual:
       \_LogicTypespec: , line:2:5, endln:2:10
@@ -266,8 +265,6 @@ Design: (unnamed)
     |vpiFullName:work@io_bus_interface.write_en
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@io_bus_interface.write_en), line:2:11, endln:2:19
   |vpiTypedef:
   \_LogicTypespec: , line:2:5, endln:2:10
     |vpiParent:
@@ -275,7 +272,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:5, endln:2:10
   |vpiImportTypespec:
-  \_LogicVar: (work@io_bus_interface.write_en), line:2:11, endln:2:19
+  \_Variable: (work@io_bus_interface.write_en), line:2:11, endln:2:19
   |vpiImportTypespec:
   \_LogicNet: (work@io_bus_interface.write_en), line:2:11, endln:2:19
     |vpiParent:
@@ -302,14 +299,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
     |vpiName:work@soc_tb
-  |vpiVariables:
-  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
+  |vpiVariable:
+  \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
     |vpiName:io_idx
     |vpiFullName:work@soc_tb.io_idx
-  |vpiGenVar:
-  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
   |vpiParameter:
   \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
     |vpiParent:
@@ -347,14 +342,12 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@soc_tb), line:20:9, endln:23:12
         |vpiFullName:work@soc_tb
-        |vpiVariables:
-        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+        |vpiVariable:
+        \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
           |vpiParent:
           \_GenFor: (work@soc_tb), line:20:9, endln:23:12
           |vpiName:io_idx
           |vpiFullName:work@soc_tb.io_idx
-        |vpiGenVar:
-        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiInternalScope:
         \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
           |vpiParent:
@@ -410,7 +403,7 @@ Design: (unnamed)
                   |vpiName:io_idx
                   |vpiFullName:work@soc_tb.io_gen.peripheral_io_bus[io_idx].write_en.io_idx
                   |vpiActual:
-                  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
+                  \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
               |vpiActual:
               \_RefObj: (peripheral_io_bus[io_idx].write_en), line:22:46, endln:22:54
                 |vpiParent:
@@ -421,7 +414,7 @@ Design: (unnamed)
                 \_LogicNet: (work@soc_tb.io_gen.write_en), line:22:46, endln:22:54
               |vpiName:peripheral_io_bus[io_idx].write_en
         |vpiImportTypespec:
-        \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+        \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiForInitStmt:
         \_Assignment: , line:20:14, endln:20:24
           |vpiParent:
@@ -435,7 +428,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_GenVar: (work@soc_tb.io_idx), line:20:14, endln:20:20
+          \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
         |vpiCondition:
         \_Operation: , line:20:26, endln:20:51
           |vpiParent:
@@ -448,7 +441,7 @@ Design: (unnamed)
             |vpiName:io_idx
             |vpiFullName:work@soc_tb.io_idx
             |vpiActual:
-            \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
+            \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
           |vpiOperand:
           \_RefObj: (work@soc_tb.NUM_PERIPHERALS), line:20:36, endln:20:51
             |vpiParent:
@@ -469,7 +462,7 @@ Design: (unnamed)
             |vpiName:io_idx
             |vpiFullName:work@soc_tb.io_idx
             |vpiActual:
-            \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
+            \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
         |vpiStmt:
         \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
       |vpiStmt:
@@ -492,7 +485,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
   |vpiImportTypespec:
-  \_GenVar: (work@soc_tb.io_idx), line:18:12, endln:18:18
+  \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:10, endln:10:15
   |vpiImportTypespec:

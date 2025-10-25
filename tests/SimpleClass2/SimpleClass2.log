@@ -15,7 +15,6 @@
 Begin                                                  1
 ClassDefn                                             12
 ClassTypespec                                         12
-ClassVar                                               1
 Constant                                              12
 Design                                                 1
 EnumConst                                              5
@@ -27,17 +26,16 @@ Identifier                                            48
 ImportTypespec                                         1
 IntTypespec                                            9
 LogicTypespec                                          3
-LogicVar                                               1
 MethodFuncCall                                         6
 Package                                                4
 RefObj                                                 7
 RefTypespec                                           26
 SourceFile                                             1
 StringTypespec                                         4
-StringVar                                              1
 Task                                                   9
 TypedefTypespec                                        3
 UnsupportedTypespec                                    2
+Variable                                               3
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Illegal implicit net "id:177, name: id".
 [ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Illegal implicit net "id:178, name: action".
@@ -875,14 +873,14 @@ Design: (unnamed)
       \_ClassDefn: (p1::c1), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:10:1, endln:19:9
       |vpiName:c1
     |vpiFullName:p1::c1
-    |vpiVariables:
-    \_StringVar: (p1::c1::toto), line:11:10, endln:11:14
+    |vpiVariable:
+    \_Variable: (p1::c1::toto), line:11:10, endln:11:14
       |vpiParent:
       \_ClassDefn: (p1::c1), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:10:1, endln:19:9
       |vpiTypespec:
       \_RefTypespec: (p1::c1::toto), line:11:3, endln:11:9
         |vpiParent:
-        \_StringVar: (p1::c1::toto), line:11:10, endln:11:14
+        \_Variable: (p1::c1::toto), line:11:10, endln:11:14
         |vpiFullName:p1::c1::toto
         |vpiActual:
         \_StringTypespec: , line:11:3, endln:11:9
@@ -1013,7 +1011,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_StringTypespec: , line:11:3, endln:11:9
     |vpiImportTypespec:
-    \_StringVar: (p1::c1::toto), line:11:10, endln:11:14
+    \_Variable: (p1::c1::toto), line:11:10, endln:11:14
     |vpiMethod:
     \_Function: (p1::c1::new), line:13:3, endln:13:58
     |vpiMethod:
@@ -1103,14 +1101,14 @@ Design: (unnamed)
       \_ClassDefn: (p2::c2), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:35:1, endln:50:9
       |vpiName:c2
     |vpiFullName:p2::c2
-    |vpiVariables:
-    \_ClassVar: (p2::c2::id_actions), line:37:26, endln:37:36
+    |vpiVariable:
+    \_Variable: (p2::c2::id_actions), line:37:26, endln:37:36
       |vpiParent:
       \_ClassDefn: (p2::c2), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:35:1, endln:50:9
       |vpiTypespec:
       \_RefTypespec: (p2::c2::id_actions::uvm_id_actions_array), line:37:5, endln:37:25
         |vpiParent:
-        \_ClassVar: (p2::c2::id_actions), line:37:26, endln:37:36
+        \_Variable: (p2::c2::id_actions), line:37:26, endln:37:36
         |vpiName:uvm_id_actions_array
         |vpiFullName:p2::c2::id_actions::uvm_id_actions_array
         |vpiActual:
@@ -1120,14 +1118,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_LogicVar: (p2::c2::inst1), line:38:12, endln:38:17
+    |vpiVariable:
+    \_Variable: (p2::c2::inst1), line:38:12, endln:38:17
       |vpiParent:
       \_ClassDefn: (p2::c2), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:35:1, endln:50:9
       |vpiTypespec:
       \_RefTypespec: (p2::c2::inst1::p3::c33), line:38:4, endln:38:11
         |vpiParent:
-        \_LogicVar: (p2::c2::inst1), line:38:12, endln:38:17
+        \_Variable: (p2::c2::inst1), line:38:12, endln:38:17
         |vpiName:p3::c33
         |vpiFullName:p2::c2::inst1::p3::c33
         |vpiActual:
@@ -1137,8 +1135,6 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiReg:
-    \_LogicVar: (p2::c2::inst1), line:38:12, endln:38:17
     |vpiInternalScope:
     \_Function: (p2::c2::new), line:40:2, endln:47:15
       |vpiParent:
@@ -1253,7 +1249,7 @@ Design: (unnamed)
             |vpiName:id_actions
             |vpiFullName:p2::c2::new::id_actions
             |vpiActual:
-            \_ClassVar: (p2::c2::id_actions), line:37:26, endln:37:36
+            \_Variable: (p2::c2::id_actions), line:37:26, endln:37:36
         |vpiStmt:
         \_MethodFuncCall: (super), line:45:5, endln:45:21
           |vpiParent:
@@ -1354,11 +1350,11 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Function: (p2::c2::new), line:40:2, endln:47:15
     |vpiImportTypespec:
-    \_ClassVar: (p2::c2::id_actions), line:37:26, endln:37:36
+    \_Variable: (p2::c2::id_actions), line:37:26, endln:37:36
     |vpiImportTypespec:
     \_UnsupportedTypespec: (p3::c33), line:38:4, endln:38:11
     |vpiImportTypespec:
-    \_LogicVar: (p2::c2::inst1), line:38:12, endln:38:17
+    \_Variable: (p2::c2::inst1), line:38:12, endln:38:17
     |vpiExtends:
     \_Extends: , line:35:18, endln:35:20
       |vpiParent:

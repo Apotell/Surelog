@@ -198,7 +198,6 @@ Design                                                 1
 EnumConst                                            205
 EnumNet                                                2
 EnumTypespec                                          25
-EnumVar                                                1
 EventControl                                          14
 ForStmt                                                1
 FuncCall                                              13
@@ -206,7 +205,6 @@ Function                                              19
 GenFor                                                 2
 GenIfElse                                             18
 GenRegion                                             13
-GenVar                                                 4
 HierPath                                             457
 IODecl                                                42
 Identifier                                           218
@@ -214,13 +212,11 @@ IfElse                                                20
 IfStmt                                                20
 ImportTypespec                                         7
 IntTypespec                                           55
-IntVar                                                 1
 IntegerTypespec                                        1
 Interface                                              1
 InterfaceTypespec                                      7
 LogicNet                                             179
 LogicTypespec                                        348
-LogicVar                                               9
 Modport                                                2
 Module                                                13
 ModuleArray                                            5
@@ -241,14 +237,13 @@ SourceFile                                            15
 StringTypespec                                        17
 StructNet                                              4
 StructTypespec                                        27
-StructVar                                              1
 SysFuncCall                                           43
 TaggedPattern                                         11
 Task                                                   9
 TypedefTypespec                                       61
 TypespecMember                                       149
 UnionTypespec                                          3
-UnionVar                                               1
+Variable                                              17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/rp32/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/core/r5p_core.sv:333:3: Null Actual: id:6489, type:RefModule, name:mdu.
@@ -1164,28 +1159,28 @@ Design: (unnamed)
     |vpiParent:
     \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/riscv/riscv_isa_pkg.sv, line:19:1, endln:1046:26
     |vpiName:riscv_isa_pkg
-  |vpiVariables:
-  \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+  |vpiVariable:
+  \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
     |vpiParent:
     \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/riscv/riscv_isa_pkg.sv, line:19:1, endln:1046:26
     |vpiTypespec:
     \_RefTypespec: (riscv_isa_pkg::t::riscv_isa_pkg::ctl_t), line:799:1, endln:799:6
       |vpiParent:
-      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
       |vpiName:riscv_isa_pkg::ctl_t
       |vpiFullName:riscv_isa_pkg::t::riscv_isa_pkg::ctl_t
       |vpiActual:
       \_TypedefTypespec: (riscv_isa_pkg::ctl_t), line:773:3, endln:773:8
     |vpiName:t
     |vpiFullName:riscv_isa_pkg::t
-  |vpiVariables:
-  \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+  |vpiVariable:
+  \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
     |vpiParent:
     \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/riscv/riscv_isa_pkg.sv, line:19:1, endln:1046:26
     |vpiTypespec:
     \_RefTypespec: (riscv_isa_pkg::f::riscv_isa_pkg::op32_frm_t), line:800:1, endln:800:11
       |vpiParent:
-      \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+      \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
       |vpiName:riscv_isa_pkg::op32_frm_t
       |vpiFullName:riscv_isa_pkg::f::riscv_isa_pkg::op32_frm_t
       |vpiActual:
@@ -3689,7 +3684,7 @@ Design: (unnamed)
           |vpiName:t
           |vpiFullName:riscv_isa_pkg::dec32::t
           |vpiActual:
-          \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+          \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
       |vpiStmt:
       \_Assignment: , line:804:1, endln:804:20
         |vpiParent:
@@ -3716,7 +3711,7 @@ Design: (unnamed)
           |vpiName:f
           |vpiFullName:riscv_isa_pkg::dec32::f
           |vpiActual:
-          \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+          \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
       |vpiStmt:
       \_Assignment: , line:807:1, endln:807:10
         |vpiParent:
@@ -3741,7 +3736,7 @@ Design: (unnamed)
             \_HierPath: (t.siz), line:807:2, endln:807:6
             |vpiName:t
             |vpiActual:
-            \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+            \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
           |vpiActual:
           \_RefObj: (siz), line:807:3, endln:807:6
             |vpiParent:
@@ -3898,7 +3893,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:813:63, endln:813:74
                   |vpiParent:
@@ -3923,7 +3918,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:813:64, endln:813:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:813:65, endln:813:68
                       |vpiParent:
@@ -3993,7 +3988,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:813:77, endln:813:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:813:78, endln:813:79
                       |vpiParent:
@@ -4040,7 +4035,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:814:63, endln:814:74
                   |vpiParent:
@@ -4065,7 +4060,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:814:64, endln:814:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:814:65, endln:814:68
                       |vpiParent:
@@ -4156,7 +4151,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:814:77, endln:814:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:814:78, endln:814:79
                       |vpiParent:
@@ -4203,7 +4198,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:815:63, endln:815:74
                   |vpiParent:
@@ -4228,7 +4223,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:815:64, endln:815:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:815:65, endln:815:68
                       |vpiParent:
@@ -4319,7 +4314,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:815:77, endln:815:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:815:78, endln:815:79
                       |vpiParent:
@@ -4366,7 +4361,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:816:63, endln:816:74
                   |vpiParent:
@@ -4391,7 +4386,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:816:64, endln:816:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:816:65, endln:816:68
                       |vpiParent:
@@ -4482,7 +4477,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:816:77, endln:816:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:816:78, endln:816:79
                       |vpiParent:
@@ -4529,7 +4524,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:817:63, endln:817:74
                   |vpiParent:
@@ -4554,7 +4549,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:817:64, endln:817:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:817:65, endln:817:68
                       |vpiParent:
@@ -4645,7 +4640,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:817:77, endln:817:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:817:78, endln:817:79
                       |vpiParent:
@@ -4692,7 +4687,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:818:63, endln:818:74
                   |vpiParent:
@@ -4717,7 +4712,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:818:64, endln:818:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:818:65, endln:818:68
                       |vpiParent:
@@ -4808,7 +4803,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:818:77, endln:818:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:818:78, endln:818:79
                       |vpiParent:
@@ -4855,7 +4850,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:819:63, endln:819:74
                   |vpiParent:
@@ -4880,7 +4875,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:819:64, endln:819:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:819:65, endln:819:68
                       |vpiParent:
@@ -4971,7 +4966,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:819:77, endln:819:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:819:78, endln:819:79
                       |vpiParent:
@@ -5018,7 +5013,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:820:63, endln:820:74
                   |vpiParent:
@@ -5043,7 +5038,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:820:64, endln:820:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:820:65, endln:820:68
                       |vpiParent:
@@ -5134,7 +5129,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:820:77, endln:820:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:820:78, endln:820:79
                       |vpiParent:
@@ -5181,7 +5176,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:821:63, endln:821:74
                   |vpiParent:
@@ -5206,7 +5201,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:821:64, endln:821:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:821:65, endln:821:68
                       |vpiParent:
@@ -5297,7 +5292,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:821:77, endln:821:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:821:78, endln:821:79
                       |vpiParent:
@@ -5344,7 +5339,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:822:63, endln:822:74
                   |vpiParent:
@@ -5369,7 +5364,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:822:64, endln:822:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:822:65, endln:822:68
                       |vpiParent:
@@ -5460,7 +5455,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:822:77, endln:822:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:822:78, endln:822:79
                       |vpiParent:
@@ -5507,7 +5502,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:823:63, endln:823:74
                   |vpiParent:
@@ -5532,7 +5527,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:823:64, endln:823:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:823:65, endln:823:68
                       |vpiParent:
@@ -5623,7 +5618,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:823:77, endln:823:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:823:78, endln:823:79
                       |vpiParent:
@@ -5670,7 +5665,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:824:63, endln:824:74
                   |vpiParent:
@@ -5695,7 +5690,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:824:64, endln:824:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:824:65, endln:824:68
                       |vpiParent:
@@ -5786,7 +5781,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:824:77, endln:824:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:824:78, endln:824:79
                       |vpiParent:
@@ -5833,7 +5828,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:825:63, endln:825:74
                   |vpiParent:
@@ -5858,7 +5853,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:825:64, endln:825:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:825:65, endln:825:68
                       |vpiParent:
@@ -5949,7 +5944,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:825:77, endln:825:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:825:78, endln:825:79
                       |vpiParent:
@@ -5996,7 +5991,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:826:63, endln:826:74
                   |vpiParent:
@@ -6021,7 +6016,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:826:64, endln:826:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:826:65, endln:826:68
                       |vpiParent:
@@ -6112,7 +6107,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:826:77, endln:826:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:826:78, endln:826:79
                       |vpiParent:
@@ -6159,7 +6154,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:827:63, endln:827:74
                   |vpiParent:
@@ -6184,7 +6179,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:827:64, endln:827:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:827:65, endln:827:68
                       |vpiParent:
@@ -6275,7 +6270,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:827:77, endln:827:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:827:78, endln:827:79
                       |vpiParent:
@@ -6322,7 +6317,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:828:63, endln:828:74
                   |vpiParent:
@@ -6347,7 +6342,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:828:64, endln:828:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:828:65, endln:828:68
                       |vpiParent:
@@ -6438,7 +6433,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:828:77, endln:828:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:828:78, endln:828:79
                       |vpiParent:
@@ -6485,7 +6480,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:829:63, endln:829:74
                   |vpiParent:
@@ -6510,7 +6505,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:829:64, endln:829:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:829:65, endln:829:68
                       |vpiParent:
@@ -6601,7 +6596,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:829:77, endln:829:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:829:78, endln:829:79
                       |vpiParent:
@@ -6648,7 +6643,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:830:63, endln:830:74
                   |vpiParent:
@@ -6673,7 +6668,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:830:64, endln:830:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:830:65, endln:830:68
                       |vpiParent:
@@ -6764,7 +6759,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:830:77, endln:830:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:830:78, endln:830:79
                       |vpiParent:
@@ -6811,7 +6806,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:831:63, endln:831:74
                   |vpiParent:
@@ -6836,7 +6831,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:831:64, endln:831:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:831:65, endln:831:68
                       |vpiParent:
@@ -6906,7 +6901,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:831:77, endln:831:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:831:78, endln:831:79
                       |vpiParent:
@@ -6953,7 +6948,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:832:63, endln:832:74
                   |vpiParent:
@@ -6978,7 +6973,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:832:64, endln:832:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:832:65, endln:832:68
                       |vpiParent:
@@ -7069,7 +7064,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:832:77, endln:832:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:832:78, endln:832:79
                       |vpiParent:
@@ -7116,7 +7111,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:833:63, endln:833:74
                   |vpiParent:
@@ -7141,7 +7136,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:833:64, endln:833:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:833:65, endln:833:68
                       |vpiParent:
@@ -7232,7 +7227,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:833:77, endln:833:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:833:78, endln:833:79
                       |vpiParent:
@@ -7279,7 +7274,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:834:63, endln:834:74
                   |vpiParent:
@@ -7304,7 +7299,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:834:64, endln:834:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:834:65, endln:834:68
                       |vpiParent:
@@ -7395,7 +7390,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:834:77, endln:834:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:834:78, endln:834:79
                       |vpiParent:
@@ -7442,7 +7437,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:835:63, endln:835:74
                   |vpiParent:
@@ -7467,7 +7462,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:835:64, endln:835:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:835:65, endln:835:68
                       |vpiParent:
@@ -7558,7 +7553,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:835:77, endln:835:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:835:78, endln:835:79
                       |vpiParent:
@@ -7605,7 +7600,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:836:63, endln:836:74
                   |vpiParent:
@@ -7630,7 +7625,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:836:64, endln:836:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:836:65, endln:836:68
                       |vpiParent:
@@ -7721,7 +7716,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:836:77, endln:836:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:836:78, endln:836:79
                       |vpiParent:
@@ -7768,7 +7763,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:837:63, endln:837:74
                   |vpiParent:
@@ -7793,7 +7788,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:837:64, endln:837:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:837:65, endln:837:68
                       |vpiParent:
@@ -7884,7 +7879,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:837:77, endln:837:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:837:78, endln:837:79
                       |vpiParent:
@@ -7931,7 +7926,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:838:63, endln:838:74
                   |vpiParent:
@@ -7956,7 +7951,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:838:64, endln:838:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:838:65, endln:838:68
                       |vpiParent:
@@ -8047,7 +8042,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:838:77, endln:838:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:838:78, endln:838:79
                       |vpiParent:
@@ -8094,7 +8089,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:839:63, endln:839:74
                   |vpiParent:
@@ -8119,7 +8114,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:839:64, endln:839:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:839:65, endln:839:68
                       |vpiParent:
@@ -8210,7 +8205,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:839:77, endln:839:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:839:78, endln:839:79
                       |vpiParent:
@@ -8257,7 +8252,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:840:63, endln:840:74
                   |vpiParent:
@@ -8282,7 +8277,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:840:64, endln:840:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:840:65, endln:840:68
                       |vpiParent:
@@ -8373,7 +8368,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:840:77, endln:840:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:840:78, endln:840:79
                       |vpiParent:
@@ -8420,7 +8415,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:841:63, endln:841:74
                   |vpiParent:
@@ -8445,7 +8440,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:841:64, endln:841:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:841:65, endln:841:68
                       |vpiParent:
@@ -8536,7 +8531,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:841:77, endln:841:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:841:78, endln:841:79
                       |vpiParent:
@@ -8583,7 +8578,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:842:63, endln:842:74
                   |vpiParent:
@@ -8608,7 +8603,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:842:64, endln:842:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:842:65, endln:842:68
                       |vpiParent:
@@ -8699,7 +8694,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:842:77, endln:842:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:842:78, endln:842:79
                       |vpiParent:
@@ -8746,7 +8741,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:843:63, endln:843:74
                   |vpiParent:
@@ -8771,7 +8766,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:843:64, endln:843:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:843:65, endln:843:68
                       |vpiParent:
@@ -8862,7 +8857,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:843:77, endln:843:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:843:78, endln:843:79
                       |vpiParent:
@@ -8909,7 +8904,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:844:63, endln:844:74
                   |vpiParent:
@@ -8934,7 +8929,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:844:64, endln:844:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:844:65, endln:844:68
                       |vpiParent:
@@ -9025,7 +9020,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:844:77, endln:844:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:844:78, endln:844:79
                       |vpiParent:
@@ -9072,7 +9067,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:845:63, endln:845:74
                   |vpiParent:
@@ -9097,7 +9092,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:845:64, endln:845:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:845:65, endln:845:68
                       |vpiParent:
@@ -9188,7 +9183,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:845:77, endln:845:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:845:78, endln:845:79
                       |vpiParent:
@@ -9235,7 +9230,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:846:63, endln:846:74
                   |vpiParent:
@@ -9260,7 +9255,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:846:64, endln:846:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:846:65, endln:846:68
                       |vpiParent:
@@ -9351,7 +9346,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:846:77, endln:846:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:846:78, endln:846:79
                       |vpiParent:
@@ -9398,7 +9393,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:847:63, endln:847:74
                   |vpiParent:
@@ -9423,7 +9418,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:847:64, endln:847:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:847:65, endln:847:68
                       |vpiParent:
@@ -9514,7 +9509,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:847:77, endln:847:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:847:78, endln:847:79
                       |vpiParent:
@@ -9561,7 +9556,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:848:63, endln:848:74
                   |vpiParent:
@@ -9586,7 +9581,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:848:64, endln:848:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:848:65, endln:848:68
                       |vpiParent:
@@ -9677,7 +9672,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:848:77, endln:848:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:848:78, endln:848:79
                       |vpiParent:
@@ -9724,7 +9719,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:849:63, endln:849:74
                   |vpiParent:
@@ -9749,7 +9744,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:849:64, endln:849:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:849:65, endln:849:68
                       |vpiParent:
@@ -9840,7 +9835,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:849:77, endln:849:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:849:78, endln:849:79
                       |vpiParent:
@@ -9887,7 +9882,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:850:63, endln:850:74
                   |vpiParent:
@@ -9912,7 +9907,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:850:64, endln:850:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:850:65, endln:850:68
                       |vpiParent:
@@ -10003,7 +9998,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:850:77, endln:850:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:850:78, endln:850:79
                       |vpiParent:
@@ -10050,7 +10045,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:851:63, endln:851:74
                   |vpiParent:
@@ -10075,7 +10070,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:851:64, endln:851:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:851:65, endln:851:68
                       |vpiParent:
@@ -10145,7 +10140,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:851:77, endln:851:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:851:78, endln:851:79
                       |vpiParent:
@@ -10272,7 +10267,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:857:63, endln:857:74
                   |vpiParent:
@@ -10297,7 +10292,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:857:64, endln:857:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:857:65, endln:857:68
                       |vpiParent:
@@ -10388,7 +10383,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:857:77, endln:857:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:857:78, endln:857:79
                       |vpiParent:
@@ -10435,7 +10430,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:858:63, endln:858:74
                   |vpiParent:
@@ -10460,7 +10455,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:858:64, endln:858:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:858:65, endln:858:68
                       |vpiParent:
@@ -10551,7 +10546,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:858:77, endln:858:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:858:78, endln:858:79
                       |vpiParent:
@@ -10598,7 +10593,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:859:63, endln:859:74
                   |vpiParent:
@@ -10623,7 +10618,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:859:64, endln:859:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:859:65, endln:859:68
                       |vpiParent:
@@ -10714,7 +10709,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:859:77, endln:859:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:859:78, endln:859:79
                       |vpiParent:
@@ -10761,7 +10756,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:860:63, endln:860:74
                   |vpiParent:
@@ -10786,7 +10781,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:860:64, endln:860:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:860:65, endln:860:68
                       |vpiParent:
@@ -10877,7 +10872,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:860:77, endln:860:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:860:78, endln:860:79
                       |vpiParent:
@@ -10924,7 +10919,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:861:63, endln:861:74
                   |vpiParent:
@@ -10949,7 +10944,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:861:64, endln:861:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:861:65, endln:861:68
                       |vpiParent:
@@ -11040,7 +11035,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:861:77, endln:861:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:861:78, endln:861:79
                       |vpiParent:
@@ -11087,7 +11082,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:862:63, endln:862:74
                   |vpiParent:
@@ -11112,7 +11107,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:862:64, endln:862:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:862:65, endln:862:68
                       |vpiParent:
@@ -11203,7 +11198,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:862:77, endln:862:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:862:78, endln:862:79
                       |vpiParent:
@@ -11250,7 +11245,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:863:63, endln:863:74
                   |vpiParent:
@@ -11275,7 +11270,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:863:64, endln:863:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:863:65, endln:863:68
                       |vpiParent:
@@ -11366,7 +11361,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:863:77, endln:863:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:863:78, endln:863:79
                       |vpiParent:
@@ -11413,7 +11408,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:864:63, endln:864:74
                   |vpiParent:
@@ -11438,7 +11433,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:864:64, endln:864:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:864:65, endln:864:68
                       |vpiParent:
@@ -11529,7 +11524,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:864:77, endln:864:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:864:78, endln:864:79
                       |vpiParent:
@@ -11576,7 +11571,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:865:63, endln:865:74
                   |vpiParent:
@@ -11601,7 +11596,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:865:64, endln:865:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:865:65, endln:865:68
                       |vpiParent:
@@ -11692,7 +11687,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:865:77, endln:865:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:865:78, endln:865:79
                       |vpiParent:
@@ -11739,7 +11734,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:866:63, endln:866:74
                   |vpiParent:
@@ -11764,7 +11759,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:866:64, endln:866:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:866:65, endln:866:68
                       |vpiParent:
@@ -11855,7 +11850,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:866:77, endln:866:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:866:78, endln:866:79
                       |vpiParent:
@@ -11902,7 +11897,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:867:63, endln:867:74
                   |vpiParent:
@@ -11927,7 +11922,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:867:64, endln:867:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:867:65, endln:867:68
                       |vpiParent:
@@ -12018,7 +12013,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:867:77, endln:867:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:867:78, endln:867:79
                       |vpiParent:
@@ -12065,7 +12060,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:868:63, endln:868:74
                   |vpiParent:
@@ -12090,7 +12085,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:868:64, endln:868:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:868:65, endln:868:68
                       |vpiParent:
@@ -12181,7 +12176,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:868:77, endln:868:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:868:78, endln:868:79
                       |vpiParent:
@@ -12228,7 +12223,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:869:63, endln:869:74
                   |vpiParent:
@@ -12253,7 +12248,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:869:64, endln:869:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:869:65, endln:869:68
                       |vpiParent:
@@ -12344,7 +12339,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:869:77, endln:869:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:869:78, endln:869:79
                       |vpiParent:
@@ -12391,7 +12386,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:870:63, endln:870:74
                   |vpiParent:
@@ -12416,7 +12411,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:870:64, endln:870:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:870:65, endln:870:68
                       |vpiParent:
@@ -12507,7 +12502,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:870:77, endln:870:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:870:78, endln:870:79
                       |vpiParent:
@@ -12554,7 +12549,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:871:63, endln:871:74
                   |vpiParent:
@@ -12579,7 +12574,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:871:64, endln:871:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:871:65, endln:871:68
                       |vpiParent:
@@ -12670,7 +12665,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:871:77, endln:871:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:871:78, endln:871:79
                       |vpiParent:
@@ -12717,7 +12712,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:872:63, endln:872:74
                   |vpiParent:
@@ -12742,7 +12737,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:872:64, endln:872:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:872:65, endln:872:68
                       |vpiParent:
@@ -12833,7 +12828,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:872:77, endln:872:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:872:78, endln:872:79
                       |vpiParent:
@@ -12880,7 +12875,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:873:63, endln:873:74
                   |vpiParent:
@@ -12905,7 +12900,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:873:64, endln:873:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:873:65, endln:873:68
                       |vpiParent:
@@ -12996,7 +12991,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:873:77, endln:873:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:873:78, endln:873:79
                       |vpiParent:
@@ -13043,7 +13038,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:874:63, endln:874:74
                   |vpiParent:
@@ -13068,7 +13063,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:874:64, endln:874:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:874:65, endln:874:68
                       |vpiParent:
@@ -13159,7 +13154,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:874:77, endln:874:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:874:78, endln:874:79
                       |vpiParent:
@@ -13273,7 +13268,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:883:63, endln:883:74
                   |vpiParent:
@@ -13298,7 +13293,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:883:64, endln:883:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:883:65, endln:883:68
                       |vpiParent:
@@ -13389,7 +13384,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:883:77, endln:883:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:883:78, endln:883:79
                       |vpiParent:
@@ -13436,7 +13431,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:885:63, endln:885:74
                   |vpiParent:
@@ -13461,7 +13456,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:885:64, endln:885:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:885:65, endln:885:68
                       |vpiParent:
@@ -13552,7 +13547,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:885:77, endln:885:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:885:78, endln:885:79
                       |vpiParent:
@@ -13599,7 +13594,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:886:63, endln:886:74
                   |vpiParent:
@@ -13624,7 +13619,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:886:64, endln:886:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:886:65, endln:886:68
                       |vpiParent:
@@ -13715,7 +13710,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:886:77, endln:886:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:886:78, endln:886:79
                       |vpiParent:
@@ -13762,7 +13757,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:887:63, endln:887:74
                   |vpiParent:
@@ -13787,7 +13782,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:887:64, endln:887:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:887:65, endln:887:68
                       |vpiParent:
@@ -13878,7 +13873,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:887:77, endln:887:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:887:78, endln:887:79
                       |vpiParent:
@@ -13925,7 +13920,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:888:63, endln:888:74
                   |vpiParent:
@@ -13950,7 +13945,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:888:64, endln:888:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:888:65, endln:888:68
                       |vpiParent:
@@ -14041,7 +14036,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:888:77, endln:888:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:888:78, endln:888:79
                       |vpiParent:
@@ -14088,7 +14083,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:889:63, endln:889:74
                   |vpiParent:
@@ -14113,7 +14108,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:889:64, endln:889:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:889:65, endln:889:68
                       |vpiParent:
@@ -14204,7 +14199,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:889:77, endln:889:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:889:78, endln:889:79
                       |vpiParent:
@@ -14251,7 +14246,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:890:63, endln:890:74
                   |vpiParent:
@@ -14276,7 +14271,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:890:64, endln:890:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:890:65, endln:890:68
                       |vpiParent:
@@ -14367,7 +14362,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:890:77, endln:890:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:890:78, endln:890:79
                       |vpiParent:
@@ -14414,7 +14409,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:891:63, endln:891:74
                   |vpiParent:
@@ -14439,7 +14434,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:891:64, endln:891:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:891:65, endln:891:68
                       |vpiParent:
@@ -14530,7 +14525,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:891:77, endln:891:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:891:78, endln:891:79
                       |vpiParent:
@@ -14577,7 +14572,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:892:63, endln:892:74
                   |vpiParent:
@@ -14602,7 +14597,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:892:64, endln:892:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:892:65, endln:892:68
                       |vpiParent:
@@ -14693,7 +14688,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:892:77, endln:892:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:892:78, endln:892:79
                       |vpiParent:
@@ -14740,7 +14735,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:893:63, endln:893:74
                   |vpiParent:
@@ -14765,7 +14760,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:893:64, endln:893:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:893:65, endln:893:68
                       |vpiParent:
@@ -14856,7 +14851,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:893:77, endln:893:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:893:78, endln:893:79
                       |vpiParent:
@@ -15035,7 +15030,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:899:63, endln:899:74
                   |vpiParent:
@@ -15060,7 +15055,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:899:64, endln:899:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:899:65, endln:899:68
                       |vpiParent:
@@ -15130,7 +15125,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:899:77, endln:899:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:899:78, endln:899:79
                       |vpiParent:
@@ -15192,7 +15187,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:899:127, endln:899:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:899:128, endln:899:129
                       |vpiParent:
@@ -15239,7 +15234,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:900:63, endln:900:74
                   |vpiParent:
@@ -15264,7 +15259,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:900:64, endln:900:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:900:65, endln:900:68
                       |vpiParent:
@@ -15334,7 +15329,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:900:77, endln:900:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:900:78, endln:900:79
                       |vpiParent:
@@ -15396,7 +15391,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:900:127, endln:900:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:900:128, endln:900:129
                       |vpiParent:
@@ -15443,7 +15438,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:901:63, endln:901:74
                   |vpiParent:
@@ -15468,7 +15463,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:901:64, endln:901:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:901:65, endln:901:68
                       |vpiParent:
@@ -15538,7 +15533,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:901:77, endln:901:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:901:78, endln:901:79
                       |vpiParent:
@@ -15600,7 +15595,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:901:127, endln:901:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:901:128, endln:901:129
                       |vpiParent:
@@ -15647,7 +15642,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:902:63, endln:902:74
                   |vpiParent:
@@ -15672,7 +15667,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:902:64, endln:902:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:902:65, endln:902:68
                       |vpiParent:
@@ -15742,7 +15737,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:902:77, endln:902:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:902:78, endln:902:79
                       |vpiParent:
@@ -15804,7 +15799,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:902:127, endln:902:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:902:128, endln:902:129
                       |vpiParent:
@@ -15851,7 +15846,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:903:63, endln:903:74
                   |vpiParent:
@@ -15876,7 +15871,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:903:64, endln:903:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:903:65, endln:903:68
                       |vpiParent:
@@ -15946,7 +15941,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:903:77, endln:903:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:903:78, endln:903:79
                       |vpiParent:
@@ -16008,7 +16003,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:903:127, endln:903:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:903:128, endln:903:129
                       |vpiParent:
@@ -16055,7 +16050,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:904:63, endln:904:74
                   |vpiParent:
@@ -16080,7 +16075,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:904:64, endln:904:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:904:65, endln:904:68
                       |vpiParent:
@@ -16150,7 +16145,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:904:77, endln:904:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:904:78, endln:904:79
                       |vpiParent:
@@ -16212,7 +16207,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:904:127, endln:904:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:904:128, endln:904:129
                       |vpiParent:
@@ -16259,7 +16254,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:905:63, endln:905:74
                   |vpiParent:
@@ -16284,7 +16279,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:905:64, endln:905:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:905:65, endln:905:68
                       |vpiParent:
@@ -16354,7 +16349,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:905:77, endln:905:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:905:78, endln:905:79
                       |vpiParent:
@@ -16416,7 +16411,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:905:127, endln:905:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:905:128, endln:905:129
                       |vpiParent:
@@ -16463,7 +16458,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:906:63, endln:906:74
                   |vpiParent:
@@ -16488,7 +16483,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:906:64, endln:906:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:906:65, endln:906:68
                       |vpiParent:
@@ -16558,7 +16553,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:906:77, endln:906:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:906:78, endln:906:79
                       |vpiParent:
@@ -16620,7 +16615,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:906:127, endln:906:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:906:128, endln:906:129
                       |vpiParent:
@@ -16786,7 +16781,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:912:63, endln:912:74
                   |vpiParent:
@@ -16811,7 +16806,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:912:64, endln:912:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:912:65, endln:912:68
                       |vpiParent:
@@ -16881,7 +16876,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:912:77, endln:912:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:912:78, endln:912:79
                       |vpiParent:
@@ -16943,7 +16938,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:912:127, endln:912:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:912:128, endln:912:129
                       |vpiParent:
@@ -16990,7 +16985,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:913:63, endln:913:74
                   |vpiParent:
@@ -17015,7 +17010,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:913:64, endln:913:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:913:65, endln:913:68
                       |vpiParent:
@@ -17085,7 +17080,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:913:77, endln:913:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:913:78, endln:913:79
                       |vpiParent:
@@ -17147,7 +17142,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:913:127, endln:913:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:913:128, endln:913:129
                       |vpiParent:
@@ -17194,7 +17189,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:914:63, endln:914:74
                   |vpiParent:
@@ -17219,7 +17214,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:914:64, endln:914:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:914:65, endln:914:68
                       |vpiParent:
@@ -17289,7 +17284,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:914:77, endln:914:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:914:78, endln:914:79
                       |vpiParent:
@@ -17351,7 +17346,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:914:127, endln:914:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:914:128, endln:914:129
                       |vpiParent:
@@ -17398,7 +17393,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:915:63, endln:915:74
                   |vpiParent:
@@ -17423,7 +17418,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:915:64, endln:915:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:915:65, endln:915:68
                       |vpiParent:
@@ -17493,7 +17488,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:915:77, endln:915:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:915:78, endln:915:79
                       |vpiParent:
@@ -17555,7 +17550,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:915:127, endln:915:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:915:128, endln:915:129
                       |vpiParent:
@@ -17602,7 +17597,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:916:63, endln:916:74
                   |vpiParent:
@@ -17627,7 +17622,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:916:64, endln:916:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:916:65, endln:916:68
                       |vpiParent:
@@ -17697,7 +17692,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:916:77, endln:916:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:916:78, endln:916:79
                       |vpiParent:
@@ -17759,7 +17754,7 @@ Design: (unnamed)
                       \_HierPath: (t.m), line:916:127, endln:916:129
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (m), line:916:128, endln:916:129
                       |vpiParent:
@@ -17865,7 +17860,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:923:55, endln:923:59
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:923:56, endln:923:59
                       |vpiParent:
@@ -17895,7 +17890,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:923:76, endln:923:124
                   |vpiParent:
@@ -17957,7 +17952,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:923:77, endln:923:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:923:78, endln:923:79
                       |vpiParent:
@@ -18060,7 +18055,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:929:63, endln:929:74
                   |vpiParent:
@@ -18085,7 +18080,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:929:64, endln:929:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:929:65, endln:929:68
                       |vpiParent:
@@ -18155,7 +18150,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:929:77, endln:929:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:929:78, endln:929:79
                       |vpiParent:
@@ -18275,7 +18270,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:929:127, endln:929:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:929:128, endln:929:131
                       |vpiParent:
@@ -18322,7 +18317,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:930:63, endln:930:74
                   |vpiParent:
@@ -18347,7 +18342,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:930:64, endln:930:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:930:65, endln:930:68
                       |vpiParent:
@@ -18417,7 +18412,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:930:77, endln:930:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:930:78, endln:930:79
                       |vpiParent:
@@ -18537,7 +18532,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:930:127, endln:930:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:930:128, endln:930:131
                       |vpiParent:
@@ -18584,7 +18579,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:931:63, endln:931:74
                   |vpiParent:
@@ -18609,7 +18604,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:931:64, endln:931:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:931:65, endln:931:68
                       |vpiParent:
@@ -18679,7 +18674,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:931:77, endln:931:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:931:78, endln:931:79
                       |vpiParent:
@@ -18799,7 +18794,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:931:127, endln:931:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:931:128, endln:931:131
                       |vpiParent:
@@ -18846,7 +18841,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:932:63, endln:932:74
                   |vpiParent:
@@ -18871,7 +18866,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:932:64, endln:932:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:932:65, endln:932:68
                       |vpiParent:
@@ -18941,7 +18936,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:932:77, endln:932:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:932:78, endln:932:79
                       |vpiParent:
@@ -19080,7 +19075,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:932:127, endln:932:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:932:128, endln:932:131
                       |vpiParent:
@@ -19127,7 +19122,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:933:63, endln:933:74
                   |vpiParent:
@@ -19152,7 +19147,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:933:64, endln:933:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:933:65, endln:933:68
                       |vpiParent:
@@ -19222,7 +19217,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:933:77, endln:933:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:933:78, endln:933:79
                       |vpiParent:
@@ -19361,7 +19356,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:933:127, endln:933:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:933:128, endln:933:131
                       |vpiParent:
@@ -19408,7 +19403,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:934:63, endln:934:74
                   |vpiParent:
@@ -19433,7 +19428,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:934:64, endln:934:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:934:65, endln:934:68
                       |vpiParent:
@@ -19503,7 +19498,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:934:77, endln:934:79
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:934:78, endln:934:79
                       |vpiParent:
@@ -19642,7 +19637,7 @@ Design: (unnamed)
                       \_HierPath: (t.csr), line:934:127, endln:934:131
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (csr), line:934:128, endln:934:131
                       |vpiParent:
@@ -19738,7 +19733,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:940:63, endln:940:74
                   |vpiParent:
@@ -19763,7 +19758,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:940:64, endln:940:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:940:65, endln:940:68
                       |vpiParent:
@@ -19809,7 +19804,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:940:77, endln:940:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:940:78, endln:940:82
                       |vpiParent:
@@ -19879,7 +19874,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:940:108, endln:940:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:940:109, endln:940:110
                       |vpiParent:
@@ -19926,7 +19921,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:941:63, endln:941:74
                   |vpiParent:
@@ -19951,7 +19946,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:941:64, endln:941:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:941:65, endln:941:68
                       |vpiParent:
@@ -19997,7 +19992,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:941:77, endln:941:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:941:78, endln:941:82
                       |vpiParent:
@@ -20067,7 +20062,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:941:108, endln:941:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:941:109, endln:941:110
                       |vpiParent:
@@ -20114,7 +20109,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:942:63, endln:942:74
                   |vpiParent:
@@ -20139,7 +20134,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:942:64, endln:942:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:942:65, endln:942:68
                       |vpiParent:
@@ -20185,7 +20180,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:942:77, endln:942:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:942:78, endln:942:82
                       |vpiParent:
@@ -20255,7 +20250,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:942:108, endln:942:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:942:109, endln:942:110
                       |vpiParent:
@@ -20351,7 +20346,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:948:63, endln:948:74
                   |vpiParent:
@@ -20376,7 +20371,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:948:64, endln:948:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:948:65, endln:948:68
                       |vpiParent:
@@ -20422,7 +20417,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:948:77, endln:948:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:948:78, endln:948:82
                       |vpiParent:
@@ -20492,7 +20487,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:948:108, endln:948:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:948:109, endln:948:110
                       |vpiParent:
@@ -20588,7 +20583,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:952:63, endln:952:74
                   |vpiParent:
@@ -20613,7 +20608,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:952:64, endln:952:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:952:65, endln:952:68
                       |vpiParent:
@@ -20659,7 +20654,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:952:77, endln:952:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:952:78, endln:952:82
                       |vpiParent:
@@ -20729,7 +20724,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:952:108, endln:952:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:952:109, endln:952:110
                       |vpiParent:
@@ -20825,7 +20820,7 @@ Design: (unnamed)
                     |vpiName:f
                     |vpiFullName:riscv_isa_pkg::dec32::f
                     |vpiActual:
-                    \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+                    \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
                 |vpiStmt:
                 \_Assignment: , line:956:63, endln:956:74
                   |vpiParent:
@@ -20850,7 +20845,7 @@ Design: (unnamed)
                       \_HierPath: (t.ill), line:956:64, endln:956:68
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (ill), line:956:65, endln:956:68
                       |vpiParent:
@@ -20896,7 +20891,7 @@ Design: (unnamed)
                       \_HierPath: (t.priv), line:956:77, endln:956:82
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (priv), line:956:78, endln:956:82
                       |vpiParent:
@@ -20966,7 +20961,7 @@ Design: (unnamed)
                       \_HierPath: (t.i), line:956:108, endln:956:110
                       |vpiName:t
                       |vpiActual:
-                      \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+                      \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
                     |vpiActual:
                     \_RefObj: (i), line:956:109, endln:956:110
                       |vpiParent:
@@ -21010,7 +21005,7 @@ Design: (unnamed)
             \_HierPath: (t.imm), line:979:2, endln:979:6
             |vpiName:t
             |vpiActual:
-            \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+            \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
           |vpiActual:
           \_RefObj: (imm), line:979:3, endln:979:6
             |vpiParent:
@@ -21039,7 +21034,7 @@ Design: (unnamed)
               \_HierPath: (t.imm), line:980:17, endln:980:22
               |vpiName:t
               |vpiActual:
-              \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+              \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
             |vpiActual:
             \_RefObj: (riscv_isa_pkg::dec32::imm), line:980:19, endln:980:22
               |vpiParent:
@@ -21056,7 +21051,7 @@ Design: (unnamed)
             |vpiName:f
             |vpiFullName:riscv_isa_pkg::dec32::f
             |vpiActual:
-            \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+            \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
           |vpiName:
           \_Identifier: (imm32_f)
             |vpiParent:
@@ -21074,7 +21069,7 @@ Design: (unnamed)
             \_HierPath: (t.i32), line:980:2, endln:980:6
             |vpiName:t
             |vpiActual:
-            \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+            \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
           |vpiActual:
           \_RefObj: (i32), line:980:3, endln:980:6
             |vpiParent:
@@ -21108,7 +21103,7 @@ Design: (unnamed)
             |vpiName:f
             |vpiFullName:riscv_isa_pkg::dec32::f
             |vpiActual:
-            \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+            \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
           |vpiName:
           \_Identifier: (gpr32_f)
             |vpiParent:
@@ -21126,7 +21121,7 @@ Design: (unnamed)
             \_HierPath: (t.gpr), line:981:2, endln:981:6
             |vpiName:t
             |vpiActual:
-            \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+            \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
           |vpiActual:
           \_RefObj: (gpr), line:981:3, endln:981:6
             |vpiParent:
@@ -21146,7 +21141,7 @@ Design: (unnamed)
           |vpiName:t
           |vpiFullName:riscv_isa_pkg::dec32::t
           |vpiActual:
-          \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+          \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (riscv_isa_pkg::dec32::riscv_isa_pkg::ctl_t), line:794:10, endln:794:15
@@ -28237,9 +28232,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:753:3, endln:753:10
   |vpiImportTypespec:
-  \_StructVar: (riscv_isa_pkg::t), line:799:12, endln:799:13
+  \_Variable: (riscv_isa_pkg::t), line:799:12, endln:799:13
   |vpiImportTypespec:
-  \_EnumVar: (riscv_isa_pkg::f), line:800:12, endln:800:13
+  \_Variable: (riscv_isa_pkg::f), line:800:12, endln:800:13
   |vpiImportTypespec:
   \_LogicNet: (riscv_isa_pkg::GPR_ILL), line:192:13, endln:192:20
     |vpiParent:
@@ -28853,14 +28848,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiName:work@r5p_bus_if
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.clk), line:25:16, endln:25:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.clk), line:25:16, endln:25:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.clk), line:25:10, endln:25:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.clk), line:25:16, endln:25:19
+      \_Variable: (work@r5p_bus_if.clk), line:25:16, endln:25:19
       |vpiFullName:work@r5p_bus_if.clk
       |vpiActual:
       \_LogicTypespec: , line:25:10, endln:25:15
@@ -28868,14 +28863,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.clk
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.rst), line:26:16, endln:26:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.rst), line:26:16, endln:26:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.rst), line:26:10, endln:26:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.rst), line:26:16, endln:26:19
+      \_Variable: (work@r5p_bus_if.rst), line:26:16, endln:26:19
       |vpiFullName:work@r5p_bus_if.rst
       |vpiActual:
       \_LogicTypespec: , line:25:10, endln:25:15
@@ -28883,14 +28878,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.rst
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.vld), line:30:16, endln:30:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.vld), line:30:16, endln:30:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.vld), line:30:1, endln:30:6
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.vld), line:30:16, endln:30:19
+      \_Variable: (work@r5p_bus_if.vld), line:30:16, endln:30:19
       |vpiFullName:work@r5p_bus_if.vld
       |vpiActual:
       \_LogicTypespec: , line:25:10, endln:25:15
@@ -28898,14 +28893,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.vld
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.wen), line:31:16, endln:31:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.wen), line:31:16, endln:31:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.wen), line:31:1, endln:31:6
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.wen), line:31:16, endln:31:19
+      \_Variable: (work@r5p_bus_if.wen), line:31:16, endln:31:19
       |vpiFullName:work@r5p_bus_if.wen
       |vpiActual:
       \_LogicTypespec: , line:25:10, endln:25:15
@@ -28913,14 +28908,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.wen
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.adr), line:32:16, endln:32:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.adr), line:32:16, endln:32:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.adr), line:32:1, endln:32:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.adr), line:32:16, endln:32:19
+      \_Variable: (work@r5p_bus_if.adr), line:32:16, endln:32:19
       |vpiFullName:work@r5p_bus_if.adr
       |vpiActual:
       \_LogicTypespec: , line:32:1, endln:32:6
@@ -28928,14 +28923,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.adr
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.ben), line:33:16, endln:33:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.ben), line:33:16, endln:33:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.ben), line:33:1, endln:33:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.ben), line:33:16, endln:33:19
+      \_Variable: (work@r5p_bus_if.ben), line:33:16, endln:33:19
       |vpiFullName:work@r5p_bus_if.ben
       |vpiActual:
       \_LogicTypespec: , line:33:1, endln:33:6
@@ -28943,14 +28938,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.ben
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.wdt), line:34:1, endln:34:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
+      \_Variable: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
       |vpiFullName:work@r5p_bus_if.wdt
       |vpiActual:
       \_LogicTypespec: , line:34:1, endln:34:6
@@ -28958,14 +28953,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.wdt
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.rdt), line:35:1, endln:35:15
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
+      \_Variable: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
       |vpiFullName:work@r5p_bus_if.rdt
       |vpiActual:
       \_LogicTypespec: , line:35:1, endln:35:6
@@ -28973,14 +28968,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.rdt
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
     |vpiParent:
     \_Interface: work@r5p_bus_if (work@r5p_bus_if), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_if.sv, line:19:1, endln:68:25
     |vpiTypespec:
     \_RefTypespec: (work@r5p_bus_if.rdy), line:36:1, endln:36:6
       |vpiParent:
-      \_LogicVar: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
+      \_Variable: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
       |vpiFullName:work@r5p_bus_if.rdy
       |vpiActual:
       \_LogicTypespec: , line:25:10, endln:25:15
@@ -28988,24 +28983,6 @@ Design: (unnamed)
     |vpiFullName:work@r5p_bus_if.rdy
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.clk), line:25:16, endln:25:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.rst), line:26:16, endln:26:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.vld), line:30:16, endln:30:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.wen), line:31:16, endln:31:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.adr), line:32:16, endln:32:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.ben), line:33:16, endln:33:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
-  |vpiReg:
-  \_LogicVar: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
   |vpiParameter:
   \_Parameter: (work@r5p_bus_if.AW), line:20:16, endln:20:23
     |vpiParent:
@@ -29263,31 +29240,31 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:25:10, endln:25:15
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.clk), line:25:16, endln:25:19
+  \_Variable: (work@r5p_bus_if.clk), line:25:16, endln:25:19
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.rst), line:26:16, endln:26:19
+  \_Variable: (work@r5p_bus_if.rst), line:26:16, endln:26:19
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.vld), line:30:16, endln:30:19
+  \_Variable: (work@r5p_bus_if.vld), line:30:16, endln:30:19
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.wen), line:31:16, endln:31:19
+  \_Variable: (work@r5p_bus_if.wen), line:31:16, endln:31:19
   |vpiImportTypespec:
   \_LogicTypespec: , line:32:1, endln:32:6
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.adr), line:32:16, endln:32:19
+  \_Variable: (work@r5p_bus_if.adr), line:32:16, endln:32:19
   |vpiImportTypespec:
   \_LogicTypespec: , line:33:1, endln:33:6
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.ben), line:33:16, endln:33:19
+  \_Variable: (work@r5p_bus_if.ben), line:33:16, endln:33:19
   |vpiImportTypespec:
   \_LogicTypespec: , line:34:1, endln:34:6
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
+  \_Variable: (work@r5p_bus_if.wdt), line:34:16, endln:34:19
   |vpiImportTypespec:
   \_LogicTypespec: , line:35:1, endln:35:6
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
+  \_Variable: (work@r5p_bus_if.rdt), line:35:16, endln:35:19
   |vpiImportTypespec:
-  \_LogicVar: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
+  \_Variable: (work@r5p_bus_if.rdy), line:36:16, endln:36:19
   |vpiImportTypespec:
   \_LogicNet: (work@r5p_bus_if.clk), line:25:16, endln:25:19
     |vpiParent:
@@ -36099,14 +36076,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_dec.sv, line:19:1, endln:83:23
     |vpiName:work@r5p_bus_dec
-  |vpiVariables:
-  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+  |vpiVariable:
+  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
     |vpiParent:
     \_Module: work@r5p_bus_dec (work@r5p_bus_dec), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/soc/r5p_bus_dec.sv, line:19:1, endln:83:23
     |vpiName:i
     |vpiFullName:work@r5p_bus_dec.i
-  |vpiGenVar:
-  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
   |vpiParameter:
   \_Parameter: (work@r5p_bus_dec.AW), line:21:16, endln:21:23
     |vpiParent:
@@ -36251,14 +36226,12 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@r5p_bus_dec), line:46:1, endln:58:14
         |vpiFullName:work@r5p_bus_dec
-        |vpiVariables:
-        \_GenVar: (work@r5p_bus_dec.i), line:46:6, endln:46:7
+        |vpiVariable:
+        \_Variable: (work@r5p_bus_dec.i), line:46:6, endln:46:7
           |vpiParent:
           \_GenFor: (work@r5p_bus_dec), line:46:1, endln:58:14
           |vpiName:i
           |vpiFullName:work@r5p_bus_dec.i
-        |vpiGenVar:
-        \_GenVar: (work@r5p_bus_dec.i), line:46:6, endln:46:7
         |vpiInternalScope:
         \_Begin: (work@r5p_bus_dec.gen_loop), line:46:22, endln:58:14
           |vpiParent:
@@ -36362,7 +36335,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
             |vpiLhs:
             \_BitSelect: (work@r5p_bus_dec.gen_loop.s_dec), line:48:15, endln:48:18
               |vpiParent:
@@ -36378,7 +36351,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_bus_dec.gen_loop.i
                 |vpiActual:
-                \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
           |vpiStmt:
           \_ContAssign: , line:50:10, endln:50:42
             |vpiParent:
@@ -36403,7 +36376,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (s.vld), line:50:32, endln:50:37
                 |vpiParent:
@@ -36451,7 +36424,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].vld.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiActual:
               \_RefObj: (m[i].vld), line:50:15, endln:50:18
                 |vpiParent:
@@ -36485,7 +36458,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (s.wen), line:51:32, endln:51:37
                 |vpiParent:
@@ -36533,7 +36506,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].wen.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiActual:
               \_RefObj: (m[i].wen), line:51:15, endln:51:18
                 |vpiParent:
@@ -36567,7 +36540,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (s.ben), line:52:32, endln:52:37
                 |vpiParent:
@@ -36615,7 +36588,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].ben.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiActual:
               \_RefObj: (m[i].ben), line:52:15, endln:52:18
                 |vpiParent:
@@ -36649,7 +36622,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (s.adr), line:53:32, endln:53:37
                 |vpiParent:
@@ -36697,7 +36670,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].adr.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiActual:
               \_RefObj: (m[i].adr), line:53:15, endln:53:18
                 |vpiParent:
@@ -36731,7 +36704,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (s.wdt), line:54:32, endln:54:37
                 |vpiParent:
@@ -36779,7 +36752,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].wdt.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiActual:
               \_RefObj: (m[i].wdt), line:54:15, endln:54:18
                 |vpiParent:
@@ -36813,7 +36786,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (m[i].rdt), line:56:32, endln:56:40
                 |vpiParent:
@@ -36833,7 +36806,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].rdt.i
                     |vpiActual:
-                    \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                    \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
                 |vpiActual:
                 \_RefObj: (work@r5p_bus_dec.gen_loop.rdt), line:56:37, endln:56:40
                   |vpiParent:
@@ -36866,7 +36839,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_bus_dec.gen_loop.i
                 |vpiActual:
-                \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
           |vpiStmt:
           \_ContAssign: , line:57:10, endln:57:45
             |vpiParent:
@@ -36891,7 +36864,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_bus_dec.gen_loop.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
               |vpiOperand:
               \_HierPath: (m[i].rdy), line:57:32, endln:57:40
                 |vpiParent:
@@ -36911,7 +36884,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:work@r5p_bus_dec.gen_loop.m[i].rdy.i
                     |vpiActual:
-                    \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                    \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
                 |vpiActual:
                 \_RefObj: (work@r5p_bus_dec.gen_loop.rdy), line:57:37, endln:57:40
                   |vpiParent:
@@ -36944,9 +36917,9 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_bus_dec.gen_loop.i
                 |vpiActual:
-                \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+                \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
         |vpiImportTypespec:
-        \_GenVar: (work@r5p_bus_dec.i), line:46:6, endln:46:7
+        \_Variable: (work@r5p_bus_dec.i), line:46:6, endln:46:7
         |vpiForInitStmt:
         \_Assignment: , line:46:6, endln:46:9
           |vpiParent:
@@ -36960,7 +36933,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_GenVar: (work@r5p_bus_dec.i), line:46:6, endln:46:7
+          \_Variable: (work@r5p_bus_dec.i), line:46:6, endln:46:7
         |vpiCondition:
         \_Operation: , line:46:11, endln:46:15
           |vpiParent:
@@ -36973,7 +36946,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_bus_dec.i
             |vpiActual:
-            \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+            \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
           |vpiOperand:
           \_RefObj: (work@r5p_bus_dec.BN), line:46:13, endln:46:15
             |vpiParent:
@@ -36994,7 +36967,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_bus_dec.i
             |vpiActual:
-            \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+            \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
         |vpiStmt:
         \_Begin: (work@r5p_bus_dec.gen_loop), line:46:22, endln:58:14
       |vpiStmt:
@@ -37369,7 +37342,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:25:3, endln:25:8
   |vpiImportTypespec:
-  \_GenVar: (work@r5p_bus_dec.i), line:43:8, endln:43:9
+  \_Variable: (work@r5p_bus_dec.i), line:43:8, endln:43:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:36:1, endln:36:6
   |vpiImportTypespec:
@@ -37506,14 +37479,14 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:61:1, endln:69:4
       |vpiFullName:work@r5p_bus_dec
-      |vpiVariables:
-      \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+      |vpiVariable:
+      \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
         |vpiParent:
         \_Begin: (work@r5p_bus_dec), line:62:1, endln:69:4
         |vpiTypespec:
         \_RefTypespec: (work@r5p_bus_dec.i), line:65:8, endln:65:20
           |vpiParent:
-          \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+          \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
           |vpiFullName:work@r5p_bus_dec.i
           |vpiActual:
           \_IntTypespec: , line:65:8, endln:65:20
@@ -37550,7 +37523,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_bus_dec.i
                 |vpiActual:
-                \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+                \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
             |vpiLhs:
             \_HierPath: (s.rdt), line:66:6, endln:66:10
               |vpiParent:
@@ -37591,7 +37564,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_bus_dec.i
                 |vpiActual:
-                \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+                \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
             |vpiLhs:
             \_HierPath: (s.rdy), line:67:6, endln:67:10
               |vpiParent:
@@ -37624,7 +37597,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+          \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
         |vpiForIncStmt:
         \_Operation: , line:65:32, endln:65:35
           |vpiParent:
@@ -37637,7 +37610,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_bus_dec.i
             |vpiActual:
-            \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+            \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
         |vpiCondition:
         \_Operation: , line:65:26, endln:65:30
           |vpiParent:
@@ -37650,7 +37623,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_bus_dec.i
             |vpiActual:
-            \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+            \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
           |vpiOperand:
           \_RefObj: (work@r5p_bus_dec.BN), line:65:28, endln:65:30
             |vpiParent:
@@ -37668,7 +37641,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntTypespec: , line:65:8, endln:65:20
       |vpiImportTypespec:
-      \_IntVar: (work@r5p_bus_dec.i), line:65:21, endln:65:22
+      \_Variable: (work@r5p_bus_dec.i), line:65:21, endln:65:22
       |vpiStmt:
       \_Assignment: , line:63:3, endln:63:13
         |vpiParent:
@@ -46224,14 +46197,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/core/r5p_lsu.sv, line:21:1, endln:159:19
     |vpiName:work@r5p_lsu
-  |vpiVariables:
-  \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+  |vpiVariable:
+  \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/third_party/tests/Rp32/hdl/rtl/core/r5p_lsu.sv, line:21:1, endln:159:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.rf3.riscv_isa_pkg::lsu_f3_t), line:125:1, endln:125:9
       |vpiParent:
-      \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+      \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
       |vpiName:riscv_isa_pkg::lsu_f3_t
       |vpiFullName:work@r5p_lsu.rf3.riscv_isa_pkg::lsu_f3_t
       |vpiActual:
@@ -46704,7 +46677,7 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.ral
     |vpiNetType:36
   |vpiImportTypespec:
-  \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+  \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
   |vpiImportTypespec:
   \_LogicNet: (work@r5p_lsu.we), line:72:9, endln:72:11
     |vpiParent:
@@ -48802,7 +48775,7 @@ Design: (unnamed)
               |vpiName:rf3
               |vpiFullName:work@r5p_lsu.rf3
               |vpiActual:
-              \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+              \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
         |vpiElseStmt:
         \_IfStmt: , line:132:10, endln:135:4
           |vpiParent:
@@ -48904,7 +48877,7 @@ Design: (unnamed)
                 |vpiName:rf3
                 |vpiFullName:work@r5p_lsu.rf3
                 |vpiActual:
-                \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+                \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
     |vpiAlwaysType:3
   |vpiProcess:
   \_Always: , line:138:1, endln:152:13
@@ -49090,7 +49063,7 @@ Design: (unnamed)
           |vpiName:rf3
           |vpiFullName:work@r5p_lsu.blk_rdt.rf3
           |vpiActual:
-          \_UnionVar: (work@r5p_lsu.rf3), line:125:16, endln:125:19
+          \_Variable: (work@r5p_lsu.rf3), line:125:16, endln:125:19
         |vpiCaseItem:
         \_CaseItem: , line:142:5, endln:142:45
           |vpiParent:
@@ -49895,14 +49868,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_soc_de0_cv (work@r5p_soc_de0_cv), file:${SURELOG_DIR}/third_party/tests/Rp32/r5p_soc_de0_cv.sv, line:55:1, endln:232:26
     |vpiName:work@r5p_soc_de0_cv
-  |vpiVariables:
-  \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+  |vpiVariable:
+  \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
     |vpiParent:
     \_Module: work@r5p_soc_de0_cv (work@r5p_soc_de0_cv), file:${SURELOG_DIR}/third_party/tests/Rp32/r5p_soc_de0_cv.sv, line:55:1, endln:232:26
     |vpiName:i
     |vpiFullName:work@r5p_soc_de0_cv.i
-  |vpiGenVar:
-  \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
   |vpiParameter:
   \_Parameter: (work@r5p_soc_de0_cv.GW), line:162:25, endln:162:31
     |vpiParent:
@@ -49947,14 +49918,12 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@r5p_soc_de0_cv), line:223:1, endln:225:14
         |vpiFullName:work@r5p_soc_de0_cv
-        |vpiVariables:
-        \_GenVar: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
+        |vpiVariable:
+        \_Variable: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
           |vpiParent:
           \_GenFor: (work@r5p_soc_de0_cv), line:223:1, endln:225:14
           |vpiName:i
           |vpiFullName:work@r5p_soc_de0_cv.i
-        |vpiGenVar:
-        \_GenVar: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
         |vpiInternalScope:
         \_Begin: (work@r5p_soc_de0_cv.gen_gpio), line:223:22, endln:225:14
           |vpiParent:
@@ -49989,7 +49958,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_soc_de0_cv.gen_gpio.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+                  \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
               |vpiOperand:
               \_BitSelect: (work@r5p_soc_de0_cv.gen_gpio.gpio_o), line:224:40, endln:224:43
                 |vpiParent:
@@ -50005,7 +49974,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@r5p_soc_de0_cv.gen_gpio.i
                   |vpiActual:
-                  \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+                  \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
               |vpiOperand:
               \_Constant: , line:224:46, endln:224:50
                 |vpiParent:
@@ -50029,9 +49998,9 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@r5p_soc_de0_cv.gen_gpio.i
                 |vpiActual:
-                \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+                \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
         |vpiImportTypespec:
-        \_GenVar: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
+        \_Variable: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
         |vpiForInitStmt:
         \_Assignment: , line:223:6, endln:223:9
           |vpiParent:
@@ -50045,7 +50014,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_GenVar: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
+          \_Variable: (work@r5p_soc_de0_cv.i), line:223:6, endln:223:7
         |vpiCondition:
         \_Operation: , line:223:11, endln:223:15
           |vpiParent:
@@ -50058,7 +50027,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_soc_de0_cv.i
             |vpiActual:
-            \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+            \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
           |vpiOperand:
           \_RefObj: (work@r5p_soc_de0_cv.GW), line:223:13, endln:223:15
             |vpiParent:
@@ -50079,7 +50048,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@r5p_soc_de0_cv.i
             |vpiActual:
-            \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+            \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
         |vpiStmt:
         \_Begin: (work@r5p_soc_de0_cv.gen_gpio), line:223:22, endln:225:14
       |vpiStmt:
@@ -50263,7 +50232,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:162:12, endln:162:24
   |vpiImportTypespec:
-  \_GenVar: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
+  \_Variable: (work@r5p_soc_de0_cv.i), line:221:8, endln:221:9
   |vpiImportTypespec:
   \_LogicNet: (work@r5p_soc_de0_cv.CLOCK_50), line:73:26, endln:73:34
     |vpiParent:

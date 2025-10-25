@@ -16,7 +16,6 @@ CaseItem                                               4
 CaseStmt                                               1
 ClassDefn                                              2
 ClassTypespec                                          2
-ClassVar                                               1
 Constant                                              13
 Design                                                 1
 EventControl                                           2
@@ -33,7 +32,6 @@ Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
 PackedArrayTypespec                                    2
-PackedArrayVar                                         2
 ParamAssign                                            4
 Parameter                                              4
 Port                                                   3
@@ -43,6 +41,7 @@ RefTypespec                                            8
 SourceFile                                             1
 Task                                                   7
 TaskCall                                               4
+Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFsm/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -63,14 +62,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@fsm_class (work@fsm_class), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:1:1, endln:87:10
     |vpiName:work@fsm_class
-  |vpiVariables:
-  \_ClassVar: (work@fsm_class.P), line:81:15, endln:81:16
+  |vpiVariable:
+  \_Variable: (work@fsm_class.P), line:81:15, endln:81:16
     |vpiParent:
     \_Module: work@fsm_class (work@fsm_class), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:1:1, endln:87:10
     |vpiTypespec:
     \_RefTypespec: (work@fsm_class.P.specificFSM), line:81:3, endln:81:14
       |vpiParent:
-      \_ClassVar: (work@fsm_class.P), line:81:15, endln:81:16
+      \_Variable: (work@fsm_class.P), line:81:15, endln:81:16
       |vpiName:specificFSM
       |vpiFullName:work@fsm_class.P.specificFSM
       |vpiActual:
@@ -89,14 +88,14 @@ Design: (unnamed)
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
       |vpiName:baseFsm
     |vpiFullName:work@fsm_class::baseFsm
-    |vpiVariables:
-    \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+    |vpiVariable:
+    \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
       |vpiParent:
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
       |vpiTypespec:
       \_RefTypespec: (work@fsm_class::baseFsm::current_state), line:5:5, endln:5:14
         |vpiParent:
-        \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+        \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
         |vpiFullName:work@fsm_class::baseFsm::current_state
         |vpiActual:
         \_PackedArrayTypespec: , line:5:5, endln:5:14
@@ -105,14 +104,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+    |vpiVariable:
+    \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
       |vpiParent:
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
       |vpiTypespec:
       \_RefTypespec: (work@fsm_class::baseFsm::next_state), line:6:5, endln:6:14
         |vpiParent:
-        \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+        \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
         |vpiFullName:work@fsm_class::baseFsm::next_state
         |vpiActual:
         \_PackedArrayTypespec: , line:6:5, endln:6:14
@@ -157,7 +156,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_class::baseFsm::next_state_transition::next_state
             |vpiActual:
-            \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+            \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
         |vpiStmt:
         \_Assignment: , line:12:9, endln:12:41
           |vpiParent:
@@ -179,7 +178,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_class::baseFsm::next_state_transition::next_state
             |vpiActual:
-            \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+            \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
             |vpiIndex:
             \_RefObj: (work@fsm_class::baseFsm::next_state_transition::state_to_bit), line:12:21, endln:12:33
               |vpiParent:
@@ -260,7 +259,7 @@ Design: (unnamed)
               |vpiName:current_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::current_state
               |vpiActual:
-              \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+              \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
           |vpiElseStmt:
           \_Assignment: , line:21:9, endln:21:36
             |vpiParent:
@@ -273,7 +272,7 @@ Design: (unnamed)
               |vpiName:next_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::next_state
               |vpiActual:
-              \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+              \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
             |vpiLhs:
             \_RefObj: (work@fsm_class::baseFsm::current_state_transition::current_state), line:21:9, endln:21:22
               |vpiParent:
@@ -281,7 +280,7 @@ Design: (unnamed)
               |vpiName:current_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::current_state
               |vpiActual:
-              \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+              \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
       |vpiTypedef:
       \_LogicTypespec: , line:15:42, endln:15:47
         |vpiParent:
@@ -380,11 +379,11 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:5:5, endln:5:14
     |vpiImportTypespec:
-    \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+    \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:6:5, endln:6:14
     |vpiImportTypespec:
-    \_PackedArrayVar: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+    \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
     |vpiMethod:
     \_Task: (work@fsm_class::baseFsm::next_state_transition), line:8:5, endln:14:12
     |vpiMethod:
@@ -791,7 +790,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_00_BIT), line:72:25, endln:72:37
                   |vpiParent:
@@ -822,7 +821,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_01_BIT), line:73:25, endln:73:37
                   |vpiParent:
@@ -853,7 +852,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_10_BIT), line:74:25, endln:74:37
                   |vpiParent:
@@ -884,7 +883,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_PackedArrayVar: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_11_BIT), line:75:25, endln:75:37
                   |vpiParent:
@@ -983,7 +982,7 @@ Design: (unnamed)
     |vpiName:x
     |vpiFullName:work@fsm_class.x
   |vpiImportTypespec:
-  \_ClassVar: (work@fsm_class.P), line:81:15, endln:81:16
+  \_Variable: (work@fsm_class.P), line:81:15, endln:81:16
   |vpiDefName:work@fsm_class
   |vpiClassDefn:
   \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
@@ -1063,7 +1062,7 @@ Design: (unnamed)
             |vpiName:P
             |vpiFullName:work@fsm_class.P
             |vpiActual:
-            \_ClassVar: (work@fsm_class.P), line:81:15, endln:81:16
+            \_Variable: (work@fsm_class.P), line:81:15, endln:81:16
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:85:3, endln:86:15
@@ -1089,7 +1088,7 @@ Design: (unnamed)
           |vpiName:P
           |vpiFullName:work@fsm_class.P
           |vpiActual:
-          \_ClassVar: (work@fsm_class.P), line:81:15, endln:81:16
+          \_Variable: (work@fsm_class.P), line:81:15, endln:81:16
     |vpiAlwaysType:1
 |vpiTypedef:
 \_ModuleTypespec: (fsm_class)

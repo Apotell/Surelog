@@ -21,10 +21,8 @@ Identifier                                            10
 IfStmt                                                 1
 Initial                                                1
 IntTypespec                                            2
-IntVar                                                 2
 LogicNet                                               1
 LogicTypespec                                          3
-LogicVar                                               3
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
@@ -37,6 +35,7 @@ SourceFile                                             1
 Task                                                   2
 TaskDecl                                               1
 UnsupportedTypespec                                    1
+Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMini/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/ClassMini/dut.sv:22:5: Unsupported Typespec: id:29, type:RefTypespec, name:pack::doorOpen.
@@ -68,14 +67,14 @@ Design: (unnamed)
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiName:door
     |vpiFullName:pack::door
-    |vpiVariables:
-    \_IntVar: (pack::door::state), line:4:9, endln:4:14
+    |vpiVariable:
+    \_Variable: (pack::door::state), line:4:9, endln:4:14
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiTypespec:
       \_RefTypespec: (pack::door::state), line:4:5, endln:4:8
         |vpiParent:
-        \_IntVar: (pack::door::state), line:4:9, endln:4:14
+        \_Variable: (pack::door::state), line:4:9, endln:4:14
         |vpiFullName:pack::door::state
         |vpiActual:
         \_IntTypespec: , line:4:5, endln:4:8
@@ -85,14 +84,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_IntVar: (pack::door::timer), line:5:9, endln:5:14
+    |vpiVariable:
+    \_Variable: (pack::door::timer), line:5:9, endln:5:14
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiTypespec:
       \_RefTypespec: (pack::door::timer), line:5:5, endln:5:8
         |vpiParent:
-        \_IntVar: (pack::door::timer), line:5:9, endln:5:14
+        \_Variable: (pack::door::timer), line:5:9, endln:5:14
         |vpiFullName:pack::door::timer
         |vpiActual:
         \_IntTypespec: , line:4:5, endln:4:8
@@ -102,14 +101,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_LogicVar: (pack::door::open), line:6:11, endln:6:15
+    |vpiVariable:
+    \_Variable: (pack::door::open), line:6:11, endln:6:15
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiTypespec:
       \_RefTypespec: (pack::door::open), line:6:5, endln:6:10
         |vpiParent:
-        \_LogicVar: (pack::door::open), line:6:11, endln:6:15
+        \_Variable: (pack::door::open), line:6:11, endln:6:15
         |vpiFullName:pack::door::open
         |vpiActual:
         \_LogicTypespec: , line:6:5, endln:6:10
@@ -118,14 +117,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_LogicVar: (pack::door::lock), line:6:16, endln:6:20
+    |vpiVariable:
+    \_Variable: (pack::door::lock), line:6:16, endln:6:20
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiTypespec:
       \_RefTypespec: (pack::door::lock), line:6:5, endln:6:10
         |vpiParent:
-        \_LogicVar: (pack::door::lock), line:6:16, endln:6:20
+        \_Variable: (pack::door::lock), line:6:16, endln:6:20
         |vpiFullName:pack::door::lock
         |vpiActual:
         \_LogicTypespec: , line:6:5, endln:6:10
@@ -134,14 +133,14 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiVariables:
-    \_LogicVar: (pack::door::clock), line:6:21, endln:6:26
+    |vpiVariable:
+    \_Variable: (pack::door::clock), line:6:21, endln:6:26
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
       |vpiTypespec:
       \_RefTypespec: (pack::door::clock), line:6:5, endln:6:10
         |vpiParent:
-        \_LogicVar: (pack::door::clock), line:6:21, endln:6:26
+        \_Variable: (pack::door::clock), line:6:21, endln:6:26
         |vpiFullName:pack::door::clock
         |vpiActual:
         \_LogicTypespec: , line:6:5, endln:6:10
@@ -150,12 +149,6 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiReg:
-    \_LogicVar: (pack::door::open), line:6:11, endln:6:15
-    |vpiReg:
-    \_LogicVar: (pack::door::lock), line:6:16, endln:6:20
-    |vpiReg:
-    \_LogicVar: (pack::door::clock), line:6:21, endln:6:26
     |vpiParameter:
     \_Parameter: (pack::door::OPENED), line:7:15, endln:7:32
       |vpiParent:
@@ -247,17 +240,17 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntTypespec: , line:4:5, endln:4:8
     |vpiImportTypespec:
-    \_IntVar: (pack::door::state), line:4:9, endln:4:14
+    \_Variable: (pack::door::state), line:4:9, endln:4:14
     |vpiImportTypespec:
-    \_IntVar: (pack::door::timer), line:5:9, endln:5:14
+    \_Variable: (pack::door::timer), line:5:9, endln:5:14
     |vpiImportTypespec:
     \_LogicTypespec: , line:6:5, endln:6:10
     |vpiImportTypespec:
-    \_LogicVar: (pack::door::open), line:6:11, endln:6:15
+    \_Variable: (pack::door::open), line:6:11, endln:6:15
     |vpiImportTypespec:
-    \_LogicVar: (pack::door::lock), line:6:16, endln:6:20
+    \_Variable: (pack::door::lock), line:6:16, endln:6:20
     |vpiImportTypespec:
-    \_LogicVar: (pack::door::clock), line:6:21, endln:6:26
+    \_Variable: (pack::door::clock), line:6:21, endln:6:26
     |vpiVirtual:1
     |vpiMethod:
     \_Task: (pack::door::door_fsm), line:10:5, endln:10:34
@@ -307,7 +300,7 @@ Design: (unnamed)
             |vpiName:open
             |vpiFullName:pack::doorOpen::door_fsm::open
             |vpiActual:
-            \_LogicVar: (pack::door::open), line:6:11, endln:6:15
+            \_Variable: (pack::door::open), line:6:11, endln:6:15
           |vpiStmt:
           \_Assignment: , line:15:20, endln:15:34
             |vpiParent:
@@ -329,7 +322,7 @@ Design: (unnamed)
               |vpiName:state
               |vpiFullName:pack::doorOpen::door_fsm::state
               |vpiActual:
-              \_IntVar: (pack::door::state), line:4:9, endln:4:14
+              \_Variable: (pack::door::state), line:4:9, endln:4:14
       |vpiImportTypespec:
       \_Task: (pack::doorOpen::door_fsm), line:14:5, endln:16:12
       |vpiExtends:

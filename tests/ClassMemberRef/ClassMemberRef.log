@@ -160,10 +160,8 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  1
 BitTypespec                                            3
-BitVar                                                 1
 ClassDefn                                              2
 ClassTypespec                                          2
-ClassVar                                               1
 Constant                                               1
 Design                                                 1
 Function                                               2
@@ -181,6 +179,7 @@ RefObj                                                 6
 RefTypespec                                            7
 SourceFile                                             1
 UnsupportedTypespec                                    1
+Variable                                               2
 VoidTypespec                                           2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/surelog.uhdm ...
@@ -213,14 +212,14 @@ Design: (unnamed)
       \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
       |vpiName:m_uvm_printer_knobs
     |vpiFullName:pkg::m_uvm_printer_knobs
-    |vpiVariables:
-    \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+    |vpiVariable:
+    \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
       |vpiParent:
       \_ClassDefn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
       |vpiTypespec:
       \_RefTypespec: (pkg::m_uvm_printer_knobs::identifier), line:5:3, endln:5:6
         |vpiParent:
-        \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+        \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
         |vpiFullName:pkg::m_uvm_printer_knobs::identifier
         |vpiActual:
         \_BitTypespec: , line:5:3, endln:5:6
@@ -232,7 +231,7 @@ Design: (unnamed)
       |vpiExpr:
       \_Constant: , line:5:20, endln:5:21
         |vpiParent:
-        \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+        \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
@@ -244,7 +243,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_BitTypespec: , line:5:3, endln:5:6
     |vpiImportTypespec:
-    \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+    \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
   |vpiInternalScope:
   \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
     |vpiParent:
@@ -255,14 +254,14 @@ Design: (unnamed)
       \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
       |vpiName:uvm_printer
     |vpiFullName:pkg::uvm_printer
-    |vpiVariables:
-    \_ClassVar: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+    |vpiVariable:
+    \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
       |vpiParent:
       \_ClassDefn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
       |vpiTypespec:
       \_RefTypespec: (pkg::uvm_printer::knobs::m_uvm_printer_knobs), line:12:3, endln:12:22
         |vpiParent:
-        \_ClassVar: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+        \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
         |vpiName:m_uvm_printer_knobs
         |vpiFullName:pkg::uvm_printer::knobs::m_uvm_printer_knobs
         |vpiActual:
@@ -385,21 +384,21 @@ Design: (unnamed)
             \_HierPath: (knobs.identifier), line:17:6, endln:17:17
             |vpiName:knobs
             |vpiActual:
-            \_ClassVar: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+            \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
           |vpiActual:
           \_RefObj: (identifier), line:17:7, endln:17:17
             |vpiParent:
             \_HierPath: (knobs.identifier), line:17:6, endln:17:17
             |vpiName:identifier
             |vpiActual:
-            \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+            \_Variable: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
           |vpiName:knobs.identifier
       |vpiInstance:
       \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
     |vpiImportTypespec:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
     |vpiImportTypespec:
-    \_ClassVar: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+    \_Variable: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
     |vpiImportTypespec:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
     |vpiMethod:

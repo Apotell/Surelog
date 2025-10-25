@@ -163,7 +163,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-ArrayVar                                               2
 Assignment                                             4
 Begin                                                  1
 ClassDefn                                              3
@@ -174,7 +173,6 @@ Function                                               1
 HierPath                                               2
 Identifier                                             7
 IntTypespec                                            1
-IntVar                                                 1
 LogicNet                                               1
 MethodFuncCall                                         1
 Module                                                 1
@@ -186,6 +184,7 @@ RefTypespec                                            9
 SourceFile                                             1
 TypeParameter                                          2
 UnsupportedTypespec                                    1
+Variable                                               3
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:54, name: cb_".
@@ -234,14 +233,14 @@ Design: (unnamed)
       \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
       |vpiName:uvm_callback
     |vpiFullName:pkg::uvm_callback
-    |vpiVariables:
-    \_IntVar: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+    |vpiVariable:
+    \_Variable: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
       |vpiParent:
       \_ClassDefn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
       |vpiTypespec:
       \_RefTypespec: (pkg::uvm_callback::get_inst_id), line:7:4, endln:7:7
         |vpiParent:
-        \_IntVar: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+        \_Variable: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
         |vpiFullName:pkg::uvm_callback::get_inst_id
         |vpiActual:
         \_IntTypespec: , line:7:4, endln:7:7
@@ -259,7 +258,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntTypespec: , line:7:4, endln:7:7
     |vpiImportTypespec:
-    \_IntVar: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+    \_Variable: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
   |vpiInternalScope:
   \_ClassDefn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
     |vpiParent:
@@ -313,40 +312,36 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
         |vpiFullName:pkg::uvm_callbacks::get_all
-        |vpiVariables:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+        |vpiVariable:
+        \_Variable: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
           |vpiParent:
           \_Begin: (pkg::uvm_callbacks::get_all)
           |vpiTypespec:
           \_RefTypespec: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:3, endln:15:5
             |vpiParent:
-            \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+            \_Variable: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
             |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
             |vpiActual:
             \_ArrayTypespec: , line:15:3, endln:15:28
           |vpiName:callbacks_to_append
           |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
-        |vpiVariables:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+        |vpiVariable:
+        \_Variable: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
           |vpiParent:
           \_Begin: (pkg::uvm_callbacks::get_all)
           |vpiTypespec:
           \_RefTypespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:3, endln:16:5
             |vpiParent:
-            \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+            \_Variable: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
             |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
             |vpiActual:
             \_ArrayTypespec: , line:16:3, endln:16:35
           |vpiName:unique_callbacks_to_append
           |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
-        |vpiRegArray:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-        |vpiRegArray:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
         |vpiImportTypespec:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+        \_Variable: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
         |vpiImportTypespec:
-        \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+        \_Variable: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
         |vpiStmt:
         \_Assignment: , line:19:3, endln:19:90
           |vpiParent:
@@ -364,7 +359,7 @@ Design: (unnamed)
               |vpiName:callbacks_to_append
               |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
               |vpiActual:
-              \_ArrayVar: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+              \_Variable: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
             |vpiActual:
             \_MethodFuncCall: (unique), line:19:52, endln:19:90
               |vpiParent:
@@ -404,7 +399,7 @@ Design: (unnamed)
             |vpiName:unique_callbacks_to_append
             |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
             |vpiActual:
-            \_ArrayVar: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+            \_Variable: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
       |vpiTypedef:
       \_VoidTypespec: , line:12:11, endln:12:15
         |vpiParent:

@@ -111,7 +111,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-ArrayVar                                               2
 Assignment                                             2
 Begin                                                  3
 BitSelect                                              1
@@ -122,20 +121,19 @@ Constant                                               5
 Design                                                 1
 ForeachStmt                                            2
 Function                                               1
-HierPath                                               1
 Identifier                                             3
 Package                                                1
 Range                                                  4
-RefObj                                                 8
+RefObj                                                 7
 RefTypespec                                           11
-RefVar                                                 2
 SourceFile                                             1
 UnsupportedTypespec                                    2
+Variable                                               4
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachForeach/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:13:28: Unsupported Typespec: id:31, type:RefTypespec, name:p.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:14:38: Unsupported Typespec: id:39, type:RefTypespec, name:next_p.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:13:28: Unsupported Typespec: id:30, type:RefTypespec, name:p.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:14:38: Unsupported Typespec: id:35, type:RefTypespec, name:next_p.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -164,14 +162,14 @@ Design: (unnamed)
       \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
       |vpiName:uvm_phase
     |vpiFullName:uvm::uvm_phase
-    |vpiVariables:
-    \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
+    |vpiVariable:
+    \_Variable: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
       |vpiParent:
       \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
       |vpiTypespec:
       \_RefTypespec: (uvm::uvm_phase::m_predecessors), line:4:3, endln:4:6
         |vpiParent:
-        \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
+        \_Variable: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
         |vpiFullName:uvm::uvm_phase::m_predecessors
         |vpiActual:
         \_ArrayTypespec: , line:4:3, endln:4:33
@@ -180,8 +178,6 @@ Design: (unnamed)
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-    |vpiRegArray:
-    \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
     |vpiInternalScope:
     \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
       |vpiParent:
@@ -197,22 +193,20 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
         |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes
-        |vpiVariables:
-        \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
+        |vpiVariable:
+        \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
           |vpiParent:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
           |vpiTypespec:
           \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:6, endln:11:9
             |vpiParent:
-            \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
+            \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
             |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors
             |vpiActual:
             \_ArrayTypespec: , line:11:6, endln:11:33
           |vpiName:predecessors
           |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors
           |vpiSigned:1
-        |vpiRegArray:
-        \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
         |vpiInternalScope:
         \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:6, endln:17:9
           |vpiParent:
@@ -254,7 +248,7 @@ Design: (unnamed)
                     |vpiName:predecessors
                     |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors
                     |vpiActual:
-                    \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
+                    \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
                     |vpiIndex:
                     \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:15:27, endln:15:33
                       |vpiParent:
@@ -262,44 +256,31 @@ Design: (unnamed)
                       |vpiName:next_p
                       |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p
                       |vpiActual:
-                      \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
+                      \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
               |vpiImportTypespec:
-              \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
+              \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
                 |vpiParent:
                 \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:12, endln:16:15
                 |vpiTypespec:
                 \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p::next_p), line:14:38, endln:14:44
                   |vpiParent:
-                  \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
+                  \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
                   |vpiName:next_p
                   |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p::next_p
                   |vpiActual:
                   \_UnsupportedTypespec: (next_p), line:14:38, endln:14:44
                 |vpiName:next_p
                 |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p
-              |vpiVariables:
-              \_HierPath: (p.m_predecessors), line:14:21, endln:14:37
+              |vpiVariable:
+              \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:14:21, endln:14:22
                 |vpiParent:
                 \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:12, endln:16:15
+                |vpiName:p
+                |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p
                 |vpiActual:
-                \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:14:21, endln:14:22
-                  |vpiParent:
-                  \_HierPath: (p.m_predecessors), line:14:21, endln:14:37
-                  |vpiName:p
-                  |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p
-                  |vpiActual:
-                  \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
-                |vpiActual:
-                \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::m_predecessors), line:14:23, endln:14:37
-                  |vpiParent:
-                  \_HierPath: (p.m_predecessors), line:14:21, endln:14:37
-                  |vpiName:m_predecessors
-                  |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::m_predecessors
-                  |vpiActual:
-                  \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
-                |vpiFullName:p.m_predecessors
+                \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
               |vpiLoopVars:
-              \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
+              \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
               |vpiStmt:
               \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:47, endln:16:15
             |vpiTypedef:
@@ -312,29 +293,29 @@ Design: (unnamed)
             |vpiStmt:
             \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:12, endln:16:15
           |vpiImportTypespec:
-          \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
+          \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
             |vpiParent:
             \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:6, endln:17:9
             |vpiTypespec:
             \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p::p), line:13:28, endln:13:29
               |vpiParent:
-              \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
+              \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
               |vpiName:p
               |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p::p
               |vpiActual:
               \_UnsupportedTypespec: (p), line:13:28, endln:13:29
             |vpiName:p
             |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p
-          |vpiVariables:
+          |vpiVariable:
           \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:13:15, endln:13:27
             |vpiParent:
             \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:6, endln:17:9
             |vpiName:predecessors
             |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors
             |vpiActual:
-            \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
+            \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
           |vpiLoopVars:
-          \_RefVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
+          \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
           |vpiStmt:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:32, endln:17:9
         |vpiTypedef:
@@ -349,7 +330,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_BitTypespec: , line:11:6, endln:11:9
         |vpiImportTypespec:
-        \_ArrayVar: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
+        \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
         |vpiImportTypespec:
         \_UnsupportedTypespec: (p), line:13:28, endln:13:29
         |vpiStmt:
@@ -401,7 +382,7 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_ArrayTypespec: , line:4:3, endln:4:33
     |vpiImportTypespec:
-    \_ArrayVar: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
+    \_Variable: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
     |vpiImportTypespec:
     \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
     |vpiMethod:

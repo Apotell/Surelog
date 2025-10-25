@@ -298,7 +298,6 @@ Interface                                              2
 InterfaceTypespec                                      4
 LogicNet                                               6
 LogicTypespec                                          4
-LogicVar                                               3
 Modport                                                4
 Module                                                 4
 ModuleTypespec                                         3
@@ -312,6 +311,7 @@ RefTypespec                                           15
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                    3
+Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:39, type:RefTypespec, name:id_t1.
@@ -335,14 +335,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiName:work@AXI_BUS
-  |vpiVariables:
-  \_LogicVar: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+  |vpiVariable:
+  \_Variable: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiTypespec:
     \_RefTypespec: (work@AXI_BUS.aw_id.id_t1), line:14:3, endln:14:8
       |vpiParent:
-      \_LogicVar: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+      \_Variable: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
       |vpiName:id_t1
       |vpiFullName:work@AXI_BUS.aw_id.id_t1
       |vpiActual:
@@ -351,14 +351,14 @@ Design: (unnamed)
     |vpiFullName:work@AXI_BUS.aw_id
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+  |vpiVariable:
+  \_Variable: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiTypespec:
     \_RefTypespec: (work@AXI_BUS.rw_id.id_t), line:20:3, endln:20:7
       |vpiParent:
-      \_LogicVar: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+      \_Variable: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
       |vpiName:id_t
       |vpiFullName:work@AXI_BUS.rw_id.id_t
       |vpiActual:
@@ -367,10 +367,6 @@ Design: (unnamed)
     |vpiFullName:work@AXI_BUS.rw_id
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
-  |vpiReg:
-  \_LogicVar: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
   |vpiParameter:
   \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
     |vpiParent:
@@ -468,9 +464,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
   |vpiImportTypespec:
-  \_LogicVar: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+  \_Variable: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
   |vpiImportTypespec:
-  \_LogicVar: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+  \_Variable: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
   |vpiImportTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
   |vpiImportTypespec:
@@ -549,14 +545,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
     |vpiName:work@mem_if
-  |vpiVariables:
-  \_LogicVar: (work@mem_if.clk), line:29:30, endln:29:33
+  |vpiVariable:
+  \_Variable: (work@mem_if.clk), line:29:30, endln:29:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:29:25, endln:29:29
       |vpiParent:
-      \_LogicVar: (work@mem_if.clk), line:29:30, endln:29:33
+      \_Variable: (work@mem_if.clk), line:29:30, endln:29:33
       |vpiFullName:work@mem_if.clk
       |vpiActual:
       \_LogicTypespec: , line:29:25, endln:29:29
@@ -564,8 +560,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.clk
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@mem_if.clk), line:29:30, endln:29:33
   |vpiTypedef:
   \_LogicTypespec: , line:29:25, endln:29:29
     |vpiParent:
@@ -573,7 +567,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:29:25, endln:29:29
   |vpiImportTypespec:
-  \_LogicVar: (work@mem_if.clk), line:29:30, endln:29:33
+  \_Variable: (work@mem_if.clk), line:29:30, endln:29:33
   |vpiImportTypespec:
   \_LogicNet: (work@mem_if.clk), line:29:30, endln:29:33
     |vpiParent:

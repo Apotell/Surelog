@@ -1270,6 +1270,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       result = tps;
       break;
     }
+    case VObjectType::paSigning_Signed: {
+      break;
+    }
     case VObjectType::paSigning_Unsigned: {
       if (isVariable) {
         // 6.8 Variable declarations, implicit type

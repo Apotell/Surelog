@@ -80,7 +80,7 @@ class CompileFileContent final {
         m_declOnly(declOnly) {}
   CompileFileContent(const CompileFileContent&) = delete;
 
-  bool compile(Elaborate elaborate, Reduce reduce);
+  bool compile();
 
  private:
   bool collectObjects_();

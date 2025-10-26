@@ -27,23 +27,15 @@
 #include "Surelog/DesignCompile/CompileDesign.h"
 #include "Surelog/DesignCompile/CompileHelper.h"
 #include "Surelog/Expression/Value.h"
-#include "Surelog/SourceCompile/Compiler.h"
-#include "Surelog/SourceCompile/SymbolTable.h"
-#include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
 #include <uhdm/ExprEval.h>
-#include <uhdm/clone_tree.h>
 #include <uhdm/expr.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/uhdm_types.h>
 
-#include <bitset>
 #include <cstdint>
-#include <iostream>
 #include <string>
-#include <string_view>
 #include <vector>
 
 namespace SURELOG {
@@ -55,11 +47,6 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
                                     CompileDesign* compileDesign,
                                     ValuedComponentI* instance, PathId fileId,
                                     uint32_t lineNumber, uhdm::Any* pexpr) {
-  if (m_reduce == Reduce::Yes) {
-    invalidValue = true;
-    return nullptr;
-  }
-
   uhdm::GetObjectFunctor getObjectFunctor =
       [&](std::string_view name, const uhdm::Any* inst,
           const uhdm::Any* pexpr) -> uhdm::Any* {
@@ -68,9 +55,8 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
   uhdm::GetObjectFunctor getValueFunctor =
       [&](std::string_view name, const uhdm::Any* inst,
           const uhdm::Any* pexpr) -> uhdm::Any* {
-    return (uhdm::Expr*)getValue(name, component, compileDesign, Reduce::Yes,
-                                 instance, fileId, lineNumber,
-                                 (uhdm::Any*)pexpr, false);
+    return (uhdm::Expr*)getValue(name, component, compileDesign, instance,
+                                 fileId, lineNumber, (uhdm::Any*)pexpr, false);
   };
   uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
       [&](std::string_view name, const uhdm::Any* inst) -> uhdm::TaskFunc* {

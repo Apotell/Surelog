@@ -194,7 +194,7 @@ void ResolveSymbols::createFastLookup() {
                 }
 
                 m_fileContent->addClassDefinition(fullSubName, def);
-                mdef->getUnelabMmodule()->addClassDefinition(name, def);
+                mdef->addClassDefinition(name, def);
               } else {
                 ModuleDefinition* def = new ModuleDefinition(
                     m_session, fullSubName, m_fileContent, subobject, s);

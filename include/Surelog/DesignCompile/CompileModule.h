@@ -75,7 +75,7 @@ class CompileModule final {
         m_instance(instance) {}
   CompileModule(const CompileModule&) = delete;
 
-  bool compile(Elaborate elaborate, Reduce reduce);
+  bool compile();
 
  private:
   enum CollectType { FUNCTION, DEFINITION, GENERATE_REGIONS, OTHER };

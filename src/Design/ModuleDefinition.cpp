@@ -58,7 +58,6 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
                                    uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr), m_name(name), m_udpDefn(nullptr) {
   addFileContent(fC, nodeId);
-  m_unelabModule = this;
   switch (fC->Type(nodeId)) {
     // case VObjectType::paConfig_declaration:
     case VObjectType::paUdp_declaration: {

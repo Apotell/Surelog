@@ -102,12 +102,6 @@ class ModuleDefinition final : public DesignComponent,
   }
   ClassDefinition* getClassDefinition(std::string_view name);
 
-  void setGenBlockId(NodeId id) {
-    m_genBlockId = id;
-    if (m_unelabModule != this) m_unelabModule->setGenBlockId(id);
-  }
-
-  NodeId getGenBlockId() const { return m_genBlockId; }
   uhdm::UdpDefn* getUdpDefn() { return m_udpDefn; }
 
   uhdm::AttributeCollection* getAttributes() const { return m_attributes; }
@@ -151,16 +145,12 @@ class ModuleDefinition final : public DesignComponent,
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
-  ModuleDefinition* getUnelabMmodule() { return m_unelabModule; }
-
  private:
   std::string m_name;
   std::string m_endLabel;
   ModportSignalMap m_modportSignalMap;
   ModportClockingBlockMap m_modportClockingBlockMap;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-  NodeId m_genBlockId;
-  ModuleDefinition* m_unelabModule = nullptr;
   uhdm::UdpDefn* m_udpDefn = nullptr;
 
   uhdm::AttributeCollection* m_attributes = nullptr;

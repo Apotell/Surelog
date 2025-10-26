@@ -45,11 +45,6 @@ Package::Package(Session* session, std::string_view name, Library* library,
       m_library(library),
       m_exprBuilder(session) {
   addFileContent(fC, nodeId);
-  m_unElabPackage = this;
-  // if (!name.empty()) {  // avoid loop
-  //   m_unElabPackage = new Package("", library, fC, nodeId);
-  //   m_unElabPackage->m_name = name;
-  // }
 
   uhdm::Package* const instance = serializer.make<uhdm::Package>();
   if (!name.empty()) instance->setName(name);

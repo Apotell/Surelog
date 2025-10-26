@@ -39,6 +39,7 @@
 
 // uhdm
 #include <uhdm/Serializer.h>
+#include <uhdm/Utils.h>
 #include <uhdm/uhdm.h>
 
 namespace SURELOG {
@@ -488,9 +489,6 @@ const uhdm::Any* ObjectBinder::findInInstance(std::string_view name,
           findInCollection(name, refType, scope->getNets(), scope)) {
     return actual;
   } else if (const uhdm::Any* const actual = findInCollection(
-                 name, refType, scope->getArrayNets(), scope)) {
-    return actual;
-  } else if (const uhdm::Any* const actual = findInCollection(
                  name, refType, scope->getTaskFuncs(), scope)) {
     return actual;
   } else if (const uhdm::Any* const actual =
@@ -850,6 +848,12 @@ const uhdm::Any* ObjectBinder::findInDesign(std::string_view name,
                  findInCollection(name, refType, scope->getAllUdps(), scope)) {
     return actual;
   }
+  if (refType == RefType::Typespec) {
+    if (const uhdm::Any* const actual =
+            findInCollection(name, refType, scope->getTypespecs(), scope)) {
+      return actual;
+    }
+  }
 
   return nullptr;
 }
@@ -917,8 +921,8 @@ const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
                 if (const uhdm::RefTypespec* const iod2 = tm->getTypespec()) {
                   return iod2->getActual();
                 }
-              } else if (const uhdm::LogicNet* const ln =
-                             ro1->getActual<uhdm::LogicNet>()) {
+              } else if (const uhdm::Net* const ln =
+                             ro1->getActual<uhdm::Net>()) {
                 // Ideally logic_net::Typespec should be valid but for
                 // too many (or rather most) cases, the Typespec isn't set.
                 // So, use the corresponding port in the parent module to
@@ -1459,7 +1463,7 @@ bool ObjectBinder::createDefaultNets() {
         parent = parent->getParent();
       }
 
-      uhdm::LogicNet* const net = m_serializer.make<uhdm::LogicNet>();
+      uhdm::Net* const net = m_serializer.make<uhdm::Net>();
       net->setName(object->getName());
       net->setParent(const_cast<uhdm::Any*>(parent));
       net->setNetType(UhdmWriter::getVpiNetType(defaultNetType));
@@ -1477,6 +1481,66 @@ bool ObjectBinder::createDefaultNets() {
 
 void ObjectBinder::bind(const uhdm::Design* object, bool report) {
   listenDesign(object);
+
+  uhdm::Serializer* const serializer = object->getSerializer();
+  if (uhdm::Factory* const factory =
+          serializer->getFactory<uhdm::ArrayTypespec>()) {
+    for (uhdm::Any* source : factory->getObjects()) {
+      uhdm::ArrayTypespec* const at = any_cast<uhdm::ArrayTypespec>(source);
+      if (at->getArrayType() == vpiAssocArray) {
+        if (uhdm::RangeCollection* const rc = at->getRanges()) {
+          if (rc->size() == 1) {
+            if (uhdm::Range* const r = rc->at(0)) {
+              if (uhdm::Operation* const operation =
+                      r->getRightExpr<uhdm::Operation>()) {
+                if (uhdm::AnyCollection* const operands =
+                        operation->getOperands()) {
+                  if (operands->size() == 1) {
+                    if (uhdm::RefObj* const operand =
+                            any_cast<uhdm::RefObj>(operands->at(0))) {
+                      bool switchToStaticArray = false;
+                      uhdm::Typespec* const typespec =
+                          uhdm::getTypespec(operand->getActual());
+                      if (typespec != nullptr) {
+                        switch (typespec->getUhdmType()) {
+                          case uhdm::UhdmType::IntTypespec:
+                          case uhdm::UhdmType::IntegerTypespec:
+                          case uhdm::UhdmType::LongIntTypespec:
+                          case uhdm::UhdmType::ShortIntTypespec: {
+                            switchToStaticArray = true;
+                          } break;
+                          default:
+                            break;
+                        }
+                      }
+
+                      if (switchToStaticArray) {
+                        at->setArrayType(vpiStaticArray);
+                      } else {
+                        uhdm::RefTypespec* const rt =
+                            serializer->make<uhdm::RefTypespec>();
+                        rt->setParent(at);
+                        rt->setName(operand->getName());
+                        rt->setFile(operand->getFile());
+                        rt->setStartLine(operand->getStartLine());
+                        rt->setStartColumn(operand->getStartColumn());
+                        rt->setEndLine(operand->getEndLine());
+                        rt->setEndColumn(operand->getEndColumn());
+                        at->setIndexTypespec(rt);
+                        at->setRanges(nullptr);
+                        operand->setParent(nullptr);
+                        enterRefTypespec(rt, 0);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   while (createDefaultNets()) {
     // Nothing to do here!
   }

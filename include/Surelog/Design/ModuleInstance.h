@@ -47,7 +47,6 @@ namespace SURELOG {
 class DesignComponent;
 class FileContent;
 class ModuleInstance;
-class Netlist;
 class Parameter;
 class PathId;
 class SymbolTable;
@@ -104,10 +103,6 @@ class ModuleInstance final : public ValuedComponentI {
   uint32_t getDepth() const;
 
   void setNodeId(NodeId id) { m_nodeId = id; }  // Used for generate stmt
-  void overrideParentChild(ModuleInstance* parent, ModuleInstance* interm,
-                           ModuleInstance* child, uhdm::Serializer& s);
-  Netlist* getNetlist() { return m_netlist; }
-  void setNetlist(Netlist* netlist) { m_netlist = netlist; }
 
   std::vector<Parameter*>& getTypeParams() { return m_typeParams; }
 
@@ -115,11 +110,6 @@ class ModuleInstance final : public ValuedComponentI {
   uhdm::Expr* getComplexValue(std::string_view name) const final;
 
   ModuleInstance* getInstanceBinding() { return m_boundInstance; }
-  bool isElaborated() const { return m_elaborated; }
-  void setElaborated() { m_elaborated = true; }
-
-  void setOverridenParam(std::string_view name);
-  bool isOverridenParam(std::string_view name) const;
 
   // DO NOT change the signature of this method, it is used in gdb for debug.
   std::string decompile(char* valueName) final;
@@ -135,10 +125,7 @@ class ModuleInstance final : public ValuedComponentI {
   std::string m_instName;  // Can carry the moduleName@instanceName if the
                            // module is undefined
   std::vector<Parameter*> m_typeParams;
-  Netlist* m_netlist;
   ModuleInstance* m_boundInstance = nullptr;
-  bool m_elaborated = false;
-  std::set<std::string, StringViewCompare> m_overridenParams;
   ModuleArrayModuleInstancesMap m_moduleArrayModuleInstancesMap;
 };
 

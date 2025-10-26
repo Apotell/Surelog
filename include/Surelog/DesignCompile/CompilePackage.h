@@ -64,11 +64,11 @@ class CompilePackage final {
         m_design(design),
         m_helper(session) {}
 
-  bool compile(Elaborate elaborate, Reduce reduce);
+  bool compile();
 
  private:
   enum CollectType { FUNCTION, DEFINITION, OTHER };
-  bool collectObjects_(CollectType collectType, Reduce reduce);
+  bool collectObjects_(CollectType collectType);
 
   Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;

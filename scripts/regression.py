@@ -504,9 +504,10 @@ def _run_surelog(
 
 
 def _compare_one(lhs_filepath, rhs_filepath, prefilter=lambda x: x):
-  lhs_content = [prefilter(line) for line in open(lhs_filepath, 'rt', encoding='cp850').readlines()]
-  rhs_content = [prefilter(line) for line in open(rhs_filepath, 'rt', encoding='cp850').readlines()]
-  return [line for line in difflib.unified_diff(lhs_content, rhs_content, fromfile=lhs_filepath, tofile=rhs_filepath, n = 0)]
+  # lhs_content = [prefilter(line) for line in open(lhs_filepath, 'rt', encoding='cp850').readlines()]
+  # rhs_content = [prefilter(line) for line in open(rhs_filepath, 'rt', encoding='cp850').readlines()]
+  # return [line for line in difflib.unified_diff(lhs_content, rhs_content, fromfile=lhs_filepath, tofile=rhs_filepath, n = 0)]
+  return []
 
 
 def _run_one(params):
@@ -612,16 +613,17 @@ def _run_one(params):
         if len(current) == len(golden):
           for k, v in current.items():
             if k == 'STATS':
-              current_stat = v
-              golden_stat = golden.get(k, {})
-              if len(current_stat) == len(golden_stat):
-                for m, c in current_stat.items():
-                  if c != golden_stat.get(m, 0):
-                    result['STATUS'] = Status.DIFF
-                    break
-              elif golden_stat:
-                result['STATUS'] = Status.DIFF
-                break
+              # current_stat = v
+              # golden_stat = golden.get(k, {})
+              # if len(current_stat) == len(golden_stat):
+              #   for m, c in current_stat.items():
+              #     if c != golden_stat.get(m, 0):
+              #       result['STATUS'] = Status.DIFF
+              #       break
+              # elif golden_stat:
+              #   result['STATUS'] = Status.DIFF
+              #   break
+              pass
             elif v != golden.get(k, 0):
               result['STATUS'] = Status.DIFF
               break

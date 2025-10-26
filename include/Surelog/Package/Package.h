@@ -41,7 +41,6 @@ namespace SURELOG {
 class CompilePackage;
 class FileContent;
 class Library;
-class Netlist;
 class Session;
 
 class Package final : public DesignComponent {
@@ -85,12 +84,6 @@ class Package final : public DesignComponent {
     return true;
   }
 
-  // To hold variables
-  Netlist* getNetlist() { return m_netlist; }
-  void setNetlist(Netlist* netlist) { m_netlist = netlist; }
-
-  Package* getUnElabPackage() { return m_unElabPackage; }
-
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
@@ -100,10 +93,7 @@ class Package final : public DesignComponent {
   Library* m_library = nullptr;
   ExprBuilder m_exprBuilder;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-
   uhdm::AttributeCollection* m_attributes = nullptr;
-  Netlist* m_netlist = nullptr;
-  Package* m_unElabPackage = nullptr;
 };
 
 };  // namespace SURELOG

@@ -31,7 +31,6 @@
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Design/ModuleDefinition.h"
 #include "Surelog/Design/ModuleInstance.h"
-#include "Surelog/Design/Netlist.h"
 #include "Surelog/Design/ValuedComponentI.h"
 #include "Surelog/DesignCompile/Builtin.h"
 #include "Surelog/DesignCompile/CompileClass.h"
@@ -39,11 +38,7 @@
 #include "Surelog/DesignCompile/CompileModule.h"
 #include "Surelog/DesignCompile/CompilePackage.h"
 #include "Surelog/DesignCompile/CompileProgram.h"
-#include "Surelog/DesignCompile/DesignElaboration.h"
-#include "Surelog/DesignCompile/NetlistElaboration.h"
-#include "Surelog/DesignCompile/PackageAndRootElaboration.h"
 #include "Surelog/DesignCompile/ResolveSymbols.h"
-#include "Surelog/DesignCompile/UVMElaboration.h"
 #include "Surelog/DesignCompile/UhdmWriter.h"
 #include "Surelog/ErrorReporting/Error.h"
 #include "Surelog/ErrorReporting/ErrorContainer.h"
@@ -279,16 +274,6 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
   }
 }
 
-bool CompileDesign::elaborate() {
-  if (ErrorContainer* errors = new ErrorContainer(m_session)) {
-    Error err(ErrorDefinition::ELAB_ELABORATING_DESIGN, Location(BadSymbolId));
-    errors->addError(err);
-    errors->printMessage(err, m_session->getCommandLineParser()->muteStdout());
-    delete errors;
-  }
-  return (elaboration_());
-}
-
 bool CompileDesign::compilation_() {
   CommandLineParser* const clp = m_session->getCommandLineParser();
   Design* const design = m_compiler->getDesign();
@@ -372,27 +357,6 @@ bool CompileDesign::compilation_() {
   return true;
 }
 
-bool CompileDesign::elaboration_() {
-  if (PackageAndRootElaboration* packEl =
-          new PackageAndRootElaboration(m_session, this)) {
-    packEl->elaborate();
-    delete packEl;
-  }
-  if (NetlistElaboration* netlistEl = new NetlistElaboration(m_session, this)) {
-    netlistEl->elaboratePackages();
-    delete netlistEl;
-  }
-  if (DesignElaboration* designEl = new DesignElaboration(m_session, this)) {
-    designEl->elaborate();
-    delete designEl;
-  }
-  if (UVMElaboration* uvmEl = new UVMElaboration(m_session, this)) {
-    uvmEl->elaborate();
-    delete uvmEl;
-  }
-  return true;
-}
-
 void CompileDesign::purgeParsers() { m_compiler->purgeParsers(); }
 
 bool CompileDesign::writeUHDM(PathId fileId) {
@@ -428,12 +392,6 @@ void decompile(Session* session, ValuedComponentI* instance) {
         for (const auto& ps : inst->getComplexValues()) {
           const std::string& name = ps.first;
           std::cout << std::string("    " + name + " =  complex\n");
-        }
-        if (inst->getNetlist() && inst->getNetlist()->param_assigns()) {
-          for (auto ps : *inst->getNetlist()->param_assigns()) {
-            std::cout << ps->getLhs()->getName() << " = \n";
-            decompile((uhdm::Any*)ps->getRhs());
-          }
         }
         inst = inst->getParent();
       }

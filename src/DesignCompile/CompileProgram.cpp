@@ -26,7 +26,6 @@
 #include <cstdint>
 #include <stack>
 #include <string>
-#include <string_view>
 #include <vector>
 
 #include "Surelog/CommandLine/CommandLineParser.h"
@@ -41,7 +40,6 @@
 #include "Surelog/ErrorReporting/ErrorContainer.h"
 #include "Surelog/ErrorReporting/ErrorDefinition.h"
 #include "Surelog/ErrorReporting/Location.h"
-#include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 #include "Surelog/Testbench/Program.h"
@@ -55,25 +53,19 @@
 #include <uhdm/property_decl.h>
 #include <uhdm/sequence_decl.h>
 
-#include <stack>
-
 namespace SURELOG {
 
 int32_t FunctorCompileProgram::operator()() const {
   CompileProgram* instance =
       new CompileProgram(m_session, m_compileDesign, m_program, m_design);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile();
   delete instance;
   return 0;
 }
 
-bool CompileProgram::compile(Elaborate elaborate, Reduce reduce) {
+bool CompileProgram::compile() {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
-
-  m_helper.setElaborate(elaborate);
-  m_helper.setReduce(reduce);
-
   const FileContent* fC = m_program->m_fileContents[0];
   NodeId nodeId = m_program->m_nodeIds[0];
 
@@ -169,8 +161,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         NodeId list_of_param_assignments = fC->Child(id);
         if (list_of_param_assignments)
           m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_param_assignments, m_compileDesign,
-              Reduce::No, false, nullptr, false, false);
+              m_program, fC, list_of_param_assignments, m_compileDesign, false,
+              nullptr, false, false);
         break;
       }
       case VObjectType::paAnsi_port_declaration: {
@@ -207,15 +199,15 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paTask_declaration: {
         // Called twice, placeholder first, then definition
         if (collectType == CollectType::OTHER) break;
-        m_helper.compileTask(m_program, fC, id, m_compileDesign, Reduce::No,
-                             nullptr, false);
+        m_helper.compileTask(m_program, fC, id, m_compileDesign, nullptr,
+                             false);
         break;
       }
       case VObjectType::paFunction_declaration: {
         // Called twice, placeholder first, then definition
         if (collectType == CollectType::OTHER) break;
-        m_helper.compileFunction(m_program, fC, id, m_compileDesign, Reduce::No,
-                                 nullptr, false);
+        m_helper.compileFunction(m_program, fC, id, m_compileDesign, nullptr,
+                                 false);
         break;
       }
       case VObjectType::paLet_declaration: {
@@ -256,13 +248,13 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, m_compileDesign,
-              Reduce::No, false, nullptr, ParameterPortListId, false);
+              m_program, fC, list_of_type_assignments, m_compileDesign, false,
+              nullptr, ParameterPortListId, false);
 
         } else {
-          m_helper.compileParameterDeclaration(
-              m_program, fC, id, m_compileDesign, Reduce::No, false, nullptr,
-              ParameterPortListId, false);
+          m_helper.compileParameterDeclaration(m_program, fC, id,
+                                               m_compileDesign, false, nullptr,
+                                               ParameterPortListId, false);
         }
         break;
       }
@@ -274,13 +266,13 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, m_compileDesign,
-              Reduce::No, true, nullptr, ParameterPortListId, false);
+              m_program, fC, list_of_type_assignments, m_compileDesign, true,
+              nullptr, ParameterPortListId, false);
 
         } else {
-          m_helper.compileParameterDeclaration(
-              m_program, fC, id, m_compileDesign, Reduce::No, true, nullptr,
-              ParameterPortListId, false);
+          m_helper.compileParameterDeclaration(m_program, fC, id,
+                                               m_compileDesign, true, nullptr,
+                                               ParameterPortListId, false);
         }
         break;
       }
@@ -311,8 +303,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paData_declaration: {
         if (collectType != CollectType::DEFINITION) break;
         m_helper.compileDataDeclaration(m_program, fC, id, false,
-                                        m_compileDesign, Reduce::No,
-                                        m_attributes);
+                                        m_compileDesign, m_attributes);
         m_attributes = nullptr;
         break;
       }

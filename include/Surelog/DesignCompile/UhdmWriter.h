@@ -52,7 +52,6 @@ class ExprBuilder;
 class Modport;
 class ModuleDefinition;
 class ModuleInstance;
-class Netlist;
 class Session;
 class Signal;
 
@@ -95,8 +94,6 @@ class UhdmWriter final {
                       uhdm::BaseClass* parent,
                       uhdm::TypespecCollection* dest_typespecs,
                       uhdm::Serializer& s, bool setParent);
-  void writeImportedSymbols(DesignComponent* mod, uhdm::Serializer& s,
-                            uhdm::TypespecCollection* typespecs);
   void writeVariables(const DesignComponent::VariableMap& orig_vars,
                       uhdm::BaseClass* parent, uhdm::Serializer& s);
   void writeModule(ModuleDefinition* mod, uhdm::Module* m, uhdm::Serializer& s,
@@ -105,21 +102,7 @@ class UhdmWriter final {
   void writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
                       uhdm::Serializer& s, ModportMap& modPortMap,
                       ModuleInstance* instance = nullptr);
-  bool writeElabInterface(uhdm::Serializer& s, ModuleInstance* instance,
-                          uhdm::Interface* m, ExprBuilder& exprBuilder);
-  void writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
-                     uhdm::Any* m, CompileDesign* compileDesign,
-                     ModportMap& modPortMap,
-                     ModuleInstanceMap& moduleInstanceMap,
-                     ExprBuilder& exprBuilder);
-  bool writeElabModule(uhdm::Serializer& s, ModuleInstance* instance,
-                       uhdm::Module* m, ExprBuilder& exprBuilder);
-  bool writeElabProgram(uhdm::Serializer& s, ModuleInstance* instance,
-                        uhdm::Program* m, ModportMap& modPortMap);
-  bool writeElabGenScope(uhdm::Serializer& s, ModuleInstance* instance,
-                         uhdm::GenScope* m, ExprBuilder& exprBuilder);
-  void writePackage(Package* pack, uhdm::Package* p, uhdm::Serializer& s,
-                    bool elaborated);
+  void writePackage(Package* pack, uhdm::Package* p, uhdm::Serializer& s);
 
   void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
                     uhdm::Serializer& s, uhdm::BaseClass* parent);
@@ -127,9 +110,6 @@ class UhdmWriter final {
                   uhdm::BaseClass* parent);
   void writeProgram(Program* mod, uhdm::Program* m, uhdm::Serializer& s,
                     ModportMap& modPortMap, ModuleInstance* instance = nullptr);
-  void writeContAssign(Netlist* netlist, uhdm::Serializer& s,
-                       DesignComponent* mod, uhdm::Any* scope,
-                       std::vector<uhdm::ContAssign*>* assigns);
 
   void bind(uhdm::Serializer& s, const std::vector<vpiHandle>& designs);
 

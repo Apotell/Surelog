@@ -50,7 +50,7 @@ bool CompileHelper::compileAssertionItem(DesignComponent* component,
     NodeId Concurrent_assertion_statement = fC->Child(item);
     if (uhdm::AnyCollection* stmts =
             compileStmt(component, fC, Concurrent_assertion_statement,
-                        compileDesign, Reduce::No, nullptr)) {
+                        compileDesign, nullptr)) {
       uhdm::AnyCollection* assertions = component->getAssertions();
       if (assertions == nullptr) {
         component->setAssertions(s.makeCollection<uhdm::Any>());
@@ -128,14 +128,14 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       else_stmt_id = fC->Sibling(else_keyword);
     }
     if (if_stmt_id) {
-      if (uhdm::AnyCollection* if_stmts = compileStmt(
-              component, fC, if_stmt_id, compileDesign, Reduce::No, pstmt)) {
+      if (uhdm::AnyCollection* if_stmts =
+              compileStmt(component, fC, if_stmt_id, compileDesign, pstmt)) {
         if_stmt = (*if_stmts)[0];
       }
     }
     if (else_stmt_id) {
-      if (uhdm::AnyCollection* else_stmts = compileStmt(
-              component, fC, else_stmt_id, compileDesign, Reduce::No, pstmt)) {
+      if (uhdm::AnyCollection* else_stmts =
+              compileStmt(component, fC, else_stmt_id, compileDesign, pstmt)) {
         else_stmt = (*else_stmts)[0];
       }
     }
@@ -148,7 +148,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (uhdm::Any* property_expr =
               compileExpression(component, fC, Property_expr, compileDesign,
-                                Reduce::No, prop_spec, instance)) {
+                                prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -171,15 +171,15 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (fC->Type(Property_expr) == VObjectType::paClocking_event) {
         if (uhdm::Expr* clocking_event = (uhdm::Expr*)compileExpression(
-                component, fC, Property_expr, compileDesign, Reduce::No,
-                prop_spec, instance)) {
+                component, fC, Property_expr, compileDesign, prop_spec,
+                instance)) {
           prop_spec->setClockingEvent(clocking_event);
         }
         Property_expr = fC->Sibling(Property_expr);
       }
       if (uhdm::Any* property_expr =
               compileExpression(component, fC, Property_expr, compileDesign,
-                                Reduce::No, prop_spec, instance)) {
+                                prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -202,7 +202,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (uhdm::Any* property_expr =
               compileExpression(component, fC, Property_expr, compileDesign,
-                                Reduce::No, prop_spec, instance)) {
+                                prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -222,7 +222,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (uhdm::Any* property_expr =
               compileExpression(component, fC, Property_expr, compileDesign,
-                                Reduce::No, prop_spec, instance)) {
+                                prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -243,7 +243,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (uhdm::Any* property_expr =
               compileExpression(component, fC, Property_expr, compileDesign,
-                                Reduce::No, prop_spec, instance)) {
+                                prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -317,22 +317,22 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
 
   uhdm::Any* if_stmt = nullptr;
   if (if_stmt_id) {
-    if (uhdm::AnyCollection* const if_stmts = compileStmt(
-            component, fC, if_stmt_id, compileDesign, Reduce::No, stmt)) {
+    if (uhdm::AnyCollection* const if_stmts =
+            compileStmt(component, fC, if_stmt_id, compileDesign, stmt)) {
       if_stmt = (*if_stmts)[0];
     }
   }
 
   uhdm::Any* else_stmt = nullptr;
   if (else_stmt_id) {
-    if (uhdm::AnyCollection* const else_stmts = compileStmt(
-            component, fC, else_stmt_id, compileDesign, Reduce::No, stmt)) {
+    if (uhdm::AnyCollection* const else_stmts =
+            compileStmt(component, fC, else_stmt_id, compileDesign, stmt)) {
       else_stmt = (*else_stmts)[0];
     }
   }
 
   uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      Reduce::No, stmt, instance);
+                                      stmt, instance);
 
   switch (fC->Type(the_stmt)) {
     case VObjectType::paSimple_immediate_assert_statement: {
@@ -398,17 +398,15 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
     if (else_keyword) else_stmt_id = fC->Sibling(else_keyword);
   }
   uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      Reduce::No, stmt, instance);
+                                      stmt, instance);
   uhdm::AnyCollection* if_stmts = nullptr;
   if (if_stmt_id)
-    if_stmts =
-        compileStmt(component, fC, if_stmt_id, compileDesign, Reduce::No, stmt);
+    if_stmts = compileStmt(component, fC, if_stmt_id, compileDesign, stmt);
   uhdm::Any* if_stmt = nullptr;
   if (if_stmts) if_stmt = if_stmts->front();
   uhdm::AnyCollection* else_stmts = nullptr;
   if (else_stmt_id)
-    else_stmts = compileStmt(component, fC, else_stmt_id, compileDesign,
-                             Reduce::No, stmt);
+    else_stmts = compileStmt(component, fC, else_stmt_id, compileDesign, stmt);
   uhdm::Any* else_stmt = nullptr;
   if (else_stmts) else_stmt = else_stmts->front();
   switch (fC->Type(the_stmt)) {
@@ -473,9 +471,8 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       NodeId Data_type_or_implicit = fC->Child(SeqFormatType_Data);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
       if (Data_type) {
-        tps =
-            compileTypespec(component, fC, Data_type, InvalidNodeId,
-                            compileDesign, Reduce::No, pstmt, instance, false);
+        tps = compileTypespec(component, fC, Data_type, InvalidNodeId,
+                              compileDesign, pstmt, instance, false);
       } else {
         Data_type = last_Data_type;
       }
@@ -507,7 +504,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       NodeId Assertion_variable_declaration = Property_spec;
       uhdm::AnyCollection* varst =
           compileDataDeclaration(component, fC, Assertion_variable_declaration,
-                                 compileDesign, Reduce::No, pstmt, instance);
+                                 compileDesign, pstmt, instance);
       if (varst) {
         for (auto v : *varst) {
           if (uhdm::Assignment* vast = any_cast<uhdm::Assignment*>(v)) {
@@ -530,16 +527,15 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
   prop_spec->setParent(result);
   if (Clocking_event) {
     if (uhdm::Expr* clocking_event = (uhdm::Expr*)compileExpression(
-            component, fC, Clocking_event, compileDesign, Reduce::No, prop_spec,
+            component, fC, Clocking_event, compileDesign, prop_spec,
             instance)) {
       prop_spec->setClockingEvent(clocking_event);
       clocking_event->setParent(prop_spec);
     }
   }
   result->setPropertySpec(prop_spec);
-  if (uhdm::Any* property_expr =
-          compileExpression(component, fC, Property_expr, compileDesign,
-                            Reduce::No, prop_spec, instance)) {
+  if (uhdm::Any* property_expr = compileExpression(
+          component, fC, Property_expr, compileDesign, prop_spec, instance)) {
     property_expr = createPropertyInst(component, property_expr, s);
     prop_spec->setPropertyExpr(property_expr);
   }
@@ -572,9 +568,9 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
       fC->populateCoreMembers(Sequence_expr, Sequence_expr, prop_port_decl);
       ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
-      if (uhdm::Typespec* tps = compileTypespec(
-              component, fC, Data_type, InvalidNodeId, compileDesign,
-              Reduce::No, pstmt, instance, false)) {
+      if (uhdm::Typespec* tps =
+              compileTypespec(component, fC, Data_type, InvalidNodeId,
+                              compileDesign, pstmt, instance, false)) {
         uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
         rtps->setParent(prop_port_decl);
         rtps->setActual(tps);
@@ -593,22 +589,20 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
     result->setExpr(mexpr);
     while (fC->Type(lookup) == VObjectType::paClocking_event) {
       uhdm::Expr* clock_event = any_cast<uhdm::Expr*>(compileExpression(
-          component, fC, lookup, compileDesign, Reduce::No, result, instance));
+          component, fC, lookup, compileDesign, result, instance));
       uhdm::ClockedSeq* seq = s.make<uhdm::ClockedSeq>();
       seq->setClockingEvent(clock_event);
       seq->setParent(mexpr);
       fC->populateCoreMembers(lookup, lookup, seq);
       lookup = fC->Sibling(lookup);
     }
-    if (uhdm::Any* seq_expr =
-            compileExpression(component, fC, lookup, compileDesign, Reduce::No,
-                              result, instance)) {
+    if (uhdm::Any* seq_expr = compileExpression(
+            component, fC, lookup, compileDesign, result, instance)) {
       mexpr->getClockedSeqs(true)->back()->setSequenceExpr(seq_expr);
     }
   } else {
-    if (uhdm::Any* seq_expr =
-            compileExpression(component, fC, Sequence_expr, compileDesign,
-                              Reduce::No, result, instance)) {
+    if (uhdm::Any* seq_expr = compileExpression(
+            component, fC, Sequence_expr, compileDesign, result, instance)) {
       result->setExpr(seq_expr);
     }
   }

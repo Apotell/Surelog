@@ -29,7 +29,6 @@
 #include <uhdm/source_file.h>
 
 #include <climits>
-#include <cstddef>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
@@ -37,11 +36,9 @@
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>
-#include <string_view>
 #include <thread>
 #include <vector>
 
-#include "Surelog/API/PythonAPI.h"
 #include "Surelog/CommandLine/CommandLineParser.h"
 #include "Surelog/Common/Containers.h"
 #include "Surelog/Common/FileSystem.h"
@@ -1298,33 +1295,6 @@ bool Compiler::compile() {
 
     writePreprocMacroInstances();
     m_compileDesign->purgeParsers();
-
-    if (clp->elaborate()) {
-      m_compileDesign->elaborate();
-      errors->printMessages(clp->muteStdout());
-
-      if (clp->profile()) {
-        std::string msg = "Elaboration took " +
-                          StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
-        std::cout << msg << std::endl;
-        profile += msg;
-        tmr.reset();
-      }
-
-      if (clp->pythonEvalScript()) {
-        PythonAPI::evalScript(fileSystem->toPath(clp->pythonEvalScriptId()),
-                              m_design);
-        if (clp->profile()) {
-          std::string msg = "Python design processing took " +
-                            StringUtils::to_string(tmr.elapsed_rounded()) +
-                            "s\n";
-          profile += msg;
-          std::cout << msg << std::endl;
-          tmr.reset();
-        }
-      }
-      errors->printMessages(clp->muteStdout());
-    }
 
     PathId uhdmFileId = fileSystem->getOutputUhdmFile(clp->fileUnit(), symbols);
     m_compileDesign->writeUHDM(uhdmFileId);

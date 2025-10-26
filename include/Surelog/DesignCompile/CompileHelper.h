@@ -103,8 +103,6 @@ class FScope : public ValuedComponentI {
 };
 
 using Scopes = std::vector<FScope*>;
-enum class Elaborate : bool { Yes = true, No = false };
-enum class Reduce : bool { Yes = true, No = false };
 
 class CompileHelper final {
  public:
@@ -129,7 +127,7 @@ class CompileHelper final {
 
   const DataType* compileTypeDef(DesignComponent* scope, const FileContent* fC,
                                  NodeId id, CompileDesign* compileDesign,
-                                 Reduce reduce, uhdm::Any* pstmt = nullptr);
+                                 uhdm::Any* pstmt = nullptr);
 
   bool compileScopeBody(Scope* parent, Statement* parentStmt,
                         const FileContent* fC, NodeId id);
@@ -177,12 +175,11 @@ class CompileHelper final {
 
   bool compileDataDeclaration(DesignComponent* component, const FileContent* fC,
                               NodeId id, bool interface,
-                              CompileDesign* compileDesign, Reduce reduce,
+                              CompileDesign* compileDesign,
                               uhdm::AttributeCollection* attributes);
 
   bool compileSignal(DesignComponent* comp, CompileDesign* compileDesign,
-                     Signal* sig, std::string_view prefix, bool signalIsPort,
-                     Reduce reduce);
+                     Signal* sig, std::string_view prefix, bool signalIsPort);
 
   uhdm::Typespec* compileTypeParameter(DesignComponent* component,
                                        CompileDesign* compileDesign,
@@ -208,8 +205,8 @@ class CompileHelper final {
 
   uhdm::AnyCollection* compileTfCallArguments(
       DesignComponent* component, const FileContent* fC, NodeId Arg_list_node,
-      CompileDesign* compileDesign, Reduce reduce, uhdm::Any* call,
-      ValuedComponentI* instance, bool muteErrors);
+      CompileDesign* compileDesign, uhdm::Any* call, ValuedComponentI* instance,
+      bool muteErrors);
 
   uhdm::Assignment* compileBlockingAssignment(
       DesignComponent* component, const FileContent* fC, NodeId nodeId,
@@ -235,7 +232,7 @@ class CompileHelper final {
 
   bool compileParameterDeclaration(DesignComponent* component,
                                    const FileContent* fC, NodeId nodeId,
-                                   CompileDesign* compileDesign, Reduce reduce,
+                                   CompileDesign* compileDesign,
                                    bool localParam,
                                    ValuedComponentI* m_instance,
                                    bool port_param, bool muteErrors);
@@ -246,13 +243,12 @@ class CompileHelper final {
                                    uhdm::TaskFuncDecl* tfd);
 
   bool compileTask(DesignComponent* component, const FileContent* fC,
-                   NodeId nodeId, CompileDesign* compileDesign, Reduce reduce,
+                   NodeId nodeId, CompileDesign* compileDesign,
                    ValuedComponentI* instance, bool isMethod);
 
   bool compileFunction(DesignComponent* component, const FileContent* fC,
                        NodeId nodeId, CompileDesign* compileDesign,
-                       Reduce reduce, ValuedComponentI* instance,
-                       bool isMethod);
+                       ValuedComponentI* instance, bool isMethod);
 
   bool compileAssertionItem(DesignComponent* component, const FileContent* fC,
                             NodeId nodeId, CompileDesign* compileDesign);
@@ -283,7 +279,7 @@ class CompileHelper final {
 
   uhdm::AnyCollection* compileStmt(DesignComponent* component,
                                    const FileContent* fC, NodeId nodeId,
-                                   CompileDesign* compileDesign, Reduce reduce,
+                                   CompileDesign* compileDesign,
                                    uhdm::Any* pstmt = nullptr,
                                    ValuedComponentI* instance = nullptr,
                                    bool muteError = false);
@@ -291,8 +287,8 @@ class CompileHelper final {
   uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
                              NodeId declarationId, NodeId nameId,
                              NodeId unpackedDimId, CompileDesign* compileDesign,
-                             Reduce reduce, uhdm::Any* pstmt,
-                             ValuedComponentI* instance, bool muteErrors);
+                             uhdm::Any* pstmt, ValuedComponentI* instance,
+                             bool muteErrors);
   uhdm::Any* compileSignals(DesignComponent* component,
                             CompileDesign* compileDesign, Signal* sig,
                             uhdm::Typespec* tps);
@@ -300,7 +296,7 @@ class CompileHelper final {
   uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
                              CompileDesign* compileDesign, NodeId nameId,
                              VObjectType subnettype, NodeId typespecId,
-                             uhdm::Typespec* tps);
+                             uhdm::Typespec* tps, uhdm::Any* pscope);
 
   uhdm::Any* compileSignals(DesignComponent* component,
                             CompileDesign* compileDesign, Signal* sig);
@@ -308,7 +304,7 @@ class CompileHelper final {
   uhdm::Typespec* compileTypespec(DesignComponent* component,
                                   const FileContent* fC, NodeId nodeId,
                                   NodeId unpackedDimId,
-                                  CompileDesign* compileDesign, Reduce reduce,
+                                  CompileDesign* compileDesign,
                                   uhdm::Any* pstmt, ValuedComponentI* instance,
                                   bool isVariable);
 
@@ -316,8 +312,7 @@ class CompileHelper final {
                                          const FileContent* fC, NodeId nodeId,
                                          NodeId packedId, NodeId unpackedId,
                                          CompileDesign* compileDesign,
-                                         Reduce reduce, uhdm::Any* pstmt,
-                                         uhdm::Typespec* ts);
+                                         uhdm::Any* pstmt, uhdm::Typespec* ts);
 
   uhdm::Typespec* compileBuiltinTypespec(DesignComponent* component,
                                          const FileContent* fC, NodeId type,
@@ -327,9 +322,8 @@ class CompileHelper final {
 
   uhdm::Typespec* compileDatastructureTypespec(
       DesignComponent* component, const FileContent* fC, NodeId type,
-      CompileDesign* compileDesign, Reduce reduce,
-      SURELOG::ValuedComponentI* instance, std::string_view suffixname = "",
-      std::string_view typeName = "");
+      CompileDesign* compileDesign, ValuedComponentI* instance,
+      std::string_view suffixname = "", std::string_view typeName = "");
 
   uhdm::Any* compileCheckerInstantiation(DesignComponent* component,
                                          const FileContent* fC, NodeId nodeId,
@@ -389,29 +383,26 @@ class CompileHelper final {
 
   uhdm::Any* compileExpression(DesignComponent* component,
                                const FileContent* fC, NodeId nodeId,
-                               CompileDesign* compileDesign, Reduce reduce,
+                               CompileDesign* compileDesign,
                                uhdm::Any* pexpr = nullptr,
                                ValuedComponentI* instance = nullptr,
                                bool muteErrors = false);
 
   uhdm::Any* compilePartSelectRange(
       DesignComponent* component, const FileContent* fC, NodeId Constant_range,
-      std::string_view name, CompileDesign* compileDesign, Reduce reduce,
-      uhdm::Any* pexpr, ValuedComponentI* instance, bool muteErrors);
+      std::string_view name, CompileDesign* compileDesign, uhdm::Any* pexpr,
+      ValuedComponentI* instance, bool muteErrors);
 
-  uhdm::RangeCollection* compileRanges(DesignComponent* component,
-                                       const FileContent* fC,
-                                       NodeId Packed_dimension,
-                                       CompileDesign* compileDesign,
-                                       Reduce reduce, uhdm::Any* pexpr,
-                                       ValuedComponentI* instance,
-                                       int32_t& size, bool muteErrors);
+  uhdm::RangeCollection* compileRanges(
+      DesignComponent* component, const FileContent* fC,
+      NodeId Packed_dimension, CompileDesign* compileDesign, uhdm::Any* pexpr,
+      ValuedComponentI* instance, int32_t& size, bool muteErrors);
 
   uhdm::Any* compileAssignmentPattern(DesignComponent* component,
                                       const FileContent* fC,
                                       NodeId Assignment_pattern,
                                       CompileDesign* compileDesign,
-                                      Reduce reduce, uhdm::Any* pexpr,
+                                      uhdm::Any* pexpr,
                                       ValuedComponentI* instance);
 
   uhdm::Any* compileProceduralContinuousAssign(DesignComponent* component,
@@ -421,7 +412,7 @@ class CompileHelper final {
 
   uhdm::AnyCollection* compileDataDeclaration(
       DesignComponent* component, const FileContent* fC, NodeId nodeId,
-      CompileDesign* compileDesign, Reduce reduce, uhdm::Any* pstmt = nullptr,
+      CompileDesign* compileDesign, uhdm::Any* pstmt = nullptr,
       ValuedComponentI* instance = nullptr);
 
   uhdm::Any* compileForLoop(DesignComponent* component, const FileContent* fC,
@@ -430,39 +421,36 @@ class CompileHelper final {
 
   uhdm::Any* compileSelectExpression(
       DesignComponent* component, const FileContent* fC, NodeId Bit_select,
-      std::string_view name, CompileDesign* compileDesign, Reduce reduce,
-      uhdm::Any* pexpr, ValuedComponentI* instance, bool muteErrors);
+      std::string_view name, CompileDesign* compileDesign, uhdm::Any* pexpr,
+      ValuedComponentI* instance, bool muteErrors);
 
   uhdm::Any* compileBits(DesignComponent* component, const FileContent* fC,
                          NodeId Expression, CompileDesign* compileDesign,
-                         Reduce reduce, uhdm::Any* pexpr,
-                         ValuedComponentI* instance, bool sizeMode,
-                         bool muteErrors);
+                         uhdm::Any* pexpr, ValuedComponentI* instance,
+                         bool sizeMode, bool muteErrors);
 
   uhdm::Any* compileClog2(DesignComponent* component, const FileContent* fC,
                           NodeId Expression, CompileDesign* compileDesign,
-                          Reduce reduce, uhdm::Any* pexpr,
-                          ValuedComponentI* instance, bool muteErrors);
+                          uhdm::Any* pexpr, ValuedComponentI* instance,
+                          bool muteErrors);
 
   uhdm::Any* compileBound(DesignComponent* component, const FileContent* fC,
                           NodeId Expression, CompileDesign* compileDesign,
-                          Reduce reduce, uhdm::Any* pexpr,
-                          ValuedComponentI* instance, bool muteErrors,
-                          std::string_view name);
+                          uhdm::Any* pexpr, ValuedComponentI* instance,
+                          bool muteErrors, std::string_view name);
 
   uhdm::Any* compileTypename(DesignComponent* component, const FileContent* fC,
                              NodeId Expression, CompileDesign* compileDesign,
-                             Reduce reduce, uhdm::Any* pexpr,
-                             ValuedComponentI* instance);
+                             uhdm::Any* pexpr, ValuedComponentI* instance);
 
   const uhdm::Typespec* getTypespec(DesignComponent* component,
                                     const FileContent* fC, NodeId id,
-                                    CompileDesign* compileDesign, Reduce reduce,
+                                    CompileDesign* compileDesign,
                                     ValuedComponentI* instance);
 
   uhdm::Any* compileComplexFuncCall(DesignComponent* component,
                                     const FileContent* fC, NodeId nodeId,
-                                    CompileDesign* compileDesign, Reduce reduce,
+                                    CompileDesign* compileDesign,
                                     uhdm::Any* pexpr,
                                     ValuedComponentI* instance,
                                     bool muteErrors);
@@ -476,17 +464,6 @@ class CompileHelper final {
   void compileImportDeclaration(DesignComponent* component,
                                 const FileContent* fC, NodeId id,
                                 CompileDesign* compileDesign);
-
-  uhdm::Any* bindVariable(DesignComponent* component, const uhdm::Any* scope,
-                          std::string_view name, CompileDesign* compileDesign);
-
-  uhdm::Any* bindVariable(DesignComponent* component,
-                          ValuedComponentI* instance, std::string_view name,
-                          CompileDesign* compileDesign);
-
-  uhdm::Any* bindParameter(DesignComponent* component,
-                           ValuedComponentI* instance, std::string_view name,
-                           CompileDesign* compileDesign, bool crossHierarchy);
 
   uhdm::EventControl* compileClocking_event(DesignComponent* component,
                                             const FileContent* fC,
@@ -553,11 +530,13 @@ class CompileHelper final {
 
   uhdm::AnyCollection* compileGenStmt(DesignComponent* component,
                                       const FileContent* fC, NodeId id,
-                                      CompileDesign* compileDesign);
+                                      CompileDesign* compileDesign,
+                                      uhdm::Any* pscope);
 
   uhdm::AnyCollection* compileGenVars(DesignComponent* component,
                                       const FileContent* fC, NodeId id,
-                                      CompileDesign* compileDesign);
+                                      CompileDesign* compileDesign,
+                                      uhdm::Any* pscope);
 
   uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
                                uhdm::Serializer& s);
@@ -586,17 +565,18 @@ class CompileHelper final {
   uhdm::Any* defaultPatternAssignment(const uhdm::Typespec* tps, uhdm::Any* exp,
                                       DesignComponent* component,
                                       CompileDesign* compileDesign,
-                                      Reduce reduce,
                                       ValuedComponentI* instance);
 
-  uhdm::Expr* expandPatternAssignment(
-      const uhdm::Typespec* tps, uhdm::Expr* rhs, DesignComponent* component,
-      CompileDesign* compileDesign, Reduce reduce, ValuedComponentI* instance);
+  uhdm::Expr* expandPatternAssignment(const uhdm::Typespec* tps,
+                                      uhdm::Expr* rhs,
+                                      DesignComponent* component,
+                                      CompileDesign* compileDesign,
+                                      ValuedComponentI* instance);
 
   uint64_t Bits(const uhdm::Any* typespec, bool& invalidValue,
                 DesignComponent* component, CompileDesign* compileDesign,
-                Reduce reduce, ValuedComponentI* instance, PathId fileId,
-                uint32_t lineNumber, bool sizeMode);
+                ValuedComponentI* instance, PathId fileId, uint32_t lineNumber,
+                bool sizeMode);
 
   std::pair<uhdm::TaskFunc*, DesignComponent*> getTaskFunc(
       std::string_view name, DesignComponent* component,
@@ -621,9 +601,8 @@ class CompileHelper final {
                     CompileDesign* compileDesign, ValuedComponentI* instance);
 
   uhdm::Any* getValue(std::string_view name, DesignComponent* component,
-                      CompileDesign* compileDesign, Reduce reduce,
-                      ValuedComponentI* instance, PathId fileId,
-                      uint32_t lineNumber, uhdm::Any* pexpr,
+                      CompileDesign* compileDesign, ValuedComponentI* instance,
+                      PathId fileId, uint32_t lineNumber, uhdm::Any* pexpr,
                       bool muteErrors = false);
 
   // Parse numeric UHDM constant into int64_t. Returns if successful.
@@ -631,9 +610,8 @@ class CompileHelper final {
 
   int64_t getValue(bool& validValue, DesignComponent* component,
                    const FileContent* fC, NodeId nodeId,
-                   CompileDesign* compileDesign, Reduce reduce,
-                   uhdm::Any* pexpr, ValuedComponentI* instance,
-                   bool muteErrors = false);
+                   CompileDesign* compileDesign, uhdm::Any* pexpr,
+                   ValuedComponentI* instance, bool muteErrors = false);
 
   uhdm::Typespec* elabTypespec(DesignComponent* component, uhdm::Typespec* spec,
                                CompileDesign* compileDesign,
@@ -665,7 +643,7 @@ class CompileHelper final {
 
   uhdm::Any* decodeHierPath(uhdm::HierPath* path, bool& invalidValue,
                             DesignComponent* component,
-                            CompileDesign* compileDesign, Reduce reduce,
+                            CompileDesign* compileDesign,
                             ValuedComponentI* instance, PathId fileName,
                             uint32_t lineNumber, uhdm::Any* pexpr,
                             bool muteErrors, bool returnTypespec);
@@ -691,12 +669,6 @@ class CompileHelper final {
 
   std::string decompileHelper(const uhdm::Any* sel);
 
-  Elaborate getElaborate() const { return m_elaborate; }
-  void setElaborate(Elaborate elaborate) { m_elaborate = elaborate; }
-
-  Reduce getReduce() const { return m_reduce; }
-  void setReduce(Reduce reduce) { m_reduce = reduce; }
-
  private:
   // Caches
   uhdm::IntTypespec* buildIntTypespec(CompileDesign* compileDesign,
@@ -714,8 +686,6 @@ class CompileHelper final {
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;
-  Elaborate m_elaborate = Elaborate::Yes;
-  Reduce m_reduce = Reduce::Yes;
 };
 
 }  // namespace SURELOG

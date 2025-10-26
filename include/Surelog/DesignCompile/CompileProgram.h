@@ -63,7 +63,7 @@ class CompileProgram final : public CompileToolbox {
         m_design(design),
         m_helper(session) {}
 
-  bool compile(Elaborate elaborate, Reduce reduce);
+  bool compile();
 
   ~CompileProgram() final = default;
 

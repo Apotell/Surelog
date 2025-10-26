@@ -35,7 +35,6 @@
 #include "Surelog/ErrorReporting/ErrorContainer.h"
 #include "Surelog/ErrorReporting/ErrorDefinition.h"
 #include "Surelog/ErrorReporting/Location.h"
-#include "Surelog/Library/Library.h"
 #include "Surelog/Package/Package.h"
 #include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
@@ -53,57 +52,45 @@
 #include <cstdint>
 #include <stack>
 #include <string>
-#include <string_view>
 #include <vector>
 
 namespace SURELOG {
 
 int32_t FunctorCompilePackage::operator()() const {
   if (CompilePackage* instance =
-          new CompilePackage(m_session, m_compileDesign,
-                             m_package->getUnElabPackage(), m_design)) {
-    instance->compile(Elaborate::No, Reduce::No);
+          new CompilePackage(m_session, m_compileDesign, m_package, m_design)) {
+    instance->compile();
     delete instance;
   }
-
-  // if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-  //   if (CompilePackage* instance = new CompilePackage(
-  //           m_session, m_compileDesign, m_package, m_design)) {
-  //     instance->compile(Elaborate::Yes, Reduce::Yes);
-  //     delete instance;
-  //   }
-  // }
-
   return 0;
 }
 
-bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
+bool CompilePackage::compile() {
   if (!m_package) return false;
   uhdm::Package* pack = m_package->getUhdmModel<uhdm::Package>();
   const FileContent* fC = m_package->m_fileContents[0];
   SymbolTable* const symbols = m_session->getSymbolTable();
   NodeId packId = m_package->m_nodeIds[0];
-  m_helper.setElaborate(elaborate);
-  m_helper.setReduce(reduce);
   fC->populateCoreMembers(packId, packId, pack);
 
   m_package->m_exprBuilder.setDesign(
       m_compileDesign->getCompiler()->getDesign());
-  if (reduce == Reduce::Yes) {
+
+  if (ErrorContainer* errors2 = new ErrorContainer(m_session)) {
     Location loc(fC->getFileId(packId), fC->Line(packId), fC->Column(packId),
                  symbols->getId(m_package->getName()));
     Error err(ErrorDefinition::COMP_COMPILE_PACKAGE, loc);
 
-    ErrorContainer* errors2 = new ErrorContainer(m_session);
     errors2->addError(err);
     errors2->printMessage(err, m_session->getCommandLineParser()->muteStdout());
     delete errors2;
   }
+
   const uhdm::ScopedScope scopedScope(pack);
-  collectObjects_(CollectType::FUNCTION, reduce);
-  collectObjects_(CollectType::DEFINITION, reduce);
+  collectObjects_(CollectType::FUNCTION);
+  collectObjects_(CollectType::DEFINITION);
   m_helper.evalScheduledExprs(m_package, m_compileDesign);
-  collectObjects_(CollectType::OTHER, reduce);
+  collectObjects_(CollectType::OTHER);
 
   do {
     VObject current = fC->Object(packId);
@@ -119,7 +106,7 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   return true;
 }
 
-bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
+bool CompilePackage::collectObjects_(CollectType collectType) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   std::vector<VObjectType> stopPoints = {
@@ -175,12 +162,11 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
-                m_package, fC, list_of_type_assignments, m_compileDesign,
-                reduce, false, nullptr, false, false);
-
+                m_package, fC, list_of_type_assignments, m_compileDesign, false,
+                nullptr, false, false);
           } else {
             m_helper.compileParameterDeclaration(m_package, fC, id,
-                                                 m_compileDesign, reduce, false,
+                                                 m_compileDesign, false,
                                                  nullptr, false, false);
           }
           break;
@@ -193,28 +179,27 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
-                m_package, fC, list_of_type_assignments, m_compileDesign,
-                reduce, true, nullptr, false, false);
-
+                m_package, fC, list_of_type_assignments, m_compileDesign, true,
+                nullptr, false, false);
           } else {
             m_helper.compileParameterDeclaration(m_package, fC, id,
-                                                 m_compileDesign, reduce, true,
-                                                 nullptr, false, false);
+                                                 m_compileDesign, true, nullptr,
+                                                 false, false);
           }
           break;
         }
         case VObjectType::paTask_declaration: {
           // Called twice, placeholder first, then definition
           if (collectType == CollectType::OTHER) break;
-          m_helper.compileTask(m_package, fC, id, m_compileDesign, reduce,
-                               nullptr, false);
+          m_helper.compileTask(m_package, fC, id, m_compileDesign, nullptr,
+                               false);
           break;
         }
         case VObjectType::paFunction_declaration: {
           // Called twice, placeholder first, then definition
           if (collectType == CollectType::OTHER) break;
-          m_helper.compileFunction(m_package, fC, id, m_compileDesign, reduce,
-                                   nullptr, false);
+          m_helper.compileFunction(m_package, fC, id, m_compileDesign, nullptr,
+                                   false);
           break;
         }
         case VObjectType::paLet_declaration: {
@@ -260,8 +245,8 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileDataDeclaration(
-              m_package, fC, id, false, m_compileDesign, reduce, m_attributes);
+          m_helper.compileDataDeclaration(m_package, fC, id, false,
+                                          m_compileDesign, m_attributes);
           m_attributes = nullptr;
           break;
         }

@@ -33,7 +33,6 @@
 #include "Surelog/Common/SymbolId.h"
 #include "Surelog/Design/DesignComponent.h"
 #include "Surelog/Design/FileContent.h"
-#include "Surelog/Design/Netlist.h"
 #include "Surelog/Expression/ExprBuilder.h"
 #include "Surelog/Expression/Value.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
@@ -59,8 +58,7 @@ ModuleInstance::ModuleInstance(Session* session,
       m_fileContent(fileContent),
       m_nodeId(nodeId),
       m_parent(parent),
-      m_instName(instName),
-      m_netlist(nullptr) {
+      m_instName(instName) {
   if (m_definition == nullptr) {
     m_instName = modName;
     m_instName.append("&").append(instName);
@@ -70,25 +68,8 @@ ModuleInstance::ModuleInstance(Session* session,
 uhdm::Expr* ModuleInstance::getComplexValue(std::string_view name) const {
   ModuleInstance* instance = (ModuleInstance*)this;
   while (instance) {
-    uhdm::Expr* res = ValuedComponentI::getComplexValue(name);
-    if (res) {
+    if (uhdm::Expr* res = ValuedComponentI::getComplexValue(name)) {
       return res;
-    }
-
-    if (instance->m_netlist) {
-      uhdm::ParamAssignCollection* param_assigns =
-          instance->m_netlist->param_assigns();
-      if (param_assigns) {
-        for (uhdm::ParamAssign* param : *param_assigns) {
-          if (param && param->getLhs()) {
-            const std::string_view param_name = param->getLhs()->getName();
-            if (param_name == name) {
-              const uhdm::Any* exp = param->getRhs();
-              if (exp) return (uhdm::Expr*)exp;
-            }
-          }
-        }
-      }
     }
 
     if (instance->getType() != VObjectType::paModule_instantiation)
@@ -127,38 +108,12 @@ const uhdm::Constant* resolveFromParamAssign(
 
 Value* ModuleInstance::getValue(std::string_view name,
                                 ExprBuilder& exprBuilder) const {
-  Value* sval = nullptr;
-
   if (ValuedComponentI::getComplexValue(
           name)) {  // Only check current instance level
     return nullptr;
   }
 
-  ModuleInstance* instance = (ModuleInstance*)this;
-  while (instance) {
-    if (instance->m_netlist) {
-      uhdm::ParamAssignCollection* param_assigns =
-          instance->m_netlist->param_assigns();
-      if (param_assigns) {
-        std::set<std::string> visited;
-        const uhdm::Constant* res =
-            resolveFromParamAssign(param_assigns, visited, name);
-        if (res) {
-          sval = exprBuilder.fromVpiValue(res->getValue(), res->getSize());
-          break;
-        }
-      }
-    }
-
-    if (instance->getType() != VObjectType::paModule_instantiation)
-      instance = instance->getParent();
-    else
-      instance = nullptr;
-  }
-
-  if (sval == nullptr) {
-    sval = ValuedComponentI::getValue(name);
-  }
+  Value* sval = ValuedComponentI::getValue(name);
 
   if (m_definition && (sval == nullptr)) {
     uhdm::ParamAssignCollection* param_assigns =
@@ -197,7 +152,6 @@ std::string ModuleInstance::decompile(char* valueName) {
 }
 
 ModuleInstance::~ModuleInstance() {
-  delete m_netlist;
   for (auto child : m_allSubInstances) {
     delete child;
   }
@@ -294,92 +248,4 @@ std::string_view ModuleInstance::getModuleName() const {
     return m_definition->getName();
   }
 }
-
-void ModuleInstance::overrideParentChild(ModuleInstance* parent,
-                                         ModuleInstance* interm,
-                                         ModuleInstance* child,
-                                         uhdm::Serializer& s) {
-  if (parent != this) return;
-  Netlist* netlist = interm->getNetlist();
-  if (netlist) {
-    if (netlist->cont_assigns() || netlist->process_stmts() ||
-        netlist->array_nets() || netlist->param_assigns() ||
-        netlist->array_vars() || netlist->nets() || netlist->variables() ||
-        netlist->interface_arrays() || netlist->interfaces())
-      return;
-  }
-
-  Netlist* child_netlist = child->getNetlist();
-  if (netlist->param_assigns()) {
-    auto params = child_netlist->param_assigns();
-    if (params == nullptr) {
-      params = s.makeCollection<uhdm::ParamAssign>();
-      child_netlist->param_assigns(params);
-    }
-    for (auto p : *netlist->param_assigns()) {
-      params->push_back(p);
-    }
-  }
-
-  // Loop indexes
-  for (auto& param : interm->getMappedValues()) {
-    const std::string_view name = param.first;
-    Value* val = param.second.first;
-    auto params = child_netlist->param_assigns();
-    if (params == nullptr) {
-      params = s.makeCollection<uhdm::ParamAssign>();
-      child_netlist->param_assigns(params);
-    }
-    bool found = false;
-    for (auto p : *params) {
-      if (p->getName() == name) {
-        found = true;
-        break;
-      }
-    }
-    if (!found) {
-      uhdm::Parameter* p = s.make<uhdm::Parameter>();
-      p->setName(name);
-      if (val && val->isValid()) p->setValue(val->uhdmValue());
-      p->setStartLine(param.second.second);
-      p->setLocalParam(true);
-      uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
-      uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-      rt->setParent(p);
-      p->setTypespec(rt);
-      rt->setActual(ts);
-      uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
-      pass->setLhs(p);
-      uhdm::Constant* c = s.make<uhdm::Constant>();
-      c->setValue(val->uhdmValue());
-      pass->setRhs(c);
-      params->push_back(pass);
-    }
-  }
-
-  child->m_parent = this;
-  std::vector<ModuleInstance*> children;
-
-  for (ModuleInstance* sub_instance : m_allSubInstances) {
-    if (sub_instance == interm) {
-      for (ModuleInstance* interm_subinstance : interm->m_allSubInstances) {
-        children.push_back(interm_subinstance);
-      }
-    } else {
-      children.push_back(sub_instance);
-    }
-  }
-
-  m_allSubInstances = children;
-}
-
-void ModuleInstance::setOverridenParam(std::string_view name) {
-  m_overridenParams.emplace(name);
-}
-
-bool ModuleInstance::isOverridenParam(std::string_view name) const {
-  if (m_overridenParams.find(name) == m_overridenParams.end()) return false;
-  return true;
-}
-
 }  // namespace SURELOG

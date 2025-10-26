@@ -67,7 +67,7 @@ class CompileClass final {
         m_builtins({"constraint_mode", "randomize", "rand_mode", "srandom"}) {}
   CompileClass(const CompileClass&) = delete;
 
-  bool compile(Elaborate elaborate, Reduce reduce);
+  bool compile();
 
  private:
   bool compile_class_parameters_(const FileContent* fC, NodeId id);

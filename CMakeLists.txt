@@ -439,7 +439,6 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/Design/Modport.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/ModuleDefinition.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/ModuleInstance.cpp
-  ${PROJECT_SOURCE_DIR}/src/Design/Netlist.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/ParamAssign.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/Parameter.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/Scope.cpp
@@ -469,19 +468,12 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileStmt.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileToolbox.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileType.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/DesignElaboration.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/ElaborationStep.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/ElaboratorHarness.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/EvalFunc.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/IntegrityChecker.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/NetlistElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ObjectBinder.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/PackageAndRootElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ResolveSymbols.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/TestbenchElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/UhdmChecker.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/UhdmWriter.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/UVMElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/ErrorReporting/Error.cpp
   ${PROJECT_SOURCE_DIR}/src/ErrorReporting/ErrorContainer.cpp
   ${PROJECT_SOURCE_DIR}/src/ErrorReporting/ErrorDefinition.cpp
@@ -729,8 +721,6 @@ if (SURELOG_BUILD_TESTS)
     src/Common/PlatformFileSystem_test.cpp
     src/DesignCompile/CompileExpression_test.cpp
     src/DesignCompile/CompileHelper_test.cpp
-    src/DesignCompile/Elaboration_test.cpp
-    src/DesignCompile/Uhdm_test.cpp
     src/Expression/ExprBuilder_test.cpp
     src/SourceCompile/ParseFile_test.cpp
     src/SourceCompile/PreprocessFile_test.cpp
@@ -936,7 +926,6 @@ install(
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/ParamAssign.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/TfPortItem.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/DesignElement.h
-        ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Netlist.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Function.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Scope.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/TimeInfo.h

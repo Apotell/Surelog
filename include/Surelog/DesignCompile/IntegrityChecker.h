@@ -102,7 +102,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitAlways(const uhdm::Always* object) final;
   void visitAnyPattern(const uhdm::AnyPattern* object) final;
   void visitArrayExpr(const uhdm::ArrayExpr* object) final;
-  void visitArrayNet(const uhdm::ArrayNet* object) final;
   void visitArrayTypespec(const uhdm::ArrayTypespec* object) final;
   void visitAssert(const uhdm::Assert* object) final;
   void visitAssignStmt(const uhdm::AssignStmt* object) final;
@@ -151,7 +150,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitDistribution(const uhdm::Distribution* object) final;
   void visitDoWhile(const uhdm::DoWhile* object) final;
   void visitEnumConst(const uhdm::EnumConst* object) final;
-  void visitEnumNet(const uhdm::EnumNet* object) final;
   void visitEnumTypespec(const uhdm::EnumTypespec* object) final;
   void visitEventControl(const uhdm::EventControl* object) final;
   void visitEventStmt(const uhdm::EventStmt* object) final;
@@ -189,7 +187,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitIndexedPartSelect(const uhdm::IndexedPartSelect* object) final;
   void visitInitial(const uhdm::Initial* object) final;
   void visitIntTypespec(const uhdm::IntTypespec* object) final;
-  void visitIntegerNet(const uhdm::IntegerNet* object) final;
   void visitIntegerTypespec(const uhdm::IntegerTypespec* object) final;
   void visitInterface(const uhdm::Interface* object) final;
   void visitInterfaceArray(const uhdm::InterfaceArray* object) final;
@@ -197,7 +194,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitInterfaceTypespec(const uhdm::InterfaceTypespec* object) final;
   void visitLetDecl(const uhdm::LetDecl* object) final;
   void visitLetExpr(const uhdm::LetExpr* object) final;
-  void visitLogicNet(const uhdm::LogicNet* object) final;
   void visitLogicTypespec(const uhdm::LogicTypespec* object) final;
   void visitLongIntTypespec(const uhdm::LongIntTypespec* object) final;
   void visitMethodFuncCall(const uhdm::MethodFuncCall* object) final;
@@ -210,12 +206,11 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitMulticlockSequenceExpr(const uhdm::MulticlockSequenceExpr* object) final;
   void visitNamedEvent(const uhdm::NamedEvent* object) final;
   void visitNamedEventArray(const uhdm::NamedEventArray* object) final;
-  void visitNetBit(const uhdm::NetBit* object) final;
+  void visitNet(const uhdm::Net* object) final;
   void visitNullStmt(const uhdm::NullStmt* object) final;
   void visitOperation(const uhdm::Operation* object) final;
   void visitOrderedWait(const uhdm::OrderedWait* object) final;
   void visitPackage(const uhdm::Package* object) final;
-  void visitPackedArrayNet(const uhdm::PackedArrayNet* object) final;
   void visitPackedArrayTypespec(const uhdm::PackedArrayTypespec* object) final;
   void visitParamAssign(const uhdm::ParamAssign* object) final;
   void visitParameter(const uhdm::Parameter* object) final;
@@ -256,7 +251,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitSourceFile(const uhdm::SourceFile* object) final;
   void visitSpecParam(const uhdm::SpecParam* object) final;
   void visitStringTypespec(const uhdm::StringTypespec* object) final;
-  void visitStructNet(const uhdm::StructNet* object) final;
   void visitStructPattern(const uhdm::StructPattern* object) final;
   void visitStructTypespec(const uhdm::StructTypespec* object) final;
   void visitSwitchArray(const uhdm::SwitchArray* object) final;
@@ -271,7 +265,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitTchk(const uhdm::Tchk* object) final;
   void visitTchkTerm(const uhdm::TchkTerm* object) final;
   void visitThread(const uhdm::Thread* object) final;
-  void visitTimeNet(const uhdm::TimeNet* object) final;
   void visitTimeTypespec(const uhdm::TimeTypespec* object) final;
   void visitTypeParameter(const uhdm::TypeParameter* object) final;
   void visitTypedefTypespec(const uhdm::TypedefTypespec* object) final;
@@ -297,7 +290,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitAnyCollection(const uhdm::Any* object, const uhdm::AnyCollection& objects) final;
   void visitAnyPatternCollection(const uhdm::Any* object, const uhdm::AnyPatternCollection& objects) final;
   void visitArrayExprCollection(const uhdm::Any* object, const uhdm::ArrayExprCollection& objects) final;
-  void visitArrayNetCollection(const uhdm::Any* object, const uhdm::ArrayNetCollection& objects) final;
   void visitArrayTypespecCollection(const uhdm::Any* object, const uhdm::ArrayTypespecCollection& objects) final;
   void visitAssertCollection(const uhdm::Any* object, const uhdm::AssertCollection& objects) final;
   void visitAssignStmtCollection(const uhdm::Any* object, const uhdm::AssignStmtCollection& objects) final;
@@ -350,7 +342,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitDistributionCollection(const uhdm::Any* object, const uhdm::DistributionCollection& objects) final;
   void visitDoWhileCollection(const uhdm::Any* object, const uhdm::DoWhileCollection& objects) final;
   void visitEnumConstCollection(const uhdm::Any* object, const uhdm::EnumConstCollection& objects) final;
-  void visitEnumNetCollection(const uhdm::Any* object, const uhdm::EnumNetCollection& objects) final;
   void visitEnumTypespecCollection(const uhdm::Any* object, const uhdm::EnumTypespecCollection& objects) final;
   void visitEventControlCollection(const uhdm::Any* object, const uhdm::EventControlCollection& objects) final;
   void visitEventStmtCollection(const uhdm::Any* object, const uhdm::EventStmtCollection& objects) final;
@@ -392,7 +383,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitInstanceCollection(const uhdm::Any* object, const uhdm::InstanceCollection& objects) final;
   void visitInstanceArrayCollection(const uhdm::Any* object, const uhdm::InstanceArrayCollection& objects) final;
   void visitIntTypespecCollection(const uhdm::Any* object, const uhdm::IntTypespecCollection& objects) final;
-  void visitIntegerNetCollection(const uhdm::Any* object, const uhdm::IntegerNetCollection& objects) final;
   void visitIntegerTypespecCollection(const uhdm::Any* object, const uhdm::IntegerTypespecCollection& objects) final;
   void visitInterfaceCollection(const uhdm::Any* object, const uhdm::InterfaceCollection& objects) final;
   void visitInterfaceArrayCollection(const uhdm::Any* object, const uhdm::InterfaceArrayCollection& objects) final;
@@ -400,7 +390,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitInterfaceTypespecCollection(const uhdm::Any* object, const uhdm::InterfaceTypespecCollection& objects) final;
   void visitLetDeclCollection(const uhdm::Any* object, const uhdm::LetDeclCollection& objects) final;
   void visitLetExprCollection(const uhdm::Any* object, const uhdm::LetExprCollection& objects) final;
-  void visitLogicNetCollection(const uhdm::Any* object, const uhdm::LogicNetCollection& objects) final;
   void visitLogicTypespecCollection(const uhdm::Any* object, const uhdm::LogicTypespecCollection& objects) final;
   void visitLongIntTypespecCollection(const uhdm::Any* object, const uhdm::LongIntTypespecCollection& objects) final;
   void visitMethodFuncCallCollection(const uhdm::Any* object, const uhdm::MethodFuncCallCollection& objects) final;
@@ -414,7 +403,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitNamedEventCollection(const uhdm::Any* object, const uhdm::NamedEventCollection& objects) final;
   void visitNamedEventArrayCollection(const uhdm::Any* object, const uhdm::NamedEventArrayCollection& objects) final;
   void visitNetCollection(const uhdm::Any* object, const uhdm::NetCollection& objects) final;
-  void visitNetBitCollection(const uhdm::Any* object, const uhdm::NetBitCollection& objects) final;
   void visitNetDriversCollection(const uhdm::Any* object, const uhdm::NetDriversCollection& objects) final;
   void visitNetLoadsCollection(const uhdm::Any* object, const uhdm::NetLoadsCollection& objects) final;
   void visitNetsCollection(const uhdm::Any* object, const uhdm::NetsCollection& objects) final;
@@ -422,7 +410,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitOperationCollection(const uhdm::Any* object, const uhdm::OperationCollection& objects) final;
   void visitOrderedWaitCollection(const uhdm::Any* object, const uhdm::OrderedWaitCollection& objects) final;
   void visitPackageCollection(const uhdm::Any* object, const uhdm::PackageCollection& objects) final;
-  void visitPackedArrayNetCollection(const uhdm::Any* object, const uhdm::PackedArrayNetCollection& objects) final;
   void visitPackedArrayTypespecCollection(const uhdm::Any* object, const uhdm::PackedArrayTypespecCollection& objects) final;
   void visitParamAssignCollection(const uhdm::Any* object, const uhdm::ParamAssignCollection& objects) final;
   void visitParameterCollection(const uhdm::Any* object, const uhdm::ParameterCollection& objects) final;
@@ -469,7 +456,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitSourceFileCollection(const uhdm::Any* object, const uhdm::SourceFileCollection& objects) final;
   void visitSpecParamCollection(const uhdm::Any* object, const uhdm::SpecParamCollection& objects) final;
   void visitStringTypespecCollection(const uhdm::Any* object, const uhdm::StringTypespecCollection& objects) final;
-  void visitStructNetCollection(const uhdm::Any* object, const uhdm::StructNetCollection& objects) final;
   void visitStructPatternCollection(const uhdm::Any* object, const uhdm::StructPatternCollection& objects) final;
   void visitStructTypespecCollection(const uhdm::Any* object, const uhdm::StructTypespecCollection& objects) final;
   void visitSwitchArrayCollection(const uhdm::Any* object, const uhdm::SwitchArrayCollection& objects) final;
@@ -487,7 +473,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitTchkCollection(const uhdm::Any* object, const uhdm::TchkCollection& objects) final;
   void visitTchkTermCollection(const uhdm::Any* object, const uhdm::TchkTermCollection& objects) final;
   void visitThreadCollection(const uhdm::Any* object, const uhdm::ThreadCollection& objects) final;
-  void visitTimeNetCollection(const uhdm::Any* object, const uhdm::TimeNetCollection& objects) final;
   void visitTimeTypespecCollection(const uhdm::Any* object, const uhdm::TimeTypespecCollection& objects) final;
   void visitTypeParameterCollection(const uhdm::Any* object, const uhdm::TypeParameterCollection& objects) final;
   void visitTypedefTypespecCollection(const uhdm::Any* object, const uhdm::TypedefTypespecCollection& objects) final;

@@ -53,7 +53,6 @@ class Compiler;
 class ConfigSet;
 class DefParam;
 class DesignComponent;
-class DesignElaboration;
 class ErrorContainer;
 class FileContent;
 class LibrarySet;
@@ -74,7 +73,6 @@ class Design final {
   friend class Builtin;
   friend class CompileDesign;
   friend class Compiler;
-  friend class DesignElaboration;
   friend class ParseCache;
   friend class ParseFile;
   friend class PPCache;

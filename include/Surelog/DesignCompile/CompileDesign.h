@@ -61,7 +61,6 @@ class CompileDesign {
   virtual ~CompileDesign() = default;  // Used in MockCompileDesign
 
   bool compile();
-  bool elaborate();
   void purgeParsers();
   bool writeUHDM(PathId fileId);
 
@@ -84,7 +83,6 @@ class CompileDesign {
   void collectObjects_(Design::FileIdDesignContentMap& all_files,
                        Design* design, bool finalCollection);
   bool compilation_();
-  bool elaboration_();
 
   Session* const m_session = nullptr;
   Compiler* const m_compiler = nullptr;

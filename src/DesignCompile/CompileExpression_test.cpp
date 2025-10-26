@@ -67,8 +67,7 @@ TEST(CompileExpression, ExprFromParseTree1) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::Yes, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
     uhdm::ExprEval eval;
@@ -100,8 +99,7 @@ TEST(CompileExpression, ExprFromParseTree2) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::Yes, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
     uhdm::ExprEval eval;
@@ -132,12 +130,10 @@ TEST(CompileExpression, ExprFromParseTree3) {
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::No, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::Yes, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;
@@ -176,12 +172,10 @@ TEST(CompileExpression, ExprFromPpTree) {
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
     const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::No, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
     const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, compileDesign.get(), Reduce::Yes, module,
-        nullptr, true);
+        nullptr, fC.get(), rhs, compileDesign.get(), module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;

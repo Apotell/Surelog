@@ -43,7 +43,7 @@ namespace SURELOG {
 int32_t FunctorCompileFileContentDecl::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
       m_session, m_compileDesign, m_fileContent, m_design, true);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile();
   delete instance;
   return 0;
 }
@@ -51,16 +51,12 @@ int32_t FunctorCompileFileContentDecl::operator()() const {
 int32_t FunctorCompileFileContent::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
       m_session, m_compileDesign, m_fileContent, m_design, false);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile();
   delete instance;
   return 0;
 }
 
-bool CompileFileContent::compile(Elaborate elaborate, Reduce reduce) {
-  m_helper.setElaborate(elaborate);
-  m_helper.setReduce(reduce);
-  return collectObjects_();
-}
+bool CompileFileContent::compile() { return collectObjects_(); }
 
 bool CompileFileContent::collectObjects_() {
   std::vector<VObjectType> stopPoints = {
@@ -105,17 +101,16 @@ bool CompileFileContent::collectObjects_() {
       case VObjectType::paFunction_declaration: {
         if (m_declOnly == false) {
           m_helper.compileFunction(m_fileContent, fC, id, m_compileDesign,
-                                   Reduce::No, nullptr, true);
+                                   nullptr, true);
           m_helper.compileFunction(m_fileContent, fC, id, m_compileDesign,
-                                   Reduce::No, nullptr, true);
+                                   nullptr, true);
         }
         break;
       }
       case VObjectType::paData_declaration: {
         if (m_declOnly) {
           m_helper.compileDataDeclaration(m_fileContent, fC, id, false,
-                                          m_compileDesign, Reduce::Yes,
-                                          nullptr);
+                                          m_compileDesign, nullptr);
         }
         break;
       }
@@ -135,12 +130,11 @@ bool CompileFileContent::collectObjects_() {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_fileContent, fC, list_of_type_assignments, m_compileDesign,
-                Reduce::Yes, false, nullptr, false, false);
-
+                false, nullptr, false, false);
           } else {
             m_helper.compileParameterDeclaration(m_fileContent, fC, id,
-                                                 m_compileDesign, Reduce::Yes,
-                                                 false, nullptr, false, false);
+                                                 m_compileDesign, false,
+                                                 nullptr, false, false);
           }
         }
         break;
@@ -161,12 +155,11 @@ bool CompileFileContent::collectObjects_() {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_fileContent, fC, list_of_type_assignments, m_compileDesign,
-                Reduce::Yes, true, nullptr, false, false);
-
+                true, nullptr, false, false);
           } else {
             m_helper.compileParameterDeclaration(m_fileContent, fC, id,
-                                                 m_compileDesign, Reduce::Yes,
-                                                 true, nullptr, false, false);
+                                                 m_compileDesign, true, nullptr,
+                                                 false, false);
           }
         }
         break;

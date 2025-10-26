@@ -6,6 +6,8 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackImport/dut.sv:11:1: No timescale set for "ibex_tracer_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackImport/dut.sv:18:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackImport/dut.sv:3:1: Compile package "ibex_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackImport/dut.sv:11:1: Compile package "ibex_tracer_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackImport/dut.sv:18:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -15,10 +17,10 @@ EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             6
 ImportTypespec                                         2
-LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              6
 Package                                                2
 ParamAssign                                            1
@@ -256,7 +258,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (ibex_pkg), line:19:8, endln:19:19
   |vpiImportTypespec:
-  \_LogicNet: (work@top.clk_i), line:18:18, endln:18:23
+  \_Net: (work@top.clk_i), line:18:18, endln:18:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackImport/dut.sv, line:18:1, endln:20:10
     |vpiName:clk_i
@@ -264,13 +266,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:18:32, endln:18:37
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o1), line:18:45, endln:18:47
+  \_Net: (work@top.o1), line:18:45, endln:18:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackImport/dut.sv, line:18:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@top.o1), line:18:32, endln:18:37
       |vpiParent:
-      \_LogicNet: (work@top.o1), line:18:45, endln:18:47
+      \_Net: (work@top.o1), line:18:45, endln:18:47
       |vpiFullName:work@top.o1
       |vpiActual:
       \_LogicTypespec: , line:18:32, endln:18:37
@@ -279,9 +281,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.clk_i), line:18:18, endln:18:23
+  \_Net: (work@top.clk_i), line:18:18, endln:18:23
   |vpiNet:
-  \_LogicNet: (work@top.o1), line:18:45, endln:18:47
+  \_Net: (work@top.o1), line:18:45, endln:18:47
   |vpiPort:
   \_Port: (clk_i), line:18:18, endln:18:23
     |vpiParent:

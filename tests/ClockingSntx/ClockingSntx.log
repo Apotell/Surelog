@@ -257,10 +257,10 @@ EventControl                                           3
 HierPath                                               1
 Identifier                                            10
 Initial                                                1
-LogicNet                                               7
 LogicTypespec                                          7
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    7
 Operation                                              4
 PartSelect                                             1
 Port                                                   6
@@ -299,28 +299,28 @@ Design: (unnamed)
       |vpiName:mem
     |vpiFullName:work@top.mem
     |vpiImportTypespec:
-    \_LogicNet: (work@top.mem.clock), line:2:17, endln:2:22
+    \_Net: (work@top.mem.clock), line:2:17, endln:2:22
       |vpiParent:
       \_ClockingBlock: (work@top.mem), line:2:2, endln:4:13
       |vpiName:clock
       |vpiFullName:work@top.mem.clock
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.mem.opcode), line:3:24, endln:3:30
+    \_Net: (work@top.mem.opcode), line:3:24, endln:3:30
       |vpiParent:
       \_ClockingBlock: (work@top.mem), line:2:2, endln:4:13
       |vpiName:opcode
       |vpiFullName:work@top.mem.opcode
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.mem.regA), line:3:32, endln:3:36
+    \_Net: (work@top.mem.regA), line:3:32, endln:3:36
       |vpiParent:
       \_ClockingBlock: (work@top.mem), line:2:2, endln:4:13
       |vpiName:regA
       |vpiFullName:work@top.mem.regA
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.mem.regB), line:3:38, endln:3:47
+    \_Net: (work@top.mem.regB), line:3:38, endln:3:47
       |vpiParent:
       \_ClockingBlock: (work@top.mem), line:2:2, endln:4:13
       |vpiName:regB
@@ -337,7 +337,7 @@ Design: (unnamed)
         |vpiName:clock
         |vpiFullName:work@top.mem.clock
         |vpiActual:
-        \_LogicNet: (work@top.mem.clock), line:2:17, endln:2:22
+        \_Net: (work@top.mem.clock), line:2:17, endln:2:22
     |vpiClockingIODecl:
     \_ClockingIODecl: (instruction), line:3:8, endln:3:49
       |vpiParent:
@@ -360,7 +360,7 @@ Design: (unnamed)
           |vpiName:opcode
           |vpiFullName:work@top.mem.instruction.opcode
           |vpiActual:
-          \_LogicNet: (work@top.mem.opcode), line:3:24, endln:3:30
+          \_Net: (work@top.mem.opcode), line:3:24, endln:3:30
         |vpiOperand:
         \_RefObj: (work@top.mem.instruction.regA), line:3:32, endln:3:36
           |vpiParent:
@@ -368,7 +368,7 @@ Design: (unnamed)
           |vpiName:regA
           |vpiFullName:work@top.mem.instruction.regA
           |vpiActual:
-          \_LogicNet: (work@top.mem.regA), line:3:32, endln:3:36
+          \_Net: (work@top.mem.regA), line:3:32, endln:3:36
         |vpiOperand:
         \_PartSelect: regB (work@top.mem.instruction.regB), line:3:38, endln:3:47
           |vpiParent:
@@ -377,7 +377,7 @@ Design: (unnamed)
           |vpiFullName:work@top.mem.instruction.regB
           |vpiDefName:regB
           |vpiActual:
-          \_LogicNet: (work@top.mem.regB), line:3:38, endln:3:47
+          \_Net: (work@top.mem.regB), line:3:38, endln:3:47
           |vpiConstantSelect:1
           |vpiLeftRange:
           \_Constant: , line:3:43, endln:3:44
@@ -406,14 +406,14 @@ Design: (unnamed)
       |vpiName:cd1
     |vpiFullName:work@top.cd1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.cd1.cpu1), line:15:21, endln:15:25
+    \_Net: (work@top.cd1.cpu1), line:15:21, endln:15:25
       |vpiParent:
       \_ClockingBlock: (work@top.cd1), line:12:2, endln:16:13
       |vpiName:cpu1
       |vpiFullName:work@top.cd1.cpu1
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.cd1.state), line:15:26, endln:15:31
+    \_Net: (work@top.cd1.state), line:15:26, endln:15:31
       |vpiParent:
       \_ClockingBlock: (work@top.cd1), line:12:2, endln:16:13
       |vpiName:state
@@ -435,7 +435,7 @@ Design: (unnamed)
           |vpiName:phi1
           |vpiFullName:work@top.cd1.phi1
           |vpiActual:
-          \_LogicNet: (work@top.phi1), line:8:9, endln:8:13
+          \_Net: (work@top.phi1), line:8:9, endln:8:13
     |vpiClockingIODecl:
     \_ClockingIODecl: (data), line:13:9, endln:13:13
       |vpiParent:
@@ -483,7 +483,7 @@ Design: (unnamed)
           \_HierPath: (top.cpu1.state), line:15:17, endln:15:31
           |vpiName:cpu1
           |vpiActual:
-          \_LogicNet: (work@top.cd1.cpu1), line:15:21, endln:15:25
+          \_Net: (work@top.cd1.cpu1), line:15:21, endln:15:25
         |vpiActual:
         \_RefObj: (work@top.cd1.state.state), line:15:26, endln:15:31
           |vpiParent:
@@ -491,7 +491,7 @@ Design: (unnamed)
           |vpiName:state
           |vpiFullName:work@top.cd1.state.state
           |vpiActual:
-          \_LogicNet: (work@top.cd1.state), line:15:26, endln:15:31
+          \_Net: (work@top.cd1.state), line:15:26, endln:15:31
         |vpiName:top.cpu1.state
   |vpiInternalScope:
   \_ClockingBlock: (work@top.cd2), line:18:2, endln:21:13
@@ -519,7 +519,7 @@ Design: (unnamed)
           |vpiName:phi2
           |vpiFullName:work@top.cd2.phi2
           |vpiActual:
-          \_LogicNet: (work@top.phi2), line:9:9, endln:9:13
+          \_Net: (work@top.phi2), line:9:9, endln:9:13
     |vpiClockingIODecl:
     \_ClockingIODecl: (cmd), line:19:24, endln:19:27
       |vpiParent:
@@ -627,7 +627,7 @@ Design: (unnamed)
         |UINT:1
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicNet: (work@top.phi1), line:8:9, endln:8:13
+  \_Net: (work@top.phi1), line:8:9, endln:8:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiName:phi1
@@ -635,13 +635,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:21, endln:8:27
   |vpiImportTypespec:
-  \_LogicNet: (work@top.data), line:8:28, endln:8:32
+  \_Net: (work@top.data), line:8:28, endln:8:32
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.data), line:8:21, endln:8:27
       |vpiParent:
-      \_LogicNet: (work@top.data), line:8:28, endln:8:32
+      \_Net: (work@top.data), line:8:28, endln:8:32
       |vpiFullName:work@top.data
       |vpiActual:
       \_LogicTypespec: , line:8:21, endln:8:27
@@ -650,13 +650,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:41, endln:8:46
   |vpiImportTypespec:
-  \_LogicNet: (work@top.write), line:8:47, endln:8:52
+  \_Net: (work@top.write), line:8:47, endln:8:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.write), line:8:41, endln:8:46
       |vpiParent:
-      \_LogicNet: (work@top.write), line:8:47, endln:8:52
+      \_Net: (work@top.write), line:8:47, endln:8:52
       |vpiFullName:work@top.write
       |vpiActual:
       \_LogicTypespec: , line:8:41, endln:8:46
@@ -664,7 +664,7 @@ Design: (unnamed)
     |vpiFullName:work@top.write
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.phi2), line:9:9, endln:9:13
+  \_Net: (work@top.phi2), line:9:9, endln:9:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiName:phi2
@@ -672,20 +672,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:21, endln:9:26
   |vpiImportTypespec:
-  \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
+  \_Net: (work@top.cmd), line:9:27, endln:9:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.cmd), line:9:21, endln:9:26
       |vpiParent:
-      \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
+      \_Net: (work@top.cmd), line:9:27, endln:9:30
       |vpiFullName:work@top.cmd
       |vpiActual:
       \_LogicTypespec: , line:9:21, endln:9:26
     |vpiName:cmd
     |vpiFullName:work@top.cmd
   |vpiImportTypespec:
-  \_LogicNet: (work@top.enable), line:9:38, endln:9:44
+  \_Net: (work@top.enable), line:9:38, endln:9:44
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiName:enable
@@ -693,13 +693,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:2, endln:11:5
   |vpiImportTypespec:
-  \_LogicNet: (work@top.cmd_reg), line:11:12, endln:11:19
+  \_Net: (work@top.cmd_reg), line:11:12, endln:11:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.cmd_reg), line:11:2, endln:11:11
       |vpiParent:
-      \_LogicNet: (work@top.cmd_reg), line:11:12, endln:11:19
+      \_Net: (work@top.cmd_reg), line:11:12, endln:11:19
       |vpiFullName:work@top.cmd_reg
       |vpiActual:
       \_LogicTypespec: , line:11:2, endln:11:5
@@ -708,19 +708,19 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.phi1), line:8:9, endln:8:13
+  \_Net: (work@top.phi1), line:8:9, endln:8:13
   |vpiNet:
-  \_LogicNet: (work@top.data), line:8:28, endln:8:32
+  \_Net: (work@top.data), line:8:28, endln:8:32
   |vpiNet:
-  \_LogicNet: (work@top.write), line:8:47, endln:8:52
+  \_Net: (work@top.write), line:8:47, endln:8:52
   |vpiNet:
-  \_LogicNet: (work@top.phi2), line:9:9, endln:9:13
+  \_Net: (work@top.phi2), line:9:9, endln:9:13
   |vpiNet:
-  \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
+  \_Net: (work@top.cmd), line:9:27, endln:9:30
   |vpiNet:
-  \_LogicNet: (work@top.enable), line:9:38, endln:9:44
+  \_Net: (work@top.enable), line:9:38, endln:9:44
   |vpiNet:
-  \_LogicNet: (work@top.cmd_reg), line:11:12, endln:11:19
+  \_Net: (work@top.cmd_reg), line:11:12, endln:11:19
   |vpiPort:
   \_Port: (phi1), line:8:9, endln:8:13
     |vpiParent:
@@ -803,7 +803,7 @@ Design: (unnamed)
         |vpiName:enable
         |vpiFullName:work@top.enable
         |vpiActual:
-        \_LogicNet: (work@top.enable), line:9:38, endln:9:44
+        \_Net: (work@top.enable), line:9:38, endln:9:44
       |vpiOperand:
       \_RefObj: (work@top.cmd_reg), line:25:24, endln:25:31
         |vpiParent:
@@ -811,7 +811,7 @@ Design: (unnamed)
         |vpiName:cmd_reg
         |vpiFullName:work@top.cmd_reg
         |vpiActual:
-        \_LogicNet: (work@top.cmd_reg), line:11:12, endln:11:19
+        \_Net: (work@top.cmd_reg), line:11:12, endln:11:19
       |vpiOperand:
       \_Constant: , line:25:33, endln:25:35
         |vpiParent:
@@ -827,7 +827,7 @@ Design: (unnamed)
       |vpiName:cmd
       |vpiFullName:work@top.cmd
       |vpiActual:
-      \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
+      \_Net: (work@top.cmd), line:9:27, endln:9:30
   |vpiClockingBlock:
   \_ClockingBlock: (work@top.mem), line:2:2, endln:4:13
   |vpiClockingBlock:

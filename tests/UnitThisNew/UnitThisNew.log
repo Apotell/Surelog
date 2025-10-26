@@ -301,6 +301,7 @@ n<> u<295> t<Top_level_rule> c<1> l<1:1> el<45:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:1:1: No timescale set for "toto".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:1:1: Compile package "toto".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
@@ -335,7 +336,7 @@ SourceFile                                             1
 StringTypespec                                         2
 Task                                                   9
 TypedefTypespec                                        1
-UnsupportedTypespec                                    6
+UnsupportedTypespec                                    7
 Variable                                               1
 VoidTypespec                                           2
 === UHDM Object Stats End ===
@@ -1216,10 +1217,17 @@ Design: (unnamed)
     \_StringTypespec: , line:3:49, endln:3:55
       |vpiParent:
       \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16
+    |vpiTypedef:
+    \_UnsupportedTypespec: (uvm_action), line:3:75, endln:3:85
+      |vpiParent:
+      \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16
+      |vpiName:uvm_action
     |vpiImportTypespec:
     \_BitTypespec: , line:3:23, endln:3:26
     |vpiImportTypespec:
     \_StringTypespec: , line:3:49, endln:3:55
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (uvm_action), line:3:75, endln:3:85
     |vpiImportTypespec:
     \_Variable: (toto::uvm_string_to_action::actions), line:4:14, endln:4:21
     |vpiVisibility:1
@@ -1334,6 +1342,13 @@ Design: (unnamed)
           \_MethodFuncCall: (copy), line:11:7, endln:11:20
           |vpiName:tmp
           |vpiFullName:toto::uvm_object::clone::tmp
+    |vpiTypedef:
+    \_UnsupportedTypespec: (uvm_object), line:7:14, endln:7:24
+      |vpiParent:
+      \_Function: (toto::uvm_object::clone), line:7:5, endln:13:16
+      |vpiName:uvm_object
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (uvm_object), line:7:14, endln:7:24
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (toto::uvm_object::clone::uvm_object), line:7:14, endln:7:24
@@ -1450,6 +1465,13 @@ Design: (unnamed)
           \_ReturnStmt: , line:21:4, endln:21:19
           |vpiName:m_b_inst
           |vpiFullName:toto::m_initialize::m_b_inst
+    |vpiTypedef:
+    \_UnsupportedTypespec: (this_type), line:16:10, endln:16:19
+      |vpiParent:
+      \_Function: (toto::m_initialize), line:16:1, endln:22:13
+      |vpiName:this_type
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (this_type), line:16:10, endln:16:19
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (toto::m_initialize::this_type), line:16:10, endln:16:19
@@ -1477,8 +1499,15 @@ Design: (unnamed)
     \_VoidTypespec: , line:25:10, endln:25:14
       |vpiParent:
       \_Function: (toto::uvm_reg::add_field), line:25:1, endln:30:12
+    |vpiTypedef:
+    \_UnsupportedTypespec: (uvm_reg_field), line:25:34, endln:25:47
+      |vpiParent:
+      \_Function: (toto::uvm_reg::add_field), line:25:1, endln:30:12
+      |vpiName:uvm_reg_field
     |vpiImportTypespec:
     \_VoidTypespec: , line:25:10, endln:25:14
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (uvm_reg_field), line:25:34, endln:25:47
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (toto::uvm_reg::add_field)
@@ -1648,8 +1677,15 @@ Design: (unnamed)
     \_VoidTypespec: , line:36:10, endln:36:14
       |vpiParent:
       \_Function: (toto::uvm_reg_backdoor::start_update_thread), line:36:1, endln:42:15
+    |vpiTypedef:
+    \_UnsupportedTypespec: (uvm_object), line:36:53, endln:36:63
+      |vpiParent:
+      \_Function: (toto::uvm_reg_backdoor::start_update_thread), line:36:1, endln:42:15
+      |vpiName:uvm_object
     |vpiImportTypespec:
     \_VoidTypespec: , line:36:10, endln:36:14
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (uvm_object), line:36:53, endln:36:63
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (toto::uvm_reg_backdoor::start_update_thread)
@@ -1677,11 +1713,6 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
   |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_action), line:3:75, endln:3:85
-    |vpiParent:
-    \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
-    |vpiName:uvm_action
-  |vpiTypedef:
   \_ArrayTypespec: , line:4:7, endln:4:24
     |vpiParent:
     \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
@@ -1693,26 +1724,6 @@ Design: (unnamed)
       |vpiFullName:toto
       |vpiActual:
       \_StringTypespec: , line:3:49, endln:3:55
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_object), line:7:14, endln:7:24
-    |vpiParent:
-    \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
-    |vpiName:uvm_object
-  |vpiTypedef:
-  \_UnsupportedTypespec: (this_type), line:16:10, endln:16:19
-    |vpiParent:
-    \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
-    |vpiName:this_type
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_reg_field), line:25:34, endln:25:47
-    |vpiParent:
-    \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
-    |vpiName:uvm_reg_field
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_object), line:36:53, endln:36:63
-    |vpiParent:
-    \_Package: toto (toto), file:${SURELOG_DIR}/tests/UnitThisNew/dut.sv, line:1:1, endln:44:11
-    |vpiName:uvm_object
   |vpiImportTypespec:
   \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16
   |vpiImportTypespec:
@@ -1726,17 +1737,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (toto::uvm_reg_backdoor::start_update_thread), line:36:1, endln:42:15
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_action), line:3:75, endln:3:85
-  |vpiImportTypespec:
   \_ArrayTypespec: , line:4:7, endln:4:24
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_object), line:7:14, endln:7:24
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (this_type), line:16:10, endln:16:19
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_reg_field), line:25:34, endln:25:47
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_object), line:36:53, endln:36:63
   |vpiDefName:toto
   |vpiTaskFunc:
   \_Function: (toto::uvm_string_to_action), line:3:4, endln:5:16

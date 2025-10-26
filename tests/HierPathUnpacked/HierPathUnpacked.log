@@ -293,6 +293,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -309,6 +310,7 @@ IntTypespec                                            4
 LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         2
+Net                                                    2
 Operation                                              5
 Package                                                1
 ParamAssign                                            4
@@ -319,7 +321,6 @@ RefModule                                              2
 RefObj                                                 8
 RefTypespec                                           13
 SourceFile                                             1
-StructNet                                              2
 StructTypespec                                         2
 SysFuncCall                                            2
 TypedefTypespec                                        2
@@ -678,7 +679,7 @@ Design: (unnamed)
           \_HierPath: (keymgr_key_i.key[0]), line:23:24, endln:23:43
           |vpiName:keymgr_key_i
           |vpiActual:
-          \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
+          \_Net: (work@top.keymgr_key_i), line:20:29, endln:20:41
         |vpiActual:
         \_BitSelect: (work@top.keymgr_key_i.key[0].key), line:23:40, endln:23:43
           |vpiParent:
@@ -686,7 +687,7 @@ Design: (unnamed)
           |vpiName:key
           |vpiFullName:work@top.keymgr_key_i.key[0].key
           |vpiActual:
-          \_LogicNet: (work@top.key), line:23:40, endln:23:43
+          \_Net: (work@top.key), line:23:40, endln:23:43
           |vpiIndex:
           \_Constant: , line:23:41, endln:23:42
             |vpiParent:
@@ -721,7 +722,7 @@ Design: (unnamed)
           \_HierPath: (a.pair[0]), line:24:24, endln:24:33
           |vpiName:a
           |vpiActual:
-          \_StructNet: (work@top.a), line:21:23, endln:21:24
+          \_Net: (work@top.a), line:21:23, endln:21:24
         |vpiActual:
         \_BitSelect: (work@top.a.pair[0].pair), line:24:30, endln:24:33
           |vpiParent:
@@ -729,7 +730,7 @@ Design: (unnamed)
           |vpiName:pair
           |vpiFullName:work@top.a.pair[0].pair
           |vpiActual:
-          \_LogicNet: (work@top.pair), line:24:30, endln:24:33
+          \_Net: (work@top.pair), line:24:30, endln:24:33
           |vpiIndex:
           \_Constant: , line:24:31, endln:24:32
             |vpiParent:
@@ -791,13 +792,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:19:23, endln:19:24
   |vpiImportTypespec:
-  \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
+  \_Net: (work@top.keymgr_key_i), line:20:29, endln:20:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@top.keymgr_key_i.keymgr_pkg::hw_key_req_t), line:20:4, endln:20:28
       |vpiParent:
-      \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
+      \_Net: (work@top.keymgr_key_i), line:20:29, endln:20:41
       |vpiName:keymgr_pkg::hw_key_req_t
       |vpiFullName:work@top.keymgr_key_i.keymgr_pkg::hw_key_req_t
       |vpiActual:
@@ -805,13 +806,13 @@ Design: (unnamed)
     |vpiName:keymgr_key_i
     |vpiFullName:work@top.keymgr_key_i
   |vpiImportTypespec:
-  \_StructNet: (work@top.a), line:21:23, endln:21:24
+  \_Net: (work@top.a), line:21:23, endln:21:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a.keymgr_pkg::foo_t), line:21:5, endln:21:22
       |vpiParent:
-      \_StructNet: (work@top.a), line:21:23, endln:21:24
+      \_Net: (work@top.a), line:21:23, endln:21:24
       |vpiName:keymgr_pkg::foo_t
       |vpiFullName:work@top.a.keymgr_pkg::foo_t
       |vpiActual:
@@ -819,14 +820,14 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiImportTypespec:
-  \_LogicNet: (work@top.key), line:23:40, endln:23:43
+  \_Net: (work@top.key), line:23:40, endln:23:43
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiName:key
     |vpiFullName:work@top.key
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.pair), line:24:30, endln:24:33
+  \_Net: (work@top.pair), line:24:30, endln:24:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiName:pair
@@ -834,13 +835,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
+  \_Net: (work@top.keymgr_key_i), line:20:29, endln:20:41
   |vpiNet:
-  \_StructNet: (work@top.a), line:21:23, endln:21:24
+  \_Net: (work@top.a), line:21:23, endln:21:24
   |vpiNet:
-  \_LogicNet: (work@top.key), line:23:40, endln:23:43
+  \_Net: (work@top.key), line:23:40, endln:23:43
   |vpiNet:
-  \_LogicNet: (work@top.pair), line:24:30, endln:24:33
+  \_Net: (work@top.pair), line:24:30, endln:24:33
   |vpiPort:
   \_Port: (o), line:19:23, endln:19:24
     |vpiParent:

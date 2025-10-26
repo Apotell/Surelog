@@ -391,6 +391,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:17:1: No timescale set for "kmac_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:33:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:1:1: Compile package "sha3_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:5:1: Compile package "kmac_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:17:1: Compile package "kmac_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv:33:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -405,6 +408,7 @@ IntTypespec                                            9
 LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                             29
 Package                                                3
 ParamAssign                                            9
@@ -413,11 +417,11 @@ Range                                                  1
 RefObj                                                39
 RefTypespec                                           26
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         4
 SysFuncCall                                            4
 TypedefTypespec                                        2
 TypespecMember                                         6
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStructTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1085,35 +1089,35 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (kmac_reg_pkg), line:35:10, endln:35:25
   |vpiImportTypespec:
-  \_StructNet: (work@top.hw2reg), line:36:15, endln:36:21
+  \_Net: (work@top.hw2reg), line:36:15, endln:36:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.hw2reg.kmac_reg_pkg::kmac_hw2reg_t), line:36:1, endln:36:14
+    \_RefTypespec: (work@top.hw2reg.kmac_hw2reg_t), line:36:1, endln:36:14
       |vpiParent:
-      \_StructNet: (work@top.hw2reg), line:36:15, endln:36:21
-      |vpiName:kmac_reg_pkg::kmac_hw2reg_t
-      |vpiFullName:work@top.hw2reg.kmac_reg_pkg::kmac_hw2reg_t
+      \_Net: (work@top.hw2reg), line:36:15, endln:36:21
+      |vpiName:kmac_hw2reg_t
+      |vpiFullName:work@top.hw2reg.kmac_hw2reg_t
       |vpiActual:
       \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:30:5, endln:30:18
     |vpiName:hw2reg
     |vpiFullName:work@top.hw2reg
   |vpiImportTypespec:
-  \_LogicNet: (work@top.status), line:37:18, endln:37:24
+  \_Net: (work@top.status), line:37:18, endln:37:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiName:status
     |vpiFullName:work@top.status
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.fifo_depth), line:37:25, endln:37:35
+  \_Net: (work@top.fifo_depth), line:37:25, endln:37:35
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiName:fifo_depth
     |vpiFullName:work@top.fifo_depth
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.d), line:37:36, endln:37:37
+  \_Net: (work@top.d), line:37:36, endln:37:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiName:d
@@ -1121,13 +1125,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.hw2reg), line:36:15, endln:36:21
+  \_Net: (work@top.hw2reg), line:36:15, endln:36:21
   |vpiNet:
-  \_LogicNet: (work@top.status), line:37:18, endln:37:24
+  \_Net: (work@top.status), line:37:18, endln:37:24
   |vpiNet:
-  \_LogicNet: (work@top.fifo_depth), line:37:25, endln:37:35
+  \_Net: (work@top.fifo_depth), line:37:25, endln:37:35
   |vpiNet:
-  \_LogicNet: (work@top.d), line:37:36, endln:37:37
+  \_Net: (work@top.d), line:37:36, endln:37:37
   |vpiGenStmt:
   \_GenIf: , line:37:1, endln:39:4
     |vpiParent:
@@ -1151,21 +1155,21 @@ Design: (unnamed)
             \_HierPath: (hw2reg.status.fifo_depth.d), line:37:11, endln:37:37
             |vpiName:hw2reg
             |vpiActual:
-            \_StructNet: (work@top.hw2reg), line:36:15, endln:36:21
+            \_Net: (work@top.hw2reg), line:36:15, endln:36:21
           |vpiActual:
           \_RefObj: (status), line:37:18, endln:37:24
             |vpiParent:
             \_HierPath: (hw2reg.status.fifo_depth.d), line:37:11, endln:37:37
             |vpiName:status
             |vpiActual:
-            \_LogicNet: (work@top.status), line:37:18, endln:37:24
+            \_Net: (work@top.status), line:37:18, endln:37:24
           |vpiActual:
           \_RefObj: (fifo_depth), line:37:25, endln:37:35
             |vpiParent:
             \_HierPath: (hw2reg.status.fifo_depth.d), line:37:11, endln:37:37
             |vpiName:fifo_depth
             |vpiActual:
-            \_LogicNet: (work@top.fifo_depth), line:37:25, endln:37:35
+            \_Net: (work@top.fifo_depth), line:37:25, endln:37:35
           |vpiActual:
           \_RefObj: (work@top.d), line:37:36, endln:37:37
             |vpiParent:
@@ -1173,7 +1177,7 @@ Design: (unnamed)
             |vpiName:d
             |vpiFullName:work@top.d
             |vpiActual:
-            \_LogicNet: (work@top.d), line:37:36, endln:37:37
+            \_Net: (work@top.d), line:37:36, endln:37:37
           |vpiName:hw2reg.status.fifo_depth.d
         |vpiName:
         \_Identifier: ($bits)

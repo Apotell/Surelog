@@ -3,6 +3,7 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:2:1: No timescale set for "pack".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:43:1: No timescale set for "door_mod".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:2:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:43:1: Compile module "work@door_mod".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:4:1: Compile class "pack::door".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:21:1: Compile class "pack::doorOpen".
@@ -25,11 +26,11 @@ Identifier                                            18
 IfStmt                                                 1
 Initial                                                1
 IntTypespec                                            4
-LogicNet                                               1
 LogicTypespec                                          5
 MethodFuncCall                                         3
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
@@ -571,13 +572,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
   |vpiImportTypespec:
-  \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+  \_Net: (work@door_mod.open), line:45:20, endln:45:24
     |vpiParent:
     \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:43:1, endln:51:10
     |vpiTypespec:
     \_RefTypespec: (work@door_mod.open.pack::doorOpen), line:45:5, endln:45:19
       |vpiParent:
-      \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+      \_Net: (work@door_mod.open), line:45:20, endln:45:24
       |vpiName:pack::doorOpen
       |vpiFullName:work@door_mod.open.pack::doorOpen
       |vpiActual:
@@ -586,7 +587,7 @@ Design: (unnamed)
     |vpiFullName:work@door_mod.open
   |vpiDefName:work@door_mod
   |vpiNet:
-  \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+  \_Net: (work@door_mod.open), line:45:20, endln:45:24
   |vpiProcess:
   \_Initial: , line:46:5, endln:50:8
     |vpiParent:
@@ -618,7 +619,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+          \_Net: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
       \_MethodFuncCall: (door_fsm), line:48:9, endln:48:23
         |vpiParent:
@@ -635,7 +636,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+          \_Net: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
       \_MethodFuncCall: (f1), line:49:9, endln:49:17
         |vpiParent:
@@ -652,7 +653,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+          \_Net: (work@door_mod.open), line:45:20, endln:45:24
 |vpiTypedef:
 \_ModuleTypespec: (door_mod)
   |vpiParent:

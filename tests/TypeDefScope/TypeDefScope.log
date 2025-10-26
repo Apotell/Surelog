@@ -124,10 +124,10 @@ Function                                              10
 IODecl                                                16
 Identifier                                            32
 IntTypespec                                            9
-LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 Port                                                   2
 RefObj                                                 2
@@ -136,7 +136,7 @@ SourceFile                                             1
 StringTypespec                                         4
 Task                                                   9
 TypedefTypespec                                        3
-UnsupportedTypespec                                    4
+UnsupportedTypespec                                    5
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefScope/slpp_all/surelog.uhdm ...
@@ -990,6 +990,11 @@ Design: (unnamed)
           |vpiActual:
           \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
       |vpiTypedef:
+      \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
+        |vpiParent:
+        \_Begin: (work@dut.UVMC_set_config_object)
+        |vpiName:uvmc_default_converter
+      |vpiTypedef:
       \_LogicTypespec: , line:9:9, endln:9:14
         |vpiParent:
         \_Begin: (work@dut.UVMC_set_config_object)
@@ -1012,6 +1017,8 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_TypedefTypespec: (converter1), line:8:46, endln:8:56
       |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
+      |vpiImportTypespec:
       \_LogicTypespec: , line:9:9, endln:9:14
       |vpiImportTypespec:
       \_TypedefTypespec: (converter2), line:9:15, endln:9:25
@@ -1023,10 +1030,17 @@ Design: (unnamed)
     \_StringTypespec: , line:3:42, endln:3:48
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
+    |vpiTypedef:
+    \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
+      |vpiParent:
+      \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
+      |vpiName:bits_t
     |vpiImportTypespec:
     \_VoidTypespec: , line:3:13, endln:3:17
     |vpiImportTypespec:
     \_StringTypespec: , line:3:42, endln:3:48
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@dut.UVMC_set_config_object)
@@ -1103,30 +1117,16 @@ Design: (unnamed)
         \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
     |vpiStmt:
     \_Begin: (work@dut.UVMC_set_config_object)
-  |vpiTypedef:
-  \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
-    |vpiName:bits_t
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
-    |vpiName:uvmc_default_converter
   |vpiImportTypespec:
   \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
-  |vpiImportTypespec:
-  \_LogicNet: (work@dut.a), line:1:13, endln:1:14
+  \_Net: (work@dut.a), line:1:13, endln:1:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
     |vpiName:a
     |vpiFullName:work@dut.a
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.b), line:1:16, endln:1:17
+  \_Net: (work@dut.b), line:1:16, endln:1:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
     |vpiName:b
@@ -1135,9 +1135,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
   |vpiNet:
-  \_LogicNet: (work@dut.a), line:1:13, endln:1:14
+  \_Net: (work@dut.a), line:1:13, endln:1:14
   |vpiNet:
-  \_LogicNet: (work@dut.b), line:1:16, endln:1:17
+  \_Net: (work@dut.b), line:1:16, endln:1:17
   |vpiPort:
   \_Port: (a), line:1:13, endln:1:14
     |vpiParent:

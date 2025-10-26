@@ -19,7 +19,6 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 5
-ArrayNet                                               4
 ArrayTypespec                                          4
 Assignment                                           290
 Begin                                                 15
@@ -41,15 +40,13 @@ IfElse                                                 4
 IfStmt                                                 2
 Initial                                                2
 IntTypespec                                            9
-IntegerNet                                             1
 IntegerTypespec                                        1
-LogicNet                                              24
 LogicTypespec                                         30
 Module                                                 8
 ModuleTypespec                                         7
+Net                                                   30
 Operation                                             32
 Package                                                1
-PackedArrayNet                                         1
 PackedArrayTypespec                                    2
 PartSelect                                             1
 Port                                                  21
@@ -61,6 +58,7 @@ SourceFile                                             8
 SysFuncCall                                            3
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysSmall/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1147,13 +1145,13 @@ Design: (unnamed)
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicNet: (work@cic5.clk), line:7:12, endln:7:15
+  \_Net: (work@cic5.clk), line:7:12, endln:7:15
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiName:clk
     |vpiFullName:work@cic5.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@cic5.rst_n), line:8:12, endln:8:17
+  \_Net: (work@cic5.rst_n), line:8:12, endln:8:17
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiName:rst_n
@@ -1161,13 +1159,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:9:12, endln:9:25
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@cic5.d_in), line:9:26, endln:9:30
+  \_Net: (work@cic5.d_in), line:9:26, endln:9:30
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.d_in), line:9:12, endln:9:25
       |vpiParent:
-      \_PackedArrayNet: (work@cic5.d_in), line:9:26, endln:9:30
+      \_Net: (work@cic5.d_in), line:9:26, endln:9:30
       |vpiFullName:work@cic5.d_in
       |vpiActual:
       \_PackedArrayTypespec: , line:9:12, endln:9:25
@@ -1177,13 +1175,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:12, endln:10:22
   |vpiImportTypespec:
-  \_LogicNet: (work@cic5.d_out), line:10:30, endln:10:35
+  \_Net: (work@cic5.d_out), line:10:30, endln:10:35
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.d_out), line:10:12, endln:10:15
       |vpiParent:
-      \_LogicNet: (work@cic5.d_out), line:10:30, endln:10:35
+      \_Net: (work@cic5.d_out), line:10:30, endln:10:35
       |vpiFullName:work@cic5.d_out
       |vpiActual:
       \_LogicTypespec: , line:10:12, endln:10:22
@@ -1194,13 +1192,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:12, endln:11:15
   |vpiImportTypespec:
-  \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+  \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.d_out_valid), line:11:12, endln:11:15
       |vpiParent:
-      \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+      \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
       |vpiFullName:work@cic5.d_out_valid
       |vpiActual:
       \_LogicTypespec: , line:11:12, endln:11:15
@@ -1212,13 +1210,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:14:1, endln:14:31
   |vpiImportTypespec:
-  \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+  \_Net: (work@cic5.int_s), line:14:19, endln:14:24
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.int_s), line:14:1, endln:14:18
       |vpiParent:
-      \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+      \_Net: (work@cic5.int_s), line:14:19, endln:14:24
       |vpiFullName:work@cic5.int_s
       |vpiActual:
       \_ArrayTypespec: , line:14:1, endln:14:31
@@ -1231,13 +1229,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:15:1, endln:15:31
   |vpiImportTypespec:
-  \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+  \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.comb_s), line:15:1, endln:15:18
       |vpiParent:
-      \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+      \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
       |vpiFullName:work@cic5.comb_s
       |vpiActual:
       \_ArrayTypespec: , line:15:1, endln:15:31
@@ -1250,13 +1248,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:16:1, endln:16:31
   |vpiImportTypespec:
-  \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+  \_Net: (work@cic5.tmp), line:16:19, endln:16:22
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.tmp), line:16:1, endln:16:18
       |vpiParent:
-      \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+      \_Net: (work@cic5.tmp), line:16:19, endln:16:22
       |vpiFullName:work@cic5.tmp
       |vpiActual:
       \_ArrayTypespec: , line:16:1, endln:16:31
@@ -1267,13 +1265,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:1, endln:17:4
   |vpiImportTypespec:
-  \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+  \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.decimation_count), line:17:1, endln:17:10
       |vpiParent:
-      \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+      \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
       |vpiFullName:work@cic5.decimation_count
       |vpiActual:
       \_LogicTypespec: , line:17:1, endln:17:4
@@ -1283,13 +1281,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:19:1, endln:19:8
   |vpiImportTypespec:
-  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+  \_Net: (work@cic5.i), line:19:9, endln:19:10
     |vpiParent:
     \_Module: work@cic5 (work@cic5), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v, line:6:1, endln:65:10
     |vpiTypespec:
     \_RefTypespec: (work@cic5.i), line:19:1, endln:19:8
       |vpiParent:
-      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+      \_Net: (work@cic5.i), line:19:9, endln:19:10
       |vpiFullName:work@cic5.i
       |vpiActual:
       \_IntegerTypespec: , line:19:1, endln:19:8
@@ -1298,25 +1296,25 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiDefName:work@cic5
   |vpiNet:
-  \_LogicNet: (work@cic5.clk), line:7:12, endln:7:15
+  \_Net: (work@cic5.clk), line:7:12, endln:7:15
   |vpiNet:
-  \_LogicNet: (work@cic5.rst_n), line:8:12, endln:8:17
+  \_Net: (work@cic5.rst_n), line:8:12, endln:8:17
   |vpiNet:
-  \_PackedArrayNet: (work@cic5.d_in), line:9:26, endln:9:30
+  \_Net: (work@cic5.d_in), line:9:26, endln:9:30
   |vpiNet:
-  \_LogicNet: (work@cic5.d_out), line:10:30, endln:10:35
+  \_Net: (work@cic5.d_out), line:10:30, endln:10:35
   |vpiNet:
-  \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+  \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
   |vpiNet:
-  \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+  \_Net: (work@cic5.int_s), line:14:19, endln:14:24
   |vpiNet:
-  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
-  |vpiArrayNet:
-  \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
-  |vpiArrayNet:
-  \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
-  |vpiArrayNet:
-  \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+  \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
+  |vpiNet:
+  \_Net: (work@cic5.tmp), line:16:19, endln:16:22
+  |vpiNet:
+  \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
+  |vpiNet:
+  \_Net: (work@cic5.i), line:19:9, endln:19:10
   |vpiPort:
   \_Port: (clk), line:7:12, endln:7:15
     |vpiParent:
@@ -1388,7 +1386,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@cic5.clk
           |vpiActual:
-          \_LogicNet: (work@cic5.clk), line:7:12, endln:7:15
+          \_Net: (work@cic5.clk), line:7:12, endln:7:15
       |vpiStmt:
       \_Begin: (work@cic5), line:22:5, endln:63:8
         |vpiParent:
@@ -1410,7 +1408,7 @@ Design: (unnamed)
               |vpiName:rst_n
               |vpiFullName:work@cic5.rst_n
               |vpiActual:
-              \_LogicNet: (work@cic5.rst_n), line:8:12, endln:8:17
+              \_Net: (work@cic5.rst_n), line:8:12, endln:8:17
             |vpiOperand:
             \_Constant: , line:23:22, endln:23:26
               |vpiParent:
@@ -1454,7 +1452,7 @@ Design: (unnamed)
                     |vpiName:int_s
                     |vpiFullName:work@cic5.int_s
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                    \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                     |vpiIndex:
                     \_RefObj: (work@cic5.i), line:26:23, endln:26:24
                       |vpiParent:
@@ -1462,7 +1460,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
                 |vpiStmt:
                 \_Assignment: , line:27:17, endln:27:35
                   |vpiParent:
@@ -1483,7 +1481,7 @@ Design: (unnamed)
                     |vpiName:comb_s
                     |vpiFullName:work@cic5.comb_s
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+                    \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
                     |vpiIndex:
                     \_RefObj: (work@cic5.i), line:27:24, endln:27:25
                       |vpiParent:
@@ -1491,7 +1489,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiForInitStmt:
               \_Assignment: , line:25:18, endln:25:21
                 |vpiParent:
@@ -1511,7 +1509,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiForIncStmt:
               \_Assignment: , line:25:29, endln:25:34
                 |vpiParent:
@@ -1530,7 +1528,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:work@cic5.i
                     |vpiActual:
-                    \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                    \_Net: (work@cic5.i), line:19:9, endln:19:10
                   |vpiOperand:
                   \_Constant: , line:25:33, endln:25:34
                     |vpiParent:
@@ -1546,7 +1544,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiCondition:
               \_Operation: , line:25:23, endln:25:27
                 |vpiParent:
@@ -1559,7 +1557,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
                 |vpiOperand:
                 \_Constant: , line:25:26, endln:25:27
                   |vpiParent:
@@ -1592,7 +1590,7 @@ Design: (unnamed)
                 |vpiName:decimation_count
                 |vpiFullName:work@cic5.decimation_count
                 |vpiActual:
-                \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+                \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
             |vpiStmt:
             \_Assignment: , line:30:13, endln:30:29
               |vpiParent:
@@ -1613,7 +1611,7 @@ Design: (unnamed)
                 |vpiName:d_out_valid
                 |vpiFullName:work@cic5.d_out_valid
                 |vpiActual:
-                \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+                \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
             |vpiStmt:
             \_Assignment: , line:31:13, endln:31:23
               |vpiParent:
@@ -1634,7 +1632,7 @@ Design: (unnamed)
                 |vpiName:d_out
                 |vpiFullName:work@cic5.d_out
                 |vpiActual:
-                \_LogicNet: (work@cic5.d_out), line:10:30, endln:10:35
+                \_Net: (work@cic5.d_out), line:10:30, endln:10:35
           |vpiElseStmt:
           \_Begin: (work@cic5), line:34:9, endln:62:12
             |vpiParent:
@@ -1667,7 +1665,7 @@ Design: (unnamed)
                       |vpiName:int_s
                       |vpiFullName:work@cic5.int_s
                       |vpiActual:
-                      \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                      \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                       |vpiIndex:
                       \_RefObj: (work@cic5.i), line:42:35, endln:42:36
                         |vpiParent:
@@ -1675,7 +1673,7 @@ Design: (unnamed)
                         |vpiName:i
                         |vpiFullName:work@cic5.i
                         |vpiActual:
-                        \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                        \_Net: (work@cic5.i), line:19:9, endln:19:10
                     |vpiOperand:
                     \_BitSelect: (work@cic5.int_s), line:42:45, endln:42:50
                       |vpiParent:
@@ -1683,7 +1681,7 @@ Design: (unnamed)
                       |vpiName:int_s
                       |vpiFullName:work@cic5.int_s
                       |vpiActual:
-                      \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                      \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                       |vpiIndex:
                       \_Operation: , line:42:46, endln:42:49
                         |vpiParent:
@@ -1696,7 +1694,7 @@ Design: (unnamed)
                           |vpiName:i
                           |vpiFullName:work@cic5.int_s.i
                           |vpiActual:
-                          \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                          \_Net: (work@cic5.i), line:19:9, endln:19:10
                         |vpiOperand:
                         \_Constant: , line:42:48, endln:42:49
                           |vpiParent:
@@ -1712,7 +1710,7 @@ Design: (unnamed)
                     |vpiName:int_s
                     |vpiFullName:work@cic5.int_s
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                    \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                     |vpiIndex:
                     \_RefObj: (work@cic5.i), line:42:23, endln:42:24
                       |vpiParent:
@@ -1720,7 +1718,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiForInitStmt:
               \_Assignment: , line:41:18, endln:41:21
                 |vpiParent:
@@ -1740,7 +1738,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiForIncStmt:
               \_Assignment: , line:41:29, endln:41:34
                 |vpiParent:
@@ -1759,7 +1757,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:work@cic5.i
                     |vpiActual:
-                    \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                    \_Net: (work@cic5.i), line:19:9, endln:19:10
                   |vpiOperand:
                   \_Constant: , line:41:33, endln:41:34
                     |vpiParent:
@@ -1775,7 +1773,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
               |vpiCondition:
               \_Operation: , line:41:23, endln:41:27
                 |vpiParent:
@@ -1788,7 +1786,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@cic5.i
                   |vpiActual:
-                  \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                  \_Net: (work@cic5.i), line:19:9, endln:19:10
                 |vpiOperand:
                 \_Constant: , line:41:26, endln:41:27
                   |vpiParent:
@@ -1819,7 +1817,7 @@ Design: (unnamed)
                 |vpiName:d_out_valid
                 |vpiFullName:work@cic5.d_out_valid
                 |vpiActual:
-                \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+                \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
             |vpiStmt:
             \_Assignment: , line:37:13, endln:37:53
               |vpiParent:
@@ -1837,7 +1835,7 @@ Design: (unnamed)
                   |vpiName:decimation_count
                   |vpiFullName:work@cic5.decimation_count
                   |vpiActual:
-                  \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+                  \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
                 |vpiOperand:
                 \_Constant: , line:37:52, endln:37:53
                   |vpiParent:
@@ -1853,7 +1851,7 @@ Design: (unnamed)
                 |vpiName:decimation_count
                 |vpiFullName:work@cic5.decimation_count
                 |vpiActual:
-                \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+                \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
             |vpiStmt:
             \_Assignment: , line:40:13, endln:40:40
               |vpiParent:
@@ -1871,7 +1869,7 @@ Design: (unnamed)
                   |vpiName:int_s
                   |vpiFullName:work@cic5.int_s
                   |vpiActual:
-                  \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                  \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                   |vpiIndex:
                   \_Constant: , line:40:31, endln:40:32
                     |vpiParent:
@@ -1887,7 +1885,7 @@ Design: (unnamed)
                   |vpiName:d_in
                   |vpiFullName:work@cic5.d_in
                   |vpiActual:
-                  \_PackedArrayNet: (work@cic5.d_in), line:9:26, endln:9:30
+                  \_Net: (work@cic5.d_in), line:9:26, endln:9:30
               |vpiLhs:
               \_BitSelect: (work@cic5.int_s), line:40:18, endln:40:21
                 |vpiParent:
@@ -1895,7 +1893,7 @@ Design: (unnamed)
                 |vpiName:int_s
                 |vpiFullName:work@cic5.int_s
                 |vpiActual:
-                \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                 |vpiIndex:
                 \_Constant: , line:40:19, endln:40:20
                   |vpiParent:
@@ -1922,7 +1920,7 @@ Design: (unnamed)
                   |vpiName:decimation_count
                   |vpiFullName:work@cic5.decimation_count
                   |vpiActual:
-                  \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+                  \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
                 |vpiOperand:
                 \_Constant: , line:48:37, endln:48:41
                   |vpiParent:
@@ -1964,7 +1962,7 @@ Design: (unnamed)
                           |vpiName:tmp
                           |vpiFullName:work@cic5.tmp
                           |vpiActual:
-                          \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+                          \_Net: (work@cic5.tmp), line:16:19, endln:16:22
                           |vpiIndex:
                           \_Operation: , line:54:34, endln:54:37
                             |vpiParent:
@@ -1977,7 +1975,7 @@ Design: (unnamed)
                               |vpiName:i
                               |vpiFullName:work@cic5.tmp.i
                               |vpiActual:
-                              \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                              \_Net: (work@cic5.i), line:19:9, endln:19:10
                             |vpiOperand:
                             \_Constant: , line:54:36, endln:54:37
                               |vpiParent:
@@ -1993,7 +1991,7 @@ Design: (unnamed)
                           |vpiName:comb_s
                           |vpiFullName:work@cic5.comb_s
                           |vpiActual:
-                          \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+                          \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
                           |vpiIndex:
                           \_RefObj: (work@cic5.i), line:54:48, endln:54:49
                             |vpiParent:
@@ -2001,7 +1999,7 @@ Design: (unnamed)
                             |vpiName:i
                             |vpiFullName:work@cic5.i
                             |vpiActual:
-                            \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                            \_Net: (work@cic5.i), line:19:9, endln:19:10
                       |vpiLhs:
                       \_BitSelect: (work@cic5.tmp), line:54:24, endln:54:27
                         |vpiParent:
@@ -2009,7 +2007,7 @@ Design: (unnamed)
                         |vpiName:tmp
                         |vpiFullName:work@cic5.tmp
                         |vpiActual:
-                        \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+                        \_Net: (work@cic5.tmp), line:16:19, endln:16:22
                         |vpiIndex:
                         \_RefObj: (work@cic5.i), line:54:25, endln:54:26
                           |vpiParent:
@@ -2017,7 +2015,7 @@ Design: (unnamed)
                           |vpiName:i
                           |vpiFullName:work@cic5.i
                           |vpiActual:
-                          \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                          \_Net: (work@cic5.i), line:19:9, endln:19:10
                     |vpiStmt:
                     \_Assignment: , line:55:21, endln:55:42
                       |vpiParent:
@@ -2030,7 +2028,7 @@ Design: (unnamed)
                         |vpiName:tmp
                         |vpiFullName:work@cic5.tmp
                         |vpiActual:
-                        \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+                        \_Net: (work@cic5.tmp), line:16:19, endln:16:22
                         |vpiIndex:
                         \_Operation: , line:55:38, endln:55:41
                           |vpiParent:
@@ -2043,7 +2041,7 @@ Design: (unnamed)
                             |vpiName:i
                             |vpiFullName:work@cic5.tmp.i
                             |vpiActual:
-                            \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                            \_Net: (work@cic5.i), line:19:9, endln:19:10
                           |vpiOperand:
                           \_Constant: , line:55:40, endln:55:41
                             |vpiParent:
@@ -2059,7 +2057,7 @@ Design: (unnamed)
                         |vpiName:comb_s
                         |vpiFullName:work@cic5.comb_s
                         |vpiActual:
-                        \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+                        \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
                         |vpiIndex:
                         \_RefObj: (work@cic5.i), line:55:28, endln:55:29
                           |vpiParent:
@@ -2067,7 +2065,7 @@ Design: (unnamed)
                           |vpiName:i
                           |vpiFullName:work@cic5.i
                           |vpiActual:
-                          \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                          \_Net: (work@cic5.i), line:19:9, endln:19:10
                   |vpiForInitStmt:
                   \_Assignment: , line:53:22, endln:53:25
                     |vpiParent:
@@ -2087,7 +2085,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
                   |vpiForIncStmt:
                   \_Assignment: , line:53:33, endln:53:38
                     |vpiParent:
@@ -2106,7 +2104,7 @@ Design: (unnamed)
                         |vpiName:i
                         |vpiFullName:work@cic5.i
                         |vpiActual:
-                        \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                        \_Net: (work@cic5.i), line:19:9, endln:19:10
                       |vpiOperand:
                       \_Constant: , line:53:37, endln:53:38
                         |vpiParent:
@@ -2122,7 +2120,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
                   |vpiCondition:
                   \_Operation: , line:53:27, endln:53:31
                     |vpiParent:
@@ -2135,7 +2133,7 @@ Design: (unnamed)
                       |vpiName:i
                       |vpiFullName:work@cic5.i
                       |vpiActual:
-                      \_IntegerNet: (work@cic5.i), line:19:9, endln:19:10
+                      \_Net: (work@cic5.i), line:19:9, endln:19:10
                     |vpiOperand:
                     \_Constant: , line:53:30, endln:53:31
                       |vpiParent:
@@ -2164,7 +2162,7 @@ Design: (unnamed)
                       |vpiName:int_s
                       |vpiFullName:work@cic5.int_s
                       |vpiActual:
-                      \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                      \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                       |vpiIndex:
                       \_Constant: , line:51:32, endln:51:33
                         |vpiParent:
@@ -2180,7 +2178,7 @@ Design: (unnamed)
                       |vpiName:comb_s
                       |vpiFullName:work@cic5.comb_s
                       |vpiActual:
-                      \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+                      \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
                       |vpiIndex:
                       \_Constant: , line:51:44, endln:51:45
                         |vpiParent:
@@ -2196,7 +2194,7 @@ Design: (unnamed)
                     |vpiName:tmp
                     |vpiFullName:work@cic5.tmp
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+                    \_Net: (work@cic5.tmp), line:16:19, endln:16:22
                     |vpiIndex:
                     \_Constant: , line:51:21, endln:51:22
                       |vpiParent:
@@ -2217,7 +2215,7 @@ Design: (unnamed)
                     |vpiName:int_s
                     |vpiFullName:work@cic5.int_s
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.int_s), line:14:19, endln:14:24
+                    \_Net: (work@cic5.int_s), line:14:19, endln:14:24
                     |vpiIndex:
                     \_Constant: , line:52:36, endln:52:37
                       |vpiParent:
@@ -2233,7 +2231,7 @@ Design: (unnamed)
                     |vpiName:comb_s
                     |vpiFullName:work@cic5.comb_s
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.comb_s), line:15:19, endln:15:25
+                    \_Net: (work@cic5.comb_s), line:15:19, endln:15:25
                     |vpiIndex:
                     \_Constant: , line:52:24, endln:52:25
                       |vpiParent:
@@ -2264,7 +2262,7 @@ Design: (unnamed)
                     |vpiName:decimation_count
                     |vpiFullName:work@cic5.decimation_count
                     |vpiActual:
-                    \_LogicNet: (work@cic5.decimation_count), line:17:12, endln:17:28
+                    \_Net: (work@cic5.decimation_count), line:17:12, endln:17:28
                 |vpiStmt:
                 \_Assignment: , line:59:17, endln:59:36
                   |vpiParent:
@@ -2285,7 +2283,7 @@ Design: (unnamed)
                     |vpiName:d_out_valid
                     |vpiFullName:work@cic5.d_out_valid
                     |vpiActual:
-                    \_LogicNet: (work@cic5.d_out_valid), line:11:16, endln:11:27
+                    \_Net: (work@cic5.d_out_valid), line:11:16, endln:11:27
                 |vpiStmt:
                 \_Assignment: , line:60:17, endln:60:32
                   |vpiParent:
@@ -2298,7 +2296,7 @@ Design: (unnamed)
                     |vpiName:tmp
                     |vpiFullName:work@cic5.tmp
                     |vpiActual:
-                    \_ArrayNet: (work@cic5.tmp), line:16:19, endln:16:22
+                    \_Net: (work@cic5.tmp), line:16:19, endln:16:22
                     |vpiIndex:
                     \_Constant: , line:60:30, endln:60:31
                       |vpiParent:
@@ -2314,7 +2312,7 @@ Design: (unnamed)
                     |vpiName:d_out
                     |vpiFullName:work@cic5.d_out
                     |vpiActual:
-                    \_LogicNet: (work@cic5.d_out), line:10:30, endln:10:35
+                    \_Net: (work@cic5.d_out), line:10:30, endln:10:35
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
@@ -2456,26 +2454,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:21, endln:8:26
   |vpiImportTypespec:
-  \_LogicNet: (work@crc32.din), line:8:27, endln:8:30
+  \_Net: (work@crc32.din), line:8:27, endln:8:30
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiTypespec:
     \_RefTypespec: (work@crc32.din), line:8:21, endln:8:26
       |vpiParent:
-      \_LogicNet: (work@crc32.din), line:8:27, endln:8:30
+      \_Net: (work@crc32.din), line:8:27, endln:8:30
       |vpiFullName:work@crc32.din
       |vpiActual:
       \_LogicTypespec: , line:8:21, endln:8:26
     |vpiName:din
     |vpiFullName:work@crc32.din
   |vpiImportTypespec:
-  \_LogicNet: (work@crc32.clk), line:8:38, endln:8:41
+  \_Net: (work@crc32.clk), line:8:38, endln:8:41
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiName:clk
     |vpiFullName:work@crc32.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@crc32.rst_n), line:8:49, endln:8:54
+  \_Net: (work@crc32.rst_n), line:8:49, endln:8:54
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiName:rst_n
@@ -2483,13 +2481,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:63, endln:8:69
   |vpiImportTypespec:
-  \_LogicNet: (work@crc32.dout), line:8:70, endln:8:74
+  \_Net: (work@crc32.dout), line:8:70, endln:8:74
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiTypespec:
     \_RefTypespec: (work@crc32.dout), line:8:63, endln:8:69
       |vpiParent:
-      \_LogicNet: (work@crc32.dout), line:8:70, endln:8:74
+      \_Net: (work@crc32.dout), line:8:70, endln:8:74
       |vpiFullName:work@crc32.dout
       |vpiActual:
       \_LogicTypespec: , line:8:63, endln:8:69
@@ -2500,13 +2498,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:10:3, endln:10:28
   |vpiImportTypespec:
-  \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+  \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiTypespec:
     \_RefTypespec: (work@crc32.crctbl), line:10:3, endln:10:13
       |vpiParent:
-      \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+      \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
       |vpiFullName:work@crc32.crctbl
       |vpiActual:
       \_ArrayTypespec: , line:10:3, endln:10:28
@@ -2516,13 +2514,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:3, endln:11:6
   |vpiImportTypespec:
-  \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+  \_Net: (work@crc32.crc), line:11:14, endln:11:17
     |vpiParent:
     \_Module: work@crc32 (work@crc32), file:${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v, line:8:1, endln:283:10
     |vpiTypespec:
     \_RefTypespec: (work@crc32.crc), line:11:3, endln:11:13
       |vpiParent:
-      \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+      \_Net: (work@crc32.crc), line:11:14, endln:11:17
       |vpiFullName:work@crc32.crc
       |vpiActual:
       \_LogicTypespec: , line:11:3, endln:11:6
@@ -2531,17 +2529,17 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@crc32
   |vpiNet:
-  \_LogicNet: (work@crc32.din), line:8:27, endln:8:30
+  \_Net: (work@crc32.din), line:8:27, endln:8:30
   |vpiNet:
-  \_LogicNet: (work@crc32.clk), line:8:38, endln:8:41
+  \_Net: (work@crc32.clk), line:8:38, endln:8:41
   |vpiNet:
-  \_LogicNet: (work@crc32.rst_n), line:8:49, endln:8:54
+  \_Net: (work@crc32.rst_n), line:8:49, endln:8:54
   |vpiNet:
-  \_LogicNet: (work@crc32.dout), line:8:70, endln:8:74
+  \_Net: (work@crc32.dout), line:8:70, endln:8:74
   |vpiNet:
-  \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
-  |vpiArrayNet:
-  \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+  \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
+  |vpiNet:
+  \_Net: (work@crc32.crc), line:11:14, endln:11:17
   |vpiPort:
   \_Port: (din), line:8:27, endln:8:30
     |vpiParent:
@@ -2609,7 +2607,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:15:16, endln:15:17
             |vpiParent:
@@ -2638,7 +2636,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:16:16, endln:16:17
             |vpiParent:
@@ -2667,7 +2665,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:17:16, endln:17:17
             |vpiParent:
@@ -2696,7 +2694,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:18:16, endln:18:17
             |vpiParent:
@@ -2725,7 +2723,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:19:16, endln:19:17
             |vpiParent:
@@ -2754,7 +2752,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:20:16, endln:20:17
             |vpiParent:
@@ -2783,7 +2781,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:21:16, endln:21:17
             |vpiParent:
@@ -2812,7 +2810,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:22:16, endln:22:17
             |vpiParent:
@@ -2841,7 +2839,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:23:16, endln:23:17
             |vpiParent:
@@ -2870,7 +2868,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:24:16, endln:24:17
             |vpiParent:
@@ -2899,7 +2897,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:25:16, endln:25:18
             |vpiParent:
@@ -2928,7 +2926,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:26:16, endln:26:18
             |vpiParent:
@@ -2957,7 +2955,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:27:16, endln:27:18
             |vpiParent:
@@ -2986,7 +2984,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:28:16, endln:28:18
             |vpiParent:
@@ -3015,7 +3013,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:29:16, endln:29:18
             |vpiParent:
@@ -3044,7 +3042,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:30:16, endln:30:18
             |vpiParent:
@@ -3073,7 +3071,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:31:16, endln:31:18
             |vpiParent:
@@ -3102,7 +3100,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:32:16, endln:32:18
             |vpiParent:
@@ -3131,7 +3129,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:33:16, endln:33:18
             |vpiParent:
@@ -3160,7 +3158,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:34:16, endln:34:18
             |vpiParent:
@@ -3189,7 +3187,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:35:16, endln:35:18
             |vpiParent:
@@ -3218,7 +3216,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:36:16, endln:36:18
             |vpiParent:
@@ -3247,7 +3245,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:37:16, endln:37:18
             |vpiParent:
@@ -3276,7 +3274,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:38:16, endln:38:18
             |vpiParent:
@@ -3305,7 +3303,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:39:16, endln:39:18
             |vpiParent:
@@ -3334,7 +3332,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:40:16, endln:40:18
             |vpiParent:
@@ -3363,7 +3361,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:41:16, endln:41:18
             |vpiParent:
@@ -3392,7 +3390,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:42:16, endln:42:18
             |vpiParent:
@@ -3421,7 +3419,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:43:16, endln:43:18
             |vpiParent:
@@ -3450,7 +3448,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:44:16, endln:44:18
             |vpiParent:
@@ -3479,7 +3477,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:45:16, endln:45:18
             |vpiParent:
@@ -3508,7 +3506,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:46:16, endln:46:18
             |vpiParent:
@@ -3537,7 +3535,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:47:16, endln:47:18
             |vpiParent:
@@ -3566,7 +3564,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:48:16, endln:48:18
             |vpiParent:
@@ -3595,7 +3593,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:49:16, endln:49:18
             |vpiParent:
@@ -3624,7 +3622,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:50:16, endln:50:18
             |vpiParent:
@@ -3653,7 +3651,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:51:16, endln:51:18
             |vpiParent:
@@ -3682,7 +3680,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:52:16, endln:52:18
             |vpiParent:
@@ -3711,7 +3709,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:53:16, endln:53:18
             |vpiParent:
@@ -3740,7 +3738,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:54:16, endln:54:18
             |vpiParent:
@@ -3769,7 +3767,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:55:16, endln:55:18
             |vpiParent:
@@ -3798,7 +3796,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:56:16, endln:56:18
             |vpiParent:
@@ -3827,7 +3825,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:57:16, endln:57:18
             |vpiParent:
@@ -3856,7 +3854,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:58:16, endln:58:18
             |vpiParent:
@@ -3885,7 +3883,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:59:16, endln:59:18
             |vpiParent:
@@ -3914,7 +3912,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:60:16, endln:60:18
             |vpiParent:
@@ -3943,7 +3941,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:61:16, endln:61:18
             |vpiParent:
@@ -3972,7 +3970,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:62:16, endln:62:18
             |vpiParent:
@@ -4001,7 +3999,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:63:16, endln:63:18
             |vpiParent:
@@ -4030,7 +4028,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:64:16, endln:64:18
             |vpiParent:
@@ -4059,7 +4057,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:65:16, endln:65:18
             |vpiParent:
@@ -4088,7 +4086,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:66:16, endln:66:18
             |vpiParent:
@@ -4117,7 +4115,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:67:16, endln:67:18
             |vpiParent:
@@ -4146,7 +4144,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:68:16, endln:68:18
             |vpiParent:
@@ -4175,7 +4173,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:69:16, endln:69:18
             |vpiParent:
@@ -4204,7 +4202,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:70:16, endln:70:18
             |vpiParent:
@@ -4233,7 +4231,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:71:16, endln:71:18
             |vpiParent:
@@ -4262,7 +4260,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:72:16, endln:72:18
             |vpiParent:
@@ -4291,7 +4289,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:73:16, endln:73:18
             |vpiParent:
@@ -4320,7 +4318,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:74:16, endln:74:18
             |vpiParent:
@@ -4349,7 +4347,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:75:16, endln:75:18
             |vpiParent:
@@ -4378,7 +4376,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:76:16, endln:76:18
             |vpiParent:
@@ -4407,7 +4405,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:77:16, endln:77:18
             |vpiParent:
@@ -4436,7 +4434,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:78:16, endln:78:18
             |vpiParent:
@@ -4465,7 +4463,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:79:16, endln:79:18
             |vpiParent:
@@ -4494,7 +4492,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:80:16, endln:80:18
             |vpiParent:
@@ -4523,7 +4521,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:81:16, endln:81:18
             |vpiParent:
@@ -4552,7 +4550,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:82:16, endln:82:18
             |vpiParent:
@@ -4581,7 +4579,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:83:16, endln:83:18
             |vpiParent:
@@ -4610,7 +4608,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:84:16, endln:84:18
             |vpiParent:
@@ -4639,7 +4637,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:85:16, endln:85:18
             |vpiParent:
@@ -4668,7 +4666,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:86:16, endln:86:18
             |vpiParent:
@@ -4697,7 +4695,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:87:16, endln:87:18
             |vpiParent:
@@ -4726,7 +4724,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:88:16, endln:88:18
             |vpiParent:
@@ -4755,7 +4753,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:89:16, endln:89:18
             |vpiParent:
@@ -4784,7 +4782,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:90:16, endln:90:18
             |vpiParent:
@@ -4813,7 +4811,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:91:16, endln:91:18
             |vpiParent:
@@ -4842,7 +4840,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:92:16, endln:92:18
             |vpiParent:
@@ -4871,7 +4869,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:93:16, endln:93:18
             |vpiParent:
@@ -4900,7 +4898,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:94:16, endln:94:18
             |vpiParent:
@@ -4929,7 +4927,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:95:16, endln:95:18
             |vpiParent:
@@ -4958,7 +4956,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:96:16, endln:96:18
             |vpiParent:
@@ -4987,7 +4985,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:97:16, endln:97:18
             |vpiParent:
@@ -5016,7 +5014,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:98:16, endln:98:18
             |vpiParent:
@@ -5045,7 +5043,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:99:16, endln:99:18
             |vpiParent:
@@ -5074,7 +5072,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:100:16, endln:100:18
             |vpiParent:
@@ -5103,7 +5101,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:101:16, endln:101:18
             |vpiParent:
@@ -5132,7 +5130,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:102:16, endln:102:18
             |vpiParent:
@@ -5161,7 +5159,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:103:16, endln:103:18
             |vpiParent:
@@ -5190,7 +5188,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:104:16, endln:104:18
             |vpiParent:
@@ -5219,7 +5217,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:105:16, endln:105:18
             |vpiParent:
@@ -5248,7 +5246,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:106:16, endln:106:18
             |vpiParent:
@@ -5277,7 +5275,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:107:16, endln:107:18
             |vpiParent:
@@ -5306,7 +5304,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:108:16, endln:108:18
             |vpiParent:
@@ -5335,7 +5333,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:109:16, endln:109:18
             |vpiParent:
@@ -5364,7 +5362,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:110:16, endln:110:18
             |vpiParent:
@@ -5393,7 +5391,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:111:16, endln:111:18
             |vpiParent:
@@ -5422,7 +5420,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:112:16, endln:112:18
             |vpiParent:
@@ -5451,7 +5449,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:113:16, endln:113:18
             |vpiParent:
@@ -5480,7 +5478,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:114:16, endln:114:18
             |vpiParent:
@@ -5509,7 +5507,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:115:16, endln:115:19
             |vpiParent:
@@ -5538,7 +5536,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:116:16, endln:116:19
             |vpiParent:
@@ -5567,7 +5565,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:117:16, endln:117:19
             |vpiParent:
@@ -5596,7 +5594,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:118:16, endln:118:19
             |vpiParent:
@@ -5625,7 +5623,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:119:16, endln:119:19
             |vpiParent:
@@ -5654,7 +5652,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:120:16, endln:120:19
             |vpiParent:
@@ -5683,7 +5681,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:121:16, endln:121:19
             |vpiParent:
@@ -5712,7 +5710,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:122:16, endln:122:19
             |vpiParent:
@@ -5741,7 +5739,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:123:16, endln:123:19
             |vpiParent:
@@ -5770,7 +5768,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:124:16, endln:124:19
             |vpiParent:
@@ -5799,7 +5797,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:125:16, endln:125:19
             |vpiParent:
@@ -5828,7 +5826,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:126:16, endln:126:19
             |vpiParent:
@@ -5857,7 +5855,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:127:16, endln:127:19
             |vpiParent:
@@ -5886,7 +5884,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:128:16, endln:128:19
             |vpiParent:
@@ -5915,7 +5913,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:129:16, endln:129:19
             |vpiParent:
@@ -5944,7 +5942,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:130:16, endln:130:19
             |vpiParent:
@@ -5973,7 +5971,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:131:16, endln:131:19
             |vpiParent:
@@ -6002,7 +6000,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:132:16, endln:132:19
             |vpiParent:
@@ -6031,7 +6029,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:133:16, endln:133:19
             |vpiParent:
@@ -6060,7 +6058,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:134:16, endln:134:19
             |vpiParent:
@@ -6089,7 +6087,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:135:16, endln:135:19
             |vpiParent:
@@ -6118,7 +6116,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:136:16, endln:136:19
             |vpiParent:
@@ -6147,7 +6145,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:137:16, endln:137:19
             |vpiParent:
@@ -6176,7 +6174,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:138:16, endln:138:19
             |vpiParent:
@@ -6205,7 +6203,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:139:16, endln:139:19
             |vpiParent:
@@ -6234,7 +6232,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:140:16, endln:140:19
             |vpiParent:
@@ -6263,7 +6261,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:141:16, endln:141:19
             |vpiParent:
@@ -6292,7 +6290,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:142:16, endln:142:19
             |vpiParent:
@@ -6321,7 +6319,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:143:16, endln:143:19
             |vpiParent:
@@ -6350,7 +6348,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:144:16, endln:144:19
             |vpiParent:
@@ -6379,7 +6377,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:145:16, endln:145:19
             |vpiParent:
@@ -6408,7 +6406,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:146:16, endln:146:19
             |vpiParent:
@@ -6437,7 +6435,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:147:16, endln:147:19
             |vpiParent:
@@ -6466,7 +6464,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:148:16, endln:148:19
             |vpiParent:
@@ -6495,7 +6493,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:149:16, endln:149:19
             |vpiParent:
@@ -6524,7 +6522,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:150:16, endln:150:19
             |vpiParent:
@@ -6553,7 +6551,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:151:16, endln:151:19
             |vpiParent:
@@ -6582,7 +6580,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:152:16, endln:152:19
             |vpiParent:
@@ -6611,7 +6609,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:153:16, endln:153:19
             |vpiParent:
@@ -6640,7 +6638,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:154:16, endln:154:19
             |vpiParent:
@@ -6669,7 +6667,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:155:16, endln:155:19
             |vpiParent:
@@ -6698,7 +6696,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:156:16, endln:156:19
             |vpiParent:
@@ -6727,7 +6725,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:157:16, endln:157:19
             |vpiParent:
@@ -6756,7 +6754,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:158:16, endln:158:19
             |vpiParent:
@@ -6785,7 +6783,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:159:16, endln:159:19
             |vpiParent:
@@ -6814,7 +6812,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:160:16, endln:160:19
             |vpiParent:
@@ -6843,7 +6841,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:161:16, endln:161:19
             |vpiParent:
@@ -6872,7 +6870,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:162:16, endln:162:19
             |vpiParent:
@@ -6901,7 +6899,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:163:16, endln:163:19
             |vpiParent:
@@ -6930,7 +6928,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:164:16, endln:164:19
             |vpiParent:
@@ -6959,7 +6957,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:165:16, endln:165:19
             |vpiParent:
@@ -6988,7 +6986,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:166:16, endln:166:19
             |vpiParent:
@@ -7017,7 +7015,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:167:16, endln:167:19
             |vpiParent:
@@ -7046,7 +7044,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:168:16, endln:168:19
             |vpiParent:
@@ -7075,7 +7073,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:169:16, endln:169:19
             |vpiParent:
@@ -7104,7 +7102,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:170:16, endln:170:19
             |vpiParent:
@@ -7133,7 +7131,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:171:16, endln:171:19
             |vpiParent:
@@ -7162,7 +7160,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:172:16, endln:172:19
             |vpiParent:
@@ -7191,7 +7189,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:173:16, endln:173:19
             |vpiParent:
@@ -7220,7 +7218,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:174:16, endln:174:19
             |vpiParent:
@@ -7249,7 +7247,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:175:16, endln:175:19
             |vpiParent:
@@ -7278,7 +7276,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:176:16, endln:176:19
             |vpiParent:
@@ -7307,7 +7305,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:177:16, endln:177:19
             |vpiParent:
@@ -7336,7 +7334,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:178:16, endln:178:19
             |vpiParent:
@@ -7365,7 +7363,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:179:16, endln:179:19
             |vpiParent:
@@ -7394,7 +7392,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:180:16, endln:180:19
             |vpiParent:
@@ -7423,7 +7421,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:181:16, endln:181:19
             |vpiParent:
@@ -7452,7 +7450,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:182:16, endln:182:19
             |vpiParent:
@@ -7481,7 +7479,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:183:16, endln:183:19
             |vpiParent:
@@ -7510,7 +7508,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:184:16, endln:184:19
             |vpiParent:
@@ -7539,7 +7537,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:185:16, endln:185:19
             |vpiParent:
@@ -7568,7 +7566,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:186:16, endln:186:19
             |vpiParent:
@@ -7597,7 +7595,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:187:16, endln:187:19
             |vpiParent:
@@ -7626,7 +7624,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:188:16, endln:188:19
             |vpiParent:
@@ -7655,7 +7653,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:189:16, endln:189:19
             |vpiParent:
@@ -7684,7 +7682,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:190:16, endln:190:19
             |vpiParent:
@@ -7713,7 +7711,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:191:16, endln:191:19
             |vpiParent:
@@ -7742,7 +7740,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:192:16, endln:192:19
             |vpiParent:
@@ -7771,7 +7769,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:193:16, endln:193:19
             |vpiParent:
@@ -7800,7 +7798,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:194:16, endln:194:19
             |vpiParent:
@@ -7829,7 +7827,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:195:16, endln:195:19
             |vpiParent:
@@ -7858,7 +7856,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:196:16, endln:196:19
             |vpiParent:
@@ -7887,7 +7885,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:197:16, endln:197:19
             |vpiParent:
@@ -7916,7 +7914,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:198:16, endln:198:19
             |vpiParent:
@@ -7945,7 +7943,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:199:16, endln:199:19
             |vpiParent:
@@ -7974,7 +7972,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:200:16, endln:200:19
             |vpiParent:
@@ -8003,7 +8001,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:201:16, endln:201:19
             |vpiParent:
@@ -8032,7 +8030,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:202:16, endln:202:19
             |vpiParent:
@@ -8061,7 +8059,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:203:16, endln:203:19
             |vpiParent:
@@ -8090,7 +8088,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:204:16, endln:204:19
             |vpiParent:
@@ -8119,7 +8117,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:205:16, endln:205:19
             |vpiParent:
@@ -8148,7 +8146,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:206:16, endln:206:19
             |vpiParent:
@@ -8177,7 +8175,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:207:16, endln:207:19
             |vpiParent:
@@ -8206,7 +8204,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:208:16, endln:208:19
             |vpiParent:
@@ -8235,7 +8233,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:209:16, endln:209:19
             |vpiParent:
@@ -8264,7 +8262,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:210:16, endln:210:19
             |vpiParent:
@@ -8293,7 +8291,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:211:16, endln:211:19
             |vpiParent:
@@ -8322,7 +8320,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:212:16, endln:212:19
             |vpiParent:
@@ -8351,7 +8349,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:213:16, endln:213:19
             |vpiParent:
@@ -8380,7 +8378,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:214:16, endln:214:19
             |vpiParent:
@@ -8409,7 +8407,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:215:16, endln:215:19
             |vpiParent:
@@ -8438,7 +8436,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:216:16, endln:216:19
             |vpiParent:
@@ -8467,7 +8465,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:217:16, endln:217:19
             |vpiParent:
@@ -8496,7 +8494,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:218:16, endln:218:19
             |vpiParent:
@@ -8525,7 +8523,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:219:16, endln:219:19
             |vpiParent:
@@ -8554,7 +8552,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:220:16, endln:220:19
             |vpiParent:
@@ -8583,7 +8581,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:221:16, endln:221:19
             |vpiParent:
@@ -8612,7 +8610,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:222:16, endln:222:19
             |vpiParent:
@@ -8641,7 +8639,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:223:16, endln:223:19
             |vpiParent:
@@ -8670,7 +8668,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:224:16, endln:224:19
             |vpiParent:
@@ -8699,7 +8697,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:225:16, endln:225:19
             |vpiParent:
@@ -8728,7 +8726,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:226:16, endln:226:19
             |vpiParent:
@@ -8757,7 +8755,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:227:16, endln:227:19
             |vpiParent:
@@ -8786,7 +8784,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:228:16, endln:228:19
             |vpiParent:
@@ -8815,7 +8813,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:229:16, endln:229:19
             |vpiParent:
@@ -8844,7 +8842,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:230:16, endln:230:19
             |vpiParent:
@@ -8873,7 +8871,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:231:16, endln:231:19
             |vpiParent:
@@ -8902,7 +8900,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:232:16, endln:232:19
             |vpiParent:
@@ -8931,7 +8929,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:233:16, endln:233:19
             |vpiParent:
@@ -8960,7 +8958,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:234:16, endln:234:19
             |vpiParent:
@@ -8989,7 +8987,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:235:16, endln:235:19
             |vpiParent:
@@ -9018,7 +9016,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:236:16, endln:236:19
             |vpiParent:
@@ -9047,7 +9045,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:237:16, endln:237:19
             |vpiParent:
@@ -9076,7 +9074,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:238:16, endln:238:19
             |vpiParent:
@@ -9105,7 +9103,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:239:16, endln:239:19
             |vpiParent:
@@ -9134,7 +9132,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:240:16, endln:240:19
             |vpiParent:
@@ -9163,7 +9161,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:241:16, endln:241:19
             |vpiParent:
@@ -9192,7 +9190,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:242:16, endln:242:19
             |vpiParent:
@@ -9221,7 +9219,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:243:16, endln:243:19
             |vpiParent:
@@ -9250,7 +9248,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:244:16, endln:244:19
             |vpiParent:
@@ -9279,7 +9277,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:245:16, endln:245:19
             |vpiParent:
@@ -9308,7 +9306,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:246:16, endln:246:19
             |vpiParent:
@@ -9337,7 +9335,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:247:16, endln:247:19
             |vpiParent:
@@ -9366,7 +9364,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:248:16, endln:248:19
             |vpiParent:
@@ -9395,7 +9393,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:249:16, endln:249:19
             |vpiParent:
@@ -9424,7 +9422,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:250:16, endln:250:19
             |vpiParent:
@@ -9453,7 +9451,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:251:16, endln:251:19
             |vpiParent:
@@ -9482,7 +9480,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:252:16, endln:252:19
             |vpiParent:
@@ -9511,7 +9509,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:253:16, endln:253:19
             |vpiParent:
@@ -9540,7 +9538,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:254:16, endln:254:19
             |vpiParent:
@@ -9569,7 +9567,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:255:16, endln:255:19
             |vpiParent:
@@ -9598,7 +9596,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:256:16, endln:256:19
             |vpiParent:
@@ -9627,7 +9625,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:257:16, endln:257:19
             |vpiParent:
@@ -9656,7 +9654,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:258:16, endln:258:19
             |vpiParent:
@@ -9685,7 +9683,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:259:16, endln:259:19
             |vpiParent:
@@ -9714,7 +9712,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:260:16, endln:260:19
             |vpiParent:
@@ -9743,7 +9741,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:261:16, endln:261:19
             |vpiParent:
@@ -9772,7 +9770,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:262:16, endln:262:19
             |vpiParent:
@@ -9801,7 +9799,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:263:16, endln:263:19
             |vpiParent:
@@ -9830,7 +9828,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:264:16, endln:264:19
             |vpiParent:
@@ -9859,7 +9857,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:265:16, endln:265:19
             |vpiParent:
@@ -9888,7 +9886,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:266:16, endln:266:19
             |vpiParent:
@@ -9917,7 +9915,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:267:16, endln:267:19
             |vpiParent:
@@ -9946,7 +9944,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:268:16, endln:268:19
             |vpiParent:
@@ -9975,7 +9973,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:269:16, endln:269:19
             |vpiParent:
@@ -10004,7 +10002,7 @@ Design: (unnamed)
           |vpiName:crctbl
           |vpiFullName:work@crc32.crctbl
           |vpiActual:
-          \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+          \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
           |vpiIndex:
           \_Constant: , line:270:16, endln:270:19
             |vpiParent:
@@ -10033,7 +10031,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@crc32.clk
           |vpiActual:
-          \_LogicNet: (work@crc32.clk), line:8:38, endln:8:41
+          \_Net: (work@crc32.clk), line:8:38, endln:8:41
       |vpiStmt:
       \_Begin: (work@crc32), line:274:3, endln:279:6
         |vpiParent:
@@ -10055,7 +10053,7 @@ Design: (unnamed)
               |vpiName:rst_n
               |vpiFullName:work@crc32.rst_n
               |vpiActual:
-              \_LogicNet: (work@crc32.rst_n), line:8:49, endln:8:54
+              \_Net: (work@crc32.rst_n), line:8:49, endln:8:54
             |vpiOperand:
             \_Constant: , line:275:18, endln:275:22
               |vpiParent:
@@ -10084,7 +10082,7 @@ Design: (unnamed)
               |vpiName:crc
               |vpiFullName:work@crc32.crc
               |vpiActual:
-              \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+              \_Net: (work@crc32.crc), line:11:14, endln:11:17
           |vpiElseStmt:
           \_Assignment: , line:278:7, endln:278:51
             |vpiParent:
@@ -10107,7 +10105,7 @@ Design: (unnamed)
                   |vpiName:crc
                   |vpiFullName:work@crc32.crc
                   |vpiActual:
-                  \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+                  \_Net: (work@crc32.crc), line:11:14, endln:11:17
                 |vpiOperand:
                 \_Constant: , line:278:22, endln:278:23
                   |vpiParent:
@@ -10123,7 +10121,7 @@ Design: (unnamed)
                 |vpiName:crctbl
                 |vpiFullName:work@crc32.crctbl
                 |vpiActual:
-                \_ArrayNet: (work@crc32.crctbl), line:10:14, endln:10:20
+                \_Net: (work@crc32.crctbl), line:10:14, endln:10:20
                 |vpiIndex:
                 \_Operation: , line:278:35, endln:278:49
                   |vpiParent:
@@ -10137,7 +10135,7 @@ Design: (unnamed)
                     |vpiFullName:work@crc32.crctbl.crc
                     |vpiDefName:crc
                     |vpiActual:
-                    \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+                    \_Net: (work@crc32.crc), line:11:14, endln:11:17
                     |vpiConstantSelect:1
                     |vpiLeftRange:
                     \_Constant: , line:278:39, endln:278:40
@@ -10162,7 +10160,7 @@ Design: (unnamed)
                     |vpiName:din
                     |vpiFullName:work@crc32.crctbl.din
                     |vpiActual:
-                    \_LogicNet: (work@crc32.din), line:8:27, endln:8:30
+                    \_Net: (work@crc32.din), line:8:27, endln:8:30
             |vpiLhs:
             \_RefObj: (work@crc32.crc), line:278:7, endln:278:10
               |vpiParent:
@@ -10170,7 +10168,7 @@ Design: (unnamed)
               |vpiName:crc
               |vpiFullName:work@crc32.crc
               |vpiActual:
-              \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+              \_Net: (work@crc32.crc), line:11:14, endln:11:17
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:281:10, endln:281:20
@@ -10183,7 +10181,7 @@ Design: (unnamed)
       |vpiName:crc
       |vpiFullName:work@crc32.crc
       |vpiActual:
-      \_LogicNet: (work@crc32.crc), line:11:14, endln:11:17
+      \_Net: (work@crc32.crc), line:11:14, endln:11:17
     |vpiLhs:
     \_RefObj: (work@crc32.dout), line:281:10, endln:281:14
       |vpiParent:
@@ -10191,7 +10189,7 @@ Design: (unnamed)
       |vpiName:dout
       |vpiFullName:work@crc32.dout
       |vpiActual:
-      \_LogicNet: (work@crc32.dout), line:8:70, endln:8:74
+      \_Net: (work@crc32.dout), line:8:70, endln:8:74
 |vpiAllModules:
 \_Module: work@latch (work@latch), file:${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v, line:7:1, endln:19:10
   |vpiParent:
@@ -10256,20 +10254,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:20, endln:7:25
   |vpiImportTypespec:
-  \_LogicNet: (work@latch.din), line:7:26, endln:7:29
+  \_Net: (work@latch.din), line:7:26, endln:7:29
     |vpiParent:
     \_Module: work@latch (work@latch), file:${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v, line:7:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@latch.din), line:7:20, endln:7:25
       |vpiParent:
-      \_LogicNet: (work@latch.din), line:7:26, endln:7:29
+      \_Net: (work@latch.din), line:7:26, endln:7:29
       |vpiFullName:work@latch.din
       |vpiActual:
       \_LogicTypespec: , line:7:20, endln:7:25
     |vpiName:din
     |vpiFullName:work@latch.din
   |vpiImportTypespec:
-  \_LogicNet: (work@latch.gate), line:7:37, endln:7:41
+  \_Net: (work@latch.gate), line:7:37, endln:7:41
     |vpiParent:
     \_Module: work@latch (work@latch), file:${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v, line:7:1, endln:19:10
     |vpiName:gate
@@ -10277,13 +10275,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:50, endln:7:53
   |vpiImportTypespec:
-  \_LogicNet: (work@latch.dout), line:7:60, endln:7:64
+  \_Net: (work@latch.dout), line:7:60, endln:7:64
     |vpiParent:
     \_Module: work@latch (work@latch), file:${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v, line:7:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@latch.dout), line:7:50, endln:7:53
       |vpiParent:
-      \_LogicNet: (work@latch.dout), line:7:60, endln:7:64
+      \_Net: (work@latch.dout), line:7:60, endln:7:64
       |vpiFullName:work@latch.dout
       |vpiActual:
       \_LogicTypespec: , line:7:50, endln:7:53
@@ -10293,13 +10291,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:3, endln:9:6
   |vpiImportTypespec:
-  \_LogicNet: (work@latch.state), line:9:13, endln:9:18
+  \_Net: (work@latch.state), line:9:13, endln:9:18
     |vpiParent:
     \_Module: work@latch (work@latch), file:${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v, line:7:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@latch.state), line:9:3, endln:9:12
       |vpiParent:
-      \_LogicNet: (work@latch.state), line:9:13, endln:9:18
+      \_Net: (work@latch.state), line:9:13, endln:9:18
       |vpiFullName:work@latch.state
       |vpiActual:
       \_LogicTypespec: , line:9:3, endln:9:6
@@ -10308,13 +10306,13 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@latch
   |vpiNet:
-  \_LogicNet: (work@latch.din), line:7:26, endln:7:29
+  \_Net: (work@latch.din), line:7:26, endln:7:29
   |vpiNet:
-  \_LogicNet: (work@latch.gate), line:7:37, endln:7:41
+  \_Net: (work@latch.gate), line:7:37, endln:7:41
   |vpiNet:
-  \_LogicNet: (work@latch.dout), line:7:60, endln:7:64
+  \_Net: (work@latch.dout), line:7:60, endln:7:64
   |vpiNet:
-  \_LogicNet: (work@latch.state), line:9:13, endln:9:18
+  \_Net: (work@latch.state), line:9:13, endln:9:18
   |vpiPort:
   \_Port: (din), line:7:26, endln:7:29
     |vpiParent:
@@ -10367,7 +10365,7 @@ Design: (unnamed)
           |vpiName:gate
           |vpiFullName:work@latch.gate
           |vpiActual:
-          \_LogicNet: (work@latch.gate), line:7:37, endln:7:41
+          \_Net: (work@latch.gate), line:7:37, endln:7:41
         |vpiOperand:
         \_RefObj: (work@latch.din), line:11:20, endln:11:23
           |vpiParent:
@@ -10375,7 +10373,7 @@ Design: (unnamed)
           |vpiName:din
           |vpiFullName:work@latch.din
           |vpiActual:
-          \_LogicNet: (work@latch.din), line:7:26, endln:7:29
+          \_Net: (work@latch.din), line:7:26, endln:7:29
       |vpiStmt:
       \_Begin: (work@latch), line:12:3, endln:17:6
         |vpiParent:
@@ -10397,7 +10395,7 @@ Design: (unnamed)
               |vpiName:gate
               |vpiFullName:work@latch.gate
               |vpiActual:
-              \_LogicNet: (work@latch.gate), line:7:37, endln:7:41
+              \_Net: (work@latch.gate), line:7:37, endln:7:41
             |vpiOperand:
             \_Constant: , line:13:17, endln:13:21
               |vpiParent:
@@ -10423,7 +10421,7 @@ Design: (unnamed)
                 |vpiName:din
                 |vpiFullName:work@latch.din
                 |vpiActual:
-                \_LogicNet: (work@latch.din), line:7:26, endln:7:29
+                \_Net: (work@latch.din), line:7:26, endln:7:29
               |vpiLhs:
               \_RefObj: (work@latch.dout), line:15:7, endln:15:11
                 |vpiParent:
@@ -10431,7 +10429,7 @@ Design: (unnamed)
                 |vpiName:dout
                 |vpiFullName:work@latch.dout
                 |vpiActual:
-                \_LogicNet: (work@latch.dout), line:7:60, endln:7:64
+                \_Net: (work@latch.dout), line:7:60, endln:7:64
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
@@ -10496,13 +10494,13 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicNet: (work@pwm256.clk), line:7:11, endln:7:14
+  \_Net: (work@pwm256.clk), line:7:11, endln:7:14
     |vpiParent:
     \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
     |vpiName:clk
     |vpiFullName:work@pwm256.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@pwm256.rst_n), line:8:11, endln:8:16
+  \_Net: (work@pwm256.rst_n), line:8:11, endln:8:16
     |vpiParent:
     \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
     |vpiName:rst_n
@@ -10510,13 +10508,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:11, endln:9:16
   |vpiImportTypespec:
-  \_LogicNet: (work@pwm256.d_in), line:9:17, endln:9:21
+  \_Net: (work@pwm256.d_in), line:9:17, endln:9:21
     |vpiParent:
     \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@pwm256.d_in), line:9:11, endln:9:16
       |vpiParent:
-      \_LogicNet: (work@pwm256.d_in), line:9:17, endln:9:21
+      \_Net: (work@pwm256.d_in), line:9:17, endln:9:21
       |vpiFullName:work@pwm256.d_in
       |vpiActual:
       \_LogicTypespec: , line:9:11, endln:9:16
@@ -10525,13 +10523,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:12, endln:10:15
   |vpiImportTypespec:
-  \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+  \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
     |vpiParent:
     \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@pwm256.pwm_out), line:10:12, endln:10:15
       |vpiParent:
-      \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+      \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
       |vpiFullName:work@pwm256.pwm_out
       |vpiActual:
       \_LogicTypespec: , line:10:12, endln:10:15
@@ -10541,13 +10539,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:1, endln:13:11
   |vpiImportTypespec:
-  \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+  \_Net: (work@pwm256.counter), line:13:18, endln:13:25
     |vpiParent:
     \_Module: work@pwm256 (work@pwm256), file:${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v, line:6:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@pwm256.counter), line:13:1, endln:13:17
       |vpiParent:
-      \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+      \_Net: (work@pwm256.counter), line:13:18, endln:13:25
       |vpiFullName:work@pwm256.counter
       |vpiActual:
       \_LogicTypespec: , line:13:1, endln:13:11
@@ -10557,15 +10555,15 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiDefName:work@pwm256
   |vpiNet:
-  \_LogicNet: (work@pwm256.clk), line:7:11, endln:7:14
+  \_Net: (work@pwm256.clk), line:7:11, endln:7:14
   |vpiNet:
-  \_LogicNet: (work@pwm256.rst_n), line:8:11, endln:8:16
+  \_Net: (work@pwm256.rst_n), line:8:11, endln:8:16
   |vpiNet:
-  \_LogicNet: (work@pwm256.d_in), line:9:17, endln:9:21
+  \_Net: (work@pwm256.d_in), line:9:17, endln:9:21
   |vpiNet:
-  \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+  \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
   |vpiNet:
-  \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+  \_Net: (work@pwm256.counter), line:13:18, endln:13:25
   |vpiPort:
   \_Port: (clk), line:7:11, endln:7:14
     |vpiParent:
@@ -10629,7 +10627,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@pwm256.clk
             |vpiActual:
-            \_LogicNet: (work@pwm256.clk), line:7:11, endln:7:14
+            \_Net: (work@pwm256.clk), line:7:11, endln:7:14
         |vpiOperand:
         \_Operation: , line:15:25, endln:15:38
           |vpiParent:
@@ -10642,7 +10640,7 @@ Design: (unnamed)
             |vpiName:rst_n
             |vpiFullName:work@pwm256.rst_n
             |vpiActual:
-            \_LogicNet: (work@pwm256.rst_n), line:8:11, endln:8:16
+            \_Net: (work@pwm256.rst_n), line:8:11, endln:8:16
       |vpiStmt:
       \_Begin: (work@pwm256), line:16:1, endln:30:4
         |vpiParent:
@@ -10664,7 +10662,7 @@ Design: (unnamed)
               |vpiName:rst_n
               |vpiFullName:work@pwm256.rst_n
               |vpiActual:
-              \_LogicNet: (work@pwm256.rst_n), line:8:11, endln:8:16
+              \_Net: (work@pwm256.rst_n), line:8:11, endln:8:16
             |vpiOperand:
             \_Constant: , line:17:18, endln:17:22
               |vpiParent:
@@ -10698,7 +10696,7 @@ Design: (unnamed)
                 |vpiName:counter
                 |vpiFullName:work@pwm256.counter
                 |vpiActual:
-                \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+                \_Net: (work@pwm256.counter), line:13:18, endln:13:25
             |vpiStmt:
             \_Assignment: , line:20:9, endln:20:24
               |vpiParent:
@@ -10719,7 +10717,7 @@ Design: (unnamed)
                 |vpiName:pwm_out
                 |vpiFullName:work@pwm256.pwm_out
                 |vpiActual:
-                \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+                \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
           |vpiElseStmt:
           \_Begin: (work@pwm256), line:23:5, endln:29:8
             |vpiParent:
@@ -10742,7 +10740,7 @@ Design: (unnamed)
                   |vpiName:counter
                   |vpiFullName:work@pwm256.counter
                   |vpiActual:
-                  \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+                  \_Net: (work@pwm256.counter), line:13:18, endln:13:25
                 |vpiOperand:
                 \_Constant: , line:24:30, endln:24:34
                   |vpiParent:
@@ -10758,7 +10756,7 @@ Design: (unnamed)
                 |vpiName:counter
                 |vpiFullName:work@pwm256.counter
                 |vpiActual:
-                \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+                \_Net: (work@pwm256.counter), line:13:18, endln:13:25
             |vpiStmt:
             \_IfElse: , line:25:9, endln:28:29
               |vpiParent:
@@ -10775,7 +10773,7 @@ Design: (unnamed)
                   |vpiName:counter
                   |vpiFullName:work@pwm256.counter
                   |vpiActual:
-                  \_LogicNet: (work@pwm256.counter), line:13:18, endln:13:25
+                  \_Net: (work@pwm256.counter), line:13:18, endln:13:25
                 |vpiOperand:
                 \_RefObj: (work@pwm256.d_in), line:25:24, endln:25:28
                   |vpiParent:
@@ -10783,7 +10781,7 @@ Design: (unnamed)
                   |vpiName:d_in
                   |vpiFullName:work@pwm256.d_in
                   |vpiActual:
-                  \_LogicNet: (work@pwm256.d_in), line:9:17, endln:9:21
+                  \_Net: (work@pwm256.d_in), line:9:17, endln:9:21
               |vpiStmt:
               \_Assignment: , line:26:13, endln:26:28
                 |vpiParent:
@@ -10804,7 +10802,7 @@ Design: (unnamed)
                   |vpiName:pwm_out
                   |vpiFullName:work@pwm256.pwm_out
                   |vpiActual:
-                  \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+                  \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
               |vpiElseStmt:
               \_Assignment: , line:28:13, endln:28:28
                 |vpiParent:
@@ -10825,7 +10823,7 @@ Design: (unnamed)
                   |vpiName:pwm_out
                   |vpiFullName:work@pwm256.pwm_out
                   |vpiActual:
-                  \_LogicNet: (work@pwm256.pwm_out), line:10:16, endln:10:23
+                  \_Net: (work@pwm256.pwm_out), line:10:16, endln:10:23
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
@@ -10899,13 +10897,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:1, endln:10:4
   |vpiImportTypespec:
-  \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+  \_Net: (work@tb.clk), line:10:6, endln:10:9
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@tb.clk), line:10:1, endln:10:4
       |vpiParent:
-      \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+      \_Net: (work@tb.clk), line:10:6, endln:10:9
       |vpiFullName:work@tb.clk
       |vpiActual:
       \_LogicTypespec: , line:10:1, endln:10:4
@@ -10913,13 +10911,13 @@ Design: (unnamed)
     |vpiFullName:work@tb.clk
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@tb.rst_n), line:11:6, endln:11:11
+  \_Net: (work@tb.rst_n), line:11:6, endln:11:11
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@tb.rst_n), line:11:1, endln:11:4
       |vpiParent:
-      \_LogicNet: (work@tb.rst_n), line:11:6, endln:11:11
+      \_Net: (work@tb.rst_n), line:11:6, endln:11:11
       |vpiFullName:work@tb.rst_n
       |vpiActual:
       \_LogicTypespec: , line:10:1, endln:10:4
@@ -10929,13 +10927,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:12:1, endln:12:12
   |vpiImportTypespec:
-  \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+  \_Net: (work@tb.d_in), line:12:20, endln:12:24
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@tb.d_in), line:12:1, endln:12:19
       |vpiParent:
-      \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+      \_Net: (work@tb.d_in), line:12:20, endln:12:24
       |vpiFullName:work@tb.d_in
       |vpiActual:
       \_LogicTypespec: , line:12:1, endln:12:12
@@ -10946,13 +10944,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:1, endln:13:5
   |vpiImportTypespec:
-  \_LogicNet: (work@tb.d_out), line:13:20, endln:13:25
+  \_Net: (work@tb.d_out), line:13:20, endln:13:25
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@tb.d_out), line:13:1, endln:13:5
       |vpiParent:
-      \_LogicNet: (work@tb.d_out), line:13:20, endln:13:25
+      \_Net: (work@tb.d_out), line:13:20, endln:13:25
       |vpiFullName:work@tb.d_out
       |vpiActual:
       \_LogicTypespec: , line:13:1, endln:13:5
@@ -10961,13 +10959,13 @@ Design: (unnamed)
     |vpiNetType:1
     |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicNet: (work@tb.d_out_valid), line:14:6, endln:14:17
+  \_Net: (work@tb.d_out_valid), line:14:6, endln:14:17
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v, line:8:1, endln:32:10
     |vpiTypespec:
     \_RefTypespec: (work@tb.d_out_valid), line:14:1, endln:14:5
       |vpiParent:
-      \_LogicNet: (work@tb.d_out_valid), line:14:6, endln:14:17
+      \_Net: (work@tb.d_out_valid), line:14:6, endln:14:17
       |vpiFullName:work@tb.d_out_valid
       |vpiActual:
       \_LogicTypespec: , line:10:1, endln:10:4
@@ -10976,15 +10974,15 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@tb
   |vpiNet:
-  \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+  \_Net: (work@tb.clk), line:10:6, endln:10:9
   |vpiNet:
-  \_LogicNet: (work@tb.rst_n), line:11:6, endln:11:11
+  \_Net: (work@tb.rst_n), line:11:6, endln:11:11
   |vpiNet:
-  \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+  \_Net: (work@tb.d_in), line:12:20, endln:12:24
   |vpiNet:
-  \_LogicNet: (work@tb.d_out), line:13:20, endln:13:25
+  \_Net: (work@tb.d_out), line:13:20, endln:13:25
   |vpiNet:
-  \_LogicNet: (work@tb.d_out_valid), line:14:6, endln:14:17
+  \_Net: (work@tb.d_out_valid), line:14:6, endln:14:17
   |vpiProcess:
   \_Always: , line:17:1, endln:17:20
     |vpiParent:
@@ -11012,7 +11010,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@tb.clk
             |vpiActual:
-            \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+            \_Net: (work@tb.clk), line:10:6, endln:10:9
         |vpiLhs:
         \_RefObj: (work@tb.clk), line:17:11, endln:17:14
           |vpiParent:
@@ -11020,7 +11018,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@tb.clk
           |vpiActual:
-          \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+          \_Net: (work@tb.clk), line:10:6, endln:10:9
     |vpiAlwaysType:1
   |vpiProcess:
   \_Initial: , line:22:1, endln:30:4
@@ -11077,7 +11075,7 @@ Design: (unnamed)
           |vpiName:d_in
           |vpiFullName:work@tb.d_in
           |vpiActual:
-          \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+          \_Net: (work@tb.d_in), line:12:20, endln:12:24
       |vpiStmt:
       \_DelayControl: , line:27:5, endln:27:20
         |vpiParent:
@@ -11104,7 +11102,7 @@ Design: (unnamed)
             |vpiName:rst_n
             |vpiFullName:work@tb.rst_n
             |vpiActual:
-            \_LogicNet: (work@tb.rst_n), line:11:6, endln:11:11
+            \_Net: (work@tb.rst_n), line:11:6, endln:11:11
       |vpiStmt:
       \_DelayControl: , line:28:5, endln:28:26
         |vpiParent:
@@ -11135,7 +11133,7 @@ Design: (unnamed)
             |vpiName:d_in
             |vpiFullName:work@tb.d_in
             |vpiActual:
-            \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+            \_Net: (work@tb.d_in), line:12:20, endln:12:24
       |vpiStmt:
       \_DelayControl: , line:29:5, endln:29:16
         |vpiParent:
@@ -11169,7 +11167,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@tb.dut.clk
         |vpiActual:
-        \_LogicNet: (work@tb.clk), line:10:6, endln:10:9
+        \_Net: (work@tb.clk), line:10:6, endln:10:9
     |vpiPort:
     \_Port: , line:20:15, endln:20:20
       |vpiParent:
@@ -11181,7 +11179,7 @@ Design: (unnamed)
         |vpiName:rst_n
         |vpiFullName:work@tb.dut.rst_n
         |vpiActual:
-        \_LogicNet: (work@tb.rst_n), line:11:6, endln:11:11
+        \_Net: (work@tb.rst_n), line:11:6, endln:11:11
     |vpiPort:
     \_Port: , line:20:22, endln:20:26
       |vpiParent:
@@ -11193,7 +11191,7 @@ Design: (unnamed)
         |vpiName:d_in
         |vpiFullName:work@tb.dut.d_in
         |vpiActual:
-        \_LogicNet: (work@tb.d_in), line:12:20, endln:12:24
+        \_Net: (work@tb.d_in), line:12:20, endln:12:24
     |vpiPort:
     \_Port: , line:20:28, endln:20:33
       |vpiParent:
@@ -11205,7 +11203,7 @@ Design: (unnamed)
         |vpiName:d_out
         |vpiFullName:work@tb.dut.d_out
         |vpiActual:
-        \_LogicNet: (work@tb.d_out), line:13:20, endln:13:25
+        \_Net: (work@tb.d_out), line:13:20, endln:13:25
     |vpiPort:
     \_Port: , line:20:35, endln:20:46
       |vpiParent:
@@ -11217,7 +11215,7 @@ Design: (unnamed)
         |vpiName:d_out_valid
         |vpiFullName:work@tb.dut.d_out_valid
         |vpiActual:
-        \_LogicNet: (work@tb.d_out_valid), line:14:6, endln:14:17
+        \_Net: (work@tb.d_out_valid), line:14:6, endln:14:17
 |vpiTypedef:
 \_ModuleTypespec: (cic5)
 |vpiTypedef:

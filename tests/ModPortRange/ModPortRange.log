@@ -17,24 +17,24 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/ModPortRange/dut.sv:39:1: Compile module "work@range_itf_port2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               5
 ArrayTypespec                                         15
 Constant                                              34
 Design                                                 1
 IODecl                                                 3
-Identifier                                            21
+Identifier                                            13
 Interface                                              3
-InterfaceTypespec                                     11
-LogicNet                                               3
+InterfaceTypespec                                      3
 LogicTypespec                                          8
 Modport                                                3
 Module                                                 4
 ModuleTypespec                                         4
+Net                                                   12
 Port                                                  11
 Range                                                 17
 RefObj                                                 2
-RefTypespec                                           35
+RefTypespec                                           39
 SourceFile                                             1
+UnsupportedTypespec                                   16
 Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortRange/slpp_unit/surelog.uhdm ...
@@ -100,7 +100,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@ConnectTB.con_i), line:32:40, endln:32:45
   |vpiImportTypespec:
-  \_LogicNet: (work@ConnectTB.con_i), line:32:40, endln:32:45
+  \_Net: (work@ConnectTB.con_i), line:32:40, endln:32:45
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:32:1, endln:33:13
     |vpiName:con_i
@@ -108,7 +108,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@ConnectTB
   |vpiNet:
-  \_LogicNet: (work@ConnectTB.con_i), line:32:40, endln:32:45
+  \_Net: (work@ConnectTB.con_i), line:32:40, endln:32:45
   |vpiPort:
   \_Port: (con_i), line:32:40, endln:32:45
     |vpiParent:
@@ -122,7 +122,7 @@ Design: (unnamed)
       |vpiName:con_i
       |vpiFullName:work@ConnectTB.con_i.con_i
       |vpiActual:
-      \_LogicNet: (work@ConnectTB.con_i), line:32:40, endln:32:45
+      \_Net: (work@ConnectTB.con_i), line:32:40, endln:32:45
     |vpiTypespec:
     \_RefTypespec: (work@ConnectTB.con_i), line:32:29, endln:32:33
       |vpiParent:
@@ -163,13 +163,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@MyInterface.my_logic), line:2:10, endln:2:18
   |vpiImportTypespec:
-  \_LogicNet: (work@MyInterface.my_logic), line:2:10, endln:2:18
+  \_Net: (work@MyInterface.my_logic), line:2:10, endln:2:18
     |vpiParent:
     \_Interface: work@MyInterface (work@MyInterface), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:1:1, endln:7:13
     |vpiTypespec:
     \_RefTypespec: (work@MyInterface.my_logic), line:2:4, endln:2:9
       |vpiParent:
-      \_LogicNet: (work@MyInterface.my_logic), line:2:10, endln:2:18
+      \_Net: (work@MyInterface.my_logic), line:2:10, endln:2:18
       |vpiFullName:work@MyInterface.my_logic
       |vpiActual:
       \_LogicTypespec: , line:2:4, endln:2:9
@@ -178,7 +178,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@MyInterface
   |vpiNet:
-  \_LogicNet: (work@MyInterface.my_logic), line:2:10, endln:2:18
+  \_Net: (work@MyInterface.my_logic), line:2:10, endln:2:18
   |vpiModport:
   \_Modport: (work@MyInterface.MyModPort), line:3:12, endln:6:5
     |vpiParent:
@@ -229,7 +229,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@mem_if.clk), line:17:30, endln:17:33
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.clk), line:17:30, endln:17:33
+  \_Net: (work@mem_if.clk), line:17:30, endln:17:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:17:1, endln:22:13
     |vpiName:clk
@@ -237,7 +237,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@mem_if
   |vpiNet:
-  \_LogicNet: (work@mem_if.clk), line:17:30, endln:17:33
+  \_Net: (work@mem_if.clk), line:17:30, endln:17:33
   |vpiModport:
   \_Modport: (work@mem_if.system), line:19:12, endln:19:30
     |vpiParent:
@@ -285,7 +285,7 @@ Design: (unnamed)
       |vpiName:clk
       |vpiFullName:work@mem_if.clk.clk
       |vpiActual:
-      \_LogicNet: (work@mem_if.clk), line:17:30, endln:17:33
+      \_Net: (work@mem_if.clk), line:17:30, endln:17:33
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:17:25, endln:17:29
       |vpiParent:
@@ -302,35 +302,39 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:25:1, endln:28:10
     |vpiName:work@memory_ctrl1
-  |vpiTypedef:
-  \_InterfaceTypespec: (mem_if), line:25:22, endln:25:28
+  |vpiImportTypespec:
+  \_Net: (work@memory_ctrl1.sif1), line:25:29, endln:25:33
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:25:1, endln:28:10
-    |vpiName:
-    \_Identifier: (mem_if)
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.sif1.mem_if), line:25:22, endln:25:28
       |vpiParent:
-      \_InterfaceTypespec: (mem_if), line:25:22, endln:25:28
+      \_Net: (work@memory_ctrl1.sif1), line:25:29, endln:25:33
       |vpiName:mem_if
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:17:1, endln:22:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.system), line:25:42, endln:25:48
+      |vpiFullName:work@memory_ctrl1.sif1.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif1
+    |vpiFullName:work@memory_ctrl1.sif1
+  |vpiImportTypespec:
+  \_Net: (work@memory_ctrl1.sif2), line:25:49, endln:25:53
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:25:1, endln:28:10
-    |vpiName:
-    \_Identifier: (work@mem_if.system)
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.sif2.mem_if), line:25:35, endln:25:41
       |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.system), line:25:42, endln:25:48
-      |vpiName:work@mem_if.system
-    |vpiModport:
-    \_Modport: (work@mem_if.system), line:19:12, endln:19:30
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:17:1, endln:22:13
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (mem_if), line:25:22, endln:25:28
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.system), line:25:42, endln:25:48
+      \_Net: (work@memory_ctrl1.sif2), line:25:49, endln:25:53
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif2.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif2
+    |vpiFullName:work@memory_ctrl1.sif2
   |vpiDefName:work@memory_ctrl1
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.sif1), line:25:29, endln:25:33
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.sif2), line:25:49, endln:25:53
   |vpiPort:
   \_Port: (sif1), line:25:29, endln:25:33
     |vpiParent:
@@ -344,7 +348,7 @@ Design: (unnamed)
       |vpiName:mem_if
       |vpiFullName:work@memory_ctrl1.sif1.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (mem_if), line:25:22, endln:25:28
+      \_InterfaceTypespec: (mem_if)
   |vpiPort:
   \_Port: (sif2), line:25:49, endln:25:53
     |vpiParent:
@@ -352,13 +356,13 @@ Design: (unnamed)
     |vpiName:sif2
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl1.sif2.work@mem_if.system), line:25:35, endln:25:41
+    \_RefTypespec: (work@memory_ctrl1.sif2.mem_if), line:25:35, endln:25:41
       |vpiParent:
       \_Port: (sif2), line:25:49, endln:25:53
-      |vpiName:work@mem_if.system
-      |vpiFullName:work@memory_ctrl1.sif2.work@mem_if.system
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif2.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.system), line:25:42, endln:25:48
+      \_InterfaceTypespec: (mem_if)
 |vpiAllModules:
 \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:35:1, endln:36:10
   |vpiParent:
@@ -368,17 +372,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:35:1, endln:36:10
     |vpiName:work@middle
-  |vpiTypedef:
-  \_InterfaceTypespec: (ConnectTB), line:35:16, endln:35:25
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:35:1, endln:36:10
-    |vpiName:
-    \_Identifier: (ConnectTB)
-      |vpiParent:
-      \_InterfaceTypespec: (ConnectTB), line:35:16, endln:35:25
-      |vpiName:ConnectTB
-    |vpiInterface:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:32:1, endln:33:13
   |vpiTypedef:
   \_ArrayTypespec: , line:35:16, endln:35:37
     |vpiParent:
@@ -411,7 +404,7 @@ Design: (unnamed)
       |vpiName:ConnectTB
       |vpiFullName:work@middle.ConnectTB
       |vpiActual:
-      \_InterfaceTypespec: (ConnectTB), line:35:16, endln:35:25
+      \_InterfaceTypespec: (ConnectTB)
   |vpiTypedef:
   \_ArrayTypespec: , line:35:32, endln:35:37
     |vpiParent:
@@ -445,17 +438,15 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:35:16, endln:35:37
   |vpiImportTypespec:
-  \_InterfaceTypespec: (ConnectTB), line:35:16, endln:35:25
-  |vpiImportTypespec:
   \_ArrayTypespec: , line:35:16, endln:35:37
   |vpiImportTypespec:
-  \_ArrayNet: (work@middle.conn1), line:35:26, endln:35:31
+  \_Net: (work@middle.conn1), line:35:26, endln:35:31
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:35:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@middle.conn1), line:35:16, endln:35:25
       |vpiParent:
-      \_ArrayNet: (work@middle.conn1), line:35:26, endln:35:31
+      \_Net: (work@middle.conn1), line:35:26, endln:35:31
       |vpiFullName:work@middle.conn1
       |vpiActual:
       \_ArrayTypespec: , line:35:16, endln:35:37
@@ -464,8 +455,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:35:32, endln:35:37
   |vpiDefName:work@middle
-  |vpiArrayNet:
-  \_ArrayNet: (work@middle.conn1), line:35:26, endln:35:31
+  |vpiNet:
+  \_Net: (work@middle.conn1), line:35:26, endln:35:31
   |vpiPort:
   \_Port: (conn1), line:35:26, endln:35:31
     |vpiParent:
@@ -525,19 +516,6 @@ Design: (unnamed)
       |vpiActual:
       \_LogicTypespec: , line:11:11, endln:11:16
   |vpiTypedef:
-  \_InterfaceTypespec: (work@MyInterface.MyModPort), line:10:17, endln:10:26
-    |vpiParent:
-    \_Module: work@range_itf_port (work@range_itf_port), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:9:1, endln:13:10
-    |vpiName:
-    \_Identifier: (work@MyInterface.MyModPort)
-      |vpiParent:
-      \_InterfaceTypespec: (work@MyInterface.MyModPort), line:10:17, endln:10:26
-      |vpiName:work@MyInterface.MyModPort
-    |vpiModport:
-    \_Modport: (work@MyInterface.MyModPort), line:3:12, endln:6:5
-    |vpiInterface:
-    \_Interface: work@MyInterface (work@MyInterface), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:1:1, endln:7:13
-  |vpiTypedef:
   \_ArrayTypespec: , line:10:5, endln:10:40
     |vpiParent:
     \_Module: work@range_itf_port (work@range_itf_port), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:9:1, endln:13:10
@@ -563,13 +541,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@range_itf_port.work@MyInterface.MyModPort), line:10:5, endln:10:16
+    \_RefTypespec: (work@range_itf_port.MyInterface), line:10:5, endln:10:16
       |vpiParent:
       \_ArrayTypespec: , line:10:5, endln:10:40
-      |vpiName:work@MyInterface.MyModPort
-      |vpiFullName:work@range_itf_port.work@MyInterface.MyModPort
+      |vpiName:MyInterface
+      |vpiFullName:work@range_itf_port.MyInterface
       |vpiActual:
-      \_InterfaceTypespec: (work@MyInterface.MyModPort), line:10:17, endln:10:26
+      \_InterfaceTypespec: (MyInterface)
   |vpiTypedef:
   \_ArrayTypespec: , line:10:35, endln:10:40
     |vpiParent:
@@ -639,13 +617,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:11:11, endln:11:30
   |vpiImportTypespec:
-  \_ArrayNet: (work@range_itf_port.my_port2), line:11:17, endln:11:25
+  \_Net: (work@range_itf_port.my_port2), line:11:17, endln:11:25
     |vpiParent:
     \_Module: work@range_itf_port (work@range_itf_port), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:9:1, endln:13:10
     |vpiTypespec:
     \_RefTypespec: (work@range_itf_port.my_port2), line:11:11, endln:11:16
       |vpiParent:
-      \_ArrayNet: (work@range_itf_port.my_port2), line:11:17, endln:11:25
+      \_Net: (work@range_itf_port.my_port2), line:11:17, endln:11:25
       |vpiFullName:work@range_itf_port.my_port2
       |vpiActual:
       \_ArrayTypespec: , line:11:11, endln:11:30
@@ -653,17 +631,15 @@ Design: (unnamed)
     |vpiFullName:work@range_itf_port.my_port2
     |vpiNetType:36
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@MyInterface.MyModPort), line:10:17, endln:10:26
-  |vpiImportTypespec:
   \_ArrayTypespec: , line:10:5, endln:10:40
   |vpiImportTypespec:
-  \_ArrayNet: (work@range_itf_port.my_port1), line:10:27, endln:10:35
+  \_Net: (work@range_itf_port.my_port1), line:10:27, endln:10:35
     |vpiParent:
     \_Module: work@range_itf_port (work@range_itf_port), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:9:1, endln:13:10
     |vpiTypespec:
     \_RefTypespec: (work@range_itf_port.my_port1), line:10:5, endln:10:16
       |vpiParent:
-      \_ArrayNet: (work@range_itf_port.my_port1), line:10:27, endln:10:35
+      \_Net: (work@range_itf_port.my_port1), line:10:27, endln:10:35
       |vpiFullName:work@range_itf_port.my_port1
       |vpiActual:
       \_ArrayTypespec: , line:10:5, endln:10:40
@@ -674,10 +650,10 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:11:25, endln:11:30
   |vpiDefName:work@range_itf_port
-  |vpiArrayNet:
-  \_ArrayNet: (work@range_itf_port.my_port2), line:11:17, endln:11:25
-  |vpiArrayNet:
-  \_ArrayNet: (work@range_itf_port.my_port1), line:10:27, endln:10:35
+  |vpiNet:
+  \_Net: (work@range_itf_port.my_port2), line:11:17, endln:11:25
+  |vpiNet:
+  \_Net: (work@range_itf_port.my_port1), line:10:27, endln:10:35
   |vpiPort:
   \_Port: (my_port1), line:10:27, endln:10:35
     |vpiParent:
@@ -714,19 +690,6 @@ Design: (unnamed)
     \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
     |vpiName:work@range_itf_port2
   |vpiTypedef:
-  \_InterfaceTypespec: (work@MyInterface.MyModPort), line:40:17, endln:40:26
-    |vpiParent:
-    \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
-    |vpiName:
-    \_Identifier: (work@MyInterface.MyModPort)
-      |vpiParent:
-      \_InterfaceTypespec: (work@MyInterface.MyModPort), line:40:17, endln:40:26
-      |vpiName:work@MyInterface.MyModPort
-    |vpiModport:
-    \_Modport: (work@MyInterface.MyModPort), line:3:12, endln:6:5
-    |vpiInterface:
-    \_Interface: work@MyInterface (work@MyInterface), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:1:1, endln:7:13
-  |vpiTypedef:
   \_ArrayTypespec: , line:41:5, endln:41:40
     |vpiParent:
     \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
@@ -752,24 +715,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@range_itf_port2.work@MyInterface.MyModPort), line:41:5, endln:41:16
+    \_RefTypespec: (work@range_itf_port2.MyInterface), line:41:5, endln:41:16
       |vpiParent:
       \_ArrayTypespec: , line:41:5, endln:41:40
-      |vpiName:work@MyInterface.MyModPort
-      |vpiFullName:work@range_itf_port2.work@MyInterface.MyModPort
-      |vpiActual:
-      \_InterfaceTypespec: (work@MyInterface.MyModPort), line:40:17, endln:40:26
-  |vpiTypedef:
-  \_InterfaceTypespec: (MyInterface), line:42:5, endln:42:16
-    |vpiParent:
-    \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
-    |vpiName:
-    \_Identifier: (MyInterface)
-      |vpiParent:
-      \_InterfaceTypespec: (MyInterface), line:42:5, endln:42:16
       |vpiName:MyInterface
-    |vpiInterface:
-    \_Interface: work@MyInterface (work@MyInterface), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:1:1, endln:7:13
+      |vpiFullName:work@range_itf_port2.MyInterface
+      |vpiActual:
+      \_InterfaceTypespec: (MyInterface)
   |vpiTypedef:
   \_ArrayTypespec: , line:43:5, endln:43:31
     |vpiParent:
@@ -802,7 +754,7 @@ Design: (unnamed)
       |vpiName:MyInterface
       |vpiFullName:work@range_itf_port2.MyInterface
       |vpiActual:
-      \_InterfaceTypespec: (MyInterface), line:42:5, endln:42:16
+      \_InterfaceTypespec: (MyInterface)
   |vpiTypedef:
   \_ArrayTypespec: , line:41:35, endln:41:40
     |vpiParent:
@@ -868,34 +820,58 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:43:5, endln:43:31
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@MyInterface.MyModPort), line:40:17, endln:40:26
+  \_Net: (work@range_itf_port2.my_port1), line:40:27, endln:40:35
+    |vpiParent:
+    \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
+    |vpiTypespec:
+    \_RefTypespec: (work@range_itf_port2.my_port1.MyInterface), line:40:5, endln:40:16
+      |vpiParent:
+      \_Net: (work@range_itf_port2.my_port1), line:40:27, endln:40:35
+      |vpiName:MyInterface
+      |vpiFullName:work@range_itf_port2.my_port1.MyInterface
+      |vpiActual:
+      \_InterfaceTypespec: (MyInterface)
+    |vpiName:my_port1
+    |vpiFullName:work@range_itf_port2.my_port1
   |vpiImportTypespec:
   \_ArrayTypespec: , line:41:5, endln:41:40
   |vpiImportTypespec:
-  \_ArrayNet: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
+  \_Net: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
     |vpiParent:
     \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
     |vpiTypespec:
     \_RefTypespec: (work@range_itf_port2.my_port2), line:41:5, endln:41:16
       |vpiParent:
-      \_ArrayNet: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
+      \_Net: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
       |vpiFullName:work@range_itf_port2.my_port2
       |vpiActual:
       \_ArrayTypespec: , line:41:5, endln:41:40
     |vpiName:my_port2
     |vpiFullName:work@range_itf_port2.my_port2
   |vpiImportTypespec:
-  \_InterfaceTypespec: (MyInterface), line:42:5, endln:42:16
+  \_Net: (work@range_itf_port2.my_port3), line:42:18, endln:42:26
+    |vpiParent:
+    \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
+    |vpiTypespec:
+    \_RefTypespec: (work@range_itf_port2.my_port3.MyInterface), line:42:5, endln:42:16
+      |vpiParent:
+      \_Net: (work@range_itf_port2.my_port3), line:42:18, endln:42:26
+      |vpiName:MyInterface
+      |vpiFullName:work@range_itf_port2.my_port3.MyInterface
+      |vpiActual:
+      \_InterfaceTypespec: (MyInterface)
+    |vpiName:my_port3
+    |vpiFullName:work@range_itf_port2.my_port3
   |vpiImportTypespec:
   \_ArrayTypespec: , line:43:5, endln:43:31
   |vpiImportTypespec:
-  \_ArrayNet: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
+  \_Net: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
     |vpiParent:
     \_Module: work@range_itf_port2 (work@range_itf_port2), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:39:1, endln:46:10
     |vpiTypespec:
     \_RefTypespec: (work@range_itf_port2.my_port4), line:43:5, endln:43:16
       |vpiParent:
-      \_ArrayNet: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
+      \_Net: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
       |vpiFullName:work@range_itf_port2.my_port4
       |vpiActual:
       \_ArrayTypespec: , line:43:5, endln:43:31
@@ -906,10 +882,14 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:43:26, endln:43:31
   |vpiDefName:work@range_itf_port2
-  |vpiArrayNet:
-  \_ArrayNet: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
-  |vpiArrayNet:
-  \_ArrayNet: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
+  |vpiNet:
+  \_Net: (work@range_itf_port2.my_port1), line:40:27, endln:40:35
+  |vpiNet:
+  \_Net: (work@range_itf_port2.my_port2), line:41:27, endln:41:35
+  |vpiNet:
+  \_Net: (work@range_itf_port2.my_port3), line:42:18, endln:42:26
+  |vpiNet:
+  \_Net: (work@range_itf_port2.my_port4), line:43:18, endln:43:26
   |vpiPort:
   \_Port: (my_port1), line:40:27, endln:40:35
     |vpiParent:
@@ -917,13 +897,13 @@ Design: (unnamed)
     |vpiName:my_port1
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@range_itf_port2.my_port1.work@MyInterface.MyModPort), line:40:5, endln:40:16
+    \_RefTypespec: (work@range_itf_port2.my_port1.MyInterface), line:40:5, endln:40:16
       |vpiParent:
       \_Port: (my_port1), line:40:27, endln:40:35
-      |vpiName:work@MyInterface.MyModPort
-      |vpiFullName:work@range_itf_port2.my_port1.work@MyInterface.MyModPort
+      |vpiName:MyInterface
+      |vpiFullName:work@range_itf_port2.my_port1.MyInterface
       |vpiActual:
-      \_InterfaceTypespec: (work@MyInterface.MyModPort), line:40:17, endln:40:26
+      \_InterfaceTypespec: (MyInterface)
   |vpiPort:
   \_Port: (my_port2), line:41:27, endln:41:35
     |vpiParent:
@@ -950,7 +930,7 @@ Design: (unnamed)
       |vpiName:MyInterface
       |vpiFullName:work@range_itf_port2.my_port3.MyInterface
       |vpiActual:
-      \_InterfaceTypespec: (MyInterface), line:42:5, endln:42:16
+      \_InterfaceTypespec: (MyInterface)
   |vpiPort:
   \_Port: (my_port4), line:43:18, endln:43:26
     |vpiParent:
@@ -964,6 +944,39 @@ Design: (unnamed)
       |vpiFullName:work@range_itf_port2.my_port4
       |vpiActual:
       \_ArrayTypespec: , line:43:26, endln:43:31
+|vpiTypedef:
+\_InterfaceTypespec: (ConnectTB)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (ConnectTB)
+    |vpiParent:
+    \_InterfaceTypespec: (ConnectTB)
+    |vpiName:ConnectTB
+  |vpiInterface:
+  \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:32:1, endln:33:13
+|vpiTypedef:
+\_InterfaceTypespec: (MyInterface)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (MyInterface)
+    |vpiParent:
+    \_InterfaceTypespec: (MyInterface)
+    |vpiName:MyInterface
+  |vpiInterface:
+  \_Interface: work@MyInterface (work@MyInterface), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:1:1, endln:7:13
+|vpiTypedef:
+\_InterfaceTypespec: (mem_if)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (mem_if)
+    |vpiParent:
+    \_InterfaceTypespec: (mem_if)
+    |vpiName:mem_if
+  |vpiInterface:
+  \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortRange/dut.sv, line:17:1, endln:22:13
 |vpiTypedef:
 \_ModuleTypespec: (memory_ctrl1)
   |vpiParent:

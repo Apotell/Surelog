@@ -267,6 +267,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:1:1: No timescale set for "std_cache_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:16:1: No timescale set for "axi_adapter_arbiter".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:1:1: Compile package "std_cache_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:16:1: Compile module "work@axi_adapter_arbiter".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -279,10 +280,10 @@ Design                                                 1
 HierPath                                               1
 Identifier                                             3
 IfStmt                                                 1
-LogicNet                                               2
 LogicTypespec                                          8
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              1
 Package                                                1
 ParamAssign                                            1
@@ -296,7 +297,7 @@ StructTypespec                                         1
 TypeParameter                                          1
 TypedefTypespec                                        1
 TypespecMember                                         9
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedVar/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:4:5: Unsupported Typespec: id:16, type:RefTypespec, name:ariane_axi::ad_req_t.
@@ -658,13 +659,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypeParameter: (work@axi_adapter_arbiter.req_t), line:18:20, endln:18:25
   |vpiImportTypespec:
-  \_LogicNet: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
+  \_Net: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
     |vpiParent:
     \_Module: work@axi_adapter_arbiter (work@axi_adapter_arbiter), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:16:1, endln:26:10
     |vpiTypespec:
     \_RefTypespec: (work@axi_adapter_arbiter.req_i.req_t), line:19:13, endln:19:18
       |vpiParent:
-      \_LogicNet: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
+      \_Net: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
       |vpiName:req_t
       |vpiFullName:work@axi_adapter_arbiter.req_i.req_t
       |vpiActual:
@@ -674,13 +675,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:20:5, endln:20:8
   |vpiImportTypespec:
-  \_LogicNet: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
+  \_Net: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
     |vpiParent:
     \_Module: work@axi_adapter_arbiter (work@axi_adapter_arbiter), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:16:1, endln:26:10
     |vpiTypespec:
     \_RefTypespec: (work@axi_adapter_arbiter.state_d), line:20:5, endln:20:8
       |vpiParent:
-      \_LogicNet: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
+      \_Net: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
       |vpiFullName:work@axi_adapter_arbiter.state_d
       |vpiActual:
       \_LogicTypespec: , line:20:5, endln:20:8
@@ -689,9 +690,9 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@axi_adapter_arbiter
   |vpiNet:
-  \_LogicNet: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
+  \_Net: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
   |vpiNet:
-  \_LogicNet: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
+  \_Net: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
   |vpiPort:
   \_Port: (req_i), line:19:34, endln:19:39
     |vpiParent:
@@ -716,14 +717,14 @@ Design: (unnamed)
       \_Always: , line:21:5, endln:25:8
       |vpiFullName:work@axi_adapter_arbiter
       |vpiImportTypespec:
-      \_LogicNet: (work@axi_adapter_arbiter.i), line:22:18, endln:22:19
+      \_Net: (work@axi_adapter_arbiter.i), line:22:18, endln:22:19
         |vpiParent:
         \_Begin: (work@axi_adapter_arbiter), line:21:17, endln:25:8
         |vpiName:i
         |vpiFullName:work@axi_adapter_arbiter.i
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@axi_adapter_arbiter.req), line:22:21, endln:22:24
+      \_Net: (work@axi_adapter_arbiter.req), line:22:21, endln:22:24
         |vpiParent:
         \_Begin: (work@axi_adapter_arbiter), line:21:17, endln:25:8
         |vpiName:req
@@ -749,7 +750,7 @@ Design: (unnamed)
               |vpiName:req_i
               |vpiFullName:req_i[i]
               |vpiActual:
-              \_LogicNet: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
+              \_Net: (work@axi_adapter_arbiter.req_i), line:19:34, endln:19:39
               |vpiIndex:
               \_RefObj: (work@axi_adapter_arbiter.req_i[i].req.i), line:22:18, endln:22:19
                 |vpiParent:
@@ -757,7 +758,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@axi_adapter_arbiter.req_i[i].req.i
                 |vpiActual:
-                \_LogicNet: (work@axi_adapter_arbiter.i), line:22:18, endln:22:19
+                \_Net: (work@axi_adapter_arbiter.i), line:22:18, endln:22:19
             |vpiActual:
             \_RefObj: (work@axi_adapter_arbiter.req), line:22:21, endln:22:24
               |vpiParent:
@@ -765,7 +766,7 @@ Design: (unnamed)
               |vpiName:req
               |vpiFullName:work@axi_adapter_arbiter.req
               |vpiActual:
-              \_LogicNet: (work@axi_adapter_arbiter.req), line:22:21, endln:22:24
+              \_Net: (work@axi_adapter_arbiter.req), line:22:21, endln:22:24
             |vpiName:req_i[i].req
           |vpiOperand:
           \_Constant: , line:22:28, endln:22:32
@@ -781,7 +782,7 @@ Design: (unnamed)
           \_IfStmt: , line:22:8, endln:24:10
           |vpiFullName:work@axi_adapter_arbiter
           |vpiImportTypespec:
-          \_LogicNet: (work@axi_adapter_arbiter.SERVING), line:23:21, endln:23:28
+          \_Net: (work@axi_adapter_arbiter.SERVING), line:23:21, endln:23:28
             |vpiParent:
             \_Begin: (work@axi_adapter_arbiter), line:22:34, endln:24:10
             |vpiName:SERVING
@@ -800,7 +801,7 @@ Design: (unnamed)
               |vpiName:SERVING
               |vpiFullName:work@axi_adapter_arbiter.SERVING
               |vpiActual:
-              \_LogicNet: (work@axi_adapter_arbiter.SERVING), line:23:21, endln:23:28
+              \_Net: (work@axi_adapter_arbiter.SERVING), line:23:21, endln:23:28
             |vpiLhs:
             \_RefObj: (work@axi_adapter_arbiter.state_d), line:23:11, endln:23:18
               |vpiParent:
@@ -808,7 +809,7 @@ Design: (unnamed)
               |vpiName:state_d
               |vpiFullName:work@axi_adapter_arbiter.state_d
               |vpiActual:
-              \_LogicNet: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
+              \_Net: (work@axi_adapter_arbiter.state_d), line:20:9, endln:20:16
     |vpiAlwaysType:2
 |vpiTypedef:
 \_ModuleTypespec: (axi_adapter_arbiter)

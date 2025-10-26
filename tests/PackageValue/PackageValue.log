@@ -588,6 +588,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: No timescale set for "riscv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: No timescale set for "ariane_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:1:1: Compile package "prim_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: Compile package "riscv".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: Compile package "ariane_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageValue/top.sv:11:1: Compile module "work@prim_diff_decode".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -625,6 +628,7 @@ RefTypespec                                           42
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -2436,14 +2440,14 @@ Design: (unnamed)
           |vpiName:p_diff_fsm
         |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm
         |vpiImportTypespec:
-        \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q), line:21:20, endln:21:27
+        \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q), line:21:20, endln:21:27
           |vpiParent:
           \_Begin: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm), line:19:17, endln:29:8
           |vpiName:state_q
           |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsSkewed), line:24:9, endln:24:17
+        \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsSkewed), line:24:9, endln:24:17
           |vpiParent:
           \_Begin: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm), line:19:17, endln:29:8
           |vpiName:IsSkewed
@@ -2462,7 +2466,7 @@ Design: (unnamed)
             |vpiName:state_q
             |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q
             |vpiActual:
-            \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q), line:21:20, endln:21:27
+            \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_q), line:21:20, endln:21:27
           |vpiCaseItem:
           \_CaseItem: , line:24:9, endln:26:12
             |vpiParent:
@@ -2474,21 +2478,21 @@ Design: (unnamed)
               |vpiName:IsSkewed
               |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsSkewed
               |vpiActual:
-              \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsSkewed), line:24:9, endln:24:17
+              \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsSkewed), line:24:9, endln:24:17
             |vpiStmt:
             \_Begin: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm), line:24:19, endln:26:12
               |vpiParent:
               \_CaseItem: , line:24:9, endln:26:12
               |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm
               |vpiImportTypespec:
-              \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd), line:25:23, endln:25:28
+              \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd), line:25:23, endln:25:28
                 |vpiParent:
                 \_Begin: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm), line:24:19, endln:26:12
                 |vpiName:IsStd
                 |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d), line:25:13, endln:25:20
+              \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d), line:25:13, endln:25:20
                 |vpiParent:
                 \_Begin: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm), line:24:19, endln:26:12
                 |vpiName:state_d
@@ -2507,7 +2511,7 @@ Design: (unnamed)
                   |vpiName:IsStd
                   |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd
                   |vpiActual:
-                  \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd), line:25:23, endln:25:28
+                  \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.IsStd), line:25:23, endln:25:28
                 |vpiLhs:
                 \_RefObj: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d), line:25:13, endln:25:20
                   |vpiParent:
@@ -2515,7 +2519,7 @@ Design: (unnamed)
                   |vpiName:state_d
                   |vpiFullName:work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d
                   |vpiActual:
-                  \_LogicNet: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d), line:25:13, endln:25:20
+                  \_Net: (work@prim_diff_decode.gen_pad_generic.p_diff_fsm.state_d), line:25:13, endln:25:20
           |vpiCaseItem:
           \_CaseItem: , line:27:9, endln:27:20
             |vpiParent:

@@ -169,11 +169,11 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:7:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:7:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 1
-ArrayNet                                               1
 ArrayTypespec                                          1
 Assignment                                             2
 Begin                                                  2
@@ -186,10 +186,10 @@ EventControl                                           1
 GenFor                                                 1
 Identifier                                             4
 ImportTypespec                                         1
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              5
 Package                                                1
 Port                                                   1
@@ -330,14 +330,14 @@ Design: (unnamed)
               |vpiName:a0
               |vpiFullName:work@dut.a0
               |vpiActual:
-              \_LogicNet: (work@dut.a0), line:7:12, endln:7:14
+              \_Net: (work@dut.a0), line:7:12, endln:7:14
           |vpiStmt:
           \_Begin: (work@dut), line:15:24, endln:17:6
             |vpiParent:
             \_EventControl: , line:15:10, endln:15:23
             |vpiFullName:work@dut
             |vpiImportTypespec:
-            \_LogicNet: (work@dut.i), line:16:6, endln:16:7
+            \_Net: (work@dut.i), line:16:6, endln:16:7
               |vpiParent:
               \_Begin: (work@dut), line:15:24, endln:17:6
               |vpiName:i
@@ -369,7 +369,7 @@ Design: (unnamed)
                 |vpiName:c
                 |vpiFullName:work@dut.c
                 |vpiActual:
-                \_ArrayNet: (work@dut.c), line:12:14, endln:12:15
+                \_Net: (work@dut.c), line:12:14, endln:12:15
                 |vpiIndex:
                 \_RefObj: (work@dut.i), line:16:6, endln:16:7
                   |vpiParent:
@@ -377,24 +377,28 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@dut.i
                   |vpiActual:
-                  \_LogicNet: (work@dut.i), line:16:6, endln:16:7
+                  \_Net: (work@dut.i), line:16:6, endln:16:7
         |vpiAlwaysType:1
     |vpiImportTypespec:
     \_Variable: (work@dut.i), line:14:14, endln:14:15
     |vpiImportTypespec:
-    \_LogicNet: (work@dut.i), line:14:21, endln:14:22
+    \_Net: (work@dut.i), line:14:21, endln:14:22
       |vpiParent:
       \_GenFor: (work@dut), line:14:2, endln:18:5
       |vpiName:i
       |vpiFullName:work@dut.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@dut.i), line:14:28, endln:14:29
+    \_Net: (work@dut.i), line:14:28, endln:14:29
       |vpiParent:
       \_GenFor: (work@dut), line:14:2, endln:18:5
       |vpiName:i
       |vpiFullName:work@dut.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@dut.i), line:14:21, endln:14:22
+    |vpiNet:
+    \_Net: (work@dut.i), line:14:28, endln:14:29
     |vpiForInitStmt:
     \_Assignment: , line:14:7, endln:14:19
       |vpiParent:
@@ -421,7 +425,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_LogicNet: (work@dut.i), line:14:21, endln:14:22
+        \_Net: (work@dut.i), line:14:21, endln:14:22
       |vpiOperand:
       \_Constant: , line:14:25, endln:14:26
         |vpiParent:
@@ -442,7 +446,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_LogicNet: (work@dut.i), line:14:28, endln:14:29
+        \_Net: (work@dut.i), line:14:28, endln:14:29
     |vpiStmt:
     \_Begin: (work@dut), line:14:33, endln:18:5
   |vpiTypedef:
@@ -518,7 +522,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:10:9, endln:10:15
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.a0), line:7:12, endln:7:14
+  \_Net: (work@dut.a0), line:7:12, endln:7:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
     |vpiName:a0
@@ -528,13 +532,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:12:2, endln:12:19
   |vpiImportTypespec:
-  \_ArrayNet: (work@dut.c), line:12:14, endln:12:15
+  \_Net: (work@dut.c), line:12:14, endln:12:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.c), line:12:2, endln:12:13
       |vpiParent:
-      \_ArrayNet: (work@dut.c), line:12:14, endln:12:15
+      \_Net: (work@dut.c), line:12:14, endln:12:15
       |vpiFullName:work@dut.c
       |vpiActual:
       \_ArrayTypespec: , line:12:2, endln:12:19
@@ -543,9 +547,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@dut
   |vpiNet:
-  \_LogicNet: (work@dut.a0), line:7:12, endln:7:14
-  |vpiArrayNet:
-  \_ArrayNet: (work@dut.c), line:12:14, endln:12:15
+  \_Net: (work@dut.a0), line:7:12, endln:7:14
+  |vpiNet:
+  \_Net: (work@dut.c), line:12:14, endln:12:15
   |vpiPort:
   \_Port: (a0), line:7:12, endln:7:14
     |vpiParent:

@@ -98,6 +98,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamCast/dut.sv:1:1: No timescale set for "otp_ctrl_part_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamCast/dut.sv:15:1: No timescale set for "otp_ctrl".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamCast/dut.sv:1:1: Compile package "otp_ctrl_part_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamCast/dut.sv:15:1: Compile module "work@otp_ctrl".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -115,10 +116,10 @@ IODecl                                                11
 Identifier                                            32
 ImportTypespec                                         1
 IntTypespec                                           10
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              4
 Package                                                2
 ParamAssign                                            1
@@ -129,6 +130,7 @@ RefTypespec                                           17
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamCast/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1111,13 +1113,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:3, endln:17:8
   |vpiImportTypespec:
-  \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+  \_Net: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:15:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@otp_ctrl.part_otp_arb_req), line:17:3, endln:17:24
       |vpiParent:
-      \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+      \_Net: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
       |vpiFullName:work@otp_ctrl.part_otp_arb_req
       |vpiActual:
       \_LogicTypespec: , line:17:3, endln:17:8
@@ -1126,7 +1128,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@otp_ctrl
   |vpiNet:
-  \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+  \_Net: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
 |vpiTypedef:
 \_ModuleTypespec: (otp_ctrl)
   |vpiParent:

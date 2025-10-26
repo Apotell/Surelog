@@ -147,19 +147,19 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv:1:1: No timescale set for "ibex_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv:13:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv:1:1: Compile package "ibex_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv:13:1: Compile module "work@top".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               2
 ArrayTypespec                                          2
 Begin                                                  1
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              12
+Constant                                               8
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -172,17 +172,20 @@ IntTypespec                                           10
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
+Operation                                              2
 Package                                                2
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  4
-RefObj                                                 7
-RefTypespec                                           28
+Range                                                  2
+RefObj                                                 3
+RefTypespec                                           24
 SourceFile                                             1
 StructTypespec                                         1
 Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                         4
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfGenTypeBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1157,6 +1160,19 @@ Design: (unnamed)
       \_Begin: (work@top.g_pmp_registers), line:20:19, endln:22:7
       |vpiName:g_pmp_registers
     |vpiFullName:work@top.g_pmp_registers
+    |vpiImportTypespec:
+    \_Net: (work@top.g_pmp_registers.pmp_cfg2), line:21:36, endln:21:44
+      |vpiParent:
+      \_Begin: (work@top.g_pmp_registers), line:20:19, endln:22:7
+      |vpiTypespec:
+      \_RefTypespec: (work@top.g_pmp_registers.pmp_cfg2), line:21:7, endln:21:16
+        |vpiParent:
+        \_Net: (work@top.g_pmp_registers.pmp_cfg2), line:21:36, endln:21:44
+        |vpiFullName:work@top.g_pmp_registers.pmp_cfg2
+        |vpiActual:
+        \_ArrayTypespec: , line:21:7, endln:21:68
+      |vpiName:pmp_cfg2
+      |vpiFullName:work@top.g_pmp_registers.pmp_cfg2
   |vpiTypedef:
   \_ImportTypespec: (ibex_pkg), line:16:12, endln:16:23
     |vpiParent:
@@ -1182,53 +1198,65 @@ Design: (unnamed)
   \_IntTypespec: , line:15:16, endln:15:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
-    |vpiExpr:
-    \_RefObj: (work@top.PMPNumRegions), line:21:54, endln:21:67
-      |vpiParent:
-      \_IntTypespec: , line:15:16, endln:15:19
-      |vpiName:PMPNumRegions
-      |vpiFullName:work@top.PMPNumRegions
-      |vpiActual:
-      \_Parameter: (work@top.PMPNumRegions), line:15:20, endln:15:37
     |vpiSigned:1
   |vpiTypedef:
   \_ArrayTypespec: , line:18:5, endln:18:66
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (work@top), line:18:51, endln:18:66
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:18:51, endln:18:66
       |vpiParent:
       \_ArrayTypespec: , line:18:5, endln:18:66
-      |vpiFullName:work@top
-      |vpiActual:
-      \_IntTypespec: , line:15:16, endln:15:19
+      |vpiRightRange:
+      \_Operation: , line:18:52, endln:18:65
+        |vpiParent:
+        \_Range: , line:18:51, endln:18:66
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@top.PMPNumRegions), line:18:52, endln:18:65
+          |vpiParent:
+          \_Operation: , line:18:52, endln:18:65
+          |vpiName:PMPNumRegions
+          |vpiFullName:work@top.PMPNumRegions
+          |vpiActual:
+          \_Parameter: (work@top.PMPNumRegions), line:15:20, endln:15:37
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.ibex_pkg::pmp_cfg_t), line:18:5, endln:18:14
+    \_RefTypespec: (work@top.pmp_cfg_t), line:18:5, endln:18:14
       |vpiParent:
       \_ArrayTypespec: , line:18:5, endln:18:66
-      |vpiName:ibex_pkg::pmp_cfg_t
-      |vpiFullName:work@top.ibex_pkg::pmp_cfg_t
+      |vpiName:pmp_cfg_t
+      |vpiFullName:work@top.pmp_cfg_t
       |vpiActual:
       \_TypedefTypespec: (ibex_pkg::pmp_cfg_t), line:8:5, endln:8:14
   |vpiTypedef:
   \_ArrayTypespec: , line:21:7, endln:21:68
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (work@top), line:21:53, endln:21:68
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:21:53, endln:21:68
       |vpiParent:
       \_ArrayTypespec: , line:21:7, endln:21:68
-      |vpiFullName:work@top
-      |vpiActual:
-      \_IntTypespec: , line:15:16, endln:15:19
+      |vpiRightRange:
+      \_Operation: , line:21:54, endln:21:67
+        |vpiParent:
+        \_Range: , line:21:53, endln:21:68
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@top.PMPNumRegions), line:21:54, endln:21:67
+          |vpiParent:
+          \_Operation: , line:21:54, endln:21:67
+          |vpiName:PMPNumRegions
+          |vpiFullName:work@top.PMPNumRegions
+          |vpiActual:
+          \_Parameter: (work@top.PMPNumRegions), line:15:20, endln:15:37
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.ibex_pkg::pmp_cfg_t), line:21:7, endln:21:16
+    \_RefTypespec: (work@top.pmp_cfg_t), line:21:7, endln:21:16
       |vpiParent:
       \_ArrayTypespec: , line:21:7, endln:21:68
-      |vpiName:ibex_pkg::pmp_cfg_t
-      |vpiFullName:work@top.ibex_pkg::pmp_cfg_t
+      |vpiName:pmp_cfg_t
+      |vpiFullName:work@top.pmp_cfg_t
       |vpiActual:
       \_TypedefTypespec: (ibex_pkg::pmp_cfg_t), line:8:5, endln:8:14
   |vpiImportTypespec:
@@ -1240,13 +1268,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:18:5, endln:18:66
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.pmp_cfg1), line:18:34, endln:18:42
+  \_Net: (work@top.pmp_cfg1), line:18:34, endln:18:42
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
     |vpiTypespec:
     \_RefTypespec: (work@top.pmp_cfg1), line:18:5, endln:18:14
       |vpiParent:
-      \_ArrayNet: (work@top.pmp_cfg1), line:18:34, endln:18:42
+      \_Net: (work@top.pmp_cfg1), line:18:34, endln:18:42
       |vpiFullName:work@top.pmp_cfg1
       |vpiActual:
       \_ArrayTypespec: , line:18:5, endln:18:66
@@ -1254,24 +1282,9 @@ Design: (unnamed)
     |vpiFullName:work@top.pmp_cfg1
   |vpiImportTypespec:
   \_ArrayTypespec: , line:21:7, endln:21:68
-  |vpiImportTypespec:
-  \_ArrayNet: (work@top.pmp_cfg2), line:21:36, endln:21:44
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.pmp_cfg2), line:21:7, endln:21:16
-      |vpiParent:
-      \_ArrayNet: (work@top.pmp_cfg2), line:21:36, endln:21:44
-      |vpiFullName:work@top.pmp_cfg2
-      |vpiActual:
-      \_ArrayTypespec: , line:21:7, endln:21:68
-    |vpiName:pmp_cfg2
-    |vpiFullName:work@top.pmp_cfg2
   |vpiDefName:work@top
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.pmp_cfg1), line:18:34, endln:18:42
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.pmp_cfg2), line:21:36, endln:21:44
+  |vpiNet:
+  \_Net: (work@top.pmp_cfg1), line:18:34, endln:18:42
   |vpiGenStmt:
   \_GenIf: , line:20:4, endln:22:7
     |vpiParent:

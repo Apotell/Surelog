@@ -368,6 +368,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:1:1: No timescale set for "bp_common_aviary_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:55:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:1:1: Compile package "bp_common_aviary_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:55:1: Compile module "work@top".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -391,10 +392,10 @@ Identifier                                            33
 ImportTypespec                                         1
 IntTypespec                                            9
 IntegerTypespec                                        1
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                             29
 Package                                                2
 PackedArrayTypespec                                    2
@@ -411,9 +412,10 @@ TaggedPattern                                         12
 Task                                                   9
 TypedefTypespec                                        3
 TypespecMember                                         1
+UnsupportedTypespec                                    9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:63:5: Null Actual: id:223, type:RefModule, name:ok.
+[ERR:IG0809] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:63:5: Null Actual: id:231, type:RefModule, name:ok.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1702,10 +1704,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
+    \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:42:12, endln:42:27
       |vpiParent:
       \_PackedArrayTypespec: , line:42:12, endln:42:40
-      |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+      |vpiName:bp_proc_param_s
+      |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
       |vpiActual:
       \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
   |vpiTypedef:
@@ -1980,13 +1983,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:60:2, endln:60:7
   |vpiImportTypespec:
-  \_LogicNet: (work@top.aa), line:60:25, endln:60:27
+  \_Net: (work@top.aa), line:60:25, endln:60:27
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
     |vpiTypespec:
     \_RefTypespec: (work@top.aa), line:60:2, endln:60:24
       |vpiParent:
-      \_LogicNet: (work@top.aa), line:60:25, endln:60:27
+      \_Net: (work@top.aa), line:60:25, endln:60:27
       |vpiFullName:work@top.aa
       |vpiActual:
       \_LogicTypespec: , line:60:2, endln:60:7
@@ -1995,7 +1998,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.aa), line:60:25, endln:60:27
+  \_Net: (work@top.aa), line:60:25, endln:60:27
   |vpiGenStmt:
   \_GenIf: , line:62:2, endln:64:5
     |vpiParent:

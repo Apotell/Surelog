@@ -89,14 +89,15 @@ Identifier                                             2
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Range                                                  1
 RefObj                                                 1
 RefTypespec                                            3
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -181,13 +182,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:3, endln:4:8
   |vpiImportTypespec:
-  \_StructNet: (work@dut2.read_buf), line:6:16, endln:6:24
+  \_Net: (work@dut2.read_buf), line:6:16, endln:6:24
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@dut2.read_buf.struct_typedef), line:6:1, endln:6:15
       |vpiParent:
-      \_StructNet: (work@dut2.read_buf), line:6:16, endln:6:24
+      \_Net: (work@dut2.read_buf), line:6:16, endln:6:24
       |vpiName:struct_typedef
       |vpiFullName:work@dut2.read_buf.struct_typedef
       |vpiActual:
@@ -195,7 +196,7 @@ Design: (unnamed)
     |vpiName:read_buf
     |vpiFullName:work@dut2.read_buf
   |vpiImportTypespec:
-  \_LogicNet: (work@dut2.q), line:8:18, endln:8:21
+  \_Net: (work@dut2.q), line:8:18, endln:8:21
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
     |vpiName:q
@@ -203,9 +204,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut2
   |vpiNet:
-  \_StructNet: (work@dut2.read_buf), line:6:16, endln:6:24
+  \_Net: (work@dut2.read_buf), line:6:16, endln:6:24
   |vpiNet:
-  \_LogicNet: (work@dut2.q), line:8:18, endln:8:21
+  \_Net: (work@dut2.q), line:8:18, endln:8:21
   |vpiContAssign:
   \_ContAssign: , line:8:8, endln:8:28
     |vpiParent:
@@ -228,7 +229,7 @@ Design: (unnamed)
         \_HierPath: (read_buf.q[1]), line:8:16, endln:8:21
         |vpiName:read_buf
         |vpiActual:
-        \_StructNet: (work@dut2.read_buf), line:6:16, endln:6:24
+        \_Net: (work@dut2.read_buf), line:6:16, endln:6:24
       |vpiActual:
       \_BitSelect: (work@dut2.read_buf.q[1].q), line:8:18, endln:8:21
         |vpiParent:
@@ -236,7 +237,7 @@ Design: (unnamed)
         |vpiName:q
         |vpiFullName:work@dut2.read_buf.q[1].q
         |vpiActual:
-        \_LogicNet: (work@dut2.q), line:8:18, endln:8:21
+        \_Net: (work@dut2.q), line:8:18, endln:8:21
         |vpiIndex:
         \_Constant: , line:8:19, endln:8:20
           |vpiParent:

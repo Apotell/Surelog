@@ -2,6 +2,7 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsStructMember/dut.sv:1:1: No timescale set for "keymgr_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsStructMember/dut.sv:16:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsStructMember/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsStructMember/dut.sv:16:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -18,10 +19,10 @@ HierPath                                               3
 Identifier                                             4
 IndexedPartSelect                                      1
 IntTypespec                                            2
-LogicNet                                               1
 LogicTypespec                                          6
 Module                                                 3
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              8
 Package                                                1
 ParamAssign                                            1
@@ -31,7 +32,6 @@ Range                                                  2
 RefObj                                                13
 RefTypespec                                           12
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 SysFuncCall                                            1
 TypedefTypespec                                        1
@@ -278,13 +278,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
   |vpiImportTypespec:
-  \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
+  \_Net: (work@top.keymgr_data_i), line:16:48, endln:16:61
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.keymgr_data_i.keymgr_pkg::kmac_data_req_t), line:16:20, endln:16:47
       |vpiParent:
-      \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
+      \_Net: (work@top.keymgr_data_i), line:16:48, endln:16:61
       |vpiName:keymgr_pkg::kmac_data_req_t
       |vpiFullName:work@top.keymgr_data_i.keymgr_pkg::kmac_data_req_t
       |vpiActual:
@@ -294,13 +294,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:9, endln:17:14
   |vpiImportTypespec:
-  \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
+  \_Net: (work@top.kmac_mask_o), line:17:30, endln:17:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.kmac_mask_o), line:17:9, endln:17:14
       |vpiParent:
-      \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
+      \_Net: (work@top.kmac_mask_o), line:17:30, endln:17:41
       |vpiFullName:work@top.kmac_mask_o
       |vpiActual:
       \_LogicTypespec: , line:17:9, endln:17:14
@@ -309,9 +309,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
+  \_Net: (work@top.keymgr_data_i), line:16:48, endln:16:61
   |vpiNet:
-  \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
+  \_Net: (work@top.kmac_mask_o), line:17:30, endln:17:41
   |vpiPort:
   \_Port: (keymgr_data_i), line:16:48, endln:16:61
     |vpiParent:
@@ -349,14 +349,14 @@ Design: (unnamed)
       \_Always: , line:19:3, endln:27:6
       |vpiFullName:work@top
       |vpiImportTypespec:
-      \_LogicNet: (work@top.mux_sel), line:20:18, endln:20:25
+      \_Net: (work@top.mux_sel), line:20:18, endln:20:25
         |vpiParent:
         \_Begin: (work@top), line:19:15, endln:27:6
         |vpiName:mux_sel
         |vpiFullName:work@top.mux_sel
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.SelKeyMgr), line:21:7, endln:21:16
+      \_Net: (work@top.SelKeyMgr), line:21:7, endln:21:16
         |vpiParent:
         \_Begin: (work@top), line:19:15, endln:27:6
         |vpiName:SelKeyMgr
@@ -375,7 +375,7 @@ Design: (unnamed)
           |vpiName:mux_sel
           |vpiFullName:work@top.mux_sel
           |vpiActual:
-          \_LogicNet: (work@top.mux_sel), line:20:18, endln:20:25
+          \_Net: (work@top.mux_sel), line:20:18, endln:20:25
         |vpiCaseItem:
         \_CaseItem: , line:21:7, endln:25:10
           |vpiParent:
@@ -387,7 +387,7 @@ Design: (unnamed)
             |vpiName:SelKeyMgr
             |vpiFullName:work@top.SelKeyMgr
             |vpiActual:
-            \_LogicNet: (work@top.SelKeyMgr), line:21:7, endln:21:16
+            \_Net: (work@top.SelKeyMgr), line:21:7, endln:21:16
           |vpiStmt:
           \_Begin: (work@top), line:21:18, endln:25:10
             |vpiParent:
@@ -418,7 +418,7 @@ Design: (unnamed)
                 \_ForStmt: (work@top), line:22:9, endln:24:12
                 |vpiFullName:work@top
                 |vpiImportTypespec:
-                \_LogicNet: (work@top.strb), line:23:54, endln:23:57
+                \_Net: (work@top.strb), line:23:54, endln:23:57
                   |vpiParent:
                   \_Begin: (work@top), line:22:63, endln:24:12
                   |vpiName:strb
@@ -458,7 +458,7 @@ Design: (unnamed)
                           \_HierPath: (keymgr_data_i.strb[i]), line:23:36, endln:23:57
                           |vpiName:keymgr_data_i
                           |vpiActual:
-                          \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
+                          \_Net: (work@top.keymgr_data_i), line:16:48, endln:16:61
                         |vpiActual:
                         \_BitSelect: (work@top.keymgr_data_i.strb[i].strb), line:23:54, endln:23:57
                           |vpiParent:
@@ -466,7 +466,7 @@ Design: (unnamed)
                           |vpiName:strb
                           |vpiFullName:work@top.keymgr_data_i.strb[i].strb
                           |vpiActual:
-                          \_LogicNet: (work@top.strb), line:23:54, endln:23:57
+                          \_Net: (work@top.strb), line:23:54, endln:23:57
                           |vpiIndex:
                           \_RefObj: (work@top.keymgr_data_i.strb[i].i), line:23:55, endln:23:56
                             |vpiParent:
@@ -484,7 +484,7 @@ Design: (unnamed)
                     |vpiFullName:work@top.kmac_mask_o
                     |vpiDefName:kmac_mask_o
                     |vpiActual:
-                    \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
+                    \_Net: (work@top.kmac_mask_o), line:17:30, endln:17:41
                     |vpiConstantSelect:1
                     |vpiIndexedPartSelectType:1
                     |vpiBaseExpr:
@@ -517,7 +517,7 @@ Design: (unnamed)
                       |UINT:8
                       |vpiConstType:9
               |vpiImportTypespec:
-              \_LogicNet: (work@top.strb), line:22:50, endln:22:54
+              \_Net: (work@top.strb), line:22:50, endln:22:54
                 |vpiParent:
                 \_ForStmt: (work@top), line:22:9, endln:24:12
                 |vpiName:strb
@@ -577,7 +577,7 @@ Design: (unnamed)
                       \_HierPath: (keymgr_data_i.strb), line:22:36, endln:22:54
                       |vpiName:keymgr_data_i
                       |vpiActual:
-                      \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
+                      \_Net: (work@top.keymgr_data_i), line:16:48, endln:16:61
                     |vpiActual:
                     \_RefObj: (work@top.strb), line:22:50, endln:22:54
                       |vpiParent:
@@ -585,7 +585,7 @@ Design: (unnamed)
                       |vpiName:strb
                       |vpiFullName:work@top.strb
                       |vpiActual:
-                      \_LogicNet: (work@top.strb), line:22:50, endln:22:54
+                      \_Net: (work@top.strb), line:22:50, endln:22:54
                     |vpiName:keymgr_data_i.strb
                   |vpiName:
                   \_Identifier: ($bits)

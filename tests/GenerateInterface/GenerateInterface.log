@@ -468,10 +468,10 @@ Identifier                                            36
 IntTypespec                                           12
 Interface                                              2
 InterfaceTypespec                                      2
-LogicNet                                               5
 LogicTypespec                                         11
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    5
 Operation                                             17
 Package                                                1
 ParamAssign                                            3
@@ -484,6 +484,7 @@ RefTypespec                                           26
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 Variable                                               7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateInterface/slpp_unit/surelog.uhdm ...
@@ -1384,19 +1385,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@abc_if.i), line:6:15, endln:6:16
     |vpiImportTypespec:
-    \_LogicNet: (work@abc_if.i), line:6:19, endln:6:20
+    \_Net: (work@abc_if.i), line:6:19, endln:6:20
       |vpiParent:
       \_GenFor: (work@abc_if), line:6:4, endln:10:15
       |vpiName:i
       |vpiFullName:work@abc_if.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@abc_if.i), line:6:30, endln:6:31
+    \_Net: (work@abc_if.i), line:6:30, endln:6:31
       |vpiParent:
       \_GenFor: (work@abc_if), line:6:4, endln:10:15
       |vpiName:i
       |vpiFullName:work@abc_if.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@abc_if.i), line:6:19, endln:6:20
+    |vpiNet:
+    \_Net: (work@abc_if.i), line:6:30, endln:6:31
     |vpiForInitStmt:
     \_Assignment: , line:6:8, endln:6:18
       |vpiParent:
@@ -1423,7 +1428,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@abc_if.i
         |vpiActual:
-        \_LogicNet: (work@abc_if.i), line:6:19, endln:6:20
+        \_Net: (work@abc_if.i), line:6:19, endln:6:20
       |vpiOperand:
       \_RefObj: (work@abc_if.NO_Input), line:6:21, endln:6:29
         |vpiParent:
@@ -1444,7 +1449,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@abc_if.i
         |vpiActual:
-        \_LogicNet: (work@abc_if.i), line:6:30, endln:6:31
+        \_Net: (work@abc_if.i), line:6:30, endln:6:31
     |vpiStmt:
     \_Begin: (work@abc_if.block), line:6:34, endln:10:15
   |vpiTypedef:
@@ -1537,13 +1542,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@abc_if.clk_i), line:4:26, endln:4:31
   |vpiImportTypespec:
-  \_LogicNet: (work@abc_if.xyz_o), line:3:26, endln:3:31
+  \_Net: (work@abc_if.xyz_o), line:3:26, endln:3:31
     |vpiParent:
     \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
     |vpiTypespec:
     \_RefTypespec: (work@abc_if.xyz_o), line:3:3, endln:3:25
       |vpiParent:
-      \_LogicNet: (work@abc_if.xyz_o), line:3:26, endln:3:31
+      \_Net: (work@abc_if.xyz_o), line:3:26, endln:3:31
       |vpiFullName:work@abc_if.xyz_o
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:8
@@ -1551,13 +1556,13 @@ Design: (unnamed)
     |vpiFullName:work@abc_if.xyz_o
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@abc_if.clk_i), line:4:26, endln:4:31
+  \_Net: (work@abc_if.clk_i), line:4:26, endln:4:31
     |vpiParent:
     \_Interface: work@abc_if (work@abc_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:1:1, endln:13:13
     |vpiTypespec:
     \_RefTypespec: (work@abc_if.clk_i), line:4:3, endln:4:25
       |vpiParent:
-      \_LogicNet: (work@abc_if.clk_i), line:4:26, endln:4:31
+      \_Net: (work@abc_if.clk_i), line:4:26, endln:4:31
       |vpiFullName:work@abc_if.clk_i
       |vpiActual:
       \_LogicTypespec: , line:4:3, endln:4:8
@@ -1566,9 +1571,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@abc_if
   |vpiNet:
-  \_LogicNet: (work@abc_if.xyz_o), line:3:26, endln:3:31
+  \_Net: (work@abc_if.xyz_o), line:3:26, endln:3:31
   |vpiNet:
-  \_LogicNet: (work@abc_if.clk_i), line:4:26, endln:4:31
+  \_Net: (work@abc_if.clk_i), line:4:26, endln:4:31
 |vpiAllInterfaces:
 \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
   |vpiParent:
@@ -1656,19 +1661,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@pins_if.i), line:28:17, endln:28:18
     |vpiImportTypespec:
-    \_LogicNet: (work@pins_if.i), line:28:24, endln:28:25
+    \_Net: (work@pins_if.i), line:28:24, endln:28:25
       |vpiParent:
       \_GenFor: (work@pins_if), line:28:5, endln:30:8
       |vpiName:i
       |vpiFullName:work@pins_if.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@pins_if.i), line:28:35, endln:28:36
+    \_Net: (work@pins_if.i), line:28:35, endln:28:36
       |vpiParent:
       \_GenFor: (work@pins_if), line:28:5, endln:30:8
       |vpiName:i
       |vpiFullName:work@pins_if.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@pins_if.i), line:28:24, endln:28:25
+    |vpiNet:
+    \_Net: (work@pins_if.i), line:28:35, endln:28:36
     |vpiForInitStmt:
     \_Assignment: , line:28:10, endln:28:22
       |vpiParent:
@@ -1695,7 +1704,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@pins_if.i
         |vpiActual:
-        \_LogicNet: (work@pins_if.i), line:28:24, endln:28:25
+        \_Net: (work@pins_if.i), line:28:24, endln:28:25
       |vpiOperand:
       \_RefObj: (work@pins_if.Width), line:28:28, endln:28:33
         |vpiParent:
@@ -1716,7 +1725,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@pins_if.i
         |vpiActual:
-        \_LogicNet: (work@pins_if.i), line:28:35, endln:28:36
+        \_Net: (work@pins_if.i), line:28:35, endln:28:36
     |vpiStmt:
     \_Begin: (work@pins_if), line:28:40, endln:30:8
   |vpiTypedef:
@@ -1809,19 +1818,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@pins_if.pins_o), line:25:21, endln:25:27
   |vpiImportTypespec:
-  \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
+  \_Net: (work@pins_if.pins), line:23:21, endln:23:25
     |vpiParent:
     \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
     |vpiName:pins
     |vpiFullName:work@pins_if.pins
   |vpiImportTypespec:
-  \_LogicNet: (work@pins_if.pins_o), line:25:21, endln:25:27
+  \_Net: (work@pins_if.pins_o), line:25:21, endln:25:27
     |vpiParent:
     \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
     |vpiTypespec:
     \_RefTypespec: (work@pins_if.pins_o), line:25:3, endln:25:20
       |vpiParent:
-      \_LogicNet: (work@pins_if.pins_o), line:25:21, endln:25:27
+      \_Net: (work@pins_if.pins_o), line:25:21, endln:25:27
       |vpiFullName:work@pins_if.pins_o
       |vpiActual:
       \_LogicTypespec: , line:25:3, endln:25:8
@@ -1830,9 +1839,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@pins_if
   |vpiNet:
-  \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
+  \_Net: (work@pins_if.pins), line:23:21, endln:23:25
   |vpiNet:
-  \_LogicNet: (work@pins_if.pins_o), line:25:21, endln:25:27
+  \_Net: (work@pins_if.pins_o), line:25:21, endln:25:27
   |vpiPort:
   \_Port: (pins), line:23:21, endln:23:25
     |vpiParent:
@@ -1846,7 +1855,7 @@ Design: (unnamed)
       |vpiName:pins
       |vpiFullName:work@pins_if.pins.pins
       |vpiActual:
-      \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
+      \_Net: (work@pins_if.pins), line:23:21, endln:23:25
     |vpiTypespec:
     \_RefTypespec: (work@pins_if.pins), line:23:9, endln:23:20
       |vpiParent:
@@ -1953,21 +1962,21 @@ Design: (unnamed)
             |vpiName:each_pin
           |vpiFullName:work@top2.each_pin
           |vpiImportTypespec:
-          \_LogicNet: (work@top2.each_pin.pins_oe), line:39:31, endln:39:34
+          \_Net: (work@top2.each_pin.pins_oe), line:39:31, endln:39:34
             |vpiParent:
             \_Begin: (work@top2.each_pin), line:38:40, endln:40:8
             |vpiName:pins_oe
             |vpiFullName:work@top2.each_pin.pins_oe
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@top2.each_pin.i), line:39:32, endln:39:33
+          \_Net: (work@top2.each_pin.i), line:39:32, endln:39:33
             |vpiParent:
             \_Begin: (work@top2.each_pin), line:38:40, endln:40:8
             |vpiName:i
             |vpiFullName:work@top2.each_pin.i
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@top2.each_pin.pins_o), line:39:43, endln:39:46
+          \_Net: (work@top2.each_pin.pins_o), line:39:43, endln:39:46
             |vpiParent:
             \_Begin: (work@top2.each_pin), line:38:40, endln:40:8
             |vpiName:pins_o
@@ -1989,7 +1998,7 @@ Design: (unnamed)
                 |vpiName:pins_oe
                 |vpiFullName:work@top2.each_pin.pins_oe
                 |vpiActual:
-                \_LogicNet: (work@top2.each_pin.pins_oe), line:39:31, endln:39:34
+                \_Net: (work@top2.each_pin.pins_oe), line:39:31, endln:39:34
                 |vpiIndex:
                 \_RefObj: (work@top2.each_pin.i), line:39:32, endln:39:33
                   |vpiParent:
@@ -1997,7 +2006,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@top2.each_pin.i
                   |vpiActual:
-                  \_LogicNet: (work@top2.each_pin.i), line:39:32, endln:39:33
+                  \_Net: (work@top2.each_pin.i), line:39:32, endln:39:33
               |vpiOperand:
               \_BitSelect: (work@top2.each_pin.pins_o), line:39:43, endln:39:46
                 |vpiParent:
@@ -2005,7 +2014,7 @@ Design: (unnamed)
                 |vpiName:pins_o
                 |vpiFullName:work@top2.each_pin.pins_o
                 |vpiActual:
-                \_LogicNet: (work@top2.each_pin.pins_o), line:39:43, endln:39:46
+                \_Net: (work@top2.each_pin.pins_o), line:39:43, endln:39:46
                 |vpiIndex:
                 \_RefObj: (work@top2.each_pin.i), line:39:44, endln:39:45
                   |vpiParent:
@@ -2013,7 +2022,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@top2.each_pin.i
                   |vpiActual:
-                  \_LogicNet: (work@top2.each_pin.i), line:39:32, endln:39:33
+                  \_Net: (work@top2.each_pin.i), line:39:32, endln:39:33
               |vpiOperand:
               \_Constant: , line:39:49, endln:39:53
                 |vpiParent:
@@ -2029,7 +2038,7 @@ Design: (unnamed)
               |vpiName:pins
               |vpiFullName:work@top2.each_pin.pins
               |vpiActual:
-              \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+              \_Net: (work@top2.pins), line:34:61, endln:34:65
               |vpiIndex:
               \_RefObj: (work@top2.each_pin.i), line:39:19, endln:39:20
                 |vpiParent:
@@ -2037,23 +2046,27 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@top2.each_pin.i
                 |vpiActual:
-                \_LogicNet: (work@top2.each_pin.i), line:39:32, endln:39:33
+                \_Net: (work@top2.each_pin.i), line:39:32, endln:39:33
         |vpiImportTypespec:
         \_Variable: (work@top2.i), line:38:17, endln:38:18
         |vpiImportTypespec:
-        \_LogicNet: (work@top2.i), line:38:24, endln:38:25
+        \_Net: (work@top2.i), line:38:24, endln:38:25
           |vpiParent:
           \_GenFor: (work@top2), line:38:5, endln:40:8
           |vpiName:i
           |vpiFullName:work@top2.i
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@top2.i), line:38:35, endln:38:36
+        \_Net: (work@top2.i), line:38:35, endln:38:36
           |vpiParent:
           \_GenFor: (work@top2), line:38:5, endln:40:8
           |vpiName:i
           |vpiFullName:work@top2.i
           |vpiNetType:1
+        |vpiNet:
+        \_Net: (work@top2.i), line:38:24, endln:38:25
+        |vpiNet:
+        \_Net: (work@top2.i), line:38:35, endln:38:36
         |vpiForInitStmt:
         \_Assignment: , line:38:10, endln:38:22
           |vpiParent:
@@ -2080,7 +2093,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@top2.i
             |vpiActual:
-            \_LogicNet: (work@top2.i), line:38:24, endln:38:25
+            \_Net: (work@top2.i), line:38:24, endln:38:25
           |vpiOperand:
           \_RefObj: (work@top2.Width), line:38:28, endln:38:33
             |vpiParent:
@@ -2101,7 +2114,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@top2.i
             |vpiActual:
-            \_LogicNet: (work@top2.i), line:38:35, endln:38:36
+            \_Net: (work@top2.i), line:38:35, endln:38:36
         |vpiStmt:
         \_Begin: (work@top2.each_pin), line:38:40, endln:40:8
       |vpiStmt:
@@ -2166,13 +2179,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:34:49, endln:34:60
   |vpiImportTypespec:
-  \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+  \_Net: (work@top2.pins), line:34:61, endln:34:65
     |vpiParent:
     \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:34:1, endln:43:10
     |vpiTypespec:
     \_RefTypespec: (work@top2.pins), line:34:49, endln:34:60
       |vpiParent:
-      \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+      \_Net: (work@top2.pins), line:34:61, endln:34:65
       |vpiFullName:work@top2.pins
       |vpiActual:
       \_LogicTypespec: , line:34:49, endln:34:60
@@ -2180,7 +2193,7 @@ Design: (unnamed)
     |vpiFullName:work@top2.pins
   |vpiDefName:work@top2
   |vpiNet:
-  \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+  \_Net: (work@top2.pins), line:34:61, endln:34:65
   |vpiPort:
   \_Port: (pins), line:34:61, endln:34:65
     |vpiParent:
@@ -2214,7 +2227,7 @@ Design: (unnamed)
         |vpiName:pins
         |vpiFullName:work@top2.intf.pins.pins
         |vpiActual:
-        \_LogicNet: (work@top2.pins), line:34:61, endln:34:65
+        \_Net: (work@top2.pins), line:34:61, endln:34:65
 |vpiTypedef:
 \_InterfaceTypespec: (abc_if)
 |vpiTypedef:

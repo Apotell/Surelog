@@ -245,6 +245,9 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:28:1: No timescale set for "goog".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:35:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:2:1: Compile package "foo_flags_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:12:1: Compile package "fooes_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:28:1: Compile package "goog".
 [INF:CP0303] ${SURELOG_DIR}/tests/FilePackUnion/dut.sv:35:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -269,7 +272,7 @@ StructTypespec                                         2
 TypedefTypespec                                        4
 TypespecMember                                         7
 UnionTypespec                                          1
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    2
 Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackUnion/slpp_all/surelog.uhdm ...
@@ -484,16 +487,16 @@ Design: (unnamed)
       \_TypedefTypespec: (goog::top_flag_t), line:32:3, endln:32:13
       |vpiFullName:goog::top_flag_t
       |vpiActual:
-      \_UnionTypespec: , line:29:9, endln:32:13
+      \_UnionTypespec: , line:29:9, endln:32:2
   |vpiTypedef:
-  \_UnionTypespec: , line:29:9, endln:32:13
+  \_UnionTypespec: , line:29:9, endln:32:2
     |vpiParent:
     \_Package: goog (goog), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (atype_t), line:30:45, endln:30:52
       |vpiParent:
-      \_UnionTypespec: , line:29:9, endln:32:13
+      \_UnionTypespec: , line:29:9, endln:32:2
       |vpiName:atype_t
       |vpiTypespec:
       \_RefTypespec: (goog::atype_t), line:30:3, endln:30:44
@@ -505,7 +508,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (btype_t), line:31:33, endln:31:40
       |vpiParent:
-      \_UnionTypespec: , line:29:9, endln:32:13
+      \_UnionTypespec: , line:29:9, endln:32:2
       |vpiName:btype_t
       |vpiTypespec:
       \_RefTypespec: (goog::btype_t), line:31:3, endln:31:32
@@ -611,7 +614,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (goog::padded_fooes_t), line:26:3, endln:26:17
+    \_RefTypespec: (goog::padded_fooes_t), line:31:3, endln:31:17
       |vpiParent:
       \_PackedArrayTypespec: , line:31:3, endln:31:32
       |vpiName:padded_fooes_t
@@ -621,7 +624,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (goog::top_flag_t), line:32:3, endln:32:13
   |vpiImportTypespec:
-  \_UnionTypespec: , line:29:9, endln:32:13
+  \_UnionTypespec: , line:29:9, endln:32:2
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:30:3, endln:30:44
   |vpiImportTypespec:
@@ -674,7 +677,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@top.b), line:35:63, endln:35:64
   |vpiImportTypespec:
-  \_LogicNet: (work@top.c), line:37:10, endln:37:11
+  \_Net: (work@top.c), line:37:10, endln:37:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
     |vpiName:c
@@ -682,7 +685,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.c), line:37:10, endln:37:11
+  \_Net: (work@top.c), line:37:10, endln:37:11
   |vpiPort:
   \_Port: (a), line:35:35, endln:35:36
     |vpiParent:
@@ -763,7 +766,7 @@ Design: (unnamed)
       |vpiName:c
       |vpiFullName:work@top.c
       |vpiActual:
-      \_LogicNet: (work@top.c), line:37:10, endln:37:11
+      \_Net: (work@top.c), line:37:10, endln:37:11
 |vpiTypedef:
 \_TypedefTypespec: (padded_fooes_t), line:26:3, endln:26:17
   |vpiParent:

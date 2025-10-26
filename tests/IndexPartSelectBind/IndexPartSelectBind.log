@@ -140,6 +140,7 @@ n<> u<134> t<Top_level_rule> c<1> l<1:1> el<25:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:1:1: No timescale set for "pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:1:1: Compile package "pkg".
 [INF:CP0302] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:8:1: Compile class "pkg::tt".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -166,15 +167,15 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    3
 Variable                                               1
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:30, name: nbytes".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:47, name: gp".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:31, name: nbytes".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:48, name: gp".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:5:3: Unsupported Typespec: id:13, type:RefTypespec, name:uvm_reg_data_t.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Null Actual: id:30, type:RefObj, name:nbytes.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Null Actual: id:47, type:RefObj, name:gp.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Null Actual: id:31, type:RefObj, name:nbytes.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Null Actual: id:48, type:RefObj, name:gp.
 [ERR:IG0811] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:10:18: Unsupported Typespec: id:18, type:RefTypespec, name:uvm_sequence_item.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -397,6 +398,13 @@ Design: (unnamed)
             \_ReturnStmt: , line:17:1, endln:17:10
             |vpiName:gp
             |vpiFullName:pkg::tt::reg2bus::gp
+      |vpiTypedef:
+      \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
+        |vpiParent:
+        \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
+        |vpiName:uvm_sequence_item
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
       |vpiMethod:1
       |vpiVisibility:1
       |vpiVirtual:1
@@ -415,24 +423,17 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:rw
         |vpiTypedef:
-        \_RefTypespec: (pkg::tt::reg2bus::rw::pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:10:54, endln:10:68
           |vpiParent:
           \_IODecl: (rw), line:10:69, endln:10:71
-          |vpiName:pkg::uvm_reg_bus_op
-          |vpiFullName:pkg::tt::reg2bus::rw::pkg::uvm_reg_bus_op
+          |vpiName:uvm_reg_bus_op
+          |vpiFullName:pkg::tt::reg2bus::rw::uvm_reg_bus_op
           |vpiActual:
           \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
       |vpiStmt:
       \_Begin: (pkg::tt::reg2bus)
-    |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
-      |vpiParent:
-      \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
-      |vpiName:uvm_sequence_item
     |vpiImportTypespec:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
-    |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
     |vpiMethod:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
   |vpiTypedef:

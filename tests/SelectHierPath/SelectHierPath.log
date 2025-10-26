@@ -91,7 +91,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SelectHierPath/dut.sv:10:1: Compile module "work@IntegerRegisterWriteStage".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              1
 Constant                                               2
@@ -102,6 +101,7 @@ Identifier                                             3
 IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 Range                                                  1
 RefObj                                                 3
@@ -110,6 +110,7 @@ SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         2
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SelectHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -163,20 +164,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:12:1, endln:12:45
   |vpiImportTypespec:
-  \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+  \_Net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
     |vpiParent:
     \_Module: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
     |vpiTypespec:
     \_RefTypespec: (work@IntegerRegisterWriteStage.pipeReg), line:12:1, endln:12:33
       |vpiParent:
-      \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+      \_Net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
       |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
       |vpiActual:
       \_ArrayTypespec: , line:12:1, endln:12:45
     |vpiName:pipeReg
     |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
   |vpiImportTypespec:
-  \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
+  \_Net: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
     |vpiParent:
     \_Module: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
     |vpiName:o
@@ -184,9 +185,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@IntegerRegisterWriteStage
   |vpiNet:
-  \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
-  |vpiArrayNet:
-  \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+  \_Net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+  |vpiNet:
+  \_Net: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
   |vpiContAssign:
   \_ContAssign: , line:14:8, endln:14:40
     |vpiParent:
@@ -202,7 +203,7 @@ Design: (unnamed)
         |vpiName:pipeReg
         |vpiFullName:pipeReg[1]
         |vpiActual:
-        \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+        \_Net: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
         |vpiIndex:
         \_Constant: , line:14:20, endln:14:21
           |vpiParent:
@@ -234,7 +235,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@IntegerRegisterWriteStage.o
       |vpiActual:
-      \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
+      \_Net: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
 |vpiTypedef:
 \_TypedefTypespec: (BranchResult), line:3:3, endln:3:15
   |vpiParent:

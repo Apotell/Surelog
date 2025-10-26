@@ -220,18 +220,19 @@ SourceFile                                             1
 StringTypespec                                         1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    2
 Variable                                               2
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:156, name: a".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Illegal implicit net "id:160, name: b".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Illegal implicit net "id:172, name: a".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Illegal implicit net "id:176, name: b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:158, name: a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Illegal implicit net "id:162, name: b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Illegal implicit net "id:174, name: a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Illegal implicit net "id:178, name: b".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitQueue/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Null Actual: id:156, type:RefObj, name:a.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Null Actual: id:160, type:RefObj, name:b.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Null Actual: id:172, type:RefObj, name:a.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Null Actual: id:176, type:RefObj, name:b.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Null Actual: id:158, type:RefObj, name:a.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Null Actual: id:162, type:RefObj, name:b.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Null Actual: id:174, type:RefObj, name:a.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Null Actual: id:178, type:RefObj, name:b.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1131,19 +1132,10 @@ Design: (unnamed)
       \_StringTypespec: , line:10:3, endln:10:9
         |vpiParent:
         \_Begin: (work@c2::main)
-      |vpiTypedef:
-      \_ClassTypespec: (work@c1), line:11:3, endln:11:5
-        |vpiParent:
-        \_Begin: (work@c2::main)
-        |vpiName:work@c1
-        |vpiClassDefn:
-        \_ClassDefn: (work@c1), file:${SURELOG_DIR}/tests/UnitQueue/top.v, line:2:1, endln:5:9
       |vpiImportTypespec:
       \_StringTypespec: , line:10:3, endln:10:9
       |vpiImportTypespec:
       \_Variable: (work@c2::main::q), line:10:10, endln:10:11
-      |vpiImportTypespec:
-      \_ClassTypespec: (work@c1), line:11:3, endln:11:5
       |vpiImportTypespec:
       \_Variable: (work@c2::main::q2), line:11:7, endln:11:9
       |vpiStmt:
@@ -1393,13 +1385,13 @@ Design: (unnamed)
     \_ClassDefn: (work@c2), file:${SURELOG_DIR}/tests/UnitQueue/top.v, line:7:1, endln:22:9
     |vpiArrayType:4
     |vpiElemTypespec:
-    \_RefTypespec: (work@c2::work@c1), line:11:3, endln:11:5
+    \_RefTypespec: (work@c2::c1), line:11:3, endln:11:5
       |vpiParent:
       \_ArrayTypespec: , line:11:3, endln:11:12
-      |vpiName:work@c1
-      |vpiFullName:work@c2::work@c1
+      |vpiName:c1
+      |vpiFullName:work@c2::c1
       |vpiActual:
-      \_ClassTypespec: (work@c1), line:11:3, endln:11:5
+      \_ClassTypespec: (work@c1)
   |vpiImportTypespec:
   \_Function: (work@c2::main), line:9:1, endln:20:12
   |vpiImportTypespec:
@@ -1408,6 +1400,13 @@ Design: (unnamed)
   \_ArrayTypespec: , line:11:3, endln:11:12
   |vpiMethod:
   \_Function: (work@c2::main), line:9:1, endln:20:12
+|vpiTypedef:
+\_ClassTypespec: (work@c1)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@c1
+  |vpiClassDefn:
+  \_ClassDefn: (work@c1), file:${SURELOG_DIR}/tests/UnitQueue/top.v, line:2:1, endln:5:9
 |vpiTypedef:
 \_ClassTypespec: (work@c2)
   |vpiParent:

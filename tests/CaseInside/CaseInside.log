@@ -168,6 +168,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: No timescale set for "dm".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: No timescale set for "dm_csrs".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: Compile module "work@dm_csrs".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -201,6 +202,7 @@ RefTypespec                                           15
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1126,28 +1128,28 @@ Design: (unnamed)
         |vpiName:csr_read_write
       |vpiFullName:work@dm_csrs.csr_read_write
       |vpiImportTypespec:
-      \_LogicNet: (work@dm_csrs.csr_read_write.dmi_req_i), line:15:27, endln:15:36
+      \_Net: (work@dm_csrs.csr_read_write.dmi_req_i), line:15:27, endln:15:36
         |vpiParent:
         \_Begin: (work@dm_csrs.csr_read_write), line:13:15, endln:28:6
         |vpiName:dmi_req_i
         |vpiFullName:work@dm_csrs.csr_read_write.dmi_req_i
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
+      \_Net: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
         |vpiParent:
         \_Begin: (work@dm_csrs.csr_read_write), line:13:15, endln:28:6
         |vpiName:addr
         |vpiFullName:work@dm_csrs.csr_read_write.addr
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
+      \_Net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
         |vpiParent:
         \_Begin: (work@dm_csrs.csr_read_write), line:13:15, endln:28:6
         |vpiName:dmcontrol_q
         |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
+      \_Net: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
         |vpiParent:
         \_Begin: (work@dm_csrs.csr_read_write), line:13:15, endln:28:6
         |vpiName:resp_queue_data
@@ -1182,7 +1184,7 @@ Design: (unnamed)
               \_HierPath: (dmi_req_i.addr), line:15:27, endln:15:41
               |vpiName:dmi_req_i
               |vpiActual:
-              \_LogicNet: (work@dm_csrs.csr_read_write.dmi_req_i), line:15:27, endln:15:36
+              \_Net: (work@dm_csrs.csr_read_write.dmi_req_i), line:15:27, endln:15:36
             |vpiActual:
             \_RefObj: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
               |vpiParent:
@@ -1190,7 +1192,7 @@ Design: (unnamed)
               |vpiName:addr
               |vpiFullName:work@dm_csrs.csr_read_write.addr
               |vpiActual:
-              \_LogicNet: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
+              \_Net: (work@dm_csrs.csr_read_write.addr), line:15:37, endln:15:41
             |vpiName:dmi_req_i.addr
         |vpiCaseItem:
         \_CaseItem: , line:17:9, endln:21:12
@@ -1228,7 +1230,7 @@ Design: (unnamed)
             \_CaseItem: , line:17:9, endln:21:12
             |vpiFullName:work@dm_csrs.csr_read_write
             |vpiImportTypespec:
-            \_LogicNet: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
+            \_Net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
               |vpiParent:
               \_Begin: (work@dm_csrs.csr_read_write), line:17:36, endln:21:12
               |vpiName:resp_queue_data
@@ -1255,7 +1257,7 @@ Design: (unnamed)
                 |vpiName:resp_queue_data
                 |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
                 |vpiActual:
-                \_LogicNet: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
+                \_Net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
         |vpiCaseItem:
         \_CaseItem: , line:23:9, endln:23:57
           |vpiParent:
@@ -1291,7 +1293,7 @@ Design: (unnamed)
               |vpiName:dmcontrol_q
               |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
               |vpiActual:
-              \_LogicNet: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
+              \_Net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
             |vpiLhs:
             \_RefObj: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
               |vpiParent:
@@ -1299,7 +1301,7 @@ Design: (unnamed)
               |vpiName:resp_queue_data
               |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
               |vpiActual:
-              \_LogicNet: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
+              \_Net: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
         |vpiCaseItem:
         \_CaseItem: , line:25:9, endln:25:18
           |vpiParent:

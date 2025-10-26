@@ -514,6 +514,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:33:1: No timescale set for "otp_ctrl_lci".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:51:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:1:1: Compile package "otp_ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:10:1: Compile package "otp_ctrl_part_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:33:1: Compile module "work@otp_ctrl_lci".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:51:1: Compile module "work@top".
 [INF:CP0302] Compile class "builtin::mailbox".
@@ -527,7 +529,7 @@ Begin                                                  2
 BitSelect                                              3
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              41
+Constant                                              39
 Design                                                 1
 EnumConst                                              7
 EnumTypespec                                           2
@@ -539,18 +541,18 @@ IODecl                                                11
 Identifier                                            38
 ImportTypespec                                         3
 IntTypespec                                           12
-LogicNet                                               2
 LogicTypespec                                          7
 Module                                                 4
 ModuleTypespec                                         3
-Operation                                             21
+Net                                                    2
+Operation                                             22
 Package                                                3
 ParamAssign                                            7
 Parameter                                              7
-Range                                                  8
+Range                                                  7
 RefModule                                              2
-RefObj                                                18
-RefTypespec                                           43
+RefObj                                                17
+RefTypespec                                           41
 SourceFile                                             1
 StringTypespec                                        12
 StructTypespec                                         1
@@ -558,12 +560,11 @@ TaggedPattern                                         12
 Task                                                   9
 TypedefTypespec                                        3
 TypespecMember                                         2
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    3
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamArraySelect/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:12:35: Unsupported Typespec: id:51, type:RefTypespec, name:NumPart.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Null Actual: id:143, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Null Actual: id:139, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1659,29 +1660,33 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
-    |vpiParent:
-    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:NumPart
-  |vpiTypedef:
   \_ArrayTypespec: , line:12:14, endln:23:4
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (otp_ctrl_part_pkg::NumPart), line:12:35, endln:12:44
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:12:35, endln:12:44
       |vpiParent:
       \_ArrayTypespec: , line:12:14, endln:23:4
-      |vpiName:NumPart
-      |vpiFullName:otp_ctrl_part_pkg::NumPart
-      |vpiActual:
-      \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
+      |vpiRightRange:
+      \_Operation: , line:12:36, endln:12:43
+        |vpiParent:
+        \_Range: , line:12:35, endln:12:44
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (otp_ctrl_part_pkg::NumPart), line:12:36, endln:12:43
+          |vpiParent:
+          \_Operation: , line:12:36, endln:12:43
+          |vpiName:NumPart
+          |vpiFullName:otp_ctrl_part_pkg::NumPart
+          |vpiActual:
+          \_Parameter: (otp_ctrl_pkg::NumPart), line:6:17, endln:6:28
     |vpiElemTypespec:
-    \_RefTypespec: (otp_ctrl_part_pkg::otp_ctrl_pkg::part_info_t), line:12:14, endln:12:25
+    \_RefTypespec: (otp_ctrl_part_pkg::part_info_t), line:12:14, endln:12:25
       |vpiParent:
       \_ArrayTypespec: , line:12:14, endln:23:4
-      |vpiName:otp_ctrl_pkg::part_info_t
-      |vpiFullName:otp_ctrl_part_pkg::otp_ctrl_pkg::part_info_t
+      |vpiName:part_info_t
+      |vpiFullName:otp_ctrl_part_pkg::part_info_t
       |vpiActual:
       \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
   |vpiTypedef:
@@ -1726,8 +1731,6 @@ Design: (unnamed)
       \_EnumTypespec: , line:25:11, endln:28:15
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:11:10, endln:11:25
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
   |vpiImportTypespec:
   \_ArrayTypespec: , line:12:14, endln:23:4
   |vpiImportTypespec:
@@ -1916,13 +1919,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:42:2, endln:42:7
   |vpiImportTypespec:
-  \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+  \_Net: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
     |vpiParent:
     \_Module: work@otp_ctrl_lci (work@otp_ctrl_lci), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:33:1, endln:48:10
     |vpiTypespec:
     \_RefTypespec: (work@otp_ctrl_lci.cnt_d), line:42:2, endln:42:27
       |vpiParent:
-      \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+      \_Net: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
       |vpiFullName:work@otp_ctrl_lci.cnt_d
       |vpiActual:
       \_LogicTypespec: , line:42:2, endln:42:7
@@ -1931,7 +1934,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@otp_ctrl_lci
   |vpiNet:
-  \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+  \_Net: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
   |vpiGenStmt:
   \_GenIf: , line:44:3, endln:46:6
     |vpiParent:
@@ -2079,7 +2082,7 @@ Design: (unnamed)
                   |vpiName:k
                   |vpiFullName:work@top.gen_part_sel.PartInfo[k].offset.k
                   |vpiActual:
-                  \_LogicNet: (work@top.gen_part_sel.k), line:62:84, endln:62:85
+                  \_Net: (work@top.gen_part_sel.k), line:62:84, endln:62:85
               |vpiActual:
               \_RefObj: (work@top.gen_part_sel.offset), line:62:87, endln:62:93
                 |vpiParent:
@@ -2087,7 +2090,7 @@ Design: (unnamed)
                 |vpiName:offset
                 |vpiFullName:work@top.gen_part_sel.offset
                 |vpiActual:
-                \_LogicNet: (work@top.gen_part_sel.offset), line:62:87, endln:62:93
+                \_Net: (work@top.gen_part_sel.offset), line:62:87, endln:62:93
               |vpiName:PartInfo[k].offset
           |vpiOperand:
           \_Operation: , line:63:53, endln:63:92
@@ -2113,7 +2116,7 @@ Design: (unnamed)
                   |vpiName:k
                   |vpiFullName:work@top.gen_part_sel.PartInfo[k].size.k
                   |vpiActual:
-                  \_LogicNet: (work@top.gen_part_sel.k), line:62:84, endln:62:85
+                  \_Net: (work@top.gen_part_sel.k), line:62:84, endln:62:85
               |vpiActual:
               \_RefObj: (work@top.gen_part_sel.size), line:63:87, endln:63:91
                 |vpiParent:
@@ -2121,7 +2124,7 @@ Design: (unnamed)
                 |vpiName:size
                 |vpiFullName:work@top.gen_part_sel.size
                 |vpiActual:
-                \_LogicNet: (work@top.gen_part_sel.size), line:63:87, endln:63:91
+                \_Net: (work@top.gen_part_sel.size), line:63:87, endln:63:91
               |vpiName:PartInfo[k].size
         |vpiLhs:
         \_Parameter: (work@top.gen_part_sel.PartEnd), line:62:43, endln:62:50
@@ -2158,21 +2161,21 @@ Design: (unnamed)
         |vpiLhs:
         \_Parameter: (work@top.gen_part_sel.DigestOffset), line:65:45, endln:65:57
       |vpiImportTypespec:
-      \_LogicNet: (work@top.gen_part_sel.k), line:62:84, endln:62:85
+      \_Net: (work@top.gen_part_sel.k), line:62:84, endln:62:85
         |vpiParent:
         \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
         |vpiName:k
         |vpiFullName:work@top.gen_part_sel.k
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.gen_part_sel.offset), line:62:87, endln:62:93
+      \_Net: (work@top.gen_part_sel.offset), line:62:87, endln:62:93
         |vpiParent:
         \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
         |vpiName:offset
         |vpiFullName:work@top.gen_part_sel.offset
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.gen_part_sel.size), line:63:87, endln:63:91
+      \_Net: (work@top.gen_part_sel.size), line:63:87, endln:63:91
         |vpiParent:
         \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
         |vpiName:size
@@ -2185,19 +2188,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@top.k), line:61:14, endln:61:15
     |vpiImportTypespec:
-    \_LogicNet: (work@top.k), line:61:21, endln:61:22
+    \_Net: (work@top.k), line:61:21, endln:61:22
       |vpiParent:
       \_GenFor: (work@top), line:61:2, endln:68:6
       |vpiName:k
       |vpiFullName:work@top.k
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.k), line:61:34, endln:61:35
+    \_Net: (work@top.k), line:61:34, endln:61:35
       |vpiParent:
       \_GenFor: (work@top), line:61:2, endln:68:6
       |vpiName:k
       |vpiFullName:work@top.k
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@top.k), line:61:21, endln:61:22
+    |vpiNet:
+    \_Net: (work@top.k), line:61:34, endln:61:35
     |vpiForInitStmt:
     \_Assignment: , line:61:7, endln:61:19
       |vpiParent:
@@ -2224,7 +2231,7 @@ Design: (unnamed)
         |vpiName:k
         |vpiFullName:work@top.k
         |vpiActual:
-        \_LogicNet: (work@top.k), line:61:21, endln:61:22
+        \_Net: (work@top.k), line:61:21, endln:61:22
       |vpiOperand:
       \_RefObj: (work@top.NumPart), line:61:25, endln:61:32
         |vpiParent:
@@ -2245,7 +2252,7 @@ Design: (unnamed)
         |vpiName:k
         |vpiFullName:work@top.k
         |vpiActual:
-        \_LogicNet: (work@top.k), line:61:34, endln:61:35
+        \_Net: (work@top.k), line:61:34, endln:61:35
     |vpiStmt:
     \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
   |vpiTypedef:
@@ -2373,7 +2380,7 @@ Design: (unnamed)
           |vpiName:size
           |vpiFullName:work@top.size
           |vpiActual:
-          \_LogicNet: (work@top.size), line:59:33, endln:59:37
+          \_Net: (work@top.size), line:59:33, endln:59:37
         |vpiName:PartInfo[LifeCycleIdx].size
       |vpiRightRange:
       \_Constant: , line:59:38, endln:59:39
@@ -2394,13 +2401,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:59:3, endln:59:8
   |vpiImportTypespec:
-  \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
+  \_Net: (work@top.aaa), line:59:41, endln:59:44
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:51:1, endln:71:10
     |vpiTypespec:
     \_RefTypespec: (work@top.aaa), line:59:3, endln:59:40
       |vpiParent:
-      \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
+      \_Net: (work@top.aaa), line:59:41, endln:59:44
       |vpiFullName:work@top.aaa
       |vpiActual:
       \_LogicTypespec: , line:59:3, endln:59:8
@@ -2408,7 +2415,7 @@ Design: (unnamed)
     |vpiFullName:work@top.aaa
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.size), line:59:33, endln:59:37
+  \_Net: (work@top.size), line:59:33, endln:59:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:51:1, endln:71:10
     |vpiName:size
@@ -2416,9 +2423,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
+  \_Net: (work@top.aaa), line:59:41, endln:59:44
   |vpiNet:
-  \_LogicNet: (work@top.size), line:59:33, endln:59:37
+  \_Net: (work@top.size), line:59:33, endln:59:37
   |vpiRefModule:
   \_RefModule: work@otp_ctrl_lci (u_otp_ctrl_lci), line:54:3, endln:54:15
     |vpiParent:
@@ -2439,6 +2446,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 4
 [   NOTE] : 0

@@ -195,10 +195,10 @@ Function                                               1
 IODecl                                                 1
 Identifier                                             4
 IntTypespec                                            2
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 PartSelect                                             2
 Port                                                   1
@@ -208,6 +208,7 @@ RefTypespec                                            6
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    2
 VarSelect                                              2
 Variable                                               1
 === UHDM Object Stats End ===
@@ -261,6 +262,20 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.iota), line:6:4, endln:10:22
       |vpiFullName:work@top.iota
+      |vpiImportTypespec:
+      \_Net: (work@top.iota.result), line:7:13, endln:7:19
+        |vpiParent:
+        \_Begin: (work@top.iota)
+        |vpiTypespec:
+        \_RefTypespec: (work@top.iota.result.box_t), line:7:7, endln:7:12
+          |vpiParent:
+          \_Net: (work@top.iota.result), line:7:13, endln:7:19
+          |vpiName:box_t
+          |vpiFullName:work@top.iota.result.box_t
+          |vpiActual:
+          \_TypedefTypespec: (box_t), line:2:29, endln:2:34
+        |vpiName:result
+        |vpiFullName:work@top.iota.result
       |vpiStmt:
       \_Assignment: , line:8:7, endln:8:37
         |vpiParent:
@@ -316,7 +331,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@top.iota.result
           |vpiActual:
-          \_LogicNet: (work@top.result), line:7:13, endln:7:19
+          \_Net: (work@top.iota.result), line:7:13, endln:7:19
           |vpiIndex:
           \_Constant: , line:8:14, endln:8:15
             |vpiParent:
@@ -333,7 +348,7 @@ Design: (unnamed)
             |vpiFullName:work@top.iota.result.result
             |vpiDefName:result
             |vpiActual:
-            \_LogicNet: (work@top.result), line:7:13, endln:7:19
+            \_Net: (work@top.iota.result), line:7:13, endln:7:19
             |vpiConstantSelect:1
             |vpiLeftRange:
             \_Constant: , line:8:17, endln:8:18
@@ -362,7 +377,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@top.iota.result
           |vpiActual:
-          \_LogicNet: (work@top.result), line:7:13, endln:7:19
+          \_Net: (work@top.iota.result), line:7:13, endln:7:19
           |vpiIndex:
           \_Constant: , line:9:21, endln:9:22
             |vpiParent:
@@ -494,28 +509,12 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (box_t), line:2:29, endln:2:34
   |vpiImportTypespec:
-  \_LogicNet: (work@top.result), line:7:13, endln:7:19
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.result.box_t), line:7:7, endln:7:12
-      |vpiParent:
-      \_LogicNet: (work@top.result), line:7:13, endln:7:19
-      |vpiName:box_t
-      |vpiFullName:work@top.result.box_t
-      |vpiActual:
-      \_TypedefTypespec: (box_t), line:2:29, endln:2:34
-    |vpiName:result
-    |vpiFullName:work@top.result
-  |vpiImportTypespec:
   \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:1:23, endln:1:24
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.iota), line:6:4, endln:10:22
-  |vpiNet:
-  \_LogicNet: (work@top.result), line:7:13, endln:7:19
   |vpiPort:
   \_Port: (o), line:1:23, endln:1:24
     |vpiParent:

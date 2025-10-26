@@ -154,6 +154,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BadScope/dut.sv:2:1: No timescale set for "pack".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BadScope/dut.sv:12:1: No timescale set for "top3".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BadScope/dut.sv:2:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/BadScope/dut.sv:12:1: Compile module "work@top3".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -176,7 +177,7 @@ StructTypespec                                         2
 TaggedPattern                                          5
 TypedefTypespec                                        2
 TypespecMember                                         7
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadScope/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/BadScope/dut.sv:17:5: Unsupported Typespec: id:32, type:RefTypespec, name:priv_lvl_e.
@@ -274,7 +275,7 @@ Design: (unnamed)
       |vpiName:status_t
       |vpiFullName:work@top3.MSTATUS_RST_VAL.status_t
       |vpiActual:
-      \_TypedefTypespec: (status_t), line:20:5, endln:20:13
+      \_TypedefTypespec: (pack::status_t), line:7:5, endln:7:13
     |vpiLocalParam:1
     |vpiName:MSTATUS_RST_VAL
     |vpiFullName:work@top3.MSTATUS_RST_VAL
@@ -338,7 +339,7 @@ Design: (unnamed)
           |vpiName:PRIV_LVL_U
           |vpiFullName:work@top3.PRIV_LVL_U
           |vpiActual:
-          \_LogicNet: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
+          \_Net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
         |vpiTypespec:
         \_RefTypespec: (work@top3.mpp), line:23:43, endln:23:46
           |vpiParent:
@@ -514,7 +515,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: , line:21:42, endln:21:45
   |vpiImportTypespec:
-  \_LogicNet: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
+  \_Net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
     |vpiParent:
     \_Module: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
     |vpiName:PRIV_LVL_U
@@ -522,7 +523,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top3
   |vpiNet:
-  \_LogicNet: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
+  \_Net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
 |vpiTypedef:
 \_ModuleTypespec: (top3)
   |vpiParent:

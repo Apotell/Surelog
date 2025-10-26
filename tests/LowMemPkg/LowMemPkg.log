@@ -73,6 +73,7 @@ PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/LowMemPkg/dut.sv
 [WRN:PA0205] ${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv:19:1: No timescale set for "wddr_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LowMemPkg/dut.sv:4:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv:19:1: Compile package "wddr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LowMemPkg/dut.sv:4:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -80,14 +81,15 @@ Constant                                               1
 Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
-LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 RefTypespec                                            3
 SourceFile                                             3
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -157,15 +159,15 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:5:13, endln:5:14
+  \_Net: (work@top.a), line:5:13, endln:5:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.a.wddr_pkg::my_logic), line:5:4, endln:5:12
+    \_RefTypespec: (work@top.a.my_logic), line:5:4, endln:5:12
       |vpiParent:
-      \_LogicNet: (work@top.a), line:5:13, endln:5:14
-      |vpiName:wddr_pkg::my_logic
-      |vpiFullName:work@top.a.wddr_pkg::my_logic
+      \_Net: (work@top.a), line:5:13, endln:5:14
+      |vpiName:my_logic
+      |vpiFullName:work@top.a.my_logic
       |vpiActual:
       \_TypedefTypespec: (wddr_pkg::my_logic), line:20:15, endln:20:23
     |vpiName:a
@@ -173,13 +175,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:4, endln:6:9
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:6:10, endln:6:11
+  \_Net: (work@top.b), line:6:10, endln:6:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:6:4, endln:6:9
       |vpiParent:
-      \_LogicNet: (work@top.b), line:6:10, endln:6:11
+      \_Net: (work@top.b), line:6:10, endln:6:11
       |vpiFullName:work@top.b
       |vpiActual:
       \_LogicTypespec: , line:6:4, endln:6:9
@@ -188,9 +190,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.a), line:5:13, endln:5:14
+  \_Net: (work@top.a), line:5:13, endln:5:14
   |vpiNet:
-  \_LogicNet: (work@top.b), line:6:10, endln:6:11
+  \_Net: (work@top.b), line:6:10, endln:6:11
 |vpiTypedef:
 \_ImportTypespec: (wddr_pkg), line:3:8, endln:3:19
   |vpiParent:

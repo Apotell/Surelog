@@ -441,6 +441,10 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageHierRef/packages.sv:60:1: No timescale set for "s".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageHierRef/top.sv:18:1: No timescale set for "m".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageHierRef/packages.sv:1:1: Compile package "p".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageHierRef/packages.sv:20:1: Compile package "q".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageHierRef/packages.sv:40:1: Compile package "r".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageHierRef/packages.sv:60:1: Compile package "s".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageHierRef/top.sv:18:1: Compile module "work@m".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -464,10 +468,10 @@ Identifier                                            41
 ImportTypespec                                         2
 Initial                                                1
 IntTypespec                                           22
-LogicNet                                               8
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         2
+Net                                                    8
 Package                                                5
 ParamAssign                                            4
 Parameter                                              4
@@ -479,6 +483,7 @@ StructTypespec                                         8
 Task                                                   9
 TypedefTypespec                                        1
 TypespecMember                                         8
+UnsupportedTypespec                                    1
 Variable                                               5
 VoidTypespec                                           4
 === UHDM Object Stats End ===
@@ -1418,13 +1423,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:5:3, endln:5:6
   |vpiImportTypespec:
-  \_LogicNet: (p::s1), line:6:3, endln:6:5
+  \_Net: (p::s1), line:6:3, endln:6:5
     |vpiParent:
     \_Package: p (p), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:1:1, endln:17:11
     |vpiTypespec:
     \_RefTypespec: (p::s1), line:4:1, endln:6:2
       |vpiParent:
-      \_LogicNet: (p::s1), line:6:3, endln:6:5
+      \_Net: (p::s1), line:6:3, endln:6:5
       |vpiFullName:p::s1
       |vpiActual:
       \_StructTypespec: , line:4:1, endln:6:2
@@ -1433,13 +1438,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:8:1, endln:10:2
   |vpiImportTypespec:
-  \_LogicNet: (p::s2), line:10:3, endln:10:5
+  \_Net: (p::s2), line:10:3, endln:10:5
     |vpiParent:
     \_Package: p (p), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:1:1, endln:17:11
     |vpiTypespec:
     \_RefTypespec: (p::s2), line:8:1, endln:10:2
       |vpiParent:
-      \_LogicNet: (p::s2), line:10:3, endln:10:5
+      \_Net: (p::s2), line:10:3, endln:10:5
       |vpiFullName:p::s2
       |vpiActual:
       \_StructTypespec: , line:8:1, endln:10:2
@@ -1449,9 +1454,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (p::f), line:12:1, endln:15:12
   |vpiNet:
-  \_LogicNet: (p::s1), line:6:3, endln:6:5
+  \_Net: (p::s1), line:6:3, endln:6:5
   |vpiNet:
-  \_LogicNet: (p::s2), line:10:3, endln:10:5
+  \_Net: (p::s2), line:10:3, endln:10:5
 |vpiAllPackages:
 \_Package: q (q), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:20:1, endln:36:11
   |vpiParent:
@@ -1575,13 +1580,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:24:3, endln:24:6
   |vpiImportTypespec:
-  \_LogicNet: (q::s1), line:25:3, endln:25:5
+  \_Net: (q::s1), line:25:3, endln:25:5
     |vpiParent:
     \_Package: q (q), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:20:1, endln:36:11
     |vpiTypespec:
     \_RefTypespec: (q::s1), line:23:1, endln:25:2
       |vpiParent:
-      \_LogicNet: (q::s1), line:25:3, endln:25:5
+      \_Net: (q::s1), line:25:3, endln:25:5
       |vpiFullName:q::s1
       |vpiActual:
       \_StructTypespec: , line:23:1, endln:25:2
@@ -1590,13 +1595,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:27:1, endln:29:2
   |vpiImportTypespec:
-  \_LogicNet: (q::s2), line:29:3, endln:29:5
+  \_Net: (q::s2), line:29:3, endln:29:5
     |vpiParent:
     \_Package: q (q), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:20:1, endln:36:11
     |vpiTypespec:
     \_RefTypespec: (q::s2), line:27:1, endln:29:2
       |vpiParent:
-      \_LogicNet: (q::s2), line:29:3, endln:29:5
+      \_Net: (q::s2), line:29:3, endln:29:5
       |vpiFullName:q::s2
       |vpiActual:
       \_StructTypespec: , line:27:1, endln:29:2
@@ -1606,9 +1611,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (q::f), line:31:1, endln:34:12
   |vpiNet:
-  \_LogicNet: (q::s1), line:25:3, endln:25:5
+  \_Net: (q::s1), line:25:3, endln:25:5
   |vpiNet:
-  \_LogicNet: (q::s2), line:29:3, endln:29:5
+  \_Net: (q::s2), line:29:3, endln:29:5
 |vpiAllPackages:
 \_Package: r (r), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:40:1, endln:56:11
   |vpiParent:
@@ -1732,13 +1737,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:44:3, endln:44:6
   |vpiImportTypespec:
-  \_LogicNet: (r::s1), line:45:3, endln:45:5
+  \_Net: (r::s1), line:45:3, endln:45:5
     |vpiParent:
     \_Package: r (r), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:40:1, endln:56:11
     |vpiTypespec:
     \_RefTypespec: (r::s1), line:43:1, endln:45:2
       |vpiParent:
-      \_LogicNet: (r::s1), line:45:3, endln:45:5
+      \_Net: (r::s1), line:45:3, endln:45:5
       |vpiFullName:r::s1
       |vpiActual:
       \_StructTypespec: , line:43:1, endln:45:2
@@ -1747,13 +1752,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:47:1, endln:49:2
   |vpiImportTypespec:
-  \_LogicNet: (r::s2), line:49:3, endln:49:5
+  \_Net: (r::s2), line:49:3, endln:49:5
     |vpiParent:
     \_Package: r (r), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:40:1, endln:56:11
     |vpiTypespec:
     \_RefTypespec: (r::s2), line:47:1, endln:49:2
       |vpiParent:
-      \_LogicNet: (r::s2), line:49:3, endln:49:5
+      \_Net: (r::s2), line:49:3, endln:49:5
       |vpiFullName:r::s2
       |vpiActual:
       \_StructTypespec: , line:47:1, endln:49:2
@@ -1763,9 +1768,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (r::f), line:51:1, endln:54:12
   |vpiNet:
-  \_LogicNet: (r::s1), line:45:3, endln:45:5
+  \_Net: (r::s1), line:45:3, endln:45:5
   |vpiNet:
-  \_LogicNet: (r::s2), line:49:3, endln:49:5
+  \_Net: (r::s2), line:49:3, endln:49:5
 |vpiAllPackages:
 \_Package: s (s), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:60:1, endln:76:11
   |vpiParent:
@@ -1889,13 +1894,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:64:3, endln:64:6
   |vpiImportTypespec:
-  \_LogicNet: (s::s1), line:65:3, endln:65:5
+  \_Net: (s::s1), line:65:3, endln:65:5
     |vpiParent:
     \_Package: s (s), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:60:1, endln:76:11
     |vpiTypespec:
     \_RefTypespec: (s::s1), line:63:1, endln:65:2
       |vpiParent:
-      \_LogicNet: (s::s1), line:65:3, endln:65:5
+      \_Net: (s::s1), line:65:3, endln:65:5
       |vpiFullName:s::s1
       |vpiActual:
       \_StructTypespec: , line:63:1, endln:65:2
@@ -1904,13 +1909,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:67:1, endln:69:2
   |vpiImportTypespec:
-  \_LogicNet: (s::s2), line:69:3, endln:69:5
+  \_Net: (s::s2), line:69:3, endln:69:5
     |vpiParent:
     \_Package: s (s), file:${SURELOG_DIR}/tests/PackageHierRef/packages.sv, line:60:1, endln:76:11
     |vpiTypespec:
     \_RefTypespec: (s::s2), line:67:1, endln:69:2
       |vpiParent:
-      \_LogicNet: (s::s2), line:69:3, endln:69:5
+      \_Net: (s::s2), line:69:3, endln:69:5
       |vpiFullName:s::s2
       |vpiActual:
       \_StructTypespec: , line:67:1, endln:69:2
@@ -1920,9 +1925,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (s::f), line:71:1, endln:74:12
   |vpiNet:
-  \_LogicNet: (s::s1), line:65:3, endln:65:5
+  \_Net: (s::s1), line:65:3, endln:65:5
   |vpiNet:
-  \_LogicNet: (s::s2), line:69:3, endln:69:5
+  \_Net: (s::s2), line:69:3, endln:69:5
 |vpiAllModules:
 \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/PackageHierRef/top.sv, line:18:1, endln:38:10
   |vpiParent:
@@ -1987,7 +1992,7 @@ Design: (unnamed)
           |vpiName:bblock
         |vpiFullName:work@m.sB1.bblock
         |vpiImportTypespec:
-        \_LogicNet: (work@m.sB1.bblock.f2), line:30:9, endln:30:11
+        \_Net: (work@m.sB1.bblock.f2), line:30:9, endln:30:11
           |vpiParent:
           \_Begin: (work@m.sB1.bblock), line:26:5, endln:31:8
           |vpiName:f2
@@ -2017,7 +2022,7 @@ Design: (unnamed)
               \_HierPath: (s1.x), line:27:9, endln:27:11
               |vpiName:s1
               |vpiActual:
-              \_LogicNet: (p::s1), line:6:3, endln:6:5
+              \_Net: (p::s1), line:6:3, endln:6:5
             |vpiActual:
             \_RefObj: (x), line:27:10, endln:27:11
               |vpiParent:
@@ -2050,7 +2055,7 @@ Design: (unnamed)
               \_HierPath: (s2.x), line:28:9, endln:28:11
               |vpiName:s2
               |vpiActual:
-              \_LogicNet: (p::s2), line:10:3, endln:10:5
+              \_Net: (p::s2), line:10:3, endln:10:5
             |vpiActual:
             \_RefObj: (x), line:28:10, endln:28:11
               |vpiParent:
@@ -2116,7 +2121,7 @@ Design: (unnamed)
               \_HierPath: (f2.x), line:30:9, endln:30:11
               |vpiName:f2
               |vpiActual:
-              \_LogicNet: (work@m.sB1.bblock.f2), line:30:9, endln:30:11
+              \_Net: (work@m.sB1.bblock.f2), line:30:9, endln:30:11
             |vpiActual:
             \_RefObj: (x), line:30:10, endln:30:11
               |vpiParent:

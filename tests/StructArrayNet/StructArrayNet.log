@@ -141,6 +141,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:6:1: No timescale set for "mod".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:9:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:9:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:6:1: Compile module "work@mod".
 [INF:UH0706] Creating UHDM Model...
@@ -153,9 +154,9 @@ IntTypespec                                            3
 LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         2
+Net                                                    2
 Operation                                              1
 Package                                                1
-PackedArrayNet                                         1
 PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
@@ -165,7 +166,6 @@ RefModule                                              1
 RefObj                                                 2
 RefTypespec                                           10
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
@@ -359,13 +359,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:10:4, endln:10:28
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.struct_array), line:10:32, endln:10:44
+  \_Net: (work@dut.struct_array), line:10:32, endln:10:44
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.struct_array), line:10:4, endln:10:28
       |vpiParent:
-      \_PackedArrayNet: (work@dut.struct_array), line:10:32, endln:10:44
+      \_Net: (work@dut.struct_array), line:10:32, endln:10:44
       |vpiFullName:work@dut.struct_array
       |vpiActual:
       \_PackedArrayTypespec: , line:10:4, endln:10:28
@@ -373,7 +373,7 @@ Design: (unnamed)
     |vpiFullName:work@dut.struct_array
   |vpiDefName:work@dut
   |vpiNet:
-  \_PackedArrayNet: (work@dut.struct_array), line:10:32, endln:10:44
+  \_Net: (work@dut.struct_array), line:10:32, endln:10:44
   |vpiPort:
   \_Port: (sel), line:9:22, endln:9:25
     |vpiParent:
@@ -407,7 +407,7 @@ Design: (unnamed)
         |vpiName:struct_array
         |vpiFullName:work@dut.m.struct_array
         |vpiActual:
-        \_PackedArrayNet: (work@dut.struct_array), line:10:32, endln:10:44
+        \_Net: (work@dut.struct_array), line:10:32, endln:10:44
         |vpiIndex:
         \_RefObj: (work@dut.m.sel), line:12:33, endln:12:36
           |vpiParent:
@@ -426,13 +426,13 @@ Design: (unnamed)
     \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:6:1, endln:7:10
     |vpiName:work@mod
   |vpiImportTypespec:
-  \_StructNet: (work@mod.struct_i), line:6:30, endln:6:38
+  \_Net: (work@mod.struct_i), line:6:30, endln:6:38
     |vpiParent:
     \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:6:1, endln:7:10
     |vpiTypespec:
     \_RefTypespec: (work@mod.struct_i.pkg::Struct), line:6:18, endln:6:29
       |vpiParent:
-      \_StructNet: (work@mod.struct_i), line:6:30, endln:6:38
+      \_Net: (work@mod.struct_i), line:6:30, endln:6:38
       |vpiName:pkg::Struct
       |vpiFullName:work@mod.struct_i.pkg::Struct
       |vpiActual:
@@ -441,7 +441,7 @@ Design: (unnamed)
     |vpiFullName:work@mod.struct_i
   |vpiDefName:work@mod
   |vpiNet:
-  \_StructNet: (work@mod.struct_i), line:6:30, endln:6:38
+  \_Net: (work@mod.struct_i), line:6:30, endln:6:38
   |vpiPort:
   \_Port: (struct_i), line:6:30, endln:6:38
     |vpiParent:

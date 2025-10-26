@@ -312,10 +312,10 @@ GenRegion                                              1
 IODecl                                                11
 Identifier                                            33
 IntTypespec                                            9
-LogicNet                                               2
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         4
+Net                                                    2
 Operation                                              8
 Package                                                1
 ParamAssign                                            2
@@ -328,6 +328,7 @@ RefTypespec                                           17
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateModule/slpp_unit/surelog.uhdm ...
@@ -1500,7 +1501,7 @@ Design: (unnamed)
       \_GenFor: (work@top), line:23:3, endln:25:6
       |vpiFullName:work@top
       |vpiImportTypespec:
-      \_LogicNet: (work@top.i), line:24:25, endln:24:26
+      \_Net: (work@top.i), line:24:25, endln:24:26
         |vpiParent:
         \_Begin: (work@top), line:23:30, endln:25:6
         |vpiName:i
@@ -1517,7 +1518,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@top.a
           |vpiActual:
-          \_LogicNet: (work@top.a), line:21:24, endln:21:25
+          \_Net: (work@top.a), line:21:24, endln:21:25
           |vpiIndex:
           \_Operation: , line:24:23, endln:24:26
             |vpiParent:
@@ -1538,7 +1539,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@top.a.i
               |vpiActual:
-              \_LogicNet: (work@top.i), line:24:25, endln:24:26
+              \_Net: (work@top.i), line:24:25, endln:24:26
         |vpiLhs:
         \_BitSelect: (work@top.b), line:24:15, endln:24:18
           |vpiParent:
@@ -1546,7 +1547,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@top.b
           |vpiActual:
-          \_LogicNet: (work@top.b), line:21:40, endln:21:41
+          \_Net: (work@top.b), line:21:40, endln:21:41
           |vpiIndex:
           \_RefObj: (work@top.i), line:24:16, endln:24:17
             |vpiParent:
@@ -1554,23 +1555,27 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@top.i
             |vpiActual:
-            \_LogicNet: (work@top.i), line:24:25, endln:24:26
+            \_Net: (work@top.i), line:24:25, endln:24:26
     |vpiImportTypespec:
     \_Variable: (work@top.i), line:23:15, endln:23:16
     |vpiImportTypespec:
-    \_LogicNet: (work@top.i), line:23:20, endln:23:21
+    \_Net: (work@top.i), line:23:20, endln:23:21
       |vpiParent:
       \_GenFor: (work@top), line:23:3, endln:25:6
       |vpiName:i
       |vpiFullName:work@top.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.i), line:23:25, endln:23:26
+    \_Net: (work@top.i), line:23:25, endln:23:26
       |vpiParent:
       \_GenFor: (work@top), line:23:3, endln:25:6
       |vpiName:i
       |vpiFullName:work@top.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@top.i), line:23:20, endln:23:21
+    |vpiNet:
+    \_Net: (work@top.i), line:23:25, endln:23:26
     |vpiForInitStmt:
     \_Assignment: , line:23:8, endln:23:18
       |vpiParent:
@@ -1597,7 +1602,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.i
         |vpiActual:
-        \_LogicNet: (work@top.i), line:23:20, endln:23:21
+        \_Net: (work@top.i), line:23:20, endln:23:21
       |vpiOperand:
       \_Constant: , line:23:22, endln:23:23
         |vpiParent:
@@ -1618,7 +1623,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.i
         |vpiActual:
-        \_LogicNet: (work@top.i), line:23:25, endln:23:26
+        \_Net: (work@top.i), line:23:25, endln:23:26
     |vpiStmt:
     \_Begin: (work@top), line:23:30, endln:25:6
   |vpiTypedef:
@@ -1672,13 +1677,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:18, endln:21:23
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:21:24, endln:21:25
+  \_Net: (work@top.a), line:21:24, endln:21:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:21:1, endln:26:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:21:18, endln:21:23
       |vpiParent:
-      \_LogicNet: (work@top.a), line:21:24, endln:21:25
+      \_Net: (work@top.a), line:21:24, endln:21:25
       |vpiFullName:work@top.a
       |vpiActual:
       \_LogicTypespec: , line:21:18, endln:21:23
@@ -1687,13 +1692,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:34, endln:21:39
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:21:40, endln:21:41
+  \_Net: (work@top.b), line:21:40, endln:21:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:21:1, endln:26:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:21:34, endln:21:39
       |vpiParent:
-      \_LogicNet: (work@top.b), line:21:40, endln:21:41
+      \_Net: (work@top.b), line:21:40, endln:21:41
       |vpiFullName:work@top.b
       |vpiActual:
       \_LogicTypespec: , line:21:34, endln:21:39
@@ -1701,9 +1706,9 @@ Design: (unnamed)
     |vpiFullName:work@top.b
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.a), line:21:24, endln:21:25
+  \_Net: (work@top.a), line:21:24, endln:21:25
   |vpiNet:
-  \_LogicNet: (work@top.b), line:21:40, endln:21:41
+  \_Net: (work@top.b), line:21:40, endln:21:41
   |vpiPort:
   \_Port: (a), line:21:24, endln:21:25
     |vpiParent:

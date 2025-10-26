@@ -290,33 +290,32 @@ Attribute                                              2
 Constant                                               6
 Design                                                 1
 EnumConst                                              8
-EnumNet                                                2
 EnumTypespec                                           2
 IODecl                                                 4
-Identifier                                            16
+Identifier                                            14
 Interface                                              2
-InterfaceTypespec                                      4
-LogicNet                                               6
+InterfaceTypespec                                      2
 LogicTypespec                                          4
 Modport                                                4
 Module                                                 4
 ModuleTypespec                                         3
+Net                                                   10
 Operation                                              2
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   4
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           15
+RefTypespec                                           17
 SourceFile                                             1
 TypedefTypespec                                        3
-UnsupportedTypespec                                    3
+UnsupportedTypespec                                   11
 Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:39, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:86, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:81, type:RefTypespec, name:DD.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:93, type:RefTypespec, name:id_t1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:87, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -470,13 +469,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
   |vpiImportTypespec:
-  \_LogicNet: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+  \_Net: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiTypespec:
     \_RefTypespec: (work@AXI_BUS.aw_id.id_t1), line:14:3, endln:14:8
       |vpiParent:
-      \_LogicNet: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+      \_Net: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
       |vpiName:id_t1
       |vpiFullName:work@AXI_BUS.aw_id.id_t1
       |vpiActual:
@@ -484,13 +483,13 @@ Design: (unnamed)
     |vpiName:aw_id
     |vpiFullName:work@AXI_BUS.aw_id
   |vpiImportTypespec:
-  \_LogicNet: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+  \_Net: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiTypespec:
     \_RefTypespec: (work@AXI_BUS.rw_id.id_t), line:20:3, endln:20:7
       |vpiParent:
-      \_LogicNet: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+      \_Net: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
       |vpiName:id_t
       |vpiFullName:work@AXI_BUS.rw_id.id_t
       |vpiActual:
@@ -499,9 +498,9 @@ Design: (unnamed)
     |vpiFullName:work@AXI_BUS.rw_id
   |vpiDefName:work@AXI_BUS
   |vpiNet:
-  \_LogicNet: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
+  \_Net: (work@AXI_BUS.aw_id), line:14:15, endln:14:20
   |vpiNet:
-  \_LogicNet: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
+  \_Net: (work@AXI_BUS.rw_id), line:20:14, endln:20:19
   |vpiModport:
   \_Modport: (work@AXI_BUS.Master), line:16:11, endln:18:4
     |vpiParent:
@@ -569,7 +568,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@mem_if.clk), line:29:30, endln:29:33
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.clk), line:29:30, endln:29:33
+  \_Net: (work@mem_if.clk), line:29:30, endln:29:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
     |vpiName:clk
@@ -577,7 +576,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@mem_if
   |vpiNet:
-  \_LogicNet: (work@mem_if.clk), line:29:30, endln:29:33
+  \_Net: (work@mem_if.clk), line:29:30, endln:29:33
   |vpiModport:
   \_Modport: (work@mem_if.system), line:31:12, endln:31:30
     |vpiParent:
@@ -625,7 +624,7 @@ Design: (unnamed)
       |vpiName:clk
       |vpiFullName:work@mem_if.clk.clk
       |vpiActual:
-      \_LogicNet: (work@mem_if.clk), line:29:30, endln:29:33
+      \_Net: (work@mem_if.clk), line:29:30, endln:29:33
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:29:25, endln:29:29
       |vpiParent:
@@ -647,13 +646,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
   |vpiImportTypespec:
-  \_LogicNet: (work@dff0_test.n1), line:1:18, endln:1:20
+  \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
     |vpiParent:
     \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
     |vpiAttribute:
     \_Attribute: (init), line:2:6, endln:2:18
       |vpiParent:
-      \_LogicNet: (work@dff0_test.n1), line:1:18, endln:1:20
+      \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
       |vpiName:init
       |DEC:1
     |vpiName:n1
@@ -662,13 +661,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:3, endln:4:6
   |vpiImportTypespec:
-  \_LogicNet: (work@dff0_test.n1), line:4:7, endln:4:9
+  \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
     |vpiParent:
     \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
     |vpiTypespec:
     \_RefTypespec: (work@dff0_test.n1), line:4:3, endln:4:6
       |vpiParent:
-      \_LogicNet: (work@dff0_test.n1), line:4:7, endln:4:9
+      \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
       |vpiFullName:work@dff0_test.n1
       |vpiActual:
       \_LogicTypespec: , line:4:3, endln:4:6
@@ -677,9 +676,9 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@dff0_test
   |vpiNet:
-  \_LogicNet: (work@dff0_test.n1), line:1:18, endln:1:20
+  \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
   |vpiNet:
-  \_LogicNet: (work@dff0_test.n1), line:4:7, endln:4:9
+  \_Net: (work@dff0_test.n1), line:4:7, endln:4:9
   |vpiPort:
   \_Port: (n1), line:1:18, endln:1:20
     |vpiParent:
@@ -749,29 +748,18 @@ Design: (unnamed)
       |vpiFullName:work@memory_ctrl1.fsm_t
       |vpiActual:
       \_EnumTypespec: , line:38:10, endln:38:43
-  |vpiTypedef:
-  \_InterfaceTypespec: (mem_if), line:36:22, endln:36:28
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:36:1, endln:43:10
-    |vpiName:
-    \_Identifier: (mem_if)
-      |vpiParent:
-      \_InterfaceTypespec: (mem_if), line:36:22, endln:36:28
-      |vpiName:mem_if
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
   |vpiImportTypespec:
   \_EnumTypespec: , line:38:10, endln:38:43
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:38:38, endln:38:43
   |vpiImportTypespec:
-  \_EnumNet: (work@memory_ctrl1.state), line:40:7, endln:40:12
+  \_Net: (work@memory_ctrl1.state), line:40:7, endln:40:12
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:36:1, endln:43:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl1.state.fsm_t), line:40:1, endln:40:6
       |vpiParent:
-      \_EnumNet: (work@memory_ctrl1.state), line:40:7, endln:40:12
+      \_Net: (work@memory_ctrl1.state), line:40:7, endln:40:12
       |vpiName:fsm_t
       |vpiFullName:work@memory_ctrl1.state.fsm_t
       |vpiActual:
@@ -779,10 +767,24 @@ Design: (unnamed)
     |vpiName:state
     |vpiFullName:work@memory_ctrl1.state
   |vpiImportTypespec:
-  \_InterfaceTypespec: (mem_if), line:36:22, endln:36:28
+  \_Net: (work@memory_ctrl1.sif), line:36:37, endln:36:40
+    |vpiParent:
+    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:36:1, endln:43:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.sif.mem_if), line:36:22, endln:36:28
+      |vpiParent:
+      \_Net: (work@memory_ctrl1.sif), line:36:37, endln:36:40
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif
+    |vpiFullName:work@memory_ctrl1.sif
   |vpiDefName:work@memory_ctrl1
   |vpiNet:
-  \_EnumNet: (work@memory_ctrl1.state), line:40:7, endln:40:12
+  \_Net: (work@memory_ctrl1.state), line:40:7, endln:40:12
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.sif), line:36:37, endln:36:40
   |vpiPort:
   \_Port: (sif), line:36:37, endln:36:40
     |vpiParent:
@@ -796,7 +798,7 @@ Design: (unnamed)
       |vpiName:mem_if
       |vpiFullName:work@memory_ctrl1.sif.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (mem_if), line:36:22, endln:36:28
+      \_InterfaceTypespec: (mem_if)
 |vpiAllModules:
 \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
   |vpiParent:
@@ -863,31 +865,18 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
     |vpiName:DD
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.system), line:45:29, endln:45:35
-    |vpiParent:
-    \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
-    |vpiName:
-    \_Identifier: (work@mem_if.system)
-      |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.system), line:45:29, endln:45:35
-      |vpiName:work@mem_if.system
-    |vpiModport:
-    \_Modport: (work@mem_if.system), line:31:12, endln:31:30
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
   |vpiImportTypespec:
   \_EnumTypespec: , line:47:10, endln:47:43
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:47:38, endln:47:43
   |vpiImportTypespec:
-  \_EnumNet: (work@memory_ctrl2.state), line:49:7, endln:49:12
+  \_Net: (work@memory_ctrl2.state), line:49:7, endln:49:12
     |vpiParent:
     \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl2.state.fsm_t), line:49:1, endln:49:6
       |vpiParent:
-      \_EnumNet: (work@memory_ctrl2.state), line:49:7, endln:49:12
+      \_Net: (work@memory_ctrl2.state), line:49:7, endln:49:12
       |vpiName:fsm_t
       |vpiFullName:work@memory_ctrl2.state.fsm_t
       |vpiActual:
@@ -897,13 +886,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (DD), line:51:1, endln:51:3
   |vpiImportTypespec:
-  \_LogicNet: (work@memory_ctrl2.t), line:51:4, endln:51:5
+  \_Net: (work@memory_ctrl2.t), line:51:4, endln:51:5
     |vpiParent:
     \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl2.t.DD), line:51:1, endln:51:3
       |vpiParent:
-      \_LogicNet: (work@memory_ctrl2.t), line:51:4, endln:51:5
+      \_Net: (work@memory_ctrl2.t), line:51:4, endln:51:5
       |vpiName:DD
       |vpiFullName:work@memory_ctrl2.t.DD
       |vpiActual:
@@ -911,12 +900,26 @@ Design: (unnamed)
     |vpiName:t
     |vpiFullName:work@memory_ctrl2.t
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.system), line:45:29, endln:45:35
+  \_Net: (work@memory_ctrl2.sif), line:45:36, endln:45:39
+    |vpiParent:
+    \_Module: work@memory_ctrl2 (work@memory_ctrl2), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:45:1, endln:53:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl2.sif.mem_if), line:45:22, endln:45:28
+      |vpiParent:
+      \_Net: (work@memory_ctrl2.sif), line:45:36, endln:45:39
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl2.sif.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif
+    |vpiFullName:work@memory_ctrl2.sif
   |vpiDefName:work@memory_ctrl2
   |vpiNet:
-  \_EnumNet: (work@memory_ctrl2.state), line:49:7, endln:49:12
+  \_Net: (work@memory_ctrl2.state), line:49:7, endln:49:12
   |vpiNet:
-  \_LogicNet: (work@memory_ctrl2.t), line:51:4, endln:51:5
+  \_Net: (work@memory_ctrl2.t), line:51:4, endln:51:5
+  |vpiNet:
+  \_Net: (work@memory_ctrl2.sif), line:45:36, endln:45:39
   |vpiPort:
   \_Port: (sif), line:45:36, endln:45:39
     |vpiParent:
@@ -924,13 +927,13 @@ Design: (unnamed)
     |vpiName:sif
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl2.sif.work@mem_if.system), line:45:22, endln:45:28
+    \_RefTypespec: (work@memory_ctrl2.sif.mem_if), line:45:22, endln:45:28
       |vpiParent:
       \_Port: (sif), line:45:36, endln:45:39
-      |vpiName:work@mem_if.system
-      |vpiFullName:work@memory_ctrl2.sif.work@mem_if.system
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl2.sif.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.system), line:45:29, endln:45:35
+      \_InterfaceTypespec: (mem_if)
 |vpiTypedef:
 \_InterfaceTypespec: (AXI_BUS)
   |vpiParent:
@@ -942,6 +945,17 @@ Design: (unnamed)
     |vpiName:AXI_BUS
   |vpiInterface:
   \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
+|vpiTypedef:
+\_InterfaceTypespec: (mem_if)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (mem_if)
+    |vpiParent:
+    \_InterfaceTypespec: (mem_if)
+    |vpiName:mem_if
+  |vpiInterface:
+  \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:29:1, endln:34:13
 |vpiTypedef:
 \_ModuleTypespec: (dff0_test)
   |vpiParent:

@@ -206,7 +206,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          3
 Constant                                              16
 Design                                                 1
@@ -217,11 +216,13 @@ IntTypespec                                            1
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    1
 PackedArrayTypespec                                    3
 Range                                                  8
 RefTypespec                                           14
 SourceFile                                             1
 TypedefTypespec                                        6
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -483,7 +484,7 @@ Design: (unnamed)
         |UINT:4
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.unit_type_t), line:14:5, endln:14:16
+    \_RefTypespec: (work@top.unit_type_t), line:16:11, endln:16:22
       |vpiParent:
       \_PackedArrayTypespec: , line:16:11, endln:16:28
       |vpiName:unit_type_t
@@ -611,7 +612,7 @@ Design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.fmt_unit_types_t), line:16:29, endln:16:45
+    \_RefTypespec: (work@top.fmt_unit_types_t), line:21:11, endln:21:27
       |vpiParent:
       \_PackedArrayTypespec: , line:21:11, endln:21:33
       |vpiName:fmt_unit_types_t
@@ -651,13 +652,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:21:11, endln:21:33
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.b), line:5:10, endln:5:11
+  \_Net: (work@top.b), line:5:10, endln:5:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b.triple), line:5:3, endln:5:9
       |vpiParent:
-      \_ArrayNet: (work@top.b), line:5:10, endln:5:11
+      \_Net: (work@top.b), line:5:10, endln:5:11
       |vpiName:triple
       |vpiFullName:work@top.b.triple
       |vpiActual:
@@ -665,8 +666,8 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiDefName:work@top
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.b), line:5:10, endln:5:11
+  |vpiNet:
+  \_Net: (work@top.b), line:5:10, endln:5:11
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

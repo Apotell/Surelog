@@ -287,6 +287,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BadLabel/dut.sv:37:4: No timescale set for "sub2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BadLabel/dut.sv:60:1: No timescale set for "block_tb".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BadLabel/dut.sv:1:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/BadLabel/dut.sv:60:1: Compile module "work@block_tb".
 [INF:CP0304] ${SURELOG_DIR}/tests/BadLabel/dut.sv:7:1: Compile interface "work@intf".
 [INF:CP0304] ${SURELOG_DIR}/tests/BadLabel/dut.sv:12:1: Compile interface "work@itf".
@@ -331,10 +332,10 @@ IfStmt                                                 1
 Initial                                                3
 Interface                                              4
 InterfaceTypespec                                      4
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 6
 ModuleTypespec                                         4
+Net                                                    1
 Operation                                              1
 Package                                                1
 RefObj                                                 2
@@ -472,7 +473,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@block_tb.name1.a
         |vpiActual:
-        \_LogicNet: (work@block_tb.a), line:61:6, endln:61:7
+        \_Net: (work@block_tb.a), line:61:6, endln:61:7
     |vpiEndLabel:name1
   |vpiTypedef:
   \_LogicTypespec: , line:61:2, endln:61:5
@@ -481,13 +482,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:61:2, endln:61:5
   |vpiImportTypespec:
-  \_LogicNet: (work@block_tb.a), line:61:6, endln:61:7
+  \_Net: (work@block_tb.a), line:61:6, endln:61:7
     |vpiParent:
     \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:60:1, endln:66:10
     |vpiTypespec:
     \_RefTypespec: (work@block_tb.a), line:61:2, endln:61:5
       |vpiParent:
-      \_LogicNet: (work@block_tb.a), line:61:6, endln:61:7
+      \_Net: (work@block_tb.a), line:61:6, endln:61:7
       |vpiFullName:work@block_tb.a
       |vpiActual:
       \_LogicTypespec: , line:61:2, endln:61:5
@@ -496,7 +497,7 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@block_tb
   |vpiNet:
-  \_LogicNet: (work@block_tb.a), line:61:6, endln:61:7
+  \_Net: (work@block_tb.a), line:61:6, endln:61:7
   |vpiProcess:
   \_Initial: , line:62:2, endln:65:14
     |vpiParent:

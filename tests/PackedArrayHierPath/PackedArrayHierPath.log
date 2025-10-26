@@ -197,6 +197,7 @@ n<> u<191> t<Top_level_rule> c<1> l<1:1> el<22:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:1:1: No timescale set for "uvm".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:1:1: Compile package "uvm".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitSelect                                              2
@@ -221,14 +222,14 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         2
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:92, name: exp_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:97, name: man_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:93, name: exp_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:98, name: man_bits".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHierPath/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:42: Unsupported Typespec: id:87, type:RefTypespec, name:fp_format_e.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Null Actual: id:92, type:RefObj, name:exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Null Actual: id:97, type:RefObj, name:man_bits.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:42: Unsupported Typespec: id:88, type:RefTypespec, name:fp_format_e.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Null Actual: id:93, type:RefObj, name:exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Null Actual: id:98, type:RefObj, name:man_bits.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -412,8 +413,15 @@ Design: (unnamed)
     \_IntTypespec: , line:17:20, endln:17:32
       |vpiParent:
       \_Function: (uvm::fp_width), line:17:1, endln:19:12
+    |vpiTypedef:
+    \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
+      |vpiParent:
+      \_Function: (uvm::fp_width), line:17:1, endln:19:12
+      |vpiName:fp_format_e
     |vpiImportTypespec:
     \_IntTypespec: , line:17:20, endln:17:32
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -602,17 +610,13 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
+    \_RefTypespec: (uvm::fp_encoding_t), line:8:12, endln:8:25
       |vpiParent:
       \_PackedArrayTypespec: , line:8:12, endln:8:46
-      |vpiName:uvm::fp_encoding_t
+      |vpiName:fp_encoding_t
+      |vpiFullName:uvm::fp_encoding_t
       |vpiActual:
       \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
-  |vpiTypedef:
-  \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
-    |vpiParent:
-    \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
-    |vpiName:fp_format_e
   |vpiImportTypespec:
   \_Function: (uvm::fp_width), line:17:1, endln:19:12
   |vpiImportTypespec:
@@ -623,8 +627,6 @@ Design: (unnamed)
   \_IntTypespec: , line:3:3, endln:3:15
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:8:12, endln:8:46
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
   |vpiDefName:uvm
   |vpiTaskFunc:
   \_Function: (uvm::fp_width), line:17:1, endln:19:12

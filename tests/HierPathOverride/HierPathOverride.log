@@ -347,6 +347,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:32:1: No timescale set for "prim_pad_attr".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:44:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:1:1: Compile package "prim_pad_wrapper_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:10:1: Compile package "pinmux_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:23:1: Compile module "work@prim_generic_pad_attr".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:32:1: Compile module "work@prim_pad_attr".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathOverride/dut.sv:44:1: Compile module "work@top".
@@ -380,6 +382,7 @@ StructTypespec                                         1
 TaggedPattern                                          3
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -671,11 +674,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
+    \_RefTypespec: (pinmux_pkg::pad_type_e), line:14:7, endln:14:17
       |vpiParent:
       \_PackedArrayTypespec: , line:14:7, endln:14:32
-      |vpiName:prim_pad_wrapper_pkg::pad_type_e
-      |vpiFullName:pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e
+      |vpiName:pad_type_e
+      |vpiFullName:pinmux_pkg::pad_type_e
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
   |vpiTypedef:
@@ -742,7 +745,7 @@ Design: (unnamed)
       |vpiName:gen_assign
     |vpiFullName:work@prim_generic_pad_attr.gen_assign
     |vpiImportTypespec:
-    \_LogicNet: (work@prim_generic_pad_attr.gen_assign.a), line:27:14, endln:27:15
+    \_Net: (work@prim_generic_pad_attr.gen_assign.a), line:27:14, endln:27:15
       |vpiParent:
       \_Begin: (work@prim_generic_pad_attr.gen_assign), line:26:22, endln:28:7
       |vpiName:a
@@ -767,7 +770,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@prim_generic_pad_attr.gen_assign.a
         |vpiActual:
-        \_LogicNet: (work@prim_generic_pad_attr.gen_assign.a), line:27:14, endln:27:15
+        \_Net: (work@prim_generic_pad_attr.gen_assign.a), line:27:14, endln:27:15
   |vpiTypedef:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:24:11, endln:24:34
     |vpiParent:

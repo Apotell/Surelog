@@ -180,6 +180,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:12:1: No timescale set for "nmi_gen".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:21:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:1:1: Compile package "prim_esc_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:12:1: Compile module "work@nmi_gen".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:21:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -193,6 +194,7 @@ IntTypespec                                            4
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                              6
 Package                                                1
 ParamAssign                                            1
@@ -203,11 +205,11 @@ RefObj                                                 4
 RefTypespec                                           17
 SourceFile                                             1
 StringTypespec                                         6
-StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          6
 TypedefTypespec                                        1
 TypespecMember                                         2
+UnsupportedTypespec                                    3
 Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec2/slpp_all/surelog.uhdm ...
@@ -407,15 +409,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
   |vpiImportTypespec:
-  \_StructNet: (work@nmi_gen.a), line:15:25, endln:15:26
+  \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
     |vpiParent:
     \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
     |vpiTypespec:
-    \_RefTypespec: (work@nmi_gen.a.prim_esc_pkg::esc_tx_t), line:15:10, endln:15:18
+    \_RefTypespec: (work@nmi_gen.a.esc_tx_t), line:15:10, endln:15:18
       |vpiParent:
-      \_StructNet: (work@nmi_gen.a), line:15:25, endln:15:26
-      |vpiName:prim_esc_pkg::esc_tx_t
-      |vpiFullName:work@nmi_gen.a.prim_esc_pkg::esc_tx_t
+      \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
+      |vpiName:esc_tx_t
+      |vpiFullName:work@nmi_gen.a.esc_tx_t
       |vpiActual:
       \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
     |vpiName:a
@@ -426,7 +428,7 @@ Design: (unnamed)
   \_Variable: (work@nmi_gen.x), line:16:15, endln:16:16
   |vpiDefName:work@nmi_gen
   |vpiNet:
-  \_StructNet: (work@nmi_gen.a), line:15:25, endln:15:26
+  \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
   |vpiPort:
   \_Port: (a), line:15:25, endln:15:26
     |vpiParent:
@@ -434,11 +436,11 @@ Design: (unnamed)
     |vpiName:a
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@nmi_gen.a.prim_esc_pkg::esc_tx_t), line:15:10, endln:15:18
+    \_RefTypespec: (work@nmi_gen.a.esc_tx_t), line:15:10, endln:15:18
       |vpiParent:
       \_Port: (a), line:15:25, endln:15:26
-      |vpiName:prim_esc_pkg::esc_tx_t
-      |vpiFullName:work@nmi_gen.a.prim_esc_pkg::esc_tx_t
+      |vpiName:esc_tx_t
+      |vpiFullName:work@nmi_gen.a.esc_tx_t
       |vpiActual:
       \_TypedefTypespec: (prim_esc_pkg::esc_tx_t), line:5:5, endln:5:13
   |vpiPort:
@@ -470,7 +472,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@nmi_gen.a
         |vpiActual:
-        \_StructNet: (work@nmi_gen.a), line:15:25, endln:15:26
+        \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
     |vpiLhs:
     \_RefObj: (work@nmi_gen.x), line:18:11, endln:18:12
       |vpiParent:

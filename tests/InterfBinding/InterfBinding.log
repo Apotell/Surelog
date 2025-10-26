@@ -121,6 +121,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:12:1: No timescale set for "ControllerIF".
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:29:1: No timescale set for "BypassNetwork".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:1:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:29:1: Compile module "work@BypassNetwork".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:12:1: Compile interface "work@ControllerIF".
 [INF:UH0706] Creating UHDM Model...
@@ -130,23 +131,24 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 IODecl                                                 1
-Identifier                                             8
+Identifier                                             7
 ImportTypespec                                         1
 Interface                                              1
-InterfaceTypespec                                      2
-LogicNet                                               3
+InterfaceTypespec                                      1
 LogicTypespec                                          6
 Modport                                                1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    4
 Package                                                1
 Port                                                   3
 RefObj                                                 5
-RefTypespec                                           10
+RefTypespec                                           11
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         2
+UnsupportedTypespec                                    4
 Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfBinding/slpp_all/surelog.uhdm ...
@@ -253,11 +255,11 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
     |vpiTypespec:
-    \_RefTypespec: (work@ControllerIF.backEnd.pack::PipelineControll), line:18:4, endln:18:20
+    \_RefTypespec: (work@ControllerIF.backEnd.PipelineControll), line:18:4, endln:18:20
       |vpiParent:
       \_Variable: (work@ControllerIF.backEnd), line:18:21, endln:18:28
-      |vpiName:pack::PipelineControll
-      |vpiFullName:work@ControllerIF.backEnd.pack::PipelineControll
+      |vpiName:PipelineControll
+      |vpiFullName:work@ControllerIF.backEnd.PipelineControll
       |vpiActual:
       \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
     |vpiName:backEnd
@@ -292,28 +294,28 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@ControllerIF.rst), line:15:14, endln:15:17
   |vpiImportTypespec:
-  \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
+  \_Net: (work@ControllerIF.clk), line:14:14, endln:14:17
     |vpiParent:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
     |vpiName:clk
     |vpiFullName:work@ControllerIF.clk
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+  \_Net: (work@ControllerIF.backEnd), line:18:21, endln:18:28
     |vpiParent:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
     |vpiTypespec:
-    \_RefTypespec: (work@ControllerIF.backEnd.pack::PipelineControll), line:18:4, endln:18:20
+    \_RefTypespec: (work@ControllerIF.backEnd.PipelineControll), line:18:4, endln:18:20
       |vpiParent:
-      \_LogicNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
-      |vpiName:pack::PipelineControll
-      |vpiFullName:work@ControllerIF.backEnd.pack::PipelineControll
+      \_Net: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+      |vpiName:PipelineControll
+      |vpiFullName:work@ControllerIF.backEnd.PipelineControll
       |vpiActual:
       \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
     |vpiName:backEnd
     |vpiFullName:work@ControllerIF.backEnd
   |vpiImportTypespec:
-  \_LogicNet: (work@ControllerIF.rst), line:15:14, endln:15:17
+  \_Net: (work@ControllerIF.rst), line:15:14, endln:15:17
     |vpiParent:
     \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
     |vpiName:rst
@@ -321,11 +323,11 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@ControllerIF
   |vpiNet:
-  \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
+  \_Net: (work@ControllerIF.clk), line:14:14, endln:14:17
   |vpiNet:
-  \_LogicNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+  \_Net: (work@ControllerIF.backEnd), line:18:21, endln:18:28
   |vpiNet:
-  \_LogicNet: (work@ControllerIF.rst), line:15:14, endln:15:17
+  \_Net: (work@ControllerIF.rst), line:15:14, endln:15:17
   |vpiModport:
   \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
     |vpiParent:
@@ -356,7 +358,7 @@ Design: (unnamed)
       |vpiName:clk
       |vpiFullName:work@ControllerIF.clk.clk
       |vpiActual:
-      \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
+      \_Net: (work@ControllerIF.clk), line:14:14, endln:14:17
     |vpiTypespec:
     \_RefTypespec: (work@ControllerIF.clk), line:14:8, endln:14:13
       |vpiParent:
@@ -377,7 +379,7 @@ Design: (unnamed)
       |vpiName:rst
       |vpiFullName:work@ControllerIF.rst.rst
       |vpiActual:
-      \_LogicNet: (work@ControllerIF.rst), line:15:14, endln:15:17
+      \_Net: (work@ControllerIF.rst), line:15:14, endln:15:17
     |vpiTypespec:
     \_RefTypespec: (work@ControllerIF.rst), line:15:8, endln:15:13
       |vpiParent:
@@ -394,36 +396,29 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
     |vpiName:work@BypassNetwork
-  |vpiTypedef:
-  \_InterfaceTypespec: (ControllerIF), line:30:5, endln:30:17
+  |vpiImportTypespec:
+  \_Net: (work@BypassNetwork.ctrl), line:30:32, endln:30:36
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
-    |vpiName:
-    \_Identifier: (ControllerIF)
+    |vpiTypespec:
+    \_RefTypespec: (work@BypassNetwork.ctrl.ControllerIF), line:30:5, endln:30:17
       |vpiParent:
-      \_InterfaceTypespec: (ControllerIF), line:30:5, endln:30:17
+      \_Net: (work@BypassNetwork.ctrl), line:30:32, endln:30:36
       |vpiName:ControllerIF
-    |vpiInterface:
-    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
+      |vpiFullName:work@BypassNetwork.ctrl.ControllerIF
+      |vpiActual:
+      \_InterfaceTypespec: (ControllerIF)
+    |vpiName:ctrl
+    |vpiFullName:work@BypassNetwork.ctrl
+  |vpiImportTypespec:
+  \_Net: (work@BypassNetwork.backEnd), line:33:18, endln:33:25
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
-    |vpiName:
-    \_Identifier: (work@ControllerIF.BypassNetwork)
-      |vpiParent:
-      \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
-      |vpiName:work@ControllerIF.BypassNetwork
-    |vpiModport:
-    \_Modport: (work@ControllerIF.BypassNetwork), line:20:12, endln:23:8
-    |vpiInterface:
-    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
+    |vpiName:backEnd
+    |vpiFullName:work@BypassNetwork.backEnd
+    |vpiNetType:1
   |vpiImportTypespec:
-  \_InterfaceTypespec: (ControllerIF), line:30:5, endln:30:17
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
-  |vpiImportTypespec:
-  \_LogicNet: (work@BypassNetwork.o), line:33:9, endln:33:10
+  \_Net: (work@BypassNetwork.o), line:33:9, endln:33:10
     |vpiParent:
     \_Module: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
     |vpiName:o
@@ -431,7 +426,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@BypassNetwork
   |vpiNet:
-  \_LogicNet: (work@BypassNetwork.o), line:33:9, endln:33:10
+  \_Net: (work@BypassNetwork.ctrl), line:30:32, endln:30:36
+  |vpiNet:
+  \_Net: (work@BypassNetwork.backEnd), line:33:18, endln:33:25
+  |vpiNet:
+  \_Net: (work@BypassNetwork.o), line:33:9, endln:33:10
   |vpiPort:
   \_Port: (ctrl), line:30:32, endln:30:36
     |vpiParent:
@@ -439,13 +438,13 @@ Design: (unnamed)
     |vpiName:ctrl
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@BypassNetwork.ctrl.work@ControllerIF.BypassNetwork), line:30:5, endln:30:17
+    \_RefTypespec: (work@BypassNetwork.ctrl.ControllerIF), line:30:5, endln:30:17
       |vpiParent:
       \_Port: (ctrl), line:30:32, endln:30:36
-      |vpiName:work@ControllerIF.BypassNetwork
-      |vpiFullName:work@BypassNetwork.ctrl.work@ControllerIF.BypassNetwork
+      |vpiName:ControllerIF
+      |vpiFullName:work@BypassNetwork.ctrl.ControllerIF
       |vpiActual:
-      \_InterfaceTypespec: (work@ControllerIF.BypassNetwork), line:30:18, endln:30:31
+      \_InterfaceTypespec: (ControllerIF)
   |vpiContAssign:
   \_ContAssign: , line:33:9, endln:33:25
     |vpiParent:
@@ -460,7 +459,7 @@ Design: (unnamed)
         \_HierPath: (ctrl.backEnd), line:33:13, endln:33:25
         |vpiName:ctrl
         |vpiActual:
-        \_Port: (ctrl), line:30:32, endln:30:36
+        \_Net: (work@BypassNetwork.ctrl), line:30:32, endln:30:36
       |vpiActual:
       \_RefObj: (work@BypassNetwork.backEnd), line:33:18, endln:33:25
         |vpiParent:
@@ -468,7 +467,7 @@ Design: (unnamed)
         |vpiName:backEnd
         |vpiFullName:work@BypassNetwork.backEnd
         |vpiActual:
-        \_LogicNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+        \_Net: (work@BypassNetwork.backEnd), line:33:18, endln:33:25
       |vpiName:ctrl.backEnd
     |vpiLhs:
     \_RefObj: (work@BypassNetwork.o), line:33:9, endln:33:10
@@ -477,7 +476,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@BypassNetwork.o
       |vpiActual:
-      \_LogicNet: (work@BypassNetwork.o), line:33:9, endln:33:10
+      \_Net: (work@BypassNetwork.o), line:33:9, endln:33:10
 |vpiTypedef:
 \_ImportTypespec: (pack), line:10:8, endln:10:15
   |vpiParent:
@@ -495,6 +494,17 @@ Design: (unnamed)
     |vpiSize:8
     |STRING:*
     |vpiConstType:8
+|vpiTypedef:
+\_InterfaceTypespec: (ControllerIF)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (ControllerIF)
+    |vpiParent:
+    \_InterfaceTypespec: (ControllerIF)
+    |vpiName:ControllerIF
+  |vpiInterface:
+  \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
 |vpiTypedef:
 \_ModuleTypespec: (BypassNetwork)
   |vpiParent:

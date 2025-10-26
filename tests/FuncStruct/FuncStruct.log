@@ -233,6 +233,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:1:1: No timescale set for "hmac_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:12:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:1:1: Compile package "hmac_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:12:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -250,14 +251,15 @@ ImportTypespec                                         1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
-PackedArrayNet                                         2
 PackedArrayTypespec                                    4
 Range                                                  5
 RefObj                                                 4
 RefTypespec                                           11
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    6
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncStruct/slpp_all/surelog.uhdm ...
@@ -279,21 +281,6 @@ Design: (unnamed)
     |vpiParent:
     \_Package: hmac_pkg (hmac_pkg), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
     |vpiName:hmac_pkg
-  |vpiVariable:
-  \_Variable: (hmac_pkg::sigma_0), line:4:24, endln:4:31
-    |vpiParent:
-    \_Package: hmac_pkg (hmac_pkg), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
-    |vpiTypespec:
-    \_RefTypespec: (hmac_pkg::sigma_0::hmac_pkg::sha_word_t), line:4:13, endln:4:23
-      |vpiParent:
-      \_Variable: (hmac_pkg::sigma_0), line:4:24, endln:4:31
-      |vpiName:hmac_pkg::sha_word_t
-      |vpiFullName:hmac_pkg::sigma_0::hmac_pkg::sha_word_t
-      |vpiActual:
-      \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
-    |vpiName:sigma_0
-    |vpiFullName:hmac_pkg::sigma_0
-    |vpiAutomatic:1
   |vpiInternalScope:
   \_Function: (hmac_pkg::compress), line:3:1, endln:8:12
     |vpiParent:
@@ -309,6 +296,23 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (hmac_pkg::compress), line:3:1, endln:8:12
       |vpiFullName:hmac_pkg::compress
+      |vpiVariable:
+      \_Variable: (hmac_pkg::compress::sigma_0), line:4:24, endln:4:31
+        |vpiParent:
+        \_Begin: (hmac_pkg::compress)
+        |vpiTypespec:
+        \_RefTypespec: (hmac_pkg::compress::sigma_0::hmac_pkg::sha_word_t), line:4:13, endln:4:23
+          |vpiParent:
+          \_Variable: (hmac_pkg::compress::sigma_0), line:4:24, endln:4:31
+          |vpiName:hmac_pkg::sha_word_t
+          |vpiFullName:hmac_pkg::compress::sigma_0::hmac_pkg::sha_word_t
+          |vpiActual:
+          \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+        |vpiName:sigma_0
+        |vpiFullName:hmac_pkg::compress::sigma_0
+        |vpiAutomatic:1
+      |vpiImportTypespec:
+      \_Variable: (hmac_pkg::compress::sigma_0), line:4:24, endln:4:31
       |vpiStmt:
       \_Assignment: , line:6:3, endln:6:25
         |vpiParent:
@@ -330,7 +334,7 @@ Design: (unnamed)
           |vpiName:sigma_0
           |vpiFullName:hmac_pkg::compress::sigma_0
           |vpiActual:
-          \_Variable: (hmac_pkg::sigma_0), line:4:24, endln:4:31
+          \_Variable: (hmac_pkg::compress::sigma_0), line:4:24, endln:4:31
       |vpiStmt:
       \_Assignment: , line:7:3, endln:7:26
         |vpiParent:
@@ -344,7 +348,7 @@ Design: (unnamed)
           |vpiName:sigma_0
           |vpiFullName:hmac_pkg::compress::sigma_0
           |vpiActual:
-          \_Variable: (hmac_pkg::sigma_0), line:4:24, endln:4:31
+          \_Variable: (hmac_pkg::compress::sigma_0), line:4:24, endln:4:31
         |vpiLhs:
         \_BitSelect: (hmac_pkg::compress::compress), line:7:11, endln:7:14
           |vpiParent:
@@ -377,11 +381,11 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:w
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::w::hmac_pkg::sha_word_t), line:3:53, endln:3:63
+      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:3:53, endln:3:63
         |vpiParent:
         \_IODecl: (w), line:3:64, endln:3:65
-        |vpiName:hmac_pkg::sha_word_t
-        |vpiFullName:hmac_pkg::compress::w::hmac_pkg::sha_word_t
+        |vpiName:sha_word_t
+        |vpiFullName:hmac_pkg::compress::w::sha_word_t
         |vpiActual:
         \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
     |vpiIODecl:
@@ -474,10 +478,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (hmac_pkg::sha_word_t), line:3:20, endln:3:30
       |vpiParent:
       \_PackedArrayTypespec: , line:3:20, endln:3:36
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:
@@ -505,10 +510,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (hmac_pkg::sha_word_t), line:3:73, endln:3:83
       |vpiParent:
       \_PackedArrayTypespec: , line:3:73, endln:3:89
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiImportTypespec:
@@ -521,8 +527,6 @@ Design: (unnamed)
   \_PackedArrayTypespec: , line:3:20, endln:3:36
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:3:73, endln:3:89
-  |vpiImportTypespec:
-  \_Variable: (hmac_pkg::sigma_0), line:4:24, endln:4:31
   |vpiDefName:hmac_pkg
   |vpiTaskFunc:
   \_Function: (hmac_pkg::compress), line:3:1, endln:8:12
@@ -577,11 +581,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (work@dut.sha_word_t), line:14:1, endln:14:11
       |vpiParent:
       \_PackedArrayTypespec: , line:14:1, endln:14:18
-      |vpiName:hmac_pkg::sha_word_t
-      |vpiFullName:work@dut.hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:work@dut.sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:
@@ -609,11 +613,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (work@dut.sha_word_t), line:15:1, endln:15:11
       |vpiParent:
       \_PackedArrayTypespec: , line:15:1, endln:15:17
-      |vpiName:hmac_pkg::sha_word_t
-      |vpiFullName:work@dut.hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:work@dut.sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiImportTypespec:
@@ -621,13 +625,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:14:1, endln:14:18
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.w), line:14:19, endln:14:20
+  \_Net: (work@dut.w), line:14:19, endln:14:20
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:12:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.w), line:14:1, endln:14:18
       |vpiParent:
-      \_PackedArrayNet: (work@dut.w), line:14:19, endln:14:20
+      \_Net: (work@dut.w), line:14:19, endln:14:20
       |vpiFullName:work@dut.w
       |vpiActual:
       \_PackedArrayTypespec: , line:14:1, endln:14:18
@@ -636,13 +640,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:15:1, endln:15:17
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.hash), line:15:18, endln:15:22
+  \_Net: (work@dut.hash), line:15:18, endln:15:22
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:12:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.hash), line:15:1, endln:15:17
       |vpiParent:
-      \_PackedArrayNet: (work@dut.hash), line:15:18, endln:15:22
+      \_Net: (work@dut.hash), line:15:18, endln:15:22
       |vpiFullName:work@dut.hash
       |vpiActual:
       \_PackedArrayTypespec: , line:15:1, endln:15:17
@@ -650,9 +654,9 @@ Design: (unnamed)
     |vpiFullName:work@dut.hash
   |vpiDefName:work@dut
   |vpiNet:
-  \_PackedArrayNet: (work@dut.w), line:14:19, endln:14:20
+  \_Net: (work@dut.w), line:14:19, endln:14:20
   |vpiNet:
-  \_PackedArrayNet: (work@dut.hash), line:15:18, endln:15:22
+  \_Net: (work@dut.hash), line:15:18, endln:15:22
   |vpiContAssign:
   \_ContAssign: , line:16:8, endln:16:27
     |vpiParent:
@@ -672,7 +676,7 @@ Design: (unnamed)
       |vpiName:w
       |vpiFullName:work@dut.w
       |vpiActual:
-      \_PackedArrayNet: (work@dut.w), line:14:19, endln:14:20
+      \_Net: (work@dut.w), line:14:19, endln:14:20
       |vpiIndex:
       \_Constant: , line:16:10, endln:16:11
         |vpiParent:
@@ -696,7 +700,7 @@ Design: (unnamed)
         |vpiName:w
         |vpiFullName:work@dut.w
         |vpiActual:
-        \_PackedArrayNet: (work@dut.w), line:14:19, endln:14:20
+        \_Net: (work@dut.w), line:14:19, endln:14:20
         |vpiIndex:
         \_Constant: , line:17:26, endln:17:27
           |vpiParent:
@@ -712,7 +716,7 @@ Design: (unnamed)
         |vpiName:hash
         |vpiFullName:work@dut.hash
         |vpiActual:
-        \_PackedArrayNet: (work@dut.hash), line:15:18, endln:15:22
+        \_Net: (work@dut.hash), line:15:18, endln:15:22
       |vpiName:
       \_Identifier: (compress)
         |vpiParent:
@@ -727,7 +731,7 @@ Design: (unnamed)
       |vpiName:hash
       |vpiFullName:work@dut.hash
       |vpiActual:
-      \_PackedArrayNet: (work@dut.hash), line:15:18, endln:15:22
+      \_Net: (work@dut.hash), line:15:18, endln:15:22
 |vpiTypedef:
 \_ModuleTypespec: (dut)
   |vpiParent:

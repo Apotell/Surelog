@@ -236,6 +236,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv:16:1: No timescale set for "my_module_types".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv:23:1: No timescale set for "t".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv:1:1: Compile package "my_funcs".
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv:16:1: Compile package "my_module_types".
 [INF:CP0303] ${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv:23:1: Compile module "work@t".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -256,10 +258,10 @@ IODecl                                                15
 Identifier                                            39
 ImportTypespec                                         2
 IntTypespec                                           15
-LogicNet                                               3
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    3
 Operation                                              3
 Package                                                3
 ParamAssign                                            2
@@ -271,6 +273,7 @@ RefTypespec                                           25
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncNamed/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1456,7 +1459,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (my_module_types), line:24:10, endln:24:28
   |vpiImportTypespec:
-  \_LogicNet: (work@t.i_clk), line:26:14, endln:26:19
+  \_Net: (work@t.i_clk), line:26:14, endln:26:19
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
     |vpiName:i_clk
@@ -1464,13 +1467,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:27:11, endln:27:25
   |vpiImportTypespec:
-  \_LogicNet: (work@t.i_d), line:27:27, endln:27:30
+  \_Net: (work@t.i_d), line:27:27, endln:27:30
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@t.i_d), line:27:11, endln:27:25
       |vpiParent:
-      \_LogicNet: (work@t.i_d), line:27:27, endln:27:30
+      \_Net: (work@t.i_d), line:27:27, endln:27:30
       |vpiFullName:work@t.i_d
       |vpiActual:
       \_LogicTypespec: , line:27:11, endln:27:25
@@ -1479,13 +1482,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:12, endln:28:17
   |vpiImportTypespec:
-  \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
+  \_Net: (work@t.o_q), line:28:33, endln:28:36
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@t.o_q), line:28:12, endln:28:17
       |vpiParent:
-      \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
+      \_Net: (work@t.o_q), line:28:33, endln:28:36
       |vpiFullName:work@t.o_q
       |vpiActual:
       \_LogicTypespec: , line:28:12, endln:28:17
@@ -1494,11 +1497,11 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@t
   |vpiNet:
-  \_LogicNet: (work@t.i_clk), line:26:14, endln:26:19
+  \_Net: (work@t.i_clk), line:26:14, endln:26:19
   |vpiNet:
-  \_LogicNet: (work@t.i_d), line:27:27, endln:27:30
+  \_Net: (work@t.i_d), line:27:27, endln:27:30
   |vpiNet:
-  \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
+  \_Net: (work@t.o_q), line:28:33, endln:28:36
   |vpiPort:
   \_Port: (i_clk), line:26:14, endln:26:19
     |vpiParent:

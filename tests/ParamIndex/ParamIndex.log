@@ -303,10 +303,10 @@ Constant                                               3
 Design                                                 1
 Identifier                                             3
 IntTypespec                                            3
-LogicNet                                               5
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         3
+Net                                                    5
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
@@ -315,6 +315,7 @@ RefObj                                                 1
 RefTypespec                                           10
 SourceFile                                             1
 TypeParameter                                          4
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamIndex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -457,13 +458,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:19:85, endln:19:88
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom.DATA1), line:20:9, endln:20:14
+  \_Net: (work@bottom.DATA1), line:20:9, endln:20:14
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@bottom.DATA1.TP1), line:20:5, endln:20:8
       |vpiParent:
-      \_LogicNet: (work@bottom.DATA1), line:20:9, endln:20:14
+      \_Net: (work@bottom.DATA1), line:20:9, endln:20:14
       |vpiName:TP1
       |vpiFullName:work@bottom.DATA1.TP1
       |vpiActual:
@@ -473,13 +474,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:5, endln:21:10
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom.a), line:21:20, endln:21:21
+  \_Net: (work@bottom.a), line:21:20, endln:21:21
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@bottom.a), line:21:5, endln:21:19
       |vpiParent:
-      \_LogicNet: (work@bottom.a), line:21:20, endln:21:21
+      \_Net: (work@bottom.a), line:21:20, endln:21:21
       |vpiFullName:work@bottom.a
       |vpiActual:
       \_LogicTypespec: , line:21:5, endln:21:10
@@ -487,13 +488,13 @@ Design: (unnamed)
     |vpiFullName:work@bottom.a
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom.DATA2), line:22:9, endln:22:14
+  \_Net: (work@bottom.DATA2), line:22:9, endln:22:14
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:19:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@bottom.DATA2.TP2), line:22:5, endln:22:8
       |vpiParent:
-      \_LogicNet: (work@bottom.DATA2), line:22:9, endln:22:14
+      \_Net: (work@bottom.DATA2), line:22:9, endln:22:14
       |vpiName:TP2
       |vpiFullName:work@bottom.DATA2.TP2
       |vpiActual:
@@ -502,11 +503,11 @@ Design: (unnamed)
     |vpiFullName:work@bottom.DATA2
   |vpiDefName:work@bottom
   |vpiNet:
-  \_LogicNet: (work@bottom.DATA1), line:20:9, endln:20:14
+  \_Net: (work@bottom.DATA1), line:20:9, endln:20:14
   |vpiNet:
-  \_LogicNet: (work@bottom.a), line:21:20, endln:21:21
+  \_Net: (work@bottom.a), line:21:20, endln:21:21
   |vpiNet:
-  \_LogicNet: (work@bottom.DATA2), line:22:9, endln:22:14
+  \_Net: (work@bottom.DATA2), line:22:9, endln:22:14
 |vpiAllModules:
 \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:11:1, endln:17:10
   |vpiParent:
@@ -547,13 +548,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:35, endln:11:40
   |vpiImportTypespec:
-  \_LogicNet: (work@mid.DATA0), line:12:6, endln:12:11
+  \_Net: (work@mid.DATA0), line:12:6, endln:12:11
     |vpiParent:
     \_Module: work@mid (work@mid), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:11:1, endln:17:10
     |vpiTypespec:
     \_RefTypespec: (work@mid.DATA0.TP0), line:12:2, endln:12:5
       |vpiParent:
-      \_LogicNet: (work@mid.DATA0), line:12:6, endln:12:11
+      \_Net: (work@mid.DATA0), line:12:6, endln:12:11
       |vpiName:TP0
       |vpiFullName:work@mid.DATA0.TP0
       |vpiActual:
@@ -562,7 +563,7 @@ Design: (unnamed)
     |vpiFullName:work@mid.DATA0
   |vpiDefName:work@mid
   |vpiNet:
-  \_LogicNet: (work@mid.DATA0), line:12:6, endln:12:11
+  \_Net: (work@mid.DATA0), line:12:6, endln:12:11
   |vpiRefModule:
   \_RefModule: work@bottom (u1), line:13:2, endln:13:8
     |vpiParent:
@@ -636,13 +637,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:3:24, endln:3:27
   |vpiImportTypespec:
-  \_LogicNet: (work@top.DATATOP), line:5:8, endln:5:15
+  \_Net: (work@top.DATATOP), line:5:8, endln:5:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamIndex/dut.sv, line:2:1, endln:9:10
     |vpiTypespec:
     \_RefTypespec: (work@top.DATATOP.TPTOP), line:5:2, endln:5:7
       |vpiParent:
-      \_LogicNet: (work@top.DATATOP), line:5:8, endln:5:15
+      \_Net: (work@top.DATATOP), line:5:8, endln:5:15
       |vpiName:TPTOP
       |vpiFullName:work@top.DATATOP.TPTOP
       |vpiActual:
@@ -651,7 +652,7 @@ Design: (unnamed)
     |vpiFullName:work@top.DATATOP
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.DATATOP), line:5:8, endln:5:15
+  \_Net: (work@top.DATATOP), line:5:8, endln:5:15
   |vpiRefModule:
   \_RefModule: work@mid (u0), line:7:3, endln:7:6
     |vpiParent:

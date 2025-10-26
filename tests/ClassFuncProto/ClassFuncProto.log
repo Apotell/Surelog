@@ -232,10 +232,10 @@ Function                                              13
 IODecl                                                18
 Identifier                                            39
 IntTypespec                                           13
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                1
 PackedArrayTypespec                                    1
 Range                                                  5
@@ -244,13 +244,13 @@ RefTypespec                                           33
 SourceFile                                             1
 Task                                                  10
 TypedefTypespec                                        3
-UnsupportedTypespec                                    6
+UnsupportedTypespec                                    9
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncProto/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:30:10: Unsupported Typespec: id:150, type:RefTypespec, name:REQ.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:38:71: Unsupported Typespec: id:177, type:RefTypespec, name:uvm_reg.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:41:71: Unsupported Typespec: id:195, type:RefTypespec, name:uvm_reg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:30:10: Unsupported Typespec: id:151, type:RefTypespec, name:REQ.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:38:71: Unsupported Typespec: id:179, type:RefTypespec, name:uvm_reg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:41:71: Unsupported Typespec: id:198, type:RefTypespec, name:uvm_reg.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:50:2: Unsupported Typespec: id:17, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1144,6 +1144,13 @@ Design: (unnamed)
             \_Function: (work@toto::c1::get_current_item), line:30:1, endln:33:14
             |vpiName:get_current_item
           |vpiFullName:work@toto::c1::get_current_item
+          |vpiTypedef:
+          \_UnsupportedTypespec: (REQ), line:30:10, endln:30:13
+            |vpiParent:
+            \_Function: (work@toto::c1::get_current_item), line:30:1, endln:33:14
+            |vpiName:REQ
+          |vpiImportTypespec:
+          \_UnsupportedTypespec: (REQ), line:30:10, endln:30:13
           |vpiMethod:1
           |vpiVisibility:1
           |vpiReturn:
@@ -1208,8 +1215,15 @@ Design: (unnamed)
             |vpiParent:
             \_Function: (work@toto::c1::get_verbosity_level), line:38:4, endln:39:15
             |vpiSigned:1
+          |vpiTypedef:
+          \_UnsupportedTypespec: (uvm_reg), line:38:71, endln:38:78
+            |vpiParent:
+            \_Function: (work@toto::c1::get_verbosity_level), line:38:4, endln:39:15
+            |vpiName:uvm_reg
           |vpiImportTypespec:
           \_IntTypespec: , line:38:13, endln:38:16
+          |vpiImportTypespec:
+          \_UnsupportedTypespec: (uvm_reg), line:38:71, endln:38:78
           |vpiMethod:1
           |vpiVisibility:1
           |vpiReturn:
@@ -1288,8 +1302,15 @@ Design: (unnamed)
             |vpiParent:
             \_Function: (work@toto::c1::set_verbosity_level), line:41:2, endln:42:15
             |vpiSigned:1
+          |vpiTypedef:
+          \_UnsupportedTypespec: (uvm_reg), line:41:71, endln:41:78
+            |vpiParent:
+            \_Function: (work@toto::c1::set_verbosity_level), line:41:2, endln:42:15
+            |vpiName:uvm_reg
           |vpiImportTypespec:
           \_IntTypespec: , line:41:11, endln:41:14
+          |vpiImportTypespec:
+          \_UnsupportedTypespec: (uvm_reg), line:41:71, endln:41:78
           |vpiMethod:1
           |vpiVisibility:1
           |vpiReturn:
@@ -1510,16 +1531,6 @@ Design: (unnamed)
             |vpiActual:
             \_EnumTypespec: , line:21:9, endln:27:15
         |vpiTypedef:
-        \_UnsupportedTypespec: (REQ), line:30:10, endln:30:13
-          |vpiParent:
-          \_ClassDefn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
-          |vpiName:REQ
-        |vpiTypedef:
-        \_UnsupportedTypespec: (uvm_reg), line:38:71, endln:38:78
-          |vpiParent:
-          \_ClassDefn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
-          |vpiName:uvm_reg
-        |vpiTypedef:
         \_ArrayTypespec: , line:38:71, endln:38:86
           |vpiParent:
           \_ClassDefn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
@@ -1532,11 +1543,6 @@ Design: (unnamed)
             |vpiFullName:work@toto::c1::uvm_reg
             |vpiActual:
             \_UnsupportedTypespec: (uvm_reg), line:38:71, endln:38:78
-        |vpiTypedef:
-        \_UnsupportedTypespec: (uvm_reg), line:41:71, endln:41:78
-          |vpiParent:
-          \_ClassDefn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
-          |vpiName:uvm_reg
         |vpiTypedef:
         \_ArrayTypespec: , line:41:71, endln:41:86
           |vpiParent:
@@ -1561,19 +1567,13 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_Function: (work@toto::c1::get_current_item), line:30:1, endln:33:14
         |vpiImportTypespec:
-        \_UnsupportedTypespec: (REQ), line:30:10, endln:30:13
-        |vpiImportTypespec:
         \_Function: (work@toto::c1::connect), line:35:2, endln:36:12
         |vpiImportTypespec:
         \_Function: (work@toto::c1::get_verbosity_level), line:38:4, endln:39:15
         |vpiImportTypespec:
-        \_UnsupportedTypespec: (uvm_reg), line:38:71, endln:38:78
-        |vpiImportTypespec:
         \_ArrayTypespec: , line:38:71, endln:38:86
         |vpiImportTypespec:
         \_Function: (work@toto::c1::set_verbosity_level), line:41:2, endln:42:15
-        |vpiImportTypespec:
-        \_UnsupportedTypespec: (uvm_reg), line:41:71, endln:41:78
         |vpiImportTypespec:
         \_ArrayTypespec: , line:41:71, endln:41:86
         |vpiImportTypespec:
@@ -1645,13 +1645,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (DD), line:50:2, endln:50:4
   |vpiImportTypespec:
-  \_LogicNet: (work@toto.d), line:50:5, endln:50:6
+  \_Net: (work@toto.d), line:50:5, endln:50:6
     |vpiParent:
     \_Module: work@toto (work@toto), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:6:1, endln:52:10
     |vpiTypespec:
     \_RefTypespec: (work@toto.d.DD), line:50:2, endln:50:4
       |vpiParent:
-      \_LogicNet: (work@toto.d), line:50:5, endln:50:6
+      \_Net: (work@toto.d), line:50:5, endln:50:6
       |vpiName:DD
       |vpiFullName:work@toto.d.DD
       |vpiActual:
@@ -1666,7 +1666,7 @@ Design: (unnamed)
   |vpiClassDefn:
   \_ClassDefn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
   |vpiNet:
-  \_LogicNet: (work@toto.d), line:50:5, endln:50:6
+  \_Net: (work@toto.d), line:50:5, endln:50:6
 |vpiTypedef:
 \_ModuleTypespec: (toto)
   |vpiParent:

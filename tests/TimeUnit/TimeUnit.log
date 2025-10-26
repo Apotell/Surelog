@@ -51,10 +51,10 @@ Identifier                                            47
 IntTypespec                                            9
 Interface                                              1
 InterfaceTypespec                                      1
-LogicNet                                              10
 LogicTypespec                                          6
 Module                                                14
 ModuleTypespec                                        16
+Net                                                   10
 Operation                                              2
 Package                                                1
 Port                                                  15
@@ -66,6 +66,7 @@ RefTypespec                                           18
 SourceFile                                             2
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TimeUnit/slpp_unit/surelog.uhdm ...
@@ -1002,30 +1003,30 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@my_interface.data), line:5:15, endln:5:19
   |vpiImportTypespec:
-  \_LogicNet: (work@my_interface.clock), line:3:9, endln:3:14
+  \_Net: (work@my_interface.clock), line:3:9, endln:3:14
     |vpiParent:
     \_Interface: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:2:1, endln:10:13
     |vpiName:clock
     |vpiFullName:work@my_interface.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@my_interface.select), line:4:9, endln:4:15
+  \_Net: (work@my_interface.select), line:4:9, endln:4:15
     |vpiParent:
     \_Interface: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:2:1, endln:10:13
     |vpiName:select
     |vpiFullName:work@my_interface.select
   |vpiImportTypespec:
-  \_LogicNet: (work@my_interface.data), line:5:15, endln:5:19
+  \_Net: (work@my_interface.data), line:5:15, endln:5:19
     |vpiParent:
     \_Interface: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:2:1, endln:10:13
     |vpiName:data
     |vpiFullName:work@my_interface.data
   |vpiDefName:work@my_interface
   |vpiNet:
-  \_LogicNet: (work@my_interface.clock), line:3:9, endln:3:14
+  \_Net: (work@my_interface.clock), line:3:9, endln:3:14
   |vpiNet:
-  \_LogicNet: (work@my_interface.select), line:4:9, endln:4:15
+  \_Net: (work@my_interface.select), line:4:9, endln:4:15
   |vpiNet:
-  \_LogicNet: (work@my_interface.data), line:5:15, endln:5:19
+  \_Net: (work@my_interface.data), line:5:15, endln:5:19
   |vpiClockingBlock:
   \_ClockingBlock: (work@my_interface.cb), line:7:3, endln:9:14
   |vpiPort:
@@ -1041,7 +1042,7 @@ Design: (unnamed)
       |vpiName:clock
       |vpiFullName:work@my_interface.clock.clock
       |vpiActual:
-      \_LogicNet: (work@my_interface.clock), line:3:9, endln:3:14
+      \_Net: (work@my_interface.clock), line:3:9, endln:3:14
   |vpiPort:
   \_Port: (select), line:4:9, endln:4:15
     |vpiParent:
@@ -1055,7 +1056,7 @@ Design: (unnamed)
       |vpiName:select
       |vpiFullName:work@my_interface.select.select
       |vpiActual:
-      \_LogicNet: (work@my_interface.select), line:4:9, endln:4:15
+      \_Net: (work@my_interface.select), line:4:9, endln:4:15
   |vpiPort:
   \_Port: (data), line:5:15, endln:5:19
     |vpiParent:
@@ -1069,7 +1070,7 @@ Design: (unnamed)
       |vpiName:data
       |vpiFullName:work@my_interface.data.data
       |vpiActual:
-      \_LogicNet: (work@my_interface.data), line:5:15, endln:5:19
+      \_Net: (work@my_interface.data), line:5:15, endln:5:19
     |vpiTypespec:
     \_RefTypespec: (work@my_interface.data), line:5:9, endln:5:14
       |vpiParent:
@@ -1112,22 +1113,22 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@my_interface (work@my_interface), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:2:1, endln:10:13
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom1.a), line:3:23, endln:3:24
+  \_Net: (work@bottom1.a), line:3:23, endln:3:24
     |vpiParent:
     \_Module: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:3:1, endln:11:10
     |vpiName:a
     |vpiFullName:work@bottom1.a
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom1.b), line:3:32, endln:3:33
+  \_Net: (work@bottom1.b), line:3:32, endln:3:33
     |vpiParent:
     \_Module: work@bottom1 (work@bottom1), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:3:1, endln:11:10
     |vpiName:b
     |vpiFullName:work@bottom1.b
   |vpiDefName:work@bottom1
   |vpiNet:
-  \_LogicNet: (work@bottom1.a), line:3:23, endln:3:24
+  \_Net: (work@bottom1.a), line:3:23, endln:3:24
   |vpiNet:
-  \_LogicNet: (work@bottom1.b), line:3:32, endln:3:33
+  \_Net: (work@bottom1.b), line:3:32, endln:3:33
   |vpiPort:
   \_Port: (a), line:3:23, endln:3:24
     |vpiParent:
@@ -1159,7 +1160,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@bottom1.u1.a
         |vpiActual:
-        \_LogicNet: (work@bottom1.a), line:3:23, endln:3:24
+        \_Net: (work@bottom1.a), line:3:23, endln:3:24
         |vpiIndex:
         \_Constant: , line:6:16, endln:6:17
           |vpiParent:
@@ -1179,7 +1180,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@bottom1.u1.b
         |vpiActual:
-        \_LogicNet: (work@bottom1.b), line:3:32, endln:3:33
+        \_Net: (work@bottom1.b), line:3:32, endln:3:33
   |vpiRefModule:
   \_RefModule: work@bottom3 (u2), line:7:2, endln:7:9
     |vpiParent:
@@ -1199,7 +1200,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@bottom1.u2.a
         |vpiActual:
-        \_LogicNet: (work@bottom1.a), line:3:23, endln:3:24
+        \_Net: (work@bottom1.a), line:3:23, endln:3:24
         |vpiIndex:
         \_Constant: , line:7:16, endln:7:17
           |vpiParent:
@@ -1219,7 +1220,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@bottom1.u2.b
         |vpiActual:
-        \_LogicNet: (work@bottom1.b), line:3:32, endln:3:33
+        \_Net: (work@bottom1.b), line:3:32, endln:3:33
   |vpiRefModule:
   \_RefModule: work@my_interface (my_interface), line:9:2, endln:9:14
     |vpiParent:
@@ -1245,22 +1246,22 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:283:1, endln:290:10
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom2.a), line:13:23, endln:13:24
+  \_Net: (work@bottom2.a), line:13:23, endln:13:24
     |vpiParent:
     \_Module: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:13:1, endln:16:10
     |vpiName:a
     |vpiFullName:work@bottom2.a
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom2.b), line:13:32, endln:13:33
+  \_Net: (work@bottom2.b), line:13:32, endln:13:33
     |vpiParent:
     \_Module: work@bottom2 (work@bottom2), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:13:1, endln:16:10
     |vpiName:b
     |vpiFullName:work@bottom2.b
   |vpiDefName:work@bottom2
   |vpiNet:
-  \_LogicNet: (work@bottom2.a), line:13:23, endln:13:24
+  \_Net: (work@bottom2.a), line:13:23, endln:13:24
   |vpiNet:
-  \_LogicNet: (work@bottom2.b), line:13:32, endln:13:33
+  \_Net: (work@bottom2.b), line:13:32, endln:13:33
   |vpiPort:
   \_Port: (a), line:13:23, endln:13:24
     |vpiParent:
@@ -1292,7 +1293,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@bottom2.work@not.a
         |vpiActual:
-        \_LogicNet: (work@bottom2.a), line:13:23, endln:13:24
+        \_Net: (work@bottom2.a), line:13:23, endln:13:24
   |vpiRefModule:
   \_RefModule: work@middle (f2), line:15:1, endln:15:7
     |vpiParent:
@@ -1318,14 +1319,14 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (ddr)
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom3.capture), line:26:17, endln:26:24
+  \_Net: (work@bottom3.capture), line:26:17, endln:26:24
     |vpiParent:
     \_Module: work@bottom3 (work@bottom3), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:22:1, endln:32:10
     |vpiName:capture
     |vpiFullName:work@bottom3.capture
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom3.clk), line:27:13, endln:27:16
+  \_Net: (work@bottom3.clk), line:27:13, endln:27:16
     |vpiParent:
     \_Module: work@bottom3 (work@bottom3), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:22:1, endln:32:10
     |vpiName:clk
@@ -1333,9 +1334,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@bottom3
   |vpiNet:
-  \_LogicNet: (work@bottom3.capture), line:26:17, endln:26:24
+  \_Net: (work@bottom3.capture), line:26:17, endln:26:24
   |vpiNet:
-  \_LogicNet: (work@bottom3.clk), line:27:13, endln:27:16
+  \_Net: (work@bottom3.clk), line:27:13, endln:27:16
   |vpiRefModule:
   \_RefModule: work@ddr (g_datapath:0:g_io), line:24:2, endln:24:5
     |vpiParent:
@@ -1354,7 +1355,7 @@ Design: (unnamed)
         |vpiName:capture
         |vpiFullName:work@bottom3.g_datapath:0:g_io.capture.capture
         |vpiActual:
-        \_LogicNet: (work@bottom3.capture), line:26:17, endln:26:24
+        \_Net: (work@bottom3.capture), line:26:17, endln:26:24
     |vpiPort:
     \_Port: (clk), line:27:8, endln:27:11
       |vpiParent:
@@ -1367,7 +1368,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@bottom3.g_datapath:0:g_io.clk.clk
         |vpiActual:
-        \_LogicNet: (work@bottom3.clk), line:27:13, endln:27:16
+        \_Net: (work@bottom3.clk), line:27:13, endln:27:16
 |vpiAllModules:
 \_Module: work@bottom4 (work@bottom4), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:86:1, endln:95:10
   |vpiParent:
@@ -1385,14 +1386,14 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (ddr)
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom4.capture), line:89:17, endln:89:24
+  \_Net: (work@bottom4.capture), line:89:17, endln:89:24
     |vpiParent:
     \_Module: work@bottom4 (work@bottom4), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:86:1, endln:95:10
     |vpiName:capture
     |vpiFullName:work@bottom4.capture
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@bottom4.clk), line:90:13, endln:90:16
+  \_Net: (work@bottom4.clk), line:90:13, endln:90:16
     |vpiParent:
     \_Module: work@bottom4 (work@bottom4), file:${SURELOG_DIR}/tests/TimeUnit/top.v, line:86:1, endln:95:10
     |vpiName:clk
@@ -1400,9 +1401,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@bottom4
   |vpiNet:
-  \_LogicNet: (work@bottom4.capture), line:89:17, endln:89:24
+  \_Net: (work@bottom4.capture), line:89:17, endln:89:24
   |vpiNet:
-  \_LogicNet: (work@bottom4.clk), line:90:13, endln:90:16
+  \_Net: (work@bottom4.clk), line:90:13, endln:90:16
   |vpiRefModule:
   \_RefModule: work@ddr (g_datapath:0:g_io), line:87:2, endln:87:5
     |vpiParent:
@@ -1421,7 +1422,7 @@ Design: (unnamed)
         |vpiName:capture
         |vpiFullName:work@bottom4.g_datapath:0:g_io.capture.capture
         |vpiActual:
-        \_LogicNet: (work@bottom4.capture), line:89:17, endln:89:24
+        \_Net: (work@bottom4.capture), line:89:17, endln:89:24
     |vpiPort:
     \_Port: (clk), line:90:8, endln:90:11
       |vpiParent:
@@ -1434,7 +1435,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@bottom4.g_datapath:0:g_io.clk.clk
         |vpiActual:
-        \_LogicNet: (work@bottom4.clk), line:90:13, endln:90:16
+        \_Net: (work@bottom4.clk), line:90:13, endln:90:16
 |vpiAllModules:
 \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:283:1, endln:290:10
   |vpiParent:
@@ -1470,7 +1471,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@middle.work@middle::nested.a
           |vpiActual:
-          \_LogicNet: (work@middle.a), line:286:8, endln:286:9
+          \_Net: (work@middle.a), line:286:8, endln:286:9
         |vpiOperand:
         \_RefObj: (work@middle.work@middle::nested.b), line:288:20, endln:288:21
           |vpiParent:
@@ -1478,7 +1479,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@middle.work@middle::nested.b
           |vpiActual:
-          \_LogicNet: (work@middle.b), line:286:11, endln:286:12
+          \_Net: (work@middle.b), line:286:11, endln:286:12
       |vpiLhs:
       \_RefObj: (work@middle.work@middle::nested.c), line:288:12, endln:288:13
         |vpiParent:
@@ -1486,7 +1487,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:work@middle.work@middle::nested.c
         |vpiActual:
-        \_LogicNet: (work@middle.c), line:286:14, endln:286:15
+        \_Net: (work@middle.c), line:286:14, endln:286:15
   |vpiTypedef:
   \_LogicTypespec: , line:286:3, endln:286:7
     |vpiParent:
@@ -1501,13 +1502,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:286:3, endln:286:7
   |vpiImportTypespec:
-  \_LogicNet: (work@middle.a), line:286:8, endln:286:9
+  \_Net: (work@middle.a), line:286:8, endln:286:9
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:283:1, endln:290:10
     |vpiTypespec:
     \_RefTypespec: (work@middle.a), line:286:3, endln:286:7
       |vpiParent:
-      \_LogicNet: (work@middle.a), line:286:8, endln:286:9
+      \_Net: (work@middle.a), line:286:8, endln:286:9
       |vpiFullName:work@middle.a
       |vpiActual:
       \_LogicTypespec: , line:286:3, endln:286:7
@@ -1515,13 +1516,13 @@ Design: (unnamed)
     |vpiFullName:work@middle.a
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@middle.b), line:286:11, endln:286:12
+  \_Net: (work@middle.b), line:286:11, endln:286:12
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:283:1, endln:290:10
     |vpiTypespec:
     \_RefTypespec: (work@middle.b), line:286:3, endln:286:7
       |vpiParent:
-      \_LogicNet: (work@middle.b), line:286:11, endln:286:12
+      \_Net: (work@middle.b), line:286:11, endln:286:12
       |vpiFullName:work@middle.b
       |vpiActual:
       \_LogicTypespec: , line:286:3, endln:286:7
@@ -1529,13 +1530,13 @@ Design: (unnamed)
     |vpiFullName:work@middle.b
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@middle.c), line:286:14, endln:286:15
+  \_Net: (work@middle.c), line:286:14, endln:286:15
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:283:1, endln:290:10
     |vpiTypespec:
     \_RefTypespec: (work@middle.c), line:286:3, endln:286:7
       |vpiParent:
-      \_LogicNet: (work@middle.c), line:286:14, endln:286:15
+      \_Net: (work@middle.c), line:286:14, endln:286:15
       |vpiFullName:work@middle.c
       |vpiActual:
       \_LogicTypespec: , line:286:3, endln:286:7
@@ -1546,11 +1547,11 @@ Design: (unnamed)
   \_ModuleTypespec: (nested)
   |vpiDefName:work@middle
   |vpiNet:
-  \_LogicNet: (work@middle.a), line:286:8, endln:286:9
+  \_Net: (work@middle.a), line:286:8, endln:286:9
   |vpiNet:
-  \_LogicNet: (work@middle.b), line:286:11, endln:286:12
+  \_Net: (work@middle.b), line:286:11, endln:286:12
   |vpiNet:
-  \_LogicNet: (work@middle.c), line:286:14, endln:286:15
+  \_Net: (work@middle.c), line:286:14, endln:286:15
   |vpiModules:
   \_Module: work@middle::nested (work@middle::nested), file:${SURELOG_DIR}/tests/TimeUnit/top1.v, line:287:3, endln:289:12
 |vpiAllModules:

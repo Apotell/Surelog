@@ -728,6 +728,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:1:1: No timescale set for "prim_util_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:1:1: Compile package "prim_util_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:22:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -742,12 +743,11 @@ IODecl                                                 6
 Identifier                                            15
 IfElse                                                 1
 IfStmt                                                 1
-IntegerNet                                             1
 IntegerTypespec                                       15
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                             17
 Package                                                1
 ParamAssign                                            5
@@ -1523,7 +1523,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:work@top.log2.res
                 |vpiActual:
-                \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+                \_Net: (work@top.log2.res), line:36:9, endln:36:12
             |vpiForIncStmt:
             \_Assignment: , line:43:26, endln:43:35
               |vpiParent:
@@ -1542,7 +1542,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:work@top.log2.res
                   |vpiActual:
-                  \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+                  \_Net: (work@top.log2.res), line:36:9, endln:36:12
                 |vpiOperand:
                 \_Constant: , line:43:34, endln:43:35
                   |vpiParent:
@@ -1558,7 +1558,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:work@top.log2.res
                 |vpiActual:
-                \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+                \_Net: (work@top.log2.res), line:36:9, endln:36:12
             |vpiCondition:
             \_Operation: , line:43:15, endln:43:24
               |vpiParent:
@@ -1571,7 +1571,7 @@ Design: (unnamed)
                 |vpiName:shifted
                 |vpiFullName:work@top.log2.shifted
                 |vpiActual:
-                \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+                \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
               |vpiOperand:
               \_Constant: , line:43:23, endln:43:24
                 |vpiParent:
@@ -1598,7 +1598,7 @@ Design: (unnamed)
                   |vpiName:shifted
                   |vpiFullName:work@top.log2.shifted
                   |vpiActual:
-                  \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+                  \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
                 |vpiOperand:
                 \_Constant: , line:44:23, endln:44:24
                   |vpiParent:
@@ -1614,7 +1614,7 @@ Design: (unnamed)
                 |vpiName:shifted
                 |vpiFullName:work@top.log2.shifted
                 |vpiActual:
-                \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+                \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
           |vpiStmt:
           \_Assignment: , line:42:3, endln:42:20
             |vpiParent:
@@ -1649,7 +1649,7 @@ Design: (unnamed)
               |vpiName:shifted
               |vpiFullName:work@top.log2.shifted
               |vpiActual:
-              \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+              \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
           |vpiStmt:
           \_ForStmt: (work@top.log2), line:43:3, endln:44:25
           |vpiStmt:
@@ -1665,7 +1665,7 @@ Design: (unnamed)
               |vpiName:res
               |vpiFullName:work@top.log2.res
               |vpiActual:
-              \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+              \_Net: (work@top.log2.res), line:36:9, endln:36:12
             |vpiLhs:
             \_RefObj: (work@top.log2.log2), line:45:3, endln:45:7
               |vpiParent:
@@ -1708,13 +1708,13 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:35:1, endln:35:4
     |vpiImportTypespec:
-    \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+    \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
       |vpiParent:
       \_Function: (work@top.log2), line:33:1, endln:48:12
       |vpiTypespec:
       \_RefTypespec: (work@top.log2.shifted), line:35:1, endln:35:11
         |vpiParent:
-        \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+        \_Net: (work@top.log2.shifted), line:35:12, endln:35:19
         |vpiFullName:work@top.log2.shifted
         |vpiActual:
         \_LogicTypespec: , line:35:1, endln:35:4
@@ -1722,13 +1722,13 @@ Design: (unnamed)
       |vpiFullName:work@top.log2.shifted
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+    \_Net: (work@top.log2.res), line:36:9, endln:36:12
       |vpiParent:
       \_Function: (work@top.log2), line:33:1, endln:48:12
       |vpiTypespec:
       \_RefTypespec: (work@top.log2.res), line:36:1, endln:36:8
         |vpiParent:
-        \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
+        \_Net: (work@top.log2.res), line:36:9, endln:36:12
         |vpiFullName:work@top.log2.res
         |vpiActual:
         \_IntegerTypespec: , line:33:10, endln:33:17

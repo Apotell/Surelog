@@ -164,6 +164,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:1:1: No timescale set for "new_package".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:12:1: No timescale set for "module_a".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:1:1: Compile package "new_package".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:12:1: Compile module "work@module_a".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -174,10 +175,10 @@ Constant                                               4
 Design                                                 1
 EventControl                                           1
 Identifier                                             3
-LogicNet                                               3
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    3
 Operation                                              1
 Package                                                1
 Port                                                   3
@@ -189,6 +190,7 @@ StructTypespec                                         1
 TypeParameter                                          1
 TypedefTypespec                                        1
 TypespecMember                                         5
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -382,13 +384,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypeParameter: (work@module_a.TYPE_PARAMETER), line:14:20, endln:14:34
   |vpiImportTypespec:
-  \_LogicNet: (work@module_a.input_struct), line:17:25, endln:17:37
+  \_Net: (work@module_a.input_struct), line:17:25, endln:17:37
     |vpiParent:
     \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
     |vpiTypespec:
     \_RefTypespec: (work@module_a.input_struct.TYPE_PARAMETER), line:17:10, endln:17:24
       |vpiParent:
-      \_LogicNet: (work@module_a.input_struct), line:17:25, endln:17:37
+      \_Net: (work@module_a.input_struct), line:17:25, endln:17:37
       |vpiName:TYPE_PARAMETER
       |vpiFullName:work@module_a.input_struct.TYPE_PARAMETER
       |vpiActual:
@@ -396,13 +398,13 @@ Design: (unnamed)
     |vpiName:input_struct
     |vpiFullName:work@module_a.input_struct
   |vpiImportTypespec:
-  \_LogicNet: (work@module_a.output_struct), line:18:26, endln:18:39
+  \_Net: (work@module_a.output_struct), line:18:26, endln:18:39
     |vpiParent:
     \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
     |vpiTypespec:
     \_RefTypespec: (work@module_a.output_struct.TYPE_PARAMETER), line:18:11, endln:18:25
       |vpiParent:
-      \_LogicNet: (work@module_a.output_struct), line:18:26, endln:18:39
+      \_Net: (work@module_a.output_struct), line:18:26, endln:18:39
       |vpiName:TYPE_PARAMETER
       |vpiFullName:work@module_a.output_struct.TYPE_PARAMETER
       |vpiActual:
@@ -410,18 +412,18 @@ Design: (unnamed)
     |vpiName:output_struct
     |vpiFullName:work@module_a.output_struct
   |vpiImportTypespec:
-  \_LogicNet: (work@module_a.clk), line:19:10, endln:19:13
+  \_Net: (work@module_a.clk), line:19:10, endln:19:13
     |vpiParent:
     \_Module: work@module_a (work@module_a), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:12:1, endln:28:21
     |vpiName:clk
     |vpiFullName:work@module_a.clk
   |vpiDefName:work@module_a
   |vpiNet:
-  \_LogicNet: (work@module_a.input_struct), line:17:25, endln:17:37
+  \_Net: (work@module_a.input_struct), line:17:25, endln:17:37
   |vpiNet:
-  \_LogicNet: (work@module_a.output_struct), line:18:26, endln:18:39
+  \_Net: (work@module_a.output_struct), line:18:26, endln:18:39
   |vpiNet:
-  \_LogicNet: (work@module_a.clk), line:19:10, endln:19:13
+  \_Net: (work@module_a.clk), line:19:10, endln:19:13
   |vpiPort:
   \_Port: (input_struct), line:17:25, endln:17:37
     |vpiParent:
@@ -476,7 +478,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@module_a.clk
           |vpiActual:
-          \_LogicNet: (work@module_a.clk), line:19:10, endln:19:13
+          \_Net: (work@module_a.clk), line:19:10, endln:19:13
       |vpiStmt:
       \_Begin: (work@module_a), line:23:28, endln:25:6
         |vpiParent:
@@ -494,7 +496,7 @@ Design: (unnamed)
             |vpiName:input_struct
             |vpiFullName:work@module_a.input_struct
             |vpiActual:
-            \_LogicNet: (work@module_a.input_struct), line:17:25, endln:17:37
+            \_Net: (work@module_a.input_struct), line:17:25, endln:17:37
           |vpiLhs:
           \_RefObj: (work@module_a.output_struct), line:24:5, endln:24:18
             |vpiParent:
@@ -502,7 +504,7 @@ Design: (unnamed)
             |vpiName:output_struct
             |vpiFullName:work@module_a.output_struct
             |vpiActual:
-            \_LogicNet: (work@module_a.output_struct), line:18:26, endln:18:39
+            \_Net: (work@module_a.output_struct), line:18:26, endln:18:39
     |vpiAlwaysType:3
   |vpiEndLabel:module_a
 |vpiTypedef:

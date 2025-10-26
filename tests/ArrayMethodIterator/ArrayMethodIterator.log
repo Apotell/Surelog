@@ -156,6 +156,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:27:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:27:1: Compile module "work@top".
 [INF:CP0302] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:6:3: Compile class "pkg::uvm_callback".
 [INF:CP0302] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:10:1: Compile class "pkg::uvm_callbacks".
@@ -173,27 +174,27 @@ Function                                               1
 HierPath                                               2
 Identifier                                             7
 IntTypespec                                            1
-LogicNet                                               1
 MethodFuncCall                                         1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                1
 Range                                                  2
 RefObj                                                 6
 RefTypespec                                            9
 SourceFile                                             1
 TypeParameter                                          2
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    4
 Variable                                               3
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:54, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:56, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:57, name: get_inst_id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:57, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:59, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:60, name: get_inst_id".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Null Actual: id:54, type:RefObj, name:cb_.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Null Actual: id:56, type:RefObj, name:cb_.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Null Actual: id:57, type:RefObj, name:get_inst_id.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Null Actual: id:57, type:RefObj, name:cb_.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Null Actual: id:59, type:RefObj, name:cb_.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Null Actual: id:60, type:RefObj, name:get_inst_id.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:29:1: Unsupported Typespec: id:19, type:RefTypespec, name:pkg::uvm_callbacks.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -516,13 +517,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
   |vpiImportTypespec:
-  \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+  \_Net: (work@top.c1), line:29:20, endln:29:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c1.pkg::uvm_callbacks), line:29:1, endln:29:19
       |vpiParent:
-      \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+      \_Net: (work@top.c1), line:29:20, endln:29:22
       |vpiName:pkg::uvm_callbacks
       |vpiFullName:work@top.c1.pkg::uvm_callbacks
       |vpiActual:
@@ -531,7 +532,7 @@ Design: (unnamed)
     |vpiFullName:work@top.c1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+  \_Net: (work@top.c1), line:29:20, endln:29:22
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

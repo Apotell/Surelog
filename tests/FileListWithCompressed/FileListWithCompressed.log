@@ -196,6 +196,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv:1:1: No timescale set for "prim_util_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:1:1: No timescale set for "foo".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv:1:1: Compile package "prim_util_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:1:1: Compile module "work@foo".
 [NTE:CP0309] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:3:12: Implicit port type (wire) for "out".
 [INF:UH0706] Creating UHDM Model...
@@ -214,10 +215,10 @@ IODecl                                                 1
 Identifier                                             6
 ImportTypespec                                         1
 IntegerTypespec                                        2
-LogicNet                                               3
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    3
 Operation                                              5
 Package                                                1
 Port                                                   2
@@ -430,13 +431,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.clk), line:2:11, endln:2:14
+  \_Net: (work@foo.clk), line:2:11, endln:2:14
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiName:clk
     |vpiFullName:work@foo.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.out), line:3:12, endln:3:15
+  \_Net: (work@foo.out), line:3:12, endln:3:15
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiName:out
@@ -444,13 +445,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:1, endln:6:6
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+  \_Net: (work@foo.a), line:6:22, endln:6:23
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@foo.a), line:6:1, endln:6:21
       |vpiParent:
-      \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+      \_Net: (work@foo.a), line:6:22, endln:6:23
       |vpiFullName:work@foo.a
       |vpiActual:
       \_LogicTypespec: , line:6:1, endln:6:6
@@ -458,11 +459,11 @@ Design: (unnamed)
     |vpiFullName:work@foo.a
   |vpiDefName:work@foo
   |vpiNet:
-  \_LogicNet: (work@foo.clk), line:2:11, endln:2:14
+  \_Net: (work@foo.clk), line:2:11, endln:2:14
   |vpiNet:
-  \_LogicNet: (work@foo.out), line:3:12, endln:3:15
+  \_Net: (work@foo.out), line:3:12, endln:3:15
   |vpiNet:
-  \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+  \_Net: (work@foo.a), line:6:22, endln:6:23
   |vpiPort:
   \_Port: (clk), line:2:11, endln:2:14
     |vpiParent:
@@ -495,7 +496,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@foo.clk
           |vpiActual:
-          \_LogicNet: (work@foo.clk), line:2:11, endln:2:14
+          \_Net: (work@foo.clk), line:2:11, endln:2:14
       |vpiStmt:
       \_Begin: (work@foo), line:7:23, endln:9:4
         |vpiParent:
@@ -518,7 +519,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@foo.a
               |vpiActual:
-              \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+              \_Net: (work@foo.a), line:6:22, endln:6:23
             |vpiOperand:
             \_Constant: , line:8:14, endln:8:18
               |vpiParent:
@@ -534,7 +535,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@foo.a
             |vpiActual:
-            \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+            \_Net: (work@foo.a), line:6:22, endln:6:23
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:10:8, endln:10:18
@@ -547,7 +548,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@foo.a
       |vpiActual:
-      \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+      \_Net: (work@foo.a), line:6:22, endln:6:23
       |vpiIndex:
       \_Constant: , line:10:16, endln:10:17
         |vpiParent:
@@ -563,7 +564,7 @@ Design: (unnamed)
       |vpiName:out
       |vpiFullName:work@foo.out
       |vpiActual:
-      \_LogicNet: (work@foo.out), line:3:12, endln:3:15
+      \_Net: (work@foo.out), line:3:12, endln:3:15
 |vpiTypedef:
 \_ModuleTypespec: (foo)
   |vpiParent:

@@ -106,7 +106,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/GenModHierPath/dut.sv:8:1: Compile module "work@InitializedBlockRAM".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 Begin                                                  2
 Constant                                               2
@@ -119,6 +118,7 @@ Identifier                                             5
 IntTypespec                                            1
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                              1
 Range                                                  1
 RefModule                                              1
@@ -186,13 +186,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:3, endln:3:16
   |vpiImportTypespec:
-  \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+  \_Net: (work@ForNarrowRequest.array), line:3:7, endln:3:12
     |vpiParent:
     \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
     \_RefTypespec: (work@ForNarrowRequest.array), line:3:3, endln:3:6
       |vpiParent:
-      \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+      \_Net: (work@ForNarrowRequest.array), line:3:7, endln:3:12
       |vpiFullName:work@ForNarrowRequest.array
       |vpiActual:
       \_ArrayTypespec: , line:3:3, endln:3:16
@@ -200,8 +200,8 @@ Design: (unnamed)
     |vpiFullName:work@ForNarrowRequest.array
     |vpiSigned:1
   |vpiDefName:work@ForNarrowRequest
-  |vpiArrayNet:
-  \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+  |vpiNet:
+  \_Net: (work@ForNarrowRequest.array), line:3:7, endln:3:12
 |vpiAllModules:
 \_Module: work@InitializedBlockRAM (work@InitializedBlockRAM), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:8:1, endln:20:10
   |vpiParent:
@@ -228,21 +228,21 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_VoidTypespec: , line:16:22, endln:16:26
     |vpiImportTypespec:
-    \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.body), line:17:15, endln:17:19
+    \_Net: (work@InitializedBlockRAM.InitializeMemory.body), line:17:15, endln:17:19
       |vpiParent:
       \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
       |vpiName:body
       |vpiFullName:work@InitializedBlockRAM.InitializeMemory.body
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.ram), line:17:20, endln:17:23
+    \_Net: (work@InitializedBlockRAM.InitializeMemory.ram), line:17:20, endln:17:23
       |vpiParent:
       \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
       |vpiName:ram
       |vpiFullName:work@InitializedBlockRAM.InitializeMemory.ram
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.array), line:17:24, endln:17:29
+    \_Net: (work@InitializedBlockRAM.InitializeMemory.array), line:17:24, endln:17:29
       |vpiParent:
       \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
       |vpiName:array
@@ -271,14 +271,14 @@ Design: (unnamed)
           \_HierPath: (body.ram.array), line:17:15, endln:17:29
           |vpiName:body
           |vpiActual:
-          \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.body), line:17:15, endln:17:19
+          \_Net: (work@InitializedBlockRAM.InitializeMemory.body), line:17:15, endln:17:19
         |vpiActual:
         \_RefObj: (ram), line:17:20, endln:17:23
           |vpiParent:
           \_HierPath: (body.ram.array), line:17:15, endln:17:29
           |vpiName:ram
           |vpiActual:
-          \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.ram), line:17:20, endln:17:23
+          \_Net: (work@InitializedBlockRAM.InitializeMemory.ram), line:17:20, endln:17:23
         |vpiActual:
         \_RefObj: (work@InitializedBlockRAM.InitializeMemory.array), line:17:24, endln:17:29
           |vpiParent:
@@ -286,7 +286,7 @@ Design: (unnamed)
           |vpiName:array
           |vpiFullName:work@InitializedBlockRAM.InitializeMemory.array
           |vpiActual:
-          \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.array), line:17:24, endln:17:29
+          \_Net: (work@InitializedBlockRAM.InitializeMemory.array), line:17:24, endln:17:29
         |vpiName:body.ram.array
       |vpiName:
       \_Identifier: ($readmemh)

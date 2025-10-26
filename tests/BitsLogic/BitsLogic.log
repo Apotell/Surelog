@@ -179,6 +179,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsLogic/dut.sv:1:1: No timescale set for "SchedulerTypes".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsLogic/dut.sv:12:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsLogic/dut.sv:1:1: Compile package "SchedulerTypes".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsLogic/dut.sv:12:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -186,10 +187,10 @@ Constant                                              11
 Design                                                 1
 Identifier                                             6
 ImportTypespec                                         1
-LogicNet                                               1
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 Package                                                1
 PackedArrayTypespec                                    1
@@ -203,6 +204,7 @@ StructTypespec                                         2
 SysFuncCall                                            1
 TypedefTypespec                                        2
 TypespecMember                                         5
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsLogic/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -423,11 +425,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.SchedulerTypes::IntIssueQueueEntry), line:6:3, endln:6:21
+    \_RefTypespec: (work@top.IntIssueQueueEntry), line:17:9, endln:17:27
       |vpiParent:
       \_PackedArrayTypespec: , line:17:9, endln:17:35
-      |vpiName:SchedulerTypes::IntIssueQueueEntry
-      |vpiFullName:work@top.SchedulerTypes::IntIssueQueueEntry
+      |vpiName:IntIssueQueueEntry
+      |vpiFullName:work@top.IntIssueQueueEntry
       |vpiActual:
       \_TypedefTypespec: (SchedulerTypes::IntIssueQueueEntry), line:6:3, endln:6:21
   |vpiTypedef:
@@ -530,13 +532,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:26:1, endln:26:6
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:26:15, endln:26:16
+  \_Net: (work@top.b), line:26:15, endln:26:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:12:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:26:1, endln:26:14
       |vpiParent:
-      \_LogicNet: (work@top.b), line:26:15, endln:26:16
+      \_Net: (work@top.b), line:26:15, endln:26:16
       |vpiFullName:work@top.b
       |vpiActual:
       \_LogicTypespec: , line:26:1, endln:26:6
@@ -545,7 +547,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.b), line:26:15, endln:26:16
+  \_Net: (work@top.b), line:26:15, endln:26:16
 |vpiTypedef:
 \_ImportTypespec: (SchedulerTypes), line:10:8, endln:10:25
   |vpiParent:

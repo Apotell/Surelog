@@ -818,11 +818,11 @@ IODecl                                                11
 Identifier                                            31
 Initial                                                1
 IntTypespec                                            9
-IntegerNet                                            14
 IntegerTypespec                                       14
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                             33
 Package                                                1
 RefObj                                                54
@@ -831,6 +831,8 @@ SourceFile                                             1
 SysFuncCall                                            2
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
+Variable                                              12
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForLoop/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1656,13 +1658,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:3, endln:3:10
   |vpiImportTypespec:
-  \_IntegerNet: (work@t.a), line:3:11, endln:3:12
+  \_Net: (work@t.a), line:3:11, endln:3:12
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/ForLoop/dut.sv, line:1:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@t.a), line:3:3, endln:3:10
       |vpiParent:
-      \_IntegerNet: (work@t.a), line:3:11, endln:3:12
+      \_Net: (work@t.a), line:3:11, endln:3:12
       |vpiFullName:work@t.a
       |vpiActual:
       \_IntegerTypespec: , line:3:3, endln:3:10
@@ -1670,13 +1672,13 @@ Design: (unnamed)
     |vpiFullName:work@t.a
     |vpiSigned:1
   |vpiImportTypespec:
-  \_IntegerNet: (work@t.b), line:3:14, endln:3:15
+  \_Net: (work@t.b), line:3:14, endln:3:15
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/ForLoop/dut.sv, line:1:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@t.b), line:3:3, endln:3:10
       |vpiParent:
-      \_IntegerNet: (work@t.b), line:3:14, endln:3:15
+      \_Net: (work@t.b), line:3:14, endln:3:15
       |vpiFullName:work@t.b
       |vpiActual:
       \_IntegerTypespec: , line:3:3, endln:3:10
@@ -1685,9 +1687,9 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiDefName:work@t
   |vpiNet:
-  \_IntegerNet: (work@t.a), line:3:11, endln:3:12
+  \_Net: (work@t.a), line:3:11, endln:3:12
   |vpiNet:
-  \_IntegerNet: (work@t.b), line:3:14, endln:3:15
+  \_Net: (work@t.b), line:3:14, endln:3:15
   |vpiProcess:
   \_Initial: , line:5:3, endln:26:6
     |vpiParent:
@@ -1697,6 +1699,174 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:5:3, endln:26:6
       |vpiFullName:work@t
+      |vpiVariable:
+      \_Variable: (work@t.a), line:15:19, endln:15:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:15:11, endln:15:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:15:19, endln:15:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:16:19, endln:16:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:16:11, endln:16:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:16:19, endln:16:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:17:19, endln:17:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:17:11, endln:17:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:17:19, endln:17:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:18:23, endln:18:24
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:18:15, endln:18:22
+          |vpiParent:
+          \_Variable: (work@t.a), line:18:23, endln:18:24
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:19:23, endln:19:24
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:19:15, endln:19:22
+          |vpiParent:
+          \_Variable: (work@t.a), line:19:23, endln:19:24
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:20:23, endln:20:24
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:20:15, endln:20:22
+          |vpiParent:
+          \_Variable: (work@t.a), line:20:23, endln:20:24
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:21:19, endln:21:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:21:11, endln:21:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:21:19, endln:21:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.b), line:21:32, endln:21:33
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.b), line:21:24, endln:21:31
+          |vpiParent:
+          \_Variable: (work@t.b), line:21:32, endln:21:33
+          |vpiFullName:work@t.b
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:b
+        |vpiFullName:work@t.b
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:22:19, endln:22:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:22:11, endln:22:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:22:19, endln:22:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.b), line:22:32, endln:22:33
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.b), line:22:24, endln:22:31
+          |vpiParent:
+          \_Variable: (work@t.b), line:22:32, endln:22:33
+          |vpiFullName:work@t.b
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:b
+        |vpiFullName:work@t.b
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.a), line:23:19, endln:23:20
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.a), line:23:11, endln:23:18
+          |vpiParent:
+          \_Variable: (work@t.a), line:23:19, endln:23:20
+          |vpiFullName:work@t.a
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:a
+        |vpiFullName:work@t.a
+        |vpiSigned:1
+      |vpiVariable:
+      \_Variable: (work@t.b), line:23:32, endln:23:33
+        |vpiParent:
+        \_Begin: (work@t), line:5:11, endln:26:6
+        |vpiTypespec:
+        \_RefTypespec: (work@t.b), line:23:24, endln:23:31
+          |vpiParent:
+          \_Variable: (work@t.b), line:23:32, endln:23:33
+          |vpiFullName:work@t.b
+          |vpiActual:
+          \_IntegerTypespec: , line:15:11, endln:15:18
+        |vpiName:b
+        |vpiFullName:work@t.b
+        |vpiSigned:1
       |vpiInternalScope:
       \_ForStmt: (work@t), line:6:6, endln:6:18
         |vpiParent:
@@ -1725,7 +1895,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:7:19, endln:7:20
               |vpiParent:
@@ -1741,7 +1911,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
       |vpiInternalScope:
       \_ForStmt: (work@t), line:8:6, endln:8:30
         |vpiParent:
@@ -1765,7 +1935,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:8:19, endln:8:20
               |vpiParent:
@@ -1781,7 +1951,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:8:22, endln:8:27
           |vpiParent:
@@ -1800,7 +1970,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:8:26, endln:8:27
               |vpiParent:
@@ -1816,7 +1986,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
       |vpiInternalScope:
       \_ForStmt: (work@t), line:9:6, endln:9:21
         |vpiParent:
@@ -1834,7 +2004,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:9:15, endln:9:16
             |vpiParent:
@@ -1866,7 +2036,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:10:22, endln:10:23
               |vpiParent:
@@ -1882,7 +2052,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:10:13, endln:10:16
           |vpiParent:
@@ -1895,7 +2065,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:10:15, endln:10:16
             |vpiParent:
@@ -1927,7 +2097,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:11:22, endln:11:23
               |vpiParent:
@@ -1943,7 +2113,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:11:25, endln:11:30
           |vpiParent:
@@ -1962,7 +2132,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:11:29, endln:11:30
               |vpiParent:
@@ -1978,7 +2148,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:11:13, endln:11:16
           |vpiParent:
@@ -1991,7 +2161,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:11:15, endln:11:16
             |vpiParent:
@@ -2024,7 +2194,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:12:16, endln:12:19
           |vpiParent:
@@ -2037,7 +2207,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:12:18, endln:12:19
             |vpiParent:
@@ -2070,7 +2240,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:13:21, endln:13:26
           |vpiParent:
@@ -2089,7 +2259,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:13:25, endln:13:26
               |vpiParent:
@@ -2105,7 +2275,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:13:16, endln:13:19
           |vpiParent:
@@ -2118,7 +2288,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:13:18, endln:13:19
             |vpiParent:
@@ -2151,7 +2321,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:14:21, endln:14:26
           |vpiParent:
@@ -2170,7 +2340,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:14:25, endln:14:26
               |vpiParent:
@@ -2186,7 +2356,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:14:28, endln:14:33
           |vpiParent:
@@ -2205,7 +2375,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:14:32, endln:14:33
               |vpiParent:
@@ -2221,7 +2391,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:14:16, endln:14:19
           |vpiParent:
@@ -2234,7 +2404,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:14:18, endln:14:19
             |vpiParent:
@@ -2261,19 +2431,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:15:19, endln:15:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:15:11, endln:15:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:15:24, endln:15:27
           |vpiParent:
@@ -2286,7 +2444,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:15:26, endln:15:27
             |vpiParent:
@@ -2313,19 +2471,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:16:19, endln:16:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:16:11, endln:16:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:16:19, endln:16:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:16:19, endln:16:20
         |vpiForIncStmt:
         \_Assignment: , line:16:29, endln:16:34
           |vpiParent:
@@ -2344,7 +2490,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:16:33, endln:16:34
               |vpiParent:
@@ -2360,7 +2506,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:16:24, endln:16:27
           |vpiParent:
@@ -2373,7 +2519,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:16:26, endln:16:27
             |vpiParent:
@@ -2400,19 +2546,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:17:19, endln:17:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:17:11, endln:17:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:17:19, endln:17:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:17:19, endln:17:20
         |vpiForIncStmt:
         \_Assignment: , line:17:29, endln:17:34
           |vpiParent:
@@ -2431,7 +2565,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:17:33, endln:17:34
               |vpiParent:
@@ -2447,7 +2581,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:17:36, endln:17:41
           |vpiParent:
@@ -2466,7 +2600,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:17:40, endln:17:41
               |vpiParent:
@@ -2482,7 +2616,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:17:24, endln:17:27
           |vpiParent:
@@ -2495,7 +2629,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:17:26, endln:17:27
             |vpiParent:
@@ -2522,19 +2656,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:18:23, endln:18:24
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:18:15, endln:18:22
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:18:23, endln:18:24
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:18:23, endln:18:24
         |vpiCondition:
         \_Operation: , line:18:28, endln:18:31
           |vpiParent:
@@ -2547,7 +2669,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:18:30, endln:18:31
             |vpiParent:
@@ -2574,19 +2696,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:19:23, endln:19:24
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:19:15, endln:19:22
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:19:23, endln:19:24
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:19:23, endln:19:24
         |vpiForIncStmt:
         \_Assignment: , line:19:33, endln:19:38
           |vpiParent:
@@ -2605,7 +2715,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:19:37, endln:19:38
               |vpiParent:
@@ -2621,7 +2731,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:19:28, endln:19:31
           |vpiParent:
@@ -2634,7 +2744,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:19:30, endln:19:31
             |vpiParent:
@@ -2661,19 +2771,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:20:23, endln:20:24
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:20:15, endln:20:22
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:20:23, endln:20:24
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:20:23, endln:20:24
         |vpiForIncStmt:
         \_Assignment: , line:20:33, endln:20:38
           |vpiParent:
@@ -2692,7 +2790,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:20:37, endln:20:38
               |vpiParent:
@@ -2708,7 +2806,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:20:40, endln:20:45
           |vpiParent:
@@ -2727,7 +2825,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:20:44, endln:20:45
               |vpiParent:
@@ -2743,7 +2841,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:20:28, endln:20:31
           |vpiParent:
@@ -2756,7 +2854,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:20:30, endln:20:31
             |vpiParent:
@@ -2783,19 +2881,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:21:19, endln:21:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:21:11, endln:21:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:21:19, endln:21:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:21:19, endln:21:20
         |vpiForInitStmt:
         \_Assignment: , line:21:24, endln:21:35
           |vpiParent:
@@ -2809,19 +2895,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.b), line:21:32, endln:21:33
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.b), line:21:24, endln:21:31
-              |vpiParent:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
-              |vpiFullName:work@t.b
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:b
-            |vpiFullName:work@t.b
-            |vpiSigned:1
+          \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:21:37, endln:21:40
           |vpiParent:
@@ -2834,7 +2908,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:21:39, endln:21:40
             |vpiParent:
@@ -2861,19 +2935,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:22:19, endln:22:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:22:11, endln:22:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:22:19, endln:22:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:22:19, endln:22:20
         |vpiForInitStmt:
         \_Assignment: , line:22:24, endln:22:35
           |vpiParent:
@@ -2887,19 +2949,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.b), line:22:32, endln:22:33
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.b), line:22:24, endln:22:31
-              |vpiParent:
-              \_IntegerNet: (work@t.b), line:22:32, endln:22:33
-              |vpiFullName:work@t.b
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:b
-            |vpiFullName:work@t.b
-            |vpiSigned:1
+          \_Variable: (work@t.b), line:22:32, endln:22:33
         |vpiForIncStmt:
         \_Assignment: , line:22:42, endln:22:47
           |vpiParent:
@@ -2918,7 +2968,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:22:46, endln:22:47
               |vpiParent:
@@ -2934,7 +2984,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiCondition:
         \_Operation: , line:22:37, endln:22:40
           |vpiParent:
@@ -2947,7 +2997,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:22:39, endln:22:40
             |vpiParent:
@@ -2974,19 +3024,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.a), line:23:19, endln:23:20
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.a), line:23:11, endln:23:18
-              |vpiParent:
-              \_IntegerNet: (work@t.a), line:23:19, endln:23:20
-              |vpiFullName:work@t.a
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:a
-            |vpiFullName:work@t.a
-            |vpiSigned:1
+          \_Variable: (work@t.a), line:23:19, endln:23:20
         |vpiForInitStmt:
         \_Assignment: , line:23:24, endln:23:35
           |vpiParent:
@@ -3000,19 +3038,7 @@ Design: (unnamed)
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
-          \_IntegerNet: (work@t.b), line:23:32, endln:23:33
-            |vpiParent:
-            \_Begin: (work@t), line:5:11, endln:26:6
-            |vpiTypespec:
-            \_RefTypespec: (work@t.b), line:23:24, endln:23:31
-              |vpiParent:
-              \_IntegerNet: (work@t.b), line:23:32, endln:23:33
-              |vpiFullName:work@t.b
-              |vpiActual:
-              \_IntegerTypespec: , line:15:11, endln:15:18
-            |vpiName:b
-            |vpiFullName:work@t.b
-            |vpiSigned:1
+          \_Variable: (work@t.b), line:23:32, endln:23:33
         |vpiForIncStmt:
         \_Assignment: , line:23:42, endln:23:47
           |vpiParent:
@@ -3031,7 +3057,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@t.a
               |vpiActual:
-              \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+              \_Variable: (work@t.a), line:15:19, endln:15:20
             |vpiOperand:
             \_Constant: , line:23:46, endln:23:47
               |vpiParent:
@@ -3047,7 +3073,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
         |vpiForIncStmt:
         \_Assignment: , line:23:49, endln:23:54
           |vpiParent:
@@ -3066,7 +3092,7 @@ Design: (unnamed)
               |vpiName:b
               |vpiFullName:work@t.b
               |vpiActual:
-              \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+              \_Variable: (work@t.b), line:21:32, endln:21:33
             |vpiOperand:
             \_Constant: , line:23:53, endln:23:54
               |vpiParent:
@@ -3082,7 +3108,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@t.b
             |vpiActual:
-            \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+            \_Variable: (work@t.b), line:21:32, endln:21:33
         |vpiCondition:
         \_Operation: , line:23:37, endln:23:40
           |vpiParent:
@@ -3095,7 +3121,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@t.a
             |vpiActual:
-            \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+            \_Variable: (work@t.a), line:15:19, endln:15:20
           |vpiOperand:
           \_Constant: , line:23:39, endln:23:40
             |vpiParent:
@@ -3112,29 +3138,29 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_IntegerTypespec: , line:15:11, endln:15:18
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:15:19, endln:15:20
+      \_Variable: (work@t.a), line:15:19, endln:15:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:16:19, endln:16:20
+      \_Variable: (work@t.a), line:16:19, endln:16:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:17:19, endln:17:20
+      \_Variable: (work@t.a), line:17:19, endln:17:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:18:23, endln:18:24
+      \_Variable: (work@t.a), line:18:23, endln:18:24
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:19:23, endln:19:24
+      \_Variable: (work@t.a), line:19:23, endln:19:24
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:20:23, endln:20:24
+      \_Variable: (work@t.a), line:20:23, endln:20:24
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:21:19, endln:21:20
+      \_Variable: (work@t.a), line:21:19, endln:21:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.b), line:21:32, endln:21:33
+      \_Variable: (work@t.b), line:21:32, endln:21:33
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:22:19, endln:22:20
+      \_Variable: (work@t.a), line:22:19, endln:22:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.b), line:22:32, endln:22:33
+      \_Variable: (work@t.b), line:22:32, endln:22:33
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.a), line:23:19, endln:23:20
+      \_Variable: (work@t.a), line:23:19, endln:23:20
       |vpiImportTypespec:
-      \_IntegerNet: (work@t.b), line:23:32, endln:23:33
+      \_Variable: (work@t.b), line:23:32, endln:23:33
       |vpiStmt:
       \_ForStmt: (work@t), line:6:6, endln:6:18
       |vpiStmt:

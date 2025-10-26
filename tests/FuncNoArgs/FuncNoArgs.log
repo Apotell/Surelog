@@ -280,12 +280,11 @@ IODecl                                                11
 Identifier                                            31
 IfStmt                                                 1
 IntTypespec                                            9
-IntegerNet                                             1
 IntegerTypespec                                        3
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              6
 Package                                                1
 ParamAssign                                            3
@@ -296,6 +295,7 @@ RefTypespec                                           17
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncNoArgs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1234,7 +1234,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
             |vpiActual:
-            \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+            \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
         |vpiForIncStmt:
         \_Assignment: , line:11:38, endln:11:43
           |vpiParent:
@@ -1253,7 +1253,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
               |vpiActual:
-              \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+              \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
             |vpiOperand:
             \_Constant: , line:11:42, endln:11:43
               |vpiParent:
@@ -1269,7 +1269,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
             |vpiActual:
-            \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+            \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
         |vpiCondition:
         \_Operation: , line:11:25, endln:11:36
           |vpiParent:
@@ -1282,7 +1282,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
             |vpiActual:
-            \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+            \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
           |vpiOperand:
           \_RefObj: (work@my_opt_reduce_or.count_nonconst_bits.A_WIDTH), line:11:29, endln:11:36
             |vpiParent:
@@ -1315,7 +1315,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
                 |vpiActual:
-                \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+                \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
           |vpiStmt:
           \_Assignment: , line:13:21, endln:13:64
             |vpiParent:
@@ -1383,13 +1383,13 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:7:14, endln:7:21
     |vpiImportTypespec:
-    \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+    \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
       |vpiParent:
       \_Function: (work@my_opt_reduce_or.count_nonconst_bits), line:7:5, endln:15:16
       |vpiTypespec:
       \_RefTypespec: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:9, endln:8:16
         |vpiParent:
-        \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+        \_Net: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
         |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
         |vpiActual:
         \_IntegerTypespec: , line:7:14, endln:7:21
@@ -1497,13 +1497,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:5, endln:28:8
   |vpiImportTypespec:
-  \_LogicNet: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
+  \_Net: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
     |vpiParent:
     \_Module: work@my_opt_reduce_or (work@my_opt_reduce_or), file:${SURELOG_DIR}/tests/FuncNoArgs/dut.sv, line:1:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@my_opt_reduce_or.tmp), line:28:5, endln:28:36
       |vpiParent:
-      \_LogicNet: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
+      \_Net: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
       |vpiFullName:work@my_opt_reduce_or.tmp
       |vpiActual:
       \_LogicTypespec: , line:28:5, endln:28:8
@@ -1514,7 +1514,7 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@my_opt_reduce_or.count_nonconst_bits), line:7:5, endln:15:16
   |vpiNet:
-  \_LogicNet: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
+  \_Net: (work@my_opt_reduce_or.tmp), line:28:37, endln:28:40
 |vpiTypedef:
 \_ModuleTypespec: (my_opt_reduce_or)
   |vpiParent:

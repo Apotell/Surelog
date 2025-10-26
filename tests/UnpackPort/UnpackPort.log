@@ -130,7 +130,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          3
 Assignment                                             1
 Begin                                                  1
@@ -150,6 +149,7 @@ IntTypespec                                            9
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              6
 Package                                                1
 Port                                                   1
@@ -161,6 +161,7 @@ StructTypespec                                         1
 Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    3
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackPort/slpp_all/surelog.uhdm ...
@@ -1001,7 +1002,7 @@ Design: (unnamed)
         |vpiName:g_fill
       |vpiFullName:work@dut.g_fill
       |vpiImportTypespec:
-      \_LogicNet: (work@dut.g_fill.i), line:9:19, endln:9:20
+      \_Net: (work@dut.g_fill.i), line:9:19, endln:9:20
         |vpiParent:
         \_Begin: (work@dut.g_fill), line:8:30, endln:10:6
         |vpiName:i
@@ -1031,7 +1032,7 @@ Design: (unnamed)
           |vpiName:var3
           |vpiFullName:work@dut.g_fill.var3
           |vpiActual:
-          \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+          \_Net: (work@dut.var3), line:1:12, endln:1:16
           |vpiIndex:
           \_RefObj: (work@dut.g_fill.i), line:9:19, endln:9:20
             |vpiParent:
@@ -1039,23 +1040,27 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@dut.g_fill.i
             |vpiActual:
-            \_LogicNet: (work@dut.g_fill.i), line:9:19, endln:9:20
+            \_Net: (work@dut.g_fill.i), line:9:19, endln:9:20
     |vpiImportTypespec:
     \_Variable: (work@dut.i), line:8:15, endln:8:16
     |vpiImportTypespec:
-    \_LogicNet: (work@dut.i), line:8:20, endln:8:21
+    \_Net: (work@dut.i), line:8:20, endln:8:21
       |vpiParent:
       \_GenFor: (work@dut), line:8:3, endln:10:6
       |vpiName:i
       |vpiFullName:work@dut.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@dut.i), line:8:25, endln:8:26
+    \_Net: (work@dut.i), line:8:25, endln:8:26
       |vpiParent:
       \_GenFor: (work@dut), line:8:3, endln:10:6
       |vpiName:i
       |vpiFullName:work@dut.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@dut.i), line:8:20, endln:8:21
+    |vpiNet:
+    \_Net: (work@dut.i), line:8:25, endln:8:26
     |vpiForInitStmt:
     \_Assignment: , line:8:8, endln:8:18
       |vpiParent:
@@ -1082,7 +1087,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_LogicNet: (work@dut.i), line:8:20, endln:8:21
+        \_Net: (work@dut.i), line:8:20, endln:8:21
       |vpiOperand:
       \_Constant: , line:8:22, endln:8:23
         |vpiParent:
@@ -1103,7 +1108,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_LogicNet: (work@dut.i), line:8:25, endln:8:26
+        \_Net: (work@dut.i), line:8:25, endln:8:26
     |vpiStmt:
     \_Begin: (work@dut.g_fill), line:8:30, endln:10:6
   |vpiTypedef:
@@ -1231,13 +1236,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:6:10, endln:6:26
   |vpiImportTypespec:
-  \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+  \_Net: (work@dut.var3), line:1:12, endln:1:16
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.var3), line:6:10, endln:6:17
       |vpiParent:
-      \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+      \_Net: (work@dut.var3), line:1:12, endln:1:16
       |vpiFullName:work@dut.var3
       |vpiActual:
       \_ArrayTypespec: , line:6:10, endln:6:26
@@ -1246,8 +1251,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:6:23, endln:6:26
   |vpiDefName:work@dut
-  |vpiArrayNet:
-  \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+  |vpiNet:
+  \_Net: (work@dut.var3), line:1:12, endln:1:16
   |vpiPort:
   \_Port: (var3), line:1:12, endln:1:16
     |vpiParent:

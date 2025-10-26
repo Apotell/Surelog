@@ -94,13 +94,12 @@ Function                                               9
 IODecl                                                11
 Identifier                                            29
 IntTypespec                                            9
-LogicNet                                               2
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    3
 Operation                                              1
 Package                                                1
-PackedArrayNet                                         1
 PackedArrayTypespec                                    2
 Port                                                   3
 Range                                                  6
@@ -109,6 +108,7 @@ RefTypespec                                           19
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -977,26 +977,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:9, endln:2:15
   |vpiImportTypespec:
-  \_LogicNet: (work@add.a), line:2:16, endln:2:17
+  \_Net: (work@add.a), line:2:16, endln:2:17
     |vpiParent:
     \_Module: work@add (work@add), file:${SURELOG_DIR}/tests/ImplicitPort/dut.sv, line:1:1, endln:6:10
     |vpiTypespec:
     \_RefTypespec: (work@add.a), line:2:9, endln:2:15
       |vpiParent:
-      \_LogicNet: (work@add.a), line:2:16, endln:2:17
+      \_Net: (work@add.a), line:2:16, endln:2:17
       |vpiFullName:work@add.a
       |vpiActual:
       \_LogicTypespec: , line:2:9, endln:2:15
     |vpiName:a
     |vpiFullName:work@add.a
   |vpiImportTypespec:
-  \_LogicNet: (work@add.b), line:2:18, endln:2:19
+  \_Net: (work@add.b), line:2:18, endln:2:19
     |vpiParent:
     \_Module: work@add (work@add), file:${SURELOG_DIR}/tests/ImplicitPort/dut.sv, line:1:1, endln:6:10
     |vpiTypespec:
     \_RefTypespec: (work@add.b), line:2:9, endln:2:15
       |vpiParent:
-      \_LogicNet: (work@add.b), line:2:18, endln:2:19
+      \_Net: (work@add.b), line:2:18, endln:2:19
       |vpiFullName:work@add.b
       |vpiActual:
       \_LogicTypespec: , line:2:9, endln:2:15
@@ -1005,13 +1005,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:3:10, endln:3:23
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@add.sum), line:3:24, endln:3:27
+  \_Net: (work@add.sum), line:3:24, endln:3:27
     |vpiParent:
     \_Module: work@add (work@add), file:${SURELOG_DIR}/tests/ImplicitPort/dut.sv, line:1:1, endln:6:10
     |vpiTypespec:
     \_RefTypespec: (work@add.sum), line:3:10, endln:3:23
       |vpiParent:
-      \_PackedArrayNet: (work@add.sum), line:3:24, endln:3:27
+      \_Net: (work@add.sum), line:3:24, endln:3:27
       |vpiFullName:work@add.sum
       |vpiActual:
       \_PackedArrayTypespec: , line:3:10, endln:3:23
@@ -1020,11 +1020,11 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiDefName:work@add
   |vpiNet:
-  \_LogicNet: (work@add.a), line:2:16, endln:2:17
+  \_Net: (work@add.a), line:2:16, endln:2:17
   |vpiNet:
-  \_LogicNet: (work@add.b), line:2:18, endln:2:19
+  \_Net: (work@add.b), line:2:18, endln:2:19
   |vpiNet:
-  \_PackedArrayNet: (work@add.sum), line:3:24, endln:3:27
+  \_Net: (work@add.sum), line:3:24, endln:3:27
   |vpiPort:
   \_Port: (a), line:2:16, endln:2:17
     |vpiParent:
@@ -1080,7 +1080,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@add.a
         |vpiActual:
-        \_LogicNet: (work@add.a), line:2:16, endln:2:17
+        \_Net: (work@add.a), line:2:16, endln:2:17
       |vpiOperand:
       \_RefObj: (work@add.b), line:5:18, endln:5:19
         |vpiParent:
@@ -1088,7 +1088,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@add.b
         |vpiActual:
-        \_LogicNet: (work@add.b), line:2:18, endln:2:19
+        \_Net: (work@add.b), line:2:18, endln:2:19
     |vpiLhs:
     \_RefObj: (work@add.sum), line:5:8, endln:5:11
       |vpiParent:
@@ -1096,7 +1096,7 @@ Design: (unnamed)
       |vpiName:sum
       |vpiFullName:work@add.sum
       |vpiActual:
-      \_PackedArrayNet: (work@add.sum), line:3:24, endln:3:27
+      \_Net: (work@add.sum), line:3:24, endln:3:27
 |vpiTypedef:
 \_ModuleTypespec: (add)
   |vpiParent:

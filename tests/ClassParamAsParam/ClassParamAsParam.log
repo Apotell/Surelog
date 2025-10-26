@@ -18,12 +18,13 @@ IntTypespec                                            4
 MethodFuncCall                                         1
 Module                                                 1
 ModuleTypespec                                         1
-RefObj                                                 1
+Net                                                    1
 RefTypespec                                            8
 SourceFile                                             1
 TypeParameter                                          4
 TypedefTypespec                                        1
-Variable                                               2
+UnsupportedTypespec                                    3
+Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -203,20 +204,13 @@ Design: (unnamed)
       \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
       |vpiName:rsrc_t
     |vpiTypedefAlias:
-    \_RefTypespec: (work@resource_db::rsrc_t::work@resource), line:9:10, endln:9:18
+    \_RefTypespec: (work@resource_db::rsrc_t::resource), line:9:10, endln:9:18
       |vpiParent:
       \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
-      |vpiName:work@resource
-      |vpiFullName:work@resource_db::rsrc_t::work@resource
+      |vpiName:resource
+      |vpiFullName:work@resource_db::rsrc_t::resource
       |vpiActual:
-      \_ClassTypespec: (work@resource), line:9:10, endln:9:18
-  |vpiTypedef:
-  \_ClassTypespec: (work@resource), line:9:10, endln:9:18
-    |vpiParent:
-    \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
-    |vpiName:work@resource
-    |vpiClassDefn:
-    \_ClassDefn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
+      \_ClassTypespec: (work@resource)
   |vpiImportTypespec:
   \_IntTypespec: , line:7:28, endln:7:31
   |vpiImportTypespec:
@@ -224,13 +218,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
   |vpiImportTypespec:
-  \_ClassTypespec: (work@resource), line:9:10, endln:9:18
-  |vpiImportTypespec:
   \_Variable: (work@resource_db::rsrc), line:10:9, endln:10:13
   |vpiDerivedClasses:
   \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
-  |vpiClassTypespec:
-  \_ClassTypespec: (work@resource), line:9:10, endln:9:18
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
   |vpiParent:
@@ -240,43 +230,32 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
     |vpiName:work@top
-  |vpiVariable:
-  \_Variable: (work@top.misc2), line:18:32, endln:18:37
+  |vpiImportTypespec:
+  \_Net: (work@top.misc2), line:18:32, endln:18:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.misc2.work@config_db), line:18:3, endln:18:31
+    \_RefTypespec: (work@top.misc2.config_db), line:18:3, endln:18:31
       |vpiParent:
-      \_Variable: (work@top.misc2), line:18:32, endln:18:37
-      |vpiName:work@config_db
-      |vpiFullName:work@top.misc2.work@config_db
+      \_Net: (work@top.misc2), line:18:32, endln:18:37
+      |vpiName:config_db
+      |vpiFullName:work@top.misc2.config_db
       |vpiActual:
-      \_ClassTypespec: (work@config_db), line:18:3, endln:18:12
+      \_ClassTypespec: (work@config_db)
     |vpiName:misc2
     |vpiFullName:work@top.misc2
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_MethodFuncCall: (new), line:18:40, endln:18:43
-      |vpiParent:
-      \_Variable: (work@top.misc2), line:18:32, endln:18:37
-      |vpiName:
-      \_Identifier: (new)
-        |vpiParent:
-        \_MethodFuncCall: (new), line:18:40, endln:18:43
-        |vpiName:new
-  |vpiTypedef:
-  \_ClassTypespec: (work@config_db), line:18:3, endln:18:12
+  |vpiDefName:work@top
+  |vpiNet:
+  \_Net: (work@top.misc2), line:18:32, endln:18:37
+  |vpiSysTaskCall:
+  \_MethodFuncCall: (new), line:18:40, endln:18:43
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
-    |vpiName:work@config_db
-    |vpiClassDefn:
-    \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
-  |vpiImportTypespec:
-  \_ClassTypespec: (work@config_db), line:18:3, endln:18:12
-  |vpiImportTypespec:
-  \_Variable: (work@top.misc2), line:18:32, endln:18:37
-  |vpiDefName:work@top
+    |vpiName:
+    \_Identifier: (new)
+      |vpiParent:
+      \_MethodFuncCall: (new), line:18:40, endln:18:43
+      |vpiName:new
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:
@@ -285,12 +264,26 @@ Design: (unnamed)
   |vpiModule:
   \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
 |vpiTypedef:
+\_ClassTypespec: (work@config_db)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@config_db
+  |vpiClassDefn:
+  \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+|vpiTypedef:
 \_ClassTypespec: (work@object)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@object
   |vpiClassDefn:
   \_ClassDefn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
+|vpiTypedef:
+\_ClassTypespec: (work@resource)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@resource
+  |vpiClassDefn:
+  \_ClassDefn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
 |vpiTypedef:
 \_ClassTypespec: (work@resource_db)
   |vpiParent:

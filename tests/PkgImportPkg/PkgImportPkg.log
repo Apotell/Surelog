@@ -83,6 +83,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:7:1: No timescale set for "otp_ctrl_part_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:11:1: No timescale set for "otp_ctrl".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:1:1: Compile package "otp_ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:7:1: Compile package "otp_ctrl_part_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:11:1: Compile module "work@otp_ctrl".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -90,24 +92,23 @@ Constant                                               4
 Design                                                 1
 Identifier                                             6
 ImportTypespec                                         2
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                2
 Port                                                   2
 Range                                                  1
 RefTypespec                                            6
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:30, type:RefTypespec, name:otp_ast_rsp_t.
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:35, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:31, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:37, type:RefTypespec, name:otp_ast_rsp_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -260,15 +261,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:12:10, endln:12:25
   |vpiImportTypespec:
-  \_StructNet: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
+  \_Net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
     |vpiTypespec:
-    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t), line:14:10, endln:14:23
+    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t), line:14:10, endln:14:23
       |vpiParent:
-      \_StructNet: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiName:otp_ctrl_pkg::otp_ast_req_t
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t
+      \_Net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
+      |vpiName:otp_ast_req_t
+      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t
       |vpiActual:
       \_TypedefTypespec: (otp_ctrl_pkg::otp_ast_req_t), line:4:5, endln:4:18
     |vpiName:otp_ast_pwr_seq_o
@@ -276,13 +277,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiImportTypespec:
-  \_LogicNet: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
+  \_Net: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
     |vpiParent:
     \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
     |vpiTypespec:
     \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_h_i.otp_ast_rsp_t), line:15:10, endln:15:23
       |vpiParent:
-      \_LogicNet: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
+      \_Net: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
       |vpiName:otp_ast_rsp_t
       |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_h_i.otp_ast_rsp_t
       |vpiActual:
@@ -293,9 +294,9 @@ Design: (unnamed)
   \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
   |vpiDefName:work@otp_ctrl
   |vpiNet:
-  \_StructNet: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
+  \_Net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
   |vpiNet:
-  \_LogicNet: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
+  \_Net: (work@otp_ctrl.otp_ast_pwr_seq_h_i), line:15:24, endln:15:43
   |vpiPort:
   \_Port: (otp_ast_pwr_seq_o), line:14:24, endln:14:41
     |vpiParent:
@@ -303,11 +304,11 @@ Design: (unnamed)
     |vpiName:otp_ast_pwr_seq_o
     |vpiDirection:2
     |vpiTypespec:
-    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t), line:14:10, endln:14:23
+    \_RefTypespec: (work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t), line:14:10, endln:14:23
       |vpiParent:
       \_Port: (otp_ast_pwr_seq_o), line:14:24, endln:14:41
-      |vpiName:otp_ctrl_pkg::otp_ast_req_t
-      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ctrl_pkg::otp_ast_req_t
+      |vpiName:otp_ast_req_t
+      |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t
       |vpiActual:
       \_TypedefTypespec: (otp_ctrl_pkg::otp_ast_req_t), line:4:5, endln:4:18
   |vpiPort:

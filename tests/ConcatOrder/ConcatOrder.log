@@ -330,6 +330,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:35:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:39:2: No timescale set for "testbench".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:1:1: Compile package "bp_common_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:35:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:39:2: Compile module "work@testbench".
 [INF:UH0706] Creating UHDM Model...
@@ -364,9 +365,10 @@ SysFuncCall                                            3
 TaggedPattern                                          6
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatOrder/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:51:6: Null Actual: id:160, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatOrder/dut.sv:51:6: Null Actual: id:166, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -711,10 +713,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
+    \_RefTypespec: (bp_common_pkg::bp_proc_param_s), line:13:11, endln:13:26
       |vpiParent:
       \_PackedArrayTypespec: , line:13:11, endln:13:41
-      |vpiName:bp_common_pkg::bp_proc_param_s
+      |vpiName:bp_proc_param_s
+      |vpiFullName:bp_common_pkg::bp_proc_param_s
       |vpiActual:
       \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
   |vpiTypedef:

@@ -189,7 +189,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 Assignment                                             2
 Begin                                                  1
@@ -203,6 +202,7 @@ Identifier                                             4
 IfStmt                                                 1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              3
 PackedArrayTypespec                                    1
 PartSelect                                             1
@@ -248,28 +248,28 @@ Design: (unnamed)
       \_Function: (work@top.dasm), line:5:1, endln:8:12
       |vpiFullName:work@top.dasm
       |vpiImportTypespec:
-      \_LogicNet: (work@top.dasm.opcode), line:6:13, endln:6:24
+      \_Net: (work@top.dasm.opcode), line:6:13, endln:6:24
         |vpiParent:
         \_Begin: (work@top.dasm)
         |vpiName:opcode
         |vpiFullName:work@top.dasm.opcode
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.dasm.pc), line:6:52, endln:6:54
+      \_Net: (work@top.dasm.pc), line:6:52, endln:6:54
         |vpiParent:
         \_Begin: (work@top.dasm)
         |vpiName:pc
         |vpiFullName:work@top.dasm.pc
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.dasm.regn), line:7:8, endln:7:12
+      \_Net: (work@top.dasm.regn), line:7:8, endln:7:12
         |vpiParent:
         \_Begin: (work@top.dasm)
         |vpiName:regn
         |vpiFullName:work@top.dasm.regn
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.dasm.regv), line:7:31, endln:7:35
+      \_Net: (work@top.dasm.regv), line:7:31, endln:7:35
         |vpiParent:
         \_Begin: (work@top.dasm)
         |vpiName:regv
@@ -299,7 +299,7 @@ Design: (unnamed)
               |vpiFullName:work@top.dasm.opcode
               |vpiDefName:opcode
               |vpiActual:
-              \_LogicNet: (work@top.dasm.opcode), line:6:13, endln:6:24
+              \_Net: (work@top.dasm.opcode), line:6:13, endln:6:24
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Constant: , line:6:20, endln:6:21
@@ -336,7 +336,7 @@ Design: (unnamed)
               |vpiName:opcode
               |vpiFullName:work@top.dasm.opcode
               |vpiActual:
-              \_LogicNet: (work@top.dasm.opcode), line:6:13, endln:6:24
+              \_Net: (work@top.dasm.opcode), line:6:13, endln:6:24
             |vpiArgument:
             \_RefObj: (work@top.dasm.pc), line:6:52, endln:6:54
               |vpiParent:
@@ -344,7 +344,7 @@ Design: (unnamed)
               |vpiName:pc
               |vpiFullName:work@top.dasm.pc
               |vpiActual:
-              \_LogicNet: (work@top.dasm.pc), line:6:52, endln:6:54
+              \_Net: (work@top.dasm.pc), line:6:52, endln:6:54
             |vpiArgument:
             \_RefObj: (work@top.dasm.tid), line:6:56, endln:6:59
               |vpiParent:
@@ -369,7 +369,7 @@ Design: (unnamed)
               |vpiName:opcode
               |vpiFullName:work@top.dasm.opcode
               |vpiActual:
-              \_LogicNet: (work@top.dasm.opcode), line:6:13, endln:6:24
+              \_Net: (work@top.dasm.opcode), line:6:13, endln:6:24
             |vpiArgument:
             \_RefObj: (work@top.dasm.pc), line:6:78, endln:6:80
               |vpiParent:
@@ -377,7 +377,7 @@ Design: (unnamed)
               |vpiName:pc
               |vpiFullName:work@top.dasm.pc
               |vpiActual:
-              \_LogicNet: (work@top.dasm.pc), line:6:52, endln:6:54
+              \_Net: (work@top.dasm.pc), line:6:52, endln:6:54
             |vpiArgument:
             \_RefObj: (work@top.dasm.tid), line:6:82, endln:6:85
               |vpiParent:
@@ -410,7 +410,7 @@ Design: (unnamed)
           |vpiName:regn
           |vpiFullName:work@top.dasm.regn
           |vpiActual:
-          \_LogicNet: (work@top.dasm.regn), line:7:8, endln:7:12
+          \_Net: (work@top.dasm.regn), line:7:8, endln:7:12
         |vpiStmt:
         \_Assignment: , line:7:14, endln:7:35
           |vpiParent:
@@ -424,7 +424,7 @@ Design: (unnamed)
             |vpiName:regv
             |vpiFullName:work@top.dasm.regv
             |vpiActual:
-            \_LogicNet: (work@top.dasm.regv), line:7:31, endln:7:35
+            \_Net: (work@top.dasm.regv), line:7:31, endln:7:35
           |vpiLhs:
           \_VarSelect: (work@top.dasm.gpr), line:7:14, endln:7:28
             |vpiParent:
@@ -432,7 +432,7 @@ Design: (unnamed)
             |vpiName:gpr
             |vpiFullName:work@top.dasm.gpr
             |vpiActual:
-            \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+            \_Net: (work@top.gpr), line:3:18, endln:3:21
             |vpiIndex:
             \_RefObj: (work@top.dasm.gpr.tid), line:7:18, endln:7:21
               |vpiParent:
@@ -448,7 +448,7 @@ Design: (unnamed)
               |vpiName:regn
               |vpiFullName:work@top.dasm.gpr.regn
               |vpiActual:
-              \_LogicNet: (work@top.dasm.regn), line:7:8, endln:7:12
+              \_Net: (work@top.dasm.regn), line:7:8, endln:7:12
     |vpiTypedef:
     \_StringTypespec: , line:5:10, endln:5:16
       |vpiParent:
@@ -572,13 +572,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:1, endln:3:24
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+  \_Net: (work@top.gpr), line:3:18, endln:3:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@top.gpr), line:3:1, endln:3:17
       |vpiParent:
-      \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+      \_Net: (work@top.gpr), line:3:18, endln:3:21
       |vpiFullName:work@top.gpr
       |vpiActual:
       \_ArrayTypespec: , line:3:1, endln:3:24
@@ -587,8 +587,8 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.dasm), line:5:1, endln:8:12
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+  |vpiNet:
+  \_Net: (work@top.gpr), line:3:18, endln:3:21
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

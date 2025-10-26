@@ -661,6 +661,7 @@ n<> u<79> t<Top_level_rule> c<1> l<1:1> el<17:1>
         n<> u<75> t<ENDMODULE> p<76> l<16:1> el<16:10>
 AST_DEBUG_END
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/Kmac/sha3_pkg.sv:7:1: Compile package "sha3_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/Kmac/kmac.sv:1:1: Compile module "work@kmac".
 [INF:CP0303] ${SURELOG_DIR}/tests/Kmac/kmac_core.sv:1:1: Compile module "work@kmac_core".
 [INF:UH0706] Creating UHDM Model...
@@ -676,15 +677,14 @@ CaseStmt                                               1
 Constant                                              53
 Design                                                 1
 EnumConst                                              5
-EnumNet                                                2
 EnumTypespec                                           1
 Identifier                                            14
 ImportTypespec                                         7
 IntTypespec                                            6
-LogicNet                                               3
 LogicTypespec                                          2
 Module                                                 3
 ModuleTypespec                                         2
+Net                                                    5
 Operation                                             33
 Package                                                1
 ParamAssign                                            8
@@ -1225,19 +1225,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:5:14, endln:5:17
   |vpiImportTypespec:
-  \_LogicNet: (work@kmac.kmac_en_i), line:8:37, endln:8:46
+  \_Net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
     \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
     |vpiName:kmac_en_i
     |vpiFullName:work@kmac.kmac_en_i
   |vpiImportTypespec:
-  \_EnumNet: (work@kmac.strength_i), line:9:37, endln:9:47
+  \_Net: (work@kmac.strength_i), line:9:37, endln:9:47
     |vpiParent:
     \_Module: work@kmac (work@kmac), file:${SURELOG_DIR}/tests/Kmac/kmac.sv, line:1:1, endln:16:10
     |vpiTypespec:
     \_RefTypespec: (work@kmac.strength_i.sha3_pkg::keccak_strength_e), line:9:9, endln:9:36
       |vpiParent:
-      \_EnumNet: (work@kmac.strength_i), line:9:37, endln:9:47
+      \_Net: (work@kmac.strength_i), line:9:37, endln:9:47
       |vpiName:sha3_pkg::keccak_strength_e
       |vpiFullName:work@kmac.strength_i.sha3_pkg::keccak_strength_e
       |vpiActual:
@@ -1246,9 +1246,9 @@ Design: (unnamed)
     |vpiFullName:work@kmac.strength_i
   |vpiDefName:work@kmac
   |vpiNet:
-  \_LogicNet: (work@kmac.kmac_en_i), line:8:37, endln:8:46
+  \_Net: (work@kmac.kmac_en_i), line:8:37, endln:8:46
   |vpiNet:
-  \_EnumNet: (work@kmac.strength_i), line:9:37, endln:9:47
+  \_Net: (work@kmac.strength_i), line:9:37, endln:9:47
   |vpiPort:
   \_Port: (kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
@@ -1548,19 +1548,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:5:14, endln:5:17
   |vpiImportTypespec:
-  \_LogicNet: (work@kmac_core.kmac_en_i), line:8:37, endln:8:46
+  \_Net: (work@kmac_core.kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
     |vpiName:kmac_en_i
     |vpiFullName:work@kmac_core.kmac_en_i
   |vpiImportTypespec:
-  \_EnumNet: (work@kmac_core.strength_i), line:9:37, endln:9:47
+  \_Net: (work@kmac_core.strength_i), line:9:37, endln:9:47
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@kmac_core.strength_i.sha3_pkg::keccak_strength_e), line:9:9, endln:9:36
       |vpiParent:
-      \_EnumNet: (work@kmac_core.strength_i), line:9:37, endln:9:47
+      \_Net: (work@kmac_core.strength_i), line:9:37, endln:9:47
       |vpiName:sha3_pkg::keccak_strength_e
       |vpiFullName:work@kmac_core.strength_i.sha3_pkg::keccak_strength_e
       |vpiActual:
@@ -1570,13 +1570,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:23:2, endln:23:7
   |vpiImportTypespec:
-  \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+  \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
     |vpiParent:
     \_Module: work@kmac_core (work@kmac_core), file:${SURELOG_DIR}/tests/Kmac/kmac_core.sv, line:1:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@kmac_core.block_addr_limit), line:23:2, endln:23:36
       |vpiParent:
-      \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+      \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
       |vpiFullName:work@kmac_core.block_addr_limit
       |vpiActual:
       \_LogicTypespec: , line:23:2, endln:23:7
@@ -1585,11 +1585,11 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@kmac_core
   |vpiNet:
-  \_LogicNet: (work@kmac_core.kmac_en_i), line:8:37, endln:8:46
+  \_Net: (work@kmac_core.kmac_en_i), line:8:37, endln:8:46
   |vpiNet:
-  \_EnumNet: (work@kmac_core.strength_i), line:9:37, endln:9:47
+  \_Net: (work@kmac_core.strength_i), line:9:37, endln:9:47
   |vpiNet:
-  \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+  \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
   |vpiPort:
   \_Port: (kmac_en_i), line:8:37, endln:8:46
     |vpiParent:
@@ -1632,7 +1632,7 @@ Design: (unnamed)
           |vpiName:strength_i
           |vpiFullName:work@kmac_core.strength_i
           |vpiActual:
-          \_EnumNet: (work@kmac_core.strength_i), line:9:37, endln:9:47
+          \_Net: (work@kmac_core.strength_i), line:9:37, endln:9:47
         |vpiCaseItem:
         \_CaseItem: , line:26:7, endln:26:64
           |vpiParent:
@@ -1679,7 +1679,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:27:7, endln:27:64
           |vpiParent:
@@ -1726,7 +1726,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:28:7, endln:28:64
           |vpiParent:
@@ -1773,7 +1773,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:29:7, endln:29:64
           |vpiParent:
@@ -1820,7 +1820,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:30:7, endln:30:64
           |vpiParent:
@@ -1867,7 +1867,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
         |vpiCaseItem:
         \_CaseItem: , line:32:7, endln:32:38
           |vpiParent:
@@ -1893,7 +1893,7 @@ Design: (unnamed)
               |vpiName:block_addr_limit
               |vpiFullName:work@kmac_core.block_addr_limit
               |vpiActual:
-              \_LogicNet: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
+              \_Net: (work@kmac_core.block_addr_limit), line:23:37, endln:23:53
     |vpiAlwaysType:2
 |vpiTypedef:
 \_ModuleTypespec: (kmac)

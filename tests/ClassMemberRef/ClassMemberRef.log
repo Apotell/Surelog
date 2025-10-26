@@ -152,6 +152,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:22:1: Compile module "work@top".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:3:1: Compile class "pkg::m_uvm_printer_knobs".
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:9:1: Compile class "pkg::uvm_printer".
@@ -170,10 +171,10 @@ HierPath                                               2
 IODecl                                                 2
 Identifier                                             9
 Initial                                                1
-LogicNet                                               1
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                1
 RefObj                                                 6
 RefTypespec                                            7
@@ -461,13 +462,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
   |vpiImportTypespec:
-  \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+  \_Net: (work@top.printer), line:24:18, endln:24:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (work@top.printer.pkg::uvm_printer), line:24:1, endln:24:17
       |vpiParent:
-      \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+      \_Net: (work@top.printer), line:24:18, endln:24:25
       |vpiName:pkg::uvm_printer
       |vpiFullName:work@top.printer.pkg::uvm_printer
       |vpiActual:
@@ -476,7 +477,7 @@ Design: (unnamed)
     |vpiFullName:work@top.printer
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+  \_Net: (work@top.printer), line:24:18, endln:24:25
   |vpiProcess:
   \_Initial: , line:25:1, endln:28:4
     |vpiParent:
@@ -487,7 +488,7 @@ Design: (unnamed)
       \_Initial: , line:25:1, endln:28:4
       |vpiFullName:work@top
       |vpiImportTypespec:
-      \_LogicNet: (work@top.en), line:27:27, endln:27:29
+      \_Net: (work@top.en), line:27:27, endln:27:29
         |vpiParent:
         \_Begin: (work@top), line:25:9, endln:28:4
         |vpiName:en
@@ -515,7 +516,7 @@ Design: (unnamed)
           |vpiName:printer
           |vpiFullName:work@top.printer
           |vpiActual:
-          \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+          \_Net: (work@top.printer), line:24:18, endln:24:25
       |vpiStmt:
       \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
         |vpiParent:
@@ -527,7 +528,7 @@ Design: (unnamed)
           |vpiName:en
           |vpiFullName:work@top.en
           |vpiActual:
-          \_LogicNet: (work@top.en), line:27:27, endln:27:29
+          \_Net: (work@top.en), line:27:27, endln:27:29
         |vpiName:
         \_Identifier: (set_name_enabled)
           |vpiParent:
@@ -540,7 +541,7 @@ Design: (unnamed)
           |vpiName:printer
           |vpiFullName:work@top.printer
           |vpiActual:
-          \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+          \_Net: (work@top.printer), line:24:18, endln:24:25
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

@@ -39,10 +39,10 @@ Gate                                                   6
 IODecl                                                11
 Identifier                                            35
 IntTypespec                                            9
-LogicNet                                              20
 LogicTypespec                                         11
 Module                                                 7
 ModuleTypespec                                        10
+Net                                                   20
 Package                                                1
 ParamAssign                                            2
 Parameter                                              2
@@ -56,15 +56,15 @@ RefTypespec                                           26
 SourceFile                                             2
 Task                                                   9
 TypedefTypespec                                        1
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitElabExternNested/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:7:1: Unsupported Typespec: id:30, type:RefTypespec, name:type.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:42, type:RefTypespec, name:type.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:273, type:RefTypespec, name:type.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:16:5: Null Actual: id:44, type:RefModule, name:i1.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:27:5: Null Actual: id:46, type:RefModule, name:i2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:35:5: Null Actual: id:48, type:RefModule, name:i3.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:43, type:RefTypespec, name:TP.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitElabExternNested/middle.v:15:2: Unsupported Typespec: id:276, type:RefTypespec, name:TP.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:16:5: Null Actual: id:45, type:RefModule, name:i1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:27:5: Null Actual: id:47, type:RefModule, name:i2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitElabExternNested/top.v:35:5: Null Actual: id:49, type:RefModule, name:i3.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -932,7 +932,7 @@ Design: (unnamed)
       |vpiFullName:work@a.logic
       |vpiDefName:logic
       |vpiActual:
-      \_LogicNet: (work@a.logic), line:10:3, endln:10:6
+      \_Net: (work@a.logic), line:10:3, endln:10:6
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:10:3, endln:10:4
@@ -981,39 +981,53 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
+    |vpiParent:
+    \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:TP
+  |vpiTypedef:
+  \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
+    |vpiParent:
+    \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
+    |vpiName:TP
   |vpiImportTypespec:
   \_UnsupportedTypespec: (type), line:7:1, endln:7:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:2, endln:13:10
   |vpiImportTypespec:
-  \_LogicNet: (work@a.a), line:13:11, endln:13:12
+  \_Net: (work@a.a), line:13:11, endln:13:12
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiTypespec:
     \_RefTypespec: (work@a.a), line:13:2, endln:13:10
       |vpiParent:
-      \_LogicNet: (work@a.a), line:13:11, endln:13:12
+      \_Net: (work@a.a), line:13:11, endln:13:12
       |vpiFullName:work@a.a
       |vpiActual:
       \_LogicTypespec: , line:13:2, endln:13:10
     |vpiName:a
     |vpiFullName:work@a.a
   |vpiImportTypespec:
-  \_LogicNet: (work@a.b), line:15:5, endln:15:6
+  \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
+  |vpiImportTypespec:
+  \_Net: (work@a.b), line:15:5, endln:15:6
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiTypespec:
-    \_RefTypespec: (work@a.b.type), line:15:2, endln:15:4
+    \_RefTypespec: (work@a.b.TP), line:15:2, endln:15:4
       |vpiParent:
-      \_LogicNet: (work@a.b), line:15:5, endln:15:6
-      |vpiName:type
-      |vpiFullName:work@a.b.type
+      \_Net: (work@a.b), line:15:5, endln:15:6
+      |vpiName:TP
+      |vpiFullName:work@a.b.TP
       |vpiActual:
-      \_UnsupportedTypespec: (type), line:7:1, endln:7:5
+      \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
     |vpiName:b
     |vpiFullName:work@a.b
   |vpiImportTypespec:
-  \_LogicNet: (work@a.logic), line:10:3, endln:10:6
+  \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
+  |vpiImportTypespec:
+  \_Net: (work@a.logic), line:10:3, endln:10:6
     |vpiParent:
     \_Module: work@a (work@a), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:3:8, endln:15:8
     |vpiName:logic
@@ -1021,11 +1035,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@a
   |vpiNet:
-  \_LogicNet: (work@a.a), line:13:11, endln:13:12
+  \_Net: (work@a.a), line:13:11, endln:13:12
   |vpiNet:
-  \_LogicNet: (work@a.b), line:15:5, endln:15:6
+  \_Net: (work@a.b), line:15:5, endln:15:6
   |vpiNet:
-  \_LogicNet: (work@a.logic), line:10:3, endln:10:6
+  \_Net: (work@a.logic), line:10:3, endln:10:6
   |vpiPort:
   \_Port: (a), line:13:11, endln:13:12
     |vpiParent:
@@ -1046,13 +1060,13 @@ Design: (unnamed)
     |vpiName:b
     |vpiDirection:2
     |vpiTypespec:
-    \_RefTypespec: (work@a.b.type), line:15:2, endln:15:4
+    \_RefTypespec: (work@a.b.TP), line:15:2, endln:15:4
       |vpiParent:
       \_Port: (b), line:15:5, endln:15:6
-      |vpiName:type
-      |vpiFullName:work@a.b.type
+      |vpiName:TP
+      |vpiFullName:work@a.b.TP
       |vpiActual:
-      \_UnsupportedTypespec: (type), line:7:1, endln:7:5
+      \_UnsupportedTypespec: (TP), line:15:2, endln:15:4
 |vpiAllModules:
 \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
   |vpiParent:
@@ -1092,7 +1106,7 @@ Design: (unnamed)
           |vpiName:nq1
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.nq1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+          \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
       |vpiPrimTerm:
       \_PrimTerm: , line:12:12, endln:12:13
         |vpiParent:
@@ -1106,7 +1120,7 @@ Design: (unnamed)
           |vpiName:d
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.d
           |vpiActual:
-          \_LogicNet: (work@dff_nested.d), line:4:2, endln:4:3
+          \_Net: (work@dff_nested.d), line:4:2, endln:4:3
       |vpiPrimTerm:
       \_PrimTerm: , line:12:15, endln:12:18
         |vpiParent:
@@ -1120,7 +1134,7 @@ Design: (unnamed)
           |vpiName:clr
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.clr
           |vpiActual:
-          \_LogicNet: (work@dff_nested.clr), line:4:13, endln:4:16
+          \_Net: (work@dff_nested.clr), line:4:13, endln:4:16
       |vpiPrimTerm:
       \_PrimTerm: , line:12:20, endln:12:22
         |vpiParent:
@@ -1134,7 +1148,7 @@ Design: (unnamed)
           |vpiName:q1
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1b.q1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+          \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
     |vpiPrimitive:
     \_Gate: work@nand (work@dff_nested.work@dff_nested::ff1.g1a), line:14:2, endln:14:24
       |vpiParent:
@@ -1155,7 +1169,7 @@ Design: (unnamed)
           |vpiName:q1
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.q1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+          \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
       |vpiPrimTerm:
       \_PrimTerm: , line:14:11, endln:14:13
         |vpiParent:
@@ -1169,7 +1183,7 @@ Design: (unnamed)
           |vpiName:ck
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.ck
           |vpiActual:
-          \_LogicNet: (work@dff_nested.ck), line:4:5, endln:4:7
+          \_Net: (work@dff_nested.ck), line:4:5, endln:4:7
       |vpiPrimTerm:
       \_PrimTerm: , line:14:15, endln:14:18
         |vpiParent:
@@ -1183,7 +1197,7 @@ Design: (unnamed)
           |vpiName:nq2
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.nq2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+          \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
       |vpiPrimTerm:
       \_PrimTerm: , line:14:20, endln:14:23
         |vpiParent:
@@ -1197,7 +1211,7 @@ Design: (unnamed)
           |vpiName:nq1
           |vpiFullName:work@dff_nested.work@dff_nested::ff1.g1a.nq1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+          \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
   |vpiInternalScope:
   \_Module: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
     |vpiParent:
@@ -1214,13 +1228,13 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:20:1, endln:20:5
     |vpiImportTypespec:
-    \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+    \_Net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
       |vpiParent:
       \_Module: work@dff_nested::ff2 (work@dff_nested::ff2), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:18:1, endln:26:10
       |vpiTypespec:
       \_RefTypespec: (work@dff_nested.work@dff_nested::ff2.q2), line:20:1, endln:20:5
         |vpiParent:
-        \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+        \_Net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
         |vpiFullName:work@dff_nested.work@dff_nested::ff2.q2
         |vpiActual:
         \_LogicTypespec: , line:20:1, endln:20:5
@@ -1229,7 +1243,7 @@ Design: (unnamed)
       |vpiNetType:1
     |vpiDefName:work@dff_nested::ff2
     |vpiNet:
-    \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+    \_Net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
     |vpiPrimitive:
     \_Gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2b), line:23:2, endln:23:24
       |vpiParent:
@@ -1250,7 +1264,7 @@ Design: (unnamed)
           |vpiName:nq2
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.nq2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+          \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
       |vpiPrimTerm:
       \_PrimTerm: , line:23:12, endln:23:14
         |vpiParent:
@@ -1264,7 +1278,7 @@ Design: (unnamed)
           |vpiName:ck
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.ck
           |vpiActual:
-          \_LogicNet: (work@dff_nested.ck), line:4:5, endln:4:7
+          \_Net: (work@dff_nested.ck), line:4:5, endln:4:7
       |vpiPrimTerm:
       \_PrimTerm: , line:23:16, endln:23:19
         |vpiParent:
@@ -1278,7 +1292,7 @@ Design: (unnamed)
           |vpiName:clr
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.clr
           |vpiActual:
-          \_LogicNet: (work@dff_nested.clr), line:4:13, endln:4:16
+          \_Net: (work@dff_nested.clr), line:4:13, endln:4:16
       |vpiPrimTerm:
       \_PrimTerm: , line:23:21, endln:23:23
         |vpiParent:
@@ -1292,7 +1306,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2b.q2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+          \_Net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
     |vpiPrimitive:
     \_Gate: work@nand (work@dff_nested.work@dff_nested::ff2.g2a), line:25:2, endln:25:24
       |vpiParent:
@@ -1313,7 +1327,7 @@ Design: (unnamed)
           |vpiName:q2
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.q2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
+          \_Net: (work@dff_nested.work@dff_nested::ff2.q2), line:21:2, endln:21:4
       |vpiPrimTerm:
       \_PrimTerm: , line:25:11, endln:25:14
         |vpiParent:
@@ -1327,7 +1341,7 @@ Design: (unnamed)
           |vpiName:nq1
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.nq1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+          \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
       |vpiPrimTerm:
       \_PrimTerm: , line:25:16, endln:25:18
         |vpiParent:
@@ -1341,7 +1355,7 @@ Design: (unnamed)
           |vpiName:pr
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.pr
           |vpiActual:
-          \_LogicNet: (work@dff_nested.pr), line:4:9, endln:4:11
+          \_Net: (work@dff_nested.pr), line:4:9, endln:4:11
       |vpiPrimTerm:
       \_PrimTerm: , line:25:20, endln:25:23
         |vpiParent:
@@ -1355,7 +1369,7 @@ Design: (unnamed)
           |vpiName:nq2
           |vpiFullName:work@dff_nested.work@dff_nested::ff2.g2a.nq2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+          \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
   |vpiInternalScope:
   \_Module: work@dff_nested::ff3 (work@dff_nested::ff3), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:28:1, endln:34:10
     |vpiParent:
@@ -1386,7 +1400,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.q
           |vpiActual:
-          \_LogicNet: (work@dff_nested.q), line:6:2, endln:6:3
+          \_Net: (work@dff_nested.q), line:6:2, endln:6:3
       |vpiPrimTerm:
       \_PrimTerm: , line:31:10, endln:31:13
         |vpiParent:
@@ -1400,7 +1414,7 @@ Design: (unnamed)
           |vpiName:nq2
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.nq2
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+          \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
       |vpiPrimTerm:
       \_PrimTerm: , line:31:15, endln:31:18
         |vpiParent:
@@ -1414,7 +1428,7 @@ Design: (unnamed)
           |vpiName:clr
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.clr
           |vpiActual:
-          \_LogicNet: (work@dff_nested.clr), line:4:13, endln:4:16
+          \_Net: (work@dff_nested.clr), line:4:13, endln:4:16
       |vpiPrimTerm:
       \_PrimTerm: , line:31:20, endln:31:22
         |vpiParent:
@@ -1428,7 +1442,7 @@ Design: (unnamed)
           |vpiName:nq
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3a.nq
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq), line:6:5, endln:6:7
+          \_Net: (work@dff_nested.nq), line:6:5, endln:6:7
     |vpiPrimitive:
     \_Gate: work@nand (work@dff_nested.work@dff_nested::ff3.g3b), line:33:2, endln:33:21
       |vpiParent:
@@ -1449,7 +1463,7 @@ Design: (unnamed)
           |vpiName:nq
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.nq
           |vpiActual:
-          \_LogicNet: (work@dff_nested.nq), line:6:5, endln:6:7
+          \_Net: (work@dff_nested.nq), line:6:5, endln:6:7
       |vpiPrimTerm:
       \_PrimTerm: , line:33:11, endln:33:13
         |vpiParent:
@@ -1463,7 +1477,7 @@ Design: (unnamed)
           |vpiName:q1
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.q1
           |vpiActual:
-          \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+          \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
       |vpiPrimTerm:
       \_PrimTerm: , line:33:15, endln:33:17
         |vpiParent:
@@ -1477,7 +1491,7 @@ Design: (unnamed)
           |vpiName:pr
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.pr
           |vpiActual:
-          \_LogicNet: (work@dff_nested.pr), line:4:9, endln:4:11
+          \_Net: (work@dff_nested.pr), line:4:9, endln:4:11
       |vpiPrimTerm:
       \_PrimTerm: , line:33:19, endln:33:20
         |vpiParent:
@@ -1491,7 +1505,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@dff_nested.work@dff_nested::ff3.g3b.q
           |vpiActual:
-          \_LogicNet: (work@dff_nested.q), line:6:2, endln:6:3
+          \_Net: (work@dff_nested.q), line:6:2, endln:6:3
   |vpiTypedef:
   \_ModuleTypespec: (ff1)
     |vpiParent:
@@ -1539,37 +1553,37 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (ff3)
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.d), line:4:2, endln:4:3
+  \_Net: (work@dff_nested.d), line:4:2, endln:4:3
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:d
     |vpiFullName:work@dff_nested.d
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.ck), line:4:5, endln:4:7
+  \_Net: (work@dff_nested.ck), line:4:5, endln:4:7
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:ck
     |vpiFullName:work@dff_nested.ck
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.pr), line:4:9, endln:4:11
+  \_Net: (work@dff_nested.pr), line:4:9, endln:4:11
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:pr
     |vpiFullName:work@dff_nested.pr
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.clr), line:4:13, endln:4:16
+  \_Net: (work@dff_nested.clr), line:4:13, endln:4:16
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:clr
     |vpiFullName:work@dff_nested.clr
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.q), line:6:2, endln:6:3
+  \_Net: (work@dff_nested.q), line:6:2, endln:6:3
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:q
     |vpiFullName:work@dff_nested.q
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.nq), line:6:5, endln:6:7
+  \_Net: (work@dff_nested.nq), line:6:5, endln:6:7
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiName:nq
@@ -1577,13 +1591,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:1, endln:7:5
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+  \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@dff_nested.q1), line:7:1, endln:7:5
       |vpiParent:
-      \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+      \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
       |vpiFullName:work@dff_nested.q1
       |vpiActual:
       \_LogicTypespec: , line:7:1, endln:7:5
@@ -1591,13 +1605,13 @@ Design: (unnamed)
     |vpiFullName:work@dff_nested.q1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+  \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@dff_nested.nq1), line:7:1, endln:7:5
       |vpiParent:
-      \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+      \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
       |vpiFullName:work@dff_nested.nq1
       |vpiActual:
       \_LogicTypespec: , line:7:1, endln:7:5
@@ -1605,13 +1619,13 @@ Design: (unnamed)
     |vpiFullName:work@dff_nested.nq1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+  \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
     |vpiParent:
     \_Module: work@dff_nested (work@dff_nested), file:${SURELOG_DIR}/tests/UnitElabExternNested/top.v, line:1:1, endln:36:10
     |vpiTypespec:
     \_RefTypespec: (work@dff_nested.nq2), line:7:1, endln:7:5
       |vpiParent:
-      \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+      \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
       |vpiFullName:work@dff_nested.nq2
       |vpiActual:
       \_LogicTypespec: , line:7:1, endln:7:5
@@ -1626,23 +1640,23 @@ Design: (unnamed)
   \_ModuleTypespec: (ff3)
   |vpiDefName:work@dff_nested
   |vpiNet:
-  \_LogicNet: (work@dff_nested.d), line:4:2, endln:4:3
+  \_Net: (work@dff_nested.d), line:4:2, endln:4:3
   |vpiNet:
-  \_LogicNet: (work@dff_nested.ck), line:4:5, endln:4:7
+  \_Net: (work@dff_nested.ck), line:4:5, endln:4:7
   |vpiNet:
-  \_LogicNet: (work@dff_nested.pr), line:4:9, endln:4:11
+  \_Net: (work@dff_nested.pr), line:4:9, endln:4:11
   |vpiNet:
-  \_LogicNet: (work@dff_nested.clr), line:4:13, endln:4:16
+  \_Net: (work@dff_nested.clr), line:4:13, endln:4:16
   |vpiNet:
-  \_LogicNet: (work@dff_nested.q), line:6:2, endln:6:3
+  \_Net: (work@dff_nested.q), line:6:2, endln:6:3
   |vpiNet:
-  \_LogicNet: (work@dff_nested.nq), line:6:5, endln:6:7
+  \_Net: (work@dff_nested.nq), line:6:5, endln:6:7
   |vpiNet:
-  \_LogicNet: (work@dff_nested.q1), line:8:2, endln:8:4
+  \_Net: (work@dff_nested.q1), line:8:2, endln:8:4
   |vpiNet:
-  \_LogicNet: (work@dff_nested.nq1), line:8:6, endln:8:9
+  \_Net: (work@dff_nested.nq1), line:8:6, endln:8:9
   |vpiNet:
-  \_LogicNet: (work@dff_nested.nq2), line:8:11, endln:8:14
+  \_Net: (work@dff_nested.nq2), line:8:11, endln:8:14
   |vpiPort:
   \_Port: (d), line:4:2, endln:4:3
     |vpiParent:
@@ -1713,38 +1727,38 @@ Design: (unnamed)
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
     |vpiName:work@m
   |vpiImportTypespec:
-  \_LogicNet: (work@m.a), line:2:18, endln:2:19
+  \_Net: (work@m.a), line:2:18, endln:2:19
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
     |vpiName:a
     |vpiFullName:work@m.a
   |vpiImportTypespec:
-  \_LogicNet: (work@m.b), line:2:20, endln:2:21
+  \_Net: (work@m.b), line:2:20, endln:2:21
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
     |vpiName:b
     |vpiFullName:work@m.b
   |vpiImportTypespec:
-  \_LogicNet: (work@m.c), line:2:22, endln:2:23
+  \_Net: (work@m.c), line:2:22, endln:2:23
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
     |vpiName:c
     |vpiFullName:work@m.c
   |vpiImportTypespec:
-  \_LogicNet: (work@m.d), line:2:24, endln:2:25
+  \_Net: (work@m.d), line:2:24, endln:2:25
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:2:8, endln:2:27
     |vpiName:d
     |vpiFullName:work@m.d
   |vpiDefName:work@m
   |vpiNet:
-  \_LogicNet: (work@m.a), line:2:18, endln:2:19
+  \_Net: (work@m.a), line:2:18, endln:2:19
   |vpiNet:
-  \_LogicNet: (work@m.b), line:2:20, endln:2:21
+  \_Net: (work@m.b), line:2:20, endln:2:21
   |vpiNet:
-  \_LogicNet: (work@m.c), line:2:22, endln:2:23
+  \_Net: (work@m.c), line:2:22, endln:2:23
   |vpiNet:
-  \_LogicNet: (work@m.d), line:2:24, endln:2:25
+  \_Net: (work@m.d), line:2:24, endln:2:25
   |vpiPort:
   \_Port: (a), line:2:18, endln:2:19
     |vpiParent:
@@ -1847,13 +1861,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:19:1, endln:19:5
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:20:7, endln:20:8
+  \_Net: (work@top.a), line:20:7, endln:20:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:19:1, endln:19:5
       |vpiParent:
-      \_LogicNet: (work@top.a), line:20:7, endln:20:8
+      \_Net: (work@top.a), line:20:7, endln:20:8
       |vpiFullName:work@top.a
       |vpiActual:
       \_LogicTypespec: , line:19:1, endln:19:5
@@ -1863,13 +1877,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:1, endln:21:6
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:22:8, endln:22:9
+  \_Net: (work@top.b), line:22:8, endln:22:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:21:1, endln:22:7
       |vpiParent:
-      \_LogicNet: (work@top.b), line:22:8, endln:22:9
+      \_Net: (work@top.b), line:22:8, endln:22:9
       |vpiFullName:work@top.b
       |vpiActual:
       \_LogicTypespec: , line:21:1, endln:21:6
@@ -1878,13 +1892,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:23:1, endln:23:5
   |vpiImportTypespec:
-  \_LogicNet: (work@top.c), line:24:1, endln:24:2
+  \_Net: (work@top.c), line:24:1, endln:24:2
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c), line:23:1, endln:23:5
       |vpiParent:
-      \_LogicNet: (work@top.c), line:24:1, endln:24:2
+      \_Net: (work@top.c), line:24:1, endln:24:2
       |vpiFullName:work@top.c
       |vpiActual:
       \_LogicTypespec: , line:23:1, endln:23:5
@@ -1892,13 +1906,13 @@ Design: (unnamed)
     |vpiFullName:work@top.c
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.d), line:24:4, endln:24:5
+  \_Net: (work@top.d), line:24:4, endln:24:5
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElabExternNested/middle.v, line:18:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.d), line:23:1, endln:23:5
       |vpiParent:
-      \_LogicNet: (work@top.d), line:24:4, endln:24:5
+      \_Net: (work@top.d), line:24:4, endln:24:5
       |vpiFullName:work@top.d
       |vpiActual:
       \_LogicTypespec: , line:23:1, endln:23:5
@@ -1907,13 +1921,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.a), line:20:7, endln:20:8
+  \_Net: (work@top.a), line:20:7, endln:20:8
   |vpiNet:
-  \_LogicNet: (work@top.b), line:22:8, endln:22:9
+  \_Net: (work@top.b), line:22:8, endln:22:9
   |vpiNet:
-  \_LogicNet: (work@top.c), line:24:1, endln:24:2
+  \_Net: (work@top.c), line:24:1, endln:24:2
   |vpiNet:
-  \_LogicNet: (work@top.d), line:24:4, endln:24:5
+  \_Net: (work@top.d), line:24:4, endln:24:5
   |vpiRefModule:
   \_RefModule: work@m (mm), line:26:1, endln:26:2
     |vpiParent:

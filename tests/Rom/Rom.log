@@ -170,7 +170,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          2
 ClassDefn                                              8
 ClassTypespec                                          8
@@ -182,10 +181,10 @@ Function                                               9
 IODecl                                                11
 Identifier                                            29
 IntTypespec                                           10
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              9
 Package                                                1
 ParamAssign                                            1
@@ -196,6 +195,7 @@ RefTypespec                                           18
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Rom/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1152,7 +1152,7 @@ Design: (unnamed)
           |vpiName:RomSize
           |vpiFullName:work@top.RomSize
           |vpiActual:
-          \_LogicNet: (work@top.RomSize), line:3:14, endln:3:21
+          \_Net: (work@top.RomSize), line:3:14, endln:3:21
         |vpiOperand:
         \_Constant: , line:3:22, endln:3:23
           |vpiParent:
@@ -1249,13 +1249,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
-  \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+  \_Net: (work@top.mem), line:3:33, endln:3:36
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@top.mem), line:3:7, endln:3:32
       |vpiParent:
-      \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+      \_Net: (work@top.mem), line:3:33, endln:3:36
       |vpiFullName:work@top.mem
       |vpiActual:
       \_LogicTypespec: , line:3:7, endln:3:12
@@ -1267,13 +1267,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:8:8, endln:11:4
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
+  \_Net: (work@top.sbox_enc), line:8:20, endln:8:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@top.sbox_enc), line:8:8, endln:8:19
       |vpiParent:
-      \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
+      \_Net: (work@top.sbox_enc), line:8:20, endln:8:28
       |vpiFullName:work@top.sbox_enc
       |vpiActual:
       \_ArrayTypespec: , line:8:8, endln:11:4
@@ -1281,7 +1281,7 @@ Design: (unnamed)
     |vpiFullName:work@top.sbox_enc
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.RomSize), line:3:14, endln:3:21
+  \_Net: (work@top.RomSize), line:3:14, endln:3:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
     |vpiName:RomSize
@@ -1289,11 +1289,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+  \_Net: (work@top.mem), line:3:33, endln:3:36
   |vpiNet:
-  \_LogicNet: (work@top.RomSize), line:3:14, endln:3:21
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
+  \_Net: (work@top.sbox_enc), line:8:20, endln:8:28
+  |vpiNet:
+  \_Net: (work@top.RomSize), line:3:14, endln:3:21
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

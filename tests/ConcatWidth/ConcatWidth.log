@@ -251,10 +251,10 @@ IODecl                                                11
 Identifier                                            29
 Initial                                                1
 IntTypespec                                           10
-LogicNet                                               4
 LogicTypespec                                          7
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    4
 Operation                                              8
 Package                                                1
 ParamAssign                                            1
@@ -267,6 +267,7 @@ RefTypespec                                           20
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatWidth/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1188,13 +1189,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:16
   |vpiImportTypespec:
-  \_LogicNet: (work@top.clk), line:4:17, endln:4:20
+  \_Net: (work@top.clk), line:4:17, endln:4:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.clk), line:4:11, endln:4:16
       |vpiParent:
-      \_LogicNet: (work@top.clk), line:4:17, endln:4:20
+      \_Net: (work@top.clk), line:4:17, endln:4:20
       |vpiFullName:work@top.clk
       |vpiActual:
       \_LogicTypespec: , line:4:11, endln:4:16
@@ -1202,13 +1203,13 @@ Design: (unnamed)
     |vpiFullName:work@top.clk
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.out), line:5:37, endln:5:40
+  \_Net: (work@top.out), line:5:37, endln:5:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.out), line:5:12, endln:5:17
       |vpiParent:
-      \_LogicNet: (work@top.out), line:5:37, endln:5:40
+      \_Net: (work@top.out), line:5:37, endln:5:40
       |vpiFullName:work@top.out
       |vpiActual:
       \_LogicTypespec: , line:4:11, endln:4:16
@@ -1218,13 +1219,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:5, endln:8:10
   |vpiImportTypespec:
-  \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+  \_Net: (work@top.counter), line:8:18, endln:8:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.counter), line:8:5, endln:8:17
       |vpiParent:
-      \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+      \_Net: (work@top.counter), line:8:18, endln:8:25
       |vpiFullName:work@top.counter
       |vpiActual:
       \_LogicTypespec: , line:8:5, endln:8:10
@@ -1234,13 +1235,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:5, endln:9:10
   |vpiImportTypespec:
-  \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+  \_Net: (work@top.counter_upd), line:9:30, endln:9:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.counter_upd), line:9:5, endln:9:29
       |vpiParent:
-      \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+      \_Net: (work@top.counter_upd), line:9:30, endln:9:41
       |vpiFullName:work@top.counter_upd
       |vpiActual:
       \_LogicTypespec: , line:9:5, endln:9:10
@@ -1249,13 +1250,13 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.clk), line:4:17, endln:4:20
+  \_Net: (work@top.clk), line:4:17, endln:4:20
   |vpiNet:
-  \_LogicNet: (work@top.out), line:5:37, endln:5:40
+  \_Net: (work@top.out), line:5:37, endln:5:40
   |vpiNet:
-  \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+  \_Net: (work@top.counter), line:8:18, endln:8:25
   |vpiNet:
-  \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+  \_Net: (work@top.counter_upd), line:9:30, endln:9:41
   |vpiPort:
   \_Port: (clk), line:4:17, endln:4:20
     |vpiParent:
@@ -1307,7 +1308,7 @@ Design: (unnamed)
         |vpiName:counter
         |vpiFullName:work@top.counter
         |vpiActual:
-        \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+        \_Net: (work@top.counter), line:8:18, endln:8:25
   |vpiProcess:
   \_Always: , line:13:5, endln:15:8
     |vpiParent:
@@ -1328,7 +1329,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.clk
           |vpiActual:
-          \_LogicNet: (work@top.clk), line:4:17, endln:4:20
+          \_Net: (work@top.clk), line:4:17, endln:4:20
       |vpiStmt:
       \_Begin: (work@top), line:13:27, endln:15:8
         |vpiParent:
@@ -1353,7 +1354,7 @@ Design: (unnamed)
               |vpiFullName:work@top.counter
               |vpiDefName:counter
               |vpiActual:
-              \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+              \_Net: (work@top.counter), line:8:18, endln:8:25
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:14:31, endln:14:45
@@ -1443,7 +1444,7 @@ Design: (unnamed)
             |vpiName:counter_upd
             |vpiFullName:work@top.counter_upd
             |vpiActual:
-            \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+            \_Net: (work@top.counter_upd), line:9:30, endln:9:41
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:16:12, endln:16:29
@@ -1456,7 +1457,7 @@ Design: (unnamed)
       |vpiName:counter_upd
       |vpiFullName:work@top.counter_upd
       |vpiActual:
-      \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+      \_Net: (work@top.counter_upd), line:9:30, endln:9:41
     |vpiLhs:
     \_RefObj: (work@top.out), line:16:12, endln:16:15
       |vpiParent:
@@ -1464,7 +1465,7 @@ Design: (unnamed)
       |vpiName:out
       |vpiFullName:work@top.out
       |vpiActual:
-      \_LogicNet: (work@top.out), line:5:37, endln:5:40
+      \_Net: (work@top.out), line:5:37, endln:5:40
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

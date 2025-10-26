@@ -7,7 +7,6 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/RangeSelect/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              1
 Constant                                              10
@@ -15,19 +14,19 @@ Design                                                 1
 HierPath                                               2
 Identifier                                             2
 IndexedPartSelect                                      2
-LogicNet                                               2
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    4
 Operation                                              1
 Range                                                  3
 RefObj                                                 1
 RefTypespec                                            7
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/RangeSelect/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -172,26 +171,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:6:4, endln:6:17
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.a), line:6:13, endln:6:14
+  \_Net: (work@top.a), line:6:13, endln:6:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:6:4, endln:6:12
       |vpiParent:
-      \_ArrayNet: (work@top.a), line:6:13, endln:6:14
+      \_Net: (work@top.a), line:6:13, endln:6:14
       |vpiFullName:work@top.a
       |vpiActual:
       \_ArrayTypespec: , line:6:4, endln:6:17
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiImportTypespec:
-  \_StructNet: (work@top.b), line:7:13, endln:7:14
+  \_Net: (work@top.b), line:7:13, endln:7:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b.tl_h2d_t), line:7:4, endln:7:12
       |vpiParent:
-      \_StructNet: (work@top.b), line:7:13, endln:7:14
+      \_Net: (work@top.b), line:7:13, endln:7:14
       |vpiName:tl_h2d_t
       |vpiFullName:work@top.b.tl_h2d_t
       |vpiActual:
@@ -201,13 +200,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:4, endln:8:9
   |vpiImportTypespec:
-  \_LogicNet: (work@top.c), line:8:10, endln:8:11
+  \_Net: (work@top.c), line:8:10, endln:8:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c), line:8:4, endln:8:9
       |vpiParent:
-      \_LogicNet: (work@top.c), line:8:10, endln:8:11
+      \_Net: (work@top.c), line:8:10, endln:8:11
       |vpiFullName:work@top.c
       |vpiActual:
       \_LogicTypespec: , line:8:4, endln:8:9
@@ -217,13 +216,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:4, endln:9:9
   |vpiImportTypespec:
-  \_LogicNet: (work@top.d), line:9:16, endln:9:17
+  \_Net: (work@top.d), line:9:16, endln:9:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@top.d), line:9:4, endln:9:15
       |vpiParent:
-      \_LogicNet: (work@top.d), line:9:16, endln:9:17
+      \_Net: (work@top.d), line:9:16, endln:9:17
       |vpiFullName:work@top.d
       |vpiActual:
       \_LogicTypespec: , line:9:4, endln:9:9
@@ -232,13 +231,13 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.b), line:7:13, endln:7:14
+  \_Net: (work@top.a), line:6:13, endln:6:14
   |vpiNet:
-  \_LogicNet: (work@top.c), line:8:10, endln:8:11
+  \_Net: (work@top.b), line:7:13, endln:7:14
   |vpiNet:
-  \_LogicNet: (work@top.d), line:9:16, endln:9:17
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.a), line:6:13, endln:6:14
+  \_Net: (work@top.c), line:8:10, endln:8:11
+  |vpiNet:
+  \_Net: (work@top.d), line:9:16, endln:9:17
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

@@ -236,10 +236,10 @@ GenIf                                                  2
 IODecl                                                11
 Identifier                                            30
 IntTypespec                                           10
-LogicNet                                               5
 LogicTypespec                                         11
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    5
 Operation                                              2
 Package                                                1
 ParamAssign                                            2
@@ -251,6 +251,7 @@ RefTypespec                                           24
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1135,7 +1136,7 @@ Design: (unnamed)
         |vpiName:inp
         |vpiFullName:work@assigner.inp
         |vpiActual:
-        \_LogicNet: (work@assigner.inp), line:6:53, endln:6:56
+        \_Net: (work@assigner.inp), line:6:53, endln:6:56
       |vpiLhs:
       \_RefObj: (work@assigner.out), line:9:11, endln:9:14
         |vpiParent:
@@ -1143,7 +1144,7 @@ Design: (unnamed)
         |vpiName:out
         |vpiFullName:work@assigner.out
         |vpiActual:
-        \_LogicNet: (work@assigner.out), line:6:69, endln:6:72
+        \_Net: (work@assigner.out), line:6:69, endln:6:72
   |vpiInternalScope:
   \_Begin: (work@assigner), line:11:4, endln:11:22
     |vpiParent:
@@ -1165,7 +1166,7 @@ Design: (unnamed)
           |vpiName:inp
           |vpiFullName:work@assigner.inp
           |vpiActual:
-          \_LogicNet: (work@assigner.inp), line:6:53, endln:6:56
+          \_Net: (work@assigner.inp), line:6:53, endln:6:56
       |vpiLhs:
       \_RefObj: (work@assigner.out), line:11:11, endln:11:14
         |vpiParent:
@@ -1173,7 +1174,7 @@ Design: (unnamed)
         |vpiName:out
         |vpiFullName:work@assigner.out
         |vpiActual:
-        \_LogicNet: (work@assigner.out), line:6:69, endln:6:72
+        \_Net: (work@assigner.out), line:6:69, endln:6:72
   |vpiTypedef:
   \_IntTypespec: , line:7:13, endln:7:16
     |vpiParent:
@@ -1188,13 +1189,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:48, endln:6:52
   |vpiImportTypespec:
-  \_LogicNet: (work@assigner.inp), line:6:53, endln:6:56
+  \_Net: (work@assigner.inp), line:6:53, endln:6:56
     |vpiParent:
     \_Module: work@assigner (work@assigner), file:${SURELOG_DIR}/tests/LocalParam/dut.sv, line:6:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@assigner.inp), line:6:48, endln:6:52
       |vpiParent:
-      \_LogicNet: (work@assigner.inp), line:6:53, endln:6:56
+      \_Net: (work@assigner.inp), line:6:53, endln:6:56
       |vpiFullName:work@assigner.inp
       |vpiActual:
       \_LogicTypespec: , line:6:48, endln:6:52
@@ -1202,13 +1203,13 @@ Design: (unnamed)
     |vpiFullName:work@assigner.inp
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@assigner.out), line:6:69, endln:6:72
+  \_Net: (work@assigner.out), line:6:69, endln:6:72
     |vpiParent:
     \_Module: work@assigner (work@assigner), file:${SURELOG_DIR}/tests/LocalParam/dut.sv, line:6:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@assigner.out), line:6:65, endln:6:68
       |vpiParent:
-      \_LogicNet: (work@assigner.out), line:6:69, endln:6:72
+      \_Net: (work@assigner.out), line:6:69, endln:6:72
       |vpiFullName:work@assigner.out
       |vpiActual:
       \_LogicTypespec: , line:6:48, endln:6:52
@@ -1217,9 +1218,9 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@assigner
   |vpiNet:
-  \_LogicNet: (work@assigner.inp), line:6:53, endln:6:56
+  \_Net: (work@assigner.inp), line:6:53, endln:6:56
   |vpiNet:
-  \_LogicNet: (work@assigner.out), line:6:69, endln:6:72
+  \_Net: (work@assigner.out), line:6:69, endln:6:72
   |vpiPort:
   \_Port: (inp), line:6:53, endln:6:56
     |vpiParent:
@@ -1302,13 +1303,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:19, endln:1:23
   |vpiImportTypespec:
-  \_LogicNet: (work@top.i), line:1:24, endln:1:25
+  \_Net: (work@top.i), line:1:24, endln:1:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LocalParam/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
     \_RefTypespec: (work@top.i), line:1:19, endln:1:23
       |vpiParent:
-      \_LogicNet: (work@top.i), line:1:24, endln:1:25
+      \_Net: (work@top.i), line:1:24, endln:1:25
       |vpiFullName:work@top.i
       |vpiActual:
       \_LogicTypespec: , line:1:19, endln:1:23
@@ -1316,13 +1317,13 @@ Design: (unnamed)
     |vpiFullName:work@top.i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o1), line:1:38, endln:1:40
+  \_Net: (work@top.o1), line:1:38, endln:1:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LocalParam/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
     \_RefTypespec: (work@top.o1), line:1:34, endln:1:37
       |vpiParent:
-      \_LogicNet: (work@top.o1), line:1:38, endln:1:40
+      \_Net: (work@top.o1), line:1:38, endln:1:40
       |vpiFullName:work@top.o1
       |vpiActual:
       \_LogicTypespec: , line:1:19, endln:1:23
@@ -1330,13 +1331,13 @@ Design: (unnamed)
     |vpiFullName:work@top.o1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o2), line:1:53, endln:1:55
+  \_Net: (work@top.o2), line:1:53, endln:1:55
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LocalParam/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
     \_RefTypespec: (work@top.o2), line:1:49, endln:1:52
       |vpiParent:
-      \_LogicNet: (work@top.o2), line:1:53, endln:1:55
+      \_Net: (work@top.o2), line:1:53, endln:1:55
       |vpiFullName:work@top.o2
       |vpiActual:
       \_LogicTypespec: , line:1:19, endln:1:23
@@ -1345,11 +1346,11 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.i), line:1:24, endln:1:25
+  \_Net: (work@top.i), line:1:24, endln:1:25
   |vpiNet:
-  \_LogicNet: (work@top.o1), line:1:38, endln:1:40
+  \_Net: (work@top.o1), line:1:38, endln:1:40
   |vpiNet:
-  \_LogicNet: (work@top.o2), line:1:53, endln:1:55
+  \_Net: (work@top.o2), line:1:53, endln:1:55
   |vpiPort:
   \_Port: (i), line:1:24, endln:1:25
     |vpiParent:
@@ -1409,7 +1410,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.asgn0.inp.i
         |vpiActual:
-        \_LogicNet: (work@top.i), line:1:24, endln:1:25
+        \_Net: (work@top.i), line:1:24, endln:1:25
     |vpiPort:
     \_Port: (out), line:2:42, endln:2:45
       |vpiParent:
@@ -1422,7 +1423,7 @@ Design: (unnamed)
         |vpiName:o1
         |vpiFullName:work@top.asgn0.out.o1
         |vpiActual:
-        \_LogicNet: (work@top.o1), line:1:38, endln:1:40
+        \_Net: (work@top.o1), line:1:38, endln:1:40
   |vpiRefModule:
   \_RefModule: work@assigner (asgn1), line:3:3, endln:3:11
     |vpiParent:
@@ -1443,7 +1444,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.asgn1.inp.i
         |vpiActual:
-        \_LogicNet: (work@top.i), line:1:24, endln:1:25
+        \_Net: (work@top.i), line:1:24, endln:1:25
     |vpiPort:
     \_Port: (out), line:3:42, endln:3:45
       |vpiParent:
@@ -1456,7 +1457,7 @@ Design: (unnamed)
         |vpiName:o2
         |vpiFullName:work@top.asgn1.out.o2
         |vpiActual:
-        \_LogicNet: (work@top.o2), line:1:53, endln:1:55
+        \_Net: (work@top.o2), line:1:53, endln:1:55
 |vpiTypedef:
 \_ModuleTypespec: (assigner)
 |vpiTypedef:

@@ -184,7 +184,6 @@ Constant                                              12
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
-EnumNet                                                1
 EnumTypespec                                           1
 FuncCall                                               1
 Function                                               1
@@ -193,6 +192,7 @@ IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 PackedArrayTypespec                                    2
 Range                                                  3
@@ -201,6 +201,7 @@ RefTypespec                                            7
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    2
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumVar/slpp_all/surelog.uhdm ...
@@ -253,6 +254,20 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.get_BA), line:9:4, endln:14:15
       |vpiFullName:work@top.get_BA
+      |vpiImportTypespec:
+      \_Net: (work@top.get_BA.out), line:10:20, endln:10:23
+        |vpiParent:
+        \_Begin: (work@top.get_BA)
+        |vpiTypespec:
+        \_RefTypespec: (work@top.get_BA.out.sp2v_e), line:10:7, endln:10:19
+          |vpiParent:
+          \_Net: (work@top.get_BA.out), line:10:20, endln:10:23
+          |vpiName:sp2v_e
+          |vpiFullName:work@top.get_BA.out.sp2v_e
+          |vpiActual:
+          \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
+        |vpiName:out
+        |vpiFullName:work@top.get_BA.out
       |vpiStmt:
       \_Assignment: , line:11:7, endln:11:17
         |vpiParent:
@@ -274,7 +289,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_EnumNet: (work@top.out), line:10:20, endln:10:23
+          \_Net: (work@top.get_BA.out), line:10:20, endln:10:23
           |vpiIndex:
           \_Constant: , line:11:11, endln:11:12
             |vpiParent:
@@ -304,7 +319,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_EnumNet: (work@top.out), line:10:20, endln:10:23
+          \_Net: (work@top.get_BA.out), line:10:20, endln:10:23
           |vpiIndex:
           \_Constant: , line:12:11, endln:12:12
             |vpiParent:
@@ -324,7 +339,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_EnumNet: (work@top.out), line:10:20, endln:10:23
+          \_Net: (work@top.get_BA.out), line:10:20, endln:10:23
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -428,7 +443,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.sp2v_e), line:5:6, endln:5:12
+    \_RefTypespec: (work@top.sp2v_e), line:9:23, endln:9:29
       |vpiParent:
       \_PackedArrayTypespec: , line:9:23, endln:9:35
       |vpiName:sp2v_e
@@ -460,7 +475,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.sp2v_e), line:5:6, endln:5:12
+    \_RefTypespec: (work@top.sp2v_e), line:10:7, endln:10:13
       |vpiParent:
       \_PackedArrayTypespec: , line:10:7, endln:10:19
       |vpiName:sp2v_e
@@ -485,28 +500,12 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:10:7, endln:10:19
   |vpiImportTypespec:
-  \_EnumNet: (work@top.out), line:10:20, endln:10:23
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.out.sp2v_e), line:10:7, endln:10:19
-      |vpiParent:
-      \_EnumNet: (work@top.out), line:10:20, endln:10:23
-      |vpiName:sp2v_e
-      |vpiFullName:work@top.out.sp2v_e
-      |vpiActual:
-      \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
-    |vpiName:out
-    |vpiFullName:work@top.out
-  |vpiImportTypespec:
   \_IntTypespec: , line:8:4, endln:8:7
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:8:17, endln:8:18
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.get_BA), line:9:4, endln:14:15
-  |vpiNet:
-  \_EnumNet: (work@top.out), line:10:20, endln:10:23
   |vpiContAssign:
   \_ContAssign: , line:16:11, endln:16:29
     |vpiParent:

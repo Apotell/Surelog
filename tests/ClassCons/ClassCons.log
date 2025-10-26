@@ -525,6 +525,8 @@ n<> u<390> t<Top_level_rule> c<1> l<1:1> el<67:1>
 AST_DEBUG_END
 [INF:CM0029] Using global timescale: "1ns/1ns".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ClassCons/definesPkg.pkg:4:1: Compile package "definesPkg_1".
+[INF:CP0301] ${SURELOG_DIR}/tests/ClassCons/definesPkg_1.pkg:4:1: Compile package "definesPkg".
 [INF:CP0306] ${SURELOG_DIR}/tests/ClassCons/top.sv:9:1: Compile program "work@class_t".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -553,9 +555,9 @@ ImportTypespec                                         2
 Initial                                                1
 IntTypespec                                            9
 IntegerTypespec                                        9
-LogicNet                                               6
 LogicTypespec                                          1
 MethodFuncCall                                         7
+Net                                                    6
 Package                                                3
 PreprocMacroDefinition                                 1
 PreprocMacroInstance                                   3
@@ -567,13 +569,12 @@ SourceFile                                             3
 SysFuncCall                                            3
 Task                                                  13
 TypedefTypespec                                        1
-UnsupportedTypespec                                    3
+UnsupportedTypespec                                    4
 VarSelect                                              5
 Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassCons/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassCons/top.sv:54:4: Unsupported Typespec: id:289, type:RefTypespec, name:D_PKG1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassCons/top.sv:55:4: Unsupported Typespec: id:292, type:RefTypespec, name:D_PKG_UNDEF.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ClassCons/top.sv:55:4: Unsupported Typespec: id:293, type:RefTypespec, name:D_PKG_UNDEF.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -2290,11 +2291,6 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_UnsupportedTypespec: (D_PKG1), line:54:4, endln:54:10
-    |vpiParent:
-    \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
-    |vpiName:D_PKG1
-  |vpiTypedef:
   \_UnsupportedTypespec: (D_PKG_UNDEF), line:55:4, endln:55:15
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
@@ -2314,13 +2310,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (definesPkg), line:11:10, endln:11:23
   |vpiImportTypespec:
-  \_LogicNet: (work@class_t.a), line:50:6, endln:50:7
+  \_Net: (work@class_t.a), line:50:6, endln:50:7
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.a.A), line:50:4, endln:50:5
       |vpiParent:
-      \_LogicNet: (work@class_t.a), line:50:6, endln:50:7
+      \_Net: (work@class_t.a), line:50:6, endln:50:7
       |vpiName:A
       |vpiFullName:work@class_t.a.A
       |vpiActual:
@@ -2328,13 +2324,13 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@class_t.a
   |vpiImportTypespec:
-  \_LogicNet: (work@class_t.b), line:51:6, endln:51:7
+  \_Net: (work@class_t.b), line:51:6, endln:51:7
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.b.B), line:51:4, endln:51:5
       |vpiParent:
-      \_LogicNet: (work@class_t.b), line:51:6, endln:51:7
+      \_Net: (work@class_t.b), line:51:6, endln:51:7
       |vpiName:B
       |vpiFullName:work@class_t.b.B
       |vpiActual:
@@ -2342,13 +2338,13 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@class_t.b
   |vpiImportTypespec:
-  \_LogicNet: (work@class_t.c), line:52:6, endln:52:7
+  \_Net: (work@class_t.c), line:52:6, endln:52:7
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.c.C), line:52:4, endln:52:5
       |vpiParent:
-      \_LogicNet: (work@class_t.c), line:52:6, endln:52:7
+      \_Net: (work@class_t.c), line:52:6, endln:52:7
       |vpiName:C
       |vpiFullName:work@class_t.c.C
       |vpiActual:
@@ -2356,13 +2352,13 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@class_t.c
   |vpiImportTypespec:
-  \_LogicNet: (work@class_t.d), line:53:10, endln:53:11
+  \_Net: (work@class_t.d), line:53:10, endln:53:11
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.d.D_PKG), line:53:4, endln:53:9
       |vpiParent:
-      \_LogicNet: (work@class_t.d), line:53:10, endln:53:11
+      \_Net: (work@class_t.d), line:53:10, endln:53:11
       |vpiName:D_PKG
       |vpiFullName:work@class_t.d.D_PKG
       |vpiActual:
@@ -2370,31 +2366,29 @@ Design: (unnamed)
     |vpiName:d
     |vpiFullName:work@class_t.d
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (D_PKG1), line:54:4, endln:54:10
-  |vpiImportTypespec:
-  \_LogicNet: (work@class_t.e), line:54:11, endln:54:12
+  \_Net: (work@class_t.e), line:54:11, endln:54:12
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.e.D_PKG1), line:54:4, endln:54:10
       |vpiParent:
-      \_LogicNet: (work@class_t.e), line:54:11, endln:54:12
+      \_Net: (work@class_t.e), line:54:11, endln:54:12
       |vpiName:D_PKG1
       |vpiFullName:work@class_t.e.D_PKG1
       |vpiActual:
-      \_UnsupportedTypespec: (D_PKG1), line:54:4, endln:54:10
+      \_ClassTypespec: (D_PKG1)
     |vpiName:e
     |vpiFullName:work@class_t.e
   |vpiImportTypespec:
   \_UnsupportedTypespec: (D_PKG_UNDEF), line:55:4, endln:55:15
   |vpiImportTypespec:
-  \_LogicNet: (work@class_t.f), line:55:16, endln:55:17
+  \_Net: (work@class_t.f), line:55:16, endln:55:17
     |vpiParent:
     \_Program: work@class_t (work@class_t), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:9:1, endln:66:11
     |vpiTypespec:
     \_RefTypespec: (work@class_t.f.D_PKG_UNDEF), line:55:4, endln:55:15
       |vpiParent:
-      \_LogicNet: (work@class_t.f), line:55:16, endln:55:17
+      \_Net: (work@class_t.f), line:55:16, endln:55:17
       |vpiName:D_PKG_UNDEF
       |vpiFullName:work@class_t.f.D_PKG_UNDEF
       |vpiActual:
@@ -2409,17 +2403,17 @@ Design: (unnamed)
   |vpiClassDefn:
   \_ClassDefn: (work@class_t::C), file:${SURELOG_DIR}/tests/ClassCons/top.sv, line:39:4, endln:48:12
   |vpiNet:
-  \_LogicNet: (work@class_t.a), line:50:6, endln:50:7
+  \_Net: (work@class_t.a), line:50:6, endln:50:7
   |vpiNet:
-  \_LogicNet: (work@class_t.b), line:51:6, endln:51:7
+  \_Net: (work@class_t.b), line:51:6, endln:51:7
   |vpiNet:
-  \_LogicNet: (work@class_t.c), line:52:6, endln:52:7
+  \_Net: (work@class_t.c), line:52:6, endln:52:7
   |vpiNet:
-  \_LogicNet: (work@class_t.d), line:53:10, endln:53:11
+  \_Net: (work@class_t.d), line:53:10, endln:53:11
   |vpiNet:
-  \_LogicNet: (work@class_t.e), line:54:11, endln:54:12
+  \_Net: (work@class_t.e), line:54:11, endln:54:12
   |vpiNet:
-  \_LogicNet: (work@class_t.f), line:55:16, endln:55:17
+  \_Net: (work@class_t.f), line:55:16, endln:55:17
   |vpiProcess:
   \_Initial: , line:56:4, endln:64:7
     |vpiParent:
@@ -2451,7 +2445,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@class_t.a
           |vpiActual:
-          \_LogicNet: (work@class_t.a), line:50:6, endln:50:7
+          \_Net: (work@class_t.a), line:50:6, endln:50:7
       |vpiStmt:
       \_Assignment: , line:58:6, endln:58:16
         |vpiParent:
@@ -2482,7 +2476,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@class_t.b
           |vpiActual:
-          \_LogicNet: (work@class_t.b), line:51:6, endln:51:7
+          \_Net: (work@class_t.b), line:51:6, endln:51:7
       |vpiStmt:
       \_Assignment: , line:59:6, endln:59:15
         |vpiParent:
@@ -2505,7 +2499,7 @@ Design: (unnamed)
           |vpiName:c
           |vpiFullName:work@class_t.c
           |vpiActual:
-          \_LogicNet: (work@class_t.c), line:52:6, endln:52:7
+          \_Net: (work@class_t.c), line:52:6, endln:52:7
       |vpiStmt:
       \_Assignment: , line:60:6, endln:60:16
         |vpiParent:
@@ -2536,7 +2530,7 @@ Design: (unnamed)
           |vpiName:d
           |vpiFullName:work@class_t.d
           |vpiActual:
-          \_LogicNet: (work@class_t.d), line:53:10, endln:53:11
+          \_Net: (work@class_t.d), line:53:10, endln:53:11
       |vpiStmt:
       \_MethodFuncCall: (print), line:61:6, endln:61:14
         |vpiParent:
@@ -2553,7 +2547,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@class_t.a
           |vpiActual:
-          \_LogicNet: (work@class_t.a), line:50:6, endln:50:7
+          \_Net: (work@class_t.a), line:50:6, endln:50:7
       |vpiStmt:
       \_MethodFuncCall: (print), line:62:6, endln:62:14
         |vpiParent:
@@ -2570,7 +2564,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@class_t.b
           |vpiActual:
-          \_LogicNet: (work@class_t.b), line:51:6, endln:51:7
+          \_Net: (work@class_t.b), line:51:6, endln:51:7
       |vpiStmt:
       \_MethodFuncCall: (print), line:63:6, endln:63:14
         |vpiParent:
@@ -2587,7 +2581,7 @@ Design: (unnamed)
           |vpiName:c
           |vpiFullName:work@class_t.c
           |vpiActual:
-          \_LogicNet: (work@class_t.c), line:52:6, endln:52:7
+          \_Net: (work@class_t.c), line:52:6, endln:52:7
 |vpiTypedef:
 \_ImportTypespec: (definesPkg_1), line:1:8, endln:1:23
   |vpiParent:
@@ -2615,6 +2609,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 2

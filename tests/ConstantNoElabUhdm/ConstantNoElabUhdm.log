@@ -89,20 +89,20 @@ Constant                                               3
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              1
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
 RefTypespec                                            6
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantNoElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -128,13 +128,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
   |vpiImportTypespec:
-  \_StructNet: (work@top.out3), line:4:31, endln:4:35
+  \_Net: (work@top.out3), line:4:31, endln:4:35
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
     |vpiTypespec:
     \_RefTypespec: (work@top.out3.my_struct_packed_t), line:4:12, endln:4:30
       |vpiParent:
-      \_StructNet: (work@top.out3), line:4:31, endln:4:35
+      \_Net: (work@top.out3), line:4:31, endln:4:35
       |vpiName:my_struct_packed_t
       |vpiFullName:work@top.out3.my_struct_packed_t
       |vpiActual:
@@ -144,13 +144,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:12, endln:5:16
   |vpiImportTypespec:
-  \_LogicNet: (work@top.out4), line:5:17, endln:5:21
+  \_Net: (work@top.out4), line:5:17, endln:5:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
     |vpiTypespec:
     \_RefTypespec: (work@top.out4), line:5:12, endln:5:16
       |vpiParent:
-      \_LogicNet: (work@top.out4), line:5:17, endln:5:21
+      \_Net: (work@top.out4), line:5:17, endln:5:21
       |vpiFullName:work@top.out4
       |vpiActual:
       \_LogicTypespec: , line:5:12, endln:5:16
@@ -159,9 +159,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.out3), line:4:31, endln:4:35
+  \_Net: (work@top.out3), line:4:31, endln:4:35
   |vpiNet:
-  \_LogicNet: (work@top.out4), line:5:17, endln:5:21
+  \_Net: (work@top.out4), line:5:17, endln:5:21
   |vpiPort:
   \_Port: (out3), line:4:31, endln:4:35
     |vpiParent:
@@ -205,7 +205,7 @@ Design: (unnamed)
         |vpiName:out3
         |vpiFullName:work@top.out3
         |vpiActual:
-        \_StructNet: (work@top.out3), line:4:31, endln:4:35
+        \_Net: (work@top.out3), line:4:31, endln:4:35
       |vpiOperand:
       \_Constant: , line:7:29, endln:7:31
         |vpiParent:
@@ -221,7 +221,7 @@ Design: (unnamed)
       |vpiName:out4
       |vpiFullName:work@top.out4
       |vpiActual:
-      \_LogicNet: (work@top.out4), line:5:17, endln:5:21
+      \_Net: (work@top.out4), line:5:17, endln:5:21
   |vpiEndLabel:top
 |vpiTypedef:
 \_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58

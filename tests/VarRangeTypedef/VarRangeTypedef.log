@@ -48,6 +48,7 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<8:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv:1:1: No timescale set for "pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv:1:1: Compile package "pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
@@ -62,6 +63,7 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -164,7 +166,8 @@ Design: (unnamed)
     \_RefTypespec: (pkg::a), line:5:12, endln:5:13
       |vpiParent:
       \_ArrayTypespec: , line:5:12, endln:5:20
-      |vpiName:pkg::a
+      |vpiName:a
+      |vpiFullName:pkg::a
       |vpiActual:
       \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:

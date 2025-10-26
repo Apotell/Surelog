@@ -143,6 +143,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructField/dut.sv:2:1: No timescale set for "my_package".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructField/dut.sv:16:1: No timescale set for "my_module".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackStructField/dut.sv:2:1: Compile package "my_package".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructField/dut.sv:16:1: Compile module "work@my_module".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -154,6 +155,7 @@ Identifier                                             3
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              3
 Package                                                1
 ParamAssign                                            1
@@ -163,7 +165,6 @@ RefObj                                                 6
 RefTypespec                                           15
 SourceFile                                             1
 StringTypespec                                         6
-StructNet                                              2
 StructTypespec                                         1
 TaggedPattern                                          6
 TypedefTypespec                                        1
@@ -326,13 +327,13 @@ Design: (unnamed)
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
     |vpiName:work@my_module
   |vpiImportTypespec:
-  \_StructNet: (work@my_module.x), line:17:34, endln:17:35
+  \_Net: (work@my_module.x), line:17:34, endln:17:35
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
     |vpiTypespec:
     \_RefTypespec: (work@my_module.x.my_package::my_struct), line:17:12, endln:17:33
       |vpiParent:
-      \_StructNet: (work@my_module.x), line:17:34, endln:17:35
+      \_Net: (work@my_module.x), line:17:34, endln:17:35
       |vpiName:my_package::my_struct
       |vpiFullName:work@my_module.x.my_package::my_struct
       |vpiActual:
@@ -340,13 +341,13 @@ Design: (unnamed)
     |vpiName:x
     |vpiFullName:work@my_module.x
   |vpiImportTypespec:
-  \_StructNet: (work@my_module.y), line:18:34, endln:18:35
+  \_Net: (work@my_module.y), line:18:34, endln:18:35
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
     |vpiTypespec:
     \_RefTypespec: (work@my_module.y.my_package::my_struct), line:18:12, endln:18:33
       |vpiParent:
-      \_StructNet: (work@my_module.y), line:18:34, endln:18:35
+      \_Net: (work@my_module.y), line:18:34, endln:18:35
       |vpiName:my_package::my_struct
       |vpiFullName:work@my_module.y.my_package::my_struct
       |vpiActual:
@@ -355,9 +356,9 @@ Design: (unnamed)
     |vpiFullName:work@my_module.y
   |vpiDefName:work@my_module
   |vpiNet:
-  \_StructNet: (work@my_module.x), line:17:34, endln:17:35
+  \_Net: (work@my_module.x), line:17:34, endln:17:35
   |vpiNet:
-  \_StructNet: (work@my_module.y), line:18:34, endln:18:35
+  \_Net: (work@my_module.y), line:18:34, endln:18:35
   |vpiPort:
   \_Port: (x), line:17:34, endln:17:35
     |vpiParent:
@@ -417,7 +418,7 @@ Design: (unnamed)
       |vpiName:x
       |vpiFullName:work@my_module.x
       |vpiActual:
-      \_StructNet: (work@my_module.x), line:17:34, endln:17:35
+      \_Net: (work@my_module.x), line:17:34, endln:17:35
   |vpiContAssign:
   \_ContAssign: , line:22:8, endln:22:38
     |vpiParent:
@@ -449,7 +450,7 @@ Design: (unnamed)
       |vpiName:y
       |vpiFullName:work@my_module.y
       |vpiActual:
-      \_StructNet: (work@my_module.y), line:18:34, endln:18:35
+      \_Net: (work@my_module.y), line:18:34, endln:18:35
   |vpiEndLabel:my_module
 |vpiTypedef:
 \_ModuleTypespec: (my_module)

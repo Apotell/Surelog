@@ -32,6 +32,7 @@ LIB: logicLib
 [WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:1: No timescale set for "cmp".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/LibraryIntercon/nets.pkg:1:1: Compile package "NetsPkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv:2:1: Compile module "logicLib@cmp".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/driver.sv:2:1: Compile module "logicLib@driver".
 [INF:CP0303] ${SURELOG_DIR}/tests/LibraryIntercon/top.sv:1:1: Compile module "logicLib@top".
@@ -43,7 +44,6 @@ LIB: logicLib
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 2
-ArrayNet                                               1
 ArrayTypespec                                          1
 Assignment                                            15
 Begin                                                  5
@@ -66,11 +66,11 @@ IfStmt                                                 1
 ImportTypespec                                         2
 Initial                                                4
 IntTypespec                                           15
-LogicNet                                               9
 LogicTypespec                                         16
 Module                                                 6
 ModuleArray                                            2
 ModuleTypespec                                         5
+Net                                                   12
 Operation                                             11
 Package                                                2
 ParamAssign                                            6
@@ -83,7 +83,8 @@ RefTypespec                                           46
 SourceFile                                             6
 Task                                                   9
 TypedefTypespec                                        2
-Variable                                               5
+UnsupportedTypespec                                    5
+Variable                                               3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LibraryIntercon/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1002,13 +1003,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:13, endln:4:18
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+  \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
     |vpiParent:
     \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
     |vpiTypespec:
     \_RefTypespec: (logicLib@cmp.inA), line:4:13, endln:4:18
       |vpiParent:
-      \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+      \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
       |vpiFullName:logicLib@cmp.inA
       |vpiActual:
       \_LogicTypespec: , line:4:13, endln:4:18
@@ -1016,13 +1017,13 @@ Design: (unnamed)
     |vpiFullName:logicLib@cmp.inA
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@cmp.rst), line:5:13, endln:5:16
+  \_Net: (logicLib@cmp.rst), line:5:13, endln:5:16
     |vpiParent:
     \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
     |vpiTypespec:
     \_RefTypespec: (logicLib@cmp.rst), line:5:7, endln:5:12
       |vpiParent:
-      \_LogicNet: (logicLib@cmp.rst), line:5:13, endln:5:16
+      \_Net: (logicLib@cmp.rst), line:5:13, endln:5:16
       |vpiFullName:logicLib@cmp.rst
       |vpiActual:
       \_LogicTypespec: , line:4:13, endln:4:18
@@ -1030,13 +1031,13 @@ Design: (unnamed)
     |vpiFullName:logicLib@cmp.rst
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+  \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
     |vpiParent:
     \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
     |vpiTypespec:
     \_RefTypespec: (logicLib@cmp.out), line:7:1, endln:7:6
       |vpiParent:
-      \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+      \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
       |vpiFullName:logicLib@cmp.out
       |vpiActual:
       \_LogicTypespec: , line:4:13, endln:4:18
@@ -1045,11 +1046,11 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:logicLib@cmp
   |vpiNet:
-  \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+  \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
   |vpiNet:
-  \_LogicNet: (logicLib@cmp.rst), line:5:13, endln:5:16
+  \_Net: (logicLib@cmp.rst), line:5:13, endln:5:16
   |vpiNet:
-  \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+  \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
   |vpiPort:
   \_Port: (inA), line:4:25, endln:4:28
     |vpiParent:
@@ -1114,7 +1115,7 @@ Design: (unnamed)
         |vpiName:out
         |vpiFullName:logicLib@cmp.out
         |vpiActual:
-        \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+        \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
   |vpiProcess:
   \_Always: , line:11:1, endln:22:4
     |vpiParent:
@@ -1135,7 +1136,7 @@ Design: (unnamed)
           |vpiName:inA
           |vpiFullName:logicLib@cmp.inA
           |vpiActual:
-          \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+          \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
         |vpiOperand:
         \_RefObj: (logicLib@cmp.rst), line:12:9, endln:12:12
           |vpiParent:
@@ -1143,7 +1144,7 @@ Design: (unnamed)
           |vpiName:rst
           |vpiFullName:logicLib@cmp.rst
           |vpiActual:
-          \_LogicNet: (logicLib@cmp.rst), line:5:13, endln:5:16
+          \_Net: (logicLib@cmp.rst), line:5:13, endln:5:16
       |vpiStmt:
       \_Begin: (logicLib@cmp), line:13:1, endln:22:4
         |vpiParent:
@@ -1160,7 +1161,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:logicLib@cmp.rst
             |vpiActual:
-            \_LogicNet: (logicLib@cmp.rst), line:5:13, endln:5:16
+            \_Net: (logicLib@cmp.rst), line:5:13, endln:5:16
           |vpiStmt:
           \_Assignment: , line:15:8, endln:15:19
             |vpiParent:
@@ -1181,7 +1182,7 @@ Design: (unnamed)
               |vpiName:out
               |vpiFullName:logicLib@cmp.out
               |vpiActual:
-              \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+              \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
           |vpiElseStmt:
           \_IfElse: , line:17:1, endln:21:10
             |vpiParent:
@@ -1198,7 +1199,7 @@ Design: (unnamed)
                 |vpiName:inA
                 |vpiFullName:logicLib@cmp.inA
                 |vpiActual:
-                \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+                \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
                 |vpiIndex:
                 \_Constant: , line:18:7, endln:18:8
                   |vpiParent:
@@ -1219,7 +1220,7 @@ Design: (unnamed)
                   |vpiName:inA
                   |vpiFullName:logicLib@cmp.inA
                   |vpiActual:
-                  \_LogicNet: (logicLib@cmp.inA), line:4:25, endln:4:28
+                  \_Net: (logicLib@cmp.inA), line:4:25, endln:4:28
                   |vpiIndex:
                   \_Constant: , line:18:17, endln:18:18
                     |vpiParent:
@@ -1248,7 +1249,7 @@ Design: (unnamed)
                 |vpiName:out
                 |vpiFullName:logicLib@cmp.out
                 |vpiActual:
-                \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+                \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
             |vpiElseStmt:
             \_Assignment: , line:20:1, endln:21:9
               |vpiParent:
@@ -1269,7 +1270,7 @@ Design: (unnamed)
                 |vpiName:out
                 |vpiFullName:logicLib@cmp.out
                 |vpiActual:
-                \_LogicNet: (logicLib@cmp.out), line:8:2, endln:8:5
+                \_Net: (logicLib@cmp.out), line:8:2, endln:8:5
     |vpiAlwaysType:1
   |vpiEndLabel:cmp
 |vpiAllModules:
@@ -1376,13 +1377,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:12:1, endln:12:6
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@driver.out), line:13:8, endln:13:11
+  \_Net: (logicLib@driver.out), line:13:8, endln:13:11
     |vpiParent:
     \_Module: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (logicLib@driver.out), line:12:1, endln:12:6
       |vpiParent:
-      \_LogicNet: (logicLib@driver.out), line:13:8, endln:13:11
+      \_Net: (logicLib@driver.out), line:13:8, endln:13:11
       |vpiFullName:logicLib@driver.out
       |vpiActual:
       \_LogicTypespec: , line:12:1, endln:12:6
@@ -1392,13 +1393,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:1, endln:15:6
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+  \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
     |vpiParent:
     \_Module: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (logicLib@driver.outvar), line:15:1, endln:16:7
       |vpiParent:
-      \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+      \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
       |vpiFullName:logicLib@driver.outvar
       |vpiActual:
       \_LogicTypespec: , line:15:1, endln:15:6
@@ -1407,9 +1408,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:logicLib@driver
   |vpiNet:
-  \_LogicNet: (logicLib@driver.out), line:13:8, endln:13:11
+  \_Net: (logicLib@driver.out), line:13:8, endln:13:11
   |vpiNet:
-  \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+  \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
   |vpiPort:
   \_Port: (out), line:13:8, endln:13:11
     |vpiParent:
@@ -1515,7 +1516,7 @@ Design: (unnamed)
               |vpiName:outvar
               |vpiFullName:logicLib@driver.outvar
               |vpiActual:
-              \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+              \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
           |vpiDelay:
           \_RefObj: (logicLib@driver.delay), line:26:2, endln:26:7
             |vpiParent:
@@ -1554,7 +1555,7 @@ Design: (unnamed)
           |vpiName:outvar
           |vpiFullName:logicLib@driver.outvar
           |vpiActual:
-          \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+          \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
       |vpiStmt:
       \_ForStmt: (logicLib@driver), line:22:1, endln:26:17
   |vpiContAssign:
@@ -1568,7 +1569,7 @@ Design: (unnamed)
       |vpiName:outvar
       |vpiFullName:logicLib@driver.outvar
       |vpiActual:
-      \_LogicNet: (logicLib@driver.outvar), line:16:8, endln:16:14
+      \_Net: (logicLib@driver.outvar), line:16:8, endln:16:14
     |vpiLhs:
     \_RefObj: (logicLib@driver.out), line:18:2, endln:18:5
       |vpiParent:
@@ -1576,7 +1577,7 @@ Design: (unnamed)
       |vpiName:out
       |vpiFullName:logicLib@driver.out
       |vpiActual:
-      \_LogicNet: (logicLib@driver.out), line:13:8, endln:13:11
+      \_Net: (logicLib@driver.out), line:13:8, endln:13:11
   |vpiEndLabel:driver
 |vpiAllModules:
 \_Module: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
@@ -1672,13 +1673,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:25
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@top.aBus), line:2:26, endln:2:30
+  \_Net: (logicLib@top.aBus), line:2:26, endln:2:30
     |vpiParent:
     \_Module: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
     |vpiTypespec:
     \_RefTypespec: (logicLib@top.aBus), line:2:14, endln:2:25
       |vpiParent:
-      \_LogicNet: (logicLib@top.aBus), line:2:26, endln:2:30
+      \_Net: (logicLib@top.aBus), line:2:26, endln:2:30
       |vpiFullName:logicLib@top.aBus
       |vpiActual:
       \_LogicTypespec: , line:2:14, endln:2:25
@@ -1688,13 +1689,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@top.dBus), line:3:13, endln:3:17
+  \_Net: (logicLib@top.dBus), line:3:13, endln:3:17
     |vpiParent:
     \_Module: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
     |vpiTypespec:
     \_RefTypespec: (logicLib@top.dBus), line:3:1, endln:3:12
       |vpiParent:
-      \_LogicNet: (logicLib@top.dBus), line:3:13, endln:3:17
+      \_Net: (logicLib@top.dBus), line:3:13, endln:3:17
       |vpiFullName:logicLib@top.dBus
       |vpiActual:
       \_LogicTypespec: , line:3:1, endln:3:6
@@ -1702,7 +1703,7 @@ Design: (unnamed)
     |vpiFullName:logicLib@top.dBus
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (logicLib@top.rst), line:7:24, endln:7:27
+  \_Net: (logicLib@top.rst), line:7:24, endln:7:27
     |vpiParent:
     \_Module: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
     |vpiName:rst
@@ -1710,11 +1711,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:logicLib@top
   |vpiNet:
-  \_LogicNet: (logicLib@top.aBus), line:2:26, endln:2:30
+  \_Net: (logicLib@top.aBus), line:2:26, endln:2:30
   |vpiNet:
-  \_LogicNet: (logicLib@top.dBus), line:3:13, endln:3:17
+  \_Net: (logicLib@top.dBus), line:3:13, endln:3:17
   |vpiNet:
-  \_LogicNet: (logicLib@top.rst), line:7:24, endln:7:27
+  \_Net: (logicLib@top.rst), line:7:24, endln:7:27
   |vpiModuleArrays:
   \_ModuleArray: (logicLib@driver), line:5:8, endln:5:19
     |vpiParent:
@@ -1761,7 +1762,7 @@ Design: (unnamed)
         |vpiName:aBus
         |vpiFullName:logicLib@top.driverArray.aBus.aBus
         |vpiActual:
-        \_LogicNet: (logicLib@top.aBus), line:2:26, endln:2:30
+        \_Net: (logicLib@top.aBus), line:2:26, endln:2:30
   |vpiModuleArrays:
   \_ModuleArray: (logicLib@cmp), line:7:5, endln:7:13
     |vpiParent:
@@ -1807,7 +1808,7 @@ Design: (unnamed)
         |vpiName:aBus
         |vpiFullName:logicLib@top.cmpArray.aBus
         |vpiActual:
-        \_LogicNet: (logicLib@top.aBus), line:2:26, endln:2:30
+        \_Net: (logicLib@top.aBus), line:2:26, endln:2:30
     |vpiPort:
     \_Port: , line:7:24, endln:7:27
       |vpiParent:
@@ -1819,7 +1820,7 @@ Design: (unnamed)
         |vpiName:rst
         |vpiFullName:logicLib@top.cmpArray.rst
         |vpiActual:
-        \_LogicNet: (logicLib@top.rst), line:7:24, endln:7:27
+        \_Net: (logicLib@top.rst), line:7:24, endln:7:27
     |vpiPort:
     \_Port: , line:7:28, endln:7:32
       |vpiParent:
@@ -1831,7 +1832,7 @@ Design: (unnamed)
         |vpiName:dBus
         |vpiFullName:logicLib@top.cmpArray.dBus
         |vpiActual:
-        \_LogicNet: (logicLib@top.dBus), line:3:13, endln:3:17
+        \_Net: (logicLib@top.dBus), line:3:13, endln:3:17
   |vpiEndLabel:top
 |vpiAllModules:
 \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
@@ -1842,22 +1843,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
     |vpiName:realLib@cmp
-  |vpiVariable:
-  \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
-    |vpiParent:
-    \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
-    |vpiTypespec:
-    \_RefTypespec: (realLib@cmp.inA.NetsPkg::realNet), line:12:2, endln:12:9
-      |vpiParent:
-      \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
-      |vpiName:NetsPkg::realNet
-      |vpiFullName:realLib@cmp.inA.NetsPkg::realNet
-      |vpiActual:
-      \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
-    |vpiName:inA
-    |vpiFullName:realLib@cmp.inA
-    |vpiRandType:1
-    |vpiVisibility:1
   |vpiVariable:
   \_Variable: (realLib@cmp.updatePeriod), line:20:2, endln:20:14
     |vpiParent:
@@ -1939,17 +1924,29 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_RealTypespec: , line:8:1, endln:8:5
   |vpiImportTypespec:
-  \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
+  \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
+    |vpiParent:
+    \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+    |vpiTypespec:
+    \_RefTypespec: (realLib@cmp.inA.realNet), line:12:2, endln:12:9
+      |vpiParent:
+      \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
+      |vpiName:realNet
+      |vpiFullName:realLib@cmp.inA.realNet
+      |vpiActual:
+      \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
+    |vpiName:inA
+    |vpiFullName:realLib@cmp.inA
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:8, endln:13:13
   |vpiImportTypespec:
-  \_LogicNet: (realLib@cmp.rst), line:14:2, endln:14:5
+  \_Net: (realLib@cmp.rst), line:14:2, endln:14:5
     |vpiParent:
     \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
     |vpiTypespec:
     \_RefTypespec: (realLib@cmp.rst), line:13:8, endln:13:13
       |vpiParent:
-      \_LogicNet: (realLib@cmp.rst), line:14:2, endln:14:5
+      \_Net: (realLib@cmp.rst), line:14:2, endln:14:5
       |vpiFullName:realLib@cmp.rst
       |vpiActual:
       \_LogicTypespec: , line:13:8, endln:13:13
@@ -1957,13 +1954,13 @@ Design: (unnamed)
     |vpiFullName:realLib@cmp.rst
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+  \_Net: (realLib@cmp.out), line:17:2, endln:17:5
     |vpiParent:
     \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
     |vpiTypespec:
     \_RefTypespec: (realLib@cmp.out), line:16:1, endln:16:6
       |vpiParent:
-      \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+      \_Net: (realLib@cmp.out), line:17:2, endln:17:5
       |vpiFullName:realLib@cmp.out
       |vpiActual:
       \_LogicTypespec: , line:13:8, endln:13:13
@@ -1974,9 +1971,11 @@ Design: (unnamed)
   \_Variable: (realLib@cmp.updatePeriod), line:20:2, endln:20:14
   |vpiDefName:realLib@cmp
   |vpiNet:
-  \_LogicNet: (realLib@cmp.rst), line:14:2, endln:14:5
+  \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
   |vpiNet:
-  \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+  \_Net: (realLib@cmp.rst), line:14:2, endln:14:5
+  |vpiNet:
+  \_Net: (realLib@cmp.out), line:17:2, endln:17:5
   |vpiPort:
   \_Port: (inA), line:12:16, endln:12:19
     |vpiParent:
@@ -1984,11 +1983,11 @@ Design: (unnamed)
     |vpiName:inA
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (realLib@cmp.inA.NetsPkg::realNet), line:12:2, endln:12:9
+    \_RefTypespec: (realLib@cmp.inA.realNet), line:12:2, endln:12:9
       |vpiParent:
       \_Port: (inA), line:12:16, endln:12:19
-      |vpiName:NetsPkg::realNet
-      |vpiFullName:realLib@cmp.inA.NetsPkg::realNet
+      |vpiName:realNet
+      |vpiFullName:realLib@cmp.inA.realNet
       |vpiActual:
       \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
   |vpiPort:
@@ -2042,7 +2041,7 @@ Design: (unnamed)
         |vpiName:out
         |vpiFullName:realLib@cmp.out
         |vpiActual:
-        \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+        \_Net: (realLib@cmp.out), line:17:2, endln:17:5
   |vpiProcess:
   \_Always: , line:23:1, endln:34:4
     |vpiParent:
@@ -2067,7 +2066,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:realLib@cmp.rst
             |vpiActual:
-            \_LogicNet: (realLib@cmp.rst), line:14:2, endln:14:5
+            \_Net: (realLib@cmp.rst), line:14:2, endln:14:5
           |vpiStmt:
           \_Assignment: , line:27:8, endln:27:19
             |vpiParent:
@@ -2088,7 +2087,7 @@ Design: (unnamed)
               |vpiName:out
               |vpiFullName:realLib@cmp.out
               |vpiActual:
-              \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+              \_Net: (realLib@cmp.out), line:17:2, endln:17:5
           |vpiElseStmt:
           \_IfElse: , line:29:1, endln:33:39
             |vpiParent:
@@ -2105,7 +2104,7 @@ Design: (unnamed)
                 |vpiName:inA
                 |vpiFullName:realLib@cmp.inA
                 |vpiActual:
-                \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
+                \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
                 |vpiIndex:
                 \_Constant: , line:30:7, endln:30:8
                   |vpiParent:
@@ -2121,7 +2120,7 @@ Design: (unnamed)
                 |vpiName:inA
                 |vpiFullName:realLib@cmp.inA
                 |vpiActual:
-                \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
+                \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
                 |vpiIndex:
                 \_Constant: , line:30:16, endln:30:17
                   |vpiParent:
@@ -2150,7 +2149,7 @@ Design: (unnamed)
                 |vpiName:out
                 |vpiFullName:realLib@cmp.out
                 |vpiActual:
-                \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+                \_Net: (realLib@cmp.out), line:17:2, endln:17:5
             |vpiElseStmt:
             \_IfStmt: , line:32:1, endln:33:39
               |vpiParent:
@@ -2167,7 +2166,7 @@ Design: (unnamed)
                   |vpiName:inA
                   |vpiFullName:realLib@cmp.inA
                   |vpiActual:
-                  \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
+                  \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
                   |vpiIndex:
                   \_Constant: , line:33:7, endln:33:8
                     |vpiParent:
@@ -2188,7 +2187,7 @@ Design: (unnamed)
                     |vpiName:inA
                     |vpiFullName:realLib@cmp.inA
                     |vpiActual:
-                    \_Variable: (realLib@cmp.inA), line:12:16, endln:12:19
+                    \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
                     |vpiIndex:
                     \_Constant: , line:33:16, endln:33:17
                       |vpiParent:
@@ -2225,7 +2224,7 @@ Design: (unnamed)
                   |vpiName:out
                   |vpiFullName:realLib@cmp.out
                   |vpiActual:
-                  \_LogicNet: (realLib@cmp.out), line:17:2, endln:17:5
+                  \_Net: (realLib@cmp.out), line:17:2, endln:17:5
       |vpiDelay:
       \_RefObj: (realLib@cmp.updatePeriod), line:24:3, endln:24:15
         |vpiParent:
@@ -2245,22 +2244,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
     |vpiName:realLib@driver
-  |vpiVariable:
-  \_Variable: (realLib@driver.out), line:5:30, endln:5:33
-    |vpiParent:
-    \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
-    |vpiTypespec:
-    \_RefTypespec: (realLib@driver.out.NetsPkg::realNet), line:5:16, endln:5:23
-      |vpiParent:
-      \_Variable: (realLib@driver.out), line:5:30, endln:5:33
-      |vpiName:NetsPkg::realNet
-      |vpiFullName:realLib@driver.out.NetsPkg::realNet
-      |vpiActual:
-      \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
-    |vpiName:out
-    |vpiFullName:realLib@driver.out
-    |vpiRandType:1
-    |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (realLib@driver.iterations), line:4:17, endln:4:33
     |vpiParent:
@@ -2381,27 +2364,41 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
   |vpiImportTypespec:
-  \_Variable: (realLib@driver.out), line:5:30, endln:5:33
+  \_Net: (realLib@driver.out), line:5:30, endln:5:33
+    |vpiParent:
+    \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+    |vpiTypespec:
+    \_RefTypespec: (realLib@driver.out.realNet), line:5:16, endln:5:23
+      |vpiParent:
+      \_Net: (realLib@driver.out), line:5:30, endln:5:33
+      |vpiName:realNet
+      |vpiFullName:realLib@driver.out.realNet
+      |vpiActual:
+      \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
+    |vpiName:out
+    |vpiFullName:realLib@driver.out
   |vpiImportTypespec:
   \_RealTypespec: , line:7:1, endln:7:5
   |vpiImportTypespec:
   \_ArrayTypespec: , line:7:1, endln:7:15
   |vpiImportTypespec:
-  \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+  \_Net: (realLib@driver.outR), line:7:6, endln:7:10
     |vpiParent:
     \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
     |vpiTypespec:
     \_RefTypespec: (realLib@driver.outR), line:7:1, endln:7:5
       |vpiParent:
-      \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+      \_Net: (realLib@driver.outR), line:7:6, endln:7:10
       |vpiFullName:realLib@driver.outR
       |vpiActual:
       \_ArrayTypespec: , line:7:1, endln:7:15
     |vpiName:outR
     |vpiFullName:realLib@driver.outR
   |vpiDefName:realLib@driver
-  |vpiArrayNet:
-  \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+  |vpiNet:
+  \_Net: (realLib@driver.out), line:5:30, endln:5:33
+  |vpiNet:
+  \_Net: (realLib@driver.outR), line:7:6, endln:7:10
   |vpiPort:
   \_Port: (out), line:5:30, endln:5:33
     |vpiParent:
@@ -2409,11 +2406,11 @@ Design: (unnamed)
     |vpiName:out
     |vpiDirection:2
     |vpiTypespec:
-    \_RefTypespec: (realLib@driver.out.NetsPkg::realNet), line:5:16, endln:5:23
+    \_RefTypespec: (realLib@driver.out.realNet), line:5:16, endln:5:23
       |vpiParent:
       \_Port: (out), line:5:30, endln:5:33
-      |vpiName:NetsPkg::realNet
-      |vpiFullName:realLib@driver.out.NetsPkg::realNet
+      |vpiName:realNet
+      |vpiFullName:realLib@driver.out.realNet
       |vpiActual:
       \_TypedefTypespec: (NetsPkg::realNet), line:3:14, endln:3:21
   |vpiProcess:
@@ -2474,7 +2471,7 @@ Design: (unnamed)
                 |vpiName:outR
                 |vpiFullName:realLib@driver.outR
                 |vpiActual:
-                \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+                \_Net: (realLib@driver.outR), line:7:6, endln:7:10
                 |vpiIndex:
                 \_Constant: , line:16:19, endln:16:20
                   |vpiParent:
@@ -2512,7 +2509,7 @@ Design: (unnamed)
               |vpiName:outR
               |vpiFullName:realLib@driver.outR
               |vpiActual:
-              \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+              \_Net: (realLib@driver.outR), line:7:6, endln:7:10
               |vpiIndex:
               \_Constant: , line:17:12, endln:17:13
                 |vpiParent:
@@ -2601,7 +2598,7 @@ Design: (unnamed)
           |vpiName:outR
           |vpiFullName:realLib@driver.outR
           |vpiActual:
-          \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+          \_Net: (realLib@driver.outR), line:7:6, endln:7:10
           |vpiIndex:
           \_Constant: , line:12:8, endln:12:9
             |vpiParent:
@@ -2631,7 +2628,7 @@ Design: (unnamed)
           |vpiName:outR
           |vpiFullName:realLib@driver.outR
           |vpiActual:
-          \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+          \_Net: (realLib@driver.outR), line:7:6, endln:7:10
           |vpiIndex:
           \_Constant: , line:13:8, endln:13:9
             |vpiParent:
@@ -2653,7 +2650,7 @@ Design: (unnamed)
       |vpiName:outR
       |vpiFullName:realLib@driver.outR
       |vpiActual:
-      \_ArrayNet: (realLib@driver.outR), line:7:6, endln:7:10
+      \_Net: (realLib@driver.outR), line:7:6, endln:7:10
     |vpiLhs:
     \_RefObj: (realLib@driver.out), line:8:8, endln:8:11
       |vpiParent:
@@ -2661,7 +2658,7 @@ Design: (unnamed)
       |vpiName:out
       |vpiFullName:realLib@driver.out
       |vpiActual:
-      \_Variable: (realLib@driver.out), line:5:30, endln:5:33
+      \_Net: (realLib@driver.out), line:5:30, endln:5:33
   |vpiEndLabel:driver
 |vpiTypedef:
 \_ModuleTypespec: (cmp)

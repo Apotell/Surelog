@@ -176,10 +176,10 @@ Design                                                 1
 GenIf                                                  1
 GenRegion                                              2
 Identifier                                             3
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                              1
 ParamAssign                                            1
 Parameter                                              1
@@ -208,12 +208,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
     |vpiName:work@dut
-  |vpiVariable:
-  \_Variable: (work@dut.loop_int), line:12:14, endln:12:22
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
-    |vpiName:loop_int
-    |vpiFullName:work@dut.loop_int
   |vpiParameter:
   \_Parameter: (work@dut.p), line:6:13, endln:6:21
     |vpiParent:
@@ -294,12 +288,18 @@ Design: (unnamed)
       |vpiParent:
       \_GenRegion: (work@dut), line:11:3, endln:20:14
       |vpiFullName:work@dut
+      |vpiVariable:
+      \_Variable: (work@dut.loop_int), line:12:14, endln:12:22
+        |vpiParent:
+        \_Begin: (work@dut), line:12:5, endln:12:23
+        |vpiName:loop_int
+        |vpiFullName:work@dut.loop_int
+      |vpiImportTypespec:
+      \_Variable: (work@dut.loop_int), line:12:14, endln:12:22
       |vpiStmt:
       \_Variable: (work@dut.loop_int), line:12:14, endln:12:22
     |vpiStmt:
     \_Begin: (work@dut), line:12:5, endln:12:23
-  |vpiImportTypespec:
-  \_Variable: (work@dut.loop_int), line:12:14, endln:12:22
   |vpiDefName:work@dut
 |vpiAllModules:
 \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
@@ -317,13 +317,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:20, endln:2:23
   |vpiImportTypespec:
-  \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
+  \_Net: (work@sub.int_status), line:2:24, endln:2:34
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
     |vpiTypespec:
     \_RefTypespec: (work@sub.int_status), line:2:20, endln:2:23
       |vpiParent:
-      \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
+      \_Net: (work@sub.int_status), line:2:24, endln:2:34
       |vpiFullName:work@sub.int_status
       |vpiActual:
       \_LogicTypespec: , line:2:20, endln:2:23
@@ -332,7 +332,7 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@sub
   |vpiNet:
-  \_LogicNet: (work@sub.int_status), line:2:24, endln:2:34
+  \_Net: (work@sub.int_status), line:2:24, endln:2:34
   |vpiPort:
   \_Port: (int_status), line:2:24, endln:2:34
     |vpiParent:

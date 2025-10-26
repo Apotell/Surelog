@@ -117,6 +117,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PartSelectHier/dut.sv:1:1: No timescale set for "tlul_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PartSelectHier/dut.sv:6:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PartSelectHier/dut.sv:1:1: Compile package "tlul_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelectHier/dut.sv:6:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -125,17 +126,16 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             3
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 PartSelect                                             1
 Range                                                  2
 RefObj                                                 2
 RefTypespec                                            4
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
@@ -257,13 +257,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
+  \_Net: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.drsp_fifo_o.tlul_pkg::tl_d2h_t), line:7:3, endln:7:21
       |vpiParent:
-      \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
+      \_Net: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
       |vpiName:tlul_pkg::tl_d2h_t
       |vpiFullName:work@dut.drsp_fifo_o.tlul_pkg::tl_d2h_t
       |vpiActual:
@@ -273,13 +273,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:3, endln:8:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+  \_Net: (work@dut.hfifo_rspid), line:8:15, endln:8:26
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.hfifo_rspid), line:8:3, endln:8:14
       |vpiParent:
-      \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+      \_Net: (work@dut.hfifo_rspid), line:8:15, endln:8:26
       |vpiFullName:work@dut.hfifo_rspid
       |vpiActual:
       \_LogicTypespec: , line:8:3, endln:8:8
@@ -287,7 +287,7 @@ Design: (unnamed)
     |vpiFullName:work@dut.hfifo_rspid
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.d_source), line:9:36, endln:9:48
+  \_Net: (work@dut.d_source), line:9:36, endln:9:48
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
     |vpiName:d_source
@@ -295,11 +295,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
-  \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
+  \_Net: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
   |vpiNet:
-  \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+  \_Net: (work@dut.hfifo_rspid), line:8:15, endln:8:26
   |vpiNet:
-  \_LogicNet: (work@dut.d_source), line:9:36, endln:9:48
+  \_Net: (work@dut.d_source), line:9:36, endln:9:48
   |vpiContAssign:
   \_ContAssign: , line:9:10, endln:9:49
     |vpiParent:
@@ -314,7 +314,7 @@ Design: (unnamed)
         \_HierPath: (drsp_fifo_o.d_source[8:3]), line:9:24, endln:9:48
         |vpiName:drsp_fifo_o
         |vpiActual:
-        \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
+        \_Net: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
       |vpiActual:
       \_PartSelect: (drsp_fifo_o.d_source[8:3]), line:9:36, endln:9:48
         |vpiParent:
@@ -322,7 +322,7 @@ Design: (unnamed)
         |vpiName:d_source
         |vpiFullName:drsp_fifo_o.d_source[8:3]
         |vpiActual:
-        \_LogicNet: (work@dut.d_source), line:9:36, endln:9:48
+        \_Net: (work@dut.d_source), line:9:36, endln:9:48
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_Constant: , line:9:45, endln:9:46
@@ -348,7 +348,7 @@ Design: (unnamed)
       |vpiName:hfifo_rspid
       |vpiFullName:work@dut.hfifo_rspid
       |vpiActual:
-      \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+      \_Net: (work@dut.hfifo_rspid), line:8:15, endln:8:26
 |vpiTypedef:
 \_ModuleTypespec: (dut)
   |vpiParent:

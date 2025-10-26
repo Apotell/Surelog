@@ -717,6 +717,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg:4:1: No timescale set for "msgPkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:11:1: No timescale set for "simple_package".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg:4:1: Compile package "definesPkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg:4:1: Compile package "msgPkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:11:1: Compile module "work@simple_package".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -732,7 +734,6 @@ Constant                                              27
 DelayControl                                           3
 Design                                                 1
 EnumConst                                              7
-EnumNet                                                1
 EnumTypespec                                           2
 FuncCall                                               2
 Function                                              11
@@ -744,10 +745,10 @@ ImportTypespec                                         2
 Initial                                                1
 IntTypespec                                            9
 IntegerTypespec                                        4
-LogicNet                                               4
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         2
+Net                                                    5
 Operation                                              4
 Package                                                3
 PackedArrayTypespec                                    2
@@ -765,6 +766,7 @@ Task                                                  14
 TaskCall                                               6
 TypedefTypespec                                        3
 TypespecMember                                         3
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitPackage/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:16:4: Null Actual: id:149, type:RefModule, name:u1.
@@ -1832,7 +1834,7 @@ Design: (unnamed)
           |vpiName:terminate_on_error
           |vpiFullName:msgPkg::initMsgPkg::terminate_on_error
           |vpiActual:
-          \_LogicNet: (msgPkg::terminate_on_error), line:7:12, endln:7:30
+          \_Net: (msgPkg::terminate_on_error), line:7:12, endln:7:30
       |vpiStmt:
       \_Assignment: , line:14:5, endln:14:20
         |vpiParent:
@@ -1854,7 +1856,7 @@ Design: (unnamed)
           |vpiName:msgName
           |vpiFullName:msgPkg::initMsgPkg::msgName
           |vpiActual:
-          \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+          \_Net: (msgPkg::msgName), line:8:12, endln:8:19
     |vpiTypedef:
     \_StringTypespec: , line:12:20, endln:12:26
       |vpiParent:
@@ -1956,7 +1958,7 @@ Design: (unnamed)
         |vpiName:msgName
         |vpiFullName:msgPkg::msg_info::msgName
         |vpiActual:
-        \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+        \_Net: (msgPkg::msgName), line:8:12, endln:8:19
       |vpiArgument:
       \_RefObj: (msgPkg::msg_info::msg), line:20:51, endln:20:54
         |vpiParent:
@@ -2015,7 +2017,7 @@ Design: (unnamed)
           |vpiName:msgName
           |vpiFullName:msgPkg::msg_warn::msgName
           |vpiActual:
-          \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+          \_Net: (msgPkg::msgName), line:8:12, endln:8:19
         |vpiArgument:
         \_RefObj: (msgPkg::msg_warn::msg), line:26:51, endln:26:54
           |vpiParent:
@@ -2041,7 +2043,7 @@ Design: (unnamed)
           |vpiName:warnCnt
           |vpiFullName:msgPkg::msg_warn::warnCnt
           |vpiActual:
-          \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
+          \_Net: (msgPkg::warnCnt), line:6:12, endln:6:19
     |vpiTypedef:
     \_StringTypespec: , line:25:19, endln:25:25
       |vpiParent:
@@ -2109,7 +2111,7 @@ Design: (unnamed)
           |vpiName:msgName
           |vpiFullName:msgPkg::msg_error::msgName
           |vpiActual:
-          \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+          \_Net: (msgPkg::msgName), line:8:12, endln:8:19
         |vpiArgument:
         \_RefObj: (msgPkg::msg_error::msg), line:33:52, endln:33:55
           |vpiParent:
@@ -2135,7 +2137,7 @@ Design: (unnamed)
           |vpiName:errCnt
           |vpiFullName:msgPkg::msg_error::errCnt
           |vpiActual:
-          \_LogicNet: (msgPkg::errCnt), line:5:12, endln:5:18
+          \_Net: (msgPkg::errCnt), line:5:12, endln:5:18
       |vpiStmt:
       \_IfStmt: , line:35:5, endln:35:37
         |vpiParent:
@@ -2147,7 +2149,7 @@ Design: (unnamed)
           |vpiName:terminate_on_error
           |vpiFullName:msgPkg::msg_error::terminate_on_error
           |vpiActual:
-          \_LogicNet: (msgPkg::terminate_on_error), line:7:12, endln:7:30
+          \_Net: (msgPkg::terminate_on_error), line:7:12, endln:7:30
         |vpiStmt:
         \_SysFuncCall: ($finish), line:35:29, endln:35:36
           |vpiParent:
@@ -2224,7 +2226,7 @@ Design: (unnamed)
           |vpiName:msgName
           |vpiFullName:msgPkg::msg_fatal::msgName
           |vpiActual:
-          \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+          \_Net: (msgPkg::msgName), line:8:12, endln:8:19
         |vpiArgument:
         \_RefObj: (msgPkg::msg_fatal::msg), line:41:52, endln:41:55
           |vpiParent:
@@ -2309,7 +2311,7 @@ Design: (unnamed)
         |vpiName:errCnt
         |vpiFullName:msgPkg::getErrCnt::errCnt
         |vpiActual:
-        \_LogicNet: (msgPkg::errCnt), line:5:12, endln:5:18
+        \_Net: (msgPkg::errCnt), line:5:12, endln:5:18
       |vpiLhs:
       \_RefObj: (msgPkg::getErrCnt::getErrCnt), line:48:5, endln:48:14
         |vpiParent:
@@ -2358,7 +2360,7 @@ Design: (unnamed)
         |vpiName:warnCnt
         |vpiFullName:msgPkg::getWarnCnt::warnCnt
         |vpiActual:
-        \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
+        \_Net: (msgPkg::warnCnt), line:6:12, endln:6:19
       |vpiLhs:
       \_RefObj: (msgPkg::getWarnCnt::getWarnCnt), line:54:5, endln:54:15
         |vpiParent:
@@ -2399,26 +2401,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:5:3, endln:5:10
   |vpiImportTypespec:
-  \_LogicNet: (msgPkg::errCnt), line:5:12, endln:5:18
+  \_Net: (msgPkg::errCnt), line:5:12, endln:5:18
     |vpiParent:
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
     |vpiTypespec:
     \_RefTypespec: (msgPkg::errCnt), line:5:3, endln:5:10
       |vpiParent:
-      \_LogicNet: (msgPkg::errCnt), line:5:12, endln:5:18
+      \_Net: (msgPkg::errCnt), line:5:12, endln:5:18
       |vpiFullName:msgPkg::errCnt
       |vpiActual:
       \_IntegerTypespec: , line:5:3, endln:5:10
     |vpiName:errCnt
     |vpiFullName:msgPkg::errCnt
   |vpiImportTypespec:
-  \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
+  \_Net: (msgPkg::warnCnt), line:6:12, endln:6:19
     |vpiParent:
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
     |vpiTypespec:
     \_RefTypespec: (msgPkg::warnCnt), line:6:3, endln:6:10
       |vpiParent:
-      \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
+      \_Net: (msgPkg::warnCnt), line:6:12, endln:6:19
       |vpiFullName:msgPkg::warnCnt
       |vpiActual:
       \_IntegerTypespec: , line:5:3, endln:5:10
@@ -2427,13 +2429,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_BitTypespec: , line:7:3, endln:7:6
   |vpiImportTypespec:
-  \_LogicNet: (msgPkg::terminate_on_error), line:7:12, endln:7:30
+  \_Net: (msgPkg::terminate_on_error), line:7:12, endln:7:30
     |vpiParent:
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
     |vpiTypespec:
     \_RefTypespec: (msgPkg::terminate_on_error), line:7:3, endln:7:6
       |vpiParent:
-      \_LogicNet: (msgPkg::terminate_on_error), line:7:12, endln:7:30
+      \_Net: (msgPkg::terminate_on_error), line:7:12, endln:7:30
       |vpiFullName:msgPkg::terminate_on_error
       |vpiActual:
       \_BitTypespec: , line:7:3, endln:7:6
@@ -2442,13 +2444,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: , line:8:3, endln:8:9
   |vpiImportTypespec:
-  \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+  \_Net: (msgPkg::msgName), line:8:12, endln:8:19
     |vpiParent:
     \_Package: msgPkg (msgPkg), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
     |vpiTypespec:
     \_RefTypespec: (msgPkg::msgName), line:8:3, endln:8:9
       |vpiParent:
-      \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+      \_Net: (msgPkg::msgName), line:8:12, endln:8:19
       |vpiFullName:msgPkg::msgName
       |vpiActual:
       \_StringTypespec: , line:8:3, endln:8:9
@@ -2470,13 +2472,13 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (msgPkg::getWarnCnt), line:53:3, endln:55:14
   |vpiNet:
-  \_LogicNet: (msgPkg::errCnt), line:5:12, endln:5:18
+  \_Net: (msgPkg::errCnt), line:5:12, endln:5:18
   |vpiNet:
-  \_LogicNet: (msgPkg::warnCnt), line:6:12, endln:6:19
+  \_Net: (msgPkg::warnCnt), line:6:12, endln:6:19
   |vpiNet:
-  \_LogicNet: (msgPkg::terminate_on_error), line:7:12, endln:7:30
+  \_Net: (msgPkg::terminate_on_error), line:7:12, endln:7:30
   |vpiNet:
-  \_LogicNet: (msgPkg::msgName), line:8:12, endln:8:19
+  \_Net: (msgPkg::msgName), line:8:12, endln:8:19
 |vpiAllModules:
 \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
   |vpiParent:
@@ -2510,21 +2512,21 @@ Design: (unnamed)
       |vpiName:u1
       |vpiDefName:work@M1
   |vpiImportTypespec:
-  \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
+  \_Net: (work@simple_package.value), line:13:8, endln:13:13
     |vpiParent:
     \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
     |vpiTypespec:
-    \_RefTypespec: (work@simple_package.value.definesPkg::bool), line:13:1, endln:13:5
+    \_RefTypespec: (work@simple_package.value.bool), line:13:1, endln:13:5
       |vpiParent:
-      \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
-      |vpiName:definesPkg::bool
-      |vpiFullName:work@simple_package.value.definesPkg::bool
+      \_Net: (work@simple_package.value), line:13:8, endln:13:13
+      |vpiName:bool
+      |vpiFullName:work@simple_package.value.bool
       |vpiActual:
       \_TypedefTypespec: (definesPkg::bool), line:10:31, endln:10:35
     |vpiName:value
     |vpiFullName:work@simple_package.value
   |vpiImportTypespec:
-  \_LogicNet: (work@simple_package.SIZE), line:15:5, endln:15:9
+  \_Net: (work@simple_package.SIZE), line:15:5, endln:15:9
     |vpiParent:
     \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
     |vpiName:SIZE
@@ -2532,9 +2534,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@simple_package
   |vpiNet:
-  \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
+  \_Net: (work@simple_package.value), line:13:8, endln:13:13
   |vpiNet:
-  \_LogicNet: (work@simple_package.SIZE), line:15:5, endln:15:9
+  \_Net: (work@simple_package.SIZE), line:15:5, endln:15:9
   |vpiProcess:
   \_Initial: , line:19:1, endln:28:4
     |vpiParent:
@@ -2704,7 +2706,7 @@ Design: (unnamed)
             |vpiName:value
             |vpiFullName:work@simple_package.value
             |vpiActual:
-            \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
+            \_Net: (work@simple_package.value), line:13:8, endln:13:13
           |vpiOperand:
           \_Constant: , line:26:28, endln:26:32
             |vpiParent:
@@ -2753,7 +2755,7 @@ Design: (unnamed)
         |vpiName:SIZE
         |vpiFullName:work@simple_package.SIZE
         |vpiActual:
-        \_LogicNet: (work@simple_package.SIZE), line:15:5, endln:15:9
+        \_Net: (work@simple_package.SIZE), line:15:5, endln:15:9
       |vpiOperand:
       \_Constant: , line:15:12, endln:15:13
         |vpiParent:

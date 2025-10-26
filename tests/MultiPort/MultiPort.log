@@ -72,6 +72,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiPort/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiPort/dut.sv:7:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/MultiPort/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/MultiPort/dut.sv:7:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -83,15 +84,16 @@ IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 Port                                                   2
 Range                                                  1
 RefTypespec                                            7
 SourceFile                                             1
-StructNet                                              2
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         2
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -223,38 +225,38 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:7:19, endln:7:40
   |vpiImportTypespec:
-  \_StructNet: (work@top.a), line:9:25, endln:9:26
+  \_Net: (work@top.a), line:9:25, endln:9:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:7:1, endln:11:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.a.my_pkg::variable_type), line:9:11, endln:9:24
+    \_RefTypespec: (work@top.a.variable_type), line:9:11, endln:9:24
       |vpiParent:
-      \_StructNet: (work@top.a), line:9:25, endln:9:26
-      |vpiName:my_pkg::variable_type
-      |vpiFullName:work@top.a.my_pkg::variable_type
+      \_Net: (work@top.a), line:9:25, endln:9:26
+      |vpiName:variable_type
+      |vpiFullName:work@top.a.variable_type
       |vpiActual:
       \_TypedefTypespec: (my_pkg::variable_type), line:5:7, endln:5:20
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiImportTypespec:
-  \_StructNet: (work@top.b), line:9:28, endln:9:29
+  \_Net: (work@top.b), line:9:28, endln:9:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:7:1, endln:11:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.b.my_pkg::variable_type), line:9:11, endln:9:24
+    \_RefTypespec: (work@top.b.variable_type), line:9:11, endln:9:24
       |vpiParent:
-      \_StructNet: (work@top.b), line:9:28, endln:9:29
-      |vpiName:my_pkg::variable_type
-      |vpiFullName:work@top.b.my_pkg::variable_type
+      \_Net: (work@top.b), line:9:28, endln:9:29
+      |vpiName:variable_type
+      |vpiFullName:work@top.b.variable_type
       |vpiActual:
       \_TypedefTypespec: (my_pkg::variable_type), line:5:7, endln:5:20
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.a), line:9:25, endln:9:26
+  \_Net: (work@top.a), line:9:25, endln:9:26
   |vpiNet:
-  \_StructNet: (work@top.b), line:9:28, endln:9:29
+  \_Net: (work@top.b), line:9:28, endln:9:29
   |vpiPort:
   \_Port: (a), line:9:25, endln:9:26
     |vpiParent:
@@ -262,11 +264,11 @@ Design: (unnamed)
     |vpiName:a
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@top.a.my_pkg::variable_type), line:9:11, endln:9:24
+    \_RefTypespec: (work@top.a.variable_type), line:9:11, endln:9:24
       |vpiParent:
       \_Port: (a), line:9:25, endln:9:26
-      |vpiName:my_pkg::variable_type
-      |vpiFullName:work@top.a.my_pkg::variable_type
+      |vpiName:variable_type
+      |vpiFullName:work@top.a.variable_type
       |vpiActual:
       \_TypedefTypespec: (my_pkg::variable_type), line:5:7, endln:5:20
   |vpiPort:
@@ -276,11 +278,11 @@ Design: (unnamed)
     |vpiName:b
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@top.b.my_pkg::variable_type), line:9:11, endln:9:24
+    \_RefTypespec: (work@top.b.variable_type), line:9:11, endln:9:24
       |vpiParent:
       \_Port: (b), line:9:28, endln:9:29
-      |vpiName:my_pkg::variable_type
-      |vpiFullName:work@top.b.my_pkg::variable_type
+      |vpiName:variable_type
+      |vpiFullName:work@top.b.variable_type
       |vpiActual:
       \_TypedefTypespec: (my_pkg::variable_type), line:5:7, endln:5:20
 |vpiTypedef:

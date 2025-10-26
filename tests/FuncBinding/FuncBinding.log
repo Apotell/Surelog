@@ -16,7 +16,6 @@ Constant                                              17
 DelayControl                                           2
 Design                                                 1
 EnumConst                                              3
-EnumNet                                                2
 EnumTypespec                                           1
 EventControl                                           2
 FuncCall                                               1
@@ -27,6 +26,7 @@ IfElse                                                 5
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              7
 Port                                                   6
 Range                                                  3
@@ -34,6 +34,7 @@ RefObj                                                36
 RefTypespec                                           21
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    2
 Variable                                               6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBinding/slpp_unit/surelog.uhdm ...
@@ -745,13 +746,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@fsm_using_function.gnt_1), line:7:12, endln:7:17
   |vpiImportTypespec:
-  \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+  \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
     |vpiTypespec:
     \_RefTypespec: (work@fsm_using_function.curr_state.state), line:12:1, endln:12:6
       |vpiParent:
-      \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+      \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
       |vpiName:state
       |vpiFullName:work@fsm_using_function.curr_state.state
       |vpiActual:
@@ -759,13 +760,13 @@ Design: (unnamed)
     |vpiName:curr_state
     |vpiFullName:work@fsm_using_function.curr_state
   |vpiImportTypespec:
-  \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+  \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
     |vpiTypespec:
     \_RefTypespec: (work@fsm_using_function.next_state.state), line:12:1, endln:12:6
       |vpiParent:
-      \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+      \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
       |vpiName:state
       |vpiFullName:work@fsm_using_function.next_state.state
       |vpiActual:
@@ -776,9 +777,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
   |vpiNet:
-  \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+  \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
   |vpiNet:
-  \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+  \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
   |vpiPort:
   \_Port: (clock), line:2:11, endln:2:16
     |vpiParent:
@@ -903,7 +904,7 @@ Design: (unnamed)
               |vpiName:curr_state
               |vpiFullName:work@fsm_using_function.FUN.curr_state
               |vpiActual:
-              \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+              \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
             |vpiArgument:
             \_RefObj: (work@fsm_using_function.FUN.req_0), line:17:47, endln:17:52
               |vpiParent:
@@ -927,7 +928,7 @@ Design: (unnamed)
               |vpiName:next_state
               |vpiFullName:work@fsm_using_function.FUN.next_state
               |vpiActual:
-              \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+              \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
             |vpiName:
             \_Identifier: (fsm_function)
               |vpiParent:
@@ -942,7 +943,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_using_function.FUN.next_state
             |vpiActual:
-            \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+            \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:45:1, endln:52:4
@@ -1025,7 +1026,7 @@ Design: (unnamed)
                 |vpiName:curr_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.curr_state
                 |vpiActual:
-                \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+                \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
               |vpiDelayControl:
               \_DelayControl: , line:48:19, endln:48:21
                 |vpiParent:
@@ -1048,7 +1049,7 @@ Design: (unnamed)
                 |vpiName:next_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.next_state
                 |vpiActual:
-                \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+                \_Net: (work@fsm_using_function.next_state), line:12:19, endln:12:29
               |vpiLhs:
               \_RefObj: (work@fsm_using_function.FSM_SEQ.curr_state), line:50:5, endln:50:15
                 |vpiParent:
@@ -1056,7 +1057,7 @@ Design: (unnamed)
                 |vpiName:curr_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.curr_state
                 |vpiActual:
-                \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+                \_Net: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
               |vpiDelayControl:
               \_DelayControl: , line:50:19, endln:50:21
                 |vpiParent:

@@ -177,6 +177,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:8:1: No timescale set for "prim_pad_wrapper".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:12:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:1:1: Compile package "prim_pad_wrapper_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:12:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:8:1: Compile module "work@prim_pad_wrapper".
 [INF:UH0706] Creating UHDM Model...
@@ -188,12 +189,11 @@ EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             7
 ImportTypespec                                         2
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         2
+Net                                                    2
 Package                                                1
-PackedArrayNet                                         1
 PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
@@ -203,6 +203,7 @@ RefModule                                              1
 RefTypespec                                            8
 SourceFile                                             1
 TypedefTypespec                                        2
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHighConn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -464,11 +465,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
+    \_RefTypespec: (work@dut.pad_pok_t), line:14:3, endln:14:12
       |vpiParent:
       \_PackedArrayTypespec: , line:14:3, endln:14:18
-      |vpiName:prim_pad_wrapper_pkg::pad_pok_t
-      |vpiFullName:work@dut.prim_pad_wrapper_pkg::pad_pok_t
+      |vpiName:pad_pok_t
+      |vpiFullName:work@dut.pad_pok_t
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
   |vpiImportTypespec:
@@ -478,13 +479,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:14:3, endln:14:18
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.pad_pok), line:14:19, endln:14:26
+  \_Net: (work@dut.pad_pok), line:14:19, endln:14:26
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:12:1, endln:18:16
     |vpiTypespec:
     \_RefTypespec: (work@dut.pad_pok), line:14:3, endln:14:18
       |vpiParent:
-      \_PackedArrayNet: (work@dut.pad_pok), line:14:19, endln:14:26
+      \_Net: (work@dut.pad_pok), line:14:19, endln:14:26
       |vpiFullName:work@dut.pad_pok
       |vpiActual:
       \_PackedArrayTypespec: , line:14:3, endln:14:18
@@ -492,7 +493,7 @@ Design: (unnamed)
     |vpiFullName:work@dut.pad_pok
   |vpiDefName:work@dut
   |vpiNet:
-  \_PackedArrayNet: (work@dut.pad_pok), line:14:19, endln:14:26
+  \_Net: (work@dut.pad_pok), line:14:19, endln:14:26
   |vpiRefModule:
   \_RefModule: work@prim_pad_wrapper (u_dio_pad), line:15:3, endln:15:19
     |vpiParent:
@@ -513,7 +514,7 @@ Design: (unnamed)
         |vpiName:pad_pok
         |vpiFullName:work@dut.u_dio_pad.pad_pok
         |vpiActual:
-        \_PackedArrayNet: (work@dut.pad_pok), line:14:19, endln:14:26
+        \_Net: (work@dut.pad_pok), line:14:19, endln:14:26
         |vpiIndex:
         \_BitSelect: (work@dut.u_dio_pad.pad_pok.DioPadBank), line:16:37, endln:16:40
           |vpiParent:
@@ -560,22 +561,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:9:10, endln:9:33
   |vpiImportTypespec:
-  \_LogicNet: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
+  \_Net: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
     |vpiParent:
     \_Module: work@prim_pad_wrapper (work@prim_pad_wrapper), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:8:1, endln:10:29
     |vpiTypespec:
-    \_RefTypespec: (work@prim_pad_wrapper.pok_i.prim_pad_wrapper_pkg::pad_pok_t), line:9:42, endln:9:51
+    \_RefTypespec: (work@prim_pad_wrapper.pok_i.pad_pok_t), line:9:42, endln:9:51
       |vpiParent:
-      \_LogicNet: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
-      |vpiName:prim_pad_wrapper_pkg::pad_pok_t
-      |vpiFullName:work@prim_pad_wrapper.pok_i.prim_pad_wrapper_pkg::pad_pok_t
+      \_Net: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
+      |vpiName:pad_pok_t
+      |vpiFullName:work@prim_pad_wrapper.pok_i.pad_pok_t
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
     |vpiName:pok_i
     |vpiFullName:work@prim_pad_wrapper.pok_i
   |vpiDefName:work@prim_pad_wrapper
   |vpiNet:
-  \_LogicNet: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
+  \_Net: (work@prim_pad_wrapper.pok_i), line:9:52, endln:9:57
   |vpiPort:
   \_Port: (pok_i), line:9:52, endln:9:57
     |vpiParent:
@@ -583,11 +584,11 @@ Design: (unnamed)
     |vpiName:pok_i
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@prim_pad_wrapper.pok_i.prim_pad_wrapper_pkg::pad_pok_t), line:9:42, endln:9:51
+    \_RefTypespec: (work@prim_pad_wrapper.pok_i.pad_pok_t), line:9:42, endln:9:51
       |vpiParent:
       \_Port: (pok_i), line:9:52, endln:9:57
-      |vpiName:prim_pad_wrapper_pkg::pad_pok_t
-      |vpiFullName:work@prim_pad_wrapper.pok_i.prim_pad_wrapper_pkg::pad_pok_t
+      |vpiName:pad_pok_t
+      |vpiFullName:work@prim_pad_wrapper.pok_i.pad_pok_t
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:23, endln:5:32
   |vpiEndLabel:prim_pad_wrapper

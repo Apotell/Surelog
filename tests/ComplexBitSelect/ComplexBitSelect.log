@@ -180,6 +180,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:1:1: No timescale set for "flash_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:12:1: No timescale set for "flash_ctrl_info_cfg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:1:1: Compile package "flash_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv:12:1: Compile module "work@flash_ctrl_info_cfg".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -192,7 +193,7 @@ Begin                                                  2
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              26
+Constant                                              24
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -207,16 +208,17 @@ IntTypespec                                           13
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              6
+Operation                                              7
 Package                                                2
 ParamAssign                                            4
 Parameter                                              4
-Range                                                  2
-RefObj                                                 9
-RefTypespec                                           23
+Range                                                  1
+RefObj                                                 7
+RefTypespec                                           21
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexBitSelect/slpp_all/surelog.uhdm ...
@@ -1075,7 +1077,7 @@ Design: (unnamed)
       \_Parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
       |vpiFullName:flash_ctrl_pkg::InfosPerBank
       |vpiActual:
-      \_IntTypespec: , line:3:13, endln:3:16
+      \_IntTypespec: , line:2:13, endln:2:16
     |vpiSigned:1
     |vpiName:InfosPerBank
     |vpiFullName:flash_ctrl_pkg::InfosPerBank
@@ -1146,43 +1148,38 @@ Design: (unnamed)
   \_IntTypespec: , line:2:13, endln:2:16
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-    |vpiExpr:
-    \_RefObj: (flash_ctrl_pkg::InfoTypes), line:3:31, endln:3:40
-      |vpiParent:
-      \_IntTypespec: , line:2:13, endln:2:16
-      |vpiName:InfoTypes
-      |vpiFullName:flash_ctrl_pkg::InfoTypes
-      |vpiActual:
-      \_Parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: , line:3:13, endln:3:16
-    |vpiParent:
-    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
     |vpiSigned:1
   |vpiTypedef:
   \_ArrayTypespec: , line:3:13, endln:7:4
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (flash_ctrl_pkg), line:3:30, endln:3:41
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:3:30, endln:3:41
       |vpiParent:
       \_ArrayTypespec: , line:3:13, endln:7:4
-      |vpiFullName:flash_ctrl_pkg
-      |vpiActual:
-      \_IntTypespec: , line:2:13, endln:2:16
+      |vpiRightRange:
+      \_Operation: , line:3:31, endln:3:40
+        |vpiParent:
+        \_Range: , line:3:30, endln:3:41
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (flash_ctrl_pkg::InfoTypes), line:3:31, endln:3:40
+          |vpiParent:
+          \_Operation: , line:3:31, endln:3:40
+          |vpiName:InfoTypes
+          |vpiFullName:flash_ctrl_pkg::InfoTypes
+          |vpiActual:
+          \_Parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
     |vpiElemTypespec:
     \_RefTypespec: (flash_ctrl_pkg), line:3:13, endln:3:16
       |vpiParent:
       \_ArrayTypespec: , line:3:13, endln:7:4
       |vpiFullName:flash_ctrl_pkg
       |vpiActual:
-      \_IntTypespec: , line:3:13, endln:3:16
+      \_IntTypespec: , line:2:13, endln:2:16
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
-  |vpiImportTypespec:
-  \_IntTypespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:13, endln:7:4
   |vpiDefName:flash_ctrl_pkg
@@ -1256,14 +1253,14 @@ Design: (unnamed)
           |vpiName:gen_invalid_region
         |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region
         |vpiImportTypespec:
-        \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:20, endln:20:23
+        \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:20, endln:20:23
           |vpiParent:
           \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region), line:19:36, endln:21:8
           |vpiName:cfgs_o
           |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
+        \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
           |vpiParent:
           \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region), line:19:36, endln:21:8
           |vpiName:i
@@ -1288,7 +1285,7 @@ Design: (unnamed)
             |vpiName:cfgs_o
             |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o
             |vpiActual:
-            \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:20, endln:20:23
+            \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:20, endln:20:23
             |vpiIndex:
             \_RefObj: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
               |vpiParent:
@@ -1296,9 +1293,9 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i
               |vpiActual:
-              \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
+              \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
       |vpiImportTypespec:
-      \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.i), line:19:9, endln:19:10
+      \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.i), line:19:9, endln:19:10
         |vpiParent:
         \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
         |vpiName:i
@@ -1320,7 +1317,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.i
             |vpiActual:
-            \_LogicNet: (work@flash_ctrl_info_cfg.gen_info_priv.i), line:19:9, endln:19:10
+            \_Net: (work@flash_ctrl_info_cfg.gen_info_priv.i), line:19:9, endln:19:10
           |vpiOperand:
           \_BitSelect: (work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize), line:19:25, endln:19:34
             |vpiParent:
@@ -1342,19 +1339,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
     |vpiImportTypespec:
-    \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
+    \_Net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
       |vpiParent:
       \_GenFor: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
       |vpiName:i
       |vpiFullName:work@flash_ctrl_info_cfg.i
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
+    \_Net: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
       |vpiParent:
       \_GenFor: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
       |vpiName:i
       |vpiFullName:work@flash_ctrl_info_cfg.i
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
+    |vpiNet:
+    \_Net: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
     |vpiForInitStmt:
     \_Assignment: , line:16:7, endln:16:19
       |vpiParent:
@@ -1381,7 +1382,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@flash_ctrl_info_cfg.i
         |vpiActual:
-        \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
+        \_Net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
       |vpiOperand:
       \_RefObj: (work@flash_ctrl_info_cfg.InfosPerBank), line:16:25, endln:16:37
         |vpiParent:
@@ -1402,7 +1403,7 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@flash_ctrl_info_cfg.i
         |vpiActual:
-        \_LogicNet: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
+        \_Net: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:40
     |vpiStmt:
     \_Begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
   |vpiTypedef:

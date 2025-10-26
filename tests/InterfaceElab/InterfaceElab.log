@@ -172,15 +172,15 @@ AST_DEBUG_END
 Constant                                               5
 Design                                                 1
 IODecl                                                 1
-Identifier                                             8
+Identifier                                             6
 IntTypespec                                            1
 Interface                                              1
-InterfaceTypespec                                      3
-LogicNet                                               2
+InterfaceTypespec                                      1
 LogicTypespec                                          4
 Modport                                                1
 Module                                                 3
 ModuleTypespec                                         3
+Net                                                    3
 Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
@@ -188,8 +188,9 @@ Port                                                   4
 Range                                                  2
 RefModule                                              3
 RefObj                                                 5
-RefTypespec                                            6
+RefTypespec                                            7
 SourceFile                                             1
+UnsupportedTypespec                                    2
 Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/surelog.uhdm ...
@@ -331,20 +332,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@REG_BUS.addr), line:9:28, endln:9:32
   |vpiImportTypespec:
-  \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+  \_Net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
     |vpiParent:
     \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiName:clk_i
     |vpiFullName:work@REG_BUS.clk_i
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@REG_BUS.addr), line:9:28, endln:9:32
+  \_Net: (work@REG_BUS.addr), line:9:28, endln:9:32
     |vpiParent:
     \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiTypespec:
     \_RefTypespec: (work@REG_BUS.addr), line:9:3, endln:9:25
       |vpiParent:
-      \_LogicNet: (work@REG_BUS.addr), line:9:28, endln:9:32
+      \_Net: (work@REG_BUS.addr), line:9:28, endln:9:32
       |vpiFullName:work@REG_BUS.addr
       |vpiActual:
       \_LogicTypespec: , line:9:3, endln:9:8
@@ -353,9 +354,9 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@REG_BUS
   |vpiNet:
-  \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+  \_Net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
   |vpiNet:
-  \_LogicNet: (work@REG_BUS.addr), line:9:28, endln:9:32
+  \_Net: (work@REG_BUS.addr), line:9:28, endln:9:32
   |vpiModport:
   \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
     |vpiParent:
@@ -386,7 +387,7 @@ Design: (unnamed)
       |vpiName:clk_i
       |vpiFullName:work@REG_BUS.clk_i.clk_i
       |vpiActual:
-      \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+      \_Net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
     |vpiTypespec:
     \_RefTypespec: (work@REG_BUS.clk_i), line:6:9, endln:6:14
       |vpiParent:
@@ -403,22 +404,23 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
     |vpiName:work@apb_to_reg
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
+  |vpiImportTypespec:
+  \_Net: (work@apb_to_reg.reg_o), line:16:16, endln:16:21
     |vpiParent:
     \_Module: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
-    |vpiName:
-    \_Identifier: (work@REG_BUS.out)
+    |vpiTypespec:
+    \_RefTypespec: (work@apb_to_reg.reg_o.REG_BUS), line:16:3, endln:16:10
       |vpiParent:
-      \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
-      |vpiName:work@REG_BUS.out
-    |vpiModport:
-    \_Modport: (work@REG_BUS.out), line:11:11, endln:11:28
-    |vpiInterface:
-    \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
+      \_Net: (work@apb_to_reg.reg_o), line:16:16, endln:16:21
+      |vpiName:REG_BUS
+      |vpiFullName:work@apb_to_reg.reg_o.REG_BUS
+      |vpiActual:
+      \_InterfaceTypespec: (REG_BUS)
+    |vpiName:reg_o
+    |vpiFullName:work@apb_to_reg.reg_o
   |vpiDefName:work@apb_to_reg
+  |vpiNet:
+  \_Net: (work@apb_to_reg.reg_o), line:16:16, endln:16:21
   |vpiPort:
   \_Port: (reg_o), line:16:16, endln:16:21
     |vpiParent:
@@ -426,13 +428,13 @@ Design: (unnamed)
     |vpiName:reg_o
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@apb_to_reg.reg_o.work@REG_BUS.out), line:16:3, endln:16:10
+    \_RefTypespec: (work@apb_to_reg.reg_o.REG_BUS), line:16:3, endln:16:10
       |vpiParent:
       \_Port: (reg_o), line:16:16, endln:16:21
-      |vpiName:work@REG_BUS.out
-      |vpiFullName:work@apb_to_reg.reg_o.work@REG_BUS.out
+      |vpiName:REG_BUS
+      |vpiFullName:work@apb_to_reg.reg_o.REG_BUS
       |vpiActual:
-      \_InterfaceTypespec: (work@REG_BUS.out), line:16:11, endln:16:14
+      \_InterfaceTypespec: (REG_BUS)
 |vpiAllModules:
 \_Module: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
   |vpiParent:
@@ -461,7 +463,7 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
   |vpiImportTypespec:
-  \_LogicNet: (work@peripherals.clk_i), line:25:16, endln:25:21
+  \_Net: (work@peripherals.clk_i), line:25:16, endln:25:21
     |vpiParent:
     \_Module: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
     |vpiName:clk_i
@@ -469,7 +471,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@peripherals
   |vpiNet:
-  \_LogicNet: (work@peripherals.clk_i), line:25:16, endln:25:21
+  \_Net: (work@peripherals.clk_i), line:25:16, endln:25:21
   |vpiRefModule:
   \_RefModule: work@REG_BUS (reg_bus), line:23:4, endln:23:11
     |vpiParent:
@@ -490,7 +492,7 @@ Design: (unnamed)
         |vpiName:clk_i
         |vpiFullName:work@peripherals.reg_bus.clk_i.clk_i
         |vpiActual:
-        \_LogicNet: (work@peripherals.clk_i), line:25:16, endln:25:21
+        \_Net: (work@peripherals.clk_i), line:25:16, endln:25:21
   |vpiRefModule:
   \_RefModule: work@apb_to_reg (i_apb_to_reg), line:27:1, endln:27:11
     |vpiParent:

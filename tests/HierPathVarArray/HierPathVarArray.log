@@ -121,11 +121,11 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv:2:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv:9:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv:2:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv:9:1: Compile module "work@top".
 [NTE:CP0309] ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv:9:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              2
 Constant                                               5
@@ -133,10 +133,10 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             4
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 Port                                                   1
 Range                                                  1
@@ -146,6 +146,7 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathVarArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -248,7 +249,8 @@ Design: (unnamed)
     \_RefTypespec: (pkg::a), line:6:12, endln:6:13
       |vpiParent:
       \_ArrayTypespec: , line:6:12, endln:6:20
-      |vpiName:pkg::a
+      |vpiName:a
+      |vpiFullName:pkg::a
       |vpiActual:
       \_TypedefTypespec: (pkg::a), line:5:6, endln:5:7
   |vpiImportTypespec:
@@ -272,19 +274,19 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
     |vpiName:work@top
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o), line:9:19, endln:9:20
+  \_Net: (work@top.o), line:9:19, endln:9:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
     |vpiName:o
     |vpiFullName:work@top.o
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.c), line:10:11, endln:10:12
+  \_Net: (work@top.c), line:10:11, endln:10:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c.pkg::b), line:10:4, endln:10:10
       |vpiParent:
-      \_ArrayNet: (work@top.c), line:10:11, endln:10:12
+      \_Net: (work@top.c), line:10:11, endln:10:12
       |vpiName:pkg::b
       |vpiFullName:work@top.c.pkg::b
       |vpiActual:
@@ -292,7 +294,7 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@top.c
   |vpiImportTypespec:
-  \_LogicNet: (work@top.x), line:11:16, endln:11:17
+  \_Net: (work@top.x), line:11:16, endln:11:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
     |vpiName:x
@@ -300,11 +302,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.o), line:9:19, endln:9:20
+  \_Net: (work@top.o), line:9:19, endln:9:20
   |vpiNet:
-  \_LogicNet: (work@top.x), line:11:16, endln:11:17
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.c), line:10:11, endln:10:12
+  \_Net: (work@top.c), line:10:11, endln:10:12
+  |vpiNet:
+  \_Net: (work@top.x), line:11:16, endln:11:17
   |vpiPort:
   \_Port: (o), line:9:19, endln:9:20
     |vpiParent:
@@ -334,7 +336,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_ArrayNet: (work@top.c), line:10:11, endln:10:12
+        \_Net: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_Constant: , line:11:13, endln:11:14
           |vpiParent:
@@ -350,7 +352,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:c[1].x
         |vpiActual:
-        \_LogicNet: (work@top.x), line:11:16, endln:11:17
+        \_Net: (work@top.x), line:11:16, endln:11:17
       |vpiName:c[1].x
   |vpiContAssign:
   \_ContAssign: , line:12:11, endln:12:21
@@ -367,7 +369,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_ArrayNet: (work@top.c), line:10:11, endln:10:12
+        \_Net: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_Constant: , line:12:17, endln:12:18
           |vpiParent:
@@ -383,7 +385,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:work@top.x
         |vpiActual:
-        \_LogicNet: (work@top.x), line:11:16, endln:11:17
+        \_Net: (work@top.x), line:11:16, endln:11:17
       |vpiName:c[1].x
     |vpiLhs:
     \_RefObj: (work@top.o), line:12:11, endln:12:12
@@ -392,7 +394,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicNet: (work@top.o), line:9:19, endln:9:20
+      \_Net: (work@top.o), line:9:19, endln:9:20
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

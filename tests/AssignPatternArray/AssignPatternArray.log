@@ -340,12 +340,14 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:41:1: No timescale set for "foo".
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:46:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:1:1: Compile package "ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:6:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:41:1: Compile module "work@foo".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignPatternArray/dut.sv:46:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-Constant                                              27
+Constant                                              25
 Design                                                 1
 EnumConst                                              6
 EnumTypespec                                           2
@@ -355,22 +357,23 @@ IntTypespec                                            6
 LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         2
-Operation                                             16
+Net                                                    1
+Operation                                             17
 Package                                                2
 ParamAssign                                            7
 Parameter                                              7
 Port                                                   2
-Range                                                  4
+Range                                                  3
 RefModule                                              1
-RefObj                                                23
-RefTypespec                                           44
+RefObj                                                21
+RefTypespec                                           42
 SourceFile                                             1
 StringTypespec                                        18
-StructNet                                              1
 StructTypespec                                         2
 TaggedPattern                                         18
 TypedefTypespec                                        4
 TypespecMember                                         3
+UnsupportedTypespec                                    6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignPatternArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -518,7 +521,7 @@ Design: (unnamed)
       \_Parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
       |vpiFullName:pkg::MuBi4Width
       |vpiActual:
-      \_IntTypespec: , line:10:13, endln:10:16
+      \_IntTypespec: , line:9:13, endln:9:16
     |vpiSigned:1
     |vpiName:MuBi4Width
     |vpiFullName:pkg::MuBi4Width
@@ -732,19 +735,6 @@ Design: (unnamed)
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
   |vpiTypedef:
   \_IntTypespec: , line:9:13, endln:9:16
-    |vpiParent:
-    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
-    |vpiExpr:
-    \_RefObj: (pkg::HwDataRules), line:28:43, endln:28:54
-      |vpiParent:
-      \_IntTypespec: , line:9:13, endln:9:16
-      |vpiName:HwDataRules
-      |vpiFullName:pkg::HwDataRules
-      |vpiActual:
-      \_Parameter: (pkg::HwDataRules), line:9:17, endln:9:32
-    |vpiSigned:1
-  |vpiTypedef:
-  \_IntTypespec: , line:10:13, endln:10:16
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
     |vpiSigned:1
@@ -996,19 +986,30 @@ Design: (unnamed)
   \_ArrayTypespec: , line:28:13, endln:37:4
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:6:1, endln:39:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (pkg), line:28:42, endln:28:55
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:28:42, endln:28:55
       |vpiParent:
       \_ArrayTypespec: , line:28:13, endln:37:4
-      |vpiFullName:pkg
-      |vpiActual:
-      \_IntTypespec: , line:9:13, endln:9:16
+      |vpiRightRange:
+      \_Operation: , line:28:43, endln:28:54
+        |vpiParent:
+        \_Range: , line:28:42, endln:28:55
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (pkg::HwDataRules), line:28:43, endln:28:54
+          |vpiParent:
+          \_Operation: , line:28:43, endln:28:54
+          |vpiName:HwDataRules
+          |vpiFullName:pkg::HwDataRules
+          |vpiActual:
+          \_Parameter: (pkg::HwDataRules), line:9:17, endln:9:32
     |vpiElemTypespec:
     \_RefTypespec: (pkg::data_region_attr_t), line:28:13, endln:28:31
       |vpiParent:
       \_ArrayTypespec: , line:28:13, endln:37:4
-      |vpiName:pkg::data_region_attr_t
+      |vpiName:data_region_attr_t
+      |vpiFullName:pkg::data_region_attr_t
       |vpiActual:
       \_TypedefTypespec: (pkg::data_region_attr_t), line:27:5, endln:27:23
   |vpiTypedef:
@@ -1019,8 +1020,6 @@ Design: (unnamed)
   \_IntTypespec: , line:7:13, endln:7:25
   |vpiImportTypespec:
   \_IntTypespec: , line:9:13, endln:9:16
-  |vpiImportTypespec:
-  \_IntTypespec: , line:10:13, endln:10:16
   |vpiImportTypespec:
   \_EnumTypespec: , line:11:11, endln:14:12
   |vpiImportTypespec:
@@ -1075,22 +1074,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:42:8, endln:42:14
   |vpiImportTypespec:
-  \_StructNet: (work@foo.DATA_REG), line:44:28, endln:44:36
+  \_Net: (work@foo.DATA_REG), line:44:28, endln:44:36
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignPatternArray/dut.sv, line:41:1, endln:45:10
     |vpiTypespec:
-    \_RefTypespec: (work@foo.DATA_REG.pkg::data_region_attr_t), line:44:9, endln:44:27
+    \_RefTypespec: (work@foo.DATA_REG.data_region_attr_t), line:44:9, endln:44:27
       |vpiParent:
-      \_StructNet: (work@foo.DATA_REG), line:44:28, endln:44:36
-      |vpiName:pkg::data_region_attr_t
-      |vpiFullName:work@foo.DATA_REG.pkg::data_region_attr_t
+      \_Net: (work@foo.DATA_REG), line:44:28, endln:44:36
+      |vpiName:data_region_attr_t
+      |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
       \_TypedefTypespec: (pkg::data_region_attr_t), line:27:5, endln:27:23
     |vpiName:DATA_REG
     |vpiFullName:work@foo.DATA_REG
   |vpiDefName:work@foo
   |vpiNet:
-  \_StructNet: (work@foo.DATA_REG), line:44:28, endln:44:36
+  \_Net: (work@foo.DATA_REG), line:44:28, endln:44:36
   |vpiPort:
   \_Port: (DATA_REG), line:44:28, endln:44:36
     |vpiParent:
@@ -1098,11 +1097,11 @@ Design: (unnamed)
     |vpiName:DATA_REG
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@foo.DATA_REG.pkg::data_region_attr_t), line:44:9, endln:44:27
+    \_RefTypespec: (work@foo.DATA_REG.data_region_attr_t), line:44:9, endln:44:27
       |vpiParent:
       \_Port: (DATA_REG), line:44:28, endln:44:36
-      |vpiName:pkg::data_region_attr_t
-      |vpiFullName:work@foo.DATA_REG.pkg::data_region_attr_t
+      |vpiName:data_region_attr_t
+      |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
       \_TypedefTypespec: (pkg::data_region_attr_t), line:27:5, endln:27:23
 |vpiAllModules:

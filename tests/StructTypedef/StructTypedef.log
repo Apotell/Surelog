@@ -98,6 +98,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructTypedef/dut.sv:15:1: No timescale set for "flash_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructTypedef/dut.sv:21:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/StructTypedef/dut.sv:1:1: Compile package "flash_ctrl_reg_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/StructTypedef/dut.sv:15:1: Compile package "flash_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructTypedef/dut.sv:21:1: Compile module "work@top".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -118,14 +120,15 @@ IntTypespec                                            9
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                3
 RefTypespec                                           20
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         3
 Task                                                   9
 TypedefTypespec                                        3
 TypespecMember                                         4
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1095,22 +1098,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (flash_ctrl_pkg), line:22:10, endln:22:27
   |vpiImportTypespec:
-  \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
+  \_Net: (work@top.region_cfg), line:24:20, endln:24:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:21:1, endln:27:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.region_cfg.flash_ctrl_pkg::mp_region_cfg_t), line:24:4, endln:24:19
+    \_RefTypespec: (work@top.region_cfg.mp_region_cfg_t), line:24:4, endln:24:19
       |vpiParent:
-      \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
-      |vpiName:flash_ctrl_pkg::mp_region_cfg_t
-      |vpiFullName:work@top.region_cfg.flash_ctrl_pkg::mp_region_cfg_t
+      \_Net: (work@top.region_cfg), line:24:20, endln:24:30
+      |vpiName:mp_region_cfg_t
+      |vpiFullName:work@top.region_cfg.mp_region_cfg_t
       |vpiActual:
       \_TypedefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:69, endln:17:84
     |vpiName:region_cfg
     |vpiFullName:work@top.region_cfg
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
+  \_Net: (work@top.region_cfg), line:24:20, endln:24:30
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

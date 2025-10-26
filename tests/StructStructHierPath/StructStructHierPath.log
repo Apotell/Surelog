@@ -235,6 +235,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructStructHierPath/dut.sv:2:1: No timescale set for "riscv_isa_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructStructHierPath/dut.sv:28:1: No timescale set for "r5p_wbu".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/StructStructHierPath/dut.sv:2:1: Compile package "riscv_isa_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructStructHierPath/dut.sv:28:1: Compile module "work@r5p_wbu".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -248,10 +249,10 @@ HierPath                                               1
 Identifier                                             5
 IfStmt                                                 1
 ImportTypespec                                         1
-LogicNet                                               1
 LogicTypespec                                          7
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Operation                                              4
 Package                                                1
 Port                                                   1
@@ -259,10 +260,10 @@ Range                                                  3
 RefObj                                                 7
 RefTypespec                                           14
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         4
 TypedefTypespec                                        2
 TypespecMember                                         9
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructStructHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -614,15 +615,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (riscv_isa_pkg), line:29:10, endln:29:26
   |vpiImportTypespec:
-  \_StructNet: (work@r5p_wbu.ctl), line:28:31, endln:28:34
+  \_Net: (work@r5p_wbu.ctl), line:28:31, endln:28:34
     |vpiParent:
     \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
     |vpiTypespec:
-    \_RefTypespec: (work@r5p_wbu.ctl.riscv_isa_pkg::ctl_t), line:28:24, endln:28:29
+    \_RefTypespec: (work@r5p_wbu.ctl.ctl_t), line:28:24, endln:28:29
       |vpiParent:
-      \_StructNet: (work@r5p_wbu.ctl), line:28:31, endln:28:34
-      |vpiName:riscv_isa_pkg::ctl_t
-      |vpiFullName:work@r5p_wbu.ctl.riscv_isa_pkg::ctl_t
+      \_Net: (work@r5p_wbu.ctl), line:28:31, endln:28:34
+      |vpiName:ctl_t
+      |vpiFullName:work@r5p_wbu.ctl.ctl_t
       |vpiActual:
       \_TypedefTypespec: (riscv_isa_pkg::ctl_t), line:23:3, endln:23:8
     |vpiName:ctl
@@ -630,13 +631,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:30:3, endln:30:6
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_wbu.wen), line:30:7, endln:30:10
+  \_Net: (work@r5p_wbu.wen), line:30:7, endln:30:10
     |vpiParent:
     \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
     |vpiTypespec:
     \_RefTypespec: (work@r5p_wbu.wen), line:30:3, endln:30:6
       |vpiParent:
-      \_LogicNet: (work@r5p_wbu.wen), line:30:7, endln:30:10
+      \_Net: (work@r5p_wbu.wen), line:30:7, endln:30:10
       |vpiFullName:work@r5p_wbu.wen
       |vpiActual:
       \_LogicTypespec: , line:30:3, endln:30:6
@@ -644,14 +645,14 @@ Design: (unnamed)
     |vpiFullName:work@r5p_wbu.wen
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_wbu.clk), line:31:23, endln:31:26
+  \_Net: (work@r5p_wbu.clk), line:31:23, endln:31:26
     |vpiParent:
     \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
     |vpiName:clk
     |vpiFullName:work@r5p_wbu.clk
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_wbu.rst), line:32:7, endln:32:10
+  \_Net: (work@r5p_wbu.rst), line:32:7, endln:32:10
     |vpiParent:
     \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
     |vpiName:rst
@@ -659,13 +660,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@r5p_wbu
   |vpiNet:
-  \_StructNet: (work@r5p_wbu.ctl), line:28:31, endln:28:34
+  \_Net: (work@r5p_wbu.ctl), line:28:31, endln:28:34
   |vpiNet:
-  \_LogicNet: (work@r5p_wbu.wen), line:30:7, endln:30:10
+  \_Net: (work@r5p_wbu.wen), line:30:7, endln:30:10
   |vpiNet:
-  \_LogicNet: (work@r5p_wbu.clk), line:31:23, endln:31:26
+  \_Net: (work@r5p_wbu.clk), line:31:23, endln:31:26
   |vpiNet:
-  \_LogicNet: (work@r5p_wbu.rst), line:32:7, endln:32:10
+  \_Net: (work@r5p_wbu.rst), line:32:7, endln:32:10
   |vpiPort:
   \_Port: (ctl), line:28:31, endln:28:34
     |vpiParent:
@@ -673,11 +674,11 @@ Design: (unnamed)
     |vpiName:ctl
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@r5p_wbu.ctl.riscv_isa_pkg::ctl_t), line:28:24, endln:28:29
+    \_RefTypespec: (work@r5p_wbu.ctl.ctl_t), line:28:24, endln:28:29
       |vpiParent:
       \_Port: (ctl), line:28:31, endln:28:34
-      |vpiName:riscv_isa_pkg::ctl_t
-      |vpiFullName:work@r5p_wbu.ctl.riscv_isa_pkg::ctl_t
+      |vpiName:ctl_t
+      |vpiFullName:work@r5p_wbu.ctl.ctl_t
       |vpiActual:
       \_TypedefTypespec: (riscv_isa_pkg::ctl_t), line:23:3, endln:23:8
   |vpiProcess:
@@ -700,7 +701,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@r5p_wbu.clk
           |vpiActual:
-          \_LogicNet: (work@r5p_wbu.clk), line:31:23, endln:31:26
+          \_Net: (work@r5p_wbu.clk), line:31:23, endln:31:26
       |vpiStmt:
       \_IfStmt: , line:32:3, endln:34:6
         |vpiParent:
@@ -712,28 +713,28 @@ Design: (unnamed)
           |vpiName:rst
           |vpiFullName:work@r5p_wbu.rst
           |vpiActual:
-          \_LogicNet: (work@r5p_wbu.rst), line:32:7, endln:32:10
+          \_Net: (work@r5p_wbu.rst), line:32:7, endln:32:10
         |vpiStmt:
         \_Begin: (work@r5p_wbu), line:32:12, endln:34:6
           |vpiParent:
           \_IfStmt: , line:32:3, endln:34:6
           |vpiFullName:work@r5p_wbu
           |vpiImportTypespec:
-          \_LogicNet: (work@r5p_wbu.gpr), line:33:16, endln:33:19
+          \_Net: (work@r5p_wbu.gpr), line:33:16, endln:33:19
             |vpiParent:
             \_Begin: (work@r5p_wbu), line:32:12, endln:34:6
             |vpiName:gpr
             |vpiFullName:work@r5p_wbu.gpr
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@r5p_wbu.e), line:33:20, endln:33:21
+          \_Net: (work@r5p_wbu.e), line:33:20, endln:33:21
             |vpiParent:
             \_Begin: (work@r5p_wbu), line:32:12, endln:34:6
             |vpiName:e
             |vpiFullName:work@r5p_wbu.e
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@r5p_wbu.rd), line:33:22, endln:33:24
+          \_Net: (work@r5p_wbu.rd), line:33:22, endln:33:24
             |vpiParent:
             \_Begin: (work@r5p_wbu), line:32:12, endln:34:6
             |vpiName:rd
@@ -754,21 +755,21 @@ Design: (unnamed)
                 \_HierPath: (ctl.gpr.e.rd), line:33:12, endln:33:24
                 |vpiName:ctl
                 |vpiActual:
-                \_StructNet: (work@r5p_wbu.ctl), line:28:31, endln:28:34
+                \_Net: (work@r5p_wbu.ctl), line:28:31, endln:28:34
               |vpiActual:
               \_RefObj: (gpr), line:33:16, endln:33:19
                 |vpiParent:
                 \_HierPath: (ctl.gpr.e.rd), line:33:12, endln:33:24
                 |vpiName:gpr
                 |vpiActual:
-                \_LogicNet: (work@r5p_wbu.gpr), line:33:16, endln:33:19
+                \_Net: (work@r5p_wbu.gpr), line:33:16, endln:33:19
               |vpiActual:
               \_RefObj: (e), line:33:20, endln:33:21
                 |vpiParent:
                 \_HierPath: (ctl.gpr.e.rd), line:33:12, endln:33:24
                 |vpiName:e
                 |vpiActual:
-                \_LogicNet: (work@r5p_wbu.e), line:33:20, endln:33:21
+                \_Net: (work@r5p_wbu.e), line:33:20, endln:33:21
               |vpiActual:
               \_RefObj: (work@r5p_wbu.rd), line:33:22, endln:33:24
                 |vpiParent:
@@ -776,7 +777,7 @@ Design: (unnamed)
                 |vpiName:rd
                 |vpiFullName:work@r5p_wbu.rd
                 |vpiActual:
-                \_LogicNet: (work@r5p_wbu.rd), line:33:22, endln:33:24
+                \_Net: (work@r5p_wbu.rd), line:33:22, endln:33:24
               |vpiName:ctl.gpr.e.rd
             |vpiLhs:
             \_RefObj: (work@r5p_wbu.wen), line:33:5, endln:33:8
@@ -785,7 +786,7 @@ Design: (unnamed)
               |vpiName:wen
               |vpiFullName:work@r5p_wbu.wen
               |vpiActual:
-              \_LogicNet: (work@r5p_wbu.wen), line:30:7, endln:30:10
+              \_Net: (work@r5p_wbu.wen), line:30:7, endln:30:10
     |vpiAlwaysType:3
 |vpiTypedef:
 \_ModuleTypespec: (r5p_wbu)

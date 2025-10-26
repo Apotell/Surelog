@@ -103,6 +103,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastEnum/dut.sv:1:1: No timescale set for "dm".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastEnum/dut.sv:12:1: No timescale set for "dm_csrs".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/CastEnum/dut.sv:1:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/CastEnum/dut.sv:12:1: Compile module "work@dm_csrs".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
@@ -115,7 +116,6 @@ Constant                                              13
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              8
-EnumNet                                                1
 EnumTypespec                                           2
 Function                                               9
 HierPath                                               1
@@ -125,6 +125,7 @@ IntTypespec                                            9
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 Package                                                2
 Range                                                  1
@@ -133,6 +134,7 @@ RefTypespec                                           16
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastEnum/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1042,13 +1044,13 @@ Design: (unnamed)
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:12:1, endln:17:10
     |vpiName:work@dm_csrs
   |vpiImportTypespec:
-  \_EnumNet: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
+  \_Net: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:12:1, endln:17:10
     |vpiTypespec:
     \_RefTypespec: (work@dm_csrs.dtm_op.dm::dtm_op_e), line:14:3, endln:14:15
       |vpiParent:
-      \_EnumNet: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
+      \_Net: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
       |vpiName:dm::dtm_op_e
       |vpiFullName:work@dm_csrs.dtm_op.dm::dtm_op_e
       |vpiActual:
@@ -1056,14 +1058,14 @@ Design: (unnamed)
     |vpiName:dtm_op
     |vpiFullName:work@dm_csrs.dtm_op
   |vpiImportTypespec:
-  \_LogicNet: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
+  \_Net: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:12:1, endln:17:10
     |vpiName:dmi_req_i
     |vpiFullName:work@dm_csrs.dmi_req_i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dm_csrs.op), line:15:43, endln:15:45
+  \_Net: (work@dm_csrs.op), line:15:43, endln:15:45
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:12:1, endln:17:10
     |vpiName:op
@@ -1071,11 +1073,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dm_csrs
   |vpiNet:
-  \_EnumNet: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
+  \_Net: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
   |vpiNet:
-  \_LogicNet: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
+  \_Net: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
   |vpiNet:
-  \_LogicNet: (work@dm_csrs.op), line:15:43, endln:15:45
+  \_Net: (work@dm_csrs.op), line:15:43, endln:15:45
   |vpiContAssign:
   \_ContAssign: , line:15:10, endln:15:46
     |vpiParent:
@@ -1095,7 +1097,7 @@ Design: (unnamed)
           \_HierPath: (dmi_req_i.op), line:15:33, endln:15:45
           |vpiName:dmi_req_i
           |vpiActual:
-          \_LogicNet: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
+          \_Net: (work@dm_csrs.dmi_req_i), line:15:33, endln:15:42
         |vpiActual:
         \_RefObj: (work@dm_csrs.op), line:15:43, endln:15:45
           |vpiParent:
@@ -1103,7 +1105,7 @@ Design: (unnamed)
           |vpiName:op
           |vpiFullName:work@dm_csrs.op
           |vpiActual:
-          \_LogicNet: (work@dm_csrs.op), line:15:43, endln:15:45
+          \_Net: (work@dm_csrs.op), line:15:43, endln:15:45
         |vpiName:dmi_req_i.op
     |vpiLhs:
     \_RefObj: (work@dm_csrs.dtm_op), line:15:10, endln:15:16
@@ -1112,7 +1114,7 @@ Design: (unnamed)
       |vpiName:dtm_op
       |vpiFullName:work@dm_csrs.dtm_op
       |vpiActual:
-      \_EnumNet: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
+      \_Net: (work@dm_csrs.dtm_op), line:14:16, endln:14:22
 |vpiTypedef:
 \_ModuleTypespec: (dm_csrs)
   |vpiParent:

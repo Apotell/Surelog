@@ -309,6 +309,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:35:1: No timescale set for "foo".
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:40:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:1:1: Compile package "ctrl_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:6:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:35:1: Compile module "work@foo".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:40:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -323,6 +325,7 @@ IntTypespec                                            6
 LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                              7
 Package                                                2
 ParamAssign                                            7
@@ -334,11 +337,11 @@ RefObj                                                14
 RefTypespec                                           32
 SourceFile                                             1
 StringTypespec                                         9
-StructNet                                              1
 StructTypespec                                         2
 TaggedPattern                                          9
 TypedefTypespec                                        4
 TypespecMember                                         3
+UnsupportedTypespec                                    6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -941,22 +944,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:36:8, endln:36:14
   |vpiImportTypespec:
-  \_StructNet: (work@foo.DATA_REG), line:38:28, endln:38:36
+  \_Net: (work@foo.DATA_REG), line:38:28, endln:38:36
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
     |vpiTypespec:
-    \_RefTypespec: (work@foo.DATA_REG.pkg::data_region_attr_t), line:38:9, endln:38:27
+    \_RefTypespec: (work@foo.DATA_REG.data_region_attr_t), line:38:9, endln:38:27
       |vpiParent:
-      \_StructNet: (work@foo.DATA_REG), line:38:28, endln:38:36
-      |vpiName:pkg::data_region_attr_t
-      |vpiFullName:work@foo.DATA_REG.pkg::data_region_attr_t
+      \_Net: (work@foo.DATA_REG), line:38:28, endln:38:36
+      |vpiName:data_region_attr_t
+      |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
       \_TypedefTypespec: (pkg::data_region_attr_t), line:27:5, endln:27:23
     |vpiName:DATA_REG
     |vpiFullName:work@foo.DATA_REG
   |vpiDefName:work@foo
   |vpiNet:
-  \_StructNet: (work@foo.DATA_REG), line:38:28, endln:38:36
+  \_Net: (work@foo.DATA_REG), line:38:28, endln:38:36
   |vpiPort:
   \_Port: (DATA_REG), line:38:28, endln:38:36
     |vpiParent:
@@ -964,11 +967,11 @@ Design: (unnamed)
     |vpiName:DATA_REG
     |vpiDirection:1
     |vpiTypespec:
-    \_RefTypespec: (work@foo.DATA_REG.pkg::data_region_attr_t), line:38:9, endln:38:27
+    \_RefTypespec: (work@foo.DATA_REG.data_region_attr_t), line:38:9, endln:38:27
       |vpiParent:
       \_Port: (DATA_REG), line:38:28, endln:38:36
-      |vpiName:pkg::data_region_attr_t
-      |vpiFullName:work@foo.DATA_REG.pkg::data_region_attr_t
+      |vpiName:data_region_attr_t
+      |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
       \_TypedefTypespec: (pkg::data_region_attr_t), line:27:5, endln:27:23
 |vpiAllModules:

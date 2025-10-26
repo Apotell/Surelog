@@ -4,16 +4,18 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:9:1: No timescale set for "package2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:15:1: No timescale set for "test".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:1:1: Compile package "package1".
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:9:1: Compile package "package2".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:15:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
 Design                                                 1
 Identifier                                             8
-LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                2
 Range                                                  1
 RefTypespec                                            8
@@ -21,6 +23,7 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        5
 TypespecMember                                         1
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefAlias/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -208,13 +211,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
   |vpiImportTypespec:
-  \_LogicNet: (work@test.kkkk), line:18:16, endln:18:20
+  \_Net: (work@test.kkkk), line:18:16, endln:18:20
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@test.kkkk.t_two_bits), line:18:5, endln:18:15
       |vpiParent:
-      \_LogicNet: (work@test.kkkk), line:18:16, endln:18:20
+      \_Net: (work@test.kkkk), line:18:16, endln:18:20
       |vpiName:t_two_bits
       |vpiFullName:work@test.kkkk.t_two_bits
       |vpiActual:
@@ -222,13 +225,13 @@ Design: (unnamed)
     |vpiName:kkkk
     |vpiFullName:work@test.kkkk
   |vpiImportTypespec:
-  \_LogicNet: (work@test.zzzz), line:19:21, endln:19:25
+  \_Net: (work@test.zzzz), line:19:21, endln:19:25
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@test.zzzz.t_two_bits_copy), line:19:5, endln:19:20
       |vpiParent:
-      \_LogicNet: (work@test.zzzz), line:19:21, endln:19:25
+      \_Net: (work@test.zzzz), line:19:21, endln:19:25
       |vpiName:t_two_bits_copy
       |vpiFullName:work@test.zzzz.t_two_bits_copy
       |vpiActual:
@@ -237,9 +240,9 @@ Design: (unnamed)
     |vpiFullName:work@test.zzzz
   |vpiDefName:work@test
   |vpiNet:
-  \_LogicNet: (work@test.kkkk), line:18:16, endln:18:20
+  \_Net: (work@test.kkkk), line:18:16, endln:18:20
   |vpiNet:
-  \_LogicNet: (work@test.zzzz), line:19:21, endln:19:25
+  \_Net: (work@test.zzzz), line:19:21, endln:19:25
 |vpiTypedef:
 \_ModuleTypespec: (test)
   |vpiParent:

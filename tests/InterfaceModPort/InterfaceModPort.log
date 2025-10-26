@@ -875,7 +875,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 3
-ArrayNet                                               1
 ArrayTypespec                                          1
 Assignment                                             3
 Begin                                                  3
@@ -889,23 +888,22 @@ Constant                                              41
 DelayControl                                           4
 Design                                                 1
 EnumConst                                              9
-EnumNet                                                1
 EnumTypespec                                           2
 EventControl                                           3
 Function                                               9
 HierPath                                              11
 IODecl                                                38
-Identifier                                            52
+Identifier                                            47
 IfStmt                                                 2
 Initial                                                1
 IntTypespec                                            9
 Interface                                              2
-InterfaceTypespec                                      7
-LogicNet                                              18
+InterfaceTypespec                                      2
 LogicTypespec                                         35
 Modport                                                4
 Module                                                 4
 ModuleTypespec                                         3
+Net                                                   22
 Operation                                              7
 Package                                                1
 ParamAssign                                            2
@@ -916,11 +914,12 @@ ProgramTypespec                                        1
 Range                                                 16
 RefModule                                              4
 RefObj                                                30
-RefTypespec                                           55
+RefTypespec                                           57
 SourceFile                                             1
 SysFuncCall                                            1
 Task                                                   9
 TypedefTypespec                                        2
+UnsupportedTypespec                                    7
 Variable                                              17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModPort/slpp_all/surelog.uhdm ...
@@ -2080,20 +2079,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@mem_if.addr_mem), line:37:16, endln:37:24
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.clk), line:26:30, endln:26:33
+  \_Net: (work@mem_if.clk), line:26:30, endln:26:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiName:clk
     |vpiFullName:work@mem_if.clk
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.reset), line:27:16, endln:27:21
+  \_Net: (work@mem_if.reset), line:27:16, endln:27:21
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.reset), line:27:3, endln:27:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.reset), line:27:16, endln:27:21
+      \_Net: (work@mem_if.reset), line:27:16, endln:27:21
       |vpiFullName:work@mem_if.reset
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2101,13 +2100,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.reset
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.we_sys), line:28:16, endln:28:22
+  \_Net: (work@mem_if.we_sys), line:28:16, endln:28:22
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.we_sys), line:28:3, endln:28:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.we_sys), line:28:16, endln:28:22
+      \_Net: (work@mem_if.we_sys), line:28:16, endln:28:22
       |vpiFullName:work@mem_if.we_sys
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2115,13 +2114,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.we_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
+  \_Net: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.cmd_valid_sys), line:29:3, endln:29:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
+      \_Net: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
       |vpiFullName:work@mem_if.cmd_valid_sys
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2129,13 +2128,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.cmd_valid_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.ready_sys), line:30:16, endln:30:25
+  \_Net: (work@mem_if.ready_sys), line:30:16, endln:30:25
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.ready_sys), line:30:3, endln:30:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.ready_sys), line:30:16, endln:30:25
+      \_Net: (work@mem_if.ready_sys), line:30:16, endln:30:25
       |vpiFullName:work@mem_if.ready_sys
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2143,13 +2142,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.ready_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.data_sys), line:31:16, endln:31:24
+  \_Net: (work@mem_if.data_sys), line:31:16, endln:31:24
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.data_sys), line:31:3, endln:31:15
       |vpiParent:
-      \_LogicNet: (work@mem_if.data_sys), line:31:16, endln:31:24
+      \_Net: (work@mem_if.data_sys), line:31:16, endln:31:24
       |vpiFullName:work@mem_if.data_sys
       |vpiActual:
       \_LogicTypespec: , line:31:3, endln:31:8
@@ -2157,13 +2156,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.data_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.addr_sys), line:32:16, endln:32:24
+  \_Net: (work@mem_if.addr_sys), line:32:16, endln:32:24
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.addr_sys), line:32:3, endln:32:15
       |vpiParent:
-      \_LogicNet: (work@mem_if.addr_sys), line:32:16, endln:32:24
+      \_Net: (work@mem_if.addr_sys), line:32:16, endln:32:24
       |vpiFullName:work@mem_if.addr_sys
       |vpiActual:
       \_LogicTypespec: , line:32:3, endln:32:8
@@ -2171,13 +2170,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.addr_sys
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
+  \_Net: (work@mem_if.we_mem), line:33:16, endln:33:22
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.we_mem), line:33:3, endln:33:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
+      \_Net: (work@mem_if.we_mem), line:33:16, endln:33:22
       |vpiFullName:work@mem_if.we_mem
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2185,13 +2184,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.we_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
+  \_Net: (work@mem_if.ce_mem), line:34:16, endln:34:22
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.ce_mem), line:34:3, endln:34:8
       |vpiParent:
-      \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
+      \_Net: (work@mem_if.ce_mem), line:34:16, endln:34:22
       |vpiFullName:work@mem_if.ce_mem
       |vpiActual:
       \_LogicTypespec: , line:26:25, endln:26:29
@@ -2199,13 +2198,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.ce_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
+  \_Net: (work@mem_if.datao_mem), line:35:16, endln:35:25
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.datao_mem), line:35:3, endln:35:15
       |vpiParent:
-      \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
+      \_Net: (work@mem_if.datao_mem), line:35:16, endln:35:25
       |vpiFullName:work@mem_if.datao_mem
       |vpiActual:
       \_LogicTypespec: , line:35:3, endln:35:8
@@ -2213,13 +2212,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.datao_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.datai_mem), line:36:16, endln:36:25
+  \_Net: (work@mem_if.datai_mem), line:36:16, endln:36:25
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.datai_mem), line:36:3, endln:36:15
       |vpiParent:
-      \_LogicNet: (work@mem_if.datai_mem), line:36:16, endln:36:25
+      \_Net: (work@mem_if.datai_mem), line:36:16, endln:36:25
       |vpiFullName:work@mem_if.datai_mem
       |vpiActual:
       \_LogicTypespec: , line:36:3, endln:36:8
@@ -2227,13 +2226,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.datai_mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
+  \_Net: (work@mem_if.addr_mem), line:37:16, endln:37:24
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.addr_mem), line:37:3, endln:37:15
       |vpiParent:
-      \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
+      \_Net: (work@mem_if.addr_mem), line:37:16, endln:37:24
       |vpiFullName:work@mem_if.addr_mem
       |vpiActual:
       \_LogicTypespec: , line:37:3, endln:37:8
@@ -2242,29 +2241,29 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@mem_if
   |vpiNet:
-  \_LogicNet: (work@mem_if.clk), line:26:30, endln:26:33
+  \_Net: (work@mem_if.clk), line:26:30, endln:26:33
   |vpiNet:
-  \_LogicNet: (work@mem_if.reset), line:27:16, endln:27:21
+  \_Net: (work@mem_if.reset), line:27:16, endln:27:21
   |vpiNet:
-  \_LogicNet: (work@mem_if.we_sys), line:28:16, endln:28:22
+  \_Net: (work@mem_if.we_sys), line:28:16, endln:28:22
   |vpiNet:
-  \_LogicNet: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
+  \_Net: (work@mem_if.cmd_valid_sys), line:29:16, endln:29:29
   |vpiNet:
-  \_LogicNet: (work@mem_if.ready_sys), line:30:16, endln:30:25
+  \_Net: (work@mem_if.ready_sys), line:30:16, endln:30:25
   |vpiNet:
-  \_LogicNet: (work@mem_if.data_sys), line:31:16, endln:31:24
+  \_Net: (work@mem_if.data_sys), line:31:16, endln:31:24
   |vpiNet:
-  \_LogicNet: (work@mem_if.addr_sys), line:32:16, endln:32:24
+  \_Net: (work@mem_if.addr_sys), line:32:16, endln:32:24
   |vpiNet:
-  \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
+  \_Net: (work@mem_if.we_mem), line:33:16, endln:33:22
   |vpiNet:
-  \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
+  \_Net: (work@mem_if.ce_mem), line:34:16, endln:34:22
   |vpiNet:
-  \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
+  \_Net: (work@mem_if.datao_mem), line:35:16, endln:35:25
   |vpiNet:
-  \_LogicNet: (work@mem_if.datai_mem), line:36:16, endln:36:25
+  \_Net: (work@mem_if.datai_mem), line:36:16, endln:36:25
   |vpiNet:
-  \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
+  \_Net: (work@mem_if.addr_mem), line:37:16, endln:37:24
   |vpiModport:
   \_Modport: (work@mem_if.system), line:41:12, endln:44:55
     |vpiParent:
@@ -2467,7 +2466,7 @@ Design: (unnamed)
       |vpiName:clk
       |vpiFullName:work@mem_if.clk.clk
       |vpiActual:
-      \_LogicNet: (work@mem_if.clk), line:26:30, endln:26:33
+      \_Net: (work@mem_if.clk), line:26:30, endln:26:33
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:26:25, endln:26:29
       |vpiParent:
@@ -2749,19 +2748,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_interface.clock), line:1:35, endln:1:40
+  \_Net: (work@mem_interface.clock), line:1:35, endln:1:40
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiName:clock
     |vpiFullName:work@mem_interface.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_interface.mem_data), line:6:15, endln:6:23
+  \_Net: (work@mem_interface.mem_data), line:6:15, endln:6:23
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiTypespec:
     \_RefTypespec: (work@mem_interface.mem_data), line:6:4, endln:6:8
       |vpiParent:
-      \_LogicNet: (work@mem_interface.mem_data), line:6:15, endln:6:23
+      \_Net: (work@mem_interface.mem_data), line:6:15, endln:6:23
       |vpiFullName:work@mem_interface.mem_data
       |vpiActual:
       \_LogicTypespec: , line:6:4, endln:6:8
@@ -2769,13 +2768,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_interface.mem_data
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_interface.mem_add), line:7:15, endln:7:22
+  \_Net: (work@mem_interface.mem_add), line:7:15, endln:7:22
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiTypespec:
     \_RefTypespec: (work@mem_interface.mem_add), line:7:4, endln:7:8
       |vpiParent:
-      \_LogicNet: (work@mem_interface.mem_add), line:7:15, endln:7:22
+      \_Net: (work@mem_interface.mem_add), line:7:15, endln:7:22
       |vpiFullName:work@mem_interface.mem_add
       |vpiActual:
       \_LogicTypespec: , line:7:4, endln:7:8
@@ -2783,13 +2782,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_interface.mem_add
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_interface.mem_en), line:8:15, endln:8:21
+  \_Net: (work@mem_interface.mem_en), line:8:15, endln:8:21
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiTypespec:
     \_RefTypespec: (work@mem_interface.mem_en), line:8:4, endln:8:8
       |vpiParent:
-      \_LogicNet: (work@mem_interface.mem_en), line:8:15, endln:8:21
+      \_Net: (work@mem_interface.mem_en), line:8:15, endln:8:21
       |vpiFullName:work@mem_interface.mem_en
       |vpiActual:
       \_LogicTypespec: , line:8:4, endln:8:8
@@ -2797,13 +2796,13 @@ Design: (unnamed)
     |vpiFullName:work@mem_interface.mem_en
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
+  \_Net: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
     |vpiParent:
     \_Interface: work@mem_interface (work@mem_interface), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:1:1, endln:21:28
     |vpiTypespec:
     \_RefTypespec: (work@mem_interface.mem_rd_wr), line:9:4, endln:9:8
       |vpiParent:
-      \_LogicNet: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
+      \_Net: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
       |vpiFullName:work@mem_interface.mem_rd_wr
       |vpiActual:
       \_LogicTypespec: , line:8:4, endln:8:8
@@ -2812,15 +2811,15 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@mem_interface
   |vpiNet:
-  \_LogicNet: (work@mem_interface.clock), line:1:35, endln:1:40
+  \_Net: (work@mem_interface.clock), line:1:35, endln:1:40
   |vpiNet:
-  \_LogicNet: (work@mem_interface.mem_data), line:6:15, endln:6:23
+  \_Net: (work@mem_interface.mem_data), line:6:15, endln:6:23
   |vpiNet:
-  \_LogicNet: (work@mem_interface.mem_add), line:7:15, endln:7:22
+  \_Net: (work@mem_interface.mem_add), line:7:15, endln:7:22
   |vpiNet:
-  \_LogicNet: (work@mem_interface.mem_en), line:8:15, endln:8:21
+  \_Net: (work@mem_interface.mem_en), line:8:15, endln:8:21
   |vpiNet:
-  \_LogicNet: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
+  \_Net: (work@mem_interface.mem_rd_wr), line:9:15, endln:9:24
   |vpiModport:
   \_Modport: (work@mem_interface.MEM), line:19:12, endln:19:40
     |vpiParent:
@@ -2853,7 +2852,7 @@ Design: (unnamed)
       |vpiName:clock
       |vpiFullName:work@mem_interface.clock.clock
       |vpiActual:
-      \_LogicNet: (work@mem_interface.clock), line:1:35, endln:1:40
+      \_Net: (work@mem_interface.clock), line:1:35, endln:1:40
     |vpiTypespec:
     \_RefTypespec: (work@mem_interface.clock), line:1:31, endln:1:34
       |vpiParent:
@@ -2871,21 +2870,6 @@ Design: (unnamed)
     |vpiParent:
     \_Program: work@test (work@test), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:99:1, endln:107:11
     |vpiName:work@test
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.tb), line:99:21, endln:99:23
-    |vpiParent:
-    \_Program: work@test (work@test), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:99:1, endln:107:11
-    |vpiName:
-    \_Identifier: (work@mem_if.tb)
-      |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.tb), line:99:21, endln:99:23
-      |vpiName:work@mem_if.tb
-    |vpiModport:
-    \_Modport: (work@mem_if.tb), line:53:12, endln:55:28
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
-  |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.tb), line:99:21, endln:99:23
   |vpiDefName:work@test
   |vpiProcess:
   \_Initial: , line:101:4, endln:105:7
@@ -2926,7 +2910,7 @@ Design: (unnamed)
             \_HierPath: (tif.reset), line:102:10, endln:102:16
             |vpiName:reset
             |vpiActual:
-            \_LogicNet: (work@mem_if.reset), line:27:16, endln:27:21
+            \_Net: (work@mem_if.reset), line:27:16, endln:27:21
           |vpiName:tif.reset
       |vpiStmt:
       \_DelayControl: , line:104:7, endln:104:18
@@ -2949,13 +2933,13 @@ Design: (unnamed)
     |vpiName:tif
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@test.tif.work@mem_if.tb), line:99:14, endln:99:20
+    \_RefTypespec: (work@test.tif.mem_if), line:99:14, endln:99:20
       |vpiParent:
       \_Port: (tif), line:99:24, endln:99:27
-      |vpiName:work@mem_if.tb
-      |vpiFullName:work@test.tif.work@mem_if.tb
+      |vpiName:mem_if
+      |vpiFullName:work@test.tif.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.tb), line:99:21, endln:99:23
+      \_InterfaceTypespec: (mem_if)
 |vpiAllModules:
 \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
   |vpiParent:
@@ -3004,13 +2988,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:114:1, endln:114:6
   |vpiImportTypespec:
-  \_LogicNet: (work@interface_modports.clk), line:114:7, endln:114:10
+  \_Net: (work@interface_modports.clk), line:114:7, endln:114:10
     |vpiParent:
     \_Module: work@interface_modports (work@interface_modports), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:112:1, endln:124:10
     |vpiTypespec:
     \_RefTypespec: (work@interface_modports.clk), line:114:1, endln:114:6
       |vpiParent:
-      \_LogicNet: (work@interface_modports.clk), line:114:7, endln:114:10
+      \_Net: (work@interface_modports.clk), line:114:7, endln:114:10
       |vpiFullName:work@interface_modports.clk
       |vpiActual:
       \_LogicTypespec: , line:114:1, endln:114:6
@@ -3019,7 +3003,7 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiDefName:work@interface_modports
   |vpiNet:
-  \_LogicNet: (work@interface_modports.clk), line:114:7, endln:114:10
+  \_Net: (work@interface_modports.clk), line:114:7, endln:114:10
   |vpiProcess:
   \_Always: , line:115:1, endln:115:18
     |vpiParent:
@@ -3041,7 +3025,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@interface_modports.clk
           |vpiActual:
-          \_LogicNet: (work@interface_modports.clk), line:114:7, endln:114:10
+          \_Net: (work@interface_modports.clk), line:114:7, endln:114:10
     |vpiAlwaysType:1
   |vpiRefModule:
   \_RefModule: work@mem_if (miff), line:119:1, endln:119:7
@@ -3063,7 +3047,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@interface_modports.miff.clk.clk
         |vpiActual:
-        \_LogicNet: (work@interface_modports.clk), line:114:7, endln:114:10
+        \_Net: (work@interface_modports.clk), line:114:7, endln:114:10
   |vpiRefModule:
   \_RefModule: work@memory_ctrl (U_ctrl), line:120:1, endln:120:12
     |vpiParent:
@@ -3188,31 +3172,18 @@ Design: (unnamed)
       |vpiFullName:work@memory_ctrl.fsm_t
       |vpiActual:
       \_EnumTypespec: , line:89:10, endln:89:43
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.system), line:87:28, endln:87:34
-    |vpiParent:
-    \_Module: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
-    |vpiName:
-    \_Identifier: (work@mem_if.system)
-      |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.system), line:87:28, endln:87:34
-      |vpiName:work@mem_if.system
-    |vpiModport:
-    \_Modport: (work@mem_if.system), line:41:12, endln:44:55
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiImportTypespec:
   \_EnumTypespec: , line:89:10, endln:89:43
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:89:38, endln:89:43
   |vpiImportTypespec:
-  \_EnumNet: (work@memory_ctrl.state), line:91:7, endln:91:12
+  \_Net: (work@memory_ctrl.state), line:91:7, endln:91:12
     |vpiParent:
     \_Module: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl.state.fsm_t), line:91:1, endln:91:6
       |vpiParent:
-      \_EnumNet: (work@memory_ctrl.state), line:91:7, endln:91:12
+      \_Net: (work@memory_ctrl.state), line:91:7, endln:91:12
       |vpiName:fsm_t
       |vpiFullName:work@memory_ctrl.state.fsm_t
       |vpiActual:
@@ -3220,10 +3191,24 @@ Design: (unnamed)
     |vpiName:state
     |vpiFullName:work@memory_ctrl.state
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.system), line:87:28, endln:87:34
+  \_Net: (work@memory_ctrl.sif), line:87:35, endln:87:38
+    |vpiParent:
+    \_Module: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl.sif.mem_if), line:87:21, endln:87:27
+      |vpiParent:
+      \_Net: (work@memory_ctrl.sif), line:87:35, endln:87:38
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl.sif.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif
+    |vpiFullName:work@memory_ctrl.sif
   |vpiDefName:work@memory_ctrl
   |vpiNet:
-  \_EnumNet: (work@memory_ctrl.state), line:91:7, endln:91:12
+  \_Net: (work@memory_ctrl.state), line:91:7, endln:91:12
+  |vpiNet:
+  \_Net: (work@memory_ctrl.sif), line:87:35, endln:87:38
   |vpiPort:
   \_Port: (sif), line:87:35, endln:87:38
     |vpiParent:
@@ -3231,13 +3216,13 @@ Design: (unnamed)
     |vpiName:sif
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl.sif.work@mem_if.system), line:87:21, endln:87:27
+    \_RefTypespec: (work@memory_ctrl.sif.mem_if), line:87:21, endln:87:27
       |vpiParent:
       \_Port: (sif), line:87:35, endln:87:38
-      |vpiName:work@mem_if.system
-      |vpiFullName:work@memory_ctrl.sif.work@mem_if.system
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl.sif.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.system), line:87:28, endln:87:34
+      \_InterfaceTypespec: (mem_if)
 |vpiAllModules:
 \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
   |vpiParent:
@@ -3303,31 +3288,18 @@ Design: (unnamed)
       |vpiFullName:work@memory_model
       |vpiActual:
       \_LogicTypespec: , line:64:1, endln:64:6
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.memory), line:62:29, endln:62:35
-    |vpiParent:
-    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
-    |vpiName:
-    \_Identifier: (work@mem_if.memory)
-      |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.memory), line:62:29, endln:62:35
-      |vpiName:work@mem_if.memory
-    |vpiModport:
-    \_Modport: (work@mem_if.memory), line:48:12, endln:49:58
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:64:1, endln:64:6
   |vpiImportTypespec:
   \_ArrayTypespec: , line:64:1, endln:64:24
   |vpiImportTypespec:
-  \_ArrayNet: (work@memory_model.mem), line:64:13, endln:64:16
+  \_Net: (work@memory_model.mem), line:64:13, endln:64:16
     |vpiParent:
     \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_model.mem), line:64:1, endln:64:12
       |vpiParent:
-      \_ArrayNet: (work@memory_model.mem), line:64:13, endln:64:16
+      \_Net: (work@memory_model.mem), line:64:13, endln:64:16
       |vpiFullName:work@memory_model.mem
       |vpiActual:
       \_ArrayTypespec: , line:64:1, endln:64:24
@@ -3335,10 +3307,51 @@ Design: (unnamed)
     |vpiFullName:work@memory_model.mem
     |vpiNetType:36
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.memory), line:62:29, endln:62:35
+  \_Net: (work@memory_model.mif), line:62:36, endln:62:39
+    |vpiParent:
+    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_model.mif.mem_if), line:62:22, endln:62:28
+      |vpiParent:
+      \_Net: (work@memory_model.mif), line:62:36, endln:62:39
+      |vpiName:mem_if
+      |vpiFullName:work@memory_model.mif.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:mif
+    |vpiFullName:work@memory_model.mif
+  |vpiImportTypespec:
+  \_Net: (work@memory_model.clk), line:69:23, endln:69:26
+    |vpiParent:
+    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
+    |vpiName:clk
+    |vpiFullName:work@memory_model.clk
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@memory_model.ce_mem), line:70:10, endln:70:16
+    |vpiParent:
+    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
+    |vpiName:ce_mem
+    |vpiFullName:work@memory_model.ce_mem
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@memory_model.we_mem), line:70:24, endln:70:30
+    |vpiParent:
+    \_Module: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
+    |vpiName:we_mem
+    |vpiFullName:work@memory_model.we_mem
+    |vpiNetType:1
   |vpiDefName:work@memory_model
-  |vpiArrayNet:
-  \_ArrayNet: (work@memory_model.mem), line:64:13, endln:64:16
+  |vpiNet:
+  \_Net: (work@memory_model.mem), line:64:13, endln:64:16
+  |vpiNet:
+  \_Net: (work@memory_model.mif), line:62:36, endln:62:39
+  |vpiNet:
+  \_Net: (work@memory_model.clk), line:69:23, endln:69:26
+  |vpiNet:
+  \_Net: (work@memory_model.ce_mem), line:70:10, endln:70:16
+  |vpiNet:
+  \_Net: (work@memory_model.we_mem), line:70:24, endln:70:30
   |vpiPort:
   \_Port: (mif), line:62:36, endln:62:39
     |vpiParent:
@@ -3346,13 +3359,13 @@ Design: (unnamed)
     |vpiName:mif
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_model.mif.work@mem_if.memory), line:62:22, endln:62:28
+    \_RefTypespec: (work@memory_model.mif.mem_if), line:62:22, endln:62:28
       |vpiParent:
       \_Port: (mif), line:62:36, endln:62:39
-      |vpiName:work@mem_if.memory
-      |vpiFullName:work@memory_model.mif.work@mem_if.memory
+      |vpiName:mem_if
+      |vpiFullName:work@memory_model.mif.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.memory), line:62:29, endln:62:35
+      \_InterfaceTypespec: (mem_if)
   |vpiProcess:
   \_Always: , line:69:1, endln:72:5
     |vpiParent:
@@ -3376,7 +3389,7 @@ Design: (unnamed)
             \_HierPath: (mif.clk), line:69:19, endln:69:26
             |vpiName:mif
             |vpiActual:
-            \_Port: (mif), line:62:36, endln:62:39
+            \_Net: (work@memory_model.mif), line:62:36, endln:62:39
           |vpiActual:
           \_RefObj: (work@memory_model.clk), line:69:23, endln:69:26
             |vpiParent:
@@ -3384,7 +3397,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@memory_model.clk
             |vpiActual:
-            \_Port: (clk), line:26:30, endln:26:33
+            \_Net: (work@memory_model.clk), line:69:23, endln:69:26
           |vpiName:mif.clk
       |vpiStmt:
       \_IfStmt: , line:70:2, endln:72:5
@@ -3405,7 +3418,7 @@ Design: (unnamed)
               \_HierPath: (mif.ce_mem), line:70:6, endln:70:16
               |vpiName:mif
               |vpiActual:
-              \_Port: (mif), line:62:36, endln:62:39
+              \_Net: (work@memory_model.mif), line:62:36, endln:62:39
             |vpiActual:
             \_RefObj: (work@memory_model.ce_mem), line:70:10, endln:70:16
               |vpiParent:
@@ -3413,7 +3426,7 @@ Design: (unnamed)
               |vpiName:ce_mem
               |vpiFullName:work@memory_model.ce_mem
               |vpiActual:
-              \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
+              \_Net: (work@memory_model.ce_mem), line:70:10, endln:70:16
             |vpiName:mif.ce_mem
           |vpiOperand:
           \_HierPath: (mif.we_mem), line:70:20, endln:70:30
@@ -3425,7 +3438,7 @@ Design: (unnamed)
               \_HierPath: (mif.we_mem), line:70:20, endln:70:30
               |vpiName:mif
               |vpiActual:
-              \_Port: (mif), line:62:36, endln:62:39
+              \_Net: (work@memory_model.mif), line:62:36, endln:62:39
             |vpiActual:
             \_RefObj: (work@memory_model.we_mem), line:70:24, endln:70:30
               |vpiParent:
@@ -3433,13 +3446,27 @@ Design: (unnamed)
               |vpiName:we_mem
               |vpiFullName:work@memory_model.we_mem
               |vpiActual:
-              \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
+              \_Net: (work@memory_model.we_mem), line:70:24, endln:70:30
             |vpiName:mif.we_mem
         |vpiStmt:
         \_Begin: (work@memory_model), line:70:32, endln:72:5
           |vpiParent:
           \_IfStmt: , line:70:2, endln:72:5
           |vpiFullName:work@memory_model
+          |vpiImportTypespec:
+          \_Net: (work@memory_model.datai_mem), line:71:29, endln:71:38
+            |vpiParent:
+            \_Begin: (work@memory_model), line:70:32, endln:72:5
+            |vpiName:datai_mem
+            |vpiFullName:work@memory_model.datai_mem
+            |vpiNetType:1
+          |vpiImportTypespec:
+          \_Net: (work@memory_model.addr_mem), line:71:12, endln:71:20
+            |vpiParent:
+            \_Begin: (work@memory_model), line:70:32, endln:72:5
+            |vpiName:addr_mem
+            |vpiFullName:work@memory_model.addr_mem
+            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:71:4, endln:71:38
             |vpiParent:
@@ -3455,7 +3482,7 @@ Design: (unnamed)
                 \_HierPath: (mif.datai_mem), line:71:25, endln:71:38
                 |vpiName:mif
                 |vpiActual:
-                \_Port: (mif), line:62:36, endln:62:39
+                \_Net: (work@memory_model.mif), line:62:36, endln:62:39
               |vpiActual:
               \_RefObj: (work@memory_model.datai_mem), line:71:29, endln:71:38
                 |vpiParent:
@@ -3463,7 +3490,7 @@ Design: (unnamed)
                 |vpiName:datai_mem
                 |vpiFullName:work@memory_model.datai_mem
                 |vpiActual:
-                \_LogicNet: (work@mem_if.datai_mem), line:36:16, endln:36:25
+                \_Net: (work@memory_model.datai_mem), line:71:29, endln:71:38
               |vpiName:mif.datai_mem
             |vpiLhs:
             \_BitSelect: (work@memory_model.mem), line:71:7, endln:71:21
@@ -3472,7 +3499,7 @@ Design: (unnamed)
               |vpiName:mem
               |vpiFullName:work@memory_model.mem
               |vpiActual:
-              \_ArrayNet: (work@memory_model.mem), line:64:13, endln:64:16
+              \_Net: (work@memory_model.mem), line:64:13, endln:64:16
               |vpiIndex:
               \_HierPath: (mif.addr_mem), line:71:8, endln:71:20
                 |vpiParent:
@@ -3483,7 +3510,7 @@ Design: (unnamed)
                   \_HierPath: (mif.addr_mem), line:71:8, endln:71:20
                   |vpiName:mif
                   |vpiActual:
-                  \_Port: (mif), line:62:36, endln:62:39
+                  \_Net: (work@memory_model.mif), line:62:36, endln:62:39
                 |vpiActual:
                 \_RefObj: (work@memory_model.mem.addr_mem), line:71:12, endln:71:20
                   |vpiParent:
@@ -3491,7 +3518,7 @@ Design: (unnamed)
                   |vpiName:addr_mem
                   |vpiFullName:work@memory_model.mem.addr_mem
                   |vpiActual:
-                  \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
+                  \_Net: (work@memory_model.addr_mem), line:71:12, endln:71:20
                 |vpiName:mif.addr_mem
     |vpiAlwaysType:1
   |vpiProcess:
@@ -3517,7 +3544,7 @@ Design: (unnamed)
             \_HierPath: (mif.clk), line:77:19, endln:77:26
             |vpiName:mif
             |vpiActual:
-            \_Port: (mif), line:62:36, endln:62:39
+            \_Net: (work@memory_model.mif), line:62:36, endln:62:39
           |vpiActual:
           \_RefObj: (work@memory_model.clk), line:77:23, endln:77:26
             |vpiParent:
@@ -3525,7 +3552,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@memory_model.clk
             |vpiActual:
-            \_Port: (clk), line:26:30, endln:26:33
+            \_Net: (work@memory_model.clk), line:69:23, endln:69:26
           |vpiName:mif.clk
       |vpiStmt:
       \_IfStmt: , line:78:2, endln:80:5
@@ -3546,7 +3573,7 @@ Design: (unnamed)
               \_HierPath: (mif.ce_mem), line:78:6, endln:78:16
               |vpiName:mif
               |vpiActual:
-              \_Port: (mif), line:62:36, endln:62:39
+              \_Net: (work@memory_model.mif), line:62:36, endln:62:39
             |vpiActual:
             \_RefObj: (work@memory_model.ce_mem), line:78:10, endln:78:16
               |vpiParent:
@@ -3554,7 +3581,7 @@ Design: (unnamed)
               |vpiName:ce_mem
               |vpiFullName:work@memory_model.ce_mem
               |vpiActual:
-              \_LogicNet: (work@mem_if.ce_mem), line:34:16, endln:34:22
+              \_Net: (work@memory_model.ce_mem), line:70:10, endln:70:16
             |vpiName:mif.ce_mem
           |vpiOperand:
           \_Operation: , line:78:20, endln:78:31
@@ -3571,7 +3598,7 @@ Design: (unnamed)
                 \_HierPath: (mif.we_mem), line:78:21, endln:78:31
                 |vpiName:mif
                 |vpiActual:
-                \_Port: (mif), line:62:36, endln:62:39
+                \_Net: (work@memory_model.mif), line:62:36, endln:62:39
               |vpiActual:
               \_RefObj: (work@memory_model.we_mem), line:78:25, endln:78:31
                 |vpiParent:
@@ -3579,13 +3606,27 @@ Design: (unnamed)
                 |vpiName:we_mem
                 |vpiFullName:work@memory_model.we_mem
                 |vpiActual:
-                \_LogicNet: (work@mem_if.we_mem), line:33:16, endln:33:22
+                \_Net: (work@memory_model.we_mem), line:70:24, endln:70:30
               |vpiName:mif.we_mem
         |vpiStmt:
         \_Begin: (work@memory_model), line:78:34, endln:80:5
           |vpiParent:
           \_IfStmt: , line:78:2, endln:80:5
           |vpiFullName:work@memory_model
+          |vpiImportTypespec:
+          \_Net: (work@memory_model.addr_mem), line:79:29, endln:79:37
+            |vpiParent:
+            \_Begin: (work@memory_model), line:78:34, endln:80:5
+            |vpiName:addr_mem
+            |vpiFullName:work@memory_model.addr_mem
+            |vpiNetType:1
+          |vpiImportTypespec:
+          \_Net: (work@memory_model.datao_mem), line:79:8, endln:79:17
+            |vpiParent:
+            \_Begin: (work@memory_model), line:78:34, endln:80:5
+            |vpiName:datao_mem
+            |vpiFullName:work@memory_model.datao_mem
+            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:79:4, endln:79:38
             |vpiParent:
@@ -3598,7 +3639,7 @@ Design: (unnamed)
               |vpiName:mem
               |vpiFullName:work@memory_model.mem
               |vpiActual:
-              \_ArrayNet: (work@memory_model.mem), line:64:13, endln:64:16
+              \_Net: (work@memory_model.mem), line:64:13, endln:64:16
               |vpiIndex:
               \_HierPath: (mif.addr_mem), line:79:25, endln:79:37
                 |vpiParent:
@@ -3609,7 +3650,7 @@ Design: (unnamed)
                   \_HierPath: (mif.addr_mem), line:79:25, endln:79:37
                   |vpiName:mif
                   |vpiActual:
-                  \_Port: (mif), line:62:36, endln:62:39
+                  \_Net: (work@memory_model.mif), line:62:36, endln:62:39
                 |vpiActual:
                 \_RefObj: (work@memory_model.mem.addr_mem), line:79:29, endln:79:37
                   |vpiParent:
@@ -3617,7 +3658,7 @@ Design: (unnamed)
                   |vpiName:addr_mem
                   |vpiFullName:work@memory_model.mem.addr_mem
                   |vpiActual:
-                  \_LogicNet: (work@mem_if.addr_mem), line:37:16, endln:37:24
+                  \_Net: (work@memory_model.addr_mem), line:79:29, endln:79:37
                 |vpiName:mif.addr_mem
             |vpiLhs:
             \_HierPath: (mif.datao_mem), line:79:7, endln:79:17
@@ -3629,14 +3670,14 @@ Design: (unnamed)
                 \_HierPath: (mif.datao_mem), line:79:7, endln:79:17
                 |vpiName:mif
                 |vpiActual:
-                \_Port: (mif), line:62:36, endln:62:39
+                \_Net: (work@memory_model.mif), line:62:36, endln:62:39
               |vpiActual:
               \_RefObj: (datao_mem), line:79:8, endln:79:17
                 |vpiParent:
                 \_HierPath: (mif.datao_mem), line:79:7, endln:79:17
                 |vpiName:datao_mem
                 |vpiActual:
-                \_LogicNet: (work@mem_if.datao_mem), line:35:16, endln:35:25
+                \_Net: (work@memory_model.datao_mem), line:79:8, endln:79:17
               |vpiName:mif.datao_mem
     |vpiAlwaysType:1
 |vpiTypedef:

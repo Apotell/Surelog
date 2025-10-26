@@ -220,6 +220,7 @@ IODecl                                                 2
 Identifier                                            11
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Range                                                  4
 RealTypespec                                           5
 RefObj                                                 7
@@ -228,12 +229,12 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        7
 TypespecMember                                         2
-UnsupportedTypespec                                    2
-Variable                                               2
+UnsupportedTypespec                                    7
+Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Unsupported Typespec: id:17, type:RefTypespec, name:some_other_type.
-[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:64, type:RefTypespec, name:i.
+[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:68, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -252,25 +253,23 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
     |vpiName:work@dut
-  |vpiVariable:
-  \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
+  |vpiImportTypespec:
+  \_Net: (work@dut.my_real_net), line:13:13, endln:13:24
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.my_real_net.my_real), line:13:5, endln:13:12
       |vpiParent:
-      \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
+      \_Net: (work@dut.my_real_net), line:13:13, endln:13:24
       |vpiName:my_real
       |vpiFullName:work@dut.my_real_net.my_real
       |vpiActual:
       \_TypedefTypespec: (my_real), line:9:14, endln:9:21
     |vpiName:my_real_net
     |vpiFullName:work@dut.my_real_net
-    |vpiRandType:1
-    |vpiVisibility:1
-  |vpiImportTypespec:
-  \_Variable: (work@dut.my_real_net), line:13:13, endln:13:24
   |vpiDefName:work@dut
+  |vpiNet:
+  \_Net: (work@dut.my_real_net), line:13:13, endln:13:24
 |vpiTypedef:
 \_BitTypespec: , line:6:9, endln:6:12
   |vpiParent:

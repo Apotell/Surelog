@@ -440,6 +440,7 @@ n<> u<130> t<Top_level_rule> c<1> l<3:1> el<15:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitForeach/top2.v:3:1: No timescale set for "uvm_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnitForeach/top2.v:3:1: Compile package "uvm_pkg".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
@@ -453,7 +454,7 @@ Begin                                                  6
 BitSelect                                              2
 ClassDefn                                             10
 ClassTypespec                                         10
-Constant                                              16
+Constant                                              14
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -465,18 +466,18 @@ Identifier                                            54
 IntTypespec                                            9
 LogicTypespec                                          2
 MethodFuncCall                                        18
-Operation                                              1
+Operation                                              2
 Package                                                2
-Range                                                  5
+Range                                                  4
 RefObj                                                30
-RefTypespec                                           33
+RefTypespec                                           30
 SourceFile                                             2
 StringTypespec                                         1
 SysFuncCall                                            2
 Task                                                   9
 TypedefTypespec                                        1
-UnsupportedTypespec                                    6
-Variable                                              10
+UnsupportedTypespec                                   11
+Variable                                               9
 VoidTypespec                                           2
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:8:14: Illegal implicit net "id:57, name: arb_sequence_q".
@@ -485,6 +486,7 @@ VoidTypespec                                           2
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:67: Illegal implicit net "id:53, name: arb_sequence_q".
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:85: Illegal implicit net "id:55, name: sequence_id".
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:53: Illegal implicit net "id:29, name: arb_sequence_q".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top.v:52:27: Illegal implicit net "id:192, name: an_obj".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top2.v:8:29: Unsupported Typespec: id:35, type:RefTypespec, name:i.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:8:14: Null Actual: id:57, type:RefObj, name:arb_sequence_q.
@@ -494,10 +496,12 @@ VoidTypespec                                           2
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:85: Null Actual: id:55, type:RefObj, name:sequence_id.
 [ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top2.v:5:47: Unsupported Typespec: id:18, type:RefTypespec, name:uvm_printer.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:53: Null Actual: id:29, type:RefObj, name:arb_sequence_q.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:54:25: Unsupported Typespec: id:195, type:RefTypespec, name:submap.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:61:26: Unsupported Typespec: id:213, type:RefTypespec, name:i.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:67:25: Unsupported Typespec: id:228, type:RefTypespec, name:i.
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:74:22: Unsupported Typespec: id:243, type:RefTypespec, name:submap.
+[ERR:IG0810] ${SURELOG_DIR}/tests/UnitForeach/top.v:46:31: Null Typespec: id:276, type:RefTypespec, name:uvm_reg_map.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:54:25: Unsupported Typespec: id:196, type:RefTypespec, name:submap.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:61:26: Unsupported Typespec: id:214, type:RefTypespec, name:i.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:67:25: Unsupported Typespec: id:229, type:RefTypespec, name:i.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitForeach/top.v:74:22: Unsupported Typespec: id:244, type:RefTypespec, name:submap.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top.v:52:27: Null Actual: id:192, type:RefObj, name:an_obj.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1567,8 +1571,15 @@ Design: (unnamed)
     \_VoidTypespec: , line:5:12, endln:5:16
       |vpiParent:
       \_Function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
+    |vpiTypedef:
+    \_UnsupportedTypespec: (uvm_printer), line:5:47, endln:5:58
+      |vpiParent:
+      \_Function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
+      |vpiName:uvm_printer
     |vpiImportTypespec:
     \_VoidTypespec: , line:5:12, endln:5:16
+    |vpiImportTypespec:
+    \_UnsupportedTypespec: (uvm_printer), line:5:47, endln:5:58
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (uvm_pkg::uvm_sequencer_base::do_print)
@@ -1595,15 +1606,8 @@ Design: (unnamed)
     \_Begin: (uvm_pkg::uvm_sequencer_base::do_print)
     |vpiInstance:
     \_Package: uvm_pkg (uvm_pkg), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-  |vpiTypedef:
-  \_UnsupportedTypespec: (uvm_printer), line:5:47, endln:5:58
-    |vpiParent:
-    \_Package: uvm_pkg (uvm_pkg), file:${SURELOG_DIR}/tests/UnitForeach/top2.v, line:3:1, endln:14:11
-    |vpiName:uvm_printer
   |vpiImportTypespec:
   \_Function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (uvm_printer), line:5:47, endln:5:58
   |vpiDefName:uvm_pkg
   |vpiTaskFunc:
   \_Function: (uvm_pkg::uvm_sequencer_base::do_print), line:5:3, endln:11:14
@@ -1731,20 +1735,6 @@ Design: (unnamed)
         |vpiName:sarray
         |vpiFullName:work@uvm_reg_map::set_check_on_read::sarray
         |vpiSigned:1
-      |vpiVariable:
-      \_Variable: (work@uvm_reg_map::set_check_on_read::an_obj), line:51:14, endln:51:20
-        |vpiParent:
-        \_Begin: (work@uvm_reg_map::set_check_on_read)
-        |vpiTypespec:
-        \_RefTypespec: (work@uvm_reg_map::set_check_on_read::an_obj::work@moreobj), line:51:6, endln:51:13
-          |vpiParent:
-          \_Variable: (work@uvm_reg_map::set_check_on_read::an_obj), line:51:14, endln:51:20
-          |vpiName:work@moreobj
-          |vpiFullName:work@uvm_reg_map::set_check_on_read::an_obj::work@moreobj
-          |vpiActual:
-          \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
-        |vpiName:an_obj
-        |vpiFullName:work@uvm_reg_map::set_check_on_read::an_obj
       |vpiInternalScope:
       \_ForeachStmt: (work@uvm_reg_map::set_check_on_read), line:54:6, endln:59:10
         |vpiParent:
@@ -2098,13 +2088,6 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@uvm_reg_map::set_check_on_read)
       |vpiTypedef:
-      \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
-        |vpiParent:
-        \_Begin: (work@uvm_reg_map::set_check_on_read)
-        |vpiName:work@moreobj
-        |vpiClassDefn:
-        \_ClassDefn: (work@moreobj), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:1:1, endln:4:9
-      |vpiTypedef:
       \_UnsupportedTypespec: (submap), line:54:25, endln:54:31
         |vpiParent:
         \_Begin: (work@uvm_reg_map::set_check_on_read)
@@ -2129,10 +2112,6 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_Variable: (work@uvm_reg_map::set_check_on_read::sarray), line:50:14, endln:50:20
       |vpiImportTypespec:
-      \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
-      |vpiImportTypespec:
-      \_Variable: (work@uvm_reg_map::set_check_on_read::an_obj), line:51:14, endln:51:20
-      |vpiImportTypespec:
       \_UnsupportedTypespec: (submap), line:54:25, endln:54:31
       |vpiImportTypespec:
       \_UnsupportedTypespec: (i), line:61:26, endln:61:27
@@ -2150,8 +2129,6 @@ Design: (unnamed)
           \_MethodFuncCall: (push_back), line:52:6, endln:52:33
           |vpiName:an_obj
           |vpiFullName:work@uvm_reg_map::set_check_on_read::an_obj
-          |vpiActual:
-          \_Variable: (work@uvm_reg_map::set_check_on_read::an_obj), line:51:14, endln:51:20
         |vpiName:
         \_Identifier: (push_back)
           |vpiParent:
@@ -2220,65 +2197,54 @@ Design: (unnamed)
       |vpiActual:
       \_StringTypespec: , line:50:7, endln:50:13
   |vpiTypedef:
-  \_ClassTypespec: (work@uvm_reg_map)
-    |vpiParent:
-    \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-    |vpiName:work@uvm_reg_map
-    |vpiClassDefn:
-    \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
-  |vpiTypedef:
   \_ArrayTypespec: , line:46:9, endln:46:43
     |vpiParent:
     \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiArrayType:3
     |vpiIndexTypespec:
-    \_RefTypespec: (work@uvm_reg_map::work@uvm_reg_map), line:46:30, endln:46:43
+    \_RefTypespec: (work@uvm_reg_map::uvm_reg_map), line:46:31, endln:46:42
       |vpiParent:
       \_ArrayTypespec: , line:46:9, endln:46:43
-      |vpiName:work@uvm_reg_map
-      |vpiFullName:work@uvm_reg_map::work@uvm_reg_map
-      |vpiActual:
-      \_ClassTypespec: (work@uvm_reg_map)
+      |vpiName:uvm_reg_map
+      |vpiFullName:work@uvm_reg_map::uvm_reg_map
     |vpiElemTypespec:
-    \_RefTypespec: (work@uvm_reg_map::work@moreobj), line:46:9, endln:46:16
+    \_RefTypespec: (work@uvm_reg_map::moreobj), line:46:9, endln:46:16
       |vpiParent:
       \_ArrayTypespec: , line:46:9, endln:46:43
-      |vpiName:work@moreobj
-      |vpiFullName:work@uvm_reg_map::work@moreobj
+      |vpiName:moreobj
+      |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
-      \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
+      \_ClassTypespec: (work@moreobj)
   |vpiTypedef:
   \_ArrayTypespec: , line:47:9, endln:47:34
     |vpiParent:
     \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiArrayType:3
     |vpiElemTypespec:
-    \_RefTypespec: (work@uvm_reg_map::work@moreobj), line:47:9, endln:47:16
+    \_RefTypespec: (work@uvm_reg_map::moreobj), line:47:9, endln:47:16
       |vpiParent:
       \_ArrayTypespec: , line:47:9, endln:47:34
-      |vpiName:work@moreobj
-      |vpiFullName:work@uvm_reg_map::work@moreobj
+      |vpiName:moreobj
+      |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
-      \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
+      \_ClassTypespec: (work@moreobj)
   |vpiTypedef:
   \_ArrayTypespec: , line:48:9, endln:48:34
     |vpiParent:
     \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiArrayType:4
     |vpiElemTypespec:
-    \_RefTypespec: (work@uvm_reg_map::work@moreobj), line:48:9, endln:48:16
+    \_RefTypespec: (work@uvm_reg_map::moreobj), line:48:9, endln:48:16
       |vpiParent:
       \_ArrayTypespec: , line:48:9, endln:48:34
-      |vpiName:work@moreobj
-      |vpiFullName:work@uvm_reg_map::work@moreobj
+      |vpiName:moreobj
+      |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
-      \_ClassTypespec: (work@moreobj), line:51:6, endln:51:13
+      \_ClassTypespec: (work@moreobj)
   |vpiImportTypespec:
   \_Function: (work@uvm_reg_map::set_check_on_read), line:49:3, endln:79:15
   |vpiImportTypespec:
   \_ArrayTypespec: , line:50:7, endln:50:24
-  |vpiImportTypespec:
-  \_ClassTypespec: (work@uvm_reg_map)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:46:9, endln:46:43
   |vpiImportTypespec:
@@ -2293,11 +2259,23 @@ Design: (unnamed)
   \_Variable: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:31
   |vpiMethod:
   \_Function: (work@uvm_reg_map::set_check_on_read), line:49:3, endln:79:15
-  |vpiClassTypespec:
-  \_ClassTypespec: (work@uvm_reg_map)
+|vpiTypedef:
+\_ClassTypespec: (work@moreobj)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@moreobj
+  |vpiClassDefn:
+  \_ClassDefn: (work@moreobj), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:1:1, endln:4:9
+|vpiTypedef:
+\_ClassTypespec: (work@uvm_reg_map)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@uvm_reg_map
+  |vpiClassDefn:
+  \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 18
+[  ERROR] : 21
 [WARNING] : 1
 [   NOTE] : 0

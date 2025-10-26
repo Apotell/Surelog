@@ -190,6 +190,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackDataType/dut.sv:13:1: No timescale set for "OK".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackDataType/dut.sv:16:1: No timescale set for "kmac_keymgr".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackDataType/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackDataType/dut.sv:13:1: Compile module "work@OK".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackDataType/dut.sv:16:1: Compile module "work@kmac_keymgr".
 [INF:CP0302] Compile class "builtin::mailbox".
@@ -197,7 +198,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 Begin                                                  1
 ClassDefn                                              8
@@ -215,6 +215,7 @@ IntTypespec                                           11
 LogicTypespec                                          5
 Module                                                 4
 ModuleTypespec                                         2
+Net                                                    2
 Operation                                              4
 Package                                                2
 ParamAssign                                            2
@@ -225,12 +226,12 @@ RefModule                                              1
 RefObj                                                 7
 RefTypespec                                           24
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 SysFuncCall                                            1
 Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                         3
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackDataType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1243,7 +1244,7 @@ Design: (unnamed)
           \_HierPath: (keymgr_data_o.digest_share0), line:18:39, endln:18:66
           |vpiName:keymgr_data_o
           |vpiActual:
-          \_StructNet: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
+          \_Net: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
         |vpiActual:
         \_RefObj: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
           |vpiParent:
@@ -1251,7 +1252,7 @@ Design: (unnamed)
           |vpiName:digest_share0
           |vpiFullName:work@kmac_keymgr.digest_share0
           |vpiActual:
-          \_LogicNet: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
+          \_Net: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
         |vpiName:keymgr_data_o.digest_share0
       |vpiName:
       \_Identifier: ($bits)
@@ -1354,13 +1355,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:18:13, endln:18:16
   |vpiImportTypespec:
-  \_StructNet: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
+  \_Net: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
     |vpiParent:
     \_Module: work@kmac_keymgr (work@kmac_keymgr), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:16:1, endln:24:10
     |vpiTypespec:
     \_RefTypespec: (work@kmac_keymgr.keymgr_data_o.keymgr_pkg::kmac_data_rsp_t), line:16:27, endln:16:54
       |vpiParent:
-      \_StructNet: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
+      \_Net: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
       |vpiName:keymgr_pkg::kmac_data_rsp_t
       |vpiFullName:work@kmac_keymgr.keymgr_data_o.keymgr_pkg::kmac_data_rsp_t
       |vpiActual:
@@ -1372,13 +1373,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:22:2, endln:22:45
   |vpiImportTypespec:
-  \_ArrayNet: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
+  \_Net: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
     |vpiParent:
     \_Module: work@kmac_keymgr (work@kmac_keymgr), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:16:1, endln:24:10
     |vpiTypespec:
     \_RefTypespec: (work@kmac_keymgr.keymgr_digest), line:22:2, endln:22:27
       |vpiParent:
-      \_ArrayNet: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
+      \_Net: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
       |vpiFullName:work@kmac_keymgr.keymgr_digest
       |vpiActual:
       \_ArrayTypespec: , line:22:2, endln:22:45
@@ -1386,7 +1387,7 @@ Design: (unnamed)
     |vpiFullName:work@kmac_keymgr.keymgr_digest
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
+  \_Net: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
     |vpiParent:
     \_Module: work@kmac_keymgr (work@kmac_keymgr), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:16:1, endln:24:10
     |vpiName:digest_share0
@@ -1394,11 +1395,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@kmac_keymgr
   |vpiNet:
-  \_StructNet: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
+  \_Net: (work@kmac_keymgr.keymgr_data_o), line:16:55, endln:16:68
   |vpiNet:
-  \_LogicNet: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
-  |vpiArrayNet:
-  \_ArrayNet: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
+  \_Net: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:41
+  |vpiNet:
+  \_Net: (work@kmac_keymgr.digest_share0), line:18:53, endln:18:66
   |vpiPort:
   \_Port: (keymgr_data_o), line:16:55, endln:16:68
     |vpiParent:

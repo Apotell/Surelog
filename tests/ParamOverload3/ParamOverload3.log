@@ -621,6 +621,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:1:1: No timescale set for "fpnew_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:43:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:1:1: Compile package "fpnew_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:43:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -660,17 +661,17 @@ SysFuncCall                                            3
 TaggedPattern                                         15
 TypedefTypespec                                        2
 TypespecMember                                         2
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    4
 VarSelect                                              2
 Variable                                               2
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Illegal implicit net "id:204, name: exp_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Illegal implicit net "id:209, name: man_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Illegal implicit net "id:206, name: exp_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Illegal implicit net "id:211, name: man_bits".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:152, type:RefTypespec, name:fpu_features_t.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Null Actual: id:204, type:RefObj, name:exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Null Actual: id:209, type:RefObj, name:man_bits.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:219, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:153, type:RefTypespec, name:fpu_features_t.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Null Actual: id:206, type:RefObj, name:exp_bits.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Null Actual: id:211, type:RefObj, name:man_bits.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:221, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1043,11 +1044,11 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:fmt
       |vpiTypedef:
-      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fpnew_pkg::fp_format_e), line:37:44, endln:37:55
+      \_RefTypespec: (fpnew_pkg::fp_width::fmt::fp_format_e), line:37:44, endln:37:55
         |vpiParent:
         \_IODecl: (fmt), line:37:56, endln:37:59
-        |vpiName:fpnew_pkg::fp_format_e
-        |vpiFullName:fpnew_pkg::fp_width::fmt::fpnew_pkg::fp_format_e
+        |vpiName:fp_format_e
+        |vpiFullName:fpnew_pkg::fp_width::fmt::fp_format_e
         |vpiActual:
         \_TypedefTypespec: (fpnew_pkg::fp_format_e), line:18:5, endln:18:16
     |vpiStmt:
@@ -1319,10 +1320,11 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (fpnew_pkg::fp_encoding_t), line:9:5, endln:9:18
+    \_RefTypespec: (fpnew_pkg::fp_encoding_t), line:20:14, endln:20:27
       |vpiParent:
       \_PackedArrayTypespec: , line:20:14, endln:20:48
-      |vpiName:fpnew_pkg::fp_encoding_t
+      |vpiName:fp_encoding_t
+      |vpiFullName:fpnew_pkg::fp_encoding_t
       |vpiActual:
       \_TypedefTypespec: (fpnew_pkg::fp_encoding_t), line:9:5, endln:9:18
   |vpiTypedef:
@@ -1449,7 +1451,7 @@ Design: (unnamed)
         \_HierPath: (Features.Width), line:46:30, endln:46:36
         |vpiName:Width
         |vpiActual:
-        \_LogicNet: (work@top.Width), line:46:31, endln:46:36
+        \_Net: (work@top.Width), line:46:31, endln:46:36
       |vpiName:Features.Width
     |vpiLhs:
     \_Parameter: (work@top.WIDTH), line:46:14, endln:46:36
@@ -1508,7 +1510,7 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:work@top.gen_nanbox_check.fmt
               |vpiActual:
-              \_LogicNet: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
+              \_Net: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
           |vpiName:
           \_Identifier: (fpnew_pkg::fp_width)
             |vpiParent:
@@ -1550,28 +1552,28 @@ Design: (unnamed)
               |vpiName:operands
             |vpiFullName:work@top.gen_nanbox_check.check.operands
             |vpiImportTypespec:
-            \_LogicNet: (work@top.gen_nanbox_check.check.operands.vectorial_op_i), line:54:38, endln:54:52
+            \_Net: (work@top.gen_nanbox_check.check.operands.vectorial_op_i), line:54:38, endln:54:52
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
               |vpiName:vectorial_op_i
               |vpiFullName:work@top.gen_nanbox_check.check.operands.vectorial_op_i
               |vpiNetType:1
             |vpiImportTypespec:
-            \_LogicNet: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
+            \_Net: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
               |vpiName:operands_i
               |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i
               |vpiNetType:1
             |vpiImportTypespec:
-            \_LogicNet: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
+            \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
               |vpiName:op
               |vpiFullName:work@top.gen_nanbox_check.check.operands.op
               |vpiNetType:1
             |vpiImportTypespec:
-            \_LogicNet: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+            \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
               |vpiName:is_boxed
@@ -1598,7 +1600,7 @@ Design: (unnamed)
                     |vpiName:vectorial_op_i
                     |vpiFullName:work@top.gen_nanbox_check.check.operands.vectorial_op_i
                     |vpiActual:
-                    \_LogicNet: (work@top.gen_nanbox_check.check.operands.vectorial_op_i), line:54:38, endln:54:52
+                    \_Net: (work@top.gen_nanbox_check.check.operands.vectorial_op_i), line:54:38, endln:54:52
                 |vpiOperand:
                 \_Operation: , line:55:38, endln:55:76
                   |vpiParent:
@@ -1611,7 +1613,7 @@ Design: (unnamed)
                     |vpiName:operands_i
                     |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i
                     |vpiActual:
-                    \_LogicNet: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
+                    \_Net: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
                     |vpiIndex:
                     \_RefObj: (work@top.gen_nanbox_check.check.operands.operands_i.op), line:55:49, endln:55:51
                       |vpiParent:
@@ -1619,7 +1621,7 @@ Design: (unnamed)
                       |vpiName:op
                       |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i.op
                       |vpiActual:
-                      \_LogicNet: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
+                      \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
                     |vpiIndex:
                     \_PartSelect: operands_i (work@top.gen_nanbox_check.check.operands.operands_i.operands_i), line:55:53, endln:55:69
                       |vpiParent:
@@ -1628,7 +1630,7 @@ Design: (unnamed)
                       |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i.operands_i
                       |vpiDefName:operands_i
                       |vpiActual:
-                      \_LogicNet: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
+                      \_Net: (work@top.gen_nanbox_check.check.operands.operands_i), line:55:38, endln:55:70
                       |vpiConstantSelect:1
                       |vpiLeftRange:
                       \_Operation: , line:55:53, endln:55:60
@@ -1682,7 +1684,7 @@ Design: (unnamed)
                 |vpiName:is_boxed
                 |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed
                 |vpiActual:
-                \_LogicNet: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+                \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
                 |vpiIndex:
                 \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.fmt), line:54:25, endln:54:28
                   |vpiParent:
@@ -1690,7 +1692,7 @@ Design: (unnamed)
                   |vpiName:fmt
                   |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.fmt
                   |vpiActual:
-                  \_LogicNet: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
+                  \_Net: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
                 |vpiIndex:
                 \_RefObj: (work@top.gen_nanbox_check.check.operands.is_boxed.op), line:54:30, endln:54:32
                   |vpiParent:
@@ -1698,30 +1700,36 @@ Design: (unnamed)
                   |vpiName:op
                   |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.op
                   |vpiActual:
-                  \_LogicNet: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
+                  \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
           |vpiImportTypespec:
           \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
           |vpiImportTypespec:
-          \_LogicNet: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
+          \_Net: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
             |vpiParent:
             \_GenFor: (work@top.gen_nanbox_check.check), line:53:7, endln:57:10
             |vpiName:op
             |vpiFullName:work@top.gen_nanbox_check.check.op
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@top.gen_nanbox_check.check.NUM_OPERANDS), line:53:37, endln:53:49
+          \_Net: (work@top.gen_nanbox_check.check.NUM_OPERANDS), line:53:37, endln:53:49
             |vpiParent:
             \_GenFor: (work@top.gen_nanbox_check.check), line:53:7, endln:57:10
             |vpiName:NUM_OPERANDS
             |vpiFullName:work@top.gen_nanbox_check.check.NUM_OPERANDS
             |vpiNetType:1
           |vpiImportTypespec:
-          \_LogicNet: (work@top.gen_nanbox_check.check.op), line:53:52, endln:53:54
+          \_Net: (work@top.gen_nanbox_check.check.op), line:53:52, endln:53:54
             |vpiParent:
             \_GenFor: (work@top.gen_nanbox_check.check), line:53:7, endln:57:10
             |vpiName:op
             |vpiFullName:work@top.gen_nanbox_check.check.op
             |vpiNetType:1
+          |vpiNet:
+          \_Net: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
+          |vpiNet:
+          \_Net: (work@top.gen_nanbox_check.check.NUM_OPERANDS), line:53:37, endln:53:49
+          |vpiNet:
+          \_Net: (work@top.gen_nanbox_check.check.op), line:53:52, endln:53:54
           |vpiForInitStmt:
           \_Assignment: , line:53:12, endln:53:25
             |vpiParent:
@@ -1748,7 +1756,7 @@ Design: (unnamed)
               |vpiName:op
               |vpiFullName:work@top.gen_nanbox_check.check.op
               |vpiActual:
-              \_LogicNet: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
+              \_Net: (work@top.gen_nanbox_check.check.op), line:53:27, endln:53:29
             |vpiOperand:
             \_Operation: , line:53:32, endln:53:50
               |vpiParent:
@@ -1761,7 +1769,7 @@ Design: (unnamed)
                 |vpiName:NUM_OPERANDS
                 |vpiFullName:work@top.gen_nanbox_check.check.NUM_OPERANDS
                 |vpiActual:
-                \_LogicNet: (work@top.gen_nanbox_check.check.NUM_OPERANDS), line:53:37, endln:53:49
+                \_Net: (work@top.gen_nanbox_check.check.NUM_OPERANDS), line:53:37, endln:53:49
           |vpiForIncStmt:
           \_Operation: , line:53:52, endln:53:56
             |vpiParent:
@@ -1774,7 +1782,7 @@ Design: (unnamed)
               |vpiName:op
               |vpiFullName:work@top.gen_nanbox_check.check.op
               |vpiActual:
-              \_LogicNet: (work@top.gen_nanbox_check.check.op), line:53:52, endln:53:54
+              \_Net: (work@top.gen_nanbox_check.check.op), line:53:52, endln:53:54
           |vpiStmt:
           \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
         |vpiStmt:
@@ -1790,7 +1798,7 @@ Design: (unnamed)
           |vpiName:no_check
         |vpiFullName:work@top.gen_nanbox_check.no_check
         |vpiImportTypespec:
-        \_LogicNet: (work@top.gen_nanbox_check.no_check.is_boxed), line:59:22, endln:59:27
+        \_Net: (work@top.gen_nanbox_check.no_check.is_boxed), line:59:22, endln:59:27
           |vpiParent:
           \_Begin: (work@top.gen_nanbox_check.no_check), line:58:14, endln:60:8
           |vpiName:is_boxed
@@ -1815,7 +1823,7 @@ Design: (unnamed)
             |vpiName:is_boxed
             |vpiFullName:work@top.gen_nanbox_check.no_check.is_boxed
             |vpiActual:
-            \_LogicNet: (work@top.gen_nanbox_check.no_check.is_boxed), line:59:22, endln:59:27
+            \_Net: (work@top.gen_nanbox_check.no_check.is_boxed), line:59:22, endln:59:27
             |vpiIndex:
             \_RefObj: (work@top.gen_nanbox_check.no_check.fmt), line:59:23, endln:59:26
               |vpiParent:
@@ -1823,16 +1831,16 @@ Design: (unnamed)
               |vpiName:fmt
               |vpiFullName:work@top.gen_nanbox_check.no_check.fmt
               |vpiActual:
-              \_LogicNet: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
+              \_Net: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
       |vpiImportTypespec:
-      \_LogicNet: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
+      \_Net: (work@top.gen_nanbox_check.fmt), line:50:84, endln:50:87
         |vpiParent:
         \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
         |vpiName:fmt
         |vpiFullName:work@top.gen_nanbox_check.fmt
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
+      \_Net: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
         |vpiParent:
         \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
         |vpiName:EnableNanBox
@@ -1866,7 +1874,7 @@ Design: (unnamed)
               \_HierPath: (Features.EnableNanBox), line:52:17, endln:52:30
               |vpiName:EnableNanBox
               |vpiActual:
-              \_LogicNet: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
+              \_Net: (work@top.gen_nanbox_check.EnableNanBox), line:52:18, endln:52:30
             |vpiName:Features.EnableNanBox
           |vpiOperand:
           \_Operation: , line:52:35, endln:52:51
@@ -1896,19 +1904,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@top.fmt), line:49:15, endln:49:18
     |vpiImportTypespec:
-    \_LogicNet: (work@top.fmt), line:49:24, endln:49:27
+    \_Net: (work@top.fmt), line:49:24, endln:49:27
       |vpiParent:
       \_GenFor: (work@top), line:49:3, endln:62:6
       |vpiName:fmt
       |vpiFullName:work@top.fmt
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@top.fmt), line:49:49, endln:49:52
+    \_Net: (work@top.fmt), line:49:49, endln:49:52
       |vpiParent:
       \_GenFor: (work@top), line:49:3, endln:62:6
       |vpiName:fmt
       |vpiFullName:work@top.fmt
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@top.fmt), line:49:24, endln:49:27
+    |vpiNet:
+    \_Net: (work@top.fmt), line:49:49, endln:49:52
     |vpiForInitStmt:
     \_Assignment: , line:49:8, endln:49:22
       |vpiParent:
@@ -1935,7 +1947,7 @@ Design: (unnamed)
         |vpiName:fmt
         |vpiFullName:work@top.fmt
         |vpiActual:
-        \_LogicNet: (work@top.fmt), line:49:24, endln:49:27
+        \_Net: (work@top.fmt), line:49:24, endln:49:27
       |vpiOperand:
       \_Operation: , line:49:30, endln:49:47
         |vpiParent:
@@ -1961,7 +1973,7 @@ Design: (unnamed)
         |vpiName:fmt
         |vpiFullName:work@top.fmt
         |vpiActual:
-        \_LogicNet: (work@top.fmt), line:49:49, endln:49:52
+        \_Net: (work@top.fmt), line:49:49, endln:49:52
     |vpiStmt:
     \_Begin: (work@top.gen_nanbox_check), line:49:56, endln:62:6
   |vpiTypedef:
@@ -1978,7 +1990,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (fpnew_pkg::fpu_features_t), line:45:14, endln:45:39
   |vpiImportTypespec:
-  \_LogicNet: (work@top.Width), line:46:31, endln:46:36
+  \_Net: (work@top.Width), line:46:31, endln:46:36
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
     |vpiName:Width
@@ -1986,7 +1998,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.Width), line:46:31, endln:46:36
+  \_Net: (work@top.Width), line:46:31, endln:46:36
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

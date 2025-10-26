@@ -71,6 +71,7 @@ n<> u<65> t<Top_level_rule> c<1> l<2:1> el<12:12>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:2:1: No timescale set for "pkg_b".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:2:1: Compile package "pkg_b".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               3
@@ -88,10 +89,11 @@ RefTypespec                                            4
 ReturnStmt                                             1
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:25, name: we".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:26, name: we".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Null Actual: id:25, type:RefObj, name:we.
+[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Null Actual: id:26, type:RefObj, name:we.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -225,11 +227,11 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:way
     |vpiTypedef:
-    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.pkg_b::DCacheWayPath), line:10:37, endln:10:50
+    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.DCacheWayPath), line:10:37, endln:10:50
       |vpiParent:
       \_IODecl: (way), line:10:51, endln:10:54
-      |vpiName:pkg_b::DCacheWayPath
-      |vpiFullName:TreeLRU_CalcWriteEnable.way.pkg_b::DCacheWayPath
+      |vpiName:DCacheWayPath
+      |vpiFullName:TreeLRU_CalcWriteEnable.way.DCacheWayPath
       |vpiActual:
       \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
   |vpiStmt:

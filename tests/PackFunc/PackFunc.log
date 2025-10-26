@@ -135,6 +135,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackFunc/dut.sv:1:1: No timescale set for "b".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackFunc/dut.sv:8:1: No timescale set for "aa".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackFunc/dut.sv:1:1: Compile package "b".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackFunc/dut.sv:8:1: Compile package "aa".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
@@ -249,21 +251,6 @@ Design: (unnamed)
     |vpiParent:
     \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
     |vpiName:aa
-  |vpiVariable:
-  \_Variable: (aa::y), line:14:18, endln:14:19
-    |vpiParent:
-    \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
-    |vpiTypespec:
-    \_RefTypespec: (aa::y::b::foo_bar_t), line:14:5, endln:14:17
-      |vpiParent:
-      \_Variable: (aa::y), line:14:18, endln:14:19
-      |vpiName:b::foo_bar_t
-      |vpiFullName:aa::y::b::foo_bar_t
-      |vpiActual:
-      \_TypedefTypespec: (b::foo_bar_t), line:4:5, endln:4:14
-    |vpiName:y
-    |vpiFullName:aa::y
-    |vpiAutomatic:1
   |vpiInternalScope:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiParent:
@@ -292,7 +279,7 @@ Design: (unnamed)
           |vpiName:y
           |vpiFullName:aa::foo_bar::y
           |vpiActual:
-          \_Variable: (aa::y), line:14:18, endln:14:19
+          \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
         |vpiLhs:
         \_RefObj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
           |vpiParent:
@@ -348,6 +335,21 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
+    \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
+      |vpiParent:
+      \_Function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiTypespec:
+      \_RefTypespec: (aa::foo_bar::y::b::foo_bar_t), line:14:5, endln:14:17
+        |vpiParent:
+        \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
+        |vpiName:b::foo_bar_t
+        |vpiFullName:aa::foo_bar::y::b::foo_bar_t
+        |vpiActual:
+        \_TypedefTypespec: (b::foo_bar_t), line:4:5, endln:4:14
+      |vpiName:y
+      |vpiFullName:aa::foo_bar::y
+      |vpiAutomatic:1
+    |vpiImportTypespec:
     \_LogicTypespec: , line:15:5, endln:15:8
     |vpiImportTypespec:
     \_Variable: (aa::foo_bar::a_vec), line:15:24, endln:15:29
@@ -394,8 +396,6 @@ Design: (unnamed)
     \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
   |vpiImportTypespec:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14
-  |vpiImportTypespec:
-  \_Variable: (aa::y), line:14:18, endln:14:19
   |vpiDefName:aa
   |vpiTaskFunc:
   \_Function: (aa::foo_bar), line:10:3, endln:21:14

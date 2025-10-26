@@ -1665,6 +1665,7 @@ n<> u<1659> t<Top_level_rule> c<1> l<2:1> el<174:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:2:1: No timescale set for "lc_ctrl_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:2:1: Compile package "lc_ctrl_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                             407
@@ -1687,12 +1688,13 @@ RefObj                                               302
 RefTypespec                                           28
 SourceFile                                             1
 TypedefTypespec                                        6
+UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:227, name: NumLcStates".
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:232, name: NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:230, name: NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:235, name: NumLcStates".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiConcat/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Null Actual: id:227, type:RefObj, name:NumLcStates.
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Null Actual: id:232, type:RefObj, name:NumLcStates.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Null Actual: id:230, type:RefObj, name:NumLcStates.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Null Actual: id:235, type:RefObj, name:NumLcStates.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -5921,10 +5923,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
+    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:132:13, endln:132:24
       |vpiParent:
       \_PackedArrayTypespec: , line:132:13, endln:132:59
-      |vpiName:lc_ctrl_pkg::token_idx_e
+      |vpiName:token_idx_e
+      |vpiFullName:lc_ctrl_pkg::token_idx_e
       |vpiActual:
       \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
   |vpiImportTypespec:

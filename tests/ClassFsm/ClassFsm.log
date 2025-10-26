@@ -25,11 +25,11 @@ IODecl                                                 2
 Identifier                                            24
 IfElse                                                 5
 IntTypespec                                            1
-LogicNet                                               3
 LogicTypespec                                          1
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    5
 Operation                                              2
 PackedArrayTypespec                                    2
 ParamAssign                                            4
@@ -41,7 +41,7 @@ RefTypespec                                            8
 SourceFile                                             1
 Task                                                   7
 TaskCall                                               4
-Variable                                               3
+Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFsm/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -88,38 +88,6 @@ Design: (unnamed)
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
       |vpiName:baseFsm
     |vpiFullName:work@fsm_class::baseFsm
-    |vpiVariable:
-    \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
-      |vpiParent:
-      \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
-      |vpiTypespec:
-      \_RefTypespec: (work@fsm_class::baseFsm::current_state), line:5:5, endln:5:14
-        |vpiParent:
-        \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
-        |vpiFullName:work@fsm_class::baseFsm::current_state
-        |vpiActual:
-        \_PackedArrayTypespec: , line:5:5, endln:5:14
-      |vpiName:current_state
-      |vpiFullName:work@fsm_class::baseFsm::current_state
-      |vpiAutomatic:1
-      |vpiRandType:1
-      |vpiVisibility:1
-    |vpiVariable:
-    \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
-      |vpiParent:
-      \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
-      |vpiTypespec:
-      \_RefTypespec: (work@fsm_class::baseFsm::next_state), line:6:5, endln:6:14
-        |vpiParent:
-        \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
-        |vpiFullName:work@fsm_class::baseFsm::next_state
-        |vpiActual:
-        \_PackedArrayTypespec: , line:6:5, endln:6:14
-      |vpiName:next_state
-      |vpiFullName:work@fsm_class::baseFsm::next_state
-      |vpiAutomatic:1
-      |vpiRandType:1
-      |vpiVisibility:1
     |vpiInternalScope:
     \_Task: (work@fsm_class::baseFsm::next_state_transition), line:8:5, endln:14:12
       |vpiParent:
@@ -156,7 +124,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_class::baseFsm::next_state_transition::next_state
             |vpiActual:
-            \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+            \_Net: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
         |vpiStmt:
         \_Assignment: , line:12:9, endln:12:41
           |vpiParent:
@@ -178,7 +146,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_class::baseFsm::next_state_transition::next_state
             |vpiActual:
-            \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+            \_Net: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
             |vpiIndex:
             \_RefObj: (work@fsm_class::baseFsm::next_state_transition::state_to_bit), line:12:21, endln:12:33
               |vpiParent:
@@ -259,7 +227,7 @@ Design: (unnamed)
               |vpiName:current_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::current_state
               |vpiActual:
-              \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+              \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
           |vpiElseStmt:
           \_Assignment: , line:21:9, endln:21:36
             |vpiParent:
@@ -272,7 +240,7 @@ Design: (unnamed)
               |vpiName:next_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::next_state
               |vpiActual:
-              \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+              \_Net: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
             |vpiLhs:
             \_RefObj: (work@fsm_class::baseFsm::current_state_transition::current_state), line:21:9, endln:21:22
               |vpiParent:
@@ -280,7 +248,7 @@ Design: (unnamed)
               |vpiName:current_state
               |vpiFullName:work@fsm_class::baseFsm::current_state_transition::current_state
               |vpiActual:
-              \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+              \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
       |vpiTypedef:
       \_LogicTypespec: , line:15:42, endln:15:47
         |vpiParent:
@@ -379,11 +347,33 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:5:5, endln:5:14
     |vpiImportTypespec:
-    \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+    \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+      |vpiParent:
+      \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
+      |vpiTypespec:
+      \_RefTypespec: (work@fsm_class::baseFsm::current_state), line:5:5, endln:5:14
+        |vpiParent:
+        \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+        |vpiFullName:work@fsm_class::baseFsm::current_state
+        |vpiActual:
+        \_PackedArrayTypespec: , line:5:5, endln:5:14
+      |vpiName:current_state
+      |vpiFullName:work@fsm_class::baseFsm::current_state
     |vpiImportTypespec:
     \_PackedArrayTypespec: , line:6:5, endln:6:14
     |vpiImportTypespec:
-    \_Variable: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+    \_Net: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+      |vpiParent:
+      \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
+      |vpiTypespec:
+      \_RefTypespec: (work@fsm_class::baseFsm::next_state), line:6:5, endln:6:14
+        |vpiParent:
+        \_Net: (work@fsm_class::baseFsm::next_state), line:6:15, endln:6:25
+        |vpiFullName:work@fsm_class::baseFsm::next_state
+        |vpiActual:
+        \_PackedArrayTypespec: , line:6:5, endln:6:14
+      |vpiName:next_state
+      |vpiFullName:work@fsm_class::baseFsm::next_state
     |vpiMethod:
     \_Task: (work@fsm_class::baseFsm::next_state_transition), line:8:5, endln:14:12
     |vpiMethod:
@@ -512,7 +502,7 @@ Design: (unnamed)
               |vpiName:x
               |vpiFullName:work@fsm_class::specificFSM::from_state_00::x
               |vpiActual:
-              \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+              \_Net: (work@fsm_class.x), line:1:49, endln:1:50
             |vpiStmt:
             \_FuncCall: (next_state_transition), line:36:9, endln:36:45
               |vpiParent:
@@ -582,7 +572,7 @@ Design: (unnamed)
                 |vpiName:x
                 |vpiFullName:work@fsm_class::specificFSM::from_state_01::x
                 |vpiActual:
-                \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+                \_Net: (work@fsm_class.x), line:1:49, endln:1:50
             |vpiStmt:
             \_FuncCall: (next_state_transition), line:45:12, endln:45:48
               |vpiParent:
@@ -647,7 +637,7 @@ Design: (unnamed)
               |vpiName:x
               |vpiFullName:work@fsm_class::specificFSM::from_state_10::x
               |vpiActual:
-              \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+              \_Net: (work@fsm_class.x), line:1:49, endln:1:50
             |vpiStmt:
             \_FuncCall: (next_state_transition), line:54:12, endln:54:48
               |vpiParent:
@@ -712,7 +702,7 @@ Design: (unnamed)
               |vpiName:x
               |vpiFullName:work@fsm_class::specificFSM::from_state_11::x
               |vpiActual:
-              \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+              \_Net: (work@fsm_class.x), line:1:49, endln:1:50
             |vpiStmt:
             \_FuncCall: (next_state_transition), line:63:11, endln:63:47
               |vpiParent:
@@ -790,7 +780,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_00_BIT), line:72:25, endln:72:37
                   |vpiParent:
@@ -821,7 +811,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_01_BIT), line:73:25, endln:73:37
                   |vpiParent:
@@ -852,7 +842,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_10_BIT), line:74:25, endln:74:37
                   |vpiParent:
@@ -883,7 +873,7 @@ Design: (unnamed)
                 |vpiName:current_state
                 |vpiFullName:work@fsm_class::specificFSM::main_comb::current_state
                 |vpiActual:
-                \_Variable: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
+                \_Net: (work@fsm_class::baseFsm::current_state), line:5:15, endln:5:28
                 |vpiIndex:
                 \_RefObj: (work@fsm_class::specificFSM::main_comb::STATE_11_BIT), line:75:25, endln:75:37
                   |vpiParent:
@@ -964,19 +954,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassTypespec: (specificFSM)
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_class.clk), line:1:25, endln:1:28
+  \_Net: (work@fsm_class.clk), line:1:25, endln:1:28
     |vpiParent:
     \_Module: work@fsm_class (work@fsm_class), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:1:1, endln:87:10
     |vpiName:clk
     |vpiFullName:work@fsm_class.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_class.reset), line:1:36, endln:1:41
+  \_Net: (work@fsm_class.reset), line:1:36, endln:1:41
     |vpiParent:
     \_Module: work@fsm_class (work@fsm_class), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:1:1, endln:87:10
     |vpiName:reset
     |vpiFullName:work@fsm_class.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+  \_Net: (work@fsm_class.x), line:1:49, endln:1:50
     |vpiParent:
     \_Module: work@fsm_class (work@fsm_class), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:1:1, endln:87:10
     |vpiName:x
@@ -989,11 +979,11 @@ Design: (unnamed)
   |vpiClassDefn:
   \_ClassDefn: (work@fsm_class::specificFSM), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:26:3, endln:79:11
   |vpiNet:
-  \_LogicNet: (work@fsm_class.clk), line:1:25, endln:1:28
+  \_Net: (work@fsm_class.clk), line:1:25, endln:1:28
   |vpiNet:
-  \_LogicNet: (work@fsm_class.reset), line:1:36, endln:1:41
+  \_Net: (work@fsm_class.reset), line:1:36, endln:1:41
   |vpiNet:
-  \_LogicNet: (work@fsm_class.x), line:1:49, endln:1:50
+  \_Net: (work@fsm_class.x), line:1:49, endln:1:50
   |vpiPort:
   \_Port: (clk), line:1:25, endln:1:28
     |vpiParent:
@@ -1032,7 +1022,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@fsm_class.clk
           |vpiActual:
-          \_LogicNet: (work@fsm_class.clk), line:1:25, endln:1:28
+          \_Net: (work@fsm_class.clk), line:1:25, endln:1:28
       |vpiStmt:
       \_Begin: (work@fsm_class), line:82:24, endln:84:6
         |vpiParent:

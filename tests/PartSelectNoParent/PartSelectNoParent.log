@@ -227,6 +227,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv:11:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv:11:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -243,6 +244,7 @@ IntTypespec                                            6
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              4
 Package                                                1
 ParamAssign                                            3
@@ -253,10 +255,10 @@ Range                                                  2
 RefObj                                                 7
 RefTypespec                                           12
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 VarSelect                                              1
 Variable                                               2
 === UHDM Object Stats End ===
@@ -537,22 +539,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:11:23, endln:11:24
   |vpiImportTypespec:
-  \_StructNet: (work@top.keymgr_key_i), line:13:17, endln:13:29
+  \_Net: (work@top.keymgr_key_i), line:13:17, endln:13:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:11:1, endln:19:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.keymgr_key_i.my_pkg::hw_key_req_t), line:13:4, endln:13:16
+    \_RefTypespec: (work@top.keymgr_key_i.hw_key_req_t), line:13:4, endln:13:16
       |vpiParent:
-      \_StructNet: (work@top.keymgr_key_i), line:13:17, endln:13:29
-      |vpiName:my_pkg::hw_key_req_t
-      |vpiFullName:work@top.keymgr_key_i.my_pkg::hw_key_req_t
+      \_Net: (work@top.keymgr_key_i), line:13:17, endln:13:29
+      |vpiName:hw_key_req_t
+      |vpiFullName:work@top.keymgr_key_i.hw_key_req_t
       |vpiActual:
       \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
     |vpiName:keymgr_key_i
     |vpiFullName:work@top.keymgr_key_i
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.keymgr_key_i), line:13:17, endln:13:29
+  \_Net: (work@top.keymgr_key_i), line:13:17, endln:13:29
   |vpiPort:
   \_Port: (o), line:11:23, endln:11:24
     |vpiParent:
@@ -605,7 +607,7 @@ Design: (unnamed)
           \_ForStmt: (work@top.key_sideload_get), line:15:7, endln:17:10
           |vpiFullName:work@top.key_sideload_get
           |vpiImportTypespec:
-          \_LogicNet: (work@top.key_sideload_get.key), line:16:27, endln:16:41
+          \_Net: (work@top.key_sideload_get.key), line:16:27, endln:16:41
             |vpiParent:
             \_Begin: (work@top.key_sideload_get), line:15:44, endln:17:10
             |vpiName:key
@@ -627,7 +629,7 @@ Design: (unnamed)
                 \_HierPath: (keymgr_key_i.key[0][31:0]), line:16:14, endln:16:41
                 |vpiName:keymgr_key_i
                 |vpiActual:
-                \_StructNet: (work@top.keymgr_key_i), line:13:17, endln:13:29
+                \_Net: (work@top.keymgr_key_i), line:13:17, endln:13:29
               |vpiActual:
               \_VarSelect: (work@top.key_sideload_get.keymgr_key_i.key[0][31:0].key), line:16:27, endln:16:41
                 |vpiParent:
@@ -635,7 +637,7 @@ Design: (unnamed)
                 |vpiName:key
                 |vpiFullName:work@top.key_sideload_get.keymgr_key_i.key[0][31:0].key
                 |vpiActual:
-                \_LogicNet: (work@top.key_sideload_get.key), line:16:27, endln:16:41
+                \_Net: (work@top.key_sideload_get.key), line:16:27, endln:16:41
                 |vpiIndex:
                 \_Constant: , line:16:31, endln:16:32
                   |vpiParent:
@@ -652,7 +654,7 @@ Design: (unnamed)
                   |vpiFullName:work@top.key_sideload_get.keymgr_key_i.key[0][31:0].key.key
                   |vpiDefName:key
                   |vpiActual:
-                  \_LogicNet: (work@top.key_sideload_get.key), line:16:27, endln:16:41
+                  \_Net: (work@top.key_sideload_get.key), line:16:27, endln:16:41
                   |vpiConstantSelect:1
                   |vpiLeftRange:
                   \_Constant: , line:16:34, endln:16:36

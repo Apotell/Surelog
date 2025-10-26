@@ -106,7 +106,6 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 ClassDefn                                              8
 ClassTypespec                                          8
@@ -119,10 +118,10 @@ Function                                               9
 IODecl                                                11
 Identifier                                            29
 IntTypespec                                            9
-LogicNet                                               3
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    4
 Operation                                              1
 Package                                                1
 Range                                                  1
@@ -131,6 +130,7 @@ RefTypespec                                           18
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ContAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -986,13 +986,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:3, endln:3:23
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.intf2), line:3:13, endln:3:18
+  \_Net: (work@top.intf2), line:3:13, endln:3:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.intf2), line:3:3, endln:3:7
       |vpiParent:
-      \_ArrayNet: (work@top.intf2), line:3:13, endln:3:18
+      \_Net: (work@top.intf2), line:3:13, endln:3:18
       |vpiFullName:work@top.intf2
       |vpiActual:
       \_ArrayTypespec: , line:3:3, endln:3:23
@@ -1000,13 +1000,13 @@ Design: (unnamed)
     |vpiFullName:work@top.intf2
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.ena), line:5:8, endln:5:11
+  \_Net: (work@top.ena), line:5:8, endln:5:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.ena), line:5:3, endln:5:7
       |vpiParent:
-      \_LogicNet: (work@top.ena), line:5:8, endln:5:11
+      \_Net: (work@top.ena), line:5:8, endln:5:11
       |vpiFullName:work@top.ena
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:7
@@ -1014,13 +1014,13 @@ Design: (unnamed)
     |vpiFullName:work@top.ena
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.__debug_req_ready), line:7:13, endln:7:30
+  \_Net: (work@top.__debug_req_ready), line:7:13, endln:7:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.__debug_req_ready), line:7:3, endln:7:7
       |vpiParent:
-      \_LogicNet: (work@top.__debug_req_ready), line:7:13, endln:7:30
+      \_Net: (work@top.__debug_req_ready), line:7:13, endln:7:30
       |vpiFullName:work@top.__debug_req_ready
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:7
@@ -1028,13 +1028,13 @@ Design: (unnamed)
     |vpiFullName:work@top.__debug_req_ready
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.toto), line:9:8, endln:9:12
+  \_Net: (work@top.toto), line:9:8, endln:9:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.toto), line:9:3, endln:9:7
       |vpiParent:
-      \_LogicNet: (work@top.toto), line:9:8, endln:9:12
+      \_Net: (work@top.toto), line:9:8, endln:9:12
       |vpiFullName:work@top.toto
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:7
@@ -1042,14 +1042,14 @@ Design: (unnamed)
     |vpiFullName:work@top.toto
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:11:14, endln:11:15
+  \_Net: (work@top.b), line:11:14, endln:11:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:11:10, endln:11:11
+  \_Net: (work@top.a), line:11:10, endln:11:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ContAssign/dut.sv, line:1:1, endln:14:10
     |vpiName:a
@@ -1057,17 +1057,17 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.ena), line:5:8, endln:5:11
+  \_Net: (work@top.intf2), line:3:13, endln:3:18
   |vpiNet:
-  \_LogicNet: (work@top.__debug_req_ready), line:7:13, endln:7:30
+  \_Net: (work@top.ena), line:5:8, endln:5:11
   |vpiNet:
-  \_LogicNet: (work@top.toto), line:9:8, endln:9:12
+  \_Net: (work@top.__debug_req_ready), line:7:13, endln:7:30
   |vpiNet:
-  \_LogicNet: (work@top.b), line:11:14, endln:11:15
+  \_Net: (work@top.toto), line:9:8, endln:9:12
   |vpiNet:
-  \_LogicNet: (work@top.a), line:11:10, endln:11:11
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.intf2), line:3:13, endln:3:18
+  \_Net: (work@top.b), line:11:14, endln:11:15
+  |vpiNet:
+  \_Net: (work@top.a), line:11:10, endln:11:11
   |vpiContAssign:
   \_ContAssign: , line:11:10, endln:11:15
     |vpiParent:
@@ -1079,7 +1079,7 @@ Design: (unnamed)
       |vpiName:b
       |vpiFullName:work@top.b
       |vpiActual:
-      \_LogicNet: (work@top.b), line:11:14, endln:11:15
+      \_Net: (work@top.b), line:11:14, endln:11:15
     |vpiLhs:
     \_RefObj: (work@top.a), line:11:10, endln:11:11
       |vpiParent:
@@ -1087,7 +1087,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@top.a
       |vpiActual:
-      \_LogicNet: (work@top.a), line:11:10, endln:11:11
+      \_Net: (work@top.a), line:11:10, endln:11:11
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

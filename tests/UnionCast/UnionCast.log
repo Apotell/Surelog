@@ -1586,6 +1586,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnionCast/dut.sv:19:1: No timescale set for "riscv_isa_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnionCast/dut.sv:145:1: No timescale set for "r5p_lsu".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnionCast/dut.sv:19:1: Compile package "riscv_isa_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnionCast/dut.sv:145:1: Compile module "work@r5p_lsu".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -1603,10 +1604,10 @@ IODecl                                                 1
 Identifier                                            23
 ImportTypespec                                         1
 IntTypespec                                            1
-LogicNet                                               5
 LogicTypespec                                         47
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    6
 Operation                                              7
 Package                                                1
 Port                                                   5
@@ -1619,7 +1620,7 @@ SysFuncCall                                            4
 TypedefTypespec                                       15
 TypespecMember                                        50
 UnionTypespec                                          1
-Variable                                               1
+UnsupportedTypespec                                   21
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnionCast/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -4093,16 +4094,16 @@ Design: (unnamed)
       \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
       |vpiFullName:riscv_isa_pkg::op32_t
       |vpiActual:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
   |vpiTypedef:
-  \_UnionTypespec: , line:115:9, endln:123:9
+  \_UnionTypespec: , line:115:9, endln:123:2
     |vpiParent:
     \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (r4), line:116:13, endln:116:15
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:r4
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::r4::op32_r4_t), line:116:3, endln:116:12
@@ -4115,7 +4116,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (r), line:117:13, endln:117:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:r
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::r::op32_r_t), line:117:3, endln:117:11
@@ -4128,7 +4129,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (i), line:118:13, endln:118:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:i
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::i::op32_i_t), line:118:3, endln:118:11
@@ -4141,7 +4142,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (s), line:119:13, endln:119:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:s
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::s::op32_s_t), line:119:3, endln:119:11
@@ -4154,7 +4155,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (b), line:120:13, endln:120:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:b
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::b::op32_b_t), line:120:3, endln:120:11
@@ -4167,7 +4168,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (u), line:121:13, endln:121:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:u
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::u::op32_u_t), line:121:3, endln:121:11
@@ -4180,7 +4181,7 @@ Design: (unnamed)
     |vpiTypespecMember:
     \_TypespecMember: (j), line:122:13, endln:122:14
       |vpiParent:
-      \_UnionTypespec: , line:115:9, endln:123:9
+      \_UnionTypespec: , line:115:9, endln:123:2
       |vpiName:j
       |vpiTypespec:
       \_RefTypespec: (riscv_isa_pkg::j::op32_j_t), line:122:3, endln:122:11
@@ -4321,7 +4322,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
   |vpiImportTypespec:
-  \_UnionTypespec: , line:115:9, endln:123:9
+  \_UnionTypespec: , line:115:9, endln:123:2
   |vpiDefName:riscv_isa_pkg
   |vpiTaskFunc:
   \_Function: (riscv_isa_pkg::opsiz), line:25:1, endln:34:19
@@ -4335,22 +4336,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiName:work@r5p_lsu
-  |vpiVariable:
-  \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
-    |vpiParent:
-    \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
-    |vpiTypespec:
-    \_RefTypespec: (work@r5p_lsu.dec.riscv_isa_pkg::op32_t), line:157:1, endln:157:7
-      |vpiParent:
-      \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
-      |vpiName:riscv_isa_pkg::op32_t
-      |vpiFullName:work@r5p_lsu.dec.riscv_isa_pkg::op32_t
-      |vpiActual:
-      \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
-    |vpiName:dec
-    |vpiFullName:work@r5p_lsu.dec
-    |vpiRandType:1
-    |vpiVisibility:1
   |vpiTypedef:
   \_ImportTypespec: (riscv_isa_pkg), line:146:10, endln:146:26
     |vpiParent:
@@ -4377,13 +4362,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:149:10, endln:149:15
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_lsu.ins), line:149:25, endln:149:28
+  \_Net: (work@r5p_lsu.ins), line:149:25, endln:149:28
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.ins), line:149:10, endln:149:15
       |vpiParent:
-      \_LogicNet: (work@r5p_lsu.ins), line:149:25, endln:149:28
+      \_Net: (work@r5p_lsu.ins), line:149:25, endln:149:28
       |vpiFullName:work@r5p_lsu.ins
       |vpiActual:
       \_LogicTypespec: , line:149:10, endln:149:15
@@ -4391,13 +4376,13 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.ins
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_lsu.rd), line:151:25, endln:151:27
+  \_Net: (work@r5p_lsu.rd), line:151:25, endln:151:27
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.rd), line:151:10, endln:151:15
       |vpiParent:
-      \_LogicNet: (work@r5p_lsu.rd), line:151:25, endln:151:27
+      \_Net: (work@r5p_lsu.rd), line:151:25, endln:151:27
       |vpiFullName:work@r5p_lsu.rd
       |vpiActual:
       \_LogicTypespec: , line:149:10, endln:149:15
@@ -4405,13 +4390,13 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.rd
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_lsu.rs1), line:152:25, endln:152:28
+  \_Net: (work@r5p_lsu.rs1), line:152:25, endln:152:28
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.rs1), line:152:10, endln:152:15
       |vpiParent:
-      \_LogicNet: (work@r5p_lsu.rs1), line:152:25, endln:152:28
+      \_Net: (work@r5p_lsu.rs1), line:152:25, endln:152:28
       |vpiFullName:work@r5p_lsu.rs1
       |vpiActual:
       \_LogicTypespec: , line:149:10, endln:149:15
@@ -4419,13 +4404,13 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.rs1
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_lsu.rs2), line:153:25, endln:153:28
+  \_Net: (work@r5p_lsu.rs2), line:153:25, endln:153:28
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.rs2), line:153:10, endln:153:15
       |vpiParent:
-      \_LogicNet: (work@r5p_lsu.rs2), line:153:25, endln:153:28
+      \_Net: (work@r5p_lsu.rs2), line:153:25, endln:153:28
       |vpiFullName:work@r5p_lsu.rs2
       |vpiActual:
       \_LogicTypespec: , line:149:10, endln:149:15
@@ -4433,13 +4418,13 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.rs2
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@r5p_lsu.imm), line:154:25, endln:154:28
+  \_Net: (work@r5p_lsu.imm), line:154:25, endln:154:28
     |vpiParent:
     \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
     |vpiTypespec:
     \_RefTypespec: (work@r5p_lsu.imm), line:154:10, endln:154:15
       |vpiParent:
-      \_LogicNet: (work@r5p_lsu.imm), line:154:25, endln:154:28
+      \_Net: (work@r5p_lsu.imm), line:154:25, endln:154:28
       |vpiFullName:work@r5p_lsu.imm
       |vpiActual:
       \_LogicTypespec: , line:149:10, endln:149:15
@@ -4447,18 +4432,59 @@ Design: (unnamed)
     |vpiFullName:work@r5p_lsu.imm
     |vpiNetType:36
   |vpiImportTypespec:
-  \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+  \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
+    |vpiParent:
+    \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
+    |vpiTypespec:
+    \_RefTypespec: (work@r5p_lsu.dec.op32_t), line:157:1, endln:157:7
+      |vpiParent:
+      \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
+      |vpiName:op32_t
+      |vpiFullName:work@r5p_lsu.dec.op32_t
+      |vpiActual:
+      \_TypedefTypespec: (riscv_isa_pkg::op32_t), line:123:3, endln:123:9
+    |vpiName:dec
+    |vpiFullName:work@r5p_lsu.dec
+  |vpiImportTypespec:
+  \_Net: (work@r5p_lsu.r), line:161:18, endln:161:19
+    |vpiParent:
+    \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
+    |vpiName:r
+    |vpiFullName:work@r5p_lsu.r
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@r5p_lsu.i), line:164:18, endln:164:19
+    |vpiParent:
+    \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
+    |vpiName:i
+    |vpiFullName:work@r5p_lsu.i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@r5p_lsu.imm_11_0), line:164:20, endln:164:28
+    |vpiParent:
+    \_Module: work@r5p_lsu (work@r5p_lsu), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:145:1, endln:166:19
+    |vpiName:imm_11_0
+    |vpiFullName:work@r5p_lsu.imm_11_0
+    |vpiNetType:1
   |vpiDefName:work@r5p_lsu
   |vpiNet:
-  \_LogicNet: (work@r5p_lsu.ins), line:149:25, endln:149:28
+  \_Net: (work@r5p_lsu.ins), line:149:25, endln:149:28
   |vpiNet:
-  \_LogicNet: (work@r5p_lsu.rd), line:151:25, endln:151:27
+  \_Net: (work@r5p_lsu.rd), line:151:25, endln:151:27
   |vpiNet:
-  \_LogicNet: (work@r5p_lsu.rs1), line:152:25, endln:152:28
+  \_Net: (work@r5p_lsu.rs1), line:152:25, endln:152:28
   |vpiNet:
-  \_LogicNet: (work@r5p_lsu.rs2), line:153:25, endln:153:28
+  \_Net: (work@r5p_lsu.rs2), line:153:25, endln:153:28
   |vpiNet:
-  \_LogicNet: (work@r5p_lsu.imm), line:154:25, endln:154:28
+  \_Net: (work@r5p_lsu.imm), line:154:25, endln:154:28
+  |vpiNet:
+  \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
+  |vpiNet:
+  \_Net: (work@r5p_lsu.r), line:161:18, endln:161:19
+  |vpiNet:
+  \_Net: (work@r5p_lsu.i), line:164:18, endln:164:19
+  |vpiNet:
+  \_Net: (work@r5p_lsu.imm_11_0), line:164:20, endln:164:28
   |vpiPort:
   \_Port: (ins), line:149:25, endln:149:28
     |vpiParent:
@@ -4540,7 +4566,7 @@ Design: (unnamed)
         |vpiName:ins
         |vpiFullName:work@r5p_lsu.ins
         |vpiActual:
-        \_LogicNet: (work@r5p_lsu.ins), line:149:25, endln:149:28
+        \_Net: (work@r5p_lsu.ins), line:149:25, endln:149:28
     |vpiLhs:
     \_RefObj: (work@r5p_lsu.dec), line:159:8, endln:159:11
       |vpiParent:
@@ -4548,7 +4574,7 @@ Design: (unnamed)
       |vpiName:dec
       |vpiFullName:work@r5p_lsu.dec
       |vpiActual:
-      \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+      \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
   |vpiContAssign:
   \_ContAssign: , line:161:8, endln:161:22
     |vpiParent:
@@ -4563,14 +4589,14 @@ Design: (unnamed)
         \_HierPath: (dec.r.rd), line:161:14, endln:161:22
         |vpiName:dec
         |vpiActual:
-        \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+        \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
       |vpiActual:
       \_RefObj: (r), line:161:18, endln:161:19
         |vpiParent:
         \_HierPath: (dec.r.rd), line:161:14, endln:161:22
         |vpiName:r
         |vpiActual:
-        \_TypespecMember: (r), line:117:13, endln:117:14
+        \_Net: (work@r5p_lsu.r), line:161:18, endln:161:19
       |vpiActual:
       \_RefObj: (work@r5p_lsu.rd), line:161:20, endln:161:22
         |vpiParent:
@@ -4578,7 +4604,7 @@ Design: (unnamed)
         |vpiName:rd
         |vpiFullName:work@r5p_lsu.rd
         |vpiActual:
-        \_TypespecMember: (rd), line:107:128, endln:107:130
+        \_Net: (work@r5p_lsu.rd), line:151:25, endln:151:27
       |vpiName:dec.r.rd
     |vpiLhs:
     \_RefObj: (work@r5p_lsu.rd), line:161:8, endln:161:10
@@ -4587,7 +4613,7 @@ Design: (unnamed)
       |vpiName:rd
       |vpiFullName:work@r5p_lsu.rd
       |vpiActual:
-      \_LogicNet: (work@r5p_lsu.rd), line:151:25, endln:151:27
+      \_Net: (work@r5p_lsu.rd), line:151:25, endln:151:27
   |vpiContAssign:
   \_ContAssign: , line:162:8, endln:162:23
     |vpiParent:
@@ -4602,14 +4628,14 @@ Design: (unnamed)
         \_HierPath: (dec.r.rs1), line:162:14, endln:162:23
         |vpiName:dec
         |vpiActual:
-        \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+        \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
       |vpiActual:
       \_RefObj: (r), line:162:18, endln:162:19
         |vpiParent:
         \_HierPath: (dec.r.rs1), line:162:14, endln:162:23
         |vpiName:r
         |vpiActual:
-        \_TypespecMember: (r), line:117:13, endln:117:14
+        \_Net: (work@r5p_lsu.r), line:161:18, endln:161:19
       |vpiActual:
       \_RefObj: (work@r5p_lsu.rs1), line:162:20, endln:162:23
         |vpiParent:
@@ -4617,7 +4643,7 @@ Design: (unnamed)
         |vpiName:rs1
         |vpiFullName:work@r5p_lsu.rs1
         |vpiActual:
-        \_TypespecMember: (rs1), line:107:98, endln:107:101
+        \_Net: (work@r5p_lsu.rs1), line:152:25, endln:152:28
       |vpiName:dec.r.rs1
     |vpiLhs:
     \_RefObj: (work@r5p_lsu.rs1), line:162:8, endln:162:11
@@ -4626,7 +4652,7 @@ Design: (unnamed)
       |vpiName:rs1
       |vpiFullName:work@r5p_lsu.rs1
       |vpiActual:
-      \_LogicNet: (work@r5p_lsu.rs1), line:152:25, endln:152:28
+      \_Net: (work@r5p_lsu.rs1), line:152:25, endln:152:28
   |vpiContAssign:
   \_ContAssign: , line:163:8, endln:163:23
     |vpiParent:
@@ -4641,14 +4667,14 @@ Design: (unnamed)
         \_HierPath: (dec.r.rs2), line:163:14, endln:163:23
         |vpiName:dec
         |vpiActual:
-        \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+        \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
       |vpiActual:
       \_RefObj: (r), line:163:18, endln:163:19
         |vpiParent:
         \_HierPath: (dec.r.rs2), line:163:14, endln:163:23
         |vpiName:r
         |vpiActual:
-        \_TypespecMember: (r), line:117:13, endln:117:14
+        \_Net: (work@r5p_lsu.r), line:161:18, endln:161:19
       |vpiActual:
       \_RefObj: (work@r5p_lsu.rs2), line:163:20, endln:163:23
         |vpiParent:
@@ -4656,7 +4682,7 @@ Design: (unnamed)
         |vpiName:rs2
         |vpiFullName:work@r5p_lsu.rs2
         |vpiActual:
-        \_TypespecMember: (rs2), line:107:81, endln:107:84
+        \_Net: (work@r5p_lsu.rs2), line:153:25, endln:153:28
       |vpiName:dec.r.rs2
     |vpiLhs:
     \_RefObj: (work@r5p_lsu.rs2), line:163:8, endln:163:11
@@ -4665,7 +4691,7 @@ Design: (unnamed)
       |vpiName:rs2
       |vpiFullName:work@r5p_lsu.rs2
       |vpiActual:
-      \_LogicNet: (work@r5p_lsu.rs2), line:153:25, endln:153:28
+      \_Net: (work@r5p_lsu.rs2), line:153:25, endln:153:28
   |vpiContAssign:
   \_ContAssign: , line:164:8, endln:164:28
     |vpiParent:
@@ -4680,14 +4706,14 @@ Design: (unnamed)
         \_HierPath: (dec.i.imm_11_0), line:164:14, endln:164:28
         |vpiName:dec
         |vpiActual:
-        \_Variable: (work@r5p_lsu.dec), line:157:8, endln:157:11
+        \_Net: (work@r5p_lsu.dec), line:157:8, endln:157:11
       |vpiActual:
       \_RefObj: (i), line:164:18, endln:164:19
         |vpiParent:
         \_HierPath: (dec.i.imm_11_0), line:164:14, endln:164:28
         |vpiName:i
         |vpiActual:
-        \_TypespecMember: (i), line:118:13, endln:118:14
+        \_Net: (work@r5p_lsu.i), line:164:18, endln:164:19
       |vpiActual:
       \_RefObj: (work@r5p_lsu.imm_11_0), line:164:20, endln:164:28
         |vpiParent:
@@ -4695,7 +4721,7 @@ Design: (unnamed)
         |vpiName:imm_11_0
         |vpiFullName:work@r5p_lsu.imm_11_0
         |vpiActual:
-        \_TypespecMember: (imm_11_0), line:108:38, endln:108:46
+        \_Net: (work@r5p_lsu.imm_11_0), line:164:20, endln:164:28
       |vpiName:dec.i.imm_11_0
     |vpiLhs:
     \_RefObj: (work@r5p_lsu.imm), line:164:8, endln:164:11
@@ -4704,7 +4730,7 @@ Design: (unnamed)
       |vpiName:imm
       |vpiFullName:work@r5p_lsu.imm
       |vpiActual:
-      \_LogicNet: (work@r5p_lsu.imm), line:154:25, endln:154:28
+      \_Net: (work@r5p_lsu.imm), line:154:25, endln:154:28
   |vpiEndLabel:r5p_lsu
 |vpiTypedef:
 \_ModuleTypespec: (r5p_lsu)

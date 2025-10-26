@@ -637,26 +637,26 @@ Constant                                              20
 ContAssign                                             1
 Design                                                 1
 IODecl                                                 2
-Identifier                                            15
+Identifier                                            13
 IfElse                                                 3
 IfStmt                                                 1
 Initial                                                1
 Interface                                              1
-InterfaceTypespec                                      3
-LogicNet                                              10
+InterfaceTypespec                                      1
 LogicTypespec                                          8
 Modport                                                2
 Module                                                 3
 ModuleTypespec                                         3
+Net                                                   13
 Operation                                             16
 Port                                                   5
 Range                                                  2
 RefObj                                                35
-RefTypespec                                           12
+RefTypespec                                           14
 SourceFile                                             1
 SysFuncCall                                            5
-UnsupportedTypespec                                    1
-Variable                                               2
+UnsupportedTypespec                                    6
+Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitTest/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/UnitTest/top.v:59:1: Unsupported Typespec: id:28, type:RefTypespec, name:DD1.
@@ -711,7 +711,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
+  \_Net: (work@mem_if.clk), line:47:30, endln:47:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
     |vpiName:clk
@@ -719,7 +719,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@mem_if
   |vpiNet:
-  \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
+  \_Net: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiModport:
   \_Modport: (work@mem_if.system), line:49:12, endln:49:30
     |vpiParent:
@@ -767,7 +767,7 @@ Design: (unnamed)
       |vpiName:clk
       |vpiFullName:work@mem_if.clk.clk
       |vpiActual:
-      \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
+      \_Net: (work@mem_if.clk), line:47:30, endln:47:33
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:47:25, endln:47:29
       |vpiParent:
@@ -784,72 +784,25 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiName:work@memory_ctrl1
-  |vpiVariable:
-  \_Variable: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl1.toto2.work@DD2), line:61:1, endln:61:4
-      |vpiParent:
-      \_Variable: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
-      |vpiName:work@DD2
-      |vpiFullName:work@memory_ctrl1.toto2.work@DD2
-      |vpiActual:
-      \_ClassTypespec: (work@DD2), line:61:1, endln:61:4
-    |vpiName:toto2
-    |vpiFullName:work@memory_ctrl1.toto2
-    |vpiRandType:1
-    |vpiVisibility:1
   |vpiTypedef:
   \_UnsupportedTypespec: (DD1), line:59:1, endln:59:4
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiName:DD1
   |vpiTypedef:
-  \_ClassTypespec: (work@DD2), line:61:1, endln:61:4
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:work@DD2
-    |vpiClassDefn:
-    \_ClassDefn: (work@DD2), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:54:1, endln:55:9
-  |vpiTypedef:
   \_LogicTypespec: , line:63:1, endln:63:5
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-  |vpiTypedef:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:
-    \_Identifier: (mem_if)
-      |vpiParent:
-      \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
-      |vpiName:mem_if
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiTypedef:
-  \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
-    |vpiParent:
-    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
-    |vpiName:
-    \_Identifier: (work@mem_if.system)
-      |vpiParent:
-      \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
-      |vpiName:work@mem_if.system
-    |vpiModport:
-    \_Modport: (work@mem_if.system), line:49:12, endln:49:30
-    |vpiInterface:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
   |vpiImportTypespec:
   \_UnsupportedTypespec: (DD1), line:59:1, endln:59:4
   |vpiImportTypespec:
-  \_LogicNet: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
+  \_Net: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl1.toto1.DD1), line:59:1, endln:59:4
       |vpiParent:
-      \_LogicNet: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
+      \_Net: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
       |vpiName:DD1
       |vpiFullName:work@memory_ctrl1.toto1.DD1
       |vpiActual:
@@ -857,19 +810,29 @@ Design: (unnamed)
     |vpiName:toto1
     |vpiFullName:work@memory_ctrl1.toto1
   |vpiImportTypespec:
-  \_ClassTypespec: (work@DD2), line:61:1, endln:61:4
-  |vpiImportTypespec:
-  \_Variable: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
+  \_Net: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
+    |vpiParent:
+    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.toto2.DD2), line:61:1, endln:61:4
+      |vpiParent:
+      \_Net: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
+      |vpiName:DD2
+      |vpiFullName:work@memory_ctrl1.toto2.DD2
+      |vpiActual:
+      \_ClassTypespec: (work@DD2)
+    |vpiName:toto2
+    |vpiFullName:work@memory_ctrl1.toto2
   |vpiImportTypespec:
   \_LogicTypespec: , line:63:1, endln:63:5
   |vpiImportTypespec:
-  \_LogicNet: (work@memory_ctrl1.i1), line:63:6, endln:63:8
+  \_Net: (work@memory_ctrl1.i1), line:63:6, endln:63:8
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl1.i1), line:63:1, endln:63:5
       |vpiParent:
-      \_LogicNet: (work@memory_ctrl1.i1), line:63:6, endln:63:8
+      \_Net: (work@memory_ctrl1.i1), line:63:6, endln:63:8
       |vpiFullName:work@memory_ctrl1.i1
       |vpiActual:
       \_LogicTypespec: , line:63:1, endln:63:5
@@ -877,13 +840,13 @@ Design: (unnamed)
     |vpiFullName:work@memory_ctrl1.i1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@memory_ctrl1.o1), line:65:5, endln:65:7
+  \_Net: (work@memory_ctrl1.o1), line:65:5, endln:65:7
     |vpiParent:
     \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
     |vpiTypespec:
     \_RefTypespec: (work@memory_ctrl1.o1), line:65:1, endln:65:4
       |vpiParent:
-      \_LogicNet: (work@memory_ctrl1.o1), line:65:5, endln:65:7
+      \_Net: (work@memory_ctrl1.o1), line:65:5, endln:65:7
       |vpiFullName:work@memory_ctrl1.o1
       |vpiActual:
       \_LogicTypespec: , line:63:1, endln:63:5
@@ -891,16 +854,46 @@ Design: (unnamed)
     |vpiFullName:work@memory_ctrl1.o1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+  \_Net: (work@memory_ctrl1.sif1), line:57:29, endln:57:33
+    |vpiParent:
+    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.sif1.mem_if), line:57:22, endln:57:28
+      |vpiParent:
+      \_Net: (work@memory_ctrl1.sif1), line:57:29, endln:57:33
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif1.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif1
+    |vpiFullName:work@memory_ctrl1.sif1
   |vpiImportTypespec:
-  \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
+  \_Net: (work@memory_ctrl1.sif2), line:57:49, endln:57:53
+    |vpiParent:
+    \_Module: work@memory_ctrl1 (work@memory_ctrl1), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:57:1, endln:67:10
+    |vpiTypespec:
+    \_RefTypespec: (work@memory_ctrl1.sif2.mem_if), line:57:35, endln:57:41
+      |vpiParent:
+      \_Net: (work@memory_ctrl1.sif2), line:57:49, endln:57:53
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif2.mem_if
+      |vpiActual:
+      \_InterfaceTypespec: (mem_if)
+    |vpiName:sif2
+    |vpiFullName:work@memory_ctrl1.sif2
   |vpiDefName:work@memory_ctrl1
   |vpiNet:
-  \_LogicNet: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
+  \_Net: (work@memory_ctrl1.toto1), line:59:5, endln:59:10
   |vpiNet:
-  \_LogicNet: (work@memory_ctrl1.i1), line:63:6, endln:63:8
+  \_Net: (work@memory_ctrl1.toto2), line:61:5, endln:61:10
   |vpiNet:
-  \_LogicNet: (work@memory_ctrl1.o1), line:65:5, endln:65:7
+  \_Net: (work@memory_ctrl1.i1), line:63:6, endln:63:8
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.o1), line:65:5, endln:65:7
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.sif1), line:57:29, endln:57:33
+  |vpiNet:
+  \_Net: (work@memory_ctrl1.sif2), line:57:49, endln:57:53
   |vpiPort:
   \_Port: (sif1), line:57:29, endln:57:33
     |vpiParent:
@@ -914,7 +907,7 @@ Design: (unnamed)
       |vpiName:mem_if
       |vpiFullName:work@memory_ctrl1.sif1.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (mem_if), line:57:22, endln:57:28
+      \_InterfaceTypespec: (mem_if)
   |vpiPort:
   \_Port: (sif2), line:57:49, endln:57:53
     |vpiParent:
@@ -922,13 +915,13 @@ Design: (unnamed)
     |vpiName:sif2
     |vpiDirection:3
     |vpiTypespec:
-    \_RefTypespec: (work@memory_ctrl1.sif2.work@mem_if.system), line:57:35, endln:57:41
+    \_RefTypespec: (work@memory_ctrl1.sif2.mem_if), line:57:35, endln:57:41
       |vpiParent:
       \_Port: (sif2), line:57:49, endln:57:53
-      |vpiName:work@mem_if.system
-      |vpiFullName:work@memory_ctrl1.sif2.work@mem_if.system
+      |vpiName:mem_if
+      |vpiFullName:work@memory_ctrl1.sif2.mem_if
       |vpiActual:
-      \_InterfaceTypespec: (work@mem_if.system), line:57:42, endln:57:48
+      \_InterfaceTypespec: (mem_if)
 |vpiAllModules:
 \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
   |vpiParent:
@@ -989,13 +982,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:1, endln:5:5
   |vpiImportTypespec:
-  \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+  \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
     |vpiParent:
     \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
     |vpiTypespec:
     \_RefTypespec: (work@tb_operators.shifter), line:5:1, endln:5:5
       |vpiParent:
-      \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+      \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
       |vpiFullName:work@tb_operators.shifter
       |vpiActual:
       \_LogicTypespec: , line:5:1, endln:5:5
@@ -1005,13 +998,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:1, endln:6:5
   |vpiImportTypespec:
-  \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+  \_Net: (work@tb_operators.result), line:6:13, endln:6:19
     |vpiParent:
     \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
     |vpiTypespec:
     \_RefTypespec: (work@tb_operators.result), line:6:1, endln:6:5
       |vpiParent:
-      \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+      \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiFullName:work@tb_operators.result
       |vpiActual:
       \_LogicTypespec: , line:6:1, endln:6:5
@@ -1020,9 +1013,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@tb_operators
   |vpiNet:
-  \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+  \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
   |vpiNet:
-  \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+  \_Net: (work@tb_operators.result), line:6:13, endln:6:19
   |vpiProcess:
   \_Initial: , line:8:1, endln:36:4
     |vpiParent:
@@ -1043,7 +1036,7 @@ Design: (unnamed)
           |vpiName:shifter
           |vpiFullName:work@tb_operators.shifter
           |vpiActual:
-          \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
         |vpiArgument:
         \_RefObj: (work@tb_operators.result), line:10:22, endln:10:28
           |vpiParent:
@@ -1051,7 +1044,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiName:
         \_Identifier: ($monitor)
           |vpiParent:
@@ -1078,7 +1071,7 @@ Design: (unnamed)
           |vpiName:shifter
           |vpiFullName:work@tb_operators.shifter
           |vpiActual:
-          \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
       |vpiStmt:
       \_Assignment: , line:13:5, endln:13:26
         |vpiParent:
@@ -1097,7 +1090,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_Constant: , line:13:25, endln:13:26
             |vpiParent:
@@ -1113,7 +1106,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:14:5, endln:14:26
         |vpiParent:
@@ -1132,7 +1125,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_Constant: , line:14:25, endln:14:26
             |vpiParent:
@@ -1148,7 +1141,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:15:5, endln:15:26
         |vpiParent:
@@ -1167,7 +1160,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_Constant: , line:15:25, endln:15:26
             |vpiParent:
@@ -1183,7 +1176,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:16:5, endln:16:33
         |vpiParent:
@@ -1231,7 +1224,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:17:5, endln:17:33
         |vpiParent:
@@ -1279,7 +1272,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:19:5, endln:19:26
         |vpiParent:
@@ -1298,7 +1291,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_Constant: , line:19:25, endln:19:26
             |vpiParent:
@@ -1314,7 +1307,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:20:5, endln:20:24
         |vpiParent:
@@ -1333,7 +1326,7 @@ Design: (unnamed)
             |vpiName:result
             |vpiFullName:work@tb_operators.result
             |vpiActual:
-            \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+            \_Net: (work@tb_operators.result), line:6:13, endln:6:19
           |vpiOperand:
           \_Constant: , line:20:23, endln:20:24
             |vpiParent:
@@ -1349,7 +1342,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_IfElse: , line:22:5, endln:30:8
         |vpiParent:
@@ -1366,7 +1359,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_RefObj: (work@tb_operators.result), line:22:19, endln:22:25
             |vpiParent:
@@ -1374,7 +1367,7 @@ Design: (unnamed)
             |vpiName:result
             |vpiFullName:work@tb_operators.result
             |vpiActual:
-            \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+            \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiStmt:
         \_Begin: (work@tb_operators), line:22:27, endln:24:8
           |vpiParent:
@@ -1413,7 +1406,7 @@ Design: (unnamed)
               |vpiName:shifter
               |vpiFullName:work@tb_operators.shifter
               |vpiActual:
-              \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+              \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
             |vpiOperand:
             \_RefObj: (work@tb_operators.result), line:24:28, endln:24:34
               |vpiParent:
@@ -1421,7 +1414,7 @@ Design: (unnamed)
               |vpiName:result
               |vpiFullName:work@tb_operators.result
               |vpiActual:
-              \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+              \_Net: (work@tb_operators.result), line:6:13, endln:6:19
           |vpiStmt:
           \_Begin: (work@tb_operators), line:24:36, endln:26:8
             |vpiParent:
@@ -1460,7 +1453,7 @@ Design: (unnamed)
                 |vpiName:shifter
                 |vpiFullName:work@tb_operators.shifter
                 |vpiActual:
-                \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+                \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
               |vpiOperand:
               \_RefObj: (work@tb_operators.result), line:26:29, endln:26:35
                 |vpiParent:
@@ -1468,7 +1461,7 @@ Design: (unnamed)
                 |vpiName:result
                 |vpiFullName:work@tb_operators.result
                 |vpiActual:
-                \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+                \_Net: (work@tb_operators.result), line:6:13, endln:6:19
             |vpiStmt:
             \_Begin: (work@tb_operators), line:26:37, endln:28:8
               |vpiParent:
@@ -1507,7 +1500,7 @@ Design: (unnamed)
                   |vpiName:shifter
                   |vpiFullName:work@tb_operators.shifter
                   |vpiActual:
-                  \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+                  \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
                 |vpiOperand:
                 \_RefObj: (work@tb_operators.result), line:28:29, endln:28:35
                   |vpiParent:
@@ -1515,7 +1508,7 @@ Design: (unnamed)
                   |vpiName:result
                   |vpiFullName:work@tb_operators.result
                   |vpiActual:
-                  \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+                  \_Net: (work@tb_operators.result), line:6:13, endln:6:19
               |vpiStmt:
               \_Begin: (work@tb_operators), line:28:37, endln:30:8
                 |vpiParent:
@@ -1556,7 +1549,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_RefObj: (work@tb_operators.shifter), line:32:27, endln:32:34
             |vpiParent:
@@ -1564,7 +1557,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:32:5, endln:32:11
           |vpiParent:
@@ -1572,7 +1565,7 @@ Design: (unnamed)
           |vpiName:result
           |vpiFullName:work@tb_operators.result
           |vpiActual:
-          \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+          \_Net: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiStmt:
       \_Assignment: , line:34:5, endln:34:32
         |vpiParent:
@@ -1591,7 +1584,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_RefObj: (work@tb_operators.result), line:34:26, endln:34:32
             |vpiParent:
@@ -1599,7 +1592,7 @@ Design: (unnamed)
             |vpiName:result
             |vpiFullName:work@tb_operators.result
             |vpiActual:
-            \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+            \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiLhs:
         \_RefObj: (work@tb_operators.shifter), line:34:5, endln:34:12
           |vpiParent:
@@ -1607,7 +1600,7 @@ Design: (unnamed)
           |vpiName:shifter
           |vpiFullName:work@tb_operators.shifter
           |vpiActual:
-          \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
       |vpiStmt:
       \_Assignment: , line:35:5, endln:35:32
         |vpiParent:
@@ -1626,7 +1619,7 @@ Design: (unnamed)
             |vpiName:shifter
             |vpiFullName:work@tb_operators.shifter
             |vpiActual:
-            \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+            \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
           |vpiOperand:
           \_RefObj: (work@tb_operators.result), line:35:26, endln:35:32
             |vpiParent:
@@ -1634,7 +1627,7 @@ Design: (unnamed)
             |vpiName:result
             |vpiFullName:work@tb_operators.result
             |vpiActual:
-            \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
+            \_Net: (work@tb_operators.result), line:6:13, endln:6:19
         |vpiLhs:
         \_RefObj: (work@tb_operators.shifter), line:35:5, endln:35:12
           |vpiParent:
@@ -1642,7 +1635,7 @@ Design: (unnamed)
           |vpiName:shifter
           |vpiFullName:work@tb_operators.shifter
           |vpiActual:
-          \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
+          \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
   |vpiParent:
@@ -1657,13 +1650,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
   |vpiImportTypespec:
-  \_LogicNet: (work@top.i), line:40:19, endln:40:20
+  \_Net: (work@top.i), line:40:19, endln:40:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
     |vpiName:i
     |vpiFullName:work@top.i
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o), line:40:29, endln:40:30
+  \_Net: (work@top.o), line:40:29, endln:40:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
     |vpiName:o
@@ -1671,13 +1664,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:41:1, endln:41:5
   |vpiImportTypespec:
-  \_LogicNet: (work@top.i), line:41:6, endln:41:7
+  \_Net: (work@top.i), line:41:6, endln:41:7
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
     |vpiTypespec:
     \_RefTypespec: (work@top.i), line:41:1, endln:41:5
       |vpiParent:
-      \_LogicNet: (work@top.i), line:41:6, endln:41:7
+      \_Net: (work@top.i), line:41:6, endln:41:7
       |vpiFullName:work@top.i
       |vpiActual:
       \_LogicTypespec: , line:41:1, endln:41:5
@@ -1685,13 +1678,13 @@ Design: (unnamed)
     |vpiFullName:work@top.i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o), line:42:5, endln:42:6
+  \_Net: (work@top.o), line:42:5, endln:42:6
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
     |vpiTypespec:
     \_RefTypespec: (work@top.o), line:42:1, endln:42:4
       |vpiParent:
-      \_LogicNet: (work@top.o), line:42:5, endln:42:6
+      \_Net: (work@top.o), line:42:5, endln:42:6
       |vpiFullName:work@top.o
       |vpiActual:
       \_LogicTypespec: , line:41:1, endln:41:5
@@ -1700,13 +1693,13 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.i), line:40:19, endln:40:20
+  \_Net: (work@top.i), line:40:19, endln:40:20
   |vpiNet:
-  \_LogicNet: (work@top.o), line:40:29, endln:40:30
+  \_Net: (work@top.o), line:40:29, endln:40:30
   |vpiNet:
-  \_LogicNet: (work@top.i), line:41:6, endln:41:7
+  \_Net: (work@top.i), line:41:6, endln:41:7
   |vpiNet:
-  \_LogicNet: (work@top.o), line:42:5, endln:42:6
+  \_Net: (work@top.o), line:42:5, endln:42:6
   |vpiPort:
   \_Port: (i), line:40:19, endln:40:20
     |vpiParent:
@@ -1730,7 +1723,7 @@ Design: (unnamed)
       |vpiName:i
       |vpiFullName:work@top.i
       |vpiActual:
-      \_LogicNet: (work@top.i), line:40:19, endln:40:20
+      \_Net: (work@top.i), line:40:19, endln:40:20
     |vpiLhs:
     \_RefObj: (work@top.o), line:43:8, endln:43:9
       |vpiParent:
@@ -1738,7 +1731,18 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicNet: (work@top.o), line:40:29, endln:40:30
+      \_Net: (work@top.o), line:40:29, endln:40:30
+|vpiTypedef:
+\_InterfaceTypespec: (mem_if)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:
+  \_Identifier: (mem_if)
+    |vpiParent:
+    \_InterfaceTypespec: (mem_if)
+    |vpiName:mem_if
+  |vpiInterface:
+  \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
 |vpiTypedef:
 \_ModuleTypespec: (memory_ctrl1)
   |vpiParent:
@@ -1760,6 +1764,13 @@ Design: (unnamed)
   |vpiName:top
   |vpiModule:
   \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:40:1, endln:44:10
+|vpiTypedef:
+\_ClassTypespec: (work@DD2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@DD2
+  |vpiClassDefn:
+  \_ClassDefn: (work@DD2), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:54:1, endln:55:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

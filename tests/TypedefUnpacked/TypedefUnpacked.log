@@ -5,11 +5,11 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:1: Compile module "work@dut".
 [NTE:CP0309] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              2
 Constant                                               5
@@ -17,10 +17,10 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             4
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 Port                                                   1
 Range                                                  1
@@ -30,6 +30,7 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefUnpacked/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -132,7 +133,8 @@ Design: (unnamed)
     \_RefTypespec: (pkg::a), line:5:12, endln:5:13
       |vpiParent:
       \_ArrayTypespec: , line:5:12, endln:5:20
-      |vpiName:pkg::a
+      |vpiName:a
+      |vpiFullName:pkg::a
       |vpiActual:
       \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:
@@ -156,19 +158,19 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
     |vpiName:work@dut
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.o), line:8:19, endln:8:20
+  \_Net: (work@dut.o), line:8:19, endln:8:20
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
     |vpiName:o
     |vpiFullName:work@dut.o
   |vpiImportTypespec:
-  \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+  \_Net: (work@dut.c), line:9:11, endln:9:12
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.c.pkg::b), line:9:4, endln:9:10
       |vpiParent:
-      \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+      \_Net: (work@dut.c), line:9:11, endln:9:12
       |vpiName:pkg::b
       |vpiFullName:work@dut.c.pkg::b
       |vpiActual:
@@ -176,7 +178,7 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@dut.c
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.x), line:10:16, endln:10:17
+  \_Net: (work@dut.x), line:10:16, endln:10:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
     |vpiName:x
@@ -184,11 +186,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
-  \_LogicNet: (work@dut.o), line:8:19, endln:8:20
+  \_Net: (work@dut.o), line:8:19, endln:8:20
   |vpiNet:
-  \_LogicNet: (work@dut.x), line:10:16, endln:10:17
-  |vpiArrayNet:
-  \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+  \_Net: (work@dut.c), line:9:11, endln:9:12
+  |vpiNet:
+  \_Net: (work@dut.x), line:10:16, endln:10:17
   |vpiPort:
   \_Port: (o), line:8:19, endln:8:20
     |vpiParent:
@@ -218,7 +220,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+        \_Net: (work@dut.c), line:9:11, endln:9:12
         |vpiIndex:
         \_Constant: , line:10:13, endln:10:14
           |vpiParent:
@@ -234,7 +236,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:c[1].x
         |vpiActual:
-        \_LogicNet: (work@dut.x), line:10:16, endln:10:17
+        \_Net: (work@dut.x), line:10:16, endln:10:17
       |vpiName:c[1].x
   |vpiContAssign:
   \_ContAssign: , line:11:11, endln:11:21
@@ -251,7 +253,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+        \_Net: (work@dut.c), line:9:11, endln:9:12
         |vpiIndex:
         \_Constant: , line:11:17, endln:11:18
           |vpiParent:
@@ -267,7 +269,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:work@dut.x
         |vpiActual:
-        \_LogicNet: (work@dut.x), line:10:16, endln:10:17
+        \_Net: (work@dut.x), line:10:16, endln:10:17
       |vpiName:c[1].x
     |vpiLhs:
     \_RefObj: (work@dut.o), line:11:11, endln:11:12
@@ -276,7 +278,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@dut.o
       |vpiActual:
-      \_LogicNet: (work@dut.o), line:8:19, endln:8:20
+      \_Net: (work@dut.o), line:8:19, endln:8:20
 |vpiTypedef:
 \_ModuleTypespec: (dut)
   |vpiParent:

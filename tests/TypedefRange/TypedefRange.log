@@ -4,6 +4,7 @@
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/TypedefRange/dut.sv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypedefRange/dut.sv:1:1: No timescale set for "pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypedefRange/dut.sv:1:1: Compile package "pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
@@ -18,6 +19,7 @@ SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefRange/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -116,10 +118,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (pkg::a), line:4:6, endln:4:7
+    \_RefTypespec: (pkg::a), line:5:12, endln:5:13
       |vpiParent:
       \_PackedArrayTypespec: , line:5:12, endln:5:18
-      |vpiName:pkg::a
+      |vpiName:a
+      |vpiFullName:pkg::a
       |vpiActual:
       \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:

@@ -140,10 +140,10 @@ EnumConst                                              2
 EnumTypespec                                           1
 HierPath                                               1
 Identifier                                             3
-LogicNet                                               2
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    3
 Operation                                              1
 PackedArrayTypespec                                    1
 Port                                                   2
@@ -151,10 +151,10 @@ Range                                                  1
 RefObj                                                 4
 RefTypespec                                           10
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -280,7 +280,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.cstate_e), line:3:37, endln:3:45
+    \_RefTypespec: (work@top.cstate_e), line:6:7, endln:6:15
       |vpiParent:
       \_PackedArrayTypespec: , line:6:7, endln:6:21
       |vpiName:cstate_e
@@ -300,13 +300,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:6:7, endln:6:21
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:2:25, endln:2:26
+  \_Net: (work@top.a), line:2:25, endln:2:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:2:19, endln:2:24
       |vpiParent:
-      \_LogicNet: (work@top.a), line:2:25, endln:2:26
+      \_Net: (work@top.a), line:2:25, endln:2:26
       |vpiFullName:work@top.a
       |vpiActual:
       \_LogicTypespec: , line:3:16, endln:3:21
@@ -314,13 +314,13 @@ Design: (unnamed)
     |vpiFullName:work@top.a
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:2:41, endln:2:42
+  \_Net: (work@top.b), line:2:41, endln:2:42
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:2:35, endln:2:40
       |vpiParent:
-      \_LogicNet: (work@top.b), line:2:41, endln:2:42
+      \_Net: (work@top.b), line:2:41, endln:2:42
       |vpiFullName:work@top.b
       |vpiActual:
       \_LogicTypespec: , line:3:16, endln:3:21
@@ -328,13 +328,13 @@ Design: (unnamed)
     |vpiFullName:work@top.b
     |vpiNetType:36
   |vpiImportTypespec:
-  \_StructNet: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+  \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@top.hw2reg_wrap.hw2reg_wrap_t), line:9:4, endln:9:17
       |vpiParent:
-      \_StructNet: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+      \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
       |vpiName:hw2reg_wrap_t
       |vpiFullName:work@top.hw2reg_wrap.hw2reg_wrap_t
       |vpiActual:
@@ -342,7 +342,7 @@ Design: (unnamed)
     |vpiName:hw2reg_wrap
     |vpiFullName:work@top.hw2reg_wrap
   |vpiImportTypespec:
-  \_LogicNet: (work@top.class_esc_state), line:12:31, endln:12:46
+  \_Net: (work@top.class_esc_state), line:12:31, endln:12:46
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
     |vpiName:class_esc_state
@@ -350,13 +350,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.a), line:2:25, endln:2:26
+  \_Net: (work@top.a), line:2:25, endln:2:26
   |vpiNet:
-  \_LogicNet: (work@top.b), line:2:41, endln:2:42
+  \_Net: (work@top.b), line:2:41, endln:2:42
   |vpiNet:
-  \_StructNet: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+  \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
   |vpiNet:
-  \_LogicNet: (work@top.class_esc_state), line:12:31, endln:12:46
+  \_Net: (work@top.class_esc_state), line:12:31, endln:12:46
   |vpiPort:
   \_Port: (a), line:2:25, endln:2:26
     |vpiParent:
@@ -397,7 +397,7 @@ Design: (unnamed)
         \_HierPath: (hw2reg_wrap.class_esc_state), line:12:19, endln:12:46
         |vpiName:hw2reg_wrap
         |vpiActual:
-        \_StructNet: (work@top.hw2reg_wrap), line:9:18, endln:9:29
+        \_Net: (work@top.hw2reg_wrap), line:9:18, endln:9:29
       |vpiActual:
       \_RefObj: (work@top.class_esc_state), line:12:31, endln:12:46
         |vpiParent:
@@ -405,7 +405,7 @@ Design: (unnamed)
         |vpiName:class_esc_state
         |vpiFullName:work@top.class_esc_state
         |vpiActual:
-        \_LogicNet: (work@top.class_esc_state), line:12:31, endln:12:46
+        \_Net: (work@top.class_esc_state), line:12:31, endln:12:46
       |vpiName:hw2reg_wrap.class_esc_state
     |vpiLhs:
     \_Operation: , line:11:11, endln:12:16
@@ -419,7 +419,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@top.a
         |vpiActual:
-        \_LogicNet: (work@top.a), line:2:25, endln:2:26
+        \_Net: (work@top.a), line:2:25, endln:2:26
       |vpiOperand:
       \_RefObj: (work@top.b), line:12:13, endln:12:14
         |vpiParent:
@@ -427,7 +427,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.b
         |vpiActual:
-        \_LogicNet: (work@top.b), line:2:41, endln:2:42
+        \_Net: (work@top.b), line:2:41, endln:2:42
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

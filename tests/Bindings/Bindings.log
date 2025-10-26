@@ -1041,6 +1041,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Bindings/dut.sv:67:1: No timescale set for "bsg_dff_reset".
 [WRN:PA0205] ${SURELOG_DIR}/tests/Bindings/dut.sv:82:1: No timescale set for "dut5".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/Bindings/dut.sv:3:1: Compile package "pack1".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:67:1: Compile module "work@bsg_dff_reset".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:20:1: Compile module "work@dut1".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:35:1: Compile module "work@dut2".
@@ -1072,10 +1073,10 @@ IODecl                                                11
 Identifier                                            42
 IfElse                                                 1
 IntTypespec                                           15
-LogicNet                                               5
 LogicTypespec                                         10
 Module                                                 8
 ModuleTypespec                                         5
+Net                                                    5
 Operation                                             32
 Package                                                2
 ParamAssign                                           14
@@ -1089,6 +1090,7 @@ SourceFile                                             1
 SysFuncCall                                            4
 Task                                                   9
 TypedefTypespec                                        5
+UnsupportedTypespec                                    5
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Bindings/slpp_all/surelog.uhdm ...
@@ -2059,11 +2061,11 @@ Design: (unnamed)
       \_TypedefTypespec: (pack1::lc_tx_t), line:13:21, endln:13:28
       |vpiName:pack1::lc_tx_t
     |vpiTypedefAlias:
-    \_RefTypespec: (pack1::lc_tx_t::pack1::lc_tx_e), line:13:13, endln:13:20
+    \_RefTypespec: (pack1::lc_tx_t::lc_tx_e), line:13:13, endln:13:20
       |vpiParent:
       \_TypedefTypespec: (pack1::lc_tx_t), line:13:21, endln:13:28
-      |vpiName:pack1::lc_tx_e
-      |vpiFullName:pack1::lc_tx_t::pack1::lc_tx_e
+      |vpiName:lc_tx_e
+      |vpiFullName:pack1::lc_tx_t::lc_tx_e
       |vpiActual:
       \_TypedefTypespec: (pack1::lc_tx_e), line:11:7, endln:11:14
   |vpiImportTypespec:
@@ -2154,7 +2156,7 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@bsg_dff_reset.harden_p), line:67:52, endln:67:62
   |vpiImportTypespec:
-  \_LogicNet: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
+  \_Net: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
     |vpiParent:
     \_Module: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
     |vpiName:clk_i
@@ -2162,7 +2164,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@bsg_dff_reset
   |vpiNet:
-  \_LogicNet: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
+  \_Net: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
   |vpiProcess:
   \_Always: , line:72:4, endln:78:9
     |vpiParent:
@@ -2183,28 +2185,28 @@ Design: (unnamed)
           |vpiName:clk_i
           |vpiFullName:work@bsg_dff_reset.clk_i
           |vpiActual:
-          \_LogicNet: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
+          \_Net: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
       |vpiStmt:
       \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
         |vpiParent:
         \_EventControl: , line:72:11, endln:72:27
         |vpiFullName:work@bsg_dff_reset
         |vpiImportTypespec:
-        \_LogicNet: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
+        \_Net: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
           |vpiName:reset_i
           |vpiFullName:work@bsg_dff_reset.reset_i
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
+        \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
           |vpiName:data_r
           |vpiFullName:work@bsg_dff_reset.data_r
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
+        \_Net: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
           |vpiName:data_i
@@ -2221,7 +2223,7 @@ Design: (unnamed)
             |vpiName:reset_i
             |vpiFullName:work@bsg_dff_reset.reset_i
             |vpiActual:
-            \_LogicNet: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
+            \_Net: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
           |vpiStmt:
           \_Assignment: , line:75:11, endln:75:46
             |vpiParent:
@@ -2247,7 +2249,7 @@ Design: (unnamed)
               |vpiName:data_r
               |vpiFullName:work@bsg_dff_reset.data_r
               |vpiActual:
-              \_LogicNet: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
+              \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
           |vpiElseStmt:
           \_Assignment: , line:77:11, endln:77:27
             |vpiParent:
@@ -2260,7 +2262,7 @@ Design: (unnamed)
               |vpiName:data_i
               |vpiFullName:work@bsg_dff_reset.data_i
               |vpiActual:
-              \_LogicNet: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
+              \_Net: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
             |vpiLhs:
             \_RefObj: (work@bsg_dff_reset.data_r), line:77:11, endln:77:17
               |vpiParent:
@@ -2268,7 +2270,7 @@ Design: (unnamed)
               |vpiName:data_r
               |vpiFullName:work@bsg_dff_reset.data_r
               |vpiActual:
-              \_LogicNet: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
+              \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:20:1, endln:31:10
@@ -2456,13 +2458,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:25:3, endln:25:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dut1.device_sel_req), line:25:32, endln:25:46
+  \_Net: (work@dut1.device_sel_req), line:25:32, endln:25:46
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:20:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@dut1.device_sel_req), line:25:3, endln:25:31
       |vpiParent:
-      \_LogicNet: (work@dut1.device_sel_req), line:25:32, endln:25:46
+      \_Net: (work@dut1.device_sel_req), line:25:32, endln:25:46
       |vpiFullName:work@dut1.device_sel_req
       |vpiActual:
       \_LogicTypespec: , line:25:3, endln:25:8
@@ -2473,7 +2475,7 @@ Design: (unnamed)
   \_Variable: (work@dut1.device), line:26:7, endln:26:13
   |vpiDefName:work@dut1
   |vpiNet:
-  \_LogicNet: (work@dut1.device_sel_req), line:25:32, endln:25:46
+  \_Net: (work@dut1.device_sel_req), line:25:32, endln:25:46
   |vpiProcess:
   \_Always: , line:27:3, endln:29:6
     |vpiParent:
@@ -2509,7 +2511,7 @@ Design: (unnamed)
           |vpiName:device_sel_req
           |vpiFullName:work@dut1.device_sel_req
           |vpiActual:
-          \_LogicNet: (work@dut1.device_sel_req), line:25:32, endln:25:46
+          \_Net: (work@dut1.device_sel_req), line:25:32, endln:25:46
     |vpiAlwaysType:2
 |vpiAllModules:
 \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
@@ -2552,6 +2554,20 @@ Design: (unnamed)
       \_Begin: (work@dut2), line:41:26, endln:45:7
     |vpiImportTypespec:
     \_LogicTypespec: , line:43:8, endln:43:12
+    |vpiImportTypespec:
+    \_Net: (work@dut2.unused), line:43:13, endln:43:19
+      |vpiParent:
+      \_Begin: (work@dut2), line:41:26, endln:45:7
+      |vpiTypespec:
+      \_RefTypespec: (work@dut2.unused), line:43:8, endln:43:12
+        |vpiParent:
+        \_Net: (work@dut2.unused), line:43:13, endln:43:19
+        |vpiFullName:work@dut2.unused
+        |vpiActual:
+        \_LogicTypespec: , line:43:8, endln:43:12
+      |vpiName:unused
+      |vpiFullName:work@dut2.unused
+      |vpiNetType:1
     |vpiStmt:
     \_ContAssign: , line:44:15, endln:44:23
       |vpiParent:
@@ -2571,7 +2587,7 @@ Design: (unnamed)
         |vpiName:o
         |vpiFullName:work@dut2.o
         |vpiActual:
-        \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
+        \_Net: (work@dut2.o), line:38:36, endln:38:37
   |vpiInternalScope:
   \_Begin: (work@dut2), line:46:9, endln:48:9
     |vpiParent:
@@ -2606,7 +2622,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@dut2.i
             |vpiActual:
-            \_LogicNet: (work@dut2.i), line:37:36, endln:37:37
+            \_Net: (work@dut2.i), line:37:36, endln:37:37
       |vpiLhs:
       \_RefObj: (work@dut2.o), line:47:15, endln:47:16
         |vpiParent:
@@ -2614,7 +2630,7 @@ Design: (unnamed)
         |vpiName:o
         |vpiFullName:work@dut2.o
         |vpiActual:
-        \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
+        \_Net: (work@dut2.o), line:38:36, endln:38:37
   |vpiTypedef:
   \_LogicTypespec: , line:37:12, endln:37:35
     |vpiParent:
@@ -2668,13 +2684,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:37:12, endln:37:35
   |vpiImportTypespec:
-  \_LogicNet: (work@dut2.i), line:37:36, endln:37:37
+  \_Net: (work@dut2.i), line:37:36, endln:37:37
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
     |vpiTypespec:
     \_RefTypespec: (work@dut2.i), line:37:12, endln:37:35
       |vpiParent:
-      \_LogicNet: (work@dut2.i), line:37:36, endln:37:37
+      \_Net: (work@dut2.i), line:37:36, endln:37:37
       |vpiFullName:work@dut2.i
       |vpiActual:
       \_LogicTypespec: , line:37:12, endln:37:35
@@ -2683,40 +2699,24 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:38:14, endln:38:19
   |vpiImportTypespec:
-  \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
+  \_Net: (work@dut2.o), line:38:36, endln:38:37
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
     |vpiTypespec:
     \_RefTypespec: (work@dut2.o), line:38:14, endln:38:19
       |vpiParent:
-      \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
+      \_Net: (work@dut2.o), line:38:36, endln:38:37
       |vpiFullName:work@dut2.o
       |vpiActual:
       \_LogicTypespec: , line:38:14, endln:38:19
     |vpiName:o
     |vpiFullName:work@dut2.o
     |vpiNetType:36
-  |vpiImportTypespec:
-  \_LogicNet: (work@dut2.unused), line:43:13, endln:43:19
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:35:1, endln:50:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.unused), line:43:8, endln:43:12
-      |vpiParent:
-      \_LogicNet: (work@dut2.unused), line:43:13, endln:43:19
-      |vpiFullName:work@dut2.unused
-      |vpiActual:
-      \_LogicTypespec: , line:43:8, endln:43:12
-    |vpiName:unused
-    |vpiFullName:work@dut2.unused
-    |vpiNetType:1
   |vpiDefName:work@dut2
   |vpiNet:
-  \_LogicNet: (work@dut2.i), line:37:36, endln:37:37
+  \_Net: (work@dut2.i), line:37:36, endln:37:37
   |vpiNet:
-  \_LogicNet: (work@dut2.o), line:38:36, endln:38:37
-  |vpiNet:
-  \_LogicNet: (work@dut2.unused), line:43:13, endln:43:19
+  \_Net: (work@dut2.o), line:38:36, endln:38:37
   |vpiPort:
   \_Port: (i), line:37:36, endln:37:37
     |vpiParent:
@@ -2823,35 +2823,35 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:54:26, endln:54:38
   |vpiImportTypespec:
-  \_LogicNet: (work@dut3.entropy_i), line:60:36, endln:60:45
+  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:entropy_i
     |vpiFullName:work@dut3.entropy_i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut3.lfsr_q), line:60:64, endln:60:67
+  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:lfsr_q
     |vpiFullName:work@dut3.lfsr_q
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut3.coeffs), line:60:72, endln:60:78
+  \_Net: (work@dut3.coeffs), line:60:72, endln:60:78
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:coeffs
     |vpiFullName:work@dut3.coeffs
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
+  \_Net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:next_lfsr_state
     |vpiFullName:work@dut3.next_lfsr_state
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut3.lockup), line:62:9, endln:62:15
+  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:lockup
@@ -2859,15 +2859,15 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut3
   |vpiNet:
-  \_LogicNet: (work@dut3.entropy_i), line:60:36, endln:60:45
+  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
   |vpiNet:
-  \_LogicNet: (work@dut3.lfsr_q), line:60:64, endln:60:67
+  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
   |vpiNet:
-  \_LogicNet: (work@dut3.coeffs), line:60:72, endln:60:78
+  \_Net: (work@dut3.coeffs), line:60:72, endln:60:78
   |vpiNet:
-  \_LogicNet: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
+  \_Net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
   |vpiNet:
-  \_LogicNet: (work@dut3.lockup), line:62:9, endln:62:15
+  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
   |vpiContAssign:
   \_ContAssign: , line:60:10, endln:60:95
     |vpiParent:
@@ -2894,7 +2894,7 @@ Design: (unnamed)
             |vpiName:entropy_i
             |vpiFullName:work@dut3.entropy_i
             |vpiActual:
-            \_LogicNet: (work@dut3.entropy_i), line:60:36, endln:60:45
+            \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
         |vpiOperand:
         \_Operation: , line:60:50, endln:60:78
           |vpiParent:
@@ -2925,7 +2925,7 @@ Design: (unnamed)
                 |vpiName:lfsr_q
                 |vpiFullName:work@dut3.lfsr_q
                 |vpiActual:
-                \_LogicNet: (work@dut3.lfsr_q), line:60:64, endln:60:67
+                \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
                 |vpiIndex:
                 \_Constant: , line:60:65, endln:60:66
                   |vpiParent:
@@ -2941,7 +2941,7 @@ Design: (unnamed)
             |vpiName:coeffs
             |vpiFullName:work@dut3.coeffs
             |vpiActual:
-            \_LogicNet: (work@dut3.coeffs), line:60:72, endln:60:78
+            \_Net: (work@dut3.coeffs), line:60:72, endln:60:78
       |vpiOperand:
       \_Operation: , line:60:83, endln:60:94
         |vpiParent:
@@ -2954,7 +2954,7 @@ Design: (unnamed)
           |vpiName:lfsr_q
           |vpiFullName:work@dut3.lfsr_q
           |vpiActual:
-          \_LogicNet: (work@dut3.lfsr_q), line:60:64, endln:60:67
+          \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
         |vpiOperand:
         \_Constant: , line:60:93, endln:60:94
           |vpiParent:
@@ -2970,7 +2970,7 @@ Design: (unnamed)
       |vpiName:next_lfsr_state
       |vpiFullName:work@dut3.next_lfsr_state
       |vpiActual:
-      \_LogicNet: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
+      \_Net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
   |vpiContAssign:
   \_ContAssign: , line:62:9, endln:62:28
     |vpiParent:
@@ -2992,7 +2992,7 @@ Design: (unnamed)
           |vpiName:lfsr_q
           |vpiFullName:work@dut3.lfsr_q
           |vpiActual:
-          \_LogicNet: (work@dut3.lfsr_q), line:60:64, endln:60:67
+          \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
     |vpiLhs:
     \_RefObj: (work@dut3.lockup), line:62:9, endln:62:15
       |vpiParent:
@@ -3000,7 +3000,7 @@ Design: (unnamed)
       |vpiName:lockup
       |vpiFullName:work@dut3.lockup
       |vpiActual:
-      \_LogicNet: (work@dut3.lockup), line:62:9, endln:62:15
+      \_Net: (work@dut3.lockup), line:62:9, endln:62:15
   |vpiRefModule:
   \_RefModule: work@bsg_dff_reset (a1), line:56:3, endln:56:16
     |vpiParent:
@@ -3177,14 +3177,14 @@ Design: (unnamed)
         \_Always: , line:99:3, endln:106:5
         |vpiFullName:work@dut5
         |vpiImportTypespec:
-        \_LogicNet: (work@dut5.last_r), line:101:19, endln:101:25
+        \_Net: (work@dut5.last_r), line:101:19, endln:101:25
           |vpiParent:
           \_Begin: (work@dut5), line:100:4, endln:106:5
           |vpiName:last_r
           |vpiFullName:work@dut5.last_r
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@dut5.reqs_i), line:101:27, endln:101:33
+        \_Net: (work@dut5.reqs_i), line:101:27, endln:101:33
           |vpiParent:
           \_Begin: (work@dut5), line:100:4, endln:106:5
           |vpiName:reqs_i
@@ -3208,7 +3208,7 @@ Design: (unnamed)
               |vpiName:last_r
               |vpiFullName:work@dut5.last_r
               |vpiActual:
-              \_LogicNet: (work@dut5.last_r), line:101:19, endln:101:25
+              \_Net: (work@dut5.last_r), line:101:19, endln:101:25
             |vpiOperand:
             \_RefObj: (work@dut5.reqs_i), line:101:27, endln:101:33
               |vpiParent:
@@ -3216,7 +3216,7 @@ Design: (unnamed)
               |vpiName:reqs_i
               |vpiFullName:work@dut5.reqs_i
               |vpiActual:
-              \_LogicNet: (work@dut5.reqs_i), line:101:27, endln:101:33
+              \_Net: (work@dut5.reqs_i), line:101:27, endln:101:33
           |vpiCaseItem:
           \_CaseItem: , line:102:5, endln:102:73
             |vpiParent:
@@ -3235,14 +3235,14 @@ Design: (unnamed)
               \_CaseItem: , line:102:5, endln:102:73
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.sel_one_hot_n), line:102:19, endln:102:32
+              \_Net: (work@dut5.sel_one_hot_n), line:102:19, endln:102:32
                 |vpiParent:
                 \_Begin: (work@dut5), line:102:13, endln:102:73
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.tag_o), line:102:41, endln:102:46
+              \_Net: (work@dut5.tag_o), line:102:41, endln:102:46
                 |vpiParent:
                 \_Begin: (work@dut5), line:102:13, endln:102:73
                 |vpiName:tag_o
@@ -3269,7 +3269,7 @@ Design: (unnamed)
                   |vpiName:sel_one_hot_n
                   |vpiFullName:work@dut5.sel_one_hot_n
                   |vpiActual:
-                  \_LogicNet: (work@dut5.sel_one_hot_n), line:102:19, endln:102:32
+                  \_Net: (work@dut5.sel_one_hot_n), line:102:19, endln:102:32
               |vpiStmt:
               \_Assignment: , line:102:41, endln:102:68
                 |vpiParent:
@@ -3296,7 +3296,7 @@ Design: (unnamed)
                   |vpiName:tag_o
                   |vpiFullName:work@dut5.tag_o
                   |vpiActual:
-                  \_LogicNet: (work@dut5.tag_o), line:102:41, endln:102:46
+                  \_Net: (work@dut5.tag_o), line:102:41, endln:102:46
           |vpiCaseItem:
           \_CaseItem: , line:103:5, endln:103:72
             |vpiParent:
@@ -3315,14 +3315,14 @@ Design: (unnamed)
               \_CaseItem: , line:103:5, endln:103:72
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.sel_one_hot_n), line:103:19, endln:103:32
+              \_Net: (work@dut5.sel_one_hot_n), line:103:19, endln:103:32
                 |vpiParent:
                 \_Begin: (work@dut5), line:103:13, endln:103:72
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.tag_o), line:103:40, endln:103:45
+              \_Net: (work@dut5.tag_o), line:103:40, endln:103:45
                 |vpiParent:
                 \_Begin: (work@dut5), line:103:13, endln:103:72
                 |vpiName:tag_o
@@ -3349,7 +3349,7 @@ Design: (unnamed)
                   |vpiName:sel_one_hot_n
                   |vpiFullName:work@dut5.sel_one_hot_n
                   |vpiActual:
-                  \_LogicNet: (work@dut5.sel_one_hot_n), line:103:19, endln:103:32
+                  \_Net: (work@dut5.sel_one_hot_n), line:103:19, endln:103:32
               |vpiStmt:
               \_Assignment: , line:103:40, endln:103:67
                 |vpiParent:
@@ -3376,7 +3376,7 @@ Design: (unnamed)
                   |vpiName:tag_o
                   |vpiFullName:work@dut5.tag_o
                   |vpiActual:
-                  \_LogicNet: (work@dut5.tag_o), line:103:40, endln:103:45
+                  \_Net: (work@dut5.tag_o), line:103:40, endln:103:45
           |vpiCaseItem:
           \_CaseItem: , line:104:7, endln:104:80
             |vpiParent:
@@ -3387,14 +3387,14 @@ Design: (unnamed)
               \_CaseItem: , line:104:7, endln:104:80
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.sel_one_hot_n), line:104:22, endln:104:35
+              \_Net: (work@dut5.sel_one_hot_n), line:104:22, endln:104:35
                 |vpiParent:
                 \_Begin: (work@dut5), line:104:16, endln:104:80
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_LogicNet: (work@dut5.tag_o), line:104:48, endln:104:53
+              \_Net: (work@dut5.tag_o), line:104:48, endln:104:53
                 |vpiParent:
                 \_Begin: (work@dut5), line:104:16, endln:104:80
                 |vpiName:tag_o
@@ -3439,7 +3439,7 @@ Design: (unnamed)
                   |vpiName:sel_one_hot_n
                   |vpiFullName:work@dut5.sel_one_hot_n
                   |vpiActual:
-                  \_LogicNet: (work@dut5.sel_one_hot_n), line:104:22, endln:104:35
+                  \_Net: (work@dut5.sel_one_hot_n), line:104:22, endln:104:35
               |vpiStmt:
               \_Assignment: , line:104:48, endln:104:75
                 |vpiParent:
@@ -3466,7 +3466,7 @@ Design: (unnamed)
                   |vpiName:tag_o
                   |vpiFullName:work@dut5.tag_o
                   |vpiActual:
-                  \_LogicNet: (work@dut5.tag_o), line:104:48, endln:104:53
+                  \_Net: (work@dut5.tag_o), line:104:48, endln:104:53
       |vpiAlwaysType:2
   |vpiTypedef:
   \_IntTypespec: , line:86:13, endln:86:16
@@ -3620,13 +3620,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:96:4, endln:96:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dut5.shifted), line:96:23, endln:96:30
+  \_Net: (work@dut5.shifted), line:96:23, endln:96:30
     |vpiParent:
     \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
     |vpiTypespec:
     \_RefTypespec: (work@dut5.shifted), line:96:4, endln:96:8
       |vpiParent:
-      \_LogicNet: (work@dut5.shifted), line:96:23, endln:96:30
+      \_Net: (work@dut5.shifted), line:96:23, endln:96:30
       |vpiFullName:work@dut5.shifted
       |vpiActual:
       \_LogicTypespec: , line:96:4, endln:96:8
@@ -3634,7 +3634,7 @@ Design: (unnamed)
     |vpiFullName:work@dut5.shifted
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut5.GEN), line:97:8, endln:97:11
+  \_Net: (work@dut5.GEN), line:97:8, endln:97:11
     |vpiParent:
     \_Module: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
     |vpiName:GEN
@@ -3642,9 +3642,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut5
   |vpiNet:
-  \_LogicNet: (work@dut5.shifted), line:96:23, endln:96:30
+  \_Net: (work@dut5.shifted), line:96:23, endln:96:30
   |vpiNet:
-  \_LogicNet: (work@dut5.GEN), line:97:8, endln:97:11
+  \_Net: (work@dut5.GEN), line:97:8, endln:97:11
   |vpiGenStmt:
   \_GenIf: , line:97:4, endln:107:7
     |vpiParent:
@@ -3656,7 +3656,7 @@ Design: (unnamed)
       |vpiName:GEN
       |vpiFullName:work@dut5.GEN
       |vpiActual:
-      \_LogicNet: (work@dut5.GEN), line:97:8, endln:97:11
+      \_Net: (work@dut5.GEN), line:97:8, endln:97:11
     |vpiStmt:
     \_Begin: (work@dut5), line:97:13, endln:107:7
 |vpiTypedef:

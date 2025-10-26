@@ -181,7 +181,7 @@ Identifier                                             5
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
-PackedArrayNet                                         1
+Net                                                    1
 PackedArrayTypespec                                    1
 Range                                                  3
 RefObj                                                 5
@@ -191,6 +191,7 @@ StructTypespec                                         2
 TypedefTypespec                                        4
 TypespecMember                                         3
 UnionTypespec                                          1
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -319,16 +320,16 @@ Design: (unnamed)
       \_TypedefTypespec: (MicroOpOperand), line:17:3, endln:17:17
       |vpiFullName:work@PreDecodeStage.MicroOpOperand
       |vpiActual:
-      \_UnionTypespec: , line:14:9, endln:17:17
+      \_UnionTypespec: , line:14:9, endln:17:2
   |vpiTypedef:
-  \_UnionTypespec: , line:14:9, endln:17:17
+  \_UnionTypespec: , line:14:9, endln:17:2
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (intOp), line:16:27, endln:16:32
       |vpiParent:
-      \_UnionTypespec: , line:14:9, endln:17:17
+      \_UnionTypespec: , line:14:9, endln:17:2
       |vpiName:intOp
       |vpiTypespec:
       \_RefTypespec: (work@PreDecodeStage.intOp.IntMicroOpOperand), line:16:5, endln:16:22
@@ -417,7 +418,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@PreDecodeStage.OpInfo), line:22:3, endln:22:9
+    \_RefTypespec: (work@PreDecodeStage.OpInfo), line:26:1, endln:26:7
       |vpiParent:
       \_PackedArrayTypespec: , line:26:1, endln:26:18
       |vpiName:OpInfo
@@ -437,7 +438,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (MicroOpOperand), line:17:3, endln:17:17
   |vpiImportTypespec:
-  \_UnionTypespec: , line:14:9, endln:17:17
+  \_UnionTypespec: , line:14:9, endln:17:2
   |vpiImportTypespec:
   \_TypedefTypespec: (OpInfo), line:22:3, endln:22:9
   |vpiImportTypespec:
@@ -445,55 +446,55 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:26:1, endln:26:18
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+  \_Net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiTypespec:
     \_RefTypespec: (work@PreDecodeStage.microOps), line:26:1, endln:26:18
       |vpiParent:
-      \_PackedArrayNet: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+      \_Net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
       |vpiFullName:work@PreDecodeStage.microOps
       |vpiActual:
       \_PackedArrayTypespec: , line:26:1, endln:26:18
     |vpiName:microOps
     |vpiFullName:work@PreDecodeStage.microOps
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.i), line:28:21, endln:28:22
+  \_Net: (work@PreDecodeStage.i), line:28:21, endln:28:22
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:i
     |vpiFullName:work@PreDecodeStage.i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
+  \_Net: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:microOps[i]
     |vpiFullName:work@PreDecodeStage.microOps[i]
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.operand), line:28:27, endln:28:34
+  \_Net: (work@PreDecodeStage.operand), line:28:27, endln:28:34
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:operand
     |vpiFullName:work@PreDecodeStage.operand
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
+  \_Net: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:intOp
     |vpiFullName:work@PreDecodeStage.intOp
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
+  \_Net: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:aluCode
     |vpiFullName:work@PreDecodeStage.aluCode
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.o), line:28:8, endln:28:9
+  \_Net: (work@PreDecodeStage.o), line:28:8, endln:28:9
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:o
@@ -501,19 +502,19 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@PreDecodeStage
   |vpiNet:
-  \_PackedArrayNet: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+  \_Net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.i), line:28:21, endln:28:22
+  \_Net: (work@PreDecodeStage.i), line:28:21, endln:28:22
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
+  \_Net: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.operand), line:28:27, endln:28:34
+  \_Net: (work@PreDecodeStage.operand), line:28:27, endln:28:34
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
+  \_Net: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
+  \_Net: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.o), line:28:8, endln:28:9
+  \_Net: (work@PreDecodeStage.o), line:28:8, endln:28:9
   |vpiContAssign:
   \_ContAssign: , line:28:8, endln:28:48
     |vpiParent:
@@ -529,7 +530,7 @@ Design: (unnamed)
         |vpiName:microOps
         |vpiFullName:microOps[i]
         |vpiActual:
-        \_PackedArrayNet: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+        \_Net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
         |vpiIndex:
         \_RefObj: (work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.i), line:28:21, endln:28:22
           |vpiParent:
@@ -537,7 +538,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.i
           |vpiActual:
-          \_LogicNet: (work@PreDecodeStage.i), line:28:21, endln:28:22
+          \_Net: (work@PreDecodeStage.i), line:28:21, endln:28:22
       |vpiActual:
       \_BitSelect: (microOps[i][1]), line:28:21, endln:28:22
         |vpiParent:
@@ -545,7 +546,7 @@ Design: (unnamed)
         |vpiName:microOps[i]
         |vpiFullName:microOps[i][1]
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
+        \_Net: (work@PreDecodeStage.microOps[i]), line:28:21, endln:28:22
         |vpiIndex:
         \_Constant: , line:28:24, endln:28:25
           |vpiParent:
@@ -560,14 +561,14 @@ Design: (unnamed)
         \_HierPath: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:operand
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.operand), line:28:27, endln:28:34
+        \_Net: (work@PreDecodeStage.operand), line:28:27, endln:28:34
       |vpiActual:
       \_RefObj: (intOp), line:28:35, endln:28:40
         |vpiParent:
         \_HierPath: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:intOp
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
+        \_Net: (work@PreDecodeStage.intOp), line:28:35, endln:28:40
       |vpiActual:
       \_RefObj: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
         |vpiParent:
@@ -575,7 +576,7 @@ Design: (unnamed)
         |vpiName:aluCode
         |vpiFullName:work@PreDecodeStage.aluCode
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
+        \_Net: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
       |vpiName:microOps[i][1].operand.intOp.aluCode
     |vpiLhs:
     \_RefObj: (work@PreDecodeStage.o), line:28:8, endln:28:9
@@ -584,7 +585,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@PreDecodeStage.o
       |vpiActual:
-      \_LogicNet: (work@PreDecodeStage.o), line:28:8, endln:28:9
+      \_Net: (work@PreDecodeStage.o), line:28:8, endln:28:9
 |vpiTypedef:
 \_ModuleTypespec: (PreDecodeStage)
   |vpiParent:

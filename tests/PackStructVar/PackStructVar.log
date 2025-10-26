@@ -3,10 +3,11 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: No timescale set for "tlul_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: No timescale set for "flash_ctrl".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:1:1: Compile package "top_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: Compile package "tlul_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: Compile module "work@flash_ctrl".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               1
 ArrayTypespec                                          1
 Constant                                              52
 Design                                                 1
@@ -17,6 +18,7 @@ IntTypespec                                           11
 LogicTypespec                                         10
 Module                                                 3
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                             12
 Package                                                2
 ParamAssign                                           11
@@ -29,6 +31,7 @@ StructTypespec                                         1
 SysFuncCall                                            6
 TypedefTypespec                                        2
 TypespecMember                                        10
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -927,21 +930,21 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:44:2, endln:44:36
   |vpiImportTypespec:
-  \_ArrayNet: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
+  \_Net: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
     |vpiParent:
     \_Module: work@flash_ctrl (work@flash_ctrl), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:41:1, endln:47:10
     |vpiTypespec:
     \_RefTypespec: (work@flash_ctrl.tl_fifo_h2d), line:44:2, endln:44:20
       |vpiParent:
-      \_ArrayNet: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
+      \_Net: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
       |vpiFullName:work@flash_ctrl.tl_fifo_h2d
       |vpiActual:
       \_ArrayTypespec: , line:44:2, endln:44:36
     |vpiName:tl_fifo_h2d
     |vpiFullName:work@flash_ctrl.tl_fifo_h2d
   |vpiDefName:work@flash_ctrl
-  |vpiArrayNet:
-  \_ArrayNet: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
+  |vpiNet:
+  \_Net: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:32
 |vpiTypedef:
 \_ModuleTypespec: (flash_ctrl)
   |vpiParent:

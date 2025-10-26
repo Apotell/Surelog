@@ -7,6 +7,10 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsOp/dut.sv:75:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsOp/dut.sv:104:1: No timescale set for "dmi_jtag".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:1:1: Compile package "top_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:22:1: Compile package "tlul_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:48:1: Compile package "hmac_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsOp/dut.sv:65:1: Compile package "flash_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsOp/dut.sv:104:1: Compile module "work@dmi_jtag".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsOp/dut.sv:75:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
@@ -25,13 +29,12 @@ Identifier                                            48
 IfStmt                                                 2
 ImportTypespec                                         1
 IntTypespec                                           10
-LogicNet                                               4
 LogicTypespec                                         23
 Module                                                 5
 ModuleTypespec                                         2
+Net                                                    7
 Operation                                             38
 Package                                                4
-PackedArrayNet                                         1
 PackedArrayTypespec                                    2
 ParamAssign                                           27
 Parameter                                             27
@@ -41,11 +44,11 @@ Range                                                 19
 RefObj                                                62
 RefTypespec                                           69
 SourceFile                                             1
-StructNet                                              2
 StructTypespec                                         5
 SysFuncCall                                           31
 TypedefTypespec                                        9
 TypespecMember                                        17
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsOp/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1558,13 +1561,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:112:3, endln:112:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
+  \_Net: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
     |vpiParent:
     \_Module: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
     |vpiTypespec:
     \_RefTypespec: (work@dmi_jtag.dr_d), line:112:3, endln:112:27
       |vpiParent:
-      \_LogicNet: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
+      \_Net: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
       |vpiFullName:work@dmi_jtag.dr_d
       |vpiActual:
       \_LogicTypespec: , line:112:3, endln:112:8
@@ -1572,13 +1575,13 @@ Design: (unnamed)
     |vpiFullName:work@dmi_jtag.dr_d
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+  \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
     |vpiParent:
     \_Module: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
     |vpiTypespec:
     \_RefTypespec: (work@dmi_jtag.dr_q), line:112:3, endln:112:27
       |vpiParent:
-      \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+      \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
       |vpiFullName:work@dmi_jtag.dr_q
       |vpiActual:
       \_LogicTypespec: , line:112:3, endln:112:8
@@ -1586,13 +1589,13 @@ Design: (unnamed)
     |vpiFullName:work@dmi_jtag.dr_q
     |vpiNetType:36
   |vpiImportTypespec:
-  \_StructNet: (work@dmi_jtag.dmi), line:114:10, endln:114:13
+  \_Net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
     |vpiParent:
     \_Module: work@dmi_jtag (work@dmi_jtag), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:104:1, endln:127:21
     |vpiTypespec:
     \_RefTypespec: (work@dmi_jtag.dmi.dmi_t), line:114:3, endln:114:8
       |vpiParent:
-      \_StructNet: (work@dmi_jtag.dmi), line:114:10, endln:114:13
+      \_Net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
       |vpiName:dmi_t
       |vpiFullName:work@dmi_jtag.dmi.dmi_t
       |vpiActual:
@@ -1601,11 +1604,11 @@ Design: (unnamed)
     |vpiFullName:work@dmi_jtag.dmi
   |vpiDefName:work@dmi_jtag
   |vpiNet:
-  \_LogicNet: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
+  \_Net: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
   |vpiNet:
-  \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+  \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
   |vpiNet:
-  \_StructNet: (work@dmi_jtag.dmi), line:114:10, endln:114:13
+  \_Net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
   |vpiProcess:
   \_Always: , line:117:3, endln:125:6
     |vpiParent:
@@ -1621,7 +1624,7 @@ Design: (unnamed)
         |vpiName:p_shift
       |vpiFullName:work@dmi_jtag.p_shift
       |vpiImportTypespec:
-      \_LogicNet: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
+      \_Net: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
         |vpiParent:
         \_Begin: (work@dmi_jtag.p_shift), line:117:15, endln:125:6
         |vpiName:shift_dr
@@ -1638,14 +1641,14 @@ Design: (unnamed)
           |vpiName:shift_dr
           |vpiFullName:work@dmi_jtag.p_shift.shift_dr
           |vpiActual:
-          \_LogicNet: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
+          \_Net: (work@dmi_jtag.p_shift.shift_dr), line:119:9, endln:119:17
         |vpiStmt:
         \_Begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
           |vpiParent:
           \_IfStmt: , line:119:5, endln:123:8
           |vpiFullName:work@dmi_jtag.p_shift
           |vpiImportTypespec:
-          \_LogicNet: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
+          \_Net: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
             |vpiParent:
             \_Begin: (work@dmi_jtag.p_shift), line:119:19, endln:123:8
             |vpiName:dmi_access
@@ -1662,14 +1665,14 @@ Design: (unnamed)
               |vpiName:dmi_access
               |vpiFullName:work@dmi_jtag.p_shift.dmi_access
               |vpiActual:
-              \_LogicNet: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
+              \_Net: (work@dmi_jtag.p_shift.dmi_access), line:120:11, endln:120:21
             |vpiStmt:
             \_Begin: (work@dmi_jtag.p_shift), line:120:23, endln:122:10
               |vpiParent:
               \_IfStmt: , line:120:7, endln:122:10
               |vpiFullName:work@dmi_jtag.p_shift
               |vpiImportTypespec:
-              \_LogicNet: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
+              \_Net: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
                 |vpiParent:
                 \_Begin: (work@dmi_jtag.p_shift), line:120:23, endln:122:10
                 |vpiName:dmi_tdi
@@ -1693,7 +1696,7 @@ Design: (unnamed)
                     |vpiName:dmi_tdi
                     |vpiFullName:work@dmi_jtag.p_shift.dmi_tdi
                     |vpiActual:
-                    \_LogicNet: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
+                    \_Net: (work@dmi_jtag.p_shift.dmi_tdi), line:121:17, endln:121:24
                   |vpiOperand:
                   \_PartSelect: dr_q (work@dmi_jtag.p_shift.dr_q), line:121:26, endln:121:47
                     |vpiParent:
@@ -1702,7 +1705,7 @@ Design: (unnamed)
                     |vpiFullName:work@dmi_jtag.p_shift.dr_q
                     |vpiDefName:dr_q
                     |vpiActual:
-                    \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+                    \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
                     |vpiConstantSelect:1
                     |vpiLeftRange:
                     \_Operation: , line:121:31, endln:121:44
@@ -1720,7 +1723,7 @@ Design: (unnamed)
                           |vpiName:dr_q
                           |vpiFullName:work@dmi_jtag.p_shift.dr_q.dr_q
                           |vpiActual:
-                          \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+                          \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
                         |vpiName:
                         \_Identifier: ($bits)
                           |vpiParent:
@@ -1749,7 +1752,7 @@ Design: (unnamed)
                   |vpiName:dr_d
                   |vpiFullName:work@dmi_jtag.p_shift.dr_d
                   |vpiActual:
-                  \_LogicNet: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
+                  \_Net: (work@dmi_jtag.dr_d), line:112:28, endln:112:32
     |vpiAlwaysType:2
   |vpiContAssign:
   \_ContAssign: , line:115:10, endln:115:37
@@ -1767,7 +1770,7 @@ Design: (unnamed)
         |vpiName:dr_q
         |vpiFullName:work@dmi_jtag.dr_q
         |vpiActual:
-        \_LogicNet: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
+        \_Net: (work@dmi_jtag.dr_q), line:112:34, endln:112:38
     |vpiLhs:
     \_RefObj: (work@dmi_jtag.dmi), line:115:10, endln:115:13
       |vpiParent:
@@ -1775,7 +1778,7 @@ Design: (unnamed)
       |vpiName:dmi
       |vpiFullName:work@dmi_jtag.dmi
       |vpiActual:
-      \_StructNet: (work@dmi_jtag.dmi), line:114:10, endln:114:13
+      \_Net: (work@dmi_jtag.dmi), line:114:10, endln:114:13
   |vpiEndLabel:dmi_jtag
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
@@ -2243,7 +2246,7 @@ Design: (unnamed)
               \_HierPath: (tl_h_i.a_source), line:88:16, endln:88:31
               |vpiName:tl_h_i
               |vpiActual:
-              \_StructNet: (work@dut.tl_h_i), line:75:39, endln:75:45
+              \_Net: (work@dut.tl_h_i), line:75:39, endln:75:45
             |vpiActual:
             \_RefObj: (work@dut.a_source), line:88:23, endln:88:31
               |vpiParent:
@@ -2251,7 +2254,7 @@ Design: (unnamed)
               |vpiName:a_source
               |vpiFullName:work@dut.a_source
               |vpiActual:
-              \_LogicNet: (work@dut.a_source), line:88:23, endln:88:31
+              \_Net: (work@dut.a_source), line:88:23, endln:88:31
             |vpiName:tl_h_i.a_source
           |vpiName:
           \_Identifier: ($bits)
@@ -2301,7 +2304,7 @@ Design: (unnamed)
               \_HierPath: (tl_h_i.a_size), line:89:16, endln:89:29
               |vpiName:tl_h_i
               |vpiActual:
-              \_StructNet: (work@dut.tl_h_i), line:75:39, endln:75:45
+              \_Net: (work@dut.tl_h_i), line:75:39, endln:75:45
             |vpiActual:
             \_RefObj: (work@dut.a_size), line:89:23, endln:89:29
               |vpiParent:
@@ -2309,7 +2312,7 @@ Design: (unnamed)
               |vpiName:a_size
               |vpiFullName:work@dut.a_size
               |vpiActual:
-              \_LogicNet: (work@dut.a_size), line:89:23, endln:89:29
+              \_Net: (work@dut.a_size), line:89:23, endln:89:29
             |vpiName:tl_h_i.a_size
           |vpiName:
           \_Identifier: ($bits)
@@ -2353,13 +2356,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (MyBits), line:97:32, endln:97:38
   |vpiImportTypespec:
-  \_StructNet: (work@dut.tl_h_i), line:75:39, endln:75:45
+  \_Net: (work@dut.tl_h_i), line:75:39, endln:75:45
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.tl_h_i.tlul_pkg::tl_h2d_t), line:75:20, endln:75:38
       |vpiParent:
-      \_StructNet: (work@dut.tl_h_i), line:75:39, endln:75:45
+      \_Net: (work@dut.tl_h_i), line:75:39, endln:75:45
       |vpiName:tlul_pkg::tl_h2d_t
       |vpiFullName:work@dut.tl_h_i.tlul_pkg::tl_h2d_t
       |vpiActual:
@@ -2369,13 +2372,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:88:3, endln:88:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.err_source), line:88:38, endln:88:48
+  \_Net: (work@dut.err_source), line:88:38, endln:88:48
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.err_source), line:88:3, endln:88:37
       |vpiParent:
-      \_LogicNet: (work@dut.err_source), line:88:38, endln:88:48
+      \_Net: (work@dut.err_source), line:88:38, endln:88:48
       |vpiFullName:work@dut.err_source
       |vpiActual:
       \_LogicTypespec: , line:88:3, endln:88:8
@@ -2385,13 +2388,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:89:3, endln:89:8
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.err_size), line:89:38, endln:89:46
+  \_Net: (work@dut.err_size), line:89:38, endln:89:46
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.err_size), line:89:3, endln:89:35
       |vpiParent:
-      \_LogicNet: (work@dut.err_size), line:89:38, endln:89:46
+      \_Net: (work@dut.err_size), line:89:38, endln:89:46
       |vpiFullName:work@dut.err_size
       |vpiActual:
       \_LogicTypespec: , line:89:3, endln:89:8
@@ -2399,13 +2402,13 @@ Design: (unnamed)
     |vpiFullName:work@dut.err_size
     |vpiNetType:36
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.b), line:98:10, endln:98:11
+  \_Net: (work@dut.b), line:98:10, endln:98:11
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.b.MyBits), line:98:3, endln:98:9
       |vpiParent:
-      \_PackedArrayNet: (work@dut.b), line:98:10, endln:98:11
+      \_Net: (work@dut.b), line:98:10, endln:98:11
       |vpiName:MyBits
       |vpiFullName:work@dut.b.MyBits
       |vpiActual:
@@ -2413,14 +2416,14 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@dut.b
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.a_source), line:88:23, endln:88:31
+  \_Net: (work@dut.a_source), line:88:23, endln:88:31
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiName:a_source
     |vpiFullName:work@dut.a_source
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.a_size), line:89:23, endln:89:29
+  \_Net: (work@dut.a_size), line:89:23, endln:89:29
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsOp/dut.sv, line:75:1, endln:101:10
     |vpiName:a_size
@@ -2428,17 +2431,17 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
-  \_StructNet: (work@dut.tl_h_i), line:75:39, endln:75:45
+  \_Net: (work@dut.tl_h_i), line:75:39, endln:75:45
   |vpiNet:
-  \_LogicNet: (work@dut.err_source), line:88:38, endln:88:48
+  \_Net: (work@dut.err_source), line:88:38, endln:88:48
   |vpiNet:
-  \_LogicNet: (work@dut.err_size), line:89:38, endln:89:46
+  \_Net: (work@dut.err_size), line:89:38, endln:89:46
   |vpiNet:
-  \_PackedArrayNet: (work@dut.b), line:98:10, endln:98:11
+  \_Net: (work@dut.b), line:98:10, endln:98:11
   |vpiNet:
-  \_LogicNet: (work@dut.a_source), line:88:23, endln:88:31
+  \_Net: (work@dut.a_source), line:88:23, endln:88:31
   |vpiNet:
-  \_LogicNet: (work@dut.a_size), line:89:23, endln:89:29
+  \_Net: (work@dut.a_size), line:89:23, endln:89:29
   |vpiPort:
   \_Port: (tl_h_i), line:75:39, endln:75:45
     |vpiParent:

@@ -142,6 +142,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitPython/top.v:13:1: No timescale set for "bottom".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitPython/top.v:16:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/UnitPython/top.v:2:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitPython/top.v:13:1: Compile module "work@bottom".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitPython/top.v:16:1: Compile module "work@top".
 [INF:CP0302] Compile class "builtin::mailbox".
@@ -156,28 +157,26 @@ ClassTypespec                                         10
 Constant                                               6
 Design                                                 1
 EnumConst                                             13
-EnumNet                                                2
 EnumTypespec                                           3
 Function                                               9
 IODecl                                                11
 Identifier                                            36
 ImportTypespec                                         1
 IntTypespec                                            9
-LogicNet                                               2
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    5
 Package                                                2
 RefModule                                              1
 RefTypespec                                           20
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        3
-UnsupportedTypespec                                    2
-Variable                                               1
+UnsupportedTypespec                                    6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitPython/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/UnitPython/top.v:25:1: Unsupported Typespec: id:43, type:RefTypespec, name:Environment.
+[ERR:IG0811] ${SURELOG_DIR}/tests/UnitPython/top.v:25:1: Unsupported Typespec: id:45, type:RefTypespec, name:Environment.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1101,22 +1100,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiName:work@top
-  |vpiVariable:
-  \_Variable: (work@top.cfg), line:27:16, endln:27:19
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.cfg.work@Configuration2), line:27:1, endln:27:15
-      |vpiParent:
-      \_Variable: (work@top.cfg), line:27:16, endln:27:19
-      |vpiName:work@Configuration2
-      |vpiFullName:work@top.cfg.work@Configuration2
-      |vpiActual:
-      \_ClassTypespec: (work@Configuration2), line:27:1, endln:27:15
-    |vpiName:cfg
-    |vpiFullName:work@top.cfg
-    |vpiRandType:1
-    |vpiVisibility:1
   |vpiTypedef:
   \_ImportTypespec: (pkg), line:17:9, endln:17:15
     |vpiParent:
@@ -1198,13 +1181,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiName:Environment
-  |vpiTypedef:
-  \_ClassTypespec: (work@Configuration2), line:27:1, endln:27:15
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
-    |vpiName:work@Configuration2
-    |vpiClassDefn:
-    \_ClassDefn: (work@Configuration2), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:10:1, endln:11:9
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:17:9, endln:17:15
   |vpiImportTypespec:
@@ -1212,13 +1188,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (fsm_t), line:18:38, endln:18:43
   |vpiImportTypespec:
-  \_EnumNet: (work@top.state), line:20:7, endln:20:12
+  \_Net: (work@top.state), line:20:7, endln:20:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.state.fsm_t), line:20:1, endln:20:6
       |vpiParent:
-      \_EnumNet: (work@top.state), line:20:7, endln:20:12
+      \_Net: (work@top.state), line:20:7, endln:20:12
       |vpiName:fsm_t
       |vpiFullName:work@top.state.fsm_t
       |vpiActual:
@@ -1226,15 +1202,15 @@ Design: (unnamed)
     |vpiName:state
     |vpiFullName:work@top.state
   |vpiImportTypespec:
-  \_EnumNet: (work@top.state2), line:21:11, endln:21:17
+  \_Net: (work@top.state2), line:21:11, endln:21:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.state2.pkg::fsm_t_pkg), line:21:1, endln:21:10
+    \_RefTypespec: (work@top.state2.fsm_t_pkg), line:21:1, endln:21:10
       |vpiParent:
-      \_EnumNet: (work@top.state2), line:21:11, endln:21:17
-      |vpiName:pkg::fsm_t_pkg
-      |vpiFullName:work@top.state2.pkg::fsm_t_pkg
+      \_Net: (work@top.state2), line:21:11, endln:21:17
+      |vpiName:fsm_t_pkg
+      |vpiFullName:work@top.state2.fsm_t_pkg
       |vpiActual:
       \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
     |vpiName:state2
@@ -1242,13 +1218,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (Environment), line:25:1, endln:25:12
   |vpiImportTypespec:
-  \_LogicNet: (work@top.env), line:25:13, endln:25:16
+  \_Net: (work@top.env), line:25:13, endln:25:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.env.Environment), line:25:1, endln:25:12
       |vpiParent:
-      \_LogicNet: (work@top.env), line:25:13, endln:25:16
+      \_Net: (work@top.env), line:25:13, endln:25:16
       |vpiName:Environment
       |vpiFullName:work@top.env.Environment
       |vpiActual:
@@ -1256,13 +1232,13 @@ Design: (unnamed)
     |vpiName:env
     |vpiFullName:work@top.env
   |vpiImportTypespec:
-  \_LogicNet: (work@top.cfg), line:26:16, endln:26:19
+  \_Net: (work@top.cfg), line:26:16, endln:26:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
     |vpiTypespec:
     \_RefTypespec: (work@top.cfg.Configuration1), line:26:1, endln:26:15
       |vpiParent:
-      \_LogicNet: (work@top.cfg), line:26:16, endln:26:19
+      \_Net: (work@top.cfg), line:26:16, endln:26:19
       |vpiName:Configuration1
       |vpiFullName:work@top.cfg.Configuration1
       |vpiActual:
@@ -1270,18 +1246,30 @@ Design: (unnamed)
     |vpiName:cfg
     |vpiFullName:work@top.cfg
   |vpiImportTypespec:
-  \_ClassTypespec: (work@Configuration2), line:27:1, endln:27:15
-  |vpiImportTypespec:
-  \_Variable: (work@top.cfg), line:27:16, endln:27:19
+  \_Net: (work@top.cfg), line:27:16, endln:27:19
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.cfg.Configuration2), line:27:1, endln:27:15
+      |vpiParent:
+      \_Net: (work@top.cfg), line:27:16, endln:27:19
+      |vpiName:Configuration2
+      |vpiFullName:work@top.cfg.Configuration2
+      |vpiActual:
+      \_ClassTypespec: (work@Configuration2)
+    |vpiName:cfg
+    |vpiFullName:work@top.cfg
   |vpiDefName:work@top
   |vpiNet:
-  \_EnumNet: (work@top.state), line:20:7, endln:20:12
+  \_Net: (work@top.state), line:20:7, endln:20:12
   |vpiNet:
-  \_EnumNet: (work@top.state2), line:21:11, endln:21:17
+  \_Net: (work@top.state2), line:21:11, endln:21:17
   |vpiNet:
-  \_LogicNet: (work@top.env), line:25:13, endln:25:16
+  \_Net: (work@top.env), line:25:13, endln:25:16
   |vpiNet:
-  \_LogicNet: (work@top.cfg), line:26:16, endln:26:19
+  \_Net: (work@top.cfg), line:26:16, endln:26:19
+  |vpiNet:
+  \_Net: (work@top.cfg), line:27:16, endln:27:19
   |vpiRefModule:
   \_RefModule: work@bottom (bot), line:23:1, endln:23:7
     |vpiParent:
@@ -1299,6 +1287,13 @@ Design: (unnamed)
   |vpiName:top
   |vpiModule:
   \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:16:1, endln:28:10
+|vpiTypedef:
+\_ClassTypespec: (work@Configuration2)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@Configuration2
+  |vpiClassDefn:
+  \_ClassDefn: (work@Configuration2), file:${SURELOG_DIR}/tests/UnitPython/top.v, line:10:1, endln:11:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

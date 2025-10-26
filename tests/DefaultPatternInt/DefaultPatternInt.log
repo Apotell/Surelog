@@ -374,6 +374,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:8:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:32:1: No timescale set for "main".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:1:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:32:1: Compile module "work@main".
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:8:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -382,7 +383,7 @@ ArrayTypespec                                          3
 Assignment                                             2
 Begin                                                  4
 BitSelect                                              5
-Constant                                              20
+Constant                                              14
 Design                                                 1
 ForStmt                                                1
 FuncCall                                               1
@@ -393,24 +394,22 @@ ImportTypespec                                         1
 IntTypespec                                            5
 Module                                                 3
 ModuleTypespec                                         2
-Operation                                              8
+Operation                                             11
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
-Range                                                  6
+Range                                                  3
 RefModule                                              1
-RefObj                                                12
-RefTypespec                                           20
+RefObj                                                 8
+RefTypespec                                           14
 SourceFile                                             1
 StringTypespec                                         3
 TaggedPattern                                          3
 TypedefTypespec                                        1
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    1
 Variable                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternInt/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:17:30: Unsupported Typespec: id:101, type:RefTypespec, name:CNT.
-[ERR:IG0811] ${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv:10:40: Unsupported Typespec: id:68, type:RefTypespec, name:CNT.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -506,45 +505,41 @@ Design: (unnamed)
   \_IntTypespec: , line:2:12, endln:2:24
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
-    |vpiExpr:
-    \_RefObj: (pack::CNT), line:4:27, endln:4:30
-      |vpiParent:
-      \_IntTypespec: , line:2:12, endln:2:24
-      |vpiName:CNT
-      |vpiFullName:pack::CNT
-      |vpiActual:
-      \_Parameter: (pack::CNT), line:2:25, endln:2:32
-  |vpiTypedef:
-  \_IntTypespec: , line:4:12, endln:4:24
-    |vpiParent:
-    \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiTypedef:
   \_ArrayTypespec: , line:4:12, endln:4:47
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (pack), line:4:26, endln:4:31
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:4:26, endln:4:31
       |vpiParent:
       \_ArrayTypespec: , line:4:12, endln:4:47
-      |vpiFullName:pack
-      |vpiActual:
-      \_IntTypespec: , line:2:12, endln:2:24
+      |vpiRightRange:
+      \_Operation: , line:4:27, endln:4:30
+        |vpiParent:
+        \_Range: , line:4:26, endln:4:31
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (pack::CNT), line:4:27, endln:4:30
+          |vpiParent:
+          \_Operation: , line:4:27, endln:4:30
+          |vpiName:CNT
+          |vpiFullName:pack::CNT
+          |vpiActual:
+          \_Parameter: (pack::CNT), line:2:25, endln:2:32
     |vpiElemTypespec:
     \_RefTypespec: (pack), line:4:12, endln:4:24
       |vpiParent:
       \_ArrayTypespec: , line:4:12, endln:4:47
       |vpiFullName:pack
       |vpiActual:
-      \_IntTypespec: , line:4:12, endln:4:24
+      \_IntTypespec: , line:2:12, endln:2:24
   |vpiTypedef:
   \_StringTypespec: , line:4:36, endln:4:43
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:12, endln:2:24
-  |vpiImportTypespec:
-  \_IntTypespec: , line:4:12, endln:4:24
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4:12, endln:4:47
   |vpiImportTypespec:
@@ -794,23 +789,27 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
   |vpiTypedef:
-  \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
-    |vpiName:CNT
-  |vpiTypedef:
   \_ArrayTypespec: , line:10:9, endln:10:45
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (work@top.CNT), line:10:40, endln:10:45
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:10:40, endln:10:45
       |vpiParent:
       \_ArrayTypespec: , line:10:9, endln:10:45
-      |vpiName:CNT
-      |vpiFullName:work@top.CNT
-      |vpiActual:
-      \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
+      |vpiRightRange:
+      \_Operation: , line:10:41, endln:10:44
+        |vpiParent:
+        \_Range: , line:10:40, endln:10:45
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@top.CNT), line:10:41, endln:10:44
+          |vpiParent:
+          \_Operation: , line:10:41, endln:10:44
+          |vpiName:CNT
+          |vpiFullName:work@top.CNT
+          |vpiActual:
+          \_Parameter: (pack::CNT), line:2:25, endln:2:32
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:10:9, endln:10:21
       |vpiParent:
@@ -835,23 +834,27 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:10:9, endln:10:45
   |vpiTypedef:
-  \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
-    |vpiName:CNT
-  |vpiTypedef:
   \_ArrayTypespec: , line:17:12, endln:17:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (work@top.CNT), line:17:30, endln:17:35
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:17:30, endln:17:35
       |vpiParent:
       \_ArrayTypespec: , line:17:12, endln:17:52
-      |vpiName:CNT
-      |vpiFullName:work@top.CNT
-      |vpiActual:
-      \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
+      |vpiRightRange:
+      \_Operation: , line:17:31, endln:17:34
+        |vpiParent:
+        \_Range: , line:17:30, endln:17:35
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@top.CNT), line:17:31, endln:17:34
+          |vpiParent:
+          \_Operation: , line:17:31, endln:17:34
+          |vpiName:CNT
+          |vpiFullName:work@top.CNT
+          |vpiActual:
+          \_Parameter: (pack::CNT), line:2:25, endln:2:32
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:17:12, endln:17:24
       |vpiParent:
@@ -866,13 +869,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:10:9, endln:10:21
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (CNT), line:10:41, endln:10:44
-  |vpiImportTypespec:
   \_ArrayTypespec: , line:10:9, endln:10:45
   |vpiImportTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (CNT), line:17:31, endln:17:34
   |vpiImportTypespec:
   \_ArrayTypespec: , line:17:12, endln:17:52
   |vpiDefName:work@top
@@ -995,6 +994,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0

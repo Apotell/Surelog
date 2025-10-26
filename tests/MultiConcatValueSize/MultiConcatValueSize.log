@@ -492,6 +492,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:41:1: No timescale set for "sub_top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:52:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:1:1: Compile package "prim_pad_wrapper_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:8:1: Compile package "pinmux_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:22:1: Compile module "work@prim_generic_pad_attr".
 [INF:CP0303] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:30:1: Compile module "work@prim_pad_attr".
 [INF:CP0303] ${SURELOG_DIR}/tests/MultiConcatValueSize/dut.sv:41:1: Compile module "work@sub_top".
@@ -537,6 +539,7 @@ TaggedPattern                                          4
 Task                                                   9
 TypedefTypespec                                        3
 TypespecMember                                         1
+UnsupportedTypespec                                    6
 Variable                                               5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiConcatValueSize/slpp_all/surelog.uhdm ...
@@ -1624,11 +1627,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e), line:5:6, endln:5:16
+    \_RefTypespec: (pinmux_pkg::pad_type_e), line:14:7, endln:14:17
       |vpiParent:
       \_PackedArrayTypespec: , line:14:7, endln:14:32
-      |vpiName:prim_pad_wrapper_pkg::pad_type_e
-      |vpiFullName:pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e
+      |vpiName:pad_type_e
+      |vpiFullName:pinmux_pkg::pad_type_e
       |vpiActual:
       \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:5:6, endln:5:16
   |vpiTypedef:
@@ -2054,19 +2057,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@sub_top.k), line:45:15, endln:45:16
     |vpiImportTypespec:
-    \_LogicNet: (work@sub_top.k), line:45:22, endln:45:23
+    \_Net: (work@sub_top.k), line:45:22, endln:45:23
       |vpiParent:
       \_GenFor: (work@sub_top), line:45:3, endln:49:6
       |vpiName:k
       |vpiFullName:work@sub_top.k
       |vpiNetType:1
     |vpiImportTypespec:
-    \_LogicNet: (work@sub_top.k), line:45:36, endln:45:37
+    \_Net: (work@sub_top.k), line:45:36, endln:45:37
       |vpiParent:
       \_GenFor: (work@sub_top), line:45:3, endln:49:6
       |vpiName:k
       |vpiFullName:work@sub_top.k
       |vpiNetType:1
+    |vpiNet:
+    \_Net: (work@sub_top.k), line:45:22, endln:45:23
+    |vpiNet:
+    \_Net: (work@sub_top.k), line:45:36, endln:45:37
     |vpiForInitStmt:
     \_Assignment: , line:45:8, endln:45:20
       |vpiParent:
@@ -2093,7 +2100,7 @@ Design: (unnamed)
         |vpiName:k
         |vpiFullName:work@sub_top.k
         |vpiActual:
-        \_LogicNet: (work@sub_top.k), line:45:22, endln:45:23
+        \_Net: (work@sub_top.k), line:45:22, endln:45:23
       |vpiOperand:
       \_RefObj: (work@sub_top.NDioPads), line:45:26, endln:45:34
         |vpiParent:
@@ -2114,7 +2121,7 @@ Design: (unnamed)
         |vpiName:k
         |vpiFullName:work@sub_top.k
         |vpiActual:
-        \_LogicNet: (work@sub_top.k), line:45:36, endln:45:37
+        \_Net: (work@sub_top.k), line:45:36, endln:45:37
     |vpiStmt:
     \_Begin: (work@sub_top.gen_dio_attr), line:45:41, endln:49:6
   |vpiTypedef:

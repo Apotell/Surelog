@@ -1381,10 +1381,10 @@ GenIf                                                  1
 Identifier                                            23
 Initial                                                1
 IntTypespec                                           12
-LogicNet                                               3
 LogicTypespec                                         27
 Module                                                 3
 ModuleTypespec                                         2
+Net                                                    3
 Operation                                             41
 ParamAssign                                            8
 Parameter                                              8
@@ -1399,6 +1399,7 @@ StructTypespec                                         7
 SysFuncCall                                           11
 TypedefTypespec                                       10
 TypespecMember                                        25
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -2456,6 +2457,11 @@ Design: (unnamed)
       |vpiObject:
       \_RefTypespec: (work@top.fill_index), line:79:5, endln:79:45
       |vpiObject:
+      \_UnsupportedTypespec: (bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
+        |vpiParent:
+        \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
+        |vpiName:bp_cache_data_mem_opcode_e
+      |vpiObject:
       \_TypespecMember: (opcode), line:80:53, endln:80:59
       |vpiObject:
       \_RefTypespec: (work@top.opcode.bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
@@ -2946,7 +2952,7 @@ Design: (unnamed)
                 |vpiName:bp_coh_states_e
                 |vpiFullName:work@top.bp_coh_states_e
                 |vpiActual:
-                \_LogicNet: (work@top.bp_coh_states_e), line:145:14, endln:145:29
+                \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
               |vpiName:
               \_Identifier: ($bits)
                 |vpiParent:
@@ -3683,7 +3689,7 @@ Design: (unnamed)
             |vpiName:pc
             |vpiFullName:work@top.pc
             |vpiActual:
-            \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+            \_Net: (work@top.pc), line:144:15, endln:144:17
           |vpiName:
           \_Identifier: ($bits)
             |vpiParent:
@@ -3741,7 +3747,7 @@ Design: (unnamed)
               |vpiName:pc
               |vpiFullName:work@top.pc
               |vpiActual:
-              \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+              \_Net: (work@top.pc), line:144:15, endln:144:17
             |vpiName:
             \_Identifier: ($bits)
               |vpiParent:
@@ -4076,6 +4082,8 @@ Design: (unnamed)
   |vpiTypedef:
   \_LogicTypespec: , line:79:5, endln:79:10
   |vpiTypedef:
+  \_UnsupportedTypespec: (bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
+  |vpiTypedef:
   \_TypedefTypespec: (bp_icache_tag_mem_pkt_s), line:95:6, endln:95:29
   |vpiTypedef:
   \_StructTypespec: , line:88:11, endln:95:4
@@ -4225,6 +4233,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:79:5, endln:79:10
   |vpiImportTypespec:
+  \_UnsupportedTypespec: (bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
+  |vpiImportTypespec:
   \_TypedefTypespec: (bp_icache_tag_mem_pkt_s), line:95:6, endln:95:29
   |vpiImportTypespec:
   \_StructTypespec: , line:88:11, endln:95:4
@@ -4263,13 +4273,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:144:3, endln:144:7
   |vpiImportTypespec:
-  \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+  \_Net: (work@top.pc), line:144:15, endln:144:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.pc), line:144:3, endln:144:7
       |vpiParent:
-      \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+      \_Net: (work@top.pc), line:144:15, endln:144:17
       |vpiFullName:work@top.pc
       |vpiActual:
       \_LogicTypespec: , line:144:3, endln:144:7
@@ -4277,13 +4287,13 @@ Design: (unnamed)
     |vpiFullName:work@top.pc
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.bp_coh_states_e), line:145:14, endln:145:29
+  \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.bp_coh_states_e), line:145:3, endln:145:13
       |vpiParent:
-      \_LogicNet: (work@top.bp_coh_states_e), line:145:14, endln:145:29
+      \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
       |vpiFullName:work@top.bp_coh_states_e
       |vpiActual:
       \_LogicTypespec: , line:145:3, endln:145:6
@@ -4293,13 +4303,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:154:1, endln:154:5
   |vpiImportTypespec:
-  \_LogicNet: (work@top.pc_sext_li), line:154:27, endln:154:37
+  \_Net: (work@top.pc_sext_li), line:154:27, endln:154:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
     \_RefTypespec: (work@top.pc_sext_li), line:154:1, endln:154:5
       |vpiParent:
-      \_LogicNet: (work@top.pc_sext_li), line:154:27, endln:154:37
+      \_Net: (work@top.pc_sext_li), line:154:27, endln:154:37
       |vpiFullName:work@top.pc_sext_li
       |vpiActual:
       \_LogicTypespec: , line:154:1, endln:154:5
@@ -4308,11 +4318,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+  \_Net: (work@top.pc), line:144:15, endln:144:17
   |vpiNet:
-  \_LogicNet: (work@top.bp_coh_states_e), line:145:14, endln:145:29
+  \_Net: (work@top.bp_coh_states_e), line:145:14, endln:145:29
   |vpiNet:
-  \_LogicNet: (work@top.pc_sext_li), line:154:27, endln:154:37
+  \_Net: (work@top.pc_sext_li), line:154:27, endln:154:37
   |vpiProcess:
   \_Initial: , line:162:3, endln:162:37
     |vpiParent:
@@ -4361,7 +4371,7 @@ Design: (unnamed)
       |vpiName:pc
       |vpiFullName:work@top.pc
       |vpiActual:
-      \_LogicNet: (work@top.pc), line:144:15, endln:144:17
+      \_Net: (work@top.pc), line:144:15, endln:144:17
   |vpiGenStmt:
   \_GenIf: , line:158:1, endln:160:4
     |vpiParent:

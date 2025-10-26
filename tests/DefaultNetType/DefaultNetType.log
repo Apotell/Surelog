@@ -398,10 +398,10 @@ Function                                               1
 IODecl                                                 1
 Identifier                                             7
 IfElse                                                 1
-LogicNet                                               5
 LogicTypespec                                          4
 Module                                                 5
 ModuleTypespec                                         4
+Net                                                    5
 Operation                                              1
 Port                                                   2
 Range                                                  2
@@ -449,14 +449,14 @@ Design: (unnamed)
     \_Module: work@M1 (work@M1), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:11:1, endln:12:10
     |vpiName:work@M1
   |vpiImportTypespec:
-  \_LogicNet: (work@M1.b), line:11:17, endln:11:18
+  \_Net: (work@M1.b), line:11:17, endln:11:18
     |vpiParent:
     \_Module: work@M1 (work@M1), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:11:1, endln:12:10
     |vpiName:b
     |vpiFullName:work@M1.b
   |vpiDefName:work@M1
   |vpiNet:
-  \_LogicNet: (work@M1.b), line:11:17, endln:11:18
+  \_Net: (work@M1.b), line:11:17, endln:11:18
   |vpiPort:
   \_Port: (b), line:11:17, endln:11:18
     |vpiParent:
@@ -553,13 +553,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:1, endln:15:4
   |vpiImportTypespec:
-  \_LogicNet: (work@bad1.a), line:15:5, endln:15:6
+  \_Net: (work@bad1.a), line:15:5, endln:15:6
     |vpiParent:
     \_Module: work@bad1 (work@bad1), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:14:1, endln:22:10
     |vpiTypespec:
     \_RefTypespec: (work@bad1.a), line:15:1, endln:15:4
       |vpiParent:
-      \_LogicNet: (work@bad1.a), line:15:5, endln:15:6
+      \_Net: (work@bad1.a), line:15:5, endln:15:6
       |vpiFullName:work@bad1.a
       |vpiActual:
       \_LogicTypespec: , line:15:1, endln:15:4
@@ -570,7 +570,7 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@bad1.__truncate_to_2_bits), line:18:1, endln:20:12
   |vpiNet:
-  \_LogicNet: (work@bad1.a), line:15:5, endln:15:6
+  \_Net: (work@bad1.a), line:15:5, endln:15:6
   |vpiContAssign:
   \_ContAssign: , line:16:8, endln:16:11
     |vpiParent:
@@ -582,7 +582,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@bad1.a
       |vpiActual:
-      \_LogicNet: (work@bad1.a), line:15:5, endln:15:6
+      \_Net: (work@bad1.a), line:15:5, endln:15:6
     |vpiLhs:
     \_RefObj: (work@bad1.b), line:16:8, endln:16:9
       |vpiParent:
@@ -606,22 +606,22 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@M1 (work@M1), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:11:1, endln:12:10
   |vpiImportTypespec:
-  \_LogicNet: (work@bad2.currentState), line:30:22, endln:30:34
+  \_Net: (work@bad2.currentState), line:30:22, endln:30:34
     |vpiParent:
     \_Module: work@bad2 (work@bad2), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:28:1, endln:49:10
     |vpiName:currentState
     |vpiFullName:work@bad2.currentState
   |vpiImportTypespec:
-  \_LogicNet: (work@bad2.nextState), line:30:36, endln:30:45
+  \_Net: (work@bad2.nextState), line:30:36, endln:30:45
     |vpiParent:
     \_Module: work@bad2 (work@bad2), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:28:1, endln:49:10
     |vpiName:nextState
     |vpiFullName:work@bad2.nextState
   |vpiDefName:work@bad2
   |vpiNet:
-  \_LogicNet: (work@bad2.currentState), line:30:22, endln:30:34
+  \_Net: (work@bad2.currentState), line:30:22, endln:30:34
   |vpiNet:
-  \_LogicNet: (work@bad2.nextState), line:30:36, endln:30:45
+  \_Net: (work@bad2.nextState), line:30:36, endln:30:45
   |vpiProcess:
   \_Always: , line:32:1, endln:37:4
     |vpiParent:
@@ -674,7 +674,7 @@ Design: (unnamed)
               |vpiName:currentState
               |vpiFullName:work@bad2.currentState
               |vpiActual:
-              \_LogicNet: (work@bad2.currentState), line:30:22, endln:30:34
+              \_Net: (work@bad2.currentState), line:30:22, endln:30:34
         |vpiElseStmt:
         \_Begin: (work@bad2), line:35:10, endln:37:4
           |vpiParent:
@@ -692,7 +692,7 @@ Design: (unnamed)
               |vpiName:nextState
               |vpiFullName:work@bad2.nextState
               |vpiActual:
-              \_LogicNet: (work@bad2.nextState), line:30:36, endln:30:45
+              \_Net: (work@bad2.nextState), line:30:36, endln:30:45
             |vpiLhs:
             \_RefObj: (work@bad2.currentState), line:36:5, endln:36:17
               |vpiParent:
@@ -700,7 +700,7 @@ Design: (unnamed)
               |vpiName:currentState
               |vpiFullName:work@bad2.currentState
               |vpiActual:
-              \_LogicNet: (work@bad2.currentState), line:30:22, endln:30:34
+              \_Net: (work@bad2.currentState), line:30:22, endln:30:34
     |vpiAlwaysType:3
   |vpiProcess:
   \_Always: , line:39:3, endln:45:8
@@ -846,13 +846,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:1, endln:4:4
   |vpiImportTypespec:
-  \_LogicNet: (work@ok.a), line:4:5, endln:4:6
+  \_Net: (work@ok.a), line:4:5, endln:4:6
     |vpiParent:
     \_Module: work@ok (work@ok), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:3:1, endln:7:10
     |vpiTypespec:
     \_RefTypespec: (work@ok.a), line:4:1, endln:4:4
       |vpiParent:
-      \_LogicNet: (work@ok.a), line:4:5, endln:4:6
+      \_Net: (work@ok.a), line:4:5, endln:4:6
       |vpiFullName:work@ok.a
       |vpiActual:
       \_LogicTypespec: , line:4:1, endln:4:4
@@ -860,7 +860,7 @@ Design: (unnamed)
     |vpiFullName:work@ok.a
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@ok.b), line:5:8, endln:5:9
+  \_Net: (work@ok.b), line:5:8, endln:5:9
     |vpiParent:
     \_Module: work@ok (work@ok), file:${SURELOG_DIR}/tests/DefaultNetType/dut.sv, line:3:1, endln:7:10
     |vpiName:b
@@ -868,9 +868,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@ok
   |vpiNet:
-  \_LogicNet: (work@ok.a), line:4:5, endln:4:6
+  \_Net: (work@ok.a), line:4:5, endln:4:6
   |vpiNet:
-  \_LogicNet: (work@ok.b), line:5:8, endln:5:9
+  \_Net: (work@ok.b), line:5:8, endln:5:9
   |vpiContAssign:
   \_ContAssign: , line:5:8, endln:5:11
     |vpiParent:
@@ -882,7 +882,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@ok.a
       |vpiActual:
-      \_LogicNet: (work@ok.a), line:4:5, endln:4:6
+      \_Net: (work@ok.a), line:4:5, endln:4:6
     |vpiLhs:
     \_RefObj: (work@ok.b), line:5:8, endln:5:9
       |vpiParent:
@@ -890,7 +890,7 @@ Design: (unnamed)
       |vpiName:b
       |vpiFullName:work@ok.b
       |vpiActual:
-      \_LogicNet: (work@ok.b), line:5:8, endln:5:9
+      \_Net: (work@ok.b), line:5:8, endln:5:9
 |vpiTypedef:
 \_EnumTypespec: , line:24:9, endln:24:37
   |vpiParent:

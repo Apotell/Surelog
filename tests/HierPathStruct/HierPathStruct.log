@@ -109,6 +109,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStruct/dut.sv:1:1: No timescale set for "gpio_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathStruct/dut.sv:13:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathStruct/dut.sv:1:1: Compile package "gpio_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathStruct/dut.sv:13:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -121,15 +122,16 @@ ImportTypespec                                         1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Package                                                1
 Range                                                  1
 RefObj                                                 3
 RefTypespec                                            6
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         3
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -299,28 +301,28 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (gpio_reg_pkg), line:15:8, endln:15:23
   |vpiImportTypespec:
-  \_StructNet: (work@dut.hw2reg), line:16:15, endln:16:21
+  \_Net: (work@dut.hw2reg), line:16:15, endln:16:21
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.hw2reg.gpio_reg_pkg::gpio_hw2reg_t), line:16:1, endln:16:14
+    \_RefTypespec: (work@dut.hw2reg.gpio_hw2reg_t), line:16:1, endln:16:14
       |vpiParent:
-      \_StructNet: (work@dut.hw2reg), line:16:15, endln:16:21
-      |vpiName:gpio_reg_pkg::gpio_hw2reg_t
-      |vpiFullName:work@dut.hw2reg.gpio_reg_pkg::gpio_hw2reg_t
+      \_Net: (work@dut.hw2reg), line:16:15, endln:16:21
+      |vpiName:gpio_hw2reg_t
+      |vpiFullName:work@dut.hw2reg.gpio_hw2reg_t
       |vpiActual:
       \_TypedefTypespec: (gpio_reg_pkg::gpio_hw2reg_t), line:9:5, endln:9:18
     |vpiName:hw2reg
     |vpiFullName:work@dut.hw2reg
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.data_in), line:17:15, endln:17:22
+  \_Net: (work@dut.data_in), line:17:15, endln:17:22
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
     |vpiName:data_in
     |vpiFullName:work@dut.data_in
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.de), line:17:23, endln:17:25
+  \_Net: (work@dut.de), line:17:23, endln:17:25
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
     |vpiName:de
@@ -328,11 +330,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
-  \_StructNet: (work@dut.hw2reg), line:16:15, endln:16:21
+  \_Net: (work@dut.hw2reg), line:16:15, endln:16:21
   |vpiNet:
-  \_LogicNet: (work@dut.data_in), line:17:15, endln:17:22
+  \_Net: (work@dut.data_in), line:17:15, endln:17:22
   |vpiNet:
-  \_LogicNet: (work@dut.de), line:17:23, endln:17:25
+  \_Net: (work@dut.de), line:17:23, endln:17:25
   |vpiContAssign:
   \_ContAssign: , line:17:8, endln:17:32
     |vpiParent:
@@ -355,21 +357,21 @@ Design: (unnamed)
         \_HierPath: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:hw2reg
         |vpiActual:
-        \_StructNet: (work@dut.hw2reg), line:16:15, endln:16:21
+        \_Net: (work@dut.hw2reg), line:16:15, endln:16:21
       |vpiActual:
       \_RefObj: (data_in), line:17:15, endln:17:22
         |vpiParent:
         \_HierPath: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:data_in
         |vpiActual:
-        \_LogicNet: (work@dut.data_in), line:17:15, endln:17:22
+        \_Net: (work@dut.data_in), line:17:15, endln:17:22
       |vpiActual:
       \_RefObj: (de), line:17:23, endln:17:25
         |vpiParent:
         \_HierPath: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:de
         |vpiActual:
-        \_LogicNet: (work@dut.de), line:17:23, endln:17:25
+        \_Net: (work@dut.de), line:17:23, endln:17:25
       |vpiName:hw2reg.data_in.de
 |vpiTypedef:
 \_ModuleTypespec: (dut)

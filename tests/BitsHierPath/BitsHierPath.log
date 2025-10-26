@@ -245,6 +245,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:8:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:11:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:8:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:11:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -257,6 +258,7 @@ IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Operation                                              1
 Package                                                1
 ParamAssign                                            2
@@ -267,7 +269,6 @@ RefModule                                              4
 RefObj                                                 3
 RefTypespec                                            7
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         1
 SysFuncCall                                            1
 TypedefTypespec                                        1
@@ -465,7 +466,7 @@ Design: (unnamed)
           |vpiName:in
           |vpiFullName:work@top.in
           |vpiActual:
-          \_StructNet: (work@top.in), line:11:33, endln:11:35
+          \_Net: (work@top.in), line:11:33, endln:11:35
         |vpiOperand:
         \_HierPath: (in.x), line:12:41, endln:12:45
           |vpiParent:
@@ -476,7 +477,7 @@ Design: (unnamed)
             \_HierPath: (in.x), line:12:41, endln:12:45
             |vpiName:in
             |vpiActual:
-            \_StructNet: (work@top.in), line:11:33, endln:11:35
+            \_Net: (work@top.in), line:11:33, endln:11:35
           |vpiActual:
           \_RefObj: (work@top.x), line:12:44, endln:12:45
             |vpiParent:
@@ -484,7 +485,7 @@ Design: (unnamed)
             |vpiName:x
             |vpiFullName:work@top.x
             |vpiActual:
-            \_LogicNet: (work@top.x), line:12:44, endln:12:45
+            \_Net: (work@top.x), line:12:44, endln:12:45
           |vpiName:in.x
       |vpiName:
       \_Identifier: ($bits)
@@ -508,13 +509,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:12:15, endln:12:18
   |vpiImportTypespec:
-  \_StructNet: (work@top.in), line:11:33, endln:11:35
+  \_Net: (work@top.in), line:11:33, endln:11:35
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiTypespec:
     \_RefTypespec: (work@top.in.pkg::struct_t), line:11:19, endln:11:32
       |vpiParent:
-      \_StructNet: (work@top.in), line:11:33, endln:11:35
+      \_Net: (work@top.in), line:11:33, endln:11:35
       |vpiName:pkg::struct_t
       |vpiFullName:work@top.in.pkg::struct_t
       |vpiActual:
@@ -522,7 +523,7 @@ Design: (unnamed)
     |vpiName:in
     |vpiFullName:work@top.in
   |vpiImportTypespec:
-  \_LogicNet: (work@top.x), line:12:44, endln:12:45
+  \_Net: (work@top.x), line:12:44, endln:12:45
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:x
@@ -530,9 +531,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_StructNet: (work@top.in), line:11:33, endln:11:35
+  \_Net: (work@top.in), line:11:33, endln:11:35
   |vpiNet:
-  \_LogicNet: (work@top.x), line:12:44, endln:12:45
+  \_Net: (work@top.x), line:12:44, endln:12:45
   |vpiPort:
   \_Port: (in), line:11:33, endln:11:35
     |vpiParent:

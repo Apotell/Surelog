@@ -17,22 +17,20 @@ Function                                               1
 IODecl                                                 1
 Identifier                                            10
 IntTypespec                                            4
-LogicNet                                               1
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
-RefObj                                                 1
+Net                                                    2
 RefTypespec                                           12
 SourceFile                                             1
 StringTypespec                                         1
 TypeParameter                                          4
 TypedefTypespec                                        2
-UnsupportedTypespec                                    1
-Variable                                               2
+UnsupportedTypespec                                    5
+Variable                                               1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:20:9: Unsupported Typespec: id:21, type:RefTypespec, name:uvm_config_db.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -248,28 +246,19 @@ Design: (unnamed)
       \_TypedefTypespec: (rsrc_t), line:9:28, endln:9:34
       |vpiName:rsrc_t
     |vpiTypedefAlias:
-    \_RefTypespec: (work@uvm_resource_db::rsrc_t::work@uvm_resource), line:9:10, endln:9:22
+    \_RefTypespec: (work@uvm_resource_db::rsrc_t::uvm_resource), line:9:10, endln:9:22
       |vpiParent:
       \_TypedefTypespec: (rsrc_t), line:9:28, endln:9:34
-      |vpiName:work@uvm_resource
-      |vpiFullName:work@uvm_resource_db::rsrc_t::work@uvm_resource
+      |vpiName:uvm_resource
+      |vpiFullName:work@uvm_resource_db::rsrc_t::uvm_resource
       |vpiActual:
-      \_ClassTypespec: (work@uvm_resource), line:9:10, endln:9:22
-  |vpiTypedef:
-  \_ClassTypespec: (work@uvm_resource), line:9:10, endln:9:22
-    |vpiParent:
-    \_ClassDefn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
-    |vpiName:work@uvm_resource
-    |vpiClassDefn:
-    \_ClassDefn: (work@uvm_resource), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:4:1, endln:5:9
+      \_ClassTypespec: (work@uvm_resource)
   |vpiImportTypespec:
   \_IntTypespec: , line:7:32, endln:7:35
   |vpiImportTypespec:
   \_TypeParameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
   |vpiImportTypespec:
   \_TypedefTypespec: (rsrc_t), line:9:28, endln:9:34
-  |vpiImportTypespec:
-  \_ClassTypespec: (work@uvm_resource), line:9:10, endln:9:22
   |vpiImportTypespec:
   \_Function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
   |vpiImportTypespec:
@@ -278,8 +267,6 @@ Design: (unnamed)
   \_Function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
   |vpiDerivedClasses:
   \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
-  |vpiClassTypespec:
-  \_ClassTypespec: (work@uvm_resource), line:9:10, endln:9:22
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
   |vpiParent:
@@ -289,46 +276,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
     |vpiName:work@top
-  |vpiVariable:
-  \_Variable: (work@top.misc2), line:26:38, endln:26:43
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.misc2.work@uvm_config_db), line:26:3, endln:26:37
-      |vpiParent:
-      \_Variable: (work@top.misc2), line:26:38, endln:26:43
-      |vpiName:work@uvm_config_db
-      |vpiFullName:work@top.misc2.work@uvm_config_db
-      |vpiActual:
-      \_ClassTypespec: (work@uvm_config_db), line:26:3, endln:26:16
-    |vpiName:misc2
-    |vpiFullName:work@top.misc2
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_MethodFuncCall: (new), line:26:46, endln:26:49
-      |vpiParent:
-      \_Variable: (work@top.misc2), line:26:38, endln:26:43
-      |vpiName:
-      \_Identifier: (new)
-        |vpiParent:
-        \_MethodFuncCall: (new), line:26:46, endln:26:49
-        |vpiName:new
-  |vpiTypedef:
-  \_ClassTypespec: (work@uvm_config_db), line:26:3, endln:26:16
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
-    |vpiName:work@uvm_config_db
-    |vpiClassDefn:
-    \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
   |vpiImportTypespec:
-  \_LogicNet: (work@top.misc1), line:24:25, endln:24:30
+  \_Net: (work@top.misc1), line:24:25, endln:24:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.misc1.m_uvm_config_obj_misc), line:24:3, endln:24:24
       |vpiParent:
-      \_LogicNet: (work@top.misc1), line:24:25, endln:24:30
+      \_Net: (work@top.misc1), line:24:25, endln:24:30
       |vpiName:m_uvm_config_obj_misc
       |vpiFullName:work@top.misc1.m_uvm_config_obj_misc
       |vpiActual:
@@ -336,12 +291,24 @@ Design: (unnamed)
     |vpiName:misc1
     |vpiFullName:work@top.misc1
   |vpiImportTypespec:
-  \_ClassTypespec: (work@uvm_config_db), line:26:3, endln:26:16
-  |vpiImportTypespec:
-  \_Variable: (work@top.misc2), line:26:38, endln:26:43
+  \_Net: (work@top.misc2), line:26:38, endln:26:43
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.misc2.uvm_config_db), line:26:3, endln:26:37
+      |vpiParent:
+      \_Net: (work@top.misc2), line:26:38, endln:26:43
+      |vpiName:uvm_config_db
+      |vpiFullName:work@top.misc2.uvm_config_db
+      |vpiActual:
+      \_ClassTypespec: (work@uvm_config_db)
+    |vpiName:misc2
+    |vpiFullName:work@top.misc2
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.misc1), line:24:25, endln:24:30
+  \_Net: (work@top.misc1), line:24:25, endln:24:30
+  |vpiNet:
+  \_Net: (work@top.misc2), line:26:38, endln:26:43
   |vpiSysTaskCall:
   \_MethodFuncCall: (new), line:24:33, endln:24:36
     |vpiParent:
@@ -350,6 +317,15 @@ Design: (unnamed)
     \_Identifier: (new)
       |vpiParent:
       \_MethodFuncCall: (new), line:24:33, endln:24:36
+      |vpiName:new
+  |vpiSysTaskCall:
+  \_MethodFuncCall: (new), line:26:46, endln:26:49
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+    |vpiName:
+    \_Identifier: (new)
+      |vpiParent:
+      \_MethodFuncCall: (new), line:26:46, endln:26:49
       |vpiName:new
 |vpiTypedef:
 \_TypedefTypespec: (m_uvm_config_obj_misc), line:20:44, endln:20:65
@@ -367,12 +343,7 @@ Design: (unnamed)
     |vpiName:uvm_config_db
     |vpiFullName:m_uvm_config_obj_misc.uvm_config_db
     |vpiActual:
-    \_UnsupportedTypespec: (uvm_config_db), line:20:9, endln:20:22
-|vpiTypedef:
-\_UnsupportedTypespec: (uvm_config_db), line:20:9, endln:20:22
-  |vpiParent:
-  \_Design: (unnamed)
-  |vpiName:uvm_config_db
+    \_ClassTypespec: (work@uvm_config_db)
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:
@@ -381,12 +352,26 @@ Design: (unnamed)
   |vpiModule:
   \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
 |vpiTypedef:
+\_ClassTypespec: (work@uvm_config_db)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@uvm_config_db
+  |vpiClassDefn:
+  \_ClassDefn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+|vpiTypedef:
 \_ClassTypespec: (work@uvm_object)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@uvm_object
   |vpiClassDefn:
   \_ClassDefn: (work@uvm_object), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:1:9, endln:2:9
+|vpiTypedef:
+\_ClassTypespec: (work@uvm_resource)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@uvm_resource
+  |vpiClassDefn:
+  \_ClassDefn: (work@uvm_resource), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:4:1, endln:5:9
 |vpiTypedef:
 \_ClassTypespec: (work@uvm_resource_db)
   |vpiParent:
@@ -397,6 +382,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

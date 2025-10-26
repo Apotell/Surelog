@@ -107,6 +107,7 @@ n<> u<101> t<Top_level_rule> c<1> l<1:1> el<24:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:1:1: No timescale set for "uvm".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:1:1: Compile package "uvm".
 [INF:CP0302] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:3:1: Compile class "uvm::uvm_phase".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -117,23 +118,25 @@ BitSelect                                              1
 BitTypespec                                            2
 ClassDefn                                              1
 ClassTypespec                                          1
-Constant                                               5
+Constant                                               1
 Design                                                 1
 ForeachStmt                                            2
 Function                                               1
 Identifier                                             3
+Operation                                              2
 Package                                                1
-Range                                                  4
-RefObj                                                 7
-RefTypespec                                           11
+Range                                                  2
+RefObj                                                 5
+RefTypespec                                            7
 SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               4
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachForeach/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:13:28: Unsupported Typespec: id:30, type:RefTypespec, name:p.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:14:38: Unsupported Typespec: id:35, type:RefTypespec, name:next_p.
+[ERR:IG0810] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:4:23: Null Typespec: id:47, type:RefTypespec, name:uvm_phase.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:13:28: Unsupported Typespec: id:25, type:RefTypespec, name:p.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:14:38: Unsupported Typespec: id:30, type:RefTypespec, name:next_p.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -363,13 +366,11 @@ Design: (unnamed)
       \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
       |vpiArrayType:3
       |vpiIndexTypespec:
-      \_RefTypespec: (uvm::uvm_phase::uvm_phase), line:4:22, endln:4:33
+      \_RefTypespec: (uvm::uvm_phase::uvm_phase), line:4:23, endln:4:32
         |vpiParent:
         \_ArrayTypespec: , line:4:3, endln:4:33
         |vpiName:uvm_phase
         |vpiFullName:uvm::uvm_phase::uvm_phase
-        |vpiActual:
-        \_ClassTypespec: (uvm_phase)
       |vpiElemTypespec:
       \_RefTypespec: (uvm::uvm_phase), line:4:3, endln:4:6
         |vpiParent:
@@ -400,7 +401,7 @@ Design: (unnamed)
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:1:1, endln:23:11
     |vpiArrayType:3
     |vpiIndexTypespec:
-    \_RefTypespec: (uvm::uvm_phase), line:11:22, endln:11:33
+    \_RefTypespec: (uvm::uvm_phase), line:11:23, endln:11:32
       |vpiParent:
       \_ArrayTypespec: , line:11:6, endln:11:33
       |vpiName:uvm_phase
@@ -426,6 +427,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 3
 [WARNING] : 1
 [   NOTE] : 0

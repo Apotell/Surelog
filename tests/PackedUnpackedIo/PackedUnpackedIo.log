@@ -163,6 +163,7 @@ n<> u<157> t<Top_level_rule> c<1> l<1:1> el<14:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedUnpackedIo/dut.sv:1:1: No timescale set for "hmac_pkg".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackedUnpackedIo/dut.sv:1:1: Compile package "hmac_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          4
@@ -178,6 +179,7 @@ Range                                                 13
 RefTypespec                                           15
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedUnpackedIo/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -290,11 +292,11 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:w
       |vpiTypedef:
-      \_RefTypespec: (hmac_pkg::compress::w::hmac_pkg::sha_word_t), line:5:53, endln:5:63
+      \_RefTypespec: (hmac_pkg::compress::w::sha_word_t), line:5:53, endln:5:63
         |vpiParent:
         \_IODecl: (w), line:5:64, endln:5:65
-        |vpiName:hmac_pkg::sha_word_t
-        |vpiFullName:hmac_pkg::compress::w::hmac_pkg::sha_word_t
+        |vpiName:sha_word_t
+        |vpiFullName:hmac_pkg::compress::w::sha_word_t
         |vpiActual:
         \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
     |vpiIODecl:
@@ -509,10 +511,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (hmac_pkg::sha_word_t), line:3:20, endln:3:30
       |vpiParent:
       \_PackedArrayTypespec: , line:3:20, endln:3:36
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:
@@ -544,7 +547,8 @@ Design: (unnamed)
     \_RefTypespec: (hmac_pkg::sha_word_t), line:6:53, endln:6:63
       |vpiParent:
       \_ArrayTypespec: , line:6:53, endln:6:73
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:
@@ -572,10 +576,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
+    \_RefTypespec: (hmac_pkg::sha_word_t), line:7:53, endln:7:63
       |vpiParent:
       \_PackedArrayTypespec: , line:7:53, endln:7:69
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:
@@ -606,7 +611,8 @@ Design: (unnamed)
     \_RefTypespec: (hmac_pkg::sha_word_t), line:8:64, endln:8:69
       |vpiParent:
       \_PackedArrayTypespec: , line:8:53, endln:8:69
-      |vpiName:hmac_pkg::sha_word_t
+      |vpiName:sha_word_t
+      |vpiFullName:hmac_pkg::sha_word_t
       |vpiActual:
       \_TypedefTypespec: (hmac_pkg::sha_word_t), line:2:22, endln:2:32
   |vpiTypedef:

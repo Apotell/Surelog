@@ -145,6 +145,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:8:1: No timescale set for "fooes".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:25:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:1:1: Compile package "foo_flags".
+[INF:CP0301] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:8:1: Compile package "fooes".
 [INF:CP0303] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:25:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -157,6 +159,7 @@ Identifier                                             7
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                2
 Port                                                   2
 Range                                                  1
@@ -167,8 +170,7 @@ StructTypespec                                         2
 TypedefTypespec                                        4
 TypespecMember                                         4
 UnionTypespec                                          1
-UnsupportedTypespec                                    2
-Variable                                               2
+UnsupportedTypespec                                    7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -319,43 +321,39 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:25:1, endln:27:10
     |vpiName:work@top
-  |vpiVariable:
-  \_Variable: (work@top.a), line:25:29, endln:25:30
+  |vpiImportTypespec:
+  \_Net: (work@top.a), line:25:29, endln:25:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:25:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a.top_flag_t), line:25:18, endln:25:28
       |vpiParent:
-      \_Variable: (work@top.a), line:25:29, endln:25:30
+      \_Net: (work@top.a), line:25:29, endln:25:30
       |vpiName:top_flag_t
       |vpiFullName:work@top.a.top_flag_t
       |vpiActual:
       \_TypedefTypespec: (top_flag_t), line:23:3, endln:23:13
     |vpiName:a
     |vpiFullName:work@top.a
-    |vpiRandType:1
-    |vpiVisibility:1
-  |vpiVariable:
-  \_Variable: (work@top.b), line:25:51, endln:25:52
+  |vpiImportTypespec:
+  \_Net: (work@top.b), line:25:51, endln:25:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:25:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b.top_flag_t), line:25:40, endln:25:50
       |vpiParent:
-      \_Variable: (work@top.b), line:25:51, endln:25:52
+      \_Net: (work@top.b), line:25:51, endln:25:52
       |vpiName:top_flag_t
       |vpiFullName:work@top.b.top_flag_t
       |vpiActual:
       \_TypedefTypespec: (top_flag_t), line:23:3, endln:23:13
     |vpiName:b
     |vpiFullName:work@top.b
-    |vpiRandType:1
-    |vpiVisibility:1
-  |vpiImportTypespec:
-  \_Variable: (work@top.a), line:25:29, endln:25:30
-  |vpiImportTypespec:
-  \_Variable: (work@top.b), line:25:51, endln:25:52
   |vpiDefName:work@top
+  |vpiNet:
+  \_Net: (work@top.a), line:25:29, endln:25:30
+  |vpiNet:
+  \_Net: (work@top.b), line:25:51, endln:25:52
   |vpiPort:
   \_Port: (a), line:25:29, endln:25:30
     |vpiParent:
@@ -395,7 +393,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@top.a
       |vpiActual:
-      \_Variable: (work@top.a), line:25:29, endln:25:30
+      \_Net: (work@top.a), line:25:29, endln:25:30
     |vpiLhs:
     \_RefObj: (work@top.b), line:26:10, endln:26:11
       |vpiParent:
@@ -403,7 +401,7 @@ Design: (unnamed)
       |vpiName:b
       |vpiFullName:work@top.b
       |vpiActual:
-      \_Variable: (work@top.b), line:25:51, endln:25:52
+      \_Net: (work@top.b), line:25:51, endln:25:52
 |vpiTypedef:
 \_TypedefTypespec: (padded_fooes_t), line:18:3, endln:18:17
   |vpiParent:
@@ -453,16 +451,16 @@ Design: (unnamed)
     \_TypedefTypespec: (top_flag_t), line:23:3, endln:23:13
     |vpiFullName:top_flag_t
     |vpiActual:
-    \_UnionTypespec: , line:20:9, endln:23:13
+    \_UnionTypespec: , line:20:9, endln:23:2
 |vpiTypedef:
-\_UnionTypespec: , line:20:9, endln:23:13
+\_UnionTypespec: , line:20:9, endln:23:2
   |vpiParent:
   \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (atype_t), line:21:30, endln:21:37
     |vpiParent:
-    \_UnionTypespec: , line:20:9, endln:23:13
+    \_UnionTypespec: , line:20:9, endln:23:2
     |vpiName:atype_t
     |vpiTypespec:
     \_RefTypespec: (atype_t.foo_flags::common_flags_t), line:21:3, endln:21:28
@@ -475,7 +473,7 @@ Design: (unnamed)
   |vpiTypespecMember:
   \_TypespecMember: (btype_t), line:22:23, endln:22:30
     |vpiParent:
-    \_UnionTypespec: , line:20:9, endln:23:13
+    \_UnionTypespec: , line:20:9, endln:23:2
     |vpiName:btype_t
     |vpiTypespec:
     \_RefTypespec: (btype_t.padded_fooes_t), line:22:3, endln:22:17

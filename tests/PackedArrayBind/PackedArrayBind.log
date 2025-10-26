@@ -153,15 +153,16 @@ Identifier                                             5
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 PackedArrayTypespec                                    1
 Range                                                  2
 RefObj                                                 4
 RefTypespec                                            9
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         3
 TypedefTypespec                                        4
 TypespecMember                                         3
+UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -348,7 +349,7 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@PreDecodeStage.MemIssueQueueEntry), line:13:3, endln:13:21
+    \_RefTypespec: (work@PreDecodeStage.MemIssueQueueEntry), line:17:9, endln:17:27
       |vpiParent:
       \_PackedArrayTypespec: , line:17:9, endln:17:35
       |vpiName:MemIssueQueueEntry
@@ -374,13 +375,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:17:9, endln:17:35
   |vpiImportTypespec:
-  \_StructNet: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+  \_Net: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiTypespec:
     \_RefTypespec: (work@PreDecodeStage.replayEntryOut.ReplayQueueEntry), line:22:1, endln:22:17
       |vpiParent:
-      \_StructNet: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+      \_Net: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
       |vpiName:ReplayQueueEntry
       |vpiFullName:work@PreDecodeStage.replayEntryOut.ReplayQueueEntry
       |vpiActual:
@@ -388,21 +389,21 @@ Design: (unnamed)
     |vpiName:replayEntryOut
     |vpiFullName:work@PreDecodeStage.replayEntryOut
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
+  \_Net: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:replayEntryOut.memData
     |vpiFullName:work@PreDecodeStage.replayEntryOut.memData
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
+  \_Net: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:memOpInfo
     |vpiFullName:work@PreDecodeStage.memOpInfo
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
+  \_Net: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
     |vpiParent:
     \_Module: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:mshrID
@@ -410,13 +411,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@PreDecodeStage
   |vpiNet:
-  \_StructNet: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+  \_Net: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
+  \_Net: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
+  \_Net: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
   |vpiNet:
-  \_LogicNet: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
+  \_Net: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
   |vpiContAssign:
   \_ContAssign: , line:24:9, endln:24:60
     |vpiParent:
@@ -431,7 +432,7 @@ Design: (unnamed)
         \_HierPath: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:replayEntryOut
         |vpiActual:
-        \_StructNet: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+        \_Net: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
       |vpiActual:
       \_BitSelect: (replayEntryOut.memData[0]), line:24:33, endln:24:40
         |vpiParent:
@@ -439,7 +440,7 @@ Design: (unnamed)
         |vpiName:replayEntryOut.memData
         |vpiFullName:replayEntryOut.memData[0]
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
+        \_Net: (work@PreDecodeStage.replayEntryOut.memData), line:24:33, endln:24:40
         |vpiIndex:
         \_Constant: , line:24:41, endln:24:42
           |vpiParent:
@@ -454,7 +455,7 @@ Design: (unnamed)
         \_HierPath: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:memOpInfo
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
+        \_Net: (work@PreDecodeStage.memOpInfo), line:24:44, endln:24:53
       |vpiActual:
       \_RefObj: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
         |vpiParent:
@@ -462,7 +463,7 @@ Design: (unnamed)
         |vpiName:mshrID
         |vpiFullName:work@PreDecodeStage.mshrID
         |vpiActual:
-        \_LogicNet: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
+        \_Net: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
       |vpiName:replayEntryOut.memData[0].memOpInfo.mshrID
     |vpiLhs:
     \_RefObj: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
@@ -471,7 +472,7 @@ Design: (unnamed)
       |vpiName:mshrID
       |vpiFullName:work@PreDecodeStage.mshrID
       |vpiActual:
-      \_LogicNet: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
+      \_Net: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
 |vpiTypedef:
 \_ModuleTypespec: (PreDecodeStage)
   |vpiParent:

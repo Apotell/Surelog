@@ -237,6 +237,8 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PortComplex/dut.sv:15:1: No timescale set for "dm".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PortComplex/dut.sv:26:1: No timescale set for "dut2".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PortComplex/dut.sv:1:1: Compile package "pr_pkg".
+[INF:CP0301] ${SURELOG_DIR}/tests/PortComplex/dut.sv:15:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/PortComplex/dut.sv:9:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/PortComplex/dut.sv:26:1: Compile module "work@dut2".
 [INF:UH0706] Creating UHDM Model...
@@ -248,9 +250,9 @@ IntTypespec                                            1
 LogicTypespec                                          8
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    3
 Operation                                              2
 Package                                                2
-PackedArrayNet                                         2
 PackedArrayTypespec                                    4
 ParamAssign                                            1
 Parameter                                              1
@@ -259,7 +261,6 @@ Range                                                  9
 RefObj                                                 2
 RefTypespec                                           21
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         8
@@ -626,13 +627,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:10:8, endln:10:32
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut.alert_tx_o), line:10:33, endln:10:43
+  \_Net: (work@dut.alert_tx_o), line:10:33, endln:10:43
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PortComplex/dut.sv, line:9:1, endln:13:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.alert_tx_o), line:10:8, endln:10:32
       |vpiParent:
-      \_PackedArrayNet: (work@dut.alert_tx_o), line:10:33, endln:10:43
+      \_Net: (work@dut.alert_tx_o), line:10:33, endln:10:43
       |vpiFullName:work@dut.alert_tx_o
       |vpiActual:
       \_PackedArrayTypespec: , line:10:8, endln:10:32
@@ -640,7 +641,7 @@ Design: (unnamed)
     |vpiFullName:work@dut.alert_tx_o
   |vpiDefName:work@dut
   |vpiNet:
-  \_PackedArrayNet: (work@dut.alert_tx_o), line:10:33, endln:10:43
+  \_Net: (work@dut.alert_tx_o), line:10:33, endln:10:43
   |vpiPort:
   \_Port: (alert_tx_o), line:10:33, endln:10:43
     |vpiParent:
@@ -745,26 +746,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:30:9, endln:30:37
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@dut2.hartinfo_i), line:30:44, endln:30:54
+  \_Net: (work@dut2.hartinfo_i), line:30:44, endln:30:54
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/PortComplex/dut.sv, line:26:1, endln:33:10
     |vpiTypespec:
     \_RefTypespec: (work@dut2.hartinfo_i), line:30:9, endln:30:37
       |vpiParent:
-      \_PackedArrayNet: (work@dut2.hartinfo_i), line:30:44, endln:30:54
+      \_Net: (work@dut2.hartinfo_i), line:30:44, endln:30:54
       |vpiFullName:work@dut2.hartinfo_i
       |vpiActual:
       \_PackedArrayTypespec: , line:30:9, endln:30:37
     |vpiName:hartinfo_i
     |vpiFullName:work@dut2.hartinfo_i
   |vpiImportTypespec:
-  \_StructNet: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
+  \_Net: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/PortComplex/dut.sv, line:26:1, endln:33:10
     |vpiTypespec:
     \_RefTypespec: (work@dut2.hart_info_i_without_range.dm::hartinfo_t), line:31:9, endln:31:23
       |vpiParent:
-      \_StructNet: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
+      \_Net: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
       |vpiName:dm::hartinfo_t
       |vpiFullName:work@dut2.hart_info_i_without_range.dm::hartinfo_t
       |vpiActual:
@@ -773,9 +774,9 @@ Design: (unnamed)
     |vpiFullName:work@dut2.hart_info_i_without_range
   |vpiDefName:work@dut2
   |vpiNet:
-  \_PackedArrayNet: (work@dut2.hartinfo_i), line:30:44, endln:30:54
+  \_Net: (work@dut2.hartinfo_i), line:30:44, endln:30:54
   |vpiNet:
-  \_StructNet: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
+  \_Net: (work@dut2.hart_info_i_without_range), line:31:44, endln:31:69
   |vpiPort:
   \_Port: (hartinfo_i), line:30:44, endln:30:54
     |vpiParent:

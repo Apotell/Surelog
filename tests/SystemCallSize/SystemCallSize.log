@@ -229,7 +229,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SystemCallSize/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               4
 ArrayTypespec                                          7
 Assignment                                             1
 Begin                                                  2
@@ -243,6 +242,7 @@ Identifier                                             6
 LogicTypespec                                          7
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    4
 Operation                                              6
 Range                                                 11
 RefObj                                                10
@@ -297,7 +297,7 @@ Design: (unnamed)
           \_GenFor: (work@top), line:13:5, endln:15:8
           |vpiFullName:work@top
           |vpiImportTypespec:
-          \_LogicNet: (work@top.i), line:14:18, endln:14:19
+          \_Net: (work@top.i), line:14:18, endln:14:19
             |vpiParent:
             \_Begin: (work@top), line:13:39, endln:15:8
             |vpiName:i
@@ -322,7 +322,7 @@ Design: (unnamed)
               |vpiName:c
               |vpiFullName:work@top.c
               |vpiActual:
-              \_ArrayNet: (work@top.c), line:9:7, endln:9:8
+              \_Net: (work@top.c), line:9:7, endln:9:8
               |vpiIndex:
               \_RefObj: (work@top.i), line:14:18, endln:14:19
                 |vpiParent:
@@ -330,23 +330,27 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@top.i
                 |vpiActual:
-                \_LogicNet: (work@top.i), line:14:18, endln:14:19
+                \_Net: (work@top.i), line:14:18, endln:14:19
         |vpiImportTypespec:
         \_Variable: (work@top.i), line:13:17, endln:13:18
         |vpiImportTypespec:
-        \_LogicNet: (work@top.i), line:13:22, endln:13:23
+        \_Net: (work@top.i), line:13:22, endln:13:23
           |vpiParent:
           \_GenFor: (work@top), line:13:5, endln:15:8
           |vpiName:i
           |vpiFullName:work@top.i
           |vpiNetType:1
         |vpiImportTypespec:
-        \_LogicNet: (work@top.i), line:13:34, endln:13:35
+        \_Net: (work@top.i), line:13:34, endln:13:35
           |vpiParent:
           \_GenFor: (work@top), line:13:5, endln:15:8
           |vpiName:i
           |vpiFullName:work@top.i
           |vpiNetType:1
+        |vpiNet:
+        \_Net: (work@top.i), line:13:22, endln:13:23
+        |vpiNet:
+        \_Net: (work@top.i), line:13:34, endln:13:35
         |vpiForInitStmt:
         \_Assignment: , line:13:10, endln:13:20
           |vpiParent:
@@ -373,7 +377,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@top.i
             |vpiActual:
-            \_LogicNet: (work@top.i), line:13:22, endln:13:23
+            \_Net: (work@top.i), line:13:22, endln:13:23
           |vpiOperand:
           \_SysFuncCall: ($size), line:13:24, endln:13:32
             |vpiParent:
@@ -385,7 +389,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@top.a
               |vpiActual:
-              \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+              \_Net: (work@top.a), line:3:14, endln:3:15
             |vpiName:
             \_Identifier: ($size)
               |vpiParent:
@@ -403,7 +407,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@top.i
             |vpiActual:
-            \_LogicNet: (work@top.i), line:13:34, endln:13:35
+            \_Net: (work@top.i), line:13:34, endln:13:35
         |vpiStmt:
         \_Begin: (work@top), line:13:39, endln:15:8
       |vpiStmt:
@@ -495,7 +499,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@top.a
             |vpiActual:
-            \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+            \_Net: (work@top.a), line:3:14, endln:3:15
           |vpiName:
           \_Identifier: ($bits)
             |vpiParent:
@@ -549,7 +553,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@top.a
             |vpiActual:
-            \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+            \_Net: (work@top.a), line:3:14, endln:3:15
           |vpiName:
           \_Identifier: ($size)
             |vpiParent:
@@ -608,7 +612,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@top.a
               |vpiActual:
-              \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+              \_Net: (work@top.a), line:3:14, endln:3:15
             |vpiName:
             \_Identifier: ($high)
               |vpiParent:
@@ -625,7 +629,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@top.a
               |vpiActual:
-              \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+              \_Net: (work@top.a), line:3:14, endln:3:15
             |vpiName:
             \_Identifier: ($low)
               |vpiParent:
@@ -659,13 +663,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:1, endln:3:20
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+  \_Net: (work@top.a), line:3:14, endln:3:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SystemCallSize/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a), line:3:1, endln:3:13
       |vpiParent:
-      \_ArrayNet: (work@top.a), line:3:14, endln:3:15
+      \_Net: (work@top.a), line:3:14, endln:3:15
       |vpiFullName:work@top.a
       |vpiActual:
       \_ArrayTypespec: , line:3:1, endln:3:20
@@ -677,13 +681,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4:1, endln:4:22
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.b), line:4:7, endln:4:8
+  \_Net: (work@top.b), line:4:7, endln:4:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SystemCallSize/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b), line:4:1, endln:4:6
       |vpiParent:
-      \_ArrayNet: (work@top.b), line:4:7, endln:4:8
+      \_Net: (work@top.b), line:4:7, endln:4:8
       |vpiFullName:work@top.b
       |vpiActual:
       \_ArrayTypespec: , line:4:1, endln:4:22
@@ -693,13 +697,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:9:1, endln:9:22
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.c), line:9:7, endln:9:8
+  \_Net: (work@top.c), line:9:7, endln:9:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SystemCallSize/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.c), line:9:1, endln:9:6
       |vpiParent:
-      \_ArrayNet: (work@top.c), line:9:7, endln:9:8
+      \_Net: (work@top.c), line:9:7, endln:9:8
       |vpiFullName:work@top.c
       |vpiActual:
       \_ArrayTypespec: , line:9:1, endln:9:22
@@ -709,13 +713,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:10:1, endln:10:30
   |vpiImportTypespec:
-  \_ArrayNet: (work@top.d), line:10:7, endln:10:8
+  \_Net: (work@top.d), line:10:7, endln:10:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SystemCallSize/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
     \_RefTypespec: (work@top.d), line:10:1, endln:10:6
       |vpiParent:
-      \_ArrayNet: (work@top.d), line:10:7, endln:10:8
+      \_Net: (work@top.d), line:10:7, endln:10:8
       |vpiFullName:work@top.d
       |vpiActual:
       \_ArrayTypespec: , line:10:1, endln:10:30
@@ -723,14 +727,14 @@ Design: (unnamed)
     |vpiFullName:work@top.d
     |vpiNetType:36
   |vpiDefName:work@top
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.a), line:3:14, endln:3:15
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.b), line:4:7, endln:4:8
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.c), line:9:7, endln:9:8
-  |vpiArrayNet:
-  \_ArrayNet: (work@top.d), line:10:7, endln:10:8
+  |vpiNet:
+  \_Net: (work@top.a), line:3:14, endln:3:15
+  |vpiNet:
+  \_Net: (work@top.b), line:4:7, endln:4:8
+  |vpiNet:
+  \_Net: (work@top.c), line:9:7, endln:9:8
+  |vpiNet:
+  \_Net: (work@top.d), line:10:7, endln:10:8
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

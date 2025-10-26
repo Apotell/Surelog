@@ -196,6 +196,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PAssignType/dut.sv:16:1: No timescale set for "shadow".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PAssignType/dut.sv:22:1: No timescale set for "aes_core".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PAssignType/dut.sv:1:1: Compile package "aes_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:22:1: Compile module "work@aes_core".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:16:1: Compile module "work@shadow".
 [INF:CP0303] ${SURELOG_DIR}/tests/PAssignType/dut.sv:11:1: Compile module "work@subreg".
@@ -208,6 +209,7 @@ ImportTypespec                                         1
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         3
+Net                                                    1
 Operation                                              3
 Package                                                1
 ParamAssign                                            3
@@ -217,11 +219,11 @@ RefModule                                              2
 RefTypespec                                           10
 SourceFile                                             1
 StringTypespec                                         3
-StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          3
 TypedefTypespec                                        1
 TypespecMember                                         1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PAssignType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -393,22 +395,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (aes_pkg), line:23:10, endln:23:20
   |vpiImportTypespec:
-  \_StructNet: (work@aes_core.ctrl_q), line:24:14, endln:24:20
+  \_Net: (work@aes_core.ctrl_q), line:24:14, endln:24:20
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
     |vpiTypespec:
-    \_RefTypespec: (work@aes_core.ctrl_q.aes_pkg::ctrl_reg_t), line:24:3, endln:24:13
+    \_RefTypespec: (work@aes_core.ctrl_q.ctrl_reg_t), line:24:3, endln:24:13
       |vpiParent:
-      \_StructNet: (work@aes_core.ctrl_q), line:24:14, endln:24:20
-      |vpiName:aes_pkg::ctrl_reg_t
-      |vpiFullName:work@aes_core.ctrl_q.aes_pkg::ctrl_reg_t
+      \_Net: (work@aes_core.ctrl_q), line:24:14, endln:24:20
+      |vpiName:ctrl_reg_t
+      |vpiFullName:work@aes_core.ctrl_q.ctrl_reg_t
       |vpiActual:
       \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
     |vpiName:ctrl_q
     |vpiFullName:work@aes_core.ctrl_q
   |vpiDefName:work@aes_core
   |vpiNet:
-  \_StructNet: (work@aes_core.ctrl_q), line:24:14, endln:24:20
+  \_Net: (work@aes_core.ctrl_q), line:24:14, endln:24:20
   |vpiRefModule:
   \_RefModule: work@shadow (shadow_reg), line:25:3, endln:25:9
     |vpiParent:

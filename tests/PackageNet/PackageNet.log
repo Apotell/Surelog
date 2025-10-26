@@ -114,6 +114,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageNet/dut.sv:1:1: No timescale set for "my_package1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageNet/dut.sv:13:1: No timescale set for "test".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/PackageNet/dut.sv:1:1: Compile package "my_package1".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageNet/dut.sv:13:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -124,10 +125,10 @@ Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
 Initial                                                1
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              1
 Package                                                1
 ParamAssign                                            2
@@ -137,6 +138,7 @@ RefObj                                                 3
 RefTypespec                                            4
 SourceFile                                             1
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -245,22 +247,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
   |vpiImportTypespec:
-  \_LogicNet: (my_package1::v), line:8:6, endln:8:7
+  \_Net: (my_package1::v), line:8:6, endln:8:7
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
     |vpiTypespec:
-    \_RefTypespec: (my_package1::v::my_package1::word), line:8:1, endln:8:5
+    \_RefTypespec: (my_package1::v::word), line:8:1, endln:8:5
       |vpiParent:
-      \_LogicNet: (my_package1::v), line:8:6, endln:8:7
-      |vpiName:my_package1::word
-      |vpiFullName:my_package1::v::my_package1::word
+      \_Net: (my_package1::v), line:8:6, endln:8:7
+      |vpiName:word
+      |vpiFullName:my_package1::v::word
       |vpiActual:
       \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
     |vpiName:v
     |vpiFullName:my_package1::v
   |vpiDefName:my_package1
   |vpiNet:
-  \_LogicNet: (my_package1::v), line:8:6, endln:8:7
+  \_Net: (my_package1::v), line:8:6, endln:8:7
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:13:1, endln:21:10
   |vpiParent:
@@ -333,7 +335,7 @@ Design: (unnamed)
           |vpiName:v
           |vpiFullName:work@test.v
           |vpiActual:
-          \_LogicNet: (my_package1::v), line:8:6, endln:8:7
+          \_Net: (my_package1::v), line:8:6, endln:8:7
 |vpiTypedef:
 \_ModuleTypespec: (test)
   |vpiParent:

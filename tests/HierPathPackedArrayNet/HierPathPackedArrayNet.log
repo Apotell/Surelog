@@ -205,6 +205,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv:1:1: No timescale set for "rvfi_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv:11:1: No timescale set for "rvfi_tracer".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv:1:1: Compile package "rvfi_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv:11:1: Compile module "work@rvfi_tracer".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -223,9 +224,9 @@ IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    1
 Operation                                              6
 Package                                                1
-PackedArrayNet                                         1
 PackedArrayTypespec                                    2
 ParamAssign                                            3
 Parameter                                              3
@@ -470,20 +471,20 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:14:9, endln:14:52
   |vpiImportTypespec:
-  \_PackedArrayNet: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+  \_Net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
     |vpiParent:
     \_Module: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |vpiTypespec:
     \_RefTypespec: (work@rvfi_tracer.rvfi_i), line:14:9, endln:14:52
       |vpiParent:
-      \_PackedArrayNet: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+      \_Net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
       |vpiFullName:work@rvfi_tracer.rvfi_i
       |vpiActual:
       \_PackedArrayTypespec: , line:14:9, endln:14:52
     |vpiName:rvfi_i
     |vpiFullName:work@rvfi_tracer.rvfi_i
   |vpiImportTypespec:
-  \_LogicNet: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
+  \_Net: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
     |vpiParent:
     \_Module: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |vpiName:clk_i
@@ -491,9 +492,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@rvfi_tracer
   |vpiNet:
-  \_PackedArrayNet: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+  \_Net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
   |vpiNet:
-  \_LogicNet: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
+  \_Net: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
   |vpiPort:
   \_Port: (rvfi_i), line:14:63, endln:14:69
     |vpiParent:
@@ -527,7 +528,7 @@ Design: (unnamed)
           |vpiName:clk_i
           |vpiFullName:work@rvfi_tracer.clk_i
           |vpiActual:
-          \_LogicNet: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
+          \_Net: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
       |vpiStmt:
       \_Begin: (work@rvfi_tracer), line:16:28, endln:21:4
         |vpiParent:
@@ -558,7 +559,7 @@ Design: (unnamed)
             \_ForStmt: (work@rvfi_tracer), line:17:3, endln:20:6
             |vpiFullName:work@rvfi_tracer
             |vpiImportTypespec:
-            \_LogicNet: (work@rvfi_tracer.trap), line:18:19, endln:18:23
+            \_Net: (work@rvfi_tracer.trap), line:18:19, endln:18:23
               |vpiParent:
               \_Begin: (work@rvfi_tracer), line:17:45, endln:20:6
               |vpiName:trap
@@ -579,7 +580,7 @@ Design: (unnamed)
                   |vpiName:rvfi_i
                   |vpiFullName:rvfi_i[i]
                   |vpiActual:
-                  \_PackedArrayNet: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+                  \_Net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
                   |vpiIndex:
                   \_RefObj: (work@rvfi_tracer.rvfi_i[i].trap.i), line:18:16, endln:18:17
                     |vpiParent:
@@ -595,7 +596,7 @@ Design: (unnamed)
                   |vpiName:trap
                   |vpiFullName:work@rvfi_tracer.trap
                   |vpiActual:
-                  \_LogicNet: (work@rvfi_tracer.trap), line:18:19, endln:18:23
+                  \_Net: (work@rvfi_tracer.trap), line:18:19, endln:18:23
                 |vpiName:rvfi_i[i].trap
               |vpiStmt:
               \_Begin: (work@rvfi_tracer), line:18:25, endln:19:8

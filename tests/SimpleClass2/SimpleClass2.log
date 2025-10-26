@@ -3,6 +3,9 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/SimpleClass2/top.v:26:1: No timescale set for "p3".
 [WRN:PA0205] ${SURELOG_DIR}/tests/SimpleClass2/top.v:31:1: No timescale set for "p2".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/SimpleClass2/top.v:8:1: Compile package "p1".
+[INF:CP0301] ${SURELOG_DIR}/tests/SimpleClass2/top.v:26:1: Compile package "p3".
+[INF:CP0301] ${SURELOG_DIR}/tests/SimpleClass2/top.v:31:1: Compile package "p2".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
@@ -34,20 +37,20 @@ SourceFile                                             1
 StringTypespec                                         4
 Task                                                   9
 TypedefTypespec                                        3
-UnsupportedTypespec                                    2
+UnsupportedTypespec                                    5
 Variable                                               3
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Illegal implicit net "id:177, name: id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Illegal implicit net "id:178, name: action".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Illegal implicit net "id:183, name: id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Illegal implicit net "id:184, name: action".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Illegal implicit net "id:179, name: id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Illegal implicit net "id:180, name: action".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Illegal implicit net "id:185, name: id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Illegal implicit net "id:186, name: action".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleClass2/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:13:37: Unsupported Typespec: id:144, type:RefTypespec, name:uvm_component.
-[ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:38:4: Unsupported Typespec: id:195, type:RefTypespec, name:p3::c33.
-[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Null Actual: id:177, type:RefObj, name:id.
-[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Null Actual: id:178, type:RefObj, name:action.
-[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Null Actual: id:183, type:RefObj, name:id.
-[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Null Actual: id:184, type:RefObj, name:action.
+[ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:13:37: Unsupported Typespec: id:145, type:RefTypespec, name:uvm_component.
+[ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:38:4: Unsupported Typespec: id:198, type:RefTypespec, name:p3::c33.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Null Actual: id:179, type:RefObj, name:id.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Null Actual: id:180, type:RefObj, name:action.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Null Actual: id:185, type:RefObj, name:id.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Null Actual: id:186, type:RefObj, name:action.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -903,8 +906,15 @@ Design: (unnamed)
       \_StringTypespec: , line:13:24, endln:13:30
         |vpiParent:
         \_Function: (p1::c1::new), line:13:3, endln:13:58
+      |vpiTypedef:
+      \_UnsupportedTypespec: (uvm_component), line:13:37, endln:13:50
+        |vpiParent:
+        \_Function: (p1::c1::new), line:13:3, endln:13:58
+        |vpiName:uvm_component
       |vpiImportTypespec:
       \_StringTypespec: , line:13:24, endln:13:30
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvm_component), line:13:37, endln:13:50
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -994,18 +1004,11 @@ Design: (unnamed)
           |vpiActual:
           \_StringTypespec: , line:15:16, endln:15:22
     |vpiTypedef:
-    \_UnsupportedTypespec: (uvm_component), line:13:37, endln:13:50
-      |vpiParent:
-      \_ClassDefn: (p1::c1), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:10:1, endln:19:9
-      |vpiName:uvm_component
-    |vpiTypedef:
     \_StringTypespec: , line:11:3, endln:11:9
       |vpiParent:
       \_ClassDefn: (p1::c1), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:10:1, endln:19:9
     |vpiImportTypespec:
     \_Function: (p1::c1::new), line:13:3, endln:13:58
-    |vpiImportTypespec:
-    \_UnsupportedTypespec: (uvm_component), line:13:37, endln:13:50
     |vpiImportTypespec:
     \_Function: (p1::c1::foo), line:15:3, endln:17:16
     |vpiImportTypespec:
@@ -1324,20 +1327,13 @@ Design: (unnamed)
         \_TypedefTypespec: (uvm_id_actions_array), line:36:42, endln:36:62
         |vpiName:uvm_id_actions_array
       |vpiTypedefAlias:
-      \_RefTypespec: (p2::c2::uvm_id_actions_array::work@uvm_pool), line:36:12, endln:36:20
+      \_RefTypespec: (p2::c2::uvm_id_actions_array::uvm_pool), line:36:12, endln:36:20
         |vpiParent:
         \_TypedefTypespec: (uvm_id_actions_array), line:36:42, endln:36:62
-        |vpiName:work@uvm_pool
-        |vpiFullName:p2::c2::uvm_id_actions_array::work@uvm_pool
+        |vpiName:uvm_pool
+        |vpiFullName:p2::c2::uvm_id_actions_array::uvm_pool
         |vpiActual:
-        \_ClassTypespec: (work@uvm_pool), line:36:12, endln:36:20
-    |vpiTypedef:
-    \_ClassTypespec: (work@uvm_pool), line:36:12, endln:36:20
-      |vpiParent:
-      \_ClassDefn: (p2::c2), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:35:1, endln:50:9
-      |vpiName:work@uvm_pool
-      |vpiClassDefn:
-      \_ClassDefn: (work@uvm_pool), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:2:1, endln:6:9
+        \_ClassTypespec: (work@uvm_pool)
     |vpiTypedef:
     \_UnsupportedTypespec: (p3::c33), line:38:4, endln:38:11
       |vpiParent:
@@ -1345,8 +1341,6 @@ Design: (unnamed)
       |vpiName:p3::c33
     |vpiImportTypespec:
     \_TypedefTypespec: (uvm_id_actions_array), line:36:42, endln:36:62
-    |vpiImportTypespec:
-    \_ClassTypespec: (work@uvm_pool), line:36:12, endln:36:20
     |vpiImportTypespec:
     \_Function: (p2::c2::new), line:40:2, endln:47:15
     |vpiImportTypespec:
@@ -1369,8 +1363,6 @@ Design: (unnamed)
         \_TypedefTypespec: (p1::c3), line:22:12, endln:22:14
     |vpiMethod:
     \_Function: (p2::c2::new), line:40:2, endln:47:15
-    |vpiClassTypespec:
-    \_ClassTypespec: (work@uvm_pool), line:36:12, endln:36:20
   |vpiTypedef:
   \_ClassTypespec: (c2)
     |vpiParent:
@@ -1442,6 +1434,13 @@ Design: (unnamed)
   \_Function: (work@uvm_pool::add), line:3:3, endln:4:14
   |vpiMethod:
   \_Function: (work@uvm_pool::add), line:3:3, endln:4:14
+|vpiTypedef:
+\_ClassTypespec: (work@uvm_pool)
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@uvm_pool
+  |vpiClassDefn:
+  \_ClassDefn: (work@uvm_pool), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:2:1, endln:6:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

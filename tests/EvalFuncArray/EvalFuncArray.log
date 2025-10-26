@@ -199,6 +199,7 @@ n<> u<193> t<Top_level_rule> c<1> l<1:1> el<27:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: No timescale set for "earlgrey".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:1:1: Compile package "earlgrey".
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
@@ -210,7 +211,7 @@ Begin                                                  3
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          8
-Constant                                              27
+Constant                                              25
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -224,17 +225,18 @@ IntTypespec                                           14
 IntegerTypespec                                        1
 LogicTypespec                                          1
 Module                                                 1
-Operation                                              7
+Operation                                              8
 Package                                                2
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  3
-RefObj                                                12
-RefTypespec                                           24
+Range                                                  2
+RefObj                                                10
+RefTypespec                                           22
 ReturnStmt                                             1
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
+UnsupportedTypespec                                    1
 Variable                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/surelog.uhdm ...
@@ -1078,7 +1080,7 @@ Design: (unnamed)
       \_Parameter: (earlgrey::InfoTypes), line:10:15, endln:10:28
       |vpiFullName:earlgrey::InfoTypes
       |vpiActual:
-      \_IntTypespec: , line:10:11, endln:10:14
+      \_IntTypespec: , line:3:11, endln:3:14
     |vpiSigned:1
     |vpiName:InfoTypes
     |vpiFullName:earlgrey::InfoTypes
@@ -1433,30 +1435,27 @@ Design: (unnamed)
     \_Package: earlgrey (earlgrey), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
     |vpiSigned:1
   |vpiTypedef:
-  \_IntTypespec: , line:10:11, endln:10:14
-    |vpiParent:
-    \_Package: earlgrey (earlgrey), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiExpr:
-    \_RefObj: (earlgrey::InfoTypes), line:12:56, endln:12:65
-      |vpiParent:
-      \_IntTypespec: , line:10:11, endln:10:14
-      |vpiName:InfoTypes
-      |vpiFullName:earlgrey::InfoTypes
-      |vpiActual:
-      \_Parameter: (earlgrey::InfoTypes), line:10:15, endln:10:28
-    |vpiSigned:1
-  |vpiTypedef:
   \_ArrayTypespec: , line:12:46, endln:12:66
     |vpiParent:
     \_Package: earlgrey (earlgrey), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (earlgrey), line:12:55, endln:12:66
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:12:55, endln:12:66
       |vpiParent:
       \_ArrayTypespec: , line:12:46, endln:12:66
-      |vpiFullName:earlgrey
-      |vpiActual:
-      \_IntTypespec: , line:10:11, endln:10:14
+      |vpiRightRange:
+      \_Operation: , line:12:56, endln:12:65
+        |vpiParent:
+        \_Range: , line:12:55, endln:12:66
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (earlgrey::InfoTypes), line:12:56, endln:12:65
+          |vpiParent:
+          \_Operation: , line:12:56, endln:12:65
+          |vpiName:InfoTypes
+          |vpiFullName:earlgrey::InfoTypes
+          |vpiActual:
+          \_Parameter: (earlgrey::InfoTypes), line:10:15, endln:10:28
     |vpiElemTypespec:
     \_RefTypespec: (earlgrey), line:12:46, endln:12:49
       |vpiParent:
@@ -1468,8 +1467,6 @@ Design: (unnamed)
   \_Function: (earlgrey::max_info_pages), line:12:4, endln:21:14
   |vpiImportTypespec:
   \_IntTypespec: , line:3:11, endln:3:14
-  |vpiImportTypespec:
-  \_IntTypespec: , line:10:11, endln:10:14
   |vpiImportTypespec:
   \_ArrayTypespec: , line:12:46, endln:12:66
   |vpiDefName:earlgrey

@@ -140,6 +140,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:1: No timescale set for "top".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:1: Compile module "work@top".
 [NTE:CP0309] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
@@ -153,10 +154,10 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               3
 Identifier                                             4
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
+Net                                                    2
 Package                                                1
 PackedArrayTypespec                                    1
 Port                                                   1
@@ -164,10 +165,10 @@ Range                                                  1
 RefObj                                                 5
 RefTypespec                                            6
 SourceFile                                             1
-StructNet                                              1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -283,10 +284,11 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
+    \_RefTypespec: (my_pkg::ast_dif_t), line:7:7, endln:7:16
       |vpiParent:
       \_PackedArrayTypespec: , line:7:7, endln:7:22
-      |vpiName:my_pkg::ast_dif_t
+      |vpiName:ast_dif_t
+      |vpiFullName:my_pkg::ast_dif_t
       |vpiActual:
       \_TypedefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
   |vpiImportTypespec:
@@ -312,19 +314,19 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:work@top
   |vpiImportTypespec:
-  \_LogicNet: (work@top.o), line:11:19, endln:11:20
+  \_Net: (work@top.o), line:11:19, endln:11:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:o
     |vpiFullName:work@top.o
   |vpiImportTypespec:
-  \_StructNet: (work@top.ast_alert_o), line:12:28, endln:12:39
+  \_Net: (work@top.ast_alert_o), line:12:28, endln:12:39
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiTypespec:
     \_RefTypespec: (work@top.ast_alert_o.my_pkg::ast_alert_rsp_t), line:12:4, endln:12:27
       |vpiParent:
-      \_StructNet: (work@top.ast_alert_o), line:12:28, endln:12:39
+      \_Net: (work@top.ast_alert_o), line:12:28, endln:12:39
       |vpiName:my_pkg::ast_alert_rsp_t
       |vpiFullName:work@top.ast_alert_o.my_pkg::ast_alert_rsp_t
       |vpiActual:
@@ -332,14 +334,14 @@ Design: (unnamed)
     |vpiName:ast_alert_o
     |vpiFullName:work@top.ast_alert_o
   |vpiImportTypespec:
-  \_LogicNet: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
+  \_Net: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:ast_alert_o.alerts_ack
     |vpiFullName:work@top.ast_alert_o.alerts_ack
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@top.p), line:16:41, endln:16:42
+  \_Net: (work@top.p), line:16:41, endln:16:42
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:p
@@ -347,13 +349,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.o), line:11:19, endln:11:20
+  \_Net: (work@top.o), line:11:19, endln:11:20
   |vpiNet:
-  \_StructNet: (work@top.ast_alert_o), line:12:28, endln:12:39
+  \_Net: (work@top.ast_alert_o), line:12:28, endln:12:39
   |vpiNet:
-  \_LogicNet: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
+  \_Net: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
   |vpiNet:
-  \_LogicNet: (work@top.p), line:16:41, endln:16:42
+  \_Net: (work@top.p), line:16:41, endln:16:42
   |vpiPort:
   \_Port: (o), line:11:19, endln:11:20
     |vpiParent:
@@ -370,14 +372,14 @@ Design: (unnamed)
       \_Always: , line:13:4, endln:15:7
       |vpiFullName:work@top
       |vpiImportTypespec:
-      \_LogicNet: (work@top.alerts_ack), line:14:19, endln:14:29
+      \_Net: (work@top.alerts_ack), line:14:19, endln:14:29
         |vpiParent:
         \_Begin: (work@top), line:13:16, endln:15:7
         |vpiName:alerts_ack
         |vpiFullName:work@top.alerts_ack
         |vpiNetType:1
       |vpiImportTypespec:
-      \_LogicNet: (work@top.p), line:14:35, endln:14:35
+      \_Net: (work@top.p), line:14:35, endln:14:35
         |vpiParent:
         \_Begin: (work@top), line:13:16, endln:15:7
         |vpiName:p
@@ -407,7 +409,7 @@ Design: (unnamed)
             \_HierPath: (ast_alert_o.alerts_ack[0].p), line:14:18, endln:14:35
             |vpiName:ast_alert_o
             |vpiActual:
-            \_StructNet: (work@top.ast_alert_o), line:12:28, endln:12:39
+            \_Net: (work@top.ast_alert_o), line:12:28, endln:12:39
           |vpiActual:
           \_BitSelect: (alerts_ack[0]), line:14:19, endln:14:29
             |vpiParent:
@@ -415,7 +417,7 @@ Design: (unnamed)
             |vpiName:alerts_ack
             |vpiFullName:alerts_ack[0]
             |vpiActual:
-            \_LogicNet: (work@top.alerts_ack), line:14:19, endln:14:29
+            \_Net: (work@top.alerts_ack), line:14:19, endln:14:29
             |vpiIndex:
             \_Constant: , line:14:30, endln:14:31
               |vpiParent:
@@ -431,7 +433,7 @@ Design: (unnamed)
             |vpiName:p
             |vpiFullName:alerts_ack[0].p
             |vpiActual:
-            \_LogicNet: (work@top.p), line:14:35, endln:14:35
+            \_Net: (work@top.p), line:14:35, endln:14:35
           |vpiName:ast_alert_o.alerts_ack[0].p
     |vpiAlwaysType:2
   |vpiContAssign:
@@ -448,7 +450,7 @@ Design: (unnamed)
         \_HierPath: (ast_alert_o.alerts_ack[0].p), line:16:15, endln:16:42
         |vpiName:ast_alert_o
         |vpiActual:
-        \_StructNet: (work@top.ast_alert_o), line:12:28, endln:12:39
+        \_Net: (work@top.ast_alert_o), line:12:28, endln:12:39
       |vpiActual:
       \_BitSelect: (ast_alert_o.alerts_ack[0]), line:16:27, endln:16:37
         |vpiParent:
@@ -456,7 +458,7 @@ Design: (unnamed)
         |vpiName:ast_alert_o.alerts_ack
         |vpiFullName:ast_alert_o.alerts_ack[0]
         |vpiActual:
-        \_LogicNet: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
+        \_Net: (work@top.ast_alert_o.alerts_ack), line:16:27, endln:16:37
         |vpiIndex:
         \_Constant: , line:16:38, endln:16:39
           |vpiParent:
@@ -472,7 +474,7 @@ Design: (unnamed)
         |vpiName:p
         |vpiFullName:work@top.p
         |vpiActual:
-        \_LogicNet: (work@top.p), line:16:41, endln:16:42
+        \_Net: (work@top.p), line:16:41, endln:16:42
       |vpiName:ast_alert_o.alerts_ack[0].p
     |vpiLhs:
     \_RefObj: (work@top.o), line:16:11, endln:16:12
@@ -481,7 +483,7 @@ Design: (unnamed)
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicNet: (work@top.o), line:11:19, endln:11:20
+      \_Net: (work@top.o), line:11:19, endln:11:20
 |vpiTypedef:
 \_ModuleTypespec: (top)
   |vpiParent:

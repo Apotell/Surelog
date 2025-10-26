@@ -125,6 +125,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv:10:1: No timescale set for "axi_err_slv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv:23:1: No timescale set for "ariane_testharness".
 [INF:CP0300] Compilation...
+[INF:CP0301] ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv:1:1: Compile package "ariane_axi_soc".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv:23:1: Compile module "work@ariane_testharness".
 [INF:CP0303] ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv:10:1: Compile module "work@axi_err_slv".
 [INF:UH0706] Creating UHDM Model...
@@ -136,10 +137,10 @@ Constant                                               1
 Design                                                 1
 HierPath                                               1
 Identifier                                             5
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         2
+Net                                                    1
 Package                                                1
 RefModule                                              1
 RefObj                                                 2
@@ -149,6 +150,7 @@ StructTypespec                                         1
 TypeParameter                                          1
 TypedefTypespec                                        1
 TypespecMember                                         2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -283,13 +285,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:33, endln:11:38
   |vpiImportTypespec:
-  \_LogicNet: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
+  \_Net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
     |vpiParent:
     \_Module: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
     |vpiTypespec:
     \_RefTypespec: (work@axi_err_slv.err_resp.resp_t), line:14:3, endln:14:9
       |vpiParent:
-      \_LogicNet: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
+      \_Net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
       |vpiName:resp_t
       |vpiFullName:work@axi_err_slv.err_resp.resp_t
       |vpiActual:
@@ -298,7 +300,7 @@ Design: (unnamed)
     |vpiFullName:work@axi_err_slv.err_resp
   |vpiDefName:work@axi_err_slv
   |vpiNet:
-  \_LogicNet: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
+  \_Net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
   |vpiProcess:
   \_Always: , line:16:3, endln:19:6
     |vpiParent:
@@ -314,7 +316,7 @@ Design: (unnamed)
         |vpiName:proc_w_channel
       |vpiFullName:work@axi_err_slv.proc_w_channel
       |vpiImportTypespec:
-      \_LogicNet: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
+      \_Net: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
         |vpiParent:
         \_Begin: (work@axi_err_slv.proc_w_channel), line:16:15, endln:19:6
         |vpiName:w_ready
@@ -344,14 +346,14 @@ Design: (unnamed)
             \_HierPath: (err_resp.w_ready), line:17:13, endln:17:21
             |vpiName:err_resp
             |vpiActual:
-            \_LogicNet: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
+            \_Net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
           |vpiActual:
           \_RefObj: (w_ready), line:17:14, endln:17:21
             |vpiParent:
             \_HierPath: (err_resp.w_ready), line:17:13, endln:17:21
             |vpiName:w_ready
             |vpiActual:
-            \_LogicNet: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
+            \_Net: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
           |vpiName:err_resp.w_ready
     |vpiAlwaysType:2
 |vpiTypedef:

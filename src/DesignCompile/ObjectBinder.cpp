@@ -1367,31 +1367,6 @@ void ObjectBinder::reportErrors() {
   ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
   for (auto& [object, component] : m_unbounded) {
-    bool reportMissingActual = false;
-    if (const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(object)) {
-      if (ro->getActual() == nullptr) {
-        if (const uhdm::Any* const parent = object->getParent()) {
-          if (!((parent->getUhdmType() == uhdm::UhdmType::HierPath) &&
-                (areSimilarNames(object, "size") ||
-                 areSimilarNames(object, "delete"))))
-            reportMissingActual = true;
-          if (!areSimilarNames(object, "default")) reportMissingActual = true;
-        }
-      }
-    } else if (const uhdm::RefTypespec* const rt =
-                   any_cast<uhdm::RefTypespec>(object)) {
-      if ((rt->getActual() == nullptr) ||
-          (rt->getActual()->getUhdmType() ==
-           uhdm::UhdmType::UnsupportedTypespec)) {
-        reportMissingActual = true;
-      }
-    } else if (const uhdm::RefModule* const rm =
-                   any_cast<uhdm::RefModule>(object)) {
-      if (rm->getActual() == nullptr) {
-        reportMissingActual = true;
-      }
-    }
-
     if (getDefaultNetType(component) == VObjectType::NO_TYPE) {
       const std::string text =
           StrCat("id:", object->getUhdmId(), ", name: ", object->getName());

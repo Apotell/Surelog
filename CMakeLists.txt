@@ -209,6 +209,70 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TCMALLOC_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS}")
 
+if (MSVC)
+  set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS
+      _WIN32
+      WIN32
+      WIN64
+      _CRT_SECURE_NO_WARNINGS
+      _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1
+      _CRT_SECURE_NO_DEPRECATE=1
+      _SCL_SECURE_NO_WARNINGS=1
+      _CRT_NONSTDC_NO_WARNINGS=1
+      $<IF:$<CONFIG:Debug>,DEBUG,NDEBUG>
+      $<IF:$<CONFIG:Debug>,_DEBUG,NDEBUG>
+  )
+
+  set_property(DIRECTORY APPEND PROPERTY COMPILE_OPTIONS
+      /Zi
+      /W4
+      /EHsc
+      /MP
+      /FS
+      /bigobj
+      /Zc:wchar_t
+      /Zc:__cplusplus
+      /Zc:strictStrings
+      /Zc:throwingNew
+      /Zc:referenceBinding
+      /Zc:rvalueCast
+      /Zc:inline
+      /wd4100  # unreferenced formal parameter
+  )
+
+  set_property(DIRECTORY APPEND PROPERTY LINK_OPTIONS
+      /SUBSYSTEM:CONSOLE
+      /DYNAMICBASE
+      /NXCOMPAT
+      $<$<CONFIG:Debug>:/DEBUG>
+  )
+else()
+  set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS
+      _CRT_SECURE_NO_WARNINGS
+      _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1
+      _CRT_SECURE_NO_DEPRECATE=1
+      _SCL_SECURE_NO_WARNINGS=1
+      _CRT_NONSTDC_NO_WARNINGS=1
+      $<IF:$<CONFIG:Debug>,DEBUG,NDEBUG>
+  )
+
+  set_property(DIRECTORY APPEND PROPERTY COMPILE_OPTIONS
+      -pipe
+      -Wall
+      -Wno-unused-parameter
+      -Wno-switch
+      -Wno-unneeded-internal-declaration
+      -Wno-language-extension-token
+      -O$<IF:$<CONFIG:Debug>,0,3>
+      $<$<CONFIG:Debug>:-g>
+  )
+endif()
+
+set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS
+    $<IF:$<CONFIG:Debug>,SYMBOLID_DEBUG_ENABLED=1,SYMBOLID_DEBUG_ENABLED=0>
+    $<IF:$<CONFIG:Debug>,PATHID_DEBUG_ENABLED=1,PATHID_DEBUG_ENABLED=0>
+)
+
 if(MSVC)
   add_compile_definitions(_CRT_NONSTDC_NO_WARNINGS)
   add_compile_definitions(_CRT_SECURE_NO_WARNINGS)

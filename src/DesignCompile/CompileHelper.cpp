@@ -3676,15 +3676,8 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
   SymbolTable* const symbols = m_session->getSymbolTable();
   bool invalidValue = false;
   int32_t ncsize = 32;
-  uhdm::Range* r = nullptr;
   uhdm::UhdmType ttps = tps->getUhdmType();
-  uhdm::UhdmType baseType = uhdm::UhdmType::IntTypespec;
   if (ttps == uhdm::UhdmType::LogicTypespec) {
-    uhdm::LogicTypespec* lts = (uhdm::LogicTypespec*)tps;
-    baseType = uhdm::UhdmType::LogicTypespec;
-    if (lts->getRanges() && !lts->getRanges()->empty()) {
-      r = (*lts->getRanges())[0];
-    }
     ncsize = 1;
   } else if (ttps == uhdm::UhdmType::ArrayTypespec) {
     uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)tps;
@@ -3693,10 +3686,6 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
       ets = rt->getActual();
     }
     if (ets != nullptr) {
-      baseType = ets->getUhdmType();
-      if (lts->getRanges() && !lts->getRanges()->empty()) {
-        r = (*lts->getRanges())[0];
-      }
       ncsize = Bits(ets, invalidValue, component, compileDesign, instance,
                     fileSystem->toPathId(ets->getFile(), symbols),
                     ets->getStartLine(), false);
@@ -3708,20 +3697,11 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
       ets = rt->getActual();
     }
     if (ets != nullptr) {
-      baseType = ets->getUhdmType();
-      if (lts->getRanges() && !lts->getRanges()->empty()) {
-        r = (*lts->getRanges())[0];
-      }
       ncsize = Bits(ets, invalidValue, component, compileDesign, instance,
                     fileSystem->toPathId(ets->getFile(), symbols),
                     ets->getStartLine(), false);
     }
   } else if (ttps == uhdm::UhdmType::BitTypespec) {
-    uhdm::BitTypespec* lts = (uhdm::BitTypespec*)tps;
-    baseType = uhdm::UhdmType::BitTypespec;
-    if (lts->getRanges() && !lts->getRanges()->empty()) {
-      r = (*lts->getRanges())[0];
-    }
     ncsize = 1;
   } else if (ttps == uhdm::UhdmType::IntTypespec) {
     ncsize = 32;
@@ -4156,7 +4136,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
         c = (uhdm::Constant*)uhdm::clone_tree(c, &elaboratorContext);
         result = c;
       }
-      c->setValue("UINT:" + std::to_string(uval));
+      c->setValue(StrCat("UINT:", uval));
       c->setDecompile(std::to_string(uval));
       c->setConstType(vpiUIntConst);
       c->setSize(size);
@@ -4214,7 +4194,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
                 c = (uhdm::Constant*)uhdm::clone_tree(c, &elaboratorContext);
                 result = c;
               }
-              c->setValue("INT:" + std::to_string(val));
+              c->setValue(StrCat("INT:", val));
               c->setDecompile(std::to_string(val));
               c->setConstType(vpiIntConst);
             } else if ((orig_size == 1) && (val == 1)) {
@@ -4224,7 +4204,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
                 c = (uhdm::Constant*)uhdm::clone_tree(c, &elaboratorContext);
                 result = c;
               }
-              c->setValue("UINT:" + std::to_string(mask));
+              c->setValue(StrCat("UINT:", mask));
               c->setDecompile(std::to_string(mask));
               c->setConstType(vpiUIntConst);
             }
@@ -4236,7 +4216,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
                 c = (uhdm::Constant*)uhdm::clone_tree(c, &elaboratorContext);
                 result = c;
               }
-              c->setValue("UINT:" + std::to_string(mask));
+              c->setValue(StrCat("UINT:", mask));
               c->setDecompile(std::to_string(mask));
               c->setConstType(vpiUIntConst);
             }
@@ -4256,7 +4236,7 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
           if (size <= 64) {
             uint64_t mask = NumUtils::getMask(size);
             uval = mask;
-            c->setValue("UINT:" + std::to_string(uval));
+            c->setValue(StrCat("UINT:", uval));
             c->setDecompile(std::to_string(uval));
             c->setConstType(vpiUIntConst);
           } else {
@@ -5027,7 +5007,7 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
     if (lv == 1) {
       if (size <= 64) {
         uint64_t mask = NumUtils::getMask(size);
-        c->setValue("UINT:" + std::to_string(mask));
+        c->setValue(StrCat("UINT:", mask));
         c->setDecompile(std::to_string(mask));
         c->setConstType(vpiUIntConst);
       } else {
@@ -5335,51 +5315,25 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
   }
   for (uint32_t i = 0; i < size; i++) {
     if (vars && ((int32_t)i < (int32_t)(vars->size()))) {
-      ((uhdm::Variable*)(*vars)[i])
-          ->setValue("UINT:" + std::to_string(values[i]));
+      ((uhdm::Variable*)(*vars)[i])->setValue(StrCat("UINT:", values[i]));
     }
   }
 
-  if (tps->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
-    const uhdm::PackedArrayTypespec* atps =
-        (const uhdm::PackedArrayTypespec*)tps;
-    const uhdm::Typespec* etps = nullptr;
-    if (const uhdm::RefTypespec* rt = atps->getElemTypespec()) {
-      etps = rt->getActual();
+  if ((tps->getUhdmType() == uhdm::UhdmType::LogicTypespec) && patternSize) {
+    uhdm::Constant* c = s.make<uhdm::Constant>();
+    c->setFile(rhs->getFile());
+    c->setStartLine(rhs->getStartLine());
+    c->setStartColumn(rhs->getStartColumn());
+    c->setEndLine(rhs->getEndLine());
+    c->setEndColumn(rhs->getEndColumn());
+    result = c;
+    uint64_t value = 0;
+    for (uint64_t i = 0; i < patternSize; i++) {
+      value |= (values[i]) ? ((uint64_t)1 << (patternSize - 1 - i)) : 0;
     }
-    // if (etps != nullptr) {
-    //   uhdm::UhdmType etps_type = etps->getUhdmType();
-    //   if (size > 1) {
-    //     if (etps_type == uhdm::UhdmType::EnumTypespec) {
-    //       uhdm::PackedArrayVar* array = s.make<uhdm::PackedArrayVar>();
-    //       array->setSize(size);
-    //       array->setRanges(atps->getRanges());
-    //       array->setElements(vars);
-    //       for (uint32_t i = 0; i < size; i++) {
-    //         vars->emplace_back(s.make<uhdm::EnumVar>());
-    //       }
-    //       result = array;
-    //     }
-    //   }
-    // }
-  } else if (tps->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
-    if (patternSize) {
-      uhdm::Constant* c = s.make<uhdm::Constant>();
-      c->setFile(rhs->getFile());
-      c->setStartLine(rhs->getStartLine());
-      c->setStartColumn(rhs->getStartColumn());
-      c->setEndLine(rhs->getEndLine());
-      c->setEndColumn(rhs->getEndColumn());
-      result = c;
-      uint64_t value = 0;
-      for (uint64_t i = 0; i < patternSize; i++) {
-        value |= (values[i]) ? ((uint64_t)1 << (patternSize - 1 - i)) : 0;
-      }
-      result->setSize(size);
-      result->setValue("UINT:" + std::to_string(value));
-      result->setDecompile(std::to_string(size) + "\'d" +
-                           std::to_string(value));
-    }
+    result->setSize(size);
+    result->setValue(StrCat("UINT:", value));
+    result->setDecompile(StrCat(size, "\'d", value));
   }
   return result;
 }
@@ -5487,10 +5441,10 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val,
     r->setParent(tps);
     tps->getRanges(true)->emplace_back(r);
     uhdm::Constant* lc = s.make<uhdm::Constant>();
-    lc->setValue("UINT:" + std::to_string(lr));
+    lc->setValue(StrCat("UINT:", lr));
     r->setLeftExpr(lc);
     uhdm::Constant* rc = s.make<uhdm::Constant>();
-    rc->setValue("UINT:" + std::to_string(rr));
+    rc->setValue(StrCat("UINT:", rr));
     r->setRightExpr(rc);
   }
 }

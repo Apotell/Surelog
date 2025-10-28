@@ -420,7 +420,6 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       if (tickNumber || largeInt(value)) {
         char base = 'd';
         uint32_t i = 0;
-        bool isSigned = false;
         std::string size(value);
         if (tickNumber) {
           for (i = 0; i < value.size(); i++) {
@@ -431,7 +430,6 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
             }
           }
           if (value.find_first_of("sS") != std::string::npos) {
-            isSigned = true;
             v = value.substr(i + 3);
           } else {
             v = value.substr(i + 2);
@@ -2207,7 +2205,6 @@ uhdm::Any *CompileHelper::compileExpression(
             NodeId paramId = fC->Sibling(child);
             if (fC->Type(paramId) != VObjectType::STRING_CONST)
               paramId = fC->Child(paramId);
-            NodeId selectId = fC->Sibling(paramId);
             const std::string_view n = fC->SymName(paramId);
             name.assign(packageName).append("::").append(n);
           } else if (childType == VObjectType::paClass_type) {
@@ -2277,26 +2274,6 @@ uhdm::Any *CompileHelper::compileExpression(
           if (result) break;
 
           if (sval == nullptr || (sval && !sval->isValid())) {
-            if (component && (result == nullptr)) {
-              if (uhdm::ParamAssignCollection *param_assigns =
-                      component->getParamAssigns()) {
-                for (uhdm::ParamAssign *param_ass : *param_assigns) {
-                  if (param_ass && param_ass->getLhs()) {
-                    const std::string_view param_name =
-                        param_ass->getLhs()->getName();
-                    bool paramFromPackage = false;
-                    if (param_ass->getLhs()->getUhdmType() ==
-                        uhdm::UhdmType::Parameter) {
-                      const uhdm::Parameter *tp =
-                          (uhdm::Parameter *)param_ass->getLhs();
-                      if (!tp->getImported().empty()) {
-                        paramFromPackage = true;
-                      }
-                    }
-                  }
-                }
-              }
-            }
             if (result == nullptr) {
               uhdm::RefObj *ref = s.make<uhdm::RefObj>();
               ref->setName(name);
@@ -3228,7 +3205,6 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         bool associativeArray = false;
         if (rexp && (rexp->getUhdmType() == uhdm::UhdmType::Constant)) {
           uhdm::Constant *c = (uhdm::Constant *)rexp;
-          const std::string_view val = c->getValue();
           if (c->getConstType() == vpiUnboundedConst) associativeArray = true;
         }
 
@@ -3662,85 +3638,23 @@ uhdm::Any *CompileHelper::compileBits(
     CompileDesign *compileDesign, uhdm::Any *pexpr, ValuedComponentI *instance,
     bool sizeMode, bool muteErrors) {
   uhdm::Serializer &s = compileDesign->getSerializer();
-  uhdm::Any *result = nullptr;
   NodeId callId = List_of_arguments;
   VObjectType callType = VObjectType::paSubroutine_call;
   if (NodeId id = fC->sl_parent(List_of_arguments, {callType}, callType)) {
     callId = id;
   }
-  NodeId Expression = List_of_arguments;
-  if (fC->Type(Expression) == VObjectType::paArgument_list) {
-    Expression = fC->Child(Expression);
-  } else if (fC->Type(Expression) == VObjectType::paData_type) {
-    Expression = fC->Child(Expression);
-  }
-  NodeId typeSpecId;
-  uint64_t bits = 0;
-  const uhdm::Typespec *tps = nullptr;
-  switch (fC->Type(Expression)) {
-    case VObjectType::paIntegerAtomType_Byte:
-    case VObjectType::paIntegerAtomType_Int:
-    case VObjectType::paIntegerAtomType_Integer:
-    case VObjectType::paIntegerAtomType_LongInt:
-    case VObjectType::paIntegerAtomType_Shortint:
-    case VObjectType::paIntegerAtomType_Time:
-    case VObjectType::paIntVec_TypeLogic:
-    case VObjectType::paIntVec_TypeBit:
-    case VObjectType::paIntVec_TypeReg:
-      typeSpecId = Expression;
-      break;
-    default: {
-      NodeId Primary = fC->Child(Expression);
-      NodeId Primary_literal = fC->Child(Primary);
-      if (fC->Type(Primary_literal) == VObjectType::paConcatenation) {
-        NodeId ConcatExpression = fC->Child(Primary_literal);
-        while (ConcatExpression) {
-          NodeId Primary = fC->Child(ConcatExpression);
-          NodeId Primary_literal = fC->Child(Primary);
-          NodeId StringConst = fC->Child(Primary_literal);
-          typeSpecId = StringConst;
-          tps = getTypespec(component, fC, typeSpecId, compileDesign, instance);
-          ConcatExpression = fC->Sibling(ConcatExpression);
-        }
-      } else if (fC->Type(Primary_literal) ==
-                 VObjectType::paComplex_func_call) {
-        typeSpecId = Primary_literal;
-      } else {
-        NodeId StringConst = fC->Child(Primary_literal);
-        typeSpecId = StringConst;
-      }
-    }
+  if (!callId) return nullptr;
+  uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
+  sys->setParent(pexpr);
+  fC->populateCoreMembers(callId, callId, sys);
+  sys->setName(sizeMode ? "$size" : "$bits");
+  if (uhdm::AnyCollection *arguments =
+          compileTfCallArguments(component, fC, List_of_arguments,
+                                 compileDesign, sys, instance, muteErrors)) {
+    sys->setArguments(arguments);
   }
 
-  if (bits == 0) {
-    tps = getTypespec(component, fC, typeSpecId, compileDesign, instance);
-  }
-
-  if (sizeMode) {
-    uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
-    sys->setName("$size");
-    sys->setParent(pexpr);
-    fC->populateCoreMembers(callId, callId, sys);
-    if (uhdm::AnyCollection *arguments =
-            compileTfCallArguments(component, fC, List_of_arguments,
-                                   compileDesign, sys, instance, muteErrors)) {
-      sys->setArguments(arguments);
-    }
-    result = sys;
-  } else {
-    uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
-    sys->setName("$bits");
-    sys->setParent(pexpr);
-    fC->populateCoreMembers(callId, callId, sys);
-    if (uhdm::AnyCollection *arguments =
-            compileTfCallArguments(component, fC, List_of_arguments,
-                                   compileDesign, sys, instance, muteErrors)) {
-      sys->setArguments(arguments);
-    }
-    result = sys;
-  }
-
-  return result;
+  return sys;
 }
 
 uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,

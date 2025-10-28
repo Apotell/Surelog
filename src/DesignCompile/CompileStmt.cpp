@@ -2040,10 +2040,6 @@ bool CompileHelper::compileClassConstructorDeclaration(
     Tf_port_list = fC->Sibling(Tf_port_list);
   }
 
-  NodeId tf_Port_ItemId = fC->Child(Tf_port_list);
-  NodeId data_type_or_implicitId = fC->Child(tf_Port_ItemId);
-  NodeId varId = fC->Sibling(data_type_or_implicitId);
-
   func->setName(name);
   func->setIODecls(
       compileTfPortList(component, func, fC, Tf_port_list, compileDesign));

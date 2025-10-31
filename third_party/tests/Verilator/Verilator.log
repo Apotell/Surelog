@@ -1858,18 +1858,21 @@ Processing: -cd . +incdir+. -parse -noelab -nocache -nobuiltin -nonote -noinfo -
 [SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:23:70: Syntax error: missing '(' at '"#~"',
       $display("pre thrupre thrumid thrupost post: #~@"right#~@side#~@"#~");
                                                                       ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:23:70:.
-[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:31: Syntax error: no viable alternative at input '$display("left_side: #~@"`',
-      $display("left_side: #~@"`rs\"#~");
-                               ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:31:.
+[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:32: Syntax error: no viable alternative at input '$display("left_side : #~@"`',
+      $display("left_side : #~@"`rs#~@#~@"#~");
+                                ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:32:.
 [SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:14: Syntax error: mismatched input '(' expecting ';',
-      $display("left_side: #~@"`rs\"#~");
+      $display("left_side : #~@"`rs#~@#~@"#~");
               ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:14:.
-[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:34: Syntax error: mismatched input '\' expecting <EOF>,
-      $display("left_side: #~@"`rs\"#~");
-                                  ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:34:.
+[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:41: Syntax error: no viable alternative at input '#~@#~@"#~"',
+      $display("left_side : #~@"`rs#~@#~@"#~");
+                                         ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:26:41:.
+[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:27:6: Syntax error: mismatched input '$' expecting <EOF>,
+      $display("na : #~@"`rs#~@#~@"#~");
+      ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_pp_display.v:27:6:.
 [WRN:PA0215] Invalid VObject location.
 [  FATAL] : 0
-[ SYNTAX] : 6
+[ SYNTAX] : 7
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
@@ -2833,7 +2836,7 @@ Processing: -cd . +incdir+. -parse -noelab -nocache -nobuiltin -nonote -noinfo -
 [ERR:PP0109] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc_def09.v:56: Macro instantiation omits argument 1 (a) for "MACROQUOTE",
 ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc_def09.v:55:9: No default value for argument 1 (a) in macro definition.
 [SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc_def09.v:11: Syntax error: mismatched input ''' expecting <EOF>,
-'initial $display("start", "msg1" , "msg2", "end");'
+'initial $display("start", "msg1"  , "msg2" , "end");'
 ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc_def09.v:11:0:.
 [  FATAL] : 0
 [ SYNTAX] : 1
@@ -4266,9 +4269,9 @@ text.
 [SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:65:85: Syntax error: no viable alternative at input 'LLZZ SURELOG_MACRO_NOT_DEFINED:withparam!!!',
 SURELOG_MACRO_NOT_DEFINED:withparam!!!  SURELOG_MACRO_NOT_DEFINED:withparam!!!  LLZZ SURELOG_MACRO_NOT_DEFINED:withparam!!!  SURELOG_MACRO_NOT_DEFINED:withparam!!! 
                                                                                      ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:65:85:.
-[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:67:15: Syntax error: no viable alternative at input 'firstline comma","',
-firstline comma","line LLZZ firstline comma","line
-               ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:67:15:.
+[SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:65:6: Syntax error: no viable alternative at input 'firstline\n\t \n\tcomma","',
+	comma","line LLZZ firstline
+      ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:65:6:.
 [SNT:PA0207] ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:84:1: Syntax error: mismatched input '$' expecting <EOF>,
 	$c("Zap(\"","bug2","\");");;
  ^-- ${SURELOG_DIR}/third_party/tests/Verilator/t_preproc.v:84:1:.
@@ -5916,7 +5919,7 @@ Processing: -cd t_sv_bus_mux_demux +incdir+. -parse -noelab -nocache -nobuiltin 
 [   NOTE] : 0
 Processed 837 tests.
 [  FATAL] : 0
-[ SYNTAX] : 137
+[ SYNTAX] : 138
 [  ERROR] : 422
 [WARNING] : 47
 [   NOTE] : 0

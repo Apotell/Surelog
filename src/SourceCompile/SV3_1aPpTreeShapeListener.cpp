@@ -232,11 +232,6 @@ void SV3_1aPpTreeShapeListener::exitMacro_actual_arg(
   addVObject(ctx, ctx->getText(), VObjectType::ppText_blob);
 }
 
-void SV3_1aPpTreeShapeListener::exitMacro_actual_arg_fragment(
-    SV3_1aPpParser::Macro_actual_arg_fragmentContext *ctx) {
-  // Do nothing.. let Macro_actual_arg be the leaf node of this sub-tree
-}
-
 void SV3_1aPpTreeShapeListener::exitString_blob(
     SV3_1aPpParser::String_blobContext *ctx) {
   addVObject(ctx, ctx->getText(), VObjectType::ppString);

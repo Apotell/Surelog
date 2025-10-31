@@ -999,7 +999,7 @@ PreprocessFile::evaluateMacro_(
       if (actual_args[i] == SymbolTable::getEmptyMacroMarker()) {
         actual_args[i].clear();
       }
-      std::string_view actual_arg = StringUtils::trim(actual_args[i]);
+      std::string_view actual_arg = actual_args[i];
       StringUtils::replaceInTokenVector(body_tokens,
                                         {"``", StrCat("`", formal), "``"},
                                         StrCat("`", actual_arg));

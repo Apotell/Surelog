@@ -622,33 +622,32 @@ pragma_expression
   | ANY
   ;
 
-macro_actual_arg: macro_actual_arg_fragment*;
-
-macro_actual_arg_fragment
-  : SIMPLE_IDENTIFIER
-  | integral_number
-  | SPACES
-  | FIXED_POINT_NUMBER
-  | QUOTED_STRING
-  | paired_parens
-  | ASSIGN_OP
-  | DOUBLE_QUOTE
-  | macro_instance
-  | CR
-  | TEXT_CR
-  | escaped_identifier
-  | simple_args_macro_definition_in_macro_body
-  | simple_no_args_macro_definition_in_macro_body
-  | comment
-  | pound_delay
-  | pound_pound_delay
-  | SPECIAL
-  | ANY
+macro_actual_arg
+  : (
+    SIMPLE_IDENTIFIER
+    | integral_number
+    | SPACES
+    | FIXED_POINT_NUMBER
+    | QUOTED_STRING
+    | paired_parens
+    | ASSIGN_OP
+    | DOUBLE_QUOTE
+    | macro_instance
+    | CR
+    | TEXT_CR
+    | escaped_identifier
+    | simple_args_macro_definition_in_macro_body
+    | simple_no_args_macro_definition_in_macro_body
+    | comment
+    | pound_delay
+    | pound_pound_delay
+    | SPECIAL
+    | ANY
+  )*
   ;
 
 paired_parens
-  : (
-    OPEN_PARENS (
+  : OPEN_PARENS (
       SIMPLE_IDENTIFIER
       | integral_number
       | SPACES
@@ -666,9 +665,7 @@ paired_parens
       | SPECIAL
       | ANY
     )* CLOSE_PARENS
-  )
-  | (
-    OPEN_CURLY (
+  | OPEN_CURLY (
       SIMPLE_IDENTIFIER
       | integral_number
       | SPACES
@@ -678,6 +675,7 @@ paired_parens
       | ASSIGN_OP
       | DOUBLE_QUOTE
       | macro_instance
+      | TEXT_CR
       | CR
       | paired_parens
       | escaped_identifier
@@ -685,9 +683,7 @@ paired_parens
       | SPECIAL
       | ANY
     )* CLOSE_CURLY
-  )
-  | (
-    OPEN_BRACKET (
+  | OPEN_BRACKET (
       SIMPLE_IDENTIFIER
       | integral_number
       | SPACES
@@ -697,6 +693,7 @@ paired_parens
       | ASSIGN_OP
       | DOUBLE_QUOTE
       | macro_instance
+      | TEXT_CR
       | CR
       | paired_parens
       | escaped_identifier
@@ -704,7 +701,6 @@ paired_parens
       | SPECIAL
       | ANY
     )* CLOSE_BRACKET
-  )
   ;
 
 text_blob

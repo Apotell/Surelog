@@ -420,10 +420,6 @@ bool isMultidimensional(const uhdm::Typespec* ts) {
       uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)ts;
       if (lts->getRanges() && lts->getRanges()->size() > 1)
         isMultiDimension = true;
-    } else if (ts->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
-      uhdm::PackedArrayTypespec* lts = (uhdm::PackedArrayTypespec*)ts;
-      if (lts->getRanges() && lts->getRanges()->size() > 1)
-        isMultiDimension = true;
     } else if (ts->getUhdmType() == uhdm::UhdmType::BitTypespec) {
       uhdm::BitTypespec* lts = (uhdm::BitTypespec*)ts;
       if (lts->getRanges() && lts->getRanges()->size() > 1)

@@ -894,12 +894,6 @@ const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
                             at->getElemTypespec()) {
                       return et->getActual();
                     }
-                  } else if (const uhdm::PackedArrayTypespec* const pat =
-                                 iod2->getActual<uhdm::PackedArrayTypespec>()) {
-                    if (const uhdm::RefTypespec* const et =
-                            at->getElemTypespec()) {
-                      return et->getActual();
-                    }
                   }
                   return iod2->getActual();
                 }

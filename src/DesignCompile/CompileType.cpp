@@ -235,11 +235,6 @@ uhdm::Any* CompileHelper::compileVariable(
             uhdm::Variable* const av = s.make<uhdm::Variable>();
             av->setName(fC->SymName(nameId));
             result = av;
-          } else if ((ts != nullptr) && (ts->getUhdmType() ==
-                                         uhdm::UhdmType::PackedArrayTypespec)) {
-            uhdm::Variable* const pav = s.make<uhdm::Variable>();
-            pav->setName(fC->SymName(nameId));
-            result = pav;
           } else {
             uhdm::RefObj* ro = s.make<uhdm::RefObj>();
             ro->setName(fC->SymName(nameId));
@@ -409,7 +404,6 @@ uhdm::Any* CompileHelper::compileVariable(
 
     switch (tpstype) {
       case uhdm::UhdmType::ArrayTypespec:
-      case uhdm::UhdmType::PackedArrayTypespec:
       case uhdm::UhdmType::StructTypespec:
       case uhdm::UhdmType::LogicTypespec:
       case uhdm::UhdmType::EnumTypespec:
@@ -956,7 +950,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 
     // create packed array
-    uhdm::PackedArrayTypespec* tpaps = s.make<uhdm::PackedArrayTypespec>();
+    uhdm::ArrayTypespec* tpaps = s.make<uhdm::ArrayTypespec>();
+    tpaps->setPacked(true);
     tpaps->setParent(pscope);
     fC->populateCoreMembers(nodeId, packedId, tpaps);
     uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
@@ -1108,7 +1103,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     for (auto r : *unpackedDimensions) r->setParent(taps);
     retts = taps;
   } else if (packedId) {
-    uhdm::PackedArrayTypespec* taps = s.make<uhdm::PackedArrayTypespec>();
+    uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
+    taps->setPacked(true);
     taps->setParent(pscope);
     fC->populateCoreMembers(nodeId, nodeId, taps);
     taps->setRanges(packedDimensions);
@@ -1798,18 +1794,6 @@ uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
       }
       break;
     }
-    case uhdm::UhdmType::PackedArrayTypespec: {
-      uhdm::PackedArrayTypespec* tps = (uhdm::PackedArrayTypespec*)spec;
-      ranges = tps->getRanges();
-      if (ranges) {
-        uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-        uhdm::PackedArrayTypespec* res = any_cast<uhdm::PackedArrayTypespec>(
-            uhdm::clone_tree((uhdm::Any*)spec, &elaboratorContext));
-        ranges = res->getRanges();
-        result = res;
-      }
-      break;
-    }
     default:
       break;
   }
@@ -1869,20 +1853,6 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
       }
       case uhdm::UhdmType::ArrayTypespec: {
         uhdm::ArrayTypespec* tps = (uhdm::ArrayTypespec*)tmp;
-        if (tps->getRanges()) {
-          for (auto op : *tps->getRanges()) {
-            stack.push(op);
-          }
-        }
-        if (const uhdm::RefTypespec* rt = tps->getElemTypespec()) {
-          if (const uhdm::Any* etps = rt->getActual()) {
-            stack.push(etps);
-          }
-        }
-        break;
-      }
-      case uhdm::UhdmType::PackedArrayTypespec: {
-        uhdm::PackedArrayTypespec* tps = (uhdm::PackedArrayTypespec*)tmp;
         if (tps->getRanges()) {
           for (auto op : *tps->getRanges()) {
             stack.push(op);

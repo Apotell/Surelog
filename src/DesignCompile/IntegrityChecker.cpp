@@ -315,10 +315,10 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         // BlahBlab: constant|operation
         expectedRelation = LineColumnRelation::Inside;
       }
-    } else if (const uhdm::PackedArrayTypespec* const
-                   parentAsPackedArrayTypespec =
-                       parent->Cast<uhdm::PackedArrayTypespec>()) {
-      if (parentAsPackedArrayTypespec->getElemTypespec() == object) {
+    } else if (const uhdm::ArrayTypespec* const parentAsArrayTypespec =
+                   parent->Cast<uhdm::ArrayTypespec>()) {
+      if ((parentAsArrayTypespec->getElemTypespec() == object) &&
+          parentAsArrayTypespec->getPacked()) {
         // elem_type [0:n] var_name
         expectedRelation = LineColumnRelation::Before;
       }
@@ -331,6 +331,14 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
                 parentAsVariable->getTypespec()) {
           if (const uhdm::ArrayTypespec* const t =
                   rt->getActual<uhdm::ArrayTypespec>()) {
+            if (t->getPacked()) {
+              // elem_type [0:n] var_name
+              expectedRelation = LineColumnRelation::Before;
+            } else {
+              // <var_name> <ranges> = ....
+              // ArrayVar::typespec refers to the ranges
+              expectedRelation = LineColumnRelation::After;
+            }
             if (t->getArrayType() == vpiQueueArray) {
               // In the case of declaration, i.e. <type> <var_name[$] it is
               // 'After' In the case of assignment to empty queue, it is
@@ -341,10 +349,6 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
                       ? LineColumnRelation::Inside
                       : LineColumnRelation::After;
             }
-          } else {
-            // <var_name> <ranges> = ....
-            // ArrayVar::typespec refers to the ranges
-            expectedRelation = LineColumnRelation::After;
           }
         }
         // if (parentAsArrayVar->getArrayType() == vpiQueueArray) {
@@ -413,11 +417,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
                    parent->Cast<uhdm::Variable>()) {
       if (const uhdm::RefTypespec* const rt = parentAsVariable->getTypespec()) {
         if (rt->getActual<uhdm::ArrayTypespec>() != nullptr) {
-          // int var_name[range]
-          expectedRelation = LineColumnRelation::After;
-        } else if (rt->getActual<uhdm::PackedArrayTypespec>() != nullptr) {
-          // elem_type [range] var_name
-          expectedRelation = LineColumnRelation::Before;
+          if (rt->getActual<uhdm::ArrayTypespec>()->getPacked()) {
+            // logic [range] var_name
+            expectedRelation = LineColumnRelation::Before;
+          } else {
+            // int var_name[range]
+            expectedRelation = LineColumnRelation::After;
+          }
         } else if (rt->getActual<uhdm::LogicTypespec>() != nullptr) {
           // logic [range] var_name
           expectedRelation = LineColumnRelation::Before;
@@ -511,9 +517,9 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
     bool isPackedArray = false;
     if (const uhdm::Variable* const v = parent->Cast<uhdm::Variable>()) {
       if (const uhdm::RefTypespec* const rt = v->getTypespec()) {
-        if (const uhdm::PackedArrayTypespec* const pat =
-                rt->getActual<uhdm::PackedArrayTypespec>()) {
-          isPackedArray = true;
+        if (const uhdm::ArrayTypespec* const pat =
+                rt->getActual<uhdm::ArrayTypespec>()) {
+          isPackedArray = pat->getPacked();
         }
       }
     }
@@ -924,7 +930,6 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
       uhdm::UhdmType::NamedEvent,
       uhdm::UhdmType::NamedEventArray,
       uhdm::UhdmType::Net,
-      uhdm::UhdmType::PackedArrayTypespec,
       uhdm::UhdmType::ParamAssign,
       uhdm::UhdmType::Parameter,
       uhdm::UhdmType::PropertyDecl,
@@ -1190,8 +1195,6 @@ void IntegrityChecker::visitNullStmt(const uhdm::NullStmt* object) {}
 void IntegrityChecker::visitOperation(const uhdm::Operation* object) {}
 void IntegrityChecker::visitOrderedWait(const uhdm::OrderedWait* object) {}
 void IntegrityChecker::visitPackage(const uhdm::Package* object) {}
-void IntegrityChecker::visitPackedArrayTypespec(
-    const uhdm::PackedArrayTypespec* object) {}
 void IntegrityChecker::visitParamAssign(const uhdm::ParamAssign* object) {}
 void IntegrityChecker::visitParameter(const uhdm::Parameter* object) {}
 void IntegrityChecker::visitPartSelect(const uhdm::PartSelect* object) {
@@ -1486,7 +1489,6 @@ void IntegrityChecker::visitNullStmtCollection(const uhdm::Any* object, const uh
 void IntegrityChecker::visitOperationCollection(const uhdm::Any* object, const uhdm::OperationCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitOrderedWaitCollection(const uhdm::Any* object, const uhdm::OrderedWaitCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitPackageCollection(const uhdm::Any* object, const uhdm::PackageCollection& objects) { reportDuplicates(object, objects); }
-void IntegrityChecker::visitPackedArrayTypespecCollection(const uhdm::Any* object, const uhdm::PackedArrayTypespecCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitParamAssignCollection(const uhdm::Any* object, const uhdm::ParamAssignCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitParameterCollection(const uhdm::Any* object, const uhdm::ParameterCollection& objects) { reportDuplicates(object, objects); }
 void IntegrityChecker::visitPartSelectCollection(const uhdm::Any* object, const uhdm::PartSelectCollection& objects) { reportDuplicates(object, objects); }

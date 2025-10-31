@@ -211,7 +211,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitOperation(const uhdm::Operation* object) final;
   void visitOrderedWait(const uhdm::OrderedWait* object) final;
   void visitPackage(const uhdm::Package* object) final;
-  void visitPackedArrayTypespec(const uhdm::PackedArrayTypespec* object) final;
   void visitParamAssign(const uhdm::ParamAssign* object) final;
   void visitParameter(const uhdm::Parameter* object) final;
   void visitPartSelect(const uhdm::PartSelect* object) final;
@@ -410,7 +409,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   void visitOperationCollection(const uhdm::Any* object, const uhdm::OperationCollection& objects) final;
   void visitOrderedWaitCollection(const uhdm::Any* object, const uhdm::OrderedWaitCollection& objects) final;
   void visitPackageCollection(const uhdm::Any* object, const uhdm::PackageCollection& objects) final;
-  void visitPackedArrayTypespecCollection(const uhdm::Any* object, const uhdm::PackedArrayTypespecCollection& objects) final;
   void visitParamAssignCollection(const uhdm::Any* object, const uhdm::ParamAssignCollection& objects) final;
   void visitParameterCollection(const uhdm::Any* object, const uhdm::ParameterCollection& objects) final;
   void visitPartSelectCollection(const uhdm::Any* object, const uhdm::PartSelectCollection& objects) final;

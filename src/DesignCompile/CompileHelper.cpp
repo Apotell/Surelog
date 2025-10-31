@@ -1604,9 +1604,9 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     uhdm::Typespec* tmp = tps;
     uhdm::UhdmType ttmp = tmp->getUhdmType();
     if ((tps != nullptr) &&
-        (tps->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec)) {
+        (tps->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
       if (uhdm::RefTypespec* ert =
-              ((uhdm::PackedArrayTypespec*)tps)->getElemTypespec()) {
+              ((uhdm::ArrayTypespec*)tps)->getElemTypespec()) {
         tmp = ert->getActual();
       }
     } else if (ttmp == uhdm::UhdmType::StructTypespec) {
@@ -1702,8 +1702,8 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         int32_t opType = op->getOpType();
         const uhdm::Typespec* tp = tps;
         if (opType == vpiAssignmentPatternOp) {
-          if (tp && tp->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
-            uhdm::PackedArrayTypespec* ptp = (uhdm::PackedArrayTypespec*)tp;
+          if (tp && (tp->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
+            uhdm::ArrayTypespec* ptp = (uhdm::ArrayTypespec*)tp;
             if (const uhdm::RefTypespec* ert = ptp->getElemTypespec()) {
               tp = ert->getActual();
             }
@@ -3599,18 +3599,17 @@ bool CompileHelper::isMultidimensional(uhdm::Typespec* ts,
       //}
     } else if (ttps == uhdm::UhdmType::ArrayTypespec) {
       uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)ts;
-      if (lts->getRanges() && lts->getRanges()->size() > 1)
-        isMultiDimension = true;
-    } else if (ttps == uhdm::UhdmType::PackedArrayTypespec) {
-      uhdm::PackedArrayTypespec* lts = (uhdm::PackedArrayTypespec*)ts;
-      if (lts->getElemTypespec() && lts->getElemTypespec()->getActual() &&
-          (lts->getElemTypespec()->getActual()->getUhdmType() ==
-           uhdm::UhdmType::StructTypespec)) {
-        isMultiDimension = true;
-      } else {
-        if (lts->getRanges() && lts->getRanges()->size() > 1)
+      if (lts->getPacked()) {
+        if (lts->getElemTypespec() && lts->getElemTypespec()->getActual() &&
+            (lts->getElemTypespec()->getActual()->getUhdmType() ==
+             uhdm::UhdmType::StructTypespec)) {
           isMultiDimension = true;
-      }
+        } else {
+          if (lts->getRanges() && lts->getRanges()->size() > 1)
+            isMultiDimension = true;
+        }
+      } else if (lts->getRanges() && lts->getRanges()->size() > 1)
+        isMultiDimension = true;
     } else if (ttps == uhdm::UhdmType::BitTypespec) {
       uhdm::BitTypespec* lts = (uhdm::BitTypespec*)ts;
       if (lts->getRanges() && lts->getRanges()->size() > 1)
@@ -3634,11 +3633,6 @@ bool CompileHelper::isDecreasingRange(uhdm::Typespec* ts,
       }
     } else if (ttps == uhdm::UhdmType::ArrayTypespec) {
       uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)ts;
-      if (lts->getRanges() && !lts->getRanges()->empty()) {
-        r = (*lts->getRanges())[0];
-      }
-    } else if (ttps == uhdm::UhdmType::PackedArrayTypespec) {
-      uhdm::PackedArrayTypespec* lts = (uhdm::PackedArrayTypespec*)ts;
       if (lts->getRanges() && !lts->getRanges()->empty()) {
         r = (*lts->getRanges())[0];
       }
@@ -3681,17 +3675,6 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
     ncsize = 1;
   } else if (ttps == uhdm::UhdmType::ArrayTypespec) {
     uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)tps;
-    uhdm::Typespec* ets = nullptr;
-    if (uhdm::RefTypespec* rt = lts->getElemTypespec()) {
-      ets = rt->getActual();
-    }
-    if (ets != nullptr) {
-      ncsize = Bits(ets, invalidValue, component, compileDesign, instance,
-                    fileSystem->toPathId(ets->getFile(), symbols),
-                    ets->getStartLine(), false);
-    }
-  } else if (ttps == uhdm::UhdmType::PackedArrayTypespec) {
-    uhdm::PackedArrayTypespec* lts = (uhdm::PackedArrayTypespec*)tps;
     uhdm::Typespec* ets = nullptr;
     if (uhdm::RefTypespec* rt = lts->getElemTypespec()) {
       ets = rt->getActual();
@@ -5113,7 +5096,8 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
   uhdm::Expr* result = rhs;
   uhdm::AnyCollection* vars = nullptr;
   if (tps == nullptr) return result;
-  if (tps->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec ||
+  if (((tps->getUhdmType() == uhdm::UhdmType::ArrayTypespec) &&
+       (((uhdm::ArrayTypespec*)tps)->getPacked())) ||
       tps->getUhdmType() == uhdm::UhdmType::LogicTypespec ||
       tps->getUhdmType() == uhdm::UhdmType::StructTypespec) {
     vars = s.makeCollection<uhdm::Any>();
@@ -5356,13 +5340,6 @@ bool CompileHelper::valueRange(Value* val, const uhdm::Typespec* lhstps,
     }
     case uhdm::UhdmType::ArrayTypespec: {
       uhdm::ArrayTypespec* lts = (uhdm::ArrayTypespec*)lhstps;
-      if (lts->getRanges() && !lts->getRanges()->empty()) {
-        r = (*lts->getRanges())[0];
-      }
-      break;
-    }
-    case uhdm::UhdmType::PackedArrayTypespec: {
-      uhdm::PackedArrayTypespec* lts = (uhdm::PackedArrayTypespec*)lhstps;
       if (lts->getRanges() && !lts->getRanges()->empty()) {
         r = (*lts->getRanges())[0];
       }

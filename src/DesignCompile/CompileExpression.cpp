@@ -3800,11 +3800,6 @@ uhdm::Any *CompileHelper::compileBound(
           ranges = bts->getRanges();
           break;
         }
-        case uhdm::UhdmType::PackedArrayTypespec: {
-          uhdm::PackedArrayTypespec *bts = (uhdm::PackedArrayTypespec *)ts;
-          ranges = bts->getRanges();
-          break;
-        }
         default:
           break;
       }
@@ -4721,8 +4716,6 @@ void CompileHelper::reorderAssignmentPattern(
             ranges = ((uhdm::LogicTypespec *)tps)->getRanges();
           } else if (ttype == uhdm::UhdmType::ArrayTypespec) {
             ranges = ((uhdm::ArrayTypespec *)tps)->getRanges();
-          } else if (ttype == uhdm::UhdmType::PackedArrayTypespec) {
-            ranges = ((uhdm::PackedArrayTypespec *)tps)->getRanges();
           }
         }
       }

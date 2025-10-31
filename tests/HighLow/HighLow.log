@@ -287,6 +287,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HighLow/dut.sv:4:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          1
 Begin                                                  4
 Constant                                               7
 ContAssign                                             1
@@ -296,7 +297,6 @@ Identifier                                             7
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              4
-PackedArrayTypespec                                    1
 ParamAssign                                            5
 Parameter                                              5
 Range                                                  1
@@ -348,7 +348,7 @@ Design: (unnamed)
       \_Parameter: (work@top.a), line:6:19, endln:6:25
       |vpiFullName:work@top.a
       |vpiActual:
-      \_PackedArrayTypespec: , line:6:13, endln:6:18
+      \_ArrayTypespec: , line:6:13, endln:6:18
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiParameter:
@@ -547,13 +547,13 @@ Design: (unnamed)
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:6:13, endln:6:18
+  \_ArrayTypespec: , line:6:13, endln:6:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiRange:
     \_Range: , line:6:13, endln:6:18
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:13, endln:6:18
+      \_ArrayTypespec: , line:6:13, endln:6:18
       |vpiLeftRange:
       \_Constant: , line:6:14, endln:6:15
         |vpiParent:
@@ -570,8 +570,9 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
+    |vpiPacked:1
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:6:13, endln:6:18
+  \_ArrayTypespec: , line:6:13, endln:6:18
   |vpiImportTypespec:
   \_Net: (work@top.ccc), line:12:10, endln:12:13
     |vpiParent:

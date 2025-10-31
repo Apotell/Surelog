@@ -146,6 +146,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 1
+ArrayTypespec                                          1
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              2
@@ -159,7 +160,6 @@ Module                                                 1
 ModuleTypespec                                         1
 Net                                                    2
 Package                                                1
-PackedArrayTypespec                                    1
 Port                                                   1
 Range                                                  1
 RefObj                                                 5
@@ -260,15 +260,15 @@ Design: (unnamed)
         \_TypespecMember: (alerts_ack), line:7:23, endln:7:33
         |vpiFullName:my_pkg::alerts_ack
         |vpiActual:
-        \_PackedArrayTypespec: , line:7:7, endln:7:22
+        \_ArrayTypespec: , line:7:7, endln:7:22
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:7:7, endln:7:22
+  \_ArrayTypespec: , line:7:7, endln:7:22
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
     |vpiRange:
     \_Range: , line:7:17, endln:7:22
       |vpiParent:
-      \_PackedArrayTypespec: , line:7:7, endln:7:22
+      \_ArrayTypespec: , line:7:7, endln:7:22
       |vpiLeftRange:
       \_Constant: , line:7:18, endln:7:19
         |vpiParent:
@@ -288,11 +288,12 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (my_pkg::ast_dif_t), line:7:7, endln:7:16
       |vpiParent:
-      \_PackedArrayTypespec: , line:7:7, endln:7:22
+      \_ArrayTypespec: , line:7:7, endln:7:22
       |vpiName:ast_dif_t
       |vpiFullName:my_pkg::ast_dif_t
       |vpiActual:
       \_TypedefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
+    |vpiPacked:1
   |vpiImportTypespec:
   \_TypedefTypespec: (my_pkg::ast_dif_t), line:4:6, endln:4:15
   |vpiImportTypespec:
@@ -304,7 +305,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:6:12, endln:8:5
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:7:7, endln:7:22
+  \_ArrayTypespec: , line:7:7, endln:7:22
   |vpiDefName:my_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10

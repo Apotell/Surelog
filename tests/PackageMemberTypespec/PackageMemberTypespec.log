@@ -81,12 +81,12 @@ AST_DEBUG_END
 [INF:CP0301] ${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv:17:1: Compile package "goog".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          1
 Constant                                               4
 Design                                                 1
 Identifier                                             4
 LogicTypespec                                          1
 Package                                                2
-PackedArrayTypespec                                    1
 Range                                                  2
 RefTypespec                                            5
 SourceFile                                             1
@@ -202,15 +202,15 @@ Design: (unnamed)
         \_TypespecMember: (atype_t), line:27:40, endln:27:47
         |vpiFullName:goog::atype_t
         |vpiActual:
-        \_PackedArrayTypespec: , line:27:2, endln:27:39
+        \_ArrayTypespec: , line:27:2, endln:27:39
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:27:2, endln:27:39
+  \_ArrayTypespec: , line:27:2, endln:27:39
     |vpiParent:
     \_Package: goog (goog), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
     |vpiRange:
     \_Range: , line:27:29, endln:27:34
       |vpiParent:
-      \_PackedArrayTypespec: , line:27:2, endln:27:39
+      \_ArrayTypespec: , line:27:2, endln:27:39
       |vpiLeftRange:
       \_Constant: , line:27:30, endln:27:31
         |vpiParent:
@@ -230,7 +230,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:27:34, endln:27:39
       |vpiParent:
-      \_PackedArrayTypespec: , line:27:2, endln:27:39
+      \_ArrayTypespec: , line:27:2, endln:27:39
       |vpiLeftRange:
       \_Constant: , line:27:35, endln:27:36
         |vpiParent:
@@ -250,17 +250,18 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (goog::foo_flags::common_flags_t), line:4:5, endln:4:19
       |vpiParent:
-      \_PackedArrayTypespec: , line:27:2, endln:27:39
+      \_ArrayTypespec: , line:27:2, endln:27:39
       |vpiName:foo_flags::common_flags_t
       |vpiFullName:goog::foo_flags::common_flags_t
       |vpiActual:
       \_TypedefTypespec: (foo_flags::common_flags_t), line:4:5, endln:4:19
+    |vpiPacked:1
   |vpiImportTypespec:
   \_TypedefTypespec: (goog::top_flag_t), line:29:3, endln:29:13
   |vpiImportTypespec:
   \_UnionTypespec: , line:26:9, endln:29:2
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:27:2, endln:27:39
+  \_ArrayTypespec: , line:27:2, endln:27:39
   |vpiDefName:goog
   |vpiEndLabel:goog
 ===================

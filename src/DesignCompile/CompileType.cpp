@@ -352,10 +352,6 @@ uhdm::Any* CompileHelper::compileVariable(
         var->setTypespec(tsRef);
 
         result = var;
-      } else if (uhdm::Variable* const var = any_cast<uhdm::Variable>(result)) {
-        var->setSigned(isSigned);
-      } else if (Nets* const nets = any_cast<Nets>(result)) {
-        nets->setSigned(isSigned);
       }
       break;
     }
@@ -562,12 +558,10 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   }
 
   if (Nets* const nets = any_cast<Nets>(obj)) {
-    nets->setSigned(sig->isSigned());
     nets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
-    var->setSigned(sig->isSigned());
     var->setConstantVariable(sig->isConst());
     var->setIsRandomized(sig->isRand() || sig->isRandc());
     var->setAutomatic(!sig->isStatic());

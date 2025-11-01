@@ -250,8 +250,7 @@ bool CompileClass::compile() {
       }
       case VObjectType::STRING_CONST: {
         if (NodeId siblingId = fC->Sibling(id)) break;
-        if (fC->Type(fC->Parent(id)) != VObjectType::paClass_declaration)
-          break;
+        if (fC->Type(fC->Parent(id)) != VObjectType::paClass_declaration) break;
 
         const std::string_view endLabel = fC->SymName(id);
         m_class->setEndLabel(endLabel);
@@ -259,9 +258,9 @@ bool CompileClass::compile() {
             StringUtils::ltrim_until(m_class->getName(), '@');
         if (endLabel != moduleName) {
           Location loc(fC->getFileId(m_class->getNodeIds()[0]),
-                        fC->Line(m_class->getNodeIds()[0]),
-                        fC->Column(m_class->getNodeIds()[0]),
-                        symbols->registerSymbol(moduleName));
+                       fC->Line(m_class->getNodeIds()[0]),
+                       fC->Column(m_class->getNodeIds()[0]),
+                       symbols->registerSymbol(moduleName));
           Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
                         symbols->registerSymbol(endLabel));
           Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);

@@ -3973,8 +3973,7 @@ bool CompileHelper::compileParameterDeclaration(
         }
         param->getTypespec()->setActual(ts);
         ts->setParent(param);
-      }
-      param->setSigned(isSigned);
+      }      
       fC->populateCoreMembers(name, name, param);
       param->setName(fC->SymName(name));
 

@@ -79,7 +79,6 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   void visitRefModule(const uhdm::RefModule* object) final;
   void visitRefObj(const uhdm::RefObj* object) final;
   void visitRefTypespec(const uhdm::RefTypespec* object) final;
-  void visitRefVar(const uhdm::RefVar* object) final;
   void visitVarSelect(const uhdm::VarSelect* object) final;
 
  private:
@@ -91,17 +90,6 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
 
   VObjectType getDefaultNetType(const uhdm::Any* object) const;
   const uhdm::Any* getPrefix(const uhdm::Any* object);
-
-  template <typename T>
-  const T* getParent(const uhdm::Any* object) const;
-
-  template <typename T = uhdm::Any>
-  static const T* getActual(const uhdm::Any* object);
-  bool setActual(const uhdm::Any* object, const uhdm::Any* actual) const;
-
-  template <typename T = uhdm::Typespec>
-  static const T* getTypespec(const uhdm::Any* object);
-  bool setTypespec(const uhdm::Any* object, const uhdm::Typespec* actual) const;
 
   const uhdm::Package* getPackage(std::string_view name,
                                   const uhdm::Any* object) const;

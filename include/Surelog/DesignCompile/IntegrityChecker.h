@@ -53,11 +53,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   static bool isValidName(const uhdm::Any* object);
   static bool isValidLocation(const uhdm::Any* object);
 
-  template <typename T = uhdm::Any>
-  static const T* getActual(const uhdm::Any* object);
-  template <typename T = uhdm::Typespec>
-  static const T* getTypespec(const uhdm::Any* object);
-
   std::set<const uhdm::PreprocMacroInstance*> getMacroInstances(
       const uhdm::Any* object) const;
 

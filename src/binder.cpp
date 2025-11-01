@@ -82,20 +82,9 @@ int main(int argc, const char **argv) {
   //   }
   // }
 
-  // if (uhdm::Factory *const factory = serializer.getFactory<uhdm::RefObj>()) {
-  //   for (uhdm::Any *object : factory->getObjects()) {
-  //     binder->bindAny(object);
-  //   }
-  // }
-
-  if (uhdm::Factory *const factory = serializer.getFactory<uhdm::RefVar>()) {
+  if (uhdm::Factory *const factory = serializer.getFactory<uhdm::RefObj>()) {
     for (uhdm::Any *object : factory->getObjects()) {
-      if (object->getUhdmId() == 16779) {
-        uhdm::RefVar *const rv = static_cast<uhdm::RefVar *>(object);
-        rv->setActual(nullptr);
-        rv->getTypespec()->setActual(nullptr);
-        binder->bindAny(object);
-      }
+      binder->bindAny(object);
     }
   }
 

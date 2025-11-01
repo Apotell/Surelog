@@ -4492,7 +4492,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                     for (uhdm::Any *arg : *arguments) {
                       if (uhdm::RefObj *const ro =
                               any_cast<uhdm::RefObj>(arg)) {
-                        uhdm::RefVar *const rf = s.make<uhdm::RefVar>();
+                        uhdm::Variable *const rf = s.make<uhdm::Variable>();
                         rf->setParent(fcall);
                         rf->setName(ro->getName());
                         rf->setFile(ro->getFile());
@@ -4526,7 +4526,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                     (method_name == "min") || (method_name == "max") ||
                     (method_name == "unique") ||
                     (method_name == "unique_index")) {
-                  uhdm::RefVar *const rf = s.make<uhdm::RefVar>();
+                  uhdm::Variable *const rf = s.make<uhdm::Variable>();
                   rf->setParent(fcall);
                   rf->setName("item");
                   rf->setFile(fcall->getFile());

@@ -134,157 +134,15 @@ VObjectType ObjectBinder::getDefaultNetType(const uhdm::Any* object) const {
   return VObjectType::NO_TYPE;
 }
 
-template <typename T>
-const T* ObjectBinder::getParent(const uhdm::Any* object) const {
-  while (object != nullptr) {
-    if (const T* const p = any_cast<T>(object)) {
-      return p;
-    }
-    object = object->getParent();
-  }
-  return nullptr;
-}
-
-template <typename T>
-const T* ObjectBinder::getActual(const uhdm::Any* object) {
-  if (object == nullptr) return nullptr;
-
-  switch (object->getUhdmType()) {
-    case uhdm::UhdmType::BitSelect:
-      return static_cast<const uhdm::BitSelect*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::ChandleVar:
-      return static_cast<const uhdm::ChandleVar*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::ClockingBlock:
-      return static_cast<const uhdm::ClockingBlock*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::HierPath: {
-      if (const uhdm::AnyCollection* const pathElems =
-              static_cast<const uhdm::HierPath*>(object)->getPathElems()) {
-        if (!pathElems->empty()) return getActual<T>(pathElems->back());
-      }
-      return nullptr;
-    }
-
-    case uhdm::UhdmType::PartSelect:
-      return static_cast<const uhdm::PartSelect*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::RefModule:
-      return static_cast<const uhdm::RefModule*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::RefObj:
-      return static_cast<const uhdm::RefObj*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::RefTypespec:
-      return static_cast<const uhdm::RefTypespec*>(object)->getActual<T>();
-
-    case uhdm::UhdmType::RefVar:
-      return static_cast<const uhdm::RefVar*>(object)->getActual<T>();
-
-    default:
-      return nullptr;
-  }
-}
-
-bool ObjectBinder::setActual(const uhdm::Any* object,
-                             const uhdm::Any* actual) const {
-  if (object == nullptr) return false;
-
-  switch (object->getUhdmType()) {
-    case uhdm::UhdmType::BitSelect:
-      return const_cast<uhdm::BitSelect*>(
-                 static_cast<const uhdm::BitSelect*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    case uhdm::UhdmType::ChandleVar:
-      return const_cast<uhdm::ChandleVar*>(
-                 static_cast<const uhdm::ChandleVar*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    case uhdm::UhdmType::ClockingBlock:
-      return const_cast<uhdm::ClockingBlock*>(
-                 static_cast<const uhdm::ClockingBlock*>(object))
-          ->setActual(const_cast<uhdm::ClockingBlock*>(
-              any_cast<uhdm::ClockingBlock>(actual)));
-
-    case uhdm::UhdmType::PartSelect:
-      return const_cast<uhdm::PartSelect*>(
-                 static_cast<const uhdm::PartSelect*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    case uhdm::UhdmType::RefModule:
-      return const_cast<uhdm::RefModule*>(
-                 static_cast<const uhdm::RefModule*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    case uhdm::UhdmType::RefObj:
-      return const_cast<uhdm::RefObj*>(static_cast<const uhdm::RefObj*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    case uhdm::UhdmType::RefTypespec:
-      return const_cast<uhdm::RefTypespec*>(
-                 static_cast<const uhdm::RefTypespec*>(object))
-          ->setActual(
-              const_cast<uhdm::Typespec*>(any_cast<uhdm::Typespec>(actual)));
-
-    case uhdm::UhdmType::RefVar:
-      return const_cast<uhdm::RefVar*>(static_cast<const uhdm::RefVar*>(object))
-          ->setActual(const_cast<uhdm::Any*>(actual));
-
-    default:
-      return false;
-  }
-}
-
-template <typename T>
-const T* ObjectBinder::getTypespec(const uhdm::Any* object) {
-  if (object == nullptr) return nullptr;
-
-  if (const uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(object)) {
-    if (const uhdm::ArrayTypespec* const at =
-            rt->getActual<uhdm::ArrayTypespec>()) {
-      if (const uhdm::RefTypespec* const irt = at->getIndexTypespec()) {
-        return getTypespec<T>(irt);
-      } else if (const uhdm::RefTypespec* const ert = at->getElemTypespec()) {
-        return getTypespec<T>(ert);
-      }
-    } else if (const uhdm::PackedArrayTypespec* const pat =
-                   rt->getActual<uhdm::PackedArrayTypespec>()) {
-      if (const uhdm::RefTypespec* const ert = pat->getElemTypespec()) {
-        return getTypespec<T>(ert);
-      }
-    }
-  } else if (const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(object)) {
-    return getTypespec<T>(ro->getTypespec());
-  } else if (const uhdm::Variables* const v =
-                 any_cast<uhdm::Variables>(object)) {
-    return getTypespec<T>(v->getTypespec());
-  } else if (const uhdm::Nets* const n = any_cast<uhdm::Nets>(object)) {
-    return getTypespec<T>(n->getTypespec());
-  } else if (const uhdm::IODecl* const iod = any_cast<uhdm::IODecl>(object)) {
-    return getTypespec<T>(iod->getTypespec());
-  }
-
-  return nullptr;
-}
-
-bool ObjectBinder::setTypespec(const uhdm::Any* object,
-                               const uhdm::Typespec* actual) const {
-  if (object == nullptr) return false;
-
-  return false;
-}
-
 const uhdm::Package* ObjectBinder::getPackage(std::string_view name,
                                               const uhdm::Any* object) const {
-  if (const uhdm::Package* const p = getParent<uhdm::Package>(object)) {
+  if (const uhdm::Package* const p = uhdm::getParent<uhdm::Package>(object)) {
     if (areSimilarNames(p, name)) {
       return p;
     }
   }
 
-  if (const uhdm::Design* const d = getParent<uhdm::Design>(object)) {
+  if (const uhdm::Design* const d = uhdm::getParent<uhdm::Design>(object)) {
     if (const uhdm::PackageCollection* const packages = d->getAllPackages()) {
       for (const uhdm::Package* p : *packages) {
         if (areSimilarNames(p, name)) {
@@ -299,13 +157,13 @@ const uhdm::Package* ObjectBinder::getPackage(std::string_view name,
 
 const uhdm::Module* ObjectBinder::getModule(std::string_view defname,
                                             const uhdm::Any* object) const {
-  if (const uhdm::Module* const m = getParent<uhdm::Module>(object)) {
+  if (const uhdm::Module* const m = uhdm::getParent<uhdm::Module>(object)) {
     if (m->getDefName() == defname) {
       return m;
     }
   }
 
-  if (const uhdm::Design* const d = getParent<uhdm::Design>(object)) {
+  if (const uhdm::Design* const d = uhdm::getParent<uhdm::Design>(object)) {
     if (const uhdm::ModuleCollection* const modules = d->getAllModules()) {
       for (const uhdm::Module* m : *modules) {
         if (m->getDefName() == defname) {
@@ -320,13 +178,14 @@ const uhdm::Module* ObjectBinder::getModule(std::string_view defname,
 
 const uhdm::Interface* ObjectBinder::getInterface(
     std::string_view defname, const uhdm::Any* object) const {
-  if (const uhdm::Interface* const m = getParent<uhdm::Interface>(object)) {
+  if (const uhdm::Interface* const m =
+          uhdm::getParent<uhdm::Interface>(object)) {
     if (m->getDefName() == defname) {
       return m;
     }
   }
 
-  if (const uhdm::Design* d = getParent<uhdm::Design>(object)) {
+  if (const uhdm::Design* d = uhdm::getParent<uhdm::Design>(object)) {
     if (const uhdm::InterfaceCollection* const interfaces =
             d->getAllInterfaces()) {
       for (const uhdm::Interface* i : *interfaces) {
@@ -354,20 +213,21 @@ const uhdm::ClassDefn* ObjectBinder::getClassDefn(
 
 const uhdm::ClassDefn* ObjectBinder::getClassDefn(
     std::string_view name, const uhdm::Any* object) const {
-  if (const uhdm::ClassDefn* const c = getParent<uhdm::ClassDefn>(object)) {
+  if (const uhdm::ClassDefn* const c =
+          uhdm::getParent<uhdm::ClassDefn>(object)) {
     if (areSimilarNames(c, name)) {
       return c;
     }
   }
 
-  if (const uhdm::Package* const p = getParent<uhdm::Package>(object)) {
+  if (const uhdm::Package* const p = uhdm::getParent<uhdm::Package>(object)) {
     if (const uhdm::ClassDefn* const c =
             getClassDefn(p->getClassDefns(), name)) {
       return c;
     }
   }
 
-  if (const uhdm::Design* const d = getParent<uhdm::Design>(object)) {
+  if (const uhdm::Design* const d = uhdm::getParent<uhdm::Design>(object)) {
     if (const uhdm::ClassDefn* const c =
             getClassDefn(d->getAllClasses(), name)) {
       return c;
@@ -476,15 +336,6 @@ const uhdm::Any* ObjectBinder::findInTypespec(std::string_view name,
               findInRefTypespec(name, refType,
                                 static_cast<const uhdm::ArrayTypespec*>(scope)
                                     ->getElemTypespec())) {
-        return actual;
-      }
-    } break;
-
-    case uhdm::UhdmType::PackedArrayTypespec: {
-      if (const uhdm::Any* const actual = findInRefTypespec(
-              name, refType,
-              static_cast<const uhdm::PackedArrayTypespec*>(scope)
-                  ->getElemTypespec())) {
         return actual;
       }
     } break;
@@ -1032,17 +883,13 @@ void ObjectBinder::visitBitSelect(const uhdm::BitSelect* object) {
         const_cast<uhdm::Any*>(actual1));
 
     // Typespec for BitSelect is the same as the typespec for its actual
-    if (const uhdm::Variables* const v = any_cast<uhdm::Variables>(actual1)) {
-      if (const uhdm::RefTypespec* const rt1 = v->getTypespec()) {
-        if (const uhdm::Typespec* const t = rt1->getActual()) {
-          if (any_cast<uhdm::UnsupportedTypespec>(t) == nullptr) {
-            if (const uhdm::RefTypespec* const rt2 = object->getTypespec()) {
-              if (const uhdm::UnsupportedTypespec* const actual2 =
-                      rt2->getActual<uhdm::UnsupportedTypespec>()) {
-                const_cast<uhdm::RefTypespec*>(rt2)->setActual(
-                    const_cast<uhdm::Typespec*>(t));
-              }
-            }
+    if (const uhdm::Typespec* const t = uhdm::getTypespec(actual1)) {
+      if (any_cast<uhdm::UnsupportedTypespec>(t) == nullptr) {
+        if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
+          if (const uhdm::UnsupportedTypespec* const actual2 =
+                  rt->getActual<uhdm::UnsupportedTypespec>()) {
+            const_cast<uhdm::RefTypespec*>(rt)->setActual(
+                const_cast<uhdm::Typespec*>(t));
           }
         }
       }
@@ -1124,7 +971,7 @@ void ObjectBinder::visitHierPath(const uhdm::HierPath* object) {
     for (const uhdm::Any* currAny : *pathElems) {
       const uhdm::BitSelect* const prevBitSelect =
           any_cast<uhdm::BitSelect>(prevAny);
-      const uhdm::Any* currActual = getActual(currAny);
+      const uhdm::Any* currActual = uhdm::getActual(currAny);
 
       if ((currActual == nullptr) && (prevBitSelect != nullptr)) {
         if (const uhdm::BitSelect* const currBitSelect =
@@ -1136,7 +983,8 @@ void ObjectBinder::visitHierPath(const uhdm::HierPath* object) {
       if (currActual == nullptr) {
         bindAny(currAny);
       } else {
-        setActual(currAny, currActual);
+        uhdm::setActual(const_cast<uhdm::Any*>(currAny),
+                        const_cast<uhdm::Any*>(currActual));
       }
 
       prevAny = currAny;
@@ -1198,17 +1046,13 @@ void ObjectBinder::visitRefObj(const uhdm::RefObj* object) {
         const_cast<uhdm::Any*>(actual1));
 
     // Typespec for RefObj is the same as the typespec for its actual
-    if (const uhdm::Variable* const v = any_cast<uhdm::Variable>(actual1)) {
-      if (const uhdm::RefTypespec* const rt1 = v->getTypespec()) {
-        if (const uhdm::Typespec* const t = rt1->getActual()) {
-          if (any_cast<uhdm::UnsupportedTypespec>(t) == nullptr) {
-            if (const uhdm::RefTypespec* const rt2 = object->getTypespec()) {
-              if (const uhdm::UnsupportedTypespec* const actual2 =
-                      rt2->getActual<uhdm::UnsupportedTypespec>()) {
-                const_cast<uhdm::RefTypespec*>(rt2)->setActual(
-                    const_cast<uhdm::Typespec*>(t));
-              }
-            }
+    if (const uhdm::Typespec* const t = uhdm::getTypespec(actual1)) {
+      if (t->getUhdmType() != uhdm::UhdmType::UnsupportedTypespec) {
+        if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
+          if (const uhdm::UnsupportedTypespec* const actual2 =
+                  rt->getActual<uhdm::UnsupportedTypespec>()) {
+            const_cast<uhdm::RefTypespec*>(rt)->setActual(
+                const_cast<uhdm::Typespec*>(t));
           }
         }
       }
@@ -1234,50 +1078,6 @@ void ObjectBinder::visitRefTypespec(const uhdm::RefTypespec* object) {
   if ((object_Actual_typespec != nullptr) && (object->getActual() == nullptr)) {
     const_cast<uhdm::RefTypespec*>(object)->setActual(
         const_cast<uhdm::Typespec*>(object_Actual_typespec));
-  }
-}
-
-void ObjectBinder::visitRefVar(const uhdm::RefVar* object) {
-  if (object->getActual() != nullptr) return;
-
-  if (const uhdm::Any* actual1 = findObject(object)) {
-    const_cast<uhdm::RefVar*>(object)->setActual(
-        const_cast<uhdm::Any*>(actual1));
-
-    // Typespec for RefVar is the same as the typespec for its actual
-    if (const uhdm::Variables* const v = any_cast<uhdm::Variables>(actual1)) {
-      if (const uhdm::RefTypespec* const rt1 = v->getTypespec()) {
-        if (const uhdm::Typespec* const t = rt1->getActual()) {
-          if (any_cast<uhdm::UnsupportedTypespec>(t) == nullptr) {
-            if (const uhdm::RefTypespec* const rt2 = object->getTypespec()) {
-              if (const uhdm::UnsupportedTypespec* const actual2 =
-                      rt2->getActual<uhdm::UnsupportedTypespec>()) {
-                uhdm::RefTypespec* const rt =
-                    const_cast<uhdm::RefTypespec*>(rt2);
-                rt->setActual(const_cast<uhdm::Typespec*>(t));
-                switch (t->getUhdmType()) {
-                  case uhdm::UhdmType::ClassTypespec:
-                  case uhdm::UhdmType::ImportTypespec:
-                  case uhdm::UhdmType::InterfaceTypespec:
-                  case uhdm::UhdmType::ModuleTypespec:
-                  case uhdm::UhdmType::ProgramTypespec:
-                  case uhdm::UhdmType::TypeParameter:
-                  case uhdm::UhdmType::TypedefTypespec:
-                  case uhdm::UhdmType::UdpDefnTypespec:
-                    rt->setName(t->getName());
-                    break;
-                  case uhdm::UhdmType::UnsupportedTypespec:
-                    break;
-                  default:
-                    rt->setName(uhdm::kEmpty);
-                    break;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 
@@ -1311,92 +1111,53 @@ const uhdm::Any* ObjectBinder::getPrefix(const uhdm::Any* object) {
   }
   if (previous == nullptr) return nullptr;
 
-  if (const uhdm::RefObj* const ro1 = any_cast<uhdm::RefObj>(previous)) {
-    if (areSimilarNames(ro1, "this") || areSimilarNames(ro1, "super")) {
-      const uhdm::Any* prefix = ro1->getParent();
-      while (prefix != nullptr) {
-        if (prefix->getUhdmType() == uhdm::UhdmType::ClassDefn) return prefix;
+  const uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(previous);
+  if (ro == nullptr) return nullptr;
 
-        prefix = prefix->getParent();
-      }
-      return prefix;
-    }
+  if (areSimilarNames(ro, "this") || areSimilarNames(ro, "super")) {
+    return uhdm::getParent<uhdm::ClassDefn>(ro);
+  }
 
-    if (const uhdm::ArrayVar* const av = ro1->getActual<uhdm::ArrayVar>()) {
-      if (const uhdm::RefTypespec* const iod2 = av->getTypespec()) {
-        if (const uhdm::ArrayTypespec* const at =
-                iod2->getActual<uhdm::ArrayTypespec>()) {
-          if (const uhdm::RefTypespec* const et = at->getElemTypespec()) {
-            return et->getActual();
-          }
-        } else if (const uhdm::PackedArrayTypespec* const pat =
-                       iod2->getActual<uhdm::PackedArrayTypespec>()) {
-          if (const uhdm::RefTypespec* const et = pat->getElemTypespec()) {
-            return et->getActual();
-          }
-        }
-      }
-    } else if (const uhdm::Variables* const var =
-                   ro1->getActual<uhdm::Variables>()) {
-      if (const uhdm::RefTypespec* const iod2 = var->getTypespec()) {
-        return iod2->getActual();
-      }
-    } else if (const uhdm::IODecl* iod = ro1->getActual<uhdm::IODecl>()) {
-      if (const uhdm::RefTypespec* const iod2 = iod->getTypespec()) {
-        return iod2->getActual();
-      }
-    } else if (const uhdm::Parameter* const p1 =
-                   ro1->getActual<uhdm::Parameter>()) {
-      if (const uhdm::RefTypespec* const iod2 = p1->getTypespec()) {
-        return iod2->getActual();
-      }
-    } else if (const uhdm::Scope* const s = ro1->getActual<uhdm::Scope>()) {
-      return s;
-    } else if (const uhdm::TypespecMember* const tm =
-                   ro1->getActual<uhdm::TypespecMember>()) {
-      if (const uhdm::RefTypespec* const iod2 = tm->getTypespec()) {
-        return iod2->getActual();
-      }
-    } else if (const uhdm::LogicNet* const ln =
-                   ro1->getActual<uhdm::LogicNet>()) {
-      // Ideally logic_net::Typespec should be valid but for
-      // too many (or rather most) cases, the Typespec isn't set.
-      // So, use the corresponding port in the parent module to
-      // find the typespec.
+  if (const uhdm::ArrayTypespec* const at =
+          uhdm::getTypespec<uhdm::ArrayTypespec>(ro)) {
+    return uhdm::getElemTypespec(at);
+  } else if (const uhdm::Net* const ln = ro->getActual<uhdm::Net>()) {
+    // Ideally logic_net::Typespec should be valid but for
+    // too many (or rather most) cases, the Typespec isn't set.
+    // So, use the corresponding port in the parent module to
+    // find the typespec.
 
-      const uhdm::Typespec* ts = nullptr;
-      if (const uhdm::RefTypespec* rt = ln->getTypespec()) {
-        ts = rt->getActual();
-      } else if (const uhdm::Module* mi = ln->getParent<uhdm::Module>()) {
-        if (mi->getPorts() != nullptr) {
-          for (const uhdm::Port* p2 : *mi->getPorts()) {
-            if (const uhdm::RefObj* ro2 = p2->getLowConn<uhdm::RefObj>()) {
-              if (ro2->getActual() == ln) {
-                if (const uhdm::RefTypespec* rt = p2->getTypespec()) {
-                  ts = rt->getActual();
-                }
-                break;
+    const uhdm::Typespec* ts = nullptr;
+    if (const uhdm::RefTypespec* rt = ln->getTypespec()) {
+      ts = rt->getActual();
+    } else if (const uhdm::Module* mi = ln->getParent<uhdm::Module>()) {
+      if (mi->getPorts() != nullptr) {
+        for (const uhdm::Port* p2 : *mi->getPorts()) {
+          if (const uhdm::RefObj* ro2 = p2->getLowConn<uhdm::RefObj>()) {
+            if (ro2->getActual() == ln) {
+              if (const uhdm::RefTypespec* rt = p2->getTypespec()) {
+                ts = rt->getActual();
               }
+              break;
             }
           }
         }
       }
-
-      if (const uhdm::ClassTypespec* const cts =
-              any_cast<uhdm::ClassTypespec>(ts)) {
-        return cts->getClassDefn();
-      } else if (const uhdm::StructTypespec* const sts =
-                     any_cast<uhdm::StructTypespec>(ts)) {
-        return sts;
-      } else if (const uhdm::UnionTypespec* const uts =
-                     any_cast<uhdm::UnionTypespec>(ts)) {
-        return uts;
-      }
-    } else if (const uhdm::Port* const p = ro1->getActual<uhdm::Port>()) {
-      if (const uhdm::RefTypespec* const iod2 = p->getTypespec()) {
-        return iod2->getActual();
-      }
     }
+    if (ts == nullptr) return nullptr;
+
+    if (const uhdm::ClassTypespec* const cts =
+            any_cast<uhdm::ClassTypespec>(ts)) {
+      return cts->getClassDefn();
+    } else if (const uhdm::StructTypespec* const sts =
+                    any_cast<uhdm::StructTypespec>(ts)) {
+      return sts;
+    } else if (const uhdm::UnionTypespec* const uts =
+                    any_cast<uhdm::UnionTypespec>(ts)) {
+      return uts;
+    }
+  } else if (const uhdm::Any* const actual = uhdm::getActual(ro)) {
+    return uhdm::getTypespec(actual);
   }
   return nullptr;
 }
@@ -1689,7 +1450,6 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
 
   visit(object);
 
-  uhdm::Serializer* const serializer = object->getSerializer();
   if (uhdm::Factory* const factory =
           serializer->getFactory<uhdm::ArrayTypespec>()) {
     for (uhdm::Any* source : factory->getObjects()) {
@@ -1736,7 +1496,7 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
                         at->setIndexTypespec(rt);
                         at->setRanges(nullptr);
                         operand->setParent(nullptr);
-                        enterRefTypespec(rt, 0);
+                        visitRefTypespec(rt);
                       }
                     }
                   }

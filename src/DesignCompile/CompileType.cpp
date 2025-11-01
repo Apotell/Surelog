@@ -152,12 +152,9 @@ uhdm::Any* CompileHelper::compileVariable(
       (decl_type != VObjectType::STRING_CONST)) {
     ts = compileTypespec(component, fC, declarationId, unpackedDimId,
                          compileDesign, pstmt, instance, true);
-    if (ts != nullptr) {
-      if (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
-        result = s.make<uhdm::ArrayVar>();
-      } else if (ts->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
-        result = s.make<uhdm::PackedArrayVar>();
-      }
+    if ((ts != nullptr) &&
+        (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
+      result = s.make<uhdm::Variable>();
     }
 
     if (result != nullptr) {

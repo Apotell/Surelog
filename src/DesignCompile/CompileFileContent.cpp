@@ -200,7 +200,7 @@ bool CompileFileContent::collectObjects_() {
         obj->setParent(udesign);
         if (exp != nullptr) {
           exp->setParent(obj, true);
-          if (uhdm::Variables* const var = any_cast<uhdm::Variables>(obj)) {
+          if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
             var->setExpr(exp);
           }
         }

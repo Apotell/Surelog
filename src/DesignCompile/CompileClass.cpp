@@ -127,13 +127,11 @@ bool CompileClass::compile() {
   NodeId classId = m_class->m_nodeIds[0];
 
   do {
-    VObject current = fC->Object(classId);
-    classId = current.m_parent;
+    classId = fC->Parent(classId);
   } while (classId && !((fC->Type(classId) == VObjectType::paDescription) ||
                         (fC->Type(classId) == VObjectType::paClass_item)));
   if (classId) {
-    VObject current = fC->Object(classId);
-    classId = current.m_child;
+    classId = fC->Child(classId);
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
       if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
               m_class, fC, classId, m_compileDesign, defn)) {
@@ -176,17 +174,17 @@ bool CompileClass::compile() {
                                 false, false, false, false, false);
   m_class->insertProperty(prop);
 
-  NodeId id = nodeId;
-  if (!id) return false;
+  if (!nodeId) return false;
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(nodeId);
   bool inFunction_body_declaration = false;
   bool inTask_body_declaration = false;
   while (!stack.empty()) {
     bool skipGuts = false;
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
-    const VObject& current = fC->Object(id);
+
     VObjectType type = fC->Type(id);
     switch (type) {
       case VObjectType::paPackage_import_item: {
@@ -224,7 +222,9 @@ bool CompileClass::compile() {
       case VObjectType::paClass_declaration:
         if (id != nodeId) {
           compile_class_declaration_(fC, id);
-          if (current.m_sibling) stack.push(current.m_sibling);
+          if (const NodeId siblingId = fC->Sibling(id)) {
+            stack.emplace(siblingId);
+          }
           continue;
         }
         break;
@@ -249,24 +249,22 @@ bool CompileClass::compile() {
         break;
       }
       case VObjectType::STRING_CONST: {
-        NodeId sibling = fC->Sibling(id);
-        if (!sibling) {
-          if (fC->Type(fC->Parent(id)) != VObjectType::paClass_declaration)
-            break;
-          const std::string_view endLabel = fC->SymName(id);
-          m_class->setEndLabel(endLabel);
-          std::string_view moduleName =
-              StringUtils::ltrim_until(m_class->getName(), '@');
-          if (endLabel != moduleName) {
-            Location loc(fC->getFileId(m_class->getNodeIds()[0]),
-                         fC->Line(m_class->getNodeIds()[0]),
-                         fC->Column(m_class->getNodeIds()[0]),
-                         symbols->registerSymbol(moduleName));
-            Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                          symbols->registerSymbol(endLabel));
-            Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
-            m_session->getErrorContainer()->addError(err);
-          }
+        if (NodeId siblingId = fC->Sibling(id)) break;
+        if (fC->Type(fC->Parent(id)) != VObjectType::paClass_declaration) break;
+
+        const std::string_view endLabel = fC->SymName(id);
+        m_class->setEndLabel(endLabel);
+        std::string_view moduleName =
+            StringUtils::ltrim_until(m_class->getName(), '@');
+        if (endLabel != moduleName) {
+          Location loc(fC->getFileId(m_class->getNodeIds()[0]),
+                       fC->Line(m_class->getNodeIds()[0]),
+                       fC->Column(m_class->getNodeIds()[0]),
+                       symbols->registerSymbol(moduleName));
+          Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
+                        symbols->registerSymbol(endLabel));
+          Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
+          m_session->getErrorContainer()->addError(err);
         }
         break;
       }
@@ -274,9 +272,10 @@ bool CompileClass::compile() {
         break;
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (!skipGuts)
-      if (current.m_child) stack.push(current.m_child);
+    if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+    if (!skipGuts) {
+      if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
+    }
   }
 
   // Default constructor

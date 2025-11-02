@@ -210,7 +210,7 @@ QUOTED_STRING
 
 // A.9.2 Comments
 
-/* one_line_comment ::= // comment_text \n */
+// one_line_comment ::= // comment_text \n
 
 LINE_COMMENT
   : '//' Comment_text '\r'? ('\n' | EOF) -> channel(COMMENTS)
@@ -220,7 +220,7 @@ LINE_COMMENT
 
 BLOCK_COMMENT: '/*' Comment_text '*/' -> channel(COMMENTS);
 
-/* comment_text ::= { Any_ASCII_character } */
+// comment_text ::= { Any_ASCII_character }
 
 fragment Comment_text: .*?;
 

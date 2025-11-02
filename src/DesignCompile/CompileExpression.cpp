@@ -2522,7 +2522,7 @@ uhdm::Any *CompileHelper::compileExpression(
 
               auto [func, actual_comp] =
                   getTaskFunc(name, component, compileDesign, instance, pexpr);
-              fcall->setFunction(any_cast<uhdm::Function>(func));
+              fcall->setTaskFunc(any_cast<uhdm::TaskFunc>(func));
               uhdm::AnyCollection *args = compileTfCallArguments(
                   component, fC, List_of_arguments, compileDesign, fcall,
                   instance, muteErrors);
@@ -4126,14 +4126,11 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
     uhdm::TaskFunc *tf = ret.first;
     if (tf) {
       if (tf->getUhdmType() == uhdm::UhdmType::Function) {
-        uhdm::FuncCall *fcall = s.make<uhdm::FuncCall>();
-        fcall->setFunction(any_cast<uhdm::Function *>(tf));
-        call = fcall;
+        call = s.make<uhdm::FuncCall>();
       } else {
-        uhdm::TaskCall *tcall = s.make<uhdm::TaskCall>();
-        tcall->setTask(any_cast<uhdm::Task>(tf));
-        call = tcall;
+        call = s.make<uhdm::TaskCall>();
       }
+      call->setTaskFunc(tf);
       tf->setParent(call);
       call->setParent(pexpr);
       NodeId fid = id;

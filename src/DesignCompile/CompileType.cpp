@@ -57,6 +57,7 @@
 // UHDM
 #include <uhdm/BaseClass.h>
 #include <uhdm/ElaboratorListener.h>
+#include <uhdm/Utils.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/expr.h>
 #include <uhdm/uhdm.h>
@@ -116,6 +117,7 @@ uhdm::Any* CompileHelper::compileVariable(
   if (fC->Type(variable) == VObjectType::STRING_CONST &&
       fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
     uhdm::HierPath* path = s.make<uhdm::HierPath>();
+    path->setParent(pstmt);
     uhdm::AnyCollection* elems = path->getPathElems(true);
     std::string fullName(fC->SymName(variable));
     uhdm::RefObj* obj = s.make<uhdm::RefObj>();
@@ -152,11 +154,7 @@ uhdm::Any* CompileHelper::compileVariable(
     ts = compileTypespec(component, fC, declarationId, unpackedDimId,
                          compileDesign, pstmt, instance, true);
   }
-  bool isSigned = true;
-  const NodeId signId = fC->Sibling(variable);
-  if (signId && (fC->Type(signId) == VObjectType::paSigning_Unsigned)) {
-    isSigned = false;
-  }
+
   switch (the_type) {
     case VObjectType::STRING_CONST:
     case VObjectType::paChandle_type: {
@@ -339,9 +337,18 @@ uhdm::Any* CompileHelper::compileVariable(
 
         if (ts == nullptr) {
           uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
-          lts->setSigned(isSigned);
           lts->setParent(var);
           fC->populateCoreMembers(declarationId, declarationId, lts);
+
+          // 6.8 Variable declarations
+          // The byte, shortint, int, integer, and longint types are signed
+          // types by default. Other net and variable types can be explicitly
+          // declared as signed.
+          const NodeId signId = fC->Sibling(variable);
+          if (signId && (fC->Type(signId) == VObjectType::paSigning_Signed)) {
+            lts->setSigned(true);
+          }
+
           ts = lts;
         }
 
@@ -352,10 +359,6 @@ uhdm::Any* CompileHelper::compileVariable(
         var->setTypespec(tsRef);
 
         result = var;
-      } else if (uhdm::Variable* const var = any_cast<uhdm::Variable>(result)) {
-        var->setSigned(isSigned);
-      } else if (Nets* const nets = any_cast<Nets>(result)) {
-        nets->setSigned(isSigned);
       }
       break;
     }
@@ -552,6 +555,7 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
       dtype = dtype->getDefinition();
     }
   }
+  if (tps != nullptr) uhdm::setSigned(tps, sig->isSigned());
   obj = compileVariable(component, fC, compileDesign, signalId, subnettype,
                         typespecId, tps, pscope);
   if (SimpleExpr* const se = any_cast<SimpleExpr>(obj)) {
@@ -562,12 +566,10 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   }
 
   if (Nets* const nets = any_cast<Nets>(obj)) {
-    nets->setSigned(sig->isSigned());
     nets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
   }
 
   if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
-    var->setSigned(sig->isSigned());
     var->setConstantVariable(sig->isConst());
     var->setIsRandomized(sig->isRand() || sig->isRandc());
     var->setAutomatic(!sig->isStatic());
@@ -909,8 +911,8 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   uhdm::Typespec* retts = ts;
   uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
-  uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr) pscope = design->getUhdmDesign();
+  if (pstmt == nullptr) pstmt = component->getUhdmModel();
+  if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
   std::vector<uhdm::Range*>* packedDimensions = nullptr;
   if (packedId) {
@@ -952,8 +954,9 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     // create packed array
     uhdm::ArrayTypespec* tpaps = s.make<uhdm::ArrayTypespec>();
     tpaps->setPacked(true);
-    tpaps->setParent(pscope);
+    tpaps->setParent(pstmt);
     fC->populateCoreMembers(nodeId, packedId, tpaps);
+
     uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
     pret->setParent(taps);
     pret->setActual(tpaps);
@@ -1012,19 +1015,18 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     else
       taps->setArrayType(vpiStaticArray);
 
-    if (packedDimensions != nullptr) {
-      tpaps->setRanges(packedDimensions);
-      for (auto r : *packedDimensions) r->setParent(tpaps);
-    }
-    if (unpackedDimensions != nullptr) {
-      taps->setRanges(unpackedDimensions);
-      for (auto r : *unpackedDimensions) r->setParent(taps);
-    }
+    tpaps->setRanges(packedDimensions);
+    for (auto r : *packedDimensions) r->setParent(tpaps, true);
+
+    taps->setRanges(unpackedDimensions);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
+
     retts = taps;
 
   } else if (unpackedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
+
     NodeId unpackDimensionId2 = unpackedId;
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
@@ -1100,12 +1102,12 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
       taps->setArrayType(vpiStaticArray);
 
     taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps);
+    for (auto r : *unpackedDimensions) r->setParent(taps, true);
     retts = taps;
   } else if (packedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
     taps->setPacked(true);
-    taps->setParent(pscope);
+    taps->setParent(pstmt);
     fC->populateCoreMembers(nodeId, nodeId, taps);
     taps->setRanges(packedDimensions);
     for (uhdm::Range* r : *packedDimensions) r->setParent(taps, true);

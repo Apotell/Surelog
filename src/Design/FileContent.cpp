@@ -68,6 +68,20 @@ FileContent::~FileContent() {
   }
 }
 
+inline bool FileContent::isComment(NodeId nodeId) const {
+  return m_objects[nodeId].m_type == VObjectType::LINE_COMMENT ||
+         m_objects[nodeId].m_type == VObjectType::BLOCK_COMMENT ||
+         m_objects[nodeId].m_type == VObjectType::ESCAPED_LINE_COMMENT ||
+         m_objects[nodeId].m_type == VObjectType::SYNOPSIS_BLOCK_COMMENT;
+}
+
+inline NodeId FileContent::skipComments(NodeId nodeId) const {
+  while (nodeId && isComment(nodeId)) {
+    nodeId = m_objects[nodeId].m_sibling;
+  }
+  return nodeId;
+}
+
 std::string_view FileContent::getName() const {
   return m_session->getFileSystem()->toPath(m_fileId);
 }
@@ -336,7 +350,7 @@ NodeId FileContent::Child(NodeId index) const {
     std::cerr << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return InvalidNodeId;
   }
-  return m_objects[index].m_child;
+  return skipComments(m_objects[index].m_child);
 }
 
 NodeId FileContent::Sibling(NodeId index) const {
@@ -347,7 +361,7 @@ NodeId FileContent::Sibling(NodeId index) const {
     std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return InvalidNodeId;
   }
-  return m_objects[index].m_sibling;
+  return skipComments(m_objects[index].m_sibling);
 }
 
 NodeId FileContent::Definition(NodeId index) const {

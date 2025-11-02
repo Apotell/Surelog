@@ -93,8 +93,7 @@ bool CompilePackage::compile() {
   collectObjects_(CollectType::OTHER);
 
   do {
-    VObject current = fC->Object(packId);
-    packId = current.m_child;
+    packId = fC->Child(packId);
   } while (packId && (fC->Type(packId) != VObjectType::paAttribute_instance));
   if (packId) {
     if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
@@ -117,18 +116,17 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
   m_helper.setDesign(m_compileDesign->getCompiler()->getDesign());
   for (uint32_t i = 0; i < m_package->m_fileContents.size(); i++) {
     const FileContent* fC = m_package->m_fileContents[i];
-    VObject current = fC->Object(m_package->m_nodeIds[i]);
-    NodeId id = current.m_child;
 
-    if (!id) id = current.m_sibling;
-    if (!id) return false;
+    NodeId id = fC->Child(m_package->m_nodeIds[i]);
+    if (!id) id = fC->Sibling(m_package->m_nodeIds[i]);
+    if (!id) continue;
 
     if (collectType == CollectType::FUNCTION) {
       // Package imports
       std::vector<FileCNodeId> pack_imports;
       // - Local file imports
-      for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
-        pack_imports.push_back(import);
+      for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
+        pack_imports.emplace_back(import);
       }
 
       for (auto& pack_import : pack_imports) {
@@ -140,11 +138,11 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
     }
 
     std::stack<NodeId> stack;
-    stack.push(id);
+    stack.emplace(id);
     while (!stack.empty()) {
       id = stack.top();
       stack.pop();
-      current = fC->Object(id);
+
       VObjectType type = fC->Type(id);
       switch (type) {
         case VObjectType::paPackage_import_item: {
@@ -318,20 +316,11 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
           break;
       }
 
-      if (current.m_sibling) stack.push(current.m_sibling);
-      if (current.m_child) {
-        if (!stopPoints.empty()) {
-          bool stop = false;
-          for (auto t : stopPoints) {
-            if (t == current.m_type) {
-              stop = true;
-              break;
-            }
-          }
-          if (!stop)
-            if (current.m_child) stack.push(current.m_child);
-        } else {
-          if (current.m_child) stack.push(current.m_child);
+      if (NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+      if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
+          stopPoints.cend()) {
+        if (NodeId childId = fC->Child(id)) {
+          stack.emplace(childId);
         }
       }
     }

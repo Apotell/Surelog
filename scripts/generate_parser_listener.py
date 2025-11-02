@@ -523,6 +523,19 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
 
           content.append(line)
 
+  if listener == 'Parser':
+    content.extend([
+      '   private:',
+      '     void processPendingTokens(antlr4::tree::ParseTree* tree, size_t endTokenIndex);',
+      '',
+      '   private:',
+      '     antlr4::tree::ParseTree *m_lastEnteredRule = nullptr;',
+      '     antlr4::tree::ParseTree *m_lastExitedRule = nullptr;',
+      '     enum class RuleAction { None, Entered, Exited };',
+      '     RuleAction m_lastRuleAction = RuleAction::None;',
+      '     size_t m_lastVisitedTokenIndex = 0;',
+    ])
+
   content.extend([
     '  };',
     '} // namespace SURELOG',

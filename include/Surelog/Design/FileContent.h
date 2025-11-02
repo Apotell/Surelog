@@ -246,6 +246,8 @@ class FileContent final : public DesignComponent {
 
  private:
   bool validate(NodeId parentId) const;
+  bool isComment(NodeId nodeId) const;
+  NodeId skipComments(NodeId nodeId) const;
 
  protected:
   std::vector<DesignElement*> m_elements;

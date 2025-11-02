@@ -73,18 +73,21 @@ bool CompileFileContent::collectObjects_() {
   uhdm::Design* const udesign = design->getUhdmDesign();
   const uhdm::ScopedScope scopedScope(udesign);
 
-  FileContent* fC = m_fileContent;
+  FileContent* const fC = m_fileContent;
   if (fC->getSize() == 0) return true;
-  const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
-  NodeId id = current.m_child;
-  if (!id) id = current.m_sibling;
-  if (!id) return false;
+
+  const NodeId nodeId = fC->getRootNode();
+  NodeId startId = fC->Child(nodeId);
+  if (!startId) startId = fC->Sibling(nodeId);
+  if (!startId) return false;
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(startId);
+
   while (!stack.empty()) {
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
-    const VObject& current = fC->Object(id);
+
     VObjectType type = fC->Type(id);
     switch (type) {
       case VObjectType::paPackage_import_item: {
@@ -168,20 +171,11 @@ bool CompileFileContent::collectObjects_() {
         break;
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) {
-      if (!stopPoints.empty()) {
-        bool stop = false;
-        for (auto t : stopPoints) {
-          if (t == current.m_type) {
-            stop = true;
-            break;
-          }
-        }
-        if (!stop)
-          if (current.m_child) stack.push(current.m_child);
-      } else {
-        if (current.m_child) stack.push(current.m_child);
+    if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+    if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
+        stopPoints.cend()) {
+      if (const NodeId childId = fC->Child(id)) {
+        stack.emplace(childId);
       }
     }
   }

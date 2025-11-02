@@ -64,13 +64,15 @@ namespace SURELOG {
 
 bool UhdmChecker::registerFile(const FileContent* fC,
                                std::set<std::string_view>& moduleNames) {
-  const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
-  NodeId id = current.m_child;
-  PathId fileId = fC->getFileId();
-  if (!id) id = current.m_sibling;
-  if (!id) return false;
+  const NodeId nodeId = fC->getRootNode();
+  NodeId startId = fC->Child(nodeId);
+  if (!startId) startId = fC->Sibling(nodeId);
+  if (!startId) return false;
+
   std::stack<NodeId> stack;
-  stack.push(id);
+  stack.emplace(startId);
+
+  const PathId fileId = fC->getFileId();
 
   FileNodeCoverMap::iterator fileItr = m_fileNodeCoverMap.find(fC);
   if (fileItr == m_fileNodeCoverMap.end()) {
@@ -78,12 +80,13 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     m_fileNodeCoverMap.emplace(fC, uhdmCover);
     fileItr = m_fileNodeCoverMap.find(fC);
   }
-  RangesMap& uhdmCover = (*fileItr).second;
+  RangesMap& uhdmCover = fileItr->second;
   bool skipModule = false;
   NodeId endModuleNode;
   while (!stack.empty()) {
-    id = stack.top();
+    const NodeId id = stack.top();
     stack.pop();
+
     const VObject& current = fC->Object(id);
     bool skip = false;
     VObjectType type = current.m_type;
@@ -92,7 +95,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     // Skip macro expansion which resides in another file (header)
     PathId fid = fC->getFileId(id);
     if (fid != fileId) {
-      if (current.m_sibling) stack.push(current.m_sibling);
+      if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
       continue;
     }
 
@@ -130,7 +133,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         type == VObjectType::paGenerate_interface_loop_statement ||
         type == VObjectType::paGenerate_region ||
         ((type == VObjectType::paPackage_or_generate_item_declaration) &&
-         !current.m_child) ||  // SEMICOLUMN ALONE ;
+         !fC->Child(id)) ||  // SEMICOLUMN ALONE ;
         type == VObjectType::paGenerate_begin_end_block) {
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
@@ -176,7 +179,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         uint16_t to = fC->EndColumn(id);
         if (lineItr != uhdmCover.end()) {
           bool found = false;
-          for (ColRange& crange : (*lineItr).second) {
+          for (ColRange& crange : lineItr->second) {
             if ((crange.from >= from) && (crange.to <= to)) {
               found = true;
               crange.from = from;
@@ -190,7 +193,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
             crange.from = from;
             crange.to = to;
             crange.covered = Status::COVERED;
-            (*lineItr).second.push_back(crange);
+            lineItr->second.emplace_back(crange);
           }
         } else {
           Ranges ranges;
@@ -198,22 +201,22 @@ bool UhdmChecker::registerFile(const FileContent* fC,
           crange.from = from;
           crange.to = to;
           crange.covered = Status::COVERED;
-          ranges.push_back(crange);
+          ranges.emplace_back(crange);
           uhdmCover.emplace(current.m_startLine, ranges);
         }
       }
       skip = true;  // Only skip the item itself
     }
 
-    if (current.m_sibling) stack.push(current.m_sibling);
-    if (current.m_child) stack.push(current.m_child);
-    if (skip == false && skipModule == false) {
+    if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
+    if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
+    if (!skip && !skipModule) {
       uint16_t from = fC->Column(id);
       uint16_t to = fC->EndColumn(id);
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
         bool found = false;
-        for (ColRange& crange : (*lineItr).second) {
+        for (ColRange& crange : lineItr->second) {
           if ((crange.from >= from) && (crange.to <= to)) {
             found = true;
             crange.from = from;
@@ -222,12 +225,12 @@ bool UhdmChecker::registerFile(const FileContent* fC,
             break;
           }
         }
-        if (found == false) {
+        if (!found) {
           ColRange crange;
           crange.from = from;
           crange.to = to;
           crange.covered = Status::EXIST;
-          (*lineItr).second.push_back(crange);
+          lineItr->second.emplace_back(crange);
         }
       } else {
         Ranges ranges;
@@ -235,7 +238,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         crange.from = from;
         crange.to = to;
         crange.covered = Status::EXIST;
-        ranges.push_back(crange);
+        ranges.emplace_back(crange);
         uhdmCover.emplace(current.m_startLine, ranges);
       }
     }
@@ -289,7 +292,7 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
 
     float cov = 0.0f;
     const auto& itr = m_fileCoverageMap.find(fC->getFileId());
-    cov = (*itr).second;
+    cov = itr->second;
     std::stringstream strst;
     strst << std::setprecision(3) << cov;
 
@@ -329,7 +332,7 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
         reportF << "<pre style=\"margin:0; padding:0 \">" << std::setw(4)
                 << line << ": " << lineText << "</pre>\n";  // white
       } else {
-        const Ranges& ranges = (*cItr).second;
+        const Ranges& ranges = cItr->second;
         bool covered = false;
         bool exist = false;
         bool unsupported = false;
@@ -442,7 +445,7 @@ void UhdmChecker::mergeColumnCoverage() {
       for (const ColRange& crange : ranges) {
         if (crange.from >= crange.to) {
         } else {
-          merged.push_back(crange);
+          merged.emplace_back(crange);
         }
       }
       cItr.second = merged;
@@ -550,10 +553,10 @@ void UhdmChecker::annotate() {
     PathId fnId = fileSystem->toPathId(bc->getFile(), symbols);
     const auto& fItr = m_fileMap.find(fnId);
     if (fItr != m_fileMap.end()) {
-      const FileContent* fC = (*fItr).second;
+      const FileContent* fC = fItr->second;
       FileNodeCoverMap::iterator fileItr = m_fileNodeCoverMap.find(fC);
       if (fileItr != m_fileNodeCoverMap.end()) {
-        RangesMap& uhdmCover = (*fileItr).second;
+        RangesMap& uhdmCover = fileItr->second;
         RangesMap::iterator cItr = uhdmCover.find(bc->getStartLine());
         // uint16_t from = bc->getStartColumn();
         // uint16_t to = bc->getEndColumn();
@@ -561,7 +564,7 @@ void UhdmChecker::annotate() {
         if (cItr != uhdmCover.end()) {
           // bool found = false;
 
-          for (ColRange& crange : (*cItr).second) {
+          for (ColRange& crange : cItr->second) {
             //  if ((crange.from >= from) && (crange.to <= to)) {
             //    found = true;
             //    crange.from = from;
@@ -576,14 +579,14 @@ void UhdmChecker::annotate() {
                     crange1.from = crange.from;
                     crange1.to = from;
                     crange1.covered = Status::EXIST;
-                    (*cItr).second.push_back(crange1);
+                    cItr->second.emplace_back(crange1);
                   }
                   if (crange.to > to) {
                     ColRange crange1;
                     crange1.from = to;
                     crange1.to = crange.to;
                     crange1.covered = Status::EXIST;
-                    (*cItr).second.push_back(crange1);
+                    cItr->second.emplace_back(crange1);
                   }
                   found = true;
                   crange.from = from;
@@ -595,11 +598,11 @@ void UhdmChecker::annotate() {
                 } else if ((from < crange.from) && (to > crange.from) && (to <
                crange.to)) { crange.from = to; ColRange crange1; crange1.from =
                from; crange1.to = to; crange1.covered = Status::COVERED;
-                  (*cItr).second.push_back(crange1);
+                  cItr->second.emplace_back(crange1);
                 } else if ((from < crange.to) && (from > crange.from) && (to >
                crange.to)) { crange.to = from; ColRange crange1; crange1.from =
                from; crange1.to = to; crange1.covered = Status::COVERED;
-                  (*cItr).second.push_back(crange1);
+                  cItr->second.emplace_back(crange1);
                 } */
           }
           /*
@@ -611,7 +614,7 @@ void UhdmChecker::annotate() {
                         crange.covered = Status::UNSUPPORTED;
                       else
                         crange.covered = Status::COVERED;
-                      (*cItr).second.push_back(crange);
+                      cItr->second.emplace_back(crange);
                     }
           */
         }

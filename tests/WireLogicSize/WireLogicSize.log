@@ -1,14 +1,14 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/WireLogicSize/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 59
+Count: 61
 LIB: work
 FILE: ${SURELOG_DIR}/tests/WireLogicSize/dut.sv
-n<> u<58> t<Top_level_rule> c<1> l<1:1> el<24:1>
-  n<> u<1> t<Null_rule> p<58> s<57> l<1:1>
-  n<> u<57> t<Source_text> p<58> c<56> l<1:1> el<23:10>
-    n<> u<56> t<Description> p<57> c<55> l<1:1> el<23:10>
-      n<> u<55> t<Module_declaration> p<56> c<53> l<1:1> el<23:10>
-        n<> u<53> t<Module_ansi_header> p<55> c<2> s<54> l<1:1> el<3:37>
+n<> u<60> t<Top_level_rule> c<1> l<1:1> el<24:1>
+  n<> u<1> t<Null_rule> p<60> s<58> l<1:1>
+  n<> u<58> t<Source_text> p<60> c<57> s<59> l<1:1> el<23:10>
+    n<> u<57> t<Description> p<58> c<56> l<1:1> el<23:10>
+      n<> u<56> t<Module_declaration> p<57> c<53> l<1:1> el<23:10>
+        n<> u<53> t<Module_ansi_header> p<56> c<2> s<54> l<1:1> el<3:37>
           n<module> u<2> t<Module_keyword> p<53> s<3> l<1:1> el<1:7>
           n<TestFunction> u<3> t<STRING_CONST> p<53> s<4> l<1:8> el<1:20>
           n<> u<4> t<Package_import_declaration_list> p<53> s<52> l<1:21> el<1:21>
@@ -60,7 +60,9 @@ n<> u<58> t<Top_level_rule> c<1> l<1:1> el<24:1>
                 n<> u<48> t<Net_port_type> p<49> c<47> l<3:32> el<3:32>
                   n<> u<47> t<Data_type_or_implicit> p<48> l<3:32> el<3:32>
               n<sw2> u<50> t<STRING_CONST> p<51> l<3:32> el<3:35>
-        n<> u<54> t<ENDMODULE> p<55> l<23:1> el<23:10>
+        n</*\n    always_comb begin\n    if(sw[0])\n        O1 = 1'b1;\n    else\n        O1 = 1'b0;\n    \n    if(sw[1])\n        O2 = 1'b1;\n    else      \n        O2 = 1'b0;\n \n    if(sw[2])\n        O3 = 1'b1;\n    else\n        O3 = 1'b0;\n\n    end\n    */> u<54> t<BLOCK_COMMENT> p<56> s<55> l<1:1> el<3:37>
+        n<> u<55> t<ENDMODULE> p<56> l<23:1> el<23:10>
+  n<// TestFunction> u<59> t<LINE_COMMENT> p<60> l<23:11> el<23:26>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/WireLogicSize/dut.sv:1:1: No timescale set for "TestFunction".
 [INF:CP0300] Compilation...
@@ -98,7 +100,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@TestFunction (work@TestFunction), file:${SURELOG_DIR}/tests/WireLogicSize/dut.sv, line:1:1, endln:23:10
     |vpiName:work@TestFunction
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:2:11, endln:2:16
     |vpiParent:
     \_Module: work@TestFunction (work@TestFunction), file:${SURELOG_DIR}/tests/WireLogicSize/dut.sv, line:1:1, endln:23:10
@@ -279,7 +281,7 @@ Design: (unnamed)
       |vpiFullName:work@TestFunction.sw2
       |vpiActual:
       \_LogicTypespec: , line:2:11, endln:2:16
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (TestFunction)
   |vpiParent:
   \_Design: (unnamed)

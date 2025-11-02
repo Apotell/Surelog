@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/InterfAlways/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 77
+Count: 78
 LIB: work
 FILE: ${SURELOG_DIR}/tests/InterfAlways/dut.sv
-n<> u<76> t<Top_level_rule> c<1> l<1:1> el<10:1>
-  n<> u<1> t<Null_rule> p<76> s<75> l<1:1>
-  n<> u<75> t<Source_text> p<76> c<42> l<1:1> el<9:10>
+n<> u<77> t<Top_level_rule> c<1> l<1:1> el<10:1>
+  n<> u<1> t<Null_rule> p<77> s<75> l<1:1>
+  n<> u<75> t<Source_text> p<77> c<42> s<76> l<1:1> el<9:10>
     n<> u<42> t<Description> p<75> c<41> s<74> l<1:1> el<5:13>
       n<> u<41> t<Interface_declaration> p<42> c<15> l<1:1> el<5:13>
         n<> u<15> t<Interface_ansi_header> p<41> c<2> s<39> l<1:1> el<1:43>
@@ -79,6 +79,7 @@ n<> u<76> t<Top_level_rule> c<1> l<1:1> el<10:1>
                           n<o> u<60> t<STRING_CONST> p<61> l<8:30> el<8:31>
                     n<> u<65> t<CLOSE_PARENS> p<66> l<8:31> el<8:32>
         n<> u<72> t<ENDMODULE> p<73> l<9:1> el<9:10>
+  n<// top> u<76> t<LINE_COMMENT> p<77> l<9:11> el<9:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfAlways/dut.sv:1:1: No timescale set for "sw_test_status_if".
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfAlways/dut.sv:7:1: No timescale set for "top".
@@ -140,10 +141,9 @@ Design: (unnamed)
       \_IntTypespec: , line:1:36, endln:1:39
     |vpiName:x
     |vpiFullName:work@sw_test_status_if.x
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:1:36, endln:1:39
     |vpiParent:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
@@ -236,10 +236,9 @@ Design: (unnamed)
       \_IntTypespec: , line:7:19, endln:7:22
     |vpiName:o
     |vpiFullName:work@top.o
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_InterfaceTypespec: (sw_test_status_if)
     |vpiParent:
     \_Design: (unnamed)
@@ -250,7 +249,7 @@ Design: (unnamed)
       |vpiName:sw_test_status_if
     |vpiInterface:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:7:19, endln:7:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
@@ -294,9 +293,9 @@ Design: (unnamed)
         |vpiFullName:work@top.u_sw.x.o
         |vpiActual:
         \_Variable: (work@top.o), line:7:23, endln:7:24
-|vpiTypedef:
+|vpiTypespec:
 \_InterfaceTypespec: (sw_test_status_if)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/ParamOverload1/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 177
+Count: 178
 LIB: work
 FILE: ${SURELOG_DIR}/tests/ParamOverload1/dut.sv
-n<> u<176> t<Top_level_rule> c<1> l<1:1> el<12:1>
-  n<> u<1> t<Null_rule> p<176> s<175> l<1:1>
-  n<> u<175> t<Source_text> p<176> c<82> l<1:1> el<10:10>
+n<> u<177> t<Top_level_rule> c<1> l<1:1> el<12:1>
+  n<> u<1> t<Null_rule> p<177> s<175> l<1:1>
+  n<> u<175> t<Source_text> p<177> c<82> s<176> l<1:1> el<10:10>
     n<> u<82> t<Description> p<175> c<81> s<174> l<1:1> el<4:10>
       n<> u<81> t<Module_declaration> p<82> c<14> l<1:1> el<4:10>
         n<> u<14> t<Module_ansi_header> p<81> c<2> s<58> l<1:1> el<1:26>
@@ -179,6 +179,7 @@ n<> u<176> t<Top_level_rule> c<1> l<1:1> el<12:1>
                           n<o> u<160> t<STRING_CONST> p<161> l<9:30> el<9:31>
                     n<> u<165> t<CLOSE_PARENS> p<166> l<9:31> el<9:32>
         n<> u<172> t<ENDMODULE> p<173> l<10:1> el<10:10>
+  n<// top> u<176> t<LINE_COMMENT> p<177> l<10:11> el<10:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload1/dut.sv:1:1: No timescale set for "dut".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload1/dut.sv:6:1: No timescale set for "top".
@@ -241,7 +242,6 @@ Design: (unnamed)
       \_IntTypespec: , line:2:14, endln:2:17
     |vpiName:x
     |vpiFullName:work@dut.x
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
@@ -255,7 +255,6 @@ Design: (unnamed)
       |vpiFullName:work@dut.P
       |vpiActual:
       \_ArrayTypespec: , line:2:14, endln:2:42
-    |vpiSigned:1
     |vpiName:P
     |vpiFullName:work@dut.P
   |vpiParamAssign:
@@ -309,12 +308,12 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.P), line:2:18, endln:2:42
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:14, endln:2:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamOverload1/dut.sv, line:1:1, endln:4:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:2:14, endln:2:42
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamOverload1/dut.sv, line:1:1, endln:4:10
@@ -413,17 +412,16 @@ Design: (unnamed)
       \_IntTypespec: , line:6:19, endln:6:22
     |vpiName:o
     |vpiFullName:work@top.o
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (dut)
     |vpiParent:
     \_Design: (unnamed)
     |vpiName:dut
     |vpiModule:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamOverload1/dut.sv, line:1:1, endln:4:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:6:19, endln:6:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload1/dut.sv, line:6:1, endln:10:10
@@ -509,9 +507,9 @@ Design: (unnamed)
         |vpiFullName:work@top.u_dut3.x.o
         |vpiActual:
         \_Variable: (work@top.o), line:6:23, endln:6:24
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (dut)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

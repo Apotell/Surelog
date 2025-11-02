@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 43
+Count: 44
 LIB: work
 FILE: ${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv
-n<> u<42> t<Top_level_rule> c<1> l<1:1> el<8:1>
-  n<> u<1> t<Null_rule> p<42> s<41> l<1:1>
-  n<> u<41> t<Source_text> p<42> c<40> l<1:1> el<6:11>
+n<> u<43> t<Top_level_rule> c<1> l<1:1> el<8:1>
+  n<> u<1> t<Null_rule> p<43> s<41> l<1:1>
+  n<> u<41> t<Source_text> p<43> c<40> s<42> l<1:1> el<6:11>
     n<> u<40> t<Description> p<41> c<39> l<1:1> el<6:11>
       n<> u<39> t<Package_declaration> p<40> c<2> l<1:1> el<6:11>
         n<> u<2> t<PACKAGE> p<39> s<3> l<1:1> el<1:8>
@@ -45,6 +45,7 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<8:1>
                           n<> u<28> t<Primary_literal> p<29> c<27> l<5:18> el<5:19>
                             n<0> u<27> t<INT_CONST> p<28> l<5:18> el<5:19>
         n<> u<38> t<ENDPACKAGE> p<39> l<6:1> el<6:11>
+  n<// pkg> u<42> t<LINE_COMMENT> p<43> l<6:12> el<6:18>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv:1:1: No timescale set for "pkg".
 [INF:CP0300] Compilation...
@@ -86,7 +87,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
@@ -102,7 +103,7 @@ Design: (unnamed)
       |vpiFullName:pkg::a
       |vpiActual:
       \_StructTypespec: , line:2:12, endln:4:5
-  |vpiTypedef:
+  |vpiTypespec:
   \_StructTypespec: , line:2:12, endln:4:5
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
@@ -119,11 +120,11 @@ Design: (unnamed)
         |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
@@ -139,7 +140,7 @@ Design: (unnamed)
       |vpiFullName:pkg::b
       |vpiActual:
       \_ArrayTypespec: , line:5:12, endln:5:20
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:5:12, endln:5:20
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11

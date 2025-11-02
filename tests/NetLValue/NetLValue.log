@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/NetLValue/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 115
+Count: 116
 LIB: work
 FILE: ${SURELOG_DIR}/tests/NetLValue/dut.sv
-n<> u<114> t<Top_level_rule> c<1> l<1:1> el<11:1>
-  n<> u<1> t<Null_rule> p<114> s<113> l<1:1>
-  n<> u<113> t<Source_text> p<114> c<112> l<1:1> el<10:10>
+n<> u<115> t<Top_level_rule> c<1> l<1:1> el<11:1>
+  n<> u<1> t<Null_rule> p<115> s<113> l<1:1>
+  n<> u<113> t<Source_text> p<115> c<112> s<114> l<1:1> el<10:10>
     n<> u<112> t<Description> p<113> c<111> l<1:1> el<10:10>
       n<> u<111> t<Module_declaration> p<112> c<5> l<1:1> el<10:10>
         n<> u<5> t<Module_ansi_header> p<111> c<2> s<23> l<1:1> el<1:10>
@@ -117,6 +117,7 @@ n<> u<114> t<Top_level_rule> c<1> l<1:1> el<11:1>
                                       n<0> u<93> t<INT_CONST> p<94> l<8:15> el<8:16>
                       n<> u<102> t<END> p<103> l<9:4> el<9:7>
         n<> u<110> t<ENDMODULE> p<111> l<10:1> el<10:10>
+  n<// t> u<114> t<LINE_COMMENT> p<115> l<10:11> el<10:15>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/NetLValue/dut.sv:1:1: No timescale set for "t".
 [INF:CP0300] Compilation...
@@ -180,10 +181,9 @@ Design: (unnamed)
       \_IntTypespec: , line:2:21, endln:2:24
     |vpiName:y
     |vpiFullName:work@t.y
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (S), line:2:30, endln:2:31
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
@@ -199,7 +199,7 @@ Design: (unnamed)
       |vpiFullName:work@t.S
       |vpiActual:
       \_StructTypespec: , line:2:12, endln:2:29
-  |vpiTypedef:
+  |vpiTypespec:
   \_StructTypespec: , line:2:12, endln:2:29
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
@@ -215,12 +215,12 @@ Design: (unnamed)
         |vpiFullName:work@t.x
         |vpiActual:
         \_IntTypespec: , line:2:21, endln:2:24
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:21, endln:2:24
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:3:4, endln:3:10
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
@@ -382,7 +382,7 @@ Design: (unnamed)
             \_Net: (work@t.x), line:7:15, endln:7:16
           |vpiName:s[1].x
     |vpiAlwaysType:2
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (t)
   |vpiParent:
   \_Design: (unnamed)

@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/ArrayTypespec/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 43
+Count: 44
 LIB: work
 FILE: ${SURELOG_DIR}/tests/ArrayTypespec/dut.sv
-n<> u<42> t<Top_level_rule> c<1> l<1:1> el<4:1>
-  n<> u<1> t<Null_rule> p<42> s<41> l<1:1>
-  n<> u<41> t<Source_text> p<42> c<40> l<1:1> el<3:10>
+n<> u<43> t<Top_level_rule> c<1> l<1:1> el<4:1>
+  n<> u<1> t<Null_rule> p<43> s<41> l<1:1>
+  n<> u<41> t<Source_text> p<43> c<40> s<42> l<1:1> el<3:10>
     n<> u<40> t<Description> p<41> c<39> l<1:1> el<3:10>
       n<> u<39> t<Module_declaration> p<40> c<5> l<1:1> el<3:10>
         n<> u<5> t<Module_ansi_header> p<39> c<2> s<37> l<1:1> el<1:12>
@@ -45,6 +45,7 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<4:1>
                                           n<> u<20> t<Primary_literal> p<21> c<19> l<2:33> el<2:35>
                                             n<12> u<19> t<INT_CONST> p<20> l<2:33> el<2:35>
         n<> u<38> t<ENDMODULE> p<39> l<3:1> el<3:10>
+  n<// top> u<42> t<LINE_COMMENT> p<43> l<3:11> el<3:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ArrayTypespec/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
@@ -97,7 +98,6 @@ Design: (unnamed)
       |vpiFullName:work@top.P
       |vpiActual:
       \_ArrayTypespec: , line:2:15, endln:2:36
-    |vpiSigned:1
     |vpiLocalParam:1
     |vpiName:P
     |vpiFullName:work@top.P
@@ -128,12 +128,12 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.P), line:2:19, endln:2:36
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:15, endln:2:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayTypespec/dut.sv, line:1:1, endln:3:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:2:15, endln:2:36
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayTypespec/dut.sv, line:1:1, endln:3:10
@@ -167,7 +167,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ArrayTypespec: , line:2:15, endln:2:36
   |vpiDefName:work@top
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

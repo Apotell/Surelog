@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/ConstantRange/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 205
+Count: 206
 LIB: work
 FILE: ${SURELOG_DIR}/tests/ConstantRange/dut.sv
-n<> u<204> t<Top_level_rule> c<1> l<1:1> el<23:1>
-  n<> u<1> t<Null_rule> p<204> s<203> l<1:1>
-  n<> u<203> t<Source_text> p<204> c<9> l<1:1> el<21:10>
+n<> u<205> t<Top_level_rule> c<1> l<1:1> el<23:1>
+  n<> u<1> t<Null_rule> p<205> s<203> l<1:1>
+  n<> u<203> t<Source_text> p<205> c<9> s<204> l<1:1> el<21:10>
     n<> u<9> t<Description> p<203> c<8> s<202> l<1:1> el<3:10>
       n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<3:10>
         n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:15>
@@ -207,6 +207,7 @@ n<> u<204> t<Top_level_rule> c<1> l<1:1> el<23:1>
                                   n<> u<184> t<Ordered_port_connection> p<185> l<18:12> el<18:12>
                         n<> u<190> t<END> p<191> l<19:1> el<19:4>
         n<> u<200> t<ENDMODULE> p<201> l<21:1> el<21:10>
+  n<// dut> u<204> t<LINE_COMMENT> p<205> l<21:11> el<21:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstantRange/dut.sv:1:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ConstantRange/dut.sv:6:1: No timescale set for "dut".
@@ -281,7 +282,6 @@ Design: (unnamed)
       |vpiFullName:work@dut.NMioPads
       |vpiActual:
       \_IntTypespec: , line:7:11, endln:7:14
-    |vpiSigned:1
     |vpiName:NMioPads
     |vpiFullName:work@dut.NMioPads
   |vpiParameter:
@@ -385,7 +385,7 @@ Design: (unnamed)
           \_Begin: (work@dut.gen_mio_pads.gen_mio_inout), line:12:47, endln:14:9
           |vpiName:gen_mio_inout
         |vpiFullName:work@dut.gen_mio_pads.gen_mio_inout
-        |vpiTypedef:
+        |vpiTypespec:
         \_ModuleTypespec: (GOOD)
           |vpiParent:
           \_Design: (unnamed)
@@ -525,7 +525,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
     |vpiFullName:work@dut
-    |vpiTypedef:
+    |vpiTypespec:
     \_ModuleTypespec: (BAD)
       |vpiParent:
       \_Begin: (work@dut), line:17:22, endln:19:4
@@ -538,12 +538,12 @@ Design: (unnamed)
       \_Begin: (work@dut), line:17:22, endln:19:4
       |vpiName:bad
       |vpiDefName:work@BAD
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:7:11, endln:7:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:8:11, endln:8:16
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
@@ -607,9 +607,9 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:17:22, endln:19:4
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (GOOD)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (dut)
   |vpiParent:
   \_Design: (unnamed)

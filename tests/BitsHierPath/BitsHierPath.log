@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 238
+Count: 239
 LIB: work
 FILE: ${SURELOG_DIR}/tests/BitsHierPath/dut.sv
-n<> u<237> t<Top_level_rule> c<1> l<1:1> el<18:1>
-  n<> u<1> t<Null_rule> p<237> s<236> l<1:1>
-  n<> u<236> t<Source_text> p<237> c<40> l<1:1> el<17:10>
+n<> u<238> t<Top_level_rule> c<1> l<1:1> el<18:1>
+  n<> u<1> t<Null_rule> p<238> s<236> l<1:1>
+  n<> u<236> t<Source_text> p<238> c<40> s<237> l<1:1> el<17:10>
     n<> u<40> t<Description> p<236> c<39> s<63> l<1:1> el<6:17>
       n<> u<39> t<Package_declaration> p<40> c<2> l<1:1> el<6:17>
         n<> u<2> t<PACKAGE> p<39> s<3> l<1:1> el<1:8>
@@ -240,6 +240,7 @@ n<> u<237> t<Top_level_rule> c<1> l<1:1> el<18:1>
                 n<> u<228> t<Port_connection_list> p<229> c<227> l<16:41> el<16:41>
                   n<> u<227> t<Ordered_port_connection> p<228> l<16:41> el<16:41>
         n<> u<233> t<ENDMODULE> p<234> l<17:1> el<17:10>
+  n<// top> u<237> t<LINE_COMMENT> p<238> l<17:11> el<17:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitsHierPath/dut.sv:8:1: No timescale set for "dut".
@@ -295,7 +296,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
     |vpiName:pkg
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
@@ -311,7 +312,7 @@ Design: (unnamed)
       |vpiFullName:pkg::struct_t
       |vpiActual:
       \_StructTypespec: , line:2:11, endln:5:4
-  |vpiTypedef:
+  |vpiTypespec:
   \_StructTypespec: , line:2:11, endln:5:4
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
@@ -340,7 +341,7 @@ Design: (unnamed)
         |vpiFullName:pkg::z
         |vpiActual:
         \_LogicTypespec: , line:4:5, endln:4:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
@@ -364,7 +365,7 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
@@ -399,7 +400,6 @@ Design: (unnamed)
       |vpiFullName:work@dut.Width
       |vpiActual:
       \_IntTypespec: , line:8:24, endln:8:27
-    |vpiSigned:1
     |vpiName:Width
     |vpiFullName:work@dut.Width
   |vpiParamAssign:
@@ -416,7 +416,7 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.Width), line:8:28, endln:8:37
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:8:24, endln:8:27
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
@@ -444,7 +444,6 @@ Design: (unnamed)
       |vpiFullName:work@top.SyncWidth
       |vpiActual:
       \_IntTypespec: , line:12:15, endln:12:18
-    |vpiSigned:1
     |vpiLocalParam:1
     |vpiName:SyncWidth
     |vpiFullName:work@top.SyncWidth
@@ -496,12 +495,12 @@ Design: (unnamed)
         |vpiName:$bits
     |vpiLhs:
     \_Parameter: (work@top.SyncWidth), line:12:19, endln:12:47
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:12:15, endln:12:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (dut)
     |vpiParent:
     \_Design: (unnamed)
@@ -582,9 +581,9 @@ Design: (unnamed)
     |vpiDefName:work@dut
     |vpiActual:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (dut)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

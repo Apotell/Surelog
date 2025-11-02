@@ -225,11 +225,11 @@ Design: (unnamed)
             |vpiFullName:work@top.add.b
             |vpiActual:
             \_IODecl: (b), line:3:30, endln:3:31
-    |vpiTypedef:
+    |vpiTypespec:
     \_VoidTypespec: , line:3:10, endln:3:14
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntTypespec: , line:3:19, endln:3:22
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
@@ -252,7 +252,7 @@ Design: (unnamed)
       \_Function: (work@top.add), line:3:1, endln:6:12
       |vpiDirection:1
       |vpiName:a
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top.add.a), line:3:19, endln:3:22
         |vpiParent:
         \_IODecl: (a), line:3:23, endln:3:24
@@ -265,7 +265,7 @@ Design: (unnamed)
       \_Function: (work@top.add), line:3:1, endln:6:12
       |vpiDirection:1
       |vpiName:b
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top.add.b), line:3:26, endln:3:29
         |vpiParent:
         \_IODecl: (b), line:3:30, endln:3:31
@@ -299,6 +299,8 @@ Design: (unnamed)
       \_FuncCall: (add), line:9:16, endln:9:27
         |vpiParent:
         \_SysFuncCall: ($display), line:9:1, endln:9:28
+        |vpiTaskFunc:
+        \_Function: (work@top.add), line:3:1, endln:6:12
         |vpiArgument:
         \_Constant: , line:9:20, endln:9:22
           |vpiParent:
@@ -320,14 +322,12 @@ Design: (unnamed)
           |vpiParent:
           \_FuncCall: (add), line:9:16, endln:9:27
           |vpiName:add
-        |vpiFunction:
-        \_Function: (work@top.add), line:3:1, endln:6:12
       |vpiName:
       \_Identifier: ($display)
         |vpiParent:
         \_SysFuncCall: ($display), line:9:1, endln:9:28
         |vpiName:$display
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

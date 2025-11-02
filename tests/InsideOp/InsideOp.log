@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 281
+Count: 282
 LIB: work
 FILE: ${SURELOG_DIR}/tests/InsideOp/dut.sv
-n<> u<280> t<Top_level_rule> c<1> l<1:1> el<39:1>
-  n<> u<1> t<Null_rule> p<280> s<279> l<1:1>
-  n<> u<279> t<Source_text> p<280> c<50> l<1:1> el<38:10>
+n<> u<281> t<Top_level_rule> c<1> l<1:1> el<39:1>
+  n<> u<1> t<Null_rule> p<281> s<279> l<1:1>
+  n<> u<279> t<Source_text> p<281> c<50> s<280> l<1:1> el<38:10>
     n<> u<50> t<Description> p<279> c<49> s<58> l<1:1> el<12:11>
       n<> u<49> t<Package_declaration> p<50> c<2> l<1:1> el<12:11>
         n<> u<2> t<PACKAGE> p<49> s<3> l<1:1> el<1:8>
@@ -283,6 +283,7 @@ n<> u<280> t<Top_level_rule> c<1> l<1:1> el<39:1>
                                                                       n<255> u<235> t<INT_CONST> p<236> l<35:18> el<35:21>
                                                     n<> u<245> t<END> p<246> l<36:3> el<36:6>
         n<> u<276> t<ENDMODULE> p<277> l<38:1> el<38:10>
+  n<// top> u<280> t<LINE_COMMENT> p<281> l<38:11> el<38:17>
 AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0301] ${SURELOG_DIR}/tests/InsideOp/dut.sv:1:1: Compile package "my_pkg".
@@ -336,7 +337,7 @@ Design: (unnamed)
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
     |vpiName:my_pkg
-  |vpiTypedef:
+  |vpiTypespec:
   \_EnumTypespec: , line:3:11, endln:10:10
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
@@ -395,12 +396,12 @@ Design: (unnamed)
       |UINT:100
       |vpiDecompile:100
       |vpiSize:64
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:3:16, endln:3:19
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
@@ -455,7 +456,6 @@ Design: (unnamed)
       \_IntTypespec: , line:22:12, endln:22:15
     |vpiName:out
     |vpiFullName:work@top.out
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
@@ -566,7 +566,7 @@ Design: (unnamed)
           \_Begin: (work@top.gen_two), line:29:45, endln:32:6
           |vpiName:gen_two
         |vpiFullName:work@top.gen_two
-        |vpiTypedef:
+        |vpiTypespec:
         \_ModuleTypespec: (GOOD)
           |vpiParent:
           \_Design: (unnamed)
@@ -761,7 +761,7 @@ Design: (unnamed)
       \_Begin: (work@top.gen_one), line:27:33, endln:29:6
       |vpiElseStmt:
       \_Begin: (work@top), line:29:12, endln:36:6
-  |vpiTypedef:
+  |vpiTypespec:
   \_ImportTypespec: (my_pkg), line:18:8, endln:18:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
@@ -778,7 +778,7 @@ Design: (unnamed)
       |vpiSize:8
       |STRING:*
       |vpiConstType:8
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:22:12, endln:22:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
@@ -840,9 +840,9 @@ Design: (unnamed)
     \_Begin: (work@top.gen_zero), line:25:42, endln:27:6
     |vpiElseStmt:
     \_Begin: (work@top), line:27:12, endln:36:6
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (GOOD)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

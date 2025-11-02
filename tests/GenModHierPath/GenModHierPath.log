@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/GenModHierPath/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 96
+Count: 97
 LIB: work
 FILE: ${SURELOG_DIR}/tests/GenModHierPath/dut.sv
-n<> u<95> t<Top_level_rule> c<1> l<1:1> el<21:1>
-  n<> u<1> t<Null_rule> p<95> s<94> l<1:1>
-  n<> u<94> t<Source_text> p<95> c<28> l<1:1> el<20:10>
+n<> u<96> t<Top_level_rule> c<1> l<1:1> el<21:1>
+  n<> u<1> t<Null_rule> p<96> s<94> l<1:1>
+  n<> u<94> t<Source_text> p<96> c<28> s<95> l<1:1> el<20:10>
     n<> u<28> t<Description> p<94> c<27> s<93> l<1:1> el<5:10>
       n<> u<27> t<Module_declaration> p<28> c<6> l<1:1> el<5:10>
         n<> u<6> t<Module_nonansi_header> p<27> c<2> s<25> l<1:1> el<1:27>
@@ -98,6 +98,7 @@ n<> u<95> t<Top_level_rule> c<1> l<1:1> el<21:1>
                                             n<> u<71> t<Bit_select> p<72> l<17:29> el<17:29>
                         n<> u<82> t<ENDFUNCTION> p<83> l<18:3> el<18:14>
         n<> u<91> t<ENDMODULE> p<92> l<20:1> el<20:10>
+  n<// InitializedBlockRAM> u<95> t<LINE_COMMENT> p<96> l<20:11> el<20:33>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenModHierPath/dut.sv:1:1: No timescale set for "ForNarrowRequest".
 [WRN:PA0205] ${SURELOG_DIR}/tests/GenModHierPath/dut.sv:8:1: No timescale set for "InitializedBlockRAM".
@@ -149,12 +150,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
     |vpiName:work@ForNarrowRequest
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:3:3, endln:3:6
     |vpiParent:
     \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:3:3, endln:3:16
     |vpiParent:
     \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
@@ -200,7 +201,6 @@ Design: (unnamed)
       \_ArrayTypespec: , line:3:3, endln:3:16
     |vpiName:array
     |vpiFullName:work@ForNarrowRequest.array
-    |vpiSigned:1
   |vpiDefName:work@ForNarrowRequest
   |vpiNet:
   \_Net: (work@ForNarrowRequest.array), line:3:7, endln:3:12
@@ -223,7 +223,7 @@ Design: (unnamed)
       \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
       |vpiName:InitializeMemory
     |vpiFullName:work@InitializedBlockRAM.InitializeMemory
-    |vpiTypedef:
+    |vpiTypespec:
     \_VoidTypespec: , line:16:22, endln:16:26
       |vpiParent:
       \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
@@ -315,7 +315,7 @@ Design: (unnamed)
           \_Begin: (work@InitializedBlockRAM.body), line:11:12, endln:13:8
           |vpiName:body
         |vpiFullName:work@InitializedBlockRAM.body
-        |vpiTypedef:
+        |vpiTypespec:
         \_ModuleTypespec: (ForNarrowRequest)
           |vpiParent:
           \_Design: (unnamed)
@@ -351,9 +351,9 @@ Design: (unnamed)
   |vpiDefName:work@InitializedBlockRAM
   |vpiTaskFunc:
   \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (ForNarrowRequest)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (InitializedBlockRAM)
   |vpiParent:
   \_Design: (unnamed)

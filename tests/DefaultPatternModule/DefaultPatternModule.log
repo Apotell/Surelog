@@ -420,7 +420,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:29:1, endln:31:10
     |vpiName:work@main
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (top)
     |vpiParent:
     \_Design: (unnamed)
@@ -540,157 +540,156 @@ Design: (unnamed)
     \_FuncCall: (ASSIGN_VADDR), line:14:38, endln:14:51
       |vpiParent:
       \_ParamAssign: , line:14:25, endln:14:52
+      |vpiTaskFunc:
+      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+        |vpiParent:
+        \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
+        |vpiName:
+        \_Identifier: (ASSIGN_VADDR)
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+          |vpiName:ASSIGN_VADDR
+        |vpiFullName:work@top.ASSIGN_VADDR
+        |vpiVariable:
+        \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+          |vpiTypespec:
+          \_RefTypespec: (work@top.ASSIGN_VADDR.i), line:9:10, endln:9:13
+            |vpiParent:
+            \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+            |vpiFullName:work@top.ASSIGN_VADDR.i
+            |vpiActual:
+            \_IntTypespec: , line:9:10, endln:9:13
+          |vpiName:i
+          |vpiFullName:work@top.ASSIGN_VADDR.i
+        |vpiInternalScope:
+        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+          |vpiFullName:work@top.ASSIGN_VADDR
+          |vpiInternalScope:
+          \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
+            |vpiParent:
+            \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
+            |vpiFullName:work@top.ASSIGN_VADDR
+            |vpiStmt:
+            \_Assignment: , line:10:10, endln:10:32
+              |vpiParent:
+              \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
+              |vpiOpType:82
+              |vpiBlocking:1
+              |vpiRhs:
+              \_BitSelect: (work@top.ASSIGN_VADDR.V), line:10:29, endln:10:32
+                |vpiParent:
+                \_Assignment: , line:10:10, endln:10:32
+                |vpiName:V
+                |vpiFullName:work@top.ASSIGN_VADDR.V
+                |vpiActual:
+                \_Parameter: (work@top.V), line:5:25, endln:5:47
+                |vpiIndex:
+                \_RefObj: (work@top.ASSIGN_VADDR.i), line:10:30, endln:10:31
+                  |vpiParent:
+                  \_BitSelect: (work@top.ASSIGN_VADDR.V), line:10:29, endln:10:32
+                  |vpiName:i
+                  |vpiFullName:work@top.ASSIGN_VADDR.i
+                  |vpiActual:
+                  \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+              |vpiLhs:
+              \_BitSelect: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:10:22, endln:10:25
+                |vpiParent:
+                \_Assignment: , line:10:10, endln:10:32
+                |vpiName:ASSIGN_VADDR
+                |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
+                |vpiActual:
+                \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+                |vpiIndex:
+                \_RefObj: (work@top.ASSIGN_VADDR.i), line:10:23, endln:10:24
+                  |vpiParent:
+                  \_BitSelect: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:10:22, endln:10:25
+                  |vpiName:i
+                  |vpiFullName:work@top.ASSIGN_VADDR.i
+                  |vpiActual:
+                  \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+          |vpiForInitStmt:
+          \_Assignment: , line:9:10, endln:9:19
+            |vpiParent:
+            \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
+            |vpiRhs:
+            \_Constant: , line:9:18, endln:9:19
+              |vpiParent:
+              \_Assignment: , line:9:10, endln:9:19
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+            |vpiLhs:
+            \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+          |vpiForIncStmt:
+          \_Operation: , line:9:30, endln:9:33
+            |vpiParent:
+            \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
+            |vpiOpType:62
+            |vpiOperand:
+            \_RefObj: (work@top.ASSIGN_VADDR.i), line:9:30, endln:9:31
+              |vpiParent:
+              \_Operation: , line:9:30, endln:9:33
+              |vpiName:i
+              |vpiFullName:work@top.ASSIGN_VADDR.i
+              |vpiActual:
+              \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+          |vpiCondition:
+          \_Operation: , line:9:21, endln:9:28
+            |vpiParent:
+            \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
+            |vpiOpType:20
+            |vpiOperand:
+            \_RefObj: (work@top.ASSIGN_VADDR.i), line:9:21, endln:9:22
+              |vpiParent:
+              \_Operation: , line:9:21, endln:9:28
+              |vpiName:i
+              |vpiFullName:work@top.ASSIGN_VADDR.i
+              |vpiActual:
+              \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+            |vpiOperand:
+            \_RefObj: (work@top.ASSIGN_VADDR.CNT), line:9:25, endln:9:28
+              |vpiParent:
+              \_Operation: , line:9:21, endln:9:28
+              |vpiName:CNT
+              |vpiFullName:work@top.ASSIGN_VADDR.CNT
+              |vpiActual:
+              \_Parameter: (work@top.CNT), line:4:25, endln:4:32
+          |vpiStmt:
+          \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
+        |vpiTypespec:
+        \_IntTypespec: , line:9:10, endln:9:13
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+          |vpiSigned:1
+        |vpiImportTypespec:
+        \_IntTypespec: , line:9:10, endln:9:13
+        |vpiImportTypespec:
+        \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
+        |vpiVisibility:1
+        |vpiReturn:
+        \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:8:17, endln:8:35
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
+          |vpiName:ASSIGN_VADDR_RET_T
+          |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
+          |vpiActual:
+          \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
+        |vpiStmt:
+        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
       |vpiName:
       \_Identifier: (ASSIGN_VADDR)
         |vpiParent:
         \_FuncCall: (ASSIGN_VADDR), line:14:38, endln:14:51
         |vpiName:ASSIGN_VADDR
-      |vpiFunction:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
     |vpiLhs:
     \_Parameter: (work@top.VADDR), line:14:25, endln:14:52
   |vpiInternalScope:
   \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
-    |vpiName:
-    \_Identifier: (ASSIGN_VADDR)
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-      |vpiName:ASSIGN_VADDR
-    |vpiFullName:work@top.ASSIGN_VADDR
-    |vpiVariable:
-    \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.ASSIGN_VADDR.i), line:9:10, endln:9:13
-        |vpiParent:
-        \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-        |vpiFullName:work@top.ASSIGN_VADDR.i
-        |vpiActual:
-        \_IntTypespec: , line:9:10, endln:9:13
-      |vpiName:i
-      |vpiFullName:work@top.ASSIGN_VADDR.i
-      |vpiSigned:1
-    |vpiInternalScope:
-    \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-      |vpiFullName:work@top.ASSIGN_VADDR
-      |vpiInternalScope:
-      \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
-        |vpiParent:
-        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
-        |vpiFullName:work@top.ASSIGN_VADDR
-        |vpiStmt:
-        \_Assignment: , line:10:10, endln:10:32
-          |vpiParent:
-          \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_BitSelect: (work@top.ASSIGN_VADDR.V), line:10:29, endln:10:32
-            |vpiParent:
-            \_Assignment: , line:10:10, endln:10:32
-            |vpiName:V
-            |vpiFullName:work@top.ASSIGN_VADDR.V
-            |vpiActual:
-            \_Parameter: (work@top.V), line:5:25, endln:5:47
-            |vpiIndex:
-            \_RefObj: (work@top.ASSIGN_VADDR.i), line:10:30, endln:10:31
-              |vpiParent:
-              \_BitSelect: (work@top.ASSIGN_VADDR.V), line:10:29, endln:10:32
-              |vpiName:i
-              |vpiFullName:work@top.ASSIGN_VADDR.i
-              |vpiActual:
-              \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-          |vpiLhs:
-          \_BitSelect: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:10:22, endln:10:25
-            |vpiParent:
-            \_Assignment: , line:10:10, endln:10:32
-            |vpiName:ASSIGN_VADDR
-            |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
-            |vpiActual:
-            \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-            |vpiIndex:
-            \_RefObj: (work@top.ASSIGN_VADDR.i), line:10:23, endln:10:24
-              |vpiParent:
-              \_BitSelect: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:10:22, endln:10:25
-              |vpiName:i
-              |vpiFullName:work@top.ASSIGN_VADDR.i
-              |vpiActual:
-              \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-      |vpiForInitStmt:
-      \_Assignment: , line:9:10, endln:9:19
-        |vpiParent:
-        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
-        |vpiRhs:
-        \_Constant: , line:9:18, endln:9:19
-          |vpiParent:
-          \_Assignment: , line:9:10, endln:9:19
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiLhs:
-        \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-      |vpiForIncStmt:
-      \_Operation: , line:9:30, endln:9:33
-        |vpiParent:
-        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
-        |vpiOpType:62
-        |vpiOperand:
-        \_RefObj: (work@top.ASSIGN_VADDR.i), line:9:30, endln:9:31
-          |vpiParent:
-          \_Operation: , line:9:30, endln:9:33
-          |vpiName:i
-          |vpiFullName:work@top.ASSIGN_VADDR.i
-          |vpiActual:
-          \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-      |vpiCondition:
-      \_Operation: , line:9:21, endln:9:28
-        |vpiParent:
-        \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
-        |vpiOpType:20
-        |vpiOperand:
-        \_RefObj: (work@top.ASSIGN_VADDR.i), line:9:21, endln:9:22
-          |vpiParent:
-          \_Operation: , line:9:21, endln:9:28
-          |vpiName:i
-          |vpiFullName:work@top.ASSIGN_VADDR.i
-          |vpiActual:
-          \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-        |vpiOperand:
-        \_RefObj: (work@top.ASSIGN_VADDR.CNT), line:9:25, endln:9:28
-          |vpiParent:
-          \_Operation: , line:9:21, endln:9:28
-          |vpiName:CNT
-          |vpiFullName:work@top.ASSIGN_VADDR.CNT
-          |vpiActual:
-          \_Parameter: (work@top.CNT), line:4:25, endln:4:32
-      |vpiStmt:
-      \_Begin: (work@top.ASSIGN_VADDR), line:9:35, endln:11:8
-    |vpiTypedef:
-    \_IntTypespec: , line:9:10, endln:9:13
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntTypespec: , line:9:10, endln:9:13
-    |vpiImportTypespec:
-    \_Variable: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
-    |vpiVisibility:1
-    |vpiReturn:
-    \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:8:17, endln:8:35
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
-      |vpiName:ASSIGN_VADDR_RET_T
-      |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
-      |vpiActual:
-      \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
-    |vpiStmt:
-    \_ForStmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
   |vpiInternalScope:
   \_Begin: (work@top), line:16:20, endln:18:4
     |vpiParent:
@@ -706,11 +705,11 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
     |vpiFullName:work@top
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:4:12, endln:4:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:5:12, endln:5:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -739,11 +738,11 @@ Design: (unnamed)
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:4:12, endln:4:24
-  |vpiTypedef:
+  |vpiTypespec:
   \_StringTypespec: , line:5:36, endln:5:43
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:7:9, endln:7:45
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -772,7 +771,7 @@ Design: (unnamed)
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:4:12, endln:4:24
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -788,7 +787,7 @@ Design: (unnamed)
       |vpiFullName:work@top.ASSIGN_VADDR_RET_T
       |vpiActual:
       \_ArrayTypespec: , line:7:9, endln:7:45
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:14:12, endln:14:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -939,14 +938,14 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:23:20, endln:25:4
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (main)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:main
   |vpiModule:
   \_Module: work@main (work@main), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:29:1, endln:31:10
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
 ===================
 [  FATAL] : 0

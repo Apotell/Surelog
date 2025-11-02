@@ -64,11 +64,11 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:dut.sv
-|vpiTypedef:
+|vpiTypespec:
 \_RealTypespec: , line:2:9, endln:2:13
   |vpiParent:
   \_Design: (unnamed)
-|vpiTypedef:
+|vpiTypespec:
 \_TypedefTypespec: (my_real), line:2:14, endln:2:21
   |vpiParent:
   \_Design: (unnamed)
@@ -84,17 +84,6 @@ Design: (unnamed)
     |vpiFullName:my_real
     |vpiActual:
     \_RealTypespec: , line:2:9, endln:2:13
-|vpiTypedef:
-\_ArrayTypespec: , line:4:44, endln:4:58
-  |vpiParent:
-  \_Design: (unnamed)
-  |vpiArrayType:2
-  |vpiElemTypespec:
-  \_RefTypespec: , line:4:44, endln:4:48
-    |vpiParent:
-    \_ArrayTypespec: , line:4:44, endln:4:58
-    |vpiActual:
-    \_RealTypespec: , line:4:20, endln:4:24
 |vpiTaskFunc:
 \_Function: (my_function2), line:4:1, endln:5:12
   |vpiParent:
@@ -104,12 +93,26 @@ Design: (unnamed)
     |vpiParent:
     \_Function: (my_function2), line:4:1, endln:5:12
     |vpiName:my_function2
-  |vpiTypedef:
+  |vpiTypespec:
   \_RealTypespec: , line:4:20, endln:4:24
     |vpiParent:
     \_Function: (my_function2), line:4:1, endln:5:12
+  |vpiTypespec:
+  \_ArrayTypespec: , line:4:44, endln:4:58
+    |vpiParent:
+    \_Function: (my_function2), line:4:1, endln:5:12
+    |vpiArrayType:2
+    |vpiElemTypespec:
+    \_RefTypespec: (my_function2), line:4:44, endln:4:48
+      |vpiParent:
+      \_ArrayTypespec: , line:4:44, endln:4:58
+      |vpiFullName:my_function2
+      |vpiActual:
+      \_RealTypespec: , line:4:20, endln:4:24
   |vpiImportTypespec:
   \_RealTypespec: , line:4:20, endln:4:24
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:4:44, endln:4:58
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
@@ -145,7 +148,7 @@ Design: (unnamed)
         |vpiDecompile:unsized
         |STRING:unsized
         |vpiConstType:6
-    |vpiTypedef:
+    |vpiTypespec:
     \_RefTypespec: (my_function2.driver), line:4:44, endln:4:48
       |vpiParent:
       \_IODecl: (driver), line:4:49, endln:4:55

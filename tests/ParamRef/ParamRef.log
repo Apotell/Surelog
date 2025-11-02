@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/ParamRef/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 193
+Count: 194
 LIB: work
 FILE: ${SURELOG_DIR}/tests/ParamRef/dut.sv
-n<> u<192> t<Top_level_rule> c<1> l<1:1> el<28:1>
-  n<> u<1> t<Null_rule> p<192> s<191> l<1:1>
-  n<> u<191> t<Source_text> p<192> c<21> l<1:1> el<27:10>
+n<> u<193> t<Top_level_rule> c<1> l<1:1> el<28:1>
+  n<> u<1> t<Null_rule> p<193> s<191> l<1:1>
+  n<> u<191> t<Source_text> p<193> c<21> s<192> l<1:1> el<27:10>
     n<> u<21> t<Description> p<191> c<20> s<73> l<1:1> el<3:11>
       n<> u<20> t<Package_declaration> p<21> c<2> l<1:1> el<3:11>
         n<> u<2> t<PACKAGE> p<20> s<3> l<1:1> el<1:8>
@@ -195,6 +195,7 @@ n<> u<192> t<Top_level_rule> c<1> l<1:1> el<28:1>
                                 n<> u<175> t<Primary_literal> p<176> c<174> l<26:45> el<26:46>
                                   n<4> u<174> t<INT_CONST> p<175> l<26:45> el<26:46>
         n<> u<188> t<ENDMODULE> p<189> l<27:1> el<27:10>
+  n<// ibex_core> u<192> t<LINE_COMMENT> p<193> l<27:11> el<27:23>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamRef/dut.sv:1:1: No timescale set for "tl_main_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamRef/dut.sv:5:1: No timescale set for "dm".
@@ -260,7 +261,6 @@ Design: (unnamed)
       |vpiFullName:tl_main_pkg::ADDR_SPACE_DEBUG_MEM
       |vpiActual:
       \_IntTypespec: , line:2:15, endln:2:18
-    |vpiSigned:1
     |vpiLocalParam:1
     |vpiName:ADDR_SPACE_DEBUG_MEM
     |vpiFullName:tl_main_pkg::ADDR_SPACE_DEBUG_MEM
@@ -278,7 +278,7 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (tl_main_pkg::ADDR_SPACE_DEBUG_MEM), line:2:19, endln:2:43
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:15, endln:2:18
     |vpiParent:
     \_Package: tl_main_pkg (tl_main_pkg), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:1:1, endln:3:11
@@ -307,7 +307,6 @@ Design: (unnamed)
       |vpiFullName:dm::HaltAddress
       |vpiActual:
       \_IntTypespec: , line:6:15, endln:6:18
-    |vpiSigned:1
     |vpiLocalParam:1
     |vpiName:HaltAddress
     |vpiFullName:dm::HaltAddress
@@ -366,12 +365,12 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (dm::ExceptionAddress), line:7:28, endln:7:62
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:6:15, endln:6:18
     |vpiParent:
     \_Package: dm (dm), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:5:1, endln:8:16
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:7:15, endln:7:20
     |vpiParent:
     \_Package: dm (dm), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:5:1, endln:8:16
@@ -438,7 +437,7 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@ibex_core.DmExceptionAddr), line:26:27, endln:26:46
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:26:14, endln:26:26
     |vpiParent:
     \_Module: work@ibex_core (work@ibex_core), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:25:1, endln:27:10
@@ -482,11 +481,11 @@ Design: (unnamed)
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@rv_core_ibex.DmExceptionAddr), line:19:27, endln:19:46
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:19:14, endln:19:26
     |vpiParent:
     \_Module: work@rv_core_ibex (work@rv_core_ibex), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:18:1, endln:23:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (ibex_core)
     |vpiParent:
     \_Design: (unnamed)
@@ -513,7 +512,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top_earlgrey (work@top_earlgrey), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:10:1, endln:16:10
     |vpiName:work@top_earlgrey
-  |vpiTypedef:
+  |vpiTypespec:
   \_ImportTypespec: (tl_main_pkg), line:11:10, endln:11:24
     |vpiParent:
     \_Module: work@top_earlgrey (work@top_earlgrey), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:10:1, endln:16:10
@@ -530,7 +529,7 @@ Design: (unnamed)
       |vpiSize:8
       |STRING:*
       |vpiConstType:8
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (rv_core_ibex)
     |vpiParent:
     \_Design: (unnamed)
@@ -548,11 +547,11 @@ Design: (unnamed)
     |vpiDefName:work@rv_core_ibex
     |vpiActual:
     \_Module: work@rv_core_ibex (work@rv_core_ibex), file:${SURELOG_DIR}/tests/ParamRef/dut.sv, line:18:1, endln:23:10
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (ibex_core)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (rv_core_ibex)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top_earlgrey)
   |vpiParent:
   \_Design: (unnamed)

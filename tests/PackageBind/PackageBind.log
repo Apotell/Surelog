@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/PackageBind/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 144
+Count: 145
 LIB: work
 FILE: ${SURELOG_DIR}/tests/PackageBind/dut.sv
-n<> u<143> t<Top_level_rule> c<1> l<1:1> el<15:1>
-  n<> u<1> t<Null_rule> p<143> s<142> l<1:1>
-  n<> u<142> t<Source_text> p<143> c<102> l<1:1> el<14:10>
+n<> u<144> t<Top_level_rule> c<1> l<1:1> el<15:1>
+  n<> u<1> t<Null_rule> p<144> s<142> l<1:1>
+  n<> u<142> t<Source_text> p<144> c<102> s<143> l<1:1> el<14:10>
     n<> u<102> t<Description> p<142> c<101> s<141> l<1:1> el<10:11>
       n<> u<101> t<Package_declaration> p<102> c<2> l<1:1> el<10:11>
         n<> u<2> t<PACKAGE> p<101> s<3> l<1:1> el<1:8>
@@ -146,6 +146,7 @@ n<> u<143> t<Top_level_rule> c<1> l<1:1> el<15:1>
                                 n<> u<126> t<Primary_literal> p<127> c<125> l<13:37> el<13:39>
                                   n<15> u<125> t<INT_CONST> p<126> l<13:37> el<13:39>
         n<> u<139> t<ENDMODULE> p<140> l<14:1> el<14:10>
+  n<// top> u<143> t<LINE_COMMENT> p<144> l<14:11> el<14:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageBind/dut.sv:1:1: No timescale set for "prim_util_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageBind/dut.sv:12:1: No timescale set for "top".
@@ -226,7 +227,6 @@ Design: (unnamed)
           \_IntegerTypespec: , line:3:7, endln:3:14
         |vpiName:result
         |vpiFullName:prim_util_pkg::_clog2::result
-        |vpiSigned:1
       |vpiInternalScope:
       \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
         |vpiParent:
@@ -328,7 +328,7 @@ Design: (unnamed)
             |vpiConstType:9
         |vpiStmt:
         \_Begin: (prim_util_pkg::_clog2), line:5:45, endln:7:10
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntegerTypespec: , line:3:7, endln:3:14
         |vpiParent:
         \_Begin: (prim_util_pkg::_clog2)
@@ -351,7 +351,7 @@ Design: (unnamed)
           |vpiFullName:prim_util_pkg::_clog2::result
           |vpiActual:
           \_Variable: (prim_util_pkg::_clog2::result), line:3:15, endln:3:21
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntegerTypespec: , line:2:23, endln:2:30
       |vpiParent:
       \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
@@ -373,7 +373,7 @@ Design: (unnamed)
       \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
       |vpiDirection:1
       |vpiName:value
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (prim_util_pkg::_clog2::value), line:2:38, endln:2:45
         |vpiParent:
         \_IODecl: (value), line:2:46, endln:2:51
@@ -398,7 +398,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
     |vpiName:work@top
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntegerTypespec: , line:12:19, endln:12:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
@@ -418,7 +418,6 @@ Design: (unnamed)
       \_IntegerTypespec: , line:12:19, endln:12:26
     |vpiName:o
     |vpiFullName:work@top.o
-    |vpiSigned:1
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.o), line:12:27, endln:12:28
@@ -443,6 +442,8 @@ Design: (unnamed)
     \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
       |vpiParent:
       \_ContAssign: , line:13:11, endln:13:40
+      |vpiTaskFunc:
+      \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
       |vpiArgument:
       \_Constant: , line:13:37, endln:13:39
         |vpiParent:
@@ -456,8 +457,6 @@ Design: (unnamed)
         |vpiParent:
         \_FuncCall: (prim_util_pkg::_clog2), line:13:15, endln:13:40
         |vpiName:prim_util_pkg::_clog2
-      |vpiFunction:
-      \_Function: (prim_util_pkg::_clog2), line:2:4, endln:9:15
     |vpiLhs:
     \_RefObj: (work@top.o), line:13:11, endln:13:12
       |vpiParent:
@@ -466,7 +465,7 @@ Design: (unnamed)
       |vpiFullName:work@top.o
       |vpiActual:
       \_Net: (work@top.o), line:12:27, endln:12:28
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

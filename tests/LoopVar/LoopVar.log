@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/LoopVar/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 65
+Count: 66
 LIB: work
 FILE: ${SURELOG_DIR}/tests/LoopVar/dut.sv
-n<> u<64> t<Top_level_rule> c<1> l<1:1> el<10:1>
-  n<> u<1> t<Null_rule> p<64> s<63> l<1:1>
-  n<> u<63> t<Source_text> p<64> c<62> l<1:1> el<9:10>
+n<> u<65> t<Top_level_rule> c<1> l<1:1> el<10:1>
+  n<> u<1> t<Null_rule> p<65> s<63> l<1:1>
+  n<> u<63> t<Source_text> p<65> c<62> s<64> l<1:1> el<9:10>
     n<> u<62> t<Description> p<63> c<61> l<1:1> el<9:10>
       n<> u<61> t<Module_declaration> p<62> c<5> l<1:1> el<9:10>
         n<> u<5> t<Module_ansi_header> p<61> c<2> s<23> l<1:1> el<1:12>
@@ -67,6 +67,7 @@ n<> u<64> t<Top_level_rule> c<1> l<1:1> el<10:1>
                                               n<i> u<38> t<STRING_CONST> p<39> l<6:24> el<6:25>
                         n<> u<51> t<END> p<52> l<7:5> el<7:8>
         n<> u<60> t<ENDMODULE> p<61> l<9:1> el<9:10>
+  n<// dut> u<64> t<LINE_COMMENT> p<65> l<9:11> el<9:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LoopVar/dut.sv:1:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
@@ -116,12 +117,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
     |vpiName:work@dut
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:5, endln:2:8
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:2:5, endln:2:18
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
@@ -167,7 +168,6 @@ Design: (unnamed)
       \_ArrayTypespec: , line:2:5, endln:2:18
     |vpiName:array
     |vpiFullName:work@dut.array
-    |vpiSigned:1
   |vpiDefName:work@dut
   |vpiNet:
   \_Net: (work@dut.array), line:2:9, endln:2:14
@@ -239,7 +239,7 @@ Design: (unnamed)
               |vpiFullName:work@dut.i
               |vpiActual:
               \_Variable: (work@dut.i), line:5:23, endln:5:24
-      |vpiTypedef:
+      |vpiTypespec:
       \_UnsupportedTypespec: (i), line:5:23, endln:5:24
         |vpiParent:
         \_Begin: (work@dut), line:4:13, endln:7:8
@@ -248,7 +248,7 @@ Design: (unnamed)
       \_UnsupportedTypespec: (i), line:5:23, endln:5:24
       |vpiStmt:
       \_ForeachStmt: (work@dut), line:5:9, endln:6:25
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (dut)
   |vpiParent:
   \_Design: (unnamed)

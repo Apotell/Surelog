@@ -137,6 +137,7 @@ Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachForeach/slpp_all/surelog.uhdm ...
 [ERR:IG0810] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:4:23: Null Typespec: id:47, type:RefTypespec, name:uvm_phase.
+[ERR:IG0810] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:11:23: Null Typespec: id:46, type:RefTypespec, name:uvm_phase.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:13:28: Unsupported Typespec: id:25, type:RefTypespec, name:p.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ForeachForeach/dut.sv:14:38: Unsupported Typespec: id:30, type:RefTypespec, name:next_p.
 [INF:UH0711] Decompiling UHDM...
@@ -211,7 +212,6 @@ Design: (unnamed)
             \_ArrayTypespec: , line:11:6, endln:11:33
           |vpiName:predecessors
           |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors
-          |vpiSigned:1
         |vpiInternalScope:
         \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:6, endln:17:9
           |vpiParent:
@@ -288,7 +288,7 @@ Design: (unnamed)
               \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
               |vpiStmt:
               \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:47, endln:16:15
-            |vpiTypedef:
+            |vpiTypespec:
             \_UnsupportedTypespec: (next_p), line:14:38, endln:14:44
               |vpiParent:
               \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:32, endln:17:9
@@ -323,11 +323,29 @@ Design: (unnamed)
           \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
           |vpiStmt:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:32, endln:17:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_BitTypespec: , line:11:6, endln:11:9
           |vpiParent:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
-        |vpiTypedef:
+        |vpiTypespec:
+        \_ArrayTypespec: , line:11:6, endln:11:33
+          |vpiParent:
+          \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
+          |vpiArrayType:3
+          |vpiIndexTypespec:
+          \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes::uvm_phase), line:11:23, endln:11:32
+            |vpiParent:
+            \_ArrayTypespec: , line:11:6, endln:11:33
+            |vpiName:uvm_phase
+            |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::uvm_phase
+          |vpiElemTypespec:
+          \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:11:6, endln:11:9
+            |vpiParent:
+            \_ArrayTypespec: , line:11:6, endln:11:33
+            |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes
+            |vpiActual:
+            \_BitTypespec: , line:11:6, endln:11:9
+        |vpiTypespec:
         \_UnsupportedTypespec: (p), line:13:28, endln:13:29
           |vpiParent:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
@@ -335,12 +353,14 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_BitTypespec: , line:11:6, endln:11:9
         |vpiImportTypespec:
+        \_ArrayTypespec: , line:11:6, endln:11:33
+        |vpiImportTypespec:
         \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::predecessors), line:11:10, endln:11:22
         |vpiImportTypespec:
         \_UnsupportedTypespec: (p), line:13:28, endln:13:29
         |vpiStmt:
         \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:13:6, endln:17:9
-      |vpiTypedef:
+      |vpiTypespec:
       \_VoidTypespec: , line:8:12, endln:8:16
         |vpiParent:
         \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
@@ -358,11 +378,11 @@ Design: (unnamed)
       \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
       |vpiInstance:
       \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:1:1, endln:23:11
-    |vpiTypedef:
+    |vpiTypespec:
     \_BitTypespec: , line:4:3, endln:4:6
       |vpiParent:
       \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
-    |vpiTypedef:
+    |vpiTypespec:
     \_ArrayTypespec: , line:4:3, endln:4:33
       |vpiParent:
       \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
@@ -390,45 +410,23 @@ Design: (unnamed)
     \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
     |vpiMethod:
     \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:8:3, endln:20:14
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (uvm_phase)
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:1:1, endln:23:11
     |vpiName:uvm_phase
     |vpiClassDefn:
     \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
-  |vpiTypedef:
-  \_ArrayTypespec: , line:11:6, endln:11:33
-    |vpiParent:
-    \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:1:1, endln:23:11
-    |vpiArrayType:3
-    |vpiIndexTypespec:
-    \_RefTypespec: (uvm::uvm_phase), line:11:23, endln:11:32
-      |vpiParent:
-      \_ArrayTypespec: , line:11:6, endln:11:33
-      |vpiName:uvm_phase
-      |vpiFullName:uvm::uvm_phase
-      |vpiActual:
-      \_ClassTypespec: (uvm_phase)
-    |vpiElemTypespec:
-    \_RefTypespec: (uvm), line:11:6, endln:11:9
-      |vpiParent:
-      \_ArrayTypespec: , line:11:6, endln:11:33
-      |vpiFullName:uvm
-      |vpiActual:
-      \_BitTypespec: , line:11:6, endln:11:9
   |vpiImportTypespec:
   \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
   |vpiImportTypespec:
   \_ClassTypespec: (uvm_phase)
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:11:6, endln:11:33
   |vpiDefName:uvm
   |vpiClassDefn:
   \_ClassDefn: (uvm::uvm_phase), file:${SURELOG_DIR}/tests/ForeachForeach/dut.sv, line:3:1, endln:5:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 0

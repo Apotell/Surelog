@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/PackedArrayHighConn/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 170
+Count: 173
 LIB: work
 FILE: ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv
-n<> u<169> t<Top_level_rule> c<1> l<1:1> el<63:3>
-  n<> u<1> t<Null_rule> p<169> s<168> l<1:1>
-  n<> u<168> t<Source_text> p<169> c<48> l<1:1> el<18:16>
+n<> u<172> t<Top_level_rule> c<1> l<1:1> el<63:3>
+  n<> u<1> t<Null_rule> p<172> s<168> l<1:1>
+  n<> u<168> t<Source_text> p<172> c<48> s<169> l<1:1> el<18:16>
     n<> u<48> t<Description> p<168> c<47> s<68> l<1:1> el<6:34>
       n<> u<47> t<Package_declaration> p<48> c<2> l<1:1> el<6:34>
         n<> u<2> t<PACKAGE> p<47> s<3> l<1:1> el<1:8>
@@ -172,6 +172,9 @@ n<> u<169> t<Top_level_rule> c<1> l<1:1> el<63:3>
                       n<> u<156> t<CLOSE_PARENS> p<157> l<16:44> el<16:45>
         n<> u<165> t<ENDMODULE> p<166> s<164> l<18:1> el<18:10>
         n<dut> u<164> t<STRING_CONST> p<166> l<18:13> el<18:16>
+  n</*\nmodule dut (\n  //  input logic [3:0] a,\n  //  input logic [3:0] b,\n  //  output logic [1:0][3:0] out\n);\n\n   // typedef logic [3:0] logic4;\n\n    logic [1:0] vector2x4;\n\n   // logic4 [1:0] vector2x4;\n   // assign vector2x4[0] = a;\n   // assign vector2x4[1] = b;\n\n  //  assign out = vector2x4;\n\nendmodule\n*/> u<169> t<BLOCK_COMMENT> p<172> s<170> l<1:1> el<18:16>
+  n</*\nmodule top(output logic [9:0] o);\n   typedef struct packed {\n      logic [9:0] min_v;\n   } filter_ctl_t;\n\n   filter_ctl_t [1:0] a = '{10'd15, 10'd0};\n   assign o = a[1];\nendmodule\n*/> u<170> t<BLOCK_COMMENT> p<172> s<171> l<1:1> el<18:16>
+  n</*\n\npackage pack_pkg;\ntypedef enum logic { fOO } foo;\nendpackage\n\nmodule dut(input pack_pkg::foo [1:0] inp[2], output pack_pkg::foo [1:0] out[2]);\nassign out = inp;\nendmodule\n\n*/> u<171> t<BLOCK_COMMENT> p<172> l<1:1> el<18:16>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:1:1: No timescale set for "prim_pad_wrapper_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:8:1: No timescale set for "prim_pad_wrapper".

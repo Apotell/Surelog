@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/LateBindingFuncArg/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 62
+Count: 63
 LIB: work
 FILE: ${SURELOG_DIR}/tests/LateBindingFuncArg/dut.sv
-n<> u<61> t<Top_level_rule> c<1> l<1:1> el<8:1>
-  n<> u<1> t<Null_rule> p<61> s<60> l<1:1>
-  n<> u<60> t<Source_text> p<61> c<5> l<1:1> el<7:10>
+n<> u<62> t<Top_level_rule> c<1> l<1:1> el<8:1>
+  n<> u<1> t<Null_rule> p<62> s<60> l<1:1>
+  n<> u<60> t<Source_text> p<62> c<5> s<61> l<1:1> el<7:10>
     n<> u<5> t<Description> p<60> c<4> s<59> l<1:1> el<1:22>
       n<> u<4> t<Top_directives> p<5> c<3> l<1:1> el<1:22>
         n<> u<3> t<Default_nettype_directive> p<4> c<2> l<1:1> el<1:22>
@@ -64,6 +64,7 @@ n<> u<61> t<Top_level_rule> c<1> l<1:1> el<8:1>
                                                       n<depth> u<32> t<STRING_CONST> p<33> l<5:30> el<5:35>
                       n<> u<49> t<ENDFUNCTION> p<50> l<6:5> el<6:16>
         n<> u<57> t<ENDMODULE> p<58> l<7:1> el<7:10>
+  n<// top> u<61> t<LINE_COMMENT> p<62> l<7:11> el<7:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LateBindingFuncArg/dut.sv:3:1: No timescale set for "top".
 [INF:CP0300] Compilation...
@@ -114,7 +115,7 @@ Design: (unnamed)
       \_Function: (work@top.doFoo), line:4:5, endln:6:16
       |vpiName:doFoo
     |vpiFullName:work@top.doFoo
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntegerTypespec: , line:4:14, endln:4:21
       |vpiParent:
       \_Function: (work@top.doFoo), line:4:5, endln:6:16
@@ -135,7 +136,7 @@ Design: (unnamed)
       \_Function: (work@top.doFoo), line:4:5, endln:6:16
       |vpiDirection:1
       |vpiName:depth
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top.doFoo.depth), line:4:34, endln:4:41
         |vpiParent:
         \_IODecl: (depth), line:4:42, endln:4:47
@@ -187,7 +188,7 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.doFoo), line:4:5, endln:6:16
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

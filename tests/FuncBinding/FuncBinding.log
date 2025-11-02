@@ -158,11 +158,11 @@ Design: (unnamed)
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
       |vpiName:fsm_function
     |vpiFullName:work@fsm_using_function.fsm_function
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: 
       |vpiParent:
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: , line:21:29, endln:21:34
       |vpiParent:
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
@@ -186,7 +186,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-    |vpiTypedef:
+    |vpiTypespec:
     \_BitTypespec: , line:21:54, endln:21:57
       |vpiParent:
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
@@ -210,7 +210,7 @@ Design: (unnamed)
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
       |vpiDirection:1
       |vpiName:state
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@fsm_using_function.fsm_function.state), line:21:29, endln:21:40
         |vpiParent:
         \_IODecl: (state), line:21:41, endln:21:46
@@ -223,7 +223,7 @@ Design: (unnamed)
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
       |vpiDirection:1
       |vpiName:req_0
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@fsm_using_function.fsm_function.req_0), line:21:54, endln:21:57
         |vpiParent:
         \_IODecl: (req_0), line:21:58, endln:21:63
@@ -236,7 +236,7 @@ Design: (unnamed)
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
       |vpiDirection:1
       |vpiName:req_1
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@fsm_using_function.fsm_function.req_1), line:21:70, endln:21:73
         |vpiParent:
         \_IODecl: (req_1), line:21:74, endln:21:79
@@ -249,7 +249,7 @@ Design: (unnamed)
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
       |vpiDirection:2
       |vpiName:future_state
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@fsm_using_function.fsm_function.future_state), line:21:88, endln:21:99
         |vpiParent:
         \_IODecl: (future_state), line:21:100, endln:21:112
@@ -620,7 +620,7 @@ Design: (unnamed)
             |vpiFullName:work@fsm_using_function.fsm_function.future_state
             |vpiActual:
             \_IODecl: (future_state), line:21:100, endln:21:112
-  |vpiTypedef:
+  |vpiTypespec:
   \_EnumTypespec: , line:11:9, endln:11:60
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -655,7 +655,7 @@ Design: (unnamed)
       |UINT:3
       |vpiDecompile:3
       |vpiSize:64
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:11:14, endln:11:19
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -679,7 +679,7 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (state), line:11:55, endln:11:60
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -695,7 +695,7 @@ Design: (unnamed)
       |vpiFullName:work@fsm_using_function.state
       |vpiActual:
       \_EnumTypespec: , line:11:9, endln:11:60
-  |vpiTypedef:
+  |vpiTypespec:
   \_BitTypespec: , line:2:7, endln:2:10
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -873,6 +873,8 @@ Design: (unnamed)
           \_FuncCall: (fsm_function), line:17:22, endln:17:72
             |vpiParent:
             \_AssignStmt: , line:17:2, endln:17:72
+            |vpiTaskFunc:
+            \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
             |vpiArgument:
             \_RefObj: (work@fsm_using_function.FUN.curr_state), line:17:35, endln:17:45
               |vpiParent:
@@ -910,8 +912,6 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (fsm_function), line:17:22, endln:17:72
               |vpiName:fsm_function
-            |vpiFunction:
-            \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
           |vpiLhs:
           \_RefObj: (work@fsm_using_function.FUN.next_state), line:17:9, endln:17:19
             |vpiParent:
@@ -1040,7 +1040,7 @@ Design: (unnamed)
                 \_Assignment: , line:50:5, endln:50:32
                 |#1
     |vpiAlwaysType:1
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (fsm_using_function)
   |vpiParent:
   \_Design: (unnamed)

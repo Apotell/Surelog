@@ -1526,7 +1526,7 @@ Design: (unnamed)
       \_Function: (work@Example.flip), line:6:5, endln:9:16
       |vpiName:flip
     |vpiFullName:work@Example.flip
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: , line:6:24, endln:6:30
       |vpiParent:
       \_Function: (work@Example.flip), line:6:5, endln:9:16
@@ -1567,7 +1567,7 @@ Design: (unnamed)
       \_Function: (work@Example.flip), line:6:5, endln:9:16
       |vpiDirection:1
       |vpiName:inp
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@Example.flip.inp), line:7:15, endln:7:21
         |vpiParent:
         \_IODecl: (inp), line:7:22, endln:7:25
@@ -1674,6 +1674,8 @@ Design: (unnamed)
           \_FuncCall: (flip), line:12:13, endln:12:24
             |vpiParent:
             \_Operation: , line:12:13, endln:12:40
+            |vpiTaskFunc:
+            \_Function: (work@Example.flip), line:6:5, endln:9:16
             |vpiArgument:
             \_RefObj: (work@Example.OUTPUT), line:12:18, endln:12:24
               |vpiParent:
@@ -1687,12 +1689,12 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (flip), line:12:13, endln:12:24
               |vpiName:flip
-            |vpiFunction:
-            \_Function: (work@Example.flip), line:6:5, endln:9:16
           |vpiOperand:
           \_FuncCall: (flip), line:12:29, endln:12:39
             |vpiParent:
             \_Operation: , line:12:13, endln:12:40
+            |vpiTaskFunc:
+            \_Function: (work@Example.flip), line:6:5, endln:9:16
             |vpiArgument:
             \_Constant: , line:12:34, endln:12:39
               |vpiParent:
@@ -1706,15 +1708,13 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (flip), line:12:29, endln:12:39
               |vpiName:flip
-            |vpiFunction:
-            \_Function: (work@Example.flip), line:6:5, endln:9:16
         |vpiStmt:
         \_Begin: (work@Example), line:13:13, endln:13:34
         |vpiElseStmt:
         \_Begin: (work@Example), line:15:13, endln:15:29
     |vpiStmt:
     \_Begin: (work@Example), line:12:9, endln:15:29
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:3:12, endln:3:16
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:1:1, endln:37:10
@@ -1738,11 +1738,11 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:5:12, endln:5:15
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:1:1, endln:37:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntegerTypespec: , line:30:5, endln:30:12
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:1:1, endln:37:10
@@ -1824,7 +1824,6 @@ Design: (unnamed)
       \_IntegerTypespec: , line:30:5, endln:30:12
     |vpiName:j
     |vpiFullName:work@Example.j
-    |vpiSigned:1
   |vpiDefName:work@Example
   |vpiTaskFunc:
   \_Function: (work@Example.flip), line:6:5, endln:9:16
@@ -1976,10 +1975,14 @@ Design: (unnamed)
           \_FuncCall: (flip), line:33:26, endln:33:50
             |vpiParent:
             \_Operation: , line:33:21, endln:33:50
+            |vpiTaskFunc:
+            \_Function: (work@Example.flip), line:6:5, endln:9:16
             |vpiArgument:
             \_FuncCall: (flip), line:33:31, endln:33:49
               |vpiParent:
               \_FuncCall: (flip), line:33:26, endln:33:50
+              |vpiTaskFunc:
+              \_Function: (work@Example.flip), line:6:5, endln:9:16
               |vpiArgument:
               \_PartSelect: OUTPUT (work@Example.OUTPUT), line:33:36, endln:33:48
                 |vpiParent:
@@ -2011,15 +2014,11 @@ Design: (unnamed)
                 |vpiParent:
                 \_FuncCall: (flip), line:33:31, endln:33:49
                 |vpiName:flip
-              |vpiFunction:
-              \_Function: (work@Example.flip), line:6:5, endln:9:16
             |vpiName:
             \_Identifier: (flip)
               |vpiParent:
               \_FuncCall: (flip), line:33:26, endln:33:50
               |vpiName:flip
-            |vpiFunction:
-            \_Function: (work@Example.flip), line:6:5, endln:9:16
         |vpiStmt:
         \_IfStmt: , line:34:13, endln:35:26
           |vpiParent:
@@ -2054,10 +2053,14 @@ Design: (unnamed)
             \_FuncCall: (flip), line:34:26, endln:34:41
               |vpiParent:
               \_Operation: , line:34:17, endln:34:41
+              |vpiTaskFunc:
+              \_Function: (work@Example.flip), line:6:5, endln:9:16
               |vpiArgument:
               \_FuncCall: (flip), line:34:31, endln:34:40
                 |vpiParent:
                 \_FuncCall: (flip), line:34:26, endln:34:41
+                |vpiTaskFunc:
+                \_Function: (work@Example.flip), line:6:5, endln:9:16
                 |vpiArgument:
                 \_Constant: , line:34:36, endln:34:39
                   |vpiParent:
@@ -2071,15 +2074,11 @@ Design: (unnamed)
                   |vpiParent:
                   \_FuncCall: (flip), line:34:31, endln:34:40
                   |vpiName:flip
-                |vpiFunction:
-                \_Function: (work@Example.flip), line:6:5, endln:9:16
               |vpiName:
               \_Identifier: (flip)
                 |vpiParent:
                 \_FuncCall: (flip), line:34:26, endln:34:41
                 |vpiName:flip
-              |vpiFunction:
-              \_Function: (work@Example.flip), line:6:5, endln:9:16
           |vpiStmt:
           \_Assignment: , line:35:17, endln:35:25
             |vpiParent:
@@ -2235,6 +2234,64 @@ Design: (unnamed)
     \_FuncCall: (negate), line:63:27, endln:63:47
       |vpiParent:
       \_ParamAssign: , line:63:23, endln:63:48
+      |vpiTaskFunc:
+      \_Function: (work@top.negate), line:56:5, endln:59:16
+        |vpiParent:
+        \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:39:1, endln:86:10
+        |vpiName:
+        \_Identifier: (negate)
+          |vpiParent:
+          \_Function: (work@top.negate), line:56:5, endln:59:16
+          |vpiName:negate
+        |vpiFullName:work@top.negate
+        |vpiTypespec:
+        \_IntegerTypespec: , line:57:15, endln:57:22
+          |vpiParent:
+          \_Function: (work@top.negate), line:56:5, endln:59:16
+          |vpiSigned:1
+        |vpiImportTypespec:
+        \_IntegerTypespec: , line:57:15, endln:57:22
+        |vpiVisibility:1
+        |vpiIODecl:
+        \_IODecl: (inp), line:57:23, endln:57:26
+          |vpiParent:
+          \_Function: (work@top.negate), line:56:5, endln:59:16
+          |vpiDirection:1
+          |vpiName:inp
+          |vpiTypespec:
+          \_RefTypespec: (work@top.negate.inp), line:57:15, endln:57:22
+            |vpiParent:
+            \_IODecl: (inp), line:57:23, endln:57:26
+            |vpiFullName:work@top.negate.inp
+            |vpiActual:
+            \_IntegerTypespec: , line:57:15, endln:57:22
+        |vpiStmt:
+        \_Assignment: , line:58:9, endln:58:22
+          |vpiParent:
+          \_Function: (work@top.negate), line:56:5, endln:59:16
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_Operation: , line:58:18, endln:58:22
+            |vpiParent:
+            \_Assignment: , line:58:9, endln:58:22
+            |vpiOpType:4
+            |vpiOperand:
+            \_RefObj: (work@top.negate.inp), line:58:19, endln:58:22
+              |vpiParent:
+              \_Operation: , line:58:18, endln:58:22
+              |vpiName:inp
+              |vpiFullName:work@top.negate.inp
+              |vpiActual:
+              \_IODecl: (inp), line:57:23, endln:57:26
+          |vpiLhs:
+          \_RefObj: (work@top.negate.negate), line:58:9, endln:58:15
+            |vpiParent:
+            \_Assignment: , line:58:9, endln:58:22
+            |vpiName:negate
+            |vpiFullName:work@top.negate.negate
+            |vpiActual:
+            \_Function: (work@top.negate), line:56:5, endln:59:16
       |vpiArgument:
       \_SysFuncCall: ($floor), line:63:34, endln:63:47
         |vpiParent:
@@ -2270,76 +2327,18 @@ Design: (unnamed)
         |vpiParent:
         \_FuncCall: (negate), line:63:27, endln:63:47
         |vpiName:negate
-      |vpiFunction:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
     |vpiLhs:
     \_Parameter: (work@top.Z), line:63:23, endln:63:48
   |vpiInternalScope:
   \_Function: (work@top.negate), line:56:5, endln:59:16
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:39:1, endln:86:10
-    |vpiName:
-    \_Identifier: (negate)
-      |vpiParent:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
-      |vpiName:negate
-    |vpiFullName:work@top.negate
-    |vpiTypedef:
-    \_IntegerTypespec: , line:57:15, endln:57:22
-      |vpiParent:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
-      |vpiSigned:1
-    |vpiImportTypespec:
-    \_IntegerTypespec: , line:57:15, endln:57:22
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_IODecl: (inp), line:57:23, endln:57:26
-      |vpiParent:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
-      |vpiDirection:1
-      |vpiName:inp
-      |vpiTypedef:
-      \_RefTypespec: (work@top.negate.inp), line:57:15, endln:57:22
-        |vpiParent:
-        \_IODecl: (inp), line:57:23, endln:57:26
-        |vpiFullName:work@top.negate.inp
-        |vpiActual:
-        \_IntegerTypespec: , line:57:15, endln:57:22
-    |vpiStmt:
-    \_Assignment: , line:58:9, endln:58:22
-      |vpiParent:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
-      |vpiOpType:82
-      |vpiBlocking:1
-      |vpiRhs:
-      \_Operation: , line:58:18, endln:58:22
-        |vpiParent:
-        \_Assignment: , line:58:9, endln:58:22
-        |vpiOpType:4
-        |vpiOperand:
-        \_RefObj: (work@top.negate.inp), line:58:19, endln:58:22
-          |vpiParent:
-          \_Operation: , line:58:18, endln:58:22
-          |vpiName:inp
-          |vpiFullName:work@top.negate.inp
-          |vpiActual:
-          \_IODecl: (inp), line:57:23, endln:57:26
-      |vpiLhs:
-      \_RefObj: (work@top.negate.negate), line:58:9, endln:58:15
-        |vpiParent:
-        \_Assignment: , line:58:9, endln:58:22
-        |vpiName:negate
-        |vpiFullName:work@top.negate.negate
-        |vpiActual:
-        \_Function: (work@top.negate), line:56:5, endln:59:16
-  |vpiTypedef:
+  |vpiTypespec:
   \_ModuleTypespec: (Example)
     |vpiParent:
     \_Design: (unnamed)
     |vpiName:Example
     |vpiModule:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:1:1, endln:37:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:40:5, endln:40:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:39:1, endln:86:10
@@ -2363,11 +2362,11 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:42:5, endln:42:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:39:1, endln:86:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:49:12, endln:49:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:39:1, endln:86:10
@@ -3596,9 +3595,9 @@ Design: (unnamed)
         |vpiFullName:work@top.e4.d4
         |vpiActual:
         \_Net: (work@top.d4), line:43:29, endln:43:31
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (Example)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

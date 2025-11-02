@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/Context/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 38
+Count: 39
 LIB: work
 FILE: ${SURELOG_DIR}/tests/Context/dut.sv
-n<> u<37> t<Top_level_rule> c<1> l<1:1> el<4:1>
-  n<> u<1> t<Null_rule> p<37> s<36> l<1:1>
-  n<> u<36> t<Source_text> p<37> c<35> l<1:1> el<3:10>
+n<> u<38> t<Top_level_rule> c<1> l<1:1> el<4:1>
+  n<> u<1> t<Null_rule> p<38> s<36> l<1:1>
+  n<> u<36> t<Source_text> p<38> c<35> s<37> l<1:1> el<3:10>
     n<> u<35> t<Description> p<36> c<34> l<1:1> el<3:10>
       n<> u<34> t<Module_declaration> p<35> c<14> l<1:1> el<3:10>
         n<> u<14> t<Module_ansi_header> p<34> c<2> s<32> l<1:1> el<1:26>
@@ -40,6 +40,7 @@ n<> u<37> t<Top_level_rule> c<1> l<1:1> el<4:1>
                               n<> u<19> t<IntegerAtomType_Int> p<20> l<2:45> el<2:48>
                           n<x> u<22> t<STRING_CONST> p<23> l<2:49> el<2:50>
         n<> u<33> t<ENDMODULE> p<34> l<3:1> el<3:10>
+  n<// top> u<37> t<LINE_COMMENT> p<38> l<3:11> el<3:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Context/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
@@ -92,10 +93,9 @@ Design: (unnamed)
       \_IntTypespec: , line:2:45, endln:2:48
     |vpiName:a
     |vpiFullName:work@top.a
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:2:45, endln:2:48
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Context/dut.sv, line:1:1, endln:3:10
@@ -125,7 +125,7 @@ Design: (unnamed)
       \_TaskDecl: (work@top.get_2), line:2:4, endln:2:52
       |vpiDirection:2
       |vpiName:x
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top.get_2.x), line:2:45, endln:2:48
         |vpiParent:
         \_IODecl: (x), line:2:49, endln:2:50
@@ -145,7 +145,7 @@ Design: (unnamed)
       |vpiFullName:work@top.a
       |vpiActual:
       \_IntTypespec: , line:2:45, endln:2:48
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

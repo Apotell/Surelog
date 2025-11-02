@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/FileListWithCompressed/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 58
+Count: 59
 LIB: work
 FILE: ${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv
-n<> u<57> t<Top_level_rule> c<1> l<1:1> el<9:1>
-  n<> u<1> t<Null_rule> p<57> s<56> l<1:1>
-  n<> u<56> t<Source_text> p<57> c<55> l<1:1> el<7:11>
+n<> u<58> t<Top_level_rule> c<1> l<1:1> el<9:1>
+  n<> u<1> t<Null_rule> p<58> s<56> l<1:1>
+  n<> u<56> t<Source_text> p<58> c<55> s<57> l<1:1> el<7:11>
     n<> u<55> t<Description> p<56> c<54> l<1:1> el<7:11>
       n<> u<54> t<Package_declaration> p<55> c<2> l<1:1> el<7:11>
         n<> u<2> t<PACKAGE> p<54> s<3> l<1:1> el<1:8>
@@ -60,14 +60,15 @@ n<> u<57> t<Top_level_rule> c<1> l<1:1> el<9:1>
                                         n<value> u<33> t<STRING_CONST> p<34> l<4:38> el<4:43>
                 n<> u<48> t<ENDFUNCTION> p<49> l<5:3> el<5:14>
         n<> u<53> t<ENDPACKAGE> p<54> l<7:1> el<7:11>
+  n<// prim_util_pkg> u<57> t<LINE_COMMENT> p<58> l<7:12> el<7:28>
 AST_DEBUG_END
 AST_DEBUG_BEGIN
-Count: 128
+Count: 129
 LIB: work
 FILE: ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz
-n<> u<127> t<Top_level_rule> c<1> l<1:1> el<12:1>
-  n<> u<1> t<Null_rule> p<127> s<126> l<1:1>
-  n<> u<126> t<Source_text> p<127> c<125> l<1:1> el<11:10>
+n<> u<128> t<Top_level_rule> c<1> l<1:1> el<12:1>
+  n<> u<1> t<Null_rule> p<128> s<126> l<1:1>
+  n<> u<126> t<Source_text> p<128> c<125> s<127> l<1:1> el<11:10>
     n<> u<125> t<Description> p<126> c<124> l<1:1> el<11:10>
       n<> u<124> t<Module_declaration> p<125> c<18> l<1:1> el<11:10>
         n<> u<18> t<Module_ansi_header> p<124> c<2> s<28> l<1:1> el<4:3>
@@ -192,6 +193,7 @@ n<> u<127> t<Top_level_rule> c<1> l<1:1> el<12:1>
                                   n<> u<109> t<Primary_literal> p<110> c<108> l<10:16> el<10:17>
                                     n<0> u<108> t<INT_CONST> p<109> l<10:16> el<10:17>
         n<> u<123> t<ENDMODULE> p<124> l<11:1> el<11:10>
+  n<// foo> u<127> t<LINE_COMMENT> p<128> l<11:11> el<11:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv:1:1: No timescale set for "prim_util_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:1:1: No timescale set for "foo".
@@ -265,7 +267,7 @@ Design: (unnamed)
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiName:vbits
     |vpiFullName:prim_util_pkg::vbits
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntegerTypespec: , line:3:21, endln:3:28
       |vpiParent:
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
@@ -287,7 +289,7 @@ Design: (unnamed)
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiDirection:1
       |vpiName:value
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (prim_util_pkg::vbits::value), line:3:35, endln:3:42
         |vpiParent:
         \_IODecl: (value), line:3:43, endln:3:48
@@ -365,7 +367,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiName:work@foo
-  |vpiTypedef:
+  |vpiTypespec:
   \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
@@ -382,7 +384,7 @@ Design: (unnamed)
       |vpiSize:40
       |STRING:vbits
       |vpiConstType:8
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:6:1, endln:6:6
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
@@ -399,6 +401,8 @@ Design: (unnamed)
         \_FuncCall: (vbits), line:6:8, endln:6:15
           |vpiParent:
           \_Operation: , line:6:8, endln:6:18
+          |vpiTaskFunc:
+          \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
           |vpiArgument:
           \_Constant: , line:6:14, endln:6:15
             |vpiParent:
@@ -412,8 +416,6 @@ Design: (unnamed)
             |vpiParent:
             \_FuncCall: (vbits), line:6:8, endln:6:15
             |vpiName:vbits
-          |vpiFunction:
-          \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
         |vpiOperand:
         \_Constant: , line:6:17, endln:6:18
           |vpiParent:
@@ -567,7 +569,7 @@ Design: (unnamed)
       |vpiFullName:work@foo.out
       |vpiActual:
       \_Net: (work@foo.out), line:3:12, endln:3:15
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (foo)
   |vpiParent:
   \_Design: (unnamed)

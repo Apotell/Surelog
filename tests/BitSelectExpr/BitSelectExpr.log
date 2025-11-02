@@ -1,11 +1,11 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.log".
 AST_DEBUG_BEGIN
-Count: 88
+Count: 89
 LIB: work
 FILE: ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv
-n<> u<87> t<Top_level_rule> c<1> l<1:1> el<14:1>
-  n<> u<1> t<Null_rule> p<87> s<86> l<1:1>
-  n<> u<86> t<Source_text> p<87> c<85> l<1:1> el<12:10>
+n<> u<88> t<Top_level_rule> c<1> l<1:1> el<14:1>
+  n<> u<1> t<Null_rule> p<88> s<86> l<1:1>
+  n<> u<86> t<Source_text> p<88> c<85> s<87> l<1:1> el<12:10>
     n<> u<85> t<Description> p<86> c<84> l<1:1> el<12:10>
       n<> u<84> t<Module_declaration> p<85> c<14> l<1:1> el<12:10>
         n<> u<14> t<Module_ansi_header> p<84> c<2> s<33> l<1:1> el<1:26>
@@ -90,6 +90,7 @@ n<> u<87> t<Top_level_rule> c<1> l<1:1> el<14:1>
                         n<> u<74> t<Primary_literal> p<75> c<73> l<9:39> el<9:40>
                           n<1> u<73> t<INT_CONST> p<74> l<9:39> el<9:40>
         n<> u<83> t<ENDMODULE> p<84> l<12:1> el<12:10>
+  n<// top> u<87> t<LINE_COMMENT> p<88> l<12:11> el<12:17>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
@@ -153,10 +154,9 @@ Design: (unnamed)
       \_IntTypespec: , line:4:7, endln:4:10
     |vpiName:o
     |vpiFullName:work@top.o
-    |vpiSigned:1
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_TypedefTypespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
@@ -172,7 +172,7 @@ Design: (unnamed)
       |vpiFullName:work@top.sram_otp_key_rsp_t
       |vpiActual:
       \_StructTypespec: , line:3:12, endln:5:5
-  |vpiTypedef:
+  |vpiTypespec:
   \_StructTypespec: , line:3:12, endln:5:5
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
@@ -189,12 +189,12 @@ Design: (unnamed)
         |vpiFullName:work@top.nonce
         |vpiActual:
         \_IntTypespec: , line:4:7, endln:4:10
-  |vpiTypedef:
+  |vpiTypespec:
   \_IntTypespec: , line:4:7, endln:4:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_ArrayTypespec: , line:7:4, endln:7:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
@@ -329,7 +329,7 @@ Design: (unnamed)
         |vpiActual:
         \_Net: (work@top.nonce), line:9:31, endln:9:36
       |vpiName:sram_otp_key_o[2 - 2].nonce
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (top)
   |vpiParent:
   \_Design: (unnamed)

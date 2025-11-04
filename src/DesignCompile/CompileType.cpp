@@ -1096,7 +1096,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
 
       uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
       taps->setPacked(false);
-      taps->setParent(pscope);
+      taps->setParent(pstmt);
       
       fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 

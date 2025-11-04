@@ -1457,9 +1457,9 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
     for (uhdm::Any* source : factory->getObjects()) {
       uhdm::ArrayTypespec* const at = any_cast<uhdm::ArrayTypespec>(source);
       if (at->getArrayType() == vpiAssocArray) {
-        if (uhdm::RangeCollection* const rc = at->getRanges()) {
-          if (rc->size() == 1) {
-            if (uhdm::Range* const r = rc->at(0)) {
+        //if (uhdm::RangeCollection* const rc = at->getRanges()) {
+        //  if (rc->size() == 1) {
+        if (uhdm::Range* const r = at->getRange()) {
               if (uhdm::Operation* const operation =
                       r->getRightExpr<uhdm::Operation>()) {
                 if (uhdm::AnyCollection* const operands =
@@ -1497,6 +1497,7 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
                         rt->setEndColumn(operand->getEndColumn());
                         at->setIndexTypespec(rt);
                         at->setRanges(nullptr);
+                        at->setRange(nullptr);
                         operand->setParent(nullptr);
                         enterRefTypespec(rt, 0);
                       }
@@ -1505,8 +1506,8 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
                 }
               }
             }
-          }
-        }
+          //}
+        //}
       }
     }
   }

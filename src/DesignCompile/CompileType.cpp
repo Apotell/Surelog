@@ -1015,34 +1015,38 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     else
       taps->setArrayType(vpiStaticArray);
 
-    tpaps->setRanges(packedDimensions);
-    for (auto r : *packedDimensions) r->setParent(tpaps, true);
+    if (packedDimensions != nullptr) {
+      tpaps->setRanges(packedDimensions);
+      for (auto r : *packedDimensions) r->setParent(tpaps);
+    }
+    if (unpackedDimensions != nullptr) {
+      taps->setRanges(unpackedDimensions);
+      for (auto r : *unpackedDimensions) r->setParent(taps);
+    }
+    retts = taps;
+
+  } else if (unpackedId) {
+    // uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
+    // taps->setPacked(false);
+    // taps->setParent(pscope);
+    // NodeId unpackDimensionId2 = unpackedId;
+    // while (fC->Sibling(unpackDimensionId2)) {
+    //   unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
+    // }
+    // fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 
     taps->setRanges(unpackedDimensions);
     for (auto r : *unpackedDimensions) r->setParent(taps, true);
 
     retts = taps;
 
-  } else if (unpackedId) {
-    uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    taps->setParent(pstmt);
+    // taps->setRanges(unpackedDimensions);
+    // for (auto r : *unpackedDimensions) r->setParent(taps);
+    // retts = taps;
 
-    NodeId unpackDimensionId2 = unpackedId;
-    while (fC->Sibling(unpackDimensionId2)) {
-      unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
-    }
-    fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
+    // Test code
+    bool bRemoveRange = false;
 
-    uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
-    ert->setParent(taps);
-    if (ts != nullptr) {
-      ert->setActual(ts);
-      ert->setName(ts->getName());
-    }
-    taps->setElemTypespec(ert);
-    fC->populateCoreMembers(nodeId, nodeId, ert);
-
-    // Associative array
     for (auto itr = unpackedDimensions->begin();
          itr != unpackedDimensions->end(); ++itr) {
       uhdm::Range* r = *itr;
@@ -1057,6 +1061,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
                 // Force it to be associative if the reference object can't be
                 // resolved. This will be fixed up later during binding.
                 associative = true;
+                bRemoveRange = true;
               }
             }
           }
@@ -1065,45 +1070,84 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
         const std::string_view value = rhs->getValue();
         if (value == "STRING:$") {
           queue = true;
-          unpackedDimensions->erase(itr);
+          // unpackedDimensions->erase(itr);
           break;
         } else if (value == "STRING:associative") {
           associative = true;
-          const uhdm::Typespec* tp = nullptr;
-          if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-            tp = rt->getActual();
-          }
-
-          if (tp != nullptr) {
-            uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
-            tpRef->setParent(taps);
-            tpRef->setName(tp->getName());
-            taps->setIndexTypespec(tpRef);
-            tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
-            fC->populateCoreMembers(unpackedId, unpackedId, tpRef);
-          }
-
-          unpackedDimensions->erase(itr);
           break;
         } else if (value == "STRING:unsized") {
           dynamic = true;
-          unpackedDimensions->erase(itr);
           break;
         }
       }
     }
-    if (associative)
-      taps->setArrayType(vpiAssocArray);
-    else if (queue)
-      taps->setArrayType(vpiQueueArray);
-    else if (dynamic)
-      taps->setArrayType(vpiDynamicArray);
-    else
-      taps->setArrayType(vpiStaticArray);
 
-    taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps, true);
-    retts = taps;
+    
+    uhdm::Typespec* elmtp = ts;
+    NodeId unpackDimensionId2 = unpackedId;
+    uhdm::ArrayTypespec* ptps = nullptr;
+    std::string_view sRefName = ts->getName();
+    for (auto itr = unpackedDimensions->rbegin();
+         itr != unpackedDimensions->rend(); ++itr) {
+      uhdm::Range* r = *itr;
+      const uhdm::Expr* rhs = r->getRightExpr();
+      std::string_view srname = r->getName();
+      std::string_view srhsname = rhs->getName();
+
+      uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
+      taps->setPacked(false);
+      taps->setParent(pscope);
+      
+      fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
+
+      uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
+      ert->setParent(taps);
+      if (elmtp != nullptr) {
+        ert->setActual(elmtp);
+        setRefTypespecName(ert, elmtp, sRefName);
+      }
+      taps->setElemTypespec(ert);      
+      fC->populateCoreMembers(nodeId, nodeId, ert);
+      elmtp = taps;
+      if (associative) {
+        taps->setArrayType(vpiAssocArray);
+        const uhdm::Typespec* tp = nullptr;
+        if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
+          tp = rt->getActual();
+        }
+
+        if (tp != nullptr) {
+          uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
+          tpRef->setParent(taps);
+          tpRef->setName(tp->getName());
+          taps->setIndexTypespec(tpRef);
+          tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
+          fC->populateCoreMembers(unpackedId, unpackedId, tpRef);
+        }
+        if (bRemoveRange) {
+          taps->setRange(r);
+          r->setParent(taps);
+        } else {
+          taps->setRange(nullptr);
+        }
+
+      } else if (queue) {
+        taps->setArrayType(vpiQueueArray);
+        taps->setRange(nullptr);
+      } else if (dynamic) {
+        taps->setArrayType(vpiDynamicArray);
+        taps->setRange(nullptr);
+      } else {
+        taps->setArrayType(vpiStaticArray);
+        taps->setRange(r);
+        r->setParent(taps);
+      }
+
+      unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
+    }
+    retts = elmtp;
+    //
+
   } else if (packedId) {
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
     taps->setPacked(true);

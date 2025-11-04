@@ -1035,10 +1035,10 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     // }
     // fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
 
-    taps->setRanges(unpackedDimensions);
-    for (auto r : *unpackedDimensions) r->setParent(taps, true);
-
-    retts = taps;
+    // taps->setRanges(unpackedDimensions);
+    // for (auto r : *unpackedDimensions) r->setParent(taps, true);
+    // 
+    // retts = taps;
 
     // taps->setRanges(unpackedDimensions);
     // for (auto r : *unpackedDimensions) r->setParent(taps);

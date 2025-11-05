@@ -1086,7 +1086,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     uhdm::Typespec* elmtp = ts;
     NodeId unpackDimensionId2 = unpackedId;
     uhdm::ArrayTypespec* ptps = nullptr;
-    std::string_view sRefName = ts->getName();
+    std::string_view sRefName = ts ? ts->getName() : "";
     for (auto itr = unpackedDimensions->rbegin();
          itr != unpackedDimensions->rend(); ++itr) {
       uhdm::Range* r = *itr;

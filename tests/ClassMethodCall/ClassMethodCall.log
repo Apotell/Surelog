@@ -45,7 +45,6 @@ Variable                                               5
 Total:                                                94
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMethodCall/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassMethodCall/dut.sv:45:5: Unsupported Typespec: id:29, type:RefTypespec, name:pack::doorOpen.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -241,7 +240,7 @@ Design: (unnamed)
         \_Function: (pack::door::f1), line:14:3, endln:16:14
         |vpiName:f1
       |vpiFullName:pack::door::f1
-      |vpiTypedef:
+      |vpiTypespec:
       \_LogicTypespec: 
         |vpiParent:
         \_Function: (pack::door::f1), line:14:3, endln:16:14
@@ -265,12 +264,12 @@ Design: (unnamed)
           |vpiParent:
           \_FuncCall: (f2), line:15:5, endln:15:9
           |vpiName:f2
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntTypespec: , line:6:5, endln:6:8
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
       |vpiSigned:1
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: , line:8:5, endln:8:10
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
@@ -329,7 +328,7 @@ Design: (unnamed)
           \_Function: (pack::doorOpen::new), line:23:5, endln:23:32
           |vpiName:new
         |vpiFullName:pack::doorOpen::new
-        |vpiTypedef:
+        |vpiTypespec:
         \_IntTypespec: , line:23:26, endln:23:29
           |vpiParent:
           \_Function: (pack::doorOpen::new), line:23:5, endln:23:32
@@ -352,7 +351,7 @@ Design: (unnamed)
           \_Function: (pack::doorOpen::new), line:23:5, endln:23:32
           |vpiDirection:1
           |vpiName:a
-          |vpiTypedef:
+          |vpiTypespec:
           \_RefTypespec: (pack::doorOpen::new::a), line:23:26, endln:23:29
             |vpiParent:
             \_IODecl: (a), line:23:30, endln:23:31
@@ -369,7 +368,7 @@ Design: (unnamed)
           \_Function: (pack::doorOpen::f2), line:25:5, endln:27:16
           |vpiName:f2
         |vpiFullName:pack::doorOpen::f2
-        |vpiTypedef:
+        |vpiTypespec:
         \_LogicTypespec: 
           |vpiParent:
           \_Function: (pack::doorOpen::f2), line:25:5, endln:27:16
@@ -421,14 +420,14 @@ Design: (unnamed)
           \_FuncCall: (f2), line:31:5, endln:31:9
             |vpiParent:
             \_Begin: (pack::doorOpen::new), line:30:5, endln:32:16
+            |vpiTaskFunc:
+            \_Function: (pack::doorOpen::f2), line:25:5, endln:27:16
             |vpiName:
             \_Identifier: (f2)
               |vpiParent:
               \_FuncCall: (f2), line:31:5, endln:31:9
               |vpiName:f2
-            |vpiFunction:
-            \_Function: (pack::doorOpen::f2), line:25:5, endln:27:16
-        |vpiTypedef:
+        |vpiTypespec:
         \_IntTypespec: , line:29:19, endln:29:22
           |vpiParent:
           \_Function: (pack::doorOpen::new), line:29:5, endln:32:16
@@ -442,7 +441,7 @@ Design: (unnamed)
           \_Function: (pack::doorOpen::new), line:29:5, endln:32:16
           |vpiDirection:1
           |vpiName:b
-          |vpiTypedef:
+          |vpiTypespec:
           \_RefTypespec: (pack::doorOpen::new::b), line:29:19, endln:29:22
             |vpiParent:
             \_IODecl: (b), line:29:23, endln:29:24
@@ -528,14 +527,14 @@ Design: (unnamed)
       \_Task: (pack::doorOpen::door_fsm), line:34:5, endln:36:12
   |vpiInternalScope:
   \_ClassDefn: (pack::doorOpen), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:21:1, endln:38:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (door)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:2:1, endln:40:11
     |vpiName:door
     |vpiClassDefn:
     \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:4:9, endln:18:9
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (doorOpen)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:2:1, endln:40:11
@@ -564,13 +563,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:43:1, endln:51:10
     |vpiName:work@door_mod
-  |vpiTypedef:
-  \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
-    |vpiParent:
-    \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:43:1, endln:51:10
-    |vpiName:pack::doorOpen
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
   |vpiImportTypespec:
   \_Net: (work@door_mod.open), line:45:20, endln:45:24
     |vpiParent:
@@ -582,7 +574,7 @@ Design: (unnamed)
       |vpiName:pack::doorOpen
       |vpiFullName:work@door_mod.open.pack::doorOpen
       |vpiActual:
-      \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
+      \_ClassTypespec: (doorOpen)
     |vpiName:open
     |vpiFullName:work@door_mod.open
   |vpiDefName:work@door_mod
@@ -621,40 +613,40 @@ Design: (unnamed)
           |vpiActual:
           \_Net: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
-      \_MethodFuncCall: (door_fsm), line:48:9, endln:48:23
+      \_MethodFuncCall: (door_fsm), line:48:14, endln:48:24
         |vpiParent:
         \_Begin: (work@door_mod), line:46:13, endln:50:8
         |vpiName:
         \_Identifier: (door_fsm)
           |vpiParent:
-          \_MethodFuncCall: (door_fsm), line:48:9, endln:48:23
+          \_MethodFuncCall: (door_fsm), line:48:14, endln:48:24
           |vpiName:door_fsm
         |vpiPrefix:
         \_RefObj: (work@door_mod.open), line:48:9, endln:48:13
           |vpiParent:
-          \_MethodFuncCall: (door_fsm), line:48:9, endln:48:23
+          \_MethodFuncCall: (door_fsm), line:48:14, endln:48:24
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
           \_Net: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
-      \_MethodFuncCall: (f1), line:49:9, endln:49:17
+      \_MethodFuncCall: (f1), line:49:14, endln:49:18
         |vpiParent:
         \_Begin: (work@door_mod), line:46:13, endln:50:8
         |vpiName:
         \_Identifier: (f1)
           |vpiParent:
-          \_MethodFuncCall: (f1), line:49:9, endln:49:17
+          \_MethodFuncCall: (f1), line:49:14, endln:49:18
           |vpiName:f1
         |vpiPrefix:
         \_RefObj: (work@door_mod.open), line:49:9, endln:49:13
           |vpiParent:
-          \_MethodFuncCall: (f1), line:49:9, endln:49:17
+          \_MethodFuncCall: (f1), line:49:14, endln:49:18
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
           \_Net: (work@door_mod.open), line:45:20, endln:45:24
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (door_mod)
   |vpiParent:
   \_Design: (unnamed)
@@ -664,6 +656,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0

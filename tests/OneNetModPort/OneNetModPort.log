@@ -726,24 +726,24 @@ Design: (unnamed)
     |vpiProgram:
     \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:1:1, endln:12:11
   |vpiImportTypespec:
-  \_Net: (work@TOP.drive), line:17:19, endln:17:24
-    |vpiParent:
-    \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:15:1, endln:19:10
-    |vpiName:drive
-    |vpiFullName:work@TOP.drive
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@TOP.observe), line:17:33, endln:17:40
     |vpiParent:
     \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:15:1, endln:19:10
     |vpiName:observe
     |vpiFullName:work@TOP.observe
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@TOP.drive), line:17:19, endln:17:24
+    |vpiParent:
+    \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPort/tb.v, line:15:1, endln:19:10
+    |vpiName:drive
+    |vpiFullName:work@TOP.drive
+    |vpiNetType:1
   |vpiDefName:work@TOP
   |vpiNet:
-  \_Net: (work@TOP.drive), line:17:19, endln:17:24
-  |vpiNet:
   \_Net: (work@TOP.observe), line:17:33, endln:17:40
+  |vpiNet:
+  \_Net: (work@TOP.drive), line:17:19, endln:17:24
   |vpiRefModule:
   \_RefModule: work@ConnectTB (conntb), line:16:3, endln:16:12
     |vpiParent:
@@ -881,18 +881,18 @@ Design: (unnamed)
     |vpiFullName:work@dut.o
     |vpiNetType:48
   |vpiImportTypespec:
-  \_Net: (work@dut.drive), line:3:17, endln:3:22
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:2:1, endln:7:10
-    |vpiName:drive
-    |vpiFullName:work@dut.drive
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@dut.observe), line:4:21, endln:4:28
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:2:1, endln:7:10
     |vpiName:observe
     |vpiFullName:work@dut.observe
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@dut.drive), line:3:17, endln:3:22
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:2:1, endln:7:10
+    |vpiName:drive
+    |vpiFullName:work@dut.drive
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
@@ -900,9 +900,9 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@dut.o), line:2:38, endln:2:39
   |vpiNet:
-  \_Net: (work@dut.drive), line:3:17, endln:3:22
-  |vpiNet:
   \_Net: (work@dut.observe), line:4:21, endln:4:28
+  |vpiNet:
+  \_Net: (work@dut.drive), line:3:17, endln:3:22
   |vpiPort:
   \_Port: (i), line:2:24, endln:2:25
     |vpiParent:
@@ -1051,27 +1051,9 @@ Design: (unnamed)
       \_InterfaceTypespec: (ConnectTB)
     |vpiName:intf
     |vpiFullName:work@middle.intf
-  |vpiImportTypespec:
-  \_Net: (work@middle.drive), line:23:22, endln:23:27
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
-    |vpiName:drive
-    |vpiFullName:work@middle.drive
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@middle.observe), line:23:40, endln:23:47
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPort/dut.v, line:22:1, endln:24:10
-    |vpiName:observe
-    |vpiFullName:work@middle.observe
-    |vpiNetType:1
   |vpiDefName:work@middle
   |vpiNet:
   \_Net: (work@middle.intf), line:22:30, endln:22:34
-  |vpiNet:
-  \_Net: (work@middle.drive), line:23:22, endln:23:27
-  |vpiNet:
-  \_Net: (work@middle.observe), line:23:40, endln:23:47
   |vpiPort:
   \_Port: (intf), line:22:30, endln:22:34
     |vpiParent:
@@ -1117,7 +1099,7 @@ Design: (unnamed)
           |vpiName:drive
           |vpiFullName:work@middle.sub1.inp.drive
           |vpiActual:
-          \_Net: (work@middle.drive), line:23:22, endln:23:27
+          \_Net: (work@ConnectTB.drive), line:10:9, endln:10:14
         |vpiName:intf.drive
     |vpiPort:
     \_Port: (out), line:23:31, endln:23:34
@@ -1142,7 +1124,7 @@ Design: (unnamed)
           |vpiName:observe
           |vpiFullName:work@middle.sub1.out.observe
           |vpiActual:
-          \_Net: (work@middle.observe), line:23:40, endln:23:47
+          \_Net: (work@ConnectTB.observe), line:11:9, endln:11:16
         |vpiName:intf.observe
 |vpiTypespec:
 \_ProgramTypespec: (TESTBENCH)

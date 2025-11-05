@@ -95,10 +95,11 @@ VoidTypespec                                          19
 ------------------------------------------------------------
 Total:                                              1820
 === UHDM Object Stats End ===
+[ERR:EL0535] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:93:63: Illegal implicit net "id:377, name:item".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv:80:61: Illegal implicit net "id:473, name:item".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ApbSlave/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:89:29: Unsupported Typespec: id:359, type:RefTypespec, name:i.
-[ERR:IG0814] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:93:63: Invalid Name id:1821, type:RefTypespec, name:item.
-[ERR:IG0814] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv:80:61: Invalid Name id:1822, type:RefTypespec, name:item.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv:93:63: Null Actual: id:377, type:RefObj, name:item.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv:80:61: Null Actual: id:473, type:RefObj, name:item.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -4030,7 +4031,7 @@ Design: (unnamed)
           \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
           |vpiFullName:svunit_pkg::svunit_testsuite::list_of_testcases
           |vpiActual:
-          \_ArrayTypespec: , line:32:9, endln:32:45
+          \_ArrayTypespec: , line:32:42, endln:32:45
         |vpiName:list_of_testcases
         |vpiFullName:svunit_pkg::svunit_testsuite::list_of_testcases
         |vpiAutomatic:1
@@ -4242,13 +4243,13 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:112
               |vpiName:$display
           |vpiStmt:
-          \_MethodFuncCall: (push_back), line:68:3, endln:68:37
+          \_MethodFuncCall: (push_back), line:68:21, endln:68:38
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::add_testcase)
             |vpiArgument:
             \_RefObj: (svunit_pkg::svunit_testsuite::add_testcase::svunit), line:68:31, endln:68:37
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:68:3, endln:68:37
+              \_MethodFuncCall: (push_back), line:68:21, endln:68:38
               |vpiName:svunit
               |vpiFullName:svunit_pkg::svunit_testsuite::add_testcase::svunit
               |vpiActual:
@@ -4256,12 +4257,12 @@ Design: (unnamed)
             |vpiName:
             \_Identifier: (push_back)
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:68:3, endln:68:37
+              \_MethodFuncCall: (push_back), line:68:21, endln:68:38
               |vpiName:push_back
             |vpiPrefix:
             \_RefObj: (svunit_pkg::svunit_testsuite::add_testcase::list_of_testcases), line:68:3, endln:68:20
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:68:3, endln:68:37
+              \_MethodFuncCall: (push_back), line:68:21, endln:68:38
               |vpiName:list_of_testcases
               |vpiFullName:svunit_pkg::svunit_testsuite::add_testcase::list_of_testcases
               |vpiActual:
@@ -4395,28 +4396,27 @@ Design: (unnamed)
             |vpiName:success_str
             |vpiFullName:svunit_pkg::svunit_testsuite::report::success_str
           |vpiInternalScope:
-          \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
+          \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:34
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
             |vpiFullName:svunit_pkg::svunit_testsuite::report
             |vpiImportTypespec:
             \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
               |vpiParent:
-              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
+              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:34
               |vpiTypespec:
-              \_RefTypespec: (svunit_pkg::svunit_testsuite::report::i::i), line:89:29, endln:89:30
+              \_RefTypespec: (svunit_pkg::svunit_testsuite::report::i)
                 |vpiParent:
                 \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
-                |vpiName:i
-                |vpiFullName:svunit_pkg::svunit_testsuite::report::i::i
+                |vpiFullName:svunit_pkg::svunit_testsuite::report::i
                 |vpiActual:
-                \_UnsupportedTypespec: (i), line:89:29, endln:89:30
+                \_UnsupportedTypespec: 
               |vpiName:i
               |vpiFullName:svunit_pkg::svunit_testsuite::report::i
             |vpiVariable:
             \_RefObj: (svunit_pkg::svunit_testsuite::report::list_of_testcases), line:89:11, endln:89:28
               |vpiParent:
-              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
+              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:34
               |vpiName:list_of_testcases
               |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases
               |vpiActual:
@@ -4424,18 +4424,18 @@ Design: (unnamed)
             |vpiLoopVars:
             \_Variable: (svunit_pkg::svunit_testsuite::report::i), line:89:29, endln:89:30
             |vpiStmt:
-            \_MethodFuncCall: (report), line:90:5, endln:90:33
+            \_MethodFuncCall: (report), line:90:26, endln:90:34
               |vpiParent:
-              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
+              \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:34
               |vpiName:
               \_Identifier: (report)
                 |vpiParent:
-                \_MethodFuncCall: (report), line:90:5, endln:90:33
+                \_MethodFuncCall: (report), line:90:26, endln:90:34
                 |vpiName:report
               |vpiPrefix:
               \_RefObj: (svunit_pkg::svunit_testsuite::report::list_of_testcases), line:90:5, endln:90:22
                 |vpiParent:
-                \_MethodFuncCall: (report), line:90:5, endln:90:33
+                \_MethodFuncCall: (report), line:90:26, endln:90:34
                 |vpiName:list_of_testcases
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases
                 |vpiActual:
@@ -4450,30 +4450,29 @@ Design: (unnamed)
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testsuite::report), line:92:3, endln:95:6
               |vpiTypespec:
-              \_RefTypespec: (svunit_pkg::svunit_testsuite::report::match::svunit_pkg::svunit_testcase), line:93:5, endln:93:20
+              \_RefTypespec: (svunit_pkg::svunit_testsuite::report::match), line:93:5, endln:93:20
                 |vpiParent:
                 \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
-                |vpiName:svunit_pkg::svunit_testcase
-                |vpiFullName:svunit_pkg::svunit_testsuite::report::match::svunit_pkg::svunit_testcase
+                |vpiFullName:svunit_pkg::svunit_testsuite::report::match
                 |vpiActual:
-                \_ClassTypespec: (svunit_testcase)
+                \_ArrayTypespec: , line:93:26, endln:93:90
               |vpiName:match
               |vpiFullName:svunit_pkg::svunit_testsuite::report::match
             |vpiTypespec:
-            \_ArrayTypespec: , line:93:5, endln:93:90
+            \_ArrayTypespec: , line:93:26, endln:93:90
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testsuite::report), line:92:3, endln:95:6
               |vpiArrayType:4
               |vpiElemTypespec:
               \_RefTypespec: (svunit_pkg::svunit_testsuite::report::svunit_testcase), line:93:5, endln:93:20
                 |vpiParent:
-                \_ArrayTypespec: , line:93:5, endln:93:90
+                \_ArrayTypespec: , line:93:26, endln:93:90
                 |vpiName:svunit_testcase
                 |vpiFullName:svunit_pkg::svunit_testsuite::report::svunit_testcase
                 |vpiActual:
                 \_ClassTypespec: (svunit_testcase)
             |vpiImportTypespec:
-            \_ArrayTypespec: , line:93:5, endln:93:90
+            \_ArrayTypespec: , line:93:26, endln:93:90
             |vpiImportTypespec:
             \_Variable: (svunit_pkg::svunit_testsuite::report::match), line:93:21, endln:93:26
             |vpiStmt:
@@ -4513,13 +4512,10 @@ Design: (unnamed)
                       |vpiParent:
                       \_Operation: , line:93:63, endln:93:89
                       |vpiActual:
-                      \_RefTypespec: (svunit_pkg::svunit_testsuite::report::list_of_testcases::item.get_results::item), line:93:63, endln:93:67
+                      \_RefObj: (item), line:93:63, endln:93:67
                         |vpiParent:
                         \_HierPath: (item.get_results), line:93:63, endln:93:81
                         |vpiName:item
-                        |vpiFullName:svunit_pkg::svunit_testsuite::report::list_of_testcases::item.get_results::item
-                        |vpiActual:
-                        \_ClassTypespec: (svunit_testcase)
                       |vpiActual:
                       \_MethodFuncCall: (get_results), line:93:68, endln:93:81
                         |vpiParent:
@@ -4586,10 +4582,9 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
           |vpiTypespec:
-          \_UnsupportedTypespec: (i), line:89:29, endln:89:30
+          \_UnsupportedTypespec: 
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testsuite::report)
-            |vpiName:i
           |vpiImportTypespec:
           \_IntTypespec: , line:86:3, endln:86:6
           |vpiImportTypespec:
@@ -4599,9 +4594,9 @@ Design: (unnamed)
           |vpiImportTypespec:
           \_Variable: (svunit_pkg::svunit_testsuite::report::success_str), line:87:11, endln:87:22
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (i), line:89:29, endln:89:30
+          \_UnsupportedTypespec: 
           |vpiStmt:
-          \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:33
+          \_ForeachStmt: (svunit_pkg::svunit_testsuite::report), line:89:3, endln:90:34
           |vpiStmt:
           \_Begin: (svunit_pkg::svunit_testsuite::report), line:92:3, endln:95:6
           |vpiStmt:
@@ -4912,14 +4907,14 @@ Design: (unnamed)
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiTypespec:
-      \_ArrayTypespec: , line:32:9, endln:32:45
+      \_ArrayTypespec: , line:32:42, endln:32:45
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testsuite), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testsuite.sv, line:26:1, endln:44:9
         |vpiArrayType:4
         |vpiElemTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testsuite::svunit_testcase), line:32:9, endln:32:24
           |vpiParent:
-          \_ArrayTypespec: , line:32:9, endln:32:45
+          \_ArrayTypespec: , line:32:42, endln:32:45
           |vpiName:svunit_testcase
           |vpiFullName:svunit_pkg::svunit_testsuite::svunit_testcase
           |vpiActual:
@@ -4933,7 +4928,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_Function: (svunit_pkg::svunit_testsuite::report), line:42:3, endln:42:33
       |vpiImportTypespec:
-      \_ArrayTypespec: , line:32:9, endln:32:45
+      \_ArrayTypespec: , line:32:42, endln:32:45
       |vpiImportTypespec:
       \_Variable: (svunit_pkg::svunit_testsuite::list_of_testcases), line:32:25, endln:32:42
       |vpiImportTypespec:
@@ -5028,7 +5023,7 @@ Design: (unnamed)
           \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
           |vpiFullName:svunit_pkg::svunit_testrunner::list_of_suites
           |vpiActual:
-          \_ArrayTypespec: , line:32:9, endln:32:43
+          \_ArrayTypespec: , line:32:40, endln:32:43
         |vpiName:list_of_suites
         |vpiFullName:svunit_pkg::svunit_testrunner::list_of_suites
         |vpiAutomatic:1
@@ -5227,13 +5222,13 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:108
               |vpiName:$display
           |vpiStmt:
-          \_MethodFuncCall: (push_back), line:67:3, endln:67:33
+          \_MethodFuncCall: (push_back), line:67:18, endln:67:34
             |vpiParent:
             \_Begin: (svunit_pkg::svunit_testrunner::add_testsuite)
             |vpiArgument:
             \_RefObj: (svunit_pkg::svunit_testrunner::add_testsuite::suite), line:67:28, endln:67:33
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:67:3, endln:67:33
+              \_MethodFuncCall: (push_back), line:67:18, endln:67:34
               |vpiName:suite
               |vpiFullName:svunit_pkg::svunit_testrunner::add_testsuite::suite
               |vpiActual:
@@ -5241,12 +5236,12 @@ Design: (unnamed)
             |vpiName:
             \_Identifier: (push_back)
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:67:3, endln:67:33
+              \_MethodFuncCall: (push_back), line:67:18, endln:67:34
               |vpiName:push_back
             |vpiPrefix:
             \_RefObj: (svunit_pkg::svunit_testrunner::add_testsuite::list_of_suites), line:67:3, endln:67:17
               |vpiParent:
-              \_MethodFuncCall: (push_back), line:67:3, endln:67:33
+              \_MethodFuncCall: (push_back), line:67:18, endln:67:34
               |vpiName:list_of_suites
               |vpiFullName:svunit_pkg::svunit_testrunner::add_testsuite::list_of_suites
               |vpiActual:
@@ -5334,30 +5329,29 @@ Design: (unnamed)
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testrunner::report), line:79:3, endln:82:6
               |vpiTypespec:
-              \_RefTypespec: (svunit_pkg::svunit_testrunner::report::match::svunit_pkg::svunit_testsuite), line:80:5, endln:80:21
+              \_RefTypespec: (svunit_pkg::svunit_testrunner::report::match), line:80:5, endln:80:21
                 |vpiParent:
                 \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
-                |vpiName:svunit_pkg::svunit_testsuite
-                |vpiFullName:svunit_pkg::svunit_testrunner::report::match::svunit_pkg::svunit_testsuite
+                |vpiFullName:svunit_pkg::svunit_testrunner::report::match
                 |vpiActual:
-                \_ClassTypespec: (svunit_testsuite)
+                \_ArrayTypespec: , line:80:27, endln:80:88
               |vpiName:match
               |vpiFullName:svunit_pkg::svunit_testrunner::report::match
             |vpiTypespec:
-            \_ArrayTypespec: , line:80:5, endln:80:88
+            \_ArrayTypespec: , line:80:27, endln:80:88
               |vpiParent:
               \_Begin: (svunit_pkg::svunit_testrunner::report), line:79:3, endln:82:6
               |vpiArrayType:4
               |vpiElemTypespec:
               \_RefTypespec: (svunit_pkg::svunit_testrunner::report::svunit_testsuite), line:80:5, endln:80:21
                 |vpiParent:
-                \_ArrayTypespec: , line:80:5, endln:80:88
+                \_ArrayTypespec: , line:80:27, endln:80:88
                 |vpiName:svunit_testsuite
                 |vpiFullName:svunit_pkg::svunit_testrunner::report::svunit_testsuite
                 |vpiActual:
                 \_ClassTypespec: (svunit_testsuite)
             |vpiImportTypespec:
-            \_ArrayTypespec: , line:80:5, endln:80:88
+            \_ArrayTypespec: , line:80:27, endln:80:88
             |vpiImportTypespec:
             \_Variable: (svunit_pkg::svunit_testrunner::report::match), line:80:22, endln:80:27
             |vpiStmt:
@@ -5397,13 +5391,10 @@ Design: (unnamed)
                       |vpiParent:
                       \_Operation: , line:80:61, endln:80:87
                       |vpiActual:
-                      \_RefTypespec: (svunit_pkg::svunit_testrunner::report::list_of_suites::item.get_results::item), line:80:61, endln:80:65
+                      \_RefObj: (item), line:80:61, endln:80:65
                         |vpiParent:
                         \_HierPath: (item.get_results), line:80:61, endln:80:79
                         |vpiName:item
-                        |vpiFullName:svunit_pkg::svunit_testrunner::report::list_of_suites::item.get_results::item
-                        |vpiActual:
-                        \_ClassTypespec: (svunit_testsuite)
                       |vpiActual:
                       \_MethodFuncCall: (get_results), line:80:66, endln:80:79
                         |vpiParent:
@@ -5795,14 +5786,14 @@ Design: (unnamed)
         |vpiInstance:
         \_Package: svunit_pkg (svunit_pkg), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_pkg.sv, line:24:1, endln:38:11
       |vpiTypespec:
-      \_ArrayTypespec: , line:32:9, endln:32:43
+      \_ArrayTypespec: , line:32:40, endln:32:43
         |vpiParent:
         \_ClassDefn: (svunit_pkg::svunit_testrunner), file:${SURELOG_DIR}/third_party/UVM/svunit_base/svunit_testrunner.sv, line:26:1, endln:43:9
         |vpiArrayType:4
         |vpiElemTypespec:
         \_RefTypespec: (svunit_pkg::svunit_testrunner::svunit_testsuite), line:32:9, endln:32:25
           |vpiParent:
-          \_ArrayTypespec: , line:32:9, endln:32:43
+          \_ArrayTypespec: , line:32:40, endln:32:43
           |vpiName:svunit_testsuite
           |vpiFullName:svunit_pkg::svunit_testrunner::svunit_testsuite
           |vpiActual:
@@ -5814,7 +5805,7 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_Function: (svunit_pkg::svunit_testrunner::report), line:41:3, endln:41:33
       |vpiImportTypespec:
-      \_ArrayTypespec: , line:32:9, endln:32:43
+      \_ArrayTypespec: , line:32:40, endln:32:43
       |vpiImportTypespec:
       \_Variable: (svunit_pkg::svunit_testrunner::list_of_suites), line:32:26, endln:32:40
       |vpiImportTypespec:
@@ -6177,14 +6168,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@apb_slave (work@apb_slave), file:${SURELOG_DIR}/third_party/tests/ApbSlave/design.sv, line:2:1, endln:74:10
   |vpiTypespec:
-  \_ArrayTypespec: , line:18:1, endln:18:32
+  \_ArrayTypespec: , line:18:27, endln:18:32
     |vpiParent:
     \_Module: work@apb_slave (work@apb_slave), file:${SURELOG_DIR}/third_party/tests/ApbSlave/design.sv, line:2:1, endln:74:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:18:27, endln:18:32
       |vpiParent:
-      \_ArrayTypespec: , line:18:1, endln:18:32
+      \_ArrayTypespec: , line:18:27, endln:18:32
       |vpiRightRange:
       \_Operation: , line:18:28, endln:18:31
         |vpiParent:
@@ -6201,7 +6192,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@apb_slave), line:18:1, endln:18:22
       |vpiParent:
-      \_ArrayTypespec: , line:18:1, endln:18:32
+      \_ArrayTypespec: , line:18:27, endln:18:32
       |vpiFullName:work@apb_slave
       |vpiActual:
       \_LogicTypespec: , line:14:16, endln:14:31
@@ -6306,7 +6297,7 @@ Design: (unnamed)
     |vpiFullName:work@apb_slave.prdata
     |vpiNetType:36
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:18:1, endln:18:32
+  \_ArrayTypespec: , line:18:27, endln:18:32
   |vpiImportTypespec:
   \_Net: (work@apb_slave.mem), line:18:23, endln:18:26
     |vpiParent:
@@ -6317,7 +6308,7 @@ Design: (unnamed)
       \_Net: (work@apb_slave.mem), line:18:23, endln:18:26
       |vpiFullName:work@apb_slave.mem
       |vpiActual:
-      \_ArrayTypespec: , line:18:1, endln:18:32
+      \_ArrayTypespec: , line:18:27, endln:18:32
     |vpiName:mem
     |vpiFullName:work@apb_slave.mem
     |vpiNetType:36
@@ -7075,18 +7066,18 @@ Design: (unnamed)
       \_Task: (work@apb_slave_unit_test.setup), line:49:3, endln:64:10
       |vpiFullName:work@apb_slave_unit_test.setup
       |vpiStmt:
-      \_MethodFuncCall: (setup), line:50:5, endln:50:21
+      \_MethodFuncCall: (setup), line:50:15, endln:50:22
         |vpiParent:
         \_Begin: (work@apb_slave_unit_test.setup), line:50:5, endln:63:15
         |vpiName:
         \_Identifier: (setup)
           |vpiParent:
-          \_MethodFuncCall: (setup), line:50:5, endln:50:21
+          \_MethodFuncCall: (setup), line:50:15, endln:50:22
           |vpiName:setup
         |vpiPrefix:
         \_RefObj: (work@apb_slave_unit_test.setup.svunit_ut), line:50:5, endln:50:14
           |vpiParent:
-          \_MethodFuncCall: (setup), line:50:5, endln:50:21
+          \_MethodFuncCall: (setup), line:50:15, endln:50:22
           |vpiName:svunit_ut
           |vpiFullName:work@apb_slave_unit_test.setup.svunit_ut
           |vpiActual:
@@ -7333,18 +7324,18 @@ Design: (unnamed)
     |vpiFullName:work@apb_slave_unit_test.teardown
     |vpiVisibility:1
     |vpiStmt:
-    \_MethodFuncCall: (teardown), line:72:5, endln:72:24
+    \_MethodFuncCall: (teardown), line:72:15, endln:72:25
       |vpiParent:
       \_Task: (work@apb_slave_unit_test.teardown), line:71:3, endln:74:10
       |vpiName:
       \_Identifier: (teardown)
         |vpiParent:
-        \_MethodFuncCall: (teardown), line:72:5, endln:72:24
+        \_MethodFuncCall: (teardown), line:72:15, endln:72:25
         |vpiName:teardown
       |vpiPrefix:
       \_RefObj: (work@apb_slave_unit_test.teardown.svunit_ut), line:72:5, endln:72:14
         |vpiParent:
-        \_MethodFuncCall: (teardown), line:72:5, endln:72:24
+        \_MethodFuncCall: (teardown), line:72:15, endln:72:25
         |vpiName:svunit_ut
         |vpiFullName:work@apb_slave_unit_test.teardown.svunit_ut
         |vpiActual:
@@ -8465,18 +8456,18 @@ Design: (unnamed)
                     \_IfStmt: , line:168:13, endln:170:16
                     |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read
                     |vpiStmt:
-                    \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                    \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                       |vpiParent:
                       \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:168:67, endln:170:16
                       |vpiName:
                       \_Identifier: (wait_for_error)
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:wait_for_error
                       |vpiPrefix:
                       \_RefObj: (work@apb_slave_unit_test.run.single_write_then_read.svunit_ut), line:169:15, endln:169:24
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:svunit_ut
                         |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.svunit_ut
                         |vpiActual:
@@ -8665,18 +8656,18 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (svunit_pkg::current_tc), line:24:17, endln:24:27
         |vpiStmt:
-        \_MethodFuncCall: (start), line:154:5, endln:154:21
+        \_MethodFuncCall: (start), line:154:15, endln:154:22
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (start)
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:start
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.single_write_then_read.svunit_ut), line:154:5, endln:154:14
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.svunit_ut
             |vpiActual:
@@ -8695,18 +8686,18 @@ Design: (unnamed)
         |vpiStmt:
         \_ForkStmt: (work@apb_slave_unit_test.run.single_write_then_read), line:156:5, endln:177:9
         |vpiStmt:
-        \_MethodFuncCall: (stop), line:178:5, endln:178:20
+        \_MethodFuncCall: (stop), line:178:15, endln:178:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (stop)
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:stop
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.single_write_then_read.svunit_ut), line:178:5, endln:178:14
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.svunit_ut
             |vpiActual:
@@ -8879,18 +8870,18 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:85
               |vpiName:$display
         |vpiStmt:
-        \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+        \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.single_write_then_read), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (update_exit_status)
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:update_exit_status
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.single_write_then_read.svunit_ut), line:184:5, endln:184:14
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.single_write_then_read.svunit_ut
             |vpiActual:
@@ -9191,18 +9182,18 @@ Design: (unnamed)
                     \_IfStmt: , line:168:13, endln:170:16
                     |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel
                     |vpiStmt:
-                    \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                    \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                       |vpiParent:
                       \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:168:67, endln:170:16
                       |vpiName:
                       \_Identifier: (wait_for_error)
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:wait_for_error
                       |vpiPrefix:
                       \_RefObj: (work@apb_slave_unit_test.run.write_wo_psel.svunit_ut), line:169:15, endln:169:24
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:svunit_ut
                         |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.svunit_ut
                         |vpiActual:
@@ -9391,18 +9382,18 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (svunit_pkg::current_tc), line:24:17, endln:24:27
         |vpiStmt:
-        \_MethodFuncCall: (start), line:154:5, endln:154:21
+        \_MethodFuncCall: (start), line:154:15, endln:154:22
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (start)
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:start
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_psel.svunit_ut), line:154:5, endln:154:14
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.svunit_ut
             |vpiActual:
@@ -9421,18 +9412,18 @@ Design: (unnamed)
         |vpiStmt:
         \_ForkStmt: (work@apb_slave_unit_test.run.write_wo_psel), line:156:5, endln:177:9
         |vpiStmt:
-        \_MethodFuncCall: (stop), line:178:5, endln:178:20
+        \_MethodFuncCall: (stop), line:178:15, endln:178:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (stop)
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:stop
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_psel.svunit_ut), line:178:5, endln:178:14
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.svunit_ut
             |vpiActual:
@@ -9605,18 +9596,18 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:85
               |vpiName:$display
         |vpiStmt:
-        \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+        \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_psel), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (update_exit_status)
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:update_exit_status
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_psel.svunit_ut), line:184:5, endln:184:14
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_psel.svunit_ut
             |vpiActual:
@@ -9925,18 +9916,18 @@ Design: (unnamed)
                     \_IfStmt: , line:168:13, endln:170:16
                     |vpiFullName:work@apb_slave_unit_test.run.write_wo_write
                     |vpiStmt:
-                    \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                    \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                       |vpiParent:
                       \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:168:67, endln:170:16
                       |vpiName:
                       \_Identifier: (wait_for_error)
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:wait_for_error
                       |vpiPrefix:
                       \_RefObj: (work@apb_slave_unit_test.run.write_wo_write.svunit_ut), line:169:15, endln:169:24
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:svunit_ut
                         |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.svunit_ut
                         |vpiActual:
@@ -10125,18 +10116,18 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (svunit_pkg::current_tc), line:24:17, endln:24:27
         |vpiStmt:
-        \_MethodFuncCall: (start), line:154:5, endln:154:21
+        \_MethodFuncCall: (start), line:154:15, endln:154:22
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (start)
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:start
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_write.svunit_ut), line:154:5, endln:154:14
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.svunit_ut
             |vpiActual:
@@ -10155,18 +10146,18 @@ Design: (unnamed)
         |vpiStmt:
         \_ForkStmt: (work@apb_slave_unit_test.run.write_wo_write), line:156:5, endln:177:9
         |vpiStmt:
-        \_MethodFuncCall: (stop), line:178:5, endln:178:20
+        \_MethodFuncCall: (stop), line:178:15, endln:178:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (stop)
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:stop
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_write.svunit_ut), line:178:5, endln:178:14
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.svunit_ut
             |vpiActual:
@@ -10339,18 +10330,18 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:85
               |vpiName:$display
         |vpiStmt:
-        \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+        \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run.write_wo_write), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (update_exit_status)
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:update_exit_status
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run.write_wo_write.svunit_ut), line:184:5, endln:184:14
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run.write_wo_write.svunit_ut
             |vpiActual:
@@ -10770,18 +10761,18 @@ Design: (unnamed)
                     \_IfStmt: , line:168:13, endln:170:16
                     |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads
                     |vpiStmt:
-                    \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                    \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                       |vpiParent:
                       \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:168:67, endln:170:16
                       |vpiName:
                       \_Identifier: (wait_for_error)
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:wait_for_error
                       |vpiPrefix:
                       \_RefObj: (work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut), line:169:15, endln:169:24
                         |vpiParent:
-                        \_MethodFuncCall: (wait_for_error), line:169:15, endln:169:40
+                        \_MethodFuncCall: (wait_for_error), line:169:25, endln:169:41
                         |vpiName:svunit_ut
                         |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut
                         |vpiActual:
@@ -10970,18 +10961,18 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (svunit_pkg::current_tc), line:24:17, endln:24:27
         |vpiStmt:
-        \_MethodFuncCall: (start), line:154:5, endln:154:21
+        \_MethodFuncCall: (start), line:154:15, endln:154:22
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (start)
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:start
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut), line:154:5, endln:154:14
             |vpiParent:
-            \_MethodFuncCall: (start), line:154:5, endln:154:21
+            \_MethodFuncCall: (start), line:154:15, endln:154:22
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut
             |vpiActual:
@@ -11000,18 +10991,18 @@ Design: (unnamed)
         |vpiStmt:
         \_ForkStmt: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:156:5, endln:177:9
         |vpiStmt:
-        \_MethodFuncCall: (stop), line:178:5, endln:178:20
+        \_MethodFuncCall: (stop), line:178:15, endln:178:21
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (stop)
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:stop
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut), line:178:5, endln:178:14
             |vpiParent:
-            \_MethodFuncCall: (stop), line:178:5, endln:178:20
+            \_MethodFuncCall: (stop), line:178:15, endln:178:21
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut
             |vpiActual:
@@ -11184,18 +11175,18 @@ Design: (unnamed)
               \_SysFuncCall: ($display), line:103:3, endln:103:85
               |vpiName:$display
         |vpiStmt:
-        \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+        \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
           |vpiParent:
           \_Begin: (work@apb_slave_unit_test.run._2_writes_then_2_reads), line:146:3, endln:185:6
           |vpiName:
           \_Identifier: (update_exit_status)
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:update_exit_status
           |vpiPrefix:
           \_RefObj: (work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut), line:184:5, endln:184:14
             |vpiParent:
-            \_MethodFuncCall: (update_exit_status), line:184:5, endln:184:34
+            \_MethodFuncCall: (update_exit_status), line:184:15, endln:184:35
             |vpiName:svunit_ut
             |vpiFullName:work@apb_slave_unit_test.run._2_writes_then_2_reads.svunit_ut
             |vpiActual:
@@ -11697,6 +11688,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 3
+[  ERROR] : 4
 [WARNING] : 1
 [   NOTE] : 2

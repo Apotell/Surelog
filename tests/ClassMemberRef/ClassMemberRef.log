@@ -187,7 +187,6 @@ VoidTypespec                                           2
 Total:                                                54
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:24:1: Unsupported Typespec: id:39, type:RefTypespec, name:pkg::uvm_printer.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -457,13 +456,6 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
     |vpiName:work@top
-  |vpiTypespec:
-  \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
-    |vpiName:pkg::uvm_printer
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
   |vpiImportTypespec:
   \_Net: (work@top.printer), line:24:18, endln:24:25
     |vpiParent:
@@ -475,7 +467,7 @@ Design: (unnamed)
       |vpiName:pkg::uvm_printer
       |vpiFullName:work@top.printer.pkg::uvm_printer
       |vpiActual:
-      \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
+      \_ClassTypespec: (uvm_printer)
     |vpiName:printer
     |vpiFullName:work@top.printer
   |vpiDefName:work@top
@@ -521,13 +513,13 @@ Design: (unnamed)
           |vpiActual:
           \_Net: (work@top.printer), line:24:18, endln:24:25
       |vpiStmt:
-      \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
+      \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
         |vpiParent:
         \_Begin: (work@top), line:25:9, endln:28:4
         |vpiArgument:
         \_RefObj: (work@top.en), line:27:27, endln:27:29
           |vpiParent:
-          \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
+          \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
           |vpiName:en
           |vpiFullName:work@top.en
           |vpiActual:
@@ -535,12 +527,12 @@ Design: (unnamed)
         |vpiName:
         \_Identifier: (set_name_enabled)
           |vpiParent:
-          \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
+          \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
           |vpiName:set_name_enabled
         |vpiPrefix:
         \_RefObj: (work@top.printer), line:27:1, endln:27:8
           |vpiParent:
-          \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
+          \_MethodFuncCall: (set_name_enabled), line:27:9, endln:27:30
           |vpiName:printer
           |vpiFullName:work@top.printer
           |vpiActual:
@@ -555,6 +547,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0

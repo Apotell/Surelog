@@ -674,12 +674,8 @@ Variable                                               2
 ------------------------------------------------------------
 Total:                                               293
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Illegal implicit net "id:206, name: exp_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Illegal implicit net "id:211, name: man_bits".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:29:14: Unsupported Typespec: id:153, type:RefTypespec, name:fpu_features_t.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:30: Null Actual: id:206, type:RefObj, name:exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:38:59: Null Actual: id:211, type:RefObj, name:man_bits.
 [ERR:IG0811] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:45:14: Unsupported Typespec: id:221, type:RefTypespec, name:fpnew_pkg::fpu_features_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1100,6 +1096,8 @@ Design: (unnamed)
               \_HierPath: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
               |vpiName:exp_bits
               |vpiFullName:fpnew_pkg::fp_width::exp_bits
+              |vpiActual:
+              \_TypespecMember: (exp_bits), line:7:18, endln:7:26
             |vpiName:FP_ENCODINGS[fmt].exp_bits
           |vpiOperand:
           \_HierPath: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
@@ -1127,6 +1125,8 @@ Design: (unnamed)
               \_HierPath: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
               |vpiName:man_bits
               |vpiFullName:fpnew_pkg::fp_width::man_bits
+              |vpiActual:
+              \_TypespecMember: (man_bits), line:8:18, endln:8:26
             |vpiName:FP_ENCODINGS[fmt].man_bits
         |vpiOperand:
         \_Constant: , line:38:70, endln:38:71
@@ -1562,6 +1562,20 @@ Design: (unnamed)
               |vpiName:operands
             |vpiFullName:work@top.gen_nanbox_check.check.operands
             |vpiImportTypespec:
+            \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
+              |vpiParent:
+              \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
+              |vpiName:is_boxed
+              |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed
+              |vpiNetType:1
+            |vpiImportTypespec:
+            \_Net: (work@top.gen_nanbox_check.check.operands.op), line:54:30, endln:54:32
+              |vpiParent:
+              \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
+              |vpiName:op
+              |vpiFullName:work@top.gen_nanbox_check.check.operands.op
+              |vpiNetType:1
+            |vpiImportTypespec:
             \_Net: (work@top.gen_nanbox_check.check.operands.vectorial_op_i), line:54:38, endln:54:52
               |vpiParent:
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
@@ -1574,20 +1588,6 @@ Design: (unnamed)
               \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
               |vpiName:operands_i
               |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
-              |vpiParent:
-              \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
-              |vpiName:op
-              |vpiFullName:work@top.gen_nanbox_check.check.operands.op
-              |vpiNetType:1
-            |vpiImportTypespec:
-            \_Net: (work@top.gen_nanbox_check.check.operands.is_boxed), line:54:16, endln:54:33
-              |vpiParent:
-              \_Begin: (work@top.gen_nanbox_check.check.operands), line:53:58, endln:57:10
-              |vpiName:is_boxed
-              |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed
               |vpiNetType:1
             |vpiStmt:
             \_ContAssign: , line:54:16, endln:56:42
@@ -1631,7 +1631,7 @@ Design: (unnamed)
                       |vpiName:op
                       |vpiFullName:work@top.gen_nanbox_check.check.operands.operands_i.op
                       |vpiActual:
-                      \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
+                      \_Net: (work@top.gen_nanbox_check.check.operands.op), line:54:30, endln:54:32
                     |vpiIndex:
                     \_PartSelect: operands_i (work@top.gen_nanbox_check.check.operands.operands_i.operands_i), line:55:53, endln:55:69
                       |vpiParent:
@@ -1710,7 +1710,7 @@ Design: (unnamed)
                   |vpiName:op
                   |vpiFullName:work@top.gen_nanbox_check.check.operands.is_boxed.op
                   |vpiActual:
-                  \_Net: (work@top.gen_nanbox_check.check.operands.op), line:55:49, endln:55:51
+                  \_Net: (work@top.gen_nanbox_check.check.operands.op), line:54:30, endln:54:32
           |vpiImportTypespec:
           \_Variable: (work@top.gen_nanbox_check.check.op), line:53:19, endln:53:21
           |vpiImportTypespec:
@@ -2019,6 +2019,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 6
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0

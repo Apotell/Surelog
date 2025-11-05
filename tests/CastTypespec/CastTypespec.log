@@ -486,7 +486,7 @@ IntTypespec                                           24
 LogicTypespec                                          1
 Module                                                 4
 ModuleTypespec                                         2
-Net                                                    2
+Net                                                    1
 Operation                                             20
 Package                                                2
 ParamAssign                                            8
@@ -503,7 +503,7 @@ Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                         5
 UnsupportedTypespec                                    2
-Variable                                               3
+Variable                                               4
 ------------------------------------------------------------
 Total:                                               300
 === UHDM Object Stats End ===
@@ -1791,21 +1791,21 @@ Design: (unnamed)
         \_TypespecMember: (b), line:27:27, endln:27:31
         |vpiFullName:work@top.b
         |vpiActual:
-        \_ArrayTypespec: , line:27:21, endln:27:31
+        \_ArrayTypespec: , line:27:28, endln:27:31
   |vpiTypespec:
   \_IntTypespec: , line:27:21, endln:27:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiSigned:1
   |vpiTypespec:
-  \_ArrayTypespec: , line:27:21, endln:27:31
+  \_ArrayTypespec: , line:27:28, endln:27:31
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:27:28, endln:27:31
       |vpiParent:
-      \_ArrayTypespec: , line:27:21, endln:27:31
+      \_ArrayTypespec: , line:27:28, endln:27:31
       |vpiRightRange:
       \_Operation: , line:27:29, endln:27:30
         |vpiParent:
@@ -1822,7 +1822,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:27:21, endln:27:24
       |vpiParent:
-      \_ArrayTypespec: , line:27:21, endln:27:31
+      \_ArrayTypespec: , line:27:28, endln:27:31
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:27:21, endln:27:24
@@ -1873,7 +1873,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:27:21, endln:27:24
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:27:21, endln:27:31
+  \_ArrayTypespec: , line:27:28, endln:27:31
   |vpiImportTypespec:
   \_StructTypespec: , line:26:5, endln:26:24
   |vpiImportTypespec:
@@ -1907,15 +1907,28 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:30:5, endln:33:8
       |vpiFullName:work@top
+      |vpiVariable:
+      \_Variable: (work@top.v1), line:31:12, endln:31:14
+        |vpiParent:
+        \_Begin: (work@top), line:30:13, endln:33:8
+        |vpiTypespec:
+        \_RefTypespec: (work@top.v1), line:31:7, endln:31:11
+          |vpiParent:
+          \_Variable: (work@top.v1), line:31:12, endln:31:14
+          |vpiFullName:work@top.v1
+          |vpiActual:
+          \_ArrayTypespec: , line:31:14, endln:31:25
+        |vpiName:v1
+        |vpiFullName:work@top.v1
       |vpiTypespec:
-      \_ArrayTypespec: , line:31:7, endln:31:25
+      \_ArrayTypespec: , line:31:14, endln:31:25
         |vpiParent:
         \_Begin: (work@top), line:30:13, endln:33:8
         |vpiArrayType:1
         |vpiRange:
         \_Range: , line:31:14, endln:31:19
           |vpiParent:
-          \_ArrayTypespec: , line:31:7, endln:31:25
+          \_ArrayTypespec: , line:31:14, endln:31:25
           |vpiLeftRange:
           \_Constant: , line:31:15, endln:31:16
             |vpiParent:
@@ -1935,7 +1948,7 @@ Design: (unnamed)
         |vpiRange:
         \_Range: , line:31:20, endln:31:25
           |vpiParent:
-          \_ArrayTypespec: , line:31:7, endln:31:25
+          \_ArrayTypespec: , line:31:14, endln:31:25
           |vpiLeftRange:
           \_Constant: , line:31:21, endln:31:22
             |vpiParent:
@@ -1955,27 +1968,15 @@ Design: (unnamed)
         |vpiElemTypespec:
         \_RefTypespec: (work@top.ab_t), line:31:7, endln:31:11
           |vpiParent:
-          \_ArrayTypespec: , line:31:7, endln:31:25
+          \_ArrayTypespec: , line:31:14, endln:31:25
           |vpiName:ab_t
           |vpiFullName:work@top.ab_t
           |vpiActual:
           \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
       |vpiImportTypespec:
-      \_ArrayTypespec: , line:31:7, endln:31:25
+      \_ArrayTypespec: , line:31:14, endln:31:25
       |vpiImportTypespec:
-      \_Net: (work@top.v1), line:31:12, endln:31:14
-        |vpiParent:
-        \_Begin: (work@top), line:30:13, endln:33:8
-        |vpiTypespec:
-        \_RefTypespec: (work@top.v1.ab_t), line:31:7, endln:31:11
-          |vpiParent:
-          \_Net: (work@top.v1), line:31:12, endln:31:14
-          |vpiName:ab_t
-          |vpiFullName:work@top.v1.ab_t
-          |vpiActual:
-          \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
-        |vpiName:v1
-        |vpiFullName:work@top.v1
+      \_Variable: (work@top.v1), line:31:12, endln:31:14
       |vpiStmt:
       \_Assignment: , line:32:7, endln:32:38
         |vpiParent:
@@ -2072,7 +2073,7 @@ Design: (unnamed)
           |vpiName:v1
           |vpiFullName:work@top.v1
           |vpiActual:
-          \_Net: (work@top.v1), line:31:12, endln:31:14
+          \_Variable: (work@top.v1), line:31:12, endln:31:14
   |vpiProcess:
   \_Always: , line:36:3, endln:40:6
     |vpiParent:
@@ -2088,18 +2089,18 @@ Design: (unnamed)
         |vpiName:p_outmux
       |vpiFullName:work@top.p_outmux
       |vpiImportTypespec:
-      \_Net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
-        |vpiParent:
-        \_Begin: (work@top.p_outmux), line:36:15, endln:40:6
-        |vpiName:selected_hart
-        |vpiFullName:work@top.p_outmux.selected_hart
-        |vpiNetType:1
-      |vpiImportTypespec:
       \_Net: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
         |vpiParent:
         \_Begin: (work@top.p_outmux), line:36:15, endln:40:6
         |vpiName:NrHarts
         |vpiFullName:work@top.p_outmux.NrHarts
+        |vpiNetType:1
+      |vpiImportTypespec:
+      \_Net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
+        |vpiParent:
+        \_Begin: (work@top.p_outmux), line:36:15, endln:40:6
+        |vpiName:selected_hart
+        |vpiFullName:work@top.p_outmux.selected_hart
         |vpiNetType:1
       |vpiStmt:
       \_IfStmt: , line:37:5, endln:39:8
@@ -2137,6 +2138,13 @@ Design: (unnamed)
           \_IfStmt: , line:37:5, endln:39:8
           |vpiFullName:work@top.p_outmux
           |vpiImportTypespec:
+          \_Net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
+            |vpiParent:
+            \_Begin: (work@top.p_outmux), line:37:51, endln:39:8
+            |vpiName:resumereq_o
+            |vpiFullName:work@top.p_outmux.resumereq_o
+            |vpiNetType:1
+          |vpiImportTypespec:
           \_Net: (work@top.p_outmux.dmcontrol_q), line:38:20, endln:38:31
             |vpiParent:
             \_Begin: (work@top.p_outmux), line:37:51, endln:39:8
@@ -2149,13 +2157,6 @@ Design: (unnamed)
             \_Begin: (work@top.p_outmux), line:37:51, endln:39:8
             |vpiName:resumereq
             |vpiFullName:work@top.p_outmux.resumereq
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
-            |vpiParent:
-            \_Begin: (work@top.p_outmux), line:37:51, endln:39:8
-            |vpiName:resumereq_o
-            |vpiFullName:work@top.p_outmux.resumereq_o
             |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:38:7, endln:38:41

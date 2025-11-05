@@ -80,20 +80,17 @@ Identifier                                             2
 IntTypespec                                            3
 Module                                                 1
 ModuleTypespec                                         1
-Net                                                    1
 Operation                                              1
 Range                                                  1
 RefObj                                                 1
 RefTypespec                                            6
 SourceFile                                             1
 UnsupportedTypespec                                    2
-Variable                                               2
+Variable                                               3
 ------------------------------------------------------------
 Total:                                                31
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachFunction/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachFunction/dut.sv:6:41: Unsupported Typespec: id:26, type:RefTypespec, name:slave_id.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachFunction/dut.sv:6:50: Unsupported Typespec: id:29, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -127,6 +124,19 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@dut.get_expected_command), line:3:3, endln:8:13
       |vpiFullName:work@dut.get_expected_command
+      |vpiVariable:
+      \_Variable: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
+        |vpiParent:
+        \_Begin: (work@dut.get_expected_command)
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.get_expected_command.write_command_queue_slave), line:4:6, endln:4:9
+          |vpiParent:
+          \_Variable: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
+          |vpiFullName:work@dut.get_expected_command.write_command_queue_slave
+          |vpiActual:
+          \_ArrayTypespec: , line:4:36, endln:4:40
+        |vpiName:write_command_queue_slave
+        |vpiFullName:work@dut.get_expected_command.write_command_queue_slave
       |vpiInternalScope:
       \_ForeachStmt: (work@dut.get_expected_command), line:6:6, endln:7:9
         |vpiParent:
@@ -142,13 +152,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForeachStmt: (work@dut.get_expected_command), line:6:6, endln:7:9
           |vpiTypespec:
-          \_RefTypespec: (work@dut.get_expected_command.slave_id.slave_id), line:6:41, endln:6:49
+          \_RefTypespec: (work@dut.get_expected_command.slave_id)
             |vpiParent:
             \_Variable: (work@dut.get_expected_command.slave_id), line:6:41, endln:6:49
-            |vpiName:slave_id
-            |vpiFullName:work@dut.get_expected_command.slave_id.slave_id
+            |vpiFullName:work@dut.get_expected_command.slave_id
             |vpiActual:
-            \_UnsupportedTypespec: (slave_id), line:6:41, endln:6:49
+            \_UnsupportedTypespec: 
           |vpiName:slave_id
           |vpiFullName:work@dut.get_expected_command.slave_id
         |vpiImportTypespec:
@@ -156,13 +165,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForeachStmt: (work@dut.get_expected_command), line:6:6, endln:7:9
           |vpiTypespec:
-          \_RefTypespec: (work@dut.get_expected_command.i.i), line:6:50, endln:6:51
+          \_RefTypespec: (work@dut.get_expected_command.i)
             |vpiParent:
             \_Variable: (work@dut.get_expected_command.i), line:6:50, endln:6:51
-            |vpiName:i
-            |vpiFullName:work@dut.get_expected_command.i.i
+            |vpiFullName:work@dut.get_expected_command.i
             |vpiActual:
-            \_UnsupportedTypespec: (i), line:6:50, endln:6:51
+            \_UnsupportedTypespec: 
           |vpiName:i
           |vpiFullName:work@dut.get_expected_command.i
         |vpiVariable:
@@ -172,7 +180,7 @@ Design: (unnamed)
           |vpiName:write_command_queue_slave
           |vpiFullName:work@dut.get_expected_command.write_command_queue_slave
           |vpiActual:
-          \_Net: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
+          \_Variable: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
         |vpiLoopVars:
         \_Variable: (work@dut.get_expected_command.slave_id), line:6:41, endln:6:49
         |vpiLoopVars:
@@ -185,14 +193,14 @@ Design: (unnamed)
         \_Begin: (work@dut.get_expected_command)
         |vpiSigned:1
       |vpiTypespec:
-      \_ArrayTypespec: , line:4:6, endln:4:40
+      \_ArrayTypespec: , line:4:36, endln:4:40
         |vpiParent:
         \_Begin: (work@dut.get_expected_command)
         |vpiArrayType:1
         |vpiRange:
         \_Range: , line:4:36, endln:4:40
           |vpiParent:
-          \_ArrayTypespec: , line:4:6, endln:4:40
+          \_ArrayTypespec: , line:4:36, endln:4:40
           |vpiRightRange:
           \_Operation: , line:4:37, endln:4:39
             |vpiParent:
@@ -209,41 +217,28 @@ Design: (unnamed)
         |vpiElemTypespec:
         \_RefTypespec: (work@dut.get_expected_command), line:4:6, endln:4:9
           |vpiParent:
-          \_ArrayTypespec: , line:4:6, endln:4:40
+          \_ArrayTypespec: , line:4:36, endln:4:40
           |vpiFullName:work@dut.get_expected_command
           |vpiActual:
           \_IntTypespec: , line:4:6, endln:4:9
       |vpiTypespec:
-      \_UnsupportedTypespec: (slave_id), line:6:41, endln:6:49
+      \_UnsupportedTypespec: 
         |vpiParent:
         \_Begin: (work@dut.get_expected_command)
-        |vpiName:slave_id
       |vpiTypespec:
-      \_UnsupportedTypespec: (i), line:6:50, endln:6:51
+      \_UnsupportedTypespec: 
         |vpiParent:
         \_Begin: (work@dut.get_expected_command)
-        |vpiName:i
       |vpiImportTypespec:
       \_IntTypespec: , line:4:6, endln:4:9
       |vpiImportTypespec:
-      \_ArrayTypespec: , line:4:6, endln:4:40
+      \_ArrayTypespec: , line:4:36, endln:4:40
       |vpiImportTypespec:
-      \_Net: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
-        |vpiParent:
-        \_Begin: (work@dut.get_expected_command)
-        |vpiTypespec:
-        \_RefTypespec: (work@dut.get_expected_command.write_command_queue_slave), line:4:6, endln:4:9
-          |vpiParent:
-          \_Net: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
-          |vpiFullName:work@dut.get_expected_command.write_command_queue_slave
-          |vpiActual:
-          \_ArrayTypespec: , line:4:6, endln:4:40
-        |vpiName:write_command_queue_slave
-        |vpiFullName:work@dut.get_expected_command.write_command_queue_slave
+      \_Variable: (work@dut.get_expected_command.write_command_queue_slave), line:4:10, endln:4:35
       |vpiImportTypespec:
-      \_UnsupportedTypespec: (slave_id), line:6:41, endln:6:49
+      \_UnsupportedTypespec: 
       |vpiImportTypespec:
-      \_UnsupportedTypespec: (i), line:6:50, endln:6:51
+      \_UnsupportedTypespec: 
       |vpiStmt:
       \_ForeachStmt: (work@dut.get_expected_command), line:6:6, endln:7:9
     |vpiTypespec:
@@ -292,6 +287,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

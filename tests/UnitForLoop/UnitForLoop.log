@@ -325,16 +325,16 @@ Variable                                               2
 ------------------------------------------------------------
 Total:                                                86
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:9:10: Illegal implicit net "id:37, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:10:4: Illegal implicit net "id:41, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:8:31: Illegal implicit net "id:32, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:13:10: Illegal implicit net "id:56, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:14:4: Illegal implicit net "id:60, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:12:31: Illegal implicit net "id:51, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:17:5: Illegal implicit net "id:71, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:18:4: Illegal implicit net "id:75, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:22:5: Illegal implicit net "id:81, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:23:5: Illegal implicit net "id:85, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:18:4: Illegal implicit net "id:75, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:22:5: Illegal implicit net "id:81, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:12:31: Illegal implicit net "id:51, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:8:31: Illegal implicit net "id:32, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:9:10: Illegal implicit net "id:37, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:10:4: Illegal implicit net "id:41, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:14:4: Illegal implicit net "id:60, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:17:5: Illegal implicit net "id:71, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:13:10: Illegal implicit net "id:56, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitForLoop/top.v:23:5: Illegal implicit net "id:85, name:i".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitForLoop/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForLoop/top.v:9:10: Null Actual: id:37, type:RefObj, name:i.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForLoop/top.v:10:4: Null Actual: id:41, type:RefObj, name:i.
@@ -374,11 +374,11 @@ Design: (unnamed)
       \_Function: (work@top::f2), line:3:1, endln:4:12
       |vpiName:f2
     |vpiFullName:work@top::f2
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: 
       |vpiParent:
       \_Function: (work@top::f2), line:3:1, endln:4:12
-    |vpiTypedef:
+    |vpiTypespec:
     \_IntTypespec: , line:3:14, endln:3:17
       |vpiParent:
       \_Function: (work@top::f2), line:3:1, endln:4:12
@@ -402,7 +402,7 @@ Design: (unnamed)
       \_Function: (work@top::f2), line:3:1, endln:4:12
       |vpiDirection:1
       |vpiName:i
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top::f2::i), line:3:14, endln:3:17
         |vpiParent:
         \_IODecl: (i), line:3:18, endln:3:19
@@ -415,7 +415,7 @@ Design: (unnamed)
       \_Function: (work@top::f2), line:3:1, endln:4:12
       |vpiDirection:1
       |vpiName:j
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@top::f2::j), line:3:21, endln:3:24
         |vpiParent:
         \_IODecl: (j), line:3:25, endln:3:26
@@ -477,6 +477,8 @@ Design: (unnamed)
           \_FuncCall: (f2), line:9:7, endln:9:14
             |vpiParent:
             \_Begin: (work@top::f1), line:8:36, endln:11:7
+            |vpiTaskFunc:
+            \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:9:10, endln:9:11
               |vpiParent:
@@ -496,8 +498,6 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (f2), line:9:7, endln:9:14
               |vpiName:f2
-            |vpiFunction:
-            \_Function: (work@top::f2), line:3:1, endln:4:12
           |vpiStmt:
           \_FuncCall: (f3), line:10:1, endln:10:8
             |vpiParent:
@@ -596,6 +596,8 @@ Design: (unnamed)
           \_FuncCall: (f2), line:13:7, endln:13:14
             |vpiParent:
             \_Begin: (work@top::f1), line:12:36, endln:15:7
+            |vpiTaskFunc:
+            \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:13:10, endln:13:11
               |vpiParent:
@@ -615,8 +617,6 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (f2), line:13:7, endln:13:14
               |vpiName:f2
-            |vpiFunction:
-            \_Function: (work@top::f2), line:3:1, endln:4:12
           |vpiStmt:
           \_FuncCall: (f4), line:14:1, endln:14:8
             |vpiParent:
@@ -694,6 +694,8 @@ Design: (unnamed)
           \_FuncCall: (f2), line:17:2, endln:17:9
             |vpiParent:
             \_Begin: (work@top::f1), line:16:24, endln:19:7
+            |vpiTaskFunc:
+            \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:17:5, endln:17:6
               |vpiParent:
@@ -713,8 +715,6 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (f2), line:17:2, endln:17:9
               |vpiName:f2
-            |vpiFunction:
-            \_Function: (work@top::f2), line:3:1, endln:4:12
           |vpiStmt:
           \_FuncCall: (f5), line:18:1, endln:18:8
             |vpiParent:
@@ -788,6 +788,8 @@ Design: (unnamed)
           \_FuncCall: (f2), line:22:2, endln:22:9
             |vpiParent:
             \_Begin: (work@top::f1), line:21:16, endln:24:7
+            |vpiTaskFunc:
+            \_Function: (work@top::f2), line:3:1, endln:4:12
             |vpiArgument:
             \_RefObj: (work@top::f1::i), line:22:5, endln:22:6
               |vpiParent:
@@ -807,8 +809,6 @@ Design: (unnamed)
               |vpiParent:
               \_FuncCall: (f2), line:22:2, endln:22:9
               |vpiName:f2
-            |vpiFunction:
-            \_Function: (work@top::f2), line:3:1, endln:4:12
           |vpiStmt:
           \_FuncCall: (f6), line:23:2, endln:23:9
             |vpiParent:
@@ -834,7 +834,7 @@ Design: (unnamed)
               |vpiName:f6
         |vpiStmt:
         \_Begin: (work@top::f1), line:21:16, endln:24:7
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:8:10, endln:8:13
         |vpiParent:
         \_Begin: (work@top::f1)
@@ -853,7 +853,7 @@ Design: (unnamed)
       \_ForStmt: (work@top::f1), line:16:4, endln:19:7
       |vpiStmt:
       \_ForStmt: (work@top::f1), line:21:4, endln:24:7
-    |vpiTypedef:
+    |vpiTypespec:
     \_LogicTypespec: 
       |vpiParent:
       \_Function: (work@top::f1), line:7:1, endln:27:12
@@ -878,7 +878,7 @@ Design: (unnamed)
   \_Function: (work@top::f2), line:3:1, endln:4:12
   |vpiMethod:
   \_Function: (work@top::f1), line:7:1, endln:27:12
-|vpiTypedef:
+|vpiTypespec:
 \_ClassTypespec: (work@top)
   |vpiParent:
   \_Design: (unnamed)

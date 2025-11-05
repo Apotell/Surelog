@@ -98,7 +98,6 @@ Variable                                               1
 Total:                                                24
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LoopVar/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/LoopVar/dut.sv:5:23: Unsupported Typespec: id:11, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -123,14 +122,14 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
     |vpiSigned:1
   |vpiTypespec:
-  \_ArrayTypespec: , line:2:5, endln:2:18
+  \_ArrayTypespec: , line:2:14, endln:2:18
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LoopVar/dut.sv, line:1:1, endln:9:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:2:14, endln:2:18
       |vpiParent:
-      \_ArrayTypespec: , line:2:5, endln:2:18
+      \_ArrayTypespec: , line:2:14, endln:2:18
       |vpiRightRange:
       \_Operation: , line:2:15, endln:2:17
         |vpiParent:
@@ -147,14 +146,14 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@dut), line:2:5, endln:2:8
       |vpiParent:
-      \_ArrayTypespec: , line:2:5, endln:2:18
+      \_ArrayTypespec: , line:2:14, endln:2:18
       |vpiFullName:work@dut
       |vpiActual:
       \_IntTypespec: , line:2:5, endln:2:8
   |vpiImportTypespec:
   \_IntTypespec: , line:2:5, endln:2:8
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:2:5, endln:2:18
+  \_ArrayTypespec: , line:2:14, endln:2:18
   |vpiImportTypespec:
   \_Net: (work@dut.array), line:2:9, endln:2:14
     |vpiParent:
@@ -165,7 +164,7 @@ Design: (unnamed)
       \_Net: (work@dut.array), line:2:9, endln:2:14
       |vpiFullName:work@dut.array
       |vpiActual:
-      \_ArrayTypespec: , line:2:5, endln:2:18
+      \_ArrayTypespec: , line:2:14, endln:2:18
     |vpiName:array
     |vpiFullName:work@dut.array
   |vpiDefName:work@dut
@@ -190,13 +189,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForeachStmt: (work@dut), line:5:9, endln:6:25
           |vpiTypespec:
-          \_RefTypespec: (work@dut.i.i), line:5:23, endln:5:24
+          \_RefTypespec: (work@dut.i)
             |vpiParent:
             \_Variable: (work@dut.i), line:5:23, endln:5:24
-            |vpiName:i
-            |vpiFullName:work@dut.i.i
+            |vpiFullName:work@dut.i
             |vpiActual:
-            \_UnsupportedTypespec: (i), line:5:23, endln:5:24
+            \_UnsupportedTypespec: 
           |vpiName:i
           |vpiFullName:work@dut.i
         |vpiVariable:
@@ -240,12 +238,11 @@ Design: (unnamed)
               |vpiActual:
               \_Variable: (work@dut.i), line:5:23, endln:5:24
       |vpiTypespec:
-      \_UnsupportedTypespec: (i), line:5:23, endln:5:24
+      \_UnsupportedTypespec: 
         |vpiParent:
         \_Begin: (work@dut), line:4:13, endln:7:8
-        |vpiName:i
       |vpiImportTypespec:
-      \_UnsupportedTypespec: (i), line:5:23, endln:5:24
+      \_UnsupportedTypespec: 
       |vpiStmt:
       \_ForeachStmt: (work@dut), line:5:9, endln:6:25
 |vpiTypespec:
@@ -258,6 +255,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0

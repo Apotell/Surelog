@@ -806,27 +806,9 @@ Design: (unnamed)
       \_InterfaceTypespec: (ConnectTB)
     |vpiName:conn
     |vpiFullName:work@middle.conn
-  |vpiImportTypespec:
-  \_Net: (work@middle.con_i), line:11:22, endln:11:27
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
-    |vpiName:con_i
-    |vpiFullName:work@middle.con_i
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@middle.con_o), line:11:39, endln:11:44
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetInterf/dut.v, line:10:1, endln:12:10
-    |vpiName:con_o
-    |vpiFullName:work@middle.con_o
-    |vpiNetType:1
   |vpiDefName:work@middle
   |vpiNet:
   \_Net: (work@middle.conn), line:10:26, endln:10:30
-  |vpiNet:
-  \_Net: (work@middle.con_i), line:11:22, endln:11:27
-  |vpiNet:
-  \_Net: (work@middle.con_o), line:11:39, endln:11:44
   |vpiPort:
   \_Port: (conn), line:10:26, endln:10:30
     |vpiParent:
@@ -872,7 +854,7 @@ Design: (unnamed)
           |vpiName:con_i
           |vpiFullName:work@middle.sub1.inp.con_i
           |vpiActual:
-          \_Net: (work@middle.con_i), line:11:22, endln:11:27
+          \_Port: (con_i), line:7:33, endln:7:38
         |vpiName:conn.con_i
     |vpiPort:
     \_Port: (out), line:11:30, endln:11:33
@@ -897,7 +879,7 @@ Design: (unnamed)
           |vpiName:con_o
           |vpiFullName:work@middle.sub1.out.con_o
           |vpiActual:
-          \_Net: (work@middle.con_o), line:11:39, endln:11:44
+          \_Port: (con_o), line:7:51, endln:7:56
         |vpiName:conn.con_o
 |vpiAllModules:
 \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
@@ -954,18 +936,18 @@ Design: (unnamed)
     |vpiFullName:work@tb.o
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@tb.con_o), line:18:32, endln:18:37
-    |vpiParent:
-    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
-    |vpiName:con_o
-    |vpiFullName:work@tb.con_o
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@tb.con_i), line:18:53, endln:18:58
     |vpiParent:
     \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
     |vpiName:con_i
     |vpiFullName:work@tb.con_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@tb.con_o), line:18:32, endln:18:37
+    |vpiParent:
+    \_Module: work@tb (work@tb), file:${SURELOG_DIR}/tests/OneNetInterf/tb.v, line:14:1, endln:19:10
+    |vpiName:con_o
+    |vpiFullName:work@tb.con_o
     |vpiNetType:1
   |vpiDefName:work@tb
   |vpiNet:
@@ -973,9 +955,9 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@tb.o), line:15:10, endln:15:11
   |vpiNet:
-  \_Net: (work@tb.con_o), line:18:32, endln:18:37
-  |vpiNet:
   \_Net: (work@tb.con_i), line:18:53, endln:18:58
+  |vpiNet:
+  \_Net: (work@tb.con_o), line:18:32, endln:18:37
   |vpiRefModule:
   \_RefModule: work@ConnectTB (conntb), line:16:3, endln:16:12
     |vpiParent:

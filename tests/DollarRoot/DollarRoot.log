@@ -6554,7 +6554,7 @@ MethodFuncCall                                        13
 Module                                                 4
 ModuleTypespec                                         3
 NamedEvent                                             1
-Net                                                   35
+Net                                                   11
 Operation                                            105
 Package                                                1
 ParamAssign                                           10
@@ -6574,16 +6574,12 @@ TypedefTypespec                                        6
 TypespecMember                                        10
 UnsupportedTypespec                                   63
 VarSelect                                              2
-Variable                                              32
+Variable                                              56
 WaitStmt                                               1
 ------------------------------------------------------------
 Total:                                              2131
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DollarRoot/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/DollarRoot/dut.sv:691:45: Unsupported Typespec: id:1265, type:RefTypespec, name:slave_id.
-[ERR:IG0811] ${SURELOG_DIR}/tests/DollarRoot/dut.sv:691:54: Unsupported Typespec: id:1268, type:RefTypespec, name:i.
-[ERR:IG0811] ${SURELOG_DIR}/tests/DollarRoot/dut.sv:703:44: Unsupported Typespec: id:1309, type:RefTypespec, name:slave_id.
-[ERR:IG0811] ${SURELOG_DIR}/tests/DollarRoot/dut.sv:703:53: Unsupported Typespec: id:1312, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -8245,6 +8241,20 @@ Design: (unnamed)
       \_Function: (work@test_program.get_read_response_from_master_0), line:266:4, endln:277:15
       |vpiFullName:work@test_program.get_read_response_from_master_0
       |vpiVariable:
+      \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+        |vpiParent:
+        \_Begin: (work@test_program.get_read_response_from_master_0)
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.get_read_response_from_master_0.rsp.Response), line:268:7, endln:268:15
+          |vpiParent:
+          \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+          |vpiName:Response
+          |vpiFullName:work@test_program.get_read_response_from_master_0.rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:rsp
+        |vpiFullName:work@test_program.get_read_response_from_master_0.rsp
+      |vpiVariable:
       \_Variable: (work@test_program.get_read_response_from_master_0.i), line:272:16, endln:272:17
         |vpiParent:
         \_Begin: (work@test_program.get_read_response_from_master_0)
@@ -8268,39 +8278,11 @@ Design: (unnamed)
           \_ForStmt: (work@test_program.get_read_response_from_master_0), line:272:7, endln:274:10
           |vpiFullName:work@test_program.get_read_response_from_master_0
           |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_0.tb), line:273:33, endln:273:35
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
-            |vpiName:tb
-            |vpiFullName:work@test_program.get_read_response_from_master_0.tb
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_0.dut), line:273:36, endln:273:39
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
-            |vpiName:dut
-            |vpiFullName:work@test_program.get_read_response_from_master_0.dut
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_0.master_0), line:273:40, endln:273:48
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
-            |vpiName:master_0
-            |vpiFullName:work@test_program.get_read_response_from_master_0.master_0
-            |vpiNetType:1
-          |vpiImportTypespec:
           \_Net: (work@test_program.get_read_response_from_master_0.get_response_data), line:273:49, endln:273:66
             |vpiParent:
             \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
             |vpiName:get_response_data
             |vpiFullName:work@test_program.get_read_response_from_master_0.get_response_data
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_0.data), line:273:18, endln:273:21
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
-            |vpiName:data
-            |vpiFullName:work@test_program.get_read_response_from_master_0.data
             |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:273:10, endln:273:69
@@ -8323,21 +8305,21 @@ Design: (unnamed)
                 \_HierPath: (work@test_program.get_read_response_from_master_0.$root.tb.dut.master_0.get_response_data), line:273:27, endln:273:66
                 |vpiName:tb
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_0.tb), line:273:33, endln:273:35
+                \_Net: (work@test_program.get_read_response_from_master_0.tb), line:271:33, endln:271:35
               |vpiActual:
               \_RefObj: (dut), line:273:36, endln:273:39
                 |vpiParent:
                 \_HierPath: (work@test_program.get_read_response_from_master_0.$root.tb.dut.master_0.get_response_data), line:273:27, endln:273:66
                 |vpiName:dut
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_0.dut), line:273:36, endln:273:39
+                \_Net: (work@test_program.get_read_response_from_master_0.dut), line:271:36, endln:271:39
               |vpiActual:
               \_RefObj: (master_0), line:273:40, endln:273:48
                 |vpiParent:
                 \_HierPath: (work@test_program.get_read_response_from_master_0.$root.tb.dut.master_0.get_response_data), line:273:27, endln:273:66
                 |vpiName:master_0
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_0.master_0), line:273:40, endln:273:48
+                \_Net: (work@test_program.get_read_response_from_master_0.master_0), line:271:40, endln:271:48
               |vpiActual:
               \_RefObj: (get_response_data), line:273:49, endln:273:66
                 |vpiParent:
@@ -8357,7 +8339,7 @@ Design: (unnamed)
                 \_HierPath: (rsp.data[i]), line:273:13, endln:273:21
                 |vpiName:rsp
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+                \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
               |vpiActual:
               \_BitSelect: (work@test_program.get_read_response_from_master_0.rsp.data[i].data), line:273:18, endln:273:21
                 |vpiParent:
@@ -8365,7 +8347,7 @@ Design: (unnamed)
                 |vpiName:data
                 |vpiFullName:work@test_program.get_read_response_from_master_0.rsp.data[i].data
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_0.data), line:273:18, endln:273:21
+                \_TypespecMember: (data), line:59:37, endln:59:61
                 |vpiIndex:
                 \_RefObj: (work@test_program.get_read_response_from_master_0.rsp.data[i].i), line:273:19, endln:273:20
                   |vpiParent:
@@ -8375,13 +8357,6 @@ Design: (unnamed)
                   |vpiActual:
                   \_Variable: (work@test_program.get_read_response_from_master_0.i), line:272:16, endln:272:17
               |vpiName:rsp.data[i]
-        |vpiImportTypespec:
-        \_Net: (work@test_program.get_read_response_from_master_0.burstcount), line:272:31, endln:272:41
-          |vpiParent:
-          \_ForStmt: (work@test_program.get_read_response_from_master_0), line:272:7, endln:274:10
-          |vpiName:burstcount
-          |vpiFullName:work@test_program.get_read_response_from_master_0.burstcount
-          |vpiNetType:1
         |vpiForInitStmt:
         \_Assignment: , line:272:12, endln:272:21
           |vpiParent:
@@ -8432,7 +8407,7 @@ Design: (unnamed)
               \_HierPath: (rsp.burstcount), line:272:27, endln:272:41
               |vpiName:rsp
               |vpiActual:
-              \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+              \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
             |vpiActual:
             \_RefObj: (work@test_program.get_read_response_from_master_0.burstcount), line:272:31, endln:272:41
               |vpiParent:
@@ -8440,7 +8415,7 @@ Design: (unnamed)
               |vpiName:burstcount
               |vpiFullName:work@test_program.get_read_response_from_master_0.burstcount
               |vpiActual:
-              \_Net: (work@test_program.get_read_response_from_master_0.burstcount), line:272:31, endln:272:41
+              \_TypespecMember: (burstcount), line:58:37, endln:58:47
             |vpiName:rsp.burstcount
         |vpiStmt:
         \_Begin: (work@test_program.get_read_response_from_master_0), line:272:48, endln:274:10
@@ -8450,19 +8425,7 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_read_response_from_master_0)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
-        |vpiParent:
-        \_Begin: (work@test_program.get_read_response_from_master_0)
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.get_read_response_from_master_0.rsp.Response), line:268:7, endln:268:15
-          |vpiParent:
-          \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
-          |vpiName:Response
-          |vpiFullName:work@test_program.get_read_response_from_master_0.rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:rsp
-        |vpiFullName:work@test_program.get_read_response_from_master_0.rsp
+      \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
       |vpiImportTypespec:
       \_IntTypespec: , line:272:12, endln:272:15
       |vpiImportTypespec:
@@ -8494,13 +8457,6 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_read_response_from_master_0)
         |vpiName:get_response_burst_size
         |vpiFullName:work@test_program.get_read_response_from_master_0.get_response_burst_size
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_read_response_from_master_0.burstcount), line:271:11, endln:271:21
-        |vpiParent:
-        \_Begin: (work@test_program.get_read_response_from_master_0)
-        |vpiName:burstcount
-        |vpiFullName:work@test_program.get_read_response_from_master_0.burstcount
         |vpiNetType:1
       |vpiStmt:
       \_FuncCall: ($root.tb.dut.master_0.pop_response), line:270:7, endln:270:43
@@ -8566,14 +8522,14 @@ Design: (unnamed)
             \_HierPath: (rsp.burstcount), line:271:10, endln:271:21
             |vpiName:rsp
             |vpiActual:
-            \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+            \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
           |vpiActual:
           \_RefObj: (burstcount), line:271:11, endln:271:21
             |vpiParent:
             \_HierPath: (rsp.burstcount), line:271:10, endln:271:21
             |vpiName:burstcount
             |vpiActual:
-            \_Net: (work@test_program.get_read_response_from_master_0.burstcount), line:271:11, endln:271:21
+            \_TypespecMember: (burstcount), line:58:37, endln:58:47
           |vpiName:rsp.burstcount
       |vpiStmt:
       \_ForStmt: (work@test_program.get_read_response_from_master_0), line:272:7, endln:274:10
@@ -8588,7 +8544,7 @@ Design: (unnamed)
           |vpiName:rsp
           |vpiFullName:work@test_program.get_read_response_from_master_0.rsp
           |vpiActual:
-          \_Net: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
+          \_Variable: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -8616,20 +8572,29 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@test_program.get_command_from_slave_0), line:309:4, endln:328:15
       |vpiFullName:work@test_program.get_command_from_slave_0
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+      |vpiVariable:
+      \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
         |vpiParent:
         \_Begin: (work@test_program.get_command_from_slave_0)
         |vpiTypespec:
         \_RefTypespec: (work@test_program.get_command_from_slave_0.cmd.Command), line:311:7, endln:311:14
           |vpiParent:
-          \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+          \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
           |vpiName:Command
           |vpiFullName:work@test_program.get_command_from_slave_0.cmd.Command
           |vpiActual:
           \_TypedefTypespec: (Command), line:54:6, endln:54:13
         |vpiName:cmd
         |vpiFullName:work@test_program.get_command_from_slave_0.cmd
+      |vpiImportTypespec:
+      \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+      |vpiImportTypespec:
+      \_Net: (work@test_program.get_command_from_slave_0.REQ_WRITE), line:317:57, endln:317:66
+        |vpiParent:
+        \_Begin: (work@test_program.get_command_from_slave_0)
+        |vpiName:REQ_WRITE
+        |vpiFullName:work@test_program.get_command_from_slave_0.REQ_WRITE
+        |vpiNetType:1
       |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_0.tb), line:314:39, endln:314:41
         |vpiParent:
@@ -8659,13 +8624,6 @@ Design: (unnamed)
         |vpiFullName:work@test_program.get_command_from_slave_0.get_command_burst_count
         |vpiNetType:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_0.burstcount), line:314:11, endln:314:21
-        |vpiParent:
-        \_Begin: (work@test_program.get_command_from_slave_0)
-        |vpiName:burstcount
-        |vpiFullName:work@test_program.get_command_from_slave_0.burstcount
-        |vpiNetType:1
-      |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_0.get_command_address), line:315:54, endln:315:73
         |vpiParent:
         \_Begin: (work@test_program.get_command_from_slave_0)
@@ -8673,25 +8631,11 @@ Design: (unnamed)
         |vpiFullName:work@test_program.get_command_from_slave_0.get_command_address
         |vpiNetType:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_0.addr), line:315:11, endln:315:15
-        |vpiParent:
-        \_Begin: (work@test_program.get_command_from_slave_0)
-        |vpiName:addr
-        |vpiFullName:work@test_program.get_command_from_slave_0.addr
-        |vpiNetType:1
-      |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_0.get_command_request), line:317:32, endln:317:51
         |vpiParent:
         \_Begin: (work@test_program.get_command_from_slave_0)
         |vpiName:get_command_request
         |vpiFullName:work@test_program.get_command_from_slave_0.get_command_request
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_0.REQ_WRITE), line:317:57, endln:317:66
-        |vpiParent:
-        \_Begin: (work@test_program.get_command_from_slave_0)
-        |vpiName:REQ_WRITE
-        |vpiFullName:work@test_program.get_command_from_slave_0.REQ_WRITE
         |vpiNetType:1
       |vpiStmt:
       \_FuncCall: ($root.tb.dut.slave_0.pop_command), line:313:7, endln:313:41
@@ -8757,14 +8701,14 @@ Design: (unnamed)
             \_HierPath: (cmd.burstcount), line:314:10, endln:314:21
             |vpiName:cmd
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+            \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
           |vpiActual:
           \_RefObj: (burstcount), line:314:11, endln:314:21
             |vpiParent:
             \_HierPath: (cmd.burstcount), line:314:10, endln:314:21
             |vpiName:burstcount
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_0.burstcount), line:314:11, endln:314:21
+            \_TypespecMember: (burstcount), line:48:37, endln:48:47
           |vpiName:cmd.burstcount
       |vpiStmt:
       \_Assignment: , line:315:7, endln:315:75
@@ -8821,14 +8765,14 @@ Design: (unnamed)
             \_HierPath: (cmd.addr), line:315:10, endln:315:15
             |vpiName:cmd
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+            \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
           |vpiActual:
           \_RefObj: (addr), line:315:11, endln:315:15
             |vpiParent:
             \_HierPath: (cmd.addr), line:315:10, endln:315:15
             |vpiName:addr
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_0.addr), line:315:11, endln:315:15
+            \_TypespecMember: (addr), line:49:37, endln:49:41
           |vpiName:cmd.addr
       |vpiStmt:
       \_IfElse: , line:317:7, endln:325:10
@@ -8915,6 +8859,27 @@ Design: (unnamed)
               \_ForStmt: (work@test_program.get_command_from_slave_0), line:319:10, endln:322:13
               |vpiFullName:work@test_program.get_command_from_slave_0
               |vpiImportTypespec:
+              \_Net: (work@test_program.get_command_from_slave_0.tb), line:320:38, endln:320:40
+                |vpiParent:
+                \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
+                |vpiName:tb
+                |vpiFullName:work@test_program.get_command_from_slave_0.tb
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@test_program.get_command_from_slave_0.dut), line:320:41, endln:320:44
+                |vpiParent:
+                \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
+                |vpiName:dut
+                |vpiFullName:work@test_program.get_command_from_slave_0.dut
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@test_program.get_command_from_slave_0.slave_0), line:320:45, endln:320:52
+                |vpiParent:
+                \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
+                |vpiName:slave_0
+                |vpiFullName:work@test_program.get_command_from_slave_0.slave_0
+                |vpiNetType:1
+              |vpiImportTypespec:
               \_Net: (work@test_program.get_command_from_slave_0.get_command_data), line:320:53, endln:320:69
                 |vpiParent:
                 \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
@@ -8922,25 +8887,11 @@ Design: (unnamed)
                 |vpiFullName:work@test_program.get_command_from_slave_0.get_command_data
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_Net: (work@test_program.get_command_from_slave_0.data), line:320:21, endln:320:24
-                |vpiParent:
-                \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
-                |vpiName:data
-                |vpiFullName:work@test_program.get_command_from_slave_0.data
-                |vpiNetType:1
-              |vpiImportTypespec:
               \_Net: (work@test_program.get_command_from_slave_0.get_command_byte_enable), line:321:53, endln:321:76
                 |vpiParent:
                 \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
                 |vpiName:get_command_byte_enable
                 |vpiFullName:work@test_program.get_command_from_slave_0.get_command_byte_enable
-                |vpiNetType:1
-              |vpiImportTypespec:
-              \_Net: (work@test_program.get_command_from_slave_0.byteenable), line:321:27, endln:321:30
-                |vpiParent:
-                \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
-                |vpiName:byteenable
-                |vpiFullName:work@test_program.get_command_from_slave_0.byteenable
                 |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:320:13, endln:320:72
@@ -8963,21 +8914,21 @@ Design: (unnamed)
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_data), line:320:32, endln:320:69
                     |vpiName:tb
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.tb), line:314:39, endln:314:41
+                    \_Net: (work@test_program.get_command_from_slave_0.tb), line:320:38, endln:320:40
                   |vpiActual:
                   \_RefObj: (dut), line:320:41, endln:320:44
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_data), line:320:32, endln:320:69
                     |vpiName:dut
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.dut), line:314:42, endln:314:45
+                    \_Net: (work@test_program.get_command_from_slave_0.dut), line:320:41, endln:320:44
                   |vpiActual:
                   \_RefObj: (slave_0), line:320:45, endln:320:52
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_data), line:320:32, endln:320:69
                     |vpiName:slave_0
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.slave_0), line:314:46, endln:314:53
+                    \_Net: (work@test_program.get_command_from_slave_0.slave_0), line:320:45, endln:320:52
                   |vpiActual:
                   \_RefObj: (get_command_data), line:320:53, endln:320:69
                     |vpiParent:
@@ -8997,7 +8948,7 @@ Design: (unnamed)
                     \_HierPath: (cmd.data[i]), line:320:16, endln:320:24
                     |vpiName:cmd
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+                    \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
                   |vpiActual:
                   \_BitSelect: (work@test_program.get_command_from_slave_0.cmd.data[i].data), line:320:21, endln:320:24
                     |vpiParent:
@@ -9005,7 +8956,7 @@ Design: (unnamed)
                     |vpiName:data
                     |vpiFullName:work@test_program.get_command_from_slave_0.cmd.data[i].data
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.data), line:320:21, endln:320:24
+                    \_TypespecMember: (data), line:50:37, endln:50:63
                     |vpiIndex:
                     \_RefObj: (work@test_program.get_command_from_slave_0.cmd.data[i].i), line:320:22, endln:320:23
                       |vpiParent:
@@ -9036,21 +8987,21 @@ Design: (unnamed)
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_byte_enable), line:321:32, endln:321:76
                     |vpiName:tb
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.tb), line:314:39, endln:314:41
+                    \_Net: (work@test_program.get_command_from_slave_0.tb), line:320:38, endln:320:40
                   |vpiActual:
                   \_RefObj: (dut), line:321:41, endln:321:44
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_byte_enable), line:321:32, endln:321:76
                     |vpiName:dut
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.dut), line:314:42, endln:314:45
+                    \_Net: (work@test_program.get_command_from_slave_0.dut), line:320:41, endln:320:44
                   |vpiActual:
                   \_RefObj: (slave_0), line:321:45, endln:321:52
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_0.$root.tb.dut.slave_0.get_command_byte_enable), line:321:32, endln:321:76
                     |vpiName:slave_0
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.slave_0), line:314:46, endln:314:53
+                    \_Net: (work@test_program.get_command_from_slave_0.slave_0), line:320:45, endln:320:52
                   |vpiActual:
                   \_RefObj: (get_command_byte_enable), line:321:53, endln:321:76
                     |vpiParent:
@@ -9070,7 +9021,7 @@ Design: (unnamed)
                     \_HierPath: (cmd.byteenable[i]), line:321:16, endln:321:30
                     |vpiName:cmd
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+                    \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
                   |vpiActual:
                   \_BitSelect: (work@test_program.get_command_from_slave_0.cmd.byteenable[i].byteenable), line:321:27, endln:321:30
                     |vpiParent:
@@ -9078,7 +9029,7 @@ Design: (unnamed)
                     |vpiName:byteenable
                     |vpiFullName:work@test_program.get_command_from_slave_0.cmd.byteenable[i].byteenable
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_0.byteenable), line:321:27, endln:321:30
+                    \_TypespecMember: (byteenable), line:51:37, endln:51:63
                     |vpiIndex:
                     \_RefObj: (work@test_program.get_command_from_slave_0.cmd.byteenable[i].i), line:321:28, endln:321:29
                       |vpiParent:
@@ -9138,7 +9089,7 @@ Design: (unnamed)
                   \_HierPath: (cmd.burstcount), line:319:29, endln:319:43
                   |vpiName:cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+                  \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
                 |vpiActual:
                 \_RefObj: (work@test_program.get_command_from_slave_0.burstcount), line:319:33, endln:319:43
                   |vpiParent:
@@ -9146,7 +9097,7 @@ Design: (unnamed)
                   |vpiName:burstcount
                   |vpiFullName:work@test_program.get_command_from_slave_0.burstcount
                   |vpiActual:
-                  \_Net: (work@test_program.get_command_from_slave_0.burstcount), line:314:11, endln:314:21
+                  \_TypespecMember: (burstcount), line:48:37, endln:48:47
                 |vpiName:cmd.burstcount
             |vpiStmt:
             \_Begin: (work@test_program.get_command_from_slave_0), line:319:50, endln:322:13
@@ -9159,13 +9110,6 @@ Design: (unnamed)
           \_IntTypespec: , line:319:14, endln:319:17
           |vpiImportTypespec:
           \_Variable: (work@test_program.get_command_from_slave_0.i), line:319:18, endln:319:19
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_command_from_slave_0.trans), line:318:14, endln:318:19
-            |vpiParent:
-            \_Begin: (work@test_program.get_command_from_slave_0), line:317:68, endln:323:10
-            |vpiName:trans
-            |vpiFullName:work@test_program.get_command_from_slave_0.trans
-            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:318:10, endln:318:27
             |vpiParent:
@@ -9190,14 +9134,14 @@ Design: (unnamed)
                 \_HierPath: (cmd.trans), line:318:13, endln:318:19
                 |vpiName:cmd
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+                \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
               |vpiActual:
               \_RefObj: (trans), line:318:14, endln:318:19
                 |vpiParent:
                 \_HierPath: (cmd.trans), line:318:13, endln:318:19
                 |vpiName:trans
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_0.trans), line:318:14, endln:318:19
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:cmd.trans
           |vpiStmt:
           \_ForStmt: (work@test_program.get_command_from_slave_0), line:319:10, endln:322:13
@@ -9206,13 +9150,6 @@ Design: (unnamed)
           |vpiParent:
           \_IfElse: , line:317:7, endln:325:10
           |vpiFullName:work@test_program.get_command_from_slave_0
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_command_from_slave_0.trans), line:324:14, endln:324:19
-            |vpiParent:
-            \_Begin: (work@test_program.get_command_from_slave_0), line:323:16, endln:325:10
-            |vpiName:trans
-            |vpiFullName:work@test_program.get_command_from_slave_0.trans
-            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:324:10, endln:324:26
             |vpiParent:
@@ -9237,14 +9174,14 @@ Design: (unnamed)
                 \_HierPath: (cmd.trans), line:324:13, endln:324:19
                 |vpiName:cmd
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+                \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
               |vpiActual:
               \_RefObj: (trans), line:324:14, endln:324:19
                 |vpiParent:
                 \_HierPath: (cmd.trans), line:324:13, endln:324:19
                 |vpiName:trans
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_0.trans), line:324:14, endln:324:19
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:cmd.trans
       |vpiStmt:
       \_ReturnStmt: , line:327:7, endln:327:17
@@ -9257,7 +9194,7 @@ Design: (unnamed)
           |vpiName:cmd
           |vpiFullName:work@test_program.get_command_from_slave_0.cmd
           |vpiActual:
-          \_Net: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
+          \_Variable: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -10374,6 +10311,20 @@ Design: (unnamed)
       \_Function: (work@test_program.get_read_response_from_master_1), line:409:4, endln:420:15
       |vpiFullName:work@test_program.get_read_response_from_master_1
       |vpiVariable:
+      \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+        |vpiParent:
+        \_Begin: (work@test_program.get_read_response_from_master_1)
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.get_read_response_from_master_1.rsp.Response), line:411:7, endln:411:15
+          |vpiParent:
+          \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+          |vpiName:Response
+          |vpiFullName:work@test_program.get_read_response_from_master_1.rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:rsp
+        |vpiFullName:work@test_program.get_read_response_from_master_1.rsp
+      |vpiVariable:
       \_Variable: (work@test_program.get_read_response_from_master_1.i), line:415:16, endln:415:17
         |vpiParent:
         \_Begin: (work@test_program.get_read_response_from_master_1)
@@ -10397,39 +10348,11 @@ Design: (unnamed)
           \_ForStmt: (work@test_program.get_read_response_from_master_1), line:415:7, endln:417:10
           |vpiFullName:work@test_program.get_read_response_from_master_1
           |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_1.tb), line:416:33, endln:416:35
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
-            |vpiName:tb
-            |vpiFullName:work@test_program.get_read_response_from_master_1.tb
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_1.dut), line:416:36, endln:416:39
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
-            |vpiName:dut
-            |vpiFullName:work@test_program.get_read_response_from_master_1.dut
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_1.master_1), line:416:40, endln:416:48
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
-            |vpiName:master_1
-            |vpiFullName:work@test_program.get_read_response_from_master_1.master_1
-            |vpiNetType:1
-          |vpiImportTypespec:
           \_Net: (work@test_program.get_read_response_from_master_1.get_response_data), line:416:49, endln:416:66
             |vpiParent:
             \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
             |vpiName:get_response_data
             |vpiFullName:work@test_program.get_read_response_from_master_1.get_response_data
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_read_response_from_master_1.data), line:416:18, endln:416:21
-            |vpiParent:
-            \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
-            |vpiName:data
-            |vpiFullName:work@test_program.get_read_response_from_master_1.data
             |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:416:10, endln:416:69
@@ -10452,21 +10375,21 @@ Design: (unnamed)
                 \_HierPath: (work@test_program.get_read_response_from_master_1.$root.tb.dut.master_1.get_response_data), line:416:27, endln:416:66
                 |vpiName:tb
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_1.tb), line:416:33, endln:416:35
+                \_Net: (work@test_program.get_read_response_from_master_1.tb), line:414:33, endln:414:35
               |vpiActual:
               \_RefObj: (dut), line:416:36, endln:416:39
                 |vpiParent:
                 \_HierPath: (work@test_program.get_read_response_from_master_1.$root.tb.dut.master_1.get_response_data), line:416:27, endln:416:66
                 |vpiName:dut
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_1.dut), line:416:36, endln:416:39
+                \_Net: (work@test_program.get_read_response_from_master_1.dut), line:414:36, endln:414:39
               |vpiActual:
               \_RefObj: (master_1), line:416:40, endln:416:48
                 |vpiParent:
                 \_HierPath: (work@test_program.get_read_response_from_master_1.$root.tb.dut.master_1.get_response_data), line:416:27, endln:416:66
                 |vpiName:master_1
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_1.master_1), line:416:40, endln:416:48
+                \_Net: (work@test_program.get_read_response_from_master_1.master_1), line:414:40, endln:414:48
               |vpiActual:
               \_RefObj: (get_response_data), line:416:49, endln:416:66
                 |vpiParent:
@@ -10486,7 +10409,7 @@ Design: (unnamed)
                 \_HierPath: (rsp.data[i]), line:416:13, endln:416:21
                 |vpiName:rsp
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+                \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
               |vpiActual:
               \_BitSelect: (work@test_program.get_read_response_from_master_1.rsp.data[i].data), line:416:18, endln:416:21
                 |vpiParent:
@@ -10494,7 +10417,7 @@ Design: (unnamed)
                 |vpiName:data
                 |vpiFullName:work@test_program.get_read_response_from_master_1.rsp.data[i].data
                 |vpiActual:
-                \_Net: (work@test_program.get_read_response_from_master_1.data), line:416:18, endln:416:21
+                \_TypespecMember: (data), line:59:37, endln:59:61
                 |vpiIndex:
                 \_RefObj: (work@test_program.get_read_response_from_master_1.rsp.data[i].i), line:416:19, endln:416:20
                   |vpiParent:
@@ -10504,13 +10427,6 @@ Design: (unnamed)
                   |vpiActual:
                   \_Variable: (work@test_program.get_read_response_from_master_1.i), line:415:16, endln:415:17
               |vpiName:rsp.data[i]
-        |vpiImportTypespec:
-        \_Net: (work@test_program.get_read_response_from_master_1.burstcount), line:415:31, endln:415:41
-          |vpiParent:
-          \_ForStmt: (work@test_program.get_read_response_from_master_1), line:415:7, endln:417:10
-          |vpiName:burstcount
-          |vpiFullName:work@test_program.get_read_response_from_master_1.burstcount
-          |vpiNetType:1
         |vpiForInitStmt:
         \_Assignment: , line:415:12, endln:415:21
           |vpiParent:
@@ -10561,7 +10477,7 @@ Design: (unnamed)
               \_HierPath: (rsp.burstcount), line:415:27, endln:415:41
               |vpiName:rsp
               |vpiActual:
-              \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+              \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
             |vpiActual:
             \_RefObj: (work@test_program.get_read_response_from_master_1.burstcount), line:415:31, endln:415:41
               |vpiParent:
@@ -10569,7 +10485,7 @@ Design: (unnamed)
               |vpiName:burstcount
               |vpiFullName:work@test_program.get_read_response_from_master_1.burstcount
               |vpiActual:
-              \_Net: (work@test_program.get_read_response_from_master_1.burstcount), line:415:31, endln:415:41
+              \_TypespecMember: (burstcount), line:58:37, endln:58:47
             |vpiName:rsp.burstcount
         |vpiStmt:
         \_Begin: (work@test_program.get_read_response_from_master_1), line:415:48, endln:417:10
@@ -10579,19 +10495,7 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_read_response_from_master_1)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
-        |vpiParent:
-        \_Begin: (work@test_program.get_read_response_from_master_1)
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.get_read_response_from_master_1.rsp.Response), line:411:7, endln:411:15
-          |vpiParent:
-          \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
-          |vpiName:Response
-          |vpiFullName:work@test_program.get_read_response_from_master_1.rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:rsp
-        |vpiFullName:work@test_program.get_read_response_from_master_1.rsp
+      \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
       |vpiImportTypespec:
       \_IntTypespec: , line:415:12, endln:415:15
       |vpiImportTypespec:
@@ -10623,13 +10527,6 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_read_response_from_master_1)
         |vpiName:get_response_burst_size
         |vpiFullName:work@test_program.get_read_response_from_master_1.get_response_burst_size
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_read_response_from_master_1.burstcount), line:414:11, endln:414:21
-        |vpiParent:
-        \_Begin: (work@test_program.get_read_response_from_master_1)
-        |vpiName:burstcount
-        |vpiFullName:work@test_program.get_read_response_from_master_1.burstcount
         |vpiNetType:1
       |vpiStmt:
       \_FuncCall: ($root.tb.dut.master_1.pop_response), line:413:7, endln:413:43
@@ -10695,14 +10592,14 @@ Design: (unnamed)
             \_HierPath: (rsp.burstcount), line:414:10, endln:414:21
             |vpiName:rsp
             |vpiActual:
-            \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+            \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
           |vpiActual:
           \_RefObj: (burstcount), line:414:11, endln:414:21
             |vpiParent:
             \_HierPath: (rsp.burstcount), line:414:10, endln:414:21
             |vpiName:burstcount
             |vpiActual:
-            \_Net: (work@test_program.get_read_response_from_master_1.burstcount), line:414:11, endln:414:21
+            \_TypespecMember: (burstcount), line:58:37, endln:58:47
           |vpiName:rsp.burstcount
       |vpiStmt:
       \_ForStmt: (work@test_program.get_read_response_from_master_1), line:415:7, endln:417:10
@@ -10717,7 +10614,7 @@ Design: (unnamed)
           |vpiName:rsp
           |vpiFullName:work@test_program.get_read_response_from_master_1.rsp
           |vpiActual:
-          \_Net: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
+          \_Variable: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -10745,20 +10642,22 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@test_program.get_command_from_slave_1), line:452:4, endln:471:15
       |vpiFullName:work@test_program.get_command_from_slave_1
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+      |vpiVariable:
+      \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
         |vpiParent:
         \_Begin: (work@test_program.get_command_from_slave_1)
         |vpiTypespec:
         \_RefTypespec: (work@test_program.get_command_from_slave_1.cmd.Command), line:454:7, endln:454:14
           |vpiParent:
-          \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+          \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
           |vpiName:Command
           |vpiFullName:work@test_program.get_command_from_slave_1.cmd.Command
           |vpiActual:
           \_TypedefTypespec: (Command), line:54:6, endln:54:13
         |vpiName:cmd
         |vpiFullName:work@test_program.get_command_from_slave_1.cmd
+      |vpiImportTypespec:
+      \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
       |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_1.tb), line:457:39, endln:457:41
         |vpiParent:
@@ -10788,25 +10687,11 @@ Design: (unnamed)
         |vpiFullName:work@test_program.get_command_from_slave_1.get_command_burst_count
         |vpiNetType:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_1.burstcount), line:457:11, endln:457:21
-        |vpiParent:
-        \_Begin: (work@test_program.get_command_from_slave_1)
-        |vpiName:burstcount
-        |vpiFullName:work@test_program.get_command_from_slave_1.burstcount
-        |vpiNetType:1
-      |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_1.get_command_address), line:458:54, endln:458:73
         |vpiParent:
         \_Begin: (work@test_program.get_command_from_slave_1)
         |vpiName:get_command_address
         |vpiFullName:work@test_program.get_command_from_slave_1.get_command_address
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_Net: (work@test_program.get_command_from_slave_1.addr), line:458:11, endln:458:15
-        |vpiParent:
-        \_Begin: (work@test_program.get_command_from_slave_1)
-        |vpiName:addr
-        |vpiFullName:work@test_program.get_command_from_slave_1.addr
         |vpiNetType:1
       |vpiImportTypespec:
       \_Net: (work@test_program.get_command_from_slave_1.get_command_request), line:460:32, endln:460:51
@@ -10886,14 +10771,14 @@ Design: (unnamed)
             \_HierPath: (cmd.burstcount), line:457:10, endln:457:21
             |vpiName:cmd
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+            \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
           |vpiActual:
           \_RefObj: (burstcount), line:457:11, endln:457:21
             |vpiParent:
             \_HierPath: (cmd.burstcount), line:457:10, endln:457:21
             |vpiName:burstcount
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_1.burstcount), line:457:11, endln:457:21
+            \_TypespecMember: (burstcount), line:48:37, endln:48:47
           |vpiName:cmd.burstcount
       |vpiStmt:
       \_Assignment: , line:458:7, endln:458:75
@@ -10950,14 +10835,14 @@ Design: (unnamed)
             \_HierPath: (cmd.addr), line:458:10, endln:458:15
             |vpiName:cmd
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+            \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
           |vpiActual:
           \_RefObj: (addr), line:458:11, endln:458:15
             |vpiParent:
             \_HierPath: (cmd.addr), line:458:10, endln:458:15
             |vpiName:addr
             |vpiActual:
-            \_Net: (work@test_program.get_command_from_slave_1.addr), line:458:11, endln:458:15
+            \_TypespecMember: (addr), line:49:37, endln:49:41
           |vpiName:cmd.addr
       |vpiStmt:
       \_IfElse: , line:460:7, endln:468:10
@@ -11044,18 +10929,25 @@ Design: (unnamed)
               \_ForStmt: (work@test_program.get_command_from_slave_1), line:462:10, endln:465:13
               |vpiFullName:work@test_program.get_command_from_slave_1
               |vpiImportTypespec:
-              \_Net: (work@test_program.get_command_from_slave_1.get_command_data), line:463:53, endln:463:69
+              \_Net: (work@test_program.get_command_from_slave_1.tb), line:464:38, endln:464:40
                 |vpiParent:
                 \_Begin: (work@test_program.get_command_from_slave_1), line:462:50, endln:465:13
-                |vpiName:get_command_data
-                |vpiFullName:work@test_program.get_command_from_slave_1.get_command_data
+                |vpiName:tb
+                |vpiFullName:work@test_program.get_command_from_slave_1.tb
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_Net: (work@test_program.get_command_from_slave_1.data), line:463:21, endln:463:24
+              \_Net: (work@test_program.get_command_from_slave_1.dut), line:464:41, endln:464:44
                 |vpiParent:
                 \_Begin: (work@test_program.get_command_from_slave_1), line:462:50, endln:465:13
-                |vpiName:data
-                |vpiFullName:work@test_program.get_command_from_slave_1.data
+                |vpiName:dut
+                |vpiFullName:work@test_program.get_command_from_slave_1.dut
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@test_program.get_command_from_slave_1.slave_1), line:464:45, endln:464:52
+                |vpiParent:
+                \_Begin: (work@test_program.get_command_from_slave_1), line:462:50, endln:465:13
+                |vpiName:slave_1
+                |vpiFullName:work@test_program.get_command_from_slave_1.slave_1
                 |vpiNetType:1
               |vpiImportTypespec:
               \_Net: (work@test_program.get_command_from_slave_1.get_command_byte_enable), line:464:53, endln:464:76
@@ -11065,11 +10957,11 @@ Design: (unnamed)
                 |vpiFullName:work@test_program.get_command_from_slave_1.get_command_byte_enable
                 |vpiNetType:1
               |vpiImportTypespec:
-              \_Net: (work@test_program.get_command_from_slave_1.byteenable), line:464:27, endln:464:30
+              \_Net: (work@test_program.get_command_from_slave_1.get_command_data), line:463:53, endln:463:69
                 |vpiParent:
                 \_Begin: (work@test_program.get_command_from_slave_1), line:462:50, endln:465:13
-                |vpiName:byteenable
-                |vpiFullName:work@test_program.get_command_from_slave_1.byteenable
+                |vpiName:get_command_data
+                |vpiFullName:work@test_program.get_command_from_slave_1.get_command_data
                 |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:463:13, endln:463:72
@@ -11092,21 +10984,21 @@ Design: (unnamed)
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_data), line:463:32, endln:463:69
                     |vpiName:tb
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.tb), line:457:39, endln:457:41
+                    \_Net: (work@test_program.get_command_from_slave_1.tb), line:464:38, endln:464:40
                   |vpiActual:
                   \_RefObj: (dut), line:463:41, endln:463:44
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_data), line:463:32, endln:463:69
                     |vpiName:dut
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.dut), line:457:42, endln:457:45
+                    \_Net: (work@test_program.get_command_from_slave_1.dut), line:464:41, endln:464:44
                   |vpiActual:
                   \_RefObj: (slave_1), line:463:45, endln:463:52
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_data), line:463:32, endln:463:69
                     |vpiName:slave_1
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.slave_1), line:457:46, endln:457:53
+                    \_Net: (work@test_program.get_command_from_slave_1.slave_1), line:464:45, endln:464:52
                   |vpiActual:
                   \_RefObj: (get_command_data), line:463:53, endln:463:69
                     |vpiParent:
@@ -11126,7 +11018,7 @@ Design: (unnamed)
                     \_HierPath: (cmd.data[i]), line:463:16, endln:463:24
                     |vpiName:cmd
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+                    \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
                   |vpiActual:
                   \_BitSelect: (work@test_program.get_command_from_slave_1.cmd.data[i].data), line:463:21, endln:463:24
                     |vpiParent:
@@ -11134,7 +11026,7 @@ Design: (unnamed)
                     |vpiName:data
                     |vpiFullName:work@test_program.get_command_from_slave_1.cmd.data[i].data
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.data), line:463:21, endln:463:24
+                    \_TypespecMember: (data), line:50:37, endln:50:63
                     |vpiIndex:
                     \_RefObj: (work@test_program.get_command_from_slave_1.cmd.data[i].i), line:463:22, endln:463:23
                       |vpiParent:
@@ -11165,21 +11057,21 @@ Design: (unnamed)
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_byte_enable), line:464:32, endln:464:76
                     |vpiName:tb
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.tb), line:457:39, endln:457:41
+                    \_Net: (work@test_program.get_command_from_slave_1.tb), line:464:38, endln:464:40
                   |vpiActual:
                   \_RefObj: (dut), line:464:41, endln:464:44
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_byte_enable), line:464:32, endln:464:76
                     |vpiName:dut
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.dut), line:457:42, endln:457:45
+                    \_Net: (work@test_program.get_command_from_slave_1.dut), line:464:41, endln:464:44
                   |vpiActual:
                   \_RefObj: (slave_1), line:464:45, endln:464:52
                     |vpiParent:
                     \_HierPath: (work@test_program.get_command_from_slave_1.$root.tb.dut.slave_1.get_command_byte_enable), line:464:32, endln:464:76
                     |vpiName:slave_1
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.slave_1), line:457:46, endln:457:53
+                    \_Net: (work@test_program.get_command_from_slave_1.slave_1), line:464:45, endln:464:52
                   |vpiActual:
                   \_RefObj: (get_command_byte_enable), line:464:53, endln:464:76
                     |vpiParent:
@@ -11199,7 +11091,7 @@ Design: (unnamed)
                     \_HierPath: (cmd.byteenable[i]), line:464:16, endln:464:30
                     |vpiName:cmd
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+                    \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
                   |vpiActual:
                   \_BitSelect: (work@test_program.get_command_from_slave_1.cmd.byteenable[i].byteenable), line:464:27, endln:464:30
                     |vpiParent:
@@ -11207,7 +11099,7 @@ Design: (unnamed)
                     |vpiName:byteenable
                     |vpiFullName:work@test_program.get_command_from_slave_1.cmd.byteenable[i].byteenable
                     |vpiActual:
-                    \_Net: (work@test_program.get_command_from_slave_1.byteenable), line:464:27, endln:464:30
+                    \_TypespecMember: (byteenable), line:51:37, endln:51:63
                     |vpiIndex:
                     \_RefObj: (work@test_program.get_command_from_slave_1.cmd.byteenable[i].i), line:464:28, endln:464:29
                       |vpiParent:
@@ -11267,7 +11159,7 @@ Design: (unnamed)
                   \_HierPath: (cmd.burstcount), line:462:29, endln:462:43
                   |vpiName:cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+                  \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
                 |vpiActual:
                 \_RefObj: (work@test_program.get_command_from_slave_1.burstcount), line:462:33, endln:462:43
                   |vpiParent:
@@ -11275,7 +11167,7 @@ Design: (unnamed)
                   |vpiName:burstcount
                   |vpiFullName:work@test_program.get_command_from_slave_1.burstcount
                   |vpiActual:
-                  \_Net: (work@test_program.get_command_from_slave_1.burstcount), line:457:11, endln:457:21
+                  \_TypespecMember: (burstcount), line:48:37, endln:48:47
                 |vpiName:cmd.burstcount
             |vpiStmt:
             \_Begin: (work@test_program.get_command_from_slave_1), line:462:50, endln:465:13
@@ -11288,13 +11180,6 @@ Design: (unnamed)
           \_IntTypespec: , line:462:14, endln:462:17
           |vpiImportTypespec:
           \_Variable: (work@test_program.get_command_from_slave_1.i), line:462:18, endln:462:19
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_command_from_slave_1.trans), line:461:14, endln:461:19
-            |vpiParent:
-            \_Begin: (work@test_program.get_command_from_slave_1), line:460:68, endln:466:10
-            |vpiName:trans
-            |vpiFullName:work@test_program.get_command_from_slave_1.trans
-            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:461:10, endln:461:27
             |vpiParent:
@@ -11319,14 +11204,14 @@ Design: (unnamed)
                 \_HierPath: (cmd.trans), line:461:13, endln:461:19
                 |vpiName:cmd
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+                \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
               |vpiActual:
               \_RefObj: (trans), line:461:14, endln:461:19
                 |vpiParent:
                 \_HierPath: (cmd.trans), line:461:13, endln:461:19
                 |vpiName:trans
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_1.trans), line:461:14, endln:461:19
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:cmd.trans
           |vpiStmt:
           \_ForStmt: (work@test_program.get_command_from_slave_1), line:462:10, endln:465:13
@@ -11335,13 +11220,6 @@ Design: (unnamed)
           |vpiParent:
           \_IfElse: , line:460:7, endln:468:10
           |vpiFullName:work@test_program.get_command_from_slave_1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.get_command_from_slave_1.trans), line:467:14, endln:467:19
-            |vpiParent:
-            \_Begin: (work@test_program.get_command_from_slave_1), line:466:16, endln:468:10
-            |vpiName:trans
-            |vpiFullName:work@test_program.get_command_from_slave_1.trans
-            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:467:10, endln:467:26
             |vpiParent:
@@ -11366,14 +11244,14 @@ Design: (unnamed)
                 \_HierPath: (cmd.trans), line:467:13, endln:467:19
                 |vpiName:cmd
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+                \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
               |vpiActual:
               \_RefObj: (trans), line:467:14, endln:467:19
                 |vpiParent:
                 \_HierPath: (cmd.trans), line:467:13, endln:467:19
                 |vpiName:trans
                 |vpiActual:
-                \_Net: (work@test_program.get_command_from_slave_1.trans), line:467:14, endln:467:19
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:cmd.trans
       |vpiStmt:
       \_ReturnStmt: , line:470:7, endln:470:17
@@ -11386,7 +11264,7 @@ Design: (unnamed)
           |vpiName:cmd
           |vpiFullName:work@test_program.get_command_from_slave_1.cmd
           |vpiActual:
-          \_Net: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
+          \_Variable: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -11974,6 +11852,48 @@ Design: (unnamed)
       \_Task: (work@test_program.master_send_commands), line:544:4, endln:568:11
       |vpiFullName:work@test_program.master_send_commands
       |vpiVariable:
+      \_Variable: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
+        |vpiParent:
+        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.master_send_commands.cmd.Command), line:550:7, endln:550:14
+          |vpiParent:
+          \_Variable: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
+          |vpiName:Command
+          |vpiFullName:work@test_program.master_send_commands.cmd.Command
+          |vpiActual:
+          \_TypedefTypespec: (Command), line:54:6, endln:54:13
+        |vpiName:cmd
+        |vpiFullName:work@test_program.master_send_commands.cmd
+      |vpiVariable:
+      \_Variable: (work@test_program.master_send_commands.rsp), line:551:19, endln:551:22
+        |vpiParent:
+        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.master_send_commands.rsp.Response), line:551:7, endln:551:15
+          |vpiParent:
+          \_Variable: (work@test_program.master_send_commands.rsp), line:551:19, endln:551:22
+          |vpiName:Response
+          |vpiFullName:work@test_program.master_send_commands.rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:rsp
+        |vpiFullName:work@test_program.master_send_commands.rsp
+      |vpiVariable:
+      \_Variable: (work@test_program.master_send_commands.exp_rsp), line:551:24, endln:551:31
+        |vpiParent:
+        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.master_send_commands.exp_rsp.Response), line:551:7, endln:551:15
+          |vpiParent:
+          \_Variable: (work@test_program.master_send_commands.exp_rsp), line:551:24, endln:551:31
+          |vpiName:Response
+          |vpiFullName:work@test_program.master_send_commands.exp_rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:exp_rsp
+        |vpiFullName:work@test_program.master_send_commands.exp_rsp
+      |vpiVariable:
       \_Variable: (work@test_program.master_send_commands.master_id), line:552:19, endln:552:28
         |vpiParent:
         \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
@@ -12151,14 +12071,14 @@ Design: (unnamed)
                   |vpiParent:
                   \_Function: (work@test_program.create_command), line:570:4, endln:599:15
                   |vpiFullName:work@test_program.create_command
-                  |vpiImportTypespec:
-                  \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                  |vpiVariable:
+                  \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                     |vpiParent:
                     \_Begin: (work@test_program.create_command)
                     |vpiTypespec:
                     \_RefTypespec: (work@test_program.create_command.cmd.Command), line:576:7, endln:576:14
                       |vpiParent:
-                      \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                      \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                       |vpiName:Command
                       |vpiFullName:work@test_program.create_command.cmd.Command
                       |vpiActual:
@@ -12166,19 +12086,7 @@ Design: (unnamed)
                     |vpiName:cmd
                     |vpiFullName:work@test_program.create_command.cmd
                   |vpiImportTypespec:
-                  \_Net: (work@test_program.create_command.addr), line:585:11, endln:585:15
-                    |vpiParent:
-                    \_Begin: (work@test_program.create_command)
-                    |vpiName:addr
-                    |vpiFullName:work@test_program.create_command.addr
-                    |vpiNetType:1
-                  |vpiImportTypespec:
-                  \_Net: (work@test_program.create_command.cmd_delay), line:586:11, endln:586:20
-                    |vpiParent:
-                    \_Begin: (work@test_program.create_command)
-                    |vpiName:cmd_delay
-                    |vpiFullName:work@test_program.create_command.cmd_delay
-                    |vpiNetType:1
+                  \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                   |vpiStmt:
                   \_IfElse: , line:578:7, endln:582:10
                     |vpiParent:
@@ -12209,13 +12117,6 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:578:7, endln:582:10
                       |vpiFullName:work@test_program.create_command
-                      |vpiImportTypespec:
-                      \_Net: (work@test_program.create_command.burstcount), line:579:14, endln:579:24
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:578:31, endln:580:10
-                        |vpiName:burstcount
-                        |vpiFullName:work@test_program.create_command.burstcount
-                        |vpiNetType:1
                       |vpiStmt:
                       \_Assignment: , line:579:10, endln:579:61
                         |vpiParent:
@@ -12241,20 +12142,22 @@ Design: (unnamed)
                               |vpiParent:
                               \_Function: (work@test_program.randomize_burstcount), line:601:4, endln:607:15
                               |vpiFullName:work@test_program.randomize_burstcount
-                              |vpiImportTypespec:
-                              \_Net: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
+                              |vpiVariable:
+                              \_Variable: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
                                 |vpiParent:
                                 \_Begin: (work@test_program.randomize_burstcount)
                                 |vpiTypespec:
                                 \_RefTypespec: (work@test_program.randomize_burstcount.burstcount.Burstcount), line:603:7, endln:603:17
                                   |vpiParent:
-                                  \_Net: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
+                                  \_Variable: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
                                   |vpiName:Burstcount
                                   |vpiFullName:work@test_program.randomize_burstcount.burstcount.Burstcount
                                   |vpiActual:
                                   \_TypedefTypespec: (Burstcount), line:31:37, endln:31:47
                                 |vpiName:burstcount
                                 |vpiFullName:work@test_program.randomize_burstcount.burstcount
+                              |vpiImportTypespec:
+                              \_Variable: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
                               |vpiStmt:
                               \_Assignment: , line:605:7, endln:605:48
                                 |vpiParent:
@@ -12293,7 +12196,7 @@ Design: (unnamed)
                                   |vpiName:burstcount
                                   |vpiFullName:work@test_program.randomize_burstcount.burstcount
                                   |vpiActual:
-                                  \_Net: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
+                                  \_Variable: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
                               |vpiStmt:
                               \_ReturnStmt: , line:606:7, endln:606:24
                                 |vpiParent:
@@ -12305,7 +12208,7 @@ Design: (unnamed)
                                   |vpiName:burstcount
                                   |vpiFullName:work@test_program.randomize_burstcount.burstcount
                                   |vpiActual:
-                                  \_Net: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
+                                  \_Variable: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
                             |vpiVisibility:1
                             |vpiAutomatic:1
                             |vpiReturn:
@@ -12333,27 +12236,20 @@ Design: (unnamed)
                             \_HierPath: (cmd.burstcount), line:579:13, endln:579:24
                             |vpiName:cmd
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                            \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                           |vpiActual:
                           \_RefObj: (burstcount), line:579:14, endln:579:24
                             |vpiParent:
                             \_HierPath: (cmd.burstcount), line:579:13, endln:579:24
                             |vpiName:burstcount
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.burstcount), line:579:14, endln:579:24
+                            \_TypespecMember: (burstcount), line:48:37, endln:48:47
                           |vpiName:cmd.burstcount
                     |vpiElseStmt:
                     \_Begin: (work@test_program.create_command), line:580:16, endln:582:10
                       |vpiParent:
                       \_IfElse: , line:578:7, endln:582:10
                       |vpiFullName:work@test_program.create_command
-                      |vpiImportTypespec:
-                      \_Net: (work@test_program.create_command.burstcount), line:581:14, endln:581:24
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:580:16, endln:582:10
-                        |vpiName:burstcount
-                        |vpiFullName:work@test_program.create_command.burstcount
-                        |vpiNetType:1
                       |vpiStmt:
                       \_Assignment: , line:581:10, endln:581:40
                         |vpiParent:
@@ -12378,14 +12274,14 @@ Design: (unnamed)
                             \_HierPath: (cmd.burstcount), line:581:13, endln:581:24
                             |vpiName:cmd
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                            \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                           |vpiActual:
                           \_RefObj: (burstcount), line:581:14, endln:581:24
                             |vpiParent:
                             \_HierPath: (cmd.burstcount), line:581:13, endln:581:24
                             |vpiName:burstcount
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.burstcount), line:581:14, endln:581:24
+                            \_TypespecMember: (burstcount), line:48:37, endln:48:47
                           |vpiName:cmd.burstcount
                   |vpiStmt:
                   \_Assignment: , line:584:7, endln:584:41
@@ -12411,14 +12307,14 @@ Design: (unnamed)
                         \_HierPath: (cmd.trans), line:584:10, endln:584:16
                         |vpiName:cmd
                         |vpiActual:
-                        \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                        \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                       |vpiActual:
                       \_RefObj: (trans), line:584:11, endln:584:16
                         |vpiParent:
                         \_HierPath: (cmd.trans), line:584:10, endln:584:16
                         |vpiName:trans
                         |vpiActual:
-                        \_IODecl: (trans), line:571:22, endln:571:27
+                        \_TypespecMember: (trans), line:47:37, endln:47:42
                       |vpiName:cmd.trans
                   |vpiStmt:
                   \_Assignment: , line:585:7, endln:585:77
@@ -12725,14 +12621,14 @@ Design: (unnamed)
                         \_HierPath: (cmd.addr), line:585:10, endln:585:15
                         |vpiName:cmd
                         |vpiActual:
-                        \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                        \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                       |vpiActual:
                       \_RefObj: (addr), line:585:11, endln:585:15
                         |vpiParent:
                         \_HierPath: (cmd.addr), line:585:10, endln:585:15
                         |vpiName:addr
                         |vpiActual:
-                        \_Net: (work@test_program.create_command.addr), line:585:11, endln:585:15
+                        \_TypespecMember: (addr), line:49:37, endln:49:41
                       |vpiName:cmd.addr
                   |vpiStmt:
                   \_Assignment: , line:586:7, endln:586:71
@@ -12775,14 +12671,14 @@ Design: (unnamed)
                         \_HierPath: (cmd.cmd_delay), line:586:10, endln:586:20
                         |vpiName:cmd
                         |vpiActual:
-                        \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                        \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                       |vpiActual:
                       \_RefObj: (cmd_delay), line:586:11, endln:586:20
                         |vpiParent:
                         \_HierPath: (cmd.cmd_delay), line:586:10, endln:586:20
                         |vpiName:cmd_delay
                         |vpiActual:
-                        \_Net: (work@test_program.create_command.cmd_delay), line:586:11, endln:586:20
+                        \_TypespecMember: (cmd_delay), line:52:37, endln:52:46
                       |vpiName:cmd.cmd_delay
                   |vpiStmt:
                   \_IfElse: , line:588:7, endln:596:10
@@ -12837,27 +12733,6 @@ Design: (unnamed)
                           |vpiParent:
                           \_ForStmt: (work@test_program.create_command), line:589:10, endln:593:13
                           |vpiFullName:work@test_program.create_command
-                          |vpiImportTypespec:
-                          \_Net: (work@test_program.create_command.data), line:590:21, endln:590:24
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_command), line:589:51, endln:593:13
-                            |vpiName:data
-                            |vpiFullName:work@test_program.create_command.data
-                            |vpiNetType:1
-                          |vpiImportTypespec:
-                          \_Net: (work@test_program.create_command.byteenable), line:591:27, endln:591:30
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_command), line:589:51, endln:593:13
-                            |vpiName:byteenable
-                            |vpiFullName:work@test_program.create_command.byteenable
-                            |vpiNetType:1
-                          |vpiImportTypespec:
-                          \_Net: (work@test_program.create_command.data_idles), line:592:27, endln:592:30
-                            |vpiParent:
-                            \_Begin: (work@test_program.create_command), line:589:51, endln:593:13
-                            |vpiName:data_idles
-                            |vpiFullName:work@test_program.create_command.data_idles
-                            |vpiNetType:1
                           |vpiStmt:
                           \_Assignment: , line:590:13, endln:590:43
                             |vpiParent:
@@ -12883,7 +12758,7 @@ Design: (unnamed)
                                 \_HierPath: (cmd.data[i]), line:590:16, endln:590:24
                                 |vpiName:cmd
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                                \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                               |vpiActual:
                               \_BitSelect: (work@test_program.create_command.cmd.data[i].data), line:590:21, endln:590:24
                                 |vpiParent:
@@ -12891,7 +12766,7 @@ Design: (unnamed)
                                 |vpiName:data
                                 |vpiFullName:work@test_program.create_command.cmd.data[i].data
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.data), line:590:21, endln:590:24
+                                \_TypespecMember: (data), line:50:37, endln:50:63
                                 |vpiIndex:
                                 \_RefObj: (work@test_program.create_command.cmd.data[i].i), line:590:22, endln:590:23
                                   |vpiParent:
@@ -12943,7 +12818,7 @@ Design: (unnamed)
                                 \_HierPath: (cmd.byteenable[i]), line:591:16, endln:591:30
                                 |vpiName:cmd
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                                \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                               |vpiActual:
                               \_BitSelect: (work@test_program.create_command.cmd.byteenable[i].byteenable), line:591:27, endln:591:30
                                 |vpiParent:
@@ -12951,7 +12826,7 @@ Design: (unnamed)
                                 |vpiName:byteenable
                                 |vpiFullName:work@test_program.create_command.cmd.byteenable[i].byteenable
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.byteenable), line:591:27, endln:591:30
+                                \_TypespecMember: (byteenable), line:51:37, endln:51:63
                                 |vpiIndex:
                                 \_RefObj: (work@test_program.create_command.cmd.byteenable[i].i), line:591:28, endln:591:29
                                   |vpiParent:
@@ -13002,7 +12877,7 @@ Design: (unnamed)
                                 \_HierPath: (cmd.data_idles[i]), line:592:16, endln:592:30
                                 |vpiName:cmd
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                                \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                               |vpiActual:
                               \_BitSelect: (work@test_program.create_command.cmd.data_idles[i].data_idles), line:592:27, endln:592:30
                                 |vpiParent:
@@ -13010,7 +12885,7 @@ Design: (unnamed)
                                 |vpiName:data_idles
                                 |vpiFullName:work@test_program.create_command.cmd.data_idles[i].data_idles
                                 |vpiActual:
-                                \_Net: (work@test_program.create_command.data_idles), line:592:27, endln:592:30
+                                \_TypespecMember: (data_idles), line:53:37, endln:53:63
                                 |vpiIndex:
                                 \_RefObj: (work@test_program.create_command.cmd.data_idles[i].i), line:592:28, endln:592:29
                                   |vpiParent:
@@ -13020,13 +12895,6 @@ Design: (unnamed)
                                   |vpiActual:
                                   \_Variable: (work@test_program.create_command.i), line:589:19, endln:589:20
                               |vpiName:cmd.data_idles[i]
-                        |vpiImportTypespec:
-                        \_Net: (work@test_program.create_command.burstcount), line:589:34, endln:589:44
-                          |vpiParent:
-                          \_ForStmt: (work@test_program.create_command), line:589:10, endln:593:13
-                          |vpiName:burstcount
-                          |vpiFullName:work@test_program.create_command.burstcount
-                          |vpiNetType:1
                         |vpiForInitStmt:
                         \_Assignment: , line:589:15, endln:589:24
                           |vpiParent:
@@ -13077,7 +12945,7 @@ Design: (unnamed)
                               \_HierPath: (cmd.burstcount), line:589:30, endln:589:44
                               |vpiName:cmd
                               |vpiActual:
-                              \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                              \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                             |vpiActual:
                             \_RefObj: (work@test_program.create_command.burstcount), line:589:34, endln:589:44
                               |vpiParent:
@@ -13085,7 +12953,7 @@ Design: (unnamed)
                               |vpiName:burstcount
                               |vpiFullName:work@test_program.create_command.burstcount
                               |vpiActual:
-                              \_Net: (work@test_program.create_command.burstcount), line:589:34, endln:589:44
+                              \_TypespecMember: (burstcount), line:48:37, endln:48:47
                             |vpiName:cmd.burstcount
                         |vpiStmt:
                         \_Begin: (work@test_program.create_command), line:589:51, endln:593:13
@@ -13105,13 +12973,6 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:588:7, endln:596:10
                       |vpiFullName:work@test_program.create_command
-                      |vpiImportTypespec:
-                      \_Net: (work@test_program.create_command.data_idles), line:595:24, endln:595:27
-                        |vpiParent:
-                        \_Begin: (work@test_program.create_command), line:594:16, endln:596:10
-                        |vpiName:data_idles
-                        |vpiFullName:work@test_program.create_command.data_idles
-                        |vpiNetType:1
                       |vpiStmt:
                       \_Assignment: , line:595:10, endln:595:68
                         |vpiParent:
@@ -13153,7 +13014,7 @@ Design: (unnamed)
                             \_HierPath: (cmd.data_idles[0]), line:595:13, endln:595:27
                             |vpiName:cmd
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                            \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                           |vpiActual:
                           \_BitSelect: (work@test_program.create_command.cmd.data_idles[0].data_idles), line:595:24, endln:595:27
                             |vpiParent:
@@ -13161,7 +13022,7 @@ Design: (unnamed)
                             |vpiName:data_idles
                             |vpiFullName:work@test_program.create_command.cmd.data_idles[0].data_idles
                             |vpiActual:
-                            \_Net: (work@test_program.create_command.data_idles), line:595:24, endln:595:27
+                            \_TypespecMember: (data_idles), line:53:37, endln:53:63
                             |vpiIndex:
                             \_Constant: , line:595:25, endln:595:26
                               |vpiParent:
@@ -13182,7 +13043,7 @@ Design: (unnamed)
                       |vpiName:cmd
                       |vpiFullName:work@test_program.create_command.cmd
                       |vpiActual:
-                      \_Net: (work@test_program.create_command.cmd), line:576:15, endln:576:18
+                      \_Variable: (work@test_program.create_command.cmd), line:576:15, endln:576:18
                 |vpiTypespec:
                 \_IntTypespec: , line:573:7, endln:573:10
                   |vpiParent:
@@ -13279,7 +13140,7 @@ Design: (unnamed)
               |vpiName:cmd
               |vpiFullName:work@test_program.master_send_commands.cmd
               |vpiActual:
-              \_Net: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
+              \_Variable: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
           |vpiStmt:
           \_TaskCall: (queue_command), line:565:10, endln:565:49
             |vpiParent:
@@ -13392,13 +13253,13 @@ Design: (unnamed)
                         \_IfElse: , line:636:10, endln:640:13
                         |vpiFullName:work@test_program.save_command_master
                         |vpiStmt:
-                        \_MethodFuncCall: (push_back), line:637:13, endln:637:64
+                        \_MethodFuncCall: (push_back), line:637:51, endln:637:65
                           |vpiParent:
                           \_Begin: (work@test_program.save_command_master), line:636:34, endln:638:13
                           |vpiArgument:
                           \_RefObj: (work@test_program.save_command_master.cmd), line:637:61, endln:637:64
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:637:13, endln:637:64
+                            \_MethodFuncCall: (push_back), line:637:51, endln:637:65
                             |vpiName:cmd
                             |vpiFullName:work@test_program.save_command_master.cmd
                             |vpiActual:
@@ -13406,12 +13267,12 @@ Design: (unnamed)
                           |vpiName:
                           \_Identifier: (push_back)
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:637:13, endln:637:64
+                            \_MethodFuncCall: (push_back), line:637:51, endln:637:65
                             |vpiName:push_back
                           |vpiPrefix:
                           \_RefObj: (work@test_program.save_command_master.write_command_queue_master), line:637:13, endln:637:39
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:637:13, endln:637:64
+                            \_MethodFuncCall: (push_back), line:637:51, endln:637:65
                             |vpiName:write_command_queue_master
                             |vpiFullName:work@test_program.save_command_master.write_command_queue_master
                             |vpiActual:
@@ -13422,13 +13283,13 @@ Design: (unnamed)
                         \_IfElse: , line:636:10, endln:640:13
                         |vpiFullName:work@test_program.save_command_master
                         |vpiStmt:
-                        \_MethodFuncCall: (push_back), line:639:13, endln:639:63
+                        \_MethodFuncCall: (push_back), line:639:50, endln:639:64
                           |vpiParent:
                           \_Begin: (work@test_program.save_command_master), line:638:19, endln:640:13
                           |vpiArgument:
                           \_RefObj: (work@test_program.save_command_master.cmd), line:639:60, endln:639:63
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:639:13, endln:639:63
+                            \_MethodFuncCall: (push_back), line:639:50, endln:639:64
                             |vpiName:cmd
                             |vpiFullName:work@test_program.save_command_master.cmd
                             |vpiActual:
@@ -13436,12 +13297,12 @@ Design: (unnamed)
                           |vpiName:
                           \_Identifier: (push_back)
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:639:13, endln:639:63
+                            \_MethodFuncCall: (push_back), line:639:50, endln:639:64
                             |vpiName:push_back
                           |vpiPrefix:
                           \_RefObj: (work@test_program.save_command_master.read_command_queue_master), line:639:13, endln:639:38
                             |vpiParent:
-                            \_MethodFuncCall: (push_back), line:639:13, endln:639:63
+                            \_MethodFuncCall: (push_back), line:639:50, endln:639:64
                             |vpiName:read_command_queue_master
                             |vpiFullName:work@test_program.save_command_master.read_command_queue_master
                             |vpiActual:
@@ -13872,13 +13733,13 @@ Design: (unnamed)
                           \_IfElse: , line:650:7, endln:654:10
                           |vpiFullName:work@test_program.save_command_slave
                           |vpiStmt:
-                          \_MethodFuncCall: (push_back), line:651:10, endln:651:59
+                          \_MethodFuncCall: (push_back), line:651:46, endln:651:60
                             |vpiParent:
                             \_Begin: (work@test_program.save_command_slave), line:650:31, endln:652:10
                             |vpiArgument:
                             \_RefObj: (work@test_program.save_command_slave.cmd), line:651:56, endln:651:59
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:651:10, endln:651:59
+                              \_MethodFuncCall: (push_back), line:651:46, endln:651:60
                               |vpiName:cmd
                               |vpiFullName:work@test_program.save_command_slave.cmd
                               |vpiActual:
@@ -13886,12 +13747,12 @@ Design: (unnamed)
                             |vpiName:
                             \_Identifier: (push_back)
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:651:10, endln:651:59
+                              \_MethodFuncCall: (push_back), line:651:46, endln:651:60
                               |vpiName:push_back
                             |vpiPrefix:
                             \_RefObj: (work@test_program.save_command_slave.write_command_queue_slave), line:651:10, endln:651:35
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:651:10, endln:651:59
+                              \_MethodFuncCall: (push_back), line:651:46, endln:651:60
                               |vpiName:write_command_queue_slave
                               |vpiFullName:work@test_program.save_command_slave.write_command_queue_slave
                               |vpiActual:
@@ -13902,13 +13763,13 @@ Design: (unnamed)
                           \_IfElse: , line:650:7, endln:654:10
                           |vpiFullName:work@test_program.save_command_slave
                           |vpiStmt:
-                          \_MethodFuncCall: (push_back), line:653:10, endln:653:58
+                          \_MethodFuncCall: (push_back), line:653:45, endln:653:59
                             |vpiParent:
                             \_Begin: (work@test_program.save_command_slave), line:652:16, endln:654:10
                             |vpiArgument:
                             \_RefObj: (work@test_program.save_command_slave.cmd), line:653:55, endln:653:58
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:653:10, endln:653:58
+                              \_MethodFuncCall: (push_back), line:653:45, endln:653:59
                               |vpiName:cmd
                               |vpiFullName:work@test_program.save_command_slave.cmd
                               |vpiActual:
@@ -13916,12 +13777,12 @@ Design: (unnamed)
                             |vpiName:
                             \_Identifier: (push_back)
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:653:10, endln:653:58
+                              \_MethodFuncCall: (push_back), line:653:45, endln:653:59
                               |vpiName:push_back
                             |vpiPrefix:
                             \_RefObj: (work@test_program.save_command_slave.read_command_queue_slave), line:653:10, endln:653:34
                               |vpiParent:
-                              \_MethodFuncCall: (push_back), line:653:10, endln:653:58
+                              \_MethodFuncCall: (push_back), line:653:45, endln:653:59
                               |vpiName:read_command_queue_slave
                               |vpiFullName:work@test_program.save_command_slave.read_command_queue_slave
                               |vpiActual:
@@ -14212,7 +14073,7 @@ Design: (unnamed)
               |vpiName:cmd
               |vpiFullName:work@test_program.master_send_commands.cmd
               |vpiActual:
-              \_Net: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
+              \_Variable: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
             |vpiArgument:
             \_RefObj: (work@test_program.master_send_commands.master_id), line:565:29, endln:565:38
               |vpiParent:
@@ -14290,47 +14151,11 @@ Design: (unnamed)
         \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.master_send_commands.cmd.Command), line:550:7, endln:550:14
-          |vpiParent:
-          \_Net: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
-          |vpiName:Command
-          |vpiFullName:work@test_program.master_send_commands.cmd.Command
-          |vpiActual:
-          \_TypedefTypespec: (Command), line:54:6, endln:54:13
-        |vpiName:cmd
-        |vpiFullName:work@test_program.master_send_commands.cmd
+      \_Variable: (work@test_program.master_send_commands.cmd), line:550:19, endln:550:22
       |vpiImportTypespec:
-      \_Net: (work@test_program.master_send_commands.rsp), line:551:19, endln:551:22
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.master_send_commands.rsp.Response), line:551:7, endln:551:15
-          |vpiParent:
-          \_Net: (work@test_program.master_send_commands.rsp), line:551:19, endln:551:22
-          |vpiName:Response
-          |vpiFullName:work@test_program.master_send_commands.rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:rsp
-        |vpiFullName:work@test_program.master_send_commands.rsp
+      \_Variable: (work@test_program.master_send_commands.rsp), line:551:19, endln:551:22
       |vpiImportTypespec:
-      \_Net: (work@test_program.master_send_commands.exp_rsp), line:551:24, endln:551:31
-        |vpiParent:
-        \_Begin: (work@test_program.master_send_commands), line:550:7, endln:566:10
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.master_send_commands.exp_rsp.Response), line:551:7, endln:551:15
-          |vpiParent:
-          \_Net: (work@test_program.master_send_commands.exp_rsp), line:551:24, endln:551:31
-          |vpiName:Response
-          |vpiFullName:work@test_program.master_send_commands.exp_rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:exp_rsp
-        |vpiFullName:work@test_program.master_send_commands.exp_rsp
+      \_Variable: (work@test_program.master_send_commands.exp_rsp), line:551:24, endln:551:31
       |vpiImportTypespec:
       \_IntTypespec: , line:552:7, endln:552:10
       |vpiImportTypespec:
@@ -14425,6 +14250,20 @@ Design: (unnamed)
       \_Function: (work@test_program.get_expected_command_for_slave), line:682:4, endln:717:15
       |vpiFullName:work@test_program.get_expected_command_for_slave
       |vpiVariable:
+      \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+        |vpiParent:
+        \_Begin: (work@test_program.get_expected_command_for_slave)
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.get_expected_command_for_slave.exp_cmd.Command), line:687:7, endln:687:14
+          |vpiParent:
+          \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+          |vpiName:Command
+          |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd.Command
+          |vpiActual:
+          \_TypedefTypespec: (Command), line:54:6, endln:54:13
+        |vpiName:exp_cmd
+        |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
+      |vpiVariable:
       \_Variable: (work@test_program.get_expected_command_for_slave.found), line:688:11, endln:688:16
         |vpiParent:
         \_Begin: (work@test_program.get_expected_command_for_slave)
@@ -14443,19 +14282,7 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_expected_command_for_slave)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
-        |vpiParent:
-        \_Begin: (work@test_program.get_expected_command_for_slave)
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.get_expected_command_for_slave.exp_cmd.Command), line:687:7, endln:687:14
-          |vpiParent:
-          \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
-          |vpiName:Command
-          |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd.Command
-          |vpiActual:
-          \_TypedefTypespec: (Command), line:54:6, endln:54:13
-        |vpiName:exp_cmd
-        |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
+      \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
       |vpiImportTypespec:
       \_IntTypespec: , line:688:7, endln:688:10
       |vpiImportTypespec:
@@ -14528,13 +14355,6 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:691:10, endln:698:13
               |vpiFullName:work@test_program.get_expected_command_for_slave
-              |vpiImportTypespec:
-              \_Net: (work@test_program.get_expected_command_for_slave.addr), line:693:25, endln:693:29
-                |vpiParent:
-                \_Begin: (work@test_program.get_expected_command_for_slave), line:691:58, endln:698:13
-                |vpiName:addr
-                |vpiFullName:work@test_program.get_expected_command_for_slave.addr
-                |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:692:13, endln:692:61
                 |vpiParent:
@@ -14572,7 +14392,7 @@ Design: (unnamed)
                   |vpiName:exp_cmd
                   |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                  \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
               |vpiStmt:
               \_IfStmt: , line:693:13, endln:697:16
                 |vpiParent:
@@ -14592,7 +14412,7 @@ Design: (unnamed)
                       \_HierPath: (exp_cmd.addr), line:693:17, endln:693:29
                       |vpiName:exp_cmd
                       |vpiActual:
-                      \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                      \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
                     |vpiActual:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.addr), line:693:25, endln:693:29
                       |vpiParent:
@@ -14600,7 +14420,7 @@ Design: (unnamed)
                       |vpiName:addr
                       |vpiFullName:work@test_program.get_expected_command_for_slave.addr
                       |vpiActual:
-                      \_Net: (work@test_program.get_expected_command_for_slave.addr), line:693:25, endln:693:29
+                      \_TypespecMember: (addr), line:49:37, endln:49:41
                     |vpiName:exp_cmd.addr
                   |vpiOperand:
                   \_HierPath: (cmd.addr), line:693:33, endln:693:41
@@ -14628,13 +14448,13 @@ Design: (unnamed)
                   \_IfStmt: , line:693:13, endln:697:16
                   |vpiFullName:work@test_program.get_expected_command_for_slave
                   |vpiStmt:
-                  \_MethodFuncCall: (delete), line:694:16, endln:694:60
+                  \_MethodFuncCall: (delete), line:694:52, endln:694:61
                     |vpiParent:
                     \_Begin: (work@test_program.get_expected_command_for_slave), line:693:43, endln:697:16
                     |vpiArgument:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.i), line:694:59, endln:694:60
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:694:16, endln:694:60
+                      \_MethodFuncCall: (delete), line:694:52, endln:694:61
                       |vpiName:i
                       |vpiFullName:work@test_program.get_expected_command_for_slave.i
                       |vpiActual:
@@ -14642,12 +14462,12 @@ Design: (unnamed)
                     |vpiName:
                     \_Identifier: (delete)
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:694:16, endln:694:60
+                      \_MethodFuncCall: (delete), line:694:52, endln:694:61
                       |vpiName:delete
                     |vpiPrefix:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.write_command_queue_slave), line:694:16, endln:694:41
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:694:16, endln:694:60
+                      \_MethodFuncCall: (delete), line:694:52, endln:694:61
                       |vpiName:write_command_queue_slave
                       |vpiFullName:work@test_program.get_expected_command_for_slave.write_command_queue_slave
                       |vpiActual:
@@ -14683,13 +14503,12 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:691:10, endln:698:13
               |vpiTypespec:
-              \_RefTypespec: (work@test_program.get_expected_command_for_slave.slave_id.slave_id), line:691:45, endln:691:53
+              \_RefTypespec: (work@test_program.get_expected_command_for_slave.slave_id)
                 |vpiParent:
                 \_Variable: (work@test_program.get_expected_command_for_slave.slave_id), line:691:45, endln:691:53
-                |vpiName:slave_id
-                |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id.slave_id
+                |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id
                 |vpiActual:
-                \_UnsupportedTypespec: (slave_id), line:691:45, endln:691:53
+                \_UnsupportedTypespec: 
               |vpiName:slave_id
               |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id
             |vpiImportTypespec:
@@ -14697,13 +14516,12 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:691:10, endln:698:13
               |vpiTypespec:
-              \_RefTypespec: (work@test_program.get_expected_command_for_slave.i.i), line:691:54, endln:691:55
+              \_RefTypespec: (work@test_program.get_expected_command_for_slave.i)
                 |vpiParent:
                 \_Variable: (work@test_program.get_expected_command_for_slave.i), line:691:54, endln:691:55
-                |vpiName:i
-                |vpiFullName:work@test_program.get_expected_command_for_slave.i.i
+                |vpiFullName:work@test_program.get_expected_command_for_slave.i
                 |vpiActual:
-                \_UnsupportedTypespec: (i), line:691:54, endln:691:55
+                \_UnsupportedTypespec: 
               |vpiName:i
               |vpiFullName:work@test_program.get_expected_command_for_slave.i
             |vpiVariable:
@@ -14721,19 +14539,17 @@ Design: (unnamed)
             |vpiStmt:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:691:58, endln:698:13
           |vpiTypespec:
-          \_UnsupportedTypespec: (slave_id), line:691:45, endln:691:53
+          \_UnsupportedTypespec: 
             |vpiParent:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:690:31, endln:702:10
-            |vpiName:slave_id
           |vpiTypespec:
-          \_UnsupportedTypespec: (i), line:691:54, endln:691:55
+          \_UnsupportedTypespec: 
             |vpiParent:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:690:31, endln:702:10
-            |vpiName:i
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (slave_id), line:691:45, endln:691:53
+          \_UnsupportedTypespec: 
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (i), line:691:54, endln:691:55
+          \_UnsupportedTypespec: 
           |vpiStmt:
           \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:691:10, endln:698:13
           |vpiStmt:
@@ -14809,7 +14625,7 @@ Design: (unnamed)
                   |vpiName:exp_cmd
                   |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                  \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
         |vpiElseStmt:
         \_Begin: (work@test_program.get_expected_command_for_slave), line:702:16, endln:714:10
           |vpiParent:
@@ -14825,13 +14641,6 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:703:10, endln:710:13
               |vpiFullName:work@test_program.get_expected_command_for_slave
-              |vpiImportTypespec:
-              \_Net: (work@test_program.get_expected_command_for_slave.addr), line:705:25, endln:705:29
-                |vpiParent:
-                \_Begin: (work@test_program.get_expected_command_for_slave), line:703:57, endln:710:13
-                |vpiName:addr
-                |vpiFullName:work@test_program.get_expected_command_for_slave.addr
-                |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:704:13, endln:704:60
                 |vpiParent:
@@ -14869,7 +14678,7 @@ Design: (unnamed)
                   |vpiName:exp_cmd
                   |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                  \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
               |vpiStmt:
               \_IfStmt: , line:705:13, endln:709:16
                 |vpiParent:
@@ -14889,7 +14698,7 @@ Design: (unnamed)
                       \_HierPath: (exp_cmd.addr), line:705:17, endln:705:29
                       |vpiName:exp_cmd
                       |vpiActual:
-                      \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                      \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
                     |vpiActual:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.addr), line:705:25, endln:705:29
                       |vpiParent:
@@ -14897,7 +14706,7 @@ Design: (unnamed)
                       |vpiName:addr
                       |vpiFullName:work@test_program.get_expected_command_for_slave.addr
                       |vpiActual:
-                      \_Net: (work@test_program.get_expected_command_for_slave.addr), line:705:25, endln:705:29
+                      \_TypespecMember: (addr), line:49:37, endln:49:41
                     |vpiName:exp_cmd.addr
                   |vpiOperand:
                   \_HierPath: (cmd.addr), line:705:33, endln:705:41
@@ -14925,13 +14734,13 @@ Design: (unnamed)
                   \_IfStmt: , line:705:13, endln:709:16
                   |vpiFullName:work@test_program.get_expected_command_for_slave
                   |vpiStmt:
-                  \_MethodFuncCall: (delete), line:706:16, endln:706:59
+                  \_MethodFuncCall: (delete), line:706:51, endln:706:60
                     |vpiParent:
                     \_Begin: (work@test_program.get_expected_command_for_slave), line:705:43, endln:709:16
                     |vpiArgument:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.i), line:706:58, endln:706:59
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:706:16, endln:706:59
+                      \_MethodFuncCall: (delete), line:706:51, endln:706:60
                       |vpiName:i
                       |vpiFullName:work@test_program.get_expected_command_for_slave.i
                       |vpiActual:
@@ -14939,12 +14748,12 @@ Design: (unnamed)
                     |vpiName:
                     \_Identifier: (delete)
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:706:16, endln:706:59
+                      \_MethodFuncCall: (delete), line:706:51, endln:706:60
                       |vpiName:delete
                     |vpiPrefix:
                     \_RefObj: (work@test_program.get_expected_command_for_slave.read_command_queue_slave), line:706:16, endln:706:40
                       |vpiParent:
-                      \_MethodFuncCall: (delete), line:706:16, endln:706:59
+                      \_MethodFuncCall: (delete), line:706:51, endln:706:60
                       |vpiName:read_command_queue_slave
                       |vpiFullName:work@test_program.get_expected_command_for_slave.read_command_queue_slave
                       |vpiActual:
@@ -14980,13 +14789,12 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:703:10, endln:710:13
               |vpiTypespec:
-              \_RefTypespec: (work@test_program.get_expected_command_for_slave.slave_id.slave_id), line:703:44, endln:703:52
+              \_RefTypespec: (work@test_program.get_expected_command_for_slave.slave_id)
                 |vpiParent:
                 \_Variable: (work@test_program.get_expected_command_for_slave.slave_id), line:703:44, endln:703:52
-                |vpiName:slave_id
-                |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id.slave_id
+                |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id
                 |vpiActual:
-                \_UnsupportedTypespec: (slave_id), line:703:44, endln:703:52
+                \_UnsupportedTypespec: 
               |vpiName:slave_id
               |vpiFullName:work@test_program.get_expected_command_for_slave.slave_id
             |vpiImportTypespec:
@@ -14994,13 +14802,12 @@ Design: (unnamed)
               |vpiParent:
               \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:703:10, endln:710:13
               |vpiTypespec:
-              \_RefTypespec: (work@test_program.get_expected_command_for_slave.i.i), line:703:53, endln:703:54
+              \_RefTypespec: (work@test_program.get_expected_command_for_slave.i)
                 |vpiParent:
                 \_Variable: (work@test_program.get_expected_command_for_slave.i), line:703:53, endln:703:54
-                |vpiName:i
-                |vpiFullName:work@test_program.get_expected_command_for_slave.i.i
+                |vpiFullName:work@test_program.get_expected_command_for_slave.i
                 |vpiActual:
-                \_UnsupportedTypespec: (i), line:703:53, endln:703:54
+                \_UnsupportedTypespec: 
               |vpiName:i
               |vpiFullName:work@test_program.get_expected_command_for_slave.i
             |vpiVariable:
@@ -15018,19 +14825,17 @@ Design: (unnamed)
             |vpiStmt:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:703:57, endln:710:13
           |vpiTypespec:
-          \_UnsupportedTypespec: (slave_id), line:703:44, endln:703:52
+          \_UnsupportedTypespec: 
             |vpiParent:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:702:16, endln:714:10
-            |vpiName:slave_id
           |vpiTypespec:
-          \_UnsupportedTypespec: (i), line:703:53, endln:703:54
+          \_UnsupportedTypespec: 
             |vpiParent:
             \_Begin: (work@test_program.get_expected_command_for_slave), line:702:16, endln:714:10
-            |vpiName:i
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (slave_id), line:703:44, endln:703:52
+          \_UnsupportedTypespec: 
           |vpiImportTypespec:
-          \_UnsupportedTypespec: (i), line:703:53, endln:703:54
+          \_UnsupportedTypespec: 
           |vpiStmt:
           \_ForeachStmt: (work@test_program.get_expected_command_for_slave), line:703:10, endln:710:13
           |vpiStmt:
@@ -15106,7 +14911,7 @@ Design: (unnamed)
                   |vpiName:exp_cmd
                   |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
                   |vpiActual:
-                  \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+                  \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
       |vpiStmt:
       \_ReturnStmt: , line:716:7, endln:716:21
         |vpiParent:
@@ -15118,7 +14923,7 @@ Design: (unnamed)
           |vpiName:exp_cmd
           |vpiFullName:work@test_program.get_expected_command_for_slave.exp_cmd
           |vpiActual:
-          \_Net: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
+          \_Variable: (work@test_program.get_expected_command_for_slave.exp_cmd), line:687:15, endln:687:22
     |vpiTypespec:
     \_IntTypespec: , line:684:7, endln:684:10
       |vpiParent:
@@ -15896,6 +15701,20 @@ Design: (unnamed)
       \_Function: (work@test_program.create_response), line:759:4, endln:772:15
       |vpiFullName:work@test_program.create_response
       |vpiVariable:
+      \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+        |vpiParent:
+        \_Begin: (work@test_program.create_response)
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.create_response.rsp.Response), line:763:7, endln:763:15
+          |vpiParent:
+          \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+          |vpiName:Response
+          |vpiFullName:work@test_program.create_response.rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:rsp
+        |vpiFullName:work@test_program.create_response.rsp
+      |vpiVariable:
       \_Variable: (work@test_program.create_response.i), line:766:16, endln:766:17
         |vpiParent:
         \_Begin: (work@test_program.create_response)
@@ -15918,20 +15737,6 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (work@test_program.create_response), line:766:7, endln:769:10
           |vpiFullName:work@test_program.create_response
-          |vpiImportTypespec:
-          \_Net: (work@test_program.create_response.data), line:767:18, endln:767:21
-            |vpiParent:
-            \_Begin: (work@test_program.create_response), line:766:43, endln:769:10
-            |vpiName:data
-            |vpiFullName:work@test_program.create_response.data
-            |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@test_program.create_response.latency), line:768:21, endln:768:24
-            |vpiParent:
-            \_Begin: (work@test_program.create_response), line:766:43, endln:769:10
-            |vpiName:latency
-            |vpiFullName:work@test_program.create_response.latency
-            |vpiNetType:1
           |vpiStmt:
           \_Assignment: , line:767:10, endln:767:37
             |vpiParent:
@@ -15957,7 +15762,7 @@ Design: (unnamed)
                 \_HierPath: (rsp.data[i]), line:767:13, endln:767:21
                 |vpiName:rsp
                 |vpiActual:
-                \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+                \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
               |vpiActual:
               \_BitSelect: (work@test_program.create_response.rsp.data[i].data), line:767:18, endln:767:21
                 |vpiParent:
@@ -15965,7 +15770,7 @@ Design: (unnamed)
                 |vpiName:data
                 |vpiFullName:work@test_program.create_response.rsp.data[i].data
                 |vpiActual:
-                \_Net: (work@test_program.create_response.data), line:767:18, endln:767:21
+                \_TypespecMember: (data), line:59:37, endln:59:61
                 |vpiIndex:
                 \_RefObj: (work@test_program.create_response.rsp.data[i].i), line:767:19, endln:767:20
                   |vpiParent:
@@ -16016,7 +15821,7 @@ Design: (unnamed)
                 \_HierPath: (rsp.latency[i]), line:768:13, endln:768:24
                 |vpiName:rsp
                 |vpiActual:
-                \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+                \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
               |vpiActual:
               \_BitSelect: (work@test_program.create_response.rsp.latency[i].latency), line:768:21, endln:768:24
                 |vpiParent:
@@ -16024,7 +15829,7 @@ Design: (unnamed)
                 |vpiName:latency
                 |vpiFullName:work@test_program.create_response.rsp.latency[i].latency
                 |vpiActual:
-                \_Net: (work@test_program.create_response.latency), line:768:21, endln:768:24
+                \_TypespecMember: (latency), line:60:37, endln:60:61
                 |vpiIndex:
                 \_RefObj: (work@test_program.create_response.rsp.latency[i].i), line:768:22, endln:768:23
                   |vpiParent:
@@ -16090,19 +15895,7 @@ Design: (unnamed)
         \_Begin: (work@test_program.create_response)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
-        |vpiParent:
-        \_Begin: (work@test_program.create_response)
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.create_response.rsp.Response), line:763:7, endln:763:15
-          |vpiParent:
-          \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
-          |vpiName:Response
-          |vpiFullName:work@test_program.create_response.rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:rsp
-        |vpiFullName:work@test_program.create_response.rsp
+      \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
       |vpiImportTypespec:
       \_IntTypespec: , line:766:12, endln:766:15
       |vpiImportTypespec:
@@ -16131,14 +15924,14 @@ Design: (unnamed)
             \_HierPath: (rsp.burstcount), line:765:10, endln:765:21
             |vpiName:rsp
             |vpiActual:
-            \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+            \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
           |vpiActual:
           \_RefObj: (burstcount), line:765:11, endln:765:21
             |vpiParent:
             \_HierPath: (rsp.burstcount), line:765:10, endln:765:21
             |vpiName:burstcount
             |vpiActual:
-            \_IODecl: (burstcount), line:760:18, endln:760:28
+            \_TypespecMember: (burstcount), line:58:37, endln:58:47
           |vpiName:rsp.burstcount
       |vpiStmt:
       \_ForStmt: (work@test_program.create_response), line:766:7, endln:769:10
@@ -16153,7 +15946,7 @@ Design: (unnamed)
           |vpiName:rsp
           |vpiFullName:work@test_program.create_response.rsp
           |vpiActual:
-          \_Net: (work@test_program.create_response.rsp), line:763:16, endln:763:19
+          \_Variable: (work@test_program.create_response.rsp), line:763:16, endln:763:19
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -16196,6 +15989,20 @@ Design: (unnamed)
       \_Function: (work@test_program.get_expected_read_response), line:774:4, endln:784:15
       |vpiFullName:work@test_program.get_expected_read_response
       |vpiVariable:
+      \_Variable: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
+        |vpiParent:
+        \_Begin: (work@test_program.get_expected_read_response)
+        |vpiTypespec:
+        \_RefTypespec: (work@test_program.get_expected_read_response.rsp.Response), line:778:7, endln:778:15
+          |vpiParent:
+          \_Variable: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
+          |vpiName:Response
+          |vpiFullName:work@test_program.get_expected_read_response.rsp.Response
+          |vpiActual:
+          \_TypedefTypespec: (Response), line:61:6, endln:61:14
+        |vpiName:rsp
+        |vpiFullName:work@test_program.get_expected_read_response.rsp
+      |vpiVariable:
       \_Variable: (work@test_program.get_expected_read_response.slave_id), line:779:16, endln:779:24
         |vpiParent:
         \_Begin: (work@test_program.get_expected_read_response)
@@ -16214,19 +16021,7 @@ Design: (unnamed)
         \_Begin: (work@test_program.get_expected_read_response)
         |vpiSigned:1
       |vpiImportTypespec:
-      \_Net: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
-        |vpiParent:
-        \_Begin: (work@test_program.get_expected_read_response)
-        |vpiTypespec:
-        \_RefTypespec: (work@test_program.get_expected_read_response.rsp.Response), line:778:7, endln:778:15
-          |vpiParent:
-          \_Net: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
-          |vpiName:Response
-          |vpiFullName:work@test_program.get_expected_read_response.rsp.Response
-          |vpiActual:
-          \_TypedefTypespec: (Response), line:61:6, endln:61:14
-        |vpiName:rsp
-        |vpiFullName:work@test_program.get_expected_read_response.rsp
+      \_Variable: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
       |vpiImportTypespec:
       \_IntTypespec: , line:779:7, endln:779:10
       |vpiImportTypespec:
@@ -16315,7 +16110,7 @@ Design: (unnamed)
           |vpiName:rsp
           |vpiFullName:work@test_program.get_expected_read_response.rsp
           |vpiActual:
-          \_Net: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
+          \_Variable: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
       |vpiStmt:
       \_ReturnStmt: , line:783:7, endln:783:17
         |vpiParent:
@@ -16327,7 +16122,7 @@ Design: (unnamed)
           |vpiName:rsp
           |vpiFullName:work@test_program.get_expected_read_response.rsp
           |vpiActual:
-          \_Net: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
+          \_Variable: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -16877,7 +16672,7 @@ Design: (unnamed)
         \_TypespecMember: (data), line:50:37, endln:50:63
         |vpiFullName:work@test_program.data
         |vpiActual:
-        \_ArrayTypespec: , line:50:8, endln:50:63
+        \_ArrayTypespec: , line:50:48, endln:50:63
     |vpiTypespecMember:
     \_TypespecMember: (byteenable), line:51:37, endln:51:63
       |vpiParent:
@@ -16889,7 +16684,7 @@ Design: (unnamed)
         \_TypespecMember: (byteenable), line:51:37, endln:51:63
         |vpiFullName:work@test_program.byteenable
         |vpiActual:
-        \_ArrayTypespec: , line:51:8, endln:51:63
+        \_ArrayTypespec: , line:51:48, endln:51:63
     |vpiTypespecMember:
     \_TypespecMember: (cmd_delay), line:52:37, endln:52:46
       |vpiParent:
@@ -16989,14 +16784,14 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypespec:
-  \_ArrayTypespec: , line:50:8, endln:50:63
+  \_ArrayTypespec: , line:50:48, endln:50:63
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:50:48, endln:50:63
       |vpiParent:
-      \_ArrayTypespec: , line:50:8, endln:50:63
+      \_ArrayTypespec: , line:50:48, endln:50:63
       |vpiLeftRange:
       \_Operation: , line:50:49, endln:50:60
         |vpiParent:
@@ -17029,7 +16824,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program), line:50:8, endln:50:26
       |vpiParent:
-      \_ArrayTypespec: , line:50:8, endln:50:63
+      \_ArrayTypespec: , line:50:48, endln:50:63
       |vpiFullName:work@test_program
       |vpiActual:
       \_LogicTypespec: , line:50:8, endln:50:13
@@ -17071,14 +16866,14 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypespec:
-  \_ArrayTypespec: , line:51:8, endln:51:63
+  \_ArrayTypespec: , line:51:48, endln:51:63
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:51:48, endln:51:63
       |vpiParent:
-      \_ArrayTypespec: , line:51:8, endln:51:63
+      \_ArrayTypespec: , line:51:48, endln:51:63
       |vpiLeftRange:
       \_Operation: , line:51:49, endln:51:60
         |vpiParent:
@@ -17111,7 +16906,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program), line:51:8, endln:51:31
       |vpiParent:
-      \_ArrayTypespec: , line:51:8, endln:51:63
+      \_ArrayTypespec: , line:51:48, endln:51:63
       |vpiFullName:work@test_program
       |vpiActual:
       \_LogicTypespec: , line:51:8, endln:51:13
@@ -17268,7 +17063,7 @@ Design: (unnamed)
         \_TypespecMember: (data), line:59:37, endln:59:61
         |vpiFullName:work@test_program.data
         |vpiActual:
-        \_ArrayTypespec: , line:59:7, endln:59:61
+        \_ArrayTypespec: , line:59:46, endln:59:61
     |vpiTypespecMember:
     \_TypespecMember: (latency), line:60:37, endln:60:61
       |vpiParent:
@@ -17282,14 +17077,14 @@ Design: (unnamed)
         |vpiActual:
         \_ArrayTypespec: , line:60:7, endln:60:61
   |vpiTypespec:
-  \_ArrayTypespec: , line:59:7, endln:59:61
+  \_ArrayTypespec: , line:59:46, endln:59:61
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:59:46, endln:59:61
       |vpiParent:
-      \_ArrayTypespec: , line:59:7, endln:59:61
+      \_ArrayTypespec: , line:59:46, endln:59:61
       |vpiLeftRange:
       \_Operation: , line:59:47, endln:59:58
         |vpiParent:
@@ -17322,7 +17117,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program), line:59:7, endln:59:25
       |vpiParent:
-      \_ArrayTypespec: , line:59:7, endln:59:61
+      \_ArrayTypespec: , line:59:46, endln:59:61
       |vpiFullName:work@test_program
       |vpiActual:
       \_LogicTypespec: , line:50:8, endln:50:13
@@ -17404,14 +17199,14 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:60:7, endln:60:17
   |vpiTypespec:
-  \_ArrayTypespec: , line:67:1, endln:67:42
+  \_ArrayTypespec: , line:67:36, endln:67:42
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:4
     |vpiRange:
     \_Range: , line:67:36, endln:67:39
       |vpiParent:
-      \_ArrayTypespec: , line:67:1, endln:67:42
+      \_ArrayTypespec: , line:67:36, endln:67:42
       |vpiRightRange:
       \_Operation: , line:67:37, endln:67:38
         |vpiParent:
@@ -17428,20 +17223,20 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program.Command), line:67:1, endln:67:8
       |vpiParent:
-      \_ArrayTypespec: , line:67:1, endln:67:42
+      \_ArrayTypespec: , line:67:36, endln:67:42
       |vpiName:Command
       |vpiFullName:work@test_program.Command
       |vpiActual:
       \_TypedefTypespec: (Command), line:54:6, endln:54:13
   |vpiTypespec:
-  \_ArrayTypespec: , line:68:1, endln:68:41
+  \_ArrayTypespec: , line:68:35, endln:68:41
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:4
     |vpiRange:
     \_Range: , line:68:35, endln:68:38
       |vpiParent:
-      \_ArrayTypespec: , line:68:1, endln:68:41
+      \_ArrayTypespec: , line:68:35, endln:68:41
       |vpiRightRange:
       \_Operation: , line:68:36, endln:68:37
         |vpiParent:
@@ -17458,20 +17253,20 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program.Command), line:68:1, endln:68:8
       |vpiParent:
-      \_ArrayTypespec: , line:68:1, endln:68:41
+      \_ArrayTypespec: , line:68:35, endln:68:41
       |vpiName:Command
       |vpiFullName:work@test_program.Command
       |vpiActual:
       \_TypedefTypespec: (Command), line:54:6, endln:54:13
   |vpiTypespec:
-  \_ArrayTypespec: , line:71:1, endln:71:41
+  \_ArrayTypespec: , line:71:35, endln:71:41
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:4
     |vpiRange:
     \_Range: , line:71:35, endln:71:38
       |vpiParent:
-      \_ArrayTypespec: , line:71:1, endln:71:41
+      \_ArrayTypespec: , line:71:35, endln:71:41
       |vpiRightRange:
       \_Operation: , line:71:36, endln:71:37
         |vpiParent:
@@ -17488,20 +17283,20 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program.Command), line:71:1, endln:71:8
       |vpiParent:
-      \_ArrayTypespec: , line:71:1, endln:71:41
+      \_ArrayTypespec: , line:71:35, endln:71:41
       |vpiName:Command
       |vpiFullName:work@test_program.Command
       |vpiActual:
       \_TypedefTypespec: (Command), line:54:6, endln:54:13
   |vpiTypespec:
-  \_ArrayTypespec: , line:72:1, endln:72:40
+  \_ArrayTypespec: , line:72:34, endln:72:40
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:4
     |vpiRange:
     \_Range: , line:72:34, endln:72:37
       |vpiParent:
-      \_ArrayTypespec: , line:72:1, endln:72:40
+      \_ArrayTypespec: , line:72:34, endln:72:40
       |vpiRightRange:
       \_Operation: , line:72:35, endln:72:36
         |vpiParent:
@@ -17518,20 +17313,20 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program.Command), line:72:1, endln:72:8
       |vpiParent:
-      \_ArrayTypespec: , line:72:1, endln:72:40
+      \_ArrayTypespec: , line:72:34, endln:72:40
       |vpiName:Command
       |vpiFullName:work@test_program.Command
       |vpiActual:
       \_TypedefTypespec: (Command), line:54:6, endln:54:13
   |vpiTypespec:
-  \_ArrayTypespec: , line:75:1, endln:75:41
+  \_ArrayTypespec: , line:75:35, endln:75:41
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiArrayType:4
     |vpiRange:
     \_Range: , line:75:35, endln:75:38
       |vpiParent:
-      \_ArrayTypespec: , line:75:1, endln:75:41
+      \_ArrayTypespec: , line:75:35, endln:75:41
       |vpiRightRange:
       \_Operation: , line:75:36, endln:75:37
         |vpiParent:
@@ -17548,7 +17343,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@test_program.Response), line:75:1, endln:75:9
       |vpiParent:
-      \_ArrayTypespec: , line:75:1, endln:75:41
+      \_ArrayTypespec: , line:75:35, endln:75:41
       |vpiName:Response
       |vpiFullName:work@test_program.Response
       |vpiActual:
@@ -17635,11 +17430,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:50:8, endln:50:13
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:50:8, endln:50:63
+  \_ArrayTypespec: , line:50:48, endln:50:63
   |vpiImportTypespec:
   \_LogicTypespec: , line:51:8, endln:51:13
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:51:8, endln:51:63
+  \_ArrayTypespec: , line:51:48, endln:51:63
   |vpiImportTypespec:
   \_ArrayTypespec: , line:52:8, endln:52:18
   |vpiImportTypespec:
@@ -17651,13 +17446,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:56:12, endln:61:5
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:59:7, endln:59:61
+  \_ArrayTypespec: , line:59:46, endln:59:61
   |vpiImportTypespec:
   \_ArrayTypespec: , line:60:7, endln:60:17
   |vpiImportTypespec:
   \_ArrayTypespec: , line:60:7, endln:60:61
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:67:1, endln:67:42
+  \_ArrayTypespec: , line:67:36, endln:67:42
   |vpiImportTypespec:
   \_Net: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
     |vpiParent:
@@ -17668,11 +17463,11 @@ Design: (unnamed)
       \_Net: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
       |vpiFullName:work@test_program.write_command_queue_master
       |vpiActual:
-      \_ArrayTypespec: , line:67:1, endln:67:42
+      \_ArrayTypespec: , line:67:36, endln:67:42
     |vpiName:write_command_queue_master
     |vpiFullName:work@test_program.write_command_queue_master
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:68:1, endln:68:41
+  \_ArrayTypespec: , line:68:35, endln:68:41
   |vpiImportTypespec:
   \_Net: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
     |vpiParent:
@@ -17683,11 +17478,11 @@ Design: (unnamed)
       \_Net: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
       |vpiFullName:work@test_program.read_command_queue_master
       |vpiActual:
-      \_ArrayTypespec: , line:68:1, endln:68:41
+      \_ArrayTypespec: , line:68:35, endln:68:41
     |vpiName:read_command_queue_master
     |vpiFullName:work@test_program.read_command_queue_master
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:71:1, endln:71:41
+  \_ArrayTypespec: , line:71:35, endln:71:41
   |vpiImportTypespec:
   \_Net: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
     |vpiParent:
@@ -17698,11 +17493,11 @@ Design: (unnamed)
       \_Net: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
       |vpiFullName:work@test_program.write_command_queue_slave
       |vpiActual:
-      \_ArrayTypespec: , line:71:1, endln:71:41
+      \_ArrayTypespec: , line:71:35, endln:71:41
     |vpiName:write_command_queue_slave
     |vpiFullName:work@test_program.write_command_queue_slave
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:72:1, endln:72:40
+  \_ArrayTypespec: , line:72:34, endln:72:40
   |vpiImportTypespec:
   \_Net: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
     |vpiParent:
@@ -17713,11 +17508,11 @@ Design: (unnamed)
       \_Net: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
       |vpiFullName:work@test_program.read_command_queue_slave
       |vpiActual:
-      \_ArrayTypespec: , line:72:1, endln:72:40
+      \_ArrayTypespec: , line:72:34, endln:72:40
     |vpiName:read_command_queue_slave
     |vpiFullName:work@test_program.read_command_queue_slave
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:75:1, endln:75:41
+  \_ArrayTypespec: , line:75:35, endln:75:41
   |vpiImportTypespec:
   \_Net: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
     |vpiParent:
@@ -17728,7 +17523,7 @@ Design: (unnamed)
       \_Net: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
       |vpiFullName:work@test_program.read_response_queue_slave
       |vpiActual:
-      \_ArrayTypespec: , line:75:1, endln:75:41
+      \_ArrayTypespec: , line:75:35, endln:75:41
     |vpiName:read_response_queue_slave
     |vpiFullName:work@test_program.read_response_queue_slave
   |vpiImportTypespec:
@@ -17742,18 +17537,39 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_EventTypespec: , line:517:1, endln:517:6
   |vpiImportTypespec:
-  \_Net: (work@test_program.tb), line:249:19, endln:249:21
+  \_Net: (work@test_program.signal_write_response_complete), line:404:35, endln:404:65
+    |vpiParent:
+    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:signal_write_response_complete
+    |vpiFullName:work@test_program.signal_write_response_complete
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@test_program.tb), line:425:19, endln:425:21
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:tb
     |vpiFullName:work@test_program.tb
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@test_program.dut), line:249:22, endln:249:25
+  \_Net: (work@test_program.dut), line:425:22, endln:425:25
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:dut
     |vpiFullName:work@test_program.dut
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@test_program.slave_1), line:425:26, endln:425:33
+    |vpiParent:
+    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:slave_1
+    |vpiFullName:work@test_program.slave_1
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@test_program.signal_command_received), line:425:34, endln:425:57
+    |vpiParent:
+    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:signal_command_received
+    |vpiFullName:work@test_program.signal_command_received
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@test_program.master_0), line:249:26, endln:249:34
@@ -17770,25 +17586,11 @@ Design: (unnamed)
     |vpiFullName:work@test_program.signal_read_response_complete
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@test_program.signal_write_response_complete), line:261:35, endln:261:65
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-    |vpiName:signal_write_response_complete
-    |vpiFullName:work@test_program.signal_write_response_complete
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@test_program.slave_0), line:282:26, endln:282:33
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:slave_0
     |vpiFullName:work@test_program.slave_0
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@test_program.signal_command_received), line:282:34, endln:282:57
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-    |vpiName:signal_command_received
-    |vpiFullName:work@test_program.signal_command_received
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@test_program.clk_clk), line:333:34, endln:333:41
@@ -17803,13 +17605,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:master_1
     |vpiFullName:work@test_program.master_1
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@test_program.slave_1), line:425:26, endln:425:33
-    |vpiParent:
-    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
-    |vpiName:slave_1
-    |vpiFullName:work@test_program.slave_1
     |vpiNetType:1
   |vpiDefName:work@test_program
   |vpiTaskFunc:
@@ -17869,25 +17664,25 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
   |vpiNet:
-  \_Net: (work@test_program.tb), line:249:19, endln:249:21
+  \_Net: (work@test_program.signal_write_response_complete), line:404:35, endln:404:65
   |vpiNet:
-  \_Net: (work@test_program.dut), line:249:22, endln:249:25
+  \_Net: (work@test_program.tb), line:425:19, endln:425:21
+  |vpiNet:
+  \_Net: (work@test_program.dut), line:425:22, endln:425:25
+  |vpiNet:
+  \_Net: (work@test_program.slave_1), line:425:26, endln:425:33
+  |vpiNet:
+  \_Net: (work@test_program.signal_command_received), line:425:34, endln:425:57
   |vpiNet:
   \_Net: (work@test_program.master_0), line:249:26, endln:249:34
   |vpiNet:
   \_Net: (work@test_program.signal_read_response_complete), line:249:35, endln:249:64
   |vpiNet:
-  \_Net: (work@test_program.signal_write_response_complete), line:261:35, endln:261:65
-  |vpiNet:
   \_Net: (work@test_program.slave_0), line:282:26, endln:282:33
-  |vpiNet:
-  \_Net: (work@test_program.signal_command_received), line:282:34, endln:282:57
   |vpiNet:
   \_Net: (work@test_program.clk_clk), line:333:34, endln:333:41
   |vpiNet:
   \_Net: (work@test_program.master_1), line:392:26, endln:392:34
-  |vpiNet:
-  \_Net: (work@test_program.slave_1), line:425:26, endln:425:33
   |vpiProcess:
   \_Always: , line:249:4, endln:258:7
     |vpiParent:
@@ -17911,14 +17706,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_0.signal_read_response_complete), line:249:13, endln:249:64
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:249:22, endln:249:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.master_0.signal_read_response_complete), line:249:13, endln:249:64
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (master_0), line:249:26, endln:249:34
           |vpiParent:
@@ -17940,48 +17735,54 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:249:11, endln:249:65
         |vpiFullName:work@test_program
-        |vpiImportTypespec:
-        \_Net: (work@test_program.cmd), line:251:16, endln:251:19
+        |vpiVariable:
+        \_Variable: (work@test_program.cmd), line:251:16, endln:251:19
           |vpiParent:
           \_Begin: (work@test_program), line:249:66, endln:258:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.cmd.Command), line:251:7, endln:251:14
             |vpiParent:
-            \_Net: (work@test_program.cmd), line:251:16, endln:251:19
+            \_Variable: (work@test_program.cmd), line:251:16, endln:251:19
             |vpiName:Command
             |vpiFullName:work@test_program.cmd.Command
             |vpiActual:
             \_TypedefTypespec: (Command), line:54:6, endln:54:13
           |vpiName:cmd
           |vpiFullName:work@test_program.cmd
-        |vpiImportTypespec:
-        \_Net: (work@test_program.actual_rsp), line:252:16, endln:252:26
+        |vpiVariable:
+        \_Variable: (work@test_program.actual_rsp), line:252:16, endln:252:26
           |vpiParent:
           \_Begin: (work@test_program), line:249:66, endln:258:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.actual_rsp.Response), line:252:7, endln:252:15
             |vpiParent:
-            \_Net: (work@test_program.actual_rsp), line:252:16, endln:252:26
+            \_Variable: (work@test_program.actual_rsp), line:252:16, endln:252:26
             |vpiName:Response
             |vpiFullName:work@test_program.actual_rsp.Response
             |vpiActual:
             \_TypedefTypespec: (Response), line:61:6, endln:61:14
           |vpiName:actual_rsp
           |vpiFullName:work@test_program.actual_rsp
-        |vpiImportTypespec:
-        \_Net: (work@test_program.exp_rsp), line:252:28, endln:252:35
+        |vpiVariable:
+        \_Variable: (work@test_program.exp_rsp), line:252:28, endln:252:35
           |vpiParent:
           \_Begin: (work@test_program), line:249:66, endln:258:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.exp_rsp.Response), line:252:7, endln:252:15
             |vpiParent:
-            \_Net: (work@test_program.exp_rsp), line:252:28, endln:252:35
+            \_Variable: (work@test_program.exp_rsp), line:252:28, endln:252:35
             |vpiName:Response
             |vpiFullName:work@test_program.exp_rsp.Response
             |vpiActual:
             \_TypedefTypespec: (Response), line:61:6, endln:61:14
           |vpiName:exp_rsp
           |vpiFullName:work@test_program.exp_rsp
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.cmd), line:251:16, endln:251:19
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.actual_rsp), line:252:16, endln:252:26
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.exp_rsp), line:252:28, endln:252:35
         |vpiStmt:
         \_Assignment: , line:254:7, endln:254:53
           |vpiParent:
@@ -18025,7 +17826,7 @@ Design: (unnamed)
             |vpiName:cmd
             |vpiFullName:work@test_program.cmd
             |vpiActual:
-            \_Net: (work@test_program.cmd), line:251:16, endln:251:19
+            \_Variable: (work@test_program.cmd), line:251:16, endln:251:19
         |vpiStmt:
         \_Assignment: , line:255:7, endln:255:53
           |vpiParent:
@@ -18050,7 +17851,7 @@ Design: (unnamed)
             |vpiName:actual_rsp
             |vpiFullName:work@test_program.actual_rsp
             |vpiActual:
-            \_Net: (work@test_program.actual_rsp), line:252:16, endln:252:26
+            \_Variable: (work@test_program.actual_rsp), line:252:16, endln:252:26
         |vpiStmt:
         \_Assignment: , line:256:7, endln:256:48
           |vpiParent:
@@ -18070,7 +17871,7 @@ Design: (unnamed)
               |vpiName:cmd
               |vpiFullName:work@test_program.cmd
               |vpiActual:
-              \_Net: (work@test_program.cmd), line:251:16, endln:251:19
+              \_Variable: (work@test_program.cmd), line:251:16, endln:251:19
             |vpiName:
             \_Identifier: (get_expected_read_response)
               |vpiParent:
@@ -18083,7 +17884,7 @@ Design: (unnamed)
             |vpiName:exp_rsp
             |vpiFullName:work@test_program.exp_rsp
             |vpiActual:
-            \_Net: (work@test_program.exp_rsp), line:252:28, endln:252:35
+            \_Variable: (work@test_program.exp_rsp), line:252:28, endln:252:35
         |vpiStmt:
         \_TaskCall: (verify_response), line:257:7, endln:257:43
           |vpiParent:
@@ -18097,7 +17898,7 @@ Design: (unnamed)
             |vpiName:actual_rsp
             |vpiFullName:work@test_program.actual_rsp
             |vpiActual:
-            \_Net: (work@test_program.actual_rsp), line:252:16, endln:252:26
+            \_Variable: (work@test_program.actual_rsp), line:252:16, endln:252:26
           |vpiArgument:
           \_RefObj: (work@test_program.exp_rsp), line:257:35, endln:257:42
             |vpiParent:
@@ -18105,7 +17906,7 @@ Design: (unnamed)
             |vpiName:exp_rsp
             |vpiFullName:work@test_program.exp_rsp
             |vpiActual:
-            \_Net: (work@test_program.exp_rsp), line:252:28, endln:252:35
+            \_Variable: (work@test_program.exp_rsp), line:252:28, endln:252:35
           |vpiName:
           \_Identifier: (verify_response)
             |vpiParent:
@@ -18135,14 +17936,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_0.signal_write_response_complete), line:261:13, endln:261:65
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:261:22, endln:261:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.master_0.signal_write_response_complete), line:261:13, endln:261:65
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (master_0), line:261:26, endln:261:34
           |vpiParent:
@@ -18156,7 +17957,7 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_0.signal_write_response_complete), line:261:13, endln:261:65
           |vpiName:signal_write_response_complete
           |vpiActual:
-          \_Net: (work@test_program.signal_write_response_complete), line:261:35, endln:261:65
+          \_Net: (work@test_program.signal_write_response_complete), line:404:35, endln:404:65
         |vpiName:$root.tb.dut.master_0.signal_write_response_complete
         |vpiFullName:work@test_program.$root.tb.dut.master_0.signal_write_response_complete
       |vpiStmt:
@@ -18197,14 +17998,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.slave_0.signal_command_received), line:282:13, endln:282:57
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:282:22, endln:282:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.slave_0.signal_command_received), line:282:13, endln:282:57
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (slave_0), line:282:26, endln:282:33
           |vpiParent:
@@ -18218,7 +18019,7 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.slave_0.signal_command_received), line:282:13, endln:282:57
           |vpiName:signal_command_received
           |vpiActual:
-          \_Net: (work@test_program.signal_command_received), line:282:34, endln:282:57
+          \_Net: (work@test_program.signal_command_received), line:425:34, endln:425:57
         |vpiName:$root.tb.dut.slave_0.signal_command_received
         |vpiFullName:work@test_program.$root.tb.dut.slave_0.signal_command_received
       |vpiStmt:
@@ -18226,6 +18027,48 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:282:11, endln:282:58
         |vpiFullName:work@test_program
+        |vpiVariable:
+        \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
+          |vpiParent:
+          \_Begin: (work@test_program), line:282:59, endln:305:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.actual_cmd.Command), line:284:7, endln:284:14
+            |vpiParent:
+            \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
+            |vpiName:Command
+            |vpiFullName:work@test_program.actual_cmd.Command
+            |vpiActual:
+            \_TypedefTypespec: (Command), line:54:6, endln:54:13
+          |vpiName:actual_cmd
+          |vpiFullName:work@test_program.actual_cmd
+        |vpiVariable:
+        \_Variable: (work@test_program.exp_cmd), line:284:31, endln:284:38
+          |vpiParent:
+          \_Begin: (work@test_program), line:282:59, endln:305:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.exp_cmd.Command), line:284:7, endln:284:14
+            |vpiParent:
+            \_Variable: (work@test_program.exp_cmd), line:284:31, endln:284:38
+            |vpiName:Command
+            |vpiFullName:work@test_program.exp_cmd.Command
+            |vpiActual:
+            \_TypedefTypespec: (Command), line:54:6, endln:54:13
+          |vpiName:exp_cmd
+          |vpiFullName:work@test_program.exp_cmd
+        |vpiVariable:
+        \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
+          |vpiParent:
+          \_Begin: (work@test_program), line:282:59, endln:305:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.rsp.Response), line:285:7, endln:285:15
+            |vpiParent:
+            \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
+            |vpiName:Response
+            |vpiFullName:work@test_program.rsp.Response
+            |vpiActual:
+            \_TypedefTypespec: (Response), line:61:6, endln:61:14
+          |vpiName:rsp
+          |vpiFullName:work@test_program.rsp
         |vpiVariable:
         \_Variable: (work@test_program.backpressure_cycles), line:287:21, endln:287:40
           |vpiParent:
@@ -18383,60 +18226,17 @@ Design: (unnamed)
           \_Begin: (work@test_program), line:282:59, endln:305:7
           |vpiSigned:1
         |vpiImportTypespec:
-        \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
-          |vpiParent:
-          \_Begin: (work@test_program), line:282:59, endln:305:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.actual_cmd.Command), line:284:7, endln:284:14
-            |vpiParent:
-            \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
-            |vpiName:Command
-            |vpiFullName:work@test_program.actual_cmd.Command
-            |vpiActual:
-            \_TypedefTypespec: (Command), line:54:6, endln:54:13
-          |vpiName:actual_cmd
-          |vpiFullName:work@test_program.actual_cmd
+        \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
         |vpiImportTypespec:
-        \_Net: (work@test_program.exp_cmd), line:284:31, endln:284:38
-          |vpiParent:
-          \_Begin: (work@test_program), line:282:59, endln:305:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.exp_cmd.Command), line:284:7, endln:284:14
-            |vpiParent:
-            \_Net: (work@test_program.exp_cmd), line:284:31, endln:284:38
-            |vpiName:Command
-            |vpiFullName:work@test_program.exp_cmd.Command
-            |vpiActual:
-            \_TypedefTypespec: (Command), line:54:6, endln:54:13
-          |vpiName:exp_cmd
-          |vpiFullName:work@test_program.exp_cmd
+        \_Variable: (work@test_program.exp_cmd), line:284:31, endln:284:38
         |vpiImportTypespec:
-        \_Net: (work@test_program.rsp), line:285:19, endln:285:22
-          |vpiParent:
-          \_Begin: (work@test_program), line:282:59, endln:305:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.rsp.Response), line:285:7, endln:285:15
-            |vpiParent:
-            \_Net: (work@test_program.rsp), line:285:19, endln:285:22
-            |vpiName:Response
-            |vpiFullName:work@test_program.rsp.Response
-            |vpiActual:
-            \_TypedefTypespec: (Response), line:61:6, endln:61:14
-          |vpiName:rsp
-          |vpiFullName:work@test_program.rsp
+        \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
         |vpiImportTypespec:
         \_IntTypespec: , line:287:17, endln:287:20
         |vpiImportTypespec:
         \_Variable: (work@test_program.backpressure_cycles), line:287:21, endln:287:40
         |vpiImportTypespec:
         \_Variable: (work@test_program.i), line:290:16, endln:290:17
-        |vpiImportTypespec:
-        \_Net: (work@test_program.trans), line:300:22, endln:300:27
-          |vpiParent:
-          \_Begin: (work@test_program), line:282:59, endln:305:7
-          |vpiName:trans
-          |vpiFullName:work@test_program.trans
-          |vpiNetType:1
         |vpiStmt:
         \_ForStmt: (work@test_program), line:290:7, endln:293:10
         |vpiStmt:
@@ -18463,7 +18263,7 @@ Design: (unnamed)
             |vpiName:actual_cmd
             |vpiFullName:work@test_program.actual_cmd
             |vpiActual:
-            \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
+            \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
         |vpiStmt:
         \_Assignment: , line:296:7, endln:296:62
           |vpiParent:
@@ -18483,7 +18283,7 @@ Design: (unnamed)
               |vpiName:actual_cmd
               |vpiFullName:work@test_program.actual_cmd
               |vpiActual:
-              \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
+              \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
             |vpiArgument:
             \_Constant: , line:296:60, endln:296:61
               |vpiParent:
@@ -18504,7 +18304,7 @@ Design: (unnamed)
             |vpiName:exp_cmd
             |vpiFullName:work@test_program.exp_cmd
             |vpiActual:
-            \_Net: (work@test_program.exp_cmd), line:284:31, endln:284:38
+            \_Variable: (work@test_program.exp_cmd), line:284:31, endln:284:38
         |vpiStmt:
         \_TaskCall: (verify_command), line:297:7, endln:297:42
           |vpiParent:
@@ -18518,7 +18318,7 @@ Design: (unnamed)
             |vpiName:actual_cmd
             |vpiFullName:work@test_program.actual_cmd
             |vpiActual:
-            \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
+            \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
           |vpiArgument:
           \_RefObj: (work@test_program.exp_cmd), line:297:34, endln:297:41
             |vpiParent:
@@ -18526,7 +18326,7 @@ Design: (unnamed)
             |vpiName:exp_cmd
             |vpiFullName:work@test_program.exp_cmd
             |vpiActual:
-            \_Net: (work@test_program.exp_cmd), line:284:31, endln:284:38
+            \_Variable: (work@test_program.exp_cmd), line:284:31, endln:284:38
           |vpiName:
           \_Identifier: (verify_command)
             |vpiParent:
@@ -18551,7 +18351,7 @@ Design: (unnamed)
                 \_HierPath: (actual_cmd.trans), line:300:11, endln:300:27
                 |vpiName:actual_cmd
                 |vpiActual:
-                \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
+                \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
               |vpiActual:
               \_RefObj: (work@test_program.trans), line:300:22, endln:300:27
                 |vpiParent:
@@ -18559,7 +18359,7 @@ Design: (unnamed)
                 |vpiName:trans
                 |vpiFullName:work@test_program.trans
                 |vpiActual:
-                \_Net: (work@test_program.trans), line:300:22, endln:300:27
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:actual_cmd.trans
             |vpiOperand:
             \_RefObj: (work@test_program.READ), line:300:31, endln:300:35
@@ -18574,13 +18374,6 @@ Design: (unnamed)
             |vpiParent:
             \_IfStmt: , line:300:7, endln:304:10
             |vpiFullName:work@test_program
-            |vpiImportTypespec:
-            \_Net: (work@test_program.burstcount), line:301:43, endln:301:53
-              |vpiParent:
-              \_Begin: (work@test_program), line:300:37, endln:304:10
-              |vpiName:burstcount
-              |vpiFullName:work@test_program.burstcount
-              |vpiNetType:1
             |vpiStmt:
             \_Assignment: , line:301:10, endln:301:54
               |vpiParent:
@@ -18603,7 +18396,7 @@ Design: (unnamed)
                     \_HierPath: (actual_cmd.burstcount), line:301:32, endln:301:53
                     |vpiName:actual_cmd
                     |vpiActual:
-                    \_Net: (work@test_program.actual_cmd), line:284:19, endln:284:29
+                    \_Variable: (work@test_program.actual_cmd), line:284:19, endln:284:29
                   |vpiActual:
                   \_RefObj: (work@test_program.burstcount), line:301:43, endln:301:53
                     |vpiParent:
@@ -18611,7 +18404,7 @@ Design: (unnamed)
                     |vpiName:burstcount
                     |vpiFullName:work@test_program.burstcount
                     |vpiActual:
-                    \_Net: (work@test_program.burstcount), line:301:43, endln:301:53
+                    \_TypespecMember: (burstcount), line:48:37, endln:48:47
                   |vpiName:actual_cmd.burstcount
                 |vpiName:
                 \_Identifier: (create_response)
@@ -18625,7 +18418,7 @@ Design: (unnamed)
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:285:19, endln:285:22
+                \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
             |vpiStmt:
             \_TaskCall: (configure_and_push_response_to_slave_0), line:302:10, endln:302:53
               |vpiParent:
@@ -18639,33 +18432,33 @@ Design: (unnamed)
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:285:19, endln:285:22
+                \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
               |vpiName:
               \_Identifier: (configure_and_push_response_to_slave_0)
                 |vpiParent:
                 \_TaskCall: (configure_and_push_response_to_slave_0), line:302:10, endln:302:53
                 |vpiName:configure_and_push_response_to_slave_0
             |vpiStmt:
-            \_MethodFuncCall: (push_back), line:303:10, endln:303:52
+            \_MethodFuncCall: (push_back), line:303:39, endln:303:53
               |vpiParent:
               \_Begin: (work@test_program), line:300:37, endln:304:10
               |vpiArgument:
               \_RefObj: (work@test_program.rsp), line:303:49, endln:303:52
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:303:10, endln:303:52
+                \_MethodFuncCall: (push_back), line:303:39, endln:303:53
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:285:19, endln:285:22
+                \_Variable: (work@test_program.rsp), line:285:19, endln:285:22
               |vpiName:
               \_Identifier: (push_back)
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:303:10, endln:303:52
+                \_MethodFuncCall: (push_back), line:303:39, endln:303:53
                 |vpiName:push_back
               |vpiPrefix:
               \_RefObj: (work@test_program.read_response_queue_slave), line:303:10, endln:303:35
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:303:10, endln:303:52
+                \_MethodFuncCall: (push_back), line:303:39, endln:303:53
                 |vpiName:read_response_queue_slave
                 |vpiFullName:work@test_program.read_response_queue_slave
                 |vpiActual:
@@ -18699,14 +18492,14 @@ Design: (unnamed)
             \_HierPath: (work@test_program.$root.tb.dut.clk_clk), line:333:21, endln:333:41
             |vpiName:tb
             |vpiActual:
-            \_Net: (work@test_program.tb), line:249:19, endln:249:21
+            \_Net: (work@test_program.tb), line:425:19, endln:425:21
           |vpiActual:
           \_RefObj: (dut), line:333:30, endln:333:33
             |vpiParent:
             \_HierPath: (work@test_program.$root.tb.dut.clk_clk), line:333:21, endln:333:41
             |vpiName:dut
             |vpiActual:
-            \_Net: (work@test_program.dut), line:249:22, endln:249:25
+            \_Net: (work@test_program.dut), line:425:22, endln:425:25
           |vpiActual:
           \_RefObj: (clk_clk), line:333:34, endln:333:41
             |vpiParent:
@@ -18788,14 +18581,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_1.signal_read_response_complete), line:392:13, endln:392:64
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:392:22, endln:392:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.master_1.signal_read_response_complete), line:392:13, endln:392:64
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (master_1), line:392:26, endln:392:34
           |vpiParent:
@@ -18817,48 +18610,54 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:392:11, endln:392:65
         |vpiFullName:work@test_program
-        |vpiImportTypespec:
-        \_Net: (work@test_program.cmd), line:394:16, endln:394:19
+        |vpiVariable:
+        \_Variable: (work@test_program.cmd), line:394:16, endln:394:19
           |vpiParent:
           \_Begin: (work@test_program), line:392:66, endln:401:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.cmd.Command), line:394:7, endln:394:14
             |vpiParent:
-            \_Net: (work@test_program.cmd), line:394:16, endln:394:19
+            \_Variable: (work@test_program.cmd), line:394:16, endln:394:19
             |vpiName:Command
             |vpiFullName:work@test_program.cmd.Command
             |vpiActual:
             \_TypedefTypespec: (Command), line:54:6, endln:54:13
           |vpiName:cmd
           |vpiFullName:work@test_program.cmd
-        |vpiImportTypespec:
-        \_Net: (work@test_program.actual_rsp), line:395:16, endln:395:26
+        |vpiVariable:
+        \_Variable: (work@test_program.actual_rsp), line:395:16, endln:395:26
           |vpiParent:
           \_Begin: (work@test_program), line:392:66, endln:401:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.actual_rsp.Response), line:395:7, endln:395:15
             |vpiParent:
-            \_Net: (work@test_program.actual_rsp), line:395:16, endln:395:26
+            \_Variable: (work@test_program.actual_rsp), line:395:16, endln:395:26
             |vpiName:Response
             |vpiFullName:work@test_program.actual_rsp.Response
             |vpiActual:
             \_TypedefTypespec: (Response), line:61:6, endln:61:14
           |vpiName:actual_rsp
           |vpiFullName:work@test_program.actual_rsp
-        |vpiImportTypespec:
-        \_Net: (work@test_program.exp_rsp), line:395:28, endln:395:35
+        |vpiVariable:
+        \_Variable: (work@test_program.exp_rsp), line:395:28, endln:395:35
           |vpiParent:
           \_Begin: (work@test_program), line:392:66, endln:401:7
           |vpiTypespec:
           \_RefTypespec: (work@test_program.exp_rsp.Response), line:395:7, endln:395:15
             |vpiParent:
-            \_Net: (work@test_program.exp_rsp), line:395:28, endln:395:35
+            \_Variable: (work@test_program.exp_rsp), line:395:28, endln:395:35
             |vpiName:Response
             |vpiFullName:work@test_program.exp_rsp.Response
             |vpiActual:
             \_TypedefTypespec: (Response), line:61:6, endln:61:14
           |vpiName:exp_rsp
           |vpiFullName:work@test_program.exp_rsp
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.cmd), line:394:16, endln:394:19
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.actual_rsp), line:395:16, endln:395:26
+        |vpiImportTypespec:
+        \_Variable: (work@test_program.exp_rsp), line:395:28, endln:395:35
         |vpiStmt:
         \_Assignment: , line:397:7, endln:397:53
           |vpiParent:
@@ -18902,7 +18701,7 @@ Design: (unnamed)
             |vpiName:cmd
             |vpiFullName:work@test_program.cmd
             |vpiActual:
-            \_Net: (work@test_program.cmd), line:394:16, endln:394:19
+            \_Variable: (work@test_program.cmd), line:394:16, endln:394:19
         |vpiStmt:
         \_Assignment: , line:398:7, endln:398:53
           |vpiParent:
@@ -18927,7 +18726,7 @@ Design: (unnamed)
             |vpiName:actual_rsp
             |vpiFullName:work@test_program.actual_rsp
             |vpiActual:
-            \_Net: (work@test_program.actual_rsp), line:395:16, endln:395:26
+            \_Variable: (work@test_program.actual_rsp), line:395:16, endln:395:26
         |vpiStmt:
         \_Assignment: , line:399:7, endln:399:48
           |vpiParent:
@@ -18947,7 +18746,7 @@ Design: (unnamed)
               |vpiName:cmd
               |vpiFullName:work@test_program.cmd
               |vpiActual:
-              \_Net: (work@test_program.cmd), line:394:16, endln:394:19
+              \_Variable: (work@test_program.cmd), line:394:16, endln:394:19
             |vpiName:
             \_Identifier: (get_expected_read_response)
               |vpiParent:
@@ -18960,7 +18759,7 @@ Design: (unnamed)
             |vpiName:exp_rsp
             |vpiFullName:work@test_program.exp_rsp
             |vpiActual:
-            \_Net: (work@test_program.exp_rsp), line:395:28, endln:395:35
+            \_Variable: (work@test_program.exp_rsp), line:395:28, endln:395:35
         |vpiStmt:
         \_TaskCall: (verify_response), line:400:7, endln:400:43
           |vpiParent:
@@ -18974,7 +18773,7 @@ Design: (unnamed)
             |vpiName:actual_rsp
             |vpiFullName:work@test_program.actual_rsp
             |vpiActual:
-            \_Net: (work@test_program.actual_rsp), line:395:16, endln:395:26
+            \_Variable: (work@test_program.actual_rsp), line:395:16, endln:395:26
           |vpiArgument:
           \_RefObj: (work@test_program.exp_rsp), line:400:35, endln:400:42
             |vpiParent:
@@ -18982,7 +18781,7 @@ Design: (unnamed)
             |vpiName:exp_rsp
             |vpiFullName:work@test_program.exp_rsp
             |vpiActual:
-            \_Net: (work@test_program.exp_rsp), line:395:28, endln:395:35
+            \_Variable: (work@test_program.exp_rsp), line:395:28, endln:395:35
           |vpiName:
           \_Identifier: (verify_response)
             |vpiParent:
@@ -19012,14 +18811,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_1.signal_write_response_complete), line:404:13, endln:404:65
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:404:22, endln:404:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.master_1.signal_write_response_complete), line:404:13, endln:404:65
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (master_1), line:404:26, endln:404:34
           |vpiParent:
@@ -19033,7 +18832,7 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.master_1.signal_write_response_complete), line:404:13, endln:404:65
           |vpiName:signal_write_response_complete
           |vpiActual:
-          \_Net: (work@test_program.signal_write_response_complete), line:261:35, endln:261:65
+          \_Net: (work@test_program.signal_write_response_complete), line:404:35, endln:404:65
         |vpiName:$root.tb.dut.master_1.signal_write_response_complete
         |vpiFullName:work@test_program.$root.tb.dut.master_1.signal_write_response_complete
       |vpiStmt:
@@ -19074,14 +18873,14 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.slave_1.signal_command_received), line:425:13, endln:425:57
           |vpiName:tb
           |vpiActual:
-          \_Net: (work@test_program.tb), line:249:19, endln:249:21
+          \_Net: (work@test_program.tb), line:425:19, endln:425:21
         |vpiActual:
         \_RefObj: (dut), line:425:22, endln:425:25
           |vpiParent:
           \_HierPath: (work@test_program.$root.tb.dut.slave_1.signal_command_received), line:425:13, endln:425:57
           |vpiName:dut
           |vpiActual:
-          \_Net: (work@test_program.dut), line:249:22, endln:249:25
+          \_Net: (work@test_program.dut), line:425:22, endln:425:25
         |vpiActual:
         \_RefObj: (slave_1), line:425:26, endln:425:33
           |vpiParent:
@@ -19095,7 +18894,7 @@ Design: (unnamed)
           \_HierPath: (work@test_program.$root.tb.dut.slave_1.signal_command_received), line:425:13, endln:425:57
           |vpiName:signal_command_received
           |vpiActual:
-          \_Net: (work@test_program.signal_command_received), line:282:34, endln:282:57
+          \_Net: (work@test_program.signal_command_received), line:425:34, endln:425:57
         |vpiName:$root.tb.dut.slave_1.signal_command_received
         |vpiFullName:work@test_program.$root.tb.dut.slave_1.signal_command_received
       |vpiStmt:
@@ -19103,6 +18902,48 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:425:11, endln:425:58
         |vpiFullName:work@test_program
+        |vpiVariable:
+        \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
+          |vpiParent:
+          \_Begin: (work@test_program), line:425:59, endln:448:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.actual_cmd.Command), line:427:7, endln:427:14
+            |vpiParent:
+            \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
+            |vpiName:Command
+            |vpiFullName:work@test_program.actual_cmd.Command
+            |vpiActual:
+            \_TypedefTypespec: (Command), line:54:6, endln:54:13
+          |vpiName:actual_cmd
+          |vpiFullName:work@test_program.actual_cmd
+        |vpiVariable:
+        \_Variable: (work@test_program.exp_cmd), line:427:31, endln:427:38
+          |vpiParent:
+          \_Begin: (work@test_program), line:425:59, endln:448:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.exp_cmd.Command), line:427:7, endln:427:14
+            |vpiParent:
+            \_Variable: (work@test_program.exp_cmd), line:427:31, endln:427:38
+            |vpiName:Command
+            |vpiFullName:work@test_program.exp_cmd.Command
+            |vpiActual:
+            \_TypedefTypespec: (Command), line:54:6, endln:54:13
+          |vpiName:exp_cmd
+          |vpiFullName:work@test_program.exp_cmd
+        |vpiVariable:
+        \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
+          |vpiParent:
+          \_Begin: (work@test_program), line:425:59, endln:448:7
+          |vpiTypespec:
+          \_RefTypespec: (work@test_program.rsp.Response), line:428:7, endln:428:15
+            |vpiParent:
+            \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
+            |vpiName:Response
+            |vpiFullName:work@test_program.rsp.Response
+            |vpiActual:
+            \_TypedefTypespec: (Response), line:61:6, endln:61:14
+          |vpiName:rsp
+          |vpiFullName:work@test_program.rsp
         |vpiVariable:
         \_Variable: (work@test_program.backpressure_cycles), line:430:21, endln:430:40
           |vpiParent:
@@ -19260,60 +19101,17 @@ Design: (unnamed)
           \_Begin: (work@test_program), line:425:59, endln:448:7
           |vpiSigned:1
         |vpiImportTypespec:
-        \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
-          |vpiParent:
-          \_Begin: (work@test_program), line:425:59, endln:448:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.actual_cmd.Command), line:427:7, endln:427:14
-            |vpiParent:
-            \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
-            |vpiName:Command
-            |vpiFullName:work@test_program.actual_cmd.Command
-            |vpiActual:
-            \_TypedefTypespec: (Command), line:54:6, endln:54:13
-          |vpiName:actual_cmd
-          |vpiFullName:work@test_program.actual_cmd
+        \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
         |vpiImportTypespec:
-        \_Net: (work@test_program.exp_cmd), line:427:31, endln:427:38
-          |vpiParent:
-          \_Begin: (work@test_program), line:425:59, endln:448:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.exp_cmd.Command), line:427:7, endln:427:14
-            |vpiParent:
-            \_Net: (work@test_program.exp_cmd), line:427:31, endln:427:38
-            |vpiName:Command
-            |vpiFullName:work@test_program.exp_cmd.Command
-            |vpiActual:
-            \_TypedefTypespec: (Command), line:54:6, endln:54:13
-          |vpiName:exp_cmd
-          |vpiFullName:work@test_program.exp_cmd
+        \_Variable: (work@test_program.exp_cmd), line:427:31, endln:427:38
         |vpiImportTypespec:
-        \_Net: (work@test_program.rsp), line:428:19, endln:428:22
-          |vpiParent:
-          \_Begin: (work@test_program), line:425:59, endln:448:7
-          |vpiTypespec:
-          \_RefTypespec: (work@test_program.rsp.Response), line:428:7, endln:428:15
-            |vpiParent:
-            \_Net: (work@test_program.rsp), line:428:19, endln:428:22
-            |vpiName:Response
-            |vpiFullName:work@test_program.rsp.Response
-            |vpiActual:
-            \_TypedefTypespec: (Response), line:61:6, endln:61:14
-          |vpiName:rsp
-          |vpiFullName:work@test_program.rsp
+        \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
         |vpiImportTypespec:
         \_IntTypespec: , line:430:17, endln:430:20
         |vpiImportTypespec:
         \_Variable: (work@test_program.backpressure_cycles), line:430:21, endln:430:40
         |vpiImportTypespec:
         \_Variable: (work@test_program.i), line:433:16, endln:433:17
-        |vpiImportTypespec:
-        \_Net: (work@test_program.trans), line:443:22, endln:443:27
-          |vpiParent:
-          \_Begin: (work@test_program), line:425:59, endln:448:7
-          |vpiName:trans
-          |vpiFullName:work@test_program.trans
-          |vpiNetType:1
         |vpiStmt:
         \_ForStmt: (work@test_program), line:433:7, endln:436:10
         |vpiStmt:
@@ -19340,7 +19138,7 @@ Design: (unnamed)
             |vpiName:actual_cmd
             |vpiFullName:work@test_program.actual_cmd
             |vpiActual:
-            \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
+            \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
         |vpiStmt:
         \_Assignment: , line:439:7, endln:439:62
           |vpiParent:
@@ -19360,7 +19158,7 @@ Design: (unnamed)
               |vpiName:actual_cmd
               |vpiFullName:work@test_program.actual_cmd
               |vpiActual:
-              \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
+              \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
             |vpiArgument:
             \_Constant: , line:439:60, endln:439:61
               |vpiParent:
@@ -19381,7 +19179,7 @@ Design: (unnamed)
             |vpiName:exp_cmd
             |vpiFullName:work@test_program.exp_cmd
             |vpiActual:
-            \_Net: (work@test_program.exp_cmd), line:427:31, endln:427:38
+            \_Variable: (work@test_program.exp_cmd), line:427:31, endln:427:38
         |vpiStmt:
         \_TaskCall: (verify_command), line:440:7, endln:440:42
           |vpiParent:
@@ -19395,7 +19193,7 @@ Design: (unnamed)
             |vpiName:actual_cmd
             |vpiFullName:work@test_program.actual_cmd
             |vpiActual:
-            \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
+            \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
           |vpiArgument:
           \_RefObj: (work@test_program.exp_cmd), line:440:34, endln:440:41
             |vpiParent:
@@ -19403,7 +19201,7 @@ Design: (unnamed)
             |vpiName:exp_cmd
             |vpiFullName:work@test_program.exp_cmd
             |vpiActual:
-            \_Net: (work@test_program.exp_cmd), line:427:31, endln:427:38
+            \_Variable: (work@test_program.exp_cmd), line:427:31, endln:427:38
           |vpiName:
           \_Identifier: (verify_command)
             |vpiParent:
@@ -19428,7 +19226,7 @@ Design: (unnamed)
                 \_HierPath: (actual_cmd.trans), line:443:11, endln:443:27
                 |vpiName:actual_cmd
                 |vpiActual:
-                \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
+                \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
               |vpiActual:
               \_RefObj: (work@test_program.trans), line:443:22, endln:443:27
                 |vpiParent:
@@ -19436,7 +19234,7 @@ Design: (unnamed)
                 |vpiName:trans
                 |vpiFullName:work@test_program.trans
                 |vpiActual:
-                \_Net: (work@test_program.trans), line:443:22, endln:443:27
+                \_TypespecMember: (trans), line:47:37, endln:47:42
               |vpiName:actual_cmd.trans
             |vpiOperand:
             \_RefObj: (work@test_program.READ), line:443:31, endln:443:35
@@ -19451,13 +19249,6 @@ Design: (unnamed)
             |vpiParent:
             \_IfStmt: , line:443:7, endln:447:10
             |vpiFullName:work@test_program
-            |vpiImportTypespec:
-            \_Net: (work@test_program.burstcount), line:444:43, endln:444:53
-              |vpiParent:
-              \_Begin: (work@test_program), line:443:37, endln:447:10
-              |vpiName:burstcount
-              |vpiFullName:work@test_program.burstcount
-              |vpiNetType:1
             |vpiStmt:
             \_Assignment: , line:444:10, endln:444:54
               |vpiParent:
@@ -19480,7 +19271,7 @@ Design: (unnamed)
                     \_HierPath: (actual_cmd.burstcount), line:444:32, endln:444:53
                     |vpiName:actual_cmd
                     |vpiActual:
-                    \_Net: (work@test_program.actual_cmd), line:427:19, endln:427:29
+                    \_Variable: (work@test_program.actual_cmd), line:427:19, endln:427:29
                   |vpiActual:
                   \_RefObj: (work@test_program.burstcount), line:444:43, endln:444:53
                     |vpiParent:
@@ -19488,7 +19279,7 @@ Design: (unnamed)
                     |vpiName:burstcount
                     |vpiFullName:work@test_program.burstcount
                     |vpiActual:
-                    \_Net: (work@test_program.burstcount), line:444:43, endln:444:53
+                    \_TypespecMember: (burstcount), line:48:37, endln:48:47
                   |vpiName:actual_cmd.burstcount
                 |vpiName:
                 \_Identifier: (create_response)
@@ -19502,7 +19293,7 @@ Design: (unnamed)
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:428:19, endln:428:22
+                \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
             |vpiStmt:
             \_TaskCall: (configure_and_push_response_to_slave_1), line:445:10, endln:445:53
               |vpiParent:
@@ -19516,33 +19307,33 @@ Design: (unnamed)
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:428:19, endln:428:22
+                \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
               |vpiName:
               \_Identifier: (configure_and_push_response_to_slave_1)
                 |vpiParent:
                 \_TaskCall: (configure_and_push_response_to_slave_1), line:445:10, endln:445:53
                 |vpiName:configure_and_push_response_to_slave_1
             |vpiStmt:
-            \_MethodFuncCall: (push_back), line:446:10, endln:446:52
+            \_MethodFuncCall: (push_back), line:446:39, endln:446:53
               |vpiParent:
               \_Begin: (work@test_program), line:443:37, endln:447:10
               |vpiArgument:
               \_RefObj: (work@test_program.rsp), line:446:49, endln:446:52
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:446:10, endln:446:52
+                \_MethodFuncCall: (push_back), line:446:39, endln:446:53
                 |vpiName:rsp
                 |vpiFullName:work@test_program.rsp
                 |vpiActual:
-                \_Net: (work@test_program.rsp), line:428:19, endln:428:22
+                \_Variable: (work@test_program.rsp), line:428:19, endln:428:22
               |vpiName:
               \_Identifier: (push_back)
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:446:10, endln:446:52
+                \_MethodFuncCall: (push_back), line:446:39, endln:446:53
                 |vpiName:push_back
               |vpiPrefix:
               \_RefObj: (work@test_program.read_response_queue_slave), line:446:10, endln:446:35
                 |vpiParent:
-                \_MethodFuncCall: (push_back), line:446:10, endln:446:52
+                \_MethodFuncCall: (push_back), line:446:39, endln:446:53
                 |vpiName:read_response_queue_slave
                 |vpiFullName:work@test_program.read_response_queue_slave
                 |vpiActual:
@@ -19576,14 +19367,14 @@ Design: (unnamed)
             \_HierPath: (work@test_program.$root.tb.dut.clk_clk), line:476:21, endln:476:41
             |vpiName:tb
             |vpiActual:
-            \_Net: (work@test_program.tb), line:249:19, endln:249:21
+            \_Net: (work@test_program.tb), line:425:19, endln:425:21
           |vpiActual:
           \_RefObj: (dut), line:476:30, endln:476:33
             |vpiParent:
             \_HierPath: (work@test_program.$root.tb.dut.clk_clk), line:476:21, endln:476:41
             |vpiName:dut
             |vpiActual:
-            \_Net: (work@test_program.dut), line:249:22, endln:249:25
+            \_Net: (work@test_program.dut), line:425:22, endln:425:25
           |vpiActual:
           \_RefObj: (clk_clk), line:476:34, endln:476:41
             |vpiParent:
@@ -19706,14 +19497,14 @@ Design: (unnamed)
               \_HierPath: (work@test_program.$root.tb.dut.reset_reset_n), line:526:13, endln:526:39
               |vpiName:tb
               |vpiActual:
-              \_Net: (work@test_program.tb), line:249:19, endln:249:21
+              \_Net: (work@test_program.tb), line:425:19, endln:425:21
             |vpiActual:
             \_RefObj: (dut), line:526:22, endln:526:25
               |vpiParent:
               \_HierPath: (work@test_program.$root.tb.dut.reset_reset_n), line:526:13, endln:526:39
               |vpiName:dut
               |vpiActual:
-              \_Net: (work@test_program.dut), line:249:22, endln:249:25
+              \_Net: (work@test_program.dut), line:425:22, endln:425:25
             |vpiActual:
             \_RefObj: (reset_reset_n), line:526:26, endln:526:39
               |vpiParent:
@@ -19983,6 +19774,13 @@ Design: (unnamed)
     \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
     |vpiName:work@test_program1
   |vpiImportTypespec:
+  \_Net: (work@test_program1.2), line:802:35, endln:802:36
+    |vpiParent:
+    \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
+    |vpiName:2
+    |vpiFullName:work@test_program1.2
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_Net: (work@test_program1.tb), line:802:19, endln:802:21
     |vpiParent:
     \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
@@ -20004,13 +19802,6 @@ Design: (unnamed)
     |vpiFullName:work@test_program1.master_0
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@test_program1.2), line:802:35, endln:802:36
-    |vpiParent:
-    \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
-    |vpiName:2
-    |vpiFullName:work@test_program1.2
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@test_program1.signal_write_response_complete), line:802:38, endln:802:68
     |vpiParent:
     \_Module: work@test_program1 (work@test_program1), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:800:1, endln:806:10
@@ -20019,13 +19810,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@test_program1
   |vpiNet:
+  \_Net: (work@test_program1.2), line:802:35, endln:802:36
+  |vpiNet:
   \_Net: (work@test_program1.tb), line:802:19, endln:802:21
   |vpiNet:
   \_Net: (work@test_program1.dut), line:802:22, endln:802:25
   |vpiNet:
   \_Net: (work@test_program1.master_0), line:802:26, endln:802:34
-  |vpiNet:
-  \_Net: (work@test_program1.2), line:802:35, endln:802:36
   |vpiNet:
   \_Net: (work@test_program1.signal_write_response_complete), line:802:38, endln:802:68
   |vpiProcess:
@@ -20249,6 +20040,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 6
+[  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0

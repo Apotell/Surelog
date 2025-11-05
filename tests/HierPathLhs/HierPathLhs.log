@@ -239,18 +239,18 @@ Design: (unnamed)
         |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause.alert_cause
         |vpiNetType:1
       |vpiImportTypespec:
-      \_Net: (work@alert_handler_reg_wrap.gen_alert_cause.k), line:3:31, endln:3:32
-        |vpiParent:
-        \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
-        |vpiName:k
-        |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause.k
-        |vpiNetType:1
-      |vpiImportTypespec:
       \_Net: (work@alert_handler_reg_wrap.gen_alert_cause.d), line:3:37, endln:3:37
         |vpiParent:
         \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
         |vpiName:d
         |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause.d
+        |vpiNetType:1
+      |vpiImportTypespec:
+      \_Net: (work@alert_handler_reg_wrap.gen_alert_cause.k), line:3:31, endln:3:32
+        |vpiParent:
+        \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
+        |vpiName:k
+        |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause.k
         |vpiNetType:1
       |vpiStmt:
       \_ContAssign: , line:3:12, endln:3:43
@@ -303,23 +303,23 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_Variable: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
     |vpiImportTypespec:
-    \_Net: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
+    \_Net: (work@alert_handler_reg_wrap.k), line:2:29, endln:2:30
       |vpiParent:
       \_GenFor: (work@alert_handler_reg_wrap), line:2:3, endln:4:6
       |vpiName:k
       |vpiFullName:work@alert_handler_reg_wrap.k
       |vpiNetType:1
     |vpiImportTypespec:
-    \_Net: (work@alert_handler_reg_wrap.k), line:2:29, endln:2:30
+    \_Net: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
       |vpiParent:
       \_GenFor: (work@alert_handler_reg_wrap), line:2:3, endln:4:6
       |vpiName:k
       |vpiFullName:work@alert_handler_reg_wrap.k
       |vpiNetType:1
     |vpiNet:
-    \_Net: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
-    |vpiNet:
     \_Net: (work@alert_handler_reg_wrap.k), line:2:29, endln:2:30
+    |vpiNet:
+    \_Net: (work@alert_handler_reg_wrap.k), line:2:22, endln:2:23
     |vpiForInitStmt:
     \_Assignment: , line:2:8, endln:2:20
       |vpiParent:
@@ -492,27 +492,9 @@ Design: (unnamed)
       \_ArrayTypespec: , line:13:3, endln:13:22
     |vpiName:a
     |vpiFullName:work@top.a
-  |vpiImportTypespec:
-  \_Net: (work@top.a[0]), line:15:12, endln:15:13
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-    |vpiName:a[0]
-    |vpiFullName:work@top.a[0]
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@top.x), line:15:18, endln:15:22
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
-    |vpiName:x
-    |vpiFullName:work@top.x
-    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.a), line:13:23, endln:13:24
-  |vpiNet:
-  \_Net: (work@top.a[0]), line:15:12, endln:15:13
-  |vpiNet:
-  \_Net: (work@top.x), line:15:18, endln:15:22
   |vpiContAssign:
   \_ContAssign: , line:15:10, endln:15:26
     |vpiParent:
@@ -552,7 +534,7 @@ Design: (unnamed)
         |vpiName:a[0]
         |vpiFullName:a[0][0]
         |vpiActual:
-        \_Net: (work@top.a[0]), line:15:12, endln:15:13
+        \_BitSelect: (a[0]), line:15:10, endln:15:11
         |vpiIndex:
         \_Constant: , line:15:15, endln:15:16
           |vpiParent:
@@ -568,7 +550,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:a[0][0].x[0]
         |vpiActual:
-        \_Net: (work@top.x), line:15:18, endln:15:22
+        \_BitSelect: (a[0][0]), line:15:12, endln:15:13
         |vpiIndex:
         \_Constant: , line:15:20, endln:15:21
           |vpiParent:

@@ -147,14 +147,13 @@ Variable                                               3
 ------------------------------------------------------------
 Total:                                                44
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Illegal implicit net "id:22, name: addrs".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Illegal implicit net "id:23, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Illegal implicit net "id:27, name: min".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Illegal implicit net "id:29, name: addrs".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Illegal implicit net "id:30, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Illegal implicit net "id:34, name: max".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Illegal implicit net "id:29, name:addrs".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Illegal implicit net "id:30, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Illegal implicit net "id:23, name:i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Illegal implicit net "id:27, name:min".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Illegal implicit net "id:34, name:max".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Illegal implicit net "id:22, name:addrs".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachClass/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:11:39: Unsupported Typespec: id:19, type:RefTypespec, name:range.
 [ERR:IG0809] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Null Actual: id:22, type:BitSelect, name:addrs.
 [ERR:IG0809] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Null Actual: id:23, type:RefObj, name:i.
 [ERR:IG0809] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Null Actual: id:27, type:RefObj, name:min.
@@ -199,7 +198,7 @@ Design: (unnamed)
         \_Variable: (uvm::uvm_reg_map::m_mems_by_offset), line:4:17, endln:4:33
         |vpiFullName:uvm::uvm_reg_map::m_mems_by_offset
         |vpiActual:
-        \_ArrayTypespec: , line:4:11, endln:4:37
+        \_ArrayTypespec: , line:4:33, endln:4:37
       |vpiName:m_mems_by_offset
       |vpiFullName:uvm::uvm_reg_map::m_mems_by_offset
       |vpiAutomatic:1
@@ -210,14 +209,14 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (uvm::uvm_reg_map), file:${SURELOG_DIR}/tests/ForeachClass/dut.sv, line:3:3, endln:5:11
     |vpiTypespec:
-    \_ArrayTypespec: , line:4:11, endln:4:37
+    \_ArrayTypespec: , line:4:33, endln:4:37
       |vpiParent:
       \_ClassDefn: (uvm::uvm_reg_map), file:${SURELOG_DIR}/tests/ForeachClass/dut.sv, line:3:3, endln:5:11
       |vpiArrayType:1
       |vpiRange:
       \_Range: , line:4:33, endln:4:37
         |vpiParent:
-        \_ArrayTypespec: , line:4:11, endln:4:37
+        \_ArrayTypespec: , line:4:33, endln:4:37
         |vpiRightRange:
         \_Operation: , line:4:34, endln:4:36
           |vpiParent:
@@ -234,14 +233,14 @@ Design: (unnamed)
       |vpiElemTypespec:
       \_RefTypespec: (uvm::uvm_reg_map), line:4:11, endln:4:16
         |vpiParent:
-        \_ArrayTypespec: , line:4:11, endln:4:37
+        \_ArrayTypespec: , line:4:33, endln:4:37
         |vpiFullName:uvm::uvm_reg_map
         |vpiActual:
         \_LogicTypespec: , line:4:11, endln:4:16
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:11, endln:4:16
     |vpiImportTypespec:
-    \_ArrayTypespec: , line:4:11, endln:4:37
+    \_ArrayTypespec: , line:4:33, endln:4:37
     |vpiImportTypespec:
     \_Variable: (uvm::uvm_reg_map::m_mems_by_offset), line:4:17, endln:4:33
   |vpiInternalScope:
@@ -264,11 +263,11 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (uvm::f1)
         |vpiTypespec:
-        \_RefTypespec: (uvm::f1::top_map::uvm::uvm_reg_map), line:9:5, endln:9:16
+        \_RefTypespec: (uvm::f1::top_map::uvm_reg_map), line:9:5, endln:9:16
           |vpiParent:
           \_Variable: (uvm::f1::top_map), line:9:17, endln:9:24
-          |vpiName:uvm::uvm_reg_map
-          |vpiFullName:uvm::f1::top_map::uvm::uvm_reg_map
+          |vpiName:uvm_reg_map
+          |vpiFullName:uvm::f1::top_map::uvm_reg_map
           |vpiActual:
           \_ClassTypespec: (uvm_reg_map)
         |vpiName:top_map
@@ -372,13 +371,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForeachStmt: (uvm::f1), line:11:5, endln:14:8
           |vpiTypespec:
-          \_RefTypespec: (uvm::f1::range::range), line:11:39, endln:11:44
+          \_RefTypespec: (uvm::f1::range)
             |vpiParent:
             \_Variable: (uvm::f1::range), line:11:39, endln:11:44
-            |vpiName:range
-            |vpiFullName:uvm::f1::range::range
+            |vpiFullName:uvm::f1::range
             |vpiActual:
-            \_UnsupportedTypespec: (range), line:11:39, endln:11:44
+            \_UnsupportedTypespec: 
           |vpiName:range
           |vpiFullName:uvm::f1::range
         |vpiVariable:
@@ -394,14 +392,13 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (uvm::f1), line:11:47, endln:14:8
       |vpiTypespec:
-      \_UnsupportedTypespec: (range), line:11:39, endln:11:44
+      \_UnsupportedTypespec: 
         |vpiParent:
         \_Begin: (uvm::f1)
-        |vpiName:range
       |vpiImportTypespec:
       \_Variable: (uvm::f1::top_map), line:9:17, endln:9:24
       |vpiImportTypespec:
-      \_UnsupportedTypespec: (range), line:11:39, endln:11:44
+      \_UnsupportedTypespec: 
       |vpiStmt:
       \_ForeachStmt: (uvm::f1), line:11:5, endln:14:8
     |vpiTypespec:
@@ -443,6 +440,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 13
+[  ERROR] : 12
 [WARNING] : 1
 [   NOTE] : 0

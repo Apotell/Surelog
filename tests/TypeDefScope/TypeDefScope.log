@@ -130,16 +130,16 @@ ModuleTypespec                                         1
 Net                                                    2
 Package                                                1
 Port                                                   2
-RefObj                                                 2
-RefTypespec                                           21
+RefTypespec                                           23
 SourceFile                                             1
 StringTypespec                                         4
 Task                                                   9
 TypedefTypespec                                        3
 UnsupportedTypespec                                    5
+Variable                                               2
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                               153
+Total:                                               155
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefScope/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/TypeDefScope/dut.sv:8:9: Unsupported Typespec: id:29, type:RefTypespec, name:uvmc_default_converter.
@@ -232,7 +232,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiName:new
       |vpiFullName:builtin::mailbox::new
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
@@ -254,7 +254,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
           |vpiParent:
           \_IODecl: (bound), line:3:23, endln:3:28
@@ -271,7 +271,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
         |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
         \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
@@ -315,7 +315,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
         |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiTypedef:
+      |vpiTypespec:
       \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
@@ -364,7 +364,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
         |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
@@ -414,7 +414,7 @@ Design: (unnamed)
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
         |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
         \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
@@ -566,7 +566,7 @@ Design: (unnamed)
       |vpiFullName:builtin::process::resume
       |vpiMethod:1
       |vpiVisibility:1
-    |vpiTypedef:
+    |vpiTypespec:
     \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/TypeDefScope/builtin.sv, line:30:3, endln:52:11
@@ -610,7 +610,7 @@ Design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
-    |vpiTypedef:
+    |vpiTypespec:
     \_TypedefTypespec: (state), line:32:68, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/TypeDefScope/builtin.sv, line:30:3, endln:52:11
@@ -674,7 +674,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiName:new
       |vpiFullName:builtin::semaphore::new
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
@@ -696,7 +696,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
           |vpiParent:
           \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -713,7 +713,7 @@ Design: (unnamed)
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiName:put
       |vpiFullName:builtin::semaphore::put
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
@@ -736,7 +736,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
           |vpiParent:
           \_IODecl: (keyCount), line:60:18, endln:60:26
@@ -753,7 +753,7 @@ Design: (unnamed)
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiName:get
       |vpiFullName:builtin::semaphore::get
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
@@ -776,7 +776,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
           |vpiParent:
           \_IODecl: (keyCount), line:63:18, endln:63:26
@@ -793,7 +793,7 @@ Design: (unnamed)
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiTypedef:
+      |vpiTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
@@ -823,7 +823,7 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
-        |vpiTypedef:
+        |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
           |vpiParent:
           \_IODecl: (keyCount), line:66:30, endln:66:38
@@ -846,56 +846,56 @@ Design: (unnamed)
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiMethod:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (array)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:array
     |vpiClassDefn:
     \_ClassDefn: (builtin::array)
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (queue)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:queue
     |vpiClassDefn:
     \_ClassDefn: (builtin::queue)
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (string)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:string
     |vpiClassDefn:
     \_ClassDefn: (builtin::string)
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (system)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:system
     |vpiClassDefn:
     \_ClassDefn: (builtin::system)
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (any_sverilog_class)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:any_sverilog_class
     |vpiClassDefn:
     \_ClassDefn: (builtin::any_sverilog_class)
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (mailbox)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiClassDefn:
     \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/TypeDefScope/builtin.sv, line:1:3, endln:27:11
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (process)
     |vpiParent:
     \_Package: (builtin)
     |vpiName:process
     |vpiClassDefn:
     \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/TypeDefScope/builtin.sv, line:30:3, endln:52:11
-  |vpiTypedef:
+  |vpiTypespec:
   \_ClassTypespec: (semaphore)
     |vpiParent:
     \_Package: (builtin)
@@ -974,7 +974,35 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiFullName:work@dut.UVMC_set_config_object
-      |vpiTypedef:
+      |vpiVariable:
+      \_Variable: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
+        |vpiParent:
+        \_Begin: (work@dut.UVMC_set_config_object)
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.UVMC_set_config_object.obj.uvm_object), line:11:1, endln:11:11
+          |vpiParent:
+          \_Variable: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
+          |vpiName:uvm_object
+          |vpiFullName:work@dut.UVMC_set_config_object.obj.uvm_object
+          |vpiActual:
+          \_UnsupportedTypespec: (uvm_object), line:11:1, endln:11:11
+        |vpiName:obj
+        |vpiFullName:work@dut.UVMC_set_config_object.obj
+      |vpiVariable:
+      \_Variable: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
+        |vpiParent:
+        \_Begin: (work@dut.UVMC_set_config_object)
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.UVMC_set_config_object.comp.uvm_component), line:12:1, endln:12:14
+          |vpiParent:
+          \_Variable: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
+          |vpiName:uvm_component
+          |vpiFullName:work@dut.UVMC_set_config_object.comp.uvm_component
+          |vpiActual:
+          \_UnsupportedTypespec: (uvm_component), line:12:1, endln:12:14
+        |vpiName:comp
+        |vpiFullName:work@dut.UVMC_set_config_object.comp
+      |vpiTypespec:
       \_TypedefTypespec: (converter1), line:8:46, endln:8:56
         |vpiParent:
         \_Begin: (work@dut.UVMC_set_config_object)
@@ -991,16 +1019,16 @@ Design: (unnamed)
           |vpiFullName:work@dut.UVMC_set_config_object.converter1.uvmc_default_converter
           |vpiActual:
           \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
-      |vpiTypedef:
+      |vpiTypespec:
       \_UnsupportedTypespec: (uvmc_default_converter), line:8:9, endln:8:31
         |vpiParent:
         \_Begin: (work@dut.UVMC_set_config_object)
         |vpiName:uvmc_default_converter
-      |vpiTypedef:
+      |vpiTypespec:
       \_LogicTypespec: , line:9:9, endln:9:14
         |vpiParent:
         \_Begin: (work@dut.UVMC_set_config_object)
-      |vpiTypedef:
+      |vpiTypespec:
       \_TypedefTypespec: (converter2), line:9:15, endln:9:25
         |vpiParent:
         \_Begin: (work@dut.UVMC_set_config_object)
@@ -1016,6 +1044,16 @@ Design: (unnamed)
           |vpiFullName:work@dut.UVMC_set_config_object.converter2
           |vpiActual:
           \_LogicTypespec: , line:9:9, endln:9:14
+      |vpiTypespec:
+      \_UnsupportedTypespec: (uvm_object), line:11:1, endln:11:11
+        |vpiParent:
+        \_Begin: (work@dut.UVMC_set_config_object)
+        |vpiName:uvm_object
+      |vpiTypespec:
+      \_UnsupportedTypespec: (uvm_component), line:12:1, endln:12:14
+        |vpiParent:
+        \_Begin: (work@dut.UVMC_set_config_object)
+        |vpiName:uvm_component
       |vpiImportTypespec:
       \_TypedefTypespec: (converter1), line:8:46, endln:8:56
       |vpiImportTypespec:
@@ -1024,15 +1062,23 @@ Design: (unnamed)
       \_LogicTypespec: , line:9:9, endln:9:14
       |vpiImportTypespec:
       \_TypedefTypespec: (converter2), line:9:15, endln:9:25
-    |vpiTypedef:
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvm_object), line:11:1, endln:11:11
+      |vpiImportTypespec:
+      \_Variable: (work@dut.UVMC_set_config_object.obj), line:11:12, endln:11:15
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvm_component), line:12:1, endln:12:14
+      |vpiImportTypespec:
+      \_Variable: (work@dut.UVMC_set_config_object.comp), line:12:15, endln:12:19
+    |vpiTypespec:
     \_VoidTypespec: , line:3:13, endln:3:17
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
-    |vpiTypedef:
+    |vpiTypespec:
     \_StringTypespec: , line:3:42, endln:3:48
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
-    |vpiTypedef:
+    |vpiTypespec:
     \_UnsupportedTypespec: (bits_t), line:7:7, endln:7:13
       |vpiParent:
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
@@ -1057,7 +1103,7 @@ Design: (unnamed)
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiDirection:1
       |vpiName:type_name
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@dut.UVMC_set_config_object.type_name), line:3:42, endln:3:48
         |vpiParent:
         \_IODecl: (type_name), line:3:49, endln:3:58
@@ -1070,7 +1116,7 @@ Design: (unnamed)
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiDirection:1
       |vpiName:contxt
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@dut.UVMC_set_config_object.contxt), line:4:7, endln:4:13
         |vpiParent:
         \_IODecl: (contxt), line:4:14, endln:4:20
@@ -1083,7 +1129,7 @@ Design: (unnamed)
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiDirection:1
       |vpiName:inst_name
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@dut.UVMC_set_config_object.inst_name), line:5:7, endln:5:13
         |vpiParent:
         \_IODecl: (inst_name), line:5:14, endln:5:23
@@ -1096,7 +1142,7 @@ Design: (unnamed)
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiDirection:1
       |vpiName:field_name
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@dut.UVMC_set_config_object.field_name), line:6:7, endln:6:13
         |vpiParent:
         \_IODecl: (field_name), line:6:14, endln:6:24
@@ -1109,7 +1155,7 @@ Design: (unnamed)
       \_Function: (work@dut.UVMC_set_config_object), line:3:4, endln:15:15
       |vpiDirection:1
       |vpiName:value
-      |vpiTypedef:
+      |vpiTypespec:
       \_RefTypespec: (work@dut.UVMC_set_config_object.value.bits_t), line:7:7, endln:7:13
         |vpiParent:
         \_IODecl: (value), line:7:14, endln:7:19
@@ -1152,7 +1198,7 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefScope/dut.sv, line:1:1, endln:18:11
     |vpiName:b
     |vpiDirection:3
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (dut)
   |vpiParent:
   \_Design: (unnamed)

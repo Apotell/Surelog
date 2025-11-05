@@ -236,7 +236,6 @@ Total:                                                95
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Unsupported Typespec: id:17, type:RefTypespec, name:some_other_type.
-[ERR:IG0811] ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported Typespec: id:68, type:RefTypespec, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -484,13 +483,12 @@ Design: (unnamed)
         |vpiParent:
         \_ForeachStmt: (Tsum), line:30:3, endln:31:36
         |vpiTypespec:
-        \_RefTypespec: (Tsum.i.i), line:30:19, endln:30:20
+        \_RefTypespec: (Tsum.i)
           |vpiParent:
           \_Variable: (Tsum.i), line:30:19, endln:30:20
-          |vpiName:i
-          |vpiFullName:Tsum.i.i
+          |vpiFullName:Tsum.i
           |vpiActual:
-          \_UnsupportedTypespec: (i), line:30:19, endln:30:20
+          \_UnsupportedTypespec: 
         |vpiName:i
         |vpiFullName:Tsum.i
       |vpiVariable:
@@ -558,12 +556,11 @@ Design: (unnamed)
             \_TypespecMember: (field1), line:23:8, endln:23:14
           |vpiName:Tsum.field1
     |vpiTypespec:
-    \_UnsupportedTypespec: (i), line:30:19, endln:30:20
+    \_UnsupportedTypespec: 
       |vpiParent:
       \_Begin: (Tsum)
-      |vpiName:i
     |vpiImportTypespec:
-    \_UnsupportedTypespec: (i), line:30:19, endln:30:20
+    \_UnsupportedTypespec: 
     |vpiStmt:
     \_Assignment: , line:29:3, endln:29:20
       |vpiParent:
@@ -600,20 +597,20 @@ Design: (unnamed)
     |vpiStmt:
     \_ForeachStmt: (Tsum), line:30:3, endln:31:36
   |vpiTypespec:
-  \_ArrayTypespec: , line:28:34, endln:28:44
+  \_ArrayTypespec: , line:28:42, endln:28:44
     |vpiParent:
     \_Function: (Tsum), line:28:1, endln:32:12
     |vpiArrayType:2
     |vpiElemTypespec:
     \_RefTypespec: (Tsum.T), line:28:34, endln:28:35
       |vpiParent:
-      \_ArrayTypespec: , line:28:34, endln:28:44
+      \_ArrayTypespec: , line:28:42, endln:28:44
       |vpiName:T
       |vpiFullName:Tsum.T
       |vpiActual:
       \_TypedefTypespec: (T), line:25:3, endln:25:4
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:28:34, endln:28:44
+  \_ArrayTypespec: , line:28:42, endln:28:44
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
@@ -656,7 +653,7 @@ Design: (unnamed)
       \_IODecl: (driver), line:28:36, endln:28:42
       |vpiFullName:Tsum.driver
       |vpiActual:
-      \_ArrayTypespec: , line:28:34, endln:28:44
+      \_ArrayTypespec: , line:28:42, endln:28:44
   |vpiStmt:
   \_Begin: (Tsum)
 |vpiTaskFunc:
@@ -673,21 +670,21 @@ Design: (unnamed)
     |vpiParent:
     \_Function: (my_function2), line:41:1, endln:42:12
   |vpiTypespec:
-  \_ArrayTypespec: , line:41:44, endln:41:58
+  \_ArrayTypespec: , line:41:56, endln:41:58
     |vpiParent:
     \_Function: (my_function2), line:41:1, endln:42:12
     |vpiArrayType:2
     |vpiElemTypespec:
     \_RefTypespec: (my_function2), line:41:44, endln:41:48
       |vpiParent:
-      \_ArrayTypespec: , line:41:44, endln:41:58
+      \_ArrayTypespec: , line:41:56, endln:41:58
       |vpiFullName:my_function2
       |vpiActual:
       \_RealTypespec: , line:41:20, endln:41:24
   |vpiImportTypespec:
   \_RealTypespec: , line:41:20, endln:41:24
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:41:44, endln:41:58
+  \_ArrayTypespec: , line:41:56, endln:41:58
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
@@ -729,10 +726,10 @@ Design: (unnamed)
       \_IODecl: (driver), line:41:49, endln:41:55
       |vpiFullName:my_function2.driver
       |vpiActual:
-      \_ArrayTypespec: , line:41:44, endln:41:58
+      \_ArrayTypespec: , line:41:56, endln:41:58
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0

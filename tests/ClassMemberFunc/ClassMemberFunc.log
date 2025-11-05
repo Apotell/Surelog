@@ -100,21 +100,19 @@ HierPath                                               1
 Identifier                                             6
 MethodFuncCall                                         1
 Package                                                1
-RefObj                                                 3
-RefTypespec                                            3
+RefObj                                                 2
+RefTypespec                                            4
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
-Variable                                               1
+Variable                                               2
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                31
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Illegal implicit net "id:27, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Illegal implicit net "id:22, name: rsrc".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Illegal implicit net "id:28, name:i".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberFunc/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Null Actual: id:27, type:RefObj, name:i.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:21: Null Actual: id:22, type:RefObj, name:rsrc.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv:15:35: Null Actual: id:28, type:RefObj, name:i.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -201,8 +199,31 @@ Design: (unnamed)
           \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
         |vpiName:rq
         |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rq
+      |vpiVariable:
+      \_Variable: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25
+        |vpiParent:
+        \_Begin: (pkg::uvm_sequencer_base::start_phase_sequence)
+        |vpiTypespec:
+        \_RefTypespec: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc::uvm_resource_base), line:15:3, endln:15:20
+          |vpiParent:
+          \_Variable: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25
+          |vpiName:uvm_resource_base
+          |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rsrc::uvm_resource_base
+          |vpiActual:
+          \_UnsupportedTypespec: (uvm_resource_base), line:15:3, endln:15:20
+        |vpiName:rsrc
+        |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rsrc
+      |vpiTypespec:
+      \_UnsupportedTypespec: (uvm_resource_base), line:15:3, endln:15:20
+        |vpiParent:
+        \_Begin: (pkg::uvm_sequencer_base::start_phase_sequence)
+        |vpiName:uvm_resource_base
       |vpiImportTypespec:
       \_Variable: (pkg::uvm_sequencer_base::start_phase_sequence::rq), line:13:30, endln:13:32
+      |vpiImportTypespec:
+      \_UnsupportedTypespec: (uvm_resource_base), line:15:3, endln:15:20
+      |vpiImportTypespec:
+      \_Variable: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25
       |vpiStmt:
       \_Assignment: , line:15:21, endln:15:37
         |vpiParent:
@@ -237,11 +258,7 @@ Design: (unnamed)
               |vpiName:get
           |vpiName:rq.get
         |vpiLhs:
-        \_RefObj: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25
-          |vpiParent:
-          \_Assignment: , line:15:21, endln:15:37
-          |vpiName:rsrc
-          |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rsrc
+        \_Variable: (pkg::uvm_sequencer_base::start_phase_sequence::rsrc), line:15:21, endln:15:25
     |vpiTypespec:
     \_VoidTypespec: , line:12:10, endln:12:14
       |vpiParent:
@@ -294,6 +311,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 4
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0

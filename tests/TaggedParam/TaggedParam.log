@@ -162,9 +162,7 @@ TypespecMember                                         2
 ------------------------------------------------------------
 Total:                                                37
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Illegal implicit net "id:24, name: fpnew_pkg::RV64D_Xsflt".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedParam/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Null Actual: id:24, type:RefObj, name:fpnew_pkg::RV64D_Xsflt.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -278,9 +276,20 @@ Design: (unnamed)
       \_ParamAssign: , line:12:45, endln:12:84
       |vpiName:fpnew_pkg::RV64D_Xsflt
       |vpiFullName:work@fpnew_top.fpnew_pkg::RV64D_Xsflt
+      |vpiActual:
+      \_Net: (work@fpnew_top.fpnew_pkg::RV64D_Xsflt), line:12:62, endln:12:84
     |vpiLhs:
     \_Parameter: (work@fpnew_top.Features), line:12:45, endln:12:84
+  |vpiImportTypespec:
+  \_Net: (work@fpnew_top.fpnew_pkg::RV64D_Xsflt), line:12:62, endln:12:84
+    |vpiParent:
+    \_Module: work@fpnew_top (work@fpnew_top), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:10:2, endln:14:11
+    |vpiName:fpnew_pkg::RV64D_Xsflt
+    |vpiFullName:work@fpnew_top.fpnew_pkg::RV64D_Xsflt
+    |vpiNetType:1
   |vpiDefName:work@fpnew_top
+  |vpiNet:
+  \_Net: (work@fpnew_top.fpnew_pkg::RV64D_Xsflt), line:12:62, endln:12:84
 |vpiAllModules:
 \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
   |vpiParent:
@@ -390,6 +399,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0

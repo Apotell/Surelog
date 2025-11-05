@@ -115,7 +115,6 @@ Identifier                                             3
 IntTypespec                                            4
 Module                                                 1
 ModuleTypespec                                         1
-Net                                                    1
 Operation                                              2
 Port                                                   1
 Range                                                  1
@@ -123,7 +122,7 @@ RefObj                                                 1
 RefTypespec                                            5
 ReturnStmt                                             1
 SourceFile                                             1
-Variable                                               1
+Variable                                               2
 ------------------------------------------------------------
 Total:                                                35
 === UHDM Object Stats End ===
@@ -176,20 +175,33 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiFullName:work@top.get_a1
+      |vpiVariable:
+      \_Variable: (work@top.get_a1.a), line:5:11, endln:5:12
+        |vpiParent:
+        \_Begin: (work@top.get_a1)
+        |vpiTypespec:
+        \_RefTypespec: (work@top.get_a1.a), line:5:7, endln:5:10
+          |vpiParent:
+          \_Variable: (work@top.get_a1.a), line:5:11, endln:5:12
+          |vpiFullName:work@top.get_a1.a
+          |vpiActual:
+          \_ArrayTypespec: , line:5:13, endln:5:26
+        |vpiName:a
+        |vpiFullName:work@top.get_a1.a
       |vpiTypespec:
       \_IntTypespec: , line:5:7, endln:5:10
         |vpiParent:
         \_Begin: (work@top.get_a1)
         |vpiSigned:1
       |vpiTypespec:
-      \_ArrayTypespec: , line:5:7, endln:5:26
+      \_ArrayTypespec: , line:5:13, endln:5:26
         |vpiParent:
         \_Begin: (work@top.get_a1)
         |vpiArrayType:1
         |vpiRange:
         \_Range: , line:5:13, endln:5:16
           |vpiParent:
-          \_ArrayTypespec: , line:5:7, endln:5:26
+          \_ArrayTypespec: , line:5:13, endln:5:26
           |vpiRightRange:
           \_Operation: , line:5:14, endln:5:15
             |vpiParent:
@@ -206,27 +218,16 @@ Design: (unnamed)
         |vpiElemTypespec:
         \_RefTypespec: (work@top.get_a1), line:5:7, endln:5:10
           |vpiParent:
-          \_ArrayTypespec: , line:5:7, endln:5:26
+          \_ArrayTypespec: , line:5:13, endln:5:26
           |vpiFullName:work@top.get_a1
           |vpiActual:
           \_IntTypespec: , line:5:7, endln:5:10
       |vpiImportTypespec:
       \_IntTypespec: , line:5:7, endln:5:10
       |vpiImportTypespec:
-      \_ArrayTypespec: , line:5:7, endln:5:26
+      \_ArrayTypespec: , line:5:13, endln:5:26
       |vpiImportTypespec:
-      \_Net: (work@top.get_a1.a), line:5:11, endln:5:12
-        |vpiParent:
-        \_Begin: (work@top.get_a1)
-        |vpiTypespec:
-        \_RefTypespec: (work@top.get_a1.a), line:5:7, endln:5:10
-          |vpiParent:
-          \_Net: (work@top.get_a1.a), line:5:11, endln:5:12
-          |vpiFullName:work@top.get_a1.a
-          |vpiActual:
-          \_ArrayTypespec: , line:5:7, endln:5:26
-        |vpiName:a
-        |vpiFullName:work@top.get_a1.a
+      \_Variable: (work@top.get_a1.a), line:5:11, endln:5:12
       |vpiStmt:
       \_Assignment: , line:5:11, endln:5:26
         |vpiParent:
@@ -255,7 +256,7 @@ Design: (unnamed)
             |UINT:1
             |vpiConstType:9
         |vpiLhs:
-        \_Net: (work@top.get_a1.a), line:5:11, endln:5:12
+        \_Variable: (work@top.get_a1.a), line:5:11, endln:5:12
       |vpiStmt:
       \_ReturnStmt: , line:6:7, endln:6:18
         |vpiParent:
@@ -267,7 +268,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@top.get_a1.a
           |vpiActual:
-          \_Net: (work@top.get_a1.a), line:5:11, endln:5:12
+          \_Variable: (work@top.get_a1.a), line:5:11, endln:5:12
           |vpiIndex:
           \_Constant: , line:6:16, endln:6:17
             |vpiParent:

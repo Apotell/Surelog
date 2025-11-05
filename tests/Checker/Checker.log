@@ -617,10 +617,19 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          1
+BitTypespec                                            3
+Constant                                               4
 Design                                                 1
+Identifier                                             1
+MethodFuncCall                                         1
+Range                                                  1
+RefTypespec                                            5
 SourceFile                                             1
+UnsupportedTypespec                                    1
+Variable                                               4
 ------------------------------------------------------------
-Total:                                                 2
+Total:                                                23
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Checker/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -632,6 +641,132 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:dut.sv
+|vpiTypespec:
+\_BitTypespec: , line:16:3, endln:16:6
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_ArrayTypespec: , line:52:3, endln:52:12
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:52:7, endln:52:12
+    |vpiParent:
+    \_ArrayTypespec: , line:52:3, endln:52:12
+    |vpiLeftRange:
+    \_Constant: , line:52:8, endln:52:9
+      |vpiParent:
+      \_Range: , line:52:7, endln:52:12
+      |vpiDecompile:3
+      |vpiSize:64
+      |UINT:3
+      |vpiConstType:9
+    |vpiRightRange:
+    \_Constant: , line:52:10, endln:52:11
+      |vpiParent:
+      \_Range: , line:52:7, endln:52:12
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+  |vpiElemTypespec:
+  \_RefTypespec: , line:52:3, endln:52:6
+    |vpiParent:
+    \_ArrayTypespec: , line:52:3, endln:52:12
+    |vpiActual:
+    \_BitTypespec: , line:16:3, endln:16:6
+  |vpiPacked:1
+|vpiTypespec:
+\_UnsupportedTypespec: (cg_op), line:57:3, endln:57:8
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:cg_op
+|vpiVariable:
+\_Variable: (window), line:16:7, endln:16:13
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiTypespec:
+  \_RefTypespec: (window), line:16:3, endln:16:6
+    |vpiParent:
+    \_Variable: (window), line:16:7, endln:16:13
+    |vpiFullName:window
+    |vpiActual:
+    \_BitTypespec: , line:16:3, endln:16:6
+  |vpiName:window
+  |vpiAutomatic:1
+  |vpiRandType:1
+  |vpiVisibility:1
+  |vpiExpr:
+  \_Constant: , line:16:16, endln:16:20
+    |vpiParent:
+    \_Variable: (window), line:16:7, endln:16:13
+    |vpiDecompile:1'b0
+    |vpiSize:1
+    |BIN:0
+    |vpiConstType:3
+|vpiVariable:
+\_Variable: (next_window), line:16:22, endln:16:33
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiTypespec:
+  \_RefTypespec: (next_window), line:16:3, endln:16:6
+    |vpiParent:
+    \_Variable: (next_window), line:16:22, endln:16:33
+    |vpiFullName:next_window
+    |vpiActual:
+    \_BitTypespec: , line:16:3, endln:16:6
+  |vpiName:next_window
+  |vpiAutomatic:1
+  |vpiRandType:1
+  |vpiVisibility:1
+  |vpiExpr:
+  \_Constant: , line:16:36, endln:16:40
+    |vpiParent:
+    \_Variable: (next_window), line:16:22, endln:16:33
+    |vpiDecompile:1'b1
+    |vpiSize:1
+    |BIN:1
+    |vpiConstType:3
+|vpiVariable:
+\_Variable: (opcode_d1), line:52:13, endln:52:22
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiTypespec:
+  \_RefTypespec: (opcode_d1), line:52:3, endln:52:12
+    |vpiParent:
+    \_Variable: (opcode_d1), line:52:13, endln:52:22
+    |vpiFullName:opcode_d1
+    |vpiActual:
+    \_ArrayTypespec: , line:52:3, endln:52:12
+  |vpiName:opcode_d1
+  |vpiAutomatic:1
+  |vpiRandType:1
+  |vpiVisibility:1
+|vpiVariable:
+\_Variable: (cg_op_1), line:57:9, endln:57:16
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiTypespec:
+  \_RefTypespec: (cg_op_1.cg_op), line:57:3, endln:57:8
+    |vpiParent:
+    \_Variable: (cg_op_1), line:57:9, endln:57:16
+    |vpiName:cg_op
+    |vpiFullName:cg_op_1.cg_op
+    |vpiActual:
+    \_UnsupportedTypespec: (cg_op), line:57:3, endln:57:8
+  |vpiName:cg_op_1
+  |vpiAutomatic:1
+  |vpiRandType:1
+  |vpiVisibility:1
+  |vpiExpr:
+  \_MethodFuncCall: (new), line:57:19, endln:57:24
+    |vpiParent:
+    \_Variable: (cg_op_1), line:57:9, endln:57:16
+    |vpiName:
+    \_Identifier: (new)
+      |vpiParent:
+      \_MethodFuncCall: (new), line:57:19, endln:57:24
+      |vpiName:new
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

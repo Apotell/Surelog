@@ -42,13 +42,12 @@ Variable                                               3
 ------------------------------------------------------------
 Total:                                               202
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Illegal implicit net "id:179, name: id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Illegal implicit net "id:180, name: action".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Illegal implicit net "id:185, name: id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Illegal implicit net "id:186, name: action".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Illegal implicit net "id:179, name:id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Illegal implicit net "id:185, name:id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Illegal implicit net "id:180, name:action".
+[ERR:EL0535] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:25: Illegal implicit net "id:186, name:action".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleClass2/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:13:37: Unsupported Typespec: id:145, type:RefTypespec, name:uvm_component.
-[ERR:IG0811] ${SURELOG_DIR}/tests/SimpleClass2/top.v:38:4: Unsupported Typespec: id:198, type:RefTypespec, name:p3::c33.
 [ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:25: Null Actual: id:179, type:RefObj, name:id.
 [ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:43:29: Null Actual: id:180, type:RefObj, name:action.
 [ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:44:21: Null Actual: id:185, type:RefObj, name:id.
@@ -1134,7 +1133,7 @@ Design: (unnamed)
         |vpiName:p3::c33
         |vpiFullName:p2::c2::inst1::p3::c33
         |vpiActual:
-        \_UnsupportedTypespec: (p3::c33), line:38:4, endln:38:11
+        \_ClassTypespec: (c33)
       |vpiName:inst1
       |vpiFullName:p2::c2::inst1
       |vpiAutomatic:1
@@ -1173,13 +1172,13 @@ Design: (unnamed)
             \_MethodFuncCall: (super.new), line:41:15, endln:41:19
             |vpiName:super.new
         |vpiStmt:
-        \_MethodFuncCall: (foo), line:42:5, endln:42:19
+        \_MethodFuncCall: (foo), line:42:11, endln:42:20
           |vpiParent:
           \_Begin: (p2::c2::new), line:41:5, endln:47:15
           |vpiArgument:
           \_RefObj: (p2::c2::new::name), line:42:15, endln:42:19
             |vpiParent:
-            \_MethodFuncCall: (foo), line:42:5, endln:42:19
+            \_MethodFuncCall: (foo), line:42:11, endln:42:20
             |vpiName:name
             |vpiFullName:p2::c2::new::name
             |vpiActual:
@@ -1187,12 +1186,12 @@ Design: (unnamed)
           |vpiName:
           \_Identifier: (foo)
             |vpiParent:
-            \_MethodFuncCall: (foo), line:42:5, endln:42:19
+            \_MethodFuncCall: (foo), line:42:11, endln:42:20
             |vpiName:foo
           |vpiPrefix:
           \_Constant: , line:42:5, endln:42:10
             |vpiParent:
-            \_MethodFuncCall: (foo), line:42:5, endln:42:19
+            \_MethodFuncCall: (foo), line:42:11, endln:42:20
             |vpiDecompile:super
             |vpiSize:5
             |STRING:super
@@ -1227,30 +1226,30 @@ Design: (unnamed)
             |STRING:this
             |vpiConstType:6
         |vpiStmt:
-        \_MethodFuncCall: (addq), line:44:5, endln:44:31
+        \_MethodFuncCall: (addq), line:44:16, endln:44:32
           |vpiParent:
           \_Begin: (p2::c2::new), line:41:5, endln:47:15
           |vpiArgument:
           \_RefObj: (p2::c2::new::id), line:44:21, endln:44:23
             |vpiParent:
-            \_MethodFuncCall: (addq), line:44:5, endln:44:31
+            \_MethodFuncCall: (addq), line:44:16, endln:44:32
             |vpiName:id
             |vpiFullName:p2::c2::new::id
           |vpiArgument:
           \_RefObj: (p2::c2::new::action), line:44:25, endln:44:31
             |vpiParent:
-            \_MethodFuncCall: (addq), line:44:5, endln:44:31
+            \_MethodFuncCall: (addq), line:44:16, endln:44:32
             |vpiName:action
             |vpiFullName:p2::c2::new::action
           |vpiName:
           \_Identifier: (addq)
             |vpiParent:
-            \_MethodFuncCall: (addq), line:44:5, endln:44:31
+            \_MethodFuncCall: (addq), line:44:16, endln:44:32
             |vpiName:addq
           |vpiPrefix:
           \_RefObj: (p2::c2::new::id_actions), line:44:5, endln:44:15
             |vpiParent:
-            \_MethodFuncCall: (addq), line:44:5, endln:44:31
+            \_MethodFuncCall: (addq), line:44:16, endln:44:32
             |vpiName:id_actions
             |vpiFullName:p2::c2::new::id_actions
             |vpiActual:
@@ -1336,19 +1335,12 @@ Design: (unnamed)
         |vpiFullName:p2::c2::uvm_id_actions_array::uvm_pool
         |vpiActual:
         \_ClassTypespec: (work@uvm_pool)
-    |vpiTypespec:
-    \_UnsupportedTypespec: (p3::c33), line:38:4, endln:38:11
-      |vpiParent:
-      \_ClassDefn: (p2::c2), file:${SURELOG_DIR}/tests/SimpleClass2/top.v, line:35:1, endln:50:9
-      |vpiName:p3::c33
     |vpiImportTypespec:
     \_TypedefTypespec: (uvm_id_actions_array), line:36:42, endln:36:62
     |vpiImportTypespec:
     \_Function: (p2::c2::new), line:40:2, endln:47:15
     |vpiImportTypespec:
     \_Variable: (p2::c2::id_actions), line:37:26, endln:37:36
-    |vpiImportTypespec:
-    \_UnsupportedTypespec: (p3::c33), line:38:4, endln:38:11
     |vpiImportTypespec:
     \_Variable: (p2::c2::inst1), line:38:12, endln:38:17
     |vpiExtends:
@@ -1446,6 +1438,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 10
+[  ERROR] : 9
 [WARNING] : 3
 [   NOTE] : 0

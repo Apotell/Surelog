@@ -267,7 +267,7 @@ Design: (unnamed)
     |vpiFullName:work@io_bus_interface.write_en
     |vpiRandType:1
     |vpiVisibility:1
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:2:5, endln:2:10
     |vpiParent:
     \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
@@ -367,13 +367,6 @@ Design: (unnamed)
             |vpiName:peripheral_io_bus
             |vpiFullName:work@soc_tb.io_gen.peripheral_io_bus
             |vpiNetType:1
-          |vpiImportTypespec:
-          \_Net: (work@soc_tb.io_gen.write_en), line:22:46, endln:22:54
-            |vpiParent:
-            \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
-            |vpiName:write_en
-            |vpiFullName:work@soc_tb.io_gen.write_en
-            |vpiNetType:1
           |vpiStmt:
           \_ContAssign: , line:22:20, endln:22:58
             |vpiParent:
@@ -413,7 +406,7 @@ Design: (unnamed)
                 |vpiName:write_en
                 |vpiFullName:peripheral_io_bus[io_idx].write_en
                 |vpiActual:
-                \_Net: (work@soc_tb.io_gen.write_en), line:22:46, endln:22:54
+                \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
               |vpiName:peripheral_io_bus[io_idx].write_en
         |vpiImportTypespec:
         \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
@@ -471,7 +464,7 @@ Design: (unnamed)
       \_GenFor: (work@soc_tb), line:20:9, endln:23:12
     |vpiStmt:
     \_Begin: (work@soc_tb), line:20:9, endln:23:12
-  |vpiTypedef:
+  |vpiTypespec:
   \_InterfaceTypespec: (io_bus_interface)
     |vpiParent:
     \_Design: (unnamed)
@@ -482,7 +475,7 @@ Design: (unnamed)
       |vpiName:io_bus_interface
     |vpiInterface:
     \_Interface: work@io_bus_interface (work@io_bus_interface), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:1:1, endln:4:13
-  |vpiTypedef:
+  |vpiTypespec:
   \_LogicTypespec: , line:10:10, endln:10:15
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
@@ -504,6 +497,13 @@ Design: (unnamed)
     |vpiName:io_bus_source
     |vpiFullName:work@soc_tb.io_bus_source
   |vpiImportTypespec:
+  \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
+    |vpiParent:
+    \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
+    |vpiName:write_en
+    |vpiFullName:work@soc_tb.write_en
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_Net: (work@soc_tb.peripheral_io_bus), line:16:12, endln:16:29
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
@@ -517,22 +517,15 @@ Design: (unnamed)
     |vpiName:IO_ONES
     |vpiFullName:work@soc_tb.IO_ONES
     |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
-    |vpiParent:
-    \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
-    |vpiName:write_en
-    |vpiFullName:work@soc_tb.write_en
-    |vpiNetType:1
   |vpiDefName:work@soc_tb
   |vpiNet:
   \_Net: (work@soc_tb.io_bus_source), line:12:7, endln:12:20
   |vpiNet:
+  \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
+  |vpiNet:
   \_Net: (work@soc_tb.peripheral_io_bus), line:16:12, endln:16:29
   |vpiNet:
   \_Net: (work@soc_tb.IO_ONES), line:16:30, endln:16:37
-  |vpiNet:
-  \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
   |vpiModuleArrays:
   \_ModuleArray: (work@io_bus_interface), line:14:22, endln:14:39
     |vpiParent:
@@ -621,9 +614,9 @@ Design: (unnamed)
         |vpiActual:
         \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
       |vpiName:peripheral_io_bus[IO_ONES].write_en
-|vpiTypedef:
+|vpiTypespec:
 \_InterfaceTypespec: (io_bus_interface)
-|vpiTypedef:
+|vpiTypespec:
 \_ModuleTypespec: (soc_tb)
   |vpiParent:
   \_Design: (unnamed)

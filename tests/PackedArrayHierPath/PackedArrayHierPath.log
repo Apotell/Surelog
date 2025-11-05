@@ -232,12 +232,8 @@ UnsupportedTypespec                                    2
 ------------------------------------------------------------
 Total:                                               100
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:93, name: exp_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:98, name: man_bits".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHierPath/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:17:42: Unsupported Typespec: id:88, type:RefTypespec, name:fp_format_e.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Null Actual: id:93, type:RefObj, name:exp_bits.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Null Actual: id:98, type:RefObj, name:man_bits.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -493,6 +489,8 @@ Design: (unnamed)
               \_HierPath: (FP_ENCODINGS[fmt].exp_bits), line:18:8, endln:18:34
               |vpiName:exp_bits
               |vpiFullName:uvm::fp_width::exp_bits
+              |vpiActual:
+              \_TypespecMember: (exp_bits), line:3:16, endln:3:24
             |vpiName:FP_ENCODINGS[fmt].exp_bits
           |vpiOperand:
           \_HierPath: (FP_ENCODINGS[fmt].man_bits), line:18:37, endln:18:63
@@ -520,6 +518,8 @@ Design: (unnamed)
               \_HierPath: (FP_ENCODINGS[fmt].man_bits), line:18:37, endln:18:63
               |vpiName:man_bits
               |vpiFullName:uvm::fp_width::man_bits
+              |vpiActual:
+              \_TypespecMember: (man_bits), line:4:16, endln:4:24
             |vpiName:FP_ENCODINGS[fmt].man_bits
         |vpiOperand:
         \_Constant: , line:18:66, endln:18:67
@@ -642,6 +642,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 5
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0

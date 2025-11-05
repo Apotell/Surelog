@@ -523,6 +523,8 @@ bool ErrorDefinition::init() {
   rec(INTEGRITY_CHECK_INVALID_LOCATION, ERROR, INTG, "Invalid location: %s");
   rec(INTEGRITY_CHECK_INVALID_REFPARENT, ERROR, INTG, "Invalid RefParent %s");
   rec(INTEGRITY_CHECK_INVALID_NAME, ERROR, INTG, "Invalid Name %s");
+  rec(INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE, ERROR, INTG,
+      "Invalid Foreach variable %s");
   return true;
 }
 

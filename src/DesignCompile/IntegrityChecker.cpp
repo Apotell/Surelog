@@ -303,6 +303,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
       expectedRelation = LineColumnRelation::Before;
     }
 
+    if (const uhdm::Function* const parentAsFunction =
+            parent->Cast<uhdm::Function>()) {
+      if (parentAsFunction->getReturn() == object) {
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    }
+
     if (const uhdm::EnumTypespec* const parentAsEnumTypespec =
             parent->Cast<uhdm::EnumTypespec>()) {
       if (parentAsEnumTypespec->getBaseTypespec() == object) {
@@ -388,7 +395,13 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         if (actualRelation == LineColumnRelation::After)
           expectedRelation = LineColumnRelation::After;
       }
-    } else if (const uhdm::Variable* const parentAsVariables =
+
+      if (parent->Cast<uhdm::TypedefTypespec>() != nullptr) {
+        if (objectAsRefTypespec->getActual() == nullptr) {
+          expectedRelation = LineColumnRelation::Inside;
+        }
+      }
+    } else if (const uhdm::Variable* const parentAsVariable =
                    parent->Cast<uhdm::Variable>()) {
       expectedRelation = LineColumnRelation::Before;
     }
@@ -511,23 +524,28 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
         }
       }
     }
+  } else if (const uhdm::MethodFuncCall* const parentAsMethodFuncCall =
+                 parent->Cast<uhdm::MethodFuncCall>()) {
+    if (parentAsMethodFuncCall->getPrefix() == object) {
+      expectedRelation = LineColumnRelation::Before;
+    }
   }
 
   if (actualRelation != expectedRelation) {
     bool isPackedArray = false;
-    if (const uhdm::Variable* const v = parent->Cast<uhdm::Variable>()) {
-      if (const uhdm::RefTypespec* const rt = v->getTypespec()) {
-        if (const uhdm::ArrayTypespec* const pat =
-                rt->getActual<uhdm::ArrayTypespec>()) {
-          isPackedArray = pat->getPacked();
-        }
-      }
+    if (const uhdm::ArrayTypespec* const at =
+            uhdm::getTypespec<uhdm::ArrayTypespec>(parent)) {
+      isPackedArray = at->getPacked();
     }
+
+    const bool isLogicNet =
+        uhdm::getTypespec<uhdm::LogicTypespec>(parent) != nullptr;
 
     if ((actualRelation == LineColumnRelation::After) &&
         (expectedRelation == LineColumnRelation::Before) &&
         (object->getUhdmType() == uhdm::UhdmType::RefTypespec) &&
-        ((parent->getUhdmType() == uhdm::UhdmType::Port) || isPackedArray)) {
+        ((parent->getUhdmType() == uhdm::UhdmType::Port) || isLogicNet ||
+         isPackedArray)) {
       // typespec for uhdm::Ports*can* be inside the parent module!
       // module (port_name):
       //   input int port_name;
@@ -839,6 +857,14 @@ void IntegrityChecker::reportUnsupportedTypespec(
   }
 }
 
+void IntegrityChecker::reportInvalidForeachVariable(
+    const uhdm::Any* object) const {
+  if (m_reportInvalidForeachVariable) {
+    reportError(ErrorDefinition::INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE,
+                object);
+  }
+}
+
 void IntegrityChecker::reportInvalidTypespecLocation(const uhdm::Any* object) {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool shouldReport = false;
@@ -965,6 +991,12 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
   bool expectDesign = (allowedDesignChildren.find(object->getUhdmType()) !=
                        allowedDesignChildren.cend());
 
+  if (any_cast<uhdm::ParamAssign>(object) != nullptr) {
+    if (any_cast<uhdm::ClassTypespec>(parent) != nullptr) {
+      expectScope = expectDesign = false;
+    }
+  }
+
   const std::set<uhdm::UhdmType> allowedUdpChildren{
       uhdm::UhdmType::Net, uhdm::UhdmType::IODecl, uhdm::UhdmType::TableEntry};
   bool expectUdpDefn = (allowedUdpChildren.find(object->getUhdmType()) !=
@@ -983,6 +1015,11 @@ void IntegrityChecker::visitAny2(const uhdm::Any* object) {
   //   errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_REFPARENT,
   //                            loc);
   // }
+
+  if ((any_cast<uhdm::IODecl>(object) != nullptr) &&
+      (any_cast<uhdm::Modport>(parent) != nullptr)) {
+    expectScope = expectDesign = expectUdpDefn = false;
+  }
 
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr) &&
       (parentAsUdpDefn == nullptr) &&
@@ -1128,7 +1165,20 @@ void IntegrityChecker::visitExtends(const uhdm::Extends* object) {}
 void IntegrityChecker::visitFinalStmt(const uhdm::FinalStmt* object) {}
 void IntegrityChecker::visitForStmt(const uhdm::ForStmt* object) {}
 void IntegrityChecker::visitForce(const uhdm::Force* object) {}
-void IntegrityChecker::visitForeachStmt(const uhdm::ForeachStmt* object) {}
+void IntegrityChecker::visitForeachStmt(const uhdm::ForeachStmt* object) {
+  if (const uhdm::Any* const variable = object->getVariable()) {
+    if (const uhdm::Any* const actual = uhdm::getActual(variable)) {
+      if (actual->getUhdmType() == uhdm::UhdmType::IODecl) {
+        if (const uhdm::Typespec* const typespec = uhdm::getTypespec(actual)) {
+          if ((typespec->getUhdmType() != uhdm::UhdmType::ArrayTypespec) &&
+              (typespec->getUhdmType() != uhdm::UhdmType::StringTypespec)) {
+            reportInvalidForeachVariable(object);
+          }
+        }
+      }
+    }
+  }
+}
 void IntegrityChecker::visitForeverStmt(const uhdm::ForeverStmt* object) {}
 void IntegrityChecker::visitForkStmt(const uhdm::ForkStmt* object) {}
 void IntegrityChecker::visitFuncCall(const uhdm::FuncCall* object) {}
@@ -1225,6 +1275,23 @@ void IntegrityChecker::visitRefModule(const uhdm::RefModule* object) {
   if (object->getActual() == nullptr) reportNullActual(object);
 }
 void IntegrityChecker::visitRefObj(const uhdm::RefObj* object) {
+  if (object->getName() == "triggered") {
+    if (const uhdm::HierPath* const hp = object->getParent<uhdm::HierPath>()) {
+      if (const uhdm::AnyCollection* const pe = hp->getPathElems()) {
+        uhdm::AnyCollection::const_iterator it =
+            std::find(pe->cbegin(), pe->cend(), object);
+        if ((it != pe->begin()) && (it != pe->cend())) {
+          if (const uhdm::NamedEvent* const ne =
+                  any_cast<uhdm::NamedEvent>(*--it)) {
+            // event.triggered is a property and can't be bound to anything.
+            // SL doesn' model properties, yet!
+            return;
+          }
+        }
+      }
+    }
+  }
+
   if (!isValidName(object)) {
     reportMissingName(object);
   }
@@ -1242,8 +1309,11 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
   const uhdm::Any* const parent = object->getParent();
   if (parent == nullptr) return;
 
+  const uhdm::Variable* const parentAsVariable =
+      object->getParent<uhdm::Variable>();
+
   if (!isImplicitFunctionReturnType(object)) {
-    if (!isValidLocation(object)) {
+    if (!isValidLocation(object) && (parentAsVariable == nullptr)) {
       reportMissingLocation(object);
     }
     if (!isValidFile(object)) {
@@ -1251,7 +1321,21 @@ void IntegrityChecker::visitRefTypespec(const uhdm::RefTypespec* object) {
     }
   }
 
-  if (const uhdm::Any* const actual = object->getActual()) {
+  if (parentAsVariable != nullptr) {
+    bool isRefVar = false;
+    if (const uhdm::ForeachStmt* const grandParentAsForeachStmt =
+            parentAsVariable->getParent<uhdm::ForeachStmt>()) {
+      if (const uhdm::AnyCollection* const loopVars =
+              grandParentAsForeachStmt->getLoopVars()) {
+        isRefVar = std::find(loopVars->cbegin(), loopVars->cend(), object) !=
+                   loopVars->cend();
+      }
+    }
+
+    if (isRefVar && isValidName(object)) {
+      reportInvalidName(object);
+    }
+  } else if (const uhdm::Any* const actual = object->getActual()) {
     if (actual->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) {
       reportUnsupportedTypespec(object);
     }

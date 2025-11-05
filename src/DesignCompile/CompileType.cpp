@@ -78,7 +78,6 @@ uhdm::Any* CompileHelper::compileVariable(
     NodeId nameId, NodeId unpackedDimId, CompileDesign* compileDesign,
     uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = compileDesign->getSerializer();
-  Design* const design = compileDesign->getCompiler()->getDesign();
   uhdm::Any* result = nullptr;
   NodeId variable = declarationId;
   VObjectType the_type = fC->Type(variable);
@@ -153,113 +152,51 @@ uhdm::Any* CompileHelper::compileVariable(
       (decl_type != VObjectType::STRING_CONST)) {
     ts = compileTypespec(component, fC, declarationId, unpackedDimId,
                          compileDesign, pstmt, instance, true);
+    if ((ts != nullptr) &&
+        (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
+      result = s.make<uhdm::Variable>();
+      result->setParent(pstmt);
+    }
+
+    if (result != nullptr) {
+      fC->populateCoreMembers(nameId, nameId, result);
+
+      uhdm::RefTypespec* const rt = s.make<uhdm::RefTypespec>();
+      rt->setActual(ts);
+      rt->setParent(result);
+      fC->populateCoreMembers(declarationId, declarationId, rt);
+
+      uhdm::Variable* const v = any_cast<uhdm::Variable>(result);
+      v->setTypespec(rt);
+      v->setName(fC->SymName(nameId));
+
+      return result;
+    }
   }
 
   switch (the_type) {
     case VObjectType::STRING_CONST:
     case VObjectType::paChandle_type: {
-      const std::string_view typeName = fC->SymName(variable);
+      uhdm::Variable* var = s.make<uhdm::Variable>();
+      var->setName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
 
-      if (const DataType* dt = component->getDataType(design, typeName)) {
-        if (uhdm::Typespec* tps = dt->getActualTypespec()) {
-          result = compileVariable(component, fC, compileDesign, nameId,
-                                   the_type, declarationId, tps, pstmt);
-        }
+      if (ts == nullptr) {
+        uhdm::UnsupportedTypespec* ut = s.make<uhdm::UnsupportedTypespec>();
+        ut->setName(fC->SymName(variable));
+        ut->setParent(pstmt);
+        fC->populateCoreMembers(declarationId, declarationId, ut);
+        ts = ut;
       }
-      if (result == nullptr) {
-        std::string typespecName(typeName);
-        ClassDefinition* cl = design->getClassDefinition(typeName);
-        if (cl == nullptr) {
-          std::string scopedName = StrCat(component->getName(), "::", typeName);
-          if ((cl = design->getClassDefinition(scopedName))) {
-            typespecName = scopedName;
-          }
-        }
-        if (cl == nullptr) {
-          if (const DesignComponent* p =
-                  valuedcomponenti_cast<const DesignComponent*>(
-                      component->getParentScope())) {
-            std::string scopedName = StrCat(p->getName(), "::", typeName);
-            if ((cl = design->getClassDefinition(scopedName))) {
-              typespecName = scopedName;
-            }
-          }
-        }
-        if (cl) {
-          ts = cl->getUhdmTypespecModel();
-          uhdm::Variable* var = s.make<uhdm::Variable>();
-          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          tpsRef->setName(typespecName);
-          tpsRef->setParent(var);
-          tpsRef->setActual(ts);
-          var->setTypespec(tpsRef);
-          var->setName(fC->SymName(nameId));
-          fC->populateCoreMembers(variable, variable, tpsRef);
-          fC->populateCoreMembers(nameId, nameId, var);
-          result = var;
-        }
-      }
-      if ((result == nullptr) && (the_type == VObjectType::STRING_CONST) &&
-          (ts != nullptr) &&
-          (ts->getUhdmType() == uhdm::UhdmType::ClassTypespec)) {
-        uhdm::Variable* var = s.make<uhdm::Variable>();
-        uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-        tsRef->setParent(var);
-        tsRef->setActual(ts);
-        tsRef->setName(ts->getName());
-        var->setTypespec(tsRef);
-        var->setName(fC->SymName(nameId));
-        fC->populateCoreMembers(nameId, nameId, var);
-        fC->populateCoreMembers(declarationId, declarationId, tsRef);
-        result = var;
-      }
-      if (result == nullptr) {
-        if (the_type == VObjectType::paChandle_type) {
-          uhdm::Variable* var = s.make<uhdm::Variable>();
-          var->setName(fC->SymName(nameId));
-          fC->populateCoreMembers(nameId, nameId, var);
-          if (ts) {
-            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            tsRef->setParent(var);
-            tsRef->setActual(ts);
-            tsRef->setName(ts->getName());
-            fC->populateCoreMembers(declarationId, declarationId, tsRef);
-            var->setTypespec(tsRef);
-          }
-          result = var;
-        } else {
-          if ((ts != nullptr) &&
-              (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
-            uhdm::Variable* const av = s.make<uhdm::Variable>();
-            av->setName(fC->SymName(nameId));
-            result = av;
-          } else {
-            uhdm::RefObj* ro = s.make<uhdm::RefObj>();
-            ro->setName(fC->SymName(nameId));
-            result = ro;
-          }
-          fC->populateCoreMembers(nameId, nameId, result);
 
-          if ((result != nullptr) &&
-              (result->getUhdmType() != UhdmType::RefObj)) {
-            if (ts == nullptr) {
-              uhdm::UnsupportedTypespec* ut =
-                  s.make<uhdm::UnsupportedTypespec>();
-              ut->setName(typeName);
-              ut->setParent(pstmt);
-              fC->populateCoreMembers(declarationId, declarationId, ut);
-              ts = ut;
-            }
+      uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+      tsRef->setParent(var);
+      tsRef->setActual(ts);
+      setRefTypespecName(tsRef, ts, fC->SymName(variable));
+      fC->populateCoreMembers(declarationId, declarationId, tsRef);
 
-            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            tsRef->setParent(result);
-            tsRef->setActual(ts);
-            setRefTypespecName(tsRef, ts, typeName);
-            fC->populateCoreMembers(declarationId, declarationId, tsRef);
-            any_cast<uhdm::SimpleExpr>(result)->setTypespec(tsRef);
-          }
-        }
-      }
+      var->setTypespec(tsRef);
+      result = var;
       break;
     }
     case VObjectType::paClass_scope: {
@@ -316,9 +253,9 @@ uhdm::Any* CompileHelper::compileVariable(
         v->setName(completeName);
 
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-        tsRef->setName(completeName);
         tsRef->setParent(v);
         tsRef->setActual(ts);
+        setRefTypespecName(tsRef, ts, completeName);
         fC->populateCoreMembers(declarationId, declarationId, tsRef);
         v->setTypespec(tsRef);
         var = v;
@@ -496,7 +433,6 @@ uhdm::Any* CompileHelper::compileVariable(
 uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
                                          CompileDesign* compileDesign,
                                          Signal* sig, uhdm::Typespec* tps) {
-  // uhdm::Serializer& s = compileDesign->getSerializer();
   const DataType* dtype = sig->getDataType();
   VObjectType subnettype = sig->getType();
   NodeId signalId = sig->getNameId();
@@ -1031,7 +967,7 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     while (fC->Sibling(unpackDimensionId2)) {
       unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
     }
-    fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
+    fC->populateCoreMembers(unpackedId, unpackDimensionId2, taps);
 
     uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
     ert->setParent(taps);
@@ -1248,8 +1184,6 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::paInterface_identifier: {
-      uhdm::InterfaceTypespec* tps = s.make<uhdm::InterfaceTypespec>();
-      fC->populateCoreMembers(type, type, tps);
       std::string name(fC->SymName(type));
       while (type) {
         if (fC->Type(type) == VObjectType::STRING_CONST) {
@@ -1257,13 +1191,19 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         }
         type = fC->Sibling(type);
       }
-      tps->setName(name);
       std::string tsName = StrCat(fC->getLibrary()->getName(), "@", name);
+
+      uhdm::InterfaceTypespec* tps = nullptr;
       if (ModuleDefinition* const def = design->getModuleDefinition(tsName)) {
-        tps->setInterface(def->getUhdmModel<uhdm::Interface>());
-      } else if (Modport* const mp = design->getModport(tsName)) {
-        tps->setInterface(mp->getInterface());
-        tps->setModport(mp->getUhdmModel());
+        tps = def->getUhdmTypespecModel<uhdm::InterfaceTypespec>();
+      } else {
+        tps = s.make<uhdm::InterfaceTypespec>();
+        tps->setName(name);
+        fC->populateCoreMembers(type, type, tps);
+        if (Modport* const mp = design->getModport(tsName)) {
+          tps->setInterface(mp->getInterface());
+          tps->setModport(mp->getUhdmModel());
+        }
       }
       result = tps;
       break;
@@ -1410,7 +1350,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         ref->setParent(pstmt);
         ref->setPacked(isPacked);
         ref->setName(typeName);
-        fC->populateCoreMembers(class_name, symb_id, ref);
+        fC->populateCoreMembers(id, id, ref);
         result = ref;
       }
       break;
@@ -1531,7 +1471,14 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::STRING_CONST: {
-      const std::string_view typeName = fC->SymName(type);
+      std::string typeName(fC->SymName(type));
+      const NodeId cbsId = fC->Sibling(type);
+      if (cbsId && (fC->Type(cbsId) == VObjectType::paConstant_bit_select)) {
+        const NodeId scId = fC->Sibling(cbsId);
+        if (scId && (fC->Type(scId) == VObjectType::STRING_CONST)) {
+          typeName.append(".").append(fC->SymName(scId));
+        }
+      }
       if (typeName == "logic") {
         uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();
         fC->populateCoreMembers(type, type, var);
@@ -1615,7 +1562,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paConstant_expression: {
       if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
               component, fC, type, compileDesign, pstmt, instance, true)) {
-        if (exp->getUhdmType() == uhdm::UhdmType::RefObj) {
+        if (any_cast<uhdm::RefObj>(exp) != nullptr) {
           result =
               compileTypespec(component, fC, fC->Child(type), InvalidNodeId,
                               compileDesign, result, instance, false);

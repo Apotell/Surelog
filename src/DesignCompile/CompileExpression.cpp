@@ -3640,7 +3640,10 @@ uhdm::Any *CompileHelper::compileBits(
   uhdm::Serializer &s = compileDesign->getSerializer();
   NodeId callId = List_of_arguments;
   VObjectType callType = VObjectType::paSubroutine_call;
-  if (NodeId id = fC->sl_parent(List_of_arguments, {callType}, callType)) {
+  if (NodeId id = fC->sl_parent(
+          List_of_arguments,
+          {VObjectType::paComplex_func_call, VObjectType::paSubroutine_call},
+          callType)) {
     callId = id;
   }
   if (!callId) return nullptr;
@@ -3889,6 +3892,15 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
   uhdm::Any *result = nullptr;
   NodeId dotedName = fC->Sibling(name);
 
+  NodeId callId = id;
+  VObjectType callType = VObjectType::paSubroutine_call;
+  if (NodeId nid = fC->sl_parent(
+          id,
+          {VObjectType::paComplex_func_call, VObjectType::paSubroutine_call},
+          callType)) {
+    callId = nid;
+  }
+
   bool hierPath = false;
   NodeId tmp = dotedName;
   while (fC->Type(tmp) == VObjectType::paAttribute_instance) {
@@ -4016,12 +4028,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
         fcall->setPrefix(object);
       }
       fcall->setParent(pexpr);
-      const std::string_view methodName = fC->SymName(Method);
-      fcall->setName(methodName);
-      if ((rootName == "super") || (rootName == "this"))
-        fC->populateCoreMembers(name, List_of_arguments, fcall);
-      else
-        fC->populateCoreMembers(Method, Method, fcall);
+      fcall->setName(fC->SymName(Method));
+      fC->populateCoreMembers(Method, callId, fcall);
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, compileDesign, fcall, instance,
               muteErrors)) {
@@ -4471,11 +4479,69 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                         component, fC, list_of_arguments, compileDesign, fcall,
                         instance, muteErrors)) {
                   fcall->setArguments(arguments);
+
+                  if ((method_name == "find") ||
+                      (method_name == "find_index") ||
+                      (method_name == "find_first") ||
+                      (method_name == "find_first_index") ||
+                      (method_name == "find_last") ||
+                      (method_name == "find_last_index") ||
+                      (method_name == "min") || (method_name == "max") ||
+                      (method_name == "unique") ||
+                      (method_name == "unique_index")) {
+                    for (uhdm::Any *arg : *arguments) {
+                      if (uhdm::RefObj *const ro =
+                              any_cast<uhdm::RefObj>(arg)) {
+                        uhdm::Variable *const rf = s.make<uhdm::Variable>();
+                        rf->setParent(fcall);
+                        rf->setName(ro->getName());
+                        rf->setFile(ro->getFile());
+                        rf->setStartLine(ro->getStartLine());
+                        rf->setStartColumn(ro->getStartColumn());
+                        rf->setEndLine(ro->getEndLine());
+                        rf->setEndColumn(ro->getEndColumn());
+                        ro->setActual(rf);
+
+                        uhdm::RefTypespec *const rt =
+                            s.make<uhdm::RefTypespec>();
+                        rt->setFile(ro->getFile());
+                        rt->setStartLine(ro->getStartLine());
+                        rt->setStartColumn(ro->getStartColumn());
+                        rt->setEndLine(ro->getEndLine());
+                        rt->setEndColumn(ro->getEndColumn());
+                        rf->setTypespec(rt);
+                      }
+                    }
+                  }
                 }
                 with_conditions_node = fC->Sibling(list_of_arguments);
-              } else {
+              } else if (list_of_arguments) {
                 with_conditions_node = list_of_arguments;
+
+                if ((method_name == "find") || (method_name == "find_index") ||
+                    (method_name == "find_first") ||
+                    (method_name == "find_first_index") ||
+                    (method_name == "find_last") ||
+                    (method_name == "find_last_index") ||
+                    (method_name == "min") || (method_name == "max") ||
+                    (method_name == "unique") ||
+                    (method_name == "unique_index")) {
+                  uhdm::Variable *const rf = s.make<uhdm::Variable>();
+                  rf->setParent(fcall);
+                  rf->setName("item");
+                  rf->setFile(fcall->getFile());
+
+                  uhdm::RefTypespec *const rt = s.make<uhdm::RefTypespec>();
+                  rt->setParent(rf);
+                  rt->setFile(fcall->getFile());
+                  rt->setStartLine(fcall->getStartLine());
+                  rt->setStartColumn(fcall->getStartColumn());
+                  rt->setEndLine(fcall->getEndLine());
+                  rt->setEndColumn(fcall->getEndColumn());
+                  rf->setTypespec(rt);
+                }
               }
+
               // vpiWith: with conditions (expression in node u<62> above)
               // (not in every method, node id is 0 if missing)
               if (with_conditions_node) {

@@ -3744,35 +3744,35 @@ bool CompileHelper::compileParameterDeclaration(
   uhdm::Any* const pany = component->getUhdmModel();
   if (fC->Type(nodeId) == VObjectType::paType_assignment_list) {
     // Type param
-    NodeId typeNameId = fC->Child(fC->Child(nodeId));
-    while (typeNameId) {
+    NodeId typeAssignId = fC->Child(nodeId);
+    while (typeAssignId) {
+      const NodeId typeNameId = fC->Child(typeAssignId);
       NodeId ntype = fC->Sibling(typeNameId);
-      bool skip = false;
       if (ntype && fC->Type(ntype) == VObjectType::paData_type) {
         ntype = fC->Child(ntype);
         if (fC->Type(ntype) == VObjectType::VIRTUAL) ntype = fC->Sibling(ntype);
-        skip = true;
       } else {
         ntype = InvalidNodeId;
       }
       uhdm::TypeParameter* p = s.make<uhdm::TypeParameter>();
       p->setName(fC->SymName(typeNameId));
+      p->setParent(pany);
       fC->populateCoreMembers(typeNameId, typeNameId, p);
-      if (uhdm::Typespec* tps =
-              compileTypespec(component, fC, ntype, InvalidNodeId,
-                              compileDesign, p, nullptr, false)) {
-        if (p->getTypespec() == nullptr) {
-          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          setRefTypespecName(tpsRef, tps, tps->getName());
-          fC->populateCoreMembers(ntype, ntype, tpsRef);
-          tpsRef->setParent(p);
-          p->setTypespec(tpsRef);
+      p->setLocalParam(localParam);
+      if (ntype) {
+        if (uhdm::Typespec* tps =
+                compileTypespec(component, fC, ntype, InvalidNodeId,
+                                compileDesign, p, nullptr, false)) {
+          if (p->getTypespec() == nullptr) {
+            uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
+            setRefTypespecName(tpsRef, tps, tps->getName());
+            fC->populateCoreMembers(ntype, ntype, tpsRef);
+            tpsRef->setParent(p);
+            p->setTypespec(tpsRef);
+          }
+          p->getTypespec()->setActual(tps);
+          tps->setParent(p);
         }
-        p->getTypespec()->setActual(tps);
-        tps->setParent(p);
-      }
-      if (localParam) {
-        p->setLocalParam(true);
       }
       parameters->emplace_back(p);
       Parameter* param = new Parameter(fC, typeNameId, fC->SymName(typeNameId),
@@ -3781,8 +3781,7 @@ bool CompileHelper::compileParameterDeclaration(
       param->setUhdmParam(p);
       p->setParent(pany);
       component->insertParameter(param);
-      typeNameId = fC->Sibling(typeNameId);
-      if (skip) typeNameId = fC->Sibling(typeNameId);
+      typeAssignId = fC->Sibling(typeAssignId);
     }
   } else if (fC->Type(nodeId) == VObjectType::TYPE) {
     // Type param
@@ -4319,9 +4318,7 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
       tfNameNode = fC->Sibling(Constant_bit_select);
       uhdm::MethodFuncCall* fcall = s.make<uhdm::MethodFuncCall>();
       const std::string_view mname = fC->SymName(tfNameNode);
-      NodeId argListNode = fC->Sibling(tfNameNode);
-      fC->populateCoreMembers(dollar_or_string,
-                              argListNode ? argListNode : tfNameNode, fcall);
+      fC->populateCoreMembers(tfNameNode, Tf_call_stmt, fcall);
       fcall->setName(mname);
       fcall->setParent(pexpr);
       uhdm::RefObj* prefix = s.make<uhdm::RefObj>();

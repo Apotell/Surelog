@@ -28,7 +28,7 @@
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
 // uhdm
-#include <uhdm/UhdmListener.h>
+#include <uhdm/UhdmVisitor.h>
 #include <uhdm/uhdm_forward_decl.h>
 
 #include <map>
@@ -45,17 +45,13 @@ namespace SURELOG {
 class Session;
 class ValuedComponentI;
 
-class ObjectBinder final : protected uhdm::UhdmListener {
- private:
+class ObjectBinder final : protected uhdm::UhdmVisitor {
+ public:
   using ForwardComponentMap =
       std::map<const ValuedComponentI*, uhdm::BaseClass*>;
   using ReverseComponentMap =
       std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
-  using DesignStack = std::vector<const uhdm::Design*>;
-  using PackageStack = std::vector<const uhdm::Package*>;
-  using PrefixStack = std::vector<const uhdm::Any*>;
-  using Unbounded =
-      std::vector<std::tuple<const uhdm::Any*, const ValuedComponentI*>>;
+  using Unbounded = std::set<const uhdm::Any*>;
   using Searched = std::set<const uhdm::Any*>;
 
   enum class RefType {
@@ -70,33 +66,21 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   void bind(const uhdm::Design* object, bool report);
   void bind(const std::vector<const uhdm::Design*>& objects, bool report);
 
+  void bindAny(const uhdm::Any* object) { visit(object); }
+
  private:
-  void enterHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
-  void leaveHierPath(const uhdm::HierPath* object, uint32_t vpiRelation) final;
-
-  void enterBitSelect(const uhdm::BitSelect* object,
-                      uint32_t vpiRelation) final;
-  void enterVarSelect(const uhdm::VarSelect* object,
-                      uint32_t vpiRelation) final;
-
-  // void enterChandle_var(const uhdm::ChandleVar* object) final;
-
-  void enterIndexedPartSelect(const uhdm::IndexedPartSelect* object,
-                              uint32_t vpiRelation) final;
-
-  void enterPartSelect(const uhdm::PartSelect* object,
-                       uint32_t vpiRelation) final;
-
-  void enterRefModule(const uhdm::RefModule* object,
-                      uint32_t vpiRelation) final;
-
-  void enterRefObj(const uhdm::RefObj* object, uint32_t vpiRelation) final;
-
-  void enterRefTypespec(const uhdm::RefTypespec* object,
-                        uint32_t vpiRelation) final;
-
-  void enterClassDefn(const uhdm::ClassDefn* object,
-                      uint32_t vpiRelation) final;
+  void visitBitSelect(const uhdm::BitSelect* object) final;
+  void visitClassDefn(const uhdm::ClassDefn* object) final;
+  // void visitChandle_var(const uhdm::ChandleVar* object) final;
+  void visitForeachStmt(const uhdm::ForeachStmt* object) final;
+  void visitHierPath(const uhdm::HierPath* object) final;
+  void visitIndexedPartSelect(const uhdm::IndexedPartSelect* object) final;
+  void visitMethodFuncCall(const uhdm::MethodFuncCall* object) final;
+  void visitPartSelect(const uhdm::PartSelect* object) final;
+  void visitRefModule(const uhdm::RefModule* object) final;
+  void visitRefObj(const uhdm::RefObj* object) final;
+  void visitRefTypespec(const uhdm::RefTypespec* object) final;
+  void visitVarSelect(const uhdm::VarSelect* object) final;
 
  private:
   bool areSimilarNames(std::string_view name1, std::string_view name2) const;
@@ -105,11 +89,8 @@ class ObjectBinder final : protected uhdm::UhdmListener {
                        const uhdm::Any* object2) const;
   static bool isInElaboratedTree(const uhdm::Any* object);
 
-  VObjectType getDefaultNetType(const ValuedComponentI* component) const;
-  const uhdm::Any* getPrefix(const uhdm::Any* object);
-
-  template <typename T>
-  const T* getParent(const uhdm::Any* object) const;
+  VObjectType getDefaultNetType(const uhdm::Any* object) const;
+  const uhdm::Any* getHierPathElemPrefix(const uhdm::Any* object);
 
   const uhdm::Package* getPackage(std::string_view name,
                                   const uhdm::Any* object) const;
@@ -119,9 +100,9 @@ class ObjectBinder final : protected uhdm::UhdmListener {
                                       const uhdm::Any* object) const;
 
   const uhdm::ClassDefn* getClassDefn(
-      const uhdm::ClassDefnCollection* collection, std::string_view name) const;
+      const uhdm::ClassDefnCollection* collection, std::string_view name);
   const uhdm::ClassDefn* getClassDefn(std::string_view name,
-                                      const uhdm::Any* object) const;
+                                      const uhdm::Any* object);
 
   const uhdm::Any* findInTypespec(std::string_view name, RefType refType,
                                   const uhdm::Typespec* scope);
@@ -165,10 +146,10 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   const uhdm::Any* findInDesign(std::string_view name, RefType refType,
                                 const uhdm::Design* scope);
 
-  const uhdm::Any* bindObject(const uhdm::Any* object);
-  const uhdm::Any* bindObjectInScope(std::string_view name,
-                                     const uhdm::Any* object,
-                                     const uhdm::Any* scope);
+  const uhdm::Any* find(std::string_view name, RefType refType,
+                        const uhdm::Any* object);
+  const uhdm::Any* findObject(const uhdm::Any* object);
+  const uhdm::Typespec* findType(const uhdm::Any* object);
 
   void reportErrors();
   bool createDefaultNets();
@@ -180,7 +161,6 @@ class ObjectBinder final : protected uhdm::UhdmListener {
   const bool m_muteStdout = false;
 
   ReverseComponentMap m_reverseComponentMap;
-  PrefixStack m_prefixStack;
   Unbounded m_unbounded;
   Searched m_searched;
 };

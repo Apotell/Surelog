@@ -32,6 +32,7 @@
 #include "Surelog/Common/NodeId.h"
 #include "Surelog/Design/FileCNodeId.h"
 #include "Surelog/Design/FileContent.h"
+#include "Surelog/Design/Signal.h"
 #include "Surelog/Design/VObject.h"
 #include "Surelog/DesignCompile/CompileDesign.h"
 #include "Surelog/DesignCompile/CompileHelper.h"
@@ -176,6 +177,27 @@ bool CompileFileContent::collectObjects_() {
         stopPoints.cend()) {
       if (const NodeId childId = fC->Child(id)) {
         stack.emplace(childId);
+      }
+    }
+  }
+
+  if (!m_declOnly) {
+    for (Signal* sig : m_fileContent->getSignals()) {
+      const FileContent* fC = sig->getFileContent();
+      NodeId id = sig->getNodeId();
+      // Assignment to a default value
+      uhdm::Expr* exp = m_helper.exprFromAssign(
+          m_fileContent, m_compileDesign, fC, id, sig->getUnpackedDimension());
+      if (uhdm::Any* obj =
+              m_helper.compileSignals(m_fileContent, m_compileDesign, sig)) {
+        fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
+        obj->setParent(udesign);
+        if (exp != nullptr) {
+          exp->setParent(obj, true);
+          if (uhdm::Variable* const var = any_cast<uhdm::Variable>(obj)) {
+            var->setExpr(exp);
+          }
+        }
       }
     }
   }

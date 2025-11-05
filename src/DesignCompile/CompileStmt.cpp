@@ -503,22 +503,22 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         }
         while (loopVarId) {
           uhdm::Variable* ref = s.make<uhdm::Variable>();
+          ref->setParent(for_each);
           ref->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
+
           uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
-          tps->setName(fC->SymName(loopVarId));
-          fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
-          if (ref->getTypespec() == nullptr) {
-            uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-            fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
-            tpsRef->setParent(ref);
-            setRefTypespecName(tpsRef, tps, fC->SymName(loopVarId));
-            ref->setTypespec(tpsRef);
-          }
-          ref->getTypespec()->setActual(tps);
+          tps->setFile(ref->getFile());
+
+          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
+          tpsRef->setParent(ref);
+          tpsRef->setActual(tps);
+          tpsRef->setFile(ref->getFile());
+
+          ref->setTypespec(tpsRef);
           loop_vars->emplace_back(ref);
-          ref->setParent(for_each);
+
           loopVarId = fC->Sibling(loopVarId);
           while (fC->Type(loopVarId) == VObjectType::paComma) {
             NodeId lookahead = fC->Sibling(loopVarId);
@@ -529,13 +529,12 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
               op->setOpType(vpiNullOp);
               loop_vars->emplace_back(op);
               loopVarId = fC->Sibling(loopVarId);
-              continue;
             } else {
               break;
             }
           }
           if ((fC->Type(loopVarId) != VObjectType::STRING_CONST) &&
-              ((fC->Type(loopVarId) != VObjectType::paComma))) {
+              (fC->Type(loopVarId) != VObjectType::paComma)) {
             break;
           }
           if (fC->Type(loopVarId) == VObjectType::paComma) {
@@ -2927,21 +2926,16 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         fC->populateCoreMembers(Variable_assignment, Variable_assignment,
                                 assign_stmt);
 
+        // No type information available so create only a reference.
+        // The actual variable is likely declared ahead.
         NodeId nameId = fC->Child(Hierarchical_identifier);
-        if (uhdm::Any* var = compileVariable(
-                component, fC, Hierarchical_identifier, nameId, InvalidNodeId,
-                compileDesign, assign_stmt, nullptr, false)) {
-          if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
-            assign_stmt->setLhs(expr);
-          }
-          if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
-            v->setName(fC->SymName(nameId));
-          } else if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(var)) {
-            ro->setName(fC->SymName(nameId));
-          }
-        }
+        uhdm::RefObj* var = s.make<uhdm::RefObj>();
+        var->setName(fC->SymName(nameId));
+        fC->populateCoreMembers(nameId, nameId, var);
+        var->setParent(assign_stmt);
+        assign_stmt->setLhs(var);
 
-        if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
+        if (uhdm::Expr* const rhs = (uhdm::Expr*)compileExpression(
                 component, fC, Expression, compileDesign, assign_stmt)) {
           assign_stmt->setRhs(rhs);
         }
@@ -3118,6 +3112,7 @@ uhdm::Any* CompileHelper::compileCheckerInstantiation(
   NodeId InstanceName = fC->Child(Name_of_instance);
   const std::string_view InstName = fC->SymName(InstanceName);
   result->setName(InstName);
+  result->setParent(pstmt);
   return result;
 }
 

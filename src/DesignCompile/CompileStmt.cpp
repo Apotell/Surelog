@@ -553,22 +553,11 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         for_each->setEndLine(stmt->getEndLine());
         for_each->setEndColumn(stmt->getEndColumn());
       }
-      uhdm::RefObj* const var = s.make<uhdm::RefObj>();
-      var->setParent(for_each);
-      for_each->setVariable(var);
-      if (NodeId varNameId = fC->Child(Ps_or_hierarchical_array_identifier)) {
-        std::string varName;
-        if (fC->Type(varNameId) == VObjectType::paClass_scope) {
-          NodeId classTypeId = fC->Child(varNameId);
-          NodeId classNameId = fC->Child(classTypeId);
-          NodeId symbNameId = fC->Sibling(varNameId);
-          varName =
-              StrCat(fC->SymName(classNameId), "::", fC->SymName(symbNameId));
-        } else {
-          varName = fC->SymName(varNameId);
-        }
-        var->setName(varName);
-        fC->populateCoreMembers(varNameId, varNameId, var);
+
+      if (uhdm::Any* const var = compilePsOrHierarchicalArrayIdentifier(
+              component, fC, Ps_or_hierarchical_array_identifier, compileDesign,
+              for_each)) {
+        for_each->setVariable(var);
       }
       stmt = for_each;
       break;

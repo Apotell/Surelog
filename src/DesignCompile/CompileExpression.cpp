@@ -1082,7 +1082,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
           fC->populateCoreMembers(nameId, nameId, r);
           elems->emplace_back(r);
           hname.append(".").append(fC->SymName(nameId));
-        } else if ((fC->Type(Bit_select) == VObjectType::paSelect)) {
+        } else if (fC->Type(Bit_select) == VObjectType::paSelect) {
           NodeId nameId = fC->Child(Bit_select);
           if (nameId && (fC->Type(nameId) == VObjectType::STRING_CONST)) {
             uhdm::RefObj *r = s.make<uhdm::RefObj>();
@@ -1101,10 +1101,9 @@ uhdm::Any *CompileHelper::compileSelectExpression(
                 compileExpression(component, fC, Bit_select, compileDesign,
                                   pexpr, instance, muteErrors);
             if (sel) {
-              hname.append(".")
-                  .append(sel->getName())
-                  .append(decompileHelper(sel));
+              hname.append(".");
               if (sel->getUhdmType() == uhdm::UhdmType::HierPath) {
+                hname.append(decompileHelper(sel));
                 uhdm::HierPath *p = (uhdm::HierPath *)sel;
                 for (auto el : *p->getPathElems()) {
                   s.swap(p, path);
@@ -1112,6 +1111,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
                 }
                 break;
               } else {
+                hname.append(sel->getName()).append(decompileHelper(sel));
                 sel->setParent(path, true);
                 elems->emplace_back(sel);
               }
@@ -2269,32 +2269,30 @@ uhdm::Any *CompileHelper::compileExpression(
               }
               if (result) break;
             }
-            if (result) break;
           }
           if (result) break;
 
-          if (sval == nullptr || (sval && !sval->isValid())) {
-            if (result == nullptr) {
-              uhdm::RefObj *ref = s.make<uhdm::RefObj>();
-              ref->setName(name);
-              ref->setParent(pexpr);
-              fC->populateCoreMembers(parent, parent, ref);
-              result = ref;
-            }
+          if ((sval == nullptr) || (sval && !sval->isValid())) {
+            uhdm::RefObj *ref = s.make<uhdm::RefObj>();
+            ref->setName(name);
+            ref->setParent(pexpr);
+            fC->populateCoreMembers(parent, parent, ref);
+            result = ref;
           } else {
             uhdm::Constant *c = s.make<uhdm::Constant>();
             c->setValue(sval->uhdmValue());
             c->setDecompile(sval->decompiledValue());
             c->setConstType(sval->vpiValType());
             c->setSize(sval->getSize());
-            if (sval->isSigned()) {
-              uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
-              ts->setSigned(true);
-              uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
-              rt->setParent(c);
-              rt->setActual(ts);
-              c->setTypespec(rt);
-            }
+
+            uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+            ts->setSigned(sval->isSigned());
+
+            uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+            rt->setParent(c);
+            rt->setActual(ts);
+            c->setTypespec(rt);
+
             result = c;
           }
           break;
@@ -4017,7 +4015,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
     } else if (fC->Type(Handle) == VObjectType::paSuper_keyword) {
       rootName = "super";
     } else if (fC->Type(Handle) == VObjectType::paThis_dot_super) {
-      rootName = "super";
+      rootName = "this.super";
     }
     NodeId List_of_arguments = fC->Sibling(Method);
     if (fC->Type(List_of_arguments) == VObjectType::paArgument_list) {
@@ -4816,5 +4814,121 @@ void CompileHelper::reorderAssignmentPattern(
                                level + 1);
     }
   }
+}
+
+uhdm::Any *CompileHelper::compilePsOrHierarchicalArrayIdentifier(
+    DesignComponent *component, const FileContent *fC, NodeId id,
+    CompileDesign *compileDesign, uhdm::Any *pscope) {
+  // ps_or_hierarchical_array_identifier
+  // : (implicit_class_handle DOT | class_scope | package_scope)?
+  // dollar_root_keyword? identifier ( NOLINT
+  //   (OPEN_BRACKET constant_expression CLOSE_BRACKET)* DOT identifier
+  // )*
+  // ;
+  if (fC->Type(id) != VObjectType::paPs_or_hierarchical_array_identifier) {
+    return nullptr;
+  }
+
+  uhdm::Serializer &s = compileDesign->getSerializer();
+  uhdm::AnyCollection *const pathElems = s.makeCollection<uhdm::Any>();
+
+  const NodeId Ps_or_hierarchical_array_identifier_Id = id;
+  std::string name;
+
+  id = fC->Child(id);
+  while (id) {
+    switch (fC->Type(id)) {
+      case VObjectType::paImplicit_class_handle: {
+        uhdm::RefObj *ro = nullptr;
+        if (const NodeId This_keyword_Id = fC->Child(id)) {
+          ro = s.make<uhdm::RefObj>();
+          ro->setName("this");
+          name.append("this.");
+        } else if (const NodeId Super_keyword_Id = fC->Child(id)) {
+          ro = s.make<uhdm::RefObj>();
+          ro->setName("super");
+          name.append("super.");
+        } else if (const NodeId This_dot_super_Id = fC->Child(id)) {
+          ro = s.make<uhdm::RefObj>();
+          ro->setName("this.super");
+          fC->populateCoreMembers(id, id, ro);
+          name.append("this.super.");
+        }
+
+        if (ro != nullptr) {
+          pathElems->emplace_back(ro);
+        }
+      } break;
+
+      case VObjectType::paClass_scope:
+      case VObjectType::paPackage_scope: {
+        const NodeId Class_scope_Id = fC->Child(id);
+        const NodeId STRING_CONST_Id = fC->Child(Class_scope_Id);
+        uhdm::RefObj *const ro = s.make<uhdm::RefObj>();
+        ro->setName(fC->SymName(STRING_CONST_Id));
+        fC->populateCoreMembers(STRING_CONST_Id, STRING_CONST_Id, ro);
+        pathElems->emplace_back(ro);
+        name.append(fC->SymName(STRING_CONST_Id)).append("::");
+      } break;
+
+      case VObjectType::paDollar_root_keyword: {
+        uhdm::RefObj *const ro = s.make<uhdm::RefObj>();
+        ro->setName("$root");
+        fC->populateCoreMembers(id, id, ro);
+        pathElems->emplace_back(ro);
+        name.append("$root.");
+      } break;
+
+      case VObjectType::STRING_CONST: {
+        const NodeId Constant_Expression_Id = fC->Sibling(id);
+        if (fC->Type(Constant_Expression_Id) ==
+            VObjectType::paConstant_expression) {
+          uhdm::BitSelect *const bs = s.make<uhdm::BitSelect>();
+          bs->setName(fC->SymName(id));
+          fC->populateCoreMembers(id, Constant_Expression_Id, bs);
+          name.append(fC->SymName(id));
+          if (uhdm::Any *const expr =
+                  compileExpression(component, fC, Constant_Expression_Id,
+                                    compileDesign, bs, nullptr, true)) {
+            bs->setIndex(any_cast<uhdm::Expr>(expr));
+            name.append("[").append(decompileHelper(expr)).append("]");
+          }
+          pathElems->emplace_back(bs);
+        } else {
+          uhdm::RefObj *const ro = s.make<uhdm::RefObj>();
+          ro->setName(fC->SymName(id));
+          fC->populateCoreMembers(id, id, ro);
+          pathElems->emplace_back(ro);
+          name.append(fC->SymName(id));
+        }
+        name.append(".");
+      } break;
+
+      default:
+        break;
+    }
+
+    id = fC->Sibling(id);
+  }
+
+  uhdm::Any *result = nullptr;
+  if (pathElems->size() > 1) {
+    if (!name.empty() && (name.back() == '.')) name.pop_back();
+    uhdm::HierPath *const hp = s.make<uhdm::HierPath>();
+    hp->setName(name);
+    hp->setParent(pscope);
+    hp->setPathElems(pathElems);
+    fC->populateCoreMembers(Ps_or_hierarchical_array_identifier_Id,
+                            Ps_or_hierarchical_array_identifier_Id, hp);
+    for (uhdm::Any *e : *pathElems) e->setParent(hp);
+    result = hp;
+  } else if (!pathElems->empty()) {
+    pathElems->front()->setParent(pscope);
+    result = pathElems->front();
+    pathElems->clear();
+    s.erase(pathElems);
+  }
+
+  return result;
 }
 }  // namespace SURELOG

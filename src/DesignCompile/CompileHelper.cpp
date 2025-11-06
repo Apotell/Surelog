@@ -2422,6 +2422,8 @@ std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
   if (sel->getUhdmType() == uhdm::UhdmType::Constant) {
     const std::string_view ind = ((uhdm::Expr*)sel)->getDecompile();
     path_name.append(ind);
+  } else if (sel->getUhdmType() == uhdm::UhdmType::HierPath) {
+    path_name.append(sel->getName());
   } else if (sel->getUhdmType() == uhdm::UhdmType::RefObj) {
     const std::string_view ind = ((uhdm::Expr*)sel)->getName();
     path_name.append(ind);

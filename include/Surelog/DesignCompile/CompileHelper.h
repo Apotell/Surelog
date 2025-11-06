@@ -541,6 +541,10 @@ class CompileHelper final {
   uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
                                uhdm::Serializer& s);
 
+  uhdm::Any* compilePsOrHierarchicalArrayIdentifier(
+      DesignComponent* component, const FileContent* fC, NodeId id,
+      CompileDesign* compileDesign, uhdm::Any* pscope);
+
   /** Variable is either a bit select or a uhdm::Range*/
   bool isSelected(const FileContent* fC, NodeId id);
 

@@ -156,11 +156,11 @@ Constant                                               3
 Design                                                 1
 ForeachStmt                                            2
 Function                                               1
-HierPath                                               1
+HierPath                                               2
 Identifier                                             5
 Package                                                1
 Range                                                  2
-RefObj                                                 6
+RefObj                                                 7
 RefTypespec                                           11
 SourceFile                                             1
 StringTypespec                                         2
@@ -171,7 +171,7 @@ UnsupportedTypespec                                    3
 Variable                                               6
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                63
+Total:                                                65
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -386,13 +386,27 @@ Design: (unnamed)
                 |vpiName:j
                 |vpiFullName:pack::uvm_mem_mam::check_reg::j
               |vpiVariable:
-              \_RefObj: (pack::uvm_mem_mam::check_reg::path), line:18:14, endln:18:18
+              \_HierPath: (pack::uvm_mem_mam::check_reg::path.slices), line:18:14, endln:18:25
                 |vpiParent:
                 \_ForeachStmt: (pack::uvm_mem_mam::check_reg), line:18:5, endln:20:8
-                |vpiName:path
-                |vpiFullName:pack::uvm_mem_mam::check_reg::path
                 |vpiActual:
-                \_Variable: (pack::uvm_mem_mam::check_reg::path), line:17:25, endln:17:29
+                \_RefObj: (pack::uvm_mem_mam::check_reg::path), line:18:14, endln:18:18
+                  |vpiParent:
+                  \_HierPath: (pack::uvm_mem_mam::check_reg::path.slices), line:18:14, endln:18:25
+                  |vpiName:path
+                  |vpiFullName:pack::uvm_mem_mam::check_reg::path
+                  |vpiActual:
+                  \_Variable: (pack::uvm_mem_mam::check_reg::path), line:17:25, endln:17:29
+                |vpiActual:
+                \_RefObj: (pack::uvm_mem_mam::check_reg::slices), line:18:19, endln:18:25
+                  |vpiParent:
+                  \_HierPath: (pack::uvm_mem_mam::check_reg::path.slices), line:18:14, endln:18:25
+                  |vpiName:slices
+                  |vpiFullName:pack::uvm_mem_mam::check_reg::slices
+                  |vpiActual:
+                  \_Variable: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
+                |vpiName:path.slices
+                |vpiFullName:pack::uvm_mem_mam::check_reg::path.slices
               |vpiLoopVars:
               \_Variable: (pack::uvm_mem_mam::check_reg::j), line:18:26, endln:18:27
               |vpiStmt:

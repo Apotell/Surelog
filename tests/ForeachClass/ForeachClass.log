@@ -132,20 +132,20 @@ Constant                                               1
 Design                                                 1
 ForeachStmt                                            1
 Function                                               1
-HierPath                                               2
+HierPath                                               3
 Identifier                                             3
 IfStmt                                                 1
 LogicTypespec                                          2
 Operation                                              4
 Package                                                1
 Range                                                  1
-RefObj                                                 7
+RefObj                                                 8
 RefTypespec                                            5
 SourceFile                                             1
 UnsupportedTypespec                                    1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                46
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Illegal implicit net "id:29, name:addrs".
 [ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Illegal implicit net "id:30, name:i".
@@ -380,13 +380,27 @@ Design: (unnamed)
           |vpiName:range
           |vpiFullName:uvm::f1::range
         |vpiVariable:
-        \_RefObj: (uvm::f1::top_map), line:11:14, endln:11:21
+        \_HierPath: (uvm::f1::top_map.m_mems_by_offset), line:11:14, endln:11:38
           |vpiParent:
           \_ForeachStmt: (uvm::f1), line:11:5, endln:14:8
-          |vpiName:top_map
-          |vpiFullName:uvm::f1::top_map
           |vpiActual:
-          \_Variable: (uvm::f1::top_map), line:9:17, endln:9:24
+          \_RefObj: (uvm::f1::top_map), line:11:14, endln:11:21
+            |vpiParent:
+            \_HierPath: (uvm::f1::top_map.m_mems_by_offset), line:11:14, endln:11:38
+            |vpiName:top_map
+            |vpiFullName:uvm::f1::top_map
+            |vpiActual:
+            \_Variable: (uvm::f1::top_map), line:9:17, endln:9:24
+          |vpiActual:
+          \_RefObj: (uvm::f1::m_mems_by_offset), line:11:22, endln:11:38
+            |vpiParent:
+            \_HierPath: (uvm::f1::top_map.m_mems_by_offset), line:11:14, endln:11:38
+            |vpiName:m_mems_by_offset
+            |vpiFullName:uvm::f1::m_mems_by_offset
+            |vpiActual:
+            \_Variable: (uvm::uvm_reg_map::m_mems_by_offset), line:4:17, endln:4:33
+          |vpiName:top_map.m_mems_by_offset
+          |vpiFullName:uvm::f1::top_map.m_mems_by_offset
         |vpiLoopVars:
         \_Variable: (uvm::f1::range), line:11:39, endln:11:44
         |vpiStmt:

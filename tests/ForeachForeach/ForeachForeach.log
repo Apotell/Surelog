@@ -122,18 +122,19 @@ Constant                                               1
 Design                                                 1
 ForeachStmt                                            2
 Function                                               1
+HierPath                                               1
 Identifier                                             3
 Operation                                              2
 Package                                                1
 Range                                                  2
-RefObj                                                 5
+RefObj                                                 6
 RefTypespec                                            7
 SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               4
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                45
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachForeach/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -272,13 +273,27 @@ Design: (unnamed)
                 |vpiName:next_p
                 |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p
               |vpiVariable:
-              \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:14:21, endln:14:22
+              \_HierPath: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p.m_predecessors), line:14:21, endln:14:37
                 |vpiParent:
                 \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:14:12, endln:16:15
-                |vpiName:p
-                |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p
                 |vpiActual:
-                \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
+                \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:14:21, endln:14:22
+                  |vpiParent:
+                  \_HierPath: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p.m_predecessors), line:14:21, endln:14:37
+                  |vpiName:p
+                  |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p
+                  |vpiActual:
+                  \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p), line:13:28, endln:13:29
+                |vpiActual:
+                \_RefObj: (uvm::uvm_phase::get_adjacent_predecessor_nodes::m_predecessors), line:14:23, endln:14:37
+                  |vpiParent:
+                  \_HierPath: (uvm::uvm_phase::get_adjacent_predecessor_nodes::p.m_predecessors), line:14:21, endln:14:37
+                  |vpiName:m_predecessors
+                  |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::m_predecessors
+                  |vpiActual:
+                  \_Variable: (uvm::uvm_phase::m_predecessors), line:4:8, endln:4:22
+                |vpiName:p.m_predecessors
+                |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes::p.m_predecessors
               |vpiLoopVars:
               \_Variable: (uvm::uvm_phase::get_adjacent_predecessor_nodes::next_p), line:14:38, endln:14:44
               |vpiStmt:

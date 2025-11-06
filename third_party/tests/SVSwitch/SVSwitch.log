@@ -75,7 +75,7 @@ ForeverStmt                                            3
 ForkStmt                                               1
 FuncCall                                               2
 Function                                              20
-HierPath                                             122
+HierPath                                             123
 IODecl                                                28
 Identifier                                           214
 IfElse                                                17
@@ -103,7 +103,7 @@ Program                                                1
 ProgramTypespec                                        1
 Range                                                 81
 RefModule                                              4
-RefObj                                               762
+RefObj                                               763
 RefTypespec                                          241
 Repeat                                                 6
 ReturnStmt                                             1
@@ -119,7 +119,7 @@ VoidTypespec                                           3
 WaitStmt                                               1
 WhileStmt                                              1
 ------------------------------------------------------------
-Total:                                              3489
+Total:                                              3491
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:20: Illegal implicit net "id:2762, name:size".
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Illegal implicit net "id:3068, name:size".
@@ -8741,13 +8741,27 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@packet::compare::i
             |vpiVariable:
-            \_RefObj: (work@packet::compare::this), line:121:18, endln:121:22
+            \_HierPath: (work@packet::compare::this.data), line:121:18, endln:121:27
               |vpiParent:
               \_ForeachStmt: (work@packet::compare), line:121:10, endln:126:13
-              |vpiName:this
-              |vpiFullName:work@packet::compare::this
               |vpiActual:
-              \_ClassDefn: (work@packet), file:${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv, line:16:1, endln:136:9
+              \_RefObj: (work@packet::compare::this)
+                |vpiParent:
+                \_HierPath: (work@packet::compare::this.data), line:121:18, endln:121:27
+                |vpiName:this
+                |vpiFullName:work@packet::compare::this
+                |vpiActual:
+                \_ClassDefn: (work@packet), file:${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv, line:16:1, endln:136:9
+              |vpiActual:
+              \_RefObj: (work@packet::compare::data), line:121:23, endln:121:27
+                |vpiParent:
+                \_HierPath: (work@packet::compare::this.data), line:121:18, endln:121:27
+                |vpiName:data
+                |vpiFullName:work@packet::compare::data
+                |vpiActual:
+                \_Variable: (work@packet::data), line:23:11, endln:23:15
+              |vpiName:this.data
+              |vpiFullName:work@packet::compare::this.data
             |vpiLoopVars:
             \_Variable: (work@packet::compare::i), line:121:28, endln:121:29
             |vpiStmt:

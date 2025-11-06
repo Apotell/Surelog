@@ -189,9 +189,15 @@ class CompileHelper final {
 
   bool compileParameterDeclaration(DesignComponent* component,
                                    const FileContent* fC, NodeId nodeId,
-                                   bool localParam,
-                                   ValuedComponentI* m_instance,
-                                   bool port_param, bool muteErrors);
+                                   ValuedComponentI* instance, bool portParam,
+                                   bool muteErrors);
+  bool compileParameterPortList(DesignComponent* component,
+                                const FileContent* fC, NodeId nodeId,
+                                ValuedComponentI* instance, bool muteErrors);
+
+  uhdm::ParamAssignCollection* compileParameterAssignmentList(
+      DesignComponent* component, const FileContent* fC, NodeId nodeId,
+      uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors);
 
   NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId,
                                uhdm::TaskFunc* tf);
@@ -264,12 +270,9 @@ class CompileHelper final {
                                          VObjectType the_type,
                                          uhdm::Any* pstmt);
 
-  uhdm::Typespec* compileDatastructureTypespec(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId type,
-                                               ValuedComponentI* instance,
-                                               std::string_view suffixname = "",
-                                               std::string_view typeName = "");
+  uhdm::UnsupportedTypespec* compileUnsupportedTypespec(
+      DesignComponent* component, const FileContent* fC, NodeId type,
+      uhdm::Any* pstmt, std::string_view typeName);
 
   uhdm::Any* compileCheckerInstantiation(DesignComponent* component,
                                          const FileContent* fC, NodeId nodeId,

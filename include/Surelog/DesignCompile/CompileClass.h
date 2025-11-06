@@ -70,15 +70,15 @@ class CompileClass final {
   bool compile();
 
  private:
-  bool compile_class_parameters_(const FileContent* fC, NodeId id);
-  bool compile_class_property_(const FileContent* fC, NodeId id);
-  bool compile_class_method_(const FileContent* fC, NodeId id);
-  bool compile_class_constraint_(const FileContent* fC, NodeId id);
-  bool compile_class_declaration_(const FileContent* fC, NodeId id);
-  bool compile_covergroup_declaration_(const FileContent* fC, NodeId id);
-  bool compile_local_parameter_declaration_(const FileContent* fC, NodeId id);
-  bool compile_parameter_declaration_(const FileContent* fC, NodeId id);
-  bool compile_class_type_(const FileContent* fC, NodeId id);
+  bool compileParameterPortList(const FileContent* fC, NodeId id);
+  bool compileProperty(const FileContent* fC, NodeId id);
+  bool compileMethod(const FileContent* fC, NodeId id);
+  bool compileConstraint(const FileContent* fC, NodeId id);
+  bool compileDeclaration(const FileContent* fC, NodeId id);
+  bool compileCovergroupDeclaration(const FileContent* fC, NodeId id);
+  bool compileLocalParameterDeclaration(const FileContent* fC, NodeId id);
+  bool compileParameterDeclaration(const FileContent* fC, NodeId id);
+  bool compileExtends(const FileContent* fC, NodeId id);
   bool compile_properties();
 
   Session* const m_session = nullptr;

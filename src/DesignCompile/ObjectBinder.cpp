@@ -40,6 +40,7 @@
 // uhdm
 #include <uhdm/Serializer.h>
 #include <uhdm/Utils.h>
+#include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
 
 namespace SURELOG {
@@ -80,9 +81,9 @@ inline bool ObjectBinder::areSimilarNames(std::string_view name1,
   return !name1.empty() && name1 == name2;
 }
 
-inline bool ObjectBinder::areSimilarNames(const uhdm::Any* object1,
+inline bool ObjectBinder::areSimilarNames(const uhdm::Any* object,
                                           std::string_view name2) const {
-  return areSimilarNames(object1->getName(), name2);
+  return areSimilarNames(object->getName(), name2);
 }
 
 inline bool ObjectBinder::areSimilarNames(const uhdm::Any* object1,
@@ -237,6 +238,73 @@ const uhdm::ClassDefn* ObjectBinder::getClassDefn(std::string_view name,
     }
   }
 
+  return nullptr;
+}
+
+class CloneContext final : public uhdm::CloneContext {
+ public:
+  CloneContext(uhdm::Serializer* serializer) : uhdm::CloneContext(serializer) {}
+};
+
+const uhdm::Typespec* ObjectBinder::propagateParamAssigns(
+    const uhdm::Typespec* source, const uhdm::Typespec* target) {
+  if (const uhdm::UnsupportedTypespec* const uts =
+          any_cast<uhdm::UnsupportedTypespec>(source)) {
+    if (uhdm::ParamAssignCollection* const sourcePAs = uts->getParamAssigns()) {
+      if (const uhdm::ClassTypespec* const actual =
+              any_cast<uhdm::ClassTypespec>(target)) {
+        CloneContext cc(&m_serializer);
+        uhdm::ClassTypespec* const ct =
+            static_cast<uhdm::ClassTypespec*>(uhdm::clone_tree(actual, &cc));
+        ct->setParent(const_cast<uhdm::Any*>(actual->getParent()));
+        ct->setParamAssigns(sourcePAs);
+
+        if (const uhdm::ClassDefn* const cd = actual->getClassDefn()) {
+          if (const uhdm::ParamAssignCollection* const definitionPAs =
+                  cd->getParamAssigns()) {
+            using named_param_assings_t =
+                std::map<std::string_view, uhdm::ParamAssign*>;
+            named_param_assings_t namedDefinitionPAs;
+            for (uhdm::ParamAssign* pa : *definitionPAs) {
+              namedDefinitionPAs.emplace(pa->getLhs()->getName(), pa);
+            }
+            named_param_assings_t namedTypespecPAs;
+            for (size_t i = 0, ni = sourcePAs->size(); i < ni; ++i) {
+              uhdm::ParamAssign* const pa = sourcePAs->at(i);
+              if (pa->getLhs() == nullptr) {
+                pa->setLhs(definitionPAs->at(i)->getLhs());
+              } else {
+                named_param_assings_t::const_iterator it =
+                    namedDefinitionPAs.find(pa->getLhs()->getName());
+                if (it != namedDefinitionPAs.cend()) {
+                  pa->setLhs(it->second->getLhs());
+                }
+              }
+              namedTypespecPAs.emplace(pa->getLhs()->getName(), pa);
+              pa->setParent(ct, true);
+            }
+
+            // Reorder the PA in typespec to match the definition
+            sourcePAs->clear();
+            for (uhdm::ParamAssign* pa : *definitionPAs) {
+              sourcePAs->emplace_back(
+                  namedTypespecPAs[pa->getLhs()->getName()]);
+            }
+          }
+        }
+
+        // Rename it to include the parameter port assignments
+        std::ostringstream out;
+        out << ct->getName() << " #(";
+        uhdm::prettyPrint(out, sourcePAs);
+        out << ")";
+        ct->setName(out.str());
+
+        const_cast<uhdm::UnsupportedTypespec*>(uts)->setParamAssigns(nullptr);
+        return ct;
+      }
+    }
+  }
   return nullptr;
 }
 
@@ -1147,9 +1215,20 @@ void ObjectBinder::visitRefTypespec(const uhdm::RefTypespec* object) {
         const_cast<uhdm::Typespec*>(actual));
   }
 
-  if ((object_Actual_typespec != nullptr) && (object->getActual() == nullptr)) {
-    const_cast<uhdm::RefTypespec*>(object)->setActual(
-        const_cast<uhdm::Typespec*>(object_Actual_typespec));
+  if (object_Actual_typespec != nullptr) {
+    if (const uhdm::Typespec* const actual = object->getActual()) {
+      if (const uhdm::Typespec* const replacement =
+              propagateParamAssigns(object_Actual_typespec, actual)) {
+        uhdm::RefTypespec* const rt = const_cast<uhdm::RefTypespec*>(object);
+        rt->setName(replacement->getName());
+        rt->setActual(const_cast<uhdm::Typespec*>(replacement));
+      }
+    }
+
+    if (object->getActual() == nullptr) {
+      const_cast<uhdm::RefTypespec*>(object)->setActual(
+          const_cast<uhdm::Typespec*>(object_Actual_typespec));
+    }
   }
 }
 
@@ -1517,12 +1596,18 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
   uhdm::Serializer* const serializer = object->getSerializer();
   if (uhdm::Factory* const factory =
           serializer->getFactory<uhdm::RefTypespec>()) {
-    for (uhdm::Any* source : factory->getObjects()) {
+    const uhdm::AnyCollection objects(factory->getObjects());
+    for (uhdm::Any* source : objects) {
       uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(source);
       if (const uhdm::UnsupportedTypespec* const uts =
               rt->getActual<uhdm::UnsupportedTypespec>()) {
-        if (const uhdm::Typespec* const replacement = findType(source)) {
-          rt->setActual(const_cast<uhdm::Typespec*>(replacement));
+        if (const uhdm::Typespec* actual = findType(source)) {
+          if (const uhdm::Typespec* const replacement =
+                  propagateParamAssigns(uts, actual)) {
+            actual = replacement;
+            rt->setName(replacement->getName());
+          }
+          rt->setActual(const_cast<uhdm::Typespec*>(actual));
         }
       }
     }

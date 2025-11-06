@@ -38,7 +38,6 @@
 #include "Surelog/ErrorReporting/ErrorContainer.h"
 #include "Surelog/ErrorReporting/ErrorDefinition.h"
 #include "Surelog/ErrorReporting/Location.h"
-#include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/SymbolTable.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 #include "Surelog/Testbench/ClassDefinition.h"
@@ -50,15 +49,8 @@
 
 // UHDM
 #include <uhdm/Serializer.h>
-#include <uhdm/class_defn.h>
-#include <uhdm/containers.h>
-#include <uhdm/expr.h>
-#include <uhdm/extends.h>
-#include <uhdm/function.h>
-#include <uhdm/function_decl.h>
-#include <uhdm/ref_typespec.h>
-#include <uhdm/task_decl.h>
-#include <uhdm/variable.h>
+#include <uhdm/Utils.h>
+#include <uhdm/uhdm.h>
 
 #include <cstdint>
 #include <stack>
@@ -85,25 +77,23 @@ bool CompileClass::compile() {
 
   std::vector<std::string_view> names;
   ClassDefinition* parent = m_class;
-  DesignComponent* tmp_container = nullptr;
-  while (parent) {
-    tmp_container = parent->getContainer();
+  DesignComponent* container = nullptr;
+  while (parent != nullptr) {
     names.emplace_back(parent->getName());
+    container = parent->getContainer();
     parent = parent->m_parent;
   }
 
   std::string fullName;
-  if (tmp_container) {
-    fullName.assign(tmp_container->getName()).append("::");
+  if (container != nullptr) {
+    fullName.append(container->getName()).append("::");
   }
-  if (!names.empty()) {
-    uint32_t index = names.size() - 1;
-    while (true) {
-      fullName += names[index];
-      if (index > 0) fullName += "::";
-      if (index == 0) break;
-      index--;
-    }
+
+  fullName.append(names.back());
+  names.pop_back();
+  while (!names.empty()) {
+    fullName.append("::").append(names.back());
+    names.pop_back();
   }
 
   uhdm::ClassDefn* const defn = m_class->getUhdmModel<uhdm::ClassDefn>();
@@ -145,8 +135,7 @@ bool CompileClass::compile() {
     pack_imports.emplace_back(import);
   }
   // - Parent container imports
-  DesignComponent* container = m_class->getContainer();
-  if (container) {
+  if (DesignComponent* container = m_class->getContainer()) {
     // FileCNodeId itself(container->getFileContents ()[0],
     // container->getNodeIds ()[0]); pack_imports.emplace_back(itself);
     for (auto& import :
@@ -161,7 +150,9 @@ bool CompileClass::compile() {
     m_helper.importPackage(m_class, m_design, pack_fC, pack_id);
   }
 
-  compile_class_parameters_(fC, nodeId);
+  if (fC->sl_collect(nodeId, VObjectType::VIRTUAL)) {
+    defn->setVirtual(true);
+  }
 
   // This
   DataType* thisdt =
@@ -171,14 +162,12 @@ bool CompileClass::compile() {
                                 false, false, false, false, false);
   m_class->insertProperty(prop);
 
-  if (!nodeId) return false;
-
   std::stack<NodeId> stack;
   stack.emplace(nodeId);
   bool inFunction_body_declaration = false;
   bool inTask_body_declaration = false;
   while (!stack.empty()) {
-    bool skipGuts = false;
+    bool skipChildren = false;
     const NodeId id = stack.top();
     stack.pop();
 
@@ -211,14 +200,14 @@ bool CompileClass::compile() {
       }
       case VObjectType::paClass_property:
         if (inFunction_body_declaration || inTask_body_declaration) break;
-        compile_class_property_(fC, id);
+        compileProperty(fC, id);
         break;
       case VObjectType::paClass_constraint:
-        compile_class_constraint_(fC, id);
+        compileConstraint(fC, id);
         break;
       case VObjectType::paClass_declaration:
         if (id != nodeId) {
-          compile_class_declaration_(fC, id);
+          compileDeclaration(fC, id);
           if (const NodeId siblingId = fC->Sibling(id)) {
             stack.emplace(siblingId);
           }
@@ -226,20 +215,27 @@ bool CompileClass::compile() {
         }
         break;
       case VObjectType::paCovergroup_declaration:
-        compile_covergroup_declaration_(fC, id);
+        compileCovergroupDeclaration(fC, id);
         break;
-      case VObjectType::paLocal_parameter_declaration:
-        compile_local_parameter_declaration_(fC, id);
+      case VObjectType::paParameter_port_list:
+        compileParameterPortList(fC, id);
+        skipChildren = true;
         break;
       case VObjectType::paParameter_declaration:
-        compile_parameter_declaration_(fC, id);
+        compileParameterDeclaration(fC, id);
+        skipChildren = true;
+        break;
+      case VObjectType::paLocal_parameter_declaration:
+        compileLocalParameterDeclaration(fC, id);
+        skipChildren = true;
         break;
       case VObjectType::paClass_method:
-        compile_class_method_(fC, id);
-        skipGuts = true;
+        compileMethod(fC, id);
+        skipChildren = true;
         break;
-      case VObjectType::paClass_type:
-        compile_class_type_(fC, id);
+      case VObjectType::EXTENDS:
+        compileExtends(fC, id);
+        skipChildren = true;
         break;
       case VObjectType::paLet_declaration: {
         m_helper.compileLetDeclaration(m_class, fC, id);
@@ -270,7 +266,7 @@ bool CompileClass::compile() {
     }
 
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-    if (!skipGuts) {
+    if (!skipChildren) {
       if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
     }
   }
@@ -313,7 +309,7 @@ bool CompileClass::compile_properties() {
   return true;
 }
 
-bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
+bool CompileClass::compileProperty(const FileContent* fC, NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -419,7 +415,7 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
   return true;
 }
 
-bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
+bool CompileClass::compileMethod(const FileContent* fC, NodeId id) {
   /*
     n<> u<8> t<MethodQualifier_Virtual> p<21> s<20> l<12>
     n<> u<9> t<Function_data_type> p<10> l<12>
@@ -717,8 +713,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
   return true;
 }
 
-bool CompileClass::compile_class_constraint_(const FileContent* fC,
-                                             NodeId class_constraint) {
+bool CompileClass::compileConstraint(const FileContent* fC,
+                                     NodeId class_constraint) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -746,8 +742,7 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_class_declaration_(const FileContent* fC,
-                                              NodeId id) {
+bool CompileClass::compileDeclaration(const FileContent* fC, NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -786,8 +781,8 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_covergroup_declaration_(const FileContent* fC,
-                                                   NodeId id) {
+bool CompileClass::compileCovergroupDeclaration(const FileContent* fC,
+                                                NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -813,8 +808,8 @@ bool CompileClass::compile_covergroup_declaration_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
-                                                        NodeId id) {
+bool CompileClass::compileLocalParameterDeclaration(const FileContent* fC,
+                                                    NodeId id) {
   /*
    n<> u<8> t<IntegerAtomType_Int> p<9> l<3>
    n<> u<9> t<Data_type> p<10> c<8> l<3>
@@ -833,17 +828,6 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
-  NodeId list_of_type_assignments = fC->Child(id);
-  if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paType_assignment_list ||
-      fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-    // Type param
-    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         true, nullptr, false, false);
-  } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, true, nullptr, false,
-                                         false);
-  }
   NodeId data_type_or_implicit = fC->Child(id);
   NodeId list_of_param_assignments = fC->Sibling(data_type_or_implicit);
   NodeId param_assignment = fC->Child(list_of_param_assignments);
@@ -869,26 +853,15 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
 
     param_assignment = fC->Sibling(param_assignment);
   }
-  return true;
+  return m_helper.compileParameterDeclaration(m_class, fC, id, nullptr, false,
+                                              false);
 }
 
-bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
-                                                  NodeId id) {
+bool CompileClass::compileParameterDeclaration(const FileContent* fC,
+                                               NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
-  NodeId list_of_type_assignments = fC->Child(id);
-  if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paType_assignment_list ||
-      fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-    // Type param
-    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         false, nullptr, false, false);
-  } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, false, nullptr, false,
-                                         false);
-  }
-
   NodeId data_type_or_implicit = fC->Child(id);
   NodeId list_of_param_assignments = fC->Sibling(data_type_or_implicit);
   NodeId param_assignment = fC->Child(list_of_param_assignments);
@@ -909,98 +882,57 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
     }
 
     FileCNodeId fnid(fC, id);
-    m_class->addObject(VObjectType::paLocal_parameter_declaration, fnid);
+    m_class->addObject(VObjectType::paParameter_declaration, fnid);
     m_class->addNamedObject(name, fnid, nullptr);
 
     param_assignment = fC->Sibling(param_assignment);
   }
-  return true;
+
+  return m_helper.compileParameterDeclaration(m_class, fC, id, nullptr, false,
+                                              false);
 }
 
-bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
+bool CompileClass::compileExtends(const FileContent* fC, NodeId id) {
+  if (fC->Type(id) != VObjectType::EXTENDS) return false;
+
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  NodeId parent = fC->Parent(id);
-  VObjectType ptype = fC->Type(parent);
-  if (ptype != VObjectType::paClass_declaration) return true;
-  NodeId base_class_id = fC->Child(id);
-  std::string base_class_name(fC->SymName(base_class_id));
-  while (fC->Sibling(base_class_id) &&
-         (fC->Type(fC->Sibling(base_class_id)) == VObjectType::STRING_CONST)) {
-    base_class_id = fC->Sibling(base_class_id);
-    base_class_name.append("::").append(fC->SymName(base_class_id));
+
+  const NodeId Class_type = fC->Sibling(id);
+  NodeId String_const = fC->Child(Class_type);
+  std::string baseClassName(fC->SymName(String_const));
+  String_const = fC->Sibling(String_const);
+  while (String_const &&
+         (fC->Type(String_const) == VObjectType::STRING_CONST)) {
+    baseClassName.append("::").append(fC->SymName(String_const));
+    String_const = fC->Sibling(String_const);
   }
-  uhdm::Extends* extends = s.make<uhdm::Extends>();
+
+  uhdm::Extends* const extends = s.make<uhdm::Extends>();
   extends->setParent(m_class->getUhdmModel());
-  fC->populateCoreMembers(base_class_id, base_class_id, extends);
+  fC->populateCoreMembers(Class_type, Class_type, extends);
   m_class->getUhdmModel<uhdm::ClassDefn>()->setExtends(extends);
 
-  uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
-  extends_ts->setParent(extends);
-  extends_ts->setName(base_class_name);
-  fC->populateCoreMembers(base_class_id, base_class_id, extends_ts);
-  extends->setClassTypespec(extends_ts);
+  uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+  rt->setParent(extends);
+  rt->setName(baseClassName);
+  fC->populateCoreMembers(Class_type, Class_type, rt);
+  extends->setClassTypespec(rt);
+
+  if (uhdm::UnsupportedTypespec* const ts = m_helper.compileUnsupportedTypespec(
+          m_class, fC, Class_type, extends, baseClassName)) {
+    rt->setActual(ts);
+  }
 
   return true;
 }
 
-bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
-  /*
-  n<all_c> u<1> t<StringConst> p<16> s<14> l<3>
-  n<uvm_port_base> u<2> t<StringConst> p<12> s<8> l<7>
-  n<IF> u<3> t<StringConst> p<6> s<5> l<7>
-  n<uvm_void> u<4> t<StringConst> p<5> l<7>
-  n<> u<5> t<Data_type> p<6> c<4> l<7>
-  n<> u<6> t<List_of_type_assignments> p<7> c<3> l<7>
-  n<> u<7> t<Parameter_port_declaration> p<8> c<6> l<7>
-  n<> u<8> t<Parameter_port_list> p<12> c<7> s<10> l<7>
-  n<IF> u<9> t<StringConst> p<10> l<7>
-  n<> u<10> t<Class_type> p<12> c<9> s<11> l<7>
-  n<> u<11> t<Endclass> p<12> l<8>
-  n<> u<12> t<Class_declaration> p<13> c<2> l<7>
-
-  or
-
-  n<T1> u<3> t<StringConst> p<9> s<5> l<18>
-  n<> u<4> t<IntegerAtomType_Int> p<5> l<18>
-  n<> u<5> t<Data_type> p<9> c<4> s<6> l<18>
-  n<T2> u<6> t<StringConst> p<9> s<8> l<18>
-  n<T1> u<7> t<StringConst> p<8> l<18>
-  n<> u<8> t<Data_type> p<9> c<7> l<18>
-  n<> u<9> t<List_of_type_assignments> p<10> c<3> l<18>
-  n<> u<10> t<Parameter_port_declaration> p<11> c<9> l<18>
-  n<> u<11> t<Parameter_port_list> p<31> c<10> s<20> l<18>
-
-  */
-  uhdm::ClassDefn* defn = m_class->getUhdmModel<uhdm::ClassDefn>();
-
-  if (fC->sl_collect(id, VObjectType::VIRTUAL)) {
-    defn->setVirtual(true);
+bool CompileClass::compileParameterPortList(const FileContent* fC, NodeId id) {
+  if (const NodeId Parameter_port_list =
+          fC->sl_collect(id, VObjectType::paParameter_port_list)) {
+    return m_helper.compileParameterPortList(m_class, fC, Parameter_port_list,
+                                             nullptr, false);
   }
 
-  NodeId paramList = fC->sl_collect(id, VObjectType::paParameter_port_list);
-  if (paramList) {
-    NodeId parameter_port_declaration = fC->Child(paramList);
-    while (parameter_port_declaration) {
-      NodeId list_of_type_assignments = fC->Child(parameter_port_declaration);
-      NodeId type = fC->Child(list_of_type_assignments);
-      if (fC->Type(list_of_type_assignments) ==
-              VObjectType::paType_assignment_list ||
-          fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-        // Type param
-        m_helper.compileParameterDeclaration(m_class, fC,
-                                             list_of_type_assignments, false,
-                                             nullptr, false, false);
-      } else if (fC->Type(type) == VObjectType::TYPE) {
-        // Handled in compile_parameter_declaration_
-      } else {
-        // Regular param
-        m_helper.compileParameterDeclaration(m_class, fC,
-                                             parameter_port_declaration, false,
-                                             nullptr, false, false);
-      }
-      parameter_port_declaration = fC->Sibling(parameter_port_declaration);
-    }
-  }
   return true;
 }
 

@@ -180,11 +180,8 @@ uhdm::Any* CompileHelper::compileVariable(
       fC->populateCoreMembers(nameId, nameId, var);
 
       if (ts == nullptr) {
-        uhdm::UnsupportedTypespec* ut = s.make<uhdm::UnsupportedTypespec>();
-        ut->setName(fC->SymName(variable));
-        ut->setParent(pstmt);
-        fC->populateCoreMembers(declarationId, declarationId, ut);
-        ts = ut;
+        ts = compileUnsupportedTypespec(component, fC, declarationId, pstmt,
+                                        fC->SymName(variable));
       }
 
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
@@ -669,16 +666,28 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
   return result;
 }
 
-Typespec* CompileHelper::compileDatastructureTypespec(
+UnsupportedTypespec* CompileHelper::compileUnsupportedTypespec(
     DesignComponent* component, const FileContent* fC, NodeId type,
-    ValuedComponentI* instance, std::string_view suffixname,
-    std::string_view typeName) {
+    uhdm::Any* pstmt, std::string_view typeName) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
-  tps->setName(typeName);
-  tps->setParent(s.topScope());
-  fC->populateCoreMembers(type, type, tps);
-  return tps;
+  uhdm::UnsupportedTypespec* const ts = s.make<uhdm::UnsupportedTypespec>();
+  ts->setName(typeName);
+  ts->setParent(pstmt);
+  fC->populateCoreMembers(type, type, ts);
+
+  if (const NodeId Parameter_value_assignment =
+          fC->sl_collect(type, VObjectType::paParameter_value_assignment)) {
+    if (const NodeId Parameter_assignment_list =
+            fC->Child(Parameter_value_assignment)) {
+      if (uhdm::ParamAssignCollection* const pas =
+              compileParameterAssignmentList(component, fC,
+                                             Parameter_assignment_list, ts,
+                                             nullptr, true)) {
+        ts->setParamAssigns(pas);
+      }
+    }
+  }
+  return ts;
 }
 
 uhdm::TypespecMember* CompileHelper::buildTypespecMember(const FileContent* fC,
@@ -1075,21 +1084,21 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
   if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
-  NodeId iDataType = InvalidNodeId;
+  NodeId Data_type = InvalidNodeId;
   if (fC->Type(id) != VObjectType::paData_type) {
-    iDataType = fC->sl_get(id, VObjectType::paData_type);
+    Data_type = fC->sl_get(id, VObjectType::paData_type);
   }
-  if (!iDataType &&
+  if (!Data_type &&
       ((fC->Type(fC->Sibling(id)) == VObjectType::paData_type_or_implicit) ||
        (fC->Type(fC->Sibling(id)) == VObjectType::paData_type))) {
-    iDataType = fC->Sibling(id);
+    Data_type = fC->Sibling(id);
   }
-  if (!iDataType) {
-    iDataType = id;
+  if (!Data_type) {
+    Data_type = id;
   }
 
   NodeId Packed_dimension =
-      fC->sl_get(iDataType, VObjectType::paPacked_dimension);
+      fC->sl_get(Data_type, VObjectType::paPacked_dimension);
 
   NodeId nodeId = id;
   if (fC->Type(id) == VObjectType::paData_type) nodeId = fC->Child(id);
@@ -1160,10 +1169,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
           var->setExpr((uhdm::Expr*)res);
         }
       } else {
-        uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
-        tps->setParent(pstmt);
-        fC->populateCoreMembers(type, type, tps);
-        result = tps;
+        const NodeId nameId = fC->sl_collect(type, VObjectType::STRING_CONST);
+        result = compileUnsupportedTypespec(component, fC, type, pstmt,
+                                            fC->SymName(nameId));
       }
       break;
     }
@@ -1251,8 +1259,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
       NodeId literal = fC->Child(type);
       if (fC->Type(literal) == VObjectType::STRING_CONST) {
         const std::string_view typeName = fC->SymName(literal);
-        result = compileDatastructureTypespec(component, fC, type, instance, "",
-                                              typeName);
+        result =
+            compileUnsupportedTypespec(component, fC, type, pstmt, typeName);
       } else {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
         var->setValue(StrCat("INT:", fC->SymName(literal)));
@@ -1290,25 +1298,21 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
     }
     case VObjectType::paPackage_scope:
     case VObjectType::paClass_scope: {
-      std::string typeName;
       NodeId class_type = fC->Child(type);
       NodeId class_name;
       if (the_type == VObjectType::paClass_scope)
         class_name = fC->Child(class_type);
       else
         class_name = class_type;
-      typeName = fC->SymName(class_name);
-      std::string packageName = typeName;
-      typeName += "::";
+      std::string_view packageName = fC->SymName(class_name);
       NodeId symb_id = fC->Sibling(type);
       const std::string_view name = fC->SymName(symb_id);
-      typeName += name;
-      Package* pack = design->getPackage(packageName);
-      if (pack) {
+      std::string typeName = StrCat(packageName, "::", name);
+      if (Package* pack = design->getPackage(packageName)) {
         const DataType* dtype = pack->getDataType(design, name);
         if (dtype == nullptr) {
           ClassDefinition* classDefn = pack->getClassDefinition(name);
-          dtype = (const DataType*)classDefn;
+          dtype = classDefn;
           if (classDefn) {
             result = classDefn->getUhdmTypespecModel();
             break;
@@ -1324,15 +1328,22 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
           if (uhdm::ParamAssignCollection* param_assigns =
                   pack->getParamAssigns()) {
             for (uhdm::ParamAssign* param : *param_assigns) {
-              const std::string_view param_name = param->getLhs()->getName();
-              if (param_name == name) {
-                const uhdm::Any* rhs = param->getRhs();
-                if (const uhdm::Expr* exp = any_cast<const uhdm::Expr*>(rhs)) {
-                  uhdm::IntTypespec* its = s.make<uhdm::IntTypespec>();
-                  its->setValue(exp->getValue());
-                  result = its;
-                } else {
-                  result = (uhdm::Typespec*)rhs;
+              if (param->getLhs()->getName() == name) {
+                if (uhdm::Any* const rhs = param->getRhs()) {
+                  if (uhdm::RefTypespec* const rt =
+                          any_cast<uhdm::RefTypespec>(rhs)) {
+                    result = rt->getActual();
+                  } else if (uhdm::TaggedPattern* const tp =
+                                 any_cast<uhdm::TaggedPattern>(rhs)) {
+                    if (uhdm::RefTypespec* const rt = tp->getTypespec()) {
+                      result = rt->getActual();
+                    }
+                  } else if (const uhdm::Expr* const exp =
+                                 any_cast<uhdm::Expr>(rhs)) {
+                    uhdm::IntTypespec* const its = s.make<uhdm::IntTypespec>();
+                    its->setValue(exp->getValue());
+                    result = its;
+                  }
                 }
                 break;
               }
@@ -1341,12 +1352,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
         }
       }
       if (result == nullptr) {
-        uhdm::UnsupportedTypespec* ref = s.make<uhdm::UnsupportedTypespec>();
-        ref->setParent(pstmt);
-        ref->setPacked(isPacked);
-        ref->setName(typeName);
-        fC->populateCoreMembers(id, id, ref);
-        result = ref;
+        result = compileUnsupportedTypespec(component, fC, id, pstmt, typeName);
       }
       break;
     }
@@ -1511,29 +1517,27 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
           }
         }
       }
-      if (!result) {
-        if (component) {
-          ClassDefinition* cl = design->getClassDefinition(typeName);
-          if (cl == nullptr) {
+      if (!result && component) {
+        ClassDefinition* cl = design->getClassDefinition(typeName);
+        if (cl == nullptr) {
+          cl = design->getClassDefinition(
+              StrCat(component->getName(), "::", typeName));
+        }
+        if (cl == nullptr) {
+          if (const DesignComponent* p =
+                  valuedcomponenti_cast<const DesignComponent*>(
+                      component->getParentScope())) {
             cl = design->getClassDefinition(
-                StrCat(component->getName(), "::", typeName));
+                StrCat(p->getName(), "::", typeName));
           }
-          if (cl == nullptr) {
-            if (const DesignComponent* p =
-                    valuedcomponenti_cast<const DesignComponent*>(
-                        component->getParentScope())) {
-              cl = design->getClassDefinition(
-                  StrCat(p->getName(), "::", typeName));
-            }
-          }
-          if (cl) {
-            result = cl->getUhdmTypespecModel();
-          }
+        }
+        if (cl) {
+          result = cl->getUhdmTypespecModel();
         }
       }
       if (result == nullptr) {
-        result = compileDatastructureTypespec(component, fC, type, instance, "",
-                                              typeName);
+        result = compileUnsupportedTypespec(component, fC, Data_type, pstmt,
+                                            typeName);
         if (result) {
           fC->populateCoreMembers(type, type, result);
         }

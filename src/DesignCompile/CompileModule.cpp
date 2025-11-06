@@ -562,7 +562,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         m_helper.importPackage(m_module, m_design, pack_fC, pack_id);
       }
     }
-    NodeId ParameterPortListId;
+
     std::stack<NodeId> stack;
     stack.emplace(startId);
 
@@ -571,9 +571,6 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       const NodeId id = stack.top();
       stack.pop();
 
-      if (ParameterPortListId && (id == ParameterPortListId)) {
-        ParameterPortListId = InvalidNodeId;
-      }
       VObjectType type = fC->Type(id);
       bool skipChildren = false;
       switch (type) {
@@ -694,50 +691,23 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paParameter_port_list: {
           if (collectType != CollectType::DEFINITION) break;
-          ParameterPortListId = id;
-          NodeId list_of_param_assignments = fC->Child(id);
-          while (list_of_param_assignments) {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_param_assignments, false, m_instance,
-                false, false);
-            list_of_param_assignments = fC->Sibling(list_of_param_assignments);
-          }
+          m_helper.compileParameterPortList(m_module, fC, id, m_instance,
+                                            false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paParameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, false, m_instance,
-                ParameterPortListId, false);
-
-          } else {
-            m_helper.compileParameterDeclaration(m_module, fC, id, false,
-                                                 m_instance,
-                                                 ParameterPortListId, false);
-          }
+          m_helper.compileParameterDeclaration(m_module, fC, id, m_instance,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paLocal_parameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, true, m_instance,
-                ParameterPortListId, false);
-
-          } else {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, id, true, m_instance, ParameterPortListId, false);
-          }
+          m_helper.compileParameterDeclaration(m_module, fC, id, m_instance,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paTask_declaration: {
@@ -810,7 +780,6 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           m_helper.compileLetDeclaration(m_module, fC, id);
           break;
         }
-        case VObjectType::paParam_assignment:
         case VObjectType::paHierarchical_instance:
         case VObjectType::paUdp_instance:
         case VObjectType::paGate_instantiation:
@@ -1040,7 +1009,6 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
     SymbolTable* const symbols = m_session->getSymbolTable();
     ErrorContainer* const errors = m_session->getErrorContainer();
 
-    NodeId ParameterPortListId;
     std::stack<NodeId> stack;
     stack.emplace(startId);
 
@@ -1049,9 +1017,6 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
       const NodeId id = stack.top();
       stack.pop();
 
-      if (ParameterPortListId && (id == ParameterPortListId)) {
-        ParameterPortListId = InvalidNodeId;
-      }
       VObjectType type = fC->Type(id);
       bool skipChildren = false;
       switch (type) {
@@ -1063,14 +1028,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paParameter_port_list: {
           if (collectType != CollectType::DEFINITION) break;
-          ParameterPortListId = id;
-          NodeId list_of_param_assignments = fC->Child(id);
-          while (list_of_param_assignments) {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_param_assignments, false, m_instance,
-                false, false);
-            list_of_param_assignments = fC->Sibling(list_of_param_assignments);
-          }
+          m_helper.compileParameterPortList(m_module, fC, id, m_instance,
+                                            false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paPort_declaration: {
@@ -1345,38 +1305,16 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paParameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, false, m_instance,
-                ParameterPortListId, false);
-
-          } else {
-            m_helper.compileParameterDeclaration(m_module, fC, id, false,
-                                                 m_instance,
-                                                 ParameterPortListId, false);
-          }
+          m_helper.compileParameterDeclaration(m_module, fC, id, m_instance,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paLocal_parameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, true, m_instance,
-                ParameterPortListId, false);
-
-          } else {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, id, true, m_instance, ParameterPortListId, false);
-          }
+          m_helper.compileParameterDeclaration(m_module, fC, id, m_instance,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paBind_directive: {
@@ -1384,7 +1322,6 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           m_helper.compileBindStmt(m_module, fC, id, m_instance);
           break;
         }
-        case VObjectType::paParam_assignment:
         case VObjectType::paDefparam_assignment: {
           if (collectType != CollectType::OTHER) break;
           FileCNodeId fnid(fC, id);

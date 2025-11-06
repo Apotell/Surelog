@@ -139,6 +139,7 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
     std::stack<NodeId> stack;
     stack.emplace(id);
     while (!stack.empty()) {
+      bool skipChildren = false;
       id = stack.top();
       stack.pop();
 
@@ -150,36 +151,23 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
           m_helper.compileImportDeclaration(m_package, fC, id);
           break;
         }
+        case VObjectType::paParameter_port_list:
+          if (collectType != CollectType::DEFINITION) break;
+          m_helper.compileParameterPortList(m_package, fC, id, nullptr, false);
+          skipChildren = true;
+          break;
         case VObjectType::paParameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(m_package, fC,
-                                                 list_of_type_assignments,
-                                                 false, nullptr, false, false);
-          } else {
-            m_helper.compileParameterDeclaration(m_package, fC, id, false,
-                                                 nullptr, false, false);
-          }
+          m_helper.compileParameterDeclaration(m_package, fC, id, nullptr,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paLocal_parameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(m_package, fC,
-                                                 list_of_type_assignments, true,
-                                                 nullptr, false, false);
-          } else {
-            m_helper.compileParameterDeclaration(m_package, fC, id, true,
-                                                 nullptr, false, false);
-          }
+          m_helper.compileParameterDeclaration(m_package, fC, id, nullptr,
+                                               false, false);
+          skipChildren = true;
           break;
         }
         case VObjectType::paTask_declaration: {
@@ -197,12 +185,6 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
         case VObjectType::paLet_declaration: {
           if (collectType != CollectType::FUNCTION) break;
           m_helper.compileLetDeclaration(m_package, fC, id);
-          break;
-        }
-        case VObjectType::paParam_assignment: {
-          if (collectType != CollectType::DEFINITION) break;
-          FileCNodeId fnid(fC, id);
-          m_package->addObject(type, fnid);
           break;
         }
         case VObjectType::paClass_declaration: {
@@ -308,11 +290,9 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
       }
 
       if (NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-      if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
-          stopPoints.cend()) {
-        if (NodeId childId = fC->Child(id)) {
-          stack.emplace(childId);
-        }
+      if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(),
+                                      type) == stopPoints.cend())) {
+        if (NodeId childId = fC->Child(id)) stack.emplace(childId);
       }
     }
   }

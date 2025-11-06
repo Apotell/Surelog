@@ -126,18 +126,8 @@ bool CompileFileContent::collectObjects_() {
       }
       case VObjectType::paParameter_declaration: {
         if (m_declOnly) {
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(m_fileContent, fC,
-                                                 list_of_type_assignments,
-                                                 false, nullptr, false, false);
-          } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id, false,
-                                                 nullptr, false, false);
-          }
+          m_helper.compileParameterDeclaration(m_fileContent, fC, id, nullptr,
+                                               false, false);
         }
         break;
       }
@@ -149,18 +139,8 @@ bool CompileFileContent::collectObjects_() {
       }
       case VObjectType::paLocal_parameter_declaration: {
         if (m_declOnly) {
-          NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
-              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-            // Type param
-            m_helper.compileParameterDeclaration(m_fileContent, fC,
-                                                 list_of_type_assignments, true,
-                                                 nullptr, false, false);
-          } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id, true,
-                                                 nullptr, false, false);
-          }
+          m_helper.compileParameterDeclaration(m_fileContent, fC, id, nullptr,
+                                               false, false);
         }
         break;
       }
@@ -171,9 +151,7 @@ bool CompileFileContent::collectObjects_() {
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
     if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
         stopPoints.cend()) {
-      if (const NodeId childId = fC->Child(id)) {
-        stack.emplace(childId);
-      }
+      if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
     }
   }
 

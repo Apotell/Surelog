@@ -151,6 +151,9 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
   const uhdm::Any* findObject(const uhdm::Any* object);
   const uhdm::Typespec* findType(const uhdm::Any* object);
 
+  const uhdm::Typespec* propagateParamAssigns(const uhdm::Typespec* source,
+                                              const uhdm::Typespec* target);
+
   void reportErrors();
   bool createDefaultNets();
 

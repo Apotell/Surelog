@@ -135,17 +135,15 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
     }
   }
 
-  NodeId ParameterPortListId;
   std::stack<NodeId> stack;
   stack.emplace(startId);
+
   VObjectType port_direction = VObjectType::NO_TYPE;
   while (!stack.empty()) {
+    bool skipChildren = false;
     const NodeId id = stack.top();
     stack.pop();
 
-    if (ParameterPortListId && (id == ParameterPortListId)) {
-      ParameterPortListId = InvalidNodeId;
-    }
     VObjectType type = fC->Type(id);
     switch (type) {
       case VObjectType::paPackage_import_item: {
@@ -154,16 +152,11 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         m_helper.compileImportDeclaration(m_program, fC, id);
         break;
       }
-      case VObjectType::paParameter_port_list: {
+      case VObjectType::paParameter_port_list:
         if (collectType != CollectType::DEFINITION) break;
-        ParameterPortListId = id;
-        NodeId list_of_param_assignments = fC->Child(id);
-        if (list_of_param_assignments)
-          m_helper.compileParameterDeclaration(m_program, fC,
-                                               list_of_param_assignments, false,
-                                               nullptr, false, false);
+        m_helper.compileParameterPortList(m_program, fC, id, nullptr, false);
+        skipChildren = true;
         break;
-      }
       case VObjectType::paAnsi_port_declaration: {
         if (collectType != CollectType::DEFINITION) break;
         m_helper.compileAnsiPortDeclaration(m_program, fC, id, port_direction);
@@ -237,36 +230,16 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paParameter_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        NodeId list_of_type_assignments = fC->Child(id);
-        if (fC->Type(list_of_type_assignments) ==
-                VObjectType::paType_assignment_list ||
-            fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-          // Type param
-          m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, false, nullptr,
-              ParameterPortListId, false);
-
-        } else {
-          m_helper.compileParameterDeclaration(
-              m_program, fC, id, false, nullptr, ParameterPortListId, false);
-        }
+        m_helper.compileParameterDeclaration(m_program, fC, id, nullptr, false,
+                                             false);
+        skipChildren = true;
         break;
       }
       case VObjectType::paLocal_parameter_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        NodeId list_of_type_assignments = fC->Child(id);
-        if (fC->Type(list_of_type_assignments) ==
-                VObjectType::paType_assignment_list ||
-            fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
-          // Type param
-          m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, true, nullptr,
-              ParameterPortListId, false);
-
-        } else {
-          m_helper.compileParameterDeclaration(m_program, fC, id, true, nullptr,
-                                               ParameterPortListId, false);
-        }
+        m_helper.compileParameterDeclaration(m_program, fC, id, nullptr, false,
+                                             false);
+        skipChildren = true;
         break;
       }
       case VObjectType::paClass_declaration: {
@@ -383,11 +356,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
     }
 
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-    if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
-        stopPoints.cend()) {
-      if (const NodeId childId = fC->Child(id)) {
-        stack.emplace(childId);
-      }
+    if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(),
+                                    type) == stopPoints.cend())) {
+      if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
     }
   }
   return true;

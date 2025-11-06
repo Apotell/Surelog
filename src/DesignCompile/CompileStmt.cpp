@@ -598,8 +598,22 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           param->getTypespec()->setActual(ts);
         }
         param_assign->setLhs(param);
-        param_assign->setRhs((uhdm::Expr*)compileExpression(
-            component, fC, value, param_assign, nullptr));
+        if (uhdm::Any* const rhs = compileExpression(component, fC, value,
+                                                     param_assign, nullptr)) {
+          if (uhdm::Typespec* const typespec = any_cast<uhdm::Typespec>(rhs)) {
+            uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+            setRefTypespecName(rt, typespec, typespec->getName());
+            fC->populateCoreMembers(value, value, rt);
+            rt->setParent(param_assign);
+            param_assign->setRhs(rt);
+          } else if (uhdm::TaggedPattern* const tp =
+                         any_cast<uhdm::TaggedPattern>(rhs)) {
+            param_assign->setRhs(tp);
+          } else if (uhdm::Expr* const e = any_cast<uhdm::Expr>(rhs)) {
+            param_assign->setRhs(e);
+          }
+        }
+
         Param_assignment = fC->Sibling(Param_assignment);
       }
       results = param_assigns;
@@ -1517,7 +1531,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
                       compileVariable(component, fC, Data_type, nameId,
                                       InvalidNodeId, parent, nullptr, false)) {
                 // if (uhdm::Any* var = compileVariable(component, fC,
-                //  nameId, VObjectType::NO_TYPE, Data_type,
+                // nameId, VObjectType::NO_TYPE, Data_type,
                 // ts)) {
                 if (uhdm::Variable* const v = any_cast<uhdm::Variable>(var)) {
                   v->setAutomatic(!is_static);
@@ -2217,20 +2231,16 @@ bool CompileHelper::compileFunction(DesignComponent* component,
            VObjectType::paLocal_parameter_declaration)) {
         DesignComponent* tmp =
             new ModuleDefinition(m_session, "fake", fC, InvalidNodeId, s);
-        compileParameterDeclaration(
-            tmp, fC, Parameter_declaration,
-            (fC->Type(Parameter_declaration) ==
-             VObjectType::paLocal_parameter_declaration),
-            nullptr, false, false);
-        if (tmp->getParameters()) {
-          for (auto p : *tmp->getParameters()) {
-            p->setParent(func, true);
-          }
+        compileParameterDeclaration(tmp, fC, Parameter_declaration, nullptr,
+                                    false, false);
+        if (uhdm::AnyCollection* const parameters = tmp->getParameters()) {
+          for (auto p : *parameters) p->setParent(func, true);
+          tmp->setParameters(nullptr);
         }
-        if (tmp->getParamAssigns()) {
-          for (auto p : *tmp->getParamAssigns()) {
-            p->setParent(func, true);
-          }
+        if (uhdm::ParamAssignCollection* const paramAssigns =
+                tmp->getParamAssigns()) {
+          for (auto p : *paramAssigns) p->setParent(func, true);
+          tmp->setParamAssigns(nullptr);
         }
         delete tmp;
       }

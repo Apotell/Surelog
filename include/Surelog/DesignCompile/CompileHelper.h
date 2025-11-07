@@ -679,12 +679,10 @@ class CompileHelper final {
   uhdm::TypespecMember* buildTypespecMember(CompileDesign* compileDesign,
                                             const FileContent* fC, NodeId id);
 
-  uhdm::Typespec* getUpdatedArrayTypespec(const FileContent* fC, NodeId nodeId,
-                                          NodeId dimensionId,
-                                          CompileDesign* compileDesign,
-                                          uhdm::RangeCollection* ranges,
-      uhdm::Typespec* elemTps, uhdm::Any* pstmt,
-                                          bool bPacked = true);
+  uhdm::Typespec* getUpdatedArrayTypespec(
+      const FileContent* fC, NodeId nodeId, NodeId dimensionId,
+      CompileDesign* compileDesign, uhdm::RangeCollection* ranges,
+      uhdm::Typespec* elemTps, uhdm::Any* pstmt, bool bPacked = true);
 
  private:
   Session* const m_session = nullptr;

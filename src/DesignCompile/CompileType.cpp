@@ -906,7 +906,6 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
     const FileContent* fC, NodeId nodeId, NodeId dimensionId,
     CompileDesign* compileDesign, uhdm::RangeCollection* ranges,
     uhdm::Typespec* elemTps, uhdm::Any* pstmt, bool bPacked) {
-
   uhdm::Serializer& s = compileDesign->getSerializer();
   bool dynamic = false;
   bool associative = false;
@@ -974,6 +973,7 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
     }
     taps->setElemTypespec(ert);
     fC->populateCoreMembers(nodeId, nodeId, ert);
+
     elmtp = taps;
     if (associative) {
       taps->setArrayType(vpiAssocArray);
@@ -1053,248 +1053,19 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     packedId = InvalidNodeId;
   }
 
-  bool dynamic = false;
-  bool associative = false;
-  bool queue = false;
   if (packedId && unpackedId) {
-    //uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    //NodeId unpackDimensionId2 = unpackedId;
-    //while (fC->Sibling(unpackDimensionId2)) {
-    //  unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
-    //}
-    //fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
-
-    //// create packed array
-    //uhdm::ArrayTypespec* tpaps = s.make<uhdm::ArrayTypespec>();
-    //tpaps->setPacked(true);
-    //tpaps->setParent(pstmt);
-    //fC->populateCoreMembers(nodeId, packedId, tpaps);
-
-    //uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
-    //pret->setParent(taps);
-    //pret->setActual(tpaps);
-    //taps->setElemTypespec(pret);
-    //fC->populateCoreMembers(nodeId, nodeId, pret);
-
-    //uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
-    //ert->setParent(tpaps);
-    //ert->setActual(ts);
-    //ert->setName(ts->getName());
-    //tpaps->setElemTypespec(ert);
-    //fC->populateCoreMembers(packedId, packedId, ert);
-
-    //// Associative array
-    //for (auto itr = unpackedDimensions->begin();
-    //     itr != unpackedDimensions->end(); ++itr) {
-    //  uhdm::Range* r = *itr;
-    //  const uhdm::Expr* rhs = r->getRightExpr();
-    //  if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-    //    const std::string_view value = rhs->getValue();
-    //    if (value == "STRING:$") {
-    //      queue = true;
-    //      unpackedDimensions->erase(itr);
-    //      break;
-    //    } else if (value == "STRING:associative") {
-    //      associative = true;
-    //      const uhdm::Typespec* tp = nullptr;
-    //      if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-    //        tp = rt->getActual();
-    //      }
-
-    //      if (tp != nullptr) {
-    //        uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
-    //        tpRef->setParent(taps);
-    //        tpRef->setName(tp->getName());
-    //        taps->setIndexTypespec(tpRef);
-    //        fC->populateCoreMembers(nodeId, unpackedId, tpRef);
-    //      }
-    //      taps->getIndexTypespec()->setActual(const_cast<uhdm::Typespec*>(tp));
-
-    //      unpackedDimensions->erase(itr);
-    //      break;
-    //    } else if (value == "STRING:unsized") {
-    //      dynamic = true;
-    //      unpackedDimensions->erase(itr);
-    //      break;
-    //    }
-    //  }
-    //}
-    //if (associative)
-    //  taps->setArrayType(vpiAssocArray);
-    //else if (queue)
-    //  taps->setArrayType(vpiQueueArray);
-    //else if (dynamic)
-    //  taps->setArrayType(vpiDynamicArray);
-    //else
-    //  taps->setArrayType(vpiStaticArray);
-
-    //if (packedDimensions != nullptr) {
-    //  tpaps->setRanges(packedDimensions);
-    //  for (auto r : *packedDimensions) r->setParent(tpaps);
-    //}
-    //if (unpackedDimensions != nullptr) {
-    //  taps->setRanges(unpackedDimensions);
-    //  for (auto r : *unpackedDimensions) r->setParent(taps);
-    //}
-    // retts = taps;
-    
-    //test code
-    uhdm::Typespec* tmpTps = getUpdatedArrayTypespec(fC, nodeId, packedId, compileDesign,
-                            packedDimensions, ts, pstmt);
-    tmpTps =
-        getUpdatedArrayTypespec(fC, nodeId, unpackedId, compileDesign,
-                                     unpackedDimensions, tmpTps, pstmt, false);
-    retts = tmpTps;
+    uhdm::Typespec* tmpTps = getUpdatedArrayTypespec(
+        fC, nodeId, packedId, compileDesign, packedDimensions, ts, pstmt);
+    retts = getUpdatedArrayTypespec(fC, nodeId, unpackedId, compileDesign,
+                                    unpackedDimensions, tmpTps, pstmt, false);
 
   } else if (unpackedId) {
-    // uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    // taps->setPacked(false);
-    // taps->setParent(pscope);
-    // NodeId unpackDimensionId2 = unpackedId;
-    // while (fC->Sibling(unpackDimensionId2)) {
-    //   unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
-    // }
-    // fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
-
-    // taps->setRanges(unpackedDimensions);
-    // for (auto r : *unpackedDimensions) r->setParent(taps, true);
-    // 
-    // retts = taps;
-
-    // taps->setRanges(unpackedDimensions);
-    // for (auto r : *unpackedDimensions) r->setParent(taps);
-    // retts = taps;
-
-    // Test code
-    //bool bRemoveRange = false;
-
-    //for (auto itr = unpackedDimensions->begin();
-    //     itr != unpackedDimensions->end(); ++itr) {
-    //  uhdm::Range* r = *itr;
-    //  const uhdm::Expr* rhs = r->getRightExpr();
-    //  if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {
-    //    if (const uhdm::AnyCollection* const operands =
-    //            static_cast<const uhdm::Operation*>(rhs)->getOperands()) {
-    //      if (operands->size() == 1) {
-    //        if (const uhdm::RefObj* const ro =
-    //                any_cast<uhdm::RefObj>(operands->front())) {
-    //          if (ro->getActual() == nullptr) {
-    //            // Force it to be associative if the reference object can't be
-    //            // resolved. This will be fixed up later during binding.
-    //            associative = true;
-    //            bRemoveRange = true;
-    //          }
-    //        }
-    //      }
-    //    }
-    //  } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-    //    const std::string_view value = rhs->getValue();
-    //    if (value == "STRING:$") {
-    //      queue = true;
-    //      // unpackedDimensions->erase(itr);
-    //      break;
-    //    } else if (value == "STRING:associative") {
-    //      associative = true;
-    //      break;
-    //    } else if (value == "STRING:unsized") {
-    //      dynamic = true;
-    //      break;
-    //    }
-    //  }
-    //}
-
-    //
-    //uhdm::Typespec* elmtp = ts;
-    //NodeId unpackDimensionId2 = unpackedId;
-    //uhdm::ArrayTypespec* ptps = nullptr;
-    //std::string_view sRefName = ts ? ts->getName() : "";
-    //for (auto itr = unpackedDimensions->rbegin();
-    //     itr != unpackedDimensions->rend(); ++itr) {
-    //  uhdm::Range* r = *itr;
-    //  const uhdm::Expr* rhs = r->getRightExpr();
-    //  std::string_view srname = r->getName();
-    //  std::string_view srhsname = rhs->getName();
-
-    //  uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    //  taps->setPacked(false);
-    //  taps->setParent(pstmt);
-    //  
-    //  fC->populateCoreMembers(nodeId, unpackDimensionId2, taps);
-
-    //  uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
-    //  ert->setParent(taps);
-    //  if (elmtp != nullptr) {
-    //    ert->setActual(elmtp);
-    //    setRefTypespecName(ert, elmtp, sRefName);
-    //  }
-    //  taps->setElemTypespec(ert);      
-    //  fC->populateCoreMembers(nodeId, nodeId, ert);
-    //  elmtp = taps;
-    //  if (associative) {
-    //    taps->setArrayType(vpiAssocArray);
-    //    const uhdm::Typespec* tp = nullptr;
-    //    if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-    //      tp = rt->getActual();
-    //    }
-
-    //    if (tp != nullptr) {
-    //      uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
-    //      tpRef->setParent(taps);
-    //      tpRef->setName(tp->getName());
-    //      taps->setIndexTypespec(tpRef);
-    //      tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
-    //      fC->populateCoreMembers(unpackedId, unpackedId, tpRef);
-    //    }
-    //    if (bRemoveRange) {
-    //      taps->setRange(r);
-    //      r->setParent(taps);
-    //    } else {
-    //      taps->setRange(nullptr);
-    //    }
-
-    //  } else if (queue) {
-    //    taps->setArrayType(vpiQueueArray);
-    //    taps->setRange(nullptr);
-    //  } else if (dynamic) {
-    //    taps->setArrayType(vpiDynamicArray);
-    //    taps->setRange(nullptr);
-    //  } else {
-    //    taps->setArrayType(vpiStaticArray);
-    //    taps->setRange(r);
-    //    r->setParent(taps);
-    //  }
-
-    //  unpackDimensionId2 = fC->Sibling(unpackDimensionId2);
-    //}
-    //retts = elmtp;
-
     retts = getUpdatedArrayTypespec(fC, nodeId, unpackedId, compileDesign,
-                            unpackedDimensions, ts, pstmt, false);
-    //
+                                    unpackedDimensions, ts, pstmt, false);
 
   } else if (packedId) {
-    //uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-    //taps->setPacked(true);
-    //taps->setParent(pstmt);
-    //fC->populateCoreMembers(nodeId, nodeId, taps);
-    //taps->setRanges(packedDimensions);
-    //for (uhdm::Range* r : *packedDimensions) r->setParent(taps, true);
-
-    //if (ts != nullptr) {
-    //  uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
-    //  ert->setParent(taps);
-    //  ert->setActual(ts);
-    //  taps->setElemTypespec(ert);
-    //  ert->setName(ts->getName());
-    //  ert->setFile(ts->getFile());
-    //  ert->setStartLine(ts->getStartLine());
-    //  ert->setStartColumn(ts->getStartColumn());
-    //  ert->setEndLine(ts->getEndLine());
-    //  ert->setEndColumn(ts->getEndColumn());
-    //}
-    //retts = taps;
     retts = getUpdatedArrayTypespec(fC, nodeId, packedId, compileDesign,
-                            packedDimensions, ts, pstmt);
+                                    packedDimensions, ts, pstmt);
   }
   return retts;
 }
@@ -1442,29 +1213,19 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::paSigning_Unsigned: {
-      if (isVariable) {
-        // 6.8 Variable declarations, implicit type
-        uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-        fC->populateCoreMembers(type, type, tps);
-        result = tps;
-      } else {
-        // Parameter implicit type is int
-        // uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
-        // result = tps;
-      }
+      //  6.8 Variable declarations, implicit type
+      uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
+      fC->populateCoreMembers(type, type, tps);
+      result = tps;
+
       break;
     }
     case VObjectType::paPacked_dimension: {
-      if (isVariable) {
-        // 6.8 Variable declarations, implicit type
-        uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-        fC->populateCoreMembers(type, type, tps);
-        result = tps;
-      } else {
-        // Parameter implicit type is bit
-        // uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
-        // result = tps;
-      }
+      // 6.8 Variable declarations, implicit type
+      uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
+      fC->populateCoreMembers(type, type, tps);
+      result = tps;
+
       break;
     }
     case VObjectType::paExpression: {

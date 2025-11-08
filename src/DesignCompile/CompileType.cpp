@@ -952,12 +952,12 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
     taps->setPacked(bPacked);
     taps->setParent(pstmt);
 
-    fC->populateCoreMembers(nodeId, bPacked ? nodeId : dimensionId2, taps);
-    //taps->setFile(r->getFile());
-    //taps->setStartLine(r->getStartLine());
-    //taps->setStartColumn(r->getStartColumn());
-    //taps->setEndLine(r->getEndLine());
-    //taps->setEndColumn(r->getEndColumn());
+    //fC->populateCoreMembers(nodeId, bPacked ? nodeId : dimensionId2, taps);
+    taps->setFile(r->getFile());
+    taps->setStartLine(r->getStartLine());
+    taps->setStartColumn(r->getStartColumn());
+    taps->setEndLine(r->getEndLine());
+    taps->setEndColumn(r->getEndColumn());
 
     uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
     ert->setParent(taps);
@@ -966,7 +966,13 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
       setRefTypespecName(ert, elmtp, sRefName);
     }
     taps->setElemTypespec(ert);
-    fC->populateCoreMembers(nodeId, nodeId, ert);
+
+    ert->setFile(r->getFile());
+    ert->setStartLine(r->getStartLine());
+    ert->setStartColumn(r->getStartColumn());
+    ert->setEndLine(r->getEndLine());
+    ert->setEndColumn(r->getEndColumn());
+    //fC->populateCoreMembers(nodeId, nodeId, ert);
 
     elmtp = taps;
     if (associative) {

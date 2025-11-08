@@ -941,13 +941,10 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
       const std::string_view value = rhs->getValue();
       if (value == "STRING:$") {
         queue = true;
-        break;
       } else if (value == "STRING:associative") {
         associative = true;
-        break;
       } else if (value == "STRING:unsized") {
         dynamic = true;
-        break;
       }
     }
 

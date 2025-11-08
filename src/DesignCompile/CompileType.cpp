@@ -907,63 +907,60 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
     CompileDesign* compileDesign, uhdm::RangeCollection* ranges,
     uhdm::Typespec* elemTps, uhdm::Any* pstmt, bool bPacked) {
   uhdm::Serializer& s = compileDesign->getSerializer();
+  //uhdm::Typespec* retts = elemTps;
   bool dynamic = false;
   bool associative = false;
   bool queue = false;
-  bool bRemoveRange = false;
-  uhdm::Typespec* retts = elemTps;
-
-  if (!bPacked) {
-    for (auto itr = ranges->begin(); itr != ranges->end(); ++itr) {
-      uhdm::Range* r = *itr;
-      const uhdm::Expr* rhs = r->getRightExpr();
-      if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {
-        if (const uhdm::AnyCollection* const operands =
-                static_cast<const uhdm::Operation*>(rhs)->getOperands()) {
-          if (operands->size() == 1) {
-            if (const uhdm::RefObj* const ro =
-                    any_cast<uhdm::RefObj>(operands->front())) {
-              if (ro->getActual() == nullptr) {
-                // Force it to be associative if the reference object can't be
-                // resolved. This will be fixed up later during binding.
-                associative = true;
-                bRemoveRange = true;
-              }
-            }
-          }
-        }
-      } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-        const std::string_view value = rhs->getValue();
-        if (value == "STRING:$") {
-          queue = true;
-          // unpackedDimensions->erase(itr);
-          break;
-        } else if (value == "STRING:associative") {
-          associative = true;
-          break;
-        } else if (value == "STRING:unsized") {
-          dynamic = true;
-          break;
-        }
-      }
-    }
-  }
+  bool bAddRange = false;
 
   uhdm::Typespec* elmtp = elemTps;
   NodeId dimensionId2 = dimensionId;
-  uhdm::ArrayTypespec* ptps = nullptr;
   std::string_view sRefName = elemTps ? elemTps->getName() : "";
   for (auto itr = ranges->rbegin(); itr != ranges->rend(); ++itr) {
     uhdm::Range* r = *itr;
     const uhdm::Expr* rhs = r->getRightExpr();
-    std::string_view srname = r->getName();
-    std::string_view srhsname = rhs->getName();
+    if (bPacked) {
+      // In case of packed don't iterate. It's always static
+    }
+    else if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {
+      if (const uhdm::AnyCollection* const operands =
+              static_cast<const uhdm::Operation*>(rhs)->getOperands()) {
+        if (operands->size() == 1) {
+          if (const uhdm::RefObj* const ro =
+                  any_cast<uhdm::RefObj>(operands->front())) {
+            if (ro->getActual() == nullptr) {
+              // Force it to be associative if the reference object can't be
+              // resolved. This will be fixed up later during binding.
+              associative = true;
+              bAddRange = true;
+            }
+          }
+        }
+      }
+    } else if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
+      const std::string_view value = rhs->getValue();
+      if (value == "STRING:$") {
+        queue = true;
+        break;
+      } else if (value == "STRING:associative") {
+        associative = true;
+        break;
+      } else if (value == "STRING:unsized") {
+        dynamic = true;
+        break;
+      }
+    }
 
     uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
     taps->setPacked(bPacked);
     taps->setParent(pstmt);
 
     fC->populateCoreMembers(nodeId, bPacked ? nodeId : dimensionId2, taps);
+    //taps->setFile(r->getFile());
+    //taps->setStartLine(r->getStartLine());
+    //taps->setStartColumn(r->getStartColumn());
+    //taps->setEndLine(r->getEndLine());
+    //taps->setEndColumn(r->getEndColumn());
 
     uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
     ert->setParent(taps);
@@ -990,7 +987,7 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
         tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
         fC->populateCoreMembers(dimensionId, dimensionId, tpRef);
       }
-      if (bRemoveRange) {
+      if (bAddRange) {
         taps->setRange(r);
         r->setParent(taps);
       } else {
@@ -1011,8 +1008,7 @@ uhdm::Typespec* CompileHelper::getUpdatedArrayTypespec(
 
     dimensionId2 = fC->Sibling(dimensionId2);
   }
-  retts = elmtp;
-  return retts;
+  return elmtp;
 }
 
 uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
@@ -1022,7 +1018,6 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   if (!packedId && !unpackedId) return ts;
 
   uhdm::Typespec* retts = ts;
-  uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
   if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr) pstmt = design->getUhdmDesign();

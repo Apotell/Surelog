@@ -2197,25 +2197,25 @@ Design: (unnamed)
         \_EventControl: , line:72:11, endln:72:27
         |vpiFullName:work@bsg_dff_reset
         |vpiImportTypespec:
-        \_Net: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
+        \_Net: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
-          |vpiName:data_i
-          |vpiFullName:work@bsg_dff_reset.data_i
+          |vpiName:reset_i
+          |vpiFullName:work@bsg_dff_reset.reset_i
           |vpiNetType:1
         |vpiImportTypespec:
-        \_Net: (work@bsg_dff_reset.data_r), line:77:11, endln:77:17
+        \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
           |vpiName:data_r
           |vpiFullName:work@bsg_dff_reset.data_r
           |vpiNetType:1
         |vpiImportTypespec:
-        \_Net: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
+        \_Net: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
           |vpiParent:
           \_Begin: (work@bsg_dff_reset), line:73:6, endln:78:9
-          |vpiName:reset_i
-          |vpiFullName:work@bsg_dff_reset.reset_i
+          |vpiName:data_i
+          |vpiFullName:work@bsg_dff_reset.data_i
           |vpiNetType:1
         |vpiStmt:
         \_IfElse: , line:74:9, endln:77:28
@@ -2254,7 +2254,7 @@ Design: (unnamed)
               |vpiName:data_r
               |vpiFullName:work@bsg_dff_reset.data_r
               |vpiActual:
-              \_Net: (work@bsg_dff_reset.data_r), line:77:11, endln:77:17
+              \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
           |vpiElseStmt:
           \_Assignment: , line:77:11, endln:77:27
             |vpiParent:
@@ -2275,7 +2275,7 @@ Design: (unnamed)
               |vpiName:data_r
               |vpiFullName:work@bsg_dff_reset.data_r
               |vpiActual:
-              \_Net: (work@bsg_dff_reset.data_r), line:77:11, endln:77:17
+              \_Net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:20:1, endln:31:10
@@ -2826,25 +2826,25 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:54:26, endln:54:38
   |vpiImportTypespec:
-  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
-    |vpiParent:
-    \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
-    |vpiName:lfsr_q
-    |vpiFullName:work@dut3.lfsr_q
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
-    |vpiParent:
-    \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
-    |vpiName:lockup
-    |vpiFullName:work@dut3.lockup
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
     |vpiName:next_lfsr_state
     |vpiFullName:work@dut3.next_lfsr_state
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
+    |vpiParent:
+    \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    |vpiName:entropy_i
+    |vpiFullName:work@dut3.entropy_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
+    |vpiParent:
+    \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    |vpiName:lfsr_q
+    |vpiFullName:work@dut3.lfsr_q
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@dut3.coeffs), line:60:72, endln:60:78
@@ -2854,23 +2854,23 @@ Design: (unnamed)
     |vpiFullName:work@dut3.coeffs
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
+  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
     |vpiParent:
     \_Module: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
-    |vpiName:entropy_i
-    |vpiFullName:work@dut3.entropy_i
+    |vpiName:lockup
+    |vpiFullName:work@dut3.lockup
     |vpiNetType:1
   |vpiDefName:work@dut3
   |vpiNet:
-  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
-  |vpiNet:
-  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
-  |vpiNet:
   \_Net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
+  |vpiNet:
+  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
+  |vpiNet:
+  \_Net: (work@dut3.lfsr_q), line:60:64, endln:60:67
   |vpiNet:
   \_Net: (work@dut3.coeffs), line:60:72, endln:60:78
   |vpiNet:
-  \_Net: (work@dut3.entropy_i), line:60:36, endln:60:45
+  \_Net: (work@dut3.lockup), line:62:9, endln:62:15
   |vpiContAssign:
   \_ContAssign: , line:60:10, endln:60:95
     |vpiParent:
@@ -3179,18 +3179,18 @@ Design: (unnamed)
         \_Always: , line:99:3, endln:106:5
         |vpiFullName:work@dut5
         |vpiImportTypespec:
-        \_Net: (work@dut5.reqs_i), line:101:27, endln:101:33
-          |vpiParent:
-          \_Begin: (work@dut5), line:100:4, endln:106:5
-          |vpiName:reqs_i
-          |vpiFullName:work@dut5.reqs_i
-          |vpiNetType:1
-        |vpiImportTypespec:
         \_Net: (work@dut5.last_r), line:101:19, endln:101:25
           |vpiParent:
           \_Begin: (work@dut5), line:100:4, endln:106:5
           |vpiName:last_r
           |vpiFullName:work@dut5.last_r
+          |vpiNetType:1
+        |vpiImportTypespec:
+        \_Net: (work@dut5.reqs_i), line:101:27, endln:101:33
+          |vpiParent:
+          \_Begin: (work@dut5), line:100:4, endln:106:5
+          |vpiName:reqs_i
+          |vpiFullName:work@dut5.reqs_i
           |vpiNetType:1
         |vpiStmt:
         \_CaseStmt: , line:101:5, endln:105:12
@@ -3237,18 +3237,18 @@ Design: (unnamed)
               \_CaseItem: , line:102:5, endln:102:73
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_Net: (work@dut5.tag_o), line:102:41, endln:102:46
-                |vpiParent:
-                \_Begin: (work@dut5), line:102:13, endln:102:73
-                |vpiName:tag_o
-                |vpiFullName:work@dut5.tag_o
-                |vpiNetType:1
-              |vpiImportTypespec:
               \_Net: (work@dut5.sel_one_hot_n), line:102:19, endln:102:32
                 |vpiParent:
                 \_Begin: (work@dut5), line:102:13, endln:102:73
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@dut5.tag_o), line:102:41, endln:102:46
+                |vpiParent:
+                \_Begin: (work@dut5), line:102:13, endln:102:73
+                |vpiName:tag_o
+                |vpiFullName:work@dut5.tag_o
                 |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:102:19, endln:102:39
@@ -3317,18 +3317,18 @@ Design: (unnamed)
               \_CaseItem: , line:103:5, endln:103:72
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_Net: (work@dut5.tag_o), line:103:40, endln:103:45
-                |vpiParent:
-                \_Begin: (work@dut5), line:103:13, endln:103:72
-                |vpiName:tag_o
-                |vpiFullName:work@dut5.tag_o
-                |vpiNetType:1
-              |vpiImportTypespec:
               \_Net: (work@dut5.sel_one_hot_n), line:103:19, endln:103:32
                 |vpiParent:
                 \_Begin: (work@dut5), line:103:13, endln:103:72
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@dut5.tag_o), line:103:40, endln:103:45
+                |vpiParent:
+                \_Begin: (work@dut5), line:103:13, endln:103:72
+                |vpiName:tag_o
+                |vpiFullName:work@dut5.tag_o
                 |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:103:19, endln:103:38
@@ -3389,18 +3389,18 @@ Design: (unnamed)
               \_CaseItem: , line:104:7, endln:104:80
               |vpiFullName:work@dut5
               |vpiImportTypespec:
-              \_Net: (work@dut5.tag_o), line:104:48, endln:104:53
-                |vpiParent:
-                \_Begin: (work@dut5), line:104:16, endln:104:80
-                |vpiName:tag_o
-                |vpiFullName:work@dut5.tag_o
-                |vpiNetType:1
-              |vpiImportTypespec:
               \_Net: (work@dut5.sel_one_hot_n), line:104:22, endln:104:35
                 |vpiParent:
                 \_Begin: (work@dut5), line:104:16, endln:104:80
                 |vpiName:sel_one_hot_n
                 |vpiFullName:work@dut5.sel_one_hot_n
+                |vpiNetType:1
+              |vpiImportTypespec:
+              \_Net: (work@dut5.tag_o), line:104:48, endln:104:53
+                |vpiParent:
+                \_Begin: (work@dut5), line:104:16, endln:104:80
+                |vpiName:tag_o
+                |vpiFullName:work@dut5.tag_o
                 |vpiNetType:1
               |vpiStmt:
               \_Assignment: , line:104:22, endln:104:46

@@ -51,8 +51,8 @@ class ObjectBinder final : protected uhdm::UhdmVisitor {
       std::map<const ValuedComponentI*, uhdm::BaseClass*>;
   using ReverseComponentMap =
       std::map<const uhdm::BaseClass*, const ValuedComponentI*>;
-  using Unbounded = std::set<const uhdm::Any*>;
-  using Searched = std::set<const uhdm::Any*>;
+  using Unbounded = uhdm::AnySet;
+  using Searched = uhdm::AnySet;
 
   enum class RefType {
     Object,

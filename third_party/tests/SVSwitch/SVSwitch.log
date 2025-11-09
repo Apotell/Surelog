@@ -121,16 +121,16 @@ WhileStmt                                              1
 ------------------------------------------------------------
 Total:                                              3491
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:20: Illegal implicit net "id:2762, name:size".
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Illegal implicit net "id:3068, name:size".
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:78:21: Illegal implicit net "id:3108, name:size".
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:48:22: Illegal implicit net "id:2964, name:size".
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:26: Illegal implicit net "id:3157, name:size".
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:40:26: Illegal implicit net "id:2754, name:size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:20: Illegal implicit net "id:2762, name:size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:46:78: Illegal implicit net "id:2792, name:size".
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:30:1: Illegal implicit net "id:2899, name:switch_coverage".
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:36:1: Illegal implicit net "id:2916, name:switch_coverage".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:48:22: Illegal implicit net "id:2964, name:size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Illegal implicit net "id:3068, name:size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:78:21: Illegal implicit net "id:3108, name:size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:26: Illegal implicit net "id:3157, name:size".
 [ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:18: Illegal implicit net "id:3183, name:size".
-[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:46:78: Illegal implicit net "id:2792, name:size".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SVSwitch/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:48:22: Null Actual: id:2964, type:RefObj, name:size.
 [ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Null Actual: id:3068, type:RefObj, name:size.
@@ -20300,18 +20300,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Variable: (work@top.Clock), line:17:5, endln:17:10
   |vpiImportTypespec:
-  \_Net: (work@top.output_intf), line:55:23, endln:55:34
+  \_Net: (work@top.reset), line:51:34, endln:51:39
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:output_intf
-    |vpiFullName:work@top.output_intf
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@top.data_out), line:55:38, endln:55:46
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:data_out
-    |vpiFullName:work@top.data_out
+    |vpiName:reset
+    |vpiFullName:work@top.reset
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@top.data_status), line:52:40, endln:52:51
@@ -20321,32 +20314,46 @@ Design: (unnamed)
     |vpiFullName:work@top.data_status
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@top.mem_en), line:66:33, endln:66:39
+  \_Net: (work@top.data_in), line:53:33, endln:53:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:mem_en
-    |vpiFullName:work@top.mem_en
+    |vpiName:data_in
+    |vpiFullName:work@top.data_in
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@top.ready), line:59:40, endln:59:45
+  \_Net: (work@top.output_intf), line:54:23, endln:54:34
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
+    |vpiName:output_intf
+    |vpiFullName:work@top.output_intf
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@top.data_out), line:54:38, endln:54:46
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
+    |vpiName:data_out
+    |vpiFullName:work@top.data_out
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@top.ready), line:58:40, endln:58:45
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
     |vpiName:ready
     |vpiFullName:work@top.ready
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@top.mem_data), line:69:35, endln:69:43
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:mem_data
-    |vpiFullName:work@top.mem_data
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@top.read), line:63:39, endln:63:43
+  \_Net: (work@top.read), line:62:39, endln:62:43
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
     |vpiName:read
     |vpiFullName:work@top.read
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@top.mem_en), line:66:33, endln:66:39
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
+    |vpiName:mem_en
+    |vpiFullName:work@top.mem_en
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@top.mem_rd_wr), line:67:36, endln:67:45
@@ -20356,49 +20363,42 @@ Design: (unnamed)
     |vpiFullName:work@top.mem_rd_wr
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@top.data_in), line:53:33, endln:53:40
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:data_in
-    |vpiFullName:work@top.data_in
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@top.reset), line:51:34, endln:51:39
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
-    |vpiName:reset
-    |vpiFullName:work@top.reset
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@top.mem_add), line:68:34, endln:68:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
     |vpiName:mem_add
     |vpiFullName:work@top.mem_add
     |vpiNetType:1
-  |vpiDefName:work@top
-  |vpiNet:
-  \_Net: (work@top.output_intf), line:55:23, endln:55:34
-  |vpiNet:
-  \_Net: (work@top.data_out), line:55:38, endln:55:46
-  |vpiNet:
-  \_Net: (work@top.data_status), line:52:40, endln:52:51
-  |vpiNet:
-  \_Net: (work@top.mem_en), line:66:33, endln:66:39
-  |vpiNet:
-  \_Net: (work@top.ready), line:59:40, endln:59:45
-  |vpiNet:
+  |vpiImportTypespec:
   \_Net: (work@top.mem_data), line:69:35, endln:69:43
-  |vpiNet:
-  \_Net: (work@top.read), line:63:39, endln:63:43
-  |vpiNet:
-  \_Net: (work@top.mem_rd_wr), line:67:36, endln:67:45
-  |vpiNet:
-  \_Net: (work@top.data_in), line:53:33, endln:53:40
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv, line:12:1, endln:73:10
+    |vpiName:mem_data
+    |vpiFullName:work@top.mem_data
+    |vpiNetType:1
+  |vpiDefName:work@top
   |vpiNet:
   \_Net: (work@top.reset), line:51:34, endln:51:39
   |vpiNet:
+  \_Net: (work@top.data_status), line:52:40, endln:52:51
+  |vpiNet:
+  \_Net: (work@top.data_in), line:53:33, endln:53:40
+  |vpiNet:
+  \_Net: (work@top.output_intf), line:54:23, endln:54:34
+  |vpiNet:
+  \_Net: (work@top.data_out), line:54:38, endln:54:46
+  |vpiNet:
+  \_Net: (work@top.ready), line:58:40, endln:58:45
+  |vpiNet:
+  \_Net: (work@top.read), line:62:39, endln:62:43
+  |vpiNet:
+  \_Net: (work@top.mem_en), line:66:33, endln:66:39
+  |vpiNet:
+  \_Net: (work@top.mem_rd_wr), line:67:36, endln:67:45
+  |vpiNet:
   \_Net: (work@top.mem_add), line:68:34, endln:68:41
+  |vpiNet:
+  \_Net: (work@top.mem_data), line:69:35, endln:69:43
   |vpiProcess:
   \_Initial: , line:19:1, endln:20:30
     |vpiParent:
@@ -20645,7 +20645,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[0]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:54:35, endln:54:36
             |vpiParent:
@@ -20661,7 +20661,7 @@ Design: (unnamed)
           |vpiName:data_out
           |vpiFullName:work@top.DUT.port0.data_out
           |vpiActual:
-          \_Net: (work@top.data_out), line:55:38, endln:55:46
+          \_Net: (work@top.data_out), line:54:38, endln:54:46
         |vpiName:output_intf[0].data_out
     |vpiPort:
     \_Port: (port1), line:55:17, endln:55:22
@@ -20679,7 +20679,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[1]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:55:35, endln:55:36
             |vpiParent:
@@ -20695,7 +20695,7 @@ Design: (unnamed)
           |vpiName:data_out
           |vpiFullName:work@top.DUT.port1.data_out
           |vpiActual:
-          \_Net: (work@top.data_out), line:55:38, endln:55:46
+          \_Net: (work@top.data_out), line:54:38, endln:54:46
         |vpiName:output_intf[1].data_out
     |vpiPort:
     \_Port: (port2), line:56:17, endln:56:22
@@ -20713,7 +20713,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[2]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:56:35, endln:56:36
             |vpiParent:
@@ -20729,7 +20729,7 @@ Design: (unnamed)
           |vpiName:data_out
           |vpiFullName:work@top.DUT.port2.data_out
           |vpiActual:
-          \_Net: (work@top.data_out), line:55:38, endln:55:46
+          \_Net: (work@top.data_out), line:54:38, endln:54:46
         |vpiName:output_intf[2].data_out
     |vpiPort:
     \_Port: (port3), line:57:17, endln:57:22
@@ -20747,7 +20747,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[3]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:57:35, endln:57:36
             |vpiParent:
@@ -20763,7 +20763,7 @@ Design: (unnamed)
           |vpiName:data_out
           |vpiFullName:work@top.DUT.port3.data_out
           |vpiActual:
-          \_Net: (work@top.data_out), line:55:38, endln:55:46
+          \_Net: (work@top.data_out), line:54:38, endln:54:46
         |vpiName:output_intf[3].data_out
     |vpiPort:
     \_Port: (ready_0), line:58:17, endln:58:24
@@ -20781,7 +20781,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[0]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:58:37, endln:58:38
             |vpiParent:
@@ -20797,7 +20797,7 @@ Design: (unnamed)
           |vpiName:ready
           |vpiFullName:work@top.DUT.ready_0.ready
           |vpiActual:
-          \_Net: (work@top.ready), line:59:40, endln:59:45
+          \_Net: (work@top.ready), line:58:40, endln:58:45
         |vpiName:output_intf[0].ready
     |vpiPort:
     \_Port: (ready_1), line:59:17, endln:59:24
@@ -20815,7 +20815,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[1]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:59:37, endln:59:38
             |vpiParent:
@@ -20831,7 +20831,7 @@ Design: (unnamed)
           |vpiName:ready
           |vpiFullName:work@top.DUT.ready_1.ready
           |vpiActual:
-          \_Net: (work@top.ready), line:59:40, endln:59:45
+          \_Net: (work@top.ready), line:58:40, endln:58:45
         |vpiName:output_intf[1].ready
     |vpiPort:
     \_Port: (ready_2), line:60:17, endln:60:24
@@ -20849,7 +20849,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[2]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:60:37, endln:60:38
             |vpiParent:
@@ -20865,7 +20865,7 @@ Design: (unnamed)
           |vpiName:ready
           |vpiFullName:work@top.DUT.ready_2.ready
           |vpiActual:
-          \_Net: (work@top.ready), line:59:40, endln:59:45
+          \_Net: (work@top.ready), line:58:40, endln:58:45
         |vpiName:output_intf[2].ready
     |vpiPort:
     \_Port: (ready_3), line:61:17, endln:61:24
@@ -20883,7 +20883,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[3]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:61:37, endln:61:38
             |vpiParent:
@@ -20899,7 +20899,7 @@ Design: (unnamed)
           |vpiName:ready
           |vpiFullName:work@top.DUT.ready_3.ready
           |vpiActual:
-          \_Net: (work@top.ready), line:59:40, endln:59:45
+          \_Net: (work@top.ready), line:58:40, endln:58:45
         |vpiName:output_intf[3].ready
     |vpiPort:
     \_Port: (read_0), line:62:17, endln:62:23
@@ -20917,7 +20917,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[0]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:62:36, endln:62:37
             |vpiParent:
@@ -20933,7 +20933,7 @@ Design: (unnamed)
           |vpiName:read
           |vpiFullName:work@top.DUT.read_0.read
           |vpiActual:
-          \_Net: (work@top.read), line:63:39, endln:63:43
+          \_Net: (work@top.read), line:62:39, endln:62:43
         |vpiName:output_intf[0].read
     |vpiPort:
     \_Port: (read_1), line:63:17, endln:63:23
@@ -20951,7 +20951,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[1]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:63:36, endln:63:37
             |vpiParent:
@@ -20967,7 +20967,7 @@ Design: (unnamed)
           |vpiName:read
           |vpiFullName:work@top.DUT.read_1.read
           |vpiActual:
-          \_Net: (work@top.read), line:63:39, endln:63:43
+          \_Net: (work@top.read), line:62:39, endln:62:43
         |vpiName:output_intf[1].read
     |vpiPort:
     \_Port: (read_2), line:64:17, endln:64:23
@@ -20985,7 +20985,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[2]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:64:36, endln:64:37
             |vpiParent:
@@ -21001,7 +21001,7 @@ Design: (unnamed)
           |vpiName:read
           |vpiFullName:work@top.DUT.read_2.read
           |vpiActual:
-          \_Net: (work@top.read), line:63:39, endln:63:43
+          \_Net: (work@top.read), line:62:39, endln:62:43
         |vpiName:output_intf[2].read
     |vpiPort:
     \_Port: (read_3), line:65:17, endln:65:23
@@ -21019,7 +21019,7 @@ Design: (unnamed)
           |vpiName:output_intf
           |vpiFullName:output_intf[3]
           |vpiActual:
-          \_Net: (work@top.output_intf), line:55:23, endln:55:34
+          \_Net: (work@top.output_intf), line:54:23, endln:54:34
           |vpiIndex:
           \_Constant: , line:65:36, endln:65:37
             |vpiParent:
@@ -21035,7 +21035,7 @@ Design: (unnamed)
           |vpiName:read
           |vpiFullName:work@top.DUT.read_3.read
           |vpiActual:
-          \_Net: (work@top.read), line:63:39, endln:63:43
+          \_Net: (work@top.read), line:62:39, endln:62:43
         |vpiName:output_intf[3].read
     |vpiPort:
     \_Port: (mem_en), line:66:17, endln:66:23

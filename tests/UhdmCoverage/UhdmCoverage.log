@@ -1307,13 +1307,6 @@ Design: (unnamed)
     |vpiFullName:work@bsg_wormhole_router.dims_p
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
-    |vpiParent:
-    \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
-    |vpiName:StrictX
-    |vpiFullName:work@bsg_wormhole_router.StrictX
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
     |vpiParent:
     \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
@@ -1327,6 +1320,13 @@ Design: (unnamed)
     |vpiName:StrictXY
     |vpiFullName:work@bsg_wormhole_router.StrictXY
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
+    |vpiParent:
+    \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiName:StrictX
+    |vpiFullName:work@bsg_wormhole_router.StrictX
+    |vpiNetType:1
   |vpiDefName:work@bsg_wormhole_router
   |vpiNet:
   \_Net: (work@bsg_wormhole_router.clk_i), line:9:10, endln:9:15
@@ -1335,11 +1335,11 @@ Design: (unnamed)
   |vpiNet:
   \_Net: (work@bsg_wormhole_router.dims_p), line:4:28, endln:4:34
   |vpiNet:
-  \_Net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
-  |vpiNet:
   \_Net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
   |vpiNet:
   \_Net: (work@bsg_wormhole_router.StrictXY), line:6:87, endln:6:95
+  |vpiNet:
+  \_Net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
   |vpiPort:
   \_Port: (clk_i), line:9:10, endln:9:15
     |vpiParent:
@@ -1611,18 +1611,11 @@ Design: (unnamed)
       |vpiName:atomic
     |vpiFullName:work@divSqrtRecFN_small.atomic
     |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:131:36, endln:131:50
+    \_Net: (work@divSqrtRecFN_small.atomic.slice_data), line:129:24, endln:129:34
       |vpiParent:
       \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
-      |vpiName:slice_width_lp
-      |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.atomic.atomic_result), line:130:34, endln:130:51
-      |vpiParent:
-      \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
-      |vpiName:atomic_result
-      |vpiFullName:work@divSqrtRecFN_small.atomic.atomic_result
+      |vpiName:slice_data
+      |vpiFullName:work@divSqrtRecFN_small.atomic.slice_data
       |vpiNetType:1
     |vpiImportTypespec:
     \_Net: (work@divSqrtRecFN_small.atomic.decode_tv_r), line:129:37, endln:129:48
@@ -1632,11 +1625,25 @@ Design: (unnamed)
       |vpiFullName:work@divSqrtRecFN_small.atomic.decode_tv_r
       |vpiNetType:1
     |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.atomic.slice_data), line:129:24, endln:129:34
+    \_Net: (work@divSqrtRecFN_small.atomic.amo_op), line:129:49, endln:129:55
       |vpiParent:
       \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
-      |vpiName:slice_data
-      |vpiFullName:work@divSqrtRecFN_small.atomic.slice_data
+      |vpiName:amo_op
+      |vpiFullName:work@divSqrtRecFN_small.atomic.amo_op
+      |vpiNetType:1
+    |vpiImportTypespec:
+    \_Net: (work@divSqrtRecFN_small.atomic.atomic_result), line:130:34, endln:130:51
+      |vpiParent:
+      \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
+      |vpiName:atomic_result
+      |vpiFullName:work@divSqrtRecFN_small.atomic.atomic_result
+      |vpiNetType:1
+    |vpiImportTypespec:
+    \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:130:37, endln:130:51
+      |vpiParent:
+      \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
+      |vpiName:slice_width_lp
+      |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
       |vpiNetType:1
     |vpiImportTypespec:
     \_Net: (work@divSqrtRecFN_small.atomic.st_data_tv_r), line:131:33, endln:131:50
@@ -1644,13 +1651,6 @@ Design: (unnamed)
       \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
       |vpiName:st_data_tv_r
       |vpiFullName:work@divSqrtRecFN_small.atomic.st_data_tv_r
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.atomic.amo_op), line:129:49, endln:129:55
-      |vpiParent:
-      \_Begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
-      |vpiName:amo_op
-      |vpiFullName:work@divSqrtRecFN_small.atomic.amo_op
       |vpiNetType:1
     |vpiStmt:
     \_ContAssign: , line:129:24, endln:131:51
@@ -1707,7 +1707,7 @@ Design: (unnamed)
             |vpiName:slice_width_lp
             |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
             |vpiActual:
-            \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:131:36, endln:131:50
+            \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:130:37, endln:130:51
         |vpiOperand:
         \_IndexedPartSelect: st_data_tv_r (work@divSqrtRecFN_small.atomic.st_data_tv_r), line:131:33, endln:131:50
           |vpiParent:
@@ -1734,7 +1734,7 @@ Design: (unnamed)
             |vpiName:slice_width_lp
             |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
             |vpiActual:
-            \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:131:36, endln:131:50
+            \_Net: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:130:37, endln:130:51
       |vpiLhs:
       \_RefObj: (work@divSqrtRecFN_small.atomic.slice_data), line:129:24, endln:129:34
         |vpiParent:
@@ -1754,6 +1754,13 @@ Design: (unnamed)
       |vpiName:non_atomic
     |vpiFullName:work@divSqrtRecFN_small.non_atomic
     |vpiImportTypespec:
+    \_Net: (work@divSqrtRecFN_small.non_atomic.slice_data), line:135:24, endln:135:34
+      |vpiParent:
+      \_Begin: (work@divSqrtRecFN_small.non_atomic), line:134:15, endln:136:18
+      |vpiName:slice_data
+      |vpiFullName:work@divSqrtRecFN_small.non_atomic.slice_data
+      |vpiNetType:1
+    |vpiImportTypespec:
     \_Net: (work@divSqrtRecFN_small.non_atomic.st_data_tv_r), line:135:50, endln:135:67
       |vpiParent:
       \_Begin: (work@divSqrtRecFN_small.non_atomic), line:134:15, endln:136:18
@@ -1766,13 +1773,6 @@ Design: (unnamed)
       \_Begin: (work@divSqrtRecFN_small.non_atomic), line:134:15, endln:136:18
       |vpiName:slice_width_lp
       |vpiFullName:work@divSqrtRecFN_small.non_atomic.slice_width_lp
-      |vpiNetType:1
-    |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.non_atomic.slice_data), line:135:24, endln:135:34
-      |vpiParent:
-      \_Begin: (work@divSqrtRecFN_small.non_atomic), line:134:15, endln:136:18
-      |vpiName:slice_data
-      |vpiFullName:work@divSqrtRecFN_small.non_atomic.slice_data
       |vpiNetType:1
     |vpiStmt:
     \_ContAssign: , line:135:24, endln:135:68
@@ -1831,18 +1831,18 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_ModuleTypespec: (bp_l2e_tile_node)
     |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.node.core_reset_i), line:144:42, endln:144:54
-      |vpiParent:
-      \_Begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
-      |vpiName:core_reset_i
-      |vpiFullName:work@divSqrtRecFN_small.node.core_reset_i
-      |vpiNetType:1
-    |vpiImportTypespec:
     \_Net: (work@divSqrtRecFN_small.node.core_clk_i), line:143:40, endln:143:50
       |vpiParent:
       \_Begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
       |vpiName:core_clk_i
       |vpiFullName:work@divSqrtRecFN_small.node.core_clk_i
+      |vpiNetType:1
+    |vpiImportTypespec:
+    \_Net: (work@divSqrtRecFN_small.node.core_reset_i), line:144:42, endln:144:54
+      |vpiParent:
+      \_Begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
+      |vpiName:core_reset_i
+      |vpiFullName:work@divSqrtRecFN_small.node.core_reset_i
       |vpiNetType:1
     |vpiStmt:
     \_RefModule: work@bp_l2e_tile_node (l2e), line:140:24, endln:140:40
@@ -1887,18 +1887,18 @@ Design: (unnamed)
       |vpiName:stub
     |vpiFullName:work@divSqrtRecFN_small.stub
     |vpiImportTypespec:
-    \_Net: (work@divSqrtRecFN_small.stub.lce_cmd_link_lo), line:150:42, endln:150:45
-      |vpiParent:
-      \_Begin: (work@divSqrtRecFN_small.stub), line:148:17, endln:152:20
-      |vpiName:lce_cmd_link_lo
-      |vpiFullName:work@divSqrtRecFN_small.stub.lce_cmd_link_lo
-      |vpiNetType:1
-    |vpiImportTypespec:
     \_Net: (work@divSqrtRecFN_small.stub.lce_req_link_lo), line:149:41, endln:149:44
       |vpiParent:
       \_Begin: (work@divSqrtRecFN_small.stub), line:148:17, endln:152:20
       |vpiName:lce_req_link_lo
       |vpiFullName:work@divSqrtRecFN_small.stub.lce_req_link_lo
+      |vpiNetType:1
+    |vpiImportTypespec:
+    \_Net: (work@divSqrtRecFN_small.stub.lce_cmd_link_lo), line:150:42, endln:150:45
+      |vpiParent:
+      \_Begin: (work@divSqrtRecFN_small.stub), line:148:17, endln:152:20
+      |vpiName:lce_cmd_link_lo
+      |vpiFullName:work@divSqrtRecFN_small.stub.lce_cmd_link_lo
       |vpiNetType:1
     |vpiStmt:
     \_ContAssign: , line:149:26, endln:149:50
@@ -1927,7 +1927,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.stub.i
           |vpiActual:
-          \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+          \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
     |vpiStmt:
     \_ContAssign: , line:150:27, endln:150:51
       |vpiParent:
@@ -1955,9 +1955,9 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.stub.i
           |vpiActual:
-          \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+          \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
   |vpiImportTypespec:
-  \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+  \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
     |vpiParent:
     \_Module: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |vpiName:i
@@ -1972,7 +1972,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@divSqrtRecFN_small
   |vpiNet:
-  \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+  \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
   |vpiNet:
   \_Net: (work@divSqrtRecFN_small.mc_y_dim_p), line:138:19, endln:138:29
   |vpiGenStmt:
@@ -1996,7 +1996,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.i
           |vpiActual:
-          \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+          \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
         |vpiOperand:
         \_Constant: , line:127:23, endln:127:28
           |vpiParent:
@@ -2017,7 +2017,7 @@ Design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.i
           |vpiActual:
-          \_Net: (work@divSqrtRecFN_small.i), line:127:34, endln:127:35
+          \_Net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
         |vpiOperand:
         \_Constant: , line:127:39, endln:127:44
           |vpiParent:
@@ -2082,25 +2082,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StringTypespec: , line:102:35, endln:102:39
   |vpiImportTypespec:
-  \_Net: (work@e.ready_and_rev), line:104:74, endln:104:87
+  \_Net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:ready_and_rev
-    |vpiFullName:work@e.ready_and_rev
+    |vpiName:lce_resp_link_cast_o
+    |vpiFullName:work@e.lce_resp_link_cast_o
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@e.resp_concentrated_link_lo), line:103:57, endln:103:82
+  \_Net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:resp_concentrated_link_lo
     |vpiFullName:work@e.resp_concentrated_link_lo
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_Net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
-    |vpiParent:
-    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:cce_lce_resp_link_lo
-    |vpiFullName:work@e.cce_lce_resp_link_lo
     |vpiNetType:1
   |vpiImportTypespec:
   \_Net: (work@e.data), line:102:77, endln:102:81
@@ -2110,32 +2103,39 @@ Design: (unnamed)
     |vpiFullName:work@e.data
     |vpiNetType:1
   |vpiImportTypespec:
-  \_Net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
-    |vpiParent:
-    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:lce_resp_link_cast_o
-    |vpiFullName:work@e.lce_resp_link_cast_o
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@e.v), line:103:83, endln:103:84
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:v
     |vpiFullName:work@e.v
     |vpiNetType:1
-  |vpiDefName:work@e
-  |vpiNet:
-  \_Net: (work@e.ready_and_rev), line:104:74, endln:104:87
-  |vpiNet:
-  \_Net: (work@e.resp_concentrated_link_lo), line:103:57, endln:103:82
-  |vpiNet:
+  |vpiImportTypespec:
   \_Net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
-  |vpiNet:
-  \_Net: (work@e.data), line:102:77, endln:102:81
+    |vpiParent:
+    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:cce_lce_resp_link_lo
+    |vpiFullName:work@e.cce_lce_resp_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@e.ready_and_rev), line:104:74, endln:104:87
+    |vpiParent:
+    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:ready_and_rev
+    |vpiFullName:work@e.ready_and_rev
+    |vpiNetType:1
+  |vpiDefName:work@e
   |vpiNet:
   \_Net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
   |vpiNet:
+  \_Net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
+  |vpiNet:
+  \_Net: (work@e.data), line:102:77, endln:102:81
+  |vpiNet:
   \_Net: (work@e.v), line:103:83, endln:103:84
+  |vpiNet:
+  \_Net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
+  |vpiNet:
+  \_Net: (work@e.ready_and_rev), line:104:74, endln:104:87
   |vpiContAssign:
   \_ContAssign: , line:102:10, endln:105:38
     |vpiParent:
@@ -2159,7 +2159,7 @@ Design: (unnamed)
             \_HierPath: (resp_concentrated_link_lo.data), line:102:51, endln:102:81
             |vpiName:resp_concentrated_link_lo
             |vpiActual:
-            \_Net: (work@e.resp_concentrated_link_lo), line:103:57, endln:103:82
+            \_Net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
           \_RefObj: (work@e.data), line:102:77, endln:102:81
             |vpiParent:
@@ -2191,7 +2191,7 @@ Design: (unnamed)
             \_HierPath: (resp_concentrated_link_lo.v), line:103:57, endln:103:84
             |vpiName:resp_concentrated_link_lo
             |vpiActual:
-            \_Net: (work@e.resp_concentrated_link_lo), line:103:57, endln:103:82
+            \_Net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
           \_RefObj: (work@e.v), line:103:83, endln:103:84
             |vpiParent:

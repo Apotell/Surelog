@@ -51,12 +51,12 @@ Variable                                               2
 ------------------------------------------------------------
 Total:                                               189
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:8:15: Illegal implicit net "id:144, name:drive".
 [ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:5:51: Illegal implicit net "id:115, name:drive".
-[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:7:20: Illegal implicit net "id:135, name:drive".
 [ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:5:63: Illegal implicit net "id:118, name:observe".
-[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:7:34: Illegal implicit net "id:139, name:observe".
 [ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:6:10: Illegal implicit net "id:122, name:drive".
+[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:7:20: Illegal implicit net "id:135, name:drive".
+[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:7:34: Illegal implicit net "id:139, name:observe".
+[ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:8:15: Illegal implicit net "id:144, name:drive".
 [ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:9:20: Illegal implicit net "id:157, name:drive".
 [ERR:EL0535] ${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v:9:34: Illegal implicit net "id:161, name:observe".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNetModPortGeneric/slpp_unit/surelog.uhdm ...
@@ -608,26 +608,26 @@ Design: (unnamed)
     |vpiName:intf
     |vpiFullName:work@OBSERVER.intf
   |vpiImportTypespec:
-  \_Net: (work@OBSERVER.observe), line:31:22, endln:31:29
-    |vpiParent:
-    \_Module: work@OBSERVER (work@OBSERVER), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:30:1, endln:32:10
-    |vpiName:observe
-    |vpiFullName:work@OBSERVER.observe
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@OBSERVER.obs), line:31:11, endln:31:14
     |vpiParent:
     \_Module: work@OBSERVER (work@OBSERVER), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:30:1, endln:32:10
     |vpiName:obs
     |vpiFullName:work@OBSERVER.obs
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@OBSERVER.observe), line:31:22, endln:31:29
+    |vpiParent:
+    \_Module: work@OBSERVER (work@OBSERVER), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:30:1, endln:32:10
+    |vpiName:observe
+    |vpiFullName:work@OBSERVER.observe
+    |vpiNetType:1
   |vpiDefName:work@OBSERVER
   |vpiNet:
   \_Net: (work@OBSERVER.intf), line:30:27, endln:30:31
   |vpiNet:
-  \_Net: (work@OBSERVER.observe), line:31:22, endln:31:29
-  |vpiNet:
   \_Net: (work@OBSERVER.obs), line:31:11, endln:31:14
+  |vpiNet:
+  \_Net: (work@OBSERVER.observe), line:31:22, endln:31:29
   |vpiPort:
   \_Port: (intf), line:30:27, endln:30:31
     |vpiParent:
@@ -802,24 +802,24 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@OBSERVER (work@OBSERVER), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:30:1, endln:32:10
   |vpiImportTypespec:
-  \_Net: (work@TOP.observe), line:17:41, endln:17:48
-    |vpiParent:
-    \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v, line:15:1, endln:20:10
-    |vpiName:observe
-    |vpiFullName:work@TOP.observe
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@TOP.drive), line:17:23, endln:17:28
     |vpiParent:
     \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v, line:15:1, endln:20:10
     |vpiName:drive
     |vpiFullName:work@TOP.drive
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@TOP.observe), line:17:41, endln:17:48
+    |vpiParent:
+    \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/tb.v, line:15:1, endln:20:10
+    |vpiName:observe
+    |vpiFullName:work@TOP.observe
+    |vpiNetType:1
   |vpiDefName:work@TOP
   |vpiNet:
-  \_Net: (work@TOP.observe), line:17:41, endln:17:48
-  |vpiNet:
   \_Net: (work@TOP.drive), line:17:23, endln:17:28
+  |vpiNet:
+  \_Net: (work@TOP.observe), line:17:41, endln:17:48
   |vpiRefModule:
   \_RefModule: work@ConnectTB (conntb), line:16:3, endln:16:12
     |vpiParent:
@@ -1168,26 +1168,26 @@ Design: (unnamed)
     |vpiName:intf
     |vpiFullName:work@middle.intf
   |vpiImportTypespec:
-  \_Net: (work@middle.observe), line:23:40, endln:23:47
-    |vpiParent:
-    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:22:1, endln:24:10
-    |vpiName:observe
-    |vpiFullName:work@middle.observe
-    |vpiNetType:1
-  |vpiImportTypespec:
   \_Net: (work@middle.drive), line:23:22, endln:23:27
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:22:1, endln:24:10
     |vpiName:drive
     |vpiFullName:work@middle.drive
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_Net: (work@middle.observe), line:23:40, endln:23:47
+    |vpiParent:
+    \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/OneNetModPortGeneric/dut.v, line:22:1, endln:24:10
+    |vpiName:observe
+    |vpiFullName:work@middle.observe
+    |vpiNetType:1
   |vpiDefName:work@middle
   |vpiNet:
   \_Net: (work@middle.intf), line:22:26, endln:22:30
   |vpiNet:
-  \_Net: (work@middle.observe), line:23:40, endln:23:47
-  |vpiNet:
   \_Net: (work@middle.drive), line:23:22, endln:23:27
+  |vpiNet:
+  \_Net: (work@middle.observe), line:23:40, endln:23:47
   |vpiPort:
   \_Port: (intf), line:22:26, endln:22:30
     |vpiParent:

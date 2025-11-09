@@ -1364,7 +1364,12 @@ const uhdm::Any* ObjectBinder::find(std::string_view name, RefType refType,
       } break;
 
       default: {
-        if (const uhdm::Typespec* ts = any_cast<uhdm::Typespec>(scope)) {
+        if (const uhdm::Scope* const s = any_cast<uhdm::Scope>(scope)) {
+          if (const uhdm::Any* const actual = findInScope(name, refType, s)) {
+            return actual;
+          }
+        } else if (const uhdm::Typespec* const ts =
+                       any_cast<uhdm::Typespec>(scope)) {
           if (const uhdm::Any* const actual =
                   findInTypespec(name, refType, ts)) {
             return actual;

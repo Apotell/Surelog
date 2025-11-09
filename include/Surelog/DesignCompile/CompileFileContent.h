@@ -76,7 +76,7 @@ class CompileFileContent final {
       : m_compileDesign(compileDesign),
         m_fileContent(fileContent),
         m_design(design),
-        m_helper(session),
+        m_helper(session, compileDesign),
         m_declOnly(declOnly) {}
   CompileFileContent(const CompileFileContent&) = delete;
 

@@ -44,23 +44,22 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
                                     std::vector<uhdm::Any*>* args,
                                     bool& invalidValue,
                                     DesignComponent* component,
-                                    CompileDesign* compileDesign,
                                     ValuedComponentI* instance, PathId fileId,
                                     uint32_t lineNumber, uhdm::Any* pexpr) {
   uhdm::GetObjectFunctor getObjectFunctor =
       [&](std::string_view name, const uhdm::Any* inst,
           const uhdm::Any* pexpr) -> uhdm::Any* {
-    return getObject(name, component, compileDesign, instance, pexpr);
+    return getObject(name, component, instance, pexpr);
   };
   uhdm::GetObjectFunctor getValueFunctor =
       [&](std::string_view name, const uhdm::Any* inst,
           const uhdm::Any* pexpr) -> uhdm::Any* {
-    return (uhdm::Expr*)getValue(name, component, compileDesign, instance,
-                                 fileId, lineNumber, (uhdm::Any*)pexpr, false);
+    return (uhdm::Expr*)getValue(name, component, instance, fileId, lineNumber,
+                                 (uhdm::Any*)pexpr, false);
   };
   uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
       [&](std::string_view name, const uhdm::Any* inst) -> uhdm::TaskFunc* {
-    auto ret = getTaskFunc(name, component, compileDesign, instance, pexpr);
+    auto ret = getTaskFunc(name, component, instance, pexpr);
     return ret.first;
   };
   uhdm::ExprEval eval;
@@ -68,9 +67,10 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
   eval.setGetValueFunctor(getValueFunctor);
   eval.setGetTaskFuncFunctor(getTaskFuncFunctor);
   if (m_exprEvalPlaceHolder == nullptr) {
-    m_exprEvalPlaceHolder = compileDesign->getSerializer().make<uhdm::Module>();
+    m_exprEvalPlaceHolder =
+        m_compileDesign->getSerializer().make<uhdm::Module>();
     m_exprEvalPlaceHolder->setParamAssigns(
-        compileDesign->getSerializer().makeCollection<uhdm::ParamAssign>());
+        m_compileDesign->getSerializer().makeCollection<uhdm::ParamAssign>());
   } else {
     m_exprEvalPlaceHolder->getParamAssigns()->erase(
         m_exprEvalPlaceHolder->getParamAssigns()->begin(),
@@ -81,16 +81,14 @@ uhdm::Expr* CompileHelper::EvalFunc(uhdm::Function* func,
   return res;
 }
 
-void CompileHelper::evalScheduledExprs(DesignComponent* component,
-                                       CompileDesign* compileDesign) {
+void CompileHelper::evalScheduledExprs(DesignComponent* component) {
   for (auto& nameEval : component->getScheduledParamExprEval()) {
     const std::string& name = nameEval.first;
     ExprEval& expr_eval = nameEval.second;
     bool invalidValue = false;
-    uhdm::Expr* result =
-        reduceExpr(expr_eval.m_expr, invalidValue, component, compileDesign,
-                   expr_eval.m_instance, expr_eval.m_fileId,
-                   expr_eval.m_lineNumber, expr_eval.m_pexpr);
+    uhdm::Expr* result = reduceExpr(expr_eval.m_expr, invalidValue, component,
+                                    expr_eval.m_instance, expr_eval.m_fileId,
+                                    expr_eval.m_lineNumber, expr_eval.m_pexpr);
     if (!invalidValue && result &&
         (result->getUhdmType() == uhdm::UhdmType::Constant)) {
       uhdm::Constant* c = (uhdm::Constant*)result;

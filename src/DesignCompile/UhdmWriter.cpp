@@ -185,12 +185,12 @@ std::string UhdmWriter::builtinGateName(VObjectType type) {
   return modName;
 }
 
-UhdmWriter::UhdmWriter(Session* session, CompileDesign* compiler,
+UhdmWriter::UhdmWriter(Session* session, CompileDesign* compileDesign,
                        Design* design)
     : m_session(session),
-      m_compileDesign(compiler),
+      m_compileDesign(compileDesign),
       m_design(design),
-      m_helper(session) {}
+      m_helper(session, compileDesign) {}
 
 uint32_t UhdmWriter::getStrengthType(VObjectType type) {
   switch (type) {
@@ -555,8 +555,8 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
       }
     }
     if (NodeId defId = orig_port->getDefaultValue()) {
-      if (uhdm::Any* exp = m_helper.compileExpression(
-              mod, fC, defId, m_compileDesign, dest_port, instance, false)) {
+      if (uhdm::Any* exp = m_helper.compileExpression(mod, fC, defId, dest_port,
+                                                      instance, false)) {
         dest_port->setHighConn(exp);
       }
     }
@@ -565,9 +565,9 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
         NodeId packedDimensions = orig_port->getPackedDimension();
         int32_t unpackedSize = 0;
         const FileContent* fC = orig_port->getFileContent();
-        if (std::vector<uhdm::Range*>* ranges = m_helper.compileRanges(
-                mod, fC, unpackedDimensions, m_compileDesign, nullptr, instance,
-                unpackedSize, false)) {
+        if (std::vector<uhdm::Range*>* ranges =
+                m_helper.compileRanges(mod, fC, unpackedDimensions, nullptr,
+                                       instance, unpackedSize, false)) {
           uhdm::ArrayTypespec* array_ts = s.make<uhdm::ArrayTypespec>();
           array_ts->setRanges(ranges);
           array_ts->setParent(dest_port);
@@ -613,8 +613,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           dest_port->getTypespec()->setActual(array_ts);
           if (uhdm::Typespec* ts = m_helper.compileTypespec(
                   mod, fC, orig_port->getTypespecId(),
-                  orig_port->getUnpackedDimension(), m_compileDesign, array_ts,
-                  nullptr, true)) {
+                  orig_port->getUnpackedDimension(), array_ts, nullptr, true)) {
             if (array_ts->getElemTypespec() == nullptr) {
               uhdm::RefTypespec* array_ts_rt = s.make<uhdm::RefTypespec>();
               array_ts_rt->setParent(array_ts);
@@ -631,8 +630,8 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
         }
       } else if (uhdm::Typespec* ts = m_helper.compileTypespec(
                      mod, fC, orig_port->getTypespecId(),
-                     orig_port->getUnpackedDimension(), m_compileDesign,
-                     dest_port, nullptr, true)) {
+                     orig_port->getUnpackedDimension(), dest_port, nullptr,
+                     true)) {
         if (dest_port->getTypespec() == nullptr) {
           uhdm::RefTypespec* dest_port_rt = s.make<uhdm::RefTypespec>();
           dest_port_rt->setName(ts->getName());
@@ -738,8 +737,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
           if (orig_net->getTypespecId()) {
             if (uhdm::Typespec* ts = m_helper.compileTypespec(
                     mod, fC, orig_net->getTypespecId(),
-                    orig_net->getUnpackedDimension(), m_compileDesign, nullptr,
-                    nullptr, true)) {
+                    orig_net->getUnpackedDimension(), nullptr, nullptr, true)) {
               uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
               rt->setName(ts->getName());
               rt->setParent(dest_net);
@@ -902,12 +900,12 @@ void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
   }
 }
 
-class ReInstanceTypespec : public VpiListener {
+class ReInstanceTypespec final : public UhdmVisitor {
  public:
   explicit ReInstanceTypespec(uhdm::Package* p) : m_package(p) {}
   ~ReInstanceTypespec() override = default;
 
-  void leaveAny(const uhdm::Any* object, vpiHandle handle) final {
+  void visitAny(const uhdm::Any* object) final {
     if (any_cast<uhdm::Typespec>(object) != nullptr) {
       if ((object->getUhdmType() != uhdm::UhdmType::EventTypespec) &&
           (object->getUhdmType() != uhdm::UhdmType::ImportTypespec) &&
@@ -917,12 +915,9 @@ class ReInstanceTypespec : public VpiListener {
     }
   }
 
-  void leaveFunction(const uhdm::Function* object, vpiHandle handle) final {
-    reInstance(object);
-  }
-  void leaveTask(const uhdm::Task* object, vpiHandle handle) final {
-    reInstance(object);
-  }
+  void visitFunction(const uhdm::Function* object) final { reInstance(object); }
+  void visitTask(const uhdm::Task* object) final { reInstance(object); }
+
   void reInstance(const uhdm::Any* cobject) {
     if (cobject == nullptr) return;
     uhdm::Any* object = (uhdm::Any*)cobject;
@@ -966,11 +961,7 @@ class ReInstanceTypespec : public VpiListener {
 // non-elablarated package
 void reInstanceTypespec(Serializer& serializer, uhdm::Any* root,
                         uhdm::Package* p) {
-  ReInstanceTypespec* listener = new ReInstanceTypespec(p);
-  vpiHandle handle = serializer.makeUhdmHandle(root->getUhdmType(), root);
-  listener->listenAny(handle);
-  vpi_release_handle(handle);
-  delete listener;
+  ReInstanceTypespec(p).visit(root);
 }
 
 void UhdmWriter::writePackage(Package* pack, uhdm::Package* p,
@@ -1173,9 +1164,8 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
         int32_t unpackedSize = 0;
         const FileContent* fC = sig->getFileContent();
         if (std::vector<uhdm::Range*>* unpackedDimensions =
-                m_helper.compileRanges(mod, fC, unpackedDimension,
-                                       m_compileDesign, nullptr, instance,
-                                       unpackedSize, false)) {
+                m_helper.compileRanges(mod, fC, unpackedDimension, nullptr,
+                                       instance, unpackedSize, false)) {
           NodeId id = sig->getNodeId();
           const std::string typeName = sig->getInterfaceTypeName();
           uhdm::InterfaceArray* smarray = s.make<uhdm::InterfaceArray>();
@@ -1269,8 +1259,8 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
       fC->populateCoreMembers(sig.getNameId(), sig.getNameId(), io);
       if (NodeId Expression = fC->Sibling(sig.getNodeId())) {
         m_helper.checkForLoops(true);
-        if (uhdm::Any* exp = m_helper.compileExpression(
-                mod, fC, Expression, m_compileDesign, io, instance, true)) {
+        if (uhdm::Any* exp = m_helper.compileExpression(mod, fC, Expression, io,
+                                                        instance, true)) {
           io->setExpr(exp);
         }
         m_helper.checkForLoops(false);

@@ -30,9 +30,7 @@
 #include "Surelog/Design/Design.h"
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/DesignCompile/CompileDesign.h"
-#include "Surelog/DesignCompile/CompileHelper.h"
 #include "Surelog/DesignCompile/CompilerHarness.h"
-#include "Surelog/Library/Library.h"
 #include "Surelog/Package/Package.h"
 #include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/ParserHarness.h"
@@ -45,11 +43,8 @@
 
 // UHDM
 #include <uhdm/Serializer.h>
-#include <uhdm/class_defn.h>
-#include <uhdm/package.h>
 
 #include <string>
-#include <string_view>
 #include <vector>
 
 namespace SURELOG {
@@ -301,7 +296,6 @@ void Builtin::addBuiltinClasses() const {
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable),
                                        "builtin.sv", symbolTable);
-  CompileHelper helper(m_session);
   ParserHarness pharness(m_session);
   CompilerHarness charness(m_session);
   FileContent* fC1 = pharness.parse(

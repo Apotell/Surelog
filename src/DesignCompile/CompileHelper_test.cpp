@@ -32,12 +32,10 @@ namespace SURELOG {
 TEST(CompileHelper, ParseConstants) {
   uhdm::Serializer s;
   auto tester = [&s](int32_t type, std::string_view value, int64_t* result) {
-    Session session;
-    CompileHelper testee(&session);
     uhdm::Constant* val = s.make<uhdm::Constant>();
     val->setConstType(type);
     val->setValue(value);
-    return testee.parseConstant(*val, result);
+    return CompileHelper::parseConstant(*val, result);
   };
 
   int64_t result;

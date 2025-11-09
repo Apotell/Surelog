@@ -107,8 +107,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
   } while (programId &&
            (fC->Type(programId) != VObjectType::paAttribute_instance));
   if (programId) {
-    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
-            m_program, fC, programId, m_compileDesign, nullptr)) {
+    if (uhdm::AttributeCollection* attributes =
+            m_helper.compileAttributes(m_program, fC, programId, nullptr)) {
       m_program->setAttributes(attributes);
     }
   }
@@ -150,8 +150,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
     switch (type) {
       case VObjectType::paPackage_import_item: {
         if (collectType != CollectType::FUNCTION) break;
-        m_helper.importPackage(m_program, m_design, fC, id, m_compileDesign);
-        m_helper.compileImportDeclaration(m_program, fC, id, m_compileDesign);
+        m_helper.importPackage(m_program, m_design, fC, id);
+        m_helper.compileImportDeclaration(m_program, fC, id);
         break;
       }
       case VObjectType::paParameter_port_list: {
@@ -159,28 +159,27 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         ParameterPortListId = id;
         NodeId list_of_param_assignments = fC->Child(id);
         if (list_of_param_assignments)
-          m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_param_assignments, m_compileDesign, false,
-              nullptr, false, false);
+          m_helper.compileParameterDeclaration(m_program, fC,
+                                               list_of_param_assignments, false,
+                                               nullptr, false, false);
         break;
       }
       case VObjectType::paAnsi_port_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileAnsiPortDeclaration(m_program, fC, id, m_compileDesign,
-                                            port_direction);
+        m_helper.compileAnsiPortDeclaration(m_program, fC, id, port_direction);
         break;
       }
       case VObjectType::paProperty_declaration: {
         if (collectType != CollectType::OTHER) break;
         uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
-            m_program, fC, id, m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, nullptr, nullptr);
         m_program->addPropertyDecl(decl);
         break;
       }
       case VObjectType::paSequence_declaration: {
         if (collectType != CollectType::OTHER) break;
         uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
-            m_program, fC, id, m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, nullptr, nullptr);
         m_program->addSequenceDecl(decl);
         break;
       }
@@ -190,53 +189,50 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         }
         if (collectType == CollectType::FUNCTION) m_nbPorts++;
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compilePortDeclaration(m_program, fC, id, m_compileDesign,
-                                        port_direction,
+        m_helper.compilePortDeclaration(m_program, fC, id, port_direction,
                                         m_hasNonNullPort || (m_nbPorts > 1));
         break;
       }
       case VObjectType::paTask_declaration: {
         // Called twice, placeholder first, then definition
         if (collectType == CollectType::OTHER) break;
-        m_helper.compileTask(m_program, fC, id, m_compileDesign, nullptr,
-                             false);
+        m_helper.compileTask(m_program, fC, id, nullptr, false);
         break;
       }
       case VObjectType::paFunction_declaration: {
         // Called twice, placeholder first, then definition
         if (collectType == CollectType::OTHER) break;
-        m_helper.compileFunction(m_program, fC, id, m_compileDesign, nullptr,
-                                 false);
+        m_helper.compileFunction(m_program, fC, id, nullptr, false);
         break;
       }
       case VObjectType::paLet_declaration: {
         if (collectType != CollectType::FUNCTION) break;
-        m_helper.compileLetDeclaration(m_program, fC, id, m_compileDesign);
+        m_helper.compileLetDeclaration(m_program, fC, id);
         break;
       }
       case VObjectType::paInput_declaration:
       case VObjectType::paOutput_declaration:
       case VObjectType::paInout_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compilePortDeclaration(m_program, fC, id, m_compileDesign,
-                                        port_direction, m_hasNonNullPort);
+        m_helper.compilePortDeclaration(m_program, fC, id, port_direction,
+                                        m_hasNonNullPort);
         break;
       }
       case VObjectType::paPort_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compilePortDeclaration(m_program, fC, id, m_compileDesign,
-                                        port_direction, m_hasNonNullPort);
+        m_helper.compilePortDeclaration(m_program, fC, id, port_direction,
+                                        m_hasNonNullPort);
         break;
       }
       case VObjectType::paAssertion_item: {
         if (collectType != CollectType::OTHER) break;
-        m_helper.compileAssertionItem(m_program, fC, id, m_compileDesign);
+        m_helper.compileAssertionItem(m_program, fC, id);
         break;
       }
       case VObjectType::paContinuous_assign: {
         if (collectType != CollectType::OTHER) break;
         m_helper.compileContinuousAssignment(m_program, fC, fC->Child(id),
-                                             m_compileDesign, nullptr, nullptr);
+                                             nullptr, nullptr);
         break;
       }
       case VObjectType::paParameter_declaration: {
@@ -247,13 +243,12 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, m_compileDesign, false,
-              nullptr, ParameterPortListId, false);
+              m_program, fC, list_of_type_assignments, false, nullptr,
+              ParameterPortListId, false);
 
         } else {
-          m_helper.compileParameterDeclaration(m_program, fC, id,
-                                               m_compileDesign, false, nullptr,
-                                               ParameterPortListId, false);
+          m_helper.compileParameterDeclaration(
+              m_program, fC, id, false, nullptr, ParameterPortListId, false);
         }
         break;
       }
@@ -265,12 +260,11 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
-              m_program, fC, list_of_type_assignments, m_compileDesign, true,
-              nullptr, ParameterPortListId, false);
+              m_program, fC, list_of_type_assignments, true, nullptr,
+              ParameterPortListId, false);
 
         } else {
-          m_helper.compileParameterDeclaration(m_program, fC, id,
-                                               m_compileDesign, true, nullptr,
+          m_helper.compileParameterDeclaration(m_program, fC, id, true, nullptr,
                                                ParameterPortListId, false);
         }
         break;
@@ -294,28 +288,25 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paNet_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileNetDeclaration(m_program, fC, id, false,
-                                       m_compileDesign, m_attributes);
+        m_helper.compileNetDeclaration(m_program, fC, id, false, m_attributes);
         m_attributes = nullptr;
         break;
       }
       case VObjectType::paData_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileDataDeclaration(m_program, fC, id, false,
-                                        m_compileDesign, m_attributes);
+        m_helper.compileDataDeclaration(m_program, fC, id, false, m_attributes);
         m_attributes = nullptr;
         break;
       }
       case VObjectType::paAttribute_instance: {
         if (collectType != CollectType::DEFINITION) break;
-        m_attributes = m_helper.compileAttributes(m_program, fC, id,
-                                                  m_compileDesign, nullptr);
+        m_attributes = m_helper.compileAttributes(m_program, fC, id, nullptr);
         break;
       }
       case VObjectType::paInitial_construct: {
         if (collectType != CollectType::OTHER) break;
         uhdm::Initial* init = m_helper.compileInitialBlock(
-            m_program, fC, id, m_compileDesign, m_program->getUhdmModel());
+            m_program, fC, id, m_program->getUhdmModel());
         uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
@@ -328,7 +319,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paFinal_construct: {
         if (collectType != CollectType::OTHER) break;
         uhdm::FinalStmt* final = m_helper.compileFinalBlock(
-            m_program, fC, id, m_compileDesign, m_program->getUhdmModel());
+            m_program, fC, id, m_program->getUhdmModel());
         uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
@@ -356,12 +347,10 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         else
           Task_prototype = Context_keyword;
         if (fC->Type(Task_prototype) == VObjectType::paTask_prototype) {
-          Task* task =
-              m_helper.compileTaskPrototype(m_program, fC, id, m_compileDesign);
+          Task* task = m_helper.compileTaskPrototype(m_program, fC, id);
           m_program->insertTask(task);
         } else {
-          Function* func = m_helper.compileFunctionPrototype(m_program, fC, id,
-                                                             m_compileDesign);
+          Function* func = m_helper.compileFunctionPrototype(m_program, fC, id);
           m_program->insertFunction(func);
         }
         break;

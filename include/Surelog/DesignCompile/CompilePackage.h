@@ -62,7 +62,7 @@ class CompilePackage final {
         m_compileDesign(compileDesign),
         m_package(package),
         m_design(design),
-        m_helper(session) {}
+        m_helper(session, compileDesign) {}
 
   bool compile();
 

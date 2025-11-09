@@ -31,7 +31,6 @@
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/Design/ModuleDefinition.h"
 #include "Surelog/Design/ModuleInstance.h"
-#include "Surelog/Design/ParamAssign.h"
 #include "Surelog/Design/Parameter.h"
 #include "Surelog/Design/Signal.h"
 #include "Surelog/Design/SimpleType.h"
@@ -51,7 +50,6 @@
 #include "Surelog/SourceCompile/VObjectTypes.h"
 #include "Surelog/Testbench/ClassDefinition.h"
 #include "Surelog/Testbench/TypeDef.h"
-#include "Surelog/Testbench/Variable.h"
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
@@ -75,9 +73,9 @@ using namespace uhdm;  // NOLINT (using a bunch of them)
 
 uhdm::Any* CompileHelper::compileVariable(
     DesignComponent* component, const FileContent* fC, NodeId declarationId,
-    NodeId nameId, NodeId unpackedDimId, CompileDesign* compileDesign,
-    uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance, bool muteErrors) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    NodeId nameId, NodeId unpackedDimId, uhdm::Any* pstmt,
+    SURELOG::ValuedComponentI* instance, bool muteErrors) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Any* result = nullptr;
   NodeId variable = declarationId;
   VObjectType the_type = fC->Type(variable);
@@ -150,8 +148,8 @@ uhdm::Any* CompileHelper::compileVariable(
   if ((decl_type != VObjectType::paPs_or_hierarchical_identifier) &&
       (decl_type != VObjectType::paImplicit_class_handle) &&
       (decl_type != VObjectType::STRING_CONST)) {
-    ts = compileTypespec(component, fC, declarationId, unpackedDimId,
-                         compileDesign, pstmt, instance, true);
+    ts = compileTypespec(component, fC, declarationId, unpackedDimId, pstmt,
+                         instance, true);
     if ((ts != nullptr) &&
         (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
       result = s.make<uhdm::Variable>();
@@ -203,7 +201,7 @@ uhdm::Any* CompileHelper::compileVariable(
       NodeId class_type = fC->Child(variable);
       NodeId class_name = fC->Child(class_type);
       const std::string_view packageName = fC->SymName(class_name);
-      Design* const design = compileDesign->getCompiler()->getDesign();
+      Design* const design = m_compileDesign->getCompiler()->getDesign();
       NodeId symb_id = fC->Sibling(variable);
       const std::string_view typeName = fC->SymName(symb_id);
       Package* pack = design->getPackage(packageName);
@@ -212,8 +210,8 @@ uhdm::Any* CompileHelper::compileVariable(
         const DataType* dtype = pack->getDataType(design, typeName);
         while (dtype) {
           if (uhdm::Typespec* const tps = dtype->getTypespec()) {
-            var = compileVariable(component, fC, compileDesign, nameId,
-                                  the_type, declarationId, tps, pstmt);
+            var = compileVariable(component, fC, nameId, the_type,
+                                  declarationId, tps, pstmt);
             break;
           }
           dtype = dtype->getDefinition();
@@ -237,8 +235,8 @@ uhdm::Any* CompileHelper::compileVariable(
           const DataType* dtype = cl->getDataType(design, typeName);
           while (dtype) {
             if (uhdm::Typespec* const tps = dtype->getTypespec()) {
-              var = compileVariable(component, fC, compileDesign, nameId,
-                                    the_type, declarationId, tps, pstmt);
+              var = compileVariable(component, fC, nameId, the_type,
+                                    declarationId, tps, pstmt);
               break;
             }
             dtype = dtype->getDefinition();
@@ -264,8 +262,8 @@ uhdm::Any* CompileHelper::compileVariable(
       break;
     }
     default: {
-      result = compileVariable(component, fC, compileDesign, nameId, the_type,
-                               declarationId, ts, pstmt);
+      result = compileVariable(component, fC, nameId, the_type, declarationId,
+                               ts, pstmt);
       if (pstmt) result->setParent(pstmt, true);
       // Implicit type
       if ((result == nullptr) && declarationId) {
@@ -307,12 +305,14 @@ uhdm::Any* CompileHelper::compileVariable(
   return result;
 }
 
-uhdm::Any* CompileHelper::compileVariable(
-    DesignComponent* component, const FileContent* fC,
-    CompileDesign* compileDesign, NodeId nameId, VObjectType subnettype,
-    NodeId typespecId, uhdm::Typespec* tps, uhdm::Any* pscope) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
-  Design* const design = compileDesign->getCompiler()->getDesign();
+uhdm::Any* CompileHelper::compileVariable(DesignComponent* component,
+                                          const FileContent* fC, NodeId nameId,
+                                          VObjectType subnettype,
+                                          NodeId typespecId,
+                                          uhdm::Typespec* tps,
+                                          uhdm::Any* pscope) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
   if (pscope == nullptr) pscope = component->getUhdmModel();
   if (pscope == nullptr) pscope = design->getUhdmDesign();
 
@@ -431,7 +431,6 @@ uhdm::Any* CompileHelper::compileVariable(
 }
 
 uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
-                                         CompileDesign* compileDesign,
                                          Signal* sig, uhdm::Typespec* tps) {
   const DataType* dtype = sig->getDataType();
   VObjectType subnettype = sig->getType();
@@ -439,7 +438,7 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   NodeId typespecId = sig->getTypespecId() ? sig->getTypespecId()
                                            : sig->getInterfaceTypeNameId();
   const FileContent* const fC = sig->getFileContent();
-  Design* const design = compileDesign->getCompiler()->getDesign();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
   uhdm::Any* pscope = sig->uhdmScopeModel();
   if (pscope == nullptr) pscope = component->getUhdmModel();
   if (pscope == nullptr) pscope = design->getUhdmDesign();
@@ -471,29 +470,28 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
       } else if (const DummyType* un = datatype_cast<DummyType>(dtype)) {
         tps = un->getTypespec();
         if (tps == nullptr) {
-          tps = compileTypespec(component, un->getFileContent(),
-                                un->getNodeId(), InvalidNodeId, compileDesign,
-                                nullptr, nullptr, true);
+          tps =
+              compileTypespec(component, un->getFileContent(), un->getNodeId(),
+                              InvalidNodeId, nullptr, nullptr, true);
           ((DummyType*)un)->setTypespec(updatedts);
         }
         break;
       } else if (const SimpleType* sit = datatype_cast<SimpleType>(dtype)) {
         tps = sit->getTypespec();
-        tps =
-            elabTypespec(component, updatedts, compileDesign, nullptr, nullptr);
+        tps = elabTypespec(component, updatedts, nullptr, nullptr);
         break;
       } else if (/*const ClassDefinition* cl = */ datatype_cast<
                  ClassDefinition>(dtype)) {
       } else if (Parameter* sit =
                      const_cast<Parameter*>(datatype_cast<Parameter>(dtype))) {
-        tps = compileTypeParameter(component, compileDesign, sit);
+        tps = compileTypeParameter(component, sit);
       }
       dtype = dtype->getDefinition();
     }
   }
   if (tps != nullptr) uhdm::setSigned(tps, sig->isSigned());
-  obj = compileVariable(component, fC, compileDesign, signalId, subnettype,
-                        typespecId, tps, pscope);
+  obj = compileVariable(component, fC, signalId, subnettype, typespecId, tps,
+                        pscope);
   if (SimpleExpr* const se = any_cast<SimpleExpr>(obj)) {
     if (uhdm::AttributeCollection* const attributes = sig->attributes()) {
       se->setAttributes(attributes);
@@ -528,27 +526,26 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
 }
 
 uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
-                                         CompileDesign* compileDesign,
                                          Signal* sig) {
   const FileContent* const fC = sig->getFileContent();
-  Design* const design = compileDesign->getCompiler()->getDesign();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
   uhdm::Any* pscope = component->getUhdmModel();
   if (pscope == nullptr) pscope = design->getUhdmDesign();
 
   uhdm::Any* uhdmScope = sig->uhdmScopeModel();
   NodeId typeSpecId = sig->getTypespecId() ? sig->getTypespecId()
                                            : sig->getInterfaceTypeNameId();
-  if (uhdm::Typespec* tps = compileTypespec(
-          component, fC, typeSpecId, sig->getUnpackedDimension(), compileDesign,
-          uhdmScope, nullptr, false)) {
-    return compileSignals(component, compileDesign, sig, tps);
+  if (uhdm::Typespec* tps = compileTypespec(component, fC, typeSpecId,
+                                            sig->getUnpackedDimension(),
+                                            uhdmScope, nullptr, false)) {
+    return compileSignals(component, sig, tps);
   }
   return nullptr;
 }
 
-uhdm::Typespec* CompileHelper::compileTypeParameter(
-    DesignComponent* component, CompileDesign* compileDesign, Parameter* sit) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+uhdm::Typespec* CompileHelper::compileTypeParameter(DesignComponent* component,
+                                                    Parameter* sit) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Typespec* spec = nullptr;
   bool type_param = false;
   if (uhdm::Any* uparam = sit->getUhdmParam()) {
@@ -593,7 +590,7 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(
   if (override_spec == nullptr) {
     override_spec = compileTypespec(component, param->getFileContent(),
                                     param->getNodeType(), InvalidNodeId,
-                                    compileDesign, nullptr, nullptr, false);
+                                    nullptr, nullptr, false);
   }
 
   if (override_spec) {
@@ -674,9 +671,9 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
 
 Typespec* CompileHelper::compileDatastructureTypespec(
     DesignComponent* component, const FileContent* fC, NodeId type,
-    CompileDesign* compileDesign, ValuedComponentI* instance,
-    std::string_view suffixname, std::string_view typeName) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    ValuedComponentI* instance, std::string_view suffixname,
+    std::string_view typeName) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
   tps->setName(typeName);
   tps->setParent(s.topScope());
@@ -684,8 +681,8 @@ Typespec* CompileHelper::compileDatastructureTypespec(
   return tps;
 }
 
-uhdm::TypespecMember* CompileHelper::buildTypespecMember(
-    CompileDesign* compileDesign, const FileContent* fC, NodeId id) {
+uhdm::TypespecMember* CompileHelper::buildTypespecMember(const FileContent* fC,
+                                                         NodeId id) {
   /*
   std::string hash = fileName + ":" + name + ":" + value + ":" +
   std::to_string(line) + ":" + std::to_string(column) + ":" +
@@ -693,7 +690,7 @@ uhdm::TypespecMember* CompileHelper::buildTypespecMember(
   std::unordered_map<std::string, uhdm::TypespecMember*>::iterator itr =
       m_cache_typespec_member.find(hash);
   */
-  uhdm::Serializer& s = compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::TypespecMember* var = s.make<uhdm::TypespecMember>();
   var->setName(fC->SymName(id));
   if (NodeId siblingId = fC->Sibling(id)) {
@@ -704,8 +701,7 @@ uhdm::TypespecMember* CompileHelper::buildTypespecMember(
   return var;
 }
 
-IntTypespec* CompileHelper::buildIntTypespec(CompileDesign* compileDesign,
-                                             PathId fileId,
+IntTypespec* CompileHelper::buildIntTypespec(PathId fileId,
                                              std::string_view name,
                                              std::string_view value,
                                              uint32_t line, uint16_t column,
@@ -719,7 +715,7 @@ IntTypespec* CompileHelper::buildIntTypespec(CompileDesign* compileDesign,
       m_cache_int_typespec.find(hash);
   */
   // if (itr == m_cache_int_typespec.end()) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::IntTypespec* var = s.make<uhdm::IntTypespec>();
   var->setValue(value);
   var->setFile(fileSystem->toPath(fileId));
@@ -732,8 +728,8 @@ IntTypespec* CompileHelper::buildIntTypespec(CompileDesign* compileDesign,
 
 uhdm::Typespec* CompileHelper::compileBuiltinTypespec(
     DesignComponent* component, const FileContent* fC, NodeId type,
-    VObjectType the_type, CompileDesign* compileDesign, uhdm::Any* pstmt) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    VObjectType the_type, uhdm::Any* pstmt) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Typespec* result = nullptr;
   NodeId sign = fC->Sibling(type);
   // 6.8 Variable declarations
@@ -840,28 +836,27 @@ uhdm::Typespec* CompileHelper::compileBuiltinTypespec(
 
 uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    NodeId packedId, NodeId unpackedId, CompileDesign* compileDesign,
-    uhdm::Any* pstmt, uhdm::Typespec* ts) {
+    NodeId packedId, NodeId unpackedId, uhdm::Any* pstmt, uhdm::Typespec* ts) {
   if (!packedId && !unpackedId) return ts;
 
   uhdm::Typespec* retts = ts;
-  uhdm::Serializer& s = compileDesign->getSerializer();
-  Design* const design = compileDesign->getCompiler()->getDesign();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
   if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
   std::vector<uhdm::Range*>* packedDimensions = nullptr;
   if (packedId) {
     int32_t packedSize = 0;
-    packedDimensions = compileRanges(component, fC, packedId, compileDesign,
-                                     nullptr, nullptr, packedSize, false);
+    packedDimensions = compileRanges(component, fC, packedId, nullptr, nullptr,
+                                     packedSize, false);
   }
 
   std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
   if (unpackedId) {
     int32_t unpackedSize = 0;
-    unpackedDimensions = compileRanges(component, fC, unpackedId, compileDesign,
-                                       nullptr, nullptr, unpackedSize, false);
+    unpackedDimensions = compileRanges(component, fC, unpackedId, nullptr,
+                                       nullptr, unpackedSize, false);
   }
 
   // LogicTypespec is exception and can have ranges as well. If yes then attach
@@ -1065,16 +1060,18 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   return retts;
 }
 
-uhdm::Typespec* CompileHelper::compileTypespec(
-    DesignComponent* component, const FileContent* fC, NodeId id,
-    NodeId unpackedDimId, CompileDesign* compileDesign, uhdm::Any* pstmt,
-    ValuedComponentI* instance, bool isVariable) {
+uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
+                                               const FileContent* fC, NodeId id,
+                                               NodeId unpackedDimId,
+                                               uhdm::Any* pstmt,
+                                               ValuedComponentI* instance,
+                                               bool isVariable) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
-  Design* const design = compileDesign->getCompiler()->getDesign();
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
 
-  uhdm::Serializer& s = compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr) pstmt = design->getUhdmDesign();
 
@@ -1148,12 +1145,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paConstant_mintypmax_expression:
     case VObjectType::paConstant_primary: {
       result = compileTypespec(component, fC, fC->Child(type), InvalidNodeId,
-                               compileDesign, pstmt, instance, false);
+                               pstmt, instance, false);
       break;
     }
     case VObjectType::paSystem_task: {
-      if (uhdm::Any* res = compileExpression(component, fC, type, compileDesign,
-                                             pstmt, instance)) {
+      if (uhdm::Any* res =
+              compileExpression(component, fC, type, pstmt, instance)) {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
         fC->populateCoreMembers(type, type, var);
         result = var;
@@ -1174,9 +1171,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paEnum_name_declaration: {
       uhdm::Typespec* baseType = nullptr;
       if (the_type == VObjectType::paEnum_base_type) {
-        baseType =
-            compileTypespec(component, fC, fC->Child(type), InvalidNodeId,
-                            compileDesign, pstmt, instance, isVariable);
+        baseType = compileTypespec(component, fC, fC->Child(type),
+                                   InvalidNodeId, pstmt, instance, isVariable);
 
         type = fC->Sibling(type);
       }
@@ -1242,8 +1238,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       NodeId Primary_literal = fC->Child(Primary);
       NodeId Name = fC->Child(Primary_literal);
       if (fC->Type(Name) == VObjectType::paClass_scope) {
-        result = compileTypespec(component, fC, Name, InvalidNodeId,
-                                 compileDesign, pstmt, instance, isVariable);
+        result = compileTypespec(component, fC, Name, InvalidNodeId, pstmt,
+                                 instance, isVariable);
       }
       if (instance) {
         const std::string_view name = fC->SymName(Name);
@@ -1255,8 +1251,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       NodeId literal = fC->Child(type);
       if (fC->Type(literal) == VObjectType::STRING_CONST) {
         const std::string_view typeName = fC->SymName(literal);
-        result = compileDatastructureTypespec(
-            component, fC, type, compileDesign, instance, "", typeName);
+        result = compileDatastructureTypespec(component, fC, type, instance, "",
+                                              typeName);
       } else {
         uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
         var->setValue(StrCat("INT:", fC->SymName(literal)));
@@ -1289,8 +1285,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paNonIntType_ShortReal:
     case VObjectType::paNonIntType_Real:
     case VObjectType::paString_type: {
-      result = compileBuiltinTypespec(component, fC, type, the_type,
-                                      compileDesign, pstmt);
+      result = compileBuiltinTypespec(component, fC, type, the_type, pstmt);
       break;
     }
     case VObjectType::paPackage_scope:
@@ -1425,7 +1420,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
 
           if (Data_type) {
             member_ts = compileTypespec(component, fC, Data_type, tmpUnpackedId,
-                                        compileDesign, result, instance, false);
+                                        result, instance, false);
           } else {
             uhdm::VoidTypespec* tps = s.make<uhdm::VoidTypespec>();
             tps->setParent(result);
@@ -1433,8 +1428,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             member_ts = tps;
           }
 
-          uhdm::TypespecMember* m =
-              buildTypespecMember(compileDesign, fC, member_name);
+          uhdm::TypespecMember* m = buildTypespecMember(fC, member_name);
           m->setParent(structOtUnionTypespec);
           if (member_ts != nullptr) {
             if (m->getTypespec() == nullptr) {
@@ -1449,9 +1443,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           }
           if (Expression &&
               (fC->Type(Expression) != VObjectType::paVariable_dimension)) {
-            if (uhdm::Any* ex =
-                    compileExpression(component, fC, Expression, compileDesign,
-                                      m, instance, false)) {
+            if (uhdm::Any* ex = compileExpression(component, fC, Expression, m,
+                                                  instance, false)) {
               m->setDefaultValue((uhdm::Expr*)ex);
             }
           }
@@ -1467,7 +1460,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paPs_type_identifier:
     case VObjectType::paInteger_type: {
       result = compileTypespec(component, fC, fC->Child(type), InvalidNodeId,
-                               compileDesign, pstmt, instance, false);
+                               pstmt, instance, false);
       break;
     }
     case VObjectType::STRING_CONST: {
@@ -1502,7 +1495,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
               if (const uhdm::Constant* exp =
                       any_cast<const uhdm::Constant*>(rhs)) {
                 uhdm::IntTypespec* its = buildIntTypespec(
-                    compileDesign,
+
                     fileSystem->toPathId(param->getFile(), symbols), typeName,
                     exp->getValue(), param->getStartLine(),
                     param->getStartColumn(), param->getStartLine(),
@@ -1539,8 +1532,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         }
       }
       if (result == nullptr) {
-        result = compileDatastructureTypespec(
-            component, fC, type, compileDesign, instance, "", typeName);
+        result = compileDatastructureTypespec(component, fC, type, instance, "",
+                                              typeName);
         if (result) {
           fC->populateCoreMembers(type, type, result);
         }
@@ -1561,11 +1554,10 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     }
     case VObjectType::paConstant_expression: {
       if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
-              component, fC, type, compileDesign, pstmt, instance, true)) {
+              component, fC, type, pstmt, instance, true)) {
         if (any_cast<uhdm::RefObj>(exp) != nullptr) {
-          result =
-              compileTypespec(component, fC, fC->Child(type), InvalidNodeId,
-                              compileDesign, result, instance, false);
+          result = compileTypespec(component, fC, fC->Child(type),
+                                   InvalidNodeId, result, instance, false);
         } else {
           uhdm::IntegerTypespec* var = s.make<uhdm::IntegerTypespec>();
           if (exp->getUhdmType() == uhdm::UhdmType::Constant) {
@@ -1589,8 +1581,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     case VObjectType::paConstant_range: {
       uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
       fC->populateCoreMembers(type, type, tps);
-      if (uhdm::RangeCollection* ranges = compileRanges(
-              component, fC, type, compileDesign, tps, instance, size, false)) {
+      if (uhdm::RangeCollection* ranges =
+              compileRanges(component, fC, type, tps, instance, size, false)) {
         if (!ranges->empty()) {
           tps->setRanges(ranges);
           for (uhdm::Range* r : *ranges) r->setParent(tps, true);
@@ -1615,12 +1607,12 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       NodeId child = fC->Child(type);
       if (fC->Type(child) == VObjectType::paExpression) {
         uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
-            component, fC, child, compileDesign, nullptr, instance, false);
+            component, fC, child, nullptr, instance, false);
         if (exp) {
           uhdm::UhdmType typ = exp->getUhdmType();
           if (typ == uhdm::UhdmType::RefObj) {
             result = compileTypespec(component, fC, child, InvalidNodeId,
-                                     compileDesign, result, instance, false);
+                                     result, instance, false);
           } else if (typ == uhdm::UhdmType::Constant) {
             uhdm::Constant* c = (uhdm::Constant*)exp;
             int32_t ctype = c->getConstType();
@@ -1654,8 +1646,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           errors->addError(err);
         }
       } else {
-        result = compileTypespec(component, fC, child, InvalidNodeId,
-                                 compileDesign, result, instance, false);
+        result = compileTypespec(component, fC, child, InvalidNodeId, result,
+                                 instance, false);
       }
       break;
     }
@@ -1689,7 +1681,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     result->setParent(pstmt);
   }
   result = compileUpdatedTypespec(component, fC, id, Packed_dimension,
-                                  unpackedDimId, compileDesign, pstmt, result);
+                                  unpackedDimId, pstmt, result);
   if (result != nullptr) {
     result->setParent(pstmt);
   }
@@ -1699,10 +1691,9 @@ uhdm::Typespec* CompileHelper::compileTypespec(
 
 uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
                                             uhdm::Typespec* spec,
-                                            CompileDesign* compileDesign,
                                             uhdm::Any* pexpr,
                                             ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::Typespec* result = spec;
   uhdm::UhdmType type = spec->getUhdmType();
   uhdm::RangeCollection* ranges = nullptr;
@@ -1750,7 +1741,6 @@ uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
 }
 
 bool CompileHelper::isOverloaded(const uhdm::Any* expr,
-                                 CompileDesign* compileDesign,
                                  ValuedComponentI* instance) {
   if (instance == nullptr) return false;
   ModuleInstance* inst = valuedcomponenti_cast<ModuleInstance*>(instance);

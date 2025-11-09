@@ -89,15 +89,15 @@ bool CompilePackage::compile() {
   const uhdm::ScopedScope scopedScope(pack);
   collectObjects_(CollectType::FUNCTION);
   collectObjects_(CollectType::DEFINITION);
-  m_helper.evalScheduledExprs(m_package, m_compileDesign);
+  m_helper.evalScheduledExprs(m_package);
   collectObjects_(CollectType::OTHER);
 
   do {
     packId = fC->Child(packId);
   } while (packId && (fC->Type(packId) != VObjectType::paAttribute_instance));
   if (packId) {
-    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
-            m_package, fC, packId, m_compileDesign, nullptr)) {
+    if (uhdm::AttributeCollection* attributes =
+            m_helper.compileAttributes(m_package, fC, packId, nullptr)) {
       m_package->setAttributes(attributes);
     }
   }
@@ -132,8 +132,7 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
       for (auto& pack_import : pack_imports) {
         const FileContent* pack_fC = pack_import.fC;
         NodeId pack_id = pack_import.nodeId;
-        m_helper.importPackage(m_package, m_design, pack_fC, pack_id,
-                               m_compileDesign, true);
+        m_helper.importPackage(m_package, m_design, pack_fC, pack_id, true);
       }
     }
 
@@ -147,9 +146,8 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
       switch (type) {
         case VObjectType::paPackage_import_item: {
           if (collectType != CollectType::FUNCTION) break;
-          m_helper.importPackage(m_package, m_design, fC, id, m_compileDesign,
-                                 true);
-          m_helper.compileImportDeclaration(m_package, fC, id, m_compileDesign);
+          m_helper.importPackage(m_package, m_design, fC, id, true);
+          m_helper.compileImportDeclaration(m_package, fC, id);
           break;
         }
         case VObjectType::paParameter_declaration: {
@@ -159,12 +157,11 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
                   VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_package, fC, list_of_type_assignments, m_compileDesign, false,
-                nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_package, fC,
+                                                 list_of_type_assignments,
+                                                 false, nullptr, false, false);
           } else {
-            m_helper.compileParameterDeclaration(m_package, fC, id,
-                                                 m_compileDesign, false,
+            m_helper.compileParameterDeclaration(m_package, fC, id, false,
                                                  nullptr, false, false);
           }
           break;
@@ -176,33 +173,30 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
                   VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_package, fC, list_of_type_assignments, m_compileDesign, true,
-                nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_package, fC,
+                                                 list_of_type_assignments, true,
+                                                 nullptr, false, false);
           } else {
-            m_helper.compileParameterDeclaration(m_package, fC, id,
-                                                 m_compileDesign, true, nullptr,
-                                                 false, false);
+            m_helper.compileParameterDeclaration(m_package, fC, id, true,
+                                                 nullptr, false, false);
           }
           break;
         }
         case VObjectType::paTask_declaration: {
           // Called twice, placeholder first, then definition
           if (collectType == CollectType::OTHER) break;
-          m_helper.compileTask(m_package, fC, id, m_compileDesign, nullptr,
-                               false);
+          m_helper.compileTask(m_package, fC, id, nullptr, false);
           break;
         }
         case VObjectType::paFunction_declaration: {
           // Called twice, placeholder first, then definition
           if (collectType == CollectType::OTHER) break;
-          m_helper.compileFunction(m_package, fC, id, m_compileDesign, nullptr,
-                                   false);
+          m_helper.compileFunction(m_package, fC, id, nullptr, false);
           break;
         }
         case VObjectType::paLet_declaration: {
           if (collectType != CollectType::FUNCTION) break;
-          m_helper.compileLetDeclaration(m_package, fC, id, m_compileDesign);
+          m_helper.compileLetDeclaration(m_package, fC, id);
           break;
         }
         case VObjectType::paParam_assignment: {
@@ -230,41 +224,39 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
         }
         case VObjectType::paClass_constructor_declaration: {
           if (collectType != CollectType::OTHER) break;
-          m_helper.compileClassConstructorDeclaration(m_package, fC, id,
-                                                      m_compileDesign);
+          m_helper.compileClassConstructorDeclaration(m_package, fC, id);
           break;
         }
         case VObjectType::paNet_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileNetDeclaration(m_package, fC, id, false,
-                                         m_compileDesign, m_attributes);
+                                         m_attributes);
           m_attributes = nullptr;
           break;
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileDataDeclaration(m_package, fC, id, false,
-                                          m_compileDesign, m_attributes);
+                                          m_attributes);
           m_attributes = nullptr;
           break;
         }
         case VObjectType::paAttribute_instance: {
           if (collectType != CollectType::DEFINITION) break;
-          m_attributes = m_helper.compileAttributes(m_package, fC, id,
-                                                    m_compileDesign, nullptr);
+          m_attributes = m_helper.compileAttributes(m_package, fC, id, nullptr);
           break;
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
           uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
-              m_package, fC, id, m_compileDesign, nullptr, nullptr);
+              m_package, fC, id, nullptr, nullptr);
           m_package->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
           uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
-              m_package, fC, id, m_compileDesign, nullptr, nullptr);
+              m_package, fC, id, nullptr, nullptr);
           m_package->addSequenceDecl(decl);
           break;
         }
@@ -279,12 +271,11 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
           else
             Task_prototype = Context_keyword;
           if (fC->Type(Task_prototype) == VObjectType::paTask_prototype) {
-            Task* task = m_helper.compileTaskPrototype(m_package, fC, id,
-                                                       m_compileDesign);
+            Task* task = m_helper.compileTaskPrototype(m_package, fC, id);
             m_package->insertTask(task);
           } else {
-            Function* func = m_helper.compileFunctionPrototype(
-                m_package, fC, id, m_compileDesign);
+            Function* func =
+                m_helper.compileFunctionPrototype(m_package, fC, id);
             m_package->insertFunction(func);
           }
           break;

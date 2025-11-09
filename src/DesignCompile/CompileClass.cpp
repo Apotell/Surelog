@@ -50,17 +50,15 @@
 
 // UHDM
 #include <uhdm/Serializer.h>
-#include <uhdm/attribute.h>
 #include <uhdm/class_defn.h>
-#include <uhdm/constraint.h>
 #include <uhdm/containers.h>
 #include <uhdm/expr.h>
 #include <uhdm/extends.h>
 #include <uhdm/function.h>
 #include <uhdm/function_decl.h>
 #include <uhdm/ref_typespec.h>
-#include <uhdm/task.h>
 #include <uhdm/task_decl.h>
+#include <uhdm/variable.h>
 
 #include <cstdint>
 #include <stack>
@@ -133,8 +131,8 @@ bool CompileClass::compile() {
   if (classId) {
     classId = fC->Child(classId);
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
-      if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
-              m_class, fC, classId, m_compileDesign, defn)) {
+      if (uhdm::AttributeCollection* attributes =
+              m_helper.compileAttributes(m_class, fC, classId, defn)) {
         m_class->setAttributes(attributes);
       }
     }
@@ -160,8 +158,7 @@ bool CompileClass::compile() {
   for (const auto& pack_import : pack_imports) {
     const FileContent* pack_fC = pack_import.fC;
     NodeId pack_id = pack_import.nodeId;
-    m_helper.importPackage(m_class, m_design, pack_fC, pack_id,
-                           m_compileDesign);
+    m_helper.importPackage(m_class, m_design, pack_fC, pack_id);
   }
 
   compile_class_parameters_(fC, nodeId);
@@ -188,8 +185,8 @@ bool CompileClass::compile() {
     VObjectType type = fC->Type(id);
     switch (type) {
       case VObjectType::paPackage_import_item: {
-        m_helper.importPackage(m_class, m_design, fC, id, m_compileDesign);
-        m_helper.compileImportDeclaration(m_class, fC, id, m_compileDesign);
+        m_helper.importPackage(m_class, m_design, fC, id);
+        m_helper.compileImportDeclaration(m_class, fC, id);
         break;
       }
       case VObjectType::paClass_constructor_declaration: {
@@ -245,7 +242,7 @@ bool CompileClass::compile() {
         compile_class_type_(fC, id);
         break;
       case VObjectType::paLet_declaration: {
-        m_helper.compileLetDeclaration(m_class, fC, id, m_compileDesign);
+        m_helper.compileLetDeclaration(m_class, fC, id);
         break;
       }
       case VObjectType::STRING_CONST: {
@@ -300,10 +297,9 @@ bool CompileClass::compile_properties() {
     const FileContent* fC = sig->getFileContent();
     NodeId id = sig->getNodeId();
     // Assignment to a default value
-    uhdm::Expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
-                                              sig->getUnpackedDimension());
-    if (uhdm::Any* obj =
-            m_helper.compileSignals(m_class, m_compileDesign, sig)) {
+    uhdm::Expr* exp =
+        m_helper.exprFromAssign(m_class, fC, id, sig->getUnpackedDimension());
+    if (uhdm::Any* obj = m_helper.compileSignals(m_class, sig)) {
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
       obj->setParent(defn);
       if (exp != nullptr) {
@@ -323,7 +319,7 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
 
   NodeId data_declaration = fC->Child(id);
   m_helper.compileDataDeclaration(m_class, fC, data_declaration, false,
-                                  m_compileDesign, m_attributes);
+                                  m_attributes);
 
   NodeId var_decl = fC->Child(data_declaration);
   VObjectType type = fC->Type(data_declaration);
@@ -520,8 +516,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
         errors->addError(err);
       }
     }
-    m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
-    m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, nullptr, true);
 
   } else if (func_type == VObjectType::paTask_declaration) {
     /*
@@ -550,8 +546,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
           .append(fC->SymName(fC->Sibling(task_name)));
     }
 
-    m_helper.compileTask(m_class, fC, id, m_compileDesign, nullptr, true);
-    m_helper.compileTask(m_class, fC, id, m_compileDesign, nullptr, true);
+    m_helper.compileTask(m_class, fC, id, nullptr, true);
+    m_helper.compileTask(m_class, fC, id, nullptr, true);
 
   } else if (func_type == VObjectType::paMethod_prototype) {
     /*
@@ -583,8 +579,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
             .append(fC->SymName(fC->Sibling(task_name)));
       }
 
-      m_helper.compileTask(m_class, fC, id, m_compileDesign, nullptr, true);
-      m_helper.compileTask(m_class, fC, id, m_compileDesign, nullptr, true);
+      m_helper.compileTask(m_class, fC, id, nullptr, true);
+      m_helper.compileTask(m_class, fC, id, nullptr, true);
 
       std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
           m_class->getTaskFuncDecls();
@@ -630,8 +626,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       NodeId function_name = fC->Sibling(function_data_type);
       funcName = fC->SymName(function_name);
 
-      m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
-      m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, nullptr, true);
 
       std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
           m_class->getTaskFuncDecls();
@@ -668,14 +664,13 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     funcName = "new";
     returnType->init(fC, InvalidNodeId, "void", VObjectType::NO_TYPE);
 
-    m_helper.compileClassConstructorDeclaration(m_class, fC, fC->Child(id),
-                                                m_compileDesign);
+    m_helper.compileClassConstructorDeclaration(m_class, fC, fC->Child(id));
 
   } else if (func_type == VObjectType::paClass_constructor_prototype) {
     funcName = "new";
 
-    m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
-    m_helper.compileFunction(m_class, fC, id, m_compileDesign, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, nullptr, true);
   } else {
     funcName = "UNRECOGNIZED_METHOD_TYPE";
   }
@@ -747,8 +742,7 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   m_class->insertConstraint(constraint);
 
   uhdm::ClassDefn* const pscope = m_class->getUhdmModel<uhdm::ClassDefn>();
-  m_helper.compileConstraintBlock(m_class, fC, class_constraint,
-                                  m_compileDesign, pscope);
+  m_helper.compileConstraintBlock(m_class, fC, class_constraint, pscope);
   return true;
 }
 
@@ -845,11 +839,10 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         m_compileDesign, true, nullptr, false,
-                                         false);
+                                         true, nullptr, false, false);
   } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, m_compileDesign, true,
-                                         nullptr, false, false);
+    m_helper.compileParameterDeclaration(m_class, fC, id, true, nullptr, false,
+                                         false);
   }
   NodeId data_type_or_implicit = fC->Child(id);
   NodeId list_of_param_assignments = fC->Sibling(data_type_or_implicit);
@@ -890,11 +883,10 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         m_compileDesign, false, nullptr, false,
-                                         false);
-  } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, m_compileDesign,
                                          false, nullptr, false, false);
+  } else {
+    m_helper.compileParameterDeclaration(m_class, fC, id, false, nullptr, false,
+                                         false);
   }
 
   NodeId data_type_or_implicit = fC->Child(id);
@@ -995,16 +987,16 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
               VObjectType::paType_assignment_list ||
           fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
         // Type param
-        m_helper.compileParameterDeclaration(
-            m_class, fC, list_of_type_assignments, m_compileDesign, false,
-            nullptr, false, false);
+        m_helper.compileParameterDeclaration(m_class, fC,
+                                             list_of_type_assignments, false,
+                                             nullptr, false, false);
       } else if (fC->Type(type) == VObjectType::TYPE) {
         // Handled in compile_parameter_declaration_
       } else {
         // Regular param
-        m_helper.compileParameterDeclaration(
-            m_class, fC, parameter_port_declaration, m_compileDesign, false,
-            nullptr, false, false);
+        m_helper.compileParameterDeclaration(m_class, fC,
+                                             parameter_port_declaration, false,
+                                             nullptr, false, false);
       }
       parameter_port_declaration = fC->Sibling(parameter_port_declaration);
     }

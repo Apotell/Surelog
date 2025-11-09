@@ -61,7 +61,7 @@ class CompileProgram final : public CompileToolbox {
         m_compileDesign(compileDesign),
         m_program(program),
         m_design(design),
-        m_helper(session) {}
+        m_helper(session, compileDesign) {}
 
   bool compile();
 

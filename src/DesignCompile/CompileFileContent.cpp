@@ -39,6 +39,10 @@
 #include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 
+// UHDM
+#include <uhdm/expr.h>
+#include <uhdm/variable.h>
+
 namespace SURELOG {
 
 int32_t FunctorCompileFileContentDecl::operator()() const {
@@ -93,10 +97,8 @@ bool CompileFileContent::collectObjects_() {
     switch (type) {
       case VObjectType::paPackage_import_item: {
         if (m_declOnly == false) {
-          m_helper.importPackage(m_fileContent, m_design, fC, id,
-                                 m_compileDesign);
-          m_helper.compileImportDeclaration(m_fileContent, fC, id,
-                                            m_compileDesign);
+          m_helper.importPackage(m_fileContent, m_design, fC, id);
+          m_helper.compileImportDeclaration(m_fileContent, fC, id);
           FileCNodeId fnid(fC, id);
           m_fileContent->addObject(type, fnid);
         }
@@ -104,24 +106,21 @@ bool CompileFileContent::collectObjects_() {
       }
       case VObjectType::paFunction_declaration: {
         if (m_declOnly == false) {
-          m_helper.compileFunction(m_fileContent, fC, id, m_compileDesign,
-                                   nullptr, true);
-          m_helper.compileFunction(m_fileContent, fC, id, m_compileDesign,
-                                   nullptr, true);
+          m_helper.compileFunction(m_fileContent, fC, id, nullptr, true);
+          m_helper.compileFunction(m_fileContent, fC, id, nullptr, true);
         }
         break;
       }
       case VObjectType::paData_declaration: {
         if (m_declOnly) {
           m_helper.compileDataDeclaration(m_fileContent, fC, id, false,
-                                          m_compileDesign, nullptr);
+                                          nullptr);
         }
         break;
       }
       case VObjectType::paBind_directive: {
         if (!m_declOnly) {
-          m_helper.compileBindStmt(m_fileContent, fC, id, m_compileDesign,
-                                   nullptr);
+          m_helper.compileBindStmt(m_fileContent, fC, id, nullptr);
         }
         break;
       }
@@ -132,12 +131,11 @@ bool CompileFileContent::collectObjects_() {
                   VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_fileContent, fC, list_of_type_assignments, m_compileDesign,
-                false, nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC,
+                                                 list_of_type_assignments,
+                                                 false, nullptr, false, false);
           } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id,
-                                                 m_compileDesign, false,
+            m_helper.compileParameterDeclaration(m_fileContent, fC, id, false,
                                                  nullptr, false, false);
           }
         }
@@ -145,8 +143,7 @@ bool CompileFileContent::collectObjects_() {
       }
       case VObjectType::paLet_declaration: {
         if (m_declOnly) {
-          m_helper.compileLetDeclaration(m_fileContent, fC, id,
-                                         m_compileDesign);
+          m_helper.compileLetDeclaration(m_fileContent, fC, id);
         }
         break;
       }
@@ -157,13 +154,12 @@ bool CompileFileContent::collectObjects_() {
                   VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_fileContent, fC, list_of_type_assignments, m_compileDesign,
-                true, nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC,
+                                                 list_of_type_assignments, true,
+                                                 nullptr, false, false);
           } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id,
-                                                 m_compileDesign, true, nullptr,
-                                                 false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC, id, true,
+                                                 nullptr, false, false);
           }
         }
         break;
@@ -186,10 +182,9 @@ bool CompileFileContent::collectObjects_() {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();
       // Assignment to a default value
-      uhdm::Expr* exp = m_helper.exprFromAssign(
-          m_fileContent, m_compileDesign, fC, id, sig->getUnpackedDimension());
-      if (uhdm::Any* obj =
-              m_helper.compileSignals(m_fileContent, m_compileDesign, sig)) {
+      uhdm::Expr* exp = m_helper.exprFromAssign(m_fileContent, fC, id,
+                                                sig->getUnpackedDimension());
+      if (uhdm::Any* obj = m_helper.compileSignals(m_fileContent, sig)) {
         fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
         obj->setParent(udesign);
         if (exp != nullptr) {

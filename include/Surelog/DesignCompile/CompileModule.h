@@ -43,11 +43,11 @@ class SymbolTable;
 class ValuedComponentI;
 
 struct FunctorCompileModule {
-  FunctorCompileModule(Session* session, CompileDesign* compiler,
+  FunctorCompileModule(Session* session, CompileDesign* compileDesign,
                        ModuleDefinition* mdl, Design* design,
                        ValuedComponentI* instance = nullptr)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_module(mdl),
         m_design(design),
         m_instance(instance) {}
@@ -64,14 +64,14 @@ struct FunctorCompileModule {
 
 class CompileModule final {
  public:
-  CompileModule(Session* session, CompileDesign* compiler,
+  CompileModule(Session* session, CompileDesign* compileDesign,
                 ModuleDefinition* mdl, Design* design,
                 ValuedComponentI* instance = nullptr)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_module(mdl),
         m_design(design),
-        m_helper(session),
+        m_helper(session, compileDesign),
         m_instance(instance) {}
   CompileModule(const CompileModule&) = delete;
 

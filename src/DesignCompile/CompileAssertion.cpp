@@ -42,15 +42,13 @@
 namespace SURELOG {
 
 bool CompileHelper::compileAssertionItem(DesignComponent* component,
-                                         const FileContent* fC, NodeId nodeId,
-                                         CompileDesign* compileDesign) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+                                         const FileContent* fC, NodeId nodeId) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   NodeId item = fC->Child(nodeId);
   if (fC->Type(item) == VObjectType::paConcurrent_assertion_item) {
     NodeId Concurrent_assertion_statement = fC->Child(item);
-    if (uhdm::AnyCollection* stmts =
-            compileStmt(component, fC, Concurrent_assertion_statement,
-                        compileDesign, nullptr)) {
+    if (uhdm::AnyCollection* stmts = compileStmt(
+            component, fC, Concurrent_assertion_statement, nullptr)) {
       uhdm::AnyCollection* assertions = component->getAssertions();
       if (assertions == nullptr) {
         component->setAssertions(s.makeCollection<uhdm::Any>());
@@ -110,9 +108,8 @@ uhdm::PropertyInst* createPropertyInst(DesignComponent* component,
 
 uhdm::Any* CompileHelper::compileConcurrentAssertion(
     DesignComponent* component, const FileContent* fC, NodeId the_stmt,
-    CompileDesign* compileDesign, uhdm::Any* pstmt,
-    SURELOG::ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   NodeId Property_spec = fC->Child(the_stmt);
 
   NodeId Action_block = fC->Sibling(Property_spec);
@@ -129,13 +126,13 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
     }
     if (if_stmt_id) {
       if (uhdm::AnyCollection* if_stmts =
-              compileStmt(component, fC, if_stmt_id, compileDesign, pstmt)) {
+              compileStmt(component, fC, if_stmt_id, pstmt)) {
         if_stmt = (*if_stmts)[0];
       }
     }
     if (else_stmt_id) {
       if (uhdm::AnyCollection* else_stmts =
-              compileStmt(component, fC, else_stmt_id, compileDesign, pstmt)) {
+              compileStmt(component, fC, else_stmt_id, pstmt)) {
         else_stmt = (*else_stmts)[0];
       }
     }
@@ -146,9 +143,8 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
     case VObjectType::paAssert_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
-      if (uhdm::Any* property_expr =
-              compileExpression(component, fC, Property_expr, compileDesign,
-                                prop_spec, instance)) {
+      if (uhdm::Any* property_expr = compileExpression(
+              component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -171,15 +167,13 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
       if (fC->Type(Property_expr) == VObjectType::paClocking_event) {
         if (uhdm::Expr* clocking_event = (uhdm::Expr*)compileExpression(
-                component, fC, Property_expr, compileDesign, prop_spec,
-                instance)) {
+                component, fC, Property_expr, prop_spec, instance)) {
           prop_spec->setClockingEvent(clocking_event);
         }
         Property_expr = fC->Sibling(Property_expr);
       }
-      if (uhdm::Any* property_expr =
-              compileExpression(component, fC, Property_expr, compileDesign,
-                                prop_spec, instance)) {
+      if (uhdm::Any* property_expr = compileExpression(
+              component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -200,9 +194,8 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
     case VObjectType::paCover_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
-      if (uhdm::Any* property_expr =
-              compileExpression(component, fC, Property_expr, compileDesign,
-                                prop_spec, instance)) {
+      if (uhdm::Any* property_expr = compileExpression(
+              component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -220,9 +213,8 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
     case VObjectType::paCover_sequence_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
-      if (uhdm::Any* property_expr =
-              compileExpression(component, fC, Property_expr, compileDesign,
-                                prop_spec, instance)) {
+      if (uhdm::Any* property_expr = compileExpression(
+              component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -241,9 +233,8 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
     case VObjectType::paRestrict_property_statement: {
       NodeId Property_expr = fC->Child(Property_spec);
       uhdm::PropertySpec* prop_spec = s.make<uhdm::PropertySpec>();
-      if (uhdm::Any* property_expr =
-              compileExpression(component, fC, Property_expr, compileDesign,
-                                prop_spec, instance)) {
+      if (uhdm::Any* property_expr = compileExpression(
+              component, fC, Property_expr, prop_spec, instance)) {
         property_expr = createPropertyInst(component, property_expr, s);
         prop_spec->setPropertyExpr(property_expr);
       }
@@ -267,8 +258,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
 
 uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
     DesignComponent* component, const FileContent* fC, NodeId the_stmt,
-    CompileDesign* compileDesign, uhdm::Any* pstmt,
-    SURELOG::ValuedComponentI* instance) {
+    uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance) {
   /*
     n<o> u<277> t<StringConst> p<278> l<25>
     n<> u<278> t<Primary_literal> p<279> c<277> l<25>
@@ -284,7 +274,7 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
     n<> u<288> t<Action_block> p<289> c<287> l<25>
     n<> u<289> t<Simple_immediate_assert_statement> p<290> c<286> l<25>
   */
-  uhdm::Serializer& s = compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
 
   uhdm::Any* stmt = nullptr;
   switch (fC->Type(the_stmt)) {
@@ -318,7 +308,7 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
   uhdm::Any* if_stmt = nullptr;
   if (if_stmt_id) {
     if (uhdm::AnyCollection* const if_stmts =
-            compileStmt(component, fC, if_stmt_id, compileDesign, stmt)) {
+            compileStmt(component, fC, if_stmt_id, stmt)) {
       if_stmt = (*if_stmts)[0];
     }
   }
@@ -326,13 +316,13 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
   uhdm::Any* else_stmt = nullptr;
   if (else_stmt_id) {
     if (uhdm::AnyCollection* const else_stmts =
-            compileStmt(component, fC, else_stmt_id, compileDesign, stmt)) {
+            compileStmt(component, fC, else_stmt_id, stmt)) {
       else_stmt = (*else_stmts)[0];
     }
   }
 
-  uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      stmt, instance);
+  uhdm::Any* expr =
+      compileExpression(component, fC, Expression, stmt, instance);
 
   switch (fC->Type(the_stmt)) {
     case VObjectType::paSimple_immediate_assert_statement: {
@@ -364,9 +354,8 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
 
 uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
     DesignComponent* component, const FileContent* fC, NodeId the_stmt,
-    CompileDesign* compileDesign, uhdm::Any* pstmt,
-    SURELOG::ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
 
   uhdm::Any* stmt = nullptr;
   switch (fC->Type(the_stmt)) {
@@ -397,16 +386,14 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
     NodeId else_keyword = fC->Sibling(if_stmt_id);
     if (else_keyword) else_stmt_id = fC->Sibling(else_keyword);
   }
-  uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      stmt, instance);
+  uhdm::Any* expr =
+      compileExpression(component, fC, Expression, stmt, instance);
   uhdm::AnyCollection* if_stmts = nullptr;
-  if (if_stmt_id)
-    if_stmts = compileStmt(component, fC, if_stmt_id, compileDesign, stmt);
+  if (if_stmt_id) if_stmts = compileStmt(component, fC, if_stmt_id, stmt);
   uhdm::Any* if_stmt = nullptr;
   if (if_stmts) if_stmt = if_stmts->front();
   uhdm::AnyCollection* else_stmts = nullptr;
-  if (else_stmt_id)
-    else_stmts = compileStmt(component, fC, else_stmt_id, compileDesign, stmt);
+  if (else_stmt_id) else_stmts = compileStmt(component, fC, else_stmt_id, stmt);
   uhdm::Any* else_stmt = nullptr;
   if (else_stmts) else_stmt = else_stmts->front();
   switch (fC->Type(the_stmt)) {
@@ -450,9 +437,8 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
 
 uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    CompileDesign* compileDesign, uhdm::Any* pstmt,
-    ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    uhdm::Any* pstmt, ValuedComponentI* instance) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::PropertyDecl* result = s.make<uhdm::PropertyDecl>();
   fC->populateCoreMembers(nodeId, nodeId, result);
   nodeId = fC->Child(nodeId);
@@ -471,8 +457,8 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       NodeId Data_type_or_implicit = fC->Child(SeqFormatType_Data);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
       if (Data_type) {
-        tps = compileTypespec(component, fC, Data_type, InvalidNodeId,
-                              compileDesign, pstmt, instance, false);
+        tps = compileTypespec(component, fC, Data_type, InvalidNodeId, pstmt,
+                              instance, false);
       } else {
         Data_type = last_Data_type;
       }
@@ -502,9 +488,8 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
     while (fC->Type(Property_spec) ==
            VObjectType::paAssertion_variable_declaration) {
       NodeId Assertion_variable_declaration = Property_spec;
-      uhdm::AnyCollection* varst =
-          compileDataDeclaration(component, fC, Assertion_variable_declaration,
-                                 compileDesign, pstmt, instance);
+      uhdm::AnyCollection* varst = compileDataDeclaration(
+          component, fC, Assertion_variable_declaration, pstmt, instance);
       if (varst) {
         for (auto v : *varst) {
           if (uhdm::Assignment* vast = any_cast<uhdm::Assignment*>(v)) {
@@ -527,15 +512,14 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
   prop_spec->setParent(result);
   if (Clocking_event) {
     if (uhdm::Expr* clocking_event = (uhdm::Expr*)compileExpression(
-            component, fC, Clocking_event, compileDesign, prop_spec,
-            instance)) {
+            component, fC, Clocking_event, prop_spec, instance)) {
       prop_spec->setClockingEvent(clocking_event);
       clocking_event->setParent(prop_spec);
     }
   }
   result->setPropertySpec(prop_spec);
-  if (uhdm::Any* property_expr = compileExpression(
-          component, fC, Property_expr, compileDesign, prop_spec, instance)) {
+  if (uhdm::Any* property_expr = compileExpression(component, fC, Property_expr,
+                                                   prop_spec, instance)) {
     property_expr = createPropertyInst(component, property_expr, s);
     prop_spec->setPropertyExpr(property_expr);
   }
@@ -545,9 +529,8 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
 
 uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    CompileDesign* compileDesign, uhdm::Any* pstmt,
-    ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+    uhdm::Any* pstmt, ValuedComponentI* instance) {
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::SequenceDecl* result = s.make<uhdm::SequenceDecl>();
   fC->populateCoreMembers(nodeId, nodeId, result);
   nodeId = fC->Child(nodeId);
@@ -569,8 +552,8 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
       ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
       if (uhdm::Typespec* tps =
-              compileTypespec(component, fC, Data_type, InvalidNodeId,
-                              compileDesign, pstmt, instance, false)) {
+              compileTypespec(component, fC, Data_type, InvalidNodeId, pstmt,
+                              instance, false)) {
         uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
         rtps->setParent(prop_port_decl);
         rtps->setActual(tps);
@@ -588,21 +571,21 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
     mexpr->setParent(result);
     result->setExpr(mexpr);
     while (fC->Type(lookup) == VObjectType::paClocking_event) {
-      uhdm::Expr* clock_event = any_cast<uhdm::Expr*>(compileExpression(
-          component, fC, lookup, compileDesign, result, instance));
+      uhdm::Expr* clock_event = any_cast<uhdm::Expr*>(
+          compileExpression(component, fC, lookup, result, instance));
       uhdm::ClockedSeq* seq = s.make<uhdm::ClockedSeq>();
       seq->setClockingEvent(clock_event);
       seq->setParent(mexpr);
       fC->populateCoreMembers(lookup, lookup, seq);
       lookup = fC->Sibling(lookup);
     }
-    if (uhdm::Any* seq_expr = compileExpression(
-            component, fC, lookup, compileDesign, result, instance)) {
+    if (uhdm::Any* seq_expr =
+            compileExpression(component, fC, lookup, result, instance)) {
       mexpr->getClockedSeqs(true)->back()->setSequenceExpr(seq_expr);
     }
   } else {
-    if (uhdm::Any* seq_expr = compileExpression(
-            component, fC, Sequence_expr, compileDesign, result, instance)) {
+    if (uhdm::Any* seq_expr =
+            compileExpression(component, fC, Sequence_expr, result, instance)) {
       result->setExpr(seq_expr);
     }
   }

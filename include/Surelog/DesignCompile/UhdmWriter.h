@@ -66,7 +66,7 @@ class UhdmWriter final {
   using ModuleInstanceMap = std::map<ModuleInstance*, uhdm::Module*>;
   using InstanceDefinitionMap = std::map<std::string_view, uhdm::Instance*>;
 
-  UhdmWriter(Session* session, CompileDesign* compiler, Design* design);
+  UhdmWriter(Session* session, CompileDesign* compilerDesign, Design* design);
 
   bool write(PathId uhdmFileId);
 

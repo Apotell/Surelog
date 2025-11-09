@@ -26,6 +26,7 @@
 #pragma once
 
 // UHDM
+#include <uhdm/containers.h>
 #include <uhdm/uhdm_forward_decl.h>
 
 #include <algorithm>
@@ -64,68 +65,66 @@ class PortNetHolder {
     return false;
   }
 
-  std::vector<uhdm::ContAssign*>* getContAssigns() const {
-    return m_contAssigns;
+  uhdm::ContAssignCollection* getContAssigns() const { return m_contAssigns; }
+
+  void setContAssigns(uhdm::ContAssignCollection* contAssigns) {
+    m_contAssigns = contAssigns;
   }
 
-  void setContAssigns(std::vector<uhdm::ContAssign*>* cont_assigns) {
-    m_contAssigns = cont_assigns;
-  }
-
-  std::vector<uhdm::Process*>* getProcesses() const { return m_processes; }
-  void setProcesses(std::vector<uhdm::Process*>* processes) {
+  uhdm::ProcessCollection* getProcesses() const { return m_processes; }
+  void setProcesses(uhdm::ProcessCollection* processes) {
     m_processes = processes;
   }
 
-  std::vector<uhdm::Any*>* getParameters() const { return m_parameters; }
-  void setParameters(std::vector<uhdm::Any*>* parameters) {
+  uhdm::AnyCollection* getParameters() const { return m_parameters; }
+  void setParameters(uhdm::AnyCollection* parameters) {
     m_parameters = parameters;
   }
 
-  std::vector<uhdm::Any*>* getAssertions() const { return m_assertions; }
-  void setAssertions(std::vector<uhdm::Any*>* assertions) {
+  uhdm::AnyCollection* getAssertions() const { return m_assertions; }
+  void setAssertions(uhdm::AnyCollection* assertions) {
     m_assertions = assertions;
   }
 
-  std::vector<uhdm::ParamAssign*>* getParamAssigns() const {
+  uhdm::ParamAssignCollection* getParamAssigns() const {
     return m_paramAssigns;
   }
-  void setParam_assigns(std::vector<uhdm::ParamAssign*>* param_assigns) {
-    m_paramAssigns = param_assigns;
+  void setParamAssigns(uhdm::ParamAssignCollection* paramAssigns) {
+    m_paramAssigns = paramAssigns;
   }
 
-  std::vector<uhdm::ParamAssign*>* getOrigParam_assigns() const {
+  uhdm::ParamAssignCollection* getOrigParamAssigns() const {
     return m_origParamAssigns;
   }
-  void setOrigParam_assigns(std::vector<uhdm::ParamAssign*>* param_assigns) {
-    m_origParamAssigns = param_assigns;
+  void setOrigParamAssigns(uhdm::ParamAssignCollection* paramAssigns) {
+    m_origParamAssigns = paramAssigns;
   }
 
-  std::vector<uhdm::TaskFunc*>* getTaskFuncs() const { return m_taskFuncs; }
+  uhdm::TaskFuncCollection* getTaskFuncs() const { return m_taskFuncs; }
 
-  void setTaskFuncs(std::vector<uhdm::TaskFunc*>* taskFuncs) {
+  void setTaskFuncs(uhdm::TaskFuncCollection* taskFuncs) {
     m_taskFuncs = taskFuncs;
   }
 
-  std::vector<uhdm::TaskFuncDecl*>* getTaskFuncDecls() const {
+  uhdm::TaskFuncDeclCollection* getTaskFuncDecls() const {
     return m_taskFuncDecls;
   }
 
-  void setTaskFuncDecls(std::vector<uhdm::TaskFuncDecl*>* taskFuncDecls) {
+  void setTaskFuncDecls(uhdm::TaskFuncDeclCollection* taskFuncDecls) {
     m_taskFuncDecls = taskFuncDecls;
   }
 
  protected:
   std::vector<Signal*> m_ports;
   std::vector<Signal*> m_signals;
-  std::vector<uhdm::ContAssign*>* m_contAssigns = nullptr;
-  std::vector<uhdm::Process*>* m_processes = nullptr;
-  std::vector<uhdm::Any*>* m_parameters = nullptr;
-  std::vector<uhdm::ParamAssign*>* m_paramAssigns = nullptr;
-  std::vector<uhdm::ParamAssign*>* m_origParamAssigns = nullptr;
-  std::vector<uhdm::TaskFunc*>* m_taskFuncs = nullptr;
-  std::vector<uhdm::TaskFuncDecl*>* m_taskFuncDecls = nullptr;
-  std::vector<uhdm::Any*>* m_assertions = nullptr;
+  uhdm::ContAssignCollection* m_contAssigns = nullptr;
+  uhdm::ProcessCollection* m_processes = nullptr;
+  uhdm::AnyCollection* m_parameters = nullptr;
+  uhdm::ParamAssignCollection* m_paramAssigns = nullptr;
+  uhdm::ParamAssignCollection* m_origParamAssigns = nullptr;
+  uhdm::TaskFuncCollection* m_taskFuncs = nullptr;
+  uhdm::TaskFuncDeclCollection* m_taskFuncDecls = nullptr;
+  uhdm::AnyCollection* m_assertions = nullptr;
 };
 
 }  // namespace SURELOG

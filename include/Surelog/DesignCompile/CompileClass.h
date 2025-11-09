@@ -39,10 +39,10 @@ namespace SURELOG {
 class Session;
 
 struct FunctorCompileClass final {
-  FunctorCompileClass(Session* session, CompileDesign* compiler,
+  FunctorCompileClass(Session* session, CompileDesign* compileDesign,
                       ClassDefinition* classDef, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_class(classDef),
         m_design(design) {}
   FunctorCompileClass(const FunctorCompileClass&) = delete;
@@ -57,13 +57,13 @@ struct FunctorCompileClass final {
 
 class CompileClass final {
  public:
-  CompileClass(Session* session, CompileDesign* compiler,
+  CompileClass(Session* session, CompileDesign* compileDesign,
                ClassDefinition* classDef, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_class(classDef),
         m_design(design),
-        m_helper(session),
+        m_helper(session, compileDesign),
         m_builtins({"constraint_mode", "randomize", "rand_mode", "srandom"}) {}
   CompileClass(const CompileClass&) = delete;
 

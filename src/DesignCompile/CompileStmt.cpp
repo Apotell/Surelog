@@ -1719,27 +1719,23 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
          (func_type == VObjectType::IMPORT) ||
          (func_type == VObjectType::EXPORT) ||
          (func_type == VObjectType::paContext_keyword) ||
-         (func_type == VObjectType::STRING_CONST)) {
+         (func_type == VObjectType::STRING_LITERAL)) {
     if (func_type == VObjectType::paDpi_import_export) {
       func_decl = fC->Child(func_decl);
       func_type = fC->Type(func_decl);
-    }
-    if (func_type == VObjectType::paPure_keyword) {
+    } else if (func_type == VObjectType::paPure_keyword) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setDPIPure(true);
-    }
-    if (func_type == VObjectType::EXPORT) {
+    } else if (func_type == VObjectType::EXPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAccessType(vpiDPIExportAcc);
-    }
-    if (func_type == VObjectType::IMPORT) {
+    } else if (func_type == VObjectType::IMPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAccessType(vpiDPIImportAcc);
-    }
-    if (func_type == VObjectType::STRING_LITERAL) {
+    } else if (func_type == VObjectType::STRING_LITERAL) {
       std::string_view ctype = StringUtils::unquoted(fC->SymName(func_decl));
       if (ctype == "DPI-C") {
         if (tf) tf->setDPICStr(vpiDPIC);
@@ -1748,44 +1744,36 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
       }
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
-    }
-    if (func_type == VObjectType::paContext_keyword) {
+    } else if (func_type == VObjectType::paContext_keyword) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setDPIContext(true);
-    }
-    if (func_type == VObjectType::paMethodQualifier_Virtual) {
+    } else if (func_type == VObjectType::paMethodQualifier_Virtual) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setVirtual(true);
-    }
-    if (func_type == VObjectType::paLifetime_Automatic) {
+    } else if (func_type == VObjectType::paLifetime_Automatic) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAutomatic(true);
-    }
-    if (func_type == VObjectType::paLifetime_Static) {
+    } else if (func_type == VObjectType::paLifetime_Static) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
-    }
-    if (func_type == VObjectType::paClassItemQualifier_Protected) {
+    } else if (func_type == VObjectType::paClassItemQualifier_Protected) {
       is_protected = true;
       if (tf) tf->setVisibility(vpiProtectedVis);
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
-    }
-    if (func_type == VObjectType::paPure_virtual_qualifier) {
+    } else if (func_type == VObjectType::paPure_virtual_qualifier) {
       if (tf) tf->setDPIPure(true);
       if (tf) tf->setVirtual(true);
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
-    }
-    if (func_type == VObjectType::paExtern_qualifier) {
+    } else if (func_type == VObjectType::paExtern_qualifier) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAccessType(vpiExternAcc);
-    }
-    if (func_type == VObjectType::paMethodQualifier_ClassItem) {
+    } else if (func_type == VObjectType::paMethodQualifier_ClassItem) {
       NodeId qualifier = fC->Child(func_decl);
       VObjectType type = fC->Type(qualifier);
       if (type == VObjectType::paClassItemQualifier_Static) {
@@ -1801,6 +1789,8 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
       }
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
+    } else {
+      break;
     }
   }
   if ((!is_local) && (!is_protected)) {

@@ -255,7 +255,7 @@ const uhdm::Typespec* ObjectBinder::propagateParamAssigns(
               any_cast<uhdm::ClassTypespec>(target)) {
         CloneContext cc(&m_serializer);
         uhdm::ClassTypespec* const ct =
-            static_cast<uhdm::ClassTypespec*>(uhdm::clone_tree(actual, &cc));
+            uhdm::clone_tree<uhdm::ClassTypespec>(actual, &cc);
         ct->setParent(const_cast<uhdm::Any*>(actual->getParent()));
         ct->setParamAssigns(sourcePAs);
 
@@ -287,8 +287,15 @@ const uhdm::Typespec* ObjectBinder::propagateParamAssigns(
             // Reorder the PA in typespec to match the definition
             sourcePAs->clear();
             for (uhdm::ParamAssign* pa : *definitionPAs) {
-              sourcePAs->emplace_back(
-                  namedTypespecPAs[pa->getLhs()->getName()]);
+              named_param_assings_t::const_iterator it =
+                  namedDefinitionPAs.find(pa->getLhs()->getName());
+              if (it == namedDefinitionPAs.cend()) {
+                uhdm::ParamAssign* const spa =
+                    uhdm::clone_tree<uhdm::ParamAssign>(pa, &cc);
+                spa->setParent(ct);
+              } else {
+                sourcePAs->emplace_back(it->second);
+              }
             }
           }
         }

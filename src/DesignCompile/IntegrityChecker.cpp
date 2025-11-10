@@ -755,6 +755,8 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* object) const {
 }
 
 void IntegrityChecker::enterAny(const uhdm::Any* object, uint32_t vpiRelation) {
+  if (isBuiltInPackageOnStack(object)) return;
+
   if (const uhdm::Identifier* const identifier =
           any_cast<uhdm::Identifier>(object)) {
     if ((identifier->getStartLine() == 0) || (identifier->getEndLine() == 0) ||

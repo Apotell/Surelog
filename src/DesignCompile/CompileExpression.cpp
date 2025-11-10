@@ -4766,7 +4766,10 @@ uhdm::Any *CompileHelper::compileClog2(
            (fC->Type(sysTaskId) != VObjectType::paComplex_func_call)) {
       sysTaskId = fC->Parent(sysTaskId);
     }
-    if (sysTaskId) fC->populateCoreMembers(sysTaskId, sysTaskId, sys);
+    if (sysTaskId) {
+      fC->populateCoreMembers(sysTaskId, sysTaskId, sys);
+      fC->populateCoreMembers(sysTaskId, sysTaskId, sys->getNameObj());
+    }
     if (uhdm::AnyCollection *arguments = compileTfCallArguments(
             component, fC, List_of_arguments, compileDesign, reduce, sys,
             instance, muteErrors)) {

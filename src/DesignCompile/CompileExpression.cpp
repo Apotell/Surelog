@@ -2704,7 +2704,8 @@ UHDM::any *CompileHelper::compileExpression(
                             result = complexValue;
                           } else {
                             Elaborator elaborator(&s, false, true);
-                            result = elaborator.clone<>(param_ass->Rhs(), param_ass);
+                            result =
+                                elaborator.clone<>(param_ass->Rhs(), param_ass);
                             fC->populateCoreMembers(child, child, result);
                           }
                           typespec *tps = nullptr;

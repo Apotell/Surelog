@@ -5107,7 +5107,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
     Elaborator elaborator(&s, false, false);
     elaborator.uniquifyTypespec(false);
-    elaborator.listenAny(m_uhdmDesign);
+    elaborator.clone<>(m_uhdmDesign, nullptr);
 
     if (m_compileDesign->getCompiler()
             ->getCommandLineParser()

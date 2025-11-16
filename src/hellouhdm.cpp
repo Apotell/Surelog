@@ -72,7 +72,7 @@ int main(int argc, const char** argv) {
     std::cout << "UHDM Elaboration...\n";
     UHDM::Serializer serializer;
     UHDM::Elaborator elaborator(&serializer, true);
-    elaborator.listenAny(UhdmDesignFromVpiHandle(the_design));
+    elaborator.clone<>(UhdmDesignFromVpiHandle(the_design), nullptr);
   }
 
   // Browse the UHDM Data Model using the IEEE VPI API.

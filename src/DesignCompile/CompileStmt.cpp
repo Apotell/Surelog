@@ -299,6 +299,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       if (labelId) {
         label = fC->SymName(labelId);
         begin->setName(label);
+        fC->populateCoreMembers(labelId, labelId, begin->getNameObj());
       }
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
@@ -381,6 +382,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       if (labelId) {
         label = fC->SymName(labelId);
         fork->setName(label);
+        fC->populateCoreMembers(labelId, labelId, fork->getNameObj());
       }
       if (endLabelId) {
         endLabel = fC->SymName(endLabelId);
@@ -1838,8 +1840,9 @@ bool CompileHelper::compileTask(DesignComponent* component,
     // make placeholder first
     task = s.make<uhdm::Task>();
     task->setName(name);
-    task->setParent(pscope);
     fC->populateCoreMembers(id, id, task);
+    task->setParent(pscope);
+    fC->populateCoreMembers(task_name, task_name, task->getNameObj());
     task_funcs->emplace_back(task);
     return true;
   }
@@ -1967,6 +1970,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
   }
 
   func->setName(name);
+  fC->populateCoreMembers(nodeId, nodeId, func->getNameObj());
   func->setIODecls(compileTfPortList(component, func, fC, Tf_port_list));
 
   NodeId Stmt;
@@ -1997,6 +2001,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       uhdm::MethodFuncCall* mcall = s.make<uhdm::MethodFuncCall>();
       mcall->setParent(func);
       mcall->setName("super.new");
+      fC->populateCoreMembers(Stmt, Stmt, mcall->getNameObj());
       NodeId Args = fC->Sibling(Stmt);
       if (fC->Type(Args) == VObjectType::paArgument_list) {
         if (uhdm::AnyCollection* arguments = compileTfCallArguments(
@@ -2034,6 +2039,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
         mcall->setParent(begin);
         mcall->setName("super.new");
         NodeId Args = fC->Sibling(Stmt);
+        fC->populateCoreMembers(Stmt, Stmt, mcall->getNameObj());
         if (fC->Type(Args) == VObjectType::paArgument_list) {
           if (uhdm::AnyCollection* arguments = compileTfCallArguments(
                   component, fC, Args, mcall, nullptr, false)) {
@@ -2099,6 +2105,14 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       Function_body_declaration = func_decl;
     else
       Function_body_declaration = fC->Child(func_decl);
+
+    if ((fC->Type(Function_body_declaration) ==
+         VObjectType::paLifetime_Automatic) ||
+        (fC->Type(Function_body_declaration) ==
+         VObjectType::paLifetime_Static)) {
+      Function_body_declaration = fC->Sibling(Function_body_declaration);
+    }
+
     NodeId Function_data_type_or_implicit =
         fC->Child(Function_body_declaration);
     nameId = fC->Sibling(Function_data_type_or_implicit);
@@ -2126,6 +2140,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     // make placeholder first
     func = s.make<uhdm::Function>();
     func->setName(name);
+    if (nameId) fC->populateCoreMembers(nameId, nameId, func->getNameObj());
     if (className.empty()) {
       func->setParent(pscope);
     } else if (ClassDefinition* const cd =
@@ -2465,10 +2480,12 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   fC->populateCoreMembers(id, id, task);
 
   NodeId Tf_port_list;
+  NodeId identifierId = task_name;
   if (fC->Type(task_name) == VObjectType::STRING_CONST) {
     Tf_port_list = fC->Sibling(task_name);
   } else if (fC->Type(task_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(task_name);
+    identifierId = fC->Child(Class_type);
     NodeId suffixname = fC->Sibling(task_name);
     taskName.assign(fC->SymName(fC->Child(Class_type)))
         .append("::")
@@ -2477,6 +2494,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   }
 
   task->setName(taskName);
+  fC->populateCoreMembers(identifierId, identifierId, task->getNameObj());
   task->setParent(scope->getUhdmModel());
 
   if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
@@ -2550,6 +2568,9 @@ Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
 
   func->setName(funcName);
   func->setParent(scope->getUhdmModel());
+  if (const NodeId identifierId = function_name ? function_name : id) {
+    fC->populateCoreMembers(identifierId, identifierId, func->getNameObj());
+  }
   fC->populateCoreMembers(id, id, func);
 
   uhdm::Typespec* ts =
@@ -2913,6 +2934,7 @@ uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(
   func_call->setParent(pexpr);
   func_call->setName("randomize");
   fC->populateCoreMembers(id, id, func_call);
+  fC->populateCoreMembers(id, id, func_call->getNameObj());
 
   NodeId Identifier_list = id;
   if (fC->Type(id) == VObjectType::paRandomize_call) {
@@ -3023,6 +3045,7 @@ uhdm::Any* CompileHelper::compileCheckerInstantiation(
   NodeId InstanceName = fC->Child(Name_of_instance);
   const std::string_view InstName = fC->SymName(InstanceName);
   result->setName(InstName);
+  fC->populateCoreMembers(InstanceName, InstanceName, result->getNameObj());
   result->setParent(pstmt);
   return result;
 }

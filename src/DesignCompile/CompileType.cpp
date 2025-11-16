@@ -1181,6 +1181,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
     }
     case VObjectType::paInterface_identifier: {
       std::string name(fC->SymName(type));
+      NodeId identifierId = type;
       while (type) {
         if (fC->Type(type) == VObjectType::STRING_CONST) {
           name.append(".").append(fC->SymName(type));
@@ -1195,7 +1196,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(DesignComponent* component,
       } else {
         tps = s.make<uhdm::InterfaceTypespec>();
         tps->setName(name);
-        fC->populateCoreMembers(type, type, tps);
+        fC->populateCoreMembers(identifierId, identifierId, tps->getNameObj());
+        fC->populateCoreMembers(identifierId, identifierId, tps);
         if (Modport* const mp = design->getModport(tsName)) {
           tps->setInterface(mp->getInterface());
           tps->setModport(mp->getUhdmModel());

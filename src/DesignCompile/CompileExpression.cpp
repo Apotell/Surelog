@@ -1907,20 +1907,20 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           const std::string_view name = fC->SymName(n);
           if (name == "$bits") {
             NodeId List_of_arguments = fC->Sibling(child);
-            result = compileBits(component, fC, List_of_arguments, pexpr,
+            result = compileBits(component, fC, n, List_of_arguments, pexpr,
                                  instance, false, muteErrors);
           } else if (name == "$size") {
             NodeId List_of_arguments = fC->Sibling(child);
-            result = compileBits(component, fC, List_of_arguments, pexpr,
+            result = compileBits(component, fC, n, List_of_arguments, pexpr,
                                  instance, true, muteErrors);
           } else if (name == "$high" || name == "$low" || name == "$left" ||
                      name == "$right") {
             NodeId List_of_arguments = fC->Sibling(child);
-            result = compileBound(component, fC, List_of_arguments, pexpr,
+            result = compileBound(component, fC, n, List_of_arguments, pexpr,
                                   instance, muteErrors, name);
           } else if (name == "$clog2") {
             NodeId List_of_arguments = fC->Sibling(child);
-            result = compileClog2(component, fC, List_of_arguments, pexpr,
+            result = compileClog2(component, fC, n, List_of_arguments, pexpr,
                                   instance, muteErrors);
           } else if (name == "$typename") {
             NodeId List_of_arguments = fC->Sibling(child);
@@ -1929,6 +1929,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           } else {
             uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
             sys->setName(name);
+            fC->populateCoreMembers(n, n, sys->getNameObj());
             sys->setParent(pexpr);
             NodeId argListNode = fC->Sibling(child);
             if (uhdm::AnyCollection *arguments = compileTfCallArguments(
@@ -2119,6 +2120,8 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               sys->setName("$unsigned");
             else
               sys->setName("$signed");
+            fC->populateCoreMembers(Simple_type, Simple_type,
+                                    sys->getNameObj());
             sys->setParent(pexpr);
 
             if (Casting_type) {
@@ -2318,8 +2321,8 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
             if (fC->Type(Constant_expression) == VObjectType::paSimple_type) {
               NodeId Integer_type = fC->Child(Constant_expression);
               NodeId Type = fC->Child(Integer_type);
-              exp_slice = compileBits(component, fC, Type, operation, instance,
-                                      false, muteErrors);
+              exp_slice = compileBits(component, fC, Constant_expression, Type,
+                                      operation, instance, false, muteErrors);
             } else {
               exp_slice = compileExpression(component, fC, Constant_expression,
                                             operation, instance, muteErrors);
@@ -2434,18 +2437,18 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           NodeId List_of_arguments = fC->Sibling(nameId);
           std::string name(fC->SymName(nameId));
           if (name == "bits") {
-            result = compileBits(component, fC, List_of_arguments, pexpr,
-                                 instance, false, muteErrors);
+            result = compileBits(component, fC, nameId, List_of_arguments,
+                                 pexpr, instance, false, muteErrors);
           } else if (name == "size") {
-            result = compileBits(component, fC, List_of_arguments, pexpr,
-                                 instance, true, muteErrors);
+            result = compileBits(component, fC, nameId, List_of_arguments,
+                                 pexpr, instance, true, muteErrors);
           } else if (name == "clog2") {
-            result = compileClog2(component, fC, List_of_arguments, pexpr,
-                                  instance, muteErrors);
+            result = compileClog2(component, fC, nameId, List_of_arguments,
+                                  pexpr, instance, muteErrors);
           } else if (name == "high" || name == "low" || name == "left" ||
                      name == "right") {
-            result = compileBound(component, fC, List_of_arguments, pexpr,
-                                  instance, muteErrors, name);
+            result = compileBound(component, fC, nameId, List_of_arguments,
+                                  pexpr, instance, muteErrors, name);
           } else if (name == "typename") {
             result = compileTypename(component, fC, List_of_arguments, pexpr,
                                      instance);
@@ -2468,6 +2471,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               bool invalidValue = false;
               uhdm::FuncCall *fcall = s.make<uhdm::FuncCall>();
               fcall->setName(name);
+              fC->populateCoreMembers(nameId, nameId, fcall->getNameObj());
               fcall->setParent(pexpr);
               fC->populateCoreMembers(Dollar_keyword, List_of_arguments, fcall);
 
@@ -2485,6 +2489,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           } else {
             uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
             sys->setName("$" + name);
+            fC->populateCoreMembers(nameId, nameId, sys->getNameObj());
             sys->setParent(pexpr);
             if (uhdm::AnyCollection *arguments =
                     compileTfCallArguments(component, fC, List_of_arguments,
@@ -3566,7 +3571,7 @@ const uhdm::Typespec *CompileHelper::getTypespec(DesignComponent *component,
 }
 
 uhdm::Any *CompileHelper::compileBits(DesignComponent *component,
-                                      const FileContent *fC,
+                                      const FileContent *fC, NodeId nameId,
                                       NodeId List_of_arguments,
                                       uhdm::Any *pexpr,
                                       ValuedComponentI *instance, bool sizeMode,
@@ -3585,6 +3590,7 @@ uhdm::Any *CompileHelper::compileBits(DesignComponent *component,
   sys->setParent(pexpr);
   fC->populateCoreMembers(callId, callId, sys);
   sys->setName(sizeMode ? "$size" : "$bits");
+  fC->populateCoreMembers(nameId, nameId, sys->getNameObj());
   if (uhdm::AnyCollection *arguments = compileTfCallArguments(
           component, fC, List_of_arguments, sys, instance, muteErrors)) {
     sys->setArguments(arguments);
@@ -3695,7 +3701,7 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
 }
 
 uhdm::Any *CompileHelper::compileBound(DesignComponent *component,
-                                       const FileContent *fC,
+                                       const FileContent *fC, NodeId nameId,
                                        NodeId List_of_arguments,
                                        uhdm::Any *pexpr,
                                        ValuedComponentI *instance,
@@ -3772,6 +3778,7 @@ uhdm::Any *CompileHelper::compileBound(DesignComponent *component,
   }
   uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
   sys->setName(StrCat("$", name));
+  fC->populateCoreMembers(nameId, nameId, sys->getNameObj());
   sys->setParent(pexpr);
   if (uhdm::AnyCollection *arguments = compileTfCallArguments(
           component, fC, List_of_arguments, sys, instance, muteErrors)) {
@@ -3781,9 +3788,12 @@ uhdm::Any *CompileHelper::compileBound(DesignComponent *component,
   return result;
 }
 
-uhdm::Any *CompileHelper::compileClog2(
-    DesignComponent *component, const FileContent *fC, NodeId List_of_arguments,
-    uhdm::Any *pexpr, ValuedComponentI *instance, bool muteErrors) {
+uhdm::Any *CompileHelper::compileClog2(DesignComponent *component,
+                                       const FileContent *fC, NodeId nameId,
+                                       NodeId List_of_arguments,
+                                       uhdm::Any *pexpr,
+                                       ValuedComponentI *instance,
+                                       bool muteErrors) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   NodeId Expression = List_of_arguments;
@@ -3793,6 +3803,7 @@ uhdm::Any *CompileHelper::compileClog2(
 
   uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
   sys->setName("$clog2");
+  fC->populateCoreMembers(nameId, nameId, sys->getNameObj());
   sys->setParent(pexpr);
   NodeId sysTaskId = List_of_arguments;
   while (sysTaskId && (fC->Type(sysTaskId) != VObjectType::paSystem_task) &&
@@ -3907,25 +3918,26 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
     const std::string_view name = fC->SymName(nameId);
     if (name == "bits") {
       NodeId List_of_arguments = fC->Sibling(nameId);
-      result = compileBits(component, fC, List_of_arguments, pexpr, instance,
-                           false, muteErrors);
+      result = compileBits(component, fC, nameId, List_of_arguments, pexpr,
+                           instance, false, muteErrors);
     } else if (name == "size") {
       NodeId List_of_arguments = fC->Sibling(nameId);
-      result = compileBits(component, fC, List_of_arguments, pexpr, instance,
-                           true, muteErrors);
+      result = compileBits(component, fC, nameId, List_of_arguments, pexpr,
+                           instance, true, muteErrors);
     } else if (name == "clog2") {
       NodeId List_of_arguments = fC->Sibling(nameId);
-      result = compileClog2(component, fC, List_of_arguments, pexpr, instance,
-                            muteErrors);
+      result = compileClog2(component, fC, nameId, List_of_arguments, pexpr,
+                            instance, muteErrors);
     } else if (name == "high" || name == "low" || name == "left" ||
                name == "right") {
-      result = compileBound(component, fC, List_of_arguments, pexpr, instance,
-                            muteErrors, name);
+      result = compileBound(component, fC, nameId, List_of_arguments, pexpr,
+                            instance, muteErrors, name);
     }
     if (result == nullptr) {
       NodeId List_of_arguments = fC->Sibling(nameId);
       uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
       sys->setName(StrCat("$", name));
+      fC->populateCoreMembers(nameId, nameId, sys->getNameObj());
       sys->setParent(pexpr);
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, sys, instance, muteErrors)) {
@@ -3958,6 +3970,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
       fcall->setParent(pexpr);
       fcall->setName(fC->SymName(Method));
       fC->populateCoreMembers(Method, callId, fcall);
+      fC->populateCoreMembers(Method, Method, fcall->getNameObj());
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, fcall, instance, muteErrors)) {
         fcall->setArguments(arguments);
@@ -4026,6 +4039,9 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
         fcall->setArguments(arguments);
       }
       fcall->setName(rootName);
+      if (const NodeId nameId = fC->Parent(Method)) {
+        fC->populateCoreMembers(nameId, nameId, fcall->getNameObj());
+      }
       fC->populateCoreMembers(fC->Parent(Method), fC->Parent(Method), fcall);
       result = fcall;
     } else if (fC->Type(List_of_arguments) == VObjectType::STRING_CONST) {
@@ -4160,6 +4176,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
     }
     if (call != nullptr) {
       call->setName(basename);
+      fC->populateCoreMembers(Class_type_name, Class_scope_name,
+                              call->getNameObj());
       if (uhdm::AnyCollection *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, call, instance, muteErrors)) {
         call->setArguments(arguments);
@@ -4391,6 +4409,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
               fcall->setName(method_name);
               fcall->setParent(path);
               fC->populateCoreMembers(method_name_node, id, fcall);
+              fC->populateCoreMembers(method_name_node, method_name_node,
+                                      fcall->getNameObj());
               NodeId list_of_arguments =
                   fC->Sibling(fC->Child(fC->Child(method_child)));
               NodeId with_conditions_node;
@@ -4480,6 +4500,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
             fcall = s.make<uhdm::MethodFuncCall>();
             const std::string_view methodName = fC->SymName(dotedName);
             fcall->setName(methodName);
+            fC->populateCoreMembers(dotedName, dotedName, fcall->getNameObj());
             fcall->setParent(path);
             fC->populateCoreMembers(dotedName, id, fcall);
             if (uhdm::AnyCollection *arguments =
@@ -4773,7 +4794,7 @@ uhdm::Any *CompileHelper::compilePsOrHierarchicalArrayIdentifier(
           fC->populateCoreMembers(id, id, ro);
           name.append("this.super.");
         }
-
+        fC->populateCoreMembers(id, id, ro);
         if (ro != nullptr) {
           pathElems->emplace_back(ro);
         }

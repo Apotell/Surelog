@@ -24,6 +24,7 @@
 #include "Surelog/Testbench/Program.h"
 
 #include <uhdm/Serializer.h>
+#include <uhdm/identifier.h>
 #include <uhdm/program.h>
 #include <uhdm/program_typespec.h>
 
@@ -43,9 +44,15 @@ Program::Program(Session* session, std::string_view name, Library* library,
   addFileContent(fC, nodeId);
 
   uhdm::Program* const instance = serializer.make<uhdm::Program>();
-  if (!name.empty()) instance->setName(name);
-  if (nodeId && (fC != nullptr))
+  instance->setName(name);
+  if (nodeId && (fC != nullptr)) {
+    if (const NodeId identifierId = fC->sl_collect(
+            nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
+      fC->populateCoreMembers(identifierId, identifierId,
+                              instance->getNameObj());
+    }
     fC->populateCoreMembers(nodeId, nodeId, instance);
+  }
   setUhdmModel(instance);
 
   uhdm::ProgramTypespec* const tps = serializer.make<uhdm::ProgramTypespec>();

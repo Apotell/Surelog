@@ -24,6 +24,7 @@
 #include "Surelog/Design/ModuleDefinition.h"
 
 #include <uhdm/Serializer.h>
+#include <uhdm/identifier.h>
 #include <uhdm/interface.h>
 #include <uhdm/interface_typespec.h>
 #include <uhdm/modport.h>
@@ -62,45 +63,50 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     // case VObjectType::paConfig_declaration:
     case VObjectType::paUdp_declaration: {
       uhdm::UdpDefn* const instance = serializer.make<uhdm::UdpDefn>();
-      if (!name.empty()) instance->setDefName(name);
+      instance->setDefName(name);
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PRIMITIVE),
                               nodeId, instance);
       setUhdmModel(instance);
 
       uhdm::UdpDefnTypespec* const tps =
           serializer.make<uhdm::UdpDefnTypespec>();
-      tps->setName(
-          fC->SymName(fC->sl_collect(nodeId, VObjectType::STRING_CONST)));
+      tps->setName(name);
       tps->setUdpDefn(instance);
       setUhdmTypespecModel(tps);
     } break;
 
     case VObjectType::paInterface_declaration: {
       uhdm::Interface* const instance = serializer.make<uhdm::Interface>();
-      if (!name.empty()) instance->setName(name);
+      instance->setName(name);
+      if (const NodeId nameId =
+              fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
+        fC->populateCoreMembers(nameId, nameId, instance->getNameObj());
+      }
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::INTERFACE),
                               nodeId, instance);
       setUhdmModel(instance);
 
       uhdm::InterfaceTypespec* const tps =
           serializer.make<uhdm::InterfaceTypespec>();
-      tps->setName(fC->SymName(
-          fC->sl_collect(nodeId, VObjectType::paInterface_identifier)));
+      tps->setName(name);
       tps->setInterface(instance);
       setUhdmTypespecModel(tps);
     } break;
 
     default: {
       uhdm::Module* const instance = serializer.make<uhdm::Module>();
-      if (!name.empty()) instance->setName(name);
+      instance->setName(name);
+      if (const NodeId nameId =
+              fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
+        fC->populateCoreMembers(nameId, nameId, instance->getNameObj());
+      }
       fC->populateCoreMembers(
           fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
           instance);
       setUhdmModel(instance);
 
       uhdm::ModuleTypespec* const tps = serializer.make<uhdm::ModuleTypespec>();
-      tps->setName(
-          fC->SymName(fC->sl_collect(nodeId, VObjectType::STRING_CONST)));
+      tps->setName(name);
       tps->setModule(instance);
       setUhdmTypespecModel(tps);
     } break;
@@ -141,6 +147,9 @@ void ModuleDefinition::insertModport(std::string_view modport,
     mp->setName(modport);
     mp->setParent(getUhdmModel());
     mp->setInterface(instance);
+    if (const NodeId nameId = fC->Child(nodeId) ? fC->Child(nodeId) : nodeId) {
+      fC->populateCoreMembers(nameId, nameId, mp->getNameObj());
+    }
     fC->populateCoreMembers(nodeId, nodeId, mp);
     it.first->second.setUhdmModel(mp);
     it.first->second.setInterface(instance);

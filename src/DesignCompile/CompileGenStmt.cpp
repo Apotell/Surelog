@@ -93,6 +93,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
     NodeId blockNameId = fC->Child(fC->Child(stmtId));
     if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
       stmt->setName(fC->SymName(blockNameId));
+      fC->populateCoreMembers(blockNameId, blockNameId, stmt->getNameObj());
     }
   } else if (fC->Type(stmtId) ==
              VObjectType::paIf_generate_construct) {  // If, If-Else stmt
@@ -143,6 +144,8 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt1->setName(fC->SymName(blockNameId));
+          fC->populateCoreMembers(blockNameId, blockNameId,
+                                  stmt1->getNameObj());
         }
 
         NodeId ElseId = fC->Sibling(stmtId);
@@ -166,6 +169,8 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         blockNameId = fC->Child(fC->Child(elseStmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt2->setName(fC->SymName(blockNameId));
+          fC->populateCoreMembers(blockNameId, blockNameId,
+                                  stmt2->getNameObj());
         }
         fC->populateCoreMembers(ifElseId, elseStmtId, genif);
       } else {
@@ -194,6 +199,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt->setName(fC->SymName(blockNameId));
+          fC->populateCoreMembers(blockNameId, blockNameId, stmt->getNameObj());
         }
       }
     }
@@ -247,6 +253,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt->setName(fC->SymName(blockNameId));
+          fC->populateCoreMembers(blockNameId, blockNameId, stmt->getNameObj());
         }
       }
       tmp = fC->Sibling(tmp);
@@ -341,6 +348,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
     NodeId blockNameId = fC->Child(fC->Child(genBlock));
     if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
       stmt->setName(fC->SymName(blockNameId));
+      fC->populateCoreMembers(blockNameId, blockNameId, stmt->getNameObj());
     }
   }
   uhdm::AnyCollection* stmts = s.makeCollection<Any>();

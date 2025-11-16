@@ -525,6 +525,9 @@ bool ErrorDefinition::init() {
   rec(INTEGRITY_CHECK_INVALID_NAME, ERROR, INTG, "Invalid Name %s");
   rec(INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE, ERROR, INTG,
       "Invalid Foreach variable %s");
+  rec(INTEGRITY_CHECK_MISSING_NAME_IDENTIFIER_LOCATION, ERROR, INTG,
+      "Missing location information: %s");
+
   return true;
 }
 

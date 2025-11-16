@@ -360,18 +360,19 @@ class CompileHelper final {
                                      bool muteErrors);
 
   uhdm::Any* compileBits(DesignComponent* component, const FileContent* fC,
-                         NodeId Expression, uhdm::Any* pexpr,
-                         ValuedComponentI* instance, bool sizeMode,
-                         bool muteErrors);
+                         NodeId nameId, NodeId List_of_arguments,
+                         uhdm::Any* pexpr, ValuedComponentI* instance,
+                         bool sizeMode, bool muteErrors);
 
   uhdm::Any* compileClog2(DesignComponent* component, const FileContent* fC,
-                          NodeId Expression, uhdm::Any* pexpr,
-                          ValuedComponentI* instance, bool muteErrors);
+                          NodeId nameId, NodeId List_of_arguments,
+                          uhdm::Any* pexpr, ValuedComponentI* instance,
+                          bool muteErrors);
 
   uhdm::Any* compileBound(DesignComponent* component, const FileContent* fC,
-                          NodeId Expression, uhdm::Any* pexpr,
-                          ValuedComponentI* instance, bool muteErrors,
-                          std::string_view name);
+                          NodeId nameId, NodeId List_of_arguments,
+                          uhdm::Any* pexpr, ValuedComponentI* instance,
+                          bool muteErrors, std::string_view name);
 
   uhdm::Any* compileTypename(DesignComponent* component, const FileContent* fC,
                              NodeId Expression, uhdm::Any* pexpr,

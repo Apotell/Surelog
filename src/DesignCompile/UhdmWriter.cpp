@@ -1795,6 +1795,18 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     errors->printMessages(clp->muteStdout());
   }
 
+  if (NameLocationChecker* const checker =
+          new NameLocationChecker(m_session)) {
+    for (auto h : designs) {
+      const uhdm::Design* const d =
+          static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
+      checker->visit(d);
+    }
+
+    delete checker;
+    errors->printMessages(clp->muteStdout());
+  }
+
   // if (clp->getDebugUhdm() || clp->getCoverUhdm()) {
   //   // Check before restore
   //   Location loc(fileSystem->getCheckerHtmlFile(uhdmFileId, symbols));

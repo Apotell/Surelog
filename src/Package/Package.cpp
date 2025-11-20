@@ -24,6 +24,7 @@
 #include "Surelog/Package/Package.h"
 
 #include <uhdm/Serializer.h>
+#include <uhdm/identifier.h>
 #include <uhdm/package.h>
 
 #include <cstdint>
@@ -47,10 +48,16 @@ Package::Package(Session* session, std::string_view name, Library* library,
   addFileContent(fC, nodeId);
 
   uhdm::Package* const instance = serializer.make<uhdm::Package>();
-  if (!name.empty()) instance->setName(name);
-  if (nodeId && (fC != nullptr))
+  instance->setName(name);
+  if (nodeId && (fC != nullptr)) {
+    if (const NodeId identifierId = fC->sl_collect(
+            nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
+      fC->populateCoreMembers(identifierId, identifierId,
+                              instance->getNameObj());
+    }
     fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PACKAGE),
                             nodeId, instance);
+  }
   setUhdmModel(instance);
 }
 

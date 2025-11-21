@@ -31,6 +31,7 @@
 // uhdm
 #include <uhdm/Utils.h>
 #include <uhdm/uhdm.h>
+#include <SingletonPredictionContext.h>
 
 namespace SURELOG {
 IntegrityChecker::IntegrityChecker(Session* session)
@@ -1700,4 +1701,109 @@ void IntegrityChecker::check(const std::vector<const uhdm::Design*>& objects) {
     check(d);
   }
 }
+
+bool FullNameChecker::hasAtMostOneDoubleColon(std::string_view& s) {
+  size_t first = s.find("::");
+  if (first == std::string_view::npos) return true;  // no "::"
+
+  size_t second = s.find("::", first + 2);
+  return (second == std::string_view::npos);
+}
+
+std::string_view FullNameChecker::getFullName(const uhdm::Any* object) {
+  std::string_view fName = "";
+  uhdm::UhdmType obj_type = (object != nullptr)
+                                ? object->getUhdmType()
+                                : uhdm::UhdmType::UnsupportedStmt;
+  switch (obj_type) {
+    case uhdm::UhdmType::Package: {
+      if (const uhdm::Package* const obj = any_cast<uhdm::Package>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    case uhdm::UhdmType::Module: {
+      if (const uhdm::Module* const obj = any_cast<uhdm::Module>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    case uhdm::UhdmType::ClassDefn: {
+      if (const uhdm::ClassDefn* const obj =
+              any_cast<uhdm::ClassDefn>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    case uhdm::UhdmType::Interface: {
+      if (const uhdm::Interface* const obj =
+              any_cast<uhdm::Interface>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    case uhdm::UhdmType::Program: {
+      if (const uhdm::Program* const obj = any_cast<uhdm::Program>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    case uhdm::UhdmType::Udp: {
+      if (const uhdm::Udp* const obj = any_cast<uhdm::Udp>(object)) {
+        fName = obj->getFullName();
+      }
+    } break;
+    default: {
+    } break;
+  }
+  return fName;
+}
+void FullNameChecker::visitAny(const uhdm::Any* object) {
+  uhdm::UhdmType obj_type = (object != nullptr)
+                                ? object->getUhdmType()
+                                : uhdm::UhdmType::UnsupportedStmt;
+
+  if (obj_type == uhdm::UhdmType::Design || obj_type == uhdm::UhdmType::SourceFile)
+    return;
+
+  if (m_visited.find(object->getParent()) == m_visited.cend()) return;
+
+  std::string_view sName = object->getName();  
+  std::string_view fName = getFullName(object);
+  std::string_view parentFullName = "";
+  std::string sObjType = std::to_string(static_cast<int>(obj_type));
+  const uhdm::BaseClass* actual_parent = object->getParent();
+  if (actual_parent) parentFullName = getFullName(actual_parent);
+  
+  //std::cout << "Uhdm Type: " << uhdm::UhdmName(obj_type) << std::endl;
+  //std::cout << "Object Name: " << sName << std::endl;
+  //std::cout << "Parent Full Name: " << parentFullName << std::endl;
+  //std::cout << "Object Full Name: " << fName << std::endl << std::endl;
+
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+  if (obj_type == uhdm::UhdmType::Package ||
+      obj_type == uhdm::UhdmType::Module ||
+      obj_type == uhdm::UhdmType::Interface ||
+      obj_type == uhdm::UhdmType::ClassDefn ||
+      obj_type == uhdm::UhdmType::Program) {
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(
+                     StrCat("Uhdm Type: ", uhdm::UhdmName(obj_type),
+                            ", Object Name: ", sName, ", Parent Full Name: ",
+                            parentFullName, ", Object Full Name: ", fName)));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_FULL_NAME,
+                             loc);
+  }
+  if (!hasAtMostOneDoubleColon(sName) || !hasAtMostOneDoubleColon(fName)) {
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(
+                     StrCat("id:", object->getUhdmId(),
+                            ", type:", uhdm::UhdmName(object->getUhdmType()),
+                            ", name:", sName, ", full name:", fName)));
+    errorContainer->addError(
+        ErrorDefinition::INTEGRITY_CHECK_INVALID_COLONS_IN_NAME,
+                             loc);
+  }
+  //
+}
+
 }  // namespace SURELOG

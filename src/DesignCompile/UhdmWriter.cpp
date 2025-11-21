@@ -1784,16 +1784,28 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     s.save(uhdmFile);
   }
 
-  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+  //if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+  //  for (auto h : designs) {
+  //    const uhdm::Design* const d =
+  //        static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
+  //    checker->check(d);
+  //  }
+
+  //  delete checker;
+  //  errors->printMessages(clp->muteStdout());
+  //}
+
+    if (FullNameChecker* const checker = new FullNameChecker(m_session)) {
     for (auto h : designs) {
       const uhdm::Design* const d =
           static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
-      checker->check(d);
+      checker->visit(d);
     }
 
     delete checker;
     errors->printMessages(clp->muteStdout());
   }
+
 
   // if (clp->getDebugUhdm() || clp->getCoverUhdm()) {
   //   // Check before restore

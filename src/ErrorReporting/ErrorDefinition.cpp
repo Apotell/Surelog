@@ -525,6 +525,10 @@ bool ErrorDefinition::init() {
   rec(INTEGRITY_CHECK_INVALID_NAME, ERROR, INTG, "Invalid Name %s");
   rec(INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE, ERROR, INTG,
       "Invalid Foreach variable %s");
+  rec(INTEGRITY_CHECK_INVALID_FULL_NAME, ERROR, INTG,
+      "Invalid Full name %s");
+  rec(INTEGRITY_CHECK_INVALID_COLONS_IN_NAME, ERROR, INTG,
+      "Invalid colons in name %s");
   return true;
 }
 

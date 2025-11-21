@@ -521,6 +521,18 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   bool m_reportInvalidForeachVariable = true;
 };
 
+class FullNameChecker final : public uhdm::UhdmVisitor {
+ public:
+  explicit FullNameChecker(Session* session) : m_session(session) {}
+
+  void visitAny(const uhdm::Any* object) final;
+  
+ private:
+  bool hasAtMostOneDoubleColon(std::string_view& s);
+  std::string_view getFullName(const uhdm::Any* object);
+  Session* m_session = nullptr;
+};
+
 };  // namespace SURELOG
 
 #endif /* SURELOG_INTEGRITYCHECKER_H */

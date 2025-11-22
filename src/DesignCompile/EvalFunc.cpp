@@ -30,7 +30,6 @@
 #include "Surelog/SourceCompile/Compiler.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/expr.h>
 #include <uhdm/uhdm.h>

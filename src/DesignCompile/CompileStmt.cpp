@@ -56,7 +56,6 @@
 
 // UHDM
 #include <uhdm/BaseClass.h>
-#include <uhdm/ElaboratorListener.h>
 #include <uhdm/expr.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>

@@ -68,7 +68,7 @@
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/sv_vpi_user.h>
@@ -916,9 +916,8 @@ any *CompileHelper::getValue(std::string_view name, DesignComponent *component,
                     }
                   }
 
-                  ElaboratorContext elaboratorContext(&s, false, true);
-                  result = UHDM::clone_tree(param->Rhs(), &elaboratorContext);
-                  if (result != nullptr) result->VpiParent(param);
+                  Elaborator elaborator(&s, false, true);
+                  result = elaborator.clone(param->Rhs(), param);
                   break;
                 }
               }
@@ -987,8 +986,8 @@ any *CompileHelper::getValue(std::string_view name, DesignComponent *component,
                     }
                   }
 
-                  ElaboratorContext elaboratorContext(&s, false, true);
-                  result = UHDM::clone_tree(param->Rhs(), &elaboratorContext);
+                  Elaborator elaborator(&s, false, true);
+                  result = elaborator.clone(param->Rhs(), nullptr);
                   break;
                 }
               }
@@ -1089,9 +1088,8 @@ any *CompileHelper::getValue(std::string_view name, DesignComponent *component,
                 }
               }
 
-              ElaboratorContext elaboratorContext(&s, false, true);
-              result = UHDM::clone_tree(param->Rhs(), &elaboratorContext);
-              if (result != nullptr) result->VpiParent(param);
+              Elaborator elaborator(&s, false, true);
+              result = elaborator.clone(param->Rhs(), param);
               break;
             }
           }
@@ -2485,10 +2483,8 @@ UHDM::any *CompileHelper::compileExpression(
                       if (param_name == n) {
                         if (substituteAssignedValue(param->Rhs(),
                                                     compileDesign)) {
-                          ElaboratorContext elaboratorContext(&s, false, true);
-                          result = UHDM::clone_tree(param->Rhs(),
-                                                    &elaboratorContext);
-                          result->VpiParent(pexpr);
+                          Elaborator elaborator(&s, false, true);
+                          result = elaborator.clone(param->Rhs(), pexpr);
                           fC->populateCoreMembers(child, child, result);
                         }
                         break;
@@ -2533,9 +2529,8 @@ UHDM::any *CompileHelper::compileExpression(
                       if (param_name == n) {
                         if (substituteAssignedValue(param->Rhs(),
                                                     compileDesign)) {
-                          ElaboratorContext elaboratorContext(&s, false, true);
-                          result = UHDM::clone_tree(param->Rhs(),
-                                                    &elaboratorContext);
+                          Elaborator elaborator(&s, false, true);
+                          result = elaborator.clone(param->Rhs(), nullptr);
                           fC->populateCoreMembers(child, child, result);
                         }
                         break;
@@ -2642,11 +2637,9 @@ UHDM::any *CompileHelper::compileExpression(
                                 uhdmconstant))) {
                             if (substituteAssignedValue(param_ass->Rhs(),
                                                         compileDesign)) {
-                              ElaboratorContext elaboratorContext(&s, false,
-                                                                  true);
-                              result = UHDM::clone_tree(param_ass->Rhs(),
-                                                        &elaboratorContext);
-                              result->VpiParent(param_ass);
+                              Elaborator elaborator(&s, false, true);
+                              result =
+                                  elaborator.clone(param_ass->Rhs(), param_ass);
                               fC->populateCoreMembers(child, child, result);
                               typespec *tps = nullptr;
                               const any *lhs = param_ass->Lhs();
@@ -2710,11 +2703,9 @@ UHDM::any *CompileHelper::compileExpression(
                           if (complexValue) {
                             result = complexValue;
                           } else {
-                            ElaboratorContext elaboratorContext(&s, false,
-                                                                true);
-                            result = UHDM::clone_tree(param_ass->Rhs(),
-                                                      &elaboratorContext);
-                            result->VpiParent(param_ass);
+                            Elaborator elaborator(&s, false, true);
+                            result =
+                                elaborator.clone(param_ass->Rhs(), param_ass);
                             fC->populateCoreMembers(child, child, result);
                           }
                           typespec *tps = nullptr;

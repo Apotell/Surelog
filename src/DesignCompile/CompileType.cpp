@@ -57,7 +57,7 @@
 
 // UHDM
 #include <uhdm/BaseClass.h>
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/expr.h>
@@ -678,9 +678,8 @@ const UHDM::typespec* bindTypespec(std::string_view name,
             if (const ref_typespec* rt = tparam->Typespec()) {
               result = rt->Actual_typespec();
             }
-            ElaboratorContext elaboratorContext(&s, false, true);
-            result = any_cast<typespec*>(
-                UHDM::clone_tree((any*)result, &elaboratorContext));
+            Elaborator elaborator(&s, false, true);
+            result = elaborator.clone(result, nullptr);
           }
         }
         break;
@@ -694,18 +693,16 @@ const UHDM::typespec* bindTypespec(std::string_view name,
               if (const ref_typespec* rt = tparam->Typespec()) {
                 result = rt->Actual_typespec();
               }
-              ElaboratorContext elaboratorContext(&s, false, true);
-              result = any_cast<typespec*>(
-                  UHDM::clone_tree((any*)result, &elaboratorContext));
+              Elaborator elaborator(&s, false, true);
+              result = elaborator.clone(result, nullptr);
             }
           }
         }
         if (const DataType* dt = mod->getDataType(name)) {
           dt = dt->getActual();
           result = dt->getTypespec();
-          ElaboratorContext elaboratorContext(&s, false, true);
-          result = any_cast<typespec*>(
-              UHDM::clone_tree((any*)result, &elaboratorContext));
+          Elaborator elaborator(&s, false, true);
+          result = elaborator.clone(result, nullptr);
         }
       }
     }
@@ -882,9 +879,8 @@ typespec* CompileHelper::compileDatastructureTypespec(
       } else if (const SimpleType* sit = datatype_cast<const SimpleType*>(dt)) {
         result = sit->getTypespec();
         if (parent_tpd && result) {
-          ElaboratorContext elaboratorContext(&s, false, true);
-          if (typespec* new_result = any_cast<typespec*>(
-                  UHDM::clone_tree((any*)result, &elaboratorContext))) {
+          Elaborator elaborator(&s, false, true);
+          if (typespec* new_result = elaborator.clone(result, nullptr)) {
             if (new_result->Typedef_alias() == nullptr) {
               ref_typespec* tsRef = s.MakeRef_typespec();
               tsRef->VpiParent(new_result);
@@ -2146,9 +2142,8 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       bit_typespec* tps = (bit_typespec*)spec;
       ranges = tps->Ranges();
       if (ranges) {
-        ElaboratorContext elaboratorContext(&s, false, true);
-        bit_typespec* res = any_cast<bit_typespec*>(
-            UHDM::clone_tree((any*)spec, &elaboratorContext));
+        Elaborator elaborator(&s, false, true);
+        bit_typespec* res = elaborator.clone(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2158,9 +2153,8 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       logic_typespec* tps = (logic_typespec*)spec;
       ranges = tps->Ranges();
       if (ranges) {
-        ElaboratorContext elaboratorContext(&s, false, true);
-        logic_typespec* res = any_cast<logic_typespec*>(
-            UHDM::clone_tree((any*)spec, &elaboratorContext));
+        Elaborator elaborator(&s, false, true);
+        logic_typespec* res = elaborator.clone(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2170,9 +2164,8 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       array_typespec* tps = (array_typespec*)spec;
       ranges = tps->Ranges();
       if (ranges) {
-        ElaboratorContext elaboratorContext(&s, false, true);
-        array_typespec* res = any_cast<array_typespec*>(
-            UHDM::clone_tree((any*)spec, &elaboratorContext));
+        Elaborator elaborator(&s, false, true);
+        array_typespec* res = elaborator.clone(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2182,9 +2175,8 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       packed_array_typespec* tps = (packed_array_typespec*)spec;
       ranges = tps->Ranges();
       if (ranges) {
-        ElaboratorContext elaboratorContext(&s, false, true);
-        packed_array_typespec* res = any_cast<packed_array_typespec*>(
-            UHDM::clone_tree((any*)spec, &elaboratorContext));
+        Elaborator elaborator(&s, false, true);
+        packed_array_typespec* res = elaborator.clone(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }

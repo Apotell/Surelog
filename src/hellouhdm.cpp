@@ -35,7 +35,7 @@
 #include "Surelog/SourceCompile/SymbolTable.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>
@@ -71,10 +71,8 @@ int main(int argc, const char** argv) {
   if (the_design && (!vpi_get(vpiElaborated, the_design))) {
     std::cout << "UHDM Elaboration...\n";
     UHDM::Serializer serializer;
-    UHDM::ElaboratorContext* elaboratorContext =
-        new UHDM::ElaboratorContext(&serializer, true);
-    elaboratorContext->m_elaborator.listenDesigns({the_design});
-    delete elaboratorContext;
+    UHDM::Elaborator elaborator(&serializer, true);
+    elaborator.elaborate(UhdmDesignFromVpiHandle(the_design), nullptr);
   }
 
   // Browse the UHDM Data Model using the IEEE VPI API.

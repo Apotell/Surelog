@@ -70,7 +70,7 @@
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/sv_vpi_user.h>
@@ -234,16 +234,14 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           // Don't reduce these operations
           if (opType == vpiAssignmentPatternOp ||
               opType == vpiMultiAssignmentPatternOp) {
-            ElaboratorContext elaboratorContext(&s, false, true);
-            param_assign* pclone =
-                (param_assign*)UHDM::clone_tree(mod_assign, &elaboratorContext);
+            Elaborator elaborator(&s, false, true);
+            param_assign* pclone = elaborator.clone(mod_assign, nullptr);
             pclone->VpiParent((any*)mod_assign->VpiParent());
             pclone->VpiOverriden(instance->isOverridenParam(paramName));
             const any* lhs = pclone->Lhs();
             any* rhs = pclone->Rhs();
             if (complexVal) {
-              rhs = UHDM::clone_tree(complexVal, &elaboratorContext);
-              rhs->VpiParent(pclone);
+              rhs = elaborator.clone(complexVal, pclone);
             }
             const typespec* ts = nullptr;
             if (lhs->UhdmType() == uhdmparameter) {

@@ -74,7 +74,7 @@
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/sv_vpi_user.h>
@@ -192,18 +192,17 @@ bool ElaborationStep::bindTypedefs_() {
                 typd->getDefinitionNode(), m_compileDesign, Reduce::Yes,
                 nullptr, nullptr, false);
           } else if (typespec* tps = def->getTypespec()) {
-            ElaboratorContext elaboratorContext(&s, false, true);
-            tpclone =
-                (typespec*)UHDM::clone_tree((any*)tps, &elaboratorContext);
+            Elaborator elaborator(&s, false, true);
+            tpclone = elaborator.clone(tps, nullptr);
             ref_typespec* rt = s.MakeRef_typespec();
             rt->VpiParent(tpclone);
             rt->Actual_typespec(tps);
             tpclone->Typedef_alias(rt);
           }
           if (typespec* unpacked = prevDef->getUnpackedTypespec()) {
-            ElaboratorContext elaboratorContext(&s, false, true);
-            array_typespec* unpacked_clone = (array_typespec*)UHDM::clone_tree(
-                (any*)unpacked, &elaboratorContext);
+            Elaborator elaborator(&s, false, true);
+            array_typespec* unpacked_clone = elaborator.clone(
+                static_cast<array_typespec*>(unpacked), nullptr);
             if (tpclone != nullptr) {
               ref_typespec* rt = s.MakeRef_typespec();
               rt->VpiParent(unpacked_clone);

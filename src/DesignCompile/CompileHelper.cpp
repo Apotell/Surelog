@@ -3736,7 +3736,7 @@ bool CompileHelper::compileParameterDeclaration(
           fC->populateCoreMembers(Param_assignment, Param_assignment,
                                   param_assign);
           Elaborator elaborator(&s, false, true);
-          any* pclone = elaborator.clone(param, param_assign);
+          any* pclone = elaborator.clone(param, nullptr);
           param_assign->Lhs(pclone);
           if (rhs != nullptr) {
             rhs->VpiParent(param_assign);
@@ -4259,8 +4259,12 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
           assigns->push_back(cts);
           modTmp->Cont_assigns(assigns);
 
-          Elaborator elaborator(&s, false);
-          elaborator.listenModule_inst(modTmp);
+          if (Elaborator* elaborator = new Elaborator(&s, false)) {
+            vpiHandle defModule = NewVpiHandle(modTmp);
+            elaborator->listenModule_inst(defModule);
+            vpi_free_object(defModule);
+            delete elaborator;
+          }
           return (any*)cts->Rhs();
         } else {
           let_expr* let = s.MakeLet_expr();

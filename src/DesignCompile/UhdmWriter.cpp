@@ -5105,9 +5105,11 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
     m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
         m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
-    Elaborator elaborator(&s, false, false);
-    elaborator.uniquifyTypespec(false);
-    elaborator.listenAny(m_uhdmDesign);
+    if (Elaborator* elaborator = new Elaborator(&s, false, false)) {
+      elaborator->uniquifyTypespec(false);
+      elaborator->listenDesigns(designs);
+      delete elaborator;
+    }
 
     if (m_compileDesign->getCompiler()
             ->getCommandLineParser()

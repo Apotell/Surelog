@@ -529,6 +529,7 @@ class FullNameChecker final : public uhdm::UhdmVisitor {
   
  private:
   bool hasAtMostOneDoubleColon(std::string_view& s);
+  bool isNameValid(std::string_view& fname, std::string_view& sName);
   std::string_view getFullName(const uhdm::Any* object);
   Session* m_session = nullptr;
 };

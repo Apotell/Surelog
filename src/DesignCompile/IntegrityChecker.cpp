@@ -1753,6 +1753,15 @@ std::string_view FullNameChecker::getFullName(const uhdm::Any* object) {
   }
   return fName;
 }
+bool FullNameChecker::isNameValid(std::string_view& fname,
+                                std::string_view& sName) {
+  if (fname != sName) return false;
+
+  // Check if both contain '@'
+  return fname.find('@') != std::string_view::npos &&
+         sName.find('@') != std::string_view::npos;
+}
+
 void FullNameChecker::visitAny(const uhdm::Any* object) {
   uhdm::UhdmType obj_type = (object != nullptr)
                                 ? object->getUhdmType()
@@ -1783,14 +1792,22 @@ void FullNameChecker::visitAny(const uhdm::Any* object) {
       obj_type == uhdm::UhdmType::Interface ||
       obj_type == uhdm::UhdmType::ClassDefn ||
       obj_type == uhdm::UhdmType::Program) {
-    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
-                 object->getStartLine(), object->getStartColumn(),
-                 symbolTable->registerSymbol(
-                     StrCat("Uhdm Type: ", uhdm::UhdmName(obj_type),
-                            ", Object Name: ", sName, ", Parent Full Name: ",
-                            parentFullName, ", Object Full Name: ", fName)));
-    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_FULL_NAME,
-                             loc);
+    bool bReportError = true;
+    if ((obj_type == uhdm::UhdmType::Interface ||
+         obj_type == uhdm::UhdmType::Module) &&
+        isNameValid(fName, sName))
+      bReportError = false;
+    
+    if (bReportError) {
+      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                   object->getStartLine(), object->getStartColumn(),
+                   symbolTable->registerSymbol(
+                       StrCat("Uhdm Type: ", uhdm::UhdmName(obj_type),
+                              ", Object Name: ", sName, ", Parent Full Name: ",
+                              parentFullName, ", Object Full Name: ", fName)));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_INVALID_FULL_NAME, loc);
+    }
   }
   if (!hasAtMostOneDoubleColon(sName) || !hasAtMostOneDoubleColon(fName)) {
     Location loc(fileSystem->toPathId(object->getFile(), symbolTable),

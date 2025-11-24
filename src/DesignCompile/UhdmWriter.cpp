@@ -82,7 +82,6 @@
 #include <uhdm/UhdmAdjuster.h>
 #include <uhdm/UhdmLint.h>
 #include <uhdm/VpiListener.h>
-#include <uhdm/clone_tree.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_uhdm.h>

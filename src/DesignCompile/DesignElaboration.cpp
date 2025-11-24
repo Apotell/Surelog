@@ -59,7 +59,6 @@
 #include <uhdm/BaseClass.h>
 #include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
-#include <uhdm/clone_tree.h>
 #include <uhdm/expr.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>

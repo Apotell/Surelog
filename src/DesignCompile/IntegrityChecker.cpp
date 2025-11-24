@@ -1795,9 +1795,45 @@ void FullNameChecker::visitAny(const uhdm::Any* object) {
     bool bReportError = true;
     if ((obj_type == uhdm::UhdmType::Interface ||
          obj_type == uhdm::UhdmType::Module) &&
-        isNameValid(fName, sName))
+        isNameValid(fName, sName)) // Here name and full name should be same and prefix with @ but never have :: as module is never part of package
       bReportError = false;
-    
+    else if (obj_type == uhdm::UhdmType::Package) {
+      // Here both name and full name should be same with no prefix and no @ and ::
+      if ((sName == fName) && (fName.find('@') == std::string_view::npos) &&
+          (sName.find('@') == std::string_view::npos) &&
+          (fName.find("::") == std::string_view::npos) &&
+          (sName.find("::") == std::string_view::npos))
+        bReportError = false;
+    } else if (obj_type == uhdm::UhdmType::ClassDefn) {
+      // 1. if parent is package then full name would be package::classname and name == classname
+      if (actual_parent &&
+          (actual_parent->getUhdmType() == uhdm::UhdmType::Package)) {
+        std::string computeName(actual_parent->getName());
+        computeName.append("::").append(sName);
+        if (fName == computeName) bReportError = false;
+      }
+      // 2. If parent is another class then fullname == parents fullname :: classname and name == parents classname::self classname
+      else if (actual_parent &&
+               (actual_parent->getUhdmType() == uhdm::UhdmType::ClassDefn)) {
+        if (const uhdm::ClassDefn* const obj =
+                any_cast<uhdm::ClassDefn>(object)) {
+          std::string computepfName(obj->getFullName());
+          std::string pName(obj->getName());
+          pName.append("::").append(sName);
+          computepfName.append("::").append(sName);
+          if ((fName == computepfName) && (pName == sName)) bReportError = false;
+        }        
+      }
+      // 3. If parent is design then name will be name and full name will be ...@class name
+      else if (actual_parent &&
+               (actual_parent->getUhdmType() == uhdm::UhdmType::Design)) {
+        if ((fName.find('@') != std::string_view::npos) &&
+            (sName.find('@') == std::string_view::npos))
+          bReportError = false;        
+      }
+      // 4. Rest other case report error.
+
+    }
     if (bReportError) {
       Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
                    object->getStartLine(), object->getStartColumn(),

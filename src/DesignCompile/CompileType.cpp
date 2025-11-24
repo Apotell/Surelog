@@ -2142,7 +2142,7 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       ranges = tps->Ranges();
       if (ranges) {
         Elaborator elaborator(&s, false, true);
-        bit_typespec* res = elaborator.clone(tps, nullptr);
+        bit_typespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2153,7 +2153,7 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       ranges = tps->Ranges();
       if (ranges) {
         Elaborator elaborator(&s, false, true);
-        logic_typespec* res = elaborator.clone(tps, nullptr);
+        logic_typespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2164,7 +2164,7 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       ranges = tps->Ranges();
       if (ranges) {
         Elaborator elaborator(&s, false, true);
-        array_typespec* res = elaborator.clone(tps, nullptr);
+        array_typespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }
@@ -2175,7 +2175,7 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       ranges = tps->Ranges();
       if (ranges) {
         Elaborator elaborator(&s, false, true);
-        packed_array_typespec* res = elaborator.clone(tps, nullptr);
+        packed_array_typespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->Ranges();
         result = res;
       }

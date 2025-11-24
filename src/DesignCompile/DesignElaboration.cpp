@@ -692,7 +692,7 @@ const UHDM::any* resize(UHDM::Serializer& serializer, const UHDM::any* object,
     UHDM::constant* c = (UHDM::constant*)result;
     if (c->VpiSize() < maxsize) {
       UHDM::Elaborator elaborator(&serializer);
-      c = elaborator.clone(c, nullptr);
+      c = elaborator.clone<>(c, nullptr);
       int32_t constType = c->VpiConstType();
       const UHDM::typespec* tps = nullptr;
       if (const UHDM::ref_typespec* rt = c->Typespec()) {
@@ -2007,7 +2007,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
         if (UHDM::expr* exp = def->getComplexValue(name)) {
           UHDM::Serializer& s = m_compileDesign->getSerializer();
           UHDM::Elaborator elaborator(&s, false, true);
-          UHDM::any* pclone = elaborator.clone(exp, nullptr);
+          UHDM::any* pclone = elaborator.clone<>(exp, nullptr);
           instance->setComplexValue(name, (UHDM::expr*)pclone);
         } else {
           Value* value = m_exprBuilder.clone(def->getValue(name));

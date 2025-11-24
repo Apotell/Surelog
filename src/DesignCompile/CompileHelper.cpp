@@ -214,7 +214,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
 
       if (p) {
         Elaborator elaborator(&s, false, true);
-        any* pclone = elaborator.clone(p, nullptr);
+        any* pclone = elaborator.clone<>(p, nullptr);
         if (pclone->UhdmType() == uhdmtype_parameter) {
           type_parameter* the_p = (type_parameter*)pclone;
           the_p->VpiImported(pack_name);
@@ -260,7 +260,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
       }
 
       Elaborator elaborator(&s, false, true);
-      UHDM::param_assign* cpass = elaborator.clone(pass, nullptr);
+      UHDM::param_assign* cpass = elaborator.clone<>(pass, nullptr);
       clone->setUhdmParamAssign(cpass);
       param_assigns->push_back(cpass);
       UHDM::any* orig_p = (UHDM::any*)cpass->Lhs();
@@ -316,7 +316,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
         if (!duplicate) {
           if (inPackage) {
             Elaborator elaborator(&s, false, /*mute errors */ true);
-            task_func* clone = elaborator.clone(func, nullptr);
+            task_func* clone = elaborator.clone<>(func, nullptr);
             sfuncs->push_back(clone);
           } else {
             sfuncs->push_back(func);
@@ -902,7 +902,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         if (ts && (ts->UhdmType() != uhdmclass_typespec) &&
             (ts->UhdmType() != uhdmunsupported_typespec)) {
           Elaborator elaborator(&s, false, true);
-          typespec* tpclone = elaborator.clone(ts, nullptr);
+          typespec* tpclone = elaborator.clone<>(ts, nullptr);
 
           if (array_tps) {
             array_tps->Instance(scope->getUhdmInstance());
@@ -3735,7 +3735,7 @@ bool CompileHelper::compileParameterDeclaration(
           fC->populateCoreMembers(Param_assignment, Param_assignment,
                                   param_assign);
           Elaborator elaborator(&s, false, true);
-          any* pclone = elaborator.clone(param, nullptr);
+          any* pclone = elaborator.clone<>(param, nullptr);
           param_assign->Lhs(pclone);
           if (rhs != nullptr) {
             rhs->VpiParent(param_assign);
@@ -3980,7 +3980,7 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
       uval = uval & mask;
       if (uniquify) {
         UHDM::Elaborator elaborator(&s, false, true);
-        c = elaborator.clone(c, nullptr);
+        c = elaborator.clone<>(c, nullptr);
         result = c;
       }
       c->VpiValue("UINT:" + std::to_string(uval));
@@ -4038,7 +4038,7 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
               }
               if (uniquify) {
                 UHDM::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone(c, nullptr);
+                c = elaborator.clone<>(c, nullptr);
                 result = c;
               }
               c->VpiValue("INT:" + std::to_string(val));
@@ -4048,7 +4048,7 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
               uint64_t mask = NumUtils::getMask(size);
               if (uniquify) {
                 UHDM::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone(c, nullptr);
+                c = elaborator.clone<>(c, nullptr);
                 result = c;
               }
               c->VpiValue("UINT:" + std::to_string(mask));
@@ -4060,7 +4060,7 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
               uint64_t mask = NumUtils::getMask(size);
               if (uniquify) {
                 UHDM::Elaborator elaborator(&s, false, true);
-                c = elaborator.clone(c, nullptr);
+                c = elaborator.clone<>(c, nullptr);
                 result = c;
               }
               c->VpiValue("UINT:" + std::to_string(mask));
@@ -4077,7 +4077,7 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
         if (uval == 1) {
           if (uniquify) {
             UHDM::Elaborator elaborator(&s, false, true);
-            c = elaborator.clone(c, nullptr);
+            c = elaborator.clone<>(c, nullptr);
             result = c;
           }
           if (size <= 64) {

@@ -200,7 +200,7 @@ bool ElaborationStep::bindTypedefs_() {
           }
           if (typespec* unpacked = prevDef->getUnpackedTypespec()) {
             Elaborator elaborator(&s, false, true);
-            array_typespec* unpacked_clone = elaborator.clone(
+            array_typespec* unpacked_clone = elaborator.clone<>(
                 static_cast<array_typespec*>(unpacked), nullptr);
             if (tpclone != nullptr) {
               ref_typespec* rt = s.MakeRef_typespec();

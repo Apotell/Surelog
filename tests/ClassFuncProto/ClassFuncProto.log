@@ -520,12 +520,12 @@ class_typespec                                         7
 class_var                                              3
 constant                                              14
 design                                                 1
-enum_const                                            38
-enum_typespec                                          9
+enum_const                                             9
+enum_typespec                                          2
 enum_var                                               1
 extends                                               15
 function                                              50
-int_typespec                                          16
+int_typespec                                          13
 int_var                                                6
 io_decl                                               78
 logic_net                                              2
@@ -533,7 +533,7 @@ logic_var                                              1
 module_inst                                            3
 package                                                2
 range                                                 17
-ref_typespec                                         115
+ref_typespec                                         109
 ref_var                                               16
 task                                                  26
 unsupported_typespec                                   6
@@ -1389,48 +1389,6 @@ design: (work@toto)
     |vpiFullName:work@toto::c1
     |vpiTypedef:
     \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-      |vpiParent:
-      \_class_defn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
-      |vpiName:uvm_severity
-      |vpiBaseTypespec:
-      \_ref_typespec: (work@toto::c1::uvm_severity)
-        |vpiParent:
-        \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-        |vpiFullName:work@toto::c1::uvm_severity
-        |vpiActual:
-        \_bit_typespec: , line:21:14, endln:21:17
-      |vpiEnumConst:
-      \_enum_const: (UVM_INFO), line:23:3, endln:23:11
-        |vpiParent:
-        \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-        |vpiName:UVM_INFO
-        |INT:0
-        |vpiDecompile:0
-        |vpiSize:2
-      |vpiEnumConst:
-      \_enum_const: (UVM_WARNING), line:24:3, endln:24:14
-        |vpiParent:
-        \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-        |vpiName:UVM_WARNING
-        |INT:1
-        |vpiDecompile:1
-        |vpiSize:2
-      |vpiEnumConst:
-      \_enum_const: (UVM_ERROR), line:25:3, endln:25:21
-        |vpiParent:
-        \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-        |vpiName:UVM_ERROR
-        |STRING:toto
-        |vpiDecompile:"toto"
-        |vpiSize:32
-      |vpiEnumConst:
-      \_enum_const: (UVM_FATAL), line:26:3, endln:26:12
-        |vpiParent:
-        \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-        |vpiName:UVM_FATAL
-        |INT:3
-        |vpiDecompile:3
-        |vpiSize:2
     |vpiExtends:
     \_extends: , line:18:18, endln:18:20
       |vpiParent:
@@ -1631,10 +1589,6 @@ design: (work@toto)
     |vpiFullName:work@toto::c2
     |vpiTypedef:
     \_int_typespec: (this_type), line:10:9, endln:10:12
-      |vpiParent:
-      \_class_defn: (work@toto::c2), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:8:1, endln:12:9
-      |vpiName:this_type
-      |vpiSigned:1
     |vpiDerivedClasses:
     \_class_defn: (work@toto::c3), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:15:1, endln:16:9
   |vpiClassDefn:
@@ -1759,50 +1713,6 @@ design: (work@toto)
     |vpiName:message
 \_int_typespec: , line:24:14, endln:24:17
   |vpiSigned:1
-\_enum_typespec: (state), line:32:5, endln:32:74
-  |vpiParent:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ClassFuncProto/builtin.sv, line:30:3, endln:52:11
-  |vpiName:state
-  |vpiEnumConst:
-  \_enum_const: (FINISHED), line:32:20, endln:32:28
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:FINISHED
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (RUNNING), line:32:30, endln:32:37
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:RUNNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (WAITING), line:32:39, endln:32:46
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:WAITING
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:SUSPENDED
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:64
-  |vpiEnumConst:
-  \_enum_const: (KILLED), line:32:59, endln:32:65
-    |vpiParent:
-    \_enum_typespec: (state), line:32:5, endln:32:74
-    |vpiName:KILLED
-    |INT:4
-    |vpiDecompile:4
-    |vpiSize:64
 \_function: (work@process::self), line:34:5, endln:34:11
   |vpiParent:
   \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ClassFuncProto/builtin.sv, line:30:3, endln:52:11
@@ -1905,49 +1815,6 @@ design: (work@toto)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-  |vpiParent:
-  \_class_defn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
-  |vpiName:uvm_severity
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@toto::c1::uvm_severity)
-    |vpiParent:
-    \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-    |vpiFullName:work@toto::c1::uvm_severity
-    |vpiActual:
-    \_bit_typespec: , line:21:14, endln:21:17
-  |vpiEnumConst:
-  \_enum_const: (UVM_INFO), line:23:3, endln:23:11
-    |vpiParent:
-    \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-    |vpiName:UVM_INFO
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (UVM_WARNING), line:24:3, endln:24:14
-    |vpiParent:
-    \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-    |vpiName:UVM_WARNING
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (UVM_ERROR), line:25:3, endln:25:21
-    |vpiParent:
-    \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-    |vpiName:UVM_ERROR
-    |STRING:toto
-    |vpiDecompile:"toto"
-    |vpiSize:32
-  |vpiEnumConst:
-  \_enum_const: (UVM_FATAL), line:26:3, endln:26:12
-    |vpiParent:
-    \_enum_typespec: (uvm_severity), line:41:35, endln:41:47
-    |vpiName:UVM_FATAL
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:2
 \_function: (work@toto::c1::get_current_item), line:30:1, endln:33:14
   |vpiParent:
   \_class_defn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
@@ -2075,11 +1942,6 @@ design: (work@toto)
   |vpiClassDefn:
   \_class_defn: (work@toto::c2), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:8:1, endln:12:9
 \_int_typespec: , line:44:41, endln:44:44
-  |vpiSigned:1
-\_int_typespec: (this_type), line:10:9, endln:10:12
-  |vpiParent:
-  \_class_defn: (work@toto::c2), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:8:1, endln:12:9
-  |vpiName:this_type
   |vpiSigned:1
 \_unsupported_typespec: (DD), line:50:2, endln:50:4
   |vpiParent:

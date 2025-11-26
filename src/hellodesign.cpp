@@ -37,7 +37,6 @@
 #include "Surelog/SourceCompile/SymbolTable.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>

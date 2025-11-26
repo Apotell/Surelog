@@ -29,8 +29,7 @@
 
 // UHDM
 #include <uhdm/BaseClass.h>
-#include <uhdm/ElaboratorListener.h>
-#include <uhdm/clone_tree.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/expr.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/uhdm_types.h>
@@ -82,14 +81,12 @@ uhdm::PropertyInst* createPropertyInst(DesignComponent* component,
     uhdm::PropertyInst* real_property_expr = s.make<uhdm::PropertyInst>();
     real_property_expr->setParent(property_expr);
     if (call->getArguments()) {
-      uhdm::ElaboratorContext elaboratorContext(&s, false, true);
+      uhdm::Elaborator elaborator(&s, false, true);
       uhdm::AnyCollection* args = real_property_expr->getArguments(true);
       for (auto arg : *call->getArguments()) {
-        if (arg->getUhdmType() == uhdm::UhdmType::RefObj) {
-          uhdm::RefObj* ref =
-              (uhdm::RefObj*)uhdm::clone_tree(arg, &elaboratorContext);
+        if (uhdm::RefObj* const ro = any_cast<uhdm::RefObj>(arg)) {
+          uhdm::RefObj* ref = elaborator.clone<>(ro, real_property_expr);
           args->emplace_back(ref);
-          ref->setParent(real_property_expr);
         } else {
           args->emplace_back(arg);
         }

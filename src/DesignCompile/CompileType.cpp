@@ -54,9 +54,8 @@
 
 // UHDM
 #include <uhdm/BaseClass.h>
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/Utils.h>
-#include <uhdm/clone_tree.h>
 #include <uhdm/expr.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/uhdm_types.h>
@@ -632,9 +631,8 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
             if (const uhdm::RefTypespec* rt = tparam->getTypespec()) {
               result = rt->getActual();
             }
-            uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-            result = any_cast<uhdm::Typespec>(
-                uhdm::clone_tree((uhdm::Any*)result, &elaboratorContext));
+            uhdm::Elaborator elaborator(&s, false, true);
+            result = elaborator.clone<>(result, nullptr);
           }
         }
         break;
@@ -649,18 +647,16 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
               if (const uhdm::RefTypespec* rt = tparam->getTypespec()) {
                 result = rt->getActual();
               }
-              uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-              result = any_cast<uhdm::Typespec>(
-                  uhdm::clone_tree((uhdm::Any*)result, &elaboratorContext));
+              uhdm::Elaborator elaborator(&s, false, true);
+              result = elaborator.clone<>(result, nullptr);
             }
           }
         }
         if (const DataType* dt = mod->getDataType(design, name)) {
           dt = dt->getActual();
           result = dt->getTypespec();
-          uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-          result = any_cast<uhdm::Typespec>(
-              uhdm::clone_tree((uhdm::Any*)result, &elaboratorContext));
+          uhdm::Elaborator elaborator(&s, false, true);
+          result = elaborator.clone<>(result, nullptr);
         }
       }
     }
@@ -1705,9 +1701,8 @@ uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
       uhdm::BitTypespec* tps = (uhdm::BitTypespec*)spec;
       ranges = tps->getRanges();
       if (ranges) {
-        uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-        uhdm::BitTypespec* res = any_cast<uhdm::BitTypespec>(
-            uhdm::clone_tree((uhdm::Any*)spec, &elaboratorContext));
+        uhdm::Elaborator elaborator(&s, false, true);
+        uhdm::BitTypespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->getRanges();
         result = res;
       }
@@ -1717,9 +1712,8 @@ uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
       uhdm::LogicTypespec* tps = (uhdm::LogicTypespec*)spec;
       ranges = tps->getRanges();
       if (ranges) {
-        uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-        uhdm::LogicTypespec* res = any_cast<uhdm::LogicTypespec>(
-            uhdm::clone_tree((uhdm::Any*)spec, &elaboratorContext));
+        uhdm::Elaborator elaborator(&s, false, true);
+        uhdm::LogicTypespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->getRanges();
         result = res;
       }
@@ -1729,9 +1723,8 @@ uhdm::Typespec* CompileHelper::elabTypespec(DesignComponent* component,
       uhdm::ArrayTypespec* tps = (uhdm::ArrayTypespec*)spec;
       ranges = tps->getRanges();
       if (ranges) {
-        uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-        uhdm::ArrayTypespec* res = any_cast<uhdm::ArrayTypespec>(
-            uhdm::clone_tree((uhdm::Any*)spec, &elaboratorContext));
+        uhdm::Elaborator elaborator(&s, false, true);
+        uhdm::ArrayTypespec* res = elaborator.clone<>(tps, nullptr);
         ranges = res->getRanges();
         result = res;
       }

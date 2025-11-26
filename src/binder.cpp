@@ -24,7 +24,6 @@
  * Created on September 05, 2025, 12:00 PM
  */
 
-#include <uhdm/ElaboratorListener.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>
 #include <uhdm/vpi_visitor.h>

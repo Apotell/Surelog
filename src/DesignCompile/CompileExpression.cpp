@@ -68,9 +68,8 @@
 #include "Surelog/Utils/StringUtils.h"
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
-#include <uhdm/clone_tree.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_user.h>
@@ -875,10 +874,8 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
                 }
               }
 
-              uhdm::ElaboratorContext elaboratorContext(&s, false, true);
-              result = uhdm::clone_tree((uhdm::Any *)param->getRhs(),
-                                        &elaboratorContext);
-              if (result != nullptr) result->setParent(param);
+              uhdm::Elaborator elaborator(&s, false, true);
+              result = elaborator.clone<>(param->getRhs(), param);
               break;
             }
           }

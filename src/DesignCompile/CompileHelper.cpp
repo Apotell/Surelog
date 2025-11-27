@@ -3966,31 +3966,21 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component,
       param->setParent(param_assign);
 
       if (value) {
-        // Unelaborated parameters
-        if ((valuedcomponenti_cast<Package>(component) ||
-             valuedcomponenti_cast<FileContent*>(component)) &&
-            (instance == nullptr)) {
-          uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-              component, fC, value, param_assign, instance);
-          rhs = (uhdm::Expr*)defaultPatternAssignment(ts, rhs, component,
-                                                      instance);
-          param_assign->setLhs(param);
-          if (rhs != nullptr) {
-            rhs->setParent(param_assign);
-            param_assign->setRhs(rhs);
-          }
-          uhdm::ParamAssignCollection* orig_param_assigns =
-              component->getOrigParamAssigns();
-          if (orig_param_assigns == nullptr) {
-            component->setOrigParamAssigns(
-                s.makeCollection<uhdm::ParamAssign>());
-            orig_param_assigns = component->getOrigParamAssigns();
-          }
-          orig_param_assigns->emplace_back(param_assign);
-        }
-
         uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
             component, fC, value, param_assign, instance);
+        rhs =
+            (uhdm::Expr*)defaultPatternAssignment(ts, rhs, component, instance);
+        rhs->setParent(param_assign);
+        param_assign->setRhs(rhs);
+
+        uhdm::ParamAssignCollection* orig_param_assigns =
+            component->getOrigParamAssigns();
+        if (orig_param_assigns == nullptr) {
+          component->setOrigParamAssigns(s.makeCollection<uhdm::ParamAssign>());
+          orig_param_assigns = component->getOrigParamAssigns();
+        }
+        orig_param_assigns->emplace_back(param_assign);
+
         if (isDecreasing && (rhs->getUhdmType() == uhdm::UhdmType::Operation)) {
           uhdm::Operation* op = (uhdm::Operation*)rhs;
           int32_t optype = op->getOpType();
@@ -4004,13 +3994,10 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component,
             }
           }
         }
-        param_assign->setRhs(rhs);
-        if (rhs) {
-          rhs->setParent(param_assign);
-          if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-            uhdm::Constant* c = (uhdm::Constant*)rhs;
-            param->setValue(c->getValue());
-          }
+
+        if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
+          uhdm::Constant* c = (uhdm::Constant*)rhs;
+          param->setValue(c->getValue());
         }
       }
       Param_assignment = fC->Sibling(Param_assignment);

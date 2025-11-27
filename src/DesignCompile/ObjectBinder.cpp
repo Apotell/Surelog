@@ -57,27 +57,27 @@ ObjectBinder::ObjectBinder(Session* session,
 
 inline bool ObjectBinder::areSimilarNames(std::string_view name1,
                                           std::string_view name2) const {
-  size_t pos = name1.find("::");
-  if (pos != std::string::npos) {
-    name1 = name1.substr(pos + 2);
-  }
+  //size_t pos = name1.find("::");
+  //if (pos != std::string::npos) {
+  //  name1 = name1.substr(pos + 2);
+  //}
 
-  pos = name1.find("work@");
+  size_t pos = name1.find("work@");
   if (pos != std::string::npos) {
     name1 = name1.substr(pos + 5);
   }
 
-  pos = name2.find("::");
-  if (pos != std::string::npos) {
-    name2 = name2.substr(pos + 2);
-  }
+  //pos = name2.find("::");
+  //if (pos != std::string::npos) {
+  //  name2 = name2.substr(pos + 2);
+  //}
 
   pos = name2.find("work@");
   if (pos != std::string::npos) {
     name2 = name2.substr(pos + 5);
   }
 
-  return !name1.empty() && name1 == name2;
+  return /*!name1.empty() && */name1 == name2;
 }
 
 inline bool ObjectBinder::areSimilarNames(const uhdm::Any* object1,

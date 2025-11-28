@@ -521,6 +521,16 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   bool m_reportInvalidForeachVariable = true;
 };
 
+class ConstTpsChecker final : public uhdm::UhdmVisitor {
+ public:
+  explicit ConstTpsChecker(Session* session) : m_session(session) {}
+
+  void visitAny(const uhdm::Any* object) final;
+
+ private:
+  Session* m_session = nullptr;
+};
+
 };  // namespace SURELOG
 
 #endif /* SURELOG_INTEGRITYCHECKER_H */

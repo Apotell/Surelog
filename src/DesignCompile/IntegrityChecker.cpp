@@ -1700,4 +1700,32 @@ void IntegrityChecker::check(const std::vector<const uhdm::Design*>& objects) {
     check(d);
   }
 }
+
+void ConstTpsChecker::visitAny(const uhdm::Any* object) {
+  uhdm::UhdmType obj_type = (object != nullptr)
+                                ? object->getUhdmType()
+                                : uhdm::UhdmType::UnsupportedStmt;
+
+  if (obj_type == uhdm::UhdmType::Constant) {
+    bool bReport = true;
+    if (const uhdm::Constant* const obj = any_cast<uhdm::Constant>(object)) {
+      if (obj->getTypespec() && obj->getTypespec()->getActual())
+        bReport = false;
+    }
+    if (bReport) {
+      SymbolTable* const symbolTable = m_session->getSymbolTable();
+      FileSystem* const fileSystem = m_session->getFileSystem();
+      ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                   object->getStartLine(), object->getStartColumn(),
+                   symbolTable->registerSymbol(
+                       StrCat("id:", object->getUhdmId(),
+                              ", type:", uhdm::UhdmName(object->getUhdmType()),
+                              ", name:", object->getName())));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_INVALID_CONST_TPS, loc);
+    }
+  }
+}
 }  // namespace SURELOG

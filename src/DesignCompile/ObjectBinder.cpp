@@ -353,11 +353,11 @@ const uhdm::Any* ObjectBinder::findInCollection(
   if (collection == nullptr) return nullptr;
 
   std::string_view shortName = name;
-  if (shortName.find("::") != std::string::npos) {
-    std::vector<std::string_view> tokens;
-    StringUtils::tokenizeMulti(shortName, "::", tokens);
-    if (tokens.size() > 1) shortName = tokens.back();
-  }
+  //if (shortName.find("::") != std::string::npos) {
+  //  std::vector<std::string_view> tokens;
+  //  StringUtils::tokenizeMulti(shortName, "::", tokens);
+  //  if (tokens.size() > 1) shortName = tokens.back();
+  //}
 
   for (const uhdm::Any* c : *collection) {
     if (c->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) continue;
@@ -456,7 +456,7 @@ const uhdm::Any* ObjectBinder::findInScope(std::string_view name,
                  name, refType, scope->getInternalScopes(), scope)) {
     return actual;
   } else if (const uhdm::Package* const p = any_cast<uhdm::Package>(scope)) {
-    std::string fullName = StrCat(p->getName(), "::", name);
+    std::string fullName(name);  //StrCat(p->getName(), "::", name);
     if (const uhdm::Any* const actual =
             findInCollection(fullName, refType, scope->getTypespecs(), scope)) {
       return actual;
@@ -626,11 +626,11 @@ const uhdm::Any* ObjectBinder::findInForStmt(std::string_view name,
 
   if (refType == RefType::Object) {
     std::string_view shortName = name;
-    if (shortName.find("::") != std::string::npos) {
-      std::vector<std::string_view> tokens;
-      StringUtils::tokenizeMulti(shortName, "::", tokens);
-      if (tokens.size() > 1) shortName = tokens.back();
-    }
+    //if (shortName.find("::") != std::string::npos) {
+    //  std::vector<std::string_view> tokens;
+    //  StringUtils::tokenizeMulti(shortName, "::", tokens);
+    //  if (tokens.size() > 1) shortName = tokens.back();
+    //}
 
     if (const uhdm::AnyCollection* const inits = scope->getForInitStmts()) {
       for (auto init : *inits) {
@@ -682,11 +682,11 @@ const uhdm::Any* ObjectBinder::findInScope_sub(
 
   std::string_view shortName = name;
   if (refType == RefType::Object) {
-    if (shortName.find("::") != std::string::npos) {
-      std::vector<std::string_view> tokens;
-      StringUtils::tokenizeMulti(shortName, "::", tokens);
-      if (tokens.size() > 1) shortName = tokens.back();
-    }
+    //if (shortName.find("::") != std::string::npos) {
+    //  std::vector<std::string_view> tokens;
+    //  StringUtils::tokenizeMulti(shortName, "::", tokens);
+    //  if (tokens.size() > 1) shortName = tokens.back();
+    //}
 
     if (areSimilarNames(scope, name) || areSimilarNames(scope, shortName)) {
       return scope;
@@ -735,11 +735,11 @@ const uhdm::Any* ObjectBinder::findInClassDefn(std::string_view name,
 
   if (refType == RefType::Object) {
     std::string_view shortName = name;
-    if (shortName.find("::") != std::string::npos) {
-      std::vector<std::string_view> tokens;
-      StringUtils::tokenizeMulti(shortName, "::", tokens);
-      if (tokens.size() > 1) shortName = tokens.back();
-    }
+    //if (shortName.find("::") != std::string::npos) {
+    //  std::vector<std::string_view> tokens;
+    //  StringUtils::tokenizeMulti(shortName, "::", tokens);
+    //  if (tokens.size() > 1) shortName = tokens.back();
+    //}
 
     if (areSimilarNames(name, "this")) {
       return scope;

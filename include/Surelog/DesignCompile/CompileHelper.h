@@ -577,7 +577,7 @@ class CompileHelper final {
                                       uint16_t column, uint32_t eline,
                                       uint16_t ecolumn);
   uhdm::TypespecMember* buildTypespecMember(const FileContent* fC, NodeId id);
-
+  uhdm::Typespec* getTypespecFromType(int32_t type, uhdm::Serializer& s);
  private:
   Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign = nullptr;

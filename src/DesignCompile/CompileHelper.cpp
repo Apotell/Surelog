@@ -156,10 +156,40 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
   return true;
 }
 
+static bool largeInt(std::string_view str) {
+  bool isSigned = false;
+  size_t pos = str.find('\'');
+  if (pos != std::string::npos) {
+    if (str.find_first_of("sS") != std::string::npos) {
+      isSigned = true;
+      str = str.substr(pos + 3);
+    } else {
+      str = str.substr(pos + 2);
+    }
+  }
+  std::string value(str);
+  value = StringUtils::replaceAll(value, "_", "");
+  bool isLarge = false;
+  if (value.size() > 20) {
+    isLarge = true;
+  } else if (value.size() == 20) {
+    if (isSigned) {
+      int64_t test = 0;
+      isLarge = NumUtils::parseInt64(value, &test) == nullptr;
+    } else {
+      uint64_t test = 0;
+      isLarge = NumUtils::parseUint64(value, &test) == nullptr;
+    }
+  }
+  return isLarge;
+}
+
 uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   Value::Type valueType = val->getType();
   uhdm::Constant* c = nullptr;
+  uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+  uhdm::Typespec* tps = nullptr;
   switch (valueType) {
     case Value::Type::Scalar: {
       c = s.make<uhdm::Constant>();
@@ -167,6 +197,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(1);
+      tps = s.make<uhdm::LogicTypespec>();
       break;
     }
     case Value::Type::Binary: {
@@ -175,22 +206,31 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::BitTypespec>();
       break;
     }
     case Value::Type::Hexadecimal: {
+      bool bLarge = largeInt(val->decompiledValue());
       c = s.make<uhdm::Constant>();
       c->setConstType(vpiHexStrVal);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      if (bLarge) tps = s.make<uhdm::LongIntTypespec>();
+      else tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Octal: {
+      bool bLarge = largeInt(val->decompiledValue());
       c = s.make<uhdm::Constant>();
       c->setConstType(vpiOctStrVal);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      if (bLarge)
+        tps = s.make<uhdm::LongIntTypespec>();
+      else
+        tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Unsigned:
@@ -200,6 +240,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Double: {
@@ -208,6 +249,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::RealTypespec>();
       break;
     }
     case Value::Type::String: {
@@ -216,12 +258,18 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::StringTypespec>();
       break;
     }
     case Value::Type::None:
     default: {
       // return nullptr
     }
+  }
+  if (tps) {
+    rt->setParent(c);
+    rt->setActual(tps);
+    c->setTypespec(rt);
   }
   return c;
 }
@@ -3441,6 +3489,15 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
       c->setConstType(fC->Type(valueNodeId) == VObjectType::INT_CONST
                           ? vpiIntConst
                           : vpiRealConst);
+      bool isInt = (fC->Type(valueNodeId) == VObjectType::INT_CONST);
+      uhdm::Typespec* ts = nullptr;
+      if (isInt) ts = s.make<uhdm::IntTypespec>();
+      else ts = s.make<uhdm::RealTypespec>();
+      uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      rt->setActual(ts);
+      c->setTypespec(rt);
+
       c->setParent(dc);
       fC->populateCoreMembers(valueNodeId, valueNodeId, c);
       dc->setDelay(c);
@@ -4450,6 +4507,11 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         c->setSize(64);
         c->setConstType(vpiIntConst);
         c->setParent(call);
+        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        rt->setActual(ts);
+        c->setTypespec(rt);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
         arguments->emplace_back(c);
       }
@@ -5252,6 +5314,12 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
     result->setSize(size);
     result->setValue(StrCat("UINT:", value));
     result->setDecompile(StrCat(size, "\'d", value));
+
+    uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+    uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    rt->setParent(c);
+    rt->setActual(ts);
+    c->setTypespec(rt);
   }
   return result;
 }
@@ -5428,6 +5496,11 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   c->setValue(std::string("STRING:") + std::string(text));
   c->setDecompile(text);
   c->setConstType(vpiStringConst);
+  uhdm::StringTypespec* cts = s.make<uhdm::StringTypespec>();
+  uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
+  crt->setParent(c);
+  crt->setActual(cts);
+  c->setTypespec(crt);
   component->addElabSysCall(scall);
   Location loc(fC->getFileId(id), fC->Line(id), fC->Column(id),
                symbols->registerSymbol(text));

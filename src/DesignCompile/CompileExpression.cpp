@@ -407,6 +407,9 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::INT_CONST: {
       // Do not evaluate the constant, keep it as in the source text:
       uhdm::Constant *c = s.make<uhdm::Constant>();
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      uhdm::Typespec *tps = nullptr;
       fC->populateCoreMembers(child, child, c);
       std::string value = std::string(fC->SymName(child));
       value.erase(std::remove(value.begin(), value.end(), '_'), value.end());
@@ -433,6 +436,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         } else {
           v = value;
           size = "";
+          tps = s.make<uhdm::LongIntTypespec>();
         }
         v = StringUtils::replaceAll(v, "#", "");
         v = StringUtils::replaceAll(v, "_", "");
@@ -452,29 +456,34 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           case 'H': {
             v = "HEX:" + v;
             c->setConstType(vpiHexConst);
+            if (!tps) tps = s.make<uhdm::IntTypespec>();
             break;
           }
           case 'b':
           case 'B': {
             v = "BIN:" + v;
             c->setConstType(vpiBinaryConst);
+            tps = s.make<uhdm::LogicTypespec>();
             break;
           }
           case 'o':
           case 'O': {
             v = "OCT:" + v;
             c->setConstType(vpiOctConst);
+            if (!tps) tps = s.make<uhdm::IntTypespec>();
             break;
           }
           case 'd':
           case 'D': {
             v = "DEC:" + v;
             c->setConstType(vpiDecConst);
+            if (!tps) tps = s.make<uhdm::IntTypespec>();
             break;
           }
           default: {
             v = "BIN:" + v;
             c->setConstType(vpiBinaryConst);
+            tps = s.make<uhdm::LogicTypespec>();
             break;
           }
         }
@@ -482,14 +491,17 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         if (!value.empty() && value[0] == '-') {
           v.assign("INT:").append(value);
           c->setConstType(vpiIntConst);
+          if (!tps) tps = s.make<uhdm::IntTypespec>();
         } else {
           v.assign("UINT:").append(value);
           c->setConstType(vpiUIntConst);
           v = StringUtils::replaceAll(v, "#", "");
+          if (!tps) tps = s.make<uhdm::IntTypespec>();
         }
         c->setSize(64);
       }
-
+      rt->setActual(tps);
+      c->setTypespec(rt);
       c->setValue(v);
       result = c;
       break;
@@ -501,6 +513,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setValue(StrCat("REAL:", value));
       c->setConstType(vpiRealConst);
       c->setSize(64);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();      
+      uhdm::Typespec *tps = s.make<uhdm::RealTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       result = c;
       break;
     }
@@ -517,6 +534,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
       c->setDecompile("1'b1");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -531,6 +553,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(0);
       c->setDecompile("'b1");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       result = c;
       break;
     }
@@ -541,6 +568,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'1");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       result = c;
       break;
     }
@@ -557,6 +589,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
       c->setDecompile("1'b0");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -571,6 +608,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(0);
       c->setDecompile("'b0");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -582,6 +624,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'0");
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -592,6 +639,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setValue(value);
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       c->setDecompile("'Z");
       result = c;
       break;
@@ -602,6 +654,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setValue(value);
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       c->setDecompile("'X");
       result = c;
       break;
@@ -619,6 +676,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setValue(value);
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       c->setDecompile("1'bX");
       result = c;
       break;
@@ -664,6 +726,12 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setValue("UINT:" + std::to_string(val));
       c->setConstType(vpiUIntConst);
       c->setSize(64);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::IntTypespec *tps = s.make<uhdm::IntTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      tps->setSigned(false);
+      c->setTypespec(rt);
       result = c;
       break;
     }
@@ -674,6 +742,11 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setSize(value.length() * 8);
       c->setValue(StrCat("STRING:", value));
       c->setConstType(vpiStringConst);
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      uhdm::Typespec *tps = s.make<uhdm::StringTypespec>();
+      rt->setParent(c);
+      rt->setActual(tps);
+      c->setTypespec(rt);
       result = c;
       break;
     }
@@ -1420,6 +1493,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           c->setSize(64);
           c->setConstType(vpiNullConst);
           c->setParent(pexpr);
+          uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          rt->setActual(ts);
+          c->setTypespec(rt);
           result = c;
           break;
         }
@@ -1430,6 +1508,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           c->setDecompile("$");
           c->setSize(1);
           c->setParent(pexpr);
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          rt->setActual(ts);
+          c->setTypespec(rt);
           result = c;
           break;
         }
@@ -2041,6 +2124,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               c->setSize(64);
               c->setConstType(vpiIntConst);
               c->setParent(pexpr);
+              uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+              uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+              rt->setParent(c);
+              rt->setActual(ts);
+              c->setTypespec(rt);
               fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
                                       c);
               args->emplace_back(c);
@@ -2091,6 +2179,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                   c->setSize(64);
                   c->setConstType(vpiUIntConst);
                   c->setParent(operation);
+                  uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+                  uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+                  rt->setParent(c);
+                  rt->setActual(ts);
+                  c->setTypespec(rt);
                   fC->populateCoreMembers(subOp1, subOp1, c);
                   operation->getOperands()->emplace_back(c);
                 }
@@ -2554,6 +2647,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                 c->setDecompile(val);
                 c->setSize(64);
                 c->setConstType(vpiUIntConst);
+                uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+                uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+                rt->setParent(c);
+                rt->setActual(ts);
+                c->setTypespec(rt);
                 fC->populateCoreMembers(subOp1, subOp1, c);
                 operands->emplace_back(c);
               }
@@ -2724,6 +2822,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           c->setSize(64);
           c->setConstType(vpiNullConst);
           c->setParent(pexpr);
+          uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          rt->setActual(ts);
+          c->setTypespec(rt);
           result = c;
           break;
         }
@@ -3603,6 +3706,10 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   uhdm::Constant *c = s.make<uhdm::Constant>();
+  uhdm::Typespec *ts = nullptr;
+  uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+  rt->setParent(c);
+
   if (fC->Type(Expression) == VObjectType::paData_type) {
     Expression = fC->Child(Expression);
     if (fC->Type(Expression) == VObjectType::VIRTUAL)
@@ -3614,72 +3721,84 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
       c->setValue("STRING:logic");
       c->setDecompile("logic");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::LogicTypespec>();
       result = c;
       break;
     case VObjectType::paIntVec_TypeBit:
       c->setValue("STRING:bit");
       c->setDecompile("bit");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::BitTypespec>();
       result = c;
       break;
     case VObjectType::paIntVec_TypeReg:
       c->setValue("STRING:reg");
       c->setDecompile("reg");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::BitTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_Byte:
       c->setValue("STRING:byte");
       c->setDecompile("byte");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::ByteTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_Shortint:
       c->setValue("STRING:shortint");
       c->setDecompile("shortint");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::ShortIntTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_Int:
       c->setValue("STRING:int");
       c->setDecompile("int");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::IntTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_Integer:
       c->setValue("STRING:integer");
       c->setDecompile("integer");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::IntegerTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_LongInt:
       c->setValue("STRING:longint");
       c->setDecompile("longint");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::LongIntTypespec>();
       result = c;
       break;
     case VObjectType::paIntegerAtomType_Time:
       c->setValue("STRING:time");
       c->setDecompile("time");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::TimeTypespec>();
       result = c;
       break;
     case VObjectType::paNonIntType_ShortReal:
       c->setValue("STRING:shortreal");
       c->setDecompile("shortreal");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::ShortRealTypespec>();
       result = c;
       break;
     case VObjectType::paNonIntType_Real:
       c->setValue("STRING:real");
       c->setDecompile("real");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::RealTypespec>();
       result = c;
       break;
     case VObjectType::paNonIntType_RealTime:
       c->setValue("STRING:realtime");
       c->setDecompile("realtime");
       c->setConstType(vpiStringConst);
+      ts = s.make<uhdm::RealTypespec>();
       result = c;
       break;
     default:
@@ -3694,6 +3813,8 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
       c->setParent(sys);
       break;
   }
+  rt->setActual(ts);
+  c->setTypespec(rt);
   return result;
 }
 
@@ -3817,7 +3938,31 @@ uhdm::Any *CompileHelper::compileClog2(DesignComponent *component,
 
   return result;
 }
-
+uhdm::Typespec *getTypespecfromType(int32_t type, uhdm::Serializer &s) {
+  uhdm::Typespec *tps = nullptr;
+  switch (type) {
+    case 0:
+      tps = s.make<uhdm::IntTypespec>();
+    case 1:
+      tps = s.make<uhdm::BitTypespec>();
+    case 2:
+      tps = s.make<uhdm::IntTypespec>();
+    case 3:
+      tps = s.make<uhdm::IntTypespec>();
+    case 4:
+      tps = s.make<uhdm::IntTypespec>();
+    case 5:
+      tps = s.make<uhdm::IntTypespec>();
+    case 6:
+      tps = s.make<uhdm::RealTypespec>();
+    case 7:
+      tps = s.make<uhdm::StringTypespec>();
+    case 8:
+      tps = s.make<uhdm::LogicTypespec>();
+      // vpiScalar;
+  }
+  return tps;
+}
 uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
                                                  const FileContent *fC,
                                                  NodeId id, uhdm::Any *pexpr,
@@ -4105,6 +4250,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
           c->setDecompile(val->decompiledValue());
           c->setSize(val->getSize());
           c->setConstType(val->vpiValType());
+          // getTypespecfromType(val->vpiValType(), s); // @todo:
           c->setParent(pexpr);
           fC->populateCoreMembers(Class_scope_name, Class_scope_name, c);
           result = c;

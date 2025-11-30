@@ -314,7 +314,7 @@ class CompileHelper final {
   void compileBindStmt(DesignComponent* component, const FileContent* fC,
                        NodeId nodeId, ValuedComponentI* instance = nullptr);
 
-  uhdm::Constant* constantFromValue(Value* val);
+  uhdm::Constant* constantFromValue(Value* val, uhdm::Any* pexpr);
 
   uhdm::Any* compileExpression(DesignComponent* component,
                                const FileContent* fC, NodeId nodeId,

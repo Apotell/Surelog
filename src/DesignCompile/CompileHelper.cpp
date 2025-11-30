@@ -184,7 +184,7 @@ static bool largeInt(std::string_view str) {
   return isLarge;
 }
 
-uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
+uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   Value::Type valueType = val->getType();
   uhdm::Constant* c = nullptr;
@@ -210,27 +210,22 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       break;
     }
     case Value::Type::Hexadecimal: {
-      bool bLarge = largeInt(val->decompiledValue());
+      // unsigned int
       c = s.make<uhdm::Constant>();
       c->setConstType(vpiHexStrVal);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
-      if (bLarge) tps = s.make<uhdm::LongIntTypespec>();
-      else tps = s.make<uhdm::IntTypespec>();
+      tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Octal: {
-      bool bLarge = largeInt(val->decompiledValue());
       c = s.make<uhdm::Constant>();
       c->setConstType(vpiOctStrVal);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
-      if (bLarge)
-        tps = s.make<uhdm::LongIntTypespec>();
-      else
-        tps = s.make<uhdm::IntTypespec>();
+      tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Unsigned:
@@ -240,7 +235,11 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
-      tps = s.make<uhdm::IntTypespec>();
+      uhdm::IntTypespec* t = s.make<uhdm::IntTypespec>();
+      if (valueType == Value::Type::Integer) {
+        t->setSigned(true);
+      }
+      tps = t;
       break;
     }
     case Value::Type::Double: {
@@ -249,7 +248,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
-      tps = s.make<uhdm::RealTypespec>();
+      tps = s.make<uhdm::LongIntTypespec>();
       break;
     }
     case Value::Type::String: {
@@ -266,7 +265,9 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       // return nullptr
     }
   }
-  if (tps) {
+  if (tps) {    
+    c->setParent(pexpr);
+    tps->setParent(pexpr);
     rt->setParent(c);
     rt->setActual(tps);
     c->setTypespec(rt);
@@ -2135,7 +2136,7 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
     } else {
       item_name->set("*");
     }
-    if (uhdm::Constant* imported_item = constantFromValue(item_name)) {
+    if (uhdm::Constant* imported_item = constantFromValue(item_name, import_stmt)) {
       imported_item->setParent(import_stmt);
       if (item_name_id) {
         // In case of "*" item_name_id will be 0
@@ -5423,6 +5424,8 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
     uhdm::Constant* rc = s.make<uhdm::Constant>();
     rc->setValue(StrCat("UINT:", rr));
     r->setRightExpr(rc);
+
+
   }
 }
 

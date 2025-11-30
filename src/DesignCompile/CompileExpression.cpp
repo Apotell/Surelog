@@ -400,7 +400,8 @@ static bool largeInt(std::string_view str) {
 }
 
 uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
-                                            uhdm::Serializer &s) {
+                                            uhdm::Serializer &s,
+                                            uhdm::Any *pscope) {
   VObjectType objtype = fC->Type(child);
   uhdm::Constant *result = nullptr;
   switch (objtype) {
@@ -500,6 +501,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         }
         c->setSize(64);
       }
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setValue(v);
@@ -516,6 +518,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();      
       uhdm::Typespec *tps = s.make<uhdm::RealTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       result = c;
@@ -537,6 +540,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
@@ -556,6 +560,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       result = c;
@@ -571,6 +576,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       result = c;
@@ -592,6 +598,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
@@ -611,6 +618,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
@@ -627,6 +635,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
@@ -642,6 +651,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("'Z");
@@ -657,6 +667,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("'X");
@@ -679,6 +690,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("1'bX");
@@ -729,6 +741,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::IntTypespec *tps = s.make<uhdm::IntTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       tps->setSigned(false);
       c->setTypespec(rt);
@@ -745,6 +758,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       uhdm::Typespec *tps = s.make<uhdm::StringTypespec>();
       rt->setParent(c);
+      tps->setParent(pscope);
       rt->setActual(tps);
       c->setTypespec(rt);
       result = c;
@@ -2387,7 +2401,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::STRING_LITERAL: {
-          if ((result = compileConst(fC, child, s))) {
+          if ((result = compileConst(fC, child, s, pexpr))) {
             result->setParent(pexpr);
           }
           break;
@@ -2918,7 +2932,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::STRING_LITERAL: {
-          if ((result = compileConst(fC, parent, s))) {
+          if ((result = compileConst(fC, parent, s, pexpr))) {
             result->setParent(pexpr);
           }
           break;

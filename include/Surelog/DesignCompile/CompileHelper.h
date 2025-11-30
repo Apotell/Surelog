@@ -454,7 +454,7 @@ class CompileHelper final {
                                       uhdm::Any* pscope);
 
   uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
-                               uhdm::Serializer& s);
+                               uhdm::Serializer& s, uhdm::Any* pscope);
 
   uhdm::Any* compilePsOrHierarchicalArrayIdentifier(DesignComponent* component,
                                                     const FileContent* fC,

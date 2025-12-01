@@ -5425,6 +5425,18 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
     rc->setValue(StrCat("UINT:", rr));
     r->setRightExpr(rc);
 
+    uhdm::IntTypespec* lrts = s.make<uhdm::IntTypespec>();
+    uhdm::RefTypespec* lrt = s.make<uhdm::RefTypespec>();
+    lrts->setParent(c);
+    lrt->setParent(lc);
+    lrt->setActual(lrts);
+    lc->setTypespec(lrt);
+
+    uhdm::RefTypespec* rrt = s.make<uhdm::RefTypespec>();
+    lrts->setParent(c);
+    rrt->setParent(lc);
+    rrt->setActual(lrts);
+    rc->setTypespec(rrt);
 
   }
 }
@@ -5501,6 +5513,7 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   c->setConstType(vpiStringConst);
   uhdm::StringTypespec* cts = s.make<uhdm::StringTypespec>();
   uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
+  cts->setParent(scall);
   crt->setParent(c);
   crt->setActual(cts);
   c->setTypespec(crt);

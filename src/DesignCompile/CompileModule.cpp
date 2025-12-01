@@ -67,6 +67,7 @@
 #include <uhdm/sequence_decl.h>
 #include <uhdm/table_entry.h>
 #include <uhdm/udp_defn.h>
+#include <uhdm/Utils.h>
 #include <uhdm/vpi_user.h>
 
 #include <cstdint>
@@ -506,6 +507,12 @@ bool CompileModule::collectUdpObjects_() {
         c->setSize(64);
         c->setConstType(vpiUIntConst);
         c->setParent(assign_stmt);
+        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        ts->setParent(assign_stmt);
+        rt->setParent(c);
+        rt->setActual(ts);
+        c->setTypespec(rt);
         fC->populateCoreMembers(Value, Value, c);
         break;
       }

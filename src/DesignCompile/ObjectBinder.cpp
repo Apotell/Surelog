@@ -878,8 +878,7 @@ void ObjectBinder::visitBitSelect(const uhdm::BitSelect* object) {
     if (const uhdm::Typespec* const t = uhdm::getTypespec(actual1)) {
       if (any_cast<uhdm::UnsupportedTypespec>(t) == nullptr) {
         if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
-          if (const uhdm::UnsupportedTypespec* const actual2 =
-                  rt->getActual<uhdm::UnsupportedTypespec>()) {
+          if (rt->getActual<uhdm::UnsupportedTypespec>() != nullptr) {
             const_cast<uhdm::RefTypespec*>(rt)->setActual(
                 const_cast<uhdm::Typespec*>(t));
           }
@@ -966,8 +965,7 @@ void ObjectBinder::visitHierPath(const uhdm::HierPath* object) {
       const uhdm::Any* currActual = uhdm::getActual(currAny);
 
       if ((currActual == nullptr) && (prevBitSelect != nullptr)) {
-        if (const uhdm::BitSelect* const currBitSelect =
-                any_cast<uhdm::BitSelect>(currAny)) {
+        if (any_cast<uhdm::BitSelect>(currAny) != nullptr) {
           currActual = prevBitSelect;
         }
       }
@@ -1076,8 +1074,7 @@ void ObjectBinder::visitRefObj(const uhdm::RefObj* object) {
         uhdm::AnyCollection::const_iterator it =
             std::find(pe->cbegin(), pe->cend(), object);
         if ((it != pe->begin()) && (it != pe->cend())) {
-          if (const uhdm::NamedEvent* const ne =
-                  any_cast<uhdm::NamedEvent>(*--it)) {
+          if (any_cast<uhdm::NamedEvent>(*--it) != nullptr) {
             // event.triggered is a property and can't be bound to anything.
             // SL doesn' model properties, yet!
             return;
@@ -1100,8 +1097,7 @@ void ObjectBinder::visitRefObj(const uhdm::RefObj* object) {
     if (const uhdm::Typespec* const t = uhdm::getTypespec(actual1)) {
       if (t->getUhdmType() != uhdm::UhdmType::UnsupportedTypespec) {
         if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
-          if (const uhdm::UnsupportedTypespec* const actual2 =
-                  rt->getActual<uhdm::UnsupportedTypespec>()) {
+          if (rt->getActual<uhdm::UnsupportedTypespec>() != nullptr) {
             const_cast<uhdm::RefTypespec*>(rt)->setActual(
                 const_cast<uhdm::Typespec*>(t));
           }
@@ -1519,8 +1515,7 @@ void ObjectBinder::bind(const uhdm::Design* object, bool report) {
           serializer->getFactory<uhdm::RefTypespec>()) {
     for (uhdm::Any* source : factory->getObjects()) {
       uhdm::RefTypespec* const rt = any_cast<uhdm::RefTypespec>(source);
-      if (const uhdm::UnsupportedTypespec* const uts =
-              rt->getActual<uhdm::UnsupportedTypespec>()) {
+      if (rt->getActual<uhdm::UnsupportedTypespec>() != nullptr) {
         if (const uhdm::Typespec* const replacement = findType(source)) {
           rt->setActual(const_cast<uhdm::Typespec*>(replacement));
         }

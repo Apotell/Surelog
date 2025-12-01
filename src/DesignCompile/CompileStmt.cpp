@@ -2116,7 +2116,6 @@ bool CompileHelper::compileFunction(DesignComponent* component,
         fC->Child(Function_body_declaration);
     beginNameId = endNameId = fC->Sibling(Function_data_type_or_implicit);
     if (fC->Type(beginNameId) == VObjectType::paInterface_identifier) {
-      const NodeId String_constId = fC->Child(beginNameId);
       endNameId = fC->Sibling(beginNameId);
       name = StrCat(fC->SymName(beginNameId), ".", fC->SymName(endNameId));
       Tf_port_list = fC->Sibling(endNameId);

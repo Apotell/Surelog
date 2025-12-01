@@ -853,25 +853,34 @@ def _generate_SV3_1aParserTreeListener_cpp(tokens: list, rules: list, template_f
 def _generate_AstListener_h(pp_rules: list, pa_rules: list, template_filepath: str, output_filepath: str):
   global _tokens
 
-  public_enter_leave_declarations = []
-  private_listen_declarations = []
+  listener_public_enter_leave_declarations = []
+  listener_private_listen_declarations = []
+  tracer_public_enter_leave_declarations = []
   for prefix, rules in [('PP', pp_rules), ('PA', pa_rules)]:
     for rule in rules:
-      public_enter_leave_declarations.extend([
+      listener_public_enter_leave_declarations.extend([
        f'  virtual void enter{prefix}_{rule}(const AstNode& node) {{}}',
        f'  virtual void leave{prefix}_{rule}(const AstNode& node) {{}}',
         ''
       ])
+      tracer_public_enter_leave_declarations.extend([
+       f'  void enter{prefix}_{rule}(const AstNode& node) final {{ TRACE_ENTER; }}',
+       f'  void leave{prefix}_{rule}(const AstNode& node) final {{ TRACE_LEAVE; }}',
+        ''
+      ])
 
-      private_listen_declarations.append(f'  void listen{prefix}_{rule}(const AstNode& node);')
-    private_listen_declarations.append('')
+      listener_private_listen_declarations.append(f'  void listen{prefix}_{rule}(const AstNode& node);')
+    listener_private_listen_declarations.append('')
 
-  public_visit_declarations = [f'  virtual void visit_{token}(const AstNode& node) {{}}' for token in _tokens]
+  listener_public_visit_declarations = [f'  virtual void visit_{token}(const AstNode& node) {{}}' for token in _tokens]
+  tracer_public_visit_declarations = [f'  void visit_{token}(const AstNode& node) final {{ TRACE_VISIT; }}' for token in _tokens]
 
   content = open(template_filepath, 'rt').read()
-  content = content.replace('<PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(public_enter_leave_declarations).rstrip())
-  content = content.replace('<PUBLIC_VISIT_DECLARATIONS>', '\n'.join(public_visit_declarations).rstrip())
-  content = content.replace('<PRIVATE_LISTEN_DECLARATIONS>', '\n'.join(private_listen_declarations).rstrip())
+  content = content.replace('//<LISTENER_PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(listener_public_enter_leave_declarations).rstrip())
+  content = content.replace('//<LISTENER_PUBLIC_VISIT_DECLARATIONS>', '\n'.join(listener_public_visit_declarations).rstrip())
+  content = content.replace('//<LISTENER_PRIVATE_LISTEN_DECLARATIONS>', '\n'.join(listener_private_listen_declarations).rstrip())
+  content = content.replace('//<TRACER_PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(tracer_public_enter_leave_declarations).rstrip())
+  content = content.replace('//<TRACER_PUBLIC_VISIT_DECLARATIONS>', '\n'.join(tracer_public_visit_declarations).rstrip())
   _write_output(output_filepath, content)
 
 
@@ -898,28 +907,8 @@ def _generate_AstListener_cpp(pp_rules: list, pa_rules: list, template_filepath:
   listen_case_statements.extend([f'    case VObjectType::{token}: visit(node); visit_{token}(node); break;' for token in _tokens])
 
   content = open(template_filepath, 'rt').read()
-  content = content.replace('<PRIVATE_LISTEN_IMPLEMENTATIONS>', '\n'.join(private_listen_implementations).rstrip())
-  content = content.replace('<LISTEN_CASE_STATEMENTS>', '\n'.join(listen_case_statements).rstrip())
-  _write_output(output_filepath, content)
-
-
-def _generate_AstTraceListener_h(pp_rules: list, pa_rules: list, template_filepath: str, output_filepath: str):
-  global _tokens
-
-  public_enter_leave_declarations = []
-  for prefix, rules in [('PP', pp_rules), ('PA', pa_rules)]:
-    for rule in rules:
-      public_enter_leave_declarations.extend([
-       f'  void enter{prefix}_{rule}(const AstNode& node) final {{ TRACE_ENTER; }}',
-       f'  void leave{prefix}_{rule}(const AstNode& node) final {{ TRACE_LEAVE; }}',
-        ''
-      ])
-
-  public_visit_declarations = [f'  void visit_{token}(const AstNode& node) final {{ TRACE_VISIT; }}' for token in _tokens]
-
-  content = open(template_filepath, 'rt').read()
-  content = content.replace('<PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(public_enter_leave_declarations).rstrip())
-  content = content.replace('<PUBLIC_VISIT_DECLARATIONS>', '\n'.join(public_visit_declarations).rstrip())
+  content = content.replace('//<PRIVATE_LISTEN_IMPLEMENTATIONS>', '\n'.join(private_listen_implementations).rstrip())
+  content = content.replace('//<LISTEN_CASE_STATEMENTS>', '\n'.join(listen_case_statements).rstrip())
   _write_output(output_filepath, content)
 
 
@@ -1016,11 +1005,6 @@ def _main():
     pp_rules, pa_rules,
     os.path.join(args.input_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstListener.template.hpp'),
     os.path.join(args.output_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstListener.h'))
-
-  _generate_AstTraceListener_h(
-    pp_rules, pa_rules,
-    os.path.join(args.input_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstTraceListener.template.hpp'),
-    os.path.join(args.output_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstTraceListener.h'))
 
   _generate_AstListener_cpp(
     pp_rules, pa_rules,

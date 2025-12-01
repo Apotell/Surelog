@@ -401,12 +401,10 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
           expectedRelation = LineColumnRelation::Inside;
         }
       }
-    } else if (const uhdm::Variable* const parentAsVariable =
-                   parent->Cast<uhdm::Variable>()) {
+    } else if (parent->Cast<uhdm::Variable>() != nullptr) {
       expectedRelation = LineColumnRelation::Before;
     }
-  } else if (const uhdm::RefObj* const objAsRefObj =
-                 any_cast<uhdm::RefObj>(object)) {
+  } else if (any_cast<uhdm::RefObj>(object) != nullptr) {
     if (const uhdm::BitSelect* const parentAsBitSelect =
             any_cast<uhdm::BitSelect>(parent)) {
       if (parentAsBitSelect->getIndex() == object) {
@@ -1281,8 +1279,7 @@ void IntegrityChecker::visitRefObj(const uhdm::RefObj* object) {
         uhdm::AnyCollection::const_iterator it =
             std::find(pe->cbegin(), pe->cend(), object);
         if ((it != pe->begin()) && (it != pe->cend())) {
-          if (const uhdm::NamedEvent* const ne =
-                  any_cast<uhdm::NamedEvent>(*--it)) {
+          if (any_cast<uhdm::NamedEvent>(*--it) != nullptr) {
             // event.triggered is a property and can't be bound to anything.
             // SL doesn' model properties, yet!
             return;

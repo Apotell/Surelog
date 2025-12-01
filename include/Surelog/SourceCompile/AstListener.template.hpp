@@ -39,6 +39,30 @@
 #include <unordered_set>
 #include <vector>
 
+// clang-format off
+#define TRACE_INIT_CONTEXT                \
+  int32_t sl = 0, sc = 0, el = 0, ec = 0; \
+  std::string_view text;                  \
+  getNodeLocation(node, sl, sc, el, ec);  \
+  getNodeText(node, text)
+
+#define TRACE_PRINT_CONTEXT \
+  "(" << (NodeId)node << ") [" << sl << "," << sc <<  ":" << el << "," << ec <<  "], (" << escaped(text) << ")"
+
+#define TRACE_ENTER TRACE_INIT_CONTEXT;       \
+  m_strm << std::string(m_indent++ * 2, ' ')  \
+  << __func__ << ": " << TRACE_PRINT_CONTEXT  \
+  << std::endl
+#define TRACE_LEAVE TRACE_INIT_CONTEXT;       \
+  m_strm << std::string(2 * --m_indent, ' ')  \
+  << __func__ << ": " << TRACE_PRINT_CONTEXT  \
+  << std::endl
+#define TRACE_VISIT TRACE_INIT_CONTEXT;       \
+  m_strm << std::string(2 * m_indent, ' ')    \
+  << __func__ << ": " << TRACE_PRINT_CONTEXT  \
+  << std::endl
+// clang-format on
+
 namespace SURELOG {
 class AstListener;
 class Session;
@@ -167,15 +191,24 @@ class AstListener {
 
   virtual void enter(const AstNode& node) {}
   virtual void leave(const AstNode& node) {}
-  virtual void visit(const AstNode& node){}
+  virtual void visit(const AstNode& node) {}
 
   // clang-format off
-<PUBLIC_ENTER_LEAVE_DECLARATIONS>
+//<LISTENER_PUBLIC_ENTER_LEAVE_DECLARATIONS>
   // clang-format on
 
   // clang-format off
-<PUBLIC_VISIT_DECLARATIONS>
+//<LISTENER_PUBLIC_VISIT_DECLARATIONS>
   // clang-format on
+
+  template <typename T, typename... Args>
+  T* fork(Args&&... args) {
+    T* const listener = new T(args...);
+    listener->m_session = m_session;
+    listener->m_objects = m_objects;
+    listener->m_count = m_count;
+    return listener;
+  }
 
   void listen(const AstNode& node);
   void listenChildren(const AstNode& node);
@@ -269,7 +302,7 @@ class AstListener {
 
  private:
   // clang-format off
-<PRIVATE_LISTEN_DECLARATIONS>
+//<LISTENER_PRIVATE_LISTEN_DECLARATIONS>
   // clang-format on
 
  protected:
@@ -294,6 +327,57 @@ AstNodeIterationHelper::Iterator::operator++(int) {
   m_node = m_listener->getNodeNextSibling(m_node);
   return tmp;
 }
+
+class AstTraceListener final : public AstListener {
+ public:
+  explicit AstTraceListener(std::ostream& strm) : m_strm(strm), m_indent(0) {}
+  ~AstTraceListener() final = default;
+
+  void enterSourceFile(Session* session, SURELOG::PathId fileId,
+                       const std::string& sourceText) final;
+  void leaveSourceFile(SURELOG::PathId fileId,
+                       const std::string& sourceText) final;
+
+  std::string escaped(std::string_view str) const {
+    std::string result;
+    result.reserve(str.size() * 2);
+    for (char ch : str) {
+      if (ch == '\'')
+        result.append("\\'");
+      else if (ch == '\"')
+        result.append("\\\"");
+      else if (ch == '\\')
+        result.append("\\");
+      else if (ch == '\n')
+        result.append("\\n");
+      else if (ch == '\r')
+        result.append("\\r");
+      else if (ch == '\t')
+        result.append("\\t");
+      else
+        result.append(1, ch);
+    }
+    return result;
+  }
+
+  // clang-format off
+//<TRACER_ENTER_LEAVE_DECLARATIONS>
+  // clang-format on
+
+  // clang-format off
+//<TRACER_VISIT_DECLARATIONS>
+  // clang-format on
+
+ private:
+  std::ostream& m_strm;
+  size_t m_indent = 0;
+};
 }  // namespace SURELOG
+
+#undef TRACE_INIT_CONTEXT
+#undef TRACE_PRINT_CONTEXT
+#undef TRACE_ENTER
+#undef TRACE_LEAVE
+#undef TRACE_VISIT
 
 #endif  // SURELOG_ASTLISTENER_H

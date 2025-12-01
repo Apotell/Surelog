@@ -537,7 +537,7 @@ size_t AstListener::clearVisitedChildren(const AstNode& node,
 }
 
 // clang-format off
-<PRIVATE_LISTEN_IMPLEMENTATIONS>
+//<PRIVATE_LISTEN_IMPLEMENTATIONS>
 // clang-format on
 
 void AstListener::listen(const AstNode& node) {
@@ -547,9 +547,35 @@ void AstListener::listen(const AstNode& node) {
 
   // clang-format off
   switch (node.m_object->m_type) {
-<LISTEN_CASE_STATEMENTS>
+//<LISTEN_CASE_STATEMENTS>
     default: break;
   };
   // clang-format on
+}
+
+void AstTraceListener::enterSourceFile(Session* session, SURELOG::PathId fileId,
+                                       const std::string& sourceText) {
+  AstListener::enterSourceFile(session, fileId, sourceText);
+
+  FileSystem* const fileSystem = m_session->getFileSystem();
+
+  m_strm << std::string(m_indent++ * 2, ' ') << __func__ << ": "
+         << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
+
+  const std::string srcFilepath =
+      fileSystem->toPlatformAbsPath(fileId).string();
+  if ((srcFilepath.find("/third_party/UVM/") != std::string::npos) ||
+      (srcFilepath.find("\\third_party\\UVM\\") != std::string::npos)) {
+    markVisited(getRootNode(), false);
+  }
+}
+
+void AstTraceListener::leaveSourceFile(SURELOG::PathId fileId,
+                                       const std::string& sourceText) {
+  AstListener::leaveSourceFile(fileId, sourceText);
+
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  m_strm << std::string(2 * --m_indent, ' ') << __func__ << ": "
+         << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
 }
 }  // namespace SURELOG

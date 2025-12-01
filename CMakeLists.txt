@@ -404,7 +404,6 @@ add_custom_command(
   OUTPUT ${GENDIR}/src/parser/generated-listeners.tstamp
          ${GENDIR}/include/Surelog/API/VObjectTypes_py.h
          ${GENDIR}/include/Surelog/SourceCompile/AstListener.h
-         ${GENDIR}/include/Surelog/SourceCompile/AstTraceListener.h
          ${GENDIR}/include/Surelog/SourceCompile/SV3_1aPpTreeShapeListener.h
          ${GENDIR}/include/Surelog/SourceCompile/SV3_1aTreeShapeListener.h
          ${GENDIR}/include/Surelog/SourceCompile/VObjectTypes.h
@@ -415,7 +414,6 @@ add_custom_command(
   DEPENDS ${GENDIR}/src/parser/generated-parsers.tstamp
           ${surelog_grammars-GENERATED_SRC}
           ${PROJECT_SOURCE_DIR}/include/Surelog/SourceCompile/AstListener.template.hpp
-          ${PROJECT_SOURCE_DIR}/include/Surelog/SourceCompile/AstTraceListener.template.hpp
           ${PROJECT_SOURCE_DIR}/scripts/generate_parser_listener.py
           ${PROJECT_SOURCE_DIR}/src/SourceCompile/AstListener.template.cxx
           ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aParserTreeListener.template.cxx
@@ -432,7 +430,6 @@ add_custom_target(GenerateParserListeners DEPENDS
   ${surelog_grammars-GENERATED_SRC}
   ${GENDIR}/include/Surelog/API/VObjectTypes_py.h
   ${GENDIR}/include/Surelog/SourceCompile/AstListener.h
-  ${GENDIR}/include/Surelog/SourceCompile/AstTraceListener.h
   ${GENDIR}/include/Surelog/SourceCompile/SV3_1aPpTreeShapeListener.h
   ${GENDIR}/include/Surelog/SourceCompile/SV3_1aTreeShapeListener.h
   ${GENDIR}/include/Surelog/SourceCompile/VObjectTypes.h
@@ -937,7 +934,6 @@ install(
 install(
   FILES ${PROJECT_SOURCE_DIR}/include/Surelog/SourceCompile/SymbolTable.h
         ${GENDIR}/include/Surelog/SourceCompile/AstListener.h
-        ${GENDIR}/include/Surelog/SourceCompile/AstTraceListener.h
         ${GENDIR}/include/Surelog/SourceCompile/VObjectTypes.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Surelog/SourceCompile)
 install(

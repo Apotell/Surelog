@@ -500,13 +500,14 @@ bool CompileModule::collectUdpObjects_() {
         fC->populateCoreMembers(id, id, assign_stmt);
         assign_stmt->setParent(init);
         uhdm::Constant* c = s.make<uhdm::Constant>();
+        c->setParent(assign_stmt);
         assign_stmt->setRhs(c);
         std::string val = StrCat("UINT:", fC->SymName(Value));
         c->setValue(val);
         c->setDecompile(fC->SymName(Value));
         c->setSize(64);
         c->setConstType(vpiUIntConst);
-        c->setParent(assign_stmt);
+        
         uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
         ts->setParent(assign_stmt);

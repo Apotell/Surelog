@@ -3495,6 +3495,7 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
       if (isInt) ts = s.make<uhdm::IntTypespec>();
       else ts = s.make<uhdm::RealTypespec>();
       uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+      ts->setParent(pstmt);
       rt->setParent(c);
       rt->setActual(ts);
       c->setTypespec(rt);
@@ -4510,6 +4511,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         c->setParent(call);
         uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        ts->setParent(call);
         rt->setParent(c);
         rt->setActual(ts);
         c->setTypespec(rt);
@@ -5318,6 +5320,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
 
     uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
     uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    ts->setParent(rhs);
     rt->setParent(c);
     rt->setActual(ts);
     c->setTypespec(rt);
@@ -5412,6 +5415,7 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
   if (lr || rr) {
     uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
+    tps->setParent(c);
     tpsRef->setParent(c);
     tpsRef->setActual(tps);
     c->setTypespec(tpsRef);
@@ -5433,7 +5437,6 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
     lc->setTypespec(lrt);
 
     uhdm::RefTypespec* rrt = s.make<uhdm::RefTypespec>();
-    lrts->setParent(c);
     rrt->setParent(lc);
     rrt->setActual(lrts);
     rc->setTypespec(rrt);

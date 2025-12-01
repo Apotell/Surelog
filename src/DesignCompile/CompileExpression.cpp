@@ -410,7 +410,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::Constant *c = s.make<uhdm::Constant>();
       c->setParent(pscope);
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
-      rt->setParent(c);
+      //rt->setParent(c);
       uhdm::Typespec *tps = nullptr;
       fC->populateCoreMembers(child, child, c);
       std::string value = std::string(fC->SymName(child));
@@ -515,6 +515,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         c->setSize(64);
       }
       tps->setParent(pscope);
+      rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setValue(v);

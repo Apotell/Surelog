@@ -3268,6 +3268,9 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
     bool muteErrors) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::RangeCollection *ranges = nullptr;
+  Design *const design = m_compileDesign->getCompiler()->getDesign();
+  if (pexpr == nullptr) pexpr = component->getUhdmModel();
+  if (pexpr == nullptr) pexpr = design->getUhdmDesign();
   size = 0;
   if (Packed_dimension &&
       ((fC->Type(Packed_dimension) == VObjectType::paPacked_dimension) ||

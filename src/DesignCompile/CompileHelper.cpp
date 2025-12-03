@@ -156,34 +156,6 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
   return true;
 }
 
-static bool largeInt(std::string_view str) {
-  bool isSigned = false;
-  size_t pos = str.find('\'');
-  if (pos != std::string::npos) {
-    if (str.find_first_of("sS") != std::string::npos) {
-      isSigned = true;
-      str = str.substr(pos + 3);
-    } else {
-      str = str.substr(pos + 2);
-    }
-  }
-  std::string value(str);
-  value = StringUtils::replaceAll(value, "_", "");
-  bool isLarge = false;
-  if (value.size() > 20) {
-    isLarge = true;
-  } else if (value.size() == 20) {
-    if (isSigned) {
-      int64_t test = 0;
-      isLarge = NumUtils::parseInt64(value, &test) == nullptr;
-    } else {
-      uint64_t test = 0;
-      isLarge = NumUtils::parseUint64(value, &test) == nullptr;
-    }
-  }
-  return isLarge;
-}
-
 uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   Value::Type valueType = val->getType();
@@ -3502,6 +3474,7 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
 
       c->setParent(dc);
       fC->populateCoreMembers(valueNodeId, valueNodeId, c);
+      fC->populateCoreMembers(valueNodeId, valueNodeId, rt);
       dc->setDelay(c);
     }
   }
@@ -4516,6 +4489,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         rt->setActual(ts);
         c->setTypespec(rt);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
+        fC->populateCoreMembers(argumentNode, argumentNode, rt);
         arguments->emplace_back(c);
       }
     }
@@ -5320,6 +5294,11 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
 
     uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
     uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    rt->setFile(rhs->getFile());
+    rt->setStartLine(rhs->getStartLine());
+    rt->setStartColumn(rhs->getStartColumn());
+    rt->setEndLine(rhs->getEndLine());
+    rt->setEndColumn(rhs->getEndColumn());
     ts->setParent(rhs);
     rt->setParent(c);
     rt->setActual(ts);

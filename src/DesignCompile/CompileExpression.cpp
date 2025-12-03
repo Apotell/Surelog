@@ -412,6 +412,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
       //rt->setParent(c);
       uhdm::Typespec *tps = nullptr;
+      fC->populateCoreMembers(child, child, rt);
       fC->populateCoreMembers(child, child, c);
       std::string value = std::string(fC->SymName(child));
       value.erase(std::remove(value.begin(), value.end(), '_'), value.end());
@@ -531,6 +532,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       c->setSize(64);
       uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();      
       uhdm::Typespec *tps = s.make<uhdm::RealTypespec>();
+      fC->populateCoreMembers(child, child, rt);
       c->setParent(pscope);
       tps->setParent(pscope);
       rt->setParent(c);
@@ -558,6 +560,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -578,6 +581,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -594,6 +598,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -616,6 +621,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -636,6 +642,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       fC->populateCoreMembers(child, child, c);
       result = c;
       break;
@@ -654,6 +661,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setActual(tps);
       c->setTypespec(rt);
       fC->populateCoreMembers(child, child, c);
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -670,6 +678,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("'Z");
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -686,6 +695,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("'X");
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -709,6 +719,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setActual(tps);
       c->setTypespec(rt);
       c->setDecompile("1'bX");
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -760,6 +771,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setActual(tps);
       tps->setSigned(false);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -776,6 +788,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       rt->setParent(c);
       rt->setActual(tps);
       c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
       result = c;
       break;
     }
@@ -1539,6 +1552,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           rt->setParent(c);
           rt->setActual(ts);
           c->setTypespec(rt);
+          fC->populateCoreMembers(child, child, rt);
           result = c;
           break;
         }
@@ -1555,6 +1569,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           rt->setParent(c);
           rt->setActual(ts);
           c->setTypespec(rt);
+          fC->populateCoreMembers(child, child, rt);
           result = c;
           break;
         }
@@ -2174,6 +2189,8 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               c->setTypespec(rt);
               fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
                                       c);
+              fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
+                                      rt);
               args->emplace_back(c);
             }
             Sequence_actual_arg = fC->Sibling(Sequence_actual_arg);
@@ -2228,6 +2245,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                   rt->setParent(c);
                   rt->setActual(ts);
                   c->setTypespec(rt);
+                  fC->populateCoreMembers(subOp1, subOp1, rt);
                   fC->populateCoreMembers(subOp1, subOp1, c);
                   operation->getOperands()->emplace_back(c);
                 }
@@ -2699,6 +2717,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                 rt->setActual(ts);
                 c->setTypespec(rt);
                 fC->populateCoreMembers(subOp1, subOp1, c);
+                fC->populateCoreMembers(subOp1, subOp1, rt);
                 operands->emplace_back(c);
               }
             }
@@ -3368,11 +3387,13 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         rexpc->setParent(range);
         uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
         uhdm::RefTypespec *rt1 = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, rt1);
         ts->setParent(pexpr);
         rt1->setParent(lexpc);
         rt1->setActual(ts);
         lexpc->setTypespec(rt1);
-        uhdm::RefTypespec *rt2 = s.make<uhdm::RefTypespec>();        
+        uhdm::RefTypespec *rt2 = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, rt2);
         rt2->setParent(rexpc);
         rt2->setActual(ts);
         rexpc->setTypespec(rt2);

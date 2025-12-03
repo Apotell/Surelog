@@ -2532,10 +2532,11 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
     std::string_view instName = fC->SymName(identifierId);
 
     if (NodeId unpackedDimId = fC->Sibling(identifierId)) {
+      uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
       int32_t unpackedSize = 0;
-      if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
-              mod, fC, unpackedDimId, nullptr, instance, unpackedSize, false)) {
-        uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
+      if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(mod, fC, unpackedDimId, mod_array, instance,
+                            unpackedSize, false)) {
+        
         mod_array->setRanges(unpackedDimensions);
         mod_array->setName(instName);
         mod_array->setFullName(modName);
@@ -2654,13 +2655,14 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod,
     if (unpackedDimId &&
         (fC->Type(unpackedDimId) == VObjectType::paUnpacked_dimension)) {
       // Vector instances
+      uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
       int32_t size;
-      uhdm::RangeCollection* ranges =
-          compileRanges(mod, fC, unpackedDimId, nullptr, instance, size, false);
+      uhdm::RangeCollection* ranges = compileRanges(
+          mod, fC, unpackedDimId, gate_array, instance, size, false);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.makeCollection<uhdm::PrimitiveArray>());
       }
-      uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
+      
       gate_array->setRanges(ranges);
       gate_array->getPrimitives(true)->emplace_back(gate);
       mod->getPrimitiveArrays()->emplace_back(gate_array);
@@ -2749,7 +2751,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
       gate_array = s.make<uhdm::SwitchArray>();
       int32_t size;
       uhdm::RangeCollection* ranges = compileRanges(
-          mod, fC, Unpacked_dimension, nullptr, instance, size, false);
+          mod, fC, Unpacked_dimension, gate_array, instance, size, false);
       gate_array->setRanges(ranges);
       gate_array->getPrimitives(true)->emplace_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {

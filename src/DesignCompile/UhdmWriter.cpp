@@ -1782,16 +1782,16 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     s.save(uhdmFile);
   }
 
-  //if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
-  //  for (auto h : designs) {
-  //    const uhdm::Design* const d =
-  //        static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
-  //    checker->check(d);
-  //  }
+  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+    for (auto h : designs) {
+      const uhdm::Design* const d =
+          static_cast<const uhdm::Design*>(((const uhdm_handle*)h)->object);
+      checker->check(d);
+    }
 
-  //  delete checker;
-  //  errors->printMessages(clp->muteStdout());
-  //}
+    delete checker;
+    errors->printMessages(clp->muteStdout());
+  }
 
   if (ConstTpsChecker* const checker = new ConstTpsChecker(m_session)) {
     for (auto h : designs) {

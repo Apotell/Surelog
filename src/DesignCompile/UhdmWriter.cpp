@@ -567,7 +567,6 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
         if (std::vector<uhdm::Range*>* ranges =
                 m_helper.compileRanges(mod, fC, unpackedDimensions, array_ts,
                                        instance, unpackedSize, false)) {
-          
           array_ts->setRanges(ranges);
           array_ts->setParent(dest_port);
           fC->populateCoreMembers(unpackedDimensions, unpackedDimensions,
@@ -1168,7 +1167,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
                                        instance, unpackedSize, false)) {
           NodeId id = sig->getNodeId();
           const std::string typeName = sig->getInterfaceTypeName();
-          
+
           smarray->setRanges(unpackedDimensions);
           for (auto d : *unpackedDimensions) d->setParent(smarray);
           if (fC->Type(sig->getNameId()) == VObjectType::STRING_CONST) {

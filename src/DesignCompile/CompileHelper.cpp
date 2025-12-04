@@ -2534,9 +2534,9 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
     if (NodeId unpackedDimId = fC->Sibling(identifierId)) {
       uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
       int32_t unpackedSize = 0;
-      if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(mod, fC, unpackedDimId, mod_array, instance,
+      if (std::vector<uhdm::Range*>* unpackedDimensions =
+              compileRanges(mod, fC, unpackedDimId, mod_array, instance,
                             unpackedSize, false)) {
-        
         mod_array->setRanges(unpackedDimensions);
         mod_array->setName(instName);
         mod_array->setFullName(modName);
@@ -2662,7 +2662,7 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod,
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.makeCollection<uhdm::PrimitiveArray>());
       }
-      
+
       gate_array->setRanges(ranges);
       gate_array->getPrimitives(true)->emplace_back(gate);
       mod->getPrimitiveArrays()->emplace_back(gate_array);

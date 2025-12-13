@@ -254,7 +254,7 @@ Design                                                 1
 GenFor                                                 1
 Identifier                                             5
 IndexedPartSelect                                      1
-IntTypespec                                            2
+IntTypespec                                           10
 Module                                                 4
 ModuleTypespec                                         4
 Operation                                              5
@@ -263,11 +263,11 @@ Parameter                                              5
 Range                                                  1
 RefModule                                              2
 RefObj                                                 4
-RefTypespec                                            4
+RefTypespec                                           12
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                58
+Total:                                                74
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelect4/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -397,8 +397,14 @@ Design: (unnamed)
         |vpiDefName:work@tlul_fifo_sync
         |vpiActual:
         \_Module: work@tlul_fifo_sync (work@tlul_fifo_sync), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:2:1, endln:3:10
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@tlul_socket_1n), line:6:3, endln:8:6
     |vpiImportTypespec:
     \_Variable: (work@tlul_socket_1n.i), line:6:15, endln:6:16
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:6:8, endln:6:20
       |vpiParent:
@@ -410,6 +416,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@tlul_socket_1n), line:6:19, endln:6:20
+          |vpiParent:
+          \_Constant: , line:6:19, endln:6:20
+          |vpiFullName:work@tlul_socket_1n
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@tlul_socket_1n.i), line:6:15, endln:6:16
@@ -458,6 +471,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:5:61, endln:5:74
     |vpiParent:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
@@ -490,6 +507,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@tlul_socket_1n), line:5:68, endln:5:69
+              |vpiParent:
+              \_Constant: , line:5:68, endln:5:69
+              |vpiFullName:work@tlul_socket_1n
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:5:70, endln:5:71
@@ -498,6 +522,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@tlul_socket_1n), line:5:70, endln:5:71
+            |vpiParent:
+            \_Constant: , line:5:70, endln:5:71
+            |vpiFullName:work@tlul_socket_1n
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:72, endln:5:73
@@ -506,6 +537,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@tlul_socket_1n), line:5:72, endln:5:73
+          |vpiParent:
+          \_Constant: , line:5:72, endln:5:73
+          |vpiFullName:work@tlul_socket_1n
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@tlul_socket_1n), line:5:61, endln:5:64
@@ -519,6 +557,8 @@ Design: (unnamed)
   \_IntTypespec: , line:5:35, endln:5:47
   |vpiImportTypespec:
   \_BitTypespec: , line:5:61, endln:5:64
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:5:61, endln:5:74
   |vpiDefName:work@tlul_socket_1n
@@ -555,6 +595,13 @@ Design: (unnamed)
       |vpiDecompile:68'h200000000000000
       |vpiSize:68
       |HEX:200000000000000
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:18:16, endln:18:35
+        |vpiParent:
+        \_Constant: , line:18:16, endln:18:35
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@top.A), line:18:12, endln:18:35
@@ -585,6 +632,13 @@ Design: (unnamed)
           |vpiDecompile:8
           |vpiSize:64
           |UINT:8
+          |vpiTypespec:
+          \_RefTypespec: (work@top.A), line:19:18, endln:19:19
+            |vpiParent:
+            \_Constant: , line:19:18, endln:19:19
+            |vpiFullName:work@top.A
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:19:20, endln:19:21
@@ -593,6 +647,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (work@top.A), line:19:20, endln:19:21
+            |vpiParent:
+            \_Constant: , line:19:20, endln:19:21
+            |vpiFullName:work@top.A
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiWidthExpr:
       \_Constant: , line:19:23, endln:19:24
@@ -601,9 +662,22 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@top.A), line:19:23, endln:19:24
+          |vpiParent:
+          \_Constant: , line:19:23, endln:19:24
+          |vpiFullName:work@top.A
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.B), line:19:12, endln:19:25
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
 |vpiAllModules:
 \_Module: work@xbar_main (work@xbar_main), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:11:1, endln:13:10

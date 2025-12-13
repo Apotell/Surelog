@@ -187,12 +187,13 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamTypespec2/dut.sv:21:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            4
 Constant                                               6
 ContAssign                                             1
 Design                                                 1
 Identifier                                             5
 ImportTypespec                                         1
-IntTypespec                                            4
+IntTypespec                                            5
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -204,9 +205,9 @@ Parameter                                              1
 Port                                                   5
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                           15
+RefTypespec                                           21
 SourceFile                                             1
-StringTypespec                                         4
+StringTypespec                                         5
 StructTypespec                                         1
 TaggedPattern                                          4
 TypedefTypespec                                        1
@@ -214,7 +215,7 @@ TypespecMember                                         2
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                76
+Total:                                                88
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -269,6 +270,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (prim_esc_pkg), line:7:49, endln:7:53
+            |vpiParent:
+            \_Constant: , line:7:49, endln:7:53
+            |vpiFullName:prim_esc_pkg
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (prim_esc_pkg::esc_p), line:7:41, endln:7:46
@@ -289,6 +297,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (prim_esc_pkg), line:8:49, endln:8:53
+            |vpiParent:
+            \_Constant: , line:8:49, endln:8:53
+            |vpiFullName:prim_esc_pkg
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (prim_esc_pkg::esc_n), line:8:41, endln:8:46
@@ -350,6 +365,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
+  |vpiTypespec:
   \_StringTypespec: , line:7:41, endln:7:46
     |vpiParent:
     \_Package: prim_esc_pkg (prim_esc_pkg), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:1:1, endln:10:26
@@ -359,6 +378,8 @@ Design: (unnamed)
   \_StructTypespec: , line:2:11, endln:5:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:7:41, endln:7:46
   |vpiDefName:prim_esc_pkg
@@ -403,7 +424,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@nmi_gen.prim_esc_pkg), line:13:11, endln:13:26
+        |vpiParent:
+        \_Constant: , line:13:11, endln:13:26
+        |vpiFullName:work@nmi_gen.prim_esc_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
   |vpiTypespec:
   \_IntTypespec: , line:16:11, endln:16:14
     |vpiParent:
@@ -411,6 +443,8 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_esc_pkg), line:13:11, endln:13:26
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@nmi_gen.a), line:15:25, endln:15:26
     |vpiParent:
@@ -516,10 +550,16 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@nmi_gen (work@nmi_gen), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:12:1, endln:19:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:21:1, endln:26:10
+  |vpiTypespec:
   \_IntTypespec: , line:21:19, endln:21:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec2/dut.sv, line:21:1, endln:26:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:21:19, endln:21:22
   |vpiImportTypespec:
@@ -563,6 +603,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (work@top.u_nmi_gen.a), line:23:11, endln:23:12
+            |vpiParent:
+            \_Constant: , line:23:11, endln:23:12
+            |vpiFullName:work@top.u_nmi_gen.a
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:23:12, endln:23:42

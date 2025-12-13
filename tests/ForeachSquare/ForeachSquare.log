@@ -106,20 +106,20 @@ Design                                                 1
 ForeachStmt                                            2
 Identifier                                             1
 Initial                                                1
-IntTypespec                                            1
+IntTypespec                                            3
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              3
 Range                                                  2
 RefObj                                                 6
-RefTypespec                                            5
+RefTypespec                                            7
 SourceFile                                             1
 UnsupportedTypespec                                    3
 VarSelect                                              1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                38
+Total:                                                42
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachSquare/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -146,6 +146,10 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ForeachSquare/dut.sv, line:1:1, endln:11:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ForeachSquare/dut.sv, line:1:1, endln:11:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:3:14, endln:3:22
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ForeachSquare/dut.sv, line:1:1, endln:11:10
@@ -166,6 +170,13 @@ Design: (unnamed)
           |vpiDecompile:16
           |vpiSize:64
           |UINT:16
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:3:15, endln:3:17
+            |vpiParent:
+            \_Constant: , line:3:15, endln:3:17
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiRange:
     \_Range: , line:3:18, endln:3:22
@@ -183,6 +194,13 @@ Design: (unnamed)
           |vpiDecompile:16
           |vpiSize:64
           |UINT:16
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:3:19, endln:3:21
+            |vpiParent:
+            \_Constant: , line:3:19, endln:3:21
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut), line:3:5, endln:3:8
@@ -193,6 +211,8 @@ Design: (unnamed)
       \_IntTypespec: , line:3:5, endln:3:8
   |vpiImportTypespec:
   \_IntTypespec: , line:3:5, endln:3:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:14, endln:3:22
   |vpiImportTypespec:

@@ -262,7 +262,7 @@ Constant                                              13
 Design                                                 1
 Identifier                                             7
 ImportTypespec                                         1
-IntTypespec                                            2
+IntTypespec                                           14
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         2
@@ -273,14 +273,15 @@ Parameter                                              6
 Range                                                  3
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                           12
+RefTypespec                                           23
 SourceFile                                             1
+StringTypespec                                         1
 StructTypespec                                         1
 TypedefTypespec                                        3
 TypespecMember                                         2
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                80
+Total:                                               104
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeValue2Struct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -342,6 +343,13 @@ Design: (unnamed)
       |vpiDecompile:128
       |vpiSize:64
       |UINT:128
+      |vpiTypespec:
+      \_RefTypespec: (pack), line:2:37, endln:2:40
+        |vpiParent:
+        \_Constant: , line:2:37, endln:2:40
+        |vpiFullName:pack
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
@@ -356,6 +364,13 @@ Design: (unnamed)
       |vpiDecompile:256'hcebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
       |vpiSize:256
       |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
+      |vpiTypespec:
+      \_RefTypespec: (pack), line:13:7, endln:13:76
+        |vpiParent:
+        \_Constant: , line:13:7, endln:13:76
+        |vpiFullName:pack
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
@@ -364,6 +379,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
   |vpiTypespec:
   \_LogicTypespec: , line:4:11, endln:4:16
     |vpiParent:
@@ -392,6 +411,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (pack), line:4:31, endln:4:32
+            |vpiParent:
+            \_Constant: , line:4:31, endln:4:32
+            |vpiFullName:pack
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:33, endln:4:34
@@ -400,6 +426,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pack), line:4:33, endln:4:34
+          |vpiParent:
+          \_Constant: , line:4:33, endln:4:34
+          |vpiFullName:pack
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (pack::sram_key_t), line:4:38, endln:4:48
@@ -483,6 +516,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:16
   |vpiImportTypespec:
   \_TypedefTypespec: (pack::sram_key_t), line:4:38, endln:4:48
@@ -541,6 +576,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_sec_anchor_flop), line:17:44, endln:17:45
+        |vpiParent:
+        \_Constant: , line:17:44, endln:17:45
+        |vpiFullName:work@prim_sec_anchor_flop
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:45
@@ -555,6 +597,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_sec_anchor_flop), line:18:44, endln:18:45
+        |vpiParent:
+        \_Constant: , line:18:44, endln:18:45
+        |vpiFullName:work@prim_sec_anchor_flop
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:45
@@ -563,6 +612,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
   |vpiTypespec:
   \_LogicTypespec: , line:18:13, endln:18:18
     |vpiParent:
@@ -591,6 +644,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_sec_anchor_flop), line:18:26, endln:18:27
+            |vpiParent:
+            \_Constant: , line:18:26, endln:18:27
+            |vpiFullName:work@prim_sec_anchor_flop
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:18:28, endln:18:29
@@ -599,9 +659,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_sec_anchor_flop), line:18:28, endln:18:29
+          |vpiParent:
+          \_Constant: , line:18:28, endln:18:29
+          |vpiFullName:work@prim_sec_anchor_flop
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:17:13, endln:17:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:18:13, endln:18:18
   |vpiDefName:work@prim_sec_anchor_flop
@@ -678,7 +747,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.pack), line:22:8, endln:22:15
+        |vpiParent:
+        \_Constant: , line:22:8, endln:22:15
+        |vpiFullName:work@top.pack
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
   |vpiTypespec:
   \_ModuleTypespec: (work@prim_sec_anchor_flop)
     |vpiParent:
@@ -688,6 +768,8 @@ Design: (unnamed)
     \_Module: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
   |vpiImportTypespec:
   \_ImportTypespec: (pack), line:22:8, endln:22:15
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_sec_anchor_flop (u_key_out_anchor), line:25:1, endln:25:21

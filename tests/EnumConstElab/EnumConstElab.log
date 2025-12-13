@@ -337,13 +337,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConstElab/dut.sv:26:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            3
 Constant                                              21
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           2
 Identifier                                             7
-IntTypespec                                            1
-LogicTypespec                                          7
+IntTypespec                                           15
+LogicTypespec                                         11
 Module                                                 5
 ModuleTypespec                                         3
 Operation                                              3
@@ -352,7 +353,7 @@ Parameter                                              3
 Range                                                  7
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                           18
+RefTypespec                                           39
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         2
@@ -362,7 +363,7 @@ TypespecMember                                         4
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               110
+Total:                                               152
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstElab/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -436,6 +437,13 @@ Design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg), line:2:35, endln:2:37
+        |vpiParent:
+        \_Constant: , line:2:35, endln:2:37
+        |vpiFullName:work@prim_subreg
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@prim_subreg.RESVAL), line:2:26, endln:2:37
@@ -454,6 +462,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:work@prim_subreg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
@@ -462,7 +477,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:work@prim_subreg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:1:1, endln:4:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:1:1, endln:4:10
   |vpiTypespec:
   \_IntTypespec: , line:3:4, endln:3:7
     |vpiParent:
@@ -470,6 +500,10 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:3:4, endln:3:7
   |vpiImportTypespec:
@@ -538,6 +572,13 @@ Design: (unnamed)
           |vpiDecompile:'1
           |vpiSize:-1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_shadow), line:18:10, endln:18:12
+            |vpiParent:
+            \_Constant: , line:18:10, endln:18:12
+            |vpiFullName:work@prim_subreg_shadow
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.b), line:18:7, endln:18:8
@@ -609,6 +650,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:8:14, endln:8:15
+          |vpiParent:
+          \_Constant: , line:8:14, endln:8:15
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:8:16, endln:8:17
@@ -617,7 +665,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:8:16, endln:8:17
+          |vpiParent:
+          \_Constant: , line:8:16, endln:8:17
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
   |vpiTypespec:
   \_LogicTypespec: , line:9:7, endln:9:12
     |vpiParent:
@@ -633,6 +692,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:9:14, endln:9:15
+          |vpiParent:
+          \_Constant: , line:9:14, endln:9:15
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:16, endln:9:17
@@ -641,6 +707,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:9:16, endln:9:17
+          |vpiParent:
+          \_Constant: , line:9:16, endln:9:17
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_EnumTypespec: , line:12:12, endln:14:12
@@ -662,6 +735,10 @@ Design: (unnamed)
       |vpiDecompile:3'b000
       |vpiSize:3
   |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
+  |vpiTypespec:
   \_TypedefTypespec: (enum_t), line:14:6, endln:14:12
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
@@ -682,6 +759,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@prim_subreg)
     |vpiParent:
     \_Design: (unnamed)
@@ -695,13 +776,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:7, endln:8:12
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:9:7, endln:9:12
   |vpiImportTypespec:
   \_EnumTypespec: , line:12:12, endln:14:12
   |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (enum_t), line:14:6, endln:14:12
   |vpiImportTypespec:
   \_StringTypespec: , line:17:7, endln:17:8
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@prim_subreg_shadow
   |vpiRefModule:
   \_RefModule: work@prim_subreg (staged_reg), line:21:4, endln:21:15
@@ -774,6 +861,13 @@ Design: (unnamed)
           |vpiDecompile:'0
           |vpiSize:-1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:38:10, endln:38:12
+            |vpiParent:
+            \_Constant: , line:38:10, endln:38:12
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@top.b), line:38:7, endln:38:8
@@ -845,6 +939,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:28:14, endln:28:15
+          |vpiParent:
+          \_Constant: , line:28:14, endln:28:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:28:16, endln:28:17
@@ -853,7 +954,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:28:16, endln:28:17
+          |vpiParent:
+          \_Constant: , line:28:16, endln:28:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
   |vpiTypespec:
   \_LogicTypespec: , line:29:7, endln:29:12
     |vpiParent:
@@ -869,6 +981,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:29:14, endln:29:15
+          |vpiParent:
+          \_Constant: , line:29:14, endln:29:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:29:16, endln:29:17
@@ -877,6 +996,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:29:16, endln:29:17
+          |vpiParent:
+          \_Constant: , line:29:16, endln:29:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_EnumTypespec: , line:32:12, endln:34:12
@@ -898,6 +1024,10 @@ Design: (unnamed)
       |vpiDecompile:2'b11
       |vpiSize:2
   |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
+  |vpiTypespec:
   \_TypedefTypespec: (enum_t), line:34:6, endln:34:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
@@ -918,6 +1048,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@prim_subreg_shadow)
     |vpiParent:
     \_Design: (unnamed)
@@ -931,13 +1065,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:7, endln:28:12
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:29:7, endln:29:12
   |vpiImportTypespec:
   \_EnumTypespec: , line:32:12, endln:34:12
   |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (enum_t), line:34:6, endln:34:12
   |vpiImportTypespec:
   \_StringTypespec: , line:37:7, endln:37:8
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@prim_subreg_shadow (u_ctrl_reg_shadowed), line:41:4, endln:41:22

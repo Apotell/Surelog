@@ -137,6 +137,7 @@ Design                                                 1
 GenIfElse                                              2
 GenRegion                                              1
 Identifier                                             5
+IntTypespec                                            4
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              3
@@ -144,9 +145,10 @@ ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
 RefObj                                                 3
+RefTypespec                                            4
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                34
+Total:                                                42
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfElseIf2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -202,6 +204,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (work@axi), line:6:19, endln:6:20
+        |vpiParent:
+        \_Constant: , line:6:19, endln:6:20
+        |vpiFullName:work@axi
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi.j), line:6:15, endln:6:20
@@ -216,6 +225,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@axi), line:7:33, endln:7:34
+        |vpiParent:
+        \_Constant: , line:7:33, endln:7:34
+        |vpiFullName:work@axi
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:34
@@ -279,6 +295,12 @@ Design: (unnamed)
             \_Begin: (work@axi.LEAF_NODES), line:16:16, endln:17:14
             |vpiName:LEAF_NODES
           |vpiFullName:work@axi.LEAF_NODES
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@axi), line:13:16, endln:17:14
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_GenIfElse: , line:13:16, endln:17:14
           |vpiParent:
@@ -316,11 +338,24 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@axi), line:13:38, endln:13:39
+                  |vpiParent:
+                  \_Constant: , line:13:38, endln:13:39
+                  |vpiFullName:work@axi
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
           |vpiStmt:
           \_Begin: (work@axi.MIDDLE_NODES), line:13:42, endln:15:14
           |vpiElseStmt:
           \_Begin: (work@axi.LEAF_NODES), line:16:16, endln:17:14
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@axi), line:11:7, endln:17:14
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_GenIfElse: , line:11:7, endln:17:14
         |vpiParent:
@@ -345,6 +380,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@axi), line:11:16, endln:11:17
+              |vpiParent:
+              \_Constant: , line:11:16, endln:11:17
+              |vpiFullName:work@axi
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_Begin: (work@axi.LAST_NODE), line:11:21, endln:13:10
@@ -352,6 +394,12 @@ Design: (unnamed)
         \_Begin: (work@axi), line:13:16, endln:17:14
     |vpiStmt:
     \_Begin: (work@axi), line:11:7, endln:17:14
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@axi
 |vpiTypespec:
 \_ModuleTypespec: (work@GOOD)

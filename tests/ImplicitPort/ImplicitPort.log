@@ -95,7 +95,7 @@ EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 Identifier                                            29
-IntTypespec                                            9
+IntTypespec                                           26
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
@@ -105,13 +105,13 @@ Package                                                1
 Port                                                   3
 Range                                                  6
 RefObj                                                 3
-RefTypespec                                           19
+RefTypespec                                           36
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                               156
+Total:                                               190
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -207,8 +207,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -223,6 +229,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -649,8 +662,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -665,6 +684,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -688,8 +714,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -705,6 +737,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -728,8 +767,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -745,6 +790,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -768,8 +820,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -792,6 +850,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -944,6 +1009,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@add), line:2:10, endln:2:12
+          |vpiParent:
+          \_Constant: , line:2:10, endln:2:12
+          |vpiFullName:work@add
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:13, endln:2:14
@@ -952,7 +1024,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@add), line:2:13, endln:2:14
+          |vpiParent:
+          \_Constant: , line:2:13, endln:2:14
+          |vpiFullName:work@add
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@add (work@add), file:${SURELOG_DIR}/tests/ImplicitPort/dut.sv, line:1:1, endln:6:10
   |vpiTypespec:
   \_ArrayTypespec: , line:3:10, endln:3:23
     |vpiParent:
@@ -968,6 +1051,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@add), line:3:18, endln:3:20
+          |vpiParent:
+          \_Constant: , line:3:18, endln:3:20
+          |vpiFullName:work@add
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:21, endln:3:22
@@ -976,10 +1066,19 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@add), line:3:21, endln:3:22
+          |vpiParent:
+          \_Constant: , line:3:21, endln:3:22
+          |vpiFullName:work@add
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiPacked:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:9, endln:2:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@add.a), line:2:16, endln:2:17
     |vpiParent:

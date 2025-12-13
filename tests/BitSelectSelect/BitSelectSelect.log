@@ -116,12 +116,13 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 BitSelect                                              2
+BitTypespec                                            1
 Constant                                               9
 ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             2
-IntTypespec                                            2
+IntTypespec                                           10
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -129,7 +130,7 @@ Net                                                    1
 Port                                                   1
 Range                                                  3
 RefObj                                                 1
-RefTypespec                                            6
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
@@ -137,7 +138,7 @@ TypespecMember                                         1
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                40
+Total:                                                58
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -221,6 +222,13 @@ Design: (unnamed)
         |vpiDecompile:9
         |vpiSize:64
         |UINT:9
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:4:14, endln:4:15
+          |vpiParent:
+          \_Constant: , line:4:14, endln:4:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:16, endln:4:17
@@ -229,7 +237,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:4:16, endln:4:17
+          |vpiParent:
+          \_Constant: , line:4:16, endln:4:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
   |vpiTypespec:
   \_IntTypespec: , line:2:19, endln:2:22
     |vpiParent:
@@ -250,6 +273,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:18, endln:7:19
+          |vpiParent:
+          \_Constant: , line:7:18, endln:7:19
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:20, endln:7:21
@@ -258,6 +288,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:20, endln:7:21
+          |vpiParent:
+          \_Constant: , line:7:20, endln:7:21
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:7:22, endln:7:27
@@ -270,6 +307,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:23, endln:7:24
+          |vpiParent:
+          \_Constant: , line:7:23, endln:7:24
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:25, endln:7:26
@@ -278,6 +322,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:25, endln:7:26
+          |vpiParent:
+          \_Constant: , line:7:25, endln:7:26
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.filter_ctl_t), line:7:4, endln:7:16
@@ -294,6 +345,10 @@ Design: (unnamed)
   \_StructTypespec: , line:3:12, endln:5:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:7, endln:4:12
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:2:19, endln:2:22
   |vpiImportTypespec:
@@ -349,6 +404,13 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiSize:-1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:8:27, endln:8:29
+        |vpiParent:
+        \_Constant: , line:8:27, endln:8:29
+        |vpiFullName:work@top
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_HierPath: (a[0][0].min_v), line:8:11, endln:8:24
@@ -369,6 +431,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.a[0][0].min_v.a), line:8:13, endln:8:14
+            |vpiParent:
+            \_Constant: , line:8:13, endln:8:14
+            |vpiFullName:work@top.a[0][0].min_v.a
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_BitSelect: (a[0][0]), line:8:13, endln:8:14
@@ -385,6 +454,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.a[0][0].min_v.a[0]), line:8:16, endln:8:17
+            |vpiParent:
+            \_Constant: , line:8:16, endln:8:17
+            |vpiFullName:work@top.a[0][0].min_v.a[0]
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_RefObj: (a[0][0].min_v), line:8:19, endln:8:24

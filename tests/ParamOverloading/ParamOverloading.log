@@ -313,10 +313,11 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamOverloading/dut.sv:24:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            3
 Constant                                              15
 Design                                                 1
 Identifier                                             5
-IntTypespec                                            1
+IntTypespec                                           13
 LogicTypespec                                          5
 Module                                                 3
 ModuleTypespec                                         3
@@ -326,7 +327,7 @@ Parameter                                              5
 Range                                                  5
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                           12
+RefTypespec                                           27
 SourceFile                                             1
 StringTypespec                                         2
 StructTypespec                                         2
@@ -336,7 +337,7 @@ TypespecMember                                         4
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                84
+Total:                                               114
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloading/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -410,6 +411,13 @@ Design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg), line:3:35, endln:3:37
+        |vpiParent:
+        \_Constant: , line:3:35, endln:3:37
+        |vpiFullName:work@prim_subreg
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@prim_subreg.RESVAL), line:3:26, endln:3:37
@@ -428,6 +436,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg), line:3:21, endln:3:22
+          |vpiParent:
+          \_Constant: , line:3:21, endln:3:22
+          |vpiFullName:work@prim_subreg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:23, endln:3:24
@@ -436,7 +451,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg), line:3:23, endln:3:24
+          |vpiParent:
+          \_Constant: , line:3:23, endln:3:24
+          |vpiFullName:work@prim_subreg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:2:1, endln:5:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:2:1, endln:5:10
   |vpiTypespec:
   \_IntTypespec: , line:4:4, endln:4:7
     |vpiParent:
@@ -444,6 +474,10 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:14, endln:3:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:4:4, endln:4:7
   |vpiImportTypespec:
@@ -492,6 +526,13 @@ Design: (unnamed)
           |vpiDecompile:'0
           |vpiSize:-1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_shadow), line:14:10, endln:14:12
+            |vpiParent:
+            \_Constant: , line:14:10, endln:14:12
+            |vpiFullName:work@prim_subreg_shadow
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.a), line:14:7, endln:14:8
@@ -512,6 +553,13 @@ Design: (unnamed)
           |vpiDecompile:'1
           |vpiSize:-1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_shadow), line:15:10, endln:15:12
+            |vpiParent:
+            \_Constant: , line:15:10, endln:15:12
+            |vpiFullName:work@prim_subreg_shadow
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@prim_subreg_shadow.b), line:15:7, endln:15:8
@@ -583,6 +631,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:9:14, endln:9:15
+          |vpiParent:
+          \_Constant: , line:9:14, endln:9:15
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:16, endln:9:17
@@ -591,7 +646,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:9:16, endln:9:17
+          |vpiParent:
+          \_Constant: , line:9:16, endln:9:17
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
   |vpiTypespec:
   \_LogicTypespec: , line:10:7, endln:10:12
     |vpiParent:
@@ -607,6 +673,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:10:14, endln:10:15
+          |vpiParent:
+          \_Constant: , line:10:14, endln:10:15
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:16, endln:10:17
@@ -615,7 +688,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_shadow), line:10:16, endln:10:17
+          |vpiParent:
+          \_Constant: , line:10:16, endln:10:17
+          |vpiFullName:work@prim_subreg_shadow
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
   |vpiTypespec:
   \_StringTypespec: , line:14:7, endln:14:8
     |vpiParent:
@@ -634,7 +718,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:7, endln:9:12
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:10:7, endln:10:12
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:14:7, endln:14:8
   |vpiDefName:work@prim_subreg_shadow
@@ -694,6 +782,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:29:19, endln:29:20
+        |vpiParent:
+        \_Constant: , line:29:19, endln:29:20
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.v1), line:29:14, endln:29:20
@@ -708,6 +803,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:30:19, endln:30:20
+        |vpiParent:
+        \_Constant: , line:30:19, endln:30:20
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.v2), line:30:14, endln:30:20
@@ -798,6 +900,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:26:14, endln:26:15
+          |vpiParent:
+          \_Constant: , line:26:14, endln:26:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:26:16, endln:26:17
@@ -806,7 +915,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:26:16, endln:26:17
+          |vpiParent:
+          \_Constant: , line:26:16, endln:26:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:24:1, endln:41:10
   |vpiTypespec:
   \_LogicTypespec: , line:27:7, endln:27:12
     |vpiParent:
@@ -822,6 +942,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:27:14, endln:27:15
+          |vpiParent:
+          \_Constant: , line:27:14, endln:27:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:27:16, endln:27:17
@@ -830,6 +957,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:27:16, endln:27:17
+          |vpiParent:
+          \_Constant: , line:27:16, endln:27:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_ModuleTypespec: (work@prim_subreg_shadow)
@@ -844,6 +978,8 @@ Design: (unnamed)
   \_StructTypespec: , line:25:12, endln:28:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:26:7, endln:26:12
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:27:7, endln:27:12
   |vpiDefName:work@top

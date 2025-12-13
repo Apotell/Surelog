@@ -259,7 +259,7 @@ Design                                                 1
 GenIf                                                  1
 GenIfElse                                              1
 Identifier                                             4
-IntTypespec                                            1
+IntTypespec                                           10
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         2
@@ -271,10 +271,11 @@ Port                                                   1
 Range                                                  4
 RefModule                                              1
 RefObj                                                11
-RefTypespec                                            5
+RefTypespec                                           18
 SourceFile                                             1
+StringTypespec                                         4
 ------------------------------------------------------------
-Total:                                                74
+Total:                                               100
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -352,6 +353,13 @@ Design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg_arb), line:2:28, endln:2:30
+        |vpiParent:
+        \_Constant: , line:2:28, endln:2:30
+        |vpiFullName:work@prim_subreg_arb
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
@@ -366,6 +374,13 @@ Design: (unnamed)
       |vpiDecompile:"RW"
       |vpiSize:16
       |STRING:RW
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_subreg_arb), line:3:28, endln:3:32
+        |vpiParent:
+        \_Constant: , line:3:28, endln:3:32
+        |vpiFullName:work@prim_subreg_arb
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
@@ -407,6 +422,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@prim_subreg_arb.gen_w), line:9:15, endln:9:16
+              |vpiParent:
+              \_Constant: , line:9:15, endln:9:16
+              |vpiFullName:work@prim_subreg_arb.gen_w
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:9:17, endln:9:18
@@ -415,9 +437,22 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_arb.gen_w), line:9:17, endln:9:18
+            |vpiParent:
+            \_Constant: , line:9:17, endln:9:18
+            |vpiFullName:work@prim_subreg_arb.gen_w
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
     |vpiImportTypespec:
     \_LogicTypespec: , line:9:5, endln:9:10
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_Net: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:20, endln:9:31
       |vpiParent:
@@ -502,6 +537,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@prim_subreg_arb.gen_ro), line:12:15, endln:12:16
+                |vpiParent:
+                \_Constant: , line:12:15, endln:12:16
+                |vpiFullName:work@prim_subreg_arb.gen_ro
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiRightRange:
           \_Constant: , line:12:17, endln:12:18
@@ -510,9 +552,22 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@prim_subreg_arb.gen_ro), line:12:17, endln:12:18
+              |vpiParent:
+              \_Constant: , line:12:17, endln:12:18
+              |vpiFullName:work@prim_subreg_arb.gen_ro
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
       |vpiImportTypespec:
       \_LogicTypespec: , line:12:5, endln:12:10
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiImportTypespec:
       \_Net: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:20, endln:12:31
         |vpiParent:
@@ -554,6 +609,12 @@ Design: (unnamed)
           |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
           |vpiActual:
           \_Net: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:20, endln:12:31
+    |vpiTypespec:
+    \_StringTypespec: 
+      |vpiParent:
+      \_Begin: (work@prim_subreg_arb), line:11:12, endln:14:6
+    |vpiImportTypespec:
+    \_StringTypespec: 
     |vpiStmt:
     \_GenIf: , line:11:12, endln:14:6
       |vpiParent:
@@ -578,6 +639,13 @@ Design: (unnamed)
           |vpiDecompile:"RO"
           |vpiSize:16
           |STRING:RO
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_arb), line:11:28, endln:11:32
+            |vpiParent:
+            \_Constant: , line:11:28, endln:11:32
+            |vpiFullName:work@prim_subreg_arb
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
       |vpiStmt:
       \_Begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
@@ -586,6 +654,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
   |vpiTypespec:
   \_LogicTypespec: , line:5:9, endln:5:17
     |vpiParent:
@@ -614,6 +690,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_arb), line:5:13, endln:5:14
+            |vpiParent:
+            \_Constant: , line:5:13, endln:5:14
+            |vpiFullName:work@prim_subreg_arb
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:15, endln:5:16
@@ -622,9 +705,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_subreg_arb), line:5:15, endln:5:16
+          |vpiParent:
+          \_Constant: , line:5:15, endln:5:16
+          |vpiFullName:work@prim_subreg_arb
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:9, endln:5:17
   |vpiImportTypespec:
@@ -685,6 +779,13 @@ Design: (unnamed)
           |vpiDecompile:"RW"
           |vpiSize:16
           |STRING:RW
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_arb), line:8:20, endln:8:24
+            |vpiParent:
+            \_Constant: , line:8:20, endln:8:24
+            |vpiFullName:work@prim_subreg_arb
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
       |vpiOperand:
       \_Operation: , line:8:30, endln:8:46
@@ -706,6 +807,13 @@ Design: (unnamed)
           |vpiDecompile:"WO"
           |vpiSize:16
           |STRING:WO
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_subreg_arb), line:8:42, endln:8:46
+            |vpiParent:
+            \_Constant: , line:8:42, endln:8:46
+            |vpiFullName:work@prim_subreg_arb
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
     |vpiStmt:
     \_Begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6

@@ -245,7 +245,7 @@ FuncCall                                               4
 Function                                               2
 IODecl                                                 2
 Identifier                                             7
-IntTypespec                                            2
+IntTypespec                                            8
 IntegerTypespec                                        4
 Module                                                 1
 ModuleTypespec                                         1
@@ -253,12 +253,12 @@ Operation                                              2
 ParamAssign                                            4
 Parameter                                              4
 RefObj                                                 8
-RefTypespec                                            6
+RefTypespec                                           12
 ReturnStmt                                             2
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                65
+Total:                                                77
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncStatic/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -348,10 +348,16 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@test.accumulate1)
             |vpiSigned:1
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@test.accumulate1)
           |vpiImportTypespec:
           \_IntTypespec: , line:4:10, endln:4:13
           |vpiImportTypespec:
           \_Variable: (work@test.accumulate1.acc), line:4:14, endln:4:17
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:4:14, endln:4:21
             |vpiParent:
@@ -365,6 +371,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@test.accumulate1), line:4:20, endln:4:21
+                |vpiParent:
+                \_Constant: , line:4:20, endln:4:21
+                |vpiFullName:work@test.accumulate1
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_Variable: (work@test.accumulate1.acc), line:4:14, endln:4:17
@@ -452,6 +465,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:15:33, endln:15:34
+          |vpiParent:
+          \_Constant: , line:15:33, endln:15:34
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: (accumulate1), line:15:21, endln:15:32
@@ -477,6 +497,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:16:33, endln:16:34
+          |vpiParent:
+          \_Constant: , line:16:33, endln:16:34
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: (accumulate1), line:16:21, endln:16:32
@@ -526,10 +553,16 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@test.accumulate2)
             |vpiSigned:1
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@test.accumulate2)
           |vpiImportTypespec:
           \_IntTypespec: , line:10:3, endln:10:6
           |vpiImportTypespec:
           \_Variable: (work@test.accumulate2.acc), line:10:7, endln:10:10
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:10:7, endln:10:14
             |vpiParent:
@@ -543,6 +576,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@test.accumulate2), line:10:13, endln:10:14
+                |vpiParent:
+                \_Constant: , line:10:13, endln:10:14
+                |vpiFullName:work@test.accumulate2
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_Variable: (work@test.accumulate2.acc), line:10:7, endln:10:10
@@ -630,6 +670,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:17:33, endln:17:34
+          |vpiParent:
+          \_Constant: , line:17:33, endln:17:34
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: (accumulate2), line:17:21, endln:17:32
@@ -655,6 +702,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:18:33, endln:18:34
+          |vpiParent:
+          \_Constant: , line:18:33, endln:18:34
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: (accumulate2), line:18:21, endln:18:32
@@ -667,10 +721,16 @@ Design: (unnamed)
   \_Function: (work@test.accumulate1), line:3:1, endln:7:12
   |vpiInternalScope:
   \_Function: (work@test.accumulate2), line:9:1, endln:13:12
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/FuncStatic/dut.sv, line:1:1, endln:20:10
   |vpiImportTypespec:
   \_Function: (work@test.accumulate1), line:3:1, endln:7:12
   |vpiImportTypespec:
   \_Function: (work@test.accumulate2), line:9:1, endln:13:12
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@test
   |vpiTaskFunc:
   \_Function: (work@test.accumulate1), line:3:1, endln:7:12

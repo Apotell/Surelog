@@ -248,14 +248,15 @@ BitTypespec                                            2
 Constant                                               4
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            4
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    2
 Range                                                  2
-RefTypespec                                            4
+RefTypespec                                            8
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                21
+Total:                                                29
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CrossItem/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -281,6 +282,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:2:2, endln:2:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
@@ -295,6 +300,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:7, endln:2:8
+          |vpiParent:
+          \_Constant: , line:2:7, endln:2:8
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:9, endln:2:10
@@ -303,6 +315,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:9, endln:2:10
+          |vpiParent:
+          \_Constant: , line:2:9, endln:2:10
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:2:2, endln:2:5
@@ -314,6 +333,8 @@ Design: (unnamed)
     |vpiPacked:1
   |vpiImportTypespec:
   \_BitTypespec: , line:2:2, endln:2:5
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:2:2, endln:2:11
   |vpiImportTypespec:

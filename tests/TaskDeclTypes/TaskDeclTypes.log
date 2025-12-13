@@ -77,17 +77,17 @@ Constant                                               4
 Design                                                 1
 IODecl                                                 3
 Identifier                                             2
-IntTypespec                                            1
+IntTypespec                                            5
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
 Range                                                  2
-RefTypespec                                            3
+RefTypespec                                            7
 SourceFile                                             1
 StringTypespec                                         1
 Task                                                   1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaskDeclTypes/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -128,6 +128,10 @@ Design: (unnamed)
       \_Task: (work@top.simutil_memload), line:2:3, endln:6:10
       |vpiSigned:1
     |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Task: (work@top.simutil_memload), line:2:3, endln:6:10
+    |vpiTypespec:
     \_LogicTypespec: , line:5:11, endln:5:16
       |vpiParent:
       \_Task: (work@top.simutil_memload), line:2:3, endln:6:10
@@ -142,6 +146,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.simutil_memload), line:5:12, endln:5:13
+            |vpiParent:
+            \_Constant: , line:5:12, endln:5:13
+            |vpiFullName:work@top.simutil_memload
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:5:14, endln:5:15
@@ -150,11 +161,20 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.simutil_memload), line:5:14, endln:5:15
+            |vpiParent:
+            \_Constant: , line:5:14, endln:5:15
+            |vpiFullName:work@top.simutil_memload
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiImportTypespec:
     \_StringTypespec: , line:3:11, endln:3:17
     |vpiImportTypespec:
     \_IntTypespec: , line:4:11, endln:4:14
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_LogicTypespec: , line:5:11, endln:5:16
     |vpiVisibility:1

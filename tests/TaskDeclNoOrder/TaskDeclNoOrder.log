@@ -225,24 +225,25 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
+BitTypespec                                            1
 Constant                                              21
 DelayControl                                           1
 Design                                                 1
 FuncCall                                               1
 IODecl                                                 4
 Identifier                                             3
-IntTypespec                                            1
+IntTypespec                                           21
 IntegerTypespec                                        5
 LogicTypespec                                         12
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    7
 Range                                                 10
-RefTypespec                                           11
+RefTypespec                                           32
 SourceFile                                             1
 Task                                                   1
 ------------------------------------------------------------
-Total:                                                82
+Total:                                               124
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaskDeclNoOrder/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -278,6 +279,12 @@ Design: (unnamed)
       |vpiParent:
       \_Task: (work@dut.set_pll_fast_run), line:3:1, endln:21:8
       |vpiFullName:work@dut.set_pll_fast_run
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@dut.set_pll_fast_run), line:15:5, endln:20:8
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiStmt:
       \_FuncCall: (set_ibias_en), line:17:9, endln:17:27
         |vpiParent:
@@ -289,6 +296,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.set_pll_fast_run), line:17:22, endln:17:26
+            |vpiParent:
+            \_Constant: , line:17:22, endln:17:26
+            |vpiFullName:work@dut.set_pll_fast_run
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiName:
         \_Identifier: (set_ibias_en), line:17:9, endln:17:21
@@ -315,6 +329,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.set_pll_fast_run), line:4:19, endln:4:20
+            |vpiParent:
+            \_Constant: , line:4:19, endln:4:20
+            |vpiFullName:work@dut.set_pll_fast_run
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:4:21, endln:4:22
@@ -323,7 +344,18 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.set_pll_fast_run), line:4:21, endln:4:22
+            |vpiParent:
+            \_Constant: , line:4:21, endln:4:22
+            |vpiFullName:work@dut.set_pll_fast_run
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Task: (work@dut.set_pll_fast_run), line:3:1, endln:21:8
     |vpiTypespec:
     \_LogicTypespec: , line:8:5, endln:8:10
       |vpiParent:
@@ -353,6 +385,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.set_pll_fast_run), line:13:12, endln:13:13
+            |vpiParent:
+            \_Constant: , line:13:12, endln:13:13
+            |vpiFullName:work@dut.set_pll_fast_run
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:13:14, endln:13:15
@@ -361,9 +400,18 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.set_pll_fast_run), line:13:14, endln:13:15
+            |vpiParent:
+            \_Constant: , line:13:14, endln:13:15
+            |vpiFullName:work@dut.set_pll_fast_run
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:12, endln:4:17
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_Net: (work@dut.set_pll_fast_run.band_vco1_val), line:4:24, endln:4:37
       |vpiParent:

@@ -50,15 +50,15 @@ AST_DEBUG_END
 Constant                                               1
 Design                                                 1
 Identifier                                             2
-IntTypespec                                            1
+IntTypespec                                            2
 Module                                                 2
 ModuleTypespec                                         2
 ParamAssign                                            1
 Parameter                                              1
-RefTypespec                                            1
+RefTypespec                                            2
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                13
+Total:                                                15
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -114,6 +114,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@foo), line:2:23, endln:2:24
+        |vpiParent:
+        \_Constant: , line:2:23, endln:2:24
+        |vpiFullName:work@foo
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@foo.bar), line:2:17, endln:2:24
@@ -122,8 +129,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@foo
 |vpiTypespec:
 \_ModuleTypespec: (work@baz)

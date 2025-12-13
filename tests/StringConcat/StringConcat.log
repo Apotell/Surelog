@@ -15,11 +15,11 @@ ModuleTypespec                                         1
 Operation                                              1
 ParamAssign                                            1
 Parameter                                              1
-RefTypespec                                            1
+RefTypespec                                            3
 SourceFile                                             1
-StringTypespec                                         1
+StringTypespec                                         3
 ------------------------------------------------------------
-Total:                                                12
+Total:                                                16
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringConcat/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -70,6 +70,13 @@ Design: (unnamed)
         |vpiDecompile:"abcd"
         |vpiSize:32
         |STRING:abcd
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:27, endln:2:33
+          |vpiParent:
+          \_Constant: , line:2:27, endln:2:33
+          |vpiFullName:work@top
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
       |vpiOperand:
       \_Constant: , line:2:35, endln:2:41
@@ -78,6 +85,13 @@ Design: (unnamed)
         |vpiDecompile:"efgh"
         |vpiSize:32
         |STRING:efgh
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:35, endln:2:41
+          |vpiParent:
+          \_Constant: , line:2:35, endln:2:41
+          |vpiFullName:work@top
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@top.X), line:2:22, endln:2:42
@@ -85,8 +99,14 @@ Design: (unnamed)
   \_StringTypespec: , line:2:15, endln:2:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringConcat/dut.sv, line:1:1, endln:3:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringConcat/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_StringTypespec: , line:2:15, endln:2:21
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@top
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

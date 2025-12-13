@@ -56,17 +56,18 @@ ArrayTypespec                                          1
 Constant                                               2
 Design                                                 1
 Identifier                                             3
+IntTypespec                                            2
 LogicTypespec                                          1
 Package                                                1
 Range                                                  1
-RefTypespec                                            4
+RefTypespec                                            6
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                20
+Total:                                                24
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -141,6 +142,10 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:5:15, endln:5:20
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+  |vpiTypespec:
   \_ArrayTypespec: , line:5:15, endln:5:20
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
@@ -156,6 +161,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:5:16, endln:5:17
+          |vpiParent:
+          \_Constant: , line:5:16, endln:5:17
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:18, endln:5:19
@@ -164,6 +176,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:5:18, endln:5:19
+          |vpiParent:
+          \_Constant: , line:5:18, endln:5:19
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (pkg::a), line:5:12, endln:5:13
@@ -181,6 +200,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:5:15, endln:5:20
   |vpiDefName:pkg

@@ -9,6 +9,7 @@ Constant                                               8
 ContAssign                                             1
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            8
 LogicTypespec                                          6
 Module                                                 1
 ModuleTypespec                                         1
@@ -16,10 +17,10 @@ Net                                                    6
 Operation                                              2
 Range                                                  4
 RefObj                                                 6
-RefTypespec                                            6
+RefTypespec                                           14
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                60
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TernaryAssoc/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -59,6 +60,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:8, endln:3:10
+          |vpiParent:
+          \_Constant: , line:3:8, endln:3:10
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:11, endln:3:12
@@ -67,7 +75,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:11, endln:3:12
+          |vpiParent:
+          \_Constant: , line:3:11, endln:3:12
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TernaryAssoc/dut.sv, line:1:1, endln:7:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:6
   |vpiImportTypespec:
@@ -100,6 +119,8 @@ Design: (unnamed)
     |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.first_condition_true), line:3:14, endln:3:34
     |vpiParent:

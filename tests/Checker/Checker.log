@@ -618,18 +618,19 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-BitTypespec                                            3
+BitTypespec                                            5
 Constant                                               4
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            2
 MethodFuncCall                                         1
 Range                                                  1
-RefTypespec                                            5
+RefTypespec                                            9
 SourceFile                                             1
 UnsupportedTypespec                                    1
 Variable                                               4
 ------------------------------------------------------------
-Total:                                                23
+Total:                                                31
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Checker/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -642,7 +643,15 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:dut.sv
 |vpiTypespec:
+\_BitTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
 \_BitTypespec: , line:16:3, endln:16:6
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypespec:
+\_IntTypespec: 
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypespec:
@@ -660,6 +669,12 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: , line:52:8, endln:52:9
+        |vpiParent:
+        \_Constant: , line:52:8, endln:52:9
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:52:10, endln:52:11
@@ -668,6 +683,12 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:52:10, endln:52:11
+        |vpiParent:
+        \_Constant: , line:52:10, endln:52:11
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
   |vpiElemTypespec:
   \_RefTypespec: , line:52:3, endln:52:6
@@ -703,6 +724,13 @@ Design: (unnamed)
     |vpiDecompile:1'b0
     |vpiSize:1
     |BIN:0
+    |vpiTypespec:
+    \_RefTypespec: (window), line:16:16, endln:16:20
+      |vpiParent:
+      \_Constant: , line:16:16, endln:16:20
+      |vpiFullName:window
+      |vpiActual:
+      \_BitTypespec: 
     |vpiConstType:3
 |vpiVariable:
 \_Variable: (next_window), line:16:22, endln:16:33
@@ -726,6 +754,13 @@ Design: (unnamed)
     |vpiDecompile:1'b1
     |vpiSize:1
     |BIN:1
+    |vpiTypespec:
+    \_RefTypespec: (next_window), line:16:36, endln:16:40
+      |vpiParent:
+      \_Constant: , line:16:36, endln:16:40
+      |vpiFullName:next_window
+      |vpiActual:
+      \_BitTypespec: 
     |vpiConstType:3
 |vpiVariable:
 \_Variable: (opcode_d1), line:52:13, endln:52:22

@@ -301,7 +301,7 @@ AST_DEBUG_END
 Constant                                              11
 Design                                                 1
 Identifier                                             4
-IntTypespec                                            3
+IntTypespec                                           12
 IntegerTypespec                                        2
 LogicTypespec                                          4
 Module                                                 3
@@ -314,15 +314,16 @@ Port                                                   1
 Range                                                  2
 RefModule                                              2
 RefObj                                                 2
-RefTypespec                                           12
+RefTypespec                                           23
 SourceFile                                             1
+StringTypespec                                         2
 StructTypespec                                         1
 TypeParameter                                          2
 TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                78
+Total:                                               100
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamElab/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -396,6 +397,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_node_arbiter), line:23:38, endln:23:39
+        |vpiParent:
+        \_Constant: , line:23:38, endln:23:39
+        |vpiFullName:work@axi_node_arbiter
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi_node_arbiter.AUX_WIDTH), line:23:26, endln:23:39
@@ -410,6 +418,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_node_arbiter), line:24:37, endln:24:38
+        |vpiParent:
+        \_Constant: , line:24:37, endln:24:38
+        |vpiFullName:work@axi_node_arbiter
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi_node_arbiter.ID_WIDTH), line:24:26, endln:24:38
@@ -424,11 +439,22 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_node_arbiter), line:25:37, endln:25:39
+        |vpiParent:
+        \_Constant: , line:25:37, endln:25:39
+        |vpiFullName:work@axi_node_arbiter
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi_node_arbiter.N_MASTER), line:25:26, endln:25:39
   |vpiTypespec:
   \_IntTypespec: , line:23:13, endln:23:25
+    |vpiParent:
+    \_Module: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
   |vpiTypespec:
@@ -504,6 +530,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@axi_node_arbiter), line:28:22, endln:28:23
+            |vpiParent:
+            \_Constant: , line:28:22, endln:28:23
+            |vpiFullName:work@axi_node_arbiter
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:28:24, endln:28:25
@@ -512,6 +545,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@axi_node_arbiter), line:28:24, endln:28:25
+          |vpiParent:
+          \_Constant: , line:28:24, endln:28:25
+          |vpiFullName:work@axi_node_arbiter
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:29:5, endln:29:10
@@ -541,6 +581,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@axi_node_arbiter), line:29:21, endln:29:22
+            |vpiParent:
+            \_Constant: , line:29:21, endln:29:22
+            |vpiFullName:work@axi_node_arbiter
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:29:23, endln:29:24
@@ -549,6 +596,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@axi_node_arbiter), line:29:23, endln:29:24
+          |vpiParent:
+          \_Constant: , line:29:23, endln:29:24
+          |vpiFullName:work@axi_node_arbiter
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_ModuleTypespec: (work@stream_arbiter)
@@ -559,6 +613,8 @@ Design: (unnamed)
     \_Module: work@stream_arbiter (work@stream_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:9:1, endln:20:10
   |vpiImportTypespec:
   \_IntTypespec: , line:23:13, endln:23:25
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (axi_meta_t), line:30:5, endln:30:15
   |vpiImportTypespec:
@@ -634,6 +690,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@stream_arbiter), line:11:34, endln:11:35
+          |vpiParent:
+          \_Constant: , line:11:34, endln:11:35
+          |vpiFullName:work@stream_arbiter
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@stream_arbiter.N_INP), line:11:25, endln:11:35
@@ -648,6 +711,13 @@ Design: (unnamed)
       |vpiDecompile:"rr"
       |vpiSize:16
       |STRING:rr
+      |vpiTypespec:
+      \_RefTypespec: (work@stream_arbiter), line:12:35, endln:12:39
+        |vpiParent:
+        \_Constant: , line:12:35, endln:12:39
+        |vpiFullName:work@stream_arbiter
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@stream_arbiter.ARBITER), line:12:25, endln:12:39
@@ -663,6 +733,14 @@ Design: (unnamed)
     \_Module: work@stream_arbiter (work@stream_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:9:1, endln:20:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@stream_arbiter (work@stream_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:9:1, endln:20:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@stream_arbiter (work@stream_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:9:1, endln:20:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@stream_arbiter_flushable)
     |vpiParent:
     \_Design: (unnamed)
@@ -675,6 +753,10 @@ Design: (unnamed)
   \_LogicTypespec: , line:10:34, endln:10:39
   |vpiImportTypespec:
   \_IntegerTypespec: , line:11:15, endln:11:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@stream_arbiter
   |vpiRefModule:
   \_RefModule: work@stream_arbiter_flushable (i_arb), line:14:3, endln:14:27
@@ -742,6 +824,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@stream_arbiter_flushable), line:3:34, endln:3:35
+          |vpiParent:
+          \_Constant: , line:3:34, endln:3:35
+          |vpiFullName:work@stream_arbiter_flushable
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@stream_arbiter_flushable.N_INP), line:3:25, endln:3:35
@@ -756,6 +845,13 @@ Design: (unnamed)
       |vpiDecompile:"rr"
       |vpiSize:16
       |STRING:rr
+      |vpiTypespec:
+      \_RefTypespec: (work@stream_arbiter_flushable), line:4:35, endln:4:39
+        |vpiParent:
+        \_Constant: , line:4:35, endln:4:39
+        |vpiFullName:work@stream_arbiter_flushable
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@stream_arbiter_flushable.ARBITER), line:4:25, endln:4:39
@@ -770,12 +866,24 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@stream_arbiter_flushable (work@stream_arbiter_flushable), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@stream_arbiter_flushable (work@stream_arbiter_flushable), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@stream_arbiter_flushable (work@stream_arbiter_flushable), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:1:1, endln:7:10
   |vpiImportTypespec:
   \_TypeParameter: (work@stream_arbiter_flushable.DATA_T), line:2:25, endln:2:31
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:34, endln:2:39
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:15, endln:3:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
     |vpiParent:

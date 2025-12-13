@@ -392,7 +392,7 @@ Function                                               1
 GenIf                                                  3
 Identifier                                             7
 ImportTypespec                                         1
-IntTypespec                                            5
+IntTypespec                                           16
 Module                                                 4
 ModuleTypespec                                         2
 Operation                                             10
@@ -402,15 +402,15 @@ Parameter                                              3
 Range                                                  3
 RefModule                                              1
 RefObj                                                 8
-RefTypespec                                           13
+RefTypespec                                           24
 SourceFile                                             1
-StringTypespec                                         2
+StringTypespec                                         3
 TaggedPattern                                          2
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               102
+Total:                                               125
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternInt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -471,6 +471,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (pack), line:2:31, endln:2:32
+        |vpiParent:
+        \_Constant: , line:2:31, endln:2:32
+        |vpiFullName:pack
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pack::CNT), line:2:25, endln:2:32
@@ -494,6 +501,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (pack), line:4:45, endln:4:46
+            |vpiParent:
+            \_Constant: , line:4:45, endln:4:46
+            |vpiFullName:pack
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (pack), line:4:36, endln:4:43
@@ -506,6 +520,10 @@ Design: (unnamed)
     \_Parameter: (pack::V), line:4:25, endln:4:47
   |vpiTypespec:
   \_IntTypespec: , line:2:12, endln:2:24
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiTypespec:
@@ -543,6 +561,8 @@ Design: (unnamed)
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:12, endln:2:24
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4:26, endln:4:47
   |vpiImportTypespec:
@@ -686,6 +706,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@top.ASSIGN_VADDR), line:12:18, endln:12:19
+                |vpiParent:
+                \_Constant: , line:12:18, endln:12:19
+                |vpiFullName:work@top.ASSIGN_VADDR
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_Variable: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
@@ -730,10 +757,16 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
           |vpiSigned:1
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
         |vpiImportTypespec:
         \_IntTypespec: , line:12:10, endln:12:13
         |vpiImportTypespec:
         \_Variable: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiVisibility:1
         |vpiReturn:
         \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:11:17, endln:11:35
@@ -785,7 +818,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.pack), line:9:8, endln:9:15
+        |vpiParent:
+        \_Constant: , line:9:8, endln:9:15
+        |vpiFullName:work@top.pack
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
   |vpiTypespec:
   \_IntTypespec: , line:10:9, endln:10:21
     |vpiParent:
@@ -864,8 +908,14 @@ Design: (unnamed)
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:10:9, endln:10:21
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternInt/dut.sv, line:8:1, endln:30:10
   |vpiImportTypespec:
   \_ImportTypespec: (pack), line:9:8, endln:9:15
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
   |vpiImportTypespec:
@@ -876,6 +926,8 @@ Design: (unnamed)
   \_TypedefTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:40
   |vpiImportTypespec:
   \_ArrayTypespec: , line:17:30, endln:17:52
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
@@ -903,6 +955,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.VADDR), line:19:11, endln:19:12
+            |vpiParent:
+            \_Constant: , line:19:11, endln:19:12
+            |vpiFullName:work@top.VADDR
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:19:17, endln:19:18
@@ -911,6 +970,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:19:17, endln:19:18
+          |vpiParent:
+          \_Constant: , line:19:17, endln:19:18
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:19:20, endln:21:4
@@ -938,6 +1004,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.VADDR), line:22:11, endln:22:12
+            |vpiParent:
+            \_Constant: , line:22:11, endln:22:12
+            |vpiFullName:work@top.VADDR
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:22:17, endln:22:18
@@ -946,6 +1019,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:22:17, endln:22:18
+          |vpiParent:
+          \_Constant: , line:22:17, endln:22:18
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:22:20, endln:24:4
@@ -973,6 +1053,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.VADDR), line:26:11, endln:26:12
+            |vpiParent:
+            \_Constant: , line:26:11, endln:26:12
+            |vpiFullName:work@top.VADDR
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:26:17, endln:26:18
@@ -981,6 +1068,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:26:17, endln:26:18
+          |vpiParent:
+          \_Constant: , line:26:17, endln:26:18
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:26:20, endln:28:4

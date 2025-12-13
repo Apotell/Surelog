@@ -12,7 +12,8 @@ BitTypespec                                            1
 Constant                                               8
 Design                                                 1
 Identifier                                             2
-LogicTypespec                                          1
+IntTypespec                                            6
+LogicTypespec                                          3
 Module                                                 1
 Operation                                              4
 Package                                                1
@@ -20,7 +21,7 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  2
 RefObj                                                 2
-RefTypespec                                            9
+RefTypespec                                           16
 SourceFile                                             1
 StringTypespec                                         2
 StructTypespec                                         1
@@ -29,7 +30,7 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                46
+Total:                                                61
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ValueSize/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -89,6 +90,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (flash_ctrl_pkg), line:7:35, endln:7:36
+        |vpiParent:
+        \_Constant: , line:7:35, endln:7:36
+        |vpiFullName:flash_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (flash_ctrl_pkg::SeedBank), line:7:24, endln:7:36
@@ -125,6 +133,13 @@ Design: (unnamed)
             |vpiDecompile:2'b11
             |vpiSize:2
             |BIN:11
+            |vpiTypespec:
+            \_RefTypespec: (flash_ctrl_pkg), line:9:24, endln:9:29
+              |vpiParent:
+              \_Constant: , line:9:24, endln:9:29
+              |vpiFullName:flash_ctrl_pkg
+              |vpiActual:
+              \_LogicTypespec: 
             |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (flash_ctrl_pkg::addr), line:9:7, endln:9:11
@@ -184,6 +199,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_pkg), line:4:13, endln:4:14
+          |vpiParent:
+          \_Constant: , line:4:13, endln:4:14
+          |vpiFullName:flash_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:15, endln:4:16
@@ -192,7 +214,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_pkg), line:4:15, endln:4:16
+          |vpiParent:
+          \_Constant: , line:4:15, endln:4:16
+          |vpiFullName:flash_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
   |vpiTypespec:
   \_BitTypespec: , line:7:14, endln:7:17
     |vpiParent:
@@ -212,6 +245,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_pkg), line:7:19, endln:7:20
+          |vpiParent:
+          \_Constant: , line:7:19, endln:7:20
+          |vpiFullName:flash_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:21, endln:7:22
@@ -220,6 +260,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_pkg), line:7:21, endln:7:22
+          |vpiParent:
+          \_Constant: , line:7:21, endln:7:22
+          |vpiFullName:flash_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (flash_ctrl_pkg), line:7:14, endln:7:17
@@ -229,6 +276,10 @@ Design: (unnamed)
       |vpiActual:
       \_BitTypespec: , line:7:14, endln:7:17
     |vpiPacked:1
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
   |vpiTypespec:
   \_StringTypespec: , line:9:7, endln:9:11
     |vpiParent:
@@ -240,9 +291,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:6, endln:4:11
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_BitTypespec: , line:7:14, endln:7:17
   |vpiImportTypespec:
   \_ArrayTypespec: , line:7:14, endln:7:23
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:9:7, endln:9:11
   |vpiDefName:flash_ctrl_pkg

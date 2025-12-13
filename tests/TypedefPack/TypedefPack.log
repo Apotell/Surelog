@@ -123,7 +123,8 @@ Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             4
-LogicTypespec                                          3
+IntTypespec                                            6
+LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
@@ -132,12 +133,12 @@ Package                                                1
 Port                                                   2
 Range                                                  3
 RefObj                                                 2
-RefTypespec                                            7
+RefTypespec                                           17
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                67
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -200,6 +201,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:25, endln:2:26
@@ -208,7 +216,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:2:25, endln:2:26
+          |vpiParent:
+          \_Constant: , line:2:25, endln:2:26
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
     |vpiParent:
@@ -247,6 +270,10 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
@@ -276,6 +303,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_lc_sender), line:11:11, endln:11:12
+          |vpiParent:
+          \_Constant: , line:11:11, endln:11:12
+          |vpiFullName:work@prim_lc_sender
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:11:13, endln:11:14
@@ -284,9 +318,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_lc_sender), line:11:13, endln:11:14
+          |vpiParent:
+          \_Constant: , line:11:13, endln:11:14
+          |vpiFullName:work@prim_lc_sender
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:10, endln:11:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
     |vpiParent:

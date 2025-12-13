@@ -60,10 +60,12 @@ ImportTypespec                                         1
 Initial                                                1
 Module                                                 1
 ModuleTypespec                                         1
+RefTypespec                                            2
 SourceFile                                             1
+StringTypespec                                         2
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                13
+Total:                                                17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SynthFilterDollarError/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -100,9 +102,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.pack), line:4:10, endln:4:17
+        |vpiParent:
+        \_Constant: , line:4:10, endln:4:17
+        |vpiFullName:work@top.pack
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthFilterDollarError/dut.sv, line:3:1, endln:10:10
   |vpiImportTypespec:
   \_ImportTypespec: (pack), line:4:10, endln:4:17
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@top
   |vpiProcess:
   \_Initial: , line:5:3, endln:7:6
@@ -113,6 +128,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:5:3, endln:7:6
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:5:11, endln:7:6
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($error), line:6:5, endln:6:15
         |vpiParent:
@@ -123,6 +144,13 @@ Design: (unnamed)
           \_SysFuncCall: ($error), line:6:5, endln:6:15
           |vpiDecompile:""
           |STRING:
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:6:12, endln:6:14
+            |vpiParent:
+            \_Constant: , line:6:12, endln:6:14
+            |vpiFullName:work@top
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiName:
         \_Identifier: ($error), line:6:6, endln:6:11

@@ -12,7 +12,7 @@
 Constant                                               2
 Design                                                 1
 Identifier                                             3
-IntTypespec                                            2
+IntTypespec                                            4
 LogicTypespec                                          3
 Module                                                 3
 ModuleTypespec                                         3
@@ -22,12 +22,12 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              3
 RefObj                                                 1
-RefTypespec                                            9
+RefTypespec                                           11
 SourceFile                                             1
 TypeParameter                                          4
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                51
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -92,6 +92,13 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
+      |vpiTypespec:
+      \_RefTypespec: (work@bottom), line:17:60, endln:17:62
+        |vpiParent:
+        \_Constant: , line:17:60, endln:17:62
+        |vpiFullName:work@bottom
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@bottom.SIZE), line:17:55, endln:17:62
@@ -99,6 +106,10 @@ Design: (unnamed)
   \_TypeParameter: (work@bottom.TP1), line:17:32, endln:17:35
   |vpiTypespec:
   \_LogicTypespec: , line:17:38, endln:17:43
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:17:1, endln:21:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:17:1, endln:21:10
   |vpiTypespec:
@@ -131,11 +142,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@bottom), line:19:17, endln:19:18
+          |vpiParent:
+          \_Constant: , line:19:17, endln:19:18
+          |vpiFullName:work@bottom
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_TypeParameter: (work@bottom.TP1), line:17:32, endln:17:35
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:38, endln:17:43
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypeParameter: (work@bottom.TP2), line:17:79, endln:17:82
   |vpiImportTypespec:

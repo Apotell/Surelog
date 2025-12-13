@@ -240,7 +240,7 @@ EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             7
 ImportTypespec                                         4
-IntTypespec                                            1
+IntTypespec                                           22
 LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
@@ -252,11 +252,12 @@ Parameter                                              1
 Port                                                   2
 Range                                                  7
 RefObj                                                 3
-RefTypespec                                           10
+RefTypespec                                           34
 SourceFile                                             1
+StringTypespec                                         4
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                87
+Total:                                               136
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -302,6 +303,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (my_pkg), line:7:36, endln:7:37
+        |vpiParent:
+        \_Constant: , line:7:36, endln:7:37
+        |vpiFullName:my_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:37
@@ -347,6 +355,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (my_pkg), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:my_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:25, endln:2:26
@@ -355,7 +370,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (my_pkg), line:2:25, endln:2:26
+          |vpiParent:
+          \_Constant: , line:2:25, endln:2:26
+          |vpiFullName:my_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
   |vpiTypespec:
   \_TypedefTypespec: (my_pkg::opcode_e), line:5:5, endln:5:13
     |vpiParent:
@@ -380,6 +406,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:11, endln:5:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (my_pkg::opcode_e), line:5:5, endln:5:13
   |vpiImportTypespec:
@@ -410,7 +438,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@dut.my_pkg), line:12:10, endln:12:19
+        |vpiParent:
+        \_Constant: , line:12:10, endln:12:19
+        |vpiFullName:work@dut.my_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
   |vpiTypespec:
   \_ImportTypespec: (my_pkg), line:13:10, endln:13:26
     |vpiParent:
@@ -427,6 +466,13 @@ Design: (unnamed)
       |vpiDecompile:opcode_e
       |vpiSize:64
       |STRING:opcode_e
+      |vpiTypespec:
+      \_RefTypespec: (work@dut.my_pkg), line:13:18, endln:13:26
+        |vpiParent:
+        \_Constant: , line:13:18, endln:13:26
+        |vpiFullName:work@dut.my_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
   |vpiTypespec:
   \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
@@ -444,7 +490,18 @@ Design: (unnamed)
       |vpiDecompile:OPCODE_LOAD
       |vpiSize:88
       |STRING:OPCODE_LOAD
+      |vpiTypespec:
+      \_RefTypespec: (work@dut.my_pkg), line:13:36, endln:13:47
+        |vpiParent:
+        \_Constant: , line:13:36, endln:13:47
+        |vpiFullName:work@dut.my_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
   |vpiTypespec:
   \_LogicTypespec: , line:14:9, endln:14:14
     |vpiParent:
@@ -460,6 +517,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:14:10, endln:14:11
+          |vpiParent:
+          \_Constant: , line:14:10, endln:14:11
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:14:12, endln:14:13
@@ -468,6 +532,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:14:12, endln:14:13
+          |vpiParent:
+          \_Constant: , line:14:12, endln:14:13
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:15:10, endln:15:15
@@ -484,6 +555,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:15:11, endln:15:12
+          |vpiParent:
+          \_Constant: , line:15:11, endln:15:12
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:15:13, endln:15:14
@@ -492,13 +570,24 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:15:13, endln:15:14
+          |vpiParent:
+          \_Constant: , line:15:13, endln:15:14
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:12:10, endln:12:19
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:10, endln:13:26
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:9, endln:14:14
   |vpiImportTypespec:
@@ -615,7 +704,14 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:32
           |UINT:2
-          |vpiConstType:9
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:18:25, endln:18:34
+            |vpiParent:
+            \_Constant: , line:18:25, endln:18:34
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
+          |vpiConstType:19
       |vpiOperand:
       \_Operation: , line:19:15, endln:19:35
         |vpiParent:

@@ -373,6 +373,7 @@ GenIfElse                                              1
 GenRegion                                              1
 HierPath                                               2
 Identifier                                             2
+IntTypespec                                           18
 LogicTypespec                                         10
 Module                                                 1
 ModuleTypespec                                         1
@@ -383,11 +384,11 @@ Parameter                                              1
 Port                                                   3
 Range                                                  6
 RefObj                                                31
-RefTypespec                                           10
+RefTypespec                                           28
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                               133
+Total:                                               169
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -432,6 +433,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (work@carryadd), line:3:19, endln:3:20
+        |vpiParent:
+        \_Constant: , line:3:19, endln:3:20
+        |vpiFullName:work@carryadd
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
@@ -542,6 +550,12 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
             |vpiFullName:work@carryadd.STAGE
+            |vpiTypespec:
+            \_IntTypespec: 
+              |vpiParent:
+              \_Begin: (work@carryadd.STAGE), line:16:25, endln:17:61
+            |vpiImportTypespec:
+            \_IntTypespec: 
             |vpiStmt:
             \_ContAssign: , line:16:32, endln:17:60
               |vpiParent:
@@ -630,6 +644,13 @@ Design: (unnamed)
                           |vpiDecompile:1
                           |vpiSize:64
                           |UINT:1
+                          |vpiTypespec:
+                          \_RefTypespec: (work@carryadd.STAGE.STAGE[i - 1].C.STAGE), line:16:73, endln:16:74
+                            |vpiParent:
+                            \_Constant: , line:16:73, endln:16:74
+                            |vpiFullName:work@carryadd.STAGE.STAGE[i - 1].C.STAGE
+                            |vpiActual:
+                            \_IntTypespec: 
                           |vpiConstType:9
                     |vpiActual:
                     \_RefObj: (work@carryadd.STAGE.C), line:16:76, endln:16:77
@@ -710,6 +731,13 @@ Design: (unnamed)
                         |vpiDecompile:1
                         |vpiSize:64
                         |UINT:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@carryadd.STAGE.STAGE[i - 1].C.STAGE), line:17:56, endln:17:57
+                          |vpiParent:
+                          \_Constant: , line:17:56, endln:17:57
+                          |vpiFullName:work@carryadd.STAGE.STAGE[i - 1].C.STAGE
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                   |vpiActual:
                   \_RefObj: (work@carryadd.STAGE.C), line:17:59, endln:17:60
@@ -729,9 +757,15 @@ Design: (unnamed)
                 |vpiActual:
                 \_Net: (work@carryadd.STAGE.Y), line:12:25, endln:12:26
           |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
+          |vpiTypespec:
           \_LogicTypespec: , line:11:17, endln:11:21
             |vpiParent:
             \_Begin: (work@carryadd.STAGE), line:10:41, endln:19:12
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiImportTypespec:
           \_LogicTypespec: , line:11:17, endln:11:21
           |vpiImportTypespec:
@@ -814,6 +848,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@carryadd.STAGE), line:13:26, endln:13:27
+                  |vpiParent:
+                  \_Constant: , line:13:26, endln:13:27
+                  |vpiFullName:work@carryadd.STAGE
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiStmt:
             \_Begin: (work@carryadd.STAGE), line:14:25, endln:14:61
@@ -847,8 +888,14 @@ Design: (unnamed)
                 |vpiFullName:work@carryadd.STAGE.i
                 |vpiActual:
                 \_Variable: (work@carryadd.i), line:10:14, endln:10:15
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@carryadd), line:10:9, endln:19:12
         |vpiImportTypespec:
         \_Variable: (work@carryadd.i), line:10:14, endln:10:15
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:10:14, endln:10:19
           |vpiParent:
@@ -860,6 +907,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@carryadd), line:10:18, endln:10:19
+              |vpiParent:
+              \_Constant: , line:10:18, endln:10:19
+              |vpiFullName:work@carryadd
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@carryadd.i), line:10:14, endln:10:15
@@ -909,6 +963,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@carryadd), line:10:38, endln:10:39
+                |vpiParent:
+                \_Constant: , line:10:38, endln:10:39
+                |vpiFullName:work@carryadd
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@carryadd.i), line:10:32, endln:10:33
@@ -924,6 +985,10 @@ Design: (unnamed)
       \_GenFor: (work@carryadd), line:10:9, endln:19:12
     |vpiStmt:
     \_Begin: (work@carryadd), line:10:9, endln:19:12
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
   |vpiTypespec:
   \_LogicTypespec: , line:5:7, endln:5:18
     |vpiParent:
@@ -952,6 +1017,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@carryadd), line:5:14, endln:5:15
+            |vpiParent:
+            \_Constant: , line:5:14, endln:5:15
+            |vpiFullName:work@carryadd
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:16, endln:5:17
@@ -960,7 +1032,16 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@carryadd), line:5:16, endln:5:17
+          |vpiParent:
+          \_Constant: , line:5:16, endln:5:17
+          |vpiFullName:work@carryadd
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@carryadd.i), line:8:8, endln:8:9
   |vpiImportTypespec:

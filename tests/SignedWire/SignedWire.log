@@ -46,15 +46,16 @@ AST_DEBUG_END
 Constant                                               2
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Range                                                  1
-RefTypespec                                            1
+RefTypespec                                            3
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                11
+Total:                                                15
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedWire/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -90,6 +91,13 @@ Design: (unnamed)
         |vpiDecompile:15
         |vpiSize:64
         |UINT:15
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:14, endln:2:16
+          |vpiParent:
+          \_Constant: , line:2:14, endln:2:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:17, endln:2:18
@@ -98,9 +106,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:17, endln:2:18
+          |vpiParent:
+          \_Constant: , line:2:17, endln:2:18
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SignedWire/dut.sv, line:1:1, endln:3:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:5
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.wire_merged), line:2:20, endln:2:31
     |vpiParent:

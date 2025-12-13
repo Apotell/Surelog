@@ -151,7 +151,7 @@ BitSelect                                              1
 Constant                                               4
 Design                                                 1
 Identifier                                             4
-IntTypespec                                            3
+IntTypespec                                            7
 LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         2
@@ -164,14 +164,14 @@ Port                                                   3
 Range                                                  1
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                           10
+RefTypespec                                           13
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                48
+Total:                                                55
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -217,6 +217,13 @@ Design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
+      |vpiTypespec:
+      \_RefTypespec: (pkg), line:2:19, endln:2:21
+        |vpiParent:
+        \_Constant: , line:2:19, endln:2:21
+        |vpiFullName:pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg::N), line:2:17, endln:2:21
@@ -225,6 +232,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
   |vpiTypespec:
   \_TypedefTypespec: (pkg::Struct), line:3:39, endln:3:45
     |vpiParent:
@@ -264,6 +275,8 @@ Design: (unnamed)
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::Struct), line:3:39, endln:3:45
   |vpiImportTypespec:
@@ -308,6 +321,10 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:10:4, endln:10:28
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:9:1, endln:13:10
@@ -335,6 +352,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:10:24, endln:10:25
+            |vpiParent:
+            \_Constant: , line:10:24, endln:10:25
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:26, endln:10:27
@@ -343,6 +367,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:10:26, endln:10:27
+          |vpiParent:
+          \_Constant: , line:10:26, endln:10:27
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut.pkg::Struct), line:3:39, endln:3:45
@@ -357,6 +388,8 @@ Design: (unnamed)
   \_IntTypespec: , line:9:18, endln:9:21
   |vpiImportTypespec:
   \_Variable: (work@dut.sel), line:9:22, endln:9:25
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:10:4, endln:10:28
   |vpiImportTypespec:

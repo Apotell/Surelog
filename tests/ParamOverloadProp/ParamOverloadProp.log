@@ -102,7 +102,7 @@ AST_DEBUG_END
 Constant                                               3
 Design                                                 1
 Identifier                                             2
-IntTypespec                                            1
+IntTypespec                                            4
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -112,10 +112,10 @@ Parameter                                              2
 Range                                                  1
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            5
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloadProp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -174,6 +174,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_flop), line:8:26, endln:8:27
+        |vpiParent:
+        \_Constant: , line:8:26, endln:8:27
+        |vpiFullName:work@prim_flop
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_flop.Width), line:8:18, endln:8:27
@@ -196,6 +203,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamOverloadProp/dut.sv, line:7:1, endln:10:10
   |vpiTypespec:
   \_LogicTypespec: , line:9:14, endln:9:19
     |vpiParent:
@@ -224,6 +235,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_flop), line:9:27, endln:9:28
+            |vpiParent:
+            \_Constant: , line:9:27, endln:9:28
+            |vpiFullName:work@prim_flop
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:29, endln:9:30
@@ -232,9 +250,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_flop), line:9:29, endln:9:30
+          |vpiParent:
+          \_Constant: , line:9:29, endln:9:30
+          |vpiFullName:work@prim_flop
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:8:14, endln:8:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:14, endln:9:19
   |vpiDefName:work@prim_flop

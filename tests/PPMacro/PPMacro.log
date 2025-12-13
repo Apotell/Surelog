@@ -79,16 +79,18 @@ Constant                                               3
 ContAssign                                             2
 Design                                                 1
 Identifier                                             3
+IntTypespec                                            3
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              1
 PreprocMacroDefinition                                 2
 PreprocMacroInstance                                   2
 RefObj                                                 2
+RefTypespec                                            3
 SourceFile                                             1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                28
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PPMacro/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -140,6 +142,13 @@ Design: (unnamed)
         |vpiDecompile:123
         |vpiSize:64
         |UINT:123
+        |vpiTypespec:
+        \_RefTypespec: (work@top1), line:1:21, endln:1:24
+          |vpiParent:
+          \_Constant: , line:1:21, endln:1:24
+          |vpiFullName:work@top1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: ($clog2), line:1:15, endln:1:20
@@ -150,6 +159,8 @@ Design: (unnamed)
     \_Identifier: ($clog2), line:1:15, endln:1:20
     |vpiObject:
     \_Constant: , line:1:21, endln:1:24
+    |vpiObject:
+    \_RefTypespec: (work@top1), line:1:21, endln:1:24
   |vpiPreprocMacroInstance:
   \_PreprocMacroInstance: (FOO2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:8:14, endln:8:19
     |vpiParent:
@@ -172,7 +183,16 @@ Design: (unnamed)
       |vpiDecompile:42
       |vpiSize:64
       |UINT:42
+      |vpiTypespec:
+      \_RefTypespec: (work@top2), line:6:14, endln:6:16
+        |vpiParent:
+        \_Constant: , line:6:14, endln:6:16
+        |vpiFullName:work@top2
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
+    |vpiObject:
+    \_RefTypespec: (work@top2), line:6:14, endln:6:16
 |vpiAllModules:
 \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
   |vpiParent:
@@ -182,6 +202,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
     |vpiName:work@top1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top1.a), line:3:10, endln:3:11
     |vpiParent:
@@ -215,6 +241,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
     |vpiName:work@top2
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top2.a), line:8:10, endln:8:11
     |vpiParent:
@@ -243,6 +275,13 @@ Design: (unnamed)
         |vpiDecompile:123
         |vpiSize:64
         |UINT:123
+        |vpiTypespec:
+        \_RefTypespec: (work@top2), line:8:23, endln:8:26
+          |vpiParent:
+          \_Constant: , line:8:23, endln:8:26
+          |vpiFullName:work@top2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top2.a), line:8:10, endln:8:11

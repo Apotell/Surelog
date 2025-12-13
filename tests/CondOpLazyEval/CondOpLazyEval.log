@@ -124,6 +124,7 @@ AST_DEBUG_END
 Constant                                               7
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            7
 IntegerTypespec                                        3
 Module                                                 1
 ModuleTypespec                                         1
@@ -131,10 +132,10 @@ Operation                                              6
 ParamAssign                                            3
 Parameter                                              3
 RefObj                                                 4
-RefTypespec                                            3
+RefTypespec                                           10
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                34
+Total:                                                48
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -206,6 +207,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:2:27, endln:2:28
+        |vpiParent:
+        \_Constant: , line:2:27, endln:2:28
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.A), line:2:23, endln:2:28
@@ -238,6 +246,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:3:33, endln:3:34
+            |vpiParent:
+            \_Constant: , line:3:33, endln:3:34
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:3:38, endln:3:41
@@ -251,6 +266,13 @@ Design: (unnamed)
           |vpiDecompile:8
           |vpiSize:64
           |UINT:8
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:3:38, endln:3:39
+            |vpiParent:
+            \_Constant: , line:3:38, endln:3:39
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_RefObj: (work@top.A), line:3:40, endln:3:41
@@ -267,6 +289,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:44, endln:3:45
+          |vpiParent:
+          \_Constant: , line:3:44, endln:3:45
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.B), line:3:23, endln:3:45
@@ -299,6 +328,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:4:32, endln:4:33
+            |vpiParent:
+            \_Constant: , line:4:32, endln:4:33
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:4:37, endln:4:40
@@ -312,6 +348,13 @@ Design: (unnamed)
           |vpiDecompile:8
           |vpiSize:64
           |UINT:8
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:4:37, endln:4:38
+            |vpiParent:
+            \_Constant: , line:4:37, endln:4:38
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_RefObj: (work@top.A), line:4:39, endln:4:40
@@ -328,6 +371,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:4:43, endln:4:44
+          |vpiParent:
+          \_Constant: , line:4:43, endln:4:44
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.C), line:4:23, endln:4:44
@@ -336,8 +386,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
   |vpiImportTypespec:
   \_IntegerTypespec: , line:2:15, endln:2:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

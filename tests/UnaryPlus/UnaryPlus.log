@@ -52,14 +52,16 @@ Constant                                               2
 Design                                                 1
 GenFor                                                 1
 Identifier                                             2
+IntTypespec                                            2
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
 RefObj                                                 2
+RefTypespec                                            2
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                16
+Total:                                                20
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnaryPlus/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -101,8 +103,14 @@ Design: (unnamed)
         \_Begin: (work@alert_handler_reg_wrap.g_dmem_intg_check), line:2:48, endln:3:6
         |vpiName:g_dmem_intg_check
       |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
     |vpiImportTypespec:
     \_Variable: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:2:7, endln:2:24
       |vpiParent:
@@ -114,6 +122,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@alert_handler_reg_wrap), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:work@alert_handler_reg_wrap
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
@@ -137,6 +152,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@alert_handler_reg_wrap), line:2:35, endln:2:36
+          |vpiParent:
+          \_Constant: , line:2:35, endln:2:36
+          |vpiFullName:work@alert_handler_reg_wrap
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Operation: , line:2:38, endln:2:46

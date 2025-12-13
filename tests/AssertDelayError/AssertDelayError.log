@@ -987,7 +987,8 @@ IfElse                                                 1
 IfStmt                                                 1
 ImmediateAssert                                        1
 Initial                                                3
-LogicTypespec                                         18
+IntTypespec                                           34
+LogicTypespec                                         22
 Module                                                 3
 ModuleTypespec                                         3
 Net                                                   13
@@ -999,12 +1000,13 @@ PropertySpec                                           6
 Range                                                 10
 RefModule                                              1
 RefObj                                                41
-RefTypespec                                           18
+RefTypespec                                           57
 Repeat                                                 1
 SourceFile                                             3
+StringTypespec                                         1
 SysFuncCall                                            4
 ------------------------------------------------------------
-Total:                                               252
+Total:                                               330
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssertDelayError/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1140,6 +1142,13 @@ Design: (unnamed)
                 |vpiDecompile:32
                 |vpiSize:64
                 |UINT:32
+                |vpiTypespec:
+                \_RefTypespec: (work@left_rotate_assertions.p_valid_rotation), line:19:83, endln:19:85
+                  |vpiParent:
+                  \_Constant: , line:19:83, endln:19:85
+                  |vpiFullName:work@left_rotate_assertions.p_valid_rotation
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiOperand:
               \_RefObj: (work@left_rotate_assertions.p_valid_rotation.rotate_by), line:19:86, endln:19:95
@@ -1210,6 +1219,13 @@ Design: (unnamed)
             |vpiDecompile:5'd31
             |vpiSize:5
             |DEC:31
+            |vpiTypespec:
+            \_RefTypespec: (work@left_rotate_assertions.p_rotation_range), line:25:47, endln:25:52
+              |vpiParent:
+              \_Constant: , line:25:47, endln:25:52
+              |vpiFullName:work@left_rotate_assertions.p_rotation_range
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:1
   |vpiPropertyDecl:
   \_PropertyDecl: (work@left_rotate_assertions.p_no_rotation), line:30:3, endln:32:14
@@ -1277,6 +1293,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@left_rotate_assertions.p_no_rotation), line:31:44, endln:31:45
+                |vpiParent:
+                \_Constant: , line:31:44, endln:31:45
+                |vpiFullName:work@left_rotate_assertions.p_no_rotation
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:31:52, endln:31:70
@@ -1354,6 +1377,15 @@ Design: (unnamed)
         |vpiActual:
         \_PropertyDecl: (work@left_rotate_assertions.p_no_rotation), line:30:3, endln:32:14
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@left_rotate_assertions (work@left_rotate_assertions), file:${SURELOG_DIR}/tests/AssertDelayError/left_rotate_assertions.sv, line:1:1, endln:35:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@left_rotate_assertions (work@left_rotate_assertions), file:${SURELOG_DIR}/tests/AssertDelayError/left_rotate_assertions.sv, line:1:1, endln:35:10
+    |vpiSigned:1
+  |vpiTypespec:
   \_LogicTypespec: , line:4:11, endln:4:17
     |vpiParent:
     \_Module: work@left_rotate_assertions (work@left_rotate_assertions), file:${SURELOG_DIR}/tests/AssertDelayError/left_rotate_assertions.sv, line:1:1, endln:35:10
@@ -1368,6 +1400,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotate_assertions), line:4:12, endln:4:14
+          |vpiParent:
+          \_Constant: , line:4:12, endln:4:14
+          |vpiFullName:work@left_rotate_assertions
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:15, endln:4:16
@@ -1376,6 +1415,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotate_assertions), line:4:15, endln:4:16
+          |vpiParent:
+          \_Constant: , line:4:15, endln:4:16
+          |vpiFullName:work@left_rotate_assertions
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:5:11, endln:5:16
@@ -1392,6 +1438,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotate_assertions), line:5:12, endln:5:13
+          |vpiParent:
+          \_Constant: , line:5:12, endln:5:13
+          |vpiFullName:work@left_rotate_assertions
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:14, endln:5:15
@@ -1400,7 +1453,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotate_assertions), line:5:14, endln:5:15
+          |vpiParent:
+          \_Constant: , line:5:14, endln:5:15
+          |vpiFullName:work@left_rotate_assertions
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@left_rotate_assertions.clk), line:2:11, endln:2:14
     |vpiParent:
@@ -1572,6 +1636,10 @@ Design: (unnamed)
           |vpiParent:
           \_IfStmt: , line:12:5, endln:14:8
           |vpiFullName:work@left_rotate_assertions
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@left_rotate_assertions), line:12:17, endln:14:8
           |vpiImportTypespec:
           \_ImmediateAssert: , line:13:7, endln:13:28
             |vpiParent:
@@ -1596,7 +1664,16 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@left_rotate_assertions), line:13:25, endln:13:26
+                  |vpiParent:
+                  \_Constant: , line:13:25, endln:13:26
+                  |vpiFullName:work@left_rotate_assertions
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ImmediateAssert: , line:13:7, endln:13:28
 |vpiAllModules:
@@ -1627,6 +1704,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotation), line:4:17, endln:4:18
+          |vpiParent:
+          \_Constant: , line:4:17, endln:4:18
+          |vpiFullName:work@left_rotation
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:19, endln:4:20
@@ -1635,7 +1719,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@left_rotation), line:4:19, endln:4:20
+          |vpiParent:
+          \_Constant: , line:4:19, endln:4:20
+          |vpiFullName:work@left_rotation
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@left_rotation (work@left_rotation), file:${SURELOG_DIR}/tests/AssertDelayError/left_rotate.sv, line:1:1, endln:21:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:11, endln:2:15
   |vpiImportTypespec:
@@ -1668,6 +1763,8 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@left_rotation.in_data), line:4:22, endln:4:29
     |vpiParent:
@@ -1818,6 +1915,12 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:9:5, endln:14:8
             |vpiFullName:work@left_rotation
+            |vpiTypespec:
+            \_LogicTypespec: 
+              |vpiParent:
+              \_Begin: (work@left_rotation), line:9:16, endln:11:8
+            |vpiImportTypespec:
+            \_LogicTypespec: 
             |vpiStmt:
             \_Assignment: , line:10:9, endln:10:33
               |vpiParent:
@@ -1830,6 +1933,13 @@ Design: (unnamed)
                 |vpiDecompile:8'b00000000
                 |vpiSize:8
                 |BIN:00000000
+                |vpiTypespec:
+                \_RefTypespec: (work@left_rotation), line:10:21, endln:10:33
+                  |vpiParent:
+                  \_Constant: , line:10:21, endln:10:33
+                  |vpiFullName:work@left_rotation
+                  |vpiActual:
+                  \_LogicTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@left_rotation.out_data), line:10:9, endln:10:17
@@ -1844,6 +1954,12 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:9:5, endln:14:8
             |vpiFullName:work@left_rotation
+            |vpiTypespec:
+            \_IntTypespec: 
+              |vpiParent:
+              \_Begin: (work@left_rotation), line:11:14, endln:14:8
+            |vpiImportTypespec:
+            \_IntTypespec: 
             |vpiStmt:
             \_Assignment: , line:13:9, endln:13:49
               |vpiParent:
@@ -1871,6 +1987,13 @@ Design: (unnamed)
                     |vpiDecompile:6
                     |vpiSize:64
                     |UINT:6
+                    |vpiTypespec:
+                    \_RefTypespec: (work@left_rotation.out_data), line:13:31, endln:13:32
+                      |vpiParent:
+                      \_Constant: , line:13:31, endln:13:32
+                      |vpiFullName:work@left_rotation.out_data
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                   |vpiRightRange:
                   \_Constant: , line:13:33, endln:13:34
@@ -1879,6 +2002,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@left_rotation.out_data), line:13:33, endln:13:34
+                      |vpiParent:
+                      \_Constant: , line:13:33, endln:13:34
+                      |vpiFullName:work@left_rotation.out_data
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiOperand:
                 \_BitSelect: (work@left_rotation.out_data), line:13:45, endln:13:48
@@ -1895,6 +2025,13 @@ Design: (unnamed)
                     |vpiDecompile:7
                     |vpiSize:64
                     |UINT:7
+                    |vpiTypespec:
+                    \_RefTypespec: (work@left_rotation.out_data), line:13:46, endln:13:47
+                      |vpiParent:
+                      \_Constant: , line:13:46, endln:13:47
+                      |vpiFullName:work@left_rotation.out_data
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@left_rotation.out_data), line:13:9, endln:13:17
@@ -1914,6 +2051,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:17:1, endln:19:4
       |vpiFullName:work@left_rotation
+      |vpiTypespec:
+      \_LogicTypespec: 
+        |vpiParent:
+        \_Begin: (work@left_rotation), line:17:9, endln:19:4
+      |vpiImportTypespec:
+      \_LogicTypespec: 
       |vpiStmt:
       \_Assignment: , line:18:5, endln:18:28
         |vpiParent:
@@ -1927,6 +2070,13 @@ Design: (unnamed)
           |vpiDecompile:8'b00000000
           |vpiSize:8
           |BIN:00000000
+          |vpiTypespec:
+          \_RefTypespec: (work@left_rotation), line:18:16, endln:18:28
+            |vpiParent:
+            \_Constant: , line:18:16, endln:18:28
+            |vpiFullName:work@left_rotation
+            |vpiActual:
+            \_LogicTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@left_rotation.out_data), line:18:5, endln:18:13
@@ -1971,6 +2121,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@tb_left_rotation), line:4:10, endln:4:11
+          |vpiParent:
+          \_Constant: , line:4:10, endln:4:11
+          |vpiFullName:work@tb_left_rotation
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:12, endln:4:13
@@ -1979,7 +2136,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@tb_left_rotation), line:4:12, endln:4:13
+          |vpiParent:
+          \_Constant: , line:4:12, endln:4:13
+          |vpiFullName:work@tb_left_rotation
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@tb_left_rotation (work@tb_left_rotation), file:${SURELOG_DIR}/tests/AssertDelayError/tb_left_rotate.sv, line:2:1, endln:46:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:8
   |vpiImportTypespec:
@@ -2012,6 +2180,8 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@tb_left_rotation.in_data), line:4:15, endln:4:22
     |vpiParent:
@@ -2100,6 +2270,24 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:21:5, endln:45:8
       |vpiFullName:work@tb_left_rotation
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_left_rotation), line:21:13, endln:45:8
+      |vpiTypespec:
+      \_LogicTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_left_rotation), line:21:13, endln:45:8
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_left_rotation), line:21:13, endln:45:8
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_LogicTypespec: 
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_Assignment: , line:23:9, endln:23:16
         |vpiParent:
@@ -2113,6 +2301,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:23:15, endln:23:16
+            |vpiParent:
+            \_Constant: , line:23:15, endln:23:16
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_left_rotation.clk), line:23:9, endln:23:12
@@ -2135,6 +2330,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:24:17, endln:24:18
+            |vpiParent:
+            \_Constant: , line:24:17, endln:24:18
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_left_rotation.reset), line:24:9, endln:24:14
@@ -2157,6 +2359,13 @@ Design: (unnamed)
           |vpiDecompile:8'b0
           |vpiSize:8
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:25:19, endln:25:23
+            |vpiParent:
+            \_Constant: , line:25:19, endln:25:23
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_LogicTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@tb_left_rotation.in_data), line:25:9, endln:25:16
@@ -2184,6 +2393,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_left_rotation), line:26:21, endln:26:22
+              |vpiParent:
+              \_Constant: , line:26:21, endln:26:22
+              |vpiFullName:work@tb_left_rotation
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@tb_left_rotation.reset), line:26:13, endln:26:18
@@ -2209,6 +2425,13 @@ Design: (unnamed)
           |vpiDecompile:"left_rotation.vcd"
           |vpiSize:136
           |STRING:left_rotation.vcd
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:30:19, endln:30:38
+            |vpiParent:
+            \_Constant: , line:30:19, endln:30:38
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiName:
         \_Identifier: ($dumpfile), line:30:10, endln:30:18
@@ -2226,6 +2449,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:31:19, endln:31:20
+            |vpiParent:
+            \_Constant: , line:31:19, endln:31:20
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiArgument:
         \_RefObj: (work@tb_left_rotation.tb_left_rotation), line:31:22, endln:31:38
@@ -2251,12 +2481,25 @@ Design: (unnamed)
           |vpiDecompile:20
           |vpiSize:64
           |UINT:20
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_left_rotation), line:34:16, endln:34:18
+            |vpiParent:
+            \_Constant: , line:34:16, endln:34:18
+            |vpiFullName:work@tb_left_rotation
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiStmt:
         \_Begin: (work@tb_left_rotation), line:34:20, endln:37:12
           |vpiParent:
           \_Repeat: , line:34:9, endln:37:12
           |vpiFullName:work@tb_left_rotation
+          |vpiTypespec:
+          \_LogicTypespec: 
+            |vpiParent:
+            \_Begin: (work@tb_left_rotation), line:34:20, endln:37:12
+          |vpiImportTypespec:
+          \_LogicTypespec: 
           |vpiStmt:
           \_Assignment: , line:35:13, endln:35:44
             |vpiParent:
@@ -2284,6 +2527,13 @@ Design: (unnamed)
                 |vpiDecompile:8'b11111111
                 |vpiSize:8
                 |BIN:11111111
+                |vpiTypespec:
+                \_RefTypespec: (work@tb_left_rotation), line:35:33, endln:35:44
+                  |vpiParent:
+                  \_Constant: , line:35:33, endln:35:44
+                  |vpiFullName:work@tb_left_rotation
+                  |vpiActual:
+                  \_LogicTypespec: 
                 |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@tb_left_rotation.in_data), line:35:13, endln:35:20
@@ -2316,6 +2566,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_left_rotation), line:40:21, endln:40:22
+              |vpiParent:
+              \_Constant: , line:40:21, endln:40:22
+              |vpiFullName:work@tb_left_rotation
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@tb_left_rotation.reset), line:40:13, endln:40:18
@@ -2343,6 +2600,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_left_rotation), line:41:21, endln:41:22
+              |vpiParent:
+              \_Constant: , line:41:21, endln:41:22
+              |vpiFullName:work@tb_left_rotation
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@tb_left_rotation.reset), line:41:13, endln:41:18

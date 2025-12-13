@@ -184,10 +184,12 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
+BitTypespec                                            1
 Constant                                               5
 Design                                                 1
 GenIf                                                  1
 Identifier                                             2
+IntTypespec                                            4
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              3
@@ -195,9 +197,10 @@ ParamAssign                                            4
 Parameter                                              4
 RefModule                                              1
 RefObj                                                 3
+RefTypespec                                            5
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                40
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsignedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -269,6 +272,13 @@ Design: (unnamed)
       |vpiDecompile:32'h80000000
       |vpiSize:32
       |HEX:80000000
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:5:32, endln:5:45
+        |vpiParent:
+        \_Constant: , line:5:32, endln:5:45
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@top.n), line:5:28, endln:5:45
@@ -296,6 +306,13 @@ Design: (unnamed)
         |vpiDecompile:1'b1
         |vpiSize:1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:6:37, endln:6:41
+          |vpiParent:
+          \_Constant: , line:6:37, endln:6:41
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.n2), line:6:28, endln:6:41
@@ -310,6 +327,13 @@ Design: (unnamed)
       |vpiDecompile:64'h8FFFFFFFFFFF0000
       |vpiSize:64
       |HEX:8FFFFFFFFFFF0000
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:7:33, endln:7:56
+        |vpiParent:
+        \_Constant: , line:7:33, endln:7:56
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@top.n3), line:7:28, endln:7:56
@@ -337,6 +361,13 @@ Design: (unnamed)
         |vpiDecompile:64'h000000000000FFFF
         |vpiSize:64
         |HEX:000000000000FFFF
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:8:38, endln:8:61
+          |vpiParent:
+          \_Constant: , line:8:38, endln:8:61
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@top.n4), line:8:28, endln:8:61
@@ -360,6 +391,18 @@ Design: (unnamed)
       |vpiDefName:work@GOOD
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:1:1, endln:2:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIf: , line:10:3, endln:12:6
@@ -385,6 +428,13 @@ Design: (unnamed)
         |vpiDecompile:10376293541461622783
         |vpiSize:64
         |UINT:10376293541461622783
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:10:13, endln:10:33
+          |vpiParent:
+          \_Constant: , line:10:13, endln:10:33
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:10:35, endln:12:6

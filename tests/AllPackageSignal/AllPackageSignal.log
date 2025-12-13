@@ -351,12 +351,12 @@ ArrayTypespec                                          3
 Assignment                                             6
 Begin                                                  3
 BitSelect                                              3
-BitTypespec                                            6
+BitTypespec                                            9
 Constant                                              20
 Design                                                 1
 Function                                               3
 Identifier                                             9
-IntTypespec                                            2
+IntTypespec                                           19
 Module                                                 2
 Operation                                             15
 Package                                                2
@@ -366,7 +366,7 @@ PreprocMacroDefinition                                 2
 PreprocMacroInstance                                   3
 Range                                                  3
 RefObj                                                 5
-RefTypespec                                           16
+RefTypespec                                           34
 ReturnStmt                                             3
 SourceFile                                             1
 StringTypespec                                         3
@@ -374,7 +374,7 @@ SysFuncCall                                            4
 TaggedPattern                                          3
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               125
+Total:                                               163
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllPackageSignal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -447,6 +447,10 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1)
         |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1)
+        |vpiTypespec:
         \_ArrayTypespec: , line:7:20, endln:7:73
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1)
@@ -477,6 +481,13 @@ Design: (unnamed)
                     |vpiDecompile:32
                     |vpiSize:64
                     |UINT:32
+                    |vpiTypespec:
+                    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:23, endln:7:25
+                      |vpiParent:
+                      \_Constant: , line:7:23, endln:7:25
+                      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                   |vpiOperand:
                   \_SysFuncCall: ($bits), line:7:29, endln:7:61
@@ -489,7 +500,14 @@ Design: (unnamed)
                       |vpiDecompile:4
                       |vpiSize:32
                       |UINT:4
-                      |vpiConstType:9
+                      |vpiTypespec:
+                      \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:42, endln:7:60
+                        |vpiParent:
+                        \_Constant: , line:7:42, endln:7:60
+                        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1
+                        |vpiActual:
+                        \_IntTypespec: 
+                      |vpiConstType:19
                     |vpiName:
                     \_Identifier: ($bits), line:7:30, endln:7:34
                       |vpiParent:
@@ -502,6 +520,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:65, endln:7:66
+                    |vpiParent:
+                    \_Constant: , line:7:65, endln:7:66
+                    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
                 |vpiOperand:
                 \_Operation: , line:7:69, endln:7:71
@@ -515,6 +540,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:70, endln:7:71
+                      |vpiParent:
+                      \_Constant: , line:7:70, endln:7:71
+                      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
           |vpiElemTypespec:
           \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:5, endln:7:8
@@ -524,15 +556,23 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: , line:7:5, endln:7:8
         |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1)
+        |vpiTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1)
         |vpiImportTypespec:
         \_BitTypespec: , line:7:5, endln:7:8
         |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
         \_ArrayTypespec: , line:7:20, endln:7:73
         |vpiImportTypespec:
         \_Variable: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1::unused_bit), line:7:9, endln:7:19
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiImportTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
         |vpiStmt:
@@ -557,6 +597,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:8:29, endln:8:33
+                  |vpiParent:
+                  \_Constant: , line:8:29, endln:8:33
+                  |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiTypespec:
               \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:8:20, endln:8:27
@@ -592,6 +639,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1::unused_bit), line:9:23, endln:9:24
+                |vpiParent:
+                \_Constant: , line:9:23, endln:9:24
+                |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter1::unused_bit
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
       |vpiTypespec:
       \_BitTypespec: , line:6:22, endln:6:25
@@ -625,6 +679,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:7:23, endln:7:25
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:23, endln:7:25
+    |vpiObject:
     \_Operation: , line:7:23, endln:7:61
     |vpiObject:
     \_SysFuncCall: ($bits), line:7:29, endln:7:61
@@ -633,13 +689,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:7:42, endln:7:60
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:42, endln:7:60
+    |vpiObject:
     \_Operation: , line:7:22, endln:7:71
     |vpiObject:
     \_Constant: , line:7:65, endln:7:66
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:65, endln:7:66
+    |vpiObject:
     \_Operation: , line:7:69, endln:7:71
     |vpiObject:
     \_Constant: , line:7:70, endln:7:71
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:7:70, endln:7:71
     |vpiObject:
     \_Operation: , line:7:21, endln:7:72
     |vpiObject:
@@ -661,6 +723,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:8:29, endln:8:33
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:8:29, endln:8:33
+    |vpiObject:
     \_StringTypespec: , line:8:20, endln:8:27
     |vpiObject:
     \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:8:20, endln:8:27
@@ -670,6 +734,8 @@ Design: (unnamed)
     \_BitSelect: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1::unused_bit), line:9:22, endln:9:25
     |vpiObject:
     \_Constant: , line:9:23, endln:9:24
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1::unused_bit), line:9:23, endln:9:24
   |vpiPreprocMacroInstance:
   \_PreprocMacroInstance: (ASSERT_STATIC_IN_PACKAGE), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:31:3, endln:31:85
     |vpiParent:
@@ -715,6 +781,10 @@ Design: (unnamed)
           |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit
         |vpiTypespec:
         \_BitTypespec: , line:7:5, endln:7:8
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2)
+        |vpiTypespec:
+        \_IntTypespec: 
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2)
         |vpiTypespec:
@@ -765,6 +835,13 @@ Design: (unnamed)
                     |vpiDecompile:32
                     |vpiSize:64
                     |UINT:32
+                    |vpiTypespec:
+                    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:52, endln:7:54
+                      |vpiParent:
+                      \_Constant: , line:7:52, endln:7:54
+                      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiOperand:
                 \_Constant: , line:7:58, endln:7:59
@@ -773,6 +850,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:58, endln:7:59
+                    |vpiParent:
+                    \_Constant: , line:7:58, endln:7:59
+                    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
                 |vpiOperand:
                 \_Operation: , line:7:62, endln:7:64
@@ -786,6 +870,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:63, endln:7:64
+                      |vpiParent:
+                      \_Constant: , line:7:63, endln:7:64
+                      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
           |vpiElemTypespec:
           \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:5, endln:7:8
@@ -795,15 +886,23 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: , line:7:5, endln:7:8
         |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2)
+        |vpiTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2)
         |vpiImportTypespec:
         \_BitTypespec: , line:7:5, endln:7:8
         |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
         \_ArrayTypespec: , line:7:20, endln:7:66
         |vpiImportTypespec:
         \_Variable: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit), line:7:9, endln:7:19
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiImportTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
         |vpiStmt:
@@ -828,6 +927,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:8:29, endln:8:33
+                  |vpiParent:
+                  \_Constant: , line:8:29, endln:8:33
+                  |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiTypespec:
               \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:8:20, endln:8:27
@@ -863,6 +969,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit), line:9:23, endln:9:24
+                |vpiParent:
+                \_Constant: , line:9:23, endln:9:24
+                |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
       |vpiTypespec:
       \_BitTypespec: , line:6:22, endln:6:25
@@ -904,13 +1017,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:7:52, endln:7:54
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:52, endln:7:54
+    |vpiObject:
     \_Operation: , line:7:22, endln:7:64
     |vpiObject:
     \_Constant: , line:7:58, endln:7:59
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:58, endln:7:59
+    |vpiObject:
     \_Operation: , line:7:62, endln:7:64
     |vpiObject:
     \_Constant: , line:7:63, endln:7:64
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:7:63, endln:7:64
     |vpiObject:
     \_Operation: , line:7:21, endln:7:65
     |vpiObject:
@@ -932,6 +1051,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:8:29, endln:8:33
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:8:29, endln:8:33
+    |vpiObject:
     \_StringTypespec: , line:8:20, endln:8:27
     |vpiObject:
     \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2), line:8:20, endln:8:27
@@ -941,6 +1062,8 @@ Design: (unnamed)
     \_BitSelect: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit), line:9:22, endln:9:25
     |vpiObject:
     \_Constant: , line:9:23, endln:9:24
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter2::unused_bit), line:9:23, endln:9:24
   |vpiPreprocMacroInstance:
   \_PreprocMacroInstance: (ASSERT_STATIC_IN_PACKAGE), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:33:3, endln:33:115
     |vpiParent:
@@ -986,6 +1109,10 @@ Design: (unnamed)
           |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit
         |vpiTypespec:
         \_BitTypespec: , line:7:5, endln:7:8
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3)
+        |vpiTypespec:
+        \_IntTypespec: 
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3)
         |vpiTypespec:
@@ -1040,7 +1167,14 @@ Design: (unnamed)
                       |vpiDecompile:4
                       |vpiSize:32
                       |UINT:4
-                      |vpiConstType:9
+                      |vpiTypespec:
+                      \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:65, endln:7:83
+                        |vpiParent:
+                        \_Constant: , line:7:65, endln:7:83
+                        |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3
+                        |vpiActual:
+                        \_IntTypespec: 
+                      |vpiConstType:19
                     |vpiName:
                     \_Identifier: ($bits), line:7:53, endln:7:57
                       |vpiParent:
@@ -1053,6 +1187,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:88, endln:7:89
+                    |vpiParent:
+                    \_Constant: , line:7:88, endln:7:89
+                    |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
                 |vpiOperand:
                 \_Operation: , line:7:92, endln:7:94
@@ -1066,6 +1207,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:93, endln:7:94
+                      |vpiParent:
+                      \_Constant: , line:7:93, endln:7:94
+                      |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
           |vpiElemTypespec:
           \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:5, endln:7:8
@@ -1075,15 +1223,23 @@ Design: (unnamed)
             |vpiActual:
             \_BitTypespec: , line:7:5, endln:7:8
         |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3)
+        |vpiTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
           |vpiParent:
           \_Begin: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3)
         |vpiImportTypespec:
         \_BitTypespec: , line:7:5, endln:7:8
         |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
         \_ArrayTypespec: , line:7:20, endln:7:96
         |vpiImportTypespec:
         \_Variable: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit), line:7:9, endln:7:19
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiImportTypespec:
         \_StringTypespec: , line:8:20, endln:8:27
         |vpiStmt:
@@ -1108,6 +1264,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:8:29, endln:8:33
+                  |vpiParent:
+                  \_Constant: , line:8:29, endln:8:33
+                  |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiTypespec:
               \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:8:20, endln:8:27
@@ -1143,6 +1306,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit), line:9:23, endln:9:24
+                |vpiParent:
+                \_Constant: , line:9:23, endln:9:24
+                |vpiFullName:pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
       |vpiTypespec:
       \_BitTypespec: , line:6:22, endln:6:25
@@ -1188,13 +1358,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:7:65, endln:7:83
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:65, endln:7:83
+    |vpiObject:
     \_Operation: , line:7:22, endln:7:94
     |vpiObject:
     \_Constant: , line:7:88, endln:7:89
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:88, endln:7:89
+    |vpiObject:
     \_Operation: , line:7:92, endln:7:94
     |vpiObject:
     \_Constant: , line:7:93, endln:7:94
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:7:93, endln:7:94
     |vpiObject:
     \_Operation: , line:7:21, endln:7:95
     |vpiObject:
@@ -1216,6 +1392,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:8:29, endln:8:33
     |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:8:29, endln:8:33
+    |vpiObject:
     \_StringTypespec: , line:8:20, endln:8:27
     |vpiObject:
     \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:8:20, endln:8:27
@@ -1225,6 +1403,8 @@ Design: (unnamed)
     \_BitSelect: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit), line:9:22, endln:9:25
     |vpiObject:
     \_Constant: , line:9:23, endln:9:24
+    |vpiObject:
+    \_RefTypespec: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3::unused_bit), line:9:23, endln:9:24
 |vpiAllPackages:
 \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:16:1, endln:18:19
   |vpiParent:
@@ -1259,6 +1439,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (pkg_b), line:17:38, endln:17:39
+        |vpiParent:
+        \_Constant: , line:17:38, endln:17:39
+        |vpiFullName:pkg_b
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg_b::ParameterIntEqual4), line:17:17, endln:17:39
@@ -1267,8 +1454,14 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:16:1, endln:18:19
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:16:1, endln:18:19
   |vpiImportTypespec:
   \_IntTypespec: , line:17:13, endln:17:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:pkg_b
   |vpiEndLabel:pkg_b
 |vpiAllPackages:
@@ -1305,6 +1498,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (pkg_a), line:28:38, endln:28:39
+        |vpiParent:
+        \_Constant: , line:28:38, endln:28:39
+        |vpiFullName:pkg_a
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg_a::ParameterIntInPkgA), line:28:17, endln:28:39
@@ -1319,6 +1519,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg_a (pkg_a), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:21:1, endln:34:19
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg_a (pkg_a), file:${SURELOG_DIR}/tests/AllPackageSignal/dut.sv, line:21:1, endln:34:19
   |vpiImportTypespec:
   \_Function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:6:3, endln:10:14
   |vpiImportTypespec:
@@ -1327,6 +1531,8 @@ Design: (unnamed)
   \_Function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter3), line:6:3, endln:10:14
   |vpiImportTypespec:
   \_IntTypespec: , line:28:13, endln:28:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:pkg_a
   |vpiTaskFunc:
   \_Function: (pkg_a::assert_static_in_package_ThisNameDoesNotMatter1), line:6:3, endln:10:14

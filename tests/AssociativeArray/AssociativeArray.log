@@ -95,16 +95,16 @@ Constant                                               8
 ContAssign                                             2
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            3
+IntTypespec                                            8
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    2
 Range                                                  2
-RefTypespec                                            8
+RefTypespec                                           16
 SourceFile                                             1
-StringTypespec                                         1
+StringTypespec                                         4
 ------------------------------------------------------------
-Total:                                                35
+Total:                                                51
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssociativeArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -126,6 +126,14 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
     |vpiName:work@top
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
   \_IntTypespec: , line:2:4, endln:2:7
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
@@ -141,7 +149,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:2:10, endln:2:15
       |vpiFullName:work@top
       |vpiActual:
-      \_IntTypespec: , line:2:4, endln:2:7
+      \_StringTypespec: 
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:2:4, endln:2:7
       |vpiParent:
@@ -164,7 +172,7 @@ Design: (unnamed)
       \_ArrayTypespec: , line:5:10, endln:5:18
       |vpiFullName:work@top
       |vpiActual:
-      \_StringTypespec: , line:5:11, endln:5:17
+      \_StringTypespec: 
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:5:4, endln:5:7
       |vpiParent:
@@ -172,6 +180,10 @@ Design: (unnamed)
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:2:4, endln:2:7
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:2:4, endln:2:7
   |vpiImportTypespec:
@@ -222,6 +234,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:3:18, endln:3:19
+        |vpiParent:
+        \_Constant: , line:3:18, endln:3:19
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_BitSelect: (work@top.a), line:3:12, endln:3:15
@@ -238,6 +257,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@top.a), line:3:13, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:13, endln:3:14
+          |vpiFullName:work@top.a
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiContAssign:
   \_ContAssign: , line:6:11, endln:6:24
@@ -250,6 +276,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:6:23, endln:6:24
+        |vpiParent:
+        \_Constant: , line:6:23, endln:6:24
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_BitSelect: (work@top.b), line:6:12, endln:6:20
@@ -266,6 +299,13 @@ Design: (unnamed)
         |vpiDecompile:"HERE"
         |vpiSize:32
         |STRING:HERE
+        |vpiTypespec:
+        \_RefTypespec: (work@top.b), line:6:13, endln:6:19
+          |vpiParent:
+          \_Constant: , line:6:13, endln:6:19
+          |vpiFullName:work@top.b
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

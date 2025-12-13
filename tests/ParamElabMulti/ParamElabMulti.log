@@ -470,7 +470,7 @@ GenFor                                                 1
 GenIf                                                  2
 Identifier                                            15
 ImportTypespec                                         4
-IntTypespec                                            1
+IntTypespec                                           16
 LogicTypespec                                          1
 Module                                                 6
 ModuleTypespec                                         4
@@ -481,9 +481,9 @@ Parameter                                              6
 Range                                                  2
 RefModule                                              3
 RefObj                                                14
-RefTypespec                                           16
+RefTypespec                                           34
 SourceFile                                             1
-StringTypespec                                         3
+StringTypespec                                         7
 StructTypespec                                         1
 TaggedPattern                                          3
 TypedefTypespec                                        2
@@ -491,7 +491,7 @@ TypespecMember                                         1
 UnsupportedTypespec                                    5
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               142
+Total:                                               179
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamElabMulti/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -554,6 +554,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (prim_pad_wrapper_pkg), line:2:25, endln:2:26
+          |vpiParent:
+          \_Constant: , line:2:25, endln:2:26
+          |vpiFullName:prim_pad_wrapper_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:27, endln:2:28
@@ -562,7 +569,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (prim_pad_wrapper_pkg), line:2:27, endln:2:28
+          |vpiParent:
+          \_Constant: , line:2:27, endln:2:28
+          |vpiFullName:prim_pad_wrapper_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiTypespec:
   \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:5:6, endln:5:16
     |vpiParent:
@@ -583,6 +601,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:12, endln:5:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:18, endln:2:23
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:5:6, endln:5:16
   |vpiDefName:prim_pad_wrapper_pkg
@@ -635,6 +655,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (pinmux_pkg), line:11:29, endln:11:30
+        |vpiParent:
+        \_Constant: , line:11:29, endln:11:30
+        |vpiFullName:pinmux_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:30
@@ -703,12 +730,27 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (pinmux_pkg::prim_pad_wrapper_pkg), line:9:11, endln:9:34
+        |vpiParent:
+        \_Constant: , line:9:11, endln:9:34
+        |vpiFullName:pinmux_pkg::prim_pad_wrapper_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiTypespec:
   \_IntTypespec: , line:11:14, endln:11:17
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiTypespec:
   \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
     |vpiParent:
@@ -770,6 +812,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (pinmux_pkg), line:14:28, endln:14:29
+            |vpiParent:
+            \_Constant: , line:14:28, endln:14:29
+            |vpiFullName:pinmux_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:14:30, endln:14:31
@@ -778,6 +827,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pinmux_pkg), line:14:30, endln:14:31
+          |vpiParent:
+          \_Constant: , line:14:30, endln:14:31
+          |vpiFullName:pinmux_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (pinmux_pkg::pad_type_e), line:14:7, endln:14:17
@@ -795,7 +851,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:9:11, endln:9:34
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_IntTypespec: , line:11:14, endln:11:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
   |vpiImportTypespec:
@@ -853,6 +913,12 @@ Design: (unnamed)
       \_Begin: (work@prim_generic_pad_attr.gen_assign), line:25:22, endln:27:7
       |vpiName:gen_assign
     |vpiFullName:work@prim_generic_pad_attr.gen_assign
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Begin: (work@prim_generic_pad_attr.gen_assign), line:25:22, endln:27:7
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_Net: (work@prim_generic_pad_attr.gen_assign.a), line:26:14, endln:26:15
       |vpiParent:
@@ -871,6 +937,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@prim_generic_pad_attr.gen_assign), line:26:18, endln:26:19
+          |vpiParent:
+          \_Constant: , line:26:18, endln:26:19
+          |vpiFullName:work@prim_generic_pad_attr.gen_assign
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_RefObj: (work@prim_generic_pad_attr.gen_assign.a), line:26:14, endln:26:15
@@ -896,9 +969,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_generic_pad_attr.prim_pad_wrapper_pkg), line:23:11, endln:23:34
+        |vpiParent:
+        \_Constant: , line:23:11, endln:23:34
+        |vpiFullName:work@prim_generic_pad_attr.prim_pad_wrapper_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:22:1, endln:28:34
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:23:11, endln:23:34
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@prim_generic_pad_attr
   |vpiGenStmt:
   \_GenIf: , line:25:4, endln:27:7
@@ -1006,9 +1092,28 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_pad_attr.prim_pad_wrapper_pkg), line:31:11, endln:31:34
+        |vpiParent:
+        \_Constant: , line:31:11, endln:31:34
+        |vpiFullName:work@prim_pad_attr.prim_pad_wrapper_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:30:1, endln:39:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:30:1, endln:39:10
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:31:11, endln:31:34
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@prim_pad_attr
   |vpiGenStmt:
   \_GenIf: , line:34:4, endln:38:7
@@ -1021,6 +1126,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_pad_attr), line:34:8, endln:34:9
+        |vpiParent:
+        \_Constant: , line:34:8, endln:34:9
+        |vpiFullName:work@prim_pad_attr
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@prim_pad_attr.gen_generic), line:34:11, endln:38:7
@@ -1097,8 +1209,14 @@ Design: (unnamed)
         |vpiDefName:work@prim_pad_attr
         |vpiActual:
         \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:30:1, endln:39:10
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@sub_top), line:45:3, endln:49:6
     |vpiImportTypespec:
     \_Variable: (work@sub_top.k), line:45:15, endln:45:16
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:45:8, endln:45:20
       |vpiParent:
@@ -1110,6 +1228,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@sub_top), line:45:19, endln:45:20
+          |vpiParent:
+          \_Constant: , line:45:19, endln:45:20
+          |vpiFullName:work@sub_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@sub_top.k), line:45:15, endln:45:16
@@ -1165,9 +1290,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@sub_top.pinmux_pkg), line:42:11, endln:42:24
+        |vpiParent:
+        \_Constant: , line:42:11, endln:42:24
+        |vpiFullName:work@sub_top.pinmux_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:42:11, endln:42:24
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@sub_top
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
@@ -1218,7 +1356,14 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:32
             |UINT:1
-            |vpiConstType:9
+            |vpiTypespec:
+            \_RefTypespec: (work@top), line:54:34, endln:54:42
+              |vpiParent:
+              \_Constant: , line:54:34, endln:54:42
+              |vpiFullName:work@top
+              |vpiActual:
+              \_IntTypespec: 
+            |vpiConstType:19
           |vpiOperand:
           \_Operation: , line:54:42, endln:54:67
             |vpiParent:
@@ -1231,7 +1376,14 @@ Design: (unnamed)
               |vpiDecompile:3'h1
               |vpiSize:3
               |HEX:1
-              |vpiConstType:5
+              |vpiTypespec:
+              \_RefTypespec: (work@top), line:54:65, endln:54:66
+                |vpiParent:
+                \_Constant: , line:54:65, endln:54:66
+                |vpiFullName:work@top
+                |vpiActual:
+                \_IntTypespec: 
+              |vpiConstType:4
         |vpiTypespec:
         \_RefTypespec: (work@top.dio_pad_type), line:54:7, endln:54:19
           |vpiParent:
@@ -1243,6 +1395,10 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.PinmuxTargetCfg), line:53:40, endln:55:5
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
+  |vpiTypespec:
   \_StringTypespec: , line:54:7, endln:54:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
@@ -1253,6 +1409,8 @@ Design: (unnamed)
     |vpiName:work@sub_top
     |vpiModule:
     \_Module: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:54:7, endln:54:19
   |vpiDefName:work@top

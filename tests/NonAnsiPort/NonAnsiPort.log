@@ -227,6 +227,7 @@ ContAssign                                             3
 Design                                                 1
 HierPath                                               3
 Identifier                                             6
+IntTypespec                                            9
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -235,14 +236,14 @@ Package                                                2
 Port                                                   3
 Range                                                  3
 RefObj                                                 6
-RefTypespec                                           12
+RefTypespec                                           21
 SourceFile                                             1
 StructTypespec                                         3
 TypedefTypespec                                        3
 TypespecMember                                         3
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                68
+Total:                                                86
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -311,6 +312,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (pkg1), line:3:16, endln:3:17
+          |vpiParent:
+          \_Constant: , line:3:16, endln:3:17
+          |vpiFullName:pkg1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:18, endln:3:19
@@ -319,13 +327,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg1), line:3:18, endln:3:19
+          |vpiParent:
+          \_Constant: , line:3:18, endln:3:19
+          |vpiFullName:pkg1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg1::struct1), line:4:7, endln:4:14
   |vpiImportTypespec:
   \_StructTypespec: , line:2:13, endln:4:6
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:9, endln:3:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:pkg1
 |vpiAllPackages:
 \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
@@ -384,6 +405,13 @@ Design: (unnamed)
         |vpiDecompile:6
         |vpiSize:64
         |UINT:6
+        |vpiTypespec:
+        \_RefTypespec: (pkg2), line:9:16, endln:9:17
+          |vpiParent:
+          \_Constant: , line:9:16, endln:9:17
+          |vpiFullName:pkg2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:18, endln:9:19
@@ -392,13 +420,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg2), line:9:18, endln:9:19
+          |vpiParent:
+          \_Constant: , line:9:18, endln:9:19
+          |vpiFullName:pkg2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg2::struct1), line:10:7, endln:10:14
   |vpiImportTypespec:
   \_StructTypespec: , line:8:13, endln:10:6
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:9, endln:9:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:pkg2
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
@@ -457,6 +498,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:15:16, endln:15:17
+          |vpiParent:
+          \_Constant: , line:15:16, endln:15:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:15:18, endln:15:19
@@ -465,13 +513,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:15:18, endln:15:19
+          |vpiParent:
+          \_Constant: , line:15:18, endln:15:19
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:13:1, endln:25:10
   |vpiImportTypespec:
   \_TypedefTypespec: (struct2), line:16:7, endln:16:14
   |vpiImportTypespec:
   \_StructTypespec: , line:14:13, endln:16:6
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:9, endln:15:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.var1), line:13:12, endln:13:16
     |vpiParent:
@@ -574,6 +635,13 @@ Design: (unnamed)
       |vpiDecompile:255
       |vpiSize:64
       |UINT:255
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:22:25, endln:22:28
+        |vpiParent:
+        \_Constant: , line:22:25, endln:22:28
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (var1.first), line:22:16, endln:22:22
@@ -605,6 +673,13 @@ Design: (unnamed)
       |vpiDecompile:127
       |vpiSize:64
       |UINT:127
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:23:26, endln:23:29
+        |vpiParent:
+        \_Constant: , line:23:26, endln:23:29
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (var2.second), line:23:16, endln:23:23
@@ -636,6 +711,13 @@ Design: (unnamed)
       |vpiDecompile:63
       |vpiSize:64
       |UINT:63
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:24:25, endln:24:27
+        |vpiParent:
+        \_Constant: , line:24:25, endln:24:27
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (var3.third), line:24:16, endln:24:22

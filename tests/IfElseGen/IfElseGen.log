@@ -165,7 +165,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  4
-BitTypespec                                            2
+BitTypespec                                            4
 Constant                                               2
 Design                                                 1
 GenIfElse                                              2
@@ -176,14 +176,14 @@ ParamAssign                                            2
 Parameter                                              2
 RefModule                                              4
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            4
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                42
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfElseGen/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:12:3: Null Actual: id:27, type:RefModule, name:cond_module.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:20:3: Null Actual: id:38, type:RefModule, name:cond_module.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:12:3: Null Actual: id:29, type:RefModule, name:cond_module.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IfElseGen/dut.sv:20:3: Null Actual: id:42, type:RefModule, name:cond_module.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -248,6 +248,13 @@ Design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dut1), line:8:42, endln:8:46
+        |vpiParent:
+        \_Constant: , line:8:42, endln:8:46
+        |vpiFullName:work@dut1
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut1.HasSndScratch), line:8:25, endln:8:46
@@ -303,8 +310,14 @@ Design: (unnamed)
   \_BitTypespec: , line:8:12, endln:8:15
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:7:1, endln:14:10
   |vpiImportTypespec:
   \_BitTypespec: , line:8:12, endln:8:15
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@dut1
   |vpiGenStmt:
   \_GenIfElse: , line:9:1, endln:13:4
@@ -357,6 +370,13 @@ Design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@dut2), line:18:42, endln:18:46
+        |vpiParent:
+        \_Constant: , line:18:42, endln:18:46
+        |vpiFullName:work@dut2
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut2.HasSndScratch), line:18:25, endln:18:46
@@ -412,8 +432,14 @@ Design: (unnamed)
   \_BitTypespec: , line:18:12, endln:18:15
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/IfElseGen/dut.sv, line:17:1, endln:24:10
   |vpiImportTypespec:
   \_BitTypespec: , line:18:12, endln:18:15
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@dut2
   |vpiGenStmt:
   \_GenIfElse: , line:19:1, endln:23:4

@@ -12,6 +12,7 @@ Constant                                               7
 Design                                                 1
 EventControl                                           1
 Identifier                                             1
+IntTypespec                                            7
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -21,10 +22,10 @@ PartSelect                                             2
 Port                                                   2
 Range                                                  1
 RefObj                                                 1
-RefTypespec                                            3
+RefTypespec                                           10
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectElab/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -64,6 +65,13 @@ Design: (unnamed)
         |vpiDecompile:15
         |vpiSize:64
         |UINT:15
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:2:6, endln:2:8
+          |vpiParent:
+          \_Constant: , line:2:6, endln:2:8
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:9, endln:2:10
@@ -72,7 +80,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:2:9, endln:2:10
+          |vpiParent:
+          \_Constant: , line:2:9, endln:2:10
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectElab/dut.sv, line:1:1, endln:8:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:20, endln:1:23
   |vpiImportTypespec:
@@ -97,6 +116,8 @@ Design: (unnamed)
     |vpiFullName:work@test.clk
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:4
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@test.data), line:2:12, endln:2:16
     |vpiParent:
@@ -163,6 +184,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:4:8, endln:4:22
         |vpiFullName:work@test
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@test), line:4:23, endln:6:4
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_Assignment: , line:5:3, endln:5:29
           |vpiParent:
@@ -190,6 +217,13 @@ Design: (unnamed)
                 |vpiDecompile:7
                 |vpiSize:64
                 |UINT:7
+                |vpiTypespec:
+                \_RefTypespec: (work@test.data), line:5:21, endln:5:22
+                  |vpiParent:
+                  \_Constant: , line:5:21, endln:5:22
+                  |vpiFullName:work@test.data
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiRightRange:
               \_Constant: , line:5:23, endln:5:24
@@ -198,6 +232,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@test.data), line:5:23, endln:5:24
+                  |vpiParent:
+                  \_Constant: , line:5:23, endln:5:24
+                  |vpiFullName:work@test.data
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiOperand:
             \_Constant: , line:5:28, endln:5:29
@@ -206,6 +247,13 @@ Design: (unnamed)
               |vpiDecompile:2
               |vpiSize:64
               |UINT:2
+              |vpiTypespec:
+              \_RefTypespec: (work@test), line:5:28, endln:5:29
+                |vpiParent:
+                \_Constant: , line:5:28, endln:5:29
+                |vpiFullName:work@test
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_PartSelect: data (work@test.data), line:5:8, endln:5:11
@@ -224,6 +272,13 @@ Design: (unnamed)
               |vpiDecompile:7
               |vpiSize:64
               |UINT:7
+              |vpiTypespec:
+              \_RefTypespec: (work@test.data), line:5:8, endln:5:9
+                |vpiParent:
+                \_Constant: , line:5:8, endln:5:9
+                |vpiFullName:work@test.data
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiRightRange:
             \_Constant: , line:5:10, endln:5:11
@@ -232,6 +287,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@test.data), line:5:10, endln:5:11
+                |vpiParent:
+                \_Constant: , line:5:10, endln:5:11
+                |vpiFullName:work@test.data
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
     |vpiAlwaysType:1
 |vpiTypespec:

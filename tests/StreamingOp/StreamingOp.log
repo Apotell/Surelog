@@ -109,13 +109,15 @@ Constant                                               3
 ContAssign                                             3
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            3
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              6
 RefObj                                                 7
+RefTypespec                                            3
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StreamingOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -136,6 +138,19 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
     |vpiName:work@dut
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.z), line:2:10, endln:2:11
     |vpiParent:
@@ -198,6 +213,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:2:19, endln:2:20
+          |vpiParent:
+          \_Constant: , line:2:19, endln:2:20
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:2:21, endln:2:27
@@ -249,6 +271,13 @@ Design: (unnamed)
           |vpiDecompile:32'd123456
           |vpiSize:32
           |DEC:123456
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:3:20, endln:3:30
+            |vpiParent:
+            \_Constant: , line:3:20, endln:3:30
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:1
         |vpiOperand:
         \_RefObj: (work@dut.x), line:3:32, endln:3:33
@@ -282,6 +311,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:4:27, endln:4:28
+          |vpiParent:
+          \_Constant: , line:4:27, endln:4:28
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:4:29, endln:4:32

@@ -300,7 +300,7 @@ EnumTypespec                                           1
 GenIfElse                                              4
 Identifier                                            10
 ImportTypespec                                         1
-IntTypespec                                            3
+IntTypespec                                           20
 Module                                                 3
 ModuleTypespec                                         2
 Operation                                              4
@@ -310,13 +310,14 @@ Parameter                                              1
 Port                                                   1
 RefModule                                              1
 RefObj                                                16
-RefTypespec                                            5
+RefTypespec                                           23
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                96
+Total:                                               132
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -402,6 +403,10 @@ Design: (unnamed)
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+  |vpiTypespec:
   \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
@@ -421,6 +426,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:3:11, endln:10:10
   |vpiImportTypespec:
   \_IntTypespec: , line:3:16, endln:3:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
   |vpiDefName:my_pkg
@@ -496,6 +503,12 @@ Design: (unnamed)
       \_Begin: (work@top.gen_zero), line:25:42, endln:27:6
       |vpiName:gen_zero
     |vpiFullName:work@top.gen_zero
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Begin: (work@top.gen_zero), line:25:42, endln:27:6
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiStmt:
     \_ContAssign: , line:26:12, endln:26:19
       |vpiParent:
@@ -507,6 +520,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.gen_zero), line:26:18, endln:26:19
+          |vpiParent:
+          \_Constant: , line:26:18, endln:26:19
+          |vpiFullName:work@top.gen_zero
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_RefObj: (work@top.gen_zero.out), line:26:12, endln:26:15
@@ -531,6 +551,12 @@ Design: (unnamed)
         \_Begin: (work@top.gen_one), line:27:33, endln:29:6
         |vpiName:gen_one
       |vpiFullName:work@top.gen_one
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@top.gen_one), line:27:33, endln:29:6
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ContAssign: , line:28:12, endln:28:19
         |vpiParent:
@@ -542,6 +568,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.gen_one), line:28:18, endln:28:19
+            |vpiParent:
+            \_Constant: , line:28:18, endln:28:19
+            |vpiFullName:work@top.gen_one
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@top.gen_one.out), line:28:12, endln:28:15
@@ -567,12 +600,18 @@ Design: (unnamed)
           |vpiName:gen_two
         |vpiFullName:work@top.gen_two
         |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@top.gen_two), line:29:45, endln:32:6
+        |vpiTypespec:
         \_ModuleTypespec: (work@GOOD)
           |vpiParent:
           \_Design: (unnamed)
           |vpiName:work@GOOD
           |vpiModule:
           \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_ContAssign: , line:30:12, endln:30:19
           |vpiParent:
@@ -584,6 +623,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@top.gen_two), line:30:18, endln:30:19
+              |vpiParent:
+              \_Constant: , line:30:18, endln:30:19
+              |vpiFullName:work@top.gen_two
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@top.gen_two.out), line:30:12, endln:30:15
@@ -616,6 +662,12 @@ Design: (unnamed)
             \_Begin: (work@top.gen_three), line:32:33, endln:34:6
             |vpiName:gen_three
           |vpiFullName:work@top.gen_three
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@top.gen_three), line:32:33, endln:34:6
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ContAssign: , line:33:12, endln:33:19
             |vpiParent:
@@ -627,6 +679,13 @@ Design: (unnamed)
               |vpiDecompile:3
               |vpiSize:64
               |UINT:3
+              |vpiTypespec:
+              \_RefTypespec: (work@top.gen_three), line:33:18, endln:33:19
+                |vpiParent:
+                \_Constant: , line:33:18, endln:33:19
+                |vpiFullName:work@top.gen_three
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@top.gen_three.out), line:33:12, endln:33:15
@@ -646,6 +705,12 @@ Design: (unnamed)
             \_Begin: (work@top.gen_invalid), line:34:12, endln:36:6
             |vpiName:gen_invalid
           |vpiFullName:work@top.gen_invalid
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@top.gen_invalid), line:34:12, endln:36:6
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ContAssign: , line:35:12, endln:35:21
             |vpiParent:
@@ -657,6 +722,13 @@ Design: (unnamed)
               |vpiDecompile:255
               |vpiSize:64
               |UINT:255
+              |vpiTypespec:
+              \_RefTypespec: (work@top.gen_invalid), line:35:18, endln:35:21
+                |vpiParent:
+                \_Constant: , line:35:18, endln:35:21
+                |vpiFullName:work@top.gen_invalid
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@top.gen_invalid.out), line:35:12, endln:35:15
@@ -777,7 +849,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.my_pkg), line:18:8, endln:18:17
+        |vpiParent:
+        \_Constant: , line:18:8, endln:18:17
+        |vpiFullName:work@top.my_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
   |vpiTypespec:
   \_IntTypespec: , line:22:12, endln:22:15
     |vpiParent:
@@ -785,6 +868,8 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:18:8, endln:18:17
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:22:12, endln:22:15
   |vpiImportTypespec:

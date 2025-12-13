@@ -67,6 +67,7 @@ AST_DEBUG_END
 Constant                                               5
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            5
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -74,10 +75,10 @@ Net                                                    1
 Port                                                   1
 Range                                                  2
 RefModule                                              1
-RefTypespec                                            2
+RefTypespec                                            7
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortDefaultValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -113,6 +114,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@bus_conn), line:7:8, endln:7:9
+          |vpiParent:
+          \_Constant: , line:7:8, endln:7:9
+          |vpiFullName:work@bus_conn
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:10, endln:7:11
@@ -121,9 +129,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@bus_conn), line:7:10, endln:7:11
+          |vpiParent:
+          \_Constant: , line:7:10, endln:7:11
+          |vpiFullName:work@bus_conn
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:7, endln:7:12
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@bus_conn.datain), line:7:13, endln:7:19
     |vpiParent:
@@ -153,6 +174,13 @@ Design: (unnamed)
       |vpiDecompile:8'hFF
       |vpiSize:8
       |HEX:FF
+      |vpiTypespec:
+      \_RefTypespec: (work@bus_conn.datain), line:7:22, endln:7:27
+        |vpiParent:
+        \_Constant: , line:7:22, endln:7:27
+        |vpiFullName:work@bus_conn.datain
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiTypespec:
     \_RefTypespec: (work@bus_conn.datain), line:7:7, endln:7:12

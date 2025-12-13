@@ -104,7 +104,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
 Begin                                                  1
-BitTypespec                                            2
+BitTypespec                                            4
 Constant                                               2
 ContAssign                                             1
 Design                                                 1
@@ -118,11 +118,11 @@ ModuleTypespec                                         1
 Net                                                    2
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            4
+RefTypespec                                            6
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                34
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceProcess/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -174,6 +174,10 @@ Design: (unnamed)
     |vpiRandType:1
     |vpiVisibility:1
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
+  |vpiTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
     |vpiParent:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
@@ -181,6 +185,8 @@ Design: (unnamed)
   \_BitTypespec: , line:5:3, endln:5:6
     |vpiParent:
     \_Interface: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfaceProcess/dut.sv, line:1:1, endln:11:13
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
   |vpiImportTypespec:
@@ -232,6 +238,13 @@ Design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@sw_test_status_if), line:3:23, endln:3:27
+        |vpiParent:
+        \_Constant: , line:3:23, endln:3:27
+        |vpiFullName:work@sw_test_status_if
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@sw_test_status_if.data_valid), line:3:10, endln:3:20
@@ -250,6 +263,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:6:3, endln:8:6
       |vpiFullName:work@sw_test_status_if
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@sw_test_status_if), line:6:11, endln:8:6
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiStmt:
       \_Assignment: , line:7:6, endln:7:25
         |vpiParent:
@@ -263,6 +282,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@sw_test_status_if), line:7:21, endln:7:25
+            |vpiParent:
+            \_Constant: , line:7:21, endln:7:25
+            |vpiFullName:work@sw_test_status_if
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@sw_test_status_if.sw_test_done), line:7:6, endln:7:18

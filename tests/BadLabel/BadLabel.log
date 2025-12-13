@@ -332,6 +332,7 @@ FuncCall                                               3
 Identifier                                            22
 IfStmt                                                 1
 Initial                                                3
+IntTypespec                                            3
 Interface                                              4
 InterfaceTypespec                                      4
 LogicTypespec                                          1
@@ -341,12 +342,13 @@ Net                                                    1
 Operation                                              1
 Package                                                1
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            9
 SourceFile                                             1
+StringTypespec                                         4
 SysFuncCall                                            1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                82
+Total:                                                96
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadLabel/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -469,6 +471,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@block_tb.name1), line:64:8, endln:64:9
+          |vpiParent:
+          \_Constant: , line:64:8, endln:64:9
+          |vpiFullName:work@block_tb.name1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_RefObj: (work@block_tb.name1.a), line:64:4, endln:64:5
@@ -480,9 +489,15 @@ Design: (unnamed)
         \_Net: (work@block_tb.a), line:61:6, endln:61:7
     |vpiEndLabel:name1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:60:1, endln:66:10
+  |vpiTypespec:
   \_LogicTypespec: , line:61:2, endln:61:5
     |vpiParent:
     \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:60:1, endln:66:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:61:2, endln:61:5
   |vpiImportTypespec:
@@ -539,6 +554,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:1
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@test.err), line:27:14, endln:27:15
+        |vpiParent:
+        \_Constant: , line:27:14, endln:27:15
+        |vpiFullName:work@test.err
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
   |vpiInternalScope:
   \_Module: work@test::sub (work@test::sub), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:34:4, endln:35:19
@@ -567,6 +589,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
+  |vpiTypespec:
   \_ModuleTypespec: (work@test::sub)
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:23:1, endln:57:21
@@ -582,6 +608,8 @@ Design: (unnamed)
     \_Module: work@test::sub2 (work@test::sub2), file:${SURELOG_DIR}/tests/BadLabel/dut.sv, line:37:4, endln:38:24
   |vpiImportTypespec:
   \_BitTypespec: , line:27:4, endln:27:7
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@test.err), line:27:8, endln:27:11
   |vpiImportTypespec:
@@ -603,6 +631,12 @@ Design: (unnamed)
         \_Begin: (work@test.dummy_label), line:30:4, endln:32:25
         |vpiName:dummy_label
       |vpiFullName:work@test.dummy_label
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@test.dummy_label), line:30:4, endln:32:25
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_IfStmt: , line:31:7, endln:31:36
         |vpiParent:
@@ -631,6 +665,13 @@ Design: (unnamed)
             |vpiDecompile:"PASSED"
             |vpiSize:48
             |STRING:PASSED
+            |vpiTypespec:
+            \_RefTypespec: (work@test.dummy_label), line:31:26, endln:31:34
+              |vpiParent:
+              \_Constant: , line:31:26, endln:31:34
+              |vpiFullName:work@test.dummy_label
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($display), line:31:18, endln:31:25
@@ -667,6 +708,13 @@ Design: (unnamed)
             \_FuncCall: (print), line:43:6, endln:43:15
             |vpiDecompile:""
             |STRING:
+            |vpiTypespec:
+            \_RefTypespec: (work@test.n1), line:43:12, endln:43:14
+              |vpiParent:
+              \_Constant: , line:43:12, endln:43:14
+              |vpiFullName:work@test.n1
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: (print), line:43:6, endln:43:11
@@ -689,6 +737,13 @@ Design: (unnamed)
             \_FuncCall: (print), line:47:6, endln:47:15
             |vpiDecompile:""
             |STRING:
+            |vpiTypespec:
+            \_RefTypespec: (work@test), line:47:12, endln:47:14
+              |vpiParent:
+              \_Constant: , line:47:12, endln:47:14
+              |vpiFullName:work@test
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: (print), line:47:6, endln:47:11
@@ -716,12 +771,25 @@ Design: (unnamed)
             \_FuncCall: (print), line:51:5, endln:51:14
             |vpiDecompile:""
             |STRING:
+            |vpiTypespec:
+            \_RefTypespec: (work@test.n1), line:51:11, endln:51:13
+              |vpiParent:
+              \_Constant: , line:51:11, endln:51:13
+              |vpiFullName:work@test.n1
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: (print), line:51:5, endln:51:10
             |vpiParent:
             \_FuncCall: (print), line:51:5, endln:51:14
             |vpiName:print
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@test), line:40:9, endln:54:6
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_ForkStmt: (work@test.n1), line:42:4, endln:44:13
       |vpiStmt:

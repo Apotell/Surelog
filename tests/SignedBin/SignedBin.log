@@ -66,17 +66,18 @@ AST_DEBUG_END
 Constant                                               2
 Design                                                 1
 Identifier                                             2
-LogicTypespec                                          2
+IntTypespec                                            1
+LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         2
 Net                                                    1
 Operation                                              2
 Port                                                   2
 RefModule                                              1
-RefTypespec                                            2
+RefTypespec                                            4
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                20
+Total:                                                24
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedBin/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -104,6 +105,18 @@ Design: (unnamed)
     |vpiName:work@prim_subreg
     |vpiModule:
     \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:7:1, endln:10:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiRefModule:
   \_RefModule: work@prim_subreg (s), line:9:1, endln:9:12
@@ -130,6 +143,13 @@ Design: (unnamed)
           |vpiDecompile:24
           |vpiSize:64
           |UINT:24
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.s.test), line:9:22, endln:9:24
+            |vpiParent:
+            \_Constant: , line:9:22, endln:9:24
+            |vpiFullName:work@dut.s.test
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:9:25, endln:9:32
@@ -143,6 +163,13 @@ Design: (unnamed)
             |vpiDecompile:1'sb0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@dut.s.test), line:9:26, endln:9:31
+              |vpiParent:
+              \_Constant: , line:9:26, endln:9:31
+              |vpiFullName:work@dut.s.test
+              |vpiActual:
+              \_LogicTypespec: 
             |vpiConstType:3
 |vpiAllModules:
 \_Module: work@prim_subreg (work@prim_subreg), file:${SURELOG_DIR}/tests/SignedBin/dut.sv, line:1:1, endln:5:10

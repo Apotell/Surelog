@@ -102,16 +102,18 @@ Attribute                                              3
 Constant                                               4
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            3
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    3
 Range                                                  2
 RefObj                                                 1
-RefTypespec                                            3
+RefTypespec                                            7
 SourceFile                                             1
+StringTypespec                                         1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AttributesNets/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -133,6 +135,10 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
     |vpiName:work@top
   |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
   \_LogicTypespec: , line:3:27, endln:3:31
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
@@ -147,6 +153,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:39, endln:3:41
+          |vpiParent:
+          \_Constant: , line:3:39, endln:3:41
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:42, endln:3:43
@@ -155,7 +168,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:42, endln:3:43
+          |vpiParent:
+          \_Constant: , line:3:42, endln:3:43
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AttributesNets/dut.sv, line:1:1, endln:7:10
   |vpiTypespec:
   \_LogicTypespec: , line:4:30, endln:4:33
     |vpiParent:
@@ -183,9 +207,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:32, endln:5:33
+          |vpiParent:
+          \_Constant: , line:5:32, endln:5:33
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:3:27, endln:3:31
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.execute_RS1), line:3:47, endln:3:58
     |vpiParent:

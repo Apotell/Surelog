@@ -121,10 +121,11 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          3
+BitTypespec                                            4
 Constant                                               5
 Design                                                 1
 Identifier                                             1
-IntTypespec                                            4
+IntTypespec                                            5
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              7
@@ -132,12 +133,12 @@ ParamAssign                                            4
 Parameter                                              4
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                            8
+RefTypespec                                           13
 SourceFile                                             1
 StringTypespec                                         1
 TaggedPattern                                          1
 ------------------------------------------------------------
-Total:                                                50
+Total:                                                60
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamArrayUnsizedPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -222,6 +223,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (work@test), line:3:29, endln:3:30
+        |vpiParent:
+        \_Constant: , line:3:29, endln:3:30
+        |vpiFullName:work@test
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@test.BobaCount), line:3:17, endln:3:30
@@ -245,6 +253,13 @@ Design: (unnamed)
           |vpiDecompile:'1
           |vpiSize:-1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@test), line:4:73, endln:4:75
+            |vpiParent:
+            \_Constant: , line:4:73, endln:4:75
+            |vpiFullName:work@test
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@test), line:4:64, endln:4:71
@@ -271,6 +286,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:5:57, endln:5:59
+          |vpiParent:
+          \_Constant: , line:5:57, endln:5:59
+          |vpiFullName:work@test
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
       |vpiOperand:
       \_Constant: , line:5:61, endln:5:63
@@ -279,6 +301,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:5:61, endln:5:63
+          |vpiParent:
+          \_Constant: , line:5:61, endln:5:63
+          |vpiFullName:work@test
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@test.NumBobaDrinkers), line:5:26, endln:5:64
@@ -311,6 +340,13 @@ Design: (unnamed)
           |vpiDecompile:4294967295
           |vpiSize:32
           |UINT:4294967295
+          |vpiTypespec:
+          \_RefTypespec: (work@test), line:6:72, endln:6:74
+            |vpiParent:
+            \_Constant: , line:6:72, endln:6:74
+            |vpiFullName:work@test
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@test.NumBobaDrinkersMulti), line:6:26, endln:6:76
@@ -319,6 +355,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamArrayUnsizedPattern/dut.sv, line:2:1, endln:8:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamArrayUnsizedPattern/dut.sv, line:2:1, endln:8:10
   |vpiTypespec:
   \_IntTypespec: , line:4:13, endln:4:25
     |vpiParent:
@@ -352,6 +392,10 @@ Design: (unnamed)
       |vpiFullName:work@test
       |vpiActual:
       \_IntTypespec: , line:4:13, endln:4:25
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamArrayUnsizedPattern/dut.sv, line:2:1, endln:8:10
   |vpiTypespec:
   \_StringTypespec: , line:4:64, endln:4:71
     |vpiParent:
@@ -417,9 +461,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_IntTypespec: , line:4:13, endln:4:25
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4:48, endln:4:76
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:4:64, endln:4:71
   |vpiImportTypespec:

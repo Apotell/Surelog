@@ -421,6 +421,7 @@ ContAssign                                             3
 Design                                                 1
 GenIf                                                  1
 Identifier                                             7
+IntTypespec                                            2
 LogicTypespec                                         16
 Module                                                 6
 ModuleTypespec                                         6
@@ -431,10 +432,11 @@ Parameter                                              4
 Port                                                   8
 RefModule                                              5
 RefObj                                                 7
-RefTypespec                                           16
+RefTypespec                                           21
 SourceFile                                             1
+StringTypespec                                         3
 ------------------------------------------------------------
-Total:                                               100
+Total:                                               110
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BindStmt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -473,13 +475,26 @@ Design: (unnamed)
       |vpiDecompile:"inv"
       |vpiSize:24
       |STRING:inv
+      |vpiTypespec:
+      \_RefTypespec: (work@bp_lce), line:1:36, endln:1:41
+        |vpiParent:
+        \_Constant: , line:1:36, endln:1:41
+        |vpiFullName:work@bp_lce
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@bp_lce.sets_p), line:1:27, endln:1:41
   |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@bp_lce (work@bp_lce), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:1:1, endln:3:10
+  |vpiTypespec:
   \_LogicTypespec: , line:1:49, endln:1:54
     |vpiParent:
     \_Module: work@bp_lce (work@bp_lce), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:49, endln:1:54
   |vpiImportTypespec:
@@ -606,9 +621,20 @@ Design: (unnamed)
       |vpiDecompile:"inv"
       |vpiSize:24
       |STRING:inv
+      |vpiTypespec:
+      \_RefTypespec: (work@bp_me_nonsynth_lce_tracer), line:8:55, endln:8:60
+        |vpiParent:
+        \_Constant: , line:8:55, endln:8:60
+        |vpiFullName:work@bp_me_nonsynth_lce_tracer
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@bp_me_nonsynth_lce_tracer.sets_p), line:8:46, endln:8:60
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@bp_me_nonsynth_lce_tracer (work@bp_me_nonsynth_lce_tracer), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:8:1, endln:11:10
   |vpiTypespec:
   \_ModuleTypespec: (work@sub)
     |vpiParent:
@@ -620,6 +646,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:8:68, endln:8:73
     |vpiParent:
     \_Module: work@bp_me_nonsynth_lce_tracer (work@bp_me_nonsynth_lce_tracer), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:8:1, endln:11:10
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:68, endln:8:73
   |vpiImportTypespec:
@@ -754,15 +782,28 @@ Design: (unnamed)
       |vpiDecompile:"inv"
       |vpiSize:24
       |STRING:inv
+      |vpiTypespec:
+      \_RefTypespec: (work@bp_me_nonsynth_lce_tracer2), line:13:56, endln:13:61
+        |vpiParent:
+        \_Constant: , line:13:56, endln:13:61
+        |vpiFullName:work@bp_me_nonsynth_lce_tracer2
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@bp_me_nonsynth_lce_tracer2.sets_p), line:13:47, endln:13:61
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@bp_me_nonsynth_lce_tracer2 (work@bp_me_nonsynth_lce_tracer2), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:13:1, endln:16:10
   |vpiTypespec:
   \_ModuleTypespec: (work@sub)
   |vpiTypespec:
   \_LogicTypespec: , line:13:69, endln:13:74
     |vpiParent:
     \_Module: work@bp_me_nonsynth_lce_tracer2 (work@bp_me_nonsynth_lce_tracer2), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:13:1, endln:16:10
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:69, endln:13:74
   |vpiImportTypespec:
@@ -943,6 +984,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@testbench), line:30:17, endln:30:18
+        |vpiParent:
+        \_Constant: , line:30:17, endln:30:18
+        |vpiFullName:work@testbench
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@testbench.p), line:30:13, endln:30:18
@@ -957,6 +1005,10 @@ Design: (unnamed)
       |vpiName:do_bind
     |vpiFullName:work@testbench.do_bind
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@testbench (work@testbench), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:25:1, endln:52:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@bp_lce)
   |vpiTypespec:
   \_ModuleTypespec: (work@inter)
@@ -969,6 +1021,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:25:25, endln:25:30
     |vpiParent:
     \_Module: work@testbench (work@testbench), file:${SURELOG_DIR}/tests/BindStmt/dut.sv, line:25:1, endln:52:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:25:25, endln:25:30
   |vpiImportTypespec:
@@ -1041,6 +1095,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@testbench), line:31:12, endln:31:13
+          |vpiParent:
+          \_Constant: , line:31:12, endln:31:13
+          |vpiFullName:work@testbench
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@testbench.do_bind), line:31:15, endln:49:6

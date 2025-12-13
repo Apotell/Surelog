@@ -56,14 +56,15 @@ AST_DEBUG_END
 Constant                                               2
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            2
 Package                                                2
 ParamAssign                                            2
 Parameter                                              2
 RefObj                                                 2
-RefTypespec                                            1
+RefTypespec                                            2
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                15
+Total:                                                18
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnelabPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -103,9 +104,22 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (pkg1), line:2:16, endln:2:17
+        |vpiParent:
+        \_Constant: , line:2:16, endln:2:17
+        |vpiFullName:pkg1
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg1::X), line:2:12, endln:2:17
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:1:1, endln:3:11
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:pkg1
 |vpiAllPackages:
 \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/UnelabPack/dut.sv, line:5:1, endln:7:11

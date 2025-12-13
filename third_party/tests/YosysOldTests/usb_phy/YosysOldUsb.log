@@ -16,6 +16,7 @@ Always                                                63
 Assignment                                           165
 Begin                                                 26
 BitSelect                                              8
+BitTypespec                                           59
 CaseItem                                              26
 CaseStmt                                               4
 ClassDefn                                              8
@@ -31,8 +32,8 @@ IODecl                                                11
 Identifier                                            31
 IfElse                                                56
 IfStmt                                                40
-IntTypespec                                            9
-LogicTypespec                                         95
+IntTypespec                                          137
+LogicTypespec                                         96
 Module                                                 3
 ModuleTypespec                                         3
 Net                                                  122
@@ -45,13 +46,13 @@ Port                                                  62
 Range                                                 26
 RefModule                                              2
 RefObj                                               561
-RefTypespec                                          107
+RefTypespec                                          295
 SourceFile                                             6
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                              1997
+Total:                                              2373
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysOldUsb/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -172,8 +173,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -188,6 +195,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -614,8 +628,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -630,6 +650,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -653,8 +680,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -670,6 +703,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -693,8 +733,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -710,6 +756,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -733,8 +786,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -757,6 +816,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -909,6 +975,10 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@usb_rx_phy (work@usb_rx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_rx_phy.v, line:79:1, endln:451:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@usb_phy (work@usb_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_phy.v, line:77:1, endln:183:10
+  |vpiTypespec:
   \_LogicTypespec: , line:94:7, endln:94:12
     |vpiParent:
     \_Module: work@usb_phy (work@usb_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_phy.v, line:77:1, endln:183:10
@@ -923,6 +993,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:94:8, endln:94:9
+          |vpiParent:
+          \_Constant: , line:94:8, endln:94:9
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:94:10, endln:94:11
@@ -931,6 +1008,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:94:10, endln:94:11
+          |vpiParent:
+          \_Constant: , line:94:10, endln:94:11
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:101:8, endln:101:13
@@ -947,6 +1031,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:101:9, endln:101:10
+          |vpiParent:
+          \_Constant: , line:101:9, endln:101:10
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:101:11, endln:101:12
@@ -955,6 +1046,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:101:11, endln:101:12
+          |vpiParent:
+          \_Constant: , line:101:11, endln:101:12
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:108:1, endln:108:4
@@ -971,6 +1069,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:108:6, endln:108:7
+          |vpiParent:
+          \_Constant: , line:108:6, endln:108:7
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:108:8, endln:108:9
@@ -979,11 +1084,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_phy), line:108:8, endln:108:9
+          |vpiParent:
+          \_Constant: , line:108:8, endln:108:9
+          |vpiFullName:work@usb_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:109:1, endln:109:4
     |vpiParent:
     \_Module: work@usb_phy (work@usb_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_phy.v, line:77:1, endln:183:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@usb_phy.clk), line:77:16, endln:77:19
     |vpiParent:
@@ -1403,6 +1517,13 @@ Design: (unnamed)
             |vpiDecompile:5'h0
             |vpiSize:5
             |HEX:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_phy), line:174:24, endln:174:28
+              |vpiParent:
+              \_Constant: , line:174:24, endln:174:28
+              |vpiFullName:work@usb_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_phy.rst_cnt), line:174:13, endln:174:20
@@ -1436,6 +1557,13 @@ Design: (unnamed)
               |vpiDecompile:2'h0
               |vpiSize:2
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_phy), line:176:20, endln:176:24
+                |vpiParent:
+                \_Constant: , line:176:20, endln:176:24
+                |vpiFullName:work@usb_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
           |vpiStmt:
           \_Assignment: , line:176:27, endln:176:42
@@ -1449,6 +1577,13 @@ Design: (unnamed)
               |vpiDecompile:5'h0
               |vpiSize:5
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_phy), line:176:38, endln:176:42
+                |vpiParent:
+                \_Constant: , line:176:38, endln:176:42
+                |vpiFullName:work@usb_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiLhs:
             \_RefObj: (work@usb_phy.rst_cnt), line:176:27, endln:176:34
@@ -1513,6 +1648,13 @@ Design: (unnamed)
                   |vpiDecompile:5'h1
                   |vpiSize:5
                   |HEX:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_phy), line:178:46, endln:178:50
+                    |vpiParent:
+                    \_Constant: , line:178:46, endln:178:50
+                    |vpiFullName:work@usb_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
               |vpiLhs:
               \_RefObj: (work@usb_phy.rst_cnt), line:178:25, endln:178:32
@@ -1569,6 +1711,13 @@ Design: (unnamed)
             |vpiDecompile:5'h1f
             |vpiSize:5
             |HEX:1f
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_phy), line:181:25, endln:181:30
+              |vpiParent:
+              \_Constant: , line:181:25, endln:181:30
+              |vpiFullName:work@usb_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
         |vpiLhs:
         \_RefObj: (work@usb_phy.usb_rst), line:181:2, endln:181:9
@@ -1957,6 +2106,13 @@ Design: (unnamed)
       |vpiDecompile:3'h0
       |vpiSize:3
       |HEX:0
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:246:21, endln:246:25
+        |vpiParent:
+        \_Constant: , line:246:21, endln:246:25
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.FS_IDLE), line:246:11, endln:246:25
@@ -1971,6 +2127,13 @@ Design: (unnamed)
       |vpiDecompile:3'h1
       |vpiSize:3
       |HEX:1
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:247:8, endln:247:12
+        |vpiParent:
+        \_Constant: , line:247:8, endln:247:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.K1), line:247:3, endln:247:12
@@ -1985,6 +2148,13 @@ Design: (unnamed)
       |vpiDecompile:3'h2
       |vpiSize:3
       |HEX:2
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:248:8, endln:248:12
+        |vpiParent:
+        \_Constant: , line:248:8, endln:248:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.J1), line:248:3, endln:248:12
@@ -1999,6 +2169,13 @@ Design: (unnamed)
       |vpiDecompile:3'h3
       |vpiSize:3
       |HEX:3
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:249:8, endln:249:12
+        |vpiParent:
+        \_Constant: , line:249:8, endln:249:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.K2), line:249:3, endln:249:12
@@ -2013,6 +2190,13 @@ Design: (unnamed)
       |vpiDecompile:3'h4
       |vpiSize:3
       |HEX:4
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:250:8, endln:250:12
+        |vpiParent:
+        \_Constant: , line:250:8, endln:250:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.J2), line:250:3, endln:250:12
@@ -2027,6 +2211,13 @@ Design: (unnamed)
       |vpiDecompile:3'h5
       |vpiSize:3
       |HEX:5
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:251:8, endln:251:12
+        |vpiParent:
+        \_Constant: , line:251:8, endln:251:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.K3), line:251:3, endln:251:12
@@ -2041,6 +2232,13 @@ Design: (unnamed)
       |vpiDecompile:3'h6
       |vpiSize:3
       |HEX:6
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:252:8, endln:252:12
+        |vpiParent:
+        \_Constant: , line:252:8, endln:252:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.J3), line:252:3, endln:252:12
@@ -2055,9 +2253,28 @@ Design: (unnamed)
       |vpiDecompile:3'h7
       |vpiSize:3
       |HEX:7
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_rx_phy), line:253:8, endln:253:12
+        |vpiParent:
+        \_Constant: , line:253:8, endln:253:12
+        |vpiFullName:work@usb_rx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_rx_phy.K4), line:253:3, endln:253:12
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@usb_rx_phy (work@usb_rx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_rx_phy.v, line:79:1, endln:451:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@usb_rx_phy (work@usb_rx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_rx_phy.v, line:79:1, endln:451:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@usb_rx_phy (work@usb_rx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_rx_phy.v, line:79:1, endln:451:10
   |vpiTypespec:
   \_LogicTypespec: , line:92:8, endln:92:13
     |vpiParent:
@@ -2073,6 +2290,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:92:9, endln:92:10
+          |vpiParent:
+          \_Constant: , line:92:9, endln:92:10
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:92:11, endln:92:12
@@ -2081,6 +2305,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:92:11, endln:92:12
+          |vpiParent:
+          \_Constant: , line:92:11, endln:92:12
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:97:8, endln:97:13
@@ -2097,6 +2328,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:97:9, endln:97:10
+          |vpiParent:
+          \_Constant: , line:97:9, endln:97:10
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:97:11, endln:97:12
@@ -2105,6 +2343,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:97:11, endln:97:12
+          |vpiParent:
+          \_Constant: , line:97:11, endln:97:12
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:104:1, endln:104:4
@@ -2125,6 +2370,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:112:6, endln:112:7
+          |vpiParent:
+          \_Constant: , line:112:6, endln:112:7
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:112:8, endln:112:9
@@ -2133,7 +2385,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:112:8, endln:112:9
+          |vpiParent:
+          \_Constant: , line:112:8, endln:112:9
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_Net: (work@usb_rx_phy.clk), line:79:20, endln:79:23
     |vpiParent:
@@ -3292,6 +3557,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:160:32, endln:160:36
+              |vpiParent:
+              \_Constant: , line:160:32, endln:160:36
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.rxd_s), line:160:23, endln:160:28
@@ -3348,6 +3620,13 @@ Design: (unnamed)
               |vpiDecompile:1'b0
               |vpiSize:1
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:162:34, endln:162:38
+                |vpiParent:
+                \_Constant: , line:162:34, endln:162:38
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.rxd_s), line:162:25, endln:162:30
@@ -3928,6 +4207,13 @@ Design: (unnamed)
             |vpiDecompile:2'h1
             |vpiSize:2
             |HEX:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:208:25, endln:208:29
+              |vpiParent:
+              \_Constant: , line:208:25, endln:208:29
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.dpll_state), line:208:11, endln:208:21
@@ -4006,6 +4292,18 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:211:8, endln:211:42
         |vpiFullName:work@usb_rx_phy
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@usb_rx_phy), line:212:4, endln:230:7
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@usb_rx_phy), line:212:4, endln:230:7
+        |vpiImportTypespec:
+        \_BitTypespec: 
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_Assignment: , line:213:2, endln:213:16
           |vpiParent:
@@ -4019,6 +4317,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:213:12, endln:213:16
+              |vpiParent:
+              \_Constant: , line:213:12, endln:213:16
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.fs_ce_d), line:213:2, endln:213:9
@@ -4052,6 +4357,13 @@ Design: (unnamed)
               |vpiDecompile:2'h0
               |vpiSize:2
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:215:5, endln:215:9
+                |vpiParent:
+                \_Constant: , line:215:5, endln:215:9
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_IfElse: , line:216:3, endln:217:33
@@ -4091,6 +4403,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h0
                   |vpiSize:2
                   |HEX:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:216:43, endln:216:47
+                    |vpiParent:
+                    \_Constant: , line:216:43, endln:216:47
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:216:25, endln:216:40
@@ -4113,6 +4432,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h1
                   |vpiSize:2
                   |HEX:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:217:28, endln:217:32
+                    |vpiParent:
+                    \_Constant: , line:217:28, endln:217:32
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:217:10, endln:217:25
@@ -4133,12 +4459,31 @@ Design: (unnamed)
               |vpiDecompile:2'h1
               |vpiSize:2
               |HEX:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:218:5, endln:218:9
+                |vpiParent:
+                \_Constant: , line:218:5, endln:218:9
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Begin: (work@usb_rx_phy), line:218:10, endln:222:6
               |vpiParent:
               \_CaseItem: , line:218:5, endln:222:6
               |vpiFullName:work@usb_rx_phy
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@usb_rx_phy), line:218:10, endln:222:6
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@usb_rx_phy), line:218:10, endln:222:6
+              |vpiImportTypespec:
+              \_BitTypespec: 
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:219:3, endln:219:17
                 |vpiParent:
@@ -4152,6 +4497,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:219:13, endln:219:17
+                    |vpiParent:
+                    \_Constant: , line:219:13, endln:219:17
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.fs_ce_d), line:219:3, endln:219:10
@@ -4199,6 +4551,13 @@ Design: (unnamed)
                     |vpiDecompile:2'h3
                     |vpiSize:2
                     |HEX:3
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_rx_phy), line:220:43, endln:220:47
+                      |vpiParent:
+                      \_Constant: , line:220:43, endln:220:47
+                      |vpiFullName:work@usb_rx_phy
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_rx_phy.dpll_next_state), line:220:25, endln:220:40
@@ -4221,6 +4580,13 @@ Design: (unnamed)
                     |vpiDecompile:2'h2
                     |vpiSize:2
                     |HEX:2
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_rx_phy), line:221:28, endln:221:32
+                      |vpiParent:
+                      \_Constant: , line:221:28, endln:221:32
+                      |vpiFullName:work@usb_rx_phy
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_rx_phy.dpll_next_state), line:221:10, endln:221:25
@@ -4241,6 +4607,13 @@ Design: (unnamed)
               |vpiDecompile:2'h2
               |vpiSize:2
               |HEX:2
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:223:5, endln:223:9
+                |vpiParent:
+                \_Constant: , line:223:5, endln:223:9
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_IfElse: , line:224:3, endln:225:33
@@ -4280,6 +4653,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h0
                   |vpiSize:2
                   |HEX:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:224:43, endln:224:47
+                    |vpiParent:
+                    \_Constant: , line:224:43, endln:224:47
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:224:25, endln:224:40
@@ -4302,6 +4682,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h3
                   |vpiSize:2
                   |HEX:3
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:225:28, endln:225:32
+                    |vpiParent:
+                    \_Constant: , line:225:28, endln:225:32
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:225:10, endln:225:25
@@ -4322,6 +4709,13 @@ Design: (unnamed)
               |vpiDecompile:2'h3
               |vpiSize:2
               |HEX:3
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:226:5, endln:226:9
+                |vpiParent:
+                \_Constant: , line:226:5, endln:226:9
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_IfElse: , line:227:3, endln:228:33
@@ -4361,6 +4755,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h0
                   |vpiSize:2
                   |HEX:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:227:43, endln:227:47
+                    |vpiParent:
+                    \_Constant: , line:227:43, endln:227:47
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:227:25, endln:227:40
@@ -4383,6 +4784,13 @@ Design: (unnamed)
                   |vpiDecompile:2'h0
                   |vpiSize:2
                   |HEX:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:228:28, endln:228:32
+                    |vpiParent:
+                    \_Constant: , line:228:28, endln:228:32
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
                 |vpiLhs:
                 \_RefObj: (work@usb_rx_phy.dpll_next_state), line:228:10, endln:228:25
@@ -4715,6 +5123,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:263:8, endln:263:76
         |vpiFullName:work@usb_rx_phy
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@usb_rx_phy), line:264:4, endln:340:7
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:265:2, endln:265:17
           |vpiParent:
@@ -4728,6 +5142,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:265:13, endln:265:17
+              |vpiParent:
+              \_Constant: , line:265:13, endln:265:17
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.synced_d), line:265:2, endln:265:10
@@ -4750,6 +5171,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:266:15, endln:266:19
+              |vpiParent:
+              \_Constant: , line:266:15, endln:266:19
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.sync_err_d), line:266:2, endln:266:12
@@ -4993,6 +5421,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_IfElse: , line:276:4, endln:281:10
                     |vpiFullName:work@usb_rx_phy
+                    |vpiTypespec:
+                    \_BitTypespec: 
+                      |vpiParent:
+                      \_Begin: (work@usb_rx_phy), line:278:7, endln:281:10
+                    |vpiImportTypespec:
+                    \_BitTypespec: 
                     |vpiStmt:
                     \_Assignment: , line:279:6, endln:279:23
                       |vpiParent:
@@ -5006,6 +5440,13 @@ Design: (unnamed)
                         |vpiDecompile:1'b1
                         |vpiSize:1
                         |BIN:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@usb_rx_phy), line:279:19, endln:279:23
+                          |vpiParent:
+                          \_Constant: , line:279:19, endln:279:23
+                          |vpiFullName:work@usb_rx_phy
+                          |vpiActual:
+                          \_BitTypespec: 
                         |vpiConstType:3
                       |vpiLhs:
                       \_RefObj: (work@usb_rx_phy.sync_err_d), line:279:6, endln:279:16
@@ -5106,6 +5547,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_IfElse: , line:285:4, endln:290:10
                     |vpiFullName:work@usb_rx_phy
+                    |vpiTypespec:
+                    \_BitTypespec: 
+                      |vpiParent:
+                      \_Begin: (work@usb_rx_phy), line:287:7, endln:290:10
+                    |vpiImportTypespec:
+                    \_BitTypespec: 
                     |vpiStmt:
                     \_Assignment: , line:288:6, endln:288:23
                       |vpiParent:
@@ -5119,6 +5566,13 @@ Design: (unnamed)
                         |vpiDecompile:1'b1
                         |vpiSize:1
                         |BIN:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@usb_rx_phy), line:288:19, endln:288:23
+                          |vpiParent:
+                          \_Constant: , line:288:19, endln:288:23
+                          |vpiFullName:work@usb_rx_phy
+                          |vpiActual:
+                          \_BitTypespec: 
                         |vpiConstType:3
                       |vpiLhs:
                       \_RefObj: (work@usb_rx_phy.sync_err_d), line:288:6, endln:288:16
@@ -5219,6 +5673,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_IfElse: , line:294:4, endln:299:10
                     |vpiFullName:work@usb_rx_phy
+                    |vpiTypespec:
+                    \_BitTypespec: 
+                      |vpiParent:
+                      \_Begin: (work@usb_rx_phy), line:296:7, endln:299:10
+                    |vpiImportTypespec:
+                    \_BitTypespec: 
                     |vpiStmt:
                     \_Assignment: , line:297:6, endln:297:23
                       |vpiParent:
@@ -5232,6 +5692,13 @@ Design: (unnamed)
                         |vpiDecompile:1'b1
                         |vpiSize:1
                         |BIN:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@usb_rx_phy), line:297:19, endln:297:23
+                          |vpiParent:
+                          \_Constant: , line:297:19, endln:297:23
+                          |vpiFullName:work@usb_rx_phy
+                          |vpiActual:
+                          \_BitTypespec: 
                         |vpiConstType:3
                       |vpiLhs:
                       \_RefObj: (work@usb_rx_phy.sync_err_d), line:297:6, endln:297:16
@@ -5332,6 +5799,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_IfElse: , line:303:4, endln:308:10
                     |vpiFullName:work@usb_rx_phy
+                    |vpiTypespec:
+                    \_BitTypespec: 
+                      |vpiParent:
+                      \_Begin: (work@usb_rx_phy), line:305:7, endln:308:10
+                    |vpiImportTypespec:
+                    \_BitTypespec: 
                     |vpiStmt:
                     \_Assignment: , line:306:6, endln:306:23
                       |vpiParent:
@@ -5345,6 +5818,13 @@ Design: (unnamed)
                         |vpiDecompile:1'b1
                         |vpiSize:1
                         |BIN:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@usb_rx_phy), line:306:19, endln:306:23
+                          |vpiParent:
+                          \_Constant: , line:306:19, endln:306:23
+                          |vpiFullName:work@usb_rx_phy
+                          |vpiActual:
+                          \_BitTypespec: 
                         |vpiConstType:3
                       |vpiLhs:
                       \_RefObj: (work@usb_rx_phy.sync_err_d), line:306:6, endln:306:16
@@ -5470,6 +5950,12 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:314:4, endln:323:10
                       |vpiFullName:work@usb_rx_phy
+                      |vpiTypespec:
+                      \_BitTypespec: 
+                        |vpiParent:
+                        \_Begin: (work@usb_rx_phy), line:315:7, endln:318:10
+                      |vpiImportTypespec:
+                      \_BitTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:316:6, endln:316:29
                         |vpiParent:
@@ -5505,6 +5991,13 @@ Design: (unnamed)
                           |vpiDecompile:1'b1
                           |vpiSize:1
                           |BIN:1
+                          |vpiTypespec:
+                          \_RefTypespec: (work@usb_rx_phy), line:317:17, endln:317:21
+                            |vpiParent:
+                            \_Constant: , line:317:17, endln:317:21
+                            |vpiFullName:work@usb_rx_phy
+                            |vpiActual:
+                            \_BitTypespec: 
                           |vpiConstType:3
                         |vpiLhs:
                         \_RefObj: (work@usb_rx_phy.synced_d), line:317:6, endln:317:14
@@ -5519,6 +6012,12 @@ Design: (unnamed)
                       |vpiParent:
                       \_IfElse: , line:314:4, endln:323:10
                       |vpiFullName:work@usb_rx_phy
+                      |vpiTypespec:
+                      \_BitTypespec: 
+                        |vpiParent:
+                        \_Begin: (work@usb_rx_phy), line:320:7, endln:323:10
+                      |vpiImportTypespec:
+                      \_BitTypespec: 
                       |vpiStmt:
                       \_Assignment: , line:321:6, endln:321:23
                         |vpiParent:
@@ -5532,6 +6031,13 @@ Design: (unnamed)
                           |vpiDecompile:1'b1
                           |vpiSize:1
                           |BIN:1
+                          |vpiTypespec:
+                          \_RefTypespec: (work@usb_rx_phy), line:321:19, endln:321:23
+                            |vpiParent:
+                            \_Constant: , line:321:19, endln:321:23
+                            |vpiFullName:work@usb_rx_phy
+                            |vpiActual:
+                            \_BitTypespec: 
                           |vpiConstType:3
                         |vpiLhs:
                         \_RefObj: (work@usb_rx_phy.sync_err_d), line:321:6, endln:321:16
@@ -5632,6 +6138,12 @@ Design: (unnamed)
                     |vpiParent:
                     \_IfElse: , line:327:4, endln:332:10
                     |vpiFullName:work@usb_rx_phy
+                    |vpiTypespec:
+                    \_BitTypespec: 
+                      |vpiParent:
+                      \_Begin: (work@usb_rx_phy), line:329:7, endln:332:10
+                    |vpiImportTypespec:
+                    \_BitTypespec: 
                     |vpiStmt:
                     \_Assignment: , line:330:6, endln:330:23
                       |vpiParent:
@@ -5645,6 +6157,13 @@ Design: (unnamed)
                         |vpiDecompile:1'b1
                         |vpiSize:1
                         |BIN:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@usb_rx_phy), line:330:19, endln:330:23
+                          |vpiParent:
+                          \_Constant: , line:330:19, endln:330:23
+                          |vpiFullName:work@usb_rx_phy
+                          |vpiActual:
+                          \_BitTypespec: 
                         |vpiConstType:3
                       |vpiLhs:
                       \_RefObj: (work@usb_rx_phy.sync_err_d), line:330:6, endln:330:16
@@ -5693,6 +6212,12 @@ Design: (unnamed)
                 |vpiParent:
                 \_CaseItem: , line:334:3, endln:338:11
                 |vpiFullName:work@usb_rx_phy
+                |vpiTypespec:
+                \_BitTypespec: 
+                  |vpiParent:
+                  \_Begin: (work@usb_rx_phy), line:335:8, endln:338:11
+                |vpiImportTypespec:
+                \_BitTypespec: 
                 |vpiStmt:
                 \_IfStmt: , line:336:4, endln:336:26
                   |vpiParent:
@@ -5718,6 +6243,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_rx_phy), line:336:21, endln:336:25
+                        |vpiParent:
+                        \_Constant: , line:336:21, endln:336:25
+                        |vpiFullName:work@usb_rx_phy
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@usb_rx_phy.synced_d), line:336:10, endln:336:18
@@ -5800,6 +6332,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:352:25, endln:352:29
+              |vpiParent:
+              \_Constant: , line:352:25, endln:352:29
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.rx_active), line:352:12, endln:352:21
@@ -5846,6 +6385,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:354:37, endln:354:41
+                |vpiParent:
+                \_Constant: , line:354:37, endln:354:41
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.rx_active), line:354:24, endln:354:33
@@ -5892,6 +6438,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_rx_phy), line:356:37, endln:356:41
+                  |vpiParent:
+                  \_Constant: , line:356:37, endln:356:41
+                  |vpiFullName:work@usb_rx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@usb_rx_phy.rx_active), line:356:24, endln:356:33
@@ -5947,6 +6500,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:359:29, endln:359:33
+              |vpiParent:
+              \_Constant: , line:359:29, endln:359:33
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.rx_valid_r), line:359:15, endln:359:25
@@ -5980,6 +6540,13 @@ Design: (unnamed)
               |vpiDecompile:1'b0
               |vpiSize:1
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:361:26, endln:361:30
+                |vpiParent:
+                \_Constant: , line:361:26, endln:361:30
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.rx_valid_r), line:361:12, endln:361:22
@@ -6095,6 +6662,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:376:23, endln:376:27
+              |vpiParent:
+              \_Constant: , line:376:23, endln:376:27
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.sd_nrzi), line:376:12, endln:376:19
@@ -6133,6 +6707,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:378:29, endln:378:33
+                |vpiParent:
+                \_Constant: , line:378:29, endln:378:33
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.sd_nrzi), line:378:18, endln:378:25
@@ -6257,6 +6838,13 @@ Design: (unnamed)
             |vpiDecompile:3'h0
             |vpiSize:3
             |HEX:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:392:22, endln:392:26
+              |vpiParent:
+              \_Constant: , line:392:22, endln:392:26
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.one_cnt), line:392:11, endln:392:18
@@ -6295,6 +6883,13 @@ Design: (unnamed)
               |vpiDecompile:3'h0
               |vpiSize:3
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:394:27, endln:394:31
+                |vpiParent:
+                \_Constant: , line:394:27, endln:394:31
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.one_cnt), line:394:16, endln:394:23
@@ -6321,6 +6916,12 @@ Design: (unnamed)
               |vpiParent:
               \_IfStmt: , line:396:2, endln:400:8
               |vpiFullName:work@usb_rx_phy
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@usb_rx_phy), line:397:5, endln:400:8
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_IfElse: , line:398:3, endln:399:37
                 |vpiParent:
@@ -6363,6 +6964,13 @@ Design: (unnamed)
                     |vpiDecompile:3'h0
                     |vpiSize:3
                     |HEX:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_rx_phy), line:398:39, endln:398:43
+                      |vpiParent:
+                      \_Constant: , line:398:39, endln:398:43
+                      |vpiFullName:work@usb_rx_phy
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_rx_phy.one_cnt), line:398:28, endln:398:35
@@ -6397,6 +7005,13 @@ Design: (unnamed)
                       |vpiDecompile:3'h1
                       |vpiSize:3
                       |HEX:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_rx_phy), line:399:32, endln:399:36
+                        |vpiParent:
+                        \_Constant: , line:399:32, endln:399:36
+                        |vpiFullName:work@usb_rx_phy
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_rx_phy.one_cnt), line:399:11, endln:399:18
@@ -6674,6 +7289,13 @@ Design: (unnamed)
                 |vpiDecompile:7
                 |vpiSize:64
                 |UINT:7
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_rx_phy.hold_reg), line:416:34, endln:416:35
+                  |vpiParent:
+                  \_Constant: , line:416:34, endln:416:35
+                  |vpiFullName:work@usb_rx_phy.hold_reg
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiRightRange:
               \_Constant: , line:416:36, endln:416:37
@@ -6682,6 +7304,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_rx_phy.hold_reg), line:416:36, endln:416:37
+                  |vpiParent:
+                  \_Constant: , line:416:36, endln:416:37
+                  |vpiFullName:work@usb_rx_phy.hold_reg
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.hold_reg), line:416:3, endln:416:11
@@ -6742,6 +7371,13 @@ Design: (unnamed)
             |vpiDecompile:3'b0
             |vpiSize:3
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:428:23, endln:428:27
+              |vpiParent:
+              \_Constant: , line:428:23, endln:428:27
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_LogicTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.bit_cnt), line:428:12, endln:428:19
@@ -6780,6 +7416,13 @@ Design: (unnamed)
               |vpiDecompile:3'h0
               |vpiSize:3
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:430:28, endln:430:32
+                |vpiParent:
+                \_Constant: , line:430:28, endln:430:32
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.bit_cnt), line:430:17, endln:430:24
@@ -6844,6 +7487,13 @@ Design: (unnamed)
                   |vpiDecompile:3'h1
                   |vpiSize:3
                   |HEX:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy), line:432:46, endln:432:50
+                    |vpiParent:
+                    \_Constant: , line:432:46, endln:432:50
+                    |vpiFullName:work@usb_rx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
               |vpiLhs:
               \_RefObj: (work@usb_rx_phy.bit_cnt), line:432:25, endln:432:32
@@ -6904,6 +7554,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_rx_phy), line:439:28, endln:439:32
+              |vpiParent:
+              \_Constant: , line:439:28, endln:439:32
+              |vpiFullName:work@usb_rx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_rx_phy.rx_valid1), line:439:15, endln:439:24
@@ -6968,6 +7625,13 @@ Design: (unnamed)
                 |vpiDecompile:3'h7
                 |vpiSize:3
                 |HEX:7
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_rx_phy), line:441:37, endln:441:41
+                  |vpiParent:
+                  \_Constant: , line:441:37, endln:441:41
+                  |vpiFullName:work@usb_rx_phy
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:5
           |vpiStmt:
           \_Assignment: , line:441:44, endln:441:61
@@ -6981,6 +7645,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_rx_phy), line:441:57, endln:441:61
+                |vpiParent:
+                \_Constant: , line:441:57, endln:441:61
+                |vpiFullName:work@usb_rx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_rx_phy.rx_valid1), line:441:44, endln:441:53
@@ -7045,6 +7716,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_rx_phy), line:443:52, endln:443:56
+                  |vpiParent:
+                  \_Constant: , line:443:52, endln:443:56
+                  |vpiFullName:work@usb_rx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@usb_rx_phy.rx_valid1), line:443:39, endln:443:48
@@ -7256,6 +7934,13 @@ Design: (unnamed)
                   |vpiDecompile:2
                   |vpiSize:64
                   |UINT:2
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy.bit_cnt), line:449:60, endln:449:61
+                    |vpiParent:
+                    \_Constant: , line:449:60, endln:449:61
+                    |vpiFullName:work@usb_rx_phy.bit_cnt
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
                 |vpiRightRange:
                 \_Constant: , line:449:62, endln:449:63
@@ -7264,6 +7949,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_rx_phy.bit_cnt), line:449:62, endln:449:63
+                    |vpiParent:
+                    \_Constant: , line:449:62, endln:449:63
+                    |vpiFullName:work@usb_rx_phy.bit_cnt
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@usb_rx_phy.rx_active), line:449:68, endln:449:77
@@ -7617,6 +8309,13 @@ Design: (unnamed)
         |vpiDecompile:3'h6
         |vpiSize:3
         |HEX:6
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_rx_phy), line:402:29, endln:402:33
+          |vpiParent:
+          \_Constant: , line:402:29, endln:402:33
+          |vpiFullName:work@usb_rx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:5
     |vpiLhs:
     \_RefObj: (work@usb_rx_phy.drop_bit), line:402:8, endln:402:16
@@ -7688,6 +8387,13 @@ Design: (unnamed)
       |vpiDecompile:3'd0
       |vpiSize:3
       |DEC:0
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:101:18, endln:101:22
+        |vpiParent:
+        \_Constant: , line:101:18, endln:101:22
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.IDLE), line:101:11, endln:101:22
@@ -7702,6 +8408,13 @@ Design: (unnamed)
       |vpiDecompile:3'h1
       |vpiSize:3
       |HEX:1
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:102:9, endln:102:13
+        |vpiParent:
+        \_Constant: , line:102:9, endln:102:13
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.SOP), line:102:3, endln:102:13
@@ -7716,6 +8429,13 @@ Design: (unnamed)
       |vpiDecompile:3'h2
       |vpiSize:3
       |HEX:2
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:103:10, endln:103:14
+        |vpiParent:
+        \_Constant: , line:103:10, endln:103:14
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.DATA), line:103:3, endln:103:14
@@ -7730,6 +8450,13 @@ Design: (unnamed)
       |vpiDecompile:3'h3
       |vpiSize:3
       |HEX:3
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:104:10, endln:104:14
+        |vpiParent:
+        \_Constant: , line:104:10, endln:104:14
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.EOP1), line:104:3, endln:104:14
@@ -7744,6 +8471,13 @@ Design: (unnamed)
       |vpiDecompile:3'h4
       |vpiSize:3
       |HEX:4
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:105:10, endln:105:14
+        |vpiParent:
+        \_Constant: , line:105:10, endln:105:14
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.EOP2), line:105:3, endln:105:14
@@ -7758,9 +8492,29 @@ Design: (unnamed)
       |vpiDecompile:3'h5
       |vpiSize:3
       |HEX:5
+      |vpiTypespec:
+      \_RefTypespec: (work@usb_tx_phy), line:106:10, endln:106:14
+        |vpiParent:
+        \_Constant: , line:106:10, endln:106:14
+        |vpiFullName:work@usb_tx_phy
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_Parameter: (work@usb_tx_phy.WAIT), line:106:3, endln:106:14
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@usb_tx_phy (work@usb_tx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_tx_phy.v, line:77:1, endln:464:10
+    |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@usb_tx_phy (work@usb_tx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_tx_phy.v, line:77:1, endln:464:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@usb_tx_phy (work@usb_tx_phy), file:${SURELOG_DIR}/third_party/tests/YosysOldTests/usb_phy/rtl/usb_tx_phy.v, line:77:1, endln:464:10
   |vpiTypespec:
   \_LogicTypespec: , line:92:7, endln:92:12
     |vpiParent:
@@ -7776,6 +8530,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_tx_phy), line:92:8, endln:92:9
+          |vpiParent:
+          \_Constant: , line:92:8, endln:92:9
+          |vpiFullName:work@usb_tx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:92:10, endln:92:11
@@ -7784,6 +8545,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_tx_phy), line:92:10, endln:92:11
+          |vpiParent:
+          \_Constant: , line:92:10, endln:92:11
+          |vpiFullName:work@usb_tx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:108:1, endln:108:4
@@ -7804,6 +8572,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_tx_phy), line:109:6, endln:109:7
+          |vpiParent:
+          \_Constant: , line:109:6, endln:109:7
+          |vpiFullName:work@usb_tx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:109:8, endln:109:9
@@ -7812,7 +8587,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_tx_phy), line:109:8, endln:109:9
+          |vpiParent:
+          \_Constant: , line:109:8, endln:109:9
+          |vpiFullName:work@usb_tx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@usb_tx_phy.clk), line:78:3, endln:78:6
     |vpiParent:
@@ -8572,6 +9360,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:151:24, endln:151:28
+              |vpiParent:
+              \_Constant: , line:151:24, endln:151:28
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.TxReady_o), line:151:11, endln:151:20
@@ -8709,6 +9504,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:166:20, endln:166:24
+              |vpiParent:
+              \_Constant: , line:166:20, endln:166:24
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.tx_ip), line:166:11, endln:166:16
@@ -8742,6 +9544,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:168:24, endln:168:28
+                |vpiParent:
+                \_Constant: , line:168:24, endln:168:28
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.tx_ip), line:168:15, endln:168:20
@@ -8775,6 +9584,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_tx_phy), line:170:24, endln:170:28
+                  |vpiParent:
+                  \_Constant: , line:170:24, endln:170:28
+                  |vpiFullName:work@usb_tx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.tx_ip), line:170:15, endln:170:20
@@ -8835,6 +9651,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:177:26, endln:177:30
+              |vpiParent:
+              \_Constant: , line:177:26, endln:177:30
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.tx_ip_sync), line:177:12, endln:177:22
@@ -8928,6 +9751,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:190:26, endln:190:30
+              |vpiParent:
+              \_Constant: , line:190:26, endln:190:30
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.data_done), line:190:13, endln:190:22
@@ -8979,6 +9809,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:192:40, endln:192:44
+                |vpiParent:
+                \_Constant: , line:192:40, endln:192:44
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.data_done), line:192:27, endln:192:36
@@ -9017,6 +9854,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_tx_phy), line:194:32, endln:194:36
+                  |vpiParent:
+                  \_Constant: , line:194:32, endln:194:36
+                  |vpiFullName:work@usb_tx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.data_done), line:194:19, endln:194:28
@@ -9077,6 +9921,13 @@ Design: (unnamed)
             |vpiDecompile:3'h0
             |vpiSize:3
             |HEX:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:206:23, endln:206:27
+              |vpiParent:
+              \_Constant: , line:206:23, endln:206:27
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.bit_cnt), line:206:12, endln:206:19
@@ -9115,6 +9966,13 @@ Design: (unnamed)
               |vpiDecompile:3'h0
               |vpiSize:3
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:208:30, endln:208:34
+                |vpiParent:
+                \_Constant: , line:208:30, endln:208:34
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.bit_cnt), line:208:19, endln:208:26
@@ -9179,6 +10037,13 @@ Design: (unnamed)
                   |vpiDecompile:3'h1
                   |vpiSize:3
                   |HEX:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy), line:210:42, endln:210:46
+                    |vpiParent:
+                    \_Constant: , line:210:42, endln:210:46
+                    |vpiFullName:work@usb_tx_phy
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:5
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.bit_cnt), line:210:21, endln:210:28
@@ -9239,6 +10104,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:215:31, endln:215:35
+              |vpiParent:
+              \_Constant: , line:215:31, endln:215:35
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.sd_raw_o), line:215:19, endln:215:27
@@ -9272,6 +10144,13 @@ Design: (unnamed)
               |vpiDecompile:3'h0
               |vpiSize:3
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:218:5, endln:218:9
+                |vpiParent:
+                \_Constant: , line:218:5, endln:218:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:218:11, endln:218:36
@@ -9293,6 +10172,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:218:34, endln:218:35
+                    |vpiParent:
+                    \_Constant: , line:218:34, endln:218:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:218:11, endln:218:19
@@ -9313,6 +10199,13 @@ Design: (unnamed)
               |vpiDecompile:3'h1
               |vpiSize:3
               |HEX:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:219:5, endln:219:9
+                |vpiParent:
+                \_Constant: , line:219:5, endln:219:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:219:11, endln:219:36
@@ -9334,6 +10227,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:219:34, endln:219:35
+                    |vpiParent:
+                    \_Constant: , line:219:34, endln:219:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:219:11, endln:219:19
@@ -9354,6 +10254,13 @@ Design: (unnamed)
               |vpiDecompile:3'h2
               |vpiSize:3
               |HEX:2
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:220:5, endln:220:9
+                |vpiParent:
+                \_Constant: , line:220:5, endln:220:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:220:11, endln:220:36
@@ -9375,6 +10282,13 @@ Design: (unnamed)
                   |vpiDecompile:2
                   |vpiSize:64
                   |UINT:2
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:220:34, endln:220:35
+                    |vpiParent:
+                    \_Constant: , line:220:34, endln:220:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:220:11, endln:220:19
@@ -9395,6 +10309,13 @@ Design: (unnamed)
               |vpiDecompile:3'h3
               |vpiSize:3
               |HEX:3
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:221:5, endln:221:9
+                |vpiParent:
+                \_Constant: , line:221:5, endln:221:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:221:11, endln:221:36
@@ -9416,6 +10337,13 @@ Design: (unnamed)
                   |vpiDecompile:3
                   |vpiSize:64
                   |UINT:3
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:221:34, endln:221:35
+                    |vpiParent:
+                    \_Constant: , line:221:34, endln:221:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:221:11, endln:221:19
@@ -9436,6 +10364,13 @@ Design: (unnamed)
               |vpiDecompile:3'h4
               |vpiSize:3
               |HEX:4
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:222:5, endln:222:9
+                |vpiParent:
+                \_Constant: , line:222:5, endln:222:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:222:11, endln:222:36
@@ -9457,6 +10392,13 @@ Design: (unnamed)
                   |vpiDecompile:4
                   |vpiSize:64
                   |UINT:4
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:222:34, endln:222:35
+                    |vpiParent:
+                    \_Constant: , line:222:34, endln:222:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:222:11, endln:222:19
@@ -9477,6 +10419,13 @@ Design: (unnamed)
               |vpiDecompile:3'h5
               |vpiSize:3
               |HEX:5
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:223:5, endln:223:9
+                |vpiParent:
+                \_Constant: , line:223:5, endln:223:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:223:11, endln:223:36
@@ -9498,6 +10447,13 @@ Design: (unnamed)
                   |vpiDecompile:5
                   |vpiSize:64
                   |UINT:5
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:223:34, endln:223:35
+                    |vpiParent:
+                    \_Constant: , line:223:34, endln:223:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:223:11, endln:223:19
@@ -9518,6 +10474,13 @@ Design: (unnamed)
               |vpiDecompile:3'h6
               |vpiSize:3
               |HEX:6
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:224:5, endln:224:9
+                |vpiParent:
+                \_Constant: , line:224:5, endln:224:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:224:11, endln:224:36
@@ -9539,6 +10502,13 @@ Design: (unnamed)
                   |vpiDecompile:6
                   |vpiSize:64
                   |UINT:6
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:224:34, endln:224:35
+                    |vpiParent:
+                    \_Constant: , line:224:34, endln:224:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:224:11, endln:224:19
@@ -9559,6 +10529,13 @@ Design: (unnamed)
               |vpiDecompile:3'h7
               |vpiSize:3
               |HEX:7
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:225:5, endln:225:9
+                |vpiParent:
+                \_Constant: , line:225:5, endln:225:9
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiStmt:
             \_Assignment: , line:225:11, endln:225:36
@@ -9580,6 +10557,13 @@ Design: (unnamed)
                   |vpiDecompile:7
                   |vpiSize:64
                   |UINT:7
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy.hold_reg_d), line:225:34, endln:225:35
+                    |vpiParent:
+                    \_Constant: , line:225:34, endln:225:35
+                    |vpiFullName:work@usb_tx_phy.hold_reg_d
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.sd_raw_o), line:225:11, endln:225:19
@@ -9654,6 +10638,13 @@ Design: (unnamed)
               |vpiDecompile:3'h7
               |vpiSize:3
               |HEX:7
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:229:34, endln:229:38
+                |vpiParent:
+                \_Constant: , line:229:34, endln:229:38
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
         |vpiLhs:
         \_RefObj: (work@usb_tx_phy.sft_done), line:229:2, endln:229:10
@@ -9752,6 +10743,13 @@ Design: (unnamed)
             |vpiDecompile:8'h80
             |vpiSize:8
             |HEX:80
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:238:27, endln:238:32
+              |vpiParent:
+              \_Constant: , line:238:27, endln:238:32
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.hold_reg), line:238:15, endln:238:23
@@ -9888,6 +10886,13 @@ Design: (unnamed)
             |vpiDecompile:3'h0
             |vpiSize:3
             |HEX:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:254:22, endln:254:26
+              |vpiParent:
+              \_Constant: , line:254:22, endln:254:26
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.one_cnt), line:254:11, endln:254:18
@@ -9926,6 +10931,13 @@ Design: (unnamed)
               |vpiDecompile:3'h0
               |vpiSize:3
               |HEX:0
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:256:29, endln:256:33
+                |vpiParent:
+                \_Constant: , line:256:29, endln:256:33
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.one_cnt), line:256:18, endln:256:25
@@ -9952,6 +10964,12 @@ Design: (unnamed)
               |vpiParent:
               \_IfStmt: , line:258:2, endln:262:8
               |vpiFullName:work@usb_tx_phy
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@usb_tx_phy), line:259:5, endln:262:8
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_IfElse: , line:260:3, endln:261:36
                 |vpiParent:
@@ -9994,6 +11012,13 @@ Design: (unnamed)
                     |vpiDecompile:3'h0
                     |vpiSize:3
                     |HEX:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_tx_phy), line:260:37, endln:260:41
+                      |vpiParent:
+                      \_Constant: , line:260:37, endln:260:41
+                      |vpiFullName:work@usb_tx_phy
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_tx_phy.one_cnt), line:260:26, endln:260:33
@@ -10028,6 +11053,13 @@ Design: (unnamed)
                       |vpiDecompile:3'h1
                       |vpiSize:3
                       |HEX:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_tx_phy), line:261:31, endln:261:35
+                        |vpiParent:
+                        \_Constant: , line:261:31, endln:261:35
+                        |vpiFullName:work@usb_tx_phy
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:5
                   |vpiLhs:
                   \_RefObj: (work@usb_tx_phy.one_cnt), line:261:10, endln:261:17
@@ -10088,6 +11120,13 @@ Design: (unnamed)
             |vpiDecompile:1'h0
             |vpiSize:1
             |HEX:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:271:22, endln:271:26
+              |vpiParent:
+              \_Constant: , line:271:22, endln:271:26
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:5
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.sd_bs_o), line:271:11, endln:271:18
@@ -10139,6 +11178,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_tx_phy), line:273:37, endln:273:41
+                  |vpiParent:
+                  \_Constant: , line:273:37, endln:273:41
+                  |vpiFullName:work@usb_tx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiOperand:
               \_Operation: , line:273:45, endln:273:68
@@ -10160,6 +11206,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@usb_tx_phy), line:273:53, endln:273:57
+                    |vpiParent:
+                    \_Constant: , line:273:53, endln:273:57
+                    |vpiFullName:work@usb_tx_phy
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiOperand:
                 \_RefObj: (work@usb_tx_phy.sd_raw_o), line:273:60, endln:273:68
@@ -10228,6 +11281,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:285:26, endln:285:30
+              |vpiParent:
+              \_Constant: , line:285:26, endln:285:30
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.sd_nrzi_o), line:285:13, endln:285:22
@@ -10284,6 +11344,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:287:43, endln:287:47
+                |vpiParent:
+                \_Constant: , line:287:43, endln:287:47
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.sd_nrzi_o), line:287:30, endln:287:39
@@ -10403,6 +11470,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:301:26, endln:301:30
+              |vpiParent:
+              \_Constant: , line:301:26, endln:301:30
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.append_eop), line:301:12, endln:301:22
@@ -10436,6 +11510,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@usb_tx_phy), line:303:30, endln:303:34
+                |vpiParent:
+                \_Constant: , line:303:30, endln:303:34
+                |vpiFullName:work@usb_tx_phy
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@usb_tx_phy.append_eop), line:303:16, endln:303:26
@@ -10469,6 +11550,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@usb_tx_phy), line:305:37, endln:305:41
+                  |vpiParent:
+                  \_Constant: , line:305:37, endln:305:41
+                  |vpiFullName:work@usb_tx_phy
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@usb_tx_phy.append_eop), line:305:23, endln:305:33
@@ -10529,6 +11617,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:312:31, endln:312:35
+              |vpiParent:
+              \_Constant: , line:312:31, endln:312:35
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.append_eop_sync1), line:312:11, endln:312:27
@@ -10622,6 +11717,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:321:31, endln:321:35
+              |vpiParent:
+              \_Constant: , line:321:31, endln:321:35
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.append_eop_sync2), line:321:11, endln:321:27
@@ -10715,6 +11817,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:330:31, endln:330:35
+              |vpiParent:
+              \_Constant: , line:330:31, endln:330:35
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.append_eop_sync3), line:330:11, endln:330:27
@@ -10839,6 +11948,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:340:31, endln:340:35
+              |vpiParent:
+              \_Constant: , line:340:31, endln:340:35
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.append_eop_sync4), line:340:11, endln:340:27
@@ -10932,6 +12048,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:356:22, endln:356:26
+              |vpiParent:
+              \_Constant: , line:356:22, endln:356:26
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.txoe_r1), line:356:11, endln:356:18
@@ -11025,6 +12148,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:365:22, endln:365:26
+              |vpiParent:
+              \_Constant: , line:365:22, endln:365:26
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.txoe_r2), line:365:11, endln:365:18
@@ -11118,6 +12248,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:374:19, endln:374:23
+              |vpiParent:
+              \_Constant: , line:374:19, endln:374:23
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.txoe), line:374:11, endln:374:15
@@ -11229,6 +12366,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:388:19, endln:388:23
+              |vpiParent:
+              \_Constant: , line:388:19, endln:388:23
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.txdp), line:388:11, endln:388:15
@@ -11361,6 +12505,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:399:19, endln:399:23
+              |vpiParent:
+              \_Constant: , line:399:19, endln:399:23
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.txdn), line:399:11, endln:399:15
@@ -11615,6 +12766,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:418:8, endln:418:77
         |vpiFullName:work@usb_tx_phy
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@usb_tx_phy), line:419:4, endln:462:7
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:420:2, endln:420:20
           |vpiParent:
@@ -11650,6 +12807,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:421:15, endln:421:19
+              |vpiParent:
+              \_Constant: , line:421:15, endln:421:19
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.tx_ready_d), line:421:2, endln:421:12
@@ -11672,6 +12836,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:423:13, endln:423:17
+              |vpiParent:
+              \_Constant: , line:423:13, endln:423:17
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.ld_sop_d), line:423:2, endln:423:10
@@ -11694,6 +12865,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:424:14, endln:424:18
+              |vpiParent:
+              \_Constant: , line:424:14, endln:424:18
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.ld_data_d), line:424:2, endln:424:11
@@ -11716,6 +12894,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@usb_tx_phy), line:425:13, endln:425:17
+              |vpiParent:
+              \_Constant: , line:425:13, endln:425:17
+              |vpiFullName:work@usb_tx_phy
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@usb_tx_phy.ld_eop_d), line:425:2, endln:425:10
@@ -11767,6 +12952,12 @@ Design: (unnamed)
                 |vpiParent:
                 \_IfStmt: , line:429:4, endln:433:10
                 |vpiFullName:work@usb_tx_phy
+                |vpiTypespec:
+                \_BitTypespec: 
+                  |vpiParent:
+                  \_Begin: (work@usb_tx_phy), line:430:7, endln:433:10
+                |vpiImportTypespec:
+                \_BitTypespec: 
                 |vpiStmt:
                 \_Assignment: , line:431:5, endln:431:20
                   |vpiParent:
@@ -11780,6 +12971,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_tx_phy), line:431:16, endln:431:20
+                      |vpiParent:
+                      \_Constant: , line:431:16, endln:431:20
+                      |vpiFullName:work@usb_tx_phy
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiLhs:
                   \_RefObj: (work@usb_tx_phy.ld_sop_d), line:431:5, endln:431:13
@@ -11840,6 +13038,12 @@ Design: (unnamed)
                 |vpiParent:
                 \_IfStmt: , line:435:4, endln:440:10
                 |vpiFullName:work@usb_tx_phy
+                |vpiTypespec:
+                \_BitTypespec: 
+                  |vpiParent:
+                  \_Begin: (work@usb_tx_phy), line:436:7, endln:440:10
+                |vpiImportTypespec:
+                \_BitTypespec: 
                 |vpiStmt:
                 \_Assignment: , line:437:5, endln:437:22
                   |vpiParent:
@@ -11853,6 +13057,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_tx_phy), line:437:18, endln:437:22
+                      |vpiParent:
+                      \_Constant: , line:437:18, endln:437:22
+                      |vpiFullName:work@usb_tx_phy
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiLhs:
                   \_RefObj: (work@usb_tx_phy.tx_ready_d), line:437:5, endln:437:15
@@ -11875,6 +13086,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@usb_tx_phy), line:438:17, endln:438:21
+                      |vpiParent:
+                      \_Constant: , line:438:17, endln:438:21
+                      |vpiFullName:work@usb_tx_phy
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiLhs:
                   \_RefObj: (work@usb_tx_phy.ld_data_d), line:438:5, endln:438:14
@@ -11958,6 +13176,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfStmt: , line:443:4, endln:447:10
                   |vpiFullName:work@usb_tx_phy
+                  |vpiTypespec:
+                  \_BitTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@usb_tx_phy), line:444:7, endln:447:10
+                  |vpiImportTypespec:
+                  \_BitTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:445:5, endln:445:20
                     |vpiParent:
@@ -11971,6 +13195,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_tx_phy), line:445:16, endln:445:20
+                        |vpiParent:
+                        \_Constant: , line:445:16, endln:445:20
+                        |vpiFullName:work@usb_tx_phy
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@usb_tx_phy.ld_eop_d), line:445:5, endln:445:13
@@ -12032,6 +13263,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfStmt: , line:449:4, endln:453:10
                   |vpiFullName:work@usb_tx_phy
+                  |vpiTypespec:
+                  \_BitTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@usb_tx_phy), line:450:7, endln:453:10
+                  |vpiImportTypespec:
+                  \_BitTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:451:5, endln:451:22
                     |vpiParent:
@@ -12045,6 +13282,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_tx_phy), line:451:18, endln:451:22
+                        |vpiParent:
+                        \_Constant: , line:451:18, endln:451:22
+                        |vpiFullName:work@usb_tx_phy
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@usb_tx_phy.tx_ready_d), line:451:5, endln:451:15
@@ -12067,6 +13311,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@usb_tx_phy), line:452:17, endln:452:21
+                        |vpiParent:
+                        \_Constant: , line:452:17, endln:452:21
+                        |vpiFullName:work@usb_tx_phy
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@usb_tx_phy.ld_data_d), line:452:5, endln:452:14
@@ -12315,6 +13566,13 @@ Design: (unnamed)
         |vpiDecompile:3'h6
         |vpiSize:3
         |HEX:6
+        |vpiTypespec:
+        \_RefTypespec: (work@usb_tx_phy), line:264:26, endln:264:30
+          |vpiParent:
+          \_Constant: , line:264:26, endln:264:30
+          |vpiFullName:work@usb_tx_phy
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:5
     |vpiLhs:
     \_RefObj: (work@usb_tx_phy.stuff), line:264:8, endln:264:13

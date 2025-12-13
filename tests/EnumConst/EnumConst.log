@@ -69,21 +69,23 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConst/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            4
 Constant                                              10
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             2
+IntTypespec                                            6
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              4
 Range                                                  1
-RefTypespec                                            2
+RefTypespec                                           12
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                29
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConst/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -146,6 +148,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
@@ -154,7 +163,27 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
   |vpiTypespec:
   \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
     |vpiParent:
@@ -175,6 +204,12 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:9, endln:5:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
   |vpiDefName:work@dut

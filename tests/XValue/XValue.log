@@ -100,18 +100,19 @@ Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
 Identifier                                             2
-LogicTypespec                                          5
+IntTypespec                                            2
+LogicTypespec                                          9
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                            6
+RefTypespec                                           12
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                36
+Total:                                                48
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/XValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -174,6 +175,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:24, endln:2:25
+          |vpiParent:
+          \_Constant: , line:2:24, endln:2:25
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:26, endln:2:27
@@ -182,7 +190,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:26, endln:2:27
+          |vpiParent:
+          \_Constant: , line:2:26, endln:2:27
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/XValue/dut.sv, line:1:1, endln:8:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/XValue/dut.sv, line:1:1, endln:8:10
   |vpiTypespec:
   \_TypedefTypespec: (dfi_cmd_e), line:5:6, endln:5:15
     |vpiParent:
@@ -207,6 +230,10 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:12, endln:5:15
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:17, endln:2:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (dfi_cmd_e), line:5:6, endln:5:15
   |vpiImportTypespec:

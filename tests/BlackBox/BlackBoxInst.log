@@ -148,7 +148,7 @@ GenFor                                                 1
 GenRegion                                              1
 HierPath                                               1
 Identifier                                             4
-IntTypespec                                            1
+IntTypespec                                            4
 Module                                                 3
 ModuleTypespec                                         3
 Operation                                              2
@@ -156,11 +156,11 @@ PreprocMacroDefinition                                 1
 PreprocMacroInstance                                   1
 RefModule                                              2
 RefObj                                                 6
-RefTypespec                                            1
+RefTypespec                                            4
 SourceFile                                             1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                40
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackBoxInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -216,9 +216,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.nyuzi.core_gen[0].core.wb_writeback_en.nyuzi.core_gen), line:27:30, endln:27:31
+          |vpiParent:
+          \_Constant: , line:27:30, endln:27:31
+          |vpiFullName:work@top.nyuzi.core_gen[0].core.wb_writeback_en.nyuzi.core_gen
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiObject:
     \_Constant: , line:27:30, endln:27:31
+    |vpiObject:
+    \_RefTypespec: (work@top.nyuzi.core_gen[0].core.wb_writeback_en.nyuzi.core_gen), line:27:30, endln:27:31
     |vpiObject:
     \_RefObj: (core), line:27:33, endln:27:37
       |vpiParent:
@@ -321,8 +330,14 @@ Design: (unnamed)
             |vpiDefName:work@core
             |vpiActual:
             \_Module: work@core (work@core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:5:1, endln:9:10
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@nyuzi), line:16:9, endln:19:12
         |vpiImportTypespec:
         \_Variable: (work@nyuzi.core_idx), line:16:14, endln:16:22
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:16:14, endln:16:26
           |vpiParent:
@@ -334,6 +349,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@nyuzi), line:16:25, endln:16:26
+              |vpiParent:
+              \_Constant: , line:16:25, endln:16:26
+              |vpiFullName:work@nyuzi
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@nyuzi.core_idx), line:16:14, endln:16:22
@@ -357,6 +379,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@nyuzi), line:16:39, endln:16:40
+              |vpiParent:
+              \_Constant: , line:16:39, endln:16:40
+              |vpiFullName:work@nyuzi
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiForIncStmt:
         \_Operation: , line:16:42, endln:16:52
@@ -396,6 +425,12 @@ Design: (unnamed)
     |vpiName:work@nyuzi
     |vpiModule:
     \_Module: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.o), line:31:12, endln:31:13
     |vpiParent:

@@ -97,15 +97,18 @@ Constant                                               2
 Design                                                 1
 HierPath                                               1
 Identifier                                             2
+IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              3
 PropertySpec                                           1
 RefObj                                                 7
+RefTypespec                                            2
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                26
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssumeProp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -143,6 +146,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.aw_select), line:6:14, endln:6:15
+          |vpiParent:
+          \_Constant: , line:6:14, endln:6:15
+          |vpiFullName:work@dut.aw_select
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiArgument:
       \_Constant: , line:6:17, endln:7:33
@@ -153,6 +163,13 @@ Design: (unnamed)
         |vpiSize:800
         |STRING:slv_aw_select_i is %d: AW has selected a slave that is not defined.\
                  NoMstPorts: %d
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.aw_select), line:6:17, endln:7:33
+          |vpiParent:
+          \_Constant: , line:6:17, endln:7:33
+          |vpiFullName:work@dut.aw_select
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
       |vpiArgument:
       \_RefObj: (work@dut.aw_select.slv_aw_select_i), line:7:35, endln:7:50
@@ -238,6 +255,18 @@ Design: (unnamed)
             |vpiFullName:work@dut.aw_select.NoMstPorts
             |vpiActual:
             \_Net: (work@dut.NoMstPorts), line:7:52, endln:7:62
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Assume: (work@dut.aw_select), line:4:16, endln:7:64
   |vpiImportTypespec:

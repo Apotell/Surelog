@@ -262,6 +262,7 @@ Design                                                 1
 EnumConst                                              4
 EnumTypespec                                           1
 Identifier                                             8
+IntTypespec                                           12
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         1
@@ -270,7 +271,7 @@ Package                                                3
 Port                                                   2
 Range                                                  5
 RefObj                                                 3
-RefTypespec                                           18
+RefTypespec                                           30
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        4
@@ -279,7 +280,7 @@ UnionTypespec                                          1
 UnsupportedTypespec                                    2
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                89
+Total:                                               113
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackUnion/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -436,6 +437,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (fooes_pkg), line:14:23, endln:14:24
+          |vpiParent:
+          \_Constant: , line:14:23, endln:14:24
+          |vpiFullName:fooes_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:14:25, endln:14:26
@@ -444,7 +452,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (fooes_pkg), line:14:25, endln:14:26
+          |vpiParent:
+          \_Constant: , line:14:25, endln:14:26
+          |vpiFullName:fooes_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: fooes_pkg (fooes_pkg), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:12:1, endln:21:23
   |vpiTypespec:
   \_TypedefTypespec: (fooes_pkg::classes_e), line:19:5, endln:19:14
     |vpiParent:
@@ -465,6 +484,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:14:11, endln:19:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:16, endln:14:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (fooes_pkg::classes_e), line:19:5, endln:19:14
   |vpiDefName:fooes_pkg
@@ -524,6 +545,10 @@ Design: (unnamed)
         |vpiActual:
         \_ArrayTypespec: , line:31:3, endln:31:32
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: goog (goog), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
+  |vpiTypespec:
   \_ArrayTypespec: , line:30:3, endln:30:44
     |vpiParent:
     \_Package: goog (goog), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:28:1, endln:33:17
@@ -538,6 +563,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:30:35, endln:30:36
+          |vpiParent:
+          \_Constant: , line:30:35, endln:30:36
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:30:37, endln:30:38
@@ -546,6 +578,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:30:37, endln:30:38
+          |vpiParent:
+          \_Constant: , line:30:37, endln:30:38
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:30:39, endln:30:44
@@ -558,6 +597,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:30:40, endln:30:41
+          |vpiParent:
+          \_Constant: , line:30:40, endln:30:41
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:30:42, endln:30:43
@@ -566,6 +612,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:30:42, endln:30:43
+          |vpiParent:
+          \_Constant: , line:30:42, endln:30:43
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (goog::foo_flags_pkg::common_flags_t), line:8:5, endln:8:19
@@ -591,6 +644,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:31:23, endln:31:24
+          |vpiParent:
+          \_Constant: , line:31:23, endln:31:24
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:31:25, endln:31:26
@@ -599,6 +659,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:31:25, endln:31:26
+          |vpiParent:
+          \_Constant: , line:31:25, endln:31:26
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:31:27, endln:31:32
@@ -611,6 +678,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:31:28, endln:31:29
+          |vpiParent:
+          \_Constant: , line:31:28, endln:31:29
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:31:30, endln:31:31
@@ -619,6 +693,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (goog), line:31:30, endln:31:31
+          |vpiParent:
+          \_Constant: , line:31:30, endln:31:31
+          |vpiFullName:goog
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (goog::padded_fooes_t), line:31:3, endln:31:17
@@ -633,6 +714,8 @@ Design: (unnamed)
   \_TypedefTypespec: (goog::top_flag_t), line:32:3, endln:32:13
   |vpiImportTypespec:
   \_UnionTypespec: , line:29:9, endln:32:2
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:30:3, endln:30:44
   |vpiImportTypespec:
@@ -680,6 +763,12 @@ Design: (unnamed)
     |vpiFullName:work@top.b
     |vpiRandType:1
     |vpiVisibility:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FilePackUnion/dut.sv, line:35:1, endln:38:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@top.a), line:35:35, endln:35:36
   |vpiImportTypespec:
@@ -758,6 +847,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:37:14, endln:37:15
+          |vpiParent:
+          \_Constant: , line:37:14, endln:37:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:37:18, endln:37:19
@@ -766,6 +862,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:37:18, endln:37:19
+          |vpiParent:
+          \_Constant: , line:37:18, endln:37:19
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top.c), line:37:10, endln:37:11

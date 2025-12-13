@@ -4,17 +4,21 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/HierBitSelect/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                              13
 ContAssign                                             3
 Design                                                 1
 Identifier                                             1
+IntTypespec                                           10
+LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 PartSelect                                             2
+RefTypespec                                           13
 SourceFile                                             1
 VarSelect                                              2
 ------------------------------------------------------------
-Total:                                                25
+Total:                                                51
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -35,6 +39,24 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
     |vpiName:work@dut
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.mido_bytes_in), line:3:8, endln:3:30
     |vpiParent:
@@ -74,6 +96,13 @@ Design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:3:33, endln:3:37
+        |vpiParent:
+        \_Constant: , line:3:33, endln:3:37
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_VarSelect: (work@dut.mido_bytes_in), line:3:8, endln:3:30
@@ -90,6 +119,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.mido_bytes_in), line:3:22, endln:3:23
+          |vpiParent:
+          \_Constant: , line:3:22, endln:3:23
+          |vpiFullName:work@dut.mido_bytes_in
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiIndex:
       \_Constant: , line:3:25, endln:3:26
@@ -98,6 +134,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.mido_bytes_in), line:3:25, endln:3:26
+          |vpiParent:
+          \_Constant: , line:3:25, endln:3:26
+          |vpiFullName:work@dut.mido_bytes_in
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiIndex:
       \_Constant: , line:3:28, endln:3:29
@@ -106,6 +149,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.mido_bytes_in), line:3:28, endln:3:29
+          |vpiParent:
+          \_Constant: , line:3:28, endln:3:29
+          |vpiFullName:work@dut.mido_bytes_in
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiContAssign:
   \_ContAssign: , line:4:8, endln:4:43
@@ -118,6 +168,13 @@ Design: (unnamed)
       |vpiDecompile:8'b10101010
       |vpiSize:8
       |BIN:10101010
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:4:32, endln:4:43
+        |vpiParent:
+        \_Constant: , line:4:32, endln:4:43
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_VarSelect: (work@dut.state_d), line:4:8, endln:4:29
@@ -134,6 +191,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.state_d), line:4:16, endln:4:17
+          |vpiParent:
+          \_Constant: , line:4:16, endln:4:17
+          |vpiFullName:work@dut.state_d
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiIndex:
       \_Constant: , line:4:19, endln:4:20
@@ -142,6 +206,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.state_d), line:4:19, endln:4:20
+          |vpiParent:
+          \_Constant: , line:4:19, endln:4:20
+          |vpiFullName:work@dut.state_d
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiIndex:
       \_Constant: , line:4:22, endln:4:23
@@ -150,6 +221,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.state_d), line:4:22, endln:4:23
+          |vpiParent:
+          \_Constant: , line:4:22, endln:4:23
+          |vpiFullName:work@dut.state_d
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiIndex:
       \_PartSelect: state_d (work@dut.state_d.state_d), line:4:25, endln:4:28
@@ -168,6 +246,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.state_d.state_d), line:4:25, endln:4:26
+            |vpiParent:
+            \_Constant: , line:4:25, endln:4:26
+            |vpiFullName:work@dut.state_d.state_d
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:4:27, endln:4:28
@@ -176,6 +261,13 @@ Design: (unnamed)
           |vpiDecompile:6
           |vpiSize:64
           |UINT:6
+          |vpiTypespec:
+          \_RefTypespec: (work@dut.state_d.state_d), line:4:27, endln:4:28
+            |vpiParent:
+            \_Constant: , line:4:27, endln:4:28
+            |vpiFullName:work@dut.state_d.state_d
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
   |vpiContAssign:
   \_ContAssign: , line:5:8, endln:5:37
@@ -188,6 +280,13 @@ Design: (unnamed)
       |vpiDecompile:8'b10101010
       |vpiSize:8
       |BIN:10101010
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:5:26, endln:5:37
+        |vpiParent:
+        \_Constant: , line:5:26, endln:5:37
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_PartSelect: state_d1 (work@dut.state_d1), line:5:17, endln:5:22
@@ -206,6 +305,13 @@ Design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.state_d1), line:5:17, endln:5:19
+          |vpiParent:
+          \_Constant: , line:5:17, endln:5:19
+          |vpiFullName:work@dut.state_d1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:20, endln:5:22
@@ -214,6 +320,13 @@ Design: (unnamed)
         |vpiDecompile:11
         |vpiSize:64
         |UINT:11
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.state_d1), line:5:20, endln:5:22
+          |vpiParent:
+          \_Constant: , line:5:20, endln:5:22
+          |vpiFullName:work@dut.state_d1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
 |vpiTypespec:
 \_ModuleTypespec: (work@dut)

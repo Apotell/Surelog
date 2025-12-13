@@ -79,19 +79,22 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  1
 BitSelect                                              1
+BitTypespec                                            1
 Constant                                               4
 ContAssign                                             1
 Design                                                 1
 GenFor                                                 1
 Identifier                                             1
+IntTypespec                                            3
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
 RefObj                                                 4
+RefTypespec                                            4
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenFor/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -128,6 +131,12 @@ Design: (unnamed)
       |vpiParent:
       \_GenFor: (work@top), line:4:4, endln:6:7
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:4:35, endln:6:7
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_Net: (work@top.tmp), line:5:17, endln:5:20
         |vpiParent:
@@ -146,6 +155,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:5:23, endln:5:27
+            |vpiParent:
+            \_Constant: , line:5:23, endln:5:27
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_BitSelect: (work@top.tmp), line:5:17, endln:5:20
@@ -163,8 +179,14 @@ Design: (unnamed)
             |vpiFullName:work@top.i
             |vpiActual:
             \_Variable: (work@top.i), line:4:9, endln:4:10
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@top), line:4:4, endln:6:7
     |vpiImportTypespec:
     \_Variable: (work@top.i), line:4:9, endln:4:10
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:4:9, endln:4:14
       |vpiParent:
@@ -176,6 +198,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:4:13, endln:4:14
+          |vpiParent:
+          \_Constant: , line:4:13, endln:4:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@top.i), line:4:9, endln:4:10
@@ -199,6 +228,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:4:20, endln:4:21
+          |vpiParent:
+          \_Constant: , line:4:20, endln:4:21
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Assignment: , line:4:24, endln:4:33
@@ -225,6 +261,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:4:32, endln:4:33
+            |vpiParent:
+            \_Constant: , line:4:32, endln:4:33
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiLhs:
       \_RefObj: (work@top.i), line:4:24, endln:4:25

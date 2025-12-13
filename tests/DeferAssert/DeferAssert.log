@@ -10,16 +10,17 @@ Design                                                 1
 Identifier                                             1
 ImmediateAssert                                        1
 Initial                                                1
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 RefObj                                                 1
-RefTypespec                                            1
+RefTypespec                                            3
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                15
+Total:                                                19
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DeferAssert/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -41,9 +42,15 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
     |vpiName:work@top
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
+  |vpiTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DeferAssert/dut.sv, line:1:1, endln:4:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ImmediateAssert: , line:3:11, endln:3:31
     |vpiParent:
@@ -69,6 +76,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:28, endln:3:29
+          |vpiParent:
+          \_Constant: , line:3:28, endln:3:29
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8

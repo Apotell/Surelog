@@ -104,7 +104,7 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             2
-IntTypespec                                            3
+IntTypespec                                            8
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
@@ -112,7 +112,7 @@ Operation                                              1
 Port                                                   1
 Range                                                  1
 RefObj                                                 1
-RefTypespec                                            6
+RefTypespec                                           11
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
@@ -120,7 +120,7 @@ TypespecMember                                         1
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                34
+Total:                                                44
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -195,6 +195,10 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:7:4, endln:7:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
@@ -209,6 +213,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:24, endln:7:25
+          |vpiParent:
+          \_Constant: , line:7:24, endln:7:25
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:26, endln:7:27
@@ -217,6 +228,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:26, endln:7:27
+          |vpiParent:
+          \_Constant: , line:7:26, endln:7:27
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.sram_otp_key_rsp_t), line:7:4, endln:7:22
@@ -233,6 +251,8 @@ Design: (unnamed)
   \_StructTypespec: , line:3:12, endln:5:5
   |vpiImportTypespec:
   \_IntTypespec: , line:4:7, endln:4:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:1:23, endln:1:24
   |vpiImportTypespec:
@@ -277,6 +297,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:9:39, endln:9:40
+        |vpiParent:
+        \_Constant: , line:9:39, endln:9:40
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (sram_otp_key_o[2 - 2].nonce), line:9:11, endln:9:36
@@ -302,6 +329,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@top.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o), line:9:26, endln:9:27
+              |vpiParent:
+              \_Constant: , line:9:26, endln:9:27
+              |vpiFullName:work@top.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:9:28, endln:9:29
@@ -310,6 +344,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@top.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o), line:9:28, endln:9:29
+              |vpiParent:
+              \_Constant: , line:9:28, endln:9:29
+              |vpiFullName:work@top.sram_otp_key_o[2 - 2].nonce.sram_otp_key_o
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiActual:
       \_RefObj: (sram_otp_key_o[2 - 2].nonce), line:9:31, endln:9:36

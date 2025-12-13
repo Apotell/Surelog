@@ -17,6 +17,7 @@ ArrayTypespec                                         14
 Assignment                                           114
 Begin                                                 75
 BitSelect                                             17
+BitTypespec                                           50
 CaseItem                                              10
 CaseStmt                                               2
 ClassDefn                                              8
@@ -39,7 +40,7 @@ IfElse                                                10
 IfStmt                                                 4
 IndexedPartSelect                                      4
 Initial                                                2
-IntTypespec                                            9
+IntTypespec                                          345
 IntegerTypespec                                        6
 LogicTypespec                                        173
 Module                                                 9
@@ -54,8 +55,9 @@ Port                                                 134
 Range                                                120
 RefModule                                              9
 RefObj                                               540
-RefTypespec                                          205
+RefTypespec                                          600
 SourceFile                                             7
+StringTypespec                                         9
 SysFuncCall                                            5
 Task                                                   9
 TypedefTypespec                                        1
@@ -63,7 +65,7 @@ UnsupportedTypespec                                    1
 VarSelect                                              1
 Variable                                               6
 ------------------------------------------------------------
-Total:                                              2524
+Total:                                              3314
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysCam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -189,8 +191,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -205,6 +213,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -631,8 +646,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -647,6 +668,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -670,8 +698,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -687,6 +721,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -710,8 +751,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -727,6 +774,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -750,8 +804,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -774,6 +834,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1053,6 +1120,13 @@ Design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:34:28, endln:34:30
+        |vpiParent:
+        \_Constant: , line:34:28, endln:34:30
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram.DATA_WIDTH), line:34:15, endln:34:30
@@ -1067,6 +1141,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:36:28, endln:36:29
+        |vpiParent:
+        \_Constant: , line:36:28, endln:36:29
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram.ADDR_WIDTH), line:36:15, endln:36:29
@@ -1081,6 +1162,13 @@ Design: (unnamed)
       |vpiDecompile:9
       |vpiSize:64
       |UINT:9
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:38:29, endln:38:30
+        |vpiParent:
+        \_Constant: , line:38:29, endln:38:30
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram.SLICE_WIDTH), line:38:15, endln:38:30
@@ -1126,6 +1214,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:58:54, endln:58:55
+            |vpiParent:
+            \_Constant: , line:58:54, endln:58:55
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@cam_bram.SLICE_WIDTH), line:58:59, endln:58:70
@@ -1153,6 +1248,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:60:24, endln:60:25
+          |vpiParent:
+          \_Constant: , line:60:24, endln:60:25
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@cam_bram.ADDR_WIDTH), line:60:27, endln:60:37
@@ -1175,6 +1277,13 @@ Design: (unnamed)
       |vpiDecompile:3'd0
       |vpiSize:3
       |DEC:0
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:63:18, endln:63:22
+        |vpiParent:
+        \_Constant: , line:63:18, endln:63:22
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_INIT), line:63:5, endln:63:22
@@ -1189,6 +1298,13 @@ Design: (unnamed)
       |vpiDecompile:3'd1
       |vpiSize:3
       |DEC:1
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:64:18, endln:64:22
+        |vpiParent:
+        \_Constant: , line:64:18, endln:64:22
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_IDLE), line:64:5, endln:64:22
@@ -1203,6 +1319,13 @@ Design: (unnamed)
       |vpiDecompile:3'd2
       |vpiSize:3
       |DEC:2
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:65:22, endln:65:26
+        |vpiParent:
+        \_Constant: , line:65:22, endln:65:26
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_DELETE_1), line:65:5, endln:65:26
@@ -1217,6 +1340,13 @@ Design: (unnamed)
       |vpiDecompile:3'd3
       |vpiSize:3
       |DEC:3
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:66:22, endln:66:26
+        |vpiParent:
+        \_Constant: , line:66:22, endln:66:26
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_DELETE_2), line:66:5, endln:66:26
@@ -1231,6 +1361,13 @@ Design: (unnamed)
       |vpiDecompile:3'd4
       |vpiSize:3
       |DEC:4
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:67:21, endln:67:25
+        |vpiParent:
+        \_Constant: , line:67:21, endln:67:25
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_WRITE_1), line:67:5, endln:67:25
@@ -1245,6 +1382,13 @@ Design: (unnamed)
       |vpiDecompile:3'd5
       |vpiSize:3
       |DEC:5
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram), line:68:21, endln:68:25
+        |vpiParent:
+        \_Constant: , line:68:21, endln:68:25
+        |vpiFullName:work@cam_bram
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_bram.STATE_WRITE_2), line:68:5, endln:68:25
@@ -1328,6 +1472,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram.slice), line:131:49, endln:131:50
+                      |vpiParent:
+                      \_Constant: , line:131:49, endln:131:50
+                      |vpiFullName:work@cam_bram.slice
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
               |vpiOperand:
               \_Operation: , line:131:53, endln:131:85
@@ -1374,12 +1525,20 @@ Design: (unnamed)
             |vpiLhs:
             \_Parameter: (work@cam_bram.slice.W), line:131:20, endln:131:21
           |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@cam_bram.slice), line:130:77, endln:157:8
+          |vpiTypespec:
           \_ModuleTypespec: (work@ram_dp)
             |vpiParent:
             \_Design: (unnamed)
             |vpiName:work@ram_dp
             |vpiModule:
             \_Module: work@ram_dp (work@ram_dp), file:${SURELOG_DIR}/third_party/tests/YosysCam/ram_dp.vh, line:32:1, endln:94:10
+          |vpiTypespec:
+          \_BitTypespec: 
+            |vpiParent:
+            \_Begin: (work@cam_bram.slice), line:130:77, endln:157:8
           |vpiTypespec:
           \_LogicTypespec: , line:133:9, endln:133:13
             |vpiParent:
@@ -1408,6 +1567,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_bram.slice), line:133:25, endln:133:26
+                    |vpiParent:
+                    \_Constant: , line:133:25, endln:133:26
+                    |vpiFullName:work@cam_bram.slice
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiRightRange:
               \_Constant: , line:133:27, endln:133:28
@@ -1416,7 +1582,18 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram.slice), line:133:27, endln:133:28
+                  |vpiParent:
+                  \_Constant: , line:133:27, endln:133:28
+                  |vpiFullName:work@cam_bram.slice
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
+          |vpiImportTypespec:
+          \_IntTypespec: 
+          |vpiImportTypespec:
+          \_BitTypespec: 
           |vpiImportTypespec:
           \_LogicTypespec: , line:133:9, endln:133:13
           |vpiImportTypespec:
@@ -1482,6 +1659,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram.slice.ram_inst.a_we), line:143:19, endln:143:23
+                  |vpiParent:
+                  \_Constant: , line:143:19, endln:143:23
+                  |vpiFullName:work@cam_bram.slice.ram_inst.a_we
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
             |vpiPort:
             \_Port: (a_addr), line:144:14, endln:144:20
@@ -1558,6 +1742,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b0
                     |vpiSize:1
                     |BIN:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram.slice.ram_inst.a_din), line:145:31, endln:145:35
+                      |vpiParent:
+                      \_Constant: , line:145:31, endln:145:35
+                      |vpiFullName:work@cam_bram.slice.ram_inst.a_din
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
             |vpiPort:
             \_Port: (a_dout), line:146:14, endln:146:20
@@ -1743,8 +1934,14 @@ Design: (unnamed)
                       |vpiActual:
                       \_Variable: (work@cam_bram.slice_ind), line:130:10, endln:130:19
             |vpiAlwaysType:1
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@cam_bram), line:130:5, endln:157:8
         |vpiImportTypespec:
         \_Variable: (work@cam_bram.slice_ind), line:130:10, endln:130:19
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:130:10, endln:130:23
           |vpiParent:
@@ -1756,6 +1953,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram), line:130:22, endln:130:23
+              |vpiParent:
+              \_Constant: , line:130:22, endln:130:23
+              |vpiFullName:work@cam_bram
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@cam_bram.slice_ind), line:130:10, endln:130:19
@@ -1805,6 +2009,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_bram), line:130:74, endln:130:75
+                |vpiParent:
+                \_Constant: , line:130:74, endln:130:75
+                |vpiFullName:work@cam_bram
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@cam_bram.slice_ind), line:130:50, endln:130:59
@@ -1821,6 +2032,10 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@cam_bram), line:130:5, endln:157:8
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_bram (work@cam_bram), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram.vh, line:32:1, endln:257:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:62:12, endln:62:17
     |vpiParent:
     \_Module: work@cam_bram (work@cam_bram), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram.vh, line:32:1, endln:257:10
@@ -1835,6 +2050,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:62:13, endln:62:14
+          |vpiParent:
+          \_Constant: , line:62:13, endln:62:14
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:62:15, endln:62:16
@@ -1843,8 +2065,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:62:15, endln:62:16
+          |vpiParent:
+          \_Constant: , line:62:15, endln:62:16
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiPacked:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_bram (work@cam_bram), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram.vh, line:32:1, endln:257:10
+    |vpiSigned:1
   |vpiTypespec:
   \_ModuleTypespec: (work@priority_encoder)
     |vpiParent:
@@ -1884,6 +2118,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:44:29, endln:44:30
+            |vpiParent:
+            \_Constant: , line:44:29, endln:44:30
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:44:31, endln:44:32
@@ -1892,6 +2133,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:44:31, endln:44:32
+          |vpiParent:
+          \_Constant: , line:44:31, endln:44:32
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:45:12, endln:45:16
@@ -1921,6 +2169,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:45:29, endln:45:30
+            |vpiParent:
+            \_Constant: , line:45:29, endln:45:30
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:45:31, endln:45:32
@@ -1929,6 +2184,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:45:31, endln:45:32
+          |vpiParent:
+          \_Constant: , line:45:31, endln:45:32
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:51:12, endln:51:16
@@ -1955,6 +2217,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram), line:51:18, endln:51:19
+              |vpiParent:
+              \_Constant: , line:51:18, endln:51:19
+              |vpiFullName:work@cam_bram
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@cam_bram.ADDR_WIDTH), line:51:21, endln:51:31
@@ -1971,6 +2240,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:51:32, endln:51:33
+            |vpiParent:
+            \_Constant: , line:51:32, endln:51:33
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:51:34, endln:51:35
@@ -1979,6 +2255,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:51:34, endln:51:35
+          |vpiParent:
+          \_Constant: , line:51:34, endln:51:35
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:70:1, endln:70:4
@@ -1995,6 +2278,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:70:6, endln:70:7
+          |vpiParent:
+          \_Constant: , line:70:6, endln:70:7
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:70:8, endln:70:9
@@ -2003,6 +2293,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:70:8, endln:70:9
+          |vpiParent:
+          \_Constant: , line:70:8, endln:70:9
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:72:1, endln:72:5
@@ -2045,6 +2342,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:72:31, endln:72:32
+            |vpiParent:
+            \_Constant: , line:72:31, endln:72:32
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:72:33, endln:72:34
@@ -2053,6 +2357,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:72:33, endln:72:34
+          |vpiParent:
+          \_Constant: , line:72:33, endln:72:34
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:75:1, endln:75:4
@@ -2082,6 +2393,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:75:18, endln:75:19
+            |vpiParent:
+            \_Constant: , line:75:18, endln:75:19
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:75:20, endln:75:21
@@ -2090,7 +2408,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:75:20, endln:75:21
+          |vpiParent:
+          \_Constant: , line:75:20, endln:75:21
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@cam_bram (work@cam_bram), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram.vh, line:32:1, endln:257:10
   |vpiTypespec:
   \_LogicTypespec: , line:78:1, endln:78:4
     |vpiParent:
@@ -2119,6 +2448,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:78:16, endln:78:17
+            |vpiParent:
+            \_Constant: , line:78:16, endln:78:17
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:78:18, endln:78:19
@@ -2127,6 +2463,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:78:18, endln:78:19
+          |vpiParent:
+          \_Constant: , line:78:18, endln:78:19
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_ArrayTypespec: , line:90:34, endln:90:51
@@ -2157,6 +2500,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:90:47, endln:90:48
+            |vpiParent:
+            \_Constant: , line:90:47, endln:90:48
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:90:49, endln:90:50
@@ -2165,6 +2515,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:90:49, endln:90:50
+          |vpiParent:
+          \_Constant: , line:90:49, endln:90:50
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@cam_bram), line:90:1, endln:90:20
@@ -2202,6 +2559,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram), line:95:43, endln:95:44
+            |vpiParent:
+            \_Constant: , line:95:43, endln:95:44
+            |vpiFullName:work@cam_bram
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:95:45, endln:95:46
@@ -2210,6 +2574,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram), line:95:45, endln:95:46
+          |vpiParent:
+          \_Constant: , line:95:45, endln:95:46
+          |vpiFullName:work@cam_bram
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@cam_bram), line:95:1, endln:95:21
@@ -2224,7 +2595,11 @@ Design: (unnamed)
     \_Module: work@cam_bram (work@cam_bram), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram.vh, line:32:1, endln:257:10
     |vpiSigned:1
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_ArrayTypespec: , line:62:12, endln:62:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@cam_bram.slice_ind), line:128:8, endln:128:17
   |vpiImportTypespec:
@@ -2465,6 +2840,8 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:75:1, endln:75:4
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@cam_bram.count_reg), line:75:23, endln:75:32
     |vpiParent:
@@ -2999,6 +3376,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (work@cam_bram), line:102:5, endln:104:8
           |vpiFullName:work@cam_bram
+          |vpiTypespec:
+          \_BitTypespec: 
+            |vpiParent:
+            \_Begin: (work@cam_bram), line:102:43, endln:104:8
+          |vpiImportTypespec:
+          \_BitTypespec: 
           |vpiStmt:
           \_Assignment: , line:103:9, endln:103:55
             |vpiParent:
@@ -3043,6 +3426,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_bram), line:103:49, endln:103:53
+                    |vpiParent:
+                    \_Constant: , line:103:49, endln:103:53
+                    |vpiFullName:work@cam_bram
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
             |vpiLhs:
             \_BitSelect: (work@cam_bram.erase_ram), line:103:18, endln:103:21
@@ -3071,6 +3461,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram), line:102:14, endln:102:15
+              |vpiParent:
+              \_Constant: , line:102:14, endln:102:15
+              |vpiFullName:work@cam_bram
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@cam_bram.i), line:102:10, endln:102:11
@@ -3106,6 +3503,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_bram), line:102:40, endln:102:41
+                |vpiParent:
+                \_Constant: , line:102:40, endln:102:41
+                |vpiFullName:work@cam_bram
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@cam_bram.i), line:102:32, endln:102:33
@@ -3138,6 +3542,12 @@ Design: (unnamed)
             \_Parameter: (work@cam_bram.RAM_DEPTH), line:60:12, endln:60:37
         |vpiStmt:
         \_Begin: (work@cam_bram), line:102:43, endln:104:8
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@cam_bram), line:101:9, endln:105:4
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ForStmt: (work@cam_bram), line:102:5, endln:104:8
   |vpiProcess:
@@ -3217,6 +3627,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_bram), line:111:14, endln:111:15
+                |vpiParent:
+                \_Constant: , line:111:14, endln:111:15
+                |vpiFullName:work@cam_bram
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@cam_bram.k), line:111:10, endln:111:11
@@ -3252,6 +3669,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram), line:111:42, endln:111:43
+                  |vpiParent:
+                  \_Constant: , line:111:42, endln:111:43
+                  |vpiFullName:work@cam_bram
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@cam_bram.k), line:111:34, endln:111:35
@@ -3284,6 +3708,18 @@ Design: (unnamed)
               \_Parameter: (work@cam_bram.SLICE_COUNT), line:58:12, endln:58:70
           |vpiStmt:
           \_Begin: (work@cam_bram), line:111:45, endln:113:8
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_bram), line:109:11, endln:114:4
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_bram), line:109:11, endln:114:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_Assignment: , line:110:5, endln:110:39
           |vpiParent:
@@ -3315,6 +3751,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b1
                 |vpiSize:1
                 |BIN:1
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram), line:110:33, endln:110:37
+                  |vpiParent:
+                  \_Constant: , line:110:33, endln:110:37
+                  |vpiFullName:work@cam_bram
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_bram.match_many_raw), line:110:5, endln:110:19
@@ -3463,6 +3906,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:170:8, endln:170:10
         |vpiFullName:work@cam_bram
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_bram), line:170:11, endln:239:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:171:5, endln:171:28
           |vpiParent:
@@ -3560,6 +4009,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram), line:175:26, endln:175:30
+                  |vpiParent:
+                  \_Constant: , line:175:26, endln:175:30
+                  |vpiFullName:work@cam_bram
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_bram.set_bit), line:175:5, endln:175:12
@@ -3600,6 +4056,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram), line:176:28, endln:176:32
+                  |vpiParent:
+                  \_Constant: , line:176:28, endln:176:32
+                  |vpiFullName:work@cam_bram
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_bram.clear_bit), line:176:5, endln:176:14
@@ -3622,6 +4085,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram), line:177:13, endln:177:17
+              |vpiParent:
+              \_Constant: , line:177:13, endln:177:17
+              |vpiFullName:work@cam_bram
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_bram.wr_en), line:177:5, endln:177:10
@@ -3644,6 +4114,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram), line:179:23, endln:179:27
+              |vpiParent:
+              \_Constant: , line:179:23, endln:179:27
+              |vpiFullName:work@cam_bram
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_bram.erase_ram_wr_en), line:179:5, endln:179:20
@@ -3749,6 +4226,18 @@ Design: (unnamed)
               |vpiParent:
               \_CaseItem: , line:186:9, endln:199:12
               |vpiFullName:work@cam_bram
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_bram), line:186:21, endln:199:12
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_bram), line:186:21, endln:199:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:188:13, endln:188:115
                 |vpiParent:
@@ -3842,6 +4331,13 @@ Design: (unnamed)
                           |vpiDecompile:1'b0
                           |vpiSize:1
                           |BIN:0
+                          |vpiTypespec:
+                          \_RefTypespec: (work@cam_bram), line:188:88, endln:188:92
+                            |vpiParent:
+                            \_Constant: , line:188:88, endln:188:92
+                            |vpiFullName:work@cam_bram
+                            |vpiActual:
+                            \_BitTypespec: 
                           |vpiConstType:3
                     |vpiOperand:
                     \_Operation: , line:188:96, endln:188:114
@@ -3868,6 +4364,13 @@ Design: (unnamed)
                           |vpiDecompile:1'b1
                           |vpiSize:1
                           |BIN:1
+                          |vpiTypespec:
+                          \_RefTypespec: (work@cam_bram), line:188:108, endln:188:112
+                            |vpiParent:
+                            \_Constant: , line:188:108, endln:188:112
+                            |vpiFullName:work@cam_bram
+                            |vpiActual:
+                            \_BitTypespec: 
                           |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.ram_addr), line:188:13, endln:188:21
@@ -3908,6 +4411,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b0
                       |vpiSize:1
                       |BIN:0
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_bram), line:189:34, endln:189:38
+                        |vpiParent:
+                        \_Constant: , line:189:34, endln:189:38
+                        |vpiFullName:work@cam_bram
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.set_bit), line:189:13, endln:189:20
@@ -3948,6 +4458,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_bram), line:190:36, endln:190:40
+                        |vpiParent:
+                        \_Constant: , line:190:36, endln:190:40
+                        |vpiFullName:work@cam_bram
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.clear_bit), line:190:13, endln:190:22
@@ -3970,6 +4487,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_bram), line:191:21, endln:191:25
+                    |vpiParent:
+                    \_Constant: , line:191:21, endln:191:25
+                    |vpiFullName:work@cam_bram
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.wr_en), line:191:13, endln:191:18
@@ -4003,6 +4527,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram), line:193:30, endln:193:31
+                      |vpiParent:
+                      \_Constant: , line:193:30, endln:193:31
+                      |vpiFullName:work@cam_bram
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiStmt:
                 \_Begin: (work@cam_bram), line:193:33, endln:195:16
@@ -4036,6 +4567,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:193:13, endln:198:16
                   |vpiFullName:work@cam_bram
+                  |vpiTypespec:
+                  \_IntTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_bram), line:195:22, endln:198:16
+                  |vpiImportTypespec:
+                  \_IntTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:196:17, endln:196:43
                     |vpiParent:
@@ -4062,6 +4599,13 @@ Design: (unnamed)
                         |vpiDecompile:1
                         |vpiSize:64
                         |UINT:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@cam_bram), line:196:42, endln:196:43
+                          |vpiParent:
+                          \_Constant: , line:196:42, endln:196:43
+                          |vpiFullName:work@cam_bram
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                     |vpiLhs:
                     \_RefObj: (work@cam_bram.count_next), line:196:17, endln:196:27
@@ -4298,6 +4842,12 @@ Design: (unnamed)
               |vpiParent:
               \_CaseItem: , line:217:9, endln:227:12
               |vpiFullName:work@cam_bram
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_bram), line:217:25, endln:227:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
               |vpiStmt:
               \_Assignment: , line:219:13, endln:219:43
                 |vpiParent:
@@ -4316,6 +4866,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram), line:219:25, endln:219:29
+                      |vpiParent:
+                      \_Constant: , line:219:25, endln:219:29
+                      |vpiFullName:work@cam_bram
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiOperand:
                   \_RefObj: (work@cam_bram.write_addr), line:219:33, endln:219:43
@@ -4346,6 +4903,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_bram), line:220:21, endln:220:25
+                    |vpiParent:
+                    \_Constant: , line:220:21, endln:220:25
+                    |vpiFullName:work@cam_bram
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.wr_en), line:220:13, endln:220:18
@@ -4399,6 +4963,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:221:13, endln:226:16
                   |vpiFullName:work@cam_bram
+                  |vpiTypespec:
+                  \_BitTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_bram), line:223:22, endln:226:16
+                  |vpiImportTypespec:
+                  \_BitTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:224:17, endln:224:39
                     |vpiParent:
@@ -4412,6 +4982,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_bram), line:224:35, endln:224:39
+                        |vpiParent:
+                        \_Constant: , line:224:35, endln:224:39
+                        |vpiFullName:work@cam_bram
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@cam_bram.erase_ram_wr_en), line:224:17, endln:224:32
@@ -4499,6 +5076,12 @@ Design: (unnamed)
               |vpiParent:
               \_CaseItem: , line:232:9, endln:237:12
               |vpiFullName:work@cam_bram
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_bram), line:232:24, endln:237:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
               |vpiStmt:
               \_Assignment: , line:234:13, endln:234:41
                 |vpiParent:
@@ -4517,6 +5100,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram), line:234:23, endln:234:27
+                      |vpiParent:
+                      \_Constant: , line:234:23, endln:234:27
+                      |vpiFullName:work@cam_bram
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiOperand:
                   \_RefObj: (work@cam_bram.write_addr), line:234:31, endln:234:41
@@ -4547,6 +5137,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_bram), line:235:21, endln:235:25
+                    |vpiParent:
+                    \_Constant: , line:235:21, endln:235:25
+                    |vpiFullName:work@cam_bram
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_bram.wr_en), line:235:13, endln:235:18
@@ -4622,6 +5219,12 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:242:5, endln:250:8
             |vpiFullName:work@cam_bram
+            |vpiTypespec:
+            \_BitTypespec: 
+              |vpiParent:
+              \_Begin: (work@cam_bram), line:242:14, endln:246:8
+            |vpiImportTypespec:
+            \_BitTypespec: 
             |vpiStmt:
             \_Assignment: , line:243:9, endln:243:32
               |vpiParent:
@@ -4673,6 +5276,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_bram), line:244:35, endln:244:39
+                      |vpiParent:
+                      \_Constant: , line:244:35, endln:244:39
+                      |vpiFullName:work@cam_bram
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@cam_bram.count_reg), line:244:9, endln:244:18
@@ -4694,6 +5304,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b1
                 |vpiSize:1
                 |BIN:1
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_bram), line:245:27, endln:245:31
+                  |vpiParent:
+                  \_Constant: , line:245:27, endln:245:31
+                  |vpiFullName:work@cam_bram
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@cam_bram.write_busy_reg), line:245:9, endln:245:23
@@ -4996,6 +5613,13 @@ Design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram_top), line:34:28, endln:34:30
+        |vpiParent:
+        \_Constant: , line:34:28, endln:34:30
+        |vpiFullName:work@cam_bram_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram_top.DATA_WIDTH), line:34:15, endln:34:30
@@ -5010,6 +5634,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram_top), line:36:28, endln:36:29
+        |vpiParent:
+        \_Constant: , line:36:28, endln:36:29
+        |vpiFullName:work@cam_bram_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram_top.ADDR_WIDTH), line:36:15, endln:36:29
@@ -5024,6 +5655,13 @@ Design: (unnamed)
       |vpiDecompile:"BRAM"
       |vpiSize:32
       |STRING:BRAM
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram_top), line:38:27, endln:38:33
+        |vpiParent:
+        \_Constant: , line:38:27, endln:38:33
+        |vpiFullName:work@cam_bram_top
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@cam_bram_top.CAM_STYLE), line:38:15, endln:38:33
@@ -5038,6 +5676,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_bram_top), line:40:29, endln:40:30
+        |vpiParent:
+        \_Constant: , line:40:29, endln:40:30
+        |vpiFullName:work@cam_bram_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_bram_top.SLICE_WIDTH), line:40:15, endln:40:30
@@ -5408,6 +6053,12 @@ Design: (unnamed)
                 |vpiFullName:work@cam_bram_top.cam_inst.match.match
                 |vpiActual:
                 \_Net: (work@cam_bram_top.match), line:56:37, endln:56:42
+        |vpiTypespec:
+        \_StringTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_bram_top), line:80:14, endln:100:8
+        |vpiImportTypespec:
+        \_StringTypespec: 
         |vpiStmt:
         \_GenIf: , line:80:14, endln:100:8
           |vpiParent:
@@ -5432,9 +6083,22 @@ Design: (unnamed)
               |vpiDecompile:"BRAM"
               |vpiSize:32
               |STRING:BRAM
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_bram_top), line:80:31, endln:80:37
+                |vpiParent:
+                \_Constant: , line:80:31, endln:80:37
+                |vpiFullName:work@cam_bram_top
+                |vpiActual:
+                \_StringTypespec: 
               |vpiConstType:6
           |vpiStmt:
           \_Begin: (work@cam_bram_top), line:80:39, endln:100:8
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@cam_bram_top), line:60:5, endln:100:8
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_GenIfElse: , line:60:5, endln:100:8
         |vpiParent:
@@ -5459,6 +6123,13 @@ Design: (unnamed)
             |vpiDecompile:"SRL"
             |vpiSize:24
             |STRING:SRL
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram_top), line:60:22, endln:60:27
+              |vpiParent:
+              \_Constant: , line:60:22, endln:60:27
+              |vpiFullName:work@cam_bram_top
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
         |vpiStmt:
         \_Begin: (work@cam_bram_top), line:60:29, endln:80:8
@@ -5466,6 +6137,14 @@ Design: (unnamed)
         \_Begin: (work@cam_bram_top), line:80:14, endln:100:8
     |vpiStmt:
     \_Begin: (work@cam_bram_top), line:60:5, endln:100:8
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_bram_top (work@cam_bram_top), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram_top.v, line:32:1, endln:103:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@cam_bram_top (work@cam_bram_top), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_bram_top.v, line:32:1, endln:103:10
   |vpiTypespec:
   \_LogicTypespec: , line:43:12, endln:43:16
     |vpiParent:
@@ -5498,6 +6177,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram_top), line:46:29, endln:46:30
+            |vpiParent:
+            \_Constant: , line:46:29, endln:46:30
+            |vpiFullName:work@cam_bram_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:46:31, endln:46:32
@@ -5506,6 +6192,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram_top), line:46:31, endln:46:32
+          |vpiParent:
+          \_Constant: , line:46:31, endln:46:32
+          |vpiFullName:work@cam_bram_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:47:12, endln:47:16
@@ -5535,6 +6228,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram_top), line:47:29, endln:47:30
+            |vpiParent:
+            \_Constant: , line:47:29, endln:47:30
+            |vpiFullName:work@cam_bram_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:47:31, endln:47:32
@@ -5543,6 +6243,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram_top), line:47:31, endln:47:32
+          |vpiParent:
+          \_Constant: , line:47:31, endln:47:32
+          |vpiFullName:work@cam_bram_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:53:12, endln:53:16
@@ -5569,6 +6276,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_bram_top), line:53:18, endln:53:19
+              |vpiParent:
+              \_Constant: , line:53:18, endln:53:19
+              |vpiFullName:work@cam_bram_top
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@cam_bram_top.ADDR_WIDTH), line:53:21, endln:53:31
@@ -5585,6 +6299,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_bram_top), line:53:32, endln:53:33
+            |vpiParent:
+            \_Constant: , line:53:32, endln:53:33
+            |vpiFullName:work@cam_bram_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:53:34, endln:53:35
@@ -5593,7 +6314,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_bram_top), line:53:34, endln:53:35
+          |vpiParent:
+          \_Constant: , line:53:34, endln:53:35
+          |vpiFullName:work@cam_bram_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:43:12, endln:43:16
   |vpiImportTypespec:
@@ -6078,6 +6810,13 @@ Design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:34:28, endln:34:30
+        |vpiParent:
+        \_Constant: , line:34:28, endln:34:30
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl.DATA_WIDTH), line:34:15, endln:34:30
@@ -6092,6 +6831,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:36:28, endln:36:29
+        |vpiParent:
+        \_Constant: , line:36:28, endln:36:29
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl.ADDR_WIDTH), line:36:15, endln:36:29
@@ -6106,6 +6852,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:38:29, endln:38:30
+        |vpiParent:
+        \_Constant: , line:38:29, endln:38:30
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl.SLICE_WIDTH), line:38:15, endln:38:30
@@ -6151,6 +6904,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:58:54, endln:58:55
+            |vpiParent:
+            \_Constant: , line:58:54, endln:58:55
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@cam_srl.SLICE_WIDTH), line:58:59, endln:58:70
@@ -6178,6 +6938,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:60:24, endln:60:25
+          |vpiParent:
+          \_Constant: , line:60:24, endln:60:25
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@cam_srl.ADDR_WIDTH), line:60:27, endln:60:37
@@ -6200,6 +6967,13 @@ Design: (unnamed)
       |vpiDecompile:2'd0
       |vpiSize:2
       |DEC:0
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:63:18, endln:63:22
+        |vpiParent:
+        \_Constant: , line:63:18, endln:63:22
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_srl.STATE_INIT), line:63:5, endln:63:22
@@ -6214,6 +6988,13 @@ Design: (unnamed)
       |vpiDecompile:2'd1
       |vpiSize:2
       |DEC:1
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:64:18, endln:64:22
+        |vpiParent:
+        \_Constant: , line:64:18, endln:64:22
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_srl.STATE_IDLE), line:64:5, endln:64:22
@@ -6228,6 +7009,13 @@ Design: (unnamed)
       |vpiDecompile:2'd2
       |vpiSize:2
       |DEC:2
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:65:19, endln:65:23
+        |vpiParent:
+        \_Constant: , line:65:19, endln:65:23
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_srl.STATE_WRITE), line:65:5, endln:65:23
@@ -6242,6 +7030,13 @@ Design: (unnamed)
       |vpiDecompile:2'd3
       |vpiSize:2
       |DEC:3
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl), line:66:20, endln:66:24
+        |vpiParent:
+        \_Constant: , line:66:20, endln:66:24
+        |vpiFullName:work@cam_srl
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@cam_srl.STATE_DELETE), line:66:5, endln:66:24
@@ -6322,6 +7117,13 @@ Design: (unnamed)
                         |vpiDecompile:2
                         |vpiSize:64
                         |UINT:2
+                        |vpiTypespec:
+                        \_RefTypespec: (work@cam_srl.row.slice), line:118:18, endln:118:19
+                          |vpiParent:
+                          \_Constant: , line:118:18, endln:118:19
+                          |vpiFullName:work@cam_srl.row.slice
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                       |vpiOperand:
                       \_RefObj: (work@cam_srl.row.slice.SLICE_WIDTH), line:118:21, endln:118:32
@@ -6338,6 +7140,13 @@ Design: (unnamed)
                       |vpiDecompile:1
                       |vpiSize:64
                       |UINT:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl.row.slice), line:118:33, endln:118:34
+                        |vpiParent:
+                        \_Constant: , line:118:33, endln:118:34
+                        |vpiFullName:work@cam_srl.row.slice
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:9
                   |vpiRightRange:
                   \_Constant: , line:118:35, endln:118:36
@@ -6346,9 +7155,26 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl.row.slice), line:118:35, endln:118:36
+                      |vpiParent:
+                      \_Constant: , line:118:35, endln:118:36
+                      |vpiFullName:work@cam_srl.row.slice
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl.row.slice), line:117:81, endln:131:12
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl.row.slice), line:117:81, endln:131:12
               |vpiImportTypespec:
               \_LogicTypespec: , line:118:13, endln:118:16
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiImportTypespec:
               \_Net: (work@cam_srl.row.slice.srl_mem), line:118:38, endln:118:45
                 |vpiParent:
@@ -6362,6 +7188,8 @@ Design: (unnamed)
                   \_LogicTypespec: , line:118:13, endln:118:16
                 |vpiName:srl_mem
                 |vpiFullName:work@cam_srl.row.slice.srl_mem
+              |vpiImportTypespec:
+              \_BitTypespec: 
               |vpiStmt:
               \_Assignment: , line:118:38, endln:118:70
                 |vpiParent:
@@ -6385,6 +7213,13 @@ Design: (unnamed)
                       |vpiDecompile:2
                       |vpiSize:64
                       |UINT:2
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl.row.slice), line:118:49, endln:118:50
+                        |vpiParent:
+                        \_Constant: , line:118:49, endln:118:50
+                        |vpiFullName:work@cam_srl.row.slice
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:9
                     |vpiOperand:
                     \_RefObj: (work@cam_srl.row.slice.SLICE_WIDTH), line:118:52, endln:118:63
@@ -6406,6 +7241,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b0
                       |vpiSize:1
                       |BIN:0
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl.row.slice), line:118:64, endln:118:68
+                        |vpiParent:
+                        \_Constant: , line:118:64, endln:118:68
+                        |vpiFullName:work@cam_srl.row.slice
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_Net: (work@cam_srl.row.slice.srl_mem), line:118:38, endln:118:45
@@ -6552,6 +7394,12 @@ Design: (unnamed)
                         |vpiParent:
                         \_IfStmt: , line:127:17, endln:129:20
                         |vpiFullName:work@cam_srl.row.slice
+                        |vpiTypespec:
+                        \_IntTypespec: 
+                          |vpiParent:
+                          \_Begin: (work@cam_srl.row.slice), line:127:40, endln:129:20
+                        |vpiImportTypespec:
+                        \_IntTypespec: 
                         |vpiStmt:
                         \_Assignment: , line:128:21, endln:128:84
                           |vpiParent:
@@ -6589,6 +7437,13 @@ Design: (unnamed)
                                     |vpiDecompile:2
                                     |vpiSize:64
                                     |UINT:2
+                                    |vpiTypespec:
+                                    \_RefTypespec: (work@cam_srl.row.slice.srl_mem), line:128:41, endln:128:42
+                                      |vpiParent:
+                                      \_Constant: , line:128:41, endln:128:42
+                                      |vpiFullName:work@cam_srl.row.slice.srl_mem
+                                      |vpiActual:
+                                      \_IntTypespec: 
                                     |vpiConstType:9
                                   |vpiOperand:
                                   \_RefObj: (work@cam_srl.row.slice.srl_mem.SLICE_WIDTH), line:128:44, endln:128:55
@@ -6605,6 +7460,13 @@ Design: (unnamed)
                                   |vpiDecompile:2
                                   |vpiSize:64
                                   |UINT:2
+                                  |vpiTypespec:
+                                  \_RefTypespec: (work@cam_srl.row.slice.srl_mem), line:128:56, endln:128:57
+                                    |vpiParent:
+                                    \_Constant: , line:128:56, endln:128:57
+                                    |vpiFullName:work@cam_srl.row.slice.srl_mem
+                                    |vpiActual:
+                                    \_IntTypespec: 
                                   |vpiConstType:9
                               |vpiRightRange:
                               \_Constant: , line:128:58, endln:128:59
@@ -6613,6 +7475,13 @@ Design: (unnamed)
                                 |vpiDecompile:0
                                 |vpiSize:64
                                 |UINT:0
+                                |vpiTypespec:
+                                \_RefTypespec: (work@cam_srl.row.slice.srl_mem), line:128:58, endln:128:59
+                                  |vpiParent:
+                                  \_Constant: , line:128:58, endln:128:59
+                                  |vpiFullName:work@cam_srl.row.slice.srl_mem
+                                  |vpiActual:
+                                  \_IntTypespec: 
                                 |vpiConstType:9
                             |vpiOperand:
                             \_BitSelect: (work@cam_srl.row.slice.shift_data), line:128:72, endln:128:83
@@ -6639,8 +7508,14 @@ Design: (unnamed)
                             |vpiActual:
                             \_Net: (work@cam_srl.row.slice.srl_mem), line:118:38, endln:118:45
                 |vpiAlwaysType:1
+            |vpiTypespec:
+            \_IntTypespec: 
+              |vpiParent:
+              \_GenFor: (work@cam_srl.row), line:117:9, endln:131:12
             |vpiImportTypespec:
             \_Variable: (work@cam_srl.row.slice_ind), line:117:14, endln:117:23
+            |vpiImportTypespec:
+            \_IntTypespec: 
             |vpiForInitStmt:
             \_Assignment: , line:117:14, endln:117:27
               |vpiParent:
@@ -6652,6 +7527,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_srl.row), line:117:26, endln:117:27
+                  |vpiParent:
+                  \_Constant: , line:117:26, endln:117:27
+                  |vpiFullName:work@cam_srl.row
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiLhs:
               \_Variable: (work@cam_srl.row.slice_ind), line:117:14, endln:117:23
@@ -6701,6 +7583,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@cam_srl.row), line:117:78, endln:117:79
+                    |vpiParent:
+                    \_Constant: , line:117:78, endln:117:79
+                    |vpiFullName:work@cam_srl.row
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@cam_srl.row.slice_ind), line:117:54, endln:117:63
@@ -6714,8 +7603,14 @@ Design: (unnamed)
             \_Begin: (work@cam_srl.row.slice), line:117:81, endln:131:12
           |vpiStmt:
           \_GenFor: (work@cam_srl.row), line:117:9, endln:131:12
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@cam_srl), line:116:5, endln:132:8
         |vpiImportTypespec:
         \_Variable: (work@cam_srl.row_ind), line:116:10, endln:116:17
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:116:10, endln:116:21
           |vpiParent:
@@ -6727,6 +7622,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_srl), line:116:20, endln:116:21
+              |vpiParent:
+              \_Constant: , line:116:20, endln:116:21
+              |vpiFullName:work@cam_srl
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@cam_srl.row_ind), line:116:10, endln:116:17
@@ -6776,6 +7678,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_srl), line:116:64, endln:116:65
+                |vpiParent:
+                \_Constant: , line:116:64, endln:116:65
+                |vpiFullName:work@cam_srl
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@cam_srl.row_ind), line:116:44, endln:116:51
@@ -6792,6 +7701,10 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@cam_srl), line:116:5, endln:132:8
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_srl (work@cam_srl), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl.vh, line:32:1, endln:223:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:62:12, endln:62:17
     |vpiParent:
     \_Module: work@cam_srl (work@cam_srl), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl.vh, line:32:1, endln:223:10
@@ -6806,6 +7719,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:62:13, endln:62:14
+          |vpiParent:
+          \_Constant: , line:62:13, endln:62:14
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:62:15, endln:62:16
@@ -6814,8 +7734,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:62:15, endln:62:16
+          |vpiParent:
+          \_Constant: , line:62:15, endln:62:16
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiPacked:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_srl (work@cam_srl), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl.vh, line:32:1, endln:223:10
+    |vpiSigned:1
   |vpiTypespec:
   \_ModuleTypespec: (work@priority_encoder)
   |vpiTypespec:
@@ -6850,6 +7782,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:44:29, endln:44:30
+            |vpiParent:
+            \_Constant: , line:44:29, endln:44:30
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:44:31, endln:44:32
@@ -6858,6 +7797,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:44:31, endln:44:32
+          |vpiParent:
+          \_Constant: , line:44:31, endln:44:32
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:45:12, endln:45:16
@@ -6887,6 +7833,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:45:29, endln:45:30
+            |vpiParent:
+            \_Constant: , line:45:29, endln:45:30
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:45:31, endln:45:32
@@ -6895,6 +7848,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:45:31, endln:45:32
+          |vpiParent:
+          \_Constant: , line:45:31, endln:45:32
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:51:12, endln:51:16
@@ -6921,6 +7881,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_srl), line:51:18, endln:51:19
+              |vpiParent:
+              \_Constant: , line:51:18, endln:51:19
+              |vpiFullName:work@cam_srl
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@cam_srl.ADDR_WIDTH), line:51:21, endln:51:31
@@ -6937,6 +7904,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:51:32, endln:51:33
+            |vpiParent:
+            \_Constant: , line:51:32, endln:51:33
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:51:34, endln:51:35
@@ -6945,6 +7919,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:51:34, endln:51:35
+          |vpiParent:
+          \_Constant: , line:51:34, endln:51:35
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:68:1, endln:68:4
@@ -6961,6 +7942,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:68:6, endln:68:7
+          |vpiParent:
+          \_Constant: , line:68:6, endln:68:7
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:68:8, endln:68:9
@@ -6969,6 +7957,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:68:8, endln:68:9
+          |vpiParent:
+          \_Constant: , line:68:8, endln:68:9
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:70:1, endln:70:5
@@ -7011,6 +8006,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:70:31, endln:70:32
+            |vpiParent:
+            \_Constant: , line:70:31, endln:70:32
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:70:33, endln:70:34
@@ -7019,6 +8021,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:70:33, endln:70:34
+          |vpiParent:
+          \_Constant: , line:70:33, endln:70:34
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:73:1, endln:73:4
@@ -7048,6 +8057,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:73:18, endln:73:19
+            |vpiParent:
+            \_Constant: , line:73:18, endln:73:19
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:73:20, endln:73:21
@@ -7056,7 +8072,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:73:20, endln:73:21
+          |vpiParent:
+          \_Constant: , line:73:20, endln:73:21
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@cam_srl (work@cam_srl), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl.vh, line:32:1, endln:223:10
   |vpiTypespec:
   \_LogicTypespec: , line:75:1, endln:75:4
     |vpiParent:
@@ -7085,6 +8112,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:75:18, endln:75:19
+            |vpiParent:
+            \_Constant: , line:75:18, endln:75:19
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:75:20, endln:75:21
@@ -7093,6 +8127,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:75:20, endln:75:21
+          |vpiParent:
+          \_Constant: , line:75:20, endln:75:21
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:76:1, endln:76:4
@@ -7122,6 +8163,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:76:16, endln:76:17
+            |vpiParent:
+            \_Constant: , line:76:16, endln:76:17
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:76:18, endln:76:19
@@ -7130,6 +8178,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:76:18, endln:76:19
+          |vpiParent:
+          \_Constant: , line:76:18, endln:76:19
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_ArrayTypespec: , line:85:34, endln:85:51
@@ -7160,6 +8215,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl), line:85:47, endln:85:48
+            |vpiParent:
+            \_Constant: , line:85:47, endln:85:48
+            |vpiFullName:work@cam_srl
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:85:49, endln:85:50
@@ -7168,6 +8230,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl), line:85:49, endln:85:50
+          |vpiParent:
+          \_Constant: , line:85:49, endln:85:50
+          |vpiFullName:work@cam_srl
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@cam_srl), line:85:1, endln:85:20
@@ -7182,7 +8251,11 @@ Design: (unnamed)
     \_Module: work@cam_srl (work@cam_srl), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl.vh, line:32:1, endln:223:10
     |vpiSigned:1
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_ArrayTypespec: , line:62:12, endln:62:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@cam_srl.row_ind), line:114:8, endln:114:15
   |vpiImportTypespec:
@@ -7425,6 +8498,8 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:73:1, endln:73:4
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@cam_srl.count_reg), line:73:23, endln:73:32
     |vpiParent:
@@ -7921,6 +8996,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_srl), line:95:14, endln:95:15
+                |vpiParent:
+                \_Constant: , line:95:14, endln:95:15
+                |vpiFullName:work@cam_srl
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@cam_srl.k), line:95:10, endln:95:11
@@ -7956,6 +9038,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_srl), line:95:42, endln:95:43
+                  |vpiParent:
+                  \_Constant: , line:95:42, endln:95:43
+                  |vpiFullName:work@cam_srl
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@cam_srl.k), line:95:34, endln:95:35
@@ -7988,6 +9077,12 @@ Design: (unnamed)
               \_Parameter: (work@cam_srl.SLICE_COUNT), line:58:12, endln:58:70
           |vpiStmt:
           \_Begin: (work@cam_srl), line:95:45, endln:97:8
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_srl), line:93:11, endln:98:4
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_Assignment: , line:94:5, endln:94:31
           |vpiParent:
@@ -8079,6 +9174,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:141:8, endln:141:10
         |vpiFullName:work@cam_srl
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_srl), line:141:11, endln:206:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:142:5, endln:142:28
           |vpiParent:
@@ -8154,6 +9255,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_srl), line:145:31, endln:145:35
+                  |vpiParent:
+                  \_Constant: , line:145:31, endln:145:35
+                  |vpiFullName:work@cam_srl
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_srl.shift_data), line:145:5, endln:145:15
@@ -8194,6 +9302,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_srl), line:146:27, endln:146:31
+                  |vpiParent:
+                  \_Constant: , line:146:27, endln:146:31
+                  |vpiFullName:work@cam_srl
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@cam_srl.shift_en), line:146:5, endln:146:13
@@ -8277,6 +9392,18 @@ Design: (unnamed)
               |vpiParent:
               \_CaseItem: , line:152:9, endln:163:12
               |vpiFullName:work@cam_srl
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:152:21, endln:163:12
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:152:21, endln:163:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:154:13, endln:154:41
                 |vpiParent:
@@ -8308,6 +9435,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b1
                       |vpiSize:1
                       |BIN:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl), line:154:35, endln:154:39
+                        |vpiParent:
+                        \_Constant: , line:154:35, endln:154:39
+                        |vpiFullName:work@cam_srl
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_srl.shift_en), line:154:13, endln:154:21
@@ -8348,6 +9482,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b0
                       |vpiSize:1
                       |BIN:0
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl), line:155:39, endln:155:43
+                        |vpiParent:
+                        \_Constant: , line:155:39, endln:155:43
+                        |vpiFullName:work@cam_srl
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_srl.shift_data), line:155:13, endln:155:23
@@ -8381,6 +9522,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:157:30, endln:157:31
+                      |vpiParent:
+                      \_Constant: , line:157:30, endln:157:31
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiStmt:
                 \_Begin: (work@cam_srl), line:157:33, endln:159:16
@@ -8414,6 +9562,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:157:13, endln:162:16
                   |vpiFullName:work@cam_srl
+                  |vpiTypespec:
+                  \_IntTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_srl), line:159:22, endln:162:16
+                  |vpiImportTypespec:
+                  \_IntTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:160:17, endln:160:43
                     |vpiParent:
@@ -8440,6 +9594,13 @@ Design: (unnamed)
                         |vpiDecompile:1
                         |vpiSize:64
                         |UINT:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@cam_srl), line:160:42, endln:160:43
+                          |vpiParent:
+                          \_Constant: , line:160:42, endln:160:43
+                          |vpiFullName:work@cam_srl
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                     |vpiLhs:
                     \_RefObj: (work@cam_srl.count_next), line:160:17, endln:160:27
@@ -8505,6 +9666,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:165:13, endln:176:16
                   |vpiFullName:work@cam_srl
+                  |vpiTypespec:
+                  \_BitTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_srl), line:165:31, endln:174:16
+                  |vpiImportTypespec:
+                  \_BitTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:166:17, endln:166:45
                     |vpiParent:
@@ -8580,6 +9747,13 @@ Design: (unnamed)
                           |vpiDecompile:1'b1
                           |vpiSize:1
                           |BIN:1
+                          |vpiTypespec:
+                          \_RefTypespec: (work@cam_srl), line:168:43, endln:168:47
+                            |vpiParent:
+                            \_Constant: , line:168:43, endln:168:47
+                            |vpiFullName:work@cam_srl
+                            |vpiActual:
+                            \_BitTypespec: 
                           |vpiConstType:3
                     |vpiLhs:
                     \_RefObj: (work@cam_srl.count_next), line:168:17, endln:168:27
@@ -8795,6 +9969,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:182:22, endln:182:23
+                      |vpiParent:
+                      \_Constant: , line:182:22, endln:182:23
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                   |vpiLhs:
                   \_RefObj: (work@cam_srl.i), line:182:18, endln:182:19
@@ -8830,6 +10011,13 @@ Design: (unnamed)
                       |vpiDecompile:1
                       |vpiSize:64
                       |UINT:1
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl), line:182:50, endln:182:51
+                        |vpiParent:
+                        \_Constant: , line:182:50, endln:182:51
+                        |vpiFullName:work@cam_srl
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:9
                   |vpiLhs:
                   \_RefObj: (work@cam_srl.i), line:182:42, endln:182:43
@@ -8862,6 +10050,18 @@ Design: (unnamed)
                     \_Parameter: (work@cam_srl.SLICE_COUNT), line:58:12, endln:58:70
                 |vpiStmt:
                 \_Begin: (work@cam_srl), line:182:53, endln:184:16
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:178:22, endln:192:12
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:178:22, endln:192:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:180:13, endln:180:42
                 |vpiParent:
@@ -8880,6 +10080,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:180:24, endln:180:28
+                      |vpiParent:
+                      \_Constant: , line:180:24, endln:180:28
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiOperand:
                   \_RefObj: (work@cam_srl.write_addr), line:180:32, endln:180:42
@@ -8923,6 +10130,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:186:30, endln:186:31
+                      |vpiParent:
+                      \_Constant: , line:186:30, endln:186:31
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiStmt:
                 \_Begin: (work@cam_srl), line:186:33, endln:188:16
@@ -8956,6 +10170,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:186:13, endln:191:16
                   |vpiFullName:work@cam_srl
+                  |vpiTypespec:
+                  \_IntTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_srl), line:188:22, endln:191:16
+                  |vpiImportTypespec:
+                  \_IntTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:189:17, endln:189:43
                     |vpiParent:
@@ -8982,6 +10202,13 @@ Design: (unnamed)
                         |vpiDecompile:1
                         |vpiSize:64
                         |UINT:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@cam_srl), line:189:42, endln:189:43
+                          |vpiParent:
+                          \_Constant: , line:189:42, endln:189:43
+                          |vpiFullName:work@cam_srl
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                     |vpiLhs:
                     \_RefObj: (work@cam_srl.count_next), line:189:17, endln:189:27
@@ -9030,6 +10257,18 @@ Design: (unnamed)
               |vpiParent:
               \_CaseItem: , line:193:9, endln:204:12
               |vpiFullName:work@cam_srl
+              |vpiTypespec:
+              \_BitTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:193:23, endln:204:12
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@cam_srl), line:193:23, endln:204:12
+              |vpiImportTypespec:
+              \_BitTypespec: 
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:195:13, endln:195:42
                 |vpiParent:
@@ -9048,6 +10287,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:195:24, endln:195:28
+                      |vpiParent:
+                      \_Constant: , line:195:24, endln:195:28
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
                   |vpiOperand:
                   \_RefObj: (work@cam_srl.write_addr), line:195:32, endln:195:42
@@ -9096,6 +10342,13 @@ Design: (unnamed)
                       |vpiDecompile:1'b0
                       |vpiSize:1
                       |BIN:0
+                      |vpiTypespec:
+                      \_RefTypespec: (work@cam_srl), line:196:39, endln:196:43
+                        |vpiParent:
+                        \_Constant: , line:196:39, endln:196:43
+                        |vpiFullName:work@cam_srl
+                        |vpiActual:
+                        \_BitTypespec: 
                       |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (work@cam_srl.shift_data), line:196:13, endln:196:23
@@ -9129,6 +10382,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:198:30, endln:198:31
+                      |vpiParent:
+                      \_Constant: , line:198:30, endln:198:31
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiStmt:
                 \_Begin: (work@cam_srl), line:198:33, endln:200:16
@@ -9162,6 +10422,12 @@ Design: (unnamed)
                   |vpiParent:
                   \_IfElse: , line:198:13, endln:203:16
                   |vpiFullName:work@cam_srl
+                  |vpiTypespec:
+                  \_IntTypespec: 
+                    |vpiParent:
+                    \_Begin: (work@cam_srl), line:200:22, endln:203:16
+                  |vpiImportTypespec:
+                  \_IntTypespec: 
                   |vpiStmt:
                   \_Assignment: , line:201:17, endln:201:43
                     |vpiParent:
@@ -9188,6 +10454,13 @@ Design: (unnamed)
                         |vpiDecompile:1
                         |vpiSize:64
                         |UINT:1
+                        |vpiTypespec:
+                        \_RefTypespec: (work@cam_srl), line:201:42, endln:201:43
+                          |vpiParent:
+                          \_Constant: , line:201:42, endln:201:43
+                          |vpiFullName:work@cam_srl
+                          |vpiActual:
+                          \_IntTypespec: 
                         |vpiConstType:9
                     |vpiLhs:
                     \_RefObj: (work@cam_srl.count_next), line:201:17, endln:201:27
@@ -9263,6 +10536,12 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:209:5, endln:217:8
             |vpiFullName:work@cam_srl
+            |vpiTypespec:
+            \_BitTypespec: 
+              |vpiParent:
+              \_Begin: (work@cam_srl), line:209:14, endln:213:8
+            |vpiImportTypespec:
+            \_BitTypespec: 
             |vpiStmt:
             \_Assignment: , line:210:9, endln:210:32
               |vpiParent:
@@ -9314,6 +10593,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b1
                     |vpiSize:1
                     |BIN:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@cam_srl), line:211:35, endln:211:39
+                      |vpiParent:
+                      \_Constant: , line:211:35, endln:211:39
+                      |vpiFullName:work@cam_srl
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@cam_srl.count_reg), line:211:9, endln:211:18
@@ -9335,6 +10621,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b1
                 |vpiSize:1
                 |BIN:1
+                |vpiTypespec:
+                \_RefTypespec: (work@cam_srl), line:212:27, endln:212:31
+                  |vpiParent:
+                  \_Constant: , line:212:27, endln:212:31
+                  |vpiFullName:work@cam_srl
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (work@cam_srl.write_busy_reg), line:212:9, endln:212:23
@@ -9616,6 +10909,13 @@ Design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl_top), line:34:28, endln:34:30
+        |vpiParent:
+        \_Constant: , line:34:28, endln:34:30
+        |vpiFullName:work@cam_srl_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl_top.DATA_WIDTH), line:34:15, endln:34:30
@@ -9630,6 +10930,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl_top), line:36:28, endln:36:29
+        |vpiParent:
+        \_Constant: , line:36:28, endln:36:29
+        |vpiFullName:work@cam_srl_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl_top.ADDR_WIDTH), line:36:15, endln:36:29
@@ -9644,6 +10951,13 @@ Design: (unnamed)
       |vpiDecompile:"SRL"
       |vpiSize:24
       |STRING:SRL
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl_top), line:38:27, endln:38:32
+        |vpiParent:
+        \_Constant: , line:38:27, endln:38:32
+        |vpiFullName:work@cam_srl_top
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@cam_srl_top.CAM_STYLE), line:38:15, endln:38:32
@@ -9658,6 +10972,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (work@cam_srl_top), line:40:29, endln:40:30
+        |vpiParent:
+        \_Constant: , line:40:29, endln:40:30
+        |vpiFullName:work@cam_srl_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@cam_srl_top.SLICE_WIDTH), line:40:15, endln:40:30
@@ -10018,6 +11339,12 @@ Design: (unnamed)
                 |vpiFullName:work@cam_srl_top.cam_inst.match.match
                 |vpiActual:
                 \_Net: (work@cam_srl_top.match), line:56:37, endln:56:42
+        |vpiTypespec:
+        \_StringTypespec: 
+          |vpiParent:
+          \_Begin: (work@cam_srl_top), line:80:14, endln:100:8
+        |vpiImportTypespec:
+        \_StringTypespec: 
         |vpiStmt:
         \_GenIf: , line:80:14, endln:100:8
           |vpiParent:
@@ -10042,9 +11369,22 @@ Design: (unnamed)
               |vpiDecompile:"BRAM"
               |vpiSize:32
               |STRING:BRAM
+              |vpiTypespec:
+              \_RefTypespec: (work@cam_srl_top), line:80:31, endln:80:37
+                |vpiParent:
+                \_Constant: , line:80:31, endln:80:37
+                |vpiFullName:work@cam_srl_top
+                |vpiActual:
+                \_StringTypespec: 
               |vpiConstType:6
           |vpiStmt:
           \_Begin: (work@cam_srl_top), line:80:39, endln:100:8
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@cam_srl_top), line:60:5, endln:100:8
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_GenIfElse: , line:60:5, endln:100:8
         |vpiParent:
@@ -10069,6 +11409,13 @@ Design: (unnamed)
             |vpiDecompile:"SRL"
             |vpiSize:24
             |STRING:SRL
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_srl_top), line:60:22, endln:60:27
+              |vpiParent:
+              \_Constant: , line:60:22, endln:60:27
+              |vpiFullName:work@cam_srl_top
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
         |vpiStmt:
         \_Begin: (work@cam_srl_top), line:60:29, endln:80:8
@@ -10076,6 +11423,14 @@ Design: (unnamed)
         \_Begin: (work@cam_srl_top), line:80:14, endln:100:8
     |vpiStmt:
     \_Begin: (work@cam_srl_top), line:60:5, endln:100:8
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@cam_srl_top (work@cam_srl_top), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl_top.v, line:32:1, endln:103:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@cam_srl_top (work@cam_srl_top), file:${SURELOG_DIR}/third_party/tests/YosysCam/cam_srl_top.v, line:32:1, endln:103:10
   |vpiTypespec:
   \_LogicTypespec: , line:43:12, endln:43:16
     |vpiParent:
@@ -10108,6 +11463,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl_top), line:46:29, endln:46:30
+            |vpiParent:
+            \_Constant: , line:46:29, endln:46:30
+            |vpiFullName:work@cam_srl_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:46:31, endln:46:32
@@ -10116,6 +11478,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl_top), line:46:31, endln:46:32
+          |vpiParent:
+          \_Constant: , line:46:31, endln:46:32
+          |vpiFullName:work@cam_srl_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:47:12, endln:47:16
@@ -10145,6 +11514,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl_top), line:47:29, endln:47:30
+            |vpiParent:
+            \_Constant: , line:47:29, endln:47:30
+            |vpiFullName:work@cam_srl_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:47:31, endln:47:32
@@ -10153,6 +11529,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl_top), line:47:31, endln:47:32
+          |vpiParent:
+          \_Constant: , line:47:31, endln:47:32
+          |vpiFullName:work@cam_srl_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:53:12, endln:53:16
@@ -10179,6 +11562,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@cam_srl_top), line:53:18, endln:53:19
+              |vpiParent:
+              \_Constant: , line:53:18, endln:53:19
+              |vpiFullName:work@cam_srl_top
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@cam_srl_top.ADDR_WIDTH), line:53:21, endln:53:31
@@ -10195,6 +11585,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@cam_srl_top), line:53:32, endln:53:33
+            |vpiParent:
+            \_Constant: , line:53:32, endln:53:33
+            |vpiFullName:work@cam_srl_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:53:34, endln:53:35
@@ -10203,7 +11600,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@cam_srl_top), line:53:34, endln:53:35
+          |vpiParent:
+          \_Constant: , line:53:34, endln:53:35
+          |vpiFullName:work@cam_srl_top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:43:12, endln:43:16
   |vpiImportTypespec:
@@ -10607,6 +12015,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (work@priority_encoder), line:34:23, endln:34:24
+        |vpiParent:
+        \_Constant: , line:34:23, endln:34:24
+        |vpiFullName:work@priority_encoder
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@priority_encoder.WIDTH), line:34:15, endln:34:24
@@ -10621,6 +12036,13 @@ Design: (unnamed)
       |vpiDecompile:"LOW"
       |vpiSize:24
       |STRING:LOW
+      |vpiTypespec:
+      \_RefTypespec: (work@priority_encoder), line:36:30, endln:36:35
+        |vpiParent:
+        \_Constant: , line:36:30, endln:36:35
+        |vpiFullName:work@priority_encoder
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@priority_encoder.LSB_PRIORITY), line:36:15, endln:36:35
@@ -10640,6 +12062,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@priority_encoder), line:46:16, endln:46:17
+          |vpiParent:
+          \_Constant: , line:46:16, endln:46:17
+          |vpiFullName:work@priority_encoder
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_SysFuncCall: ($clog2), line:46:19, endln:46:32
@@ -10684,6 +12113,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@priority_encoder), line:47:19, endln:47:20
+          |vpiParent:
+          \_Constant: , line:47:19, endln:47:20
+          |vpiFullName:work@priority_encoder
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@priority_encoder.W2), line:47:11, endln:47:20
@@ -10707,6 +12143,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@priority_encoder), line:50:21, endln:58:8
           |vpiFullName:work@priority_encoder
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@priority_encoder), line:53:36, endln:55:12
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ContAssign: , line:54:20, endln:54:55
             |vpiParent:
@@ -10726,6 +12168,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@priority_encoder.input_unencoded), line:54:53, endln:54:54
+                  |vpiParent:
+                  \_Constant: , line:54:53, endln:54:54
+                  |vpiFullName:work@priority_encoder.input_unencoded
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@priority_encoder.output_encoded), line:54:20, endln:54:34
@@ -10740,6 +12189,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@priority_encoder), line:50:21, endln:58:8
           |vpiFullName:work@priority_encoder
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@priority_encoder), line:55:18, endln:57:12
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ContAssign: , line:56:20, endln:56:56
             |vpiParent:
@@ -10764,6 +12219,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder.input_unencoded), line:56:54, endln:56:55
+                    |vpiParent:
+                    \_Constant: , line:56:54, endln:56:55
+                    |vpiFullName:work@priority_encoder.input_unencoded
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@priority_encoder.output_encoded), line:56:20, endln:56:34
@@ -10773,6 +12235,12 @@ Design: (unnamed)
               |vpiFullName:work@priority_encoder.output_encoded
               |vpiActual:
               \_Net: (work@priority_encoder.output_encoded), line:41:37, endln:41:51
+        |vpiTypespec:
+        \_StringTypespec: 
+          |vpiParent:
+          \_Begin: (work@priority_encoder), line:50:21, endln:58:8
+        |vpiImportTypespec:
+        \_StringTypespec: 
         |vpiStmt:
         \_ContAssign: , line:52:16, endln:52:47
           |vpiParent:
@@ -10822,6 +12290,13 @@ Design: (unnamed)
               |vpiDecompile:"LOW"
               |vpiSize:24
               |STRING:LOW
+              |vpiTypespec:
+              \_RefTypespec: (work@priority_encoder), line:53:29, endln:53:34
+                |vpiParent:
+                \_Constant: , line:53:29, endln:53:34
+                |vpiFullName:work@priority_encoder
+                |vpiActual:
+                \_StringTypespec: 
               |vpiConstType:6
           |vpiStmt:
           \_Begin: (work@priority_encoder), line:53:36, endln:55:12
@@ -10837,6 +12312,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@priority_encoder), line:58:14, endln:88:8
           |vpiFullName:work@priority_encoder
+          |vpiTypespec:
+          \_BitTypespec: 
+            |vpiParent:
+            \_Begin: (work@priority_encoder), line:83:36, endln:85:12
+          |vpiImportTypespec:
+          \_BitTypespec: 
           |vpiStmt:
           \_ContAssign: , line:84:20, endln:84:73
             |vpiParent:
@@ -10866,6 +12347,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder), line:84:47, endln:84:51
+                    |vpiParent:
+                    \_Constant: , line:84:47, endln:84:51
+                    |vpiFullName:work@priority_encoder
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiOperand:
                 \_RefObj: (work@priority_encoder.out2), line:84:53, endln:84:57
@@ -10887,6 +12375,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder), line:84:62, endln:84:66
+                    |vpiParent:
+                    \_Constant: , line:84:62, endln:84:66
+                    |vpiFullName:work@priority_encoder
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiOperand:
                 \_RefObj: (work@priority_encoder.out1), line:84:68, endln:84:72
@@ -10909,6 +12404,12 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@priority_encoder), line:58:14, endln:88:8
           |vpiFullName:work@priority_encoder
+          |vpiTypespec:
+          \_BitTypespec: 
+            |vpiParent:
+            \_Begin: (work@priority_encoder), line:85:18, endln:87:12
+          |vpiImportTypespec:
+          \_BitTypespec: 
           |vpiStmt:
           \_ContAssign: , line:86:20, endln:86:73
             |vpiParent:
@@ -10938,6 +12439,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder), line:86:47, endln:86:51
+                    |vpiParent:
+                    \_Constant: , line:86:47, endln:86:51
+                    |vpiFullName:work@priority_encoder
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiOperand:
                 \_RefObj: (work@priority_encoder.out1), line:86:53, endln:86:57
@@ -10959,6 +12467,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b1
                   |vpiSize:1
                   |BIN:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder), line:86:62, endln:86:66
+                    |vpiParent:
+                    \_Constant: , line:86:62, endln:86:66
+                    |vpiFullName:work@priority_encoder
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiOperand:
                 \_RefObj: (work@priority_encoder.out2), line:86:68, endln:86:72
@@ -10978,6 +12493,18 @@ Design: (unnamed)
               \_Net: (work@priority_encoder.output_encoded), line:41:37, endln:41:51
         |vpiTypespec:
         \_ModuleTypespec: (work@priority_encoder)
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@priority_encoder), line:58:14, endln:88:8
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@priority_encoder), line:58:14, endln:88:8
+        |vpiTypespec:
+        \_StringTypespec: 
+          |vpiParent:
+          \_Begin: (work@priority_encoder), line:58:14, endln:88:8
         |vpiTypespec:
         \_LogicTypespec: , line:61:9, endln:61:13
           |vpiParent:
@@ -11015,6 +12542,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@priority_encoder), line:61:26, endln:61:27
+                  |vpiParent:
+                  \_Constant: , line:61:26, endln:61:27
+                  |vpiFullName:work@priority_encoder
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiRightRange:
             \_Constant: , line:61:28, endln:61:29
@@ -11023,11 +12557,24 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@priority_encoder), line:61:28, endln:61:29
+                |vpiParent:
+                \_Constant: , line:61:28, endln:61:29
+                |vpiFullName:work@priority_encoder
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
         |vpiTypespec:
         \_LogicTypespec: , line:62:9, endln:62:13
           |vpiParent:
           \_Begin: (work@priority_encoder), line:58:14, endln:88:8
+        |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
+        \_BitTypespec: 
+        |vpiImportTypespec:
+        \_StringTypespec: 
         |vpiImportTypespec:
         \_LogicTypespec: , line:61:9, endln:61:13
         |vpiImportTypespec:
@@ -11131,6 +12678,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@priority_encoder.priority_encoder_inst1.input_unencoded.input_unencoded), line:68:49, endln:68:50
+                    |vpiParent:
+                    \_Constant: , line:68:49, endln:68:50
+                    |vpiFullName:work@priority_encoder.priority_encoder_inst1.input_unencoded.input_unencoded
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiRightRange:
               \_Constant: , line:68:51, endln:68:52
@@ -11139,6 +12693,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@priority_encoder.priority_encoder_inst1.input_unencoded.input_unencoded), line:68:51, endln:68:52
+                  |vpiParent:
+                  \_Constant: , line:68:51, endln:68:52
+                  |vpiFullName:work@priority_encoder.priority_encoder_inst1.input_unencoded.input_unencoded
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
           |vpiPort:
           \_Port: (output_valid), line:69:14, endln:69:26
@@ -11222,6 +12783,13 @@ Design: (unnamed)
                     |vpiDecompile:1'b0
                     |vpiSize:1
                     |BIN:0
+                    |vpiTypespec:
+                    \_RefTypespec: (work@priority_encoder.priority_encoder_inst2.input_unencoded), line:77:41, endln:77:45
+                      |vpiParent:
+                      \_Constant: , line:77:41, endln:77:45
+                      |vpiFullName:work@priority_encoder.priority_encoder_inst2.input_unencoded
+                      |vpiActual:
+                      \_BitTypespec: 
                     |vpiConstType:3
               |vpiOperand:
               \_PartSelect: input_unencoded (work@priority_encoder.priority_encoder_inst2.input_unencoded.input_unencoded), line:77:49, endln:77:76
@@ -11253,6 +12821,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@priority_encoder.priority_encoder_inst2.input_unencoded.input_unencoded), line:77:71, endln:77:72
+                      |vpiParent:
+                      \_Constant: , line:77:71, endln:77:72
+                      |vpiFullName:work@priority_encoder.priority_encoder_inst2.input_unencoded.input_unencoded
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiRightRange:
                 \_RefObj: (work@priority_encoder.priority_encoder_inst2.input_unencoded.input_unencoded.W2), line:77:73, endln:77:75
@@ -11345,11 +12920,24 @@ Design: (unnamed)
               |vpiDecompile:"LOW"
               |vpiSize:24
               |STRING:LOW
+              |vpiTypespec:
+              \_RefTypespec: (work@priority_encoder), line:83:29, endln:83:34
+                |vpiParent:
+                \_Constant: , line:83:29, endln:83:34
+                |vpiFullName:work@priority_encoder
+                |vpiActual:
+                \_StringTypespec: 
               |vpiConstType:6
           |vpiStmt:
           \_Begin: (work@priority_encoder), line:83:36, endln:85:12
           |vpiElseStmt:
           \_Begin: (work@priority_encoder), line:85:18, endln:87:12
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@priority_encoder), line:50:5, endln:88:8
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_GenIfElse: , line:50:5, endln:88:8
         |vpiParent:
@@ -11374,6 +12962,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@priority_encoder), line:50:18, endln:50:19
+              |vpiParent:
+              \_Constant: , line:50:18, endln:50:19
+              |vpiFullName:work@priority_encoder
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_Begin: (work@priority_encoder), line:50:21, endln:58:8
@@ -11381,6 +12976,14 @@ Design: (unnamed)
         \_Begin: (work@priority_encoder), line:58:14, endln:88:8
     |vpiStmt:
     \_Begin: (work@priority_encoder), line:50:5, endln:88:8
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@priority_encoder (work@priority_encoder), file:${SURELOG_DIR}/third_party/tests/YosysCam/priority_encoder.vh, line:32:1, endln:94:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@priority_encoder (work@priority_encoder), file:${SURELOG_DIR}/third_party/tests/YosysCam/priority_encoder.vh, line:32:1, endln:94:10
   |vpiTypespec:
   \_LogicTypespec: , line:39:12, endln:39:16
     |vpiParent:
@@ -11409,6 +13012,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@priority_encoder), line:39:24, endln:39:25
+            |vpiParent:
+            \_Constant: , line:39:24, endln:39:25
+            |vpiFullName:work@priority_encoder
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:39:26, endln:39:27
@@ -11417,6 +13027,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@priority_encoder), line:39:26, endln:39:27
+          |vpiParent:
+          \_Constant: , line:39:26, endln:39:27
+          |vpiFullName:work@priority_encoder
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:40:12, endln:40:16
@@ -11459,6 +13076,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@priority_encoder), line:41:32, endln:41:33
+            |vpiParent:
+            \_Constant: , line:41:32, endln:41:33
+            |vpiFullName:work@priority_encoder
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:41:34, endln:41:35
@@ -11467,7 +13091,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@priority_encoder), line:41:34, endln:41:35
+          |vpiParent:
+          \_Constant: , line:41:34, endln:41:35
+          |vpiFullName:work@priority_encoder
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:39:12, endln:39:16
   |vpiImportTypespec:
@@ -11607,6 +13242,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@priority_encoder), line:92:27, endln:92:28
+          |vpiParent:
+          \_Constant: , line:92:27, endln:92:28
+          |vpiFullName:work@priority_encoder
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@priority_encoder.output_encoded), line:92:32, endln:92:46
@@ -11658,6 +13300,13 @@ Design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
+      |vpiTypespec:
+      \_RefTypespec: (work@ram_dp), line:34:28, endln:34:30
+        |vpiParent:
+        \_Constant: , line:34:28, endln:34:30
+        |vpiFullName:work@ram_dp
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@ram_dp.DATA_WIDTH), line:34:15, endln:34:30
@@ -11672,9 +13321,20 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
+      |vpiTypespec:
+      \_RefTypespec: (work@ram_dp), line:35:28, endln:35:30
+        |vpiParent:
+        \_Constant: , line:35:28, endln:35:30
+        |vpiFullName:work@ram_dp
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@ram_dp.ADDR_WIDTH), line:35:15, endln:35:30
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@ram_dp (work@ram_dp), file:${SURELOG_DIR}/third_party/tests/YosysCam/ram_dp.vh, line:32:1, endln:94:10
   |vpiTypespec:
   \_LogicTypespec: , line:39:12, endln:39:16
     |vpiParent:
@@ -11707,6 +13367,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@ram_dp), line:41:29, endln:41:30
+            |vpiParent:
+            \_Constant: , line:41:29, endln:41:30
+            |vpiFullName:work@ram_dp
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:41:31, endln:41:32
@@ -11715,6 +13382,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@ram_dp), line:41:31, endln:41:32
+          |vpiParent:
+          \_Constant: , line:41:31, endln:41:32
+          |vpiFullName:work@ram_dp
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:42:12, endln:42:16
@@ -11744,6 +13418,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@ram_dp), line:42:29, endln:42:30
+            |vpiParent:
+            \_Constant: , line:42:29, endln:42:30
+            |vpiFullName:work@ram_dp
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:42:31, endln:42:32
@@ -11752,7 +13433,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@ram_dp), line:42:31, endln:42:32
+          |vpiParent:
+          \_Constant: , line:42:31, endln:42:32
+          |vpiFullName:work@ram_dp
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@ram_dp (work@ram_dp), file:${SURELOG_DIR}/third_party/tests/YosysCam/ram_dp.vh, line:32:1, endln:94:10
   |vpiTypespec:
   \_ArrayTypespec: , line:58:25, endln:58:46
     |vpiParent:
@@ -11779,6 +13471,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@ram_dp), line:58:27, endln:58:28
+              |vpiParent:
+              \_Constant: , line:58:27, endln:58:28
+              |vpiFullName:work@ram_dp
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_RefObj: (work@ram_dp.ADDR_WIDTH), line:58:30, endln:58:40
@@ -11795,6 +13494,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@ram_dp), line:58:42, endln:58:43
+            |vpiParent:
+            \_Constant: , line:58:42, endln:58:43
+            |vpiFullName:work@ram_dp
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:58:44, endln:58:45
@@ -11803,6 +13509,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@ram_dp), line:58:44, endln:58:45
+          |vpiParent:
+          \_Constant: , line:58:44, endln:58:45
+          |vpiFullName:work@ram_dp
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@ram_dp), line:58:1, endln:58:21
@@ -11816,6 +13529,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@ram_dp (work@ram_dp), file:${SURELOG_DIR}/third_party/tests/YosysCam/ram_dp.vh, line:32:1, endln:94:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:39:12, endln:39:16
   |vpiImportTypespec:
@@ -11962,6 +13677,8 @@ Design: (unnamed)
     |vpiName:b_dout
     |vpiFullName:work@ram_dp.b_dout
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@ram_dp.a_dout_reg), line:53:22, endln:53:32
     |vpiParent:
@@ -12224,6 +13941,12 @@ Design: (unnamed)
               |vpiParent:
               \_ForStmt: (work@ram_dp), line:70:9, endln:72:12
               |vpiFullName:work@ram_dp
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@ram_dp), line:70:59, endln:72:12
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:71:13, endln:71:23
                 |vpiParent:
@@ -12237,6 +13960,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@ram_dp), line:71:22, endln:71:23
+                    |vpiParent:
+                    \_Constant: , line:71:22, endln:71:23
+                    |vpiFullName:work@ram_dp
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
                 |vpiLhs:
                 \_BitSelect: (work@ram_dp.mem), line:71:16, endln:71:19
@@ -12300,6 +14030,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@ram_dp), line:70:56, endln:70:57
+                    |vpiParent:
+                    \_Constant: , line:70:56, endln:70:57
+                    |vpiFullName:work@ram_dp
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiLhs:
               \_RefObj: (work@ram_dp.j), line:70:48, endln:70:49
@@ -12347,6 +14084,13 @@ Design: (unnamed)
                     |vpiDecompile:2
                     |vpiSize:64
                     |UINT:2
+                    |vpiTypespec:
+                    \_RefTypespec: (work@ram_dp), line:70:29, endln:70:30
+                      |vpiParent:
+                      \_Constant: , line:70:29, endln:70:30
+                      |vpiFullName:work@ram_dp
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                   |vpiOperand:
                   \_Operation: , line:70:33, endln:70:45
@@ -12368,9 +14112,22 @@ Design: (unnamed)
                       |vpiDecompile:2
                       |vpiSize:64
                       |UINT:2
+                      |vpiTypespec:
+                      \_RefTypespec: (work@ram_dp), line:70:44, endln:70:45
+                        |vpiParent:
+                        \_Constant: , line:70:44, endln:70:45
+                        |vpiFullName:work@ram_dp
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:9
             |vpiStmt:
             \_Begin: (work@ram_dp), line:70:59, endln:72:12
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@ram_dp), line:69:63, endln:73:8
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ForStmt: (work@ram_dp), line:70:9, endln:72:12
         |vpiForInitStmt:
@@ -12384,6 +14141,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@ram_dp), line:69:14, endln:69:15
+              |vpiParent:
+              \_Constant: , line:69:14, endln:69:15
+              |vpiFullName:work@ram_dp
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@ram_dp.i), line:69:10, endln:69:11
@@ -12424,6 +14188,13 @@ Design: (unnamed)
                 |vpiDecompile:2
                 |vpiSize:64
                 |UINT:2
+                |vpiTypespec:
+                \_RefTypespec: (work@ram_dp), line:69:44, endln:69:45
+                  |vpiParent:
+                  \_Constant: , line:69:44, endln:69:45
+                  |vpiFullName:work@ram_dp
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiOperand:
               \_Operation: , line:69:48, endln:69:60
@@ -12445,6 +14216,13 @@ Design: (unnamed)
                   |vpiDecompile:2
                   |vpiSize:64
                   |UINT:2
+                  |vpiTypespec:
+                  \_RefTypespec: (work@ram_dp), line:69:59, endln:69:60
+                    |vpiParent:
+                    \_Constant: , line:69:59, endln:69:60
+                    |vpiFullName:work@ram_dp
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@ram_dp.i), line:69:36, endln:69:37
@@ -12479,6 +14257,13 @@ Design: (unnamed)
               |vpiDecompile:2
               |vpiSize:64
               |UINT:2
+              |vpiTypespec:
+              \_RefTypespec: (work@ram_dp), line:69:21, endln:69:22
+                |vpiParent:
+                \_Constant: , line:69:21, endln:69:22
+                |vpiFullName:work@ram_dp
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@ram_dp.ADDR_WIDTH), line:69:24, endln:69:34
@@ -12490,6 +14275,12 @@ Design: (unnamed)
               \_Parameter: (work@ram_dp.ADDR_WIDTH), line:35:15, endln:35:30
         |vpiStmt:
         \_Begin: (work@ram_dp), line:69:63, endln:73:8
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@ram_dp), line:66:9, endln:74:4
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ForStmt: (work@ram_dp), line:69:5, endln:73:8
   |vpiProcess:

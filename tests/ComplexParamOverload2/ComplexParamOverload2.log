@@ -366,7 +366,7 @@ EnumConst                                              2
 EnumTypespec                                           2
 Identifier                                            12
 ImportTypespec                                         2
-IntTypespec                                            9
+IntTypespec                                           18
 Module                                                 6
 ModuleTypespec                                         5
 Package                                                1
@@ -375,15 +375,16 @@ Parameter                                              5
 Port                                                   4
 RefModule                                              4
 RefObj                                                 4
-RefTypespec                                           17
+RefTypespec                                           28
 SourceFile                                             1
+StringTypespec                                         2
 StructTypespec                                         2
 TypedefTypespec                                        4
 TypespecMember                                         2
 UnsupportedTypespec                                    4
 Variable                                               2
 ------------------------------------------------------------
-Total:                                               106
+Total:                                               128
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexParamOverload2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -428,6 +429,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:1:1, endln:17:24
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:1:1, endln:17:24
   |vpiTypespec:
   \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
     |vpiParent:
@@ -552,6 +557,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:2:17, endln:2:20
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
   |vpiImportTypespec:
   \_TypedefTypespec: (pinmux_pkg::struct1_t), line:8:6, endln:8:15
@@ -602,6 +609,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@almost_top), line:48:36, endln:48:37
+        |vpiParent:
+        \_Constant: , line:48:36, endln:48:37
+        |vpiFullName:work@almost_top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@almost_top.TargetCfg), line:48:24, endln:48:37
@@ -621,7 +635,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@almost_top.pinmux_pkg), line:47:11, endln:47:24
+        |vpiParent:
+        \_Constant: , line:47:11, endln:47:24
+        |vpiFullName:work@almost_top.pinmux_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:46:1, endln:55:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:46:1, endln:55:10
   |vpiTypespec:
   \_ModuleTypespec: (work@prim_pad_attr)
     |vpiParent:
@@ -631,6 +660,10 @@ Design: (unnamed)
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:35:1, endln:44:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:47:11, endln:47:24
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@almost_top
   |vpiRefModule:
   \_RefModule: work@prim_pad_attr (u_prim_pad_attr), line:50:4, endln:50:17
@@ -689,6 +722,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_generic_pad_attr), line:20:37, endln:20:38
+        |vpiParent:
+        \_Constant: , line:20:37, endln:20:38
+        |vpiFullName:work@prim_generic_pad_attr
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_generic_pad_attr.PadTypeInGeneric), line:20:18, endln:20:38
@@ -697,8 +737,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:19:1, endln:22:34
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:19:1, endln:22:34
   |vpiImportTypespec:
   \_IntTypespec: , line:20:14, endln:20:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@prim_generic_pad_attr.o), line:19:41, endln:19:42
   |vpiDefName:work@prim_generic_pad_attr
@@ -770,6 +816,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_pad_attr), line:36:28, endln:36:29
+        |vpiParent:
+        \_Constant: , line:36:28, endln:36:29
+        |vpiFullName:work@prim_pad_attr
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_pad_attr.PadType), line:36:18, endln:36:29
@@ -779,6 +832,10 @@ Design: (unnamed)
     \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:35:1, endln:44:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:35:1, endln:44:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@prim_submodule)
     |vpiParent:
     \_Design: (unnamed)
@@ -787,6 +844,8 @@ Design: (unnamed)
     \_Module: work@prim_submodule (work@prim_submodule), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:24:1, endln:32:10
   |vpiImportTypespec:
   \_IntTypespec: , line:36:14, endln:36:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@prim_pad_attr.o), line:41:10, endln:41:11
     |vpiParent:
@@ -867,6 +926,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_submodule), line:25:28, endln:25:29
+        |vpiParent:
+        \_Constant: , line:25:28, endln:25:29
+        |vpiFullName:work@prim_submodule
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_submodule.PadType), line:25:18, endln:25:29
@@ -876,6 +942,10 @@ Design: (unnamed)
     \_Module: work@prim_submodule (work@prim_submodule), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:24:1, endln:32:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_submodule (work@prim_submodule), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:24:1, endln:32:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@prim_generic_pad_attr)
     |vpiParent:
     \_Design: (unnamed)
@@ -884,6 +954,8 @@ Design: (unnamed)
     \_Module: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:19:1, endln:22:34
   |vpiImportTypespec:
   \_IntTypespec: , line:25:14, endln:25:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@prim_submodule.o), line:24:34, endln:24:35
   |vpiDefName:work@prim_submodule
@@ -956,6 +1028,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:59:36, endln:59:37
+        |vpiParent:
+        \_Constant: , line:59:36, endln:59:37
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.TargetCfg), line:59:24, endln:59:37
@@ -975,7 +1054,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.pinmux_pkg), line:58:11, endln:58:24
+        |vpiParent:
+        \_Constant: , line:58:11, endln:58:24
+        |vpiFullName:work@top.pinmux_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:57:1, endln:66:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:57:1, endln:66:10
   |vpiTypespec:
   \_ModuleTypespec: (work@almost_top)
     |vpiParent:
@@ -985,6 +1079,10 @@ Design: (unnamed)
     \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload2/dut.sv, line:46:1, endln:55:10
   |vpiImportTypespec:
   \_ImportTypespec: (pinmux_pkg), line:58:11, endln:58:24
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@almost_top (u_top), line:61:4, endln:61:14

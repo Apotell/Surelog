@@ -66,17 +66,18 @@ Constant                                               4
 ContAssign                                             1
 Design                                                 1
 Identifier                                             1
-LogicTypespec                                          1
+IntTypespec                                            3
+LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 Range                                                  1
 RefObj                                                 1
-RefTypespec                                            1
+RefTypespec                                            5
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                16
+Total:                                                24
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ShiftX/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -98,6 +99,14 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ShiftX/dut.sv, line:2:1, endln:7:10
     |vpiName:work@top
   |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ShiftX/dut.sv, line:2:1, endln:7:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ShiftX/dut.sv, line:2:1, endln:7:10
+  |vpiTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ShiftX/dut.sv, line:2:1, endln:7:10
@@ -112,6 +121,13 @@ Design: (unnamed)
         |vpiDecompile:63
         |vpiSize:64
         |UINT:63
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:12, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:15, endln:3:16
@@ -120,7 +136,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:15, endln:3:16
+          |vpiParent:
+          \_Constant: , line:3:15, endln:3:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
@@ -156,6 +183,13 @@ Design: (unnamed)
         |vpiDecompile:'X
         |vpiSize:-1
         |BIN:X
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:18, endln:5:20
+          |vpiParent:
+          \_Constant: , line:5:18, endln:5:20
+          |vpiFullName:work@top
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiOperand:
       \_Constant: , line:5:24, endln:5:25
@@ -164,6 +198,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:24, endln:5:25
+          |vpiParent:
+          \_Constant: , line:5:24, endln:5:25
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top.sxc), line:5:12, endln:5:15

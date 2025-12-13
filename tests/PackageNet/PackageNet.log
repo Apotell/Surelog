@@ -125,6 +125,7 @@ Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
 Initial                                                1
+IntTypespec                                            6
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -135,12 +136,13 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                            9
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                37
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -187,6 +189,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (my_package1), line:3:17, endln:3:18
+        |vpiParent:
+        \_Constant: , line:3:17, endln:3:18
+        |vpiFullName:my_package1
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (my_package1::p1), line:3:12, endln:3:18
@@ -201,9 +210,20 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (my_package1), line:4:17, endln:4:18
+        |vpiParent:
+        \_Constant: , line:4:17, endln:4:18
+        |vpiFullName:my_package1
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (my_package1::p2), line:4:12, endln:4:18
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
   |vpiTypespec:
   \_LogicTypespec: , line:6:9, endln:6:14
     |vpiParent:
@@ -219,6 +239,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (my_package1), line:6:16, endln:6:17
+          |vpiParent:
+          \_Constant: , line:6:16, endln:6:17
+          |vpiFullName:my_package1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:18, endln:6:19
@@ -227,6 +254,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (my_package1), line:6:18, endln:6:19
+          |vpiParent:
+          \_Constant: , line:6:18, endln:6:19
+          |vpiFullName:my_package1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
@@ -244,6 +278,8 @@ Design: (unnamed)
       |vpiFullName:my_package1::word
       |vpiActual:
       \_LogicTypespec: , line:6:9, endln:6:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:9, endln:6:14
   |vpiImportTypespec:
@@ -290,9 +326,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@test.my_package1), line:15:8, endln:15:22
+        |vpiParent:
+        \_Constant: , line:15:8, endln:15:22
+        |vpiFullName:work@test.my_package1
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:13:1, endln:21:10
   |vpiImportTypespec:
   \_ImportTypespec: (my_package1), line:15:8, endln:15:22
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@test
   |vpiProcess:
   \_Initial: , line:17:1, endln:19:4

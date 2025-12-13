@@ -209,32 +209,32 @@ EnumTypespec                                           1
 Function                                              11
 IODecl                                                12
 Identifier                                            40
-IntTypespec                                           10
+IntTypespec                                           15
 LogicTypespec                                          2
 MethodFuncCall                                         8
 Package                                                1
 Range                                                  2
 RefObj                                                16
-RefTypespec                                           20
+RefTypespec                                           27
 SourceFile                                             1
-StringTypespec                                         1
+StringTypespec                                         3
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 Variable                                               2
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                               178
+Total:                                               192
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:158, name:a".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Illegal implicit net "id:162, name:b".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Illegal implicit net "id:174, name:a".
-[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Illegal implicit net "id:178, name:b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:172, name:a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Illegal implicit net "id:176, name:b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Illegal implicit net "id:188, name:a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Illegal implicit net "id:192, name:b".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitQueue/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Null Actual: id:158, type:RefObj, name:a.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Null Actual: id:162, type:RefObj, name:b.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Null Actual: id:174, type:RefObj, name:a.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Null Actual: id:178, type:RefObj, name:b.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Null Actual: id:172, type:RefObj, name:a.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Null Actual: id:176, type:RefObj, name:b.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Null Actual: id:188, type:RefObj, name:a.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Null Actual: id:192, type:RefObj, name:b.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -328,8 +328,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -344,6 +350,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -770,8 +783,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -786,6 +805,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -809,8 +835,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -826,6 +858,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -849,8 +888,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -866,6 +911,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -889,8 +941,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -913,6 +971,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1134,6 +1199,10 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@c2::main)
       |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@c2::main)
+      |vpiTypespec:
       \_ArrayTypespec: , line:10:11, endln:10:14
         |vpiParent:
         \_Begin: (work@c2::main)
@@ -1160,6 +1229,8 @@ Design: (unnamed)
           \_ClassTypespec: (work@c1)
       |vpiImportTypespec:
       \_StringTypespec: , line:10:3, endln:10:9
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiImportTypespec:
       \_ArrayTypespec: , line:10:11, endln:10:14
       |vpiImportTypespec:

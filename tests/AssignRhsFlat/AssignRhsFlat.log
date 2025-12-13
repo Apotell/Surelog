@@ -122,18 +122,19 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               4
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
-IntTypespec                                            4
+IntTypespec                                            7
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              3
 RefObj                                                 1
-RefTypespec                                           13
+RefTypespec                                           17
 SourceFile                                             1
 StringTypespec                                         3
 StructTypespec                                         3
@@ -142,7 +143,7 @@ TypedefTypespec                                        1
 TypespecMember                                         7
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                54
+Total:                                                62
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignRhsFlat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -257,6 +258,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
+  |vpiTypespec:
   \_StringTypespec: , line:12:17, endln:12:20
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignRhsFlat/dut.sv, line:1:1, endln:13:10
@@ -270,6 +279,10 @@ Design: (unnamed)
   \_StructTypespec: , line:4:3, endln:7:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:12:17, endln:12:20
   |vpiImportTypespec:
@@ -314,6 +327,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@dut), line:12:24, endln:12:28
+              |vpiParent:
+              \_Constant: , line:12:24, endln:12:28
+              |vpiFullName:work@dut
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiOperand:
           \_Constant: , line:12:30, endln:12:31
@@ -322,6 +342,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@dut), line:12:30, endln:12:31
+              |vpiParent:
+              \_Constant: , line:12:30, endln:12:31
+              |vpiFullName:work@dut
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (work@dut.BC1), line:12:17, endln:12:20
@@ -342,6 +369,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:12:39, endln:12:40
+            |vpiParent:
+            \_Constant: , line:12:39, endln:12:40
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (work@dut), line:12:34, endln:12:37
@@ -370,6 +404,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@dut), line:12:58, endln:12:59
+                |vpiParent:
+                \_Constant: , line:12:58, endln:12:59
+                |vpiFullName:work@dut
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiTypespec:
             \_RefTypespec: (work@dut), line:12:49, endln:12:56

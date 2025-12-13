@@ -152,11 +152,13 @@ ArrayTypespec                                          1
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              2
+BitTypespec                                            1
 Constant                                               5
 ContAssign                                             1
 Design                                                 1
 HierPath                                               3
 Identifier                                             4
+IntTypespec                                            4
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -165,14 +167,14 @@ Package                                                1
 Port                                                   1
 Range                                                  1
 RefObj                                                 5
-RefTypespec                                            6
+RefTypespec                                           11
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                57
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -264,6 +266,10 @@ Design: (unnamed)
         |vpiActual:
         \_ArrayTypespec: , line:7:7, endln:7:22
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
+  |vpiTypespec:
   \_ArrayTypespec: , line:7:7, endln:7:22
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
@@ -278,6 +284,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (my_pkg), line:7:18, endln:7:19
+          |vpiParent:
+          \_Constant: , line:7:18, endln:7:19
+          |vpiFullName:my_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:20, endln:7:21
@@ -286,6 +299,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (my_pkg), line:7:20, endln:7:21
+          |vpiParent:
+          \_Constant: , line:7:20, endln:7:21
+          |vpiFullName:my_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (my_pkg::ast_dif_t), line:7:7, endln:7:16
@@ -307,6 +327,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_StructTypespec: , line:6:12, endln:8:5
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_ArrayTypespec: , line:7:7, endln:7:22
   |vpiDefName:my_pkg
 |vpiAllModules:
@@ -318,6 +340,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiName:work@top
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.o), line:11:19, endln:11:20
     |vpiParent:
@@ -358,6 +386,18 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:13:4, endln:15:7
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:13:16, endln:15:7
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:13:16, endln:15:7
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiStmt:
       \_Assignment: , line:14:7, endln:14:41
         |vpiParent:
@@ -371,6 +411,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:14:37, endln:14:41
+            |vpiParent:
+            \_Constant: , line:14:37, endln:14:41
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_HierPath: (ast_alert_o.alerts_ack[0].p), line:14:18, endln:14:35
@@ -398,6 +445,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@top.ast_alert_o.alerts_ack[0].p.alerts_ack), line:14:30, endln:14:31
+                |vpiParent:
+                \_Constant: , line:14:30, endln:14:31
+                |vpiFullName:work@top.ast_alert_o.alerts_ack[0].p.alerts_ack
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiActual:
           \_RefObj: (alerts_ack[0].p), line:14:35, endln:14:35
@@ -439,6 +493,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.ast_alert_o.alerts_ack[0].p.ast_alert_o.alerts_ack), line:16:38, endln:16:39
+            |vpiParent:
+            \_Constant: , line:16:38, endln:16:39
+            |vpiFullName:work@top.ast_alert_o.alerts_ack[0].p.ast_alert_o.alerts_ack
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_RefObj: (work@top.p), line:16:41, endln:16:42

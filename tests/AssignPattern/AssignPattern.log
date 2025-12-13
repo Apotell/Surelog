@@ -73,16 +73,17 @@ Constant                                               3
 ContAssign                                             2
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            3
 IntegerTypespec                                        1
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              3
 RefObj                                                 2
-RefTypespec                                            1
+RefTypespec                                            4
 SourceFile                                             1
 TaggedPattern                                          1
 ------------------------------------------------------------
-Total:                                                18
+Total:                                                24
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -104,10 +105,16 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
     |vpiName:work@top
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
+  |vpiTypespec:
   \_IntegerTypespec: , line:2:18, endln:2:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
     |INT:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntegerTypespec: , line:2:18, endln:2:19
   |vpiImportTypespec:
@@ -149,6 +156,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:2:20, endln:2:21
+            |vpiParent:
+            \_Constant: , line:2:20, endln:2:21
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (work@top), line:2:18, endln:2:19
@@ -181,6 +195,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:18, endln:3:19
+          |vpiParent:
+          \_Constant: , line:3:18, endln:3:19
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:3:20, endln:3:21
@@ -194,6 +215,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:3:20, endln:3:21
+            |vpiParent:
+            \_Constant: , line:3:20, endln:3:21
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top.uu), line:3:11, endln:3:13

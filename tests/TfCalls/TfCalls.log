@@ -16,10 +16,12 @@ ModuleTypespec                                         1
 Net                                                    2
 Port                                                   2
 RefObj                                                 1
+RefTypespec                                            1
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                15
+Total:                                                17
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TfCalls/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -78,6 +80,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:2:3, endln:4:6
       |vpiFullName:work@m1
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@m1), line:2:11, endln:4:6
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($display), line:3:5, endln:3:24
         |vpiParent:
@@ -89,6 +97,13 @@ Design: (unnamed)
           |vpiDecompile:"%d"
           |vpiSize:16
           |STRING:%d
+          |vpiTypespec:
+          \_RefTypespec: (work@m1), line:3:14, endln:3:18
+            |vpiParent:
+            \_Constant: , line:3:14, endln:3:18
+            |vpiFullName:work@m1
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_RefObj: (work@m1.clk), line:3:20, endln:3:23

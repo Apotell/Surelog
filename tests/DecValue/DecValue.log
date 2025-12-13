@@ -112,6 +112,7 @@ ContAssign                                             1
 Design                                                 1
 Identifier                                             1
 IntTypespec                                            3
+LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
@@ -119,11 +120,11 @@ ParamAssign                                            3
 Parameter                                              3
 Port                                                   1
 RefObj                                                 4
-RefTypespec                                            3
+RefTypespec                                            5
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                28
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DecValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -198,6 +199,13 @@ Design: (unnamed)
       |vpiDecompile:'X
       |vpiSize:-1
       |BIN:X
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:2:18, endln:2:20
+        |vpiParent:
+        \_Constant: , line:2:18, endln:2:20
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.A), line:2:14, endln:2:20
@@ -212,6 +220,13 @@ Design: (unnamed)
       |vpiDecompile:'X
       |vpiSize:-1
       |BIN:X
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:3:18, endln:3:20
+        |vpiParent:
+        \_Constant: , line:3:18, endln:3:20
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.B), line:3:14, endln:3:20
@@ -243,10 +258,16 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.C), line:4:19, endln:4:28
   |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
   \_IntTypespec: , line:4:15, endln:4:18
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DecValue/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:4:15, endln:4:18
   |vpiImportTypespec:

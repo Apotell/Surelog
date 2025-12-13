@@ -524,6 +524,7 @@ there are 6 more instances of this message.
 Always                                                 1
 Assert                                                 4
 Begin                                                  2
+BitTypespec                                            1
 ClockedSeq                                             2
 ClockingBlock                                          1
 Constant                                               4
@@ -533,6 +534,7 @@ EventControl                                           2
 FuncCall                                               2
 Identifier                                             4
 IfElse                                                 1
+IntTypespec                                            3
 LogicTypespec                                         15
 Module                                                 1
 ModuleTypespec                                         1
@@ -544,11 +546,11 @@ PropertyDecl                                           2
 PropertyInst                                           2
 PropertySpec                                           6
 RefObj                                                35
-RefTypespec                                           15
+RefTypespec                                           19
 SequenceInst                                           2
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                               150
+Total:                                               158
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SequenceInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -698,6 +700,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@m.p_multiclock), line:13:13, endln:13:16
+              |vpiParent:
+              \_Constant: , line:13:13, endln:13:16
+              |vpiFullName:work@m.p_multiclock
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_ClockedSeq: , line:13:17, endln:13:24
@@ -751,6 +760,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@m.p_multiclock), line:13:37, endln:13:40
+                |vpiParent:
+                \_Constant: , line:13:37, endln:13:40
+                |vpiFullName:work@m.p_multiclock
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@m.p_multiclock.z), line:13:41, endln:13:42
@@ -877,6 +893,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@m.p_triggers), line:18:58, endln:18:62
+              |vpiParent:
+              \_Constant: , line:18:58, endln:18:62
+              |vpiFullName:work@m.p_triggers
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
         |vpiName:p_triggers
   |vpiConcurrentAssertions:
@@ -1000,13 +1023,25 @@ Design: (unnamed)
           |vpiActual:
           \_Net: (work@m.clk1), line:1:34, endln:1:38
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/SequenceInst/dut.sv, line:1:1, endln:30:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/SequenceInst/dut.sv, line:1:1, endln:30:10
+  |vpiTypespec:
   \_LogicTypespec: , line:1:10, endln:1:15
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/SequenceInst/dut.sv, line:1:1, endln:30:10
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_PropertyInst: (p_triggers), line:16:24, endln:16:43
   |vpiImportTypespec:
   \_SequenceInst: (p_triggers), line:18:24, endln:18:63
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_SequenceInst: (p_multiclock), line:28:23, endln:28:76
   |vpiImportTypespec:

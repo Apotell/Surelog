@@ -65,17 +65,17 @@ Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             3
-IntTypespec                                            2
+IntTypespec                                            4
 Module                                                 2
 Package                                                2
 ParamAssign                                            1
 Parameter                                              1
 RefObj                                                 2
-RefTypespec                                            4
+RefTypespec                                            5
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                27
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -121,6 +121,13 @@ Design: (unnamed)
       |vpiDecompile:24
       |vpiSize:64
       |UINT:24
+      |vpiTypespec:
+      \_RefTypespec: (spi_device_reg_pkg), line:2:40, endln:2:42
+        |vpiParent:
+        \_Constant: , line:2:40, endln:2:42
+        |vpiFullName:spi_device_reg_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
@@ -128,8 +135,14 @@ Design: (unnamed)
   \_IntTypespec: , line:2:14, endln:2:26
     |vpiParent:
     \_Package: spi_device_reg_pkg (spi_device_reg_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: spi_device_reg_pkg (spi_device_reg_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:14, endln:2:26
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:spi_device_reg_pkg
 |vpiAllPackages:
 \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11

@@ -85,10 +85,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv:3:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               3
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            2
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -97,14 +99,14 @@ Operation                                              1
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                            6
+RefTypespec                                            9
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                32
+Total:                                                38
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantNoElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -126,9 +128,15 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
     |vpiName:work@top
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
+  |vpiTypespec:
   \_LogicTypespec: , line:5:12, endln:5:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.out3), line:4:31, endln:4:35
     |vpiParent:
@@ -215,6 +223,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:29, endln:7:31
+          |vpiParent:
+          \_Constant: , line:7:29, endln:7:31
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@top.out4), line:7:10, endln:7:14
@@ -273,6 +288,12 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: , line:2:31, endln:2:32
+        |vpiParent:
+        \_Constant: , line:2:31, endln:2:32
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:2:33, endln:2:34
@@ -281,7 +302,17 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:2:33, endln:2:34
+        |vpiParent:
+        \_Constant: , line:2:33, endln:2:34
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

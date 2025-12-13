@@ -87,12 +87,14 @@ ContAssign                                             3
 Design                                                 1
 GenIfElse                                              1
 Identifier                                             1
+IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         1
 RefObj                                                 6
+RefTypespec                                            1
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                18
+Total:                                                20
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenIfElse/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -225,6 +227,12 @@ Design: (unnamed)
         |vpiFullName:work@top.e
         |vpiActual:
         \_Net: (work@top.e), line:8:12, endln:8:13
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenIfElse/dut.sv, line:2:1, endln:10:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIfElse: , line:3:4, endln:9:7
@@ -237,6 +245,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:3:8, endln:3:9
+        |vpiParent:
+        \_Constant: , line:3:8, endln:3:9
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:3:11, endln:5:7

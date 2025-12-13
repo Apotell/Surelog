@@ -8,6 +8,7 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstPort/dut.sv:8:1: Compile module "work@mix_columns".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            4
 Constant                                               5
 Design                                                 1
 EnumConst                                              2
@@ -22,11 +23,12 @@ Package                                                1
 Port                                                   3
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            6
+RefTypespec                                           11
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                37
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -79,6 +81,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
+  |vpiTypespec:
   \_TypedefTypespec: (aes_pkg::ciph_op_e), line:5:3, endln:5:12
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
@@ -98,6 +104,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:9, endln:5:12
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (aes_pkg::ciph_op_e), line:5:3, endln:5:12
   |vpiDefName:aes_pkg
@@ -126,7 +134,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@cipher_core.aes_pkg), line:16:10, endln:16:20
+        |vpiParent:
+        \_Constant: , line:16:10, endln:16:20
+        |vpiFullName:work@cipher_core.aes_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
   |vpiTypespec:
   \_ModuleTypespec: (work@mix_columns)
     |vpiParent:
@@ -136,6 +155,8 @@ Design: (unnamed)
     \_Module: work@mix_columns (work@mix_columns), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:8:1, endln:11:10
   |vpiImportTypespec:
   \_ImportTypespec: (aes_pkg), line:16:10, endln:16:20
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@cipher_core.op_i), line:14:32, endln:14:36
     |vpiParent:

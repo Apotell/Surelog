@@ -154,6 +154,7 @@ Design                                                 1
 GenIf                                                  1
 HierPath                                               1
 Identifier                                             4
+IntTypespec                                            8
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -162,7 +163,7 @@ Operation                                              1
 Port                                                   1
 Range                                                  3
 RefObj                                                 1
-RefTypespec                                            8
+RefTypespec                                           16
 SourceFile                                             1
 StructTypespec                                         2
 SysFuncCall                                            1
@@ -170,7 +171,7 @@ TypedefTypespec                                        2
 TypespecMember                                         3
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                49
+Total:                                                65
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -196,6 +197,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
     |vpiFullName:work@some_mod
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@some_mod.a), line:10:29, endln:10:30
     |vpiParent:
@@ -266,6 +273,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+                |vpiParent:
+                \_Constant: , line:14:21, endln:14:22
+                |vpiFullName:work@some_mod.a.pair[0].pair
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiName:a.pair[0]
         |vpiName:
@@ -280,6 +294,13 @@ Design: (unnamed)
         |vpiDecompile:42
         |vpiSize:64
         |UINT:42
+        |vpiTypespec:
+        \_RefTypespec: (work@some_mod), line:14:28, endln:14:30
+          |vpiParent:
+          \_Constant: , line:14:28, endln:14:30
+          |vpiFullName:work@some_mod
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@some_mod), line:14:32, endln:16:7
@@ -343,6 +364,12 @@ Design: (unnamed)
       |vpiDecompile:19
       |vpiSize:64
       |UINT:19
+      |vpiTypespec:
+      \_RefTypespec: , line:2:10, endln:2:12
+        |vpiParent:
+        \_Constant: , line:2:10, endln:2:12
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:2:13, endln:2:14
@@ -351,7 +378,17 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:2:13, endln:2:14
+        |vpiParent:
+        \_Constant: , line:2:13, endln:2:14
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTypespec:
 \_LogicTypespec: , line:3:3, endln:3:8
   |vpiParent:
@@ -367,6 +404,12 @@ Design: (unnamed)
       |vpiDecompile:21
       |vpiSize:64
       |UINT:21
+      |vpiTypespec:
+      \_RefTypespec: , line:3:10, endln:3:12
+        |vpiParent:
+        \_Constant: , line:3:10, endln:3:12
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:3:13, endln:3:14
@@ -375,6 +418,12 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:3:13, endln:3:14
+        |vpiParent:
+        \_Constant: , line:3:13, endln:3:14
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
 |vpiTypespec:
 \_TypedefTypespec: (foo_t), line:8:3, endln:8:8
@@ -424,6 +473,12 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: , line:7:17, endln:7:18
+        |vpiParent:
+        \_Constant: , line:7:17, endln:7:18
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:7:19, endln:7:20
@@ -432,6 +487,12 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:7:19, endln:7:20
+        |vpiParent:
+        \_Constant: , line:7:19, endln:7:20
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
   |vpiElemTypespec:
   \_RefTypespec: (fourty_two_t), line:7:3, endln:7:15

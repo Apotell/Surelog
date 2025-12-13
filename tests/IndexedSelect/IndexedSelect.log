@@ -162,16 +162,18 @@ Design                                                 1
 GenRegion                                              1
 Identifier                                             1
 IndexedPartSelect                                      1
+IntTypespec                                            4
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
 ParamAssign                                            3
 Parameter                                              3
 RefObj                                                 1
+RefTypespec                                            4
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexedSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -222,6 +224,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (work@test), line:3:15, endln:3:16
+        |vpiParent:
+        \_Constant: , line:3:15, endln:3:16
+        |vpiFullName:work@test
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@test.FOO), line:3:11, endln:3:16
@@ -254,6 +263,13 @@ Design: (unnamed)
           |vpiDecompile:32'd4
           |vpiSize:32
           |DEC:4
+          |vpiTypespec:
+          \_RefTypespec: (work@test), line:4:25, endln:4:30
+            |vpiParent:
+            \_Constant: , line:4:25, endln:4:30
+            |vpiFullName:work@test
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:1
     |vpiLhs:
     \_Parameter: (work@test.FOO_REPL), line:4:11, endln:4:32
@@ -279,6 +295,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test.FOO_REPL), line:6:28, endln:6:29
+          |vpiParent:
+          \_Constant: , line:6:28, endln:6:29
+          |vpiFullName:work@test.FOO_REPL
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiWidthExpr:
       \_Constant: , line:6:31, endln:6:33
@@ -287,6 +310,13 @@ Design: (unnamed)
         |vpiDecompile:32
         |vpiSize:64
         |UINT:32
+        |vpiTypespec:
+        \_RefTypespec: (work@test.FOO_REPL), line:6:31, endln:6:33
+          |vpiParent:
+          \_Constant: , line:6:31, endln:6:33
+          |vpiFullName:work@test.FOO_REPL
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@test.DEBUG), line:6:11, endln:6:34
@@ -312,6 +342,19 @@ Design: (unnamed)
       \_Variable: (work@test.i), line:10:12, endln:10:13
     |vpiStmt:
     \_Begin: (work@test), line:10:5, endln:10:14
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IndexedSelect/dut.sv, line:1:1, endln:17:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@test
 |vpiTypespec:
 \_ModuleTypespec: (work@test)

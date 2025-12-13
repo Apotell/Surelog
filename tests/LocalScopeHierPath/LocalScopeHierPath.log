@@ -158,12 +158,13 @@ ForeachStmt                                            2
 Function                                               1
 HierPath                                               2
 Identifier                                             5
+IntTypespec                                            1
 Package                                                1
 Range                                                  2
 RefObj                                                 7
-RefTypespec                                           11
+RefTypespec                                           14
 SourceFile                                             1
-StringTypespec                                         2
+StringTypespec                                         3
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
@@ -171,7 +172,7 @@ UnsupportedTypespec                                    3
 Variable                                               6
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                65
+Total:                                                70
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -219,6 +220,10 @@ Design: (unnamed)
       |vpiRandType:1
       |vpiVisibility:1
     |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/LocalScopeHierPath/dut.sv, line:7:1, endln:9:9
+    |vpiTypespec:
     \_ArrayTypespec: , line:8:29, endln:8:31
       |vpiParent:
       \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/LocalScopeHierPath/dut.sv, line:7:1, endln:9:9
@@ -231,6 +236,8 @@ Design: (unnamed)
         |vpiFullName:pack::uvm_hdl_path_concat::uvm_hdl_path_slice
         |vpiActual:
         \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_ArrayTypespec: , line:8:29, endln:8:31
     |vpiImportTypespec:
@@ -471,6 +478,10 @@ Design: (unnamed)
           |vpiStmt:
           \_Begin: (pack::uvm_mem_mam::check_reg), line:16:21, endln:21:6
         |vpiTypespec:
+        \_StringTypespec: 
+          |vpiParent:
+          \_Begin: (pack::uvm_mem_mam::check_reg)
+        |vpiTypespec:
         \_ArrayTypespec: , line:14:28, endln:14:31
           |vpiParent:
           \_Begin: (pack::uvm_mem_mam::check_reg)
@@ -487,6 +498,8 @@ Design: (unnamed)
         \_UnsupportedTypespec: 
           |vpiParent:
           \_Begin: (pack::uvm_mem_mam::check_reg)
+        |vpiImportTypespec:
+        \_StringTypespec: 
         |vpiImportTypespec:
         \_ArrayTypespec: , line:14:28, endln:14:31
         |vpiImportTypespec:

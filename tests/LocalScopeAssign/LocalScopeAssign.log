@@ -79,6 +79,7 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             1
+IntTypespec                                            8
 LogicTypespec                                          4
 Module                                                 1
 ModuleTypespec                                         1
@@ -86,10 +87,10 @@ Net                                                    2
 Port                                                   2
 Range                                                  4
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                           12
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                34
+Total:                                                50
 === UHDM Object Stats End ===
 [ERR:EL0535] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Illegal implicit net "id:10, name:v2".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeAssign/slpp_all/surelog.uhdm ...
@@ -127,6 +128,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@module_scope_Example), line:4:17, endln:4:19
+          |vpiParent:
+          \_Constant: , line:4:17, endln:4:19
+          |vpiFullName:work@module_scope_Example
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:20, endln:4:21
@@ -135,9 +143,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@module_scope_Example), line:4:20, endln:4:21
+          |vpiParent:
+          \_Constant: , line:4:20, endln:4:21
+          |vpiFullName:work@module_scope_Example
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@module_scope_Example.o1), line:3:29, endln:3:31
     |vpiParent:

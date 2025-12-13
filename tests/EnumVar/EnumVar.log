@@ -95,18 +95,19 @@ Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
 Identifier                                             4
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    2
 Package                                                1
 Range                                                  1
-RefTypespec                                            5
+RefTypespec                                            7
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                28
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -177,6 +178,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:2:22, endln:2:23
+          |vpiParent:
+          \_Constant: , line:2:22, endln:2:23
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:24, endln:2:25
@@ -185,7 +193,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:2:24, endln:2:25
+          |vpiParent:
+          \_Constant: , line:2:24, endln:2:25
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
   |vpiTypespec:
   \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
     |vpiParent:
@@ -223,6 +242,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:11, endln:6:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
   |vpiImportTypespec:

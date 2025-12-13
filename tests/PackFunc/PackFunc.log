@@ -147,12 +147,13 @@ Design                                                 1
 Function                                               1
 IODecl                                                 1
 Identifier                                             6
+IntTypespec                                            6
 LogicTypespec                                          3
 Operation                                              2
 Package                                                2
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                            6
+RefTypespec                                           12
 SourceFile                                             1
 StructTypespec                                         1
 SysFuncCall                                            2
@@ -160,7 +161,7 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                45
+Total:                                                57
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -229,6 +230,13 @@ Design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
+        |vpiTypespec:
+        \_RefTypespec: (b), line:3:12, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:14
+          |vpiFullName:b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:15, endln:3:16
@@ -237,13 +245,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (b), line:3:15, endln:3:16
+          |vpiParent:
+          \_Constant: , line:3:15, endln:3:16
+          |vpiFullName:b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: b (b), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
   |vpiImportTypespec:
   \_TypedefTypespec: (b::foo_bar_t), line:4:5, endln:4:14
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:b
 |vpiAllPackages:
 \_Package: aa (aa), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
@@ -328,6 +349,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (aa::foo_bar), line:15:19, endln:15:20
+              |vpiParent:
+              \_Constant: , line:15:19, endln:15:20
+              |vpiFullName:aa::foo_bar
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:15:21, endln:15:22
@@ -336,7 +364,18 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (aa::foo_bar), line:15:21, endln:15:22
+            |vpiParent:
+            \_Constant: , line:15:21, endln:15:22
+            |vpiFullName:aa::foo_bar
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiImportTypespec:
     \_Variable: (aa::foo_bar::y), line:14:18, endln:14:19
       |vpiParent:
@@ -354,6 +393,8 @@ Design: (unnamed)
       |vpiAutomatic:1
     |vpiImportTypespec:
     \_LogicTypespec: , line:15:5, endln:15:8
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_Variable: (aa::foo_bar::a_vec), line:15:24, endln:15:29
       |vpiParent:

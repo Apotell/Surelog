@@ -65,16 +65,18 @@ Constant                                               3
 Design                                                 1
 Identifier                                             2
 Initial                                                1
+IntTypespec                                            3
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              1
 ParamAssign                                            1
 Parameter                                              1
 RefObj                                                 1
+RefTypespec                                            3
 SourceFile                                             1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                15
+Total:                                                21
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MinTypMax/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -117,6 +119,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:22, endln:2:23
+          |vpiParent:
+          \_Constant: , line:2:22, endln:2:23
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:2:24, endln:2:25
@@ -125,6 +134,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:24, endln:2:25
+          |vpiParent:
+          \_Constant: , line:2:24, endln:2:25
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:2:26, endln:2:27
@@ -133,9 +149,22 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:26, endln:2:27
+          |vpiParent:
+          \_Constant: , line:2:26, endln:2:27
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.value), line:2:13, endln:2:28
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MinTypMax/dut.sv, line:1:1, endln:4:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiProcess:
   \_Initial: , line:3:3, endln:3:27

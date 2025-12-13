@@ -185,12 +185,12 @@ AST_DEBUG_END
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              1
-BitTypespec                                            1
+BitTypespec                                            3
 Constant                                               7
 Design                                                 1
 GenFor                                                 1
 Identifier                                             3
-IntTypespec                                            1
+IntTypespec                                            6
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -200,11 +200,11 @@ Parameter                                              4
 Range                                                  1
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                            3
+RefTypespec                                           10
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                61
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -250,6 +250,13 @@ Design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@alert_sender), line:3:27, endln:3:31
+        |vpiParent:
+        \_Constant: , line:3:27, endln:3:31
+        |vpiFullName:work@alert_sender
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:31
@@ -257,8 +264,14 @@ Design: (unnamed)
   \_BitTypespec: , line:3:13, endln:3:16
     |vpiParent:
     \_Module: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
   |vpiImportTypespec:
   \_BitTypespec: , line:3:13, endln:3:16
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@alert_sender
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
@@ -313,6 +326,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:7:45, endln:7:46
+        |vpiParent:
+        \_Constant: , line:7:45, endln:7:46
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
@@ -345,6 +365,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:8:59, endln:8:63
+            |vpiParent:
+            \_Constant: , line:8:59, endln:8:63
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:65
@@ -367,6 +394,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.AlertAsyncOn), line:9:31, endln:9:32
+          |vpiParent:
+          \_Constant: , line:9:31, endln:9:32
+          |vpiFullName:work@dut.AlertAsyncOn
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.res), line:9:11, endln:9:33
@@ -406,8 +440,14 @@ Design: (unnamed)
         |vpiDefName:work@alert_sender
         |vpiActual:
         \_Module: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@dut), line:10:1, endln:14:4
     |vpiImportTypespec:
     \_Variable: (work@dut.i), line:10:13, endln:10:14
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:10:6, endln:10:18
       |vpiParent:
@@ -419,6 +459,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:10:17, endln:10:18
+          |vpiParent:
+          \_Constant: , line:10:17, endln:10:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@dut.i), line:10:13, endln:10:14
@@ -464,6 +511,10 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+  |vpiTypespec:
   \_LogicTypespec: , line:8:11, endln:8:16
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
@@ -491,6 +542,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:8:28, endln:8:29
+            |vpiParent:
+            \_Constant: , line:8:28, endln:8:29
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:8:30, endln:8:31
@@ -499,11 +557,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:8:30, endln:8:31
+          |vpiParent:
+          \_Constant: , line:8:30, endln:8:31
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
   |vpiImportTypespec:
   \_IntTypespec: , line:7:11, endln:7:14
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:8:11, endln:8:16
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@dut
 |vpiTypespec:
 \_ModuleTypespec: (work@alert_sender)

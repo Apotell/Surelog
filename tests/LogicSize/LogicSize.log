@@ -131,6 +131,7 @@ Constant                                               2
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            2
 LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         2
@@ -140,10 +141,10 @@ Parameter                                              2
 Port                                                   3
 RefModule                                              1
 RefObj                                                 3
-RefTypespec                                            6
+RefTypespec                                            8
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                36
+Total:                                                40
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicSize/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -189,6 +190,13 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:2:24, endln:2:25
+        |vpiParent:
+        \_Constant: , line:2:24, endln:2:25
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.P), line:2:20, endln:2:25
@@ -196,8 +204,14 @@ Design: (unnamed)
   \_LogicTypespec: , line:2:14, endln:2:19
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.a), line:1:25, endln:1:26
     |vpiParent:
@@ -282,11 +296,22 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:7:24, endln:7:25
+        |vpiParent:
+        \_Constant: , line:7:24, endln:7:25
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.X), line:7:20, endln:7:25
   |vpiTypespec:
   \_LogicTypespec: , line:7:14, endln:7:19
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:6:1, endln:13:10
   |vpiTypespec:
@@ -298,6 +323,8 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/LogicSize/dut.sv, line:1:1, endln:4:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:14, endln:7:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.o), line:6:25, endln:6:26
     |vpiParent:

@@ -230,7 +230,7 @@ Function                                               9
 IODecl                                                11
 Identifier                                            32
 ImportTypespec                                         1
-IntTypespec                                           11
+IntTypespec                                           25
 LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
@@ -240,15 +240,16 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  3
 RefObj                                                 1
-RefTypespec                                           32
+RefTypespec                                           45
 SourceFile                                             1
+StringTypespec                                         1
 StructTypespec                                         7
 Task                                                   9
 TypedefTypespec                                        2
 TypespecMember                                        12
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                               189
+Total:                                               217
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructVarImp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -344,8 +345,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -360,6 +367,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -786,8 +800,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -802,6 +822,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -825,8 +852,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -842,6 +875,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -865,8 +905,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -882,6 +928,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -905,8 +958,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -929,6 +988,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1105,6 +1171,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (flash_ctrl_reg_pkg), line:4:26, endln:4:27
+        |vpiParent:
+        \_Constant: , line:4:26, endln:4:27
+        |vpiFullName:flash_ctrl_reg_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (flash_ctrl_reg_pkg::NBanks), line:4:17, endln:4:27
@@ -1119,6 +1192,13 @@ Design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
+      |vpiTypespec:
+      \_RefTypespec: (flash_ctrl_reg_pkg), line:5:30, endln:5:31
+        |vpiParent:
+        \_Constant: , line:5:30, endln:5:31
+        |vpiFullName:flash_ctrl_reg_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (flash_ctrl_reg_pkg::NumRegions), line:5:17, endln:5:31
@@ -1127,6 +1207,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiTypespec:
   \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:26:5, endln:26:43
     |vpiParent:
@@ -1324,6 +1408,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_reg_pkg), line:21:14, endln:21:15
+          |vpiParent:
+          \_Constant: , line:21:14, endln:21:15
+          |vpiFullName:flash_ctrl_reg_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:21:16, endln:21:17
@@ -1332,6 +1423,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (flash_ctrl_reg_pkg), line:21:16, endln:21:17
+          |vpiParent:
+          \_Constant: , line:21:16, endln:21:17
+          |vpiFullName:flash_ctrl_reg_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_StructTypespec: , line:23:5, endln:25:6
@@ -1352,6 +1450,8 @@ Design: (unnamed)
         \_LogicTypespec: , line:21:7, endln:21:12
   |vpiImportTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:26:5, endln:26:43
   |vpiImportTypespec:
@@ -1398,7 +1498,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.flash_ctrl_reg_pkg), line:34:10, endln:34:31
+        |vpiParent:
+        \_Constant: , line:34:10, endln:34:31
+        |vpiFullName:work@top.flash_ctrl_reg_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:33:1, endln:38:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:33:1, endln:38:10
   |vpiTypespec:
   \_ArrayTypespec: , line:36:3, endln:36:55
     |vpiParent:
@@ -1422,6 +1537,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:36:53, endln:36:54
+          |vpiParent:
+          \_Constant: , line:36:53, endln:36:54
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:36:3, endln:36:41
@@ -1434,6 +1556,10 @@ Design: (unnamed)
     |vpiPacked:1
   |vpiImportTypespec:
   \_ImportTypespec: (flash_ctrl_reg_pkg), line:34:10, endln:34:31
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:36:3, endln:36:55
   |vpiImportTypespec:

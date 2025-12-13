@@ -271,6 +271,7 @@ Function                                               1
 IODecl                                                 2
 Identifier                                             3
 IfElse                                                 1
+IntTypespec                                           15
 LogicTypespec                                         13
 Module                                                 1
 ModuleTypespec                                         1
@@ -279,10 +280,10 @@ Operation                                              2
 Port                                                   5
 Range                                                  7
 RefObj                                                 9
-RefTypespec                                           13
+RefTypespec                                           28
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                87
+Total:                                               117
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncAttrib/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -304,6 +305,10 @@ Design: (unnamed)
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FuncAttrib/dut.sv, line:9:1, endln:22:10
     |vpiName:work@foo
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FuncAttrib/dut.sv, line:9:1, endln:22:10
+  |vpiTypespec:
   \_LogicTypespec: , line:10:8, endln:10:12
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FuncAttrib/dut.sv, line:9:1, endln:22:10
@@ -322,6 +327,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@foo), line:12:14, endln:12:15
+          |vpiParent:
+          \_Constant: , line:12:14, endln:12:15
+          |vpiFullName:work@foo
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:12:16, endln:12:17
@@ -330,7 +342,16 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@foo), line:12:16, endln:12:17
+          |vpiParent:
+          \_Constant: , line:12:16, endln:12:17
+          |vpiFullName:work@foo
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:8, endln:10:12
   |vpiImportTypespec:
@@ -526,6 +547,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@foo), line:17:19, endln:17:20
+              |vpiParent:
+              \_Constant: , line:17:19, endln:17:20
+              |vpiFullName:work@foo
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@foo.out), line:17:12, endln:17:15
@@ -568,6 +596,13 @@ Design: (unnamed)
                     |vpiDecompile:7
                     |vpiSize:64
                     |UINT:7
+                    |vpiTypespec:
+                    \_RefTypespec: (do_add), line:1:11, endln:1:12
+                      |vpiParent:
+                      \_Constant: , line:1:11, endln:1:12
+                      |vpiFullName:do_add
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                   |vpiRightRange:
                   \_Constant: , line:1:13, endln:1:14
@@ -576,9 +611,22 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (do_add), line:1:13, endln:1:14
+                      |vpiParent:
+                      \_Constant: , line:1:13, endln:1:14
+                      |vpiFullName:do_add
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Function: (do_add), line:1:1, endln:7:12
               |vpiImportTypespec:
               \_LogicTypespec: , line:1:10, endln:1:15
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiMethod:1
               |vpiVisibility:1
               |vpiReturn:

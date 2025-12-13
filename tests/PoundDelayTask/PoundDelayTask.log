@@ -68,12 +68,14 @@ Identifier                                             3
 Initial                                                1
 Module                                                 1
 ModuleTypespec                                         1
+RefTypespec                                            1
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 Task                                                   1
 TaskCall                                               1
 ------------------------------------------------------------
-Total:                                                14
+Total:                                                16
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -104,6 +106,12 @@ Design: (unnamed)
       \_Task: (work@m.t), line:2:5, endln:4:12
       |vpiName:t
     |vpiFullName:work@m.t
+    |vpiTypespec:
+    \_StringTypespec: 
+      |vpiParent:
+      \_Task: (work@m.t), line:2:5, endln:4:12
+    |vpiImportTypespec:
+    \_StringTypespec: 
     |vpiVisibility:1
     |vpiStmt:
     \_SysFuncCall: ($display), line:3:9, endln:3:32
@@ -116,6 +124,13 @@ Design: (unnamed)
         |vpiDecompile:"I'm task t!"
         |vpiSize:88
         |STRING:I'm task t!
+        |vpiTypespec:
+        \_RefTypespec: (work@m.t), line:3:18, endln:3:31
+          |vpiParent:
+          \_Constant: , line:3:18, endln:3:31
+          |vpiFullName:work@m.t
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
       |vpiName:
       \_Identifier: ($display), line:3:10, endln:3:17

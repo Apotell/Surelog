@@ -134,7 +134,7 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             4
-IntTypespec                                            4
+IntTypespec                                            5
 Interface                                              1
 InterfaceTypespec                                      1
 Module                                                 2
@@ -143,12 +143,12 @@ Net                                                    2
 Port                                                   3
 RefModule                                              2
 RefObj                                                 6
-RefTypespec                                            6
+RefTypespec                                            7
 SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                46
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortInterface/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -218,6 +218,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PortInterface/dut.sv, line:8:1, endln:10:10
     |vpiName:work@dut
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PortInterface/dut.sv, line:8:1, endln:10:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.ss_if), line:8:24, endln:8:29
     |vpiParent:
@@ -260,6 +266,13 @@ Design: (unnamed)
       |vpiDecompile:32'h1234
       |vpiSize:32
       |HEX:1234
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:9:30, endln:9:38
+        |vpiParent:
+        \_Constant: , line:9:30, endln:9:38
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_HierPath: (ss_if.start_addr), line:9:16, endln:9:27

@@ -191,6 +191,7 @@ Design                                                 1
 IODecl                                                 3
 Identifier                                             4
 ImmediateAssert                                        3
+IntTypespec                                            2
 LetDecl                                                3
 LetExpr                                                3
 LogicTypespec                                          1
@@ -199,12 +200,12 @@ ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 RefObj                                                 7
-RefTypespec                                            1
+RefTypespec                                            3
 SeqFormalDecl                                          3
 SourceFile                                             1
 SysFuncCall                                            3
 ------------------------------------------------------------
-Total:                                                41
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LetExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -226,9 +227,15 @@ Design: (unnamed)
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
     |vpiName:work@m
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+  |vpiTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
@@ -309,6 +316,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@m.p2), line:6:21, endln:6:21
+          |vpiParent:
+          \_Constant: , line:6:21, endln:6:21
+          |vpiFullName:work@m.p2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:7
       |vpiArgument:
       \_Constant: , line:6:22, endln:6:22
@@ -317,6 +331,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@m.p2), line:6:22, endln:6:22
+          |vpiParent:
+          \_Constant: , line:6:22, endln:6:22
+          |vpiFullName:work@m.p2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:7
       |vpiArgument:
       \_Operation: , line:6:25, endln:6:38

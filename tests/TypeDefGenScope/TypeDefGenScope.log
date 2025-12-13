@@ -105,18 +105,19 @@ Constant                                               1
 Design                                                 1
 GenIf                                                  1
 Identifier                                             5
+IntTypespec                                            1
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
-RefTypespec                                            7
+RefTypespec                                            8
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        3
 TypespecMember                                         3
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                35
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefGenScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -273,6 +274,12 @@ Design: (unnamed)
         \_TypedefTypespec: (bp_bedrock_mem_fwd_header_s), line:16:7, endln:16:34
       |vpiName:mem_fwd_header_cast_i
       |vpiFullName:work@dut.m.mem_fwd_header_cast_i
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@dut
   |vpiGenStmt:
   \_GenIf: , line:3:4, endln:21:7
@@ -285,6 +292,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:3:8, endln:3:9
+        |vpiParent:
+        \_Constant: , line:3:8, endln:3:9
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut.m), line:3:11, endln:21:7

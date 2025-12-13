@@ -146,11 +146,13 @@ AST_DEBUG_END
 Always                                                 1
 Assignment                                             3
 Begin                                                  1
+BitTypespec                                            1
 Constant                                               7
 Design                                                 1
 EventControl                                           1
 ForStmt                                                1
 Identifier                                             1
+IntTypespec                                            6
 IntegerTypespec                                        1
 LogicTypespec                                          4
 Module                                                 1
@@ -160,10 +162,10 @@ Operation                                              2
 Port                                                   2
 Range                                                  2
 RefObj                                                 6
-RefTypespec                                            5
+RefTypespec                                           12
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                44
+Total:                                                58
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnboundForLoop/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -199,6 +201,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@signed_shifter), line:2:15, endln:2:16
+          |vpiParent:
+          \_Constant: , line:2:15, endln:2:16
+          |vpiFullName:work@signed_shifter
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:17, endln:2:18
@@ -207,7 +216,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@signed_shifter), line:2:17, endln:2:18
+          |vpiParent:
+          \_Constant: , line:2:17, endln:2:18
+          |vpiFullName:work@signed_shifter
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
   |vpiTypespec:
   \_LogicTypespec: , line:3:10, endln:3:20
     |vpiParent:
@@ -220,6 +240,8 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:9, endln:2:13
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@signed_shifter.i), line:2:20, endln:2:21
     |vpiParent:
@@ -327,6 +349,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@signed_shifter), line:6:11, endln:6:12
+                |vpiParent:
+                \_Constant: , line:6:11, endln:6:12
+                |vpiFullName:work@signed_shifter
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@signed_shifter.j), line:6:9, endln:6:10
@@ -362,6 +391,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@signed_shifter), line:6:21, endln:6:22
+                  |vpiParent:
+                  \_Constant: , line:6:21, endln:6:22
+                  |vpiFullName:work@signed_shifter
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@signed_shifter.j), line:6:17, endln:6:18
@@ -405,6 +441,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@signed_shifter), line:6:28, endln:6:32
+                |vpiParent:
+                \_Constant: , line:6:28, endln:6:32
+                |vpiFullName:work@signed_shifter
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (work@signed_shifter.Q), line:6:24, endln:6:25
@@ -414,6 +457,18 @@ Design: (unnamed)
               |vpiFullName:work@signed_shifter.Q
               |vpiActual:
               \_Net: (work@signed_shifter.Q), line:3:27, endln:3:28
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@signed_shifter), line:5:14, endln:7:6
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@signed_shifter), line:5:14, endln:7:6
+        |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_ForStmt: (work@signed_shifter), line:6:5, endln:6:33
     |vpiAlwaysType:1

@@ -350,7 +350,7 @@ FuncCall                                               2
 Function                                               2
 IODecl                                                 2
 Identifier                                             8
-IntTypespec                                            2
+IntTypespec                                           15
 LogicTypespec                                          4
 MethodFuncCall                                         3
 Module                                                 1
@@ -359,17 +359,17 @@ Net                                                    3
 Operation                                              8
 Range                                                  4
 RefObj                                                12
-RefTypespec                                            9
+RefTypespec                                           22
 SourceFile                                             1
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                85
+Total:                                               111
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CrossFunc/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/CrossFunc/dut.sv:9:12: Unsupported Typespec: id:11, type:RefTypespec, name:CrossQueueType.
-[ERR:IG0811] ${SURELOG_DIR}/tests/CrossFunc/dut.sv:17:12: Unsupported Typespec: id:35, type:RefTypespec, name:CrossQueueType.
-[ERR:IG0811] ${SURELOG_DIR}/tests/CrossFunc/dut.sv:24:2: Unsupported Typespec: id:85, type:RefTypespec, name:cg.
+[ERR:IG0811] ${SURELOG_DIR}/tests/CrossFunc/dut.sv:17:12: Unsupported Typespec: id:37, type:RefTypespec, name:CrossQueueType.
+[ERR:IG0811] ${SURELOG_DIR}/tests/CrossFunc/dut.sv:24:2: Unsupported Typespec: id:111, type:RefTypespec, name:cg.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -427,6 +427,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@mod_m.myFunc1), line:10:17, endln:10:18
+            |vpiParent:
+            \_Constant: , line:10:17, endln:10:18
+            |vpiFullName:work@mod_m.myFunc1
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Variable: (work@mod_m.myFunc1.i), line:10:13, endln:10:14
@@ -506,12 +513,18 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
       |vpiSigned:1
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
     |vpiImportTypespec:
     \_UnsupportedTypespec: (CrossQueueType), line:9:12, endln:9:26
     |vpiImportTypespec:
     \_IntTypespec: , line:9:35, endln:9:38
     |vpiImportTypespec:
     \_Variable: (work@mod_m.myFunc1.i), line:10:13, endln:10:14
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@mod_m.myFunc1.CrossQueueType), line:9:12, endln:9:26
@@ -575,6 +588,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@mod_m.myFunc2), line:18:26, endln:18:27
+            |vpiParent:
+            \_Constant: , line:18:26, endln:18:27
+            |vpiFullName:work@mod_m.myFunc2
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Variable: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
@@ -635,6 +655,13 @@ Design: (unnamed)
               |vpiDecompile:2
               |vpiSize:64
               |UINT:2
+              |vpiTypespec:
+              \_RefTypespec: (work@mod_m.myFunc2), line:19:24, endln:19:25
+                |vpiParent:
+                \_Constant: , line:19:24, endln:19:25
+                |vpiFullName:work@mod_m.myFunc2
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@mod_m.myFunc2.i), line:19:26, endln:19:27
@@ -656,6 +683,13 @@ Design: (unnamed)
               |vpiDecompile:2
               |vpiSize:64
               |UINT:2
+              |vpiTypespec:
+              \_RefTypespec: (work@mod_m.myFunc2), line:19:28, endln:19:29
+                |vpiParent:
+                \_Constant: , line:19:28, endln:19:29
+                |vpiFullName:work@mod_m.myFunc2
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@mod_m.myFunc2.i), line:19:30, endln:19:31
@@ -690,6 +724,13 @@ Design: (unnamed)
           |vpiDecompile:31
           |vpiSize:64
           |UINT:31
+          |vpiTypespec:
+          \_RefTypespec: (work@mod_m.myFunc2), line:17:42, endln:17:44
+            |vpiParent:
+            \_Constant: , line:17:42, endln:17:44
+            |vpiFullName:work@mod_m.myFunc2
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:17:45, endln:17:46
@@ -698,11 +739,24 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@mod_m.myFunc2), line:17:45, endln:17:46
+            |vpiParent:
+            \_Constant: , line:17:45, endln:17:46
+            |vpiFullName:work@mod_m.myFunc2
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
     |vpiImportTypespec:
     \_UnsupportedTypespec: (CrossQueueType), line:17:12, endln:17:26
     |vpiImportTypespec:
     \_LogicTypespec: , line:17:35, endln:17:40
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_Variable: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
     |vpiVisibility:1
@@ -744,6 +798,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@mod_m), line:2:9, endln:2:11
+          |vpiParent:
+          \_Constant: , line:2:9, endln:2:11
+          |vpiFullName:work@mod_m
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:12, endln:2:13
@@ -752,7 +813,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@mod_m), line:2:12, endln:2:13
+          |vpiParent:
+          \_Constant: , line:2:12, endln:2:13
+          |vpiFullName:work@mod_m
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
   |vpiTypespec:
   \_UnsupportedTypespec: (cg), line:24:2, endln:24:4
     |vpiParent:
@@ -764,6 +836,8 @@ Design: (unnamed)
   \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:2, endln:2:7
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@mod_m.a), line:2:15, endln:2:16
     |vpiParent:
@@ -830,6 +904,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (work@mod_m), line:24:19, endln:24:20
+        |vpiParent:
+        \_Constant: , line:24:19, endln:24:20
+        |vpiFullName:work@mod_m
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiName:
     \_Identifier: (new)

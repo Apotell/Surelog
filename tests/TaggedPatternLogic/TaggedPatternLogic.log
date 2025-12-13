@@ -110,9 +110,11 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            3
 Constant                                               5
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            2
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -120,7 +122,7 @@ Operation                                              2
 ParamAssign                                            1
 Parameter                                              1
 Range                                                  1
-RefTypespec                                            9
+RefTypespec                                           14
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         1
@@ -129,7 +131,7 @@ TypedefTypespec                                        1
 TypespecMember                                         3
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                42
+Total:                                                52
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedPatternLogic/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -193,6 +195,13 @@ Design: (unnamed)
               |vpiDecompile:'1
               |vpiSize:-1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@top), line:9:22, endln:9:24
+                |vpiParent:
+                \_Constant: , line:9:22, endln:9:24
+                |vpiFullName:work@top
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiTypespec:
             \_RefTypespec: (work@top), line:9:13, endln:9:20
@@ -220,6 +229,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:10:10, endln:10:14
+            |vpiParent:
+            \_Constant: , line:10:10, endln:10:14
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@top.sel), line:10:5, endln:10:8
@@ -240,6 +256,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:11:9, endln:11:13
+            |vpiParent:
+            \_Constant: , line:11:9, endln:11:13
+            |vpiFullName:work@top
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@top.rd), line:11:5, endln:11:7
@@ -323,6 +346,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:12, endln:3:13
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:13
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:14, endln:3:15
@@ -331,9 +361,24 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:14, endln:3:15
+          |vpiParent:
+          \_Constant: , line:3:14, endln:3:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
+  |vpiTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
+  |vpiTypespec:
+  \_BitTypespec: 
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
   |vpiTypespec:
@@ -347,7 +392,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:9:13, endln:9:20
   |vpiDefName:work@top

@@ -105,6 +105,7 @@ Design                                                 1
 ExpectStmt                                             1
 Identifier                                             1
 Initial                                                1
+IntTypespec                                            1
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -112,10 +113,10 @@ Net                                                    3
 Operation                                              2
 PropertySpec                                           1
 RefObj                                                 3
-RefTypespec                                            3
+RefTypespec                                            4
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                26
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExpectStmt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -200,6 +201,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:7:1, endln:9:4
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:7:9, endln:9:4
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ExpectStmt: , line:8:5, endln:8:37
         |vpiParent:
@@ -241,6 +248,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@top), line:8:30, endln:8:33
+                |vpiParent:
+                \_Constant: , line:8:30, endln:8:33
+                |vpiFullName:work@top
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@top.b), line:8:34, endln:8:35

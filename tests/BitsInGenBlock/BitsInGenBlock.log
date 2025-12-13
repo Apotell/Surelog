@@ -147,7 +147,7 @@ Design                                                 1
 GenIf                                                  2
 GenRegion                                              1
 Identifier                                             3
-IntTypespec                                            1
+IntTypespec                                            3
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         2
@@ -158,12 +158,12 @@ Parameter                                              1
 Port                                                   3
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                            7
+RefTypespec                                            9
 SourceFile                                             1
 SysFuncCall                                            1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                51
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsInGenBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -302,6 +302,12 @@ Design: (unnamed)
             |vpiDefName:work@GOOD
             |vpiActual:
             \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/BitsInGenBlock/dut.sv, line:1:1, endln:3:10
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@ibex_top), line:15:10, endln:28:4
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_ParamAssign: , line:17:20, endln:22:7
         |vpiStmt:
@@ -328,6 +334,13 @@ Design: (unnamed)
               |vpiDecompile:10
               |vpiSize:64
               |UINT:10
+              |vpiTypespec:
+              \_RefTypespec: (work@ibex_top), line:24:24, endln:24:26
+                |vpiParent:
+                \_Constant: , line:24:24, endln:24:26
+                |vpiFullName:work@ibex_top
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiStmt:
           \_Begin: (work@ibex_top), line:24:28, endln:26:6
@@ -342,11 +355,22 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@ibex_top), line:15:7, endln:15:8
+            |vpiParent:
+            \_Constant: , line:15:7, endln:15:8
+            |vpiFullName:work@ibex_top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiStmt:
         \_Begin: (work@ibex_top), line:15:10, endln:28:4
     |vpiStmt:
     \_Begin: (work@ibex_top), line:15:3, endln:28:4
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@ibex_top (work@ibex_top), file:${SURELOG_DIR}/tests/BitsInGenBlock/dut.sv, line:5:1, endln:31:10
   |vpiTypespec:
   \_IntTypespec: , line:17:16, endln:17:19
     |vpiParent:
@@ -361,6 +385,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@ibex_top (work@ibex_top), file:${SURELOG_DIR}/tests/BitsInGenBlock/dut.sv, line:5:1, endln:31:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:17:16, endln:17:19
   |vpiImportTypespec:

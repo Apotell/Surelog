@@ -48,6 +48,7 @@ ArrayTypespec                                          1
 Assignment                                            15
 Begin                                                  5
 BitSelect                                             10
+BitTypespec                                            9
 ClassDefn                                              8
 ClassTypespec                                          8
 Constant                                              53
@@ -65,7 +66,7 @@ IfElse                                                 4
 IfStmt                                                 1
 ImportTypespec                                         2
 Initial                                                4
-IntTypespec                                           15
+IntTypespec                                           50
 LogicTypespec                                         16
 Module                                                 6
 ModuleArray                                            2
@@ -77,16 +78,17 @@ ParamAssign                                            6
 Parameter                                              6
 Port                                                  12
 Range                                                  7
-RealTypespec                                           5
+RealTypespec                                          12
 RefObj                                                32
-RefTypespec                                           46
+RefTypespec                                           99
 SourceFile                                             6
+StringTypespec                                         2
 Task                                                   9
 TypedefTypespec                                        2
 UnsupportedTypespec                                    5
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               393
+Total:                                               499
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LibraryIntercon/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -207,8 +209,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -223,6 +231,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -649,8 +664,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -665,6 +686,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -688,8 +716,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -705,6 +739,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -728,8 +769,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -745,6 +792,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -768,8 +822,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -792,6 +852,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -989,6 +1056,13 @@ Design: (unnamed)
       |vpiDecompile:0.65
       |vpiSize:64
       |REAL:0.650000
+      |vpiTypespec:
+      \_RefTypespec: (logicLib@cmp), line:2:36, endln:2:40
+        |vpiParent:
+        \_Constant: , line:2:36, endln:2:40
+        |vpiFullName:logicLib@cmp
+        |vpiActual:
+        \_RealTypespec: 
       |vpiConstType:2
     |vpiLhs:
     \_Parameter: (logicLib@cmp.hyst), line:2:29, endln:2:40
@@ -997,11 +1071,23 @@ Design: (unnamed)
     |vpiParent:
     \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
   |vpiTypespec:
+  \_RealTypespec: 
+    |vpiParent:
+    \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
+  |vpiTypespec:
   \_LogicTypespec: , line:4:13, endln:4:18
     |vpiParent:
     \_Module: logicLib@cmp (logicLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.sv, line:2:1, endln:24:7
   |vpiImportTypespec:
   \_RealTypespec: , line:2:24, endln:2:28
+  |vpiImportTypespec:
+  \_RealTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:13, endln:4:18
   |vpiImportTypespec:
@@ -1109,6 +1195,13 @@ Design: (unnamed)
         |vpiDecompile:1'b0
         |vpiSize:1
         |BIN:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@cmp), line:10:8, endln:10:12
+          |vpiParent:
+          \_Constant: , line:10:8, endln:10:12
+          |vpiFullName:logicLib@cmp
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_RefObj: (logicLib@cmp.out), line:10:2, endln:10:5
@@ -1152,6 +1245,18 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:12:2, endln:12:13
         |vpiFullName:logicLib@cmp
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (logicLib@cmp), line:13:1, endln:22:4
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (logicLib@cmp), line:13:1, endln:22:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_IfElse: , line:14:1, endln:21:10
           |vpiParent:
@@ -1176,6 +1281,13 @@ Design: (unnamed)
               |vpiDecompile:1'b0
               |vpiSize:1
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (logicLib@cmp), line:15:15, endln:15:19
+                |vpiParent:
+                \_Constant: , line:15:15, endln:15:19
+                |vpiFullName:logicLib@cmp
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (logicLib@cmp.out), line:15:8, endln:15:11
@@ -1209,6 +1321,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (logicLib@cmp.inA), line:18:7, endln:18:8
+                    |vpiParent:
+                    \_Constant: , line:18:7, endln:18:8
+                    |vpiFullName:logicLib@cmp.inA
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiOperand:
               \_Operation: , line:18:12, endln:18:19
@@ -1230,6 +1349,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (logicLib@cmp.inA), line:18:17, endln:18:18
+                      |vpiParent:
+                      \_Constant: , line:18:17, endln:18:18
+                      |vpiFullName:logicLib@cmp.inA
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
             |vpiStmt:
             \_Assignment: , line:18:21, endln:18:32
@@ -1243,6 +1369,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b1
                 |vpiSize:1
                 |BIN:1
+                |vpiTypespec:
+                \_RefTypespec: (logicLib@cmp), line:18:28, endln:18:32
+                  |vpiParent:
+                  \_Constant: , line:18:28, endln:18:32
+                  |vpiFullName:logicLib@cmp
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (logicLib@cmp.out), line:18:21, endln:18:24
@@ -1264,6 +1397,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b0
                 |vpiSize:1
                 |BIN:0
+                |vpiTypespec:
+                \_RefTypespec: (logicLib@cmp), line:21:5, endln:21:9
+                  |vpiParent:
+                  \_Constant: , line:21:5, endln:21:9
+                  |vpiFullName:logicLib@cmp
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (logicLib@cmp.out), line:20:1, endln:20:4
@@ -1323,6 +1463,13 @@ Design: (unnamed)
       |vpiDecompile:256
       |vpiSize:64
       |UINT:256
+      |vpiTypespec:
+      \_RefTypespec: (logicLib@driver), line:8:15, endln:8:18
+        |vpiParent:
+        \_Constant: , line:8:15, endln:8:18
+        |vpiFullName:logicLib@driver
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (logicLib@driver.iterations), line:8:2, endln:8:18
@@ -1337,11 +1484,22 @@ Design: (unnamed)
       |vpiDecompile:30
       |vpiSize:64
       |UINT:30
+      |vpiTypespec:
+      \_RefTypespec: (logicLib@driver), line:6:10, endln:6:12
+        |vpiParent:
+        \_Constant: , line:6:10, endln:6:12
+        |vpiFullName:logicLib@driver
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (logicLib@driver.delay), line:6:2, endln:6:12
   |vpiTypespec:
   \_IntTypespec: , line:7:1, endln:7:4
+    |vpiParent:
+    \_Module: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
   |vpiTypespec:
@@ -1368,6 +1526,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@driver), line:16:3, endln:16:4
+          |vpiParent:
+          \_Constant: , line:16:3, endln:16:4
+          |vpiFullName:logicLib@driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:16:5, endln:16:6
@@ -1376,9 +1541,18 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@driver), line:16:5, endln:16:6
+          |vpiParent:
+          \_Constant: , line:16:5, endln:16:6
+          |vpiFullName:logicLib@driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:7:1, endln:7:4
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:5:1, endln:5:4
   |vpiImportTypespec:
@@ -1469,6 +1643,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (logicLib@driver), line:25:6, endln:25:7
+              |vpiParent:
+              \_Constant: , line:25:6, endln:25:7
+              |vpiFullName:logicLib@driver
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (logicLib@driver.i), line:25:2, endln:25:3
@@ -1532,14 +1713,26 @@ Design: (unnamed)
             |vpiActual:
             \_Parameter: (logicLib@driver.delay), line:6:2, endln:6:12
       |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (logicLib@driver), line:20:1, endln:27:4
+      |vpiTypespec:
       \_IntTypespec: , line:24:1, endln:24:4
         |vpiParent:
         \_Begin: (logicLib@driver), line:20:1, endln:27:4
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (logicLib@driver), line:20:1, endln:27:4
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: , line:24:1, endln:24:4
       |vpiImportTypespec:
       \_Variable: (logicLib@driver.i), line:25:2, endln:25:3
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:21:1, endln:21:12
         |vpiParent:
@@ -1553,6 +1746,13 @@ Design: (unnamed)
           |vpiDecompile:'0
           |vpiSize:-1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (logicLib@driver), line:21:10, endln:21:12
+            |vpiParent:
+            \_Constant: , line:21:10, endln:21:12
+            |vpiFullName:logicLib@driver
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (logicLib@driver.outvar), line:21:1, endln:21:7
@@ -1602,6 +1802,10 @@ Design: (unnamed)
     |vpiModule:
     \_Module: logicLib@driver (logicLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.sv, line:2:1, endln:29:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: logicLib@top (logicLib@top), file:${SURELOG_DIR}/tests/LibraryIntercon/top.sv, line:1:1, endln:9:16
+  |vpiTypespec:
   \_ModuleTypespec: (logicLib@cmp)
     |vpiParent:
     \_Design: (unnamed)
@@ -1623,6 +1827,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:2:15, endln:2:16
+          |vpiParent:
+          \_Constant: , line:2:15, endln:2:16
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:17, endln:2:18
@@ -1631,6 +1842,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:2:17, endln:2:18
+          |vpiParent:
+          \_Constant: , line:2:17, endln:2:18
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:2:20, endln:2:25
@@ -1643,6 +1861,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
@@ -1651,6 +1876,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
@@ -1667,6 +1899,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:3:8, endln:3:9
+          |vpiParent:
+          \_Constant: , line:3:8, endln:3:9
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:10, endln:3:11
@@ -1675,7 +1914,16 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top), line:3:10, endln:3:11
+          |vpiParent:
+          \_Constant: , line:3:10, endln:3:11
+          |vpiFullName:logicLib@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:25
   |vpiImportTypespec:
@@ -1739,6 +1987,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top.driverArray), line:5:20, endln:5:21
+          |vpiParent:
+          \_Constant: , line:5:20, endln:5:21
+          |vpiFullName:logicLib@top.driverArray
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:22, endln:5:23
@@ -1747,6 +2002,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top.driverArray), line:5:22, endln:5:23
+          |vpiParent:
+          \_Constant: , line:5:22, endln:5:23
+          |vpiFullName:logicLib@top.driverArray
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (logicLib@top.driverArray.driver), line:5:1, endln:5:7
@@ -1786,6 +2048,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top.cmpArray), line:7:14, endln:7:15
+          |vpiParent:
+          \_Constant: , line:7:14, endln:7:15
+          |vpiFullName:logicLib@top.cmpArray
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:16, endln:7:17
@@ -1794,6 +2063,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (logicLib@top.cmpArray), line:7:16, endln:7:17
+          |vpiParent:
+          \_Constant: , line:7:16, endln:7:17
+          |vpiFullName:logicLib@top.cmpArray
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (logicLib@top.cmpArray.cmp), line:7:1, endln:7:4
@@ -1871,6 +2147,13 @@ Design: (unnamed)
       |vpiDecompile:100.0
       |vpiSize:64
       |REAL:100.000000
+      |vpiTypespec:
+      \_RefTypespec: (realLib@cmp.updatePeriod), line:20:17, endln:20:22
+        |vpiParent:
+        \_Constant: , line:20:17, endln:20:22
+        |vpiFullName:realLib@cmp.updatePeriod
+        |vpiActual:
+        \_RealTypespec: 
       |vpiConstType:2
   |vpiParameter:
   \_Parameter: (realLib@cmp.hyst), line:9:2, endln:9:13
@@ -1897,6 +2180,13 @@ Design: (unnamed)
       |vpiDecompile:0.65
       |vpiSize:64
       |REAL:0.650000
+      |vpiTypespec:
+      \_RefTypespec: (realLib@cmp), line:9:9, endln:9:13
+        |vpiParent:
+        \_Constant: , line:9:9, endln:9:13
+        |vpiFullName:realLib@cmp
+        |vpiActual:
+        \_RealTypespec: 
       |vpiConstType:2
     |vpiLhs:
     \_Parameter: (realLib@cmp.hyst), line:9:2, endln:9:13
@@ -1916,9 +2206,28 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (realLib@cmp.NetsPkg), line:5:2, endln:5:12
+        |vpiParent:
+        \_Constant: , line:5:2, endln:5:12
+        |vpiFullName:realLib@cmp.NetsPkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
   |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+  |vpiTypespec:
   \_RealTypespec: , line:8:1, endln:8:5
+    |vpiParent:
+    \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+  |vpiTypespec:
+  \_RealTypespec: 
+    |vpiParent:
+    \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
+  |vpiTypespec:
+  \_BitTypespec: 
     |vpiParent:
     \_Module: realLib@cmp (realLib@cmp), file:${SURELOG_DIR}/tests/LibraryIntercon/cmp.svr, line:2:1, endln:36:7
   |vpiTypespec:
@@ -1928,7 +2237,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (NetsPkg), line:5:2, endln:5:12
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_RealTypespec: , line:8:1, endln:8:5
+  |vpiImportTypespec:
+  \_RealTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (realLib@cmp.inA), line:12:16, endln:12:19
     |vpiParent:
@@ -2039,6 +2354,13 @@ Design: (unnamed)
         |vpiDecompile:1'b0
         |vpiSize:1
         |BIN:0
+        |vpiTypespec:
+        \_RefTypespec: (realLib@cmp), line:22:8, endln:22:12
+          |vpiParent:
+          \_Constant: , line:22:8, endln:22:12
+          |vpiFullName:realLib@cmp
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_RefObj: (realLib@cmp.out), line:22:2, endln:22:5
@@ -2061,6 +2383,18 @@ Design: (unnamed)
         |vpiParent:
         \_DelayControl: , line:24:2, endln:34:4
         |vpiFullName:realLib@cmp
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (realLib@cmp), line:25:1, endln:34:4
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (realLib@cmp), line:25:1, endln:34:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_IfElse: , line:26:1, endln:33:39
           |vpiParent:
@@ -2085,6 +2419,13 @@ Design: (unnamed)
               |vpiDecompile:1'b0
               |vpiSize:1
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (realLib@cmp), line:27:15, endln:27:19
+                |vpiParent:
+                \_Constant: , line:27:15, endln:27:19
+                |vpiFullName:realLib@cmp
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiLhs:
             \_RefObj: (realLib@cmp.out), line:27:8, endln:27:11
@@ -2118,6 +2459,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (realLib@cmp.inA), line:30:7, endln:30:8
+                    |vpiParent:
+                    \_Constant: , line:30:7, endln:30:8
+                    |vpiFullName:realLib@cmp.inA
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiOperand:
               \_BitSelect: (realLib@cmp.inA), line:30:15, endln:30:18
@@ -2134,6 +2482,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (realLib@cmp.inA), line:30:16, endln:30:17
+                    |vpiParent:
+                    \_Constant: , line:30:16, endln:30:17
+                    |vpiFullName:realLib@cmp.inA
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
             |vpiStmt:
             \_Assignment: , line:30:20, endln:30:31
@@ -2147,6 +2502,13 @@ Design: (unnamed)
                 |vpiDecompile:1'b1
                 |vpiSize:1
                 |BIN:1
+                |vpiTypespec:
+                \_RefTypespec: (realLib@cmp), line:30:27, endln:30:31
+                  |vpiParent:
+                  \_Constant: , line:30:27, endln:30:31
+                  |vpiFullName:realLib@cmp
+                  |vpiActual:
+                  \_BitTypespec: 
                 |vpiConstType:3
               |vpiLhs:
               \_RefObj: (realLib@cmp.out), line:30:20, endln:30:23
@@ -2180,6 +2542,13 @@ Design: (unnamed)
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
+                    |vpiTypespec:
+                    \_RefTypespec: (realLib@cmp.inA), line:33:7, endln:33:8
+                      |vpiParent:
+                      \_Constant: , line:33:7, endln:33:8
+                      |vpiFullName:realLib@cmp.inA
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiOperand:
                 \_Operation: , line:33:12, endln:33:25
@@ -2201,6 +2570,13 @@ Design: (unnamed)
                       |vpiDecompile:1
                       |vpiSize:64
                       |UINT:1
+                      |vpiTypespec:
+                      \_RefTypespec: (realLib@cmp.inA), line:33:16, endln:33:17
+                        |vpiParent:
+                        \_Constant: , line:33:16, endln:33:17
+                        |vpiFullName:realLib@cmp.inA
+                        |vpiActual:
+                        \_IntTypespec: 
                       |vpiConstType:9
                   |vpiOperand:
                   \_RefObj: (realLib@cmp.hyst), line:33:21, endln:33:25
@@ -2222,6 +2598,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (realLib@cmp), line:33:34, endln:33:38
+                    |vpiParent:
+                    \_Constant: , line:33:34, endln:33:38
+                    |vpiFullName:realLib@cmp
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
                 |vpiLhs:
                 \_RefObj: (realLib@cmp.out), line:33:27, endln:33:30
@@ -2289,6 +2672,13 @@ Design: (unnamed)
       |vpiDecompile:256
       |vpiSize:64
       |UINT:256
+      |vpiTypespec:
+      \_RefTypespec: (realLib@driver), line:4:30, endln:4:33
+        |vpiParent:
+        \_Constant: , line:4:30, endln:4:33
+        |vpiFullName:realLib@driver
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (realLib@driver.iterations), line:4:17, endln:4:33
@@ -2303,6 +2693,13 @@ Design: (unnamed)
       |vpiDecompile:30
       |vpiSize:64
       |UINT:30
+      |vpiTypespec:
+      \_RefTypespec: (realLib@driver), line:3:25, endln:3:27
+        |vpiParent:
+        \_Constant: , line:3:25, endln:3:27
+        |vpiFullName:realLib@driver
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (realLib@driver.delay), line:3:17, endln:3:27
@@ -2322,9 +2719,24 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (realLib@driver.NetsPkg), line:2:8, endln:2:18
+        |vpiParent:
+        \_Constant: , line:2:8, endln:2:18
+        |vpiFullName:realLib@driver.NetsPkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
   |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+  |vpiTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
+    |vpiParent:
+    \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: realLib@driver (realLib@driver), file:${SURELOG_DIR}/tests/LibraryIntercon/driver.svr, line:1:1, endln:21:19
   |vpiTypespec:
@@ -2352,6 +2764,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (realLib@driver), line:7:11, endln:7:12
+          |vpiParent:
+          \_Constant: , line:7:11, endln:7:12
+          |vpiFullName:realLib@driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:13, endln:7:14
@@ -2360,6 +2779,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (realLib@driver), line:7:13, endln:7:14
+          |vpiParent:
+          \_Constant: , line:7:13, endln:7:14
+          |vpiFullName:realLib@driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (realLib@driver), line:7:1, endln:7:5
@@ -2371,7 +2797,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (NetsPkg), line:2:8, endln:2:18
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
@@ -2456,6 +2886,18 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (realLib@driver), line:14:3, endln:18:8
           |vpiFullName:realLib@driver
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (realLib@driver), line:15:5, endln:18:8
+          |vpiTypespec:
+          \_RealTypespec: 
+            |vpiParent:
+            \_Begin: (realLib@driver), line:15:5, endln:18:8
+          |vpiImportTypespec:
+          \_IntTypespec: 
+          |vpiImportTypespec:
+          \_RealTypespec: 
           |vpiStmt:
           \_DelayControl: , line:16:7, endln:16:28
             |vpiParent:
@@ -2473,6 +2915,13 @@ Design: (unnamed)
                 |vpiDecompile:0.2
                 |vpiSize:64
                 |REAL:0.200000
+                |vpiTypespec:
+                \_RefTypespec: (realLib@driver), line:16:25, endln:16:28
+                  |vpiParent:
+                  \_Constant: , line:16:25, endln:16:28
+                  |vpiFullName:realLib@driver
+                  |vpiActual:
+                  \_RealTypespec: 
                 |vpiConstType:2
               |vpiLhs:
               \_BitSelect: (realLib@driver.outR), line:16:18, endln:16:21
@@ -2489,6 +2938,13 @@ Design: (unnamed)
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
+                  |vpiTypespec:
+                  \_RefTypespec: (realLib@driver.outR), line:16:19, endln:16:20
+                    |vpiParent:
+                    \_Constant: , line:16:19, endln:16:20
+                    |vpiFullName:realLib@driver.outR
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
             |vpiDelay:
             \_RefObj: (realLib@driver.delay), line:16:8, endln:16:13
@@ -2511,6 +2967,13 @@ Design: (unnamed)
               |vpiDecompile:0.2
               |vpiSize:64
               |REAL:0.200000
+              |vpiTypespec:
+              \_RefTypespec: (realLib@driver), line:17:18, endln:17:21
+                |vpiParent:
+                \_Constant: , line:17:18, endln:17:21
+                |vpiFullName:realLib@driver
+                |vpiActual:
+                \_RealTypespec: 
               |vpiConstType:2
             |vpiLhs:
             \_BitSelect: (realLib@driver.outR), line:17:11, endln:17:14
@@ -2527,6 +2990,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (realLib@driver.outR), line:17:12, endln:17:13
+                  |vpiParent:
+                  \_Constant: , line:17:12, endln:17:13
+                  |vpiFullName:realLib@driver.outR
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
         |vpiForInitStmt:
         \_Assignment: , line:14:8, endln:14:17
@@ -2539,6 +3009,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (realLib@driver), line:14:16, endln:14:17
+              |vpiParent:
+              \_Constant: , line:14:16, endln:14:17
+              |vpiFullName:realLib@driver
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (realLib@driver.i), line:14:12, endln:14:13
@@ -2579,10 +3056,22 @@ Design: (unnamed)
         |vpiStmt:
         \_Begin: (realLib@driver), line:15:5, endln:18:8
       |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (realLib@driver), line:11:1, endln:19:4
+      |vpiTypespec:
+      \_RealTypespec: 
+        |vpiParent:
+        \_Begin: (realLib@driver), line:11:1, endln:19:4
+      |vpiTypespec:
       \_IntTypespec: , line:14:8, endln:14:11
         |vpiParent:
         \_Begin: (realLib@driver), line:11:1, endln:19:4
         |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_RealTypespec: 
       |vpiImportTypespec:
       \_IntTypespec: , line:14:8, endln:14:11
       |vpiImportTypespec:
@@ -2600,6 +3089,13 @@ Design: (unnamed)
           |vpiDecompile:0.0
           |vpiSize:64
           |REAL:0.000000
+          |vpiTypespec:
+          \_RefTypespec: (realLib@driver), line:12:13, endln:12:16
+            |vpiParent:
+            \_Constant: , line:12:13, endln:12:16
+            |vpiFullName:realLib@driver
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
         |vpiLhs:
         \_BitSelect: (realLib@driver.outR), line:12:7, endln:12:10
@@ -2616,6 +3112,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (realLib@driver.outR), line:12:8, endln:12:9
+              |vpiParent:
+              \_Constant: , line:12:8, endln:12:9
+              |vpiFullName:realLib@driver.outR
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiStmt:
       \_Assignment: , line:13:3, endln:13:16
@@ -2630,6 +3133,13 @@ Design: (unnamed)
           |vpiDecompile:3.3
           |vpiSize:64
           |REAL:3.300000
+          |vpiTypespec:
+          \_RefTypespec: (realLib@driver), line:13:13, endln:13:16
+            |vpiParent:
+            \_Constant: , line:13:13, endln:13:16
+            |vpiFullName:realLib@driver
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
         |vpiLhs:
         \_BitSelect: (realLib@driver.outR), line:13:7, endln:13:10
@@ -2646,6 +3156,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (realLib@driver.outR), line:13:8, endln:13:9
+              |vpiParent:
+              \_Constant: , line:13:8, endln:13:9
+              |vpiFullName:realLib@driver.outR
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiStmt:
       \_ForStmt: (realLib@driver), line:14:3, endln:18:8

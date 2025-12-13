@@ -137,6 +137,7 @@ Design                                                 1
 GenIfElse                                              1
 GenRegion                                              1
 Identifier                                             4
+IntTypespec                                            2
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              2
@@ -144,10 +145,11 @@ ParamAssign                                            3
 Parameter                                              3
 RefModule                                              1
 RefObj                                                 4
+RefTypespec                                            2
 SourceFile                                             1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                31
+Total:                                                35
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -209,6 +211,13 @@ Design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
+      |vpiTypespec:
+      \_RefTypespec: (work@axi), line:6:33, endln:6:34
+        |vpiParent:
+        \_Constant: , line:6:33, endln:6:34
+        |vpiFullName:work@axi
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi.N_MASTER), line:6:15, endln:6:34
@@ -251,6 +260,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@axi), line:8:36, endln:8:37
+          |vpiParent:
+          \_Constant: , line:8:36, endln:8:37
+          |vpiFullName:work@axi
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_RefObj: (work@axi.LOG_MASTER), line:8:39, endln:8:49
@@ -333,6 +349,12 @@ Design: (unnamed)
         \_Begin: (work@axi), line:17:7, endln:19:10
     |vpiStmt:
     \_Begin: (work@axi), line:13:7, endln:19:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@axi (work@axi), file:${SURELOG_DIR}/tests/GenBlock/dut.sv, line:4:1, endln:22:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@axi
 |vpiTypespec:
 \_ModuleTypespec: (work@GOOD)

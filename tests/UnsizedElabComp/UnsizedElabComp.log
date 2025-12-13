@@ -206,11 +206,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  4
+BitTypespec                                            4
 Constant                                              12
 Design                                                 1
 GenIf                                                  4
 Identifier                                             2
-LogicTypespec                                          2
+IntTypespec                                            4
+LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         4
 Operation                                              4
@@ -219,14 +221,14 @@ Parameter                                              2
 Range                                                  2
 RefModule                                              4
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                           14
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                50
+Total:                                                74
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedElabComp/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:16:5: Null Actual: id:43, type:RefModule, name:bad.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:20:5: Null Actual: id:50, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:16:5: Null Actual: id:65, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:20:5: Null Actual: id:74, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -294,6 +296,13 @@ Design: (unnamed)
       |vpiDecompile:3'b111
       |vpiSize:3
       |BIN:111
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:5:30, endln:5:36
+        |vpiParent:
+        \_Constant: , line:5:30, endln:5:36
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.P1), line:5:25, endln:5:36
@@ -308,6 +317,13 @@ Design: (unnamed)
       |vpiDecompile:3'b110
       |vpiSize:3
       |BIN:110
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:6:30, endln:6:36
+        |vpiParent:
+        \_Constant: , line:6:30, endln:6:36
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.P2), line:6:25, endln:6:36
@@ -397,6 +413,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:20, endln:5:21
+          |vpiParent:
+          \_Constant: , line:5:20, endln:5:21
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:22, endln:5:23
@@ -405,9 +428,34 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:5:22, endln:5:23
+          |vpiParent:
+          \_Constant: , line:5:22, endln:5:23
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:13, endln:5:18
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIf: , line:7:3, endln:9:6
@@ -425,6 +473,13 @@ Design: (unnamed)
         |vpiDecompile:3'b111
         |vpiSize:3
         |BIN:111
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:8, endln:7:14
+          |vpiParent:
+          \_Constant: , line:7:8, endln:7:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiOperand:
       \_Constant: , line:7:18, endln:7:20
@@ -433,6 +488,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:7:18, endln:7:20
+          |vpiParent:
+          \_Constant: , line:7:18, endln:7:20
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@top), line:7:22, endln:9:6
@@ -460,6 +522,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:11:14, endln:11:16
+          |vpiParent:
+          \_Constant: , line:11:14, endln:11:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@top), line:11:18, endln:13:6
@@ -479,6 +548,13 @@ Design: (unnamed)
         |vpiDecompile:3'b101
         |vpiSize:3
         |BIN:101
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:15:8, endln:15:14
+          |vpiParent:
+          \_Constant: , line:15:8, endln:15:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiOperand:
       \_Constant: , line:15:18, endln:15:20
@@ -487,6 +563,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:15:18, endln:15:20
+          |vpiParent:
+          \_Constant: , line:15:18, endln:15:20
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@top), line:15:22, endln:17:6
@@ -514,6 +597,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:19:14, endln:19:16
+          |vpiParent:
+          \_Constant: , line:19:14, endln:19:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@top), line:19:18, endln:21:6

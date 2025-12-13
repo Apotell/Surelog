@@ -869,6 +869,13 @@ void IntegrityChecker::reportInvalidForeachVariable(
   }
 }
 
+void IntegrityChecker::reportMissingConstantTypespec(
+    const uhdm::Any* object) const {
+  if (m_reportMissingConstantTypespec) {
+    reportError(ErrorDefinition::INTEGRITY_CHECK_INVALID_CONST_TPS, object);
+  }
+}
+
 void IntegrityChecker::reportInvalidTypespecLocation(const uhdm::Any* object) {
   if (const uhdm::Typespec* const t = any_cast<uhdm::Typespec>(object)) {
     bool shouldReport = false;
@@ -1138,7 +1145,14 @@ void IntegrityChecker::visitClockedSeq(const uhdm::ClockedSeq* object) {}
 void IntegrityChecker::visitClockingBlock(const uhdm::ClockingBlock* object) {}
 void IntegrityChecker::visitClockingIODecl(const uhdm::ClockingIODecl* object) {
 }
-void IntegrityChecker::visitConstant(const uhdm::Constant* object) {}
+void IntegrityChecker::visitConstant(const uhdm::Constant* object) {
+  bool report = true;
+  if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
+    if (const uhdm::Typespec* const t = rt->getActual()) {
+      report = false;
+    }
+  }
+}
 void IntegrityChecker::visitConstrForeach(const uhdm::ConstrForeach* object) {}
 void IntegrityChecker::visitConstrIf(const uhdm::ConstrIf* object) {}
 void IntegrityChecker::visitConstrIfElse(const uhdm::ConstrIfElse* object) {}

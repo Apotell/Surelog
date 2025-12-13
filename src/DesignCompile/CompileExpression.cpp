@@ -4052,9 +4052,12 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
       result = sys;
     } break;
   }
-  rt->setActual(ts);
+  rt->setParent(result);
   fC->populateCoreMembers(Expression, Expression, rt);
-  if (ts != nullptr) ts->setParent(pexpr);
+  if (ts != nullptr) {
+    ts->setParent(pexpr);
+    rt->setActual(ts);
+  }
   return result;
 }
 

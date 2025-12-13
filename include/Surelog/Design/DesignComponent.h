@@ -210,12 +210,6 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
     return any_cast<T>(m_typespecModel);
   }
 
-  void scheduleParamExprEval(std::string_view name, ExprEval& expr_eval) {
-    m_scheduledParamExprEval.emplace_back(name, expr_eval);
-  }
-  std::vector<std::pair<std::string, ExprEval>>& getScheduledParamExprEval() {
-    return m_scheduledParamExprEval;
-  }
   void setDesignElement(const DesignElement* elem) { m_designElement = elem; }
   const DesignElement* getDesignElement() const { return m_designElement; }
 
@@ -257,7 +251,6 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   ParamAssignVec m_paramAssigns;
   uhdm::Any* m_model = nullptr;
   uhdm::Typespec* m_typespecModel = nullptr;
-  std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;
 };

@@ -563,10 +563,10 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
         NodeId packedDimensions = orig_port->getPackedDimension();
         int32_t unpackedSize = 0;
         const FileContent* fC = orig_port->getFileContent();
+        uhdm::ArrayTypespec* array_ts = s.make<uhdm::ArrayTypespec>();
         if (std::vector<uhdm::Range*>* ranges =
-                m_helper.compileRanges(mod, fC, unpackedDimensions, nullptr,
+                m_helper.compileRanges(mod, fC, unpackedDimensions, array_ts,
                                        instance, unpackedSize, false)) {
-          uhdm::ArrayTypespec* array_ts = s.make<uhdm::ArrayTypespec>();
           array_ts->setRanges(ranges);
           array_ts->setParent(dest_port);
           fC->populateCoreMembers(unpackedDimensions, unpackedDimensions,
@@ -1159,14 +1159,14 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
     for (Signal* sig : signals) {
       NodeId unpackedDimension = sig->getUnpackedDimension();
       if (unpackedDimension && sig->getInterfaceDef()) {
+        uhdm::InterfaceArray* smarray = s.make<uhdm::InterfaceArray>();
         int32_t unpackedSize = 0;
         const FileContent* fC = sig->getFileContent();
         if (std::vector<uhdm::Range*>* unpackedDimensions =
-                m_helper.compileRanges(mod, fC, unpackedDimension, nullptr,
+                m_helper.compileRanges(mod, fC, unpackedDimension, smarray,
                                        instance, unpackedSize, false)) {
           NodeId id = sig->getNodeId();
           const std::string typeName = sig->getInterfaceTypeName();
-          uhdm::InterfaceArray* smarray = s.make<uhdm::InterfaceArray>();
           smarray->setRanges(unpackedDimensions);
           for (auto d : *unpackedDimensions) d->setParent(smarray);
           if (fC->Type(sig->getNameId()) == VObjectType::STRING_CONST) {

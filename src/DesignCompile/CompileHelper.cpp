@@ -156,10 +156,11 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
   return true;
 }
 
-uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
+uhdm::Constant* CompileHelper::constantFromValue(Value* val, uhdm::Any* pexpr) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   Value::Type valueType = val->getType();
   uhdm::Constant* c = nullptr;
+  uhdm::Typespec* tps = nullptr;
   switch (valueType) {
     case Value::Type::Scalar: {
       c = s.make<uhdm::Constant>();
@@ -167,6 +168,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(1);
+      tps = s.make<uhdm::LogicTypespec>();
       break;
     }
     case Value::Type::Binary: {
@@ -175,6 +177,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::LogicTypespec>();
       break;
     }
     case Value::Type::Hexadecimal: {
@@ -183,6 +186,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Octal: {
@@ -191,15 +195,23 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::IntTypespec>();
       break;
     }
     case Value::Type::Unsigned:
     case Value::Type::Integer: {
       c = s.make<uhdm::Constant>();
-      c->setConstType(vpiIntVal);
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      uhdm::IntTypespec* t = s.make<uhdm::IntTypespec>();
+      if (valueType == Value::Type::Integer) {
+        t->setSigned(true);
+        c->setConstType(vpiIntVal);
+      } else {
+        c->setConstType(vpiUIntVal);
+      }
+      tps = t;
       break;
     }
     case Value::Type::Double: {
@@ -208,6 +220,7 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::RealTypespec>();
       break;
     }
     case Value::Type::String: {
@@ -216,11 +229,22 @@ uhdm::Constant* CompileHelper::constantFromValue(Value* val) {
       c->setValue(val->uhdmValue());
       c->setDecompile(val->decompiledValue());
       c->setSize(val->getSize());
+      tps = s.make<uhdm::StringTypespec>();
       break;
     }
     case Value::Type::None:
     default: {
       // return nullptr
+    }
+  }
+  if (c != nullptr) {
+    uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    rt->setParent(c);
+    c->setParent(pexpr);
+    c->setTypespec(rt);
+    if (tps != nullptr) {
+      tps->setParent(pexpr);
+      rt->setActual(tps);
     }
   }
   return c;
@@ -559,8 +583,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     if (const uhdm::RefTypespec* rt = enum_t->getBaseTypespec()) {
       if (const uhdm::Typespec* ts = rt->getActual()) {
         bool invalidValue = false;
-        baseSize = Bits(ts, invalidValue, scope, nullptr, fC->getFileId(),
-                        ts->getStartLine(), true);
+        baseSize =
+            Bits(ts, invalidValue, scope, fC, data_declaration, nullptr, true);
       }
     }
     while (enum_name_declaration) {
@@ -1699,7 +1723,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp, Signal* sig,
         exp->setParent(obj, true);
       }
       if (exp->getUhdmType() == uhdm::UhdmType::Constant) {
-        adjustSize(tps, comp, nullptr, (uhdm::Constant*)exp);
+        adjustSize(tps, comp, fC, id, nullptr, (uhdm::Constant*)exp);
       } else if (exp->getUhdmType() == uhdm::UhdmType::Operation) {
         uhdm::Operation* op = (uhdm::Operation*)exp;
         int32_t opType = op->getOpType();
@@ -1715,7 +1739,8 @@ bool CompileHelper::compileSignal(DesignComponent* comp, Signal* sig,
         }
         for (auto oper : *op->getOperands()) {
           if (oper->getUhdmType() == uhdm::UhdmType::Constant)
-            adjustSize(tp, comp, nullptr, (uhdm::Constant*)oper, false, true);
+            adjustSize(tp, comp, fC, id, nullptr, (uhdm::Constant*)oper, false,
+                       true);
         }
       }
     }
@@ -2087,15 +2112,13 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
     } else {
       item_name->set("*");
     }
-    if (uhdm::Constant* imported_item = constantFromValue(item_name)) {
+    if (uhdm::Constant* imported_item =
+            constantFromValue(item_name, import_stmt)) {
       imported_item->setParent(import_stmt);
-      if (item_name_id) {
-        // In case of "*" item_name_id will be 0
-        fC->populateCoreMembers(item_name_id, item_name_id, imported_item);
-      } else {
-        fC->populateCoreMembers(package_import_item_id, package_import_item_id,
-                                imported_item);
-      }
+      // In case of "*" item_name_id will be 0
+      NodeId nodeId = item_name_id ? item_name_id : package_import_item_id;
+      fC->populateCoreMembers(nodeId, nodeId, imported_item);
+      fC->populateCoreMembers(nodeId, nodeId, imported_item->getTypespec());
       import_stmt->setItem(imported_item);
     }
     m_exprBuilder.deleteValue(item_name);
@@ -2532,10 +2555,11 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
     std::string_view instName = fC->SymName(identifierId);
 
     if (NodeId unpackedDimId = fC->Sibling(identifierId)) {
+      uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
       int32_t unpackedSize = 0;
-      if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
-              mod, fC, unpackedDimId, nullptr, instance, unpackedSize, false)) {
-        uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
+      if (std::vector<uhdm::Range*>* unpackedDimensions =
+              compileRanges(mod, fC, unpackedDimId, mod_array, instance,
+                            unpackedSize, false)) {
         mod_array->setRanges(unpackedDimensions);
         mod_array->setName(instName);
         mod_array->setFullName(modName);
@@ -2653,14 +2677,14 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod,
     uhdm::Primitive* gate = udp;
     if (unpackedDimId &&
         (fC->Type(unpackedDimId) == VObjectType::paUnpacked_dimension)) {
+      uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
       // Vector instances
-      int32_t size;
-      uhdm::RangeCollection* ranges =
-          compileRanges(mod, fC, unpackedDimId, nullptr, instance, size, false);
+      int32_t size = 0;
+      uhdm::RangeCollection* ranges = compileRanges(
+          mod, fC, unpackedDimId, gate_array, instance, size, false);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.makeCollection<uhdm::PrimitiveArray>());
       }
-      uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
       gate_array->setRanges(ranges);
       gate_array->getPrimitives(true)->emplace_back(gate);
       mod->getPrimitiveArrays()->emplace_back(gate_array);
@@ -2749,7 +2773,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
       gate_array = s.make<uhdm::SwitchArray>();
       int32_t size;
       uhdm::RangeCollection* ranges = compileRanges(
-          mod, fC, Unpacked_dimension, nullptr, instance, size, false);
+          mod, fC, Unpacked_dimension, gate_array, instance, size, false);
       gate_array->setRanges(ranges);
       gate_array->getPrimitives(true)->emplace_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {
@@ -3431,18 +3455,33 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
       dc->setDelay(ref);
     } else if ((fC->Type(valueNodeId) == VObjectType::INT_CONST) ||
                (fC->Type(valueNodeId) == VObjectType::REAL_CONST)) {
-      uhdm::Constant* c = s.make<uhdm::Constant>();
       std::string value =
           (fC->Type(valueNodeId) == VObjectType::INT_CONST) ? "INT:" : "REAL:";
       value.append(fC->SymName(valueNodeId));
+
+      uhdm::Constant* c = s.make<uhdm::Constant>();
+      c->setParent(dc);
       c->setValue(value);
       c->setDecompile(fC->SymName(valueNodeId));
       c->setSize(64);
       c->setConstType(fC->Type(valueNodeId) == VObjectType::INT_CONST
                           ? vpiIntConst
                           : vpiRealConst);
-      c->setParent(dc);
       fC->populateCoreMembers(valueNodeId, valueNodeId, c);
+
+      uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(valueNodeId, valueNodeId, rt);
+
+      uhdm::Typespec* ts = nullptr;
+      if (fC->Type(valueNodeId) == VObjectType::INT_CONST)
+        ts = s.make<uhdm::IntTypespec>();
+      else
+        ts = s.make<uhdm::RealTypespec>();
+      ts->setParent(pstmt);
+      rt->setActual(ts);
+
       dc->setDelay(c);
     }
   }
@@ -3625,10 +3664,9 @@ bool CompileHelper::isDecreasingRange(uhdm::Typespec* ts,
   return false;
 }
 
-uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
-                                                   uhdm::Any* exp,
-                                                   DesignComponent* component,
-                                                   ValuedComponentI* instance) {
+uhdm::Any* CompileHelper::defaultPatternAssignment(
+    const FileContent* fC, NodeId child, const uhdm::Typespec* tps,
+    uhdm::Any* exp, DesignComponent* component, ValuedComponentI* instance) {
   uhdm::Any* result = exp;
   if (tps == nullptr) {
     return result;
@@ -3637,8 +3675,6 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
     return result;
   }
 
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbols = m_session->getSymbolTable();
   bool invalidValue = false;
   int32_t ncsize = 32;
   uhdm::UhdmType ttps = tps->getUhdmType();
@@ -3651,9 +3687,7 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(const uhdm::Typespec* tps,
       ets = rt->getActual();
     }
     if (ets != nullptr) {
-      ncsize = Bits(ets, invalidValue, component, instance,
-                    fileSystem->toPathId(ets->getFile(), symbols),
-                    ets->getStartLine(), false);
+      ncsize = Bits(ets, invalidValue, component, fC, child, instance, false);
     }
   } else if (ttps == uhdm::UhdmType::BitTypespec) {
     ncsize = 1;
@@ -3873,8 +3907,8 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component,
         uhdm::UhdmType exprType = uhdm::UhdmType::BaseClass;
         if (expr != nullptr) {
           exprType = expr->getUhdmType();
-          if ((expr =
-                   defaultPatternAssignment(ts, expr, component, instance))) {
+          if ((expr = defaultPatternAssignment(fC, nodeId, ts, expr, component,
+                                               instance))) {
             exprType = expr->getUhdmType();
           }
         }
@@ -3891,12 +3925,11 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component,
           int32_t size = c->getSize();
           if (ts) {
             bool invalidValue = false;
-            int32_t sizetmp =
-                Bits(ts, invalidValue, component, instance, fC->getFileId(),
-                     fC->Line(actual_value), false);
+            int32_t sizetmp = Bits(ts, invalidValue, component, fC,
+                                   actual_value, instance, false);
             if (!invalidValue) size = sizetmp;
           }
-          adjustSize(ts, component, instance, c);
+          adjustSize(ts, component, fC, nodeId, instance, c);
           Value* val = m_exprBuilder.fromVpiValue(c->getValue(), size);
           component->setValue(the_name, val, m_exprBuilder);
         } else if (expr && ((exprType == uhdm::UhdmType::Operation) ||
@@ -3968,8 +4001,8 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component,
       if (value) {
         uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
             component, fC, value, param_assign, instance);
-        rhs =
-            (uhdm::Expr*)defaultPatternAssignment(ts, rhs, component, instance);
+        rhs = (uhdm::Expr*)defaultPatternAssignment(fC, nodeId, ts, rhs,
+                                                    component, instance);
         rhs->setParent(param_assign);
         param_assign->setRhs(rhs);
 
@@ -4030,6 +4063,7 @@ std::string twosComplement(std::string_view bin) {
 
 uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
                                           DesignComponent* component,
+                                          const FileContent* fC, NodeId nodeId,
                                           ValuedComponentI* instance,
                                           uhdm::Constant* c, bool uniquify,
                                           bool sizeMode) {
@@ -4038,14 +4072,11 @@ uhdm::Constant* CompileHelper::adjustSize(const uhdm::Typespec* ts,
   if (ts == nullptr) {
     return result;
   }
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbols = m_session->getSymbolTable();
   int32_t orig_size = c->getSize();
 
   bool invalidValue = false;
-  int32_t sizetmp = Bits(ts, invalidValue, component, instance,
-                         fileSystem->toPathId(c->getFile(), symbols),
-                         c->getStartLine(), sizeMode);
+  int32_t sizetmp =
+      Bits(ts, invalidValue, component, fC, nodeId, instance, sizeMode);
 
   int32_t size = orig_size;
   if (c->getConstType() != vpiDecConst) {
@@ -4432,12 +4463,22 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         }
       } else {
         uhdm::Constant* c = s.make<uhdm::Constant>();
+        c->setParent(call);
         c->setValue("INT:0");
         c->setDecompile("0");
         c->setSize(64);
         c->setConstType(vpiIntConst);
-        c->setParent(call);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
+
+        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(argumentNode, argumentNode, rt);
+
+        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(call);
+        rt->setActual(ts);
+
         arguments->emplace_back(c);
       }
     }
@@ -4935,6 +4976,7 @@ void CompileHelper::adjustUnsized(uhdm::Constant* c, int32_t size) {
 int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
                                     int32_t opIndex, uhdm::Expr* rhs,
                                     DesignComponent* component,
+                                    const FileContent* fC, NodeId nodeId,
                                     ValuedComponentI* instance) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
@@ -4963,9 +5005,8 @@ int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
         if (const uhdm::RefTypespec* rt = member->getTypespec()) {
           mtps = rt->getActual();
         }
-        int32_t ncsize = Bits(mtps, invalidValue, component, instance,
-                              fileSystem->toPathId(member->getFile(), symbols),
-                              member->getStartLine(), false);
+        int32_t ncsize =
+            Bits(mtps, invalidValue, component, fC, nodeId, instance, false);
         // Fix the size of the member:
         adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
         cop->setSize(ncsize);
@@ -4976,28 +5017,24 @@ int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
   } else if (rtps->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
     uhdm::ArrayTypespec* atps = (uhdm::ArrayTypespec*)rtps;
     if (const uhdm::RefTypespec* ert = atps->getElemTypespec()) {
-      int32_t ncsize = Bits(ert->getActual(), invalidValue, component, instance,
-                            fileSystem->toPathId(rtps->getFile(), symbols),
-                            rtps->getStartLine(), false);
+      int32_t ncsize = Bits(ert->getActual(), invalidValue, component, fC,
+                            nodeId, instance, false);
       // Fix the size of the member:
       adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
       cop->setSize(ncsize);
     }
   } else if (rtps->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
-    uint64_t fullSize = Bits(rtps, invalidValue, component, instance,
-                             fileSystem->toPathId(rtps->getFile(), symbols),
-                             rtps->getStartLine(), false);
-    uint64_t innerSize = Bits(rtps, invalidValue, component, instance,
-                              fileSystem->toPathId(rtps->getFile(), symbols),
-                              rtps->getStartLine(), true);
+    uint64_t fullSize =
+        Bits(rtps, invalidValue, component, fC, nodeId, instance, false);
+    uint64_t innerSize =
+        Bits(rtps, invalidValue, component, fC, nodeId, instance, true);
     int32_t ncsize = fullSize / innerSize;
     // Fix the size of the member:
     adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
     cop->setSize(ncsize);
   } else {
-    int32_t ncsize = Bits(rtps, invalidValue, component, instance,
-                          fileSystem->toPathId(rtps->getFile(), symbols),
-                          rtps->getStartLine(), false);
+    int32_t ncsize =
+        Bits(rtps, invalidValue, component, fC, nodeId, instance, false);
     // Fix the size of the member:
     adjustUnsized(any_cast<uhdm::Constant>(cop), ncsize);
     cop->setSize(ncsize);
@@ -5006,10 +5043,9 @@ int32_t CompileHelper::adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
   return cop->getSize();
 }
 
-uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
-                                                   uhdm::Expr* rhs,
-                                                   DesignComponent* component,
-                                                   ValuedComponentI* instance) {
+uhdm::Expr* CompileHelper::expandPatternAssignment(
+    const FileContent* fC, NodeId child, const uhdm::Typespec* tps,
+    uhdm::Expr* rhs, DesignComponent* component, ValuedComponentI* instance) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   uhdm::Serializer& s = m_compileDesign->getSerializer();
@@ -5025,9 +5061,8 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
   }
 
   bool invalidValue = false;
-  uint64_t size = Bits(tps, invalidValue, component, instance,
-                       fileSystem->toPathId(rhs->getFile(), symbolTable),
-                       rhs->getStartLine(), false);
+  uint64_t size =
+      Bits(tps, invalidValue, component, fC, child, instance, false);
   uint64_t patternSize = 0;
 
   uhdm::ExprEval eval(true);
@@ -5039,10 +5074,10 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
     int32_t opType = op->getOpType();
     if (opType == vpiConditionOp) {
       uhdm::AnyCollection* ops = op->getOperands();
-      ops->at(1) = expandPatternAssignment(tps, (uhdm::Expr*)ops->at(1),
-                                           component, instance);
-      ops->at(2) = expandPatternAssignment(tps, (uhdm::Expr*)ops->at(2),
-                                           component, instance);
+      ops->at(1) = expandPatternAssignment(
+          fC, child, tps, (uhdm::Expr*)ops->at(1), component, instance);
+      ops->at(2) = expandPatternAssignment(
+          fC, child, tps, (uhdm::Expr*)ops->at(2), component, instance);
       return result;
     } else if (opType == vpiAssignmentPatternOp) {
       uhdm::AnyCollection* operands = op->getOperands();
@@ -5069,10 +5104,8 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
             int32_t valIndex = 0;
             // Apply default
             for (uhdm::TypespecMember* member : *stps->getMembers()) {
-              uint64_t csize =
-                  Bits(member, invalidValue, component, instance,
-                       fileSystem->toPathId(rhs->getFile(), symbolTable),
-                       rhs->getStartLine(), false);
+              uint64_t csize = Bits(member, invalidValue, component, fC, child,
+                                    instance, false);
               patternSize += csize;
               if (invalidValue) {
                 return result;
@@ -5094,10 +5127,8 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
             }
             valIndex = 0;
             for (uhdm::TypespecMember* member : *stps->getMembers()) {
-              uint64_t csize =
-                  Bits(member, invalidValue, component, instance,
-                       fileSystem->toPathId(rhs->getFile(), symbolTable),
-                       rhs->getStartLine(), false);
+              uint64_t csize = Bits(member, invalidValue, component, fC, child,
+                                    instance, false);
 
               for (uhdm::Any* op : *operands) {
                 bool found = false;
@@ -5193,8 +5224,8 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
                            fileSystem->toPathId(cop->getFile(), symbolTable),
                            cop->getStartLine(), nullptr);
             uint64_t v = eval.get_uvalue(invalidValue, vexp);
-            int32_t csize =
-                adjustOpSize(tps, cop, opIndex, rhs, component, instance);
+            int32_t csize = adjustOpSize(tps, cop, opIndex, rhs, component, fC,
+                                         child, instance);
             if (invalidValue) {
               return result;
             }
@@ -5239,6 +5270,19 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(const uhdm::Typespec* tps,
     result->setSize(size);
     result->setValue(StrCat("UINT:", value));
     result->setDecompile(StrCat(size, "\'d", value));
+
+    uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+    rt->setParent(c);
+    c->setTypespec(rt);
+    rt->setFile(rhs->getFile());
+    rt->setStartLine(rhs->getStartLine());
+    rt->setStartColumn(rhs->getStartColumn());
+    rt->setEndLine(rhs->getEndLine());
+    rt->setEndColumn(rhs->getEndColumn());
+
+    uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+    ts->setParent(rhs);
+    rt->setActual(ts);
   }
   return result;
 }
@@ -5328,20 +5372,38 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val) {
   uint16_t lr = val->getLRange();
   uint16_t rr = val->getRRange();
   if (lr || rr) {
-    uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-    uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-    tpsRef->setParent(c);
-    tpsRef->setActual(tps);
-    c->setTypespec(tpsRef);
+    uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
+    crt->setParent(c);
+    c->setTypespec(crt);
+
+    uhdm::LogicTypespec* ts = s.make<uhdm::LogicTypespec>();
+    ts->setParent(c);
+    crt->setActual(ts);
+
     uhdm::Range* r = s.make<uhdm::Range>();
-    r->setParent(tps);
-    tps->getRanges(true)->emplace_back(r);
+    r->setParent(ts);
+    ts->getRanges(true)->emplace_back(r);
+
     uhdm::Constant* lc = s.make<uhdm::Constant>();
     lc->setValue(StrCat("UINT:", lr));
     r->setLeftExpr(lc);
+
+    uhdm::RefTypespec* lcrt = s.make<uhdm::RefTypespec>();
+    lcrt->setParent(lc);
+    lc->setTypespec(lcrt);
+
     uhdm::Constant* rc = s.make<uhdm::Constant>();
     rc->setValue(StrCat("UINT:", rr));
     r->setRightExpr(rc);
+
+    uhdm::RefTypespec* rcrt = s.make<uhdm::RefTypespec>();
+    rcrt->setParent(lc);
+    rc->setTypespec(rcrt);
+
+    uhdm::IntTypespec* lts = s.make<uhdm::IntTypespec>();
+    lts->setParent(c);
+    lcrt->setActual(lts);
+    rcrt->setActual(lts);
   }
 }
 
@@ -5409,12 +5471,18 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   uhdm::SysTaskCall* scall = s.make<uhdm::SysTaskCall>();
   fC->populateCoreMembers(id, id, scall);
   scall->setName(name);
-  uhdm::AnyCollection* args = scall->getArguments(true);
   uhdm::Constant* c = s.make<uhdm::Constant>();
-  args->emplace_back(c);
-  c->setValue(std::string("STRING:") + std::string(text));
+  c->setParent(scall);
+  c->setValue(StrCat("STRING:", text));
   c->setDecompile(text);
   c->setConstType(vpiStringConst);
+  scall->getArguments(true)->emplace_back(c);
+  uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
+  crt->setParent(c);
+  c->setTypespec(crt);
+  uhdm::StringTypespec* cts = s.make<uhdm::StringTypespec>();
+  cts->setParent(scall);
+  crt->setActual(cts);
   component->addElabSysCall(scall);
   Location loc(fC->getFileId(id), fC->Line(id), fC->Column(id),
                symbols->registerSymbol(text));

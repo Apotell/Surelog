@@ -588,6 +588,9 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
 
 void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
   if (m_reportMissingLocation) {
+    if (object->getParent() &&
+        (object->getParent()->getUhdmType() == uhdm::UhdmType::ImportTypespec))
+      return;
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, object);
   }
 
@@ -783,6 +786,9 @@ void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
 
 void IntegrityChecker::reportMissingFile(const uhdm::Any* object) const {
   if (m_reportMissingFile) {
+    if (object->getParent() &&
+        (object->getParent()->getUhdmType() == uhdm::UhdmType::ImportTypespec))
+      return;
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE, object);
   }
 }

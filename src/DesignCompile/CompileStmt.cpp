@@ -568,13 +568,25 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         NodeId name = fC->Child(Param_assignment);
         NodeId value = fC->Sibling(name);
         uhdm::Parameter* param = s.make<uhdm::Parameter>();
+        param->setParent(pstmt);
+        param->setName(fC->SymName(name));
+        if (ts != nullptr) {
+          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+          setRefTypespecName(tsRef, ts, fC->SymName(Data_type));
+          fC->populateCoreMembers(Data_type_or_implicit, Data_type_or_implicit,
+                                  tsRef);
+          tsRef->setParent(param);
+          param->setTypespec(tsRef);
+          tsRef->setActual(ts);
+        }
         // Unpacked dimensions
         if (fC->Type(value) == VObjectType::paUnpacked_dimension) {
-          int32_t unpackedSize;
-          std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
-              component, fC, value, param, nullptr, unpackedSize, false);
-          param->setRanges(unpackedDimensions);
-          param->setSize(unpackedSize);
+          int32_t unpackedSize = 0;
+          if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
+                  component, fC, value, param, nullptr, unpackedSize, false)) {
+            param->setRanges(unpackedDimensions);
+            param->setSize(unpackedSize);
+          }
           while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
             value = fC->Sibling(value);
           }
@@ -583,25 +595,14 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         fC->populateCoreMembers(name, name, param);
 
         uhdm::ParamAssign* param_assign = s.make<uhdm::ParamAssign>();
+        param_assign->setParent(pstmt);
         fC->populateCoreMembers(Param_assignment, Param_assignment,
                                 param_assign);
-        param_assigns->emplace_back(param_assign);
-        param->setParent(pstmt);
-        param->setName(fC->SymName(name));
-        if (ts != nullptr) {
-          if (param->getTypespec() == nullptr) {
-            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            setRefTypespecName(tsRef, ts, fC->SymName(Data_type));
-            fC->populateCoreMembers(Data_type_or_implicit,
-                                    Data_type_or_implicit, tsRef);
-            tsRef->setParent(param);
-            param->setTypespec(tsRef);
-          }
-          param->getTypespec()->setActual(ts);
-        }
         param_assign->setLhs(param);
-        param_assign->setRhs((uhdm::Expr*)compileExpression(
-            component, fC, value, param_assign, nullptr));
+        param_assign->setRhs(
+            compileExpression(component, fC, value, param_assign, nullptr));
+        param_assigns->emplace_back(param_assign);
+
         Param_assignment = fC->Sibling(Param_assignment);
       }
       results = param_assigns;
@@ -611,6 +612,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId cond = fC->Sibling(the_stmt);
       NodeId rstmt = fC->Sibling(cond);
       uhdm::Repeat* repeat = s.make<uhdm::Repeat>();
+      repeat->setParent(pstmt);
       if (uhdm::Any* cond_exp =
               compileExpression(component, fC, cond, repeat)) {
         repeat->setCondition((uhdm::Expr*)cond_exp);
@@ -630,6 +632,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId cond = fC->Sibling(the_stmt);
       NodeId rstmt = fC->Sibling(cond);
       uhdm::WhileStmt* while_st = s.make<uhdm::WhileStmt>();
+      while_st->setParent(pstmt);
       if (uhdm::Any* cond_exp =
               compileExpression(component, fC, cond, while_st)) {
         while_st->setCondition((uhdm::Expr*)cond_exp);
@@ -649,6 +652,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId Statement_or_null = fC->Sibling(the_stmt);
       NodeId Condition = fC->Sibling(Statement_or_null);
       uhdm::DoWhile* do_while = s.make<uhdm::DoWhile>();
+      do_while->setParent(pstmt);
       if (NodeId Statement = fC->Child(Statement_or_null)) {
         uhdm::AnyCollection* while_stmts = compileStmt(
             component, fC, Statement, do_while, instance, muteErrors);
@@ -677,6 +681,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         // wait
         NodeId Statement_or_null = fC->Sibling(Expression);
         uhdm::WaitStmt* waitst = s.make<uhdm::WaitStmt>();
+        waitst->setParent(pstmt);
         if (NodeId Statement = fC->Child(Statement_or_null)) {
           uhdm::AnyCollection* while_stmts = compileStmt(
               component, fC, Statement, waitst, instance, muteErrors);
@@ -696,6 +701,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       } else {
         // wait order
         uhdm::OrderedWait* waitst = s.make<uhdm::OrderedWait>();
+        waitst->setParent(pstmt);
         stmt = waitst;
         uhdm::AnyCollection* conditions = waitst->getConditions(true);
         NodeId Hierarchical_identifier = Expression;
@@ -765,6 +771,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
     case VObjectType::paEvent_trigger: {
       uhdm::EventStmt* estmt = s.make<uhdm::EventStmt>();
+      estmt->setParent(pstmt);
       NodeId Trigger_type = fC->Child(the_stmt);
       if (fC->Type(Trigger_type) != VObjectType::paNonBlockingTriggerEvent) {
         estmt->setBlocking(true);
@@ -783,6 +790,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
     case VObjectType::RETURN: {
       uhdm::ReturnStmt* return_stmt = s.make<uhdm::ReturnStmt>();
+      return_stmt->setParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, return_stmt);
       if (NodeId cond = fC->Sibling(the_stmt)) {
         if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
@@ -1607,6 +1615,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
   uhdm::Typespec* ts = nullptr;
   while (tf_port_item) {
     uhdm::IODecl* decl = s.make<uhdm::IODecl>();
+    decl->setParent(parent);
     ios->emplace_back(decl);
     NodeId tf_data_type_or_implicit = fC->Child(tf_port_item);
     NodeId tf_data_type = fC->Child(tf_data_type_or_implicit);
@@ -1642,7 +1651,6 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
             component, fC, type, unpackedDimension, decl, nullptr, true)) {
       ts = tempts;
     }
-    decl->setParent(parent);
 
     if (ts != nullptr) {
       if (decl->getTypespec() == nullptr) {

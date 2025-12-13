@@ -89,7 +89,6 @@ bool CompilePackage::compile() {
   const uhdm::ScopedScope scopedScope(pack);
   collectObjects_(CollectType::FUNCTION);
   collectObjects_(CollectType::DEFINITION);
-  m_helper.evalScheduledExprs(m_package);
   collectObjects_(CollectType::OTHER);
 
   do {

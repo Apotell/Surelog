@@ -520,7 +520,6 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   bool m_reportDuplicates = true;
   bool m_reportInvalidForeachVariable = true;
 };
-
-};  // namespace SURELOG
+}  // namespace SURELOG
 
 #endif /* SURELOG_INTEGRITYCHECKER_H */

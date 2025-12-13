@@ -844,14 +844,14 @@ uhdm::Typespec* CompileHelper::compileUpdatedTypespec(
   std::vector<uhdm::Range*>* packedDimensions = nullptr;
   if (packedId) {
     int32_t packedSize = 0;
-    packedDimensions = compileRanges(component, fC, packedId, nullptr, nullptr,
+    packedDimensions = compileRanges(component, fC, packedId, pstmt, nullptr,
                                      packedSize, false);
   }
 
   std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
   if (unpackedId) {
     int32_t unpackedSize = 0;
-    unpackedDimensions = compileRanges(component, fC, unpackedId, nullptr,
+    unpackedDimensions = compileRanges(component, fC, unpackedId, pstmt,
                                        nullptr, unpackedSize, false);
   }
 

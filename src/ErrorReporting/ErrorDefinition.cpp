@@ -525,6 +525,7 @@ bool ErrorDefinition::init() {
   rec(INTEGRITY_CHECK_INVALID_NAME, ERROR, INTG, "Invalid Name %s");
   rec(INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE, ERROR, INTG,
       "Invalid Foreach variable %s");
+  rec(INTEGRITY_CHECK_INVALID_CONST_TPS, ERROR, INTG, "Invalid Typespec: %s");
   return true;
 }
 

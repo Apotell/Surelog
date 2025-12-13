@@ -588,6 +588,9 @@ void IntegrityChecker::reportInvalidLocation(const uhdm::Any* object) const {
 
 void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
   if (m_reportMissingLocation) {
+    if (object->getParent() &&
+        (object->getParent()->getUhdmType() == uhdm::UhdmType::ImportTypespec))
+      return;
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, object);
   }
 
@@ -783,6 +786,9 @@ void IntegrityChecker::reportMissingName(const uhdm::Any* object) const {
 
 void IntegrityChecker::reportMissingFile(const uhdm::Any* object) const {
   if (m_reportMissingFile) {
+    if (object->getParent() &&
+        (object->getParent()->getUhdmType() == uhdm::UhdmType::ImportTypespec))
+      return;
     reportError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE, object);
   }
 }
@@ -860,6 +866,13 @@ void IntegrityChecker::reportInvalidForeachVariable(
   if (m_reportInvalidForeachVariable) {
     reportError(ErrorDefinition::INTEGRITY_CHECK_INVALID_FOREACH_VARIABLE,
                 object);
+  }
+}
+
+void IntegrityChecker::reportMissingConstantTypespec(
+    const uhdm::Any* object) const {
+  if (m_reportMissingConstantTypespec) {
+    reportError(ErrorDefinition::INTEGRITY_CHECK_INVALID_CONST_TPS, object);
   }
 }
 
@@ -1132,7 +1145,14 @@ void IntegrityChecker::visitClockedSeq(const uhdm::ClockedSeq* object) {}
 void IntegrityChecker::visitClockingBlock(const uhdm::ClockingBlock* object) {}
 void IntegrityChecker::visitClockingIODecl(const uhdm::ClockingIODecl* object) {
 }
-void IntegrityChecker::visitConstant(const uhdm::Constant* object) {}
+void IntegrityChecker::visitConstant(const uhdm::Constant* object) {
+  bool report = true;
+  if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
+    if (const uhdm::Typespec* const t = rt->getActual()) {
+      report = false;
+    }
+  }
+}
 void IntegrityChecker::visitConstrForeach(const uhdm::ConstrForeach* object) {}
 void IntegrityChecker::visitConstrIf(const uhdm::ConstrIf* object) {}
 void IntegrityChecker::visitConstrIfElse(const uhdm::ConstrIfElse* object) {}

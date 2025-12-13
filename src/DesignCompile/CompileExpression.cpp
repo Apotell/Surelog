@@ -400,14 +400,23 @@ static bool largeInt(std::string_view str) {
 }
 
 uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
-                                            uhdm::Serializer &s) {
+                                            uhdm::Serializer &s,
+                                            uhdm::Any *pscope) {
   VObjectType objtype = fC->Type(child);
   uhdm::Constant *result = nullptr;
   switch (objtype) {
     case VObjectType::INT_CONST: {
       // Do not evaluate the constant, keep it as in the source text:
       uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pscope);
       fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = nullptr;
       std::string value = std::string(fC->SymName(child));
       value.erase(std::remove(value.begin(), value.end(), '_'), value.end());
       std::string v;
@@ -433,6 +442,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         } else {
           v = value;
           size = "";
+          tps = s.make<uhdm::LongIntTypespec>();
         }
         v = StringUtils::replaceAll(v, "#", "");
         v = StringUtils::replaceAll(v, "_", "");
@@ -450,57 +460,89 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         switch (base) {
           case 'h':
           case 'H': {
-            v = "HEX:" + v;
+            v = StrCat("HEX:", v);
             c->setConstType(vpiHexConst);
+            if (!tps) tps = s.make<uhdm::IntTypespec>();
             break;
           }
           case 'b':
           case 'B': {
-            v = "BIN:" + v;
+            v = StrCat("BIN:", v);
             c->setConstType(vpiBinaryConst);
+            tps = s.make<uhdm::LogicTypespec>();
             break;
           }
           case 'o':
           case 'O': {
-            v = "OCT:" + v;
+            v = StrCat("OCT:", v);
             c->setConstType(vpiOctConst);
+            if (!tps) {
+              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            }
             break;
           }
           case 'd':
           case 'D': {
-            v = "DEC:" + v;
+            v = StrCat("DEC:", v);
             c->setConstType(vpiDecConst);
+            if (!tps) {
+              uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+              t->setSigned(true);
+              tps = t;
+            }
             break;
           }
           default: {
-            v = "BIN:" + v;
+            v = StrCat("BIN:", v);
             c->setConstType(vpiBinaryConst);
+            tps = s.make<uhdm::LogicTypespec>();
             break;
           }
         }
       } else {
         if (!value.empty() && value[0] == '-') {
-          v.assign("INT:").append(value);
+          v = StrCat("INT:", value);
           c->setConstType(vpiIntConst);
+          if (!tps) {
+            uhdm::IntTypespec *t = s.make<uhdm::IntTypespec>();
+            t->setSigned(true);
+            tps = t;
+          }
         } else {
-          v.assign("UINT:").append(value);
+          v = StrCat("UINT:", value);
           c->setConstType(vpiUIntConst);
           v = StringUtils::replaceAll(v, "#", "");
+          if (!tps) tps = s.make<uhdm::IntTypespec>();
         }
         c->setSize(64);
       }
-
+      tps->setParent(pscope);
+      rt->setActual(tps);
       c->setValue(v);
       result = c;
       break;
     }
     case VObjectType::REAL_CONST: {
-      uhdm::Constant *c = s.make<uhdm::Constant>();
       const std::string_view value = fC->SymName(child);
+
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pscope);
       c->setDecompile(value);
       c->setValue(StrCat("REAL:", value));
       c->setConstType(vpiRealConst);
       c->setSize(64);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::RealTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -512,12 +554,22 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::paScalar_1TickB1:
     case VObjectType::pa1: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:1";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:1");
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
       c->setDecompile("1'b1");
       fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -526,21 +578,42 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::paNumber_Tickb1:
     case VObjectType::paNumber_TickB1: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:1";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:1");
       c->setConstType(vpiBinaryConst);
       c->setSize(0);
       c->setDecompile("'b1");
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
     case VObjectType::paNumber_Tick1: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:1";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:1");
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'1");
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -552,12 +625,22 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::paScalar_1TickB0:
     case VObjectType::pa0: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:0";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:0");
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
       c->setDecompile("1'b0");
       fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -566,43 +649,85 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::paNumber_Tickb0:
     case VObjectType::paNumber_TickB0: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:0";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:0");
       c->setConstType(vpiBinaryConst);
       c->setSize(0);
       c->setDecompile("'b0");
       fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
     case VObjectType::paNumber_Tick0: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:0";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:0");
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'0");
       fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::BitTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
     case VObjectType::paZ: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:Z";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:Z");
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'Z");
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
     case VObjectType::paX: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:X";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:X");
       c->setConstType(vpiBinaryConst);
       c->setSize(-1);
       c->setDecompile("'X");
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -615,11 +740,22 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
     case VObjectType::paInitVal_1TickBx:
     case VObjectType::paInitVal_1TickBX: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      std::string value = "BIN:X";
-      c->setValue(value);
+      c->setParent(pscope);
+      c->setValue("BIN:X");
       c->setConstType(vpiBinaryConst);
       c->setSize(1);
       c->setDecompile("1'bX");
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::LogicTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -660,20 +796,47 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
         default:
           break;
       }
+
       uhdm::Constant *c = s.make<uhdm::Constant>();
-      c->setValue("UINT:" + std::to_string(val));
+      c->setParent(pscope);
+      c->setValue(StrCat("UINT:", val));
       c->setConstType(vpiUIntConst);
       c->setSize(64);
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::IntTypespec *tps = s.make<uhdm::IntTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+      tps->setSigned(false);
+
       result = c;
       break;
     }
     case VObjectType::STRING_LITERAL: {
-      uhdm::Constant *c = s.make<uhdm::Constant>();
       std::string_view value = StringUtils::unquoted(fC->SymName(child));
+
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pscope);
       c->setDecompile(fC->SymName(child));
       c->setSize(value.length() * 8);
       c->setValue(StrCat("STRING:", value));
       c->setConstType(vpiStringConst);
+      fC->populateCoreMembers(child, child, c);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      rt->setParent(c);
+      c->setTypespec(rt);
+      fC->populateCoreMembers(child, child, rt);
+
+      uhdm::Typespec *tps = s.make<uhdm::StringTypespec>();
+      tps->setParent(pscope);
+      rt->setActual(tps);
+
       result = c;
       break;
     }
@@ -685,8 +848,10 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
 
 uhdm::Any *CompileHelper::decodeHierPath(
     uhdm::HierPath *path, bool &invalidValue, DesignComponent *component,
-    ValuedComponentI *instance, PathId fileId, uint32_t lineNumber,
+    const FileContent *fC, NodeId nodeId, ValuedComponentI *instance,
     uhdm::Any *pexpr, bool muteErrors, bool returnTypespec) {
+  const PathId fileId = fC->getFileId();
+
   uhdm::GetObjectFunctor getObjectFunctor =
       [&](std::string_view name, const uhdm::Any *inst,
           const uhdm::Any *pexpr) -> uhdm::Any * {
@@ -695,7 +860,7 @@ uhdm::Any *CompileHelper::decodeHierPath(
   uhdm::GetObjectFunctor getValueFunctor =
       [&](std::string_view name, const uhdm::Any *inst,
           const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, instance, fileId, lineNumber,
+    return (uhdm::Expr *)getValue(name, component, fC, nodeId, instance,
                                   (uhdm::Any *)pexpr, false);
   };
   uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
@@ -732,19 +897,23 @@ uhdm::Expr *CompileHelper::reduceExpr(uhdm::Any *result, bool &invalidValue,
 
 uhdm::Any *CompileHelper::getValue(std::string_view name,
                                    DesignComponent *component,
-                                   ValuedComponentI *instance, PathId fileId,
-                                   uint32_t lineNumber, uhdm::Any *pexpr,
+                                   const FileContent *fC, NodeId nodeId,
+                                   ValuedComponentI *instance, uhdm::Any *pexpr,
                                    bool muteErrors) {
-  Design *const design = m_compileDesign->getCompiler()->getDesign();
-  uhdm::Serializer &s = m_compileDesign->getSerializer();
-  Value *sval = nullptr;
-  uhdm::Any *result = nullptr;
+  const PathId fileId = fC->getFileId();
+  const uint32_t lineNumber = fC->Line(nodeId);
   if (loopDetected(fileId, lineNumber, instance)) {
     return nullptr;
   }
   if (m_checkForLoops) {
     m_stackLevel++;
   }
+
+  Design *const design = m_compileDesign->getCompiler()->getDesign();
+  uhdm::Serializer &s = m_compileDesign->getSerializer();
+  Value *sval = nullptr;
+  uhdm::Any *result = nullptr;
+
   if (name.find("::") != std::string::npos) {
     std::vector<std::string_view> res;
     StringUtils::tokenizeMulti(name, "::", res);
@@ -770,13 +939,10 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
           }
         }
         if (result == nullptr) {
-          if (Value *sval = pack->getValue(varName)) {
-            uhdm::Constant *c = s.make<uhdm::Constant>();
-            c->setValue(sval->uhdmValue());
+          if (Value *const sval = pack->getValue(varName)) {
+            uhdm::Constant *c = constantFromValue(sval, pexpr);
+            fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
             setRange(c, sval);
-            c->setDecompile(sval->decompiledValue());
-            c->setConstType(sval->vpiValType());
-            c->setSize(sval->getSize());
             result = c;
           }
         }
@@ -797,12 +963,9 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
     if (result == nullptr) {
       sval = instance->getValue(name);
       if (sval && sval->isValid()) {
-        uhdm::Constant *c = s.make<uhdm::Constant>();
-        c->setValue(sval->uhdmValue());
+        uhdm::Constant *c = constantFromValue(sval, pexpr);
+        fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
         setRange(c, sval);
-        c->setDecompile(sval->decompiledValue());
-        c->setConstType(sval->vpiValType());
-        c->setSize(sval->getSize());
         result = c;
       }
     }
@@ -816,12 +979,9 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
       if (result == nullptr) {
         sval = instance->getValue(name);
         if (sval && sval->isValid()) {
-          uhdm::Constant *c = s.make<uhdm::Constant>();
-          c->setValue(sval->uhdmValue());
+          uhdm::Constant *c = constantFromValue(sval, pexpr);
+          fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
           setRange(c, sval);
-          c->setDecompile(sval->decompiledValue());
-          c->setConstType(sval->vpiValType());
-          c->setSize(sval->getSize());
           result = c;
         }
       }
@@ -835,12 +995,9 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
     if (result == nullptr) {
       sval = component->getValue(name);
       if (sval && sval->isValid()) {
-        uhdm::Constant *c = s.make<uhdm::Constant>();
-        c->setValue(sval->uhdmValue());
+        uhdm::Constant *c = constantFromValue(sval, pexpr);
+        fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
         setRange(c, sval);
-        c->setDecompile(sval->decompiledValue());
-        c->setConstType(sval->vpiValType());
-        c->setSize(sval->getSize());
         result = c;
       }
     }
@@ -858,19 +1015,20 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
                 uhdm::Operation *op = (uhdm::Operation *)param->getRhs();
                 int32_t opType = op->getOpType();
                 if (opType == vpiAssignmentPatternOp) {
-                  const uhdm::Any *lhs = param->getLhs();
-                  uhdm::Any *rhs = param->getRhs();
                   const uhdm::Typespec *ts = nullptr;
-                  if (lhs->getUhdmType() == uhdm::UhdmType::Parameter) {
+                  const uhdm::Parameter *lhs = param->getLhs<uhdm::Parameter>();
+                  if (lhs != nullptr) {
                     if (const uhdm::RefTypespec *rt =
                             ((uhdm::Parameter *)lhs)->getTypespec()) {
                       ts = rt->getActual();
                     }
                   }
-                  rhs = expandPatternAssignment(ts, (uhdm::Expr *)rhs,
-                                                component, instance);
-                  param->setRhs(rhs);
-                  reorderAssignmentPattern(component, lhs, rhs, instance, 0);
+                  if (uhdm::Expr *rhs = param->getRhs<uhdm::Expr>()) {
+                    rhs = expandPatternAssignment(fC, nodeId, ts, rhs,
+                                                  component, instance);
+                    param->setRhs(rhs);
+                    reorderAssignmentPattern(component, lhs, rhs, instance, 0);
+                  }
                 }
               }
 
@@ -891,12 +1049,12 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
         uhdm::EnumTypespec *etps = (uhdm::EnumTypespec *)tps;
         for (auto n : *etps->getEnumConsts()) {
           if (n->getName() == name) {
-            uhdm::Constant *c = s.make<uhdm::Constant>();
+            uhdm::Constant *c = constantFromValue(sval, pexpr);
+            fC->populateCoreMembers(nodeId, nodeId, c->getTypespec());
             c->setValue(n->getValue());
             setRange(c, sval);
-            c->setSize(64);
-            c->setConstType(vpiUIntConst);
             result = c;
+            break;
           }
         }
       }
@@ -908,8 +1066,8 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
     if (resultType == uhdm::UhdmType::Constant) {
     } else if (resultType == uhdm::UhdmType::RefObj) {
       if (result->getName() != name) {
-        if (uhdm::Any *tmp = getValue(result->getName(), component, instance,
-                                      fileId, lineNumber, pexpr, muteErrors)) {
+        if (uhdm::Any *tmp = getValue(result->getName(), component, fC, nodeId,
+                                      instance, pexpr, muteErrors)) {
           result = tmp;
         }
       }
@@ -1415,21 +1573,41 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
       switch (childType) {
         case VObjectType::paNull_keyword: {
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setValue("UINT:0");
           c->setDecompile("0");
           c->setSize(64);
           c->setConstType(vpiNullConst);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          fC->populateCoreMembers(child, child, rt);
+          rt->setParent(c);
+          c->setTypespec(rt);
+
+          uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
         case VObjectType::paDollar_keyword: {
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setConstType(vpiUnboundedConst);
           c->setValue("STRING:$");
           c->setDecompile("$");
           c->setSize(1);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          fC->populateCoreMembers(child, child, rt);
+          rt->setParent(c);
+          c->setTypespec(rt);
+
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
@@ -1731,7 +1909,6 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           NodeId op = fC->Sibling(subExpr);
           if (op) {
             operation = s.make<uhdm::Operation>();
-            operation->getOperands(true);
             operation->setParent(pexpr);
             if (attributes != nullptr) {
               operation->setAttributes(attributes);
@@ -1743,7 +1920,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           if (uhdm::Any *opL = compileExpression(component, fC, subExpr, pexpr2,
                                                  instance, muteErrors)) {
             if (operation != nullptr) {
-              operation->getOperands()->emplace_back(opL);
+              operation->getOperands(true)->emplace_back(opL);
             }
             result = opL;
           }
@@ -1753,7 +1930,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               NodeId subRExpr = fC->Sibling(op);
               if (uhdm::Any *opR = compileExpression(
                       component, fC, subRExpr, pexpr2, instance, muteErrors)) {
-                operation->getOperands()->emplace_back(opR);
+                operation->getOperands(true)->emplace_back(opR);
               }
               op = fC->Sibling(subRExpr);
             } else if (fC->Type(op) == VObjectType::paComma_operator) {
@@ -1761,7 +1938,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               NodeId subRExpr = fC->Sibling(op);
               if (uhdm::Any *opR = compileExpression(
                       component, fC, subRExpr, pexpr2, instance, muteErrors)) {
-                operation->getOperands()->emplace_back(opR);
+                operation->getOperands(true)->emplace_back(opR);
               }
               op = fC->Sibling(subRExpr);
             }
@@ -1784,9 +1961,9 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
           VObjectType opType = fC->Type(op);
           uint32_t vopType = UhdmWriter::getVpiOpType(opType);
           uhdm::Operation *operation = s.make<uhdm::Operation>();
-          uhdm::AnyCollection *operands = operation->getOperands(true);
-          result = operation;
           operation->setParent(pexpr);
+
+          uhdm::AnyCollection *operands = operation->getOperands(true);
           if (attributes != nullptr) {
             operation->setAttributes(attributes);
             for (auto a : *attributes) a->setParent(operation);
@@ -1796,6 +1973,8 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
             opL->setParent(operation, true);
             operands->emplace_back(opL);
           }
+
+          result = operation;
           if (vopType == 0) {
             result = nullptr;
           }
@@ -1925,9 +2104,9 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                                      instance);
           } else {
             uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
+            sys->setParent(pexpr);
             sys->setName(name);
             fC->populateCoreMembers(n, n, sys->getNameObj());
-            sys->setParent(pexpr);
             NodeId argListNode = fC->Sibling(child);
             if (uhdm::AnyCollection *arguments = compileTfCallArguments(
                     component, fC, argListNode, sys, instance, muteErrors)) {
@@ -1948,13 +2127,13 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
             if (uint32_t vopType = UhdmWriter::getVpiOpType(opType)) {
               // Post increment/decrement
               uhdm::Operation *operation = s.make<uhdm::Operation>();
+              operation->setParent(pexpr);
               if (attributes != nullptr) {
                 operation->setAttributes(attributes);
                 for (auto a : *attributes) a->setParent(operation);
               }
-              fC->populateCoreMembers(parent, parent, operation);
-              operation->setParent(pexpr);
               operation->setOpType(vopType);
+              fC->populateCoreMembers(parent, parent, operation);
               operation->getOperands(true)->emplace_back(variable);
               variable->setParent(operation, true);
               result = operation;
@@ -2036,13 +2215,24 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               }
             } else {
               uhdm::Constant *c = s.make<uhdm::Constant>();
+              c->setParent(pexpr);
               c->setValue("INT:0");
               c->setDecompile("0");
               c->setSize(64);
               c->setConstType(vpiIntConst);
-              c->setParent(pexpr);
               fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
                                       c);
+
+              uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+              rt->setParent(c);
+              c->setTypespec(rt);
+              fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
+                                      rt);
+
+              uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+              ts->setParent(pexpr);
+              rt->setActual(ts);
+
               args->emplace_back(c);
             }
             Sequence_actual_arg = fC->Sibling(Sequence_actual_arg);
@@ -2085,13 +2275,24 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                 } else {
                   std::string_view val = fC->SymName(subOp1);
                   val.remove_prefix(2);
+
                   uhdm::Constant *c = s.make<uhdm::Constant>();
+                  c->setParent(operation);
                   c->setValue(StrCat("UINT:", val));
                   c->setDecompile(val);
                   c->setSize(64);
                   c->setConstType(vpiUIntConst);
-                  c->setParent(operation);
                   fC->populateCoreMembers(subOp1, subOp1, c);
+
+                  uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+                  rt->setParent(c);
+                  c->setTypespec(rt);
+                  fC->populateCoreMembers(subOp1, subOp1, rt);
+
+                  uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+                  ts->setParent(operation);
+                  rt->setActual(ts);
+
                   operation->getOperands()->emplace_back(c);
                 }
               }
@@ -2164,15 +2365,11 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
             NodeId paramId = fC->Sibling(child);
             if (fC->Type(paramId) != VObjectType::STRING_CONST)
               paramId = fC->Child(paramId);
-            const std::string_view n = fC->SymName(paramId);
-            name.assign(packageName).append("::").append(n);
+            name = StrCat(packageName, "::", fC->SymName(paramId));
           } else if (childType == VObjectType::paClass_type) {
-            const std::string_view packageName = fC->SymName(fC->Child(child));
-            name = packageName;
-            std::string n;
+            name = fC->SymName(fC->Child(child));
             if (fC->Sibling(parent)) {
-              n = fC->SymName(fC->Sibling(parent));
-              name += "::" + n;
+              name = StrCat(name, "::", fC->SymName(fC->Sibling(parent)));
             }
           } else {
             NodeId rhs;
@@ -2214,14 +2411,14 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                 uint32_t vopType = UhdmWriter::getVpiOpType(type);
                 if (vopType) {
                   uhdm::Operation *op = s.make<uhdm::Operation>();
+                  op->setParent(pexpr);
                   op->setAttributes(attributes);
                   op->setOpType(vopType);
-                  op->setParent(pexpr);
                   fC->populateCoreMembers(parent, parent, op);
                   uhdm::RefObj *ref = s.make<uhdm::RefObj>();
-                  fC->populateCoreMembers(child, child, ref);
-                  ref->setName(name);
                   ref->setParent(op);
+                  ref->setName(name);
+                  fC->populateCoreMembers(child, child, ref);
                   op->getOperands(true)->emplace_back(ref);
                   result = op;
                 }
@@ -2239,18 +2436,20 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
             result = ref;
           } else {
             uhdm::Constant *c = s.make<uhdm::Constant>();
+            c->setParent(pexpr);
             c->setValue(sval->uhdmValue());
             c->setDecompile(sval->decompiledValue());
             c->setConstType(sval->vpiValType());
             c->setSize(sval->getSize());
 
-            uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
-            ts->setSigned(sval->isSigned());
-
             uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
             rt->setParent(c);
-            rt->setActual(ts);
             c->setTypespec(rt);
+
+            uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+            ts->setParent(pexpr);
+            rt->setActual(ts);
+            ts->setSigned(sval->isSigned());
 
             result = c;
           }
@@ -2294,7 +2493,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::STRING_LITERAL: {
-          if ((result = compileConst(fC, child, s))) {
+          if ((result = compileConst(fC, child, s, pexpr))) {
             result->setParent(pexpr);
           }
           break;
@@ -2548,6 +2747,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
               } else {
                 std::string_view val = fC->SymName(subOp1);
                 val.remove_prefix(2);
+
                 uhdm::Constant *c = s.make<uhdm::Constant>();
                 c->setParent(operation);
                 c->setValue(StrCat("UINT:", val));
@@ -2555,6 +2755,16 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
                 c->setSize(64);
                 c->setConstType(vpiUIntConst);
                 fC->populateCoreMembers(subOp1, subOp1, c);
+
+                uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+                rt->setParent(c);
+                c->setTypespec(rt);
+                fC->populateCoreMembers(subOp1, subOp1, rt);
+
+                uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+                ts->setParent(operation);
+                rt->setActual(ts);
+
                 operands->emplace_back(c);
               }
             }
@@ -2719,54 +2929,104 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         }
         case VObjectType::paNull_keyword: {
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setValue("UINT:0");
           c->setDecompile("0");
           c->setSize(64);
           c->setConstType(vpiNullConst);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          c->setTypespec(rt);
+          fC->populateCoreMembers(parent, parent, rt);
+
+          uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
         case VObjectType::paDollar_keyword: {
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setConstType(vpiUnboundedConst);
           c->setValue("STRING:$");
           c->setDecompile("$");
           c->setSize(1);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          c->setTypespec(rt);
+          fC->populateCoreMembers(parent, parent, rt);
+
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
         case VObjectType::paThis_keyword: {
           // TODO: To be changed to class var
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setConstType(vpiStringConst);
           c->setValue("STRING:this");
           c->setDecompile("this");
           c->setSize(4);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          c->setTypespec(rt);
+          fC->populateCoreMembers(parent, parent, rt);
+
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
         case VObjectType::paSuper_keyword: {
           // TODO: To be changed to class var
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setConstType(vpiStringConst);
           c->setValue("STRING:super");
           c->setDecompile("super");
           c->setSize(5);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          c->setTypespec(rt);
+          fC->populateCoreMembers(parent, parent, rt);
+
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
         case VObjectType::paThis_dot_super: {
           // TODO: To be changed to class var
           uhdm::Constant *c = s.make<uhdm::Constant>();
+          c->setParent(pexpr);
           c->setConstType(vpiStringConst);
           c->setValue("STRING:this.super");
           c->setDecompile("this.super");
           c->setSize(10);
-          c->setParent(pexpr);
+
+          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+          rt->setParent(c);
+          c->setTypespec(rt);
+          fC->populateCoreMembers(parent, parent, rt);
+
+          uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+          ts->setParent(pexpr);
+          rt->setActual(ts);
+
           result = c;
           break;
         }
@@ -2815,7 +3075,7 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::STRING_LITERAL: {
-          if ((result = compileConst(fC, parent, s))) {
+          if ((result = compileConst(fC, parent, s, pexpr))) {
             result->setParent(pexpr);
           }
           break;
@@ -2828,8 +3088,8 @@ uhdm::Any *CompileHelper::compileExpression(DesignComponent *component,
         }
         case VObjectType::paArray_member_label: {
           uhdm::RefObj *ref = s.make<uhdm::RefObj>();
-          ref->setName("default");
           ref->setParent(pexpr);
+          ref->setName("default");
           ref->setStructMember(true);
           result = ref;
           break;
@@ -3094,6 +3354,9 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
     bool muteErrors) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::RangeCollection *ranges = nullptr;
+  Design *const design = m_compileDesign->getCompiler()->getDesign();
+  if (pexpr == nullptr) pexpr = component->getUhdmModel();
+  if (pexpr == nullptr) pexpr = design->getUhdmDesign();
   size = 0;
   if (Packed_dimension &&
       ((fC->Type(Packed_dimension) == VObjectType::paPacked_dimension) ||
@@ -3167,8 +3430,8 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
                  (fC->Type(Packed_dimension) ==
                   VObjectType::paUnsized_dimension)) {
         uhdm::Range *range = s.make<uhdm::Range>();
-
         fC->populateCoreMembers(Packed_dimension, Packed_dimension, range);
+
         uhdm::Constant *lexpc = s.make<uhdm::Constant>();
         lexpc->setConstType(vpiUIntConst);
         lexpc->setSize(64);
@@ -3189,11 +3452,28 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         range->setRightExpr(rexpc);
         range->setParent(pexpr);
         rexpc->setParent(range);
+
+        uhdm::RefTypespec *lrt = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, lrt);
+        lrt->setParent(lexpc);
+        lexpc->setTypespec(lrt);
+
+        uhdm::RefTypespec *rrt = s.make<uhdm::RefTypespec>();
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, rrt);
+        rrt->setParent(rexpc);
+        rexpc->setTypespec(rrt);
+
+        uhdm::IntTypespec *ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(pexpr);
+        lrt->setActual(ts);
+        rrt->setActual(ts);
+
         ranges->emplace_back(range);
       } else if (fC->Type(fC->Child(Packed_dimension)) ==
                  VObjectType::paAssociative_dimension) {
         NodeId DataType = fC->Child(fC->Child(Packed_dimension));
         uhdm::Range *range = s.make<uhdm::Range>();
+        range->setParent(pexpr);
         fC->populateCoreMembers(Packed_dimension, Packed_dimension, range);
 
         uhdm::Constant *lexpc = s.make<uhdm::Constant>();
@@ -3214,6 +3494,24 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         range->setRightExpr(rexpc);
         fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, rexpc);
 
+        uhdm::RefTypespec *lrt = s.make<uhdm::RefTypespec>();
+        lrt->setParent(lexpc);
+        lexpc->setTypespec(lrt);
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, lrt);
+
+        uhdm::RefTypespec *rrt = s.make<uhdm::RefTypespec>();
+        rrt->setParent(rexpc);
+        rexpc->setTypespec(rrt);
+        fC->populateCoreMembers(Packed_dimension, Packed_dimension, rrt);
+
+        uhdm::IntTypespec *lts = s.make<uhdm::IntTypespec>();
+        lts->setParent(pexpr);
+        lrt->setActual(lts);
+
+        uhdm::StringTypespec *rts = s.make<uhdm::StringTypespec>();
+        rts->setParent(pexpr);
+        rrt->setActual(rts);
+
         if (uhdm::Typespec *assoc_tps =
                 compileTypespec(component, fC, DataType, InvalidNodeId, nullptr,
                                 instance, true)) {
@@ -3224,7 +3522,6 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
           rexpc->setTypespec(assoc_tps_rt);
         }
 
-        range->setParent(pexpr);
         ranges->emplace_back(range);
       }
       Packed_dimension = fC->Sibling(Packed_dimension);
@@ -3300,9 +3597,11 @@ uhdm::Any *CompileHelper::compilePartSelectRange(
 }
 
 uint64_t CompileHelper::Bits(const uhdm::Any *typespec, bool &invalidValue,
-                             DesignComponent *component,
-                             ValuedComponentI *instance, PathId fileId,
-                             uint32_t lineNumber, bool sizeMode) {
+                             DesignComponent *component, const FileContent *fC,
+                             NodeId nodeId, ValuedComponentI *instance,
+                             bool sizeMode) {
+  const PathId fileId = fC->getFileId();
+  const uint32_t lineNumber = fC->Line(nodeId);
   if (loopDetected(fileId, lineNumber, instance)) {
     return 0;
   }
@@ -3332,7 +3631,7 @@ uint64_t CompileHelper::Bits(const uhdm::Any *typespec, bool &invalidValue,
   uhdm::GetObjectFunctor getValueFunctor =
       [&](std::string_view name, const uhdm::Any *inst,
           const uhdm::Any *pexpr) -> uhdm::Any * {
-    return (uhdm::Expr *)getValue(name, component, instance, fileId, lineNumber,
+    return (uhdm::Expr *)getValue(name, component, fC, nodeId, instance,
                                   (uhdm::Any *)pexpr, false);
   };
   uhdm::GetTaskFuncFunctor getTaskFuncFunctor =
@@ -3438,8 +3737,8 @@ const uhdm::Typespec *CompileHelper::getTypespec(DesignComponent *component,
         if (exp->getUhdmType() == uhdm::UhdmType::HierPath) {
           bool invalidValue = false;
           result = (uhdm::Typespec *)decodeHierPath(
-              (uhdm::HierPath *)exp, invalidValue, component, instance,
-              fC->getFileId(), fC->Line(id), nullptr, false, true);
+              (uhdm::HierPath *)exp, invalidValue, component, fC, id, instance,
+              nullptr, false, true);
         } else if (exp->getUhdmType() == uhdm::UhdmType::BitSelect) {
           uhdm::BitSelect *select = (uhdm::BitSelect *)exp;
           basename = select->getName();
@@ -3602,97 +3901,162 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
                                           ValuedComponentI *instance) {
   uhdm::Serializer &s = m_compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
-  uhdm::Constant *c = s.make<uhdm::Constant>();
+
   if (fC->Type(Expression) == VObjectType::paData_type) {
     Expression = fC->Child(Expression);
     if (fC->Type(Expression) == VObjectType::VIRTUAL)
       Expression = fC->Sibling(Expression);
   }
+
+  uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+
+  uhdm::Typespec *ts = nullptr;
   VObjectType type = fC->Type(Expression);
   switch (type) {
-    case VObjectType::paIntVec_TypeLogic:
+    case VObjectType::paIntVec_TypeLogic: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:logic");
       c->setDecompile("logic");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntVec_TypeBit:
+    } break;
+    case VObjectType::paIntVec_TypeBit: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:bit");
       c->setDecompile("bit");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntVec_TypeReg:
+    } break;
+    case VObjectType::paIntVec_TypeReg: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:reg");
       c->setDecompile("reg");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_Byte:
+    } break;
+    case VObjectType::paIntegerAtomType_Byte: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:byte");
       c->setDecompile("byte");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_Shortint:
+    } break;
+    case VObjectType::paIntegerAtomType_Shortint: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:shortint");
       c->setDecompile("shortint");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_Int:
+    } break;
+    case VObjectType::paIntegerAtomType_Int: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:int");
       c->setDecompile("int");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_Integer:
+    } break;
+    case VObjectType::paIntegerAtomType_Integer: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:integer");
       c->setDecompile("integer");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_LongInt:
+    } break;
+    case VObjectType::paIntegerAtomType_LongInt: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:longint");
       c->setDecompile("longint");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paIntegerAtomType_Time:
+    } break;
+    case VObjectType::paIntegerAtomType_Time: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:time");
       c->setDecompile("time");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paNonIntType_ShortReal:
+    } break;
+    case VObjectType::paNonIntType_ShortReal: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:shortreal");
       c->setDecompile("shortreal");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paNonIntType_Real:
+    } break;
+    case VObjectType::paNonIntType_Real: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:real");
       c->setDecompile("real");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    case VObjectType::paNonIntType_RealTime:
+    } break;
+    case VObjectType::paNonIntType_RealTime: {
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue("STRING:realtime");
       c->setDecompile("realtime");
       c->setConstType(vpiStringConst);
+      c->setTypespec(rt);
+      ts = s.make<uhdm::StringTypespec>();
       result = c;
-      break;
-    default:
-      uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
-      sys->setName("$typename");
-      sys->setParent(pexpr);
-      result = sys;
+    } break;
+    default: {
       const std::string_view arg = fC->SymName(Expression);
+      uhdm::Constant *c = s.make<uhdm::Constant>();
+      c->setParent(pexpr);
       c->setValue(StrCat("STRING:", arg));
       c->setDecompile(arg);
       c->setConstType(vpiStringConst);
+
+      rt->setParent(c);
+      c->setTypespec(rt);
+
+      uhdm::SysFuncCall *sys = s.make<uhdm::SysFuncCall>();
+      sys->setName("$typename");
+      sys->setParent(pexpr);
+      sys->getArguments(true)->emplace_back(c);
       c->setParent(sys);
-      break;
+      result = sys;
+    } break;
+  }
+  rt->setParent(result);
+  fC->populateCoreMembers(Expression, Expression, rt);
+  if (ts != nullptr) {
+    ts->setParent(pexpr);
+    rt->setActual(ts);
   }
   return result;
 }
@@ -4046,6 +4410,16 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
       uhdm::Constant *cvar = s.make<uhdm::Constant>();
       cvar->setDecompile("this");
       cvar->setParent(pexpr);
+
+      uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
+      fC->populateCoreMembers(name, name, rt);
+      rt->setParent(cvar);
+      cvar->setTypespec(rt);
+
+      uhdm::StringTypespec *ts = s.make<uhdm::StringTypespec>();
+      ts->setParent(pexpr);
+      rt->setActual(ts);
+
       result = cvar;
     }
   } else if (fC->Type(name) == VObjectType::paClass_scope) {
@@ -4100,13 +4474,10 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
               return tmpResult;
             }
           }
-          uhdm::Constant *c = s.make<uhdm::Constant>();
-          c->setValue(val->uhdmValue());
-          c->setDecompile(val->decompiledValue());
-          c->setSize(val->getSize());
-          c->setConstType(val->vpiValType());
-          c->setParent(pexpr);
+          uhdm::Constant *c = constantFromValue(val, pexpr);
           fC->populateCoreMembers(Class_scope_name, Class_scope_name, c);
+          fC->populateCoreMembers(Class_scope_name, Class_scope_name,
+                                  c->getTypespec());
           result = c;
           return result;
         }
@@ -4549,9 +4920,8 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(DesignComponent *component,
         tmpName.clear();
         result = ref;
       }
-    } else if (uhdm::Any *st =
-                   getValue(sval, component, instance, fC->getFileId(),
-                            fC->Line(Bit_select), pexpr, muteErrors)) {
+    } else if (uhdm::Any *st = getValue(sval, component, fC, Bit_select,
+                                        instance, pexpr, muteErrors)) {
       uhdm::UhdmType type = st->getUhdmType();
       NodeId Select = dotedName;
       if (NodeId BitSelect = fC->Child(Select)) {

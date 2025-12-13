@@ -314,7 +314,7 @@ class CompileHelper final {
   void compileBindStmt(DesignComponent* component, const FileContent* fC,
                        NodeId nodeId, ValuedComponentI* instance = nullptr);
 
-  uhdm::Constant* constantFromValue(Value* val);
+  uhdm::Constant* constantFromValue(Value* val, uhdm::Any* pexpr);
 
   uhdm::Any* compileExpression(DesignComponent* component,
                                const FileContent* fC, NodeId nodeId,
@@ -454,7 +454,7 @@ class CompileHelper final {
                                       uhdm::Any* pscope);
 
   uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
-                               uhdm::Serializer& s);
+                               uhdm::Serializer& s, uhdm::Any* pscope);
 
   uhdm::Any* compilePsOrHierarchicalArrayIdentifier(DesignComponent* component,
                                                     const FileContent* fC,
@@ -475,33 +475,29 @@ class CompileHelper final {
 
   int32_t adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
                        int32_t opIndex, uhdm::Expr* rhs,
-                       DesignComponent* component, ValuedComponentI* instance);
+                       DesignComponent* component, const FileContent* fC,
+                       NodeId nodeId, ValuedComponentI* instance);
 
   void adjustUnsized(uhdm::Constant* c, int32_t size);
 
-  uhdm::Any* defaultPatternAssignment(const uhdm::Typespec* tps, uhdm::Any* exp,
+  uhdm::Any* defaultPatternAssignment(const FileContent* fC, NodeId child,
+                                      const uhdm::Typespec* tps, uhdm::Any* exp,
                                       DesignComponent* component,
                                       ValuedComponentI* instance);
 
-  uhdm::Expr* expandPatternAssignment(const uhdm::Typespec* tps,
+  uhdm::Expr* expandPatternAssignment(const FileContent* fC, NodeId child,
+                                      const uhdm::Typespec* tps,
                                       uhdm::Expr* rhs,
                                       DesignComponent* component,
                                       ValuedComponentI* instance);
 
   uint64_t Bits(const uhdm::Any* typespec, bool& invalidValue,
-                DesignComponent* component, ValuedComponentI* instance,
-                PathId fileId, uint32_t lineNumber, bool sizeMode);
+                DesignComponent* component, const FileContent* fC,
+                NodeId nodeId, ValuedComponentI* instance, bool sizeMode);
 
   std::pair<uhdm::TaskFunc*, DesignComponent*> getTaskFunc(
       std::string_view name, DesignComponent* component,
       ValuedComponentI* instance, uhdm::Any* pexpr);
-
-  uhdm::Expr* EvalFunc(uhdm::Function* func, std::vector<uhdm::Any*>* args,
-                       bool& invalidValue, DesignComponent* component,
-                       ValuedComponentI* instance, PathId fileId,
-                       uint32_t lineNumber, uhdm::Any* pexpr);
-
-  void evalScheduledExprs(DesignComponent* component);
 
   uhdm::Expr* exprFromAssign(DesignComponent* component, const FileContent* fC,
                              NodeId id, NodeId unpackedDimension);
@@ -511,8 +507,8 @@ class CompileHelper final {
                     ValuedComponentI* instance);
 
   uhdm::Any* getValue(std::string_view name, DesignComponent* component,
-                      ValuedComponentI* instance, PathId fileId,
-                      uint32_t lineNumber, uhdm::Any* pexpr,
+                      const FileContent* fC, NodeId nodeId,
+                      ValuedComponentI* instance, uhdm::Any* pexpr,
                       bool muteErrors = false);
 
   // Parse numeric UHDM constant into int64_t. Returns if successful.
@@ -546,10 +542,10 @@ class CompileHelper final {
                                uint32_t lineNo, uint16_t columnNo);
 
   uhdm::Any* decodeHierPath(uhdm::HierPath* path, bool& invalidValue,
-                            DesignComponent* component,
-                            ValuedComponentI* instance, PathId fileName,
-                            uint32_t lineNumber, uhdm::Any* pexpr,
-                            bool muteErrors, bool returnTypespec);
+                            DesignComponent* component, const FileContent* fC,
+                            NodeId nodeId, ValuedComponentI* instance,
+                            uhdm::Any* pexpr, bool muteErrors,
+                            bool returnTypespec);
 
   bool valueRange(Value* val, const uhdm::Typespec* lhstps,
                   const uhdm::Typespec* rhstps, DesignComponent* component,
@@ -558,9 +554,10 @@ class CompileHelper final {
   void setRange(uhdm::Constant* c, Value* val);
 
   uhdm::Constant* adjustSize(const uhdm::Typespec* ts,
-                             DesignComponent* component,
-                             ValuedComponentI* instance, uhdm::Constant* c,
-                             bool uniquify = false, bool sizeMode = false);
+                             DesignComponent* component, const FileContent* fC,
+                             NodeId nodeId, ValuedComponentI* instance,
+                             uhdm::Constant* c, bool uniquify = false,
+                             bool sizeMode = false);
 
   /** task/func/scope */
   uhdm::Any* searchObjectName(std::string_view name, DesignComponent* component,
@@ -577,6 +574,7 @@ class CompileHelper final {
                                       uint16_t column, uint32_t eline,
                                       uint16_t ecolumn);
   uhdm::TypespecMember* buildTypespecMember(const FileContent* fC, NodeId id);
+  uhdm::Typespec* getTypespecFromType(int32_t type, uhdm::Serializer& s);
 
  private:
   Session* const m_session = nullptr;

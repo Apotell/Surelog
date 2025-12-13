@@ -49,6 +49,7 @@
 
 // UHDM
 #include <uhdm/Serializer.h>
+#include <uhdm/Utils.h>
 #include <uhdm/always.h>
 #include <uhdm/assignment.h>
 #include <uhdm/attribute.h>
@@ -486,27 +487,38 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Identifier = fC->Child(id);
         NodeId Value = fC->Sibling(Identifier);
         uhdm::Initial* init = s.make<uhdm::Initial>();
-        fC->populateCoreMembers(id, id, init);
         init->setParent(defn);
         defn->setInitial(init);
+        fC->populateCoreMembers(id, id, init);
+
         uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
+        assign_stmt->setParent(init);
         init->setStmt(assign_stmt);
+        fC->populateCoreMembers(id, id, assign_stmt);
+
         uhdm::RefObj* ref = s.make<uhdm::RefObj>();
-        ref->setName(fC->SymName(Identifier));
         ref->setParent(assign_stmt);
+        ref->setName(fC->SymName(Identifier));
         fC->populateCoreMembers(Identifier, Identifier, ref);
         assign_stmt->setLhs(ref);
-        fC->populateCoreMembers(id, id, assign_stmt);
-        assign_stmt->setParent(init);
+
         uhdm::Constant* c = s.make<uhdm::Constant>();
-        assign_stmt->setRhs(c);
-        std::string val = StrCat("UINT:", fC->SymName(Value));
-        c->setValue(val);
+        c->setParent(assign_stmt);
+        c->setValue(StrCat("UINT:", fC->SymName(Value)));
         c->setDecompile(fC->SymName(Value));
         c->setSize(64);
         c->setConstType(vpiUIntConst);
-        c->setParent(assign_stmt);
         fC->populateCoreMembers(Value, Value, c);
+        assign_stmt->setRhs(c);
+
+        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
+        rt->setParent(c);
+        c->setTypespec(rt);
+        fC->populateCoreMembers(Value, Value, rt);
+
+        uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
+        ts->setParent(assign_stmt);
+        rt->setActual(ts);
         break;
       }
       default:

@@ -529,7 +529,6 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileStmt.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileToolbox.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileType.cpp
-  ${PROJECT_SOURCE_DIR}/src/DesignCompile/EvalFunc.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/IntegrityChecker.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ObjectBinder.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ResolveSymbols.cpp

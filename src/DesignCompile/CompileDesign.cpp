@@ -54,6 +54,7 @@
 #include "Surelog/Testbench/Program.h"
 
 // UHDM
+#include <uhdm/design.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/uhdm_types.h>
 #include <uhdm/vpi_visitor.h>
@@ -124,6 +125,7 @@ bool CompileDesign::compile() {
                           m_session->getCommandLineParser()->muteStdout());
     delete errors2;
   }
+  const uhdm::ScopedScope scopedScope(m_compiler->getDesign()->getUhdmDesign());
   return (compilation_());
 }
 

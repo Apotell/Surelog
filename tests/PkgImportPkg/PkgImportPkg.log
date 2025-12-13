@@ -92,6 +92,7 @@ Constant                                               4
 Design                                                 1
 Identifier                                             6
 ImportTypespec                                         2
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -99,18 +100,19 @@ Net                                                    2
 Package                                                2
 Port                                                   2
 Range                                                  1
-RefTypespec                                            6
+RefTypespec                                           10
 SourceFile                                             1
+StringTypespec                                         2
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                37
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportPkg/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:31, type:RefTypespec, name:otp_ast_rsp_t.
-[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:37, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:39, type:RefTypespec, name:otp_ast_rsp_t.
+[ERR:IG0811] ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv:15:10: Unsupported Typespec: id:45, type:RefTypespec, name:otp_ast_rsp_t.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -177,6 +179,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (otp_ctrl_pkg), line:3:12, endln:3:13
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:13
+          |vpiFullName:otp_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:14, endln:3:15
@@ -185,13 +194,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (otp_ctrl_pkg), line:3:14, endln:3:15
+          |vpiParent:
+          \_Constant: , line:3:14, endln:3:15
+          |vpiFullName:otp_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
   |vpiImportTypespec:
   \_TypedefTypespec: (otp_ctrl_pkg::otp_ast_req_t), line:4:5, endln:4:18
   |vpiImportTypespec:
   \_StructTypespec: , line:2:11, endln:4:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:otp_ctrl_pkg
   |vpiEndLabel:otp_ctrl_pkg
 |vpiAllPackages:
@@ -219,9 +241,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (otp_ctrl_part_pkg::otp_ctrl_pkg), line:8:10, endln:8:25
+        |vpiParent:
+        \_Constant: , line:8:10, endln:8:25
+        |vpiFullName:otp_ctrl_part_pkg::otp_ctrl_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:7:1, endln:9:31
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:8:10, endln:8:25
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:otp_ctrl_part_pkg
   |vpiEndLabel:otp_ctrl_part_pkg
 |vpiAllModules:
@@ -249,7 +284,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@otp_ctrl.otp_ctrl_pkg), line:12:10, endln:12:25
+        |vpiParent:
+        \_Constant: , line:12:10, endln:12:25
+        |vpiFullName:work@otp_ctrl.otp_ctrl_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:11:1, endln:17:21
   |vpiTypespec:
   \_UnsupportedTypespec: (otp_ast_rsp_t), line:15:10, endln:15:23
     |vpiParent:
@@ -262,6 +308,8 @@ Design: (unnamed)
     |vpiName:otp_ast_rsp_t
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:12:10, endln:12:25
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@otp_ctrl.otp_ast_pwr_seq_o), line:14:24, endln:14:41
     |vpiParent:

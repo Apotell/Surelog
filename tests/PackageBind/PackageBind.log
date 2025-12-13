@@ -165,6 +165,7 @@ FuncCall                                               1
 Function                                               1
 IODecl                                                 1
 Identifier                                             4
+IntTypespec                                            4
 IntegerTypespec                                        5
 Module                                                 1
 ModuleTypespec                                         1
@@ -173,12 +174,12 @@ Operation                                              3
 Package                                                1
 Port                                                   1
 RefObj                                                 7
-RefTypespec                                            5
+RefTypespec                                            9
 ReturnStmt                                             1
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                55
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -237,6 +238,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
           |vpiFullName:prim_util_pkg::_clog2
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (prim_util_pkg::_clog2), line:5:45, endln:7:10
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:6:3, endln:6:21
             |vpiParent:
@@ -263,6 +270,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (prim_util_pkg::_clog2), line:6:20, endln:6:21
+                  |vpiParent:
+                  \_Constant: , line:6:20, endln:6:21
+                  |vpiFullName:prim_util_pkg::_clog2
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (prim_util_pkg::_clog2::value), line:6:3, endln:6:8
@@ -283,6 +297,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:5:21, endln:5:22
+              |vpiParent:
+              \_Constant: , line:5:21, endln:5:22
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (prim_util_pkg::_clog2::result), line:5:12, endln:5:18
@@ -325,6 +346,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:5:32, endln:5:33
+              |vpiParent:
+              \_Constant: , line:5:32, endln:5:33
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_Begin: (prim_util_pkg::_clog2), line:5:45, endln:7:10
@@ -333,10 +361,16 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (prim_util_pkg::_clog2)
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (prim_util_pkg::_clog2)
       |vpiImportTypespec:
       \_IntegerTypespec: , line:3:7, endln:3:14
       |vpiImportTypespec:
       \_Variable: (prim_util_pkg::_clog2::result), line:3:15, endln:3:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ForStmt: (prim_util_pkg::_clog2), line:5:7, endln:7:10
       |vpiStmt:
@@ -399,10 +433,16 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
     |vpiName:work@top
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
+  |vpiTypespec:
   \_IntegerTypespec: , line:12:19, endln:12:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackageBind/dut.sv, line:12:1, endln:14:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntegerTypespec: , line:12:19, endln:12:26
   |vpiImportTypespec:
@@ -451,6 +491,13 @@ Design: (unnamed)
         |vpiDecompile:15
         |vpiSize:64
         |UINT:15
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:37, endln:13:39
+          |vpiParent:
+          \_Constant: , line:13:37, endln:13:39
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiName:
       \_Identifier: (prim_util_pkg::_clog2), line:13:15, endln:13:36

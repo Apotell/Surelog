@@ -195,6 +195,7 @@ Constant                                               4
 Design                                                 1
 GenFor                                                 2
 Identifier                                             4
+IntTypespec                                            4
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         2
@@ -203,12 +204,12 @@ Operation                                              4
 Port                                                   3
 RefModule                                              1
 RefObj                                                 6
-RefTypespec                                            4
+RefTypespec                                            8
 SourceFile                                             1
 VarSelect                                              1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                55
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarSelectGenStmt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -360,8 +361,14 @@ Design: (unnamed)
                   |vpiFullName:work@aes_sub_bytes.gen_sbox_j.gen_sbox_i.aes_sbox_ij.data_i.data_i.j
                   |vpiActual:
                   \_Variable: (work@aes_sub_bytes.j), line:14:15, endln:14:16
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@aes_sub_bytes.gen_sbox_j), line:15:5, endln:20:8
         |vpiImportTypespec:
         \_Variable: (work@aes_sub_bytes.gen_sbox_j.i), line:15:17, endln:15:18
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:15:10, endln:15:22
           |vpiParent:
@@ -373,6 +380,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@aes_sub_bytes.gen_sbox_j), line:15:21, endln:15:22
+              |vpiParent:
+              \_Constant: , line:15:21, endln:15:22
+              |vpiFullName:work@aes_sub_bytes.gen_sbox_j
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@aes_sub_bytes.gen_sbox_j.i), line:15:17, endln:15:18
@@ -396,6 +410,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@aes_sub_bytes.gen_sbox_j), line:15:28, endln:15:29
+              |vpiParent:
+              \_Constant: , line:15:28, endln:15:29
+              |vpiFullName:work@aes_sub_bytes.gen_sbox_j
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiForIncStmt:
         \_Operation: , line:15:31, endln:15:34
@@ -414,8 +435,14 @@ Design: (unnamed)
         \_Begin: (work@aes_sub_bytes.gen_sbox_j.gen_sbox_i), line:15:36, endln:20:8
       |vpiStmt:
       \_GenFor: (work@aes_sub_bytes.gen_sbox_j), line:15:5, endln:20:8
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@aes_sub_bytes), line:14:3, endln:21:6
     |vpiImportTypespec:
     \_Variable: (work@aes_sub_bytes.j), line:14:15, endln:14:16
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:14:8, endln:14:20
       |vpiParent:
@@ -427,6 +454,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@aes_sub_bytes), line:14:19, endln:14:20
+          |vpiParent:
+          \_Constant: , line:14:19, endln:14:20
+          |vpiFullName:work@aes_sub_bytes
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@aes_sub_bytes.j), line:14:15, endln:14:16
@@ -450,6 +484,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@aes_sub_bytes), line:14:26, endln:14:27
+          |vpiParent:
+          \_Constant: , line:14:26, endln:14:27
+          |vpiFullName:work@aes_sub_bytes
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Operation: , line:14:29, endln:14:32

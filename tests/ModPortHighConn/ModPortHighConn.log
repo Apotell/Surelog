@@ -13,6 +13,7 @@ BitSelect                                             10
 Constant                                              14
 Design                                                 1
 Identifier                                             2
+IntTypespec                                           14
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -21,10 +22,10 @@ Operation                                              2
 Port                                                  10
 Range                                                  2
 RefModule                                              4
-RefTypespec                                            2
+RefTypespec                                           16
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                58
+Total:                                                86
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortHighConn/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -91,6 +92,10 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@moduleA (work@moduleA), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:2:1, endln:3:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:5:1, endln:11:10
+  |vpiTypespec:
   \_LogicTypespec: , line:6:5, endln:6:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ModPortHighConn/dut.sv, line:5:1, endln:11:10
@@ -105,6 +110,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:6:11, endln:6:12
+          |vpiParent:
+          \_Constant: , line:6:11, endln:6:12
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:13, endln:6:14
@@ -113,7 +125,16 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:6:13, endln:6:14
+          |vpiParent:
+          \_Constant: , line:6:13, endln:6:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:5, endln:6:9
   |vpiImportTypespec:
@@ -177,6 +198,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceA.topA), line:7:35, endln:7:36
+            |vpiParent:
+            \_Constant: , line:7:35, endln:7:36
+            |vpiFullName:work@top.instanceA.topA
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiPort:
     \_Port: (port1), line:7:41, endln:7:46
@@ -198,6 +226,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceA.topB), line:7:52, endln:7:53
+            |vpiParent:
+            \_Constant: , line:7:52, endln:7:53
+            |vpiFullName:work@top.instanceA.topB
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
   |vpiRefModule:
   \_RefModule: work@moduleA (instanceB), line:8:5, endln:8:12
@@ -226,6 +261,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceB.topA), line:8:28, endln:8:29
+            |vpiParent:
+            \_Constant: , line:8:28, endln:8:29
+            |vpiFullName:work@top.instanceB.topA
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiPort:
     \_Port: , line:8:32, endln:8:39
@@ -246,6 +288,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceB.topB), line:8:37, endln:8:38
+            |vpiParent:
+            \_Constant: , line:8:37, endln:8:38
+            |vpiFullName:work@top.instanceB.topB
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
   |vpiRefModule:
   \_RefModule: work@moduleA (instanceC), line:9:5, endln:9:12
@@ -274,6 +323,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceC.topA), line:9:28, endln:9:29
+            |vpiParent:
+            \_Constant: , line:9:28, endln:9:29
+            |vpiFullName:work@top.instanceC.topA
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiPort:
     \_Port: , line:9:32, endln:9:48
@@ -299,6 +355,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@top.instanceC.topB), line:9:37, endln:9:38
+              |vpiParent:
+              \_Constant: , line:9:37, endln:9:38
+              |vpiFullName:work@top.instanceC.topB
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_BitSelect: (work@top.instanceC.topB), line:9:45, endln:9:48
@@ -315,6 +378,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@top.instanceC.topB), line:9:46, endln:9:47
+              |vpiParent:
+              \_Constant: , line:9:46, endln:9:47
+              |vpiFullName:work@top.instanceC.topB
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
   |vpiRefModule:
   \_RefModule: work@moduleA (instanceD), line:10:5, endln:10:12
@@ -348,6 +418,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@top.instanceD.topA), line:10:28, endln:10:29
+              |vpiParent:
+              \_Constant: , line:10:28, endln:10:29
+              |vpiFullName:work@top.instanceD.topA
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_BitSelect: (work@top.instanceD.topA), line:10:36, endln:10:39
@@ -364,6 +441,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@top.instanceD.topA), line:10:37, endln:10:38
+              |vpiParent:
+              \_Constant: , line:10:37, endln:10:38
+              |vpiFullName:work@top.instanceD.topA
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
     |vpiPort:
     \_Port: (topB), line:10:41, endln:10:48
@@ -385,6 +469,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.instanceD.topB), line:10:46, endln:10:47
+            |vpiParent:
+            \_Constant: , line:10:46, endln:10:47
+            |vpiFullName:work@top.instanceD.topB
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
 |vpiTypespec:
 \_ModuleTypespec: (work@moduleA)

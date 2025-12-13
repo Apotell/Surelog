@@ -213,11 +213,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 ClockedSeq                                             1
 Constant                                               2
 Design                                                 1
 Identifier                                             1
-LogicTypespec                                          3
+LogicTypespec                                          4
 Module                                                 1
 ModuleTypespec                                         1
 MulticlockSequenceExpr                                 1
@@ -226,11 +227,11 @@ Operation                                             11
 PropertyDecl                                           4
 PropertySpec                                           4
 RefObj                                                14
-RefTypespec                                            3
+RefTypespec                                            5
 SequenceDecl                                           1
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                52
+Total:                                                56
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SeqUseNonTemp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -429,9 +430,21 @@ Design: (unnamed)
         |vpiParent:
         \_MulticlockSequenceExpr: , line:6:1, endln:6:52
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:

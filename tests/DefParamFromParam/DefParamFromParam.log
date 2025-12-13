@@ -116,15 +116,17 @@ AST_DEBUG_END
 Constant                                               3
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            3
 Module                                                 2
 ModuleTypespec                                         2
 ParamAssign                                            4
 Parameter                                              4
 RefModule                                              1
 RefObj                                                 1
+RefTypespec                                            3
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                21
+Total:                                                27
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefParamFromParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -170,6 +172,13 @@ Design: (unnamed)
       |vpiDecompile:9
       |vpiSize:64
       |UINT:9
+      |vpiTypespec:
+      \_RefTypespec: (work@fifo), line:2:24, endln:2:25
+        |vpiParent:
+        \_Constant: , line:2:24, endln:2:25
+        |vpiFullName:work@fifo
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@fifo.width1), line:2:15, endln:2:25
@@ -184,9 +193,22 @@ Design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
+      |vpiTypespec:
+      \_RefTypespec: (work@fifo), line:3:24, endln:3:25
+        |vpiParent:
+        \_Constant: , line:3:24, endln:3:25
+        |vpiFullName:work@fifo
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@fifo.width2), line:3:15, endln:3:25
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@fifo (work@fifo), file:${SURELOG_DIR}/tests/DefParamFromParam/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@fifo
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefParamFromParam/dut.sv, line:6:1, endln:13:10
@@ -221,6 +243,13 @@ Design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:7:25, endln:7:27
+        |vpiParent:
+        \_Constant: , line:7:25, endln:7:27
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.width_a), line:7:15, endln:7:27
@@ -239,12 +268,18 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.width_b), line:8:15, endln:8:32
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DefParamFromParam/dut.sv, line:6:1, endln:13:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@fifo)
     |vpiParent:
     \_Design: (unnamed)
     |vpiName:work@fifo
     |vpiModule:
     \_Module: work@fifo (work@fifo), file:${SURELOG_DIR}/tests/DefParamFromParam/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@fifo (fifo_inst), line:10:5, endln:10:9

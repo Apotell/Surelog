@@ -99,6 +99,7 @@ Assert                                                 1
 Constant                                               1
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    3
@@ -107,9 +108,10 @@ Port                                                   3
 PropertyDecl                                           1
 PropertySpec                                           2
 RefObj                                                 4
+RefTypespec                                            1
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                26
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PropBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -178,6 +180,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@clock_divider_assertions.p_reset), line:12:19, endln:12:22
+              |vpiParent:
+              \_Constant: , line:12:19, endln:12:22
+              |vpiFullName:work@clock_divider_assertions.p_reset
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Operation: , line:12:23, endln:12:31
@@ -209,6 +218,12 @@ Design: (unnamed)
         |vpiFullName:work@clock_divider_assertions.p_reset
         |vpiActual:
         \_PropertyDecl: (work@clock_divider_assertions.p_reset), line:10:5, endln:13:16
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@clock_divider_assertions (work@clock_divider_assertions), file:${SURELOG_DIR}/tests/PropBinding/dut.sv, line:3:1, endln:18:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@clock_divider_assertions.clk), line:4:11, endln:4:14
     |vpiParent:

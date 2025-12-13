@@ -275,11 +275,13 @@ Always                                                 1
 Assignment                                             1
 Begin                                                  2
 BitSelect                                              1
+BitTypespec                                            1
 Constant                                              12
 Design                                                 1
 HierPath                                               1
 Identifier                                             3
 IfStmt                                                 1
+IntTypespec                                           11
 LogicTypespec                                          8
 Module                                                 1
 ModuleTypespec                                         1
@@ -291,7 +293,7 @@ Parameter                                              1
 Port                                                   1
 Range                                                  5
 RefObj                                                 5
-RefTypespec                                           14
+RefTypespec                                           26
 SourceFile                                             1
 StructTypespec                                         1
 TypeParameter                                          1
@@ -299,7 +301,7 @@ TypedefTypespec                                        1
 TypespecMember                                         9
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                81
+Total:                                               105
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedVar/slpp_all/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:4:5: Unsupported Typespec: id:16, type:RefTypespec, name:ariane_axi::ad_req_t.
@@ -482,6 +484,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:6:12, endln:6:13
+          |vpiParent:
+          \_Constant: , line:6:12, endln:6:13
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:14, endln:6:15
@@ -490,7 +499,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:6:14, endln:6:15
+          |vpiParent:
+          \_Constant: , line:6:14, endln:6:15
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: std_cache_pkg (std_cache_pkg), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:1:1, endln:14:11
   |vpiTypespec:
   \_LogicTypespec: , line:7:5, endln:7:10
     |vpiParent:
@@ -506,6 +526,13 @@ Design: (unnamed)
         |vpiDecompile:63
         |vpiSize:64
         |UINT:63
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:7:12, endln:7:14
+          |vpiParent:
+          \_Constant: , line:7:12, endln:7:14
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:15, endln:7:16
@@ -514,6 +541,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:7:15, endln:7:16
+          |vpiParent:
+          \_Constant: , line:7:15, endln:7:16
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:10:5, endln:10:10
@@ -530,6 +564,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:10:12, endln:10:13
+          |vpiParent:
+          \_Constant: , line:10:12, endln:10:13
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:14, endln:10:15
@@ -538,6 +579,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:10:14, endln:10:15
+          |vpiParent:
+          \_Constant: , line:10:14, endln:10:15
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:11:5, endln:11:10
@@ -554,6 +602,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:11:12, endln:11:13
+          |vpiParent:
+          \_Constant: , line:11:12, endln:11:13
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:11:14, endln:11:15
@@ -562,6 +617,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (std_cache_pkg), line:11:14, endln:11:15
+          |vpiParent:
+          \_Constant: , line:11:14, endln:11:15
+          |vpiFullName:std_cache_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_TypedefTypespec: (std_cache_pkg::bypass_req_t), line:12:3, endln:12:15
@@ -575,6 +637,8 @@ Design: (unnamed)
   \_UnsupportedTypespec: (ariane_pkg::amo_t), line:5:5, endln:5:22
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:5, endln:6:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:5, endln:7:10
   |vpiImportTypespec:
@@ -623,15 +687,28 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_adapter_arbiter), line:17:26, endln:17:27
+        |vpiParent:
+        \_Constant: , line:17:26, endln:17:27
+        |vpiFullName:work@axi_adapter_arbiter
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@axi_adapter_arbiter.NR_PORTS), line:17:15, endln:17:27
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@axi_adapter_arbiter (work@axi_adapter_arbiter), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:16:1, endln:26:10
   |vpiTypespec:
   \_TypeParameter: (work@axi_adapter_arbiter.req_t), line:18:20, endln:18:25
   |vpiTypespec:
   \_LogicTypespec: , line:20:5, endln:20:8
     |vpiParent:
     \_Module: work@axi_adapter_arbiter (work@axi_adapter_arbiter), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:16:1, endln:26:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypeParameter: (work@axi_adapter_arbiter.req_t), line:18:20, endln:18:25
   |vpiImportTypespec:
@@ -692,6 +769,12 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:21:5, endln:25:8
       |vpiFullName:work@axi_adapter_arbiter
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@axi_adapter_arbiter), line:21:17, endln:25:8
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_Net: (work@axi_adapter_arbiter.i), line:22:18, endln:22:19
         |vpiParent:
@@ -751,6 +834,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@axi_adapter_arbiter), line:22:28, endln:22:32
+              |vpiParent:
+              \_Constant: , line:22:28, endln:22:32
+              |vpiFullName:work@axi_adapter_arbiter
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
         |vpiStmt:
         \_Begin: (work@axi_adapter_arbiter), line:22:34, endln:24:10

@@ -128,16 +128,17 @@ Constant                                               1
 Design                                                 1
 EventControl                                           1
 Identifier                                             1
+IntTypespec                                            1
 LogicTypespec                                          4
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    4
 Operation                                              3
 RefObj                                                 4
-RefTypespec                                            4
+RefTypespec                                            5
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                28
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Iff/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -159,9 +160,15 @@ Design: (unnamed)
     \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/Iff/dut.sv, line:1:1, endln:8:10
     |vpiName:work@block_tb
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/Iff/dut.sv, line:1:1, endln:8:10
+  |vpiTypespec:
   \_LogicTypespec: , line:2:2, endln:2:6
     |vpiParent:
     \_Module: work@block_tb (work@block_tb), file:${SURELOG_DIR}/tests/Iff/dut.sv, line:1:1, endln:8:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:2, endln:2:6
   |vpiImportTypespec:
@@ -275,6 +282,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@block_tb), line:6:33, endln:6:34
+                |vpiParent:
+                \_Constant: , line:6:33, endln:6:34
+                |vpiFullName:work@block_tb
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
       |vpiStmt:
       \_Assignment: , line:7:11, endln:7:17

@@ -46,13 +46,14 @@ Design                                                 1
 Function                                               1
 IODecl                                                 1
 Identifier                                             2
+IntTypespec                                            2
 Range                                                  2
 RealTypespec                                           3
-RefTypespec                                            4
+RefTypespec                                            8
 SourceFile                                             1
 TypedefTypespec                                        1
 ------------------------------------------------------------
-Total:                                                21
+Total:                                                27
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileResolutionFunction/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -98,6 +99,10 @@ Design: (unnamed)
     |vpiParent:
     \_Function: (my_function2), line:4:1, endln:5:12
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Function: (my_function2), line:4:1, endln:5:12
+  |vpiTypespec:
   \_ArrayTypespec: , line:4:56, endln:4:58
     |vpiParent:
     \_Function: (my_function2), line:4:1, endln:5:12
@@ -111,6 +116,8 @@ Design: (unnamed)
       \_RealTypespec: , line:4:20, endln:4:24
   |vpiImportTypespec:
   \_RealTypespec: , line:4:20, endln:4:24
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:4:56, endln:4:58
   |vpiMethod:1
@@ -140,6 +147,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (my_function2.driver), line:4:56, endln:4:58
+          |vpiParent:
+          \_Constant: , line:4:56, endln:4:57
+          |vpiFullName:my_function2.driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:56, endln:4:57
@@ -147,6 +161,13 @@ Design: (unnamed)
         \_Range: , line:4:56, endln:4:58
         |vpiDecompile:unsized
         |STRING:unsized
+        |vpiTypespec:
+        \_RefTypespec: (my_function2.driver), line:4:56, endln:4:58
+          |vpiParent:
+          \_Constant: , line:4:56, endln:4:57
+          |vpiFullName:my_function2.driver
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:6
     |vpiTypespec:
     \_RefTypespec: (my_function2.driver), line:4:44, endln:4:48

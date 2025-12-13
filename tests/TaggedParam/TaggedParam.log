@@ -139,10 +139,11 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:16:1: Compile module "work@fpu_wrap".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               2
 Design                                                 1
 Identifier                                             4
-IntTypespec                                            1
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -152,7 +153,7 @@ ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            7
+RefTypespec                                            9
 SourceFile                                             1
 StringTypespec                                         2
 StructTypespec                                         1
@@ -160,7 +161,7 @@ TaggedPattern                                          2
 TypedefTypespec                                        1
 TypespecMember                                         2
 ------------------------------------------------------------
-Total:                                                37
+Total:                                                41
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -334,6 +335,13 @@ Design: (unnamed)
           |vpiDecompile:64
           |vpiSize:64
           |UINT:64
+          |vpiTypespec:
+          \_RefTypespec: (work@fpu_wrap), line:19:22, endln:19:24
+            |vpiParent:
+            \_Constant: , line:19:22, endln:19:24
+            |vpiFullName:work@fpu_wrap
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (work@fpu_wrap.Width), line:19:7, endln:19:12
@@ -354,6 +362,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@fpu_wrap), line:20:22, endln:20:26
+            |vpiParent:
+            \_Constant: , line:20:22, endln:20:26
+            |vpiFullName:work@fpu_wrap
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (work@fpu_wrap.EnableNanBox), line:20:7, endln:20:19
@@ -366,7 +381,15 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@fpu_wrap.FPU_FEATURES), line:18:38, endln:21:6
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
+  |vpiTypespec:
   \_StringTypespec: , line:19:7, endln:19:12
+    |vpiParent:
+    \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
+  |vpiTypespec:
+  \_BitTypespec: 
     |vpiParent:
     \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
   |vpiTypespec:
@@ -377,7 +400,11 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@fpnew_top (work@fpnew_top), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:10:2, endln:14:11
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_StringTypespec: , line:19:7, endln:19:12
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@fpu_wrap
   |vpiRefModule:
   \_RefModule: work@fpnew_top (i_fpnew_bulk), line:23:8, endln:23:17

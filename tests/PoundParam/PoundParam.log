@@ -639,11 +639,13 @@ there are 2 more instances of this message.
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 1
 Assignment                                             1
+BitTypespec                                            1
 Constant                                              42
 ContAssign                                             1
 Design                                                 1
 EventControl                                           1
 Identifier                                             2
+IntTypespec                                           41
 LogicTypespec                                         15
 Module                                                 2
 ModuleTypespec                                         2
@@ -656,10 +658,10 @@ Port                                                  13
 Range                                                 15
 RefModule                                              2
 RefObj                                                18
-RefTypespec                                           15
+RefTypespec                                           57
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                               172
+Total:                                               256
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PoundParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -698,9 +700,24 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dffr), line:5:18, endln:5:19
+        |vpiParent:
+        \_Constant: , line:5:18, endln:5:19
+        |vpiFullName:work@dffr
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dffr.SIZE), line:5:11, endln:5:19
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dffr (work@dffr), file:${SURELOG_DIR}/tests/PoundParam/dut.v, line:2:1, endln:33:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dffr (work@dffr), file:${SURELOG_DIR}/tests/PoundParam/dut.v, line:2:1, endln:33:10
   |vpiTypespec:
   \_LogicTypespec: , line:7:7, endln:7:17
     |vpiParent:
@@ -729,6 +746,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dffr), line:7:13, endln:7:14
+            |vpiParent:
+            \_Constant: , line:7:13, endln:7:14
+            |vpiFullName:work@dffr
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:15, endln:7:16
@@ -737,7 +761,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dffr), line:7:15, endln:7:16
+          |vpiParent:
+          \_Constant: , line:7:15, endln:7:16
+          |vpiFullName:work@dffr
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:7, endln:7:17
   |vpiImportTypespec:
@@ -981,6 +1016,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@dffr.si), line:28:31, endln:28:32
+                  |vpiParent:
+                  \_Constant: , line:28:31, endln:28:32
+                  |vpiFullName:work@dffr.si
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiRightRange:
             \_Constant: , line:28:33, endln:28:34
@@ -989,6 +1031,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@dffr.si), line:28:33, endln:28:34
+                |vpiParent:
+                \_Constant: , line:28:33, endln:28:34
+                |vpiFullName:work@dffr.si
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiOperand:
           \_Operation: , line:28:39, endln:28:76
@@ -1028,6 +1077,13 @@ Design: (unnamed)
                   |vpiDecompile:1'b0
                   |vpiSize:1
                   |BIN:0
+                  |vpiTypespec:
+                  \_RefTypespec: (work@dffr), line:28:53, endln:28:57
+                    |vpiParent:
+                    \_Constant: , line:28:53, endln:28:57
+                    |vpiFullName:work@dffr
+                    |vpiActual:
+                    \_BitTypespec: 
                   |vpiConstType:3
             |vpiOperand:
             \_PartSelect: din (work@dffr.din), line:28:63, endln:28:76
@@ -1059,6 +1115,13 @@ Design: (unnamed)
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
+                  |vpiTypespec:
+                  \_RefTypespec: (work@dffr.din), line:28:72, endln:28:73
+                    |vpiParent:
+                    \_Constant: , line:28:72, endln:28:73
+                    |vpiFullName:work@dffr.din
+                    |vpiActual:
+                    \_IntTypespec: 
                   |vpiConstType:9
               |vpiRightRange:
               \_Constant: , line:28:74, endln:28:75
@@ -1067,6 +1130,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@dffr.din), line:28:74, endln:28:75
+                  |vpiParent:
+                  \_Constant: , line:28:74, endln:28:75
+                  |vpiFullName:work@dffr.din
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
         |vpiLhs:
         \_PartSelect: q (work@dffr.q), line:28:4, endln:28:12
@@ -1098,6 +1168,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@dffr.q), line:28:9, endln:28:10
+                |vpiParent:
+                \_Constant: , line:28:9, endln:28:10
+                |vpiFullName:work@dffr.q
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiRightRange:
           \_Constant: , line:28:11, endln:28:12
@@ -1106,6 +1183,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@dffr.q), line:28:11, endln:28:12
+              |vpiParent:
+              \_Constant: , line:28:11, endln:28:12
+              |vpiFullName:work@dffr.q
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
     |vpiAlwaysType:1
   |vpiContAssign:
@@ -1142,6 +1226,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dffr.q), line:30:30, endln:30:31
+            |vpiParent:
+            \_Constant: , line:30:30, endln:30:31
+            |vpiFullName:work@dffr.q
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:30:32, endln:30:33
@@ -1150,6 +1241,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dffr.q), line:30:32, endln:30:33
+          |vpiParent:
+          \_Constant: , line:30:32, endln:30:33
+          |vpiFullName:work@dffr.q
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_PartSelect: so (work@dffr.so), line:30:11, endln:30:19
@@ -1181,6 +1279,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dffr.so), line:30:16, endln:30:17
+            |vpiParent:
+            \_Constant: , line:30:16, endln:30:17
+            |vpiFullName:work@dffr.so
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:30:18, endln:30:19
@@ -1189,6 +1294,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dffr.so), line:30:18, endln:30:19
+          |vpiParent:
+          \_Constant: , line:30:18, endln:30:19
+          |vpiFullName:work@dffr.so
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PoundParam/dut.v, line:35:1, endln:51:10
@@ -1221,6 +1333,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:36:9, endln:36:10
+          |vpiParent:
+          \_Constant: , line:36:9, endln:36:10
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:36:11, endln:36:12
@@ -1229,9 +1348,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:36:11, endln:36:12
+          |vpiParent:
+          \_Constant: , line:36:11, endln:36:12
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PoundParam/dut.v, line:35:1, endln:51:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:36:8, endln:36:13
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@test.pv1), line:35:13, endln:35:16
     |vpiParent:

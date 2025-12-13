@@ -99,19 +99,21 @@ Constant                                               3
 Design                                                 1
 Identifier                                             4
 Initial                                                1
+IntTypespec                                            2
 IntegerTypespec                                        1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 RefObj                                                 3
-RefTypespec                                            1
+RefTypespec                                            4
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 Task                                                   1
 TaskCall                                               1
 ------------------------------------------------------------
-Total:                                                25
+Total:                                                31
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaskBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -152,6 +154,14 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@tb.display), line:5:2, endln:7:23
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb.display), line:5:2, endln:7:23
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb.display), line:5:2, endln:7:23
       |vpiImportTypespec:
       \_IntegerTypespec: , line:5:2, endln:5:9
       |vpiImportTypespec:
@@ -167,6 +177,10 @@ Design: (unnamed)
           \_IntegerTypespec: , line:5:2, endln:5:9
         |vpiName:i
         |vpiFullName:work@tb.display.i
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_Assignment: , line:5:10, endln:5:15
         |vpiParent:
@@ -180,6 +194,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@tb.display), line:5:14, endln:5:15
+            |vpiParent:
+            \_Constant: , line:5:14, endln:5:15
+            |vpiFullName:work@tb.display
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Net: (work@tb.display.i), line:5:10, endln:5:11
@@ -209,6 +230,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@tb.display), line:6:10, endln:6:11
+              |vpiParent:
+              \_Constant: , line:6:10, endln:6:11
+              |vpiFullName:work@tb.display
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb.display.i), line:6:2, endln:6:3
@@ -229,6 +257,13 @@ Design: (unnamed)
           |vpiDecompile:"i=%0d"
           |vpiSize:40
           |STRING:i=%0d
+          |vpiTypespec:
+          \_RefTypespec: (work@tb.display), line:7:11, endln:7:18
+            |vpiParent:
+            \_Constant: , line:7:11, endln:7:18
+            |vpiFullName:work@tb.display
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_RefObj: (work@tb.display.i), line:7:20, endln:7:21

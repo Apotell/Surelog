@@ -194,13 +194,14 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  2
+BitTypespec                                            1
 Constant                                               6
 Design                                                 1
 FuncCall                                               1
 Function                                               1
 Identifier                                             4
 Initial                                                1
-IntTypespec                                            5
+IntTypespec                                           10
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -212,12 +213,12 @@ Port                                                   3
 Range                                                  2
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                            7
+RefTypespec                                           13
 ReturnStmt                                             1
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                57
+Total:                                                69
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -278,6 +279,13 @@ Design: (unnamed)
       |vpiDecompile:12
       |vpiSize:64
       |UINT:12
+      |vpiTypespec:
+      \_RefTypespec: (work@prim_lfsr), line:4:36, endln:4:38
+        |vpiParent:
+        \_Constant: , line:4:36, endln:4:38
+        |vpiFullName:work@prim_lfsr
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
@@ -324,6 +332,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@prim_lfsr.get_1s), line:6:21, endln:6:22
+                |vpiParent:
+                \_Constant: , line:6:21, endln:6:22
+                |vpiFullName:work@prim_lfsr.get_1s
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiRightRange:
           \_Constant: , line:6:23, endln:6:24
@@ -332,9 +347,26 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@prim_lfsr.get_1s), line:6:23, endln:6:24
+              |vpiParent:
+              \_Constant: , line:6:23, endln:6:24
+              |vpiFullName:work@prim_lfsr.get_1s
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@prim_lfsr.get_1s)
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@prim_lfsr.get_1s)
       |vpiImportTypespec:
       \_LogicTypespec: , line:6:7, endln:6:12
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiImportTypespec:
       \_Net: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
         |vpiParent:
@@ -348,6 +380,8 @@ Design: (unnamed)
           \_LogicTypespec: , line:6:7, endln:6:12
         |vpiName:a
         |vpiFullName:work@prim_lfsr.get_1s.a
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiStmt:
       \_Assignment: , line:6:26, endln:6:32
         |vpiParent:
@@ -361,6 +395,13 @@ Design: (unnamed)
           |vpiDecompile:'1
           |vpiSize:-1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_lfsr.get_1s), line:6:30, endln:6:32
+            |vpiParent:
+            \_Constant: , line:6:30, endln:6:32
+            |vpiFullName:work@prim_lfsr.get_1s
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_Net: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
@@ -404,6 +445,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@prim_lfsr.get_1s), line:5:37, endln:5:38
+              |vpiParent:
+              \_Constant: , line:5:37, endln:5:38
+              |vpiFullName:work@prim_lfsr.get_1s
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:5:39, endln:5:40
@@ -412,9 +460,22 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@prim_lfsr.get_1s), line:5:39, endln:5:40
+            |vpiParent:
+            \_Constant: , line:5:39, endln:5:40
+            |vpiFullName:work@prim_lfsr.get_1s
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
     |vpiImportTypespec:
     \_LogicTypespec: , line:5:23, endln:5:28
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -431,6 +492,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
+  |vpiTypespec:
   \_IntTypespec: , line:3:25, endln:3:28
     |vpiParent:
     \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
@@ -439,6 +504,8 @@ Design: (unnamed)
   \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
   |vpiImportTypespec:
   \_IntTypespec: , line:4:14, endln:4:26
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:3:25, endln:3:28
   |vpiImportTypespec:

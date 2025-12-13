@@ -99,7 +99,7 @@ AST_DEBUG_END
 Constant                                               1
 Design                                                 1
 Identifier                                             5
-IntTypespec                                            1
+IntTypespec                                            2
 Interface                                              2
 InterfaceTypespec                                      2
 Module                                                 1
@@ -110,12 +110,12 @@ Parameter                                              1
 Port                                                   2
 RefModule                                              2
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                            4
 SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -219,6 +219,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@tnoc_types), line:2:34, endln:2:35
+        |vpiParent:
+        \_Constant: , line:2:34, endln:2:35
+        |vpiFullName:work@tnoc_types
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@tnoc_types.PACKET_CONFIG), line:2:18, endln:2:35
@@ -227,8 +234,14 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfType/dut.sv, line:1:1, endln:4:13
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/InterfType/dut.sv, line:1:1, endln:4:13
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@tnoc_types
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfType/dut.sv, line:13:1, endln:18:10

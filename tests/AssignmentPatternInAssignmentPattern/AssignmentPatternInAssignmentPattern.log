@@ -321,7 +321,7 @@ EnumConst                                              6
 EnumTypespec                                           2
 Identifier                                            10
 ImportTypespec                                         2
-IntTypespec                                            6
+IntTypespec                                           24
 LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         2
@@ -334,16 +334,16 @@ Port                                                   2
 Range                                                  2
 RefModule                                              1
 RefObj                                                10
-RefTypespec                                           29
+RefTypespec                                           45
 SourceFile                                             1
-StringTypespec                                         6
+StringTypespec                                         8
 StructTypespec                                         2
 TaggedPattern                                          6
 TypedefTypespec                                        4
 TypespecMember                                         3
 UnsupportedTypespec                                    6
 ------------------------------------------------------------
-Total:                                               150
+Total:                                               186
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -403,6 +403,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (ctrl_pkg), line:2:31, endln:2:32
+        |vpiParent:
+        \_Constant: , line:2:31, endln:2:32
+        |vpiFullName:ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:32
@@ -417,6 +424,13 @@ Design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
+      |vpiTypespec:
+      \_RefTypespec: (ctrl_pkg), line:3:35, endln:3:37
+        |vpiParent:
+        \_Constant: , line:3:35, endln:3:37
+        |vpiFullName:ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:37
@@ -425,8 +439,14 @@ Design: (unnamed)
     |vpiParent:
     \_Package: ctrl_pkg (ctrl_pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: ctrl_pkg (ctrl_pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:ctrl_pkg
 |vpiAllPackages:
 \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
@@ -544,6 +564,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (pkg), line:9:31, endln:9:32
+        |vpiParent:
+        \_Constant: , line:9:31, endln:9:32
+        |vpiFullName:pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg::HwDataRules), line:9:17, endln:9:32
@@ -558,6 +585,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (pkg), line:10:30, endln:10:31
+        |vpiParent:
+        \_Constant: , line:10:30, endln:10:31
+        |vpiFullName:pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
@@ -639,6 +673,10 @@ Design: (unnamed)
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+  |vpiTypespec:
   \_EnumTypespec: , line:11:11, endln:14:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
@@ -693,6 +731,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (pkg), line:11:34, endln:11:35
+            |vpiParent:
+            \_Constant: , line:11:34, endln:11:35
+            |vpiFullName:pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:11:36, endln:11:37
@@ -701,6 +746,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:11:36, endln:11:37
+          |vpiParent:
+          \_Constant: , line:11:36, endln:11:37
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (pkg::mubi4_t), line:14:5, endln:14:12
@@ -776,6 +828,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:15:23, endln:15:24
+          |vpiParent:
+          \_Constant: , line:15:23, endln:15:24
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:15:25, endln:15:26
@@ -784,6 +843,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:15:25, endln:15:26
+          |vpiParent:
+          \_Constant: , line:15:25, endln:15:26
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (pkg::flash_lcmgr_phase_e), line:20:5, endln:20:24
@@ -891,6 +957,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:9:13, endln:9:16
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_EnumTypespec: , line:11:11, endln:14:12
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:16, endln:11:21
@@ -938,9 +1006,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@foo.pkg), line:36:8, endln:36:14
+        |vpiParent:
+        \_Constant: , line:36:8, endln:36:14
+        |vpiFullName:work@foo.pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:36:8, endln:36:14
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@foo.DATA_REG), line:38:28, endln:38:36
     |vpiParent:
@@ -997,7 +1078,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.pkg), line:41:8, endln:41:14
+        |vpiParent:
+        \_Constant: , line:41:8, endln:41:14
+        |vpiFullName:work@top.pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
   |vpiTypespec:
   \_ModuleTypespec: (work@foo)
     |vpiParent:
@@ -1007,6 +1099,8 @@ Design: (unnamed)
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:41:8, endln:41:14
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@foo (f), line:42:1, endln:42:4

@@ -500,7 +500,7 @@ IODecl                                                14
 Identifier                                            44
 IfStmt                                                 1
 ImportTypespec                                         2
-IntTypespec                                           16
+IntTypespec                                           40
 IntegerTypespec                                        6
 LogicTypespec                                          2
 Module                                                 2
@@ -512,19 +512,20 @@ ParamAssign                                            4
 Parameter                                              4
 Range                                                  3
 RefObj                                                26
-RefTypespec                                           32
+RefTypespec                                           57
 ReturnStmt                                             3
 SourceFile                                             1
+StringTypespec                                         2
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               280
+Total:                                               331
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:159, name:InfosPerBank".
+[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:194, name:InfosPerBank".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Null Actual: id:159, type:RefObj, name:InfosPerBank.
+[ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Null Actual: id:194, type:RefObj, name:InfosPerBank.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -618,8 +619,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -634,6 +641,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -1060,8 +1074,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -1076,6 +1096,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -1099,8 +1126,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -1116,6 +1149,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -1139,8 +1179,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -1156,6 +1202,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -1179,8 +1232,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1203,6 +1262,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1378,6 +1444,12 @@ Design: (unnamed)
           |vpiParent:
           \_ForStmt: (prim_util_pkg::_clog2), line:9:5, endln:11:8
           |vpiFullName:prim_util_pkg::_clog2
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (prim_util_pkg::_clog2), line:9:54, endln:11:8
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:10:7, endln:10:25
             |vpiParent:
@@ -1404,6 +1476,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (prim_util_pkg::_clog2), line:10:24, endln:10:25
+                  |vpiParent:
+                  \_Constant: , line:10:24, endln:10:25
+                  |vpiFullName:prim_util_pkg::_clog2
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiLhs:
             \_RefObj: (prim_util_pkg::_clog2::value), line:10:7, endln:10:12
@@ -1424,6 +1503,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:9:19, endln:9:20
+              |vpiParent:
+              \_Constant: , line:9:19, endln:9:20
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (prim_util_pkg::_clog2::result), line:9:10, endln:9:16
@@ -1459,6 +1545,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (prim_util_pkg::_clog2), line:9:51, endln:9:52
+                |vpiParent:
+                \_Constant: , line:9:51, endln:9:52
+                |vpiFullName:prim_util_pkg::_clog2
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (prim_util_pkg::_clog2::result), line:9:33, endln:9:39
@@ -1488,6 +1581,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:9:30, endln:9:31
+              |vpiParent:
+              \_Constant: , line:9:30, endln:9:31
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_Begin: (prim_util_pkg::_clog2), line:9:54, endln:11:8
@@ -1496,10 +1596,16 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (prim_util_pkg::_clog2)
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (prim_util_pkg::_clog2)
       |vpiImportTypespec:
       \_IntegerTypespec: , line:7:5, endln:7:12
       |vpiImportTypespec:
       \_Variable: (prim_util_pkg::_clog2::result), line:7:13, endln:7:19
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:8:5, endln:8:22
         |vpiParent:
@@ -1526,6 +1632,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::_clog2), line:8:21, endln:8:22
+              |vpiParent:
+              \_Constant: , line:8:21, endln:8:22
+              |vpiFullName:prim_util_pkg::_clog2
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (prim_util_pkg::_clog2::value), line:8:5, endln:8:10
@@ -1597,8 +1710,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (prim_util_pkg::vbits), line:15:1, endln:19:14
       |vpiSigned:1
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (prim_util_pkg::vbits), line:15:1, endln:19:14
     |vpiImportTypespec:
     \_IntegerTypespec: , line:15:20, endln:15:27
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -1650,6 +1769,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::vbits), line:17:22, endln:17:23
+              |vpiParent:
+              \_Constant: , line:17:22, endln:17:23
+              |vpiFullName:prim_util_pkg::vbits
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:17:27, endln:17:28
@@ -1658,6 +1784,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (prim_util_pkg::vbits), line:17:27, endln:17:28
+            |vpiParent:
+            \_Constant: , line:17:27, endln:17:28
+            |vpiFullName:prim_util_pkg::vbits
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_FuncCall: (prim_util_pkg::_clog2), line:17:31, endln:17:59
@@ -1749,6 +1882,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (flash_ctrl_pkg), line:26:27, endln:26:28
+        |vpiParent:
+        \_Constant: , line:26:27, endln:26:28
+        |vpiFullName:flash_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (flash_ctrl_pkg::InfoTypes), line:26:15, endln:26:28
@@ -1890,6 +2030,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (flash_ctrl_pkg::max_info_pages), line:37:18, endln:37:19
+                  |vpiParent:
+                  \_Constant: , line:37:18, endln:37:19
+                  |vpiFullName:flash_ctrl_pkg::max_info_pages
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
               |vpiLhs:
               \_Variable: (flash_ctrl_pkg::max_info_pages::i), line:37:14, endln:37:15
@@ -1934,10 +2081,16 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (flash_ctrl_pkg::max_info_pages)
             |vpiSigned:1
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (flash_ctrl_pkg::max_info_pages)
           |vpiImportTypespec:
           \_IntTypespec: , line:36:5, endln:36:8
           |vpiImportTypespec:
           \_Variable: (flash_ctrl_pkg::max_info_pages::current_max), line:36:9, endln:36:20
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiImportTypespec:
           \_Variable: (flash_ctrl_pkg::max_info_pages::i), line:37:14, endln:37:15
           |vpiStmt:
@@ -1953,6 +2106,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (flash_ctrl_pkg::max_info_pages), line:36:23, endln:36:24
+                |vpiParent:
+                \_Constant: , line:36:23, endln:36:24
+                |vpiFullName:flash_ctrl_pkg::max_info_pages
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_Variable: (flash_ctrl_pkg::max_info_pages::current_max), line:36:9, endln:36:20
@@ -2070,6 +2230,13 @@ Design: (unnamed)
           |vpiDecompile:10
           |vpiSize:64
           |UINT:10
+          |vpiTypespec:
+          \_RefTypespec: (flash_ctrl_pkg), line:28:5, endln:28:7
+            |vpiParent:
+            \_Constant: , line:28:5, endln:28:7
+            |vpiFullName:flash_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:29:5, endln:29:6
@@ -2078,6 +2245,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (flash_ctrl_pkg), line:29:5, endln:29:6
+            |vpiParent:
+            \_Constant: , line:29:5, endln:29:6
+            |vpiFullName:flash_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:30:5, endln:30:6
@@ -2086,6 +2260,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (flash_ctrl_pkg), line:30:5, endln:30:6
+            |vpiParent:
+            \_Constant: , line:30:5, endln:30:6
+            |vpiFullName:flash_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiName:
       \_Identifier: (max_info_pages), line:27:33, endln:27:47
@@ -2126,10 +2307,16 @@ Design: (unnamed)
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
   |vpiImportTypespec:
   \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
   |vpiImportTypespec:
   \_IntTypespec: , line:26:11, endln:26:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:flash_ctrl_pkg
   |vpiTaskFunc:
   \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
@@ -2194,7 +2381,18 @@ Design: (unnamed)
       |vpiDecompile:vbits
       |vpiSize:40
       |STRING:vbits
+      |vpiTypespec:
+      \_RefTypespec: (otp_ctrl_pkg::prim_util_pkg), line:50:25, endln:50:30
+        |vpiParent:
+        \_Constant: , line:50:25, endln:50:30
+        |vpiFullName:otp_ctrl_pkg::prim_util_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:48:1, endln:57:11
   |vpiTypespec:
   \_IntTypespec: , line:54:13, endln:54:16
     |vpiParent:
@@ -2202,6 +2400,8 @@ Design: (unnamed)
     |vpiSigned:1
   |vpiImportTypespec:
   \_ImportTypespec: (prim_util_pkg), line:50:10, endln:50:30
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:54:13, endln:54:16
   |vpiDefName:otp_ctrl_pkg
@@ -2230,7 +2430,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@flash_ctrl_info_cfg.flash_ctrl_pkg), line:59:35, endln:59:52
+        |vpiParent:
+        \_Constant: , line:59:35, endln:59:52
+        |vpiFullName:work@flash_ctrl_info_cfg.flash_ctrl_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
   |vpiTypespec:
   \_LogicTypespec: , line:61:1, endln:61:6
     |vpiParent:
@@ -2259,6 +2470,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@flash_ctrl_info_cfg), line:61:18, endln:61:19
+            |vpiParent:
+            \_Constant: , line:61:18, endln:61:19
+            |vpiFullName:work@flash_ctrl_info_cfg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:61:20, endln:61:21
@@ -2267,11 +2485,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@flash_ctrl_info_cfg), line:61:20, endln:61:21
+          |vpiParent:
+          \_Constant: , line:61:20, endln:61:21
+          |vpiFullName:work@flash_ctrl_info_cfg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
   |vpiImportTypespec:
   \_ImportTypespec: (flash_ctrl_pkg), line:59:35, endln:59:52
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:61:1, endln:61:6
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
     |vpiParent:

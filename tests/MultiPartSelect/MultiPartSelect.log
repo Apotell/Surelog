@@ -132,6 +132,7 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             2
+IntTypespec                                           12
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -139,7 +140,7 @@ Net                                                    1
 PartSelect                                             2
 Range                                                  2
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
@@ -147,11 +148,11 @@ TypespecMember                                         1
 UnsupportedTypespec                                    1
 VarSelect                                              2
 ------------------------------------------------------------
-Total:                                                39
+Total:                                                63
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiPartSelect/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiPartSelect/dut.sv:8:20: Null Actual: id:24, type:PartSelect, name:.
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiPartSelect/dut.sv:9:20: Null Actual: id:33, type:PartSelect, name:.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiPartSelect/dut.sv:8:20: Null Actual: id:34, type:PartSelect, name:.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiPartSelect/dut.sv:9:20: Null Actual: id:51, type:PartSelect, name:.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -170,6 +171,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPartSelect/dut.sv, line:5:1, endln:11:10
     |vpiName:work@top
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPartSelect/dut.sv, line:5:1, endln:11:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.xx), line:7:11, endln:7:13
     |vpiParent:
@@ -198,6 +205,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:8:27, endln:8:28
+        |vpiParent:
+        \_Constant: , line:8:27, endln:8:28
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (xx.a[1][3:2]), line:8:14, endln:8:19
@@ -225,6 +239,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.xx.a[1][3:2].a), line:8:17, endln:8:18
+            |vpiParent:
+            \_Constant: , line:8:17, endln:8:18
+            |vpiFullName:work@top.xx.a[1][3:2].a
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiIndex:
         \_PartSelect: (work@top.xx.a[1][3:2].a), line:8:20, endln:8:23
@@ -239,6 +260,13 @@ Design: (unnamed)
             |vpiDecompile:3
             |vpiSize:64
             |UINT:3
+            |vpiTypespec:
+            \_RefTypespec: (work@top.xx.a[1][3:2].a), line:8:20, endln:8:21
+              |vpiParent:
+              \_Constant: , line:8:20, endln:8:21
+              |vpiFullName:work@top.xx.a[1][3:2].a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiRightRange:
           \_Constant: , line:8:22, endln:8:23
@@ -247,6 +275,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@top.xx.a[1][3:2].a), line:8:22, endln:8:23
+              |vpiParent:
+              \_Constant: , line:8:22, endln:8:23
+              |vpiFullName:work@top.xx.a[1][3:2].a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiName:xx.a[1][3:2]
   |vpiContAssign:
@@ -260,6 +295,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:9:27, endln:9:28
+        |vpiParent:
+        \_Constant: , line:9:27, endln:9:28
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (xx.a[1][1:0]), line:9:14, endln:9:19
@@ -287,6 +329,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.xx.a[1][1:0].a), line:9:17, endln:9:18
+            |vpiParent:
+            \_Constant: , line:9:17, endln:9:18
+            |vpiFullName:work@top.xx.a[1][1:0].a
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiIndex:
         \_PartSelect: (work@top.xx.a[1][1:0].a), line:9:20, endln:9:23
@@ -301,6 +350,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@top.xx.a[1][1:0].a), line:9:20, endln:9:21
+              |vpiParent:
+              \_Constant: , line:9:20, endln:9:21
+              |vpiFullName:work@top.xx.a[1][1:0].a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiRightRange:
           \_Constant: , line:9:22, endln:9:23
@@ -309,6 +365,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@top.xx.a[1][1:0].a), line:9:22, endln:9:23
+              |vpiParent:
+              \_Constant: , line:9:22, endln:9:23
+              |vpiFullName:work@top.xx.a[1][1:0].a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiName:xx.a[1][1:0]
 |vpiTypespec:
@@ -359,6 +422,12 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: , line:2:12, endln:2:13
+        |vpiParent:
+        \_Constant: , line:2:12, endln:2:13
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:2:14, endln:2:15
@@ -367,6 +436,12 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:2:14, endln:2:15
+        |vpiParent:
+        \_Constant: , line:2:14, endln:2:15
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
   |vpiRange:
   \_Range: , line:2:16, endln:2:21
@@ -379,6 +454,12 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: , line:2:17, endln:2:18
+        |vpiParent:
+        \_Constant: , line:2:17, endln:2:18
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:2:19, endln:2:20
@@ -387,7 +468,17 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:2:19, endln:2:20
+        |vpiParent:
+        \_Constant: , line:2:19, endln:2:20
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTypespec:
 \_ModuleTypespec: (work@top)
   |vpiParent:

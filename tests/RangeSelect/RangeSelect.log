@@ -14,6 +14,7 @@ Design                                                 1
 HierPath                                               2
 Identifier                                             2
 IndexedPartSelect                                      2
+IntTypespec                                           10
 LogicTypespec                                          3
 Module                                                 1
 ModuleTypespec                                         1
@@ -21,14 +22,14 @@ Net                                                    4
 Operation                                              1
 Range                                                  3
 RefObj                                                 1
-RefTypespec                                            7
+RefTypespec                                           17
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                46
+Total:                                                66
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/RangeSelect/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -97,6 +98,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:14, endln:3:15
+          |vpiParent:
+          \_Constant: , line:3:14, endln:3:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:16, endln:3:17
@@ -105,7 +113,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:16, endln:3:17
+          |vpiParent:
+          \_Constant: , line:3:16, endln:3:17
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
   |vpiTypespec:
   \_ArrayTypespec: , line:6:14, endln:6:17
     |vpiParent:
@@ -127,6 +146,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:6:15, endln:6:16
+            |vpiParent:
+            \_Constant: , line:6:15, endln:6:16
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.tl_h2d_t), line:6:4, endln:6:12
@@ -155,6 +181,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:9:11, endln:9:12
+          |vpiParent:
+          \_Constant: , line:9:11, endln:9:12
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:13, endln:9:14
@@ -163,6 +196,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:9:13, endln:9:14
+          |vpiParent:
+          \_Constant: , line:9:13, endln:9:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
@@ -170,6 +210,8 @@ Design: (unnamed)
   \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:6:14, endln:6:17
   |vpiImportTypespec:

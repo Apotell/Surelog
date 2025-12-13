@@ -120,18 +120,19 @@ Function                                               1
 IODecl                                                 2
 Identifier                                             5
 Initial                                                1
-IntTypespec                                            2
+IntTypespec                                            4
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              1
 RefObj                                                 4
-RefTypespec                                            3
+RefTypespec                                            7
 ReturnStmt                                             1
 SourceFile                                             1
+StringTypespec                                         2
 SysFuncCall                                            2
 VoidTypespec                                           1
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                41
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VoidFuncReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -167,6 +168,12 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
       |vpiFullName:work@top.add
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@top.add)
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($display), line:4:1, endln:4:25
         |vpiParent:
@@ -178,6 +185,13 @@ Design: (unnamed)
           |vpiDecompile:"%d+%d="
           |vpiSize:48
           |STRING:%d+%d=
+          |vpiTypespec:
+          \_RefTypespec: (work@top.add), line:4:10, endln:4:18
+            |vpiParent:
+            \_Constant: , line:4:10, endln:4:18
+            |vpiFullName:work@top.add
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_RefObj: (work@top.add.a), line:4:20, endln:4:21
@@ -274,8 +288,20 @@ Design: (unnamed)
         \_IntTypespec: , line:3:19, endln:3:22
     |vpiStmt:
     \_Begin: (work@top.add)
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv, line:1:1, endln:11:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv, line:1:1, endln:11:10
   |vpiImportTypespec:
   \_Function: (work@top.add), line:3:1, endln:6:12
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.add), line:3:1, endln:6:12
@@ -294,6 +320,13 @@ Design: (unnamed)
         |vpiDecompile:"%d"
         |vpiSize:16
         |STRING:%d
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:9:10, endln:9:14
+          |vpiParent:
+          \_Constant: , line:9:10, endln:9:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_StringTypespec: 
         |vpiConstType:6
       |vpiArgument:
       \_FuncCall: (add), line:9:16, endln:9:27
@@ -308,6 +341,13 @@ Design: (unnamed)
           |vpiDecompile:45
           |vpiSize:64
           |UINT:45
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:9:20, endln:9:22
+            |vpiParent:
+            \_Constant: , line:9:20, endln:9:22
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiArgument:
         \_Constant: , line:9:24, endln:9:26
@@ -316,6 +356,13 @@ Design: (unnamed)
           |vpiDecompile:90
           |vpiSize:64
           |UINT:90
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:9:24, endln:9:26
+            |vpiParent:
+            \_Constant: , line:9:24, endln:9:26
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiName:
         \_Identifier: (add), line:9:16, endln:9:19

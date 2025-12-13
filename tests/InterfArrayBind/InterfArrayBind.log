@@ -215,6 +215,7 @@ GenFor                                                 1
 GenRegion                                              1
 HierPath                                               2
 Identifier                                             4
+IntTypespec                                            6
 Interface                                              1
 InterfaceTypespec                                      1
 LogicTypespec                                          3
@@ -227,11 +228,11 @@ ParamAssign                                            1
 Parameter                                              1
 Range                                                  1
 RefObj                                                 8
-RefTypespec                                            4
+RefTypespec                                           10
 SourceFile                                             1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                54
+Total:                                                66
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -326,6 +327,13 @@ Design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
+      |vpiTypespec:
+      \_RefTypespec: (work@soc_tb), line:8:34, endln:8:35
+        |vpiParent:
+        \_Constant: , line:8:34, endln:8:35
+        |vpiFullName:work@soc_tb
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@soc_tb.NUM_PERIPHERALS), line:8:16, endln:8:35
@@ -360,6 +368,12 @@ Design: (unnamed)
             \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
             |vpiName:io_gen
           |vpiFullName:work@soc_tb.io_gen
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@soc_tb.io_gen), line:21:9, endln:23:12
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_ContAssign: , line:22:20, endln:22:58
             |vpiParent:
@@ -371,6 +385,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@soc_tb.io_gen), line:22:57, endln:22:58
+                |vpiParent:
+                \_Constant: , line:22:57, endln:22:58
+                |vpiFullName:work@soc_tb.io_gen
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_HierPath: (peripheral_io_bus[io_idx].write_en), line:22:20, endln:22:54
@@ -401,8 +422,14 @@ Design: (unnamed)
                 |vpiActual:
                 \_Net: (work@soc_tb.write_en), line:16:39, endln:16:47
               |vpiName:peripheral_io_bus[io_idx].write_en
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@soc_tb), line:20:9, endln:23:12
         |vpiImportTypespec:
         \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:20:14, endln:20:24
           |vpiParent:
@@ -414,6 +441,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@soc_tb), line:20:23, endln:20:24
+              |vpiParent:
+              \_Constant: , line:20:23, endln:20:24
+              |vpiFullName:work@soc_tb
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@soc_tb.io_idx), line:20:14, endln:20:20
@@ -458,6 +492,10 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@soc_tb), line:20:9, endln:23:12
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
+  |vpiTypespec:
   \_InterfaceTypespec: (work@io_bus_interface)
     |vpiParent:
     \_Design: (unnamed)
@@ -472,6 +510,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:10:10, endln:10:15
     |vpiParent:
     \_Module: work@soc_tb (work@soc_tb), file:${SURELOG_DIR}/tests/InterfArrayBind/dut.sv, line:6:1, endln:26:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@soc_tb.io_idx), line:18:12, endln:18:18
   |vpiImportTypespec:
@@ -549,6 +589,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@soc_tb.peripheral_io_bus), line:14:58, endln:14:59
+            |vpiParent:
+            \_Constant: , line:14:58, endln:14:59
+            |vpiFullName:work@soc_tb.peripheral_io_bus
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:14:60, endln:14:61
@@ -557,6 +604,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@soc_tb.peripheral_io_bus), line:14:60, endln:14:61
+          |vpiParent:
+          \_Constant: , line:14:60, endln:14:61
+          |vpiFullName:work@soc_tb.peripheral_io_bus
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@soc_tb.peripheral_io_bus.io_bus_interface), line:14:5, endln:14:21
@@ -577,6 +631,13 @@ Design: (unnamed)
       |vpiDecompile:32'hffffffff
       |vpiSize:32
       |HEX:ffffffff
+      |vpiTypespec:
+      \_RefTypespec: (work@soc_tb), line:16:50, endln:16:62
+        |vpiParent:
+        \_Constant: , line:16:50, endln:16:62
+        |vpiFullName:work@soc_tb
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_HierPath: (peripheral_io_bus[IO_ONES].write_en), line:16:12, endln:16:47

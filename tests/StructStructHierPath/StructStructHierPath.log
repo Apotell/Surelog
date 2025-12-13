@@ -259,6 +259,7 @@ HierPath                                               1
 Identifier                                             5
 IfStmt                                                 1
 ImportTypespec                                         1
+IntTypespec                                            9
 LogicTypespec                                          7
 Module                                                 1
 ModuleTypespec                                         1
@@ -268,14 +269,15 @@ Package                                                1
 Port                                                   1
 Range                                                  3
 RefObj                                                 7
-RefTypespec                                           14
+RefTypespec                                           24
 SourceFile                                             1
+StringTypespec                                         1
 StructTypespec                                         4
 TypedefTypespec                                        2
 TypespecMember                                         9
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                83
+Total:                                               103
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructStructHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -447,6 +449,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (riscv_isa_pkg), line:11:12, endln:11:13
+            |vpiParent:
+            \_Constant: , line:11:12, endln:11:13
+            |vpiFullName:riscv_isa_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:11:14, endln:11:15
@@ -455,6 +464,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (riscv_isa_pkg), line:11:14, endln:11:15
+            |vpiParent:
+            \_Constant: , line:11:14, endln:11:15
+            |vpiFullName:riscv_isa_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:11:16, endln:11:17
@@ -463,7 +479,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (riscv_isa_pkg), line:11:16, endln:11:17
+          |vpiParent:
+          \_Constant: , line:11:16, endln:11:17
+          |vpiFullName:riscv_isa_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: riscv_isa_pkg (riscv_isa_pkg), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:2:1, endln:26:26
   |vpiTypespec:
   \_TypedefTypespec: (riscv_isa_pkg::ctl_t), line:23:3, endln:23:8
     |vpiParent:
@@ -511,6 +538,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:5, endln:11:10
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (riscv_isa_pkg::ctl_t), line:23:3, endln:23:8
   |vpiImportTypespec:
   \_StructTypespec: , line:19:9, endln:23:2
@@ -541,13 +570,26 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@r5p_wbu.riscv_isa_pkg), line:29:10, endln:29:26
+        |vpiParent:
+        \_Constant: , line:29:10, endln:29:26
+        |vpiFullName:work@r5p_wbu.riscv_isa_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
   |vpiTypespec:
   \_LogicTypespec: , line:30:3, endln:30:6
     |vpiParent:
     \_Module: work@r5p_wbu (work@r5p_wbu), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:28:1, endln:37:10
   |vpiImportTypespec:
   \_ImportTypespec: (riscv_isa_pkg), line:29:10, endln:29:26
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@r5p_wbu.ctl), line:28:31, endln:28:34
     |vpiParent:

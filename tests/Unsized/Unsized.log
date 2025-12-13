@@ -4,18 +4,20 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/Unsized/dut.sv:1:2: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            2
 Constant                                              12
 Design                                                 1
 Identifier                                             1
-LogicTypespec                                          4
+IntTypespec                                            8
+LogicTypespec                                          6
 Module                                                 2
 ModuleTypespec                                         1
 Net                                                    4
 Range                                                  4
-RefTypespec                                            4
+RefTypespec                                           16
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                34
+Total:                                                58
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Unsized/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -51,6 +53,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:11, endln:2:13
+          |vpiParent:
+          \_Constant: , line:2:11, endln:2:13
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:14, endln:2:15
@@ -59,9 +68,32 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:2:14, endln:2:15
+          |vpiParent:
+          \_Constant: , line:2:14, endln:2:15
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Unsized/dut.sv, line:1:2, endln:6:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Unsized/dut.sv, line:1:2, endln:6:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Unsized/dut.sv, line:1:2, endln:6:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:4, endln:2:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.a), line:2:17, endln:2:18
     |vpiParent:
@@ -90,6 +122,8 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.c), line:4:17, endln:4:18
     |vpiParent:

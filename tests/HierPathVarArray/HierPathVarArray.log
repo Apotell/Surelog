@@ -133,6 +133,7 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             4
+IntTypespec                                            5
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -141,14 +142,14 @@ Package                                                1
 Port                                                   1
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            5
+RefTypespec                                           10
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        2
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                39
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathVarArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -223,6 +224,10 @@ Design: (unnamed)
       |vpiActual:
       \_ArrayTypespec: , line:6:15, endln:6:20
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
+  |vpiTypespec:
   \_ArrayTypespec: , line:6:15, endln:6:20
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
@@ -238,6 +243,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:6:16, endln:6:17
+          |vpiParent:
+          \_Constant: , line:6:16, endln:6:17
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:18, endln:6:19
@@ -246,6 +258,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:6:18, endln:6:19
+          |vpiParent:
+          \_Constant: , line:6:18, endln:6:19
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (pkg::a), line:6:12, endln:6:13
@@ -264,6 +283,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::b), line:6:14, endln:6:15
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_ArrayTypespec: , line:6:15, endln:6:20
   |vpiDefName:pkg
 |vpiAllModules:
@@ -275,6 +296,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
     |vpiName:work@top
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.o), line:9:19, endln:9:20
     |vpiParent:
@@ -317,6 +344,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:11:20, endln:11:21
+        |vpiParent:
+        \_Constant: , line:11:20, endln:11:21
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (c[1].x), line:11:11, endln:11:17
@@ -337,6 +371,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.c[1].x.c), line:11:13, endln:11:14
+            |vpiParent:
+            \_Constant: , line:11:13, endln:11:14
+            |vpiFullName:work@top.c[1].x.c
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_RefObj: (c[1].x), line:11:16, endln:11:17
@@ -370,6 +411,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top.c[1].x.c), line:12:17, endln:12:18
+            |vpiParent:
+            \_Constant: , line:12:17, endln:12:18
+            |vpiFullName:work@top.c[1].x.c
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_RefObj: (work@top.x), line:12:20, endln:12:21

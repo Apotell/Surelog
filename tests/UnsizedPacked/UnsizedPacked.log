@@ -53,15 +53,16 @@ ArrayTypespec                                          1
 Constant                                               4
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    2
 Range                                                  2
-RefTypespec                                            3
+RefTypespec                                            7
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                19
+Total:                                                25
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedPacked/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -84,6 +85,10 @@ Design: (unnamed)
     |vpiName:work@test
   |vpiTypespec:
   \_LogicTypespec: , line:3:1, endln:3:4
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
   |vpiTypespec:
@@ -113,6 +118,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:5:5, endln:5:7
+          |vpiParent:
+          \_Constant: , line:5:5, endln:5:6
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:5, endln:5:6
@@ -120,9 +132,18 @@ Design: (unnamed)
         \_Range: , line:5:5, endln:5:7
         |vpiDecompile:unsized
         |STRING:unsized
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:5:5, endln:5:7
+          |vpiParent:
+          \_Constant: , line:5:5, endln:5:6
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:6
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:4
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:11, endln:3:13
   |vpiImportTypespec:

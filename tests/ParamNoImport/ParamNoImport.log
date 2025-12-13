@@ -125,10 +125,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:1:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               5
 Design                                                 1
 Identifier                                             4
-LogicTypespec                                          1
+IntTypespec                                            2
+LogicTypespec                                          3
 Module                                                 2
 ModuleTypespec                                         2
 Operation                                              2
@@ -137,7 +139,7 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefModule                                              1
-RefTypespec                                            6
+RefTypespec                                           11
 SourceFile                                             1
 StringTypespec                                         2
 StructTypespec                                         1
@@ -146,7 +148,7 @@ TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                39
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -201,6 +203,13 @@ Design: (unnamed)
           |vpiDecompile:2'b10
           |vpiSize:2
           |BIN:10
+          |vpiTypespec:
+          \_RefTypespec: (pkg), line:10:17, endln:10:22
+            |vpiParent:
+            \_Constant: , line:10:17, endln:10:22
+            |vpiFullName:pkg
+            |vpiActual:
+            \_LogicTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (pkg::slow_clk_val), line:10:3, endln:10:15
@@ -260,6 +269,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:7:10, endln:7:11
+          |vpiParent:
+          \_Constant: , line:7:10, endln:7:11
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:12, endln:7:13
@@ -268,7 +284,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:7:12, endln:7:13
+          |vpiParent:
+          \_Constant: , line:7:12, endln:7:13
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
   |vpiTypespec:
   \_StringTypespec: , line:10:3, endln:10:15
     |vpiParent:
@@ -279,6 +310,10 @@ Design: (unnamed)
   \_StructTypespec: , line:6:9, endln:8:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:3, endln:7:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:10:3, endln:10:15
   |vpiDefName:pkg
@@ -334,9 +369,22 @@ Design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@test), line:1:40, endln:1:42
+        |vpiParent:
+        \_Constant: , line:1:40, endln:1:42
+        |vpiFullName:work@test
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@test
 |vpiTypespec:
 \_ModuleTypespec: (work@dut)

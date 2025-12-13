@@ -126,7 +126,8 @@ Constant                                              11
 Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
-LogicTypespec                                          3
+IntTypespec                                            6
+LogicTypespec                                          7
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              2
@@ -135,10 +136,11 @@ ParamAssign                                            3
 Parameter                                              3
 Range                                                  3
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                           15
 SourceFile                                             1
+StringTypespec                                         1
 ------------------------------------------------------------
-Total:                                                46
+Total:                                                67
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamConstPush/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -199,6 +201,13 @@ Design: (unnamed)
       |vpiDecompile:2'b00
       |vpiSize:2
       |BIN:00
+      |vpiTypespec:
+      \_RefTypespec: (base_pkg), line:2:34, endln:2:39
+        |vpiParent:
+        \_Constant: , line:2:34, endln:2:39
+        |vpiFullName:base_pkg
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (base_pkg::BASE), line:2:25, endln:2:39
@@ -226,6 +235,13 @@ Design: (unnamed)
         |vpiDecompile:2'b01
         |vpiSize:2
         |BIN:01
+        |vpiTypespec:
+        \_RefTypespec: (base_pkg), line:3:41, endln:3:46
+          |vpiParent:
+          \_Constant: , line:3:41, endln:3:46
+          |vpiFullName:base_pkg
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_Parameter: (base_pkg::USAGE), line:3:25, endln:3:46
@@ -244,6 +260,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (base_pkg), line:2:19, endln:2:20
+          |vpiParent:
+          \_Constant: , line:2:19, endln:2:20
+          |vpiFullName:base_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:21, endln:2:22
@@ -252,9 +275,28 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (base_pkg), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:base_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: base_pkg (base_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: base_pkg (base_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:1:1, endln:4:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:12, endln:2:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiDefName:base_pkg
 |vpiAllPackages:
 \_Package: error_pkg (error_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
@@ -308,6 +350,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (error_pkg), line:7:19, endln:7:20
+          |vpiParent:
+          \_Constant: , line:7:19, endln:7:20
+          |vpiFullName:error_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:7:21, endln:7:22
@@ -316,9 +365,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (error_pkg), line:7:21, endln:7:22
+          |vpiParent:
+          \_Constant: , line:7:21, endln:7:22
+          |vpiFullName:error_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: error_pkg (error_pkg), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:6:1, endln:8:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:12, endln:7:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:error_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:10:1, endln:11:10
@@ -345,9 +407,22 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.error_pkg), line:10:19, endln:10:31
+        |vpiParent:
+        \_Constant: , line:10:19, endln:10:31
+        |vpiFullName:work@top.error_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConstPush/dut.sv, line:10:1, endln:11:10
   |vpiImportTypespec:
   \_ImportTypespec: (error_pkg), line:10:19, endln:10:31
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@top
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

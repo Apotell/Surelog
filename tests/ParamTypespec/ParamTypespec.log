@@ -170,12 +170,13 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamTypespec/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               9
 ContAssign                                             1
 Design                                                 1
 Identifier                                             4
 ImportTypespec                                         1
-IntTypespec                                            2
+IntTypespec                                            9
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
@@ -187,12 +188,13 @@ Parameter                                              2
 Port                                                   1
 Range                                                  2
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                           14
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                55
+Total:                                                73
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -257,6 +259,13 @@ Design: (unnamed)
               |vpiDecompile:3'h1
               |vpiSize:3
               |HEX:1
+              |vpiTypespec:
+              \_RefTypespec: (otp_ctrl_part_pkg), line:4:51, endln:4:55
+                |vpiParent:
+                \_Constant: , line:4:51, endln:4:55
+                |vpiFullName:otp_ctrl_part_pkg
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:5
     |vpiLhs:
     \_Parameter: (otp_ctrl_part_pkg::PartInvDefault), line:2:26, endln:6:49
@@ -275,6 +284,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (otp_ctrl_part_pkg), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:otp_ctrl_part_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
@@ -283,9 +299,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (otp_ctrl_part_pkg), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:otp_ctrl_part_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:1:1, endln:7:31
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:otp_ctrl_part_pkg
   |vpiEndLabel:otp_ctrl_part_pkg
 |vpiAllModules:
@@ -348,7 +377,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.otp_ctrl_part_pkg), line:10:11, endln:10:31
+        |vpiParent:
+        \_Constant: , line:10:11, endln:10:31
+        |vpiFullName:work@top.otp_ctrl_part_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
   |vpiTypespec:
   \_IntTypespec: , line:9:19, endln:9:22
     |vpiParent:
@@ -396,6 +436,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@top), line:14:33, endln:14:34
+              |vpiParent:
+              \_Constant: , line:14:33, endln:14:34
+              |vpiFullName:work@top
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:14:35, endln:14:36
@@ -404,6 +451,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:14:35, endln:14:36
+            |vpiParent:
+            \_Constant: , line:14:35, endln:14:36
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:14:37, endln:14:38
@@ -412,15 +466,36 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:14:37, endln:14:38
+          |vpiParent:
+          \_Constant: , line:14:37, endln:14:38
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_part_pkg), line:10:11, endln:10:31
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:9:19, endln:9:22
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:9:23, endln:9:24
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:4, endln:14:9
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.part_buf_data), line:14:40, endln:14:53
     |vpiParent:

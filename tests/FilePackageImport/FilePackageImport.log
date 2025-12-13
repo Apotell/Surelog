@@ -80,22 +80,23 @@ Function                                               1
 IODecl                                                 2
 Identifier                                             4
 ImportTypespec                                         1
-IntTypespec                                            1
+IntTypespec                                            3
 LogicTypespec                                          2
 Package                                                1
 Range                                                  1
 RefObj                                                 1
-RefTypespec                                            4
+RefTypespec                                            7
 ReturnStmt                                             1
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                26
+Total:                                                32
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:26, name:we".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:32, name:we".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Null Actual: id:26, type:RefObj, name:we.
+[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Null Actual: id:32, type:RefObj, name:we.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -129,6 +130,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (pkg_b), line:3:16, endln:3:17
+          |vpiParent:
+          \_Constant: , line:3:16, endln:3:17
+          |vpiFullName:pkg_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:18, endln:3:19
@@ -137,7 +145,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg_b), line:3:18, endln:3:19
+          |vpiParent:
+          \_Constant: , line:3:18, endln:3:19
+          |vpiFullName:pkg_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
   |vpiTypespec:
   \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
     |vpiParent:
@@ -156,6 +175,8 @@ Design: (unnamed)
       \_LogicTypespec: , line:3:9, endln:3:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:9, endln:3:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
   |vpiDefName:pkg_b
@@ -176,7 +197,18 @@ Design: (unnamed)
     |vpiDecompile:*
     |vpiSize:8
     |STRING:*
+    |vpiTypespec:
+    \_RefTypespec: (pkg_b), line:7:8, endln:7:16
+      |vpiParent:
+      \_Constant: , line:7:8, endln:7:16
+      |vpiFullName:pkg_b
+      |vpiActual:
+      \_StringTypespec: 
     |vpiConstType:8
+|vpiTypespec:
+\_StringTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTaskFunc:
 \_Function: (TreeLRU_CalcWriteEnable), line:9:1, endln:12:12
   |vpiParent:

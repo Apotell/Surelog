@@ -215,7 +215,7 @@ Constant                                               7
 Design                                                 1
 Identifier                                             6
 ImportTypespec                                         1
-IntTypespec                                            5
+IntTypespec                                           11
 Module                                                 4
 ModuleTypespec                                         4
 Operation                                              3
@@ -224,12 +224,12 @@ ParamAssign                                            5
 Parameter                                              5
 RefModule                                              3
 RefObj                                                 1
-RefTypespec                                            8
+RefTypespec                                           15
 SourceFile                                             1
-StringTypespec                                         2
+StringTypespec                                         3
 TaggedPattern                                          2
 ------------------------------------------------------------
-Total:                                                59
+Total:                                                73
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -283,6 +283,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (foo_pkg), line:2:41, endln:2:42
+            |vpiParent:
+            \_Constant: , line:2:41, endln:2:42
+            |vpiFullName:foo_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (foo_pkg), line:2:32, endln:2:39
@@ -299,11 +306,17 @@ Design: (unnamed)
     \_Package: foo_pkg (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: foo_pkg (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
+  |vpiTypespec:
   \_StringTypespec: , line:2:32, endln:2:39
     |vpiParent:
     \_Package: foo_pkg (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:2:32, endln:2:39
   |vpiDefName:foo_pkg
@@ -341,6 +354,13 @@ Design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
+      |vpiTypespec:
+      \_RefTypespec: (work@bottom), line:6:25, endln:6:26
+        |vpiParent:
+        \_Constant: , line:6:25, endln:6:26
+        |vpiFullName:work@bottom
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@bottom.VALUE), line:6:17, endln:6:26
@@ -349,8 +369,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:5:1, endln:7:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:5:1, endln:7:10
   |vpiImportTypespec:
   \_IntTypespec: , line:6:13, endln:6:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@bottom
 |vpiAllModules:
 \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:9:1, endln:15:10
@@ -398,6 +424,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@lower), line:11:38, endln:11:39
+          |vpiParent:
+          \_Constant: , line:11:38, endln:11:39
+          |vpiFullName:work@lower
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@lower.VALUE), line:11:17, endln:11:39
@@ -417,12 +450,27 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@lower.foo_pkg), line:10:10, endln:10:20
+        |vpiParent:
+        \_Constant: , line:10:10, endln:10:20
+        |vpiFullName:work@lower.foo_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:9:1, endln:15:10
   |vpiTypespec:
   \_IntTypespec: , line:11:13, endln:11:16
     |vpiParent:
     \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:9:1, endln:15:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:9:1, endln:15:10
   |vpiTypespec:
   \_ModuleTypespec: (work@bottom)
     |vpiParent:
@@ -433,7 +481,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (foo_pkg), line:10:10, endln:10:20
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_IntTypespec: , line:11:13, endln:11:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@lower
   |vpiRefModule:
   \_RefModule: work@bottom (bottom_u), line:12:3, endln:12:9
@@ -477,6 +529,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:23:25, endln:23:26
+        |vpiParent:
+        \_Constant: , line:23:25, endln:23:26
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.VALUE), line:23:17, endln:23:26
@@ -486,6 +545,10 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:22:1, endln:25:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:22:1, endln:25:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@upper)
     |vpiParent:
     \_Design: (unnamed)
@@ -494,6 +557,8 @@ Design: (unnamed)
     \_Module: work@upper (work@upper), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:17:1, endln:20:10
   |vpiImportTypespec:
   \_IntTypespec: , line:23:13, endln:23:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiRefModule:
   \_RefModule: work@upper (upper_u), line:24:3, endln:24:8
@@ -537,6 +602,13 @@ Design: (unnamed)
       |vpiDecompile:7
       |vpiSize:64
       |UINT:7
+      |vpiTypespec:
+      \_RefTypespec: (work@upper), line:18:25, endln:18:26
+        |vpiParent:
+        \_Constant: , line:18:25, endln:18:26
+        |vpiFullName:work@upper
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@upper.VALUE), line:18:17, endln:18:26
@@ -546,6 +618,10 @@ Design: (unnamed)
     \_Module: work@upper (work@upper), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:17:1, endln:20:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@upper (work@upper), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:17:1, endln:20:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@lower)
     |vpiParent:
     \_Design: (unnamed)
@@ -554,6 +630,8 @@ Design: (unnamed)
     \_Module: work@lower (work@lower), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:9:1, endln:15:10
   |vpiImportTypespec:
   \_IntTypespec: , line:18:13, endln:18:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@upper
   |vpiRefModule:
   \_RefModule: work@lower (lower_u), line:19:3, endln:19:8

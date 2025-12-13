@@ -221,13 +221,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
-BitTypespec                                            1
+BitTypespec                                            3
 Constant                                              13
 Design                                                 1
 HierPath                                               3
 Identifier                                             6
 ImportTypespec                                         1
-IntTypespec                                            3
+IntTypespec                                           13
 Module                                                 3
 ModuleTypespec                                         2
 Operation                                              4
@@ -237,15 +237,15 @@ Parameter                                              4
 Range                                                  2
 RefModule                                              1
 RefObj                                                 6
-RefTypespec                                           15
+RefTypespec                                           28
 SourceFile                                             1
-StringTypespec                                         6
+StringTypespec                                         7
 StructTypespec                                         1
 TaggedPattern                                          6
 TypedefTypespec                                        1
 TypespecMember                                         3
 ------------------------------------------------------------
-Total:                                                90
+Total:                                               116
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NoReducTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -378,6 +378,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (cheshire_pkg), line:20:25, endln:20:26
+            |vpiParent:
+            \_Constant: , line:20:25, endln:20:26
+            |vpiFullName:cheshire_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (cheshire_pkg::NoSlvPorts), line:20:5, endln:20:15
@@ -398,6 +405,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (cheshire_pkg), line:21:25, endln:21:26
+            |vpiParent:
+            \_Constant: , line:21:25, endln:21:26
+            |vpiFullName:cheshire_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (cheshire_pkg::NoMstPorts), line:21:5, endln:21:15
@@ -418,6 +432,13 @@ Design: (unnamed)
           |vpiDecompile:48
           |vpiSize:64
           |UINT:48
+          |vpiTypespec:
+          \_RefTypespec: (cheshire_pkg), line:22:25, endln:22:27
+            |vpiParent:
+            \_Constant: , line:22:25, endln:22:27
+            |vpiFullName:cheshire_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (cheshire_pkg::AxiAddrWidth), line:22:5, endln:22:17
@@ -430,9 +451,15 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (cheshire_pkg::AxiXbarCfg), line:19:34, endln:23:4
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: cheshire_pkg (cheshire_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:18:1, endln:24:11
+  |vpiTypespec:
   \_StringTypespec: , line:20:5, endln:20:15
     |vpiParent:
     \_Package: cheshire_pkg (cheshire_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:18:1, endln:24:11
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:20:5, endln:20:15
   |vpiDefName:cheshire_pkg
@@ -491,6 +518,13 @@ Design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_xbar), line:11:73, endln:11:75
+        |vpiParent:
+        \_Constant: , line:11:73, endln:11:75
+        |vpiFullName:work@axi_xbar
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@axi_xbar.Cfg), line:11:33, endln:11:75
@@ -530,11 +564,26 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiSize:-1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@axi_xbar), line:13:73, endln:13:75
+        |vpiParent:
+        \_Constant: , line:13:73, endln:13:75
+        |vpiFullName:work@axi_xbar
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@axi_xbar.Connectivity), line:13:58, endln:13:75
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@axi_xbar (work@axi_xbar), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:9:1, endln:16:10
+  |vpiTypespec:
   \_BitTypespec: , line:13:13, endln:13:16
+    |vpiParent:
+    \_Module: work@axi_xbar (work@axi_xbar), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:9:1, endln:16:10
+  |vpiTypespec:
+  \_IntTypespec: 
     |vpiParent:
     \_Module: work@axi_xbar (work@axi_xbar), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:9:1, endln:16:10
   |vpiTypespec:
@@ -576,6 +625,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@axi_xbar), line:13:33, endln:13:34
+            |vpiParent:
+            \_Constant: , line:13:33, endln:13:34
+            |vpiFullName:work@axi_xbar
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:35, endln:13:36
@@ -584,6 +640,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@axi_xbar), line:13:35, endln:13:36
+          |vpiParent:
+          \_Constant: , line:13:35, endln:13:36
+          |vpiFullName:work@axi_xbar
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:13:37, endln:13:57
@@ -620,6 +683,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@axi_xbar), line:13:53, endln:13:54
+            |vpiParent:
+            \_Constant: , line:13:53, endln:13:54
+            |vpiFullName:work@axi_xbar
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:55, endln:13:56
@@ -628,6 +698,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@axi_xbar), line:13:55, endln:13:56
+          |vpiParent:
+          \_Constant: , line:13:55, endln:13:56
+          |vpiFullName:work@axi_xbar
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@axi_xbar), line:13:13, endln:13:16
@@ -638,7 +715,11 @@ Design: (unnamed)
       \_BitTypespec: , line:13:13, endln:13:16
     |vpiPacked:1
   |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
   \_BitTypespec: , line:13:13, endln:13:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:13:13, endln:13:57
   |vpiDefName:work@axi_xbar
@@ -667,7 +748,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@cheshire_soc.cheshire_pkg), line:26:28, endln:26:43
+        |vpiParent:
+        \_Constant: , line:26:28, endln:26:43
+        |vpiFullName:work@cheshire_soc.cheshire_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@cheshire_soc (work@cheshire_soc), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:26:1, endln:30:10
   |vpiTypespec:
   \_ModuleTypespec: (work@axi_xbar)
     |vpiParent:
@@ -677,6 +769,8 @@ Design: (unnamed)
     \_Module: work@axi_xbar (work@axi_xbar), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:9:1, endln:16:10
   |vpiImportTypespec:
   \_ImportTypespec: (cheshire_pkg), line:26:28, endln:26:43
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@cheshire_soc
   |vpiRefModule:
   \_RefModule: work@axi_xbar (i_axi_xbar), line:27:3, endln:27:11

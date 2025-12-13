@@ -74,6 +74,7 @@ ArrayTypespec                                          3
 Constant                                               3
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            3
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         2
@@ -82,10 +83,10 @@ Operation                                              3
 Port                                                   1
 Range                                                  3
 RefModule                                              1
-RefTypespec                                            5
+RefTypespec                                            8
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                28
+Total:                                                34
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackboxMissingDef/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv:2:4: Null Actual: id:7, type:RefModule, name:pll.
@@ -117,6 +118,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:1:31, endln:1:34
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackboxMissingDef/dut.sv, line:1:1, endln:5:10
@@ -137,6 +142,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:1:32, endln:1:33
+            |vpiParent:
+            \_Constant: , line:1:32, endln:1:33
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:1:18, endln:1:23
@@ -166,6 +178,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:1:32, endln:1:33
+            |vpiParent:
+            \_Constant: , line:1:32, endln:1:33
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:1:18, endln:1:29
@@ -178,6 +197,8 @@ Design: (unnamed)
   \_ModuleTypespec: (PLLE2_ADV)
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:18, endln:1:23
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:1:31, endln:1:34
   |vpiImportTypespec:

@@ -255,13 +255,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  8
-BitTypespec                                            3
+BitTypespec                                            4
 CaseItem                                               8
 Constant                                               7
 Design                                                 1
 GenCase                                                3
 Identifier                                             2
-LogicTypespec                                          1
+IntTypespec                                            2
+LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         7
 ParamAssign                                            4
@@ -269,17 +270,17 @@ Parameter                                              4
 Range                                                  1
 RefModule                                              8
 RefObj                                                 7
-RefTypespec                                            4
+RefTypespec                                           11
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                71
+Total:                                                85
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenCaseStmt/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:13:12: Null Actual: id:38, type:RefModule, name:u2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:19:13: Null Actual: id:48, type:RefModule, name:u1.
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:20:13: Null Actual: id:53, type:RefModule, name:u2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:25:14: Null Actual: id:63, type:RefModule, name:u1.
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:27:14: Null Actual: id:71, type:RefModule, name:u3.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:13:12: Null Actual: id:52, type:RefModule, name:u2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:19:13: Null Actual: id:62, type:RefModule, name:u1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:20:13: Null Actual: id:67, type:RefModule, name:u2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:25:14: Null Actual: id:77, type:RefModule, name:u1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenCaseStmt/dut.sv:27:14: Null Actual: id:85, type:RefModule, name:u3.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -375,6 +376,13 @@ Design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:7:34, endln:7:38
+        |vpiParent:
+        \_Constant: , line:7:34, endln:7:38
+        |vpiFullName:work@top
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.x_1b0), line:7:26, endln:7:38
@@ -389,6 +397,13 @@ Design: (unnamed)
       |vpiDecompile:1'sb0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:8:33, endln:8:38
+        |vpiParent:
+        \_Constant: , line:8:33, endln:8:38
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.x_1sb0), line:8:24, endln:8:38
@@ -403,6 +418,13 @@ Design: (unnamed)
       |vpiDecompile:1'sb1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:9:33, endln:9:38
+        |vpiParent:
+        \_Constant: , line:9:33, endln:9:38
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.x_1sb1), line:9:24, endln:9:38
@@ -417,6 +439,13 @@ Design: (unnamed)
       |vpiDecompile:2'sb11
       |vpiSize:2
       |BIN:11
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:10:42, endln:10:48
+        |vpiParent:
+        \_Constant: , line:10:42, endln:10:48
+        |vpiFullName:work@top
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.x_2sb11), line:10:32, endln:10:48
@@ -565,10 +594,18 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
+  |vpiTypespec:
   \_BitTypespec: , line:8:13, endln:8:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
   |vpiTypespec:
   \_LogicTypespec: , line:10:13, endln:10:25
     |vpiParent:
@@ -584,6 +621,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:10:27, endln:10:28
+          |vpiParent:
+          \_Constant: , line:10:27, endln:10:28
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:29, endln:10:30
@@ -592,14 +636,31 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:10:29, endln:10:30
+          |vpiParent:
+          \_Constant: , line:10:29, endln:10:30
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenCaseStmt/dut.sv, line:6:1, endln:30:10
   |vpiImportTypespec:
   \_BitTypespec: , line:7:13, endln:7:16
   |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
   \_BitTypespec: , line:8:13, endln:8:23
   |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:10:13, endln:10:25
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenCase: , line:12:3, endln:15:10
@@ -624,6 +685,13 @@ Design: (unnamed)
         |vpiDecompile:2'b?1
         |vpiSize:2
         |BIN:?1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:5, endln:13:10
+          |vpiParent:
+          \_Constant: , line:13:5, endln:13:10
+          |vpiFullName:work@top
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiStmt:
       \_Begin: (work@top), line:13:12, endln:13:21

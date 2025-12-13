@@ -296,6 +296,7 @@ GenIf                                                  2
 HierPath                                               7
 Identifier                                            23
 Initial                                                1
+IntTypespec                                            4
 IntegerTypespec                                        2
 Interface                                              1
 InterfaceTypespec                                      1
@@ -304,12 +305,12 @@ Module                                                 1
 ModuleTypespec                                         1
 RefModule                                              1
 RefObj                                                12
-RefTypespec                                            2
+RefTypespec                                            6
 ReturnStmt                                             2
 SourceFile                                             1
 SysFuncCall                                            8
 ------------------------------------------------------------
-Total:                                                83
+Total:                                                91
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathInterfBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -345,8 +346,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@intf.f), line:2:5, endln:4:16
       |vpiSigned:1
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@intf.f), line:2:5, endln:4:16
     |vpiImportTypespec:
     \_IntegerTypespec: , line:2:24, endln:2:31
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -367,6 +374,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@intf.f), line:3:16, endln:3:17
+          |vpiParent:
+          \_Constant: , line:3:16, endln:3:17
+          |vpiFullName:work@intf.f
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiInternalScope:
   \_Begin: (work@intf.blk), line:5:12, endln:9:8
@@ -378,8 +392,14 @@ Design: (unnamed)
       \_Begin: (work@intf.blk), line:5:12, endln:9:8
       |vpiName:blk
     |vpiFullName:work@intf.blk
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
   |vpiImportTypespec:
   \_Function: (work@intf.f), line:2:5, endln:4:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@intf
   |vpiTaskFunc:
   \_Function: (work@intf.f), line:2:5, endln:4:16
@@ -394,6 +414,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@intf), line:5:9, endln:5:10
+        |vpiParent:
+        \_Constant: , line:5:9, endln:5:10
+        |vpiFullName:work@intf
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@intf.blk), line:5:12, endln:9:8
@@ -421,8 +448,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.f), line:14:5, endln:16:16
       |vpiSigned:1
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@top.f), line:14:5, endln:16:16
     |vpiImportTypespec:
     \_IntegerTypespec: , line:14:24, endln:14:31
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -443,6 +476,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top.f), line:15:16, endln:15:17
+          |vpiParent:
+          \_Constant: , line:15:16, endln:15:17
+          |vpiFullName:work@top.f
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiInternalScope:
   \_Begin: (work@top.blk), line:17:12, endln:21:8
@@ -465,8 +505,14 @@ Design: (unnamed)
       |vpiName:work@intf
     |vpiInterface:
     \_Interface: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
   |vpiImportTypespec:
   \_Function: (work@top.f), line:14:5, endln:16:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.f), line:14:5, endln:16:16
@@ -763,6 +809,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:17:9, endln:17:10
+        |vpiParent:
+        \_Constant: , line:17:9, endln:17:10
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top.blk), line:17:12, endln:21:8

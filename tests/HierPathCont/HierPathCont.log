@@ -166,12 +166,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathCont/dut.sv:3:1: Compile module "work@unsized_single_bit_1".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            3
 Constant                                              10
 ContAssign                                             4
 Design                                                 1
 HierPath                                               1
 Identifier                                             2
-LogicTypespec                                          7
+IntTypespec                                            6
+LogicTypespec                                          8
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    4
@@ -179,14 +181,14 @@ Operation                                              2
 Port                                                   4
 Range                                                  3
 RefObj                                                 7
-RefTypespec                                           10
+RefTypespec                                           20
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                63
+Total:                                                83
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathCont/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -208,6 +210,14 @@ Design: (unnamed)
     \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
     |vpiName:work@unsized_single_bit_1
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
+  |vpiTypespec:
   \_LogicTypespec: , line:4:12, endln:4:16
     |vpiParent:
     \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
@@ -222,6 +232,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@unsized_single_bit_1), line:4:18, endln:4:19
+          |vpiParent:
+          \_Constant: , line:4:18, endln:4:19
+          |vpiFullName:work@unsized_single_bit_1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:20, endln:4:21
@@ -230,13 +247,30 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@unsized_single_bit_1), line:4:20, endln:4:21
+          |vpiParent:
+          \_Constant: , line:4:20, endln:4:21
+          |vpiFullName:work@unsized_single_bit_1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
   |vpiTypespec:
   \_LogicTypespec: , line:5:12, endln:5:16
     |vpiParent:
     \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
   |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:12, endln:4:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@unsized_single_bit_1.out1), line:4:23, endln:4:27
     |vpiParent:
@@ -368,6 +402,13 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiSize:-1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@unsized_single_bit_1), line:11:19, endln:11:21
+        |vpiParent:
+        \_Constant: , line:11:19, endln:11:21
+        |vpiFullName:work@unsized_single_bit_1
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@unsized_single_bit_1.out1), line:11:10, endln:11:14
@@ -401,6 +442,13 @@ Design: (unnamed)
         |vpiDecompile:4'b1111
         |vpiSize:4
         |BIN:1111
+        |vpiTypespec:
+        \_RefTypespec: (work@unsized_single_bit_1), line:14:28, endln:14:35
+          |vpiParent:
+          \_Constant: , line:14:28, endln:14:35
+          |vpiFullName:work@unsized_single_bit_1
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@unsized_single_bit_1.out2), line:14:10, endln:14:14
@@ -421,6 +469,13 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiSize:-1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@unsized_single_bit_1), line:17:19, endln:17:21
+        |vpiParent:
+        \_Constant: , line:17:19, endln:17:21
+        |vpiFullName:work@unsized_single_bit_1
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_HierPath: (out3.a), line:17:14, endln:17:16
@@ -465,6 +520,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@unsized_single_bit_1), line:20:28, endln:20:30
+          |vpiParent:
+          \_Constant: , line:20:28, endln:20:30
+          |vpiFullName:work@unsized_single_bit_1
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@unsized_single_bit_1.out4), line:20:10, endln:20:14
@@ -523,6 +585,12 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: , line:1:31, endln:1:32
+        |vpiParent:
+        \_Constant: , line:1:31, endln:1:32
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiRightRange:
     \_Constant: , line:1:33, endln:1:34
@@ -531,7 +599,17 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: , line:1:33, endln:1:34
+        |vpiParent:
+        \_Constant: , line:1:33, endln:1:34
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
+|vpiTypespec:
+\_IntTypespec: 
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiTypespec:
 \_ModuleTypespec: (work@unsized_single_bit_1)
   |vpiParent:

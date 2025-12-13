@@ -255,10 +255,10 @@ HierPath                                               3
 IODecl                                                 6
 Identifier                                             7
 Initial                                                2
-IntTypespec                                            2
+IntTypespec                                            7
 Interface                                              1
 InterfaceTypespec                                      1
-LogicTypespec                                          2
+LogicTypespec                                          3
 Modport                                                2
 Module                                                 3
 ModuleTypespec                                         2
@@ -267,12 +267,13 @@ Port                                                   2
 Range                                                  2
 RefModule                                              2
 RefObj                                                 6
-RefTypespec                                            6
+RefTypespec                                           13
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                70
+Total:                                                84
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModExp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -331,6 +332,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:32
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@I.x), line:3:13, endln:3:14
+        |vpiParent:
+        \_Constant: , line:3:13, endln:3:14
+        |vpiFullName:work@I.x
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
   |vpiVariable:
   \_Variable: (work@I.R), line:4:5, endln:4:6
@@ -362,6 +370,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@I), line:2:8, endln:2:9
+          |vpiParent:
+          \_Constant: , line:2:8, endln:2:9
+          |vpiFullName:work@I
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:10, endln:2:11
@@ -370,7 +385,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@I), line:2:10, endln:2:11
+          |vpiParent:
+          \_Constant: , line:2:10, endln:2:11
+          |vpiFullName:work@I
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiTypespec:
   \_IntTypespec: , line:3:7, endln:3:10
     |vpiParent:
@@ -382,6 +408,8 @@ Design: (unnamed)
     \_Interface: work@I (work@I), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:1:1, endln:7:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:6
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@I.r), line:2:13, endln:2:14
   |vpiImportTypespec:
@@ -506,6 +534,12 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
     |vpiName:work@sub
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_Net: (work@sub.I), line:9:23, endln:9:24
     |vpiParent:
@@ -547,6 +581,13 @@ Design: (unnamed)
         |vpiDecompile:4'b1010
         |vpiSize:4
         |BIN:1010
+        |vpiTypespec:
+        \_RefTypespec: (work@sub), line:11:17, endln:11:24
+          |vpiParent:
+          \_Constant: , line:11:17, endln:11:24
+          |vpiFullName:work@sub
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_HierPath: (I.P), line:11:12, endln:11:14
@@ -594,6 +635,12 @@ Design: (unnamed)
     |vpiName:work@sub
     |vpiModule:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:9:1, endln:12:10
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfaceModExp/dut.sv, line:14:1, endln:20:10
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.A), line:16:15, endln:16:16
     |vpiParent:
@@ -633,6 +680,13 @@ Design: (unnamed)
           |vpiDecompile:"0x%0b"
           |vpiSize:40
           |STRING:0x%0b
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:18:23, endln:18:30
+            |vpiParent:
+            \_Constant: , line:18:23, endln:18:30
+            |vpiFullName:work@top
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_HierPath: (inst.r), line:18:32, endln:18:38

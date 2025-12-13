@@ -88,10 +88,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               7
 ContAssign                                             1
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            6
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
@@ -99,10 +101,10 @@ Net                                                    1
 Operation                                              5
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                            1
+RefTypespec                                            8
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                24
+Total:                                                38
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExprEvalPartial/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -124,6 +126,14 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
     |vpiName:work@top
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
+  |vpiTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
@@ -138,6 +148,13 @@ Design: (unnamed)
         |vpiDecompile:63
         |vpiSize:64
         |UINT:63
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:12, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:15, endln:3:16
@@ -146,7 +163,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:3:15, endln:3:16
+          |vpiParent:
+          \_Constant: , line:3:15, endln:3:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
@@ -206,6 +234,13 @@ Design: (unnamed)
               |vpiDecompile:'1
               |vpiSize:-1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@top), line:4:19, endln:4:21
+                |vpiParent:
+                \_Constant: , line:4:19, endln:4:21
+                |vpiFullName:work@top
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiOperand:
             \_Constant: , line:4:25, endln:4:26
@@ -214,6 +249,13 @@ Design: (unnamed)
               |vpiDecompile:8
               |vpiSize:64
               |UINT:8
+              |vpiTypespec:
+              \_RefTypespec: (work@top), line:4:25, endln:4:26
+                |vpiParent:
+                \_Constant: , line:4:25, endln:4:26
+                |vpiFullName:work@top
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:4:30, endln:4:31
@@ -222,6 +264,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@top), line:4:30, endln:4:31
+              |vpiParent:
+              \_Constant: , line:4:30, endln:4:31
+              |vpiFullName:work@top
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_RefObj: (work@top.A), line:4:34, endln:4:35
@@ -243,6 +292,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:4:39, endln:4:40
+            |vpiParent:
+            \_Constant: , line:4:39, endln:4:40
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:4:43, endln:4:44
@@ -251,6 +307,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (work@top), line:4:43, endln:4:44
+            |vpiParent:
+            \_Constant: , line:4:43, endln:4:44
+            |vpiFullName:work@top
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@top.s1c), line:4:12, endln:4:15

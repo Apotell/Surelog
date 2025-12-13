@@ -156,6 +156,7 @@ Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             7
+IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
@@ -164,7 +165,7 @@ Package                                                2
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           13
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         2
 TypedefTypespec                                        4
@@ -172,7 +173,7 @@ TypespecMember                                         4
 UnionTypespec                                          1
 UnsupportedTypespec                                    7
 ------------------------------------------------------------
-Total:                                                59
+Total:                                                63
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -281,6 +282,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (fooes), line:10:23, endln:10:24
+          |vpiParent:
+          \_Constant: , line:10:23, endln:10:24
+          |vpiFullName:fooes
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:25, endln:10:26
@@ -289,7 +297,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (fooes), line:10:25, endln:10:26
+          |vpiParent:
+          \_Constant: , line:10:25, endln:10:26
+          |vpiFullName:fooes
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: fooes (fooes), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
   |vpiTypespec:
   \_TypedefTypespec: (fooes::classes), line:12:5, endln:12:12
     |vpiParent:
@@ -310,6 +329,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:10:11, endln:12:12
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:16, endln:10:21
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (fooes::classes), line:12:5, endln:12:12
   |vpiDefName:fooes

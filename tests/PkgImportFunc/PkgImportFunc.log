@@ -116,18 +116,19 @@ Design                                                 1
 Function                                               1
 Identifier                                             5
 ImportTypespec                                         1
-IntTypespec                                            4
+IntTypespec                                            5
 Module                                                 1
 ModuleTypespec                                         1
 Package                                                2
 Port                                                   1
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                            6
 ReturnStmt                                             1
 SourceFile                                             1
+StringTypespec                                         1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                37
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PkgImportFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -181,10 +182,16 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (prim_util_pkg::get_5)
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (prim_util_pkg::get_5)
       |vpiImportTypespec:
       \_IntTypespec: , line:3:7, endln:3:10
       |vpiImportTypespec:
       \_Variable: (prim_util_pkg::get_5::result), line:3:11, endln:3:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:3:11, endln:3:21
         |vpiParent:
@@ -198,6 +205,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (prim_util_pkg::get_5), line:3:20, endln:3:21
+            |vpiParent:
+            \_Constant: , line:3:20, endln:3:21
+            |vpiFullName:prim_util_pkg::get_5
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Variable: (prim_util_pkg::get_5::result), line:3:11, endln:3:17
@@ -263,9 +277,22 @@ Design: (unnamed)
       |vpiDecompile:get_5
       |vpiSize:40
       |STRING:get_5
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_state_pkg::prim_util_pkg), line:9:26, endln:9:31
+        |vpiParent:
+        \_Constant: , line:9:26, endln:9:31
+        |vpiFullName:lc_ctrl_state_pkg::prim_util_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/PkgImportFunc/dut.sv, line:8:1, endln:10:11
   |vpiImportTypespec:
   \_ImportTypespec: (prim_util_pkg), line:9:11, endln:9:31
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:lc_ctrl_state_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PkgImportFunc/dut.sv, line:12:1, endln:14:10

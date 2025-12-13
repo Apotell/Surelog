@@ -332,7 +332,7 @@ IODecl                                                12
 Identifier                                            36
 IfStmt                                                 2
 Initial                                                1
-IntTypespec                                            9
+IntTypespec                                           23
 IntegerTypespec                                        2
 LogicTypespec                                          2
 Module                                                 1
@@ -345,15 +345,16 @@ Parameter                                              3
 Port                                                   1
 Range                                                  1
 RefObj                                                11
-RefTypespec                                           16
+RefTypespec                                           31
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            5
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 WhileStmt                                              1
 ------------------------------------------------------------
-Total:                                               185
+Total:                                               215
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncCont/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -449,8 +450,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -465,6 +472,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -891,8 +905,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -907,6 +927,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -930,8 +957,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -947,6 +980,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -970,8 +1010,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -987,6 +1033,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -1010,8 +1063,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1034,6 +1093,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1204,6 +1270,13 @@ Design: (unnamed)
       |vpiDecompile:33
       |vpiSize:64
       |UINT:33
+      |vpiTypespec:
+      \_RefTypespec: (work@t), line:14:23, endln:14:25
+        |vpiParent:
+        \_Constant: , line:14:23, endln:14:25
+        |vpiFullName:work@t
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@t.WIDTH), line:14:15, endln:14:25
@@ -1218,6 +1291,13 @@ Design: (unnamed)
       |vpiDecompile:11
       |vpiSize:64
       |UINT:11
+      |vpiTypespec:
+      \_RefTypespec: (work@t), line:15:27, endln:15:29
+        |vpiParent:
+        \_Constant: , line:15:27, endln:15:29
+        |vpiFullName:work@t
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@t.MAX_WIDTH), line:15:15, endln:15:29
@@ -1244,6 +1324,12 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (work@t.num_out), line:20:4, endln:27:15
           |vpiFullName:work@t.num_out
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@t.num_out)
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_Assignment: , line:22:7, endln:22:18
             |vpiParent:
@@ -1257,6 +1343,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@t.num_out), line:22:17, endln:22:18
+                |vpiParent:
+                \_Constant: , line:22:17, endln:22:18
+                |vpiFullName:work@t.num_out
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@t.num_out.num_out), line:22:7, endln:22:14
@@ -1313,6 +1406,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@t.num_out), line:23:33, endln:23:34
+                      |vpiParent:
+                      \_Constant: , line:23:33, endln:23:34
+                      |vpiFullName:work@t.num_out
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiOperand:
                 \_RefObj: (work@t.num_out.num_out), line:23:38, endln:23:45
@@ -1335,6 +1435,12 @@ Design: (unnamed)
               |vpiParent:
               \_WhileStmt: , line:23:7, endln:26:10
               |vpiFullName:work@t.num_out
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_Begin: (work@t.num_out), line:23:59, endln:26:10
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiStmt:
               \_Assignment: , line:24:9, endln:24:30
                 |vpiParent:
@@ -1361,6 +1467,13 @@ Design: (unnamed)
                     |vpiDecompile:2
                     |vpiSize:64
                     |UINT:2
+                    |vpiTypespec:
+                    \_RefTypespec: (work@t.num_out), line:24:29, endln:24:30
+                      |vpiParent:
+                      \_Constant: , line:24:29, endln:24:30
+                      |vpiFullName:work@t.num_out
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiLhs:
                 \_RefObj: (work@t.num_out.num_out), line:24:9, endln:24:16
@@ -1422,6 +1535,10 @@ Design: (unnamed)
   |vpiInternalScope:
   \_Function: (work@t.num_out), line:20:4, endln:27:15
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncCont/dut.sv, line:8:1, endln:35:10
+  |vpiTypespec:
   \_LogicTypespec: , line:18:4, endln:18:8
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncCont/dut.sv, line:8:1, endln:35:10
@@ -1449,6 +1566,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@t), line:18:18, endln:18:19
+            |vpiParent:
+            \_Constant: , line:18:18, endln:18:19
+            |vpiFullName:work@t
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:18:20, endln:18:21
@@ -1457,9 +1581,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@t), line:18:20, endln:18:21
+          |vpiParent:
+          \_Constant: , line:18:20, endln:18:21
+          |vpiFullName:work@t
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_Function: (work@t.num_out), line:20:4, endln:27:15
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@t.clk), line:10:4, endln:10:7
     |vpiParent:
@@ -1504,6 +1637,18 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:29:4, endln:34:7
       |vpiFullName:work@t
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@t), line:29:12, endln:34:7
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@t), line:29:12, endln:34:7
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_IfStmt: , line:30:7, endln:30:31
         |vpiParent:
@@ -1528,6 +1673,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@t), line:30:22, endln:30:23
+              |vpiParent:
+              \_Constant: , line:30:22, endln:30:23
+              |vpiFullName:work@t
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_SysFuncCall: ($stop), line:30:25, endln:30:30
@@ -1571,6 +1723,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@t), line:31:23, endln:31:24
+              |vpiParent:
+              \_Constant: , line:31:23, endln:31:24
+              |vpiFullName:work@t
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiStmt:
         \_SysFuncCall: ($stop), line:31:26, endln:31:31
@@ -1592,6 +1751,13 @@ Design: (unnamed)
           |vpiDecompile:"*-* All Finished *-*\n"
           |vpiSize:176
           |STRING:*-* All Finished *-*\n
+          |vpiTypespec:
+          \_RefTypespec: (work@t), line:32:14, endln:32:38
+            |vpiParent:
+            \_Constant: , line:32:14, endln:32:38
+            |vpiFullName:work@t
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiName:
         \_Identifier: ($write), line:32:8, endln:32:13

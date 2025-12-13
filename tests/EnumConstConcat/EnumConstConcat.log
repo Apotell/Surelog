@@ -171,8 +171,8 @@ EnumConst                                              3
 EnumTypespec                                           2
 GenIf                                                  1
 Identifier                                             6
-IntTypespec                                            1
-LogicTypespec                                          2
+IntTypespec                                           14
+LogicTypespec                                          4
 Module                                                 4
 ModuleTypespec                                         2
 Operation                                              4
@@ -182,11 +182,11 @@ Parameter                                              1
 Range                                                  2
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                            6
+RefTypespec                                           20
 SourceFile                                             1
 TypedefTypespec                                        2
 ------------------------------------------------------------
-Total:                                                63
+Total:                                                92
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -232,6 +232,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (prim_mubi_pkg), line:3:28, endln:3:29
+        |vpiParent:
+        \_Constant: , line:3:28, endln:3:29
+        |vpiFullName:prim_mubi_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
@@ -240,6 +247,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: prim_mubi_pkg (prim_mubi_pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: prim_mubi_pkg (prim_mubi_pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
   |vpiTypespec:
   \_EnumTypespec: , line:4:9, endln:7:10
     |vpiParent:
@@ -295,6 +306,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (prim_mubi_pkg), line:4:32, endln:4:33
+            |vpiParent:
+            \_Constant: , line:4:32, endln:4:33
+            |vpiFullName:prim_mubi_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:34, endln:4:35
@@ -303,6 +321,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (prim_mubi_pkg), line:4:34, endln:4:35
+          |vpiParent:
+          \_Constant: , line:4:34, endln:4:35
+          |vpiFullName:prim_mubi_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (prim_mubi_pkg::mubi4_t), line:7:3, endln:7:10
@@ -322,6 +347,8 @@ Design: (unnamed)
       \_EnumTypespec: , line:4:9, endln:7:10
   |vpiImportTypespec:
   \_IntTypespec: , line:3:11, endln:3:14
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_EnumTypespec: , line:4:9, endln:7:10
   |vpiImportTypespec:
@@ -372,6 +399,13 @@ Design: (unnamed)
         |vpiDecompile:9
         |vpiSize:64
         |UINT:9
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:13:21, endln:13:22
+          |vpiParent:
+          \_Constant: , line:13:21, endln:13:22
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:23, endln:13:24
@@ -380,7 +414,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:13:23, endln:13:24
+          |vpiParent:
+          \_Constant: , line:13:23, endln:13:24
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
   |vpiTypespec:
   \_TypedefTypespec: (pkg::fsm_state_e), line:15:3, endln:15:14
     |vpiParent:
@@ -401,6 +450,10 @@ Design: (unnamed)
   \_EnumTypespec: , line:13:9, endln:15:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:14, endln:13:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (pkg::fsm_state_e), line:15:3, endln:15:14
   |vpiDefName:pkg
@@ -443,6 +496,12 @@ Design: (unnamed)
       |vpiDefName:work@GOOD
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:19:1, endln:20:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIf: , line:24:4, endln:26:7
@@ -468,6 +527,13 @@ Design: (unnamed)
         |vpiDecompile:197
         |vpiSize:64
         |UINT:197
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:24:27, endln:24:30
+          |vpiParent:
+          \_Constant: , line:24:27, endln:24:30
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:24:32, endln:26:7

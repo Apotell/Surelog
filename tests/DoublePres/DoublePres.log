@@ -1056,6 +1056,7 @@ FuncCall                                               1
 Function                                               1
 GenIf                                                 14
 Identifier                                             4
+IntTypespec                                           29
 IntegerTypespec                                        2
 LogicTypespec                                          1
 Module                                                 2
@@ -1065,30 +1066,30 @@ Operation                                             45
 ParamAssign                                           20
 Parameter                                             20
 Port                                                   6
-RealTypespec                                           1
+RealTypespec                                          22
 RefModule                                             15
 RefObj                                                30
-RefTypespec                                            3
+RefTypespec                                           53
 ReturnStmt                                             1
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                               255
+Total:                                               355
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DoublePres/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:56:7: Null Actual: id:128, type:RefModule, name:good1.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:60:7: Null Actual: id:136, type:RefModule, name:good2.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:64:7: Null Actual: id:144, type:RefModule, name:good3.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:68:7: Null Actual: id:151, type:RefModule, name:good4.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:72:7: Null Actual: id:159, type:RefModule, name:good5.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:76:7: Null Actual: id:166, type:RefModule, name:good6.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:80:7: Null Actual: id:173, type:RefModule, name:good7.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:84:7: Null Actual: id:180, type:RefModule, name:good8.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:88:6: Null Actual: id:191, type:RefModule, name:good9.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:92:6: Null Actual: id:202, type:RefModule, name:good10.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:96:6: Null Actual: id:209, type:RefModule, name:good11.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:100:6: Null Actual: id:220, type:RefModule, name:good12.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:104:6: Null Actual: id:231, type:RefModule, name:good13.
-[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:108:6: Null Actual: id:242, type:RefModule, name:good15.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:56:7: Null Actual: id:192, type:RefModule, name:good1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:60:7: Null Actual: id:202, type:RefModule, name:good2.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:64:7: Null Actual: id:212, type:RefModule, name:good3.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:68:7: Null Actual: id:221, type:RefModule, name:good4.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:72:7: Null Actual: id:231, type:RefModule, name:good5.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:76:7: Null Actual: id:240, type:RefModule, name:good6.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:80:7: Null Actual: id:249, type:RefModule, name:good7.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:84:7: Null Actual: id:258, type:RefModule, name:good8.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:88:6: Null Actual: id:273, type:RefModule, name:good9.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:92:6: Null Actual: id:288, type:RefModule, name:good10.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:96:6: Null Actual: id:297, type:RefModule, name:good11.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:100:6: Null Actual: id:312, type:RefModule, name:good12.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:104:6: Null Actual: id:327, type:RefModule, name:good13.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DoublePres/dut.sv:108:6: Null Actual: id:342, type:RefModule, name:good15.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1248,6 +1249,13 @@ Design: (unnamed)
       |vpiDecompile:1142.500
       |vpiSize:64
       |REAL:1142.500000
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:9:35, endln:9:43
+        |vpiParent:
+        \_Constant: , line:9:35, endln:9:43
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_RealTypespec: 
       |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.CLKFBOUT_PHASE), line:9:18, endln:9:43
@@ -1275,6 +1283,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:12:36, endln:12:37
+          |vpiParent:
+          \_Constant: , line:12:36, endln:12:37
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.err), line:12:13, endln:12:37
@@ -1289,6 +1304,13 @@ Design: (unnamed)
       |vpiDecompile:9
       |vpiSize:64
       |UINT:9
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:14:15, endln:14:16
+        |vpiParent:
+        \_Constant: , line:14:15, endln:14:16
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.f), line:14:11, endln:14:16
@@ -1303,6 +1325,13 @@ Design: (unnamed)
       |vpiDecompile:5.7
       |vpiSize:64
       |REAL:5.700000
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:15:15, endln:15:18
+        |vpiParent:
+        \_Constant: , line:15:15, endln:15:18
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_RealTypespec: 
       |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.r), line:15:11, endln:15:18
@@ -1343,6 +1372,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:16:35, endln:16:36
+          |vpiParent:
+          \_Constant: , line:16:35, endln:16:36
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.average_delay), line:16:11, endln:16:36
@@ -1362,6 +1398,13 @@ Design: (unnamed)
         |vpiDecompile:0.1
         |vpiSize:64
         |REAL:0.100000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:18:16, endln:18:19
+          |vpiParent:
+          \_Constant: , line:18:16, endln:18:19
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
       |vpiOperand:
       \_Constant: , line:18:22, endln:18:25
@@ -1370,6 +1413,13 @@ Design: (unnamed)
         |vpiDecompile:0.5
         |vpiSize:64
         |REAL:0.500000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:18:22, endln:18:25
+          |vpiParent:
+          \_Constant: , line:18:22, endln:18:25
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.A1), line:18:11, endln:18:25
@@ -1389,6 +1439,13 @@ Design: (unnamed)
         |vpiDecompile:0.1
         |vpiSize:64
         |REAL:0.100000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:20:16, endln:20:19
+          |vpiParent:
+          \_Constant: , line:20:16, endln:20:19
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
       |vpiOperand:
       \_Constant: , line:20:22, endln:20:25
@@ -1397,6 +1454,13 @@ Design: (unnamed)
         |vpiDecompile:0.5
         |vpiSize:64
         |REAL:0.500000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:20:22, endln:20:25
+          |vpiParent:
+          \_Constant: , line:20:22, endln:20:25
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.A2), line:20:11, endln:20:25
@@ -1416,6 +1480,13 @@ Design: (unnamed)
         |vpiDecompile:0.6
         |vpiSize:64
         |REAL:0.600000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:22:18, endln:22:21
+          |vpiParent:
+          \_Constant: , line:22:18, endln:22:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.A3), line:22:11, endln:22:21
@@ -1435,6 +1506,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:24:16, endln:24:17
+          |vpiParent:
+          \_Constant: , line:24:16, endln:24:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:24:20, endln:24:21
@@ -1443,6 +1521,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:24:20, endln:24:21
+          |vpiParent:
+          \_Constant: , line:24:20, endln:24:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A4), line:24:11, endln:24:21
@@ -1462,6 +1547,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:26:16, endln:26:17
+          |vpiParent:
+          \_Constant: , line:26:16, endln:26:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:26:20, endln:26:21
@@ -1470,6 +1562,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:26:20, endln:26:21
+          |vpiParent:
+          \_Constant: , line:26:20, endln:26:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A5), line:26:11, endln:26:21
@@ -1489,6 +1588,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:28:16, endln:28:17
+          |vpiParent:
+          \_Constant: , line:28:16, endln:28:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:28:20, endln:28:21
@@ -1497,6 +1603,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:28:20, endln:28:21
+          |vpiParent:
+          \_Constant: , line:28:20, endln:28:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A6), line:28:11, endln:28:21
@@ -1516,6 +1629,13 @@ Design: (unnamed)
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:30:16, endln:30:17
+          |vpiParent:
+          \_Constant: , line:30:16, endln:30:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:30:20, endln:30:21
@@ -1524,6 +1644,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:30:20, endln:30:21
+          |vpiParent:
+          \_Constant: , line:30:20, endln:30:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A7), line:30:11, endln:30:21
@@ -1543,6 +1670,13 @@ Design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:32:16, endln:32:18
+          |vpiParent:
+          \_Constant: , line:32:16, endln:32:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:32:21, endln:32:22
@@ -1551,6 +1685,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:32:21, endln:32:22
+          |vpiParent:
+          \_Constant: , line:32:21, endln:32:22
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A8), line:32:11, endln:32:22
@@ -1570,6 +1711,13 @@ Design: (unnamed)
         |vpiDecompile:10.3
         |vpiSize:64
         |REAL:10.300000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:34:16, endln:34:20
+          |vpiParent:
+          \_Constant: , line:34:16, endln:34:20
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
       |vpiOperand:
       \_Constant: , line:34:23, endln:34:26
@@ -1578,6 +1726,13 @@ Design: (unnamed)
         |vpiDecompile:2.1
         |vpiSize:64
         |REAL:2.100000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:34:23, endln:34:26
+          |vpiParent:
+          \_Constant: , line:34:23, endln:34:26
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
     |vpiLhs:
     \_Parameter: (work@dut.A9), line:34:11, endln:34:26
@@ -1597,6 +1752,13 @@ Design: (unnamed)
         |vpiDecompile:10.3
         |vpiSize:64
         |REAL:10.300000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:36:17, endln:36:21
+          |vpiParent:
+          \_Constant: , line:36:17, endln:36:21
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
       |vpiOperand:
       \_Constant: , line:36:24, endln:36:25
@@ -1605,6 +1767,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:36:24, endln:36:25
+          |vpiParent:
+          \_Constant: , line:36:24, endln:36:25
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A10), line:36:11, endln:36:25
@@ -1624,6 +1793,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:38:17, endln:38:18
+          |vpiParent:
+          \_Constant: , line:38:17, endln:38:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:38:22, endln:38:23
@@ -1632,6 +1808,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:38:22, endln:38:23
+          |vpiParent:
+          \_Constant: , line:38:22, endln:38:23
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A11), line:38:11, endln:38:23
@@ -1651,6 +1834,13 @@ Design: (unnamed)
         |vpiDecompile:2.1
         |vpiSize:64
         |REAL:2.100000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:40:17, endln:40:20
+          |vpiParent:
+          \_Constant: , line:40:17, endln:40:20
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
       |vpiOperand:
       \_Constant: , line:40:24, endln:40:25
@@ -1659,6 +1849,13 @@ Design: (unnamed)
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:40:24, endln:40:25
+          |vpiParent:
+          \_Constant: , line:40:24, endln:40:25
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A12), line:40:11, endln:40:25
@@ -1713,6 +1910,13 @@ Design: (unnamed)
         |vpiDecompile:20
         |vpiSize:64
         |UINT:20
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:44:17, endln:44:19
+          |vpiParent:
+          \_Constant: , line:44:17, endln:44:19
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:44:22, endln:44:23
@@ -1721,6 +1925,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:44:22, endln:44:23
+          |vpiParent:
+          \_Constant: , line:44:22, endln:44:23
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.A14), line:44:11, endln:44:23
@@ -1747,6 +1958,12 @@ Design: (unnamed)
           |vpiParent:
           \_Function: (work@dut.incr_d), line:46:1, endln:51:12
           |vpiFullName:work@dut.incr_d
+          |vpiTypespec:
+          \_RealTypespec: 
+            |vpiParent:
+            \_Begin: (work@dut.incr_d)
+          |vpiImportTypespec:
+          \_RealTypespec: 
           |vpiStmt:
           \_Assignment: , line:48:4, endln:48:17
             |vpiParent:
@@ -1760,6 +1977,13 @@ Design: (unnamed)
               |vpiDecompile:10.1
               |vpiSize:64
               |REAL:10.100000
+              |vpiTypespec:
+              \_RefTypespec: (work@dut.incr_d), line:48:13, endln:48:17
+                |vpiParent:
+                \_Constant: , line:48:13, endln:48:17
+                |vpiFullName:work@dut.incr_d
+                |vpiActual:
+                \_RealTypespec: 
               |vpiConstType:2
             |vpiLhs:
             \_RefObj: (work@dut.incr_d.incr_d), line:48:4, endln:48:10
@@ -2095,10 +2319,22 @@ Design: (unnamed)
   \_RealTypespec: , line:9:13, endln:9:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DoublePres/dut.sv, line:8:1, endln:111:10
+  |vpiTypespec:
+  \_RealTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DoublePres/dut.sv, line:8:1, endln:111:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DoublePres/dut.sv, line:8:1, endln:111:10
   |vpiImportTypespec:
   \_Function: (work@dut.incr_d), line:46:1, endln:51:12
   |vpiImportTypespec:
   \_RealTypespec: , line:9:13, endln:9:17
+  |vpiImportTypespec:
+  \_RealTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.a), line:10:10, endln:10:11
     |vpiParent:
@@ -2154,6 +2390,13 @@ Design: (unnamed)
         |vpiDecompile:0.05
         |vpiSize:64
         |REAL:0.050000
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:55:14, endln:55:18
+          |vpiParent:
+          \_Constant: , line:55:14, endln:55:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_RealTypespec: 
         |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:55:20, endln:57:7
@@ -2186,6 +2429,13 @@ Design: (unnamed)
           |vpiDecompile:0.4
           |vpiSize:64
           |REAL:0.400000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:59:15, endln:59:18
+            |vpiParent:
+            \_Constant: , line:59:15, endln:59:18
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:59:20, endln:61:7
@@ -2218,6 +2468,13 @@ Design: (unnamed)
           |vpiDecompile:0.6
           |vpiSize:64
           |REAL:0.600000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:63:15, endln:63:18
+            |vpiParent:
+            \_Constant: , line:63:15, endln:63:18
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:63:20, endln:65:7
@@ -2245,6 +2502,13 @@ Design: (unnamed)
         |vpiDecompile:6
         |vpiSize:64
         |UINT:6
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:67:14, endln:67:15
+          |vpiParent:
+          \_Constant: , line:67:14, endln:67:15
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:67:17, endln:69:7
@@ -2277,6 +2541,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:71:15, endln:71:16
+            |vpiParent:
+            \_Constant: , line:71:15, endln:71:16
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:71:18, endln:73:7
@@ -2304,6 +2575,13 @@ Design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:75:14, endln:75:16
+          |vpiParent:
+          \_Constant: , line:75:14, endln:75:16
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:75:18, endln:77:7
@@ -2331,6 +2609,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:79:14, endln:79:15
+          |vpiParent:
+          \_Constant: , line:79:14, endln:79:15
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:79:17, endln:81:7
@@ -2358,6 +2643,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:83:12, endln:83:13
+          |vpiParent:
+          \_Constant: , line:83:12, endln:83:13
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:83:15, endln:85:5
@@ -2390,6 +2682,13 @@ Design: (unnamed)
           |vpiDecompile:1.8
           |vpiSize:64
           |REAL:1.800000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:87:13, endln:87:16
+            |vpiParent:
+            \_Constant: , line:87:13, endln:87:16
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
       |vpiOperand:
       \_Operation: , line:87:22, endln:87:28
@@ -2411,6 +2710,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:87:27, endln:87:28
+            |vpiParent:
+            \_Constant: , line:87:27, endln:87:28
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:87:31, endln:89:6
@@ -2443,6 +2749,13 @@ Design: (unnamed)
           |vpiDecompile:0.3
           |vpiSize:64
           |REAL:0.300000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:91:15, endln:91:18
+            |vpiParent:
+            \_Constant: , line:91:15, endln:91:18
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
       |vpiOperand:
       \_Operation: , line:91:24, endln:91:34
@@ -2464,6 +2777,13 @@ Design: (unnamed)
           |vpiDecompile:0.3
           |vpiSize:64
           |REAL:0.300000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:91:31, endln:91:34
+            |vpiParent:
+            \_Constant: , line:91:31, endln:91:34
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:91:37, endln:93:6
@@ -2491,6 +2811,13 @@ Design: (unnamed)
         |vpiDecompile:256
         |vpiSize:64
         |UINT:256
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:95:14, endln:95:17
+          |vpiParent:
+          \_Constant: , line:95:14, endln:95:17
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:95:19, endln:97:6
@@ -2523,6 +2850,13 @@ Design: (unnamed)
           |vpiDecompile:378
           |vpiSize:64
           |UINT:378
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:99:14, endln:99:17
+            |vpiParent:
+            \_Constant: , line:99:14, endln:99:17
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:99:23, endln:99:35
@@ -2544,6 +2878,13 @@ Design: (unnamed)
           |vpiDecompile:378.23
           |vpiSize:64
           |REAL:378.230000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:99:29, endln:99:35
+            |vpiParent:
+            \_Constant: , line:99:29, endln:99:35
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:99:38, endln:101:6
@@ -2576,6 +2917,13 @@ Design: (unnamed)
           |vpiDecompile:378
           |vpiSize:64
           |UINT:378
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:103:14, endln:103:17
+            |vpiParent:
+            \_Constant: , line:103:14, endln:103:17
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:103:23, endln:103:35
@@ -2597,6 +2945,13 @@ Design: (unnamed)
           |vpiDecompile:378.23
           |vpiSize:64
           |REAL:378.230000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:103:29, endln:103:35
+            |vpiParent:
+            \_Constant: , line:103:29, endln:103:35
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:103:38, endln:105:6
@@ -2629,6 +2984,13 @@ Design: (unnamed)
           |vpiDecompile:11
           |vpiSize:64
           |UINT:11
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:107:13, endln:107:15
+            |vpiParent:
+            \_Constant: , line:107:13, endln:107:15
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:21, endln:107:32
@@ -2650,6 +3012,13 @@ Design: (unnamed)
           |vpiDecompile:11.1
           |vpiSize:64
           |REAL:11.100000
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:107:28, endln:107:32
+            |vpiParent:
+            \_Constant: , line:107:28, endln:107:32
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_RealTypespec: 
           |vpiConstType:2
     |vpiStmt:
     \_Begin: (work@dut), line:107:35, endln:109:6

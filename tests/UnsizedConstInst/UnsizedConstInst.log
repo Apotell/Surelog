@@ -146,10 +146,12 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
+BitTypespec                                            1
 Constant                                               5
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
+IntTypespec                                            4
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -161,10 +163,10 @@ PartSelect                                             1
 Range                                                  1
 RefModule                                              2
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            7
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                28
+Total:                                                38
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedConstInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -203,9 +205,24 @@ Design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
+      |vpiTypespec:
+      \_RefTypespec: (work@bottom), line:2:17, endln:2:18
+        |vpiParent:
+        \_Constant: , line:2:17, endln:2:18
+        |vpiFullName:work@bottom
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@bottom.P), line:2:13, endln:2:18
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
   |vpiTypespec:
   \_LogicTypespec: , line:3:3, endln:3:8
     |vpiParent:
@@ -226,6 +243,13 @@ Design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
+        |vpiTypespec:
+        \_RefTypespec: (work@bottom), line:3:26, endln:3:28
+          |vpiParent:
+          \_Constant: , line:3:26, endln:3:28
+          |vpiFullName:work@bottom
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:29, endln:3:30
@@ -234,6 +258,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@bottom), line:3:29, endln:3:30
+          |vpiParent:
+          \_Constant: , line:3:29, endln:3:30
+          |vpiFullName:work@bottom
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@bottom), line:3:3, endln:3:8
@@ -242,6 +273,10 @@ Design: (unnamed)
       |vpiFullName:work@bottom
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:3, endln:3:8
   |vpiImportTypespec:
@@ -306,6 +341,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@bottom.product_exponent), line:5:33, endln:5:34
+            |vpiParent:
+            \_Constant: , line:5:33, endln:5:34
+            |vpiFullName:work@bottom.product_exponent
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Constant: , line:5:39, endln:5:41
@@ -314,6 +356,13 @@ Design: (unnamed)
         |vpiDecompile:'1
         |vpiSize:-1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@bottom), line:5:39, endln:5:41
+          |vpiParent:
+          \_Constant: , line:5:39, endln:5:41
+          |vpiFullName:work@bottom
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@bottom.p), line:5:10, endln:5:11

@@ -13,17 +13,19 @@ DelayControl                                           2
 Design                                                 1
 Identifier                                             4
 Initial                                                2
+IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 RefObj                                                 4
-RefTypespec                                            1
+RefTypespec                                            3
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            3
 ------------------------------------------------------------
-Total:                                                30
+Total:                                                34
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneClock/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -76,6 +78,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:5:3, endln:8:6
       |vpiFullName:work@tb
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb), line:5:11, endln:8:6
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($monitor), line:6:5, endln:6:43
         |vpiParent:
@@ -87,6 +95,13 @@ Design: (unnamed)
           |vpiDecompile:"@%0dns clk = %0d"
           |vpiSize:128
           |STRING:@%0dns clk = %0d
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:6:14, endln:6:32
+            |vpiParent:
+            \_Constant: , line:6:14, endln:6:32
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_SysFuncCall: ($time), line:6:33, endln:6:38
@@ -133,6 +148,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:10:3, endln:13:6
       |vpiFullName:work@tb
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb), line:11:3, endln:13:6
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:12:5, endln:12:12
         |vpiParent:
@@ -146,6 +167,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@tb), line:12:11, endln:12:12
+            |vpiParent:
+            \_Constant: , line:12:11, endln:12:12
+            |vpiFullName:work@tb
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb.clk), line:12:5, endln:12:8

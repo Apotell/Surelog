@@ -224,8 +224,8 @@ Design                                                 1
 GenFor                                                 1
 GenIf                                                  2
 Identifier                                             4
-IntTypespec                                            1
-LogicTypespec                                          2
+IntTypespec                                            8
+LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         3
 Operation                                              5
@@ -234,14 +234,14 @@ Parameter                                              3
 Range                                                  2
 RefModule                                              2
 RefObj                                                 7
-RefTypespec                                            3
+RefTypespec                                           12
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                59
+Total:                                                77
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantRange/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ConstantRange/dut.sv:18:4: Null Actual: id:59, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConstantRange/dut.sv:18:4: Null Actual: id:77, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -323,6 +323,13 @@ Design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:7:26, endln:7:27
+        |vpiParent:
+        \_Constant: , line:7:26, endln:7:27
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.NMioPads), line:7:15, endln:7:27
@@ -337,6 +344,13 @@ Design: (unnamed)
       |vpiDecompile:8'b11110000
       |vpiSize:8
       |BIN:11110000
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:8:49, endln:8:60
+        |vpiParent:
+        \_Constant: , line:8:49, endln:8:60
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut.ConnectDioIn), line:8:34, endln:8:60
@@ -351,6 +365,13 @@ Design: (unnamed)
       |vpiDecompile:8'b11110000
       |vpiSize:8
       |BIN:11110000
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:9:50, endln:9:61
+        |vpiParent:
+        \_Constant: , line:9:50, endln:9:61
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut.ConnectDioOut), line:9:34, endln:9:61
@@ -443,8 +464,14 @@ Design: (unnamed)
               \_Variable: (work@dut.k), line:11:13, endln:11:14
         |vpiStmt:
         \_Begin: (work@dut.gen_mio_pads.gen_mio_inout), line:12:47, endln:14:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@dut), line:11:1, endln:15:4
     |vpiImportTypespec:
     \_Variable: (work@dut.k), line:11:13, endln:11:14
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:11:6, endln:11:18
       |vpiParent:
@@ -456,6 +483,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:11:17, endln:11:18
+          |vpiParent:
+          \_Constant: , line:11:17, endln:11:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@dut.k), line:11:13, endln:11:14
@@ -519,6 +553,10 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
+  |vpiTypespec:
   \_LogicTypespec: , line:8:11, endln:8:16
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
@@ -546,6 +584,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@dut), line:8:29, endln:8:30
+            |vpiParent:
+            \_Constant: , line:8:29, endln:8:30
+            |vpiFullName:work@dut
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:8:31, endln:8:32
@@ -554,11 +599,26 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:8:31, endln:8:32
+          |vpiParent:
+          \_Constant: , line:8:31, endln:8:32
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantRange/dut.sv, line:6:1, endln:21:10
   |vpiImportTypespec:
   \_IntTypespec: , line:7:11, endln:7:14
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:8:11, endln:8:16
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiDefName:work@dut
   |vpiGenStmt:
   \_GenIf: , line:17:1, endln:19:4
@@ -579,6 +639,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.ConnectDioIn), line:17:18, endln:17:19
+          |vpiParent:
+          \_Constant: , line:17:18, endln:17:19
+          |vpiFullName:work@dut.ConnectDioIn
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@dut), line:17:22, endln:19:4

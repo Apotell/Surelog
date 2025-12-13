@@ -298,6 +298,7 @@ AST_DEBUG_END
 Assignment                                             5
 Begin                                                  5
 BitSelect                                              2
+BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          8
 Constant                                              22
@@ -311,7 +312,7 @@ GenIf                                                  1
 GenRegion                                              1
 IODecl                                                11
 Identifier                                            33
-IntTypespec                                            9
+IntTypespec                                           30
 LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         4
@@ -324,18 +325,18 @@ Port                                                   2
 Range                                                  4
 RefModule                                              2
 RefObj                                                14
-RefTypespec                                           17
+RefTypespec                                           39
 SourceFile                                             1
 Task                                                   9
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 Variable                                               5
 ------------------------------------------------------------
-Total:                                               207
+Total:                                               251
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateModule/slpp_unit/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenerateModule/top.v:13:17: Null Actual: id:50, type:RefModule, name:N4.
-[ERR:IG0809] ${SURELOG_DIR}/tests/GenerateModule/top.v:9:9: Null Actual: id:30, type:RefModule, name:N1.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenerateModule/top.v:13:17: Null Actual: id:60, type:RefModule, name:N4.
+[ERR:IG0809] ${SURELOG_DIR}/tests/GenerateModule/top.v:9:9: Null Actual: id:36, type:RefModule, name:N1.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -429,8 +430,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
       |vpiImportTypespec:
       \_IntTypespec: , line:3:19, endln:3:22
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (bound), line:3:23, endln:3:28
@@ -445,6 +452,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::mailbox::new::bound), line:3:31, endln:3:32
+            |vpiParent:
+            \_Constant: , line:3:31, endln:3:32
+            |vpiFullName:builtin::mailbox::new::bound
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
@@ -871,8 +885,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
       |vpiImportTypespec:
       \_IntTypespec: , line:57:18, endln:57:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiIODecl:
       \_IODecl: (keyCount), line:57:22, endln:57:30
@@ -887,6 +907,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:33, endln:57:34
+            |vpiParent:
+            \_Constant: , line:57:33, endln:57:34
+            |vpiFullName:builtin::semaphore::new::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
@@ -910,8 +937,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiImportTypespec:
       \_IntTypespec: , line:60:14, endln:60:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -927,6 +960,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:29, endln:60:30
+            |vpiParent:
+            \_Constant: , line:60:29, endln:60:30
+            |vpiFullName:builtin::semaphore::put::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
@@ -950,8 +990,14 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
       |vpiImportTypespec:
       \_IntTypespec: , line:63:14, endln:63:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiIODecl:
@@ -967,6 +1013,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:29, endln:63:30
+            |vpiParent:
+            \_Constant: , line:63:29, endln:63:30
+            |vpiFullName:builtin::semaphore::get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
@@ -990,8 +1043,14 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
         |vpiSigned:1
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
@@ -1014,6 +1073,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:41, endln:66:42
+            |vpiParent:
+            \_Constant: , line:66:41, endln:66:42
+            |vpiFullName:builtin::semaphore::try_get::keyCount
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiTypespec:
         \_RefTypespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
@@ -1181,6 +1247,13 @@ Design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
+      |vpiTypespec:
+      \_RefTypespec: (work@small_test), line:3:33, endln:3:34
+        |vpiParent:
+        \_Constant: , line:3:33, endln:3:34
+        |vpiFullName:work@small_test
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@small_test.SIZE), line:3:26, endln:3:34
@@ -1259,8 +1332,14 @@ Design: (unnamed)
                   \_Begin: (work@small_test.B1.B4.B5), line:12:38, endln:14:16
                   |vpiName:N4
                   |vpiDefName:work@M4
+              |vpiTypespec:
+              \_IntTypespec: 
+                |vpiParent:
+                \_GenFor: (work@small_test.B1.B4), line:12:13, endln:14:16
               |vpiImportTypespec:
               \_Variable: (work@small_test.B1.B4.m), line:12:18, endln:12:19
+              |vpiImportTypespec:
+              \_IntTypespec: 
               |vpiForInitStmt:
               \_Assignment: , line:12:18, endln:12:21
                 |vpiParent:
@@ -1321,6 +1400,13 @@ Design: (unnamed)
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
+                    |vpiTypespec:
+                    \_RefTypespec: (work@small_test.B1.B4), line:12:35, endln:12:36
+                      |vpiParent:
+                      \_Constant: , line:12:35, endln:12:36
+                      |vpiFullName:work@small_test.B1.B4
+                      |vpiActual:
+                      \_IntTypespec: 
                     |vpiConstType:9
                 |vpiLhs:
                 \_RefObj: (work@small_test.B1.B4.m), line:12:31, endln:12:32
@@ -1339,8 +1425,14 @@ Design: (unnamed)
             |vpiParent:
             \_Begin: (work@small_test.B1), line:7:30, endln:16:8
             |vpiName:M1
+          |vpiTypespec:
+          \_IntTypespec: 
+            |vpiParent:
+            \_Begin: (work@small_test.B1), line:7:30, endln:16:8
           |vpiImportTypespec:
           \_ModuleTypespec: (M1)
+          |vpiImportTypespec:
+          \_IntTypespec: 
           |vpiStmt:
           \_RefModule: work@M1 (N1), line:9:9, endln:9:11
             |vpiParent:
@@ -1371,11 +1463,24 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@small_test.B1), line:11:16, endln:11:17
+                  |vpiParent:
+                  \_Constant: , line:11:16, endln:11:17
+                  |vpiFullName:work@small_test.B1
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiStmt:
             \_Begin: (work@small_test.B1.B4), line:11:19, endln:15:12
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@small_test), line:7:5, endln:16:8
         |vpiImportTypespec:
         \_Variable: (work@small_test.i), line:7:10, endln:7:11
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:7:10, endln:7:13
           |vpiParent:
@@ -1387,6 +1492,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@small_test), line:7:12, endln:7:13
+              |vpiParent:
+              \_Constant: , line:7:12, endln:7:13
+              |vpiFullName:work@small_test
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@small_test.i), line:7:10, endln:7:11
@@ -1436,6 +1548,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@small_test), line:7:27, endln:7:28
+                |vpiParent:
+                \_Constant: , line:7:27, endln:7:28
+                |vpiFullName:work@small_test
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@small_test.i), line:7:23, endln:7:24
@@ -1451,6 +1570,12 @@ Design: (unnamed)
       \_GenFor: (work@small_test), line:7:5, endln:16:8
     |vpiStmt:
     \_Begin: (work@small_test), line:7:5, endln:16:8
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:1:1, endln:19:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@small_test.i), line:5:10, endln:5:11
   |vpiImportTypespec:
@@ -1483,6 +1608,13 @@ Design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:22:20, endln:22:24
+        |vpiParent:
+        \_Constant: , line:22:20, endln:22:24
+        |vpiFullName:work@top
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@top.toto), line:22:13, endln:22:24
@@ -1502,6 +1634,12 @@ Design: (unnamed)
       |vpiParent:
       \_GenFor: (work@top), line:23:3, endln:25:6
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:23:30, endln:25:6
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_ContAssign: , line:24:14, endln:24:27
         |vpiParent:
@@ -1526,6 +1664,13 @@ Design: (unnamed)
               |vpiDecompile:2
               |vpiSize:64
               |UINT:2
+              |vpiTypespec:
+              \_RefTypespec: (work@top.a), line:24:23, endln:24:24
+                |vpiParent:
+                \_Constant: , line:24:23, endln:24:24
+                |vpiFullName:work@top.a
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiOperand:
             \_RefObj: (work@top.a.i), line:24:25, endln:24:26
@@ -1551,8 +1696,14 @@ Design: (unnamed)
             |vpiFullName:work@top.i
             |vpiActual:
             \_Variable: (work@top.i), line:23:15, endln:23:16
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@top), line:23:3, endln:25:6
     |vpiImportTypespec:
     \_Variable: (work@top.i), line:23:15, endln:23:16
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:23:8, endln:23:18
       |vpiParent:
@@ -1564,6 +1715,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:23:17, endln:23:18
+          |vpiParent:
+          \_Constant: , line:23:17, endln:23:18
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@top.i), line:23:15, endln:23:16
@@ -1587,6 +1745,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:23:22, endln:23:23
+          |vpiParent:
+          \_Constant: , line:23:22, endln:23:23
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Operation: , line:23:25, endln:23:28
@@ -1604,6 +1769,10 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top), line:23:30, endln:25:6
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:21:1, endln:26:10
+  |vpiTypespec:
   \_LogicTypespec: , line:21:18, endln:21:23
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:21:1, endln:26:10
@@ -1618,6 +1787,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:21:19, endln:21:20
+          |vpiParent:
+          \_Constant: , line:21:19, endln:21:20
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:21:21, endln:21:22
@@ -1626,9 +1802,24 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:21:21, endln:21:22
+          |vpiParent:
+          \_Constant: , line:21:21, endln:21:22
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/GenerateModule/top.v, line:21:1, endln:26:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:18, endln:21:23
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.a), line:21:24, endln:21:25
     |vpiParent:

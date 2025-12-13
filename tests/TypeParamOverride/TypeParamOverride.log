@@ -133,6 +133,7 @@ AST_DEBUG_END
 Always                                                 1
 Assignment                                             1
 Begin                                                  1
+BitTypespec                                            1
 Constant                                               1
 Design                                                 1
 HierPath                                               1
@@ -144,7 +145,7 @@ Net                                                    1
 Package                                                1
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            5
+RefTypespec                                            6
 SourceFile                                             1
 StructTypespec                                         1
 TypeParameter                                          1
@@ -152,7 +153,7 @@ TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                35
+Total:                                                37
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -317,6 +318,12 @@ Design: (unnamed)
         \_Begin: (work@axi_err_slv.proc_w_channel), line:16:15, endln:19:6
         |vpiName:proc_w_channel
       |vpiFullName:work@axi_err_slv.proc_w_channel
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@axi_err_slv.proc_w_channel), line:16:15, endln:19:6
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_Net: (work@axi_err_slv.proc_w_channel.w_ready), line:17:14, endln:17:21
         |vpiParent:
@@ -337,6 +344,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@axi_err_slv.proc_w_channel), line:17:25, endln:17:29
+            |vpiParent:
+            \_Constant: , line:17:25, endln:17:29
+            |vpiFullName:work@axi_err_slv.proc_w_channel
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_HierPath: (err_resp.w_ready), line:17:13, endln:17:21

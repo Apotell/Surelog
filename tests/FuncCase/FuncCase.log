@@ -24,7 +24,7 @@ GenIf                                                  1
 IODecl                                                 1
 Identifier                                             7
 ImportTypespec                                         1
-IntTypespec                                            1
+IntTypespec                                            9
 LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         2
@@ -35,13 +35,14 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 7
-RefTypespec                                            4
+RefTypespec                                           13
 ReturnStmt                                             5
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                66
+Total:                                                84
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -76,8 +77,14 @@ Design: (unnamed)
     \_IntTypespec: , line:7:20, endln:7:32
       |vpiParent:
       \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
     |vpiImportTypespec:
     \_IntTypespec: , line:7:20, endln:7:32
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -138,6 +145,13 @@ Design: (unnamed)
             |vpiDecompile:3
             |vpiSize:64
             |UINT:3
+            |vpiTypespec:
+            \_RefTypespec: (fpnew_pkg::num_operands), line:9:23, endln:9:24
+              |vpiParent:
+              \_Constant: , line:9:23, endln:9:24
+              |vpiFullName:fpnew_pkg::num_operands
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiCaseItem:
       \_CaseItem: , line:10:7, endln:10:25
@@ -162,6 +176,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (fpnew_pkg::num_operands), line:10:23, endln:10:24
+              |vpiParent:
+              \_Constant: , line:10:23, endln:10:24
+              |vpiFullName:fpnew_pkg::num_operands
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiCaseItem:
       \_CaseItem: , line:11:7, endln:11:25
@@ -186,6 +207,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (fpnew_pkg::num_operands), line:11:23, endln:11:24
+              |vpiParent:
+              \_Constant: , line:11:23, endln:11:24
+              |vpiFullName:fpnew_pkg::num_operands
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiCaseItem:
       \_CaseItem: , line:12:7, endln:12:25
@@ -210,6 +238,13 @@ Design: (unnamed)
             |vpiDecompile:3
             |vpiSize:64
             |UINT:3
+            |vpiTypespec:
+            \_RefTypespec: (fpnew_pkg::num_operands), line:12:23, endln:12:24
+              |vpiParent:
+              \_Constant: , line:12:23, endln:12:24
+              |vpiFullName:fpnew_pkg::num_operands
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
       |vpiCaseItem:
       \_CaseItem: , line:13:7, endln:13:25
@@ -226,6 +261,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (fpnew_pkg::num_operands), line:13:23, endln:13:24
+              |vpiParent:
+              \_Constant: , line:13:23, endln:13:24
+              |vpiFullName:fpnew_pkg::num_operands
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
     |vpiInstance:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
@@ -287,6 +329,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg), line:2:21, endln:2:22
+          |vpiParent:
+          \_Constant: , line:2:21, endln:2:22
+          |vpiFullName:fpnew_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:23, endln:2:24
@@ -295,7 +344,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (fpnew_pkg), line:2:23, endln:2:24
+          |vpiParent:
+          \_Constant: , line:2:23, endln:2:24
+          |vpiFullName:fpnew_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
   |vpiTypespec:
   \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
     |vpiParent:
@@ -318,6 +378,8 @@ Design: (unnamed)
   \_EnumTypespec: , line:2:9, endln:4:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:19
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
   |vpiDefName:fpnew_pkg
@@ -409,9 +471,28 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.fpnew_pkg), line:23:11, endln:23:23
+        |vpiParent:
+        \_Constant: , line:23:11, endln:23:23
+        |vpiFullName:work@top.fpnew_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:22:1, endln:30:10
   |vpiImportTypespec:
   \_ImportTypespec: (fpnew_pkg), line:23:11, endln:23:23
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIf: , line:27:4, endln:29:7
@@ -437,6 +518,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:27:13, endln:27:14
+          |vpiParent:
+          \_Constant: , line:27:13, endln:27:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:27:16, endln:29:7

@@ -282,7 +282,7 @@ HierPath                                               1
 IODecl                                                10
 Identifier                                             6
 ImportTypespec                                         1
-IntTypespec                                            1
+IntTypespec                                           23
 Interface                                              1
 InterfaceTypespec                                      1
 LogicTypespec                                         10
@@ -294,15 +294,16 @@ ParamAssign                                            3
 Parameter                                              3
 Range                                                 10
 RefObj                                                13
-RefTypespec                                           13
+RefTypespec                                           35
 SourceFile                                             1
+StringTypespec                                         1
 UnsupportedTypespec                                    1
 Variable                                               5
 ------------------------------------------------------------
-Total:                                               122
+Total:                                               167
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfImport/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/InterfImport/dut.sv:9:13: Unsupported Typespec: id:19, type:RefTypespec, name:tnoc_packet_config.
+[ERR:IG0811] ${SURELOG_DIR}/tests/InterfImport/dut.sv:9:13: Unsupported Typespec: id:24, type:RefTypespec, name:tnoc_packet_config.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -340,9 +341,22 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (tnoc_pkg), line:2:45, endln:2:46
+        |vpiParent:
+        \_Constant: , line:2:45, endln:2:46
+        |vpiFullName:tnoc_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:2:15, endln:2:46
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:1:1, endln:4:11
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:tnoc_pkg
 |vpiAllInterfaces:
 \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
@@ -511,7 +525,18 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@tnoc_port_control_if.tnoc_pkg), line:7:11, endln:7:22
+        |vpiParent:
+        \_Constant: , line:7:11, endln:7:22
+        |vpiFullName:work@tnoc_port_control_if.tnoc_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
   |vpiTypespec:
   \_UnsupportedTypespec: (tnoc_packet_config), line:9:13, endln:9:31
     |vpiParent:
@@ -550,6 +575,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@tnoc_port_control_if), line:13:19, endln:13:20
+            |vpiParent:
+            \_Constant: , line:13:19, endln:13:20
+            |vpiFullName:work@tnoc_port_control_if
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:21, endln:13:22
@@ -558,15 +590,30 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@tnoc_port_control_if), line:13:21, endln:13:22
+          |vpiParent:
+          \_Constant: , line:13:21, endln:13:22
+          |vpiFullName:work@tnoc_port_control_if
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
   |vpiImportTypespec:
   \_ImportTypespec: (tnoc_pkg), line:7:11, endln:7:22
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiImportTypespec:
   \_UnsupportedTypespec: (tnoc_packet_config), line:9:13, endln:9:31
   |vpiImportTypespec:
   \_IntTypespec: , line:11:15, endln:11:18
   |vpiImportTypespec:
   \_LogicTypespec: , line:13:3, endln:13:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@tnoc_port_control_if.request), line:13:25, endln:13:32
   |vpiImportTypespec:

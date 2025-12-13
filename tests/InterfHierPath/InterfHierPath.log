@@ -101,6 +101,7 @@ ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             3
+IntTypespec                                            4
 Interface                                              1
 InterfaceTypespec                                      1
 LogicTypespec                                          4
@@ -111,11 +112,11 @@ Port                                                   1
 Range                                                  2
 RefModule                                              1
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                            8
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                41
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -166,6 +167,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (work@logic_gate_if), line:3:7, endln:3:8
+          |vpiParent:
+          \_Constant: , line:3:7, endln:3:8
+          |vpiFullName:work@logic_gate_if
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:9, endln:3:10
@@ -174,9 +182,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@logic_gate_if), line:3:9, endln:3:10
+          |vpiParent:
+          \_Constant: , line:3:9, endln:3:10
+          |vpiFullName:work@logic_gate_if
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@logic_gate_if (work@logic_gate_if), file:${SURELOG_DIR}/tests/InterfHierPath/dut.sv, line:1:1, endln:5:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@logic_gate_if.a), line:3:12, endln:3:13
   |vpiImportTypespec:

@@ -22,7 +22,7 @@ Identifier                                            10
 IfStmt                                                 1
 Initial                                                1
 IntTypespec                                            2
-LogicTypespec                                          3
+LogicTypespec                                          6
 MethodFuncCall                                         2
 Module                                                 1
 ModuleTypespec                                         1
@@ -31,14 +31,14 @@ Package                                                1
 ParamAssign                                            3
 Parameter                                              3
 RefObj                                                 5
-RefTypespec                                            7
+RefTypespec                                           10
 SourceFile                                             1
 Task                                                   2
 TaskDecl                                               1
 UnsupportedTypespec                                    1
 Variable                                               5
 ------------------------------------------------------------
-Total:                                                66
+Total:                                                72
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMini/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -181,6 +181,13 @@ Design: (unnamed)
         |vpiDecompile:2'b00
         |vpiSize:2
         |BIN:00
+        |vpiTypespec:
+        \_RefTypespec: (pack::door), line:7:27, endln:7:32
+          |vpiParent:
+          \_Constant: , line:7:27, endln:7:32
+          |vpiFullName:pack::door
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_Parameter: (pack::door::OPENED), line:7:15, endln:7:32
@@ -195,6 +202,13 @@ Design: (unnamed)
         |vpiDecompile:2'b01
         |vpiSize:2
         |BIN:01
+        |vpiTypespec:
+        \_RefTypespec: (pack::door), line:8:20, endln:8:25
+          |vpiParent:
+          \_Constant: , line:8:20, endln:8:25
+          |vpiFullName:pack::door
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_Parameter: (pack::door::CLOSED), line:8:8, endln:8:25
@@ -209,6 +223,13 @@ Design: (unnamed)
         |vpiDecompile:2'b10
         |vpiSize:2
         |BIN:10
+        |vpiTypespec:
+        \_RefTypespec: (pack::door), line:9:20, endln:9:25
+          |vpiParent:
+          \_Constant: , line:9:20, endln:9:25
+          |vpiFullName:pack::door
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
       |vpiLhs:
       \_Parameter: (pack::door::LOCKED), line:9:8, endln:9:25
@@ -227,6 +248,10 @@ Design: (unnamed)
       |vpiVirtual:1
       |vpiDPIPure:1
     |vpiTypespec:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
+    |vpiTypespec:
     \_IntTypespec: , line:4:5, endln:4:8
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
@@ -235,6 +260,8 @@ Design: (unnamed)
     \_LogicTypespec: , line:6:5, endln:6:10
       |vpiParent:
       \_ClassDefn: (pack::door), file:${SURELOG_DIR}/tests/ClassMini/dut.sv, line:3:9, endln:11:9
+    |vpiImportTypespec:
+    \_LogicTypespec: 
     |vpiImportTypespec:
     \_Task: (pack::door::door_fsm), line:10:5, endln:10:34
     |vpiImportTypespec:

@@ -577,6 +577,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             8
 Begin                                                  2
+BitTypespec                                            8
 Constant                                              21
 ContAssign                                             1
 DelayControl                                           8
@@ -584,6 +585,7 @@ Design                                                 1
 Identifier                                            13
 ImmediateAssert                                        4
 Initial                                                2
+IntTypespec                                            4
 LogicTypespec                                         10
 Module                                                 2
 ModuleTypespec                                         2
@@ -592,11 +594,12 @@ Operation                                              9
 Port                                                   7
 RefModule                                              1
 RefObj                                                29
-RefTypespec                                           10
+RefTypespec                                           31
 SourceFile                                             2
+StringTypespec                                         9
 SysFuncCall                                           11
 ------------------------------------------------------------
-Total:                                               149
+Total:                                               191
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneAnd/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -706,6 +709,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:4:3, endln:7:6
       |vpiFullName:work@and_tb
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@and_tb), line:4:11, endln:7:6
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($monitor), line:5:5, endln:5:53
         |vpiParent:
@@ -717,6 +726,13 @@ Design: (unnamed)
           |vpiDecompile:"@%0dns %0d & %0d = %0d"
           |vpiSize:176
           |STRING:@%0dns %0d & %0d = %0d
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:5:14, endln:5:38
+            |vpiParent:
+            \_Constant: , line:5:14, endln:5:38
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_StringTypespec: 
           |vpiConstType:6
         |vpiArgument:
         \_SysFuncCall: ($time), line:5:39, endln:5:44
@@ -779,6 +795,20 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:9:3, endln:26:6
       |vpiFullName:work@and_tb
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@and_tb), line:10:3, endln:26:6
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@and_tb), line:10:3, endln:26:6
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@and_tb), line:10:3, endln:26:6
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_ImmediateAssert: , line:13:9, endln:13:79
         |vpiParent:
@@ -828,6 +858,13 @@ Design: (unnamed)
             |vpiDecompile:"OK!"
             |vpiSize:24
             |STRING:OK!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:13:39, endln:13:44
+              |vpiParent:
+              \_Constant: , line:13:39, endln:13:44
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($display), line:13:31, endln:13:38
@@ -845,6 +882,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:13:59, endln:13:60
+              |vpiParent:
+              \_Constant: , line:13:59, endln:13:60
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiArgument:
           \_Constant: , line:13:62, endln:13:77
@@ -853,12 +897,23 @@ Design: (unnamed)
             |vpiDecompile:"o != (a & b)!"
             |vpiSize:104
             |STRING:o != (a & b)!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:13:62, endln:13:77
+              |vpiParent:
+              \_Constant: , line:13:62, endln:13:77
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($fatal), line:13:53, endln:13:58
             |vpiParent:
             \_SysFuncCall: ($fatal), line:13:52, endln:13:78
             |vpiName:$fatal
+      |vpiImportTypespec:
+      \_StringTypespec: 
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiImportTypespec:
       \_ImmediateAssert: , line:17:9, endln:17:79
         |vpiParent:
@@ -908,6 +963,13 @@ Design: (unnamed)
             |vpiDecompile:"OK!"
             |vpiSize:24
             |STRING:OK!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:17:39, endln:17:44
+              |vpiParent:
+              \_Constant: , line:17:39, endln:17:44
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($display), line:17:31, endln:17:38
@@ -925,6 +987,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:17:59, endln:17:60
+              |vpiParent:
+              \_Constant: , line:17:59, endln:17:60
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiArgument:
           \_Constant: , line:17:62, endln:17:77
@@ -933,6 +1002,13 @@ Design: (unnamed)
             |vpiDecompile:"o != (a & b)!"
             |vpiSize:104
             |STRING:o != (a & b)!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:17:62, endln:17:77
+              |vpiParent:
+              \_Constant: , line:17:62, endln:17:77
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($fatal), line:17:53, endln:17:58
@@ -988,6 +1064,13 @@ Design: (unnamed)
             |vpiDecompile:"OK!"
             |vpiSize:24
             |STRING:OK!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:21:39, endln:21:44
+              |vpiParent:
+              \_Constant: , line:21:39, endln:21:44
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($display), line:21:31, endln:21:38
@@ -1005,6 +1088,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:21:59, endln:21:60
+              |vpiParent:
+              \_Constant: , line:21:59, endln:21:60
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiArgument:
           \_Constant: , line:21:62, endln:21:77
@@ -1013,6 +1103,13 @@ Design: (unnamed)
             |vpiDecompile:"o != (a & b)!"
             |vpiSize:104
             |STRING:o != (a & b)!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:21:62, endln:21:77
+              |vpiParent:
+              \_Constant: , line:21:62, endln:21:77
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($fatal), line:21:53, endln:21:58
@@ -1068,6 +1165,13 @@ Design: (unnamed)
             |vpiDecompile:"OK!"
             |vpiSize:24
             |STRING:OK!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:25:39, endln:25:44
+              |vpiParent:
+              \_Constant: , line:25:39, endln:25:44
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($display), line:25:31, endln:25:38
@@ -1085,6 +1189,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:25:59, endln:25:60
+              |vpiParent:
+              \_Constant: , line:25:59, endln:25:60
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiArgument:
           \_Constant: , line:25:62, endln:25:77
@@ -1093,6 +1204,13 @@ Design: (unnamed)
             |vpiDecompile:"o != (a & b)!"
             |vpiSize:104
             |STRING:o != (a & b)!
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:25:62, endln:25:77
+              |vpiParent:
+              \_Constant: , line:25:62, endln:25:77
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_StringTypespec: 
             |vpiConstType:6
           |vpiName:
           \_Identifier: ($fatal), line:25:53, endln:25:58
@@ -1112,6 +1230,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:11:10, endln:11:14
+            |vpiParent:
+            \_Constant: , line:11:10, endln:11:14
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@and_tb.a), line:11:6, endln:11:7
@@ -1134,6 +1259,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:12:10, endln:12:14
+            |vpiParent:
+            \_Constant: , line:12:10, endln:12:14
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@and_tb.b), line:12:6, endln:12:7
@@ -1168,6 +1300,13 @@ Design: (unnamed)
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:15:10, endln:15:14
+              |vpiParent:
+              \_Constant: , line:15:10, endln:15:14
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@and_tb.a), line:15:6, endln:15:7
@@ -1190,6 +1329,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:16:10, endln:16:14
+            |vpiParent:
+            \_Constant: , line:16:10, endln:16:14
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@and_tb.b), line:16:6, endln:16:7
@@ -1224,6 +1370,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:19:10, endln:19:14
+              |vpiParent:
+              \_Constant: , line:19:10, endln:19:14
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@and_tb.a), line:19:6, endln:19:7
@@ -1246,6 +1399,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:20:10, endln:20:14
+            |vpiParent:
+            \_Constant: , line:20:10, endln:20:14
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@and_tb.b), line:20:6, endln:20:7
@@ -1280,6 +1440,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@and_tb), line:23:10, endln:23:14
+              |vpiParent:
+              \_Constant: , line:23:10, endln:23:14
+              |vpiFullName:work@and_tb
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@and_tb.a), line:23:6, endln:23:7
@@ -1302,6 +1469,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@and_tb), line:24:10, endln:24:14
+            |vpiParent:
+            \_Constant: , line:24:10, endln:24:14
+            |vpiFullName:work@and_tb
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@and_tb.b), line:24:6, endln:24:7

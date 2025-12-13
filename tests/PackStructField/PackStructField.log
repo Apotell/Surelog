@@ -147,6 +147,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructField/dut.sv:16:1: Compile module "work@my_module".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            4
 Constant                                               4
 ContAssign                                             2
 Design                                                 1
@@ -162,7 +163,7 @@ ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
 RefObj                                                 6
-RefTypespec                                           13
+RefTypespec                                           17
 SourceFile                                             1
 StringTypespec                                         4
 StructTypespec                                         1
@@ -170,7 +171,7 @@ TaggedPattern                                          4
 TypedefTypespec                                        1
 TypespecMember                                         2
 ------------------------------------------------------------
-Total:                                                57
+Total:                                                65
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructField/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -225,6 +226,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (my_package), line:10:8, endln:10:12
+            |vpiParent:
+            \_Constant: , line:10:8, endln:10:12
+            |vpiFullName:my_package
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (my_package::a), line:10:5, endln:10:6
@@ -245,6 +253,13 @@ Design: (unnamed)
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
+          |vpiTypespec:
+          \_RefTypespec: (my_package), line:11:8, endln:11:12
+            |vpiParent:
+            \_Constant: , line:11:8, endln:11:12
+            |vpiFullName:my_package
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiTypespec:
         \_RefTypespec: (my_package::b), line:11:5, endln:11:6
@@ -306,6 +321,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
+  |vpiTypespec:
   \_StringTypespec: , line:10:5, endln:10:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
@@ -315,6 +334,8 @@ Design: (unnamed)
   \_StructTypespec: , line:4:11, endln:7:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_StringTypespec: , line:10:5, endln:10:6
   |vpiDefName:my_package

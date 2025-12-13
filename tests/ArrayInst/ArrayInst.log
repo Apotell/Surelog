@@ -108,14 +108,15 @@ AST_DEBUG_END
 Constant                                               8
 Design                                                 1
 Identifier                                             3
+IntTypespec                                            8
 Module                                                 3
 ModuleArray                                            3
 ModuleTypespec                                         3
 Range                                                  4
-RefTypespec                                            3
+RefTypespec                                           11
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                29
+Total:                                                45
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -143,6 +144,12 @@ Design: (unnamed)
     |vpiName:work@qq
     |vpiModule:
     \_Module: work@qq (work@qq), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:1:1, endln:2:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@flop (work@flop), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:4:1, endln:6:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@flop
   |vpiModuleArrays:
   \_ModuleArray: (work@qq), line:5:6, endln:5:7
@@ -161,6 +168,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@flop.q), line:5:8, endln:5:9
+          |vpiParent:
+          \_Constant: , line:5:8, endln:5:9
+          |vpiFullName:work@flop.q
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:10, endln:5:11
@@ -169,6 +183,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@flop.q), line:5:10, endln:5:11
+          |vpiParent:
+          \_Constant: , line:5:10, endln:5:11
+          |vpiFullName:work@flop.q
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@flop.q.qq), line:5:3, endln:5:5
@@ -204,6 +225,12 @@ Design: (unnamed)
     |vpiName:work@flop
     |vpiModule:
     \_Module: work@flop (work@flop), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:4:1, endln:6:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayInst/dut.sv, line:8:1, endln:10:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@top
   |vpiModuleArrays:
   \_ModuleArray: (work@flop), line:9:8, endln:9:23
@@ -222,6 +249,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances1), line:9:24, endln:9:25
+          |vpiParent:
+          \_Constant: , line:9:24, endln:9:25
+          |vpiFullName:work@top.flop_instances1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:26, endln:9:27
@@ -230,6 +264,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances1), line:9:26, endln:9:27
+          |vpiParent:
+          \_Constant: , line:9:26, endln:9:27
+          |vpiFullName:work@top.flop_instances1
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.flop_instances1.flop), line:9:3, endln:9:7
@@ -256,6 +297,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances2), line:9:48, endln:9:49
+          |vpiParent:
+          \_Constant: , line:9:48, endln:9:49
+          |vpiFullName:work@top.flop_instances2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:50, endln:9:51
@@ -264,6 +312,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances2), line:9:50, endln:9:51
+          |vpiParent:
+          \_Constant: , line:9:50, endln:9:51
+          |vpiFullName:work@top.flop_instances2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:9:52, endln:9:57
@@ -276,6 +331,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances2), line:9:53, endln:9:54
+          |vpiParent:
+          \_Constant: , line:9:53, endln:9:54
+          |vpiFullName:work@top.flop_instances2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:9:55, endln:9:56
@@ -284,6 +346,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.flop_instances2), line:9:55, endln:9:56
+          |vpiParent:
+          \_Constant: , line:9:55, endln:9:56
+          |vpiFullName:work@top.flop_instances2
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.flop_instances2.flop), line:9:3, endln:9:7

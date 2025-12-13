@@ -236,23 +236,25 @@ IODecl                                                 2
 Identifier                                            12
 IfElse                                                 1
 IfStmt                                                 1
+IntTypespec                                            4
 MethodFuncCall                                         2
 Net                                                    1
 Operation                                              1
 Package                                                1
 RefObj                                                11
-RefTypespec                                            6
+RefTypespec                                           11
 SourceFile                                             1
+StringTypespec                                         1
 Variable                                               1
 VoidTypespec                                           2
 ------------------------------------------------------------
-Total:                                                67
+Total:                                                77
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:28, name:ovm_default_printer".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:50, name:OVM_PRINT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Illegal implicit net "id:32, name:ovm_default_printer".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Illegal implicit net "id:56, name:OVM_PRINT".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Null Actual: id:28, type:RefObj, name:ovm_default_printer.
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Null Actual: id:50, type:RefObj, name:OVM_PRINT.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:26:15: Null Actual: id:32, type:RefObj, name:ovm_default_printer.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageVar/dut.sv:35:30: Null Actual: id:56, type:RefObj, name:OVM_PRINT.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -334,8 +336,14 @@ Design: (unnamed)
       \_VoidTypespec: , line:15:17, endln:15:21
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (pack::ovm_object::print), line:15:1, endln:15:54
       |vpiImportTypespec:
       \_VoidTypespec: , line:15:17, endln:15:21
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
@@ -359,6 +367,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (pack::ovm_object::print::printer), line:15:48, endln:15:52
+            |vpiParent:
+            \_Constant: , line:15:48, endln:15:52
+            |vpiFullName:pack::ovm_object::print::printer
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:11
         |vpiTypespec:
         \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer), line:15:28, endln:15:39
@@ -383,6 +398,12 @@ Design: (unnamed)
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
         |vpiFullName:pack::ovm_object::print
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (pack::ovm_object::print)
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_IfStmt: , line:25:3, endln:26:35
           |vpiParent:
@@ -407,6 +428,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (pack::ovm_object::print), line:25:15, endln:25:19
+                |vpiParent:
+                \_Constant: , line:25:15, endln:25:19
+                |vpiFullName:pack::ovm_object::print
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:11
           |vpiStmt:
           \_Assignment: , line:26:5, endln:26:34
@@ -497,6 +525,18 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:28:3, endln:38:6
             |vpiFullName:pack::ovm_object::print
+            |vpiTypespec:
+            \_IntTypespec: 
+              |vpiParent:
+              \_Begin: (pack::ovm_object::print), line:31:8, endln:38:6
+            |vpiTypespec:
+            \_StringTypespec: 
+              |vpiParent:
+              \_Begin: (pack::ovm_object::print), line:31:8, endln:38:6
+            |vpiImportTypespec:
+            \_IntTypespec: 
+            |vpiImportTypespec:
+            \_StringTypespec: 
             |vpiStmt:
             \_Assignment: , line:34:5, endln:34:46
               |vpiParent:
@@ -541,6 +581,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (pack::ovm_object::print), line:35:24, endln:35:28
+                  |vpiParent:
+                  \_Constant: , line:35:24, endln:35:28
+                  |vpiFullName:pack::ovm_object::print
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:11
               |vpiArgument:
               \_RefObj: (pack::ovm_object::print::OVM_PRINT), line:35:30, endln:35:39
@@ -554,6 +601,13 @@ Design: (unnamed)
                 \_FuncCall: (m_field_automation), line:35:5, endln:35:44
                 |vpiDecompile:""
                 |STRING:
+                |vpiTypespec:
+                \_RefTypespec: (pack::ovm_object::print), line:35:41, endln:35:43
+                  |vpiParent:
+                  \_Constant: , line:35:41, endln:35:43
+                  |vpiFullName:pack::ovm_object::print
+                  |vpiActual:
+                  \_StringTypespec: 
                 |vpiConstType:6
               |vpiName:
               \_Identifier: (m_field_automation), line:35:5, endln:35:23
@@ -581,8 +635,14 @@ Design: (unnamed)
       \_VoidTypespec: , line:23:10, endln:23:14
         |vpiParent:
         \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (pack::ovm_object::print), line:23:1, endln:39:12
       |vpiImportTypespec:
       \_VoidTypespec: , line:23:10, endln:23:14
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiVisibility:1
       |vpiReturn:
       \_RefTypespec: (pack::ovm_object::print)
@@ -604,6 +664,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (pack::ovm_object::print::printer), line:23:53, endln:23:57
+            |vpiParent:
+            \_Constant: , line:23:53, endln:23:57
+            |vpiFullName:pack::ovm_object::print::printer
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:11
         |vpiTypespec:
         \_RefTypespec: (pack::ovm_object::print::printer::ovm_printer), line:23:33, endln:23:44

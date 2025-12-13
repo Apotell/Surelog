@@ -44,16 +44,17 @@ ArrayTypespec                                          1
 Constant                                               1
 Design                                                 1
 Identifier                                             1
+IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    1
 Operation                                              1
 Range                                                  1
-RefTypespec                                            2
+RefTypespec                                            3
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                13
+Total:                                                15
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IllegalZeroValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -79,6 +80,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:3:12, endln:3:15
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
@@ -99,6 +104,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@test), line:3:13, endln:3:14
+            |vpiParent:
+            \_Constant: , line:3:13, endln:3:14
+            |vpiFullName:work@test
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@test), line:3:1, endln:3:4
@@ -109,6 +121,8 @@ Design: (unnamed)
       \_LogicTypespec: , line:3:1, endln:3:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:4
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:12, endln:3:15
   |vpiImportTypespec:

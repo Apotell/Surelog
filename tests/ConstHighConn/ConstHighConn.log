@@ -77,21 +77,22 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstHighConn/dut.sv:5:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               2
 ContAssign                                             1
 Design                                                 1
 Identifier                                             2
-LogicTypespec                                          4
+LogicTypespec                                          5
 Module                                                 2
 ModuleTypespec                                         2
 Net                                                    2
 Port                                                   3
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            4
+RefTypespec                                            6
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                26
+Total:                                                30
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstHighConn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -113,9 +114,15 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
     |vpiName:work@dut
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
+  |vpiTypespec:
   \_LogicTypespec: , line:1:20, endln:1:25
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:20, endln:1:25
   |vpiImportTypespec:
@@ -159,6 +166,13 @@ Design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:2:15, endln:2:19
+        |vpiParent:
+        \_Constant: , line:2:15, endln:2:19
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_RefObj: (work@dut.o), line:2:11, endln:2:12
@@ -185,9 +199,15 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
   |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+  |vpiTypespec:
   \_LogicTypespec: , line:5:20, endln:5:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:20, endln:5:25
   |vpiImportTypespec:
@@ -240,6 +260,13 @@ Design: (unnamed)
         |vpiDecompile:15'b0
         |vpiSize:15
         |BIN:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.d.o), line:7:13, endln:7:18
+          |vpiParent:
+          \_Constant: , line:7:13, endln:7:18
+          |vpiFullName:work@top.d.o
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
 |vpiTypespec:
 \_ModuleTypespec: (work@dut)

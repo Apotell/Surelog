@@ -134,6 +134,7 @@ Design                                                 1
 HierPath                                               1
 Identifier                                             4
 ImportTypespec                                         1
+IntTypespec                                            8
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -142,14 +143,15 @@ Package                                                1
 PartSelect                                             2
 Range                                                  2
 RefObj                                                 1
-RefTypespec                                            4
+RefTypespec                                           13
 SourceFile                                             1
+StringTypespec                                         1
 StructTypespec                                         1
 TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                38
+Total:                                                56
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -230,6 +232,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (swerv_types), line:4:31, endln:4:32
+          |vpiParent:
+          \_Constant: , line:4:31, endln:4:32
+          |vpiFullName:swerv_types
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:33, endln:4:34
@@ -238,7 +247,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (swerv_types), line:4:33, endln:4:34
+          |vpiParent:
+          \_Constant: , line:4:33, endln:4:34
+          |vpiFullName:swerv_types
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: swerv_types (swerv_types), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
   |vpiTypespec:
   \_LogicTypespec: , line:5:24, endln:5:29
     |vpiParent:
@@ -254,6 +274,13 @@ Design: (unnamed)
         |vpiDecompile:95
         |vpiSize:64
         |UINT:95
+        |vpiTypespec:
+        \_RefTypespec: (swerv_types), line:5:31, endln:5:33
+          |vpiParent:
+          \_Constant: , line:5:31, endln:5:33
+          |vpiFullName:swerv_types
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:34, endln:5:35
@@ -262,6 +289,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (swerv_types), line:5:34, endln:5:35
+          |vpiParent:
+          \_Constant: , line:5:34, endln:5:35
+          |vpiFullName:swerv_types
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_TypedefTypespec: (swerv_types::trace_pkt_t), line:6:26, endln:6:37
@@ -269,6 +303,8 @@ Design: (unnamed)
   \_StructTypespec: , line:3:9, endln:6:25
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:24, endln:4:29
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:24, endln:5:29
   |vpiDefName:swerv_types
@@ -297,9 +333,28 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@top.swerv_types), line:11:10, endln:11:24
+        |vpiParent:
+        \_Constant: , line:11:10, endln:11:24
+        |vpiFullName:work@top.swerv_types
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
   |vpiImportTypespec:
   \_ImportTypespec: (swerv_types), line:11:10, endln:11:24
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
     |vpiParent:
@@ -357,6 +412,13 @@ Design: (unnamed)
           |vpiDecompile:63
           |vpiSize:64
           |UINT:63
+          |vpiTypespec:
+          \_RefTypespec: (work@top.trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0].trace_rv_i_insn_ip), line:13:79, endln:13:81
+            |vpiParent:
+            \_Constant: , line:13:79, endln:13:81
+            |vpiFullName:work@top.trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0].trace_rv_i_insn_ip
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:13:82, endln:13:83
@@ -365,6 +427,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0].trace_rv_i_insn_ip), line:13:82, endln:13:83
+            |vpiParent:
+            \_Constant: , line:13:82, endln:13:83
+            |vpiFullName:work@top.trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0].trace_rv_i_insn_ip
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiName:trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]
     |vpiLhs:
@@ -384,6 +453,13 @@ Design: (unnamed)
         |vpiDecompile:63
         |vpiSize:64
         |UINT:63
+        |vpiTypespec:
+        \_RefTypespec: (work@top.trace_rv_i_insn_ip), line:13:29, endln:13:31
+          |vpiParent:
+          \_Constant: , line:13:29, endln:13:31
+          |vpiFullName:work@top.trace_rv_i_insn_ip
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:32, endln:13:33
@@ -392,6 +468,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top.trace_rv_i_insn_ip), line:13:32, endln:13:33
+          |vpiParent:
+          \_Constant: , line:13:32, endln:13:33
+          |vpiFullName:work@top.trace_rv_i_insn_ip
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
 |vpiTypespec:
 \_ModuleTypespec: (work@top)

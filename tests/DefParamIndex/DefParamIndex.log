@@ -290,6 +290,7 @@ GenFor                                                 1
 GenIf                                                  3
 GenRegion                                              2
 Identifier                                             6
+IntTypespec                                            9
 Module                                                 4
 ModuleTypespec                                         5
 Operation                                              5
@@ -298,14 +299,14 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              5
 RefObj                                                 6
-RefTypespec                                            1
+RefTypespec                                           10
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                63
+Total:                                                81
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:31:2: Null Actual: id:59, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:31:2: Null Actual: id:77, type:RefModule, name:bad.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -386,8 +387,14 @@ Design: (unnamed)
             |vpiDefName:work@hierdefparam_b
             |vpiActual:
             \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_GenFor: (work@hierdefparam_a), line:15:5, endln:17:8
         |vpiImportTypespec:
         \_Variable: (work@hierdefparam_a.i), line:15:10, endln:15:11
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiForInitStmt:
         \_Assignment: , line:15:10, endln:15:15
           |vpiParent:
@@ -399,6 +406,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@hierdefparam_a), line:15:14, endln:15:15
+              |vpiParent:
+              \_Constant: , line:15:14, endln:15:15
+              |vpiFullName:work@hierdefparam_a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_Variable: (work@hierdefparam_a.i), line:15:10, endln:15:11
@@ -422,6 +436,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@hierdefparam_a), line:15:21, endln:15:22
+              |vpiParent:
+              \_Constant: , line:15:21, endln:15:22
+              |vpiFullName:work@hierdefparam_a
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiForIncStmt:
         \_Assignment: , line:15:24, endln:15:29
@@ -448,6 +469,13 @@ Design: (unnamed)
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
+              |vpiTypespec:
+              \_RefTypespec: (work@hierdefparam_a), line:15:28, endln:15:29
+                |vpiParent:
+                \_Constant: , line:15:28, endln:15:29
+                |vpiFullName:work@hierdefparam_a
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@hierdefparam_a.i), line:15:24, endln:15:25
@@ -500,6 +528,13 @@ Design: (unnamed)
       |vpiDecompile:44
       |vpiSize:64
       |UINT:44
+      |vpiTypespec:
+      \_RefTypespec: (work@hierdefparam_b), line:23:30, endln:23:32
+        |vpiParent:
+        \_Constant: , line:23:30, endln:23:32
+        |vpiFullName:work@hierdefparam_b
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
@@ -557,6 +592,10 @@ Design: (unnamed)
       |vpiName:bad
       |vpiDefName:work@BAD
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:23:13, endln:23:18
     |vpiParent:
     \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
@@ -571,6 +610,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (work@hierdefparam_b), line:23:14, endln:23:15
+          |vpiParent:
+          \_Constant: , line:23:14, endln:23:15
+          |vpiFullName:work@hierdefparam_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:23:16, endln:23:17
@@ -579,8 +625,17 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@hierdefparam_b), line:23:16, endln:23:17
+          |vpiParent:
+          \_Constant: , line:23:16, endln:23:17
+          |vpiFullName:work@hierdefparam_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiPacked:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:23:13, endln:23:18
   |vpiDefName:work@hierdefparam_b
@@ -608,6 +663,13 @@ Design: (unnamed)
         |vpiDecompile:42
         |vpiSize:64
         |UINT:42
+        |vpiTypespec:
+        \_RefTypespec: (work@hierdefparam_b), line:24:19, endln:24:21
+          |vpiParent:
+          \_Constant: , line:24:19, endln:24:21
+          |vpiFullName:work@hierdefparam_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@hierdefparam_b), line:24:23, endln:26:6
@@ -635,6 +697,13 @@ Design: (unnamed)
         |vpiDecompile:43
         |vpiSize:64
         |UINT:43
+        |vpiTypespec:
+        \_RefTypespec: (work@hierdefparam_b), line:27:19, endln:27:21
+          |vpiParent:
+          \_Constant: , line:27:19, endln:27:21
+          |vpiFullName:work@hierdefparam_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@hierdefparam_b), line:27:23, endln:29:6
@@ -662,6 +731,13 @@ Design: (unnamed)
         |vpiDecompile:44
         |vpiSize:64
         |UINT:44
+        |vpiTypespec:
+        \_RefTypespec: (work@hierdefparam_b), line:30:19, endln:30:21
+          |vpiParent:
+          \_Constant: , line:30:19, endln:30:21
+          |vpiFullName:work@hierdefparam_b
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@hierdefparam_b), line:30:23, endln:32:6

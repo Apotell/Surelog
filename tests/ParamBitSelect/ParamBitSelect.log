@@ -164,6 +164,8 @@ GenFor                                                 1
 GenIf                                                  1
 GenIfElse                                              1
 Identifier                                             2
+IntTypespec                                            4
+LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         4
 Operation                                              5
@@ -171,14 +173,15 @@ ParamAssign                                            1
 Parameter                                              1
 RefModule                                              3
 RefObj                                                 5
+RefTypespec                                            5
 SourceFile                                             1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                40
+Total:                                                50
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamBitSelect/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:15:8: Null Actual: id:40, type:RefModule, name:bad.
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Null Actual: id:27, type:RefModule, name:m.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:15:8: Null Actual: id:50, type:RefModule, name:bad.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamBitSelect/dut.sv:11:5: Null Actual: id:33, type:RefModule, name:m.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -225,6 +228,13 @@ Design: (unnamed)
       |vpiDecompile:4'b0011
       |vpiSize:4
       |BIN:0011
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:7:18, endln:7:25
+        |vpiParent:
+        \_Constant: , line:7:18, endln:7:25
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@dut.test), line:7:11, endln:7:25
@@ -292,8 +302,14 @@ Design: (unnamed)
           |vpiParent:
           \_Begin: (work@dut), line:10:16, endln:18:6
           |vpiName:MOD
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@dut), line:10:16, endln:18:6
         |vpiImportTypespec:
         \_ModuleTypespec: (MOD)
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_RefModule: work@MOD (m), line:11:5, endln:11:8
           |vpiParent:
@@ -329,6 +345,13 @@ Design: (unnamed)
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
+                |vpiTypespec:
+                \_RefTypespec: (work@dut), line:12:14, endln:12:15
+                  |vpiParent:
+                  \_Constant: , line:12:14, endln:12:15
+                  |vpiFullName:work@dut
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
             |vpiOperand:
             \_Operation: , line:12:19, endln:12:25
@@ -350,6 +373,13 @@ Design: (unnamed)
                 |vpiDecompile:1
                 |vpiSize:64
                 |UINT:1
+                |vpiTypespec:
+                \_RefTypespec: (work@dut), line:12:24, endln:12:25
+                  |vpiParent:
+                  \_Constant: , line:12:24, endln:12:25
+                  |vpiFullName:work@dut
+                  |vpiActual:
+                  \_IntTypespec: 
                 |vpiConstType:9
           |vpiStmt:
           \_Begin: (work@dut), line:12:27, endln:14:8
@@ -377,8 +407,14 @@ Design: (unnamed)
             \_Variable: (work@dut.k), line:9:13, endln:9:14
         |vpiStmt:
         \_Begin: (work@dut), line:10:16, endln:18:6
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@dut), line:9:1, endln:19:4
     |vpiImportTypespec:
     \_Variable: (work@dut.k), line:9:13, endln:9:14
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:9:6, endln:9:18
       |vpiParent:
@@ -390,6 +426,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:9:17, endln:9:18
+          |vpiParent:
+          \_Constant: , line:9:17, endln:9:18
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@dut.k), line:9:13, endln:9:14
@@ -413,6 +456,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (work@dut), line:9:24, endln:9:25
+          |vpiParent:
+          \_Constant: , line:9:24, endln:9:25
+          |vpiFullName:work@dut
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Operation: , line:9:27, endln:9:30
@@ -429,6 +479,12 @@ Design: (unnamed)
         \_Variable: (work@dut.k), line:9:13, endln:9:14
     |vpiStmt:
     \_Begin: (work@dut), line:9:32, endln:19:4
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamBitSelect/dut.sv, line:5:1, endln:21:10
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiDefName:work@dut
 |vpiTypespec:
 \_ModuleTypespec: (work@GOOD)

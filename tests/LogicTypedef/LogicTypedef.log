@@ -10,17 +10,18 @@ BitTypespec                                            1
 Constant                                               6
 Design                                                 1
 Identifier                                             4
+IntTypespec                                            6
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
 Net                                                    3
 Range                                                  3
-RefTypespec                                            7
+RefTypespec                                           13
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                                37
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypedef/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -56,6 +57,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:2:20, endln:2:21
+          |vpiParent:
+          \_Constant: , line:2:20, endln:2:21
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:2:22, endln:2:23
@@ -64,7 +72,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:2:22, endln:2:23
+          |vpiParent:
+          \_Constant: , line:2:22, endln:2:23
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
   |vpiTypespec:
   \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
     |vpiParent:
@@ -116,6 +135,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:8:18, endln:8:19
+          |vpiParent:
+          \_Constant: , line:8:18, endln:8:19
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:8:20, endln:8:21
@@ -124,6 +150,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:8:20, endln:8:21
+          |vpiParent:
+          \_Constant: , line:8:20, endln:8:21
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@test), line:8:13, endln:8:16
@@ -151,6 +184,8 @@ Design: (unnamed)
       \_ArrayTypespec: , line:8:13, endln:8:22
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:13, endln:2:18
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
   |vpiImportTypespec:

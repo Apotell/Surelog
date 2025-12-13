@@ -15,9 +15,11 @@ ModuleTypespec                                         2
 ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
+RefTypespec                                            2
 SourceFile                                             1
+StringTypespec                                         2
 ------------------------------------------------------------
-Total:                                                15
+Total:                                                19
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -63,6 +65,13 @@ Design: (unnamed)
       |vpiDecompile:"FIRSTVALUE"
       |vpiSize:80
       |STRING:FIRSTVALUE
+      |vpiTypespec:
+      \_RefTypespec: (work@parameter_module), line:9:28, endln:9:40
+        |vpiParent:
+        \_Constant: , line:9:28, endln:9:40
+        |vpiFullName:work@parameter_module
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:40
@@ -77,9 +86,22 @@ Design: (unnamed)
       |vpiDecompile:"SECONDVALUE"
       |vpiSize:88
       |STRING:SECONDVALUE
+      |vpiTypespec:
+      \_RefTypespec: (work@parameter_module), line:10:29, endln:10:42
+        |vpiParent:
+        \_Constant: , line:10:29, endln:10:42
+        |vpiFullName:work@parameter_module
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
     |vpiLhs:
     \_Parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:42
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
+  |vpiImportTypespec:
+  \_StringTypespec: 
   |vpiDefName:work@parameter_module
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10

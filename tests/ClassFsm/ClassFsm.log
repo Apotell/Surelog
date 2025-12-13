@@ -12,7 +12,7 @@ ArrayTypespec                                          2
 Assignment                                             4
 Begin                                                  8
 BitSelect                                              5
-BitTypespec                                            2
+BitTypespec                                            4
 CaseItem                                               4
 CaseStmt                                               1
 ClassDefn                                              2
@@ -25,7 +25,7 @@ FuncCall                                               8
 IODecl                                                 2
 Identifier                                            24
 IfElse                                                 5
-IntTypespec                                            1
+IntTypespec                                           12
 LogicTypespec                                          1
 MethodFuncCall                                         2
 Module                                                 1
@@ -37,13 +37,13 @@ Parameter                                              4
 Port                                                   3
 Range                                                  2
 RefObj                                                25
-RefTypespec                                            8
+RefTypespec                                           21
 SourceFile                                             1
 Task                                                   7
 TaskCall                                               4
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               160
+Total:                                               186
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFsm/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -105,6 +105,18 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (work@fsm_class::baseFsm::next_state_transition), line:8:5, endln:14:12
         |vpiFullName:work@fsm_class::baseFsm::next_state_transition
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@fsm_class::baseFsm::next_state_transition), line:10:7, endln:13:10
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@fsm_class::baseFsm::next_state_transition), line:10:7, endln:13:10
+        |vpiImportTypespec:
+        \_IntTypespec: 
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:11:9, endln:11:23
           |vpiParent:
@@ -118,6 +130,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@fsm_class::baseFsm::next_state_transition), line:11:22, endln:11:23
+              |vpiParent:
+              \_Constant: , line:11:22, endln:11:23
+              |vpiFullName:work@fsm_class::baseFsm::next_state_transition
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiLhs:
           \_RefObj: (work@fsm_class::baseFsm::next_state_transition::next_state), line:11:9, endln:11:19
@@ -140,6 +159,13 @@ Design: (unnamed)
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
+            |vpiTypespec:
+            \_RefTypespec: (work@fsm_class::baseFsm::next_state_transition), line:12:37, endln:12:41
+              |vpiParent:
+              \_Constant: , line:12:37, endln:12:41
+              |vpiFullName:work@fsm_class::baseFsm::next_state_transition
+              |vpiActual:
+              \_BitTypespec: 
             |vpiConstType:3
           |vpiLhs:
           \_BitSelect: (work@fsm_class::baseFsm::next_state_transition::next_state), line:12:20, endln:12:34
@@ -196,6 +222,12 @@ Design: (unnamed)
         |vpiParent:
         \_Task: (work@fsm_class::baseFsm::current_state_transition), line:15:5, endln:23:12
         |vpiFullName:work@fsm_class::baseFsm::current_state_transition
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@fsm_class::baseFsm::current_state_transition), line:17:7, endln:22:10
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_IfElse: , line:18:7, endln:21:37
           |vpiParent:
@@ -221,6 +253,13 @@ Design: (unnamed)
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
+              |vpiTypespec:
+              \_RefTypespec: (work@fsm_class::baseFsm::current_state_transition), line:19:25, endln:19:26
+                |vpiParent:
+                \_Constant: , line:19:25, endln:19:26
+                |vpiFullName:work@fsm_class::baseFsm::current_state_transition
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiLhs:
             \_RefObj: (work@fsm_class::baseFsm::current_state_transition::current_state), line:19:9, endln:19:22
@@ -279,6 +318,10 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
     |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
+    |vpiTypespec:
     \_ArrayTypespec: , line:5:5, endln:5:14
       |vpiParent:
       \_ClassDefn: (work@fsm_class::baseFsm), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:3:3, endln:24:11
@@ -293,6 +336,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::baseFsm), line:5:10, endln:5:11
+            |vpiParent:
+            \_Constant: , line:5:10, endln:5:11
+            |vpiFullName:work@fsm_class::baseFsm
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:5:12, endln:5:13
@@ -301,6 +351,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::baseFsm), line:5:12, endln:5:13
+            |vpiParent:
+            \_Constant: , line:5:12, endln:5:13
+            |vpiFullName:work@fsm_class::baseFsm
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiElemTypespec:
       \_RefTypespec: (work@fsm_class::baseFsm), line:5:5, endln:5:8
@@ -325,6 +382,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::baseFsm), line:6:10, endln:6:11
+            |vpiParent:
+            \_Constant: , line:6:10, endln:6:11
+            |vpiFullName:work@fsm_class::baseFsm
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiRightRange:
         \_Constant: , line:6:12, endln:6:13
@@ -333,6 +397,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::baseFsm), line:6:12, endln:6:13
+            |vpiParent:
+            \_Constant: , line:6:12, endln:6:13
+            |vpiFullName:work@fsm_class::baseFsm
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiElemTypespec:
       \_RefTypespec: (work@fsm_class::baseFsm), line:6:5, endln:6:8
@@ -348,6 +419,8 @@ Design: (unnamed)
     \_Task: (work@fsm_class::baseFsm::current_state_transition), line:15:5, endln:23:12
     |vpiImportTypespec:
     \_BitTypespec: , line:5:5, endln:5:8
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_ArrayTypespec: , line:5:5, endln:5:14
     |vpiImportTypespec:
@@ -435,6 +508,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::specificFSM), line:28:32, endln:28:33
+            |vpiParent:
+            \_Constant: , line:28:32, endln:28:33
+            |vpiFullName:work@fsm_class::specificFSM
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Parameter: (work@fsm_class::specificFSM::STATE_00_BIT), line:28:17, endln:28:33
@@ -449,6 +529,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::specificFSM), line:29:32, endln:29:33
+            |vpiParent:
+            \_Constant: , line:29:32, endln:29:33
+            |vpiFullName:work@fsm_class::specificFSM
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Parameter: (work@fsm_class::specificFSM::STATE_01_BIT), line:29:17, endln:29:33
@@ -463,6 +550,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::specificFSM), line:30:32, endln:30:33
+            |vpiParent:
+            \_Constant: , line:30:32, endln:30:33
+            |vpiFullName:work@fsm_class::specificFSM
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Parameter: (work@fsm_class::specificFSM::STATE_10_BIT), line:30:17, endln:30:33
@@ -477,6 +571,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (work@fsm_class::specificFSM), line:31:32, endln:31:33
+            |vpiParent:
+            \_Constant: , line:31:32, endln:31:33
+            |vpiFullName:work@fsm_class::specificFSM
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_Parameter: (work@fsm_class::specificFSM::STATE_11_BIT), line:31:17, endln:31:33
@@ -760,6 +861,12 @@ Design: (unnamed)
           |vpiParent:
           \_Task: (work@fsm_class::specificFSM::main_comb), line:69:6, endln:78:12
           |vpiFullName:work@fsm_class::specificFSM::main_comb
+          |vpiTypespec:
+          \_BitTypespec: 
+            |vpiParent:
+            \_Begin: (work@fsm_class::specificFSM::main_comb), line:70:7, endln:77:10
+          |vpiImportTypespec:
+          \_BitTypespec: 
           |vpiStmt:
           \_CaseStmt: , line:71:9, endln:76:16
             |vpiParent:
@@ -772,6 +879,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@fsm_class::specificFSM::main_comb), line:71:15, endln:71:19
+                |vpiParent:
+                \_Constant: , line:71:15, endln:71:19
+                |vpiFullName:work@fsm_class::specificFSM::main_comb
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiCaseItem:
             \_CaseItem: , line:72:11, endln:72:54
@@ -901,6 +1015,12 @@ Design: (unnamed)
         |vpiVisibility:1
         |vpiStmt:
         \_Begin: (work@fsm_class::specificFSM::main_comb), line:70:7, endln:77:10
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_ClassDefn: (work@fsm_class::specificFSM), file:${SURELOG_DIR}/tests/ClassFsm/dut.sv, line:26:3, endln:79:11
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiImportTypespec:
       \_Task: (work@fsm_class::specificFSM::from_state_00), line:33:5, endln:40:12
       |vpiImportTypespec:
@@ -1032,6 +1152,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:82:10, endln:82:24
         |vpiFullName:work@fsm_class
+        |vpiTypespec:
+        \_IntTypespec: 
+          |vpiParent:
+          \_Begin: (work@fsm_class), line:82:24, endln:84:6
+        |vpiImportTypespec:
+        \_IntTypespec: 
         |vpiStmt:
         \_MethodFuncCall: (current_state_transition), line:83:7, endln:83:34
           |vpiParent:
@@ -1043,6 +1169,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (work@fsm_class), line:83:32, endln:83:33
+              |vpiParent:
+              \_Constant: , line:83:32, endln:83:33
+              |vpiFullName:work@fsm_class
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiName:
           \_Identifier: (current_state_transition), line:83:7, endln:83:31

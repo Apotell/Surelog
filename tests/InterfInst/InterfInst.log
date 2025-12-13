@@ -150,7 +150,7 @@ ContAssign                                             2
 Design                                                 1
 HierPath                                               2
 Identifier                                             4
-IntTypespec                                            6
+IntTypespec                                            7
 Interface                                              1
 InterfaceTypespec                                      1
 Module                                                 2
@@ -159,12 +159,12 @@ Net                                                    2
 Port                                                   5
 RefModule                                              2
 RefObj                                                 7
-RefTypespec                                            8
+RefTypespec                                            9
 SourceFile                                             1
 UnsupportedTypespec                                    2
 Variable                                               3
 ------------------------------------------------------------
-Total:                                                52
+Total:                                                54
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -370,6 +370,10 @@ Design: (unnamed)
     |vpiInterface:
     \_Interface: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@dut)
     |vpiParent:
     \_Design: (unnamed)
@@ -381,6 +385,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:10:19, endln:10:22
   |vpiImportTypespec:
@@ -419,6 +425,13 @@ Design: (unnamed)
       |vpiDecompile:32'h1234
       |vpiSize:32
       |HEX:1234
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:12:38, endln:12:46
+        |vpiParent:
+        \_Constant: , line:12:38, endln:12:46
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:5
     |vpiLhs:
     \_HierPath: (u_sim_sram_if.start_addr), line:12:24, endln:12:35

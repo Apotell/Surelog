@@ -165,7 +165,7 @@ Design                                                 1
 GenIf                                                  1
 Identifier                                             5
 ImportTypespec                                         1
-IntTypespec                                            3
+IntTypespec                                            9
 LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         2
@@ -176,12 +176,13 @@ Parameter                                              2
 Range                                                  1
 RefModule                                              1
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                           11
 SourceFile                                             1
+StringTypespec                                         1
 TypedefTypespec                                        1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                60
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -227,6 +228,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:5:28, endln:5:29
+        |vpiParent:
+        \_Constant: , line:5:28, endln:5:29
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
@@ -235,6 +243,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
   |vpiTypespec:
   \_LogicTypespec: , line:6:12, endln:6:17
     |vpiParent:
@@ -263,6 +275,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:6:27, endln:6:28
+            |vpiParent:
+            \_Constant: , line:6:27, endln:6:28
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:29, endln:6:30
@@ -271,6 +290,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:6:29, endln:6:30
+          |vpiParent:
+          \_Constant: , line:6:29, endln:6:30
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::unused_type_t), line:6:32, endln:6:45
@@ -290,6 +316,8 @@ Design: (unnamed)
       \_LogicTypespec: , line:6:12, endln:6:17
   |vpiImportTypespec:
   \_IntTypespec: , line:5:14, endln:5:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:12, endln:6:17
   |vpiImportTypespec:
@@ -355,6 +383,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:11:28, endln:11:29
+        |vpiParent:
+        \_Constant: , line:11:28, endln:11:29
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@top.TxWidth), line:11:18, endln:11:29
@@ -394,16 +429,35 @@ Design: (unnamed)
       |vpiDecompile:unused_type_t
       |vpiSize:104
       |STRING:unused_type_t
+      |vpiTypespec:
+      \_RefTypespec: (work@top.lc_ctrl_pkg), line:10:24, endln:10:37
+        |vpiParent:
+        \_Constant: , line:10:24, endln:10:37
+        |vpiFullName:work@top.lc_ctrl_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
   |vpiTypespec:
   \_IntTypespec: , line:11:14, endln:11:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
   |vpiImportTypespec:
   \_ImportTypespec: (lc_ctrl_pkg), line:10:11, endln:10:37
   |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
   \_IntTypespec: , line:11:14, endln:11:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Variable: (work@top.o), line:12:18, endln:12:19
   |vpiDefName:work@top
@@ -451,6 +505,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:15:18, endln:15:19
+          |vpiParent:
+          \_Constant: , line:15:18, endln:15:19
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:15:21, endln:17:6

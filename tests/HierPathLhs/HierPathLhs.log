@@ -161,20 +161,21 @@ ArrayTypespec                                          1
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              4
+BitTypespec                                            1
 Constant                                              11
 ContAssign                                             2
 Design                                                 1
 GenFor                                                 1
 HierPath                                               3
 Identifier                                             4
-IntTypespec                                            1
+IntTypespec                                           11
 Module                                                 2
 ModuleTypespec                                         2
 Net                                                    1
 Operation                                              2
 Range                                                  2
 RefObj                                                 6
-RefTypespec                                            4
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         1
 TypedefTypespec                                        1
@@ -182,7 +183,7 @@ TypespecMember                                         1
 UnsupportedTypespec                                    1
 Variable                                               1
 ------------------------------------------------------------
-Total:                                                55
+Total:                                                77
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -224,6 +225,12 @@ Design: (unnamed)
         \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
         |vpiName:gen_alert_cause
       |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@alert_handler_reg_wrap.gen_alert_cause), line:2:34, endln:4:6
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiImportTypespec:
       \_Net: (work@alert_handler_reg_wrap.gen_alert_cause.hw2reg), line:3:18, endln:3:30
         |vpiParent:
@@ -256,6 +263,13 @@ Design: (unnamed)
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@alert_handler_reg_wrap.gen_alert_cause), line:3:39, endln:3:43
+            |vpiParent:
+            \_Constant: , line:3:39, endln:3:43
+            |vpiFullName:work@alert_handler_reg_wrap.gen_alert_cause
+            |vpiActual:
+            \_BitTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_HierPath: (hw2reg.alert_cause[k].d), line:3:18, endln:3:37
@@ -293,8 +307,14 @@ Design: (unnamed)
             |vpiActual:
             \_Net: (work@alert_handler_reg_wrap.gen_alert_cause.d), line:3:37, endln:3:37
           |vpiName:hw2reg.alert_cause[k].d
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_GenFor: (work@alert_handler_reg_wrap), line:2:3, endln:4:6
     |vpiImportTypespec:
     \_Variable: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiForInitStmt:
     \_Assignment: , line:2:8, endln:2:20
       |vpiParent:
@@ -306,6 +326,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@alert_handler_reg_wrap), line:2:19, endln:2:20
+          |vpiParent:
+          \_Constant: , line:2:19, endln:2:20
+          |vpiFullName:work@alert_handler_reg_wrap
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiLhs:
       \_Variable: (work@alert_handler_reg_wrap.k), line:2:15, endln:2:16
@@ -329,6 +356,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@alert_handler_reg_wrap), line:2:26, endln:2:27
+          |vpiParent:
+          \_Constant: , line:2:26, endln:2:27
+          |vpiFullName:work@alert_handler_reg_wrap
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiForIncStmt:
     \_Operation: , line:2:29, endln:2:32
@@ -394,6 +428,10 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
     |vpiSigned:1
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:13:3, endln:13:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
@@ -408,6 +446,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:13, endln:13:14
+          |vpiParent:
+          \_Constant: , line:13:13, endln:13:14
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:15, endln:13:16
@@ -416,6 +461,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:15, endln:13:16
+          |vpiParent:
+          \_Constant: , line:13:15, endln:13:16
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:13:17, endln:13:22
@@ -428,6 +480,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:18, endln:13:19
+          |vpiParent:
+          \_Constant: , line:13:18, endln:13:19
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:13:20, endln:13:21
@@ -436,6 +495,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:13:20, endln:13:21
+          |vpiParent:
+          \_Constant: , line:13:20, endln:13:21
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.struct_t), line:13:3, endln:13:11
@@ -452,6 +518,8 @@ Design: (unnamed)
   \_StructTypespec: , line:9:11, endln:11:4
   |vpiImportTypespec:
   \_IntTypespec: , line:10:5, endln:10:8
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:13:3, endln:13:22
   |vpiImportTypespec:
@@ -481,6 +549,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@top), line:15:25, endln:15:26
+        |vpiParent:
+        \_Constant: , line:15:25, endln:15:26
+        |vpiFullName:work@top
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_HierPath: (a[0][0].x[0]), line:15:10, endln:15:19
@@ -501,6 +576,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.a[0][0].x[0].a), line:15:12, endln:15:13
+            |vpiParent:
+            \_Constant: , line:15:12, endln:15:13
+            |vpiFullName:work@top.a[0][0].x[0].a
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_BitSelect: (a[0][0]), line:15:12, endln:15:13
@@ -517,6 +599,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.a[0][0].x[0].a[0]), line:15:15, endln:15:16
+            |vpiParent:
+            \_Constant: , line:15:15, endln:15:16
+            |vpiFullName:work@top.a[0][0].x[0].a[0]
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiActual:
       \_BitSelect: (a[0][0].x[0]), line:15:18, endln:15:22
@@ -533,6 +622,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.a[0][0].x[0].x), line:15:20, endln:15:21
+            |vpiParent:
+            \_Constant: , line:15:20, endln:15:21
+            |vpiFullName:work@top.a[0][0].x[0].x
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiName:a[0][0].x[0]
 |vpiTypespec:

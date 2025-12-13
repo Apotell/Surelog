@@ -63,14 +63,15 @@ Design                                                 1
 Function                                               1
 IODecl                                                 1
 Identifier                                             2
+IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         1
-RefTypespec                                            1
+RefTypespec                                            2
 ReturnStmt                                             1
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                12
+Total:                                                14
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitArg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -105,8 +106,14 @@ Design: (unnamed)
     \_LogicTypespec: , line:3:20, endln:3:25
       |vpiParent:
       \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12
     |vpiImportTypespec:
     \_LogicTypespec: , line:3:20, endln:3:25
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -133,6 +140,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@top.bsg_mul_booth), line:6:10, endln:6:11
+          |vpiParent:
+          \_Constant: , line:6:10, endln:6:11
+          |vpiFullName:work@top.bsg_mul_booth
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12

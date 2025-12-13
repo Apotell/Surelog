@@ -169,6 +169,7 @@ HierPath                                               2
 IODecl                                                 1
 Identifier                                             8
 Initial                                                1
+IntTypespec                                            3
 IntegerTypespec                                        2
 Interface                                              1
 InterfaceTypespec                                      1
@@ -180,12 +181,12 @@ ParamAssign                                            1
 Parameter                                              1
 RefModule                                              2
 RefObj                                                 5
-RefTypespec                                            2
+RefTypespec                                            5
 ReturnStmt                                             1
 SourceFile                                             1
 SysFuncCall                                            2
 ------------------------------------------------------------
-Total:                                                43
+Total:                                                49
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceFuncCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -224,6 +225,13 @@ Design: (unnamed)
       |vpiDecompile:7
       |vpiSize:64
       |UINT:7
+      |vpiTypespec:
+      \_RefTypespec: (work@Foo), line:2:28, endln:2:29
+        |vpiParent:
+        \_Constant: , line:2:28, endln:2:29
+        |vpiFullName:work@Foo
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
@@ -303,8 +311,14 @@ Design: (unnamed)
           |vpiFullName:work@Foo.bar.MULTIPLIER
           |vpiActual:
           \_Parameter: (work@Foo.MULTIPLIER), line:2:15, endln:2:29
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/InterfaceFuncCall/dut.sv, line:1:1, endln:7:13
   |vpiImportTypespec:
   \_Function: (work@Foo.bar), line:3:5, endln:6:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@Foo
   |vpiTaskFunc:
   \_Function: (work@Foo.bar), line:3:5, endln:6:16
@@ -338,6 +352,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:12:5, endln:15:8
       |vpiFullName:work@top
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@top), line:12:13, endln:15:8
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($display), line:13:9, endln:13:31
         |vpiParent:
@@ -364,6 +384,13 @@ Design: (unnamed)
               |vpiDecompile:3
               |vpiSize:64
               |UINT:3
+              |vpiTypespec:
+              \_RefTypespec: (work@top.foo_1.bar), line:13:28, endln:13:29
+                |vpiParent:
+                \_Constant: , line:13:28, endln:13:29
+                |vpiFullName:work@top.foo_1.bar
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiName:
             \_Identifier: (bar), line:13:24, endln:13:27
@@ -402,6 +429,13 @@ Design: (unnamed)
               |vpiDecompile:3
               |vpiSize:64
               |UINT:3
+              |vpiTypespec:
+              \_RefTypespec: (work@top.foo_2.bar), line:14:28, endln:14:29
+                |vpiParent:
+                \_Constant: , line:14:28, endln:14:29
+                |vpiFullName:work@top.foo_2.bar
+                |vpiActual:
+                \_IntTypespec: 
               |vpiConstType:9
             |vpiName:
             \_Identifier: (bar), line:14:24, endln:14:27

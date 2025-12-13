@@ -293,6 +293,7 @@ EnumConst                                              8
 EnumTypespec                                           2
 IODecl                                                 4
 Identifier                                            14
+IntTypespec                                            6
 Interface                                              2
 InterfaceTypespec                                      2
 LogicTypespec                                          4
@@ -306,17 +307,17 @@ Parameter                                              1
 Port                                                   4
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                           17
+RefTypespec                                           23
 SourceFile                                             1
 TypedefTypespec                                        3
 UnsupportedTypespec                                   11
 Variable                                               3
 ------------------------------------------------------------
-Total:                                               112
+Total:                                               124
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortTest/slpp_unit/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:93, type:RefTypespec, name:id_t1.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:87, type:RefTypespec, name:DD.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:14:3: Unsupported Typespec: id:105, type:RefTypespec, name:id_t1.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ModPortTest/top.v:51:1: Unsupported Typespec: id:99, type:RefTypespec, name:DD.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -389,9 +390,20 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@AXI_BUS), line:9:30, endln:9:31
+          |vpiParent:
+          \_Constant: , line:9:30, endln:9:31
+          |vpiFullName:work@AXI_BUS
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@AXI_BUS.AXI_ID_WIDTH), line:9:12, endln:9:31
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
   |vpiTypespec:
   \_TypedefTypespec: (id_t), line:12:38, endln:12:42
     |vpiParent:
@@ -438,6 +450,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@AXI_BUS), line:12:31, endln:12:32
+            |vpiParent:
+            \_Constant: , line:12:31, endln:12:32
+            |vpiFullName:work@AXI_BUS
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:12:33, endln:12:34
@@ -446,6 +465,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@AXI_BUS), line:12:33, endln:12:34
+          |vpiParent:
+          \_Constant: , line:12:33, endln:12:34
+          |vpiFullName:work@AXI_BUS
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_UnsupportedTypespec: (id_t1), line:14:3, endln:14:8
@@ -457,6 +483,8 @@ Design: (unnamed)
     |vpiParent:
     \_Interface: work@AXI_BUS (work@AXI_BUS), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:8:1, endln:26:13
     |vpiName:id_t1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (id_t), line:12:38, endln:12:42
   |vpiImportTypespec:
@@ -643,9 +671,16 @@ Design: (unnamed)
     \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
     |vpiName:work@dff0_test
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiTypespec:
   \_LogicTypespec: , line:4:3, endln:4:6
     |vpiParent:
     \_Module: work@dff0_test (work@dff0_test), file:${SURELOG_DIR}/tests/ModPortTest/top.v, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dff0_test.n1), line:1:18, endln:1:20
     |vpiParent:

@@ -255,7 +255,7 @@ Constant                                               3
 Design                                                 1
 HierPath                                               1
 Identifier                                             5
-IntTypespec                                            2
+IntTypespec                                            5
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         2
@@ -268,14 +268,14 @@ Port                                                   1
 Range                                                  1
 RefModule                                              4
 RefObj                                                 3
-RefTypespec                                            7
+RefTypespec                                           10
 SourceFile                                             1
 StructTypespec                                         1
 SysFuncCall                                            1
 TypedefTypespec                                        1
 TypespecMember                                         2
 ------------------------------------------------------------
-Total:                                                47
+Total:                                                53
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -356,6 +356,13 @@ Design: (unnamed)
         |vpiDecompile:7
         |vpiSize:64
         |UINT:7
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:3:11, endln:3:12
+          |vpiParent:
+          \_Constant: , line:3:11, endln:3:12
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:13, endln:3:14
@@ -364,7 +371,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (pkg), line:3:13, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:13, endln:3:14
+          |vpiFullName:pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
   |vpiTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
     |vpiParent:
@@ -375,6 +393,8 @@ Design: (unnamed)
   \_StructTypespec: , line:2:11, endln:5:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
   |vpiDefName:pkg
@@ -413,6 +433,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:8:36, endln:8:37
+        |vpiParent:
+        \_Constant: , line:8:36, endln:8:37
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@dut.Width), line:8:28, endln:8:37
@@ -421,8 +448,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:8:1, endln:9:10
   |vpiImportTypespec:
   \_IntTypespec: , line:8:24, endln:8:27
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@dut
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10

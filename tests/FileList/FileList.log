@@ -207,6 +207,7 @@ Always                                                 1
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              1
+BitTypespec                                            1
 Constant                                               8
 ContAssign                                             1
 Design                                                 1
@@ -216,6 +217,7 @@ Function                                               1
 IODecl                                                 1
 Identifier                                             6
 ImportTypespec                                         1
+IntTypespec                                            6
 IntegerTypespec                                        2
 LogicTypespec                                          1
 Module                                                 1
@@ -226,12 +228,13 @@ Package                                                1
 Port                                                   2
 Range                                                  1
 RefObj                                                 6
-RefTypespec                                            3
+RefTypespec                                           11
 ReturnStmt                                             1
 SourceFile                                             2
+StringTypespec                                         1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                55
+Total:                                                71
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileList/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -272,8 +275,14 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiSigned:1
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_Function: (prim_util_pkg::vbits), line:3:2, endln:5:14
     |vpiImportTypespec:
     \_IntegerTypespec: , line:3:21, endln:3:28
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -325,6 +334,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (prim_util_pkg::vbits), line:4:22, endln:4:23
+              |vpiParent:
+              \_Constant: , line:4:22, endln:4:23
+              |vpiFullName:prim_util_pkg::vbits
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:4:27, endln:4:28
@@ -333,6 +349,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (prim_util_pkg::vbits), line:4:27, endln:4:28
+            |vpiParent:
+            \_Constant: , line:4:27, endln:4:28
+            |vpiFullName:prim_util_pkg::vbits
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_SysFuncCall: ($clog2), line:4:31, endln:4:44
@@ -383,7 +406,22 @@ Design: (unnamed)
       |vpiDecompile:vbits
       |vpiSize:40
       |STRING:vbits
+      |vpiTypespec:
+      \_RefTypespec: (work@foo.prim_util_pkg), line:5:23, endln:5:28
+        |vpiParent:
+        \_Constant: , line:5:23, endln:5:28
+        |vpiFullName:work@foo.prim_util_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileList/dut.sv, line:1:1, endln:11:10
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileList/dut.sv, line:1:1, endln:11:10
   |vpiTypespec:
   \_LogicTypespec: , line:6:1, endln:6:6
     |vpiParent:
@@ -410,6 +448,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@foo), line:6:14, endln:6:15
+              |vpiParent:
+              \_Constant: , line:6:14, endln:6:15
+              |vpiFullName:work@foo
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiName:
           \_Identifier: (vbits), line:6:8, endln:6:13
@@ -423,6 +468,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@foo), line:6:17, endln:6:18
+            |vpiParent:
+            \_Constant: , line:6:17, endln:6:18
+            |vpiFullName:work@foo
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:6:19, endln:6:20
@@ -431,9 +483,20 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@foo), line:6:19, endln:6:20
+          |vpiParent:
+          \_Constant: , line:6:19, endln:6:20
+          |vpiFullName:work@foo
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiImportTypespec:
   \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@foo.clk), line:2:11, endln:2:14
     |vpiParent:
@@ -507,6 +570,12 @@ Design: (unnamed)
         |vpiParent:
         \_EventControl: , line:7:8, endln:7:22
         |vpiFullName:work@foo
+        |vpiTypespec:
+        \_BitTypespec: 
+          |vpiParent:
+          \_Begin: (work@foo), line:7:23, endln:9:4
+        |vpiImportTypespec:
+        \_BitTypespec: 
         |vpiStmt:
         \_Assignment: , line:8:5, endln:8:18
           |vpiParent:
@@ -532,6 +601,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@foo), line:8:14, endln:8:18
+                |vpiParent:
+                \_Constant: , line:8:14, endln:8:18
+                |vpiFullName:work@foo
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
           |vpiLhs:
           \_RefObj: (work@foo.a), line:8:5, endln:8:6
@@ -561,6 +637,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@foo.a), line:10:16, endln:10:17
+          |vpiParent:
+          \_Constant: , line:10:16, endln:10:17
+          |vpiFullName:work@foo.a
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiLhs:
     \_RefObj: (work@foo.out), line:10:8, endln:10:11

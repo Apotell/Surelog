@@ -1754,13 +1754,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
+BitTypespec                                            2
 Constant                                             295
 Design                                                 1
 EnumConst                                             23
 EnumTypespec                                           3
 Identifier                                             7
-IntTypespec                                            6
-LogicTypespec                                          6
+IntTypespec                                          262
+LogicTypespec                                         40
 Module                                                 1
 Operation                                            342
 Package                                                1
@@ -1770,18 +1771,18 @@ PreprocMacroDefinition                                 2
 PreprocMacroInstance                                  15
 Range                                                  8
 RefObj                                               204
-RefTypespec                                           28
+RefTypespec                                          313
 SourceFile                                             1
 TypedefTypespec                                        6
 UnsupportedTypespec                                    3
 ------------------------------------------------------------
-Total:                                               971
+Total:                                              1548
 === UHDM Object Stats End ===
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:221, name:NumLcStates".
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:226, name:NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:370, name:NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:379, name:NumLcStates".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiConcat/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Null Actual: id:221, type:RefObj, name:NumLcStates.
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Null Actual: id:226, type:RefObj, name:NumLcStates.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Null Actual: id:370, type:RefObj, name:NumLcStates.
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Null Actual: id:379, type:RefObj, name:NumLcStates.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -1832,6 +1833,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -1849,6 +1857,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -1864,6 +1874,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -1880,6 +1897,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -1901,6 +1920,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -1909,6 +1935,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -1934,9 +1967,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -1965,6 +2002,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -1973,6 +2017,13 @@ Design: (unnamed)
             |vpiDecompile:7
             |vpiSize:64
             |UINT:7
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -1981,6 +2032,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -1998,13 +2056,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -2052,6 +2116,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -2068,6 +2139,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -2089,6 +2162,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -2097,6 +2177,13 @@ Design: (unnamed)
           |vpiDecompile:6
           |vpiSize:64
           |UINT:6
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -2122,9 +2209,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -2153,6 +2244,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -2161,6 +2259,13 @@ Design: (unnamed)
             |vpiDecompile:6
             |vpiSize:64
             |UINT:6
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -2169,6 +2274,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -2186,13 +2298,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -2224,6 +2342,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -2241,6 +2366,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -2256,6 +2383,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -2272,6 +2406,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -2293,6 +2429,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -2301,6 +2444,13 @@ Design: (unnamed)
           |vpiDecompile:6
           |vpiSize:64
           |UINT:6
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -2326,9 +2476,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -2357,6 +2511,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -2365,6 +2526,13 @@ Design: (unnamed)
             |vpiDecompile:6
             |vpiSize:64
             |UINT:6
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -2373,6 +2541,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -2390,13 +2565,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -2444,6 +2625,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -2460,6 +2648,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -2481,6 +2671,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -2489,6 +2686,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -2514,9 +2718,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -2545,6 +2753,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -2553,6 +2768,13 @@ Design: (unnamed)
             |vpiDecompile:5
             |vpiSize:64
             |UINT:5
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -2561,6 +2783,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -2578,13 +2807,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -2616,6 +2851,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -2633,6 +2875,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -2648,6 +2892,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -2664,6 +2915,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -2685,6 +2938,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -2693,6 +2953,13 @@ Design: (unnamed)
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -2718,9 +2985,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -2749,6 +3020,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -2757,6 +3035,13 @@ Design: (unnamed)
             |vpiDecompile:5
             |vpiSize:64
             |UINT:5
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -2765,6 +3050,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -2782,13 +3074,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -2836,6 +3134,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -2852,6 +3157,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -2873,6 +3180,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -2881,6 +3195,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -2906,9 +3227,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -2937,6 +3262,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -2945,6 +3277,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -2953,6 +3292,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -2970,13 +3316,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -3008,6 +3360,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -3025,6 +3384,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -3040,6 +3401,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -3056,6 +3424,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -3077,6 +3447,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -3085,6 +3462,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -3110,9 +3494,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -3141,6 +3529,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -3149,6 +3544,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -3157,6 +3559,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -3174,13 +3583,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -3228,6 +3643,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -3244,6 +3666,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -3265,6 +3689,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -3273,6 +3704,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -3298,9 +3736,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -3329,6 +3771,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -3337,6 +3786,13 @@ Design: (unnamed)
             |vpiDecompile:3
             |vpiSize:64
             |UINT:3
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -3345,6 +3801,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -3362,13 +3825,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -3400,6 +3869,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -3417,6 +3893,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -3432,6 +3910,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -3448,6 +3933,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -3469,6 +3956,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -3477,6 +3971,13 @@ Design: (unnamed)
           |vpiDecompile:3
           |vpiSize:64
           |UINT:3
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -3502,9 +4003,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -3533,6 +4038,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -3541,6 +4053,13 @@ Design: (unnamed)
             |vpiDecompile:3
             |vpiSize:64
             |UINT:3
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -3549,6 +4068,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -3566,13 +4092,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -3620,6 +4152,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -3636,6 +4175,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -3657,6 +4198,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -3665,6 +4213,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -3690,9 +4245,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -3721,6 +4280,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -3729,6 +4295,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -3737,6 +4310,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -3754,13 +4334,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -3792,6 +4378,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -3809,6 +4402,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -3824,6 +4419,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -3840,6 +4442,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -3861,6 +4465,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -3869,6 +4480,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -3894,9 +4512,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -3925,6 +4547,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -3933,6 +4562,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -3941,6 +4577,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -3958,13 +4601,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -4012,6 +4661,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -4028,6 +4684,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -4049,6 +4707,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -4057,6 +4722,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -4082,9 +4754,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -4113,6 +4789,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -4121,6 +4804,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -4129,6 +4819,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -4146,13 +4843,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -4184,6 +4887,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -4201,6 +4911,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -4216,6 +4928,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -4232,6 +4951,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -4253,6 +4974,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -4261,6 +4989,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -4286,9 +5021,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -4317,6 +5056,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -4325,6 +5071,13 @@ Design: (unnamed)
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -4333,6 +5086,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -4350,13 +5110,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -4404,6 +5170,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
+          |vpiParent:
+          \_Constant: , line:124:8, endln:124:9
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:124:9, endln:124:27
@@ -4420,6 +5193,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:124:8, endln:124:9
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:124:8, endln:124:9
     |vpiObject:
     \_Operation: , line:124:9, endln:124:27
     |vpiObject:
@@ -4441,6 +5216,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+            |vpiParent:
+            \_Constant: , line:125:9, endln:125:10
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:125:11, endln:125:12
@@ -4449,6 +5231,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
+            |vpiParent:
+            \_Constant: , line:125:11, endln:125:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:125:13, endln:126:32
@@ -4474,9 +5263,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:125:9, endln:125:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:9, endln:125:10
+    |vpiObject:
     \_Operation: , line:125:9, endln:125:12
     |vpiObject:
     \_Constant: , line:125:11, endln:125:12
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:125:11, endln:125:12
     |vpiObject:
     \_Operation: , line:125:13, endln:126:32
     |vpiObject:
@@ -4505,6 +5298,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+              |vpiParent:
+              \_Constant: , line:127:9, endln:127:10
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:127:11, endln:127:12
@@ -4513,6 +5313,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+              |vpiParent:
+              \_Constant: , line:127:11, endln:127:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:127:13, endln:127:14
@@ -4521,6 +5328,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
+            |vpiParent:
+            \_Constant: , line:127:13, endln:127:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:127:15, endln:127:32
@@ -4538,13 +5352,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:127:9, endln:127:10
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:9, endln:127:10
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:12
     |vpiObject:
     \_Constant: , line:127:11, endln:127:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:11, endln:127:12
+    |vpiObject:
     \_Operation: , line:127:9, endln:127:14
     |vpiObject:
     \_Constant: , line:127:13, endln:127:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:127:13, endln:127:14
     |vpiObject:
     \_Operation: , line:127:15, endln:127:32
     |vpiObject:
@@ -4576,6 +5396,13 @@ Design: (unnamed)
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+          |vpiParent:
+          \_Constant: , line:107:10, endln:107:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:107:11, endln:107:25
@@ -4593,6 +5420,8 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:107:10, endln:107:11
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:107:10, endln:107:11
+    |vpiObject:
     \_Operation: , line:107:11, endln:107:25
     |vpiObject:
     \_RefObj: (lc_ctrl_pkg::ZeroTokenIdx), line:107:12, endln:107:24
@@ -4608,6 +5437,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
+          |vpiParent:
+          \_Constant: , line:108:10, endln:108:11
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:108:11, endln:108:29
@@ -4624,6 +5460,8 @@ Design: (unnamed)
           \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
     |vpiObject:
     \_Constant: , line:108:10, endln:108:11
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:108:10, endln:108:11
     |vpiObject:
     \_Operation: , line:108:11, endln:108:29
     |vpiObject:
@@ -4645,6 +5483,13 @@ Design: (unnamed)
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+            |vpiParent:
+            \_Constant: , line:109:11, endln:109:12
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:109:13, endln:109:14
@@ -4653,6 +5498,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
+            |vpiParent:
+            \_Constant: , line:109:13, endln:109:14
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:109:15, endln:110:31
@@ -4678,9 +5530,13 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:109:11, endln:109:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:11, endln:109:12
+    |vpiObject:
     \_Operation: , line:109:11, endln:109:14
     |vpiObject:
     \_Constant: , line:109:13, endln:109:14
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:109:13, endln:109:14
     |vpiObject:
     \_Operation: , line:109:15, endln:110:31
     |vpiObject:
@@ -4709,6 +5565,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+              |vpiParent:
+              \_Constant: , line:111:11, endln:111:12
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
           |vpiOperand:
           \_Constant: , line:111:13, endln:111:14
@@ -4717,6 +5580,13 @@ Design: (unnamed)
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
+            |vpiTypespec:
+            \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+              |vpiParent:
+              \_Constant: , line:111:13, endln:111:14
+              |vpiFullName:lc_ctrl_pkg
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiOperand:
         \_Constant: , line:111:15, endln:111:16
@@ -4725,6 +5595,13 @@ Design: (unnamed)
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
+            |vpiParent:
+            \_Constant: , line:111:15, endln:111:16
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiOperand:
       \_Operation: , line:111:17, endln:111:34
@@ -4742,13 +5619,19 @@ Design: (unnamed)
     |vpiObject:
     \_Constant: , line:111:11, endln:111:12
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:11, endln:111:12
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:14
     |vpiObject:
     \_Constant: , line:111:13, endln:111:14
     |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:13, endln:111:14
+    |vpiObject:
     \_Operation: , line:111:11, endln:111:16
     |vpiObject:
     \_Constant: , line:111:15, endln:111:16
+    |vpiObject:
+    \_RefTypespec: (lc_ctrl_pkg), line:111:15, endln:111:16
     |vpiObject:
     \_Operation: , line:111:17, endln:111:34
     |vpiObject:
@@ -4900,6 +5783,13 @@ Design: (unnamed)
       |vpiDecompile:6
       |vpiSize:64
       |UINT:6
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:8:29, endln:8:30
+        |vpiParent:
+        \_Constant: , line:8:29, endln:8:30
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::NumTokens), line:8:17, endln:8:30
@@ -4914,6 +5804,13 @@ Design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:9:33, endln:9:34
+        |vpiParent:
+        \_Constant: , line:9:33, endln:9:34
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::TokenIdxWidth), line:9:17, endln:9:34
@@ -4928,6 +5825,13 @@ Design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:27:27, endln:27:28
+        |vpiParent:
+        \_Constant: , line:27:27, endln:27:28
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::TxWidth), line:27:17, endln:27:28
@@ -4961,6 +5865,13 @@ Design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:36:32, endln:36:34
+        |vpiParent:
+        \_Constant: , line:36:32, endln:36:34
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::RmaSeedWidth), line:36:17, endln:36:34
@@ -4975,6 +5886,13 @@ Design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:38:61, endln:38:63
+        |vpiParent:
+        \_Constant: , line:38:61, endln:38:63
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::LC_FLASH_RMA_SEED_DEFAULT), line:38:33, endln:38:63
@@ -4989,6 +5907,13 @@ Design: (unnamed)
       |vpiDecompile:128
       |vpiSize:64
       |UINT:128
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:40:36, endln:40:39
+        |vpiParent:
+        \_Constant: , line:40:36, endln:40:39
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::LcKeymgrDivWidth), line:40:17, endln:40:39
@@ -5003,6 +5928,13 @@ Design: (unnamed)
       |vpiDecompile:16
       |vpiSize:64
       |UINT:16
+      |vpiTypespec:
+      \_RefTypespec: (lc_ctrl_pkg), line:76:34, endln:76:36
+        |vpiParent:
+        \_Constant: , line:76:34, endln:76:36
+        |vpiFullName:lc_ctrl_pkg
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (lc_ctrl_pkg::FsmStateWidth), line:76:18, endln:76:36
@@ -5027,6 +5959,13 @@ Design: (unnamed)
           |vpiDecompile:21
           |vpiSize:64
           |UINT:21
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:134:6, endln:134:8
+            |vpiParent:
+            \_Constant: , line:134:6, endln:134:8
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:134:8, endln:134:25
@@ -5061,6 +6000,13 @@ Design: (unnamed)
           |vpiDecompile:20
           |vpiSize:64
           |UINT:20
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:137:6, endln:137:8
+            |vpiParent:
+            \_Constant: , line:137:6, endln:137:8
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:137:8, endln:137:25
@@ -5095,6 +6041,13 @@ Design: (unnamed)
           |vpiDecompile:20
           |vpiSize:64
           |UINT:20
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:140:6, endln:140:8
+            |vpiParent:
+            \_Constant: , line:140:6, endln:140:8
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:140:8, endln:140:25
@@ -5137,6 +6090,13 @@ Design: (unnamed)
           |vpiDecompile:19
           |vpiSize:64
           |UINT:19
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:144:6, endln:144:8
+            |vpiParent:
+            \_Constant: , line:144:6, endln:144:8
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:144:8, endln:144:25
@@ -5179,6 +6139,13 @@ Design: (unnamed)
           |vpiDecompile:19
           |vpiSize:64
           |UINT:19
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:148:6, endln:148:8
+            |vpiParent:
+            \_Constant: , line:148:6, endln:148:8
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:148:8, endln:148:25
@@ -5347,6 +6314,13 @@ Design: (unnamed)
           |vpiDecompile:4
           |vpiSize:64
           |UINT:4
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:167:6, endln:167:7
+            |vpiParent:
+            \_Constant: , line:167:6, endln:167:7
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:167:7, endln:167:24
@@ -5373,6 +6347,13 @@ Design: (unnamed)
           |vpiDecompile:8
           |vpiSize:64
           |UINT:8
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:168:6, endln:168:7
+            |vpiParent:
+            \_Constant: , line:168:6, endln:168:7
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiOperand:
         \_Operation: , line:168:7, endln:169:24
@@ -5402,6 +6383,10 @@ Design: (unnamed)
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
   |vpiTypespec:
   \_EnumTypespec: , line:10:11, endln:21:16
     |vpiParent:
@@ -5489,6 +6474,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:10:37, endln:10:38
+            |vpiParent:
+            \_Constant: , line:10:37, endln:10:38
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:10:39, endln:10:40
@@ -5497,6 +6489,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:10:39, endln:10:40
+          |vpiParent:
+          \_Constant: , line:10:39, endln:10:40
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
@@ -5569,6 +6568,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:29:31, endln:29:32
+            |vpiParent:
+            \_Constant: , line:29:31, endln:29:32
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:29:33, endln:29:34
@@ -5577,7 +6583,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:29:33, endln:29:34
+          |vpiParent:
+          \_Constant: , line:29:33, endln:29:34
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:32:5, endln:32:12
     |vpiParent:
@@ -5638,6 +6655,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:37:31, endln:37:32
+            |vpiParent:
+            \_Constant: , line:37:31, endln:37:32
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:37:33, endln:37:34
@@ -5646,6 +6670,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:37:33, endln:37:34
+          |vpiParent:
+          \_Constant: , line:37:33, endln:37:34
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
@@ -5663,6 +6694,10 @@ Design: (unnamed)
       |vpiFullName:lc_ctrl_pkg::lc_flash_rma_seed_t
       |vpiActual:
       \_LogicTypespec: , line:37:11, endln:37:16
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
   |vpiTypespec:
   \_LogicTypespec: , line:41:11, endln:41:16
     |vpiParent:
@@ -5691,6 +6726,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:41:35, endln:41:36
+            |vpiParent:
+            \_Constant: , line:41:35, endln:41:36
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:41:37, endln:41:38
@@ -5699,6 +6741,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:41:37, endln:41:38
+          |vpiParent:
+          \_Constant: , line:41:37, endln:41:38
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_keymgr_div_t), line:41:40, endln:41:55
@@ -5875,6 +6924,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:77:37, endln:77:38
+            |vpiParent:
+            \_Constant: , line:77:37, endln:77:38
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:77:39, endln:77:40
@@ -5883,6 +6939,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:77:39, endln:77:40
+          |vpiParent:
+          \_Constant: , line:77:39, endln:77:40
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::fsm_state_e), line:93:5, endln:93:16
@@ -5926,6 +6989,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:132:38, endln:132:39
+            |vpiParent:
+            \_Constant: , line:132:38, endln:132:39
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:132:40, endln:132:41
@@ -5934,6 +7004,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:132:40, endln:132:41
+          |vpiParent:
+          \_Constant: , line:132:40, endln:132:41
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiRange:
     \_Range: , line:132:42, endln:132:59
@@ -5957,6 +7034,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (lc_ctrl_pkg), line:132:55, endln:132:56
+            |vpiParent:
+            \_Constant: , line:132:55, endln:132:56
+            |vpiFullName:lc_ctrl_pkg
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:132:57, endln:132:58
@@ -5965,6 +7049,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:132:57, endln:132:58
+          |vpiParent:
+          \_Constant: , line:132:57, endln:132:58
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:132:13, endln:132:24
@@ -5978,6 +7069,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:8:13, endln:8:16
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_EnumTypespec: , line:10:11, endln:21:16
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:16, endln:10:21
@@ -5988,6 +7081,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:29:16, endln:29:21
   |vpiImportTypespec:
+  \_LogicTypespec: 
+  |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:32:5, endln:32:12
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:31, endln:33:38
@@ -5995,6 +7090,8 @@ Design: (unnamed)
   \_LogicTypespec: , line:37:11, endln:37:16
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:41:11, endln:41:16
   |vpiImportTypespec:

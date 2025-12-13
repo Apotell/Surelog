@@ -175,6 +175,7 @@ Constant                                               4
 Design                                                 1
 EventControl                                           1
 Identifier                                             3
+IntTypespec                                            4
 LogicTypespec                                          5
 Module                                                 1
 ModuleTypespec                                         1
@@ -184,7 +185,7 @@ Package                                                1
 Port                                                   3
 Range                                                  2
 RefObj                                                 4
-RefTypespec                                           11
+RefTypespec                                           15
 SourceFile                                             1
 StructTypespec                                         1
 TypeParameter                                          1
@@ -192,7 +193,7 @@ TypedefTypespec                                        1
 TypespecMember                                         5
 UnsupportedTypespec                                    4
 ------------------------------------------------------------
-Total:                                                57
+Total:                                                65
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -309,6 +310,13 @@ Design: (unnamed)
         |vpiDecompile:128
         |vpiSize:64
         |UINT:128
+        |vpiTypespec:
+        \_RefTypespec: (new_package), line:3:12, endln:3:15
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:15
+          |vpiFullName:new_package
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:16, endln:3:17
@@ -317,7 +325,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (new_package), line:3:16, endln:3:17
+          |vpiParent:
+          \_Constant: , line:3:16, endln:3:17
+          |vpiFullName:new_package
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: new_package (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
   |vpiTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
     |vpiParent:
@@ -333,6 +352,13 @@ Design: (unnamed)
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
+        |vpiTypespec:
+        \_RefTypespec: (new_package), line:4:12, endln:4:13
+          |vpiParent:
+          \_Constant: , line:4:12, endln:4:13
+          |vpiFullName:new_package
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:4:14, endln:4:15
@@ -341,6 +367,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (new_package), line:4:14, endln:4:15
+          |vpiParent:
+          \_Constant: , line:4:14, endln:4:15
+          |vpiFullName:new_package
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_LogicTypespec: , line:5:5, endln:5:10
@@ -352,6 +385,8 @@ Design: (unnamed)
   \_StructTypespec: , line:2:9, endln:8:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
   |vpiImportTypespec:

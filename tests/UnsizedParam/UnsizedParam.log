@@ -148,11 +148,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedParam/dut.sv:8:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               4
 ContAssign                                             1
 Design                                                 1
 Identifier                                             3
-IntTypespec                                            1
+IntTypespec                                            4
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -162,12 +163,12 @@ Parameter                                              2
 Range                                                  1
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                            3
+RefTypespec                                            7
 SourceFile                                             1
 TypedefTypespec                                        1
 UnsupportedTypespec                                    1
 ------------------------------------------------------------
-Total:                                                33
+Total:                                                41
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -228,6 +229,13 @@ Design: (unnamed)
       |vpiDecompile:20
       |vpiSize:64
       |UINT:20
+      |vpiTypespec:
+      \_RefTypespec: (work@submodule), line:2:22, endln:2:24
+        |vpiParent:
+        \_Constant: , line:2:22, endln:2:24
+        |vpiFullName:work@submodule
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@submodule.X), line:2:18, endln:2:24
@@ -242,6 +250,13 @@ Design: (unnamed)
       |vpiDecompile:'1
       |vpiSize:-1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@submodule), line:4:28, endln:4:30
+        |vpiParent:
+        \_Constant: , line:4:28, endln:4:30
+        |vpiFullName:work@submodule
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@submodule.Y), line:4:24, endln:4:30
@@ -250,6 +265,10 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
   |vpiTypespec:
   \_LogicTypespec: , line:3:12, endln:3:17
     |vpiParent:
@@ -278,6 +297,13 @@ Design: (unnamed)
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
+          |vpiTypespec:
+          \_RefTypespec: (work@submodule), line:3:21, endln:3:22
+            |vpiParent:
+            \_Constant: , line:3:21, endln:3:22
+            |vpiFullName:work@submodule
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:23, endln:3:24
@@ -286,6 +312,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@submodule), line:3:23, endln:3:24
+          |vpiParent:
+          \_Constant: , line:3:23, endln:3:24
+          |vpiFullName:work@submodule
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
   |vpiTypespec:
   \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
@@ -303,12 +336,20 @@ Design: (unnamed)
       |vpiFullName:work@submodule.my_type_t
       |vpiActual:
       \_LogicTypespec: , line:3:12, endln:3:17
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
   |vpiImportTypespec:
   \_IntTypespec: , line:2:14, endln:2:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:12, endln:3:17
   |vpiImportTypespec:
   \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@submodule.a), line:5:11, endln:5:12
     |vpiParent:

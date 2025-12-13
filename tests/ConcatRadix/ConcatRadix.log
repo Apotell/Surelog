@@ -86,10 +86,13 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          1
 Begin                                                  1
+BitTypespec                                            1
 Constant                                               5
 Design                                                 1
 GenIf                                                  1
 Identifier                                             1
+IntTypespec                                            3
+LogicTypespec                                          1
 Module                                                 1
 ModuleTypespec                                         2
 Operation                                              2
@@ -98,13 +101,13 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            1
+RefTypespec                                            6
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                22
+Total:                                                32
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
-[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Null Actual: id:22, type:RefModule, name:mybar.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Null Actual: id:32, type:RefModule, name:mybar.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -152,6 +155,13 @@ Design: (unnamed)
         |vpiDecompile:1'd0
         |vpiSize:1
         |DEC:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:3:24, endln:3:28
+          |vpiParent:
+          \_Constant: , line:3:24, endln:3:28
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:1
       |vpiOperand:
       \_Constant: , line:3:30, endln:3:34
@@ -160,6 +170,13 @@ Design: (unnamed)
         |vpiDecompile:1'b1
         |vpiSize:1
         |BIN:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:3:30, endln:3:34
+          |vpiParent:
+          \_Constant: , line:3:30, endln:3:34
+          |vpiFullName:work@test
+          |vpiActual:
+          \_BitTypespec: 
         |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@test.foo), line:3:17, endln:3:35
@@ -182,6 +199,10 @@ Design: (unnamed)
       |vpiName:mybar
       |vpiDefName:work@bar
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+  |vpiTypespec:
   \_ArrayTypespec: , line:3:11, endln:3:16
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
@@ -196,6 +217,13 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:3:12, endln:3:13
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:13
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:14, endln:3:15
@@ -204,10 +232,38 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:3:14, endln:3:15
+          |vpiParent:
+          \_Constant: , line:3:14, endln:3:15
+          |vpiFullName:work@test
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiPacked:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+    |vpiSigned:1
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_ArrayTypespec: , line:3:11, endln:3:16
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiDefName:work@test
   |vpiGenStmt:
   \_GenIf: , line:5:1, endln:7:4
@@ -233,6 +289,13 @@ Design: (unnamed)
         |vpiDecompile:2'b01
         |vpiSize:2
         |BIN:01
+        |vpiTypespec:
+        \_RefTypespec: (work@test), line:5:12, endln:5:17
+          |vpiParent:
+          \_Constant: , line:5:12, endln:5:17
+          |vpiFullName:work@test
+          |vpiActual:
+          \_LogicTypespec: 
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@test), line:5:19, endln:7:4

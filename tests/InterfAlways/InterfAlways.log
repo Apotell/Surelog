@@ -94,7 +94,7 @@ Begin                                                  1
 Constant                                               1
 Design                                                 1
 Identifier                                             3
-IntTypespec                                            4
+IntTypespec                                            5
 Interface                                              1
 InterfaceTypespec                                      1
 Module                                                 1
@@ -103,11 +103,11 @@ Net                                                    1
 Port                                                   3
 RefModule                                              1
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                            5
 SourceFile                                             1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                31
+Total:                                                33
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfAlways/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -170,6 +170,12 @@ Design: (unnamed)
       |vpiParent:
       \_Always: , line:2:4, endln:4:7
       |vpiFullName:work@sw_test_status_if
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@sw_test_status_if), line:2:11, endln:4:7
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiStmt:
       \_Assignment: , line:3:7, endln:3:13
         |vpiParent:
@@ -183,6 +189,13 @@ Design: (unnamed)
           |vpiDecompile:10
           |vpiSize:64
           |UINT:10
+          |vpiTypespec:
+          \_RefTypespec: (work@sw_test_status_if), line:3:11, endln:3:13
+            |vpiParent:
+            \_Constant: , line:3:11, endln:3:13
+            |vpiFullName:work@sw_test_status_if
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@sw_test_status_if.x), line:3:7, endln:3:8

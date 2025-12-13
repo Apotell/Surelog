@@ -631,6 +631,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                            11
 Begin                                                  5
+BitTypespec                                            2
 ClassDefn                                              1
 ClassTypespec                                          1
 Constant                                              20
@@ -641,9 +642,10 @@ Identifier                                            13
 IfElse                                                 3
 IfStmt                                                 1
 Initial                                                1
+IntTypespec                                           11
 Interface                                              1
 InterfaceTypespec                                      1
-LogicTypespec                                          8
+LogicTypespec                                         11
 Modport                                                2
 Module                                                 3
 ModuleTypespec                                         3
@@ -652,13 +654,14 @@ Operation                                             16
 Port                                                   5
 Range                                                  2
 RefObj                                                35
-RefTypespec                                           14
+RefTypespec                                           34
 SourceFile                                             1
+StringTypespec                                         4
 SysFuncCall                                            5
 UnsupportedTypespec                                    6
 Variable                                               1
 ------------------------------------------------------------
-Total:                                               176
+Total:                                               216
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitTest/slpp_unit/surelog.uhdm ...
 [ERR:IG0811] ${SURELOG_DIR}/tests/UnitTest/top.v:59:1: Unsupported Typespec: id:28, type:RefTypespec, name:DD1.
@@ -948,6 +951,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (work@tb_operators), line:5:7, endln:5:9
+          |vpiParent:
+          \_Constant: , line:5:7, endln:5:9
+          |vpiFullName:work@tb_operators
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:5:10, endln:5:11
@@ -956,9 +966,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@tb_operators), line:5:10, endln:5:11
+          |vpiParent:
+          \_Constant: , line:5:10, endln:5:11
+          |vpiFullName:work@tb_operators
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:1, endln:5:5
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_Net: (work@tb_operators.shifter), line:5:13, endln:5:20
     |vpiParent:
@@ -1001,6 +1024,24 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:8:1, endln:36:4
       |vpiFullName:work@tb_operators
+      |vpiTypespec:
+      \_LogicTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_operators), line:8:9, endln:36:4
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_operators), line:8:9, endln:36:4
+      |vpiTypespec:
+      \_BitTypespec: 
+        |vpiParent:
+        \_Begin: (work@tb_operators), line:8:9, endln:36:4
+      |vpiImportTypespec:
+      \_LogicTypespec: 
+      |vpiImportTypespec:
+      \_IntTypespec: 
+      |vpiImportTypespec:
+      \_BitTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($monitor), line:10:5, endln:10:29
         |vpiParent:
@@ -1039,6 +1080,13 @@ Design: (unnamed)
           |vpiDecompile:32'b1
           |vpiSize:32
           |BIN:1
+          |vpiTypespec:
+          \_RefTypespec: (work@tb_operators), line:11:15, endln:11:20
+            |vpiParent:
+            \_Constant: , line:11:15, endln:11:20
+            |vpiFullName:work@tb_operators
+            |vpiActual:
+            \_LogicTypespec: 
           |vpiConstType:3
         |vpiLhs:
         \_RefObj: (work@tb_operators.shifter), line:11:5, endln:11:12
@@ -1074,6 +1122,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:13:25, endln:13:26
+              |vpiParent:
+              \_Constant: , line:13:25, endln:13:26
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:13:5, endln:13:11
@@ -1109,6 +1164,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:14:25, endln:14:26
+              |vpiParent:
+              \_Constant: , line:14:25, endln:14:26
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:14:5, endln:14:11
@@ -1144,6 +1206,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:15:25, endln:15:26
+              |vpiParent:
+              \_Constant: , line:15:25, endln:15:26
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:15:5, endln:15:11
@@ -1176,6 +1245,13 @@ Design: (unnamed)
               |vpiDecompile:1'b1
               |vpiSize:1
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@tb_operators), line:16:15, endln:16:19
+                |vpiParent:
+                \_Constant: , line:16:15, endln:16:19
+                |vpiFullName:work@tb_operators
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiOperand:
             \_Constant: , line:16:20, endln:16:25
@@ -1184,6 +1260,13 @@ Design: (unnamed)
               |vpiDecompile:31'b0
               |vpiSize:31
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (work@tb_operators), line:16:20, endln:16:25
+                |vpiParent:
+                \_Constant: , line:16:20, endln:16:25
+                |vpiFullName:work@tb_operators
+                |vpiActual:
+                \_LogicTypespec: 
               |vpiConstType:3
           |vpiOperand:
           \_Constant: , line:16:31, endln:16:33
@@ -1192,6 +1275,13 @@ Design: (unnamed)
             |vpiDecompile:31
             |vpiSize:64
             |UINT:31
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:16:31, endln:16:33
+              |vpiParent:
+              \_Constant: , line:16:31, endln:16:33
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:16:5, endln:16:11
@@ -1224,6 +1314,13 @@ Design: (unnamed)
               |vpiDecompile:1'b0
               |vpiSize:1
               |BIN:0
+              |vpiTypespec:
+              \_RefTypespec: (work@tb_operators), line:17:15, endln:17:19
+                |vpiParent:
+                \_Constant: , line:17:15, endln:17:19
+                |vpiFullName:work@tb_operators
+                |vpiActual:
+                \_BitTypespec: 
               |vpiConstType:3
             |vpiOperand:
             \_Constant: , line:17:20, endln:17:25
@@ -1232,6 +1329,13 @@ Design: (unnamed)
               |vpiDecompile:31'b1
               |vpiSize:31
               |BIN:1
+              |vpiTypespec:
+              \_RefTypespec: (work@tb_operators), line:17:20, endln:17:25
+                |vpiParent:
+                \_Constant: , line:17:20, endln:17:25
+                |vpiFullName:work@tb_operators
+                |vpiActual:
+                \_LogicTypespec: 
               |vpiConstType:3
           |vpiOperand:
           \_Constant: , line:17:31, endln:17:33
@@ -1240,6 +1344,13 @@ Design: (unnamed)
             |vpiDecompile:31
             |vpiSize:64
             |UINT:31
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:17:31, endln:17:33
+              |vpiParent:
+              \_Constant: , line:17:31, endln:17:33
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:17:5, endln:17:11
@@ -1275,6 +1386,13 @@ Design: (unnamed)
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:19:25, endln:19:26
+              |vpiParent:
+              \_Constant: , line:19:25, endln:19:26
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:19:5, endln:19:11
@@ -1310,6 +1428,13 @@ Design: (unnamed)
             |vpiDecompile:4
             |vpiSize:64
             |UINT:4
+            |vpiTypespec:
+            \_RefTypespec: (work@tb_operators), line:20:23, endln:20:24
+              |vpiParent:
+              \_Constant: , line:20:23, endln:20:24
+              |vpiFullName:work@tb_operators
+              |vpiActual:
+              \_IntTypespec: 
             |vpiConstType:9
         |vpiLhs:
         \_RefObj: (work@tb_operators.result), line:20:5, endln:20:11
@@ -1349,6 +1474,12 @@ Design: (unnamed)
           |vpiParent:
           \_IfElse: , line:22:5, endln:30:8
           |vpiFullName:work@tb_operators
+          |vpiTypespec:
+          \_StringTypespec: 
+            |vpiParent:
+            \_Begin: (work@tb_operators), line:22:27, endln:24:8
+          |vpiImportTypespec:
+          \_StringTypespec: 
           |vpiStmt:
           \_SysFuncCall: ($display), line:23:9, endln:23:31
             |vpiParent:
@@ -1360,6 +1491,13 @@ Design: (unnamed)
               |vpiDecompile:"GTE TEST 1"
               |vpiSize:80
               |STRING:GTE TEST 1
+              |vpiTypespec:
+              \_RefTypespec: (work@tb_operators), line:23:18, endln:23:30
+                |vpiParent:
+                \_Constant: , line:23:18, endln:23:30
+                |vpiFullName:work@tb_operators
+                |vpiActual:
+                \_StringTypespec: 
               |vpiConstType:6
             |vpiName:
             \_Identifier: ($display), line:23:10, endln:23:17
@@ -1396,6 +1534,12 @@ Design: (unnamed)
             |vpiParent:
             \_IfElse: , line:24:14, endln:30:8
             |vpiFullName:work@tb_operators
+            |vpiTypespec:
+            \_StringTypespec: 
+              |vpiParent:
+              \_Begin: (work@tb_operators), line:24:36, endln:26:8
+            |vpiImportTypespec:
+            \_StringTypespec: 
             |vpiStmt:
             \_SysFuncCall: ($display), line:25:9, endln:25:31
               |vpiParent:
@@ -1407,6 +1551,13 @@ Design: (unnamed)
                 |vpiDecompile:"GTE TEST 2"
                 |vpiSize:80
                 |STRING:GTE TEST 2
+                |vpiTypespec:
+                \_RefTypespec: (work@tb_operators), line:25:18, endln:25:30
+                  |vpiParent:
+                  \_Constant: , line:25:18, endln:25:30
+                  |vpiFullName:work@tb_operators
+                  |vpiActual:
+                  \_StringTypespec: 
                 |vpiConstType:6
               |vpiName:
               \_Identifier: ($display), line:25:10, endln:25:17
@@ -1443,6 +1594,12 @@ Design: (unnamed)
               |vpiParent:
               \_IfElse: , line:26:14, endln:30:8
               |vpiFullName:work@tb_operators
+              |vpiTypespec:
+              \_StringTypespec: 
+                |vpiParent:
+                \_Begin: (work@tb_operators), line:26:37, endln:28:8
+              |vpiImportTypespec:
+              \_StringTypespec: 
               |vpiStmt:
               \_SysFuncCall: ($display), line:27:9, endln:27:31
                 |vpiParent:
@@ -1454,6 +1611,13 @@ Design: (unnamed)
                   |vpiDecompile:"GTE TEST 3"
                   |vpiSize:80
                   |STRING:GTE TEST 3
+                  |vpiTypespec:
+                  \_RefTypespec: (work@tb_operators), line:27:18, endln:27:30
+                    |vpiParent:
+                    \_Constant: , line:27:18, endln:27:30
+                    |vpiFullName:work@tb_operators
+                    |vpiActual:
+                    \_StringTypespec: 
                   |vpiConstType:6
                 |vpiName:
                 \_Identifier: ($display), line:27:10, endln:27:17
@@ -1490,6 +1654,12 @@ Design: (unnamed)
                 |vpiParent:
                 \_IfStmt: , line:28:14, endln:30:8
                 |vpiFullName:work@tb_operators
+                |vpiTypespec:
+                \_StringTypespec: 
+                  |vpiParent:
+                  \_Begin: (work@tb_operators), line:28:37, endln:30:8
+                |vpiImportTypespec:
+                \_StringTypespec: 
                 |vpiStmt:
                 \_SysFuncCall: ($display), line:29:9, endln:29:31
                   |vpiParent:
@@ -1501,6 +1671,13 @@ Design: (unnamed)
                     |vpiDecompile:"GTE TEST 3"
                     |vpiSize:80
                     |STRING:GTE TEST 3
+                    |vpiTypespec:
+                    \_RefTypespec: (work@tb_operators), line:29:18, endln:29:30
+                      |vpiParent:
+                      \_Constant: , line:29:18, endln:29:30
+                      |vpiFullName:work@tb_operators
+                      |vpiActual:
+                      \_StringTypespec: 
                     |vpiConstType:6
                   |vpiName:
                   \_Identifier: ($display), line:29:10, endln:29:17

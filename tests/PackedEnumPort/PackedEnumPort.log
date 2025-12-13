@@ -157,8 +157,8 @@ Design                                                 1
 EnumConst                                              1
 EnumTypespec                                           1
 Identifier                                             5
-IntTypespec                                            4
-LogicTypespec                                          3
+IntTypespec                                            9
+LogicTypespec                                          5
 Module                                                 3
 ModuleTypespec                                         2
 Net                                                    2
@@ -166,13 +166,13 @@ Package                                                1
 Port                                                   4
 Range                                                  2
 RefModule                                              1
-RefTypespec                                           11
+RefTypespec                                           18
 SourceFile                                             1
 TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                56
+Total:                                                70
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -227,6 +227,13 @@ Design: (unnamed)
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:3:24, endln:3:25
+          |vpiParent:
+          \_Constant: , line:3:24, endln:3:25
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:26, endln:3:27
@@ -235,7 +242,22 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (lc_ctrl_pkg), line:3:26, endln:3:27
+          |vpiParent:
+          \_Constant: , line:3:26, endln:3:27
+          |vpiFullName:lc_ctrl_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:2:1, endln:8:25
+  |vpiTypespec:
+  \_LogicTypespec: 
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:2:1, endln:8:25
   |vpiTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:6, endln:5:13
     |vpiParent:
@@ -273,6 +295,10 @@ Design: (unnamed)
   \_EnumTypespec: , line:3:12, endln:5:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:17, endln:3:22
+  |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
+  \_LogicTypespec: 
   |vpiImportTypespec:
   \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:6, endln:5:13
   |vpiImportTypespec:
@@ -372,6 +398,10 @@ Design: (unnamed)
     |vpiModule:
     \_Module: work@lc_ctrl_fsm (work@lc_ctrl_fsm), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:11:1, endln:16:24
   |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:24:1, endln:37:16
+  |vpiTypespec:
   \_IntTypespec: , line:24:19, endln:24:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:24:1, endln:37:16
@@ -391,6 +421,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:25:25, endln:25:26
+          |vpiParent:
+          \_Constant: , line:25:25, endln:25:26
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:25:27, endln:25:28
@@ -399,6 +436,13 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (work@top), line:25:27, endln:25:28
+          |vpiParent:
+          \_Constant: , line:25:27, endln:25:28
+          |vpiFullName:work@top
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top.lc_ctrl_pkg::lc_tx_t), line:7:20, endln:7:27
@@ -409,6 +453,8 @@ Design: (unnamed)
       |vpiActual:
       \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:20, endln:7:27
     |vpiPacked:1
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiImportTypespec:
   \_IntTypespec: , line:24:19, endln:24:22
   |vpiImportTypespec:
@@ -487,6 +533,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (work@top.u_lc_ctrl_fsm.lc_clk_byp_ack), line:35:41, endln:35:42
+            |vpiParent:
+            \_Constant: , line:35:41, endln:35:42
+            |vpiFullName:work@top.u_lc_ctrl_fsm.lc_clk_byp_ack
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
   |vpiEndLabel:top
 |vpiTypespec:

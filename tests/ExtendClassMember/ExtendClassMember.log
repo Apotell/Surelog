@@ -138,20 +138,21 @@ Extends                                                2
 Function                                               1
 HierPath                                               1
 Identifier                                             5
+IntTypespec                                            2
 Package                                                1
 RefObj                                                 2
-RefTypespec                                            7
+RefTypespec                                            9
 SourceFile                                             1
 TypeParameter                                          3
 UnsupportedTypespec                                    3
 Variable                                               2
 ------------------------------------------------------------
-Total:                                                39
+Total:                                                43
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExtendClassMember/slpp_all/surelog.uhdm ...
-[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:9:48: Unsupported Typespec: id:23, type:RefTypespec, name:uvm_sequence_item.
-[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:12:45: Unsupported Typespec: id:28, type:RefTypespec, name:uvm_sequence_item.
-[ERR:IG0810] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Null Typespec: id:33, type:RefTypespec, name:uvm_sequencer_base.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:9:48: Unsupported Typespec: id:25, type:RefTypespec, name:uvm_sequence_item.
+[ERR:IG0811] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:12:45: Unsupported Typespec: id:30, type:RefTypespec, name:uvm_sequence_item.
+[ERR:IG0810] ${SURELOG_DIR}/tests/ExtendClassMember/dut.sv:13:58: Null Typespec: id:35, type:RefTypespec, name:uvm_sequencer_base.
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
@@ -203,11 +204,24 @@ Design: (unnamed)
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
+        |vpiTypespec:
+        \_RefTypespec: (pkg::uvm_tlm_fifo::print_enabled), line:5:22, endln:5:23
+          |vpiParent:
+          \_Constant: , line:5:22, endln:5:23
+          |vpiFullName:pkg::uvm_tlm_fifo::print_enabled
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+    |vpiTypespec:
+    \_IntTypespec: 
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_tlm_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:3:1, endln:7:9
     |vpiTypespec:
     \_BitTypespec: , line:5:2, endln:5:5
       |vpiParent:
       \_ClassDefn: (pkg::uvm_tlm_fifo), file:${SURELOG_DIR}/tests/ExtendClassMember/dut.sv, line:3:1, endln:7:9
+    |vpiImportTypespec:
+    \_IntTypespec: 
     |vpiImportTypespec:
     \_BitTypespec: , line:5:2, endln:5:5
     |vpiImportTypespec:
@@ -326,6 +340,12 @@ Design: (unnamed)
         \_Function: (pkg::uvm_sequencer_param_base::new), line:19:1, endln:21:42
         |vpiName:new
       |vpiFullName:pkg::uvm_sequencer_param_base::new
+      |vpiTypespec:
+      \_IntTypespec: 
+        |vpiParent:
+        \_Function: (pkg::uvm_sequencer_param_base::new), line:19:1, endln:21:42
+      |vpiImportTypespec:
+      \_IntTypespec: 
       |vpiMethod:1
       |vpiStmt:
       \_Assignment: , line:21:3, endln:21:42
@@ -340,6 +360,13 @@ Design: (unnamed)
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
+          |vpiTypespec:
+          \_RefTypespec: (pkg::uvm_sequencer_param_base::new), line:21:41, endln:21:42
+            |vpiParent:
+            \_Constant: , line:21:41, endln:21:42
+            |vpiFullName:pkg::uvm_sequencer_param_base::new
+            |vpiActual:
+            \_IntTypespec: 
           |vpiConstType:9
         |vpiLhs:
         \_HierPath: (sqr_rsp_analysis_fifo.print_enabled), line:21:24, endln:21:38

@@ -52,10 +52,12 @@ Module                                                 1
 ModuleTypespec                                         1
 PreprocMacroDefinition                                 2
 PreprocMacroInstance                                   2
+RefTypespec                                            1
 SourceFile                                             1
+StringTypespec                                         1
 SysFuncCall                                            1
 ------------------------------------------------------------
-Total:                                                14
+Total:                                                16
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -118,7 +120,16 @@ Design: (unnamed)
       |vpiDecompile:"test/rom.mem`message"
       |vpiSize:160
       |STRING:test/rom.mem`message
+      |vpiTypespec:
+      \_RefTypespec: (work@test), line:5:33, endln:5:60
+        |vpiParent:
+        \_Constant: , line:5:33, endln:5:60
+        |vpiFullName:work@test
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:6
+    |vpiObject:
+    \_RefTypespec: (work@test), line:5:33, endln:5:60
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
   |vpiParent:
@@ -138,6 +149,12 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:6:1, endln:8:8
       |vpiFullName:work@test
+      |vpiTypespec:
+      \_StringTypespec: 
+        |vpiParent:
+        \_Begin: (work@test), line:6:9, endln:8:8
+      |vpiImportTypespec:
+      \_StringTypespec: 
       |vpiStmt:
       \_SysFuncCall: ($display), line:7:5, endln:7:38
         |vpiParent:

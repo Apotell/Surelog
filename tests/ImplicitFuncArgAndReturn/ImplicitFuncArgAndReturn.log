@@ -129,12 +129,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
+BitTypespec                                            1
 Constant                                               2
 Design                                                 1
 Function                                               1
 IODecl                                                 1
 Identifier                                             3
-IntTypespec                                            1
+IntTypespec                                            2
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         2
@@ -142,10 +143,10 @@ ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            4
 SourceFile                                             1
 ------------------------------------------------------------
-Total:                                                25
+Total:                                                29
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -184,6 +185,13 @@ Design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
+      |vpiTypespec:
+      \_RefTypespec: (work@ScratchPad), line:12:27, endln:12:31
+        |vpiParent:
+        \_Constant: , line:12:27, endln:12:31
+        |vpiFullName:work@ScratchPad
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_Parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:31
@@ -240,6 +248,10 @@ Design: (unnamed)
         |vpiActual:
         \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
   |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
+  |vpiTypespec:
   \_ModuleTypespec: (work@sub)
     |vpiParent:
     \_Design: (unnamed)
@@ -248,6 +260,8 @@ Design: (unnamed)
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
   |vpiImportTypespec:
   \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiDefName:work@ScratchPad
   |vpiTaskFunc:
   \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
@@ -293,6 +307,13 @@ Design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
+      |vpiTypespec:
+      \_RefTypespec: (work@sub), line:4:29, endln:4:30
+        |vpiParent:
+        \_Constant: , line:4:29, endln:4:30
+        |vpiFullName:work@sub
+        |vpiActual:
+        \_IntTypespec: 
       |vpiConstType:9
     |vpiLhs:
     \_Parameter: (work@sub.M_SECURE), line:4:18, endln:4:30
@@ -301,8 +322,14 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
     |vpiSigned:1
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Module: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
   |vpiImportTypespec:
   \_IntTypespec: , line:4:14, endln:4:17
+  |vpiImportTypespec:
+  \_IntTypespec: 
   |vpiDefName:work@sub
 |vpiTypespec:
 \_ModuleTypespec: (work@ScratchPad)

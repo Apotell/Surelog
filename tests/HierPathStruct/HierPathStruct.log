@@ -113,12 +113,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathStruct/dut.sv:13:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+BitTypespec                                            1
 Constant                                               4
 ContAssign                                             1
 Design                                                 1
 HierPath                                               1
 Identifier                                             5
 ImportTypespec                                         1
+IntTypespec                                            2
 LogicTypespec                                          2
 Module                                                 1
 ModuleTypespec                                         1
@@ -126,14 +128,15 @@ Net                                                    1
 Package                                                1
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            6
+RefTypespec                                           10
 SourceFile                                             1
+StringTypespec                                         1
 StructTypespec                                         2
 TypedefTypespec                                        2
 TypespecMember                                         3
 UnsupportedTypespec                                    2
 ------------------------------------------------------------
-Total:                                                39
+Total:                                                47
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -214,6 +217,13 @@ Design: (unnamed)
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
+        |vpiTypespec:
+        \_RefTypespec: (gpio_reg_pkg), line:3:12, endln:3:14
+          |vpiParent:
+          \_Constant: , line:3:12, endln:3:14
+          |vpiFullName:gpio_reg_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
       |vpiRightRange:
       \_Constant: , line:3:15, endln:3:16
@@ -222,7 +232,18 @@ Design: (unnamed)
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
+        |vpiTypespec:
+        \_RefTypespec: (gpio_reg_pkg), line:3:15, endln:3:16
+          |vpiParent:
+          \_Constant: , line:3:15, endln:3:16
+          |vpiFullName:gpio_reg_pkg
+          |vpiActual:
+          \_IntTypespec: 
         |vpiConstType:9
+  |vpiTypespec:
+  \_IntTypespec: 
+    |vpiParent:
+    \_Package: gpio_reg_pkg (gpio_reg_pkg), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
   |vpiTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
     |vpiParent:
@@ -268,6 +289,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
+  \_IntTypespec: 
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
   |vpiImportTypespec:
   \_TypedefTypespec: (gpio_reg_pkg::gpio_hw2reg_t), line:9:5, endln:9:18
@@ -299,9 +322,28 @@ Design: (unnamed)
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
+      |vpiTypespec:
+      \_RefTypespec: (work@dut.gpio_reg_pkg), line:15:8, endln:15:23
+        |vpiParent:
+        \_Constant: , line:15:8, endln:15:23
+        |vpiFullName:work@dut.gpio_reg_pkg
+        |vpiActual:
+        \_StringTypespec: 
       |vpiConstType:8
+  |vpiTypespec:
+  \_StringTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
+  |vpiTypespec:
+  \_BitTypespec: 
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
   |vpiImportTypespec:
   \_ImportTypespec: (gpio_reg_pkg), line:15:8, endln:15:23
+  |vpiImportTypespec:
+  \_StringTypespec: 
+  |vpiImportTypespec:
+  \_BitTypespec: 
   |vpiImportTypespec:
   \_Net: (work@dut.hw2reg), line:16:15, endln:16:21
     |vpiParent:
@@ -330,6 +372,13 @@ Design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
+      |vpiTypespec:
+      \_RefTypespec: (work@dut), line:17:28, endln:17:32
+        |vpiParent:
+        \_Constant: , line:17:28, endln:17:32
+        |vpiFullName:work@dut
+        |vpiActual:
+        \_BitTypespec: 
       |vpiConstType:3
     |vpiLhs:
     \_HierPath: (hw2reg.data_in.de), line:17:14, endln:17:25

@@ -1148,9 +1148,12 @@ void IntegrityChecker::visitClockingIODecl(const uhdm::ClockingIODecl* object) {
 void IntegrityChecker::visitConstant(const uhdm::Constant* object) {
   bool report = true;
   if (const uhdm::RefTypespec* const rt = object->getTypespec()) {
-    if (const uhdm::Typespec* const t = rt->getActual()) {
+    if (rt->getActual() != nullptr) {
       report = false;
     }
+  }
+  if (report) {
+    reportMissingConstantTypespec(object);
   }
 }
 void IntegrityChecker::visitConstrForeach(const uhdm::ConstrForeach* object) {}

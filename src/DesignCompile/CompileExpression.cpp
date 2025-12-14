@@ -850,8 +850,6 @@ uhdm::Any *CompileHelper::decodeHierPath(
     uhdm::HierPath *path, bool &invalidValue, DesignComponent *component,
     const FileContent *fC, NodeId nodeId, ValuedComponentI *instance,
     uhdm::Any *pexpr, bool muteErrors, bool returnTypespec) {
-  const PathId fileId = fC->getFileId();
-
   uhdm::GetObjectFunctor getObjectFunctor =
       [&](std::string_view name, const uhdm::Any *inst,
           const uhdm::Any *pexpr) -> uhdm::Any * {

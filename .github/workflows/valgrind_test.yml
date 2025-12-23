@@ -1,7 +1,11 @@
 name: Valgrind
 
+concurrency:
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
-  - workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   valgrind:

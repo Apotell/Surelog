@@ -18,13 +18,39 @@ jobs:
               sudo apt-get update
               sudo apt-get install -y valgrind
           
-          - name: Build project
+          - name: Build on Linux
+            if: runner.os == 'Linux'
+            shell: bash
+            env:
+             CC: gcc-11
+             CXX: g++-11
             run: |
-              cd $GITHUB_WORKSPACE
-              mkdir -p build
-              cd build
-              cmake ..
-              make
+              env
+              which cmake && cmake --version
+              which java && java -version
+              which python && python --version
+              which ninja && ninja --version
+              which $CC && $CC --version
+              which $CXX && $CXX --version
+
+              if [[ "${{ matrix.config.build-type }}" == "debug" ]]; then
+                cmake -G Ninja                        \
+              -DCMAKE_BUILD_TYPE=Debug            \
+              -DPython3_ROOT_DIR=$pythonLocation  \
+              -DWITH_STATIC_CRT=0                 \
+              -DCMAKE_INSTALL_PREFIX=out/install  \
+              -S . -B out/build
+              else
+                cmake -G Ninja                        \
+              -DCMAKE_BUILD_TYPE=RelWithDebInfo   \
+              -DPython3_ROOT_DIR=$pythonLocation  \
+              -DWITH_STATIC_CRT=0                 \
+              -DCMAKE_INSTALL_PREFIX=out/install  \
+              -S . -B out/build
+              fi
+
+              cmake --build out/build -j `nproc`
+              cmake --install out/build
           
           - name: Run Valgrind tests
             run: |

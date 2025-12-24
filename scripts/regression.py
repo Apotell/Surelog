@@ -336,7 +336,15 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   tool_args_list = []
   if tool == 'valgrind':
     tool_log_filepath = os.path.join(output_dirpath, 'valgrind.log')
-    tool_args_list = ['valgrind', '--tool=memcheck', f'--log-file={tool_log_filepath}']
+    tool_args_list = [
+      'valgrind',
+      '--tool=memcheck',
+      '--leak-check=full',
+      '--track-origins=yes',
+      '--show-leak-kinds=all',
+      '--show-mismatched-frees',
+      f'--log-file={tool_log_filepath}'
+    ]
   elif tool == 'ddd':
     tool_args_list = ['ddd']
 

@@ -7,12 +7,16 @@ concurrency:
 on:
   workflow_dispatch:
 
-jobs:
-  valgrind:
-    runs-on: ubuntu-latest
+env:
+  python3_version: '3.x'
+  build-type: debug
+  artifact-tag: ubuntu-gcc
+  artifact-name: Surelog_ubuntu-gcc_debug_${{ github.run_number }}
+  regression-artifact-name: Surelog_regression_ubuntu-gcc_debug_${{ github.run_number }}
 
-    env:
-      regression-artifact-name: Surelog_regression_ubuntu-gcc_debug_${{ github.run_number }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Install Core Dependencies
@@ -30,11 +34,11 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ env.PYTHON3_VERSION }}
+        python-version: ${{ env.python3_version }}
         architecture: 'x64'
 
     - name: Setup Python Packages
-      run: pip3 install orderedmultidict psutil build
+      run: pip3 install orderedmultidict
 
     - name: Git Pull
       uses: actions/checkout@v4
@@ -59,14 +63,89 @@ jobs:
           -DCMAKE_BUILD_TYPE=Debug            \
           -DPython3_ROOT_DIR=$pythonLocation  \
           -DWITH_STATIC_CRT=0                 \
-          -DCMAKE_INSTALL_PREFIX=install      \
-          -S . -B build
+          -DCMAKE_INSTALL_PREFIX=out/install  \
+          -S . -B out/build
 
-        cmake --build build -j `nproc`
-        cmake --install build
+        cmake --build out/build -j `nproc`
+        cmake --install out/build
           
+    - name: Prepare artifacts
+      if: always()
+      run: |
+        cp deploy/CMakeLists.txt out/install/.
+        cd out
+
+        mv install/lib install/${{ env.artifact-tag }}_${{ env.build-type }}
+        mkdir install/lib
+        mv install/${{ env.artifact-tag }}_${{ env.build-type }} install/lib/.
+
+        mv install/bin install/${{ env.artifact-tag }}_${{ env.build-type }}
+        mkdir install/bin
+        mv install/${{ env.artifact-tag }}_${{ env.build-type }} install/bin/.
+
+        mv install ${{ env.artifact-name }}
+        tar czfp ${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
+
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.artifact-name }}
+        path: build/${{ env.artifact-name }}.tar.gz
+
+  regression:
+    name: "Regression | ubuntu-gcc | ${{ matrix.shard }}"
+    runs-on: ubuntu-latest
+    needs: build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        num_shards: [6]
+        shard: [0, 1, 2, 3, 4, 5]
+
+    steps:
+    - name: Install Core Dependencies
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y valgrind
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.python3_version }}
+        architecture: 'x64'
+
+    - name: Setup Python Packages
+      run: pip3 install orderedmultidict psutil build
+
+    - name: Git Pull
+      uses: actions/checkout@v4
+
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ env.artifact-name }}
+
+    - name: Extract artifact
+      shell: bash
+      run: |
+        # This has to be a separate step and run under bash since tar on Windows
+        # still doesn't support symlink and the root repository folder is a symlink.
+        tar xzfp ${{ env.artifact-name }}.tar.gz
+        mv ${{ env.artifact-name }} build
+        rm ${{ env.artifact-name }}.tar.gz
+
     - name: Run valgrind regression tests
-      run: python3 scripts/regression.py run --tool valgrind --filters ArianeElab
+      run: |
+        python3 scripts/regression.py run                                         \
+          --build-dirpath build/bin/${{ env.artifact-tag }}_${{ env.build-type }} \
+          --surelog-filepath surelog                                              \
+          --output-dirpath ../../regression                                       \
+          --tool valgrind                                                         \
+          --jobs $(nproc)                                                         \
+          --num_shards=${{ matrix.num_shards }}                                   \
+          --shard=${{ matrix.shard }}
 
     - name: Prepare regression artifacts
       if: always()
@@ -83,29 +162,3 @@ jobs:
       with:
         name: ${{ env.regression-artifact-name }}
         path: build/${{ env.regression-artifact-name }}.tar.gz
-
-
-
-#         cd $GITHUB_WORKSPACE/tests
-#         for test in $(find . -type f -executable -name "*test*"); do
-#           valgrind --leak-check=full \
-#             --show-leak-kinds=all \
-#             --track-origins=yes \
-#             --verbose \
-#             --log-file=valgrind_report_$(basename $test).txt \
-#             ./$test
-#         done
-          
-#     - name: Upload Valgrind reports
-#       if: always()
-#       uses: actions/upload-artifact@v4
-#       with:
-#         name: valgrind-reports
-#         path: tests/valgrind_report_*.txt
-#           
-#     - name: Check for memory leaks
-#       run: |
-#         if grep -l "ERROR SUMMARY: [1-9]" tests/valgrind_report_*.txt 2>/dev/null; then
-#           echo "Memory leaks detected!"
-#           exit 1
-#         fi

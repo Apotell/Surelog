@@ -342,7 +342,7 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
       '--leak-check=full',
       '--track-origins=yes',
       '--show-leak-kinds=all',
-      '--show-mismatched-frees',
+      '--show-mismatched-frees=yes',
       f'--log-file={tool_log_filepath}'
     ]
   elif tool == 'ddd':

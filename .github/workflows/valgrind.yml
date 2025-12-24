@@ -12,7 +12,6 @@ env:
   build-type: debug
   artifact-tag: ubuntu-gcc
   artifact-name: Surelog_ubuntu-gcc_debug_${{ github.run_number }}
-  regression-artifact-name: Surelog_regression_ubuntu-gcc_debug_${{ github.run_number }}
 
 jobs:
   build:
@@ -102,6 +101,9 @@ jobs:
     name: "Regression | ubuntu-gcc | ${{ matrix.shard }}"
     runs-on: ubuntu-latest
     needs: build
+
+    env:
+      regression-artifact-name: Surelog_regression_ubuntu-gcc_debug_${{ github.run_number }}_${{ matrix.shard }}
 
     strategy:
       fail-fast: false

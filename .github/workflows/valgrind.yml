@@ -1,4 +1,4 @@
-name: Valgrind
+name: valgrind
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
@@ -61,11 +61,11 @@ jobs:
           -DCMAKE_BUILD_TYPE=Debug            \
           -DPython3_ROOT_DIR=$pythonLocation  \
           -DWITH_STATIC_CRT=0                 \
-          -DCMAKE_INSTALL_PREFIX=out/install  \
-          -S . -B out/build
+          -DCMAKE_INSTALL_PREFIX=install      \
+          -S . -B build
 
-        cmake --build out/build -j `nproc`
-        cmake --install out/build
+        cmake --build build -j `nproc`
+        cmake --install build
           
     - name: Run valgrind regression tests
       run: python3 scripts/regression.py run --tool valgrind --filters ArianeElab

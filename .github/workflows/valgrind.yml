@@ -45,6 +45,11 @@ jobs:
       with:
         submodules: recursive
 
+    - name: Use ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: ${{ github.repository }}-${{ github.workflow }}
+
     - name: Build on Linux
       shell: bash
       env:
@@ -91,7 +96,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.artifact-name }}
-        path: build/${{ env.artifact-name }}.tar.gz
+        path: out/${{ env.artifact-name }}.tar.gz
 
   regression:
     name: "Regression | ubuntu-gcc | ${{ matrix.shard }}"

@@ -48,13 +48,15 @@ jobs:
       uses: hendrikmuhs/ccache-action@v1.2
       with:
         key: ${{ github.repository }}-${{ github.workflow }}
-        create-symlink: true
+
+    - shell: bash
+      run: |
+        echo 'CC=gcc-11' >> $GITHUB_ENV
+        echo 'CXX=g++-11' >> $GITHUB_ENV
+        echo 'PATH=/usr/lib/ccache:'"$PATH" >> $GITHUB_ENV
 
     - name: Build on Linux
       shell: bash
-      env:
-        CC: gcc-11
-        CXX: g++-11
       run: |
         env
         which cmake && cmake --version

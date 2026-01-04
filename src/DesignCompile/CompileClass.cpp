@@ -70,8 +70,7 @@
 
 namespace SURELOG {
 int32_t FunctorCompileClass::operator()() const {
-  CompileClass* instance =
-      new CompileClass(m_session, m_compileDesign, m_class, m_design);
+  CompileClass* instance = new CompileClass(m_session, m_compileDesign, m_class, m_design);
   instance->compile();
   delete instance;
   return true;
@@ -115,8 +114,7 @@ bool CompileClass::compile() {
   CommandLineParser* const clp = m_session->getCommandLineParser();
 
   if (ErrorContainer* errors = new ErrorContainer(m_session)) {
-    Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
-                 symbols->registerSymbol(fullName));
+    Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId), symbols->registerSymbol(fullName));
     Error err1(ErrorDefinition::COMP_COMPILE_CLASS, loc);
     errors->printMessage(err1, clp->muteStdout());
     delete errors;
@@ -127,13 +125,12 @@ bool CompileClass::compile() {
 
   do {
     classId = fC->Parent(classId);
-  } while (classId && !((fC->Type(classId) == VObjectType::paDescription) ||
-                        (fC->Type(classId) == VObjectType::paClass_item)));
+  } while (classId &&
+           !((fC->Type(classId) == VObjectType::paDescription) || (fC->Type(classId) == VObjectType::paClass_item)));
   if (classId) {
     classId = fC->Child(classId);
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
-      if (uhdm::AttributeCollection* attributes =
-              m_helper.compileAttributes(m_class, fC, classId, defn)) {
+      if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_class, fC, classId, defn)) {
         m_class->setAttributes(attributes);
       }
     }
@@ -150,8 +147,7 @@ bool CompileClass::compile() {
   if (container) {
     // FileCNodeId itself(container->getFileContents ()[0],
     // container->getNodeIds ()[0]); pack_imports.emplace_back(itself);
-    for (auto& import :
-         container->getObjects(VObjectType::paPackage_import_item)) {
+    for (auto& import : container->getObjects(VObjectType::paPackage_import_item)) {
       pack_imports.emplace_back(import);
     }
   }
@@ -165,11 +161,9 @@ bool CompileClass::compile() {
   compile_class_parameters_(fC, nodeId);
 
   // This
-  DataType* thisdt =
-      new DataType(fC, nodeId, "this", VObjectType::paClass_declaration);
+  DataType* thisdt = new DataType(fC, nodeId, "this", VObjectType::paClass_declaration);
   thisdt->setDefinition(m_class);
-  Property* prop = new Property(thisdt, fC, nodeId, InvalidNodeId, "this",
-                                false, false, false, false, false);
+  Property* prop = new Property(thisdt, fC, nodeId, InvalidNodeId, "this", false, false, false, false, false);
   m_class->insertProperty(prop);
 
   if (!nodeId) return false;
@@ -214,9 +208,7 @@ bool CompileClass::compile() {
         if (inFunction_body_declaration || inTask_body_declaration) break;
         compile_class_property_(fC, id);
         break;
-      case VObjectType::paClass_constraint:
-        compile_class_constraint_(fC, id);
-        break;
+      case VObjectType::paClass_constraint: compile_class_constraint_(fC, id); break;
       case VObjectType::paClass_declaration:
         if (id != nodeId) {
           compile_class_declaration_(fC, id);
@@ -226,22 +218,14 @@ bool CompileClass::compile() {
           continue;
         }
         break;
-      case VObjectType::paCovergroup_declaration:
-        compile_covergroup_declaration_(fC, id);
-        break;
-      case VObjectType::paLocal_parameter_declaration:
-        compile_local_parameter_declaration_(fC, id);
-        break;
-      case VObjectType::paParameter_declaration:
-        compile_parameter_declaration_(fC, id);
-        break;
+      case VObjectType::paCovergroup_declaration: compile_covergroup_declaration_(fC, id); break;
+      case VObjectType::paLocal_parameter_declaration: compile_local_parameter_declaration_(fC, id); break;
+      case VObjectType::paParameter_declaration: compile_parameter_declaration_(fC, id); break;
       case VObjectType::paClass_method:
         compile_class_method_(fC, id);
         skipGuts = true;
         break;
-      case VObjectType::paClass_type:
-        compile_class_type_(fC, id);
-        break;
+      case VObjectType::paClass_type: compile_class_type_(fC, id); break;
       case VObjectType::paLet_declaration: {
         m_helper.compileLetDeclaration(m_class, fC, id);
         break;
@@ -252,22 +236,17 @@ bool CompileClass::compile() {
 
         const std::string_view endLabel = fC->SymName(id);
         m_class->setEndLabel(endLabel);
-        std::string_view moduleName =
-            StringUtils::ltrim_until(m_class->getName(), '@');
+        std::string_view moduleName = StringUtils::ltrim_until(m_class->getName(), '@');
         if (endLabel != moduleName) {
-          Location loc(fC->getFileId(m_class->getNodeIds()[0]),
-                       fC->Line(m_class->getNodeIds()[0]),
-                       fC->Column(m_class->getNodeIds()[0]),
-                       symbols->registerSymbol(moduleName));
-          Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                        symbols->registerSymbol(endLabel));
+          Location loc(fC->getFileId(m_class->getNodeIds()[0]), fC->Line(m_class->getNodeIds()[0]),
+                       fC->Column(m_class->getNodeIds()[0]), symbols->registerSymbol(moduleName));
+          Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id), symbols->registerSymbol(endLabel));
           Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
           m_session->getErrorContainer()->addError(err);
         }
         break;
       }
-      default:
-        break;
+      default: break;
     }
 
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
@@ -279,8 +258,7 @@ bool CompileClass::compile() {
   // Default constructor
   DataType* returnType = new DataType();
   FunctionMethod* method =
-      new FunctionMethod(m_class, fC, nodeId, "new", returnType, false, false,
-                         false, false, false, false);
+      new FunctionMethod(m_class, fC, nodeId, "new", returnType, false, false, false, false, false, false);
   method->compile(m_helper);
   Function* prevDef = m_class->getFunction("new");
   if (!prevDef) {
@@ -298,8 +276,7 @@ bool CompileClass::compile_properties() {
     const FileContent* fC = sig->getFileContent();
     NodeId id = sig->getNodeId();
     // Assignment to a default value
-    uhdm::Expr* exp =
-        m_helper.exprFromAssign(m_class, fC, id, sig->getUnpackedDimension());
+    uhdm::Expr* exp = m_helper.exprFromAssign(m_class, fC, id, sig->getUnpackedDimension());
     if (uhdm::Any* obj = m_helper.compileSignals(m_class, sig)) {
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
       obj->setParent(defn);
@@ -319,8 +296,7 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   NodeId data_declaration = fC->Child(id);
-  m_helper.compileDataDeclaration(m_class, fC, data_declaration, false,
-                                  m_attributes);
+  m_helper.compileDataDeclaration(m_class, fC, data_declaration, false, m_attributes);
 
   NodeId var_decl = fC->Child(data_declaration);
   VObjectType type = fC->Type(data_declaration);
@@ -329,13 +305,11 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
   bool is_protected = false;
   bool is_rand = false;
   bool is_randc = false;
-  while ((type == VObjectType::paPropQualifier_ClassItem) ||
-         (type == VObjectType::paPropQualifier_Rand) ||
+  while ((type == VObjectType::paPropQualifier_ClassItem) || (type == VObjectType::paPropQualifier_Rand) ||
          (type == VObjectType::paPropQualifier_Randc)) {
     NodeId qualifier = fC->Child(data_declaration);
     VObjectType qualType = fC->Type(qualifier);
-    if (qualType == VObjectType::paClassItemQualifier_Protected)
-      is_protected = true;
+    if (qualType == VObjectType::paClassItemQualifier_Protected) is_protected = true;
     if (qualType == VObjectType::paClassItemQualifier_Static) is_static = true;
     if (qualType == VObjectType::paClassItemQualifier_Local) is_local = true;
     if (type == VObjectType::paPropQualifier_Rand) is_rand = true;
@@ -379,15 +353,13 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
       }
       DataType* datatype = m_class->getUsedDataType(typeName);
       if (!datatype) {
-        DataType* type =
-            new DataType(fC, node_type, typeName, fC->Type(node_type));
+        DataType* type = new DataType(fC, node_type, typeName, fC->Type(node_type));
         m_class->insertUsedDataType(typeName, type);
         datatype = m_class->getUsedDataType(typeName);
       }
 
       NodeId list_of_variable_decl_assignments = fC->Sibling(data_type);
-      NodeId variable_decl_assignment =
-          fC->Child(list_of_variable_decl_assignments);
+      NodeId variable_decl_assignment = fC->Child(list_of_variable_decl_assignments);
       while (variable_decl_assignment) {
         NodeId var = fC->Child(variable_decl_assignment);
         NodeId range = fC->Sibling(var);
@@ -395,21 +367,17 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
 
         Property* previous = m_class->getProperty(varName);
         if (previous) {
-          Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                        symbols->registerSymbol(varName));
+          Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var), symbols->registerSymbol(varName));
           const FileContent* prevFile = previous->getFileContent();
           NodeId prevNode = previous->getNodeId();
-          Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                        prevFile->Column(prevNode),
+          Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
                         symbols->registerSymbol(varName));
-          Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PROPERTY, loc1,
-                    loc2);
+          Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PROPERTY, loc1, loc2);
           errors->addError(err);
         }
 
         Property* prop =
-            new Property(datatype, fC, var, range, varName, is_local, is_static,
-                         is_protected, is_rand, is_randc);
+            new Property(datatype, fC, var, range, varName, is_local, is_static, is_protected, is_rand, is_randc);
         m_class->insertProperty(prop);
 
         variable_decl_assignment = fC->Sibling(variable_decl_assignment);
@@ -453,8 +421,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
   DataType* returnType = new DataType();
   while ((func_type == VObjectType::paMethodQualifier_Virtual) ||
          (func_type == VObjectType::paMethodQualifier_ClassItem) ||
-         (func_type == VObjectType::paPure_virtual_qualifier) ||
-         (func_type == VObjectType::paExtern_qualifier) ||
+         (func_type == VObjectType::paPure_virtual_qualifier) || (func_type == VObjectType::paExtern_qualifier) ||
          (func_type == VObjectType::paClassItemQualifier_Protected)) {
     if (func_type == VObjectType::paMethodQualifier_Virtual) {
       is_virtual = true;
@@ -482,8 +449,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       VObjectType type = fC->Type(qualifier);
       if (type == VObjectType::paClassItemQualifier_Static) is_static = true;
       if (type == VObjectType::paClassItemQualifier_Local) is_local = true;
-      if (type == VObjectType::paClassItemQualifier_Protected)
-        is_protected = true;
+      if (type == VObjectType::paClassItemQualifier_Protected) is_protected = true;
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
     }
@@ -510,8 +476,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     if (function_name) {
       funcName = fC->SymName(function_name);
       if (m_builtins.find(funcName) != m_builtins.end()) {
-        Location loc(fC->getFileId(), fC->Line(function_name),
-                     fC->Column(function_name),
+        Location loc(fC->getFileId(), fC->Line(function_name), fC->Column(function_name),
                      symbols->registerSymbol(funcName));
         Error err(ErrorDefinition::COMP_CANNOT_REDEFINE_BUILTIN_METHOD, loc);
         errors->addError(err);
@@ -530,8 +495,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
      n<> u<148> t<Class_method> p<149> c<147> l<37>
      */
 
-    NodeId task_decl =
-        m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
+    NodeId task_decl = m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
     NodeId Task_body_declaration;
     if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
       Task_body_declaration = task_decl;
@@ -542,9 +506,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       taskName = fC->SymName(task_name);
     else if (fC->Type(task_name) == VObjectType::paClass_scope) {
       NodeId Class_type = fC->Child(task_name);
-      taskName.assign(fC->SymName(fC->Child(Class_type)))
-          .append("::")
-          .append(fC->SymName(fC->Sibling(task_name)));
+      taskName.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(fC->Sibling(task_name)));
     }
 
     m_helper.compileTask(m_class, fC, id, nullptr, true);
@@ -563,8 +525,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     NodeId func_prototype = fC->Child(func_decl);
     uhdm::Serializer& s = m_compileDesign->getSerializer();
     if (fC->Type(func_prototype) == VObjectType::paTask_prototype) {
-      NodeId task_decl =
-          m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
+      NodeId task_decl = m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
       NodeId Task_body_declaration;
       if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
         Task_body_declaration = task_decl;
@@ -575,16 +536,13 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
         taskName = fC->SymName(task_name);
       else if (fC->Type(task_name) == VObjectType::paClass_scope) {
         NodeId Class_type = fC->Child(task_name);
-        taskName.assign(fC->SymName(fC->Child(Class_type)))
-            .append("::")
-            .append(fC->SymName(fC->Sibling(task_name)));
+        taskName.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(fC->Sibling(task_name)));
       }
 
       m_helper.compileTask(m_class, fC, id, nullptr, true);
       m_helper.compileTask(m_class, fC, id, nullptr, true);
 
-      std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
-          m_class->getTaskFuncDecls();
+      std::vector<uhdm::TaskFuncDecl*>* task_func_decls = m_class->getTaskFuncDecls();
       if (task_func_decls == nullptr) {
         m_class->setTaskFuncDecls(s.makeCollection<uhdm::TaskFuncDecl>());
         task_func_decls = m_class->getTaskFuncDecls();
@@ -631,8 +589,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       m_helper.compileFunction(m_class, fC, id, nullptr, true);
       m_helper.compileFunction(m_class, fC, id, nullptr, true);
 
-      std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
-          m_class->getTaskFuncDecls();
+      std::vector<uhdm::TaskFuncDecl*>* task_func_decls = m_class->getTaskFuncDecls();
       if (task_func_decls == nullptr) {
         m_class->setTaskFuncDecls(s.makeCollection<uhdm::TaskFuncDecl>());
         task_func_decls = m_class->getTaskFuncDecls();
@@ -682,34 +639,28 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     method->compile(m_helper);
     TaskMethod* prevDef = m_class->getTask(taskName);
     if (prevDef) {
-      Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                    symbols->registerSymbol(taskName));
+      Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id), symbols->registerSymbol(taskName));
       const FileContent* prevFile = prevDef->getFileContent();
       NodeId prevNode = prevDef->getNodeId();
-      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
+      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
                     symbols->registerSymbol(taskName));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_TASK, loc1, loc2);
       errors->addError(err);
     }
     m_class->insertTask(method);
   } else {
-    FunctionMethod* method = new FunctionMethod(
-        m_class, fC, id, funcName, returnType, is_virtual, is_extern, is_static,
-        is_local, is_protected, is_pure);
-    Variable* variable =
-        new Variable(returnType, fC, id, InvalidNodeId, funcName);
+    FunctionMethod* method = new FunctionMethod(m_class, fC, id, funcName, returnType, is_virtual, is_extern, is_static,
+                                                is_local, is_protected, is_pure);
+    Variable* variable = new Variable(returnType, fC, id, InvalidNodeId, funcName);
     method->addVariable(variable);
     method->compile(m_helper);
     Function* prevDef = m_class->getFunction(funcName);
     if (prevDef) {
       SymbolId funcSymbol = symbols->registerSymbol(funcName);
-      Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                    funcSymbol);
+      Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id), funcSymbol);
       const FileContent* prevFile = prevDef->getFileContent();
       NodeId prevNode = prevDef->getNodeId();
-      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode), funcSymbol);
+      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode), funcSymbol);
       if (funcSymbol) {
         Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_FUNCTION, loc1, loc2);
         errors->addError(err);
@@ -720,8 +671,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
   return true;
 }
 
-bool CompileClass::compile_class_constraint_(const FileContent* fC,
-                                             NodeId class_constraint) {
+bool CompileClass::compile_class_constraint_(const FileContent* fC, NodeId class_constraint) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -730,13 +680,11 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   const std::string_view constName = fC->SymName(constraint_name);
   Constraint* prevDef = m_class->getConstraint(constName);
   if (prevDef) {
-    Location loc1(fC->getFileId(class_constraint), fC->Line(class_constraint),
-                  fC->Column(class_constraint),
+    Location loc1(fC->getFileId(class_constraint), fC->Line(class_constraint), fC->Column(class_constraint),
                   symbols->registerSymbol(constName));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode = prevDef->getNodeId();
-    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                  prevFile->Column(prevNode),
+    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
                   symbols->registerSymbol(constName));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_CONSTRAINT, loc1, loc2);
     errors->addError(err);
@@ -749,8 +697,7 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_class_declaration_(const FileContent* fC,
-                                              NodeId id) {
+bool CompileClass::compile_class_declaration_(const FileContent* fC, NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -758,26 +705,20 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   const bool virtualClass = fC->sl_collect(id, VObjectType::VIRTUAL);
   const NodeId class_name_id = fC->sl_collect(id, VObjectType::STRING_CONST);
   const std::string_view class_name = fC->SymName(class_name_id);
-  std::string full_class_name =
-      StrCat(m_class->getUhdmModel<uhdm::ClassDefn>()->getFullName(),
-             "::", class_name);
+  std::string full_class_name = StrCat(m_class->getUhdmModel<uhdm::ClassDefn>()->getFullName(), "::", class_name);
   ClassDefinition* prevDef = m_class->getClass(class_name);
   if (prevDef) {
-    Location loc1(fC->getFileId(class_name_id), fC->Line(class_name_id),
-                  fC->Column(class_name_id),
+    Location loc1(fC->getFileId(class_name_id), fC->Line(class_name_id), fC->Column(class_name_id),
                   symbols->registerSymbol(class_name));
     const FileContent* prevFile = prevDef->getFileContent();
-    NodeId prevNode =
-        prevFile->sl_collect(prevDef->getNodeId(), VObjectType::STRING_CONST);
-    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                  prevFile->Column(prevNode),
+    NodeId prevNode = prevFile->sl_collect(prevDef->getNodeId(), VObjectType::STRING_CONST);
+    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
                   symbols->registerSymbol(class_name));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_INNER_CLASS, loc1, loc2);
     errors->addError(err);
   }
   ClassDefinition* the_class =
-      new ClassDefinition(m_session, class_name, m_class->getLibrary(),
-                          m_class->getContainer(), fC, id, m_class, s);
+      new ClassDefinition(m_session, class_name, m_class->getLibrary(), m_class->getContainer(), fC, id, m_class, s);
   uhdm::ClassDefn* defn = the_class->getUhdmModel<uhdm::ClassDefn>();
   defn->setVirtual(virtualClass);
   defn->setFullName(full_class_name);
@@ -789,8 +730,7 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_covergroup_declaration_(const FileContent* fC,
-                                                   NodeId id) {
+bool CompileClass::compile_covergroup_declaration_(const FileContent* fC, NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
@@ -798,26 +738,22 @@ bool CompileClass::compile_covergroup_declaration_(const FileContent* fC,
   const std::string_view covergroupName = fC->SymName(covergroup_name);
   CoverGroupDefinition* prevDef = m_class->getCoverGroup(covergroupName);
   if (prevDef) {
-    Location loc1(fC->getFileId(covergroup_name), fC->Line(covergroup_name),
-                  fC->Column(covergroup_name),
+    Location loc1(fC->getFileId(covergroup_name), fC->Line(covergroup_name), fC->Column(covergroup_name),
                   symbols->registerSymbol(covergroupName));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode = prevDef->getNodeId();
-    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                  prevFile->Column(prevNode),
+    Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
                   symbols->registerSymbol(covergroupName));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_COVERGROUP, loc1, loc2);
     errors->addError(err);
   }
-  CoverGroupDefinition* covergroup =
-      new CoverGroupDefinition(fC, id, covergroupName);
+  CoverGroupDefinition* covergroup = new CoverGroupDefinition(fC, id, covergroupName);
   m_class->insertCoverGroup(covergroup);
 
   return true;
 }
 
-bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
-                                                        NodeId id) {
+bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC, NodeId id) {
   /*
    n<> u<8> t<IntegerAtomType_Int> p<9> l<3>
    n<> u<9> t<Data_type> p<10> c<8> l<3>
@@ -837,15 +773,12 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   NodeId list_of_type_assignments = fC->Child(id);
-  if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paType_assignment_list ||
+  if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
-    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         true, nullptr, false, false);
+    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments, true, nullptr, false, false);
   } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, true, nullptr, false,
-                                         false);
+    m_helper.compileParameterDeclaration(m_class, fC, id, true, nullptr, false, false);
   }
   NodeId data_type_or_implicit = fC->Child(id);
   NodeId list_of_param_assignments = fC->Sibling(data_type_or_implicit);
@@ -853,15 +786,13 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   while (param_assignment) {
     NodeId var = fC->Child(param_assignment);
     const std::string_view name = fC->SymName(var);
-    const std::pair<FileCNodeId, DesignComponent*>* prevDef =
-        m_class->getNamedObject(name);
+    const std::pair<FileCNodeId, DesignComponent*>* prevDef = m_class->getNamedObject(name);
     if (prevDef) {
-      Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                    symbols->registerSymbol(name));
+      Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var), symbols->registerSymbol(name));
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
-      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode), symbols->registerSymbol(name));
+      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
+                    symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
       errors->addError(err);
     }
@@ -875,21 +806,17 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   return true;
 }
 
-bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
-                                                  NodeId id) {
+bool CompileClass::compile_parameter_declaration_(const FileContent* fC, NodeId id) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   NodeId list_of_type_assignments = fC->Child(id);
-  if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paType_assignment_list ||
+  if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
-    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
-                                         false, nullptr, false, false);
+    m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments, false, nullptr, false, false);
   } else {
-    m_helper.compileParameterDeclaration(m_class, fC, id, false, nullptr, false,
-                                         false);
+    m_helper.compileParameterDeclaration(m_class, fC, id, false, nullptr, false, false);
   }
 
   NodeId data_type_or_implicit = fC->Child(id);
@@ -898,15 +825,13 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
   while (param_assignment) {
     NodeId var = fC->Child(param_assignment);
     const std::string_view name = fC->SymName(var);
-    const std::pair<FileCNodeId, DesignComponent*>* prevDef =
-        m_class->getNamedObject(name);
+    const std::pair<FileCNodeId, DesignComponent*>* prevDef = m_class->getNamedObject(name);
     if (prevDef) {
-      Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                    symbols->registerSymbol(name));
+      Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var), symbols->registerSymbol(name));
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
-      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode), symbols->registerSymbol(name));
+      Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode), prevFile->Column(prevNode),
+                    symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
       errors->addError(err);
     }
@@ -927,8 +852,7 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
   if (ptype != VObjectType::paClass_declaration) return true;
   NodeId base_class_id = fC->Child(id);
   std::string base_class_name(fC->SymName(base_class_id));
-  while (fC->Sibling(base_class_id) &&
-         (fC->Type(fC->Sibling(base_class_id)) == VObjectType::STRING_CONST)) {
+  while (fC->Sibling(base_class_id) && (fC->Type(fC->Sibling(base_class_id)) == VObjectType::STRING_CONST)) {
     base_class_id = fC->Sibling(base_class_id);
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
@@ -986,20 +910,15 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
     while (parameter_port_declaration) {
       NodeId list_of_type_assignments = fC->Child(parameter_port_declaration);
       NodeId type = fC->Child(list_of_type_assignments);
-      if (fC->Type(list_of_type_assignments) ==
-              VObjectType::paType_assignment_list ||
+      if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
           fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
         // Type param
-        m_helper.compileParameterDeclaration(m_class, fC,
-                                             list_of_type_assignments, false,
-                                             nullptr, false, false);
+        m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments, false, nullptr, false, false);
       } else if (fC->Type(type) == VObjectType::TYPE) {
         // Handled in compile_parameter_declaration_
       } else {
         // Regular param
-        m_helper.compileParameterDeclaration(m_class, fC,
-                                             parameter_port_declaration, false,
-                                             nullptr, false, false);
+        m_helper.compileParameterDeclaration(m_class, fC, parameter_port_declaration, false, nullptr, false, false);
       }
       parameter_port_declaration = fC->Sibling(parameter_port_declaration);
     }

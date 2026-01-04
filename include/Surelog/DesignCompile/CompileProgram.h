@@ -38,12 +38,8 @@ class Program;
 class Session;
 
 struct FunctorCompileProgram final {
-  FunctorCompileProgram(Session* session, CompileDesign* compileDesign,
-                        Program* program, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_program(program),
-        m_design(design) {}
+  FunctorCompileProgram(Session* session, CompileDesign* compileDesign, Program* program, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_program(program), m_design(design) {}
   int32_t operator()() const;
 
  private:
@@ -55,8 +51,7 @@ struct FunctorCompileProgram final {
 
 class CompileProgram final : public CompileToolbox {
  public:
-  CompileProgram(Session* session, CompileDesign* compileDesign,
-                 Program* program, Design* design)
+  CompileProgram(Session* session, CompileDesign* compileDesign, Program* program, Design* design)
       : m_session(session),
         m_compileDesign(compileDesign),
         m_program(program),

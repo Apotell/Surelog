@@ -58,8 +58,7 @@ TEST(SymbolTableTest, SymbolTableAccess) {
 
   // For now, symbols returned in getSymbols() always contain bad symbol as
   // first element (though this is an implementation detail and might change).
-  EXPECT_THAT(table.getSymbols(),
-              ElementsAre(SymbolTable::getBadSymbol(), "foo", "bar"));
+  EXPECT_THAT(table.getSymbols(), ElementsAre(SymbolTable::getBadSymbol(), "foo", "bar"));
 }
 
 TEST(SymbolTableTest, SymbolStringsAreStable) {
@@ -134,8 +133,7 @@ TEST(SymbolTableTest, SequenceOfStackedSymbolTablesPreserved) {
   } kTests[] = {
       {&parent, {"@@BAD_SYMBOL@@", "foo", "bar"}},
       {child.get(), {"@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux"}},
-      {grandchild.get(),
-       {"@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux", "foobar", "flip"}},
+      {grandchild.get(), {"@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux", "foobar", "flip"}},
   };
 
   for (const auto &testcase : kTests) {
@@ -147,13 +145,11 @@ TEST(SymbolTableTest, SequenceOfStackedSymbolTablesPreserved) {
       const std::string_view symbol = all_symbols[i];
       EXPECT_EQ(symbol, testsym.getSymbol(SymbolId(i, BadRawSymbol))) << i;
       EXPECT_EQ(testsym.getId(symbol), SymbolId(i, symbol));
-      EXPECT_EQ(testsym.registerSymbol(symbol),
-                SymbolId(i, symbol));  // re-register attempt.
+      EXPECT_EQ(testsym.registerSymbol(symbol), SymbolId(i, symbol));  // re-register attempt.
     }
 
     // Request value out of range will return bad symbol.
-    EXPECT_EQ(SymbolTable::getBadSymbol(),
-              testsym.getSymbol(SymbolId(all_symbols.size(), BadRawSymbol)));
+    EXPECT_EQ(SymbolTable::getBadSymbol(), testsym.getSymbol(SymbolId(all_symbols.size(), BadRawSymbol)));
   }
 
   // A new symbol introduced in the parent should not be visible
@@ -177,16 +173,14 @@ TEST(SymbolTableTest, SequenceOfStackedSymbolTablesPreserved) {
 
   // Likewise, looking at 'all symbols', parent symbols only should be
   // included up to the point the snapshot happened.
-  std::vector<std::string_view> expected_parent{"@@BAD_SYMBOL@@", "foo", "bar",
-                                                "hello"};
+  std::vector<std::string_view> expected_parent{"@@BAD_SYMBOL@@", "foo", "bar", "hello"};
   EXPECT_EQ(parent.getSymbols(), expected_parent);
 
-  std::vector<std::string_view> expected_child{
-      "@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux", "hello"};
+  std::vector<std::string_view> expected_child{"@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux", "hello"};
   EXPECT_EQ(child->getSymbols(), expected_child);
 
-  std::vector<std::string_view> expected_grandchild{
-      "@@BAD_SYMBOL@@", "foo", "bar", "baz", "quux", "foobar", "flip", "hello"};
+  std::vector<std::string_view> expected_grandchild{"@@BAD_SYMBOL@@", "foo",    "bar",  "baz",
+                                                    "quux",           "foobar", "flip", "hello"};
   EXPECT_EQ(grandchild->getSymbols(), expected_grandchild);
 }
 }  // namespace

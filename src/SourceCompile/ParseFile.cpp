@@ -73,9 +73,8 @@ ParseFile::ParseFile(Session* session, PathId fileId)
   debug_AstModel = false;
 }
 
-ParseFile::ParseFile(Session* session, PathId fileId, CompileSourceFile* csf,
-                     CompilationUnit* compilationUnit, Library* library,
-                     PathId ppFileId, bool keepParserHandler)
+ParseFile::ParseFile(Session* session, PathId fileId, CompileSourceFile* csf, CompilationUnit* compilationUnit,
+                     Library* library, PathId ppFileId, bool keepParserHandler)
     : m_session(session),
       m_fileId(fileId),
       m_ppFileId(ppFileId),
@@ -93,8 +92,8 @@ ParseFile::ParseFile(Session* session, PathId fileId, CompileSourceFile* csf,
   debug_AstModel = m_session->getCommandLineParser()->getDebugAstModel();
 }
 
-ParseFile::ParseFile(Session* session, CompileSourceFile* compileSourceFile,
-                     ParseFile* parent, PathId chunkFileId, uint32_t offsetLine)
+ParseFile::ParseFile(Session* session, CompileSourceFile* compileSourceFile, ParseFile* parent, PathId chunkFileId,
+                     uint32_t offsetLine)
     : m_session(session),
       m_fileId(parent->m_fileId),
       m_ppFileId(chunkFileId),
@@ -112,8 +111,7 @@ ParseFile::ParseFile(Session* session, CompileSourceFile* compileSourceFile,
   parent->m_children.emplace_back(this);
 }
 
-ParseFile::ParseFile(Session* session, std::string_view text,
-                     CompileSourceFile* csf, CompilationUnit* compilationUnit,
+ParseFile::ParseFile(Session* session, std::string_view text, CompileSourceFile* csf, CompilationUnit* compilationUnit,
                      Library* library)
     : m_session(session),
       m_compileSourceFile(csf),
@@ -140,17 +138,11 @@ SymbolId ParseFile::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
-SymbolId ParseFile::getId(std::string_view symbol) const {
-  return m_session->getSymbolTable()->getId(symbol);
-}
+SymbolId ParseFile::getId(std::string_view symbol) const { return m_session->getSymbolTable()->getId(symbol); }
 
-std::string_view ParseFile::getSymbol(SymbolId id) const {
-  return m_session->getSymbolTable()->getSymbol(id);
-}
+std::string_view ParseFile::getSymbol(SymbolId id) const { return m_session->getSymbolTable()->getSymbol(id); }
 
-void ParseFile::addError(Error& error) {
-  m_session->getErrorContainer()->addError(error);
-}
+void ParseFile::addError(Error& error) { m_session->getErrorContainer()->addError(error); }
 
 PathId ParseFile::getFileId(uint32_t line) {
   if ((line == 0) || !getCompileSourceFile()) return m_fileId;
@@ -210,8 +202,7 @@ void ParseFile::printLocationCache() const {
   strm << "File: " << PathIdPP(m_fileId, fileSystem) << std::endl;
   for (const auto& entry1 : m_locationCache) {
     for (const auto& entry2 : entry1) {
-      strm << index << ": " << entry2.m_column << ", "
-           << PathIdPP(entry2.m_fileId, fileSystem) << ", " << entry2.m_line
+      strm << index << ": " << entry2.m_column << ", " << PathIdPP(entry2.m_fileId, fileSystem) << ", " << entry2.m_line
            << ", " << entry2.m_offset << ", " << entry2.m_hint << std::endl;
     }
     strm << std::endl;
@@ -224,8 +215,7 @@ void ParseFile::printLocationCache() const {
 }
 
 void ParseFile::buildLocationCache_recurse(uint32_t index) {
-  auto const& infos =
-      getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
+  auto const& infos = getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
   const IncludeFileInfo& oifi = infos[index];
   const IncludeFileInfo& cifi = infos[oifi.m_indexOpposite];
 
@@ -236,21 +226,17 @@ void ParseFile::buildLocationCache_recurse(uint32_t index) {
   if (oifi.m_context == IncludeFileInfo::Context::Include) {
     targetFileId = oifi.m_sectionFileId;
     while (sourceLine < oifi.m_sourceLine) {
-      m_locationCache[sourceLine++].emplace_back(1, targetFileId, targetLine++,
-                                                 0, index);
+      m_locationCache[sourceLine++].emplace_back(1, targetFileId, targetLine++, 0, index);
     }
-    m_locationCache[sourceLine].emplace_back(1, targetFileId, targetLine, 0,
-                                             index);
+    m_locationCache[sourceLine].emplace_back(1, targetFileId, targetLine, 0, index);
     if (oifi.m_sourceColumn > 1) {
-      m_locationCache[sourceLine].emplace_back(
-          oifi.m_sourceColumn, targetFileId, targetLine, 0, index);
+      m_locationCache[sourceLine].emplace_back(oifi.m_sourceColumn, targetFileId, targetLine, 0, index);
     }
   } else if (oifi.m_context == IncludeFileInfo::Context::Macro) {
     targetLine = oifi.m_macroDefinition->m_startLine;
     targetFileId = oifi.m_macroDefinition->m_fileId;
-    m_locationCache[sourceLine].emplace_back(
-        oifi.m_sourceColumn, targetFileId, targetLine,
-        oifi.m_sourceColumn - oifi.m_macroDefinition->m_bodyStartColumn, index);
+    m_locationCache[sourceLine].emplace_back(oifi.m_sourceColumn, targetFileId, targetLine,
+                                             oifi.m_sourceColumn - oifi.m_macroDefinition->m_bodyStartColumn, index);
   }
 
   int32_t pio = -1;
@@ -261,8 +247,7 @@ void ParseFile::buildLocationCache_recurse(uint32_t index) {
     const IncludeFileInfo& icifi = infos[ioifi.m_indexOpposite];
 
     while (sourceLine < ioifi.m_sourceLine) {
-      m_locationCache[++sourceLine].emplace_back(1, targetFileId, ++targetLine,
-                                                 0, index);
+      m_locationCache[++sourceLine].emplace_back(1, targetFileId, ++targetLine, 0, index);
     }
 
     buildLocationCache_recurse(i);
@@ -272,14 +257,12 @@ void ParseFile::buildLocationCache_recurse(uint32_t index) {
     if (ioifi.m_context == IncludeFileInfo::Context::Include) {
       if (icifi.m_sourceColumn > 1) {
         // Included file doesn't have newline at the end of the file!
-        m_locationCache[sourceLine].emplace_back(
-            icifi.m_sourceColumn, targetFileId, targetLine,
-            icifi.m_sourceColumn - icifi.m_symbolColumn, index);
+        m_locationCache[sourceLine].emplace_back(icifi.m_sourceColumn, targetFileId, targetLine,
+                                                 icifi.m_sourceColumn - icifi.m_symbolColumn, index);
       }
     } else if (ioifi.m_context == IncludeFileInfo::Context::Macro) {
-      m_locationCache[icifi.m_sourceLine].emplace_back(
-          icifi.m_sourceColumn, targetFileId, targetLine,
-          icifi.m_sourceColumn - icifi.m_symbolColumn, index);
+      m_locationCache[icifi.m_sourceLine].emplace_back(icifi.m_sourceColumn, targetFileId, targetLine,
+                                                       icifi.m_sourceColumn - icifi.m_symbolColumn, index);
     }
 
     pio = i;
@@ -291,12 +274,10 @@ void ParseFile::buildLocationCache_recurse(uint32_t index) {
     const IncludeFileInfo& pioifi = infos[pio];
     const IncludeFileInfo& picifi = infos[pioifi.m_indexOpposite];
 
-    if ((picifi.m_context == IncludeFileInfo::Context::Include) &&
-        (picifi.m_sourceColumn > 1)) {
+    if ((picifi.m_context == IncludeFileInfo::Context::Include) && (picifi.m_sourceColumn > 1)) {
       // Last included file doesn't have a newline at the end of the file!
-      m_locationCache[sourceLine].emplace_back(
-          picifi.m_sourceColumn, targetFileId, targetLine - 1,
-          picifi.m_sourceColumn - picifi.m_symbolColumn, index);
+      m_locationCache[sourceLine].emplace_back(picifi.m_sourceColumn, targetFileId, targetLine - 1,
+                                               picifi.m_sourceColumn - picifi.m_symbolColumn, index);
     }
 
     if (picifi.m_sourceLine < cifi.m_sourceLine) {
@@ -307,17 +288,15 @@ void ParseFile::buildLocationCache_recurse(uint32_t index) {
 
   while (sourceLine <= cifi.m_sourceLine) {
     if (m_locationCache[sourceLine].empty()) {
-      m_locationCache[sourceLine].emplace_back(1, targetFileId, targetLine, 0,
-                                               index);
+      m_locationCache[sourceLine].emplace_back(1, targetFileId, targetLine, 0, index);
     }
     ++sourceLine;
     ++targetLine;
   }
 
   if (oifi.m_context == IncludeFileInfo::Context::Macro) {
-    m_locationCache[cifi.m_sourceLine].emplace_back(
-        cifi.m_sourceColumn, targetFileId, targetLine - 1,
-        cifi.m_sourceColumn - cifi.m_sectionColumn, index);
+    m_locationCache[cifi.m_sourceLine].emplace_back(cifi.m_sourceColumn, targetFileId, targetLine - 1,
+                                                    cifi.m_sourceColumn - cifi.m_sectionColumn, index);
   }
 }
 
@@ -341,8 +320,7 @@ void ParseFile::buildLocationCache() {
   // printLocationCache();
 }
 
-ParseFile::MapLocationResult ParseFile::mapLocations(uint32_t sl, uint16_t sc,
-                                                     uint32_t el, uint16_t ec) {
+ParseFile::MapLocationResult ParseFile::mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec) {
   MapLocationResult result = {m_fileId, sl, sc, m_fileId, el, ec};
   if (!getCompileSourceFile()) return result;
 
@@ -394,8 +372,8 @@ ParseFile::MapLocationResult ParseFile::mapLocations(uint32_t sl, uint16_t sc,
     }
   }
 
-  if ((si >= 0) && (ei >= 0) && (sentry[si].m_hint != eentry[ei].m_hint) &&
-      ((si + 1) == ei) && (eentry[ei].m_column == ec)) {
+  if ((si >= 0) && (ei >= 0) && (sentry[si].m_hint != eentry[ei].m_hint) && ((si + 1) == ei) &&
+      (eentry[ei].m_column == ec)) {
     ei = si;
   }
 
@@ -457,50 +435,31 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
     m_antlrParserHandler->m_inputStream = new antlr4::ANTLRInputStream(stream);
     fileSystem->close(stream);
   } else {
-    m_antlrParserHandler->m_inputStream =
-        new antlr4::ANTLRInputStream(m_sourceText);
+    m_antlrParserHandler->m_inputStream = new antlr4::ANTLRInputStream(m_sourceText);
   }
 
-  m_antlrParserHandler->m_errorListener =
-      new AntlrParserErrorListener(m_session, this, false, lineOffset, fileId);
-  m_antlrParserHandler->m_lexer =
-      new SV3_1aLexer(m_antlrParserHandler->m_inputStream);
+  m_antlrParserHandler->m_errorListener = new AntlrParserErrorListener(m_session, this, false, lineOffset, fileId);
+  m_antlrParserHandler->m_lexer = new SV3_1aLexer(m_antlrParserHandler->m_inputStream);
   VerilogVersion version = VerilogVersion::SystemVerilog;
   if (pp) version = pp->getVerilogVersion();
   if (version != VerilogVersion::NoVersion) {
     switch (version) {
-      case VerilogVersion::NoVersion:
-        break;
-      case VerilogVersion::Verilog1995:
-        m_antlrParserHandler->m_lexer->sverilog = false;
-        break;
-      case VerilogVersion::Verilog2001:
-        m_antlrParserHandler->m_lexer->sverilog = false;
-        break;
-      case VerilogVersion::Verilog2005:
-        m_antlrParserHandler->m_lexer->sverilog = false;
-        break;
-      case VerilogVersion::SVerilog2005:
-        m_antlrParserHandler->m_lexer->sverilog = true;
-        break;
-      case VerilogVersion::Verilog2009:
-        m_antlrParserHandler->m_lexer->sverilog = true;
-        break;
-      case VerilogVersion::SystemVerilog:
-        m_antlrParserHandler->m_lexer->sverilog = true;
-        break;
+      case VerilogVersion::NoVersion: break;
+      case VerilogVersion::Verilog1995: m_antlrParserHandler->m_lexer->sverilog = false; break;
+      case VerilogVersion::Verilog2001: m_antlrParserHandler->m_lexer->sverilog = false; break;
+      case VerilogVersion::Verilog2005: m_antlrParserHandler->m_lexer->sverilog = false; break;
+      case VerilogVersion::SVerilog2005: m_antlrParserHandler->m_lexer->sverilog = true; break;
+      case VerilogVersion::Verilog2009: m_antlrParserHandler->m_lexer->sverilog = true; break;
+      case VerilogVersion::SystemVerilog: m_antlrParserHandler->m_lexer->sverilog = true; break;
     }
   } else {
     std::string_view type = std::get<1>(fileSystem->getType(fileId, symbols));
-    m_antlrParserHandler->m_lexer->sverilog =
-        (type == ".sv") || clp->fullSVMode() || clp->isSVFile(fileId);
+    m_antlrParserHandler->m_lexer->sverilog = (type == ".sv") || clp->fullSVMode() || clp->isSVFile(fileId);
   }
 
   m_antlrParserHandler->m_lexer->removeErrorListeners();
-  m_antlrParserHandler->m_lexer->addErrorListener(
-      m_antlrParserHandler->m_errorListener);
-  m_antlrParserHandler->m_tokens =
-      new antlr4::CommonTokenStream(m_antlrParserHandler->m_lexer);
+  m_antlrParserHandler->m_lexer->addErrorListener(m_antlrParserHandler->m_errorListener);
+  m_antlrParserHandler->m_tokens = new antlr4::CommonTokenStream(m_antlrParserHandler->m_lexer);
   m_antlrParserHandler->m_tokens->fill();
 
   if (clp->profile()) {
@@ -515,35 +474,27 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
 #ifdef ANTLRCPP_VERSION
   antlr4::atn::ParserATNSimulatorOptions options;
   options.setPredictionContextMergeCacheOptions(
-      antlr4::atn::PredictionContextMergeCacheOptions()
-          .setMaxSize(10000)
-          .setClearEveryN(100));
+      antlr4::atn::PredictionContextMergeCacheOptions().setMaxSize(10000).setClearEveryN(100));
 
-  m_antlrParserHandler->m_parser =
-      new SV3_1aParser(m_antlrParserHandler->m_tokens, options);
+  m_antlrParserHandler->m_parser = new SV3_1aParser(m_antlrParserHandler->m_tokens, options);
 #else
-  m_antlrParserHandler->m_parser =
-      new SV3_1aParser(m_antlrParserHandler->m_tokens);
+  m_antlrParserHandler->m_parser = new SV3_1aParser(m_antlrParserHandler->m_tokens);
 #endif
 
   if (clp->profile()) {
     m_antlrParserHandler->m_parser->setProfile(true);
   }
-  m_antlrParserHandler->m_parser
-      ->getInterpreter<antlr4::atn::ParserATNSimulator>()
-      ->setPredictionMode(antlr4::atn::PredictionMode::SLL);
+  m_antlrParserHandler->m_parser->getInterpreter<antlr4::atn::ParserATNSimulator>()->setPredictionMode(
+      antlr4::atn::PredictionMode::SLL);
   m_antlrParserHandler->m_parser->removeErrorListeners();
-  m_antlrParserHandler->m_parser->setErrorHandler(
-      std::make_shared<antlr4::BailErrorStrategy>());
+  m_antlrParserHandler->m_parser->setErrorHandler(std::make_shared<antlr4::BailErrorStrategy>());
 
   try {
-    m_antlrParserHandler->m_tree =
-        m_antlrParserHandler->m_parser->top_level_rule();
+    m_antlrParserHandler->m_tree = m_antlrParserHandler->m_parser->top_level_rule();
 
     if (clp->profile()) {
-      StrAppend(&m_profileInfo,
-                "SLL Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()),
-                "s ", fileSystem->toPath(fileId), "\n");
+      StrAppend(&m_profileInfo, "SLL Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
+                fileSystem->toPath(fileId), "\n");
       tmr.reset();
       profileParser();
     }
@@ -554,20 +505,15 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
     if (clp->profile()) {
       m_antlrParserHandler->m_parser->setProfile(true);
     }
-    m_antlrParserHandler->m_parser->setErrorHandler(
-        std::make_shared<antlr4::DefaultErrorStrategy>());
-    m_antlrParserHandler->m_parser->addErrorListener(
-        m_antlrParserHandler->m_errorListener);
-    m_antlrParserHandler->m_parser
-        ->getInterpreter<antlr4::atn::ParserATNSimulator>()
-        ->setPredictionMode(antlr4::atn::PredictionMode::LL);
-    m_antlrParserHandler->m_tree =
-        m_antlrParserHandler->m_parser->top_level_rule();
+    m_antlrParserHandler->m_parser->setErrorHandler(std::make_shared<antlr4::DefaultErrorStrategy>());
+    m_antlrParserHandler->m_parser->addErrorListener(m_antlrParserHandler->m_errorListener);
+    m_antlrParserHandler->m_parser->getInterpreter<antlr4::atn::ParserATNSimulator>()->setPredictionMode(
+        antlr4::atn::PredictionMode::LL);
+    m_antlrParserHandler->m_tree = m_antlrParserHandler->m_parser->top_level_rule();
 
     if (clp->profile()) {
-      StrAppend(&m_profileInfo,
-                "LL  Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()),
-                "s ", fileSystem->toPath(fileId), "\n");
+      StrAppend(&m_profileInfo, "LL  Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
+                fileSystem->toPath(fileId), "\n");
       tmr.reset();
       profileParser();
     }
@@ -633,8 +579,7 @@ bool ParseFile::parse() {
         m_fileContent->printTree(std::cout);
       }
       if (clp->debugCache()) {
-        std::cout << "PARSER CACHE USED FOR: "
-                  << fileSystem->toPath(getFileId(0)) << std::endl;
+        std::cout << "PARSER CACHE USED FOR: " << fileSystem->toPath(getFileId(0)) << std::endl;
       }
       return true;
     }
@@ -655,8 +600,7 @@ bool ParseFile::parse() {
     }
     if (ok) {
       if (clp->debugCache()) {
-        std::cout << "PARSER CACHE USED FOR: "
-                  << fileSystem->toPath(getFileId(0)) << std::endl;
+        std::cout << "PARSER CACHE USED FOR: " << fileSystem->toPath(getFileId(0)) << std::endl;
       }
       return true;
     }
@@ -683,18 +627,14 @@ bool ParseFile::parse() {
       Timer tmr;
 
       if (clp->parseTree()) {
-        FileContent* const ppFileContent =
-            getCompileSourceFile()->getPreprocessor()->getFileContent();
-        m_listener = new SV3_1aParserTreeListener(
-            m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine,
-            ppFileContent);
+        FileContent* const ppFileContent = getCompileSourceFile()->getPreprocessor()->getFileContent();
+        m_listener =
+            new SV3_1aParserTreeListener(m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine, ppFileContent);
       } else {
-        m_listener = new SV3_1aTreeShapeListener(
-            m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine);
+        m_listener = new SV3_1aTreeShapeListener(m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine);
       }
 
-      antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
-                                                  m_antlrParserHandler->m_tree);
+      antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener, m_antlrParserHandler->m_tree);
 
       if (!m_fileContent->validate()) {
         Location ppfile(BadSymbolId);
@@ -719,11 +659,8 @@ bool ParseFile::parse() {
       }
 
       if (clp->profile()) {
-        m_profileInfo +=
-            "Cache saving: " + std::to_string(tmr.elapsed_rounded()) + "s\n";
-        std::cout << "Cache saving: " + std::to_string(tmr.elapsed_rounded()) +
-                         "s\n"
-                  << std::flush;
+        m_profileInfo += "Cache saving: " + std::to_string(tmr.elapsed_rounded()) + "s\n";
+        std::cout << "Cache saving: " + std::to_string(tmr.elapsed_rounded()) + "s\n" << std::flush;
         tmr.reset();
       }
     }
@@ -735,21 +672,16 @@ bool ParseFile::parse() {
           // TODO: Incrementally regenerate the FileContent
           child->m_fileContent->setParent(m_fileContent);
           if (clp->parseTree()) {
-            FileContent* const ppFileContent = child->getCompileSourceFile()
-                                                   ->getPreprocessor()
-                                                   ->getFileContent();
-            child->m_listener = new SV3_1aParserTreeListener(
-                m_session, child, child->m_antlrParserHandler->m_tokens,
-                child->m_offsetLine, ppFileContent);
+            FileContent* const ppFileContent = child->getCompileSourceFile()->getPreprocessor()->getFileContent();
+            child->m_listener = new SV3_1aParserTreeListener(m_session, child, child->m_antlrParserHandler->m_tokens,
+                                                             child->m_offsetLine, ppFileContent);
           } else {
-            child->m_listener = new SV3_1aTreeShapeListener(
-                m_session, child, child->m_antlrParserHandler->m_tokens,
-                child->m_offsetLine);
+            child->m_listener = new SV3_1aTreeShapeListener(m_session, child, child->m_antlrParserHandler->m_tokens,
+                                                            child->m_offsetLine);
           }
 
           Timer tmr;
-          antlr4::tree::ParseTreeWalker::DEFAULT.walk(
-              child->m_listener, child->m_antlrParserHandler->m_tree);
+          antlr4::tree::ParseTreeWalker::DEFAULT.walk(child->m_listener, child->m_antlrParserHandler->m_tree);
 
           if (clp->profile()) {
             // m_profileInfo += "For file " + getSymbol

@@ -73,8 +73,7 @@ namespace SURELOG {
 static constexpr char kSchemaVersion[] = "1.4";
 static constexpr std::string_view UnknownRawPath = "<unknown>";
 
-ParseCache::ParseCache(Session* session, ParseFile* parser)
-    : Cache(session), m_parse(parser) {}
+ParseCache::ParseCache(Session* session, ParseFile* parser) : Cache(session), m_parse(parser) {}
 
 PathId ParseCache::getCacheFileId(PathId ppFileId) const {
   if (!ppFileId) ppFileId = m_parse->getPpFileId();
@@ -91,30 +90,25 @@ PathId ParseCache::getCacheFileId(PathId ppFileId) const {
     // an output file. Instead it uses the source itself i.e. from the original
     // source location. Compute the "potential" Preprocessor output file so the
     // cache file location would be correct.
-    ppFileId = fileSystem->getPpOutputFile(clp->fileUnit(), ppFileId, libName,
-                                           symbols);
+    ppFileId = fileSystem->getPpOutputFile(clp->fileUnit(), ppFileId, libName, symbols);
   }
 
   Precompiled* const precompiled = m_session->getPrecompiled();
   const bool isPrecompiled = precompiled->isFilePrecompiled(ppFileId);
 
-  return fileSystem->getParseCacheFile(clp->fileUnit(), ppFileId, libName,
-                                       isPrecompiled, symbols);
+  return fileSystem->getParseCacheFile(clp->fileUnit(), ppFileId, libName, isPrecompiled, symbols);
 }
 
-bool ParseCache::checkCacheIsValid(PathId cacheFileId,
-                                   const ::ParseCache::Reader& root) const {
+bool ParseCache::checkCacheIsValid(PathId cacheFileId, const ::ParseCache::Reader& root) const {
   const ::Header::Reader& sourceHeader = root.getHeader();
 
   Precompiled* const precompiled = m_session->getPrecompiled();
   if (precompiled->isFilePrecompiled(m_parse->getPpFileId())) {
     // For precompiled, check only the signature & version (so using
     // BadPathId instead of the actual arguments)
-    return checkIfCacheIsValid(sourceHeader, kSchemaVersion, BadPathId,
-                               BadPathId);
+    return checkIfCacheIsValid(sourceHeader, kSchemaVersion, BadPathId, BadPathId);
   } else {
-    return checkIfCacheIsValid(sourceHeader, kSchemaVersion, cacheFileId,
-                               m_parse->getPpFileId());
+    return checkIfCacheIsValid(sourceHeader, kSchemaVersion, cacheFileId, m_parse->getPpFileId());
   }
 }
 
@@ -122,8 +116,7 @@ bool ParseCache::checkCacheIsValid(PathId cacheFileId) const {
   if (!cacheFileId) return false;
 
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::string filepath =
-      fileSystem->toPlatformAbsPath(cacheFileId).string();
+  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
 
   const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
   if (fd < 0) return false;
@@ -142,23 +135,16 @@ bool ParseCache::checkCacheIsValid(PathId cacheFileId) const {
   return result;
 }
 
-bool ParseCache::isValid() {
-  return checkCacheIsValid(getCacheFileId(BadPathId));
-}
+bool ParseCache::isValid() { return checkCacheIsValid(getCacheFileId(BadPathId)); }
 
-void ParseCache::cacheSymbols(::ParseCache::Builder builder,
-                              SymbolTable& sourceSymbols) {
+void ParseCache::cacheSymbols(::ParseCache::Builder builder, SymbolTable& sourceSymbols) {
   const std::vector<std::string_view> texts = sourceSymbols.getSymbols();
-  ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols =
-      builder.initSymbols(texts.size());
+  ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols = builder.initSymbols(texts.size());
   Cache::cacheSymbols(targetSymbols, texts);
 }
 
-void ParseCache::cacheErrors(::ParseCache::Builder builder,
-                             SymbolTable& targetSymbols,
-                             const ErrorContainer* errorContainer,
-                             const SymbolTable& sourceSymbols,
-                             PathId subjectId) {
+void ParseCache::cacheErrors(::ParseCache::Builder builder, SymbolTable& targetSymbols,
+                             const ErrorContainer* errorContainer, const SymbolTable& sourceSymbols, PathId subjectId) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   std::vector<Error> sourceErrors;
   sourceErrors.reserve(errorContainer->getErrors().size());
@@ -171,32 +157,23 @@ void ParseCache::cacheErrors(::ParseCache::Builder builder,
     }
   }
 
-  ::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors =
-      builder.initErrors(sourceErrors.size());
+  ::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors = builder.initErrors(sourceErrors.size());
   Cache::cacheErrors(targetErrors, targetSymbols, sourceErrors, sourceSymbols);
 }
 
-void ParseCache::cacheVObjects(::ParseCache::Builder builder,
-                               const FileContent* fC,
-                               SymbolTable& targetSymbols,
-                               const SymbolTable& sourceSymbols,
-                               PathId fileId) {
+void ParseCache::cacheVObjects(::ParseCache::Builder builder, const FileContent* fC, SymbolTable& targetSymbols,
+                               const SymbolTable& sourceSymbols, PathId fileId) {
   const std::vector<VObject>& sourceVObjects = fC->getVObjects();
-  ::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects =
-      builder.initObjects(sourceVObjects.size());
-  Cache::cacheVObjects(targetVObjects, targetSymbols, sourceVObjects,
-                       sourceSymbols);
+  ::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects = builder.initObjects(sourceVObjects.size());
+  Cache::cacheVObjects(targetVObjects, targetSymbols, sourceVObjects, sourceSymbols);
 }
 
-void ParseCache::cacheDesignElements(::ParseCache::Builder builder,
-                                     const FileContent* fC,
-                                     SymbolTable& targetSymbols,
+void ParseCache::cacheDesignElements(::ParseCache::Builder builder, const FileContent* fC, SymbolTable& targetSymbols,
                                      const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::vector<DesignElement*>& sourceDesignElements =
-      fC->getDesignElements();
-  ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Builder
-      targetDesignElements = builder.initElements(sourceDesignElements.size());
+  const std::vector<DesignElement*>& sourceDesignElements = fC->getDesignElements();
+  ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Builder targetDesignElements =
+      builder.initElements(sourceDesignElements.size());
 
   for (size_t i = 0, ni = sourceDesignElements.size(); i < ni; ++i) {
     const DesignElement* sourceDesignElement = sourceDesignElements[i];
@@ -206,20 +183,15 @@ void ParseCache::cacheDesignElements(::ParseCache::Builder builder,
     ::TimeInfo::Builder targetTimeInfo = targetDesignElement.initTimeInfo();
 
     targetTimeInfo.setType(static_cast<uint16_t>(sourceTimeInfo.m_type));
-    targetTimeInfo.setFileId(
-        (RawPathId)fileSystem->copy(sourceTimeInfo.m_fileId, &targetSymbols));
+    targetTimeInfo.setFileId((RawPathId)fileSystem->copy(sourceTimeInfo.m_fileId, &targetSymbols));
     targetTimeInfo.setLine(sourceTimeInfo.m_line);
-    targetTimeInfo.setTimeUnit(
-        static_cast<uint16_t>(sourceTimeInfo.m_timeUnit));
+    targetTimeInfo.setTimeUnit(static_cast<uint16_t>(sourceTimeInfo.m_timeUnit));
     targetTimeInfo.setTimeUnitValue(sourceTimeInfo.m_timeUnitValue);
-    targetTimeInfo.setTimePrecision(
-        static_cast<uint16_t>(sourceTimeInfo.m_timePrecision));
+    targetTimeInfo.setTimePrecision(static_cast<uint16_t>(sourceTimeInfo.m_timePrecision));
     targetTimeInfo.setTimePrecisionValue(sourceTimeInfo.m_timePrecisionValue);
 
-    targetDesignElement.setName((RawSymbolId)targetSymbols.copyFrom(
-        sourceDesignElement->m_name, &sourceSymbols));
-    targetDesignElement.setFileId((RawPathId)fileSystem->copy(
-        sourceDesignElement->m_fileId, &targetSymbols));
+    targetDesignElement.setName((RawSymbolId)targetSymbols.copyFrom(sourceDesignElement->m_name, &sourceSymbols));
+    targetDesignElement.setFileId((RawPathId)fileSystem->copy(sourceDesignElement->m_fileId, &targetSymbols));
     targetDesignElement.setType(sourceDesignElement->m_type);
     targetDesignElement.setUniqueId((RawNodeId)sourceDesignElement->m_uniqueId);
     targetDesignElement.setLine(sourceDesignElement->m_startLine);
@@ -228,54 +200,42 @@ void ParseCache::cacheDesignElements(::ParseCache::Builder builder,
     targetDesignElement.setEndColumn(sourceDesignElement->m_endColumn);
     targetDesignElement.setParent((RawNodeId)sourceDesignElement->m_parent);
     targetDesignElement.setNode((RawNodeId)sourceDesignElement->m_node);
-    targetDesignElement.setDefaultNetType(
-        static_cast<uint32_t>(sourceDesignElement->m_defaultNetType));
+    targetDesignElement.setDefaultNetType(static_cast<uint32_t>(sourceDesignElement->m_defaultNetType));
   }
 }
 
 void ParseCache::restoreDesignElements(
     FileContent* fC, SymbolTable& targetSymbols,
-    const ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Reader&
-        sourceDesignElements,
+    const ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Reader& sourceDesignElements,
     const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
 
   for (const ::DesignElement::Reader& sourceElement : sourceDesignElements) {
-    const std::string_view elemName = sourceSymbols.getSymbol(
-        SymbolId(sourceElement.getName(), UnknownRawPath));
+    const std::string_view elemName = sourceSymbols.getSymbol(SymbolId(sourceElement.getName(), UnknownRawPath));
     DesignElement* targetElement = new DesignElement(
         targetSymbols.registerSymbol(elemName),
-        fileSystem->toPathId(fileSystem->remap(sourceSymbols.getSymbol(SymbolId(
-                                 sourceElement.getFileId(), UnknownRawPath))),
-                             symbols),
-        static_cast<DesignElement::ElemType>(sourceElement.getType()),
-        NodeId(sourceElement.getUniqueId()), sourceElement.getLine(),
-        sourceElement.getColumn(), sourceElement.getEndLine(),
-        sourceElement.getEndColumn(), NodeId(sourceElement.getParent()));
+        fileSystem->toPathId(
+            fileSystem->remap(sourceSymbols.getSymbol(SymbolId(sourceElement.getFileId(), UnknownRawPath))), symbols),
+        static_cast<DesignElement::ElemType>(sourceElement.getType()), NodeId(sourceElement.getUniqueId()),
+        sourceElement.getLine(), sourceElement.getColumn(), sourceElement.getEndLine(), sourceElement.getEndColumn(),
+        NodeId(sourceElement.getParent()));
     targetElement->m_node = NodeId(sourceElement.getNode());
-    targetElement->m_defaultNetType =
-        static_cast<VObjectType>(sourceElement.getDefaultNetType());
+    targetElement->m_defaultNetType = static_cast<VObjectType>(sourceElement.getDefaultNetType());
 
     const ::TimeInfo::Reader& sourceTimeInfo = sourceElement.getTimeInfo();
     TimeInfo* const targetTimeInfo = &targetElement->m_timeInfo;
 
-    targetTimeInfo->m_type =
-        static_cast<TimeInfo::Type>(sourceTimeInfo.getType());
-    targetTimeInfo->m_fileId =
-        fileSystem->toPathId(fileSystem->remap(sourceSymbols.getSymbol(SymbolId(
-                                 sourceTimeInfo.getFileId(), UnknownRawPath))),
-                             &targetSymbols);
+    targetTimeInfo->m_type = static_cast<TimeInfo::Type>(sourceTimeInfo.getType());
+    targetTimeInfo->m_fileId = fileSystem->toPathId(
+        fileSystem->remap(sourceSymbols.getSymbol(SymbolId(sourceTimeInfo.getFileId(), UnknownRawPath))),
+        &targetSymbols);
     targetTimeInfo->m_line = sourceTimeInfo.getLine();
-    targetTimeInfo->m_timeUnit =
-        static_cast<TimeInfo::Unit>(sourceTimeInfo.getTimeUnit());
+    targetTimeInfo->m_timeUnit = static_cast<TimeInfo::Unit>(sourceTimeInfo.getTimeUnit());
     targetTimeInfo->m_timeUnitValue = sourceTimeInfo.getTimeUnitValue();
-    targetTimeInfo->m_timePrecision =
-        static_cast<TimeInfo::Unit>(sourceTimeInfo.getTimePrecision());
-    targetTimeInfo->m_timePrecisionValue =
-        sourceTimeInfo.getTimePrecisionValue();
-    const std::string fullName =
-        StrCat(fC->getLibrary()->getName(), "@", elemName);
+    targetTimeInfo->m_timePrecision = static_cast<TimeInfo::Unit>(sourceTimeInfo.getTimePrecision());
+    targetTimeInfo->m_timePrecisionValue = sourceTimeInfo.getTimePrecisionValue();
+    const std::string fullName = StrCat(fC->getLibrary()->getName(), "@", elemName);
     fC->addDesignElement(fullName, targetElement);
   }
 }
@@ -284,8 +244,7 @@ bool ParseCache::restore(PathId cacheFileId) {
   if (!cacheFileId) return false;
 
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::string filepath =
-      fileSystem->toPlatformAbsPath(cacheFileId).string();
+  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
 
   const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
   if (fd < 0) return false;
@@ -308,27 +267,21 @@ bool ParseCache::restore(PathId cacheFileId) {
     ErrorContainer* const targetErrorContainer = m_session->getErrorContainer();
 
     restoreSymbols(sourceSymbols, root.getSymbols());
-    restoreErrors(targetErrorContainer, targetSymbols, root.getErrors(),
-                  sourceSymbols);
+    restoreErrors(targetErrorContainer, targetSymbols, root.getErrors(), sourceSymbols);
 
     // Restore design content (Verilog Design Elements)
     FileContent* fC = m_parse->getFileContent();
     if (fC == nullptr) {
-      fC = new FileContent(m_session, m_parse->getFileId(0),
-                           m_parse->getLibrary(), nullptr, BadPathId);
+      fC = new FileContent(m_session, m_parse->getFileId(0), m_parse->getLibrary(), nullptr, BadPathId);
       m_parse->setFileContent(fC);
-      m_parse->getCompileSourceFile()
-          ->getCompiler()
-          ->getDesign()
-          ->addFileContent(m_parse->getFileId(0), fC);
+      m_parse->getCompileSourceFile()->getCompiler()->getDesign()->addFileContent(m_parse->getFileId(0), fC);
     }
 
     // Restore design elements
     restoreDesignElements(fC, targetSymbols, root.getElements(), sourceSymbols);
 
     // Restore design objects
-    restoreVObjects(*fC->mutableVObjects(), targetSymbols, root.getObjects(),
-                    sourceSymbols);
+    restoreVObjects(*fC->mutableVObjects(), targetSymbols, root.getObjects(), sourceSymbols);
   } while (false);
 
   ::close(fd);
@@ -381,8 +334,7 @@ bool ParseCache::save() {
   cacheHeader(builder.getHeader(), kSchemaVersion);
 
   // Cache the errors and canonical symbols
-  cacheErrors(builder, targetSymbols, errorContainer, *sourceSymbols,
-              m_parse->getFileId(LINE1));
+  cacheErrors(builder, targetSymbols, errorContainer, *sourceSymbols, m_parse->getFileId(LINE1));
 
   if (fC != nullptr) {
     // Cache the design content
@@ -390,8 +342,7 @@ bool ParseCache::save() {
   }
 
   // Cache the design objects
-  cacheVObjects(builder, fC, targetSymbols, *sourceSymbols,
-                m_parse->getFileId(0));
+  cacheVObjects(builder, fC, targetSymbols, *sourceSymbols, m_parse->getFileId(0));
 
   // Cache symbols
   cacheSymbols(builder, targetSymbols);
@@ -400,10 +351,8 @@ bool ParseCache::save() {
   PathId cacheDirId = fileSystem->getParent(cacheFileId, sourceSymbols);
   if (!fileSystem->mkdirs(cacheDirId)) return false;
 
-  const std::string filepath =
-      fileSystem->toPlatformAbsPath(cacheFileId).string();
-  const int32_t fd =
-      ::open(filepath.c_str(), O_CREAT | O_WRONLY | O_BINARY, S_IRWXU);
+  const std::string filepath = fileSystem->toPlatformAbsPath(cacheFileId).string();
+  const int32_t fd = ::open(filepath.c_str(), O_CREAT | O_WRONLY | O_BINARY, S_IRWXU);
   if (fd < 0) return false;
 
   writePackedMessageToFd(fd, message);

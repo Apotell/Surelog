@@ -49,27 +49,21 @@
 #include "Surelog/Utils/ParseUtils.h"
 
 namespace SURELOG {
-SVLibShapeListener::SVLibShapeListener(Session *session,
-                                       ParseLibraryDef *parser,
-                                       antlr4::CommonTokenStream *tokens)
-    : SV3_1aTreeShapeHelper(
-          session, new ParseFile(session, parser->getFileId()), tokens, 0),
+SVLibShapeListener::SVLibShapeListener(Session *session, ParseLibraryDef *parser, antlr4::CommonTokenStream *tokens)
+    : SV3_1aTreeShapeHelper(session, new ParseFile(session, parser->getFileId()), tokens, 0),
       m_parser(parser),
       m_tokens(tokens) {
-  m_fileContent = new FileContent(m_session, m_parser->getFileId(), nullptr,
-                                  nullptr, BadPathId);
+  m_fileContent = new FileContent(m_session, m_parser->getFileId(), nullptr, nullptr, BadPathId);
   m_pf->setFileContent(m_fileContent);
-  m_includeFileInfo.emplace(IncludeFileInfo::Context::Include,
-                            IncludeFileInfo::Action::Push, m_pf->getFileId(0),
-                            1, 1, 1, 1, BadSymbolId, 0, 0);
+  m_includeFileInfo.emplace(IncludeFileInfo::Context::Include, IncludeFileInfo::Action::Push, m_pf->getFileId(0), 1, 1,
+                            1, 1, BadSymbolId, 0, 0);
 }
 
 SymbolId SVLibShapeListener::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
-void SVLibShapeListener::enterLibrary_declaration(
-    SV3_1aParser::Library_declarationContext *ctx) {
+void SVLibShapeListener::enterLibrary_declaration(SV3_1aParser::Library_declarationContext *ctx) {
   FileSystem *const fileSystem = m_session->getFileSystem();
   std::string name = ctx->identifier()->getText();
   LibrarySet *librarySet = m_parser->getLibrarySet();
@@ -90,8 +84,7 @@ void SVLibShapeListener::enterLibrary_declaration(
   }
 }
 
-void SVLibShapeListener::enterInclude_statement(
-    SV3_1aParser::Include_statementContext *ctx) {
+void SVLibShapeListener::enterInclude_statement(SV3_1aParser::Include_statementContext *ctx) {
   const std::string filename = ctx->file_path_spec()->getText();
 
   FileSystem *const fileSystem = m_session->getFileSystem();
@@ -102,56 +95,42 @@ void SVLibShapeListener::enterInclude_statement(
   PathId fileId = fileSystem->locate(filename, includePathIds, symbolTable);
 
   if (!fileId) {
-    fileId =
-        fileSystem->getSibling(m_parser->getFileId(), filename, symbolTable);
+    fileId = fileSystem->getSibling(m_parser->getFileId(), filename, symbolTable);
   }
 
   if (!fileId || !fileSystem->isRegularFile(fileId)) {
     LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
-    Location loc(m_parser->getFileId(), lineCol.first, lineCol.second,
-                 symbolTable->registerSymbol(filename));
+    Location loc(m_parser->getFileId(), lineCol.first, lineCol.second, symbolTable->registerSymbol(filename));
     Error err(ErrorDefinition::PP_CANNOT_OPEN_INCLUDE_FILE, loc);
     m_session->getErrorContainer()->addError(err);
     return;
   }
 
-  ParseLibraryDef parser(m_session, m_parser->getLibrarySet(),
-                         m_parser->getConfigSet());
+  ParseLibraryDef parser(m_session, m_parser->getLibrarySet(), m_parser->getConfigSet());
   parser.parseLibraryDefinition(fileId);
 }
 
-void SVLibShapeListener::enterUselib_directive(
-    SV3_1aParser::Uselib_directiveContext *ctx) {}
+void SVLibShapeListener::enterUselib_directive(SV3_1aParser::Uselib_directiveContext *ctx) {}
 
-void SVLibShapeListener::enterConfig_declaration(
-    SV3_1aParser::Config_declarationContext *ctx) {}
+void SVLibShapeListener::enterConfig_declaration(SV3_1aParser::Config_declarationContext *ctx) {}
 
-void SVLibShapeListener::enterDesign_statement(
-    SV3_1aParser::Design_statementContext *ctx) {}
+void SVLibShapeListener::enterDesign_statement(SV3_1aParser::Design_statementContext *ctx) {}
 
-void SVLibShapeListener::enterConfig_rule_statement(
-    SV3_1aParser::Config_rule_statementContext *ctx) {}
+void SVLibShapeListener::enterConfig_rule_statement(SV3_1aParser::Config_rule_statementContext *ctx) {}
 
-void SVLibShapeListener::enterDefault_clause(
-    SV3_1aParser::Default_clauseContext *ctx) {}
+void SVLibShapeListener::enterDefault_clause(SV3_1aParser::Default_clauseContext *ctx) {}
 
-void SVLibShapeListener::enterInst_clause(
-    SV3_1aParser::Inst_clauseContext *ctx) {}
+void SVLibShapeListener::enterInst_clause(SV3_1aParser::Inst_clauseContext *ctx) {}
 
 void SVLibShapeListener::enterInst_name(SV3_1aParser::Inst_nameContext *ctx) {}
 
-void SVLibShapeListener::enterCell_clause(
-    SV3_1aParser::Cell_clauseContext *ctx) {}
+void SVLibShapeListener::enterCell_clause(SV3_1aParser::Cell_clauseContext *ctx) {}
 
-void SVLibShapeListener::enterLiblist_clause(
-    SV3_1aParser::Liblist_clauseContext *ctx) {}
+void SVLibShapeListener::enterLiblist_clause(SV3_1aParser::Liblist_clauseContext *ctx) {}
 
-void SVLibShapeListener::enterUse_clause(SV3_1aParser::Use_clauseContext *ctx) {
+void SVLibShapeListener::enterUse_clause(SV3_1aParser::Use_clauseContext *ctx) {}
 
-}
-
-void SVLibShapeListener::exitString_value(
-    SV3_1aParser::String_valueContext *ctx) {
+void SVLibShapeListener::exitString_value(SV3_1aParser::String_valueContext *ctx) {
   std::string ident;
 
   ident = ctx->QUOTED_STRING()->getText();
@@ -186,8 +165,7 @@ void SVLibShapeListener::exitIdentifier(SV3_1aParser::IdentifierContext *ctx) {
   }
 }
 
-void SVLibShapeListener::exitHierarchical_identifier(
-    SV3_1aParser::Hierarchical_identifierContext *ctx) {
+void SVLibShapeListener::exitHierarchical_identifier(SV3_1aParser::Hierarchical_identifierContext *ctx) {
   std::string ident;
   antlr4::ParserRuleContext *childCtx = nullptr;
 

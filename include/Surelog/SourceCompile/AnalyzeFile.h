@@ -43,8 +43,7 @@ class AnalyzeFile final {
  public:
   class FileChunk final {
    public:
-    FileChunk(DesignElement::ElemType type, uint64_t from, uint64_t to,
-              uint64_t startChar, uint64_t endChar)
+    FileChunk(DesignElement::ElemType type, uint64_t from, uint64_t to, uint64_t startChar, uint64_t endChar)
         : m_chunkType(type),
           m_fromLine(from),
           m_toLine(to),
@@ -61,8 +60,8 @@ class AnalyzeFile final {
     uint64_t m_endChar;
   };
 
-  AnalyzeFile(Session* session, Design* design, PathId ppFileId, PathId fileId,
-              int32_t nbChunks, std::string_view text = "")
+  AnalyzeFile(Session* session, Design* design, PathId ppFileId, PathId fileId, int32_t nbChunks,
+              std::string_view text = "")
       : m_session(session),
         m_design(design),
         m_ppFileId(ppFileId),

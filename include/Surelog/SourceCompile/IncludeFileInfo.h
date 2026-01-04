@@ -38,27 +38,17 @@ class MacroInfo;
 
 class IncludeFileInfo final {
  public:
-  enum class Context : uint16_t {
-    None = 0,
-    Include = 1,
-    Macro = 2,
-    Directive = 3
-  };
+  enum class Context : uint16_t { None = 0, Include = 1, Macro = 2, Directive = 3 };
   enum class Action : uint16_t { None = 0, Push = 1, Pop = 2 };
 
-  IncludeFileInfo(Context context, Action action, PathId sectionFileId,
-                  uint32_t sectionLine, uint16_t sectionColumn,
-                  uint32_t sourceLine, uint16_t sourceColumn, SymbolId symbolId,
-                  uint32_t symbolLine, uint32_t symbolColumn)
-      : IncludeFileInfo(context, action, nullptr, sectionFileId, sectionLine,
-                        sectionColumn, sourceLine, sourceColumn, symbolId,
-                        symbolLine, symbolColumn, -1) {}
-  IncludeFileInfo(Context context, Action action,
-                  const MacroInfo *macroDefinition, PathId sectionFileId,
-                  uint32_t sectionLine, uint16_t sectionColumn,
-                  uint32_t sourceLine, uint16_t sourceColumn, SymbolId symbolId,
-                  uint32_t symbolLine, uint32_t symbolColumn,
-                  int32_t indexOpposite)
+  IncludeFileInfo(Context context, Action action, PathId sectionFileId, uint32_t sectionLine, uint16_t sectionColumn,
+                  uint32_t sourceLine, uint16_t sourceColumn, SymbolId symbolId, uint32_t symbolLine,
+                  uint32_t symbolColumn)
+      : IncludeFileInfo(context, action, nullptr, sectionFileId, sectionLine, sectionColumn, sourceLine, sourceColumn,
+                        symbolId, symbolLine, symbolColumn, -1) {}
+  IncludeFileInfo(Context context, Action action, const MacroInfo *macroDefinition, PathId sectionFileId,
+                  uint32_t sectionLine, uint16_t sectionColumn, uint32_t sourceLine, uint16_t sourceColumn,
+                  SymbolId symbolId, uint32_t symbolLine, uint32_t symbolColumn, int32_t indexOpposite)
       : m_context(context),
         m_action(action),
         m_macroDefinition(macroDefinition),

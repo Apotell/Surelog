@@ -36,8 +36,7 @@ namespace SURELOG {
 CompilerHarness::CompilerHarness(Session* session) : m_session(session) {}
 
 struct CompilerHarness::Holder {
-  explicit Holder(Session* session)
-      : m_session(session), compiler(new Compiler(m_session)) {
+  explicit Holder(Session* session) : m_session(session), compiler(new Compiler(m_session)) {
     session->getCommandLineParser()->setCacheAllowed(false);
   }
   Session* const m_session = nullptr;

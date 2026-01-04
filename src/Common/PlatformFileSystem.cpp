@@ -71,8 +71,7 @@ PlatformFileSystem::~PlatformFileSystem() {
   }
 }
 
-PathId PlatformFileSystem::toPathId(std::string_view path,
-                                    SymbolTable *symbolTable) {
+PathId PlatformFileSystem::toPathId(std::string_view path, SymbolTable *symbolTable) {
   if (path.empty()) return BadPathId;
 
   std::filesystem::path normpath = normalize(path);
@@ -82,16 +81,12 @@ PathId PlatformFileSystem::toPathId(std::string_view path,
   return PathId(symbolTable, (RawSymbolId)symbolId, symbol);
 }
 
-std::filesystem::path PlatformFileSystem::toPlatformAbsPath(PathId id) {
-  return toPath(id);
-}
+std::filesystem::path PlatformFileSystem::toPlatformAbsPath(PathId id) { return toPath(id); }
 
-std::pair<std::filesystem::path, std::filesystem::path>
-PlatformFileSystem::toSplitPlatformPath(PathId id) {
+std::pair<std::filesystem::path, std::filesystem::path> PlatformFileSystem::toSplitPlatformPath(PathId id) {
   std::filesystem::path path = toPath(id);
   const std::string pathstr = path.string();
-  filepath_to_working_directories_cache_t::const_iterator it =
-      m_filepathToWorkingDirectoriesCache.find(pathstr);
+  filepath_to_working_directories_cache_t::const_iterator it = m_filepathToWorkingDirectoriesCache.find(pathstr);
   if (it != m_filepathToWorkingDirectoriesCache.end()) {
     std::filesystem::path suffix = path.lexically_relative(it->second);
     return std::make_pair(it->second, suffix);
@@ -128,40 +123,29 @@ PlatformFileSystem::toSplitPlatformPath(PathId id) {
     }
   }
 
-  return (minUpDirs == std::numeric_limits<int32_t>::max())
-             ? std::make_pair("", path)
-             : std::make_pair(bestPrefix, bestSuffix);
+  return (minUpDirs == std::numeric_limits<int32_t>::max()) ? std::make_pair("", path)
+                                                            : std::make_pair(bestPrefix, bestSuffix);
 }
 
-std::filesystem::path PlatformFileSystem::toPlatformRelPath(PathId id) {
-  return toSplitPlatformPath(id).second;
-}
+std::filesystem::path PlatformFileSystem::toPlatformRelPath(PathId id) { return toSplitPlatformPath(id).second; }
 
-std::string PlatformFileSystem::getWorkingDir() {
-  return m_workingDir.string();
-}
+std::string PlatformFileSystem::getWorkingDir() { return m_workingDir.string(); }
 
 std::set<std::string> PlatformFileSystem::getWorkingDirs() {
   std::set<std::string> workingDirs;
-  std::transform(m_configurations.begin(), m_configurations.end(),
-                 std::inserter(workingDirs, workingDirs.end()),
-                 [](const Configuration &configuration) {
-                   return configuration.m_sourceDir.string();
-                 });
+  std::transform(m_configurations.begin(), m_configurations.end(), std::inserter(workingDirs, workingDirs.end()),
+                 [](const Configuration &configuration) { return configuration.m_sourceDir.string(); });
   return workingDirs;
 }
 
-std::istream &PlatformFileSystem::openInput(
-    const std::filesystem::path &filepath, std::ios_base::openmode mode) {
+std::istream &PlatformFileSystem::openInput(const std::filesystem::path &filepath, std::ios_base::openmode mode) {
   if (!filepath.is_absolute()) return m_nullInputStream;
 
   std::scoped_lock<std::mutex> lock(m_inputStreamsMutex);
 #ifdef SURELOG_WITH_ZLIB
   if (filepath.extension() == ".gz") {
-    std::pair<InputStreams::iterator, bool> it =
-        m_inputStreams.emplace(new std::istringstream);
-    std::istringstream &strm =
-        *static_cast<std::istringstream *>(it.first->get());
+    std::pair<InputStreams::iterator, bool> it = m_inputStreams.emplace(new std::istringstream);
+    std::istringstream &strm = *static_cast<std::istringstream *>(it.first->get());
 
     const std::string file_path = filepath.string();
 
@@ -173,15 +157,13 @@ std::istream &PlatformFileSystem::openInput(
       while (true) {
         unzippedBytes = gzread(zipped_file, unzipBuffer, 8192);
         if (unzippedBytes > 0) {
-          unzippedData.insert(unzippedData.end(), unzipBuffer,
-                              unzipBuffer + unzippedBytes);
+          unzippedData.insert(unzippedData.end(), unzipBuffer, unzipBuffer + unzippedBytes);
         } else {
           break;
         }
       }
       gzclose(zipped_file);
-      const std::string unzippedContent(unzippedData.begin(),
-                                        unzippedData.end());
+      const std::string unzippedContent(unzippedData.begin(), unzippedData.end());
       strm.str(unzippedContent);
     } else {
       strm.setstate(std::istringstream::badbit);
@@ -191,29 +173,25 @@ std::istream &PlatformFileSystem::openInput(
   }
 #endif
 
-  std::pair<InputStreams::iterator, bool> it =
-      m_inputStreams.emplace(new std::ifstream);
+  std::pair<InputStreams::iterator, bool> it = m_inputStreams.emplace(new std::ifstream);
 
   std::ifstream &strm = *static_cast<std::ifstream *>(it.first->get());
   strm.open(filepath, mode);
   return strm;
 }
 
-std::ostream &PlatformFileSystem::openOutput(
-    const std::filesystem::path &filepath, std::ios_base::openmode mode) {
+std::ostream &PlatformFileSystem::openOutput(const std::filesystem::path &filepath, std::ios_base::openmode mode) {
   if (!filepath.is_absolute()) return m_nullOutputStream;
 
   std::scoped_lock<std::mutex> lock(m_outputStreamsMutex);
-  std::pair<OutputStreams::iterator, bool> it =
-      m_outputStreams.emplace(new std::ofstream);
+  std::pair<OutputStreams::iterator, bool> it = m_outputStreams.emplace(new std::ofstream);
 
   std::ofstream &strm = *static_cast<std::ofstream *>(it.first->get());
   strm.open(filepath, mode);
   return strm;
 }
 
-std::istream &PlatformFileSystem::openInput(PathId fileId,
-                                            std::ios_base::openmode mode) {
+std::istream &PlatformFileSystem::openInput(PathId fileId, std::ios_base::openmode mode) {
   const std::filesystem::path filepath = toPath(fileId);
   return filepath.empty() ? m_nullInputStream : openInput(filepath, mode);
 }
@@ -229,8 +207,7 @@ bool PlatformFileSystem::close(std::istream &strm) {
   return false;
 }
 
-std::ostream &PlatformFileSystem::openOutput(PathId fileId,
-                                             std::ios_base::openmode mode) {
+std::ostream &PlatformFileSystem::openOutput(PathId fileId, std::ios_base::openmode mode) {
   const std::filesystem::path filepath = toPath(fileId);
   return filepath.empty() ? m_nullOutputStream : openOutput(filepath, mode);
 }
@@ -246,8 +223,7 @@ bool PlatformFileSystem::close(std::ostream &strm) {
   return false;
 }
 
-bool PlatformFileSystem::saveContent(PathId fileId, const char *content,
-                                     std::streamsize length, bool useTemp) {
+bool PlatformFileSystem::saveContent(PathId fileId, const char *content, std::streamsize length, bool useTemp) {
   if (!fileId) return false;
 
   const std::filesystem::path filepath = toPath(fileId);
@@ -258,8 +234,7 @@ bool PlatformFileSystem::saveContent(PathId fileId, const char *content,
   std::filesystem::path filepath2Write = filepath;
   if (useTemp) filepath2Write += ".tmp";
 
-  std::ostream &strm =
-      openOutput(filepath2Write, std::ios_base::out | std::ios_base::binary);
+  std::ostream &strm = openOutput(filepath2Write, std::ios_base::out | std::ios_base::binary);
   if (strm.good()) {
     if (length > 0) {
       strm.write(content, length);
@@ -281,8 +256,7 @@ bool PlatformFileSystem::saveContent(PathId fileId, const char *content,
   return result;
 }
 
-bool PlatformFileSystem::addMapping(std::string_view what,
-                                    std::string_view with) {
+bool PlatformFileSystem::addMapping(std::string_view what, std::string_view with) {
   std::filesystem::path original = normalize(what);
   std::filesystem::path replacement = normalize(with);
 
@@ -299,29 +273,23 @@ std::string PlatformFileSystem::remap(std::string_view what) {
     if (mapping.m_what == what) {
       return mapping.m_with;
     } else if ((mapping.m_what.length() < what.length()) &&
-               (what.compare(0, mapping.m_what.length(), mapping.m_what) ==
-                0)) {
-      return std::string(mapping.m_with)
-          .append(what.substr(mapping.m_what.length()));
+               (what.compare(0, mapping.m_what.length(), mapping.m_what) == 0)) {
+      return std::string(mapping.m_with).append(what.substr(mapping.m_what.length()));
     }
   }
   return std::string(what);
 }
 
-bool PlatformFileSystem::addWorkingDirectoryCacheEntry(
-    std::string_view prefix, std::string_view suffix) {
-  const std::string filepath =
-      (std::filesystem::path(prefix) / suffix).string();
-  filepath_to_working_directories_cache_t::const_iterator it =
-      m_filepathToWorkingDirectoriesCache.find(filepath);
+bool PlatformFileSystem::addWorkingDirectoryCacheEntry(std::string_view prefix, std::string_view suffix) {
+  const std::string filepath = (std::filesystem::path(prefix) / suffix).string();
+  filepath_to_working_directories_cache_t::const_iterator it = m_filepathToWorkingDirectoriesCache.find(filepath);
   if (it != m_filepathToWorkingDirectoriesCache.end()) return false;
   m_filepathToWorkingDirectoriesCache.emplace(filepath, prefix);
   return true;
 }
 
 struct ConfigurationComparer final {
-  bool operator()(const PlatformFileSystem::Configuration &lhs,
-                  const PlatformFileSystem::Configuration &rhs) const {
+  bool operator()(const PlatformFileSystem::Configuration &lhs, const PlatformFileSystem::Configuration &rhs) const {
     const std::string lhs_s = lhs.m_sourceDir.string();
     const std::string rhs_s = rhs.m_sourceDir.string();
     int32_t r = lhs_s.length() - rhs_s.length();
@@ -329,8 +297,7 @@ struct ConfigurationComparer final {
   }
 };
 
-void PlatformFileSystem::addConfiguration(
-    const std::filesystem::path &sourceDir) {
+void PlatformFileSystem::addConfiguration(const std::filesystem::path &sourceDir) {
   int32_t editCount = 0;
   for (Configuration &configuration : m_configurations) {
     if (is_subpath(configuration.m_sourceDir, sourceDir)) {
@@ -347,15 +314,13 @@ void PlatformFileSystem::addConfiguration(
     m_configurations.emplace_back(Configuration{sourceDir, ""});
   }
 
-  std::stable_sort(m_configurations.begin(), m_configurations.end(),
-                   ConfigurationComparer());
+  std::stable_sort(m_configurations.begin(), m_configurations.end(), ConfigurationComparer());
 
   size_t count = 1;
   for (size_t i = 1, n = m_configurations.size(); i < n; ++i) {
     const Configuration &cc = m_configurations[count - 1];
     const Configuration &ci = m_configurations[i];
-    if ((cc.m_sourceDir != ci.m_sourceDir) ||
-        (cc.m_cacheDir != ci.m_cacheDir)) {
+    if ((cc.m_sourceDir != ci.m_sourceDir) || (cc.m_cacheDir != ci.m_cacheDir)) {
       m_configurations[count].m_sourceDir = m_configurations[i].m_sourceDir;
       m_configurations[count].m_cacheDir = m_configurations[i].m_cacheDir;
       ++count;
@@ -367,8 +332,7 @@ void PlatformFileSystem::addConfiguration(
   }
 }
 
-PathId PlatformFileSystem::getProgramFile(std::string_view hint,
-                                          SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getProgramFile(std::string_view hint, SymbolTable *symbolTable) {
   const std::filesystem::path programPath = getProgramPath();
   if (!programPath.empty()) {
     addConfiguration(normalize(programPath.parent_path()));
@@ -394,8 +358,7 @@ PathId PlatformFileSystem::getProgramFile(std::string_view hint,
     std::stringstream searchPath(path);
     std::string pathElement;
     while (std::getline(searchPath, pathElement, PATH_DELIMITER)) {
-      const std::filesystem::path programPath =
-          std::filesystem::path(pathElement) / hintPath;
+      const std::filesystem::path programPath = std::filesystem::path(pathElement) / hintPath;
       if (std::filesystem::exists(programPath, ec) && !ec) {
         addConfiguration(normalize(programPath.parent_path()));
         return toPathId(programPath.string(), symbolTable);
@@ -406,8 +369,7 @@ PathId PlatformFileSystem::getProgramFile(std::string_view hint,
   return BadPathId;  // Didn't find anything.
 }
 
-PathId PlatformFileSystem::getWorkingDir(std::string_view dir,
-                                         SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getWorkingDir(std::string_view dir, SymbolTable *symbolTable) {
   const std::filesystem::path dirpath(dir);
   if (dir.empty() || !dirpath.is_absolute()) return BadPathId;
 
@@ -416,22 +378,19 @@ PathId PlatformFileSystem::getWorkingDir(std::string_view dir,
   return sourceDirId;
 }
 
-PathId PlatformFileSystem::getOutputDir(std::string_view dir,
-                                        SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getOutputDir(std::string_view dir, SymbolTable *symbolTable) {
   const std::filesystem::path dirpath(dir);
   if (dir.empty() || !dirpath.is_absolute()) return BadPathId;
 
   PathId outputDirId = toPathId(dirpath.string(), symbolTable);
   m_outputDir = toPath(outputDirId);
   if (kEnableLogs) {
-    std::cerr << "getOutputDir: " << dir << " => "
-              << PathIdPP(outputDirId, this) << std::endl;
+    std::cerr << "getOutputDir: " << dir << " => " << PathIdPP(outputDirId, this) << std::endl;
   }
   return outputDirId;
 }
 
-PathId PlatformFileSystem::getPrecompiledDir(PathId programId,
-                                             SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getPrecompiledDir(PathId programId, SymbolTable *symbolTable) {
   if (!programId) return BadPathId;
 
   const std::filesystem::path programFile = toPath(programId);
@@ -447,12 +406,11 @@ PathId PlatformFileSystem::getPrecompiledDir(PathId programId,
   std::error_code ec;
   for (const std::filesystem::path &dir : search_paths) {
     const std::filesystem::path pkgDir = dir / kPrecompiledDirName;
-    if ((std::filesystem::exists(dir, ec) && !ec) &&
-        (std::filesystem::is_directory(pkgDir, ec) && !ec)) {
+    if ((std::filesystem::exists(dir, ec) && !ec) && (std::filesystem::is_directory(pkgDir, ec) && !ec)) {
       PathId precompiledDirId = toPathId(pkgDir.string(), symbolTable);
       if (kEnableLogs) {
-        std::cerr << "getPrecompiledDir: " << PathIdPP(programId, this)
-                  << " => " << PathIdPP(precompiledDirId, this) << std::endl;
+        std::cerr << "getPrecompiledDir: " << PathIdPP(programId, this) << " => " << PathIdPP(precompiledDirId, this)
+                  << std::endl;
       }
       return precompiledDirId;
     }
@@ -461,16 +419,13 @@ PathId PlatformFileSystem::getPrecompiledDir(PathId programId,
   return toPathId((programPath / kPrecompiledDirName).string(), symbolTable);
 }
 
-std::filesystem::path PlatformFileSystem::getPrecompiledDir(
-    SymbolTable *symbolTable) {
+std::filesystem::path PlatformFileSystem::getPrecompiledDir(SymbolTable *symbolTable) {
   std::string programPath = getProgramPath().string();
   PathId programId = toPathId(programPath, symbolTable);
   return toPath(getPrecompiledDir(programId, symbolTable));
 }
 
-PathId PlatformFileSystem::getLogFile(bool isUnitCompilation,
-                                      std::string_view filename,
-                                      SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) {
   if (filename.empty()) return BadPathId;
 
   std::filesystem::path logFile = m_outputDir;
@@ -478,15 +433,12 @@ PathId PlatformFileSystem::getLogFile(bool isUnitCompilation,
   logFile /= filename;
   PathId logFileId = toPathId(logFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getLogFile: " << filename << " => "
-              << PathIdPP(logFileId, this) << std::endl;
+    std::cerr << "getLogFile: " << filename << " => " << PathIdPP(logFileId, this) << std::endl;
   }
   return logFileId;
 }
 
-PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation,
-                                       std::string_view dirname,
-                                       SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) {
   if (dirname.empty()) return BadPathId;
 
   std::filesystem::path cacheDir = m_outputDir;
@@ -494,14 +446,12 @@ PathId PlatformFileSystem::getCacheDir(bool isUnitCompilation,
   cacheDir /= dirname;
   PathId cacheDirId = toPathId(cacheDir.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getCacheDir: " << dirname << " => "
-              << PathIdPP(cacheDirId, this) << std::endl;
+    std::cerr << "getCacheDir: " << dirname << " => " << PathIdPP(cacheDirId, this) << std::endl;
   }
   return cacheDirId;
 }
 
-PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation,
-                                         SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) {
   std::filesystem::path cacheDir = m_outputDir;
   cacheDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   PathId compileDirId = toPathId(cacheDir.string(), symbolTable);
@@ -511,31 +461,24 @@ PathId PlatformFileSystem::getCompileDir(bool isUnitCompilation,
   return compileDirId;
 }
 
-PathId PlatformFileSystem::getPpOutputFile(bool isUnitCompilation,
-                                           PathId sourceFileId,
-                                           std::string_view libraryName,
+PathId PlatformFileSystem::getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                                            SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
   std::filesystem::path ppOutputFilepath = m_outputDir;
-  ppOutputFilepath /=
-      isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  ppOutputFilepath /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   ppOutputFilepath /= kPreprocessLibraryDirName;
   ppOutputFilepath /= libraryName;
   ppOutputFilepath /= toPlatformRelPath(sourceFileId);
   PathId ppFileId = toPathId(ppOutputFilepath.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getPpOutputFile: " << PathIdPP(sourceFileId, this) << " => "
-              << PathIdPP(ppFileId, this) << std::endl;
+    std::cerr << "getPpOutputFile: " << PathIdPP(sourceFileId, this) << " => " << PathIdPP(ppFileId, this) << std::endl;
   }
   return ppFileId;
 }
 
-PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation,
-                                          PathId sourceFileId,
-                                          std::string_view libraryName,
-                                          bool isPrecompiled,
-                                          SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
+                                          bool isPrecompiled, SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
   std::filesystem::path ppCacheFile;
@@ -553,17 +496,14 @@ PathId PlatformFileSystem::getPpCacheFile(bool isUnitCompilation,
   ppCacheFile += ".slpp";
   const PathId ppCacheFileId = toPathId(ppCacheFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getPpCacheFile: " << PathIdPP(sourceFileId, this) << " => "
-              << PathIdPP(ppCacheFileId, this) << std::endl;
+    std::cerr << "getPpCacheFile: " << PathIdPP(sourceFileId, this) << " => " << PathIdPP(ppCacheFileId, this)
+              << std::endl;
   }
   return ppCacheFileId;
 }
 
-PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation,
-                                             PathId ppFileId,
-                                             std::string_view libraryName,
-                                             bool isPrecompiled,
-                                             SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName,
+                                             bool isPrecompiled, SymbolTable *symbolTable) {
   if (!ppFileId || libraryName.empty()) return BadPathId;
 
   const std::filesystem::path ppFile = toPath(ppFileId);
@@ -579,68 +519,56 @@ PathId PlatformFileSystem::getParseCacheFile(bool isUnitCompilation,
     ppOutputDir /= kPreprocessLibraryDirName;
 
     parseCacheFile = m_outputDir;
-    parseCacheFile /=
-        isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+    parseCacheFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
     parseCacheFile /= kParserCacheDirName;
     parseCacheFile /= ppFile.lexically_relative(ppOutputDir);
   }
   parseCacheFile += ".slpa";
-  const PathId parseCacheFileId =
-      toPathId(parseCacheFile.string(), symbolTable);
+  const PathId parseCacheFileId = toPathId(parseCacheFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getParseCacheFile: " << PathIdPP(ppFileId, this) << " => "
-              << PathIdPP(parseCacheFileId, this) << std::endl;
+    std::cerr << "getParseCacheFile: " << PathIdPP(ppFileId, this) << " => " << PathIdPP(parseCacheFileId, this)
+              << std::endl;
   }
   return parseCacheFileId;
 }
 
-PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation,
-                                              PathId sourceFileId,
-                                              std::string_view libraryName,
+PathId PlatformFileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                                               SymbolTable *symbolTable) {
   if (!sourceFileId || libraryName.empty()) return BadPathId;
 
   std::filesystem::path pythonCacheFile = m_outputDir;
-  pythonCacheFile /=
-      isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  pythonCacheFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   pythonCacheFile /= kPythonCacheDirName;
   pythonCacheFile /= libraryName;
   pythonCacheFile /= toPlatformRelPath(sourceFileId);
   pythonCacheFile += ".slpy";
   PathId pyCacheFileId = toPathId(pythonCacheFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getPythonCacheFile: " << PathIdPP(sourceFileId, this)
-              << " => " << PathIdPP(pyCacheFileId, this) << std::endl;
+    std::cerr << "getPythonCacheFile: " << PathIdPP(sourceFileId, this) << " => " << PathIdPP(pyCacheFileId, this)
+              << std::endl;
   }
   return pyCacheFileId;
 }
 
-PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation,
-                                                   SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
   std::filesystem::path ppMultiprocessingDir = m_outputDir;
-  ppMultiprocessingDir /=
-      isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  ppMultiprocessingDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   ppMultiprocessingDir /= kMultiprocessingPpDirName;
-  PathId ppMultiprocessingDirId =
-      toPathId(ppMultiprocessingDir.string(), symbolTable);
+  PathId ppMultiprocessingDirId = toPathId(ppMultiprocessingDir.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getPpMultiprocessingDir: "
-              << PathIdPP(ppMultiprocessingDirId, this) << std::endl;
+    std::cerr << "getPpMultiprocessingDir: " << PathIdPP(ppMultiprocessingDirId, this) << std::endl;
   }
   return ppMultiprocessingDirId;
 }
 
-PathId PlatformFileSystem::getParserMultiprocessingDir(
-    bool isUnitCompilation, SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) {
   std::filesystem::path parserMultiprocessingDir = m_outputDir;
-  parserMultiprocessingDir /=
-      isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
+  parserMultiprocessingDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   parserMultiprocessingDir /= kMultiprocessingParserDirName;
   return toPathId(parserMultiprocessingDir.string(), symbolTable);
 }
 
-PathId PlatformFileSystem::getChunkFile(PathId ppFileId, int32_t chunkIndex,
-                                        SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getChunkFile(PathId ppFileId, int32_t chunkIndex, SymbolTable *symbolTable) {
   std::filesystem::path ppFile = toPath(ppFileId);
   if (ppFile.empty()) return BadPathId;
 
@@ -648,22 +576,19 @@ PathId PlatformFileSystem::getChunkFile(PathId ppFileId, int32_t chunkIndex,
   const char filler = strm.fill();
   const std::streamsize width = strm.width();
 
-  strm << "." << std::setfill('0') << std::setw(4) << chunkIndex
-       << std::setfill(filler) << std::setw(width)
+  strm << "." << std::setfill('0') << std::setw(4) << chunkIndex << std::setfill(filler) << std::setw(width)
        << ppFile.extension().string();
 
   std::filesystem::path chunkFile = ppFile;
   chunkFile.replace_extension(strm.str());
   PathId chunkFileId = toPathId(chunkFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getChunkFile: " << PathIdPP(ppFileId, this) << " => "
-              << PathIdPP(chunkFileId, this) << std::endl;
+    std::cerr << "getChunkFile: " << PathIdPP(ppFileId, this) << " => " << PathIdPP(chunkFileId, this) << std::endl;
   }
   return chunkFileId;
 }
 
-PathId PlatformFileSystem::getCheckerDir(bool isUnitCompilation,
-                                         SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) {
   std::filesystem::path checkerDir = m_outputDir;
   checkerDir /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   checkerDir /= kCheckerDirName;
@@ -674,8 +599,7 @@ PathId PlatformFileSystem::getCheckerDir(bool isUnitCompilation,
   return checkerDirId;
 }
 
-PathId PlatformFileSystem::getCheckerFile(PathId uhdmFileId,
-                                          SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCheckerFile(PathId uhdmFileId, SymbolTable *symbolTable) {
   std::filesystem::path uhdmFile = toPath(uhdmFileId);
   if (uhdmFile.empty()) return BadPathId;
 
@@ -684,14 +608,13 @@ PathId PlatformFileSystem::getCheckerFile(PathId uhdmFileId,
   checkerFile /= uhdmFile.filename().replace_extension(".chk");
   PathId checkerFileId = toPathId(checkerFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getCheckerFile: " << PathIdPP(uhdmFileId, this) << " => "
-              << PathIdPP(checkerFileId, this) << std::endl;
+    std::cerr << "getCheckerFile: " << PathIdPP(uhdmFileId, this) << " => " << PathIdPP(checkerFileId, this)
+              << std::endl;
   }
   return checkerFileId;
 }
 
-PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId,
-                                              SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, SymbolTable *symbolTable) {
   const std::filesystem::path uhdmFile = toPath(uhdmFileId);
   if (uhdmFile.empty()) return BadPathId;
 
@@ -701,14 +624,13 @@ PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId,
   checkerHtmlFile += ".html";
   PathId checkerHtmlFileId = toPathId(checkerHtmlFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getCheckerHtmlFile: " << PathIdPP(uhdmFileId, this) << " => "
-              << PathIdPP(checkerHtmlFileId, this) << std::endl;
+    std::cerr << "getCheckerHtmlFile: " << PathIdPP(uhdmFileId, this) << " => " << PathIdPP(checkerHtmlFileId, this)
+              << std::endl;
   }
   return checkerHtmlFileId;
 }
 
-PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, int32_t index,
-                                              SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, int32_t index, SymbolTable *symbolTable) {
   std::filesystem::path uhdmFile = toPath(uhdmFileId);
   if (uhdmFile.empty()) return BadPathId;
 
@@ -716,30 +638,27 @@ PathId PlatformFileSystem::getCheckerHtmlFile(PathId uhdmFileId, int32_t index,
   const char filler = strm.fill();
   const std::streamsize width = strm.width();
 
-  strm << uhdmFile.stem().string() << "_" << std::setfill('0') << std::setw(4)
-       << index << std::setfill(filler) << std::setw(width) << ".chk.html";
+  strm << uhdmFile.stem().string() << "_" << std::setfill('0') << std::setw(4) << index << std::setfill(filler)
+       << std::setw(width) << ".chk.html";
 
   std::filesystem::path checkerHtmlFile = uhdmFile.parent_path();
   checkerHtmlFile /= kCheckerDirName;
   checkerHtmlFile /= strm.str();
   PathId checkerHtmlFileId = toPathId(checkerHtmlFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getCheckerHtmlFile: " << PathIdPP(uhdmFileId, this) << ", "
-              << index << " => " << PathIdPP(checkerHtmlFileId, this)
-              << std::endl;
+    std::cerr << "getCheckerHtmlFile: " << PathIdPP(uhdmFileId, this) << ", " << index << " => "
+              << PathIdPP(checkerHtmlFileId, this) << std::endl;
   }
   return checkerHtmlFileId;
 }
 
-PathId PlatformFileSystem::getOutputUhdmFile(bool isUnitCompilation,
-                                             SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) {
   std::filesystem::path uhdmFile = m_outputDir;
   uhdmFile /= isUnitCompilation ? kUnitCompileDirName : kAllCompileDirName;
   uhdmFile /= "surelog.uhdm";
   PathId uhdmFileId = toPathId(uhdmFile.string(), symbolTable);
   if (kEnableLogs) {
-    std::cerr << "getOutputUhdmFile: " << PathIdPP(uhdmFileId, this)
-              << std::endl;
+    std::cerr << "getOutputUhdmFile: " << PathIdPP(uhdmFileId, this) << std::endl;
   }
   return uhdmFileId;
 }
@@ -782,8 +701,7 @@ bool PlatformFileSystem::mkdir(PathId dirId) {
   if (dir.empty()) return false;
 
   std::error_code ec;
-  if ((std::filesystem::exists(dir, ec) && !ec) &&
-      (std::filesystem::is_directory(dir, ec) && !ec)) {
+  if ((std::filesystem::exists(dir, ec) && !ec) && (std::filesystem::is_directory(dir, ec) && !ec)) {
     return true;
   }
 
@@ -801,8 +719,7 @@ bool PlatformFileSystem::rmdir(PathId dirId) {
   if (dir.empty()) return false;
 
   std::error_code ec;
-  if ((!std::filesystem::exists(dir, ec) && !ec) ||
-      (!std::filesystem::is_directory(dir, ec) && !ec)) {
+  if ((!std::filesystem::exists(dir, ec) && !ec) || (!std::filesystem::is_directory(dir, ec) && !ec)) {
     return true;
   }
 
@@ -820,8 +737,7 @@ bool PlatformFileSystem::mkdirs(PathId dirId) {
   if (dir.empty()) return false;
 
   std::error_code ec;
-  if ((std::filesystem::exists(dir, ec) && !ec) &&
-      (std::filesystem::is_directory(dir, ec) && !ec)) {
+  if ((std::filesystem::exists(dir, ec) && !ec) && (std::filesystem::is_directory(dir, ec) && !ec)) {
     return true;
   }
 
@@ -842,8 +758,7 @@ bool PlatformFileSystem::rmtree(PathId dirId) {
   if (dir.empty()) return false;
 
   std::error_code ec;
-  if ((!std::filesystem::exists(dir, ec) && !ec) ||
-      (!std::filesystem::is_directory(dir, ec) && !ec)) {
+  if ((!std::filesystem::exists(dir, ec) && !ec) || (!std::filesystem::is_directory(dir, ec) && !ec)) {
     return true;
   }
 
@@ -910,8 +825,8 @@ bool PlatformFileSystem::filesize(PathId fileId, std::streamsize *result) {
   return false;
 }
 
-std::filesystem::file_time_type PlatformFileSystem::modtime(
-    PathId fileId, std::filesystem::file_time_type defaultOnFail) {
+std::filesystem::file_time_type PlatformFileSystem::modtime(PathId fileId,
+                                                            std::filesystem::file_time_type defaultOnFail) {
   if (!fileId) return defaultOnFail;
 
   const std::filesystem::path filepath = toPath(fileId);
@@ -922,26 +837,21 @@ std::filesystem::file_time_type PlatformFileSystem::modtime(
     return defaultOnFail;
   }
 
-  std::filesystem::file_time_type lmt =
-      std::filesystem::last_write_time(filepath, ec);
+  std::filesystem::file_time_type lmt = std::filesystem::last_write_time(filepath, ec);
   return ec ? defaultOnFail : lmt;
 }
 
-PathId PlatformFileSystem::locate(std::string_view name,
-                                  const PathIdVector &directories,
-                                  SymbolTable *symbolTable) {
+PathId PlatformFileSystem::locate(std::string_view name, const PathIdVector &directories, SymbolTable *symbolTable) {
   if (name.empty()) return BadPathId;
 
   std::error_code ec;
   for (const PathId &dirId : directories) {
     if (dirId) {
-      const std::filesystem::path filepath =
-          normalize(std::filesystem::path(toPath(dirId)) / name);
+      const std::filesystem::path filepath = normalize(std::filesystem::path(toPath(dirId)) / name);
       if (!filepath.empty() && std::filesystem::exists(filepath, ec) && !ec) {
         PathId resultId = toPathId(filepath.string(), symbolTable);
         if (kEnableLogs) {
-          std::cerr << "locate: " << name << " => " << PathIdPP(resultId, this)
-                    << std::endl;
+          std::cerr << "locate: " << name << " => " << PathIdPP(resultId, this) << std::endl;
         }
         return resultId;
       }
@@ -951,9 +861,7 @@ PathId PlatformFileSystem::locate(std::string_view name,
   return BadPathId;
 }
 
-PathIdVector &PlatformFileSystem::collect(PathId dirId,
-                                          std::string_view extension,
-                                          SymbolTable *symbolTable,
+PathIdVector &PlatformFileSystem::collect(PathId dirId, std::string_view extension, SymbolTable *symbolTable,
                                           PathIdVector &container) {
   if (!dirId) return container;
 
@@ -962,11 +870,9 @@ PathIdVector &PlatformFileSystem::collect(PathId dirId,
 
   std::error_code ec;
   if (std::filesystem::is_directory(dirpath, ec) && !ec) {
-    for (const std::filesystem::directory_entry &entry :
-         std::filesystem::directory_iterator(dirpath)) {
+    for (const std::filesystem::directory_entry &entry : std::filesystem::directory_iterator(dirpath)) {
       const std::filesystem::path &filepath = entry.path();
-      if (extension.empty() ||
-          StringUtils::endsWith(filepath.string(), extension)) {
+      if (extension.empty() || StringUtils::endsWith(filepath.string(), extension)) {
         if (std::filesystem::is_regular_file(filepath, ec) && !ec) {
           container.emplace_back(toPathId(filepath.string(), symbolTable));
         }
@@ -975,8 +881,7 @@ PathIdVector &PlatformFileSystem::collect(PathId dirId,
   }
 
   if (kEnableLogs) {
-    std::cerr << "collect: " << PathIdPP(dirId, this) << ", " << extension
-              << " => " << std::endl;
+    std::cerr << "collect: " << PathIdPP(dirId, this) << ", " << extension << " => " << std::endl;
     for (const PathId &fileId : container) {
       std::cerr << "    " << PathIdPP(fileId, this) << std::endl;
     }
@@ -985,30 +890,23 @@ PathIdVector &PlatformFileSystem::collect(PathId dirId,
   return container;
 }
 
-PathIdVector &PlatformFileSystem::collect(PathId dirId,
-                                          SymbolTable *symbolTable,
-                                          PathIdVector &container) {
+PathIdVector &PlatformFileSystem::collect(PathId dirId, SymbolTable *symbolTable, PathIdVector &container) {
   return dirId ? collect(dirId, "", symbolTable, container) : container;
 }
 
-PathIdVector &PlatformFileSystem::matching(PathId dirId,
-                                           const std::regex &pattern,
-                                           SymbolTable *symbolTable,
+PathIdVector &PlatformFileSystem::matching(PathId dirId, const std::regex &pattern, SymbolTable *symbolTable,
                                            PathIdVector &container) {
   std::filesystem::path prefix = toPath(dirId);
   if (prefix.empty()) return container;
 
   std::error_code ec;
-  const std::filesystem::directory_options options =
-      std::filesystem::directory_options::skip_permission_denied |
-      std::filesystem::directory_options::follow_directory_symlink;
+  const std::filesystem::directory_options options = std::filesystem::directory_options::skip_permission_denied |
+                                                     std::filesystem::directory_options::follow_directory_symlink;
 
-  for (const std::filesystem::directory_entry &entry :
-       std::filesystem::recursive_directory_iterator(prefix, options)) {
+  for (const std::filesystem::directory_entry &entry : std::filesystem::recursive_directory_iterator(prefix, options)) {
     const std::filesystem::path &absolute = entry.path();
     if (std::filesystem::is_regular_file(absolute, ec) && !ec) {
-      const std::string relative =
-          std::filesystem::relative(absolute, prefix, ec).string();
+      const std::string relative = std::filesystem::relative(absolute, prefix, ec).string();
       std::smatch match;
       if (!ec && std::regex_match(relative, match, pattern)) {
         if (std::filesystem::is_regular_file(absolute, ec) && !ec) {
@@ -1028,9 +926,7 @@ PathIdVector &PlatformFileSystem::matching(PathId dirId,
   return container;
 }
 
-PathIdVector &PlatformFileSystem::matching(PathId dirId,
-                                           std::string_view pattern,
-                                           SymbolTable *symbolTable,
+PathIdVector &PlatformFileSystem::matching(PathId dirId, std::string_view pattern, SymbolTable *symbolTable,
                                            PathIdVector &container) {
   if (!dirId) return container;
 
@@ -1062,8 +958,7 @@ PathIdVector &PlatformFileSystem::matching(PathId dirId,
   }
 
   if (suffix.empty()) {
-    return collect(toPathId(prefix.string(), symbolTable), symbolTable,
-                   container);
+    return collect(toPathId(prefix.string(), symbolTable), symbolTable, container);
   }
 
   prefix = std::filesystem::weakly_canonical(prefix, ec);
@@ -1078,23 +973,20 @@ PathIdVector &PlatformFileSystem::matching(PathId dirId,
   regexp = StringUtils::replaceAll(regexp, StrCat("...", escaped),
                                    StrCat(R"([a-zA-Z0-9_\-.)", escaped, R"(]+)",
                                           escaped));  // separator allowed
-  regexp = StringUtils::replaceAll(
-      regexp, StrCat("..", escaped),
-      StrCat(R"([a-zA-Z0-9_\-.]+)", escaped, R"([a-zA-Z0-9_\-.]+)",
-             escaped));  // separator NOT allowed
+  regexp = StringUtils::replaceAll(regexp, StrCat("..", escaped),
+                                   StrCat(R"([a-zA-Z0-9_\-.]+)", escaped, R"([a-zA-Z0-9_\-.]+)",
+                                          escaped));     // separator NOT allowed
   regexp = StringUtils::replaceAll(regexp, ".", "\\.");  // escape it
   regexp = StringUtils::replaceAll(regexp, "?",
-                                   R"([a-zA-Z0-9_\-\.])");  // at most one
-  regexp = StringUtils::replaceAll(
-      regexp, "*", StrCat("[^", escaped, "]*"));  // free for all
+                                   R"([a-zA-Z0-9_\-\.])");                     // at most one
+  regexp = StringUtils::replaceAll(regexp, "*", StrCat("[^", escaped, "]*"));  // free for all
 
   const std::regex patregex(regexp);
   const PathId prefixId = toPathId(prefix.string(), symbolTable);
   return matching(prefixId, patregex, symbolTable, container);
 }
 
-PathId PlatformFileSystem::getChild(PathId id, std::string_view name,
-                                    SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getChild(PathId id, std::string_view name, SymbolTable *symbolTable) {
   if (!id) return BadPathId;
 
   std::filesystem::path filepath = toPath(id);
@@ -1103,16 +995,14 @@ PathId PlatformFileSystem::getChild(PathId id, std::string_view name,
   return toPathId((filepath / name).string(), symbolTable);
 }
 
-PathId PlatformFileSystem::getSibling(PathId id, std::string_view name,
-                                      SymbolTable *symbolTable) {
+PathId PlatformFileSystem::getSibling(PathId id, std::string_view name, SymbolTable *symbolTable) {
   if (!id) return BadPathId;
 
   std::filesystem::path filepath = toPath(id);
   if (filepath.empty()) return BadPathId;
 
-  return filepath.has_parent_path()
-             ? toPathId((filepath.parent_path() / name).string(), symbolTable)
-             : toPathId(name, symbolTable);
+  return filepath.has_parent_path() ? toPathId((filepath.parent_path() / name).string(), symbolTable)
+                                    : toPathId(name, symbolTable);
 }
 
 PathId PlatformFileSystem::getParent(PathId id, SymbolTable *symbolTable) {
@@ -1121,13 +1011,11 @@ PathId PlatformFileSystem::getParent(PathId id, SymbolTable *symbolTable) {
   std::filesystem::path filepath = toPath(id);
   if (filepath.empty()) return BadPathId;
 
-  return filepath.has_parent_path()
-             ? toPathId(filepath.parent_path().string(), symbolTable)
-             : toPathId(".", symbolTable);
+  return filepath.has_parent_path() ? toPathId(filepath.parent_path().string(), symbolTable)
+                                    : toPathId(".", symbolTable);
 }
 
-std::pair<SymbolId, std::string_view> PlatformFileSystem::getLeaf(
-    PathId id, SymbolTable *symbolTable) {
+std::pair<SymbolId, std::string_view> PlatformFileSystem::getLeaf(PathId id, SymbolTable *symbolTable) {
   if (!id) return {BadSymbolId, BadRawSymbol};
 
   const std::filesystem::path filepath = toPath(id);
@@ -1138,8 +1026,7 @@ std::pair<SymbolId, std::string_view> PlatformFileSystem::getLeaf(
   return symbolTable->add(filepath.filename().string());
 }
 
-std::pair<SymbolId, std::string_view> PlatformFileSystem::getType(
-    PathId id, SymbolTable *symbolTable) {
+std::pair<SymbolId, std::string_view> PlatformFileSystem::getType(PathId id, SymbolTable *symbolTable) {
   if (!id) return {BadSymbolId, BadRawSymbol};
 
   const std::filesystem::path filepath = toPath(id);
@@ -1153,8 +1040,7 @@ std::pair<SymbolId, std::string_view> PlatformFileSystem::getType(
 void PlatformFileSystem::printConfiguration(std::ostream &out) {
   out << "=== FileSystem Configuration ===" << std::endl;
   for (const Configuration &configuration : m_configurations) {
-    out << configuration.m_sourceDir << " => " << configuration.m_cacheDir
-        << std::endl;
+    out << configuration.m_sourceDir << " => " << configuration.m_cacheDir << std::endl;
   }
   out << "=== === ===" << std::endl;
 }

@@ -55,8 +55,8 @@ class Program final : public DesignComponent, public ClockingBlockHolder {
   friend class CompileProgram;
 
  public:
-  Program(Session* session, std::string_view name, Library* library,
-          FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer);
+  Program(Session* session, std::string_view name, Library* library, FileContent* fC, NodeId nodeId,
+          uhdm::Serializer& serializer);
   ~Program() final = default;
 
   uint32_t getSize() const final;
@@ -64,11 +64,8 @@ class Program final : public DesignComponent, public ClockingBlockHolder {
   bool isInstance() const final { return true; }
   std::string_view getName() const final { return m_name; }
 
-  ClassNameClassDefinitionMultiMap& getClassDefinitions() {
-    return m_classDefinitions;
-  }
-  void addClassDefinition(std::string_view className,
-                          ClassDefinition* classDef) {
+  ClassNameClassDefinitionMultiMap& getClassDefinitions() { return m_classDefinitions; }
+  void addClassDefinition(std::string_view className, ClassDefinition* classDef) {
     m_classDefinitions.emplace(className, classDef);
   }
   ClassDefinition* getClassDefinition(std::string_view name);

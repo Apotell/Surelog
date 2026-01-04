@@ -37,32 +37,23 @@ class Session;
 
 class AntlrLibParserErrorListener final : public antlr4::ANTLRErrorListener {
  public:
-  explicit AntlrLibParserErrorListener(Session *session,
-                                       ParseLibraryDef *parser)
+  explicit AntlrLibParserErrorListener(Session *session, ParseLibraryDef *parser)
       : m_session(session), m_parser(parser) {}
   AntlrLibParserErrorListener(const AntlrLibParserErrorListener &) = delete;
   ~AntlrLibParserErrorListener() final = default;
 
-  void syntaxError(antlr4::Recognizer *recognizer,
-                   antlr4::Token *offendingSymbol, size_t line,
-                   size_t charPositionInLine, const std::string &msg,
-                   std::exception_ptr e) final;
+  void syntaxError(antlr4::Recognizer *recognizer, antlr4::Token *offendingSymbol, size_t line,
+                   size_t charPositionInLine, const std::string &msg, std::exception_ptr e) final;
 
-  void reportAmbiguity(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa,
-                       size_t startIndex, size_t stopIndex, bool exact,
-                       const antlrcpp::BitSet &ambigAlts,
-                       antlr4::atn::ATNConfigSet *configs) final;
+  void reportAmbiguity(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
+                       bool exact, const antlrcpp::BitSet &ambigAlts, antlr4::atn::ATNConfigSet *configs) final;
 
-  void reportAttemptingFullContext(antlr4::Parser *recognizer,
-                                   const antlr4::dfa::DFA &dfa,
-                                   size_t startIndex, size_t stopIndex,
-                                   const antlrcpp::BitSet &conflictingAlts,
+  void reportAttemptingFullContext(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex,
+                                   size_t stopIndex, const antlrcpp::BitSet &conflictingAlts,
                                    antlr4::atn::ATNConfigSet *configs) final;
 
-  void reportContextSensitivity(antlr4::Parser *recognizer,
-                                const antlr4::dfa::DFA &dfa, size_t startIndex,
-                                size_t stopIndex, size_t prediction,
-                                antlr4::atn::ATNConfigSet *configs) final;
+  void reportContextSensitivity(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex,
+                                size_t stopIndex, size_t prediction, antlr4::atn::ATNConfigSet *configs) final;
 
  private:
   Session *const m_session = nullptr;

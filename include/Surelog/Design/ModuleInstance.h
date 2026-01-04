@@ -54,25 +54,16 @@ class SymbolTable;
 class ModuleInstance final : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(ModuleInstance, ValuedComponentI)
  public:
-  ModuleInstance(Session* session, DesignComponent* definition,
-                 const FileContent* fileContent, NodeId nodeId,
-                 ModuleInstance* parent, std::string_view instName,
-                 std::string_view moduleName);
+  ModuleInstance(Session* session, DesignComponent* definition, const FileContent* fileContent, NodeId nodeId,
+                 ModuleInstance* parent, std::string_view instName, std::string_view moduleName);
   ~ModuleInstance() final;
 
-  using ModuleArrayModuleInstancesMap =
-      std::map<uhdm::ModuleArray*, std::vector<ModuleInstance*>>;
+  using ModuleArrayModuleInstancesMap = std::map<uhdm::ModuleArray*, std::vector<ModuleInstance*>>;
 
   void addSubInstance(ModuleInstance* subInstance);
-  std::vector<ModuleInstance*>& getAllSubInstances() {
-    return m_allSubInstances;
-  }
-  ModuleArrayModuleInstancesMap& getModuleArrayModuleInstancesMap() {
-    return m_moduleArrayModuleInstancesMap;
-  }
-  void setInstanceBinding(ModuleInstance* boundToInstance) {
-    m_boundInstance = boundToInstance;
-  }
+  std::vector<ModuleInstance*>& getAllSubInstances() { return m_allSubInstances; }
+  ModuleArrayModuleInstancesMap& getModuleArrayModuleInstancesMap() { return m_moduleArrayModuleInstancesMap; }
+  void setInstanceBinding(ModuleInstance* boundToInstance) { m_boundInstance = boundToInstance; }
   DesignComponent* getDefinition() { return m_definition; }
   const DesignComponent* getDefinition() const { return m_definition; }
   uint32_t getNbChildren() const { return m_allSubInstances.size(); }

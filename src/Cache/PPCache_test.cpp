@@ -91,34 +91,27 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
   std::unique_ptr<FileSystem> fileSystem(new TestFileSystem(kInputDir));
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
 
-  const PathId kInputDirId =
-      fileSystem->toPathId(kInputDir.string(), symbolTable.get());
+  const PathId kInputDirId = fileSystem->toPathId(kInputDir.string(), symbolTable.get());
   EXPECT_TRUE(kInputDirId);
   EXPECT_TRUE(fileSystem->mkdirs(kInputDirId));
 
-  const PathId include1DirId =
-      fileSystem->getChild(kInputDirId, "include1", symbolTable.get());
+  const PathId include1DirId = fileSystem->getChild(kInputDirId, "include1", symbolTable.get());
   EXPECT_TRUE(include1DirId);
   EXPECT_TRUE(fileSystem->mkdirs(include1DirId));
 
-  const PathId header1FileId =
-      fileSystem->getChild(include1DirId, "header1.sv", symbolTable.get());
+  const PathId header1FileId = fileSystem->getChild(include1DirId, "header1.sv", symbolTable.get());
   EXPECT_TRUE(header1FileId);
 
   std::ostream &strm1 = fileSystem->openForWrite(header1FileId);
   EXPECT_TRUE(strm1.good());
-  strm1 << "function automatic int get_0();" << std::endl
-        << "  return 0;" << std::endl
-        << "endfunction" << std::endl;
+  strm1 << "function automatic int get_0();" << std::endl << "  return 0;" << std::endl << "endfunction" << std::endl;
   fileSystem->close(strm1);
 
-  const PathId include2DirId =
-      fileSystem->getChild(kInputDirId, "include2", symbolTable.get());
+  const PathId include2DirId = fileSystem->getChild(kInputDirId, "include2", symbolTable.get());
   EXPECT_TRUE(include2DirId);
   EXPECT_TRUE(fileSystem->mkdirs(include2DirId));
 
-  const PathId header2FileId =
-      fileSystem->getChild(include2DirId, "header2.sv", symbolTable.get());
+  const PathId header2FileId = fileSystem->getChild(include2DirId, "header2.sv", symbolTable.get());
   EXPECT_TRUE(header2FileId);
 
   std::ostream &strm2 = fileSystem->openForWrite(header2FileId);
@@ -130,13 +123,11 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
         << "endfunction" << std::endl;
   fileSystem->close(strm2);
 
-  const PathId include3DirId =
-      fileSystem->getChild(kInputDirId, "include3", symbolTable.get());
+  const PathId include3DirId = fileSystem->getChild(kInputDirId, "include3", symbolTable.get());
   EXPECT_TRUE(include3DirId);
   EXPECT_TRUE(fileSystem->mkdirs(include3DirId));
 
-  const PathId header3FileId =
-      fileSystem->getChild(include3DirId, "header3.sv", symbolTable.get());
+  const PathId header3FileId = fileSystem->getChild(include3DirId, "header3.sv", symbolTable.get());
   EXPECT_TRUE(header3FileId);
 
   std::ostream &strm3 = fileSystem->openForWrite(header3FileId);
@@ -148,8 +139,7 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
         << "endfunction" << std::endl;
   fileSystem->close(strm3);
 
-  const PathId sourceFileId =
-      fileSystem->getChild(kInputDirId, "source.sv", symbolTable.get());
+  const PathId sourceFileId = fileSystem->getChild(kInputDirId, "source.sv", symbolTable.get());
   EXPECT_TRUE(sourceFileId);
 
   std::ostream &strm4 = fileSystem->openForWrite(sourceFileId);
@@ -164,21 +154,19 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
   // Run 1
   {
-    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr,
-                    nullptr, nullptr);
+    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr, nullptr, nullptr);
 
-    const std::vector<std::string> args{
-        kProgramFile.string(),
-        "-nostdout",
-        "-nobuiltin",
-        "-parse",
-        std::string("-I").append(fileSystem->toPath(include1DirId)),
-        std::string("-I").append(fileSystem->toPath(include2DirId)),
-        std::string(fileSystem->toPath(sourceFileId)),
-        std::string(fileSystem->toPath(header1FileId)),
-        std::string(fileSystem->toPath(header2FileId)),
-        "-o",
-        kOutputDir.string()};
+    const std::vector<std::string> args{kProgramFile.string(),
+                                        "-nostdout",
+                                        "-nobuiltin",
+                                        "-parse",
+                                        std::string("-I").append(fileSystem->toPath(include1DirId)),
+                                        std::string("-I").append(fileSystem->toPath(include2DirId)),
+                                        std::string(fileSystem->toPath(sourceFileId)),
+                                        std::string(fileSystem->toPath(header1FileId)),
+                                        std::string(fileSystem->toPath(header2FileId)),
+                                        "-o",
+                                        kOutputDir.string()};
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
@@ -189,8 +177,7 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
     const auto &compileSourceFiles = compiler->getCompileSourceFiles();
     for (CompileSourceFile *csf : compileSourceFiles) {
-      EXPECT_FALSE(csf->getPreprocessor()->usingCachedVersion())
-          << PathIdPP(csf->getFileId(), fileSystem.get());
+      EXPECT_FALSE(csf->getPreprocessor()->usingCachedVersion()) << PathIdPP(csf->getFileId(), fileSystem.get());
     }
   }
 
@@ -220,23 +207,21 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
   // Run 2
   {
-    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr,
-                    nullptr, nullptr);
+    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr, nullptr, nullptr);
 
-    const std::vector<std::string> args{
-        kProgramFile.string(),
-        "-nostdout",
-        "-nobuiltin",
-        "-parse",
-        std::string("-I").append(fileSystem->toPath(include1DirId)),
-        std::string("-I").append(fileSystem->toPath(include2DirId)),
-        std::string("-I").append(fileSystem->toPath(include3DirId)),
-        std::string(fileSystem->toPath(sourceFileId)),
-        std::string(fileSystem->toPath(header1FileId)),
-        std::string(fileSystem->toPath(header2FileId)),
-        std::string(fileSystem->toPath(header3FileId)),
-        "-o",
-        kOutputDir.string()};
+    const std::vector<std::string> args{kProgramFile.string(),
+                                        "-nostdout",
+                                        "-nobuiltin",
+                                        "-parse",
+                                        std::string("-I").append(fileSystem->toPath(include1DirId)),
+                                        std::string("-I").append(fileSystem->toPath(include2DirId)),
+                                        std::string("-I").append(fileSystem->toPath(include3DirId)),
+                                        std::string(fileSystem->toPath(sourceFileId)),
+                                        std::string(fileSystem->toPath(header1FileId)),
+                                        std::string(fileSystem->toPath(header2FileId)),
+                                        std::string(fileSystem->toPath(header3FileId)),
+                                        "-o",
+                                        kOutputDir.string()};
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
@@ -250,12 +235,10 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
       const PathId fileId = csf->getFileId();
       if ((fileId == header3FileId) || (fileId == sourceFileId)) {
         EXPECT_FALSE(csf->getPreprocessor()->usingCachedVersion())
-            << "fileid:" << fileId << " is "
-            << PathIdPP(fileId, fileSystem.get());
+            << "fileid:" << fileId << " is " << PathIdPP(fileId, fileSystem.get());
       } else {
         EXPECT_TRUE(csf->getPreprocessor()->usingCachedVersion())
-            << "fileid:" << fileId << " is "
-            << PathIdPP(fileId, fileSystem.get());
+            << "fileid:" << fileId << " is " << PathIdPP(fileId, fileSystem.get());
       }
     }
   }

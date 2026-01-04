@@ -48,8 +48,7 @@ class ParserHarness {
   std::unique_ptr<FileContent> parse(std::string_view content);
 
   // Builtin
-  FileContent *parse(std::string_view content, Compiler *compiler,
-                     PathId fileId);
+  FileContent *parse(std::string_view content, Compiler *compiler, PathId fileId);
 
  private:
   struct Holder;

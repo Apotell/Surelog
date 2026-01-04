@@ -45,10 +45,9 @@
 
 namespace SURELOG {
 
-SV3_1aPpTreeListenerHelper::SV3_1aPpTreeListenerHelper(
-    Session* session, PreprocessFile* pp,
-    PreprocessFile::SpecialInstructions& instructions,
-    antlr4::CommonTokenStream* tokens)
+SV3_1aPpTreeListenerHelper::SV3_1aPpTreeListenerHelper(Session* session, PreprocessFile* pp,
+                                                       PreprocessFile::SpecialInstructions& instructions,
+                                                       antlr4::CommonTokenStream* tokens)
     : CommonListenerHelper(session, nullptr, tokens),
       m_pp(pp),
       m_inActiveBranch(true),
@@ -64,9 +63,8 @@ SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
-std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-SV3_1aPpTreeListenerHelper::getPPFileLine(antlr4::tree::ParseTree* tree,
-                                          antlr4::Token* token) const {
+std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> SV3_1aPpTreeListenerHelper::getPPFileLine(
+    antlr4::tree::ParseTree* tree, antlr4::Token* token) const {
   const LineColumn slc = ParseUtils::getLineColumn(m_tokens, tree);
   const LineColumn elc = ParseUtils::getEndLineColumn(m_tokens, tree);
   const uint32_t sl = m_pp->getLineNb(slc.first);
@@ -78,53 +76,52 @@ SV3_1aPpTreeListenerHelper::getPPFileLine(antlr4::tree::ParseTree* tree,
 }
 
 void SV3_1aPpTreeListenerHelper::init() {
-  static constexpr std::string_view kReservedMacros[] = {
-      "define",
-      "celldefine",
-      "endcelldefine",
-      "default_nettype",
-      "undef",
-      "ifdef",
-      "ifndef",
-      "else",
-      "elsif",
-      "endif",
-      "include",
-      "pragma",
-      "begin_keywords",
-      "end_keywords",
-      "resetall",
-      "timescale",
-      "unconnected_drive",
-      "nounconnected_drive",
-      "line",
-      "default_decay_time",
-      "default_trireg_strength",
-      "delay_mode_distributed",
-      "delay_mode_path",
-      "delay_mode_unit",
-      "delay_mode_zero",
-      "undefineall",
-      "accelerate",
-      "noaccelerate",
-      "protect",
-      "uselib",
-      "disable_portfaults",
-      "enable_portfaults",
-      "nosuppress_faults",
-      "suppress_faults",
-      "signed",
-      "unsigned",
-      "endprotect",
-      "protected",
-      "endprotected",
-      "expand_vectornets",
-      "noexpand_vectornets",
-      "autoexpand_vectornets",
-      "remove_gatename",
-      "noremove_gatenames",
-      "remove_netname",
-      "noremove_netnames"};
+  static constexpr std::string_view kReservedMacros[] = {"define",
+                                                         "celldefine",
+                                                         "endcelldefine",
+                                                         "default_nettype",
+                                                         "undef",
+                                                         "ifdef",
+                                                         "ifndef",
+                                                         "else",
+                                                         "elsif",
+                                                         "endif",
+                                                         "include",
+                                                         "pragma",
+                                                         "begin_keywords",
+                                                         "end_keywords",
+                                                         "resetall",
+                                                         "timescale",
+                                                         "unconnected_drive",
+                                                         "nounconnected_drive",
+                                                         "line",
+                                                         "default_decay_time",
+                                                         "default_trireg_strength",
+                                                         "delay_mode_distributed",
+                                                         "delay_mode_path",
+                                                         "delay_mode_unit",
+                                                         "delay_mode_zero",
+                                                         "undefineall",
+                                                         "accelerate",
+                                                         "noaccelerate",
+                                                         "protect",
+                                                         "uselib",
+                                                         "disable_portfaults",
+                                                         "enable_portfaults",
+                                                         "nosuppress_faults",
+                                                         "suppress_faults",
+                                                         "signed",
+                                                         "unsigned",
+                                                         "endprotect",
+                                                         "protected",
+                                                         "endprotected",
+                                                         "expand_vectornets",
+                                                         "noexpand_vectornets",
+                                                         "autoexpand_vectornets",
+                                                         "remove_gatename",
+                                                         "noremove_gatenames",
+                                                         "remove_netname",
+                                                         "noremove_netnames"};
 
   SymbolTable* const symbols = m_session->getSymbolTable();
   for (const std::string_view reserved_macro : kReservedMacros) {
@@ -133,47 +130,37 @@ void SV3_1aPpTreeListenerHelper::init() {
   }
 }
 
-void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                          antlr4::ParserRuleContext* ctx,
-                                          std::string_view object,
-                                          bool printColumn) {
+void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error, antlr4::ParserRuleContext* ctx,
+                                          std::string_view object, bool printColumn) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   if (m_instructions.m_mute) return;
   LineColumn lineCol = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (m_pp->getMacroInfo()) {
-    Location loc(m_pp->getMacroInfo()->m_fileId,
-                 m_pp->getMacroInfo()->m_startLine + lineCol.first - 1,
-                 lineCol.second, symbols->registerSymbol(object));
-    Location extraLoc(m_pp->getIncluderFileId(m_pp->getIncluderLine()),
-                      m_pp->getIncluderLine(), 0);
+    Location loc(m_pp->getMacroInfo()->m_fileId, m_pp->getMacroInfo()->m_startLine + lineCol.first - 1, lineCol.second,
+                 symbols->registerSymbol(object));
+    Location extraLoc(m_pp->getIncluderFileId(m_pp->getIncluderLine()), m_pp->getIncluderLine(), 0);
     m_session->getErrorContainer()->addError(error, {loc, extraLoc});
   } else {
-    Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first),
-                 printColumn ? lineCol.second : 0,
+    Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first), printColumn ? lineCol.second : 0,
                  symbols->registerSymbol(object));
     m_session->getErrorContainer()->addError(error, loc);
   }
 }
 
-void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                          Location& loc, bool showDuplicates) {
+void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error, Location& loc, bool showDuplicates) {
   if (m_instructions.m_mute) return;
   m_session->getErrorContainer()->addError(error, loc, showDuplicates);
 }
 
-void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                          Location& loc, Location& extraLoc,
+void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error, Location& loc, Location& extraLoc,
                                           bool showDuplicates) {
   if (m_instructions.m_mute) return;
-  m_session->getErrorContainer()->addError(error, {loc, extraLoc},
-                                           showDuplicates);
+  m_session->getErrorContainer()->addError(error, {loc, extraLoc}, showDuplicates);
 }
 
-void SV3_1aPpTreeListenerHelper::forwardToParser(
-    antlr4::ParserRuleContext* ctx) {
+void SV3_1aPpTreeListenerHelper::forwardToParser(antlr4::ParserRuleContext* ctx) {
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  if (m_inActiveBranch && (!m_inMacroDefinitionParsing) &&
-      (!clp->filterSimpleDirectives()) &&
+  if (m_inActiveBranch && (!m_inMacroDefinitionParsing) && (!clp->filterSimpleDirectives()) &&
       (!(m_filterProtectedRegions && m_inProtectedRegion))) {
     // m_pp->append(ctx->getText() + "\n");
     m_pp->append(ctx->getText());
@@ -189,8 +176,7 @@ void SV3_1aPpTreeListenerHelper::addLineFiller(antlr4::ParserRuleContext* ctx) {
   m_pp->append(std::string(count, '\n'));
 }
 
-void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
-    std::string_view macroName, antlr4::ParserRuleContext* ctx) {
+void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(std::string_view macroName, antlr4::ParserRuleContext* ctx) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   MacroInfo* macroInf = m_pp->getMacro(macroName);
   if (macroInf) {
@@ -198,16 +184,14 @@ void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
     if ((macroInf->m_fileId == m_pp->getFileId(lineCol.first)) &&
         (m_pp->getLineNb(lineCol.first) == macroInf->m_startLine))
       return;
-    Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first),
-                 lineCol.second, symbols->getId(macroName));
-    Location extraLoc(macroInf->m_fileId, macroInf->m_startLine,
-                      macroInf->m_nameStartColumn);
+    Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first), lineCol.second,
+                 symbols->getId(macroName));
+    Location extraLoc(macroInf->m_fileId, macroInf->m_startLine, macroInf->m_nameStartColumn);
     logError(ErrorDefinition::PP_MULTIPLY_DEFINED_MACRO, loc, extraLoc);
   }
 }
 
-void SV3_1aPpTreeListenerHelper::setCurrentBranchActivity(
-    uint32_t currentLine) {
+void SV3_1aPpTreeListenerHelper::setCurrentBranchActivity(uint32_t currentLine) {
   PreprocessFile::IfElseStack& stack = m_pp->getStack();
   if (!stack.empty()) {
     int32_t index = stack.size() - 1;
@@ -262,15 +246,12 @@ bool SV3_1aPpTreeListenerHelper::isPreviousBranchActive() const {
   for (int32_t i = stack.size() - 1; i >= 0; --i) {
     const PreprocessFile::IfElseItem& tmpitem = stack[i];
     switch (tmpitem.m_type) {
-      case PreprocessFile::IfElseItem::IFDEF:
-        return tmpitem.m_defined;
+      case PreprocessFile::IfElseItem::IFDEF: return tmpitem.m_defined;
       case PreprocessFile::IfElseItem::ELSIF:
         if (tmpitem.m_defined) return true;
         break;
-      case PreprocessFile::IfElseItem::IFNDEF:
-        return !tmpitem.m_defined;
-      default:
-        break;
+      case PreprocessFile::IfElseItem::IFNDEF: return !tmpitem.m_defined;
+      default: break;
     }
   }
   return false;

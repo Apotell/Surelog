@@ -52,81 +52,61 @@
 
 namespace SURELOG {
 
-SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseFile* pf,
-                                             antlr4::CommonTokenStream* tokens,
+SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseFile* pf, antlr4::CommonTokenStream* tokens,
                                              uint32_t lineOffset)
-    : CommonListenerHelper(session, nullptr, tokens),
-      m_pf(pf),
-      m_currentElement(nullptr),
-      m_lineOffset(lineOffset) {
+    : CommonListenerHelper(session, nullptr, tokens), m_pf(pf), m_currentElement(nullptr), m_lineOffset(lineOffset) {
   if (pf->getCompileSourceFile()) {
-    m_ppOutputFileLocation =
-        session->getCommandLineParser()->usePPOutputFileLocation();
+    m_ppOutputFileLocation = session->getCommandLineParser()->usePPOutputFileLocation();
   } else {
     m_ppOutputFileLocation = false;
   }
 }
 
-SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session,
-                                             ParseLibraryDef* pf,
-                                             antlr4::CommonTokenStream* tokens)
+SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseLibraryDef* pf, antlr4::CommonTokenStream* tokens)
     : CommonListenerHelper(session, nullptr, tokens),
       m_pf(nullptr),
       m_currentElement(nullptr),
       m_lineOffset(0),
       m_ppOutputFileLocation(false) {}
 
-void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
-                                     antlr4::ParserRuleContext* ctx,
-                                     std::string_view object,
-                                     bool printColumn) {
+void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error, antlr4::ParserRuleContext* ctx,
+                                     std::string_view object, bool printColumn) {
   LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
 
-  Location loc(m_pf->getFileId(lineCol.first /*+ m_lineOffset*/),
-               m_pf->getLineNb(lineCol.first /*+ m_lineOffset*/),
-               printColumn ? lineCol.second : 0,
-               m_session->getSymbolTable()->registerSymbol(object));
+  Location loc(m_pf->getFileId(lineCol.first /*+ m_lineOffset*/), m_pf->getLineNb(lineCol.first /*+ m_lineOffset*/),
+               printColumn ? lineCol.second : 0, m_session->getSymbolTable()->registerSymbol(object));
   Error err(error, loc);
   m_pf->addError(err);
 }
 
-void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
-                                     Location& loc, bool showDuplicates) {
+void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error, Location& loc, bool showDuplicates) {
   m_session->getErrorContainer()->addError(error, loc, showDuplicates);
 }
 
-void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
-                                     Location& loc, Location& extraLoc,
+void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error, Location& loc, Location& extraLoc,
                                      bool showDuplicates) {
-  m_session->getErrorContainer()->addError(error, {loc, extraLoc},
-                                           showDuplicates);
+  m_session->getErrorContainer()->addError(error, {loc, extraLoc}, showDuplicates);
 }
 
 NodeId SV3_1aTreeShapeHelper::generateDesignElemId() {
   return m_pf->getCompilationUnit()->generateUniqueDesignElemId();
 }
 
-NodeId SV3_1aTreeShapeHelper::generateNodeId() {
-  return m_pf->getCompilationUnit()->generateUniqueNodeId();
-}
+NodeId SV3_1aTreeShapeHelper::generateNodeId() { return m_pf->getCompilationUnit()->generateUniqueNodeId(); }
 
 SymbolId SV3_1aTreeShapeHelper::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
-void SV3_1aTreeShapeHelper::addNestedDesignElement(
-    antlr4::ParserRuleContext* ctx, std::string_view name,
-    DesignElement::ElemType elemtype, VObjectType objtype) {
+void SV3_1aTreeShapeHelper::addNestedDesignElement(antlr4::ParserRuleContext* ctx, std::string_view name,
+                                                   DesignElement::ElemType elemtype, VObjectType objtype) {
   auto [fileId, line, column, endLine, endColumn] = getFileLine(ctx, nullptr);
-  const std::string design_element =
-      StrCat(m_pf->getLibrary()->getName(), "@", name);
-  DesignElement* elem = new DesignElement(
-      registerSymbol(name), fileId, elemtype, generateDesignElemId(), line,
-      column, endLine, endColumn, InvalidNodeId);
+  const std::string design_element = StrCat(m_pf->getLibrary()->getName(), "@", name);
+  DesignElement* elem = new DesignElement(registerSymbol(name), fileId, elemtype, generateDesignElemId(), line, column,
+                                          endLine, endColumn, InvalidNodeId);
   elem->m_context = ctx;
   elem->m_timeInfo = m_pf->getCompilationUnit()->getTimeInfo(fileId, line);
-  elem->m_defaultNetType =
-      m_pf->getCompilationUnit()->getDefaultNetType(fileId, line);
+  elem->m_defaultNetType = m_pf->getCompilationUnit()->getDefaultNetType(fileId, line);
   if (!m_nestedElements.empty()) {
     elem->m_timeInfo = m_nestedElements.top()->m_timeInfo;
     elem->m_parent = m_nestedElements.top()->m_uniqueId;
@@ -136,47 +116,34 @@ void SV3_1aTreeShapeHelper::addNestedDesignElement(
   m_nestedElements.push(m_currentElement);
 }
 
-void SV3_1aTreeShapeHelper::addDesignElement(antlr4::ParserRuleContext* ctx,
-                                             std::string_view name,
-                                             DesignElement::ElemType elemtype,
-                                             VObjectType objtype) {
+void SV3_1aTreeShapeHelper::addDesignElement(antlr4::ParserRuleContext* ctx, std::string_view name,
+                                             DesignElement::ElemType elemtype, VObjectType objtype) {
   auto [fileId, line, column, endLine, endColumn] = getFileLine(ctx, nullptr);
-  const std::string design_element =
-      StrCat(m_pf->getLibrary()->getName(), "@", name);
-  DesignElement* elem = new DesignElement(
-      registerSymbol(name), fileId, elemtype, generateDesignElemId(), line,
-      column, endLine, endColumn, InvalidNodeId);
+  const std::string design_element = StrCat(m_pf->getLibrary()->getName(), "@", name);
+  DesignElement* elem = new DesignElement(registerSymbol(name), fileId, elemtype, generateDesignElemId(), line, column,
+                                          endLine, endColumn, InvalidNodeId);
   elem->m_context = ctx;
-  elem->m_timeInfo =
-      m_pf->getCompilationUnit()->getTimeInfo(m_pf->getFileId(line), line);
-  elem->m_defaultNetType =
-      m_pf->getCompilationUnit()->getDefaultNetType(fileId, line);
+  elem->m_timeInfo = m_pf->getCompilationUnit()->getTimeInfo(m_pf->getFileId(line), line);
+  elem->m_defaultNetType = m_pf->getCompilationUnit()->getDefaultNetType(fileId, line);
   m_fileContent->addDesignElement(design_element, elem);
   m_currentElement = m_fileContent->getDesignElements().back();
 }
 
-std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-SV3_1aTreeShapeHelper::getPPFileLine(antlr4::tree::ParseTree* tree,
-                                     antlr4::Token* token) const {
-  const LineColumn slc = (token == nullptr)
-                             ? ParseUtils::getLineColumn(m_tokens, tree)
-                             : ParseUtils::getLineColumn(token);
-  const LineColumn elc = (token == nullptr)
-                             ? ParseUtils::getEndLineColumn(m_tokens, tree)
-                             : ParseUtils::getEndLineColumn(token);
-  return std::make_tuple(m_pf->getFileId(0), slc.first, slc.second, elc.first,
-                         elc.second);
+std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> SV3_1aTreeShapeHelper::getPPFileLine(
+    antlr4::tree::ParseTree* tree, antlr4::Token* token) const {
+  const LineColumn slc =
+      (token == nullptr) ? ParseUtils::getLineColumn(m_tokens, tree) : ParseUtils::getLineColumn(token);
+  const LineColumn elc =
+      (token == nullptr) ? ParseUtils::getEndLineColumn(m_tokens, tree) : ParseUtils::getEndLineColumn(token);
+  return std::make_tuple(m_pf->getFileId(0), slc.first, slc.second, elc.first, elc.second);
 }
 
-std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-SV3_1aTreeShapeHelper::getFileLine(antlr4::tree::ParseTree* tree,
-                                   antlr4::Token* token) const {
-  const LineColumn slc = (token == nullptr)
-                             ? ParseUtils::getLineColumn(m_tokens, tree)
-                             : ParseUtils::getLineColumn(token);
-  const LineColumn elc = (token == nullptr)
-                             ? ParseUtils::getEndLineColumn(m_tokens, tree)
-                             : ParseUtils::getEndLineColumn(token);
+std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> SV3_1aTreeShapeHelper::getFileLine(
+    antlr4::tree::ParseTree* tree, antlr4::Token* token) const {
+  const LineColumn slc =
+      (token == nullptr) ? ParseUtils::getLineColumn(m_tokens, tree) : ParseUtils::getLineColumn(token);
+  const LineColumn elc =
+      (token == nullptr) ? ParseUtils::getEndLineColumn(m_tokens, tree) : ParseUtils::getEndLineColumn(token);
   uint32_t sl = 0;
   uint16_t sc = 0;
   uint32_t el = 0;
@@ -190,8 +157,7 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::tree::ParseTree* tree,
     ec = elc.second;
   } else {
     const ParseFile::MapLocationResult& r =
-        m_pf->mapLocations(slc.first + m_lineOffset, slc.second,
-                           elc.first + m_lineOffset, elc.second);
+        m_pf->mapLocations(slc.first + m_lineOffset, slc.second, elc.first + m_lineOffset, elc.second);
     fid = r.m_startFileId;
     sl = r.m_startLine;
     sc = r.m_startColumn;
@@ -201,14 +167,11 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::tree::ParseTree* tree,
   return std::make_tuple(fid, sl, sc, el, ec);
 }
 
-std::pair<double, TimeInfo::Unit> SV3_1aTreeShapeHelper::getTimeValue(
-    SV3_1aParser::Time_literalContext* ctx) {
+std::pair<double, TimeInfo::Unit> SV3_1aTreeShapeHelper::getTimeValue(SV3_1aParser::Time_literalContext* ctx) {
   double actual_value = 0;
   TimeInfo::Unit unit = TimeInfo::Unit::Second;
-  if (ctx->INTEGRAL_NUMBER())
-    actual_value = atoi(ctx->INTEGRAL_NUMBER()->getText().c_str());
-  if (ctx->REAL_NUMBER())
-    actual_value = atoi(ctx->REAL_NUMBER()->getText().c_str());
+  if (ctx->INTEGRAL_NUMBER()) actual_value = atoi(ctx->INTEGRAL_NUMBER()->getText().c_str());
+  if (ctx->REAL_NUMBER()) actual_value = atoi(ctx->REAL_NUMBER()->getText().c_str());
   unit = TimeInfo::unitFromString(ctx->time_unit()->getText());
 
   return std::make_pair(actual_value, unit);

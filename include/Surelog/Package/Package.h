@@ -48,8 +48,8 @@ class Package final : public DesignComponent {
   friend CompilePackage;
 
  public:
-  Package(Session* session, std::string_view name, Library* library,
-          const FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer);
+  Package(Session* session, std::string_view name, Library* library, const FileContent* fC, NodeId nodeId,
+          uhdm::Serializer& serializer);
   void append(Package* package);
 
   ~Package() final = default;
@@ -57,20 +57,14 @@ class Package final : public DesignComponent {
   Library* getLibrary() { return m_library; }
 
   uint32_t getSize() const final;
-  VObjectType getType() const final {
-    return VObjectType::paPackage_declaration;
-  }
+  VObjectType getType() const final { return VObjectType::paPackage_declaration; }
   bool isInstance() const final { return false; }
   std::string_view getName() const final { return m_name; }
 
-  const DataType* getDataType(Design* design,
-                              std::string_view name) const override;
+  const DataType* getDataType(Design* design, std::string_view name) const override;
 
-  ClassNameClassDefinitionMultiMap& getClassDefinitions() {
-    return m_classDefinitions;
-  }
-  void addClassDefinition(std::string_view className,
-                          ClassDefinition* classDef) {
+  ClassNameClassDefinitionMultiMap& getClassDefinitions() { return m_classDefinitions; }
+  void addClassDefinition(std::string_view className, ClassDefinition* classDef) {
     m_classDefinitions.emplace(className, classDef);
   }
   ClassDefinition* getClassDefinition(std::string_view name);

@@ -56,31 +56,25 @@ void StrAppend(std::string* dest, Ts&&... args) {
 
 namespace StringUtils {
 // Tokenize "str" at "any_of_separator", store in "result" array.
-std::vector<std::string_view>& tokenize(std::string_view str,
-                                        std::string_view any_of_separators,
+std::vector<std::string_view>& tokenize(std::string_view str, std::string_view any_of_separators,
                                         std::vector<std::string_view>& result);
-std::vector<std::string>& tokenize(std::string_view str,
-                                   std::string_view any_of_separators,
+std::vector<std::string>& tokenize(std::string_view str, std::string_view any_of_separators,
                                    std::vector<std::string>& result);
 
 // Tokenize "str" at "multichar_separator"; store in "result" array.
-std::vector<std::string_view>& tokenizeMulti(
-    std::string_view str, std::string_view multichar_separator,
-    std::vector<std::string_view>& result);
-std::vector<std::string>& tokenizeMulti(std::string_view str,
-                                        std::string_view multichar_separator,
+std::vector<std::string_view>& tokenizeMulti(std::string_view str, std::string_view multichar_separator,
+                                             std::vector<std::string_view>& result);
+std::vector<std::string>& tokenizeMulti(std::string_view str, std::string_view multichar_separator,
                                         std::vector<std::string>& result);
 
 // Tokenizes "str" at "separator", but leaves 'bracketed' areas
 // intact: "double quoted" (parenthesized) [foo] {bar}
-std::vector<std::string_view>& tokenizeBalanced(
-    std::string_view str, std::string_view any_of_separators,
-    std::vector<std::string_view>& result);
+std::vector<std::string_view>& tokenizeBalanced(std::string_view str, std::string_view any_of_separators,
+                                                std::vector<std::string_view>& result);
 
 // In "token" array, replace sequence of tokens that match "pattern" with
 // a single element "news"
-void replaceInTokenVector(std::vector<std::string>& tokens,
-                          const std::vector<std::string_view>& pattern,
+void replaceInTokenVector(std::vector<std::string>& tokens, const std::vector<std::string_view>& pattern,
                           std::string_view news);
 
 // Replace every item in "tokens" that matches "pattern" with "news".
@@ -88,8 +82,7 @@ void replaceInTokenVector(std::vector<std::string>& tokens,
 // Including surprising feature: if the pattern is just between
 // double-quotes right and left in the tokens-array, carriage return is
 // removed in "news". TODO: less surprises.
-void replaceInTokenVector(std::vector<std::string>& tokens,
-                          std::string_view pattern, std::string_view news);
+void replaceInTokenVector(std::vector<std::string>& tokens, std::string_view pattern, std::string_view news);
 
 // Remove whitespace at the beginning of the string.
 [[nodiscard]] std::string_view ltrim(std::string_view str);
@@ -112,15 +105,13 @@ void replaceInTokenVector(std::vector<std::string>& tokens,
 [[nodiscard]] std::string_view leaf(std::string_view str);
 
 // In given string "str", replace all occurences of "from" with "to"
-std::string replaceAll(std::string_view str, std::string_view from,
-                       std::string_view to);
+std::string replaceAll(std::string_view str, std::string_view from, std::string_view to);
 
 // Given a large input, return the content of line number "line".
 // Lines are 1 indexed. The newline separator is included in the
 // returned lines; the last line in text might not have a newline
 // so will not be included.
-[[nodiscard]] std::string_view getLineInString(std::string_view text,
-                                               int32_t line);
+[[nodiscard]] std::string_view getLineInString(std::string_view text, int32_t line);
 
 // Split input text into lines at '\n'. This separator is included in the
 // returned lines; the last line in text might not have a newline so will

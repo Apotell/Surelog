@@ -49,31 +49,26 @@ class SV3_1aPpTreeListenerHelper : public CommonListenerHelper {
   // Helper function if-else
   bool isPreviousBranchActive() const;
   // Helper function to log errors
-  void logError(ErrorDefinition::ErrorType error,
-                antlr4::ParserRuleContext* ctx, std::string_view object,
+  void logError(ErrorDefinition::ErrorType error, antlr4::ParserRuleContext* ctx, std::string_view object,
                 bool printColumn = false);
-  void logError(ErrorDefinition::ErrorType, Location& loc,
-                bool showDuplicates = false);
-  void logError(ErrorDefinition::ErrorType, Location& loc, Location& extraLoc,
-                bool showDuplicates = false);
-  void checkMultiplyDefinedMacro(std::string_view macroName,
-                                 antlr4::ParserRuleContext* ctx);
+  void logError(ErrorDefinition::ErrorType, Location& loc, bool showDuplicates = false);
+  void logError(ErrorDefinition::ErrorType, Location& loc, Location& extraLoc, bool showDuplicates = false);
+  void checkMultiplyDefinedMacro(std::string_view macroName, antlr4::ParserRuleContext* ctx);
   void forwardToParser(antlr4::ParserRuleContext* ctx);
   void init();
   void addLineFiller(antlr4::ParserRuleContext* ctx);
 
   SymbolId registerSymbol(std::string_view symbol) final;
 
-  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getPPFileLine(
-      antlr4::tree::ParseTree* tree, antlr4::Token* token) const final;
-  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(
-      antlr4::tree::ParseTree* tree, antlr4::Token* token) const final {
+  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getPPFileLine(antlr4::tree::ParseTree* tree,
+                                                                           antlr4::Token* token) const final;
+  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(antlr4::tree::ParseTree* tree,
+                                                                         antlr4::Token* token) const final {
     return getPPFileLine(tree, token);
   }
 
  protected:
-  SV3_1aPpTreeListenerHelper(Session* session, PreprocessFile* pp,
-                             PreprocessFile::SpecialInstructions& instructions,
+  SV3_1aPpTreeListenerHelper(Session* session, PreprocessFile* pp, PreprocessFile::SpecialInstructions& instructions,
                              antlr4::CommonTokenStream* tokens);
 
  protected:

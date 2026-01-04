@@ -47,16 +47,12 @@ class PythonAPICache final : Cache {
  private:
   PathId getCacheFileId(PathId sourceFileId) const;
 
-  bool checkCacheIsValid(PathId cacheFileId,
-                         const ::PythonAPICache::Reader& root) const;
+  bool checkCacheIsValid(PathId cacheFileId, const ::PythonAPICache::Reader& root) const;
   bool checkCacheIsValid(PathId cacheFileId) const;
 
-  void cacheSymbols(::PythonAPICache::Builder builder,
-                    SymbolTable& sourceSymbols);
+  void cacheSymbols(::PythonAPICache::Builder builder, SymbolTable& sourceSymbols);
 
-  void cacheErrors(::PythonAPICache::Builder builder,
-                   SymbolTable& targetSymbols,
-                   const ErrorContainer* errorContainer,
+  void cacheErrors(::PythonAPICache::Builder builder, SymbolTable& targetSymbols, const ErrorContainer* errorContainer,
                    const SymbolTable& sourceSymbols, PathId subjectId);
 
  private:

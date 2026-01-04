@@ -40,16 +40,13 @@ class Session;
 
 class VObject final {
  public:
-  VObject(SymbolId name, PathId fileId, VObjectType type, uint32_t startLine,
-          uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-          NodeId parent = InvalidNodeId)
-      : VObject(name, fileId, type, startLine, startColumn, endLine, endColumn,
-                parent, InvalidNodeId /* definition */,
+  VObject(SymbolId name, PathId fileId, VObjectType type, uint32_t startLine, uint16_t startColumn, uint32_t endLine,
+          uint16_t endColumn, NodeId parent = InvalidNodeId)
+      : VObject(name, fileId, type, startLine, startColumn, endLine, endColumn, parent, InvalidNodeId /* definition */,
                 InvalidNodeId /* child */, InvalidNodeId /* sibling */) {}
 
-  VObject(SymbolId name, PathId fileId, VObjectType type, uint32_t startLine,
-          uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-          NodeId parent, NodeId definition, NodeId child, NodeId sibling)
+  VObject(SymbolId name, PathId fileId, VObjectType type, uint32_t startLine, uint16_t startColumn, uint32_t endLine,
+          uint16_t endColumn, NodeId parent, NodeId definition, NodeId child, NodeId sibling)
       : m_name(name),
         m_fileId(fileId),
         m_type(type),
@@ -65,8 +62,7 @@ class VObject final {
   static std::string_view getTypeName(VObjectType type);
   static VObjectType getType(std::string_view name);
 
-  std::string print(Session* session, NodeId uniqueId, PathId definitionFile,
-                    PathId printedFile) const;
+  std::string print(Session* session, NodeId uniqueId, PathId definitionFile, PathId printedFile) const;
 
   SymbolId m_name;
   PathId m_fileId;
@@ -85,9 +81,7 @@ class VObject final {
   NodeId m_sibling;
 };
 
-inline std::ostream& operator<<(std::ostream& os, VObjectType type) {
-  return os << VObject::getTypeName(type);
-}
+inline std::ostream& operator<<(std::ostream& os, VObjectType type) { return os << VObject::getTypeName(type); }
 }  // namespace SURELOG
 
 #endif /* SURELOG_VOBJECT_H */

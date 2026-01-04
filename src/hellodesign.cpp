@@ -49,16 +49,15 @@ namespace fs = std::filesystem;
 class DesignListener final : public uhdm::VpiListener {
   void enterModule(const uhdm::Module *object, vpiHandle handle) final {
     std::string_view instName = object->getName();
-    m_flatTraversal = (instName.empty()) &&
-                      ((object->getParent() == nullptr) ||
-                       ((object->getParent() != nullptr) &&
-                        (object->getParent()->getVpiType() != vpiModule)));
+    m_flatTraversal =
+        (instName.empty()) && ((object->getParent() == nullptr) ||
+                               ((object->getParent() != nullptr) && (object->getParent()->getVpiType() != vpiModule)));
     if (m_flatTraversal)
-      std::cout << "Entering Module Definition: " << object->getDefName() << " "
-                << intptr_t(object) << " " << object->getUhdmId() << std::endl;
+      std::cout << "Entering Module Definition: " << object->getDefName() << " " << intptr_t(object) << " "
+                << object->getUhdmId() << std::endl;
     else
-      std::cout << "Entering Module Instance: " << object->getFullName() << " "
-                << intptr_t(object) << " " << object->getUhdmId() << std::endl;
+      std::cout << "Entering Module Instance: " << object->getFullName() << " " << intptr_t(object) << " "
+                << object->getUhdmId() << std::endl;
   }
 
   void enterContAssign(const uhdm::ContAssign *object, vpiHandle handle) final {
@@ -67,8 +66,7 @@ class DesignListener final : public uhdm::VpiListener {
                    "only navigate the ones in the hierarchical tree!"
                 << std::endl;
     } else {
-      std::cout << "  enterCont_assign " << intptr_t(object) << " "
-                << object->getUhdmId() << std::endl;
+      std::cout << "  enterCont_assign " << intptr_t(object) << " " << object->getUhdmId() << std::endl;
     }
   }
 

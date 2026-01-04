@@ -31,14 +31,10 @@
 #include "Surelog/Common/PathId.h"
 
 namespace SURELOG {
-MacroInfo::MacroInfo(std::string_view name, DefType defType, PathId fileId,
-                     uint32_t startLine, uint16_t startColumn, uint32_t endLine,
-                     uint16_t endColumn, uint16_t nameStartColumn,
-                     uint16_t bodyStartColumn,
-                     const std::vector<std::string>& arguments,
-                     const std::vector<LineColumn>& argumentPositions,
-                     const std::vector<std::string>& tokens,
-                     const std::vector<LineColumn>& tokenPositions)
+MacroInfo::MacroInfo(std::string_view name, DefType defType, PathId fileId, uint32_t startLine, uint16_t startColumn,
+                     uint32_t endLine, uint16_t endColumn, uint16_t nameStartColumn, uint16_t bodyStartColumn,
+                     const std::vector<std::string>& arguments, const std::vector<LineColumn>& argumentPositions,
+                     const std::vector<std::string>& tokens, const std::vector<LineColumn>& tokenPositions)
     : m_name(name),
       m_defType(defType),
       m_fileId(fileId),

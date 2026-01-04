@@ -21,9 +21,7 @@
 #include "Surelog/SourceCompile/ParserHarness.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 
-namespace SURELOG {
-
-namespace {
+namespace SURELOG { namespace {
 TEST(ParserTest, BasicParse) {
   ParserHarness harness;
   {
@@ -56,5 +54,4 @@ TEST(ParserTest, BasicParse) {
     EXPECT_EQ(fC->Type(Unary_Not), VObjectType::paUnary_Not);
   }
 }
-}  // namespace
-}  // namespace SURELOG
+}}  // namespace SURELOG

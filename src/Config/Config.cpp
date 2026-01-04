@@ -36,8 +36,7 @@ UseClause* Config::getCellUseClause(std::string_view cell) {
   return (found == m_cellUseClauses.end()) ? nullptr : &found->second;
 }
 
-void Config::addInstanceUseClause(std::string_view instance,
-                                  const UseClause& use) {
+void Config::addInstanceUseClause(std::string_view instance, const UseClause& use) {
   auto previous = m_instanceUseClauses.find(instance);
   if (previous != m_instanceUseClauses.end()) {
     m_instanceUseClauses.erase(previous);

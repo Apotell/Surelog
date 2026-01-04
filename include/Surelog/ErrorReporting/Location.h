@@ -35,11 +35,9 @@ namespace SURELOG {
 
 class Location final {
  public:
-  explicit Location(SymbolId object)
-      : m_fileId(BadPathId), m_line(0), m_column(0), m_object(object) {}
+  explicit Location(SymbolId object) : m_fileId(BadPathId), m_line(0), m_column(0), m_object(object) {}
   explicit Location(PathId fileId) : Location((SymbolId)fileId) {}
-  Location(PathId fileId, uint32_t line, uint16_t column,
-           SymbolId object = BadSymbolId)
+  Location(PathId fileId, uint32_t line, uint16_t column, SymbolId object = BadSymbolId)
       : m_fileId(fileId), m_line(line), m_column(column), m_object(object) {}
 
   /* Do not create a copy constructor, use default */

@@ -38,10 +38,8 @@ class Error final {
  public:
   friend ErrorContainer;
   Error(ErrorDefinition::ErrorType errorId, const Location& loc);
-  Error(ErrorDefinition::ErrorType errorId, const Location& loc,
-        const Location& extra);
-  Error(ErrorDefinition::ErrorType errorId,
-        const std::vector<Location>& locations);
+  Error(ErrorDefinition::ErrorType errorId, const Location& loc, const Location& extra);
+  Error(ErrorDefinition::ErrorType errorId, const std::vector<Location>& locations);
   Error(const Error& orig) = default;
 
   bool operator==(const Error& rhs) const;

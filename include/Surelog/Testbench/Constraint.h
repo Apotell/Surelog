@@ -36,8 +36,7 @@ class FileContent;
 
 class Constraint final {
  public:
-  Constraint(const FileContent* fC, NodeId id, std::string_view name)
-      : m_fileContent(fC), m_nodeId(id), m_name(name) {}
+  Constraint(const FileContent* fC, NodeId id, std::string_view name) : m_fileContent(fC), m_nodeId(id), m_name(name) {}
   Constraint(const Constraint&) = delete;
 
   std::string_view getName() const { return m_name; }

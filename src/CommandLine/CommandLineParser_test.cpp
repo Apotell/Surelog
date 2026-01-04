@@ -111,39 +111,26 @@ TEST(CommandLineParserTest, WorkingDirectories1) {
   }
 
   const std::vector<std::string> args{
-      programPath.string(),
-      "-nostdout",
-      "-wd",
-      "dira",
-      "-cd",
-      "dirb1",
-      "dirc/file_a.sv",
-      "dirc/file_b.sv",
-      "dird/file.sv",
-      "-cd",
-      "dirb2",
-      "dirc/file_a.sv",
-      "dirc/file_b.sv",
-      "dird/file.sv",
+      programPath.string(), "-nostdout",      "-wd",          "dira", "-cd",   "dirb1",
+      "dirc/file_a.sv",     "dirc/file_b.sv", "dird/file.sv", "-cd",  "dirb2", "dirc/file_a.sv",
+      "dirc/file_b.sv",     "dird/file.sv",
   };
 
-  const std::set<fs::path> expectedWorkingDirs{
-      testdir,
-      testdir / "dira",
-      testdir / "dira" / "dirb1",
-      testdir / "dira" / "dirb1" / "dirc",
-      testdir / "dira" / "dirb1" / "dird",
-      testdir / "dira" / "dirb2",
-      testdir / "dira" / "dirb2" / "dirc",
-      testdir / "dira" / "dirb2" / "dird"};
+  const std::set<fs::path> expectedWorkingDirs{testdir,
+                                               testdir / "dira",
+                                               testdir / "dira" / "dirb1",
+                                               testdir / "dira" / "dirb1" / "dirc",
+                                               testdir / "dira" / "dirb1" / "dird",
+                                               testdir / "dira" / "dirb2",
+                                               testdir / "dira" / "dirb2" / "dirc",
+                                               testdir / "dira" / "dirb2" / "dird"};
 
   std::vector<const char*> cargs;
   cargs.reserve(args.size());
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string& arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem* const fileSystem = session.getFileSystem();
   CommandLineParser* const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -153,15 +140,13 @@ TEST(CommandLineParserTest, WorkingDirectories1) {
 
   const PathIdVector& workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualWorkingDirs;
-  std::transform(workingDirIds.begin(), workingDirIds.end(),
-                 std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
+  std::transform(workingDirIds.begin(), workingDirIds.end(), std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedWorkingDirs, actualWorkingDirs);
 
   const PathIdVector& sourceFileIds = clp->getSourceFiles();
   std::set<fs::path> actualSourceFiles;
-  std::transform(sourceFileIds.begin(), sourceFileIds.end(),
-                 std::inserter(actualSourceFiles, actualSourceFiles.end()),
+  std::transform(sourceFileIds.begin(), sourceFileIds.end(), std::inserter(actualSourceFiles, actualSourceFiles.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedSourceFiles, actualSourceFiles);
 }
@@ -241,23 +226,21 @@ TEST(CommandLineParserTest, WorkingDirectories2) {
       "../dirb1/dird/file.sv",
   };
 
-  const std::set<fs::path> expectedWorkingDirs{
-      testdir,
-      testdir / "dira",
-      testdir / "dira" / "dirb1",
-      testdir / "dira" / "dirb1" / "dirc",
-      testdir / "dira" / "dirb1" / "dird",
-      testdir / "dira" / "dirb2",
-      testdir / "dira" / "dirb2" / "dirc",
-      testdir / "dira" / "dirb2" / "dird"};
+  const std::set<fs::path> expectedWorkingDirs{testdir,
+                                               testdir / "dira",
+                                               testdir / "dira" / "dirb1",
+                                               testdir / "dira" / "dirb1" / "dirc",
+                                               testdir / "dira" / "dirb1" / "dird",
+                                               testdir / "dira" / "dirb2",
+                                               testdir / "dira" / "dirb2" / "dirc",
+                                               testdir / "dira" / "dirb2" / "dird"};
 
   std::vector<const char*> cargs;
   cargs.reserve(args.size());
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string& arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem* const fileSystem = session.getFileSystem();
   CommandLineParser* const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -267,15 +250,13 @@ TEST(CommandLineParserTest, WorkingDirectories2) {
 
   const PathIdVector& workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualWorkingDirs;
-  std::transform(workingDirIds.begin(), workingDirIds.end(),
-                 std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
+  std::transform(workingDirIds.begin(), workingDirIds.end(), std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedWorkingDirs, actualWorkingDirs);
 
   const PathIdVector& sourceFileIds = clp->getSourceFiles();
   std::set<fs::path> actualSourceFiles;
-  std::transform(sourceFileIds.begin(), sourceFileIds.end(),
-                 std::inserter(actualSourceFiles, actualSourceFiles.end()),
+  std::transform(sourceFileIds.begin(), sourceFileIds.end(), std::inserter(actualSourceFiles, actualSourceFiles.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedSourceFiles, actualSourceFiles);
 }
@@ -304,10 +285,8 @@ TEST(CommandLineParserTest, WorkingDirectories3) {
 
   std::error_code ec;
   const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir =
-      FileSystem::normalize(fs::path(testing::TempDir()) / "ws3");
-  const fs::path testdir =
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
+  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws3");
+  const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
       wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
@@ -316,14 +295,11 @@ TEST(CommandLineParserTest, WorkingDirectories3) {
       wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
   };
 
-  const std::vector<fs::path> files{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" /
-          "test_a.sv",
-      wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
-      wsdir / "tests" / "testname" / "test_c.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" /
-          "uvm_a.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
+  const std::vector<fs::path> files{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" / "test_a.sv",
+                                    wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
+                                    wsdir / "tests" / "testname" / "test_c.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" / "uvm_a.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
 
   for (const fs::path& dir : dirs) {
     fs::create_directories(dir, ec);
@@ -338,30 +314,27 @@ TEST(CommandLineParserTest, WorkingDirectories3) {
     expectedSourceFiles.insert(file);
   }
 
-  const std::vector<std::string> args{
-      programPath.string(),
-      "-nostdout",
-      "../subfolder_3/test_a.sv",
-      "../../subfolder_4/test_b.sv",
-      "../../test_c.sv",
-      "../../../../third_party/uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
-      "../../../../third_party/uvm/uvm_subfolder_a/uvm_b.sv"};
+  const std::vector<std::string> args{programPath.string(),
+                                      "-nostdout",
+                                      "../subfolder_3/test_a.sv",
+                                      "../../subfolder_4/test_b.sv",
+                                      "../../test_c.sv",
+                                      "../../../../third_party/uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
+                                      "../../../../third_party/uvm/uvm_subfolder_a/uvm_b.sv"};
 
-  const std::set<fs::path> expectedWorkingDirs{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3",
-      wsdir / "tests" / "testname" / "subfolder_4",
-      wsdir / "tests" / "testname",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a"};
+  const std::set<fs::path> expectedWorkingDirs{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
+                                               wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3",
+                                               wsdir / "tests" / "testname" / "subfolder_4",
+                                               wsdir / "tests" / "testname",
+                                               wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
+                                               wsdir / "third_party" / "uvm" / "uvm_subfolder_a"};
 
   std::vector<const char*> cargs;
   cargs.reserve(args.size());
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string& arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem* const fileSystem = session.getFileSystem();
   CommandLineParser* const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -371,15 +344,13 @@ TEST(CommandLineParserTest, WorkingDirectories3) {
 
   const PathIdVector& workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualWorkingDirs;
-  std::transform(workingDirIds.begin(), workingDirIds.end(),
-                 std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
+  std::transform(workingDirIds.begin(), workingDirIds.end(), std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedWorkingDirs, actualWorkingDirs);
 
   const PathIdVector& sourceFileIds = clp->getSourceFiles();
   std::set<fs::path> actualSourceFiles;
-  std::transform(sourceFileIds.begin(), sourceFileIds.end(),
-                 std::inserter(actualSourceFiles, actualSourceFiles.end()),
+  std::transform(sourceFileIds.begin(), sourceFileIds.end(), std::inserter(actualSourceFiles, actualSourceFiles.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedSourceFiles, actualSourceFiles);
 }
@@ -409,10 +380,8 @@ TEST(CommandLineParserTest, WorkingDirectories4) {
 
   std::error_code ec;
   const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir =
-      FileSystem::normalize(fs::path(testing::TempDir()) / "ws4");
-  const fs::path testdir =
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
+  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws4");
+  const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
       wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
@@ -421,14 +390,11 @@ TEST(CommandLineParserTest, WorkingDirectories4) {
       wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
   };
 
-  const std::vector<fs::path> files{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" /
-          "test_a.sv",
-      wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
-      wsdir / "tests" / "testname" / "test_c.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" /
-          "uvm_a.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
+  const std::vector<fs::path> files{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" / "test_a.sv",
+                                    wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
+                                    wsdir / "tests" / "testname" / "test_c.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" / "uvm_a.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
 
   for (const fs::path& dir : dirs) {
     fs::create_directories(dir, ec);
@@ -443,35 +409,32 @@ TEST(CommandLineParserTest, WorkingDirectories4) {
     expectedSourceFiles.insert(file);
   }
 
-  const std::vector<std::string> args{
-      programPath.string(),
-      "-nostdout",
-      "-wd",
-      "../..",
-      "subfolder_1/subfolder_3/test_a.sv",
-      "subfolder_4/test_b.sv",
-      "test_c.sv",
-      "-wd",
-      "../../../../third_party",
-      "uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
-      "uvm/uvm_subfolder_a/uvm_b.sv"};
+  const std::vector<std::string> args{programPath.string(),
+                                      "-nostdout",
+                                      "-wd",
+                                      "../..",
+                                      "subfolder_1/subfolder_3/test_a.sv",
+                                      "subfolder_4/test_b.sv",
+                                      "test_c.sv",
+                                      "-wd",
+                                      "../../../../third_party",
+                                      "uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
+                                      "uvm/uvm_subfolder_a/uvm_b.sv"};
 
-  const std::set<fs::path> expectedWorkingDirs{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3",
-      wsdir / "tests" / "testname" / "subfolder_4",
-      wsdir / "tests" / "testname",
-      wsdir / "third_party",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b"};
+  const std::set<fs::path> expectedWorkingDirs{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
+                                               wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3",
+                                               wsdir / "tests" / "testname" / "subfolder_4",
+                                               wsdir / "tests" / "testname",
+                                               wsdir / "third_party",
+                                               wsdir / "third_party" / "uvm" / "uvm_subfolder_a",
+                                               wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b"};
 
   std::vector<const char*> cargs;
   cargs.reserve(args.size());
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string& arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem* const fileSystem = session.getFileSystem();
   CommandLineParser* const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -481,15 +444,13 @@ TEST(CommandLineParserTest, WorkingDirectories4) {
 
   const PathIdVector& workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualWorkingDirs;
-  std::transform(workingDirIds.begin(), workingDirIds.end(),
-                 std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
+  std::transform(workingDirIds.begin(), workingDirIds.end(), std::inserter(actualWorkingDirs, actualWorkingDirs.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedWorkingDirs, actualWorkingDirs);
 
   const PathIdVector& sourceFileIds = clp->getSourceFiles();
   std::set<fs::path> actualSourceFiles;
-  std::transform(sourceFileIds.begin(), sourceFileIds.end(),
-                 std::inserter(actualSourceFiles, actualSourceFiles.end()),
+  std::transform(sourceFileIds.begin(), sourceFileIds.end(), std::inserter(actualSourceFiles, actualSourceFiles.end()),
                  [&](const PathId& id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedSourceFiles, actualSourceFiles);
 }

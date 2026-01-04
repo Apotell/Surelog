@@ -56,8 +56,7 @@
 
 namespace SURELOG {
 
-Design::Design(Session* session, uhdm::Serializer& serializer,
-               LibrarySet* librarySet, ConfigSet* configSet)
+Design::Design(Session* session, uhdm::Serializer& serializer, LibrarySet* librarySet, ConfigSet* configSet)
     : m_session(session),
       m_uhdmDesign(serializer.make<uhdm::Design>()),
       m_librarySet(librarySet),
@@ -99,8 +98,7 @@ void Design::addPPFileContent(PathId fileId, FileContent* content) {
   m_mutex.unlock();
 }
 
-DesignComponent* Design::getComponentDefinition(
-    std::string_view componentName) const {
+DesignComponent* Design::getComponentDefinition(std::string_view componentName) const {
   if (DesignComponent* const dc = getPackage(componentName)) {
     return dc;
   } else if (DesignComponent* const dc = getModuleDefinition(componentName)) {
@@ -113,10 +111,8 @@ DesignComponent* Design::getComponentDefinition(
   return nullptr;
 }
 
-ModuleDefinition* Design::getModuleDefinition(
-    std::string_view moduleName) const {
-  ModuleNameModuleDefinitionMap::const_iterator itr =
-      m_moduleDefinitions.find(moduleName);
+ModuleDefinition* Design::getModuleDefinition(std::string_view moduleName) const {
+  ModuleNameModuleDefinitionMap::const_iterator itr = m_moduleDefinitions.find(moduleName);
   if (itr != m_moduleDefinitions.end()) {
     return itr->second;
   }
@@ -157,8 +153,7 @@ std::string Design::reportInstanceTree() const {
       undef = " [U]";
     }
     std::string type_s;
-    Location loc(tmp->getFileId(), tmp->getLineNb(), tmp->getColumnNb(),
-                 tmp->getFullPathId(symbols));
+    Location loc(tmp->getFileId(), tmp->getLineNb(), tmp->getColumnNb(), tmp->getFullPathId(symbols));
     if (type == VObjectType::paUdp_instantiation) {
       type_s = "[UDP]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
@@ -167,13 +162,10 @@ std::string Design::reportInstanceTree() const {
       type_s = "[MOD]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
       errors->addError(err);
-    } else if ((type == VObjectType::paCmos_switch_instance) ||
-               (type == VObjectType::paEnable_gate_instance) ||
-               (type == VObjectType::paMos_switch_instance) ||
-               (type == VObjectType::paN_input_gate_instance) ||
+    } else if ((type == VObjectType::paCmos_switch_instance) || (type == VObjectType::paEnable_gate_instance) ||
+               (type == VObjectType::paMos_switch_instance) || (type == VObjectType::paN_input_gate_instance) ||
                (type == VObjectType::paN_output_gate_instance) ||
-               (type == VObjectType::paPass_enable_switch_instance) ||
-               (type == VObjectType::paPass_switch_instance) ||
+               (type == VObjectType::paPass_enable_switch_instance) || (type == VObjectType::paPass_switch_instance) ||
                (type == VObjectType::paPull_gate_instance)) {
       type_s = "[GAT]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
@@ -196,8 +188,7 @@ std::string Design::reportInstanceTree() const {
       errors->addError(err);
     }
 
-    StrAppend(&tree, type_s, " ", def, undef, " ", tmp->getFullPathName(),
-              "\n");
+    StrAppend(&tree, type_s, " ", def, undef, " ", tmp->getFullPathName(), "\n");
 
     bool extraInfo = false;
     if (extraInfo) {
@@ -222,11 +213,8 @@ std::string Design::reportInstanceTree() const {
   return tree;
 }
 
-void Design::reportInstanceTreeStats(uint32_t& nbTopLevelModules,
-                                     uint32_t& maxDepth,
-                                     uint32_t& numberOfInstances,
-                                     uint32_t& numberOfLeafInstances,
-                                     uint32_t& nbUndefinedModules,
+void Design::reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth, uint32_t& numberOfInstances,
+                                     uint32_t& numberOfLeafInstances, uint32_t& nbUndefinedModules,
                                      uint32_t& nbUndefinedInstances) const {
   nbTopLevelModules = 0;
   maxDepth = 0;
@@ -276,15 +264,13 @@ void Design::reportInstanceTreeStats(uint32_t& nbTopLevelModules,
   nbUndefinedModules = undefModules.size();
 }
 
-ModuleInstance* Design::findInstance(std::string_view path,
-                                     ModuleInstance* scope) const {
+ModuleInstance* Design::findInstance(std::string_view path, ModuleInstance* scope) const {
   std::vector<std::string> vpath;
   StringUtils::tokenize(path, ".", vpath);
   return findInstance(vpath, scope);
 }
 
-ModuleInstance* Design::findInstance(const std::vector<std::string>& path,
-                                     ModuleInstance* scope) const {
+ModuleInstance* Design::findInstance(const std::vector<std::string>& path, ModuleInstance* scope) const {
   if (path.empty()) return nullptr;
   if (scope) {
     ModuleInstance* res = findInstance_(path, scope);
@@ -309,8 +295,7 @@ ModuleInstance* Design::findInstance(const std::vector<std::string>& path,
   return nullptr;
 }
 
-ModuleInstance* Design::findInstance_(const std::vector<std::string>& path,
-                                      ModuleInstance* scope) const {
+ModuleInstance* Design::findInstance_(const std::vector<std::string>& path, ModuleInstance* scope) const {
   if (path.empty()) return nullptr;
   if (scope == nullptr) return nullptr;
   if (path.size() == 1) {
@@ -339,8 +324,7 @@ ModuleInstance* Design::findInstance_(const std::vector<std::string>& path,
 DefParam* Design::getDefParam(std::string_view name) const {
   std::vector<std::string> vpath;
   StringUtils::tokenize(name, ".", vpath);
-  std::map<std::string, DefParam*>::const_iterator itr =
-      m_defParams.find(vpath[0]);
+  std::map<std::string, DefParam*>::const_iterator itr = m_defParams.find(vpath[0]);
   if (itr != m_defParams.end()) {
     vpath.erase(vpath.begin());
     return getDefParam_(vpath, itr->second);
@@ -354,13 +338,11 @@ Value* Design::getDefParamValue(std::string_view name) {
   return nullptr;
 }
 
-DefParam* Design::getDefParam_(std::vector<std::string>& path,
-                               DefParam* parent) const {
+DefParam* Design::getDefParam_(std::vector<std::string>& path, DefParam* parent) const {
   if (path.empty()) {
     return parent;
   }
-  std::map<std::string, DefParam*>::iterator itr =
-      parent->getChildren().find(path[0]);
+  std::map<std::string, DefParam*>::iterator itr = parent->getChildren().find(path[0]);
   if (itr != parent->getChildren().end()) {
     path.erase(path.begin());
     return getDefParam_(path, itr->second);
@@ -368,8 +350,7 @@ DefParam* Design::getDefParam_(std::vector<std::string>& path,
   return nullptr;
 }
 
-void Design::addDefParam(std::string_view name, const FileContent* fC,
-                         NodeId nodeId, Value* value) {
+void Design::addDefParam(std::string_view name, const FileContent* fC, NodeId nodeId, Value* value) {
   std::vector<std::string> vpath;
   StringUtils::tokenize(name, ".", vpath);
   std::map<std::string, DefParam*>::iterator itr = m_defParams.find(vpath[0]);
@@ -384,8 +365,8 @@ void Design::addDefParam(std::string_view name, const FileContent* fC,
   }
 }
 
-void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
-                          NodeId nodeId, Value* value, DefParam* parent) {
+void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC, NodeId nodeId, Value* value,
+                          DefParam* parent) {
   if (path.empty()) {
     parent->setValue(value);
     parent->setLocation(fC, nodeId);
@@ -394,19 +375,14 @@ void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
   ErrorContainer* const errors = m_session->getErrorContainer();
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
-  std::map<std::string, DefParam*>::iterator itr =
-      parent->getChildren().find(path[0]);
+  std::map<std::string, DefParam*>::iterator itr = parent->getChildren().find(path[0]);
   if (itr != parent->getChildren().end()) {
     path.erase(path.begin());
     if (path.empty()) {
       DefParam* previous = itr->second;
-      if (!fC->getFileId(nodeId).equals(
-              previous->getLocation()->getFileId(previous->getNodeId()),
-              fileSystem) ||
-          (fC->Line(nodeId) !=
-           previous->getLocation()->Line(previous->getNodeId()))) {
-        Location loc1(fC->getFileId(nodeId), fC->Line(nodeId),
-                      fC->Column(nodeId),
+      if (!fC->getFileId(nodeId).equals(previous->getLocation()->getFileId(previous->getNodeId()), fileSystem) ||
+          (fC->Line(nodeId) != previous->getLocation()->Line(previous->getNodeId()))) {
+        Location loc1(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
                       symbols->registerSymbol(previous->getFullName()));
         Location loc2(previous->getLocation()->getFileId(previous->getNodeId()),
                       previous->getLocation()->Line(previous->getNodeId()),
@@ -446,8 +422,7 @@ void Design::checkDefParamUsage(DefParam* parent) {
       }
 
       Location loc(parent->getLocation()->getFileId(parent->getNodeId()),
-                   parent->getLocation()->Line(parent->getNodeId()),
-                   parent->getLocation()->Column(parent->getNodeId()),
+                   parent->getLocation()->Line(parent->getNodeId()), parent->getLocation()->Column(parent->getNodeId()),
                    symbols->registerSymbol(parent->getFullName()));
       Error err(ErrorDefinition::ELAB_UNMATCHED_DEFPARAM, loc);
       errors->addError(err);
@@ -459,8 +434,7 @@ void Design::checkDefParamUsage(DefParam* parent) {
 }
 
 Package* Design::getPackage(std::string_view name) const {
-  PackageNamePackageDefinitionMultiMap::const_iterator itr =
-      m_packageDefinitions.find(name);
+  PackageNamePackageDefinitionMultiMap::const_iterator itr = m_packageDefinitions.find(name);
   if (itr == m_packageDefinitions.end()) {
     return nullptr;
   } else {
@@ -469,8 +443,7 @@ Package* Design::getPackage(std::string_view name) const {
 }
 
 Program* Design::getProgram(std::string_view name) const {
-  ProgramNameProgramDefinitionMap::const_iterator itr =
-      m_programDefinitions.find(name);
+  ProgramNameProgramDefinitionMap::const_iterator itr = m_programDefinitions.find(name);
   if (itr == m_programDefinitions.end()) {
     return nullptr;
   } else {
@@ -479,8 +452,7 @@ Program* Design::getProgram(std::string_view name) const {
 }
 
 ClassDefinition* Design::getClassDefinition(std::string_view name) const {
-  ClassNameClassDefinitionMap::const_iterator itr =
-      m_uniqueClassDefinitions.find(name);
+  ClassNameClassDefinitionMap::const_iterator itr = m_uniqueClassDefinitions.find(name);
   if (itr == m_uniqueClassDefinitions.end()) {
     return nullptr;
   } else {
@@ -496,8 +468,7 @@ void Design::orderPackages() {
   MultiDefCount multiDefCount;
   for (const auto& packageName : m_orderedPackageNames) {
     for (uint32_t i = 0; i < m_packageDefinitions.size(); i++) {
-      PackageNamePackageDefinitionMultiMap::iterator pos =
-          m_packageDefinitions.begin();
+      PackageNamePackageDefinitionMultiMap::iterator pos = m_packageDefinitions.begin();
       std::advance(pos, i);
 
       if (packageName == pos->first) {
@@ -517,18 +488,15 @@ void Design::orderPackages() {
   }
 }
 
-Package* Design::addPackageDefinition(std::string_view packageName,
-                                      Package* package) {
-  PackageNamePackageDefinitionMultiMap::iterator itr =
-      m_packageDefinitions.find(packageName);
+Package* Design::addPackageDefinition(std::string_view packageName, Package* package) {
+  PackageNamePackageDefinitionMultiMap::iterator itr = m_packageDefinitions.find(packageName);
   if (itr == m_packageDefinitions.end()) {
     m_packageDefinitions.emplace(packageName, package);
     return package;
   } else {
     Package* old = itr->second;
     if (old->getFileContents()[0]->getParent() &&
-        (old->getFileContents()[0]->getParent() ==
-         package->getFileContents()[0]->getParent())) {
+        (old->getFileContents()[0]->getParent() == package->getFileContents()[0]->getParent())) {
       old->append(package);
       return old;
     } else {
@@ -538,8 +506,7 @@ Package* Design::addPackageDefinition(std::string_view packageName,
   }
 }
 
-void Design::addClassDefinition(std::string_view className,
-                                ClassDefinition* classDef) {
+void Design::addClassDefinition(std::string_view className, ClassDefinition* classDef) {
   if (m_uniqueClassDefinitions.emplace(className, classDef).second) {
     m_classDefinitions.emplace(className, classDef);
   }
@@ -579,14 +546,11 @@ std::vector<BindStmt*> Design::getBindStmts(std::string_view targetName) {
   return results;
 }
 
-void Design::addBindStmt(std::string_view targetName, BindStmt* stmt) {
-  m_bindMap.emplace(targetName, stmt);
-}
+void Design::addBindStmt(std::string_view targetName, BindStmt* stmt) { m_bindMap.emplace(targetName, stmt); }
 
 vpiHandle Design::getVpiDesign() const {
   if (m_uhdmDesign != nullptr) {
-    return m_uhdmDesign->getSerializer()->makeUhdmHandle(uhdm::UhdmType::Design,
-                                                         m_uhdmDesign);
+    return m_uhdmDesign->getSerializer()->makeUhdmHandle(uhdm::UhdmType::Design, m_uhdmDesign);
   }
   return nullptr;
 }

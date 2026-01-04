@@ -34,50 +34,36 @@
 #include "Surelog/Utils/ParseUtils.h"
 
 namespace SURELOG {
-SV3_1aPythonListener::SV3_1aPythonListener(PythonListen* pl,
-                                           PyThreadState* interpState,
-                                           antlr4::CommonTokenStream* tokens,
-                                           uint32_t lineOffset)
-    : m_pl(pl),
-      m_interpState(interpState),
-      m_tokens(tokens),
-      m_lineOffset(lineOffset) {}
+SV3_1aPythonListener::SV3_1aPythonListener(PythonListen* pl, PyThreadState* interpState,
+                                           antlr4::CommonTokenStream* tokens, uint32_t lineOffset)
+    : m_pl(pl), m_interpState(interpState), m_tokens(tokens), m_lineOffset(lineOffset) {}
 
-SV3_1aPythonListener::SV3_1aPythonListener(const SV3_1aPythonListener& orig) =
-    default;
+SV3_1aPythonListener::SV3_1aPythonListener(const SV3_1aPythonListener& orig) = default;
 
 SV3_1aPythonListener::~SV3_1aPythonListener() = default;
 
-void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
-                                    antlr4::ParserRuleContext* ctx,
-                                    const std::string& object,
-                                    bool printColumn) {
+void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error, antlr4::ParserRuleContext* ctx,
+                                    const std::string& object, bool printColumn) {
   LineColumn lineCol = ParseUtils::getLineColumn(getTokenStream(), ctx);
 
-  Location loc(
-      m_pl->getParseFile()->getFileId(lineCol.first + m_lineOffset),
-      m_pl->getParseFile()->getLineNb(lineCol.first + m_lineOffset),
-      printColumn ? lineCol.second : 0,
-      m_pl->getCompileSourceFile()->getSymbolTable()->registerSymbol(object));
+  Location loc(m_pl->getParseFile()->getFileId(lineCol.first + m_lineOffset),
+               m_pl->getParseFile()->getLineNb(lineCol.first + m_lineOffset), printColumn ? lineCol.second : 0,
+               m_pl->getCompileSourceFile()->getSymbolTable()->registerSymbol(object));
   Error err(error, loc);
   m_pl->addError(err);
 }
 
-void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
-                                    Location& loc, bool showDuplicates) {
+void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error, Location& loc, bool showDuplicates) {
   Error err(error, loc);
-  m_pl->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_pl->getCompileSourceFile()->getErrorContainer()->addError(err, showDuplicates);
 }
 
-void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
-                                    Location& loc, Location& extraLoc,
+void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error, Location& loc, Location& extraLoc,
                                     bool showDuplicates) {
   std::vector<Location> extras;
   extras.push_back(extraLoc);
   Error err(error, loc, &extras);
-  m_pl->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_pl->getCompileSourceFile()->getErrorContainer()->addError(err, showDuplicates);
 }
 }  // namespace SURELOG
 

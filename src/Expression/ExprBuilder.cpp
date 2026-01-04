@@ -69,8 +69,7 @@ Value* ExprBuilder::clone(Value* val) {
 //              and fix the intended places.
 //
 // NOLINTBEGIN(*.DeadStores)
-Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
-                             ValuedComponentI* instance, bool muteErrors) {
+Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent, ValuedComponentI* instance, bool muteErrors) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   Value* value = m_valueFactory.newLValue();
@@ -97,16 +96,14 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
       if (sval == nullptr) fullName = StrCat(packageName, "::", name);
       if (sval == nullptr) {
         if (muteErrors == false) {
-          Location loc(fC->getFileId(parent), fC->Line(parent),
-                       fC->Column(parent), symbols->registerSymbol(fullName));
+          Location loc(fC->getFileId(parent), fC->Line(parent), fC->Column(parent), symbols->registerSymbol(fullName));
           Error err(ErrorDefinition::ELAB_UNDEF_VARIABLE, loc);
           errors->addError(err);
         }
         value->setInvalid();
         return value;
       }
-      if (sval->getType() == Value::Type::String ||
-          sval->getType() == Value::Type::Hexadecimal) {
+      if (sval->getType() == Value::Type::String || sval->getType() == Value::Type::Hexadecimal) {
         m_valueFactory.deleteValue(value);
         value = clone(sval);
       } else {
@@ -114,8 +111,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
       }
       return value;
     }
-    default:
-      break;
+    default: break;
   }
 
   if (child) {
@@ -325,8 +321,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
           case VObjectType::paBinOp_Equiv: {
             NodeId rval = fC->Sibling(op);
             Value* valueR = evalExpr(fC, rval, instance, muteErrors);
-            if ((valueL->getType() == Value::Type::String) &&
-                (valueR->getType() == Value::Type::String)) {
+            if ((valueL->getType() == Value::Type::String) && (valueR->getType() == Value::Type::String)) {
               m_valueFactory.deleteValue(value);
               value = m_valueFactory.newStValue();
             }
@@ -338,8 +333,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
           case VObjectType::paBinOp_Not: {
             NodeId rval = fC->Sibling(op);
             Value* valueR = evalExpr(fC, rval, instance, muteErrors);
-            if ((valueL->getType() == Value::Type::String) &&
-                (valueR->getType() == Value::Type::String)) {
+            if ((valueL->getType() == Value::Type::String) && (valueR->getType() == Value::Type::String)) {
               m_valueFactory.deleteValue(value);
               value = m_valueFactory.newStValue();
             }
@@ -461,21 +455,16 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
             case 'B':
               if (v.find_first_of("xzXZ") != std::string::npos) {
                 StValue* stval = (StValue*)m_valueFactory.newStValue();
-                stval->set(v, Value::Type::Binary,
-                           (intsize ? intsize : v.size()));
+                stval->set(v, Value::Type::Binary, (intsize ? intsize : v.size()));
                 value = stval;
               } else {
                 intformat = NumUtils::parseBinary(v, &hex_value) != nullptr;
               }
               break;
             case 'o':
-            case 'O':
-              intformat = NumUtils::parseOctal(v, &hex_value) != nullptr;
-              break;
+            case 'O': intformat = NumUtils::parseOctal(v, &hex_value) != nullptr; break;
             case 'd':
-            case 'D':
-              intformat = NumUtils::parseUint64(v, &hex_value) != nullptr;
-              break;
+            case 'D': intformat = NumUtils::parseUint64(v, &hex_value) != nullptr; break;
             default:
               // '1
               intformat = NumUtils::parseBinary(v, &hex_value) != nullptr;
@@ -549,16 +538,14 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
 
         if (sval == nullptr) {
           if (muteErrors == false) {
-            Location loc(fC->getFileId(child), fC->Line(child),
-                         fC->Column(child), symbols->registerSymbol(fullName));
+            Location loc(fC->getFileId(child), fC->Line(child), fC->Column(child), symbols->registerSymbol(fullName));
             Error err(ErrorDefinition::ELAB_UNDEF_VARIABLE, loc);
             errors->addError(err);
           }
           value->setInvalid();
           break;
         }
-        if (sval->getType() == Value::Type::String ||
-            sval->getType() == Value::Type::Hexadecimal) {
+        if (sval->getType() == Value::Type::String || sval->getType() == Value::Type::Hexadecimal) {
           m_valueFactory.deleteValue(value);
           value = clone(sval);
         } else {
@@ -678,8 +665,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
           if (fC->Type(ConstVal) == VObjectType::INT_CONST) {
             token = fC->SymName(ConstVal);
           } else {
-            Value* constVal =
-                evalExpr(fC, Primary_literal, instance, muteErrors);
+            Value* constVal = evalExpr(fC, Primary_literal, instance, muteErrors);
             uint64_t v = constVal->getValueUL();
             token = NumUtils::toBinary(constVal->getSize(), v);
           }
@@ -769,8 +755,8 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
 
         if (sval == nullptr) {
           if (muteErrors == false) {
-            Location loc(fC->getFileId(parent), fC->Line(parent),
-                         fC->Column(parent), symbols->registerSymbol(fullName));
+            Location loc(fC->getFileId(parent), fC->Line(parent), fC->Column(parent),
+                         symbols->registerSymbol(fullName));
             Error err(ErrorDefinition::ELAB_UNDEF_VARIABLE, loc);
             errors->addError(err);
           }
@@ -872,8 +858,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
             m_valueFactory.deleteValue(valueR);
             return value;
           }
-          default:
-            break;
+          default: break;
         }
         break;
       }
@@ -911,8 +896,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         }
         break;
       }
-      default:
-        break;
+      default: break;
     }
 
     value->setInvalid();
@@ -959,18 +943,14 @@ Value* ExprBuilder::fromVpiValue(std::string_view s, int32_t size) {
   } else if (s.find("SCAL:") == 0) {
     s.remove_prefix(std::string_view("SCAL:").length());
     switch (s.front()) {
-      case 'Z':
-        break;
-      case 'X':
-        break;
-      case 'H':
-        break;
+      case 'Z': break;
+      case 'X': break;
+      case 'H': break;
       case 'L':
         break;
         // Not really clear what the difference between X and DontCare is.
         // Let's parse 'W'eak don't care as this one.
-      case 'W':
-        break;
+      case 'W': break;
       default:
         if (strcasecmp(s.data(), "DontCare") == 0) {
         } else if (strcasecmp(s.data(), "NoChange") == 0) {
@@ -1076,8 +1056,7 @@ Value* ExprBuilder::fromString(std::string_view value) {
       }
       case 'd': {
         long double v = 0;
-        if ((sval.find('.') != std::string::npos) &&
-            (NumUtils::parseLongDouble(sval, &v) != nullptr)) {
+        if ((sval.find('.') != std::string::npos) && (NumUtils::parseLongDouble(sval, &v) != nullptr)) {
           val = m_valueFactory.newLValue();
           val->set((double)v);
         } else {
@@ -1122,8 +1101,7 @@ Value* ExprBuilder::fromString(std::string_view value) {
     }
   } else {
     long double v = 0;
-    if ((value.find('.') != std::string::npos) &&
-        (NumUtils::parseLongDouble(value, &v) != nullptr)) {
+    if ((value.find('.') != std::string::npos) && (NumUtils::parseLongDouble(value, &v) != nullptr)) {
       val = m_valueFactory.newLValue();
       val->set((double)v);
     } else if (!value.empty()) {

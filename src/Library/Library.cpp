@@ -33,16 +33,12 @@
 namespace SURELOG {
 
 Library::Library(Session* session, std::string_view name)
-    : m_session(session),
-      m_nameId(session->getSymbolTable()->registerSymbol(name)) {}
+    : m_session(session), m_nameId(session->getSymbolTable()->registerSymbol(name)) {}
 
-std::string_view Library::getName() const {
-  return m_session->getSymbolTable()->getSymbol(m_nameId);
-}
+std::string_view Library::getName() const { return m_session->getSymbolTable()->getSymbol(m_nameId); }
 
 void Library::addModuleDefinition(ModuleDefinition* def) {
-  m_modules.emplace(m_session->getSymbolTable()->registerSymbol(def->getName()),
-                    def);
+  m_modules.emplace(m_session->getSymbolTable()->registerSymbol(def->getName()), def);
 }
 
 ModuleDefinition* Library::getModule(std::string_view name) const {
@@ -52,8 +48,7 @@ ModuleDefinition* Library::getModule(std::string_view name) const {
 
 std::ostream& Library::report(std::ostream& out) const {
   FileSystem* const fileSystem = m_session->getFileSystem();
-  out << "LIB: " << m_session->getSymbolTable()->getSymbol(m_nameId)
-      << std::endl;
+  out << "LIB: " << m_session->getSymbolTable()->getSymbol(m_nameId) << std::endl;
   for (const auto& id : m_fileIds) {
     out << "     " << PathIdPP(id, fileSystem) << std::endl;
   }

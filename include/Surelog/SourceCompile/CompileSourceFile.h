@@ -58,13 +58,11 @@ class CompileSourceFile final {
 
   enum class Action { Preprocess, PostPreprocess, Parse, PythonAPI };
 
-  CompileSourceFile(Session* session, PathId fileId, Compiler* compiler,
-                    CompilationUnit* comp_unit, Library* library,
+  CompileSourceFile(Session* session, PathId fileId, Compiler* compiler, CompilationUnit* comp_unit, Library* library,
                     std::string_view = "");
 
   // Chunk File:
-  CompileSourceFile(Session* session, CompileSourceFile* parent,
-                    PathId ppResultFileId, uint32_t lineOffset);
+  CompileSourceFile(Session* session, CompileSourceFile* parent, PathId ppResultFileId, uint32_t lineOffset);
   CompileSourceFile(const CompileSourceFile& orig);
   ~CompileSourceFile();
 
@@ -81,15 +79,12 @@ class CompileSourceFile final {
   bool initParser();
   void setParser(ParseFile* pf) { m_parser = pf; }
 
-  const std::map<SymbolId, PreprocessFile::AntlrParserHandler*,
-                 SymbolIdLessThanComparer>&
-  getPpAntlrHandlerMap() const {
+  const std::map<SymbolId, PreprocessFile::AntlrParserHandler*, SymbolIdLessThanComparer>& getPpAntlrHandlerMap()
+      const {
     return m_antlrPpMacroMap;
   }
-  void registerAntlrPpHandlerForId(SymbolId id,
-                                   PreprocessFile::AntlrParserHandler* pp);
-  void registerAntlrPpHandlerForId(PathId id,
-                                   PreprocessFile::AntlrParserHandler* pp);
+  void registerAntlrPpHandlerForId(SymbolId id, PreprocessFile::AntlrParserHandler* pp);
+  void registerAntlrPpHandlerForId(PathId id, PreprocessFile::AntlrParserHandler* pp);
   PreprocessFile::AntlrParserHandler* getAntlrPpHandlerForId(SymbolId);
   PreprocessFile::AntlrParserHandler* getAntlrPpHandlerForId(PathId);
 
@@ -111,9 +106,7 @@ class CompileSourceFile final {
   ParseFile* getParser() const { return m_parser; }
   PreprocessFile* getPreprocessor() const { return m_pp; }
 
-  const uhdm::PreprocMacroInstanceCollection& getPreprocMacroInstances() const {
-    return m_preprocMacroInstances;
-  }
+  const uhdm::PreprocMacroInstanceCollection& getPreprocMacroInstances() const { return m_preprocMacroInstances; }
 
  private:
   bool preprocess_();
@@ -122,9 +115,7 @@ class CompileSourceFile final {
   bool parse_();
   bool pythonAPI_();
 
-  uhdm::PreprocMacroInstanceCollection& getPreprocMacroInstances() {
-    return m_preprocMacroInstances;
-  }
+  uhdm::PreprocMacroInstanceCollection& getPreprocMacroInstances() { return m_preprocMacroInstances; }
 
   Session* m_session = nullptr;
   PathId m_fileId;

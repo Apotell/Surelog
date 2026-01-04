@@ -13,9 +13,7 @@ namespace SURELOG {
 struct StringViewCompare {
   using is_transparent = void;
 
-  constexpr bool operator()(std::string_view a, std::string_view b) const {
-    return a < b;
-  }
+  constexpr bool operator()(std::string_view a, std::string_view b) const { return a < b; }
 };
 
 class ClassDefinition;
@@ -24,18 +22,13 @@ class Package;
 class Program;
 class MacroInfo;
 
-using ModuleNameModuleDefinitionMap =
-    std::map<std::string, ModuleDefinition *, StringViewCompare>;
-using PackageNamePackageDefinitionMultiMap =
-    std::multimap<std::string, Package *, StringViewCompare>;
+using ModuleNameModuleDefinitionMap = std::map<std::string, ModuleDefinition *, StringViewCompare>;
+using PackageNamePackageDefinitionMultiMap = std::multimap<std::string, Package *, StringViewCompare>;
 using PackageDefinitionVec = std::vector<Package *>;
-using ProgramNameProgramDefinitionMap =
-    std::map<std::string, Program *, StringViewCompare>;
+using ProgramNameProgramDefinitionMap = std::map<std::string, Program *, StringViewCompare>;
 
-using ClassNameClassDefinitionMultiMap =
-    std::multimap<std::string, ClassDefinition *, StringViewCompare>;
-using ClassNameClassDefinitionMap =
-    std::map<std::string, ClassDefinition *, StringViewCompare>;
+using ClassNameClassDefinitionMultiMap = std::multimap<std::string, ClassDefinition *, StringViewCompare>;
+using ClassNameClassDefinitionMap = std::map<std::string, ClassDefinition *, StringViewCompare>;
 
 using MacroStorage = std::vector<MacroInfo *>;
 using LineColumn = std::pair<uint32_t, uint16_t>;

@@ -36,12 +36,9 @@ class FileContent;
 class Session;
 
 struct FunctorCompileFileContentDecl final {
-  FunctorCompileFileContentDecl(Session* session, CompileDesign* compileDesign,
-                                FileContent* fileContent, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_fileContent(fileContent),
-        m_design(design) {}
+  FunctorCompileFileContentDecl(Session* session, CompileDesign* compileDesign, FileContent* fileContent,
+                                Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_fileContent(fileContent), m_design(design) {}
   FunctorCompileFileContentDecl(const FunctorCompileFileContentDecl&) = delete;
   int32_t operator()() const;
 
@@ -53,12 +50,8 @@ struct FunctorCompileFileContentDecl final {
 };
 
 struct FunctorCompileFileContent final {
-  FunctorCompileFileContent(Session* session, CompileDesign* compileDesign,
-                            FileContent* fileContent, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_fileContent(fileContent),
-        m_design(design) {}
+  FunctorCompileFileContent(Session* session, CompileDesign* compileDesign, FileContent* fileContent, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_fileContent(fileContent), m_design(design) {}
   FunctorCompileFileContent(const FunctorCompileFileContent&) = delete;
   int32_t operator()() const;
 
@@ -71,8 +64,8 @@ struct FunctorCompileFileContent final {
 
 class CompileFileContent final {
  public:
-  CompileFileContent(Session* session, CompileDesign* compileDesign,
-                     FileContent* fileContent, Design* design, bool declOnly)
+  CompileFileContent(Session* session, CompileDesign* compileDesign, FileContent* fileContent, Design* design,
+                     bool declOnly)
       : m_compileDesign(compileDesign),
         m_fileContent(fileContent),
         m_design(design),

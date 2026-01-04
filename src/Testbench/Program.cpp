@@ -38,18 +38,16 @@
 
 namespace SURELOG {
 
-Program::Program(Session* session, std::string_view name, Library* library,
-                 FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer)
+Program::Program(Session* session, std::string_view name, Library* library, FileContent* fC, NodeId nodeId,
+                 uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr), m_name(name), m_library(library) {
   addFileContent(fC, nodeId);
 
   uhdm::Program* const instance = serializer.make<uhdm::Program>();
   instance->setName(name);
   if (nodeId && (fC != nullptr)) {
-    if (const NodeId identifierId = fC->sl_collect(
-            nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
-      fC->populateCoreMembers(identifierId, identifierId,
-                              instance->getNameObj());
+    if (const NodeId identifierId = fC->sl_collect(nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
+      fC->populateCoreMembers(identifierId, identifierId, instance->getNameObj());
     }
     fC->populateCoreMembers(nodeId, nodeId, instance);
   }
@@ -68,9 +66,7 @@ uint32_t Program::getSize() const {
   return size;
 }
 
-VObjectType Program::getType() const {
-  return (m_fileContents[0]->Type(m_nodeIds[0]));
-}
+VObjectType Program::getType() const { return (m_fileContents[0]->Type(m_nodeIds[0])); }
 
 ClassDefinition* Program::getClassDefinition(std::string_view name) {
   auto itr = m_classDefinitions.find(name);

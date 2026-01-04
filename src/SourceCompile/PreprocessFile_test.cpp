@@ -30,11 +30,9 @@ using ::testing::ElementsAre;
 
 namespace {
 
-bool ContainsError(const ErrorContainer &errors,
-                   ErrorDefinition::ErrorType etype) {
-  return std::count_if(
-      errors.getErrors().begin(), errors.getErrors().end(),
-      [etype](const Error &e) { return e.getType() == etype; });
+bool ContainsError(const ErrorContainer &errors, ErrorDefinition::ErrorType etype) {
+  return std::count_if(errors.getErrors().begin(), errors.getErrors().end(),
+                       [etype](const Error &e) { return e.getType() == etype; });
 }
 
 TEST(PreprocessTest, PreprocessWithoutPPTokens) {
@@ -112,8 +110,7 @@ module top();
   assign a = `FOO_FUN(123, 12);
 endmodule)");
 
-  EXPECT_TRUE(ContainsError(harness.collectedErrors(),
-                            ErrorDefinition::PP_TOO_MANY_ARGS_MACRO));
+  EXPECT_TRUE(ContainsError(harness.collectedErrors(), ErrorDefinition::PP_TOO_MANY_ARGS_MACRO));
 
   EXPECT_EQ(res, R"(
 module top();
@@ -130,8 +127,7 @@ module top();
   assign a = `FOO_FUN(123);
 endmodule)");
 
-  EXPECT_FALSE(ContainsError(harness.collectedErrors(),
-                             ErrorDefinition::PP_TOO_MANY_ARGS_MACRO));
+  EXPECT_FALSE(ContainsError(harness.collectedErrors(), ErrorDefinition::PP_TOO_MANY_ARGS_MACRO));
 }
 
 TEST(PreprocessTest, IfdefCodeSelectionIfBranch) {

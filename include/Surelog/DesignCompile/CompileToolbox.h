@@ -36,12 +36,10 @@ class NodeId;
 class CompileToolbox {
  public:
   CompileToolbox() = default;
-  virtual ~CompileToolbox() =
-      default;  // Used as inheritance functionality provider.
+  virtual ~CompileToolbox() = default;  // Used as inheritance functionality provider.
 
  protected:
-  virtual bool compileInitialBlock_(FileContent* fC, NodeId nodeId,
-                                    DesignComponent* component);
+  virtual bool compileInitialBlock_(FileContent* fC, NodeId nodeId, DesignComponent* component);
 };
 
 }  // namespace SURELOG

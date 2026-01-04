@@ -87,8 +87,7 @@ void LogListener::flush(std::ostream &strm) {
   // public API (which in turn are reponsible for ensuring thread-safety)
 
   if (m_droppedCount > 0) {
-    strm << "---------- " << m_droppedCount
-         << " messages were dropped! ----------" << std::endl;
+    strm << "---------- " << m_droppedCount << " messages were dropped! ----------" << std::endl;
   }
   m_droppedCount = 0;
   while (!m_queued.empty()) {
@@ -107,8 +106,7 @@ LogListener::LogResult LogListener::flush() {
 
   FileSystem *const fileSystem = m_session->getFileSystem();
 
-  std::ostream &strm =
-      fileSystem->openOutput(m_fileId, std::ios_base::out | std::ios_base::app);
+  std::ostream &strm = fileSystem->openOutput(m_fileId, std::ios_base::out | std::ios_base::app);
   if (!strm.good()) {
     fileSystem->close(strm);
     return LogResult::FailedToOpenFileForWrite;
@@ -129,8 +127,7 @@ LogListener::LogResult LogListener::log(std::string_view message) {
 
   FileSystem *const fileSystem = m_session->getFileSystem();
 
-  std::ostream &strm =
-      fileSystem->openOutput(m_fileId, std::ios_base::out | std::ios_base::app);
+  std::ostream &strm = fileSystem->openOutput(m_fileId, std::ios_base::out | std::ios_base::app);
   if (!strm.good()) {
     enqueue(message);
     fileSystem->close(strm);

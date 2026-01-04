@@ -82,8 +82,7 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(Session* session, uhdm::Serializer& serializer, LibrarySet* librarySet,
-         ConfigSet* configSet);
+  Design(Session* session, uhdm::Serializer& serializer, LibrarySet* librarySet, ConfigSet* configSet);
   Design(const Design& orig) = delete;
   ~Design();
 
@@ -100,45 +99,29 @@ class Design final {
 
   ConfigSet* getConfigSet() const { return m_configSet; }
 
-  ModuleNameModuleDefinitionMap& getModuleDefinitions() {
-    return m_moduleDefinitions;
-  }
+  ModuleNameModuleDefinitionMap& getModuleDefinitions() { return m_moduleDefinitions; }
 
-  PackageNamePackageDefinitionMultiMap& getPackageDefinitions() {
-    return m_packageDefinitions;
-  }
+  PackageNamePackageDefinitionMultiMap& getPackageDefinitions() { return m_packageDefinitions; }
 
-  PackageDefinitionVec& getOrderedPackageDefinitions() {
-    return m_orderedPackageDefinitions;
-  }
+  PackageDefinitionVec& getOrderedPackageDefinitions() { return m_orderedPackageDefinitions; }
 
-  ProgramNameProgramDefinitionMap& getProgramDefinitions() {
-    return m_programDefinitions;
-  }
+  ProgramNameProgramDefinitionMap& getProgramDefinitions() { return m_programDefinitions; }
 
-  ClassNameClassDefinitionMultiMap& getClassDefinitions() {
-    return m_classDefinitions;
-  }
+  ClassNameClassDefinitionMultiMap& getClassDefinitions() { return m_classDefinitions; }
 
-  ClassNameClassDefinitionMap& getUniqueClassDefinitions() {
-    return m_uniqueClassDefinitions;
-  }
+  ClassNameClassDefinitionMap& getUniqueClassDefinitions() { return m_uniqueClassDefinitions; }
 
   ModuleDefinition* getModuleDefinition(std::string_view moduleName) const;
   Modport* getModport(std::string_view modportName) const;
 
   DesignComponent* getComponentDefinition(std::string_view componentName) const;
 
-  const std::vector<ModuleInstance*>& getTopLevelModuleInstances() const {
-    return m_topLevelModuleInstances;
-  }
+  const std::vector<ModuleInstance*>& getTopLevelModuleInstances() const { return m_topLevelModuleInstances; }
 
   std::string reportInstanceTree() const;
 
-  void reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth,
-                               uint32_t& numberOfInstances,
-                               uint32_t& numberOfLeafInstances,
-                               uint32_t& nbUndefinedModules,
+  void reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth, uint32_t& numberOfInstances,
+                               uint32_t& numberOfLeafInstances, uint32_t& nbUndefinedModules,
                                uint32_t& nbUndefinedInstances) const;
 
   DefParam* getDefParam(std::string_view name) const;
@@ -149,11 +132,9 @@ class Design final {
 
   void checkDefParamUsage(DefParam* parent = nullptr);
 
-  ModuleInstance* findInstance(const std::vector<std::string>& path,
-                               ModuleInstance* scope = nullptr) const;
+  ModuleInstance* findInstance(const std::vector<std::string>& path, ModuleInstance* scope = nullptr) const;
 
-  ModuleInstance* findInstance(std::string_view path,
-                               ModuleInstance* scope = nullptr) const;
+  ModuleInstance* findInstance(std::string_view path, ModuleInstance* scope = nullptr) const;
 
   Package* getPackage(std::string_view name) const;
 
@@ -181,23 +162,17 @@ class Design final {
   // Thread-safe
   void addPPFileContent(PathId fileId, FileContent* content);
 
-  void addOrderedPackage(std::string_view packageName) {
-    m_orderedPackageNames.emplace_back(packageName);
-  }
+  void addOrderedPackage(std::string_view packageName) { m_orderedPackageNames.emplace_back(packageName); }
 
   void addModuleDefinition(std::string_view moduleName, ModuleDefinition* def) {
     m_moduleDefinitions.emplace(moduleName, def);
   }
 
-  void addTopLevelModuleInstance(ModuleInstance* instance) {
-    m_topLevelModuleInstances.emplace_back(instance);
-  }
+  void addTopLevelModuleInstance(ModuleInstance* instance) { m_topLevelModuleInstances.emplace_back(instance); }
 
-  void addDefParam(std::string_view name, const FileContent* fC, NodeId nodeId,
-                   Value* value);
+  void addDefParam(std::string_view name, const FileContent* fC, NodeId nodeId, Value* value);
 
-  void addClassDefinition(std::string_view className,
-                          ClassDefinition* classDef);
+  void addClassDefinition(std::string_view className, ClassDefinition* classDef);
 
   void addProgramDefinition(const std::string& programName, Program* program) {
     m_programDefinitions.emplace(programName, program);
@@ -210,12 +185,10 @@ class Design final {
   void orderPackages();
 
  private:
-  ModuleInstance* findInstance_(const std::vector<std::string>& path,
-                                ModuleInstance* scope) const;
-  void addDefParam_(std::vector<std::string>& path, const FileContent* fC,
-                    NodeId nodeId, Value* value, DefParam* parent);
-  DefParam* getDefParam_(std::vector<std::string>& path,
-                         DefParam* parent) const;
+  ModuleInstance* findInstance_(const std::vector<std::string>& path, ModuleInstance* scope) const;
+  void addDefParam_(std::vector<std::string>& path, const FileContent* fC, NodeId nodeId, Value* value,
+                    DefParam* parent);
+  DefParam* getDefParam_(std::vector<std::string>& path, DefParam* parent) const;
 
   Session* const m_session = nullptr;
   uhdm::Design* const m_uhdmDesign = nullptr;

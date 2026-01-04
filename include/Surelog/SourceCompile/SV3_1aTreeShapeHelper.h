@@ -60,15 +60,12 @@ class SV3_1aTreeShapeHelper : public CommonListenerHelper {
   ~SV3_1aTreeShapeHelper() override = default;
 
  protected:
-  void logError(ErrorDefinition::ErrorType error,
-                antlr4::ParserRuleContext* ctx, std::string_view object,
+  void logError(ErrorDefinition::ErrorType error, antlr4::ParserRuleContext* ctx, std::string_view object,
                 bool printColumn = false);
 
-  void logError(ErrorDefinition::ErrorType, Location& loc,
-                bool showDuplicates = false);
+  void logError(ErrorDefinition::ErrorType, Location& loc, bool showDuplicates = false);
 
-  void logError(ErrorDefinition::ErrorType, Location& loc, Location& extraLoc,
-                bool showDuplicates = false);
+  void logError(ErrorDefinition::ErrorType, Location& loc, Location& extraLoc, bool showDuplicates = false);
 
   NodeId generateDesignElemId();
 
@@ -76,28 +73,23 @@ class SV3_1aTreeShapeHelper : public CommonListenerHelper {
 
   SymbolId registerSymbol(std::string_view symbol) override;
 
-  void addNestedDesignElement(antlr4::ParserRuleContext* ctx,
-                              std::string_view name,
-                              DesignElement::ElemType elemtype,
+  void addNestedDesignElement(antlr4::ParserRuleContext* ctx, std::string_view name, DesignElement::ElemType elemtype,
                               VObjectType objtype);
 
-  void addDesignElement(antlr4::ParserRuleContext* ctx, std::string_view name,
-                        DesignElement::ElemType elemtype, VObjectType objtype);
+  void addDesignElement(antlr4::ParserRuleContext* ctx, std::string_view name, DesignElement::ElemType elemtype,
+                        VObjectType objtype);
 
-  std::pair<double, TimeInfo::Unit> getTimeValue(
-      SV3_1aParser::Time_literalContext* ctx);
+  std::pair<double, TimeInfo::Unit> getTimeValue(SV3_1aParser::Time_literalContext* ctx);
 
-  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getPPFileLine(
-      antlr4::tree::ParseTree* tree, antlr4::Token* token) const override;
-  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(
-      antlr4::tree::ParseTree* tree, antlr4::Token* token) const final;
+  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getPPFileLine(antlr4::tree::ParseTree* tree,
+                                                                           antlr4::Token* token) const override;
+  std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(antlr4::tree::ParseTree* tree,
+                                                                         antlr4::Token* token) const final;
 
  protected:
-  SV3_1aTreeShapeHelper(Session* session, ParseFile* pf,
-                        antlr4::CommonTokenStream* tokens, uint32_t lineOffset);
+  SV3_1aTreeShapeHelper(Session* session, ParseFile* pf, antlr4::CommonTokenStream* tokens, uint32_t lineOffset);
 
-  SV3_1aTreeShapeHelper(Session* session, ParseLibraryDef* pf,
-                        antlr4::CommonTokenStream* tokens);
+  SV3_1aTreeShapeHelper(Session* session, ParseLibraryDef* pf, antlr4::CommonTokenStream* tokens);
 
  protected:
   ParseFile* m_pf = nullptr;

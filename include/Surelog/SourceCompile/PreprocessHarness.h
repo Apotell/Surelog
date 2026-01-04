@@ -41,9 +41,7 @@ class PreprocessHarness final {
   explicit PreprocessHarness(Session* session);
   ~PreprocessHarness();
 
-  std::string preprocess(std::string_view content,
-                         CompilationUnit* compUnit = nullptr,
-                         PathId fileId = BadPathId);
+  std::string preprocess(std::string_view content, CompilationUnit* compUnit = nullptr, PathId fileId = BadPathId);
 
   const ErrorContainer& collectedErrors() const;
 

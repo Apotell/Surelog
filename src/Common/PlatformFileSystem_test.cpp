@@ -79,8 +79,7 @@ class TestFileSystem : public PlatformFileSystem {
 };
 
 std::string getUniqueTempFileName() {
-  return StrCat(::testing::UnitTest::GetInstance()->current_test_info()->name(),
-                "-",
+  return StrCat(::testing::UnitTest::GetInstance()->current_test_info()->name(), "-",
                 std::chrono::steady_clock::now().time_since_epoch().count());
 }
 
@@ -120,8 +119,7 @@ TEST(PlatformFileSystemTest, ReadWriteOperations) {
   std::string actualContent;
   EXPECT_TRUE(fileSystem->readContent(fileId, actualContent));
 
-  const std::string expectedContent =
-      StrCat(line1, "\n", line2, "\n", line3, "\n");
+  const std::string expectedContent = StrCat(line1, "\n", line2, "\n", line3, "\n");
   EXPECT_EQ(actualContent, expectedContent);
 
   std::vector<std::string> actualLines;
@@ -178,8 +176,7 @@ TEST(PlatformFileSystemTest, LoadSaveOperations) {
 
 TEST(PlatformFileSystemTest, BasicFileOperations) {
   // GTEST_SKIP() << "Temporarily skipped";
-  const fs::path testdir =
-      fs::path(testing::TempDir()) / getUniqueTempFileName();
+  const fs::path testdir = fs::path(testing::TempDir()) / getUniqueTempFileName();
   const fs::path dirtest = testdir / "file-exist-dir";
   const std::string_view filename = "file-exists-test.txt";
   const fs::path filepath = dirtest / filename;
@@ -187,10 +184,8 @@ TEST(PlatformFileSystemTest, BasicFileOperations) {
 
   std::unique_ptr<TestFileSystem> fileSystem(new TestFileSystem(testdir));
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
-  const PathId dirId =
-      fileSystem->toPathId(dirtest.string(), symbolTable.get());
-  const PathId fileId =
-      fileSystem->toPathId(filepath.string(), symbolTable.get());
+  const PathId dirId = fileSystem->toPathId(dirtest.string(), symbolTable.get());
+  const PathId fileId = fileSystem->toPathId(filepath.string(), symbolTable.get());
 
   EXPECT_FALSE(fileSystem->exists(dirId));
   EXPECT_TRUE(fileSystem->rmtree(dirId));  // not there: no error
@@ -233,14 +228,10 @@ TEST(PlatformFileSystemTest, LocateFile) {
   std::unique_ptr<TestFileSystem> fileSystem(new TestFileSystem(testdir));
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
 
-  const PathId pathId1 =
-      fileSystem->toPathId(path1.string(), symbolTable.get());
-  const PathId pathId2 =
-      fileSystem->toPathId(path2.string(), symbolTable.get());
-  const PathId dirId1 =
-      fileSystem->toPathId(actual_dir_1.string(), symbolTable.get());
-  const PathId dirId2 =
-      fileSystem->toPathId(actual_dir_2.string(), symbolTable.get());
+  const PathId pathId1 = fileSystem->toPathId(path1.string(), symbolTable.get());
+  const PathId pathId2 = fileSystem->toPathId(path2.string(), symbolTable.get());
+  const PathId dirId1 = fileSystem->toPathId(actual_dir_1.string(), symbolTable.get());
+  const PathId dirId2 = fileSystem->toPathId(actual_dir_2.string(), symbolTable.get());
 
   EXPECT_TRUE(fileSystem->mkdirs(pathId1));
   EXPECT_TRUE(fileSystem->mkdirs(dirId1));
@@ -254,41 +245,34 @@ TEST(PlatformFileSystemTest, LocateFile) {
   };
 
   // At this point, the file does not exist yet.
-  const PathId not_exists =
-      fileSystem->locate(search_file, directories, symbolTable.get());
+  const PathId not_exists = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_EQ(not_exists, BadPathId);
 
-  const fs::path actual_loc_1 =
-      FileSystem::normalize(actual_dir_1 / search_file);
+  const fs::path actual_loc_1 = FileSystem::normalize(actual_dir_1 / search_file);
   std::ofstream(actual_loc_1).close();
 
-  PathId now_exists =
-      fileSystem->locate(search_file, directories, symbolTable.get());
+  PathId now_exists = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_NE(now_exists, BadPathId);
   EXPECT_EQ(fileSystem->toPlatformAbsPath(now_exists), actual_loc_1);
 
-  PathId already_found =
-      fileSystem->locate(search_file, directories, symbolTable.get());
+  PathId already_found = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_EQ(already_found, now_exists);
 
   const fs::path actual_loc_2 = actual_dir_2 / search_file;
   std::ofstream(actual_loc_2).close();
 
-  PathId now_exists_1 =
-      fileSystem->locate(search_file, directories, symbolTable.get());
+  PathId now_exists_1 = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_NE(now_exists_1, BadPathId);
   EXPECT_EQ(fileSystem->toPlatformAbsPath(now_exists_1), actual_loc_1);
 
   EXPECT_TRUE(fileSystem->remove(now_exists_1));
   EXPECT_FALSE(fileSystem->exists(now_exists_1));
 
-  PathId now_exists_2 =
-      fileSystem->locate(search_file, directories, symbolTable.get());
+  PathId now_exists_2 = fileSystem->locate(search_file, directories, symbolTable.get());
   EXPECT_NE(now_exists_2, BadPathId);
   EXPECT_EQ(fileSystem->toPlatformAbsPath(now_exists_2), actual_loc_2);
 
-  EXPECT_TRUE(fileSystem->rmtree(
-      fileSystem->toPathId(basedir.string(), symbolTable.get())));
+  EXPECT_TRUE(fileSystem->rmtree(fileSystem->toPathId(basedir.string(), symbolTable.get())));
 }
 
 TEST(PlatformFileSystemTest, PathRelations) {
@@ -299,28 +283,22 @@ TEST(PlatformFileSystemTest, PathRelations) {
   std::unique_ptr<SymbolTable> symbolTable(new SymbolTable);
 
   const fs::path base = FileSystem::normalize(testing::TempDir());
-  PathId fileId =
-      fileSystem->toPathId((base / "abc.txt").string(), symbolTable.get());
+  PathId fileId = fileSystem->toPathId((base / "abc.txt").string(), symbolTable.get());
   PathId fileDirId = fileSystem->getParent(fileId, symbolTable.get());
   EXPECT_EQ(base, fileSystem->toPlatformAbsPath(fileDirId));
 
-  PathId siblingId =
-      fileSystem->getSibling(fileId, "def.txt", symbolTable.get());
+  PathId siblingId = fileSystem->getSibling(fileId, "def.txt", symbolTable.get());
   PathId siblingDirId = fileSystem->getParent(siblingId, symbolTable.get());
   EXPECT_EQ(fileDirId, siblingDirId);
 
-  std::string_view filename =
-      std::get<1>(fileSystem->getLeaf(fileId, symbolTable.get()));
+  std::string_view filename = std::get<1>(fileSystem->getLeaf(fileId, symbolTable.get()));
   EXPECT_EQ(filename, "abc.txt");
 
-  std::string_view extension =
-      std::get<1>(fileSystem->getType(fileId, symbolTable.get()));
+  std::string_view extension = std::get<1>(fileSystem->getType(fileId, symbolTable.get()));
   EXPECT_EQ(extension, ".txt");
 
-  PathId fileIdNoExt =
-      fileSystem->toPathId((base / "abc").string(), symbolTable.get());
-  std::string_view no_ext =
-      std::get<1>(fileSystem->getType(fileIdNoExt, symbolTable.get()));
+  PathId fileIdNoExt = fileSystem->toPathId((base / "abc").string(), symbolTable.get());
+  std::string_view no_ext = std::get<1>(fileSystem->getType(fileIdNoExt, symbolTable.get()));
   EXPECT_EQ(no_ext, BadRawSymbol);
 }
 
@@ -349,10 +327,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
 
   std::error_code ec;
   const fs::path programPath = FileSystem::getProgramPath();
-  const fs::path wsdir =
-      FileSystem::normalize(fs::path(testing::TempDir()) / "ws_nonideal");
-  const fs::path testdir =
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
+  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws_nonideal");
+  const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
       wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
@@ -361,14 +337,11 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
       wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
   };
 
-  const std::vector<fs::path> files{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" /
-          "test_a.sv",
-      wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
-      wsdir / "tests" / "testname" / "test_c.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" /
-          "uvm_a.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
+  const std::vector<fs::path> files{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" / "test_a.sv",
+                                    wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
+                                    wsdir / "tests" / "testname" / "test_c.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" / "uvm_a.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
 
   for (const fs::path &dir : dirs) {
     fs::create_directories(dir, ec);
@@ -383,22 +356,20 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
     expectedSourceFiles.insert(file);
   }
 
-  const std::vector<std::string> args{
-      programPath.string(),
-      "-nostdout",
-      "../subfolder_3/test_a.sv",
-      "../../subfolder_4/test_b.sv",
-      "../../test_c.sv",
-      "../../../../third_party/uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
-      "../../../../third_party/uvm/uvm_subfolder_a/uvm_b.sv"};
+  const std::vector<std::string> args{programPath.string(),
+                                      "-nostdout",
+                                      "../subfolder_3/test_a.sv",
+                                      "../../subfolder_4/test_b.sv",
+                                      "../../test_c.sv",
+                                      "../../../../third_party/uvm/uvm_subfolder_a/uvm_subfolder_b/uvm_a.sv",
+                                      "../../../../third_party/uvm/uvm_subfolder_a/uvm_b.sv"};
 
   std::vector<const char *> cargs;
   cargs.reserve(args.size());
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string &arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem *const fileSystem = session.getFileSystem();
   CommandLineParser *const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -410,8 +381,7 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
       FileSystem::normalize(programPath.parent_path()).string(),
       FileSystem::normalize(wsdir).string(),
   };
-  const std::set<std::string> actualFsWorkingDirs =
-      fileSystem->getWorkingDirs();
+  const std::set<std::string> actualFsWorkingDirs = fileSystem->getWorkingDirs();
   EXPECT_EQ(expectedFsWorkingDirs, actualFsWorkingDirs);
 
   const std::set<fs::path> expectedClpWorkingDirs{
@@ -425,10 +395,9 @@ TEST(PlatformFileSystemTest, WorkingDirs_NonIdeal) {
 
   const PathIdVector &workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualClpWorkingDirs;
-  std::transform(
-      workingDirIds.begin(), workingDirIds.end(),
-      std::inserter(actualClpWorkingDirs, actualClpWorkingDirs.end()),
-      [&](const PathId &id) { return fileSystem->toPath(id); });
+  std::transform(workingDirIds.begin(), workingDirIds.end(),
+                 std::inserter(actualClpWorkingDirs, actualClpWorkingDirs.end()),
+                 [&](const PathId &id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedClpWorkingDirs, actualClpWorkingDirs);
 }
 
@@ -458,10 +427,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
 
   std::error_code ec;
   const fs::path programPath = FileSystem::getProgramPath().string();
-  const fs::path wsdir =
-      FileSystem::normalize(fs::path(testing::TempDir()) / "ws_ideal");
-  const fs::path testdir =
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
+  const fs::path wsdir = FileSystem::normalize(fs::path(testing::TempDir()) / "ws_ideal");
+  const fs::path testdir = wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2";
 
   const std::vector<fs::path> dirs{
       wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_2",
@@ -470,14 +437,11 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
       wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b",
   };
 
-  const std::vector<fs::path> files{
-      wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" /
-          "test_a.sv",
-      wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
-      wsdir / "tests" / "testname" / "test_c.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" /
-          "uvm_a.sv",
-      wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
+  const std::vector<fs::path> files{wsdir / "tests" / "testname" / "subfolder_1" / "subfolder_3" / "test_a.sv",
+                                    wsdir / "tests" / "testname" / "subfolder_4" / "test_b.sv",
+                                    wsdir / "tests" / "testname" / "test_c.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_subfolder_b" / "uvm_a.sv",
+                                    wsdir / "third_party" / "uvm" / "uvm_subfolder_a" / "uvm_b.sv"};
 
   for (const fs::path &dir : dirs) {
     fs::create_directories(dir, ec);
@@ -511,8 +475,7 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
   std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                  [](const std::string &arg) { return arg.c_str(); });
 
-  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr,
-                  nullptr, nullptr);
+  Session session(new TestFileSystem(testdir), nullptr, nullptr, nullptr, nullptr, nullptr);
   FileSystem *const fileSystem = session.getFileSystem();
   CommandLineParser *const clp = session.getCommandLineParser();
   session.parseCommandLine(cargs.size(), cargs.data(), false, false);
@@ -521,11 +484,8 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
   EXPECT_FALSE(ec) << ec;
 
   const std::set<std::string> expectedFsWorkingDirs = {
-      programPath.parent_path().string(),
-      (wsdir / "tests" / "testname").string(),
-      (wsdir / "third_party").string()};
-  const std::set<std::string> actualFsWorkingDirs =
-      fileSystem->getWorkingDirs();
+      programPath.parent_path().string(), (wsdir / "tests" / "testname").string(), (wsdir / "third_party").string()};
+  const std::set<std::string> actualFsWorkingDirs = fileSystem->getWorkingDirs();
   EXPECT_EQ(expectedFsWorkingDirs, actualFsWorkingDirs);
 
   const std::set<fs::path> expectedClpWorkingDirs{
@@ -540,10 +500,9 @@ TEST(PlatformFileSystemTest, WorkingDirs_Ideal) {
 
   const PathIdVector &workingDirIds = clp->getWorkingDirs();
   std::set<fs::path> actualClpWorkingDirs;
-  std::transform(
-      workingDirIds.begin(), workingDirIds.end(),
-      std::inserter(actualClpWorkingDirs, actualClpWorkingDirs.end()),
-      [&](const PathId &id) { return fileSystem->toPath(id); });
+  std::transform(workingDirIds.begin(), workingDirIds.end(),
+                 std::inserter(actualClpWorkingDirs, actualClpWorkingDirs.end()),
+                 [&](const PathId &id) { return fileSystem->toPath(id); });
   EXPECT_EQ(expectedClpWorkingDirs, actualClpWorkingDirs);
 }
 
@@ -565,8 +524,7 @@ class InMemoryFileSystem : public TestFileSystem {
     }
   }
 
-  std::istream &openInput(const fs::path &filepath,
-                          std::ios_base::openmode mode) override {
+  std::istream &openInput(const fs::path &filepath, std::ios_base::openmode mode) override {
     if (!filepath.is_absolute()) {
       return m_nullInputStream;
     }
@@ -577,8 +535,7 @@ class InMemoryFileSystem : public TestFileSystem {
       return m_nullInputStream;
     }
 
-    std::pair<InputStreams::iterator, bool> it2 =
-        m_inputStreams.emplace(new std::istringstream(it1->second));
+    std::pair<InputStreams::iterator, bool> it2 = m_inputStreams.emplace(new std::istringstream(it1->second));
 
     return **it2.first;
   }
@@ -586,8 +543,7 @@ class InMemoryFileSystem : public TestFileSystem {
   bool close(std::istream &strm) override {
     std::scoped_lock<std::mutex> lock(m_inputStreamsMutex);
 
-    InputStreams::const_iterator it =
-        m_inputStreams.find((std::istringstream *)&strm);
+    InputStreams::const_iterator it = m_inputStreams.find((std::istringstream *)&strm);
     if (it != m_inputStreams.end()) {
       m_inputStreams.erase(it);
       return true;
@@ -596,8 +552,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return false;
   }
 
-  std::ostream &openOutput(const fs::path &filepath,
-                           std::ios_base::openmode mode) override {
+  std::ostream &openOutput(const fs::path &filepath, std::ios_base::openmode mode) override {
     if (!filepath.is_absolute()) {
       return m_nullOutputStream;
     }
@@ -612,15 +567,13 @@ class InMemoryFileSystem : public TestFileSystem {
       }
     }
 
-    std::pair<OutputStreams::iterator, bool> it =
-        m_outputStreams.emplace(new std::ostringstream(content, mode));
+    std::pair<OutputStreams::iterator, bool> it = m_outputStreams.emplace(new std::ostringstream(content, mode));
     m_openOutputFiles.emplace(it.first->get(), filepath);
 
     return **it.first;
   }
 
-  bool saveContent(PathId fileId, const char *content, std::streamsize length,
-                   bool useTemp) override {
+  bool saveContent(PathId fileId, const char *content, std::streamsize length, bool useTemp) override {
     // Can't use temporary with virtual file system
     return TestFileSystem::saveContent(fileId, content, length, false);
   }
@@ -632,11 +585,9 @@ class InMemoryFileSystem : public TestFileSystem {
 
     OpenOutputFiles::const_iterator it1 = m_openOutputFiles.find(&strm);
     if (it1 != m_openOutputFiles.end()) {
-      m_files.insert_or_assign(it1->second,
-                               ((std::ostringstream *)&strm)->str());
+      m_files.insert_or_assign(it1->second, ((std::ostringstream *)&strm)->str());
 
-      OutputStreams::const_iterator it2 =
-          m_outputStreams.find((std::ostringstream *)&strm);
+      OutputStreams::const_iterator it2 = m_outputStreams.find((std::ostringstream *)&strm);
       if (it2 != m_outputStreams.end()) {
         m_outputStreams.erase(it2);
       }
@@ -648,8 +599,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return false;
   }
 
-  PathId getProgramFile(std::string_view hint,
-                        SymbolTable *symbolTable) override {
+  PathId getProgramFile(std::string_view hint, SymbolTable *symbolTable) override {
     if (!hint.empty()) {
       std::error_code ec;
       m_lastModifiedTime = fs::last_write_time(hint, ec);
@@ -783,8 +733,7 @@ class InMemoryFileSystem : public TestFileSystem {
     if (path.empty()) return false;
 
     std::scoped_lock<std::mutex> lock(m_mutex);
-    return (m_directories.find(path) != m_directories.end()) ||
-           (m_files.find(path) != m_files.end());
+    return (m_directories.find(path) != m_directories.end()) || (m_files.find(path) != m_files.end());
   }
 
   bool exists(PathId parentId, std::string_view descendant) override {
@@ -796,8 +745,7 @@ class InMemoryFileSystem : public TestFileSystem {
     const fs::path path = parentPath / descendant;
 
     std::scoped_lock<std::mutex> lock(m_mutex);
-    return (m_directories.find(path) != m_directories.end()) ||
-           (m_files.find(path) != m_files.end());
+    return (m_directories.find(path) != m_directories.end()) || (m_files.find(path) != m_files.end());
   }
 
   bool isDirectory(PathId id) override {
@@ -820,8 +768,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return (m_files.find(filepath) != m_files.end());
   }
 
-  PathId locate(std::string_view suffix, const PathIdVector &directories,
-                SymbolTable *symbolTable) override {
+  PathId locate(std::string_view suffix, const PathIdVector &directories, SymbolTable *symbolTable) override {
     if (suffix.empty() || directories.empty()) return BadPathId;
 
     std::scoped_lock<std::mutex> lock(m_mutex);
@@ -859,8 +806,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return false;
   }
 
-  PathIdVector &collect(PathId dirId, SymbolTable *symbolTable,
-                        PathIdVector &container) override {
+  PathIdVector &collect(PathId dirId, SymbolTable *symbolTable, PathIdVector &container) override {
     if (!dirId) return container;
 
     const fs::path dir = toPath(dirId);
@@ -879,8 +825,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return container;
   }
 
-  PathIdVector &collect(PathId dirId, std::string_view extension,
-                        SymbolTable *symbolTable,
+  PathIdVector &collect(PathId dirId, std::string_view extension, SymbolTable *symbolTable,
                         PathIdVector &container) override {
     if (!dirId || extension.empty()) return container;
 
@@ -902,8 +847,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return container;
   }
 
-  PathIdVector &matching(PathId dirId, std::string_view pattern,
-                         SymbolTable *symbolTable,
+  PathIdVector &matching(PathId dirId, std::string_view pattern, SymbolTable *symbolTable,
                          PathIdVector &container) override {
     if (!dirId) return container;
 
@@ -936,8 +880,7 @@ class InMemoryFileSystem : public TestFileSystem {
     }
 
     if (suffix.empty()) {
-      return collect(toPathId(prefix.string(), symbolTable), symbolTable,
-                     container);
+      return collect(toPathId(prefix.string(), symbolTable), symbolTable, container);
     }
 
     prefix = normalize(prefix);
@@ -949,19 +892,16 @@ class InMemoryFileSystem : public TestFileSystem {
     std::string regexp = suffix.string();
     regexp = StringUtils::replaceAll(regexp, separator,
                                      escaped);  // escape separators
-    regexp =
-        StringUtils::replaceAll(regexp, StrCat("...", escaped),
-                                StrCat(R"([a-zA-Z0-9_\-.)", escaped, R"(]+)",
-                                       escaped));  // separator allowed
-    regexp = StringUtils::replaceAll(
-        regexp, StrCat("..", escaped),
-        StrCat(R"([a-zA-Z0-9_\-.]+)", escaped, R"([a-zA-Z0-9_\-.]+)",
-               escaped));  // separator NOT allowed
+    regexp = StringUtils::replaceAll(regexp, StrCat("...", escaped),
+                                     StrCat(R"([a-zA-Z0-9_\-.)", escaped, R"(]+)",
+                                            escaped));  // separator allowed
+    regexp = StringUtils::replaceAll(regexp, StrCat("..", escaped),
+                                     StrCat(R"([a-zA-Z0-9_\-.]+)", escaped, R"([a-zA-Z0-9_\-.]+)",
+                                            escaped));     // separator NOT allowed
     regexp = StringUtils::replaceAll(regexp, ".", "\\.");  // escape it
     regexp = StringUtils::replaceAll(regexp, "?",
-                                     R"([a-zA-Z0-9_\-\.])");  // at most one
-    regexp = StringUtils::replaceAll(
-        regexp, "*", StrCat("[^", escaped, "]*"));  // free for all
+                                     R"([a-zA-Z0-9_\-\.])");                     // at most one
+    regexp = StringUtils::replaceAll(regexp, "*", StrCat("[^", escaped, "]*"));  // free for all
 
     const std::regex regex(regexp);
     for (Files::const_reference entry : m_files) {
@@ -976,10 +916,7 @@ class InMemoryFileSystem : public TestFileSystem {
     return container;
   }
 
-  fs::file_time_type modtime(PathId fileId,
-                             fs::file_time_type defaultOnFail) override {
-    return m_lastModifiedTime;
-  }
+  fs::file_time_type modtime(PathId fileId, fs::file_time_type defaultOnFail) override { return m_lastModifiedTime; }
 
   std::mutex m_mutex;
 
@@ -1116,33 +1053,26 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
 
   // Run 1: Create cache in kOutputDir_run1 using source at kInputDir_run1
   {
-    Session session(new TestFileSystem(kInputDir_run1), nullptr, nullptr,
-                    nullptr, nullptr, nullptr);
+    Session session(new TestFileSystem(kInputDir_run1), nullptr, nullptr, nullptr, nullptr, nullptr);
     FileSystem *const fileSystem = session.getFileSystem();
     SymbolTable *const symbolTable = session.getSymbolTable();
     CommandLineParser *const clp = session.getCommandLineParser();
 
-    const PathId inputDirId =
-        fileSystem->toPathId(kInputDir_run1.string(), symbolTable);
+    const PathId inputDirId = fileSystem->toPathId(kInputDir_run1.string(), symbolTable);
     EXPECT_TRUE(fileSystem->mkdirs(inputDirId));
 
-    const PathId headerDirId = fileSystem->toPathId(
-        (kInputDir_run1 / kHeadersDirName).string(), symbolTable);
+    const PathId headerDirId = fileSystem->toPathId((kInputDir_run1 / kHeadersDirName).string(), symbolTable);
     EXPECT_TRUE(fileSystem->mkdirs(headerDirId));
 
-    const PathId headerFileId =
-        fileSystem->getChild(headerDirId, kHeaderFileName, symbolTable);
+    const PathId headerFileId = fileSystem->getChild(headerDirId, kHeaderFileName, symbolTable);
     EXPECT_TRUE(headerFileId);
 
     std::ostream &strm1 = fileSystem->openForWrite(headerFileId);
     EXPECT_TRUE(strm1.good());
-    strm1 << "function automatic int get_1();" << std::endl
-          << "  return 1;" << std::endl
-          << "endfunction" << std::endl;
+    strm1 << "function automatic int get_1();" << std::endl << "  return 1;" << std::endl << "endfunction" << std::endl;
     fileSystem->close(strm1);
 
-    const PathId sourceFileId = fileSystem->toPathId(
-        (kInputDir_run1 / kSourceFileName).string(), symbolTable);
+    const PathId sourceFileId = fileSystem->toPathId((kInputDir_run1 / kSourceFileName).string(), symbolTable);
     EXPECT_TRUE(sourceFileId);
 
     std::ostream &strm2 = fileSystem->openForWrite(sourceFileId);
@@ -1154,16 +1084,15 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
           << "endmodule" << std::endl;
     fileSystem->close(strm2);
 
-    const std::vector<std::string> args{
-        kProgramPath.string(),
-        "-nostdout",
-        "-parse",
-        "-nobuiltin",
-        std::string("-I").append(fileSystem->toPath(headerDirId)),
-        std::string(fileSystem->toPath(sourceFileId)),
-        std::string(fileSystem->toPath(headerFileId)),
-        "-o",
-        kOutputDir_run1.string()};
+    const std::vector<std::string> args{kProgramPath.string(),
+                                        "-nostdout",
+                                        "-parse",
+                                        "-nobuiltin",
+                                        std::string("-I").append(fileSystem->toPath(headerDirId)),
+                                        std::string(fileSystem->toPath(sourceFileId)),
+                                        std::string(fileSystem->toPath(headerFileId)),
+                                        "-o",
+                                        kOutputDir_run1.string()};
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
@@ -1180,25 +1109,21 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
       PreprocessFile *const ppFile = csf->getPreprocessor();
       ParseFile *const parseFile = csf->getParser();
 
-      SymbolId libraryNameId =
-          csf->getPreprocessor()->getLibrary()->getNameId();
+      SymbolId libraryNameId = csf->getPreprocessor()->getLibrary()->getNameId();
       EXPECT_TRUE(libraryNameId);
 
-      PathId ppCacheFileId = fileSystem->getPpCacheFile(
-          clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
+      PathId ppCacheFileId =
+          fileSystem->getPpCacheFile(clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(ppCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(ppCacheFileId));
 
-      PathId parseCacheFileId = fileSystem->getParseCacheFile(
-          clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false,
-          symbolTable);
+      PathId parseCacheFileId =
+          fileSystem->getParseCacheFile(clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(parseCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(parseCacheFileId));
 
-      EXPECT_FALSE(ppFile->usingCachedVersion())
-          << PathIdPP(ppCacheFileId, fileSystem);
-      EXPECT_FALSE(parseFile->usingCachedVersion())
-          << PathIdPP(parseCacheFileId, fileSystem);
+      EXPECT_FALSE(ppFile->usingCachedVersion()) << PathIdPP(ppCacheFileId, fileSystem);
+      EXPECT_FALSE(parseFile->usingCachedVersion()) << PathIdPP(parseCacheFileId, fileSystem);
     }
   }
 
@@ -1213,39 +1138,33 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
   // Run 2: Setup a remap from original location to new location and with that
   // setup, the cache should be loaded successfully.
   {
-    Session session(new TestFileSystem(kInputDir_run2), nullptr, nullptr,
-                    nullptr, nullptr, nullptr);
+    Session session(new TestFileSystem(kInputDir_run2), nullptr, nullptr, nullptr, nullptr, nullptr);
     FileSystem *const fileSystem = session.getFileSystem();
     SymbolTable *const symbolTable = session.getSymbolTable();
     CommandLineParser *const clp = session.getCommandLineParser();
 
-    const PathId headerDirId = fileSystem->toPathId(
-        (kInputDir_run2 / kHeadersDirName).string(), symbolTable);
+    const PathId headerDirId = fileSystem->toPathId((kInputDir_run2 / kHeadersDirName).string(), symbolTable);
     EXPECT_TRUE(fileSystem->isDirectory(headerDirId));
 
-    const PathId headerFileId =
-        fileSystem->getChild(headerDirId, kHeaderFileName, symbolTable);
+    const PathId headerFileId = fileSystem->getChild(headerDirId, kHeaderFileName, symbolTable);
     EXPECT_TRUE(headerFileId);
     EXPECT_TRUE(fileSystem->isRegularFile(headerFileId));
 
-    const PathId sourceFileId = fileSystem->toPathId(
-        (kInputDir_run2 / kSourceFileName).string(), symbolTable);
+    const PathId sourceFileId = fileSystem->toPathId((kInputDir_run2 / kSourceFileName).string(), symbolTable);
     EXPECT_TRUE(sourceFileId);
     EXPECT_TRUE(fileSystem->isRegularFile(sourceFileId));
 
-    EXPECT_TRUE(fileSystem->addMapping(kInputDir_run1.string(),
-                                       kInputDir_run2.string()));
+    EXPECT_TRUE(fileSystem->addMapping(kInputDir_run1.string(), kInputDir_run2.string()));
 
-    const std::vector<std::string> args{
-        FileSystem::getProgramPath().string(),
-        "-nostdout",
-        "-parse",
-        "-nobuiltin",
-        std::string("-I").append(fileSystem->toPath(headerDirId)),
-        std::string(fileSystem->toPath(headerFileId)),
-        std::string(fileSystem->toPath(sourceFileId)),
-        "-o",
-        kOutputDir_run2.string()};
+    const std::vector<std::string> args{FileSystem::getProgramPath().string(),
+                                        "-nostdout",
+                                        "-parse",
+                                        "-nobuiltin",
+                                        std::string("-I").append(fileSystem->toPath(headerDirId)),
+                                        std::string(fileSystem->toPath(headerFileId)),
+                                        std::string(fileSystem->toPath(sourceFileId)),
+                                        "-o",
+                                        kOutputDir_run2.string()};
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
@@ -1262,27 +1181,23 @@ TEST(PlatformFileSystemTest, PortableCacheTest) {
       PreprocessFile *const ppFile = csf->getPreprocessor();
       ParseFile *const parseFile = csf->getParser();
 
-      SymbolId libraryNameId =
-          csf->getPreprocessor()->getLibrary()->getNameId();
+      SymbolId libraryNameId = csf->getPreprocessor()->getLibrary()->getNameId();
       EXPECT_TRUE(libraryNameId);
 
-      PathId ppCacheFileId = fileSystem->getPpCacheFile(
-          clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
+      PathId ppCacheFileId =
+          fileSystem->getPpCacheFile(clp->fileUnit(), csf->getFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(ppCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(ppCacheFileId));
 
-      PathId parseCacheFileId = fileSystem->getParseCacheFile(
-          clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false,
-          symbolTable);
+      PathId parseCacheFileId =
+          fileSystem->getParseCacheFile(clp->fileUnit(), csf->getPpOutputFileId(), libraryNameId, false, symbolTable);
       EXPECT_TRUE(parseCacheFileId);
       EXPECT_TRUE(fileSystem->isRegularFile(parseCacheFileId));
 
       EXPECT_TRUE(ppFile->usingCachedVersion())
-          << PathIdPP(csf->getFileId(), fileSystem) << ", "
-          << PathIdPP(ppCacheFileId, fileSystem);
+          << PathIdPP(csf->getFileId(), fileSystem) << ", " << PathIdPP(ppCacheFileId, fileSystem);
       EXPECT_TRUE(parseFile->usingCachedVersion())
-          << PathIdPP(csf->getPpOutputFileId(), fileSystem) << ", "
-          << PathIdPP(parseCacheFileId, fileSystem);
+          << PathIdPP(csf->getPpOutputFileId(), fileSystem) << ", " << PathIdPP(parseCacheFileId, fileSystem);
     }
   }
 

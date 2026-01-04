@@ -50,8 +50,7 @@ TEST(CompileHelper, ParseConstants) {
     EXPECT_EQ((uint64_t)result, 0xFFFFFFFFFFFFFFFFuLL);
 
     // Out of range.
-    EXPECT_FALSE(
-        tester(vpiBinaryConst, "BIN:" + std::string(65, '1'), &result));
+    EXPECT_FALSE(tester(vpiBinaryConst, "BIN:" + std::string(65, '1'), &result));
   }
 
   {  // Decimal tests

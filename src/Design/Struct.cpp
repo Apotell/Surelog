@@ -35,8 +35,7 @@
 namespace SURELOG {
 
 Struct::Struct(const FileContent* fC, NodeId nameId, NodeId structId)
-    : DataType(fC, structId, fC->SymName(nameId), fC->Type(structId)),
-      m_nameId(nameId) {
+    : DataType(fC, structId, fC->SymName(nameId), fC->Type(structId)), m_nameId(nameId) {
   m_category = DataType::Category::STRUCT;
 }
 

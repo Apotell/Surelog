@@ -27,8 +27,7 @@
 #include "Surelog/Design/ClockingBlock.h"
 
 namespace SURELOG {
-void ClockingBlockHolder::addClockingBlock(SymbolId blockId,
-                                           ClockingBlock& block) {
+void ClockingBlockHolder::addClockingBlock(SymbolId blockId, ClockingBlock& block) {
   m_clockingBlockMap.emplace(blockId, block);
 }
 

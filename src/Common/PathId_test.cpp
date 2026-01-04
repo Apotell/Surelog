@@ -43,15 +43,11 @@ TEST(PathId, constructors) {
   std::unique_ptr<SymbolTable> symbolTableB(new SymbolTable);
   std::unique_ptr<FileSystem> fileSystem(new TestFileSystem);
 
-  PathId pathId1a =
-      fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
-  PathId pathId2a =
-      fileSystem->toPathId((testdir / "path2").string(), symbolTableA.get());
+  PathId pathId1a = fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
+  PathId pathId2a = fileSystem->toPathId((testdir / "path2").string(), symbolTableA.get());
 
-  PathId pathId1b =
-      fileSystem->toPathId((testdir / "path1").string(), symbolTableB.get());
-  PathId pathId2b =
-      fileSystem->toPathId((testdir / "path2").string(), symbolTableB.get());
+  PathId pathId1b = fileSystem->toPathId((testdir / "path1").string(), symbolTableB.get());
+  PathId pathId2b = fileSystem->toPathId((testdir / "path2").string(), symbolTableB.get());
 
   EXPECT_EQ(pathId1a.getSymbolTable(), pathId2a.getSymbolTable());
   EXPECT_EQ(pathId1b.getSymbolTable(), pathId2b.getSymbolTable());
@@ -68,8 +64,7 @@ TEST(PathId, assignment_operator) {
   std::unique_ptr<SymbolTable> symbolTableA(new SymbolTable);
   std::unique_ptr<FileSystem> fileSystem(new TestFileSystem);
 
-  PathId pathId1 =
-      fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
+  PathId pathId1 = fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
 
   PathId pathId2 = pathId1;
   EXPECT_EQ(pathId1, pathId2);
@@ -82,10 +77,8 @@ TEST(PathId, comparison_operators) {
   std::unique_ptr<SymbolTable> symbolTableA(new SymbolTable);
   std::unique_ptr<FileSystem> fileSystem(new TestFileSystem);
 
-  PathId pathId1 =
-      fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
-  PathId pathId2 =
-      fileSystem->toPathId((testdir / "path2").string(), symbolTableA.get());
+  PathId pathId1 = fileSystem->toPathId((testdir / "path1").string(), symbolTableA.get());
+  PathId pathId2 = fileSystem->toPathId((testdir / "path2").string(), symbolTableA.get());
 
   PathId pathId4, pathId5;
   EXPECT_EQ(pathId4, pathId4);  // Both empty self
@@ -95,8 +88,7 @@ TEST(PathId, comparison_operators) {
   EXPECT_NE(pathId1, pathId2);  // Two distinct non-empty
 
   std::unique_ptr<SymbolTable> symbolTableB(new SymbolTable);
-  PathId pathId6 =
-      fileSystem->toPathId((testdir / "path1").string(), symbolTableB.get());
+  PathId pathId6 = fileSystem->toPathId((testdir / "path1").string(), symbolTableB.get());
   EXPECT_NE(pathId1.getSymbolTable(), pathId6.getSymbolTable());
   EXPECT_EQ(pathId1, pathId6);  // Same stored in distinct SymbolTables
 }

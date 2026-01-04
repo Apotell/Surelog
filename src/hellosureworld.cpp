@@ -64,15 +64,14 @@ int main(int argc, const char** argv) {
   // Browse the Surelog Data Model
   if (the_design) {
     for (auto& top : the_design->getTopLevelModuleInstances()) {
-      std::function<void(SURELOG::ModuleInstance*)> inst_visit =
-          [&inst_visit, fileSystem](SURELOG::ModuleInstance* inst) {
-            std::cout << "Inst: " << inst->getFullPathName() << std::endl;
-            std::cout << "File: " << fileSystem->toPath(inst->getFileId())
-                      << std::endl;
-            for (uint32_t i = 0; i < inst->getNbChildren(); i++) {
-              inst_visit(inst->getChildren(i));
-            }
-          };
+      std::function<void(SURELOG::ModuleInstance*)> inst_visit = [&inst_visit,
+                                                                  fileSystem](SURELOG::ModuleInstance* inst) {
+        std::cout << "Inst: " << inst->getFullPathName() << std::endl;
+        std::cout << "File: " << fileSystem->toPath(inst->getFileId()) << std::endl;
+        for (uint32_t i = 0; i < inst->getNbChildren(); i++) {
+          inst_visit(inst->getChildren(i));
+        }
+      };
       inst_visit(top);
     }
   }

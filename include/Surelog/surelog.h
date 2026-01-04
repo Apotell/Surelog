@@ -55,7 +55,6 @@
 #include <Surelog/Design/FileCNodeId.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/Function.h>
-#include <Surelog/Design/Instance.h>
 #include <Surelog/Design/ModuleDefinition.h>
 #include <Surelog/Design/ModuleInstance.h>
 #include <Surelog/Design/Parameter.h>

@@ -47,15 +47,11 @@ class Value;
 class ValuedComponentI : public RTTI {
   SURELOG_IMPLEMENT_RTTI(ValuedComponentI, RTTI)
  public:
-  using ParamMap =
-      std::map<std::string, std::pair<Value*, int32_t>, StringViewCompare>;
+  using ParamMap = std::map<std::string, std::pair<Value*, int32_t>, StringViewCompare>;
   using ComplexValueMap = std::map<std::string, uhdm::Expr*, StringViewCompare>;
 
-  ValuedComponentI(Session* session, const ValuedComponentI* parentScope,
-                   ValuedComponentI* definition)
-      : m_session(session),
-        m_parentScope(parentScope),
-        m_definition(definition) {}
+  ValuedComponentI(Session* session, const ValuedComponentI* parentScope, ValuedComponentI* definition)
+      : m_session(session), m_parentScope(parentScope), m_definition(definition) {}
 
   ~ValuedComponentI() override = default;
 
@@ -63,8 +59,7 @@ class ValuedComponentI : public RTTI {
   const Session* getSession() const { return m_session; }
 
   virtual Value* getValue(std::string_view name) const;
-  virtual Value* getValue(std::string_view name,
-                          ExprBuilder& exprBuilder) const;
+  virtual Value* getValue(std::string_view name, ExprBuilder& exprBuilder) const;
   virtual void setValue(std::string_view name, Value* val,  // NOLINT
                         ExprBuilder& exprBuilder, int32_t lineNb = 0);
   virtual void deleteValue(std::string_view name, ExprBuilder& exprBuilder);
@@ -91,7 +86,6 @@ class ValuedComponentI : public RTTI {
 };
 
 }  // namespace SURELOG
-SURELOG_IMPLEMENT_RTTI_VIRTUAL_CAST_FUNCTIONS(valuedcomponenti_cast,
-                                              SURELOG::ValuedComponentI)
+SURELOG_IMPLEMENT_RTTI_VIRTUAL_CAST_FUNCTIONS(valuedcomponenti_cast, SURELOG::ValuedComponentI)
 
 #endif /* SURELOG_VALUEDCOMPONENTI_H */

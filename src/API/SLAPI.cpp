@@ -60,8 +60,7 @@
 #include "Surelog/Utils/StringUtils.h"
 
 namespace SURELOG {
-void SLsetWaiver(const char* messageId, const char* fileName, uint32_t line,
-                 const char* objectName) {
+void SLsetWaiver(const char* messageId, const char* fileName, uint32_t line, const char* objectName) {
   if (fileName == nullptr && line == 0 && objectName == nullptr) {
     Waiver::setWaiver(messageId, "", 0, "");
   } else if (line == 0 && objectName == nullptr) {
@@ -73,38 +72,30 @@ void SLsetWaiver(const char* messageId, const char* fileName, uint32_t line,
   }
 }
 
-void SLregisterNewErrorType(const char* messageId, const char* text,
-                            const char* secondLine) {
+void SLregisterNewErrorType(const char* messageId, const char* text, const char* secondLine) {
   //[WARNI:PP0103]
   std::string errorId = messageId;
   errorId = StringUtils::rtrim_until(errorId, ']');
   errorId = StringUtils::ltrim_until(errorId, '[');
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
-  ErrorDefinition::ErrorSeverity severity =
-      ErrorDefinition::getErrorSeverity(errorId.substr(0, 5));
-  ErrorDefinition::ErrorCategory category =
-      ErrorDefinition::getCategory(errorId.substr(6, 2));
+  ErrorDefinition::ErrorSeverity severity = ErrorDefinition::getErrorSeverity(errorId.substr(0, 5));
+  ErrorDefinition::ErrorCategory category = ErrorDefinition::getCategory(errorId.substr(6, 2));
   ErrorDefinition::rec(type, severity, category, text, secondLine);
 }
 
 void SLoverrideSeverity(const char* messageId, const char* severity) {
-  ErrorDefinition::setSeverity(ErrorDefinition::getErrorType(messageId),
-                               ErrorDefinition::getErrorSeverity(severity));
+  ErrorDefinition::setSeverity(ErrorDefinition::getErrorType(messageId), ErrorDefinition::getErrorSeverity(severity));
 }
 
 static bool IsEmpty(const char* str) { return !(str && *str); }
 
-void SLaddError(Session* session, const char* messageId, const char* fileName,
-                uint32_t line, uint32_t col, const char* objectName) {
+void SLaddError(Session* session, const char* messageId, const char* fileName, uint32_t line, uint32_t col,
+                const char* objectName) {
   FileSystem* const fileSystem = session->getFileSystem();
   SymbolTable* const symbolTable = session->getSymbolTable();
   ErrorContainer* const errors = session->getErrorContainer();
-  const PathId fileId = IsEmpty(fileName)
-                            ? BadPathId
-                            : fileSystem->toPathId(fileName, symbolTable);
-  const SymbolId objectId = IsEmpty(objectName)
-                                ? BadSymbolId
-                                : symbolTable->registerSymbol(objectName);
+  const PathId fileId = IsEmpty(fileName) ? BadPathId : fileSystem->toPathId(fileName, symbolTable);
+  const SymbolId objectId = IsEmpty(objectName) ? BadSymbolId : symbolTable->registerSymbol(objectName);
   Location loc(fileId, line, col, objectId);
 
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
@@ -112,27 +103,18 @@ void SLaddError(Session* session, const char* messageId, const char* fileName,
   errors->addError(err, false, false);
 }
 
-void SLaddMLError(Session* session, const char* messageId,
-                  const char* fileName1, uint32_t line1, uint32_t col1,
-                  const char* objectName1, const char* fileName2,
-                  uint32_t line2, uint32_t col2, const char* objectName2) {
+void SLaddMLError(Session* session, const char* messageId, const char* fileName1, uint32_t line1, uint32_t col1,
+                  const char* objectName1, const char* fileName2, uint32_t line2, uint32_t col2,
+                  const char* objectName2) {
   FileSystem* const fileSystem = session->getFileSystem();
   SymbolTable* const symbolTable = session->getSymbolTable();
   ErrorContainer* const errors = session->getErrorContainer();
-  const PathId fileId1 = IsEmpty(fileName1)
-                             ? BadPathId
-                             : fileSystem->toPathId(fileName1, symbolTable);
-  const SymbolId objectId1 = IsEmpty(objectName1)
-                                 ? BadSymbolId
-                                 : symbolTable->registerSymbol(objectName1);
+  const PathId fileId1 = IsEmpty(fileName1) ? BadPathId : fileSystem->toPathId(fileName1, symbolTable);
+  const SymbolId objectId1 = IsEmpty(objectName1) ? BadSymbolId : symbolTable->registerSymbol(objectName1);
   Location loc1(fileId1, line1, col1, objectId1);
 
-  PathId fileId2 = IsEmpty(fileName2)
-                       ? BadPathId
-                       : fileSystem->toPathId(fileName2, symbolTable);
-  SymbolId objectId2 = IsEmpty(objectName2)
-                           ? BadSymbolId
-                           : symbolTable->registerSymbol(objectName2);
+  PathId fileId2 = IsEmpty(fileName2) ? BadPathId : fileSystem->toPathId(fileName2, symbolTable);
+  SymbolId objectId2 = IsEmpty(objectName2) ? BadSymbolId : symbolTable->registerSymbol(objectName2);
   Location loc2(fileId2, line2, col2, objectId2);
 
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
@@ -140,27 +122,18 @@ void SLaddMLError(Session* session, const char* messageId,
   errors->addError(err, false, false);
 }
 
-void SLaddErrorContext(SV3_1aPythonListener* prog,
-                       antlr4::ParserRuleContext* context,
-                       const char* messageId, const char* objectName,
-                       bool printColumn) {
+void SLaddErrorContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context, const char* messageId,
+                       const char* objectName, bool printColumn) {
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = prog;
   antlr4::ParserRuleContext* ctx = context;
-  ErrorContainer* errors =
-      listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
-  LineColumn lineCol =
-      ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
+  ErrorContainer* errors = listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
+  LineColumn lineCol = ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
 
-  Location loc(
-      listener->getPythonListen()->getParseFile()->getFileId(lineCol.first),
-      listener->getPythonListen()->getParseFile()->getLineNb(lineCol.first),
-      printColumn ? lineCol.second : 0,
-      listener->getPythonListen()
-          ->getCompileSourceFile()
-          ->getSymbolTable()
-          ->registerSymbol(objectName));
+  Location loc(listener->getPythonListen()->getParseFile()->getFileId(lineCol.first),
+               listener->getPythonListen()->getParseFile()->getLineNb(lineCol.first), printColumn ? lineCol.second : 0,
+               listener->getPythonListen()->getCompileSourceFile()->getSymbolTable()->registerSymbol(objectName));
   Error err(type, loc);
   errors->addError(err, false, false);
 #else
@@ -168,40 +141,27 @@ void SLaddErrorContext(SV3_1aPythonListener* prog,
 #endif
 }
 
-void SLaddMLErrorContext(SV3_1aPythonListener* prog,
-                         antlr4::ParserRuleContext* context1,
-                         antlr4::ParserRuleContext* context2,
-                         const char* messageId, const char* objectName1,
+void SLaddMLErrorContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context1,
+                         antlr4::ParserRuleContext* context2, const char* messageId, const char* objectName1,
                          const char* objectName2, bool printColumn) {
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = prog;
   antlr4::ParserRuleContext* ctx1 = context1;
   antlr4::ParserRuleContext* ctx2 = context2;
-  ErrorContainer* errors =
-      listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
-  LineColumn lineCol1 =
-      ParseUtils::getLineColumn(listener->getTokenStream(), ctx1);
-  LineColumn lineCol2 =
-      ParseUtils::getLineColumn(listener->getTokenStream(), ctx2);
+  ErrorContainer* errors = listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
+  LineColumn lineCol1 = ParseUtils::getLineColumn(listener->getTokenStream(), ctx1);
+  LineColumn lineCol2 = ParseUtils::getLineColumn(listener->getTokenStream(), ctx2);
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
 
-  Location loc1(
-      listener->getPythonListen()->getParseFile()->getFileId(lineCol1.first),
-      listener->getPythonListen()->getParseFile()->getLineNb(lineCol1.first),
-      printColumn ? lineCol1.second : 0,
-      listener->getPythonListen()
-          ->getCompileSourceFile()
-          ->getSymbolTable()
-          ->registerSymbol(objectName1));
+  Location loc1(listener->getPythonListen()->getParseFile()->getFileId(lineCol1.first),
+                listener->getPythonListen()->getParseFile()->getLineNb(lineCol1.first),
+                printColumn ? lineCol1.second : 0,
+                listener->getPythonListen()->getCompileSourceFile()->getSymbolTable()->registerSymbol(objectName1));
 
-  Location loc2(
-      listener->getPythonListen()->getParseFile()->getFileId(lineCol2.first),
-      listener->getPythonListen()->getParseFile()->getLineNb(lineCol2.first),
-      printColumn ? lineCol2.second : 0,
-      listener->getPythonListen()
-          ->getCompileSourceFile()
-          ->getSymbolTable()
-          ->registerSymbol(objectName2));
+  Location loc2(listener->getPythonListen()->getParseFile()->getFileId(lineCol2.first),
+                listener->getPythonListen()->getParseFile()->getLineNb(lineCol2.first),
+                printColumn ? lineCol2.second : 0,
+                listener->getPythonListen()->getCompileSourceFile()->getSymbolTable()->registerSymbol(objectName2));
   Error err(type, loc1, loc2);
   errors->addError(err, false, false);
 #else
@@ -209,8 +169,7 @@ void SLaddMLErrorContext(SV3_1aPythonListener* prog,
 #endif
 }
 
-std::string SLgetFile(SV3_1aPythonListener* prog,
-                      antlr4::ParserRuleContext* context) {
+std::string SLgetFile(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
 #ifdef SURELOG_WITH_PYTHON
   FileSystem* const fileSystem = FileSystem::getInstance();
   SV3_1aPythonListener* listener = prog;
@@ -222,13 +181,11 @@ std::string SLgetFile(SV3_1aPythonListener* prog,
 #endif
 }
 
-int32_t SLgetLine(SV3_1aPythonListener* prog,
-                  antlr4::ParserRuleContext* context) {
+int32_t SLgetLine(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = prog;
   antlr4::ParserRuleContext* ctx = context;
-  LineColumn lineCol =
-      ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.first;
 #else
   std::cerr << "SLgetLine(): Python support not compiled in\n";
@@ -236,13 +193,11 @@ int32_t SLgetLine(SV3_1aPythonListener* prog,
 #endif
 }
 
-int32_t SLgetColumn(SV3_1aPythonListener* prog,
-                    antlr4::ParserRuleContext* context) {
+int32_t SLgetColumn(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = prog;
   antlr4::ParserRuleContext* ctx = context;
-  LineColumn lineCol =
-      ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.second;
 #else
   std::cerr << "SLgetColumn(): Python support not compiled in\n";
@@ -250,8 +205,7 @@ int32_t SLgetColumn(SV3_1aPythonListener* prog,
 #endif
 }
 
-std::string SLgetText(SV3_1aPythonListener* /*prog*/,
-                      antlr4::ParserRuleContext* context) {
+std::string SLgetText(SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = context;
   std::vector<antlr4::Token*> tokens = ParseUtils::getFlatTokenList(ctx);
   std::string text;
@@ -261,8 +215,7 @@ std::string SLgetText(SV3_1aPythonListener* /*prog*/,
   return text;
 }
 
-std::vector<std::string> SLgetTokens(SV3_1aPythonListener* /*prog*/,
-                                     antlr4::ParserRuleContext* context) {
+std::vector<std::string> SLgetTokens(SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = context;
   std::vector<antlr4::Token*> tokens = ParseUtils::getFlatTokenList(ctx);
   std::vector<std::string> body_tokens;
@@ -273,21 +226,19 @@ std::vector<std::string> SLgetTokens(SV3_1aPythonListener* /*prog*/,
   return body_tokens;
 }
 
-antlr4::ParserRuleContext* SLgetParentContext(
-    SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
+antlr4::ParserRuleContext* SLgetParentContext(SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = context;
   return (antlr4::ParserRuleContext*)ctx->parent;
 }
 
-std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(
-    SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
+std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(SV3_1aPythonListener* /*prog*/,
+                                                             antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = context;
   std::vector<antlr4::ParserRuleContext*> children;
 
   for (antlr4::tree::ParseTree* child : ctx->children) {
     // Get the i-th child node of `parent`.
-    antlr4::tree::TerminalNode* node =
-        dynamic_cast<antlr4::tree::TerminalNode*>(child);
+    antlr4::tree::TerminalNode* node = dynamic_cast<antlr4::tree::TerminalNode*>(child);
     if (node) {
       // Terminal node
     } else {
@@ -353,19 +304,16 @@ RawNodeId SLgetParent(FileContent* fC, RawNodeId parent, uint32_t type) {
 static std::vector<RawNodeId> transform(const std::vector<NodeId>& input) {
   std::vector<RawNodeId> output;
   output.reserve(input.size());
-  std::transform(input.begin(), input.end(), std::back_inserter(output),
-                 [](NodeId id) { return (RawNodeId)id; });
+  std::transform(input.begin(), input.end(), std::back_inserter(output), [](NodeId id) { return (RawNodeId)id; });
   return output;
 }
 
-std::vector<RawNodeId> SLgetAll(FileContent* fC, RawNodeId parent,
-                                uint32_t type) {
+std::vector<RawNodeId> SLgetAll(FileContent* fC, RawNodeId parent, uint32_t type) {
   if (!fC) return {};
   return transform(fC->sl_get_all(NodeId(parent), (VObjectType)type));
 }
 
-std::vector<RawNodeId> SLgetAll(FileContent* fC, RawNodeId parent,
-                                const std::vector<uint32_t>& types) {
+std::vector<RawNodeId> SLgetAll(FileContent* fC, RawNodeId parent, const std::vector<uint32_t>& types) {
   if (!fC) return {};
   VObjectTypeUnorderedSet vtypes;
   vtypes.reserve(types.size());
@@ -378,18 +326,14 @@ RawNodeId SLcollect(FileContent* fC, RawNodeId parent, uint32_t type) {
   return fC->sl_collect(NodeId(parent), (VObjectType)type);
 }
 
-std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent,
-                                    uint32_t type, bool first) {
+std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent, uint32_t type, bool first) {
   if (fC)
-    return transform(
-        fC->sl_collect_all(NodeId(parent), (VObjectType)type, first));
+    return transform(fC->sl_collect_all(NodeId(parent), (VObjectType)type, first));
   else
     return {};
 }
 
-std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent,
-                                    const std::vector<uint32_t>& types,
-                                    bool first) {
+std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent, const std::vector<uint32_t>& types, bool first) {
   if (!fC) return {};
   VObjectTypeUnorderedSet vtypes;
   vtypes.reserve(types.size());
@@ -397,10 +341,8 @@ std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent,
   return transform(fC->sl_collect_all(NodeId(parent), vtypes, first));
 }
 
-std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent,
-                                    const std::vector<uint32_t>& types,
-                                    const std::vector<uint32_t>& stopPoints,
-                                    bool first) {
+std::vector<RawNodeId> SLcollectAll(FileContent* fC, RawNodeId parent, const std::vector<uint32_t>& types,
+                                    const std::vector<uint32_t>& stopPoints, bool first) {
   if (!fC) return {};
   VObjectTypeUnorderedSet vtypes;
   vtypes.reserve(types.size());
@@ -438,32 +380,28 @@ uint32_t SLgetnTopModuleInstance(Design* design) {
 
 ModuleDefinition* SLgetModuleDefinition(Design* design, uint32_t index) {
   if (!design) return nullptr;
-  ModuleNameModuleDefinitionMap::iterator itr =
-      design->getModuleDefinitions().begin();
+  ModuleNameModuleDefinitionMap::iterator itr = design->getModuleDefinitions().begin();
   for (uint32_t i = 0; i < index; i++) itr++;
   return (*itr).second;
 }
 
 Program* SLgetProgramDefinition(Design* design, uint32_t index) {
   if (!design) return nullptr;
-  ProgramNameProgramDefinitionMap::iterator itr =
-      design->getProgramDefinitions().begin();
+  ProgramNameProgramDefinitionMap::iterator itr = design->getProgramDefinitions().begin();
   for (uint32_t i = 0; i < index; i++) itr++;
   return (*itr).second;
 }
 
 Package* SLgetPackageDefinition(Design* design, uint32_t index) {
   if (!design) return nullptr;
-  PackageNamePackageDefinitionMultiMap::iterator itr =
-      design->getPackageDefinitions().begin();
+  PackageNamePackageDefinitionMultiMap::iterator itr = design->getPackageDefinitions().begin();
   for (uint32_t i = 0; i < index; i++) itr++;
   return (*itr).second;
 }
 
 ClassDefinition* SLgetClassDefinition(Design* design, uint32_t index) {
   if (!design) return nullptr;
-  ClassNameClassDefinitionMap::iterator itr =
-      design->getUniqueClassDefinitions().begin();
+  ClassNameClassDefinitionMap::iterator itr = design->getUniqueClassDefinitions().begin();
   for (uint32_t i = 0; i < index; i++) itr++;
   return (*itr).second;
 }
@@ -489,8 +427,7 @@ std::string SLgetModuleFile(ModuleDefinition* module) {
   if (!ModuleHasFirstFileContent(module)) return "";
   Session* const session = module->getSession();
   FileSystem* const fileSystem = session->getFileSystem();
-  return std::string(fileSystem->toPath(
-      module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
+  return std::string(fileSystem->toPath(module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
 }
 
 uint32_t SLgetModuleLine(ModuleDefinition* module) {
@@ -523,8 +460,7 @@ std::string SLgetClassFile(ClassDefinition* module) {
   if (!ModuleHasFirstFileContent(module)) return "";
   Session* const session = module->getSession();
   FileSystem* const fileSystem = session->getFileSystem();
-  return std::string(fileSystem->toPath(
-      module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
+  return std::string(fileSystem->toPath(module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
 }
 
 uint32_t SLgetClassLine(ClassDefinition* module) {
@@ -557,8 +493,7 @@ std::string SLgetPackageFile(Package* module) {
   if (!ModuleHasFirstFileContent(module)) return "";
   Session* const session = module->getSession();
   FileSystem* const fileSystem = session->getFileSystem();
-  return std::string(fileSystem->toPath(
-      module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
+  return std::string(fileSystem->toPath(module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
 }
 
 uint32_t SLgetPackageLine(Package* module) {
@@ -590,8 +525,7 @@ std::string SLgetProgramFile(Program* module) {
   if (!ModuleHasFirstFileContent(module)) return "";
   Session* const session = module->getSession();
   FileSystem* const fileSystem = session->getFileSystem();
-  return std::string(fileSystem->toPath(
-      module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
+  return std::string(fileSystem->toPath(module->getFileContents()[0]->getFileId(module->getNodeIds()[0])));
 }
 
 uint32_t SLgetProgramLine(Program* module) {
@@ -648,8 +582,7 @@ std::string SLgetInstanceFileName(ModuleInstance* instance) {
   if (!instance) return "";
   Session* const session = instance->getSession();
   FileSystem* const fileSystem = session->getFileSystem();
-  return std::string(fileSystem->toPath(
-      instance->getFileContent()->getFileId(instance->getNodeId())));
+  return std::string(fileSystem->toPath(instance->getFileContent()->getFileId(instance->getNodeId())));
 }
 
 FileContent* SLgetInstanceFileContent(ModuleInstance* instance) {

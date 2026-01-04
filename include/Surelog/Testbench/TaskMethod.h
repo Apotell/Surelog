@@ -34,8 +34,7 @@ namespace SURELOG {
 
 class TaskMethod final : public Task {
  public:
-  TaskMethod(DesignComponent* parent, const FileContent* fC, NodeId id,
-             std::string_view name, bool is_extern)
+  TaskMethod(DesignComponent* parent, const FileContent* fC, NodeId id, std::string_view name, bool is_extern)
       : Task(parent, fC, id, name), m_extern(is_extern) {}
   ~TaskMethod() final = default;
   bool isExtern() const { return m_extern; }

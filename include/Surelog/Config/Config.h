@@ -41,20 +41,10 @@ class UseClause {
  public:
   enum Type { UseLib, UseConfig, UseModule, UseParam };
   UseClause(Type type, std::string_view name, const FileContent* fC, NodeId id)
-      : m_type(type),
-        m_name(name),
-        m_fileContent(fC),
-        m_node(id),
-        m_used(false) {}
-  UseClause(Type type, const FileContent* fC, NodeId id)
-      : m_type(type), m_fileContent(fC), m_node(id), m_used(false) {}
-  UseClause(Type type, const std::vector<std::string>& libs,
-            const FileContent* fC, NodeId id)
-      : m_type(type),
-        m_libs(libs),
-        m_fileContent(fC),
-        m_node(id),
-        m_used(false) {}
+      : m_type(type), m_name(name), m_fileContent(fC), m_node(id), m_used(false) {}
+  UseClause(Type type, const FileContent* fC, NodeId id) : m_type(type), m_fileContent(fC), m_node(id), m_used(false) {}
+  UseClause(Type type, const std::vector<std::string>& libs, const FileContent* fC, NodeId id)
+      : m_type(type), m_libs(libs), m_fileContent(fC), m_node(id), m_used(false) {}
 
   Type getType() const { return m_type; }
   std::string_view getName() const { return m_name; }
@@ -79,11 +69,7 @@ class Config final {
  public:
   using UseClauseMap = std::map<std::string, UseClause, StringViewCompare>;
   Config(std::string_view name, const FileContent* fC, NodeId nodeId)
-      : m_name(name),
-        m_fileContent(fC),
-        m_nodeId(nodeId),
-        m_used(false),
-        m_isTopLevel(false) {}
+      : m_name(name), m_fileContent(fC), m_nodeId(nodeId), m_used(false), m_isTopLevel(false) {}
 
   std::string_view getName() const { return m_name; }
   const FileContent* getFileContent() const { return m_fileContent; }
@@ -100,14 +86,10 @@ class Config final {
   std::string_view getDesignLib() const { return m_designLib; }
 
   void addDefaultLib(std::string_view lib) { m_defaultLibs.emplace_back(lib); }
-  const std::vector<std::string>& getDefaultLibs() const {
-    return m_defaultLibs;
-  }
+  const std::vector<std::string>& getDefaultLibs() const { return m_defaultLibs; }
 
   void addInstanceUseClause(std::string_view instance, const UseClause& use);
-  const UseClauseMap& getInstanceUseClauses() const {
-    return m_instanceUseClauses;
-  }
+  const UseClauseMap& getInstanceUseClauses() const { return m_instanceUseClauses; }
   UseClause* getInstanceUseClause(std::string_view instance);
 
   void addCellUseClause(std::string_view cell, const UseClause& use);

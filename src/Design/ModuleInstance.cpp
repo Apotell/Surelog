@@ -47,11 +47,8 @@
 #include <uhdm/vpi_visitor.h>
 
 namespace SURELOG {
-ModuleInstance::ModuleInstance(Session* session,
-                               DesignComponent* moduleDefinition,
-                               const FileContent* fileContent, NodeId nodeId,
-                               ModuleInstance* parent,
-                               std::string_view instName,
+ModuleInstance::ModuleInstance(Session* session, DesignComponent* moduleDefinition, const FileContent* fileContent,
+                               NodeId nodeId, ModuleInstance* parent, std::string_view instName,
                                std::string_view modName)
     : ValuedComponentI(session, parent, moduleDefinition),
       m_definition(moduleDefinition),
@@ -80,9 +77,8 @@ uhdm::Expr* ModuleInstance::getComplexValue(std::string_view name) const {
   return nullptr;
 }
 
-const uhdm::Constant* resolveFromParamAssign(
-    const uhdm::ParamAssignCollection* param_assigns,
-    std::set<std::string>& visited, const std::string_view& name) {
+const uhdm::Constant* resolveFromParamAssign(const uhdm::ParamAssignCollection* param_assigns,
+                                             std::set<std::string>& visited, const std::string_view& name) {
   std::string s(name);
   if (visited.find(s) != visited.end()) {
     return nullptr;
@@ -106,22 +102,18 @@ const uhdm::Constant* resolveFromParamAssign(
   return nullptr;
 }
 
-Value* ModuleInstance::getValue(std::string_view name,
-                                ExprBuilder& exprBuilder) const {
-  if (ValuedComponentI::getComplexValue(
-          name)) {  // Only check current instance level
+Value* ModuleInstance::getValue(std::string_view name, ExprBuilder& exprBuilder) const {
+  if (ValuedComponentI::getComplexValue(name)) {  // Only check current instance level
     return nullptr;
   }
 
   Value* sval = ValuedComponentI::getValue(name);
 
   if (m_definition && (sval == nullptr)) {
-    uhdm::ParamAssignCollection* param_assigns =
-        m_definition->getParamAssigns();
+    uhdm::ParamAssignCollection* param_assigns = m_definition->getParamAssigns();
     if (param_assigns) {
       std::set<std::string> visited;
-      const uhdm::Constant* res =
-          resolveFromParamAssign(param_assigns, visited, name);
+      const uhdm::Constant* res = resolveFromParamAssign(param_assigns, visited, name);
       if (res) {
         sval = exprBuilder.fromVpiValue(res->getValue(), res->getSize());
       }
@@ -157,13 +149,9 @@ ModuleInstance::~ModuleInstance() {
   }
 }
 
-void ModuleInstance::addSubInstance(ModuleInstance* subInstance) {
-  m_allSubInstances.push_back(subInstance);
-}
+void ModuleInstance::addSubInstance(ModuleInstance* subInstance) { m_allSubInstances.push_back(subInstance); }
 
-VObjectType ModuleInstance::getType() const {
-  return m_fileContent->Type(m_nodeId);
-}
+VObjectType ModuleInstance::getType() const { return m_fileContent->Type(m_nodeId); }
 
 VObjectType ModuleInstance::getModuleType() const {
   VObjectType type = (VObjectType)0;
@@ -173,25 +161,15 @@ VObjectType ModuleInstance::getModuleType() const {
   return type;
 }
 
-PathId ModuleInstance::getFileId() const {
-  return m_fileContent->getFileId(m_nodeId);
-}
+PathId ModuleInstance::getFileId() const { return m_fileContent->getFileId(m_nodeId); }
 
-uint32_t ModuleInstance::getLineNb() const {
-  return m_fileContent->Line(m_nodeId);
-}
+uint32_t ModuleInstance::getLineNb() const { return m_fileContent->Line(m_nodeId); }
 
-uint16_t ModuleInstance::getColumnNb() const {
-  return m_fileContent->Column(m_nodeId);
-}
+uint16_t ModuleInstance::getColumnNb() const { return m_fileContent->Column(m_nodeId); }
 
-uint32_t ModuleInstance::getEndLineNb() const {
-  return m_fileContent->EndLine(m_nodeId);
-}
+uint32_t ModuleInstance::getEndLineNb() const { return m_fileContent->EndLine(m_nodeId); }
 
-uint16_t ModuleInstance::getEndColumnNb() const {
-  return m_fileContent->EndColumn(m_nodeId);
-}
+uint16_t ModuleInstance::getEndColumnNb() const { return m_fileContent->EndColumn(m_nodeId); }
 
 SymbolId ModuleInstance::getFullPathId(SymbolTable* symbols) const {
   return symbols->registerSymbol(getFullPathName());
@@ -233,8 +211,7 @@ uint32_t ModuleInstance::getDepth() const {
 
 std::string ModuleInstance::getInstanceName() const {
   if (m_definition == nullptr) {
-    std::string name =
-        m_instName.substr(m_instName.find("&", 0, 1) + 1, m_instName.size());
+    std::string name = m_instName.substr(m_instName.find("&", 0, 1) + 1, m_instName.size());
     return name;
   } else {
     return m_instName;

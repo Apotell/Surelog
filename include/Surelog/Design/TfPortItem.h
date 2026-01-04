@@ -38,13 +38,9 @@ class Value;
 
 class TfPortItem final : public Variable {
  public:
-  TfPortItem(Procedure* parent, const FileContent* fc, NodeId id, NodeId range,
-             std::string_view name, DataType* type, Value* default_value,
-             VObjectType direction)
-      : Variable(type, fc, id, range, name),
-        m_parent(parent),
-        m_default(default_value),
-        m_direction(direction) {}
+  TfPortItem(Procedure* parent, const FileContent* fc, NodeId id, NodeId range, std::string_view name, DataType* type,
+             Value* default_value, VObjectType direction)
+      : Variable(type, fc, id, range, name), m_parent(parent), m_default(default_value), m_direction(direction) {}
   ~TfPortItem() final = default;
 
   Procedure* getParent() const { return m_parent; }

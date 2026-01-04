@@ -66,9 +66,7 @@ namespace SURELOG {
 
 using namespace uhdm;  // NOLINT (using a bunch of these)
 
-uhdm::Any* CompileHelper::searchObjectName(std::string_view name,
-                                           DesignComponent* component,
-                                           uhdm::Any* stmt) {
+uhdm::Any* CompileHelper::searchObjectName(std::string_view name, DesignComponent* component, uhdm::Any* stmt) {
   uhdm::Any* object = nullptr;
   auto [func, actual_comp] = getTaskFunc(name, component, nullptr, stmt);
   if (func) {
@@ -93,8 +91,7 @@ uhdm::Any* CompileHelper::searchObjectName(std::string_view name,
       }
       if (object == nullptr) {
         if (stmt->getParent()) {
-          if (uhdm::Any* tmp = searchObjectName(
-                  name, component, (uhdm::Any*)stmt->getParent())) {
+          if (uhdm::Any* tmp = searchObjectName(name, component, (uhdm::Any*)stmt->getParent())) {
             object = tmp;
           }
         }
@@ -104,9 +101,8 @@ uhdm::Any* CompileHelper::searchObjectName(std::string_view name,
   return object;
 }
 
-uhdm::AnyCollection* CompileHelper::compileStmt(
-    DesignComponent* component, const FileContent* fC, NodeId the_stmt,
-    uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
+uhdm::AnyCollection* CompileHelper::compileStmt(DesignComponent* component, const FileContent* fC, NodeId the_stmt,
+                                                uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
@@ -117,8 +113,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
   uhdm::AttributeCollection* attributes = nullptr;
   if (type == VObjectType::paAttribute_instance) {
     attributes = compileAttributes(component, fC, the_stmt, nullptr);
-    while (fC->Type(the_stmt) == VObjectType::paAttribute_instance)
-      the_stmt = fC->Sibling(the_stmt);
+    while (fC->Type(the_stmt) == VObjectType::paAttribute_instance) the_stmt = fC->Sibling(the_stmt);
   }
   type = fC->Type(the_stmt);
   uhdm::Any* stmt = nullptr;
@@ -151,9 +146,8 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         // That is the null statement (no statement)
         return nullptr;
       }
-      if (uhdm::AnyCollection* sts = compileGenStmt(
-              valuedcomponenti_cast<ModuleDefinition*>(component), fC, the_stmt,
-              pstmt)) {
+      if (uhdm::AnyCollection* sts =
+              compileGenStmt(valuedcomponenti_cast<ModuleDefinition*>(component), fC, the_stmt, pstmt)) {
         if (!sts->empty()) stmt = sts->front();
       }
       break;
@@ -170,8 +164,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         NodeId tmp = child;
         while (tmp) {
           if (fC->Type(tmp) != VObjectType::STRING_CONST) {
-            if (uhdm::AnyCollection* stmts = compileStmt(
-                    component, fC, tmp, pstmt, instance, muteErrors)) {
+            if (uhdm::AnyCollection* stmts = compileStmt(component, fC, tmp, pstmt, instance, muteErrors)) {
               for (uhdm::Any* st : *stmts) {
                 results->emplace_back(st);
               }
@@ -180,8 +173,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           tmp = fC->Sibling(tmp);
         }
       } else {
-        results =
-            compileStmt(component, fC, child, pstmt, instance, muteErrors);
+        results = compileStmt(component, fC, child, pstmt, instance, muteErrors);
       }
       break;
     }
@@ -202,8 +194,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::paImmediate_assertion_statement:
     case VObjectType::paProcedural_assertion_statement:
     case VObjectType::paLoop_statement: {
-      results = compileStmt(component, fC, fC->Child(the_stmt), pstmt, instance,
-                            muteErrors);
+      results = compileStmt(component, fC, fC->Child(the_stmt), pstmt, instance, muteErrors);
       break;
     }
     case VObjectType::paInc_or_dec_expression: {
@@ -211,23 +202,20 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       break;
     }
     case VObjectType::paProcedural_timing_control_statement: {
-      uhdm::AtomicStmt* dc = compileProceduralTimingControlStmt(
-          component, fC, fC->Child(the_stmt), pstmt, instance);
+      uhdm::AtomicStmt* dc = compileProceduralTimingControlStmt(component, fC, fC->Child(the_stmt), pstmt, instance);
       stmt = dc;
       break;
     }
     case VObjectType::paNonblocking_assignment: {
       NodeId Operator_assignment = the_stmt;
-      uhdm::Assignment* assign = compileBlockingAssignment(
-          component, fC, Operator_assignment, false, pstmt, instance);
+      uhdm::Assignment* assign = compileBlockingAssignment(component, fC, Operator_assignment, false, pstmt, instance);
       stmt = assign;
       break;
     }
     case VObjectType::paBlocking_assignment:
     case VObjectType::paOperator_assignment: {
       NodeId Operator_assignment = fC->Child(the_stmt);
-      uhdm::Assignment* assign = compileBlockingAssignment(
-          component, fC, Operator_assignment, true, pstmt, instance);
+      uhdm::Assignment* assign = compileBlockingAssignment(component, fC, Operator_assignment, true, pstmt, instance);
       stmt = assign;
       break;
     }
@@ -243,29 +231,25 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::paConditional_statement: {
       NodeId Conditional_statement = the_stmt;
       NodeId Cond_predicate = fC->Child(Conditional_statement);
-      uhdm::AtomicStmt* cstmt = compileConditionalStmt(
-          component, fC, Cond_predicate, pstmt, instance);
+      uhdm::AtomicStmt* cstmt = compileConditionalStmt(component, fC, Cond_predicate, pstmt, instance);
       stmt = cstmt;
       break;
     }
     case VObjectType::paCond_predicate: {
       NodeId Cond_predicate = the_stmt;
-      uhdm::AtomicStmt* cstmt = compileConditionalStmt(
-          component, fC, Cond_predicate, pstmt, instance);
+      uhdm::AtomicStmt* cstmt = compileConditionalStmt(component, fC, Cond_predicate, pstmt, instance);
       stmt = cstmt;
       break;
     }
     case VObjectType::paRandcase_statement: {
       NodeId Case_statement = the_stmt;
-      uhdm::AtomicStmt* cstmt =
-          compileRandcaseStmt(component, fC, Case_statement, pstmt, instance);
+      uhdm::AtomicStmt* cstmt = compileRandcaseStmt(component, fC, Case_statement, pstmt, instance);
       stmt = cstmt;
       break;
     }
     case VObjectType::paCase_statement: {
       NodeId Case_statement = the_stmt;
-      uhdm::AtomicStmt* cstmt =
-          compileCaseStmt(component, fC, Case_statement, pstmt, instance);
+      uhdm::AtomicStmt* cstmt = compileCaseStmt(component, fC, Case_statement, pstmt, instance);
       stmt = cstmt;
       break;
     }
@@ -313,17 +297,13 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       scope->setParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, scope);
       if (labelId && endLabelId && (label != endLabel)) {
-        Location loc(fC->getFileId(), fC->Line(labelId), fC->Column(labelId),
-                     symbols->registerSymbol(label));
-        Location loc2(fC->getFileId(), fC->Line(endLabelId),
-                      fC->Column(endLabelId),
-                      symbols->registerSymbol(endLabel));
+        Location loc(fC->getFileId(), fC->Line(labelId), fC->Column(labelId), symbols->registerSymbol(label));
+        Location loc2(fC->getFileId(), fC->Line(endLabelId), fC->Column(endLabelId), symbols->registerSymbol(endLabel));
         Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
         errors->addError(err);
       }
       while (item && (fC->Type(item) != VObjectType::END)) {
-        if (uhdm::AnyCollection* cstmts =
-                compileStmt(component, fC, item, stmt, instance, muteErrors)) {
+        if (uhdm::AnyCollection* cstmts = compileStmt(component, fC, item, stmt, instance, muteErrors)) {
           for (uhdm::Any* cstmt : *cstmts) {
             bool isDecl = false;
             if (cstmt->getUhdmType() == uhdm::UhdmType::Assignment) {
@@ -369,8 +349,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId tempItem = fC->Sibling(item);
       while (tempItem) {
         VObjectType type = fC->Type(tempItem);
-        if ((type == VObjectType::paJoin_keyword) ||
-            (type == VObjectType::paJoin_any_keyword) ||
+        if ((type == VObjectType::paJoin_keyword) || (type == VObjectType::paJoin_any_keyword) ||
             (type == VObjectType::paJoin_none_keyword)) {
           if ((endLabelId = fC->Sibling(tempItem))) {
             break;
@@ -394,8 +373,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
 
       scope->setParent(pstmt);
       while (item) {
-        if (uhdm::AnyCollection* cstmts =
-                compileStmt(component, fC, item, stmt, instance, muteErrors)) {
+        if (uhdm::AnyCollection* cstmts = compileStmt(component, fC, item, stmt, instance, muteErrors)) {
           for (uhdm::Any* cstmt : *cstmts) {
             bool isDecl = false;
             if (cstmt->getUhdmType() == uhdm::UhdmType::Assignment) {
@@ -419,17 +397,13 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         if (item) {
           VObjectType jointype = fC->Type(item);
           int32_t vpijointype = 0;
-          if (jointype == VObjectType::paJoin_keyword ||
-              jointype == VObjectType::paJoin_any_keyword ||
+          if (jointype == VObjectType::paJoin_keyword || jointype == VObjectType::paJoin_any_keyword ||
               jointype == VObjectType::paJoin_none_keyword) {
             if (NodeId endLabel = fC->Sibling(item)) {
               const std::string_view endlabel = fC->SymName(endLabel);
               if (endlabel != label) {
-                Location loc(fC->getFileId(), fC->Line(labelId),
-                             fC->Column(labelId),
-                             symbols->registerSymbol(label));
-                Location loc2(fC->getFileId(), fC->Line(endLabel),
-                              fC->Column(endLabel),
+                Location loc(fC->getFileId(), fC->Line(labelId), fC->Column(labelId), symbols->registerSymbol(label));
+                Location loc2(fC->getFileId(), fC->Line(endLabel), fC->Column(endLabel),
                               symbols->registerSymbol(endlabel));
                 Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
                 errors->addError(err);
@@ -457,8 +431,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::FOREVER: {
       uhdm::ForeverStmt* forever = s.make<uhdm::ForeverStmt>();
       NodeId item = fC->Sibling(the_stmt);
-      if (uhdm::AnyCollection* forev =
-              compileStmt(component, fC, item, forever, instance, muteErrors)) {
+      if (uhdm::AnyCollection* forev = compileStmt(component, fC, item, forever, instance, muteErrors)) {
         uhdm::Any* stmt = forev->front();
         stmt->setParent(forever);
         forever->setStmt(stmt);
@@ -475,8 +448,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
       uhdm::AnyCollection* loop_vars = for_each->getLoopVars(true);
-      while (fC->Type(Statement) == VObjectType::STRING_CONST ||
-             fC->Type(Statement) == VObjectType::paLoop_variables ||
+      while (fC->Type(Statement) == VObjectType::STRING_CONST || fC->Type(Statement) == VObjectType::paLoop_variables ||
              fC->Type(Statement) == VObjectType::paComma) {
         if (fC->Type(Statement) == VObjectType::STRING_CONST) {
           loopVarId = Statement;
@@ -520,8 +492,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
               break;
             }
           }
-          if ((fC->Type(loopVarId) != VObjectType::STRING_CONST) &&
-              (fC->Type(loopVarId) != VObjectType::paComma)) {
+          if ((fC->Type(loopVarId) != VObjectType::STRING_CONST) && (fC->Type(loopVarId) != VObjectType::paComma)) {
             break;
           }
           if (fC->Type(loopVarId) == VObjectType::paComma) {
@@ -531,8 +502,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         Statement = fC->Sibling(Statement);
       }
 
-      if (uhdm::AnyCollection* forev = compileStmt(
-              component, fC, Statement, for_each, instance, muteErrors)) {
+      if (uhdm::AnyCollection* forev = compileStmt(component, fC, Statement, for_each, instance, muteErrors)) {
         uhdm::Any* stmt = forev->front();
         stmt->setParent(for_each);
         for_each->setStmt(stmt);
@@ -540,16 +510,15 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         for_each->setEndColumn(stmt->getEndColumn());
       }
 
-      if (uhdm::Any* const var = compilePsOrHierarchicalArrayIdentifier(
-              component, fC, Ps_or_hierarchical_array_identifier, for_each)) {
+      if (uhdm::Any* const var =
+              compilePsOrHierarchicalArrayIdentifier(component, fC, Ps_or_hierarchical_array_identifier, for_each)) {
         for_each->setVariable(var);
       }
       stmt = for_each;
       break;
     }
     case VObjectType::paProcedural_continuous_assignment: {
-      uhdm::Any* conta =
-          compileProceduralContinuousAssign(component, fC, the_stmt);
+      uhdm::Any* conta = compileProceduralContinuousAssign(component, fC, the_stmt);
       stmt = conta;
       break;
     }
@@ -561,8 +530,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId Param_assignment = fC->Child(List_of_param_assignments);
       NodeId unpackedDimId = fC->Sibling(fC->Child(Param_assignment));
       uhdm::Typespec* ts =
-          compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
-                          unpackedDimId, nullptr, nullptr, false);
+          compileTypespec(component, fC, fC->Child(Data_type_or_implicit), unpackedDimId, nullptr, nullptr, false);
       uhdm::AnyCollection* param_assigns = s.makeCollection<Any>();
       while (Param_assignment) {
         NodeId name = fC->Child(Param_assignment);
@@ -573,8 +541,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         if (ts != nullptr) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           setRefTypespecName(tsRef, ts, fC->SymName(Data_type));
-          fC->populateCoreMembers(Data_type_or_implicit, Data_type_or_implicit,
-                                  tsRef);
+          fC->populateCoreMembers(Data_type_or_implicit, Data_type_or_implicit, tsRef);
           tsRef->setParent(param);
           param->setTypespec(tsRef);
           tsRef->setActual(ts);
@@ -582,8 +549,8 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         // Unpacked dimensions
         if (fC->Type(value) == VObjectType::paUnpacked_dimension) {
           int32_t unpackedSize = 0;
-          if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
-                  component, fC, value, param, nullptr, unpackedSize, false)) {
+          if (std::vector<uhdm::Range*>* unpackedDimensions =
+                  compileRanges(component, fC, value, param, nullptr, unpackedSize, false)) {
             param->setRanges(unpackedDimensions);
             param->setSize(unpackedSize);
           }
@@ -596,11 +563,9 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
 
         uhdm::ParamAssign* param_assign = s.make<uhdm::ParamAssign>();
         param_assign->setParent(pstmt);
-        fC->populateCoreMembers(Param_assignment, Param_assignment,
-                                param_assign);
+        fC->populateCoreMembers(Param_assignment, Param_assignment, param_assign);
         param_assign->setLhs(param);
-        param_assign->setRhs(
-            compileExpression(component, fC, value, param_assign, nullptr));
+        param_assign->setRhs(compileExpression(component, fC, value, param_assign, nullptr));
         param_assigns->emplace_back(param_assign);
 
         Param_assignment = fC->Sibling(Param_assignment);
@@ -613,12 +578,10 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId rstmt = fC->Sibling(cond);
       uhdm::Repeat* repeat = s.make<uhdm::Repeat>();
       repeat->setParent(pstmt);
-      if (uhdm::Any* cond_exp =
-              compileExpression(component, fC, cond, repeat)) {
+      if (uhdm::Any* cond_exp = compileExpression(component, fC, cond, repeat)) {
         repeat->setCondition((uhdm::Expr*)cond_exp);
       }
-      if (uhdm::AnyCollection* repeat_stmts =
-              compileStmt(component, fC, rstmt, repeat, instance, muteErrors)) {
+      if (uhdm::AnyCollection* repeat_stmts = compileStmt(component, fC, rstmt, repeat, instance, muteErrors)) {
         uhdm::Any* stmt = repeat_stmts->front();
         repeat->setStmt(stmt);
         stmt->setParent(repeat);
@@ -633,12 +596,10 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId rstmt = fC->Sibling(cond);
       uhdm::WhileStmt* while_st = s.make<uhdm::WhileStmt>();
       while_st->setParent(pstmt);
-      if (uhdm::Any* cond_exp =
-              compileExpression(component, fC, cond, while_st)) {
+      if (uhdm::Any* cond_exp = compileExpression(component, fC, cond, while_st)) {
         while_st->setCondition((uhdm::Expr*)cond_exp);
       }
-      if (uhdm::AnyCollection* while_stmts = compileStmt(
-              component, fC, rstmt, while_st, instance, muteErrors)) {
+      if (uhdm::AnyCollection* while_stmts = compileStmt(component, fC, rstmt, while_st, instance, muteErrors)) {
         uhdm::Any* stmt = while_stmts->front();
         while_st->setStmt(stmt);
         stmt->setParent(while_st);
@@ -654,20 +615,17 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       uhdm::DoWhile* do_while = s.make<uhdm::DoWhile>();
       do_while->setParent(pstmt);
       if (NodeId Statement = fC->Child(Statement_or_null)) {
-        uhdm::AnyCollection* while_stmts = compileStmt(
-            component, fC, Statement, do_while, instance, muteErrors);
+        uhdm::AnyCollection* while_stmts = compileStmt(component, fC, Statement, do_while, instance, muteErrors);
         if (while_stmts && !while_stmts->empty()) {
           uhdm::Any* stmt = while_stmts->front();
           do_while->setStmt(stmt);
           stmt->setParent(do_while);
         }
       }
-      if (uhdm::Any* cond_exp =
-              compileExpression(component, fC, Condition, do_while)) {
+      if (uhdm::Any* cond_exp = compileExpression(component, fC, Condition, do_while)) {
         do_while->setCondition((uhdm::Expr*)cond_exp);
       }
-      fC->populateCoreMembers(fC->Parent(Condition), fC->Parent(Condition),
-                              do_while);
+      fC->populateCoreMembers(fC->Parent(Condition), fC->Parent(Condition), do_while);
       stmt = do_while;
       break;
     }
@@ -683,8 +641,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         uhdm::WaitStmt* waitst = s.make<uhdm::WaitStmt>();
         waitst->setParent(pstmt);
         if (NodeId Statement = fC->Child(Statement_or_null)) {
-          uhdm::AnyCollection* while_stmts = compileStmt(
-              component, fC, Statement, waitst, instance, muteErrors);
+          uhdm::AnyCollection* while_stmts = compileStmt(component, fC, Statement, waitst, instance, muteErrors);
           if (while_stmts && !while_stmts->empty()) {
             uhdm::Any* stmt = while_stmts->front();
             waitst->setStmt(stmt);
@@ -693,8 +650,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
             waitst->setEndColumn(stmt->getEndColumn());
           }
         }
-        if (uhdm::Any* cond_exp =
-                compileExpression(component, fC, Expression, waitst)) {
+        if (uhdm::Any* cond_exp = compileExpression(component, fC, Expression, waitst)) {
           waitst->setCondition((uhdm::Expr*)cond_exp);
         }
         stmt = waitst;
@@ -706,10 +662,8 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         uhdm::AnyCollection* conditions = waitst->getConditions(true);
         NodeId Hierarchical_identifier = Expression;
         while (Hierarchical_identifier &&
-               (fC->Type(Hierarchical_identifier) ==
-                VObjectType::paHierarchical_identifier)) {
-          if (uhdm::Any* cond_exp = compileExpression(
-                  component, fC, Hierarchical_identifier, waitst)) {
+               (fC->Type(Hierarchical_identifier) == VObjectType::paHierarchical_identifier)) {
+          if (uhdm::Any* cond_exp = compileExpression(component, fC, Hierarchical_identifier, waitst)) {
             conditions->emplace_back(cond_exp);
           }
           Hierarchical_identifier = fC->Sibling(Hierarchical_identifier);
@@ -718,8 +672,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         NodeId Stmt = fC->Child(Action_block);
         if (fC->Type(Stmt) == VObjectType::paStatement_or_null) {
           // If only
-          if (uhdm::AnyCollection* if_stmts = compileStmt(
-                  component, fC, Stmt, waitst, instance, muteErrors)) {
+          if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, Stmt, waitst, instance, muteErrors)) {
             if (!if_stmts->empty()) {
               uhdm::Any* stmt = if_stmts->front();
               waitst->setStmt(stmt);
@@ -731,8 +684,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         } else if (fC->Type(Stmt) == VObjectType::ELSE) {
           // Else Only
           Stmt = fC->Sibling(Stmt);
-          if (uhdm::AnyCollection* if_stmts = compileStmt(
-                  component, fC, Stmt, waitst, instance, muteErrors)) {
+          if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, Stmt, waitst, instance, muteErrors)) {
             if (!if_stmts->empty()) {
               uhdm::Any* stmt = if_stmts->front();
               waitst->setElseStmt(stmt);
@@ -743,8 +695,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           }
         } else {
           // if else
-          if (uhdm::AnyCollection* if_stmts = compileStmt(
-                  component, fC, Stmt, waitst, instance, muteErrors)) {
+          if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, Stmt, waitst, instance, muteErrors)) {
             if (!if_stmts->empty()) {
               uhdm::Any* stmt = if_stmts->front();
               waitst->setStmt(stmt);
@@ -755,8 +706,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           }
           NodeId Else = fC->Sibling(Stmt);
           Stmt = fC->Sibling(Else);
-          if (uhdm::AnyCollection* else_stmts = compileStmt(
-                  component, fC, Stmt, waitst, instance, muteErrors)) {
+          if (uhdm::AnyCollection* else_stmts = compileStmt(component, fC, Stmt, waitst, instance, muteErrors)) {
             if (!else_stmts->empty()) {
               uhdm::Any* stmt = else_stmts->front();
               waitst->setElseStmt(stmt);
@@ -778,8 +728,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       }
       stmt = estmt;
       NodeId Hierarchical_identifier = fC->Sibling(Trigger_type);
-      if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
-              component, fC, Hierarchical_identifier, estmt)) {
+      if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(component, fC, Hierarchical_identifier, estmt)) {
         estmt->setLabel(exp->getName());
       }
       break;
@@ -793,8 +742,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       return_stmt->setParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, return_stmt);
       if (NodeId cond = fC->Sibling(the_stmt)) {
-        if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
-                component, fC, cond, return_stmt, instance, true)) {
+        if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(component, fC, cond, return_stmt, instance, true)) {
           exp->setParent(return_stmt);
           return_stmt->setCondition(exp);
           return_stmt->setEndLine(exp->getEndLine());
@@ -813,8 +761,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId exp = fC->Child(the_stmt);
       if (exp) {
         uhdm::Disable* disable = s.make<uhdm::Disable>();
-        if (uhdm::Expr* expc =
-                (uhdm::Expr*)compileExpression(component, fC, exp, disable)) {
+        if (uhdm::Expr* expc = (uhdm::Expr*)compileExpression(component, fC, exp, disable)) {
           if (expc->getUhdmType() == uhdm::UhdmType::RefObj) {
             const std::string_view name = expc->getName();
             if (uhdm::Any* object = searchObjectName(name, component, pstmt)) {
@@ -844,46 +791,37 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       break;
     }
     case VObjectType::paChecker_instantiation: {
-      stmt = compileCheckerInstantiation(component, fC, fC->Child(the_stmt),
-                                         pstmt, nullptr);
+      stmt = compileCheckerInstantiation(component, fC, fC->Child(the_stmt), pstmt, nullptr);
       break;
     }
     case VObjectType::paSimple_immediate_assertion_statement: {
-      stmt = compileSimpleImmediateAssertion(component, fC, fC->Child(the_stmt),
-                                             pstmt, nullptr);
+      stmt = compileSimpleImmediateAssertion(component, fC, fC->Child(the_stmt), pstmt, nullptr);
       break;
     }
     case VObjectType::paDeferred_immediate_assertion_statement: {
-      stmt = compileDeferredImmediateAssertion(
-          component, fC, fC->Child(the_stmt), pstmt, nullptr);
+      stmt = compileDeferredImmediateAssertion(component, fC, fC->Child(the_stmt), pstmt, nullptr);
       break;
     }
     case VObjectType::paProperty_declaration: {
-      stmt =
-          compilePropertyDeclaration(component, fC, the_stmt, pstmt, nullptr);
+      stmt = compilePropertyDeclaration(component, fC, the_stmt, pstmt, nullptr);
       break;
     }
     case VObjectType::paConcurrent_assertion_statement: {
-      stmt = compileConcurrentAssertion(component, fC, fC->Child(the_stmt),
-                                        pstmt, nullptr);
+      stmt = compileConcurrentAssertion(component, fC, fC->Child(the_stmt), pstmt, nullptr);
       break;
     }
     case VObjectType::paData_declaration: {
-      results = compileDataDeclaration(component, fC, fC->Child(the_stmt),
-                                       pstmt, instance);
+      results = compileDataDeclaration(component, fC, fC->Child(the_stmt), pstmt, instance);
       break;
     }
     case VObjectType::STRING_CONST: {
-      if (uhdm::AnyCollection* stmts =
-              compileStmt(component, fC, fC->Sibling(the_stmt), pstmt, instance,
-                          muteErrors)) {
+      if (uhdm::AnyCollection* stmts = compileStmt(component, fC, fC->Sibling(the_stmt), pstmt, instance, muteErrors)) {
         const std::string_view label = fC->SymName(the_stmt);
         for (uhdm::Any* st : *stmts) {
           if (uhdm::AtomicStmt* stm = any_cast<uhdm::AtomicStmt>(st)) {
             stm->setLabel(label);
             fC->populateCoreMembers(the_stmt, InvalidNodeId, stm);
-          } else if (uhdm::ConcurrentAssertions* stm =
-                         any_cast<uhdm::ConcurrentAssertions>(st)) {
+          } else if (uhdm::ConcurrentAssertions* stm = any_cast<uhdm::ConcurrentAssertions>(st)) {
             stm->setName(label);
             fC->populateCoreMembers(the_stmt, InvalidNodeId, stm);
           }
@@ -909,14 +847,13 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           if (else_keyword) else_stmt_id = fC->Sibling(else_keyword);
         }
         if (if_stmt_id) {
-          if (uhdm::AnyCollection* if_stmts = compileStmt(
-                  component, fC, if_stmt_id, expect, instance, muteErrors)) {
+          if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, if_stmt_id, expect, instance, muteErrors)) {
             if_stmt = if_stmts->front();
           }
         }
         if (else_stmt_id) {
-          if (uhdm::AnyCollection* else_stmts = compileStmt(
-                  component, fC, else_stmt_id, expect, instance, muteErrors)) {
+          if (uhdm::AnyCollection* else_stmts =
+                  compileStmt(component, fC, else_stmt_id, expect, instance, muteErrors)) {
             else_stmt = else_stmts->front();
           }
         }
@@ -926,13 +863,12 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
 
       uhdm::Expr* clocking_event = nullptr;
       if (fC->Type(Clocking_event) == VObjectType::paClocking_event) {
-        clocking_event = (uhdm::Expr*)compileExpression(
-            component, fC, Clocking_event, prop_spec, instance);
+        clocking_event = (uhdm::Expr*)compileExpression(component, fC, Clocking_event, prop_spec, instance);
         Clocking_event = fC->Sibling(Clocking_event);
       }
       prop_spec->setClockingEvent(clocking_event);
-      if (uhdm::Expr* property_expr = any_cast<uhdm::Expr>(compileExpression(
-              component, fC, Clocking_event, prop_spec, instance))) {
+      if (uhdm::Expr* property_expr =
+              any_cast<uhdm::Expr>(compileExpression(component, fC, Clocking_event, prop_spec, instance))) {
         prop_spec->setPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_expr, Property_expr, prop_spec);
@@ -945,8 +881,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
     case VObjectType::paContinuous_assign: {
       // Non-elab model
-      auto assigns = compileContinuousAssignment(
-          component, fC, fC->Child(the_stmt), pstmt, nullptr);
+      auto assigns = compileContinuousAssignment(component, fC, fC->Child(the_stmt), pstmt, nullptr);
       uhdm::AnyCollection* stmts = s.makeCollection<Any>();
       for (auto assign : assigns) {
         assign->setParent(pstmt);
@@ -959,10 +894,9 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::paModule_instantiation:
     case VObjectType::paProgram_instantiation: {
       // Non-elab model
-      ModuleDefinition* mod =
-          valuedcomponenti_cast<ModuleDefinition*>(component);
-      std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>>
-          result = compileInstantiation(mod, fC, pstmt, the_stmt, nullptr);
+      ModuleDefinition* mod = valuedcomponenti_cast<ModuleDefinition*>(component);
+      std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>> result =
+          compileInstantiation(mod, fC, pstmt, the_stmt, nullptr);
       if (!result.first.empty()) {
         uhdm::AnyCollection* stmts = s.makeCollection<Any>();
         for (auto mod : result.first) {
@@ -983,25 +917,21 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
     case VObjectType::paAlways_construct: {
       // Non-elab model
-      ModuleDefinition* mod =
-          valuedcomponenti_cast<ModuleDefinition*>(component);
-      uhdm::Always* always =
-          compileAlwaysBlock(mod, fC, the_stmt, pstmt, nullptr);
+      ModuleDefinition* mod = valuedcomponenti_cast<ModuleDefinition*>(component);
+      uhdm::Always* always = compileAlwaysBlock(mod, fC, the_stmt, pstmt, nullptr);
       stmt = always;
       break;
     }
     case VObjectType::paInitial_construct: {
       // Non-elab model
-      ModuleDefinition* mod =
-          valuedcomponenti_cast<ModuleDefinition*>(component);
+      ModuleDefinition* mod = valuedcomponenti_cast<ModuleDefinition*>(component);
       uhdm::Initial* init = compileInitialBlock(mod, fC, the_stmt, pstmt);
       stmt = init;
       break;
     }
     case VObjectType::paFinal_construct: {
       // Non-elab model
-      ModuleDefinition* mod =
-          valuedcomponenti_cast<ModuleDefinition*>(component);
+      ModuleDefinition* mod = valuedcomponenti_cast<ModuleDefinition*>(component);
       uhdm::FinalStmt* final = compileFinalBlock(mod, fC, the_stmt, pstmt);
       stmt = final;
       break;
@@ -1010,8 +940,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       compileNetDeclaration(component, fC, the_stmt, false, nullptr);
       break;
     }
-    default:
-      break;
+    default: break;
   }
   if (stmt) {
     if (attributes) {
@@ -1040,17 +969,13 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
   } else {
     VObjectType stmttype = fC->Type(the_stmt);
-    if ((muteErrors == false) && (stmttype != VObjectType::END) &&
-        (stmttype != VObjectType::paJoin_keyword) &&
-        (stmttype != VObjectType::paJoin_any_keyword) &&
-        (stmttype != VObjectType::paJoin_none_keyword)) {
+    if ((muteErrors == false) && (stmttype != VObjectType::END) && (stmttype != VObjectType::paJoin_keyword) &&
+        (stmttype != VObjectType::paJoin_any_keyword) && (stmttype != VObjectType::paJoin_none_keyword)) {
       uhdm::UnsupportedStmt* ustmt = s.make<uhdm::UnsupportedStmt>();
       std::string lineText;
       fileSystem->readLine(fC->getFileId(), fC->Line(the_stmt), lineText);
-      Location loc(fC->getFileId(the_stmt), fC->Line(the_stmt),
-                   fC->Column(the_stmt),
-                   symbols->registerSymbol(
-                       StrCat("<", fC->printObject(the_stmt), "> ", lineText)));
+      Location loc(fC->getFileId(the_stmt), fC->Line(the_stmt), fC->Column(the_stmt),
+                   symbols->registerSymbol(StrCat("<", fC->printObject(the_stmt), "> ", lineText)));
       Error err(ErrorDefinition::UHDM_UNSUPPORTED_STMT, loc);
       errors->addError(err);
       ustmt->setValue(StrCat("STRING:", lineText));
@@ -1065,9 +990,9 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
   return results;
 }
 
-uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    uhdm::Any* pstmt, ValuedComponentI* instance) {
+uhdm::AnyCollection* CompileHelper::compileDataDeclaration(DesignComponent* component, const FileContent* fC,
+                                                           NodeId nodeId, uhdm::Any* pstmt,
+                                                           ValuedComponentI* instance) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::AnyCollection* results = nullptr;
   VObjectType type = fC->Type(nodeId);
@@ -1095,13 +1020,10 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
       // uhdm::Typespec* ts = compileTypespec(component, fC, Data_type,
       // compileDesign);
       NodeId List_of_variable_decl_assignments = fC->Sibling(Data_type);
-      if (fC->Type(List_of_variable_decl_assignments) ==
-          VObjectType::paPacked_dimension) {
-        List_of_variable_decl_assignments =
-            fC->Sibling(List_of_variable_decl_assignments);
+      if (fC->Type(List_of_variable_decl_assignments) == VObjectType::paPacked_dimension) {
+        List_of_variable_decl_assignments = fC->Sibling(List_of_variable_decl_assignments);
       }
-      NodeId Variable_decl_assignment =
-          fC->Child(List_of_variable_decl_assignments);
+      NodeId Variable_decl_assignment = fC->Child(List_of_variable_decl_assignments);
       while (Variable_decl_assignment) {
         NodeId Var = Variable_decl_assignment;
         if (fC->Child(Var)) Var = fC->Child(Var);
@@ -1110,13 +1032,11 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
         assign_stmt->setParent(pstmt);
         assign_stmt->setOpType(vpiAssignmentOp);
         assign_stmt->setBlocking(true);
-        fC->populateCoreMembers(Variable_decl_assignment,
-                                Variable_decl_assignment, assign_stmt);
+        fC->populateCoreMembers(Variable_decl_assignment, Variable_decl_assignment, assign_stmt);
 
         NodeId UnpackedDimensionsStartId = fC->Sibling(Var);
-        if (uhdm::Any* var = compileVariable(component, fC, Data_type, Var,
-                                             UnpackedDimensionsStartId,
-                                             assign_stmt, instance, false)) {
+        if (uhdm::Any* var = compileVariable(component, fC, Data_type, Var, UnpackedDimensionsStartId, assign_stmt,
+                                             instance, false)) {
           fC->populateCoreMembers(Var, Var, var);
           if (uhdm::Expr* const expr = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(expr);
@@ -1131,13 +1051,11 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
         }
 
         NodeId Expression = UnpackedDimensionsStartId;
-        while (Expression &&
-               (fC->Type(Expression) != VObjectType::paExpression)) {
+        while (Expression && (fC->Type(Expression) != VObjectType::paExpression)) {
           Expression = fC->Sibling(Expression);
         }
         if (Expression) {
-          if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-                  component, fC, Expression, assign_stmt, instance)) {
+          if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign_stmt, instance)) {
             assign_stmt->setRhs(rhs);
           }
         }
@@ -1150,8 +1068,7 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
       break;
     }
     case VObjectType::paType_declaration: {
-      /* const DataType* dt = */ compileTypeDef(component, fC,
-                                                fC->Parent(nodeId), pstmt);
+      /* const DataType* dt = */ compileTypeDef(component, fC, fC->Parent(nodeId), pstmt);
       if (results == nullptr) {
         results = s.makeCollection<Any>();
         // Return an empty list of statements.
@@ -1159,15 +1076,14 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
       }
       break;
     }
-    default:
-      break;
+    default: break;
   }
   return results;
 }
 
-uhdm::AtomicStmt* CompileHelper::compileConditionalStmt(
-    DesignComponent* component, const FileContent* fC, NodeId Cond_predicate,
-    uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
+uhdm::AtomicStmt* CompileHelper::compileConditionalStmt(DesignComponent* component, const FileContent* fC,
+                                                        NodeId Cond_predicate, uhdm::Any* pstmt,
+                                                        ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   int32_t qualifier = 0;
   if (fC->Type(Cond_predicate) == VObjectType::paUnique_priority) {
@@ -1187,28 +1103,24 @@ uhdm::AtomicStmt* CompileHelper::compileConditionalStmt(
   if (Else_branch_stmt) {
     uhdm::IfElse* cond_stmt = s.make<uhdm::IfElse>();
     cond_stmt->setQualifier(qualifier);
-    if (uhdm::Any* cond_exp = compileExpression(component, fC, Cond_predicate,
-                                                cond_stmt, instance)) {
+    if (uhdm::Any* cond_exp = compileExpression(component, fC, Cond_predicate, cond_stmt, instance)) {
       cond_stmt->setCondition((uhdm::Expr*)cond_exp);
     }
-    if (uhdm::AnyCollection* if_stmts = compileStmt(
-            component, fC, If_branch_stmt, cond_stmt, instance, muteErrors)) {
+    if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, If_branch_stmt, cond_stmt, instance, muteErrors)) {
       cond_stmt->setStmt(if_stmts->front());
     }
-    if (uhdm::AnyCollection* else_stmts = compileStmt(
-            component, fC, Else_branch_stmt, cond_stmt, instance, muteErrors)) {
+    if (uhdm::AnyCollection* else_stmts =
+            compileStmt(component, fC, Else_branch_stmt, cond_stmt, instance, muteErrors)) {
       cond_stmt->setElseStmt(else_stmts->front());
     }
     result_stmt = cond_stmt;
   } else {
     uhdm::IfStmt* cond_stmt = s.make<uhdm::IfStmt>();
     cond_stmt->setQualifier(qualifier);
-    if (uhdm::Any* cond_exp = compileExpression(component, fC, Cond_predicate,
-                                                cond_stmt, instance)) {
+    if (uhdm::Any* cond_exp = compileExpression(component, fC, Cond_predicate, cond_stmt, instance)) {
       cond_stmt->setCondition((uhdm::Expr*)cond_exp);
     }
-    if (uhdm::AnyCollection* if_stmts = compileStmt(
-            component, fC, If_branch_stmt, cond_stmt, instance, muteErrors)) {
+    if (uhdm::AnyCollection* if_stmts = compileStmt(component, fC, If_branch_stmt, cond_stmt, instance, muteErrors)) {
       cond_stmt->setStmt(if_stmts->front());
     }
     result_stmt = cond_stmt;
@@ -1216,10 +1128,9 @@ uhdm::AtomicStmt* CompileHelper::compileConditionalStmt(
   return result_stmt;
 }
 
-uhdm::AtomicStmt* CompileHelper::compileEventControlStmt(
-    DesignComponent* component, const FileContent* fC,
-    NodeId Procedural_timing_control, uhdm::Any* pstmt,
-    ValuedComponentI* instance, bool muteErrors) {
+uhdm::AtomicStmt* CompileHelper::compileEventControlStmt(DesignComponent* component, const FileContent* fC,
+                                                         NodeId Procedural_timing_control, uhdm::Any* pstmt,
+                                                         ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   /*
   n<#100> u<70> t<IntConst> p<71> l<7>
@@ -1234,22 +1145,19 @@ uhdm::AtomicStmt* CompileHelper::compileEventControlStmt(
   event->setParent(pstmt);
 
   if (Event_expression) {
-    if (uhdm::Any* exp =
-            compileExpression(component, fC, Event_expression, event)) {
+    if (uhdm::Any* exp = compileExpression(component, fC, Event_expression, event)) {
       event->setCondition(exp);
     }
   }  // else @(*) : no event expression
   NodeId Statement_or_null = fC->Sibling(Procedural_timing_control);
-  if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Statement_or_null,
-                                               event, instance, muteErrors)) {
+  if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Statement_or_null, event, instance, muteErrors)) {
     if (!stmts->empty()) event->setStmt(stmts->front());
   }
   return event;
 }
 
-uhdm::AtomicStmt* CompileHelper::compileRandcaseStmt(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
+uhdm::AtomicStmt* CompileHelper::compileRandcaseStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                     uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::AtomicStmt* result = nullptr;
   NodeId RandCase = fC->Child(nodeId);
@@ -1264,14 +1172,12 @@ uhdm::AtomicStmt* CompileHelper::compileRandcaseStmt(
     case_items->emplace_back(case_item);
     uhdm::AnyCollection* exprs = case_item->getExprs(true);
     case_item->setParent(case_stmt);
-    if (uhdm::Any* item_exp =
-            compileExpression(component, fC, Expression, case_item, instance)) {
+    if (uhdm::Any* item_exp = compileExpression(component, fC, Expression, case_item, instance)) {
       item_exp->setParent(case_item);
       exprs->emplace_back(item_exp);
     }
     NodeId stmt = fC->Sibling(Expression);
-    if (uhdm::AnyCollection* stmts =
-            compileStmt(component, fC, stmt, case_item, instance, muteErrors)) {
+    if (uhdm::AnyCollection* stmts = compileStmt(component, fC, stmt, case_item, instance, muteErrors)) {
       case_item->setStmt(stmts->front());
     }
     RandCase = fC->Sibling(RandCase);
@@ -1282,9 +1188,8 @@ uhdm::AtomicStmt* CompileHelper::compileRandcaseStmt(
   return result;
 }
 
-uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
+uhdm::AtomicStmt* CompileHelper::compileCaseStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                 uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::AtomicStmt* result = nullptr;
   NodeId Case_keyword = fC->Child(nodeId);
@@ -1296,8 +1201,7 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
   NodeId Case_type = fC->Child(Case_keyword);
   NodeId Condition = fC->Sibling(Case_keyword);
   uhdm::CaseStmt* case_stmt = s.make<uhdm::CaseStmt>();
-  uhdm::Any* cond_exp =
-      compileExpression(component, fC, Condition, case_stmt, instance);
+  uhdm::Any* cond_exp = compileExpression(component, fC, Condition, case_stmt, instance);
   NodeId Case_item = fC->Sibling(Condition);
   uhdm::CaseItemCollection* case_items = case_stmt->getCaseItems(true);
   result = case_stmt;
@@ -1306,38 +1210,23 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
   VObjectType CaseType = fC->Type(Case_type);
   switch (CaseType) {
     case VObjectType::paCase_inside_item:
-    case VObjectType::CASE:
-      case_stmt->setCaseType(vpiCaseExact);
-      break;
-    case VObjectType::CASEX:
-      case_stmt->setCaseType(vpiCaseX);
-      break;
-    case VObjectType::CASEZ:
-      case_stmt->setCaseType(vpiCaseZ);
-      break;
-    default:
-      break;
+    case VObjectType::CASE: case_stmt->setCaseType(vpiCaseExact); break;
+    case VObjectType::CASEX: case_stmt->setCaseType(vpiCaseX); break;
+    case VObjectType::CASEZ: case_stmt->setCaseType(vpiCaseZ); break;
+    default: break;
   }
   if (Unique) {
     VObjectType UniqueType = fC->Type(Unique);
     switch (UniqueType) {
-      case VObjectType::UNIQUE:
-        case_stmt->setQualifier(vpiUniqueQualifier);
-        break;
-      case VObjectType::UNIQUE0:
-        case_stmt->setQualifier(vpiNoQualifier);
-        break;
-      case VObjectType::PRIORITY:
-        case_stmt->setQualifier(vpiPriorityQualifier);
-        break;
-      default:
-        break;
+      case VObjectType::UNIQUE: case_stmt->setQualifier(vpiUniqueQualifier); break;
+      case VObjectType::UNIQUE0: case_stmt->setQualifier(vpiNoQualifier); break;
+      case VObjectType::PRIORITY: case_stmt->setQualifier(vpiPriorityQualifier); break;
+      default: break;
     }
   }
   while (Case_item) {
     uhdm::CaseItem* case_item = nullptr;
-    if (fC->Type(Case_item) == VObjectType::paCase_item ||
-        fC->Type(Case_item) == VObjectType::paCase_inside_item) {
+    if (fC->Type(Case_item) == VObjectType::paCase_item || fC->Type(Case_item) == VObjectType::paCase_inside_item) {
       case_item = s.make<uhdm::CaseItem>();
       case_items->emplace_back(case_item);
       fC->populateCoreMembers(Case_item, Case_item, case_item);
@@ -1352,16 +1241,13 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
         while (Expression) {
           if (fC->Type(Expression) == VObjectType::paExpression) {
             // Expr
-            if (uhdm::Any* item_exp = compileExpression(
-                    component, fC, Expression, case_item, instance)) {
+            if (uhdm::Any* item_exp = compileExpression(component, fC, Expression, case_item, instance)) {
               item_exp->setParent(case_item);
               exprs->emplace_back(item_exp);
             }
           } else {
             // Stmt
-            if (uhdm::AnyCollection* stmts =
-                    compileStmt(component, fC, Expression, case_item, instance,
-                                muteErrors)) {
+            if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Expression, case_item, instance, muteErrors)) {
               case_item->setStmt(stmts->front());
             }
           }
@@ -1386,16 +1272,14 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
         insideOp->setParent(case_item);
 
         while (Value_range) {
-          if (uhdm::Expr* item_exp = (uhdm::Expr*)compileExpression(
-                  component, fC, Value_range, insideOp)) {
+          if (uhdm::Expr* item_exp = (uhdm::Expr*)compileExpression(component, fC, Value_range, insideOp)) {
             operands->emplace_back(item_exp);
           }
           Value_range = fC->Sibling(Value_range);
         }
         NodeId Statement_or_null = fC->Sibling(Open_range_list);
         // Stmt
-        if (uhdm::AnyCollection* stmts = compileStmt(
-                component, fC, Statement_or_null, case_item, instance)) {
+        if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Statement_or_null, case_item, instance)) {
           case_item->setStmt(stmts->front());
         }
       }
@@ -1404,8 +1288,7 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
     if (isDefault) {
       // Default
       if (Expression) {
-        if (uhdm::AnyCollection* stmts =
-                compileStmt(component, fC, Expression, case_item, instance)) {
+        if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Expression, case_item, instance)) {
           case_item->setStmt(stmts->front());
         }
       }
@@ -1418,9 +1301,8 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
 }
 
 template <typename T>
-std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*>
-CompileHelper::compileTfPortDecl(DesignComponent* component, T* parent,
-                                 const FileContent* fC, NodeId tf_item_decl) {
+std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*> CompileHelper::compileTfPortDecl(
+    DesignComponent* component, T* parent, const FileContent* fC, NodeId tf_item_decl) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::IODecl*>* ios = parent->getIODecls(true);
 
@@ -1444,39 +1326,33 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
         NodeId Data_type = fC->Child(Data_type_or_implicit);
         uhdm::Typespec* ts = nullptr;
         if (fC->Type(Data_type) == VObjectType::paData_type) {
-          ts = compileTypespec(component, fC, Data_type, InvalidNodeId, parent,
-                               nullptr, false);
+          ts = compileTypespec(component, fC, Data_type, InvalidNodeId, parent, nullptr, false);
         } else if (fC->Type(Data_type) == VObjectType::paPacked_dimension) {
           // Implicit type
           uhdm::LogicTypespec* pts = s.make<uhdm::LogicTypespec>();
           pts->setParent(parent);
           fC->populateCoreMembers(Data_type, Data_type, pts);
           int32_t size;
-          if (uhdm::RangeCollection* ranges = compileRanges(
-                  component, fC, Data_type, pts, nullptr, size, false)) {
+          if (uhdm::RangeCollection* ranges = compileRanges(component, fC, Data_type, pts, nullptr, size, false)) {
             pts->setRanges(ranges);
           }
           ts = pts;
         }
 
-        NodeId List_of_tf_variable_identifiers =
-            fC->Sibling(Data_type_or_implicit);
+        NodeId List_of_tf_variable_identifiers = fC->Sibling(Data_type_or_implicit);
         NodeId nameId = fC->Child(List_of_tf_variable_identifiers);
         while (nameId) {
           uhdm::RangeCollection* ranges = nullptr;
           NodeId Variable_dimension = fC->Sibling(nameId);
-          if (fC->Type(Variable_dimension) ==
-              VObjectType::paVariable_dimension) {
+          if (fC->Type(Variable_dimension) == VObjectType::paVariable_dimension) {
             int32_t size;
-            ranges = compileRanges(component, fC, Variable_dimension, parent,
-                                   nullptr, size, false);
+            ranges = compileRanges(component, fC, Variable_dimension, parent, nullptr, size, false);
           }
           const std::string_view name = fC->SymName(nameId);
           uhdm::IODecl* decl = s.make<uhdm::IODecl>();
           ios->emplace_back(decl);
           decl->setParent(parent);
-          decl->setDirection(
-              UhdmWriter::getVpiDirection(tf_port_direction_type));
+          decl->setDirection(UhdmWriter::getVpiDirection(tf_port_direction_type));
           decl->setName(name);
           ioMap.emplace(name, decl);
           fC->populateCoreMembers(nameId, nameId, decl);
@@ -1491,41 +1367,33 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             decl->getTypespec()->setActual(ts);
           }
           decl->setRanges(ranges);
-          if (fC->Type(Variable_dimension) ==
-              VObjectType::paVariable_dimension) {
+          if (fC->Type(Variable_dimension) == VObjectType::paVariable_dimension) {
             nameId = fC->Sibling(nameId);
           }
           nameId = fC->Sibling(nameId);
         }
-      } else if (fC->Type(Tf_port_declaration) ==
-                 VObjectType::paBlock_item_declaration) {
+      } else if (fC->Type(Tf_port_declaration) == VObjectType::paBlock_item_declaration) {
         NodeId Data_declaration = fC->Child(Tf_port_declaration);
         if (fC->Type(Data_declaration) == VObjectType::paData_declaration) {
           NodeId Variable_declaration = fC->Child(Data_declaration);
           bool is_static = false;
-          if (fC->Type(Variable_declaration) ==
-              VObjectType::paLifetime_Automatic) {
+          if (fC->Type(Variable_declaration) == VObjectType::paLifetime_Automatic) {
             Variable_declaration = fC->Sibling(Variable_declaration);
-          } else if (fC->Type(Variable_declaration) ==
-                     VObjectType::paLifetime_Static) {
+          } else if (fC->Type(Variable_declaration) == VObjectType::paLifetime_Static) {
             is_static = true;
             Variable_declaration = fC->Sibling(Variable_declaration);
           }
           NodeId Data_type = fC->Child(Variable_declaration);
-          uhdm::Typespec* ts = compileTypespec(
-              component, fC, Data_type, InvalidNodeId, parent, nullptr, false);
+          uhdm::Typespec* ts = compileTypespec(component, fC, Data_type, InvalidNodeId, parent, nullptr, false);
           NodeId List_of_variable_decl_assignments = fC->Sibling(Data_type);
-          NodeId Variable_decl_assignment =
-              fC->Child(List_of_variable_decl_assignments);
+          NodeId Variable_decl_assignment = fC->Child(List_of_variable_decl_assignments);
           while (Variable_decl_assignment) {
             NodeId nameId = fC->Child(Variable_decl_assignment);
             const std::string_view name = fC->SymName(nameId);
-            std::map<std::string, uhdm::IODecl*>::iterator itr =
-                ioMap.find(name);
+            std::map<std::string, uhdm::IODecl*>::iterator itr = ioMap.find(name);
             if (itr == ioMap.end()) {
               if (uhdm::Any* var =
-                      compileVariable(component, fC, Data_type, nameId,
-                                      InvalidNodeId, parent, nullptr, false)) {
+                      compileVariable(component, fC, Data_type, nameId, InvalidNodeId, parent, nullptr, false)) {
                 // if (uhdm::Any* var = compileVariable(component, fC,
                 //  nameId, VObjectType::NO_TYPE, Data_type,
                 // ts)) {
@@ -1566,12 +1434,10 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
   return std::make_pair(ios, nullptr);
 }
 
-std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
-    DesignComponent* component, uhdm::Any* parent, const FileContent* fC,
-    NodeId tf_port_list) {
-  if ((!tf_port_list) ||
-      ((fC->Type(tf_port_list) != VObjectType::paTf_port_item_list) &&
-       (fC->Type(tf_port_list) != VObjectType::paLet_port_list))) {
+std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(DesignComponent* component, uhdm::Any* parent,
+                                                             const FileContent* fC, NodeId tf_port_list) {
+  if ((!tf_port_list) || ((fC->Type(tf_port_list) != VObjectType::paTf_port_item_list) &&
+                          (fC->Type(tf_port_list) != VObjectType::paLet_port_list))) {
     return nullptr;
   }
 
@@ -1636,19 +1502,16 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
     if (fC->Type(type) == VObjectType::VIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
 
-    NodeId unpackedDimension =
-        fC->Sibling(fC->Sibling(fC->Child(tf_port_item)));
-    if (unpackedDimension &&
-        (fC->Type(unpackedDimension) != VObjectType::paVariable_dimension))
+    NodeId unpackedDimension = fC->Sibling(fC->Sibling(fC->Child(tf_port_item)));
+    if (unpackedDimension && (fC->Type(unpackedDimension) != VObjectType::paVariable_dimension))
       unpackedDimension = fC->Sibling(unpackedDimension);
     int32_t size;
-    if (std::vector<uhdm::Range*>* unpackedDimensions = compileRanges(
-            component, fC, unpackedDimension, decl, nullptr, size, false)) {
+    if (std::vector<uhdm::Range*>* unpackedDimensions =
+            compileRanges(component, fC, unpackedDimension, decl, nullptr, size, false)) {
       decl->setRanges(unpackedDimensions);
     }
     fC->populateCoreMembers(tf_param_name, tf_param_name, decl);
-    if (uhdm::Typespec* tempts = compileTypespec(
-            component, fC, type, unpackedDimension, decl, nullptr, true)) {
+    if (uhdm::Typespec* tempts = compileTypespec(component, fC, type, unpackedDimension, decl, nullptr, true)) {
       ts = tempts;
     }
 
@@ -1672,11 +1535,9 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
     decl->setName(name);
 
     NodeId expression = fC->Sibling(tf_param_name);
-    if (expression &&
-        (fC->Type(expression) != VObjectType::paVariable_dimension) &&
+    if (expression && (fC->Type(expression) != VObjectType::paVariable_dimension) &&
         (fC->Type(type) != VObjectType::STRING_CONST)) {
-      if (uhdm::Any* defvalue =
-              compileExpression(component, fC, expression, decl, nullptr)) {
+      if (uhdm::Any* defvalue = compileExpression(component, fC, expression, decl, nullptr)) {
         decl->setExpr(defvalue);
       }
     }
@@ -1687,8 +1548,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
   return ios;
 }
 
-NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
-                                            NodeId nodeId, uhdm::TaskFunc* tf) {
+NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId, uhdm::TaskFunc* tf) {
   NodeId func_decl = nodeId;
   VObjectType func_type = fC->Type(nodeId);
 
@@ -1705,17 +1565,12 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
   bool is_protected = false;
   while ((func_type == VObjectType::paMethodQualifier_Virtual) ||
          (func_type == VObjectType::paMethodQualifier_ClassItem) ||
-         (func_type == VObjectType::paPure_virtual_qualifier) ||
-         (func_type == VObjectType::paExtern_qualifier) ||
+         (func_type == VObjectType::paPure_virtual_qualifier) || (func_type == VObjectType::paExtern_qualifier) ||
          (func_type == VObjectType::paClassItemQualifier_Protected) ||
-         (func_type == VObjectType::paLifetime_Automatic) ||
-         (func_type == VObjectType::paLifetime_Static) ||
-         (func_type == VObjectType::paDpi_import_export) ||
-         (func_type == VObjectType::paPure_keyword) ||
-         (func_type == VObjectType::IMPORT) ||
-         (func_type == VObjectType::EXPORT) ||
-         (func_type == VObjectType::paContext_keyword) ||
-         (func_type == VObjectType::STRING_CONST)) {
+         (func_type == VObjectType::paLifetime_Automatic) || (func_type == VObjectType::paLifetime_Static) ||
+         (func_type == VObjectType::paDpi_import_export) || (func_type == VObjectType::paPure_keyword) ||
+         (func_type == VObjectType::IMPORT) || (func_type == VObjectType::EXPORT) ||
+         (func_type == VObjectType::paContext_keyword) || (func_type == VObjectType::STRING_CONST)) {
     if (func_type == VObjectType::paDpi_import_export) {
       func_decl = fC->Child(func_decl);
       func_type = fC->Type(func_decl);
@@ -1805,8 +1660,7 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
   return func_decl;
 }
 
-bool CompileHelper::compileTask(DesignComponent* component,
-                                const FileContent* fC, NodeId id,
+bool CompileHelper::compileTask(DesignComponent* component, const FileContent* fC, NodeId id,
                                 ValuedComponentI* instance, bool isMethod) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
@@ -1815,10 +1669,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
     task_funcs = component->getTaskFuncs();
   }
   uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr)
-    pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
-  NodeId nodeId =
-      (fC->Type(id) == VObjectType::paTask_declaration) ? id : fC->Child(id);
+  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
+  NodeId nodeId = (fC->Type(id) == VObjectType::paTask_declaration) ? id : fC->Child(id);
   std::string name;
   NodeId task_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
   NodeId Task_body_declaration;
@@ -1831,9 +1683,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     name = fC->SymName(task_name);
   else if (fC->Type(task_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(task_name);
-    name.assign(fC->SymName(fC->Child(Class_type)))
-        .append("::")
-        .append(fC->SymName(fC->Sibling(task_name)));
+    name.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(fC->Sibling(task_name)));
     task_name = fC->Sibling(task_name);
   }
 
@@ -1854,8 +1704,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     task_funcs->emplace_back(task);
     return true;
   }
-  if (task->getIODecls() || task->getVariables() || task->getStmt())
-    return true;
+  if (task->getIODecls() || task->getVariables() || task->getStmt()) return true;
   setFuncTaskQualifiers(fC, nodeId, task);
   task->setMethod(isMethod);
   fC->populateCoreMembers(nodeId, task_decl, task);
@@ -1865,17 +1714,14 @@ bool CompileHelper::compileTask(DesignComponent* component,
   if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     Statement_or_null = fC->Sibling(Tf_port_list);
     task->setIODecls(compileTfPortList(component, task, fC, Tf_port_list));
-  } else if (fC->Type(Tf_port_list) ==
-             VObjectType::paTf_item_declaration_list) {
+  } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration_list) {
     Statement_or_null = fC->Sibling(Tf_port_list);
     Tf_port_list = fC->Child(Tf_port_list);
     compileTfPortDecl(component, task, fC, Tf_port_list);
-    while (Tf_port_list &&
-           (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration)) {
+    while (Tf_port_list && (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration)) {
       NodeId Block_item_declaration = fC->Child(Tf_port_list);
       NodeId Parameter_declaration = fC->Child(Block_item_declaration);
-      if (Parameter_declaration && (fC->Type(Parameter_declaration) ==
-                                    VObjectType::paParameter_declaration)) {
+      if (Parameter_declaration && (fC->Type(Parameter_declaration) == VObjectType::paParameter_declaration)) {
         compileStmt(component, fC, Parameter_declaration, task, instance);
       }
       Tf_port_list = fC->Sibling(Tf_port_list);
@@ -1887,8 +1733,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
   }
 
   NodeId MoreStatement_or_null = fC->Sibling(Statement_or_null);
-  if (MoreStatement_or_null &&
-      (fC->Type(MoreStatement_or_null) == VObjectType::ENDTASK)) {
+  if (MoreStatement_or_null && (fC->Type(MoreStatement_or_null) == VObjectType::ENDTASK)) {
     MoreStatement_or_null = InvalidNodeId;
   }
   if (MoreStatement_or_null) {
@@ -1900,10 +1745,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
     uhdm::AnyCollection* stmts = begin->getStmts(true);
     const NodeId firstStatementId = Statement_or_null;
     NodeId lastStatementId = Statement_or_null;
-    while (Statement_or_null &&
-           (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
-      if (uhdm::AnyCollection* sts =
-              compileStmt(component, fC, Statement_or_null, begin, instance)) {
+    while (Statement_or_null && (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
+      if (uhdm::AnyCollection* sts = compileStmt(component, fC, Statement_or_null, begin, instance)) {
         for (uhdm::Any* st : *sts) {
           uhdm::UhdmType stmt_type = st->getUhdmType();
           if (stmt_type == uhdm::UhdmType::ParamAssign) {
@@ -1912,14 +1755,12 @@ bool CompileHelper::compileTask(DesignComponent* component,
           }
           if (stmt_type == uhdm::UhdmType::Assignment) {
             uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-            if (stmt->getRhs() == nullptr ||
-                (uhdm::Expr*)stmt->getLhs<uhdm::Variable>()) {
+            if (stmt->getRhs() == nullptr || (uhdm::Expr*)stmt->getLhs<uhdm::Variable>()) {
               // Declaration
               if (stmt->getRhs() != nullptr) {
                 stmts->emplace_back(st);
               } else {
-                if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
-                  var->setParent(begin);
+                if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>()) var->setParent(begin);
                 // s.Erase(stmt);
               }
             } else {
@@ -1937,10 +1778,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
     fC->populateCoreMembers(firstStatementId, lastStatementId, begin);
   } else {
     // Page 983, 2017 Standard: 0 or 1 Stmt
-    if (Statement_or_null &&
-        (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
-      if (uhdm::AnyCollection* stmts =
-              compileStmt(component, fC, Statement_or_null, task, instance)) {
+    if (Statement_or_null && (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
+      if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Statement_or_null, task, instance)) {
         if (!stmts->empty()) {
           task->setStmt(stmts->at(0));
         }
@@ -1950,8 +1789,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
   return true;
 }
 
-bool CompileHelper::compileClassConstructorDeclaration(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId) {
+bool CompileHelper::compileClassConstructorDeclaration(DesignComponent* component, const FileContent* fC,
+                                                       NodeId nodeId) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
   if (task_funcs == nullptr) {
@@ -2011,8 +1850,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       fC->populateCoreMembers(Stmt, Stmt, mcall->getNameObj());
       NodeId Args = fC->Sibling(Stmt);
       if (fC->Type(Args) == VObjectType::paArgument_list) {
-        if (uhdm::AnyCollection* arguments = compileTfCallArguments(
-                component, fC, Args, mcall, nullptr, false)) {
+        if (uhdm::AnyCollection* arguments = compileTfCallArguments(component, fC, Args, mcall, nullptr, false)) {
           mcall->setArguments(arguments);
         }
         Stmt = fC->Sibling(Stmt);  // NOLINT(*.DeadStores)
@@ -2021,8 +1859,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       fC->populateCoreMembers(Stmt, Args, mcall);
     } else {
       if (NodeId Statement = fC->Child(Stmt)) {
-        if (uhdm::AnyCollection* sts =
-                compileStmt(component, fC, Statement, func)) {
+        if (uhdm::AnyCollection* sts = compileStmt(component, fC, Statement, func)) {
           uhdm::Any* st = sts->front();
           st->setParent(func);
           func->setStmt(st);
@@ -2048,8 +1885,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
         NodeId Args = fC->Sibling(Stmt);
         fC->populateCoreMembers(Stmt, Stmt, mcall->getNameObj());
         if (fC->Type(Args) == VObjectType::paArgument_list) {
-          if (uhdm::AnyCollection* arguments = compileTfCallArguments(
-                  component, fC, Args, mcall, nullptr, false)) {
+          if (uhdm::AnyCollection* arguments = compileTfCallArguments(component, fC, Args, mcall, nullptr, false)) {
             mcall->setArguments(arguments);
           }
           Stmt = fC->Sibling(Stmt);
@@ -2059,8 +1895,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
         mcall->setParent(begin);
       } else {
         if (NodeId Statement = fC->Child(Stmt)) {
-          if (uhdm::AnyCollection* sts =
-                  compileStmt(component, fC, Statement, begin)) {
+          if (uhdm::AnyCollection* sts = compileStmt(component, fC, Statement, begin)) {
             for (uhdm::Any* st : *sts) {
               stmts->emplace_back(st);
               st->setParent(begin);
@@ -2077,8 +1912,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
   return true;
 }
 
-bool CompileHelper::compileFunction(DesignComponent* component,
-                                    const FileContent* fC, NodeId id,
+bool CompileHelper::compileFunction(DesignComponent* component, const FileContent* fC, NodeId id,
                                     ValuedComponentI* instance, bool isMethod) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::TaskFunc*>* task_funcs = component->getTaskFuncs();
@@ -2086,12 +1920,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     component->setTaskFuncs(s.makeCollection<uhdm::TaskFunc>());
     task_funcs = component->getTaskFuncs();
   }
-  NodeId nodeId = (fC->Type(id) == VObjectType::paFunction_declaration)
-                      ? id
-                      : fC->Child(id);
+  NodeId nodeId = (fC->Type(id) == VObjectType::paFunction_declaration) ? id : fC->Child(id);
   uhdm::Any* pscope = component->getUhdmModel();
-  if (pscope == nullptr)
-    pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
+  if (pscope == nullptr) pscope = m_compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::string name;
   std::string className;
   NodeId func_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
@@ -2113,15 +1944,12 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     else
       Function_body_declaration = fC->Child(func_decl);
 
-    if ((fC->Type(Function_body_declaration) ==
-         VObjectType::paLifetime_Automatic) ||
-        (fC->Type(Function_body_declaration) ==
-         VObjectType::paLifetime_Static)) {
+    if ((fC->Type(Function_body_declaration) == VObjectType::paLifetime_Automatic) ||
+        (fC->Type(Function_body_declaration) == VObjectType::paLifetime_Static)) {
       Function_body_declaration = fC->Sibling(Function_body_declaration);
     }
 
-    NodeId Function_data_type_or_implicit =
-        fC->Child(Function_body_declaration);
+    NodeId Function_data_type_or_implicit = fC->Child(Function_body_declaration);
     beginNameId = endNameId = fC->Sibling(Function_data_type_or_implicit);
     if (fC->Type(beginNameId) == VObjectType::paInterface_identifier) {
       endNameId = fC->Sibling(beginNameId);
@@ -2156,11 +1984,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     }
     if (className.empty()) {
       func->setParent(pscope);
-    } else if (ClassDefinition* const cd =
-                   m_compileDesign->getCompiler()
-                       ->getDesign()
-                       ->getClassDefinition(StrCat(fC->getLibrary()->getName(),
-                                                   "@", className))) {
+    } else if (ClassDefinition* const cd = m_compileDesign->getCompiler()->getDesign()->getClassDefinition(
+                   StrCat(fC->getLibrary()->getName(), "@", className))) {
       func->setParent(cd->getUhdmModel());
     } else {
       func->setParent(pscope);
@@ -2169,8 +1994,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     task_funcs->emplace_back(func);
     return true;
   }
-  if (func->getIODecls() || func->getVariables() || func->getStmt())
-    return true;
+  if (func->getIODecls() || func->getVariables() || func->getStmt()) return true;
   const uhdm::ScopedScope scopedScope(func);
   setFuncTaskQualifiers(fC, nodeId, func);
   func->setMethod(isMethod);
@@ -2186,24 +2010,21 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       Function_body_declaration = func_decl;
     else
       Function_body_declaration = fC->Child(func_decl);
-    NodeId Function_data_type_or_implicit =
-        fC->Child(Function_body_declaration);
+    NodeId Function_data_type_or_implicit = fC->Child(Function_body_declaration);
     NodeId Function_data_type = fC->Child(Function_data_type_or_implicit);
     NodeId Return_data_type = fC->Child(Function_data_type);
     if (fC->Type(Function_data_type) == VObjectType::paPacked_dimension) {
       Return_data_type = Function_data_type;
     }
-    if ((!Return_data_type) &&
-        ((fC->Type(Function_data_type) == VObjectType::paSigning_Unsigned) ||
-         (fC->Type(Function_data_type) == VObjectType::paSigning_Signed))) {
+    if ((!Return_data_type) && ((fC->Type(Function_data_type) == VObjectType::paSigning_Unsigned) ||
+                                (fC->Type(Function_data_type) == VObjectType::paSigning_Signed))) {
       Return_data_type = Function_data_type;
     }
 
     const uhdm::ScopedScope scopedScope(func);
     uhdm::Typespec* ts = nullptr;
     if (Return_data_type) {
-      ts = compileTypespec(component, fC, Return_data_type, InvalidNodeId, func,
-                           instance, true);
+      ts = compileTypespec(component, fC, Return_data_type, InvalidNodeId, func, instance, true);
     } else if (!Function_data_type) {
       // Implicit return type
       ts = s.make<uhdm::LogicTypespec>();
@@ -2229,8 +2050,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     func->setIODecls(compileTfPortList(component, func, fC, Tf_port_list));
     Function_statement_or_null = fC->Sibling(Tf_port_list);
-  } else if (fC->Type(Tf_port_list) ==
-             VObjectType::paTf_item_declaration_list) {
+  } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration_list) {
     Function_statement_or_null = fC->Sibling(Tf_port_list);
     Tf_port_list = fC->Child(Tf_port_list);
     auto results = compileTfPortDecl(component, func, fC, Tf_port_list);
@@ -2239,17 +2059,12 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     while (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {
       NodeId Block_item_declaration = fC->Child(Tf_port_list);
       NodeId Parameter_declaration = fC->Child(Block_item_declaration);
-      if ((fC->Type(Parameter_declaration) ==
-           VObjectType::paParameter_declaration) ||
-          (fC->Type(Parameter_declaration) ==
-           VObjectType::paLocal_parameter_declaration)) {
-        DesignComponent* tmp =
-            new ModuleDefinition(m_session, "fake", fC, InvalidNodeId, s);
-        compileParameterDeclaration(
-            tmp, fC, Parameter_declaration,
-            (fC->Type(Parameter_declaration) ==
-             VObjectType::paLocal_parameter_declaration),
-            nullptr, false, false);
+      if ((fC->Type(Parameter_declaration) == VObjectType::paParameter_declaration) ||
+          (fC->Type(Parameter_declaration) == VObjectType::paLocal_parameter_declaration)) {
+        DesignComponent* tmp = new ModuleDefinition(m_session, "fake", fC, InvalidNodeId, s);
+        compileParameterDeclaration(tmp, fC, Parameter_declaration,
+                                    (fC->Type(Parameter_declaration) == VObjectType::paLocal_parameter_declaration),
+                                    nullptr, false, false);
         if (tmp->getParameters()) {
           for (auto p : *tmp->getParameters()) {
             p->setParent(func, true);
@@ -2267,10 +2082,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     }
   }
 
-  NodeId MoreFunction_statement_or_null =
-      fC->Sibling(Function_statement_or_null);
-  if (MoreFunction_statement_or_null &&
-      (fC->Type(MoreFunction_statement_or_null) == VObjectType::ENDFUNCTION)) {
+  NodeId MoreFunction_statement_or_null = fC->Sibling(Function_statement_or_null);
+  if (MoreFunction_statement_or_null && (fC->Type(MoreFunction_statement_or_null) == VObjectType::ENDFUNCTION)) {
     MoreFunction_statement_or_null = InvalidNodeId;
   }
   if (MoreFunction_statement_or_null) {
@@ -2284,8 +2097,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     NodeId lastStatementId = Function_statement_or_null;
     while (Function_statement_or_null) {
       if (NodeId Statement = fC->Child(Function_statement_or_null)) {
-        if (uhdm::AnyCollection* sts =
-                compileStmt(component, fC, Statement, begin, instance)) {
+        if (uhdm::AnyCollection* sts = compileStmt(component, fC, Statement, begin, instance)) {
           for (uhdm::Any* st : *sts) {
             uhdm::UhdmType stmt_type = st->getUhdmType();
             if (stmt_type == uhdm::UhdmType::ParamAssign) {
@@ -2293,14 +2105,12 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                 func->getParamAssigns(true)->emplace_back(pst);
             } else if (stmt_type == uhdm::UhdmType::Assignment) {
               uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-              if ((stmt->getRhs() == nullptr) ||
-                  stmt->getLhs<uhdm::Variable>()) {
+              if ((stmt->getRhs() == nullptr) || stmt->getLhs<uhdm::Variable>()) {
                 // Declaration
                 if (stmt->getRhs() != nullptr) {
                   stmts->emplace_back(st);
                 } else {
-                  if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
-                    var->setParent(begin);
+                  if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>()) var->setParent(begin);
                   // s.Erase(stmt);
                 }
               } else {
@@ -2319,19 +2129,16 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     // begin keyword in function is implicit, and so can't have an explicit
     // location. However, set the file parameter anyways.
     // fC->populateCoreMembers(firstStatementId, lastStatementId, begin);
-    begin->setFile(
-        m_session->getFileSystem()->toPath(fC->getFileId(firstStatementId)));
+    begin->setFile(m_session->getFileSystem()->toPath(fC->getFileId(firstStatementId)));
   } else {
     // Page 983, 2017 Standard: 0 or 1 Stmt
     NodeId Statement = fC->Child(Function_statement_or_null);
     if (Statement) {
-      if (uhdm::AnyCollection* sts =
-              compileStmt(component, fC, Statement, func, instance)) {
+      if (uhdm::AnyCollection* sts = compileStmt(component, fC, Statement, func, instance)) {
         uhdm::Any* st = sts->front();
         uhdm::UhdmType stmt_type = st->getUhdmType();
         if (stmt_type == uhdm::UhdmType::ParamAssign) {
-          if (uhdm::ParamAssign* pst = any_cast<uhdm::ParamAssign>(st))
-            func->getParamAssigns(true)->emplace_back(pst);
+          if (uhdm::ParamAssign* pst = any_cast<uhdm::ParamAssign>(st)) func->getParamAssigns(true)->emplace_back(pst);
         } else if (stmt_type == uhdm::UhdmType::Assignment) {
           uhdm::Assignment* stmt = (uhdm::Assignment*)st;
           if ((stmt->getRhs() == nullptr) || stmt->getLhs<uhdm::Variable>()) {
@@ -2339,8 +2146,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
             if (stmt->getRhs() != nullptr) {
               func->setStmt(st);
             } else {
-              if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>())
-                var->setParent(func);
+              if (uhdm::Variable* var = stmt->getLhs<uhdm::Variable>()) var->setParent(func);
               // s.Erase(stmt);
             }
           } else {
@@ -2356,9 +2162,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   return true;
 }
 
-NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC,
-                                                NodeId nodeId,
-                                                uhdm::TaskFuncDecl* tfd) {
+NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC, NodeId nodeId, uhdm::TaskFuncDecl* tfd) {
   NodeId func_decl = nodeId;
   VObjectType func_type = fC->Type(nodeId);
 
@@ -2375,17 +2179,12 @@ NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC,
   bool is_protected = false;
   while ((func_type == VObjectType::paMethodQualifier_Virtual) ||
          (func_type == VObjectType::paMethodQualifier_ClassItem) ||
-         (func_type == VObjectType::paPure_virtual_qualifier) ||
-         (func_type == VObjectType::paExtern_qualifier) ||
+         (func_type == VObjectType::paPure_virtual_qualifier) || (func_type == VObjectType::paExtern_qualifier) ||
          (func_type == VObjectType::paClassItemQualifier_Protected) ||
-         (func_type == VObjectType::paLifetime_Automatic) ||
-         (func_type == VObjectType::paLifetime_Static) ||
-         (func_type == VObjectType::paDpi_import_export) ||
-         (func_type == VObjectType::paPure_keyword) ||
-         (func_type == VObjectType::IMPORT) ||
-         (func_type == VObjectType::EXPORT) ||
-         (func_type == VObjectType::paContext_keyword) ||
-         (func_type == VObjectType::STRING_CONST)) {
+         (func_type == VObjectType::paLifetime_Automatic) || (func_type == VObjectType::paLifetime_Static) ||
+         (func_type == VObjectType::paDpi_import_export) || (func_type == VObjectType::paPure_keyword) ||
+         (func_type == VObjectType::IMPORT) || (func_type == VObjectType::EXPORT) ||
+         (func_type == VObjectType::paContext_keyword) || (func_type == VObjectType::STRING_CONST)) {
     if (func_type == VObjectType::paDpi_import_export) {
       func_decl = fC->Child(func_decl);
       func_type = fC->Type(func_decl);
@@ -2475,8 +2274,7 @@ NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC,
   return func_decl;
 }
 
-Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
-                                          const FileContent* fC, NodeId id) {
+Task* CompileHelper::compileTaskPrototype(DesignComponent* scope, const FileContent* fC, NodeId id) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::vector<uhdm::TaskFuncDecl*>* task_funcs = scope->getTaskFuncDecls();
   if (task_funcs == nullptr) {
@@ -2500,9 +2298,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
     NodeId Class_type = fC->Child(task_name);
     identifierId = fC->Child(Class_type);
     NodeId suffixname = fC->Sibling(task_name);
-    taskName.assign(fC->SymName(fC->Child(Class_type)))
-        .append("::")
-        .append(fC->SymName(suffixname));
+    taskName.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(suffixname));
     Tf_port_list = fC->Sibling(suffixname);
   }
 
@@ -2522,9 +2318,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   return result;
 }
 
-Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
-                                                  const FileContent* fC,
-                                                  NodeId id) {
+Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope, const FileContent* fC, NodeId id) {
   std::string funcName;
   NodeId function_name;
   uhdm::Serializer& s = m_compileDesign->getSerializer();
@@ -2586,11 +2380,9 @@ Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
   }
   fC->populateCoreMembers(id, id, func);
 
-  uhdm::Typespec* ts =
-      compileTypespec(scope, fC, type, InvalidNodeId, func, nullptr, true);
+  uhdm::Typespec* ts = compileTypespec(scope, fC, type, InvalidNodeId, func, nullptr, true);
   NodeId Packed_dimension = type;
-  if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension)
-    Packed_dimension = fC->Sibling(type);
+  if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension) Packed_dimension = fC->Sibling(type);
   if (!Packed_dimension && (fC->Type(type) == VObjectType::paConstant_range)) {
     Packed_dimension = type;
   }
@@ -2601,8 +2393,7 @@ Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
     fC->populateCoreMembers(type, type, lts);
 
     int32_t size;
-    uhdm::RangeCollection* ranges =
-        compileRanges(scope, fC, Packed_dimension, func, nullptr, size, false);
+    uhdm::RangeCollection* ranges = compileRanges(scope, fC, Packed_dimension, func, nullptr, size, false);
     if ((ranges != nullptr) && !ranges->empty()) {
       lts->setRanges(ranges);
       for (uhdm::Range* r : *ranges) r->setParent(lts, true);
@@ -2624,9 +2415,7 @@ Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
   } else if (fC->Type(function_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(function_name);
     NodeId suffixname = fC->Sibling(function_name);
-    funcName.assign(fC->SymName(fC->Child(Class_type)))
-        .append("::")
-        .append(fC->SymName(suffixname));
+    funcName.assign(fC->SymName(fC->Child(Class_type))).append("::").append(fC->SymName(suffixname));
     Tf_port_list = fC->Sibling(suffixname);
   }
 
@@ -2640,15 +2429,14 @@ Function* CompileHelper::compileFunctionPrototype(DesignComponent* scope,
   DataType* returnType = new DataType();
   returnType->init(fC, type, typeName, fC->Type(type));
   Function* result = new Function(scope, fC, id, funcName, returnType);
-  Variable* variable =
-      new Variable(returnType, fC, id, InvalidNodeId, funcName);
+  Variable* variable = new Variable(returnType, fC, id, InvalidNodeId, funcName);
   result->addVariable(variable);
   result->compile(*this);
   return result;
 }
 
-uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId) {
+uhdm::Any* CompileHelper::compileProceduralContinuousAssign(DesignComponent* component, const FileContent* fC,
+                                                            NodeId nodeId) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   NodeId assigntypeid = fC->Child(nodeId);
   VObjectType assigntype = fC->Type(assigntypeid);
@@ -2659,20 +2447,16 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
       NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
-      if (fC->Type(fC->Child(Hierarchical_identifier)) ==
-          VObjectType::paHierarchical_identifier) {
+      if (fC->Type(fC->Child(Hierarchical_identifier)) == VObjectType::paHierarchical_identifier) {
         Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
-      } else if (fC->Type(Hierarchical_identifier) !=
-                 VObjectType::paPs_or_hierarchical_identifier) {
+      } else if (fC->Type(Hierarchical_identifier) != VObjectType::paPs_or_hierarchical_identifier) {
         Hierarchical_identifier = Variable_lvalue;
       }
       NodeId Expression = fC->Sibling(Variable_lvalue);
-      if (uhdm::Expr* const lhs = (uhdm::Expr*)compileExpression(
-              component, fC, Hierarchical_identifier, assign)) {
+      if (uhdm::Expr* const lhs = (uhdm::Expr*)compileExpression(component, fC, Hierarchical_identifier, assign)) {
         assign->setLhs(lhs);
       }
-      if (uhdm::Expr* const rhs = (uhdm::Expr*)compileExpression(
-              component, fC, Expression, assign)) {
+      if (uhdm::Expr* const rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign)) {
         assign->setRhs(rhs);
       }
       the_stmt = assign;
@@ -2683,20 +2467,16 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
       NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
-      if (fC->Type(fC->Child(Hierarchical_identifier)) ==
-          VObjectType::paHierarchical_identifier) {
+      if (fC->Type(fC->Child(Hierarchical_identifier)) == VObjectType::paHierarchical_identifier) {
         Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
-      } else if (fC->Type(Hierarchical_identifier) !=
-                 VObjectType::paPs_or_hierarchical_identifier) {
+      } else if (fC->Type(Hierarchical_identifier) != VObjectType::paPs_or_hierarchical_identifier) {
         Hierarchical_identifier = Variable_lvalue;
       }
       NodeId Expression = fC->Sibling(Variable_lvalue);
-      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(
-              component, fC, Hierarchical_identifier, assign)) {
+      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(component, fC, Hierarchical_identifier, assign)) {
         assign->setLhs(lhs);
       }
-      if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-              component, fC, Expression, assign)) {
+      if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign)) {
         assign->setRhs(rhs);
       }
       the_stmt = assign;
@@ -2707,15 +2487,12 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
       NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
-      if (fC->Type(fC->Child(Hierarchical_identifier)) ==
-          VObjectType::paHierarchical_identifier) {
+      if (fC->Type(fC->Child(Hierarchical_identifier)) == VObjectType::paHierarchical_identifier) {
         Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
-      } else if (fC->Type(Hierarchical_identifier) !=
-                 VObjectType::paPs_or_hierarchical_identifier) {
+      } else if (fC->Type(Hierarchical_identifier) != VObjectType::paPs_or_hierarchical_identifier) {
         Hierarchical_identifier = Variable_lvalue;
       }
-      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(
-              component, fC, Hierarchical_identifier, assign)) {
+      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(component, fC, Hierarchical_identifier, assign)) {
         assign->setLhs(lhs);
       }
       the_stmt = assign;
@@ -2726,28 +2503,23 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
       NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
-      if (fC->Type(fC->Child(Hierarchical_identifier)) ==
-          VObjectType::paHierarchical_identifier) {
+      if (fC->Type(fC->Child(Hierarchical_identifier)) == VObjectType::paHierarchical_identifier) {
         Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
-      } else if (fC->Type(Hierarchical_identifier) !=
-                 VObjectType::paPs_or_hierarchical_identifier) {
+      } else if (fC->Type(Hierarchical_identifier) != VObjectType::paPs_or_hierarchical_identifier) {
         Hierarchical_identifier = Variable_lvalue;
       }
-      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(
-              component, fC, Hierarchical_identifier, assign)) {
+      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(component, fC, Hierarchical_identifier, assign)) {
         assign->setLhs(lhs);
       }
       the_stmt = assign;
       break;
     }
-    default:
-      break;
+    default: break;
   }
   return the_stmt;
 }
 
-uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
-                                         const FileContent* fC, NodeId nodeId,
+uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                          bool muteErrors) {
   /*
     n<> u<36> t<IntegerAtomType_Int> p<37> l<5>
@@ -2822,8 +2594,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
   // Init
   if (For_initialization) {
     NodeId For_variable_declaration = fC->Child(For_initialization);
-    if (fC->Type(For_variable_declaration) ==
-        VObjectType::paFor_variable_declaration) {
+    if (fC->Type(For_variable_declaration) == VObjectType::paFor_variable_declaration) {
       while (For_variable_declaration) {
         uhdm::AnyCollection* stmts = for_stmt->getForInitStmts(true);
         NodeId Data_type = fC->Child(For_variable_declaration);
@@ -2831,12 +2602,10 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         NodeId Expression = fC->Sibling(Var);
         uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
         assign_stmt->setParent(for_stmt);
-        fC->populateCoreMembers(For_variable_declaration,
-                                For_variable_declaration, assign_stmt);
+        fC->populateCoreMembers(For_variable_declaration, For_variable_declaration, assign_stmt);
 
         if (uhdm::Any* var =
-                compileVariable(component, fC, Data_type, Var, InvalidNodeId,
-                                assign_stmt, nullptr, false)) {
+                compileVariable(component, fC, Data_type, Var, InvalidNodeId, assign_stmt, nullptr, false)) {
           if (uhdm::Expr* const v = any_cast<uhdm::Expr>(var)) {
             assign_stmt->setLhs(v);
           }
@@ -2846,35 +2615,29 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
             ro->setName(fC->SymName(Var));
           }
         }
-        if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-                component, fC, Expression, assign_stmt)) {
+        if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign_stmt)) {
           assign_stmt->setRhs(rhs);
         }
         stmts->emplace_back(assign_stmt);
 
         For_variable_declaration = fC->Sibling(For_variable_declaration);
       }
-    } else if (fC->Type(For_variable_declaration) ==
-               VObjectType::paVariable_assignment_list) {
+    } else if (fC->Type(For_variable_declaration) == VObjectType::paVariable_assignment_list) {
       NodeId List_of_variable_assignments = For_variable_declaration;
       NodeId Variable_assignment = fC->Child(List_of_variable_assignments);
       while (Variable_assignment) {
         NodeId Variable_lvalue = fC->Child(Variable_assignment);
         NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
-        if (fC->Type(fC->Child(Hierarchical_identifier)) ==
-            VObjectType::paHierarchical_identifier) {
-          Hierarchical_identifier =
-              fC->Child(fC->Child(Hierarchical_identifier));
-        } else if (fC->Type(Hierarchical_identifier) !=
-                   VObjectType::paPs_or_hierarchical_identifier) {
+        if (fC->Type(fC->Child(Hierarchical_identifier)) == VObjectType::paHierarchical_identifier) {
+          Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
+        } else if (fC->Type(Hierarchical_identifier) != VObjectType::paPs_or_hierarchical_identifier) {
           Hierarchical_identifier = Variable_lvalue;
         }
         NodeId Expression = fC->Sibling(Variable_lvalue);
         uhdm::AnyCollection* stmts = for_stmt->getForInitStmts(true);
         uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
         assign_stmt->setParent(for_stmt);
-        fC->populateCoreMembers(Variable_assignment, Variable_assignment,
-                                assign_stmt);
+        fC->populateCoreMembers(Variable_assignment, Variable_assignment, assign_stmt);
 
         // No type information available so create only a reference.
         // The actual variable is likely declared ahead.
@@ -2885,8 +2648,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         var->setParent(assign_stmt);
         assign_stmt->setLhs(var);
 
-        if (uhdm::Expr* const rhs = (uhdm::Expr*)compileExpression(
-                component, fC, Expression, assign_stmt)) {
+        if (uhdm::Expr* const rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign_stmt)) {
           assign_stmt->setRhs(rhs);
         }
         stmts->emplace_back(assign_stmt);
@@ -2898,8 +2660,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
 
   // Condition
   if (Condition) {
-    if (uhdm::Expr* cond = (uhdm::Expr*)compileExpression(
-            component, fC, Condition, for_stmt)) {
+    if (uhdm::Expr* cond = (uhdm::Expr*)compileExpression(component, fC, Condition, for_stmt)) {
       for_stmt->setCondition(cond);
     }
   }
@@ -2912,15 +2673,13 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
 
       NodeId Expression = fC->Child(For_step_assignment);
       if (fC->Type(Expression) == VObjectType::paOperator_assignment) {
-        if (std::vector<uhdm::Any*>* incstmts =
-                compileStmt(component, fC, Expression, for_stmt)) {
+        if (std::vector<uhdm::Any*>* incstmts = compileStmt(component, fC, Expression, for_stmt)) {
           for (auto stmt : *incstmts) {
             stmts->emplace_back(stmt);
           }
         }
       } else {
-        if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
-                component, fC, Expression, for_stmt)) {
+        if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(component, fC, Expression, for_stmt)) {
           stmts->emplace_back(exp);
         }
       }
@@ -2930,8 +2689,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
 
   // Stmt
   if (Statement_or_null) {
-    if (uhdm::AnyCollection* stmts = compileStmt(
-            component, fC, Statement_or_null, for_stmt, nullptr, muteErrors)) {
+    if (uhdm::AnyCollection* stmts = compileStmt(component, fC, Statement_or_null, for_stmt, nullptr, muteErrors)) {
       for_stmt->setStmt(stmts->front());
     }
   }
@@ -2939,9 +2697,8 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
   return for_stmt;
 }
 
-uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(
-    DesignComponent* component, const FileContent* fC, NodeId id,
-    uhdm::Any* pexpr) {
+uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(DesignComponent* component, const FileContent* fC, NodeId id,
+                                                          uhdm::Any* pexpr) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::MethodFuncCall* func_call = s.make<uhdm::MethodFuncCall>();
   func_call->setParent(pexpr);
@@ -2962,24 +2719,21 @@ uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(
   }
   NodeId Constraint_block = fC->Sibling(With);
   if (fC->Type(Identifier_list) == VObjectType::paIdentifier_list) {
-    if (uhdm::AnyCollection* arguments = compileTfCallArguments(
-            component, fC, Identifier_list, func_call, nullptr, false)) {
+    if (uhdm::AnyCollection* arguments =
+            compileTfCallArguments(component, fC, Identifier_list, func_call, nullptr, false)) {
       func_call->setArguments(arguments);
     }
   }
 
   if (Constraint_block) {
-    if (uhdm::Any* cblock = compileConstraintBlock(
-            component, fC, Constraint_block, func_call)) {
+    if (uhdm::Any* cblock = compileConstraintBlock(component, fC, Constraint_block, func_call)) {
       func_call->setWith(cblock);
     }
   }
   return func_call;
 }
 
-uhdm::Any* CompileHelper::compileConstraintBlock(DesignComponent* component,
-                                                 const FileContent* fC,
-                                                 NodeId nodeId,
+uhdm::Any* CompileHelper::compileConstraintBlock(DesignComponent* component, const FileContent* fC, NodeId nodeId,
                                                  uhdm::Any* pexpr) {
   NodeId constraint_name = fC->Child(fC->Child(nodeId));
   uhdm::Serializer& s = m_compileDesign->getSerializer();
@@ -2992,9 +2746,7 @@ uhdm::Any* CompileHelper::compileConstraintBlock(DesignComponent* component,
   return result;
 }
 
-void CompileHelper::compileBindStmt(DesignComponent* component,
-                                    const FileContent* fC,
-                                    NodeId Bind_directive,
+void CompileHelper::compileBindStmt(DesignComponent* component, const FileContent* fC, NodeId Bind_directive,
                                     ValuedComponentI* instance) {
   /*
   n<bp_lce> u<46> t<StringConst> p<65> s<64> l<9:5> el<9:11>
@@ -3041,14 +2793,12 @@ void CompileHelper::compileBindStmt(DesignComponent* component,
   NodeId Instance_name = tmp;
   Instance_name = fC->Child(fC->Child(Instance_name));
   std::string fullName = StrCat(fC->getLibrary()->getName(), "@", targetName);
-  BindStmt* bind = new BindStmt(fC, Module_instantiation, Target_scope,
-                                Instance_target, Source_scope, Instance_name);
+  BindStmt* bind = new BindStmt(fC, Module_instantiation, Target_scope, Instance_target, Source_scope, Instance_name);
   m_compileDesign->getCompiler()->getDesign()->addBindStmt(fullName, bind);
 }
 
-uhdm::Any* CompileHelper::compileCheckerInstantiation(
-    DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    uhdm::Any* pstmt, ValuedComponentI* instance) {
+uhdm::Any* CompileHelper::compileCheckerInstantiation(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                      uhdm::Any* pstmt, ValuedComponentI* instance) {
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   uhdm::CheckerInst* result = s.make<uhdm::CheckerInst>();
   NodeId Ps_identifier = fC->Child(nodeId);

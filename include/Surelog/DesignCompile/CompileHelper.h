@@ -66,8 +66,7 @@ using TfPortList = std::vector<TfPortItem*>;
 class FScope : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(FScope, ValuedComponentI)
  public:
-  FScope(Session* session, const SURELOG::ValuedComponentI* parent,
-         SURELOG::ValuedComponentI* definition)
+  FScope(Session* session, const SURELOG::ValuedComponentI* parent, SURELOG::ValuedComponentI* definition)
       : ValuedComponentI(session, parent, definition) {}
 
  private:
@@ -82,383 +81,250 @@ class CompileHelper final {
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
 
-  static void setRefTypespecName(uhdm::RefTypespec* rt,
-                                 const uhdm::Typespec* ts,
-                                 std::string_view name);
+  static void setRefTypespecName(uhdm::RefTypespec* rt, const uhdm::Typespec* ts, std::string_view name);
 
   // ------------------------------------------------------------------------------------------
   // Surelog internal modeling
 
-  bool importPackage(DesignComponent* scope, Design* design,
-                     const FileContent* fC, NodeId id, bool inPackage = false);
+  bool importPackage(DesignComponent* scope, Design* design, const FileContent* fC, NodeId id, bool inPackage = false);
 
-  bool compileTfPortList(Procedure* parent, const FileContent* fC, NodeId id,
-                         TfPortList& targetList);
+  bool compileTfPortList(Procedure* parent, const FileContent* fC, NodeId id, TfPortList& targetList);
 
-  const DataType* compileTypeDef(DesignComponent* scope, const FileContent* fC,
-                                 NodeId id, uhdm::Any* pstmt = nullptr);
+  const DataType* compileTypeDef(DesignComponent* scope, const FileContent* fC, NodeId id, uhdm::Any* pstmt = nullptr);
 
-  bool compileScopeBody(Scope* parent, Statement* parentStmt,
-                        const FileContent* fC, NodeId id);
+  bool compileScopeBody(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
   bool compileScopeVariable(Scope* parent, const FileContent* fC, NodeId id);
 
-  bool compileSubroutine_call(Scope* parent, Statement* parentStmt,
-                              const FileContent* fC, NodeId id);
+  bool compileSubroutine_call(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
-  bool compileSeqBlock_stmt(Scope* parent, Statement* parentStmt,
-                            const FileContent* fC, NodeId id);
+  bool compileSeqBlock_stmt(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
-  bool compileLoop_stmt(Scope* parent, Statement* parentStmt,
-                        const FileContent* fC, NodeId id);
+  bool compileLoop_stmt(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
-  bool compileForLoop_stmt(Scope* parent, Statement* parentStmt,
-                           const FileContent* fC, NodeId id);
+  bool compileForLoop_stmt(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
-  bool compileForeachLoop_stmt(Scope* parent, Statement* parentStmt,
-                               const FileContent* fC, NodeId id);
+  bool compileForeachLoop_stmt(Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 
-  Function* compileFunctionPrototype(DesignComponent* scope,
-                                     const FileContent* fC, NodeId id);
+  Function* compileFunctionPrototype(DesignComponent* scope, const FileContent* fC, NodeId id);
 
-  Task* compileTaskPrototype(DesignComponent* scope, const FileContent* fC,
-                             NodeId id);
+  Task* compileTaskPrototype(DesignComponent* scope, const FileContent* fC, NodeId id);
 
-  bool compilePortDeclaration(DesignComponent* scope, const FileContent* fC,
-                              NodeId id, VObjectType& port_direction,
+  bool compilePortDeclaration(DesignComponent* scope, const FileContent* fC, NodeId id, VObjectType& port_direction,
                               bool hasNonNullPort);
 
-  bool compileAnsiPortDeclaration(DesignComponent* component,
-                                  const FileContent* fC, NodeId id,
+  bool compileAnsiPortDeclaration(DesignComponent* component, const FileContent* fC, NodeId id,
                                   VObjectType& port_direction);
 
-  bool elaborationSystemTask(DesignComponent* component, const FileContent* fC,
-                             NodeId id);
+  bool elaborationSystemTask(DesignComponent* component, const FileContent* fC, NodeId id);
 
-  bool compileNetDeclaration(DesignComponent* component, const FileContent* fC,
-                             NodeId id, bool interface,
+  bool compileNetDeclaration(DesignComponent* component, const FileContent* fC, NodeId id, bool interface,
                              uhdm::AttributeCollection* attributes);
 
-  bool compileDataDeclaration(DesignComponent* component, const FileContent* fC,
-                              NodeId id, bool interface,
+  bool compileDataDeclaration(DesignComponent* component, const FileContent* fC, NodeId id, bool interface,
                               uhdm::AttributeCollection* attributes);
 
-  bool compileSignal(DesignComponent* comp, Signal* sig,
-                     std::string_view prefix, bool signalIsPort);
+  bool compileSignal(DesignComponent* comp, Signal* sig, std::string_view prefix, bool signalIsPort);
 
-  uhdm::Typespec* compileTypeParameter(DesignComponent* component,
-                                       Parameter* sit);
+  uhdm::Typespec* compileTypeParameter(DesignComponent* component, Parameter* sit);
 
   // ------------------------------------------------------------------------------------------
   // UHDM modeling
 
-  std::vector<uhdm::ContAssign*> compileContinuousAssignment(
-      DesignComponent* component, const FileContent* fC, NodeId id,
-      uhdm::Any* pstmt, ValuedComponentI* instance);
+  std::vector<uhdm::ContAssign*> compileContinuousAssignment(DesignComponent* component, const FileContent* fC,
+                                                             NodeId id, uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::Always* compileAlwaysBlock(DesignComponent* component,
-                                   const FileContent* fC, NodeId id,
-                                   uhdm::Any* pstmt,
+  uhdm::Always* compileAlwaysBlock(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::Any* pstmt,
                                    ValuedComponentI* instance);
 
-  uhdm::Any* compileTfCall(DesignComponent* component, const FileContent* fC,
-                           NodeId Tf_call_stmt, uhdm::Any* pexpr);
+  uhdm::Any* compileTfCall(DesignComponent* component, const FileContent* fC, NodeId Tf_call_stmt, uhdm::Any* pexpr);
 
-  uhdm::AnyCollection* compileTfCallArguments(
-      DesignComponent* component, const FileContent* fC, NodeId Arg_list_node,
-      uhdm::Any* call, ValuedComponentI* instance, bool muteErrors);
+  uhdm::AnyCollection* compileTfCallArguments(DesignComponent* component, const FileContent* fC, NodeId Arg_list_node,
+                                              uhdm::Any* call, ValuedComponentI* instance, bool muteErrors);
 
-  uhdm::Assignment* compileBlockingAssignment(
-      DesignComponent* component, const FileContent* fC, NodeId nodeId,
-      bool blocking, uhdm::Any* pstmt, ValuedComponentI* instance = nullptr);
+  uhdm::Assignment* compileBlockingAssignment(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                              bool blocking, uhdm::Any* pstmt, ValuedComponentI* instance = nullptr);
 
-  uhdm::AtomicStmt* compileProceduralTimingControlStmt(
-      DesignComponent* component, const FileContent* fC, NodeId nodeId,
-      uhdm::Any* pstmt, ValuedComponentI* instance = nullptr);
+  uhdm::AtomicStmt* compileProceduralTimingControlStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                       uhdm::Any* pstmt, ValuedComponentI* instance = nullptr);
 
-  uhdm::AtomicStmt* compileEventControlStmt(
-      DesignComponent* component, const FileContent* fC, NodeId nodeId,
-      uhdm::Any* pstmt, ValuedComponentI* instance = nullptr,
-      bool muteErrors = false);
+  uhdm::AtomicStmt* compileEventControlStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                            uhdm::Any* pstmt, ValuedComponentI* instance = nullptr,
+                                            bool muteErrors = false);
 
-  uhdm::AtomicStmt* compileConditionalStmt(DesignComponent* component,
-                                           const FileContent* fC, NodeId nodeId,
-                                           uhdm::Any* pstmt,
-                                           ValuedComponentI* instance = nullptr,
+  uhdm::AtomicStmt* compileConditionalStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                           uhdm::Any* pstmt, ValuedComponentI* instance = nullptr,
                                            bool muteErrors = false);
 
-  bool compileParameterDeclaration(DesignComponent* component,
-                                   const FileContent* fC, NodeId nodeId,
-                                   bool localParam,
-                                   ValuedComponentI* m_instance,
-                                   bool port_param, bool muteErrors);
+  bool compileParameterDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId, bool localParam,
+                                   ValuedComponentI* m_instance, bool port_param, bool muteErrors);
 
-  NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId,
-                               uhdm::TaskFunc* tf);
-  NodeId setFuncTaskDeclQualifiers(const FileContent* fC, NodeId nodeId,
-                                   uhdm::TaskFuncDecl* tfd);
+  NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId, uhdm::TaskFunc* tf);
+  NodeId setFuncTaskDeclQualifiers(const FileContent* fC, NodeId nodeId, uhdm::TaskFuncDecl* tfd);
 
-  bool compileTask(DesignComponent* component, const FileContent* fC,
-                   NodeId nodeId, ValuedComponentI* instance, bool isMethod);
+  bool compileTask(DesignComponent* component, const FileContent* fC, NodeId nodeId, ValuedComponentI* instance,
+                   bool isMethod);
 
-  bool compileFunction(DesignComponent* component, const FileContent* fC,
-                       NodeId nodeId, ValuedComponentI* instance,
+  bool compileFunction(DesignComponent* component, const FileContent* fC, NodeId nodeId, ValuedComponentI* instance,
                        bool isMethod);
 
-  bool compileAssertionItem(DesignComponent* component, const FileContent* fC,
-                            NodeId nodeId);
+  bool compileAssertionItem(DesignComponent* component, const FileContent* fC, NodeId nodeId);
 
-  std::vector<uhdm::IODecl*>* compileTfPortList(DesignComponent* scope,
-                                                uhdm::Any* parent,
-                                                const FileContent* fC,
+  std::vector<uhdm::IODecl*>* compileTfPortList(DesignComponent* scope, uhdm::Any* parent, const FileContent* fC,
                                                 NodeId id);
 
   template <typename T>
-  std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*>
-  compileTfPortDecl(DesignComponent* scope, T* parent, const FileContent* fC,
-                    NodeId id);
+  std::pair<uhdm::IODeclCollection*, uhdm::VariableCollection*> compileTfPortDecl(DesignComponent* scope, T* parent,
+                                                                                  const FileContent* fC, NodeId id);
 
-  uhdm::AtomicStmt* compileCaseStmt(DesignComponent* component,
-                                    const FileContent* fC, NodeId nodeId,
-                                    uhdm::Any* pstmt = nullptr,
-                                    ValuedComponentI* instance = nullptr,
+  uhdm::AtomicStmt* compileCaseStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                    uhdm::Any* pstmt = nullptr, ValuedComponentI* instance = nullptr,
                                     bool muteErrors = false);
-  uhdm::AtomicStmt* compileRandcaseStmt(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        uhdm::Any* pstmt = nullptr,
-                                        ValuedComponentI* instance = nullptr,
+  uhdm::AtomicStmt* compileRandcaseStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                        uhdm::Any* pstmt = nullptr, ValuedComponentI* instance = nullptr,
                                         bool muteErrors = false);
 
-  uhdm::AnyCollection* compileStmt(DesignComponent* component,
-                                   const FileContent* fC, NodeId nodeId,
-                                   uhdm::Any* pstmt = nullptr,
-                                   ValuedComponentI* instance = nullptr,
+  uhdm::AnyCollection* compileStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                   uhdm::Any* pstmt = nullptr, ValuedComponentI* instance = nullptr,
                                    bool muteError = false);
 
-  uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
-                             NodeId declarationId, NodeId nameId,
-                             NodeId unpackedDimId, uhdm::Any* pstmt,
-                             ValuedComponentI* instance, bool muteErrors);
-  uhdm::Any* compileSignals(DesignComponent* component, Signal* sig,
-                            uhdm::Typespec* tps);
+  uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC, NodeId declarationId, NodeId nameId,
+                             NodeId unpackedDimId, uhdm::Any* pstmt, ValuedComponentI* instance, bool muteErrors);
+  uhdm::Any* compileSignals(DesignComponent* component, Signal* sig, uhdm::Typespec* tps);
 
-  uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
-                             NodeId nameId, VObjectType subnettype,
-                             NodeId typespecId, uhdm::Typespec* tps,
-                             uhdm::Any* pscope);
+  uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC, NodeId nameId, VObjectType subnettype,
+                             NodeId typespecId, uhdm::Typespec* tps, uhdm::Any* pscope);
 
   uhdm::Any* compileSignals(DesignComponent* component, Signal* sig);
 
-  uhdm::Typespec* compileTypespec(DesignComponent* component,
-                                  const FileContent* fC, NodeId nodeId,
-                                  NodeId unpackedDimId, uhdm::Any* pstmt,
-                                  ValuedComponentI* instance, bool isVariable);
+  uhdm::Typespec* compileTypespec(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                  NodeId unpackedDimId, uhdm::Any* pstmt, ValuedComponentI* instance, bool isVariable);
 
-  uhdm::Typespec* compileUpdatedTypespec(DesignComponent* component,
-                                         const FileContent* fC, NodeId nodeId,
-                                         NodeId packedId, NodeId unpackedId,
-                                         uhdm::Any* pstmt, uhdm::Typespec* ts);
+  uhdm::Typespec* compileUpdatedTypespec(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                         NodeId packedId, NodeId unpackedId, uhdm::Any* pstmt, uhdm::Typespec* ts);
 
-  uhdm::Typespec* compileBuiltinTypespec(DesignComponent* component,
-                                         const FileContent* fC, NodeId type,
-                                         VObjectType the_type,
-                                         uhdm::Any* pstmt);
+  uhdm::Typespec* compileBuiltinTypespec(DesignComponent* component, const FileContent* fC, NodeId type,
+                                         VObjectType the_type, uhdm::Any* pstmt);
 
-  uhdm::Typespec* compileDatastructureTypespec(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId type,
-                                               ValuedComponentI* instance,
-                                               std::string_view suffixname = "",
+  uhdm::Typespec* compileDatastructureTypespec(DesignComponent* component, const FileContent* fC, NodeId type,
+                                               ValuedComponentI* instance, std::string_view suffixname = "",
                                                std::string_view typeName = "");
 
-  uhdm::Any* compileCheckerInstantiation(DesignComponent* component,
-                                         const FileContent* fC, NodeId nodeId,
-                                         uhdm::Any* pstmt,
-                                         ValuedComponentI* instance);
+  uhdm::Any* compileCheckerInstantiation(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                         uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::Any* compileSimpleImmediateAssertion(DesignComponent* component,
-                                             const FileContent* fC,
-                                             NodeId nodeId, uhdm::Any* pstmt,
-                                             ValuedComponentI* instance);
+  uhdm::Any* compileSimpleImmediateAssertion(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                             uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::Any* compileDeferredImmediateAssertion(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId nodeId, uhdm::Any* pstmt,
-                                               ValuedComponentI* instance);
+  uhdm::Any* compileDeferredImmediateAssertion(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                               uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::Any* compileConcurrentAssertion(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        uhdm::Any* pstmt,
-                                        ValuedComponentI* instance);
+  uhdm::Any* compileConcurrentAssertion(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                        uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::PropertyDecl* compilePropertyDeclaration(DesignComponent* component,
-                                                 const FileContent* fC,
-                                                 NodeId nodeId,
-                                                 uhdm::Any* pstmt,
-                                                 ValuedComponentI* instance);
+  uhdm::PropertyDecl* compilePropertyDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                 uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::SequenceDecl* compileSequenceDeclaration(DesignComponent* component,
-                                                 const FileContent* fC,
-                                                 NodeId nodeId,
-                                                 uhdm::Any* pstmt,
-                                                 ValuedComponentI* instance);
+  uhdm::SequenceDecl* compileSequenceDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                                 uhdm::Any* pstmt, ValuedComponentI* instance);
 
-  uhdm::Initial* compileInitialBlock(DesignComponent* component,
-                                     const FileContent* fC, NodeId id,
-                                     uhdm::Any* pstmt);
+  uhdm::Initial* compileInitialBlock(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::Any* pstmt);
 
-  uhdm::FinalStmt* compileFinalBlock(DesignComponent* component,
-                                     const FileContent* fC, NodeId id,
-                                     uhdm::Any* pstmt);
+  uhdm::FinalStmt* compileFinalBlock(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::Any* pstmt);
 
-  void compileBindStmt(DesignComponent* component, const FileContent* fC,
-                       NodeId nodeId, ValuedComponentI* instance = nullptr);
+  void compileBindStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                       ValuedComponentI* instance = nullptr);
 
   uhdm::Constant* constantFromValue(Value* val, uhdm::Any* pexpr);
 
-  uhdm::Any* compileExpression(DesignComponent* component,
-                               const FileContent* fC, NodeId nodeId,
-                               uhdm::Any* pexpr = nullptr,
-                               ValuedComponentI* instance = nullptr,
+  uhdm::Any* compileExpression(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                               uhdm::Any* pexpr = nullptr, ValuedComponentI* instance = nullptr,
                                bool muteErrors = false);
 
-  uhdm::Any* compilePartSelectRange(DesignComponent* component,
-                                    const FileContent* fC,
-                                    NodeId Constant_range,
-                                    std::string_view name, uhdm::Any* pexpr,
-                                    ValuedComponentI* instance,
+  uhdm::Any* compilePartSelectRange(DesignComponent* component, const FileContent* fC, NodeId Constant_range,
+                                    std::string_view name, uhdm::Any* pexpr, ValuedComponentI* instance,
                                     bool muteErrors);
 
-  uhdm::RangeCollection* compileRanges(DesignComponent* component,
-                                       const FileContent* fC,
-                                       NodeId Packed_dimension,
-                                       uhdm::Any* pexpr,
-                                       ValuedComponentI* instance,
-                                       int32_t& size, bool muteErrors);
+  uhdm::RangeCollection* compileRanges(DesignComponent* component, const FileContent* fC, NodeId Packed_dimension,
+                                       uhdm::Any* pexpr, ValuedComponentI* instance, int32_t& size, bool muteErrors);
 
-  uhdm::Any* compileAssignmentPattern(DesignComponent* component,
-                                      const FileContent* fC,
-                                      NodeId Assignment_pattern,
-                                      uhdm::Any* pexpr,
-                                      ValuedComponentI* instance);
+  uhdm::Any* compileAssignmentPattern(DesignComponent* component, const FileContent* fC, NodeId Assignment_pattern,
+                                      uhdm::Any* pexpr, ValuedComponentI* instance);
 
-  uhdm::Any* compileProceduralContinuousAssign(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId nodeId);
+  uhdm::Any* compileProceduralContinuousAssign(DesignComponent* component, const FileContent* fC, NodeId nodeId);
 
-  uhdm::AnyCollection* compileDataDeclaration(
-      DesignComponent* component, const FileContent* fC, NodeId nodeId,
-      uhdm::Any* pstmt = nullptr, ValuedComponentI* instance = nullptr);
+  uhdm::AnyCollection* compileDataDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                              uhdm::Any* pstmt = nullptr, ValuedComponentI* instance = nullptr);
 
-  uhdm::Any* compileForLoop(DesignComponent* component, const FileContent* fC,
-                            NodeId nodeId, bool muteErrors = false);
+  uhdm::Any* compileForLoop(DesignComponent* component, const FileContent* fC, NodeId nodeId, bool muteErrors = false);
 
-  uhdm::Any* compileSelectExpression(DesignComponent* component,
-                                     const FileContent* fC, NodeId Bit_select,
-                                     std::string_view name, uhdm::Any* pexpr,
-                                     ValuedComponentI* instance,
+  uhdm::Any* compileSelectExpression(DesignComponent* component, const FileContent* fC, NodeId Bit_select,
+                                     std::string_view name, uhdm::Any* pexpr, ValuedComponentI* instance,
                                      bool muteErrors);
 
-  uhdm::Any* compileBits(DesignComponent* component, const FileContent* fC,
-                         NodeId nameId, NodeId List_of_arguments,
-                         uhdm::Any* pexpr, ValuedComponentI* instance,
-                         bool sizeMode, bool muteErrors);
+  uhdm::Any* compileBits(DesignComponent* component, const FileContent* fC, NodeId nameId, NodeId List_of_arguments,
+                         uhdm::Any* pexpr, ValuedComponentI* instance, bool sizeMode, bool muteErrors);
 
-  uhdm::Any* compileClog2(DesignComponent* component, const FileContent* fC,
-                          NodeId nameId, NodeId List_of_arguments,
-                          uhdm::Any* pexpr, ValuedComponentI* instance,
-                          bool muteErrors);
+  uhdm::Any* compileClog2(DesignComponent* component, const FileContent* fC, NodeId nameId, NodeId List_of_arguments,
+                          uhdm::Any* pexpr, ValuedComponentI* instance, bool muteErrors);
 
-  uhdm::Any* compileBound(DesignComponent* component, const FileContent* fC,
-                          NodeId nameId, NodeId List_of_arguments,
-                          uhdm::Any* pexpr, ValuedComponentI* instance,
-                          bool muteErrors, std::string_view name);
+  uhdm::Any* compileBound(DesignComponent* component, const FileContent* fC, NodeId nameId, NodeId List_of_arguments,
+                          uhdm::Any* pexpr, ValuedComponentI* instance, bool muteErrors, std::string_view name);
 
-  uhdm::Any* compileTypename(DesignComponent* component, const FileContent* fC,
-                             NodeId Expression, uhdm::Any* pexpr,
+  uhdm::Any* compileTypename(DesignComponent* component, const FileContent* fC, NodeId Expression, uhdm::Any* pexpr,
                              ValuedComponentI* instance);
 
-  const uhdm::Typespec* getTypespec(DesignComponent* component,
-                                    const FileContent* fC, NodeId id,
+  const uhdm::Typespec* getTypespec(DesignComponent* component, const FileContent* fC, NodeId id,
                                     ValuedComponentI* instance);
 
-  uhdm::Any* compileComplexFuncCall(DesignComponent* component,
-                                    const FileContent* fC, NodeId nodeId,
-                                    uhdm::Any* pexpr,
-                                    ValuedComponentI* instance,
-                                    bool muteErrors);
+  uhdm::Any* compileComplexFuncCall(DesignComponent* component, const FileContent* fC, NodeId nodeId, uhdm::Any* pexpr,
+                                    ValuedComponentI* instance, bool muteErrors);
 
-  uhdm::AttributeCollection* compileAttributes(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId nodeId, uhdm::Any* pexpr);
+  uhdm::AttributeCollection* compileAttributes(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                               uhdm::Any* pexpr);
 
-  void compileImportDeclaration(DesignComponent* component,
-                                const FileContent* fC, NodeId id);
+  void compileImportDeclaration(DesignComponent* component, const FileContent* fC, NodeId id);
 
-  uhdm::EventControl* compileClocking_event(DesignComponent* component,
-                                            const FileContent* fC,
-                                            NodeId nodeId, uhdm::Any* pexpr,
-                                            ValuedComponentI* instance);
+  uhdm::EventControl* compileClocking_event(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                            uhdm::Any* pexpr, ValuedComponentI* instance);
 
-  uhdm::ClockingBlock* compileClockingBlock(DesignComponent* component,
-                                            const FileContent* fC,
-                                            NodeId nodeId, uhdm::Any* pexpr,
-                                            ValuedComponentI* instance);
+  uhdm::ClockingBlock* compileClockingBlock(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                            uhdm::Any* pexpr, ValuedComponentI* instance);
 
-  uhdm::AtomicStmt* compileDelayControl(DesignComponent* component,
-                                        const FileContent* fC,
-                                        NodeId Procedural_timing_control,
-                                        uhdm::Any* pexpr,
-                                        ValuedComponentI* instance);
+  uhdm::AtomicStmt* compileDelayControl(DesignComponent* component, const FileContent* fC,
+                                        NodeId Procedural_timing_control, uhdm::Any* pexpr, ValuedComponentI* instance);
 
-  bool compileClassConstructorDeclaration(DesignComponent* component,
-                                          const FileContent* fC, NodeId nodeId);
+  bool compileClassConstructorDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId);
 
-  uhdm::MethodFuncCall* compileRandomizeCall(DesignComponent* component,
-                                             const FileContent* fC,
-                                             NodeId nodeId, uhdm::Any* pexpr);
+  uhdm::MethodFuncCall* compileRandomizeCall(DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                                             uhdm::Any* pexpr);
 
-  uhdm::Any* compileConstraintBlock(DesignComponent* component,
-                                    const FileContent* fC, NodeId nodeId,
-                                    uhdm::Any* pexpr);
+  uhdm::Any* compileConstraintBlock(DesignComponent* component, const FileContent* fC, NodeId nodeId, uhdm::Any* pexpr);
 
   uint32_t getBuiltinType(VObjectType type);
 
-  void compileLetDeclaration(DesignComponent* component, const FileContent* fC,
-                             NodeId nodeId);
+  void compileLetDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId);
 
-  std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>>
-  compileInstantiation(ModuleDefinition* mod, const FileContent* fC,
-                       uhdm::Any* pexpr, NodeId id, ValuedComponentI* instance);
+  std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>> compileInstantiation(
+      ModuleDefinition* mod, const FileContent* fC, uhdm::Any* pexpr, NodeId id, ValuedComponentI* instance);
 
-  void writePrimTerms(ModuleDefinition* mod, const FileContent* fC, NodeId id,
-                      uhdm::Primitive* prim, int32_t vpiGateType,
-                      ValuedComponentI* instance);
+  void writePrimTerms(ModuleDefinition* mod, const FileContent* fC, NodeId id, uhdm::Primitive* prim,
+                      int32_t vpiGateType, ValuedComponentI* instance);
 
-  void compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC,
-                               NodeId id, ValuedComponentI* instance);
+  void compileUdpInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id, ValuedComponentI* instance);
 
-  void compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC,
-                                NodeId id, ValuedComponentI* instance);
+  void compileGateInstantiation(ModuleDefinition* mod, const FileContent* fC, NodeId id, ValuedComponentI* instance);
 
-  void compileHighConn(DesignComponent* component, const FileContent* fC,
-                       NodeId id, uhdm::PortCollection* ports,
+  void compileHighConn(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::PortCollection* ports,
                        uhdm::Any* pexpr);
 
-  uhdm::AnyCollection* compileGenStmt(DesignComponent* component,
-                                      const FileContent* fC, NodeId id,
-                                      uhdm::Any* pscope);
+  uhdm::AnyCollection* compileGenStmt(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::Any* pscope);
 
-  uhdm::AnyCollection* compileGenVars(DesignComponent* component,
-                                      const FileContent* fC, NodeId id,
-                                      uhdm::Any* pscope);
+  uhdm::AnyCollection* compileGenVars(DesignComponent* component, const FileContent* fC, NodeId id, uhdm::Any* pscope);
 
-  uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
-                               uhdm::Serializer& s, uhdm::Any* pscope);
+  uhdm::Constant* compileConst(const FileContent* fC, NodeId child, uhdm::Serializer& s, uhdm::Any* pscope);
 
-  uhdm::Any* compilePsOrHierarchicalArrayIdentifier(DesignComponent* component,
-                                                    const FileContent* fC,
-                                                    NodeId id,
+  uhdm::Any* compilePsOrHierarchicalArrayIdentifier(DesignComponent* component, const FileContent* fC, NodeId id,
                                                     uhdm::Any* pscope);
 
   /** Variable is either a bit select or a uhdm::Range*/
@@ -468,100 +334,73 @@ class CompileHelper final {
 
   bool isDecreasingRange(uhdm::Typespec* ts, DesignComponent* component);
 
-  uhdm::Expr* reduceExpr(uhdm::Any* expr, bool& invalidValue,
-                         DesignComponent* component, ValuedComponentI* instance,
-                         PathId fileId, uint32_t lineNumber, uhdm::Any* pexpr,
-                         bool muteErrors = false);
+  uhdm::Expr* reduceExpr(uhdm::Any* expr, bool& invalidValue, DesignComponent* component, ValuedComponentI* instance,
+                         PathId fileId, uint32_t lineNumber, uhdm::Any* pexpr, bool muteErrors = false);
 
-  int32_t adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop,
-                       int32_t opIndex, uhdm::Expr* rhs,
-                       DesignComponent* component, const FileContent* fC,
-                       NodeId nodeId, ValuedComponentI* instance);
+  int32_t adjustOpSize(const uhdm::Typespec* tps, uhdm::Expr* cop, int32_t opIndex, uhdm::Expr* rhs,
+                       DesignComponent* component, const FileContent* fC, NodeId nodeId, ValuedComponentI* instance);
 
   void adjustUnsized(uhdm::Constant* c, int32_t size);
 
-  uhdm::Any* defaultPatternAssignment(const FileContent* fC, NodeId child,
-                                      const uhdm::Typespec* tps, uhdm::Any* exp,
-                                      DesignComponent* component,
-                                      ValuedComponentI* instance);
+  uhdm::Any* defaultPatternAssignment(const FileContent* fC, NodeId child, const uhdm::Typespec* tps, uhdm::Any* exp,
+                                      DesignComponent* component, ValuedComponentI* instance);
 
-  uhdm::Expr* expandPatternAssignment(const FileContent* fC, NodeId child,
-                                      const uhdm::Typespec* tps,
-                                      uhdm::Expr* rhs,
-                                      DesignComponent* component,
-                                      ValuedComponentI* instance);
+  uhdm::Expr* expandPatternAssignment(const FileContent* fC, NodeId child, const uhdm::Typespec* tps, uhdm::Expr* rhs,
+                                      DesignComponent* component, ValuedComponentI* instance);
 
-  uint64_t Bits(const uhdm::Any* typespec, bool& invalidValue,
-                DesignComponent* component, const FileContent* fC,
+  uint64_t Bits(const uhdm::Any* typespec, bool& invalidValue, DesignComponent* component, const FileContent* fC,
                 NodeId nodeId, ValuedComponentI* instance, bool sizeMode);
 
-  std::pair<uhdm::TaskFunc*, DesignComponent*> getTaskFunc(
-      std::string_view name, DesignComponent* component,
-      ValuedComponentI* instance, uhdm::Any* pexpr);
+  std::pair<uhdm::TaskFunc*, DesignComponent*> getTaskFunc(std::string_view name, DesignComponent* component,
+                                                           ValuedComponentI* instance, uhdm::Any* pexpr);
 
-  uhdm::Expr* exprFromAssign(DesignComponent* component, const FileContent* fC,
-                             NodeId id, NodeId unpackedDimension);
+  uhdm::Expr* exprFromAssign(DesignComponent* component, const FileContent* fC, NodeId id, NodeId unpackedDimension);
 
   void checkForLoops(bool on);
-  bool loopDetected(PathId fileId, uint32_t lineNumber,
-                    ValuedComponentI* instance);
+  bool loopDetected(PathId fileId, uint32_t lineNumber, ValuedComponentI* instance);
 
-  uhdm::Any* getValue(std::string_view name, DesignComponent* component,
-                      const FileContent* fC, NodeId nodeId,
-                      ValuedComponentI* instance, uhdm::Any* pexpr,
-                      bool muteErrors = false);
+  uhdm::Any* getValue(std::string_view name, DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                      ValuedComponentI* instance, uhdm::Any* pexpr, bool muteErrors = false);
 
   // Parse numeric UHDM constant into int64_t. Returns if successful.
   static bool parseConstant(const uhdm::Constant& constant, int64_t* value);
 
-  int64_t getValue(bool& validValue, DesignComponent* component,
-                   const FileContent* fC, NodeId nodeId, uhdm::Any* pexpr,
+  int64_t getValue(bool& validValue, DesignComponent* component, const FileContent* fC, NodeId nodeId, uhdm::Any* pexpr,
                    ValuedComponentI* instance, bool muteErrors = false);
 
-  uhdm::Typespec* elabTypespec(DesignComponent* component, uhdm::Typespec* spec,
-                               uhdm::Any* pexpr = nullptr,
+  uhdm::Typespec* elabTypespec(DesignComponent* component, uhdm::Typespec* spec, uhdm::Any* pexpr = nullptr,
                                ValuedComponentI* instance = nullptr);
 
   bool substituteAssignedValue(const uhdm::Any* op);
 
-  uhdm::Any* getObject(std::string_view name, DesignComponent* component,
-                       ValuedComponentI* instance, const uhdm::Any* pexpr);
+  uhdm::Any* getObject(std::string_view name, DesignComponent* component, ValuedComponentI* instance,
+                       const uhdm::Any* pexpr);
 
-  void reorderAssignmentPattern(DesignComponent* mod, const uhdm::Any* lhs,
-                                uhdm::Any* rhs, ValuedComponentI* instance,
+  void reorderAssignmentPattern(DesignComponent* mod, const uhdm::Any* lhs, uhdm::Any* rhs, ValuedComponentI* instance,
                                 uint32_t level);
 
-  bool errorOnNegativeConstant(DesignComponent* component, uhdm::Expr* exp,
-                               ValuedComponentI* instance);
+  bool errorOnNegativeConstant(DesignComponent* component, uhdm::Expr* exp, ValuedComponentI* instance);
   bool errorOnNegativeConstant(DesignComponent* component, Value* value,
 
                                ValuedComponentI* instance);
-  bool errorOnNegativeConstant(DesignComponent* component,
-                               std::string_view value,
-                               ValuedComponentI* instance, PathId fileId,
-                               uint32_t lineNo, uint16_t columnNo);
+  bool errorOnNegativeConstant(DesignComponent* component, std::string_view value, ValuedComponentI* instance,
+                               PathId fileId, uint32_t lineNo, uint16_t columnNo);
 
-  uhdm::Any* decodeHierPath(uhdm::HierPath* path, bool& invalidValue,
-                            DesignComponent* component, const FileContent* fC,
-                            NodeId nodeId, ValuedComponentI* instance,
-                            uhdm::Any* pexpr, bool muteErrors,
+  uhdm::Any* decodeHierPath(uhdm::HierPath* path, bool& invalidValue, DesignComponent* component, const FileContent* fC,
+                            NodeId nodeId, ValuedComponentI* instance, uhdm::Any* pexpr, bool muteErrors,
                             bool returnTypespec);
 
-  bool valueRange(Value* val, const uhdm::Typespec* lhstps,
-                  const uhdm::Typespec* rhstps, DesignComponent* component,
+  bool valueRange(Value* val, const uhdm::Typespec* lhstps, const uhdm::Typespec* rhstps, DesignComponent* component,
                   ValuedComponentI* instance);
 
   void setRange(uhdm::Constant* c, Value* val);
 
-  uhdm::Constant* adjustSize(const uhdm::Typespec* ts,
-                             DesignComponent* component, const FileContent* fC,
-                             NodeId nodeId, ValuedComponentI* instance,
-                             uhdm::Constant* c, bool uniquify = false,
+  uhdm::Constant* adjustSize(const uhdm::Typespec* ts, DesignComponent* component, const FileContent* fC, NodeId nodeId,
+                             ValuedComponentI* instance, uhdm::Constant* c, bool uniquify = false,
                              bool sizeMode = false);
 
   /** task/func/scope */
-  uhdm::Any* searchObjectName(std::string_view name, DesignComponent* component,
-                              uhdm::Any* stmt);
+  uhdm::Any* searchObjectName(std::string_view name, DesignComponent* component, uhdm::Any* stmt);
 
   bool isOverloaded(const uhdm::Any* expr, ValuedComponentI* instance);
 
@@ -569,10 +408,8 @@ class CompileHelper final {
 
  private:
   // Caches
-  uhdm::IntTypespec* buildIntTypespec(PathId fileId, std::string_view name,
-                                      std::string_view value, uint32_t line,
-                                      uint16_t column, uint32_t eline,
-                                      uint16_t ecolumn);
+  uhdm::IntTypespec* buildIntTypespec(PathId fileId, std::string_view name, std::string_view value, uint32_t line,
+                                      uint16_t column, uint32_t eline, uint16_t ecolumn);
   uhdm::TypespecMember* buildTypespecMember(const FileContent* fC, NodeId id);
   uhdm::Typespec* getTypespecFromType(int32_t type, uhdm::Serializer& s);
 

@@ -36,9 +36,7 @@
 
 namespace SURELOG {
 AstListener::AstListener(const AstListener& rhs)
-    : m_session(rhs.m_session),
-      m_objects(rhs.m_objects),
-      m_count(rhs.m_count) {}
+    : m_session(rhs.m_session), m_objects(rhs.m_objects), m_count(rhs.m_count) {}
 
 VObjectType AstListener::getNodeType(const AstNode& node) const {
   return node ? node.m_object->m_type : VObjectType::_INVALID_;
@@ -64,8 +62,7 @@ bool AstListener::getNodeText(const AstNode& node, std::string& text) const {
   return false;
 }
 
-bool AstListener::getNodeText(const AstNode& node,
-                              std::string_view& text) const {
+bool AstListener::getNodeText(const AstNode& node, std::string_view& text) const {
   if (node && node.m_object->m_name) {
     text = m_session->getSymbolTable()->getSymbol(node.m_object->m_name);
     return true;
@@ -81,8 +78,7 @@ bool AstListener::getNodeFileId(const AstNode& node, PathId& fileId) const {
   return false;
 }
 
-bool AstListener::getNodeLocation(const AstNode& node, int32_t& startLine,
-                                  int32_t& startColumn, int32_t& endLine,
+bool AstListener::getNodeLocation(const AstNode& node, int32_t& startLine, int32_t& startColumn, int32_t& endLine,
                                   int32_t& endColumn) const {
   if (node) {
     startLine = node.m_object->m_startLine;
@@ -94,31 +90,26 @@ bool AstListener::getNodeLocation(const AstNode& node, int32_t& startLine,
   return false;
 }
 
-bool AstListener::getNodeStartLocation(const AstNode& node, int32_t& line,
-                                       int32_t& column) const {
+bool AstListener::getNodeStartLocation(const AstNode& node, int32_t& line, int32_t& column) const {
   int32_t endLine = 0, endColumn = 0;
   return getNodeLocation(node, line, column, endLine, endColumn);
 }
 
-bool AstListener::getNodeEndLocation(const AstNode& node, int32_t& line,
-                                     int32_t& column) const {
+bool AstListener::getNodeEndLocation(const AstNode& node, int32_t& line, int32_t& column) const {
   int32_t startLine = 0, startColumn = 0;
   return getNodeLocation(node, startLine, startColumn, line, column);
 }
 
 AstNode AstListener::getNodeParent(const AstNode& node) const {
   if (node && node.m_object->m_parent) {
-    return AstNode(node.m_object->m_parent,
-                   &m_objects[node.m_object->m_parent]);
+    return AstNode(node.m_object->m_parent, &m_objects[node.m_object->m_parent]);
   }
   return AstNode();
 }
 
-AstNode AstListener::getNodeParent(const AstNode& node,
-                                   VObjectType type) const {
+AstNode AstListener::getNodeParent(const AstNode& node, VObjectType type) const {
   if (node) {
-    for (NodeId parentId = m_objects[node.m_index].m_parent; parentId;
-         parentId = m_objects[parentId].m_parent) {
+    for (NodeId parentId = m_objects[node.m_index].m_parent; parentId; parentId = m_objects[parentId].m_parent) {
       if (m_objects[parentId].m_type == type) {
         return AstNode(parentId, &m_objects[parentId]);
       }
@@ -127,11 +118,9 @@ AstNode AstListener::getNodeParent(const AstNode& node,
   return AstNode();
 }
 
-AstNode AstListener::getNodeParent(const AstNode& node,
-                                   const std::set<VObjectType>& types) const {
+AstNode AstListener::getNodeParent(const AstNode& node, const std::set<VObjectType>& types) const {
   if (node) {
-    for (NodeId parentId = m_objects[node.m_index].m_parent; parentId;
-         parentId = m_objects[parentId].m_parent) {
+    for (NodeId parentId = m_objects[node.m_index].m_parent; parentId; parentId = m_objects[parentId].m_parent) {
       if (types.find(m_objects[parentId].m_type) != types.cend()) {
         return AstNode(parentId, &m_objects[parentId]);
       }
@@ -155,8 +144,7 @@ AstNode AstListener::getNodePrevSibling(const AstNode& node) const {
   return AstNode();
 }
 
-AstNode AstListener::getNodePrevSibling(const AstNode& node,
-                                        VObjectType type) const {
+AstNode AstListener::getNodePrevSibling(const AstNode& node, VObjectType type) const {
   if (node && node.m_object->m_parent) {
     NodeId id = m_objects[node.m_object->m_parent].m_child;
     NodeId pid;
@@ -171,8 +159,7 @@ AstNode AstListener::getNodePrevSibling(const AstNode& node,
   return AstNode();
 }
 
-AstNode AstListener::getNodePrevSibling(
-    const AstNode& node, const std::set<VObjectType>& types) const {
+AstNode AstListener::getNodePrevSibling(const AstNode& node, const std::set<VObjectType>& types) const {
   if (node && node.m_object->m_parent) {
     NodeId id = m_objects[node.m_object->m_parent].m_child;
     NodeId pid;
@@ -196,11 +183,9 @@ AstNode AstListener::getNodeNextSibling(const AstNode& node) const {
   return AstNode();
 }
 
-AstNode AstListener::getNodeNextSibling(const AstNode& node,
-                                        VObjectType type) const {
+AstNode AstListener::getNodeNextSibling(const AstNode& node, VObjectType type) const {
   if (node && node.m_object->m_sibling) {
-    for (NodeId siblingId = m_objects[node.m_index].m_sibling; siblingId;
-         siblingId = m_objects[siblingId].m_sibling) {
+    for (NodeId siblingId = m_objects[node.m_index].m_sibling; siblingId; siblingId = m_objects[siblingId].m_sibling) {
       if (m_objects[siblingId].m_type == type) {
         return AstNode(siblingId, &m_objects[siblingId]);
       }
@@ -209,12 +194,9 @@ AstNode AstListener::getNodeNextSibling(const AstNode& node,
   return AstNode();
 }
 
-
-AstNode AstListener::getNodeNextSibling(
-    const AstNode& node, const std::set<VObjectType>& types) const {
+AstNode AstListener::getNodeNextSibling(const AstNode& node, const std::set<VObjectType>& types) const {
   if (node && node.m_object->m_sibling) {
-    for (NodeId siblingId = m_objects[node.m_index].m_sibling; siblingId;
-         siblingId = m_objects[siblingId].m_sibling) {
+    for (NodeId siblingId = m_objects[node.m_index].m_sibling; siblingId; siblingId = m_objects[siblingId].m_sibling) {
       if (types.find(m_objects[siblingId].m_type) != types.cend()) {
         return AstNode(siblingId, &m_objects[siblingId]);
       }
@@ -223,8 +205,7 @@ AstNode AstListener::getNodeNextSibling(
   return AstNode();
 }
 
-bool AstListener::getNodeChildren(const AstNode& node,
-                                  astnode_vector_t& children) const {
+bool AstListener::getNodeChildren(const AstNode& node, astnode_vector_t& children) const {
   if (!node) return false;
   if (!node.m_object->m_child) return true;
 
@@ -235,8 +216,7 @@ bool AstListener::getNodeChildren(const AstNode& node,
   return true;
 }
 
-bool AstListener::getNodeSiblings(const AstNode& node,
-                                  astnode_vector_t& siblings) const {
+bool AstListener::getNodeSiblings(const AstNode& node, astnode_vector_t& siblings) const {
   if (!node) return false;
   if (!node.m_object->m_parent) return true;
 
@@ -251,9 +231,7 @@ bool AstListener::getNodeSiblings(const AstNode& node,
   return true;
 }
 
-AstNode AstListener::getNodeOfTypeInTree(const AstNode& node,
-                                              VObjectType type,
-                                              size_t depth /* = 4 */) const {
+AstNode AstListener::getNodeOfTypeInTree(const AstNode& node, VObjectType type, size_t depth /* = 4 */) const {
   std::deque<std::pair<NodeId, size_t>> queue;
   queue.emplace_back(node.m_index, 0);
 
@@ -265,8 +243,7 @@ AstNode AstListener::getNodeOfTypeInTree(const AstNode& node,
     }
 
     if (nodeDepth < depth) {
-      for (NodeId childId = m_objects[nodeId].m_child; childId;
-           childId = m_objects[childId].m_sibling) {
+      for (NodeId childId = m_objects[nodeId].m_child; childId; childId = m_objects[childId].m_sibling) {
         queue.emplace_back(childId, nodeDepth + 1);
       }
     }
@@ -276,9 +253,8 @@ AstNode AstListener::getNodeOfTypeInTree(const AstNode& node,
   return AstNode();
 }
 
-AstNode AstListener::getNodeOfTypeInTree(
-    const AstNode& node, const std::set<VObjectType>& types,
-    size_t depth /* = 4 */) const {
+AstNode AstListener::getNodeOfTypeInTree(const AstNode& node, const std::set<VObjectType>& types,
+                                         size_t depth /* = 4 */) const {
   std::deque<std::pair<NodeId, size_t>> queue;
   queue.emplace_back(node.m_index, 0);
 
@@ -290,8 +266,7 @@ AstNode AstListener::getNodeOfTypeInTree(
     }
 
     if (nodeDepth < depth) {
-      for (NodeId childId = m_objects[nodeId].m_child; childId;
-           childId = m_objects[childId].m_sibling) {
+      for (NodeId childId = m_objects[nodeId].m_child; childId; childId = m_objects[childId].m_sibling) {
         queue.emplace_back(childId, nodeDepth + 1);
       }
     }
@@ -310,8 +285,7 @@ AstNode AstListener::getNodeChild(const AstNode& node) const {
 
 AstNode AstListener::getNodeChild(const AstNode& node, VObjectType type) const {
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
       if (m_objects[childId].m_type == type) {
         return AstNode(childId, &m_objects[childId]);
       }
@@ -320,11 +294,9 @@ AstNode AstListener::getNodeChild(const AstNode& node, VObjectType type) const {
   return AstNode();
 }
 
-AstNode AstListener::getNodeChild(const AstNode& node,
-                                  const std::set<VObjectType>& types) const {
+AstNode AstListener::getNodeChild(const AstNode& node, const std::set<VObjectType>& types) const {
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
       if (types.find(m_objects[childId].m_type) != types.cend()) {
         return AstNode(childId, &m_objects[childId]);
       }
@@ -336,32 +308,27 @@ AstNode AstListener::getNodeChild(const AstNode& node,
 size_t AstListener::getNodeChildCount(const AstNode& node) const {
   size_t count = 0;
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
       ++count;
     }
   }
   return count;
 }
 
-size_t AstListener::getNodeChildCount(const AstNode& node,
-                                      VObjectType type) const {
+size_t AstListener::getNodeChildCount(const AstNode& node, VObjectType type) const {
   size_t count = 0;
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
       if (m_objects[childId].m_type == type) ++count;
     }
   }
   return count;
 }
 
-size_t AstListener::getNodeChildCount(
-    const AstNode& node, const std::set<VObjectType>& types) const {
+size_t AstListener::getNodeChildCount(const AstNode& node, const std::set<VObjectType>& types) const {
   size_t count = 0;
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
       if (types.find(m_objects[childId].m_type) != types.cend()) ++count;
     }
   }
@@ -370,30 +337,19 @@ size_t AstListener::getNodeChildCount(
 
 size_t AstListener::getNodeSiblingCount(const AstNode& node) const {
   return (node && node.m_object->m_parent)
-             ? (getNodeChildCount(
-                    AstNode(node.m_object->m_parent,
-                            &m_objects[node.m_object->m_parent])) -
-                1)
+             ? (getNodeChildCount(AstNode(node.m_object->m_parent, &m_objects[node.m_object->m_parent])) - 1)
              : 0;
 }
 
-size_t AstListener::getNodeSiblingCount(const AstNode& node,
-                                        VObjectType type) const {
+size_t AstListener::getNodeSiblingCount(const AstNode& node, VObjectType type) const {
   return (node && node.m_object->m_parent)
-             ? (getNodeChildCount(AstNode(node.m_object->m_parent,
-                                          &m_objects[node.m_object->m_parent]),
-                                  type) -
-                1)
+             ? (getNodeChildCount(AstNode(node.m_object->m_parent, &m_objects[node.m_object->m_parent]), type) - 1)
              : 0;
 }
 
-size_t AstListener::getNodeSiblingCount(
-    const AstNode& node, const std::set<VObjectType>& types) const {
+size_t AstListener::getNodeSiblingCount(const AstNode& node, const std::set<VObjectType>& types) const {
   return (node && node.m_object->m_parent)
-             ? (getNodeChildCount(AstNode(node.m_object->m_parent,
-                                          &m_objects[node.m_object->m_parent]),
-                                  types) -
-                1)
+             ? (getNodeChildCount(AstNode(node.m_object->m_parent, &m_objects[node.m_object->m_parent]), types) - 1)
              : 0;
 }
 
@@ -401,58 +357,47 @@ size_t AstListener::getNodeCountInTree(const NodeId& id) const {
   size_t count = 0;
   if (id) {
     count += 1;
-    for (NodeId childId = m_objects[id].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[id].m_child; childId; childId = m_objects[childId].m_sibling) {
       count += getNodeCountInTree(childId);
     }
   }
   return count;
 }
-size_t AstListener::getNodeCountInTree(const NodeId& id,
-                                       VObjectType type) const {
+size_t AstListener::getNodeCountInTree(const NodeId& id, VObjectType type) const {
   size_t count = 0;
   if (id) {
     if (m_objects[id].m_type == type) count += 1;
-    for (NodeId childId = m_objects[id].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[id].m_child; childId; childId = m_objects[childId].m_sibling) {
       count += getNodeCountInTree(childId, type);
     }
   }
   return count;
 }
-size_t AstListener::getNodeCountInTree(
-    const NodeId& id, const std::set<VObjectType>& types) const {
+size_t AstListener::getNodeCountInTree(const NodeId& id, const std::set<VObjectType>& types) const {
   size_t count = 0;
   if (id) {
     if (types.find(m_objects[id].m_type) != types.cend()) count += 1;
-    for (NodeId childId = m_objects[id].m_child; childId;
-         childId = m_objects[childId].m_sibling) {
+    for (NodeId childId = m_objects[id].m_child; childId; childId = m_objects[childId].m_sibling) {
       count += getNodeCountInTree(childId, types);
     }
   }
   return count;
 }
 
-size_t AstListener::getNodeCountInTree(const AstNode& node) const {
-  return getNodeCountInTree(node.m_index);
-}
-size_t AstListener::getNodeCountInTree(const AstNode& node,
-                                       VObjectType type) const {
+size_t AstListener::getNodeCountInTree(const AstNode& node) const { return getNodeCountInTree(node.m_index); }
+size_t AstListener::getNodeCountInTree(const AstNode& node, VObjectType type) const {
   return getNodeCountInTree(node.m_index, type);
 }
-size_t AstListener::getNodeCountInTree(
-    const AstNode& node, const std::set<VObjectType>& types) const {
+size_t AstListener::getNodeCountInTree(const AstNode& node, const std::set<VObjectType>& types) const {
   return getNodeCountInTree(node.m_index, types);
 }
 
-void AstListener::enterSourceFile(Session* session, PathId fileId,
-                                  const std::string& sourceText) {
+void AstListener::enterSourceFile(Session* session, PathId fileId, const std::string& sourceText) {
   m_visited.clear();
   m_session = session;
 }
 
-void AstListener::listen(Session* session, PathId fileId,
-                         const std::string& sourceText, const VObject* objects,
+void AstListener::listen(Session* session, PathId fileId, const std::string& sourceText, const VObject* objects,
                          size_t count) {
   m_session = session;
   m_objects = objects;
@@ -488,16 +433,13 @@ void AstListener::listenSiblings(const AstNode& node) {
 }
 
 inline size_t AstListener::markVisited(const NodeId& id) {
-  return id ? (m_visited.emplace(id).second ? 1 : 0) +
-                  markVisited(m_objects[id].m_child) +
+  return id ? (m_visited.emplace(id).second ? 1 : 0) + markVisited(m_objects[id].m_child) +
                   markVisited(m_objects[id].m_sibling)
             : 0;
 }
 
 inline size_t AstListener::clearVisited(const NodeId& id) {
-  return id ? m_visited.erase(id) + clearVisited(m_objects[id].m_child) +
-                  clearVisited(m_objects[id].m_sibling)
-            : 0;
+  return id ? m_visited.erase(id) + clearVisited(m_objects[id].m_child) + clearVisited(m_objects[id].m_sibling) : 0;
 }
 
 size_t AstListener::markVisited(const AstNode& node, bool includeSubTree) {
@@ -511,26 +453,20 @@ size_t AstListener::clearVisited(const AstNode& node, bool includeSubTree) {
   return count;
 }
 
-size_t AstListener::markChildrenVisited(const AstNode& node,
-                                        bool includeSubTree) {
+size_t AstListener::markChildrenVisited(const AstNode& node, bool includeSubTree) {
   size_t count = 0;
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-          childId = m_objects[childId].m_sibling) {
-      count += includeSubTree ? markVisited(childId)
-                              : (m_visited.emplace(childId).second ? 1 : 0);
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
+      count += includeSubTree ? markVisited(childId) : (m_visited.emplace(childId).second ? 1 : 0);
     }
   }
   return count;
 }
-size_t AstListener::clearVisitedChildren(const AstNode& node,
-                                         bool includeSubTree) {
+size_t AstListener::clearVisitedChildren(const AstNode& node, bool includeSubTree) {
   size_t count = 0;
   if (node && node.m_object->m_child) {
-    for (NodeId childId = m_objects[node.m_index].m_child; childId;
-          childId = m_objects[childId].m_sibling) {
-      count +=
-          includeSubTree ? clearVisited(childId) : m_visited.erase(childId);
+    for (NodeId childId = m_objects[node.m_index].m_child; childId; childId = m_objects[childId].m_sibling) {
+      count += includeSubTree ? clearVisited(childId) : m_visited.erase(childId);
     }
   }
   return count;
@@ -553,29 +489,24 @@ void AstListener::listen(const AstNode& node) {
   // clang-format on
 }
 
-void AstTraceListener::enterSourceFile(Session* session, SURELOG::PathId fileId,
-                                       const std::string& sourceText) {
+void AstTraceListener::enterSourceFile(Session* session, SURELOG::PathId fileId, const std::string& sourceText) {
   AstListener::enterSourceFile(session, fileId, sourceText);
 
   FileSystem* const fileSystem = m_session->getFileSystem();
 
-  m_strm << std::string(m_indent++ * 2, ' ') << __func__ << ": "
-         << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
+  m_strm << std::string(m_indent++ * 2, ' ') << __func__ << ": " << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
 
-  const std::string srcFilepath =
-      fileSystem->toPlatformAbsPath(fileId).string();
+  const std::string srcFilepath = fileSystem->toPlatformAbsPath(fileId).string();
   if ((srcFilepath.find("/third_party/UVM/") != std::string::npos) ||
       (srcFilepath.find("\\third_party\\UVM\\") != std::string::npos)) {
     markVisited(getRootNode(), false);
   }
 }
 
-void AstTraceListener::leaveSourceFile(SURELOG::PathId fileId,
-                                       const std::string& sourceText) {
+void AstTraceListener::leaveSourceFile(SURELOG::PathId fileId, const std::string& sourceText) {
   AstListener::leaveSourceFile(fileId, sourceText);
 
   FileSystem* const fileSystem = m_session->getFileSystem();
-  m_strm << std::string(2 * --m_indent, ' ') << __func__ << ": "
-         << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
+  m_strm << std::string(2 * --m_indent, ' ') << __func__ << ": " << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
 }
 }  // namespace SURELOG

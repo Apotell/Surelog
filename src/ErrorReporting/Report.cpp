@@ -100,8 +100,7 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
   const PathId outputDirId = clp->getOutputDirId();
   const PathId allLogFileId = fileSystem->getLogFile(false, st);
   const PathId unitLogFileId = fileSystem->getLogFile(true, st);
-  const PathId diffFileId =
-      fileSystem->getChild(outputDirId, kDiffLogFileName, st);
+  const PathId diffFileId = fileSystem->getChild(outputDirId, kDiffLogFileName, st);
 
   bool readAll = false;
   bool readUnit = false;
@@ -121,40 +120,30 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
   std::cout << "|-------|------------------|-------------------|" << std::endl;
   std::cout << "|       |  FILE UNIT COMP  |  ALL COMPILATION  |" << std::endl;
   std::cout << "|-------|------------------|-------------------|" << std::endl;
-  std::cout << "| FATAL | " << std::setw(9) << readUnitResult.m_nbFatal
-            << "        | " << std::setw(9) << readAllResult.m_nbFatal
-            << "         |" << std::endl;
-  std::cout << "|SYNTAX | " << std::setw(9) << readUnitResult.m_nbSyntax
-            << "        | " << std::setw(9) << readAllResult.m_nbSyntax
-            << "         |" << std::endl;
-  std::cout << "| ERROR | " << std::setw(9) << readUnitResult.m_nbError
-            << "        | " << std::setw(9) << readAllResult.m_nbError
-            << "         |" << std::endl;
-  std::cout << "|WARNING| " << std::setw(9) << readUnitResult.m_nbWarning
-            << "        | " << std::setw(9) << readAllResult.m_nbWarning
-            << "         |" << std::endl;
-  std::cout << "| INFO  | " << std::setw(9) << readUnitResult.m_nbInfo
-            << "        | " << std::setw(9) << readAllResult.m_nbInfo
-            << "         |" << std::endl;
-  std::cout << "| NOTE  | " << std::setw(9) << readUnitResult.m_nbNote
-            << "        | " << std::setw(9) << readAllResult.m_nbNote
-            << "         |" << std::endl;
+  std::cout << "| FATAL | " << std::setw(9) << readUnitResult.m_nbFatal << "        | " << std::setw(9)
+            << readAllResult.m_nbFatal << "         |" << std::endl;
+  std::cout << "|SYNTAX | " << std::setw(9) << readUnitResult.m_nbSyntax << "        | " << std::setw(9)
+            << readAllResult.m_nbSyntax << "         |" << std::endl;
+  std::cout << "| ERROR | " << std::setw(9) << readUnitResult.m_nbError << "        | " << std::setw(9)
+            << readAllResult.m_nbError << "         |" << std::endl;
+  std::cout << "|WARNING| " << std::setw(9) << readUnitResult.m_nbWarning << "        | " << std::setw(9)
+            << readAllResult.m_nbWarning << "         |" << std::endl;
+  std::cout << "| INFO  | " << std::setw(9) << readUnitResult.m_nbInfo << "        | " << std::setw(9)
+            << readAllResult.m_nbInfo << "         |" << std::endl;
+  std::cout << "| NOTE  | " << std::setw(9) << readUnitResult.m_nbNote << "        | " << std::setw(9)
+            << readAllResult.m_nbNote << "         |" << std::endl;
   std::cout << "|-------|------------------|-------------------|" << std::endl;
   std::cout << std::endl;
-  std::cout << "FILE UNIT LOG: " << PathIdPP(unitLogFileId, fileSystem)
-            << std::endl;
-  std::cout << "ALL FILES LOG: " << PathIdPP(allLogFileId, fileSystem)
-            << std::endl;
+  std::cout << "FILE UNIT LOG: " << PathIdPP(unitLogFileId, fileSystem) << std::endl;
+  std::cout << "ALL FILES LOG: " << PathIdPP(allLogFileId, fileSystem) << std::endl;
 
   const PathId allCompileDirId = fileSystem->getCompileDir(false, st);
   const PathId unitCompileDirId = fileSystem->getCompileDir(true, st);
   const fs::path allCompileDir = fileSystem->toPlatformAbsPath(allCompileDirId);
-  const fs::path unitCompileDir =
-      fileSystem->toPlatformAbsPath(unitCompileDirId);
+  const fs::path unitCompileDir = fileSystem->toPlatformAbsPath(unitCompileDirId);
   const fs::path diffFile = fileSystem->toPlatformAbsPath(diffFileId);
 
-  std::string diffCmd = StrCat("diff -r ", unitCompileDir, " ", allCompileDir,
-                               " --exclude cache --brief > ", diffFile);
+  std::string diffCmd = StrCat("diff -r ", unitCompileDir, " ", allCompileDir, " --exclude cache --brief > ", diffFile);
   int32_t retval = system(diffCmd.c_str());
 
   std::istream& ifs = fileSystem->openForRead(diffFileId);
@@ -176,10 +165,8 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
   }
   fileSystem->close(ifs);
 
-  int32_t nbFatal =
-      std::stoi(readUnitResult.m_nbFatal) + std::stoi(readAllResult.m_nbFatal);
-  int32_t nbSyntax = std::stoi(readUnitResult.m_nbSyntax) +
-                     std::stoi(readAllResult.m_nbSyntax);
+  int32_t nbFatal = std::stoi(readUnitResult.m_nbFatal) + std::stoi(readAllResult.m_nbFatal);
+  int32_t nbSyntax = std::stoi(readUnitResult.m_nbSyntax) + std::stoi(readAllResult.m_nbSyntax);
 
   // m.unlock();
   return std::make_pair(retval != -1, (!nbFatal) && (!nbSyntax));

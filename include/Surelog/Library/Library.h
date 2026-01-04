@@ -40,8 +40,7 @@ class Session;
 
 class Library final {
  public:
-  using ModuleDefinitionByNameMap =
-      std::map<SymbolId, ModuleDefinition*, SymbolIdLessThanComparer>;
+  using ModuleDefinitionByNameMap = std::map<SymbolId, ModuleDefinition*, SymbolIdLessThanComparer>;
 
  public:
   Library(Session* session, std::string_view name);
@@ -54,9 +53,7 @@ class Library final {
   std::string_view getName() const;
   SymbolId getNameId() const { return m_nameId; }
   const PathIdVector& getFiles() const { return m_fileIds; }
-  bool isMember(PathId fid) const {
-    return m_fileIdsSet.find(fid) != m_fileIdsSet.end();
-  }
+  bool isMember(PathId fid) const { return m_fileIdsSet.find(fid) != m_fileIdsSet.end(); }
   std::ostream& report(std::ostream& out) const;
   void addModuleDefinition(ModuleDefinition* def);
   ModuleDefinitionByNameMap& getModules() { return m_modules; }

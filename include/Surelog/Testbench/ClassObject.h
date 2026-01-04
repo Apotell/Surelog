@@ -39,8 +39,7 @@ class Value;
 
 class ClassObject final {
  public:
-  using PropertyValueMap =
-      std::map<std::string, std::pair<Property*, Value*>, std::less<>>;
+  using PropertyValueMap = std::map<std::string, std::pair<Property*, Value*>, std::less<>>;
 
   explicit ClassObject(ClassDefinition* class_def) : m_class(class_def) {}
   ClassObject(const ClassObject& orig) = delete;

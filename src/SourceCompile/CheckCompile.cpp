@@ -41,8 +41,7 @@
 #include "Surelog/SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
-CheckCompile::CheckCompile(Session* session, Compiler* compiler)
-    : m_session(session), m_compiler(compiler) {}
+CheckCompile::CheckCompile(Session* session, Compiler* compiler) : m_session(session), m_compiler(compiler) {}
 
 bool CheckCompile::check() {
   if (!checkSyntaxErrors_()) return false;
@@ -62,24 +61,19 @@ bool CheckCompile::mergeSymbolTables_() {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
 
-  const Design::FileIdDesignContentMap& all_files =
-      m_compiler->getDesign()->getAllFileContents();
+  const Design::FileIdDesignContentMap& all_files = m_compiler->getDesign()->getAllFileContents();
   for (const auto& sym_file : all_files) {
     const auto fileContent = sym_file.second;
     Session* const fileContentSession = fileContent->getSession();
-    SymbolTable* const fileContentSymbols =
-        fileContentSession->getSymbolTable();
+    SymbolTable* const fileContentSymbols = fileContentSession->getSymbolTable();
 
     fileSystem->copy(fileContent->getFileId(), symbols);
     for (NodeId id : fileContent->getNodeIds()) {
-      *fileContent->getMutableFileId(id) =
-          fileSystem->copy(fileContent->getFileId(id), symbols);
+      *fileContent->getMutableFileId(id) = fileSystem->copy(fileContent->getFileId(id), symbols);
     }
     for (DesignElement* elem : fileContent->getDesignElements()) {
-      elem->m_name =
-          symbols->registerSymbol(fileContentSymbols->getSymbol(elem->m_name));
-      elem->m_fileId =
-          fileSystem->copy(fileContent->getFileId(elem->m_node), symbols);
+      elem->m_name = symbols->registerSymbol(fileContentSymbols->getSymbol(elem->m_name));
+      elem->m_fileId = fileSystem->copy(fileContent->getFileId(elem->m_node), symbols);
     }
   }
   return true;
@@ -102,31 +96,25 @@ bool CheckCompile::checkTimescale_() {
   bool timeUnitUsed = false;
   bool timeScaleUsed = false;
   std::vector<Location> noTimeUnitLocs;
-  Design::FileIdDesignContentMap& all_files =
-      m_compiler->getDesign()->getAllFileContents();
+  Design::FileIdDesignContentMap& all_files = m_compiler->getDesign()->getAllFileContents();
   SymbolIdUnorderedSet reportedMissingTimescale;
   SymbolIdUnorderedSet reportedMissingTimeunit;
   for (const auto& sym_file : all_files) {
     const auto fileContent = sym_file.second;
     for (auto elem : fileContent->getDesignElements()) {
-      if (elem->m_type == DesignElement::Module ||
-          elem->m_type == DesignElement::Interface ||
-          elem->m_type == DesignElement::Package ||
-          elem->m_type == DesignElement::Primitive ||
+      if (elem->m_type == DesignElement::Module || elem->m_type == DesignElement::Interface ||
+          elem->m_type == DesignElement::Package || elem->m_type == DesignElement::Primitive ||
           elem->m_type == DesignElement::Program) {
         if (elem->m_timeInfo.m_type == TimeInfo::Type::TimeUnitTimePrecision) {
           timeUnitUsed = true;
         } else if (elem->m_timeInfo.m_type == TimeInfo::Type::Timescale) {
           timeScaleUsed = true;
-          Location loc(fileContent->getFileId(elem->m_node), elem->m_startLine,
-                       elem->m_startColumn, elem->m_name);
+          Location loc(fileContent->getFileId(elem->m_node), elem->m_startLine, elem->m_startColumn, elem->m_name);
           noTimeUnitLocs.push_back(loc);
         } else {
-          Location loc(fileContent->getFileId(elem->m_node), elem->m_startLine,
-                       elem->m_startColumn, elem->m_name);
+          Location loc(fileContent->getFileId(elem->m_node), elem->m_startLine, elem->m_startColumn, elem->m_name);
           noTimeUnitLocs.push_back(loc);
-          if (reportedMissingTimescale.find(elem->m_name) ==
-              reportedMissingTimescale.end()) {
+          if (reportedMissingTimescale.find(elem->m_name) == reportedMissingTimescale.end()) {
             reportedMissingTimescale.insert(elem->m_name);
             Error err(ErrorDefinition::PA_NOTIMESCALE_INFO, loc);
             if (reportMissingTimescale) errors->addError(err);
@@ -137,8 +125,7 @@ bool CheckCompile::checkTimescale_() {
   }
   if (timeUnitUsed && timeScaleUsed) {
     for (const auto& loc : noTimeUnitLocs) {
-      if (reportedMissingTimeunit.find(loc.m_object) ==
-          reportedMissingTimeunit.end()) {
+      if (reportedMissingTimeunit.find(loc.m_object) == reportedMissingTimeunit.end()) {
         reportedMissingTimeunit.insert(loc.m_object);
         Error err(ErrorDefinition::PA_MISSING_TIMEUNIT, loc);
         errors->addError(err);

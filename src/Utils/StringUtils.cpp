@@ -46,9 +46,8 @@ std::string StringUtils::to_string(double a_value, const int32_t n) {
   return out.str();
 }
 
-std::vector<std::string_view>& StringUtils::tokenizeMulti(
-    std::string_view str, std::string_view multichar_separator,
-    std::vector<std::string_view>& result) {
+std::vector<std::string_view>& StringUtils::tokenizeMulti(std::string_view str, std::string_view multichar_separator,
+                                                          std::vector<std::string_view>& result) {
   if (str.empty()) return result;
 
   size_t start = 0;
@@ -76,18 +75,16 @@ std::vector<std::string_view>& StringUtils::tokenizeMulti(
   return result;
 }
 
-std::vector<std::string>& StringUtils::tokenizeMulti(
-    std::string_view str, std::string_view multichar_separator,
-    std::vector<std::string>& result) {
+std::vector<std::string>& StringUtils::tokenizeMulti(std::string_view str, std::string_view multichar_separator,
+                                                     std::vector<std::string>& result) {
   std::vector<std::string_view> view_result;
   tokenizeMulti(str, multichar_separator, view_result);
   result.insert(result.end(), view_result.begin(), view_result.end());
   return result;
 }
 
-std::vector<std::string_view>& StringUtils::tokenize(
-    std::string_view str, std::string_view any_of_separators,
-    std::vector<std::string_view>& result) {
+std::vector<std::string_view>& StringUtils::tokenize(std::string_view str, std::string_view any_of_separators,
+                                                     std::vector<std::string_view>& result) {
   if (str.empty()) return result;
 
   std::array<bool, 256> separators = {false};
@@ -109,18 +106,16 @@ std::vector<std::string_view>& StringUtils::tokenize(
   return result;
 }
 
-std::vector<std::string>& StringUtils::tokenize(
-    std::string_view str, std::string_view any_of_separators,
-    std::vector<std::string>& result) {
+std::vector<std::string>& StringUtils::tokenize(std::string_view str, std::string_view any_of_separators,
+                                                std::vector<std::string>& result) {
   std::vector<std::string_view> view_result;
   tokenize(str, any_of_separators, view_result);
   result.insert(result.end(), view_result.begin(), view_result.end());
   return result;
 }
 
-std::vector<std::string_view>& StringUtils::tokenizeBalanced(
-    std::string_view str, std::string_view any_of_separators,
-    std::vector<std::string_view>& result) {
+std::vector<std::string_view>& StringUtils::tokenizeBalanced(std::string_view str, std::string_view any_of_separators,
+                                                             std::vector<std::string_view>& result) {
   if (str.empty()) return result;
 
   std::array<bool, 256> separators = {false};
@@ -171,9 +166,8 @@ static std::string removeLF(std::string_view st) {
   return result;
 }
 
-void StringUtils::replaceInTokenVector(
-    std::vector<std::string>& tokens,
-    const std::vector<std::string_view>& pattern, std::string_view news) {
+void StringUtils::replaceInTokenVector(std::vector<std::string>& tokens, const std::vector<std::string_view>& pattern,
+                                       std::string_view news) {
   bool more = true;
   const size_t ni = tokens.size();
   const size_t nj = pattern.size();
@@ -197,40 +191,34 @@ void StringUtils::replaceInTokenVector(
   }
 }
 
-void StringUtils::replaceInTokenVector(std::vector<std::string>& tokens,
-                                       std::string_view pattern,
+void StringUtils::replaceInTokenVector(std::vector<std::string>& tokens, std::string_view pattern,
                                        std::string_view news) {
   const std::string news_s(news);
   uint32_t tokensSize = tokens.size();
   for (uint32_t i = 0; i < tokensSize; i++) {
     if (tokens[i] == pattern) {
       const bool surrounded_by_quotes =
-          (i > 0 && (tokens[i - 1] == "\"")) &&
-          ((i < tokensSize - 1) && (tokens[i + 1] == "\""));
+          (i > 0 && (tokens[i - 1] == "\"")) && ((i < tokensSize - 1) && (tokens[i + 1] == "\""));
       tokens[i] = surrounded_by_quotes ? removeLF(news) : news_s;
     }
   }
 }
 
 std::string_view StringUtils::ltrim(std::string_view str) {
-  while (!str.empty() &&
-         std::isspace<char>(str.front(), std::locale::classic())) {
+  while (!str.empty() && std::isspace<char>(str.front(), std::locale::classic())) {
     str.remove_prefix(1);
   }
   return str;
 }
 
 std::string_view StringUtils::rtrim(std::string_view str) {
-  while (!str.empty() &&
-         std::isspace<char>(str.back(), std::locale::classic())) {
+  while (!str.empty() && std::isspace<char>(str.back(), std::locale::classic())) {
     str.remove_suffix(1);
   }
   return str;
 }
 
-std::string_view StringUtils::trim(std::string_view str) {
-  return ltrim(rtrim(str));
-}
+std::string_view StringUtils::trim(std::string_view str) { return ltrim(rtrim(str)); }
 
 std::string_view StringUtils::rtrim_until(std::string_view str, char c) {
   auto pos = str.rfind(c);
@@ -249,8 +237,7 @@ std::string_view StringUtils::leaf(std::string_view str) {
   return found_dot == std::string_view::npos ? str : str.substr(found_dot + 1);
 }
 
-std::string StringUtils::replaceAll(std::string_view str, std::string_view from,
-                                    std::string_view to) {
+std::string StringUtils::replaceAll(std::string_view str, std::string_view from, std::string_view to) {
   size_t start_pos = 0;
   std::string result(str);
   while ((start_pos = result.find(from, start_pos)) != std::string::npos) {
@@ -273,8 +260,7 @@ static std::string_view SplitNext(std::string_view* src, char separator) {
   return result;
 }
 
-std::string_view StringUtils::getLineInString(std::string_view text,
-                                              int32_t line) {
+std::string_view StringUtils::getLineInString(std::string_view text, int32_t line) {
   if (line < 1) return "";
 
   std::string_view s;
@@ -302,9 +288,7 @@ std::string StringUtils::removeComments(std::string_view text) {
       inComment = true;
       result.erase(result.end() - 1);
     }
-    if ((c1 == ' ' || c1 == '#' || c1 == '\0' || c1 == '\t' || c1 == '\n') &&
-        c2 == '#')
-      inComment = true;
+    if ((c1 == ' ' || c1 == '#' || c1 == '\0' || c1 == '\t' || c1 == '\n') && c2 == '#') inComment = true;
     if (c2 == '\n') inComment = false;
     if (!inComment) result += c2;
     c1 = c2;
@@ -363,14 +347,11 @@ std::string StringUtils::evaluateEnvVars(std::string_view text) {
   return input;
 }
 
-void StringUtils::registerEnvVar(std::string_view var, std::string_view value) {
-  envVars.emplace(var, value);
-}
+void StringUtils::registerEnvVar(std::string_view var, std::string_view value) { envVars.emplace(var, value); }
 
 std::string_view StringUtils::unquoted(std::string_view text) {
   if ((text.size() >= 2) &&
-      (((text.front() == '\"') && (text.back() == '\"')) ||
-       ((text.front() == '\'') && (text.back() == '\'')))) {
+      (((text.front() == '\"') && (text.back() == '\"')) || ((text.front() == '\'') && (text.back() == '\'')))) {
     text.remove_prefix(1);
     text.remove_suffix(1);
   }
@@ -378,18 +359,14 @@ std::string_view StringUtils::unquoted(std::string_view text) {
 }
 
 bool StringUtils::startsWith(std::string_view text, std::string_view prefix) {
-  return (text.size() >= prefix.size()) &&
-         (text.compare(0, prefix.size(), prefix) == 0);
+  return (text.size() >= prefix.size()) && (text.compare(0, prefix.size(), prefix) == 0);
 }
 
 bool StringUtils::endsWith(std::string_view text, std::string_view suffix) {
-  return (text.size() >= suffix.size()) &&
-         (text.compare(text.size() - suffix.size(), suffix.size(), suffix) ==
-          0);
+  return (text.size() >= suffix.size()) && (text.compare(text.size() - suffix.size(), suffix.size(), suffix) == 0);
 }
 
 bool StringUtils::isblank(std::string_view text) {
-  return std::all_of(text.cbegin(), text.cend(),
-                     [](unsigned char ch) { return std::isblank(ch); });
+  return std::all_of(text.cbegin(), text.cend(), [](unsigned char ch) { return std::isblank(ch); });
 }
 }  // namespace SURELOG

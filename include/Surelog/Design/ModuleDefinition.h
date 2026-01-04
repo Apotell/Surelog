@@ -59,14 +59,12 @@ namespace SURELOG {
 class CompileModule;
 class FileContent;
 
-class ModuleDefinition final : public DesignComponent,
-                               public ClockingBlockHolder {
+class ModuleDefinition final : public DesignComponent, public ClockingBlockHolder {
   SURELOG_IMPLEMENT_RTTI(ModuleDefinition, DesignComponent)
   friend CompileModule;
 
  public:
-  ModuleDefinition(Session* session, std::string_view name,
-                   const FileContent* fileContent, NodeId nodeId,
+  ModuleDefinition(Session* session, std::string_view name, const FileContent* fileContent, NodeId nodeId,
                    uhdm::Serializer& serializer);
   ~ModuleDefinition() final = default;
 
@@ -77,27 +75,19 @@ class ModuleDefinition final : public DesignComponent,
 
   using ClockingBlockMap = std::map<std::string, ClockingBlock>;
   using ModportSignalMap = std::map<std::string, Modport, std::less<>>;
-  using ModportClockingBlockMap =
-      std::map<std::string, std::vector<ClockingBlock>, std::less<>>;
+  using ModportClockingBlockMap = std::map<std::string, std::vector<ClockingBlock>, std::less<>>;
 
   ModportSignalMap& getModportSignalMap() { return m_modportSignalMap; }
-  ModportClockingBlockMap& getModportClockingBlockMap() {
-    return m_modportClockingBlockMap;
-  }
-  void insertModport(std::string_view modport, const Signal& signal,
-                     NodeId nodeId);
+  ModportClockingBlockMap& getModportClockingBlockMap() { return m_modportClockingBlockMap; }
+  void insertModport(std::string_view modport, const Signal& signal, NodeId nodeId);
   void insertModport(std::string_view modport, const ClockingBlock& block);
   const Signal* getModportSignal(std::string_view modport, NodeId port) const;
   Modport* getModport(std::string_view modport);
 
-  const ClockingBlock* getModportClockingBlock(std::string_view modport,
-                                               NodeId port) const;
+  const ClockingBlock* getModportClockingBlock(std::string_view modport, NodeId port) const;
 
-  ClassNameClassDefinitionMultiMap& getClassDefinitions() {
-    return m_classDefinitions;
-  }
-  void addClassDefinition(std::string_view className,
-                          ClassDefinition* classDef) {
+  ClassNameClassDefinitionMultiMap& getClassDefinitions() { return m_classDefinitions; }
+  void addClassDefinition(std::string_view className, ClassDefinition* classDef) {
     m_classDefinitions.emplace(className, classDef);
   }
   ClassDefinition* getClassDefinition(std::string_view name);
@@ -111,36 +101,20 @@ class ModuleDefinition final : public DesignComponent,
     return true;
   }
   std::vector<uhdm::ModuleArray*>* getModuleArrays() { return m_moduleArrays; }
-  void setModuleArrays(std::vector<uhdm::ModuleArray*>* modules) {
-    m_moduleArrays = modules;
-  }
+  void setModuleArrays(std::vector<uhdm::ModuleArray*>* modules) { m_moduleArrays = modules; }
 
   std::vector<uhdm::RefModule*>* getRefModules() { return m_refModules; }
-  void setRefModules(std::vector<uhdm::RefModule*>* modules) {
-    m_refModules = modules;
-  }
+  void setRefModules(std::vector<uhdm::RefModule*>* modules) { m_refModules = modules; }
 
   uhdm::PrimitiveCollection* getPrimitives() { return m_subPrimitives; }
-  uhdm::PrimitiveArrayCollection* getPrimitiveArrays() {
-    return m_subPrimitiveArrays;
-  }
-  uhdm::GenScopeArrayCollection* getGenScopeArrays() {
-    return m_subGenScopeArrays;
-  }
+  uhdm::PrimitiveArrayCollection* getPrimitiveArrays() { return m_subPrimitiveArrays; }
+  uhdm::GenScopeArrayCollection* getGenScopeArrays() { return m_subGenScopeArrays; }
   std::vector<uhdm::Any*>* getGenStmts() { return m_genStmts; }
   std::vector<uhdm::Any*>* getGenVars() { return m_genVars; }
-  void setPrimitives(uhdm::PrimitiveCollection* primitives) {
-    m_subPrimitives = primitives;
-  }
-  void setPrimitiveArrays(uhdm::PrimitiveArrayCollection* primitives) {
-    m_subPrimitiveArrays = primitives;
-  }
-  void setGenScopeArrays(uhdm::GenScopeArrayCollection* gen_arrays) {
-    m_subGenScopeArrays = gen_arrays;
-  }
-  void setGenStmts(std::vector<uhdm::Any*>* gen_stmts) {
-    m_genStmts = gen_stmts;
-  }
+  void setPrimitives(uhdm::PrimitiveCollection* primitives) { m_subPrimitives = primitives; }
+  void setPrimitiveArrays(uhdm::PrimitiveArrayCollection* primitives) { m_subPrimitiveArrays = primitives; }
+  void setGenScopeArrays(uhdm::GenScopeArrayCollection* gen_arrays) { m_subGenScopeArrays = gen_arrays; }
+  void setGenStmts(std::vector<uhdm::Any*>* gen_stmts) { m_genStmts = gen_stmts; }
   void setGenVars(std::vector<uhdm::Any*>* gen_vars) { m_genVars = gen_vars; }
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }

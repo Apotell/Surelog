@@ -43,13 +43,10 @@ class MacroInfo final {
     UndefineAll = 2,
   };
 
-  MacroInfo(std::string_view name, DefType defType, PathId fileId,
-            uint32_t startLine, uint16_t startColumn, uint32_t endLine,
-            uint16_t endColumn, uint16_t nameStartColumn,
-            uint16_t bodyStartColumn, const std::vector<std::string>& arguments,
-            const std::vector<LineColumn>& argumentPositions,
-            const std::vector<std::string>& tokens,
-            const std::vector<LineColumn>& tokenPositions);
+  MacroInfo(std::string_view name, DefType defType, PathId fileId, uint32_t startLine, uint16_t startColumn,
+            uint32_t endLine, uint16_t endColumn, uint16_t nameStartColumn, uint16_t bodyStartColumn,
+            const std::vector<std::string>& arguments, const std::vector<LineColumn>& argumentPositions,
+            const std::vector<std::string>& tokens, const std::vector<LineColumn>& tokenPositions);
 
   const std::string m_name;
   const DefType m_defType;

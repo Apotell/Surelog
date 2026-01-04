@@ -45,42 +45,29 @@ class CommandLineParser final {
  public:
   explicit CommandLineParser(Session* session);
   CommandLineParser(const CommandLineParser& orig) = delete;
-  bool parse(int32_t argc, const char** argv, bool diffCompMode = false,
-             bool fileUnit = false);
+  bool parse(int32_t argc, const char** argv, bool diffCompMode = false, bool fileUnit = false);
 
   /* Verilog command line content */
   const PathIdVector& getWorkingDirs() const { return m_workingDirs; }
   const PathIdVector& getLibraryPaths() const { return m_libraryPaths; }
   const PathIdVector& getSourceFiles() const { return m_sourceFiles; }
   const PathIdVector& getLibraryFiles() const { return m_libraryFiles; }
-  const SymbolIdVector& getLibraryExtensions() const {
-    return m_libraryExtensions;
-  }
+  const SymbolIdVector& getLibraryExtensions() const { return m_libraryExtensions; }
   const PathIdVector& getIncludePaths() const { return m_includePaths; }
   const PathIdVector& getOrdredLibraries() const { return m_orderedLibraries; }
   const PathIdVector& getLibraryMapFiles() const { return m_libraryMapFiles; }
   const PathIdVector& getConfigFiles() const { return m_configFiles; }
   const SymbolIdVector& getUseConfigs() const { return m_useConfigs; }
-  const std::map<SymbolId, std::string, SymbolIdLessThanComparer>&
-  getDefineList() const {
-    return m_defineList;
-  }
-  const std::map<SymbolId, std::string, SymbolIdLessThanComparer>&
-  getParamList() const {
-    return m_paramList;
-  }
-  bool fileUnit() const {
-    return m_fileUnit;
-  }  // File or all compilation semantic
+  const std::map<SymbolId, std::string, SymbolIdLessThanComparer>& getDefineList() const { return m_defineList; }
+  const std::map<SymbolId, std::string, SymbolIdLessThanComparer>& getParamList() const { return m_paramList; }
+  bool fileUnit() const { return m_fileUnit; }  // File or all compilation semantic
   void setFileUnit() { m_fileUnit = true; }
   /* PP Output file/dir options */
   PathId writePpOutputFileId() const { return m_writePpOutputFileId; }
   PathId getOutputDirId() const { return m_outputDirId; }
   PathId getCompileAllDirId() const { return m_compileAllDirId; }
   PathId getCompileUnitDirId() const { return m_compileUnitDirId; }
-  PathId getCompileDirId() const {
-    return fileUnit() ? m_compileUnitDirId : m_compileAllDirId;
-  }
+  PathId getCompileDirId() const { return fileUnit() ? m_compileUnitDirId : m_compileAllDirId; }
   PathId getLogFileId() const { return m_logFileId; }
   SymbolId getLogFileNameId() const { return m_logFileNameId; }
   bool writePpOutput() const { return m_writePpOutput; }
@@ -101,7 +88,7 @@ class CommandLineParser final {
   PathId getPrecompiledDirId() const { return m_precompiledDirId; }
   bool usePPOutputFileLocation() const { return m_ppOutputFileLocation; }
   void printExtraPpLineInfo(bool on) { m_ppPrintLineInfo = on; }
-  bool printExtraPpLineInfo() { return m_ppPrintLineInfo; }
+  bool printExtraPpLineInfo() const { return m_ppPrintLineInfo; }
   /* PP Output content generation options */
   bool filterFileLine() const { return m_filterFileLine; }
   void setFilterFileLine(bool val) { m_filterFileLine = val; }
@@ -116,13 +103,9 @@ class CommandLineParser final {
   void setFilterNote() { m_note = false; }
   void setFilterWarning() { m_warning = false; }
   void setReportNonSynthesizable(bool report) { m_nonSynthesizable = report; }
-  bool reportNonSynthesizable() { return m_nonSynthesizable; }
-  void setReportNonSynthesizableWithFormal(bool report) {
-    m_nonSynthesizableWithFormal = report;
-  }
-  bool reportNonSynthesizableWithFormal() {
-    return m_nonSynthesizableWithFormal;
-  }
+  bool reportNonSynthesizable() const { return m_nonSynthesizable; }
+  void setReportNonSynthesizableWithFormal(bool report) { m_nonSynthesizableWithFormal = report; }
+  bool reportNonSynthesizableWithFormal() const { return m_nonSynthesizableWithFormal; }
   /* Debug/traces options */
   bool muteStdout() const { return m_muteStdout; }
   void setMuteStdout() { m_muteStdout = true; }
@@ -198,15 +181,9 @@ class CommandLineParser final {
   bool pythonAllowed() const { return m_pythonAllowed; }
   void noPython() { m_pythonAllowed = false; }
   void withPython();
-  bool pythonEvalScriptPerFile() const {
-    return m_pythonEvalScriptPerFile && m_pythonAllowed;
-  }
-  bool pythonEvalScript() const {
-    return m_pythonEvalScript && m_pythonAllowed;
-  }
-  PathId pythonEvalScriptPerFileId() const {
-    return m_pythonEvalScriptPerFileId;
-  }
+  bool pythonEvalScriptPerFile() const { return m_pythonEvalScriptPerFile && m_pythonAllowed; }
+  bool pythonEvalScript() const { return m_pythonEvalScript && m_pythonAllowed; }
+  PathId pythonEvalScriptPerFileId() const { return m_pythonEvalScriptPerFileId; }
   PathId pythonEvalScriptId() const { return m_pythonEvalScriptId; }
   PathId pythonListenerId() const { return m_pythonListenerFileId; }
 
@@ -223,24 +200,12 @@ class CommandLineParser final {
   bool parseBuiltIn() const { return m_parseBuiltIn; }
   PathId getProgramId() const { return m_programId; }
   std::string getExeCommand() const { return m_exeCommand; }
-  std::set<std::string, std::less<>>& getTopLevelModules() {
-    return m_topLevelModules;
-  }
-  std::set<std::string, std::less<>>& getBlackBoxModules() {
-    return m_blackboxModules;
-  }
-  std::set<std::string, std::less<>>& getBlackBoxInstances() {
-    return m_blackboxInstances;
-  }
-  void setTopLevelModule(std::string_view module) {
-    m_topLevelModules.emplace(module);
-  }
-  void setBlackBoxModule(std::string_view module) {
-    m_blackboxModules.emplace(module);
-  }
-  void setBlackBoxInstance(std::string_view instance) {
-    m_blackboxInstances.emplace(instance);
-  }
+  std::set<std::string, std::less<>>& getTopLevelModules() { return m_topLevelModules; }
+  std::set<std::string, std::less<>>& getBlackBoxModules() { return m_blackboxModules; }
+  std::set<std::string, std::less<>>& getBlackBoxInstances() { return m_blackboxInstances; }
+  void setTopLevelModule(std::string_view module) { m_topLevelModules.emplace(module); }
+  void setBlackBoxModule(std::string_view module) { m_blackboxModules.emplace(module); }
+  void setBlackBoxInstance(std::string_view instance) { m_blackboxInstances.emplace(instance); }
 
   bool fullSVMode() const { return m_sverilog; }
   void fullSVMode(bool sverilog) { m_sverilog = sverilog; }
@@ -251,23 +216,18 @@ class CommandLineParser final {
   void addIncludesAsSourceFiles();
 
  private:
-  std::pair<PathId, std::filesystem::path> addWorkingDirectory_(
-      const std::filesystem::path& wd, const std::filesystem::path& rwd);
+  std::pair<PathId, std::filesystem::path> addWorkingDirectory_(const std::filesystem::path& wd,
+                                                                const std::filesystem::path& rwd);
   bool plus_arguments_(std::string_view s, const std::filesystem::path& cd);
   void processOutputDirectory_(const std::vector<std::string>& args);
-  void processArgs_(const std::vector<std::string>& args,
-                    std::filesystem::path& wd, std::filesystem::path& cd,
+  void processArgs_(const std::vector<std::string>& args, std::filesystem::path& wd, std::filesystem::path& cd,
                     std::vector<std::string>& container);
+  void splitPlusArg_(std::string_view s, std::string_view prefix, SymbolIdVector& container);
+  void splitPlusArg_(std::string_view s, std::string_view prefix, const std::filesystem::path& cd,
+                     PathIdVector& container);
   void splitPlusArg_(std::string_view s, std::string_view prefix,
-                     SymbolIdVector& container);
-  void splitPlusArg_(std::string_view s, std::string_view prefix,
-                     const std::filesystem::path& cd, PathIdVector& container);
-  void splitPlusArg_(
-      std::string_view s, std::string_view prefix,
-      std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container);
-  void splitEqArg_(
-      std::string_view s,
-      std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container);
+                     std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container);
+  void splitEqArg_(std::string_view s, std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container);
   bool checkCommandLine_();
   bool prepareCompilation_(int32_t argc, const char** argv);
   bool setupCache_();
@@ -281,15 +241,13 @@ class CommandLineParser final {
   PathIdVector m_libraryFiles;  // -v
   PathIdVector m_includePaths;  // +incdir+
   PathIdSet m_includePathSet;
-  SymbolIdVector m_libraryExtensions;  // +libext+
-  PathIdVector m_orderedLibraries;     // -L <libName>
-  PathIdVector m_libraryMapFiles;      // -map
-  PathIdVector m_configFiles;          // -cfgFile <config file>
-  SymbolIdVector m_useConfigs;         // -cfg <configName>
-  std::map<SymbolId, std::string, SymbolIdLessThanComparer>
-      m_defineList;  // +define+
-  std::map<SymbolId, std::string, SymbolIdLessThanComparer>
-      m_paramList;  // -Pparameter=value
+  SymbolIdVector m_libraryExtensions;                                      // +libext+
+  PathIdVector m_orderedLibraries;                                         // -L <libName>
+  PathIdVector m_libraryMapFiles;                                          // -map
+  PathIdVector m_configFiles;                                              // -cfgFile <config file>
+  SymbolIdVector m_useConfigs;                                             // -cfg <configName>
+  std::map<SymbolId, std::string, SymbolIdLessThanComparer> m_defineList;  // +define+
+  std::map<SymbolId, std::string, SymbolIdLessThanComparer> m_paramList;   // -Pparameter=value
   PathId m_writePpOutputFileId;
   bool m_writePpOutput;
   bool m_filterFileLine;

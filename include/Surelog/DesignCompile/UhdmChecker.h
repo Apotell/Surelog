@@ -49,8 +49,7 @@ class UhdmChecker final {
   bool check(PathId uhdmFileId);
 
  private:
-  bool registerFile(const FileContent* fC,
-                    std::set<std::string_view>& moduleNames);
+  bool registerFile(const FileContent* fC, std::set<std::string_view>& moduleNames);
   bool reportHtml(PathId uhdmFileId, float overallCoverage);
   float reportCoverage(PathId uhdmFileId);
   void annotate();

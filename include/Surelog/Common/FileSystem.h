@@ -107,8 +107,7 @@ class FileSystem {
   static constexpr std::string_view kParserCacheDirName = kCacheDirName;
   static constexpr std::string_view kPythonCacheDirName = kCacheDirName;
 
-  using filepath_to_working_directories_cache_t =
-      std::map<std::string, std::string, std::less<>>;
+  using filepath_to_working_directories_cache_t = std::map<std::string, std::string, std::less<>>;
 
  public:
   // Returns the executing binary's path by querying the OS
@@ -119,8 +118,7 @@ class FileSystem {
   //   No trailing slash regardless of whether the path exists or not
   //   Shortens the path by removing any '.' and '..'
   static std::filesystem::path normalize(const std::filesystem::path &p);
-  static bool is_subpath(const std::filesystem::path &parent,
-                         const std::filesystem::path &child);
+  static bool is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child);
 
  public:
   // Convert a native filesystem path to PathId
@@ -132,8 +130,7 @@ class FileSystem {
   virtual std::filesystem::path toPlatformAbsPath(PathId id) = 0;
   virtual std::filesystem::path toPlatformRelPath(PathId id) = 0;
   // Returns base and relative paths
-  virtual std::pair<std::filesystem::path, std::filesystem::path>
-  toSplitPlatformPath(PathId id) = 0;
+  virtual std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) = 0;
 
   // Returns the current working directory as either the native filesystem
   // path or as a PathId registered in the input SymbolTable.
@@ -146,8 +143,7 @@ class FileSystem {
   // Open/Close an input stream represented by the input PathId.
   // openForRead defaults the ios_base::openmode to ios_base::text
   // openForLoad defaults the ios_base::openmode to ios_base::binary
-  virtual std::istream &openInput(PathId fileId,
-                                  std::ios_base::openmode mode) = 0;
+  virtual std::istream &openInput(PathId fileId, std::ios_base::openmode mode) = 0;
   std::istream &openForRead(PathId fileId);
   std::istream &openForLoad(PathId fileId);
   virtual bool close(std::istream &strm) = 0;
@@ -155,8 +151,7 @@ class FileSystem {
   // Open/Close an output stream represented by the input PathId.
   // openForWrite defaults the ios_base::openmode to ios_base::text
   // openForSave defaults the ios_base::openmode to ios_base::binary
-  virtual std::ostream &openOutput(PathId fileId,
-                                   std::ios_base::openmode mode) = 0;
+  virtual std::ostream &openOutput(PathId fileId, std::ios_base::openmode mode) = 0;
   std::ostream &openForWrite(PathId fileId);
   std::ostream &openForSave(PathId fileId);
   virtual bool close(std::ostream &strm) = 0;
@@ -165,15 +160,13 @@ class FileSystem {
   // input PathId. onlyIfModified defaults to true if using the overloaded
   // variation.
   virtual bool readContent(PathId fileId, std::string &content);
-  virtual bool writeContent(PathId fileId, std::string_view content,
-                            bool onlyIfModified);
+  virtual bool writeContent(PathId fileId, std::string_view content, bool onlyIfModified);
   bool writeContent(PathId fileId, std::string_view content);
 
   // Read/Write lines of text from file represented by input PathId.
   // onlyIfModified defaults to true if using the overloaded variation.
   virtual bool readLines(PathId fileId, std::vector<std::string> &lines);
-  virtual bool writeLines(PathId fileId, const std::vector<std::string> &lines,
-                          bool onlyIfModified);
+  virtual bool writeLines(PathId fileId, const std::vector<std::string> &lines, bool onlyIfModified);
   bool writeLines(PathId fileId, const std::vector<std::string> &lines);
 
   // Read specific line of text from file represented by input PathId.
@@ -183,8 +176,7 @@ class FileSystem {
   // Load/Save content i.e. blob from file represented by input PathId.
   // useTemp defaults to false if using the overloaded variations.
   virtual bool loadContent(PathId fileId, std::vector<char> &data);
-  virtual bool saveContent(PathId fileId, const char *content,
-                           std::streamsize length, bool useTemp) = 0;
+  virtual bool saveContent(PathId fileId, const char *content, std::streamsize length, bool useTemp) = 0;
   bool saveContent(PathId fileId, const char *content, std::streamsize length);
   bool saveContent(PathId fileId, const std::vector<char> &data, bool useTemp);
   bool saveContent(PathId fileId, const std::vector<char> &data);
@@ -197,78 +189,52 @@ class FileSystem {
 
   // Adds a working directory cache entry
   // This is used primarily for use with _sepcmd_ command.
-  virtual bool addWorkingDirectoryCacheEntry(std::string_view prefix,
-                                             std::string_view suffix) = 0;
+  virtual bool addWorkingDirectoryCacheEntry(std::string_view prefix, std::string_view suffix) = 0;
 
   // Path computation APIs for different contexts
-  virtual PathId getProgramFile(std::string_view hint,
-                                SymbolTable *symbolTable) = 0;
+  virtual PathId getProgramFile(std::string_view hint, SymbolTable *symbolTable) = 0;
 
-  virtual PathId getWorkingDir(std::string_view dir,
-                               SymbolTable *symbolTable) = 0;
-  virtual PathId getOutputDir(std::string_view dir,
-                              SymbolTable *symbolTable) = 0;
-  virtual PathId getPrecompiledDir(PathId programId,
-                                   SymbolTable *symbolTable) = 0;
+  virtual PathId getWorkingDir(std::string_view dir, SymbolTable *symbolTable) = 0;
+  virtual PathId getOutputDir(std::string_view dir, SymbolTable *symbolTable) = 0;
+  virtual PathId getPrecompiledDir(PathId programId, SymbolTable *symbolTable) = 0;
 
-  virtual PathId getLogFile(bool isUnitCompilation, std::string_view filename,
-                            SymbolTable *symbolTable) = 0;
+  virtual PathId getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) = 0;
   PathId getLogFile(bool isUnitCompilation, SymbolTable *symbolTable);
 
-  virtual PathId getCacheDir(bool isUnitCompilation, std::string_view dirname,
-                             SymbolTable *symbolTable) = 0;
+  virtual PathId getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) = 0;
   PathId getCacheDir(bool isUnitCompilation, SymbolTable *symbolTable);
 
-  virtual PathId getCompileDir(bool isUnitCompilation,
-                               SymbolTable *symbolTable) = 0;
+  virtual PathId getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
 
-  virtual PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId,
-                                 std::string_view libraryName,
+  virtual PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                                  SymbolTable *symbolTable) = 0;
-  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId,
-                         SymbolId libraryNameId, SymbolTable *symbolTable);
+  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId, SymbolTable *symbolTable);
 
-  virtual PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                                std::string_view libraryName,
-                                bool isPrecompiled,
-                                SymbolTable *symbolTable) = 0;
-  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                        SymbolId libraryNameId, bool isPrecompiled,
+  virtual PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
+                                bool isPrecompiled, SymbolTable *symbolTable) = 0;
+  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId, bool isPrecompiled,
                         SymbolTable *symbolTable);
 
-  virtual PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId,
-                                   std::string_view libraryName,
-                                   bool isPrecompiled,
-                                   SymbolTable *symbolTable) = 0;
-  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId,
-                           SymbolId libraryNameId, bool isPrecompiled,
+  virtual PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName,
+                                   bool isPrecompiled, SymbolTable *symbolTable) = 0;
+  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, SymbolId libraryNameId, bool isPrecompiled,
                            SymbolTable *symbolTable);
 
-  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                                    std::string_view libraryName,
+  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                                     SymbolTable *symbolTable) = 0;
-  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                                    SymbolId libraryNameId,
+  virtual PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
                                     SymbolTable *symbolTable);
 
-  virtual PathId getPpMultiprocessingDir(bool isUnitCompilation,
-                                         SymbolTable *symbolTable) = 0;
-  virtual PathId getParserMultiprocessingDir(bool isUnitCompilation,
-                                             SymbolTable *symbolTable) = 0;
+  virtual PathId getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
 
-  virtual PathId getChunkFile(PathId ppFileId, int32_t chunkIndex,
-                              SymbolTable *symbolTable) = 0;
+  virtual PathId getChunkFile(PathId ppFileId, int32_t chunkIndex, SymbolTable *symbolTable) = 0;
 
-  virtual PathId getCheckerDir(bool isUnitCompilation,
-                               SymbolTable *symbolTable) = 0;
-  virtual PathId getCheckerFile(PathId uhdmFileId,
-                                SymbolTable *symbolTable) = 0;
-  virtual PathId getCheckerHtmlFile(PathId uhdmFileId,
-                                    SymbolTable *symbolTable) = 0;
-  virtual PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index,
-                                    SymbolTable *symbolTable) = 0;
-  virtual PathId getOutputUhdmFile(bool isUnitCompilation,
-                                   SymbolTable *symbolTable) = 0;
+  virtual PathId getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
+  virtual PathId getCheckerFile(PathId uhdmFileId, SymbolTable *symbolTable) = 0;
+  virtual PathId getCheckerHtmlFile(PathId uhdmFileId, SymbolTable *symbolTable) = 0;
+  virtual PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index, SymbolTable *symbolTable) = 0;
+  virtual PathId getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) = 0;
 
   // Rename directory/file represented by 'whatId' to 'toId'
   virtual bool rename(PathId whatId, PathId toId) = 0;
@@ -310,43 +276,33 @@ class FileSystem {
 
   // Returns the 'last modified time' for the input fileId, or the default
   // if the file was not found or the operation failed.
-  virtual std::filesystem::file_time_type modtime(
-      PathId fileId, std::filesystem::file_time_type defaultOnFail) = 0;
+  virtual std::filesystem::file_time_type modtime(PathId fileId, std::filesystem::file_time_type defaultOnFail) = 0;
   std::filesystem::file_time_type modtime(PathId fileId);
 
   // Find the first directory in input 'directories' that contain
   // directory/file named 'name'.
   // If found, return the PathId representing that directory/file
   // and otherwise BadPathId
-  virtual PathId locate(std::string_view name, const PathIdVector &directories,
-                        SymbolTable *symbolTable) = 0;
+  virtual PathId locate(std::string_view name, const PathIdVector &directories, SymbolTable *symbolTable) = 0;
 
   // Returns a list of all files under the input 'dirId'.
-  virtual PathIdVector &collect(PathId dirId, SymbolTable *symbolTable,
-                                PathIdVector &container) = 0;
+  virtual PathIdVector &collect(PathId dirId, SymbolTable *symbolTable, PathIdVector &container) = 0;
   // Returns a list of all files under the input 'dirId',
   // filtered by 'extension'.
-  virtual PathIdVector &collect(PathId dirId, std::string_view extension,
-                                SymbolTable *symbolTable,
+  virtual PathIdVector &collect(PathId dirId, std::string_view extension, SymbolTable *symbolTable,
                                 PathIdVector &container) = 0;
   // Returns all files under the input 'dirId' that matches the input 'pattern'
-  virtual PathIdVector &matching(PathId dirId, std::string_view pattern,
-                                 SymbolTable *symbolTable,
+  virtual PathIdVector &matching(PathId dirId, std::string_view pattern, SymbolTable *symbolTable,
                                  PathIdVector &container) = 0;
-  virtual PathIdVector &matching(PathId dirId, const std::regex &pattern,
-                                 SymbolTable *symbolTable,
+  virtual PathIdVector &matching(PathId dirId, const std::regex &pattern, SymbolTable *symbolTable,
                                  PathIdVector &container) = 0;
 
   // Returns child, sibling, parent, leaf and type of filesystem path
-  virtual PathId getChild(PathId id, std::string_view name,
-                          SymbolTable *symbolTable) = 0;
-  virtual PathId getSibling(PathId id, std::string_view name,
-                            SymbolTable *symbolTable) = 0;
+  virtual PathId getChild(PathId id, std::string_view name, SymbolTable *symbolTable) = 0;
+  virtual PathId getSibling(PathId id, std::string_view name, SymbolTable *symbolTable) = 0;
   virtual PathId getParent(PathId id, SymbolTable *symbolTable) = 0;
-  virtual std::pair<SymbolId, std::string_view> getLeaf(
-      PathId id, SymbolTable *symbolTable) = 0;
-  virtual std::pair<SymbolId, std::string_view> getType(
-      PathId id, SymbolTable *symbolTable) = 0;
+  virtual std::pair<SymbolId, std::string_view> getLeaf(PathId id, SymbolTable *symbolTable) = 0;
+  virtual std::pair<SymbolId, std::string_view> getType(PathId id, SymbolTable *symbolTable) = 0;
 
   // Returns a copy of the input id registered with the input SymbolTable.
   virtual PathId copy(PathId id, SymbolTable *toSymbolTable);

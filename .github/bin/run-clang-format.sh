@@ -18,7 +18,7 @@ CLANG_FORMAT="${CLANG_FORMAT:-clang-format}"
 FORMAT_OUT=${TMPDIR:-/tmp}/clang-format-diff.out
 
 # Run on all c++ files.
-find src include -name "*.h" -o -name "*.cpp" | xargs ${CLANG_FORMAT} --style=Google -i
+find src include -name "*.h" -o -name "*.cpp" | xargs ${CLANG_FORMAT} --style=file -i
 
 # Check if we got any diff, then print it out in in the CI.
 # TODO: make these suggested diffs in the pull request.

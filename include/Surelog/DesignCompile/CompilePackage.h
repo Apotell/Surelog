@@ -39,12 +39,8 @@ class Package;
 class Session;
 
 struct FunctorCompilePackage final {
-  FunctorCompilePackage(Session* session, CompileDesign* compileDesign,
-                        Package* package, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_package(package),
-        m_design(design) {}
+  FunctorCompilePackage(Session* session, CompileDesign* compileDesign, Package* package, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_package(package), m_design(design) {}
   int32_t operator()() const;
 
  private:
@@ -56,8 +52,7 @@ struct FunctorCompilePackage final {
 
 class CompilePackage final {
  public:
-  CompilePackage(Session* session, CompileDesign* compileDesign,
-                 Package* package, Design* design)
+  CompilePackage(Session* session, CompileDesign* compileDesign, Package* package, Design* design)
       : m_session(session),
         m_compileDesign(compileDesign),
         m_package(package),

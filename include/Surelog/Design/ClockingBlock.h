@@ -43,8 +43,7 @@ class ClockingBlock final {
   enum Type { Global, Default, Regular };
   // TODO: some of these parameters are not used. Correct or oversight ?
   ClockingBlock([[maybe_unused]] const FileContent* fileContent, NodeId blockId,
-                [[maybe_unused]] NodeId clockingBlockId, Type type,
-                uhdm::ClockingBlock* cb)
+                [[maybe_unused]] NodeId clockingBlockId, Type type, uhdm::ClockingBlock* cb)
       : m_blockId(blockId), m_model(cb), m_type(type) {}
 
   void addSignal(Signal& signal) { m_signals.push_back(signal); }

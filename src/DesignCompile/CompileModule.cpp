@@ -78,8 +78,7 @@
 
 namespace SURELOG {
 int32_t FunctorCompileModule::operator()() const {
-  if (CompileModule* instance = new CompileModule(
-          m_session, m_compileDesign, m_module, m_design, m_instance)) {
+  if (CompileModule* instance = new CompileModule(m_session, m_compileDesign, m_module, m_design, m_instance)) {
     instance->compile();
     delete instance;
   }
@@ -119,20 +118,11 @@ bool CompileModule::compile() {
     case VObjectType::paGenerate_interface_block:
     case VObjectType::paGenerate_interface_item:
     case VObjectType::paGenerate_interface_named_block:
-    case VObjectType::paGenerate_region:
-      errType = ErrorDefinition::COMP_COMPILE_GENERATE_BLOCK;
-      break;
-    case VObjectType::paInterface_declaration:
-      errType = ErrorDefinition::COMP_COMPILE_INTERFACE;
-      break;
-    case VObjectType::paUdp_declaration:
-      errType = ErrorDefinition::COMP_COMPILE_UDP;
-      break;
-    case VObjectType::paChecker_declaration:
-      errType = ErrorDefinition::COMP_COMPILE_CHECKER;
-      break;
-    default:
-      break;
+    case VObjectType::paGenerate_region: errType = ErrorDefinition::COMP_COMPILE_GENERATE_BLOCK; break;
+    case VObjectType::paInterface_declaration: errType = ErrorDefinition::COMP_COMPILE_INTERFACE; break;
+    case VObjectType::paUdp_declaration: errType = ErrorDefinition::COMP_COMPILE_UDP; break;
+    case VObjectType::paChecker_declaration: errType = ErrorDefinition::COMP_COMPILE_CHECKER; break;
+    default: break;
   }
 
   m_module->setDesignElement(fC->getDesignElement(m_module->getName()));
@@ -140,8 +130,7 @@ bool CompileModule::compile() {
   auto& blackboxModules = clp->getBlackBoxModules();
   bool skipModule = false;
   std::string libName;
-  if (!m_module->getFileContents().empty())
-    libName = m_module->getFileContents()[0]->getLibrary()->getName();
+  if (!m_module->getFileContents().empty()) libName = m_module->getFileContents()[0]->getLibrary()->getName();
   const std::string_view modName = m_module->getName();
   if (blackboxModules.find(modName) != blackboxModules.end()) {
     errType = ErrorDefinition::COMP_SKIPPING_BLACKBOX_MODULE;
@@ -150,8 +139,7 @@ bool CompileModule::compile() {
   auto& blackboxInstances = clp->getBlackBoxInstances();
   std::string instanceName;
   if (m_instance) {
-    if (ModuleInstance* inst =
-            valuedcomponenti_cast<ModuleInstance*>(m_instance)) {
+    if (ModuleInstance* inst = valuedcomponenti_cast<ModuleInstance*>(m_instance)) {
       instanceName = inst->getFullPathName();
     }
   }
@@ -217,29 +205,22 @@ bool CompileModule::compile() {
     case VObjectType::paUdp_declaration:
       if (!collectUdpObjects_()) return false;
       break;
-    case VObjectType::paChecker_declaration:
-      break;
-    default:
-      break;
+    case VObjectType::paChecker_declaration: break;
+    default: break;
   }
 
   switch (moduleType) {
     case VObjectType::paModule_declaration:
     case VObjectType::paInterface_declaration:
-    case VObjectType::paUdp_declaration:
-      do {
-        nodeId = fC->Child(nodeId);
-      } while (nodeId &&
-               (fC->Type(nodeId) != VObjectType::paAttribute_instance));
+    case VObjectType::paUdp_declaration: do { nodeId = fC->Child(nodeId);
+      } while (nodeId && (fC->Type(nodeId) != VObjectType::paAttribute_instance));
       if (nodeId) {
-        if (uhdm::AttributeCollection* attributes =
-                m_helper.compileAttributes(m_module, fC, nodeId, nullptr)) {
+        if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_module, fC, nodeId, nullptr)) {
           m_module->setAttributes(attributes);
         }
       }
       break;
-    default:
-      break;
+    default: break;
   }
 
   for (Signal* sig : m_module->getSignals()) {
@@ -269,8 +250,7 @@ bool CompileModule::collectUdpObjects_() {
       case VObjectType::paUdp_ansi_declaration: {
         NodeId Attributes = fC->Child(id);
         if (fC->Type(Attributes) == VObjectType::paAttribute_instance) {
-          if (uhdm::AttributeCollection* attributes =
-                  m_helper.compileAttributes(m_module, fC, Attributes, defn)) {
+          if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_module, fC, Attributes, defn)) {
             defn->setAttributes(attributes);
           }
         }
@@ -293,12 +273,10 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Output = fC->Child(id);
         uhdm::Net* net = s.make<uhdm::Net>();
         if (fC->Type(Output) == VObjectType::paAttribute_instance) {
-          if (uhdm::AttributeCollection* attributes =
-                  m_helper.compileAttributes(m_module, fC, Output, net)) {
+          if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(m_module, fC, Output, net)) {
             net->setAttributes(attributes);
           }
-          while (fC->Type(Output) == VObjectType::paAttribute_instance)
-            Output = fC->Sibling(Output);
+          while (fC->Type(Output) == VObjectType::paAttribute_instance) Output = fC->Sibling(Output);
         }
 
         const std::string_view outputname = fC->SymName(Output);
@@ -323,10 +301,8 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Indentifier_list = fC->Child(id);
         uhdm::AttributeCollection* attributes = nullptr;
         if (fC->Type(Indentifier_list) == VObjectType::paAttribute_instance) {
-          attributes = m_helper.compileAttributes(m_module, fC,
-                                                  Indentifier_list, nullptr);
-          while (fC->Type(Indentifier_list) ==
-                 VObjectType::paAttribute_instance)
+          attributes = m_helper.compileAttributes(m_module, fC, Indentifier_list, nullptr);
+          while (fC->Type(Indentifier_list) == VObjectType::paAttribute_instance)
             Indentifier_list = fC->Sibling(Indentifier_list);
         }
         NodeId Identifier = fC->Child(Indentifier_list);
@@ -521,8 +497,7 @@ bool CompileModule::collectUdpObjects_() {
         rt->setActual(ts);
         break;
       }
-      default:
-        break;
+      default: break;
     }
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
     if (const NodeId childId = fC->Child(id)) stack.emplace(childId);
@@ -534,17 +509,16 @@ bool CompileModule::collectUdpObjects_() {
 bool CompileModule::collectModuleObjects_(CollectType collectType) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
-  std::vector<VObjectType> stopPoints = {
-      VObjectType::paConditional_generate_construct,
-      VObjectType::paGenerate_module_conditional_statement,
-      VObjectType::paLoop_generate_construct,
-      VObjectType::paGenerate_module_loop_statement,
-      VObjectType::paPar_block,
-      VObjectType::paSeq_block,
-      VObjectType::paModule_declaration,
-      VObjectType::paClass_declaration,
-      VObjectType::paFunction_body_declaration,
-      VObjectType::paTask_body_declaration};
+  std::vector<VObjectType> stopPoints = {VObjectType::paConditional_generate_construct,
+                                         VObjectType::paGenerate_module_conditional_statement,
+                                         VObjectType::paLoop_generate_construct,
+                                         VObjectType::paGenerate_module_loop_statement,
+                                         VObjectType::paPar_block,
+                                         VObjectType::paSeq_block,
+                                         VObjectType::paModule_declaration,
+                                         VObjectType::paClass_declaration,
+                                         VObjectType::paFunction_body_declaration,
+                                         VObjectType::paTask_body_declaration};
   if (collectType == CollectType::GENERATE_REGIONS) {
     if (m_instance != nullptr) {
       stopPoints.emplace_back(VObjectType::paGenerate_region);
@@ -607,8 +581,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           }
           if (collectType == CollectType::FUNCTION) m_nbPorts++;
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compilePortDeclaration(m_module, fC, id, port_direction,
-                                          m_hasNonNullPort || (m_nbPorts > 1));
+          m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort || (m_nbPorts > 1));
           m_attributes = nullptr;
           break;
         }
@@ -621,8 +594,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paOutput_declaration:
         case VObjectType::paInout_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compilePortDeclaration(m_module, fC, id, port_direction,
-                                          m_hasNonNullPort);
+          m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
           m_attributes = nullptr;
           break;
         }
@@ -639,8 +611,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileDataDeclaration(m_module, fC, id, false,
-                                          m_attributes);
+          m_helper.compileDataDeclaration(m_module, fC, id, false, m_attributes);
           m_attributes = nullptr;
           break;
         }
@@ -655,20 +626,16 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paPort_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compilePortDeclaration(m_module, fC, id, port_direction,
-                                          m_hasNonNullPort);
+          m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
           m_attributes = nullptr;
           break;
         }
         case VObjectType::paContinuous_assign: {
           if (collectType != CollectType::OTHER) break;
           uhdm::ContAssignCollection assigns =
-              m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
-                                                   m_module->getUhdmModel(),
-                                                   m_instance);
+              m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id), m_module->getUhdmModel(), m_instance);
           if (m_module->getContAssigns() == nullptr) {
-            m_module->setContAssigns(m_compileDesign->getSerializer()
-                                         .makeCollection<uhdm::ContAssign>());
+            m_module->setContAssigns(m_compileDesign->getSerializer().makeCollection<uhdm::ContAssign>());
           }
           for (auto assign : assigns) {
             m_module->getContAssigns()->emplace_back(assign);
@@ -677,28 +644,26 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          if (uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
-                  m_module, fC, id, m_module->getUhdmModel(), m_instance)) {
+          if (uhdm::PropertyDecl* decl =
+                  m_helper.compilePropertyDeclaration(m_module, fC, id, m_module->getUhdmModel(), m_instance)) {
             m_module->addPropertyDecl(decl);
           }
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          if (uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
-                  m_module, fC, id, m_module->getUhdmModel(), m_instance)) {
+          if (uhdm::SequenceDecl* decl =
+                  m_helper.compileSequenceDeclaration(m_module, fC, id, m_module->getUhdmModel(), m_instance)) {
             m_module->addSequenceDecl(decl);
           }
           break;
         }
         case VObjectType::paAlways_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::Always* always = m_helper.compileAlwaysBlock(
-              m_module, fC, id, m_module->getUhdmModel(), m_instance);
+          uhdm::Always* always = m_helper.compileAlwaysBlock(m_module, fC, id, m_module->getUhdmModel(), m_instance);
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(always);
@@ -709,9 +674,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           ParameterPortListId = id;
           NodeId list_of_param_assignments = fC->Child(id);
           while (list_of_param_assignments) {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_param_assignments, false, m_instance,
-                false, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_param_assignments, false, m_instance, false,
+                                                 false);
             list_of_param_assignments = fC->Sibling(list_of_param_assignments);
           }
           break;
@@ -720,35 +684,28 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType != CollectType::DEFINITION) break;
 
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, false, m_instance,
-                ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_type_assignments, false, m_instance,
+                                                 ParameterPortListId, false);
 
           } else {
-            m_helper.compileParameterDeclaration(m_module, fC, id, false,
-                                                 m_instance,
-                                                 ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, id, false, m_instance, ParameterPortListId, false);
           }
           break;
         }
         case VObjectType::paLocal_parameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, true, m_instance,
-                ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_type_assignments, true, m_instance,
+                                                 ParameterPortListId, false);
 
           } else {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, id, true, m_instance, ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, id, true, m_instance, ParameterPortListId, false);
           }
           break;
         }
@@ -778,8 +735,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
             Task* task = m_helper.compileTaskPrototype(m_module, fC, id);
             m_module->insertTask(task);
           } else {
-            Function* func =
-                m_helper.compileFunctionPrototype(m_module, fC, id);
+            Function* func = m_helper.compileFunctionPrototype(m_module, fC, id);
             m_module->insertFunction(func);
           }
           break;
@@ -853,15 +809,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paModule_instantiation:
         case VObjectType::paProgram_instantiation: {
           if (collectType != CollectType::OTHER) break;
-          std::pair<std::vector<uhdm::ModuleArray*>,
-                    std::vector<uhdm::RefModule*>>
-              result = m_helper.compileInstantiation(
-                  m_module, fC, m_module->getUhdmModel(), id, m_instance);
+          std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>> result =
+              m_helper.compileInstantiation(m_module, fC, m_module->getUhdmModel(), id, m_instance);
           if (!result.first.empty()) {
             auto subModuleArrays = m_module->getModuleArrays();
             if (subModuleArrays == nullptr) {
-              subModuleArrays = m_compileDesign->getSerializer()
-                                    .makeCollection<uhdm::ModuleArray>();
+              subModuleArrays = m_compileDesign->getSerializer().makeCollection<uhdm::ModuleArray>();
               m_module->setModuleArrays(subModuleArrays);
             }
             for (auto mod : result.first) {
@@ -871,8 +824,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (!result.second.empty()) {
             auto subModules = m_module->getRefModules();
             if (subModules == nullptr) {
-              subModules = m_compileDesign->getSerializer()
-                               .makeCollection<uhdm::RefModule>();
+              subModules = m_compileDesign->getSerializer().makeCollection<uhdm::RefModule>();
               m_module->setRefModules(subModules);
             }
             for (auto mod : result.second) {
@@ -885,12 +837,10 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paInitial_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::Initial* init = m_helper.compileInitialBlock(
-              m_module, fC, id, m_module->getUhdmModel());
+          uhdm::Initial* init = m_helper.compileInitialBlock(m_module, fC, id, m_module->getUhdmModel());
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(init);
@@ -898,12 +848,10 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paFinal_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::FinalStmt* final = m_helper.compileFinalBlock(
-              m_module, fC, id, m_module->getUhdmModel());
+          uhdm::FinalStmt* final = m_helper.compileFinalBlock(m_module, fC, id, m_module->getUhdmModel());
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(final);
@@ -913,8 +861,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType != CollectType::DEFINITION) break;
           NodeId sibling = fC->Sibling(id);
           if (!sibling) {
-            if (fC->Type(fC->Parent(id)) != VObjectType::paModule_declaration)
-              break;
+            if (fC->Type(fC->Parent(id)) != VObjectType::paModule_declaration) break;
             const std::string_view endLabel = fC->SymName(id);
             m_module->setEndLabel(endLabel);
             std::string_view moduleName = m_module->getName();
@@ -922,14 +869,10 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
             moduleName = StringUtils::ltrim_until(moduleName, ':');
             moduleName = StringUtils::ltrim_until(moduleName, ':');
             if (endLabel != moduleName) {
-              Location loc(fC->getFileId(m_module->getNodeIds()[0]),
-                           fC->Line(m_module->getNodeIds()[0]),
-                           fC->Column(m_module->getNodeIds()[0]),
-                           symbols->registerSymbol(moduleName));
-              Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                            symbols->registerSymbol(endLabel));
-              errors->addError(ErrorDefinition::COMP_UNMATCHED_LABEL, loc,
-                               loc2);
+              Location loc(fC->getFileId(m_module->getNodeIds()[0]), fC->Line(m_module->getNodeIds()[0]),
+                           fC->Column(m_module->getNodeIds()[0]), symbols->registerSymbol(moduleName));
+              Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id), symbols->registerSymbol(endLabel));
+              errors->addError(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
             }
           }
           break;
@@ -939,8 +882,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          if (uhdm::AnyCollection* vars = m_helper.compileGenVars(
-                  m_module, fC, id, m_module->getUhdmModel())) {
+          if (uhdm::AnyCollection* vars = m_helper.compileGenVars(m_module, fC, id, m_module->getUhdmModel())) {
             if (m_module->getGenVars() == nullptr) {
               m_module->setGenVars(vars);
             } else {
@@ -960,8 +902,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          if (uhdm::AnyCollection* stmts = m_helper.compileGenStmt(
-                  m_module, fC, id, m_module->getUhdmModel())) {
+          if (uhdm::AnyCollection* stmts = m_helper.compileGenStmt(m_module, fC, id, m_module->getUhdmModel())) {
             if (m_module->getGenStmts() == nullptr) {
               m_module->setGenStmts(stmts);
             } else {
@@ -972,13 +913,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           }
           break;
         }
-        default:
-          break;
+        default: break;
       }
 
       if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-      if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(),
-                                      type) == stopPoints.cend())) {
+      if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(), type) == stopPoints.cend())) {
         if (const NodeId childId = fC->Child(id)) {
           stack.emplace(childId);
         }
@@ -1004,20 +943,19 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
 }
 
 bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
-  std::vector<VObjectType> stopPoints = {
-      VObjectType::paConditional_generate_construct,
-      VObjectType::paGenerate_module_conditional_statement,
-      VObjectType::paGenerate_interface_conditional_statement,
-      VObjectType::paLoop_generate_construct,
-      VObjectType::paGenerate_module_loop_statement,
-      VObjectType::paGenerate_interface_loop_statement,
-      VObjectType::paPar_block,
-      VObjectType::paSeq_block,
-      VObjectType::paModule_declaration,
-      VObjectType::paInterface_declaration,
-      VObjectType::paClass_declaration,
-      VObjectType::paFunction_body_declaration,
-      VObjectType::paTask_body_declaration};
+  std::vector<VObjectType> stopPoints = {VObjectType::paConditional_generate_construct,
+                                         VObjectType::paGenerate_module_conditional_statement,
+                                         VObjectType::paGenerate_interface_conditional_statement,
+                                         VObjectType::paLoop_generate_construct,
+                                         VObjectType::paGenerate_module_loop_statement,
+                                         VObjectType::paGenerate_interface_loop_statement,
+                                         VObjectType::paPar_block,
+                                         VObjectType::paSeq_block,
+                                         VObjectType::paModule_declaration,
+                                         VObjectType::paInterface_declaration,
+                                         VObjectType::paClass_declaration,
+                                         VObjectType::paFunction_body_declaration,
+                                         VObjectType::paTask_body_declaration};
   if (collectType == CollectType::GENERATE_REGIONS) {
     if (m_instance != nullptr) {
       stopPoints.emplace_back(VObjectType::paGenerate_region);
@@ -1078,17 +1016,15 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           ParameterPortListId = id;
           NodeId list_of_param_assignments = fC->Child(id);
           while (list_of_param_assignments) {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_param_assignments, false, m_instance,
-                false, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_param_assignments, false, m_instance, false,
+                                                 false);
             list_of_param_assignments = fC->Sibling(list_of_param_assignments);
           }
           break;
         }
         case VObjectType::paPort_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compilePortDeclaration(m_module, fC, id, port_direction,
-                                          m_hasNonNullPort);
+          m_helper.compilePortDeclaration(m_module, fC, id, port_direction, m_hasNonNullPort);
           m_attributes = nullptr;
           break;
         }
@@ -1122,11 +1058,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::paContinuous_assign: {
           if (collectType != CollectType::OTHER) break;
           uhdm::ContAssignCollection assigns =
-              m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
-                                                   nullptr, m_instance);
+              m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id), nullptr, m_instance);
           if (m_module->getContAssigns() == nullptr) {
-            m_module->setContAssigns(m_compileDesign->getSerializer()
-                                         .makeCollection<uhdm::ContAssign>());
+            m_module->setContAssigns(m_compileDesign->getSerializer().makeCollection<uhdm::ContAssign>());
           }
           for (auto assign : assigns) {
             m_module->getContAssigns()->emplace_back(assign);
@@ -1135,12 +1069,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paAlways_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::Always* always = m_helper.compileAlwaysBlock(
-              m_module, fC, id, m_module->getUhdmModel(), m_instance);
+          uhdm::Always* always = m_helper.compileAlwaysBlock(m_module, fC, id, m_module->getUhdmModel(), m_instance);
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(always);
@@ -1176,15 +1108,12 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::paModule_instantiation:
         case VObjectType::paProgram_instantiation: {
           if (collectType != CollectType::OTHER) break;
-          std::pair<std::vector<uhdm::ModuleArray*>,
-                    std::vector<uhdm::RefModule*>>
-              result = m_helper.compileInstantiation(
-                  m_module, fC, m_module->getUhdmModel(), id, m_instance);
+          std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>> result =
+              m_helper.compileInstantiation(m_module, fC, m_module->getUhdmModel(), id, m_instance);
           if (!result.first.empty()) {
             auto subModuleArrays = m_module->getModuleArrays();
             if (subModuleArrays == nullptr) {
-              subModuleArrays = m_compileDesign->getSerializer()
-                                    .makeCollection<uhdm::ModuleArray>();
+              subModuleArrays = m_compileDesign->getSerializer().makeCollection<uhdm::ModuleArray>();
               m_module->setModuleArrays(subModuleArrays);
             }
             for (auto mod : result.first) {
@@ -1194,8 +1123,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           if (!result.second.empty()) {
             auto subModules = m_module->getRefModules();
             if (subModules == nullptr) {
-              subModules = m_compileDesign->getSerializer()
-                               .makeCollection<uhdm::RefModule>();
+              subModules = m_compileDesign->getSerializer().makeCollection<uhdm::RefModule>();
               m_module->setRefModules(subModules);
             }
             for (auto mod : result.second) {
@@ -1216,23 +1144,20 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           VObjectTypeUnorderedSet types = {VObjectType::paModport_item};
           std::vector<NodeId> items = fC->sl_collect_all(id, types);
           for (auto& nodeId : items) {
-            Location loc(fC->getFileId(nodeId), fC->Line(nodeId),
-                         fC->Column(nodeId));
+            Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId));
             errors->addError(ErrorDefinition::COMP_NO_MODPORT_IN_GENERATE, loc);
           }
           break;
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
-              m_module, fC, id, nullptr, m_instance);
+          uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(m_module, fC, id, nullptr, m_instance);
           m_module->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
-              m_module, fC, id, nullptr, m_instance);
+          uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(m_module, fC, id, nullptr, m_instance);
           m_module->addSequenceDecl(decl);
           break;
         }
@@ -1260,8 +1185,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             while (modport_ports_declaration) {
               NodeId port_declaration = fC->Child(modport_ports_declaration);
               VObjectType port_declaration_type = fC->Type(port_declaration);
-              if (port_declaration_type ==
-                  VObjectType::paModport_simple_ports_declaration) {
+              if (port_declaration_type == VObjectType::paModport_simple_ports_declaration) {
                 NodeId port_direction = fC->Child(port_declaration);
                 port_direction_type = fC->Type(port_direction);
                 NodeId modport_simple_port = fC->Sibling(port_direction);
@@ -1270,8 +1194,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                   SymbolId port_symbol = fC->Name(simple_port_name);
                   bool port_exists = false;
                   for (auto& port : m_module->m_signals) {
-                    if (port->getFileContent()->Name(port->getNameId()) ==
-                        port_symbol) {
+                    if (port->getFileContent()->Name(port->getNameId()) == port_symbol) {
                       port_exists = true;
                       break;
                     }
@@ -1280,63 +1203,44 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                   if (!Expression) {
                     // If expression is not null, we cannot conclude here
                     if (!port_exists) {
-                      Location loc(fC->getFileId(simple_port_name),
-                                   fC->Line(simple_port_name),
+                      Location loc(fC->getFileId(simple_port_name), fC->Line(simple_port_name),
                                    fC->Column(simple_port_name),
-                                   symbols->registerSymbol(
-                                       fC->SymName(simple_port_name)));
-                      errors->addError(
-                          ErrorDefinition::COMP_MODPORT_UNDEFINED_PORT, loc);
+                                   symbols->registerSymbol(fC->SymName(simple_port_name)));
+                      errors->addError(ErrorDefinition::COMP_MODPORT_UNDEFINED_PORT, loc);
                     }
                   }
-                  Signal signal(
-                      m_module, fC, port_declaration, simple_port_name,
-                      VObjectType::paData_type_or_implicit, port_direction_type,
-                      InvalidNodeId, InvalidNodeId, false);
-                  const std::string modportName =
-                      StrCat(m_module->getName(), ".", modportsymb);
+                  Signal signal(m_module, fC, port_declaration, simple_port_name, VObjectType::paData_type_or_implicit,
+                                port_direction_type, InvalidNodeId, InvalidNodeId, false);
+                  const std::string modportName = StrCat(m_module->getName(), ".", modportsymb);
                   m_module->insertModport(modportName, signal, id);
                   modport_simple_port = fC->Sibling(modport_simple_port);
                 }
-              } else if (port_declaration_type ==
-                         VObjectType::
-                             paModport_hierarchical_ports_declaration) {
-              } else if (port_declaration_type ==
-                         VObjectType::paModport_tf_ports_declaration) {
+              } else if (port_declaration_type == VObjectType::paModport_hierarchical_ports_declaration) {
+              } else if (port_declaration_type == VObjectType::paModport_tf_ports_declaration) {
               } else {
                 // CLOCKING
                 NodeId clocking_block_name = port_declaration;
-                SymbolId clocking_block_symbol =
-                    symbols->registerSymbol(fC->SymName(clocking_block_name));
-                ClockingBlock* cb =
-                    m_module->getClockingBlock(clocking_block_symbol);
+                SymbolId clocking_block_symbol = symbols->registerSymbol(fC->SymName(clocking_block_name));
+                ClockingBlock* cb = m_module->getClockingBlock(clocking_block_symbol);
                 if (cb == nullptr) {
-                  Location loc(fC->getFileId(clocking_block_name),
-                               fC->Line(clocking_block_name),
-                               fC->Column(clocking_block_name),
-                               clocking_block_symbol);
-                  errors->addError(
-                      ErrorDefinition::COMP_MODPORT_UNDEFINED_CLOCKING_BLOCK,
-                      loc);
+                  Location loc(fC->getFileId(clocking_block_name), fC->Line(clocking_block_name),
+                               fC->Column(clocking_block_name), clocking_block_symbol);
+                  errors->addError(ErrorDefinition::COMP_MODPORT_UNDEFINED_CLOCKING_BLOCK, loc);
                 } else {
-                  const std::string modportName =
-                      StrCat(m_module->getName(), ".", modportsymb);
+                  const std::string modportName = StrCat(m_module->getName(), ".", modportsymb);
                   m_module->insertModport(modportName, *cb);
                 }
               }
-              modport_ports_declaration =
-                  fC->Sibling(modport_ports_declaration);
+              modport_ports_declaration = fC->Sibling(modport_ports_declaration);
             }
           }
           break;
         case VObjectType::paInitial_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::Initial* init = m_helper.compileInitialBlock(
-              m_module, fC, id, m_module->getUhdmModel());
+          uhdm::Initial* init = m_helper.compileInitialBlock(m_module, fC, id, m_module->getUhdmModel());
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(init);
@@ -1344,12 +1248,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paFinal_construct: {
           if (collectType != CollectType::OTHER) break;
-          uhdm::FinalStmt* final = m_helper.compileFinalBlock(
-              m_module, fC, id, m_module->getUhdmModel());
+          uhdm::FinalStmt* final = m_helper.compileFinalBlock(m_module, fC, id, m_module->getUhdmModel());
           uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(m_compileDesign->getSerializer()
-                                       .makeCollection<uhdm::Process>());
+            m_module->setProcesses(m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->emplace_back(final);
@@ -1359,35 +1261,28 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           if (collectType != CollectType::DEFINITION) break;
 
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, false, m_instance,
-                ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_type_assignments, false, m_instance,
+                                                 ParameterPortListId, false);
 
           } else {
-            m_helper.compileParameterDeclaration(m_module, fC, id, false,
-                                                 m_instance,
-                                                 ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, id, false, m_instance, ParameterPortListId, false);
           }
           break;
         }
         case VObjectType::paLocal_parameter_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(
-                m_module, fC, list_of_type_assignments, true, m_instance,
-                ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, list_of_type_assignments, true, m_instance,
+                                                 ParameterPortListId, false);
 
           } else {
-            m_helper.compileParameterDeclaration(
-                m_module, fC, id, true, m_instance, ParameterPortListId, false);
+            m_helper.compileParameterDeclaration(m_module, fC, id, true, m_instance, ParameterPortListId, false);
           }
           break;
         }
@@ -1420,14 +1315,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             moduleName = StringUtils::ltrim_until(moduleName, ':');
             moduleName = StringUtils::ltrim_until(moduleName, ':');
             if (endLabel != moduleName) {
-              Location loc(fC->getFileId(m_module->getNodeIds()[0]),
-                           fC->Line(m_module->getNodeIds()[0]),
-                           fC->Column(m_module->getNodeIds()[0]),
-                           symbols->registerSymbol(moduleName));
-              Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                            symbols->registerSymbol(endLabel));
-              errors->addError(ErrorDefinition::COMP_UNMATCHED_LABEL, loc,
-                               loc2);
+              Location loc(fC->getFileId(m_module->getNodeIds()[0]), fC->Line(m_module->getNodeIds()[0]),
+                           fC->Column(m_module->getNodeIds()[0]), symbols->registerSymbol(moduleName));
+              Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id), symbols->registerSymbol(endLabel));
+              errors->addError(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
             }
           }
           break;
@@ -1437,8 +1328,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          if (uhdm::AnyCollection* vars = m_helper.compileGenVars(
-                  m_module, fC, id, m_module->getUhdmModel())) {
+          if (uhdm::AnyCollection* vars = m_helper.compileGenVars(m_module, fC, id, m_module->getUhdmModel())) {
             if (m_module->getGenVars() == nullptr) {
               m_module->setGenVars(vars);
             } else {
@@ -1458,8 +1348,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          if (uhdm::AnyCollection* stmts = m_helper.compileGenStmt(
-                  m_module, fC, id, m_module->getUhdmModel())) {
+          if (uhdm::AnyCollection* stmts = m_helper.compileGenStmt(m_module, fC, id, m_module->getUhdmModel())) {
             if (m_module->getGenStmts() == nullptr) {
               m_module->setGenStmts(stmts);
             } else {
@@ -1470,13 +1359,11 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           }
           break;
         }
-        default:
-          break;
+        default: break;
       }
 
       if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-      if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(),
-                                      type) == stopPoints.cend())) {
+      if (!skipChildren && (std::find(stopPoints.cbegin(), stopPoints.cend(), type) == stopPoints.cend())) {
         if (const NodeId childId = fC->Child(id)) {
           stack.emplace(childId);
         }
@@ -1521,55 +1408,42 @@ bool CompileModule::checkModule_() {
       }
     }
     if (port->getType() == VObjectType::paData_type_or_implicit) {
-      if (port->getDirection() == VObjectType::paPortDir_Out ||
-          port->getDirection() == VObjectType::paPortDir_Inout) {
+      if (port->getDirection() == VObjectType::paPortDir_Out || port->getDirection() == VObjectType::paPortDir_Inout) {
         if (countMissingType == 0)
-          missingTypeLoc = new Location(
-              fileSystem->copy(
-                  port->getFileContent()->getFileId(port->getNameId()),
-                  symbols),
-              port->getFileContent()->Line(port->getNameId()),
-              port->getFileContent()->Column(port->getNameId()),
-              symbols->registerSymbol(port->getName()));
+          missingTypeLoc =
+              new Location(fileSystem->copy(port->getFileContent()->getFileId(port->getNameId()), symbols),
+                           port->getFileContent()->Line(port->getNameId()),
+                           port->getFileContent()->Column(port->getNameId()), symbols->registerSymbol(port->getName()));
         countMissingType++;
       }
     }
     if (port->getDirection() == VObjectType::NO_TYPE) {
       if (countMissingDirection == 0)
-        missingDirectionLoc = new Location(
-            fileSystem->copy(
-                port->getFileContent()->getFileId(port->getNameId()), symbols),
-            port->getFileContent()->Line(port->getNameId()),
-            port->getFileContent()->Column(port->getNameId()),
-            symbols->registerSymbol(port->getName()));
+        missingDirectionLoc =
+            new Location(fileSystem->copy(port->getFileContent()->getFileId(port->getNameId()), symbols),
+                         port->getFileContent()->Line(port->getNameId()),
+                         port->getFileContent()->Column(port->getNameId()), symbols->registerSymbol(port->getName()));
       countMissingDirection++;
     }
   }
   if (countMissingType) {
-    Location countLoc(
-        symbols->registerSymbol(std::to_string(countMissingType - 1)));
+    Location countLoc(symbols->registerSymbol(std::to_string(countMissingType - 1)));
     if (countMissingType - 1 > 0) {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc,
-                       countLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc, countLoc);
     } else {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE,
-                       *missingTypeLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc);
     }
     delete missingTypeLoc;
   }
   if (countMissingDirection) {
-    Location countLoc(
-        symbols->registerSymbol(std::to_string(countMissingDirection - 1)));
+    Location countLoc(symbols->registerSymbol(std::to_string(countMissingDirection - 1)));
     if (countMissingDirection - 1 > 0) {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_DIRECTION,
-                       *missingDirectionLoc, countLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_DIRECTION, *missingDirectionLoc, countLoc);
     } else {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_DIRECTION,
-                       *missingDirectionLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_DIRECTION, *missingDirectionLoc);
     }
     if (countMissingType) {
-      errors->addError(ErrorDefinition::COMP_UNSPECIFIED_PORT,
-                       *missingDirectionLoc);
+      errors->addError(ErrorDefinition::COMP_UNSPECIFIED_PORT, *missingDirectionLoc);
     }
     delete missingDirectionLoc;
   }
@@ -1585,28 +1459,21 @@ bool CompileModule::checkInterface_() {
   Location* missingTypeLoc = nullptr;
   for (auto& port : m_module->m_ports) {
     if (port->getType() == VObjectType::paData_type_or_implicit) {
-      if (port->getDirection() == VObjectType::paPortDir_Out ||
-          port->getDirection() == VObjectType::paPortDir_Inout) {
+      if (port->getDirection() == VObjectType::paPortDir_Out || port->getDirection() == VObjectType::paPortDir_Inout) {
         if (countMissingType == 0)
-          missingTypeLoc = new Location(
-              fileSystem->copy(
-                  port->getFileContent()->getFileId(port->getNodeId()),
-                  symbols),
-              port->getFileContent()->Line(port->getNodeId()), 0,
-              symbols->registerSymbol(port->getName()));
+          missingTypeLoc = new Location(fileSystem->copy(port->getFileContent()->getFileId(port->getNodeId()), symbols),
+                                        port->getFileContent()->Line(port->getNodeId()), 0,
+                                        symbols->registerSymbol(port->getName()));
         countMissingType++;
       }
     }
   }
   if (countMissingType) {
-    Location countLoc(
-        symbols->registerSymbol(std::to_string(countMissingType - 1)));
+    Location countLoc(symbols->registerSymbol(std::to_string(countMissingType - 1)));
     if (countMissingType - 1 > 0) {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc,
-                       countLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc, countLoc);
     } else {
-      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE,
-                       *missingTypeLoc);
+      errors->addError(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc);
     }
     delete missingTypeLoc;
   }
@@ -1644,12 +1511,10 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
     clocking_event = fC->Sibling(clocking_block_name);
   }
   if (clocking_block_name)
-    clocking_block_symbol =
-        symbols->registerSymbol(fC->SymName(clocking_block_name));
+    clocking_block_symbol = symbols->registerSymbol(fC->SymName(clocking_block_name));
   else
     clocking_block_symbol = symbols->registerSymbol("unnamed_clocking_block");
-  uhdm::ClockingBlock* cblock =
-      m_helper.compileClockingBlock(m_module, fC, id, nullptr, m_instance);
+  uhdm::ClockingBlock* cblock = m_helper.compileClockingBlock(m_module, fC, id, nullptr, m_instance);
   ClockingBlock cb(fC, clocking_block_type, clocking_event, type, cblock);
   m_module->addClockingBlock(clocking_block_symbol, cb);
 }

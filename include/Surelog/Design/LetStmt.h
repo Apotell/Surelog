@@ -40,8 +40,7 @@ class FileContent;
 
 class LetStmt final {
  public:
-  LetStmt(uhdm::LetDecl* decl, uhdm::SeqFormalDeclCollection* ios,
-          uhdm::Expr* expr)
+  LetStmt(uhdm::LetDecl* decl, uhdm::SeqFormalDeclCollection* ios, uhdm::Expr* expr)
       : m_decl(decl), m_ios(ios), m_expr(expr) {}
   ~LetStmt() = default;
   const uhdm::LetDecl* getDecl() { return m_decl; }

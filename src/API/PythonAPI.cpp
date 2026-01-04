@@ -68,15 +68,8 @@ bool PythonAPI::m_strictMode = false;
 std::filesystem::path PythonAPI::m_builtinPath;
 
 #ifdef SURELOG_WITH_PYTHON
-static struct PyModuleDef SLAPI_module = {PyModuleDef_HEAD_INIT,
-                                          "slapi",
-                                          nullptr,
-                                          -1,
-                                          SwigMethods,
-                                          nullptr,
-                                          nullptr,
-                                          nullptr,
-                                          nullptr};
+static struct PyModuleDef SLAPI_module = {
+    PyModuleDef_HEAD_INIT, "slapi", nullptr, -1, SwigMethods, nullptr, nullptr, nullptr, nullptr};
 
 static PyObject* PyInit_slapi() { return PyModule_Create(&SLAPI_module); }
 #endif
@@ -111,9 +104,7 @@ bool PythonAPI::loadScript_(const std::filesystem::path& name, bool check) {
     fclose(fp);
     return true;
   } else {
-    if (check)
-      std::cerr << "PYTHON API ERROR: Script \"" << name
-                << "\" does not exist.\n";
+    if (check) std::cerr << "PYTHON API ERROR: Script \"" << name << "\" does not exist.\n";
   }
 #endif
   return false;
@@ -157,8 +148,7 @@ void PythonAPI::loadScriptsInInterp_() {
 
   bool waiverLoaded = false;
   std::filesystem::path waivers = workingDir / "slwaivers.py";
-  PathId waiversId =
-      m_fileSystem->toPathId(waivers.string(), symbolTable.get());
+  PathId waiversId = m_fileSystem->toPathId(waivers.string(), symbolTable.get());
   if (m_fileSystem->isRegularFile(waiversId)) {
     waiverLoaded = loadScript_(waivers);
   }
@@ -187,8 +177,7 @@ void PythonAPI::loadScriptsInInterp_() {
   }
 
   if (!m_listenerScript.empty()) {
-    PathId listenerId =
-        m_fileSystem->toPathId(m_listenerScript.string(), symbolTable.get());
+    PathId listenerId = m_fileSystem->toPathId(m_listenerScript.string(), symbolTable.get());
     if (m_fileSystem->isRegularFile(listenerId)) {
       m_listenerLoaded = loadScript_(m_listenerScript);
     }
@@ -196,8 +185,7 @@ void PythonAPI::loadScriptsInInterp_() {
 
   if (!m_listenerLoaded) {
     std::filesystem::path listener = workingDir / "slSV3_1aPythonListener.py";
-    PathId listenerId =
-        m_fileSystem->toPathId(listener.string(), symbolTable.get());
+    PathId listenerId = m_fileSystem->toPathId(listener.string(), symbolTable.get());
     if (m_fileSystem->isRegularFile(listenerId)) {
       m_listenerScript = listener;
       m_listenerLoaded = loadScript_(listener);
@@ -205,10 +193,8 @@ void PythonAPI::loadScriptsInInterp_() {
   }
 
   if (!m_listenerLoaded) {
-    std::filesystem::path listener =
-        m_programPath / "python" / "slSV3_1aPythonListener.py";
-    PathId listenerId =
-        m_fileSystem->toPathId(listener.string(), symbolTable.get());
+    std::filesystem::path listener = m_programPath / "python" / "slSV3_1aPythonListener.py";
+    PathId listenerId = m_fileSystem->toPathId(listener.string(), symbolTable.get());
     if (m_fileSystem->isRegularFile(listenerId)) {
       m_listenerScript = listener;
       m_listenerLoaded = loadScript_(listener);
@@ -241,9 +227,7 @@ void PythonAPI::initInterp_() {
 
   PyRun_SimpleString("import sys");
   PyRun_SimpleString("sys.path.append(\".\")");
-  PyRun_SimpleString(
-      std::string("sys.path.append(\"" + m_programPath.string() + "\")")
-          .c_str());
+  PyRun_SimpleString(std::string("sys.path.append(\"" + m_programPath.string() + "\")").c_str());
 #endif
 }
 
@@ -278,9 +262,7 @@ void PythonAPI::init(int32_t argc, const char** argv) {
 #endif
 }
 
-void PythonAPI::evalScript(const std::string& function,
-                           SV3_1aPythonListener* listener,
-                           parser_rule_context* ctx1) {
+void PythonAPI::evalScript(const std::string& function, SV3_1aPythonListener* listener, parser_rule_context* ctx1) {
 #ifdef SURELOG_WITH_PYTHON
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)ctx1;
   PyEval_AcquireThread(listener->getPyThreadState());
@@ -291,18 +273,14 @@ void PythonAPI::evalScript(const std::string& function,
   Py_DECREF(pModuleName);
   pFunc = PyObject_GetAttrString(pModule, function.c_str());
   if (!pFunc || !PyCallable_Check(pFunc)) {
-    if (m_strictMode)
-      std::cout << "PYTHON API ERROR: Function \"" << function
-                << "\" does not exist.\n";
+    if (m_strictMode) std::cout << "PYTHON API ERROR: Function \"" << function << "\" does not exist.\n";
     PyEval_ReleaseThread(listener->getPyThreadState());
     return;
   }
   pArgs = PyTuple_New(2);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(listener),
-                              SWIGTYPE_p_SURELOG__SV3_1aPythonListener, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(listener), SWIGTYPE_p_SURELOG__SV3_1aPythonListener, 0 | 0);
   PyTuple_SetItem(pArgs, 0, pValue);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(ctx),
-                              SWIGTYPE_p_antlr4__ParserRuleContext, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(ctx), SWIGTYPE_p_antlr4__ParserRuleContext, 0 | 0);
   PyTuple_SetItem(pArgs, 1, pValue);
   PyObject_CallObject(pFunc, pArgs);
   PyErr_Print();
@@ -313,10 +291,8 @@ void PythonAPI::evalScript(const std::string& function,
 #endif
 }
 
-std::string PythonAPI::evalScript(const std::string& module,
-                                  const std::string& function,
-                                  const std::vector<std::string>& args,
-                                  PyThreadState* interp) {
+std::string PythonAPI::evalScript(const std::string& module, const std::string& function,
+                                  const std::vector<std::string>& args, PyThreadState* interp) {
 #ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(interp);
 
@@ -359,15 +335,13 @@ std::string PythonAPI::evalScript(const std::string& module,
         Py_DECREF(pFunc);
         Py_DECREF(pModule);
         PyErr_Print();
-        std::cout << "PYTHON API ERROR: Incorrect function evaluation: "
-                  << function << std::endl;
+        std::cout << "PYTHON API ERROR: Incorrect function evaluation: " << function << std::endl;
         PyEval_ReleaseThread(interp);
         return m_invalidScriptResult;
       }
     } else {
       if (PyErr_Occurred()) PyErr_Print();
-      std::cout << "PYTHON API ERROR: Cannot find function " << function
-                << std::endl;
+      std::cout << "PYTHON API ERROR: Cannot find function " << function << std::endl;
 
       PyEval_ReleaseThread(interp);
       return m_invalidScriptResult;
@@ -387,8 +361,7 @@ std::string PythonAPI::evalScript(const std::string& module,
 #endif
 }
 
-bool PythonAPI::evalScriptPerFile(const std::filesystem::path& script,
-                                  ErrorContainer* errors, FileContent* fC,
+bool PythonAPI::evalScriptPerFile(const std::filesystem::path& script, ErrorContainer* errors, FileContent* fC,
                                   PyThreadState* interp) {
 #ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(interp);
@@ -401,17 +374,14 @@ bool PythonAPI::evalScriptPerFile(const std::filesystem::path& script,
   Py_DECREF(pModuleName);
   pFunc = PyObject_GetAttrString(pModule, function.c_str());
   if (!pFunc || !PyCallable_Check(pFunc)) {
-    std::cout << "PYTHON API ERROR: Function \"" << function
-              << "\" does not exist.\n";
+    std::cout << "PYTHON API ERROR: Function \"" << function << "\" does not exist.\n";
     PyEval_ReleaseThread(interp);
     return false;
   }
   pArgs = PyTuple_New(2);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(errors),
-                              SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(errors), SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
   PyTuple_SetItem(pArgs, 0, pValue);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(fC),
-                              SWIGTYPE_p_SURELOG__FileContent, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(fC), SWIGTYPE_p_SURELOG__FileContent, 0 | 0);
   PyTuple_SetItem(pArgs, 1, pValue);
 
   PyObject_CallObject(pFunc, pArgs);
@@ -427,8 +397,7 @@ bool PythonAPI::evalScriptPerFile(const std::filesystem::path& script,
 #endif
 }
 
-bool PythonAPI::evalScript(const std::filesystem::path& script,
-                           Design* design) {
+bool PythonAPI::evalScript(const std::filesystem::path& script, Design* design) {
 #ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(m_mainThreadState);
   loadScript_(script);
@@ -440,17 +409,15 @@ bool PythonAPI::evalScript(const std::filesystem::path& script,
   Py_DECREF(pModuleName);
   pFunc = PyObject_GetAttrString(pModule, function.c_str());
   if (!pFunc || !PyCallable_Check(pFunc)) {
-    std::cout << "PYTHON API ERROR: Function \"" << function
-              << "\" does not exist.\n";
+    std::cout << "PYTHON API ERROR: Function \"" << function << "\" does not exist.\n";
     PyEval_ReleaseThread(m_mainThreadState);
     return false;
   }
   pArgs = PyTuple_New(2);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(m_session->getErrorContainer()),
-                              SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
+  pValue =
+      SWIG_NewPointerObj(SWIG_as_voidptr(m_session->getErrorContainer()), SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
   PyTuple_SetItem(pArgs, 0, pValue);
-  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(design),
-                              SWIGTYPE_p_SURELOG__Design, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(design), SWIGTYPE_p_SURELOG__Design, 0 | 0);
   PyTuple_SetItem(pArgs, 1, pValue);
   PyObject_CallObject(pFunc, pArgs);
   PyErr_Print();

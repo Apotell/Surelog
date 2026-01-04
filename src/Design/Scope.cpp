@@ -28,9 +28,7 @@
 
 namespace SURELOG {
 
-void Scope::addVariable(Variable* var) {
-  m_variables.emplace(var->getName(), var);
-}
+void Scope::addVariable(Variable* var) { m_variables.emplace(var->getName(), var); }
 
 Variable* Scope::getVariable(std::string_view name) {
   VariableMap::iterator itr = m_variables.find(name);

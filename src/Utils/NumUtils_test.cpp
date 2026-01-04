@@ -59,8 +59,7 @@ TEST(NumUtilsTest, ValidateRangeSigned32) {
   EXPECT_TRUE(NumUtils::parseInt32("2147483647", &value));
   EXPECT_EQ(value, 2147483647);
 
-  EXPECT_TRUE(
-      NumUtils::parseInt32(" +2147483647", &value));  // Leading space and +
+  EXPECT_TRUE(NumUtils::parseInt32(" +2147483647", &value));  // Leading space and +
   EXPECT_EQ(value, 2147483647);
 
   EXPECT_TRUE(NumUtils::parseInt32("-2147483648", &value));
@@ -97,10 +96,8 @@ TEST(NumUtilsTest, ValidateRangeSigned64) {
   EXPECT_TRUE(NumUtils::parseInt64("-9223372036854775808", &value));
   EXPECT_EQ(value, -9223372036854775807LL - 1);
 
-  EXPECT_FALSE(
-      NumUtils::parseInt64("9223372036854775808", &value));  // out of range.
-  EXPECT_FALSE(
-      NumUtils::parseInt64("-9223372036854775809", &value));  // out of range.
+  EXPECT_FALSE(NumUtils::parseInt64("9223372036854775808", &value));   // out of range.
+  EXPECT_FALSE(NumUtils::parseInt64("-9223372036854775809", &value));  // out of range.
 }
 
 TEST(NumUtilsTest, ValidateRangeUnsigned64) {
@@ -113,8 +110,7 @@ TEST(NumUtilsTest, ValidateRangeUnsigned64) {
   EXPECT_TRUE(NumUtils::parseUint64(" +18446744073709551615", &value));
   EXPECT_EQ(value, 18446744073709551615UL);
 
-  EXPECT_FALSE(
-      NumUtils::parseUint64("18446744073709551616", &value));  // out of range.
+  EXPECT_FALSE(NumUtils::parseUint64("18446744073709551616", &value));  // out of range.
 }
 
 TEST(NumUtilsTest, ParseLenientSigned32) {
@@ -158,10 +154,9 @@ TEST(NumUtilsTest, ParseLenientUnsigned32) {
   EXPECT_EQ(value, 4294967295);
 
   EXPECT_TRUE(NumUtils::parseIntLenient("-1", &value));  // Signed value
-  EXPECT_EQ(value, 4294967295);  // .. interpreted as all bits set
+  EXPECT_EQ(value, 4294967295);                          // .. interpreted as all bits set
 
-  EXPECT_TRUE(
-      NumUtils::parseIntLenient(" -1 ", &value));  // also recognize with space
+  EXPECT_TRUE(NumUtils::parseIntLenient(" -1 ", &value));  // also recognize with space
   EXPECT_EQ(value, 4294967295);
 
   // Full signed range allowed
@@ -197,10 +192,8 @@ TEST(NumUtilsTest, ParseLenientSigned64) {
   EXPECT_TRUE(NumUtils::parseIntLenient("18446744073709551615", &value));
   EXPECT_EQ(value, -1);  // ... that aliases into negative signed
 
-  EXPECT_FALSE(
-      NumUtils::parseIntLenient("-9223372036854775809", &value));  // range
-  EXPECT_FALSE(
-      NumUtils::parseIntLenient("18446744073709551616", &value));  // range
+  EXPECT_FALSE(NumUtils::parseIntLenient("-9223372036854775809", &value));  // range
+  EXPECT_FALSE(NumUtils::parseIntLenient("18446744073709551616", &value));  // range
 }
 
 TEST(NumUtilsTest, ParseLenientUnsigned64) {
@@ -218,10 +211,9 @@ TEST(NumUtilsTest, ParseLenientUnsigned64) {
   EXPECT_EQ(value, 18446744073709551615UL);
 
   EXPECT_TRUE(NumUtils::parseIntLenient("-1", &value));  // Signed value
-  EXPECT_EQ(value, 18446744073709551615UL);  // .. interpreted as all bits set
+  EXPECT_EQ(value, 18446744073709551615UL);              // .. interpreted as all bits set
 
-  EXPECT_TRUE(
-      NumUtils::parseIntLenient(" -1 ", &value));  // also recognize with space
+  EXPECT_TRUE(NumUtils::parseIntLenient(" -1 ", &value));  // also recognize with space
   EXPECT_EQ(value, 18446744073709551615UL);
 
   // Full signed range allowed
@@ -231,10 +223,8 @@ TEST(NumUtilsTest, ParseLenientUnsigned64) {
   EXPECT_TRUE(NumUtils::parseIntLenient("-9223372036854775808", &value));
   EXPECT_EQ(value, 9223372036854775808UL);
 
-  EXPECT_FALSE(
-      NumUtils::parseIntLenient("-9223372036854775809", &value));  // range
-  EXPECT_FALSE(
-      NumUtils::parseIntLenient("18446744073709551616", &value));  // range
+  EXPECT_FALSE(NumUtils::parseIntLenient("-9223372036854775809", &value));  // range
+  EXPECT_FALSE(NumUtils::parseIntLenient("18446744073709551616", &value));  // range
 }
 
 TEST(NumUtilsTest, ParseFloat) {

@@ -52,12 +52,8 @@
 
 namespace SURELOG {
 
-ParseLibraryDef::ParseLibraryDef(Session* session, LibrarySet* librarySet,
-                                 ConfigSet* configSet)
-    : m_session(session),
-      m_librarySet(librarySet),
-      m_configSet(configSet),
-      m_fileContent(nullptr) {}
+ParseLibraryDef::ParseLibraryDef(Session* session, LibrarySet* librarySet, ConfigSet* configSet)
+    : m_session(session), m_librarySet(librarySet), m_configSet(configSet), m_fileContent(nullptr) {}
 
 bool ParseLibraryDef::parseLibrariesDefinition() {
   // Get .map files from command line
@@ -79,8 +75,7 @@ bool ParseLibraryDef::parseLibrariesDefinition() {
 
   // Config files are parsed using the library top rule
   const PathIdVector& cfgFiles = clp->getConfigFiles();
-  libraryMapFiles.insert(libraryMapFiles.end(), cfgFiles.begin(),
-                         cfgFiles.end());
+  libraryMapFiles.insert(libraryMapFiles.end(), cfgFiles.begin(), cfgFiles.end());
 
   for (const PathId& fileId : libraryMapFiles) {
     parseLibraryDefinition(fileId);
@@ -126,8 +121,7 @@ bool ParseLibraryDef::parseLibraryDefinition(PathId fileId, Library* lib) {
   errors->addError(err);
   errors->printMessage(err, clp->muteStdout());
 
-  AntlrLibParserErrorListener* errorListener =
-      new AntlrLibParserErrorListener(m_session, this);
+  AntlrLibParserErrorListener* errorListener = new AntlrLibParserErrorListener(m_session, this);
   antlr4::ANTLRInputStream* inputStream = new antlr4::ANTLRInputStream(stream);
   SV3_1aLexer* lexer = new SV3_1aLexer(inputStream);
   lexer->removeErrorListeners();
@@ -139,8 +133,7 @@ bool ParseLibraryDef::parseLibraryDefinition(PathId fileId, Library* lib) {
   parser->addErrorListener(errorListener);
   antlr4::tree::ParseTree* m_tree = parser->top_level_library_rule();
 
-  SVLibShapeListener* listener =
-      new SVLibShapeListener(m_session, this, tokens);
+  SVLibShapeListener* listener = new SVLibShapeListener(m_session, this, tokens);
   m_fileContent = listener->getFileContent();
 
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(listener, m_tree);
@@ -173,19 +166,16 @@ bool ParseLibraryDef::parseConfigDefinition() {
   SymbolTable* const symbols = m_session->getSymbolTable();
 
   VObjectTypeUnorderedSet types = {VObjectType::paConfig_declaration};
-  std::vector<NodeId> configs =
-      m_fileContent->sl_collect_all(m_fileContent->getRootNode(), types);
+  std::vector<NodeId> configs = m_fileContent->sl_collect_all(m_fileContent->getRootNode(), types);
   for (auto& config : configs) {
     NodeId ident = m_fileContent->Child(config);
-    std::string name = StrCat(m_fileContent->getLibrary()->getName(), "@",
-                              m_fileContent->SymName(ident));
+    std::string name = StrCat(m_fileContent->getLibrary()->getName(), "@", m_fileContent->SymName(ident));
     symbols->registerSymbol(name);
     Config conf(name, m_fileContent, config);
 
     // Design clause
     VObjectTypeUnorderedSet designStmt = {VObjectType::paDesign_statement};
-    std::vector<NodeId> designs =
-        m_fileContent->sl_collect_all(config, designStmt);
+    std::vector<NodeId> designs = m_fileContent->sl_collect_all(config, designStmt);
     if (designs.empty()) {
       // TODO: Error
     } else if (designs.size() > 1) {
@@ -205,8 +195,7 @@ bool ParseLibraryDef::parseConfigDefinition() {
 
     // Default clause
     VObjectTypeUnorderedSet defaultStmt = {VObjectType::paDefault_clause};
-    std::vector<NodeId> defaults =
-        m_fileContent->sl_collect_all(config, defaultStmt);
+    std::vector<NodeId> defaults = m_fileContent->sl_collect_all(config, defaultStmt);
     if (!defaults.empty()) {
       NodeId defaultClause = defaults[0];
       NodeId libList = m_fileContent->Sibling(defaultClause);
@@ -220,15 +209,12 @@ bool ParseLibraryDef::parseConfigDefinition() {
     }
 
     // Instance and Cell clauses
-    VObjectTypeUnorderedSet instanceStmt = {VObjectType::paInst_clause,
-                                            VObjectType::paCell_clause};
-    std::vector<NodeId> instances =
-        m_fileContent->sl_collect_all(config, instanceStmt);
+    VObjectTypeUnorderedSet instanceStmt = {VObjectType::paInst_clause, VObjectType::paCell_clause};
+    std::vector<NodeId> instances = m_fileContent->sl_collect_all(config, instanceStmt);
     for (auto& inst : instances) {
       VObjectType type = m_fileContent->Type(inst);
       NodeId instName = m_fileContent->Child(inst);
-      if (type == VObjectType::paInst_clause)
-        instName = m_fileContent->Child(instName);
+      if (type == VObjectType::paInst_clause) instName = m_fileContent->Child(instName);
       std::string instNameS;
       while (instName) {
         if (instNameS.empty())
@@ -274,8 +260,7 @@ bool ParseLibraryDef::parseConfigDefinition() {
           else
             conf.addCellUseClause(instNameS, usec);
         }
-      } else if (m_fileContent->Type(instClause) ==
-                 VObjectType::paUse_clause_config) {
+      } else if (m_fileContent->Type(instClause) == VObjectType::paUse_clause_config) {
         NodeId use = m_fileContent->Child(instClause);
         std::string useName;
         NodeId mem = use;

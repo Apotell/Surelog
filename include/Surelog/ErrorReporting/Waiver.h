@@ -45,26 +45,21 @@ class Waiver final {
 
   static bool macroArgCheck(std::string_view name);
 
-  static void setWaiver(std::string_view messageId, std::string_view fileName,
-                        uint32_t line, std::string_view objectName);
+  static void setWaiver(std::string_view messageId, std::string_view fileName, uint32_t line,
+                        std::string_view objectName);
 
   class WaiverData {
    public:
-    WaiverData(ErrorDefinition::ErrorType messageId, std::string_view fileName,
-               uint32_t line, std::string_view objectName)
-        : m_messageId(messageId),
-          m_fileName(fileName),
-          m_line(line),
-          m_objectId(objectName) {}
+    WaiverData(ErrorDefinition::ErrorType messageId, std::string_view fileName, uint32_t line,
+               std::string_view objectName)
+        : m_messageId(messageId), m_fileName(fileName), m_line(line), m_objectId(objectName) {}
     const ErrorDefinition::ErrorType m_messageId;
     const std::string m_fileName;
     const uint32_t m_line;
     const std::string m_objectId;
   };
 
-  static std::multimap<ErrorDefinition::ErrorType, WaiverData>& getWaivers() {
-    return m_waivers;
-  }
+  static std::multimap<ErrorDefinition::ErrorType, WaiverData>& getWaivers() { return m_waivers; }
 
  private:
   static std::set<std::string, std::less<>> m_macroArgCheck;

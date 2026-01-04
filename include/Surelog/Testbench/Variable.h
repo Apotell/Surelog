@@ -37,13 +37,8 @@ class FileContent;
 
 class Variable {
  public:
-  Variable(const DataType* dataType, const FileContent* fc, NodeId varId,
-           NodeId range, std::string_view name)
-      : m_dataType(dataType),
-        m_fc(fc),
-        m_nodeId(varId),
-        m_range(range),
-        m_name(name) {}
+  Variable(const DataType* dataType, const FileContent* fc, NodeId varId, NodeId range, std::string_view name)
+      : m_dataType(dataType), m_fc(fc), m_nodeId(varId), m_range(range), m_name(name) {}
   Variable(const Variable&) = delete;
   virtual ~Variable() = default;
 

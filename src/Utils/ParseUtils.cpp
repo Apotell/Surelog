@@ -34,8 +34,7 @@ namespace SURELOG {
 
 LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
   const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
-  const uint16_t columnNb =
-      static_cast<uint16_t>(token->getCharPositionInLine() + 1);
+  const uint16_t columnNb = static_cast<uint16_t>(token->getCharPositionInLine() + 1);
   return {lineNb, columnNb};
 }
 
@@ -44,45 +43,34 @@ LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
   const size_t pos = text.rfind('\n');
   if (pos == std::string::npos) {
     const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
-    const uint16_t columnNb = static_cast<uint16_t>(
-        token->getCharPositionInLine() + token->getStopIndex() -
-        token->getStartIndex() + 1 + 1);
+    const uint16_t columnNb =
+        static_cast<uint16_t>(token->getCharPositionInLine() + token->getStopIndex() - token->getStartIndex() + 1 + 1);
     return {lineNb, columnNb};
   } else {
-    const uint32_t lineNb = static_cast<uint32_t>(token->getLine()) +
-                            std::count(text.begin(), text.end(), '\n');
+    const uint32_t lineNb = static_cast<uint32_t>(token->getLine()) + std::count(text.begin(), text.end(), '\n');
     const uint16_t columnNb = static_cast<uint16_t>(text.length() - pos);
     return {lineNb, columnNb};
   }
 }
 
-LineColumn ParseUtils::getLineColumn(antlr4::tree::TerminalNode* node) {
-  return getLineColumn(node->getSymbol());
-}
+LineColumn ParseUtils::getLineColumn(antlr4::tree::TerminalNode* node) { return getLineColumn(node->getSymbol()); }
 
 LineColumn ParseUtils::getEndLineColumn(antlr4::tree::TerminalNode* node) {
   return getEndLineColumn(node->getSymbol());
 }
 
-LineColumn ParseUtils::getLineColumn(const antlr4::CommonTokenStream* stream,
-                                     antlr4::tree::ParseTree* tree) {
+LineColumn ParseUtils::getLineColumn(const antlr4::CommonTokenStream* stream, antlr4::tree::ParseTree* tree) {
   const antlr4::misc::Interval sourceInterval = tree->getSourceInterval();
-  return (sourceInterval.a == -1)
-             ? LineColumn(0, 0)
-             : getLineColumn(stream->get(sourceInterval.a));
+  return (sourceInterval.a == -1) ? LineColumn(0, 0) : getLineColumn(stream->get(sourceInterval.a));
 }
 
-LineColumn ParseUtils::getEndLineColumn(const antlr4::CommonTokenStream* stream,
-                                        antlr4::tree::ParseTree* tree) {
+LineColumn ParseUtils::getEndLineColumn(const antlr4::CommonTokenStream* stream, antlr4::tree::ParseTree* tree) {
   const antlr4::misc::Interval sourceInterval = tree->getSourceInterval();
-  return (sourceInterval.b == -1)
-             ? LineColumn(0, 0)
-             : getEndLineColumn(stream->get(sourceInterval.b));
+  return (sourceInterval.b == -1) ? LineColumn(0, 0) : getEndLineColumn(stream->get(sourceInterval.b));
 }
 
-void ParseUtils::tokenizeAtComma(
-    std::vector<std::string>& actualArgs,
-    const std::vector<antlr4::tree::ParseTree*>& tokens) {
+void ParseUtils::tokenizeAtComma(std::vector<std::string>& actualArgs,
+                                 const std::vector<antlr4::tree::ParseTree*>& tokens) {
   bool notEmpty = false;
   std::vector<std::string> tmpArgs;
   uint32_t topIndex = 0;
@@ -139,14 +127,12 @@ void ParseUtils::tokenizeAtComma(
  *         the current parent node to inspect for terminal nodes.
  */
 
-static void inOrderTraversal(std::vector<antlr4::Token*>& tokens,
-                             const antlr4::tree::ParseTree* parent) {
+static void inOrderTraversal(std::vector<antlr4::Token*>& tokens, const antlr4::tree::ParseTree* parent) {
   if (!parent) return;
   // Iterate over all child nodes of `parent`.
   for (auto child : parent->children) {
     // Get the i-th child node of `parent`.
-    antlr4::tree::TerminalNode* node =
-        dynamic_cast<antlr4::tree::TerminalNode*>(child);
+    antlr4::tree::TerminalNode* node = dynamic_cast<antlr4::tree::TerminalNode*>(child);
     if (node) {
       // We found a leaf/terminal, add its Token to our list.
       tokens.push_back(node->getSymbol());
@@ -166,8 +152,7 @@ static void inOrderTraversal(std::vector<antlr4::Token*>& tokens,
  * @return all Tokens from the {@code tree} in an in-order sequence.
  */
 
-std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(
-    antlr4::tree::ParseTree* tree) {
+std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(antlr4::tree::ParseTree* tree) {
   std::vector<antlr4::Token*> tokens;
   inOrderTraversal(tokens, tree);
   return tokens;

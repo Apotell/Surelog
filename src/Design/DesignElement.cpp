@@ -30,10 +30,8 @@
 #include <ostream>
 
 namespace SURELOG {
-DesignElement::DesignElement(SymbolId name, PathId fileId, ElemType type,
-                             NodeId uniqueId, uint32_t startLine,
-                             uint16_t startColumn, uint32_t endLine,
-                             uint16_t endColumn, NodeId parent)
+DesignElement::DesignElement(SymbolId name, PathId fileId, ElemType type, NodeId uniqueId, uint32_t startLine,
+                             uint16_t startColumn, uint32_t endLine, uint16_t endColumn, NodeId parent)
     : m_name(name),
       m_fileId(fileId),
       m_type(type),
@@ -47,9 +45,8 @@ DesignElement::DesignElement(SymbolId name, PathId fileId, ElemType type,
 
 std::ostream& operator<<(std::ostream& os, DesignElement::ElemType type) {
   switch (type) {
-#define CASE_TYPE_PRINT(e)         \
-  case DesignElement::ElemType::e: \
-    return os << #e
+#define CASE_TYPE_PRINT(e) \
+  case DesignElement::ElemType::e: return os << #e
     CASE_TYPE_PRINT(Module);
     CASE_TYPE_PRINT(Primitive);
     CASE_TYPE_PRINT(Interface);

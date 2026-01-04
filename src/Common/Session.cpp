@@ -34,22 +34,14 @@
 namespace fs = std::filesystem;
 
 namespace SURELOG {
-Session::Session(FileSystem *fileSystem, SymbolTable *symbolTable,
-                 LogListener *logListener, ErrorContainer *errorContainer,
-                 CommandLineParser *commandLineParser, Precompiled *precompiled)
-    : m_fileSystem(fileSystem == nullptr
-                       ? new PlatformFileSystem(fs::current_path())
-                       : fileSystem),
+Session::Session(FileSystem *fileSystem, SymbolTable *symbolTable, LogListener *logListener,
+                 ErrorContainer *errorContainer, CommandLineParser *commandLineParser, Precompiled *precompiled)
+    : m_fileSystem(fileSystem == nullptr ? new PlatformFileSystem(fs::current_path()) : fileSystem),
       m_symbolTable(symbolTable == nullptr ? new SymbolTable : symbolTable),
-      m_logListener(logListener == nullptr ? new LogListener(this)
-                                           : logListener),
-      m_precompiled(precompiled == nullptr ? new Precompiled(this)
-                                           : precompiled),
-      m_errorContainer(errorContainer == nullptr ? new ErrorContainer(this)
-                                                 : errorContainer),
-      m_commandLineParser(commandLineParser == nullptr
-                              ? new CommandLineParser(this)
-                              : commandLineParser),
+      m_logListener(logListener == nullptr ? new LogListener(this) : logListener),
+      m_precompiled(precompiled == nullptr ? new Precompiled(this) : precompiled),
+      m_errorContainer(errorContainer == nullptr ? new ErrorContainer(this) : errorContainer),
+      m_commandLineParser(commandLineParser == nullptr ? new CommandLineParser(this) : commandLineParser),
       m_ownsFileSystem(fileSystem == nullptr),
       m_ownsSymbolTable(symbolTable == nullptr),
       m_ownsLogListener(logListener == nullptr),
@@ -57,12 +49,10 @@ Session::Session(FileSystem *fileSystem, SymbolTable *symbolTable,
       m_ownsErrorContainer(errorContainer == nullptr),
       m_ownsCommandLineParser(commandLineParser == nullptr) {}
 
-Session::Session()
-    : Session(nullptr, nullptr, nullptr, nullptr, nullptr, nullptr) {}
+Session::Session() : Session(nullptr, nullptr, nullptr, nullptr, nullptr, nullptr) {}
 
 Session::Session(Session *session)
-    : Session(session->m_fileSystem, session->m_symbolTable,
-              session->m_logListener, session->m_errorContainer,
+    : Session(session->m_fileSystem, session->m_symbolTable, session->m_logListener, session->m_errorContainer,
               session->m_commandLineParser, session->m_precompiled) {}
 
 Session::~Session() {
@@ -74,8 +64,7 @@ Session::~Session() {
   if (m_ownsCommandLineParser) delete m_commandLineParser;
 }
 
-bool Session::parseCommandLine(int32_t argc, const char **argv,
-                               bool diffCompMode, bool fileUnit) {
+bool Session::parseCommandLine(int32_t argc, const char **argv, bool diffCompMode, bool fileUnit) {
   return m_commandLineParser->parse(argc, argv, diffCompMode, fileUnit);
 }
 

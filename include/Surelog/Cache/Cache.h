@@ -60,45 +60,35 @@ class Cache {
 
   std::string_view getExecutableTimeStamp() const;
 
-  bool checkIfCacheIsValid(const Header::Reader& header,
-                           std::string_view schemaVersion, PathId cacheFileId,
+  bool checkIfCacheIsValid(const Header::Reader& header, std::string_view schemaVersion, PathId cacheFileId,
                            PathId sourceFileId) const;
 
   void cacheHeader(Header::Builder builder, std::string_view schemaVersion);
 
-  void cacheErrors(
-      ::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors,
-      SymbolTable& targetSymbols, const std::vector<Error>& sourceErrors,
-      const SymbolTable& sourceSymbols);
+  void cacheErrors(::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors, SymbolTable& targetSymbols,
+                   const std::vector<Error>& sourceErrors, const SymbolTable& sourceSymbols);
 
-  void cacheVObjects(
-      ::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects,
-      SymbolTable& targetSymbols, const std::vector<VObject>& sourceVObjects,
-      const SymbolTable& sourceSymbols);
+  void cacheVObjects(::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects,
+                     SymbolTable& targetSymbols, const std::vector<VObject>& sourceVObjects,
+                     const SymbolTable& sourceSymbols);
 
-  void cacheSymbols(
-      ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols,
-      const std::vector<std::string_view>& sourceSymbols);
+  void cacheSymbols(::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols,
+                    const std::vector<std::string_view>& sourceSymbols);
 
   // Restores errors and the cache symbol table (to be used in other restore
   // operations).
   // References in the error container to local symbols will be entered into
   // the local symbol table.
   void restoreErrors(ErrorContainer* errorContainer, SymbolTable& targetSymbols,
-                     const ::capnp::List<::Error>::Reader& sourceErrors,
-                     const SymbolTable& sourceSymbols);
+                     const ::capnp::List<::Error>::Reader& sourceErrors, const SymbolTable& sourceSymbols);
 
   // Restore objects coming from the flatbuffer cache and with the corresponding
   // "cacheSymbols" into "fileContent", with IDs relevant in the local
   // symbol table "localSymbols" (which is updated).
-  void restoreVObjects(std::vector<VObject>& targetVObjects,
-                       SymbolTable& targetSymbols,
-                       const ::capnp::List<::VObject>::Reader& sourceVObjects,
-                       const SymbolTable& sourceSymbols);
+  void restoreVObjects(std::vector<VObject>& targetVObjects, SymbolTable& targetSymbols,
+                       const ::capnp::List<::VObject>::Reader& sourceVObjects, const SymbolTable& sourceSymbols);
 
-  void restoreSymbols(
-      SymbolTable& targetSymbols,
-      const ::capnp::List<::capnp::Text>::Reader& sourceSymbols);
+  void restoreSymbols(SymbolTable& targetSymbols, const ::capnp::List<::capnp::Text>::Reader& sourceSymbols);
 
  protected:
   Session* const m_session = nullptr;

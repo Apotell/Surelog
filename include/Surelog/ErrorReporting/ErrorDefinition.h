@@ -307,12 +307,8 @@ class ErrorDefinition {
 
   class ErrorInfo {
    public:
-    ErrorInfo(ErrorSeverity severity, ErrorCategory category,
-              std::string_view s, std::string_view extra)
-        : m_severity(severity),
-          m_category(category),
-          m_errorText(s),
-          m_extraText(extra) {}
+    ErrorInfo(ErrorSeverity severity, ErrorCategory category, std::string_view s, std::string_view extra)
+        : m_severity(severity), m_category(category), m_errorText(s), m_extraText(extra) {}
 
     ErrorSeverity m_severity;
     const ErrorCategory m_category;
@@ -322,9 +318,7 @@ class ErrorDefinition {
 
   static bool init();
 
-  static const std::map<ErrorType, ErrorInfo>& getErrorInfoMap() {
-    return *mutableGlobalErrorInfoMap();
-  }
+  static const std::map<ErrorType, ErrorInfo>& getErrorInfoMap() { return *mutableGlobalErrorInfoMap(); }
 
   static ErrorType getErrorType(std::string_view errorId);
   static ErrorSeverity getErrorSeverity(std::string_view errorSeverity);
@@ -332,8 +326,7 @@ class ErrorDefinition {
   static ErrorCategory getCategory(std::string_view category);
 
   static void setSeverity(ErrorType type, ErrorSeverity severity);
-  static void rec(ErrorType type, ErrorSeverity severity,
-                  ErrorCategory category, std::string_view text,
+  static void rec(ErrorType type, ErrorSeverity severity, ErrorCategory category, std::string_view text,
                   std::string_view extraText = "");
 
  private:

@@ -50,12 +50,10 @@
 namespace SURELOG {
 
 VObjectType ModuleDefinition::getType() const {
-  return (m_fileContents.empty()) ? VObjectType::paN_input_gate_instance
-                                  : m_fileContents[0]->Type(m_nodeIds[0]);
+  return (m_fileContents.empty()) ? VObjectType::paN_input_gate_instance : m_fileContents[0]->Type(m_nodeIds[0]);
 }
 
-ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
-                                   const FileContent* fC, NodeId nodeId,
+ModuleDefinition::ModuleDefinition(Session* session, std::string_view name, const FileContent* fC, NodeId nodeId,
                                    uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr), m_name(name), m_udpDefn(nullptr) {
   addFileContent(fC, nodeId);
@@ -64,12 +62,10 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     case VObjectType::paUdp_declaration: {
       uhdm::UdpDefn* const instance = serializer.make<uhdm::UdpDefn>();
       instance->setDefName(name);
-      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PRIMITIVE),
-                              nodeId, instance);
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PRIMITIVE), nodeId, instance);
       setUhdmModel(instance);
 
-      uhdm::UdpDefnTypespec* const tps =
-          serializer.make<uhdm::UdpDefnTypespec>();
+      uhdm::UdpDefnTypespec* const tps = serializer.make<uhdm::UdpDefnTypespec>();
       tps->setName(name);
       tps->setUdpDefn(instance);
       setUhdmTypespecModel(tps);
@@ -78,16 +74,13 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     case VObjectType::paInterface_declaration: {
       uhdm::Interface* const instance = serializer.make<uhdm::Interface>();
       instance->setName(name);
-      if (const NodeId nameId =
-              fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
+      if (const NodeId nameId = fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
         fC->populateCoreMembers(nameId, nameId, instance->getNameObj());
       }
-      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::INTERFACE),
-                              nodeId, instance);
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::INTERFACE), nodeId, instance);
       setUhdmModel(instance);
 
-      uhdm::InterfaceTypespec* const tps =
-          serializer.make<uhdm::InterfaceTypespec>();
+      uhdm::InterfaceTypespec* const tps = serializer.make<uhdm::InterfaceTypespec>();
       tps->setName(name);
       tps->setInterface(instance);
       setUhdmTypespecModel(tps);
@@ -96,13 +89,10 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     default: {
       uhdm::Module* const instance = serializer.make<uhdm::Module>();
       instance->setName(name);
-      if (const NodeId nameId =
-              fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
+      if (const NodeId nameId = fC->sl_collect(nodeId, VObjectType::STRING_CONST)) {
         fC->populateCoreMembers(nameId, nameId, instance->getNameObj());
       }
-      fC->populateCoreMembers(
-          fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
-          instance);
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId, instance);
       setUhdmModel(instance);
 
       uhdm::ModuleTypespec* const tps = serializer.make<uhdm::ModuleTypespec>();
@@ -115,8 +105,7 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
 
 bool ModuleDefinition::isInstance() const {
   const VObjectType type = getType();
-  return ((type == VObjectType::paN_input_gate_instance) ||
-          (type == VObjectType::paModule_declaration) ||
+  return ((type == VObjectType::paN_input_gate_instance) || (type == VObjectType::paModule_declaration) ||
           (type == VObjectType::paUdp_declaration));
 }
 
@@ -130,14 +119,12 @@ uint32_t ModuleDefinition::getSize() const {
   return size;
 }
 
-void ModuleDefinition::insertModport(std::string_view modport,
-                                     const Signal& signal, NodeId nodeId) {
+void ModuleDefinition::insertModport(std::string_view modport, const Signal& signal, NodeId nodeId) {
   ModportSignalMap::iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
     const FileContent* const fC = m_fileContents[0];
-    auto it = m_modportSignalMap.emplace(
-        std::piecewise_construct, std::forward_as_tuple(modport),
-        std::forward_as_tuple(this, modport, fC, nodeId));
+    auto it = m_modportSignalMap.emplace(std::piecewise_construct, std::forward_as_tuple(modport),
+                                         std::forward_as_tuple(this, modport, fC, nodeId));
     it.first->second.addSignal(signal);
 
     uhdm::Serializer* const serializer = getUhdmModel()->getSerializer();
@@ -158,8 +145,7 @@ void ModuleDefinition::insertModport(std::string_view modport,
   }
 }
 
-const Signal* ModuleDefinition::getModportSignal(std::string_view modport,
-                                                 NodeId port) const {
+const Signal* ModuleDefinition::getModportSignal(std::string_view modport, NodeId port) const {
   ModportSignalMap::const_iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
     return nullptr;
@@ -182,13 +168,10 @@ Modport* ModuleDefinition::getModport(std::string_view modport) {
   }
 }
 
-void ModuleDefinition::insertModport(std::string_view modport,
-                                     const ClockingBlock& cb) {
-  ModportClockingBlockMap::iterator itr =
-      m_modportClockingBlockMap.find(modport);
+void ModuleDefinition::insertModport(std::string_view modport, const ClockingBlock& cb) {
+  ModportClockingBlockMap::iterator itr = m_modportClockingBlockMap.find(modport);
   if (itr == m_modportClockingBlockMap.end()) {
-    auto it = m_modportClockingBlockMap.emplace(std::piecewise_construct,
-                                                std::forward_as_tuple(modport),
+    auto it = m_modportClockingBlockMap.emplace(std::piecewise_construct, std::forward_as_tuple(modport),
                                                 std::forward_as_tuple());
     it.first->second.emplace_back(cb);
   } else {
@@ -196,8 +179,7 @@ void ModuleDefinition::insertModport(std::string_view modport,
   }
 }
 
-const ClockingBlock* ModuleDefinition::getModportClockingBlock(
-    std::string_view modport, NodeId port) const {
+const ClockingBlock* ModuleDefinition::getModportClockingBlock(std::string_view modport, NodeId port) const {
   auto itr = m_modportClockingBlockMap.find(modport);
   if (itr == m_modportClockingBlockMap.end()) {
     return nullptr;

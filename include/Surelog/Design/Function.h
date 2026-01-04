@@ -47,8 +47,7 @@ using TfPortList = std::vector<TfPortItem*>;
 class Procedure : public Scope, public Statement {
   SURELOG_IMPLEMENT_RTTI_2_BASES(Procedure, Scope, Statement)
  public:
-  Procedure(DesignComponent* parent, const FileContent* fC, NodeId id,
-            std::string_view name);
+  Procedure(DesignComponent* parent, const FileContent* fC, NodeId id, std::string_view name);
   ~Procedure() override = default;
 
   DesignComponent* getParent() const { return m_parent; }
@@ -72,15 +71,13 @@ class Procedure : public Scope, public Statement {
 class SeqBlock : public Scope, public Statement {
   SURELOG_IMPLEMENT_RTTI_2_BASES(SeqBlock, Scope, Statement)
  public:
-  SeqBlock(std::string_view name, Scope* parent, Statement* parentStmt,
-           const FileContent* fC, NodeId id);
+  SeqBlock(std::string_view name, Scope* parent, Statement* parentStmt, const FileContent* fC, NodeId id);
 };
 
 class Function : public Procedure {
   SURELOG_IMPLEMENT_RTTI(Function, Procedure)
  public:
-  Function(DesignComponent* parent, const FileContent* fC, NodeId id,
-           std::string_view name, DataType* returnType)
+  Function(DesignComponent* parent, const FileContent* fC, NodeId id, std::string_view name, DataType* returnType)
       : Procedure(parent, fC, id, name), m_returnType(returnType) {}
   bool compile(CompileHelper& compile_helper);
   ~Function() override = default;

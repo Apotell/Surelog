@@ -38,14 +38,12 @@ class SymbolTable;
 class Session final {
  public:
   Session();
-  Session(FileSystem* fileSystem, SymbolTable* symbolTable,
-          LogListener* logListener, ErrorContainer* errorContainer,
+  Session(FileSystem* fileSystem, SymbolTable* symbolTable, LogListener* logListener, ErrorContainer* errorContainer,
           CommandLineParser* commandLineParser, Precompiled* precompiled);
   explicit Session(Session* session);
   ~Session();
 
-  bool parseCommandLine(int32_t argc, const char** argv, bool diffCompMode,
-                        bool fileUnit);
+  bool parseCommandLine(int32_t argc, const char** argv, bool diffCompMode, bool fileUnit);
 
   ErrorContainer* getErrorContainer() { return m_errorContainer; }
   const ErrorContainer* getErrorContainer() const { return m_errorContainer; }
@@ -63,9 +61,7 @@ class Session final {
   const Precompiled* getPrecompiled() const { return m_precompiled; }
 
   CommandLineParser* getCommandLineParser() { return m_commandLineParser; }
-  const CommandLineParser* getCommandLineParser() const {
-    return m_commandLineParser;
-  }
+  const CommandLineParser* getCommandLineParser() const { return m_commandLineParser; }
 
  private:
   FileSystem* const m_fileSystem = nullptr;

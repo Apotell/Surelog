@@ -34,90 +34,83 @@ namespace SURELOG {
  *
  */
 using RawNodeId = uint32_t;
-inline static constexpr RawNodeId InvalidRawNodeId =
-    0;  // Max of 28 bits as per cache!
+inline static constexpr RawNodeId InvalidRawNodeId = 0;  // Max of 28 bits as per cache!
 class NodeId final {
  public:
   constexpr NodeId() : NodeId(InvalidRawNodeId) {}
-  constexpr explicit NodeId(RawNodeId id) : id(id) {}
+  constexpr explicit NodeId(RawNodeId id) : m_id(id) {}
   constexpr NodeId(const NodeId &rhs) = default;
 
-  operator RawNodeId() const { return id; }  // NOLINT
+  operator RawNodeId() const { return m_id; }  // NOLINT
 
   // Don't include size_t conversion on 32Bit machines where sizeof(size_t)==32
-  template <typename T = std::size_t,
-            typename std::enable_if<!std::is_same<T, RawNodeId>::value>::type
-                * = nullptr>
+  template <typename T = std::size_t, typename std::enable_if<!std::is_same<T, RawNodeId>::value>::type * = nullptr>
   operator std::size_t() const {  // NOLINT
-    return id;
+    return m_id;
   }
 
-  explicit operator bool() const { return id != InvalidRawNodeId; }
+  explicit operator bool() const { return m_id != InvalidRawNodeId; }
 
-  bool operator<(const NodeId &rhs) const { return id < rhs.id; }
-  bool operator<=(const NodeId &rhs) const { return id <= rhs.id; }
+  bool operator<(const NodeId &rhs) const { return m_id < rhs.m_id; }
+  bool operator<=(const NodeId &rhs) const { return m_id <= rhs.m_id; }
 
-  bool operator>(const NodeId &rhs) const { return id > rhs.id; }
-  bool operator>=(const NodeId &rhs) const { return id >= rhs.id; }
+  bool operator>(const NodeId &rhs) const { return m_id > rhs.m_id; }
+  bool operator>=(const NodeId &rhs) const { return m_id >= rhs.m_id; }
 
-  bool operator==(const NodeId &rhs) const { return id == rhs.id; }
-  bool operator!=(const NodeId &rhs) const { return id != rhs.id; }
+  bool operator==(const NodeId &rhs) const { return m_id == rhs.m_id; }
+  bool operator!=(const NodeId &rhs) const { return m_id != rhs.m_id; }
 
-  NodeId operator-(const NodeId &rhs) const { return NodeId(id - rhs.id); }
-  NodeId operator+(const NodeId &rhs) const { return NodeId(id + rhs.id); }
+  NodeId operator-(const NodeId &rhs) const { return NodeId(m_id - rhs.m_id); }
+  NodeId operator+(const NodeId &rhs) const { return NodeId(m_id + rhs.m_id); }
 
   NodeId &operator-=(const NodeId &rhs) {
-    id -= rhs.id;
+    m_id -= rhs.m_id;
     return *this;
   }
   NodeId &operator+=(const NodeId &rhs) {
-    id += rhs.id;
+    m_id += rhs.m_id;
     return *this;
   }
 
-  template <typename U, typename = typename std::enable_if<
-                            std::is_integral<U>::value>::type>
+  template <typename U, typename = typename std::enable_if<std::is_integral<U>::value>::type>
   bool operator<(const U &rhs) const {
-    return id < rhs;
+    return m_id < rhs;
   }
-  template <typename U, typename = typename std::enable_if<
-                            std::is_integral<U>::value>::type>
+  template <typename U, typename = typename std::enable_if<std::is_integral<U>::value>::type>
   bool operator<=(const U &rhs) const {
-    return id <= rhs;
+    return m_id <= rhs;
   }
 
-  template <typename U, typename = typename std::enable_if<
-                            std::is_integral<U>::value>::type>
+  template <typename U, typename = typename std::enable_if<std::is_integral<U>::value>::type>
   bool operator>(const U &rhs) const {
-    return id > rhs;
+    return m_id > rhs;
   }
-  template <typename U, typename = typename std::enable_if<
-                            std::is_integral<U>::value>::type>
+  template <typename U, typename = typename std::enable_if<std::is_integral<U>::value>::type>
   bool operator>=(const U &rhs) const {
-    return id >= rhs;
+    return m_id >= rhs;
   }
 
   NodeId &operator++() {
-    ++id;
+    ++m_id;
     return *this;
   }
   NodeId operator++(int) {
-    const NodeId rid(id++);
+    const NodeId rid(m_id++);
     return rid;
   }
 
   NodeId &operator--() {
-    --id;
+    --m_id;
     return *this;
   }
   NodeId operator--(int) {
-    const NodeId rid(id--);
+    const NodeId rid(m_id--);
     return rid;
   }
 
   NodeId &operator=(const NodeId &rhs) {
     if (this != &rhs) {
-      id = rhs.id;
+      m_id = rhs.m_id;
     }
     return *this;
   }
@@ -125,7 +118,7 @@ class NodeId final {
   friend std::ostream &operator<<(std::ostream &strm, const NodeId &nodeId);
 
  private:
-  RawNodeId id;
+  RawNodeId m_id = 0;
 };
 
 static_assert(sizeof(NodeId) == sizeof(RawNodeId), "NodeId type grew?");
@@ -138,26 +131,19 @@ inline std::ostream &operator<<(std::ostream &strm, const NodeId &nodeId) {
 }
 
 struct NodeIdHasher final {
-  inline size_t operator()(const NodeId &value) const {
-    return std::hash<RawNodeId>()((RawNodeId)value);
-  }
+  inline size_t operator()(const NodeId &value) const { return std::hash<RawNodeId>()((RawNodeId)value); }
 };
 
 struct NodeIdEqualityComparer final {
-  inline bool operator()(const NodeId &lhs, const NodeId &rhs) const {
-    return (lhs == rhs);
-  }
+  inline bool operator()(const NodeId &lhs, const NodeId &rhs) const { return (lhs == rhs); }
 };
 
 struct NodeIdLessThanComparer final {
-  inline bool operator()(const NodeId &lhs, const NodeId &rhs) const {
-    return (lhs < rhs);
-  }
+  inline bool operator()(const NodeId &lhs, const NodeId &rhs) const { return (lhs < rhs); }
 };
 
 using NodeIdSet = std::set<NodeId, NodeIdLessThanComparer>;
-using NodeIdUnorderedSet =
-    std::unordered_set<NodeId, NodeIdHasher, NodeIdEqualityComparer>;
+using NodeIdUnorderedSet = std::unordered_set<NodeId, NodeIdHasher, NodeIdEqualityComparer>;
 
 }  // namespace SURELOG
 

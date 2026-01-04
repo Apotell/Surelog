@@ -37,8 +37,7 @@ class Session;
 
 class ParseLibraryDef final {
  public:
-  ParseLibraryDef(Session* session, LibrarySet* librarySet,
-                  ConfigSet* configSet);
+  ParseLibraryDef(Session* session, LibrarySet* librarySet, ConfigSet* configSet);
   ParseLibraryDef(const ParseLibraryDef& orig) = delete;
 
   bool parseLibrariesDefinition();

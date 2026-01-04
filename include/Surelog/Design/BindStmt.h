@@ -39,8 +39,8 @@ class FileContent;
 
 class BindStmt final {
  public:
-  BindStmt(const FileContent* fC, NodeId stmtId, NodeId targetModId,
-           NodeId targetInstId, NodeId bindId, NodeId instanceId);
+  BindStmt(const FileContent* fC, NodeId stmtId, NodeId targetModId, NodeId targetInstId, NodeId bindId,
+           NodeId instanceId);
   ~BindStmt() = default;
 
   const FileContent* getFileContent() const { return m_fC; }

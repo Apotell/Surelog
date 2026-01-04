@@ -64,13 +64,8 @@ class Variable;
 
 class ExprEval {
  public:
-  ExprEval(uhdm::Expr* expr, ValuedComponentI* instance, PathId fileId,
-           uint32_t lineNumber, uhdm::Any* pexpr)
-      : m_expr(expr),
-        m_instance(instance),
-        m_fileId(fileId),
-        m_lineNumber(lineNumber),
-        m_pexpr(pexpr) {}
+  ExprEval(uhdm::Expr* expr, ValuedComponentI* instance, PathId fileId, uint32_t lineNumber, uhdm::Any* pexpr)
+      : m_expr(expr), m_instance(instance), m_fileId(fileId), m_lineNumber(lineNumber), m_pexpr(pexpr) {}
   uhdm::Expr* const m_expr = nullptr;
   ValuedComponentI* const m_instance = nullptr;
   PathId m_fileId;
@@ -81,8 +76,7 @@ class ExprEval {
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
-  DesignComponent(Session* session, const DesignComponent* parent,
-                  DesignComponent* definition)
+  DesignComponent(Session* session, const DesignComponent* parent, DesignComponent* definition)
       : ValuedComponentI(session, parent, definition) {}
   ~DesignComponent() override = default;
 
@@ -103,35 +97,27 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   using ParameterVec = std::vector<Parameter*>;
   using ParamAssignVec = std::vector<ParamAssign*>;
   using LetStmtMap = std::map<std::string, LetStmt*, StringViewCompare>;
-  using NamedObjectMap =
-      std::map<std::string, std::pair<FileCNodeId, DesignComponent*>,
-               StringViewCompare>;
-  using FuncNameTypespecVec =
-      std::vector<std::pair<std::string, uhdm::Typespec*>>;
+  using NamedObjectMap = std::map<std::string, std::pair<FileCNodeId, DesignComponent*>, StringViewCompare>;
+  using FuncNameTypespecVec = std::vector<std::pair<std::string, uhdm::Typespec*>>;
 
   void addFileContent(const FileContent* fileContent, NodeId nodeId);
-  const std::vector<const FileContent*>& getFileContents() const {
-    return m_fileContents;
-  }
+  const std::vector<const FileContent*>& getFileContents() const { return m_fileContents; }
   const std::vector<NodeId>& getNodeIds() const { return m_nodeIds; }
 
   // Precompiled Object of interest
   const std::vector<FileCNodeId>& getObjects(VObjectType type) const;
   void addObject(VObjectType type, FileCNodeId object);
 
-  void addNamedObject(std::string_view name, FileCNodeId object,
-                      DesignComponent* def = nullptr);
+  void addNamedObject(std::string_view name, FileCNodeId object, DesignComponent* def = nullptr);
   const NamedObjectMap& getNamedObjects() const { return m_namedObjects; }
-  const std::pair<FileCNodeId, DesignComponent*>* getNamedObject(
-      std::string_view name) const;
+  const std::pair<FileCNodeId, DesignComponent*>* getNamedObject(std::string_view name) const;
 
   DataTypeMap& getUsedDataTypeMap() { return m_usedDataTypes; }
   DataType* getUsedDataType(std::string_view name);
   void insertUsedDataType(std::string_view dataTypeName, DataType* dataType);
 
   const DataTypeMap& getDataTypeMap() const { return m_dataTypes; }
-  virtual const DataType* getDataType(Design* design,
-                                      std::string_view name) const;
+  virtual const DataType* getDataType(Design* design, std::string_view name) const;
   void insertDataType(std::string_view dataTypeName, DataType* dataType);
 
   const TypeDefMap& getTypeDefMap() const { return m_typedefs; }
@@ -156,45 +142,24 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   const ParameterMap& getParameterMap() const { return m_parameterMap; }
   Parameter* getParameter(std::string_view name) const;
   void insertParameter(Parameter* p);
-  const ParameterVec& getOrderedParameters() const {
-    return m_orderedParameters;
-  }
+  const ParameterVec& getOrderedParameters() const { return m_orderedParameters; }
 
-  void addParamAssign(ParamAssign* assign) {
-    m_paramAssigns.emplace_back(assign);
-  }
+  void addParamAssign(ParamAssign* assign) { m_paramAssigns.emplace_back(assign); }
   const ParamAssignVec& getParamAssignVec() const { return m_paramAssigns; }
 
-  void addImportTypespec(uhdm::ImportTypespec* i) {
-    m_importTypespecs.emplace_back(i);
-  }
-  const DataType* getImportedDataType(
-      Design* design, std::string_view name,
-      std::set<const DesignComponent*>& visited) const;
-  const std::vector<uhdm::ImportTypespec*>& getImportedSymbols() const {
-    return m_importTypespecs;
-  }
+  void addImportTypespec(uhdm::ImportTypespec* i) { m_importTypespecs.emplace_back(i); }
+  const DataType* getImportedDataType(Design* design, std::string_view name,
+                                      std::set<const DesignComponent*>& visited) const;
+  const std::vector<uhdm::ImportTypespec*>& getImportedSymbols() const { return m_importTypespecs; }
 
-  void addElabSysCall(uhdm::TFCall* elab_sys_call) {
-    m_elabSysCalls.emplace_back(elab_sys_call);
-  }
-  const std::vector<uhdm::TFCall*>& getElabSysCalls() const {
-    return m_elabSysCalls;
-  }
+  void addElabSysCall(uhdm::TFCall* elab_sys_call) { m_elabSysCalls.emplace_back(elab_sys_call); }
+  const std::vector<uhdm::TFCall*>& getElabSysCalls() const { return m_elabSysCalls; }
 
-  void addPropertyDecl(uhdm::PropertyDecl* prop_decl) {
-    m_propertyDecls.emplace_back(prop_decl);
-  }
-  const std::vector<uhdm::PropertyDecl*>& getPropertyDecls() const {
-    return m_propertyDecls;
-  }
+  void addPropertyDecl(uhdm::PropertyDecl* prop_decl) { m_propertyDecls.emplace_back(prop_decl); }
+  const std::vector<uhdm::PropertyDecl*>& getPropertyDecls() const { return m_propertyDecls; }
 
-  void addSequenceDecl(uhdm::SequenceDecl* seq_decl) {
-    m_sequenceDecls.emplace_back(seq_decl);
-  }
-  const std::vector<uhdm::SequenceDecl*>& getSequenceDecls() const {
-    return m_sequenceDecls;
-  }
+  void addSequenceDecl(uhdm::SequenceDecl* seq_decl) { m_sequenceDecls.emplace_back(seq_decl); }
+  const std::vector<uhdm::SequenceDecl*>& getSequenceDecls() const { return m_sequenceDecls; }
 
   void setUhdmModel(uhdm::Any* model) { m_model = model; }
   uhdm::Any* getUhdmModel() { return m_model; }
@@ -219,9 +184,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   const LetStmtMap& getLetStmts() const { return m_letDecls; }
 
  private:
-  const DataType* getDataTypeRecursive(
-      Design* design, std::string_view name,
-      std::set<const DesignComponent*>& visited) const;
+  const DataType* getDataTypeRecursive(Design* design, std::string_view name,
+                                       std::set<const DesignComponent*>& visited) const;
 
  protected:
   std::vector<const FileContent*> m_fileContents;

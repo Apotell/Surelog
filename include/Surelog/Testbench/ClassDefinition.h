@@ -61,10 +61,8 @@ class ClassDefinition final : public DesignComponent, public DataType {
   friend class CompileClass;
 
  public:
-  ClassDefinition(Session* session, std::string_view name, Library* library,
-                  DesignComponent* container, const FileContent* fC,
-                  NodeId nodeId, ClassDefinition* parent,
-                  uhdm::Serializer& serializer);
+  ClassDefinition(Session* session, std::string_view name, Library* library, DesignComponent* container,
+                  const FileContent* fC, NodeId nodeId, ClassDefinition* parent, uhdm::Serializer& serializer);
 
   ~ClassDefinition() final = default;
 
@@ -80,11 +78,9 @@ class ClassDefinition final : public DesignComponent, public DataType {
   using PropertyMap = std::map<std::string, Property*, StringViewCompare>;
   using TaskMap = std::map<std::string, TaskMethod*, StringViewCompare>;
   using ConstraintMap = std::map<std::string, Constraint*, StringViewCompare>;
-  using BaseClassMap =
-      std::map<std::string, const DataType*, StringViewCompare>;
+  using BaseClassMap = std::map<std::string, const DataType*, StringViewCompare>;
   using ClassMap = std::map<std::string, ClassDefinition*, StringViewCompare>;
-  using CoverGroupMap =
-      std::map<std::string, CoverGroupDefinition*, StringViewCompare>;
+  using CoverGroupMap = std::map<std::string, CoverGroupDefinition*, StringViewCompare>;
 
   const PropertyMap& getPropertyMap() const { return m_properties; }
   Property* getProperty(std::string_view name) const;
@@ -107,8 +103,7 @@ class ClassDefinition final : public DesignComponent, public DataType {
   const ClassDefinition* getClass(std::string_view name) const;
   void insertClass(ClassDefinition* p);
 
-  const DataType* getDataType(Design* design,
-                              std::string_view name) const override;
+  const DataType* getDataType(Design* design, std::string_view name) const override;
 
   const CoverGroupMap& getCoverGroupMap() const { return m_coverGroups; }
   CoverGroupDefinition* getCoverGroup(std::string_view name);

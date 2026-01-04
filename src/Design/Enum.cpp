@@ -31,9 +31,7 @@
 
 namespace SURELOG {
 Enum::Enum(const FileContent* fC, NodeId nameId, NodeId baseTypeId)
-    : DataType(fC, baseTypeId, fC->SymName(nameId), fC->Type(baseTypeId)),
-      m_nameId(nameId),
-      m_baseTypespec(nullptr) {
+    : DataType(fC, baseTypeId, fC->SymName(nameId), fC->Type(baseTypeId)), m_nameId(nameId), m_baseTypespec(nullptr) {
   m_category = DataType::Category::ENUM;
 }
 

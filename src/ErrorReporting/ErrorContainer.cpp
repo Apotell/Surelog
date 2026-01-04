@@ -46,9 +46,7 @@
 
 namespace SURELOG {
 ErrorContainer::ErrorContainer(Session* session)
-    : m_session(session),
-      m_reportedFatalErrorLogFile(false),
-      m_interpState(nullptr) {
+    : m_session(session), m_reportedFatalErrorLogFile(false), m_interpState(nullptr) {
   m_interpState = PythonAPI::getMainInterp();
   /* Do nothing here */
 }
@@ -59,33 +57,25 @@ void ErrorContainer::init() {
     if (LogListener::failed(logListener->initialize())) {
       FileSystem* const fileSystem = m_session->getFileSystem();
       CommandLineParser* const clp = m_session->getCommandLineParser();
-      std::cerr << "[FTL:LG0001] Cannot create log file \""
-                << fileSystem->toPath(clp->getLogFileId()) << "\"" << std::endl;
+      std::cerr << "[FTL:LG0001] Cannot create log file \"" << fileSystem->toPath(clp->getLogFileId()) << "\""
+                << std::endl;
     }
   }
 }
 
-Error& ErrorContainer::addError(Error& error, const std::string& message,
-                                bool reportFatalError, bool showDuplicates) {
+Error& ErrorContainer::addError(Error& error, const std::string& message, bool reportFatalError, bool showDuplicates) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbolTable = m_session->getSymbolTable();
-  std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>& waivers =
-      Waiver::getWaivers();
-  std::pair<
-      std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator,
-      std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator>
+  std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>& waivers = Waiver::getWaivers();
+  std::pair<std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator,
+            std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator>
       ret = waivers.equal_range(error.m_errorId);
-  for (std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator
-           it = ret.first;
-       it != ret.second; ++it) {
+  for (std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>::iterator it = ret.first; it != ret.second; ++it) {
     if ((((*it).second.m_fileName.empty()) ||
-         (fileSystem->toPath(error.m_locations[0].m_fileId) ==
-          (*it).second.m_fileName)) &&
-        (((*it).second.m_line == 0) ||
-         (error.m_locations[0].m_line == (*it).second.m_line)) &&
+         (fileSystem->toPath(error.m_locations[0].m_fileId) == (*it).second.m_fileName)) &&
+        (((*it).second.m_line == 0) || (error.m_locations[0].m_line == (*it).second.m_line)) &&
         (((*it).second.m_objectId.empty()) ||
-         (symbolTable->getSymbol(error.m_locations[0].m_object) ==
-          (*it).second.m_objectId))) {
+         (symbolTable->getSymbol(error.m_locations[0].m_object) == (*it).second.m_objectId))) {
       error.m_waived = true;
       break;
     }
@@ -107,15 +97,12 @@ Error& ErrorContainer::addError(Error& error, const std::string& message,
   return error;
 }
 
-std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
-    ErrorDefinition::ErrorType errorId, const std::vector<Location>& locations,
-    bool reentrantPython) const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
-      infoMap = ErrorDefinition::getErrorInfoMap();
+std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(ErrorDefinition::ErrorType errorId,
+                                                                       const std::vector<Location>& locations,
+                                                                       bool reentrantPython) const {
+  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
 
-  std::map<ErrorDefinition::ErrorType,
-           ErrorDefinition::ErrorInfo>::const_iterator itr =
-      infoMap.find(errorId);
+  std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(errorId);
   if (itr == infoMap.end()) {
     return std::make_tuple("", false, false);
   }
@@ -135,21 +122,15 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
       severity = "FTL";
       reportFatalError = true;
       break;
-    case ErrorDefinition::SYNTAX:
-      severity = "SNT";
-      break;
-    case ErrorDefinition::ERROR:
-      severity = "ERR";
-      break;
+    case ErrorDefinition::SYNTAX: severity = "SNT"; break;
+    case ErrorDefinition::ERROR: severity = "ERR"; break;
     case ErrorDefinition::WARNING:
       severity = "WRN";
       if (clp->filterWarning()) filterMessage = true;
       break;
     case ErrorDefinition::INFO:
       severity = "INF";
-      if (clp->filterInfo() &&
-          (errorId != ErrorDefinition::PP_PROCESSING_SOURCE_FILE))
-        filterMessage = true;
+      if (clp->filterInfo() && (errorId != ErrorDefinition::PP_PROCESSING_SOURCE_FILE)) filterMessage = true;
       break;
     case ErrorDefinition::NOTE:
       severity = "NTE";
@@ -189,8 +170,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
       std::string extraLocation(fileSystem->toPath(extraLoc.m_fileId));
       if (extraLoc.m_line > 0) {
         extraLocation += ":" + std::to_string(extraLoc.m_line) + ":";
-        if (extraLoc.m_column > 0)
-          extraLocation += std::to_string(extraLoc.m_column) + ":";
+        if (extraLoc.m_column > 0) extraLocation += std::to_string(extraLoc.m_column) + ":";
       }
       size_t objectOffset = text.find("%exloc");
       if ((objectOffset == std::string::npos) && !info.m_extraText.empty()) {
@@ -219,8 +199,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
       }
     }
     if (extraLoc.m_object) {
-      const std::string_view objString =
-          symbolTable->getSymbol(extraLoc.m_object);
+      const std::string_view objString = symbolTable->getSymbol(extraLoc.m_object);
       size_t objectOffset = text.find("%exobj");
       if (objectOffset != std::string::npos) {
         text = text.replace(objectOffset, 6, objString);
@@ -236,8 +215,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
   else if (errorId < 1000)
     padding = "0";
   if ((reentrantPython == false) || (!clp->pythonAllowed())) {
-    tmp = "[" + severity + ":" + category + padding + std::to_string(errorId) +
-          "] " + location + text + "\n";
+    tmp = "[" + severity + ":" + category + padding + std::to_string(errorId) + "] " + location + text + "\n";
   } else {
     std::vector<std::string> args;
     args.push_back(severity);
@@ -245,19 +223,15 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
     args.push_back(padding + std::to_string(errorId));
     args.push_back(location);
     args.push_back(text);
-    tmp = PythonAPI::evalScript("__main__", "SLformatMsg", args,
-                                (PyThreadState*)m_interpState);
+    tmp = PythonAPI::evalScript("__main__", "SLformatMsg", args, (PyThreadState*)m_interpState);
   }
 
   return std::make_tuple(tmp, reportFatalError, filterMessage);
 }
 
-void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
-                              const Location& loc,
-                              bool showDuplicates /* = false */,
-                              bool reentrantPython /* = true */) {
-  auto [message, reportFatalError, filterMessage] =
-      createErrorMessage(errorId, {loc}, reentrantPython);
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId, const Location& loc,
+                              bool showDuplicates /* = false */, bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] = createErrorMessage(errorId, {loc}, reentrantPython);
 
   if (!filterMessage) {  // filter Message
     Error error(errorId, loc);
@@ -265,12 +239,9 @@ void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
   }
 }
 
-void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
-                              const Location& loc, const Location& extra,
-                              bool showDuplicates /* = false */,
-                              bool reentrantPython /* = true */) {
-  auto [message, reportFatalError, filterMessage] =
-      createErrorMessage(errorId, {loc, extra}, reentrantPython);
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId, const Location& loc, const Location& extra,
+                              bool showDuplicates /* = false */, bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] = createErrorMessage(errorId, {loc, extra}, reentrantPython);
 
   if (!filterMessage) {  // filter Message
     Error error(errorId, loc, extra);
@@ -278,12 +249,9 @@ void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
   }
 }
 
-void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
-                              const std::vector<Location>& locations,
-                              bool showDuplicates /* = false */,
-                              bool reentrantPython /* = true */) {
-  auto [message, reportFatalError, filterMessage] =
-      createErrorMessage(errorId, locations, reentrantPython);
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId, const std::vector<Location>& locations,
+                              bool showDuplicates /* = false */, bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] = createErrorMessage(errorId, locations, reentrantPython);
 
   if (!filterMessage) {  // filter Message
     Error error(errorId, locations);
@@ -291,8 +259,7 @@ void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
   }
 }
 
-Error& ErrorContainer::addError(Error& error, bool showDuplicates,
-                                bool reentrantPython) {
+Error& ErrorContainer::addError(Error& error, bool showDuplicates, bool reentrantPython) {
   if (error.m_reported || error.m_waived) {
     return error;
   }
@@ -314,11 +281,9 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
     if (!err.m_reported) {
       // Translate IDs to master symbol table
       for (auto& loc : err.m_locations) {
-        if (loc.m_fileId)
-          loc.m_fileId = fileSystem->copy(loc.m_fileId, symbolTable);
+        if (loc.m_fileId) loc.m_fileId = fileSystem->copy(loc.m_fileId, symbolTable);
         if (loc.m_object) {
-          loc.m_object = symbolTable->copyFrom(loc.m_object,
-                                               rhs.m_session->getSymbolTable());
+          loc.m_object = symbolTable->copyFrom(loc.m_object, rhs.m_session->getSymbolTable());
         }
       }
       addError(err);
@@ -327,23 +292,17 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
 }
 
 bool ErrorContainer::hasFatalErrors() const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
-      infoMap = ErrorDefinition::getErrorInfoMap();
+  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
   bool reportFatalError = false;
   for (const Error& msg : m_errors) {
     ErrorDefinition::ErrorType type = msg.m_errorId;
-    std::map<ErrorDefinition::ErrorType,
-             ErrorDefinition::ErrorInfo>::const_iterator itr =
-        infoMap.find(type);
+    std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(type);
     if (itr != infoMap.end()) {
       ErrorDefinition::ErrorInfo info = (*itr).second;
       std::string severity;
       switch (info.m_severity) {
-        case ErrorDefinition::FATAL:
-          reportFatalError = true;
-          break;
-        default:
-          break;
+        case ErrorDefinition::FATAL: reportFatalError = true; break;
+        default: break;
       }
     }
   }
@@ -355,8 +314,7 @@ std::pair<std::string, bool> ErrorContainer::createReport_() const {
   bool reportFatalErrors = false;
   for (const Error& error : m_errors) {
     if (!error.m_reported && !error.m_waived) {
-      auto [message, reportFatalError, filterMessage] =
-          createErrorMessage(error.m_errorId, error.m_locations);
+      auto [message, reportFatalError, filterMessage] = createErrorMessage(error.m_errorId, error.m_locations);
       if (reportFatalError) reportFatalErrors = true;
       if (!filterMessage)  // Filtered
         report += message;
@@ -365,13 +323,11 @@ std::pair<std::string, bool> ErrorContainer::createReport_() const {
   return std::make_pair(report, reportFatalErrors);
 }
 
-std::pair<std::string, bool> ErrorContainer::createReport_(
-    const Error& error) const {
+std::pair<std::string, bool> ErrorContainer::createReport_(const Error& error) const {
   std::string report;
   bool reportFatalErrors = false;
   if (!error.m_reported && !error.m_waived) {
-    auto [message, reportFatalError, filterMessage] =
-        createErrorMessage(error.m_errorId, error.m_locations);
+    auto [message, reportFatalError, filterMessage] = createErrorMessage(error.m_errorId, error.m_locations);
     if (reportFatalError) reportFatalErrors = true;
     if (!filterMessage)  // Filtered
       report += message;
@@ -396,36 +352,21 @@ bool ErrorContainer::printStats(ErrorContainer::Stats stats, bool muteStdout) {
 }
 
 ErrorContainer::Stats ErrorContainer::getErrorStats() const {
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
-      infoMap = ErrorDefinition::getErrorInfoMap();
+  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>& infoMap = ErrorDefinition::getErrorInfoMap();
   ErrorContainer::Stats stats;
   for (const auto& msg : m_errors) {
     if (!msg.m_waived) {
       ErrorDefinition::ErrorType type = msg.m_errorId;
-      std::map<ErrorDefinition::ErrorType,
-               ErrorDefinition::ErrorInfo>::const_iterator itr =
-          infoMap.find(type);
+      std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>::const_iterator itr = infoMap.find(type);
       if (itr != infoMap.end()) {
         ErrorDefinition::ErrorInfo info = (*itr).second;
         switch (info.m_severity) {
-          case ErrorDefinition::FATAL:
-            stats.nbFatal++;
-            break;
-          case ErrorDefinition::SYNTAX:
-            stats.nbSyntax++;
-            break;
-          case ErrorDefinition::ERROR:
-            stats.nbError++;
-            break;
-          case ErrorDefinition::WARNING:
-            stats.nbWarning++;
-            break;
-          case ErrorDefinition::INFO:
-            stats.nbInfo++;
-            break;
-          case ErrorDefinition::NOTE:
-            stats.nbNote++;
-            break;
+          case ErrorDefinition::FATAL: stats.nbFatal++; break;
+          case ErrorDefinition::SYNTAX: stats.nbSyntax++; break;
+          case ErrorDefinition::ERROR: stats.nbError++; break;
+          case ErrorDefinition::WARNING: stats.nbWarning++; break;
+          case ErrorDefinition::INFO: stats.nbInfo++; break;
+          case ErrorDefinition::NOTE: stats.nbNote++; break;
         }
       }
     }
@@ -437,11 +378,9 @@ bool ErrorContainer::printToLogFile(std::string_view report) {
   LogListener* const logListener = m_session->getLogListener();
   LogListener::LogResult result;
   if (LogListener::failed(result = logListener->log(report))) {
-    if (!m_reportedFatalErrorLogFile &&
-        (result == LogListener::LogResult::FailedToOpenFileForWrite)) {
+    if (!m_reportedFatalErrorLogFile && (result == LogListener::LogResult::FailedToOpenFileForWrite)) {
       FileSystem* const fileSystem = m_session->getFileSystem();
-      std::cerr << "[FTL:LG0002] Cannot open log file \""
-                << fileSystem->toPath(logListener->getLogFileId())
+      std::cerr << "[FTL:LG0002] Cannot open log file \"" << fileSystem->toPath(logListener->getLogFileId())
                 << "\" in append mode" << std::endl;
       m_reportedFatalErrorLogFile = true;
     }

@@ -33,8 +33,7 @@
 
 namespace SURELOG {
 
-TypeDef::TypeDef(const FileContent* fC, NodeId id, NodeId the_def,
-                 std::string_view name, bool forwardDeclaration)
+TypeDef::TypeDef(const FileContent* fC, NodeId id, NodeId the_def, std::string_view name, bool forwardDeclaration)
     : DataType(fC, id, name, fC->Type(id)),
       m_the_def(the_def),
       m_datatype(nullptr),
@@ -43,8 +42,7 @@ TypeDef::TypeDef(const FileContent* fC, NodeId id, NodeId the_def,
 }
 
 void TypeDef::setTypespec(uhdm::Typespec* typespec) {
-  if ((typespec == nullptr) ||
-      (typespec->getUhdmType() == uhdm::UhdmType::TypedefTypespec)) {
+  if ((typespec == nullptr) || (typespec->getUhdmType() == uhdm::UhdmType::TypedefTypespec)) {
     m_typespec = typespec;
   }
 }

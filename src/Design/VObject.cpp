@@ -33,8 +33,7 @@
 
 namespace SURELOG {
 
-std::string VObject::print(Session *session, NodeId uniqueId,
-                           PathId definitionFile, PathId printedFile) const {
+std::string VObject::print(Session *session, NodeId uniqueId, PathId definitionFile, PathId printedFile) const {
   SymbolTable *const symbols = session->getSymbolTable();
   FileSystem *const fileSystem = session->getFileSystem();
   std::string text;
@@ -46,8 +45,7 @@ std::string VObject::print(Session *session, NodeId uniqueId,
   }
   StrAppend(&text, " u<", uniqueId, "> ");
   std::string_view typeName = getTypeName(m_type);
-  if (StringUtils::startsWith(typeName, "pp") ||
-      StringUtils::startsWith(typeName, "pa")) {
+  if (StringUtils::startsWith(typeName, "pp") || StringUtils::startsWith(typeName, "pa")) {
     typeName.remove_prefix(2);
   }
   StrAppend(&text, "t<", typeName, ">");
@@ -58,8 +56,7 @@ std::string VObject::print(Session *session, NodeId uniqueId,
   if (m_sibling) StrAppend(&text, " s<", m_sibling, ">");
 
   StrAppend(&text, " ");
-  if (!printedFile.equals(m_fileId, fileSystem))
-    StrAppend(&text, "f<", m_fileId, "> ");
+  if (!printedFile.equals(m_fileId, fileSystem)) StrAppend(&text, "f<", m_fileId, "> ");
 
   StrAppend(&text, "l<", m_startLine, ":", m_startColumn, ">");
   if (m_endLine) StrAppend(&text, " el<", m_endLine, ":", m_endColumn, ">");

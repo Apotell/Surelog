@@ -56,21 +56,14 @@ class PythonAPI final {
 
   static void loadScripts();
   static bool loadScript(const std::filesystem::path& name, bool check = false);
-  static std::string evalScript(const std::string& module,
-                                const std::string& function,
-                                const std::vector<std::string>& args,
-                                PyThreadState* interp);
-  static void evalScript(const std::string& function,
-                         SV3_1aPythonListener* listener,
-                         parser_rule_context* ctx);
+  static std::string evalScript(const std::string& module, const std::string& function,
+                                const std::vector<std::string>& args, PyThreadState* interp);
+  static void evalScript(const std::string& function, SV3_1aPythonListener* listener, parser_rule_context* ctx);
   static std::string getInvalidScriptString() { return m_invalidScriptResult; }
   static bool isListenerLoaded() { return m_listenerLoaded; }
   static std::string getListenerScript() { return m_listenerScript.string(); }
-  static void setListenerScript(const std::filesystem::path& script) {
-    m_listenerScript = script;
-  }
-  static bool evalScriptPerFile(const std::filesystem::path& script,
-                                ErrorContainer* errors, FileContent* fC,
+  static void setListenerScript(const std::filesystem::path& script) { m_listenerScript = script; }
+  static bool evalScriptPerFile(const std::filesystem::path& script, ErrorContainer* errors, FileContent* fC,
                                 PyThreadState* interp);
   static bool evalScript(const std::filesystem::path& script, Design* design);
   static void setStrictMode(bool mode) { m_strictMode = mode; }
@@ -78,8 +71,7 @@ class PythonAPI final {
  private:
   static void initInterp_();
   static void loadScriptsInInterp_();
-  static bool loadScript_(const std::filesystem::path& name,
-                          bool check = false);
+  static bool loadScript_(const std::filesystem::path& name, bool check = false);
   static std::string m_invalidScriptResult;
   static PyThreadState* m_mainThreadState;
   static std::filesystem::path m_programPath;

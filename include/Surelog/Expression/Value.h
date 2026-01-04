@@ -45,23 +45,12 @@ class Value : public RTTI {
   friend Expr;
   friend ValueFactory;
 
-  enum class Type {
-    None,
-    Binary,
-    Hexadecimal,
-    Octal,
-    Unsigned,
-    Integer,
-    Double,
-    String,
-    Scalar
-  };
+  enum class Type { None, Binary, Hexadecimal, Octal, Unsigned, Integer, Double, String, Scalar };
 
   ~Value() override = default;
 
-  virtual int32_t getSize() const = 0;  // size in bits
-  virtual int32_t getSize(
-      uint32_t wordIndex) const = 0;  // size in bits of a multi-word value
+  virtual int32_t getSize() const = 0;                    // size in bits
+  virtual int32_t getSize(uint32_t wordIndex) const = 0;  // size in bits of a multi-word value
   // nb of 64 bits words necessary to encode the size
   virtual uint16_t getNbWords() const = 0;
 
@@ -162,36 +151,20 @@ class SValue final : public Value {
   Data m_value;
 
  public:
-  SValue()
-      : m_type(Value::Type::Unsigned), m_size(0), m_valid(1), m_negative(0) {
-    m_value.u_int = 0;
-  }
+  SValue() : m_type(Value::Type::Unsigned), m_size(0), m_valid(1), m_negative(0) { m_value.u_int = 0; }
   SValue(int64_t val, int32_t size)
-      : m_type(Value::Type::Integer),
-        m_size(size),
-        m_valid(1),
-        m_negative(val < 0),
-        m_signed(true) {
+      : m_type(Value::Type::Integer), m_size(size), m_valid(1), m_negative(val < 0), m_signed(true) {
     m_value.s_int = val;
   }
-  explicit SValue(uint64_t val)
-      : m_type(Value::Type::Unsigned), m_size(64), m_valid(1), m_negative(0) {
+  explicit SValue(uint64_t val) : m_type(Value::Type::Unsigned), m_size(64), m_valid(1), m_negative(0) {
     m_value.u_int = val;
   }
   explicit SValue(int64_t val)
-      : m_type(Value::Type::Integer),
-        m_size(64),
-        m_valid(1),
-        m_negative(val < 0),
-        m_signed(true) {
+      : m_type(Value::Type::Integer), m_size(64), m_valid(1), m_negative(val < 0), m_signed(true) {
     m_value.s_int = val;
   }
   explicit SValue(double val)
-      : m_type(Value::Type::Double),
-        m_size(64),
-        m_valid(1),
-        m_negative(val < 0),
-        m_signed(true) {
+      : m_type(Value::Type::Double), m_size(64), m_valid(1), m_negative(val < 0), m_signed(true) {
     m_value.d_int = val;
   }
   ~SValue() final;
@@ -332,11 +305,7 @@ class LValue final : public Value {
   LValue(const LValue&);
   LValue() = default;
   LValue(Type type, SValue* values, uint16_t nbWords)
-      : m_type(type),
-        m_nbWords(nbWords),
-        m_valueArray(values),
-        m_valid(1),
-        m_negative(0) {}
+      : m_type(type), m_nbWords(nbWords), m_valueArray(values), m_valid(1), m_negative(0) {}
   explicit LValue(uint64_t val);
   explicit LValue(int64_t val);
   explicit LValue(double val);
@@ -443,14 +412,9 @@ class StValue final : public Value {
   friend LValue;
 
  public:
-  StValue()
-      : m_type(Type::String), m_size(0), m_valid(false), m_typespec(nullptr) {}
+  StValue() : m_type(Type::String), m_size(0), m_valid(false), m_typespec(nullptr) {}
   explicit StValue(std::string_view val)
-      : m_type(Type::String),
-        m_value(val),
-        m_size(val.size()),
-        m_valid(true),
-        m_typespec(nullptr) {}
+      : m_type(Type::String), m_value(val), m_size(val.size()), m_valid(true), m_typespec(nullptr) {}
   ~StValue() final;
 
   int32_t getSize() const final { return m_size; }
@@ -529,47 +493,29 @@ class StValue final : public Value {
     m_signed = false;
     m_typespec = nullptr;
   }
-  bool operator<(const Value& rhs) const final {
-    return m_value < (value_cast<const StValue*>(&rhs))->m_value;
-  }
-  bool operator==(const Value& rhs) const final {
-    return m_value == (value_cast<const StValue*>(&rhs))->m_value;
-  }
+  bool operator<(const Value& rhs) const final { return m_value < (value_cast<const StValue*>(&rhs))->m_value; }
+  bool operator==(const Value& rhs) const final { return m_value == (value_cast<const StValue*>(&rhs))->m_value; }
   uint64_t getValueUL(uint16_t index = 0) const final {
     switch (m_type) {
-      case Value::Type::Integer:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
-      case Value::Type::Unsigned:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
-      case Value::Type::Hexadecimal:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 16);
-      case Value::Type::Octal:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 8);
-      case Value::Type::Binary:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 2);
-      default:
-        return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
+      case Value::Type::Integer: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
+      case Value::Type::Unsigned: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
+      case Value::Type::Hexadecimal: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 16);
+      case Value::Type::Octal: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 8);
+      case Value::Type::Binary: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 2);
+      default: return (uint64_t)std::strtoull(m_value.c_str(), nullptr, 10);
     }
   }
   int64_t getValueL(uint16_t index = 0) const final {
     switch (m_type) {
-      case Value::Type::Integer:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
-      case Value::Type::Unsigned:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
-      case Value::Type::Hexadecimal:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 16);
-      case Value::Type::Octal:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 8);
-      case Value::Type::Binary:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 2);
-      default:
-        return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
+      case Value::Type::Integer: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
+      case Value::Type::Unsigned: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
+      case Value::Type::Hexadecimal: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 16);
+      case Value::Type::Octal: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 8);
+      case Value::Type::Binary: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 2);
+      default: return (int64_t)std::strtoll(m_value.c_str(), nullptr, 10);
     }
   }
-  double getValueD(uint16_t index = 0) const final {
-    return strtod(m_value.c_str(), nullptr);
-  }
+  double getValueD(uint16_t index = 0) const final { return strtod(m_value.c_str(), nullptr); }
   std::string getValueS() const final { return m_value; }
 
   std::string uhdmValue() final;

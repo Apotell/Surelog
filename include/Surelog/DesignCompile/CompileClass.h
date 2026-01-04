@@ -39,12 +39,8 @@ namespace SURELOG {
 class Session;
 
 struct FunctorCompileClass final {
-  FunctorCompileClass(Session* session, CompileDesign* compileDesign,
-                      ClassDefinition* classDef, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_class(classDef),
-        m_design(design) {}
+  FunctorCompileClass(Session* session, CompileDesign* compileDesign, ClassDefinition* classDef, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_class(classDef), m_design(design) {}
   FunctorCompileClass(const FunctorCompileClass&) = delete;
   int32_t operator()() const;
 
@@ -57,8 +53,7 @@ struct FunctorCompileClass final {
 
 class CompileClass final {
  public:
-  CompileClass(Session* session, CompileDesign* compileDesign,
-               ClassDefinition* classDef, Design* design)
+  CompileClass(Session* session, CompileDesign* compileDesign, ClassDefinition* classDef, Design* design)
       : m_session(session),
         m_compileDesign(compileDesign),
         m_class(classDef),

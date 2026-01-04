@@ -70,8 +70,7 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   std::filesystem::path toPlatformAbsPath(PathId id) override;
   std::filesystem::path toPlatformRelPath(PathId id) override;
 
-  std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(
-      PathId id) override;
+  std::pair<std::filesystem::path, std::filesystem::path> toSplitPlatformPath(PathId id) override;
 
   std::string getWorkingDir() override;
   std::set<std::string> getWorkingDirs() override;
@@ -81,74 +80,56 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   bool close(std::istream &strm) override;
 
   using FileSystem::openOutput;
-  std::ostream &openOutput(PathId fileId,
-                           std::ios_base::openmode mode) override;
+  std::ostream &openOutput(PathId fileId, std::ios_base::openmode mode) override;
   bool close(std::ostream &strm) override;
 
   using FileSystem::saveContent;
-  bool saveContent(PathId fileId, const char *content, std::streamsize length,
-                   bool useTemp) override;
+  bool saveContent(PathId fileId, const char *content, std::streamsize length, bool useTemp) override;
 
   bool addMapping(std::string_view what, std::string_view with) override;
   std::string remap(std::string_view what) override;
 
-  bool addWorkingDirectoryCacheEntry(std::string_view prefix,
-                                     std::string_view suffix) override;
+  bool addWorkingDirectoryCacheEntry(std::string_view prefix, std::string_view suffix) override;
 
-  PathId getProgramFile(std::string_view hint,
-                        SymbolTable *symbolTable) override;
+  PathId getProgramFile(std::string_view hint, SymbolTable *symbolTable) override;
 
   PathId getWorkingDir(std::string_view dir, SymbolTable *symbolTable) override;
   PathId getOutputDir(std::string_view dir, SymbolTable *symbolTable) override;
   PathId getPrecompiledDir(PathId programId, SymbolTable *symbolTable) override;
 
   using FileSystem::getLogFile;
-  PathId getLogFile(bool isUnitCompilation, std::string_view filename,
-                    SymbolTable *symbolTable) override;
+  PathId getLogFile(bool isUnitCompilation, std::string_view filename, SymbolTable *symbolTable) override;
 
-  PathId getCacheDir(bool isUnitCompilation, std::string_view dirname,
-                     SymbolTable *symbolTable) override;
+  PathId getCacheDir(bool isUnitCompilation, std::string_view dirname, SymbolTable *symbolTable) override;
 
-  PathId getCompileDir(bool isUnitCompilation,
-                       SymbolTable *symbolTable) override;
+  PathId getCompileDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
 
   using FileSystem::getPpOutputFile;
-  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId,
-                         std::string_view libraryName,
+  PathId getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                          SymbolTable *symbolTable) override;
 
   using FileSystem::getPpCacheFile;
-  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                        std::string_view libraryName, bool isPrecompiled,
+  PathId getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName, bool isPrecompiled,
                         SymbolTable *symbolTable) override;
 
   using FileSystem::getParseCacheFile;
-  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId,
-                           std::string_view libraryName, bool isPrecompiled,
+  PathId getParseCacheFile(bool isUnitCompilation, PathId ppFileId, std::string_view libraryName, bool isPrecompiled,
                            SymbolTable *symbolTable) override;
 
   using FileSystem::getPythonCacheFile;
-  PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                            std::string_view libraryName,
+  PathId getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, std::string_view libraryName,
                             SymbolTable *symbolTable) override;
 
-  PathId getPpMultiprocessingDir(bool isUnitCompilation,
-                                 SymbolTable *symbolTable) override;
-  PathId getParserMultiprocessingDir(bool isUnitCompilation,
-                                     SymbolTable *symbolTable) override;
+  PathId getPpMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
+  PathId getParserMultiprocessingDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
 
-  PathId getChunkFile(PathId ppFileId, int32_t chunkIndex,
-                      SymbolTable *symbolTable) override;
+  PathId getChunkFile(PathId ppFileId, int32_t chunkIndex, SymbolTable *symbolTable) override;
 
-  PathId getCheckerDir(bool isUnitCompilation,
-                       SymbolTable *symbolTable) override;
+  PathId getCheckerDir(bool isUnitCompilation, SymbolTable *symbolTable) override;
   PathId getCheckerFile(PathId uhdmFileId, SymbolTable *symbolTable) override;
-  PathId getCheckerHtmlFile(PathId uhdmFileId,
-                            SymbolTable *symbolTable) override;
-  PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index,
-                            SymbolTable *symbolTable) override;
-  PathId getOutputUhdmFile(bool isUnitCompilation,
-                           SymbolTable *symbolTable) override;
+  PathId getCheckerHtmlFile(PathId uhdmFileId, SymbolTable *symbolTable) override;
+  PathId getCheckerHtmlFile(PathId uhdmFileId, int32_t index, SymbolTable *symbolTable) override;
+  PathId getOutputUhdmFile(bool isUnitCompilation, SymbolTable *symbolTable) override;
 
   bool rename(PathId whatId, PathId toId) override;
   bool remove(PathId fileId) override;
@@ -161,33 +142,23 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   bool isDirectory(PathId id) override;
   bool isRegularFile(PathId id) override;
   bool filesize(PathId fileId, std::streamsize *result) override;
-  std::filesystem::file_time_type modtime(
-      PathId fileId, std::filesystem::file_time_type defaultOnFail) override;
+  std::filesystem::file_time_type modtime(PathId fileId, std::filesystem::file_time_type defaultOnFail) override;
 
-  PathId locate(std::string_view name, const PathIdVector &directories,
-                SymbolTable *symbolTable) override;
+  PathId locate(std::string_view name, const PathIdVector &directories, SymbolTable *symbolTable) override;
 
-  PathIdVector &collect(PathId dirId, SymbolTable *symbolTable,
+  PathIdVector &collect(PathId dirId, SymbolTable *symbolTable, PathIdVector &container) override;
+  PathIdVector &collect(PathId dirId, std::string_view extension, SymbolTable *symbolTable,
                         PathIdVector &container) override;
-  PathIdVector &collect(PathId dirId, std::string_view extension,
-                        SymbolTable *symbolTable,
-                        PathIdVector &container) override;
-  PathIdVector &matching(PathId dirId, std::string_view pattern,
-                         SymbolTable *symbolTable,
+  PathIdVector &matching(PathId dirId, std::string_view pattern, SymbolTable *symbolTable,
                          PathIdVector &container) override;
-  PathIdVector &matching(PathId dirId, const std::regex &pattern,
-                         SymbolTable *symbolTable,
+  PathIdVector &matching(PathId dirId, const std::regex &pattern, SymbolTable *symbolTable,
                          PathIdVector &container) override;
 
-  PathId getChild(PathId id, std::string_view name,
-                  SymbolTable *symbolTable) override;
-  PathId getSibling(PathId id, std::string_view name,
-                    SymbolTable *symbolTable) override;
+  PathId getChild(PathId id, std::string_view name, SymbolTable *symbolTable) override;
+  PathId getSibling(PathId id, std::string_view name, SymbolTable *symbolTable) override;
   PathId getParent(PathId id, SymbolTable *symbolTable) override;
-  std::pair<SymbolId, std::string_view> getLeaf(
-      PathId id, SymbolTable *symbolTable) override;
-  std::pair<SymbolId, std::string_view> getType(
-      PathId id, SymbolTable *symbolTable) override;
+  std::pair<SymbolId, std::string_view> getLeaf(PathId id, SymbolTable *symbolTable) override;
+  std::pair<SymbolId, std::string_view> getType(PathId id, SymbolTable *symbolTable) override;
 
   void printConfiguration(std::ostream &out) override;
 
@@ -199,10 +170,8 @@ class PlatformFileSystem /*final*/ : public FileSystem {
   void addConfiguration(const std::filesystem::path &sourceDir);
   std::filesystem::path getPrecompiledDir(SymbolTable *symbolTable);
 
-  virtual std::istream &openInput(const std::filesystem::path &filepath,
-                                  std::ios_base::openmode mode);
-  virtual std::ostream &openOutput(const std::filesystem::path &filepath,
-                                   std::ios_base::openmode mode);
+  virtual std::istream &openInput(const std::filesystem::path &filepath, std::ios_base::openmode mode);
+  virtual std::ostream &openOutput(const std::filesystem::path &filepath, std::ios_base::openmode mode);
 
   // ref: https://stackoverflow.com/a/18940595
   template <class T>
@@ -222,24 +191,18 @@ class PlatformFileSystem /*final*/ : public FileSystem {
       template <class U, class... Ts>
       Helper(std::unique_ptr<U, Ts...> const &up) : ptr(up.get()) {}  // NOLINT
       // && optional: enforces rvalue use only
-      bool operator<(const Helper &o) const {
-        return std::less<T *>()(ptr, o.ptr);
-      }
+      bool operator<(const Helper &o) const { return std::less<T *>()(ptr, o.ptr); }
     };
     // Without helper, we would need 2^n different overloads, where
     // n is the number of types we want to support (so, 8 with
     // raw pointers, unique pointers, and shared pointers). That
     // seems silly.
     // && helps enforce rvalue use only
-    bool operator()(Helper const &&lhs, Helper const &&rhs) const {
-      return lhs < rhs;
-    }
+    bool operator()(Helper const &&lhs, Helper const &&rhs) const { return lhs < rhs; }
   };
 
-  using InputStreams =
-      std::set<std::unique_ptr<std::istream>, Comparer<std::istream>>;
-  using OutputStreams =
-      std::set<std::unique_ptr<std::ostream>, Comparer<std::ostream>>;
+  using InputStreams = std::set<std::unique_ptr<std::istream>, Comparer<std::istream>>;
+  using OutputStreams = std::set<std::unique_ptr<std::ostream>, Comparer<std::ostream>>;
 
   const std::filesystem::path m_workingDir;
 

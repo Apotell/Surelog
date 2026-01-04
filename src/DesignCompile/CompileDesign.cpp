@@ -75,12 +75,9 @@
 #endif
 
 namespace SURELOG {
-CompileDesign::CompileDesign(Session* session, Compiler* compiler)
-    : m_session(session), m_compiler(compiler) {}
+CompileDesign::CompileDesign(Session* session, Compiler* compiler) : m_session(session), m_compiler(compiler) {}
 
-uhdm::Serializer& CompileDesign::getSerializer() {
-  return m_compiler->getSerializer();
-}
+uhdm::Serializer& CompileDesign::getSerializer() { return m_compiler->getSerializer(); }
 
 void CompileDesign::lockSerializer() { m_compiler->lockSerializer(); }
 
@@ -91,28 +88,26 @@ bool CompileDesign::compile() {
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
   SymbolTable* const symbols = m_session->getSymbolTable();
-  uhdm::ErrorHandler errHandler =
-      [=](uhdm::ErrorType errType, std::string_view msg,
-          const uhdm::Any* object1, const uhdm::Any* object2) {
-        if (object1) {
-          Location loc1(fileSystem->toPathId(object1->getFile(), symbols),
-                        object1->getStartLine(), object1->getStartColumn(),
-                        symbols->registerSymbol(msg));
-          if (object2) {
-            Location loc2(fileSystem->toPathId(object2->getFile(), symbols),
-                          object2->getStartLine(), object2->getStartColumn());
-            Error err((ErrorDefinition::ErrorType)errType, loc1, loc2);
-            errors->addError(err);
-          } else {
-            Error err((ErrorDefinition::ErrorType)errType, loc1);
-            errors->addError(err);
-          }
-        } else {
-          Location loc(symbols->registerSymbol(msg));
-          Error err((ErrorDefinition::ErrorType)errType, loc);
-          errors->addError(err);
-        }
-      };
+  uhdm::ErrorHandler errHandler = [=](uhdm::ErrorType errType, std::string_view msg, const uhdm::Any* object1,
+                                      const uhdm::Any* object2) {
+    if (object1) {
+      Location loc1(fileSystem->toPathId(object1->getFile(), symbols), object1->getStartLine(),
+                    object1->getStartColumn(), symbols->registerSymbol(msg));
+      if (object2) {
+        Location loc2(fileSystem->toPathId(object2->getFile(), symbols), object2->getStartLine(),
+                      object2->getStartColumn());
+        Error err((ErrorDefinition::ErrorType)errType, loc1, loc2);
+        errors->addError(err);
+      } else {
+        Error err((ErrorDefinition::ErrorType)errType, loc1);
+        errors->addError(err);
+      }
+    } else {
+      Location loc(symbols->registerSymbol(msg));
+      Error err((ErrorDefinition::ErrorType)errType, loc);
+      errors->addError(err);
+    }
+  };
 
   uhdm::Serializer& serializer = m_compiler->getSerializer();
   serializer.setErrorHandler(errHandler);
@@ -121,8 +116,7 @@ bool CompileDesign::compile() {
     Location loc(BadSymbolId);
     Error err1(ErrorDefinition::COMP_COMPILE, loc);
     errors2->addError(err1);
-    errors2->printMessage(err1,
-                          m_session->getCommandLineParser()->muteStdout());
+    errors2->printMessage(err1, m_session->getCommandLineParser()->muteStdout());
     delete errors2;
   }
   const uhdm::ScopedScope scopedScope(m_compiler->getDesign()->getUhdmDesign());
@@ -172,8 +166,7 @@ void CompileDesign::compileMT_(ObjectMapType& objects, int32_t maxThreadCount) {
     for (int32_t i = 0; i < maxThreadCount; i++) {
       std::thread* th = new std::thread([=] {
         for (uint32_t j = 0; j < jobArray[i].size(); j++) {
-          FunctorType funct(m_sessions[i], this, jobArray[i][j],
-                            m_compiler->getDesign());
+          FunctorType funct(m_sessions[i], this, jobArray[i][j], m_compiler->getDesign());
           funct.operator()();
         }
       });
@@ -188,8 +181,7 @@ void CompileDesign::compileMT_(ObjectMapType& objects, int32_t maxThreadCount) {
   }
 }
 
-void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
-                                    Design* design, bool finalCollection) {
+void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files, Design* design, bool finalCollection) {
   typedef std::map<std::string, std::vector<Package*>> FileNamePackageMap;
   FileNamePackageMap fileNamePackageMap;
   SymbolTable* const symbols = m_session->getSymbolTable();
@@ -209,8 +201,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
 
         if (oldParentFile && (oldParentFile == newParentFile)) {
           // Recombine splitted module
-          existing->addFileContent(mod.second->getFileContents()[0],
-                                   mod.second->getNodeIds()[0]);
+          existing->addFileContent(mod.second->getFileContents()[0], mod.second->getNodeIds()[0]);
           for (auto& classdef : mod.second->getClassDefinitions()) {
             existing->addClassDefinition(classdef.first, classdef.second);
             classdef.second->setContainer(existing);
@@ -237,19 +228,14 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
         const FileContent* newParentFile = newFC->getParent();
         NodeId newNodeId = newP->getNodeIds()[0];
         if (!finalCollection &&
-            ((oldParentFile != newParentFile) ||
-             ((oldParentFile == nullptr) && (newParentFile == nullptr)))) {
+            ((oldParentFile != newParentFile) || ((oldParentFile == nullptr) && (newParentFile == nullptr)))) {
           NodeId oldNodeId = existing->getNodeIds()[0];
           uint32_t oldLine = oldFC->Line(oldNodeId);
           uint32_t newLine = newFC->Line(newNodeId);
-          if ((oldFC->getFileId() != newFC->getFileId()) ||
-              (oldLine != newLine)) {
-            Location loc1(oldFC->getFileId(), oldLine, oldFC->Column(oldNodeId),
-                          symbols->registerSymbol(pack.first));
-            Location loc2(newFC->getFileId(), newLine, newFC->Column(newNodeId),
-                          symbols->registerSymbol(pack.first));
-            Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PACKAGE, loc1,
-                      loc2);
+          if ((oldFC->getFileId() != newFC->getFileId()) || (oldLine != newLine)) {
+            Location loc1(oldFC->getFileId(), oldLine, oldFC->Column(oldNodeId), symbols->registerSymbol(pack.first));
+            Location loc2(newFC->getFileId(), newLine, newFC->Column(newNodeId), symbols->registerSymbol(pack.first));
+            Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PACKAGE, loc1, loc2);
             errors->addError(err);
           }
         }
@@ -292,10 +278,8 @@ bool CompileDesign::compilation_() {
 
   for (int32_t i = 0; i < maxThreadCount; ++i) {
     SymbolTable* const symbols = m_session->getSymbolTable()->CreateSnapshot();
-    m_sessions.emplace_back(new Session(m_session->getFileSystem(), symbols,
-                                        m_session->getLogListener(), nullptr,
-                                        m_session->getCommandLineParser(),
-                                        m_session->getPrecompiled()));
+    m_sessions.emplace_back(new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                        m_session->getCommandLineParser(), m_session->getPrecompiled()));
   }
 
   for (auto& file : all_files) {
@@ -304,14 +288,11 @@ bool CompileDesign::compilation_() {
     }
   }
 
-  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorCreateLookup>(
-      all_files, maxThreadCount);
+  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorCreateLookup>(all_files, maxThreadCount);
 
-  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorResolve>(
-      all_files, maxThreadCount);
+  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorResolve>(all_files, maxThreadCount);
 
-  compileMT_<FileContent, Design::FileIdDesignContentMap,
-             FunctorCompileFileContentDecl>(all_files, maxThreadCount);
+  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorCompileFileContentDecl>(all_files, maxThreadCount);
 
   collectObjects_(all_files, design, false);
   m_compiler->getDesign()->orderPackages();
@@ -322,12 +303,10 @@ bool CompileDesign::compilation_() {
     funct.operator()();
   }
 
-  compileMT_<FileContent, Design::FileIdDesignContentMap,
-             FunctorCompileFileContent>(all_files, maxThreadCount);
+  compileMT_<FileContent, Design::FileIdDesignContentMap, FunctorCompileFileContent>(all_files, maxThreadCount);
 
   // Compile modules
-  compileMT_<ModuleDefinition, ModuleNameModuleDefinitionMap,
-             FunctorCompileModule>(
+  compileMT_<ModuleDefinition, ModuleNameModuleDefinitionMap, FunctorCompileModule>(
       m_compiler->getDesign()->getModuleDefinitions(), maxThreadCount);
 
   // Compile programs
@@ -341,8 +320,7 @@ bool CompileDesign::compilation_() {
   }
 
   // Compile classes
-  compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,
-             FunctorCompileClass>(
+  compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap, FunctorCompileClass>(
       m_compiler->getDesign()->getClassDefinitions(), maxThreadCount);
   design->clearContainers();
 
@@ -363,8 +341,7 @@ void CompileDesign::purgeParsers() { m_compiler->purgeParsers(); }
 
 bool CompileDesign::writeUHDM(PathId fileId) {
   bool result = false;
-  if (UhdmWriter* uhdmwriter =
-          new UhdmWriter(m_session, this, m_compiler->getDesign())) {
+  if (UhdmWriter* uhdmwriter = new UhdmWriter(m_session, this, m_compiler->getDesign())) {
     result = uhdmwriter->write(fileId);
     delete uhdmwriter;
   }
@@ -378,18 +355,14 @@ void decompile(Session* session, ValuedComponentI* instance) {
     if (inst) {
       DesignComponent* component = inst->getDefinition();
       while (inst) {
-        std::cout << "Instance:" << inst->getFullPathName() << " "
-                  << fileSystem->toPath(inst->getFileId()) << "\n";
+        std::cout << "Instance:" << inst->getFullPathName() << " " << fileSystem->toPath(inst->getFileId()) << "\n";
         std::cout << "Mod: " << inst->getModuleName() << " "
-                  << fileSystem->toPath(
-                         component->getFileContents()[0]->getFileId())
-                  << "\n";
+                  << fileSystem->toPath(component->getFileContents()[0]->getFileId()) << "\n";
 
         for (const auto& ps : inst->getMappedValues()) {
           const std::string& name = ps.first;
           Value* val = ps.second.first;
-          std::cout << std::string("    " + name + " = " + val->uhdmValue() +
-                                   "\n");
+          std::cout << std::string("    " + name + " = " + val->uhdmValue() + "\n");
         }
         for (const auto& ps : inst->getComplexValues()) {
           const std::string& name = ps.first;

@@ -67,52 +67,30 @@ class PortNetHolder {
 
   uhdm::ContAssignCollection* getContAssigns() const { return m_contAssigns; }
 
-  void setContAssigns(uhdm::ContAssignCollection* contAssigns) {
-    m_contAssigns = contAssigns;
-  }
+  void setContAssigns(uhdm::ContAssignCollection* contAssigns) { m_contAssigns = contAssigns; }
 
   uhdm::ProcessCollection* getProcesses() const { return m_processes; }
-  void setProcesses(uhdm::ProcessCollection* processes) {
-    m_processes = processes;
-  }
+  void setProcesses(uhdm::ProcessCollection* processes) { m_processes = processes; }
 
   uhdm::AnyCollection* getParameters() const { return m_parameters; }
-  void setParameters(uhdm::AnyCollection* parameters) {
-    m_parameters = parameters;
-  }
+  void setParameters(uhdm::AnyCollection* parameters) { m_parameters = parameters; }
 
   uhdm::AnyCollection* getAssertions() const { return m_assertions; }
-  void setAssertions(uhdm::AnyCollection* assertions) {
-    m_assertions = assertions;
-  }
+  void setAssertions(uhdm::AnyCollection* assertions) { m_assertions = assertions; }
 
-  uhdm::ParamAssignCollection* getParamAssigns() const {
-    return m_paramAssigns;
-  }
-  void setParamAssigns(uhdm::ParamAssignCollection* paramAssigns) {
-    m_paramAssigns = paramAssigns;
-  }
+  uhdm::ParamAssignCollection* getParamAssigns() const { return m_paramAssigns; }
+  void setParamAssigns(uhdm::ParamAssignCollection* paramAssigns) { m_paramAssigns = paramAssigns; }
 
-  uhdm::ParamAssignCollection* getOrigParamAssigns() const {
-    return m_origParamAssigns;
-  }
-  void setOrigParamAssigns(uhdm::ParamAssignCollection* paramAssigns) {
-    m_origParamAssigns = paramAssigns;
-  }
+  uhdm::ParamAssignCollection* getOrigParamAssigns() const { return m_origParamAssigns; }
+  void setOrigParamAssigns(uhdm::ParamAssignCollection* paramAssigns) { m_origParamAssigns = paramAssigns; }
 
   uhdm::TaskFuncCollection* getTaskFuncs() const { return m_taskFuncs; }
 
-  void setTaskFuncs(uhdm::TaskFuncCollection* taskFuncs) {
-    m_taskFuncs = taskFuncs;
-  }
+  void setTaskFuncs(uhdm::TaskFuncCollection* taskFuncs) { m_taskFuncs = taskFuncs; }
 
-  uhdm::TaskFuncDeclCollection* getTaskFuncDecls() const {
-    return m_taskFuncDecls;
-  }
+  uhdm::TaskFuncDeclCollection* getTaskFuncDecls() const { return m_taskFuncDecls; }
 
-  void setTaskFuncDecls(uhdm::TaskFuncDeclCollection* taskFuncDecls) {
-    m_taskFuncDecls = taskFuncDecls;
-  }
+  void setTaskFuncDecls(uhdm::TaskFuncDeclCollection* taskFuncDecls) { m_taskFuncDecls = taskFuncDecls; }
 
  protected:
   std::vector<Signal*> m_ports;

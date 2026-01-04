@@ -57,15 +57,13 @@ TEST(StringUtilsTest, TokenizeMulti) {
   tok_result.clear();
   StringUtils::tokenizeMulti("Mary_¯Had_¯a_¯little_¯lamb_¯", "_¯", tok_result);
   EXPECT_EQ(tok_result.size(), size_t(6));
-  EXPECT_THAT(tok_result,
-              ElementsAre("Mary", "Had", "a", "little", "lamb", ""));
+  EXPECT_THAT(tok_result, ElementsAre("Mary", "Had", "a", "little", "lamb", ""));
 
   // Consecutive separators should include empty strings
   tok_result.clear();
   StringUtils::tokenizeMulti("Mary_¯Had_¯a_¯little_¯_¯lamb", "_¯", tok_result);
   EXPECT_EQ(tok_result.size(), size_t(6));
-  EXPECT_THAT(tok_result,
-              ElementsAre("Mary", "Had", "a", "little", "", "lamb"));
+  EXPECT_THAT(tok_result, ElementsAre("Mary", "Had", "a", "little", "", "lamb"));
 }
 
 TEST(StringUtilsTest, TokenizeBalanced) {
@@ -75,9 +73,7 @@ TEST(StringUtilsTest, TokenizeBalanced) {
       "[that shall not break]",
       " ", tok_result);
   EXPECT_EQ(tok_result.size(), size_t(4));
-  EXPECT_THAT(tok_result,
-              ElementsAre("\"some text\"", "(that has)", "{multiple clusters}",
-                          "[that shall not break]"));
+  EXPECT_THAT(tok_result, ElementsAre("\"some text\"", "(that has)", "{multiple clusters}", "[that shall not break]"));
 
   // Terminating separator should include an emty string
   tok_result.clear();
@@ -87,8 +83,7 @@ TEST(StringUtilsTest, TokenizeBalanced) {
       " ", tok_result);
   EXPECT_EQ(tok_result.size(), size_t(5));
   EXPECT_THAT(tok_result,
-              ElementsAre("\"some text\"", "(that has)", "{multiple clusters}",
-                          "[that shall not break]", ""));
+              ElementsAre("\"some text\"", "(that has)", "{multiple clusters}", "[that shall not break]", ""));
 
   // Consecutive separators should include empty strings
   tok_result.clear();
@@ -98,8 +93,7 @@ TEST(StringUtilsTest, TokenizeBalanced) {
       " ", tok_result);
   EXPECT_EQ(tok_result.size(), size_t(5));
   EXPECT_THAT(tok_result,
-              ElementsAre("\"some text\"", "(that has)", "{multiple clusters}",
-                          "", "[that shall not break]"));
+              ElementsAre("\"some text\"", "(that has)", "{multiple clusters}", "", "[that shall not break]"));
 }
 
 TEST(StringUtilsTest, ReplaceInTokenVectorWithVectorPattern) {
@@ -209,8 +203,7 @@ TEST(StringUtilsTest, Leaf) {
 }
 
 TEST(StringUtilsTest, ReplaceAll) {
-  EXPECT_EQ("The String With Space",
-            StringUtils::replaceAll("TheFOOStringFOOWithFOOSpace", "FOO", " "));
+  EXPECT_EQ("The String With Space", StringUtils::replaceAll("TheFOOStringFOOWithFOOSpace", "FOO", " "));
 
   // Various substring situations.
   EXPECT_EQ("xABCyABCzABC", StringUtils::replaceAll("xAyAzA", "A", "ABC"));
@@ -262,8 +255,7 @@ TEST(StringUtilsTest, RemoveComments) {
   EXPECT_EQ("hello ", StringUtils::removeComments("hello /// world"));
   EXPECT_EQ("hello ", StringUtils::removeComments("hello // world"));
   EXPECT_EQ("hello ", StringUtils::removeComments("hello # world"));
-  EXPECT_EQ("hello \nworld",
-            StringUtils::removeComments("hello # world\nworld"));
+  EXPECT_EQ("hello \nworld", StringUtils::removeComments("hello # world\nworld"));
 
 #if 0
   // TODO: does not ignore comment-like characters in strings
@@ -286,10 +278,8 @@ TEST(StringUtilsTest, DoubleStringConversion) {
 
 TEST(StringUtilsTest, EvaluateEnvironmentVariables) {
   // Variables not set are expanded to an empty string.
-  EXPECT_EQ("hello  bar",
-            StringUtils::evaluateEnvVars("hello ${TESTING_UNKNOWN_VAR} bar"));
-  EXPECT_EQ("hello  bar",
-            StringUtils::evaluateEnvVars("hello $TESTING_UNKNOWN_VAR/ bar"));
+  EXPECT_EQ("hello  bar", StringUtils::evaluateEnvVars("hello ${TESTING_UNKNOWN_VAR} bar"));
+  EXPECT_EQ("hello  bar", StringUtils::evaluateEnvVars("hello $TESTING_UNKNOWN_VAR/ bar"));
 
   // Variables set via the environment
 #if defined(_WIN32)
@@ -300,8 +290,7 @@ TEST(StringUtilsTest, EvaluateEnvironmentVariables) {
   setenv("TESTING_EVAL_BAR", "bar-value", 1);
 #endif
 
-  EXPECT_EQ("hello foo-value bar",
-            StringUtils::evaluateEnvVars("hello ${TESTING_EVAL_FOO} bar"));
+  EXPECT_EQ("hello foo-value bar", StringUtils::evaluateEnvVars("hello ${TESTING_EVAL_FOO} bar"));
 
 #if defined(_MSC_VER) || defined(__MINGW32__) || defined(__CYGWIN__)
 #define EXPECTED_SEPARATOR "\\"
@@ -309,16 +298,13 @@ TEST(StringUtilsTest, EvaluateEnvironmentVariables) {
 #define EXPECTED_SEPARATOR "/"
 #endif
 
-  EXPECT_EQ("hello bar-value" EXPECTED_SEPARATOR " bar",
-            StringUtils::evaluateEnvVars("hello $TESTING_EVAL_BAR/ bar"));
+  EXPECT_EQ("hello bar-value" EXPECTED_SEPARATOR " bar", StringUtils::evaluateEnvVars("hello $TESTING_EVAL_BAR/ bar"));
 
   // Variables set via registerEnvVar()
-  EXPECT_EQ("hello  bar",
-            StringUtils::evaluateEnvVars("hello ${REGISTERED_EVAL_FOO} bar"));
+  EXPECT_EQ("hello  bar", StringUtils::evaluateEnvVars("hello ${REGISTERED_EVAL_FOO} bar"));
 
   StringUtils::registerEnvVar("REGISTERED_EVAL_FOO", "foo-reg");
-  EXPECT_EQ("hello foo-reg bar",
-            StringUtils::evaluateEnvVars("hello ${REGISTERED_EVAL_FOO} bar"));
+  EXPECT_EQ("hello foo-reg bar", StringUtils::evaluateEnvVars("hello ${REGISTERED_EVAL_FOO} bar"));
 }
 
 TEST(StringUtilsTest, StrCat) {

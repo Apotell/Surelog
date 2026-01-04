@@ -46,8 +46,7 @@ Value* ValuedComponentI::getValue(std::string_view name) const {
     }
 
     if (m_parentScope) {
-      if (const ModuleInstance* inst =
-              valuedcomponenti_cast<ModuleInstance*>(this)) {
+      if (const ModuleInstance* inst = valuedcomponenti_cast<ModuleInstance*>(this)) {
         if (inst->getType() != VObjectType::paModule_instantiation) {
           return m_parentScope->getValue(name);
         }
@@ -61,15 +60,10 @@ Value* ValuedComponentI::getValue(std::string_view name) const {
   return nullptr;
 }
 
-Value* ValuedComponentI::getValue(std::string_view name,
-                                  ExprBuilder& exprBuilder) const {
-  return getValue(name);
-}
+Value* ValuedComponentI::getValue(std::string_view name, ExprBuilder& exprBuilder) const { return getValue(name); }
 
-void ValuedComponentI::deleteValue(std::string_view name,
-                                   ExprBuilder& exprBuilder) {
-  std::map<std::string, std::pair<Value*, int32_t>>::iterator itr =
-      m_paramMap.find(name);
+void ValuedComponentI::deleteValue(std::string_view name, ExprBuilder& exprBuilder) {
+  std::map<std::string, std::pair<Value*, int32_t>>::iterator itr = m_paramMap.find(name);
   if (itr != m_paramMap.end()) {
     exprBuilder.deleteValue((*itr).second.first);
     m_paramMap.erase(itr);
@@ -77,8 +71,7 @@ void ValuedComponentI::deleteValue(std::string_view name,
 }
 
 void ValuedComponentI::forgetValue(std::string_view name) {
-  std::map<std::string, std::pair<Value*, int32_t>>::iterator itr =
-      m_paramMap.find(name);
+  std::map<std::string, std::pair<Value*, int32_t>>::iterator itr = m_paramMap.find(name);
   if (itr != m_paramMap.end()) {
     m_paramMap.erase(itr);
   }

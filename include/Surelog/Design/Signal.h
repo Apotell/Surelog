@@ -46,12 +46,10 @@ class ModuleDefinition;
 
 class Signal final {
  public:
-  Signal(DesignComponent* component, const FileContent* fileContent,
-         NodeId nodeId, NodeId nameId, VObjectType type, VObjectType direction,
-         NodeId packedDimension, NodeId unpackedDimension, bool is_signed);
-  Signal(DesignComponent* component, const FileContent* fileContent,
-         NodeId nodeId, NodeId nameId, NodeId interfaceTypeName,
-         VObjectType subnettype, NodeId unpackedDimension, bool is_signed);
+  Signal(DesignComponent* component, const FileContent* fileContent, NodeId nodeId, NodeId nameId, VObjectType type,
+         VObjectType direction, NodeId packedDimension, NodeId unpackedDimension, bool is_signed);
+  Signal(DesignComponent* component, const FileContent* fileContent, NodeId nodeId, NodeId nameId,
+         NodeId interfaceTypeName, VObjectType subnettype, NodeId unpackedDimension, bool is_signed);
 
   VObjectType getType() const { return m_type; }
   VObjectType getDirection() const { return m_direction; }
@@ -73,9 +71,7 @@ class Signal final {
   std::string getInterfaceTypeName() const;
 
   ModuleDefinition* getInterfaceDef() { return m_interfaceDef; }
-  void setInterfaceDef(ModuleDefinition* interfaceDef) {
-    m_interfaceDef = interfaceDef;
-  }
+  void setInterfaceDef(ModuleDefinition* interfaceDef) { m_interfaceDef = interfaceDef; }
   Modport* getModport() { return m_modPort; }
   void setModport(Modport* modport) { m_modPort = modport; }
   void setDirection(VObjectType direction) { m_direction = direction; }

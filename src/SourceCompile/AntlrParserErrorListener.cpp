@@ -41,11 +41,8 @@
 
 namespace SURELOG {
 
-AntlrParserErrorListener::AntlrParserErrorListener(Session *session,
-                                                   ParseFile *parser,
-                                                   bool watchDogOn,
-                                                   uint32_t lineOffset,
-                                                   PathId fileId)
+AntlrParserErrorListener::AntlrParserErrorListener(Session *session, ParseFile *parser, bool watchDogOn,
+                                                   uint32_t lineOffset, PathId fileId)
     : m_session(session),
       m_parser(parser),
       m_reportedSyntaxError(0),
@@ -54,9 +51,8 @@ AntlrParserErrorListener::AntlrParserErrorListener(Session *session,
       m_lineOffset(lineOffset),
       m_fileId(fileId) {}
 
-void AntlrParserErrorListener::syntaxError(
-    antlr4::Recognizer *recognizer, antlr4::Token *offendingSymbol, size_t line,
-    size_t charPositionInLine, const std::string &msg, std::exception_ptr e) {
+void AntlrParserErrorListener::syntaxError(antlr4::Recognizer *recognizer, antlr4::Token *offendingSymbol, size_t line,
+                                           size_t charPositionInLine, const std::string &msg, std::exception_ptr e) {
   if (m_watchDogOn) {
     m_barked = true;
     return;
@@ -73,17 +69,14 @@ void AntlrParserErrorListener::syntaxError(
     if (!lineText.empty()) {
       lineText.push_back('\n');
       lineText.append(charPositionInLine, ' ');
-      StrAppend(&lineText, "^-- ",
-                fileSystem->toPath(m_parser->getFileId(line + m_lineOffset)),
-                ":", m_parser->getLineNb(line + m_lineOffset), ":",
-                charPositionInLine, ":");
+      StrAppend(&lineText, "^-- ", fileSystem->toPath(m_parser->getFileId(line + m_lineOffset)), ":",
+                m_parser->getLineNb(line + m_lineOffset), ":", charPositionInLine, ":");
     }
   }
   if (m_reportedSyntaxError < 10) {
     SymbolId msgId = m_parser->registerSymbol(msg);
     int32_t adjustedLine = m_parser->getLineNb(line + m_lineOffset);
-    Location loc1(m_parser->getFileId(line + m_lineOffset), adjustedLine,
-                  charPositionInLine, msgId);
+    Location loc1(m_parser->getFileId(line + m_lineOffset), adjustedLine, charPositionInLine, msgId);
     Location loc2(m_parser->registerSymbol(lineText));
     Location loc3(m_parser->getCompileSourceFile()->getFileId(), 0, 0);
     Error err(ErrorDefinition::PA_SYNTAX_ERROR, {loc1, loc2, loc3});
@@ -92,18 +85,17 @@ void AntlrParserErrorListener::syntaxError(
   m_reportedSyntaxError++;
 }
 
-void AntlrParserErrorListener::reportAmbiguity(
-    antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex,
-    size_t stopIndex, bool exact, const antlrcpp::BitSet &ambigAlts,
-    antlr4::atn::ATNConfigSet *configs) {}
+void AntlrParserErrorListener::reportAmbiguity(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa,
+                                               size_t startIndex, size_t stopIndex, bool exact,
+                                               const antlrcpp::BitSet &ambigAlts, antlr4::atn::ATNConfigSet *configs) {}
 
-void AntlrParserErrorListener::reportAttemptingFullContext(
-    antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex,
-    size_t stopIndex, const antlrcpp::BitSet &conflictingAlts,
-    antlr4::atn::ATNConfigSet *configs) {}
+void AntlrParserErrorListener::reportAttemptingFullContext(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa,
+                                                           size_t startIndex, size_t stopIndex,
+                                                           const antlrcpp::BitSet &conflictingAlts,
+                                                           antlr4::atn::ATNConfigSet *configs) {}
 
-void AntlrParserErrorListener::reportContextSensitivity(
-    antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa, size_t startIndex,
-    size_t stopIndex, size_t prediction, antlr4::atn::ATNConfigSet *configs) {}
+void AntlrParserErrorListener::reportContextSensitivity(antlr4::Parser *recognizer, const antlr4::dfa::DFA &dfa,
+                                                        size_t startIndex, size_t stopIndex, size_t prediction,
+                                                        antlr4::atn::ATNConfigSet *configs) {}
 
 }  // namespace SURELOG

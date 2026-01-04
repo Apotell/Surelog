@@ -47,8 +47,7 @@ class Scope : public RTTI {
   using StmtVector = std::vector<Statement*>;
   using ScopeVector = std::vector<Scope*>;
 
-  Scope(std::string_view name, Scope* parent)
-      : m_name(name), m_parentScope(parent) {}
+  Scope(std::string_view name, Scope* parent) : m_name(name), m_parentScope(parent) {}
   ~Scope() override = default;
 
   std::string_view getName() const { return m_name; }

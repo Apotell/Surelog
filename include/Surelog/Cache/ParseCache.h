@@ -46,37 +46,31 @@ class ParseCache final : Cache {
  private:
   PathId getCacheFileId(PathId ppFileId) const;
 
-  bool checkCacheIsValid(PathId cacheFileId,
-                         const ::ParseCache::Reader& root) const;
+  bool checkCacheIsValid(PathId cacheFileId, const ::ParseCache::Reader& root) const;
   bool checkCacheIsValid(PathId cacheFileId) const;
 
   // Store symbols in cache.
   void cacheSymbols(::ParseCache::Builder builder, SymbolTable& sourceSymbols);
 
   // Store errors in cache. Canonicalize strings and store in "targetSymbols".
-  void cacheErrors(::ParseCache::Builder builder, SymbolTable& targetSymbols,
-                   const ErrorContainer* errorContainer,
+  void cacheErrors(::ParseCache::Builder builder, SymbolTable& targetSymbols, const ErrorContainer* errorContainer,
                    const SymbolTable& sourceSymbols, PathId subjectId);
 
   // Convert vobjects from "fcontent" into cachable VObjects.
   // Uses "sourceSymbols" and "targetSymbols" to map symbols found in "fC"
   // to IDs used on the cache on disk.
   // Updates "targetSymbols" if new IDs are needed.
-  void cacheVObjects(::ParseCache::Builder builder, const FileContent* fC,
-                     SymbolTable& targetSymbols,
+  void cacheVObjects(::ParseCache::Builder builder, const FileContent* fC, SymbolTable& targetSymbols,
                      const SymbolTable& sourceSymbols, PathId fileId);
 
-  void cacheDesignElements(::ParseCache::Builder builder, const FileContent* fC,
-                           SymbolTable& targetSymbols,
+  void cacheDesignElements(::ParseCache::Builder builder, const FileContent* fC, SymbolTable& targetSymbols,
                            const SymbolTable& sourceSymbols);
 
   bool restore(PathId cacheFileId);
 
-  void restoreDesignElements(
-      FileContent* fC, SymbolTable& targetSymbols,
-      const ::capnp::List< ::DesignElement, ::capnp::Kind::STRUCT>::Reader&
-          sourceDesignElements,
-      const SymbolTable& sourceSymbols);
+  void restoreDesignElements(FileContent* fC, SymbolTable& targetSymbols,
+                             const ::capnp::List< ::DesignElement, ::capnp::Kind::STRUCT>::Reader& sourceDesignElements,
+                             const SymbolTable& sourceSymbols);
 
  private:
   ParseFile* const m_parse = nullptr;

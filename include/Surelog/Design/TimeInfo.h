@@ -36,14 +36,7 @@ namespace SURELOG {
 class TimeInfo final {
  public:
   enum class Type { None, Timescale, TimeUnitTimePrecision };
-  enum class Unit {
-    Second,
-    Millisecond,
-    Microsecond,
-    Nanosecond,
-    Picosecond,
-    Femtosecond
-  };
+  enum class Unit { Second, Millisecond, Microsecond, Nanosecond, Picosecond, Femtosecond };
 
   Type m_type = Type::None;
   PathId m_fileId;

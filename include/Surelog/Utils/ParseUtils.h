@@ -43,10 +43,8 @@ class TerminalNode;
 }  // namespace antlr4
 
 namespace SURELOG::ParseUtils {
-LineColumn getLineColumn(const antlr4::CommonTokenStream* stream,
-                         antlr4::tree::ParseTree* tree);
-LineColumn getEndLineColumn(const antlr4::CommonTokenStream* stream,
-                            antlr4::tree::ParseTree* tree);
+LineColumn getLineColumn(const antlr4::CommonTokenStream* stream, antlr4::tree::ParseTree* tree);
+LineColumn getEndLineColumn(const antlr4::CommonTokenStream* stream, antlr4::tree::ParseTree* tree);
 
 LineColumn getLineColumn(antlr4::Token* token);
 LineColumn getEndLineColumn(antlr4::Token* token);
@@ -54,8 +52,7 @@ LineColumn getEndLineColumn(antlr4::Token* token);
 LineColumn getLineColumn(antlr4::tree::TerminalNode* node);
 LineColumn getEndLineColumn(antlr4::tree::TerminalNode* node);
 
-void tokenizeAtComma(std::vector<std::string>& actualArgs,
-                     const std::vector<antlr4::tree::ParseTree*>& tokens);
+void tokenizeAtComma(std::vector<std::string>& actualArgs, const std::vector<antlr4::tree::ParseTree*>& tokens);
 std::vector<antlr4::Token*> getFlatTokenList(antlr4::tree::ParseTree* tree);
 }  // namespace SURELOG::ParseUtils
 

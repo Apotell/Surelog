@@ -37,8 +37,7 @@ Precompiled::Precompiled(Session *session) : m_session(session) {
   addPrecompiled("ovm_pkg", "ovm_pkg.sv");
 }
 
-void Precompiled::addPrecompiled(std::string_view packageName,
-                                 std::string_view fileName) {
+void Precompiled::addPrecompiled(std::string_view packageName, std::string_view fileName) {
   m_packageMap.emplace(packageName, fileName);
   m_packageFileSet.emplace(fileName);
 }

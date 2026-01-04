@@ -43,11 +43,8 @@ class FileContent;
 class Session;
 
 struct FunctorCreateLookup final {
-  FunctorCreateLookup(Session* session, CompileDesign* compileDesign,
-                      FileContent* fileContent, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_fileContent(fileContent) {}
+  FunctorCreateLookup(Session* session, CompileDesign* compileDesign, FileContent* fileContent, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_fileContent(fileContent) {}
   FunctorCreateLookup(const FunctorCreateLookup&) = delete;
   int32_t operator()() const;
 
@@ -58,11 +55,8 @@ struct FunctorCreateLookup final {
 };
 
 struct FunctorResolve final {
-  FunctorResolve(Session* session, CompileDesign* compileDesign,
-                 FileContent* fileContent, Design* design)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_fileContent(fileContent) {}
+  FunctorResolve(Session* session, CompileDesign* compileDesign, FileContent* fileContent, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_fileContent(fileContent) {}
   FunctorResolve(const FunctorResolve&) = delete;
   int32_t operator()() const;
 
@@ -74,11 +68,8 @@ struct FunctorResolve final {
 
 class ResolveSymbols final : public CompileStep {
  public:
-  ResolveSymbols(Session* session, CompileDesign* compileDesign,
-                 FileContent* fileContent)
-      : m_session(session),
-        m_compileDesign(compileDesign),
-        m_fileContent(fileContent) {}
+  ResolveSymbols(Session* session, CompileDesign* compileDesign, FileContent* fileContent)
+      : m_session(session), m_compileDesign(compileDesign), m_fileContent(fileContent) {}
   ResolveSymbols(const ResolveSymbols&) = delete;
   ~ResolveSymbols() final = default;
 
@@ -114,30 +105,24 @@ class ResolveSymbols final : public CompileStep {
   NodeId sl_get(NodeId parent,
                 VObjectType type) const final;  // Get first item of type
 
-  NodeId sl_parent(
-      NodeId parent,
-      VObjectType type) const final;  // Get first parent item of type
+  NodeId sl_parent(NodeId parent,
+                   VObjectType type) const final;  // Get first parent item of type
 
-  NodeId sl_parent(NodeId parent, const VObjectTypeUnorderedSet& types,
-                   VObjectType& actualType) const final;
+  NodeId sl_parent(NodeId parent, const VObjectTypeUnorderedSet& types, VObjectType& actualType) const final;
 
-  std::vector<NodeId> sl_get_all(
-      NodeId parent,
-      VObjectType type) const final;  // get all items of type
+  std::vector<NodeId> sl_get_all(NodeId parent,
+                                 VObjectType type) const final;  // get all items of type
 
   NodeId sl_collect(NodeId parent,
-                    VObjectType type)
-      const final;  // Recursively search for first item of type
+                    VObjectType type) const final;  // Recursively search for first item of type
 
   std::vector<NodeId> sl_collect_all(NodeId parent,
-                                     VObjectType type)
-      const final;  // Recursively search for all items of type
+                                     VObjectType type) const final;  // Recursively search for all items of type
 
   Compiler* getCompiler() const;
 
  private:
-  bool bindDefinition_(NodeId objIndex,
-                       const VObjectTypeUnorderedSet& bindTypes);
+  bool bindDefinition_(NodeId objIndex, const VObjectTypeUnorderedSet& bindTypes);
 
   Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign = nullptr;

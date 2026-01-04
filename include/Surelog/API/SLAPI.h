@@ -53,55 +53,42 @@ class ErrorContainer;
 using UIntVector = std::vector<uint32_t>;
 
 /* Error DB API  */
-void SLsetWaiver(const char* messageId, const char* fileName = nullptr,
-                 uint32_t line = 0, const char* objectName = nullptr);
+void SLsetWaiver(const char* messageId, const char* fileName = nullptr, uint32_t line = 0,
+                 const char* objectName = nullptr);
 
 void SLoverrideSeverity(const char* messageId, const char* severity);
 
-void SLregisterNewErrorType(const char* messageId, const char* text,
-                            const char* secondLine);
+void SLregisterNewErrorType(const char* messageId, const char* text, const char* secondLine);
 
-void SLaddError(ErrorContainer* container, const char* messageId,
-                const char* fileName, uint32_t line, uint32_t col,
+void SLaddError(ErrorContainer* container, const char* messageId, const char* fileName, uint32_t line, uint32_t col,
                 const char* objectName);
 
-void SLaddErrorContext(SV3_1aPythonListener* prog,
-                       antlr4::ParserRuleContext* context,
-                       const char* messageId, const char* objectName,
-                       bool printColumn = false);
+void SLaddErrorContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context, const char* messageId,
+                       const char* objectName, bool printColumn = false);
 
-void SLaddMLErrorContext(SV3_1aPythonListener* prog,
-                         antlr4::ParserRuleContext* context1,
-                         antlr4::ParserRuleContext* context2,
-                         const char* messageId, const char* objectName1,
+void SLaddMLErrorContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context1,
+                         antlr4::ParserRuleContext* context2, const char* messageId, const char* objectName1,
                          const char* objectName2, bool printColumn = false);
 
-void SLaddMLError(ErrorContainer* container, const char* messageId,
-                  const char* fileName1, uint32_t line1, uint32_t col1,
-                  const char* objectName1, const char* fileName2,
-                  uint32_t line2, uint32_t col2, const char* objectName2);
+void SLaddMLError(ErrorContainer* container, const char* messageId, const char* fileName1, uint32_t line1,
+                  uint32_t col1, const char* objectName1, const char* fileName2, uint32_t line2, uint32_t col2,
+                  const char* objectName2);
 
 /* File Listener API */
-std::string SLgetFile(SV3_1aPythonListener* prog,
-                      antlr4::ParserRuleContext* context);
+std::string SLgetFile(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-int32_t SLgetLine(SV3_1aPythonListener* prog,
-                  antlr4::ParserRuleContext* context);
+int32_t SLgetLine(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-int32_t SLgetColumn(SV3_1aPythonListener* prog,
-                    antlr4::ParserRuleContext* context);
+int32_t SLgetColumn(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-std::string SLgetText(SV3_1aPythonListener* prog,
-                      antlr4::ParserRuleContext* context);
+std::string SLgetText(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-std::vector<std::string> SLgetTokens(SV3_1aPythonListener* prog,
-                                     antlr4::ParserRuleContext* context);
+std::vector<std::string> SLgetTokens(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-antlr4::ParserRuleContext* SLgetParentContext(
-    SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
+antlr4::ParserRuleContext* SLgetParentContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(
-    SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
+std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(SV3_1aPythonListener* prog,
+                                                             antlr4::ParserRuleContext* context);
 
 /* Parser API */
 RawNodeId SLgetRootNode(FileContent* fC);
@@ -132,20 +119,16 @@ UIntVector SLgetAll(FileContent* fC, RawNodeId parent,
 UIntVector SLgetAll(FileContent* fC, RawNodeId parent,
                     const UIntVector& types);  // get all child items of types
 
-RawNodeId SLcollect(
-    FileContent* fC, RawNodeId parent,
-    uint32_t type);  // Recursively search for first item of type
+RawNodeId SLcollect(FileContent* fC, RawNodeId parent,
+                    uint32_t type);  // Recursively search for first item of type
 
-UIntVector SLcollectAll(
-    FileContent* fC, RawNodeId parent, uint32_t type,
-    bool first);  // Recursively search for all items of type
+UIntVector SLcollectAll(FileContent* fC, RawNodeId parent, uint32_t type,
+                        bool first);  // Recursively search for all items of type
 
-UIntVector SLcollectAll(
-    FileContent* fC, RawNodeId parent, const UIntVector& types,
-    bool first);  // Recursively search for all items of types
+UIntVector SLcollectAll(FileContent* fC, RawNodeId parent, const UIntVector& types,
+                        bool first);  // Recursively search for all items of types
 
-UIntVector SLcollectAll(FileContent* fC, RawNodeId parent,
-                        const UIntVector& types, const UIntVector& stopPoints,
+UIntVector SLcollectAll(FileContent* fC, RawNodeId parent, const UIntVector& types, const UIntVector& stopPoints,
                         bool first);
 // Recursively search for all items of types
 // and stops at types stopPoints

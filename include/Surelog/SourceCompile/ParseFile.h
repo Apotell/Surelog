@@ -55,25 +55,22 @@ class ParseFile final {
   ParseFile(Session* session, PathId fileId);
 
   // Regular file
-  ParseFile(Session* session, PathId fileId, CompileSourceFile* csf,
-            CompilationUnit* compilationUnit, Library* library, PathId ppFileId,
-            bool keepParserHandler);
+  ParseFile(Session* session, PathId fileId, CompileSourceFile* csf, CompilationUnit* compilationUnit, Library* library,
+            PathId ppFileId, bool keepParserHandler);
 
   // File chunk
-  ParseFile(Session* session, CompileSourceFile* compileSourceFile,
-            ParseFile* parent, PathId chunkFileId, uint32_t offsetLine);
+  ParseFile(Session* session, CompileSourceFile* compileSourceFile, ParseFile* parent, PathId chunkFileId,
+            uint32_t offsetLine);
 
   // Unit test constructor
-  ParseFile(Session* session, std::string_view text, CompileSourceFile* csf,
-            CompilationUnit* compilationUnit, Library* library);
+  ParseFile(Session* session, std::string_view text, CompileSourceFile* csf, CompilationUnit* compilationUnit,
+            Library* library);
   ~ParseFile();
 
   bool parse();
   bool needToParse();
 
-  CompileSourceFile* getCompileSourceFile() const {
-    return m_compileSourceFile;
-  }
+  CompileSourceFile* getCompileSourceFile() const { return m_compileSourceFile; }
   CompilationUnit* getCompilationUnit() const { return m_compilationUnit; }
   Library* getLibrary() const { return m_library; }
   PathId getFileId(uint32_t line);
@@ -90,28 +87,20 @@ class ParseFile final {
     uint16_t m_endColumn = 0;
   };
 
-  MapLocationResult mapLocations(uint32_t sl, uint16_t sc, uint32_t el,
-                                 uint16_t ec);
+  MapLocationResult mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec);
 
   class LineTranslationInfo {
    public:
-    LineTranslationInfo(PathId pretendFileId, uint32_t originalLine,
-                        uint32_t pretendLine)
-        : m_pretendFileId(pretendFileId),
-          m_originalLine(originalLine),
-          m_pretendLine(pretendLine) {}
+    LineTranslationInfo(PathId pretendFileId, uint32_t originalLine, uint32_t pretendLine)
+        : m_pretendFileId(pretendFileId), m_originalLine(originalLine), m_pretendLine(pretendLine) {}
     PathId m_pretendFileId;
     uint32_t m_originalLine;
     uint32_t m_pretendLine;
   };
 
-  AntlrParserHandler* getAntlrParserHandler() const {
-    return m_antlrParserHandler;
-  }
+  AntlrParserHandler* getAntlrParserHandler() const { return m_antlrParserHandler; }
 
-  void addLineTranslationInfo(LineTranslationInfo& info) {
-    m_lineTranslationVec.push_back(info);
-  }
+  void addLineTranslationInfo(LineTranslationInfo& info) { m_lineTranslationVec.push_back(info); }
 
   void addError(Error& error);
   SymbolId registerSymbol(std::string_view symbol);
@@ -135,13 +124,8 @@ class ParseFile final {
     int32_t m_offset = 0;   // Offset on line in source file
     int32_t m_hint = -1;    // Index in directives stack
 
-    inline LocationCacheEntry(uint32_t column, const PathId& fileId,
-                              uint32_t line, int32_t offset, int32_t hint)
-        : m_column(column),
-          m_fileId(fileId),
-          m_line(line),
-          m_offset(offset),
-          m_hint(hint) {}
+    inline LocationCacheEntry(uint32_t column, const PathId& fileId, uint32_t line, int32_t offset, int32_t hint)
+        : m_column(column), m_fileId(fileId), m_line(line), m_offset(offset), m_hint(hint) {}
   };
   using location_cache_entry_t = std::vector<LocationCacheEntry>;
   using location_cache_t = std::vector<location_cache_entry_t>;

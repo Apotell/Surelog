@@ -58,8 +58,7 @@ class Session;
 
 class Compiler {
  public:
-  using PPFileMap =
-      std::map<PathId, std::vector<PathId>, PathIdLessThanComparer>;
+  using PPFileMap = std::map<PathId, std::vector<PathId>, PathIdLessThanComparer>;
   explicit Compiler(Session* session);
   Compiler(Session* session, std::string_view text);
   Compiler(const Compiler& orig) = delete;
@@ -75,16 +74,12 @@ class Compiler {
   void lockSerializer() { m_serializerMutex.lock(); }
   void unlockSerializer() { m_serializerMutex.unlock(); }
 
-  std::vector<CompileSourceFile*>& getCompileSourceFiles() {
-    return m_compilers;
-  }
-  const std::map<SymbolId, PreprocessFile::AntlrParserHandler*,
-                 SymbolIdLessThanComparer>&
-  getPpAntlrHandlerMap() const {
+  std::vector<CompileSourceFile*>& getCompileSourceFiles() { return m_compilers; }
+  const std::map<SymbolId, PreprocessFile::AntlrParserHandler*, SymbolIdLessThanComparer>& getPpAntlrHandlerMap()
+      const {
     return m_antlrPpMap;
   }
-  void registerAntlrPpHandlerForId(SymbolId id,
-                                   PreprocessFile::AntlrParserHandler* pp);
+  void registerAntlrPpHandlerForId(SymbolId id, PreprocessFile::AntlrParserHandler* pp);
   PreprocessFile::AntlrParserHandler* getAntlrPpHandlerForId(SymbolId);
 
   // TODO: this should return a const Design, but can't be because
@@ -117,8 +112,7 @@ class Compiler {
   bool pythoninit_();
   bool compileFileSet_(CompileSourceFile::Action action, bool allowMultithread,
                        std::vector<CompileSourceFile*>& container);
-  bool compileOneFile_(CompileSourceFile* compileSource,
-                       CompileSourceFile::Action action);
+  bool compileOneFile_(CompileSourceFile* compileSource, CompileSourceFile::Action action);
   bool cleanup_();
 
   void writeUhdmSourceFiles();
@@ -128,9 +122,7 @@ class Compiler {
   uhdm::Serializer m_serializer;
   Session* const m_session = nullptr;
   CompilationUnit* m_commonCompilationUnit;
-  std::map<SymbolId, PreprocessFile::AntlrParserHandler*,
-           SymbolIdLessThanComparer>
-      m_antlrPpMap;
+  std::map<SymbolId, PreprocessFile::AntlrParserHandler*, SymbolIdLessThanComparer> m_antlrPpMap;
   std::vector<CompileSourceFile*> m_compilers;
   std::vector<CompileSourceFile*> m_compilersChunkFiles;
   std::vector<CompileSourceFile*> m_compilersParentFiles;

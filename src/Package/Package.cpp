@@ -38,25 +38,18 @@
 
 namespace SURELOG {
 
-Package::Package(Session* session, std::string_view name, Library* library,
-                 const FileContent* fC, NodeId nodeId,
+Package::Package(Session* session, std::string_view name, Library* library, const FileContent* fC, NodeId nodeId,
                  uhdm::Serializer& serializer)
-    : DesignComponent(session, fC, nullptr),
-      m_name(name),
-      m_library(library),
-      m_exprBuilder(session) {
+    : DesignComponent(session, fC, nullptr), m_name(name), m_library(library), m_exprBuilder(session) {
   addFileContent(fC, nodeId);
 
   uhdm::Package* const instance = serializer.make<uhdm::Package>();
   instance->setName(name);
   if (nodeId && (fC != nullptr)) {
-    if (const NodeId identifierId = fC->sl_collect(
-            nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
-      fC->populateCoreMembers(identifierId, identifierId,
-                              instance->getNameObj());
+    if (const NodeId identifierId = fC->sl_collect(nodeId, VObjectType::STRING_CONST, VObjectType::paAttr_spec)) {
+      fC->populateCoreMembers(identifierId, identifierId, instance->getNameObj());
     }
-    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PACKAGE),
-                            nodeId, instance);
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PACKAGE), nodeId, instance);
   }
   setUhdmModel(instance);
 }
@@ -69,8 +62,7 @@ uint32_t Package::getSize() const {
 }
 
 ClassDefinition* Package::getClassDefinition(std::string_view name) {
-  ClassNameClassDefinitionMultiMap::iterator itr =
-      m_classDefinitions.find(name);
+  ClassNameClassDefinitionMultiMap::iterator itr = m_classDefinitions.find(name);
   if (itr == m_classDefinitions.end()) {
     return nullptr;
   } else {
@@ -78,10 +70,8 @@ ClassDefinition* Package::getClassDefinition(std::string_view name) {
   }
 }
 
-const ClassDefinition* Package::getClassDefinition(
-    std::string_view name) const {
-  ClassNameClassDefinitionMultiMap::const_iterator itr =
-      m_classDefinitions.find(name);
+const ClassDefinition* Package::getClassDefinition(std::string_view name) const {
+  ClassNameClassDefinitionMultiMap::const_iterator itr = m_classDefinitions.find(name);
   if (itr == m_classDefinitions.end()) {
     return nullptr;
   } else {
@@ -89,8 +79,7 @@ const ClassDefinition* Package::getClassDefinition(
   }
 }
 
-const DataType* Package::getDataType(Design* design,
-                                     std::string_view name) const {
+const DataType* Package::getDataType(Design* design, std::string_view name) const {
   if (const DataType* const dt = DesignComponent::getDataType(design, name)) {
     return dt;
   } else if (const DataType* const dt = getClassDefinition(name)) {
@@ -101,11 +90,9 @@ const DataType* Package::getDataType(Design* design,
 
 void Package::append(Package* package) {
   DesignComponent::append(package);
-  for (auto& type : package->m_dataTypes)
-    insertDataType(type.first, type.second);
+  for (auto& type : package->m_dataTypes) insertDataType(type.first, type.second);
   for (auto& param : package->getMappedValues())
-    setValue(param.first, param.second.first, m_exprBuilder,
-             param.second.second);
+    setValue(param.first, param.second.first, m_exprBuilder, param.second.second);
   for (auto& classDef : package->m_classDefinitions) {
     addClassDefinition(classDef.first, classDef.second);
     classDef.second->setContainer(this);

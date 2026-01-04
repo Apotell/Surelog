@@ -27,9 +27,6 @@
 
 namespace SURELOG {
 
-bool CompileToolbox::compileInitialBlock_(FileContent* fC, NodeId nodeId,
-                                          DesignComponent* component) {
-  return true;
-}
+bool CompileToolbox::compileInitialBlock_(FileContent* fC, NodeId nodeId, DesignComponent* component) { return true; }
 
 }  // namespace SURELOG

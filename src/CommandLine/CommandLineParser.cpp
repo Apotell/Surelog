@@ -61,13 +61,10 @@ namespace fs = std::filesystem;
 
 constexpr uint32_t kLinesForFileSplitting = 10000000;
 
-static std::unordered_map<std::string, int32_t>
-    cmd_ignore;  // commands with an arg to be dropped, and the number of args
-                 // to drop
-static std::unordered_map<std::string, std::string>
-    cmd_rename;  // commands to be renamed (no args)
-static std::unordered_map<std::string, std::string>
-    cmd_merge;  // commands to be merged into 1 argument
+static std::unordered_map<std::string, int32_t> cmd_ignore;  // commands with an arg to be dropped, and the number of
+                                                             // args to drop
+static std::unordered_map<std::string, std::string> cmd_rename;  // commands to be renamed (no args)
+static std::unordered_map<std::string, std::string> cmd_merge;   // commands to be merged into 1 argument
 
 // !!! Update this number when the grammar changes !!!
 //         Or when the cache schema changes
@@ -76,16 +73,14 @@ std::string_view CommandLineParser::getVersionNumber() {
 #define VSTRINGIFY(x) #x
 #define VERSION_STRING(major, minor) VSTRINGIFY(major) "." VSTRINGIFY(minor)
   // Defined in CMakeList.txt in project() call.
-  static constexpr std::string_view kVersionNumber(
-      VERSION_STRING(SURELOG_VERSION_MAJOR, SURELOG_VERSION_MINOR));
+  static constexpr std::string_view kVersionNumber(VERSION_STRING(SURELOG_VERSION_MAJOR, SURELOG_VERSION_MINOR));
 #undef VERSION_STRING
 #undef VSTRINGIFY
   return kVersionNumber;
 }
 
-static const std::initializer_list<std::string_view> copyright = {
-    "Copyright (c) 2017-2023 Alain Dargelas,",
-    "http://www.apache.org/licenses/LICENSE-2.0"};
+static const std::initializer_list<std::string_view> copyright = {"Copyright (c) 2017-2023 Alain Dargelas,",
+                                                                  "http://www.apache.org/licenses/LICENSE-2.0"};
 
 static const std::initializer_list<std::string_view> banner = {
     "********************************************",
@@ -304,8 +299,7 @@ static bool is_c_file(const std::string_view s) {
   return (ext == "c" || ext == "cpp" || ext == "cc");
 }
 
-static std::string printStringArray(
-    const std::initializer_list<std::string_view>& all_strings) {
+static std::string printStringArray(const std::initializer_list<std::string_view>& all_strings) {
   std::string report;
   for (std::string_view s : all_strings) {
     report.append(s).append("\n");
@@ -331,8 +325,7 @@ std::string CommandLineParser::currentDateTime() {
 }
 
 static std::string BuildIdentifier() {
-  return StrCat("VERSION: ", CommandLineParser::getVersionNumber(),
-                "\nBUILT  : ", __DATE__, "\n");
+  return StrCat("VERSION: ", CommandLineParser::getVersionNumber(), "\nBUILT  : ", __DATE__, "\n");
 }
 
 void CommandLineParser::logBanner(int32_t argc, const char** argv) {
@@ -431,8 +424,7 @@ CommandLineParser::CommandLineParser(Session* session)
       m_gc(true),
       m_disableLineMarkings(false),
       m_reduce(true) {
-  m_libraryExtensions.emplace_back(
-      m_session->getSymbolTable()->registerSymbol(".v"));  // default
+  m_libraryExtensions.emplace_back(m_session->getSymbolTable()->registerSymbol(".v"));  // default
 }
 
 // Undecorate command line arg by removing any space, single-quotes,
@@ -447,8 +439,8 @@ static std::string_view undecorateArg(std::string_view arg) {
   while (!arg.empty() && std::isspace(arg.back())) arg.remove_suffix(1);
 
   // Remove any surrounding quotes
-  if ((arg.size() > 1) && (((arg.front() == '\"') && (arg.back() == '\"')) ||
-                           ((arg.front() == '\'') && (arg.back() == '\'')))) {
+  if ((arg.size() > 1) &&
+      (((arg.front() == '\"') && (arg.back() == '\"')) || ((arg.front() == '\'') && (arg.back() == '\'')))) {
     arg.remove_prefix(1);
     arg.remove_suffix(1);
 
@@ -458,13 +450,11 @@ static std::string_view undecorateArg(std::string_view arg) {
   return arg;
 }
 
-std::pair<PathId, fs::path> CommandLineParser::addWorkingDirectory_(
-    const fs::path& wd, const fs::path& rcd) {
+std::pair<PathId, fs::path> CommandLineParser::addWorkingDirectory_(const fs::path& wd, const fs::path& rcd) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
 
-  const fs::path cwd =
-      FileSystem::normalize(rcd.is_relative() ? wd / rcd : rcd);
+  const fs::path cwd = FileSystem::normalize(rcd.is_relative() ? wd / rcd : rcd);
 
   if (rcd.is_absolute()) {
     fileSystem->getWorkingDir(rcd.string(), symbols);
@@ -488,9 +478,7 @@ std::pair<PathId, fs::path> CommandLineParser::addWorkingDirectory_(
   return {cwdId, fileSystem->toPath(cwdId)};
 }
 
-void CommandLineParser::splitPlusArg_(std::string_view s,
-                                      std::string_view prefix,
-                                      SymbolIdVector& container) {
+void CommandLineParser::splitPlusArg_(std::string_view s, std::string_view prefix, SymbolIdVector& container) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   std::istringstream f((std::string(s)));
   std::string tmp;
@@ -502,9 +490,8 @@ void CommandLineParser::splitPlusArg_(std::string_view s,
   }
 }
 
-void CommandLineParser::splitEqArg_(
-    std::string_view s,
-    std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container) {
+void CommandLineParser::splitEqArg_(std::string_view s,
+                                    std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   std::string def;
   std::string value;
@@ -521,9 +508,7 @@ void CommandLineParser::splitEqArg_(
   }
 }
 
-void CommandLineParser::splitPlusArg_(std::string_view s,
-                                      std::string_view prefix,
-                                      const fs::path& cd,
+void CommandLineParser::splitPlusArg_(std::string_view s, std::string_view prefix, const fs::path& cd,
                                       PathIdVector& container) {
   std::istringstream f((std::string(s)));
   std::string tmp;
@@ -534,9 +519,8 @@ void CommandLineParser::splitPlusArg_(std::string_view s,
   }
 }
 
-void CommandLineParser::splitPlusArg_(
-    std::string_view s, std::string_view prefix,
-    std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container) {
+void CommandLineParser::splitPlusArg_(std::string_view s, std::string_view prefix,
+                                      std::map<SymbolId, std::string, SymbolIdLessThanComparer>& container) {
   std::istringstream f((std::string(s)));
   std::string tmp;
   while (std::getline(f, tmp, '+')) {
@@ -547,8 +531,7 @@ void CommandLineParser::splitPlusArg_(
 }
 
 /* Custom parser for +arguments */
-bool CommandLineParser::plus_arguments_(std::string_view s,
-                                        const fs::path& cd) {
+bool CommandLineParser::plus_arguments_(std::string_view s, const fs::path& cd) {
   constexpr std::string_view incdir("+incdir+");
   constexpr std::string_view libext("+libext+");
   constexpr std::string_view define("+define+");
@@ -579,8 +562,7 @@ bool CommandLineParser::plus_arguments_(std::string_view s,
   return false;
 }
 
-void CommandLineParser::processArgs_(const std::vector<std::string>& args,
-                                     fs::path& wd, fs::path& cd,
+void CommandLineParser::processArgs_(const std::vector<std::string>& args, fs::path& wd, fs::path& cd,
                                      std::vector<std::string>& container) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
@@ -612,8 +594,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
       if (i < args.size() - 2) {
         const int32_t argcount = std::stoi(args[i + 2]);
         if (argcount < 0 || argcount > 100) {  // just a sane limit
-          std::cerr << "Illegal argument count for -cmd_ign (" << args[i + 2]
-                    << ")" << std::endl;
+          std::cerr << "Illegal argument count for -cmd_ign (" << args[i + 2] << ")" << std::endl;
           return;
         }
         cmd_ignore[args[i + 1]] = argcount;
@@ -648,8 +629,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
       if (i < args.size() - cmd_ignore_it->second) {
         i += cmd_ignore_it->second;
       } else {
-        std::cerr << "Missing arguments to ignored command " << arg
-                  << std::endl;
+        std::cerr << "Missing arguments to ignored command " << arg << std::endl;
       }
       continue;
     }
@@ -666,8 +646,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
         arg.append(args[i + 1]);
         i += 1;
       } else {
-        std::cerr << "Missing arguments to renamed command " << arg
-                  << std::endl;
+        std::cerr << "Missing arguments to renamed command " << arg << std::endl;
         return;
       }
     }
@@ -709,8 +688,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
           processArgs_(argsInFile, wd, cd, container);
         } else {
           Location loc(fId);
-          errors->addError(ErrorDefinition::CMD_DASH_F_FILE_DOES_NOT_EXIST,
-                           loc);
+          errors->addError(ErrorDefinition::CMD_DASH_F_FILE_DOES_NOT_EXIST, loc);
           break;
         }
       }
@@ -732,11 +710,9 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
         for (const auto& entry : fileContent["sources"]) {
           const std::string baseDirectory = entry["base_directory"];
           const std::string relativeFilepath = entry["relative_filepath"];
-          fileSystem->addWorkingDirectoryCacheEntry(baseDirectory,
-                                                    relativeFilepath);
+          fileSystem->addWorkingDirectoryCacheEntry(baseDirectory, relativeFilepath);
 
-          std::filesystem::path absFilepath =
-              std::filesystem::path(baseDirectory) / relativeFilepath;
+          std::filesystem::path absFilepath = std::filesystem::path(baseDirectory) / relativeFilepath;
           container.emplace_back(absFilepath.string());
         }
       }
@@ -746,8 +722,7 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
   }
 }
 
-void CommandLineParser::processOutputDirectory_(
-    const std::vector<std::string>& args) {
+void CommandLineParser::processOutputDirectory_(const std::vector<std::string>& args) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
@@ -785,8 +760,7 @@ void CommandLineParser::processOutputDirectory_(
   }
 }
 
-bool CommandLineParser::parse(int32_t argc, const char** argv,
-                              bool diffCompMode /* = false */,
+bool CommandLineParser::parse(int32_t argc, const char** argv, bool diffCompMode /* = false */,
                               bool fileUnit /* = false */) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
@@ -854,8 +828,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
 
   // Setup a few dependent input & output directories
   if (!m_outputDirId) {
-    m_outputDirId =
-        fileSystem->getOutputDir(fileSystem->getWorkingDir(), symbols);
+    m_outputDirId = fileSystem->getOutputDir(fileSystem->getWorkingDir(), symbols);
   }
   m_precompiledDirId = fileSystem->getPrecompiledDir(m_programId, symbols);
   m_compileUnitDirId = fileSystem->getCompileDir(true, symbols);
@@ -1095,10 +1068,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
 #endif
     else if (all_arguments[i] == "-nouhdm") {
       m_writeUhdm = false;
-    } else if (all_arguments[i] == "-mt" || all_arguments[i] == "--threads" ||
-               all_arguments[i] == "-mp") {
-      bool mt =
-          ((all_arguments[i] == "-mt") || (all_arguments[i] == "--threads"));
+    } else if (all_arguments[i] == "-mt" || all_arguments[i] == "--threads" || all_arguments[i] == "-mp") {
+      bool mt = ((all_arguments[i] == "-mt") || (all_arguments[i] == "--threads"));
       if (i == all_arguments.size() - 1) {
         Location loc(symbols->registerSymbol(all_arguments[i]));
         errors->addError(ErrorDefinition::CMD_MT_MISSING_LEVEL, loc);
@@ -1107,8 +1078,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       i++;
       uint32_t maxMT = 0;
       if (all_arguments[i] == "max") {
-        uint32_t concurentThreadsSupported =
-            std::thread::hardware_concurrency();
+        uint32_t concurentThreadsSupported = std::thread::hardware_concurrency();
         maxMT = concurentThreadsSupported;
       } else {
         maxMT = std::stoi(all_arguments[i]);
@@ -1118,10 +1088,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
         errors->addError(ErrorDefinition::CMD_MT_INCORRECT_LEVEL, loc);
       } else {
         if (m_diffCompMode) {
-          uint32_t concurentThreadsSupported =
-              std::thread::hardware_concurrency();
-          if (maxMT > (concurentThreadsSupported / 2))
-            maxMT = (concurentThreadsSupported / 2);
+          uint32_t concurentThreadsSupported = std::thread::hardware_concurrency();
+          if (maxMT > (concurentThreadsSupported / 2)) maxMT = (concurentThreadsSupported / 2);
         }
 
         if (maxMT == 0) {
@@ -1146,8 +1114,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
           }
 
           if (profile()) {
-            Location loc(symbols->registerSymbol(
-                StrCat(m_maxProcesses, " processes and ", m_maxTreads)));
+            Location loc(symbols->registerSymbol(StrCat(m_maxProcesses, " processes and ", m_maxTreads)));
             errors->addError(ErrorDefinition::CMD_NUMBER_THREADS, loc);
           }
         }
@@ -1156,8 +1123,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       PythonAPI::setStrictMode(true);
     } else if (all_arguments[i] == "-tbb") {
       m_useTbb = true;
-    } else if ((all_arguments[i] == "--top-module") ||
-               (all_arguments[i] == "-top")) {
+    } else if ((all_arguments[i] == "--top-module") || (all_arguments[i] == "-top")) {
       i++;
       m_topLevelModules.insert(all_arguments[i]);
     } else if (all_arguments[i] == "-bb_mod") {
@@ -1182,36 +1148,31 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       fs::path filepath = FileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
-      m_libraryFiles.emplace_back(
-          fileSystem->toPathId(filepath.string(), symbols));
+      m_libraryFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-y") {
       if (i == all_arguments.size() - 1) {
         Location loc(symbols->registerSymbol(all_arguments[i]));
         errors->addError(ErrorDefinition::CMD_LIBRARY_PATH_MISSING_PATH, loc);
         break;
       }
-      m_libraryPaths.emplace_back(
-          std::get<0>(addWorkingDirectory_(cd, all_arguments[++i])));
+      m_libraryPaths.emplace_back(std::get<0>(addWorkingDirectory_(cd, all_arguments[++i])));
     } else if (all_arguments[i] == "-l") {
       ++i;
     } else if (all_arguments[i] == "-L") {
       fs::path filepath = FileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
-      m_orderedLibraries.emplace_back(
-          fileSystem->toPathId(filepath.string(), symbols));
+      m_orderedLibraries.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-map") {
       fs::path filepath = FileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
-      m_libraryMapFiles.emplace_back(
-          fileSystem->toPathId(filepath.string(), symbols));
+      m_libraryMapFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-cfgfile") {
       fs::path filepath = FileSystem::normalize(all_arguments[++i]);
       addWorkingDirectory_(cd, filepath.parent_path());
       if (filepath.is_relative()) filepath = cd / filepath;
-      m_configFiles.emplace_back(
-          fileSystem->toPathId(filepath.string(), symbols));
+      m_configFiles.emplace_back(fileSystem->toPathId(filepath.string(), symbols));
     } else if (all_arguments[i] == "-cfg") {
       i++;
       m_useConfigs.push_back(symbols->registerSymbol(all_arguments[i]));
@@ -1223,11 +1184,9 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       }
       fs::path filepath = FileSystem::normalize(all_arguments[++i]);
       if (filepath.is_relative()) {
-        m_writePpOutputFileId =
-            fileSystem->getChild(m_outputDirId, filepath.string(), symbols);
+        m_writePpOutputFileId = fileSystem->getChild(m_outputDirId, filepath.string(), symbols);
       } else {
-        m_writePpOutputFileId =
-            fileSystem->toPathId(filepath.string(), symbols);
+        m_writePpOutputFileId = fileSystem->toPathId(filepath.string(), symbols);
       }
     } else if (all_arguments[i] == "-nohash") {
       m_noCacheHash = true;
@@ -1239,8 +1198,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       }
       fs::path dirpath = FileSystem::normalize(all_arguments[++i]);
       if (dirpath.is_relative()) {
-        m_cacheDirId =
-            fileSystem->getChild(m_outputDirId, dirpath.string(), symbols);
+        m_cacheDirId = fileSystem->getChild(m_outputDirId, dirpath.string(), symbols);
       } else {
         m_cacheDirId = fileSystem->toPathId(dirpath.string(), symbols);
       }
@@ -1281,8 +1239,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
     } else if (all_arguments[i] == "-diffcompunit") {
       if (m_fileUnit) {
         Location loc(symbols->registerSymbol(all_arguments[i]));
-        errors->addError(ErrorDefinition::CMD_SEPARATE_COMPILATION_UNIT_ON,
-                         loc);
+        errors->addError(ErrorDefinition::CMD_SEPARATE_COMPILATION_UNIT_ON, loc);
       }
     } else if (all_arguments[i] == "-odir") {
       i++;
@@ -1357,8 +1314,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       m_compile = true;
       m_elaborate = true;
       m_pythonListener = true;
-      if (!m_pythonAllowed)
-        std::cerr << "ERROR: No Python allowed, check your arguments!\n";
+      if (!m_pythonAllowed) std::cerr << "ERROR: No Python allowed, check your arguments!\n";
     } else if (all_arguments[i] == "-nopython") {
       m_pythonAllowed = false;
     } else if (all_arguments[i] == "-withpython") {
@@ -1375,8 +1331,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       m_compile = true;
       m_elaborate = true;
       m_pythonEvalScriptPerFile = true;
-      m_pythonEvalScriptPerFileId =
-          fileSystem->toPathId(all_arguments[i], symbols);
+      m_pythonEvalScriptPerFileId = fileSystem->toPathId(all_arguments[i], symbols);
       if (m_pythonAllowed)
         PythonAPI::loadScript(all_arguments[i], true);
       else
@@ -1423,8 +1378,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
     } else if (all_arguments[i] == "-noprecompiledcache") {
       m_precompiledCacheAllowed = false;
     } else if (all_arguments[i] == "-sv") {
-      if (((i + 1) < all_arguments.size()) &&
-          (all_arguments[i + 1][0] != '-')) {
+      if (((i + 1) < all_arguments.size()) && (all_arguments[i + 1][0] != '-')) {
         fs::path filepath = FileSystem::normalize(all_arguments[++i]);
         addWorkingDirectory_(cd, filepath.parent_path());
         if (filepath.is_relative()) filepath = cd / filepath;
@@ -1456,8 +1410,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
     } else if (all_arguments[i].at(0) == '-') {
       Location loc(symbols->registerSymbol(all_arguments[i]));
       errors->addError(ErrorDefinition::CMD_MINUS_ARG_IGNORED, loc);
-    } else if ((all_arguments[i][0] == '-') || is_number(all_arguments[i]) ||
-               is_c_file(all_arguments[i]) ||
+    } else if ((all_arguments[i][0] == '-') || is_number(all_arguments[i]) || is_c_file(all_arguments[i]) ||
                (all_arguments[i].rfind(".vlt") != std::string::npos)) {
       Location loc(symbols->registerSymbol(all_arguments[i]));
       errors->addError(ErrorDefinition::CMD_PLUS_ARG_IGNORED, loc);
@@ -1547,8 +1500,7 @@ bool CommandLineParser::prepareCompilation_(int32_t argc, const char** argv) {
   }
 
   if (!m_logFileId) {
-    m_logFileId = fileSystem->getLogFile(
-        m_fileUnit, symbols->getSymbol(m_logFileNameId), symbols);
+    m_logFileId = fileSystem->getLogFile(m_fileUnit, symbols->getSymbol(m_logFileNameId), symbols);
   }
 
   if (!fileSystem->mkdirs(m_outputDirId)) {
@@ -1617,8 +1569,7 @@ bool CommandLineParser::cleanCache() {
   }
 
   if (!m_cacheAllowed && !fileSystem->rmtree(m_cacheDirId)) {
-    std::cerr << "ERROR: Cannot delete cache directory: "
-              << PathIdPP(m_cacheDirId, fileSystem) << std::endl;
+    std::cerr << "ERROR: Cannot delete cache directory: " << PathIdPP(m_cacheDirId, fileSystem) << std::endl;
     noError = false;
   }
 
@@ -1648,8 +1599,7 @@ void CommandLineParser::addIncludesAsSourceFiles() {
       if (!line.empty() && std::regex_search(line, match, includeRegex)) {
         std::string includedFile = match[1].str();
 
-        if (PathId includedId =
-                fileSystem->locate(includedFile, m_includePaths, symbols)) {
+        if (PathId includedId = fileSystem->locate(includedFile, m_includePaths, symbols)) {
           if (m_sourceFileSet.emplace(includedId).second) {
             m_sourceFiles.emplace_back(includedId);
             queue.emplace_back(includedId);

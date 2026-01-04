@@ -51,13 +51,9 @@ class LogListener {
     Enqueued = 1,
   };
 
-  static bool succeeded(LogResult result) {
-    return static_cast<int32_t>(result) >= 0;
-  }
+  static bool succeeded(LogResult result) { return static_cast<int32_t>(result) >= 0; }
 
-  static bool failed(LogResult result) {
-    return static_cast<int32_t>(result) < 0;
-  }
+  static bool failed(LogResult result) { return static_cast<int32_t>(result) < 0; }
 
  public:
   explicit LogListener(Session* session);

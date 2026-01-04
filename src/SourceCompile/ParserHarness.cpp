@@ -49,8 +49,7 @@ struct ParserHarness::Holder {
 
 ParserHarness::ParserHarness() : m_ownsSession(true) {}
 
-ParserHarness::ParserHarness(Session* session)
-    : m_session(session), m_ownsSession(false) {}
+ParserHarness::ParserHarness(Session* session) : m_session(session), m_ownsSession(false) {}
 
 ParserHarness::~ParserHarness() {
   if (m_ownsSession) delete m_session;
@@ -72,21 +71,17 @@ std::unique_ptr<FileContent> ParserHarness::parse(std::string_view content) {
   m_h->m_unit = std::make_unique<CompilationUnit>(false);
   m_h->m_lib = std::make_unique<Library>(m_session, "work");
   m_h->m_compiler = std::make_unique<Compiler>(m_session);
-  m_h->m_csf = std::make_unique<CompileSourceFile>(
-      m_session, BadPathId, m_h->m_compiler.get(), m_h->m_unit.get(),
-      m_h->m_lib.get());
-  m_h->m_pf = std::make_unique<ParseFile>(m_session, content, m_h->m_csf.get(),
-                                          m_h->m_unit.get(), m_h->m_lib.get());
+  m_h->m_csf = std::make_unique<CompileSourceFile>(m_session, BadPathId, m_h->m_compiler.get(), m_h->m_unit.get(),
+                                                   m_h->m_lib.get());
+  m_h->m_pf = std::make_unique<ParseFile>(m_session, content, m_h->m_csf.get(), m_h->m_unit.get(), m_h->m_lib.get());
   std::unique_ptr<FileContent> file_content_result(
-      std::make_unique<FileContent>(m_session, BadPathId, m_h->m_lib.get(),
-                                    nullptr, BadPathId));
+      std::make_unique<FileContent>(m_session, BadPathId, m_h->m_lib.get(), nullptr, BadPathId));
   m_h->m_pf->setFileContent(file_content_result.get());
   if (!m_h->m_pf->parse()) file_content_result.reset(nullptr);
   return file_content_result;
 }
 
-FileContent* ParserHarness::parse(std::string_view content, Compiler* compiler,
-                                  PathId fileId) {
+FileContent* ParserHarness::parse(std::string_view content, Compiler* compiler, PathId fileId) {
   if (m_ownsSession) {
     delete m_session;
     m_session = new Session;
@@ -94,11 +89,9 @@ FileContent* ParserHarness::parse(std::string_view content, Compiler* compiler,
 
   CompilationUnit* const unit = new CompilationUnit(false);
   Library* const lib = new Library(m_session, "work");
-  CompileSourceFile* const csf =
-      new CompileSourceFile(m_session, fileId, compiler, unit, lib);
+  CompileSourceFile* const csf = new CompileSourceFile(m_session, fileId, compiler, unit, lib);
   ParseFile* const pf = new ParseFile(m_session, content, csf, unit, lib);
-  FileContent* file_content_result =
-      new FileContent(m_session, fileId, lib, nullptr, BadPathId);
+  FileContent* file_content_result = new FileContent(m_session, fileId, lib, nullptr, BadPathId);
   pf->setFileContent(file_content_result);
   if (!pf->parse()) file_content_result = nullptr;
   return file_content_result;

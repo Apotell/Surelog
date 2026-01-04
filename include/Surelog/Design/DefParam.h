@@ -39,20 +39,14 @@ class Value;
 class DefParam final {
  public:
   explicit DefParam(std::string_view name, DefParam* parent = nullptr)
-      : m_name(name),
-        m_value(nullptr),
-        m_used(false),
-        m_parent(parent),
-        m_fileContent(nullptr) {}
+      : m_name(name), m_value(nullptr), m_used(false), m_parent(parent), m_fileContent(nullptr) {}
 
   DefParam(const DefParam& orig) = delete;
 
   Value* getValue() const { return m_value; }
   void setValue(Value* value) { m_value = value; }
 
-  void setChild(const std::string& name, DefParam* child) {
-    m_children.emplace(name, child);
-  }
+  void setChild(const std::string& name, DefParam* child) { m_children.emplace(name, child); }
   std::map<std::string, DefParam*>& getChildren() { return m_children; }
   bool isUsed() const { return m_used; }
   void setUsed() { m_used = true; }

@@ -33,17 +33,12 @@
 
 namespace SURELOG {
 
-PythonListen::PythonListen(ParseFile* parse,
-                           CompileSourceFile* compileSourceFile)
-    : m_parse(parse),
-      m_compileSourceFile(compileSourceFile),
-      m_usingCachedVersion(false) {}
+PythonListen::PythonListen(ParseFile* parse, CompileSourceFile* compileSourceFile)
+    : m_parse(parse), m_compileSourceFile(compileSourceFile), m_usingCachedVersion(false) {}
 
 PythonListen::~PythonListen() = default;
 
-void PythonListen::addError(Error& error) {
-  m_session->getErrorContainer()->addError(error);
-}
+void PythonListen::addError(Error& error) { m_session->getErrorContainer()->addError(error); }
 
 bool PythonListen::listen() {
   PythonAPICache cache(this);
@@ -55,12 +50,10 @@ bool PythonListen::listen() {
   // This is either a parent Parser object of this Parser object has no parent
   if ((!m_parse->m_children.empty()) || (m_parse->m_parent == nullptr)) {
     if ((m_parse->m_parent == nullptr) && (m_parse->m_children.empty())) {
-      SV3_1aPythonListener* pythonListener =
-          new SV3_1aPythonListener(this, m_compileSourceFile->getPythonInterp(),
-                                   m_parse->m_antlrParserHandler->m_tokens, 0);
+      SV3_1aPythonListener* pythonListener = new SV3_1aPythonListener(this, m_compileSourceFile->getPythonInterp(),
+                                                                      m_parse->m_antlrParserHandler->m_tokens, 0);
       m_pythonListeners.push_back(pythonListener);
-      antlr4::tree::ParseTreeWalker::DEFAULT.walk(
-          pythonListener, m_parse->m_antlrParserHandler->m_tree);
+      antlr4::tree::ParseTreeWalker::DEFAULT.walk(pythonListener, m_parse->m_antlrParserHandler->m_tree);
     }
 
     if (!m_parse->m_children.empty()) {
@@ -70,11 +63,9 @@ bool PythonListen::listen() {
           // TODO: Incrementally regenerate the FileContent
 
           SV3_1aPythonListener* pythonListener = new SV3_1aPythonListener(
-              this, m_compileSourceFile->getPythonInterp(),
-              child->m_antlrParserHandler->m_tokens, child->m_offsetLine);
+              this, m_compileSourceFile->getPythonInterp(), child->m_antlrParserHandler->m_tokens, child->m_offsetLine);
           m_pythonListeners.push_back(pythonListener);
-          antlr4::tree::ParseTreeWalker::DEFAULT.walk(
-              pythonListener, child->m_antlrParserHandler->m_tree);
+          antlr4::tree::ParseTreeWalker::DEFAULT.walk(pythonListener, child->m_antlrParserHandler->m_tree);
         }
       }
     }

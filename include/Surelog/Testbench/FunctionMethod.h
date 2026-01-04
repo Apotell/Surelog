@@ -35,10 +35,8 @@ namespace SURELOG {
 
 class FunctionMethod final : public Function {
  public:
-  FunctionMethod(DesignComponent* parent, const FileContent* fC, NodeId id,
-                 std::string_view name, DataType* returnType, bool is_virtual,
-                 bool is_extern, bool is_static, bool is_local,
-                 bool is_protected, bool is_pure)
+  FunctionMethod(DesignComponent* parent, const FileContent* fC, NodeId id, std::string_view name, DataType* returnType,
+                 bool is_virtual, bool is_extern, bool is_static, bool is_local, bool is_protected, bool is_pure)
       : Function(parent, fC, id, name, returnType),
         m_virtual(is_virtual),
         m_extern(is_extern),

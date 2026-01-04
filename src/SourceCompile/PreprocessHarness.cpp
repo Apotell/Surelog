@@ -33,33 +33,24 @@ namespace SURELOG {
 
 PreprocessHarness::PreprocessHarness() : m_ownsSession(true) {}
 
-PreprocessHarness::PreprocessHarness(Session* session)
-    : m_session(session), m_ownsSession(false) {}
+PreprocessHarness::PreprocessHarness(Session* session) : m_session(session), m_ownsSession(false) {}
 
 PreprocessHarness::~PreprocessHarness() {
   if (m_ownsSession) delete m_session;
 }
 
-std::string PreprocessHarness::preprocess(std::string_view content,
-                                          CompilationUnit* compUnit,
-                                          PathId fileId) {
+std::string PreprocessHarness::preprocess(std::string_view content, CompilationUnit* compUnit, PathId fileId) {
   PreprocessFile::SpecialInstructions instructions(
-      PreprocessFile::SpecialInstructions::DontMute,
-      PreprocessFile::SpecialInstructions::DontMark,
-      PreprocessFile::SpecialInstructions::DontFilter,
-      PreprocessFile::SpecialInstructions::CheckLoop,
-      PreprocessFile::SpecialInstructions::ComplainUndefinedMacro,
-      PreprocessFile::SpecialInstructions::Evaluate,
-      compUnit ? PreprocessFile::SpecialInstructions::Persist
-               : PreprocessFile::SpecialInstructions::DontPersist);
+      PreprocessFile::SpecialInstructions::DontMute, PreprocessFile::SpecialInstructions::DontMark,
+      PreprocessFile::SpecialInstructions::DontFilter, PreprocessFile::SpecialInstructions::CheckLoop,
+      PreprocessFile::SpecialInstructions::ComplainUndefinedMacro, PreprocessFile::SpecialInstructions::Evaluate,
+      compUnit ? PreprocessFile::SpecialInstructions::Persist : PreprocessFile::SpecialInstructions::DontPersist);
   if (m_session == nullptr) m_session = new Session;
   CompilationUnit unit(false);
   Library lib(m_session, "work");
   Compiler compiler(m_session);
-  CompileSourceFile csf(m_session, BadPathId, &compiler,
-                        compUnit ? compUnit : &unit, &lib);
-  PreprocessFile pp(m_session, BadSymbolId, &csf, instructions,
-                    compUnit ? compUnit : &unit, &lib, nullptr, 0, content,
+  CompileSourceFile csf(m_session, BadPathId, &compiler, compUnit ? compUnit : &unit, &lib);
+  PreprocessFile pp(m_session, BadSymbolId, &csf, instructions, compUnit ? compUnit : &unit, &lib, nullptr, 0, content,
                     nullptr, fileId, BadPathId, 0);
 
   std::string result;
@@ -76,7 +67,5 @@ std::string PreprocessHarness::preprocess(std::string_view content,
   return result;
 }
 
-const ErrorContainer& PreprocessHarness::collectedErrors() const {
-  return *m_session->getErrorContainer();
-}
+const ErrorContainer& PreprocessHarness::collectedErrors() const { return *m_session->getErrorContainer(); }
 }  // namespace SURELOG

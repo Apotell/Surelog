@@ -31,19 +31,14 @@
 
 namespace SURELOG {
 
-Parameter::Parameter(const FileContent* fC, NodeId nodeId,
-                     std::string_view name, NodeId nodeType, bool portParam)
-    : DataType(fC, nodeId, name,
-               fC ? fC->Type(nodeType) : VObjectType::paParameter_declaration,
-               true),
+Parameter::Parameter(const FileContent* fC, NodeId nodeId, std::string_view name, NodeId nodeType, bool portParam)
+    : DataType(fC, nodeId, name, fC ? fC->Type(nodeType) : VObjectType::paParameter_declaration, true),
       m_ntype(nodeType),
       m_param(nullptr),
       m_portParam(portParam) {
   m_category = DataType::Category::PARAMETER;
 }
 
-VObjectType Parameter::getType() const {
-  return getFileContent()->Type(m_ntype);
-}
+VObjectType Parameter::getType() const { return getFileContent()->Type(m_ntype); }
 
 }  // namespace SURELOG

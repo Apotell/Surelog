@@ -968,7 +968,6 @@ install(
   FILES ${PROJECT_SOURCE_DIR}/include/Surelog/Design/ClockingBlock.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Design.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/BindStmt.h
-        ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Instance.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Signal.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/ValuedComponentI.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/DataType.h

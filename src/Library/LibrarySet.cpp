@@ -77,8 +77,7 @@ std::ostream& LibrarySet::report(std::ostream& out) const {
   return out;
 }
 
-void LibrarySet::checkErrors(SymbolTable* symbols,
-                             ErrorContainer* errors) const {
+void LibrarySet::checkErrors(SymbolTable* symbols, ErrorContainer* errors) const {
   std::map<PathId, std::string, PathIdLessThanComparer> fileSet;
   for (const auto& library : m_libraries) {
     for (const auto& file : library.getFiles()) {
@@ -86,8 +85,7 @@ void LibrarySet::checkErrors(SymbolTable* symbols,
       if (itr == fileSet.end()) {
         fileSet.emplace(file, library.getName());
       } else {
-        Location loc1(symbols->registerSymbol(
-            StrCat(itr->second, ", ", library.getName())));
+        Location loc1(symbols->registerSymbol(StrCat(itr->second, ", ", library.getName())));
         Location loc2(file);
         Error err(ErrorDefinition::LIB_FILE_MAPS_TO_MULTIPLE_LIBS, loc1, loc2);
         errors->addError(err);

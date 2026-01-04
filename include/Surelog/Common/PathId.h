@@ -56,21 +56,17 @@ class PathId final {
  public:
 #if SURELOG_PATHID_DEBUG_ENABLED
   PathId() : m_symbolTable(nullptr), m_id(BadRawPathId), m_value(BadRawPath) {}
-  PathId(const SymbolTable *const symbolTable, RawPathId id,
-         std::string_view value)
+  PathId(const SymbolTable *const symbolTable, RawPathId id, std::string_view value)
       : m_symbolTable(symbolTable), m_id(id), m_value(value) {}
-  PathId(const PathId &rhs)
-      : PathId(rhs.m_symbolTable, rhs.m_id, rhs.m_value) {}
+  PathId(const PathId &rhs) : PathId(rhs.m_symbolTable, rhs.m_id, rhs.m_value) {}
   PathId(const SymbolTable *const symbolTable, SymbolId id)
       : PathId(symbolTable, (RawSymbolId)id, (std::string_view)id) {}
 #else
   PathId() : m_symbolTable(nullptr), m_id(BadRawPathId) {}
-  PathId(const SymbolTable *const symbolTable, RawPathId id,
-         std::string_view value)
+  PathId(const SymbolTable *const symbolTable, RawPathId id, std::string_view value)
       : m_symbolTable(symbolTable), m_id(id) {}
   PathId(const PathId &rhs) : PathId(rhs.m_symbolTable, rhs.m_id, BadRawPath) {}
-  PathId(const SymbolTable *const symbolTable, SymbolId id)
-      : PathId(symbolTable, (RawSymbolId)id, BadRawPath) {}
+  PathId(const SymbolTable *const symbolTable, SymbolId id) : PathId(symbolTable, (RawSymbolId)id, BadRawPath) {}
 #endif
 
   PathId &operator=(const PathId &rhs) {
@@ -112,34 +108,25 @@ class PathId final {
 
 inline static const PathId BadPathId(nullptr, BadRawPathId, BadRawPath);
 
-inline std::istream &operator>>(std::istream &strm, PathId &pathId) {
-  return strm >> pathId.m_id;
-}
+inline std::istream &operator>>(std::istream &strm, PathId &pathId) { return strm >> pathId.m_id; }
 
-inline std::ostream &operator<<(std::ostream &strm, const PathId &pathId) {
-  return strm << pathId.m_id;
-}
+inline std::ostream &operator<<(std::ostream &strm, const PathId &pathId) { return strm << pathId.m_id; }
 
 struct PathIdPP final {  // Pretty Printer
   const PathId &m_id;
   FileSystem *const m_fileSystem = nullptr;
 
-  explicit PathIdPP(const PathId &id, FileSystem *fileSystem)
-      : m_id(id), m_fileSystem(fileSystem) {}
+  explicit PathIdPP(const PathId &id, FileSystem *fileSystem) : m_id(id), m_fileSystem(fileSystem) {}
 };
 
 std::ostream &operator<<(std::ostream &strm, const PathIdPP &id);
 
 struct PathIdHasher final {
-  inline size_t operator()(const PathId &value) const {
-    return std::hash<RawPathId>()((RawPathId)value);
-  }
+  inline size_t operator()(const PathId &value) const { return std::hash<RawPathId>()((RawPathId)value); }
 };
 
 struct PathIdLessThanComparer final {
-  inline bool operator()(const PathId &lhs, const PathId &rhs) const {
-    return ((RawPathId)lhs < (RawPathId)rhs);
-  }
+  inline bool operator()(const PathId &lhs, const PathId &rhs) const { return ((RawPathId)lhs < (RawPathId)rhs); }
 };
 
 using PathIdSet = std::set<PathId, PathIdLessThanComparer>;

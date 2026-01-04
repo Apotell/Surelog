@@ -42,9 +42,7 @@ class ExprBuilder final {
   explicit ExprBuilder(Session* session) : m_session(session) {}
   ExprBuilder(const ExprBuilder& orig) = delete;
 
-  Value* evalExpr(const FileContent*, NodeId id,
-                  ValuedComponentI* instance = nullptr,
-                  bool muteErrors = false);
+  Value* evalExpr(const FileContent*, NodeId id, ValuedComponentI* instance = nullptr, bool muteErrors = false);
   Value* fromVpiValue(std::string_view value, int32_t size);
   Value* fromString(std::string_view value);
   Value* clone(Value* val);

@@ -62,15 +62,7 @@ class SV3_1aPpParserBaseListener;
 
 #define LINE1 1
 
-enum VerilogVersion {
-  NoVersion,
-  Verilog1995,
-  Verilog2001,
-  Verilog2005,
-  SVerilog2005,
-  Verilog2009,
-  SystemVerilog
-};
+enum VerilogVersion { NoVersion, Verilog1995, Verilog2001, Verilog2005, SVerilog2005, Verilog2009, SystemVerilog };
 
 /* Can be either an include file or a macro definition being evaluated */
 class PreprocessFile final {
@@ -79,18 +71,13 @@ class PreprocessFile final {
   class DescriptiveErrorListener;
 
   /* Constructors */
-  PreprocessFile(Session* session, PathId fileId, CompileSourceFile* csf,
-                 SpecialInstructions& instructions,
-                 CompilationUnit* compilationUnit, Library* library,
-                 PreprocessFile* includer = nullptr, uint32_t includerLine = 0);
-  PreprocessFile(Session* session, SymbolId macroId, CompileSourceFile* csf,
-                 SpecialInstructions& instructions,
-                 CompilationUnit* compilationUnit, Library* library,
-                 PreprocessFile* includer, uint32_t includerLine,
-                 std::string_view macroBody = "", MacroInfo* = nullptr,
-                 PathId fileId = BadPathId,
-                 PathId embeddedMacroCallFile = BadPathId,
-                 uint32_t embeddedMacroCallLine = 0,
+  PreprocessFile(Session* session, PathId fileId, CompileSourceFile* csf, SpecialInstructions& instructions,
+                 CompilationUnit* compilationUnit, Library* library, PreprocessFile* includer = nullptr,
+                 uint32_t includerLine = 0);
+  PreprocessFile(Session* session, SymbolId macroId, CompileSourceFile* csf, SpecialInstructions& instructions,
+                 CompilationUnit* compilationUnit, Library* library, PreprocessFile* includer, uint32_t includerLine,
+                 std::string_view macroBody = "", MacroInfo* = nullptr, PathId fileId = BadPathId,
+                 PathId embeddedMacroCallFile = BadPathId, uint32_t embeddedMacroCallLine = 0,
                  uint16_t embeddedMacroCallColumn = 0);
   ~PreprocessFile();
 
@@ -99,26 +86,19 @@ class PreprocessFile final {
   std::tuple<const std::string&, LineColumn> getPreProcessedFileContent() const;
 
   /* Macro manipulations */
-  MacroInfo* defineMacro(std::string_view name, MacroInfo::DefType defType,
-                         uint32_t startLine, uint16_t startColumn,
-                         uint32_t endLine, uint16_t endColumn,
-                         uint16_t nameStartColumn, uint16_t bodyStartColumn,
-                         std::string_view arguments,
-                         const std::vector<LineColumn>& argumentPositions,
-                         const std::vector<std::string>& tokens,
-                         const std::vector<LineColumn>& tokenPositions);
+  MacroInfo* defineMacro(std::string_view name, MacroInfo::DefType defType, uint32_t startLine, uint16_t startColumn,
+                         uint32_t endLine, uint16_t endColumn, uint16_t nameStartColumn, uint16_t bodyStartColumn,
+                         std::string_view arguments, const std::vector<LineColumn>& argumentPositions,
+                         const std::vector<std::string>& tokens, const std::vector<LineColumn>& tokenPositions);
   void addMacro(MacroInfo* info);  // Used by PPCache
   std::tuple<bool, std::string, std::vector<LineColumn>, LineColumn> getMacro(
-      std::string_view name, std::vector<std::string>& actual_arguments,
-      PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
-      SpecialInstructions& instructions,
-      PathId embeddedMacroCallFile = BadPathId,
-      uint32_t embeddedMacroCallLine = 0, uint16_t embeddedMacroCallColumn = 0);
-  MacroInfo* undefineMacro(std::string_view name, uint32_t startLine,
-                           uint16_t startColumn, uint32_t endLine,
+      std::string_view name, std::vector<std::string>& actual_arguments, PreprocessFile* callingFile,
+      uint32_t callingLine, LoopCheck& loopChecker, SpecialInstructions& instructions,
+      PathId embeddedMacroCallFile = BadPathId, uint32_t embeddedMacroCallLine = 0,
+      uint16_t embeddedMacroCallColumn = 0);
+  MacroInfo* undefineMacro(std::string_view name, uint32_t startLine, uint16_t startColumn, uint32_t endLine,
                            uint16_t endColumn, uint16_t nameStartColumn);
-  MacroInfo* undefineAllMacros(uint32_t startLine, uint16_t startColumn,
-                               uint32_t endLine, uint16_t endColumn);
+  MacroInfo* undefineAllMacros(uint32_t startLine, uint16_t startColumn, uint32_t endLine, uint16_t endColumn);
   bool isMacroBody() const { return !m_macroBody.empty(); }
   std::string_view getMacroBody() const { return m_macroBody; }
   MacroInfo* getMacroInfo() { return m_macroInfo; }
@@ -126,9 +106,7 @@ class PreprocessFile final {
   const MacroStorage& getMacros() const { return m_macros; }
   MacroInfo* getMacro(std::string_view name);
 
-  CompileSourceFile* getCompileSourceFile() const {
-    return m_compileSourceFile;
-  }
+  CompileSourceFile* getCompileSourceFile() const { return m_compileSourceFile; }
   CompilationUnit* getCompilationUnit() const { return m_compilationUnit; }
   Library* getLibrary() const { return m_library; }
   antlr4::CommonTokenStream* getTokenStream() const {
@@ -144,17 +122,11 @@ class PreprocessFile final {
   size_t getLineCount() const { return m_lineCount; }
   void setLineCount(size_t count) { m_lineCount = count; }
   LineColumn getCurrentPosition() const;
-  const std::vector<IncludeFileInfo>& getIncludeFileInfo() const {
-    return m_includeFileInfo;
-  }
-  int32_t addIncludeFileInfo(IncludeFileInfo::Context context,
-                             IncludeFileInfo::Action action,
-                             const MacroInfo* macroDefinition,
-                             PathId sectionFileId, uint32_t sectionLine,
-                             uint16_t sectionColumn, uint32_t sourceLine,
-                             uint16_t sourceColumn, SymbolId symbolId,
-                             uint32_t symbolLine, uint16_t symbolColumn,
-                             int32_t indexOpposite = -1);
+  const std::vector<IncludeFileInfo>& getIncludeFileInfo() const { return m_includeFileInfo; }
+  int32_t addIncludeFileInfo(IncludeFileInfo::Context context, IncludeFileInfo::Action action,
+                             const MacroInfo* macroDefinition, PathId sectionFileId, uint32_t sectionLine,
+                             uint16_t sectionColumn, uint32_t sourceLine, uint16_t sourceColumn, SymbolId symbolId,
+                             uint32_t symbolLine, uint16_t symbolColumn, int32_t indexOpposite = -1);
   void clearIncludeFileInfo();
   void reportIncludeInfo(std::ostream& strm) const;
 
@@ -167,17 +139,12 @@ class PreprocessFile final {
 
   PathId getEmbeddedMacroCallFile() const { return m_embeddedMacroCallFile; }
   uint32_t getEmbeddedMacroCallLine() const { return m_embeddedMacroCallLine; }
-  uint16_t getEmbeddedMacroCallColumn() const {
-    return m_embeddedMacroCallColumn;
-  }
+  uint16_t getEmbeddedMacroCallColumn() const { return m_embeddedMacroCallColumn; }
 
   /* Markings */
-  static constexpr std::string_view MacroNotDefined =
-      "SURELOG_MACRO_NOT_DEFINED";
-  static constexpr std::string_view PP__Line__Marking =
-      "SURELOG__LINE__MARKING";
-  static constexpr std::string_view PP__File__Marking =
-      "SURELOG__FILE__MARKING";
+  static constexpr std::string_view MacroNotDefined = "SURELOG_MACRO_NOT_DEFINED";
+  static constexpr std::string_view PP__Line__Marking = "SURELOG__LINE__MARKING";
+  static constexpr std::string_view PP__File__Marking = "SURELOG__FILE__MARKING";
 
  public:
   /* Instructions passed from calling scope */
@@ -187,10 +154,7 @@ class PreprocessFile final {
     enum EmptyMacroInstr : bool { Mark = true, DontMark = false };
     enum FileLineInfoInstr : bool { Filter = true, DontFilter = false };
     enum CheckLoopInstr : bool { CheckLoop = true, DontCheckLoop = false };
-    enum AsIsUndefinedMacroInstr : bool {
-      AsIsUndefinedMacro = true,
-      ComplainUndefinedMacro = false
-    };
+    enum AsIsUndefinedMacroInstr : bool { AsIsUndefinedMacro = true, ComplainUndefinedMacro = false };
     enum PersistMacroInstr : bool { Persist = true, DontPersist = false };
     enum EvaluateInstr : bool { Evaluate = true, DontEvaluate = false };
     SpecialInstructions()
@@ -204,12 +168,9 @@ class PreprocessFile final {
     SpecialInstructions(SpecialInstructions& rhs)
 
         = default;
-    SpecialInstructions(TraceInstr mute, EmptyMacroInstr mark_empty_macro,
-                        FileLineInfoInstr filterFileLine,
-                        CheckLoopInstr check_macro_loop,
-                        AsIsUndefinedMacroInstr as_is_undefined_macro,
-                        EvaluateInstr evaluate = Evaluate,
-                        PersistMacroInstr persist = DontPersist)
+    SpecialInstructions(TraceInstr mute, EmptyMacroInstr mark_empty_macro, FileLineInfoInstr filterFileLine,
+                        CheckLoopInstr check_macro_loop, AsIsUndefinedMacroInstr as_is_undefined_macro,
+                        EvaluateInstr evaluate = Evaluate, PersistMacroInstr persist = DontPersist)
         : m_mute(mute),
           m_mark_empty_macro(mark_empty_macro),
           m_filterFileLine(filterFileLine),
@@ -227,19 +188,14 @@ class PreprocessFile final {
     PersistMacroInstr m_persist;
   };
 
-  std::string evaluateMacroInstance(
-      std::string_view macro_instance, PreprocessFile* callingFile,
-      uint32_t callingLine, uint16_t callingColumn,
-      SpecialInstructions::CheckLoopInstr checkMacroLoop,
-      SpecialInstructions::AsIsUndefinedMacroInstr);
+  std::string evaluateMacroInstance(std::string_view macro_instance, PreprocessFile* callingFile, uint32_t callingLine,
+                                    uint16_t callingColumn, SpecialInstructions::CheckLoopInstr checkMacroLoop,
+                                    SpecialInstructions::AsIsUndefinedMacroInstr);
 
   /* Incoming `line handling */
   struct LineTranslationInfo final {
-    LineTranslationInfo(PathId pretendFileId, uint32_t originalLine,
-                        uint32_t pretendLine)
-        : m_pretendFileId(pretendFileId),
-          m_originalLine(originalLine),
-          m_pretendLine(pretendLine) {}
+    LineTranslationInfo(PathId pretendFileId, uint32_t originalLine, uint32_t pretendLine)
+        : m_pretendFileId(pretendFileId), m_originalLine(originalLine), m_pretendLine(pretendLine) {}
     const PathId m_pretendFileId;
     const uint32_t m_originalLine = 0;
     const uint32_t m_pretendLine = 0;
@@ -286,9 +242,7 @@ class PreprocessFile final {
   void resumeAppend() { m_pauseAppend = false; }
   bool isPaused() const { return m_pauseAppend; }
 
-  void addLineTranslationInfo(LineTranslationInfo& info) {
-    m_lineTranslationVec.push_back(info);
-  }
+  void addLineTranslationInfo(LineTranslationInfo& info) { m_lineTranslationVec.push_back(info); }
 
   /* Shorthand for logging an error */
   void addError(Error& error);
@@ -313,26 +267,17 @@ class PreprocessFile final {
   void collectIncludedFiles(std::set<PreprocessFile*>& included);
   bool usingCachedVersion() const { return m_usingCachedVersion; }
   std::string getProfileInfo() const { return m_profileInfo; }
-  std::vector<LineTranslationInfo>& getLineTranslationInfo() {
-    return m_lineTranslationVec;
-  }
-  const std::vector<LineTranslationInfo>& getLineTranslationInfo() const {
-    return m_lineTranslationVec;
-  }
+  std::vector<LineTranslationInfo>& getLineTranslationInfo() { return m_lineTranslationVec; }
+  const std::vector<LineTranslationInfo>& getLineTranslationInfo() const { return m_lineTranslationVec; }
 
  private:
-  std::tuple<bool, std::string, std::vector<LineColumn>, LineColumn>
-  evaluateMacro_(std::string_view name, std::vector<std::string>& arguments,
-                 PreprocessFile* callingFile, uint32_t callingLine,
-                 LoopCheck& loopChecker, MacroInfo* macroInfo,
-                 SpecialInstructions& instructions,
-                 PathId embeddedMacroCallFile, uint32_t embeddedMacroCallLine,
-                 uint16_t embeddedMacroCallColumn);
+  std::tuple<bool, std::string, std::vector<LineColumn>, LineColumn> evaluateMacro_(
+      std::string_view name, std::vector<std::string>& arguments, PreprocessFile* callingFile, uint32_t callingLine,
+      LoopCheck& loopChecker, MacroInfo* macroInfo, SpecialInstructions& instructions, PathId embeddedMacroCallFile,
+      uint32_t embeddedMacroCallLine, uint16_t embeddedMacroCallColumn);
 
-  void checkMacroArguments_(std::string_view name, uint32_t line,
-                            uint16_t column,
-                            const std::vector<std::string>& arguments,
-                            const std::vector<std::string>& tokens);
+  void checkMacroArguments_(std::string_view name, uint32_t line, uint16_t column,
+                            const std::vector<std::string>& arguments, const std::vector<std::string>& tokens);
   void forgetPreprocessor_(PreprocessFile*, PreprocessFile* pp);
 
   Session* const m_session = nullptr;

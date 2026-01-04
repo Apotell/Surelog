@@ -59,16 +59,14 @@ TEST(CompileExpression, ExprFromParseTree1) {
       "parameter p7 = (1'b0) ? 15 : 16;"
       "endmodule");
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   EXPECT_EQ(assigns.size(), 7);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
-    const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
     uhdm::ExprEval eval;
@@ -91,16 +89,14 @@ TEST(CompileExpression, ExprFromParseTree2) {
       "parameter p4 = ~1'b0;"
       "endmodule");
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   EXPECT_EQ(assigns.size(), 4);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
-    const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp->getUhdmType(), uhdm::UhdmType::Constant);
     bool invalidValue = false;
     uhdm::ExprEval eval;
@@ -121,8 +117,7 @@ TEST(CompileExpression, ExprFromParseTree3) {
       "parameter p2 = '{1'b1, 2'b10}"
       "endmodule");
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   EXPECT_EQ(assigns.size(), 2);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
@@ -130,11 +125,9 @@ TEST(CompileExpression, ExprFromParseTree3) {
     NodeId param = fC->Child(param_assign);
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
-    const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
-    const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;
@@ -163,8 +156,7 @@ TEST(CompileExpression, ExprFromPpTree) {
   // elaboration performed here!
   auto fC = pharness.parse(text);
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   EXPECT_EQ(assigns.size(), 2);
   uhdm::Serializer &serializer = compileDesign->getSerializer();
   uhdm::Module *const module = serializer.make<uhdm::Module>();
@@ -172,11 +164,9 @@ TEST(CompileExpression, ExprFromPpTree) {
     NodeId param = fC->Child(param_assign);
     const std::string_view name = fC->SymName(param);
     NodeId rhs = fC->Sibling(param);
-    const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp1 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     EXPECT_EQ(exp1->getUhdmType(), uhdm::UhdmType::Operation);
-    const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(
-        nullptr, fC.get(), rhs, module, nullptr, true);
+    const uhdm::Expr *exp2 = (uhdm::Expr *)helper.compileExpression(nullptr, fC.get(), rhs, module, nullptr, true);
     if (name == "p1") {
       EXPECT_EQ(exp2->getUhdmType(), uhdm::UhdmType::Constant);
       bool invalidValue = false;

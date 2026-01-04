@@ -41,9 +41,7 @@ namespace SURELOG {
 
 using namespace uhdm;  // NOLINT (we use a good chunk of these here)
 
-uhdm::AnyCollection* CompileHelper::compileGenVars(DesignComponent* component,
-                                                   const FileContent* fC,
-                                                   NodeId id,
+uhdm::AnyCollection* CompileHelper::compileGenVars(DesignComponent* component, const FileContent* fC, NodeId id,
                                                    uhdm::Any* pscope) {
   Serializer& s = m_compileDesign->getSerializer();
   AnyCollection* vars = nullptr;
@@ -63,9 +61,7 @@ uhdm::AnyCollection* CompileHelper::compileGenVars(DesignComponent* component,
   return vars;
 }
 
-uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
-                                                   const FileContent* fC,
-                                                   NodeId id,
+uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component, const FileContent* fC, NodeId id,
                                                    uhdm::Any* pscope) {
   Serializer& s = m_compileDesign->getSerializer();
   NodeId stmtId = fC->Child(id);
@@ -84,8 +80,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
     checkForLoops(true);
     const uhdm::ScopedScope scopedScope2(stmt);
-    if (uhdm::AnyCollection* stmts =
-            compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
+    if (uhdm::AnyCollection* stmts = compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
       stmt->setStmts(stmts);
     }
     checkForLoops(false);
@@ -95,8 +90,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
       stmt->setName(fC->SymName(blockNameId));
       fC->populateCoreMembers(blockNameId, blockNameId, stmt->getNameObj());
     }
-  } else if (fC->Type(stmtId) ==
-             VObjectType::paIf_generate_construct) {  // If, If-Else stmt
+  } else if (fC->Type(stmtId) == VObjectType::paIf_generate_construct) {  // If, If-Else stmt
     NodeId ifElseId = fC->Child(stmtId);
     if (fC->Type(ifElseId) == VObjectType::IF) {
       // lookahead
@@ -112,8 +106,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
       NodeId condId = fC->Sibling(ifElseId);
       checkForLoops(true);
-      uhdm::Expr* cond =
-          (uhdm::Expr*)compileExpression(component, fC, condId, nullptr);
+      uhdm::Expr* cond = (uhdm::Expr*)compileExpression(component, fC, condId, nullptr);
       checkForLoops(false);
 
       NodeId stmtId = fC->Sibling(condId);
@@ -134,8 +127,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         checkForLoops(true);
         {
           const uhdm::ScopedScope scopedScope1(stmt1);
-          if (uhdm::AnyCollection* stmts =
-                  compileStmt(component, fC, stmtId, stmt1, nullptr, true)) {
+          if (uhdm::AnyCollection* stmts = compileStmt(component, fC, stmtId, stmt1, nullptr, true)) {
             stmt1->setStmts(stmts);
           }
         }
@@ -144,8 +136,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt1->setName(fC->SymName(blockNameId));
-          fC->populateCoreMembers(blockNameId, blockNameId,
-                                  stmt1->getNameObj());
+          fC->populateCoreMembers(blockNameId, blockNameId, stmt1->getNameObj());
         }
 
         NodeId ElseId = fC->Sibling(stmtId);
@@ -159,8 +150,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         checkForLoops(true);
         {
           const uhdm::ScopedScope scopedScope2(stmt2);
-          if (uhdm::AnyCollection* stmts = compileStmt(
-                  component, fC, elseStmtId, stmt2, nullptr, true)) {
+          if (uhdm::AnyCollection* stmts = compileStmt(component, fC, elseStmtId, stmt2, nullptr, true)) {
             stmt2->setStmts(stmts);
           }
         }
@@ -169,8 +159,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         blockNameId = fC->Child(fC->Child(elseStmtId));
         if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt2->setName(fC->SymName(blockNameId));
-          fC->populateCoreMembers(blockNameId, blockNameId,
-                                  stmt2->getNameObj());
+          fC->populateCoreMembers(blockNameId, blockNameId, stmt2->getNameObj());
         }
         fC->populateCoreMembers(ifElseId, elseStmtId, genif);
       } else {
@@ -190,8 +179,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
         checkForLoops(true);
         const uhdm::ScopedScope scopedScope(stmt);
-        if (uhdm::AnyCollection* stmts =
-                compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
+        if (uhdm::AnyCollection* stmts = compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
           stmt->setStmts(stmts);
         }
         checkForLoops(false);
@@ -203,16 +191,14 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         }
       }
     }
-  } else if (fC->Type(stmtId) ==
-             VObjectType::paCase_generate_construct) {  // Case
+  } else if (fC->Type(stmtId) == VObjectType::paCase_generate_construct) {  // Case
     NodeId tmp = fC->Child(stmtId);
     uhdm::GenCase* gencase = s.make<uhdm::GenCase>();
     gencase->setParent(pscope);
     fC->populateCoreMembers(stmtId, stmtId, gencase);
     genstmt = gencase;
     checkForLoops(true);
-    if (uhdm::Expr* cond =
-            (uhdm::Expr*)compileExpression(component, fC, tmp, gencase)) {
+    if (uhdm::Expr* cond = (uhdm::Expr*)compileExpression(component, fC, tmp, gencase)) {
       gencase->setCondition(cond);
     }
     checkForLoops(false);
@@ -229,8 +215,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
         NodeId stmtId = itemExp;
         if (fC->Type(itemExp) == VObjectType::paConstant_expression) {
           checkForLoops(true);
-          if (uhdm::Expr* ex = (uhdm::Expr*)compileExpression(component, fC,
-                                                              itemExp, citem)) {
+          if (uhdm::Expr* ex = (uhdm::Expr*)compileExpression(component, fC, itemExp, citem)) {
             citem->getExprs(true)->emplace_back(ex);
           }
           checkForLoops(false);
@@ -244,8 +229,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
         checkForLoops(true);
         const uhdm::ScopedScope scopedScope(stmt);
-        if (uhdm::AnyCollection* stmts =
-                compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
+        if (uhdm::AnyCollection* stmts = compileStmt(component, fC, stmtId, stmt, nullptr, true)) {
           stmt->setStmts(stmts);
         }
         checkForLoops(false);
@@ -259,8 +243,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
       tmp = fC->Sibling(tmp);
     }
   } else if (fC->Type(stmtId) == VObjectType::paGenvar_initialization ||
-             fC->Type(stmtId) ==
-                 VObjectType::paGenvar_decl_assignment) {  // For loop stmt
+             fC->Type(stmtId) == VObjectType::paGenvar_decl_assignment) {  // For loop stmt
     NodeId varInit = stmtId;
     NodeId endLoopTest = fC->Sibling(varInit);
     uhdm::GenFor* genfor = s.make<uhdm::GenFor>();
@@ -283,8 +266,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
     checkForLoops(true);
     NodeId Expression = fC->Sibling(Var);
-    if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-            component, fC, Expression, assign_stmt)) {
+    if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(component, fC, Expression, assign_stmt)) {
       assign_stmt->setRhs(rhs);
     }
     checkForLoops(false);
@@ -292,8 +274,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
     // Condition
     checkForLoops(true);
-    if (uhdm::Expr* cond = (uhdm::Expr*)compileExpression(
-            component, fC, endLoopTest, genfor)) {
+    if (uhdm::Expr* cond = (uhdm::Expr*)compileExpression(component, fC, endLoopTest, genfor)) {
       genfor->setCondition(cond);
     }
     checkForLoops(false);
@@ -306,8 +287,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
     if (!exprId) {  // Unary operator like i++
       exprId = iteration;
       checkForLoops(true);
-      if (uhdm::Expr* ex =
-              (uhdm::Expr*)compileExpression(component, fC, exprId, genfor)) {
+      if (uhdm::Expr* ex = (uhdm::Expr*)compileExpression(component, fC, exprId, genfor)) {
         genfor->setForIncStmt(ex);
       }
       checkForLoops(false);
@@ -318,12 +298,10 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
       assign_stmt->setParent(genfor);
       fC->populateCoreMembers(iteration, iteration, assign_stmt);
       checkForLoops(true);
-      if (uhdm::Expr* lhs =
-              (uhdm::Expr*)compileExpression(component, fC, var, assign_stmt)) {
+      if (uhdm::Expr* lhs = (uhdm::Expr*)compileExpression(component, fC, var, assign_stmt)) {
         assign_stmt->setLhs(lhs);
       }
-      if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
-              component, fC, exprId, assign_stmt)) {
+      if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(component, fC, exprId, assign_stmt)) {
         assign_stmt->setRhs(rhs);
       }
       checkForLoops(false);
@@ -339,8 +317,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(DesignComponent* component,
 
     checkForLoops(true);
     const uhdm::ScopedScope scopedScope2(stmt);
-    if (uhdm::AnyCollection* stmts =
-            compileStmt(component, fC, genBlock, stmt, nullptr, true)) {
+    if (uhdm::AnyCollection* stmts = compileStmt(component, fC, genBlock, stmt, nullptr, true)) {
       stmt->setStmts(stmts);
     }
     checkForLoops(false);

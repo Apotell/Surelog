@@ -37,13 +37,10 @@ class Timer final {
 
   void reset() { m_beg = clock_t::now(); }
 
-  double elapsed() const {
-    return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
-  }
+  double elapsed() const { return std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count(); }
 
   double elapsed_rounded() const {
-    double res =
-        std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
+    double res = std::chrono::duration_cast<second_t>(clock_t::now() - m_beg).count();
     return round(res);
   }
 

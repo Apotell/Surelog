@@ -47,8 +47,7 @@ class FileContent;
 
 class Modport final {
  public:
-  Modport(ModuleDefinition* parent, std::string_view name,
-          const FileContent* const fC, NodeId nodeId)
+  Modport(ModuleDefinition* parent, std::string_view name, const FileContent* const fC, NodeId nodeId)
       : m_parent(parent), m_name(name), m_fileContent(fC), m_nodeId(nodeId) {}
 
   std::string_view getName() const { return m_name; }

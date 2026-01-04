@@ -36,15 +36,13 @@ Error::Error(ErrorDefinition::ErrorType errorId, const Location& loc)
   m_locations.emplace_back(loc);
 }
 
-Error::Error(ErrorDefinition::ErrorType errorId, const Location& loc,
-             const Location& extra)
+Error::Error(ErrorDefinition::ErrorType errorId, const Location& loc, const Location& extra)
     : m_errorId(errorId), m_reported(false), m_waived(false) {
   m_locations.emplace_back(loc);
   m_locations.emplace_back(extra);
 }
 
-Error::Error(ErrorDefinition::ErrorType errorId,
-             const std::vector<Location>& locations)
+Error::Error(ErrorDefinition::ErrorType errorId, const std::vector<Location>& locations)
     : m_errorId(errorId), m_reported(false), m_waived(false) {
   for (const auto& location : locations) m_locations.emplace_back(location);
 }
@@ -52,11 +50,9 @@ Error::Error(ErrorDefinition::ErrorType errorId,
 bool Error::operator==(const Error& rhs) const {
   if (m_errorId != rhs.m_errorId) return false;
   if (m_locations.size() < rhs.m_locations.size())
-    return std::equal(m_locations.begin(), m_locations.end(),
-                      rhs.m_locations.begin());
+    return std::equal(m_locations.begin(), m_locations.end(), rhs.m_locations.begin());
   else
-    return std::equal(rhs.m_locations.begin(), rhs.m_locations.end(),
-                      m_locations.begin());
+    return std::equal(rhs.m_locations.begin(), rhs.m_locations.end(), m_locations.begin());
 }
 
 bool Error::operator<(const Error& rhs) const {

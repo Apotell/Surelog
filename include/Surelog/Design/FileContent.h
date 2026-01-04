@@ -61,12 +61,10 @@ class FileContent final : public DesignComponent {
   SURELOG_IMPLEMENT_RTTI(FileContent, DesignComponent)
 
  public:
-  using AnyToNodeIdPairCache =
-      std::map<const uhdm::Any*, std::pair<NodeId, NodeId>>;
+  using AnyToNodeIdPairCache = std::map<const uhdm::Any*, std::pair<NodeId, NodeId>>;
 
  public:
-  FileContent(Session* session, PathId fileId, Library* library,
-              FileContent* parent, PathId fileChunkId);
+  FileContent(Session* session, PathId fileId, Library* library, FileContent* parent, PathId fileChunkId);
   ~FileContent() final;
 
   Session* getSession() { return m_session; }
@@ -82,42 +80,31 @@ class FileContent final : public DesignComponent {
   NodeId sl_parent(NodeId parent,
                    VObjectType type) const;  // Get first parent item of type
 
-  NodeId sl_parent(
-      NodeId parent, const VObjectTypeUnorderedSet& types,
-      VObjectType& actualType) const;  // Get first parent item of type
+  NodeId sl_parent(NodeId parent, const VObjectTypeUnorderedSet& types,
+                   VObjectType& actualType) const;  // Get first parent item of type
 
-  std::vector<NodeId> sl_get_all(
-      NodeId parent, VObjectType type) const;  // get all child items of type
+  std::vector<NodeId> sl_get_all(NodeId parent, VObjectType type) const;  // get all child items of type
 
   std::vector<NodeId> sl_get_all(NodeId parent,
-                                 const VObjectTypeUnorderedSet& types)
-      const;  // get all child items of types
+                                 const VObjectTypeUnorderedSet& types) const;  // get all child items of types
 
-  NodeId sl_collect(
-      NodeId parent,
-      VObjectType type) const;  // Recursively search for first item of type
+  NodeId sl_collect(NodeId parent,
+                    VObjectType type) const;  // Recursively search for first item of type
 
-  NodeId sl_collect(
-      NodeId parent, VObjectType type,
-      VObjectType stopType) const;  // Recursively search for first item of type
+  NodeId sl_collect(NodeId parent, VObjectType type,
+                    VObjectType stopType) const;  // Recursively search for first item of type
 
-  std::vector<NodeId> sl_collect_all(
-      NodeId parent, VObjectType type,
-      bool first = false) const;  // Recursively search for all items of type
+  std::vector<NodeId> sl_collect_all(NodeId parent, VObjectType type,
+                                     bool first = false) const;  // Recursively search for all items of type
 
-  std::vector<NodeId> sl_collect_all(
-      NodeId parent, const VObjectTypeUnorderedSet& types,
-      bool first = false) const;  // Recursively search for all items of types
+  std::vector<NodeId> sl_collect_all(NodeId parent, const VObjectTypeUnorderedSet& types,
+                                     bool first = false) const;  // Recursively search for all items of types
 
-  std::vector<NodeId> sl_collect_all(NodeId parent,
-                                     const VObjectTypeUnorderedSet& types,
-                                     const VObjectTypeUnorderedSet& stopPoints,
-                                     bool first = false) const;
+  std::vector<NodeId> sl_collect_all(NodeId parent, const VObjectTypeUnorderedSet& types,
+                                     const VObjectTypeUnorderedSet& stopPoints, bool first = false) const;
   // Recursively search for all items of types
   // and stops at types stopPoints
-  uint32_t getSize() const final {
-    return static_cast<uint32_t>(m_objects.size());
-  }
+  uint32_t getSize() const final { return static_cast<uint32_t>(m_objects.size()); }
   VObjectType getType() const final { return VObjectType::NO_TYPE; }
   bool isInstance() const final { return false; }
   std::string_view getName() const final;
@@ -126,26 +113,18 @@ class FileContent final : public DesignComponent {
   PathId* getMutableFileId(NodeId id);
   Library* getLibrary() const { return m_library; }
   std::vector<DesignElement*>& getDesignElements() { return m_elements; }
-  const std::vector<DesignElement*>& getDesignElements() const {
-    return m_elements;
-  }
+  const std::vector<DesignElement*>& getDesignElements() const { return m_elements; }
   void addDesignElement(std::string_view name, DesignElement* elem);
   const DesignElement* getDesignElement(std::string_view name) const;
   using DesignComponent::addObject;
-  NodeId addObject(SymbolId name, PathId fileId, VObjectType type,
-                   uint32_t line, uint16_t column, uint32_t endLine,
-                   uint16_t endColumn, NodeId parent = InvalidNodeId,
-                   NodeId definition = InvalidNodeId,
-                   NodeId child = InvalidNodeId,
-                   NodeId sibling = InvalidNodeId);
+  NodeId addObject(SymbolId name, PathId fileId, VObjectType type, uint32_t line, uint16_t column, uint32_t endLine,
+                   uint16_t endColumn, NodeId parent = InvalidNodeId, NodeId definition = InvalidNodeId,
+                   NodeId child = InvalidNodeId, NodeId sibling = InvalidNodeId);
   const std::vector<VObject>& getVObjects() const { return m_objects; }
   std::vector<VObject>* mutableVObjects() { return &m_objects; }
   const NameIdMap& getObjectLookup() const { return m_objectLookup; }
-  void insertObjectLookup(std::string_view name, NodeId id,
-                          ErrorContainer* errors);
-  std::set<std::string, std::less<>>& getReferencedObjects() {
-    return m_referencedObjects;
-  }
+  void insertObjectLookup(std::string_view name, NodeId id, ErrorContainer* errors);
+  std::set<std::string, std::less<>>& getReferencedObjects() { return m_referencedObjects; }
 
   const VObject& Object(NodeId index) const;
   VObject* MutableObject(NodeId index);
@@ -177,18 +156,10 @@ class FileContent final : public DesignComponent {
 
   std::string_view SymName(NodeId index) const;
 
-  const ModuleNameModuleDefinitionMap& getModuleDefinitions() const {
-    return m_moduleDefinitions;
-  }
-  const PackageNamePackageDefinitionMultiMap& getPackageDefinitions() const {
-    return m_packageDefinitions;
-  }
-  const ProgramNameProgramDefinitionMap& getProgramDefinitions() const {
-    return m_programDefinitions;
-  }
-  const ClassNameClassDefinitionMultiMap& getClassDefinitions() const {
-    return m_classDefinitions;
-  }
+  const ModuleNameModuleDefinitionMap& getModuleDefinitions() const { return m_moduleDefinitions; }
+  const PackageNamePackageDefinitionMultiMap& getPackageDefinitions() const { return m_packageDefinitions; }
+  const ProgramNameProgramDefinitionMap& getProgramDefinitions() const { return m_programDefinitions; }
+  const ClassNameClassDefinitionMultiMap& getClassDefinitions() const { return m_classDefinitions; }
   void addModuleDefinition(std::string_view moduleName, ModuleDefinition* def) {
     m_moduleDefinitions.emplace(moduleName, def);
   }
@@ -198,13 +169,11 @@ class FileContent final : public DesignComponent {
   void addProgramDefinition(std::string_view programName, Program* program) {
     m_programDefinitions.emplace(programName, program);
   }
-  void addClassDefinition(std::string_view className,
-                          ClassDefinition* classDef) {
+  void addClassDefinition(std::string_view className, ClassDefinition* classDef) {
     m_classDefinitions.emplace(className, classDef);
   }
 
-  const ModuleDefinition* getModuleDefinition(
-      std::string_view moduleName) const;
+  const ModuleDefinition* getModuleDefinition(std::string_view moduleName) const;
 
   DesignComponent* getComponentDefinition(std::string_view componentName) const;
 
@@ -215,14 +184,12 @@ class FileContent final : public DesignComponent {
   ClassDefinition* getClassDefinition(std::string_view name);
   const ClassDefinition* getClassDefinition(std::string_view name) const;
 
-  const DataType* getDataType(Design* design,
-                              std::string_view name) const override;
+  const DataType* getDataType(Design* design, std::string_view name) const override;
 
   const FileContent* getParent() const { return m_parentFile; }
   void setParent(FileContent* parent) { m_parentFile = parent; }
 
-  bool diffTree(NodeId id, const FileContent* oFc, NodeId oId,
-                std::string* diff_out) const;
+  bool diffTree(NodeId id, const FileContent* oFc, NodeId oId, std::string* diff_out) const;
 
   PathId getFileId() const { return m_fileId; }
   PathId getChunkFileId() const { return m_fileChunkId; }
@@ -230,11 +197,8 @@ class FileContent final : public DesignComponent {
   bool isLibraryCellFile() const { return m_isLibraryCellFile; }
   void setLibraryCellFile() { m_isLibraryCellFile = true; }
 
-  void populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                           uhdm::Any* instance, bool force = false) const;
-  const AnyToNodeIdPairCache& getAnyToNodeIdPairCache() const {
-    return m_anyToNodeIdPairCache;
-  }
+  void populateCoreMembers(NodeId startIndex, NodeId endIndex, uhdm::Any* instance, bool force = false) const;
+  const AnyToNodeIdPairCache& getAnyToNodeIdPairCache() const { return m_anyToNodeIdPairCache; }
 
   bool validate() const;
 
@@ -253,8 +217,7 @@ class FileContent final : public DesignComponent {
   std::vector<DesignElement*> m_elements;
   std::map<std::string, DesignElement*, StringViewCompare> m_elementMap;
   std::vector<VObject> m_objects;
-  std::unordered_map<NodeId, PathId, NodeIdHasher, NodeIdEqualityComparer>
-      m_definitionFiles;
+  std::unordered_map<NodeId, PathId, NodeIdHasher, NodeIdEqualityComparer> m_definitionFiles;
 
   NameIdMap m_objectLookup;  // Populated at ResolveSymbol stage
   std::set<std::string, std::less<>> m_referencedObjects;
@@ -272,8 +235,7 @@ class FileContent final : public DesignComponent {
 
   const PathId m_fileId;
   const PathId m_fileChunkId;
-  Library* m_library =
-      nullptr;  // TODO: should be set in constructor and *const
+  Library* m_library = nullptr;         // TODO: should be set in constructor and *const
   FileContent* m_parentFile = nullptr;  // for file chunks
   bool m_isLibraryCellFile = false;
 };

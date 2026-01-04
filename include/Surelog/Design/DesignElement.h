@@ -54,9 +54,8 @@ class DesignElement final {
     SLline  // Used to split files with correct file info
   };
 
-  DesignElement(SymbolId name, PathId fileId, ElemType type, NodeId uniqueId,
-                uint32_t startLine, uint16_t startColumn, uint32_t endLine,
-                uint16_t endColumn, NodeId parent);
+  DesignElement(SymbolId name, PathId fileId, ElemType type, NodeId uniqueId, uint32_t startLine, uint16_t startColumn,
+                uint32_t endLine, uint16_t endColumn, NodeId parent);
 
   SymbolId m_name;
   PathId m_fileId;

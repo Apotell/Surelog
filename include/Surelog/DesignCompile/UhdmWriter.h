@@ -81,35 +81,26 @@ class UhdmWriter final {
   static std::string builtinGateName(VObjectType type);
 
  private:
-  void writePorts(const std::vector<Signal*>& orig_ports,
-                  uhdm::BaseClass* parent, uhdm::Serializer& s,
-                  ModportMap& modPortMap, SignalBaseClassMap& signalBaseMap,
-                  SignalMap& signalMap, ModuleInstance* instance = nullptr,
-                  DesignComponent* mod = nullptr);
-  void writeNets(DesignComponent* mod, const std::vector<Signal*>& orig_nets,
-                 uhdm::BaseClass* parent, uhdm::Serializer& s,
-                 SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
-                 SignalMap& portMap, ModuleInstance* instance = nullptr);
-  void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
-                      uhdm::BaseClass* parent,
-                      uhdm::TypespecCollection* dest_typespecs,
-                      uhdm::Serializer& s, bool setParent);
-  void writeVariables(const DesignComponent::VariableMap& orig_vars,
-                      uhdm::BaseClass* parent, uhdm::Serializer& s);
+  void writePorts(const std::vector<Signal*>& orig_ports, uhdm::BaseClass* parent, uhdm::Serializer& s,
+                  ModportMap& modPortMap, SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
+                  ModuleInstance* instance = nullptr, DesignComponent* mod = nullptr);
+  void writeNets(DesignComponent* mod, const std::vector<Signal*>& orig_nets, uhdm::BaseClass* parent,
+                 uhdm::Serializer& s, SignalBaseClassMap& signalBaseMap, SignalMap& signalMap, SignalMap& portMap,
+                 ModuleInstance* instance = nullptr);
+  void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap, uhdm::BaseClass* parent,
+                      uhdm::TypespecCollection* dest_typespecs, uhdm::Serializer& s, bool setParent);
+  void writeVariables(const DesignComponent::VariableMap& orig_vars, uhdm::BaseClass* parent, uhdm::Serializer& s);
   void writeModule(ModuleDefinition* mod, uhdm::Module* m, uhdm::Serializer& s,
-                   InstanceDefinitionMap& instanceDefinitionMap,
-                   ModportMap& modPortMap, ModuleInstance* instance = nullptr);
-  void writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
-                      uhdm::Serializer& s, ModportMap& modPortMap,
+                   InstanceDefinitionMap& instanceDefinitionMap, ModportMap& modPortMap,
+                   ModuleInstance* instance = nullptr);
+  void writeInterface(ModuleDefinition* mod, uhdm::Interface* m, uhdm::Serializer& s, ModportMap& modPortMap,
                       ModuleInstance* instance = nullptr);
   void writePackage(Package* pack, uhdm::Package* p, uhdm::Serializer& s);
 
-  void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
-                    uhdm::Serializer& s, uhdm::BaseClass* parent);
-  void writeClass(ClassDefinition* classDef, uhdm::Serializer& s,
-                  uhdm::BaseClass* parent);
-  void writeProgram(Program* mod, uhdm::Program* m, uhdm::Serializer& s,
-                    ModportMap& modPortMap, ModuleInstance* instance = nullptr);
+  void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes, uhdm::Serializer& s, uhdm::BaseClass* parent);
+  void writeClass(ClassDefinition* classDef, uhdm::Serializer& s, uhdm::BaseClass* parent);
+  void writeProgram(Program* mod, uhdm::Program* m, uhdm::Serializer& s, ModportMap& modPortMap,
+                    ModuleInstance* instance = nullptr);
 
   void bind(uhdm::Serializer& s, const std::vector<vpiHandle>& designs);
 

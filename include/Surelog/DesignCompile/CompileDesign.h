@@ -72,16 +72,13 @@ class CompileDesign {
   void lockSerializer();
   void unlockSerializer();
   uhdm::SourceFileCollection* getUhdmSourceFiles() { return m_uhdmSourcefiles; }
-  std::map<const uhdm::Typespec*, const uhdm::Typespec*>& getSwapedObjects() {
-    return m_typespecSwapMap;
-  }
+  std::map<const uhdm::Typespec*, const uhdm::Typespec*>& getSwapedObjects() { return m_typespecSwapMap; }
 
  private:
   template <class ObjectType, class ObjectMapType, typename FunctorType>
   void compileMT_(ObjectMapType& objects, int32_t maxThreadCount);
 
-  void collectObjects_(Design::FileIdDesignContentMap& all_files,
-                       Design* design, bool finalCollection);
+  void collectObjects_(Design::FileIdDesignContentMap& all_files, Design* design, bool finalCollection);
   bool compilation_();
 
   Session* const m_session = nullptr;

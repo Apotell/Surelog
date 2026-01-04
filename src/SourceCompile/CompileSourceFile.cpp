@@ -55,10 +55,8 @@
 
 namespace SURELOG {
 
-CompileSourceFile::CompileSourceFile(Session* session, PathId fileId,
-                                     Compiler* compiler,
-                                     CompilationUnit* compilationUnit,
-                                     Library* library, std::string_view text)
+CompileSourceFile::CompileSourceFile(Session* session, PathId fileId, Compiler* compiler,
+                                     CompilationUnit* compilationUnit, Library* library, std::string_view text)
     : m_session(session),
       m_fileId(fileId),
       m_compiler(compiler),
@@ -67,9 +65,8 @@ CompileSourceFile::CompileSourceFile(Session* session, PathId fileId,
       m_library(library),
       m_text(text) {}
 
-CompileSourceFile::CompileSourceFile(Session* session,
-                                     CompileSourceFile* parent,
-                                     PathId ppResultFileId, uint32_t lineOffset)
+CompileSourceFile::CompileSourceFile(Session* session, CompileSourceFile* parent, PathId ppResultFileId,
+                                     uint32_t lineOffset)
     : m_session(session),
       m_fileId(parent->m_fileId),
       m_compiler(parent->m_compiler),
@@ -82,8 +79,7 @@ CompileSourceFile::CompileSourceFile(Session* session,
 #endif
       m_fileAnalyzer(parent->m_fileAnalyzer),
       m_library(parent->m_library) {
-  m_parser = new ParseFile(m_session, this, parent->m_parser, m_ppResultFileId,
-                           lineOffset);
+  m_parser = new ParseFile(m_session, this, parent->m_parser, m_ppResultFileId, lineOffset);
 }
 
 bool CompileSourceFile::compile(Action action) {
@@ -92,19 +88,12 @@ bool CompileSourceFile::compile(Action action) {
   m_action = action;
   if (clp->verbose()) {
     Location loc(m_fileId);
-    ErrorDefinition::ErrorType type =
-        ErrorDefinition::PP_PROCESSING_SOURCE_FILE;
+    ErrorDefinition::ErrorType type = ErrorDefinition::PP_PROCESSING_SOURCE_FILE;
     switch (m_action) {
       case Action::Preprocess:
-      case Action::PostPreprocess:
-        type = ErrorDefinition::PP_PROCESSING_SOURCE_FILE;
-        break;
-      case Action::Parse:
-        type = ErrorDefinition::PA_PROCESSING_SOURCE_FILE;
-        break;
-      case Action::PythonAPI:
-        type = ErrorDefinition::PY_PROCESSING_SOURCE_FILE;
-        break;
+      case Action::PostPreprocess: type = ErrorDefinition::PP_PROCESSING_SOURCE_FILE; break;
+      case Action::Parse: type = ErrorDefinition::PA_PROCESSING_SOURCE_FILE; break;
+      case Action::PythonAPI: type = ErrorDefinition::PY_PROCESSING_SOURCE_FILE; break;
     }
     if (action != Action::PostPreprocess) {
       Error err(type, loc);
@@ -113,12 +102,9 @@ bool CompileSourceFile::compile(Action action) {
   }
 
   switch (m_action) {
-    case Action::Preprocess:
-      return preprocess_();
-    case Action::PostPreprocess:
-      return postPreprocess_();
-    case Action::Parse:
-      return parse_();
+    case Action::Preprocess: return preprocess_();
+    case Action::PostPreprocess: return postPreprocess_();
+    case Action::Parse: return parse_();
     case Action::PythonAPI: {
       return pythonAPI_();
     }
@@ -126,8 +112,7 @@ bool CompileSourceFile::compile(Action action) {
   return true;
 }
 
-CompileSourceFile::CompileSourceFile(const CompileSourceFile& orig)
-    : m_session(orig.m_session) {}
+CompileSourceFile::CompileSourceFile(const CompileSourceFile& orig) : m_session(orig.m_session) {}
 
 CompileSourceFile::~CompileSourceFile() {
   DeleteSequenceContainerPointersAndClear(&m_ppIncludeVec);
@@ -176,10 +161,8 @@ bool CompileSourceFile::pythonAPI_() {
   }
 
   if (m_session->pythonEvalScriptPerFile()) {
-    PythonAPI::evalScriptPerFile(m_session->getFileSystem()->toPath(
-                                     m_session->pythonEvalScriptPerFileId()),
-                                 m_errors, m_parser->getFileContent(),
-                                 m_interpState);
+    PythonAPI::evalScriptPerFile(m_session->getFileSystem()->toPath(m_session->pythonEvalScriptPerFileId()), m_errors,
+                                 m_parser->getFileContent(), m_interpState);
   }
   return true;
 #else
@@ -191,8 +174,7 @@ bool CompileSourceFile::initParser() {
   if (m_parser == nullptr) {
     CommandLineParser* const clp = m_session->getCommandLineParser();
     m_parser =
-        new ParseFile(m_session, m_fileId, this, m_compilationUnit, m_library,
-                      m_ppResultFileId, clp->pythonListener());
+        new ParseFile(m_session, m_fileId, this, m_compilationUnit, m_library, m_ppResultFileId, clp->pythonListener());
     return true;
   }
   return false;
@@ -214,20 +196,15 @@ bool CompileSourceFile::preprocess_() {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   PreprocessFile::SpecialInstructions instructions(
-      PreprocessFile::SpecialInstructions::DontMute,
-      PreprocessFile::SpecialInstructions::DontMark,
+      PreprocessFile::SpecialInstructions::DontMute, PreprocessFile::SpecialInstructions::DontMark,
       clp->filterFileLine() ? PreprocessFile::SpecialInstructions::Filter
                             : PreprocessFile::SpecialInstructions::DontFilter,
-      PreprocessFile::SpecialInstructions::CheckLoop,
-      PreprocessFile::SpecialInstructions::ComplainUndefinedMacro);
+      PreprocessFile::SpecialInstructions::CheckLoop, PreprocessFile::SpecialInstructions::ComplainUndefinedMacro);
   if (m_text.empty()) {
-    m_pp = new PreprocessFile(m_session, m_fileId, this, instructions,
-                              m_compilationUnit, m_library);
+    m_pp = new PreprocessFile(m_session, m_fileId, this, instructions, m_compilationUnit, m_library);
   } else {
-    m_pp = new PreprocessFile(m_session, BadSymbolId, this, instructions,
-                              m_compilationUnit, m_library,
-                              /* includer */ nullptr, /* includerLine */ 0,
-                              m_text, nullptr, m_fileId, BadPathId, 0);
+    m_pp = new PreprocessFile(m_session, BadSymbolId, this, instructions, m_compilationUnit, m_library,
+                              /* includer */ nullptr, /* includerLine */ 0, m_text, nullptr, m_fileId, BadPathId, 0);
   }
   registerPP(m_pp);
 
@@ -270,8 +247,7 @@ bool CompileSourceFile::postPreprocess_() {
   m_ppResultFileId = clp->writePpOutputFileId();
   if (!m_ppResultFileId) {
     const std::string_view libraryName = m_library->getName();
-    m_ppResultFileId = fileSystem->getPpOutputFile(clp->fileUnit(), m_fileId,
-                                                   libraryName, symbols);
+    m_ppResultFileId = fileSystem->getPpOutputFile(clp->fileUnit(), m_fileId, libraryName, symbols);
   }
 
   if (clp->lowMem() || clp->link()) {
@@ -280,22 +256,19 @@ bool CompileSourceFile::postPreprocess_() {
 
   const PathId ppResultDirId = fileSystem->getParent(m_ppResultFileId, symbols);
   if (!fileSystem->mkdirs(ppResultDirId)) {
-    errors->addError(ErrorDefinition::PP_CANNOT_CREATE_DIRECTORY,
-                     Location(ppResultDirId));
+    errors->addError(ErrorDefinition::PP_CANNOT_CREATE_DIRECTORY, Location(ppResultDirId));
     return false;
   }
   if (!m_pp->usingCachedVersion() || !fileSystem->exists(m_ppResultFileId)) {
     if (!fileSystem->writeContent(m_ppResultFileId, m_pp_result, true)) {
-      errors->addError(ErrorDefinition::PP_OPEN_FILE_FOR_WRITE,
-                       Location(m_ppResultFileId));
+      errors->addError(ErrorDefinition::PP_OPEN_FILE_FOR_WRITE, Location(m_ppResultFileId));
       return false;
     }
   }
   return true;
 }
 
-void CompileSourceFile::registerAntlrPpHandlerForId(
-    SymbolId id, PreprocessFile::AntlrParserHandler* pp) {
+void CompileSourceFile::registerAntlrPpHandlerForId(SymbolId id, PreprocessFile::AntlrParserHandler* pp) {
   auto itr = m_antlrPpMacroMap.find(id);
   if (itr != m_antlrPpMacroMap.end()) {
     delete (*itr).second;
@@ -304,8 +277,7 @@ void CompileSourceFile::registerAntlrPpHandlerForId(
   m_antlrPpMacroMap.emplace(id, pp);
 }
 
-void CompileSourceFile::registerAntlrPpHandlerForId(
-    PathId id, PreprocessFile::AntlrParserHandler* pp) {
+void CompileSourceFile::registerAntlrPpHandlerForId(PathId id, PreprocessFile::AntlrParserHandler* pp) {
   auto itr = m_antlrPpFileMap.find(id);
   if (itr != m_antlrPpFileMap.end()) {
     delete (*itr).second;
@@ -314,8 +286,7 @@ void CompileSourceFile::registerAntlrPpHandlerForId(
   m_antlrPpFileMap.emplace(id, pp);
 }
 
-PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(
-    SymbolId id) {
+PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(SymbolId id) {
   auto itr = m_antlrPpMacroMap.find(id);
   if (itr != m_antlrPpMacroMap.end()) {
     PreprocessFile::AntlrParserHandler* ptr = (*itr).second;
@@ -324,8 +295,7 @@ PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(
   return nullptr;
 }
 
-PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(
-    PathId id) {
+PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(PathId id) {
   auto itr = m_antlrPpFileMap.find(id);
   if (itr != m_antlrPpFileMap.end()) {
     PreprocessFile::AntlrParserHandler* ptr = (*itr).second;

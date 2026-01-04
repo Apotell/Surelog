@@ -46,13 +46,8 @@ class Statement : public RTTI {
   SURELOG_IMPLEMENT_RTTI(Statement, RTTI)
  public:
   using StatementVector = std::vector<Statement*>;
-  Statement(Scope* scope, Statement* parentStmt, const FileContent* fileContent,
-            NodeId node, VObjectType type)
-      : m_scope(scope),
-        m_parent(parentStmt),
-        m_fileContent(fileContent),
-        m_nodeId(node),
-        m_type(type) {}
+  Statement(Scope* scope, Statement* parentStmt, const FileContent* fileContent, NodeId node, VObjectType type)
+      : m_scope(scope), m_parent(parentStmt), m_fileContent(fileContent), m_nodeId(node), m_type(type) {}
   ~Statement() override = default;
 
   Scope* getScope() const { return m_scope; }
@@ -67,9 +62,7 @@ class Statement : public RTTI {
   virtual Function* getFunction() { return nullptr; }
   virtual void setFunction(Function* function) {}
 
-  void addStatement(Statement* statement) {
-    m_statements.emplace_back(statement);
-  }
+  void addStatement(Statement* statement) { m_statements.emplace_back(statement); }
   const StatementVector& getStatements() const { return m_statements; }
 
  private:
@@ -95,12 +88,9 @@ class SubRoutineArg {
 class SubRoutineCallStmt : public Statement {
   SURELOG_IMPLEMENT_RTTI(SubRoutineCallStmt, Statement)
  public:
-  SubRoutineCallStmt(Scope* scope, Statement* parentStmt,
-                     const FileContent* fileContent, NodeId node,
-                     VObjectType type, std::vector<NodeId>& var_chain,
-                     std::string_view funcName,
-                     std::vector<SubRoutineArg*>& args, bool static_call,
-                     bool system_call)
+  SubRoutineCallStmt(Scope* scope, Statement* parentStmt, const FileContent* fileContent, NodeId node, VObjectType type,
+                     std::vector<NodeId>& var_chain, std::string_view funcName, std::vector<SubRoutineArg*>& args,
+                     bool static_call, bool system_call)
       : Statement(scope, parentStmt, fileContent, node, type),
         m_var_chain(var_chain),
         m_func(funcName),
@@ -130,18 +120,14 @@ class SubRoutineCallStmt : public Statement {
 class ForLoopStmt : public Scope, public Statement {
   SURELOG_IMPLEMENT_RTTI_2_BASES(ForLoopStmt, Scope, Statement)
  public:
-  ForLoopStmt(const std::string& name, Scope* scope, Statement* parentStmt,
-              const FileContent* fileContent, NodeId node, VObjectType type)
+  ForLoopStmt(const std::string& name, Scope* scope, Statement* parentStmt, const FileContent* fileContent, NodeId node,
+              VObjectType type)
       : Scope(name, scope),
         Statement(scope, parentStmt, fileContent, node, type),
         m_iteratorType(VObjectType::NO_TYPE) {}
 
-  void addIteratorId(NodeId itrId, NodeId init_expression) {
-    m_iteratorIds.emplace_back(itrId, init_expression);
-  }
-  std::vector<std::pair<NodeId, NodeId>>& getIteratorIds() {
-    return m_iteratorIds;
-  }
+  void addIteratorId(NodeId itrId, NodeId init_expression) { m_iteratorIds.emplace_back(itrId, init_expression); }
+  std::vector<std::pair<NodeId, NodeId>>& getIteratorIds() { return m_iteratorIds; }
   void setIteratorType(VObjectType type) { m_iteratorType = type; }
   VObjectType getIteratorType() const { return m_iteratorType; }
   void addIteratorStepId(NodeId itrId) { m_stepIds.emplace_back(itrId); }
@@ -159,12 +145,9 @@ class ForLoopStmt : public Scope, public Statement {
 class ForeachLoopStmt : public Scope, public Statement {
   SURELOG_IMPLEMENT_RTTI_2_BASES(ForeachLoopStmt, Scope, Statement)
  public:
-  ForeachLoopStmt(const std::string& name, NodeId arrayId, Scope* scope,
-                  Statement* parentStmt, const FileContent* fileContent,
-                  NodeId node, VObjectType type)
-      : Scope(name, scope),
-        Statement(scope, parentStmt, fileContent, node, type),
-        m_arrayId(arrayId) {}
+  ForeachLoopStmt(const std::string& name, NodeId arrayId, Scope* scope, Statement* parentStmt,
+                  const FileContent* fileContent, NodeId node, VObjectType type)
+      : Scope(name, scope), Statement(scope, parentStmt, fileContent, node, type), m_arrayId(arrayId) {}
 
   NodeId getArrayId() const { return m_arrayId; }
 
@@ -177,7 +160,6 @@ class ForeachLoopStmt : public Scope, public Statement {
 };
 
 }  // namespace SURELOG
-SURELOG_IMPLEMENT_RTTI_VIRTUAL_CAST_FUNCTIONS(statement_cast,
-                                              SURELOG::Statement)
+SURELOG_IMPLEMENT_RTTI_VIRTUAL_CAST_FUNCTIONS(statement_cast, SURELOG::Statement)
 
 #endif /* SURELOG_STATEMENT_H */

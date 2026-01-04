@@ -78,15 +78,12 @@ void walk(scompiler* compiler, AstListener* listener) {
     FileContent* const fC = parser->getFileContent();
     if (listener->shouldWalkSourceFile(fC->getSession(), fC->getFileId())) {
       const std::vector<VObject>& objects = fC->getVObjects();
-      listener->listen(fC->getSession(), fC->getFileId(),
-                       parser->getSourceText(), objects.data(), objects.size());
+      listener->listen(fC->getSession(), fC->getFileId(), parser->getSourceText(), objects.data(), objects.size());
     }
   }
 }
 
-static bool isSpace(VObjectType type) {
-  return (type == VObjectType::WHITE_SPACE) || (type == VObjectType::CR);
-}
+static bool isSpace(VObjectType type) { return (type == VObjectType::WHITE_SPACE) || (type == VObjectType::CR); }
 
 static NodeId skipSpace(NodeId nodeId, const std::vector<VObject>& objects) {
   while (nodeId && isSpace(objects[nodeId].m_type)) {
@@ -95,8 +92,8 @@ static NodeId skipSpace(NodeId nodeId, const std::vector<VObject>& objects) {
   return nodeId;
 }
 
-static bool compareTrees(NodeId nodeIdA, const std::vector<VObject>& objectsA,
-                         NodeId nodeIdB, const std::vector<VObject>& objectsB) {
+static bool compareTrees(NodeId nodeIdA, const std::vector<VObject>& objectsA, NodeId nodeIdB,
+                         const std::vector<VObject>& objectsB) {
   if (!nodeIdA && !nodeIdB) {
     // Both nodes are null
     return true;

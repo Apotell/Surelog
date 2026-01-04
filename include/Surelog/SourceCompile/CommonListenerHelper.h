@@ -86,29 +86,25 @@ class CommonListenerHelper {
   uint16_t Column(NodeId index) const;
   uint32_t Line(NodeId index) const;
 
-  NodeId addVObject(antlr4::tree::ParseTree* tree, std::string_view name,
-                    VObjectType objtype, bool skipParenting = false);
-  NodeId addVObject(antlr4::tree::ParseTree* tree, VObjectType objtype,
+  NodeId addVObject(antlr4::tree::ParseTree* tree, std::string_view name, VObjectType objtype,
                     bool skipParenting = false);
-  NodeId addVObject(antlr4::tree::ParseTree* tree, SymbolId sym,
-                    VObjectType objtype, bool skipParenting = false);
+  NodeId addVObject(antlr4::tree::ParseTree* tree, VObjectType objtype, bool skipParenting = false);
+  NodeId addVObject(antlr4::tree::ParseTree* tree, SymbolId sym, VObjectType objtype, bool skipParenting = false);
 
   void addNodeIdForContext(const antlr4::tree::ParseTree* tree, NodeId nodeId);
-  void addParentChildRelations(const antlr4::tree::ParseTree* tree,
-                               NodeId parentId);
+  void addParentChildRelations(const antlr4::tree::ParseTree* tree, NodeId parentId);
 
-  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-  getPPFileLine(antlr4::tree::ParseTree* tree, antlr4::Token* token) const = 0;
-  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-  getFileLine(antlr4::tree::ParseTree* tree, antlr4::Token* token) const = 0;
+  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getPPFileLine(antlr4::tree::ParseTree* tree,
+                                                                                   antlr4::Token* token) const = 0;
+  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(antlr4::tree::ParseTree* tree,
+                                                                                 antlr4::Token* token) const = 0;
 
   NodeId& MutableChild(NodeId index);
   NodeId& MutableSibling(NodeId index);
   NodeId& MutableParent(NodeId index);
 
  protected:
-  CommonListenerHelper(Session* session, FileContent* file_content,
-                       antlr4::CommonTokenStream* tokens);
+  CommonListenerHelper(Session* session, FileContent* file_content, antlr4::CommonTokenStream* tokens);
 
  protected:
   using ContextToObjectMap = std::map<const antlr4::tree::ParseTree*, NodeId>;

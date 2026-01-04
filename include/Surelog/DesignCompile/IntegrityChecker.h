@@ -53,8 +53,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   static bool isValidName(const uhdm::Any* object);
   static bool isValidLocation(const uhdm::Any* object);
 
-  std::set<const uhdm::PreprocMacroInstance*> getMacroInstances(
-      const uhdm::Any* object) const;
+  std::set<const uhdm::PreprocMacroInstance*> getMacroInstances(const uhdm::Any* object) const;
 
   void populateAnyMacroInstanceCache(const uhdm::PreprocMacroInstance* pmi);
   void populateAnyMacroInstanceCache();
@@ -68,21 +67,15 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
 
   std::string_view toString(LineColumnRelation relation) const;
 
-  LineColumnRelation getLineColumnRelation(uint32_t sl, uint16_t sc,
-                                           uint32_t el, uint16_t ec) const;
-  LineColumnRelation getLineColumnRelation(uint32_t l, uint16_t c, uint32_t sl,
-                                           uint16_t sc, uint32_t el,
+  LineColumnRelation getLineColumnRelation(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec) const;
+  LineColumnRelation getLineColumnRelation(uint32_t l, uint16_t c, uint32_t sl, uint16_t sc, uint32_t el,
                                            uint16_t ec) const;
-  LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc,
-                                           uint32_t cel, uint16_t cec,
-                                           uint32_t psl, uint16_t psc,
-                                           uint32_t pel, uint16_t pec) const;
+  LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc, uint32_t cel, uint16_t cec, uint32_t psl,
+                                           uint16_t psc, uint32_t pel, uint16_t pec) const;
 
-  void reportError(ErrorDefinition::ErrorType errorType,
-                   const uhdm::Any* object) const;
+  void reportError(ErrorDefinition::ErrorType errorType, const uhdm::Any* object) const;
   template <typename T>
-  void reportDuplicates(const uhdm::Any* object,
-                        const std::vector<T*>& collection) const;
+  void reportDuplicates(const uhdm::Any* object, const std::vector<T*>& collection) const;
   void reportInvalidLocation(const uhdm::Any* object) const;
   void reportMissingLocation(const uhdm::Any* object) const;
   void reportMissingName(const uhdm::Any* object) const;
@@ -506,8 +499,7 @@ class IntegrityChecker final : protected uhdm::UhdmVisitor {
   const uhdm_type_set_t m_typesWithMissingParent;
   const uhdm_type_set_t m_typesWithMissingLocation;
 
-  using any_macro_instance_map_t =
-      std::multimap<const uhdm::Any*, const uhdm::PreprocMacroInstance*>;
+  using any_macro_instance_map_t = std::multimap<const uhdm::Any*, const uhdm::PreprocMacroInstance*>;
   any_macro_instance_map_t m_anyMacroInstance;
 
   bool m_reportInvalidName = true;

@@ -68,8 +68,7 @@ int main(int argc, const char **argv) {
 
   SURELOG::Session session;
   SURELOG::ObjectBinder::ForwardComponentMap forwardComponentMap;
-  SURELOG::ObjectBinder *const binder = new SURELOG::ObjectBinder(
-      &session, forwardComponentMap, serializer, true);
+  SURELOG::ObjectBinder *const binder = new SURELOG::ObjectBinder(&session, forwardComponentMap, serializer, true);
 
   vpi_show_ids(true);
   uhdm::visit_designs(restoredDesigns, std::cout);

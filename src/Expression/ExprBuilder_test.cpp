@@ -28,9 +28,7 @@
 #include "Surelog/SourceCompile/ParserHarness.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
 
-namespace SURELOG {
-
-namespace {
+namespace SURELOG { namespace {
 TEST(ExprBuilderTest, BasicValueOp) {
   {
     LValue v0, v1, v2;
@@ -109,8 +107,7 @@ TEST(ExprBuilderTest, ExprFromParseTree1) {
       "parameter p3 = -2 * -5;"
       "endmodule");
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
@@ -133,8 +130,7 @@ TEST(ExprBuilderTest, ExprFromParseTree2) {
       "parameter p4 = 32 - 16;"
       "endmodule");
   NodeId root = fC->getRootNode();
-  std::vector<NodeId> assigns =
-      fC->sl_collect_all(root, VObjectType::paParam_assignment);
+  std::vector<NodeId> assigns = fC->sl_collect_all(root, VObjectType::paParam_assignment);
   for (NodeId param_assign : assigns) {
     NodeId param = fC->Child(param_assign);
     NodeId rhs = fC->Sibling(param);
@@ -143,5 +139,4 @@ TEST(ExprBuilderTest, ExprFromParseTree2) {
     EXPECT_EQ(val->getValueUL(), 16);
   }
 }
-}  // namespace
-}  // namespace SURELOG
+}}  // namespace SURELOG

@@ -62,8 +62,7 @@ namespace SURELOG {
 // implemented, the data collection part is. The actual coverage is not and is
 // commented out as it is a work in progress
 
-bool UhdmChecker::registerFile(const FileContent* fC,
-                               std::set<std::string_view>& moduleNames) {
+bool UhdmChecker::registerFile(const FileContent* fC, std::set<std::string_view>& moduleNames) {
   const NodeId nodeId = fC->getRootNode();
   NodeId startId = fC->Child(nodeId);
   if (!startId) startId = fC->Sibling(nodeId);
@@ -100,11 +99,9 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     }
 
     if (type == VObjectType::paModule_declaration) {
-      NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST,
-                                   VObjectType::paAttr_spec);
+      NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST, VObjectType::paAttr_spec);
       if (stId) {
-        std::string name =
-            StrCat(fC->getLibrary()->getName(), "@", fC->SymName(stId));
+        std::string name = StrCat(fC->getLibrary()->getName(), "@", fC->SymName(stId));
         if (moduleNames.find(name) == moduleNames.end()) {
           skipModule = true;
         }
@@ -112,28 +109,21 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       endModuleNode = fC->Parent(id);
       endModuleNode = fC->Sibling(endModuleNode);
     }
-    if (type == VObjectType::paDescription || type == VObjectType::ENDCASE ||
-        type == VObjectType::ENDTASK || type == VObjectType::ENDFUNCTION ||
-        type == VObjectType::ENDMODULE || type == VObjectType::ENDINTERFACE ||
-        type == VObjectType::ENDPACKAGE || type == VObjectType::ENDCLOCKING ||
-        type == VObjectType::ENDCLASS || type == VObjectType::ENDGENERATE ||
-        type == VObjectType::ENDCONFIG ||
-        type == VObjectType::paEndcelldefine_directive ||
-        type == VObjectType::ENDGROUP || type == VObjectType::ENDPRIMITIVE ||
-        type == VObjectType::ENDTABLE || type == VObjectType::ENDPROGRAM ||
-        type == VObjectType::ENDCHECKER || type == VObjectType::ENDPROPERTY ||
-        type == VObjectType::ENDSPECIFY || type == VObjectType::ENDSEQUENCE ||
-        type == VObjectType::paPort_declaration ||
+    if (type == VObjectType::paDescription || type == VObjectType::ENDCASE || type == VObjectType::ENDTASK ||
+        type == VObjectType::ENDFUNCTION || type == VObjectType::ENDMODULE || type == VObjectType::ENDINTERFACE ||
+        type == VObjectType::ENDPACKAGE || type == VObjectType::ENDCLOCKING || type == VObjectType::ENDCLASS ||
+        type == VObjectType::ENDGENERATE || type == VObjectType::ENDCONFIG ||
+        type == VObjectType::paEndcelldefine_directive || type == VObjectType::ENDGROUP ||
+        type == VObjectType::ENDPRIMITIVE || type == VObjectType::ENDTABLE || type == VObjectType::ENDPROGRAM ||
+        type == VObjectType::ENDCHECKER || type == VObjectType::ENDPROPERTY || type == VObjectType::ENDSPECIFY ||
+        type == VObjectType::ENDSEQUENCE || type == VObjectType::paPort_declaration ||
         type == VObjectType::paPort_list || type == VObjectType::paPort ||
         type == VObjectType::paConditional_generate_construct ||
         type == VObjectType::paGenerate_module_conditional_statement ||
         type == VObjectType::paGenerate_interface_conditional_statement ||
-        type == VObjectType::paLoop_generate_construct ||
-        type == VObjectType::paGenerate_module_loop_statement ||
-        type == VObjectType::paGenerate_interface_loop_statement ||
-        type == VObjectType::paGenerate_region ||
-        ((type == VObjectType::paPackage_or_generate_item_declaration) &&
-         !fC->Child(id)) ||  // SEMICOLUMN ALONE ;
+        type == VObjectType::paLoop_generate_construct || type == VObjectType::paGenerate_module_loop_statement ||
+        type == VObjectType::paGenerate_interface_loop_statement || type == VObjectType::paGenerate_region ||
+        ((type == VObjectType::paPackage_or_generate_item_declaration) && !fC->Child(id)) ||  // SEMICOLUMN ALONE ;
         type == VObjectType::paGenerate_begin_end_block) {
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (lineItr != uhdmCover.end()) {
@@ -141,9 +131,8 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       }
       skip = true;  // Only skip the item itself
     }
-    if (type == VObjectType::paPort_declaration_list ||
-        type == VObjectType::paBit_select || type == VObjectType::paSelect ||
-        type == VObjectType::IF || type == VObjectType::ELSE ||
+    if (type == VObjectType::paPort_declaration_list || type == VObjectType::paBit_select ||
+        type == VObjectType::paSelect || type == VObjectType::IF || type == VObjectType::ELSE ||
         type == VObjectType::OPEN_PARENS || type == VObjectType::CLOSE_PARENS) {
       skip = true;  // Only skip the item itself
     }
@@ -157,21 +146,17 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     }
     SURELOG::VObjectType parentType = fC->Type(current.m_parent);
     if ((type == VObjectType::STRING_CONST) &&
-        ((parentType ==
-          VObjectType::paModule_declaration) ||  // endmodule : name
-         (parentType ==
-          VObjectType::paPackage_declaration) ||  // endpackage : name
-         (parentType ==
-          VObjectType::paFunction_body_declaration) ||  // endfunction  : name
-         (parentType == VObjectType::paTask_declaration) ||   // endtask : name
-         (parentType == VObjectType::paClass_declaration) ||  // endclass : name
-         (parentType ==
-          VObjectType::paName_of_instance) ||  // instance name, slight problem,
-                                               // the isntance name will be
-                                               // "covered" even in generate
-                                               // branches that are not covered.
-         (parentType == VObjectType::paModule_nonansi_header) ||  // module name
-         (parentType == VObjectType::paType_declaration)))        // struct name
+        ((parentType == VObjectType::paModule_declaration) ||         // endmodule : name
+         (parentType == VObjectType::paPackage_declaration) ||        // endpackage : name
+         (parentType == VObjectType::paFunction_body_declaration) ||  // endfunction  : name
+         (parentType == VObjectType::paTask_declaration) ||           // endtask : name
+         (parentType == VObjectType::paClass_declaration) ||          // endclass : name
+         (parentType == VObjectType::paName_of_instance) ||           // instance name, slight problem,
+                                                                      // the isntance name will be
+                                                                      // "covered" even in generate
+                                                                      // branches that are not covered.
+         (parentType == VObjectType::paModule_nonansi_header) ||      // module name
+         (parentType == VObjectType::paType_declaration)))            // struct name
     {
       RangesMap::iterator lineItr = uhdmCover.find(current.m_startLine);
       if (skipModule == false) {
@@ -254,8 +239,7 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
-  const PathId reportFileId =
-      fileSystem->getCheckerHtmlFile(uhdmFileId, symbols);
+  const PathId reportFileId = fileSystem->getCheckerHtmlFile(uhdmFileId, symbols);
 
   std::ostream& report = fileSystem->openForWrite(reportFileId);
   if (report.bad()) {
@@ -265,8 +249,7 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
   report << "\n<!DOCTYPE html>\n<html>\n<head>\n<style>\nbody {\n\n}\np "
             "{\nfont-size: 14px;\n}</style>\n";
   report << "<h2 style=\"text-decoration: underline\">"
-         << "Overall Coverage: " << std::setprecision(3) << overallCoverage
-         << "%</h2>\n";
+         << "Overall Coverage: " << std::setprecision(3) << overallCoverage << "%</h2>\n";
   uint32_t fileIndex = 1;
   std::string allUncovered;
   static std::multimap<int32_t, std::string> orderedCoverageMap;
@@ -277,10 +260,8 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
       return false;
     }
     const std::string filepath(fileSystem->toPath(fC->getFileId()));
-    const PathId chkFileId =
-        fileSystem->getCheckerHtmlFile(uhdmFileId, fileIndex, symbols);
-    const std::string fname(
-        std::get<1>(fileSystem->getLeaf(chkFileId, symbols)));
+    const PathId chkFileId = fileSystem->getCheckerHtmlFile(uhdmFileId, fileIndex, symbols);
+    const std::string fname(std::get<1>(fileSystem->getLeaf(chkFileId, symbols)));
     std::ostream& reportF = fileSystem->openForWrite(chkFileId);
     if (reportF.bad()) {
       fileSystem->close(report);
@@ -300,24 +281,20 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
     const std::string fileStatGreen = StrCat(
         "<div style=\"overflow: hidden;\"> <h3 style=\"background-color: "
         "#82E0AA; margin:0; min-width: 110px; padding:10; float: left; \">",
-        coverage,
-        "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=",
-        fname + "> ", filepath, "</a></h3></div>\n");
+        coverage, "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=", fname + "> ", filepath,
+        "</a></h3></div>\n");
     const std::string fileStatPink = StrCat(
         "<div style=\"overflow: hidden;\"> <h3 style=\"background-color: "
         "#FFB6C1; margin:0; min-width: 110px; padding:10; float: left; \">",
-        coverage,
-        "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=",
-        fname + "> ", filepath, "</a></h3></div>\n");
+        coverage, "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=", fname + "> ", filepath,
+        "</a></h3></div>\n");
     const std::string fileStatRed = StrCat(
         "<div style=\"overflow: hidden;\"> <h3 style=\"background-color: "
         "#FF0000; margin:0; min-width: 110px; padding:10; float: left; \">",
-        coverage,
-        "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=",
-        fname + "> ", filepath, "</a></h3></div>\n");
+        coverage, "</h3> <h3 style=\"margin:0; padding:10; float: left; \"> <a href=", fname + "> ", filepath,
+        "</a></h3></div>\n");
     const std::string fileStatWhite =
-        StrCat("<h3 style=\"margin:0; padding:0 \"> <a href=" + fname + ">",
-               filepath, "</a> ", coverage, "</h3>\n");
+        StrCat("<h3 style=\"margin:0; padding:0 \"> <a href=" + fname + ">", filepath, "</a> ", coverage, "</h3>\n");
 
     reportF << "<h3>" << filepath << coverage << "</h3>\n";
     bool uncovered = false;
@@ -329,8 +306,8 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
       RangesMap::const_iterator cItr = uhdmCover.find(line);
 
       if (cItr == uhdmCover.end()) {
-        reportF << "<pre style=\"margin:0; padding:0 \">" << std::setw(4)
-                << line << ": " << lineText << "</pre>\n";  // white
+        reportF << "<pre style=\"margin:0; padding:0 \">" << std::setw(4) << line << ": " << lineText
+                << "</pre>\n";  // white
       } else {
         const Ranges& ranges = cItr->second;
         bool covered = false;
@@ -338,15 +315,9 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
         bool unsupported = false;
         for (const ColRange& crange : ranges) {
           switch (crange.covered) {
-            case EXIST:
-              exist = true;
-              break;
-            case COVERED:
-              covered = true;
-              break;
-            case UNSUPPORTED:
-              unsupported = true;
-              break;
+            case EXIST: exist = true; break;
+            case COVERED: covered = true; break;
+            case UNSUPPORTED: unsupported = true; break;
           }
         }
 
@@ -363,14 +334,10 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
           // inline-block \">" << lineText << "</pre>\n";  // grey
           reportF << "<pre style=\"background-color: #C0C0C0; margin:0; "
                      "padding:0 \">"
-                  << std::setw(4) << std::to_string(line) << ": " << lineText
-                  << "</pre>\n";  // grey
+                  << std::setw(4) << std::to_string(line) << ": " << lineText << "</pre>\n";  // grey
         } else if (exist && (!unsupported)) {
-          reportF
-              << "<pre id=\"id" << line
-              << R"(" style="background-color: #FFB6C1; margin:0; padding:0 ">)"
-              << std::setw(4) << std::to_string(line) << ": " << lineText
-              << "</pre>\n";  // pink
+          reportF << "<pre id=\"id" << line << R"(" style="background-color: #FFB6C1; margin:0; padding:0 ">)"
+                  << std::setw(4) << std::to_string(line) << ": " << lineText << "</pre>\n";  // pink
           if (uncovered == false) {
             StrAppend(&allUncovered, "<pre></pre>\n");
             StrAppend(&allUncovered, fileStatWhite);
@@ -378,17 +345,13 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
             uncovered = true;
           }
           pinkCoverage = fileStatPink;
-          StrAppend(
-              &allUncovered,
-              "<pre style=\"background-color: #FFB6C1; margin:0; padding:0 \"> "
-              "<a href=",
-              fname, "#id", line, ">", lineText, "</a></pre>\n");
+          StrAppend(&allUncovered,
+                    "<pre style=\"background-color: #FFB6C1; margin:0; padding:0 \"> "
+                    "<a href=",
+                    fname, "#id", line, ">", lineText, "</a></pre>\n");
         } else if (unsupported) {
-          reportF
-              << "<pre id=\"id" << line
-              << R"(" style="background-color: #FF0000; margin:0; padding:0 ">)"
-              << std::setw(4) << std::to_string(line) << ": " << lineText
-              << "</pre>\n";  // red
+          reportF << "<pre id=\"id" << line << R"(" style="background-color: #FF0000; margin:0; padding:0 ">)"
+                  << std::setw(4) << std::to_string(line) << ": " << lineText << "</pre>\n";  // red
           if (uncovered == false) {
             StrAppend(&allUncovered, "<pre></pre>\n");
             StrAppend(&allUncovered, fileStatWhite);
@@ -396,16 +359,14 @@ bool UhdmChecker::reportHtml(PathId uhdmFileId, float overallCoverage) {
             uncovered = true;
           }
           redCoverage = fileStatRed;
-          StrAppend(
-              &allUncovered,
-              "<pre style=\"background-color: #FF0000; margin:0; padding:0 \"> "
-              "<a href=",
-              fname, "#id", line, ">", lineText, "</a></pre>\n");
+          StrAppend(&allUncovered,
+                    "<pre style=\"background-color: #FF0000; margin:0; padding:0 \"> "
+                    "<a href=",
+                    fname, "#id", line, ">", lineText, "</a></pre>\n");
         } else {
           reportF << "<pre style=\"background-color: #C0C0C0; margin:0; "
                      "padding:0 \">"
-                  << std::setw(4) << std::to_string(line) << ": " << lineText
-                  << "</pre>\n";  // grey
+                  << std::setw(4) << std::to_string(line) << ": " << lineText << "</pre>\n";  // grey
         }
       }
     }
@@ -478,15 +439,9 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
       bool unsupported = false;
       for (ColRange& crange : ranges) {
         switch (crange.covered) {
-          case EXIST:
-            exist = true;
-            break;
-          case COVERED:
-            covered = true;
-            break;
-          case UNSUPPORTED:
-            unsupported = true;
-            break;
+          case EXIST: exist = true; break;
+          case COVERED: covered = true; break;
+          case UNSUPPORTED: unsupported = true; break;
         }
       }
 
@@ -496,8 +451,7 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
         if (fileNamePrinted == false) {
           firstUncoveredLine = cItr.first;
           report << "\n\n"
-                 << fileSystem->toPath(fC->getFileId()) << ":" << cItr.first
-                 << ": "
+                 << fileSystem->toPath(fC->getFileId()) << ":" << cItr.first << ": "
                  << " Missing models\n";
           fileNamePrinted = true;
         }
@@ -513,8 +467,7 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
       coverage = (lineNb - uncovered) * 100.0f / lineNb;
     if (uncovered) {
       report << "File coverage: " << std::setprecision(3) << coverage << "%\n";
-      m_coverageMap.emplace(
-          coverage, std::make_pair(fC->getFileId(), firstUncoveredLine));
+      m_coverageMap.emplace(coverage, std::make_pair(fC->getFileId(), firstUncoveredLine));
     }
     m_fileCoverageMap.emplace(fC->getFileId(), coverage);
   }
@@ -522,14 +475,12 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
   if (overallLineNb == 0)
     overallCoverage = 100.0f;
   else
-    overallCoverage =
-        (overallLineNb - overallUncovered) * 100.0f / overallLineNb;
-  report << "\nOverall coverage: " << std::setprecision(3) << overallCoverage
-         << "%\n";
+    overallCoverage = (overallLineNb - overallUncovered) * 100.0f / overallLineNb;
+  report << "\nOverall coverage: " << std::setprecision(3) << overallCoverage << "%\n";
   report << "\nOrdered coverage:\n";
   for (const auto& covFile : m_coverageMap) {
-    report << covFile.second.first << ":" << covFile.second.second << ": "
-           << std::setprecision(3) << covFile.first << "% "
+    report << covFile.second.first << ":" << covFile.second.second << ": " << std::setprecision(3) << covFile.first
+           << "% "
            << "\n";
   }
   fileSystem->close(report);
@@ -546,8 +497,7 @@ void UhdmChecker::annotate() {
     if (!bc) continue;
     bool unsupported = false;
     uhdm::UhdmType ot = bc->getUhdmType();
-    if ((ot == uhdm::UhdmType::UnsupportedExpr) ||
-        (ot == uhdm::UhdmType::UnsupportedStmt) ||
+    if ((ot == uhdm::UhdmType::UnsupportedExpr) || (ot == uhdm::UhdmType::UnsupportedStmt) ||
         (ot == uhdm::UhdmType::UnsupportedTypespec))
       unsupported = true;
     PathId fnId = fileSystem->toPathId(bc->getFile(), symbols);
@@ -623,8 +573,7 @@ void UhdmChecker::annotate() {
   }
 }
 
-void collectUsedFileContents(std::set<const FileContent*>& files,
-                             std::set<std::string_view>& moduleNames,
+void collectUsedFileContents(std::set<const FileContent*>& files, std::set<std::string_view>& moduleNames,
                              ModuleInstance* instance) {
   if (instance) {
     DesignComponent* def = instance->getDefinition();
@@ -659,8 +608,7 @@ bool UhdmChecker::check(PathId uhdmFileId) {
 
   for (const FileContent* fC : files) {
     if (!clp->createCache()) {
-      std::string_view fileName =
-          std::get<1>(fileSystem->getLeaf(fC->getFileId(), symbols));
+      std::string_view fileName = std::get<1>(fileSystem->getLeaf(fC->getFileId(), symbols));
       if ((fileName == "uvm_pkg.sv") || (fileName == "ovm_pkg.sv")) {
         continue;
       }
@@ -674,8 +622,7 @@ bool UhdmChecker::check(PathId uhdmFileId) {
 
   mergeColumnCoverage();
 
-  if (!fileSystem->mkdirs(
-          fileSystem->getCheckerDir(clp->fileUnit(), symbols))) {
+  if (!fileSystem->mkdirs(fileSystem->getCheckerDir(clp->fileUnit(), symbols))) {
     return false;
   }
 

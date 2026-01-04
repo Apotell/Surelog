@@ -74,10 +74,8 @@ struct AstNodeLessComparer;
 class AstNode final {
  public:
   AstNode() : m_index(), m_object(nullptr) {}
-  AstNode(const AstNode& node)
-      : m_index(node.m_index), m_object(node.m_object) {}
-  AstNode(const NodeId& index, const VObject* const object)
-      : m_index(index), m_object(object) {}
+  AstNode(const AstNode& node) : m_index(node.m_index), m_object(node.m_object) {}
+  AstNode(const NodeId& index, const VObject* const object) : m_index(index), m_object(object) {}
 
   AstNode& operator=(const AstNode& rhs) {
     if (this != &rhs) {
@@ -87,13 +85,9 @@ class AstNode final {
     return *this;
   }
 
-  bool operator==(const AstNode& rhs) const {
-    return (m_index == rhs.m_index) && (m_object == rhs.m_object);
-  }
+  bool operator==(const AstNode& rhs) const { return (m_index == rhs.m_index) && (m_object == rhs.m_object); }
 
-  bool operator!=(const AstNode& rhs) const {
-    return (m_index != rhs.m_index) || (m_object != rhs.m_object);
-  }
+  bool operator!=(const AstNode& rhs) const { return (m_index != rhs.m_index) || (m_object != rhs.m_object); }
 
  public:
   operator bool() const { return m_index && (m_object != nullptr); }
@@ -116,15 +110,11 @@ struct AstNodeEqualityComparer final {
 };
 
 struct AstNodeLessComparer final {
-  bool operator()(const AstNode& lhs, const AstNode& rhs) const {
-    return (lhs.m_index < rhs.m_index);
-  }
+  bool operator()(const AstNode& lhs, const AstNode& rhs) const { return (lhs.m_index < rhs.m_index); }
 };
 
 struct AstNodeHash final {
-  size_t operator()(const AstNode& node) const {
-    return std::hash<RawNodeId>()(node.m_index);
-  }
+  size_t operator()(const AstNode& node) const { return std::hash<RawNodeId>()(node.m_index); }
 };
 
 class AstNodeIterationHelper final {
@@ -138,8 +128,7 @@ class AstNodeIterationHelper final {
     using iterator_category = std::forward_iterator_tag;
 
     Iterator(const AstListener* listener) : m_listener(listener), m_node() {}
-    Iterator(const AstListener* listener, const AstNode& node)
-        : m_listener(listener), m_node(node) {}
+    Iterator(const AstListener* listener, const AstNode& node) : m_listener(listener), m_node(node) {}
 
     reference operator*() const { return m_node; }
     pointer operator->() const { return &m_node; }
@@ -159,8 +148,7 @@ class AstNodeIterationHelper final {
     AstNode m_node;
   };
 
-  AstNodeIterationHelper(const AstListener* listener, const AstNode& node)
-      : m_listener(listener), m_node(node) {}
+  AstNodeIterationHelper(const AstListener* listener, const AstNode& node) : m_listener(listener), m_node(node) {}
   ~AstNodeIterationHelper() = default;
 
   Iterator begin() { return Iterator(m_listener, m_node); }
@@ -179,14 +167,11 @@ class AstListener {
 
  public:
   AstListener() = default;
-  AstListener(const AstListener &rhs);
+  AstListener(const AstListener& rhs);
   virtual ~AstListener() = default;
 
-  virtual bool shouldWalkSourceFile(Session* session, PathId fileId) const {
-    return true;
-  }
-  virtual void enterSourceFile(Session* session, PathId fileId,
-                               const std::string& sourceText);
+  virtual bool shouldWalkSourceFile(Session* session, PathId fileId) const { return true; }
+  virtual void enterSourceFile(Session* session, PathId fileId, const std::string& sourceText);
   virtual void leaveSourceFile(PathId fileId, const std::string& sourceText) {}
 
   virtual void enter(const AstNode& node) {}
@@ -214,8 +199,7 @@ class AstListener {
   void listenChildren(const AstNode& node);
   void listenSiblings(const AstNode& node);
 
-  void listen(Session* session, PathId fileId, const std::string& sourceText,
-              const VObject* objects, size_t count);
+  void listen(Session* session, PathId fileId, const std::string& sourceText, const VObject* objects, size_t count);
 
   VObjectType getNodeType(const AstNode& node) const;
   AstNode getRootNode() const;
@@ -224,33 +208,26 @@ class AstListener {
   bool getNodeText(const AstNode& node, std::string_view& text) const;
   bool getNodeFileId(const AstNode& node, PathId& fileId) const;
 
-  bool getNodeStartLocation(const AstNode& node, int32_t& line,
-                            int32_t& column) const;
-  bool getNodeEndLocation(const AstNode& node, int32_t& line,
-                          int32_t& column) const;
-  bool getNodeLocation(const AstNode& node, int32_t& startLine,
-                       int32_t& startColumn, int32_t& endLine,
+  bool getNodeStartLocation(const AstNode& node, int32_t& line, int32_t& column) const;
+  bool getNodeEndLocation(const AstNode& node, int32_t& line, int32_t& column) const;
+  bool getNodeLocation(const AstNode& node, int32_t& startLine, int32_t& startColumn, int32_t& endLine,
                        int32_t& endColumn) const;
 
   AstNode getNodeParent(const AstNode& node) const;
   AstNode getNodeParent(const AstNode& node, VObjectType type) const;
-  AstNode getNodeParent(const AstNode& node,
-                        const std::set<VObjectType>& types) const;
+  AstNode getNodeParent(const AstNode& node, const std::set<VObjectType>& types) const;
 
   AstNode getNodePrevSibling(const AstNode& node) const;
   AstNode getNodePrevSibling(const AstNode& node, VObjectType type) const;
-  AstNode getNodePrevSibling(const AstNode& node,
-                             const std::set<VObjectType>& types) const;
+  AstNode getNodePrevSibling(const AstNode& node, const std::set<VObjectType>& types) const;
 
   AstNode getNodeNextSibling(const AstNode& node) const;
   AstNode getNodeNextSibling(const AstNode& node, VObjectType type) const;
-  AstNode getNodeNextSibling(const AstNode& node,
-                             const std::set<VObjectType>& types) const;
+  AstNode getNodeNextSibling(const AstNode& node, const std::set<VObjectType>& types) const;
 
   AstNode getNodeChild(const AstNode& node) const;
   AstNode getNodeChild(const AstNode& node, VObjectType type) const;
-  AstNode getNodeChild(const AstNode& node,
-                       const std::set<VObjectType>& types) const;
+  AstNode getNodeChild(const AstNode& node, const std::set<VObjectType>& types) const;
 
   AstNodeIterationHelper getNodeChildren(const AstNode& node) const {
     return AstNodeIterationHelper(this, getNodeChild(node));
@@ -263,26 +240,20 @@ class AstListener {
   bool getNodeChildren(const AstNode& node, astnode_vector_t& children) const;
   bool getNodeSiblings(const AstNode& node, astnode_vector_t& siblings) const;
 
-  AstNode getNodeOfTypeInTree(const AstNode& node, VObjectType type,
-                              size_t depth = 4) const;
-  AstNode getNodeOfTypeInTree(const AstNode& node,
-                              const std::set<VObjectType>& types,
-                              size_t depth = 4) const;
+  AstNode getNodeOfTypeInTree(const AstNode& node, VObjectType type, size_t depth = 4) const;
+  AstNode getNodeOfTypeInTree(const AstNode& node, const std::set<VObjectType>& types, size_t depth = 4) const;
 
   size_t getNodeChildCount(const AstNode& node) const;
   size_t getNodeChildCount(const AstNode& node, VObjectType type) const;
-  size_t getNodeChildCount(const AstNode& node,
-                           const std::set<VObjectType>& types) const;
+  size_t getNodeChildCount(const AstNode& node, const std::set<VObjectType>& types) const;
 
   size_t getNodeSiblingCount(const AstNode& node) const;
   size_t getNodeSiblingCount(const AstNode& node, VObjectType type) const;
-  size_t getNodeSiblingCount(const AstNode& node,
-                             const std::set<VObjectType>& types) const;
+  size_t getNodeSiblingCount(const AstNode& node, const std::set<VObjectType>& types) const;
 
   size_t getNodeCountInTree(const AstNode& node) const;
   size_t getNodeCountInTree(const AstNode& node, VObjectType type) const;
-  size_t getNodeCountInTree(const AstNode& node,
-                            const std::set<VObjectType>& types) const;
+  size_t getNodeCountInTree(const AstNode& node, const std::set<VObjectType>& types) const;
 
   const NodeIdSet& getVisited() const { return m_visited; }
   size_t markVisited(const AstNode& node, bool includeSubTree);
@@ -294,8 +265,7 @@ class AstListener {
  private:
   size_t getNodeCountInTree(const NodeId& id) const;
   size_t getNodeCountInTree(const NodeId& id, VObjectType type) const;
-  size_t getNodeCountInTree(const NodeId& id,
-                            const std::set<VObjectType>& types) const;
+  size_t getNodeCountInTree(const NodeId& id, const std::set<VObjectType>& types) const;
 
   size_t markVisited(const NodeId& id);
   size_t clearVisited(const NodeId& id);
@@ -315,14 +285,12 @@ class AstListener {
   size_t m_count = 0;
 };
 
-inline AstNodeIterationHelper::Iterator&
-AstNodeIterationHelper::Iterator::operator++() {
+inline AstNodeIterationHelper::Iterator& AstNodeIterationHelper::Iterator::operator++() {
   m_node = m_listener->getNodeNextSibling(m_node);
   return *this;
 }
 
-inline AstNodeIterationHelper::Iterator
-AstNodeIterationHelper::Iterator::operator++(int) {
+inline AstNodeIterationHelper::Iterator AstNodeIterationHelper::Iterator::operator++(int) {
   Iterator tmp(m_listener, m_node);
   m_node = m_listener->getNodeNextSibling(m_node);
   return tmp;
@@ -333,10 +301,8 @@ class AstTraceListener final : public AstListener {
   explicit AstTraceListener(std::ostream& strm) : m_strm(strm), m_indent(0) {}
   ~AstTraceListener() final = default;
 
-  void enterSourceFile(Session* session, SURELOG::PathId fileId,
-                       const std::string& sourceText) final;
-  void leaveSourceFile(SURELOG::PathId fileId,
-                       const std::string& sourceText) final;
+  void enterSourceFile(Session* session, SURELOG::PathId fileId, const std::string& sourceText) final;
+  void leaveSourceFile(SURELOG::PathId fileId, const std::string& sourceText) final;
 
   std::string escaped(std::string_view str) const {
     std::string result;

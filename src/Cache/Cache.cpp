@@ -60,9 +60,8 @@ std::string_view Cache::getExecutableTimeStamp() const {
   return sExecTstamp;
 }
 
-bool Cache::checkIfCacheIsValid(const Header::Reader& header,
-                                std::string_view schemaVersion,
-                                PathId cacheFileId, PathId sourceFileId) const {
+bool Cache::checkIfCacheIsValid(const Header::Reader& header, std::string_view schemaVersion, PathId cacheFileId,
+                                PathId sourceFileId) const {
   // Schema version
   if (schemaVersion != header.getSchemaVersion().cStr()) {
     return false;
@@ -92,16 +91,13 @@ bool Cache::checkIfCacheIsValid(const Header::Reader& header,
   return true;
 }
 
-void Cache::cacheHeader(Header::Builder builder,
-                        std::string_view schemaVersion) {
+void Cache::cacheHeader(Header::Builder builder, std::string_view schemaVersion) {
   builder.setSchemaVersion(std::string(schemaVersion));
   builder.setSlVersion(std::string(CommandLineParser::getVersionNumber()));
 }
 
-void Cache::cacheErrors(
-    ::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors,
-    SymbolTable& targetSymbols, const std::vector<Error>& sourceErrors,
-    const SymbolTable& sourceSymbols) {
+void Cache::cacheErrors(::capnp::List<::Error, ::capnp::Kind::STRUCT>::Builder targetErrors, SymbolTable& targetSymbols,
+                        const std::vector<Error>& sourceErrors, const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   for (size_t i = 0, ni = sourceErrors.size(); i < ni; ++i) {
     const Error& sourceError = sourceErrors[i];
@@ -115,8 +111,7 @@ void Cache::cacheErrors(
     for (size_t j = 0, nj = sourceLocations.size(); j < nj; ++j) {
       const Location& sourceLocation = sourceLocations[j];
       PathId fileId = fileSystem->copy(sourceLocation.m_fileId, &targetSymbols);
-      SymbolId objectId =
-          targetSymbols.copyFrom(sourceLocation.m_object, &sourceSymbols);
+      SymbolId objectId = targetSymbols.copyFrom(sourceLocation.m_object, &sourceSymbols);
 
       ::Location::Builder targetLocation = targetLocations[j];
       targetLocation.setFileId((RawPathId)fileId);
@@ -127,22 +122,19 @@ void Cache::cacheErrors(
   }
 }
 
-void Cache::cacheVObjects(
-    ::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects,
-    SymbolTable& targetSymbols, const std::vector<VObject>& sourceVObjects,
-    const SymbolTable& sourceSymbols) {
+void Cache::cacheVObjects(::capnp::List<::VObject, ::capnp::Kind::STRUCT>::Builder targetVObjects,
+                          SymbolTable& targetSymbols, const std::vector<VObject>& sourceVObjects,
+                          const SymbolTable& sourceSymbols) {
   if (sourceVObjects.size() > Capacity) {
     std::cerr << "INTERNAL ERROR: Cache is saturated, Use -nocache option\n";
     return;
   }
   // Convert a local symbol ID to a cache symbol ID to be stored.
-  std::function<uint64_t(SymbolId)> toCacheSym = [&targetSymbols,
-                                                  &sourceSymbols](SymbolId id) {
+  std::function<uint64_t(SymbolId)> toCacheSym = [&targetSymbols, &sourceSymbols](SymbolId id) {
     return (RawSymbolId)targetSymbols.copyFrom(id, &sourceSymbols);
   };
   FileSystem* const fileSystem = m_session->getFileSystem();
-  std::function<uint64_t(PathId)> toCachePath = [&targetSymbols,
-                                                 &fileSystem](PathId id) {
+  std::function<uint64_t(PathId)> toCachePath = [&targetSymbols, &fileSystem](PathId id) {
     return (RawPathId)fileSystem->copy(id, &targetSymbols);
   };
 
@@ -190,53 +182,40 @@ void Cache::cacheVObjects(
   }
 }
 
-void Cache::cacheSymbols(
-    ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols,
-    const std::vector<std::string_view>& sourceSymbols) {
+void Cache::cacheSymbols(::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetSymbols,
+                         const std::vector<std::string_view>& sourceSymbols) {
   for (size_t i = 0, ni = sourceSymbols.size(); i < ni; ++i) {
     const std::string symbol(sourceSymbols[i]);
     targetSymbols.set(i, symbol.c_str());
   }
 }
 
-void Cache::restoreSymbols(
-    SymbolTable& targetSymbols,
-    const ::capnp::List<::capnp::Text>::Reader& sourceSymbols) {
+void Cache::restoreSymbols(SymbolTable& targetSymbols, const ::capnp::List<::capnp::Text>::Reader& sourceSymbols) {
   for (const ::capnp::Text::Reader& sourceSymbol : sourceSymbols) {
     targetSymbols.registerSymbol(sourceSymbol.cStr());
   }
 }
 
-void Cache::restoreErrors(ErrorContainer* errorContainer,
-                          SymbolTable& targetSymbols,
-                          const ::capnp::List<::Error>::Reader& sourceErrors,
-                          const SymbolTable& sourceSymbols) {
+void Cache::restoreErrors(ErrorContainer* errorContainer, SymbolTable& targetSymbols,
+                          const ::capnp::List<::Error>::Reader& sourceErrors, const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   for (const ::Error::Reader& sourceError : sourceErrors) {
     std::vector<Location> targetLocations;
-    for (const ::Location::Reader& sourceLocation :
-         sourceError.getLocations()) {
+    for (const ::Location::Reader& sourceLocation : sourceError.getLocations()) {
       PathId fileId = fileSystem->toPathId(
-          fileSystem->remap(sourceSymbols.getSymbol(
-              SymbolId(sourceLocation.getFileId(), UnknownRawPath))),
+          fileSystem->remap(sourceSymbols.getSymbol(SymbolId(sourceLocation.getFileId(), UnknownRawPath))),
           &targetSymbols);
-      SymbolId objectId = targetSymbols.copyFrom(
-          SymbolId(sourceLocation.getObject(), UnknownRawPath), &sourceSymbols);
-      targetLocations.emplace_back(fileId, sourceLocation.getLine(),
-                                   sourceLocation.getColumn(), objectId);
+      SymbolId objectId = targetSymbols.copyFrom(SymbolId(sourceLocation.getObject(), UnknownRawPath), &sourceSymbols);
+      targetLocations.emplace_back(fileId, sourceLocation.getLine(), sourceLocation.getColumn(), objectId);
     }
 
-    Error error(
-        static_cast<ErrorDefinition::ErrorType>(sourceError.getErrorId()),
-        targetLocations);
+    Error error(static_cast<ErrorDefinition::ErrorType>(sourceError.getErrorId()), targetLocations);
     errorContainer->addError(error, false);
   }
 }
 
-void Cache::restoreVObjects(
-    std::vector<VObject>& targetVObjects, SymbolTable& targetSymbols,
-    const ::capnp::List<::VObject>::Reader& sourceVObjects,
-    const SymbolTable& sourceSymbols) {
+void Cache::restoreVObjects(std::vector<VObject>& targetVObjects, SymbolTable& targetSymbols,
+                            const ::capnp::List<::VObject>::Reader& sourceVObjects, const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   /* Restore design objects */
   targetVObjects.clear();
@@ -273,11 +252,10 @@ void Cache::restoreVObjects(
 
     targetVObjects.emplace_back(
         targetSymbols.copyFrom(SymbolId(name, UnknownRawPath), &sourceSymbols),
-        fileSystem->toPathId(fileSystem->remap(sourceSymbols.getSymbol(
-                                 SymbolId(fileId, UnknownRawPath))),
+        fileSystem->toPathId(fileSystem->remap(sourceSymbols.getSymbol(SymbolId(fileId, UnknownRawPath))),
                              &targetSymbols),
-        (VObjectType)type, line, column, endLine, endColumn, NodeId(parent),
-        NodeId(definition), NodeId(child), NodeId(sibling));
+        (VObjectType)type, line, column, endLine, endColumn, NodeId(parent), NodeId(definition), NodeId(child),
+        NodeId(sibling));
   }
 }
 }  // namespace SURELOG

@@ -95,17 +95,13 @@ int main(int argc, const char** argv) {
       // C++ top handle from which the entire design can be traversed using the
       // C++ API
       udesign = UhdmDesignFromVpiHandle(the_design);
-      result.append("Design name (C++): ")
-          .append(udesign->getName())
-          .append("\n");
+      result.append("Design name (C++): ").append(udesign->getName()).append("\n");
     }
     // Example demonstrating the classic VPI API traversal of the folded model
     // of the design Flat non-elaborated module/interface/packages/classes list
     // contains ports/nets/statements (No ranges or sizes here, see elaborated
     // section below)
-    result +=
-        "Design name (VPI): " + std::string(vpi_get_str(vpiName, the_design)) +
-        "\n";
+    result += "Design name (VPI): " + std::string(vpi_get_str(vpiName, the_design)) + "\n";
     // Flat Module list:
     result += "Module List:\n";
     vpiHandle modItr = vpi_iterate(vpiAllModules, the_design);
@@ -136,15 +132,13 @@ int main(int argc, const char** argv) {
           .append(std::to_string(vpi_get(vpiLineNo, obj_h)));
       vpiHandle processItr = vpi_iterate(vpiProcess, obj_h);
       while (vpiHandle sub_h = vpi_scan(processItr)) {
-        result += "\n    \\_ process stmt, file:" +
-                  std::string(vpi_get_str(vpiFile, sub_h)) +
+        result += "\n    \\_ process stmt, file:" + std::string(vpi_get_str(vpiFile, sub_h)) +
                   ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
         vpi_release_handle(sub_h);
       }
       vpiHandle assignItr = vpi_iterate(vpiContAssign, obj_h);
       while (vpiHandle sub_h = vpi_scan(assignItr)) {
-        result += "\n    \\_ assign stmt, file:" +
-                  std::string(vpi_get_str(vpiFile, sub_h)) +
+        result += "\n    \\_ assign stmt, file:" + std::string(vpi_get_str(vpiFile, sub_h)) +
                   ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
       }
       vpi_release_handle(assignItr);
@@ -161,64 +155,62 @@ int main(int argc, const char** argv) {
     result += "Instance Tree:\n";
     vpiHandle instItr = vpi_iterate(vpiTopModules, the_design);
     while (vpiHandle obj_h = vpi_scan(instItr)) {
-      std::function<std::string(vpiHandle, std::string)> inst_visit =
-          [&inst_visit](vpiHandle obj_h, std::string margin) {
-            std::string res;
-            std::string defName;
-            std::string objectName;
-            if (const char* s = vpi_get_str(vpiDefName, obj_h)) {
-              defName = s;
-            }
-            if (const char* s = vpi_get_str(vpiName, obj_h)) {
-              if (!defName.empty()) {
-                defName += " ";
-              }
-              objectName = std::string("(") + s + std::string(")");
-            }
-            std::string f;
-            if (const char* s = vpi_get_str(vpiFile, obj_h)) {
-              f = s;
-            }
-            res.append(margin)
-                .append("+ module: ")
-                .append(defName)
-                .append(objectName)
-                .append(", file:")
-                .append(f)
-                .append(", line:")
-                .append(std::to_string(vpi_get(vpiLineNo, obj_h)))
-                .append("\n");
+      std::function<std::string(vpiHandle, std::string)> inst_visit = [&inst_visit](vpiHandle obj_h,
+                                                                                    std::string margin) {
+        std::string res;
+        std::string defName;
+        std::string objectName;
+        if (const char* s = vpi_get_str(vpiDefName, obj_h)) {
+          defName = s;
+        }
+        if (const char* s = vpi_get_str(vpiName, obj_h)) {
+          if (!defName.empty()) {
+            defName += " ";
+          }
+          objectName = std::string("(") + s + std::string(")");
+        }
+        std::string f;
+        if (const char* s = vpi_get_str(vpiFile, obj_h)) {
+          f = s;
+        }
+        res.append(margin)
+            .append("+ module: ")
+            .append(defName)
+            .append(objectName)
+            .append(", file:")
+            .append(f)
+            .append(", line:")
+            .append(std::to_string(vpi_get(vpiLineNo, obj_h)))
+            .append("\n");
 
-            // Recursive tree traversal
-            margin = std::string("  ") + margin;
-            if (vpi_get(vpiType, obj_h) == vpiModule ||
-                vpi_get(vpiType, obj_h) == vpiGenScope) {
-              vpiHandle subItr = vpi_iterate(vpiModule, obj_h);
-              while (vpiHandle sub_h = vpi_scan(subItr)) {
-                res += inst_visit(sub_h, margin);
-                vpi_release_handle(sub_h);
-              }
-              vpi_release_handle(subItr);
-            }
-            if (vpi_get(vpiType, obj_h) == vpiModule ||
-                vpi_get(vpiType, obj_h) == vpiGenScope) {
-              vpiHandle subItr = vpi_iterate(vpiGenScopeArray, obj_h);
-              while (vpiHandle sub_h = vpi_scan(subItr)) {
-                res += inst_visit(sub_h, margin);
-                vpi_release_handle(sub_h);
-              }
-              vpi_release_handle(subItr);
-            }
-            if (vpi_get(vpiType, obj_h) == vpiGenScopeArray) {
-              vpiHandle subItr = vpi_iterate(vpiGenScope, obj_h);
-              while (vpiHandle sub_h = vpi_scan(subItr)) {
-                res += inst_visit(sub_h, margin);
-                vpi_release_handle(sub_h);
-              }
-              vpi_release_handle(subItr);
-            }
-            return res;
-          };
+        // Recursive tree traversal
+        margin = std::string("  ") + margin;
+        if (vpi_get(vpiType, obj_h) == vpiModule || vpi_get(vpiType, obj_h) == vpiGenScope) {
+          vpiHandle subItr = vpi_iterate(vpiModule, obj_h);
+          while (vpiHandle sub_h = vpi_scan(subItr)) {
+            res += inst_visit(sub_h, margin);
+            vpi_release_handle(sub_h);
+          }
+          vpi_release_handle(subItr);
+        }
+        if (vpi_get(vpiType, obj_h) == vpiModule || vpi_get(vpiType, obj_h) == vpiGenScope) {
+          vpiHandle subItr = vpi_iterate(vpiGenScopeArray, obj_h);
+          while (vpiHandle sub_h = vpi_scan(subItr)) {
+            res += inst_visit(sub_h, margin);
+            vpi_release_handle(sub_h);
+          }
+          vpi_release_handle(subItr);
+        }
+        if (vpi_get(vpiType, obj_h) == vpiGenScopeArray) {
+          vpiHandle subItr = vpi_iterate(vpiGenScope, obj_h);
+          while (vpiHandle sub_h = vpi_scan(subItr)) {
+            res += inst_visit(sub_h, margin);
+            vpi_release_handle(sub_h);
+          }
+          vpi_release_handle(subItr);
+        }
+        return res;
+      };
       result.append(inst_visit(obj_h, ""));
     }
   }

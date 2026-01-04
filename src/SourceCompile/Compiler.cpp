@@ -87,8 +87,7 @@ Compiler::Compiler(Session* session)
       m_design(new Design(m_session, m_serializer, m_librarySet, m_configSet)),
       m_compileDesign(nullptr) {
 #ifdef USETBB
-  if (m_session->useTbb() && (m_session->getMaxTreads() > 0))
-    tbb::task_scheduler_init init(m_session->getMaxTreads());
+  if (m_session->useTbb() && (m_session->getMaxTreads() > 0)) tbb::task_scheduler_init init(m_session->getMaxTreads());
 #endif
 }
 
@@ -118,8 +117,7 @@ void Compiler::purgeParsers() {
 }
 
 struct FunctorCompileOneFile {
-  FunctorCompileOneFile(CompileSourceFile* compileSource,
-                        CompileSourceFile::Action action)
+  FunctorCompileOneFile(CompileSourceFile* compileSource, CompileSourceFile::Action action)
       : m_compileSourceFile(compileSource), m_action(action) {}
 
   int32_t operator()() const {
@@ -137,15 +135,12 @@ struct FunctorCompileOneFile {
   CompileSourceFile::Action m_action;
 };
 
-bool Compiler::compileOneFile_(CompileSourceFile* compiler,
-                               CompileSourceFile::Action action) {
+bool Compiler::compileOneFile_(CompileSourceFile* compiler, CompileSourceFile::Action action) {
   bool status = compiler->compile(action);
   return status;
 }
 
-bool Compiler::isLibraryFile(PathId id) const {
-  return (m_libraryFiles.find(id) != m_libraryFiles.end());
-}
+bool Compiler::isLibraryFile(PathId id) const { return (m_libraryFiles.find(id) != m_libraryFiles.end()); }
 
 bool Compiler::ppinit_() {
   FileSystem* const fileSystem = m_session->getFileSystem();
@@ -153,8 +148,7 @@ bool Compiler::ppinit_() {
   if (!clp->fileUnit()) {
     m_commonCompilationUnit = new CompilationUnit(false);
     if (clp->parseBuiltIn()) {
-      Builtin(m_session, nullptr, nullptr)
-          .addBuiltinMacros(m_commonCompilationUnit);
+      Builtin(m_session, nullptr, nullptr).addBuiltinMacros(m_commonCompilationUnit);
     }
   }
 
@@ -173,24 +167,21 @@ bool Compiler::ppinit_() {
     Library* library = m_librarySet->getLibrary(sourceFileId);
     sourceFiles.insert(sourceFileId);
 
-    Session* const session = new Session(
-        m_session->getFileSystem(), symbols, m_session->getLogListener(),
-        nullptr, m_session->getCommandLineParser(), nullptr);
+    Session* const session = new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                         m_session->getCommandLineParser(), nullptr);
     m_sessions.emplace_back(session);
 
     if (clp->fileUnit() && clp->parseBuiltIn()) {
       Builtin(session, nullptr, nullptr).addBuiltinMacros(comp_unit);
     }
 
-    CompileSourceFile* compiler =
-        new CompileSourceFile(session, sourceFileId, this, comp_unit, library);
+    CompileSourceFile* compiler = new CompileSourceFile(session, sourceFileId, this, comp_unit, library);
     m_compilers.emplace_back(compiler);
   }
 
   if (!m_text.empty()) {
     Library* library = new Library(m_session, "UnitTest");
-    CompileSourceFile* compiler = new CompileSourceFile(
-        m_session, BadPathId, this, comp_unit, library, m_text);
+    CompileSourceFile* compiler = new CompileSourceFile(m_session, BadPathId, this, comp_unit, library, m_text);
     m_compilers.emplace_back(compiler);
   }
 
@@ -198,38 +189,29 @@ bool Compiler::ppinit_() {
   PathIdSet libFileIdSet;
   // (-v <file>)
   const auto& libFiles = clp->getLibraryFiles();
-  std::copy_if(libFiles.begin(), libFiles.end(),
-               std::inserter(libFileIdSet, libFileIdSet.end()),
-               [&sourceFiles](const PathId& libFileId) {
-                 return sourceFiles.find(libFileId) == sourceFiles.end();
-               });
+  std::copy_if(libFiles.begin(), libFiles.end(), std::inserter(libFileIdSet, libFileIdSet.end()),
+               [&sourceFiles](const PathId& libFileId) { return sourceFiles.find(libFileId) == sourceFiles.end(); });
 
   // (-y <path> +libext+<ext>)
   for (const PathId& libFileId : clp->getLibraryPaths()) {
     for (const SymbolId& ext : clp->getLibraryExtensions()) {
       PathIdVector fileIds;
-      fileSystem->collect(libFileId,
-                          m_session->getSymbolTable()->getSymbol(ext),
-                          m_session->getSymbolTable(), fileIds);
-      std::copy_if(fileIds.begin(), fileIds.end(),
-                   std::inserter(libFileIdSet, libFileIdSet.end()),
+      fileSystem->collect(libFileId, m_session->getSymbolTable()->getSymbol(ext), m_session->getSymbolTable(), fileIds);
+      std::copy_if(fileIds.begin(), fileIds.end(), std::inserter(libFileIdSet, libFileIdSet.end()),
                    [&](const PathId& libFileId) {
                      if (sourceFiles.find(libFileId) == sourceFiles.end()) {
                        bool fileContainsModuleOfSameName = false;
-                       std::filesystem::path dir_entry =
-                           fileSystem->toPath(libFileId);
+                       std::filesystem::path dir_entry = fileSystem->toPath(libFileId);
                        std::ifstream ifs(dir_entry.string());
                        if (ifs.good()) {
                          std::stringstream buffer;
                          buffer << ifs.rdbuf();
                          std::string moduleName = dir_entry.stem().string();
-                         const std::regex regexpMod{"(module)[ \t]+(" +
-                                                    moduleName + ")"};
+                         const std::regex regexpMod{"(module)[ \t]+(" + moduleName + ")"};
                          if (std::regex_search(buffer.str(), regexpMod)) {
                            fileContainsModuleOfSameName = true;
                          }
-                         const std::regex regexpPrim{"(primitive)[ \t]+(" +
-                                                     moduleName + ")"};
+                         const std::regex regexpPrim{"(primitive)[ \t]+(" + moduleName + ")"};
                          if (std::regex_search(buffer.str(), regexpPrim)) {
                            fileContainsModuleOfSameName = true;
                          }
@@ -262,8 +244,7 @@ bool Compiler::ppinit_() {
         continue;
       }
 
-      std::string_view type =
-          std::get<1>(fileSystem->getType(id, m_session->getSymbolTable()));
+      std::string_view type = std::get<1>(fileSystem->getType(id, m_session->getSymbolTable()));
       if (type == ".map") {
         // .map files are not parsed with the regular parser
         continue;
@@ -274,13 +255,11 @@ bool Compiler::ppinit_() {
         m_compilationUnits.emplace_back(comp_unit);
         symbols = symbols->CreateSnapshot();
       }
-      Session* const session = new Session(
-          m_session->getFileSystem(), symbols, m_session->getLogListener(),
-          nullptr, m_session->getCommandLineParser(), nullptr);
+      Session* const session = new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                           m_session->getCommandLineParser(), nullptr);
       m_sessions.emplace_back(session);
 
-      CompileSourceFile* compiler =
-          new CompileSourceFile(session, id, this, comp_unit, &lib);
+      CompileSourceFile* compiler = new CompileSourceFile(session, id, this, comp_unit, &lib);
       m_compilers.emplace_back(compiler);
     }
   }
@@ -289,44 +268,38 @@ bool Compiler::ppinit_() {
 
 bool Compiler::createFileList_() {
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  if (!((clp->writePpOutput() || clp->writePpOutputFileId()) &&
-        (!clp->parseOnly()))) {
+  if (!((clp->writePpOutput() || clp->writePpOutputFileId()) && (!clp->parseOnly()))) {
     return true;
   }
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
   {
-    PathId fileId =
-        fileSystem->getChild(clp->getCompileDirId(), "file.lst", symbols);
+    PathId fileId = fileSystem->getChild(clp->getCompileDirId(), "file.lst", symbols);
     std::ostream& ofs = fileSystem->openForWrite(fileId);
     if (ofs.good()) {
       for (CompileSourceFile* sourceFile : m_compilers) {
-        m_ppFileMap[sourceFile->getFileId()].emplace_back(
-            sourceFile->getPpOutputFileId());
+        m_ppFileMap[sourceFile->getFileId()].emplace_back(sourceFile->getPpOutputFileId());
 
         ofs << fileSystem->toPath(sourceFile->getPpOutputFileId()) << std::endl;
       }
       ofs.flush();
       fileSystem->close(ofs);
     } else {
-      std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem)
-                << std::endl;
+      std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem) << std::endl;
     }
   }
   {
-    PathId fileId =
-        fileSystem->getChild(clp->getCompileDirId(), "file_map.lst", symbols);
+    PathId fileId = fileSystem->getChild(clp->getCompileDirId(), "file_map.lst", symbols);
     std::ostream& ofs = fileSystem->openForWrite(fileId);
     if (ofs.good()) {
       for (CompileSourceFile* sourceFile : m_compilers) {
-        ofs << fileSystem->toPath(sourceFile->getPpOutputFileId()) << " "
-            << fileSystem->toPath(sourceFile->getFileId()) << std::endl;
+        ofs << fileSystem->toPath(sourceFile->getPpOutputFileId()) << " " << fileSystem->toPath(sourceFile->getFileId())
+            << std::endl;
       }
       ofs.flush();
       fileSystem->close(ofs);
     } else {
-      std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem)
-                << std::endl;
+      std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem) << std::endl;
     }
   }
   {
@@ -339,8 +312,7 @@ bool Compiler::createFileList_() {
       std::size_t val = std::hash<std::string>{}(concatFiles.str());
       {
         std::string hashedName = std::to_string(val) + ".sep_lst";
-        PathId fileId =
-            fileSystem->getChild(clp->getCompileDirId(), hashedName, symbols);
+        PathId fileId = fileSystem->getChild(clp->getCompileDirId(), hashedName, symbols);
         std::ostream& ofs = fileSystem->openForWrite(fileId);
         if (ofs.good()) {
           for (CompileSourceFile* sourceFile : m_compilers) {
@@ -348,18 +320,15 @@ bool Compiler::createFileList_() {
           }
           fileSystem->close(ofs);
         } else {
-          std::cerr << "Could not create filelist: "
-                    << PathIdPP(fileId, fileSystem) << std::endl;
+          std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem) << std::endl;
         }
       }
       {
         std::string hashedName = std::to_string(val) + ".sepcmd.json";
-        PathId fileId =
-            fileSystem->getChild(clp->getCompileDirId(), hashedName, symbols);
+        PathId fileId = fileSystem->getChild(clp->getCompileDirId(), hashedName, symbols);
         nlohmann::json sources;
         for (CompileSourceFile* sourceFile : m_compilers) {
-          auto [prefix, suffix] =
-              fileSystem->toSplitPlatformPath(sourceFile->getFileId());
+          auto [prefix, suffix] = fileSystem->toSplitPlatformPath(sourceFile->getFileId());
           nlohmann::json entry;
           entry["base_directory"] = prefix;
           entry["relative_filepath"] = suffix;
@@ -380,8 +349,7 @@ bool Compiler::createFileList_() {
           ofs << std::setw(2) << table << std::endl;
           fileSystem->close(ofs);
         } else {
-          std::cerr << "Could not create filelist: "
-                    << PathIdPP(fileId, fileSystem) << std::endl;
+          std::cerr << "Could not create filelist: " << PathIdPP(fileId, fileSystem) << std::endl;
         }
       }
     }
@@ -403,10 +371,8 @@ bool Compiler::createMultiProcessParser_() {
 
   // Create CMakeLists.txt
   const bool muted = clp->muteStdout();
-  const fs::path outputDir =
-      fileSystem->toPlatformAbsPath(clp->getOutputDirId());
-  const fs::path programPath =
-      fileSystem->toPlatformAbsPath(clp->getProgramId());
+  const fs::path outputDir = fileSystem->toPlatformAbsPath(clp->getOutputDirId());
+  const fs::path programPath = fileSystem->toPlatformAbsPath(clp->getProgramId());
   const std::string_view profile = clp->profile() ? " -profile " : " ";
   const std::string_view sverilog = clp->fullSVMode() ? " -sverilog " : " ";
   const std::string_view fileUnit = clp->fileUnit() ? " -fileunit " : " ";
@@ -461,16 +427,11 @@ bool Compiler::createMultiProcessParser_() {
     FileSystem* const fileSystem = m_session->getFileSystem();
     absoluteIndex++;
     std::string targetname =
-        StrCat(absoluteIndex, "_",
-               std::get<1>(fileSystem->getLeaf(compiler->getPpOutputFileId(),
-                                               symbols)));
-    std::string_view svFile =
-        clp->isSVFile(compiler->getFileId()) ? " -sv " : " ";
+        StrCat(absoluteIndex, "_", std::get<1>(fileSystem->getLeaf(compiler->getPpOutputFileId(), symbols)));
+    std::string_view svFile = clp->isSVFile(compiler->getFileId()) ? " -sv " : " ";
     std::string batchCmd =
-        StrCat(profile, fileUnit, sverilog, synth, noHash,
-               " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ",
-               targetname + ".log ", svFile,
-               fileSystem->toPath(compiler->getPpOutputFileId()));
+        StrCat(profile, fileUnit, sverilog, synth, noHash, " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ",
+               targetname + ".log ", svFile, fileSystem->toPath(compiler->getPpOutputFileId()));
     for (const std::string& wd : fileSystem->getWorkingDirs()) {
       StrAppend(&batchCmd, " -wd ", wd);
     }
@@ -490,23 +451,18 @@ bool Compiler::createMultiProcessParser_() {
     for (const auto compiler : jobArray[i]) {
       Session* const session = compiler->getSession();
       FileSystem* const fileSystem = session->getFileSystem();
-      fs::path fileName =
-          fileSystem->toPlatformAbsPath(compiler->getPpOutputFileId());
-      std::string_view svFile =
-          clp->isSVFile(compiler->getFileId()) ? " -sv " : " ";
+      fs::path fileName = fileSystem->toPlatformAbsPath(compiler->getPpOutputFileId());
+      std::string_view svFile = clp->isSVFile(compiler->getFileId()) ? " -sv " : " ";
       StrAppend(&fileList, svFile, fileName);
     }
     if (!fileList.empty()) {
       std::string targetname =
           StrCat(std::to_string(absoluteIndex), "_",
-                 std::get<1>(fileSystem->getLeaf(
-                     jobArray[i].back()->getPpOutputFileId(),
-                     jobArray[i].back()->getSession()->getSymbolTable())));
+                 std::get<1>(fileSystem->getLeaf(jobArray[i].back()->getPpOutputFileId(),
+                                                 jobArray[i].back()->getSession()->getSymbolTable())));
 
-      std::string batchCmd =
-          StrCat(profile, fileUnit, sverilog, synth, noHash,
-                 " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ",
-                 targetname + ".log ", fileList);
+      std::string batchCmd = StrCat(profile, fileUnit, sverilog, synth, noHash,
+                                    " -parseonly -nostdout -nobuiltin -mt 0 -mp 0 -l ", targetname + ".log ", fileList);
       for (const std::string& wd : fileSystem->getWorkingDirs()) {
         StrAppend(&batchCmd, " -wd ", wd);
       }
@@ -520,31 +476,26 @@ bool Compiler::createMultiProcessParser_() {
     }
   }
 
-  const PathId dirId =
-      fileSystem->getPpMultiprocessingDir(clp->fileUnit(), symbols);
+  const PathId dirId = fileSystem->getPpMultiprocessingDir(clp->fileUnit(), symbols);
   fileSystem->mkdirs(dirId);
 
   if (nbProcesses == 1) {
     // Single child process
-    const PathId fileId =
-        fileSystem->getChild(dirId, "parser_batch.txt", symbols);
+    const PathId fileId = fileSystem->getChild(dirId, "parser_batch.txt", symbols);
     if (!fileSystem->writeLines(fileId, batchProcessCommands)) {
-      std::cerr << "FATAL: Could not create file: "
-                << PathIdPP(fileId, fileSystem) << std::endl;
+      std::cerr << "FATAL: Could not create file: " << PathIdPP(fileId, fileSystem) << std::endl;
       return false;
     }
 
-    const std::string command =
-        StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ",
-               outputDir, " -nostdout -batch ", fileSystem->toPath(fileId));
+    const std::string command = StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ", outputDir,
+                                       " -nostdout -batch ", fileSystem->toPath(fileId));
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog parsing status: " << result << std::endl;
     if (!result) return false;
   } else {
     // Multiple child processes managed by cmake
-    const PathId fileId =
-        fileSystem->getChild(dirId, "CMakeLists.txt", symbols);
+    const PathId fileId = fileSystem->getChild(dirId, "CMakeLists.txt", symbols);
     std::ostream& ofs = fileSystem->openForWrite(fileId);
     if (ofs.good()) {
       ofs << "cmake_minimum_required (VERSION 3.0)" << std::endl;
@@ -568,14 +519,12 @@ bool Compiler::createMultiProcessParser_() {
       ofs << std::flush;
       fileSystem->close(ofs);
     } else {
-      std::cerr << "FATAL: Could not create file: "
-                << PathIdPP(fileId, fileSystem) << std::endl;
+      std::cerr << "FATAL: Could not create file: " << PathIdPP(fileId, fileSystem) << std::endl;
       return false;
     }
 
     const std::string command =
-        StrCat("cd ", fileSystem->toPath(dirId),
-               "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
+        StrCat("cd ", fileSystem->toPath(dirId), "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog parsing status: " << result << std::endl;
@@ -598,10 +547,8 @@ bool Compiler::createMultiProcessPreProcessor_() {
 
   const bool muted = clp->muteStdout();
   const fs::path workingDir = fileSystem->getWorkingDir();
-  const fs::path outputDir =
-      fileSystem->toPlatformAbsPath(clp->getOutputDirId());
-  const fs::path programPath =
-      fileSystem->toPlatformAbsPath(clp->getProgramId());
+  const fs::path outputDir = fileSystem->toPlatformAbsPath(clp->getOutputDirId());
+  const fs::path programPath = fileSystem->toPlatformAbsPath(clp->getProgramId());
   const std::string_view profile = clp->profile() ? " -profile " : " ";
   const std::string_view sverilog = clp->fullSVMode() ? " -sverilog " : " ";
   const std::string_view fileUnit = clp->fileUnit() ? " -fileunit " : " ";
@@ -648,21 +595,18 @@ bool Compiler::createMultiProcessPreProcessor_() {
     StrAppend(&batchCmd, " -wd ", wd);
   }
 
-  const PathId dirId =
-      fileSystem->getParserMultiprocessingDir(clp->fileUnit(), symbols);
+  const PathId dirId = fileSystem->getParserMultiprocessingDir(clp->fileUnit(), symbols);
   fileSystem->mkdirs(dirId);
 
   if (nbProcesses == 1) {
     // Single child process
     const PathId fileId = fileSystem->getChild(dirId, "pp_batch.txt", symbols);
     if (!fileSystem->writeContent(fileId, batchCmd)) {
-      std::cerr << "FATAL: Could not create file: "
-                << PathIdPP(fileId, fileSystem) << std::endl;
+      std::cerr << "FATAL: Could not create file: " << PathIdPP(fileId, fileSystem) << std::endl;
       return false;
     }
-    std::string command =
-        StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ",
-               outputDir, " -nostdout -batch ", fileSystem->toPath(fileId));
+    std::string command = StrCat("cd ", workingDir, kSystemCommandSeparator, programPath, " -o ", outputDir,
+                                 " -nostdout -batch ", fileSystem->toPath(fileId));
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog preproc status: " << result << std::endl;
@@ -671,8 +615,7 @@ bool Compiler::createMultiProcessPreProcessor_() {
     // Create CMakeLists.txt
     StrAppend(&batchCmd, " -o ", outputDir);
 
-    const PathId fileId =
-        fileSystem->getChild(dirId, "CMakeLists.txt", symbols);
+    const PathId fileId = fileSystem->getChild(dirId, "CMakeLists.txt", symbols);
     std::ostream& ofs = fileSystem->openForWrite(fileId);
     if (ofs.good()) {
       ofs << "cmake_minimum_required (VERSION 3.0)" << std::endl;
@@ -686,14 +629,12 @@ bool Compiler::createMultiProcessPreProcessor_() {
       ofs << std::flush;
       fileSystem->close(ofs);
     } else {
-      std::cerr << "FATAL: Could not create file: "
-                << PathIdPP(fileId, fileSystem) << std::endl;
+      std::cerr << "FATAL: Could not create file: " << PathIdPP(fileId, fileSystem) << std::endl;
       return false;
     }
 
     std::string command =
-        StrCat("cd ", fileSystem->toPath(dirId),
-               "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
+        StrCat("cd ", fileSystem->toPath(dirId), "; cmake -G \"Unix Makefiles\" .; make -j ", nbProcesses);
     if (!muted) std::cout << "Running: " << command << std::endl << std::flush;
     int32_t result = system(command.c_str());
     if (!muted) std::cout << "Surelog preproc status: " << result << std::endl;
@@ -718,16 +659,12 @@ bool Compiler::parseinit_() {
 
   std::vector<CompileSourceFile*> tmp_compilers;
   for (CompileSourceFile* const compiler : m_compilers) {
-    const uint32_t nbThreads =
-        prec->isFilePrecompiled(compiler->getPpOutputFileId())
-            ? 0
-            : clp->getMaxTreads();
+    const uint32_t nbThreads = prec->isFilePrecompiled(compiler->getPpOutputFileId()) ? 0 : clp->getMaxTreads();
 
     const int32_t effectiveNbThreads = calculateEffectiveThreads(nbThreads);
 
-    AnalyzeFile* const fileAnalyzer = new AnalyzeFile(
-        compiler->getSession(), m_design, compiler->getPpOutputFileId(),
-        compiler->getFileId(), effectiveNbThreads, m_text);
+    AnalyzeFile* const fileAnalyzer = new AnalyzeFile(compiler->getSession(), m_design, compiler->getPpOutputFileId(),
+                                                      compiler->getFileId(), effectiveNbThreads, m_text);
     fileAnalyzer->analyze();
     compiler->setFileAnalyzer(fileAnalyzer);
     if (fileAnalyzer->getSplitFiles().size() > 1) {
@@ -740,32 +677,27 @@ bool Compiler::parseinit_() {
         symbols = symbols->CreateSnapshot();
       }
 
-      Session* const session = new Session(
-          m_session->getFileSystem(), symbols, m_session->getLogListener(),
-          nullptr, m_session->getCommandLineParser(), nullptr);
+      Session* const session = new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                           m_session->getCommandLineParser(), nullptr);
       m_sessions.emplace_back(session);
-      compiler->getParser()->setFileContent(new FileContent(
-          session, compiler->getParser()->getFileId(0),
-          compiler->getParser()->getLibrary(), nullptr, BadPathId));
+      compiler->getParser()->setFileContent(new FileContent(session, compiler->getParser()->getFileId(0),
+                                                            compiler->getParser()->getLibrary(), nullptr, BadPathId));
 
       int32_t j = 0;
       for (const auto& ppId : fileAnalyzer->getSplitFiles()) {
         SymbolTable* symbols = m_session->getSymbolTable()->CreateSnapshot();
-        Session* const session = new Session(
-            m_session->getFileSystem(), symbols, m_session->getLogListener(),
-            nullptr, m_session->getCommandLineParser(), nullptr);
+        Session* const session = new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                             m_session->getCommandLineParser(), nullptr);
         m_sessions.emplace_back(session);
-        CompileSourceFile* chunkCompiler = new CompileSourceFile(
-            session, compiler, ppId, fileAnalyzer->getLineOffsets()[j]);
+        CompileSourceFile* chunkCompiler =
+            new CompileSourceFile(session, compiler, ppId, fileAnalyzer->getLineOffsets()[j]);
         // Schedule chunk
         tmp_compilers.emplace_back(chunkCompiler);
 
-        FileContent* const chunkFileContent =
-            new FileContent(session, compiler->getParser()->getFileId(0),
-                            compiler->getParser()->getLibrary(), nullptr, ppId);
+        FileContent* const chunkFileContent = new FileContent(session, compiler->getParser()->getFileId(0),
+                                                              compiler->getParser()->getLibrary(), nullptr, ppId);
         chunkCompiler->getParser()->setFileContent(chunkFileContent);
-        getDesign()->addFileContent(compiler->getParser()->getFileId(0),
-                                    chunkFileContent);
+        getDesign()->addFileContent(compiler->getParser()->getFileId(0), chunkFileContent);
 
         j++;
       }
@@ -773,9 +705,8 @@ bool Compiler::parseinit_() {
       if ((!clp->fileUnit()) && m_text.empty()) {
         SymbolTable* symbols = m_session->getSymbolTable()->CreateSnapshot();
 
-        Session* const session = new Session(
-            m_session->getFileSystem(), symbols, m_session->getLogListener(),
-            nullptr, m_session->getCommandLineParser(), nullptr);
+        Session* const session = new Session(m_session->getFileSystem(), symbols, m_session->getLogListener(), nullptr,
+                                             m_session->getCommandLineParser(), nullptr);
         m_sessions.emplace_back(session);
 
         compiler->setSession(session);
@@ -810,8 +741,7 @@ bool Compiler::cleanup_() {
   return true;
 }
 
-bool Compiler::compileFileSet_(CompileSourceFile::Action action,
-                               bool allowMultithread,
+bool Compiler::compileFileSet_(CompileSourceFile::Action action, bool allowMultithread,
                                std::vector<CompileSourceFile*>& container) {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
@@ -860,8 +790,7 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
         bool status = compileOneFile_(source, action);
         m_errors->appendErrors(*souirce->getErrorContainer());
         m_errors->printMessages(m_session->muteStdout());
-        if ((!status) || source->getErrorContainer()->hasFatalErrors())
-          return false;
+        if ((!status) || source->getErrorContainer()->hasFatalErrors()) return false;
       }
     }
 #endif
@@ -907,8 +836,7 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
           else if (job->getParser())
             fileId = job->getParser()->getFileId(0);
           sum += job->getJobSize(action);
-          std::cout << job->getJobSize(action) << " "
-                    << jobFileSystem->toPath(fileId) << std::endl;
+          std::cout << job->getJobSize(action) << " " << jobFileSystem->toPath(fileId) << std::endl;
         }
         std::cout << ", Total: " << sum << std::endl << std::flush;
       }
@@ -920,16 +848,14 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
       std::thread* th = new std::thread([=] {
         for (CompileSourceFile* job : jobArray[i]) {
 #ifdef SURELOG_WITH_PYTHON
-          if (m_session->pythonListener() ||
-              m_session->pythonEvalScriptPerFile()) {
+          if (m_session->pythonListener() || m_session->pythonEvalScriptPerFile()) {
             PyThreadState* interpState = PythonAPI::initNewInterp();
             job->setPythonInterp(interpState);
           }
 #endif
           job->compile(action);
 #ifdef SURELOG_WITH_PYTHON
-          if (m_session->pythonListener() ||
-              m_session->pythonEvalScriptPerFile()) {
+          if (m_session->pythonListener() || m_session->pythonEvalScriptPerFile()) {
             job->shutdownPythonInterp();
           }
 #endif
@@ -983,12 +909,10 @@ void Compiler::writeUhdmSourceFiles() {
 
     std::vector<uhdm::SourceFile*> sourceFileStack;
     std::vector<uhdm::PreprocMacroInstance*> macroInstanceStack;
-    std::vector<uhdm::PreprocMacroInstance*>& macroInstances =
-        sourceFile->getPreprocMacroInstances();
+    std::vector<uhdm::PreprocMacroInstance*>& macroInstances = sourceFile->getPreprocMacroInstances();
     macroInstances.resize(objects.size(), nullptr);
 
-    const std::vector<IncludeFileInfo>& includeFileInfos =
-        preprocessFile->getIncludeFileInfo();
+    const std::vector<IncludeFileInfo>& includeFileInfos = preprocessFile->getIncludeFileInfo();
     for (const IncludeFileInfo& ifi : includeFileInfos) {
       if (ifi.m_context == IncludeFileInfo::Context::Include) {
         if (ifi.m_action == IncludeFileInfo::Action::Push) {
@@ -999,8 +923,7 @@ void Compiler::writeUhdmSourceFiles() {
           if (oifi.m_symbolId) {
             incl->setName(symbolTable->getSymbol(oifi.m_symbolId));
           } else {
-            auto [_, name] =
-                fileSystem->getLeaf(oifi.m_sectionFileId, symbolTable);
+            auto [_, name] = fileSystem->getLeaf(oifi.m_sectionFileId, symbolTable);
             incl->setName(name);
           }
           incl->setFile(fileSystem->toPath(oifi.m_sectionFileId));
@@ -1018,8 +941,7 @@ void Compiler::writeUhdmSourceFiles() {
           sourceFileStack.emplace_back(incl);
 
           for (MacroInfo* mi : oifi.m_macroDefinitions) {
-            uhdm::PreprocMacroDefinition* const pmd =
-                m_serializer.make<uhdm::PreprocMacroDefinition>();
+            uhdm::PreprocMacroDefinition* const pmd = m_serializer.make<uhdm::PreprocMacroDefinition>();
             pmd->setName(mi->m_name);
             pmd->setParent(incl);
             pmd->setFile(fileSystem->toPath(mi->m_fileId));
@@ -1040,8 +962,7 @@ void Compiler::writeUhdmSourceFiles() {
           const IncludeFileInfo& oifi = ifi;
           const IncludeFileInfo& cifi = includeFileInfos[oifi.m_indexOpposite];
 
-          uhdm::PreprocMacroInstance* const pmi =
-              m_serializer.make<uhdm::PreprocMacroInstance>();
+          uhdm::PreprocMacroInstance* const pmi = m_serializer.make<uhdm::PreprocMacroInstance>();
           pmi->setName(oifi.m_macroDefinition->m_name);
           pmi->setFile(fileSystem->toPath(oifi.m_sectionFileId));
           pmi->setStartLine(oifi.m_symbolLine);
@@ -1058,14 +979,10 @@ void Compiler::writeUhdmSourceFiles() {
           pmi->setSourceEndColumn(cifi.m_sourceColumn);
           if (macroInstanceStack.empty()) {
             pmi->setParent(sourceFileStack.back());
-            sourceFileStack.back()
-                ->getPreprocMacroInstances(true)
-                ->emplace_back(pmi);
+            sourceFileStack.back()->getPreprocMacroInstances(true)->emplace_back(pmi);
           } else {
             pmi->setParent(macroInstanceStack.back());
-            macroInstanceStack.back()
-                ->getPreprocMacroInstances(true)
-                ->emplace_back(pmi);
+            macroInstanceStack.back()->getPreprocMacroInstances(true)->emplace_back(pmi);
           }
           macroInstanceStack.emplace_back(pmi);
           instanceMap.emplace(pmi, oifi.m_macroDefinition);
@@ -1079,10 +996,8 @@ void Compiler::writeUhdmSourceFiles() {
             if (object.m_ppEndLine > cifi.m_sourceLine) break;
             if (macroInstances[i] != nullptr) continue;
 
-            if ((object.m_ppStartLine == oifi.m_sourceLine) &&
-                (object.m_ppEndLine == cifi.m_sourceLine)) {
-              if ((object.m_ppStartColumn >= oifi.m_sourceColumn) &&
-                  (object.m_ppEndColumn <= cifi.m_sourceColumn)) {
+            if ((object.m_ppStartLine == oifi.m_sourceLine) && (object.m_ppEndLine == cifi.m_sourceLine)) {
+              if ((object.m_ppStartColumn >= oifi.m_sourceColumn) && (object.m_ppEndColumn <= cifi.m_sourceColumn)) {
                 macroInstances[i] = macroInstanceStack.back();
               }
             } else if (object.m_ppStartLine == oifi.m_sourceLine) {
@@ -1120,17 +1035,13 @@ void Compiler::writePreprocMacroInstances() {
     Session* const session = sourceFile->getSession();
     FileSystem* const fileSystem = session->getFileSystem();
     const std::vector<VObject>& objects = fileContent->getVObjects();
-    const FileContent::AnyToNodeIdPairCache& anyToNodeIdPairCache =
-        fileContent->getAnyToNodeIdPairCache();
-    std::vector<uhdm::PreprocMacroInstance*>& pmis =
-        sourceFile->getPreprocMacroInstances();
+    const FileContent::AnyToNodeIdPairCache& anyToNodeIdPairCache = fileContent->getAnyToNodeIdPairCache();
+    std::vector<uhdm::PreprocMacroInstance*>& pmis = sourceFile->getPreprocMacroInstances();
 
     for (const auto& [any, id] : anys) {
-      if (any->getFile() != fileSystem->toPath(sourceFile->getFileId()))
-        continue;
+      if (any->getFile() != fileSystem->toPath(sourceFile->getFileId())) continue;
 
-      FileContent::AnyToNodeIdPairCache::const_iterator it =
-          anyToNodeIdPairCache.find(any);
+      FileContent::AnyToNodeIdPairCache::const_iterator it = anyToNodeIdPairCache.find(any);
       // TODO(hs): No cache entry! Based on the parent of this any
       // try and walk the objects tree to find an appropriate
       // start/end index. Make sure to use ppStart/ppEnd and not
@@ -1142,20 +1053,16 @@ void Compiler::writePreprocMacroInstances() {
 
       if (startIndex && (pmis[startIndex] != nullptr)) {
         const VObject& object = objects[startIndex];
-        if ((object.m_startLine == any->getStartLine()) &&
-            (object.m_startColumn == any->getStartColumn())) {
-          pmis[startIndex]->getObjects(true)->emplace_back(
-              const_cast<uhdm::Any*>(any));
+        if ((object.m_startLine == any->getStartLine()) && (object.m_startColumn == any->getStartColumn())) {
+          pmis[startIndex]->getObjects(true)->emplace_back(const_cast<uhdm::Any*>(any));
           allPpMIs.emplace(pmis[startIndex]);
         }
       }
 
       if (endIndex && (pmis[endIndex] != nullptr)) {
         const VObject& object = objects[startIndex];
-        if ((object.m_endLine == any->getEndLine()) &&
-            (object.m_endColumn == any->getEndColumn())) {
-          pmis[endIndex]->getObjects(true)->emplace_back(
-              const_cast<uhdm::Any*>(any));
+        if ((object.m_endLine == any->getEndLine()) && (object.m_endColumn == any->getEndColumn())) {
+          pmis[endIndex]->getObjects(true)->emplace_back(const_cast<uhdm::Any*>(any));
           allPpMIs.emplace(pmis[endIndex]);
         }
       }
@@ -1164,12 +1071,10 @@ void Compiler::writePreprocMacroInstances() {
 
   for (uhdm::PreprocMacroInstance* pmi : allPpMIs) {
     if (uhdm::AnyCollection* const objects = pmi->getObjects()) {
-      std::sort(objects->begin(), objects->end(),
-                [](const uhdm::Any* const lhs, const uhdm::Any* const rhs) {
-                  return lhs->getUhdmId() < rhs->getUhdmId();
-                });
-      objects->erase(std::unique(objects->begin(), objects->end()),
-                     objects->end());
+      std::sort(objects->begin(), objects->end(), [](const uhdm::Any* const lhs, const uhdm::Any* const rhs) {
+        return lhs->getUhdmId() < rhs->getUhdmId();
+      });
+      objects->erase(std::unique(objects->begin(), objects->end()), objects->end());
     }
   }
 }
@@ -1186,8 +1091,7 @@ bool Compiler::compile() {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   if (clp->profile()) {
-    std::string msg = "Scan libraries took " +
-                      StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+    std::string msg = "Scan libraries took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
     std::cout << msg << std::endl;
     profile += msg;
     tmr.reset();
@@ -1196,19 +1100,16 @@ bool Compiler::compile() {
   // Preprocess
   ppinit_();
   createMultiProcessPreProcessor_();
-  if (!compileFileSet_(CompileSourceFile::Action::Preprocess, clp->fileUnit(),
-                       m_compilers)) {
+  if (!compileFileSet_(CompileSourceFile::Action::Preprocess, clp->fileUnit(), m_compilers)) {
     return false;
   }
   // Single thread post Preprocess
-  if (!compileFileSet_(CompileSourceFile::Action::PostPreprocess, false,
-                       m_compilers)) {
+  if (!compileFileSet_(CompileSourceFile::Action::PostPreprocess, false, m_compilers)) {
     return false;
   }
 
   if (clp->profile()) {
-    std::string msg = "Preprocessing took " +
-                      StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+    std::string msg = "Preprocessing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
     std::cout << msg << std::endl;
     for (const CompileSourceFile* compiler : m_compilers) {
       msg += compiler->getPreprocessor()->getProfileInfo();
@@ -1220,8 +1121,7 @@ bool Compiler::compile() {
 
   // Parse
   bool parserInitialized = false;
-  if (clp->parse() || clp->pythonListener() || clp->pythonEvalScriptPerFile() ||
-      clp->pythonEvalScript()) {
+  if (clp->parse() || clp->pythonListener() || clp->pythonEvalScriptPerFile() || clp->pythonEvalScript()) {
     parseinit_();
     createFileList_();
     createMultiProcessParser_();
@@ -1229,8 +1129,7 @@ bool Compiler::compile() {
     if (!compileFileSet_(CompileSourceFile::Action::Parse, true, m_compilers)) {
       return false;  // Small files and large file chunks
     }
-    if (!compileFileSet_(CompileSourceFile::Action::Parse, true,
-                         m_compilersParentFiles)) {
+    if (!compileFileSet_(CompileSourceFile::Action::Parse, true, m_compilersParentFiles)) {
       return false;  // Recombine chunks
     }
   } else {
@@ -1240,8 +1139,7 @@ bool Compiler::compile() {
   writeUhdmSourceFiles();
 
   if (clp->profile()) {
-    std::string msg =
-        "Parsing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+    std::string msg = "Parsing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
     for (const CompileSourceFile* compilerParent : m_compilersParentFiles) {
       msg += compilerParent->getParser()->getProfileInfo();
     }
@@ -1263,16 +1161,11 @@ bool Compiler::compile() {
   // Python Listener
   if (parseOk && (clp->pythonListener() || clp->pythonEvalScriptPerFile())) {
     if (!parserInitialized) pythoninit_();
-    if (!compileFileSet_(CompileSourceFile::Action::PythonAPI, true,
-                         m_compilers))
-      return false;
-    if (!compileFileSet_(CompileSourceFile::Action::PythonAPI, true,
-                         m_compilersParentFiles))
-      return false;
+    if (!compileFileSet_(CompileSourceFile::Action::PythonAPI, true, m_compilers)) return false;
+    if (!compileFileSet_(CompileSourceFile::Action::PythonAPI, true, m_compilersParentFiles)) return false;
 
     if (clp->profile()) {
-      std::string msg = "Python file processing took " +
-                        StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+      std::string msg = "Python file processing took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
       std::cout << msg << std::endl;
       profile += msg;
       tmr.reset();
@@ -1286,8 +1179,7 @@ bool Compiler::compile() {
     errors->printMessages(clp->muteStdout());
 
     if (clp->profile()) {
-      std::string msg = "Compilation took " +
-                        StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
+      std::string msg = "Compilation took " + StringUtils::to_string(tmr.elapsed_rounded()) + "s\n";
       std::cout << msg << std::endl;
       profile += msg;
       tmr.reset();
@@ -1302,22 +1194,18 @@ bool Compiler::compile() {
     // delete compileDesign;
   }
   if (clp->profile()) {
-    std::string msg = "Total time " +
-                      StringUtils::to_string(tmrTotal.elapsed_rounded()) +
-                      "s\n";
+    std::string msg = "Total time " + StringUtils::to_string(tmrTotal.elapsed_rounded()) + "s\n";
     profile += msg;
-    profile = std::string("==============\n") + "PROFILE\n" +
-              std::string("==============\n") + profile + "==============\n";
+    profile =
+        std::string("==============\n") + "PROFILE\n" + std::string("==============\n") + profile + "==============\n";
     std::cout << profile << std::endl;
     errors->printToLogFile(profile);
   }
   return true;
 }
 
-void Compiler::registerAntlrPpHandlerForId(
-    SymbolId id, PreprocessFile::AntlrParserHandler* pp) {
-  std::map<SymbolId, PreprocessFile::AntlrParserHandler*>::iterator itr =
-      m_antlrPpMap.find(id);
+void Compiler::registerAntlrPpHandlerForId(SymbolId id, PreprocessFile::AntlrParserHandler* pp) {
+  std::map<SymbolId, PreprocessFile::AntlrParserHandler*>::iterator itr = m_antlrPpMap.find(id);
   if (itr != m_antlrPpMap.end()) {
     delete (*itr).second;
     m_antlrPpMap.erase(itr);
@@ -1327,10 +1215,8 @@ void Compiler::registerAntlrPpHandlerForId(
   m_antlrPpMap.emplace(id, pp);
 }
 
-PreprocessFile::AntlrParserHandler* Compiler::getAntlrPpHandlerForId(
-    SymbolId id) {
-  std::map<SymbolId, PreprocessFile::AntlrParserHandler*>::iterator itr =
-      m_antlrPpMap.find(id);
+PreprocessFile::AntlrParserHandler* Compiler::getAntlrPpHandlerForId(SymbolId id) {
+  std::map<SymbolId, PreprocessFile::AntlrParserHandler*>::iterator itr = m_antlrPpMap.find(id);
   if (itr != m_antlrPpMap.end()) {
     PreprocessFile::AntlrParserHandler* ptr = (*itr).second;
     return ptr;
@@ -1339,21 +1225,17 @@ PreprocessFile::AntlrParserHandler* Compiler::getAntlrPpHandlerForId(
 }
 
 bool Compiler::parseLibrariesDef_() {
-  ParseLibraryDef* libParser =
-      new ParseLibraryDef(m_session, m_librarySet, m_configSet);
+  ParseLibraryDef* libParser = new ParseLibraryDef(m_session, m_librarySet, m_configSet);
   bool result = libParser->parseLibrariesDefinition();
   delete libParser;
   return result;
 }
 
-uhdm::Design* Compiler::getUhdmDesign() const {
-  return m_design->getUhdmDesign();
-}
+uhdm::Design* Compiler::getUhdmDesign() const { return m_design->getUhdmDesign(); }
 
 vpiHandle Compiler::getVpiDesign() const {
   uhdm::Design* const uhdmDesign = m_design->getUhdmDesign();
-  return (uhdmDesign != nullptr) ? uhdmDesign->getSerializer()->makeUhdmHandle(
-                                       uhdmDesign->getUhdmType(), uhdmDesign)
+  return (uhdmDesign != nullptr) ? uhdmDesign->getSerializer()->makeUhdmHandle(uhdmDesign->getUhdmType(), uhdmDesign)
                                  : nullptr;
 }
 }  // namespace SURELOG

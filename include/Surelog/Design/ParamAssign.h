@@ -36,8 +36,7 @@ class FileContent;
 
 class ParamAssign {
  public:
-  ParamAssign(const FileContent* fC, NodeId paramId, NodeId assignId,
-              bool isMultidimensional, bool port_param)
+  ParamAssign(const FileContent* fC, NodeId paramId, NodeId assignId, bool isMultidimensional, bool port_param)
       : m_fileContent(fC),
         m_paramId(paramId),
         m_assignId(assignId),

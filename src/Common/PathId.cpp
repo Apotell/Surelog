@@ -29,9 +29,7 @@
 #include "Surelog/SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
-std::ostream &operator<<(std::ostream &strm, const PathIdPP &id) {
-  return strm << id.m_fileSystem->toPath(id.m_id);
-}
+std::ostream &operator<<(std::ostream &strm, const PathIdPP &id) { return strm << id.m_fileSystem->toPath(id.m_id); }
 
 bool PathId::equals(const PathId &rhs, FileSystem *fileSystem) const {
   // IMPORTANT: The logic to compare two PathId instances cannot use
@@ -44,8 +42,8 @@ bool PathId::equals(const PathId &rhs, FileSystem *fileSystem) const {
     return true;
   }
 
-  if ((m_symbolTable != nullptr) && (rhs.m_symbolTable != nullptr) &&
-      (m_id != BadRawPathId) && (rhs.m_id != BadRawPathId)) {
+  if ((m_symbolTable != nullptr) && (rhs.m_symbolTable != nullptr) && (m_id != BadRawPathId) &&
+      (rhs.m_id != BadRawPathId)) {
     return fileSystem->toPath(*this) == fileSystem->toPath(rhs);
   }
 
@@ -57,10 +55,9 @@ bool PathId::operator==(const PathId &rhs) const {
     return true;
   }
 
-  if ((m_symbolTable != nullptr) && (rhs.m_symbolTable != nullptr) &&
-      (m_id != BadRawPathId) && (rhs.m_id != BadRawPathId)) {
-    return m_symbolTable->getSymbol((SymbolId)(*this)) ==
-           rhs.m_symbolTable->getSymbol((SymbolId)rhs);
+  if ((m_symbolTable != nullptr) && (rhs.m_symbolTable != nullptr) && (m_id != BadRawPathId) &&
+      (rhs.m_id != BadRawPathId)) {
+    return m_symbolTable->getSymbol((SymbolId)(*this)) == rhs.m_symbolTable->getSymbol((SymbolId)rhs);
   }
 
   return false;

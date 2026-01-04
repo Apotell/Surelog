@@ -78,8 +78,7 @@ std::filesystem::path FileSystem::normalize(const std::filesystem::path &p) {
   return norm;
 }
 
-bool FileSystem::is_subpath(const std::filesystem::path &parent,
-                            const std::filesystem::path &child) {
+bool FileSystem::is_subpath(const std::filesystem::path &parent, const std::filesystem::path &child) {
   std::filesystem::path np = normalize(parent);
   std::filesystem::path nc = normalize(child);
 
@@ -101,21 +100,15 @@ std::string_view FileSystem::toPath(PathId id) {
   return (symbol == SymbolTable::getBadSymbol()) ? kEmpty : symbol;
 }
 
-PathId FileSystem::getWorkingDir(SymbolTable *symbolTable) {
-  return toPathId(getWorkingDir(), symbolTable);
-}
+PathId FileSystem::getWorkingDir(SymbolTable *symbolTable) { return toPathId(getWorkingDir(), symbolTable); }
 
-std::istream &FileSystem::openForRead(PathId fileId) {
-  return openInput(fileId, std::ios_base::in);
-}
+std::istream &FileSystem::openForRead(PathId fileId) { return openInput(fileId, std::ios_base::in); }
 
 std::istream &FileSystem::openForLoad(PathId fileId) {
   return openInput(fileId, std::ios_base::in | std::ios_base::binary);
 }
 
-std::ostream &FileSystem::openForWrite(PathId fileId) {
-  return openOutput(fileId, std::ios_base::out);
-}
+std::ostream &FileSystem::openForWrite(PathId fileId) { return openOutput(fileId, std::ios_base::out); }
 
 std::ostream &FileSystem::openForSave(PathId fileId) {
   return openOutput(fileId, std::ios_base::out | std::ios_base::binary);
@@ -150,8 +143,7 @@ bool FileSystem::readContent(PathId fileId, std::string &content) {
   return result;
 }
 
-bool FileSystem::writeContent(PathId fileId, std::string_view content,
-                              bool onlyIfModified) {
+bool FileSystem::writeContent(PathId fileId, std::string_view content, bool onlyIfModified) {
   if (!fileId) return false;
 
   if (onlyIfModified && exists(fileId)) {
@@ -172,9 +164,7 @@ bool FileSystem::writeContent(PathId fileId, std::string_view content,
   return result;
 }
 
-bool FileSystem::writeContent(PathId fileId, std::string_view content) {
-  return writeContent(fileId, content, true);
-}
+bool FileSystem::writeContent(PathId fileId, std::string_view content) { return writeContent(fileId, content, true); }
 
 bool FileSystem::readLines(PathId fileId, std::vector<std::string> &lines) {
   if (!fileId) return false;
@@ -184,8 +174,7 @@ bool FileSystem::readLines(PathId fileId, std::vector<std::string> &lines) {
   if (strm.good()) {
     std::string line;
     while (!strm.eof() && std::getline(strm, line)) {
-      while (!line.empty() &&
-             ((line.back() == '\r') || (line.back() == '\n'))) {
+      while (!line.empty() && ((line.back() == '\r') || (line.back() == '\n'))) {
         line.pop_back();
       }
       lines.emplace_back(line);
@@ -196,15 +185,12 @@ bool FileSystem::readLines(PathId fileId, std::vector<std::string> &lines) {
   return result;
 }
 
-bool FileSystem::writeLines(PathId fileId,
-                            const std::vector<std::string> &lines,
-                            bool onlyIfModified /* = true */) {
+bool FileSystem::writeLines(PathId fileId, const std::vector<std::string> &lines, bool onlyIfModified /* = true */) {
   if (!fileId) return false;
 
   if (onlyIfModified && exists(fileId)) {
     std::vector<std::string> currentLines;
-    if ((readLines(fileId, currentLines)) &&
-        (lines.size() == currentLines.size())) {
+    if ((readLines(fileId, currentLines)) && (lines.size() == currentLines.size())) {
       bool diffs = false;
       for (size_t i = 0, n = lines.size(); i < n; ++i) {
         if (lines[i] != currentLines[i]) {
@@ -229,8 +215,7 @@ bool FileSystem::writeLines(PathId fileId,
   return result;
 }
 
-bool FileSystem::writeLines(PathId fileId,
-                            const std::vector<std::string> &lines) {
+bool FileSystem::writeLines(PathId fileId, const std::vector<std::string> &lines) {
   return writeLines(fileId, lines, true);
 }
 
@@ -247,8 +232,7 @@ bool FileSystem::readLine(PathId fileId, int32_t index, std::string &content) {
     }
 
     if ((result = (index == 0))) {
-      while (!line.empty() &&
-             ((line.back() == '\r') || (line.back() == '\n'))) {
+      while (!line.empty() && ((line.back() == '\r') || (line.back() == '\n'))) {
         line.pop_back();
       }
       content = line;
@@ -280,77 +264,62 @@ bool FileSystem::loadContent(PathId fileId, std::vector<char> &content) {
   return result;
 }
 
-bool FileSystem::saveContent(PathId fileId, const char *content,
-                             std::streamsize length) {
+bool FileSystem::saveContent(PathId fileId, const char *content, std::streamsize length) {
   return saveContent(fileId, content, length, false);
 }
 
-bool FileSystem::saveContent(PathId fileId, const std::vector<char> &content,
-                             bool useTemp) {
+bool FileSystem::saveContent(PathId fileId, const std::vector<char> &content, bool useTemp) {
   return saveContent(fileId, content.data(), content.size(), useTemp);
 }
 
-bool FileSystem::saveContent(PathId fileId, const std::vector<char> &data) {
-  return saveContent(fileId, data, false);
-}
+bool FileSystem::saveContent(PathId fileId, const std::vector<char> &data) { return saveContent(fileId, data, false); }
 
-PathId FileSystem::getLogFile(bool isUnitCompilation,
-                              SymbolTable *symbolTable) {
+PathId FileSystem::getLogFile(bool isUnitCompilation, SymbolTable *symbolTable) {
   return getLogFile(isUnitCompilation, kLogFileName, symbolTable);
 }
 
-PathId FileSystem::getCacheDir(bool isUnitCompilation,
-                               SymbolTable *symbolTable) {
+PathId FileSystem::getCacheDir(bool isUnitCompilation, SymbolTable *symbolTable) {
   return getCacheDir(isUnitCompilation, kCacheDirName, symbolTable);
 }
 
-PathId FileSystem::getPpOutputFile(bool isUnitCompilation, PathId sourceFileId,
-                                   SymbolId libraryNameId,
+PathId FileSystem::getPpOutputFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
                                    SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPpOutputFile(isUnitCompilation, sourceFileId, libraryName,
-                         symbolTable);
+  return getPpOutputFile(isUnitCompilation, sourceFileId, libraryName, symbolTable);
 }
 
-PathId FileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceFileId,
-                                  SymbolId libraryNameId, bool isPrecompiled,
-                                  SymbolTable *symbolTable) {
+PathId FileSystem::getPpCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
+                                  bool isPrecompiled, SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPpCacheFile(isUnitCompilation, sourceFileId, libraryName,
-                        isPrecompiled, symbolTable);
+  return getPpCacheFile(isUnitCompilation, sourceFileId, libraryName, isPrecompiled, symbolTable);
 }
 
-PathId FileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFileId,
-                                     SymbolId libraryNameId, bool isPrecompiled,
-                                     SymbolTable *symbolTable) {
+PathId FileSystem::getParseCacheFile(bool isUnitCompilation, PathId ppFileId, SymbolId libraryNameId,
+                                     bool isPrecompiled, SymbolTable *symbolTable) {
   if (!ppFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getParseCacheFile(isUnitCompilation, ppFileId, libraryName,
-                           isPrecompiled, symbolTable);
+  return getParseCacheFile(isUnitCompilation, ppFileId, libraryName, isPrecompiled, symbolTable);
 }
 
-PathId FileSystem::getPythonCacheFile(bool isUnitCompilation,
-                                      PathId sourceFileId,
-                                      SymbolId libraryNameId,
+PathId FileSystem::getPythonCacheFile(bool isUnitCompilation, PathId sourceFileId, SymbolId libraryNameId,
                                       SymbolTable *symbolTable) {
   if (!sourceFileId || !libraryNameId) return BadPathId;
 
   const std::string_view libraryName = symbolTable->getSymbol(libraryNameId);
   if (libraryName == BadRawSymbol) return BadPathId;
 
-  return getPythonCacheFile(isUnitCompilation, sourceFileId, libraryName,
-                            symbolTable);
+  return getPythonCacheFile(isUnitCompilation, sourceFileId, libraryName, symbolTable);
 }
 
 std::filesystem::file_time_type FileSystem::modtime(PathId fileId) {

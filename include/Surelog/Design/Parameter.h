@@ -45,8 +45,7 @@ class FileContent;
 class Parameter final : public DataType {
   SURELOG_IMPLEMENT_RTTI(Parameter, DataType)
  public:
-  Parameter(const FileContent* fC, NodeId nodeId, std::string_view name,
-            NodeId nodeType, bool portParam);
+  Parameter(const FileContent* fC, NodeId nodeId, std::string_view name, NodeId nodeType, bool portParam);
   ~Parameter() final = default;
 
   VObjectType getType() const final;
@@ -55,9 +54,7 @@ class Parameter final : public DataType {
   void setUhdmParam(uhdm::Any* param) { m_param = param; }
   uhdm::Any* getUhdmParam() const { return m_param; }
   bool isPortParam() const { return m_portParam; }
-  void setImportedPackage(std::string_view package) {
-    m_importedPackage = package;
-  }
+  void setImportedPackage(std::string_view package) { m_importedPackage = package; }
   std::string importedPackage() { return m_importedPackage; }
   bool isTypeParam() const { return m_typeParam; }
   void setTypeParam() { m_typeParam = true; }

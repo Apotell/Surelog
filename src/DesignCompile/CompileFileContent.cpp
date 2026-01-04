@@ -46,16 +46,14 @@
 namespace SURELOG {
 
 int32_t FunctorCompileFileContentDecl::operator()() const {
-  CompileFileContent* instance = new CompileFileContent(
-      m_session, m_compileDesign, m_fileContent, m_design, true);
+  CompileFileContent* instance = new CompileFileContent(m_session, m_compileDesign, m_fileContent, m_design, true);
   instance->compile();
   delete instance;
   return 0;
 }
 
 int32_t FunctorCompileFileContent::operator()() const {
-  CompileFileContent* instance = new CompileFileContent(
-      m_session, m_compileDesign, m_fileContent, m_design, false);
+  CompileFileContent* instance = new CompileFileContent(m_session, m_compileDesign, m_fileContent, m_design, false);
   instance->compile();
   delete instance;
   return 0;
@@ -64,15 +62,14 @@ int32_t FunctorCompileFileContent::operator()() const {
 bool CompileFileContent::compile() { return collectObjects_(); }
 
 bool CompileFileContent::collectObjects_() {
-  std::vector<VObjectType> stopPoints = {
-      VObjectType::paModule_declaration,
-      VObjectType::paInterface_declaration,
-      VObjectType::paProgram_declaration,
-      VObjectType::paClass_declaration,
-      VObjectType::PRIMITIVE,
-      VObjectType::paPackage_declaration,
-      VObjectType::paFunction_declaration,
-      VObjectType::paInterface_class_declaration};
+  std::vector<VObjectType> stopPoints = {VObjectType::paModule_declaration,
+                                         VObjectType::paInterface_declaration,
+                                         VObjectType::paProgram_declaration,
+                                         VObjectType::paClass_declaration,
+                                         VObjectType::PRIMITIVE,
+                                         VObjectType::paPackage_declaration,
+                                         VObjectType::paFunction_declaration,
+                                         VObjectType::paInterface_class_declaration};
 
   Design* const design = m_compileDesign->getCompiler()->getDesign();
   uhdm::Design* const udesign = design->getUhdmDesign();
@@ -113,8 +110,7 @@ bool CompileFileContent::collectObjects_() {
       }
       case VObjectType::paData_declaration: {
         if (m_declOnly) {
-          m_helper.compileDataDeclaration(m_fileContent, fC, id, false,
-                                          nullptr);
+          m_helper.compileDataDeclaration(m_fileContent, fC, id, false, nullptr);
         }
         break;
       }
@@ -127,16 +123,13 @@ bool CompileFileContent::collectObjects_() {
       case VObjectType::paParameter_declaration: {
         if (m_declOnly) {
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(m_fileContent, fC,
-                                                 list_of_type_assignments,
-                                                 false, nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC, list_of_type_assignments, false, nullptr, false,
+                                                 false);
           } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id, false,
-                                                 nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC, id, false, nullptr, false, false);
           }
         }
         break;
@@ -150,27 +143,22 @@ bool CompileFileContent::collectObjects_() {
       case VObjectType::paLocal_parameter_declaration: {
         if (m_declOnly) {
           NodeId list_of_type_assignments = fC->Child(id);
-          if (fC->Type(list_of_type_assignments) ==
-                  VObjectType::paType_assignment_list ||
+          if (fC->Type(list_of_type_assignments) == VObjectType::paType_assignment_list ||
               fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
-            m_helper.compileParameterDeclaration(m_fileContent, fC,
-                                                 list_of_type_assignments, true,
-                                                 nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC, list_of_type_assignments, true, nullptr, false,
+                                                 false);
           } else {
-            m_helper.compileParameterDeclaration(m_fileContent, fC, id, true,
-                                                 nullptr, false, false);
+            m_helper.compileParameterDeclaration(m_fileContent, fC, id, true, nullptr, false, false);
           }
         }
         break;
       }
-      default:
-        break;
+      default: break;
     }
 
     if (const NodeId siblingId = fC->Sibling(id)) stack.emplace(siblingId);
-    if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) ==
-        stopPoints.cend()) {
+    if (std::find(stopPoints.cbegin(), stopPoints.cend(), type) == stopPoints.cend()) {
       if (const NodeId childId = fC->Child(id)) {
         stack.emplace(childId);
       }
@@ -182,8 +170,7 @@ bool CompileFileContent::collectObjects_() {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();
       // Assignment to a default value
-      uhdm::Expr* exp = m_helper.exprFromAssign(m_fileContent, fC, id,
-                                                sig->getUnpackedDimension());
+      uhdm::Expr* exp = m_helper.exprFromAssign(m_fileContent, fC, id, sig->getUnpackedDimension());
       if (uhdm::Any* obj = m_helper.compileSignals(m_fileContent, sig)) {
         fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
         obj->setParent(udesign);

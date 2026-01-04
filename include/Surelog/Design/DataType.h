@@ -59,11 +59,9 @@ class DataType : public RTTI {
   };
 
   DataType() = default;
-  DataType(const FileContent* fC, NodeId id, std::string_view name,
-           VObjectType type, bool isParameter = false);
+  DataType(const FileContent* fC, NodeId id, std::string_view name, VObjectType type, bool isParameter = false);
 
-  void init(const FileContent* fC, NodeId id, std::string_view name,
-            VObjectType type, bool isParameter = false) {
+  void init(const FileContent* fC, NodeId id, std::string_view name, VObjectType type, bool isParameter = false) {
     m_fileContent = fC;
     m_id = id;
     m_name = name;
@@ -110,9 +108,7 @@ class DataType : public RTTI {
   virtual void setTypespec(uhdm::Typespec* typespec);
 
   uhdm::Typespec* getUnpackedTypespec() const { return m_unpackedTypespec; }
-  void setUnpackedTypespec(uhdm::Typespec* typespec) {
-    m_unpackedTypespec = typespec;
-  }
+  void setUnpackedTypespec(uhdm::Typespec* typespec) { m_unpackedTypespec = typespec; }
 
   const int32_t d_id = ++s_id;
   static int32_t s_id;

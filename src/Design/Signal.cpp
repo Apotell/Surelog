@@ -34,10 +34,9 @@ namespace SURELOG {
 
 int32_t Signal::s_instId = 0;
 
-Signal::Signal(DesignComponent* component, const FileContent* fileContent,
-               NodeId nodeId, NodeId nameId, VObjectType type,
-               VObjectType direction, NodeId packedDimension,
-               NodeId unpackedDimension, bool is_signed)
+Signal::Signal(DesignComponent* component, const FileContent* fileContent, NodeId nodeId, NodeId nameId,
+               VObjectType type, VObjectType direction, NodeId packedDimension, NodeId unpackedDimension,
+               bool is_signed)
     : d_instId(++s_instId),
       m_component(component),
       m_fileContent(fileContent),
@@ -51,9 +50,8 @@ Signal::Signal(DesignComponent* component, const FileContent* fileContent,
       m_direction(direction),
       m_signed(is_signed) {}
 
-Signal::Signal(DesignComponent* component, const FileContent* fileContent,
-               NodeId nodeId, NodeId nameId, NodeId interfaceTypeNameId,
-               VObjectType subnettype, NodeId unpackedDimension, bool is_signed)
+Signal::Signal(DesignComponent* component, const FileContent* fileContent, NodeId nodeId, NodeId nameId,
+               NodeId interfaceTypeNameId, VObjectType subnettype, NodeId unpackedDimension, bool is_signed)
     : d_instId(++s_instId),
       m_component(component),
       m_fileContent(fileContent),
@@ -69,8 +67,7 @@ Signal::Signal(DesignComponent* component, const FileContent* fileContent,
 
 std::string Signal::getInterfaceTypeName() const {
   std::string type_name;
-  if (m_fileContent->Type(m_interfaceTypeNameId) ==
-      VObjectType::paClass_scope) {
+  if (m_fileContent->Type(m_interfaceTypeNameId) == VObjectType::paClass_scope) {
     NodeId Class_type = m_fileContent->Child(m_interfaceTypeNameId);
     NodeId Pack_name = m_fileContent->Child(Class_type);
     type_name.assign(m_fileContent->SymName(Pack_name)).append("::");
@@ -92,12 +89,8 @@ std::string Signal::getInterfaceTypeName() const {
   return type_name;
 }
 
-std::string_view Signal::getName() const {
-  return m_fileContent->SymName(m_nameId);
-}
+std::string_view Signal::getName() const { return m_fileContent->SymName(m_nameId); }
 
-NodeId Signal::getModportId() const {
-  return m_fileContent->Sibling(m_interfaceTypeNameId);
-}
+NodeId Signal::getModportId() const { return m_fileContent->Sibling(m_interfaceTypeNameId); }
 
 }  // namespace SURELOG

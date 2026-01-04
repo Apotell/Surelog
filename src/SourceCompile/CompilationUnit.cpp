@@ -32,13 +32,10 @@
 
 namespace SURELOG {
 
-CompilationUnit::CompilationUnit(bool fileUnit)
-    : m_fileUnit(fileUnit), m_inDesignElement(false) {}
+CompilationUnit::CompilationUnit(bool fileUnit) : m_fileUnit(fileUnit), m_inDesignElement(false) {}
 
 MacroInfo* CompilationUnit::getMacroInfo(std::string_view macroName) {
-  for (MacroStorage::const_reverse_iterator it = m_macros.crbegin(),
-                                            end = m_macros.crend();
-       it != end; ++it) {
+  for (MacroStorage::const_reverse_iterator it = m_macros.crbegin(), end = m_macros.crend(); it != end; ++it) {
     MacroInfo* mi = *it;
     if (mi->m_defType == MacroInfo::DefType::UndefineAll) {
       return nullptr;
@@ -51,13 +48,9 @@ MacroInfo* CompilationUnit::getMacroInfo(std::string_view macroName) {
   return nullptr;
 }
 
-void CompilationUnit::registerMacroInfo(MacroInfo* macro) {
-  m_macros.emplace_back(macro);
-}
+void CompilationUnit::registerMacroInfo(MacroInfo* macro) { m_macros.emplace_back(macro); }
 
-void CompilationUnit::recordTimeInfo(TimeInfo& info) {
-  m_timeInfo.emplace_back(info);
-}
+void CompilationUnit::recordTimeInfo(TimeInfo& info) { m_timeInfo.emplace_back(info); }
 
 TimeInfo& CompilationUnit::getTimeInfo(PathId fileId, uint32_t line) {
   if (m_timeInfo.empty()) {
@@ -74,9 +67,7 @@ TimeInfo& CompilationUnit::getTimeInfo(PathId fileId, uint32_t line) {
   return m_noTimeInfo;
 }
 
-void CompilationUnit::recordDefaultNetType(NetTypeInfo& info) {
-  m_defaultNetTypes.emplace_back(info);
-}
+void CompilationUnit::recordDefaultNetType(NetTypeInfo& info) { m_defaultNetTypes.emplace_back(info); }
 
 VObjectType CompilationUnit::getDefaultNetType(PathId fileId, uint32_t line) {
   if (m_defaultNetTypes.empty()) {

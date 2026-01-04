@@ -463,8 +463,7 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
   m_antlrParserHandler->m_tokens->fill();
 
   if (clp->profile()) {
-    // m_profileInfo += "Tokenizer: " + std::to_string (tmr.elapsed_rounded
-    // ())
+    // m_profileInfo += "Tokenizer: " + std::to_string (tmr.elapsed())
     // + " " + fileName + "\n";
     tmr.reset();
   }
@@ -493,8 +492,8 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
     m_antlrParserHandler->m_tree = m_antlrParserHandler->m_parser->top_level_rule();
 
     if (clp->profile()) {
-      StrAppend(&m_profileInfo, "SLL Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
-                fileSystem->toPath(fileId), "\n");
+      StrAppend(&m_profileInfo, "SLL Parsing: ", std::to_string(tmr.elapsed()), "ms ", fileSystem->toPath(fileId),
+                "\n");
       tmr.reset();
       profileParser();
     }
@@ -512,8 +511,7 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
     m_antlrParserHandler->m_tree = m_antlrParserHandler->m_parser->top_level_rule();
 
     if (clp->profile()) {
-      StrAppend(&m_profileInfo, "LL  Parsing: ", StringUtils::to_string(tmr.elapsed_rounded()), "s ",
-                fileSystem->toPath(fileId), "\n");
+      StrAppend(&m_profileInfo, "LL Parsing: ", std::to_string(tmr.elapsed()), "ms ", fileSystem->toPath(fileId), "\n");
       tmr.reset();
       profileParser();
     }
@@ -647,8 +645,8 @@ bool ParseFile::parse() {
       }
 
       if (clp->profile()) {
-        // m_profileInfo += "AST Walking: " + std::to_string
-        // (tmr.elapsed_rounded ()) + "\n";
+        // m_profileInfo += "AST Walking: " + std::to_string(tmr.elapsed ())
+        // + "\n";
         tmr.reset();
       }
 
@@ -659,8 +657,8 @@ bool ParseFile::parse() {
       }
 
       if (clp->profile()) {
-        m_profileInfo += "Cache saving: " + std::to_string(tmr.elapsed_rounded()) + "s\n";
-        std::cout << "Cache saving: " + std::to_string(tmr.elapsed_rounded()) + "s\n" << std::flush;
+        m_profileInfo += "Cache saving: " + std::to_string(tmr.elapsed()) + "ms\n";
+        std::cout << "Cache saving: " + std::to_string(tmr.elapsed()) + "ms\n" << std::flush;
         tmr.reset();
       }
     }
@@ -686,7 +684,7 @@ bool ParseFile::parse() {
           if (clp->profile()) {
             // m_profileInfo += "For file " + getSymbol
             // (child->m_ppFileId) + ", AST Walking took" +
-            // std::to_string (tmr.elapsed_rounded ()) + "\n";
+            // std::to_string (tmr.elapsed()) + "ms\n";
             tmr.reset();
           }
 

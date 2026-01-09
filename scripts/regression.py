@@ -33,7 +33,10 @@ def _is_ci_build():
 
 # Except for the workspace dirpath all paths are expected to be relative
 # either to the workspace directory or the build directory
-_default_test_dirpaths = [ 'tests' ] # , os.path.join('third_party', 'tests') ]
+_default_test_dirpaths = [
+  # 'tests',
+  os.path.join('third_party', 'tests'),
+]
 _default_build_dirpath = 'build'
 
 if not _is_ci_build():

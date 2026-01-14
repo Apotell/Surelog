@@ -78,7 +78,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
  public:
   DesignComponent(Session* session, const DesignComponent* parent, DesignComponent* definition)
       : ValuedComponentI(session, parent, definition) {}
-  ~DesignComponent() override = default;
+  ~DesignComponent() override;
 
   virtual uint32_t getSize() const = 0;
   virtual VObjectType getType() const = 0;

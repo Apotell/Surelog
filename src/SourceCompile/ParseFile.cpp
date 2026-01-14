@@ -633,6 +633,7 @@ bool ParseFile::parse() {
       }
 
       antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener, m_antlrParserHandler->m_tree);
+      m_antlrParserHandler->m_parser->getTreeTracker().reset();
 
       if (!m_fileContent->validate()) {
         Location ppfile(BadSymbolId);
@@ -680,6 +681,7 @@ bool ParseFile::parse() {
 
           Timer tmr;
           antlr4::tree::ParseTreeWalker::DEFAULT.walk(child->m_listener, child->m_antlrParserHandler->m_tree);
+          child->m_antlrParserHandler->m_parser->getTreeTracker().reset();
 
           if (clp->profile()) {
             // m_profileInfo += "For file " + getSymbol

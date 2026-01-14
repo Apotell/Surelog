@@ -24,9 +24,18 @@
 
 #include <string_view>
 
+#include "Surelog/Design/DataType.h"
+#include "Surelog/Design/Statement.h"
+#include "Surelog/Design/TfPortItem.h"
 #include "Surelog/Testbench/Variable.h"
 
 namespace SURELOG {
+Scope::~Scope() {
+  for (auto& [k, p] : m_variables) delete p;
+  for (auto& [k, p] : m_usedDataTypes) delete p;
+  for (auto p : m_statements) delete p;
+  for (auto p : m_scopes) delete p;
+}
 
 void Scope::addVariable(Variable* var) { m_variables.emplace(var->getName(), var); }
 

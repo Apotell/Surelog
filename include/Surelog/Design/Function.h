@@ -48,7 +48,7 @@ class Procedure : public Scope, public Statement {
   SURELOG_IMPLEMENT_RTTI_2_BASES(Procedure, Scope, Statement)
  public:
   Procedure(DesignComponent* parent, const FileContent* fC, NodeId id, std::string_view name);
-  ~Procedure() override = default;
+  ~Procedure() override;
 
   DesignComponent* getParent() const { return m_parent; }
 
@@ -61,8 +61,8 @@ class Procedure : public Scope, public Statement {
   TfPortList& getParams() { return m_params; }
 
  protected:
-  DesignComponent* m_parent;
-  const FileContent* m_fileContent;
+  DesignComponent* const m_parent = nullptr;
+  const FileContent* const m_fileContent = nullptr;
   NodeId m_nodeId;
   const std::string m_name;
   TfPortList m_params;
@@ -85,7 +85,7 @@ class Function : public Procedure {
   DataType* getReturnType() const { return m_returnType; }
 
  private:
-  DataType* m_returnType;
+  DataType* const m_returnType = nullptr;
 };
 };  // namespace SURELOG
 

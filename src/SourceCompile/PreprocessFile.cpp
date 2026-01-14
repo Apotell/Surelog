@@ -541,6 +541,8 @@ bool PreprocessFile::preprocess() {
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener, m_antlrParserHandler->m_pptree);
 
   if (m_macroBody.empty() && (m_includer == nullptr)) {
+    m_antlrParserHandler->m_ppparser->getTreeTracker().reset();
+
     const auto [lastLine, lastColumn] = getCurrentPosition();
     getSourceFile()->addIncludeFileInfo(
         /* context */ IncludeFileInfo::Context::Include,

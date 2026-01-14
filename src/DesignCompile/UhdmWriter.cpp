@@ -1540,6 +1540,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     std::cout << "===================\n";
   }
   errors->printMessages(clp->muteStdout());
+  for (vpiHandle vh : designs) vpi_release_handle(vh);
+  designs.clear();
   return true;
 }
 }  // namespace SURELOG

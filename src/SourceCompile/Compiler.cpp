@@ -105,6 +105,7 @@ Compiler::~Compiler() {
   delete m_design;
   delete m_configSet;
   delete m_librarySet;
+  delete m_compileDesign;
   delete m_commonCompilationUnit;
 
   cleanup_();

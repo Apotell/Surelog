@@ -41,7 +41,7 @@ class TaskMethod final : public Task {
   bool compile(CompileHelper& compile_helper);
 
  private:
-  bool m_extern;
+  bool m_extern = false;
 };
 
 };  // namespace SURELOG

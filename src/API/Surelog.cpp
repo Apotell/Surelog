@@ -36,7 +36,10 @@ namespace SURELOG {
 scompiler* start_compiler(Session* session) {
   Compiler* the_compiler = new Compiler(session);
   bool status = the_compiler->compile();
-  if (!status) return nullptr;
+  if (!status) {
+    delete the_compiler;
+    the_compiler = nullptr;
+  }
   return (scompiler*)the_compiler;
 }
 

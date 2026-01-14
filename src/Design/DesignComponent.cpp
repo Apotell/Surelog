@@ -14,14 +14,14 @@
  limitations under the License.
  */
 
-#include "Surelog/Design/DesignComponent.h"
-
 /*
  * File:   DesignComponent.cpp
  * Author: alain
  *
  * Created on March 25, 2018, 10:27 PM
  */
+
+#include "Surelog/Design/DesignComponent.h"
 
 #include <uhdm/import_typespec.h>
 
@@ -33,6 +33,7 @@
 #include "Surelog/Design/Design.h"
 #include "Surelog/Design/FileCNodeId.h"
 #include "Surelog/Design/FileContent.h"
+#include "Surelog/Design/ParamAssign.h"
 #include "Surelog/Design/Parameter.h"
 #include "Surelog/Design/ValuedComponentI.h"
 #include "Surelog/SourceCompile/VObjectTypes.h"
@@ -42,6 +43,11 @@
 #include "Surelog/Testbench/Variable.h"
 
 namespace SURELOG {
+DesignComponent::~DesignComponent() {
+  for (ParamAssign* pa : m_paramAssigns) delete pa;
+  for (auto& [k, p] : m_parameterMap) delete p;
+}
+
 void DesignComponent::addFileContent(const FileContent* fileContent, NodeId nodeId) {
   if ((fileContent != nullptr) &&
       (std::find(m_fileContents.cbegin(), m_fileContents.cend(), fileContent) == m_fileContents.cend())) {
